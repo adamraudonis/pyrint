@@ -26,6 +26,7 @@ pub struct AstContext {
     pub definitely_defined: HashSet<String>,
     pub function_signatures: HashMap<String, FunctionSignature>,
     pub imports: HashMap<String, String>, // Maps imported name to module path
+    pub module_conditionally_defined: HashSet<String>, // Module-level variables that are conditionally defined
 }
 
 impl AstContext {
@@ -50,6 +51,7 @@ impl AstContext {
             definitely_defined: HashSet::new(),
             function_signatures: HashMap::new(),
             imports: HashMap::new(),
+            module_conditionally_defined: HashSet::new(),
         }
     }
 
@@ -458,6 +460,10 @@ impl AstContext {
     fn visit_for(&mut self, for_stmt: ast::StmtFor) {
         self.in_loop += 1;
         self.visit_expr(*for_stmt.iter);
+        
+        // Track the loop variable as definitely defined within the loop
+        self.track_assignments(&for_stmt.target);
+        
         for stmt in for_stmt.body {
             self.visit_stmt(stmt);
         }
@@ -470,6 +476,10 @@ impl AstContext {
     fn visit_async_for(&mut self, for_stmt: ast::StmtAsyncFor) {
         self.in_loop += 1;
         self.visit_expr(*for_stmt.iter);
+        
+        // Track the loop variable as definitely defined within the loop
+        self.track_assignments(&for_stmt.target);
+        
         for stmt in for_stmt.body {
             self.visit_stmt(stmt);
         }
@@ -492,10 +502,15 @@ impl AstContext {
     }
 
     fn visit_if(&mut self, if_stmt: ast::StmtIf) {
-        self.visit_expr(*if_stmt.test);
+        self.visit_expr(*if_stmt.test.clone());
         
         // Track variables defined in if branch
         let before_if = self.definitely_defined.clone();
+        
+        // For if/elif/else chains, check if the final else (not elif) terminates
+        // Do this before consuming if_stmt
+        let final_else_terminates = self.get_final_else_terminates(&if_stmt);
+        let has_else = !if_stmt.orelse.is_empty();
         
         for stmt in if_stmt.body {
             self.visit_stmt(stmt);
@@ -506,11 +521,6 @@ impl AstContext {
         // Reset to before if for else branch
         self.definitely_defined = before_if.clone();
         
-        let has_else = !if_stmt.orelse.is_empty();
-        
-        // Check the else branch structure before consuming it
-        let is_elif = has_else && if_stmt.orelse.iter().any(|s| matches!(s, ast::Stmt::If(_)));
-        
         for stmt in if_stmt.orelse {
             self.visit_stmt(stmt);
         }
@@ -519,22 +529,47 @@ impl AstContext {
         
         // Variables are definitely defined only if defined in ALL branches
         if has_else {
-            // Check if else branch is complete (not just elif)
-            let is_complete_else = !is_elif;
-            
-            if is_complete_else || is_elif {
-                // For complete if-else or elif chains, intersect definitions
-                self.definitely_defined = if_defined.intersection(&else_defined).cloned().collect();
+            if final_else_terminates {
+                // If the final else terminates (in if/else or if/elif/else),
+                // variables from the if/elif branches are definitely defined
+                // We need to properly collect all variables from if/elif branches
+                self.definitely_defined = if_defined.union(&else_defined).cloned().collect();
+                // Remove conditionally defined status for these variables
+                for var in &self.definitely_defined {
+                    self.conditionally_defined.remove(var);
+                }
             } else {
+                // Normal case: intersect definitions from all branches
                 self.definitely_defined = if_defined.intersection(&else_defined).cloned().collect();
+                
+                // IMPORTANT: Variables that were defined before the if statement
+                // and are reassigned in branches remain definitely defined
+                // BUT only if we're in a function (not at module level)
+                if self.in_function {
+                    for var in &before_if {
+                        // Only preserve if this variable is being reassigned in a branch
+                        if if_defined.contains(var) || else_defined.contains(var) {
+                            self.definitely_defined.insert(var.clone());
+                            // Remove from conditionally defined since it's definitely defined
+                            self.conditionally_defined.remove(var);
+                        }
+                    }
+                }
             }
             
             // Mark variables as conditionally defined if not in all branches
             for var in if_defined.union(&else_defined) {
                 if !self.definitely_defined.contains(var) {
                     self.conditionally_defined.insert(var.clone(), true);
-                    // Also track as local variable
-                    self.local_vars.insert(var.clone());
+                    // Only track as local variable if in a function
+                    if self.in_function {
+                        self.local_vars.insert(var.clone());
+                    }
+                    
+                    // If we're at module level, also track in module_conditionally_defined
+                    if !self.in_function && !self.in_class {
+                        self.module_conditionally_defined.insert(var.clone());
+                    }
                 }
             }
         } else {
@@ -543,8 +578,15 @@ impl AstContext {
             for var in if_defined {
                 if !self.definitely_defined.contains(&var) {
                     self.conditionally_defined.insert(var.clone(), true);
-                    // Also track as local variable
-                    self.local_vars.insert(var);
+                    // Only track as local variable if in a function
+                    if self.in_function {
+                        self.local_vars.insert(var.clone());
+                    }
+                    
+                    // If we're at module level, also track in module_conditionally_defined
+                    if !self.in_function && !self.in_class {
+                        self.module_conditionally_defined.insert(var);
+                    }
                 }
             }
         }
@@ -581,35 +623,78 @@ impl AstContext {
         let try_defined = self.definitely_defined.clone();
         let try_conditionally = self.conditionally_defined.clone();
         
-        // Variables defined in try are only conditionally defined
-        // because an exception might occur before assignment
-        self.definitely_defined = before_try.clone();
+        // Save the state after try block for the else clause
+        let after_try_state = self.definitely_defined.clone();
         
-        // Track all variables that were defined (definitely or conditionally) in the try block
-        for var in try_defined {
-            if !self.definitely_defined.contains(&var) {
-                self.conditionally_defined.insert(var.clone(), true);
-                // Also track as local variable
-                self.local_vars.insert(var);
+        // Check if all except handlers terminate (return, raise, etc.)
+        // If they do, variables defined in try block are definitely defined after try/except
+        let all_handlers_terminate = !try_stmt.handlers.is_empty() && try_stmt.handlers.iter().all(|handler| {
+            match handler {
+                ast::ExceptHandler::ExceptHandler(h) => {
+                    self.handler_always_terminates(&h.body)
+                }
+            }
+        });
+        
+        // Special case: try/finally with no except handlers
+        let no_except_handlers = try_stmt.handlers.is_empty();
+        
+        if all_handlers_terminate || no_except_handlers {
+            // If all except handlers terminate OR there are no except handlers (try/finally),
+            // variables from try are definitely defined after the block
+            // (since if an exception occurs, we either handle and terminate, or propagate)
+            self.definitely_defined = try_defined.clone();
+        } else {
+            // Variables defined in try are only conditionally defined
+            // because an exception might occur before assignment
+            self.definitely_defined = before_try.clone();
+            
+            // Track all variables that were defined (definitely or conditionally) in the try block
+            for var in &try_defined {
+                if !self.definitely_defined.contains(var) {
+                    self.conditionally_defined.insert(var.clone(), true);
+                    // Also track as local variable if in a function
+                    if self.in_function {
+                        self.local_vars.insert(var.clone());
+                    }
+                }
+            }
+            
+            // Also mark variables that became conditionally defined within try block
+            for (var, _) in &try_conditionally {
+                if !before_conditionally.contains_key(var) && !self.definitely_defined.contains(var) {
+                    self.conditionally_defined.insert(var.clone(), true);
+                    if self.in_function {
+                        self.local_vars.insert(var.clone());
+                    }
+                }
             }
         }
         
-        // Also mark variables that became conditionally defined within try block
-        for (var, _) in try_conditionally {
-            if !before_conditionally.contains_key(&var) && !self.definitely_defined.contains(&var) {
-                self.conditionally_defined.insert(var.clone(), true);
-                self.local_vars.insert(var);
-            }
-        }
+        // Visit except handlers and collect variables defined in ALL handlers
+        let mut all_handlers_define_same: Option<HashSet<String>> = None;
         
-        // Visit except handlers
         for handler in try_stmt.handlers {
             let before_handler = self.definitely_defined.clone();
             
             match handler {
                 ast::ExceptHandler::ExceptHandler(h) => {
+                    // Reset to state before try for this handler
+                    self.definitely_defined = before_try.clone();
+                    
                     for stmt in h.body {
                         self.visit_stmt(stmt);
+                    }
+                    
+                    let handler_defined = self.definitely_defined.clone();
+                    
+                    // Track which variables are defined in ALL handlers
+                    if let Some(ref mut common_vars) = all_handlers_define_same {
+                        // Intersect with previous handlers
+                        *common_vars = common_vars.intersection(&handler_defined).cloned().collect();
+                    } else {
+                        // First handler
+                        all_handlers_define_same = Some(handler_defined);
                     }
                 }
             }
@@ -618,9 +703,37 @@ impl AstContext {
             self.definitely_defined = before_handler;
         }
         
+        // If there are handlers and they all define certain variables,
+        // AND those same variables are defined in the try block,
+        // then those variables are definitely defined after try/except
+        if let Some(handler_common_vars) = all_handlers_define_same {
+            if !all_handlers_terminate {
+                // Variables defined in both try AND all except handlers are definitely defined
+                let definitely_defined_after: HashSet<String> = try_defined.intersection(&handler_common_vars).cloned().collect();
+                for var in definitely_defined_after {
+                    self.definitely_defined.insert(var.clone());
+                    self.conditionally_defined.remove(&var);
+                }
+            }
+        }
+        
         // Visit else clause (executed if no exception)
-        for stmt in try_stmt.orelse {
-            self.visit_stmt(stmt);
+        // The else block runs only if the try block succeeded, so variables
+        // defined in the try block are available
+        if !try_stmt.orelse.is_empty() {
+            // Restore state from after try block for the else clause
+            self.definitely_defined = after_try_state;
+            for stmt in try_stmt.orelse {
+                self.visit_stmt(stmt);
+            }
+            // After else, merge the states
+            self.definitely_defined = before_try.clone();
+            // Variables from try are still only conditionally defined overall
+            for var in &try_defined {
+                if !self.definitely_defined.contains(var) {
+                    self.conditionally_defined.insert(var.clone(), true);
+                }
+            }
         }
         
         // Visit finally clause
@@ -691,9 +804,7 @@ impl AstContext {
             }
             
             // Track variable definitions
-            if self.in_function {
-                self.track_assignments(target);
-            }
+            self.track_assignments(target);
         }
         
         // Visit the value being assigned
@@ -704,7 +815,9 @@ impl AstContext {
         match expr {
             ast::Expr::Name(name) => {
                 let var_name = name.id.to_string();
-                self.local_vars.insert(var_name.clone());
+                if self.in_function {
+                    self.local_vars.insert(var_name.clone());
+                }
                 self.definitely_defined.insert(var_name.clone());
                 self.conditionally_defined.remove(&var_name);
             }
@@ -722,8 +835,57 @@ impl AstContext {
         }
     }
     
-    fn visit_ann_assign(&mut self, _ann_assign: ast::StmtAnnAssign) {
-        // Handle annotated assignments if needed
+    fn visit_ann_assign(&mut self, ann_assign: ast::StmtAnnAssign) {
+        // Handle annotated assignments - these are variable definitions!
+        if let Some(value) = ann_assign.value {
+            // Visit the value expression first
+            self.visit_expr(*value);
+            
+            // Track the assignment
+            self.track_assignments(&ann_assign.target);
+        }
+        // Note: If there's no value, it's just a type annotation, not an assignment
+    }
+    
+    fn handler_always_terminates(&self, body: &[ast::Stmt]) -> bool {
+        // Check if the handler body always terminates (returns, raises, continues, or breaks)
+        // This follows pylint's logic for determining if a code path terminates
+        for stmt in body {
+            match stmt {
+                ast::Stmt::Return(_) | ast::Stmt::Raise(_) | ast::Stmt::Continue(_) | ast::Stmt::Break(_) => {
+                    return true;
+                }
+                ast::Stmt::If(if_stmt) => {
+                    // Check if both branches terminate
+                    let if_terminates = self.handler_always_terminates(&if_stmt.body);
+                    let else_terminates = !if_stmt.orelse.is_empty() && 
+                                          self.handler_always_terminates(&if_stmt.orelse);
+                    if if_terminates && else_terminates {
+                        return true;
+                    }
+                }
+                _ => {}
+            }
+        }
+        false
+    }
+    
+    fn get_final_else_terminates(&self, if_stmt: &ast::StmtIf) -> bool {
+        // For if/elif/else chains, check if the final else (not elif) terminates
+        if if_stmt.orelse.is_empty() {
+            return false;
+        }
+        
+        // Check if this is an elif (else contains only another if statement)
+        if if_stmt.orelse.len() == 1 {
+            if let ast::Stmt::If(nested_if) = &if_stmt.orelse[0] {
+                // Recursively check the nested if/elif chain
+                return self.get_final_else_terminates(nested_if);
+            }
+        }
+        
+        // This is a final else block (not elif)
+        self.handler_always_terminates(&if_stmt.orelse)
     }
     
     fn count_starred_exprs(&self, expr: &ast::Expr) -> usize {
@@ -747,20 +909,55 @@ impl AstContext {
                 let var_name = name.id.to_string();
                 
                 // Check for E0606: possibly used before assignment
-                if self.in_function && 
-                   !self.definitely_defined.contains(&var_name) &&
-                   !self.function_args.contains(&var_name) &&
-                   !self.global_names.contains(&var_name) &&
-                   !self.nonlocal_names.contains(&var_name) {
+                // We need to be careful to avoid false positives while catching real issues
+                
+                // First check if this is a local variable that's definitely defined
+                let is_definitely_defined = self.definitely_defined.contains(&var_name) ||
+                                          self.function_args.contains(&var_name) ||
+                                          self.global_names.contains(&var_name) ||
+                                          self.nonlocal_names.contains(&var_name);
+                
+                if !is_definitely_defined {
+                    // Check two cases:
+                    // 1. Module-level variable used in function that was conditionally defined at module level
+                    // 2. Local variable that is conditionally defined within the function
                     
-                    if self.conditionally_defined.contains_key(&var_name) {
-                        // E0606: Variable might not be assigned
-                        let start = match &expr {
-                            Name(n) => n.range.start(),
-                            _ => return,
-                        };
-                        let (line, col) = self.offset_to_line_col(start);
-                        self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
+                    if self.in_function {
+                        // Inside a function - check two sub-cases:
+                        // a) Using a module-level conditional variable (_SIGN_KEY_ID case)
+                        if self.module_conditionally_defined.contains(&var_name) &&
+                           !self.local_vars.contains(&var_name) {
+                            // This is a module-level variable that was conditionally defined
+                            // being used inside a function - this is the _SIGN_KEY_ID case
+                            let start = match &expr {
+                                Name(n) => n.range.start(),
+                                _ => return,
+                            };
+                            let (line, col) = self.offset_to_line_col(start);
+                            self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
+                        }
+                        // b) Using a locally conditionally defined variable (bad_var_test case)
+                        else if self.conditionally_defined.contains_key(&var_name) &&
+                                self.local_vars.contains(&var_name) {
+                            // This is a local variable that is conditionally defined within the function
+                            // e.g., defined in a try block or if statement
+                            let start = match &expr {
+                                Name(n) => n.range.start(),
+                                _ => return,
+                            };
+                            let (line, col) = self.offset_to_line_col(start);
+                            self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
+                        }
+                    } else {
+                        // At module level - check if using a conditionally defined variable
+                        if self.conditionally_defined.contains_key(&var_name) {
+                            let start = match &expr {
+                                Name(n) => n.range.start(),
+                                _ => return,
+                            };
+                            let (line, col) = self.offset_to_line_col(start);
+                            self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
+                        }
                     }
                 }
             }
