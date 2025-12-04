@@ -1,0 +1,52 @@
+[package]
+name = "pyrint"
+version = "0.1.0"
+edition = "2021"
+authors = ["Pyrint Contributors"]
+description = "A fast Python linter written in Rust, compatible with Pylint"
+license = "MIT OR Apache-2.0"
+
+[dependencies]
+# Python AST parsing
+rustpython-parser = "0.3"
+rustpython-ast = "0.3"
+
+# Error handling and utilities
+anyhow = "1.0"
+thiserror = "1.0"
+
+# CLI and configuration
+clap = { version = "4.4", features = ["derive"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+toml = "0.8"
+
+# File handling and parallel processing
+walkdir = "2.4"
+rayon = "1.8"
+glob = "0.3"
+
+# Text processing and reporting
+colored = "2.1"
+regex = "1.10"
+
+# Performance monitoring (optional)
+mimalloc = { version = "0.1", default-features = false, optional = true }
+
+[dev-dependencies]
+criterion = "0.5"
+pretty_assertions = "1.4"
+tempfile = "3.8"
+
+[features]
+default = []
+jemalloc = ["mimalloc"]
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3
+
+[[bench]]
+name = "lint_performance"
+harness = false
