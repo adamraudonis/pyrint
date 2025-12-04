@@ -156,8 +156,8 @@ impl AstContext {
                     self.class_methods.insert(qualified_name, (line, col));
                 }
             }
-        } else {
-            // Check for duplicate functions at module level
+        } else if !self.in_function {
+            // Only check for duplicate functions at module level (not inside other functions)
             if let Some(prev_loc) = self.defined_names.get(&func_name) {
                 self.add_issue(
                     &crate::errors::E0102,
@@ -169,6 +169,7 @@ impl AstContext {
                 self.defined_names.insert(func_name.clone(), (line, col));
             }
         }
+        // If we're inside a function, nested functions are allowed to have the same name
 
         // Store function signature for argument checking
         if !self.in_class && !self.in_function { // Only track top-level functions for now
@@ -220,14 +221,10 @@ impl AstContext {
         let prev_conditionally = self.conditionally_defined.clone();
         let prev_definitely = self.definitely_defined.clone();
         
-        self.in_function = true;
-        self.in_init = is_init;
-        self.in_generator = false;
-        self.function_args.clear();
-        
         // E0211: Method has no argument
         // E0213: Method should have self as first argument
-        if self.in_class {
+        // Only check for methods directly in a class, not nested functions inside methods
+        if self.in_class && !self.in_function {
             // Check if function has @staticmethod or @classmethod decorator
             let has_staticmethod = func.decorator_list.iter().any(|decorator| {
                 self.is_decorator_name(decorator, "staticmethod")
@@ -280,6 +277,12 @@ impl AstContext {
                 }
             }
         }
+        
+        // Now set in_function to true for the body processing
+        self.in_function = true;
+        self.in_init = is_init;
+        self.in_generator = false;
+        self.function_args.clear();
 
         let mut seen_args = HashSet::new();
         // Check all argument types for duplicates
@@ -373,16 +376,37 @@ impl AstContext {
         let (line, col) = self.offset_to_line_col(start);
         let class_name = cls.name.to_string();
         
-        if let Some(prev_loc) = self.defined_names.get(&class_name) {
-            self.add_issue(
-                &crate::errors::E0102,
-                line,
-                col,
-                vec![class_name.clone(), format!("{}", prev_loc.0)],
-            );
-        } else {
-            self.defined_names.insert(class_name.clone(), (line, col));
+        // Only check for duplicate classes at the same scope level
+        if !self.in_class && !self.in_function {
+            // Top-level class
+            if let Some(prev_loc) = self.defined_names.get(&class_name) {
+                self.add_issue(
+                    &crate::errors::E0102,
+                    line,
+                    col,
+                    vec![class_name.clone(), format!("{}", prev_loc.0)],
+                );
+            } else {
+                self.defined_names.insert(class_name.clone(), (line, col));
+            }
+        } else if self.in_class {
+            // Nested class within another class - track separately
+            if let Some(parent_class) = &self.current_class {
+                let qualified_name = format!("{}::{}", parent_class, class_name);
+                if let Some(prev_loc) = self.class_methods.get(&qualified_name) {
+                    self.add_issue(
+                        &crate::errors::E0102,
+                        line,
+                        col,
+                        vec![class_name.clone(), format!("{}", prev_loc.0)],
+                    );
+                } else {
+                    // Store nested class in class_methods map with qualified name
+                    self.class_methods.insert(qualified_name, (line, col));
+                }
+            }
         }
+        // If we're inside a function, nested classes are allowed
 
         let prev_in_class = self.in_class;
         let prev_class = self.current_class.clone();
