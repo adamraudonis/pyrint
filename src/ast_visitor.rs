@@ -15,6 +15,8 @@ pub struct AstContext {
     pub in_loop: usize,
     pub in_generator: bool,
     pub in_init: bool,
+    pub in_except_handler: bool,
+    pub in_async_function: bool,
     pub defined_names: HashMap<String, (usize, usize)>,
     pub class_methods: HashMap<String, (usize, usize)>,
     pub global_names: HashSet<String>,
@@ -27,6 +29,7 @@ pub struct AstContext {
     pub function_signatures: HashMap<String, FunctionSignature>,
     pub imports: HashMap<String, String>, // Maps imported name to module path
     pub module_conditionally_defined: HashSet<String>, // Module-level variables that are conditionally defined
+    pub variable_usages: HashMap<String, Vec<(usize, usize)>>, // Track where variables are used in current function
 }
 
 impl AstContext {
@@ -40,6 +43,8 @@ impl AstContext {
             in_loop: 0,
             in_generator: false,
             in_init: false,
+            in_except_handler: false,
+            in_async_function: false,
             defined_names: HashMap::new(),
             class_methods: HashMap::new(),
             global_names: HashSet::new(),
@@ -52,6 +57,7 @@ impl AstContext {
             function_signatures: HashMap::new(),
             imports: HashMap::new(),
             module_conditionally_defined: HashSet::new(),
+            variable_usages: HashMap::new(),
         }
     }
 
@@ -113,7 +119,13 @@ impl AstContext {
         use ast::Stmt::*;
         
         match stmt {
-            FunctionDef(func) => self.visit_function_def(func),
+            FunctionDef(func) => {
+                // Regular functions reset the async context
+                let prev_async = self.in_async_function;
+                self.in_async_function = false;
+                self.visit_function_def(func);
+                self.in_async_function = prev_async;
+            }
             AsyncFunctionDef(func) => self.visit_async_function_def(func),
             ClassDef(cls) => self.visit_class_def(cls),
             Return(ret) => self.visit_return(ret),
@@ -130,6 +142,7 @@ impl AstContext {
             Pass(_) => {}
             Break(brk) => self.visit_break(brk),
             Continue(cont) => self.visit_continue(cont),
+            Raise(raise) => self.visit_raise(raise),
             Assign(assign) => self.visit_assign(assign),
             AnnAssign(ann_assign) => self.visit_ann_assign(ann_assign),
             Import(import) => self.visit_import(import),
@@ -222,6 +235,8 @@ impl AstContext {
         let prev_local_vars = self.local_vars.clone();
         let prev_conditionally = self.conditionally_defined.clone();
         let prev_definitely = self.definitely_defined.clone();
+        let prev_usages = self.variable_usages.clone();
+        self.variable_usages.clear();
         
         // E0211: Method has no argument
         // E0213: Method should have self as first argument
@@ -346,6 +361,44 @@ impl AstContext {
             self.add_issue(&crate::errors::E0101, line, col, vec![]);
         }
 
+        // Check for E0115 in nested functions
+        // We need to check if nested functions have both global and nonlocal declarations for the same name
+        for stmt in &func.body {
+            if let ast::Stmt::FunctionDef(nested_func) = stmt {
+                let nested_start = nested_func.range.start();
+                let (nested_line, nested_col) = self.offset_to_line_col(nested_start);
+                
+                // Collect global and nonlocal declarations in the nested function
+                let mut nested_globals: HashSet<String> = HashSet::new();
+                let mut nested_nonlocals: HashSet<String> = HashSet::new();
+                
+                for nested_stmt in &nested_func.body {
+                    match nested_stmt {
+                        ast::Stmt::Global(global_stmt) => {
+                            for name in &global_stmt.names {
+                                nested_globals.insert(name.to_string());
+                            }
+                        }
+                        ast::Stmt::Nonlocal(nonlocal_stmt) => {
+                            for name in &nonlocal_stmt.names {
+                                nested_nonlocals.insert(name.to_string());
+                            }
+                        }
+                        _ => {}
+                    }
+                }
+                
+                // Check for names that are both global and nonlocal
+                for name in &nested_globals {
+                    if nested_nonlocals.contains(name) {
+                        // Report error at the nested function definition line (like pylint does)
+                        self.add_issue(&crate::errors::E0115, nested_line, nested_col, vec![name.clone()]);
+                    }
+                }
+            }
+        }
+        
+        // Now visit the body normally
         for stmt in func.body {
             self.visit_stmt(stmt);
         }
@@ -357,9 +410,14 @@ impl AstContext {
         self.local_vars = prev_local_vars;
         self.conditionally_defined = prev_conditionally;
         self.definitely_defined = prev_definitely;
+        self.variable_usages = prev_usages;
     }
 
     fn visit_async_function_def(&mut self, func: ast::StmtAsyncFunctionDef) {
+        // Save the current async state
+        let prev_in_async = self.in_async_function;
+        self.in_async_function = true;
+        
         let func_def = ast::StmtFunctionDef {
             name: func.name,
             args: func.args,
@@ -371,6 +429,9 @@ impl AstContext {
             range: func.range,
         };
         self.visit_function_def(func_def);
+        
+        // Restore the previous async state
+        self.in_async_function = prev_in_async;
     }
 
     fn visit_class_def(&mut self, cls: ast::StmtClassDef) {
@@ -454,6 +515,34 @@ impl AstContext {
             let start = brk.range.start();
             let (line, col) = self.offset_to_line_col(start);
             self.add_issue(&crate::errors::E0103, line, col, vec!["'break'".to_string()]);
+        }
+    }
+    
+    fn visit_raise(&mut self, raise: ast::StmtRaise) {
+        // Check for bare raise (no exception specified)
+        if raise.exc.is_none() && !self.in_except_handler {
+            // E0704: Bare raise not in except handler
+            let start = raise.range.start();
+            let (line, col) = self.offset_to_line_col(start);
+            self.add_issue(&crate::errors::E0704, line, col, vec![]);
+        }
+        
+        // Visit the exception expression if present and check for E0711
+        if let Some(exc) = &raise.exc {
+            // Check for E0711: NotImplemented raised instead of NotImplementedError
+            if let ast::Expr::Name(name) = &**exc {
+                if name.id.as_str() == "NotImplemented" {
+                    let start = name.range.start();
+                    let (line, col) = self.offset_to_line_col(start);
+                    self.add_issue(&crate::errors::E0711, line, col, vec![]);
+                }
+            }
+            self.visit_expr(*raise.exc.unwrap());
+        }
+        
+        // Visit the cause expression if present
+        if let Some(cause) = raise.cause {
+            self.visit_expr(*cause);
         }
     }
 
@@ -682,9 +771,15 @@ impl AstContext {
                     // Reset to state before try for this handler
                     self.definitely_defined = before_try.clone();
                     
+                    // Mark that we're in an except handler for E0704 checking
+                    let prev_in_except = self.in_except_handler;
+                    self.in_except_handler = true;
+                    
                     for stmt in h.body {
                         self.visit_stmt(stmt);
                     }
+                    
+                    self.in_except_handler = prev_in_except;
                     
                     let handler_defined = self.definitely_defined.clone();
                     
@@ -749,10 +844,17 @@ impl AstContext {
         for name in &global_stmt.names {
             let name_str = name.to_string();
             
-            // E0115: Name is both nonlocal and global
-            if self.nonlocal_names.contains(&name_str) {
-                self.add_issue(&crate::errors::E0115, line, col, vec![name_str.clone()]);
+            // E0118: Check if variable was used before global declaration
+            if let Some(usages) = self.variable_usages.get(&name_str).cloned() {
+                for (usage_line, usage_col) in usages {
+                    if usage_line < line {
+                        // Variable was used before global declaration
+                        self.add_issue(&crate::errors::E0118, usage_line, usage_col, vec![name_str.clone()]);
+                    }
+                }
             }
+            
+            // E0115 is now handled in visit_function_def by scanning all declarations first
             
             self.global_names.insert(name_str);
         }
@@ -765,10 +867,7 @@ impl AstContext {
         for name in &nonlocal_stmt.names {
             let name_str = name.to_string();
             
-            // E0115: Name is both nonlocal and global
-            if self.global_names.contains(&name_str) {
-                self.add_issue(&crate::errors::E0115, line, col, vec![name_str.clone()]);
-            }
+            // E0115 is now handled in visit_function_def by scanning all declarations first
             
             // E0117: nonlocal without binding
             if !self.in_function {
@@ -784,6 +883,9 @@ impl AstContext {
     }
     
     fn visit_assign(&mut self, assign: ast::StmtAssign) {
+        // Visit the value being assigned first (for E0118 - used before global)
+        self.visit_expr(*assign.value);
+        
         // Check for too many star expressions (E0112)
         let mut star_count = 0;
         for target in &assign.targets {
@@ -806,9 +908,6 @@ impl AstContext {
             // Track variable definitions
             self.track_assignments(target);
         }
-        
-        // Visit the value being assigned
-        self.visit_expr(*assign.value);
     }
     
     fn track_assignments(&mut self, expr: &ast::Expr) {
@@ -908,6 +1007,15 @@ impl AstContext {
             Name(name) => {
                 let var_name = name.id.to_string();
                 
+                // Track variable usage for E0118 checking
+                if self.in_function {
+                    let start = name.range.start();
+                    let (line, col) = self.offset_to_line_col(start);
+                    self.variable_usages.entry(var_name.clone())
+                        .or_insert_with(Vec::new)
+                        .push((line, col));
+                }
+                
                 // Check for E0606: possibly used before assignment
                 // We need to be careful to avoid false positives while catching real issues
                 
@@ -918,45 +1026,73 @@ impl AstContext {
                                           self.nonlocal_names.contains(&var_name);
                 
                 if !is_definitely_defined {
-                    // Check two cases:
-                    // 1. Module-level variable used in function that was conditionally defined at module level
-                    // 2. Local variable that is conditionally defined within the function
+                    let start = match &expr {
+                        Name(n) => n.range.start(),
+                        _ => return,
+                    };
+                    let (line, col) = self.offset_to_line_col(start);
                     
                     if self.in_function {
-                        // Inside a function - check two sub-cases:
-                        // a) Using a module-level conditional variable (_SIGN_KEY_ID case)
-                        if self.module_conditionally_defined.contains(&var_name) &&
-                           !self.local_vars.contains(&var_name) {
-                            // This is a module-level variable that was conditionally defined
-                            // being used inside a function - this is the _SIGN_KEY_ID case
-                            let start = match &expr {
-                                Name(n) => n.range.start(),
-                                _ => return,
-                            };
-                            let (line, col) = self.offset_to_line_col(start);
+                        // Inside a function - determine which error to report
+                        
+                        // Check if this variable is known to the function at all
+                        let is_local = self.local_vars.contains(&var_name);
+                        let is_conditional = self.conditionally_defined.contains_key(&var_name);
+                        let is_module_conditional = self.module_conditionally_defined.contains(&var_name);
+                        
+                        if is_local && is_conditional {
+                            // E0606: Local variable that is conditionally defined
                             self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
-                        }
-                        // b) Using a locally conditionally defined variable (bad_var_test case)
-                        else if self.conditionally_defined.contains_key(&var_name) &&
-                                self.local_vars.contains(&var_name) {
-                            // This is a local variable that is conditionally defined within the function
-                            // e.g., defined in a try block or if statement
-                            let start = match &expr {
-                                Name(n) => n.range.start(),
-                                _ => return,
-                            };
-                            let (line, col) = self.offset_to_line_col(start);
+                        } else if is_local && !is_conditional {
+                            // E0601: Local variable that will be assigned later but used before
+                            self.add_issue(&crate::errors::E0601, line, col, vec![var_name.clone()]);
+                        } else if is_module_conditional && !is_local {
+                            // E0606: Using module-level conditionally defined variable
                             self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
+                        } else {
+                            // E0602: Undefined variable - not defined anywhere
+                            // Skip common built-ins to avoid false positives
+                            let builtins = ["print", "len", "range", "str", "int", "float", "bool", 
+                                          "list", "dict", "set", "tuple", "type", "isinstance",
+                                          "open", "file", "input", "sum", "min", "max", "abs",
+                                          "round", "sorted", "reversed", "enumerate", "zip",
+                                          "map", "filter", "any", "all", "hex", "oct", "bin",
+                                          "ord", "chr", "dir", "help", "id", "hash", "iter",
+                                          "next", "super", "property", "staticmethod", 
+                                          "classmethod", "getattr", "setattr", "hasattr",
+                                          "delattr", "vars", "globals", "locals", "eval",
+                                          "exec", "compile", "True", "False", "None",
+                                          "__name__", "__file__", "__doc__", "Exception",
+                                          "ValueError", "TypeError", "KeyError", "IndexError",
+                                          "RuntimeError", "NotImplementedError", "AttributeError"];
+                            if !builtins.contains(&var_name.as_str()) {
+                                self.add_issue(&crate::errors::E0602, line, col, vec![var_name.clone()]);
+                            }
                         }
                     } else {
-                        // At module level - check if using a conditionally defined variable
+                        // At module level
                         if self.conditionally_defined.contains_key(&var_name) {
-                            let start = match &expr {
-                                Name(n) => n.range.start(),
-                                _ => return,
-                            };
-                            let (line, col) = self.offset_to_line_col(start);
+                            // E0606: conditionally defined variable
                             self.add_issue(&crate::errors::E0606, line, col, vec![var_name.clone()]);
+                        } else {
+                            // E0602: undefined variable
+                            // Skip common built-ins
+                            let builtins = ["print", "len", "range", "str", "int", "float", "bool", 
+                                          "list", "dict", "set", "tuple", "type", "isinstance",
+                                          "open", "file", "input", "sum", "min", "max", "abs",
+                                          "round", "sorted", "reversed", "enumerate", "zip",
+                                          "map", "filter", "any", "all", "hex", "oct", "bin",
+                                          "ord", "chr", "dir", "help", "id", "hash", "iter",
+                                          "next", "super", "property", "staticmethod", 
+                                          "classmethod", "getattr", "setattr", "hasattr",
+                                          "delattr", "vars", "globals", "locals", "eval",
+                                          "exec", "compile", "True", "False", "None",
+                                          "__name__", "__file__", "__doc__", "Exception",
+                                          "ValueError", "TypeError", "KeyError", "IndexError",
+                                          "RuntimeError", "NotImplementedError", "AttributeError"];
+                            if !builtins.contains(&var_name.as_str()) {
+                                self.add_issue(&crate::errors::E0602, line, col, vec![var_name.clone()]);
+                            }
                         }
                     }
                 }
@@ -1005,15 +1141,66 @@ impl AstContext {
                 }
             }
             ast::Expr::Dict(dict) => {
-                // Visit keys and values in the dict
+                // Check for duplicate keys (E0109)
+                let mut seen_keys: HashSet<String> = HashSet::new();
                 for key in &dict.keys {
                     if let Some(k) = key {
+                        // Check if this is a simple literal key we can track
+                        match k {
+                            ast::Expr::Constant(constant) => {
+                                let key_str = match &constant.value {
+                                    ast::Constant::Str(s) => s.to_string(),
+                                    ast::Constant::Int(i) => i.to_string(),
+                                    ast::Constant::Float(f) => f.to_string(),
+                                    ast::Constant::Bool(b) => b.to_string(),
+                                    ast::Constant::None => "None".to_string(),
+                                    _ => continue, // Skip other constant types
+                                };
+                                
+                                if !seen_keys.insert(key_str.clone()) {
+                                    // Key was already in the set - it's a duplicate
+                                    let start = constant.range.start();
+                                    let (line, col) = self.offset_to_line_col(start);
+                                    self.add_issue(&crate::errors::E0109, line, col, vec![key_str]);
+                                }
+                            }
+                            _ => {} // Skip non-constant keys for now
+                        }
                         self.visit_expr(k.clone());
                     }
                 }
                 for value in &dict.values {
                     self.visit_expr(value.clone());
                 }
+            }
+            ast::Expr::BinOp(binop) => {
+                // Visit both operands of binary operation
+                self.visit_expr(*binop.left.clone());
+                self.visit_expr(*binop.right.clone());
+            }
+            ast::Expr::UnaryOp(unaryop) => {
+                // Visit operand of unary operation
+                self.visit_expr(*unaryop.operand.clone());
+            }
+            ast::Expr::JoinedStr(joined) => {
+                // Visit values in f-string
+                for value in &joined.values {
+                    self.visit_expr(value.clone());
+                }
+            }
+            ast::Expr::FormattedValue(fmtval) => {
+                // Visit the value in formatted string
+                self.visit_expr(*fmtval.value.clone());
+            }
+            Await(await_expr) => {
+                // E1142: Check if await is used outside async function
+                if !self.in_async_function {
+                    let start = await_expr.range.start();
+                    let (line, col) = self.offset_to_line_col(start);
+                    self.add_issue(&crate::errors::E1142, line, col, vec![]);
+                }
+                // Visit the awaited expression
+                self.visit_expr(*await_expr.value.clone());
             }
             _ => {}
         }
@@ -1033,6 +1220,39 @@ impl AstContext {
         
         match stmt {
             Expr(expr_stmt) => self.expr_contains_yield(&expr_stmt.value),
+            If(if_stmt) => {
+                // Check condition and body for yield
+                self.expr_contains_yield(&if_stmt.test) ||
+                if_stmt.body.iter().any(|s| self.stmt_contains_yield(s)) ||
+                if_stmt.orelse.iter().any(|s| self.stmt_contains_yield(s))
+            }
+            For(for_stmt) => {
+                // Check body for yield
+                for_stmt.body.iter().any(|s| self.stmt_contains_yield(s)) ||
+                for_stmt.orelse.iter().any(|s| self.stmt_contains_yield(s))
+            }
+            While(while_stmt) => {
+                // Check body for yield
+                while_stmt.body.iter().any(|s| self.stmt_contains_yield(s)) ||
+                while_stmt.orelse.iter().any(|s| self.stmt_contains_yield(s))
+            }
+            Try(try_stmt) => {
+                // Check all blocks for yield
+                try_stmt.body.iter().any(|s| self.stmt_contains_yield(s)) ||
+                try_stmt.handlers.iter().any(|h| {
+                    match h {
+                        ast::ExceptHandler::ExceptHandler(eh) => {
+                            eh.body.iter().any(|s| self.stmt_contains_yield(s))
+                        }
+                    }
+                }) ||
+                try_stmt.orelse.iter().any(|s| self.stmt_contains_yield(s)) ||
+                try_stmt.finalbody.iter().any(|s| self.stmt_contains_yield(s))
+            }
+            With(with_stmt) => {
+                // Check body for yield
+                with_stmt.body.iter().any(|s| self.stmt_contains_yield(s))
+            }
             _ => false,
         }
     }

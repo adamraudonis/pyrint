@@ -1,0 +1,30 @@
+# Include important files
+include README.md
+include LICENSE
+include Cargo.toml
+include Cargo.lock
+include pyproject.toml
+
+# Include Rust source code
+recursive-include src *.rs
+
+# Include Python package
+recursive-include pyrint_package *.py
+
+# Exclude test files and development files
+recursive-exclude tests *
+recursive-exclude target *
+exclude .gitignore
+exclude .git
+exclude ERROR_CODES_STATUS.txt
+exclude test_*.py
+exclude benches
+recursive-exclude benches *
+
+# Exclude compiled files
+global-exclude *.pyc
+global-exclude __pycache__
+global-exclude *.so
+global-exclude *.dylib
+global-exclude *.dll
+global-exclude .DS_Store

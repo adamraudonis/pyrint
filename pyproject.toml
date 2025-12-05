@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel", "setuptools-rust>=1.7.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pyrint"
+version = "0.1.0"
+authors = [
+    {name = "Adam Raudonis", email = "adam.raudonis@gmail.com"},  # Replace with your email
+]
+description = "A fast Python linter written in Rust. Faster than pylint, slower than ruff. Catches more issues than ruff, less than pylint"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Rust",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Operating System :: OS Independent",
+]
+keywords = ["linter", "static-analysis", "python", "rust", "fast"]
+
+[project.urls]
+Homepage = "https://github.com/adamraudonis/pyrint"
+Issues = "https://github.com/adamraudonis/pyrint/issues"
+Repository = "https://github.com/adamraudonis/pyrint"
+
+[project.scripts]
+pyrint = "pyrint.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pylint>=2.0",
+]
+
+[tool.setuptools]
+packages = ["pyrint"]
+package-dir = {"pyrint" = "pyrint_package"}
+
+[tool.setuptools.exclude-package-data]
+"*" = ["tests/*", "*.pyc", "__pycache__"]

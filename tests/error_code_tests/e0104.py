@@ -1,0 +1,1 @@
+return 42  # E0104: return-outside-function

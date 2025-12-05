@@ -20,4 +20,26 @@ target
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
+# macOS
 .DS_Store
+
+# Python packaging
+build/
+dist/
+*.egg-info/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.dylib
+*.dll
+
+# Test files (keep error_code_tests but ignore temporary test files)
+test_*.py
+tests/random_issues/
+tests/repo_tests/
+
+# Documentation and instructions (keep in repo but optional)
+# Comment out if you want to track these:
+# UPLOAD_INSTRUCTIONS.md
+# ERROR_CODES_STATUS.txt

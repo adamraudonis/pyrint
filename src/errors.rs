@@ -131,6 +131,12 @@ pub const E0108: ErrorCode = ErrorCode {
     message_template: "Duplicate argument name {} in function definition",
 };
 
+pub const E0109: ErrorCode = ErrorCode {
+    code: "E0109",
+    symbol: "duplicate-key",
+    message_template: "Duplicate key {} in dictionary",
+};
+
 pub const E0110: ErrorCode = ErrorCode {
     code: "E0110",
     symbol: "abstract-class-instantiated",
@@ -183,6 +189,12 @@ pub const E0118: ErrorCode = ErrorCode {
     code: "E0118",
     symbol: "used-prior-global-declaration",
     message_template: "Name {} is used prior to global declaration",
+};
+
+pub const E0119: ErrorCode = ErrorCode {
+    code: "E0119",
+    symbol: "misplaced-format-function",
+    message_template: "format function is not called on str",
 };
 
 // New error codes for extended functionality
@@ -258,6 +270,12 @@ pub const E0303: ErrorCode = ErrorCode {
     message_template: "__len__ does not return non-negative integer",
 };
 
+pub const E0601: ErrorCode = ErrorCode {
+    code: "E0601",
+    symbol: "used-before-assignment",
+    message_template: "Using variable '{}' before assignment",
+};
+
 pub const E0602: ErrorCode = ErrorCode {
     code: "E0602",
     symbol: "undefined-variable",
@@ -270,10 +288,28 @@ pub const E0606: ErrorCode = ErrorCode {
     message_template: "Possibly using variable '{}' before assignment",
 };
 
+pub const E0704: ErrorCode = ErrorCode {
+    code: "E0704",
+    symbol: "misplaced-bare-raise",
+    message_template: "The raise statement is not inside an except clause",
+};
+
+pub const E0711: ErrorCode = ErrorCode {
+    code: "E0711",
+    symbol: "notimplemented-raised",
+    message_template: "NotImplemented raised - should raise NotImplementedError",
+};
+
 pub const E1120: ErrorCode = ErrorCode {
     code: "E1120",
     symbol: "no-value-for-parameter",
     message_template: "No value for argument '{}' in function call",
+};
+
+pub const E1142: ErrorCode = ErrorCode {
+    code: "E1142",
+    symbol: "await-outside-async",
+    message_template: "'await' outside async function",
 };
 
 pub const E1205: ErrorCode = ErrorCode {
