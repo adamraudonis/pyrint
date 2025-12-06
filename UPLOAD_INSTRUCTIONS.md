@@ -20,21 +20,27 @@ cd /Users/adamraudonis/Desktop/Projects/Prylint/prylint
 cargo build --release
 ```
 
-### Step 2: Create the distribution
+### Step 2: Update version numbers
+
+Update the version in both files:
+- `Cargo.toml`: version = "0.1.1"
+- `pyproject.toml`: version = "0.1.1"
+
+### Step 3: Create the distribution
 
 ```bash
-# Clean previous builds
+# Clean previous builds (optional)
 rm -rf dist build *.egg-info
 
 # Use the simple setup that includes the binary
-python3 setup_simple.py bdist_wheel
+# This creates both source distribution and wheel
+python setup_simple.py sdist bdist_wheel
 ```
 
-### Step 3: Create source distribution (optional)
-
-```bash
-python3 setup_simple.py sdist
-```
+**Note**: The `setup_simple.py` script automatically:
+- Builds the Rust binary with --release
+- Copies it to `prylint_package/bin/prylint`
+- Includes it in the wheel distribution
 
 ## Platform-Specific Considerations
 
@@ -84,8 +90,11 @@ TestPyPI is a separate instance for testing:
 Once you're confident the package works:
 
 ```bash
-# Upload to PyPI
-python3 -m twine upload dist/*
+# Upload specific version to PyPI (recommended)
+python -m twine upload dist/prylint-0.1.1*
+
+# Or upload all files in dist/
+python -m twine upload dist/*
 
 # You'll be prompted for:
 # Username: __token__
@@ -149,9 +158,9 @@ For future releases, consider setting up:
 ✅ Setup files configured
 ✅ README prepared for PyPI
 ✅ Rust binary built with --release
+✅ Version 0.1.1 successfully uploaded to PyPI
 ⚠️ Platform-specific wheel only (macOS)
-⚠️ Manual upload required
-⚠️ Multi-platform support needs additional setup
+⚠️ Multi-platform support needs additional setup for wider compatibility
 
 ## Next Steps
 

@@ -91,17 +91,48 @@ Prylint is designed for developers who want:
 - A modern, performant alternative to traditional linters
 - Focus on catching real errors, not style issues
 
+## Development
+
+### Building from Source
+
+```bash
+# Clone the repository
+git clone https://github.com/adamraudonis/prylint.git
+cd prylint
+
+# Build the Rust binary (debug mode)
+cargo build
+
+# Build the Rust binary (release mode)
+cargo build --release
+
+# Run tests
+cargo test
+python tests/run_error_code_tests.py
+```
+
+### Creating a Release
+
+```bash
+# 1. Update version in Cargo.toml and pyproject.toml
+# Edit both files to bump version (e.g., 0.1.0 -> 0.1.1)
+
+# 2. Build release binary
+cargo build --release
+
+# 3. Build Python distribution
+python setup_simple.py sdist bdist_wheel
+
+# 4. Upload to PyPI
+python -m twine upload dist/prylint-VERSION*
+
+# Note: The project uses setup_simple.py which includes the pre-built
+# Rust binary in the Python package, avoiding build-time Rust compilation
+```
+
 ## Contributing
 
 Contributions are welcome! Please feel free to submit issues and pull requests on [GitHub](https://github.com/adamraudonis/prylint).
-
-## Roadmap
-
-- [ ] Expand error code coverage
-- [ ] Add configuration file support
-- [ ] Implement auto-fix capabilities
-- [ ] Add IDE integrations
-- [ ] Support for custom rules
 
 ## Credits
 

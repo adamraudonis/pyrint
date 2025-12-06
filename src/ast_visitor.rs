@@ -30,6 +30,7 @@ pub struct AstContext {
     pub imports: HashMap<String, String>, // Maps imported name to module path
     pub module_conditionally_defined: HashSet<String>, // Module-level variables that are conditionally defined
     pub variable_usages: HashMap<String, Vec<(usize, usize)>>, // Track where variables are used in current function
+    pub in_unreachable_code: bool, // Track if we're in unreachable code (e.g., if False:)
 }
 
 impl AstContext {
@@ -58,10 +59,16 @@ impl AstContext {
             imports: HashMap::new(),
             module_conditionally_defined: HashSet::new(),
             variable_usages: HashMap::new(),
+            in_unreachable_code: false,
         }
     }
 
+    
     pub fn add_issue(&mut self, code: &ErrorCode, line: usize, column: usize, args: Vec<String>) {
+        // Skip issues in unreachable code
+        if self.in_unreachable_code {
+            return;
+        }
         let message = if args.is_empty() {
             code.message_template.to_string()
         } else {
@@ -217,10 +224,6 @@ impl AstContext {
                     );
                 }
             }
-        } else {
-            // We're inside a function - add nested function to local variables
-            self.local_vars.insert(func_name.clone());
-            self.definitely_defined.insert(func_name.clone());
         }
 
         // Store function signature for argument checking
@@ -265,6 +268,14 @@ impl AstContext {
         }
         
         let is_init = func.name.as_str() == "__init__";
+        
+        // If we're inside a function (nested function), add the function name to parent scope
+        // BEFORE saving state, so it's available in the parent when we restore
+        if self.in_function {
+            self.local_vars.insert(func_name.clone());
+            self.definitely_defined.insert(func_name.clone());
+        }
+        
         let prev_in_function = self.in_function;
         let prev_in_init = self.in_init;
         let prev_in_generator = self.in_generator;
@@ -336,7 +347,12 @@ impl AstContext {
         self.in_function = true;
         self.in_init = is_init;
         self.in_generator = false;
-        self.function_args.clear();
+        
+        // If we're already in a function (nested function), preserve parent's args
+        // so the nested function can access closure variables
+        if !prev_in_function {
+            self.function_args.clear();
+        }
 
         let mut seen_args = HashSet::new();
         // Check all argument types for duplicates
@@ -448,6 +464,7 @@ impl AstContext {
         self.conditionally_defined = prev_conditionally;
         self.definitely_defined = prev_definitely;
         self.variable_usages = prev_usages;
+        
     }
 
     fn visit_async_function_def(&mut self, func: ast::StmtAsyncFunctionDef) {
@@ -505,6 +522,10 @@ impl AstContext {
                     self.class_methods.insert(qualified_name, (line, col));
                 }
             }
+        } else if self.in_function {
+            // If we're inside a function, add the class to local variables
+            self.local_vars.insert(class_name.clone());
+            self.definitely_defined.insert(class_name.clone());
         }
         // If we're inside a function, nested classes are allowed
 
@@ -628,6 +649,12 @@ impl AstContext {
     }
 
     fn visit_if(&mut self, if_stmt: ast::StmtIf) {
+        // Check if this is "if False:" which makes the body unreachable
+        let is_if_false = matches!(
+            &*if_stmt.test, 
+            ast::Expr::Constant(c) if matches!(&c.value, ast::Constant::Bool(false))
+        );
+        
         self.visit_expr(*if_stmt.test.clone());
         
         // Track variables defined in if branch
@@ -638,9 +665,18 @@ impl AstContext {
         let final_else_terminates = self.get_final_else_terminates(&if_stmt);
         let has_else = !if_stmt.orelse.is_empty();
         
+        // Save unreachable state and set it if this is "if False:"
+        let saved_unreachable = self.in_unreachable_code;
+        if is_if_false {
+            self.in_unreachable_code = true;
+        }
+        
         for stmt in if_stmt.body {
             self.visit_stmt(stmt);
         }
+        
+        // Restore unreachable state after processing the if body
+        self.in_unreachable_code = saved_unreachable;
         
         let if_defined = self.definitely_defined.clone();
         
@@ -721,6 +757,29 @@ impl AstContext {
     fn visit_with(&mut self, with_stmt: ast::StmtWith) {
         for item in with_stmt.items {
             self.visit_expr(item.context_expr.clone());
+            
+            // Track the 'as' variable if present (e.g., 'with open() as f:')
+            if let Some(optional_vars) = &item.optional_vars {
+                // Extract variable names from the target
+                match &**optional_vars {
+                    ast::Expr::Name(name) => {
+                        let var_name = name.id.to_string();
+                        self.local_vars.insert(var_name.clone());
+                        self.definitely_defined.insert(var_name);
+                    }
+                    ast::Expr::Tuple(tuple) => {
+                        // Handle multiple assignment like 'with ... as (a, b):'
+                        for elt in &tuple.elts {
+                            if let ast::Expr::Name(name) = elt {
+                                let var_name = name.id.to_string();
+                                self.local_vars.insert(var_name.clone());
+                                self.definitely_defined.insert(var_name);
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+            }
         }
         for stmt in with_stmt.body {
             self.visit_stmt(stmt);
@@ -730,6 +789,29 @@ impl AstContext {
     fn visit_async_with(&mut self, with_stmt: ast::StmtAsyncWith) {
         for item in with_stmt.items {
             self.visit_expr(item.context_expr.clone());
+            
+            // Track the 'as' variable if present
+            if let Some(optional_vars) = &item.optional_vars {
+                // Extract variable names from the target
+                match &**optional_vars {
+                    ast::Expr::Name(name) => {
+                        let var_name = name.id.to_string();
+                        self.local_vars.insert(var_name.clone());
+                        self.definitely_defined.insert(var_name);
+                    }
+                    ast::Expr::Tuple(tuple) => {
+                        // Handle multiple assignment like 'with ... as (a, b):'
+                        for elt in &tuple.elts {
+                            if let ast::Expr::Name(name) = elt {
+                                let var_name = name.id.to_string();
+                                self.local_vars.insert(var_name.clone());
+                                self.definitely_defined.insert(var_name);
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+            }
         }
         for stmt in with_stmt.body {
             self.visit_stmt(stmt);
@@ -892,6 +974,7 @@ impl AstContext {
             self.visit_stmt(stmt);
         }
     }
+
 
     fn visit_global(&mut self, global_stmt: ast::StmtGlobal) {
         let start = global_stmt.range.start();
