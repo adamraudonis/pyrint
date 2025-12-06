@@ -79,7 +79,7 @@ impl Linter {
 
         let issues = context.issues.clone();
         
-        let filtered_issues = if !self.config.enabled_checkers.is_empty() {
+        let mut filtered_issues = if !self.config.enabled_checkers.is_empty() {
             issues
                 .into_iter()
                 .filter(|issue| self.config.enabled_checkers.contains(&issue.code))
@@ -92,6 +92,14 @@ impl Linter {
         } else {
             issues
         };
+        
+        // Apply errors_only filter if enabled
+        if self.config.errors_only {
+            filtered_issues = filtered_issues
+                .into_iter()
+                .filter(|issue| matches!(issue.severity, crate::errors::Severity::Error))
+                .collect();
+        }
 
         Ok(filtered_issues)
     }

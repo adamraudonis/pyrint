@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel", "setuptools-rust>=1.7.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pyrint"
+name = "prylint"
 version = "0.1.0"
 authors = [
     {name = "Adam Raudonis", email = "adam.raudonis@gmail.com"},  # Replace with your email
@@ -30,12 +30,12 @@ classifiers = [
 keywords = ["linter", "static-analysis", "python", "rust", "fast"]
 
 [project.urls]
-Homepage = "https://github.com/adamraudonis/pyrint"
-Issues = "https://github.com/adamraudonis/pyrint/issues"
-Repository = "https://github.com/adamraudonis/pyrint"
+Homepage = "https://github.com/adamraudonis/prylint"
+Issues = "https://github.com/adamraudonis/prylint/issues"
+Repository = "https://github.com/adamraudonis/prylint"
 
 [project.scripts]
-pyrint = "pyrint.cli:main"
+prylint = "prylint.cli:main"
 
 [project.optional-dependencies]
 dev = [
@@ -44,8 +44,8 @@ dev = [
 ]
 
 [tool.setuptools]
-packages = ["pyrint"]
-package-dir = {"pyrint" = "pyrint_package"}
+packages = ["prylint"]
+package-dir = {"prylint" = "prylint_package"}
 
 [tool.setuptools.exclude-package-data]
 "*" = ["tests/*", "*.pyc", "__pycache__"]

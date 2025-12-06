@@ -88,6 +88,10 @@ impl AstContext {
         
         match ast_result {
             Ok(ast_module) => {
+                // First pass: collect all module-level definitions
+                self.collect_module_definitions(&ast_module);
+                
+                // Second pass: do the actual checking
                 self.visit_module(ast_module);
                 Ok(())
             }
@@ -101,6 +105,36 @@ impl AstContext {
                 );
                 Err(format!("Syntax error: {}", e.error))
             }
+        }
+    }
+    
+    fn collect_module_definitions(&mut self, module: &ast::Mod) {
+        // Preliminary pass to collect all module-level function and class definitions
+        // This allows forward references to work correctly
+        match module {
+            ast::Mod::Module(ast::ModModule { body, .. }) => {
+                for stmt in body {
+                    match stmt {
+                        ast::Stmt::FunctionDef(func) => {
+                            let start = func.range.start();
+                            let (line, col) = self.offset_to_line_col(start);
+                            self.defined_names.insert(func.name.to_string(), (line, col));
+                        }
+                        ast::Stmt::AsyncFunctionDef(func) => {
+                            let start = func.range.start();
+                            let (line, col) = self.offset_to_line_col(start);
+                            self.defined_names.insert(func.name.to_string(), (line, col));
+                        }
+                        ast::Stmt::ClassDef(cls) => {
+                            let start = cls.range.start();
+                            let (line, col) = self.offset_to_line_col(start);
+                            self.defined_names.insert(cls.name.to_string(), (line, col));
+                        }
+                        _ => {}
+                    }
+                }
+            }
+            _ => {}
         }
     }
 
@@ -174,17 +208,20 @@ impl AstContext {
         } else if !self.in_function {
             // Only check for duplicate functions at module level (not inside other functions)
             if let Some(prev_loc) = self.defined_names.get(&func_name) {
-                self.add_issue(
-                    &crate::errors::E0102,
-                    line,
-                    col,
-                    vec![format!("function already defined line {}", prev_loc.0)],
-                );
-            } else {
-                self.defined_names.insert(func_name.clone(), (line, col));
+                if prev_loc != &(line, col) {  // Don't report duplicates with itself from pre-pass
+                    self.add_issue(
+                        &crate::errors::E0102,
+                        line,
+                        col,
+                        vec![format!("function already defined line {}", prev_loc.0)],
+                    );
+                }
             }
+        } else {
+            // We're inside a function - add nested function to local variables
+            self.local_vars.insert(func_name.clone());
+            self.definitely_defined.insert(func_name.clone());
         }
-        // If we're inside a function, nested functions are allowed to have the same name
 
         // Store function signature for argument checking
         if !self.in_class && !self.in_function { // Only track top-level functions for now
@@ -443,14 +480,14 @@ impl AstContext {
         if !self.in_class && !self.in_function {
             // Top-level class
             if let Some(prev_loc) = self.defined_names.get(&class_name) {
-                self.add_issue(
-                    &crate::errors::E0102,
-                    line,
-                    col,
-                    vec![class_name.clone(), format!("{}", prev_loc.0)],
-                );
-            } else {
-                self.defined_names.insert(class_name.clone(), (line, col));
+                if prev_loc != &(line, col) {  // Don't report duplicates with itself from pre-pass
+                    self.add_issue(
+                        &crate::errors::E0102,
+                        line,
+                        col,
+                        vec![class_name.clone(), format!("{}", prev_loc.0)],
+                    );
+                }
             }
         } else if self.in_class {
             // Nested class within another class - track separately
@@ -775,8 +812,27 @@ impl AstContext {
                     let prev_in_except = self.in_except_handler;
                     self.in_except_handler = true;
                     
+                    // Track the exception variable (e.g., 'e' in 'except Exception as e:')
+                    let prev_local_vars = if let Some(name) = &h.name {
+                        let exc_var_name = name.to_string();
+                        self.local_vars.insert(exc_var_name.clone());
+                        self.definitely_defined.insert(exc_var_name.clone());
+                        self.function_args.insert(exc_var_name.clone()); // Treat like a local binding
+                        Some(self.local_vars.clone())
+                    } else {
+                        None
+                    };
+                    
                     for stmt in h.body {
                         self.visit_stmt(stmt);
+                    }
+                    
+                    // Remove exception variable from scope after the handler
+                    if let Some(name) = &h.name {
+                        let exc_var_name = name.to_string();
+                        self.local_vars.remove(&exc_var_name);
+                        self.definitely_defined.remove(&exc_var_name);
+                        self.function_args.remove(&exc_var_name);
                     }
                     
                     self.in_except_handler = prev_in_except;
@@ -1023,7 +1079,9 @@ impl AstContext {
                 let is_definitely_defined = self.definitely_defined.contains(&var_name) ||
                                           self.function_args.contains(&var_name) ||
                                           self.global_names.contains(&var_name) ||
-                                          self.nonlocal_names.contains(&var_name);
+                                          self.nonlocal_names.contains(&var_name) ||
+                                          self.imports.contains_key(&var_name) ||
+                                          self.defined_names.contains_key(&var_name);
                 
                 if !is_definitely_defined {
                     let start = match &expr {
@@ -1064,8 +1122,30 @@ impl AstContext {
                                           "exec", "compile", "True", "False", "None",
                                           "__name__", "__file__", "__doc__", "Exception",
                                           "ValueError", "TypeError", "KeyError", "IndexError",
-                                          "RuntimeError", "NotImplementedError", "AttributeError"];
-                            if !builtins.contains(&var_name.as_str()) {
+                                          "RuntimeError", "NotImplementedError", "AttributeError",
+                                          "bytes", "bytearray", "callable", "issubclass", "object",
+                                          "AssertionError", "UnicodeEncodeError", "IOError",
+                                          "OSError", "ImportError", "NameError", "StopIteration",
+                                          "GeneratorExit", "SystemExit", "KeyboardInterrupt",
+                                          "MemoryError", "OverflowError", "ZeroDivisionError",
+                                          "SyntaxError", "IndentationError", "TabError",
+                                          "SystemError", "UnicodeError", "UnicodeDecodeError",
+                                          "Warning", "DeprecationWarning", "FutureWarning",
+                                          "UserWarning", "PendingDeprecationWarning",
+                                          "BaseException", "ArithmeticError", "LookupError",
+                                          "EnvironmentError", "ReferenceError", "EOFError",
+                                          "BufferError", "FloatingPointError", "StandardError",
+                                          "StopAsyncIteration", "ConnectionError", "BrokenPipeError",
+                                          "ConnectionAbortedError", "ConnectionRefusedError",
+                                          "ConnectionResetError", "FileExistsError", "FileNotFoundError",
+                                          "InterruptedError", "IsADirectoryError", "NotADirectoryError",
+                                          "PermissionError", "ProcessLookupError", "TimeoutError",
+                                          "NotImplemented", "Ellipsis", "__debug__", "quit", "exit",
+                                          "copyright", "credits", "license", "__import__",
+                                          "format", "repr", "ascii", "memoryview", "frozenset",
+                                          "complex", "divmod", "pow", "slice", "__build_class__",
+                                          "__loader__", "__spec__", "__package__", "__cached__"];
+                            if !builtins.contains(&var_name.as_str()) && !self.imports.contains_key(&var_name) && !self.defined_names.contains_key(&var_name) {
                                 self.add_issue(&crate::errors::E0602, line, col, vec![var_name.clone()]);
                             }
                         }
@@ -1089,8 +1169,30 @@ impl AstContext {
                                           "exec", "compile", "True", "False", "None",
                                           "__name__", "__file__", "__doc__", "Exception",
                                           "ValueError", "TypeError", "KeyError", "IndexError",
-                                          "RuntimeError", "NotImplementedError", "AttributeError"];
-                            if !builtins.contains(&var_name.as_str()) {
+                                          "RuntimeError", "NotImplementedError", "AttributeError",
+                                          "bytes", "bytearray", "callable", "issubclass", "object",
+                                          "AssertionError", "UnicodeEncodeError", "IOError",
+                                          "OSError", "ImportError", "NameError", "StopIteration",
+                                          "GeneratorExit", "SystemExit", "KeyboardInterrupt",
+                                          "MemoryError", "OverflowError", "ZeroDivisionError",
+                                          "SyntaxError", "IndentationError", "TabError",
+                                          "SystemError", "UnicodeError", "UnicodeDecodeError",
+                                          "Warning", "DeprecationWarning", "FutureWarning",
+                                          "UserWarning", "PendingDeprecationWarning",
+                                          "BaseException", "ArithmeticError", "LookupError",
+                                          "EnvironmentError", "ReferenceError", "EOFError",
+                                          "BufferError", "FloatingPointError", "StandardError",
+                                          "StopAsyncIteration", "ConnectionError", "BrokenPipeError",
+                                          "ConnectionAbortedError", "ConnectionRefusedError",
+                                          "ConnectionResetError", "FileExistsError", "FileNotFoundError",
+                                          "InterruptedError", "IsADirectoryError", "NotADirectoryError",
+                                          "PermissionError", "ProcessLookupError", "TimeoutError",
+                                          "NotImplemented", "Ellipsis", "__debug__", "quit", "exit",
+                                          "copyright", "credits", "license", "__import__",
+                                          "format", "repr", "ascii", "memoryview", "frozenset",
+                                          "complex", "divmod", "pow", "slice", "__build_class__",
+                                          "__loader__", "__spec__", "__package__", "__cached__"];
+                            if !builtins.contains(&var_name.as_str()) && !self.imports.contains_key(&var_name) && !self.defined_names.contains_key(&var_name) {
                                 self.add_issue(&crate::errors::E0602, line, col, vec![var_name.clone()]);
                             }
                         }

@@ -1,24 +1,24 @@
 #!/usr/bin/env python3
-"""Command-line interface for Pyrint."""
+"""Command-line interface for Prylint."""
 
 import sys
 import argparse
 import json
 from pathlib import Path
-from .linter import lint_file, lint_directory, PyrintError
+from .linter import lint_file, lint_directory, PrylintError
 
 
 def main():
-    """Main entry point for the pyrint CLI."""
+    """Main entry point for the prylint CLI."""
     parser = argparse.ArgumentParser(
-        description="Pyrint - A fast Python linter written in Rust",
+        description="Prylint - A fast Python linter written in Rust",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  pyrint file.py                  # Lint a single file
-  pyrint src/                     # Lint all Python files in directory
-  pyrint --json file.py           # Output as JSON
-  pyrint --no-recursive src/      # Don't recurse into subdirectories
+  prylint file.py                  # Lint a single file
+  prylint src/                     # Lint all Python files in directory
+  prylint --json file.py           # Output as JSON
+  prylint --no-recursive src/      # Don't recurse into subdirectories
         """
     )
     
@@ -46,6 +46,22 @@ Examples:
     )
     
     parser.add_argument(
+        "-E", "--errors-only",
+        action="store_true",
+        help="Display only error messages (ignore warnings)"
+    )
+    
+    parser.add_argument(
+        "--disable",
+        help="Disable specific checkers (comma-separated error codes, e.g., E0401,W0611)"
+    )
+    
+    parser.add_argument(
+        "--enable",
+        help="Enable specific checkers (comma-separated error codes)"
+    )
+    
+    parser.add_argument(
         "--version", "-v",
         action="version",
         version="%(prog)s 0.1.0"
@@ -57,12 +73,21 @@ Examples:
         path = Path(args.path)
         
         if path.is_file():
-            issues = lint_file(str(path), json_output=False)
+            issues = lint_file(
+                str(path), 
+                json_output=False,
+                errors_only=args.errors_only,
+                disable=args.disable,
+                enable=args.enable
+            )
         elif path.is_dir():
             issues = lint_directory(
                 str(path),
                 recursive=not args.no_recursive,
-                json_output=False
+                json_output=False,
+                errors_only=args.errors_only,
+                disable=args.disable,
+                enable=args.enable
             )
         else:
             print(f"Error: {path} is not a valid file or directory", file=sys.stderr)
@@ -93,7 +118,7 @@ Examples:
         
         return 1 if issues else 0
         
-    except PyrintError as e:
+    except PrylintError as e:
         print(f"Error: {e}", file=sys.stderr)
         return 1
     except KeyboardInterrupt:

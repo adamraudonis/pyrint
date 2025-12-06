@@ -1,4 +1,4 @@
-"""Main linting interface for Pyrint."""
+"""Main linting interface for Prylint."""
 
 import json
 import subprocess
@@ -8,13 +8,13 @@ from pathlib import Path
 from typing import List, Dict, Any, Optional
 
 
-class PyrintError(Exception):
-    """Base exception for Pyrint errors."""
+class PrylintError(Exception):
+    """Base exception for Prylint errors."""
     pass
 
 
 class Issue:
-    """Represents a linting issue found by Pyrint."""
+    """Represents a linting issue found by Prylint."""
     
     def __init__(self, code: str, message: str, file: str, line: int, column: int, severity: str, symbol: str):
         self.code = code
@@ -40,18 +40,18 @@ class Issue:
         }
 
 
-def _find_pyrint_binary() -> str:
-    """Find the pyrint binary in the package."""
+def _find_prylint_binary() -> str:
+    """Find the prylint binary in the package."""
     # Look for the Rust binary in common locations
     possible_paths = [
         # Installed via pip - binary should be in package directory
-        Path(__file__).parent / "bin" / "pyrint",
-        Path(__file__).parent / "pyrint",
+        Path(__file__).parent / "bin" / "prylint",
+        Path(__file__).parent / "prylint",
         # Development mode
-        Path(__file__).parent.parent / "target" / "release" / "pyrint",
-        Path(__file__).parent.parent / "target" / "debug" / "pyrint",
+        Path(__file__).parent.parent / "target" / "release" / "prylint",
+        Path(__file__).parent.parent / "target" / "debug" / "prylint",
         # System PATH
-        "pyrint",
+        "prylint",
     ]
     
     for path in possible_paths:
@@ -67,40 +67,50 @@ def _find_pyrint_binary() -> str:
             except:
                 continue
     
-    raise PyrintError(
-        "Could not find pyrint binary. Please ensure the package was installed correctly."
+    raise PrylintError(
+        "Could not find prylint binary. Please ensure the package was installed correctly."
     )
 
 
-def lint_file(filepath: str, json_output: bool = True) -> List[Issue]:
+def lint_file(filepath: str, json_output: bool = True, errors_only: bool = False, 
+              disable: Optional[str] = None, enable: Optional[str] = None) -> List[Issue]:
     """
     Lint a single Python file.
     
     Args:
         filepath: Path to the Python file to lint
         json_output: Whether to parse JSON output (True) or return raw text
+        errors_only: Whether to show only errors (ignore warnings)
+        disable: Comma-separated list of error codes to disable
+        enable: Comma-separated list of error codes to enable
         
     Returns:
         List of Issue objects found in the file
         
     Raises:
-        PyrintError: If linting fails or file doesn't exist
+        PrylintError: If linting fails or file doesn't exist
     """
     if not os.path.exists(filepath):
-        raise PyrintError(f"File not found: {filepath}")
+        raise PrylintError(f"File not found: {filepath}")
     
-    binary = _find_pyrint_binary()
+    binary = _find_prylint_binary()
     
     cmd = [binary]
     if json_output:
         cmd.append("--json")
+    if errors_only:
+        cmd.append("-E")
+    if disable:
+        cmd.extend(["--disable", disable])
+    if enable:
+        cmd.extend(["--enable", enable])
     cmd.append(filepath)
     
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, check=False)
         
         if result.returncode not in [0, 1]:  # 0 = no issues, 1 = issues found
-            raise PyrintError(f"Pyrint failed: {result.stderr}")
+            raise PrylintError(f"Prylint failed: {result.stderr}")
         
         if json_output and result.stdout:
             try:
@@ -113,12 +123,14 @@ def lint_file(filepath: str, json_output: bool = True) -> List[Issue]:
             return _parse_text_output(result.stdout)
             
     except FileNotFoundError:
-        raise PyrintError(f"Could not execute pyrint binary at: {binary}")
+        raise PrylintError(f"Could not execute prylint binary at: {binary}")
     except Exception as e:
-        raise PyrintError(f"Linting failed: {str(e)}")
+        raise PrylintError(f"Linting failed: {str(e)}")
 
 
-def lint_directory(directory: str, recursive: bool = True, json_output: bool = True) -> List[Issue]:
+def lint_directory(directory: str, recursive: bool = True, json_output: bool = True,
+                  errors_only: bool = False, disable: Optional[str] = None, 
+                  enable: Optional[str] = None) -> List[Issue]:
     """
     Lint all Python files in a directory.
     
@@ -126,18 +138,21 @@ def lint_directory(directory: str, recursive: bool = True, json_output: bool = T
         directory: Path to the directory to lint
         recursive: Whether to recursively lint subdirectories
         json_output: Whether to parse JSON output (True) or return raw text
+        errors_only: Whether to show only errors (ignore warnings)
+        disable: Comma-separated list of error codes to disable
+        enable: Comma-separated list of error codes to enable
         
     Returns:
         List of Issue objects found in all files
         
     Raises:
-        PyrintError: If linting fails or directory doesn't exist
+        PrylintError: If linting fails or directory doesn't exist
     """
     if not os.path.exists(directory):
-        raise PyrintError(f"Directory not found: {directory}")
+        raise PrylintError(f"Directory not found: {directory}")
     
     if not os.path.isdir(directory):
-        raise PyrintError(f"Not a directory: {directory}")
+        raise PrylintError(f"Not a directory: {directory}")
     
     all_issues = []
     
@@ -148,9 +163,10 @@ def lint_directory(directory: str, recursive: bool = True, json_output: bool = T
     
     for py_file in Path(directory).glob(pattern):
         try:
-            issues = lint_file(str(py_file), json_output=json_output)
+            issues = lint_file(str(py_file), json_output=json_output, 
+                             errors_only=errors_only, disable=disable, enable=enable)
             all_issues.extend(issues)
-        except PyrintError:
+        except PrylintError:
             # Skip files that can't be linted
             continue
     
@@ -158,7 +174,7 @@ def lint_directory(directory: str, recursive: bool = True, json_output: bool = T
 
 
 def _parse_text_output(output: str) -> List[Issue]:
-    """Parse text output from pyrint into Issue objects."""
+    """Parse text output from prylint into Issue objects."""
     issues = []
     
     for line in output.split('\n'):

@@ -3,7 +3,7 @@ use clap::Parser;
 use colored::*;
 use std::process;
 
-use pyrint::{Args, config::Config, linter::Linter, reporter::Reporter};
+use prylint::{Args, config::Config, linter::Linter, reporter::Reporter};
 
 fn main() -> Result<()> {
     let args = Args::parse();

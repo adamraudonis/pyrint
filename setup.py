@@ -1,4 +1,4 @@
-"""Setup configuration for pyrint package."""
+"""Setup configuration for prylint package."""
 
 from setuptools import setup, find_packages
 from setuptools_rust import Binding, RustExtension
@@ -15,17 +15,17 @@ def read_long_description():
 
 
 setup(
-    name="pyrint",
+    name="prylint",
     version="0.1.0",
     author="Adam Raudonis",
     author_email="adam.raudonis@gmail.com",  # Replace with your email
     description="A fast Python linter written in Rust",
     long_description=read_long_description(),
     long_description_content_type="text/markdown",
-    url="https://github.com/adamraudonis/pyrint",  # Replace with your repo URL
+    url="https://github.com/adamraudonis/prylint",  # Replace with your repo URL
     project_urls={
-        "Bug Tracker": "https://github.com/adamraudonis/pyrint/issues",
-        "Source Code": "https://github.com/adamraudonis/pyrint",
+        "Bug Tracker": "https://github.com/adamraudonis/prylint/issues",
+        "Source Code": "https://github.com/adamraudonis/prylint",
     },
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -45,7 +45,7 @@ setup(
     packages=find_packages(where=".", exclude=["tests", "tests.*"]),
     rust_extensions=[
         RustExtension(
-            "pyrint._pyrint_rust",
+            "prylint._prylint_rust",
             path="Cargo.toml",
             binding=Binding.PyO3,
         )
@@ -61,7 +61,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "pyrint=pyrint.cli:main",
+            "prylint=prylint.cli:main",
         ],
     },
     include_package_data=True,

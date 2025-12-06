@@ -1,4 +1,4 @@
-# PyPI Upload Instructions for Pyrint
+# PyPI Upload Instructions for Prylint
 
 ## Prerequisites
 
@@ -11,15 +11,17 @@
 
 ## Building the Package
 
-Since Pyrint includes a Rust binary, we need to build platform-specific wheels:
+Since Prylint includes a Rust binary, we need to build platform-specific wheels:
 
 ### Step 1: Build the Rust binary with --release
+
 ```bash
-cd /Users/adamraudonis/Desktop/Projects/Pyrint/pyrint
+cd /Users/adamraudonis/Desktop/Projects/Prylint/prylint
 cargo build --release
 ```
 
 ### Step 2: Create the distribution
+
 ```bash
 # Clean previous builds
 rm -rf dist build *.egg-info
@@ -29,13 +31,14 @@ python3 setup_simple.py bdist_wheel
 ```
 
 ### Step 3: Create source distribution (optional)
+
 ```bash
 python3 setup_simple.py sdist
 ```
 
 ## Platform-Specific Considerations
 
-**IMPORTANT**: The wheel you build will only work on your platform (macOS in this case). 
+**IMPORTANT**: The wheel you build will only work on your platform (macOS in this case).
 For a proper PyPI release, you would need to:
 
 1. Build wheels for multiple platforms (Linux, Windows, macOS)
@@ -52,11 +55,11 @@ python3 -m venv test_env
 source test_env/bin/activate
 
 # Install the wheel
-pip install dist/pyrint-*.whl
+pip install dist/prylint-*.whl
 
 # Test it
-pyrint --version
-pyrint some_script.py
+prylint --version
+prylint some_script.py
 
 # Deactivate when done
 deactivate
@@ -73,7 +76,7 @@ TestPyPI is a separate instance for testing:
    ```
 3. **Test installation**:
    ```bash
-   pip install --index-url https://test.pypi.org/simple/ pyrint
+   pip install --index-url https://test.pypi.org/simple/ prylint
    ```
 
 ## Uploading to PyPI
@@ -90,6 +93,7 @@ python3 -m twine upload dist/*
 ```
 
 Or create a `~/.pypirc` file:
+
 ```ini
 [pypi]
 username = __token__
@@ -101,10 +105,12 @@ password = <your-api-token>
 If you want broader compatibility without platform-specific builds:
 
 1. **Option 1**: Have users install Rust and build on installation
+
    - Modify setup.py to build during install
    - Requires users to have Rust toolchain
 
 2. **Option 2**: Download pre-built binaries
+
    - Host binaries on GitHub releases
    - Download appropriate binary during installation
 
@@ -114,21 +120,24 @@ If you want broader compatibility without platform-specific builds:
 
 ## Package Name Availability
 
-Before uploading, check if 'pyrint' is available on PyPI:
-- Visit: https://pypi.org/project/pyrint/
+Before uploading, check if 'prylint' is available on PyPI:
+
+- Visit: https://pypi.org/project/prylint/
 - If taken, you'll need to choose a different name in setup.py
 
 ## Versioning
 
 Remember to update the version in:
+
 - setup.py / setup_simple.py
 - pyproject.toml
-- pyrint_package/__init__.py
+- prylint_package/**init**.py
 - Cargo.toml
 
 ## Continuous Deployment
 
 For future releases, consider setting up:
+
 - GitHub Actions for automated builds
 - Automatic PyPI uploads on tags
 - Multi-platform wheel building with cibuildwheel
@@ -140,9 +149,9 @@ For future releases, consider setting up:
 ✅ Setup files configured
 ✅ README prepared for PyPI
 ✅ Rust binary built with --release
-⚠️  Platform-specific wheel only (macOS)
-⚠️  Manual upload required
-⚠️  Multi-platform support needs additional setup
+⚠️ Platform-specific wheel only (macOS)
+⚠️ Manual upload required
+⚠️ Multi-platform support needs additional setup
 
 ## Next Steps
 

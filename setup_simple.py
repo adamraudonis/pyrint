@@ -1,4 +1,4 @@
-"""Simple setup configuration for pyrint package without PyO3."""
+"""Simple setup configuration for prylint package without PyO3."""
 
 from setuptools import setup, find_packages
 from setuptools.command.build_py import build_py
@@ -28,7 +28,7 @@ def build_rust_binary():
 def copy_binary_to_package():
     """Copy the built binary to the package directory."""
     src_binary = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "target", "release", "pyrint"
+        os.path.dirname(os.path.abspath(__file__)), "target", "release", "prylint"
     )
 
     # Add .exe extension on Windows
@@ -41,11 +41,11 @@ def copy_binary_to_package():
         )
 
     dst_dir = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "pyrint_package", "bin"
+        os.path.dirname(os.path.abspath(__file__)), "prylint_package", "bin"
     )
     os.makedirs(dst_dir, exist_ok=True)
 
-    dst_binary = os.path.join(dst_dir, "pyrint")
+    dst_binary = os.path.join(dst_dir, "prylint")
     if platform.system() == "Windows":
         dst_binary += ".exe"
 
@@ -88,17 +88,17 @@ def read_long_description():
 
 
 setup(
-    name="pyrint",
+    name="prylint",
     version="0.1.0",
     author="Adam Raudonis",
     author_email="adam.raudonis@gmail.com",  # Replace with your email
     description="A fast Python linter written in Rust",
     long_description=read_long_description(),
     long_description_content_type="text/markdown",
-    url="https://github.com/adamraudonis/pyrint",
+    url="https://github.com/adamraudonis/prylint",
     project_urls={
-        "Bug Tracker": "https://github.com/adamraudonis/pyrint/issues",
-        "Source Code": "https://github.com/adamraudonis/pyrint",
+        "Bug Tracker": "https://github.com/adamraudonis/prylint/issues",
+        "Source Code": "https://github.com/adamraudonis/prylint",
     },
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -116,10 +116,10 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.8",
-    packages=["pyrint"],
-    package_dir={"pyrint": "pyrint_package"},
+    packages=["prylint"],
+    package_dir={"prylint": "prylint_package"},
     package_data={
-        "pyrint": ["bin/*"],
+        "prylint": ["bin/*"],
     },
     include_package_data=True,
     cmdclass={
@@ -129,7 +129,7 @@ setup(
     },
     entry_points={
         "console_scripts": [
-            "pyrint=pyrint.cli:main",
+            "prylint=prylint.cli:main",
         ],
     },
     zip_safe=False,

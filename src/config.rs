@@ -90,10 +90,10 @@ impl Config {
 
     pub fn from_default_locations() -> Result<Self> {
         let possible_paths = vec![
-            PathBuf::from(".pyrintrc"),
-            PathBuf::from(".pyrint.toml"),
-            PathBuf::from("pyrint.toml"),
-            PathBuf::from(".config/pyrint.toml"),
+            PathBuf::from(".prylintrc"),
+            PathBuf::from(".prylint.toml"),
+            PathBuf::from("prylint.toml"),
+            PathBuf::from(".config/prylint.toml"),
         ];
 
         for path in possible_paths {

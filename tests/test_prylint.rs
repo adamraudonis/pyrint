@@ -1,6 +1,6 @@
-use pyrint::linter::Linter;
-use pyrint::config::Config;
-use pyrint::errors::{Issue, Severity};
+use prylint::linter::Linter;
+use prylint::config::Config;
+use prylint::errors::{Issue, Severity};
 use std::fs;
 use std::path::PathBuf;
 use tempfile::TempDir;
