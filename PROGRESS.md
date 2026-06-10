@@ -533,6 +533,75 @@ pylint behavior — bugs are replicated.
      os.environ GT-env noise (irreducible here). (5) six.with_metaclass
      call-result synthesis still unwired (no diff evidence at N=1000).
      (6) recursion guard still 350 (no diff evidence at N=1000).
+   - **phase 9 (diff-reduction round 8, N=1000)**: 1.16k -> 970 diff
+     lines. LANDED (probe-verified, harness/infertests now 61 probes):
+     (a) **LookupMixIn.lookup `@lru_cache` maxsize=128 EXACT**
+     (_base_nodes.py:262 — the DEFAULT size, not unbounded!): one tiny
+     GLOBAL LRU over (node, name); hits refresh recency, inserts at
+     capacity evict the LRU entry. Evictions are SEMANTIC: a re-miss
+     recomputes against LIVE module locals — cross-module delayed_assattr
+     (salt compat.py `copy._deepcopy_dispatch = pre_dispatch` lands in
+     copy.py's locals AFTER copy was built; the stale 128-LRU entry ages
+     out and the recompute sees it) and re-mints fresh module-model
+     Consts. Our old unbounded memo replayed stale lookups forever
+     (salt _Constant value-order cluster; salt 132 -> 99).
+     (b) **cap-cascade cache parity** (node_ng.py:163-167): after the
+     truncation `yield Uninferable` the wrapper is SUSPENDED before
+     `break`; the cache write runs ONLY if the consumer pulls again —
+     regardless of how the producer ended. A producer completing Done
+     after the truncation Stop previously hit the unconditional cache
+     branch, freezing every mid-cascade node of a cap blow (GT re-burns
+     ##103 per follow-up dump node, we replayed ##0; groupby.py
+     count-diff lines 63 -> 1).
+     (c) **Instance.getitem igetattr under the ORIGINAL ctx**
+     (bases.py:421): only infer_call_result gets the boundnode-bound
+     new_context; the __getitem__ MRO/ancestors walks run bn-free and
+     hit/write the (node, name, None, None) global cache keys (the
+     asv groupby subscript ERR-vs-U cluster's root count drift).
+     (d) ancestors()/_inferred_bases unproxy astroid-`Instance` baseobjs
+     (Const/containers!): `class Color(Enum)` base Name infers to
+     [Const None, Class Enum] -> NoneType+object enter the ancestors
+     stream FIRST -> igetattr's same-scope filter keeps object.__new__
+     -> metaclass-call chain solves Color(x) -> Inst:Color (airflow
+     RetryAction/TableauJobFinishCode cluster). ClassModel.attr___call__
+     = instantiate_class (objectmodel.py:707-710) — calling a Const None
+     burns the '__get__' descriptor-check metaclass walk before failing.
+     (e) helpers._object_type uses the caller's ctx AS-IS (helpers.py:43
+     — no copy: ln/path flow through; type(self) under a Property
+     igetattr keeps ln='_constructor'); infer_issubclass pulls the OBJ
+     arg FIRST (UseInferenceDefault before the 2nd arg is touched),
+     infer_isinstance the container first.
+     (f) **PY_FROZEN spec table**: pyenv probe captures
+     `_imp._frozen_module_names()` + FrozenImporter loader_state.filename;
+     importlib_finder ports spec.py:169-192 (stdlib-gated, AFTER the
+     search-path scan). `import _frozen_importlib as _bootstrap` now
+     resolves to astroid's EMPTY stub module instead of failing
+     (importlib.import_module chains in pandas nanops).
+     TOOLS: @@DUMPNODE sentinels in both tracers (dump.rs +
+     /tmp/trace_gt_ni5.py with WIPE markers), /tmp/cmp_dumptrace.py
+     (per-dump-node normalized event-stream diff + SequenceMatcher
+     ni-drift localizer), prefix-bisect workflow for cross-file cache
+     archaeology (PRYLINT_DUMP_ONLY={prefix files + target}).
+     N=1000 differing files/lines: django 14/57, pylfunc 10/15, pandas
+     133/686, salt 23/99, airflow 18/65, sentry 10/25, core 11/23.
+     REMAINING (by volume): (1) pandas count/cache drift (~600 lines):
+     frame.py self.columns/index instance_attr walks — tuple-target
+     AssignAttr (`ts.index, ts.columns = rng, rng` at
+     tests/frame/methods/test_at_time.py:106) replays a stale [U] for
+     the rhs Tuple where GT re-infers (suspected: assigned_stmts value
+     pull keyed without the live cc/bn identity, or an earlier
+     truncation froze (tuple,None,None,bnkey) — trace pair saved in
+     /tmp/trace_{gt,rs}_fr.txt, first diverging attr = #132 of 180 in
+     @@DUMPNODE 1426:57:Attribute); nanops cap-cliff (62 lines, first
+     count drift now at 143:29 ##9 vs ##7 — FunctionDef.type/_is_property
+     ctx-None decorator pulls around @overload defs, GT re-walks
+     ImportFrom chains we replay — likely ALSO the 128-LRU on lookup
+     interacting with decoratornames); asv U-vs-ERR residue (36). (2) django
+     test_writer types.NoneType 4th value (12) + ErrorDict cluster (9).
+     (3) salt ImmutableDict/log_parsers GT-extra Inst values (16) +
+     rsax931 trailing Const None (23). (4) pylfunc NOTREE x3 + os.environ
+     noise (irreducible). (5) six.with_metaclass still unwired (no diff
+     evidence). (6) recursion guard still 350 (no diff evidence).
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the
