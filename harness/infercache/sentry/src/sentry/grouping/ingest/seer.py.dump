@@ -1,0 +1,724 @@
+41:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+41:9:Attribute -> Func:logging.getLogger
+41:9:Name -> Module:logging
+44:1:Attribute -> U
+44:1:Attribute -> U
+44:1:Name -> U
+46:11:Name -> U
+47:14:Name -> Class:builtins.dict
+47:19:Name -> Class:builtins.str
+47:24:Name -> U
+48:21:Name -> U
+49:19:Name -> Class:builtins.bool
+50:5:Name -> Class:builtins.bool
+56:14:Attribute -> U
+56:14:Name -> U
+60:26:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+60:26:Name -> Func:src.sentry.grouping.ingest.seer._event_content_is_seer_eligible
+60:58:Name -> U
+61:31:Call -> U
+61:31:Name -> Func:src.sentry.grouping.ingest.seer._project_has_similarity_grouping_enabled
+61:72:Name -> U
+62:12:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+62:36:Name -> U
+66:8:Call -> Const:bool:True | Const:bool:False
+66:8:Name -> Func:src.sentry.grouping.ingest.seer._has_custom_fingerprint
+66:32:Name -> U
+66:39:Name -> U
+66:49:Name -> Const:bool:False | U
+67:11:Call -> Const:bool:True | Const:bool:False
+67:11:Name -> Func:src.sentry.grouping.ingest.seer._is_race_condition_skipped_event
+67:44:Name -> U
+67:51:Name -> U
+67:68:Name -> Const:bool:False | U
+68:11:Call -> U
+68:11:Name -> U
+68:30:Attribute -> U
+68:30:Name -> U
+68:42:Attribute -> U
+68:42:Name -> U
+68:66:Name -> U
+68:73:Name -> Const:bool:False | U
+69:11:Call -> U
+69:11:Name -> Func:src.sentry.grouping.ingest.seer._circuit_breaker_broken
+69:35:Name -> U
+69:42:Name -> U
+69:51:Name -> Const:bool:False | U
+73:11:Call -> Const:bool:True | Const:bool:False
+73:11:Name -> Func:src.sentry.grouping.ingest.seer._has_empty_stacktrace_string
+73:40:Name -> U
+73:47:Name -> U
+73:57:Name -> Const:bool:False | U
+75:11:Call -> Const:bool:True | Const:bool:False
+75:11:Name -> Func:src.sentry.grouping.ingest.seer._stacktrace_exceeds_limits
+75:38:Name -> U
+75:45:Name -> U
+75:55:Name -> Const:bool:False | U
+83:11:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+83:11:Name -> Func:src.sentry.grouping.ingest.seer._ratelimiting_enabled
+83:33:Name -> U
+83:40:Name -> U
+83:49:Name -> Const:bool:False | U
+91:11:Name -> U
+91:35:Name -> U
+91:61:Name -> Class:builtins.bool
+92:5:Name -> Class:builtins.bool
+100:7:Attribute -> U
+100:7:Name -> U
+101:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+101:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+101:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+104:32:Attribute -> U
+104:32:Name -> U
+105:39:Call -> U
+105:39:Name -> Class:builtins.bool
+105:44:Attribute -> U
+105:44:Name -> U
+106:24:Attribute -> U
+106:24:Name -> U
+107:28:Attribute -> U
+107:28:Name -> U
+110:8:Call -> U
+110:8:Name -> U
+111:12:Name -> U
+111:76:Name -> Const:bool:False | U
+117:24:Call -> U
+117:24:Name -> Class:builtins.bool
+117:29:Attribute -> U
+117:29:Name -> U
+118:19:Name -> Class:typing.Any
+119:11:Name -> U
+121:12:Call -> U
+121:12:Attribute -> U
+121:12:Name -> U
+122:28:Call -> U
+122:28:Name -> Class:builtins.bool
+122:33:Attribute -> U
+122:33:Name -> U
+123:15:Name -> Class:builtins.Exception
+124:28:Call -> ERR
+124:28:Name -> Func:builtins.repr
+124:33:Name -> ExcInst:builtins.Exception
+126:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+126:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+126:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+129:28:Attribute -> U
+129:28:Name -> U
+130:43:Name -> U
+131:35:Name -> Const:NoneType:None | U
+132:20:Attribute -> U
+132:20:Name -> U
+133:24:Attribute -> U
+133:24:Name -> U
+139:43:Name -> U
+139:53:Name -> Class:builtins.bool
+143:15:Attribute -> U
+143:15:Name -> U
+145:11:Call -> U
+145:11:Name -> U
+145:40:Name -> U
+146:8:Call -> U
+146:8:Attribute -> U
+146:8:Name -> U
+148:24:Call -> U
+148:24:Attribute -> U
+148:24:Name -> U
+149:30:Name -> U
+153:7:Attribute -> U
+153:7:Name -> U
+153:25:Name -> U
+154:8:Call -> U
+154:8:Attribute -> U
+154:8:Name -> U
+156:24:Call -> U
+156:24:Attribute -> U
+156:24:Name -> U
+157:30:Name -> U
+161:4:Call -> U
+161:4:Attribute -> U
+161:4:Name -> U
+163:20:Call -> U
+163:20:Attribute -> U
+163:20:Name -> U
+164:26:Name -> U
+170:11:Name -> U
+170:28:Name -> Class:builtins.dict
+170:33:Name -> Class:builtins.str
+170:38:Name -> U
+170:67:Name -> Class:builtins.bool
+171:5:Name -> Class:builtins.bool
+172:20:Call -> U
+172:20:Name -> U
+172:47:Attribute -> U
+172:47:Name -> U
+173:7:Call -> U
+173:7:Name -> U
+173:33:Name -> U
+173:40:Name -> U
+173:50:Attribute -> U
+173:50:Name -> U
+173:74:Name -> U
+174:8:Call -> U
+174:8:Name -> U
+175:12:Name -> U
+175:81:Name -> Const:bool:False | U
+182:54:Name -> U
+182:66:Name -> Class:builtins.bool
+187:26:Call -> U
+187:26:Name -> Class:builtins.bool
+187:31:Call -> U
+187:31:Attribute -> U
+187:31:Name -> U
+189:4:Call -> U
+189:4:Attribute -> U
+189:4:Name -> U
+191:20:Call -> U
+191:20:Attribute -> U
+191:20:Name -> U
+192:28:Name -> U
+195:11:Name -> U
+199:11:Name -> U
+199:28:Name -> Class:builtins.dict
+199:33:Name -> Class:builtins.str
+199:38:Name -> U
+199:67:Name -> Class:builtins.bool
+200:5:Name -> Class:builtins.bool
+201:7:Call -> ERR
+201:7:Name -> Func:builtins.any
+201:11:Call -> U
+201:11:Attribute -> U
+201:11:Name -> U
+201:59:Name -> U
+201:74:Name -> U
+202:8:Call -> U
+202:8:Name -> U
+203:12:Name -> U
+203:80:Name -> Const:bool:False | U
+210:33:Name -> U
+210:49:Name -> U
+210:73:Name -> Class:builtins.bool
+210:90:Name -> Class:builtins.bool
+215:23:Call -> U
+215:23:Attribute -> U
+215:23:Name -> U
+216:28:Call -> U
+216:28:Attribute -> U
+216:28:Name -> U
+218:27:Name -> U
+218:55:Name -> U
+219:28:Name -> U
+219:61:Name -> U
+221:32:Attribute -> U
+221:32:Name -> U
+221:62:Attribute -> U
+221:62:Name -> U
+223:7:Call -> U
+223:7:Attribute -> U
+223:7:Attribute -> U
+223:7:Name -> U
+223:72:Name -> U
+224:8:Name -> Dict:2
+224:40:Name -> U
+225:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+225:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+225:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+225:83:Name -> Dict:2
+226:8:Call -> U
+226:8:Name -> U
+227:12:Name -> U
+227:79:Name -> Const:bool:False | U
+232:7:Call -> U
+232:7:Attribute -> U
+232:7:Attribute -> U
+232:7:Name -> U
+233:35:Attribute -> U
+233:35:Name -> U
+233:57:Name -> U
+235:8:Name -> Dict:2
+235:40:Name -> U
+236:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+236:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+236:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+236:84:Name -> Dict:2
+237:8:Call -> U
+237:8:Name -> U
+238:12:Name -> U
+238:80:Name -> Const:bool:False | U
+246:35:Name -> U
+246:51:Name -> U
+246:75:Name -> Class:builtins.bool
+246:92:Name -> Class:builtins.bool
+247:21:Call -> U
+247:21:Attribute -> U
+247:21:Name -> U
+248:22:Call -> U
+248:22:Name -> U
+249:8:Attribute -> U
+249:8:Name -> U
+250:8:Name -> U
+251:8:Call -> U
+251:8:Attribute -> U
+251:8:Name -> U
+251:43:Name -> U
+253:25:Call -> U
+253:25:Attribute -> U
+253:25:Name -> U
+255:7:Name -> U
+256:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+256:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+256:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+259:28:Attribute -> U
+259:28:Name -> U
+260:30:Attribute -> U
+260:30:Name -> U
+261:18:Name -> U
+264:8:Call -> U
+264:8:Name -> U
+265:12:Name -> U
+265:77:Name -> Const:bool:False | U
+268:11:Name -> U
+272:11:Name -> U
+272:28:Name -> Class:builtins.dict
+272:33:Name -> Class:builtins.str
+272:38:Name -> U
+272:67:Name -> Class:builtins.bool
+273:5:Name -> Class:builtins.bool
+274:24:Call -> U
+274:24:Name -> U
+274:46:Call -> U
+274:46:Name -> U
+274:85:Name -> U
+275:11:Name -> U
+276:11:Name -> U
+277:12:Call -> U
+277:12:Name -> U
+278:16:Name -> U
+281:30:Name -> Const:bool:False | U
+286:4:Attribute -> U
+286:4:Name -> U
+286:38:Name -> U
+291:11:Name -> U
+292:14:Name -> Class:builtins.dict
+292:19:Name -> Class:builtins.str
+292:24:Name -> U
+293:19:Name -> Class:builtins.bool
+294:5:Name -> Class:builtins.tuple
+294:11:Name -> U
+294:43:Name -> Class:builtins.dict
+294:48:Name -> Class:builtins.str
+294:53:Name -> Class:builtins.str
+294:59:Name -> Class:builtins.int
+294:65:Name -> Class:builtins.bool
+301:21:Call -> U
+301:21:Name -> U
+301:30:Attribute -> U
+301:30:Name -> U
+303:24:Call -> U
+303:24:Attribute -> U
+303:24:Attribute -> U
+303:24:Name -> U
+305:8:Call -> U
+305:8:Name -> U
+305:30:Call -> U
+305:30:Name -> U
+305:69:Name -> U
+308:20:Call -> U
+308:20:Name -> U
+308:47:Attribute -> U
+308:47:Name -> U
+310:18:Name -> U
+311:20:Attribute -> U
+311:20:Name -> U
+312:16:Call -> U
+312:16:Attribute -> U
+312:16:Name -> U
+313:22:Attribute -> U
+313:22:Attribute -> U
+313:22:Name -> U
+314:22:Name -> U
+315:69:Name -> U
+315:26:Call -> U
+315:26:Name -> U
+315:50:Name -> U
+316:13:Call -> U
+316:13:Attribute -> U
+316:13:Name -> U
+318:17:Name -> U
+319:25:Name -> Const:bool:False | U
+320:20:Attribute -> U
+320:20:Name -> U
+322:4:Call -> U
+322:4:Attribute -> U
+322:4:Attribute -> U
+322:4:Name -> U
+324:17:Name -> Class:builtins.dict
+324:22:Name -> Class:builtins.str
+324:27:Name -> Class:builtins.str
+324:33:Name -> Class:builtins.int
+324:39:Name -> Class:builtins.bool
+325:20:Attribute -> U
+325:20:Name -> U
+326:25:Attribute -> U
+326:25:Name -> U
+327:25:Name -> Const:bool:False | U
+330:11:Name -> Dict:10
+330:25:Name -> Dict:3
+333:1:Attribute -> U
+333:1:Attribute -> U
+333:1:Name -> U
+335:11:Name -> U
+336:21:Name -> U
+337:14:Name -> Class:builtins.dict
+337:19:Name -> Class:builtins.str
+337:24:Name -> U
+338:5:Name -> Class:builtins.tuple
+338:11:Name -> Class:builtins.float
+338:25:Name -> U
+338:43:Name -> Class:builtins.str
+349:17:Call -> U
+349:17:Attribute -> U
+349:17:Name -> U
+350:24:Call -> U
+350:24:Attribute -> U
+350:24:Attribute -> U
+350:24:Name -> U
+351:35:Call -> U
+351:35:Name -> U
+351:56:Name -> U
+353:45:Call -> Tuple:2
+353:45:Name -> Func:src.sentry.grouping.ingest.seer._build_seer_request
+353:65:Name -> U
+353:72:Name -> U
+355:21:Call -> U
+355:21:Name -> U
+355:55:Attribute -> U
+355:55:Attribute -> U
+355:55:Name -> U
+356:31:Call -> U
+356:31:Name -> U
+357:8:Name -> Dict:10
+358:11:Name -> Dict:3
+358:59:Name -> U
+359:23:Name -> U
+366:47:Name -> U
+368:25:Call -> U
+368:25:Attribute -> U
+368:25:Attribute -> U
+368:25:Name -> U
+369:18:Attribute -> U
+369:18:Name -> U
+369:51:Name -> U
+370:19:Attribute -> U
+370:19:Attribute -> U
+370:19:Name -> U
+372:34:Attribute -> U
+372:34:Name -> U
+372:50:Name -> U
+372:77:Name -> U
+376:7:Name -> U
+383:27:Name -> U
+384:31:Name -> U
+384:58:Attribute -> U
+384:58:Name -> U
+385:39:Call -> Const:bool:True | U
+385:39:Name -> Func:src.sentry.grouping.ingest.seer._should_use_seer_match_for_grouping
+386:16:Name -> U
+387:16:Name -> U
+388:16:Name -> U
+389:16:Name -> U
+390:16:Name -> Const:int:0
+394:15:Name -> Const:bool:True | U
+395:43:Name -> U
+396:39:Call -> U | Inst:builtins.dict
+396:39:Name -> Func:dataclasses.asdict
+396:46:Name -> U
+397:38:Attribute -> U
+397:38:Name -> U
+405:7:Name -> Const:str:'no_matches_usable' | Const:str:'no_seer_matches' | Const:str:'match_found'
+405:52:Call -> U
+405:52:Attribute -> U
+405:52:Name -> U
+409:14:Name -> Dict:10
+419:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+419:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+419:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+419:85:Name -> U
+423:8:Call -> U
+423:8:Name -> U
+424:12:Name -> U
+424:26:Name -> Dict:3
+424:67:Name -> U
+428:8:Name -> U
+431:11:Name -> Const:int:0 | Const:int:1
+434:11:Name -> Const:str:'no_matches_usable' | Const:str:'no_seer_matches' | Const:str:'match_found'
+436:32:Attribute -> U
+436:32:Name -> U
+436:58:Name -> Const:str:'no_matches_usable' | Const:str:'no_seer_matches' | Const:str:'match_found'
+440:7:Name -> U
+440:38:Name -> Const:int:0 | Const:int:1
+441:8:Call -> U
+441:8:Attribute -> U
+441:8:Name -> U
+443:12:Name -> Const:int:0 | Const:int:1
+444:24:Call -> U
+444:24:Attribute -> U
+444:24:Name -> U
+445:17:Name -> Dict:2
+448:4:Call -> U
+448:4:Attribute -> U
+448:4:Name -> U
+450:8:Call -> ERR
+450:8:Name -> Func:builtins.len
+450:12:Name -> U
+451:20:Call -> U
+451:20:Attribute -> U
+451:20:Name -> U
+453:14:Name -> Dict:2
+454:25:Name -> U
+458:4:Call -> U
+458:4:Attribute -> U
+458:4:Name -> U
+460:20:Call -> U
+460:20:Attribute -> U
+460:20:Name -> U
+462:14:Name -> Dict:2
+463:25:Name -> U
+468:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+468:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+468:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+471:24:Attribute -> U
+471:24:Name -> U
+472:26:Attribute -> U
+472:26:Attribute -> U
+472:26:Name -> U
+473:20:Name -> U
+474:32:Call -> ERR
+474:32:Name -> Func:builtins.len
+474:36:Name -> U
+475:40:Name -> Const:int:0 | Const:int:1
+476:31:Name -> Const:NoneType:None | U | Inst:builtins.dict
+477:34:Call -> Const:bool:False
+477:34:Name -> Class:builtins.bool
+477:39:Name -> Const:NoneType:None | U
+481:12:Name -> Const:NoneType:None | U
+481:33:Name -> Const:NoneType:None | U
+481:59:Name -> U
+485:11:Name -> U
+486:21:Name -> U
+487:22:Name -> U
+488:34:Name -> Class:builtins.bool
+489:40:Name -> Class:builtins.int
+490:5:Name -> Class:builtins.bool
+502:8:Call -> U
+502:8:Name -> U
+502:29:Call -> U
+502:29:Attribute -> U
+502:29:Name -> U
+505:11:Name -> U
+505:48:Name -> U
+509:11:Name -> U
+510:12:Call -> U
+510:12:Attribute -> U
+510:12:Name -> U
+512:28:Call -> U
+512:28:Attribute -> U
+512:28:Name -> U
+513:34:Attribute -> U
+513:34:Name -> U
+519:25:Call -> U
+519:25:Name -> U
+520:8:Name -> U
+520:25:Name -> U
+522:26:Call -> U
+522:26:Name -> Class:builtins.bool
+523:8:Attribute -> U
+523:8:Name -> U
+523:38:Attribute -> U
+523:38:Attribute -> U
+523:38:Name -> U
+526:11:Name -> U
+528:9:Name -> U
+528:46:Name -> U
+530:9:Name -> U
+530:47:Name -> U
+532:13:Name -> U
+537:4:Call -> U
+537:4:Attribute -> U
+537:4:Name -> U
+539:20:Call -> U
+539:20:Attribute -> U
+539:20:Name -> U
+540:26:Attribute -> U
+540:26:Name -> U
+540:52:Name -> Const:str:'no_parent_metadata' | Const:str:'only_event_hybrid' | Const:str:'only_parent_hybrid' | Const:str:'no_fingerprint_match' | Const:str:'fingerprint_match'
+543:11:Name -> U
+546:1:Attribute -> U
+546:1:Attribute -> U
+546:1:Name -> U
+548:11:Name -> U
+549:21:Name -> U
+550:14:Name -> Class:builtins.dict
+550:19:Name -> Class:builtins.str
+550:24:Name -> U
+551:21:Name -> Class:builtins.list
+551:26:Name -> U
+552:5:Name -> U
+555:7:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+555:7:Name -> Func:src.sentry.grouping.ingest.seer.should_call_seer_for_grouping
+555:37:Name -> U
+555:44:Name -> U
+555:54:Name -> U
+556:8:Call -> U
+556:8:Name -> U
+556:36:Name -> U
+560:75:Call -> Tuple:3
+560:75:Name -> Func:src.sentry.grouping.ingest.seer.get_seer_similar_issues
+561:16:Name -> U
+561:23:Name -> U
+561:40:Name -> U
+563:15:Name -> Class:builtins.Exception
+564:12:Call -> U
+564:12:Attribute -> U
+564:12:Name -> U
+565:16:Name -> ExcInst:builtins.Exception
+565:34:Attribute -> U
+565:34:Name -> U
+565:61:Attribute -> U
+565:61:Attribute -> U
+565:61:Name -> U
+570:22:Attribute -> U
+570:22:Name -> U
+571:11:Name -> U
+575:25:Name -> Class:typing.Any
+576:16:Attribute -> U
+576:16:Name -> U
+578:15:Name -> U
+579:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+579:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+579:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+582:40:Attribute -> U
+582:40:Name -> U
+583:47:Call -> U
+583:47:Name -> Class:builtins.bool
+583:52:Attribute -> U
+583:52:Name -> U
+584:32:Attribute -> U
+584:32:Name -> U
+585:36:Attribute -> U
+585:36:Name -> U
+586:40:Attribute -> U
+586:40:Attribute -> U
+586:40:Name -> U
+587:38:Attribute -> U
+587:38:Attribute -> U
+587:38:Name -> U
+588:34:Attribute -> U
+588:34:Attribute -> U
+588:34:Name -> U
+591:23:Name -> Const:NoneType:None | Const:NoneType:None | U
+593:24:Call -> U
+593:24:Attribute -> U
+593:24:Name -> U
+595:28:Call -> U
+595:28:Name -> U
+595:55:Attribute -> U
+595:55:Name -> U
+597:12:Call -> U
+597:12:Attribute -> U
+597:12:Name -> U
+607:27:Attribute -> U
+607:27:Name -> U
+607:53:Name -> U
+608:31:Attribute -> U
+608:31:Name -> U
+608:57:Name -> U
+609:32:Attribute -> U
+609:32:Name -> U
+610:27:Name -> U
+610:46:Attribute -> U
+610:46:Name -> U
+611:39:Name -> Const:NoneType:None | Const:NoneType:None | U
+612:36:Name -> Const:NoneType:None | U
+613:43:Attribute -> U
+613:43:Name -> U
+616:11:Name -> Const:NoneType:None | Const:NoneType:None | U
+619:1:Attribute -> U
+619:1:Attribute -> U
+619:1:Name -> U
+621:11:Name -> U
+622:24:Name -> U
+623:14:Name -> Class:builtins.dict
+623:19:Name -> Class:builtins.str
+623:24:Name -> U
+638:18:Attribute -> U
+638:18:Name -> U
+640:50:Name -> U
+640:8:Attribute -> U
+640:8:Name -> U
+643:11:Call -> U
+643:11:Name -> U
+643:44:Attribute -> U
+643:44:Name -> U
+643:59:Name -> U | Const:NoneType:None
+647:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+647:11:Name -> Func:src.sentry.grouping.ingest.seer.should_call_seer_for_grouping
+647:41:Name -> U
+647:48:Name -> U
+647:58:Name -> U
+650:4:Call -> U
+650:4:Name -> U
+650:32:Name -> U
+652:32:Call -> Tuple:2
+652:32:Name -> Func:src.sentry.grouping.ingest.seer._build_seer_request
+652:52:Name -> U
+652:59:Name -> U
+654:21:Call -> U
+654:21:Name -> U
+654:55:Attribute -> U
+654:55:Attribute -> U
+654:55:Name -> U
+656:8:Call -> U
+656:8:Name -> U
+657:12:Name -> Dict:10
+657:26:Name -> Dict:3
+657:75:Name -> U
+659:11:Name -> Class:builtins.Exception
+660:8:Call -> U
+660:8:Attribute -> U
+660:8:Name -> U
+661:12:Name -> ExcInst:builtins.Exception
+663:25:Attribute -> U
+663:25:Name -> U
+664:27:Attribute -> U
+664:27:Attribute -> U
+664:27:Name -> U
+665:29:Attribute -> U
+665:29:Name -> U
+670:4:Call -> U
+670:4:Attribute -> U
+670:4:Name -> U
+672:20:Call -> U
+672:20:Attribute -> U
+672:20:Name -> U
+674:24:Attribute -> U
+674:24:Name -> U
+680:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+680:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+680:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+683:24:Attribute -> U
+683:24:Name -> U
+684:26:Attribute -> U
+684:26:Attribute -> U
+684:26:Name -> U
+685:20:Call -> U
+685:20:Attribute -> U
+685:20:Name -> U
+693:7:Name -> U
+694:8:Call -> U
+694:8:Attribute -> U
+694:8:Name -> U
+695:39:Attribute -> U
+695:39:Call -> U
+695:39:Name -> U
+695:66:Attribute -> U
+695:66:Name -> U

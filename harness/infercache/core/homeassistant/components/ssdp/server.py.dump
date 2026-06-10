@@ -1,0 +1,248 @@
+33:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+33:10:Attribute -> Func:logging.getLogger
+33:10:Name -> Module:logging
+33:28:Name -> Const:str:'homeassistant.components.ssdp.server' | Const:str:'__main__'
+36:28:Name -> U
+39:24:Call -> U
+39:24:Name -> U
+46:21:Name -> Const:str:'2026.7.0.dev0'
+54:12:Call -> U
+54:12:Name -> U
+61:12:Call -> U
+61:12:Name -> U
+68:12:Call -> U
+68:12:Name -> U
+75:12:Call -> U
+75:12:Name -> U
+83:12:Call -> Inst:xml.etree.ElementTree.Element | U
+83:12:Attribute -> Class:xml.etree.ElementTree.Element | U
+83:12:Name -> Module:xml.etree.ElementTree
+85:22:Name -> Class:builtins.list
+85:27:Name -> Class:.type
+85:32:Name -> U
+86:14:Name -> Class:builtins.list
+86:19:Name -> Class:.type
+86:24:Name -> U
+90:12:Name -> U
+91:5:Name -> Class:builtins.tuple
+91:11:Name -> Class:builtins.int
+91:16:Attribute -> Class:_socket.socket | Class:socket.socket
+91:16:Name -> Module:socket
+93:31:Call -> U
+93:31:Name -> U
+93:47:Name -> U
+93:13:Attribute -> Const:int:2
+93:13:Name -> Module:socket
+93:60:Attribute -> Const:int:30
+93:60:Name -> Module:socket
+94:18:Call -> Inst:_socket.socket | Inst:socket.socket
+94:18:Attribute -> Class:_socket.socket | Class:socket.socket
+94:18:Name -> Module:socket
+94:32:Name -> Const:int:2 | Const:int:30
+94:40:Attribute -> Const:int:1
+94:40:Name -> Module:socket
+96:8:Call -> ERR
+96:8:Attribute -> BM:_socket.socket.setblocking | BM:_socket.socket.setblocking
+96:8:Name -> Inst:_socket.socket | Inst:socket.socket
+98:16:Name -> U
+98:31:Name -> U
+99:8:Call -> ERR
+99:8:Attribute -> BM:_socket.socket.bind | BM:_socket.socket.bind
+99:8:Name -> Inst:_socket.socket | Inst:socket.socket
+99:25:Name -> U
+100:15:Call -> ERR
+100:15:Attribute -> BM:_socket.socket.getsockname | BM:_socket.socket.getsockname
+100:15:Name -> Inst:_socket.socket | Inst:socket.socket
+101:11:Name -> Class:builtins.BaseException
+102:8:Call -> Const:NoneType:None
+102:8:Attribute -> BM:_socket.socket.close | BM:socket.socket.close
+102:8:Name -> Inst:_socket.socket | Inst:socket.socket
+104:11:Name -> U
+104:17:Name -> Inst:_socket.socket | Inst:socket.socket
+110:29:Name -> U
+112:8:Name -> Inst:homeassistant.components.ssdp.server.Server
+112:20:Name -> U
+113:8:Name -> Inst:homeassistant.components.ssdp.server.Server
+113:28:Name -> Class:builtins.list
+113:33:Name -> U
+117:14:Attribute -> U
+117:14:Attribute -> U
+117:14:Name -> Inst:homeassistant.components.ssdp.server.Server
+118:8:Call -> U
+118:8:Attribute -> U
+118:8:Name -> U
+118:30:Name -> U
+118:56:Attribute -> BM:homeassistant.components.ssdp.server.Server.async_stop
+118:56:Name -> Inst:homeassistant.components.ssdp.server.Server
+119:8:Call -> U
+119:8:Attribute -> U
+119:8:Name -> U
+120:12:Name -> U
+121:12:Attribute -> BM:homeassistant.components.ssdp.server.Server._async_start_upnp_servers
+121:12:Name -> Inst:homeassistant.components.ssdp.server.Server
+124:47:Name -> Class:builtins.str
+126:28:Call -> U | Const:str:'00000000000000000000000000000000'
+126:28:Name -> Func:homeassistant.helpers.instance_id.async_get
+126:50:Attribute -> U
+126:50:Name -> Inst:homeassistant.components.ssdp.server.Server
+127:15:Call -> Const:str:''
+127:15:Attribute -> BM:builtins.str.upper
+128:20:Name -> U
+128:39:Name -> U
+129:16:Name -> U
+129:37:Name -> U
+130:16:Name -> U
+133:53:Name -> U
+136:20:Call -> Const:str:''
+136:20:Attribute -> BM:homeassistant.components.ssdp.server.Server._async_get_instance_udn
+136:20:Name -> Inst:homeassistant.components.ssdp.server.Server
+137:28:Call -> U
+137:28:Name -> U
+137:50:Attribute -> U
+137:50:Name -> Inst:homeassistant.components.ssdp.server.Server
+138:21:Name -> U
+140:31:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+140:31:Name -> Func:homeassistant.helpers.network.get_url
+140:39:Attribute -> U
+140:39:Name -> Inst:homeassistant.components.ssdp.server.Server
+141:15:Name -> Class:homeassistant.helpers.network.NoURLAvailableError
+142:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+142:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+142:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+149:30:Call -> U | Const:str:'00000000000000000000000000000000'
+149:30:Name -> Func:homeassistant.helpers.instance_id.async_get
+149:52:Attribute -> U
+149:52:Name -> Inst:homeassistant.components.ssdp.server.Server
+150:8:Name -> Class:homeassistant.components.ssdp.server.HassUpnpServiceDevice
+151:12:Call -> U
+151:12:Attribute -> U
+151:12:Attribute -> U
+151:12:Name -> Class:homeassistant.components.ssdp.server.HassUpnpServiceDevice
+152:20:Name -> U
+153:33:Attribute -> U
+153:33:Attribute -> U
+153:33:Attribute -> U
+153:33:Name -> Inst:homeassistant.components.ssdp.server.Server
+154:27:Name -> U
+155:33:Name -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+156:30:Name -> U
+161:27:Call -> Inst:builtins.enumerate
+161:27:Name -> Class:builtins.enumerate
+161:37:Attribute -> U
+161:37:Attribute -> U
+161:37:Name -> Class:homeassistant.components.ssdp.server.HassUpnpServiceDevice
+162:22:Call -> U | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+162:22:Name -> Func:urllib.parse.urljoin
+162:30:Name -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+162:48:Attribute -> U
+162:48:Name -> U
+163:12:Attribute -> U
+163:12:Attribute -> U
+163:12:Name -> Class:homeassistant.components.ssdp.server.HassUpnpServiceDevice
+163:58:Name -> U
+163:67:Call -> U
+163:67:Attribute -> U
+163:67:Name -> U
+164:20:Name -> U | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+168:18:Call -> Inst:builtins.int
+168:18:Name -> Class:builtins.int
+168:22:Call -> ERR
+168:22:Name -> Func:time.time
+173:13:Call -> Inst:contextlib.ExitStack
+173:13:Name -> Class:contextlib.ExitStack
+174:35:Call -> U
+174:35:Name -> Func:homeassistant.components.ssdp.common.async_build_source_set
+174:58:Attribute -> U
+174:58:Name -> Inst:homeassistant.components.ssdp.server.Server
+175:32:Call -> Const:str:''
+175:32:Name -> Class:builtins.str
+175:36:Name -> U
+176:19:Attribute -> U
+176:19:Name -> U
+177:32:Call -> U
+177:32:Name -> Func:typing.cast
+177:37:Name -> Class:ipaddress.IPv6Address
+177:50:Name -> U
+178:27:Attribute -> U
+178:27:Name -> U
+179:34:Name -> U
+180:24:Name -> Const:str:''
+183:24:Call -> Inst:builtins.int
+183:24:Name -> Class:builtins.int
+183:28:Attribute -> U
+183:28:Name -> U
+186:36:Name -> Const:str:''
+187:33:Call -> U
+187:33:Name -> U
+187:57:Name -> Tuple:4 | Tuple:2
+188:25:Call -> U
+188:25:Name -> U
+188:51:Name -> U
+188:62:Name -> U
+189:47:Call -> Tuple:2
+189:47:Name -> Func:homeassistant.components.ssdp.server._async_find_next_available_port
+189:79:Name -> U
+190:16:Call -> U
+190:16:Attribute -> BM:contextlib._BaseExitStack.enter_context
+190:16:Name -> Inst:contextlib.ExitStack
+190:36:Name -> U
+191:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+191:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+191:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+192:58:Name -> U
+192:69:Name -> U
+194:16:Call -> ERR
+194:16:Attribute -> BM:builtins.list.append
+194:16:Attribute -> List:0
+194:16:Name -> Inst:homeassistant.components.ssdp.server.Server
+195:20:Call -> U
+195:20:Name -> U
+196:31:Name -> U
+197:31:Name -> U
+198:34:Name -> U
+199:38:Name -> Class:homeassistant.components.ssdp.server.HassUpnpServiceDevice
+200:32:Name -> Inst:builtins.int
+203:28:Call -> U | Inst:asyncio.tasks._GatheringFuture
+203:28:Attribute -> Func:asyncio.tasks.gather
+203:28:Name -> Module:asyncio
+204:18:Call -> U
+204:18:Attribute -> U
+204:18:Name -> U
+204:63:Attribute -> List:0
+204:63:Name -> Inst:homeassistant.components.ssdp.server.Server
+208:27:Call -> Inst:builtins.enumerate
+208:27:Name -> Class:builtins.enumerate
+208:37:Name -> U
+209:15:Call -> ERR
+209:15:Name -> Func:builtins.isinstance
+209:26:Name -> U
+209:34:Name -> Class:builtins.Exception
+210:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+210:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+210:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+212:20:Attribute -> U
+212:20:Attribute -> List:0
+212:20:Name -> Inst:homeassistant.components.ssdp.server.Server
+212:39:Name -> U
+213:20:Name -> U
+215:16:Call -> ERR
+215:16:Attribute -> BM:builtins.list.append
+215:16:Name -> List:0
+215:38:Attribute -> List:0
+215:38:Name -> Inst:homeassistant.components.ssdp.server.Server
+215:57:Name -> U
+216:22:Name -> List:0
+217:12:Call -> ERR
+217:12:Attribute -> BM:builtins.list.remove
+217:12:Attribute -> List:0
+217:12:Name -> Inst:homeassistant.components.ssdp.server.Server
+217:38:Name -> U
+219:35:Name -> Class:typing.Any
+221:14:Call -> Const:NoneType:None
+221:14:Attribute -> BM:homeassistant.components.ssdp.server.Server._async_stop_upnp_servers
+221:14:Name -> Inst:homeassistant.components.ssdp.server.Server
+225:22:Attribute -> List:0
+225:22:Name -> Inst:homeassistant.components.ssdp.server.Server
+226:18:Call -> U
+226:18:Attribute -> U
+226:18:Name -> U

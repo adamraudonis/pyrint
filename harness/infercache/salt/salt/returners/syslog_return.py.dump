@@ -1,0 +1,117 @@
+99:7:Name -> Class:builtins.ImportError
+103:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+103:6:Attribute -> Func:logging.getLogger
+103:6:Name -> Module:logging
+103:24:Name -> Const:str:'salt.returners.syslog_return' | Const:str:'__main__'
+122:15:Call -> Inst:builtins.dict
+122:15:Attribute -> Func:salt.returners.get_returner_options
+122:15:Attribute -> Module:salt.returners
+122:15:Name -> Module:salt
+123:8:Name -> Const:str:'syslog'
+124:8:Name -> Const:NoneType:None | U
+125:8:Name -> Dict:4
+126:17:Name -> ERR
+127:17:Name -> ERR
+128:17:Name -> Dict:3
+130:11:Name -> Inst:builtins.dict
+142:30:Name -> U
+142:62:Name -> U
+143:4:Call -> ERR
+143:4:Attribute -> BM:builtins.list.extend
+143:4:Name -> List:2
+143:36:Name -> U
+143:48:Name -> U
+145:25:Name -> List:2
+146:15:Call -> U
+146:15:Name -> Func:builtins.hasattr
+146:23:Name -> Module:syslog
+146:31:Name -> U
+147:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+147:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+147:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+147:52:Name -> U
+149:15:Call -> ERR
+149:15:Name -> Func:builtins.isinstance
+149:26:Call -> U
+149:26:Name -> Func:builtins.getattr
+149:34:Name -> Module:syslog
+149:42:Name -> U
+149:48:Name -> Class:builtins.int
+150:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+150:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+150:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+150:53:Name -> U
+150:58:Name -> Const:str:'level' | Const:str:'facility'
+154:16:Name -> U
+155:15:Call -> ERR
+155:15:Name -> Func:builtins.isinstance
+155:26:Name -> U
+155:42:Name -> Class:builtins.str
+156:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+156:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+156:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+158:11:Call -> ERR
+158:11:Name -> Func:builtins.len
+158:15:Name -> U
+159:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+159:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+159:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+166:11:Name -> Const:bool:True | Const:bool:False
+168:11:Name -> Const:str:'syslog'
+176:15:Call -> Inst:builtins.dict
+176:15:Name -> Func:salt.returners.syslog_return._get_options
+176:28:Name -> U
+178:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+178:11:Name -> Func:salt.returners.syslog_return._verify_options
+178:27:Name -> Inst:builtins.dict
+182:12:Call -> ERR
+182:12:Name -> Func:builtins.getattr
+182:20:Name -> Module:syslog
+182:28:Name -> Inst:builtins.dict
+183:15:Call -> ERR
+183:15:Name -> Func:builtins.getattr
+183:23:Name -> Module:syslog
+183:31:Name -> Inst:builtins.dict
+187:15:Name -> Inst:builtins.dict
+188:20:Name -> Const:int:0
+188:32:Call -> U
+188:32:Name -> Func:builtins.getattr
+188:40:Name -> Module:syslog
+188:48:Name -> U
+191:16:Name -> Inst:builtins.dict
+192:8:Call -> ERR
+192:8:Attribute -> Func:syslog.openlog
+192:8:Name -> Module:syslog
+193:18:Call -> U
+193:18:Attribute -> Func:salt.utils.stringutils.to_str
+193:18:Attribute -> Module:salt.utils.stringutils
+193:18:Attribute -> Module:salt.utils
+193:18:Name -> Module:salt
+193:48:Name -> Inst:builtins.dict
+193:76:Name -> Const:int:0 | U
+196:8:Call -> ERR
+196:8:Attribute -> Func:syslog.openlog
+196:8:Name -> Module:syslog
+196:33:Name -> Const:int:0 | U
+199:4:Call -> ERR
+199:4:Attribute -> Func:syslog.syslog
+199:4:Name -> Module:syslog
+199:18:Name -> U
+199:29:Name -> U
+199:36:Call -> U
+199:36:Attribute -> Func:salt.utils.json.dumps
+199:36:Attribute -> Module:salt.utils.json
+199:36:Attribute -> Module:salt.utils
+199:36:Name -> Module:salt
+199:58:Name -> U
+202:4:Call -> ERR
+202:4:Attribute -> Func:syslog.closelog
+202:4:Name -> Module:syslog
+209:25:Name -> Const:NoneType:None | U
+209:11:Name -> U
+209:53:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+209:53:Attribute -> Func:salt.utils.jid.gen_jid
+209:53:Attribute -> Module:salt.utils.jid
+209:53:Attribute -> Module:salt.utils
+209:53:Name -> Module:salt
+209:76:Name -> ERR

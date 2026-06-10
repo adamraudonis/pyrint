@@ -1,0 +1,229 @@
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'salt.modules.pyenv' | Const:str:'__main__'
+28:11:Call -> U
+28:11:Name -> Func:salt.modules.pyenv.is_installed
+28:24:Name -> Const:NoneType:None | U
+31:13:Call -> Const:str:'Uninferable/bin/pyenv'
+31:13:Name -> Func:salt.modules.pyenv._pyenv_bin
+31:24:Name -> Const:NoneType:None | U
+32:11:Call -> U
+32:11:Name -> Func:salt.modules.pyenv._pyenv_path
+32:23:Name -> Const:NoneType:None | U
+34:7:Name -> Const:NoneType:None | U
+35:18:Name -> U
+36:10:Name -> Const:NoneType:None | U | Const:str:' Uninferable'
+38:31:Name -> U
+38:37:Name -> Const:str:'' | U | Const:str:' Uninferable'
+38:43:Name -> Const:str:'Uninferable/bin/pyenv'
+40:13:Call -> ERR
+40:13:Name -> ERR
+40:40:Name -> Const:str:'env PYENV_ROOT=Uninferable Uninferable/ | Const:str:'env PYENV_ROOT=UninferableUninferable U | Const:str:'env PYENV_ROOT=Uninferable Uninferable 
+40:49:Name -> U
+40:59:Name -> Const:str:'' | U
+40:73:Name -> Const:NoneType:None | U
+42:7:Call -> ERR
+42:7:Name -> Func:builtins.isinstance
+42:18:Name -> Const:NoneType:None | U
+42:23:Name -> Class:builtins.dict
+43:8:Call -> U
+43:8:Attribute -> U
+43:8:Name -> Const:NoneType:None | U
+43:19:Name -> U
+44:15:Name -> Const:NoneType:None | U
+46:7:Name -> U
+47:15:Name -> U
+53:11:Call -> U
+53:11:Name -> Func:salt.modules.pyenv._pyenv_path
+53:23:Name -> Const:NoneType:None | U
+54:14:Name -> U
+59:7:Name -> Const:NoneType:None | U
+60:15:Call -> ERR
+60:15:Name -> ERR
+62:15:Call -> ERR
+62:15:Name -> ERR
+62:62:Name -> Const:NoneType:None | U
+64:11:Call -> U
+64:11:Attribute -> Func:posixpath.expanduser | U
+64:11:Attribute -> Module:posixpath | Module:ntpath
+64:11:Name -> Module:os
+64:30:Name -> Const:NoneType:None | U
+68:7:Call -> Const:bool:False | U
+68:7:Attribute -> Func:genericpath.isdir | U
+68:7:Attribute -> Module:posixpath | Module:ntpath
+68:7:Name -> Module:os
+68:21:Name -> U
+71:16:Call -> ERR
+71:16:Name -> ERR
+72:55:Name -> U
+72:69:Name -> Const:NoneType:None | U
+77:11:Call -> Const:bool:False | U
+77:11:Attribute -> Func:genericpath.isdir | U
+77:11:Attribute -> Module:posixpath | Module:ntpath
+77:11:Name -> Module:os
+77:25:Name -> U
+80:16:Call -> ERR
+80:16:Name -> ERR
+81:14:Call -> Const:str:"''" | U
+81:14:Attribute -> Func:shlex.quote
+81:14:Name -> Module:shlex
+81:26:Name -> U
+81:53:Name -> Const:NoneType:None | U
+86:14:Name -> U
+87:11:Call -> Const:bool:False | U
+87:11:Attribute -> Func:genericpath.isdir | U
+87:11:Attribute -> Module:posixpath | Module:ntpath
+87:11:Name -> Module:os
+87:25:Name -> Const:str:'Uninferable/plugins/python-build'
+90:16:Call -> ERR
+90:16:Name -> ERR
+91:14:Call -> Const:str:"''" | Const:str:'Uninferable/plugins/python-build' | Const:str:"''"
+91:14:Attribute -> Func:shlex.quote
+91:14:Name -> Module:shlex
+91:26:Name -> Const:str:'Uninferable/plugins/python-build'
+91:53:Name -> Const:NoneType:None | U
+105:11:Name -> Const:NoneType:None | U
+105:19:Call -> U
+105:19:Name -> Func:salt.modules.pyenv._pyenv_path
+105:31:Name -> Const:NoneType:None | U
+106:11:Call -> U
+106:11:Attribute -> Func:posixpath.expanduser | U
+106:11:Attribute -> Module:posixpath | Module:ntpath
+106:11:Name -> Module:os
+106:30:Name -> U
+107:11:Call -> Const:bool:True | U
+107:11:Name -> Func:salt.modules.pyenv._install_pyenv
+107:26:Name -> U
+107:32:Name -> Const:NoneType:None | U
+120:11:Name -> Const:NoneType:None | U
+120:19:Call -> U
+120:19:Name -> Func:salt.modules.pyenv._pyenv_path
+120:31:Name -> Const:NoneType:None | U
+121:11:Call -> U
+121:11:Attribute -> Func:posixpath.expanduser | U
+121:11:Attribute -> Module:posixpath | Module:ntpath
+121:11:Name -> Module:os
+121:30:Name -> U
+123:11:Call -> Const:bool:False | U
+123:11:Name -> Func:salt.modules.pyenv._update_pyenv
+123:25:Name -> U
+123:31:Name -> Const:NoneType:None | U
+136:11:Call -> ERR
+136:11:Name -> ERR
+136:36:Call -> Const:str:'Uninferable/bin/pyenv'
+136:36:Name -> Func:salt.modules.pyenv._pyenv_bin
+136:47:Name -> Const:NoneType:None | U
+153:13:Call -> U
+153:13:Attribute -> Func:re.sub
+153:13:Name -> Module:re
+153:37:Name -> U
+158:7:Name -> ERR
+159:8:Call -> ERR
+159:8:Attribute -> BM:builtins.list.append
+159:8:Name -> List:0
+161:7:Call -> ERR
+161:7:Name -> ERR
+162:8:Call -> ERR
+162:8:Attribute -> BM:builtins.list.append
+162:8:Name -> List:0
+162:24:Call -> ERR
+162:24:Name -> ERR
+164:7:Name -> List:0
+165:14:Call -> Const:str:''
+165:14:Attribute -> BM:builtins.str.join
+165:23:Name -> U
+168:10:Call -> Const:bool:False | Dict:0 | U | Const:bool:False
+168:10:Name -> Func:salt.modules.pyenv._pyenv_exec
+168:33:Name -> U
+168:45:Name -> Const:NoneType:None | Const:str:''
+168:56:Name -> Const:NoneType:None | U
+168:67:Name -> Dict:0
+169:7:Name -> Const:bool:False | Dict:0 | U | Const:bool:False
+170:8:Call -> Const:bool:True
+170:8:Name -> Func:salt.modules.pyenv.rehash
+170:21:Name -> Const:NoneType:None | U
+171:15:Name -> Const:bool:False | Dict:0 | U | Const:bool:False
+174:8:Call -> Const:bool:True
+174:8:Name -> Func:salt.modules.pyenv.uninstall_python
+174:25:Name -> U
+174:39:Name -> Const:NoneType:None | U
+192:13:Call -> U
+192:13:Attribute -> Func:re.sub
+192:13:Name -> Module:re
+192:37:Name -> U
+194:22:Name -> U
+195:4:Call -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+195:4:Name -> Func:salt.modules.pyenv._pyenv_exec
+195:29:Name -> Const:str:'--force Uninferable'
+195:41:Name -> Const:NoneType:None | U
+209:10:Call -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+209:10:Name -> Func:salt.modules.pyenv._pyenv_exec
+209:50:Name -> Const:NoneType:None | U
+210:17:Name -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+210:35:Call -> U
+210:35:Attribute -> U
+210:35:Name -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+229:7:Name -> Const:NoneType:None | U
+230:8:Call -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+230:8:Name -> Func:salt.modules.pyenv._pyenv_exec
+230:30:Name -> U
+230:44:Name -> Const:NoneType:None | U
+233:14:Call -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+233:14:Name -> Func:salt.modules.pyenv._pyenv_exec
+233:42:Name -> Const:NoneType:None | U
+234:21:Name -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+234:39:Call -> U
+234:39:Attribute -> U
+234:39:Name -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+248:13:Call -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+248:13:Name -> Func:salt.modules.pyenv._pyenv_exec
+248:52:Name -> Const:NoneType:None | U
+249:7:Name -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+250:20:Call -> U
+250:20:Attribute -> U
+250:20:Name -> U
+251:15:Name -> U
+253:12:Call -> ERR
+253:12:Attribute -> BM:builtins.list.append
+253:12:Name -> List:0
+253:23:Call -> U
+253:23:Attribute -> U
+253:23:Name -> U
+254:11:Name -> List:0
+267:4:Call -> Const:bool:False | Const:NoneType:None | U | Const:bool:False
+267:4:Name -> Func:salt.modules.pyenv._pyenv_exec
+267:32:Name -> Const:NoneType:None | U
+282:11:Call -> U
+282:11:Name -> Func:salt.modules.pyenv._pyenv_path
+282:23:Name -> Const:NoneType:None | U
+283:16:Call -> U
+283:16:Attribute -> U
+283:16:Name -> Const:NoneType:None | U
+285:15:Name -> U
+286:22:Name -> Const:str:''
+286:42:Call -> Const:str:"''" | U
+286:42:Attribute -> Func:shlex.quote
+286:42:Name -> Module:shlex
+286:54:Name -> U
+287:13:Call -> ERR
+287:13:Name -> ERR
+288:20:Call -> Const:str:"''" | U
+288:20:Attribute -> Func:shlex.quote
+288:20:Name -> Module:shlex
+288:32:Name -> U
+288:52:Name -> Const:str:'' | Const:str:" ''" | U
+289:14:Name -> Const:NoneType:None | U
+293:7:Name -> U
+294:8:Call -> Const:bool:True
+294:8:Name -> Func:salt.modules.pyenv.rehash
+294:21:Name -> Const:NoneType:None | U
+295:15:Name -> U
+311:7:Name -> U
+312:31:Name -> U
+312:40:Name -> U
+314:14:Name -> U
+316:11:Call -> U | Const:bool:False
+316:11:Name -> Func:salt.modules.pyenv.do
+316:14:Name -> Const:str:'PYENV_VERSION=Uninferable Uninferable' | U
+316:25:Name -> Const:NoneType:None | U

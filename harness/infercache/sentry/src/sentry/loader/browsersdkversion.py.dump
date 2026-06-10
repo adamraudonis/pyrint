@@ -1,0 +1,135 @@
+12:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:9:Attribute -> Func:logging.getLogger
+12:9:Name -> Module:logging
+14:18:Call -> U
+14:18:Attribute -> Func:re.compile
+14:18:Name -> Module:re
+15:16:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+15:16:Attribute -> Func:posixpath.abspath | U
+15:16:Attribute -> Module:posixpath | Module:ntpath
+15:16:Name -> Module:os
+15:32:Call -> U
+15:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+15:32:Attribute -> Module:posixpath | Module:ntpath
+15:32:Name -> Module:os
+15:45:Call -> U
+15:45:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+15:45:Attribute -> Module:posixpath | Module:ntpath
+15:45:Name -> Module:os
+15:61:Attribute -> U
+15:61:Name -> U
+18:1:Call -> Func:functools._lru_cache_wrapper.wrapper | Func:functools._lru_cache_wrapper.wrapper | Func:functools._lru_cache_wrapper.wrapper | Func:_functools.functools._lru_cache_wrapper.wrapper | Func:_functools.functools._lru_cache_wrapper.wrapper | Func:_functools.functools._lru_cache_wrapper.wrapper | U | Func:functools.lru_cache.decorating_function
+18:1:Attribute -> Func:functools.lru_cache
+18:1:Name -> Module:functools
+20:14:Name -> U
+22:9:Call -> U
+22:9:Attribute -> Func:posixpath.join | Func:ntpath.join
+22:9:Attribute -> Module:posixpath | Module:ntpath
+22:9:Name -> Module:os
+22:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+22:37:Name -> U
+24:13:Call -> ERR
+24:13:Name -> Func:_io.open
+24:18:Name -> U
+25:19:Call -> U
+25:19:Attribute -> U
+25:19:Name -> U
+25:32:Call -> U
+25:32:Attribute -> U
+25:32:Name -> U
+26:11:Name -> Class:builtins.OSError
+31:21:Name -> U
+31:32:Name -> U
+31:44:Call -> U
+31:44:Attribute -> U
+31:44:Name -> U
+31:66:Name -> U
+34:11:Name -> U
+33:8:Call -> ERR
+33:8:Name -> Func:builtins.max
+33:12:Call -> Inst:builtins.map
+33:12:Name -> Class:builtins.map
+33:16:Name -> U
+33:25:Name -> U
+35:13:Call -> U
+35:13:Name -> U
+35:21:Attribute -> U
+35:21:Name -> U
+44:15:Call -> List:8
+44:15:Name -> Func:src.sentry.loader.browsersdkversion.get_all_browser_sdk_version_versions
+47:19:Name -> List:8
+48:8:Call -> ERR
+48:8:Attribute -> BM:builtins.list.append
+48:8:Name -> List:0
+48:19:Name -> Const:str:'latest' | Const:str:'10.x' | Const:str:'9.x' | Const:str:'8.x' | Const:str:'7.x' | Const:str:'6.x' | Const:str:'5.x' | Const:str:'4.x'
+48:28:Name -> Const:str:'latest' | Const:str:'10.x' | Const:str:'9.x' | Const:str:'8.x' | Const:str:'7.x' | Const:str:'6.x' | Const:str:'5.x' | Const:str:'4.x'
+49:11:Call -> Tuple:0
+49:11:Name -> Class:builtins.tuple
+49:17:Name -> List:0
+53:15:Call -> U
+53:15:Name -> Func:src.sentry.loader.browsersdkversion.get_available_sdk_versions_for_project
+53:54:Name -> U
+56:19:Name -> U
+57:8:Call -> ERR
+57:8:Attribute -> BM:builtins.list.append
+57:8:Name -> List:0
+57:19:Name -> U
+57:28:Name -> U
+58:11:Call -> Tuple:0
+58:11:Name -> Class:builtins.tuple
+58:17:Name -> List:0
+62:11:Call -> Const:NoneType:None | U | Const:NoneType:None
+62:11:Name -> Func:src.sentry.loader.browsersdkversion.load_registry
+63:7:Name -> Const:NoneType:None | U | Const:NoneType:None
+64:15:Call -> U
+64:15:Attribute -> U
+64:15:Name -> U
+69:15:Call -> U | List:0
+69:15:Name -> Func:src.sentry.loader.browsersdkversion.load_version_from_file
+70:7:Name -> U
+72:15:Call -> U
+72:15:Name -> Func:src.sentry.loader.browsersdkversion.get_highest_browser_sdk_version
+72:48:Name -> U
+72:59:Name -> U | List:0
+72:71:Call -> U
+72:71:Name -> U
+72:79:Name -> U
+72:84:Call -> U
+72:84:Name -> U
+73:11:Call -> U
+73:11:Name -> Func:src.sentry.loader.browsersdkversion.get_highest_browser_sdk_version
+75:9:Name -> U
+75:20:Name -> U | List:0
+75:32:Call -> U
+75:32:Attribute -> U
+75:32:Name -> U
+75:45:Name -> U
+79:44:Name -> U
+80:23:Call -> U
+80:23:Name -> Func:src.sentry.loader.browsersdkversion.get_selected_browser_sdk_version
+80:56:Name -> U
+83:15:Call -> U
+83:15:Name -> Func:src.sentry.loader.browsersdkversion.match_selected_version_to_browser_sdk_version
+83:61:Name -> U
+84:11:Name -> Class:builtins.Exception
+85:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+85:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+85:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+86:15:Call -> U
+86:15:Name -> U
+86:23:Attribute -> U
+86:23:Name -> U
+90:11:Call -> U
+90:11:Attribute -> U
+90:11:Attribute -> U
+90:11:Name -> U
+90:56:Call -> U
+90:56:Name -> Func:src.sentry.loader.browsersdkversion.get_default_sdk_version_for_project
+91:8:Attribute -> U
+91:8:Name -> U
+96:11:Call -> U
+96:11:Attribute -> U
+96:11:Name -> U
+100:11:Call -> U
+100:11:Attribute -> U
+100:11:Name -> U

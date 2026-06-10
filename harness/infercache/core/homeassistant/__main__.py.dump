@@ -1,0 +1,281 @@
+18:11:Call -> ERR
+18:11:Attribute -> BM:builtins.str.startswith
+18:11:Attribute -> Const:str:'darwin'
+18:11:Name -> Module:sys
+19:8:Call -> ERR
+19:8:Name -> Func:builtins.print
+21:17:Attribute -> Inst:_io.TextIOWrapper
+21:17:Name -> Module:sys
+23:8:Call -> ERR
+23:8:Attribute -> Func:sys.exit
+23:8:Name -> Module:sys
+28:7:Attribute -> U
+28:7:Name -> Module:sys
+28:30:Name -> Tuple:3
+29:8:Call -> ERR
+29:8:Name -> Func:builtins.print
+31:15:Name -> Tuple:3
+31:40:Name -> Tuple:3
+31:65:Name -> Tuple:3
+32:17:Attribute -> Inst:_io.TextIOWrapper
+32:17:Name -> Module:sys
+34:8:Call -> ERR
+34:8:Attribute -> Func:sys.exit
+34:8:Name -> Module:sys
+37:35:Name -> Class:builtins.str
+41:14:Call -> U
+41:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+41:14:Attribute -> Module:posixpath | Module:ntpath
+41:14:Name -> Module:os
+41:27:Name -> U
+44:11:Call -> Const:bool:False | U
+44:11:Attribute -> Func:genericpath.isdir | U
+44:11:Attribute -> Module:posixpath | Module:ntpath
+44:11:Name -> Module:os
+44:25:Name -> U
+45:11:Name -> U
+45:25:Call -> U
+45:25:Attribute -> U
+45:25:Name -> U
+46:15:Call -> Const:bool:False | Const:bool:True | U
+46:15:Attribute -> Func:genericpath.exists | U
+46:15:Attribute -> Module:posixpath | Module:ntpath
+46:15:Name -> Module:os
+46:30:Name -> U
+50:12:Call -> ERR
+50:12:Name -> Func:builtins.print
+51:66:Name -> U
+51:79:Name -> Const:str:'is not a directory' | Const:str:'does not exist'
+52:21:Attribute -> Inst:_io.TextIOWrapper
+52:21:Name -> Module:sys
+54:12:Call -> ERR
+54:12:Attribute -> Func:sys.exit
+54:12:Name -> Module:sys
+57:12:Call -> ERR
+57:12:Attribute -> Func:posix.mkdir
+57:12:Name -> Module:os
+57:21:Name -> U
+58:15:Name -> Class:builtins.OSError
+59:12:Call -> ERR
+59:12:Name -> Func:builtins.print
+61:29:Name -> U
+61:43:Name -> ExcInst:builtins.OSError
+62:21:Attribute -> Inst:_io.TextIOWrapper
+62:21:Name -> Module:sys
+64:12:Call -> ERR
+64:12:Attribute -> Func:sys.exit
+64:12:Name -> Module:sys
+67:11:Call -> Const:bool:False | U
+67:11:Attribute -> Func:genericpath.isdir | U
+67:11:Attribute -> Module:posixpath | Module:ntpath
+67:11:Name -> Module:os
+67:25:Name -> U
+69:12:Call -> ERR
+69:12:Attribute -> Func:posix.mkdir
+69:12:Name -> Module:os
+69:21:Name -> U
+70:15:Name -> Class:builtins.OSError
+71:12:Call -> ERR
+71:12:Name -> Func:builtins.print
+72:67:Name -> U
+72:78:Name -> ExcInst:builtins.OSError
+73:21:Attribute -> Inst:_io.TextIOWrapper
+73:21:Name -> Module:sys
+75:12:Call -> ERR
+75:12:Attribute -> Func:sys.exit
+75:12:Name -> Module:sys
+78:23:Attribute -> Class:argparse.Namespace
+78:23:Name -> Module:argparse
+82:13:Call -> Inst:argparse.ArgumentParser
+82:13:Attribute -> Class:argparse.ArgumentParser
+82:13:Name -> Module:argparse
+84:59:Name -> Const:int:100
+86:4:Call -> U
+86:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+86:4:Name -> Inst:argparse.ArgumentParser
+86:63:Name -> Const:str:'2026.7.0.dev0'
+87:4:Call -> U
+87:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+87:4:Name -> Inst:argparse.ArgumentParser
+91:16:Call -> U
+91:16:Attribute -> U
+91:16:Name -> U
+94:4:Call -> U
+94:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+94:4:Name -> Inst:argparse.ArgumentParser
+99:4:Call -> U
+99:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+99:4:Name -> Inst:argparse.ArgumentParser
+102:4:Call -> U
+102:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+102:4:Name -> Inst:argparse.ArgumentParser
+106:21:Call -> Inst:argparse._MutuallyExclusiveGroup
+106:21:Attribute -> BM:argparse._ActionsContainer.add_mutually_exclusive_group
+106:21:Name -> Inst:argparse.ArgumentParser
+107:4:Call -> U
+107:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+107:4:Name -> Inst:argparse._MutuallyExclusiveGroup
+112:4:Call -> U
+112:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+112:4:Name -> Inst:argparse._MutuallyExclusiveGroup
+115:25:Call -> U
+115:25:Attribute -> U
+115:25:Name -> U
+120:4:Call -> U
+120:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+120:4:Name -> Inst:argparse.ArgumentParser
+123:4:Call -> U
+123:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+123:4:Name -> Inst:argparse.ArgumentParser
+125:13:Name -> Class:builtins.int
+129:4:Call -> U
+129:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+129:4:Name -> Inst:argparse.ArgumentParser
+131:13:Name -> Class:builtins.str
+135:4:Call -> U
+135:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+135:4:Name -> Inst:argparse.ArgumentParser
+138:4:Call -> U
+138:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+138:4:Name -> Inst:argparse.ArgumentParser
+139:26:Attribute -> Const:str:'...'
+139:26:Name -> Module:argparse
+141:4:Call -> U
+141:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+141:4:Name -> Inst:argparse.ArgumentParser
+147:11:Call -> U | Inst:argparse.Namespace
+147:11:Attribute -> BM:argparse.ArgumentParser.parse_args
+147:11:Name -> Inst:argparse.ArgumentParser
+153:19:Call -> ERR
+153:19:Name -> Func:builtins.sum
+154:12:Call -> U
+154:12:Attribute -> U
+154:12:Name -> U
+154:38:Attribute -> U
+154:38:Name -> U
+154:66:Call -> List:0
+154:66:Attribute -> Func:threading.enumerate
+154:66:Name -> Module:threading
+156:11:Name -> U
+157:12:Call -> ERR
+157:12:Attribute -> BM:_io.TextIOWrapper.write
+157:12:Attribute -> Inst:_io.TextIOWrapper
+157:12:Name -> Module:sys
+157:38:Name -> U
+162:11:Name -> Class:builtins.AssertionError
+163:8:Call -> ERR
+163:8:Attribute -> BM:_io.TextIOWrapper.write
+163:8:Attribute -> Inst:_io.TextIOWrapper
+163:8:Name -> Module:sys
+166:14:Name -> Class:builtins.int
+168:4:Call -> Const:NoneType:None
+168:4:Name -> Func:homeassistant.__main__.validate_python
+170:11:Call -> U | Inst:argparse.Namespace
+170:11:Name -> Func:homeassistant.__main__.get_arguments
+172:11:Attribute -> U
+172:11:Name -> U | Inst:argparse.Namespace
+173:8:Call -> Const:NoneType:None
+173:8:Name -> Func:homeassistant.__main__.validate_os
+175:7:Attribute -> U
+175:7:Name -> U | Inst:argparse.Namespace
+178:15:Call -> Const:int:1 | Const:int:1 | Const:int:1 | U
+178:15:Attribute -> Func:homeassistant.scripts.run
+178:15:Name -> Module:homeassistant.scripts
+178:27:Attribute -> U
+178:27:Name -> U | Inst:argparse.Namespace
+180:17:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+180:17:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+180:17:Attribute -> Module:posixpath | Module:ntpath
+180:17:Name -> Module:os
+180:33:Call -> U
+180:33:Attribute -> Func:posixpath.join | Func:ntpath.join
+180:33:Attribute -> Module:posixpath | Module:ntpath
+180:33:Name -> Module:os
+180:46:Call -> ERR
+180:46:Attribute -> Func:posix.getcwd
+180:46:Name -> Module:os
+180:59:Attribute -> U
+180:59:Name -> U | Inst:argparse.Namespace
+181:7:Call -> Const:bool:False | Const:bool:True
+181:7:Name -> Func:homeassistant.backup_restore.restore_backup
+181:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+182:15:Name -> Const:int:100
+184:4:Call -> Const:NoneType:None
+184:4:Name -> Func:homeassistant.__main__.ensure_config_path
+184:23:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+189:9:Call -> Gen:homeassistant.runner.ensure_single_execution
+189:9:Attribute -> Func:homeassistant.runner.ensure_single_execution
+189:9:Name -> Module:homeassistant.runner
+189:40:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+191:11:Attribute -> Const:NoneType:None | U
+191:11:Name -> Inst:homeassistant.runner.SingleExecutionLock
+192:19:Attribute -> U
+192:19:Name -> Inst:homeassistant.runner.SingleExecutionLock
+194:20:Call -> U
+194:20:Attribute -> U
+194:20:Name -> U
+194:45:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+196:23:Call -> Inst:homeassistant.runner.RuntimeConfig
+196:23:Attribute -> Class:homeassistant.runner.RuntimeConfig
+196:23:Name -> Module:homeassistant.runner
+197:23:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+198:20:Attribute -> U
+198:20:Name -> U | Inst:argparse.Namespace
+199:28:Attribute -> U
+199:28:Name -> U | Inst:argparse.Namespace
+200:21:Attribute -> U
+200:21:Name -> U | Inst:argparse.Namespace
+201:25:Attribute -> U
+201:25:Name -> U | Inst:argparse.Namespace
+202:21:Attribute -> U
+202:21:Name -> U | Inst:argparse.Namespace
+203:30:Attribute -> U
+203:30:Name -> U | Inst:argparse.Namespace
+204:26:Attribute -> U
+204:26:Name -> U | Inst:argparse.Namespace
+205:18:Attribute -> U
+205:18:Name -> U | Inst:argparse.Namespace
+206:20:Attribute -> U
+206:20:Name -> U | Inst:argparse.Namespace
+207:22:Name -> U
+210:26:Call -> U
+210:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+210:26:Attribute -> Module:posixpath | Module:ntpath
+210:26:Name -> Module:os
+210:39:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+210:51:Name -> Const:str:'home-assistant.log.fault'
+211:13:Call -> ERR
+211:13:Name -> Func:_io.open
+211:18:Name -> U
+212:12:Call -> ERR
+212:12:Attribute -> Func:faulthandler.enable
+212:12:Name -> Module:faulthandler
+212:32:Name -> U
+213:24:Call -> U
+213:24:Attribute -> Func:homeassistant.runner.run
+213:24:Name -> Module:homeassistant.runner
+213:35:Name -> Inst:homeassistant.runner.RuntimeConfig
+214:12:Call -> ERR
+214:12:Attribute -> Func:faulthandler.disable
+214:12:Name -> Module:faulthandler
+217:13:Call -> Inst:contextlib.suppress
+217:13:Name -> Class:contextlib.suppress
+217:22:Name -> Class:builtins.FileNotFoundError
+218:15:Call -> U
+218:15:Attribute -> Func:genericpath.getsize
+218:15:Attribute -> Module:posixpath | Module:ntpath
+218:15:Name -> Module:os
+218:31:Name -> U
+219:16:Call -> ERR
+219:16:Attribute -> Func:posix.remove
+219:16:Name -> Module:os
+219:26:Name -> U
+221:8:Call -> Const:NoneType:None
+221:8:Name -> Func:homeassistant.__main__.check_threads
+223:15:Name -> U
+226:3:Name -> Const:str:'homeassistant.__main__' | Const:str:'__main__'
+227:4:Call -> ERR
+227:4:Attribute -> Func:sys.exit
+227:4:Name -> Module:sys
+227:13:Call -> Const:int:1 | Const:int:1 | Const:int:1 | U
+227:13:Name -> Func:homeassistant.__main__.main

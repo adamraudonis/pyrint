@@ -1,0 +1,121 @@
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'tests.support.sshd_runtime' | Const:str:'__main__'
+26:22:Name -> Class:builtins.str
+26:28:Attribute -> Class:os.PathLike
+26:28:Name -> Module:os
+26:40:Name -> Class:builtins.str
+40:7:Attribute -> Const:str:'posix' | Const:str:'nt'
+40:7:Name -> Module:os
+43:11:Call -> Const:NoneType:None | U
+43:11:Attribute -> Func:shutil.which
+43:11:Name -> Module:shutil
+44:11:Name -> Const:NoneType:None | U
+45:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+45:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+45:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+48:17:Attribute -> Class:pathlib.Path
+48:17:Name -> Module:pathlib
+49:7:Name -> Const:NoneType:None | U
+50:12:Call -> Inst:pathlib.Path
+50:12:Attribute -> Class:pathlib.Path
+50:12:Name -> Module:pathlib
+50:25:Name -> U
+51:11:Call -> U | Const:bool:False | Const:bool:False
+51:11:Attribute -> BM:pathlib.Path.is_file
+51:11:Name -> Inst:pathlib.Path
+52:26:Call -> Inst:pathlib.Path
+52:26:Attribute -> BM:pathlib.Path.resolve
+52:26:Name -> Inst:pathlib.Path
+54:11:Name -> Const:NoneType:None | U
+55:7:Name -> Const:NoneType:None | Inst:pathlib.Path
+56:8:Call -> ERR
+56:8:Attribute -> BM:builtins.list.extend
+56:8:Name -> List:2
+56:26:Call -> Const:str:''
+56:26:Name -> Class:builtins.str
+56:30:Name -> Inst:pathlib.Path
+58:10:Name -> Class:builtins.list
+58:15:Name -> Class:builtins.str
+60:15:Call -> Inst:subprocess.CompletedProcess
+60:15:Attribute -> Func:subprocess.run
+60:15:Name -> Module:subprocess
+61:12:Name -> List:2
+67:11:Attribute -> U
+67:11:Name -> Inst:subprocess.CompletedProcess
+68:24:Call -> U
+68:24:Attribute -> U
+68:24:Attribute -> Const:NoneType:None | U
+68:24:Name -> Inst:subprocess.CompletedProcess
+69:23:Call -> U
+69:23:Attribute -> U
+69:23:Name -> U
+70:23:Name -> U
+70:31:Call -> U
+70:31:Attribute -> U
+70:31:Name -> U
+72:24:Call -> U
+72:24:Attribute -> U
+72:24:Name -> U
+73:19:Call -> ERR
+73:19:Name -> Func:builtins.len
+73:23:Name -> U
+75:27:Call -> U
+75:27:Attribute -> U
+75:27:Name -> U
+75:45:Call -> U
+75:45:Attribute -> U
+75:45:Name -> U
+76:36:Name -> U
+78:19:Name -> U
+80:19:Call -> U
+80:19:Attribute -> U
+80:19:Name -> U
+81:20:Call -> ERR
+81:20:Attribute -> BM:builtins.list.append
+81:20:Name -> List:0
+81:32:Name -> U
+83:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+83:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+83:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+85:16:Attribute -> U
+85:16:Name -> Inst:subprocess.CompletedProcess
+86:16:Call -> Const:str:'' | U
+86:16:Attribute -> BM:builtins.str.strip | U
+86:17:Attribute -> Const:NoneType:None | U
+86:17:Name -> Inst:subprocess.CompletedProcess
+86:32:Attribute -> Const:NoneType:None | U
+86:32:Name -> Inst:subprocess.CompletedProcess
+88:11:Name -> Class:builtins.OSError
+89:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+89:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+89:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+89:49:Name -> ExcInst:builtins.OSError
+91:11:Name -> List:0
+91:20:Call -> ERR
+91:20:Attribute -> BM:builtins.str.startswith
+91:20:Attribute -> Const:str:'darwin'
+91:20:Name -> Module:sys
+91:57:Call -> Const:bool:False | U
+91:57:Attribute -> Func:genericpath.isdir | U
+91:57:Attribute -> Module:posixpath | Module:ntpath
+91:57:Name -> Module:os
+92:8:Call -> ERR
+92:8:Attribute -> BM:builtins.list.append
+92:8:Name -> List:0
+94:13:Name -> List:0
+96:12:Call -> Const:NoneType:None
+96:12:Attribute -> Func:os.makedirs
+96:12:Name -> Module:os
+96:24:Name -> U
+97:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+97:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+97:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+97:67:Name -> U
+98:15:Name -> Class:builtins.OSError
+99:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+99:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+99:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+99:49:Name -> U
+99:52:Name -> ExcInst:builtins.OSError

@@ -1,0 +1,120 @@
+8:20:Name -> Class:django.test.testcases.SimpleTestCase
+14:19:Call -> Inst:django.http.response.HttpResponse
+14:19:Name -> Class:django.http.response.HttpResponse
+16:23:Call -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper | Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper
+16:23:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator
+16:33:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_wrapped_sync_function_is_not_coroutine_function.sync_view
+17:8:Call -> Const:NoneType:None
+17:8:Attribute -> BM:unittest.case.TestCase.assertIs
+17:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+17:22:Call -> U
+17:22:Name -> Func:inspect.iscoroutinefunction
+17:42:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper | Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper
+21:19:Call -> Inst:django.http.response.HttpResponse
+21:19:Name -> Class:django.http.response.HttpResponse
+23:23:Call -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper | Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper
+23:23:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator
+23:33:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_wrapped_async_function_is_coroutine_function.async_view
+24:8:Call -> Const:NoneType:None
+24:8:Attribute -> BM:unittest.case.TestCase.assertIs
+24:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+24:22:Call -> U
+24:22:Name -> Func:inspect.iscoroutinefunction
+24:42:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper | Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator._view_wrapper
+27:9:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator
+29:19:Call -> Inst:django.http.response.HttpResponse
+29:19:Name -> Class:django.http.response.HttpResponse
+29:40:Attribute -> Const:str:'Content Content Content Content Content
+29:40:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+31:18:Call -> Inst:django.http.request.HttpRequest
+31:18:Name -> Class:django.http.request.HttpRequest
+32:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+32:8:Name -> Inst:django.http.request.HttpRequest
+33:19:Call -> Inst:django.http.response.HttpResponse
+33:19:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_gzip_page_decorator.sync_view
+33:29:Name -> Inst:django.http.request.HttpRequest
+34:8:Call -> Const:NoneType:None
+34:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+34:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+34:25:Attribute -> Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+34:25:Name -> Inst:django.http.response.HttpResponse
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+35:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+35:25:Call -> U | Const:NoneType:None
+35:25:Attribute -> BM:django.http.response.HttpResponseBase.get
+35:25:Name -> Inst:django.http.response.HttpResponse
+38:9:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator
+40:19:Call -> Inst:django.http.response.HttpResponse
+40:19:Name -> Class:django.http.response.HttpResponse
+40:40:Attribute -> Const:str:'Content Content Content Content Content
+40:40:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+42:18:Call -> Inst:django.http.request.HttpRequest
+42:18:Name -> Class:django.http.request.HttpRequest
+43:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+43:8:Name -> Inst:django.http.request.HttpRequest
+44:25:Call -> Inst:django.http.response.HttpResponse
+44:25:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_gzip_page_decorator_async_view.async_view
+44:36:Name -> Inst:django.http.request.HttpRequest
+45:8:Call -> Const:NoneType:None
+45:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+45:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+45:25:Attribute -> U
+45:25:Name -> U
+46:8:Call -> Const:NoneType:None
+46:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+46:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+46:25:Call -> U
+46:25:Attribute -> U
+46:25:Name -> U
+49:9:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator
+51:19:Call -> Inst:django.http.response.StreamingHttpResponse
+51:19:Name -> Class:django.http.response.StreamingHttpResponse
+51:41:Call -> Const:bytes:b''
+51:41:Attribute -> BM:builtins.str.encode
+51:41:Attribute -> Const:str:'Content Content Content Content Content
+51:41:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+51:72:Call -> Inst:builtins.range
+51:72:Name -> Class:builtins.range
+53:18:Call -> Inst:django.http.request.HttpRequest
+53:18:Name -> Class:django.http.request.HttpRequest
+54:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+54:8:Name -> Inst:django.http.request.HttpRequest
+55:19:Call -> Inst:django.http.response.StreamingHttpResponse
+55:19:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_streaming_response_yields_chunks_incrementally.stream_view
+55:31:Name -> Inst:django.http.request.HttpRequest
+56:28:Call -> Inst:builtins.list
+56:28:Name -> Class:builtins.list
+56:33:Name -> Inst:django.http.response.StreamingHttpResponse
+59:8:Call -> Const:NoneType:None
+59:8:Attribute -> BM:unittest.case.TestCase.assertGreater
+59:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+59:27:Call -> ERR
+59:27:Name -> Func:builtins.len
+59:31:Name -> Inst:builtins.list
+62:9:Name -> Func:django.utils.decorators.make_middleware_decorator._make_decorator._decorator
+65:25:Call -> Inst:builtins.range
+65:25:Name -> Class:builtins.range
+66:26:Call -> Const:bytes:b''
+66:26:Attribute -> BM:builtins.str.encode
+66:26:Attribute -> Const:str:'Content Content Content Content Content
+66:26:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+68:19:Call -> Inst:django.http.response.StreamingHttpResponse
+68:19:Name -> Class:django.http.response.StreamingHttpResponse
+68:41:Call -> AGen:tests.decorators.test_gzip.GzipPageTests.test_async_streaming_response_yields_chunks_incrementally.stream_view.content
+68:41:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_async_streaming_response_yields_chunks_incrementally.stream_view.content
+70:18:Call -> Inst:django.http.request.HttpRequest
+70:18:Name -> Class:django.http.request.HttpRequest
+71:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+71:8:Name -> Inst:django.http.request.HttpRequest
+72:25:Call -> Inst:django.http.response.StreamingHttpResponse
+72:25:Name -> Func:tests.decorators.test_gzip.GzipPageTests.test_async_streaming_response_yields_chunks_incrementally.stream_view
+72:37:Name -> Inst:django.http.request.HttpRequest
+73:29:Name -> U
+73:54:Name -> U
+76:8:Call -> Const:NoneType:None
+76:8:Attribute -> BM:unittest.case.TestCase.assertGreater
+76:8:Name -> Inst:tests.decorators.test_gzip.GzipPageTests
+76:27:Call -> ERR
+76:27:Name -> Func:builtins.len
+76:31:Name -> U

@@ -1,0 +1,1562 @@
+80:3:Name -> Const:bool:False
+98:13:Name -> Class:pandas.core.indexes.base.Index
+101:11:Name -> Class:.Union
+102:22:Name -> Class:builtins.bool
+103:17:Name -> Class:builtins.bool
+104:5:Name -> Class:.Union
+110:7:Name -> Const:bool:True | U
+112:11:Name -> U
+113:20:Call -> Inst:pandas.core.indexes.range.RangeIndex | U
+113:20:Name -> Func:pandas.core.internals.construction._extract_index
+113:35:Name -> U
+115:20:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+115:20:Name -> Func:pandas.core.indexes.base.ensure_index
+115:33:Name -> U
+118:23:Call -> Tuple:2
+118:23:Name -> Func:pandas.core.internals.construction._homogenize
+118:35:Name -> U
+118:43:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+118:50:Name -> Const:NoneType:None | U
+126:16:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+126:16:Name -> Func:pandas.core.indexes.base.ensure_index
+126:29:Name -> U
+127:18:Call -> Const:NoneType:None | Const:NoneType:None | U
+127:18:Name -> Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array
+127:32:Name -> U
+127:64:Name -> U
+129:24:Call -> ERR
+129:24:Name -> Func:builtins.len
+129:28:Name -> U
+132:19:Name -> U
+134:20:Call -> ERR
+134:20:Name -> Func:builtins.isinstance
+134:31:Name -> U
+134:37:Attribute -> Class:.ndarray
+134:37:Name -> U
+134:49:Name -> Class:pandas.core.arrays.base.ExtensionArray
+135:19:Attribute -> U
+135:19:Name -> U
+136:19:Call -> ERR
+136:19:Name -> Func:builtins.len
+136:23:Name -> U
+136:31:Call -> ERR
+136:31:Name -> Func:builtins.len
+136:35:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+138:22:Call -> ExcInst:builtins.ValueError
+138:22:Name -> Class:builtins.ValueError
+143:14:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+143:14:Name -> Func:pandas.core.indexes.base.ensure_index
+143:27:Name -> U
+144:7:Call -> ERR
+144:7:Name -> Func:builtins.len
+144:11:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+144:23:Call -> ERR
+144:23:Name -> Func:builtins.len
+144:27:Name -> U | List:0
+145:14:Call -> ExcInst:builtins.ValueError
+145:14:Name -> Class:builtins.ValueError
+148:12:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+148:21:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | U
+150:11:Call -> Inst:pandas.core.internals.managers.BlockManager
+150:11:Name -> Func:pandas.core.internals.managers.create_block_manager_from_column_arrays
+151:8:Name -> U | List:0
+151:16:Name -> List:2
+151:34:Name -> Const:bool:True | U
+151:52:Name -> List:0 | U
+156:10:Attribute -> U
+156:10:Attribute -> U
+156:10:Name -> U
+156:28:Attribute -> Class:.ndarray
+156:28:Name -> U
+159:11:Name -> Class:.Union
+160:10:Name -> Class:builtins.bool
+161:5:Name -> Class:.Union
+166:12:Call -> U
+166:12:Attribute -> U
+166:12:Name -> U
+166:23:Name -> U
+167:7:Name -> U
+168:16:Call -> Inst:pandas.core.indexes.range.RangeIndex
+168:16:Name -> Func:pandas.core.indexes.api.default_index
+168:30:Call -> ERR
+168:30:Name -> Func:builtins.len
+168:34:Name -> U
+170:16:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+170:16:Name -> Func:pandas.core.indexes.base.ensure_index
+170:29:Name -> U
+172:7:Name -> U
+173:18:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+173:18:Name -> Func:pandas.core.indexes.base.ensure_index
+173:31:Name -> U
+174:26:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+174:26:Name -> Func:pandas.core.internals.construction.to_arrays
+174:36:Name -> U
+174:43:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+178:26:Call -> Tuple:2
+178:26:Name -> Func:pandas.core.internals.construction.reorder_arrays
+178:41:Name -> U | List:0 | Inst:builtins.list
+178:49:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+178:62:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+178:71:Call -> ERR
+178:71:Name -> Func:builtins.len
+178:75:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+179:7:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+180:18:Name -> U
+182:10:Call -> Inst:pandas.core.internals.managers.BlockManager
+182:10:Name -> Func:pandas.core.internals.construction.arrays_to_mgr
+182:24:Name -> U | List:0
+182:32:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+182:41:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+182:54:Name -> U
+184:7:Name -> U
+185:14:Call -> Inst:pandas.core.internals.managers.BlockManager
+185:14:Attribute -> BM:pandas.core.internals.managers.BaseBlockManager.copy
+185:14:Name -> Inst:pandas.core.internals.managers.BlockManager
+186:11:Name -> Inst:pandas.core.internals.managers.BlockManager
+194:35:Name -> Class:.Union
+194:58:Name -> Class:builtins.bool
+195:5:Name -> Class:.Union
+198:23:Call -> ERR
+198:23:Name -> Func:builtins.isinstance
+198:34:Name -> U
+198:43:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+198:54:Name -> Class:pandas.core.indexes.base.Index
+198:61:Name -> Class:pandas.core.arrays.base.ExtensionArray
+200:7:Call -> ERR
+200:7:Name -> Func:builtins.isinstance
+200:18:Name -> U
+200:26:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+201:11:Name -> U
+202:15:Attribute -> U
+202:15:Name -> U
+203:26:Call -> Inst:pandas.core.indexes.base.Index
+203:26:Name -> Class:pandas.core.indexes.base.Index
+203:33:Attribute -> U
+203:33:Name -> U
+204:11:Name -> U
+205:20:Attribute -> U
+205:20:Name -> U
+207:21:Call -> U
+207:21:Attribute -> U
+207:21:Name -> U
+207:36:Name -> U
+210:15:Call -> ERR
+210:15:Name -> Func:builtins.len
+210:19:Name -> U
+210:31:Name -> U | Inst:pandas.core.indexes.base.Index
+210:55:Call -> ERR
+210:55:Name -> Func:builtins.len
+210:59:Name -> U | Inst:pandas.core.indexes.base.Index
+211:21:Call -> Inst:.ndarray
+211:21:Attribute -> Func:.empty
+211:21:Name -> U
+211:44:Name -> Class:builtins.object
+213:13:Call -> U
+213:13:Name -> Func:builtins.getattr
+213:21:Name -> U | Inst:.ndarray
+215:7:Call -> U
+215:7:Name -> Func:pandas.core.dtypes.common.is_1d_only_ea_dtype
+215:27:Name -> U
+215:38:Call -> U
+215:38:Name -> Func:pandas.core.dtypes.common.is_1d_only_ea_dtype
+215:58:Name -> U
+218:11:Call -> ERR
+218:11:Name -> Func:builtins.isinstance
+218:22:Name -> U | Inst:.ndarray
+218:31:Attribute -> Class:.ndarray
+218:31:Name -> U
+218:43:Name -> Class:pandas.core.arrays.base.ExtensionArray
+218:64:Attribute -> U | Const:NoneType:None
+218:64:Name -> U | Inst:.ndarray
+224:16:Name -> U | Inst:.ndarray
+224:26:Name -> U
+225:25:Call -> Inst:builtins.range
+225:25:Name -> Class:builtins.range
+225:31:Attribute -> U | Inst:.ndarray
+225:31:Name -> U | Inst:.ndarray
+228:22:Name -> U | Inst:.ndarray
+232:11:Name -> U
+235:19:Call -> ERR
+235:19:Name -> Func:builtins.isinstance
+235:30:Name -> U | Inst:.ndarray
+235:34:Name -> Class:pandas.core.arrays.base.ExtensionArray
+235:50:Name -> Class:pandas.core.indexes.base.Index
+235:57:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+236:20:Call -> U
+236:20:Name -> Func:pandas.core.dtypes.common.is_1d_only_ea_dtype
+236:40:Attribute -> U | Const:NoneType:None
+236:40:Name -> U | Inst:.ndarray
+234:38:Call -> ERR
+234:38:Name -> Func:builtins.isinstance
+234:49:Name -> U | Inst:.ndarray
+234:52:Name -> Class:pandas.core.indexes.base.Index
+234:17:Call -> U | Inst:.ndarray
+234:17:Attribute -> U | BM:.ndarray.copy
+234:17:Name -> U | Inst:.ndarray
+234:64:Call -> U | Inst:.ndarray
+234:64:Attribute -> U | BM:.ndarray.copy
+234:64:Name -> U | Inst:.ndarray
+237:21:Name -> U | Inst:.ndarray
+238:25:Name -> U | Inst:.ndarray | List:1
+241:11:Name -> U | Inst:pandas.core.indexes.base.Index
+242:22:Call -> Inst:pandas.core.indexes.base.Index
+242:22:Name -> Class:pandas.core.indexes.base.Index
+242:28:Call -> Inst:builtins.range
+242:28:Name -> Class:builtins.range
+242:34:Call -> ERR
+242:34:Name -> Func:builtins.len
+242:38:Name -> U | Inst:.ndarray | List:1
+244:22:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+244:22:Name -> Func:pandas.core.indexes.base.ensure_index
+244:35:Name -> U | Inst:pandas.core.indexes.base.Index
+246:15:Call -> Inst:pandas.core.internals.managers.BlockManager
+246:15:Name -> Func:pandas.core.internals.construction.arrays_to_mgr
+246:29:Name -> U | Inst:.ndarray | List:1
+246:37:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+246:46:Name -> U
+246:59:Name -> U
+246:78:Name -> U
+248:7:Call -> ERR
+248:7:Name -> Func:builtins.isinstance
+248:18:Name -> U | Inst:.ndarray | List:1
+248:27:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+248:38:Name -> Class:pandas.core.indexes.base.Index
+249:15:Name -> U
+249:25:Name -> U
+249:42:Call -> U | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True
+249:42:Name -> Func:pandas.core.dtypes.astype.astype_is_view
+249:57:Attribute -> U | Const:NoneType:None
+249:57:Name -> U | Inst:.ndarray | List:1
+249:71:Name -> U
+250:19:Attribute -> U
+250:19:Name -> U | Inst:.ndarray | List:1
+252:7:Call -> ERR
+252:7:Name -> Func:builtins.isinstance
+252:18:Name -> U
+252:26:Name -> Class:pandas.core.dtypes.base.ExtensionDtype
+255:17:Call -> Const:NoneType:None | Const:NoneType:None | U | Inst:.ndarray | List:1
+255:17:Name -> Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array
+255:31:Name -> U | Inst:.ndarray | List:1
+256:11:Name -> U
+257:21:Call -> U | Inst:.ndarray | Inst:.ndarray
+257:21:Attribute -> U | BM:.ndarray.copy | BM:builtins.list.copy | BM:.ndarray.copy
+257:21:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+258:11:Attribute -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+258:11:Name -> Const:NoneType:None | Const:NoneType:None | U | Inst:.ndarray | Inst:.ndarray | Inst:.ndarray
+259:21:Call -> U | Inst:.ndarray | Inst:.ndarray
+259:21:Attribute -> U | BM:.ndarray.reshape | BM:.ndarray.reshape
+259:21:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+261:9:Call -> ERR
+261:9:Name -> Func:builtins.isinstance
+261:20:Name -> U | Inst:.ndarray | List:1
+261:29:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+261:40:Name -> Class:pandas.core.indexes.base.Index
+262:11:Name -> U
+263:21:Call -> U
+263:21:Attribute -> U
+263:21:Attribute -> U
+263:21:Name -> U | Inst:.ndarray | List:1
+265:21:Attribute -> U
+265:21:Name -> U | Inst:.ndarray | List:1
+267:17:Call -> U | Inst:.ndarray | List:1 | Inst:.ndarray
+267:17:Name -> Func:pandas.core.internals.construction._ensure_2d
+267:28:Name -> U | Inst:.ndarray | List:1
+269:9:Call -> ERR
+269:9:Name -> Func:builtins.isinstance
+269:20:Name -> U | Inst:.ndarray | List:1
+269:29:Attribute -> Class:.ndarray
+269:29:Name -> U
+269:41:Name -> Class:pandas.core.arrays.base.ExtensionArray
+271:11:Name -> U
+271:21:Name -> U
+271:38:Call -> U | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True
+271:38:Name -> Func:pandas.core.dtypes.astype.astype_is_view
+271:53:Attribute -> U | Const:NoneType:None
+271:53:Name -> U | Inst:.ndarray | List:1
+271:67:Name -> U
+274:21:Call -> Inst:.ndarray
+274:21:Attribute -> Func:.array
+274:21:Name -> U
+274:30:Name -> U | Inst:.ndarray | List:1
+276:21:Call -> U
+276:21:Attribute -> U
+276:21:Name -> U
+276:32:Name -> U | Inst:.ndarray | List:1
+277:17:Call -> U | Inst:.ndarray | List:1 | Inst:.ndarray | Inst:.ndarray | Inst:.ndarray
+277:17:Name -> Func:pandas.core.internals.construction._ensure_2d
+277:28:Name -> U | Inst:.ndarray | List:1 | Inst:.ndarray
+282:17:Call -> Inst:.ndarray | U
+282:17:Name -> Func:pandas.core.internals.construction._prep_ndarraylike
+282:35:Name -> U | Inst:.ndarray | List:1
+282:48:Name -> U
+284:7:Name -> U
+284:29:Attribute -> U | Const:NoneType:None
+284:29:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+284:45:Name -> U
+286:17:Call -> U
+286:17:Name -> Func:pandas.core.construction.sanitize_array
+287:12:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+289:18:Name -> U
+290:17:Name -> U
+295:21:Call -> Tuple:2
+295:21:Name -> Func:pandas.core.internals.construction._get_axes
+296:8:Attribute -> U | Inst:.ndarray
+296:8:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None
+296:25:Attribute -> U | Inst:.ndarray
+296:25:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None
+296:48:Name -> U
+296:63:Name -> U | Inst:pandas.core.indexes.base.Index
+299:4:Call -> Const:NoneType:None
+299:4:Name -> Func:pandas.core.internals.construction._check_values_indices_shape_match
+299:38:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+299:46:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+299:53:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+301:13:Attribute -> U | Inst:.ndarray
+301:13:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None
+306:7:Name -> U
+306:25:Name -> U
+306:42:Call -> Const:bool:False | U | Const:bool:False | Const:bool:False | Const:bool:False
+306:42:Name -> Func:pandas.core.dtypes.common.is_object_dtype
+306:58:Attribute -> U | Const:NoneType:None
+306:58:Name -> U | Inst:.ndarray
+307:22:Call -> Inst:builtins.list
+307:22:Name -> Class:builtins.list
+307:27:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+309:12:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+309:12:Attribute -> Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects
+309:12:Name -> Module:pandas._libs.lib
+310:16:Name -> U
+316:33:Call -> U
+316:33:Attribute -> U
+316:33:Name -> U
+318:21:Name -> Inst:builtins.list
+321:11:Call -> ERR
+321:11:Name -> Func:builtins.any
+321:15:Name -> U
+321:24:Name -> U
+321:38:Call -> Inst:builtins.zip
+321:38:Name -> Class:builtins.zip
+321:42:Name -> Inst:builtins.list
+321:55:Name -> U
+323:16:Call -> Inst:pandas.core.internals.blocks.DatetimeLikeBlock | Inst:pandas.core.internals.blocks.NDArrayBackedExtensionBlock | Inst:pandas.core.internals.blocks.ExtensionBlock | Inst:pandas.core.internals.blocks.NumpyBlock
+323:16:Name -> Func:pandas.core.internals.blocks.new_block_2d
+323:29:Call -> U
+323:29:Name -> Func:pandas.core.internals.blocks.ensure_block_shape
+323:48:Name -> U
+323:68:Call -> Inst:pandas._libs.internals.BlockPlacement
+323:68:Name -> Class:pandas._libs.internals.BlockPlacement
+323:83:Name -> U
+324:31:Call -> Inst:builtins.enumerate
+324:31:Name -> Class:builtins.enumerate
+324:41:Name -> U
+327:17:Call -> Inst:pandas._libs.internals.BlockPlacement
+327:17:Name -> Class:pandas._libs.internals.BlockPlacement
+327:32:Call -> Inst:builtins.slice
+327:32:Name -> Class:builtins.slice
+327:38:Call -> ERR
+327:38:Name -> Func:builtins.len
+327:42:Name -> Inst:pandas.core.indexes.base.Index | U | Inst:pandas.core.indexes.multi.MultiIndex
+328:17:Call -> Inst:pandas.core.internals.blocks.DatetimeLikeBlock | Inst:pandas.core.internals.blocks.NDArrayBackedExtensionBlock | Inst:pandas.core.internals.blocks.ExtensionBlock | Inst:pandas.core.internals.blocks.NumpyBlock
+328:17:Name -> Func:pandas.core.internals.blocks.new_block_2d
+328:30:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+328:48:Name -> Inst:pandas._libs.internals.BlockPlacement
+328:57:Name -> Const:NoneType:None | U
+329:28:Name -> Inst:pandas.core.internals.blocks.DatetimeLikeBlock | Inst:pandas.core.internals.blocks.NDArrayBackedExtensionBlock | Inst:pandas.core.internals.blocks.ExtensionBlock | Inst:pandas.core.internals.blocks.NumpyBlock
+330:9:Name -> U
+330:27:Attribute -> U
+330:27:Attribute -> U | Const:NoneType:None | Const:NoneType:None
+330:27:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+330:56:Call -> U
+330:56:Name -> Func:pandas._config.using_string_dtype
+331:16:Call -> Inst:pandas.core.arrays.string_.StringDtype
+331:16:Name -> Class:pandas.core.arrays.string_.StringDtype
+331:37:Attribute -> U
+331:37:Name -> U
+333:22:Call -> Inst:builtins.list
+333:22:Name -> Class:builtins.list
+333:27:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+335:12:Call -> Inst:pandas.core.internals.blocks.DatetimeLikeBlock | Inst:pandas.core.internals.blocks.NDArrayBackedExtensionBlock | Inst:pandas.core.internals.blocks.ExtensionBlock | Inst:pandas.core.internals.blocks.NumpyBlock
+335:12:Name -> Func:pandas.core.internals.blocks.new_block
+336:16:Call -> Inst:pandas.core.arrays.string_.StringArray | U
+336:16:Attribute -> BM:pandas.core.arrays.string_.StringArray._from_sequence | BM:pandas.core.arrays.string_arrow.ArrowStringArray._from_sequence
+336:16:Call -> Class:pandas.core.arrays.string_.StringArray | Class:pandas.core.arrays.string_arrow.ArrowStringArray
+336:16:Attribute -> BM:pandas.core.arrays.string_.StringDtype.construct_array_type
+336:16:Name -> Inst:pandas.core.arrays.string_.StringDtype
+336:60:Name -> U
+336:72:Name -> Inst:pandas.core.arrays.string_.StringDtype
+337:16:Call -> Inst:pandas._libs.internals.BlockPlacement
+337:16:Name -> Class:pandas._libs.internals.BlockPlacement
+337:31:Call -> Inst:builtins.slice
+337:31:Name -> Class:builtins.slice
+337:37:Name -> U
+337:40:Name -> U
+340:27:Call -> Inst:builtins.enumerate
+340:27:Name -> Class:builtins.enumerate
+340:37:Name -> Inst:builtins.list
+344:13:Call -> Inst:pandas._libs.internals.BlockPlacement
+344:13:Name -> Class:pandas._libs.internals.BlockPlacement
+344:28:Call -> Inst:builtins.slice
+344:28:Name -> Class:builtins.slice
+344:34:Call -> ERR
+344:34:Name -> Func:builtins.len
+344:38:Name -> Inst:pandas.core.indexes.base.Index | U | Inst:pandas.core.indexes.multi.MultiIndex
+345:13:Call -> Inst:pandas.core.internals.blocks.DatetimeLikeBlock | Inst:pandas.core.internals.blocks.NDArrayBackedExtensionBlock | Inst:pandas.core.internals.blocks.ExtensionBlock | Inst:pandas.core.internals.blocks.NumpyBlock
+345:13:Name -> Func:pandas.core.internals.blocks.new_block_2d
+345:26:Name -> U | Inst:.ndarray | List:1 | Const:NoneType:None | Const:NoneType:None | Inst:.ndarray
+345:44:Name -> Inst:pandas._libs.internals.BlockPlacement
+345:53:Name -> Const:NoneType:None | U
+346:24:Name -> Inst:pandas.core.internals.blocks.DatetimeLikeBlock | Inst:pandas.core.internals.blocks.NDArrayBackedExtensionBlock | Inst:pandas.core.internals.blocks.ExtensionBlock | Inst:pandas.core.internals.blocks.NumpyBlock
+348:7:Call -> ERR
+348:7:Name -> Func:builtins.len
+348:11:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+352:11:Call -> Inst:pandas.core.internals.managers.BlockManager
+352:11:Name -> Func:pandas.core.internals.managers.create_block_manager_from_blocks
+353:8:Name -> U | List:1 | List:1 | List:0
+353:23:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+353:32:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+358:12:Attribute -> Class:.ndarray
+358:12:Name -> U
+358:31:Name -> Class:pandas.core.indexes.base.Index
+358:47:Name -> Class:pandas.core.indexes.base.Index
+364:7:Attribute -> U
+364:7:Name -> U
+364:26:Call -> ERR
+364:26:Name -> Func:builtins.len
+364:30:Name -> U
+364:42:Attribute -> U
+364:42:Name -> U
+364:61:Call -> ERR
+364:61:Name -> Func:builtins.len
+364:65:Name -> U
+367:11:Attribute -> U
+367:11:Name -> U
+367:34:Call -> ERR
+367:34:Name -> Func:builtins.len
+367:38:Name -> U
+368:18:Call -> ExcInst:builtins.ValueError
+368:18:Name -> Class:builtins.ValueError
+370:17:Attribute -> U
+370:17:Name -> U
+371:19:Call -> ERR
+371:19:Name -> Func:builtins.len
+371:23:Name -> U
+371:31:Call -> ERR
+371:31:Name -> Func:builtins.len
+371:35:Name -> U
+372:14:Call -> ExcInst:builtins.ValueError
+372:14:Name -> Class:builtins.ValueError
+372:54:Name -> U
+372:78:Name -> Tuple:2
+376:10:Name -> Class:builtins.dict
+380:11:Name -> Class:.Union
+381:10:Name -> Class:builtins.bool
+382:5:Name -> Class:.Union
+389:12:Name -> Class:_collections_abc.Sequence
+389:21:Name -> Class:typing.Any
+391:7:Name -> U
+392:18:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+392:18:Name -> Func:pandas.core.indexes.base.ensure_index
+392:31:Name -> U
+393:11:Name -> Const:NoneType:None | U
+393:37:Call -> ERR
+393:37:Name -> Func:builtins.isinstance
+393:48:Name -> Const:NoneType:None | U
+393:55:Attribute -> U
+393:55:Name -> U
+395:22:Attribute -> U
+395:22:Name -> Const:NoneType:None | U
+395:40:Call -> ERR
+395:40:Name -> Func:builtins.len
+395:44:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+397:22:Attribute -> U
+397:22:Name -> U
+397:32:Call -> ERR
+397:32:Name -> Func:builtins.len
+397:36:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+398:16:Call -> Set:0
+398:16:Name -> Class:builtins.set
+399:20:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+399:20:Name -> Func:pandas.core.indexes.base.ensure_index
+399:33:Call -> U
+399:33:Attribute -> U
+399:33:Name -> U
+400:22:Call -> Inst:builtins.list
+400:22:Name -> Class:builtins.list
+400:27:Call -> U
+400:27:Attribute -> U
+400:27:Name -> U
+402:25:Call -> Inst:builtins.enumerate
+402:25:Name -> Class:builtins.enumerate
+402:35:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+404:22:Call -> U | Const:NoneType:None | Const:NoneType:None
+404:22:Attribute -> U | BM:pandas.core.indexes.base.Index.get_loc
+404:22:Name -> U | Inst:pandas.core.indexes.base.Index
+404:40:Name -> U
+405:19:Name -> Class:builtins.KeyError
+406:16:Call -> ERR
+406:16:Attribute -> BM:builtins.set.add
+406:16:Name -> Set:0
+406:26:Name -> U
+408:20:Name -> Inst:builtins.list
+408:32:Name -> U | Const:NoneType:None | Const:NoneType:None
+409:12:Name -> U
+409:19:Name -> U
+409:24:Name -> U
+410:15:Call -> Const:NoneType:None
+410:15:Name -> Func:pandas._libs.lib.is_scalar
+410:25:Name -> U
+410:36:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:bool:False | U | Inst:.ndarray | Inst:.ndarray | Const:NoneType:None | Const:NoneType:None
+410:36:Name -> Func:pandas.core.dtypes.missing.isna | Func:pandas.core.dtypes.missing.isna | Func:pandas.core.dtypes.missing.isna | Func:pandas.core.dtypes.missing.isna | Func:pandas.core.dtypes.missing.isna | Func:pandas.core.dtypes.missing.isna
+410:41:Name -> U
+411:16:Call -> ERR
+411:16:Attribute -> BM:builtins.set.add
+411:16:Name -> Set:0
+411:26:Name -> U
+413:11:Name -> U
+416:15:Name -> Set:0
+417:24:Call -> Inst:pandas.core.indexes.range.RangeIndex | U
+417:24:Name -> Func:pandas.core.internals.construction._extract_index
+418:21:Name -> U
+418:43:Call -> Inst:builtins.enumerate
+418:43:Name -> Class:builtins.enumerate
+418:53:Name -> U
+418:64:Name -> U
+418:73:Name -> U
+421:24:Call -> Inst:pandas.core.indexes.range.RangeIndex | U | Inst:pandas.core.indexes.base.Index
+421:24:Name -> Func:pandas.core.internals.construction._extract_index
+421:39:Name -> U
+423:20:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+423:20:Name -> Func:pandas.core.indexes.base.ensure_index
+423:33:Name -> U
+426:11:Name -> Set:0
+426:25:Call -> U
+426:25:Name -> Func:pandas.core.dtypes.common.is_integer_dtype
+426:42:Name -> Const:NoneType:None | U
+428:21:Name -> Set:0
+429:22:Call -> U
+429:22:Name -> Func:pandas.core.dtypes.cast.construct_1d_arraylike_from_scalar
+430:20:Name -> U
+430:27:Name -> U
+431:20:Call -> ERR
+431:20:Name -> Func:builtins.len
+431:24:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+432:29:Name -> Const:NoneType:None | U
+432:20:Name -> U
+432:52:Call -> U
+432:52:Attribute -> U
+432:52:Name -> U
+434:16:Name -> U
+434:23:Name -> U
+434:28:Name -> U
+437:15:Call -> Inst:builtins.list | Inst:builtins.range
+437:15:Name -> Func:pandas.core.indexes.base.maybe_sequence_to_range
+437:39:Call -> Inst:builtins.list
+437:39:Name -> Class:builtins.list
+437:44:Call -> U
+437:44:Attribute -> U
+437:44:Name -> U
+438:33:Name -> Inst:builtins.list | Inst:builtins.range
+438:18:Call -> Inst:pandas.core.indexes.base.Index
+438:18:Name -> Class:pandas.core.indexes.base.Index
+438:24:Name -> Inst:builtins.list | Inst:builtins.range
+438:43:Call -> Inst:pandas.core.indexes.range.RangeIndex
+438:43:Name -> Func:pandas.core.indexes.api.default_index
+439:18:Call -> Inst:builtins.list | U
+439:18:Attribute -> Func:pandas.core.common.maybe_iterable_to_list
+439:18:Name -> Module:pandas.core.common
+439:45:Name -> U
+439:50:Name -> U
+439:63:Name -> Inst:builtins.list | Inst:builtins.range
+441:7:Name -> Const:bool:True | U
+447:19:Call -> ERR
+447:19:Name -> Func:builtins.isinstance
+447:30:Name -> U
+447:33:Name -> Class:pandas.core.arrays.base.ExtensionArray
+446:16:Call -> U
+446:16:Attribute -> U
+446:16:Name -> U
+451:24:Call -> ERR
+451:24:Name -> Func:builtins.isinstance
+451:35:Name -> U
+451:38:Name -> Class:pandas.core.indexes.base.Index
+452:28:Call -> ERR
+452:28:Name -> Func:builtins.isinstance
+452:39:Name -> U
+452:42:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+452:57:Call -> U
+452:57:Name -> Func:pandas.core.dtypes.common.is_1d_only_ea_dtype
+452:77:Attribute -> U
+452:77:Name -> U
+449:20:Call -> U
+449:20:Attribute -> U
+449:20:Name -> U
+454:25:Name -> U
+457:21:Name -> U
+460:11:Call -> Inst:pandas.core.internals.managers.BlockManager
+460:11:Name -> Func:pandas.core.internals.construction.arrays_to_mgr
+460:25:Name -> U
+460:33:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+460:42:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+460:55:Name -> Const:NoneType:None | U
+460:74:Name -> Const:bool:True | U
+464:10:Name -> Class:_collections_abc.Sequence
+465:13:Name -> Class:pandas.core.indexes.base.Index
+466:11:Name -> Class:pandas.core.indexes.base.Index
+467:11:Name -> Class:.Union
+468:5:Name -> Class:builtins.tuple
+468:11:Name -> Class:builtins.list
+468:16:Name -> Class:.Union
+468:28:Name -> Class:pandas.core.indexes.base.Index
+468:35:Name -> Class:pandas.core.indexes.base.Index
+474:7:Call -> U
+474:7:Name -> Func:pandas.core.dtypes.inference.is_named_tuple
+474:22:Name -> U
+474:35:Name -> U
+475:18:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+475:18:Name -> Func:pandas.core.indexes.base.ensure_index
+475:31:Attribute -> U
+475:31:Name -> U
+477:22:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+477:22:Name -> Func:pandas.core.internals.construction.to_arrays
+477:32:Name -> U
+477:38:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+477:53:Name -> U
+478:14:Call -> U
+478:14:Name -> Func:pandas.core.indexes.base.ensure_index
+478:27:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+480:7:Name -> U
+481:11:Call -> ERR
+481:11:Name -> Func:builtins.isinstance
+481:22:Name -> U
+481:31:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+482:20:Call -> Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+482:20:Name -> Func:pandas.core.internals.construction._get_names_from_index
+482:42:Name -> U
+484:20:Call -> Inst:pandas.core.indexes.range.RangeIndex
+484:20:Name -> Func:pandas.core.indexes.api.default_index
+484:34:Call -> ERR
+484:34:Name -> Func:builtins.len
+484:38:Name -> U
+486:11:Name -> U | List:0 | Inst:builtins.list
+486:19:Name -> U
+486:28:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index
+489:29:Name -> Class:builtins.bool
+494:8:Call -> ERR
+494:8:Name -> Func:builtins.len
+494:12:Name -> U
+495:12:Call -> Const:NoneType:None
+495:12:Name -> Func:pandas._libs.lib.is_list_like
+495:25:Name -> U
+496:12:Call -> U
+496:12:Name -> Func:builtins.getattr
+496:20:Name -> U
+497:17:Call -> ERR
+497:17:Name -> Func:builtins.isinstance
+497:28:Name -> U
+497:34:Name -> Class:pandas.core.arrays.base.ExtensionArray
+497:54:Attribute -> U
+497:54:Name -> U
+504:36:Name -> Class:builtins.bool
+504:52:Attribute -> Class:.ndarray
+504:52:Name -> U
+508:7:Call -> ERR
+508:7:Name -> Func:builtins.len
+508:11:Name -> U
+511:15:Call -> Inst:.ndarray
+511:15:Attribute -> Func:.empty
+511:15:Name -> U
+511:38:Name -> Class:builtins.object
+512:9:Call -> ERR
+512:9:Name -> Func:builtins.isinstance
+512:20:Name -> U
+512:28:Name -> Class:builtins.range
+513:14:Call -> U
+513:14:Name -> Func:pandas.core.construction.range_to_ndarray
+513:31:Name -> U
+514:15:Name -> U
+514:24:Attribute -> U
+514:24:Name -> U
+517:15:Call -> Const:NoneType:None
+517:15:Name -> Func:pandas._libs.lib.is_list_like
+517:28:Name -> U
+517:34:Call -> ERR
+517:34:Name -> Func:builtins.isinstance
+517:45:Name -> U
+517:48:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCDataFrame
+518:19:Name -> U
+520:12:Call -> Const:NoneType:None | Const:NoneType:None | U
+520:12:Name -> Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array
+520:26:Name -> U
+521:11:Call -> ERR
+521:11:Name -> Func:builtins.isinstance
+521:22:Name -> Const:NoneType:None | Const:NoneType:None | U
+521:26:Name -> Class:builtins.list
+521:32:Name -> Class:builtins.tuple
+521:39:Name -> Class:builtins.range
+522:16:Call -> U
+522:16:Name -> Func:pandas.core.dtypes.cast.construct_1d_object_array_from_listlike
+522:56:Name -> Const:NoneType:None | Const:NoneType:None | U
+523:11:Call -> ERR
+523:11:Name -> Func:builtins.isinstance
+523:22:Name -> Const:NoneType:None | Const:NoneType:None | U
+523:25:Attribute -> Class:.ndarray
+523:25:Name -> U
+523:41:Attribute -> U
+523:41:Name -> Const:NoneType:None | Const:NoneType:None | U
+523:52:Name -> Class:builtins.object
+524:16:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+524:16:Attribute -> Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects
+524:16:Name -> Module:pandas._libs.lib
+524:42:Name -> Const:NoneType:None | Const:NoneType:None | U
+527:15:Name -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+534:7:Call -> Const:NoneType:None
+534:7:Name -> Func:pandas._libs.lib.is_list_like
+534:20:Name -> U
+535:17:Call -> Inst:.ndarray
+535:17:Attribute -> Func:.array
+535:17:Name -> U
+535:27:Call -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+535:27:Name -> Func:pandas.core.internals.construction._prep_ndarraylike.convert
+535:35:Name -> U
+535:47:Name -> U
+536:9:Call -> ERR
+536:9:Name -> Func:builtins.isinstance
+536:20:Name -> U
+536:31:Attribute -> Class:.ndarray
+536:31:Name -> U
+536:47:Attribute -> U
+536:47:Name -> U
+538:17:Call -> Inst:.ndarray
+538:17:Attribute -> Func:.array
+538:17:Name -> U
+538:27:Call -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+538:27:Name -> Func:pandas.core.internals.construction._prep_ndarraylike.convert
+538:35:Name -> U
+538:47:Name -> U
+540:17:Call -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+540:17:Name -> Func:pandas.core.internals.construction._prep_ndarraylike.convert
+540:25:Name -> U
+542:11:Call -> U
+542:11:Name -> Func:pandas.core.internals.construction._ensure_2d
+542:22:Name -> U | Inst:.ndarray | Inst:.ndarray | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+545:23:Attribute -> Class:.ndarray
+545:23:Name -> U
+545:38:Attribute -> Class:.ndarray
+545:38:Name -> U
+549:7:Attribute -> U
+549:7:Name -> U
+550:17:Call -> U
+550:17:Attribute -> U
+550:17:Name -> U
+550:33:Attribute -> U
+550:33:Name -> U
+551:9:Attribute -> U
+551:9:Name -> U
+552:14:Call -> ExcInst:builtins.ValueError
+552:14:Name -> Class:builtins.ValueError
+552:55:Attribute -> U
+552:55:Name -> U
+553:11:Name -> U
+557:17:Name -> Class:pandas.core.indexes.base.Index
+557:31:Name -> Class:.Union
+558:5:Name -> Class:builtins.tuple
+558:11:Name -> Class:builtins.list
+558:16:Name -> Class:.Union
+558:28:Name -> Class:builtins.list
+558:33:Name -> Class:typing.Any
+562:10:Name -> Class:builtins.list
+562:15:Name -> Class:typing.Any
+564:15:Name -> U
+565:11:Call -> ERR
+565:11:Name -> Func:builtins.isinstance
+565:22:Name -> U
+565:28:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+565:39:Name -> Class:pandas.core.indexes.base.Index
+566:15:Name -> U
+567:22:Call -> U
+567:22:Attribute -> U
+567:22:Name -> U
+567:33:Name -> U
+568:15:Call -> ERR
+568:15:Name -> Func:builtins.isinstance
+568:26:Name -> U
+568:31:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+568:46:Attribute -> U
+568:46:Attribute -> U
+568:46:Name -> U
+568:67:Attribute -> U
+568:67:Name -> U
+571:22:Call -> U
+571:22:Attribute -> U
+571:22:Name -> U
+571:34:Name -> U
+572:12:Call -> ERR
+572:12:Attribute -> BM:builtins.list.append
+572:12:Name -> List:0
+572:24:Attribute -> U
+572:24:Name -> U
+573:18:Attribute -> U
+573:18:Name -> U
+575:15:Call -> ERR
+575:15:Name -> Func:builtins.isinstance
+575:26:Name -> U
+575:31:Name -> Class:builtins.dict
+578:19:Name -> Const:NoneType:None
+579:29:Call -> U
+579:29:Attribute -> U
+579:29:Name -> U
+581:19:Call -> ERR
+581:19:Name -> Func:builtins.isinstance
+581:30:Name -> U
+581:38:Name -> Class:pandas.core.indexes.datetimes.DatetimeIndex
+581:53:Name -> Class:pandas.core.indexes.timedeltas.TimedeltaIndex
+583:26:Call -> U
+583:26:Name -> Func:pandas.core.dtypes.cast.dict_compat
+583:38:Name -> U
+586:26:Call -> Inst:builtins.dict
+586:26:Name -> Class:builtins.dict
+586:31:Name -> U
+588:23:Call -> ERR
+588:23:Name -> Func:builtins.isinstance
+588:34:Name -> U
+588:41:Name -> Class:pandas.core.indexes.multi.MultiIndex
+588:57:Attribute -> U
+588:57:Name -> U
+594:26:Attribute -> U
+594:26:Call -> U | Inst:pandas.core.generic.NDFrame
+594:26:Attribute -> BM:pandas.core.series.Series.reindex
+594:26:Call -> Inst:pandas.core.series.Series
+594:26:Name -> Class:pandas.core.series.Series
+594:33:Name -> U | Inst:builtins.dict
+594:46:Name -> U
+597:26:Call -> Const:NoneType:None
+597:26:Attribute -> Func:pandas._libs.lib.fast_multiget
+597:26:Name -> Module:pandas._libs.lib
+597:44:Name -> U | Inst:builtins.dict
+597:49:Attribute -> U
+597:49:Name -> Const:NoneType:None | U
+597:73:Attribute -> U
+597:73:Name -> U
+599:18:Call -> U
+599:18:Name -> Func:pandas.core.construction.sanitize_array
+599:33:Name -> U | Inst:builtins.dict
+599:38:Name -> U
+599:51:Name -> U
+600:12:Call -> Const:NoneType:None
+600:12:Attribute -> Func:pandas.core.common.require_length_match
+600:12:Name -> Module:pandas.core.common
+600:37:Name -> U
+600:42:Name -> U
+601:12:Call -> ERR
+601:12:Attribute -> BM:builtins.list.append
+601:12:Name -> List:0
+603:8:Call -> ERR
+603:8:Attribute -> BM:builtins.list.append
+603:8:Name -> List:0
+603:27:Name -> U | Inst:builtins.dict
+605:11:Name -> List:0
+605:24:Name -> List:0
+608:28:Name -> Class:pandas.core.indexes.base.Index
+612:11:Name -> Class:pandas.core.indexes.base.Index
+613:7:Call -> ERR
+613:7:Name -> Func:builtins.len
+613:11:Name -> U
+614:15:Call -> Inst:pandas.core.indexes.range.RangeIndex
+614:15:Name -> Func:pandas.core.indexes.api.default_index
+616:18:Call -> Set:0
+616:18:Name -> Class:builtins.set
+617:13:Name -> Class:builtins.list
+617:18:Name -> Class:builtins.list
+617:23:Name -> Class:_collections_abc.Hashable
+617:35:Name -> Class:pandas.core.indexes.base.Index
+623:15:Name -> U
+624:11:Call -> ERR
+624:11:Name -> Func:builtins.isinstance
+624:22:Name -> U
+624:27:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+626:12:Call -> ERR
+626:12:Attribute -> BM:builtins.list.append
+626:12:Name -> List:0
+626:27:Attribute -> U
+626:27:Name -> U
+627:13:Call -> ERR
+627:13:Name -> Func:builtins.isinstance
+627:24:Name -> U
+627:29:Name -> Class:builtins.dict
+629:12:Call -> ERR
+629:12:Attribute -> BM:builtins.list.append
+629:12:Name -> List:0
+629:27:Call -> Inst:builtins.list
+629:27:Name -> Class:builtins.list
+629:32:Call -> U
+629:32:Attribute -> U
+629:32:Name -> U
+630:13:Call -> Const:NoneType:None
+630:13:Name -> Func:pandas._libs.lib.is_list_like
+630:26:Name -> U
+630:35:Call -> U
+630:35:Name -> Func:builtins.getattr
+630:43:Name -> U
+632:12:Call -> ERR
+632:12:Attribute -> BM:builtins.set.add
+632:12:Name -> Set:0
+632:28:Call -> ERR
+632:28:Name -> Func:builtins.len
+632:32:Name -> U
+633:13:Call -> ERR
+633:13:Name -> Func:builtins.isinstance
+633:24:Name -> U
+633:29:Attribute -> Class:.ndarray
+633:29:Name -> U
+633:45:Attribute -> U
+633:45:Name -> U
+634:18:Call -> ExcInst:builtins.ValueError
+634:18:Name -> Class:builtins.ValueError
+636:11:Name -> List:0
+636:27:Name -> Set:0
+637:14:Call -> ExcInst:builtins.ValueError
+637:14:Name -> Class:builtins.ValueError
+639:7:Name -> Const:bool:False | Const:bool:True
+640:16:Call -> U | Inst:pandas.core.indexes.base.Index
+640:16:Name -> Func:pandas.core.indexes.api.union_indexes
+640:30:Name -> List:0
+641:9:Name -> Const:bool:False | Const:bool:True
+642:16:Call -> U | Inst:pandas.core.indexes.base.Index
+642:16:Name -> Func:pandas.core.indexes.api.union_indexes
+642:30:Name -> List:0
+644:7:Name -> Const:bool:False | Const:bool:True
+645:11:Call -> Const:int:0
+645:11:Name -> Func:builtins.len
+645:15:Name -> Set:0
+646:18:Call -> ExcInst:builtins.ValueError
+646:18:Name -> Class:builtins.ValueError
+648:11:Name -> Const:bool:False | Const:bool:True
+649:18:Call -> ExcInst:builtins.ValueError
+649:18:Name -> Class:builtins.ValueError
+652:21:Call -> ERR
+652:21:Attribute -> BM:builtins.set.pop
+652:21:Name -> Set:0
+653:11:Name -> Const:bool:False | Const:bool:True
+654:15:Name -> U
+654:29:Call -> ERR
+654:29:Name -> Func:builtins.len
+654:33:Name -> U | Inst:pandas.core.indexes.base.Index
+656:36:Name -> U
+657:30:Call -> ERR
+657:30:Name -> Func:builtins.len
+657:34:Name -> U | Inst:pandas.core.indexes.base.Index
+659:22:Call -> ExcInst:builtins.ValueError
+659:22:Name -> Class:builtins.ValueError
+659:33:Name -> U
+661:20:Call -> Inst:pandas.core.indexes.range.RangeIndex
+661:20:Name -> Func:pandas.core.indexes.api.default_index
+661:34:Name -> U
+663:11:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.multi.MultiIndex
+663:11:Name -> Func:pandas.core.indexes.base.ensure_index
+663:24:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.range.RangeIndex
+667:12:Name -> Class:builtins.list
+667:17:Name -> Class:.Union
+667:42:Name -> Class:pandas.core.indexes.base.Index
+667:58:Name -> Class:pandas.core.indexes.base.Index
+667:80:Name -> Class:builtins.int
+668:5:Name -> Class:builtins.tuple
+668:11:Name -> Class:builtins.list
+668:16:Name -> Class:.Union
+668:28:Name -> Class:pandas.core.indexes.base.Index
+673:7:Name -> U
+674:15:Call -> U
+674:15:Attribute -> U
+674:15:Name -> U
+674:30:Name -> U
+676:24:Name -> Class:builtins.list
+676:29:Name -> Class:.Union
+677:22:Call -> U
+677:22:Attribute -> U
+677:22:Name -> U
+677:46:Name -> U
+678:24:Call -> Inst:builtins.enumerate
+678:24:Name -> Class:builtins.enumerate
+678:34:Name -> U
+679:19:Name -> U
+681:26:Call -> Inst:.ndarray
+681:26:Attribute -> Func:.empty
+681:26:Name -> U
+681:35:Name -> U
+681:49:Name -> Class:builtins.object
+682:20:Call -> Const:NoneType:None
+682:20:Attribute -> BM:.ndarray.fill
+682:20:Name -> Inst:.ndarray
+682:29:Attribute -> U
+682:29:Name -> U
+684:26:Name -> U
+684:33:Name -> U
+685:16:Call -> ERR
+685:16:Attribute -> BM:builtins.list.append
+685:16:Name -> List:0
+685:34:Name -> Inst:.ndarray | U
+687:21:Name -> List:0
+688:26:Name -> U
+690:11:Name -> U | List:0
+690:19:Name -> U
+693:35:Name -> Class:pandas.core.indexes.base.Index
+694:20:Call -> ERR
+694:20:Name -> Func:builtins.any
+694:24:Call -> U
+694:24:Name -> Func:builtins.getattr
+694:32:Name -> U
+694:70:Name -> U
+695:11:Name -> U
+696:15:Call -> Inst:pandas.core.indexes.range.RangeIndex
+696:15:Name -> Func:pandas.core.indexes.api.default_index
+696:29:Call -> ERR
+696:29:Name -> Func:builtins.len
+696:33:Name -> U
+698:11:Name -> Class:builtins.list
+698:16:Name -> Class:_collections_abc.Hashable
+698:28:Call -> Inst:builtins.list
+698:28:Name -> Class:builtins.list
+698:33:Call -> Inst:builtins.range
+698:33:Name -> Class:builtins.range
+698:39:Call -> ERR
+698:39:Name -> Func:builtins.len
+698:43:Name -> U
+700:16:Call -> Inst:builtins.enumerate
+700:16:Name -> Class:builtins.enumerate
+700:26:Name -> U
+701:12:Call -> U
+701:12:Name -> Func:builtins.getattr
+701:20:Name -> U
+702:11:Name -> U
+703:12:Name -> Inst:builtins.list
+703:18:Name -> U
+703:23:Name -> U
+705:12:Name -> Inst:builtins.list
+705:18:Name -> U
+705:34:Name -> Const:int:0
+708:11:Call -> Inst:pandas.core.indexes.base.Index
+708:11:Name -> Class:pandas.core.indexes.base.Index
+708:17:Name -> Inst:builtins.list
+712:7:Name -> Class:builtins.int
+712:15:Name -> Class:builtins.int
+712:27:Name -> Class:pandas.core.indexes.base.Index
+712:50:Name -> Class:pandas.core.indexes.base.Index
+713:5:Name -> Class:builtins.tuple
+713:11:Name -> Class:pandas.core.indexes.base.Index
+713:18:Name -> Class:pandas.core.indexes.base.Index
+717:7:Name -> U
+718:16:Call -> Inst:pandas.core.indexes.range.RangeIndex
+718:16:Name -> Func:pandas.core.indexes.api.default_index
+718:30:Name -> U
+720:16:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+720:16:Name -> Func:pandas.core.indexes.base.ensure_index
+720:29:Name -> U
+722:7:Name -> U
+723:18:Call -> Inst:pandas.core.indexes.range.RangeIndex
+723:18:Name -> Func:pandas.core.indexes.api.default_index
+723:32:Name -> U
+725:18:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+725:18:Name -> Func:pandas.core.indexes.base.ensure_index
+725:31:Name -> U
+726:11:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+726:18:Name -> U | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+755:11:Call -> Inst:builtins.list
+755:11:Name -> Class:builtins.list
+755:16:Call -> Inst:builtins.map
+755:16:Name -> Class:builtins.map
+755:20:Name -> Func:dataclasses.asdict
+755:28:Name -> U
+763:19:Name -> Class:pandas.core.indexes.base.Index
+763:40:Name -> Class:.Union
+764:5:Name -> Class:builtins.tuple
+764:11:Name -> Class:builtins.list
+764:16:Name -> Class:.Union
+764:28:Name -> Class:pandas.core.indexes.base.Index
+780:11:Call -> ERR
+780:11:Name -> Func:builtins.len
+780:15:Name -> U
+781:11:Call -> ERR
+781:11:Name -> Func:builtins.isinstance
+781:22:Name -> U
+781:28:Attribute -> Class:.ndarray
+781:28:Name -> U
+782:15:Attribute -> U
+782:15:Attribute -> U
+782:15:Name -> U
+784:26:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+784:26:Name -> Func:pandas.core.indexes.base.ensure_index
+784:39:Attribute -> U
+784:39:Attribute -> U
+784:39:Name -> U
+785:26:Name -> U
+785:31:Name -> U
+785:49:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+787:19:Call -> ERR
+787:19:Name -> Func:builtins.len
+787:23:Name -> U
+790:34:Call -> Inst:builtins.enumerate
+790:34:Name -> Class:builtins.enumerate
+790:44:Name -> U
+791:27:Attribute -> U
+791:27:Name -> U
+792:28:Name -> U
+792:35:Name -> U
+792:40:Name -> U
+794:23:Name -> U
+794:31:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+795:17:Attribute -> U
+795:17:Name -> U
+797:26:Name -> U
+797:34:Name -> U
+797:50:Call -> Inst:builtins.range
+797:50:Name -> Class:builtins.range
+797:56:Attribute -> U
+797:56:Name -> U
+798:19:Name -> U
+799:30:Call -> Inst:pandas.core.indexes.range.RangeIndex
+799:30:Name -> Func:pandas.core.indexes.api.default_index
+799:44:Attribute -> U
+799:44:Name -> U
+800:23:Name -> U
+800:31:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+801:19:Call -> List:0 | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+801:19:Name -> Func:pandas.core.indexes.base.ensure_index
+803:9:Call -> ERR
+803:9:Name -> Func:builtins.isinstance
+803:20:Name -> U
+803:26:Attribute -> Class:.ndarray
+803:26:Name -> U
+803:42:Attribute -> U
+803:42:Attribute -> U
+803:42:Name -> U
+805:11:Name -> U
+806:22:Call -> Inst:pandas.core.indexes.base.Index
+806:22:Name -> Class:pandas.core.indexes.base.Index
+806:28:Attribute -> U
+806:28:Attribute -> U
+806:28:Name -> U
+807:18:Name -> U
+807:23:Name -> U
+807:35:Name -> U | Inst:pandas.core.indexes.base.Index
+808:15:Name -> U
+808:23:Name -> U | Inst:pandas.core.indexes.base.Index
+810:9:Call -> ERR
+810:9:Name -> Func:builtins.isinstance
+810:20:Name -> U
+810:26:Attribute -> Class:.ndarray
+810:26:Name -> U
+810:42:Attribute -> U
+810:42:Name -> U
+813:18:Name -> U
+813:26:Name -> U
+813:42:Call -> Inst:builtins.range
+813:42:Name -> Class:builtins.range
+813:48:Attribute -> U
+813:48:Name -> U
+814:11:Name -> U
+815:22:Call -> Inst:pandas.core.indexes.range.RangeIndex
+815:22:Name -> Func:pandas.core.indexes.api.default_index
+815:36:Attribute -> U
+815:36:Name -> U
+816:15:Name -> U
+816:23:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+818:7:Call -> ERR
+818:7:Name -> Func:builtins.isinstance
+818:18:Name -> U
+818:28:Name -> Class:builtins.list
+818:34:Name -> Class:builtins.tuple
+819:14:Call -> Const:NoneType:None | Const:NoneType:None
+819:14:Name -> Func:pandas.core.internals.construction._list_to_arrays
+819:30:Name -> U
+820:9:Call -> ERR
+820:9:Name -> Func:builtins.isinstance
+820:20:Name -> U
+820:29:Attribute -> Class:_collections_abc.Mapping
+820:29:Name -> Module:collections.abc
+821:23:Call -> Tuple:2
+821:23:Name -> Func:pandas.core.internals.construction._list_of_dict_to_arrays
+821:47:Name -> U
+821:53:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex | U
+822:9:Call -> ERR
+822:9:Name -> Func:builtins.isinstance
+822:20:Name -> U
+822:29:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+823:23:Call -> Tuple:2
+823:23:Name -> Func:pandas.core.internals.construction._list_of_series_to_arrays
+823:49:Name -> U
+823:55:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.range.RangeIndex
+831:22:Attribute -> U
+831:22:Name -> U
+831:43:Name -> U
+831:51:Call -> U
+831:51:Name -> Func:builtins.hasattr
+831:59:Name -> U
+833:12:Call -> ERR
+833:12:Name -> Func:builtins.len
+833:16:Name -> U
+834:16:Call -> ERR
+834:16:Name -> Func:builtins.all
+834:20:Call -> U
+834:20:Name -> Func:builtins.hasattr
+834:28:Name -> U
+834:53:Name -> U
+835:16:Call -> ERR
+835:16:Name -> Func:builtins.len
+835:21:Call -> ERR
+835:21:Name -> Func:builtins.len
+835:25:Name -> U
+835:41:Name -> U
+837:27:Call -> U
+837:27:Attribute -> U
+837:27:Name -> U
+838:20:Call -> ERR
+838:20:Name -> Func:builtins.len
+838:24:Name -> U
+840:16:Call -> U
+840:16:Name -> Func:pandas.core.construction.array
+840:26:Name -> U
+840:30:Name -> U
+840:50:Name -> U
+840:63:Name -> U
+841:31:Call -> Inst:builtins.range
+841:31:Name -> Class:builtins.range
+841:37:Name -> U
+843:22:Call -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.range.RangeIndex
+843:22:Name -> Func:pandas.core.internals.construction._validate_or_indexify_columns
+843:52:Name -> U
+843:60:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.range.RangeIndex
+844:19:Name -> U
+844:27:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.range.RangeIndex
+846:16:Call -> Inst:builtins.tuple
+846:16:Name -> Class:builtins.tuple
+846:22:Name -> U
+846:34:Name -> U
+847:14:Call -> Const:NoneType:None | Const:NoneType:None
+847:14:Name -> Func:pandas.core.internals.construction._list_to_arrays
+847:30:Name -> U
+849:23:Call -> Tuple:2
+849:23:Name -> Func:pandas.core.internals.construction._finalize_columns_and_data
+849:50:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+849:55:Name -> U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.range.RangeIndex | Const:NoneType:None
+849:64:Name -> Const:NoneType:None | U
+850:11:Name -> Inst:builtins.list | U
+850:20:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+853:26:Name -> Class:builtins.list
+853:31:Name -> Class:builtins.tuple
+853:39:Name -> Class:builtins.list
+853:49:Attribute -> Class:.ndarray
+853:49:Name -> U
+856:7:Call -> ERR
+856:7:Name -> Func:builtins.isinstance
+856:18:Name -> U
+856:27:Name -> Class:builtins.tuple
+857:18:Call -> Const:NoneType:None
+857:18:Attribute -> Func:pandas._libs.lib.to_object_array_tuples
+857:18:Name -> Module:pandas._libs.lib
+857:45:Name -> U
+860:18:Call -> Const:NoneType:None
+860:18:Attribute -> Func:pandas._libs.lib.to_object_array
+860:18:Name -> Module:pandas._libs.lib
+860:38:Name -> U
+861:11:Name -> Const:NoneType:None | Const:NoneType:None
+865:10:Name -> Class:builtins.list
+866:13:Name -> Class:pandas.core.indexes.base.Index
+867:5:Name -> Class:builtins.tuple
+867:11:Attribute -> Class:.ndarray
+867:11:Name -> U
+867:23:Name -> Class:pandas.core.indexes.base.Index
+870:7:Name -> U
+872:21:Name -> U
+872:32:Name -> U
+872:40:Call -> ERR
+872:40:Name -> Func:builtins.isinstance
+872:51:Name -> U
+872:55:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+872:66:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCDataFrame
+873:18:Call -> Inst:pandas.core.indexes.range.RangeIndex | U | Inst:pandas.core.indexes.base.Index
+873:18:Name -> Func:pandas.core.indexes.api.get_objs_combined_axis
+873:41:Name -> U
+875:19:Name -> Class:builtins.dict
+875:24:Name -> Class:builtins.int
+875:29:Attribute -> Class:.ndarray
+875:29:Name -> U
+878:13:Name -> U
+879:16:Call -> U
+879:16:Name -> Func:builtins.getattr
+879:24:Name -> U
+880:11:Name -> U
+881:20:Call -> Inst:pandas.core.indexes.range.RangeIndex
+881:20:Name -> Func:pandas.core.indexes.api.default_index
+881:34:Call -> ERR
+881:34:Name -> Func:builtins.len
+881:38:Name -> U
+883:11:Call -> ERR
+883:11:Name -> Func:builtins.id
+883:14:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+883:24:Name -> Dict:0
+884:22:Name -> Dict:0
+884:36:Call -> ERR
+884:36:Name -> Func:builtins.id
+884:39:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+886:22:Name -> Dict:0
+886:36:Call -> ERR
+886:36:Name -> Func:builtins.id
+886:39:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+886:49:Call -> U | Inst:.ndarray | Tuple:2
+886:49:Attribute -> U | BM:pandas.core.indexes.base.Index.get_indexer
+886:49:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+886:67:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+888:17:Call -> Const:NoneType:None | Const:NoneType:None | U
+888:17:Name -> Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array | Func:pandas.core.construction.extract_array
+888:31:Name -> U
+889:8:Call -> ERR
+889:8:Attribute -> BM:builtins.list.append
+889:8:Name -> List:0
+889:30:Call -> Const:NoneType:None | Const:NoneType:None | U | Inst:.ndarray | Inst:.ndarray | Inst:.ndarray
+889:30:Attribute -> Func:pandas.core.array_algos.take.take_nd | Func:pandas.core.array_algos.take.take_nd | Func:pandas.core.array_algos.take.take_nd
+889:30:Name -> Module:pandas.core.algorithms
+889:49:Name -> Const:NoneType:None | Const:NoneType:None | U
+889:57:Name -> U | Inst:.ndarray
+891:14:Call -> U
+891:14:Attribute -> U
+891:14:Name -> U
+891:24:Name -> List:0
+892:11:Name -> U
+892:20:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+896:10:Name -> Class:builtins.list
+896:15:Name -> Class:builtins.dict
+897:13:Name -> Class:pandas.core.indexes.base.Index
+898:5:Name -> Class:builtins.tuple
+898:11:Attribute -> Class:.ndarray
+898:11:Name -> U
+898:23:Name -> Class:pandas.core.indexes.base.Index
+920:17:Call -> U
+920:17:Name -> Class:builtins.type
+920:22:Name -> U
+920:28:Name -> Class:builtins.dict
+920:12:Name -> U
+920:38:Call -> Inst:builtins.dict
+920:38:Name -> Class:builtins.dict
+920:43:Name -> U
+920:55:Name -> U
+922:7:Name -> U
+923:15:Call -> Inst:builtins.list
+923:15:Name -> Class:builtins.list
+923:20:Call -> U
+923:20:Attribute -> U
+923:20:Name -> U
+923:39:Name -> U
+924:19:Call -> ERR
+924:19:Name -> Func:builtins.any
+924:23:Call -> ERR
+924:23:Name -> Func:builtins.isinstance
+924:34:Name -> U
+924:37:Name -> Class:builtins.dict
+924:52:Name -> U
+925:19:Call -> Const:NoneType:None
+925:19:Attribute -> Func:pandas._libs.lib.fast_unique_multiple_list_gen
+925:19:Name -> Module:pandas._libs.lib
+925:53:Name -> U
+925:63:Name -> U
+926:18:Call -> Const:NoneType:None | U | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+926:18:Name -> Func:pandas.core.indexes.base.ensure_index
+926:31:Name -> Const:NoneType:None
+930:18:Call -> Const:NoneType:None
+930:18:Attribute -> Func:pandas._libs.lib.dicts_to_array
+930:18:Name -> Module:pandas._libs.lib
+930:37:Name -> U
+930:43:Name -> Const:NoneType:None
+932:18:Call -> Const:NoneType:None
+932:18:Attribute -> Func:pandas._libs.lib.dicts_to_array
+932:18:Name -> Module:pandas._libs.lib
+932:37:Name -> U
+932:43:Call -> Inst:builtins.list
+932:43:Name -> Class:builtins.list
+932:48:Name -> U
+934:11:Name -> Const:NoneType:None | Const:NoneType:None
+934:20:Name -> U | Const:NoneType:None | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.multi.MultiIndex
+938:13:Attribute -> Class:.ndarray
+938:13:Name -> U
+939:13:Name -> Class:pandas.core.indexes.base.Index
+940:11:Name -> Class:.Union
+941:5:Name -> Class:builtins.tuple
+941:11:Name -> Class:builtins.list
+941:16:Name -> Class:.Union
+941:28:Name -> Class:pandas.core.indexes.base.Index
+945:15:Call -> Inst:builtins.list
+945:15:Name -> Class:builtins.list
+945:20:Attribute -> U
+945:20:Name -> U
+948:18:Call -> U | Inst:pandas.core.indexes.range.RangeIndex
+948:18:Name -> Func:pandas.core.internals.construction._validate_or_indexify_columns
+948:48:Name -> Inst:builtins.list
+948:58:Name -> U
+949:11:Name -> Class:builtins.AssertionError
+951:14:Call -> ExcInst:builtins.ValueError
+951:14:Name -> Class:builtins.ValueError
+951:25:Name -> ExcInst:builtins.AssertionError
+951:35:Name -> ExcInst:builtins.AssertionError
+953:7:Name -> Inst:builtins.list
+953:20:Attribute -> ERR
+953:20:Name -> Inst:builtins.list
+953:41:Attribute -> U
+953:41:Name -> U
+954:19:Call -> U
+954:19:Name -> Func:pandas.core.internals.construction.convert_object_array
+954:40:Name -> Inst:builtins.list
+954:56:Name -> U
+956:11:Name -> Inst:builtins.list | U
+956:21:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+960:13:Name -> Class:builtins.list
+960:18:Attribute -> Class:.ndarray
+960:18:Name -> U
+960:40:Name -> Class:pandas.core.indexes.base.Index
+961:5:Name -> Class:pandas.core.indexes.base.Index
+985:7:Name -> U
+986:18:Call -> Inst:pandas.core.indexes.range.RangeIndex
+986:18:Name -> Func:pandas.core.indexes.api.default_index
+986:32:Call -> ERR
+986:32:Name -> Func:builtins.len
+986:36:Name -> U
+989:21:Call -> ERR
+989:21:Name -> Func:builtins.isinstance
+989:32:Name -> U
+989:41:Name -> Class:builtins.list
+989:51:Call -> ERR
+989:51:Name -> Func:builtins.all
+990:12:Call -> ERR
+990:12:Name -> Func:builtins.isinstance
+990:23:Name -> U
+990:28:Name -> Class:builtins.list
+990:45:Name -> U
+993:15:Name -> U
+993:30:Call -> ERR
+993:30:Name -> Func:builtins.len
+993:34:Name -> U
+993:46:Call -> ERR
+993:46:Name -> Func:builtins.len
+993:50:Name -> U
+995:18:Call -> ExcInst:builtins.AssertionError
+995:18:Name -> Class:builtins.AssertionError
+996:19:Call -> ERR
+996:19:Name -> Func:builtins.len
+996:23:Name -> U
+996:66:Call -> ERR
+996:66:Name -> Func:builtins.len
+996:70:Name -> U
+998:11:Name -> U
+1000:15:Call -> ERR
+1000:15:Name -> Func:builtins.len
+1000:20:Call -> ERR
+1000:20:Name -> Func:builtins.len
+1000:24:Name -> U
+1000:40:Name -> U
+1001:22:Call -> ExcInst:builtins.ValueError
+1001:22:Name -> Class:builtins.ValueError
+1006:15:Name -> U
+1006:27:Call -> ERR
+1006:27:Name -> Func:builtins.len
+1006:31:Name -> U
+1006:46:Call -> ERR
+1006:46:Name -> Func:builtins.len
+1006:50:Name -> U
+1007:22:Call -> ExcInst:builtins.ValueError
+1007:22:Name -> Class:builtins.ValueError
+1008:23:Call -> ERR
+1008:23:Name -> Func:builtins.len
+1008:27:Name -> U
+1009:23:Call -> ERR
+1009:23:Name -> Func:builtins.len
+1009:27:Name -> U
+1011:11:Name -> U | Inst:pandas.core.indexes.range.RangeIndex
+1015:13:Name -> Class:builtins.list
+1015:18:Attribute -> U
+1015:18:Name -> U
+1015:30:Attribute -> U
+1015:30:Name -> U
+1016:11:Name -> Class:.Union
+1017:19:Name -> Class:builtins.str
+1018:18:Name -> Class:builtins.bool
+1019:5:Name -> Class:builtins.list
+1019:10:Name -> Class:.Union
+1037:11:Name -> U
+1037:20:Call -> U
+1037:20:Attribute -> U
+1037:20:Name -> U
+1040:26:Name -> Const:str:'numpy' | U
+1040:54:Call -> ERR
+1040:54:Name -> Func:builtins.isinstance
+1040:65:Name -> U
+1040:72:Name -> Class:pandas.core.dtypes.dtypes.BaseMaskedDtype
+1041:18:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1041:18:Attribute -> Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects
+1041:18:Name -> Module:pandas._libs.lib
+1042:16:Name -> U
+1043:26:Name -> Const:bool:False | U
+1044:42:Name -> U
+1053:15:Name -> U
+1054:19:Attribute -> U
+1054:19:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1054:32:Call -> U
+1054:32:Attribute -> U
+1054:32:Name -> U
+1056:48:Name -> Const:str:'numpy' | U
+1057:26:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1057:26:Attribute -> Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects | Func:pandas._libs.lib.maybe_convert_objects
+1057:26:Name -> Module:pandas._libs.lib
+1058:24:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1063:50:Name -> U
+1064:41:Call -> U
+1064:41:Attribute -> U
+1064:41:Name -> U
+1066:23:Name -> U
+1066:53:Attribute -> ERR
+1066:53:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1066:66:Call -> U
+1066:66:Attribute -> U
+1066:66:Name -> U
+1067:36:Call -> Inst:pandas.core.arrays.string_.StringDtype
+1067:36:Name -> Class:pandas.core.arrays.string_.StringDtype
+1068:34:Call -> Class:pandas.core.arrays.string_.StringArray | Class:pandas.core.arrays.string_arrow.ArrowStringArray
+1068:34:Attribute -> BM:pandas.core.arrays.string_.StringDtype.construct_array_type
+1068:34:Name -> Inst:pandas.core.arrays.string_.StringDtype
+1069:30:Call -> Inst:pandas.core.arrays.string_.StringArray | U
+1069:30:Attribute -> BM:pandas.core.arrays.string_.StringArray._from_sequence | BM:pandas.core.arrays.string_arrow.ArrowStringArray._from_sequence
+1069:30:Name -> Class:pandas.core.arrays.string_.StringArray | Class:pandas.core.arrays.string_arrow.ArrowStringArray
+1069:53:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1069:64:Name -> Inst:pandas.core.arrays.string_.StringDtype
+1070:21:Name -> Const:str:'numpy' | U
+1070:50:Call -> ERR
+1070:50:Name -> Func:builtins.isinstance
+1070:61:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1070:66:Attribute -> Class:.ndarray
+1070:66:Name -> U
+1071:23:Attribute -> U
+1071:23:Attribute -> U
+1071:23:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1072:30:Call -> U
+1072:30:Name -> Func:pandas.core.construction.array
+1072:39:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1074:17:Call -> ERR
+1074:17:Name -> Func:builtins.isinstance
+1074:28:Name -> U
+1074:35:Name -> Class:pandas.core.dtypes.base.ExtensionDtype
+1078:22:Call -> U
+1078:22:Attribute -> U
+1078:22:Name -> U
+1079:22:Call -> U
+1079:22:Attribute -> U
+1079:22:Name -> U
+1079:41:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1079:52:Name -> U
+1080:17:Attribute -> U
+1080:17:Name -> U
+1086:22:Call -> Const:NoneType:None | U
+1086:22:Name -> Func:pandas.core.dtypes.cast.maybe_cast_to_datetime
+1086:45:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1086:50:Name -> U
+1088:15:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Inst:pandas.core.arrays.string_.StringArray
+1090:14:Call -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1090:14:Name -> Func:pandas.core.internals.construction.convert_object_array.convert
+1090:22:Name -> U
+1090:38:Name -> U
+1092:11:Name -> U

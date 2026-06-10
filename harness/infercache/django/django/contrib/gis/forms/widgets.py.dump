@@ -1,0 +1,129 @@
+9:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+9:9:Attribute -> Func:logging.getLogger
+9:9:Name -> Module:logging
+12:25:Name -> Class:django.forms.widgets.Widget
+27:8:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+28:12:Name -> Const:str:'base_layer' | Const:str:'geom_type' | Const:str:'map_srid' | Const:str:'display_raw'
+28:17:Call -> Const:NoneType:None
+28:17:Name -> Func:builtins.getattr
+28:25:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+28:31:Name -> Const:str:'base_layer' | Const:str:'geom_type' | Const:str:'map_srid' | Const:str:'display_raw'
+31:11:Name -> Const:NoneType:None | U
+32:12:Call -> U
+32:12:Attribute -> U | BM:builtins.dict.update
+32:12:Attribute -> U | Dict:0
+32:12:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+32:30:Name -> U
+35:28:Name -> U
+35:15:Attribute -> U
+35:15:Name -> U
+39:19:Call -> Inst:django.contrib.gis.geos.geometry.GEOSGeometry
+39:19:Name -> Class:django.contrib.gis.geos.geometry.GEOSGeometry
+39:32:Name -> U
+40:16:Name -> Class:django.contrib.gis.geos.error.GEOSException
+40:31:Name -> Class:django.contrib.gis.gdal.error.GDALException
+40:46:Name -> Class:builtins.ValueError
+40:58:Name -> Class:builtins.TypeError
+41:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+41:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+41:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+41:73:Name -> U
+41:80:Name -> ExcInst:django.contrib.gis.geos.error.GEOSException | ExcInst:django.contrib.gis.gdal.error.GDALException | ExcInst:builtins.ValueError | ExcInst:builtins.TypeError
+45:18:Call -> Dict:1
+45:18:Attribute -> BM:django.forms.widgets.Widget.get_context
+45:18:Call -> Super
+45:18:Name -> Class:builtins.super
+45:38:Name -> U
+45:44:Name -> U
+45:51:Name -> U
+48:11:Name -> U
+48:21:Call -> ERR
+48:21:Name -> Func:builtins.isinstance
+48:32:Name -> U
+48:39:Name -> Class:builtins.str
+49:20:Call -> Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None
+49:20:Attribute -> BM:django.contrib.gis.forms.widgets.BaseGeometryWidget.deserialize
+49:20:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+49:37:Name -> U
+51:11:Name -> U | Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None
+53:15:Attribute -> U | Const:int:4326 | Const:int:4326
+53:15:Name -> U | Inst:django.contrib.gis.geos.geometry.GEOSGeometry
+53:30:Attribute -> U | Const:int:4326 | Const:int:4326
+53:30:Name -> U | Inst:django.contrib.gis.geos.geometry.GEOSGeometry
+53:44:Attribute -> Const:int:4326
+53:44:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+55:26:Attribute -> U | Inst:django.contrib.gis.gdal.geometries.OGRGeometry
+55:26:Name -> U | Inst:django.contrib.gis.geos.geometry.GEOSGeometry
+56:20:Call -> U | Inst:django.contrib.gis.gdal.geometries.OGRGeometry
+56:20:Attribute -> U | BM:django.contrib.gis.gdal.geometries.OGRGeometry.transform
+56:20:Name -> U | Inst:django.contrib.gis.gdal.geometries.OGRGeometry
+56:34:Attribute -> Const:int:4326
+56:34:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+57:28:Name -> U | Inst:django.contrib.gis.gdal.geometries.OGRGeometry
+58:23:Attribute -> Class:django.contrib.gis.gdal.error.GDALException
+58:23:Name -> Module:django.contrib.gis.gdal
+59:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+59:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+59:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+61:24:Attribute -> U | Const:int:4326 | Const:int:4326
+61:24:Name -> U | Inst:django.contrib.gis.geos.geometry.GEOSGeometry
+62:24:Attribute -> Const:int:4326
+62:24:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+63:24:Name -> ExcInst:django.contrib.gis.gdal.error.GDALException
+65:8:Name -> Dict:1
+65:32:Call -> U
+65:32:Attribute -> BM:django.contrib.gis.forms.widgets.BaseGeometryWidget.serialize
+65:32:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+65:47:Name -> U | Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None | Inst:django.contrib.gis.gdal.geometries.OGRGeometry
+66:20:Attribute -> U
+66:20:Call -> Inst:django.contrib.gis.gdal.geomtype.OGRGeomType
+66:20:Attribute -> Class:django.contrib.gis.gdal.geomtype.OGRGeomType
+66:20:Name -> Module:django.contrib.gis.gdal
+66:37:Attribute -> U | Dict:0
+66:37:Name -> Inst:django.contrib.gis.forms.widgets.BaseGeometryWidget
+67:8:Name -> Dict:1
+68:26:Name -> U
+68:54:Name -> U
+70:15:Name -> Dict:1
+73:23:Name -> Class:django.contrib.gis.forms.widgets.BaseGeometryWidget
+91:29:Name -> U
+91:15:Attribute -> U
+91:15:Name -> U
+94:15:Call -> Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None
+94:15:Attribute -> BM:django.contrib.gis.forms.widgets.BaseGeometryWidget.deserialize
+94:15:Call -> Super
+94:15:Name -> Class:builtins.super
+94:35:Name -> U
+96:11:Name -> Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None
+96:20:Call -> U
+96:20:Attribute -> U
+96:20:Name -> Inst:django.utils.functional.SimpleLazyObject
+96:37:Name -> U
+96:48:Attribute -> Const:int:3857
+96:48:Name -> Inst:django.contrib.gis.forms.widgets.OpenLayersWidget
+97:12:Name -> Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None
+97:24:Attribute -> Const:int:3857
+97:24:Name -> Inst:django.contrib.gis.forms.widgets.OpenLayersWidget
+98:15:Name -> Inst:django.contrib.gis.geos.geometry.GEOSGeometry | Const:NoneType:None
+101:16:Name -> Class:django.contrib.gis.forms.widgets.OpenLayersWidget
+112:11:Name -> Const:NoneType:None | U
+114:8:Call -> U
+114:8:Attribute -> U | BM:builtins.dict.setdefault
+114:8:Name -> Const:NoneType:None | U | Dict:0
+114:40:Attribute -> Const:int:5
+114:40:Name -> Inst:django.contrib.gis.forms.widgets.OSMWidget
+115:8:Call -> U
+115:8:Attribute -> U | BM:builtins.dict.setdefault
+115:8:Name -> Const:NoneType:None | U | Dict:0
+115:40:Attribute -> Const:int:47
+115:40:Name -> Inst:django.contrib.gis.forms.widgets.OSMWidget
+116:8:Call -> U
+116:8:Attribute -> U | BM:builtins.dict.setdefault
+116:8:Name -> Const:NoneType:None | U | Dict:0
+116:41:Attribute -> Const:int:12
+116:41:Name -> Inst:django.contrib.gis.forms.widgets.OSMWidget
+117:8:Call -> Const:NoneType:None | Const:NoneType:None
+117:8:Attribute -> BM:django.contrib.gis.forms.widgets.BaseGeometryWidget.__init__ | BM:django.forms.widgets.Widget.__init__ | BM:builtins.object.__init__
+117:8:Call -> Super
+117:8:Name -> Class:builtins.super
+117:31:Name -> Const:NoneType:None | U | Dict:0

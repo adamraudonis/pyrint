@@ -1,0 +1,166 @@
+14:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+14:6:Attribute -> Func:logging.getLogger
+14:6:Name -> Module:logging
+14:24:Name -> Const:str:'salt.roster' | Const:str:'__main__'
+29:7:Call -> U
+29:7:Attribute -> U
+29:7:Name -> U
+29:50:Call -> U
+29:50:Attribute -> U
+29:50:Name -> U
+30:17:Call -> U
+30:17:Attribute -> U
+30:17:Call -> U
+30:17:Attribute -> U
+30:17:Name -> U
+31:31:Call -> U
+31:31:Attribute -> U
+31:31:Name -> U
+32:21:Call -> U
+32:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+32:21:Attribute -> Module:posixpath | Module:ntpath
+32:21:Name -> Module:os
+32:34:Name -> U
+32:51:Name -> U
+33:15:Call -> Const:bool:False | U
+33:15:Attribute -> Func:genericpath.isfile | U
+33:15:Attribute -> Module:posixpath | Module:ntpath
+33:15:Name -> Module:os
+33:30:Name -> U
+34:27:Name -> U
+37:11:Name -> Const:NoneType:None | U
+38:11:Call -> U
+38:11:Attribute -> U
+38:11:Name -> U
+39:23:Call -> U
+39:23:Attribute -> U
+39:23:Name -> U
+40:29:Call -> U
+40:29:Attribute -> U
+40:29:Name -> U
+41:23:Call -> U
+41:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+41:23:Attribute -> Module:posixpath | Module:ntpath
+41:23:Name -> Module:os
+41:36:Name -> U
+42:29:Name -> U
+43:23:Call -> U
+43:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+43:23:Attribute -> Module:posixpath | Module:ntpath
+43:23:Name -> Module:os
+43:36:Name -> U
+45:23:Call -> U
+45:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+45:23:Attribute -> Module:posixpath | Module:ntpath
+45:23:Name -> Module:os
+45:36:Attribute -> U
+45:36:Attribute -> Module:salt.syspaths
+45:36:Name -> Module:salt
+47:11:Call -> Const:bool:False | U
+47:11:Attribute -> Func:genericpath.isfile | U
+47:11:Attribute -> Module:posixpath | Module:ntpath
+47:11:Name -> Module:os
+47:26:Name -> Const:NoneType:None | U
+48:14:Call -> ExcInst:builtins.OSError
+48:14:Name -> Class:builtins.OSError
+48:38:Name -> Const:NoneType:None | U
+50:11:Call -> ERR
+50:11:Attribute -> Func:posix.access
+50:11:Name -> Module:os
+50:21:Name -> Const:NoneType:None | U
+50:31:Attribute -> Const:int:4
+50:31:Name -> Module:os
+51:14:Call -> ExcInst:builtins.OSError
+51:14:Name -> Class:builtins.OSError
+51:50:Name -> Const:NoneType:None | U
+53:11:Name -> Const:NoneType:None | U
+63:8:Name -> Inst:salt.roster.Roster
+63:20:Name -> U
+64:11:Call -> ERR
+64:11:Name -> Func:builtins.isinstance
+64:22:Name -> Const:str:'flat' | U
+64:32:Name -> Class:builtins.list
+65:12:Name -> Inst:salt.roster.Roster
+65:28:Name -> Const:str:'flat' | U
+66:13:Call -> ERR
+66:13:Name -> Func:builtins.isinstance
+66:24:Name -> Const:str:'flat' | U
+66:34:Name -> Class:builtins.str
+67:12:Name -> Inst:salt.roster.Roster
+67:28:Call -> U
+67:28:Attribute -> BM:builtins.str.split | U
+67:28:Name -> Const:str:'flat' | U
+69:12:Name -> Inst:salt.roster.Roster
+69:28:Name -> Const:str:'flat' | U
+70:15:Name -> Const:str:'flat' | U
+71:12:Name -> Inst:salt.roster.Roster
+72:16:Call -> Inst:salt.loader.lazy.LazyLoader
+72:16:Attribute -> Func:salt.loader.utils
+72:16:Attribute -> Module:salt.loader
+72:16:Name -> Module:salt
+72:34:Attribute -> U
+72:34:Name -> Inst:salt.roster.Roster
+73:17:Call -> Inst:salt.loader.lazy.LazyLoader
+73:17:Attribute -> Func:salt.loader.runner
+73:17:Attribute -> Module:salt.loader
+73:17:Name -> Module:salt
+73:36:Attribute -> U
+73:36:Name -> Inst:salt.roster.Roster
+73:53:Name -> Inst:salt.loader.lazy.LazyLoader
+74:8:Name -> Inst:salt.roster.Roster
+74:23:Call -> Inst:salt.loader.lazy.LazyLoader
+74:23:Attribute -> Func:salt.loader.roster
+74:23:Attribute -> Module:salt.loader
+74:23:Name -> Module:salt
+74:42:Attribute -> U
+74:42:Name -> Inst:salt.roster.Roster
+74:60:Name -> Inst:salt.loader.lazy.LazyLoader
+74:74:Name -> Inst:salt.loader.lazy.LazyLoader
+80:15:Call -> Set:0
+80:15:Name -> Class:builtins.set
+81:11:Attribute -> Const:str:'flat' | U | List:1
+81:11:Name -> Inst:salt.roster.Roster
+82:27:Attribute -> Const:str:'flat' | U | List:1
+82:27:Name -> Inst:salt.roster.Roster
+83:25:Name -> Const:str:'flat'
+84:19:Name -> Const:str:'flat.targets'
+84:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+84:26:Name -> Inst:salt.roster.Roster
+85:20:Call -> ERR
+85:20:Attribute -> BM:builtins.set.add
+85:20:Name -> Set:0
+85:29:Name -> Const:str:'flat'
+86:19:Name -> Set:0
+87:15:Call -> ERR
+87:15:Name -> Func:builtins.sorted
+87:22:Name -> Set:0
+95:20:Call -> Set:0 | U
+95:20:Attribute -> BM:salt.roster.Roster._gen_back
+95:20:Name -> Inst:salt.roster.Roster
+96:23:Name -> U
+97:15:Name -> Const:str:'Uninferable.targets'
+97:28:Attribute -> Inst:salt.loader.lazy.LazyLoader
+97:28:Name -> Inst:salt.roster.Roster
+100:16:Call -> ERR
+100:16:Attribute -> BM:builtins.dict.update
+100:16:Name -> Dict:0
+100:31:Call -> U
+100:31:Attribute -> Inst:salt.loader.lazy.LazyLoader
+100:31:Name -> Inst:salt.roster.Roster
+100:44:Name -> Const:str:'Uninferable.targets'
+100:51:Name -> U
+100:56:Name -> U
+101:19:Attribute -> Class:salt.exceptions.SaltRenderError
+101:19:Attribute -> Module:salt.exceptions
+101:19:Name -> Module:salt
+102:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+102:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+102:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+102:62:Name -> ExcInst:salt.exceptions.SaltRenderError
+103:19:Name -> Class:builtins.OSError
+104:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+104:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+104:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+104:68:Name -> U
+104:74:Name -> ExcInst:builtins.OSError
+106:15:Name -> Dict:0

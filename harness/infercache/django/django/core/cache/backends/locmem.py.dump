@@ -1,0 +1,266 @@
+17:18:Name -> Class:django.core.cache.backends.base.BaseCache
+18:22:Attribute -> Const:int:5
+18:22:Name -> Module:pickle
+21:8:Call -> Const:NoneType:None
+21:8:Attribute -> BM:django.core.cache.backends.base.BaseCache.__init__ | BM:builtins.object.__init__
+21:8:Call -> Super
+21:8:Name -> Class:builtins.super
+21:25:Name -> U
+22:8:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+22:22:Call -> ERR
+22:22:Attribute -> BM:builtins.dict.setdefault
+22:22:Name -> Dict:0
+22:41:Name -> U
+22:47:Call -> Inst:collections.OrderedDict
+22:47:Name -> Class:collections.OrderedDict
+23:8:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+23:28:Call -> ERR
+23:28:Attribute -> BM:builtins.dict.setdefault
+23:28:Name -> Dict:0
+23:52:Name -> U
+24:8:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+24:21:Call -> ERR
+24:21:Attribute -> BM:builtins.dict.setdefault
+24:21:Name -> Dict:0
+24:39:Name -> U
+24:45:Call -> Inst:threading.lock
+24:45:Name -> Func:threading.Lock
+26:38:Name -> Inst:builtins.object
+27:14:Call -> U
+27:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+27:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+27:41:Name -> U
+27:54:Name -> Const:NoneType:None | U
+28:18:Call -> U
+28:18:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+28:18:Name -> Module:pickle
+28:31:Name -> U
+28:38:Attribute -> Const:int:5
+28:38:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+29:13:Attribute -> U
+29:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+30:15:Call -> U
+30:15:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._has_expired
+30:15:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+30:33:Name -> U
+31:16:Call -> Const:NoneType:None
+31:16:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._set
+31:16:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+31:26:Name -> U
+31:31:Name -> U
+31:40:Name -> Inst:builtins.object | U
+36:14:Call -> U
+36:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+36:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+36:41:Name -> U
+36:54:Name -> Const:NoneType:None | U
+37:13:Attribute -> U
+37:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+38:15:Call -> U
+38:15:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._has_expired
+38:15:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+38:33:Name -> U
+39:16:Call -> Const:bool:False | Const:bool:True
+39:16:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._delete
+39:16:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+39:29:Name -> U
+40:23:Name -> Const:NoneType:None | U
+41:22:Attribute -> U
+41:22:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+41:34:Name -> U
+42:12:Call -> U
+42:12:Attribute -> U
+42:12:Attribute -> U
+42:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+42:36:Name -> U
+43:15:Call -> U
+43:15:Attribute -> Func:_pickle.loads | Func:pickle._loads
+43:15:Name -> Module:pickle
+43:28:Name -> U
+45:39:Name -> Inst:builtins.object
+46:11:Call -> ERR
+46:11:Name -> Func:builtins.len
+46:15:Attribute -> U
+46:15:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+46:31:Attribute -> Inst:builtins.int | Const:int:300
+46:31:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+47:12:Call -> Const:NoneType:None
+47:12:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._cull
+47:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+48:8:Attribute -> U
+48:8:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+48:20:Name -> U
+48:27:Name -> U
+49:8:Call -> U
+49:8:Attribute -> U
+49:8:Attribute -> U
+49:8:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+49:32:Name -> U
+50:8:Attribute -> U
+50:8:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+50:26:Name -> U
+50:33:Call -> Const:NoneType:None | U
+50:33:Attribute -> BM:django.core.cache.backends.base.BaseCache.get_backend_timeout
+50:33:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+50:58:Name -> Inst:builtins.object | U
+52:38:Name -> Inst:builtins.object
+53:14:Call -> U
+53:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+53:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+53:41:Name -> U
+53:54:Name -> Const:NoneType:None | U
+54:18:Call -> U
+54:18:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+54:18:Name -> Module:pickle
+54:31:Name -> U
+54:38:Attribute -> Const:int:5
+54:38:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+55:13:Attribute -> U
+55:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+56:12:Call -> Const:NoneType:None
+56:12:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._set
+56:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+56:22:Name -> U
+56:27:Name -> U
+56:36:Name -> Inst:builtins.object | U
+58:33:Name -> Inst:builtins.object
+59:14:Call -> U
+59:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+59:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+59:41:Name -> U
+59:54:Name -> Const:NoneType:None | U
+60:13:Attribute -> U
+60:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+61:15:Call -> U
+61:15:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._has_expired
+61:15:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+61:33:Name -> U
+63:12:Attribute -> U
+63:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+63:30:Name -> U
+63:37:Call -> Const:NoneType:None | U
+63:37:Attribute -> BM:django.core.cache.backends.base.BaseCache.get_backend_timeout
+63:37:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+63:62:Name -> Inst:builtins.object | U
+67:14:Call -> U
+67:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+67:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+67:41:Name -> U
+67:54:Name -> Const:NoneType:None | U
+68:13:Attribute -> U
+68:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+69:15:Call -> U
+69:15:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._has_expired
+69:15:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+69:33:Name -> U
+70:16:Call -> Const:bool:False | Const:bool:True
+70:16:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._delete
+70:16:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+70:29:Name -> U
+71:22:Call -> ExcInst:builtins.ValueError
+71:22:Name -> Class:builtins.ValueError
+71:56:Name -> U
+72:22:Attribute -> U
+72:22:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+72:34:Name -> U
+73:20:Call -> U
+73:20:Attribute -> Func:_pickle.loads | Func:pickle._loads
+73:20:Name -> Module:pickle
+73:33:Name -> U
+74:24:Name -> U
+74:32:Name -> Const:int:1 | U
+75:22:Call -> U
+75:22:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+75:22:Name -> Module:pickle
+75:35:Name -> U
+75:46:Attribute -> Const:int:5
+75:46:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+76:12:Attribute -> U
+76:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+76:24:Name -> U
+76:31:Name -> U
+77:12:Call -> U
+77:12:Attribute -> U
+77:12:Attribute -> U
+77:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+77:36:Name -> U
+78:15:Name -> U
+81:14:Call -> U
+81:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+81:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+81:41:Name -> U
+81:54:Name -> Const:NoneType:None | U
+82:13:Attribute -> U
+82:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+83:15:Call -> U
+83:15:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._has_expired
+83:15:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+83:33:Name -> U
+84:16:Call -> Const:bool:False | Const:bool:True
+84:16:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._delete
+84:16:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+84:29:Name -> U
+89:14:Call -> U
+89:14:Attribute -> U
+89:14:Attribute -> U
+89:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+89:36:Name -> U
+90:15:Name -> U
+90:35:Name -> U
+90:42:Call -> U
+90:42:Attribute -> Func:time.time | Lambda:django.test.utils:869 | U
+90:42:Name -> Module:time
+93:11:Attribute -> Inst:builtins.int | Const:int:3
+93:11:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+94:12:Call -> U
+94:12:Attribute -> U
+94:12:Attribute -> U
+94:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+95:12:Call -> U
+95:12:Attribute -> U
+95:12:Attribute -> U
+95:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+97:20:Call -> ERR
+97:20:Name -> Func:builtins.len
+97:24:Attribute -> U
+97:24:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+97:40:Attribute -> Inst:builtins.int | Const:int:3
+97:40:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+98:21:Call -> Inst:builtins.range
+98:21:Name -> Class:builtins.range
+98:27:Name -> U
+99:25:Call -> U
+99:25:Attribute -> U
+99:25:Attribute -> U
+99:25:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+100:20:Attribute -> U
+100:20:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+100:38:Name -> U
+104:16:Attribute -> U
+104:16:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+104:28:Name -> U
+105:16:Attribute -> U
+105:16:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+105:34:Name -> U
+106:15:Name -> Class:builtins.KeyError
+111:14:Call -> U
+111:14:Attribute -> BM:django.core.cache.backends.base.BaseCache.make_and_validate_key
+111:14:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+111:41:Name -> U
+111:54:Name -> Const:NoneType:None | U
+112:13:Attribute -> U
+112:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+113:19:Call -> Const:bool:False | Const:bool:True
+113:19:Attribute -> BM:django.core.cache.backends.locmem.LocMemCache._delete
+113:19:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+113:32:Name -> U
+116:13:Attribute -> U
+116:13:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+117:12:Call -> U
+117:12:Attribute -> U
+117:12:Attribute -> U
+117:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache
+118:12:Call -> U
+118:12:Attribute -> U
+118:12:Attribute -> U
+118:12:Name -> Inst:django.core.cache.backends.locmem.LocMemCache

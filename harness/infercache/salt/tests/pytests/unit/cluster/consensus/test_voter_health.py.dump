@@ -1,0 +1,318 @@
+45:9:Call -> Inst:salt.cluster.consensus.raft.node.Node
+45:9:Name -> Class:salt.cluster.consensus.raft.node.Node
+46:4:Call -> Const:NoneType:None
+46:4:Attribute -> BM:salt.cluster.consensus.raft.node.Node.register_schedule_timeout
+46:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+46:33:Attribute -> U
+46:33:Name -> U
+47:14:Call -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+47:14:Name -> Class:salt.cluster.consensus.raft.node.ManualPeer
+47:25:Name -> Inst:salt.cluster.consensus.raft.node.Node
+49:9:Call -> Inst:salt.cluster.consensus.raft.node.Node
+49:9:Name -> Class:salt.cluster.consensus.raft.node.Node
+50:4:Call -> Const:NoneType:None
+50:4:Attribute -> BM:salt.cluster.consensus.raft.node.Node.register_schedule_timeout
+50:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+50:33:Attribute -> U
+50:33:Name -> U
+51:14:Call -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+51:14:Name -> Class:salt.cluster.consensus.raft.node.ManualPeer
+51:25:Name -> Inst:salt.cluster.consensus.raft.node.Node
+53:13:Call -> Inst:salt.cluster.consensus.raft.node.Node
+53:13:Name -> Class:salt.cluster.consensus.raft.node.Node
+53:35:Name -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+53:44:Name -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+53:65:Name -> Const:NoneType:None | U
+54:4:Call -> Const:NoneType:None
+54:4:Attribute -> BM:salt.cluster.consensus.raft.node.Node.register_schedule_timeout
+54:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+54:37:Attribute -> U
+54:37:Name -> U
+55:4:Call -> Const:NoneType:None
+55:4:Attribute -> BM:salt.cluster.consensus.raft.node.Node.become_follower
+55:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+56:4:Call -> Const:NoneType:None
+56:4:Attribute -> BM:salt.cluster.consensus.raft.node.Node.become_candidate
+56:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+57:4:Call -> Const:NoneType:None
+57:4:Attribute -> BM:salt.cluster.consensus.raft.node.ManualPeer.handle_all_requests
+57:4:Name -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+58:4:Call -> Const:NoneType:None | Const:NoneType:None
+58:4:Attribute -> BM:salt.cluster.consensus.raft.node.Node.request_vote_reply
+58:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+58:42:Attribute -> U | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:10 | Const:int:10 | Const:int:5 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1
+58:42:Name -> Inst:salt.cluster.consensus.raft.node.Node
+59:11:Attribute -> Inst:salt.cluster.consensus.raft.node.NodeState
+59:11:Name -> Inst:salt.cluster.consensus.raft.node.Node
+59:27:Attribute -> Const:str:'leader'
+59:27:Name -> Class:salt.cluster.consensus.raft.node.NodeState
+62:4:Call -> U | Const:NoneType:None
+62:4:Attribute -> U | BM:salt.cluster.consensus.raft.log.MembershipStateMachine.apply
+62:4:Attribute -> Const:NoneType:None | U | Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+62:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+65:4:Name -> Inst:salt.cluster.consensus.raft.node.Node
+66:11:Name -> Inst:salt.cluster.consensus.raft.node.Node
+66:19:Name -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+66:28:Name -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+77:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+77:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+78:37:Call -> Tuple:3
+78:37:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+78:61:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+82:8:Call -> ERR
+82:8:Attribute -> BM:builtins.dict.clear
+82:8:Attribute -> Dict:0
+82:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+83:8:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+84:8:Call -> Const:NoneType:None | Const:NoneType:None
+84:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.append_entries_reply
+84:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+85:12:Attribute -> U | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:10 | Const:int:10 | Const:int:5 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1
+85:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+88:12:Attribute -> U | Const:int:-1 | Const:int:10 | Const:int:10 | Const:int:50 | Const:int:5 | Const:int:5 | Const:int:3 | Const:int:5
+88:12:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+88:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+90:12:Attribute -> U | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:10 | Const:int:10 | Const:int:5 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1
+90:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+92:12:Attribute -> U | Const:int:-1 | Const:int:10 | Const:int:10 | Const:int:50 | Const:int:5 | Const:int:5 | Const:int:3 | Const:int:5
+92:12:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+92:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+95:23:Attribute -> Dict:0
+95:23:Name -> Inst:salt.cluster.consensus.raft.node.Node
+99:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+99:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+100:37:Call -> Tuple:3
+100:37:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+100:61:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+102:8:Call -> Const:NoneType:None | Const:NoneType:None
+102:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.append_entries_reply
+102:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+103:12:Attribute -> U | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:10 | Const:int:10 | Const:int:5 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1
+103:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+106:12:Attribute -> U | Const:int:-1 | Const:int:10 | Const:int:10 | Const:int:50 | Const:int:5 | Const:int:5 | Const:int:3 | Const:int:5
+106:12:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+106:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+108:12:Attribute -> U | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:10 | Const:int:10 | Const:int:5 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1
+108:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+110:12:Attribute -> U | Const:int:-1 | Const:int:10 | Const:int:10 | Const:int:50 | Const:int:5 | Const:int:5 | Const:int:3 | Const:int:5
+110:12:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+110:12:Name -> Inst:salt.cluster.consensus.raft.node.Node
+113:23:Attribute -> Dict:0
+113:23:Name -> Inst:salt.cluster.consensus.raft.node.Node
+127:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+127:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+128:23:Call -> Tuple:3
+128:23:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+128:47:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+131:15:Call -> U
+131:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_demote | Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_demotes_per_ring_voter_with_auto_replace._body._spy
+131:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+134:12:Name -> U
+134:23:Attribute -> List:0 | U | List:0 | List:0
+134:23:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+134:23:Name -> Inst:salt.cluster.consensus.raft.node.Node
+134:45:Attribute -> U
+134:45:Name -> U
+134:55:Attribute -> Const:int:1
+134:55:Name -> Class:salt.cluster.consensus.raft.log.LogEntryType
+137:15:Call -> ERR
+137:15:Name -> Func:builtins.len
+137:19:Name -> U
+138:15:Attribute -> U
+138:15:Name -> U
+139:27:Name -> U
+140:23:Name -> U
+143:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+143:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+144:23:Call -> Tuple:3
+144:23:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+144:47:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+145:15:Call -> U
+145:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_demote | Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_demotes_per_ring_voter_with_auto_replace._body._spy
+145:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+152:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+152:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+153:23:Call -> Tuple:3
+153:23:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+153:47:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+155:15:Call -> U
+155:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_demote | Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_demotes_per_ring_voter_with_auto_replace._body._spy
+155:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+159:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+159:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+160:23:Call -> Tuple:3
+160:23:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+160:47:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+161:8:Call -> Const:NoneType:None
+161:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.become_follower
+161:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+161:31:Attribute -> U | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:10 | Const:int:10 | Const:int:5 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:5 | Const:int:10 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1
+161:31:Name -> Inst:salt.cluster.consensus.raft.node.Node
+162:15:Attribute -> Inst:salt.cluster.consensus.raft.node.NodeState
+162:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+162:31:Attribute -> Const:str:'leader'
+162:31:Name -> Class:salt.cluster.consensus.raft.node.NodeState
+163:15:Call -> U
+163:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_demote | Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_demotes_per_ring_voter_with_auto_replace._body._spy
+163:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+173:23:Call -> Tuple:3
+173:23:Name -> Func:tests.pytests.unit.cluster.consensus.test_voter_health._leader_with_two_voters
+173:47:Name -> U
+173:69:Name -> Const:NoneType:None | U
+174:18:Call -> Inst:salt.cluster.consensus.raft.node.Node
+174:18:Name -> Class:salt.cluster.consensus.raft.node.Node
+175:8:Call -> Const:NoneType:None
+175:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.register_schedule_timeout
+175:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+175:42:Attribute -> U
+175:42:Name -> U
+176:23:Call -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+176:23:Name -> Class:salt.cluster.consensus.raft.node.ManualPeer
+176:34:Name -> Inst:salt.cluster.consensus.raft.node.Node
+177:8:Call -> U
+177:8:Attribute -> BM:builtins.list.append | U | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+177:8:Attribute -> List:0 | U | List:0 | List:1 | List:2 | List:1 | List:1 | List:1 | List:1 | List:1 | List:1 | List:1 | List:2 | List:1
+177:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+177:28:Name -> Inst:salt.cluster.consensus.raft.node.ManualPeer
+178:8:Call -> U | Const:NoneType:None
+178:8:Attribute -> U | BM:salt.cluster.consensus.raft.log.MembershipStateMachine.apply
+178:8:Attribute -> Const:NoneType:None | U | Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+178:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+185:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+187:8:Attribute -> Dict:0 | U
+187:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+188:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+191:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+191:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+192:17:Call -> Inst:salt.cluster.consensus.raft.node.Node
+192:17:Attribute -> BM:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal._leader_with_learner
+192:17:Name -> Inst:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal
+192:43:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+193:8:Attribute -> Dict:0 | U
+193:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+193:40:Attribute -> U | Const:int:-1 | Const:int:10 | Const:int:10 | Const:int:50 | Const:int:5 | Const:int:5 | Const:int:3 | Const:int:5
+193:40:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+193:40:Name -> Inst:salt.cluster.consensus.raft.node.Node
+194:15:Call -> U
+194:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_promote
+194:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+197:12:Name -> U
+197:23:Attribute -> List:0 | U | List:0 | List:0
+197:23:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+197:23:Name -> Inst:salt.cluster.consensus.raft.node.Node
+197:45:Attribute -> U
+197:45:Name -> U
+197:55:Attribute -> Const:int:1
+197:55:Name -> Class:salt.cluster.consensus.raft.log.LogEntryType
+199:15:Attribute -> U
+199:15:Name -> U
+200:28:Name -> U
+201:32:Name -> U
+204:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+204:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+205:17:Call -> Inst:salt.cluster.consensus.raft.node.Node
+205:17:Attribute -> BM:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal._leader_with_learner
+205:17:Name -> Inst:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal
+205:43:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+208:8:Call -> Const:bool:False | U | Const:NoneType:None
+208:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.log_add
+208:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+210:15:Call -> U
+210:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_promote
+210:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+213:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+213:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+214:17:Call -> Inst:salt.cluster.consensus.raft.node.Node
+214:17:Attribute -> BM:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal._leader_with_learner
+214:17:Name -> Inst:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal
+214:43:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+215:15:Call -> U
+215:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_promote
+215:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+225:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+225:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+226:17:Call -> Inst:salt.cluster.consensus.raft.node.Node
+226:17:Attribute -> BM:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal._leader_with_learner
+226:17:Name -> Inst:tests.pytests.unit.cluster.consensus.test_voter_health.TestVoterPromotionProposal
+226:43:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+227:8:Attribute -> Dict:0 | U
+227:8:Name -> Inst:salt.cluster.consensus.raft.node.Node
+227:40:Attribute -> U | Const:int:-1 | Const:int:10 | Const:int:10 | Const:int:50 | Const:int:5 | Const:int:5 | Const:int:3 | Const:int:5
+227:40:Attribute -> Inst:salt.cluster.consensus.raft.log.Log
+227:40:Name -> Inst:salt.cluster.consensus.raft.node.Node
+228:15:Call -> U
+228:15:Attribute -> Func:tests.pytests.functional.cluster.consensus.test_raft_service.TestPerRingVoterHealth.test_watchdog_replaces_dead_voter_with_caught_up_learner._body._spy_promote
+228:15:Name -> Inst:salt.cluster.consensus.raft.node.Node
+242:17:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+242:17:Attribute -> Func:tempfile.mkdtemp
+242:17:Name -> Module:tempfile
+243:15:Call -> Inst:salt.utils.optsdict.OptsDict
+243:15:Attribute -> Func:salt.config.master_config
+243:15:Attribute -> Module:salt.config
+243:15:Name -> Module:salt
+244:8:Name -> Inst:salt.utils.optsdict.OptsDict
+245:8:Name -> Inst:salt.utils.optsdict.OptsDict
+246:8:Name -> Inst:salt.utils.optsdict.OptsDict
+247:8:Name -> Inst:salt.utils.optsdict.OptsDict
+247:27:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+248:8:Name -> Inst:salt.utils.optsdict.OptsDict
+250:15:Call -> U
+250:15:Attribute -> Func:asyncio.events.new_event_loop
+250:15:Name -> Module:asyncio
+253:29:Call -> U
+253:29:Name -> U
+254:29:Call -> U
+254:29:Name -> U
+256:18:Call -> Inst:salt.cluster.consensus.service.RaftService
+256:18:Name -> Class:salt.cluster.consensus.service.RaftService
+256:30:Name -> Inst:salt.utils.optsdict.OptsDict
+256:36:Name -> U
+256:42:Name -> Dict:2
+258:12:Call -> U
+258:12:Attribute -> U
+258:12:Name -> U
+259:20:Call -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+259:20:Name -> Class:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+260:8:Call -> Const:NoneType:None | U
+260:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.register_schedule_timeout | U
+260:8:Attribute -> Inst:salt.cluster.consensus.raft.node.Node | U
+260:8:Name -> Inst:salt.cluster.consensus.service.RaftService
+260:44:Attribute -> BM:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler.schedule
+260:44:Name -> Inst:salt.cluster.consensus.raft.scheduler.ManualTimeoutScheduler
+261:8:Call -> Const:NoneType:None | U
+261:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.become_follower | U
+261:8:Attribute -> Inst:salt.cluster.consensus.raft.node.Node | U
+261:8:Name -> Inst:salt.cluster.consensus.service.RaftService
+262:8:Call -> Const:NoneType:None | U
+262:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.become_candidate | U
+262:8:Attribute -> Inst:salt.cluster.consensus.raft.node.Node | U
+262:8:Name -> Inst:salt.cluster.consensus.service.RaftService
+263:8:Call -> Const:NoneType:None | U
+263:8:Attribute -> BM:salt.cluster.consensus.raft.node.Node.become_leader | U
+263:8:Attribute -> Inst:salt.cluster.consensus.raft.node.Node | U
+263:8:Name -> Inst:salt.cluster.consensus.service.RaftService
+264:8:Call -> U | Const:NoneType:None
+264:8:Attribute -> U | BM:salt.cluster.consensus.raft.log.MembershipStateMachine.apply
+264:8:Attribute -> Const:NoneType:None | U | Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+264:8:Attribute -> Inst:salt.cluster.consensus.raft.node.Node | U
+264:8:Name -> Inst:salt.cluster.consensus.service.RaftService
+271:8:Attribute -> Inst:salt.cluster.consensus.raft.node.Node | U
+271:8:Name -> Inst:salt.cluster.consensus.service.RaftService
+272:15:Name -> Inst:salt.cluster.consensus.service.RaftService
+272:20:Name -> Inst:salt.utils.optsdict.OptsDict
+282:20:Call -> Tuple:2
+282:20:Attribute -> BM:tests.pytests.unit.cluster.consensus.test_voter_health.TestOperatorOverride._make_service
+282:20:Name -> Inst:tests.pytests.unit.cluster.consensus.test_voter_health.TestOperatorOverride
+283:15:Call -> U | Const:bool:False
+283:15:Attribute -> BM:salt.utils.optsdict.OptsDict.get
+283:15:Name -> Inst:salt.utils.optsdict.OptsDict
+284:15:Call -> U
+284:15:Attribute -> BM:salt.cluster.consensus.service.RaftService.propose_voter_demotion
+284:15:Name -> Inst:salt.cluster.consensus.service.RaftService
+287:20:Call -> Tuple:2
+287:20:Attribute -> BM:tests.pytests.unit.cluster.consensus.test_voter_health.TestOperatorOverride._make_service
+287:20:Name -> Inst:tests.pytests.unit.cluster.consensus.test_voter_health.TestOperatorOverride
+288:8:Name -> Inst:salt.utils.optsdict.OptsDict
+289:15:Call -> U
+289:15:Attribute -> BM:salt.cluster.consensus.service.RaftService.propose_voter_demotion
+289:15:Name -> Inst:salt.cluster.consensus.service.RaftService

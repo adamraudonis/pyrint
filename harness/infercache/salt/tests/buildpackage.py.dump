@@ -1,0 +1,630 @@
+23:0:Name -> Module:logging
+24:0:Name -> Module:logging
+25:0:Name -> Module:logging
+27:0:Call -> Const:NoneType:None
+27:0:Attribute -> Func:logging.addLevelName
+27:0:Name -> Module:logging
+27:21:Attribute -> Const:int:0 | Const:int:1000
+27:21:Name -> Module:logging
+28:0:Call -> Const:NoneType:None
+28:0:Attribute -> Func:logging.addLevelName
+28:0:Name -> Module:logging
+28:21:Attribute -> Const:int:5 | Const:int:5
+28:21:Name -> Module:logging
+29:0:Call -> Const:NoneType:None
+29:0:Attribute -> Func:logging.addLevelName
+29:0:Name -> Module:logging
+29:21:Attribute -> Const:int:1 | Const:int:1
+29:21:Name -> Module:logging
+32:11:Attribute -> Const:int:0
+32:11:Name -> Module:logging
+33:13:Attribute -> Const:int:10
+33:13:Name -> Module:logging
+34:13:Attribute -> Const:int:40
+34:13:Name -> Module:logging
+35:16:Attribute -> Const:int:50
+35:16:Name -> Module:logging
+36:15:Attribute -> Const:int:1 | Const:int:1
+36:15:Name -> Module:logging
+37:12:Attribute -> Const:int:20
+37:12:Name -> Module:logging
+38:13:Attribute -> Const:int:0 | Const:int:1000
+38:13:Name -> Module:logging
+39:13:Attribute -> Const:int:5 | Const:int:5
+39:13:Name -> Module:logging
+40:15:Attribute -> Const:int:30
+40:15:Name -> Module:logging
+43:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+43:6:Attribute -> Func:logging.getLogger
+43:6:Name -> Module:logging
+43:24:Name -> Const:str:'tests.buildpackage' | Const:str:'__main__'
+52:11:Call -> ERR
+52:11:Name -> Func:builtins.isinstance
+52:22:Name -> U
+52:28:Name -> Class:builtins.list
+53:16:Name -> U
+54:15:Name -> U | List:1
+55:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+55:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+55:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+55:18:Name -> U
+56:8:Call -> U
+56:8:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+56:8:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+56:8:Name -> Module:sys
+56:25:Name -> U
+57:4:Call -> U
+57:4:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+57:4:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+57:4:Name -> Module:sys
+58:4:Call -> ERR
+58:4:Attribute -> Func:sys.exit
+58:4:Name -> Module:sys
+68:13:Call -> Inst:optparse.OptionParser
+68:13:Name -> Class:optparse.OptionParser
+69:4:Call -> U
+69:4:Attribute -> BM:optparse.OptionContainer.add_option
+69:4:Name -> Inst:optparse.OptionParser
+70:4:Call -> U
+70:4:Attribute -> BM:optparse.OptionContainer.add_option
+70:4:Name -> Inst:optparse.OptionParser
+80:17:Call -> Inst:optparse.OptionGroup
+80:17:Name -> Class:optparse.OptionGroup
+80:29:Name -> Inst:optparse.OptionParser
+81:4:Call -> Inst:salt.utils.parsers.CustomOption | U
+81:4:Attribute -> BM:optparse.OptionContainer.add_option
+81:4:Name -> Inst:optparse.OptionGroup
+86:4:Call -> Inst:salt.utils.parsers.CustomOption | U
+86:4:Attribute -> BM:optparse.OptionContainer.add_option
+86:4:Name -> Inst:optparse.OptionGroup
+94:4:Call -> Inst:salt.utils.parsers.CustomOption | U
+94:4:Attribute -> BM:optparse.OptionContainer.add_option
+94:4:Name -> Inst:optparse.OptionGroup
+103:4:Call -> Inst:optparse.OptionGroup | U
+103:4:Attribute -> BM:optparse.OptionParser.add_option_group
+103:4:Name -> Inst:optparse.OptionParser
+103:28:Name -> Inst:optparse.OptionGroup
+107:16:Call -> Inst:optparse.OptionGroup
+107:16:Name -> Class:optparse.OptionGroup
+107:28:Name -> Inst:optparse.OptionParser
+108:4:Call -> Inst:salt.utils.parsers.CustomOption | U
+108:4:Attribute -> BM:optparse.OptionContainer.add_option
+108:4:Name -> Inst:optparse.OptionGroup
+114:4:Call -> Inst:optparse.OptionGroup | U
+114:4:Attribute -> BM:optparse.OptionParser.add_option_group
+114:4:Name -> Inst:optparse.OptionParser
+114:28:Name -> Inst:optparse.OptionGroup
+116:11:Call -> Tuple:2
+116:11:Attribute -> BM:optparse.OptionParser.parse_args
+116:11:Name -> Inst:optparse.OptionParser
+119:18:Name -> Inst:optparse.OptionGroup
+119:30:Name -> Inst:optparse.OptionGroup
+120:25:Attribute -> U
+120:25:Name -> U
+120:45:Attribute -> List:0
+120:45:Name -> Inst:optparse.OptionGroup
+121:19:Call -> U
+121:19:Name -> Func:builtins.getattr
+121:27:Name -> U
+121:33:Name -> U
+122:19:Call -> U | Const:bool:True | Const:bool:False
+122:19:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+122:19:Attribute -> Module:posixpath | Module:ntpath
+122:19:Name -> Module:os
+122:33:Name -> U
+124:23:Call -> U
+124:23:Attribute -> Func:posixpath.expanduser | U
+124:23:Attribute -> Module:posixpath | Module:ntpath
+124:23:Name -> Module:os
+124:42:Name -> U
+125:23:Call -> U | Const:bool:True | Const:bool:False
+125:23:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+125:23:Attribute -> Module:posixpath | Module:ntpath
+125:23:Name -> Module:os
+125:37:Name -> U
+127:27:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+127:27:Attribute -> Func:posixpath.realpath | U
+127:27:Attribute -> Module:posixpath | Module:ntpath
+127:27:Name -> Module:os
+127:44:Name -> U
+129:16:Call -> ERR
+129:16:Name -> Func:builtins.setattr
+129:24:Name -> U
+129:30:Name -> U
+129:40:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+133:11:Attribute -> U
+133:11:Name -> U
+134:8:Call -> ERR
+134:8:Attribute -> BM:builtins.list.append
+134:8:Name -> List:0
+135:11:Call -> Const:bool:False | U
+135:11:Attribute -> Func:genericpath.isdir | U
+135:11:Attribute -> Module:posixpath | Module:ntpath
+135:11:Name -> Module:os
+135:25:Attribute -> U
+135:25:Name -> U
+136:8:Call -> ERR
+136:8:Attribute -> BM:builtins.list.append
+136:8:Name -> List:0
+136:44:Attribute -> U
+136:44:Name -> U
+138:8:Call -> Const:NoneType:None | Const:NoneType:None
+138:8:Attribute -> Func:shutil.rmtree
+138:8:Name -> Module:shutil
+138:22:Attribute -> U
+138:22:Name -> U
+139:11:Name -> Class:builtins.OSError
+140:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+140:11:Name -> ExcInst:builtins.OSError
+140:29:Attribute -> Const:int:2
+140:29:Name -> Module:errno
+140:43:Attribute -> Const:int:20
+140:43:Name -> Module:errno
+141:12:Call -> ERR
+141:12:Attribute -> BM:builtins.list.append
+141:12:Name -> List:0
+142:16:Call -> U
+142:16:Attribute -> BM:builtins.str.format
+143:20:Attribute -> U
+143:20:Name -> U
+143:36:Name -> ExcInst:builtins.OSError
+148:12:Call -> Const:NoneType:None
+148:12:Attribute -> Func:os.makedirs
+148:12:Name -> Module:os
+148:24:Attribute -> U
+148:24:Name -> U
+149:15:Name -> Class:builtins.OSError
+150:12:Call -> ERR
+150:12:Attribute -> BM:builtins.list.append
+150:12:Name -> List:0
+151:16:Call -> U
+151:16:Attribute -> BM:builtins.str.format
+152:20:Attribute -> U
+152:20:Name -> U
+152:36:Name -> ExcInst:builtins.OSError
+156:8:Call -> Const:NoneType:None | Const:NoneType:None
+156:8:Attribute -> Func:shutil.rmtree
+156:8:Name -> Module:shutil
+156:22:Attribute -> U
+156:22:Name -> U
+157:11:Name -> Class:builtins.OSError
+158:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+158:11:Name -> ExcInst:builtins.OSError
+158:29:Attribute -> Const:int:2
+158:29:Name -> Module:errno
+158:43:Attribute -> Const:int:20
+158:43:Name -> Module:errno
+159:12:Call -> ERR
+159:12:Attribute -> BM:builtins.list.append
+159:12:Name -> List:0
+160:16:Call -> U
+160:16:Attribute -> BM:builtins.str.format
+161:20:Attribute -> U
+161:20:Name -> U
+161:39:Name -> ExcInst:builtins.OSError
+166:12:Call -> Const:NoneType:None
+166:12:Attribute -> Func:os.makedirs
+166:12:Name -> Module:os
+166:24:Attribute -> U
+166:24:Name -> U
+167:15:Name -> Class:builtins.OSError
+168:12:Call -> ERR
+168:12:Attribute -> BM:builtins.list.append
+168:12:Name -> List:0
+169:16:Call -> U
+169:16:Attribute -> BM:builtins.str.format
+170:20:Attribute -> U
+170:20:Name -> U
+170:39:Name -> ExcInst:builtins.OSError
+176:4:Name -> U
+176:20:Call -> U
+176:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+176:20:Attribute -> Module:posixpath | Module:ntpath
+176:20:Name -> Module:os
+176:33:Attribute -> U
+176:33:Name -> U
+178:7:Name -> List:0
+179:8:Call -> Const:NoneType:None
+179:8:Name -> Func:tests.buildpackage._abort
+179:15:Name -> U
+181:11:Name -> U
+189:8:Call -> ERR
+189:8:Attribute -> Func:posix.remove
+189:8:Name -> Module:os
+189:18:Call -> U
+189:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+189:18:Attribute -> Module:posixpath | Module:ntpath
+189:18:Name -> Module:os
+189:31:Name -> U
+189:36:Call -> U
+189:36:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+189:36:Attribute -> Module:posixpath | Module:ntpath
+189:36:Name -> Module:os
+189:53:Name -> U
+190:11:Name -> Class:builtins.OSError
+191:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+191:11:Name -> ExcInst:builtins.OSError
+191:24:Attribute -> Const:int:2
+191:24:Name -> Module:errno
+192:12:Call -> Const:NoneType:None
+192:12:Name -> Func:tests.buildpackage._abort
+192:19:Name -> ExcInst:builtins.OSError
+195:8:Call -> Const:NoneType:None | U
+195:8:Attribute -> Func:shutil.move
+195:8:Name -> Module:shutil
+195:20:Name -> U
+195:25:Name -> U
+196:11:Attribute -> Class:shutil.Error
+196:11:Name -> Module:shutil
+197:8:Call -> Const:NoneType:None
+197:8:Name -> Func:tests.buildpackage._abort
+197:15:Name -> ExcInst:shutil.Error
+201:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+201:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+201:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+201:36:Name -> U
+202:11:Call -> Inst:subprocess.Popen
+202:11:Attribute -> Class:subprocess.Popen
+202:11:Name -> Module:subprocess
+202:28:Name -> U
+202:41:Attribute -> Const:int:-1
+202:41:Name -> Module:subprocess
+202:65:Attribute -> Const:int:-1
+202:65:Name -> Module:subprocess
+203:21:Call -> Tuple:2
+203:21:Attribute -> BM:subprocess.Popen.communicate
+203:21:Name -> Inst:subprocess.Popen
+204:7:Name -> Const:bytes:b'string'
+205:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+205:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+205:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+205:42:Name -> Const:bytes:b'string'
+206:7:Name -> Const:bytes:b'string'
+207:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+207:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+207:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+207:18:Name -> Const:bytes:b'string'
+208:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+208:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+208:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+208:32:Attribute -> Const:int:0
+208:32:Name -> Inst:subprocess.Popen
+209:11:Name -> Const:bytes:b'string'
+209:19:Name -> Const:bytes:b'string'
+209:27:Attribute -> Const:int:0
+209:27:Name -> Inst:subprocess.Popen
+213:4:Call -> ERR
+213:4:Attribute -> Func:posix.chdir
+213:4:Name -> Module:os
+213:13:Attribute -> U
+213:13:Name -> U
+216:28:Call -> Tuple:3
+216:28:Name -> Func:tests.buildpackage._run_command
+216:42:Name -> Const:str:'python' | U
+217:7:Name -> Const:int:0
+219:21:Call -> ERR
+219:21:Name -> Func:builtins.max
+220:12:Call -> Gen:glob._iglob | Inst:itertools.chain
+220:12:Attribute -> Func:glob.iglob
+220:12:Name -> Module:glob
+220:23:Call -> U
+220:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+220:23:Attribute -> Module:posixpath | Module:ntpath
+220:23:Name -> Module:os
+220:36:Attribute -> U
+220:36:Name -> U
+221:16:Attribute -> Func:genericpath.getctime
+221:16:Attribute -> Module:posixpath | Module:ntpath
+221:16:Name -> Module:os
+223:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+223:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+223:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+223:43:Name -> U
+224:15:Name -> U
+226:8:Call -> Const:NoneType:None
+226:8:Name -> Func:tests.buildpackage._abort
+236:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+236:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+236:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+237:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+237:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+237:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+239:13:Call -> ERR
+239:13:Name -> Func:_io.open
+240:29:Call -> U
+240:29:Attribute -> U
+240:29:Call -> U
+240:29:Attribute -> U
+240:29:Name -> U
+241:28:Call -> Inst:builtins.int
+241:28:Name -> Class:builtins.int
+241:32:Call -> U
+241:32:Attribute -> U
+241:32:Call -> U
+241:32:Attribute -> U
+241:32:Name -> U
+242:12:Name -> Class:builtins.ValueError
+242:24:Name -> Class:builtins.IndexError
+243:8:Call -> Const:NoneType:None
+243:8:Name -> Func:tests.buildpackage._abort
+244:12:Call -> U
+244:12:Attribute -> BM:builtins.str.format
+245:36:Name -> ERR
+247:11:Name -> Class:builtins.OSError
+248:8:Call -> Const:NoneType:None
+248:8:Name -> Func:tests.buildpackage._abort
+248:18:Name -> ExcInst:builtins.OSError
+250:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+250:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+250:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+250:34:Name -> Inst:builtins.int
+252:42:Call -> U
+252:42:Attribute -> Func:posixpath.join | Func:ntpath.join
+252:42:Attribute -> Module:posixpath | Module:ntpath
+252:42:Name -> Module:os
+252:55:Attribute -> U
+252:55:Name -> U
+254:7:Name -> Inst:builtins.int
+256:8:Call -> ERR
+256:8:Attribute -> BM:builtins.list.extend
+256:8:Name -> List:2
+257:11:Call -> Const:bool:False | Const:bool:True | U
+257:11:Attribute -> Func:genericpath.exists | U
+257:11:Attribute -> Module:posixpath | Module:ntpath
+257:11:Name -> Module:os
+258:12:Call -> ERR
+258:12:Attribute -> BM:builtins.list.extend
+258:12:Name -> List:1
+259:8:Call -> ERR
+259:8:Attribute -> BM:builtins.list.extend
+259:8:Name -> List:1
+260:9:Name -> Inst:builtins.int
+261:8:Call -> ERR
+261:8:Attribute -> BM:builtins.list.extend
+261:8:Name -> List:1
+262:9:Name -> Inst:builtins.int
+263:8:Call -> ERR
+263:8:Attribute -> BM:builtins.list.extend
+263:8:Name -> List:1
+265:8:Call -> Const:NoneType:None
+265:8:Name -> Func:tests.buildpackage._abort
+265:45:Name -> Inst:builtins.int
+268:4:Call -> Tuple:3
+268:4:Name -> Func:tests.buildpackage._run_command
+268:44:Name -> List:1
+272:16:Call -> U
+272:16:Name -> Func:tests.buildpackage._make_sdist
+272:28:Name -> U
+272:45:Name -> Const:str:'python26'
+273:11:Name -> Class:builtins.NameError
+274:16:Call -> U
+274:16:Name -> Func:tests.buildpackage._make_sdist
+274:28:Name -> U
+279:17:Call -> U
+279:17:Attribute -> Func:re.compile
+279:17:Name -> Module:re
+281:28:Call -> U
+281:28:Attribute -> U
+281:28:Call -> U
+281:28:Attribute -> U
+281:28:Name -> U
+281:45:Call -> U
+281:45:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+281:45:Attribute -> Module:posixpath | Module:ntpath
+281:45:Name -> Module:os
+281:62:Name -> U
+282:11:Name -> Class:builtins.AttributeError
+283:8:Call -> Const:NoneType:None
+283:8:Name -> Func:tests.buildpackage._abort
+283:70:Name -> U
+285:7:Name -> U
+286:36:Name -> U
+288:22:Call -> Const:str:''
+288:22:Attribute -> BM:builtins.str.join
+288:32:Name -> U
+288:38:Name -> U
+288:46:Name -> U
+289:22:Call -> Const:str:''
+289:22:Attribute -> BM:builtins.str.join
+289:32:Name -> U
+289:38:Name -> U
+289:46:Name -> U
+291:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+291:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+291:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+291:32:Name -> U | Const:str:''
+292:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+292:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+292:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+292:32:Name -> U | Const:str:''
+295:21:Call -> ERR
+295:21:Attribute -> BM:builtins.str.split
+296:15:Call -> U
+296:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+296:15:Attribute -> Module:posixpath | Module:ntpath
+296:15:Name -> Module:os
+296:28:Attribute -> U
+296:28:Name -> U
+296:44:Name -> U
+298:12:Call -> Const:NoneType:None
+298:12:Attribute -> Func:os.makedirs
+298:12:Name -> Module:os
+298:24:Name -> U
+299:15:Name -> Class:builtins.OSError
+301:15:Call -> Const:bool:False | U
+301:15:Attribute -> Func:genericpath.isdir | U
+301:15:Attribute -> Module:posixpath | Module:ntpath
+301:15:Name -> Module:os
+301:29:Name -> U
+302:12:Call -> Const:NoneType:None
+302:12:Name -> Func:tests.buildpackage._abort
+302:48:Name -> U
+305:25:Call -> U
+305:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+305:25:Attribute -> Module:posixpath | Module:ntpath
+305:25:Name -> Module:os
+305:38:Attribute -> U
+305:38:Name -> U
+306:23:Call -> U
+306:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+306:23:Attribute -> Module:posixpath | Module:ntpath
+306:23:Name -> Module:os
+306:36:Attribute -> U
+306:36:Name -> U
+307:4:Call -> Const:NoneType:None
+307:4:Name -> Func:tests.buildpackage._move
+307:10:Name -> U
+307:17:Name -> U
+321:8:Call -> U
+321:8:Attribute -> Func:shutil.copy
+321:8:Name -> Module:shutil
+321:20:Call -> U
+321:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+321:20:Attribute -> Module:posixpath | Module:ntpath
+321:20:Name -> Module:os
+321:33:Name -> U
+321:51:Name -> Const:str:'salt-master' | Const:str:'salt-syndic' | Const:str:'salt-minion' | Const:str:'salt-api' | Const:str:'salt-master.service' | Const:str:'salt-syndic.service' | Const:str:'salt-minion.service' | Const:str:'salt-api.service' | Const:str:'README.fedora' | Const:str:'logrotate.salt' | Const:str:'salt.bash'
+321:57:Name -> U
+324:16:Call -> U
+324:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+324:16:Attribute -> Module:posixpath | Module:ntpath
+324:16:Name -> Module:os
+324:29:Attribute -> U
+324:29:Name -> U
+325:9:Call -> ERR
+325:9:Name -> Func:_io.open
+325:14:Attribute -> U
+325:14:Name -> U
+326:21:Call -> U
+326:21:Attribute -> U
+326:21:Call -> U
+326:21:Attribute -> U
+326:21:Name -> U
+327:9:Call -> ERR
+327:9:Name -> Func:_io.open
+327:14:Name -> U
+328:20:Name -> U
+329:15:Call -> U
+329:15:Attribute -> U
+329:15:Name -> U
+330:41:Name -> U | Const:str:''
+331:17:Call -> U
+331:17:Attribute -> U
+331:17:Name -> U
+332:35:Name -> U | Const:str:''
+333:12:Call -> U
+333:12:Attribute -> U
+333:12:Name -> U
+333:22:Name -> U | Const:str:'%global srcver Uninferable' | Const:str:'%global srcver ' | Const:str:'Version: Uninferable' | Const:str:'Version: '
+337:4:Call -> ERR
+337:4:Attribute -> BM:builtins.list.extend
+337:4:Name -> List:2
+337:15:Name -> List:2
+338:4:Call -> ERR
+338:4:Attribute -> BM:builtins.list.append
+338:4:Name -> List:2
+338:15:Name -> U
+339:28:Call -> Tuple:3
+339:28:Name -> Func:tests.buildpackage._run_command
+339:41:Name -> List:2
+341:7:Name -> Const:int:0
+342:8:Call -> Const:NoneType:None
+342:8:Name -> Func:tests.buildpackage._abort
+344:15:Call -> Inst:builtins.list
+344:15:Attribute -> Func:glob.glob
+344:15:Name -> Module:glob
+345:8:Call -> U
+345:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+345:8:Attribute -> Module:posixpath | Module:ntpath
+345:8:Name -> Module:os
+346:12:Attribute -> U
+346:12:Name -> U
+349:21:Name -> U | Const:str:''
+352:4:Call -> ERR
+352:4:Attribute -> BM:builtins.list.extend
+352:4:Name -> Inst:builtins.list
+353:8:Call -> Inst:builtins.list
+353:8:Attribute -> Func:glob.glob
+353:8:Name -> Module:glob
+353:18:Call -> U
+353:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+353:18:Attribute -> Module:posixpath | Module:ntpath
+353:18:Name -> Module:os
+353:31:Attribute -> U
+353:31:Name -> U
+353:64:Name -> U | Const:str:''
+355:11:Name -> Inst:builtins.list
+360:3:Name -> Const:str:'tests.buildpackage' | Const:str:'__main__'
+361:11:Call -> U
+361:11:Name -> Func:tests.buildpackage._init
+363:4:Call -> ERR
+363:4:Name -> Func:builtins.print
+364:8:Call -> U
+364:8:Attribute -> BM:builtins.str.format
+365:12:Attribute -> U
+365:12:Name -> U
+365:27:Attribute -> U
+365:27:Name -> U
+374:11:Attribute -> U
+374:11:Name -> U
+374:29:Name -> Dict:9
+373:8:Name -> Dict:9
+373:19:Attribute -> U
+373:19:Name -> U
+375:13:Name -> Dict:9
+377:4:Call -> Const:NoneType:None
+377:4:Attribute -> Func:logging.basicConfig
+377:4:Name -> Module:logging
+378:17:Attribute -> U
+378:17:Name -> U
+379:15:Name -> Const:str:'%(asctime)s.%(msecs)03d %(levelname)s: 
+380:16:Name -> Const:str:'%H:%M:%S'
+381:14:Name -> Dict:9
+381:25:Attribute -> U
+381:25:Name -> U
+383:7:Attribute -> U
+383:7:Name -> U
+383:29:Name -> Dict:9
+384:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+384:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+384:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+384:71:Attribute -> U
+384:71:Name -> U
+387:11:Attribute -> U
+387:11:Name -> U
+388:8:Call -> Const:NoneType:None
+388:8:Name -> Func:tests.buildpackage._abort
+389:9:Call -> U
+389:9:Attribute -> U
+389:9:Attribute -> U
+389:9:Name -> U
+390:20:Call -> Inst:builtins.list
+390:20:Name -> Func:tests.buildpackage.build_centos
+390:33:Name -> U
+392:8:Call -> Const:NoneType:None
+392:8:Name -> Func:tests.buildpackage._abort
+392:40:Attribute -> U
+392:40:Name -> U
+394:57:Attribute -> U
+394:57:Name -> U
+395:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+395:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+395:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+395:13:Name -> Const:str:'Build complete. Artifacts will be store
+396:4:Call -> ERR
+396:4:Name -> Func:builtins.print
+396:10:Name -> Const:str:'Build complete. Artifacts will be store
+397:20:Name -> Inst:builtins.list
+398:8:Call -> U
+398:8:Attribute -> Func:shutil.copy
+398:8:Name -> Module:shutil
+398:20:Name -> U
+398:30:Attribute -> U
+398:30:Name -> U
+399:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+399:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+399:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+399:52:Name -> U
+400:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+400:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+400:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

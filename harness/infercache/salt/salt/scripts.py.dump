@@ -1,0 +1,962 @@
+21:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+21:6:Attribute -> Func:logging.getLogger
+21:6:Name -> Module:logging
+21:24:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+36:3:Attribute -> U
+36:3:Name -> Module:sys
+36:35:Call -> ERR
+36:35:Attribute -> BM:builtins.str.startswith
+36:35:Attribute -> Const:str:'darwin'
+36:35:Name -> Module:sys
+37:4:Call -> Const:NoneType:None | U
+37:4:Attribute -> BM:multiprocessing.context.DefaultContext.set_start_method | BM:multiprocessing.context.BaseContext.set_start_method
+37:4:Name -> Module:multiprocessing
+42:20:Attribute -> U
+42:20:Attribute -> U
+42:20:Name -> U
+43:12:Name -> Class:builtins.AttributeError
+43:28:Name -> Class:builtins.KeyError
+46:7:Name -> U
+46:17:Attribute -> Const:int:2
+46:17:Name -> Module:signal
+49:18:Attribute -> U
+49:18:Attribute -> U
+49:18:Name -> U
+51:16:Call -> U
+51:16:Attribute -> BM:builtins.str.format
+56:54:Name -> U
+58:16:Name -> Class:builtins.AttributeError
+58:32:Name -> Class:builtins.KeyError
+63:7:Name -> Const:str:'\nExiting gracefully on Ctrl-c' | U | Const:NoneType:None
+63:28:Name -> U | Const:bool:False
+65:7:Name -> Const:str:'\nExiting gracefully on Ctrl-c' | U | Const:NoneType:None | Const:str:'\nExiting with hard crash on Ctrl-c'
+66:8:Call -> ERR
+66:8:Name -> Func:builtins.print
+66:14:Name -> Const:str:'\nExiting gracefully on Ctrl-c' | U | Const:str:'\nExiting with hard crash on Ctrl-c'
+66:29:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+66:29:Name -> Module:sys
+67:7:Name -> U | Const:bool:False
+71:20:Call -> Const:str:''
+71:20:Attribute -> Func:traceback.format_exc
+71:20:Name -> Module:traceback
+72:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+72:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+72:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+72:22:Name -> Const:str:''
+73:15:Name -> Class:builtins.AttributeError
+75:8:Call -> ERR
+75:8:Attribute -> Func:sys.exit
+75:8:Name -> Module:sys
+75:17:Attribute -> Const:int:1
+75:17:Attribute -> Module:salt.defaults.exitcodes
+75:17:Attribute -> Module:salt.defaults
+75:17:Name -> Module:salt
+76:4:Call -> ERR
+76:4:Attribute -> Func:sys.exit
+76:4:Name -> Module:sys
+76:13:Attribute -> Const:int:0
+76:13:Attribute -> Module:salt.defaults.exitcodes
+76:13:Attribute -> Module:salt.defaults
+76:13:Name -> Module:salt
+81:7:Call -> U | Inst:signal.Handlers
+81:7:Attribute -> Func:_signal.getsignal | Func:signal.getsignal
+81:7:Name -> Module:signal
+81:24:Attribute -> Const:int:2
+81:24:Name -> Module:signal
+81:43:Attribute -> Const:int:0
+81:43:Name -> Module:signal
+81:59:Attribute -> Func:_signal.default_int_handler
+81:59:Name -> Module:signal
+83:8:Call -> U | Inst:signal.Handlers
+83:8:Attribute -> Func:_signal.signal | Func:signal.signal
+83:8:Name -> Module:signal
+83:22:Attribute -> Const:int:2
+83:22:Name -> Module:signal
+83:37:Call -> Partial:PartialFunction
+83:37:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+83:37:Name -> Module:functools
+83:55:Name -> Func:salt.scripts._handle_signals
+83:72:Name -> U
+85:7:Call -> U | Inst:signal.Handlers
+85:7:Attribute -> Func:_signal.getsignal | Func:signal.getsignal
+85:7:Name -> Module:signal
+85:24:Attribute -> Const:int:15
+85:24:Name -> Module:signal
+85:43:Attribute -> Const:int:0
+85:43:Name -> Module:signal
+87:8:Call -> U | Inst:signal.Handlers
+87:8:Attribute -> Func:_signal.signal | Func:signal.signal
+87:8:Name -> Module:signal
+87:22:Attribute -> Const:int:15
+87:22:Name -> Module:signal
+87:38:Call -> Partial:PartialFunction
+87:38:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+87:38:Name -> Module:functools
+87:56:Name -> Func:salt.scripts._handle_signals
+87:73:Name -> U
+110:11:Call -> ERR
+110:11:Attribute -> BM:builtins.str.startswith
+110:11:Attribute -> Const:str:'darwin'
+110:11:Name -> Module:sys
+114:7:Call -> Const:NoneType:None | U
+114:7:Attribute -> BM:multiprocessing.context.DefaultContext.get_start_method | U
+114:7:Name -> Module:multiprocessing
+115:8:Call -> Const:NoneType:None | U
+115:8:Attribute -> BM:multiprocessing.context.DefaultContext.set_start_method | BM:multiprocessing.context.BaseContext.set_start_method
+115:8:Name -> Module:multiprocessing
+122:4:Call -> Const:NoneType:None
+122:4:Name -> Func:salt.scripts._pin_multiprocessing_fork
+129:7:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+130:8:Attribute -> Dict:203
+130:8:Name -> Module:sys
+130:34:Attribute -> Dict:203
+130:34:Name -> Module:sys
+130:46:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+132:13:Call -> Inst:salt.cli.daemons.Master
+132:13:Attribute -> Class:salt.cli.daemons.Master
+132:13:Attribute -> Module:salt.cli.daemons
+132:13:Attribute -> Module:salt.cli
+132:13:Name -> Module:salt
+133:4:Call -> Const:NoneType:None
+133:4:Attribute -> BM:salt.cli.daemons.Master.start
+133:4:Name -> Inst:salt.cli.daemons.Master
+146:4:Attribute -> Func:salt._logging.impl.in_mainprocess
+146:4:Attribute -> Module:salt._logging
+146:4:Name -> Module:salt
+146:43:Call -> ERR
+146:43:Attribute -> Func:posix.getpid
+146:43:Name -> Module:os
+154:8:Call -> U
+154:8:Attribute -> U
+154:8:Attribute -> U
+154:8:Name -> U
+156:11:Call -> Inst:threading._RLock | Inst:_thread.RLock
+156:11:Attribute -> Func:threading.RLock
+156:11:Name -> Module:threading
+165:14:Call -> Const:int:1 | U
+165:14:Attribute -> BM:threading._RLock.acquire | BM:_thread.RLock.acquire
+165:14:Name -> Inst:threading._RLock | Inst:_thread.RLock
+166:12:Call -> Const:NoneType:None
+166:12:Attribute -> BM:threading._RLock.release | BM:_thread.RLock.release
+166:12:Name -> Inst:threading._RLock | Inst:_thread.RLock
+167:12:Call -> ERR
+167:12:Attribute -> Func:time.sleep
+167:12:Name -> Module:time
+170:19:Call -> ERR
+170:19:Attribute -> Func:posix.getuid
+170:19:Name -> Module:os
+170:44:Call -> U
+170:44:Attribute -> Func:salt.utils.platform.is_windows
+170:44:Attribute -> Module:salt.utils.platform
+170:44:Attribute -> Module:salt.utils
+170:44:Name -> Module:salt
+171:20:Call -> ERR
+171:20:Attribute -> Func:posix.kill
+171:20:Name -> Module:os
+171:28:Name -> U
+172:19:Name -> Class:builtins.OSError
+175:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+175:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+175:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+175:70:Name -> ExcInst:builtins.OSError
+176:16:Call -> U
+176:16:Attribute -> Func:posix._exit | U
+176:16:Name -> Module:os
+176:25:Attribute -> Const:int:1
+176:25:Attribute -> Module:salt.defaults.exitcodes
+176:25:Attribute -> Module:salt.defaults
+176:25:Name -> Module:salt
+179:15:Call -> U
+179:15:Attribute -> Func:salt.utils.platform.is_windows
+179:15:Attribute -> Module:salt.utils.platform
+179:15:Attribute -> Module:salt.utils
+179:15:Name -> Module:salt
+180:21:Call -> Inst:threading.Thread
+180:21:Attribute -> Class:threading.Thread
+180:21:Name -> Module:threading
+181:23:Name -> Func:salt.scripts.minion_process.suicide_when_without_parent
+181:58:Call -> ERR
+181:58:Attribute -> Func:posix.getppid
+181:58:Name -> Module:os
+183:12:Call -> Const:NoneType:None
+183:12:Attribute -> BM:threading.Thread.start
+183:12:Name -> Inst:threading.Thread
+185:17:Call -> Inst:salt.cli.daemons.Minion
+185:17:Attribute -> Class:salt.cli.daemons.Minion
+185:17:Attribute -> Module:salt.cli.daemons
+185:17:Attribute -> Module:salt.cli
+185:17:Name -> Module:salt
+186:8:Call -> U | Inst:signal.Handlers
+186:8:Attribute -> Func:_signal.signal | Func:signal.signal
+186:8:Name -> Module:signal
+186:22:Attribute -> Const:int:1
+186:22:Name -> Module:signal
+186:37:Call -> Partial:PartialFunction
+186:37:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+186:37:Name -> Module:functools
+186:55:Name -> Func:salt.scripts.minion_process.handle_hup
+186:67:Name -> Inst:salt.cli.daemons.Minion
+187:8:Call -> Const:NoneType:None
+187:8:Attribute -> BM:salt.cli.daemons.Minion.start
+187:8:Name -> Inst:salt.cli.daemons.Minion
+188:12:Name -> Class:salt.exceptions.SaltClientError
+188:29:Name -> Class:salt.exceptions.SaltReqTimeoutError
+188:50:Name -> Class:salt.exceptions.SaltSystemExit
+189:8:Call -> Const:int:1 | U
+189:8:Attribute -> BM:threading._RLock.acquire | BM:_thread.RLock.acquire
+189:8:Name -> Inst:threading._RLock | Inst:_thread.RLock
+190:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+190:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+190:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+193:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+193:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+193:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+195:11:Name -> ERR
+195:34:Call -> U
+195:34:Name -> Func:builtins.hasattr
+195:42:Name -> ERR
+196:20:Call -> ERR
+196:20:Attribute -> ERR
+196:20:Attribute -> ERR
+196:20:Name -> ERR
+197:16:Call -> U
+197:16:Name -> BM:random.Random.randint
+197:27:Name -> Const:int:60 | U
+198:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+198:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+198:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+198:52:Name -> U
+199:8:Call -> ERR
+199:8:Attribute -> Func:time.sleep
+199:8:Name -> Module:time
+199:19:Name -> U
+200:8:Call -> ERR
+200:8:Attribute -> Func:sys.exit
+200:8:Name -> Module:sys
+200:17:Attribute -> Const:int:99
+200:17:Attribute -> Module:salt.defaults.exitcodes
+200:17:Attribute -> Module:salt.defaults
+200:17:Name -> Module:salt
+202:8:Call -> Const:int:1 | U
+202:8:Attribute -> BM:threading._RLock.acquire | BM:_thread.RLock.acquire
+202:8:Name -> Inst:threading._RLock | Inst:_thread.RLock
+210:4:Call -> Const:NoneType:None
+210:4:Name -> Func:salt.scripts._pin_multiprocessing_fork
+218:4:Call -> Const:NoneType:None
+218:4:Attribute -> Func:salt.utils.debug.enable_sigusr1_handler
+218:4:Attribute -> Module:salt.utils.debug
+218:4:Attribute -> Module:salt.utils
+218:4:Name -> Module:salt
+220:4:Call -> Const:bool:True | Const:bool:True | Const:bool:False | U
+220:4:Attribute -> Func:salt.utils.process.notify_systemd
+220:4:Attribute -> Module:salt.utils.process
+220:4:Attribute -> Module:salt.utils
+220:4:Name -> Module:salt
+229:7:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+230:8:Attribute -> Dict:203
+230:8:Name -> Module:sys
+230:34:Attribute -> Dict:203
+230:34:Name -> Module:sys
+230:46:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+232:13:Attribute -> List:6 | List:6 | U
+232:13:Name -> Module:sys
+233:8:Call -> U
+233:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+233:8:Attribute -> List:6 | List:6 | U
+233:8:Name -> Module:sys
+235:7:Call -> U
+235:7:Attribute -> Func:salt.utils.platform.is_windows
+235:7:Attribute -> Module:salt.utils.platform
+235:7:Attribute -> Module:salt.utils
+235:7:Name -> Module:salt
+236:17:Call -> Inst:salt.cli.daemons.Minion
+236:17:Attribute -> Class:salt.cli.daemons.Minion
+236:17:Attribute -> Module:salt.cli.daemons
+236:17:Attribute -> Module:salt.cli
+236:17:Name -> Module:salt
+237:8:Call -> Const:NoneType:None
+237:8:Attribute -> BM:salt.cli.daemons.Minion.start
+237:8:Name -> Inst:salt.cli.daemons.Minion
+240:32:Attribute -> U
+240:32:Name -> Module:sys
+241:17:Call -> Inst:salt.cli.daemons.Minion
+241:17:Attribute -> Class:salt.cli.daemons.Minion
+241:17:Attribute -> Module:salt.cli.daemons
+241:17:Attribute -> Module:salt.cli
+241:17:Name -> Module:salt
+242:8:Call -> Const:NoneType:None
+242:8:Attribute -> BM:salt.cli.daemons.Minion.start
+242:8:Name -> Inst:salt.cli.daemons.Minion
+253:8:Call -> ERR
+253:8:Attribute -> Func:posix.kill
+253:8:Name -> Module:os
+253:16:Name -> U
+253:21:Name -> U
+256:26:Call -> U | Inst:signal.Handlers
+256:26:Attribute -> Func:_signal.getsignal | Func:signal.getsignal
+256:26:Name -> Module:signal
+256:43:Attribute -> Const:int:2
+256:43:Name -> Module:signal
+257:27:Call -> U | Inst:signal.Handlers
+257:27:Attribute -> Func:_signal.getsignal | Func:signal.getsignal
+257:27:Name -> Module:signal
+257:44:Attribute -> Const:int:15
+257:44:Name -> Module:signal
+260:22:Call -> Inst:multiprocessing.context.Process
+260:22:Attribute -> Class:multiprocessing.context.Process
+260:22:Name -> Module:multiprocessing
+261:23:Name -> Func:salt.scripts.minion_process
+263:12:Call -> Const:NoneType:None
+263:12:Attribute -> BM:multiprocessing.process.BaseProcess.start
+263:12:Name -> Inst:multiprocessing.context.Process
+264:12:Call -> U | Inst:signal.Handlers
+264:12:Attribute -> Func:_signal.signal | Func:signal.signal
+264:12:Name -> Module:signal
+265:16:Attribute -> Const:int:15
+265:16:Name -> Module:signal
+266:16:Call -> Partial:PartialFunction
+266:16:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+266:16:Name -> Module:functools
+266:34:Name -> Func:salt.scripts.salt_minion.escalate_signal_to_process
+266:62:Attribute -> U
+266:62:Name -> Inst:multiprocessing.context.Process
+268:12:Call -> U | Inst:signal.Handlers
+268:12:Attribute -> Func:_signal.signal | Func:signal.signal
+268:12:Name -> Module:signal
+269:16:Attribute -> Const:int:2
+269:16:Name -> Module:signal
+270:16:Call -> Partial:PartialFunction
+270:16:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+270:16:Name -> Module:functools
+270:34:Name -> Func:salt.scripts.salt_minion.escalate_signal_to_process
+270:62:Attribute -> U
+270:62:Name -> Inst:multiprocessing.context.Process
+272:12:Call -> U | Inst:signal.Handlers
+272:12:Attribute -> Func:_signal.signal | Func:signal.signal
+272:12:Name -> Module:signal
+273:16:Attribute -> Const:int:1
+273:16:Name -> Module:signal
+274:16:Call -> Partial:PartialFunction
+274:16:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+274:16:Name -> Module:functools
+274:34:Name -> Func:salt.scripts.salt_minion.escalate_signal_to_process
+274:62:Attribute -> U
+274:62:Name -> Inst:multiprocessing.context.Process
+276:15:Name -> Class:builtins.Exception
+278:21:Call -> Inst:salt.cli.daemons.Minion
+278:21:Attribute -> Class:salt.cli.daemons.Minion
+278:21:Attribute -> Module:salt.cli.daemons
+278:21:Attribute -> Module:salt.cli
+278:21:Name -> Module:salt
+279:12:Call -> Const:NoneType:None
+279:12:Attribute -> BM:salt.cli.daemons.Minion.start
+279:12:Name -> Inst:salt.cli.daemons.Minion
+282:8:Call -> Const:NoneType:None
+282:8:Attribute -> BM:multiprocessing.process.BaseProcess.join
+282:8:Name -> Inst:multiprocessing.context.Process
+286:8:Call -> U | Inst:signal.Handlers
+286:8:Attribute -> Func:_signal.signal | Func:signal.signal
+286:8:Name -> Module:signal
+286:22:Attribute -> Const:int:2
+286:22:Name -> Module:signal
+286:37:Name -> U | Inst:signal.Handlers
+287:8:Call -> U | Inst:signal.Handlers
+287:8:Attribute -> Func:_signal.signal | Func:signal.signal
+287:8:Name -> Module:signal
+287:22:Attribute -> Const:int:15
+287:22:Name -> Module:signal
+287:38:Name -> U | Inst:signal.Handlers
+289:15:Attribute -> Const:NoneType:None | U
+289:15:Name -> Inst:multiprocessing.context.Process
+289:35:Attribute -> Const:int:99
+289:35:Attribute -> Module:salt.defaults.exitcodes
+289:35:Attribute -> Module:salt.defaults
+289:35:Name -> Module:salt
+290:12:Call -> ERR
+290:12:Attribute -> Func:sys.exit
+290:12:Name -> Module:sys
+290:21:Attribute -> Const:NoneType:None | U
+290:21:Name -> Inst:multiprocessing.context.Process
+294:8:Call -> ERR
+294:8:Attribute -> Func:time.sleep
+294:8:Name -> Module:time
+294:23:Call -> U
+294:23:Name -> BM:random.Random.randint
+297:18:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+297:18:Attribute -> Func:logging.getLogger
+297:18:Name -> Module:logging
+298:23:Attribute -> List:1 | U | List:0
+298:23:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+299:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+299:12:Attribute -> BM:logging.Logger.removeHandler | U | BM:logging.Logger.removeHandler
+299:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+299:34:Name -> Inst:unittest._log._CapturingHandler
+300:8:Call -> Const:NoneType:None
+300:8:Attribute -> Func:logging.basicConfig
+300:8:Name -> Module:logging
+312:11:Call -> Inst:threading._RLock | Inst:_thread.RLock
+312:11:Attribute -> Func:threading.RLock
+312:11:Name -> Module:threading
+321:14:Call -> Const:int:1 | U
+321:14:Attribute -> BM:threading._RLock.acquire | BM:_thread.RLock.acquire
+321:14:Name -> Inst:threading._RLock | Inst:_thread.RLock
+322:12:Call -> Const:NoneType:None
+322:12:Attribute -> BM:threading._RLock.release | BM:_thread.RLock.release
+322:12:Name -> Inst:threading._RLock | Inst:_thread.RLock
+323:12:Call -> ERR
+323:12:Attribute -> Func:time.sleep
+323:12:Name -> Module:time
+326:16:Call -> ERR
+326:16:Attribute -> Func:posix.kill
+326:16:Name -> Module:os
+326:24:Name -> U
+327:19:Name -> Class:builtins.OSError
+330:16:Call -> U
+330:16:Attribute -> Func:posix._exit | U
+330:16:Name -> Module:os
+333:15:Call -> U
+333:15:Attribute -> Func:salt.utils.platform.is_windows
+333:15:Attribute -> Module:salt.utils.platform
+333:15:Attribute -> Module:salt.utils
+333:15:Name -> Module:salt
+334:21:Call -> Inst:threading.Thread
+334:21:Attribute -> Class:threading.Thread
+334:21:Name -> Module:threading
+335:23:Name -> Func:salt.scripts.proxy_minion_process.suicide_when_without_parent
+335:58:Call -> ERR
+335:58:Attribute -> Func:posix.getppid
+335:58:Name -> Module:os
+337:12:Call -> Const:NoneType:None
+337:12:Attribute -> BM:threading.Thread.start
+337:12:Name -> Inst:threading.Thread
+341:17:Attribute -> Const:int:0
+341:17:Attribute -> Module:salt.defaults.exitcodes
+341:17:Attribute -> Module:salt.defaults
+341:17:Name -> Module:salt
+342:22:Call -> Inst:salt.cli.daemons.ProxyMinion
+342:22:Attribute -> Class:salt.cli.daemons.ProxyMinion
+342:22:Attribute -> Module:salt.cli.daemons
+342:22:Attribute -> Module:salt.cli
+342:22:Name -> Module:salt
+343:8:Call -> Const:NoneType:None
+343:8:Attribute -> BM:salt.cli.daemons.ProxyMinion.start
+343:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+346:8:Name -> Class:builtins.Exception
+347:8:Name -> Class:salt.exceptions.SaltClientError
+348:8:Name -> Class:salt.exceptions.SaltReqTimeoutError
+349:8:Name -> Class:salt.exceptions.SaltSystemExit
+352:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+352:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+352:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+355:17:Attribute -> Const:int:99
+355:17:Attribute -> Module:salt.defaults.exitcodes
+355:17:Attribute -> Module:salt.defaults
+355:17:Name -> Module:salt
+356:11:Name -> Class:builtins.SystemExit
+358:17:Attribute -> Class:builtins.SystemExit.code
+358:17:Name -> ExcInst:builtins.SystemExit
+360:8:Call -> Const:int:1 | U
+360:8:Attribute -> BM:threading._RLock.acquire | BM:_thread.RLock.acquire
+360:8:Name -> Inst:threading._RLock | Inst:_thread.RLock
+362:7:Name -> Const:bool:False | Const:bool:True | Const:bool:False
+363:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+363:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+363:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+365:11:Name -> Inst:salt.cli.daemons.ProxyMinion
+366:15:Call -> Const:bool:True
+366:15:Name -> Func:builtins.hasattr
+366:23:Name -> Inst:salt.cli.daemons.ProxyMinion
+367:24:Call -> U | Const:int:60
+367:24:Attribute -> BM:builtins.dict.get | BM:salt.utils.optsdict.OptsDict.get | U
+367:24:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+367:24:Name -> Inst:salt.cli.daemons.ProxyMinion
+368:23:Call -> U
+368:23:Name -> BM:random.Random.randint
+368:34:Name -> Const:int:60 | U | Const:int:60
+369:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+369:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+369:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+369:63:Name -> U
+371:8:Call -> U
+371:8:Attribute -> U
+371:8:Name -> U
+371:18:Name -> U
+373:8:Call -> U
+373:8:Attribute -> U
+373:8:Name -> U
+374:4:Call -> ERR
+374:4:Attribute -> Func:sys.exit
+374:4:Name -> Module:sys
+374:13:Name -> Const:int:0 | Const:int:99 | Class:builtins.SystemExit.code
+381:4:Call -> Const:NoneType:None
+381:4:Name -> Func:salt.scripts._pin_multiprocessing_fork
+388:13:Attribute -> List:6 | List:6 | U
+388:13:Name -> Module:sys
+389:8:Call -> U
+389:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+389:8:Attribute -> List:6 | List:6 | U
+389:8:Name -> Module:sys
+391:7:Call -> U
+391:7:Attribute -> Func:salt.utils.platform.is_windows
+391:7:Attribute -> Module:salt.utils.platform
+391:7:Attribute -> Module:salt.utils
+391:7:Name -> Module:salt
+392:22:Call -> Inst:salt.cli.daemons.ProxyMinion
+392:22:Attribute -> Class:salt.cli.daemons.ProxyMinion
+392:22:Attribute -> Module:salt.cli.daemons
+392:22:Attribute -> Module:salt.cli
+392:22:Name -> Module:salt
+393:8:Call -> Const:NoneType:None
+393:8:Attribute -> BM:salt.cli.daemons.ProxyMinion.start
+393:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+396:32:Attribute -> U
+396:32:Name -> Module:sys
+397:22:Call -> Inst:salt.cli.daemons.ProxyMinion
+397:22:Attribute -> Class:salt.cli.daemons.ProxyMinion
+397:22:Attribute -> Module:salt.cli.daemons
+397:22:Attribute -> Module:salt.cli
+397:22:Name -> Module:salt
+398:8:Call -> Const:NoneType:None
+398:8:Attribute -> BM:salt.cli.daemons.ProxyMinion.start
+398:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+404:20:Call -> Inst:multiprocessing.queues.Queue
+404:20:Attribute -> BM:multiprocessing.context.BaseContext.Queue
+404:20:Name -> Module:multiprocessing
+405:15:Name -> Class:builtins.Exception
+407:26:Call -> Inst:salt.cli.daemons.ProxyMinion
+407:26:Attribute -> Class:salt.cli.daemons.ProxyMinion
+407:26:Attribute -> Module:salt.cli.daemons
+407:26:Attribute -> Module:salt.cli
+407:26:Name -> Module:salt
+408:12:Call -> Const:NoneType:None
+408:12:Attribute -> BM:salt.cli.daemons.ProxyMinion.start
+408:12:Name -> Inst:salt.cli.daemons.ProxyMinion
+410:18:Call -> Inst:multiprocessing.context.Process
+410:18:Attribute -> Class:multiprocessing.context.Process
+410:18:Name -> Module:multiprocessing
+411:19:Name -> Func:salt.scripts.proxy_minion_process
+411:47:Name -> Inst:multiprocessing.queues.Queue
+413:8:Call -> Const:NoneType:None
+413:8:Attribute -> BM:multiprocessing.process.BaseProcess.start
+413:8:Name -> Inst:multiprocessing.context.Process
+415:12:Call -> Const:NoneType:None
+415:12:Attribute -> BM:multiprocessing.process.BaseProcess.join
+415:12:Name -> Inst:multiprocessing.context.Process
+417:32:Call -> U
+417:32:Attribute -> BM:multiprocessing.queues.Queue.get
+417:32:Name -> Inst:multiprocessing.queues.Queue
+418:19:Name -> Class:builtins.Exception
+419:19:Attribute -> Const:NoneType:None | U
+419:19:Name -> Inst:multiprocessing.context.Process
+423:15:Name -> U | Const:int:60
+425:16:Call -> ERR
+425:16:Attribute -> Func:sys.exit
+425:16:Name -> Module:sys
+425:25:Attribute -> Const:NoneType:None | U
+425:25:Name -> Inst:multiprocessing.context.Process
+427:12:Call -> ERR
+427:12:Attribute -> Func:time.sleep
+427:12:Name -> Module:time
+427:23:Name -> U | Const:int:60
+428:15:Name -> Class:builtins.KeyboardInterrupt
+432:18:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+432:18:Attribute -> Func:logging.getLogger
+432:18:Name -> Module:logging
+433:23:Attribute -> List:1 | U | List:0
+433:23:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+434:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+434:12:Attribute -> BM:logging.Logger.removeHandler | U | BM:logging.Logger.removeHandler
+434:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+434:34:Name -> Inst:unittest._log._CapturingHandler
+435:8:Call -> Const:NoneType:None
+435:8:Attribute -> Func:logging.basicConfig
+435:8:Name -> Module:logging
+442:4:Call -> Const:NoneType:None
+442:4:Name -> Func:salt.scripts._pin_multiprocessing_fork
+446:4:Call -> Const:bool:True | Const:bool:True | Const:bool:False | U
+446:4:Attribute -> Func:salt.utils.process.notify_systemd
+446:4:Attribute -> Module:salt.utils.process
+446:4:Attribute -> Module:salt.utils
+446:4:Name -> Module:salt
+450:10:Call -> ERR
+450:10:Attribute -> Func:posix.getpid
+450:10:Name -> Module:os
+452:17:Call -> Inst:salt.cli.daemons.Syndic
+452:17:Attribute -> Class:salt.cli.daemons.Syndic
+452:17:Attribute -> Module:salt.cli.daemons
+452:17:Attribute -> Module:salt.cli
+452:17:Name -> Module:salt
+453:8:Call -> Const:NoneType:None
+453:8:Attribute -> BM:salt.cli.daemons.Syndic.start
+453:8:Name -> Inst:salt.cli.daemons.Syndic
+454:11:Name -> Class:builtins.KeyboardInterrupt
+455:8:Call -> ERR
+455:8:Attribute -> Func:posix.kill
+455:8:Name -> Module:os
+455:16:Name -> U
+465:17:Call -> Inst:salt.cli.key.SaltKey
+465:17:Attribute -> Class:salt.cli.key.SaltKey
+465:17:Attribute -> Module:salt.cli.key
+465:17:Attribute -> Module:salt.cli
+465:17:Name -> Module:salt
+466:8:Call -> Const:NoneType:None
+466:8:Name -> Func:salt.scripts._install_signal_handlers
+466:33:Name -> Inst:salt.cli.key.SaltKey
+467:8:Call -> Const:NoneType:None
+467:8:Attribute -> BM:salt.cli.key.SaltKey.run
+467:8:Name -> Inst:salt.cli.key.SaltKey
+468:11:Name -> Class:builtins.Exception
+469:8:Call -> U
+469:8:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+469:8:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+469:8:Name -> Module:sys
+469:35:Name -> ExcInst:builtins.Exception
+479:13:Call -> Inst:salt.cli.cp.SaltCPCli
+479:13:Attribute -> Class:salt.cli.cp.SaltCPCli
+479:13:Attribute -> Module:salt.cli.cp
+479:13:Attribute -> Module:salt.cli
+479:13:Name -> Module:salt
+480:4:Call -> Const:NoneType:None
+480:4:Name -> Func:salt.scripts._install_signal_handlers
+480:29:Name -> Inst:salt.cli.cp.SaltCPCli
+481:4:Call -> Const:NoneType:None
+481:4:Attribute -> BM:salt.cli.cp.SaltCPCli.run
+481:4:Name -> Inst:salt.cli.cp.SaltCPCli
+489:4:Call -> Const:NoneType:None
+489:4:Name -> Func:salt.scripts._pin_multiprocessing_fork
+493:13:Attribute -> List:6 | List:6 | U
+493:13:Name -> Module:sys
+494:8:Call -> U
+494:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+494:8:Attribute -> List:6 | List:6 | U
+494:8:Name -> Module:sys
+495:13:Call -> Inst:salt.cli.call.SaltCall
+495:13:Attribute -> Class:salt.cli.call.SaltCall
+495:13:Attribute -> Module:salt.cli.call
+495:13:Attribute -> Module:salt.cli
+495:13:Name -> Module:salt
+496:4:Call -> Const:NoneType:None
+496:4:Name -> Func:salt.scripts._install_signal_handlers
+496:29:Name -> Inst:salt.cli.call.SaltCall
+497:4:Call -> Const:NoneType:None
+497:4:Attribute -> BM:salt.cli.call.SaltCall.run
+497:4:Name -> Inst:salt.cli.call.SaltCall
+506:13:Attribute -> List:6 | List:6 | U
+506:13:Name -> Module:sys
+507:8:Call -> U
+507:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+507:8:Attribute -> List:6 | List:6 | U
+507:8:Name -> Module:sys
+508:13:Call -> Inst:salt.cli.run.SaltRun
+508:13:Attribute -> Class:salt.cli.run.SaltRun
+508:13:Attribute -> Module:salt.cli.run
+508:13:Attribute -> Module:salt.cli
+508:13:Name -> Module:salt
+509:4:Call -> Const:NoneType:None
+509:4:Name -> Func:salt.scripts._install_signal_handlers
+509:29:Name -> Inst:salt.cli.run.SaltRun
+510:4:Call -> Const:NoneType:None
+510:4:Attribute -> BM:salt.cli.run.SaltRun.run
+510:4:Name -> Inst:salt.cli.run.SaltRun
+519:13:Attribute -> List:6 | List:6 | U
+519:13:Name -> Module:sys
+520:8:Call -> U
+520:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+520:8:Attribute -> List:6 | List:6 | U
+520:8:Name -> Module:sys
+522:17:Call -> Inst:salt.cli.ssh.SaltSSH
+522:17:Attribute -> Class:salt.cli.ssh.SaltSSH
+522:17:Attribute -> Module:salt.cli.ssh
+522:17:Attribute -> Module:salt.cli
+522:17:Name -> Module:salt
+523:8:Call -> Const:NoneType:None
+523:8:Name -> Func:salt.scripts._install_signal_handlers
+523:33:Name -> Inst:salt.cli.ssh.SaltSSH
+524:8:Call -> Const:NoneType:None
+524:8:Attribute -> BM:salt.cli.ssh.SaltSSH.run
+524:8:Name -> Inst:salt.cli.ssh.SaltSSH
+525:11:Name -> Class:salt.exceptions.SaltClientError
+526:8:Call -> ERR
+526:8:Name -> Func:builtins.print
+526:14:Call -> Const:str:''
+526:14:Name -> Class:builtins.str
+526:18:Name -> ExcInst:salt.exceptions.SaltClientError
+526:29:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+526:29:Name -> Module:sys
+528:15:Attribute -> ERR
+528:15:Attribute -> ERR
+528:15:Name -> ERR
+529:24:Call -> Const:str:''
+529:24:Attribute -> Func:traceback.format_exc
+529:24:Name -> Module:traceback
+530:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+530:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+530:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+530:26:Name -> Const:str:''
+531:16:Name -> Class:builtins.AttributeError
+531:32:Name -> Class:builtins.KeyError
+533:8:Call -> ERR
+533:8:Attribute -> Func:sys.exit
+533:8:Name -> Module:sys
+533:17:Attribute -> Const:int:1
+533:17:Attribute -> Module:salt.defaults.exitcodes
+533:17:Attribute -> Module:salt.defaults
+533:17:Name -> Module:salt
+544:11:Name -> Class:builtins.ImportError
+548:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+548:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+548:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+548:52:Name -> ExcInst:builtins.ImportError
+549:8:Call -> ERR
+549:8:Name -> Func:builtins.print
+550:8:Call -> ERR
+550:8:Attribute -> Func:sys.exit
+550:8:Name -> Module:sys
+550:17:Attribute -> Const:int:69
+550:17:Attribute -> Module:salt.defaults.exitcodes
+550:17:Attribute -> Module:salt.defaults
+550:17:Name -> Module:salt
+551:13:Attribute -> List:6 | List:6 | U
+551:13:Name -> Module:sys
+552:8:Call -> U
+552:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+552:8:Attribute -> List:6 | List:6 | U
+552:8:Name -> Module:sys
+554:13:Call -> Inst:salt.cloud.cli.SaltCloud
+554:13:Attribute -> Class:salt.cloud.cli.SaltCloud
+554:13:Attribute -> Module:salt.cloud.cli
+554:13:Attribute -> Module:salt.cloud
+554:13:Name -> Module:salt
+555:4:Call -> Const:NoneType:None
+555:4:Name -> Func:salt.scripts._install_signal_handlers
+555:29:Name -> Inst:salt.cloud.cli.SaltCloud
+556:4:Call -> Const:NoneType:None
+556:4:Attribute -> BM:salt.cloud.cli.SaltCloud.run
+556:4:Name -> Inst:salt.cloud.cli.SaltCloud
+563:4:Call -> Const:NoneType:None
+563:4:Name -> Func:salt.scripts._pin_multiprocessing_fork
+567:4:Call -> Const:bool:True | Const:bool:True | Const:bool:False | U
+567:4:Attribute -> Func:salt.utils.process.notify_systemd
+567:4:Attribute -> Module:salt.utils.process
+567:4:Attribute -> Module:salt.utils
+567:4:Name -> Module:salt
+571:11:Call -> Inst:salt.cli.api.SaltAPI
+571:11:Attribute -> Class:salt.cli.api.SaltAPI
+571:11:Attribute -> Module:salt.cli.api
+571:11:Attribute -> Module:salt.cli
+571:11:Name -> Module:salt
+572:4:Call -> Const:NoneType:None
+572:4:Attribute -> BM:salt.cli.api.SaltAPI.start
+572:4:Name -> Inst:salt.cli.api.SaltAPI
+582:13:Attribute -> List:6 | List:6 | U
+582:13:Name -> Module:sys
+583:8:Call -> U
+583:8:Attribute -> BM:builtins.list.remove | BM:builtins.list.remove | U
+583:8:Attribute -> List:6 | List:6 | U
+583:8:Name -> Module:sys
+584:13:Call -> Inst:salt.cli.salt.SaltCMD
+584:13:Attribute -> Class:salt.cli.salt.SaltCMD
+584:13:Attribute -> Module:salt.cli.salt
+584:13:Attribute -> Module:salt.cli
+584:13:Name -> Module:salt
+585:4:Call -> Const:NoneType:None
+585:4:Name -> Func:salt.scripts._install_signal_handlers
+585:29:Name -> Inst:salt.cli.salt.SaltCMD
+586:4:Call -> Const:NoneType:None
+586:4:Attribute -> BM:salt.cli.salt.SaltCMD.run
+586:4:Name -> Inst:salt.cli.salt.SaltCMD
+597:10:Call -> Inst:salt.cli.spm.SPM
+597:10:Attribute -> Class:salt.cli.spm.SPM
+597:10:Attribute -> Module:salt.cli.spm
+597:10:Attribute -> Module:salt.cli
+597:10:Name -> Module:salt
+598:4:Call -> Const:NoneType:None
+598:4:Attribute -> BM:salt.cli.spm.SPM.run
+598:4:Name -> Inst:salt.cli.spm.SPM
+609:4:Call -> Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | U
+609:4:Attribute -> Func:salt.utils.extend.run
+609:4:Attribute -> Module:salt.utils.extend
+609:4:Attribute -> Module:salt.utils
+609:4:Name -> Module:salt
+610:18:Name -> U
+611:13:Name -> U
+612:20:Name -> U
+613:17:Name -> U
+614:14:Name -> U
+623:15:Call -> ERR
+623:15:Name -> Func:builtins.dir
+623:19:Attribute -> Dict:203
+623:19:Name -> Module:sys
+623:31:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+624:11:Call -> U
+624:11:Attribute -> U
+624:11:Name -> U
+625:12:Call -> ERR
+625:12:Attribute -> BM:builtins.list.append
+625:12:Name -> List:0
+625:25:Name -> U
+626:7:Call -> ERR
+626:7:Name -> Func:builtins.len
+626:11:Attribute -> U
+626:11:Name -> Module:sys
+628:19:Name -> List:0
+629:24:Name -> U
+630:8:Call -> ERR
+630:8:Name -> Func:builtins.print
+630:14:Name -> Const:str:'Must pass in a salt command, available  | Const:str:'Must pass in a salt command, available 
+631:8:Call -> ERR
+631:8:Attribute -> Func:sys.exit
+631:8:Name -> Module:sys
+632:10:Attribute -> U
+632:10:Name -> Module:sys
+633:7:Name -> U
+633:18:Name -> List:0
+635:8:Attribute -> U
+635:8:Name -> Module:sys
+636:16:Name -> Func:salt.scripts.salt_main
+638:8:Attribute -> U
+638:8:Name -> Module:sys
+638:30:Name -> U
+639:8:Call -> U
+639:8:Attribute -> U
+639:8:Attribute -> U
+639:8:Name -> Module:sys
+640:16:Call -> ERR
+640:16:Name -> Func:builtins.getattr
+640:24:Attribute -> Dict:203
+640:24:Name -> Module:sys
+640:36:Name -> Const:str:'salt.scripts' | Const:str:'__main__'
+640:55:Name -> U
+641:4:Call -> Const:NoneType:None | U
+641:4:Name -> Func:salt.scripts.salt_main | U
+645:15:Name -> U
+647:15:Name -> U
+648:25:Name -> U
+650:20:Name -> U
+650:33:Name -> Const:bool:False | Const:bool:True
+651:8:Call -> U
+651:8:Attribute -> U
+651:8:Name -> U
+651:36:Name -> U
+652:11:Name -> U
+656:14:Call -> U
+656:14:Attribute -> U
+656:14:Name -> U
+657:23:Name -> U
+658:8:Name -> U
+658:35:Name -> U
+658:43:Attribute -> Const:str:':'
+658:43:Name -> Module:os
+658:55:Name -> U
+660:8:Name -> U
+660:32:Name -> U
+661:11:Name -> U
+666:9:Call -> Inst:contextlib.suppress
+666:9:Attribute -> Class:contextlib.suppress
+666:9:Name -> Module:contextlib
+666:29:Name -> Class:builtins.AttributeError
+667:15:Attribute -> ERR
+667:15:Name -> Module:sys
+679:18:Call -> U | Const:NoneType:None
+679:18:Name -> Func:salt.scripts._get_onedir_env_path
+680:7:Name -> U | Const:NoneType:None
+681:8:Call -> ERR
+681:8:Name -> Func:builtins.print
+684:17:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+684:17:Name -> Module:sys
+687:8:Call -> ERR
+687:8:Attribute -> Func:sys.exit
+687:8:Name -> Module:sys
+687:17:Attribute -> Const:int:1
+687:17:Attribute -> Module:salt.defaults.exitcodes
+687:17:Attribute -> Module:salt.defaults
+687:17:Name -> Module:salt
+689:17:Call -> Const:str:''
+689:17:Name -> Class:builtins.str
+689:21:Name -> U
+689:35:Call -> U
+689:35:Attribute -> BM:builtins.str.format
+689:58:Attribute -> U
+689:58:Name -> Module:sys
+692:7:Name -> Const:NoneType:None | U
+693:22:Call -> U
+693:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+693:22:Attribute -> Module:posixpath | Module:ntpath
+693:22:Name -> Module:os
+693:35:Name -> U
+694:9:Call -> U | Const:NoneType:None
+694:9:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+694:9:Attribute -> Dict:43 | Inst:os._Environ
+694:9:Name -> Module:os
+695:26:Call -> U | Const:NoneType:None
+695:26:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+695:26:Attribute -> Dict:43 | Inst:os._Environ
+695:26:Name -> Module:os
+696:22:Call -> U
+696:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+696:22:Attribute -> Module:posixpath | Module:ntpath
+696:22:Name -> Module:os
+696:35:Name -> U | Const:NoneType:None
+697:9:Call -> U | Const:NoneType:None
+697:9:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+697:9:Attribute -> Dict:43 | Inst:os._Environ
+697:9:Name -> Module:os
+698:22:Call -> U | Const:NoneType:None
+698:22:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+698:22:Attribute -> Dict:43 | Inst:os._Environ
+698:22:Name -> Module:os
+700:22:Attribute -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:311
+700:22:Attribute -> Module:salt.config
+700:22:Name -> Module:salt
+701:11:Call -> Inst:salt.utils.optsdict.OptsDict
+701:11:Attribute -> Func:salt.config.minion_config
+701:11:Attribute -> Module:salt.config
+701:11:Name -> Module:salt
+701:37:Name -> U | Const:NoneType:None | Inst:salt.utils.immutabletypes.ImmutableDict
+703:11:Call -> U | Const:NoneType:None
+703:11:Attribute -> BM:salt.utils.optsdict.OptsDict.get
+703:11:Name -> Inst:salt.utils.optsdict.OptsDict
+704:19:Call -> U
+704:19:Attribute -> Func:salt.utils.user.get_user
+704:19:Attribute -> Module:salt.utils.user
+704:19:Attribute -> Module:salt.utils
+704:19:Name -> Module:salt
+707:7:Name -> U | Const:NoneType:None
+707:16:Name -> U | Const:NoneType:None
+707:35:Name -> U | Const:NoneType:None
+707:43:Name -> U
+708:8:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+708:8:Attribute -> Func:salt.utils.verify.check_user
+708:8:Attribute -> Module:salt.utils.verify
+708:8:Attribute -> Module:salt.utils
+708:8:Name -> Module:salt
+708:37:Name -> U | Const:NoneType:None
+710:10:Call -> U
+710:10:Name -> Func:salt.scripts._pip_environment
+710:27:Call -> Inst:builtins.dict
+710:27:Attribute -> BM:builtins.dict.copy | BM:os._Environ.copy
+710:27:Attribute -> Dict:43 | Inst:os._Environ
+710:27:Name -> Module:os
+710:46:Name -> Const:str:''
+711:11:Call -> U
+711:11:Name -> Func:salt.scripts._pip_args
+711:21:Attribute -> U
+711:21:Name -> Module:sys
+711:35:Name -> Const:str:''
+713:8:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+713:8:Name -> Module:sys
+716:8:Call -> U
+716:8:Name -> Func:salt.scripts._pip_args
+716:18:Attribute -> U
+716:18:Name -> Module:sys
+716:32:Name -> Const:str:''
+717:10:Call -> Inst:subprocess.CompletedProcess
+717:10:Attribute -> Func:subprocess.run
+717:10:Name -> Module:subprocess
+717:25:Name -> U
+717:64:Name -> U
+718:4:Call -> ERR
+718:4:Attribute -> Func:sys.exit
+718:4:Name -> Module:sys
+718:13:Attribute -> U
+718:13:Name -> Inst:subprocess.CompletedProcess

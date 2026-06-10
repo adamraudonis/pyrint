@@ -1,0 +1,390 @@
+22:7:Name -> Class:builtins.ImportError
+26:4:Attribute -> U
+26:4:Attribute -> U
+26:4:Name -> U
+27:4:Attribute -> U
+27:4:Attribute -> U
+27:4:Name -> U
+28:4:Call -> U
+28:4:Attribute -> U
+28:4:Attribute -> U
+28:4:Name -> U
+28:23:Name -> Const:bool:True | Const:bool:False
+32:1:Attribute -> U
+32:1:Name -> U
+34:9:Call -> U
+34:9:Attribute -> U
+34:9:Attribute -> U
+34:9:Name -> U
+35:14:Name -> U
+38:1:Attribute -> U
+38:1:Name -> U
+40:9:Call -> U
+40:9:Attribute -> U
+40:9:Attribute -> U
+40:9:Name -> U
+41:19:Call -> U
+41:19:Name -> BM:random.Random.randint
+42:8:Call -> U
+42:8:Attribute -> Func:salt.modules.win_useradd.rename
+42:8:Name -> Module:salt.modules.win_useradd
+42:27:Attribute -> U
+42:27:Name -> U
+42:45:Name -> U
+43:8:Name -> U
+43:27:Name -> U
+44:14:Name -> U
+47:1:Attribute -> U
+47:1:Name -> U
+54:11:Call -> U
+54:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+54:11:Attribute -> Module:posixpath | Module:ntpath
+54:11:Name -> Module:os
+54:24:Call -> U | Const:str:'C:\\Windows'
+54:24:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+54:24:Attribute -> Dict:43 | Inst:os._Environ
+54:24:Name -> Module:os
+55:11:Call -> U
+55:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+55:11:Attribute -> Module:posixpath | Module:ntpath
+55:11:Name -> Module:os
+55:24:Name -> U
+55:47:Attribute -> Const:str:'00000000000000000000000000000000'
+55:47:Call -> Inst:uuid.UUID
+55:47:Attribute -> Func:uuid.uuid4
+55:47:Name -> Module:uuid
+56:4:Call -> ERR
+56:4:Attribute -> Func:posix.mkdir
+56:4:Name -> Module:os
+56:13:Name -> U
+57:14:Call -> U | Const:str:'.'
+57:14:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+57:14:Attribute -> Dict:43 | Inst:os._Environ
+57:14:Name -> Module:os
+58:17:Name -> U | Const:str:'.'
+58:28:Attribute -> U
+58:28:Name -> U
+59:11:Call -> Inst:subprocess.CompletedProcess
+59:11:Attribute -> Func:subprocess.run
+59:11:Name -> Module:subprocess
+60:19:Name -> U
+60:38:Name -> Const:str:'Uninferable\\Uninferable' | Const:str:'.\\Uninferable'
+65:7:Attribute -> U
+65:7:Name -> Inst:subprocess.CompletedProcess
+67:12:Call -> ERR
+67:12:Attribute -> Func:posix.rmdir
+67:12:Name -> Module:os
+67:21:Name -> U
+68:15:Name -> Class:builtins.OSError
+70:8:Call -> U
+70:8:Attribute -> U
+70:8:Name -> U
+71:38:Name -> Const:str:'Uninferable\\Uninferable' | Const:str:'.\\Uninferable'
+71:51:Name -> U
+71:59:Attribute -> Const:NoneType:None | U
+71:59:Name -> Inst:subprocess.CompletedProcess
+71:73:Attribute -> Const:NoneType:None | U
+71:73:Name -> Inst:subprocess.CompletedProcess
+74:14:Name -> U
+76:8:Call -> Const:NoneType:None | Const:NoneType:None
+76:8:Attribute -> Func:shutil.rmtree
+76:8:Name -> Module:shutil
+76:22:Name -> U
+79:1:Call -> U
+79:1:Attribute -> U
+79:1:Attribute -> U
+79:1:Name -> U
+88:7:Name -> U
+89:19:Attribute -> U
+89:19:Name -> U
+90:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+90:13:Attribute -> Func:salt.utils.win_runas.runas
+90:13:Name -> Module:salt.utils.win_runas
+91:12:Call -> Const:str:'cmd /c ' | Const:str:'cmd /c Uninferable' | U
+91:12:Attribute -> Func:salt.platform.win.prepend_cmd
+91:12:Attribute -> Module:salt.platform.win
+91:12:Attribute -> Module:salt.platform
+91:12:Name -> Module:salt
+91:49:Name -> U
+92:17:Attribute -> U
+92:17:Name -> U
+93:17:Attribute -> U
+93:17:Name -> U
+95:11:Name -> U
+95:23:Call -> ERR
+95:23:Attribute -> ERR
+95:23:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+98:1:Call -> U
+98:1:Attribute -> U
+98:1:Attribute -> U
+98:1:Name -> U
+107:7:Name -> U
+108:19:Attribute -> U
+108:19:Name -> U
+109:13:Call -> Dict:0 | Dict:1
+109:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+109:13:Name -> Module:salt.utils.win_runas
+110:12:Call -> Const:str:'cmd /c ' | Const:str:'cmd /c Uninferable' | U
+110:12:Attribute -> Func:salt.platform.win.prepend_cmd
+110:12:Attribute -> Module:salt.platform.win
+110:12:Attribute -> Module:salt.platform
+110:12:Name -> Module:salt
+110:49:Name -> U
+111:17:Attribute -> U
+111:17:Name -> U
+112:17:Attribute -> U
+112:17:Name -> U
+114:11:Name -> U
+114:23:Call -> ERR
+114:23:Attribute -> ERR
+114:23:Name -> Dict:0 | Dict:1
+120:4:Call -> U
+120:4:Attribute -> BM:pathlib.Path.write_text
+120:4:Call -> Inst:pathlib.Path
+120:4:Name -> Class:pathlib.Path
+120:9:Name -> U
+120:31:Call -> Const:str:''
+120:31:Attribute -> BM:builtins.bytes.decode
+120:31:Name -> Const:bytes:b'salt_runas_cd_dir_marker.txt'
+121:22:Name -> U
+122:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+122:13:Attribute -> Func:salt.utils.win_runas.runas
+122:13:Name -> Module:salt.utils.win_runas
+123:12:Call -> Const:str:'cmd /c ' | Const:str:'cmd /c ' | Const:str:'cmd /c Uninferable' | U
+123:12:Attribute -> Func:salt.platform.win.prepend_cmd
+123:12:Attribute -> Module:salt.platform.win
+123:12:Attribute -> Module:salt.platform
+123:12:Name -> Module:salt
+123:49:Name -> Const:str:'cd /d "Uninferable" & dir /b'
+124:17:Attribute -> U
+124:17:Name -> U
+125:17:Attribute -> U
+125:17:Name -> U
+127:11:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+127:35:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+128:13:Call -> U
+128:13:Attribute -> U
+128:13:Name -> U
+128:38:Call -> ERR
+128:38:Attribute -> ERR
+128:38:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+128:71:Call -> U
+128:71:Attribute -> U
+128:71:Name -> U
+129:11:Name -> Const:bytes:b'salt_runas_cd_dir_marker.txt'
+129:21:Name -> U
+129:29:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+129:47:Name -> U
+134:4:Call -> U
+134:4:Attribute -> BM:pathlib.Path.write_text
+134:4:Call -> Inst:pathlib.Path
+134:4:Name -> Class:pathlib.Path
+134:9:Name -> U
+134:31:Call -> Const:str:''
+134:31:Attribute -> BM:builtins.bytes.decode
+134:31:Name -> Const:bytes:b'salt_runas_cd_dir_marker_unpriv.txt'
+135:22:Name -> U
+136:13:Call -> Dict:0 | Dict:1
+136:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+136:13:Name -> Module:salt.utils.win_runas
+137:12:Call -> Const:str:'cmd /c ' | Const:str:'cmd /c ' | Const:str:'cmd /c Uninferable' | U
+137:12:Attribute -> Func:salt.platform.win.prepend_cmd
+137:12:Attribute -> Module:salt.platform.win
+137:12:Attribute -> Module:salt.platform
+137:12:Name -> Module:salt
+137:49:Name -> Const:str:'cd /d "Uninferable" & dir /b'
+138:17:Attribute -> U
+138:17:Name -> U
+139:17:Attribute -> U
+139:17:Name -> U
+141:11:Name -> Dict:0 | Dict:1
+141:35:Name -> Dict:0 | Dict:1
+142:13:Call -> U
+142:13:Attribute -> U
+142:13:Name -> U
+142:38:Call -> ERR
+142:38:Attribute -> ERR
+142:38:Name -> Dict:0 | Dict:1
+142:71:Call -> U
+142:71:Attribute -> U
+142:71:Name -> U
+143:11:Name -> Const:bytes:b'salt_runas_cd_dir_marker_unpriv.txt'
+143:21:Name -> U
+143:29:Name -> Dict:0 | Dict:1
+143:47:Name -> U
+147:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+147:13:Attribute -> Func:salt.utils.win_runas.runas
+147:13:Name -> Module:salt.utils.win_runas
+148:31:Attribute -> U
+148:31:Name -> U
+148:55:Attribute -> U
+148:55:Name -> U
+150:11:Attribute -> U
+150:11:Name -> U
+150:28:Call -> ERR
+150:28:Attribute -> ERR
+150:28:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+154:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+154:13:Attribute -> Func:salt.utils.win_runas.runas
+154:13:Name -> Module:salt.utils.win_runas
+155:31:Call -> Inst:builtins.int
+155:31:Name -> Class:builtins.int
+155:35:Attribute -> U
+155:35:Name -> U
+155:64:Attribute -> U
+155:64:Name -> U
+157:11:Call -> Const:str:''
+157:11:Name -> Class:builtins.str
+157:15:Attribute -> U
+157:15:Name -> U
+157:37:Call -> ERR
+157:37:Attribute -> ERR
+157:37:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+161:13:Call -> Dict:0 | Dict:1
+161:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+161:13:Name -> Module:salt.utils.win_runas
+162:31:Attribute -> U
+162:31:Name -> U
+162:55:Attribute -> U
+162:55:Name -> U
+164:11:Attribute -> U
+164:11:Name -> U
+164:28:Call -> ERR
+164:28:Attribute -> ERR
+164:28:Name -> Dict:0 | Dict:1
+168:13:Call -> Dict:0 | Dict:1
+168:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+168:13:Name -> Module:salt.utils.win_runas
+169:31:Call -> Inst:builtins.int
+169:31:Name -> Class:builtins.int
+169:35:Attribute -> U
+169:35:Name -> U
+169:64:Attribute -> U
+169:64:Name -> U
+171:11:Call -> Const:str:''
+171:11:Name -> Class:builtins.str
+171:15:Attribute -> U
+171:15:Name -> U
+171:37:Call -> ERR
+171:37:Attribute -> ERR
+171:37:Name -> Dict:0 | Dict:1
+176:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+176:13:Attribute -> Func:salt.utils.win_runas.runas
+176:13:Name -> Module:salt.utils.win_runas
+177:23:Name -> Const:str:'invalidcommand'
+178:17:Attribute -> U
+178:17:Name -> U
+179:17:Attribute -> U
+179:17:Name -> U
+182:11:Call -> ERR
+182:11:Name -> Func:builtins.isinstance
+182:22:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+182:37:Name -> Class:builtins.int
+183:11:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+184:11:Name -> Const:str:'invalidcommand'
+184:23:Call -> ERR
+184:23:Attribute -> ERR
+184:23:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+185:11:Call -> ERR
+185:11:Attribute -> ERR
+185:11:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+190:13:Call -> Dict:0 | Dict:1
+190:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+190:13:Name -> Module:salt.utils.win_runas
+191:23:Name -> Const:str:'invalidcommand'
+192:17:Attribute -> U
+192:17:Name -> U
+193:17:Attribute -> U
+193:17:Name -> U
+196:11:Call -> ERR
+196:11:Name -> Func:builtins.isinstance
+196:22:Name -> Dict:0 | Dict:1
+196:37:Name -> Class:builtins.int
+197:11:Name -> Dict:0 | Dict:1
+198:11:Name -> Const:str:'invalidcommand'
+198:23:Call -> ERR
+198:23:Attribute -> ERR
+198:23:Name -> Dict:0 | Dict:1
+199:11:Call -> ERR
+199:11:Attribute -> ERR
+199:11:Name -> Dict:0 | Dict:1
+204:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+204:13:Attribute -> Func:salt.utils.win_runas.runas
+204:13:Name -> Module:salt.utils.win_runas
+206:17:Attribute -> U
+206:17:Name -> U
+207:17:Attribute -> U
+207:17:Name -> U
+208:20:Name -> Const:str:'foo'
+210:11:Call -> ERR
+210:11:Attribute -> ERR
+210:11:Call -> ERR
+210:11:Attribute -> ERR
+210:11:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+210:48:Name -> Const:str:'foo'
+215:13:Call -> Dict:0 | Dict:1
+215:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+215:13:Name -> Module:salt.utils.win_runas
+217:17:Attribute -> U
+217:17:Name -> U
+218:17:Attribute -> U
+218:17:Name -> U
+219:20:Name -> Const:str:'foo'
+221:11:Call -> ERR
+221:11:Attribute -> ERR
+221:11:Call -> ERR
+221:11:Attribute -> ERR
+221:11:Name -> Dict:0 | Dict:1
+221:48:Name -> Const:str:'foo'
+226:9:Call -> U
+226:9:Attribute -> U
+226:9:Name -> U
+226:23:Name -> Class:salt.exceptions.TimedProcTimeoutError
+227:17:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+227:17:Attribute -> Func:salt.utils.win_runas.runas
+227:17:Name -> Module:salt.utils.win_runas
+229:21:Attribute -> U
+229:21:Name -> U
+230:21:Attribute -> U
+230:21:Name -> U
+231:20:Name -> Const:int:1
+237:9:Call -> U
+237:9:Attribute -> U
+237:9:Name -> U
+237:23:Name -> Class:salt.exceptions.TimedProcTimeoutError
+238:17:Call -> Dict:0 | Dict:1
+238:17:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+238:17:Name -> Module:salt.utils.win_runas
+240:21:Attribute -> U
+240:21:Name -> U
+241:21:Attribute -> U
+241:21:Name -> U
+242:20:Name -> Const:int:1
+247:13:Call -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+247:13:Attribute -> Func:salt.utils.win_runas.runas
+247:13:Name -> Module:salt.utils.win_runas
+249:17:Attribute -> U
+249:17:Name -> U
+250:17:Attribute -> U
+250:17:Name -> U
+253:11:Call -> ERR
+253:11:Name -> Func:builtins.isinstance
+253:22:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+253:37:Name -> Class:builtins.int
+254:28:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+255:27:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+256:27:Name -> Dict:0 | Dict:1 | Dict:0 | Dict:1
+260:13:Call -> Dict:0 | Dict:1
+260:13:Attribute -> Func:salt.utils.win_runas.runas_unpriv
+260:13:Name -> Module:salt.utils.win_runas
+262:17:Attribute -> U
+262:17:Name -> U
+263:17:Attribute -> U
+263:17:Name -> U
+266:11:Call -> ERR
+266:11:Name -> Func:builtins.isinstance
+266:22:Name -> Dict:0 | Dict:1
+266:37:Name -> Class:builtins.int
+267:28:Name -> Dict:0 | Dict:1
+268:27:Name -> Dict:0 | Dict:1
+269:27:Name -> Dict:0 | Dict:1

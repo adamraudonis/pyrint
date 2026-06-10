@@ -1,0 +1,1324 @@
+//! Engine + ModuleGraph: astroid manager/modutils/spec port.
+//!
+//! - sys.path resolution: astroid/interpreter/_import/spec.py find_spec
+//!   (ImportlibFinder + PathSpecFinder namespace scan; Zip/ExplicitNamespace
+//!   finders are dead in the pinned environment and not ported).
+//! - manager.ast_from_module_name / ast_from_file (manager.py:131-276),
+//!   astroid_cache with setdefault semantics (manager.py:420-422 —
+//!   first-built module wins; probe-verified).
+//! - builder._post_build (builder.py:159-178): cache BEFORE delayed
+//!   star-import locals expansion + delayed_assattr (which uses inference).
+
+use std::cell::{Cell, RefCell};
+use std::path::{Path, PathBuf};
+use std::rc::Rc;
+
+use indexmap::IndexMap;
+use rustc_hash::{FxHashMap, FxHashSet};
+
+use pyast::tree::{ModuleData, Node, NodeKind, Tree};
+use pyast::NodeId;
+
+use crate::intern::GlobalInterner;
+use crate::pyenv::{self, PyEnv};
+use crate::snapshot::{load_snapshot, EInf};
+use crate::value::{ErrKind, GNode, GSym, ModId, Value, ValueKey};
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum FType {
+    Function,
+    Method,
+    ClassMethod,
+    StaticMethod,
+}
+
+pub struct Module {
+    pub id: ModId,
+    pub name: String,
+    /// absolute source path; "<?>" for string-built, "<snapshot>" for C-ext
+    pub file: String,
+    pub tree: Tree,
+    /// tree sym index -> global sym
+    pub gsym: Vec<GSym>,
+    pub package: bool,
+    pub pure_python: bool,
+    /// scope node -> ordered locals (engine-side mutable copy; astroid
+    /// mutates locals during delayed passes and cross-module assattr)
+    pub locals: RefCell<FxHashMap<NodeId, IndexMap<GSym, Vec<GNode>>>>,
+    /// snapshot FunctionDef.type overrides
+    pub ftype: FxHashMap<NodeId, FType>,
+    pub einf: FxHashMap<NodeId, Vec<EInf>>,
+    /// raw-built Arguments with args=None (unknown signature)
+    pub args_unknown: FxHashMap<NodeId, bool>,
+    /// snapshot qname overrides (raw-built node reparenting)
+    pub qnames: FxHashMap<NodeId, String>,
+}
+
+impl Module {
+    pub fn module_node(&self) -> GNode {
+        GNode {
+            m: self.id,
+            n: NodeId::MODULE,
+        }
+    }
+}
+
+#[derive(Debug, Clone)]
+pub enum BuildFail {
+    /// AstroidImportError (+ message text for imports checker later)
+    Import(String),
+    /// AstroidSyntaxError
+    Syntax(String),
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum SpecType {
+    CBuiltin,
+    CExtension,
+    PySource,
+    PyCompiled,
+    PkgDirectory,
+    PyNamespace,
+    PyFrozen,
+}
+
+#[derive(Debug, Clone)]
+pub struct Spec {
+    pub type_: SpecType,
+    pub location: Option<String>,
+    pub submodule_search_locations: Option<Vec<String>>,
+}
+
+pub type InfKey = (GNode, Option<GSym>, Option<u64>, Option<ValueKey>);
+
+pub struct BuiltinRefs {
+    pub object: GNode,
+    pub type_: GNode,
+    pub int: GNode,
+    pub float: GNode,
+    pub complex: GNode,
+    pub str_: GNode,
+    pub bytes: GNode,
+    pub bool_: GNode,
+    pub list: GNode,
+    pub tuple: GNode,
+    pub dict: GNode,
+    pub set: GNode,
+    pub frozenset: GNode,
+    pub slice: GNode,
+    pub super_: GNode,
+    pub generator: GNode,
+    pub async_generator: GNode,
+    pub function: GNode,
+    pub method: GNode,
+    pub module: GNode,
+    pub none_type: GNode,
+    pub notimpl_type: GNode,
+    pub ellipsis_type: GNode,
+    pub union_type: GNode,
+    pub traceback: GNode,
+}
+
+pub struct Engine {
+    pub interner: RefCell<GlobalInterner>,
+    pub mods: RefCell<Vec<Rc<Module>>>,
+    /// astroid_cache: modname -> module (setdefault semantics)
+    pub astroid_cache: RefCell<FxHashMap<String, ModId>>,
+    /// _mod_file_cache (modname, contextfile=None) -> spec | cached error
+    pub mod_file_cache: RefCell<FxHashMap<String, Result<Spec, String>>>,
+    /// instance_attrs for every class/function (cross-module mutable)
+    pub iattrs: RefCell<FxHashMap<GNode, IndexMap<GSym, Vec<GNode>>>>,
+    /// global inference cache (context.py:19-23)
+    pub inf_cache: RefCell<FxHashMap<InfKey, Rc<Vec<Value>>>>,
+    /// LookupMixIn.lookup lru_cache
+    pub lookup_cache: RefCell<FxHashMap<(GNode, GSym), Rc<crate::lookup::LookupResult>>>,
+    /// FunctionDef.type cached_property
+    pub ftype_cache: RefCell<FxHashMap<GNode, FType>>,
+    /// inference-tip recursion guard + cache (inference_tip.py:37-86)
+    pub tip_guard: RefCell<FxHashSet<(u8, GNode)>>,
+    pub tip_cache: RefCell<FxHashMap<(u8, GNode), Rc<Vec<Value>>>>,
+    pub tip_order: RefCell<std::collections::VecDeque<(u8, GNode)>>,
+    /// recursion depth guard standing in for Python's RecursionError
+    pub depth: Cell<u32>,
+    pub max_depth: u32,
+    pub callctx_id: Cell<u64>,
+    pub env: PyEnv,
+    /// [realpath(cwd)] + venv sys.path
+    pub sys_path: Vec<String>,
+    pub snapshot_dir: PathBuf,
+    pub builtins_mod: Cell<ModId>,
+    pub b: RefCell<Option<Rc<BuiltinRefs>>>,
+    pub isfile_cache: RefCell<FxHashMap<String, bool>>,
+    pub isdir_cache: RefCell<FxHashMap<String, bool>>,
+}
+
+fn snapshot_dir() -> PathBuf {
+    if let Ok(d) = std::env::var("PRYLINT_SNAPSHOT_DIR") {
+        return PathBuf::from(d);
+    }
+    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("snapshot")
+}
+
+impl Engine {
+    pub fn new(root: &Path) -> Engine {
+        let env = pyenv::probe();
+        let real_root = std::fs::canonicalize(root)
+            .unwrap_or_else(|_| root.to_path_buf())
+            .to_string_lossy()
+            .into_owned();
+        let mut sys_path = vec![real_root];
+        sys_path.extend(env.sys_path.clone());
+        let e = Engine {
+            interner: RefCell::new(GlobalInterner::default()),
+            mods: RefCell::new(Vec::new()),
+            astroid_cache: RefCell::new(FxHashMap::default()),
+            mod_file_cache: RefCell::new(FxHashMap::default()),
+            iattrs: RefCell::new(FxHashMap::default()),
+            inf_cache: RefCell::new(FxHashMap::default()),
+            lookup_cache: RefCell::new(FxHashMap::default()),
+            ftype_cache: RefCell::new(FxHashMap::default()),
+            tip_guard: RefCell::new(FxHashSet::default()),
+            tip_cache: RefCell::new(FxHashMap::default()),
+            tip_order: RefCell::new(std::collections::VecDeque::new()),
+            depth: Cell::new(0),
+            max_depth: 350,
+            callctx_id: Cell::new(1),
+            env,
+            sys_path,
+            snapshot_dir: snapshot_dir(),
+            builtins_mod: Cell::new(ModId(0)),
+            b: RefCell::new(None),
+            isfile_cache: RefCell::new(FxHashMap::default()),
+            isdir_cache: RefCell::new(FxHashMap::default()),
+        };
+        e.bootstrap();
+        e
+    }
+
+    pub fn sym(&self, s: &str) -> GSym {
+        self.interner.borrow_mut().intern(s)
+    }
+    pub fn sname(&self, s: GSym) -> String {
+        self.interner.borrow().get(s).to_string()
+    }
+    /// translate a tree-local sym to the global interner
+    pub fn g(&self, md: &Module, sym: pyast::tree::Sym) -> GSym {
+        md.gsym[sym.0 as usize]
+    }
+
+    pub fn next_callctx_id(&self) -> u64 {
+        let id = self.callctx_id.get();
+        self.callctx_id.set(id + 1);
+        id
+    }
+
+    fn isfile(&self, p: &str) -> bool {
+        if let Some(&v) = self.isfile_cache.borrow().get(p) {
+            return v;
+        }
+        let v = Path::new(p).is_file();
+        self.isfile_cache.borrow_mut().insert(p.to_string(), v);
+        v
+    }
+    fn isdir(&self, p: &str) -> bool {
+        if let Some(&v) = self.isdir_cache.borrow().get(p) {
+            return v;
+        }
+        let v = Path::new(p).is_dir();
+        self.isdir_cache.borrow_mut().insert(p.to_string(), v);
+        v
+    }
+
+    // ---------- bootstrap ----------
+
+    fn bootstrap(&self) {
+        // builtins from the snapshot (post-brain bootstrap module)
+        let id = self
+            .load_snapshot_module("builtins")
+            .expect("builtins snapshot must exist");
+        self.builtins_mod.set(id);
+        self.astroid_cache
+            .borrow_mut()
+            .insert("builtins".to_string(), id);
+        // synthetic module holding the bare _CONST_PROXY classes
+        // (raw_building.py:608-624: NoneType/NotImplementedType/Ellipsis are
+        // build_class results NOT inserted into builtins.locals) + UnionType.
+        let synth = self.build_synth_module();
+        let find = |name: &str| -> GNode {
+            let bm = self.md(id);
+            let sym = self.sym(name);
+            let locs = bm.locals.borrow();
+            locs.get(&NodeId::MODULE)
+                .and_then(|l| l.get(&sym))
+                .and_then(|v| v.first().copied())
+                .unwrap_or(GNode {
+                    m: id,
+                    n: NodeId::MODULE,
+                })
+        };
+        let refs = BuiltinRefs {
+            object: find("object"),
+            type_: find("type"),
+            int: find("int"),
+            float: find("float"),
+            complex: find("complex"),
+            str_: find("str"),
+            bytes: find("bytes"),
+            bool_: find("bool"),
+            list: find("list"),
+            tuple: find("tuple"),
+            dict: find("dict"),
+            set: find("set"),
+            frozenset: find("frozenset"),
+            slice: find("slice"),
+            super_: find("super"),
+            generator: find("generator"),
+            async_generator: find("async_generator"),
+            function: find("function"),
+            method: find("method"),
+            module: find("module"),
+            traceback: find("traceback"),
+            none_type: GNode { m: synth, n: NodeId(1) },
+            notimpl_type: GNode { m: synth, n: NodeId(2) },
+            ellipsis_type: GNode { m: synth, n: NodeId(3) },
+            union_type: GNode { m: synth, n: NodeId(4) },
+        };
+        *self.b.borrow_mut() = Some(Rc::new(refs));
+    }
+
+    pub fn builtins(&self) -> Rc<BuiltinRefs> {
+        Rc::clone(self.b.borrow().as_ref().unwrap())
+    }
+
+    fn build_synth_module(&self) -> ModId {
+        // Module named "builtins" (for qname purposes) holding bare classes.
+        let mut interner = pyast::tree::Interner::default();
+        let mut nodes: Vec<Node> = Vec::new();
+        let class_names = ["NoneType", "NotImplementedType", "Ellipsis", "UnionType"];
+        let body: Vec<NodeId> = (1..=class_names.len() as u32).map(NodeId).collect();
+        nodes.push(Node {
+            kind: NodeKind::Module(Box::new(ModuleData {
+                name: "builtins".into(),
+                file: "<synthetic>".into(),
+                package: false,
+                body: body.clone(),
+                doc_node: None,
+                future_imports: Vec::new(),
+            })),
+            parent: NodeId::MODULE,
+            fromlineno: 0,
+            col_offset: 0,
+            end_lineno: 0,
+            end_col_offset: -1,
+            tolineno: 0,
+        });
+        for name in class_names {
+            let sym = interner.intern(name);
+            nodes.push(Node {
+                kind: NodeKind::ClassDef(Box::new(pyast::tree::ClassData {
+                    name: sym,
+                    decorators: None,
+                    bases: Vec::new(),
+                    keywords: Vec::new(),
+                    metaclass: None,
+                    type_params: Vec::new(),
+                    body: Vec::new(),
+                    doc_node: None,
+                })),
+                parent: NodeId::MODULE,
+                fromlineno: 0,
+                col_offset: 0,
+                end_lineno: 0,
+                end_col_offset: -1,
+                tolineno: 0,
+            });
+        }
+        let tree = Tree {
+            nodes,
+            interner,
+            locals: FxHashMap::default(),
+        };
+        self.register_module("builtins".to_string(), "<synthetic>".to_string(), tree, false, false)
+    }
+
+    // ---------- module registration ----------
+
+    pub fn register_module(
+        &self,
+        name: String,
+        file: String,
+        tree: Tree,
+        package: bool,
+        pure_python: bool,
+    ) -> ModId {
+        let id = ModId(self.mods.borrow().len() as u32);
+        // gsym translation table
+        let n_syms = tree.interner.len();
+        let mut gsym = Vec::with_capacity(n_syms);
+        {
+            let mut gi = self.interner.borrow_mut();
+            for i in 0..n_syms {
+                gsym.push(gi.intern(tree.interner.get(pyast::tree::Sym(i as u32))));
+            }
+        }
+        // engine-side locals copy, translated; ImportFrom-sourced entries
+        // are stripped here and re-added by post_build (replacing pyast's
+        // static stdlib wildcard table with real module resolution).
+        let mut locals: FxHashMap<NodeId, IndexMap<GSym, Vec<GNode>>> = FxHashMap::default();
+        for (&scope, map) in &tree.locals {
+            let mut out: IndexMap<GSym, Vec<GNode>> = IndexMap::new();
+            for (sym, ids) in map {
+                let gs = gsym[sym.0 as usize];
+                let filtered: Vec<GNode> = ids
+                    .iter()
+                    .filter(|&&n| !matches!(tree.nodes[n.idx()].kind, NodeKind::ImportFrom { .. }))
+                    .map(|&n| GNode { m: id, n })
+                    .collect();
+                if !filtered.is_empty() {
+                    out.insert(gs, filtered);
+                }
+            }
+            locals.insert(scope, out);
+        }
+        let md = Module {
+            id,
+            name,
+            file,
+            tree,
+            gsym,
+            package,
+            pure_python,
+            locals: RefCell::new(locals),
+            ftype: FxHashMap::default(),
+            einf: FxHashMap::default(),
+            args_unknown: FxHashMap::default(),
+            qnames: FxHashMap::default(),
+        };
+        self.mods.borrow_mut().push(Rc::new(md));
+        id
+    }
+
+    /// manager.cache_module: setdefault — first module wins.
+    pub fn cache_module(&self, name: &str, id: ModId) {
+        self.astroid_cache
+            .borrow_mut()
+            .entry(name.to_string())
+            .or_insert(id);
+    }
+
+    fn load_snapshot_module(&self, modname: &str) -> Option<ModId> {
+        let path = self.snapshot_dir.join(format!("{modname}.json"));
+        let data = std::fs::read_to_string(path).ok()?;
+        let snap = load_snapshot(&data)?;
+        let id = ModId(self.mods.borrow().len() as u32);
+        let n_syms = snap.tree.interner.len();
+        let mut gsym = Vec::with_capacity(n_syms);
+        {
+            let mut gi = self.interner.borrow_mut();
+            for i in 0..n_syms {
+                gsym.push(gi.intern(snap.tree.interner.get(pyast::tree::Sym(i as u32))));
+            }
+        }
+        let mut locals: FxHashMap<NodeId, IndexMap<GSym, Vec<GNode>>> = FxHashMap::default();
+        for (scope, entries) in &snap.locals {
+            let mut out: IndexMap<GSym, Vec<GNode>> = IndexMap::new();
+            for (name, ids) in entries {
+                let gs = self.sym(name);
+                out.insert(gs, ids.iter().map(|&n| GNode { m: id, n }).collect());
+            }
+            locals.insert(*scope, out);
+        }
+        let ftype = snap
+            .ftype
+            .iter()
+            .map(|(&n, s)| {
+                (
+                    n,
+                    match s.as_str() {
+                        "method" => FType::Method,
+                        "classmethod" => FType::ClassMethod,
+                        "staticmethod" => FType::StaticMethod,
+                        _ => FType::Function,
+                    },
+                )
+            })
+            .collect();
+        let md = Module {
+            id,
+            name: snap.name.clone(),
+            file: "<snapshot>".to_string(),
+            tree: snap.tree,
+            gsym,
+            package: false,
+            pure_python: snap.pure_python,
+            locals: RefCell::new(locals),
+            ftype,
+            einf: snap.einf,
+            args_unknown: snap.args_unknown,
+            qnames: snap.qnames,
+        };
+        self.mods.borrow_mut().push(Rc::new(md));
+        // instance_attrs from the snapshot (exception classes etc.)
+        {
+            let mut ia = self.iattrs.borrow_mut();
+            for (cls, entries) in &snap.iattrs {
+                let g = GNode { m: id, n: *cls };
+                let map = ia.entry(g).or_default();
+                for (name, ids) in entries {
+                    let gs = self.sym(name);
+                    map.entry(gs)
+                        .or_default()
+                        .extend(ids.iter().map(|&n| GNode { m: id, n }));
+                }
+            }
+        }
+        Some(id)
+    }
+
+    fn string_build_empty(&self, modname: &str) -> ModId {
+        let mut interner = pyast::tree::Interner::default();
+        let _ = interner.intern("");
+        let tree = Tree {
+            nodes: vec![Node {
+                kind: NodeKind::Module(Box::new(ModuleData {
+                    name: modname.into(),
+                    file: "<?>".into(),
+                    package: false,
+                    body: Vec::new(),
+                    doc_node: None,
+                    future_imports: Vec::new(),
+                })),
+                parent: NodeId::MODULE,
+                fromlineno: 0,
+                col_offset: 0,
+                end_lineno: 0,
+                end_col_offset: -1,
+                tolineno: 0,
+            }],
+            interner,
+            locals: FxHashMap::default(),
+        };
+        let id = self.register_module(modname.to_string(), "<?>".to_string(), tree, false, true);
+        self.cache_module(modname, id);
+        id
+    }
+
+    fn namespace_build(&self, modname: &str) -> ModId {
+        let mut interner = pyast::tree::Interner::default();
+        let _ = interner.intern("");
+        let tree = Tree {
+            nodes: vec![Node {
+                kind: NodeKind::Module(Box::new(ModuleData {
+                    name: modname.into(),
+                    file: "".into(),
+                    package: true,
+                    body: Vec::new(),
+                    doc_node: None,
+                    future_imports: Vec::new(),
+                })),
+                parent: NodeId::MODULE,
+                fromlineno: 0,
+                col_offset: 0,
+                end_lineno: 0,
+                end_col_offset: -1,
+                tolineno: 0,
+            }],
+            interner,
+            locals: FxHashMap::default(),
+        };
+        let id = self.register_module(modname.to_string(), String::new(), tree, true, true);
+        self.cache_module(modname, id);
+        id
+    }
+
+    // ---------- find_spec port ----------
+
+    /// modutils.get_source_file (modutils.py:480-504), prefer_stubs=False
+    fn get_source_file(&self, filename: &str) -> Option<String> {
+        let abs = abspath(filename);
+        let (base, orig_ext) = split_ext(&abs);
+        if !matches!(orig_ext, "py" | "pyi") && !orig_ext.is_empty() && self.isfile(&abs) {
+            return Some(abs);
+        }
+        for ext in ["py", "pyi"] {
+            let cand = format!("{base}.{ext}");
+            if self.isfile(&cand) {
+                return Some(cand);
+            }
+        }
+        // include_no_ext
+        if orig_ext.is_empty() && self.isfile(&base) {
+            return Some(base);
+        }
+        None
+    }
+
+    /// modutils._has_init
+    fn has_init(&self, directory: &str) -> Option<String> {
+        for ext in ["py", "pyi", "pyc", "pyo"] {
+            let cand = format!("{directory}/__init__.{ext}");
+            if self.isfile(&cand) {
+                return Some(cand);
+            }
+        }
+        None
+    }
+
+    /// spec.py ImportlibFinder.find_module (spec.py:126-194)
+    fn importlib_finder(
+        &self,
+        modname: &str,
+        submodule_path: Option<&[String]>,
+    ) -> Option<Spec> {
+        if submodule_path.is_none()
+            && self
+                .env
+                .builtin_module_names
+                .iter()
+                .any(|b| b == modname)
+        {
+            return Some(Spec {
+                type_: SpecType::CBuiltin,
+                location: None,
+                submodule_search_locations: None,
+            });
+        }
+        let search: &[String] = match submodule_path {
+            Some(p) => p,
+            None => &self.sys_path,
+        };
+        for entry in search {
+            let pkgdir = join_path(entry, modname);
+            for suffix in ["py", "pyi", "pyc"] {
+                if self.isfile(&format!("{pkgdir}/__init__.{suffix}")) {
+                    return Some(Spec {
+                        type_: SpecType::PkgDirectory,
+                        location: Some(pkgdir),
+                        submodule_search_locations: None,
+                    });
+                }
+            }
+            // suffix order: EXTENSION_SUFFIXES (C), then .py, then .pyc
+            for ext in &self.env.ext_suffixes {
+                let f = format!("{}{}", join_path(entry, modname), ext);
+                if self.isfile(&f) {
+                    return Some(Spec {
+                        type_: SpecType::CExtension,
+                        location: Some(f),
+                        submodule_search_locations: None,
+                    });
+                }
+            }
+            let f = format!("{}.py", join_path(entry, modname));
+            if self.isfile(&f) {
+                return Some(Spec {
+                    type_: SpecType::PySource,
+                    location: Some(f),
+                    submodule_search_locations: None,
+                });
+            }
+            let f = format!("{}.pyc", join_path(entry, modname));
+            if self.isfile(&f) {
+                return Some(Spec {
+                    type_: SpecType::PyCompiled,
+                    location: Some(f),
+                    submodule_search_locations: None,
+                });
+            }
+        }
+        // The PY_FROZEN branch (spec.py:169-192) requires a live
+        // interpreter; in the pinned venv every frozen stdlib module has
+        // sources on sys.path and `os.path` is special-cased upstream in
+        // file_info_from_modpath, so this is intentionally not ported.
+        None
+    }
+
+    /// spec.py PathSpecFinder reduced to its live effect: namespace
+    /// directory portions for dirs without __init__.
+    fn pathspec_finder(&self, modname: &str, submodule_path: Option<&[String]>) -> Option<Spec> {
+        let search: &[String] = match submodule_path {
+            Some(p) => p,
+            None => &self.sys_path,
+        };
+        let mut portions = Vec::new();
+        for entry in search {
+            let d = join_path(entry, modname);
+            if self.isdir(&d) {
+                portions.push(d);
+            }
+        }
+        if portions.is_empty() {
+            None
+        } else {
+            Some(Spec {
+                type_: SpecType::PyNamespace,
+                location: None,
+                submodule_search_locations: Some(portions),
+            })
+        }
+    }
+
+    /// spec.py:461-496 _find_spec (path=None) + contribute_to_path
+    fn find_spec(&self, modpath: &[&str]) -> Result<Spec, String> {
+        let mut search_paths: Option<Vec<String>> = None;
+        let mut processed: Vec<&str> = Vec::new();
+        let mut modpath = modpath.to_vec();
+        let mut spec_res: Option<Spec> = None;
+        while !modpath.is_empty() {
+            let modname = modpath.remove(0);
+            let submodule_path = search_paths.clone();
+            let spec = self
+                .importlib_finder(modname, submodule_path.as_deref())
+                .or_else(|| self.pathspec_finder(modname, submodule_path.as_deref()));
+            let mut spec = match spec {
+                Some(s) => s,
+                None => {
+                    let full: Vec<&str> = processed
+                        .iter()
+                        .copied()
+                        .chain(std::iter::once(modname))
+                        .chain(modpath.iter().copied())
+                        .collect();
+                    return Err(format!("No module named {}", full.join(".")));
+                }
+            };
+            processed.push(modname);
+            if !modpath.is_empty() {
+                // contribute_to_path
+                search_paths = match spec.type_ {
+                    SpecType::PyNamespace => spec.submodule_search_locations.clone(),
+                    _ => match &spec.location {
+                        None => None,
+                        Some(loc) => {
+                            // setuptools namespace __init__ check
+                            if self.is_setuptools_namespace(loc) {
+                                let joined: Vec<String> = self
+                                    .sys_path
+                                    .iter()
+                                    .map(|p| {
+                                        let mut q = p.clone();
+                                        for part in &processed {
+                                            q = join_path(&q, part);
+                                        }
+                                        q
+                                    })
+                                    .filter(|q| self.isdir(q))
+                                    .collect();
+                                Some(joined)
+                            } else {
+                                Some(vec![loc.clone()])
+                            }
+                        }
+                    },
+                };
+            }
+            if spec.type_ == SpecType::PkgDirectory {
+                spec.submodule_search_locations = search_paths.clone();
+            }
+            spec_res = Some(spec);
+        }
+        Ok(spec_res.unwrap())
+    }
+
+    fn is_setuptools_namespace(&self, location: &str) -> bool {
+        let init = format!("{location}/__init__.py");
+        match std::fs::read(&init) {
+            Err(_) => false,
+            Ok(data) => {
+                let head = &data[..data.len().min(4096)];
+                let has = |needle: &[u8]| head.windows(needle.len()).any(|w| w == needle);
+                (has(b"pkgutil") && has(b"extend_path"))
+                    || (has(b"pkg_resources") && has(b"declare_namespace(__name__)"))
+            }
+        }
+    }
+
+    /// modutils.file_info_from_modpath + _spec_from_modpath
+    fn file_info_from_modpath(&self, parts: &[&str]) -> Result<Spec, String> {
+        if parts == ["os", "path"] {
+            return Ok(Spec {
+                type_: SpecType::PySource,
+                location: Some(self.env.os_path_file.clone()),
+                submodule_search_locations: None,
+            });
+        }
+        let mut found = if parts.first() == Some(&"xml") {
+            let mut xmlplus: Vec<&str> = vec!["_xmlplus"];
+            xmlplus.extend(&parts[1..]);
+            match self.find_spec(&xmlplus) {
+                Ok(s) => Ok(s),
+                Err(_) => self.find_spec(parts),
+            }
+        } else {
+            self.find_spec(parts)
+        }?;
+        // _spec_from_modpath post-processing (modutils.py:622-660)
+        match found.type_ {
+            SpecType::PyCompiled => {
+                if let Some(loc) = &found.location {
+                    if let Some(src) = self.get_source_file(loc) {
+                        found.location = Some(src);
+                        found.type_ = SpecType::PySource;
+                    }
+                }
+            }
+            SpecType::CBuiltin => {
+                found.location = None;
+            }
+            SpecType::PkgDirectory => {
+                let loc = found.location.clone().unwrap_or_default();
+                found.location = self.has_init(&loc);
+                found.type_ = SpecType::PySource;
+            }
+            _ => {}
+        }
+        Ok(found)
+    }
+
+    /// manager.file_from_module_name with the _mod_file_cache
+    fn file_from_module_name(&self, modname: &str) -> Result<Spec, String> {
+        if let Some(cached) = self.mod_file_cache.borrow().get(modname) {
+            return cached.clone();
+        }
+        let parts: Vec<&str> = modname.split('.').collect();
+        let res = self.file_info_from_modpath(&parts).map_err(|e| {
+            format!("Failed to import module {modname} with error:\n{e}.")
+        });
+        self.mod_file_cache
+            .borrow_mut()
+            .insert(modname.to_string(), res.clone());
+        res
+    }
+
+    // ---------- ast_from_* ----------
+
+    /// manager.ast_from_module_name (manager.py:195-276)
+    pub fn ast_from_module_name(&self, modname: &str, use_cache: bool) -> Result<ModId, BuildFail> {
+        if modname.is_empty() {
+            return Err(BuildFail::Import("No module name given.".to_string()));
+        }
+        if use_cache {
+            if let Some(&id) = self.astroid_cache.borrow().get(modname) {
+                return Ok(id);
+            }
+        }
+        if modname == "__main__" {
+            return Ok(self.string_build_empty(modname));
+        }
+        let spec = self
+            .file_from_module_name(modname)
+            .map_err(BuildFail::Import)?;
+        match spec.type_ {
+            SpecType::CBuiltin | SpecType::CExtension => {
+                if spec.type_ == SpecType::CExtension && !self.can_load_extension(modname) {
+                    return Ok(self.string_build_empty(modname));
+                }
+                match self.load_snapshot_module(modname) {
+                    Some(id) => {
+                        self.cache_module(modname, id);
+                        Ok(id)
+                    }
+                    None => {
+                        // astroid would live-import; modules absent from the
+                        // snapshot failed to import there too.
+                        Err(BuildFail::Import(format!(
+                            "Loading {modname} failed with:\nsnapshot unavailable"
+                        )))
+                    }
+                }
+            }
+            SpecType::PyCompiled => Err(BuildFail::Import(format!(
+                "Unable to load compiled module {modname}."
+            ))),
+            SpecType::PyNamespace => Ok(self.namespace_build(modname)),
+            SpecType::PyFrozen => match &spec.location {
+                None => Ok(self.string_build_empty(modname)),
+                Some(loc) => self.ast_from_file(loc, Some(modname), false, false),
+            },
+            SpecType::PySource | SpecType::PkgDirectory => match &spec.location {
+                None => Err(BuildFail::Import(format!(
+                    "Can't find a file for module {modname}."
+                ))),
+                Some(loc) => self.ast_from_file(loc, Some(modname), false, false),
+            },
+        }
+    }
+
+    fn can_load_extension(&self, modname: &str) -> bool {
+        // manager._can_load_extension: stdlib modules only (no whitelist)
+        let first = modname.split('.').next().unwrap_or(modname);
+        self.env.stdlib_module_names.iter().any(|m| m == first)
+    }
+
+    /// manager.ast_from_file (manager.py:131-168)
+    pub fn ast_from_file(
+        &self,
+        filepath: &str,
+        modname: Option<&str>,
+        fallback: bool,
+        mut source: bool,
+    ) -> Result<ModId, BuildFail> {
+        let modname = match modname {
+            Some(m) => m.to_string(),
+            None => filepath.to_string(),
+        };
+        let check_cache = |fp: &str| -> Option<ModId> {
+            let cache = self.astroid_cache.borrow();
+            let &id = cache.get(&modname)?;
+            if self.md(id).file == fp {
+                Some(id)
+            } else {
+                None
+            }
+        };
+        if let Some(id) = check_cache(filepath) {
+            return Ok(id);
+        }
+        let mut filepath = filepath.to_string();
+        if let Some(src) = self.get_source_file(&filepath) {
+            filepath = src;
+            source = true;
+        }
+        if let Some(id) = check_cache(&filepath) {
+            return Ok(id);
+        }
+        if source {
+            return self.file_build(&filepath, &modname);
+        }
+        if fallback && !modname.is_empty() {
+            return self.ast_from_module_name(&modname, true);
+        }
+        Err(BuildFail::Import(format!(
+            "Unable to build an AST for {filepath}."
+        )))
+    }
+
+    /// builder.file_build + _data_build + _post_build
+    fn file_build(&self, path: &str, modname: &str) -> Result<ModId, BuildFail> {
+        let abs = abspath(path);
+        let bytes = std::fs::read(&abs).map_err(|e| {
+            BuildFail::Import(format!("Unable to load file {path}:\n{e}"))
+        })?;
+        let src = match pyast::decode_source(&bytes, &abs) {
+            Ok(src) => src,
+            Err(pyast::DecodeError::Syntax(msg)) | Err(pyast::DecodeError::Lookup(msg)) => {
+                return Err(BuildFail::Syntax(format!(
+                    "Python 3 encoding specification error or unknown encoding:\n{msg}"
+                )))
+            }
+            Err(pyast::DecodeError::Unicode) => {
+                return Err(BuildFail::Import(format!(
+                    "Wrong or no encoding specified for {abs}."
+                )))
+            }
+        };
+        // _data_build: modname ".__init__" suffix => package
+        let (modname2, package) = if let Some(stripped) = modname.strip_suffix(".__init__") {
+            (stripped.to_string(), true)
+        } else {
+            let stem_is_init = Path::new(&abs)
+                .file_stem()
+                .map(|s| s == "__init__")
+                .unwrap_or(false);
+            (modname.to_string(), stem_is_init)
+        };
+        let outcome = pyast::parse::parse_module(&src, &modname2, &abs, package);
+        let tree = match outcome.tree {
+            Some(t) => t,
+            None => {
+                let e = outcome.error.unwrap();
+                return Err(BuildFail::Syntax(format!(
+                    "Parsing Python code failed:\n{} ({}, line {})",
+                    e.message, modname2, e.line
+                )));
+            }
+        };
+        let id = self.register_module(modname2.clone(), abs, tree, package, true);
+        // _post_build: cache BEFORE delayed steps (cycle tolerance)
+        self.cache_module(&modname2, id);
+        self.post_build(id);
+        Ok(id)
+    }
+
+    // ---------- _post_build: star imports + delayed assattr ----------
+
+    fn post_build(&self, id: ModId) {
+        self.add_from_names_to_locals(id);
+        self.process_delayed_assattr(id);
+    }
+
+    /// builder.add_from_names_to_locals (builder.py:213-246): re-adds every
+    /// ImportFrom name (the register step stripped them), resolving `*`
+    /// through the real module graph; each add re-sorts that name's list
+    /// by fromlineno (stable).
+    fn add_from_names_to_locals(&self, id: ModId) {
+        let md = self.md(id);
+        let order = self.walk_preorder(id);
+        // global-declared names per FunctionDef frame (rebuilder
+        // _global_names stack; the dict_keys view captured per ImportFrom
+        // reflects all Global statements in the frame by post-build time)
+        for n in order {
+            let g = GNode { m: id, n };
+            let (names, level): (Vec<(GSym, Option<GSym>)>, Option<u32>) =
+                match &md.tree.nodes[n.idx()].kind {
+                    NodeKind::ImportFrom { names, level, .. } => (
+                        names
+                            .iter()
+                            .map(|(a, b)| (self.g(&md, *a), b.map(|s| self.g(&md, s))))
+                            .collect(),
+                        *level,
+                    ),
+                    _ => continue,
+                };
+            let _ = level;
+            let parent = self.parent(g).unwrap_or(g);
+            let scope = self.scope_for_locals(parent);
+            let globals = self.function_global_names(g);
+            for (name, asname) in names {
+                let name_str = self.sname(name);
+                if name_str == "*" {
+                    let imported = match self.do_import_module(g, None) {
+                        Ok(m) => m,
+                        Err(_) => continue,
+                    };
+                    for pub_name in self.public_names(imported) {
+                        let target = if globals.contains(&pub_name) {
+                            GNode { m: id, n: NodeId::MODULE }
+                        } else {
+                            scope
+                        };
+                        self.add_local_sorted(target, pub_name, g);
+                    }
+                } else {
+                    let local = asname.unwrap_or(name);
+                    let target = if globals.contains(&local) {
+                        GNode { m: id, n: NodeId::MODULE }
+                    } else {
+                        scope
+                    };
+                    self.add_local_sorted(target, local, g);
+                }
+            }
+        }
+    }
+
+    /// scope used by NodeNG.set_local: nearest scope of `node` that is not
+    /// a comprehension... actually set_local walks to scope() (incl.
+    /// comprehensions can't contain ImportFrom). Use scope().
+    fn scope_for_locals(&self, node: GNode) -> GNode {
+        self.scope(node)
+    }
+
+    /// names declared `global` within the nearest FunctionDef frame
+    /// (rebuilder.py:63,1255-1257: _global_names is pushed per function)
+    fn function_global_names(&self, node: GNode) -> FxHashSet<GSym> {
+        let mut out = FxHashSet::default();
+        // find nearest FunctionDef ancestor
+        let mut cur = node;
+        let func = loop {
+            match self.parent(cur) {
+                None => return out,
+                Some(p) => {
+                    let md = self.md(p.m);
+                    if matches!(
+                        md.tree.nodes[p.n.idx()].kind,
+                        NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                    ) {
+                        break p;
+                    }
+                    cur = p;
+                }
+            }
+        };
+        // collect Global names within func, not crossing nested functions
+        let md = self.md(func.m);
+        let mut stack: Vec<NodeId> = Vec::new();
+        let mut buf = Vec::new();
+        md.tree.push_children(func.n, &mut buf);
+        stack.extend(buf.iter().copied());
+        while let Some(n) = stack.pop() {
+            match &md.tree.nodes[n.idx()].kind {
+                NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_) | NodeKind::Lambda(_) => {
+                    continue
+                }
+                NodeKind::Global { names } => {
+                    for s in names {
+                        out.insert(self.g(&md, *s));
+                    }
+                }
+                _ => {}
+            }
+            buf.clear();
+            md.tree.push_children(n, &mut buf);
+            stack.extend(buf.iter().copied());
+        }
+        out
+    }
+
+    fn add_local_sorted(&self, scope: GNode, name: GSym, node: GNode) {
+        let md = self.md(scope.m);
+        let mut locals = md.locals.borrow_mut();
+        let list = locals.entry(scope.n).or_default().entry(name).or_default();
+        list.push(node);
+        // stable sort by fromlineno (builder.py:221-226)
+        let engine = self;
+        list.sort_by_key(|g| engine.fromlineno(*g));
+    }
+
+    /// Module.public_names: locals keys not starting with '_'
+    pub fn public_names(&self, id: ModId) -> Vec<GSym> {
+        let md = self.md(id);
+        let locals = md.locals.borrow();
+        match locals.get(&NodeId::MODULE) {
+            Some(map) => map
+                .keys()
+                .filter(|&&k| !self.sname(k).starts_with('_'))
+                .copied()
+                .collect(),
+            None => Vec::new(),
+        }
+    }
+
+    // ---------- import resolution used by inference ----------
+
+    /// _base_nodes.py:148-172 do_import_module. `modname` None => use the
+    /// node's own modname (ImportFrom).
+    pub fn do_import_module(&self, node: GNode, modname: Option<&str>) -> Result<ModId, BuildFail> {
+        let md = self.md(node.m);
+        let (own_modname, level) = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::ImportFrom { modname, level, .. } => {
+                (Some(md.tree.s(*modname).to_string()), *level)
+            }
+            _ => (None, None),
+        };
+        let modname = match modname {
+            Some(m) => m.to_string(),
+            None => own_modname.unwrap_or_default(),
+        };
+        let mymodule = self.md(node.m);
+        let absmodname = self
+            .relative_to_absolute_name(&mymodule, &modname, level)
+            .map_err(|_| BuildFail::Import(format!(
+                "Relative import with too many levels for module {modname:?}"
+            )))?;
+        // cache bypass for self-import
+        let use_cache = absmodname != mymodule.name;
+        self.import_module(&mymodule, &modname, level.map(|l| l >= 1).unwrap_or(false), level, use_cache, &absmodname)
+    }
+
+    /// Module.import_module (scoped_nodes.py:439-475)
+    fn import_module(
+        &self,
+        _mymodule: &Module,
+        modname: &str,
+        relative_only: bool,
+        _level: Option<u32>,
+        use_cache: bool,
+        absmodname: &str,
+    ) -> Result<ModId, BuildFail> {
+        match self.ast_from_module_name(absmodname, use_cache) {
+            Ok(id) => Ok(id),
+            Err(e) => {
+                if relative_only {
+                    return Err(e);
+                }
+                if modname == absmodname {
+                    return Err(e);
+                }
+                self.ast_from_module_name(modname, use_cache)
+            }
+        }
+    }
+
+    /// scoped_nodes.py:477-523 relative_to_absolute_name — EXACT (E0402).
+    pub fn relative_to_absolute_name(
+        &self,
+        module: &Module,
+        modname: &str,
+        level: Option<u32>,
+    ) -> Result<String, ErrKind> {
+        // absolute_import_activated() is always True on py3
+        if level.is_none() {
+            return Ok(modname.to_string());
+        }
+        let mut level = level.unwrap();
+        let package_name: String;
+        if level > 0 {
+            if module.package {
+                level -= 1;
+                package_name = rsplit_n(&module.name, level as usize);
+            } else if !module.file.is_empty()
+                && module.file != "<?>"
+                && !Path::new(&format!(
+                    "{}/__init__.py",
+                    parent_dir(&module.file)
+                ))
+                .exists()
+                && Path::new(&format!(
+                    "{}/{}",
+                    parent_dir(&module.file),
+                    modname.split('.').next().unwrap_or("")
+                ))
+                .exists()
+            {
+                level -= 1;
+                package_name = String::new();
+            } else {
+                package_name = rsplit_n(&module.name, level as usize);
+            }
+            if level > 0 && (module.name.matches('.').count() as u32) < level {
+                return Err(ErrKind::TooManyLevels);
+            }
+        } else if module.package {
+            package_name = module.name.clone();
+        } else {
+            package_name = rsplit_n(&module.name, 1);
+        }
+        if !package_name.is_empty() {
+            if modname.is_empty() {
+                return Ok(package_name);
+            }
+            return Ok(format!("{package_name}.{modname}"));
+        }
+        Ok(modname.to_string())
+    }
+
+    // ---------- delayed assattr (builder.py:248-284) ----------
+
+    fn process_delayed_assattr(&self, id: ModId) {
+        let md = self.md(id);
+        let order = self.walk_preorder(id);
+        let delayed: Vec<NodeId> = order
+            .into_iter()
+            .filter(|&n| {
+                matches!(md.tree.nodes[n.idx()].kind, NodeKind::AssignAttr { .. })
+                    && !matches!(
+                        md.tree.nodes[md.tree.nodes[n.idx()].parent.idx()].kind,
+                        NodeKind::ExceptHandler { .. }
+                    )
+            })
+            .collect();
+        for n in delayed {
+            self.delayed_assattr(GNode { m: id, n });
+        }
+    }
+
+    fn delayed_assattr(&self, node: GNode) {
+        let md = self.md(node.m);
+        let (expr, attrname) = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::AssignAttr { expr, attrname } => {
+                (GNode { m: node.m, n: *expr }, self.g(&md, *attrname))
+            }
+            _ => return,
+        };
+        let ctx = crate::ctx::Ctx::new();
+        let flow = self.infer(expr, &ctx);
+        if flow.err.map(|e| e.is_inference()).unwrap_or(false) && flow.vals.is_empty() {
+            return;
+        }
+        if let Some(e) = flow.err {
+            if !e.is_inference() {
+                return; // astroid only catches InferenceError; others crash
+                        // the build — be permissive instead.
+            }
+        }
+        for inferred in &flow.vals {
+            match inferred {
+                Value::Uninferable => continue,
+                Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+                    if !self.can_assign_attr(*cls, attrname) {
+                        continue;
+                    }
+                    let mut ia = self.iattrs.borrow_mut();
+                    let vals = ia.entry(*cls).or_default().entry(attrname).or_default();
+                    if !vals.contains(&node) {
+                        vals.push(node);
+                    }
+                }
+                Value::Node(g) => {
+                    let gmd = self.md(g.m);
+                    match &gmd.tree.nodes[g.n.idx()].kind {
+                        NodeKind::FunctionDef(_)
+                        | NodeKind::AsyncFunctionDef(_)
+                        | NodeKind::Lambda(_) => {
+                            // function instance_attrs
+                            let mut ia = self.iattrs.borrow_mut();
+                            let vals = ia.entry(*g).or_default().entry(attrname).or_default();
+                            if !vals.contains(&node) {
+                                vals.push(node);
+                            }
+                        }
+                        NodeKind::Module(_) | NodeKind::ClassDef(_) => {
+                            // iattrs = inferred.locals (module/class locals!)
+                            let mut locals = gmd.locals.borrow_mut();
+                            let vals = locals
+                                .entry(g.n)
+                                .or_default()
+                                .entry(attrname)
+                                .or_default();
+                            if !vals.contains(&node) {
+                                vals.push(node);
+                            }
+                        }
+                        // Const/containers (Instance subclasses) and
+                        // everything without locals: AttributeError -> skip
+                        _ => continue,
+                    }
+                }
+                // proxies (BoundMethod/Generator/...) -> continue
+                _ => continue,
+            }
+        }
+    }
+
+    /// builder._can_assign_attr — slots subset: full ClassDef.slots() is
+    /// ported later with the slots checkers; only the builtins.object guard
+    /// is load-bearing for instance_attrs fidelity in practice.
+    fn can_assign_attr(&self, cls: GNode, _attrname: GSym) -> bool {
+        self.qname(cls) != "builtins.object"
+    }
+}
+
+// ---------- path helpers ----------
+
+pub fn abspath(p: &str) -> String {
+    match std::path::absolute(p) {
+        Ok(a) => a.to_string_lossy().into_owned(),
+        Err(_) => p.to_string(),
+    }
+}
+
+fn parent_dir(p: &str) -> String {
+    Path::new(p)
+        .parent()
+        .map(|x| x.to_string_lossy().into_owned())
+        .unwrap_or_default()
+}
+
+fn join_path(a: &str, b: &str) -> String {
+    if a.is_empty() {
+        return b.to_string();
+    }
+    format!("{}/{}", a.trim_end_matches('/'), b)
+}
+
+fn split_ext(p: &str) -> (String, &str) {
+    match p.rfind('.') {
+        Some(i) if !p[i + 1..].contains('/') && i > p.rfind('/').map(|s| s + 1).unwrap_or(0) => {
+            (p[..i].to_string(), &p[i + 1..])
+        }
+        _ => (p.to_string(), ""),
+    }
+}
+
+fn rsplit_n(name: &str, level: usize) -> String {
+    // name.rsplit(".", level)[0]
+    let mut s = name;
+    for _ in 0..level {
+        match s.rfind('.') {
+            Some(i) => s = &s[..i],
+            None => break,
+        }
+    }
+    s.to_string()
+}

@@ -1,0 +1,1388 @@
+21:1:Name -> Func:contextlib.contextmanager
+23:18:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+23:18:Attribute -> Func:posixpath.abspath | U
+23:18:Attribute -> Module:posixpath | Module:ntpath
+23:18:Name -> Module:os
+23:34:Call -> U
+23:34:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+23:34:Attribute -> Module:posixpath | Module:ntpath
+23:34:Name -> Module:os
+23:50:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+24:14:Call -> U
+24:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+24:14:Attribute -> Module:posixpath | Module:ntpath
+24:14:Name -> Module:os
+24:27:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+24:40:Name -> U
+25:14:Call -> ERR
+25:14:Attribute -> Func:posix.getcwd
+25:14:Name -> Module:os
+26:4:Call -> ERR
+26:4:Attribute -> Func:posix.chdir
+26:4:Name -> Module:os
+26:13:Name -> U
+30:8:Call -> ERR
+30:8:Attribute -> Func:posix.chdir
+30:8:Name -> Module:os
+30:17:Name -> U
+33:1:Name -> Func:contextlib.contextmanager
+35:24:Attribute -> Const:NoneType:None | U
+35:24:Attribute -> Inst:unittest.loader.TestLoader
+35:24:Name -> Class:django.test.runner.DiscoverRunner
+36:4:Attribute -> Inst:unittest.loader.TestLoader
+36:4:Name -> Class:django.test.runner.DiscoverRunner
+36:50:Name -> U
+40:8:Attribute -> Inst:unittest.loader.TestLoader
+40:8:Name -> Class:django.test.runner.DiscoverRunner
+40:54:Name -> Const:NoneType:None | U
+44:1:Call -> Inst:unittest.mock._patch_dict
+44:1:Attribute -> Class:unittest.mock._patch_dict
+44:1:Attribute -> Func:unittest.mock.patch
+44:1:Name -> Module:unittest.mock
+44:17:Attribute -> Dict:43 | Inst:os._Environ
+44:17:Name -> Module:os
+45:1:Call -> Inst:unittest.mock._patch
+45:1:Attribute -> Func:unittest.mock._patch_object
+45:1:Attribute -> Func:unittest.mock.patch
+45:1:Name -> Module:unittest.mock
+45:19:Name -> Module:multiprocessing
+48:1:Call -> Inst:unittest.mock._patch
+48:1:Attribute -> Func:unittest.mock._patch_object
+48:1:Attribute -> Func:unittest.mock.patch
+48:1:Name -> Module:unittest.mock
+48:19:Name -> Module:multiprocessing
+49:42:Name -> Class:django.test.testcases.SimpleTestCase
+51:17:Call -> Inst:argparse.ArgumentParser
+51:17:Name -> Class:argparse.ArgumentParser
+52:8:Call -> Const:NoneType:None
+52:8:Attribute -> BM:django.test.runner.DiscoverRunner.add_arguments
+52:8:Name -> Class:django.test.runner.DiscoverRunner
+52:37:Name -> Inst:argparse.ArgumentParser
+53:15:Name -> Inst:argparse.ArgumentParser
+56:17:Call -> U | Inst:argparse.Namespace
+56:17:Attribute -> BM:argparse.ArgumentParser.parse_args
+56:17:Call -> Inst:argparse.ArgumentParser
+56:17:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests.get_parser
+56:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+57:8:Call -> Const:NoneType:None
+57:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+57:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+57:25:Attribute -> U
+57:25:Name -> U | Inst:argparse.Namespace
+60:17:Call -> U | Inst:argparse.Namespace
+60:17:Attribute -> BM:argparse.ArgumentParser.parse_args
+60:17:Call -> Inst:argparse.ArgumentParser
+60:17:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests.get_parser
+60:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+61:8:Call -> Const:NoneType:None
+61:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+61:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+61:25:Attribute -> U
+61:25:Name -> U | Inst:argparse.Namespace
+64:17:Call -> U | Inst:argparse.Namespace
+64:17:Attribute -> BM:argparse.ArgumentParser.parse_args
+64:17:Call -> Inst:argparse.ArgumentParser
+64:17:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests.get_parser
+64:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+65:8:Call -> Const:NoneType:None
+65:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+65:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+65:25:Attribute -> U
+65:25:Name -> U | Inst:argparse.Namespace
+68:17:Call -> U | Inst:argparse.Namespace
+68:17:Attribute -> BM:argparse.ArgumentParser.parse_args
+68:17:Call -> Inst:argparse.ArgumentParser
+68:17:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests.get_parser
+68:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+69:8:Call -> Const:NoneType:None
+69:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+69:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+69:25:Attribute -> U
+69:25:Name -> U | Inst:argparse.Namespace
+72:13:Call -> Inst:unittest.case._AssertRaisesContext
+72:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+72:13:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+72:31:Name -> Class:builtins.SystemExit
+72:44:Call -> Gen:django.test.utils.captured_output
+72:44:Name -> Func:django.test.utils.captured_stderr
+73:12:Call -> U | Inst:argparse.Namespace
+73:12:Attribute -> BM:argparse.ArgumentParser.parse_args
+73:12:Call -> Inst:argparse.ArgumentParser
+73:12:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests.get_parser
+73:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+75:8:Call -> Const:NoneType:None
+75:8:Attribute -> BM:unittest.case.TestCase.assertIn
+75:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+75:22:Name -> Const:str:"argument --parallel: 'unaccepted' is no
+75:27:Call -> ERR
+75:27:Attribute -> ERR
+75:27:Name -> Inst:_io.TextIOWrapper
+78:8:Call -> Const:NoneType:None
+78:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+78:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+78:25:Call -> Const:int:1 | Inst:builtins.int | U
+78:25:Name -> Func:django.test.runner.get_max_test_processes
+80:5:Call -> Inst:unittest.mock._patch_dict
+80:5:Attribute -> Class:unittest.mock._patch_dict
+80:5:Attribute -> Func:unittest.mock.patch
+80:5:Name -> Module:unittest.mock
+80:21:Attribute -> Dict:43 | Inst:os._Environ
+80:21:Name -> Module:os
+82:8:Call -> Const:NoneType:None
+82:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+82:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+82:25:Call -> Const:int:1 | Inst:builtins.int | U
+82:25:Name -> Func:django.test.runner.get_max_test_processes
+89:8:Name -> U
+90:8:Call -> Const:NoneType:None
+90:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+90:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+90:25:Call -> Const:int:1 | Inst:builtins.int | U
+90:25:Name -> Func:django.test.runner.get_max_test_processes
+91:13:Call -> Inst:unittest.mock._patch_dict
+91:13:Attribute -> Class:unittest.mock._patch_dict
+91:13:Attribute -> Func:unittest.mock.patch
+91:13:Name -> Module:unittest.mock
+91:29:Attribute -> Dict:43 | Inst:os._Environ
+91:29:Name -> Module:os
+92:12:Call -> Const:NoneType:None
+92:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+92:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+92:29:Call -> Const:int:1 | Inst:builtins.int | U
+92:29:Name -> Func:django.test.runner.get_max_test_processes
+99:8:Name -> U
+100:8:Call -> Const:NoneType:None
+100:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+100:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+100:25:Call -> Const:int:1 | Inst:builtins.int | U
+100:25:Name -> Func:django.test.runner.get_max_test_processes
+101:13:Call -> Inst:unittest.mock._patch_dict
+101:13:Attribute -> Class:unittest.mock._patch_dict
+101:13:Attribute -> Func:unittest.mock.patch
+101:13:Name -> Module:unittest.mock
+101:29:Attribute -> Dict:43 | Inst:os._Environ
+101:29:Name -> Module:os
+102:12:Call -> Const:NoneType:None
+102:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+102:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+102:29:Call -> Const:int:1 | Inst:builtins.int | U
+102:29:Name -> Func:django.test.runner.get_max_test_processes
+109:8:Name -> U
+110:8:Call -> Const:NoneType:None
+110:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+110:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+110:25:Call -> Const:int:1 | Inst:builtins.int | U
+110:25:Name -> Func:django.test.runner.get_max_test_processes
+111:13:Call -> Inst:unittest.mock._patch_dict
+111:13:Attribute -> Class:unittest.mock._patch_dict
+111:13:Attribute -> Func:unittest.mock.patch
+111:13:Name -> Module:unittest.mock
+111:29:Attribute -> Dict:43 | Inst:os._Environ
+111:29:Name -> Module:os
+112:12:Call -> Const:NoneType:None
+112:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+112:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerParallelArgumentTests
+112:29:Call -> Const:int:1 | Inst:builtins.int | U
+112:29:Name -> Func:django.test.runner.get_max_test_processes
+115:26:Name -> Class:django.test.testcases.SimpleTestCase
+116:5:Name -> Class:builtins.staticmethod
+118:16:Attribute -> U
+118:16:Attribute -> U
+118:16:Name -> U
+118:45:Attribute -> U
+118:45:Name -> U
+118:72:Attribute -> U
+118:72:Name -> U
+121:17:Call -> Inst:django.test.runner.DiscoverRunner
+121:17:Name -> Class:django.test.runner.DiscoverRunner
+122:8:Call -> Const:NoneType:None
+122:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+122:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+122:25:Attribute -> Const:bool:False | U
+122:25:Name -> Inst:django.test.runner.DiscoverRunner
+125:17:Call -> Inst:argparse.ArgumentParser
+125:17:Name -> Class:argparse.ArgumentParser
+126:8:Call -> Const:NoneType:None
+126:8:Attribute -> BM:django.test.runner.DiscoverRunner.add_arguments
+126:8:Name -> Class:django.test.runner.DiscoverRunner
+126:37:Name -> Inst:argparse.ArgumentParser
+127:13:Call -> U | Inst:argparse.Namespace
+127:13:Attribute -> BM:argparse.ArgumentParser.parse_args
+127:13:Name -> Inst:argparse.ArgumentParser
+128:8:Call -> Const:NoneType:None
+128:8:Attribute -> BM:unittest.case.TestCase.assertIs
+128:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+128:22:Attribute -> U
+128:22:Name -> U | Inst:argparse.Namespace
+129:13:Call -> U | Inst:argparse.Namespace
+129:13:Attribute -> BM:argparse.ArgumentParser.parse_args
+129:13:Name -> Inst:argparse.ArgumentParser
+130:8:Call -> Const:NoneType:None
+130:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+130:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+130:26:Attribute -> U
+130:26:Name -> U | Inst:argparse.Namespace
+131:13:Call -> U | Inst:argparse.Namespace
+131:13:Attribute -> BM:argparse.ArgumentParser.parse_args
+131:13:Name -> Inst:argparse.ArgumentParser
+132:8:Call -> Const:NoneType:None
+132:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+132:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+132:25:Attribute -> U
+132:25:Name -> U | Inst:argparse.Namespace
+135:17:Call -> Inst:argparse.ArgumentParser
+135:17:Name -> Class:argparse.ArgumentParser
+136:8:Call -> Const:NoneType:None
+136:8:Attribute -> BM:django.test.runner.DiscoverRunner.add_arguments
+136:8:Name -> Class:django.test.runner.DiscoverRunner
+136:37:Name -> Inst:argparse.ArgumentParser
+138:13:Call -> U | Inst:argparse.Namespace
+138:13:Attribute -> BM:argparse.ArgumentParser.parse_args
+138:13:Name -> Inst:argparse.ArgumentParser
+139:8:Call -> Const:NoneType:None
+139:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+139:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+139:25:Attribute -> U
+139:25:Name -> U | Inst:argparse.Namespace
+140:13:Call -> U | Inst:argparse.Namespace
+140:13:Attribute -> BM:argparse.ArgumentParser.parse_args
+140:13:Name -> Inst:argparse.ArgumentParser
+141:8:Call -> Const:NoneType:None
+141:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+141:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+141:24:Attribute -> U
+141:24:Name -> U | Inst:argparse.Namespace
+144:17:Call -> Inst:django.test.runner.DiscoverRunner
+144:17:Name -> Class:django.test.runner.DiscoverRunner
+145:8:Call -> Const:NoneType:None
+145:8:Attribute -> BM:unittest.case.TestCase.assertIs
+145:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+145:22:Attribute -> Const:bool:False | U
+145:22:Name -> Inst:django.test.runner.DiscoverRunner
+146:8:Call -> Const:NoneType:None
+146:8:Attribute -> BM:django.test.runner.DiscoverRunner.setup_shuffler
+146:8:Name -> Inst:django.test.runner.DiscoverRunner
+147:8:Call -> Const:NoneType:None
+147:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+147:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+147:26:Attribute -> Const:NoneType:None | Const:NoneType:None | U
+147:26:Name -> Inst:django.test.runner.DiscoverRunner
+150:17:Call -> Inst:django.test.runner.DiscoverRunner
+150:17:Name -> Class:django.test.runner.DiscoverRunner
+151:8:Call -> Const:NoneType:None
+151:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+151:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+151:26:Attribute -> Const:bool:False | U
+151:26:Name -> Inst:django.test.runner.DiscoverRunner
+152:13:Call -> Inst:unittest.mock._patch
+152:13:Attribute -> Func:unittest.mock.patch
+152:13:Name -> Module:unittest.mock
+153:17:Call -> Gen:django.test.utils.captured_output
+153:17:Name -> Func:django.test.utils.captured_stdout
+154:16:Call -> Const:NoneType:None
+154:16:Attribute -> BM:django.test.runner.DiscoverRunner.setup_shuffler
+154:16:Name -> Inst:django.test.runner.DiscoverRunner
+155:8:Call -> Const:NoneType:None
+155:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+155:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+155:25:Call -> ERR
+155:25:Attribute -> ERR
+155:25:Name -> Inst:_io.TextIOWrapper
+156:8:Call -> Const:NoneType:None
+156:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+156:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+156:25:Attribute -> Const:NoneType:None | Const:NoneType:None | U
+156:25:Name -> Inst:django.test.runner.DiscoverRunner
+159:17:Call -> Inst:django.test.runner.DiscoverRunner
+159:17:Name -> Class:django.test.runner.DiscoverRunner
+160:8:Call -> Const:NoneType:None
+160:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+160:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+160:25:Attribute -> Const:bool:False | U
+160:25:Name -> Inst:django.test.runner.DiscoverRunner
+161:13:Call -> Gen:django.test.utils.captured_output
+161:13:Name -> Func:django.test.utils.captured_stdout
+162:12:Call -> Const:NoneType:None
+162:12:Attribute -> BM:django.test.runner.DiscoverRunner.setup_shuffler
+162:12:Name -> Inst:django.test.runner.DiscoverRunner
+164:8:Call -> Const:NoneType:None
+164:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+164:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+164:25:Call -> ERR
+164:25:Attribute -> ERR
+164:25:Name -> Inst:_io.TextIOWrapper
+164:44:Name -> Const:str:'Using shuffle seed: 2 (given)\n'
+165:8:Call -> Const:NoneType:None
+165:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+165:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+165:25:Attribute -> Const:NoneType:None | Const:NoneType:None | U
+165:25:Name -> Inst:django.test.runner.DiscoverRunner
+168:13:Call -> Gen:tests.test_runner.test_discover_runner.change_cwd
+168:13:Name -> Func:tests.test_runner.test_discover_runner.change_cwd
+174:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+174:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+174:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+174:42:Name -> Class:builtins.RuntimeError
+174:56:Name -> Const:str:"One of the test labels is a path to a f
+175:16:Call -> Const:NoneType:None | Const:NoneType:None | U
+175:16:Attribute -> BM:django.test.runner.DiscoverRunner.load_tests_for_label
+175:16:Call -> Inst:django.test.runner.DiscoverRunner
+175:16:Name -> Class:django.test.runner.DiscoverRunner
+179:12:Call -> Const:int:0 | U
+179:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+179:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+179:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+179:12:Call -> Inst:django.test.runner.DiscoverRunner
+179:12:Name -> Class:django.test.runner.DiscoverRunner
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+186:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+186:25:Name -> Const:int:0 | U
+190:12:Call -> Const:int:0 | U
+190:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+190:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+190:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+190:12:Call -> Inst:django.test.runner.DiscoverRunner
+190:12:Name -> Class:django.test.runner.DiscoverRunner
+197:8:Call -> Const:NoneType:None
+197:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+197:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+197:25:Name -> Const:int:0 | U
+201:12:Call -> Const:int:0 | U
+201:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+201:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+201:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+201:12:Call -> Inst:django.test.runner.DiscoverRunner
+201:12:Name -> Class:django.test.runner.DiscoverRunner
+208:8:Call -> Const:NoneType:None
+208:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+208:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+208:25:Name -> Const:int:0 | U
+212:12:Call -> Const:int:0 | U
+212:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+212:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+212:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+212:12:Call -> Inst:django.test.runner.DiscoverRunner
+212:12:Name -> Class:django.test.runner.DiscoverRunner
+219:8:Call -> Const:NoneType:None
+219:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+219:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+219:25:Name -> Const:int:0 | U
+223:12:Call -> Const:int:0 | U
+223:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+223:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+223:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+223:12:Call -> Inst:django.test.runner.DiscoverRunner
+223:12:Name -> Class:django.test.runner.DiscoverRunner
+231:8:Call -> Const:NoneType:None
+231:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+231:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+231:25:Name -> Const:int:0 | U
+250:20:Call -> ERR
+250:20:Name -> Func:builtins.sorted
+250:29:Name -> List:6
+250:42:Name -> List:6
+252:25:Name -> List:6
+255:24:Name -> U
+256:23:Name -> U
+257:35:Call -> ERR
+257:35:Name -> Func:builtins.sorted
+257:44:Name -> List:6
+257:57:Name -> List:6
+258:25:Name -> List:6
+260:17:Call -> Gen:unittest.case.TestCase.subTest
+260:17:Attribute -> BM:unittest.case.TestCase.subTest
+260:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+260:30:Name -> List:1 | List:1 | List:1 | List:1 | List:1 | List:2 | List:1
+261:24:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+261:24:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+261:24:Call -> Inst:django.test.runner.DiscoverRunner
+261:24:Name -> Class:django.test.runner.DiscoverRunner
+262:39:Name -> List:1 | List:1 | List:1 | List:1 | List:1 | List:2 | List:1
+265:16:Call -> Const:NoneType:None
+265:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+265:16:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+265:33:Name -> List:6 | List:2 | List:1 | U
+265:43:Call -> U
+265:43:Attribute -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.get_test_methods_names
+265:43:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+265:71:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+268:17:Call -> Inst:django.test.runner.DiscoverRunner
+268:17:Name -> Class:django.test.runner.DiscoverRunner
+275:40:Name -> List:4
+276:17:Call -> Gen:unittest.case.TestCase.subTest
+276:17:Attribute -> BM:unittest.case.TestCase.subTest
+276:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+276:42:Name -> Const:str:'test_runner_apps.sample.tests' | Const:str:'test_runner_apps.sample.tests.Test.test | Const:str:'test_runner_apps.sample.empty' | Const:str:'test_runner_apps.sample.tests_sample.Em
+277:21:Call -> Gen:tests.test_runner.test_discover_runner.change_loader_patterns
+277:21:Name -> Func:tests.test_runner.test_discover_runner.change_loader_patterns
+278:28:Call -> Const:int:0 | U
+278:28:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+278:28:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+278:28:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+278:28:Name -> Inst:django.test.runner.DiscoverRunner
+278:48:Name -> Const:str:'test_runner_apps.sample.tests' | Const:str:'test_runner_apps.sample.tests.Test.test | Const:str:'test_runner_apps.sample.empty' | Const:str:'test_runner_apps.sample.tests_sample.Em
+279:20:Call -> Const:NoneType:None
+279:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+279:20:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+279:37:Name -> Const:int:0 | U
+279:44:Name -> Const:int:1 | Const:int:1 | Const:int:0 | Const:int:0
+280:20:Call -> Const:NoneType:None
+280:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+280:20:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+281:24:Attribute -> Const:NoneType:None | U
+281:24:Attribute -> Inst:unittest.loader.TestLoader
+281:24:Name -> Inst:django.test.runner.DiscoverRunner
+285:17:Call -> Inst:django.test.runner.DiscoverRunner
+285:17:Name -> Class:django.test.runner.DiscoverRunner
+286:13:Call -> Gen:tests.test_runner.test_discover_runner.change_cwd
+286:13:Name -> Func:tests.test_runner.test_discover_runner.change_cwd
+286:30:Call -> Gen:tests.test_runner.test_discover_runner.change_loader_patterns
+286:30:Name -> Func:tests.test_runner.test_discover_runner.change_loader_patterns
+287:17:Call -> Inst:unittest.case._AssertRaisesContext
+287:17:Attribute -> BM:unittest.case.TestCase.assertRaises
+287:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+287:35:Name -> Class:builtins.RuntimeError
+288:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+288:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+288:16:Name -> Inst:django.test.runner.DiscoverRunner
+289:12:Call -> Const:NoneType:None
+289:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+289:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+289:29:Attribute -> Const:NoneType:None | U
+289:29:Attribute -> Inst:unittest.loader.TestLoader
+289:29:Name -> Inst:django.test.runner.DiscoverRunner
+292:13:Call -> Gen:tests.test_runner.test_discover_runner.change_cwd
+292:13:Name -> Func:tests.test_runner.test_discover_runner.change_cwd
+294:16:Call -> Const:int:0 | U
+294:16:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+294:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+294:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+294:16:Call -> Inst:django.test.runner.DiscoverRunner
+294:16:Name -> Class:django.test.runner.DiscoverRunner
+301:8:Call -> Const:NoneType:None
+301:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+301:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+301:25:Name -> Const:int:0 | U
+308:13:Call -> Gen:tests.test_runner.test_discover_runner.change_cwd
+308:13:Name -> Func:tests.test_runner.test_discover_runner.change_cwd
+309:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+309:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+309:20:Call -> Inst:django.test.runner.DiscoverRunner
+309:20:Name -> Class:django.test.runner.DiscoverRunner
+310:12:Call -> Const:NoneType:None
+310:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+310:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+311:16:Call -> ERR
+311:16:Attribute -> ERR
+311:16:Call -> ERR
+311:16:Attribute -> ERR
+311:16:Attribute -> List:0
+311:16:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+312:16:Call -> U
+312:16:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+312:16:Attribute -> Module:posixpath | Module:ntpath
+312:16:Name -> Module:os
+312:33:Call -> ERR
+312:33:Attribute -> Func:posix.getcwd
+312:33:Name -> Module:os
+317:12:Call -> Const:int:0 | U
+317:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+317:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+317:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+317:12:Call -> Inst:django.test.runner.DiscoverRunner
+317:12:Name -> Class:django.test.runner.DiscoverRunner
+324:8:Call -> Const:NoneType:None
+324:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+324:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+324:25:Name -> Const:int:0 | U
+328:12:Call -> Const:int:0 | U
+328:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+328:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+328:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+328:12:Call -> Inst:django.test.runner.DiscoverRunner
+328:12:Name -> Class:django.test.runner.DiscoverRunner
+335:8:Call -> Const:NoneType:None
+335:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+335:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+335:25:Name -> Const:int:0 | U
+346:12:Call -> Const:int:0 | U
+346:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+346:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+346:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+346:12:Call -> Inst:django.test.runner.DiscoverRunner
+346:12:Name -> Class:django.test.runner.DiscoverRunner
+353:8:Call -> Const:NoneType:None
+353:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+353:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+353:25:Name -> Const:int:0 | U
+356:13:Call -> Gen:tests.test_runner.test_discover_runner.change_cwd
+356:13:Name -> Func:tests.test_runner.test_discover_runner.change_cwd
+357:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+357:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+357:20:Call -> Inst:django.test.runner.DiscoverRunner
+357:20:Name -> Class:django.test.runner.DiscoverRunner
+360:12:Call -> Const:NoneType:None
+360:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+360:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+361:16:Attribute -> ERR
+361:16:Attribute -> ERR
+361:16:Attribute -> List:0
+361:16:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+365:12:Call -> Const:NoneType:None
+365:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+365:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+366:16:Attribute -> ERR
+366:16:Attribute -> ERR
+366:16:Attribute -> List:0
+366:16:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+371:12:Call -> Const:NoneType:None
+371:12:Attribute -> BM:unittest.case.TestCase.assertIn
+371:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+372:32:Attribute -> U
+372:32:Attribute -> U
+372:32:Name -> U
+372:62:Attribute -> List:0
+372:62:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+382:17:Call -> Inst:django.test.runner.DiscoverRunner
+382:17:Name -> Class:django.test.runner.DiscoverRunner
+383:13:Call -> Inst:django.test.utils.modify_settings
+383:13:Attribute -> BM:django.test.testcases.SimpleTestCase.modify_settings
+383:13:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+383:60:Name -> Const:str:'forms_tests.field_tests'
+384:21:Call -> Const:int:0 | U
+384:21:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+384:21:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+384:21:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+384:21:Name -> Inst:django.test.runner.DiscoverRunner
+384:41:Name -> Const:str:'forms_tests'
+385:19:Call -> Const:int:0 | U
+385:19:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+385:19:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+385:19:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+385:19:Name -> Inst:django.test.runner.DiscoverRunner
+385:39:Name -> Const:str:'forms_tests'
+385:49:Name -> Const:str:'forms_tests.field_tests'
+386:8:Call -> Const:NoneType:None
+386:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+386:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+386:25:Name -> Const:int:0 | U
+386:33:Name -> Const:int:0 | U
+393:17:Call -> Inst:django.test.runner.DiscoverRunner
+393:17:Name -> Class:django.test.runner.DiscoverRunner
+394:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+394:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+394:16:Name -> Inst:django.test.runner.DiscoverRunner
+397:8:Call -> Const:NoneType:None
+397:8:Attribute -> BM:unittest.case.TestCase.assertIn
+397:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+399:12:Call -> ERR
+399:12:Attribute -> ERR
+399:12:Call -> ERR
+399:12:Name -> Func:builtins.next
+399:17:Call -> ERR
+399:17:Name -> Func:builtins.iter
+399:22:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+402:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+402:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+402:16:Name -> Inst:django.test.runner.DiscoverRunner
+403:16:Call -> Inst:builtins.tuple
+403:16:Name -> Class:builtins.tuple
+403:22:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+404:8:Call -> Const:NoneType:None
+404:8:Attribute -> BM:unittest.case.TestCase.assertIn
+404:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+405:26:Call -> ERR
+405:26:Attribute -> ERR
+405:26:Name -> Inst:builtins.tuple
+407:8:Call -> Const:NoneType:None
+407:8:Attribute -> BM:unittest.case.TestCase.assertIn
+407:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+408:26:Call -> ERR
+408:26:Attribute -> ERR
+408:26:Name -> Inst:builtins.tuple
+410:8:Call -> Const:NoneType:None
+410:8:Attribute -> BM:unittest.case.TestCase.assertIn
+410:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+411:27:Call -> ERR
+411:27:Attribute -> ERR
+411:27:Name -> Inst:builtins.tuple
+413:8:Call -> Const:NoneType:None
+413:8:Attribute -> BM:unittest.case.TestCase.assertIn
+413:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+414:27:Call -> ERR
+414:27:Attribute -> ERR
+414:27:Name -> Inst:builtins.tuple
+416:8:Call -> Const:NoneType:None
+416:8:Attribute -> BM:unittest.case.TestCase.assertIn
+416:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+418:12:Call -> ERR
+418:12:Attribute -> ERR
+418:12:Name -> Inst:builtins.tuple
+421:8:Call -> Const:NoneType:None
+421:8:Attribute -> BM:unittest.case.TestCase.assertIn
+421:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+422:22:Call -> ERR
+422:22:Attribute -> ERR
+422:22:Name -> Inst:builtins.tuple
+424:8:Call -> Const:NoneType:None
+424:8:Attribute -> BM:unittest.case.TestCase.assertIn
+424:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+425:22:Call -> ERR
+425:22:Attribute -> ERR
+425:22:Name -> Inst:builtins.tuple
+427:8:Call -> Const:NoneType:None
+427:8:Attribute -> BM:unittest.case.TestCase.assertIn
+427:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+428:22:Call -> ERR
+428:22:Attribute -> ERR
+428:22:Name -> Inst:builtins.tuple
+433:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+433:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+433:16:Call -> Inst:django.test.runner.DiscoverRunner
+433:16:Name -> Class:django.test.runner.DiscoverRunner
+436:16:Call -> Inst:builtins.list
+436:16:Name -> Class:builtins.list
+436:21:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+437:8:Call -> Const:NoneType:None
+437:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+437:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+437:30:Name -> Inst:builtins.list
+437:40:Attribute -> Class:unittest.loader._FailedTest
+437:40:Attribute -> Module:unittest.loader
+437:40:Name -> Module:unittest
+438:8:Call -> Const:NoneType:None
+438:8:Attribute -> BM:unittest.case.TestCase.assertNotIsInstance
+438:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+438:33:Name -> Inst:builtins.list
+438:44:Attribute -> Class:unittest.loader._FailedTest
+438:44:Attribute -> Module:unittest.loader
+438:44:Name -> Module:unittest
+450:32:Name -> List:4
+451:17:Call -> Gen:unittest.case.TestCase.subTest
+451:17:Attribute -> BM:unittest.case.TestCase.subTest
+451:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+451:37:Name -> Dict:0 | Dict:1 | Dict:1 | Dict:2
+453:25:Call -> Inst:django.test.runner.DiscoverRunner
+453:25:Name -> Class:django.test.runner.DiscoverRunner
+453:42:Name -> Dict:0 | Dict:1 | Dict:1 | Dict:2
+454:24:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+454:24:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+454:24:Name -> Inst:django.test.runner.DiscoverRunner
+454:55:Name -> List:4
+456:25:Call -> U
+456:25:Attribute -> U
+456:25:Call -> U
+456:25:Attribute -> U
+456:25:Name -> U
+456:62:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+457:16:Call -> Const:NoneType:None
+457:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+457:16:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+457:33:Name -> U
+457:40:Name -> List:4 | List:4 | List:4 | List:4
+460:8:Call -> Const:NoneType:None
+460:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+460:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+460:30:Call -> Dict:5
+460:30:Attribute -> BM:django.test.runner.DiscoverRunner.get_test_runner_kwargs
+460:30:Call -> Inst:django.test.runner.DiscoverRunner
+460:30:Name -> Class:django.test.runner.DiscoverRunner
+460:73:Name -> Class:builtins.dict
+463:8:Call -> Const:NoneType:None
+463:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+463:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+463:25:Attribute -> Class:unittest.suite.TestSuite
+463:25:Call -> Inst:django.test.runner.DiscoverRunner
+463:25:Name -> Class:django.test.runner.DiscoverRunner
+463:54:Name -> Class:unittest.suite.TestSuite
+466:8:Call -> Const:NoneType:None
+466:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+466:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+466:25:Attribute -> Class:unittest.runner.TextTestRunner
+466:25:Call -> Inst:django.test.runner.DiscoverRunner
+466:25:Name -> Class:django.test.runner.DiscoverRunner
+466:55:Name -> Class:unittest.runner.TextTestRunner
+469:8:Call -> Const:NoneType:None
+469:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+469:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+469:25:Attribute -> Inst:unittest.loader.TestLoader
+469:25:Call -> Inst:django.test.runner.DiscoverRunner
+469:25:Name -> Class:django.test.runner.DiscoverRunner
+469:55:Name -> Inst:unittest.loader.TestLoader
+472:17:Call -> Inst:django.test.runner.DiscoverRunner
+472:17:Name -> Class:django.test.runner.DiscoverRunner
+473:8:Call -> Const:NoneType:None
+473:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+473:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+474:12:Call -> Const:int:0 | U
+474:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+474:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+474:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+474:12:Name -> Inst:django.test.runner.DiscoverRunner
+476:17:Call -> Inst:django.test.runner.DiscoverRunner
+476:17:Name -> Class:django.test.runner.DiscoverRunner
+477:8:Call -> Const:NoneType:None
+477:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+477:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+478:12:Call -> Const:int:0 | U
+478:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+478:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+478:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+478:12:Name -> Inst:django.test.runner.DiscoverRunner
+480:17:Call -> Inst:django.test.runner.DiscoverRunner
+480:17:Name -> Class:django.test.runner.DiscoverRunner
+481:8:Call -> Const:NoneType:None
+481:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+481:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+482:12:Call -> Const:int:0 | U
+482:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+482:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+482:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+482:12:Name -> Inst:django.test.runner.DiscoverRunner
+486:17:Call -> Inst:django.test.runner.DiscoverRunner
+486:17:Name -> Class:django.test.runner.DiscoverRunner
+487:8:Call -> Const:NoneType:None
+487:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+487:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+488:12:Call -> Const:int:0 | U
+488:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+488:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+488:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+488:12:Name -> Inst:django.test.runner.DiscoverRunner
+490:17:Call -> Inst:django.test.runner.DiscoverRunner
+490:17:Name -> Class:django.test.runner.DiscoverRunner
+491:8:Call -> Const:NoneType:None
+491:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+491:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+492:12:Call -> Const:int:0 | U
+492:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+492:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+492:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+492:12:Name -> Inst:django.test.runner.DiscoverRunner
+494:17:Call -> Inst:django.test.runner.DiscoverRunner
+494:17:Name -> Class:django.test.runner.DiscoverRunner
+495:8:Call -> Const:NoneType:None
+495:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+495:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+496:12:Call -> Const:int:0 | U
+496:12:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+496:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+496:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+496:12:Name -> Inst:django.test.runner.DiscoverRunner
+501:12:Call -> ERR
+501:12:Attribute -> BM:builtins.dict.setdefault
+501:12:Name -> Dict:0
+502:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+502:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+502:20:Call -> Inst:django.test.runner.DiscoverRunner
+502:20:Name -> Class:django.test.runner.DiscoverRunner
+502:37:Name -> Dict:0
+505:19:Call -> Const:int:0 | U
+505:19:Attribute -> BM:unittest.suite.BaseTestSuite.countTestCases | BM:unittest.suite.BaseTestSuite.countTestCases
+505:19:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+507:8:Call -> Const:NoneType:None
+507:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+507:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+507:25:Call -> Const:int:0 | U
+507:25:Name -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_tag_inheritance.count_tests
+508:8:Call -> Const:NoneType:None
+508:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+508:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+508:25:Call -> Const:int:0 | U
+508:25:Name -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_tag_inheritance.count_tests
+509:8:Call -> Const:NoneType:None
+509:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+509:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+509:25:Call -> Const:int:0 | U
+509:25:Name -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_tag_inheritance.count_tests
+510:8:Call -> Const:NoneType:None
+510:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+510:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+510:25:Call -> Const:int:0 | U
+510:25:Name -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_tag_inheritance.count_tests
+511:8:Call -> Const:NoneType:None
+511:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+511:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+511:25:Call -> Const:int:0 | U
+511:25:Name -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_tag_inheritance.count_tests
+512:8:Call -> Const:NoneType:None
+512:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+512:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+512:25:Call -> Const:int:0 | U
+512:25:Name -> Func:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_tag_inheritance.count_tests
+515:13:Call -> Inst:unittest.case._AssertRaisesContext
+515:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+515:13:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+515:31:Name -> Class:builtins.SyntaxError
+516:12:Call -> U | Const:NoneType:None
+516:12:Name -> Func:importlib.import_module | U
+517:17:Call -> Inst:django.test.runner.DiscoverRunner
+517:17:Name -> Class:django.test.runner.DiscoverRunner
+520:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+520:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+520:16:Name -> Inst:django.test.runner.DiscoverRunner
+521:8:Call -> Const:NoneType:None
+521:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+521:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+522:13:Call -> U
+522:13:Attribute -> U
+522:13:Name -> U
+522:35:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+531:17:Call -> Inst:django.test.runner.DiscoverRunner
+531:17:Name -> Class:django.test.runner.DiscoverRunner
+532:13:Call -> Gen:django.test.utils.captured_output
+532:13:Name -> Func:django.test.utils.captured_stdout
+533:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+533:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+533:12:Name -> Inst:django.test.runner.DiscoverRunner
+534:12:Call -> Const:NoneType:None
+534:12:Attribute -> BM:unittest.case.TestCase.assertIn
+534:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+534:64:Call -> ERR
+534:64:Attribute -> ERR
+534:64:Name -> Inst:_io.TextIOWrapper
+537:17:Call -> Inst:django.test.runner.DiscoverRunner
+537:17:Name -> Class:django.test.runner.DiscoverRunner
+538:13:Call -> Gen:django.test.utils.captured_output
+538:13:Name -> Func:django.test.utils.captured_stdout
+539:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+539:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+539:12:Name -> Inst:django.test.runner.DiscoverRunner
+540:12:Call -> Const:NoneType:None
+540:12:Attribute -> BM:unittest.case.TestCase.assertIn
+540:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+540:64:Call -> ERR
+540:64:Attribute -> ERR
+540:64:Name -> Inst:_io.TextIOWrapper
+543:17:Call -> Inst:django.test.runner.DiscoverRunner
+543:17:Name -> Class:django.test.runner.DiscoverRunner
+544:13:Call -> Gen:django.test.utils.captured_output
+544:13:Name -> Func:django.test.utils.captured_stdout
+545:12:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+545:12:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+545:12:Name -> Inst:django.test.runner.DiscoverRunner
+551:12:Call -> Const:NoneType:None
+551:12:Attribute -> BM:unittest.case.TestCase.assertIn
+551:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+551:49:Call -> ERR
+551:49:Attribute -> ERR
+551:49:Name -> Inst:_io.TextIOWrapper
+555:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+555:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+555:13:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+555:38:Name -> Class:builtins.ValueError
+555:50:Name -> Const:str:'You cannot use --pdb with parallel test
+556:12:Call -> Inst:django.test.runner.DiscoverRunner
+556:12:Name -> Class:django.test.runner.DiscoverRunner
+560:17:Call -> Inst:django.test.runner.DiscoverRunner
+560:17:Name -> Class:django.test.runner.DiscoverRunner
+561:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+561:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+561:16:Name -> Inst:django.test.runner.DiscoverRunner
+562:8:Call -> Const:NoneType:None
+562:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+562:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+562:25:Attribute -> U
+562:25:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+562:42:Call -> ERR
+562:42:Name -> Func:builtins.len
+562:46:Attribute -> U
+562:46:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+569:17:Call -> Inst:django.test.runner.DiscoverRunner
+569:17:Name -> Class:django.test.runner.DiscoverRunner
+570:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+570:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+570:16:Name -> Inst:django.test.runner.DiscoverRunner
+571:8:Call -> Const:NoneType:None
+571:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+571:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+571:25:Attribute -> U
+571:25:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+571:42:Call -> ERR
+571:42:Name -> Func:builtins.len
+571:46:Attribute -> U
+571:46:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+572:8:Call -> Const:NoneType:None
+572:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+572:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+572:25:Attribute -> Const:int:0 | U
+572:25:Name -> Inst:django.test.runner.DiscoverRunner
+572:42:Attribute -> U
+572:42:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+579:17:Call -> Inst:django.test.runner.DiscoverRunner
+579:17:Name -> Class:django.test.runner.DiscoverRunner
+580:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+580:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+580:16:Name -> Inst:django.test.runner.DiscoverRunner
+581:8:Call -> Const:NoneType:None
+581:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+581:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+581:25:Attribute -> Const:int:0 | U
+581:25:Name -> Inst:django.test.runner.DiscoverRunner
+582:8:Call -> Const:NoneType:None
+582:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+582:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+582:30:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+582:37:Name -> Class:unittest.suite.TestSuite
+585:17:Call -> Inst:django.test.runner.DiscoverRunner
+585:17:Name -> Class:django.test.runner.DiscoverRunner
+586:13:Call -> Gen:django.test.utils.captured_output
+586:13:Name -> Func:django.test.utils.captured_stdout
+586:42:Call -> Gen:django.test.utils.captured_output
+586:42:Name -> Func:django.test.utils.captured_stderr
+587:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+587:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+587:20:Name -> Inst:django.test.runner.DiscoverRunner
+593:12:Call -> U
+593:12:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+593:12:Name -> Inst:django.test.runner.DiscoverRunner
+593:29:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+594:8:Call -> Const:NoneType:None
+594:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+594:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+594:45:Call -> ERR
+594:45:Attribute -> ERR
+594:45:Name -> Inst:_io.TextIOWrapper
+595:8:Call -> Const:NoneType:None
+595:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+595:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+595:45:Call -> ERR
+595:45:Attribute -> ERR
+595:45:Name -> Inst:_io.TextIOWrapper
+598:17:Call -> Inst:django.test.runner.DiscoverRunner
+598:17:Name -> Class:django.test.runner.DiscoverRunner
+599:13:Call -> Gen:django.test.utils.captured_output
+599:13:Name -> Func:django.test.utils.captured_stdout
+599:42:Call -> Gen:django.test.utils.captured_output
+599:42:Name -> Func:django.test.utils.captured_stderr
+600:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+600:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+600:20:Name -> Inst:django.test.runner.DiscoverRunner
+606:12:Call -> U
+606:12:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+606:12:Name -> Inst:django.test.runner.DiscoverRunner
+606:29:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+607:8:Call -> Const:NoneType:None
+607:8:Attribute -> BM:unittest.case.TestCase.assertIn
+607:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+607:42:Call -> ERR
+607:42:Attribute -> ERR
+607:42:Name -> Inst:_io.TextIOWrapper
+608:8:Call -> Const:NoneType:None
+608:8:Attribute -> BM:unittest.case.TestCase.assertIn
+608:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+608:42:Call -> ERR
+608:42:Attribute -> ERR
+608:42:Name -> Inst:_io.TextIOWrapper
+611:23:Name -> Class:django.test.runner.DiscoverRunner
+613:23:Call -> U
+613:23:Name -> U
+615:17:Call -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner.MyRunner
+615:17:Name -> Class:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner.MyRunner
+615:28:Name -> Dict:0
+617:13:Call -> Gen:django.test.utils.captured_output
+617:13:Name -> Func:django.test.utils.captured_stdout
+618:12:Call -> Const:NoneType:None
+618:12:Attribute -> BM:django.test.runner.DiscoverRunner.setup_shuffler
+618:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner.MyRunner
+619:13:Call -> Gen:django.test.utils.captured_output
+619:13:Name -> Func:django.test.utils.captured_stdout
+621:25:Call -> U
+621:25:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+621:25:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner.MyRunner
+622:19:Name -> Class:builtins.RuntimeError
+623:25:Call -> Const:str:''
+623:25:Name -> Class:builtins.str
+623:29:Name -> ExcInst:builtins.RuntimeError
+624:17:Call -> ERR
+624:17:Attribute -> ERR
+624:17:Name -> Inst:_io.TextIOWrapper
+625:15:Name -> U | Const:str:''
+625:23:Name -> U
+634:25:Call -> Tuple:2
+634:25:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner
+634:25:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+634:52:Name -> Class:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_run_suite_logs_seed.TestRunner
+635:8:Call -> Const:NoneType:None
+635:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+635:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+635:25:Name -> U | Const:str:''
+636:8:Call -> Const:NoneType:None
+636:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+636:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+636:25:Name -> Const:str:'Used shuffle seed'
+636:42:Name -> U
+638:25:Call -> Tuple:2
+638:25:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner
+638:25:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+638:52:Name -> Class:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_run_suite_logs_seed.TestRunner
+639:8:Call -> Const:NoneType:None
+639:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+639:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+639:25:Name -> U | Const:str:''
+640:29:Name -> Const:str:'Used shuffle seed'
+641:8:Call -> Const:NoneType:None
+641:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+641:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+641:25:Name -> U
+641:33:Name -> Const:str:'Used shuffle seed: 2 (given)\n'
+650:22:Call -> ExcInst:builtins.RuntimeError
+650:22:Name -> Class:builtins.RuntimeError
+652:25:Call -> Tuple:2
+652:25:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerTests.run_suite_with_runner
+652:25:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+652:52:Name -> Class:tests.test_runner.test_discover_runner.DiscoverRunnerTests.test_run_suite_logs_seed_exception.TestRunner
+653:8:Call -> Const:NoneType:None
+653:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+653:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+653:25:Name -> U | Const:str:''
+655:8:Call -> Const:NoneType:None
+655:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+655:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+655:25:Name -> U
+655:33:Name -> Const:str:'Used shuffle seed: 2 (given)\n'
+657:5:Call -> Inst:unittest.mock._patch
+657:5:Attribute -> Func:unittest.mock.patch
+657:5:Name -> Module:unittest.mock
+659:13:Call -> Inst:unittest.mock._patch
+659:13:Attribute -> Func:unittest.mock.patch
+659:13:Name -> Module:unittest.mock
+660:12:Call -> Inst:django.test.runner.DiscoverRunner
+660:12:Name -> Class:django.test.runner.DiscoverRunner
+661:12:Call -> U
+661:12:Attribute -> U
+661:12:Name -> U
+663:5:Call -> Inst:unittest.mock._patch
+663:5:Attribute -> Func:unittest.mock.patch
+663:5:Name -> Module:unittest.mock
+665:13:Call -> Inst:unittest.mock._patch
+665:13:Attribute -> Func:unittest.mock.patch
+665:13:Name -> Module:unittest.mock
+666:12:Call -> Inst:django.test.runner.DiscoverRunner
+666:12:Name -> Class:django.test.runner.DiscoverRunner
+667:12:Call -> U
+667:12:Attribute -> U
+667:12:Name -> U
+669:5:Call -> Inst:unittest.mock._patch
+669:5:Attribute -> Func:unittest.mock.patch
+669:5:Name -> Module:unittest.mock
+673:12:Call -> Inst:unittest.mock._patch
+673:12:Attribute -> Func:unittest.mock.patch
+673:12:Name -> Module:unittest.mock
+674:12:Call -> Gen:django.test.utils.captured_output
+674:12:Name -> Func:django.test.utils.captured_stderr
+676:12:Call -> Inst:django.test.runner.DiscoverRunner
+676:12:Name -> Class:django.test.runner.DiscoverRunner
+677:12:Call -> U
+677:12:Attribute -> U
+677:12:Name -> U
+679:5:Call -> Inst:unittest.mock._patch
+679:5:Attribute -> Func:unittest.mock.patch
+679:5:Name -> Module:unittest.mock
+681:13:Call -> Inst:unittest.mock._patch
+681:13:Attribute -> Func:unittest.mock.patch
+681:13:Name -> Module:unittest.mock
+682:12:Call -> Inst:django.test.runner.DiscoverRunner
+682:12:Name -> Class:django.test.runner.DiscoverRunner
+683:12:Call -> U
+683:12:Attribute -> U
+683:12:Name -> U
+686:17:Call -> Inst:django.test.runner.DiscoverRunner
+686:17:Name -> Class:django.test.runner.DiscoverRunner
+687:13:Call -> Gen:django.test.utils.captured_output
+687:13:Name -> Func:django.test.utils.captured_stderr
+688:17:Call -> Gen:django.test.utils.TimeKeeper.timed | Gen:django.test.utils.NullTimeKeeper.timed
+688:17:Attribute -> BM:django.test.utils.TimeKeeper.timed | BM:django.test.utils.NullTimeKeeper.timed
+688:17:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+688:17:Name -> Inst:django.test.runner.DiscoverRunner
+690:12:Call -> Const:NoneType:None | U
+690:12:Attribute -> BM:django.test.utils.TimeKeeper.print_results | BM:django.test.utils.NullTimeKeeper.print_results
+690:12:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+690:12:Name -> Inst:django.test.runner.DiscoverRunner
+691:8:Call -> Const:NoneType:None
+691:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+691:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+691:30:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+691:30:Name -> Inst:django.test.runner.DiscoverRunner
+691:50:Name -> Class:django.test.utils.NullTimeKeeper
+692:8:Call -> Const:NoneType:None
+692:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+692:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+692:33:Call -> ERR
+692:33:Attribute -> ERR
+692:33:Name -> Inst:_io.TextIOWrapper
+695:17:Call -> Inst:django.test.runner.DiscoverRunner
+695:17:Name -> Class:django.test.runner.DiscoverRunner
+696:13:Call -> Gen:django.test.utils.captured_output
+696:13:Name -> Func:django.test.utils.captured_stderr
+697:17:Call -> Gen:django.test.utils.TimeKeeper.timed | Gen:django.test.utils.NullTimeKeeper.timed
+697:17:Attribute -> BM:django.test.utils.TimeKeeper.timed | BM:django.test.utils.NullTimeKeeper.timed
+697:17:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+697:17:Name -> Inst:django.test.runner.DiscoverRunner
+699:12:Call -> Const:NoneType:None | U
+699:12:Attribute -> BM:django.test.utils.TimeKeeper.print_results | BM:django.test.utils.NullTimeKeeper.print_results
+699:12:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+699:12:Name -> Inst:django.test.runner.DiscoverRunner
+700:8:Call -> Const:NoneType:None
+700:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+700:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+700:30:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+700:30:Name -> Inst:django.test.runner.DiscoverRunner
+700:50:Name -> Class:django.test.utils.TimeKeeper
+701:8:Call -> Const:NoneType:None
+701:8:Attribute -> BM:unittest.case.TestCase.assertIn
+701:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+701:30:Call -> ERR
+701:30:Attribute -> ERR
+701:30:Name -> Inst:_io.TextIOWrapper
+709:16:Name -> Const:int:5
+710:16:Attribute -> Const:int:10
+710:16:Name -> Module:logging
+711:16:Attribute -> Const:int:20
+711:16:Name -> Module:logging
+712:16:Attribute -> Const:int:30
+712:16:Name -> Module:logging
+713:16:Name -> Const:int:45
+715:16:Name -> Const:int:5
+716:16:Attribute -> Const:int:10
+716:16:Name -> Module:logging
+717:16:Attribute -> Const:int:20
+717:16:Name -> Module:logging
+718:16:Attribute -> Const:int:30
+718:16:Name -> Module:logging
+719:16:Name -> Const:int:45
+721:16:Name -> Const:int:5
+722:16:Attribute -> Const:int:10
+722:16:Name -> Module:logging
+723:16:Attribute -> Const:int:20
+723:16:Name -> Module:logging
+724:16:Attribute -> Const:int:30
+724:16:Name -> Module:logging
+725:16:Name -> Const:int:45
+727:16:Name -> Const:int:5
+728:16:Attribute -> Const:int:10
+728:16:Name -> Module:logging
+729:16:Attribute -> Const:int:20
+729:16:Name -> Module:logging
+730:16:Attribute -> Const:int:30
+730:16:Name -> Module:logging
+731:16:Name -> Const:int:45
+733:40:Name -> List:24
+734:17:Call -> Gen:unittest.case.TestCase.subTest
+734:17:Attribute -> BM:unittest.case.TestCase.subTest
+734:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+734:40:Name -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:3 | Const:int:3 | Const:int:3 | Const:int:3 | Const:int:3 | Const:int:3
+734:57:Name -> Const:NoneType:None | Const:int:5 | Const:int:10 | Const:int:20 | Const:int:30 | Const:int:45 | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+735:21:Call -> Gen:django.test.utils.captured_output
+735:21:Name -> Func:django.test.utils.captured_stdout
+736:29:Call -> Inst:django.test.runner.DiscoverRunner
+736:29:Name -> Class:django.test.runner.DiscoverRunner
+736:54:Name -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:2 | Const:int:3 | Const:int:3 | Const:int:3 | Const:int:3 | Const:int:3 | Const:int:3
+737:20:Call -> Const:NoneType:None
+737:20:Attribute -> BM:django.test.runner.DiscoverRunner.log
+737:20:Name -> Inst:django.test.runner.DiscoverRunner
+737:31:Name -> Const:str:'logging message'
+737:36:Name -> Const:NoneType:None | Const:int:5 | Const:int:10 | Const:int:20 | Const:int:30 | Const:int:45 | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+738:20:Call -> Const:NoneType:None
+738:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+738:20:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+738:37:Call -> ERR
+738:37:Attribute -> ERR
+738:37:Name -> Inst:_io.TextIOWrapper
+738:70:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True
+738:59:Name -> Const:str:'logging message'
+741:17:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+741:17:Attribute -> Func:logging.getLogger
+741:17:Name -> Module:logging
+746:13:Attribute -> Const:int:10
+746:13:Name -> Module:logging
+747:13:Attribute -> Const:int:20
+747:13:Name -> Module:logging
+748:13:Attribute -> Const:int:30
+748:13:Name -> Module:logging
+752:31:Name -> List:6
+753:17:Call -> Gen:unittest.case.TestCase.subTest
+753:17:Attribute -> BM:unittest.case.TestCase.subTest
+753:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+753:36:Name -> Const:NoneType:None | Const:int:5 | Const:int:10 | Const:int:20 | Const:int:30 | Const:int:45
+754:25:Call -> Inst:django.test.runner.DiscoverRunner
+754:25:Name -> Class:django.test.runner.DiscoverRunner
+754:47:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+757:21:Call -> Inst:unittest._log._AssertLogsContext
+757:21:Attribute -> BM:unittest.case.TestCase.assertLogs
+757:21:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+758:20:Call -> Const:NoneType:None
+758:20:Attribute -> BM:django.test.runner.DiscoverRunner.log
+758:20:Name -> Inst:django.test.runner.DiscoverRunner
+758:46:Name -> Const:NoneType:None | Const:int:5 | Const:int:10 | Const:int:20 | Const:int:30 | Const:int:45
+759:16:Call -> Const:NoneType:None
+759:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+759:16:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+759:33:Attribute -> U
+759:33:Name -> Const:NoneType:None | Inst:__astroid_synthetic._LoggingWatcher
+759:45:Name -> Const:str:'INFO:test.logging:log message' | Const:str:'Level 5:test.logging:log message' | Const:str:'DEBUG:test.logging:log message' | Const:str:'INFO:test.logging:log message' | Const:str:'WARNING:test.logging:log message' | Const:str:'Level 45:test.logging:log message'
+768:17:Call -> Inst:django.test.runner.DiscoverRunner
+768:17:Name -> Class:django.test.runner.DiscoverRunner
+769:43:Name -> List:4
+770:17:Call -> Gen:unittest.case.TestCase.subTest
+770:17:Attribute -> BM:unittest.case.TestCase.subTest
+770:17:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+770:39:Name -> Const:str:'FailureTestCase' | Const:str:'ErrorTestCase' | Const:str:'ExpectedFailureTestCase' | Const:str:'UnexpectedSuccessTestCase'
+771:24:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+771:24:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+771:24:Name -> Inst:django.test.runner.DiscoverRunner
+773:68:Name -> Const:str:'FailureTestCase' | Const:str:'ErrorTestCase' | Const:str:'ExpectedFailureTestCase' | Const:str:'UnexpectedSuccessTestCase'
+776:21:Call -> Gen:django.test.utils.captured_output
+776:21:Name -> Func:django.test.utils.captured_stderr
+777:29:Call -> U
+777:29:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+777:29:Name -> Inst:django.test.runner.DiscoverRunner
+777:46:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+778:27:Call -> U
+778:27:Attribute -> BM:django.test.runner.DiscoverRunner.suite_result
+778:27:Name -> Inst:django.test.runner.DiscoverRunner
+778:47:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+778:54:Name -> U
+779:16:Call -> Const:NoneType:None
+779:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+779:16:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+779:33:Name -> U
+779:43:Name -> Const:int:1 | Const:int:1 | Const:int:0 | Const:int:1
+782:13:Call -> Gen:django.test.utils.captured_output
+782:13:Name -> Func:django.test.utils.captured_stderr
+782:42:Call -> Gen:django.test.utils.captured_output
+782:42:Name -> Func:django.test.utils.captured_stdout
+783:21:Call -> Inst:django.test.runner.DiscoverRunner
+783:21:Name -> Class:django.test.runner.DiscoverRunner
+784:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+784:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+784:20:Name -> Inst:django.test.runner.DiscoverRunner
+785:12:Call -> U
+785:12:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+785:12:Name -> Inst:django.test.runner.DiscoverRunner
+785:29:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+786:8:Call -> Const:NoneType:None
+786:8:Attribute -> BM:unittest.case.TestCase.assertIn
+786:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+786:48:Call -> ERR
+786:48:Attribute -> ERR
+786:48:Name -> Inst:_io.TextIOWrapper
+789:13:Call -> Gen:django.test.utils.captured_output
+789:13:Name -> Func:django.test.utils.captured_stderr
+789:42:Call -> Gen:django.test.utils.captured_output
+789:42:Name -> Func:django.test.utils.captured_stdout
+790:21:Call -> Inst:django.test.runner.DiscoverRunner
+790:21:Name -> Class:django.test.runner.DiscoverRunner
+791:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+791:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+791:20:Name -> Inst:django.test.runner.DiscoverRunner
+792:12:Call -> U
+792:12:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+792:12:Name -> Inst:django.test.runner.DiscoverRunner
+792:29:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+793:8:Call -> Const:NoneType:None
+793:8:Attribute -> BM:unittest.case.TestCase.assertIn
+793:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerTests
+793:48:Call -> ERR
+793:48:Attribute -> ERR
+793:48:Name -> Inst:_io.TextIOWrapper
+796:38:Name -> Class:django.test.testcases.SimpleTestCase
+797:13:Call -> Inst:django.test.runner.DiscoverRunner
+797:13:Name -> Class:django.test.runner.DiscoverRunner
+801:13:Call -> Gen:django.test.utils.captured_output
+801:13:Name -> Func:django.test.utils.captured_stdout
+802:20:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+802:20:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+802:20:Attribute -> Inst:django.test.runner.DiscoverRunner
+802:20:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+802:44:Name -> U
+803:24:Call -> Dict:0
+803:24:Attribute -> BM:django.test.runner.DiscoverRunner.get_databases
+803:24:Attribute -> Inst:django.test.runner.DiscoverRunner
+803:24:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+803:50:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+804:15:Name -> Dict:0
+804:26:Call -> ERR
+804:26:Attribute -> ERR
+804:26:Name -> Inst:_io.TextIOWrapper
+807:28:Call -> Tuple:2
+807:28:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.get_databases
+807:28:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+807:47:Name -> U
+808:8:Call -> Const:NoneType:None
+808:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+808:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+808:25:Name -> Dict:0
+808:36:Name -> U
+809:28:Call -> Inst:builtins.set
+809:28:Name -> Class:builtins.set
+809:32:Name -> Inst:django.db.utils.ConnectionHandler
+809:47:Call -> Inst:builtins.set
+809:47:Name -> Class:builtins.set
+809:51:Name -> U
+810:11:Name -> U
+811:12:Call -> Const:NoneType:None
+811:12:Attribute -> BM:unittest.case.TestCase.assertIn
+811:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+811:26:Attribute -> Const:str:'Skipping setup of unused database(s): '
+811:26:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+811:42:Call -> Const:str:''
+811:42:Attribute -> BM:builtins.str.join
+811:52:Call -> ERR
+811:52:Name -> Func:builtins.sorted
+811:59:Name -> U
+811:80:Name -> U
+813:12:Call -> Const:NoneType:None
+813:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+813:12:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+813:29:Attribute -> Const:str:'Skipping setup of unused database(s): '
+813:29:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+813:44:Name -> U
+816:28:Call -> Tuple:2
+816:28:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.get_databases
+816:28:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+817:8:Call -> Const:NoneType:None
+817:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+817:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+817:25:Name -> Dict:0
+818:8:Call -> Const:NoneType:None
+818:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+818:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+818:25:Attribute -> Const:str:'Skipping setup of unused database(s): '
+818:25:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+818:40:Name -> U
+821:28:Call -> Tuple:2
+821:28:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.get_databases
+821:28:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+824:8:Call -> Const:NoneType:None
+824:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+824:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+824:25:Name -> Dict:0
+824:37:Name -> U
+824:63:Name -> Inst:django.db.utils.ConnectionHandler
+825:8:Call -> Const:NoneType:None
+825:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+825:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+825:25:Attribute -> Const:str:'Skipping setup of unused database(s): '
+825:25:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+825:40:Name -> U
+828:8:Call -> Const:NoneType:None
+828:8:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.assertSkippedDatabases
+828:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+837:8:Call -> Const:NoneType:None
+837:8:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.assertSkippedDatabases
+837:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+845:8:Call -> Const:NoneType:None
+845:8:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.assertSkippedDatabases
+845:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+850:8:Call -> Const:NoneType:None
+850:8:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.assertSkippedDatabases
+850:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+855:23:Call -> Tuple:2
+855:23:Attribute -> BM:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests.get_databases
+855:23:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+858:8:Call -> Const:NoneType:None
+858:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+858:8:Name -> Inst:tests.test_runner.test_discover_runner.DiscoverRunnerGetDatabasesTests
+858:25:Name -> Dict:0

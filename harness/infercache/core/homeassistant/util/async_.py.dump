@@ -1,0 +1,123 @@
+18:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:10:Attribute -> Func:logging.getLogger
+18:10:Name -> Module:logging
+18:28:Name -> Const:str:'homeassistant.util.async_' | Const:str:'__main__'
+24:10:Name -> Class:_collections_abc.Coroutine
+24:20:Name -> Class:typing.Any
+24:25:Name -> Class:typing.Any
+24:30:Name -> Const:NoneType:None
+26:10:Name -> Class:builtins.str
+27:10:Name -> Class:asyncio.events.AbstractEventLoop
+28:5:Name -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+28:10:Name -> Const:NoneType:None
+30:11:Name -> Const:NoneType:None | U
+32:19:Call -> U
+32:19:Name -> Func:asyncio.events.get_running_loop | Func:_asyncio.get_running_loop
+33:15:Name -> Class:builtins.RuntimeError
+39:12:Call -> Const:NoneType:None
+39:12:Attribute -> Func:homeassistant.helpers.frame.report_usage
+39:12:Name -> Module:homeassistant.helpers.frame
+42:11:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+42:11:Name -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+42:16:Name -> U
+42:27:Name -> Const:NoneType:None | U
+42:38:Name -> Const:NoneType:None | U
+45:21:Name -> Class:asyncio.futures.Future | Class:_asyncio.Future
+45:28:Name -> Class:typing.Any
+45:37:Name -> Class:builtins.bool
+47:11:Call -> U
+47:11:Name -> Class:builtins.bool
+47:32:Call -> U
+47:32:Name -> Func:builtins.getattr
+47:40:Name -> U
+47:71:Call -> U
+47:71:Name -> U
+51:10:Name -> Class:asyncio.events.AbstractEventLoop
+51:39:Name -> Class:_collections_abc.Callable
+51:50:Name -> Const:NoneType:None
+51:56:Name -> Const:NoneType:None
+51:69:Name -> Const:NoneType:None
+52:5:Attribute -> Class:concurrent.futures._base.Future
+52:5:Attribute -> Module:concurrent.futures
+52:5:Name -> Module:concurrent
+52:31:Name -> Const:NoneType:None
+57:17:Call -> U
+57:17:Attribute -> U
+57:17:Attribute -> U
+57:17:Name -> U
+57:54:Name -> U
+57:63:Call -> ERR
+57:63:Attribute -> Func:_thread.get_ident
+57:63:Name -> Module:threading
+58:14:Call -> ExcInst:builtins.RuntimeError
+58:14:Name -> Class:builtins.RuntimeError
+60:12:Attribute -> Class:concurrent.futures._base.Future
+60:12:Attribute -> Module:concurrent.futures
+60:12:Name -> Module:concurrent
+60:38:Name -> Const:NoneType:None
+60:44:Call -> Inst:concurrent.futures._base.Future
+60:44:Attribute -> Class:concurrent.futures._base.Future
+60:44:Attribute -> Module:concurrent.futures
+60:44:Name -> Module:concurrent
+65:12:Call -> Const:NoneType:None
+65:12:Attribute -> BM:concurrent.futures._base.Future.set_result
+65:12:Name -> Inst:concurrent.futures._base.Future
+65:30:Call -> U
+65:30:Name -> U
+65:40:Name -> Tuple:0
+66:15:Name -> Class:builtins.Exception
+67:15:Call -> Const:bool:False | Const:bool:True
+67:15:Attribute -> BM:concurrent.futures._base.Future.set_running_or_notify_cancel
+67:15:Name -> Inst:concurrent.futures._base.Future
+68:16:Call -> Const:NoneType:None
+68:16:Attribute -> BM:concurrent.futures._base.Future.set_exception
+68:16:Name -> Inst:concurrent.futures._base.Future
+68:37:Name -> ExcInst:builtins.Exception
+70:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+70:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+70:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+72:4:Call -> U
+72:4:Attribute -> U
+72:4:Name -> U
+72:30:Name -> Func:homeassistant.util.async_.run_callback_threadsafe.run_callback
+74:7:Call -> U
+74:7:Name -> Func:builtins.hasattr
+74:15:Name -> U
+74:21:Name -> Const:str:'_shutdown_run_callback_threadsafe'
+93:14:Call -> ExcInst:builtins.RuntimeError
+93:14:Name -> Class:builtins.RuntimeError
+95:11:Name -> Inst:concurrent.futures._base.Future
+99:11:Name -> Class:builtins.int
+99:24:Name -> Class:typing.Any
+99:48:Name -> Class:builtins.bool
+100:5:Name -> Class:typing.Any
+105:16:Call -> Inst:asyncio.locks.Semaphore
+105:16:Name -> Class:asyncio.locks.Semaphore
+105:26:Name -> U
+107:29:Name -> Class:_collections_abc.Awaitable
+107:39:Name -> Class:typing.Any
+107:48:Name -> Class:typing.Any
+108:19:Name -> Inst:asyncio.locks.Semaphore
+109:25:Name -> U
+111:17:Call -> U | Inst:asyncio.tasks._GatheringFuture
+111:17:Name -> Func:asyncio.tasks.gather
+112:10:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+112:10:Name -> Func:homeassistant.util.async_.create_eager_task
+112:28:Call -> U
+112:28:Name -> Func:homeassistant.util.async_.gather_with_limited_concurrency.sem_task
+112:37:Name -> U
+112:56:Name -> Tuple:0
+113:26:Name -> Const:bool:False | U
+117:43:Name -> Class:asyncio.events.AbstractEventLoop
+131:4:Call -> ERR
+131:4:Name -> Func:builtins.setattr
+131:12:Name -> U
+131:18:Name -> Const:str:'_shutdown_run_callback_threadsafe'
+134:38:Name -> Class:asyncio.events.AbstractEventLoop
+134:60:Name -> Class:builtins.list
+134:65:Name -> Class:asyncio.events.TimerHandle
+136:13:Name -> Class:builtins.list
+136:18:Name -> Class:asyncio.events.TimerHandle
+136:33:Attribute -> U
+136:33:Name -> U
+137:11:Name -> U

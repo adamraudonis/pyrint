@@ -1,0 +1,16 @@
+7:12:Name -> Class:tests.migrations.test_base.MigrationTestBase
+12:5:Call -> Inst:django.test.utils.override_settings
+12:5:Name -> Class:django.test.utils.override_settings
+17:8:Call -> Const:NoneType:None
+17:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+17:8:Name -> Inst:tests.migrations.test_deprecated_fields.Tests
+19:8:Call -> U
+19:8:Name -> Func:django.core.management.call_command
+21:8:Call -> Const:NoneType:None
+21:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+21:8:Name -> Inst:tests.migrations.test_deprecated_fields.Tests
+23:8:Call -> U
+23:8:Name -> Func:django.core.management.call_command
+25:8:Call -> Const:NoneType:None
+25:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+25:8:Name -> Inst:tests.migrations.test_deprecated_fields.Tests

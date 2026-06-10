@@ -1,0 +1,297 @@
+26:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+26:9:Attribute -> Func:logging.getLogger
+26:9:Name -> Module:logging
+44:15:Call -> U
+44:15:Name -> Func:builtins.getattr
+44:23:Name -> Inst:django.conf.LazySettings
+45:7:Name -> U
+46:15:Call -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+46:15:Name -> Func:django.core.wsgi.get_wsgi_application | Func:tests.wsgi.tests.GetInternalWSGIApplicationTest.test_default.mock_get_wsgi_app | U
+49:15:Call -> U
+49:15:Name -> Func:django.utils.module_loading.import_string
+49:29:Name -> U
+50:11:Name -> Class:builtins.ImportError
+51:14:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+51:14:Name -> Class:django.core.exceptions.ImproperlyConfigured
+53:40:Name -> U
+54:15:Name -> ExcInst:builtins.ImportError
+58:21:Call -> ERR
+58:21:Attribute -> Func:sys.exc_info
+58:21:Name -> Module:sys
+59:11:Call -> ERR
+59:11:Name -> Func:builtins.issubclass
+60:8:Name -> U
+62:12:Name -> Class:builtins.BrokenPipeError
+63:12:Name -> Class:builtins.ConnectionAbortedError
+64:12:Name -> Class:builtins.ConnectionResetError
+69:17:Attribute -> Class:wsgiref.simple_server.WSGIServer
+69:17:Name -> Module:wsgiref.simple_server
+75:11:Name -> Const:bool:False | U
+76:12:Name -> Inst:django.core.servers.basehttp.WSGIServer
+76:34:Attribute -> Const:int:30
+76:34:Name -> Module:socket
+77:8:Name -> Inst:django.core.servers.basehttp.WSGIServer
+77:35:Name -> Const:bool:True | U
+78:8:Call -> Const:NoneType:None | Const:NoneType:None
+78:8:Attribute -> BM:socketserver.TCPServer.__init__ | BM:socketserver.BaseServer.__init__ | BM:builtins.object.__init__
+78:8:Call -> Super
+78:8:Name -> Class:builtins.super
+78:26:Name -> Tuple:0
+78:34:Name -> Dict:0
+81:11:Call -> U
+81:11:Name -> Func:django.core.servers.basehttp.is_broken_pipe_error
+82:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+82:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+82:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+82:49:Name -> U
+84:12:Call -> Const:NoneType:None
+84:12:Attribute -> BM:socketserver.BaseServer.handle_error
+84:12:Call -> Super
+84:12:Name -> Class:builtins.super
+84:33:Name -> U
+84:42:Name -> U
+87:25:Attribute -> Class:socketserver.ThreadingMixIn
+87:25:Name -> Module:socketserver
+87:54:Name -> Class:django.core.servers.basehttp.WSGIServer
+93:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+93:8:Attribute -> BM:django.core.servers.basehttp.WSGIServer.__init__ | BM:socketserver.TCPServer.__init__ | BM:socketserver.BaseServer.__init__ | BM:builtins.object.__init__
+93:8:Call -> Super
+93:8:Name -> Class:builtins.super
+93:26:Name -> Tuple:0
+93:34:Name -> Dict:0
+94:8:Name -> Inst:django.core.servers.basehttp.ThreadedWSGIServer
+94:36:Name -> Const:NoneType:None | U
+99:11:Attribute -> Const:NoneType:None | U
+99:11:Name -> Inst:django.core.servers.basehttp.ThreadedWSGIServer
+102:31:Call -> U
+102:31:Attribute -> U
+102:31:Attribute -> U
+102:31:Name -> Inst:django.core.servers.basehttp.ThreadedWSGIServer
+103:16:Name -> Inst:django.db.utils.ConnectionHandler
+103:28:Name -> U
+103:37:Name -> U
+104:8:Call -> Const:NoneType:None
+104:8:Attribute -> BM:socketserver.ThreadingMixIn.process_request_thread
+104:8:Call -> Super
+104:8:Name -> Class:builtins.super
+104:39:Name -> U
+104:48:Name -> U
+108:8:Call -> Const:NoneType:None
+108:8:Attribute -> BM:django.utils.connection.BaseConnectionHandler.close_all
+108:8:Name -> Inst:django.db.utils.ConnectionHandler
+111:8:Call -> Const:NoneType:None
+111:8:Attribute -> BM:django.core.servers.basehttp.ThreadedWSGIServer._close_connections
+111:8:Name -> Inst:django.core.servers.basehttp.ThreadedWSGIServer
+112:8:Call -> Const:NoneType:None | U
+112:8:Attribute -> BM:socketserver.TCPServer.close_request | BM:socketserver.BaseServer.close_request
+112:8:Call -> Super
+112:8:Name -> Class:builtins.super
+112:30:Name -> U
+115:20:Attribute -> Class:wsgiref.simple_server.ServerHandler
+115:20:Name -> Module:wsgiref.simple_server
+126:29:Call -> Inst:builtins.int
+126:29:Name -> Class:builtins.int
+126:33:Call -> U
+126:33:Attribute -> U
+126:33:Name -> U
+127:16:Name -> Class:builtins.ValueError
+127:28:Name -> Class:builtins.TypeError
+129:8:Call -> Const:NoneType:None
+129:8:Attribute -> BM:wsgiref.handlers.SimpleHandler.__init__ | BM:builtins.object.__init__
+129:8:Call -> Super
+129:8:Name -> Class:builtins.super
+130:12:Call -> Inst:django.core.handlers.wsgi.LimitedStream
+130:12:Name -> Class:django.core.handlers.wsgi.LimitedStream
+130:26:Name -> U
+130:33:Name -> Inst:builtins.int | Const:int:0
+130:50:Name -> U
+130:58:Name -> U
+130:66:Name -> U
+130:77:Name -> Dict:0
+134:8:Call -> Const:NoneType:None
+134:8:Attribute -> BM:wsgiref.handlers.BaseHandler.cleanup_headers
+134:8:Call -> Super
+134:8:Name -> Class:builtins.super
+136:12:Attribute -> Dict:0 | Const:NoneType:None
+136:12:Name -> Inst:django.core.servers.basehttp.ServerHandler
+137:36:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+137:36:Name -> Inst:django.core.servers.basehttp.ServerHandler
+138:16:Call -> Const:str:''
+138:16:Name -> Class:builtins.str
+138:20:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+138:20:Name -> Inst:django.core.servers.basehttp.ServerHandler
+140:16:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+140:16:Name -> Inst:django.core.servers.basehttp.ServerHandler
+145:12:Attribute -> Dict:0 | Const:NoneType:None
+145:12:Name -> Inst:django.core.servers.basehttp.ServerHandler
+146:40:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+146:40:Name -> Inst:django.core.servers.basehttp.ServerHandler
+148:12:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+148:12:Name -> Inst:django.core.servers.basehttp.ServerHandler
+150:17:Call -> ERR
+150:17:Name -> Func:builtins.isinstance
+150:28:Attribute -> ERR
+150:28:Attribute -> Inst:django.core.servers.basehttp.ServerHandler
+150:28:Name -> Inst:django.core.servers.basehttp.ServerHandler
+150:57:Attribute -> Class:socketserver.ThreadingMixIn
+150:57:Name -> Module:socketserver
+151:12:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+151:12:Name -> Inst:django.core.servers.basehttp.ServerHandler
+154:11:Call -> U | Const:NoneType:None
+154:11:Attribute -> BM:wsgiref.headers.Headers.get
+154:11:Attribute -> Inst:wsgiref.headers.Headers | Const:NoneType:None
+154:11:Name -> Inst:django.core.servers.basehttp.ServerHandler
+155:12:Attribute -> Inst:django.core.servers.basehttp.ServerHandler
+155:12:Name -> Inst:django.core.servers.basehttp.ServerHandler
+158:8:Call -> U
+158:8:Attribute -> U
+158:8:Call -> U
+158:8:Attribute -> BM:wsgiref.handlers.SimpleHandler.get_stdin
+158:8:Name -> Inst:django.core.servers.basehttp.ServerHandler
+159:8:Call -> Const:NoneType:None | Const:NoneType:None
+159:8:Attribute -> BM:wsgiref.simple_server.ServerHandler.close | BM:wsgiref.handlers.BaseHandler.close
+159:8:Call -> Super
+159:8:Name -> Class:builtins.super
+162:11:Attribute -> Dict:0 | Const:NoneType:None
+162:11:Name -> Inst:django.core.servers.basehttp.ServerHandler
+164:16:Call -> Inst:collections.deque
+164:16:Name -> Class:collections.deque
+164:22:Attribute -> U | Const:NoneType:None | List:1
+164:22:Name -> Inst:django.core.servers.basehttp.ServerHandler
+170:23:Attribute -> Const:bool:False | Const:bool:True
+170:23:Name -> Inst:django.core.servers.basehttp.ServerHandler
+171:20:Call -> Const:NoneType:None
+171:20:Attribute -> BM:wsgiref.handlers.BaseHandler.send_headers
+171:20:Name -> Inst:django.core.servers.basehttp.ServerHandler
+173:16:Call -> Const:NoneType:None
+173:16:Attribute -> BM:django.core.servers.basehttp.ServerHandler.close
+173:16:Name -> Inst:django.core.servers.basehttp.ServerHandler
+175:12:Call -> Const:NoneType:None
+175:12:Attribute -> BM:wsgiref.handlers.BaseHandler.finish_response
+175:12:Call -> Super
+175:12:Name -> Class:builtins.super
+178:25:Attribute -> Class:wsgiref.simple_server.WSGIRequestHandler
+178:25:Name -> Module:wsgiref.simple_server
+183:15:Attribute -> U
+183:15:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+186:11:Name -> Tuple:0
+186:33:Call -> ERR
+186:33:Attribute -> ERR
+186:33:Name -> Tuple:0
+194:13:Call -> ERR
+194:13:Attribute -> ERR
+194:13:Name -> Tuple:0
+194:35:Call -> ERR
+194:35:Name -> Func:builtins.len
+194:39:Name -> Tuple:0
+195:26:Call -> Inst:builtins.int
+195:26:Name -> Class:builtins.int
+195:30:Name -> Tuple:0
+199:8:Call -> Const:NoneType:None
+199:8:Name -> Func:django.utils.log.log_message
+200:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+201:12:Name -> U | Const:str:"You're accessing the development server
+202:13:Name -> Tuple:0 | Tuple:0
+203:20:Attribute -> U
+203:20:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+204:24:Name -> Const:int:500 | Inst:builtins.int | Const:NoneType:None
+205:24:Call -> U
+205:24:Attribute -> BM:http.server.BaseHTTPRequestHandler.log_date_time_string
+205:24:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+213:17:Attribute -> U
+213:17:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+214:22:Name -> U
+215:20:Attribute -> U
+215:20:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+215:33:Name -> U
+217:15:Call -> U
+217:15:Attribute -> BM:wsgiref.simple_server.WSGIRequestHandler.get_environ
+217:15:Call -> Super
+217:15:Name -> Class:builtins.super
+220:8:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+221:8:Call -> Const:NoneType:None | Const:NoneType:None
+221:8:Attribute -> BM:django.core.servers.basehttp.WSGIRequestHandler.handle_one_request
+221:8:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+222:18:Attribute -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+222:18:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+223:12:Call -> Const:NoneType:None | Const:NoneType:None
+223:12:Attribute -> BM:django.core.servers.basehttp.WSGIRequestHandler.handle_one_request
+223:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+225:12:Call -> U
+225:12:Attribute -> U
+225:12:Attribute -> U
+225:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+225:37:Attribute -> Const:int:1
+225:37:Name -> Module:socket
+226:16:Name -> Class:builtins.AttributeError
+226:32:Name -> Class:builtins.OSError
+233:8:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+233:31:Call -> U
+233:31:Attribute -> U
+233:31:Attribute -> U
+233:31:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+234:11:Call -> ERR
+234:11:Name -> Func:builtins.len
+234:15:Attribute -> U
+234:15:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+235:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+236:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+237:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+238:12:Call -> Const:NoneType:None
+238:12:Attribute -> BM:http.server.BaseHTTPRequestHandler.send_error
+238:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+241:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+241:15:Attribute -> BM:http.server.BaseHTTPRequestHandler.parse_request
+241:15:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+244:18:Call -> Inst:django.core.servers.basehttp.ServerHandler
+244:18:Name -> Class:django.core.servers.basehttp.ServerHandler
+245:12:Attribute -> U
+245:12:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+245:24:Attribute -> Inst:socketserver._SocketWriter | U
+245:24:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+245:36:Call -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+245:36:Attribute -> BM:wsgiref.simple_server.WSGIRequestHandler.get_stderr
+245:36:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+245:55:Call -> U
+245:55:Attribute -> BM:django.core.servers.basehttp.WSGIRequestHandler.get_environ
+245:55:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+247:8:Name -> Inst:django.core.servers.basehttp.ServerHandler
+247:34:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+248:8:Call -> Const:NoneType:None
+248:8:Attribute -> BM:wsgiref.handlers.BaseHandler.run
+248:8:Name -> Inst:django.core.servers.basehttp.ServerHandler
+248:20:Call -> U
+248:20:Attribute -> U
+248:20:Attribute -> U
+248:20:Name -> Inst:django.core.servers.basehttp.WSGIRequestHandler
+258:15:Name -> Class:django.core.servers.basehttp.WSGIServer
+260:22:Name -> U
+260:28:Name -> U
+261:7:Name -> Const:bool:False | U
+262:20:Call -> Class:django.core.servers.basehttp.run.WSGIServer
+262:20:Name -> Class:builtins.type
+262:40:Attribute -> Class:socketserver.ThreadingMixIn
+262:40:Name -> Module:socketserver
+262:69:Name -> Class:django.core.servers.basehttp.WSGIServer | U
+264:20:Name -> Class:django.core.servers.basehttp.WSGIServer | U
+265:12:Call -> Inst:django.core.servers.basehttp.run.WSGIServer | Inst:django.core.servers.basehttp.WSGIServer | U
+265:12:Name -> Class:django.core.servers.basehttp.run.WSGIServer | Class:django.core.servers.basehttp.WSGIServer | U
+265:22:Name -> Tuple:2
+265:38:Name -> Class:django.core.servers.basehttp.WSGIRequestHandler
+265:63:Name -> Const:bool:False | U
+266:7:Name -> Const:NoneType:None | U
+267:8:Call -> U
+267:8:Name -> U
+267:16:Call -> U
+267:16:Name -> Func:builtins.getattr
+267:24:Name -> Inst:django.core.servers.basehttp.run.WSGIServer | Inst:django.core.servers.basehttp.WSGIServer | U
+267:46:Name -> U
+268:7:Name -> Const:bool:False | U
+275:8:Name -> Inst:django.core.servers.basehttp.run.WSGIServer | Inst:django.core.servers.basehttp.WSGIServer | U
+276:4:Call -> Const:NoneType:None | Const:NoneType:None | U
+276:4:Attribute -> BM:wsgiref.simple_server.WSGIServer.set_app | BM:wsgiref.simple_server.WSGIServer.set_app | U
+276:4:Name -> Inst:django.core.servers.basehttp.run.WSGIServer | Inst:django.core.servers.basehttp.WSGIServer | U
+276:18:Name -> U
+277:4:Call -> Const:NoneType:None | Const:NoneType:None | U
+277:4:Attribute -> BM:socketserver.BaseServer.serve_forever | BM:socketserver.BaseServer.serve_forever | U
+277:4:Name -> Inst:django.core.servers.basehttp.run.WSGIServer | Inst:django.core.servers.basehttp.WSGIServer | U

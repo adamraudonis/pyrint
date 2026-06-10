@@ -1,0 +1,91 @@
+20:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:10:Attribute -> Func:logging.getLogger
+20:10:Name -> Module:logging
+20:28:Name -> Const:str:'homeassistant.components.command_line.n | Const:str:'__main__'
+24:10:Name -> U
+25:12:Name -> Class:builtins.dict
+26:20:Name -> Class:builtins.dict
+27:5:Name -> ERR
+29:11:Name -> Const:NoneType:None | U
+30:8:Call -> Const:NoneType:None
+30:8:Name -> Func:homeassistant.components.command_line.utils.create_platform_yaml_not_supported_issue
+30:49:Name -> U
+30:55:Name -> Const:str:'notify'
+33:20:Name -> Const:NoneType:None | U
+34:13:Name -> Class:builtins.str
+34:19:Name -> Const:NoneType:None | U
+34:33:Name -> Const:str:'command'
+35:13:Name -> Class:builtins.int
+35:19:Name -> Const:NoneType:None | U
+35:33:Name -> Const:str:'command_timeout'
+37:11:Call -> Inst:homeassistant.components.command_line.notify.CommandLineNotificationService
+37:11:Name -> Class:homeassistant.components.command_line.notify.CommandLineNotificationService
+37:42:Name -> U
+37:51:Name -> U
+40:37:Name -> Class:homeassistant.components.notify.legacy.BaseNotificationService
+43:32:Name -> Class:builtins.str
+43:46:Name -> Class:builtins.int
+45:8:Name -> Inst:homeassistant.components.command_line.notify.CommandLineNotificationService
+45:23:Name -> U
+46:8:Name -> Inst:homeassistant.components.command_line.notify.CommandLineNotificationService
+46:24:Name -> U
+48:36:Name -> Class:builtins.str
+48:56:Name -> Class:typing.Any
+50:27:Call -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+50:27:Name -> Func:homeassistant.components.command_line.utils.render_template_args
+50:48:Attribute -> U
+50:48:Name -> Inst:homeassistant.components.command_line.notify.CommandLineNotificationService
+50:59:Attribute -> U
+50:59:Name -> Inst:homeassistant.components.command_line.notify.CommandLineNotificationService
+53:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+53:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+53:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:49:Name -> Const:str:'' | U
+55:13:Call -> Inst:subprocess.Popen
+55:13:Attribute -> Class:subprocess.Popen
+55:13:Name -> Module:subprocess
+56:12:Name -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+58:18:Attribute -> Const:int:-1
+58:18:Name -> Module:subprocess
+63:16:Call -> Tuple:2
+63:16:Attribute -> BM:subprocess.Popen.communicate
+63:16:Name -> Inst:subprocess.Popen
+63:39:Name -> Const:str:'' | U
+63:56:Attribute -> U
+63:56:Name -> Inst:homeassistant.components.command_line.notify.CommandLineNotificationService
+64:19:Attribute -> Const:int:0
+64:19:Name -> Inst:subprocess.Popen
+65:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+65:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+65:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+67:24:Attribute -> Const:int:0
+67:24:Name -> Inst:subprocess.Popen
+68:24:Name -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+70:19:Attribute -> Class:subprocess.TimeoutExpired
+70:19:Name -> Module:subprocess
+71:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+71:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+71:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+71:57:Name -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+72:16:Call -> Const:NoneType:None
+72:16:Name -> Func:homeassistant.util.process.kill_subprocess
+72:32:Name -> Inst:subprocess.Popen
+73:22:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+73:22:Name -> Class:homeassistant.exceptions.HomeAssistantError
+74:39:Name -> Const:str:'command_line'
+76:57:Name -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+77:23:Name -> ExcInst:subprocess.TimeoutExpired
+78:19:Attribute -> Class:subprocess.SubprocessError
+78:19:Name -> Module:subprocess
+79:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+79:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+79:66:Name -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+80:22:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+80:22:Name -> Class:homeassistant.exceptions.HomeAssistantError
+81:39:Name -> Const:str:'command_line'
+83:57:Name -> Const:NoneType:None | U | Const:str:'Uninferable None' | Const:str:'Uninferable Uninferable'
+83:75:Call -> Const:str:''
+83:75:Name -> Class:builtins.str
+83:79:Name -> ExcInst:subprocess.SubprocessError
+84:23:Name -> ExcInst:subprocess.SubprocessError

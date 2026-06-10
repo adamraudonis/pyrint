@@ -1,0 +1,93 @@
+29:1:Call -> U
+29:1:Name -> U
+29:31:Call -> U
+29:31:Attribute -> U
+29:31:Name -> U
+44:5:Attribute -> U
+44:5:Name -> U
+45:30:Name -> Class:builtins.int
+45:58:Name -> Class:builtins.str
+45:66:Name -> Class:builtins.str
+46:23:Name -> U
+46:56:Name -> U
+48:19:Call -> ERR
+48:19:Call -> ERR
+48:19:Attribute -> ERR
+48:19:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.run_me
+48:52:Name -> U
+48:71:Name -> U
+48:83:Call -> Inst:builtins.range
+48:83:Name -> Class:builtins.range
+51:5:Attribute -> U
+51:5:Name -> U
+52:28:Name -> Class:builtins.str
+55:15:Call -> Const:str:'echo https://airflow.apache.org/'
+55:15:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.run_after_loop
+59:5:Attribute -> U
+59:5:Name -> U
+60:27:Name -> Class:builtins.str
+63:16:Call -> Const:str:'echo "ti_key={{ task_instance_key_str }
+63:16:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.also_run_this
+67:5:Attribute -> U
+67:5:Name -> U
+68:54:Name -> Class:builtins.str
+69:31:Name -> U
+71:22:Call -> Const:str:'echo "ti_key=Uninferable"'
+71:22:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.also_run_this_again
+75:5:Attribute -> U
+75:5:Name -> U
+76:28:Name -> Class:builtins.str
+79:17:Call -> Const:str:'echo "hello world"; exit 99;'
+79:17:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.this_will_skip
+82:20:Call -> U
+82:20:Name -> U
+82:72:Attribute -> U
+82:72:Name -> U
+85:5:Attribute -> U
+85:5:Name -> U
+86:22:Name -> Class:builtins.str
+86:30:Name -> Class:builtins.str
+87:11:Name -> U
+87:19:Attribute -> U
+87:19:Name -> U
+87:37:Attribute -> U
+87:37:Name -> U
+89:14:Call -> U
+89:14:Name -> U
+91:4:Call -> Const:str:'sleep 3600'
+91:4:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.sleep_in
+95:5:Call -> U
+95:5:Attribute -> U
+95:5:Name -> U
+96:36:Name -> Class:builtins.str
+96:44:Name -> Class:builtins.str
+97:51:Name -> U
+99:4:Call -> Const:str:'mkdir -p $AIRFLOW_HOME/$BASE_DIR/foo/ba
+99:4:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.make_dynamic_dirs
+103:5:Attribute -> U
+103:5:Name -> U
+104:28:Name -> Class:builtins.str
+109:23:Call -> Const:str:''
+109:23:Name -> Class:builtins.str
+109:27:Call -> Inst:pathlib.Path
+109:27:Name -> Class:pathlib.Path
+109:32:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+110:14:Call -> Const:str:''
+110:14:Name -> Func:shlex.join
+110:28:Name -> Const:str:''
+112:15:Name -> Const:str:''
+114:4:Call -> Const:str:''
+114:4:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator.get_file_stats
+117:4:Call -> U
+117:4:Name -> U
+117:10:Name -> U
+117:23:Name -> Const:str:'echo https://airflow.apache.org/'
+118:4:Call -> U
+118:4:Name -> U
+118:11:Name -> Const:str:'echo "ti_key={{ task_instance_key_str }
+118:22:Name -> Const:str:'echo "ti_key=Uninferable"'
+118:39:Name -> Const:str:'echo "hello world"; exit 99;'
+118:51:Name -> Const:str:'echo https://airflow.apache.org/'
+118:62:Name -> U
+121:0:Call -> Const:NoneType:None
+121:0:Name -> Func:providers.standard.src.airflow.providers.standard.example_dags.example_bash_decorator.example_bash_decorator

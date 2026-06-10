@@ -1,0 +1,647 @@
+37:3:Name -> Const:bool:False
+43:35:Name -> Class:_collections_abc.Mapping
+43:43:Name -> Class:builtins.str
+43:48:Name -> Class:builtins.str
+43:71:Name -> Class:builtins.dict
+43:76:Name -> Class:builtins.str
+43:81:Name -> Class:builtins.str
+45:18:Call -> Dict:43
+45:18:Name -> Class:builtins.dict
+45:37:Name -> Const:NoneType:None | U
+45:23:Attribute -> Dict:43 | Inst:os._Environ
+45:23:Name -> Module:os
+45:54:Name -> U
+46:25:Name -> Tuple:2
+47:8:Call -> ERR
+47:8:Attribute -> BM:builtins.dict.pop
+47:8:Name -> Dict:43
+47:24:Name -> Const:str:'GH_TOKEN' | Const:str:'GITHUB_TOKEN'
+48:11:Name -> Dict:43
+51:35:Name -> Class:_collections_abc.Mapping
+51:43:Name -> Class:builtins.str
+51:48:Name -> Class:builtins.str
+51:71:Name -> Class:builtins.str
+53:31:Name -> Const:NoneType:None | U
+53:17:Attribute -> Dict:43 | Inst:os._Environ
+53:17:Name -> Module:os
+53:48:Name -> U
+54:25:Name -> Tuple:2
+55:16:Call -> U | Const:NoneType:None
+55:16:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get | U
+55:16:Name -> Dict:43 | Inst:os._Environ | U
+55:31:Name -> Const:str:'GH_TOKEN' | Const:str:'GITHUB_TOKEN'
+56:11:Name -> U | Const:NoneType:None
+57:19:Name -> U
+62:13:Name -> Class:_collections_abc.Sequence
+62:22:Name -> Class:builtins.str
+66:14:Name -> Class:typing.Any
+64:29:Name -> Class:builtins.bool
+65:9:Name -> Class:_collections_abc.Mapping
+65:17:Name -> Class:builtins.str
+65:22:Name -> Class:builtins.str
+67:5:Attribute -> Class:subprocess.CompletedProcess
+67:5:Name -> Module:subprocess
+67:33:Name -> Class:typing.Any
+74:39:Name -> Const:NoneType:None | U
+74:18:Call -> Inst:builtins.dict
+74:18:Attribute -> BM:builtins.dict.copy | BM:os._Environ.copy
+74:18:Attribute -> Dict:43 | Inst:os._Environ
+74:18:Name -> Module:os
+74:56:Call -> Inst:builtins.dict
+74:56:Name -> Class:builtins.dict
+74:61:Name -> U
+75:12:Call -> ERR
+75:12:Attribute -> BM:builtins.dict.pop
+75:12:Name -> Dict:0
+76:7:Call -> U
+76:7:Name -> U
+77:15:Call -> Inst:subprocess.CompletedProcess
+77:15:Attribute -> Class:subprocess.CompletedProcess
+77:15:Name -> Module:subprocess
+77:43:Name -> U
+78:13:Call -> Inst:subprocess.CompletedProcess
+78:13:Attribute -> Func:subprocess.run
+78:13:Name -> Module:subprocess
+78:28:Name -> U
+78:41:Call -> Dict:43
+78:41:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.env_without_github_tokens
+78:67:Name -> Inst:builtins.dict
+78:96:Name -> Dict:0
+79:7:Attribute -> U
+79:7:Name -> Inst:subprocess.CompletedProcess
+80:15:Name -> Inst:subprocess.CompletedProcess
+81:11:Name -> Const:bool:True | U
+81:42:Call -> U
+81:42:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.get_github_token_from_env
+81:68:Name -> Inst:builtins.dict
+82:11:Name -> U
+83:12:Call -> Const:NoneType:None
+83:12:Attribute -> BM:subprocess.CompletedProcess.check_returncode
+83:12:Name -> Inst:subprocess.CompletedProcess
+84:15:Name -> Inst:subprocess.CompletedProcess
+85:11:Call -> Inst:subprocess.CompletedProcess
+85:11:Attribute -> Func:subprocess.run
+85:11:Name -> Module:subprocess
+85:26:Name -> U
+85:39:Name -> Inst:builtins.dict
+85:58:Name -> U
+85:67:Name -> Dict:0
+88:33:Name -> Class:builtins.str
+88:60:Name -> Class:_collections_abc.Mapping
+88:68:Name -> Class:builtins.str
+88:73:Name -> Class:builtins.str
+88:96:Name -> Class:builtins.str
+97:16:Call -> U
+97:16:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.get_github_token_from_env
+97:42:Name -> Const:NoneType:None | U
+98:31:Name -> Const:NoneType:None | U
+98:17:Attribute -> Dict:43 | Inst:os._Environ
+98:17:Name -> Module:os
+98:48:Name -> U
+100:8:Name -> Dict:43 | Inst:os._Environ | U
+100:19:Name -> Const:str:'GH_TOKEN' | Const:str:'GITHUB_TOKEN'
+100:55:Name -> Tuple:2
+100:80:Call -> U | Const:NoneType:None
+100:80:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get | U
+100:80:Name -> Dict:43 | Inst:os._Environ | U
+100:95:Name -> Const:str:'GH_TOKEN' | Const:str:'GITHUB_TOKEN'
+102:7:Name -> Const:NoneType:None | U
+102:17:Name -> Const:NoneType:None | U
+102:30:Name -> U
+103:15:Name -> Const:NoneType:None | U
+105:26:Call -> Inst:subprocess.CompletedProcess
+105:26:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.run_gh_command
+111:16:Name -> Const:NoneType:None | U
+113:11:Name -> Class:builtins.FileNotFoundError
+114:15:Name -> Const:NoneType:None | U
+114:24:Name -> U
+115:7:Attribute -> U
+115:7:Name -> Inst:subprocess.CompletedProcess
+115:43:Call -> U
+115:43:Attribute -> U
+115:43:Attribute -> Const:NoneType:None | U
+115:43:Name -> Inst:subprocess.CompletedProcess
+116:15:Call -> U
+116:15:Attribute -> U
+116:15:Attribute -> Const:NoneType:None | U
+116:15:Name -> Inst:subprocess.CompletedProcess
+117:11:Name -> Const:NoneType:None | U
+117:20:Name -> U
+120:24:Name -> Class:builtins.str
+120:36:Name -> Class:typing.Any
+120:44:Name -> Class:builtins.str
+121:18:Call -> U
+121:18:Attribute -> U
+121:18:Name -> U
+122:42:Call -> ERR
+122:42:Name -> Func:builtins.isinstance
+122:53:Name -> U
+122:60:Name -> Class:builtins.bool
+122:20:Call -> Const:str:''
+122:20:Attribute -> BM:builtins.str.lower
+122:20:Call -> Const:str:''
+122:20:Name -> Class:builtins.str
+122:24:Name -> U
+122:71:Name -> U
+123:4:Call -> U
+123:4:Name -> U
+123:27:Name -> U
+123:53:Call -> U
+123:53:Name -> U
+123:60:Call -> Const:str:''
+123:60:Name -> Class:builtins.str
+123:64:Name -> Const:str:'' | U
+124:14:Name -> U
+124:28:Name -> Const:str:'' | U
+127:42:Name -> U
+131:7:Attribute -> U
+131:7:Name -> U
+134:16:Call -> U
+134:16:Attribute -> U
+134:16:Attribute -> U
+134:16:Name -> U
+135:12:Call -> U
+135:12:Attribute -> U
+135:12:Attribute -> U
+135:12:Name -> U
+136:18:Call -> U
+136:18:Attribute -> U
+136:18:Attribute -> U
+136:18:Name -> U
+139:18:Call -> U
+139:18:Attribute -> U
+139:18:Call -> U
+139:18:Attribute -> U
+139:18:Name -> U
+140:11:Name -> Class:builtins.Exception
+141:18:Attribute -> U
+141:18:Name -> U
+143:38:Name -> U
+143:52:Call -> U
+143:52:Attribute -> U
+143:52:Name -> U
+143:20:Call -> Inst:builtins.int
+143:20:Name -> Class:builtins.int
+143:24:Name -> U
+145:7:Name -> U
+145:17:Call -> U
+145:17:Attribute -> U
+145:17:Name -> U
+146:19:Call -> Inst:_pydatetime.datetime | U
+146:19:Attribute -> BM:_pydatetime.datetime.fromtimestamp
+146:19:Name -> Class:_pydatetime.datetime
+146:42:Call -> Inst:builtins.int
+146:42:Name -> Class:builtins.int
+146:46:Name -> U
+146:57:Attribute -> Inst:_pydatetime.timezone
+146:57:Name -> Class:_pydatetime.timezone
+147:21:Call -> U
+147:21:Attribute -> BM:_pydatetime.date.strftime | U
+147:21:Name -> Inst:_pydatetime.datetime | U
+151:7:Name -> Inst:builtins.int | Const:NoneType:None
+152:8:Call -> ERR
+152:8:Name -> Func:builtins.print
+152:78:Name -> U | Const:str:'unknown'
+156:33:Call -> U
+156:33:Attribute -> U
+156:33:Name -> U
+157:11:Name -> U
+157:27:Call -> U
+157:27:Attribute -> U
+157:27:Name -> U
+158:12:Call -> ERR
+158:12:Name -> Func:builtins.print
+158:64:Name -> U
+160:12:Call -> ERR
+160:12:Name -> Func:builtins.print
+160:70:Name -> U | Const:str:'unknown'
+163:4:Call -> ERR
+163:4:Name -> Func:builtins.print
+163:39:Attribute -> U
+163:39:Name -> U
+163:72:Name -> U
+167:15:Name -> Class:builtins.str
+167:26:Name -> Class:builtins.str
+167:44:Name -> Class:pathlib.Path
+167:64:Name -> Class:builtins.str
+167:92:Name -> Class:builtins.int
+168:5:Name -> Class:builtins.bool
+183:66:Name -> U
+183:77:Name -> U
+184:4:Call -> U
+184:4:Name -> U
+184:39:Name -> Const:str:'https://api.github.com/repos/apache/air
+184:48:Name -> U
+185:11:Call -> U
+185:11:Name -> U
+187:11:Name -> Const:NoneType:None | U
+188:12:Name -> Dict:1
+188:49:Name -> U
+189:12:Name -> Dict:1
+191:23:Call -> U
+191:23:Attribute -> U
+191:23:Name -> U
+191:36:Name -> Const:str:'https://api.github.com/repos/apache/air
+191:49:Name -> Dict:1
+191:66:Name -> Const:int:60 | U
+192:12:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+192:12:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.log_github_rate_limit_error
+192:40:Name -> U
+193:15:Attribute -> U
+193:15:Name -> U
+194:16:Call -> U
+194:16:Name -> U
+195:47:Name -> Const:str:'https://api.github.com/repos/apache/air
+200:16:Call -> ERR
+200:16:Attribute -> Func:sys.exit
+200:16:Name -> Module:sys
+201:15:Attribute -> U
+201:15:Name -> U
+202:16:Call -> U
+202:16:Name -> U
+202:46:Name -> Const:str:'https://api.github.com/repos/apache/air
+204:15:Attribute -> U
+204:15:Name -> U
+205:16:Call -> U
+205:16:Name -> U
+205:40:Name -> Const:str:'https://api.github.com/repos/apache/air
+205:83:Attribute -> U
+205:83:Name -> U
+206:16:Call -> ERR
+206:16:Attribute -> Func:sys.exit
+206:16:Name -> Module:sys
+207:12:Call -> U
+207:12:Attribute -> U
+207:12:Name -> U
+207:36:Attribute -> U
+207:36:Name -> U
+208:15:Attribute -> U
+208:15:Name -> U
+209:12:Call -> U
+209:12:Name -> U
+209:51:Name -> Const:str:'https://api.github.com/repos/apache/air
+209:73:Name -> Const:int:60 | U
+210:12:Call -> ERR
+210:12:Attribute -> Func:sys.exit
+210:12:Name -> Module:sys
+211:4:Call -> U
+211:4:Name -> U
+211:41:Name -> Const:str:'https://api.github.com/repos/apache/air
+211:50:Name -> U
+215:19:Call -> U
+215:19:Attribute -> Func:re.compile
+215:19:Name -> Module:re
+219:13:Name -> Class:builtins.bool
+219:39:Name -> Class:builtins.str
+220:5:Name -> Class:builtins.tuple
+220:11:Name -> Class:builtins.list
+220:16:Name -> Class:builtins.str
+220:22:Name -> Class:builtins.dict
+220:27:Name -> Class:builtins.str
+220:32:Name -> Class:builtins.str
+232:27:Name -> Class:builtins.dict
+232:32:Name -> Class:builtins.str
+232:37:Name -> Class:builtins.str
+233:4:Call -> U
+233:4:Name -> U
+234:42:Name -> Const:str:'upstream' | U
+236:4:Call -> U
+236:4:Name -> U
+237:11:Call -> U
+237:11:Name -> U
+237:16:Name -> U
+238:21:Name -> Class:builtins.list
+238:26:Name -> Class:builtins.str
+240:19:Call -> U
+240:19:Attribute -> U
+240:19:Call -> U
+240:19:Attribute -> U
+240:19:Attribute -> U
+240:19:Name -> U
+240:48:Name -> Const:str:'upstream' | U
+241:11:Name -> U
+242:8:Call -> U
+242:8:Name -> U
+243:49:Name -> Const:str:'upstream' | U
+245:8:Call -> U
+245:8:Name -> U
+245:25:Name -> U
+246:8:Call -> U
+246:8:Name -> U
+255:8:Call -> ERR
+255:8:Attribute -> Func:sys.exit
+255:8:Name -> Module:sys
+256:12:Call -> U
+256:12:Attribute -> U
+256:12:Call -> U
+256:12:Attribute -> U
+256:12:Name -> U
+256:58:Name -> U
+256:86:Name -> U
+257:15:Name -> U
+258:16:Call -> U
+258:16:Attribute -> U
+258:16:Name -> U
+258:39:Name -> U
+259:11:Name -> U
+259:22:Call -> U
+259:22:Attribute -> U
+259:22:Name -> U
+259:47:Call -> U
+259:47:Attribute -> U
+259:47:Name -> U
+260:12:Call -> ERR
+260:12:Attribute -> BM:builtins.list.append
+260:12:Name -> List:0
+260:35:Name -> U
+261:23:Call -> ERR
+261:23:Name -> Func:builtins.sorted
+261:30:Name -> List:0
+261:51:Name -> U
+262:19:Name -> U
+263:15:Call -> Const:NoneType:None | U
+263:15:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.get_tag_date
+263:28:Name -> U
+264:15:Name -> Const:NoneType:None | U
+265:12:Call -> U
+265:12:Name -> U
+266:12:Call -> ERR
+266:12:Attribute -> Func:sys.exit
+266:12:Name -> Module:sys
+267:8:Name -> Dict:0
+267:30:Name -> U
+267:41:Name -> Const:NoneType:None | U
+268:4:Call -> U
+268:4:Name -> U
+269:7:Call -> U
+269:7:Name -> U
+270:8:Call -> U
+270:8:Name -> U
+271:8:Call -> U
+271:8:Name -> U
+271:22:Name -> U
+272:7:Name -> Const:bool:True | U
+273:23:Name -> U
+274:12:Call -> U
+274:12:Name -> U
+274:31:Name -> U
+274:48:Name -> Dict:0
+274:70:Name -> U
+275:17:Call -> U
+275:17:Name -> U
+276:90:Attribute -> U
+276:90:Name -> U
+278:11:Name -> U
+278:21:Attribute -> U
+278:21:Name -> U
+279:12:Call -> U
+279:12:Name -> U
+280:12:Call -> ERR
+280:12:Attribute -> Func:sys.exit
+280:12:Name -> Module:sys
+281:11:Name -> U
+281:29:Name -> Dict:0
+285:27:Name -> Class:builtins.str
+286:20:Name -> Class:builtins.str
+287:18:Name -> Class:builtins.str
+288:30:Name -> Class:builtins.str
+289:17:Name -> Class:pathlib.Path
+290:5:Name -> Class:builtins.bool
+301:31:Name -> U
+301:58:Name -> U
+302:11:Call -> Const:bool:False | Const:bool:True
+302:11:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.download_file_from_github
+303:18:Name -> U
+304:13:Name -> Const:str:'Uninferable-Uninferable.txt'
+305:21:Name -> U
+306:20:Name -> U
+310:22:Name -> Class:builtins.str
+310:30:Name -> Class:builtins.str
+318:11:Call -> U
+318:11:Name -> U
+318:16:Name -> U
+320:21:Attribute -> U
+320:21:Attribute -> U
+320:21:Name -> U
+320:31:Name -> U
+321:11:Name -> Class:builtins.IndexError
+322:8:Call -> U
+322:8:Name -> U
+322:38:Name -> U
+324:15:Name -> Class:builtins.int
+325:37:Call -> U
+325:37:Name -> Func:builtins.hasattr
+325:45:Name -> U
+325:8:Attribute -> U
+325:8:Name -> U
+325:80:Attribute -> U
+325:80:Name -> U
+327:11:Call -> U
+327:11:Attribute -> BM:_pydatetime.date.strftime | U
+327:11:Call -> Inst:_pydatetime.datetime | U
+327:11:Attribute -> BM:_pydatetime.datetime.fromtimestamp
+327:11:Name -> Class:_pydatetime.datetime
+327:34:Name -> U
+327:48:Attribute -> Inst:_pydatetime.timezone
+327:48:Name -> Class:_pydatetime.timezone
+330:42:Name -> Class:builtins.str
+330:60:Name -> Class:pathlib.Path
+330:85:Name -> Class:builtins.str
+330:104:Name -> Class:builtins.str
+342:42:Name -> U
+342:75:Name -> U
+345:14:Call -> U
+345:14:Attribute -> U
+345:14:Name -> U
+346:4:Name -> Dict:1
+346:41:Name -> U
+347:24:Call -> U
+347:24:Attribute -> U
+347:24:Name -> U
+347:37:Name -> Const:str:'https://api.github.com/repos/Uninferabl
+347:50:Name -> Dict:1
+349:7:Attribute -> U
+349:7:Name -> U
+350:8:Call -> U
+350:8:Name -> U
+352:15:Attribute -> U
+352:15:Name -> U
+352:48:Attribute -> U
+352:48:Name -> U
+354:8:Call -> ERR
+354:8:Attribute -> Func:sys.exit
+354:8:Name -> Module:sys
+357:16:Call -> Tuple:2 | Tuple:2
+357:16:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+357:16:Attribute -> Module:posixpath | Module:ntpath
+357:16:Name -> Module:os
+357:33:Call -> U
+357:33:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+357:33:Attribute -> Module:posixpath | Module:ntpath
+357:33:Name -> Module:os
+357:50:Name -> U
+358:20:Call -> U
+358:20:Attribute -> U
+358:20:Name -> U
+359:11:Call -> U
+359:11:Attribute -> U
+359:11:Name -> U
+359:39:Name -> U
+360:27:Name -> U
+363:11:Name -> Const:NoneType:None | U
+364:8:Call -> U
+364:8:Name -> U
+364:54:Name -> U
+365:8:Call -> ERR
+365:8:Attribute -> Func:sys.exit
+365:8:Name -> Module:sys
+367:4:Call -> U
+367:4:Name -> U
+367:53:Name -> Const:NoneType:None | U
+367:71:Name -> U
+369:15:Call -> U
+369:15:Attribute -> U
+369:15:Name -> U
+369:27:Name -> Const:NoneType:None | U
+369:62:Name -> Dict:1
+371:7:Attribute -> U
+371:7:Name -> U
+372:8:Call -> U
+372:8:Name -> U
+373:68:Attribute -> U
+373:68:Name -> U
+373:92:Attribute -> U
+373:92:Name -> U
+375:8:Call -> ERR
+375:8:Attribute -> Func:sys.exit
+375:8:Name -> Module:sys
+377:17:Call -> Inst:builtins.int
+377:17:Name -> Class:builtins.int
+377:21:Call -> U
+377:21:Attribute -> U
+377:21:Attribute -> U
+377:21:Name -> U
+378:16:Attribute -> U
+378:16:Call -> Inst:tempfile._TemporaryFileWrapper
+378:16:Attribute -> Func:tempfile.NamedTemporaryFile
+378:16:Name -> Module:tempfile
+379:4:Call -> Const:NoneType:None
+379:4:Attribute -> Func:os.makedirs
+379:4:Name -> Module:os
+379:16:Call -> U
+379:16:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+379:16:Attribute -> Module:posixpath | Module:ntpath
+379:16:Name -> Module:os
+379:32:Name -> U
+381:9:Call -> U
+381:9:Name -> U
+381:20:Name -> Inst:builtins.int
+381:64:Name -> U
+382:13:Call -> ERR
+382:13:Name -> Func:_io.open
+382:18:Name -> U
+383:25:Call -> U
+383:25:Attribute -> U
+383:25:Name -> U
+384:19:Name -> U
+385:20:Call -> U
+385:20:Attribute -> U
+385:20:Name -> U
+385:28:Name -> U
+386:20:Call -> U
+386:20:Attribute -> U
+386:20:Name -> U
+386:40:Call -> ERR
+386:40:Name -> Func:builtins.len
+386:44:Name -> U
+388:9:Call -> Inst:zipfile.ZipFile
+388:9:Attribute -> Class:zipfile.ZipFile
+388:9:Name -> Module:zipfile
+388:25:Name -> U
+389:8:Call -> Const:NoneType:None
+389:8:Attribute -> BM:zipfile.ZipFile.extractall
+389:8:Name -> Inst:zipfile.ZipFile
+391:4:Call -> ERR
+391:4:Attribute -> Func:posix.remove
+391:4:Name -> Module:os
+391:14:Name -> U
+394:34:Name -> Class:builtins.str
+394:52:Name -> Class:pathlib.Path
+394:77:Name -> Class:builtins.str
+394:96:Name -> Class:builtins.str
+397:16:Call -> U
+397:16:Attribute -> U
+397:16:Name -> U
+398:45:Name -> U
+398:71:Name -> U
+399:55:Name -> U
+403:14:Call -> U
+403:14:Attribute -> U
+403:14:Name -> U
+404:4:Name -> Dict:1
+404:41:Name -> U
+406:20:Call -> U
+406:20:Attribute -> U
+406:20:Name -> U
+406:32:Name -> Const:str:'https://api.github.com/repos/Uninferabl
+406:48:Name -> Dict:1
+408:7:Attribute -> U
+408:7:Name -> U
+409:8:Call -> U
+409:8:Name -> U
+410:59:Attribute -> U
+410:59:Name -> U
+410:88:Attribute -> U
+410:88:Name -> U
+412:8:Call -> ERR
+412:8:Attribute -> Func:sys.exit
+412:8:Name -> Module:sys
+414:10:Call -> U
+414:10:Attribute -> U
+414:10:Name -> U
+416:20:Call -> U
+416:20:Attribute -> U
+416:20:Name -> U
+417:8:Name -> Const:str:'https://api.github.com/repos/Uninferabl
+417:34:Name -> Dict:1
+417:86:Name -> U
+420:7:Attribute -> U
+420:7:Name -> U
+421:8:Call -> U
+421:8:Name -> U
+424:12:Attribute -> U
+424:12:Name -> U
+425:12:Attribute -> U
+425:12:Name -> U
+427:8:Call -> ERR
+427:8:Attribute -> Func:sys.exit
+427:8:Name -> Module:sys
+429:11:Call -> U
+429:11:Attribute -> U
+429:11:Name -> U
+430:18:Call -> ERR
+430:18:Name -> Func:builtins.sorted
+430:25:Name -> U
+430:45:Call -> Inst:_pydatetime.datetime
+430:45:Attribute -> BM:_pydatetime.datetime.fromisoformat
+430:45:Name -> Class:_pydatetime.datetime
+430:68:Name -> U
+434:15:Name -> U
+435:11:Call -> U
+435:11:Attribute -> U
+435:11:Call -> U
+435:11:Attribute -> U
+435:11:Name -> U
+436:21:Name -> U
+439:4:Call -> U
+439:4:Name -> U
+439:40:Name -> Const:NoneType:None | U
+439:56:Name -> U
+441:4:Call -> Const:NoneType:None
+441:4:Name -> Func:dev.breeze.src.airflow_breeze.utils.github.download_artifact_from_run_id
+441:34:Call -> Const:str:''
+441:34:Name -> Class:builtins.str
+441:38:Name -> Const:NoneType:None | U
+441:47:Name -> U
+441:60:Name -> U
+441:79:Name -> U

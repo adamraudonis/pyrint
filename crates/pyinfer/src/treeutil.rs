@@ -1,0 +1,425 @@
+//! Tree navigation helpers shared by lookup/inference: scope(), frame(),
+//! statement(), qname(), are_exclusive(), locate_child(), assign_type().
+//! Ports of astroid/nodes/node_ng.py + _base_nodes.py + node_classes.py.
+
+use std::rc::Rc;
+
+use pyast::tree::{Ctx as ExprCtx, NodeKind};
+use pyast::NodeId;
+
+use crate::graph::{Engine, Module};
+use crate::value::{GNode, ModId};
+
+impl Engine {
+    #[inline]
+    pub fn md(&self, m: ModId) -> Rc<Module> {
+        Rc::clone(&self.mods.borrow()[m.0 as usize])
+    }
+
+    pub fn kind_is<F: FnOnce(&NodeKind) -> bool>(&self, g: GNode, f: F) -> bool {
+        let md = self.md(g.m);
+        f(&md.tree.nodes[g.n.idx()].kind)
+    }
+
+    pub fn parent(&self, g: GNode) -> Option<GNode> {
+        if g.n == NodeId::MODULE {
+            return None;
+        }
+        let md = self.md(g.m);
+        Some(GNode {
+            m: g.m,
+            n: md.tree.nodes[g.n.idx()].parent,
+        })
+    }
+
+    pub fn fromlineno(&self, g: GNode) -> u32 {
+        self.md(g.m).tree.nodes[g.n.idx()].fromlineno
+    }
+
+    /// node_ng.py:276-285 statement(): nearest enclosing statement incl.
+    /// self; None for Module (StatementMissing).
+    pub fn statement(&self, g: GNode) -> Option<GNode> {
+        let mut cur = g;
+        loop {
+            if self.is_statement(cur) {
+                return Some(cur);
+            }
+            cur = self.parent(cur)?;
+        }
+    }
+
+    pub fn is_statement(&self, g: GNode) -> bool {
+        let md = self.md(g.m);
+        is_statement_kind(&md.tree.nodes[g.n.idx()].kind)
+    }
+
+    /// nearest scope node (Module/Func/Lambda/Class/comprehensions),
+    /// including self. Decorators get the scope OUTSIDE the function
+    /// (node_classes.py Decorators.scope -> parent.parent.scope()).
+    pub fn scope(&self, g: GNode) -> GNode {
+        let md = self.md(g.m);
+        if matches!(md.tree.nodes[g.n.idx()].kind, NodeKind::Decorators { .. }) {
+            // decorators live outside the decorated frame
+            let p = self.parent(g).unwrap_or(g);
+            let pp = self.parent(p).unwrap_or(p);
+            return self.scope(pp);
+        }
+        let mut cur = g;
+        loop {
+            if self.is_scope(cur) {
+                return cur;
+            }
+            match self.parent(cur) {
+                Some(p) => cur = p,
+                None => return cur,
+            }
+        }
+    }
+
+    pub fn is_scope(&self, g: GNode) -> bool {
+        let md = self.md(g.m);
+        matches!(
+            md.tree.nodes[g.n.idx()].kind,
+            NodeKind::Module(_)
+                | NodeKind::FunctionDef(_)
+                | NodeKind::AsyncFunctionDef(_)
+                | NodeKind::ClassDef(_)
+                | NodeKind::Lambda(_)
+                | NodeKind::ListComp(_)
+                | NodeKind::SetComp(_)
+                | NodeKind::DictComp(_)
+                | NodeKind::GeneratorExp(_)
+        )
+    }
+
+    /// nearest frame (Module/FunctionDef/Lambda/ClassDef), including self.
+    pub fn frame(&self, g: GNode) -> GNode {
+        let mut cur = g;
+        loop {
+            if self.is_frame(cur) {
+                return cur;
+            }
+            match self.parent(cur) {
+                Some(p) => cur = p,
+                None => return cur,
+            }
+        }
+    }
+
+    pub fn is_frame(&self, g: GNode) -> bool {
+        let md = self.md(g.m);
+        matches!(
+            md.tree.nodes[g.n.idx()].kind,
+            NodeKind::Module(_)
+                | NodeKind::FunctionDef(_)
+                | NodeKind::AsyncFunctionDef(_)
+                | NodeKind::ClassDef(_)
+                | NodeKind::Lambda(_)
+        )
+    }
+
+    pub fn is_comprehension_scope(&self, g: GNode) -> bool {
+        let md = self.md(g.m);
+        matches!(
+            md.tree.nodes[g.n.idx()].kind,
+            NodeKind::ListComp(_) | NodeKind::SetComp(_) | NodeKind::DictComp(_) | NodeKind::GeneratorExp(_)
+        )
+    }
+
+    /// True if `anc` is a (strict) ancestor of `node` (node_ng parent_of).
+    pub fn parent_of(&self, anc: GNode, node: GNode) -> bool {
+        let mut cur = node;
+        while let Some(p) = self.parent(cur) {
+            if p == anc {
+                return true;
+            }
+            cur = p;
+        }
+        false
+    }
+
+    /// LocalsDictNodeNG.qname (mixin.py:40-50): chain of names through
+    /// parent frames up to the module.
+    pub fn qname(&self, g: GNode) -> String {
+        let md = self.md(g.m);
+        if let Some(qn) = md.qnames.get(&g.n) {
+            return qn.clone();
+        }
+        let mut parts: Vec<String> = Vec::new();
+        let mut cur = g;
+        loop {
+            let name = match &md.tree.nodes[cur.n.idx()].kind {
+                NodeKind::Module(d) => {
+                    parts.push(d.name.to_string());
+                    break;
+                }
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                    md.tree.s(d.name).to_string()
+                }
+                NodeKind::ClassDef(d) => md.tree.s(d.name).to_string(),
+                NodeKind::Lambda(_) => "<lambda>".to_string(),
+                _ => {
+                    // shouldn't happen for qname targets; fall to parent
+                    match self.parent(cur) {
+                        Some(p) => {
+                            cur = p;
+                            continue;
+                        }
+                        None => break,
+                    }
+                }
+            };
+            parts.push(name);
+            match self.parent(cur) {
+                Some(p) => cur = self.frame(p),
+                None => break,
+            }
+        }
+        parts.reverse();
+        parts.join(".")
+    }
+
+    pub fn node_name(&self, g: GNode) -> Option<String> {
+        let md = self.md(g.m);
+        match &md.tree.nodes[g.n.idx()].kind {
+            NodeKind::Module(d) => Some(d.name.to_string()),
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                Some(md.tree.s(d.name).to_string())
+            }
+            NodeKind::ClassDef(d) => Some(md.tree.s(d.name).to_string()),
+            NodeKind::Name { name } | NodeKind::AssignName { name } | NodeKind::DelName { name } => {
+                Some(md.tree.s(*name).to_string())
+            }
+            NodeKind::Lambda(_) => Some("<lambda>".to_string()),
+            _ => None,
+        }
+    }
+
+    /// _base_nodes.py:90-126 + node_classes assign_type dispatch.
+    pub fn assign_type(&self, g: GNode) -> GNode {
+        let md = self.md(g.m);
+        match &md.tree.nodes[g.n.idx()].kind {
+            // FilterStmtsBaseNode + AssignTypeNode -> self
+            NodeKind::FunctionDef(_)
+            | NodeKind::AsyncFunctionDef(_)
+            | NodeKind::ClassDef(_)
+            | NodeKind::Lambda(_)
+            | NodeKind::Import { .. }
+            | NodeKind::ImportFrom { .. }
+            | NodeKind::Assign { .. }
+            | NodeKind::AnnAssign { .. }
+            | NodeKind::AugAssign { .. }
+            | NodeKind::Delete { .. }
+            | NodeKind::For(_)
+            | NodeKind::AsyncFor(_)
+            | NodeKind::With(_)
+            | NodeKind::AsyncWith(_)
+            | NodeKind::ExceptHandler { .. }
+            | NodeKind::NamedExpr { .. }
+            | NodeKind::MatchAs { .. }
+            | NodeKind::MatchStar { .. }
+            | NodeKind::MatchMapping { .. }
+            | NodeKind::TypeAlias { .. }
+            | NodeKind::TypeVar { .. }
+            | NodeKind::TypeVarTuple { .. }
+            | NodeKind::ParamSpec { .. }
+            | NodeKind::Comprehension { .. }
+            | NodeKind::Arguments(_) => g,
+            // ParentAssignNode -> parent.assign_type()
+            NodeKind::AssignName { .. }
+            | NodeKind::AssignAttr { .. }
+            | NodeKind::DelName { .. }
+            | NodeKind::DelAttr { .. }
+            | NodeKind::Starred { .. } => {
+                let p = self.parent(g).unwrap_or(g);
+                self.assign_type(p)
+            }
+            NodeKind::Tuple { ctx, .. } | NodeKind::List { ctx, .. }
+                if *ctx == ExprCtx::Store =>
+            {
+                let p = self.parent(g).unwrap_or(g);
+                self.assign_type(p)
+            }
+            _ => {
+                // NodeNG has no assign_type; reaching here would be an
+                // AttributeError in astroid. Be conservative: self.
+                g
+            }
+        }
+    }
+
+    /// `For`/`AsyncFor`/`Comprehension`.optional_assign
+    pub fn optional_assign(&self, g: GNode) -> bool {
+        let md = self.md(g.m);
+        matches!(
+            md.tree.nodes[g.n.idx()].kind,
+            NodeKind::For(_) | NodeKind::AsyncFor(_) | NodeKind::Comprehension { .. }
+        )
+    }
+
+    /// NodeNG.locate_child equivalent: which field of `parent` contains
+    /// `child` (directly). Returns the astroid field name.
+    pub fn locate_child(&self, parent: GNode, child: GNode) -> Option<&'static str> {
+        debug_assert_eq!(parent.m, child.m);
+        let md = self.md(parent.m);
+        let c = child.n;
+        let kind = &md.tree.nodes[parent.n.idx()].kind;
+        match kind {
+            NodeKind::If { test, body, orelse } => {
+                if *test == c {
+                    Some("test")
+                } else if body.contains(&c) {
+                    Some("body")
+                } else if orelse.contains(&c) {
+                    Some("orelse")
+                } else {
+                    None
+                }
+            }
+            NodeKind::IfExp { test, body, orelse } => {
+                if *test == c {
+                    Some("test")
+                } else if *body == c {
+                    Some("body")
+                } else if *orelse == c {
+                    Some("orelse")
+                } else {
+                    None
+                }
+            }
+            NodeKind::Try(d) | NodeKind::TryStar(d) => {
+                if d.body.contains(&c) {
+                    Some("body")
+                } else if d.handlers.contains(&c) {
+                    Some("handlers")
+                } else if d.orelse.contains(&c) {
+                    Some("orelse")
+                } else if d.finalbody.contains(&c) {
+                    Some("finalbody")
+                } else {
+                    None
+                }
+            }
+            _ => None,
+        }
+    }
+
+    /// node_classes.py:116-186 are_exclusive (exceptions=None form).
+    pub fn are_exclusive(&self, stmt1: GNode, stmt2: GNode) -> bool {
+        // index stmt1's parents
+        let mut stmt1_parents: rustc_hash::FxHashMap<GNode, GNode> = Default::default();
+        let mut previous = stmt1;
+        let mut cur = stmt1;
+        while let Some(node) = self.parent(cur) {
+            stmt1_parents.insert(node, previous);
+            previous = node;
+            cur = node;
+        }
+        // climb stmt2's parents to the first common one
+        let mut previous2 = stmt2;
+        let mut cur2 = stmt2;
+        while let Some(node) = self.parent(cur2) {
+            if let Some(&child1) = stmt1_parents.get(&node) {
+                let md = self.md(node.m);
+                let k = &md.tree.nodes[node.n.idx()].kind;
+                if matches!(k, NodeKind::If { .. }) {
+                    let c2attr = self.locate_child(node, previous2);
+                    let c1attr = self.locate_child(node, child1);
+                    if c1attr == Some("test") || c2attr == Some("test") {
+                        return false;
+                    }
+                    if c1attr != c2attr {
+                        return true;
+                    }
+                } else if matches!(k, NodeKind::Try(_)) {
+                    let c2 = self.locate_child(node, previous2);
+                    let c1 = self.locate_child(node, child1);
+                    if previous2 != child1 {
+                        // exceptions=None: ExceptHandler.catch(None) is True
+                        let first_in_body_caught = c2 == Some("handlers") && c1 == Some("body");
+                        let second_in_body_caught = c2 == Some("body") && c1 == Some("handlers");
+                        let first_in_else = c2 == Some("handlers") && c1 == Some("orelse");
+                        let second_in_else = c2 == Some("orelse") && c1 == Some("handlers");
+                        if first_in_body_caught
+                            || second_in_body_caught
+                            || first_in_else
+                            || second_in_else
+                        {
+                            return true;
+                        }
+                    } else if c2 == Some("handlers") && c1 == Some("handlers") {
+                        return previous2 != child1;
+                    }
+                }
+                return false;
+            }
+            previous2 = node;
+            cur2 = node;
+        }
+        false
+    }
+
+    /// preorder walk collecting node ids (children() order).
+    pub fn walk_preorder(&self, m: ModId) -> Vec<NodeId> {
+        let md = self.md(m);
+        let mut out = Vec::with_capacity(md.tree.nodes.len());
+        let mut stack = vec![NodeId::MODULE];
+        let mut buf = Vec::new();
+        while let Some(id) = stack.pop() {
+            out.push(id);
+            buf.clear();
+            md.tree.push_children(id, &mut buf);
+            for &c in buf.iter().rev() {
+                stack.push(c);
+            }
+        }
+        out
+    }
+}
+
+pub fn is_statement_kind(k: &NodeKind) -> bool {
+    matches!(
+        k,
+        NodeKind::FunctionDef(_)
+            | NodeKind::AsyncFunctionDef(_)
+            | NodeKind::ClassDef(_)
+            | NodeKind::Return { .. }
+            | NodeKind::Delete { .. }
+            | NodeKind::Assign { .. }
+            | NodeKind::AugAssign { .. }
+            | NodeKind::AnnAssign { .. }
+            | NodeKind::TypeAlias { .. }
+            | NodeKind::For(_)
+            | NodeKind::AsyncFor(_)
+            | NodeKind::While { .. }
+            | NodeKind::If { .. }
+            | NodeKind::With(_)
+            | NodeKind::AsyncWith(_)
+            | NodeKind::Match { .. }
+            | NodeKind::Raise { .. }
+            | NodeKind::Try(_)
+            | NodeKind::TryStar(_)
+            | NodeKind::Assert { .. }
+            | NodeKind::Import { .. }
+            | NodeKind::ImportFrom { .. }
+            | NodeKind::Global { .. }
+            | NodeKind::Nonlocal { .. }
+            | NodeKind::Expr { .. }
+            | NodeKind::Pass
+            | NodeKind::Break
+            | NodeKind::Continue
+            | NodeKind::ExceptHandler { .. }
+    )
+}
+
+pub fn kind_label(k: &NodeKind) -> &'static str {
+    match k {
+        NodeKind::Module(_) => "Module",
+        NodeKind::FunctionDef(_) => "FunctionDef",
+        NodeKind::AsyncFunctionDef(_) => "AsyncFunctionDef",
+        NodeKind::ClassDef(_) => "ClassDef",
+        NodeKind::Lambda(_) => "Lambda",
+        NodeKind::Const(_) => "Const",
+        _ => "Node",
+    }
+}

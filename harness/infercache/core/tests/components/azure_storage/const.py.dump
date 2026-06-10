@@ -1,0 +1,10 @@
+13:4:Name -> Const:str:'account_name'
+14:4:Name -> Const:str:'container_name'
+15:4:Name -> Const:str:'storage_account_key'
+18:14:Call -> Inst:homeassistant.components.backup.models.AgentBackup
+18:14:Name -> Class:homeassistant.components.backup.models.AgentBackup
+35:23:Call -> U
+35:23:Name -> Func:json.dumps
+35:29:Call -> U | Inst:builtins.dict
+35:29:Attribute -> BM:homeassistant.components.backup.models.AgentBackup.as_dict
+35:29:Name -> Inst:homeassistant.components.backup.models.AgentBackup

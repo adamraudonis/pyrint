@@ -1,0 +1,460 @@
+27:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:6:Attribute -> Func:logging.getLogger
+27:6:Name -> Module:logging
+27:24:Name -> Const:str:'salt.modules.system' | Const:str:'__main__'
+37:7:Call -> U
+37:7:Attribute -> Func:salt.utils.platform.is_windows
+37:7:Attribute -> Module:salt.utils.platform
+37:7:Attribute -> Module:salt.utils
+37:7:Name -> Module:salt
+40:7:Call -> U
+40:7:Attribute -> Func:salt.utils.platform.is_darwin
+40:7:Attribute -> Module:salt.utils.platform
+40:7:Attribute -> Module:salt.utils
+40:7:Name -> Module:salt
+43:7:Call -> U
+43:7:Attribute -> Func:salt.utils.platform.is_sunos
+43:7:Attribute -> Module:salt.utils.platform
+43:7:Attribute -> Module:salt.utils
+43:7:Name -> Module:salt
+46:11:Name -> Const:str:'system'
+60:10:Call -> ERR
+60:10:Name -> ERR
+60:30:Name -> List:1
+61:11:Name -> U
+74:22:Name -> U
+75:10:Call -> ERR
+75:10:Name -> ERR
+75:30:Name -> List:2
+76:11:Name -> U
+90:10:Call -> ERR
+90:10:Name -> ERR
+90:30:Name -> List:1
+91:11:Name -> U
+107:46:Name -> Const:NoneType:None | U
+107:33:Name -> U
+108:10:Call -> ERR
+108:10:Name -> ERR
+108:30:Name -> List:3
+109:11:Name -> U
+126:8:Call -> U
+126:8:Attribute -> Func:salt.utils.platform.is_freebsd
+126:8:Attribute -> Module:salt.utils.platform
+126:8:Attribute -> Module:salt.utils
+126:8:Name -> Module:salt
+127:11:Call -> U
+127:11:Attribute -> Func:salt.utils.platform.is_netbsd
+127:11:Attribute -> Module:salt.utils.platform
+127:11:Attribute -> Module:salt.utils
+127:11:Name -> Module:salt
+128:11:Call -> U
+128:11:Attribute -> Func:salt.utils.platform.is_openbsd
+128:11:Attribute -> Module:salt.utils.platform
+128:11:Attribute -> Module:salt.utils
+128:11:Name -> Module:salt
+135:23:Name -> Const:str:'-p' | Const:str:'-h'
+135:46:Name -> Const:NoneType:None | U
+135:33:Name -> U
+136:10:Call -> ERR
+136:10:Name -> ERR
+136:30:Name -> List:3
+137:11:Name -> U
+151:7:Call -> U
+151:7:Attribute -> U
+151:7:Name -> U
+152:19:Name -> U
+152:30:Call -> U
+152:30:Attribute -> U
+152:30:Name -> U
+153:19:Call -> U
+153:19:Attribute -> U
+153:19:Name -> U
+153:43:Call -> Inst:salt.modules.system._FixedOffset
+153:43:Name -> Class:salt.modules.system._FixedOffset
+154:8:Call -> ERR
+154:8:Attribute -> BM:builtins.list.append
+154:8:Name -> List:1
+162:16:Call -> U
+162:16:Attribute -> BM:builtins.str.format
+162:64:Call -> U
+162:64:Attribute -> U
+162:64:Name -> U
+163:20:Name -> List:1
+163:27:Name -> U
+165:20:Call -> ERR
+165:20:Name -> ERR
+165:44:Name -> List:2
+166:7:Name -> U
+169:16:Call -> U
+169:16:Attribute -> BM:builtins.str.format
+169:58:Call -> U
+169:58:Attribute -> U
+169:58:Name -> U
+170:20:Name -> List:1
+170:27:Name -> U
+172:20:Call -> ERR
+172:20:Name -> ERR
+172:44:Name -> List:2
+173:11:Name -> U
+176:18:Call -> U
+176:18:Attribute -> BM:builtins.str.format
+176:43:Name -> U
+177:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+177:18:Name -> Class:salt.exceptions.CommandExecutionError
+177:40:Name -> U
+192:7:Call -> Const:NoneType:None | Const:NoneType:None | U
+192:7:Attribute -> Func:salt.utils.path.which_bin
+192:7:Attribute -> Module:salt.utils.path
+192:7:Attribute -> Module:salt.utils
+192:7:Name -> Module:salt
+193:14:Call -> ERR
+193:14:Name -> ERR
+199:15:Name -> U
+207:10:Call -> ERR
+207:10:Name -> ERR
+208:7:Name -> U
+209:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+209:8:Attribute -> BM:logging.Logger.warn | U | BM:logging.Logger.warn
+209:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+211:12:Name -> U
+227:15:Name -> U
+229:21:Call -> Inst:_pydatetime.datetime
+229:21:Attribute -> BM:_pydatetime.datetime.strptime
+229:21:Name -> Class:_pydatetime.datetime
+229:39:Name -> U
+229:49:Name -> U
+231:15:Name -> Class:builtins.ValueError
+233:11:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+242:12:Call -> U
+242:12:Attribute -> Func:re.match
+242:12:Name -> Module:re
+242:47:Name -> U
+243:11:Name -> U
+244:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+244:14:Name -> Class:salt.exceptions.SaltInvocationError
+246:17:Call -> U
+246:17:Attribute -> U
+246:17:Name -> U
+247:19:Call -> Inst:builtins.int
+247:19:Name -> Class:builtins.int
+247:23:Call -> U
+247:23:Attribute -> U
+247:23:Name -> U
+248:21:Call -> Inst:builtins.int
+248:21:Name -> Class:builtins.int
+248:25:Call -> U
+248:25:Attribute -> U
+248:25:Name -> U
+249:19:Name -> Const:int:-1 | Const:int:1
+249:27:Name -> Inst:builtins.int
+249:47:Name -> Inst:builtins.int
+250:11:Name -> U
+259:7:Name -> U
+260:18:Call -> U
+260:18:Name -> Func:salt.modules.system._offset_to_min
+260:33:Name -> U
+261:17:Call -> Inst:_pydatetime.timedelta
+261:17:Name -> Class:_pydatetime.timedelta
+261:35:Name -> U
+262:22:Call -> Inst:_pydatetime.datetime | U
+262:22:Attribute -> Func:salt.utils.timeutil.utcnow
+262:22:Attribute -> Module:salt.utils.timeutil
+262:22:Attribute -> Module:salt.utils
+262:22:Name -> Module:salt
+262:53:Name -> Inst:_pydatetime.timedelta
+263:22:Call -> U
+263:22:Attribute -> U
+263:22:Name -> U
+263:49:Call -> Inst:salt.modules.system._FixedOffset
+263:49:Name -> Class:salt.modules.system._FixedOffset
+263:62:Name -> U
+265:22:Call -> Inst:_pydatetime.datetime | U
+265:22:Attribute -> BM:_pydatetime.datetime.now
+265:22:Name -> Class:_pydatetime.datetime
+266:11:Name -> U | Inst:_pydatetime.datetime
+287:18:Call -> U
+287:18:Name -> Func:salt.modules.system._get_offset_time
+287:35:Name -> Const:NoneType:None | U
+288:11:Call -> U
+288:11:Attribute -> UM:_pydatetime.date.strftime
+288:11:Name -> Class:_pydatetime.datetime
+288:29:Name -> U
+323:13:Call -> Const:NoneType:None | Inst:_pydatetime.datetime
+323:13:Name -> Func:salt.modules.system._try_parse_datetime
+323:33:Name -> U
+323:42:Name -> List:4
+324:7:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+327:11:Call -> Const:bool:False | Const:bool:True | Const:bool:True
+327:11:Name -> Func:salt.modules.system.set_system_date_time
+328:14:Attribute -> U
+328:14:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+329:16:Attribute -> U
+329:16:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+330:16:Attribute -> U
+330:16:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+331:19:Name -> Const:NoneType:None | U
+353:18:Call -> U
+353:18:Name -> Func:salt.modules.system._get_offset_time
+353:35:Name -> Const:NoneType:None | U
+354:11:Call -> U
+354:11:Attribute -> UM:_pydatetime.date.strftime
+354:11:Name -> Class:_pydatetime.datetime
+354:29:Name -> U
+398:16:Call -> U
+398:16:Name -> Func:salt.modules.system._get_offset_time
+398:33:Name -> Const:NoneType:None | U
+401:7:Name -> Const:NoneType:None | U
+402:16:Attribute -> U
+402:16:Name -> U
+403:7:Name -> Const:NoneType:None | U
+404:17:Attribute -> U
+404:17:Name -> U
+405:7:Name -> Const:NoneType:None | U
+406:15:Attribute -> U
+406:15:Name -> U
+407:7:Name -> Const:NoneType:None | U
+408:16:Attribute -> U
+408:16:Name -> U
+409:7:Name -> Const:NoneType:None | U
+410:18:Attribute -> U
+410:18:Name -> U
+411:7:Name -> Const:NoneType:None | U
+412:18:Attribute -> U
+412:18:Name -> U
+415:23:Call -> Inst:_pydatetime.datetime
+415:23:Name -> Class:_pydatetime.datetime
+416:12:Name -> Const:NoneType:None | U
+416:19:Name -> Const:NoneType:None | U
+416:27:Name -> Const:NoneType:None | U
+416:33:Name -> Const:NoneType:None | U
+416:40:Name -> Const:NoneType:None | U
+416:49:Name -> Const:NoneType:None | U
+416:61:Attribute -> U
+416:61:Name -> U
+418:11:Name -> Class:builtins.ValueError
+419:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+419:14:Name -> Class:salt.exceptions.SaltInvocationError
+419:34:Attribute -> ERR
+419:34:Name -> ExcInst:builtins.ValueError
+421:11:Call -> Const:bool:True
+421:11:Name -> Func:salt.modules.system._date_bin_set_datetime
+421:34:Name -> Inst:_pydatetime.datetime
+424:7:Call -> U | Const:bool:False
+424:7:Name -> Func:salt.modules.system.has_settable_hwclock
+427:15:Call -> Const:bool:True
+427:15:Name -> Func:salt.modules.system._swclock_to_hwclock
+450:18:Call -> U
+450:18:Name -> Func:salt.modules.system._get_offset_time
+450:35:Name -> Const:NoneType:None | U
+451:11:Call -> U
+451:11:Attribute -> UM:_pydatetime.date.strftime
+451:11:Name -> Class:_pydatetime.datetime
+451:29:Name -> U
+477:13:Call -> Const:NoneType:None | Inst:_pydatetime.datetime
+477:13:Name -> Func:salt.modules.system._try_parse_datetime
+477:33:Name -> U
+477:42:Name -> List:6
+478:7:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+479:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+479:14:Name -> Class:salt.exceptions.SaltInvocationError
+482:11:Call -> Const:bool:False | Const:bool:True | Const:bool:True
+482:11:Name -> Func:salt.modules.system.set_system_date_time
+483:14:Attribute -> U
+483:14:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+483:34:Attribute -> U
+483:34:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+483:53:Attribute -> U
+483:53:Name -> Const:NoneType:None | Inst:_pydatetime.datetime
+483:76:Name -> Const:NoneType:None | U
+493:19:Name -> Class:_pydatetime.tzinfo
+499:8:Call -> ERR
+499:8:Attribute -> BM:builtins.object.__init__
+499:8:Call -> Super
+499:8:Name -> Class:builtins.super
+500:8:Name -> Inst:salt.modules.system._FixedOffset
+500:24:Call -> Inst:_pydatetime.timedelta
+500:24:Name -> Class:_pydatetime.timedelta
+500:42:Name -> U
+503:15:Attribute -> Inst:_pydatetime.timedelta
+503:15:Name -> Inst:salt.modules.system._FixedOffset
+509:15:Call -> Inst:_pydatetime.timedelta
+509:15:Name -> Class:_pydatetime.timedelta
+516:7:Name -> U
+516:19:Name -> U
+516:33:Call -> U
+516:33:Attribute -> U
+516:33:Name -> U
+517:15:Name -> U
+518:11:Name -> U
+537:19:Call -> Const:NoneType:None | Const:str:'hostnamectl' | U
+537:19:Attribute -> Func:salt.utils.path.which
+537:19:Attribute -> Module:salt.utils.path
+537:19:Attribute -> Module:salt.utils
+537:19:Name -> Module:salt
+538:7:Name -> Const:NoneType:None | Const:str:'hostnamectl' | U
+539:15:Call -> ERR
+539:15:Name -> ERR
+540:13:Name -> Const:str:'hostnamectl' | U
+544:18:Call -> U
+544:18:Attribute -> Func:re.compile
+544:18:Name -> Module:re
+546:17:Call -> U
+546:17:Attribute -> Func:salt.utils.files.fopen
+546:17:Attribute -> Module:salt.utils.files
+546:17:Attribute -> Module:salt.utils
+546:17:Name -> Module:salt
+547:28:Call -> U
+547:28:Attribute -> U
+547:28:Name -> U
+548:27:Call -> U
+548:27:Attribute -> Func:salt.utils.stringutils.to_unicode
+548:27:Attribute -> Module:salt.utils.stringutils
+548:27:Attribute -> Module:salt.utils
+548:27:Name -> Module:salt
+548:61:Name -> U
+549:28:Call -> U
+549:28:Attribute -> U
+549:28:Name -> U
+549:42:Name -> U
+550:23:Name -> U
+552:31:Call -> U
+552:31:Name -> Func:salt.modules.system._strip_quotes
+552:45:Call -> U
+552:45:Attribute -> U
+552:45:Call -> U
+552:45:Attribute -> U
+552:45:Name -> U
+554:15:Name -> Class:builtins.OSError
+557:11:Name -> Const:NoneType:None | U
+561:8:Call -> U
+561:8:Attribute -> U
+561:8:Call -> U
+561:8:Attribute -> U
+561:8:Call -> U
+561:8:Attribute -> U
+561:8:Call -> U
+561:8:Attribute -> U
+561:8:Name -> U | Const:NoneType:None
+584:8:Call -> U
+584:8:Attribute -> U
+584:8:Call -> U
+584:8:Attribute -> U
+584:8:Call -> U
+584:8:Attribute -> U
+584:8:Call -> U
+584:8:Attribute -> Func:salt.utils.stringutils.to_unicode
+584:8:Attribute -> Module:salt.utils.stringutils
+584:8:Attribute -> Module:salt.utils
+584:8:Name -> Module:salt
+584:42:Name -> U
+590:19:Call -> Const:NoneType:None | Const:str:'hostnamectl' | U
+590:19:Attribute -> Func:salt.utils.path.which
+590:19:Attribute -> Module:salt.utils.path
+590:19:Attribute -> Module:salt.utils
+590:19:Name -> Module:salt
+591:7:Name -> Const:NoneType:None | Const:str:'hostnamectl' | U
+592:17:Call -> ERR
+592:17:Name -> ERR
+593:13:Name -> Const:str:'hostnamectl' | U
+593:55:Name -> U
+595:23:Name -> U
+597:11:Call -> Const:bool:False | U
+597:11:Attribute -> Func:genericpath.isfile | U
+597:11:Attribute -> Module:posixpath | Module:ntpath
+597:11:Name -> Module:os
+598:13:Call -> U
+598:13:Attribute -> Func:salt.utils.files.fopen
+598:13:Attribute -> Module:salt.utils.files
+598:13:Attribute -> Module:salt.utils
+598:13:Name -> Module:salt
+601:14:Call -> U
+601:14:Attribute -> Func:re.compile
+601:14:Name -> Module:re
+602:15:Call -> U
+602:15:Attribute -> Func:salt.utils.stringutils.to_str
+602:15:Attribute -> Module:salt.utils.stringutils
+602:15:Attribute -> Module:salt.utils
+602:15:Name -> Module:salt
+602:65:Name -> U
+604:13:Call -> U
+604:13:Attribute -> Func:salt.utils.files.fopen
+604:13:Attribute -> Module:salt.utils.files
+604:13:Attribute -> Module:salt.utils
+604:13:Name -> Module:salt
+605:20:Call -> U
+605:20:Attribute -> U
+605:20:Name -> U
+606:27:Call -> Inst:builtins.enumerate
+606:27:Name -> Class:builtins.enumerate
+606:37:Name -> U
+607:19:Call -> U
+607:19:Attribute -> U
+607:19:Name -> U
+607:33:Call -> U
+607:33:Attribute -> Func:salt.utils.stringutils.to_unicode
+607:33:Attribute -> Module:salt.utils.stringutils
+607:33:Attribute -> Module:salt.utils
+607:33:Name -> Module:salt
+607:67:Name -> U
+608:20:Name -> U
+608:26:Name -> U
+608:31:Name -> U
+612:16:Call -> U
+612:16:Attribute -> U
+612:16:Name -> U
+612:29:Name -> U
+614:12:Call -> U
+614:12:Attribute -> U
+614:12:Name -> U
+615:12:Call -> U
+615:12:Attribute -> U
+615:12:Name -> U
+616:12:Call -> U
+616:12:Attribute -> U
+616:12:Name -> U
+616:33:Name -> U
+618:11:Name -> Class:builtins.OSError
+632:11:Call -> ERR
+632:11:Name -> ERR
+632:44:Name -> U
+645:11:Call -> ERR
+645:11:Name -> ERR
+652:11:Call -> ERR
+652:11:Attribute -> ERR
+652:11:Name -> ERR
+658:1:Call -> Inst:salt.utils.decorators.Depends
+658:1:Name -> Class:salt.utils.decorators.Depends
+679:15:Call -> U
+679:15:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+679:15:Attribute -> Module:posixpath | Module:ntpath
+679:15:Name -> Module:os
+679:31:Name -> Const:str:'/var/volatile/tmp/salt/reboot_witnessed
+680:11:Call -> Const:bool:False | Const:bool:True | U
+680:11:Attribute -> Func:genericpath.exists | U
+680:11:Attribute -> Module:posixpath | Module:ntpath
+680:11:Name -> Module:os
+680:26:Name -> U
+682:12:Call -> Const:NoneType:None
+682:12:Attribute -> Func:os.makedirs
+682:12:Name -> Module:os
+682:24:Name -> U
+683:15:Name -> Class:builtins.OSError
+684:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+684:18:Name -> Class:salt.exceptions.SaltInvocationError
+685:34:Name -> U
+685:47:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+685:47:Name -> ExcInst:builtins.OSError
+685:60:Attribute -> Const:str:''
+685:60:Name -> ExcInst:builtins.OSError
+688:16:Call -> ERR
+688:16:Name -> ERR
+688:49:Name -> Const:str:'/var/volatile/tmp/salt/reboot_witnessed
+689:18:Name -> U
+691:11:Name -> Const:int:-1 | U
+694:1:Call -> Inst:salt.utils.decorators.Depends
+694:1:Name -> Class:salt.utils.decorators.Depends
+713:11:Call -> Const:bool:False | Const:bool:True | U
+713:11:Attribute -> Func:genericpath.exists | U
+713:11:Attribute -> Module:posixpath | Module:ntpath
+713:11:Name -> Module:os
+713:26:Name -> Const:str:'/var/volatile/tmp/salt/reboot_witnessed

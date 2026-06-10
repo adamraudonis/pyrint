@@ -1,0 +1,504 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'salt.modules.osquery' | Const:str:'__main__'
+26:7:Call -> Const:NoneType:None | Const:str:'osqueryi' | U
+26:7:Attribute -> Func:salt.utils.path.which
+26:7:Attribute -> Module:salt.utils.path
+26:7:Attribute -> Module:salt.utils
+26:7:Name -> Module:salt
+27:15:Name -> Const:str:'osquery'
+39:60:Name -> U
+40:10:Call -> ERR
+40:10:Name -> ERR
+40:34:Name -> List:3
+41:7:Name -> U
+43:15:Call -> U
+43:15:Attribute -> Func:salt.utils.json.loads
+43:15:Attribute -> Module:salt.utils.json
+43:15:Attribute -> Module:salt.utils
+43:15:Name -> Module:salt
+43:37:Name -> U
+44:20:Name -> U
+45:12:Call -> ERR
+45:12:Attribute -> BM:builtins.list.append
+45:12:Name -> List:0
+45:25:Name -> U
+46:15:Name -> List:0
+58:39:Name -> U
+59:10:Call -> ERR
+59:10:Name -> ERR
+59:34:Name -> List:3
+60:7:Name -> U
+61:8:Name -> Dict:1
+62:8:Name -> Dict:1
+62:23:Name -> U
+64:8:Name -> Dict:1
+64:22:Call -> U
+64:22:Attribute -> Func:salt.utils.json.loads
+64:22:Attribute -> Module:salt.utils.json
+64:22:Attribute -> Module:salt.utils
+64:22:Name -> Module:salt
+64:44:Name -> U
+65:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+65:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+65:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+65:26:Name -> Dict:1
+66:11:Name -> Dict:1
+77:7:Name -> Const:NoneType:None | U
+78:11:Call -> ERR
+78:11:Name -> Func:builtins.isinstance
+78:22:Name -> U
+78:29:Name -> Class:builtins.list
+79:26:Call -> List:0 | Const:bool:False
+79:26:Name -> Func:salt.modules.osquery._table_attrs
+79:39:Name -> U
+80:15:Name -> List:0 | Const:bool:False
+81:25:Name -> U
+82:23:Name -> U
+82:32:Name -> U
+83:24:Name -> Dict:1
+84:24:Name -> Dict:1
+85:31:Name -> U
+85:70:Name -> U
+87:31:Name -> Dict:1
+88:25:Call -> Const:str:''
+88:25:Attribute -> BM:builtins.str.join
+88:34:Name -> U
+90:16:Name -> Dict:1
+91:16:Name -> Dict:1
+91:50:Name -> U
+92:23:Name -> Dict:1
+94:12:Name -> Dict:1
+95:12:Name -> Dict:1
+96:19:Name -> Dict:1
+100:20:Name -> Const:str:'' | Const:str:'*'
+100:34:Name -> U
+102:7:Name -> Const:NoneType:None | U
+103:17:Name -> Const:str:'select  from Uninferable' | Const:str:'select * from Uninferable'
+103:29:Name -> U
+105:13:Name -> Const:str:'select  from Uninferable' | Const:str:'select * from Uninferable' | Const:str:'select  from Uninferable where Uninfera | Const:str:'select * from Uninferable where Uninfer
+107:10:Call -> Dict:1
+107:10:Name -> Func:salt.modules.osquery._osquery
+107:19:Name -> Const:str:'select  from Uninferable;' | Const:str:'select * from Uninferable;' | Const:str:'select  from Uninferable where Uninfera | Const:str:'select * from Uninferable where Uninfer
+108:7:Name -> Dict:1
+109:8:Name -> Dict:1
+109:22:Name -> Dict:1
+111:8:Name -> Dict:1
+111:25:Name -> Dict:1
+112:11:Name -> Dict:1
+126:10:Call -> Dict:1
+126:10:Name -> Func:salt.modules.osquery._osquery_cmd
+127:19:Name -> Dict:1
+127:27:Name -> Dict:1
+128:21:Name -> Dict:1
+128:29:Call -> ERR
+128:29:Name -> Func:builtins.isinstance
+128:40:Name -> Dict:1
+128:53:Name -> Class:builtins.list
+129:19:Call -> ERR
+129:19:Attribute -> ERR
+129:19:Name -> Dict:1
+129:56:Name -> Dict:2
+130:11:Name -> Dict:2
+143:7:Name -> ERR
+144:15:Call -> Dict:1
+144:15:Name -> Func:salt.modules.osquery._osquery_cmd
+144:56:Name -> Const:NoneType:None | U
+144:69:Name -> Const:NoneType:None | U
+158:7:Name -> ERR
+159:15:Call -> Dict:1
+159:15:Name -> Func:salt.modules.osquery._osquery_cmd
+159:60:Name -> Const:NoneType:None | U
+159:73:Name -> Const:NoneType:None | U
+176:7:Name -> ERR
+177:15:Call -> Dict:1
+177:15:Name -> Func:salt.modules.osquery._osquery_cmd
+177:58:Name -> Const:NoneType:None | U
+177:71:Name -> Const:NoneType:None | U
+194:7:Name -> ERR
+195:15:Call -> Dict:1
+195:15:Name -> Func:salt.modules.osquery._osquery_cmd
+195:54:Name -> Const:NoneType:None | U
+195:67:Name -> Const:NoneType:None | U
+212:7:Name -> ERR
+213:15:Call -> Dict:1
+213:15:Name -> Func:salt.modules.osquery._osquery_cmd
+213:62:Name -> Const:NoneType:None | U
+213:75:Name -> Const:NoneType:None | U
+230:7:Name -> ERR
+231:15:Call -> Dict:1
+231:15:Name -> Func:salt.modules.osquery._osquery_cmd
+231:57:Name -> Const:NoneType:None | U
+231:70:Name -> Const:NoneType:None | U
+248:7:Name -> ERR
+249:15:Call -> Dict:1
+249:15:Name -> Func:salt.modules.osquery._osquery_cmd
+249:55:Name -> Const:NoneType:None | U
+249:68:Name -> Const:NoneType:None | U
+263:7:Name -> ERR
+264:15:Call -> Dict:1
+264:15:Name -> Func:salt.modules.osquery._osquery_cmd
+264:56:Name -> Const:NoneType:None | U
+264:69:Name -> Const:NoneType:None | U
+278:11:Call -> Dict:1
+278:11:Name -> Func:salt.modules.osquery._osquery_cmd
+278:51:Name -> Const:NoneType:None | U
+278:64:Name -> Const:NoneType:None | U
+291:11:Call -> Dict:1
+291:11:Name -> Func:salt.modules.osquery._osquery_cmd
+291:49:Name -> Const:NoneType:None | U
+291:62:Name -> Const:NoneType:None | U
+304:11:Call -> Dict:1
+304:11:Name -> Func:salt.modules.osquery._osquery_cmd
+304:53:Name -> Const:NoneType:None | U
+304:66:Name -> Const:NoneType:None | U
+317:11:Call -> Dict:1
+317:11:Name -> Func:salt.modules.osquery._osquery_cmd
+317:45:Name -> Const:NoneType:None | U
+317:58:Name -> Const:NoneType:None | U
+330:11:Call -> Dict:1
+330:11:Name -> Func:salt.modules.osquery._osquery_cmd
+330:47:Name -> Const:NoneType:None | U
+330:60:Name -> Const:NoneType:None | U
+343:11:Call -> Dict:1
+343:11:Name -> Func:salt.modules.osquery._osquery_cmd
+343:49:Name -> Const:NoneType:None | U
+343:62:Name -> Const:NoneType:None | U
+356:11:Call -> Dict:1
+356:11:Name -> Func:salt.modules.osquery._osquery_cmd
+356:52:Name -> Const:NoneType:None | U
+356:65:Name -> Const:NoneType:None | U
+369:11:Call -> Dict:1
+369:11:Name -> Func:salt.modules.osquery._osquery_cmd
+369:52:Name -> Const:NoneType:None | U
+369:65:Name -> Const:NoneType:None | U
+382:11:Call -> Dict:1
+382:11:Name -> Func:salt.modules.osquery._osquery_cmd
+382:46:Name -> Const:NoneType:None | U
+382:59:Name -> Const:NoneType:None | U
+395:11:Call -> Dict:1
+395:11:Name -> Func:salt.modules.osquery._osquery_cmd
+395:55:Name -> Const:NoneType:None | U
+395:68:Name -> Const:NoneType:None | U
+408:11:Call -> Dict:1
+408:11:Name -> Func:salt.modules.osquery._osquery_cmd
+408:59:Name -> Const:NoneType:None | U
+408:72:Name -> Const:NoneType:None | U
+421:11:Call -> Dict:1
+421:11:Name -> Func:salt.modules.osquery._osquery_cmd
+421:57:Name -> Const:NoneType:None | U
+421:70:Name -> Const:NoneType:None | U
+434:11:Call -> Dict:1
+434:11:Name -> Func:salt.modules.osquery._osquery_cmd
+434:51:Name -> Const:NoneType:None | U
+434:64:Name -> Const:NoneType:None | U
+447:11:Call -> Dict:1
+447:11:Name -> Func:salt.modules.osquery._osquery_cmd
+447:44:Name -> Const:NoneType:None | U
+447:57:Name -> Const:NoneType:None | U
+460:11:Call -> Dict:1
+460:11:Name -> Func:salt.modules.osquery._osquery_cmd
+460:55:Name -> Const:NoneType:None | U
+460:68:Name -> Const:NoneType:None | U
+473:11:Call -> Dict:1
+473:11:Name -> Func:salt.modules.osquery._osquery_cmd
+473:55:Name -> Const:NoneType:None | U
+473:68:Name -> Const:NoneType:None | U
+486:11:Call -> Dict:1
+486:11:Name -> Func:salt.modules.osquery._osquery_cmd
+486:46:Name -> Const:NoneType:None | U
+486:59:Name -> Const:NoneType:None | U
+499:11:Call -> Dict:1
+499:11:Name -> Func:salt.modules.osquery._osquery_cmd
+499:50:Name -> Const:NoneType:None | U
+499:63:Name -> Const:NoneType:None | U
+512:11:Call -> Dict:1
+512:11:Name -> Func:salt.modules.osquery._osquery_cmd
+512:54:Name -> Const:NoneType:None | U
+512:67:Name -> Const:NoneType:None | U
+525:11:Call -> Dict:1
+525:11:Name -> Func:salt.modules.osquery._osquery_cmd
+525:51:Name -> Const:NoneType:None | U
+525:64:Name -> Const:NoneType:None | U
+538:11:Call -> Dict:1
+538:11:Name -> Func:salt.modules.osquery._osquery_cmd
+538:52:Name -> Const:NoneType:None | U
+538:65:Name -> Const:NoneType:None | U
+551:11:Call -> Dict:1
+551:11:Name -> Func:salt.modules.osquery._osquery_cmd
+551:58:Name -> Const:NoneType:None | U
+551:71:Name -> Const:NoneType:None | U
+564:11:Call -> Dict:1
+564:11:Name -> Func:salt.modules.osquery._osquery_cmd
+564:60:Name -> Const:NoneType:None | U
+564:73:Name -> Const:NoneType:None | U
+577:11:Call -> Dict:1
+577:11:Name -> Func:salt.modules.osquery._osquery_cmd
+577:49:Name -> Const:NoneType:None | U
+577:62:Name -> Const:NoneType:None | U
+590:11:Call -> Dict:1
+590:11:Name -> Func:salt.modules.osquery._osquery_cmd
+590:46:Name -> Const:NoneType:None | U
+590:59:Name -> Const:NoneType:None | U
+603:11:Call -> Dict:1
+603:11:Name -> Func:salt.modules.osquery._osquery_cmd
+603:53:Name -> Const:NoneType:None | U
+603:66:Name -> Const:NoneType:None | U
+616:11:Call -> Dict:1
+616:11:Name -> Func:salt.modules.osquery._osquery_cmd
+616:53:Name -> Const:NoneType:None | U
+616:66:Name -> Const:NoneType:None | U
+629:11:Call -> Dict:1
+629:11:Name -> Func:salt.modules.osquery._osquery_cmd
+629:48:Name -> Const:NoneType:None | U
+629:61:Name -> Const:NoneType:None | U
+642:11:Call -> Dict:1
+642:11:Name -> Func:salt.modules.osquery._osquery_cmd
+642:55:Name -> Const:NoneType:None | U
+642:68:Name -> Const:NoneType:None | U
+655:11:Call -> Dict:1
+655:11:Name -> Func:salt.modules.osquery._osquery_cmd
+655:51:Name -> Const:NoneType:None | U
+655:64:Name -> Const:NoneType:None | U
+668:11:Call -> Dict:1
+668:11:Name -> Func:salt.modules.osquery._osquery_cmd
+668:45:Name -> Const:NoneType:None | U
+668:58:Name -> Const:NoneType:None | U
+681:7:Call -> U
+681:7:Attribute -> Func:salt.utils.platform.is_darwin
+681:7:Attribute -> Module:salt.utils.platform
+681:7:Attribute -> Module:salt.utils
+681:7:Name -> Module:salt
+682:15:Call -> Dict:1
+682:15:Name -> Func:salt.modules.osquery._osquery_cmd
+682:47:Name -> Const:NoneType:None | U
+682:60:Name -> Const:NoneType:None | U
+696:7:Call -> U
+696:7:Attribute -> Func:salt.utils.platform.is_darwin
+696:7:Attribute -> Module:salt.utils.platform
+696:7:Attribute -> Module:salt.utils
+696:7:Name -> Module:salt
+697:15:Call -> Dict:1
+697:15:Name -> Func:salt.modules.osquery._osquery_cmd
+697:58:Name -> Const:NoneType:None | U
+697:71:Name -> Const:NoneType:None | U
+711:7:Call -> U
+711:7:Attribute -> Func:salt.utils.platform.is_darwin
+711:7:Attribute -> Module:salt.utils.platform
+711:7:Attribute -> Module:salt.utils
+711:7:Name -> Module:salt
+712:15:Call -> Dict:1
+712:15:Name -> Func:salt.modules.osquery._osquery_cmd
+712:62:Name -> Const:NoneType:None | U
+712:75:Name -> Const:NoneType:None | U
+726:7:Call -> U
+726:7:Attribute -> Func:salt.utils.platform.is_darwin
+726:7:Attribute -> Module:salt.utils.platform
+726:7:Attribute -> Module:salt.utils
+726:7:Name -> Module:salt
+727:15:Call -> Dict:1
+727:15:Name -> Func:salt.modules.osquery._osquery_cmd
+727:56:Name -> Const:NoneType:None | U
+727:69:Name -> Const:NoneType:None | U
+741:7:Call -> U
+741:7:Attribute -> Func:salt.utils.platform.is_darwin
+741:7:Attribute -> Module:salt.utils.platform
+741:7:Attribute -> Module:salt.utils
+741:7:Name -> Module:salt
+742:15:Call -> Dict:1
+742:15:Name -> Func:salt.modules.osquery._osquery_cmd
+742:48:Name -> Const:NoneType:None | U
+742:61:Name -> Const:NoneType:None | U
+756:7:Call -> U
+756:7:Attribute -> Func:salt.utils.platform.is_darwin
+756:7:Attribute -> Module:salt.utils.platform
+756:7:Attribute -> Module:salt.utils
+756:7:Name -> Module:salt
+757:15:Call -> Dict:1
+757:15:Name -> Func:salt.modules.osquery._osquery_cmd
+757:56:Name -> Const:NoneType:None | U
+757:69:Name -> Const:NoneType:None | U
+771:7:Call -> U
+771:7:Attribute -> Func:salt.utils.platform.is_darwin
+771:7:Attribute -> Module:salt.utils.platform
+771:7:Attribute -> Module:salt.utils
+771:7:Name -> Module:salt
+772:15:Call -> Dict:1
+772:15:Name -> Func:salt.modules.osquery._osquery_cmd
+772:61:Name -> Const:NoneType:None | U
+772:74:Name -> Const:NoneType:None | U
+786:7:Call -> U
+786:7:Attribute -> Func:salt.utils.platform.is_darwin
+786:7:Attribute -> Module:salt.utils.platform
+786:7:Attribute -> Module:salt.utils
+786:7:Name -> Module:salt
+787:15:Call -> Dict:1
+787:15:Name -> Func:salt.modules.osquery._osquery_cmd
+787:58:Name -> Const:NoneType:None | U
+787:71:Name -> Const:NoneType:None | U
+801:7:Call -> U
+801:7:Attribute -> Func:salt.utils.platform.is_darwin
+801:7:Attribute -> Module:salt.utils.platform
+801:7:Attribute -> Module:salt.utils
+801:7:Name -> Module:salt
+802:15:Call -> Dict:1
+802:15:Name -> Func:salt.modules.osquery._osquery_cmd
+802:61:Name -> Const:NoneType:None | U
+802:74:Name -> Const:NoneType:None | U
+816:7:Call -> U
+816:7:Attribute -> Func:salt.utils.platform.is_darwin
+816:7:Attribute -> Module:salt.utils.platform
+816:7:Attribute -> Module:salt.utils
+816:7:Name -> Module:salt
+817:15:Call -> Dict:1
+817:15:Name -> Func:salt.modules.osquery._osquery_cmd
+817:60:Name -> Const:NoneType:None | U
+817:73:Name -> Const:NoneType:None | U
+831:7:Call -> U
+831:7:Attribute -> Func:salt.utils.platform.is_darwin
+831:7:Attribute -> Module:salt.utils.platform
+831:7:Attribute -> Module:salt.utils
+831:7:Name -> Module:salt
+832:15:Call -> Dict:1
+832:15:Name -> Func:salt.modules.osquery._osquery_cmd
+832:58:Name -> Const:NoneType:None | U
+832:71:Name -> Const:NoneType:None | U
+846:7:Call -> U
+846:7:Attribute -> Func:salt.utils.platform.is_darwin
+846:7:Attribute -> Module:salt.utils.platform
+846:7:Attribute -> Module:salt.utils
+846:7:Name -> Module:salt
+847:15:Call -> Dict:1
+847:15:Name -> Func:salt.modules.osquery._osquery_cmd
+847:61:Name -> Const:NoneType:None | U
+847:74:Name -> Const:NoneType:None | U
+861:7:Call -> U
+861:7:Attribute -> Func:salt.utils.platform.is_darwin
+861:7:Attribute -> Module:salt.utils.platform
+861:7:Attribute -> Module:salt.utils
+861:7:Name -> Module:salt
+862:15:Call -> Dict:1
+862:15:Name -> Func:salt.modules.osquery._osquery_cmd
+862:58:Name -> Const:NoneType:None | U
+862:71:Name -> Const:NoneType:None | U
+876:7:Call -> U
+876:7:Attribute -> Func:salt.utils.platform.is_darwin
+876:7:Attribute -> Module:salt.utils.platform
+876:7:Attribute -> Module:salt.utils
+876:7:Name -> Module:salt
+877:15:Call -> Dict:1
+877:15:Name -> Func:salt.modules.osquery._osquery_cmd
+877:51:Name -> Const:NoneType:None | U
+877:64:Name -> Const:NoneType:None | U
+891:7:Call -> U
+891:7:Attribute -> Func:salt.utils.platform.is_darwin
+891:7:Attribute -> Module:salt.utils.platform
+891:7:Attribute -> Module:salt.utils
+891:7:Name -> Module:salt
+892:15:Call -> Dict:1
+892:15:Name -> Func:salt.modules.osquery._osquery_cmd
+892:54:Name -> Const:NoneType:None | U
+892:67:Name -> Const:NoneType:None | U
+906:7:Call -> U
+906:7:Attribute -> Func:salt.utils.platform.is_darwin
+906:7:Attribute -> Module:salt.utils.platform
+906:7:Attribute -> Module:salt.utils
+906:7:Name -> Module:salt
+907:15:Call -> Dict:1
+907:15:Name -> Func:salt.modules.osquery._osquery_cmd
+907:49:Name -> Const:NoneType:None | U
+907:62:Name -> Const:NoneType:None | U
+921:7:Call -> U
+921:7:Attribute -> Func:salt.utils.platform.is_darwin
+921:7:Attribute -> Module:salt.utils.platform
+921:7:Attribute -> Module:salt.utils
+921:7:Name -> Module:salt
+922:15:Call -> Dict:1
+922:15:Name -> Func:salt.modules.osquery._osquery_cmd
+922:55:Name -> Const:NoneType:None | U
+922:68:Name -> Const:NoneType:None | U
+936:7:Call -> U
+936:7:Attribute -> Func:salt.utils.platform.is_darwin
+936:7:Attribute -> Module:salt.utils.platform
+936:7:Attribute -> Module:salt.utils
+936:7:Name -> Module:salt
+937:15:Call -> Dict:1
+937:15:Name -> Func:salt.modules.osquery._osquery_cmd
+937:54:Name -> Const:NoneType:None | U
+937:67:Name -> Const:NoneType:None | U
+951:7:Call -> U
+951:7:Attribute -> Func:salt.utils.platform.is_darwin
+951:7:Attribute -> Module:salt.utils.platform
+951:7:Attribute -> Module:salt.utils
+951:7:Name -> Module:salt
+952:15:Call -> Dict:1
+952:15:Name -> Func:salt.modules.osquery._osquery_cmd
+952:61:Name -> Const:NoneType:None | U
+952:74:Name -> Const:NoneType:None | U
+966:7:Call -> U
+966:7:Attribute -> Func:salt.utils.platform.is_darwin
+966:7:Attribute -> Module:salt.utils.platform
+966:7:Attribute -> Module:salt.utils
+966:7:Name -> Module:salt
+967:15:Call -> Dict:1
+967:15:Name -> Func:salt.modules.osquery._osquery_cmd
+967:57:Name -> Const:NoneType:None | U
+967:70:Name -> Const:NoneType:None | U
+981:7:Call -> U
+981:7:Attribute -> Func:salt.utils.platform.is_darwin
+981:7:Attribute -> Module:salt.utils.platform
+981:7:Attribute -> Module:salt.utils
+981:7:Name -> Module:salt
+982:15:Call -> Dict:1
+982:15:Name -> Func:salt.modules.osquery._osquery_cmd
+982:60:Name -> Const:NoneType:None | U
+982:73:Name -> Const:NoneType:None | U
+996:7:Call -> U
+996:7:Attribute -> Func:salt.utils.platform.is_darwin
+996:7:Attribute -> Module:salt.utils.platform
+996:7:Attribute -> Module:salt.utils
+996:7:Name -> Module:salt
+997:15:Call -> Dict:1
+997:15:Name -> Func:salt.modules.osquery._osquery_cmd
+997:60:Name -> Const:NoneType:None | U
+997:73:Name -> Const:NoneType:None | U
+1011:7:Call -> U
+1011:7:Attribute -> Func:salt.utils.platform.is_darwin
+1011:7:Attribute -> Module:salt.utils.platform
+1011:7:Attribute -> Module:salt.utils
+1011:7:Name -> Module:salt
+1012:15:Call -> Dict:1
+1012:15:Name -> Func:salt.modules.osquery._osquery_cmd
+1012:60:Name -> Const:NoneType:None | U
+1012:73:Name -> Const:NoneType:None | U
+1026:11:Call -> Dict:1
+1026:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1026:44:Name -> Const:NoneType:None | U
+1026:57:Name -> Const:NoneType:None | U
+1039:11:Call -> Dict:1
+1039:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1039:44:Name -> Const:NoneType:None | U
+1039:57:Name -> Const:NoneType:None | U
+1052:11:Call -> Dict:1
+1052:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1052:58:Name -> Const:NoneType:None | U
+1052:71:Name -> Const:NoneType:None | U
+1065:11:Call -> Dict:1
+1065:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1065:53:Name -> Const:NoneType:None | U
+1065:66:Name -> Const:NoneType:None | U
+1078:11:Call -> Dict:1
+1078:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1078:52:Name -> Const:NoneType:None | U
+1078:65:Name -> Const:NoneType:None | U
+1091:11:Call -> Dict:1
+1091:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1091:56:Name -> Const:NoneType:None | U
+1091:69:Name -> Const:NoneType:None | U
+1104:11:Call -> Dict:1
+1104:11:Name -> Func:salt.modules.osquery._osquery_cmd
+1104:44:Name -> Const:NoneType:None | U
+1117:11:Call -> Dict:1
+1117:11:Name -> Func:salt.modules.osquery._osquery
+1117:20:Name -> Const:NoneType:None | U

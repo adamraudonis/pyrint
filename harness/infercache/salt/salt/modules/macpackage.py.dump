@@ -1,0 +1,171 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'salt.modules.macpackage' | Const:str:'__main__'
+21:7:Call -> U
+21:7:Attribute -> Func:salt.utils.platform.is_darwin
+21:7:Attribute -> Module:salt.utils.platform
+21:7:Attribute -> Module:salt.utils
+21:7:Name -> Module:salt
+22:15:Name -> Const:str:'macpackage'
+46:19:Name -> U
+48:14:Call -> Const:str:"''" | U
+48:14:Attribute -> Func:shlex.quote
+48:14:Name -> Module:shlex
+48:26:Name -> U
+50:13:Call -> Const:str:"''" | Const:str:'LocalSystem' | U | Const:str:"''"
+50:13:Attribute -> Func:shlex.quote
+50:13:Name -> Module:shlex
+50:25:Name -> Const:str:'LocalSystem' | U
+52:28:Name -> U | Const:str:"''"
+52:42:Name -> Const:str:"''" | Const:str:'LocalSystem' | U | Const:str:"''"
+53:7:Name -> Const:bool:False | U
+55:7:Name -> Const:bool:False | U
+61:15:Name -> Const:str:"installer -pkg Uninferable -target ''" | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target ''" | Const:str:"installer -pkg '' -target ''" | Const:str:"installer -pkg '' -target LocalSystem" | Const:str:"installer -pkg '' -target Uninferable" | Const:str:"installer -pkg '' -target ''" | Const:str:"installer -pkg Uninferable -target '' - | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target '' - | Const:str:"installer -pkg '' -target '' -store" | Const:str:"installer -pkg '' -target LocalSystem - | Const:str:"installer -pkg '' -target Uninferable - | Const:str:"installer -pkg '' -target '' -store" | Const:str:"installer -pkg Uninferable -target '' - | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target '' - | Const:str:"installer -pkg '' -target '' -allowUntr | Const:str:"installer -pkg '' -target LocalSystem - | Const:str:"installer -pkg '' -target Uninferable - | Const:str:"installer -pkg '' -target '' -allowUntr | Const:str:"installer -pkg Uninferable -target '' - | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target '' - | Const:str:"installer -pkg '' -target '' -store -al | Const:str:"installer -pkg '' -target LocalSystem - | Const:str:"installer -pkg '' -target Uninferable - | Const:str:"installer -pkg '' -target '' -store -al
+64:11:Call -> ERR
+64:11:Name -> ERR
+64:35:Name -> Const:str:"installer -pkg Uninferable -target ''" | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target ''" | Const:str:"installer -pkg '' -target ''" | Const:str:"installer -pkg '' -target LocalSystem" | Const:str:"installer -pkg '' -target Uninferable" | Const:str:"installer -pkg '' -target ''" | Const:str:"installer -pkg Uninferable -target '' - | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target '' - | Const:str:"installer -pkg '' -target '' -store" | Const:str:"installer -pkg '' -target LocalSystem - | Const:str:"installer -pkg '' -target Uninferable - | Const:str:"installer -pkg '' -target '' -store" | Const:str:"installer -pkg Uninferable -target '' - | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target '' - | Const:str:"installer -pkg '' -target '' -allowUntr | Const:str:"installer -pkg '' -target LocalSystem - | Const:str:"installer -pkg '' -target Uninferable - | Const:str:"installer -pkg '' -target '' -allowUntr | Const:str:"installer -pkg Uninferable -target '' - | Const:str:'installer -pkg Uninferable -target Loca | Const:str:'installer -pkg Uninferable -target Unin | Const:str:"installer -pkg Uninferable -target '' - | Const:str:"installer -pkg '' -target '' -store -al | Const:str:"installer -pkg '' -target LocalSystem - | Const:str:"installer -pkg '' -target Uninferable - | Const:str:"installer -pkg '' -target '' -store -al
+64:53:Name -> Const:bool:False | Const:bool:True
+86:7:Name -> Const:str:'/Applications/' | U
+87:11:Name -> U
+88:23:Call -> U
+88:23:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+88:23:Attribute -> Module:posixpath | Module:ntpath
+88:23:Name -> Module:os
+88:40:Name -> U
+90:23:Call -> U
+90:23:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+90:23:Attribute -> Module:posixpath | Module:ntpath
+90:23:Name -> Module:os
+90:40:Name -> U
+92:17:Call -> U
+92:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+92:17:Attribute -> Module:posixpath | Module:ntpath
+92:17:Name -> Module:os
+92:30:Name -> Const:str:'/Applications/' | U
+92:38:Name -> U
+94:11:Name -> U
+97:32:Name -> U
+97:40:Name -> Const:str:'/Applications/' | U
+98:11:Call -> ERR
+98:11:Name -> ERR
+98:31:Name -> Const:str:'rsync -a --delete "Uninferable" "/Appli | Const:str:'rsync -a --delete "Uninferable" "Uninfe
+118:11:Call -> ERR
+118:11:Name -> ERR
+118:35:Name -> U
+140:15:Call -> ERR
+140:15:Name -> ERR
+142:60:Name -> U
+142:72:Name -> U
+144:11:Call -> ERR
+144:11:Name -> ERR
+144:31:Name -> Const:str:'hdiutil attach -readonly -nobrowse -mou
+144:37:Name -> U
+164:29:Name -> U
+166:11:Call -> ERR
+166:11:Name -> ERR
+166:31:Name -> Const:str:'hdiutil detach "Uninferable"'
+185:11:Call -> ERR
+185:11:Attribute -> ERR
+185:11:Call -> ERR
+185:11:Name -> ERR
+185:31:Name -> Const:str:'pkgutil --pkgs'
+204:10:Call -> Const:str:"''" | U
+204:10:Attribute -> Func:shlex.quote
+204:10:Name -> Module:shlex
+204:22:Name -> U
+208:15:Call -> ERR
+208:15:Name -> ERR
+212:27:Name -> Const:str:"''" | U
+213:14:Call -> ERR
+213:14:Name -> ERR
+213:34:Name -> Const:str:"xar -t -f '' | grep PackageInfo" | Const:str:'xar -t -f Uninferable | grep PackageInf
+214:16:Call -> U
+214:16:Attribute -> U
+214:16:Name -> U
+216:34:Name -> U
+218:18:Call -> U
+218:18:Attribute -> BM:builtins.str.format
+218:43:Name -> Const:str:"''" | U
+218:48:Call -> Const:str:''
+218:48:Attribute -> BM:builtins.str.join
+218:57:Name -> U
+219:12:Call -> ERR
+219:12:Name -> ERR
+219:32:Name -> U
+219:41:Name -> U
+222:21:Name -> U
+223:20:Call -> U | List:0
+223:20:Name -> Func:salt.modules.macpackage._get_pkg_id_from_pkginfo
+223:45:Call -> U
+223:45:Attribute -> Func:posixpath.join | Func:ntpath.join
+223:45:Attribute -> Module:posixpath | Module:ntpath
+223:45:Name -> Module:os
+223:58:Name -> U
+223:68:Name -> U
+224:19:Name -> U | List:0
+225:20:Call -> ERR
+225:20:Attribute -> BM:builtins.list.extend
+225:20:Name -> List:0
+225:39:Name -> U
+227:26:Call -> List:1 | List:0
+227:26:Name -> Func:salt.modules.macpackage._get_pkg_id_dir
+227:42:Name -> Const:str:"''" | U
+231:8:Call -> ERR
+231:8:Name -> ERR
+231:32:Name -> U
+233:11:Name -> List:0 | List:1 | List:0
+252:11:Call -> Const:str:"''" | U
+252:11:Attribute -> Func:shlex.quote
+252:11:Name -> Module:shlex
+252:23:Name -> U
+254:16:Call -> U
+254:16:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+254:16:Attribute -> Module:posixpath | Module:ntpath
+254:16:Name -> Module:os
+254:32:Name -> Const:str:"''" | U
+257:18:Name -> U
+258:10:Call -> ERR
+258:10:Name -> ERR
+258:30:Name -> Const:str:'find Uninferable -name *.pkg'
+260:16:Call -> U
+260:16:Attribute -> U
+260:16:Name -> U
+261:13:Name -> U
+262:8:Call -> ERR
+262:8:Attribute -> BM:builtins.list.extend
+262:8:Name -> List:0
+262:29:Call -> List:0 | List:1 | List:0
+262:29:Name -> Func:salt.modules.macpackage.get_pkg_id
+262:40:Name -> U
+264:11:Name -> List:0
+269:14:Call -> Const:str:"''" | U
+269:14:Attribute -> Func:shlex.quote
+269:14:Name -> Module:shlex
+269:26:Name -> U
+270:10:Call -> U
+270:10:Attribute -> BM:builtins.str.format
+271:8:Name -> Const:str:"''" | U
+273:10:Call -> ERR
+273:10:Name -> ERR
+273:30:Name -> U
+275:29:Name -> U
+276:15:Call -> U
+276:15:Attribute -> U
+276:15:Name -> U
+282:11:Call -> Const:str:"''" | U
+282:11:Attribute -> Func:shlex.quote
+282:11:Name -> Module:shlex
+282:23:Call -> U
+282:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+282:23:Attribute -> Module:posixpath | Module:ntpath
+282:23:Name -> Module:os
+282:36:Name -> U
+283:68:Name -> Const:str:"''" | U
+288:15:Name -> Const:str:'/usr/libexec/PlistBuddy -c "print :CFBu | Const:str:'/usr/libexec/PlistBuddy -c "print :CFBu
+291:10:Call -> ERR
+291:10:Name -> ERR
+291:30:Name -> Const:str:'/usr/libexec/PlistBuddy -c "print :CFBu | Const:str:'/usr/libexec/PlistBuddy -c "print :CFBu
+291:48:Name -> Const:bool:False | Const:bool:True
+293:31:Name -> U
+294:16:Name -> U

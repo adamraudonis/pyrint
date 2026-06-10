@@ -1,0 +1,41 @@
+13:17:Name -> Class:django.apps.config.AppConfig
+16:19:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+16:19:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+19:8:Call -> Const:NoneType:None
+19:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+19:8:Name -> Inst:django.dispatch.dispatcher.Signal
+20:12:Name -> Func:django.contrib.auth.management.rename_permissions_after_model_rename
+23:8:Call -> Const:NoneType:None
+23:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+23:8:Name -> Inst:django.dispatch.dispatcher.Signal
+24:12:Name -> Func:django.contrib.auth.management.create_permissions
+27:27:Call -> U
+27:27:Name -> Func:builtins.getattr
+27:35:Call -> U
+27:35:Name -> Func:django.contrib.auth.get_user_model
+29:11:Call -> ERR
+29:11:Name -> Func:builtins.isinstance
+29:22:Name -> U
+29:40:Name -> Class:django.db.models.query_utils.DeferredAttribute
+32:12:Call -> Const:NoneType:None
+32:12:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+32:12:Name -> Inst:django.dispatch.dispatcher.Signal
+32:35:Name -> Func:django.contrib.auth.models.update_last_login
+33:8:Call -> Const:NoneType:None | U | Func:django.core.checks.registry.CheckRegistry.register.inner
+33:8:Attribute -> BM:django.core.checks.registry.CheckRegistry.register
+33:8:Name -> Module:django.core.checks
+33:24:Name -> Func:django.contrib.auth.checks.check_user_model
+33:42:Attribute -> Const:str:'models'
+33:42:Attribute -> Class:django.core.checks.registry.Tags
+33:42:Name -> Module:django.core.checks
+34:8:Call -> Const:NoneType:None | U | Func:django.core.checks.registry.CheckRegistry.register.inner
+34:8:Attribute -> BM:django.core.checks.registry.CheckRegistry.register
+34:8:Name -> Module:django.core.checks
+34:24:Name -> Func:django.contrib.auth.checks.check_models_permissions
+34:50:Attribute -> Const:str:'models'
+34:50:Attribute -> Class:django.core.checks.registry.Tags
+34:50:Name -> Module:django.core.checks
+35:8:Call -> Const:NoneType:None | U | Func:django.core.checks.registry.CheckRegistry.register.inner
+35:8:Attribute -> BM:django.core.checks.registry.CheckRegistry.register
+35:8:Name -> Module:django.core.checks
+35:24:Name -> Func:django.contrib.auth.checks.check_middleware

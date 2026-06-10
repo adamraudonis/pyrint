@@ -1,0 +1,468 @@
+49:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+49:6:Attribute -> Func:logging.getLogger
+49:6:Name -> Module:logging
+49:24:Name -> Const:str:'salt.modules.solarisipspkg' | Const:str:'__main__'
+57:8:Name -> ERR
+58:12:Call -> Inst:builtins.float
+58:12:Name -> Class:builtins.float
+58:18:Name -> ERR
+59:12:Call -> Const:NoneType:None | Const:str:'pkg' | U
+59:12:Attribute -> Func:salt.utils.path.which
+59:12:Attribute -> Module:salt.utils.path
+59:12:Attribute -> Module:salt.utils
+59:12:Name -> Module:salt
+61:15:Name -> Const:str:'pkg'
+93:11:Call -> U
+93:11:Attribute -> U
+93:11:Call -> U
+93:11:Attribute -> U
+93:11:Call -> U
+93:11:Attribute -> U
+93:11:Name -> U
+105:11:Call -> U
+105:11:Attribute -> U
+105:11:Call -> U
+105:11:Attribute -> U
+105:11:Call -> U
+105:11:Attribute -> U
+105:11:Name -> U
+125:4:Call -> Const:NoneType:None
+125:4:Attribute -> Func:salt.utils.pkg.clear_rtag
+125:4:Attribute -> Module:salt.utils.pkg
+125:4:Attribute -> Module:salt.utils
+125:4:Name -> Module:salt
+125:30:Name -> ERR
+126:7:Name -> Const:bool:False | U
+127:15:Call -> ERR
+127:15:Name -> ERR
+129:15:Call -> ERR
+129:15:Name -> ERR
+144:34:Name -> U
+145:12:Call -> ERR
+145:12:Attribute -> ERR
+145:12:Call -> ERR
+145:12:Name -> ERR
+145:39:Name -> List:4
+146:11:Name -> U
+149:16:Name -> U
+150:8:Name -> Dict:0
+150:12:Call -> U
+150:12:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+150:29:Name -> U
+150:38:Call -> U
+150:38:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgversion
+150:58:Name -> U
+151:11:Name -> Dict:0
+185:7:Call -> U | Const:bool:False | Const:bool:True
+185:7:Attribute -> Func:salt.utils.data.is_true
+185:7:Attribute -> Module:salt.utils.data
+185:7:Attribute -> Module:salt.utils
+185:7:Name -> Module:salt
+185:31:Name -> Const:bool:True | U
+186:8:Call -> U
+186:8:Name -> Func:salt.modules.solarisipspkg.refresh_db
+189:12:Call -> ERR
+189:12:Attribute -> ERR
+189:12:Call -> ERR
+189:12:Name -> ERR
+190:16:Name -> U
+191:8:Name -> Dict:0
+191:17:Call -> U
+191:17:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+191:34:Name -> U
+191:43:Call -> U
+191:43:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgversion
+191:63:Name -> U
+192:11:Name -> Dict:0
+218:7:Call -> U | Const:bool:False | Const:bool:False
+218:7:Attribute -> Func:salt.utils.data.is_true
+218:7:Attribute -> Module:salt.utils.data
+218:7:Attribute -> Module:salt.utils
+218:7:Name -> Module:salt
+218:31:Name -> Const:bool:False | U
+219:8:Call -> U
+219:8:Name -> Func:salt.modules.solarisipspkg.refresh_db
+223:10:Call -> Dict:0 | U | Dict:0
+223:10:Name -> Func:salt.modules.solarisipspkg.list_pkgs
+228:13:Call -> ERR
+228:13:Name -> ERR
+228:37:Name -> List:4
+229:4:Call -> ERR
+229:4:Attribute -> ERR
+229:4:Name -> ERR
+230:10:Call -> Dict:0 | U | Dict:0
+230:10:Name -> Func:salt.modules.solarisipspkg.list_pkgs
+231:10:Call -> Dict:0
+231:10:Attribute -> Func:salt.utils.data.compare_dicts
+231:10:Attribute -> Module:salt.utils.data
+231:10:Attribute -> Module:salt.utils
+231:10:Name -> Module:salt
+231:40:Name -> Dict:0 | U | Dict:0
+231:45:Name -> Dict:0 | U | Dict:0
+233:7:Name -> U
+234:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+234:14:Name -> Class:salt.exceptions.CommandExecutionError
+237:27:Name -> Dict:0
+238:27:Name -> Dict:8
+238:49:Name -> U
+239:26:Name -> U
+243:11:Name -> Dict:0
+250:7:Name -> U
+251:15:Name -> ERR
+253:14:Call -> U
+253:14:Attribute -> Func:copy.deepcopy
+253:14:Name -> Module:copy
+253:28:Name -> ERR
+254:8:Call -> ERR
+254:8:Name -> ERR
+254:43:Name -> U
+255:15:Name -> U
+271:7:Call -> ERR
+271:7:Name -> Func:builtins.any
+272:9:Call -> U | Const:bool:False
+272:9:Attribute -> Func:salt.utils.data.is_true
+272:9:Attribute -> Module:salt.utils.data
+272:9:Attribute -> Module:salt.utils
+272:9:Name -> Module:salt
+272:33:Call -> ERR
+272:33:Attribute -> BM:builtins.dict.get
+272:33:Name -> Dict:0
+272:44:Name -> Const:str:'removed' | Const:str:'purge_desired'
+276:26:Name -> ERR
+276:42:Call -> ERR
+276:42:Attribute -> BM:builtins.dict.get
+276:42:Name -> Dict:0
+277:15:Call -> U
+277:15:Name -> Func:salt.modules.solarisipspkg._list_pkgs_from_context
+277:39:Name -> Const:bool:False | U
+281:12:Call -> ERR
+281:12:Attribute -> ERR
+281:12:Call -> ERR
+281:12:Name -> ERR
+281:39:Name -> Const:str:'/bin/pkg list -Hv'
+283:16:Name -> U
+284:15:Call -> U
+284:15:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+284:32:Name -> U
+285:18:Call -> U
+285:18:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgversion
+285:38:Name -> U
+286:8:Call -> ERR
+286:8:Name -> ERR
+286:41:Name -> Dict:0
+286:46:Name -> U
+286:52:Name -> U
+288:4:Call -> ERR
+288:4:Name -> ERR
+288:42:Name -> Dict:0
+289:4:Name -> ERR
+289:35:Call -> U | Dict:0
+289:35:Attribute -> Func:copy.deepcopy
+289:35:Name -> Module:copy
+289:49:Name -> Dict:0
+290:11:Name -> Const:bool:False | U
+291:8:Call -> ERR
+291:8:Name -> ERR
+291:43:Name -> Dict:0
+292:11:Name -> Dict:0
+310:11:Name -> Tuple:0
+314:4:Call -> ERR
+314:4:Attribute -> BM:builtins.list.extend
+314:4:Name -> List:3
+314:15:Name -> Tuple:0
+315:12:Call -> ERR
+315:12:Attribute -> ERR
+315:12:Call -> ERR
+315:12:Name -> ERR
+315:39:Name -> List:3
+317:16:Name -> U
+318:8:Name -> Dict:0
+318:12:Call -> U
+318:12:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+318:29:Name -> U
+318:38:Call -> U
+318:38:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgversion
+318:58:Name -> U
+321:16:Name -> Tuple:0
+322:11:Name -> U
+322:23:Name -> Dict:0
+323:12:Name -> Dict:0
+323:16:Name -> U
+326:7:Call -> Const:int:0
+326:7:Name -> Func:builtins.len
+326:11:Name -> Tuple:0
+328:19:Call -> ERR
+328:19:Name -> Func:builtins.next
+328:24:Call -> ERR
+328:24:Name -> Func:builtins.iter
+328:29:Call -> DictValues
+328:29:Attribute -> BM:builtins.dict.values
+328:29:Name -> Dict:0
+329:15:Name -> Class:builtins.StopIteration
+332:11:Name -> Dict:0
+358:11:Name -> Tuple:0
+362:4:Call -> ERR
+362:4:Attribute -> BM:builtins.list.extend
+362:4:Name -> List:3
+362:15:Name -> Tuple:0
+363:12:Call -> ERR
+363:12:Attribute -> ERR
+363:12:Call -> ERR
+363:12:Name -> ERR
+363:39:Name -> List:3
+365:16:Name -> U
+366:8:Name -> Dict:0
+366:12:Call -> U
+366:12:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+366:29:Name -> U
+366:38:Call -> U
+366:38:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgversion
+366:58:Name -> U
+368:16:Call -> Const:str:'' | U | Const:str:'' | Dict:0
+368:16:Name -> Func:salt.modules.solarisipspkg.version
+368:25:Name -> Tuple:0
+370:7:Call -> Const:int:0
+370:7:Name -> Func:builtins.len
+370:11:Name -> Tuple:0
+372:37:Name -> Dict:0
+372:21:Call -> Inst:builtins.list
+372:21:Name -> Class:builtins.list
+372:26:Name -> U
+372:46:Name -> Tuple:0
+372:56:Name -> Const:str:'' | U | Const:str:'' | Dict:0
+374:16:Name -> Dict:0
+375:11:Name -> U
+375:23:Name -> Const:str:'' | U | Const:str:'' | Dict:0 | Dict:1
+377:11:Name -> Dict:0
+377:15:Name -> U
+377:24:Name -> Const:str:'' | U | Const:str:'' | Dict:0 | Dict:1
+377:34:Name -> U
+378:12:Name -> Dict:0
+378:16:Name -> U
+381:16:Name -> Tuple:0
+382:11:Name -> U
+382:23:Name -> Dict:0
+383:12:Name -> Dict:0
+383:16:Name -> U
+386:7:Call -> Const:int:0
+386:7:Name -> Func:builtins.len
+386:11:Name -> Tuple:0
+388:19:Call -> ERR
+388:19:Name -> Func:builtins.next
+388:24:Call -> ERR
+388:24:Name -> Func:builtins.iter
+388:29:Call -> DictValues
+388:29:Attribute -> BM:builtins.dict.values
+388:29:Name -> Dict:0
+389:15:Name -> Class:builtins.StopIteration
+392:11:Name -> Dict:0
+396:20:Call -> Inst:builtins.function
+396:20:Attribute -> Func:salt.utils.functools.alias_function
+396:20:Attribute -> Module:salt.utils.functools
+396:20:Attribute -> Module:salt.utils
+396:20:Name -> Module:salt
+397:4:Name -> Func:salt.modules.solarisipspkg.latest_version
+412:7:Call -> U
+412:7:Attribute -> U
+412:7:Name -> U
+414:15:Name -> U
+415:39:Name -> U
+417:12:Call -> ERR
+417:12:Attribute -> ERR
+417:12:Call -> ERR
+417:12:Name -> ERR
+417:39:Name -> List:4
+418:11:Name -> U
+422:16:Name -> U
+423:8:Call -> ERR
+423:8:Attribute -> BM:builtins.list.append
+423:8:Name -> List:0
+423:19:Call -> U
+423:19:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+423:36:Name -> U
+425:11:Name -> List:0
+440:7:Call -> U
+440:7:Attribute -> U
+440:7:Name -> U
+442:15:Name -> U
+443:39:Name -> U
+445:12:Call -> ERR
+445:12:Attribute -> ERR
+445:12:Call -> ERR
+445:12:Name -> ERR
+445:39:Name -> List:4
+449:7:Call -> ERR
+449:7:Name -> Func:builtins.len
+449:11:Name -> U
+450:15:Name -> U
+452:11:Call -> U
+452:11:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+452:28:Name -> U
+468:38:Name -> U
+469:11:Call -> ERR
+469:11:Name -> ERR
+469:35:Name -> List:4
+486:39:Name -> U
+487:10:Call -> ERR
+487:10:Name -> ERR
+487:34:Name -> List:4
+488:7:Name -> U
+493:16:Call -> U
+493:16:Attribute -> U
+493:16:Name -> U
+494:15:Call -> U
+494:15:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgname
+494:32:Name -> U
+495:18:Call -> U
+495:18:Name -> Func:salt.modules.solarisipspkg._ips_get_pkgversion
+495:38:Name -> U
+496:8:Call -> ERR
+496:8:Name -> ERR
+496:41:Name -> Dict:0
+496:46:Name -> U
+496:52:Name -> U
+498:11:Name -> Const:bool:False | U
+499:8:Call -> ERR
+499:8:Name -> ERR
+499:43:Name -> Dict:0
+500:11:Name -> Dict:0
+528:11:Name -> Const:NoneType:None | U
+529:11:Call -> U
+529:11:Name -> Func:salt.modules.solarisipspkg.is_installed
+529:24:Name -> Const:NoneType:None | U
+532:7:Name -> Const:bool:False | U
+533:8:Call -> U
+533:8:Name -> Func:salt.modules.solarisipspkg.refresh_db
+536:7:Name -> Const:NoneType:None | U
+538:19:Name -> U
+539:15:Call -> U
+539:15:Name -> Func:builtins.getattr
+539:23:Name -> U
+540:19:Call -> Inst:builtins.list
+540:19:Name -> Class:builtins.list
+540:24:Call -> U
+540:24:Attribute -> U
+540:24:Name -> U
+541:20:Call -> ERR
+541:20:Attribute -> BM:builtins.list.append
+541:20:Name -> Const:str:'' | List:0
+542:27:Call -> Inst:builtins.list
+542:27:Name -> Class:builtins.list
+542:32:Call -> U
+542:32:Attribute -> U
+542:32:Name -> U
+542:53:Call -> Inst:builtins.list
+542:53:Name -> Class:builtins.list
+542:58:Call -> U
+542:58:Attribute -> U
+542:58:Name -> U
+545:20:Call -> ERR
+545:20:Attribute -> BM:builtins.list.append
+545:20:Name -> Const:str:'' | List:0
+545:36:Call -> Inst:builtins.list
+545:36:Name -> Class:builtins.list
+545:41:Call -> U
+545:41:Attribute -> U
+545:41:Name -> U
+547:16:Call -> ERR
+547:16:Attribute -> BM:builtins.list.append
+547:16:Name -> Const:str:'' | List:0
+547:35:Name -> U
+548:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+548:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+548:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+548:65:Name -> Const:NoneType:None | U
+548:71:Name -> List:0
+551:11:Name -> Const:NoneType:None | U
+552:26:Name -> Const:NoneType:None | U
+552:33:Name -> U
+554:26:Name -> Const:NoneType:None | U
+557:7:Name -> Const:bool:False | U
+558:8:Call -> ERR
+558:8:Attribute -> BM:builtins.list.append
+558:8:Name -> List:4
+562:10:Call -> Dict:0 | U | Dict:0
+562:10:Name -> Func:salt.modules.solarisipspkg.list_pkgs
+566:7:Call -> ERR
+566:7:Name -> Func:builtins.isinstance
+566:18:Name -> Const:str:'' | List:0 | Const:str:'None@Uninferable' | Const:str:'Uninferable@Uninferable' | Const:str:'None' | Const:str:'Uninferable'
+566:28:Name -> Class:builtins.str
+567:8:Call -> ERR
+567:8:Attribute -> BM:builtins.list.append
+567:8:Name -> List:4
+567:19:Name -> Const:str:'' | List:0 | Const:str:'None@Uninferable' | Const:str:'Uninferable@Uninferable' | Const:str:'None' | Const:str:'Uninferable'
+568:9:Call -> ERR
+568:9:Name -> Func:builtins.isinstance
+568:20:Name -> Const:str:'' | List:0 | Const:str:'None@Uninferable' | Const:str:'Uninferable@Uninferable' | Const:str:'None' | Const:str:'Uninferable'
+568:30:Name -> Class:builtins.list
+569:14:Name -> List:4
+569:20:Name -> Const:str:'' | List:0 | Const:str:'None@Uninferable' | Const:str:'Uninferable@Uninferable' | Const:str:'None' | Const:str:'Uninferable'
+571:10:Call -> ERR
+571:10:Name -> ERR
+571:34:Name -> List:4 | U | List:4
+574:4:Call -> ERR
+574:4:Attribute -> ERR
+574:4:Name -> ERR
+575:10:Call -> Dict:0 | U | Dict:0
+575:10:Name -> Func:salt.modules.solarisipspkg.list_pkgs
+576:10:Call -> Dict:0
+576:10:Attribute -> Func:salt.utils.data.compare_dicts
+576:10:Attribute -> Module:salt.utils.data
+576:10:Attribute -> Module:salt.utils
+576:10:Name -> Module:salt
+576:40:Name -> Dict:0 | U | Dict:0
+576:45:Name -> Dict:0 | U | Dict:0
+578:7:Name -> U
+579:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+579:14:Name -> Class:salt.exceptions.CommandExecutionError
+582:27:Name -> Dict:0
+583:27:Name -> Dict:8
+583:49:Name -> U
+584:27:Name -> U
+589:7:Name -> Const:bool:False | U
+592:11:Name -> Dict:0
+622:51:Name -> Const:NoneType:None | U
+622:14:Call -> Inst:builtins.list
+622:14:Attribute -> Func:salt.utils.args.split_input
+622:14:Attribute -> Module:salt.utils.args
+622:14:Attribute -> Module:salt.utils
+622:14:Name -> Module:salt
+622:42:Name -> U
+622:62:Name -> Const:NoneType:None | U
+623:11:Name -> Inst:builtins.list | List:1
+626:7:Name -> Const:NoneType:None | U
+627:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+627:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+627:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+627:63:Name -> Const:NoneType:None | U
+627:69:Name -> Inst:builtins.list | List:1
+630:10:Call -> Dict:0 | U | Dict:0
+630:10:Name -> Func:salt.modules.solarisipspkg.list_pkgs
+633:44:Name -> Inst:builtins.list | List:1
+634:10:Call -> ERR
+634:10:Name -> ERR
+634:34:Name -> U | List:5
+637:4:Call -> ERR
+637:4:Attribute -> ERR
+637:4:Name -> ERR
+638:10:Call -> Dict:0 | U | Dict:0
+638:10:Name -> Func:salt.modules.solarisipspkg.list_pkgs
+639:10:Call -> Dict:0
+639:10:Attribute -> Func:salt.utils.data.compare_dicts
+639:10:Attribute -> Module:salt.utils.data
+639:10:Attribute -> Module:salt.utils
+639:10:Name -> Module:salt
+639:40:Name -> Dict:0 | U | Dict:0
+639:45:Name -> Dict:0 | U | Dict:0
+641:7:Name -> U
+642:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+642:14:Name -> Class:salt.exceptions.CommandExecutionError
+645:27:Name -> Dict:0
+646:27:Name -> Dict:8
+646:49:Name -> U
+647:27:Name -> U
+651:11:Name -> Dict:0
+666:11:Call -> Dict:0 | Dict:0
+666:11:Name -> Func:salt.modules.solarisipspkg.remove
+666:18:Name -> U
+666:26:Name -> Dict:0

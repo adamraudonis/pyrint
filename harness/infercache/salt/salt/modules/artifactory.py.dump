@@ -1,0 +1,690 @@
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'salt.modules.artifactory' | Const:str:'__main__'
+36:13:Call -> Inst:urllib.request.HTTPPasswordMgrWithDefaultRealm
+36:13:Attribute -> Class:urllib.request.HTTPPasswordMgrWithDefaultRealm
+36:13:Attribute -> Module:urllib.request
+36:13:Name -> Module:urllib
+37:4:Call -> Const:NoneType:None
+37:4:Attribute -> BM:urllib.request.HTTPPasswordMgr.add_password
+37:4:Name -> Inst:urllib.request.HTTPPasswordMgrWithDefaultRealm
+37:30:Name -> U
+37:35:Name -> U
+37:45:Name -> U
+38:25:Call -> Inst:urllib.request.HTTPBasicAuthHandler
+38:25:Attribute -> Class:urllib.request.HTTPBasicAuthHandler
+38:25:Attribute -> Module:urllib.request
+38:25:Name -> Module:urllib
+38:61:Name -> Inst:urllib.request.HTTPPasswordMgrWithDefaultRealm
+39:13:Call -> Inst:urllib.request.OpenerDirector
+39:13:Attribute -> Func:urllib.request.build_opener
+39:13:Attribute -> Module:urllib.request
+39:13:Name -> Module:urllib
+39:41:Name -> Inst:urllib.request.HTTPBasicAuthHandler
+40:4:Call -> Const:NoneType:None
+40:4:Attribute -> Func:urllib.request.install_opener
+40:4:Attribute -> Module:urllib.request
+40:4:Name -> Module:urllib
+40:34:Name -> Inst:urllib.request.OpenerDirector
+80:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+80:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+80:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+84:8:Name -> U
+85:8:Name -> U
+86:8:Name -> U
+87:8:Name -> U
+88:8:Name -> U
+89:8:Name -> Const:str:'/tmp' | U
+90:8:Name -> Const:NoneType:None | U
+92:7:Name -> Const:NoneType:None | U
+92:20:Name -> Const:NoneType:None | U
+93:8:Call -> Const:NoneType:None
+93:8:Name -> Func:salt.modules.artifactory.set_basic_auth
+93:23:Name -> U
+93:40:Name -> Const:NoneType:None | U
+93:50:Name -> Const:NoneType:None | U
+94:24:Call -> Dict:1
+94:24:Name -> Func:salt.modules.artifactory._get_artifact_metadata
+95:24:Name -> U
+96:19:Name -> U
+97:17:Name -> U
+98:20:Name -> U
+99:29:Name -> Const:bool:False | U
+101:14:Name -> Dict:1
+102:30:Call -> Tuple:2
+102:30:Name -> Func:salt.modules.artifactory._get_snapshot_url
+103:24:Name -> U
+104:19:Name -> U
+105:17:Name -> U
+106:20:Name -> U
+107:16:Name -> U
+108:18:Name -> U
+109:19:Name -> Const:NoneType:None | U
+110:29:Name -> Const:bool:False | U
+112:18:Call -> Const:NoneType:None | U
+112:18:Name -> Func:salt.modules.artifactory.__resolve_target_file
+112:40:Name -> U
+112:51:Name -> Const:str:'/tmp' | U
+112:63:Name -> Const:NoneType:None | U
+114:11:Call -> Dict:3
+114:11:Name -> Func:salt.modules.artifactory.__save_artifact
+114:27:Name -> U
+114:41:Name -> Const:NoneType:None | U
+158:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+158:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+158:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+162:8:Name -> U
+163:8:Name -> U
+164:8:Name -> U
+165:8:Name -> U
+166:8:Name -> U
+167:8:Name -> U
+168:8:Name -> Const:str:'/tmp' | U
+169:8:Name -> Const:NoneType:None | U
+171:7:Name -> Const:NoneType:None | U
+171:20:Name -> Const:NoneType:None | U
+172:8:Call -> Const:NoneType:None
+172:8:Name -> Func:salt.modules.artifactory.set_basic_auth
+172:23:Name -> U
+172:40:Name -> Const:NoneType:None | U
+172:50:Name -> Const:NoneType:None | U
+173:30:Call -> Tuple:2
+173:30:Name -> Func:salt.modules.artifactory._get_snapshot_url
+174:24:Name -> U
+175:19:Name -> U
+176:17:Name -> U
+177:20:Name -> U
+178:16:Name -> U
+179:18:Name -> U
+180:25:Name -> Const:NoneType:None | U
+181:19:Name -> Const:NoneType:None | U
+182:29:Name -> Const:bool:False | U
+184:18:Call -> Const:NoneType:None | U
+184:18:Name -> Func:salt.modules.artifactory.__resolve_target_file
+184:40:Name -> U
+184:51:Name -> Const:str:'/tmp' | U
+184:63:Name -> Const:NoneType:None | U
+186:11:Call -> Dict:3
+186:11:Name -> Func:salt.modules.artifactory.__save_artifact
+186:27:Name -> U
+186:41:Name -> Const:NoneType:None | U
+226:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+226:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+226:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+230:8:Name -> U
+231:8:Name -> U
+232:8:Name -> U
+233:8:Name -> U
+234:8:Name -> U
+235:8:Name -> Const:str:'/tmp' | U
+236:8:Name -> Const:NoneType:None | U
+238:7:Name -> Const:NoneType:None | U
+238:20:Name -> Const:NoneType:None | U
+239:8:Call -> Const:NoneType:None
+239:8:Name -> Func:salt.modules.artifactory.set_basic_auth
+239:23:Name -> U
+239:40:Name -> Const:NoneType:None | U
+239:50:Name -> Const:NoneType:None | U
+240:14:Call -> U
+240:14:Name -> Func:salt.modules.artifactory.__find_latest_version
+241:24:Name -> U
+242:19:Name -> U
+243:17:Name -> U
+244:20:Name -> U
+246:29:Call -> Tuple:2
+246:29:Name -> Func:salt.modules.artifactory._get_release_url
+247:8:Name -> U
+248:8:Name -> U
+249:8:Name -> U
+250:8:Name -> U
+251:8:Name -> U
+252:8:Name -> U
+253:8:Name -> Const:NoneType:None | U
+254:8:Name -> Const:bool:False | U
+256:18:Call -> Const:NoneType:None | U
+256:18:Name -> Func:salt.modules.artifactory.__resolve_target_file
+256:40:Name -> U
+256:51:Name -> Const:str:'/tmp' | U
+256:63:Name -> Const:NoneType:None | U
+258:11:Call -> Dict:3
+258:11:Name -> Func:salt.modules.artifactory.__save_artifact
+258:27:Name -> U
+258:40:Name -> Const:NoneType:None | U
+301:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+301:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+301:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+305:8:Name -> U
+306:8:Name -> U
+307:8:Name -> U
+308:8:Name -> U
+309:8:Name -> U
+310:8:Name -> U
+311:8:Name -> Const:str:'/tmp' | U
+312:8:Name -> Const:NoneType:None | U
+314:7:Name -> Const:NoneType:None | U
+314:20:Name -> Const:NoneType:None | U
+315:8:Call -> Const:NoneType:None
+315:8:Name -> Func:salt.modules.artifactory.set_basic_auth
+315:23:Name -> U
+315:40:Name -> Const:NoneType:None | U
+315:50:Name -> Const:NoneType:None | U
+316:29:Call -> Tuple:2
+316:29:Name -> Func:salt.modules.artifactory._get_release_url
+317:8:Name -> U
+318:8:Name -> U
+319:8:Name -> U
+320:8:Name -> U
+321:8:Name -> U
+322:8:Name -> U
+323:8:Name -> Const:NoneType:None | U
+324:8:Name -> Const:bool:False | U
+326:18:Call -> Const:NoneType:None | U
+326:18:Name -> Func:salt.modules.artifactory.__resolve_target_file
+326:40:Name -> U
+326:51:Name -> Const:str:'/tmp' | U
+326:63:Name -> Const:NoneType:None | U
+328:11:Call -> Dict:3
+328:11:Name -> Func:salt.modules.artifactory.__save_artifact
+328:27:Name -> U
+328:40:Name -> Const:NoneType:None | U
+332:7:Name -> Const:NoneType:None | U
+333:22:Call -> U
+333:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+333:22:Attribute -> Module:posixpath | Module:ntpath
+333:22:Name -> Module:os
+333:35:Name -> U
+333:47:Name -> U
+334:11:Name -> Const:NoneType:None | U
+348:21:Name -> Const:NoneType:None | U
+348:48:Name -> Const:NoneType:None | U
+350:7:Name -> Const:NoneType:None | U
+352:40:Call -> Dict:1
+352:40:Name -> Func:salt.modules.artifactory._get_snapshot_version_metadata
+353:32:Name -> U
+354:27:Name -> U
+355:25:Name -> U
+356:28:Name -> U
+357:24:Name -> U
+360:20:Name -> U
+361:20:Name -> U
+361:37:Name -> Dict:1
+363:32:Call -> U
+363:32:Attribute -> BM:builtins.str.format
+371:36:Name -> U
+372:31:Name -> U
+373:29:Name -> U
+374:32:Name -> U
+375:30:Name -> U
+376:31:Name -> Const:NoneType:None | U
+377:28:Name -> U
+379:22:Call -> ExcInst:salt.modules.artifactory.ArtifactoryError
+379:22:Name -> Class:salt.modules.artifactory.ArtifactoryError
+379:39:Name -> U
+382:33:Name -> U
+382:16:Name -> U
+382:53:Name -> U
+382:71:Name -> Const:NoneType:None | U
+385:16:Name -> U
+386:20:Name -> U
+387:23:Name -> Dict:1
+389:32:Call -> U
+389:32:Attribute -> BM:builtins.str.format
+397:36:Name -> U
+398:31:Name -> U
+399:29:Name -> U
+400:32:Name -> U
+401:30:Name -> U
+402:31:Name -> Const:NoneType:None | U
+403:28:Name -> U
+405:22:Call -> ExcInst:salt.modules.artifactory.ArtifactoryError
+405:22:Name -> Class:salt.modules.artifactory.ArtifactoryError
+405:39:Name -> U
+407:31:Name -> Dict:1
+408:16:Name -> U
+410:15:Name -> Class:salt.exceptions.CommandExecutionError
+411:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+411:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+411:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+413:16:Name -> U
+415:31:Name -> U
+417:16:Call -> U
+417:16:Name -> Func:salt.modules.artifactory.__get_group_id_subpath
+417:39:Name -> U
+417:49:Name -> Const:bool:False | U
+419:16:Call -> U
+419:16:Attribute -> BM:builtins.str.format
+420:20:Name -> U
+421:25:Name -> Const:NoneType:None | U
+422:18:Name -> U
+423:19:Call -> U | Const:str:''
+423:19:Name -> Func:salt.modules.artifactory.__get_classifier_url
+423:40:Name -> Const:NoneType:None | U
+426:19:Call -> U
+426:19:Attribute -> BM:builtins.str.format
+427:24:Name -> U
+428:19:Name -> U
+429:18:Name -> U
+430:20:Name -> U
+431:16:Name -> U
+432:18:Name -> U
+434:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+434:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+434:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+434:33:Name -> U
+436:11:Name -> U
+436:25:Name -> U
+449:16:Call -> U
+449:16:Name -> Func:salt.modules.artifactory.__get_group_id_subpath
+449:39:Name -> U
+449:49:Name -> Const:bool:False | U
+452:16:Call -> U
+452:16:Attribute -> BM:builtins.str.format
+453:20:Name -> U
+454:16:Name -> U
+455:18:Name -> U
+456:19:Call -> U | Const:str:''
+456:19:Name -> Func:salt.modules.artifactory.__get_classifier_url
+456:40:Name -> Const:NoneType:None | U
+459:18:Call -> U
+459:18:Attribute -> BM:builtins.str.format
+460:24:Name -> U
+461:19:Name -> U
+462:18:Name -> U
+463:20:Name -> U
+464:16:Name -> U
+465:18:Name -> U
+467:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+467:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+467:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+467:32:Name -> U
+468:11:Name -> U
+468:24:Name -> U
+474:16:Call -> U
+474:16:Name -> Func:salt.modules.artifactory.__get_group_id_subpath
+474:39:Name -> U
+474:49:Name -> Const:bool:False | U
+476:28:Call -> U
+476:28:Attribute -> BM:builtins.str.format
+477:24:Name -> U
+478:19:Name -> U
+479:18:Name -> U
+480:20:Name -> U
+482:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+482:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+482:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+482:42:Name -> U
+483:11:Name -> U
+494:28:Call -> U
+494:28:Name -> Func:salt.modules.artifactory._get_artifact_metadata_url
+495:24:Name -> U
+496:19:Name -> U
+497:17:Name -> U
+498:20:Name -> U
+499:29:Name -> Const:bool:False | U
+503:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+503:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+503:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+503:37:Name -> U
+504:32:Call -> U
+504:32:Attribute -> U
+504:32:Call -> U
+504:32:Attribute -> Func:urllib.request.urlopen
+504:32:Attribute -> Module:urllib.request
+504:32:Name -> Module:urllib
+504:55:Name -> U
+505:12:Name -> Class:urllib.error.HTTPError
+505:23:Name -> Class:urllib.error.URLError
+506:18:Call -> U
+506:18:Attribute -> BM:builtins.str.format
+507:12:Name -> U
+507:35:Name -> ExcInst:urllib.error.HTTPError | ExcInst:urllib.error.URLError
+509:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+509:14:Name -> Class:salt.exceptions.CommandExecutionError
+509:36:Name -> U
+511:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+511:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+511:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+511:42:Name -> U
+512:11:Name -> U
+518:19:Call -> U
+518:19:Name -> Func:salt.modules.artifactory._get_artifact_metadata_xml
+519:24:Name -> U
+520:19:Name -> U
+521:17:Name -> U
+522:20:Name -> U
+523:29:Name -> Const:bool:False | U
+525:11:Call -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+525:11:Attribute -> Func:xml.etree.ElementTree.XML
+525:11:Name -> Module:xml.etree.ElementTree
+525:25:Name -> U
+527:11:Name -> U
+527:23:Attribute -> U
+527:23:Call -> U
+527:23:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+527:23:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+528:11:Name -> U
+528:26:Attribute -> U
+528:26:Call -> U
+528:26:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+528:26:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+529:21:Attribute -> U
+529:21:Call -> U
+529:21:Attribute -> U
+529:21:Call -> U
+529:21:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+529:21:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+530:30:Name -> U
+542:16:Call -> U
+542:16:Name -> Func:salt.modules.artifactory.__get_group_id_subpath
+542:39:Name -> U
+542:49:Name -> Const:bool:False | U
+544:36:Call -> U
+544:36:Attribute -> BM:builtins.str.format
+545:24:Name -> U
+546:19:Name -> U
+547:18:Name -> U
+548:20:Name -> U
+549:16:Name -> U
+551:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+551:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+551:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+551:50:Name -> U
+552:11:Name -> U
+564:36:Call -> U
+564:36:Name -> Func:salt.modules.artifactory._get_snapshot_version_metadata_url
+565:24:Name -> U
+566:19:Name -> U
+567:17:Name -> U
+568:20:Name -> U
+569:16:Name -> U
+570:29:Name -> Const:bool:False | U
+574:40:Call -> U
+574:40:Attribute -> U
+574:40:Call -> U
+574:40:Attribute -> Func:urllib.request.urlopen
+574:40:Attribute -> Module:urllib.request
+574:40:Name -> Module:urllib
+575:12:Name -> U
+577:12:Name -> Class:urllib.error.HTTPError
+577:23:Name -> Class:urllib.error.URLError
+578:18:Call -> U
+578:18:Attribute -> BM:builtins.str.format
+579:12:Name -> U
+579:43:Name -> ExcInst:urllib.error.HTTPError | ExcInst:urllib.error.URLError
+581:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+581:14:Name -> Class:salt.exceptions.CommandExecutionError
+581:36:Name -> U
+583:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+583:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+583:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+583:50:Name -> U
+584:11:Name -> U
+590:19:Call -> U
+590:19:Name -> Func:salt.modules.artifactory._get_snapshot_version_metadata_xml
+591:24:Name -> U
+592:19:Name -> U
+593:17:Name -> U
+594:20:Name -> U
+595:16:Name -> U
+597:15:Call -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+597:15:Attribute -> Func:xml.etree.ElementTree.XML
+597:15:Name -> Module:xml.etree.ElementTree
+597:29:Name -> U
+599:11:Name -> U
+599:23:Attribute -> U
+599:23:Call -> U
+599:23:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+599:23:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+600:11:Name -> U
+600:26:Attribute -> U
+600:26:Call -> U
+600:26:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+600:26:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+601:11:Name -> U
+601:22:Attribute -> U
+601:22:Call -> U
+601:22:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+601:22:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+603:24:Call -> U
+603:24:Attribute -> U
+603:24:Call -> U
+603:24:Attribute -> U | BM:xml.etree.ElementTree.Element.find
+603:24:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+605:28:Name -> U
+606:20:Attribute -> U
+606:20:Call -> U
+606:20:Attribute -> U
+606:20:Name -> U
+607:16:Attribute -> U
+607:16:Call -> U
+607:16:Attribute -> U
+607:16:Name -> U
+608:11:Call -> U
+608:11:Attribute -> U
+608:11:Name -> U
+609:25:Attribute -> U
+609:25:Call -> U
+609:25:Attribute -> U
+609:25:Name -> U
+610:12:Name -> Dict:0
+610:35:Name -> U
+610:53:Name -> U
+610:67:Name -> U
+612:12:Name -> Dict:0
+612:35:Name -> U
+612:48:Name -> U
+614:33:Name -> Dict:0
+620:16:Call -> U
+620:16:Name -> Func:salt.modules.artifactory.__get_group_id_subpath
+620:39:Name -> U
+620:49:Name -> Const:bool:False | U
+622:25:Call -> U
+622:25:Attribute -> BM:builtins.str.format
+623:24:Name -> U
+624:19:Name -> U
+625:18:Name -> U
+626:20:Name -> U
+628:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+628:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+628:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+628:39:Name -> U
+629:11:Name -> U
+640:25:Call -> U
+640:25:Name -> Func:salt.modules.artifactory.__get_latest_version_url
+641:24:Name -> U
+642:19:Name -> U
+643:17:Name -> U
+644:20:Name -> U
+645:29:Name -> Const:bool:False | U
+649:18:Call -> U
+649:18:Attribute -> U
+649:18:Call -> U
+649:18:Attribute -> Func:urllib.request.urlopen
+649:18:Attribute -> Module:urllib.request
+649:18:Name -> Module:urllib
+649:41:Name -> U
+650:12:Name -> Class:urllib.error.HTTPError
+650:23:Name -> Class:urllib.error.URLError
+651:18:Call -> U
+651:18:Attribute -> BM:builtins.str.format
+652:12:Name -> U
+652:32:Name -> ExcInst:urllib.error.HTTPError | ExcInst:urllib.error.URLError
+654:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+654:14:Name -> Class:salt.exceptions.CommandExecutionError
+654:36:Name -> U
+656:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+656:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+656:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+656:33:Name -> U
+658:7:Name -> U
+658:26:Name -> U
+659:14:Call -> ExcInst:salt.modules.artifactory.ArtifactoryError
+659:14:Name -> Class:salt.modules.artifactory.ArtifactoryError
+661:11:Name -> U
+665:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+665:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+665:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+665:41:Name -> U
+665:55:Name -> U
+668:7:Call -> Const:bool:False | U
+668:7:Attribute -> Func:genericpath.isfile | U
+668:7:Attribute -> Module:posixpath | Module:ntpath
+668:7:Name -> Module:os
+668:22:Name -> U
+669:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+669:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+669:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+669:66:Name -> U
+670:23:Name -> U
+672:59:Call -> Tuple:3
+672:59:Name -> Func:salt.modules.artifactory.__download
+672:70:Name -> U
+673:11:Name -> Const:bool:False | Const:bool:True
+674:27:Call -> U
+674:27:Attribute -> Func:salt.utils.stringutils.to_unicode
+674:27:Attribute -> Module:salt.utils.stringutils
+674:27:Attribute -> Module:salt.utils
+674:27:Name -> Module:salt
+674:61:Name -> Const:NoneType:None | U
+675:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+675:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+675:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+675:49:Name -> U
+676:23:Call -> ERR
+676:23:Name -> ERR
+676:54:Name -> U
+677:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+677:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+677:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+677:55:Name -> U
+677:68:Name -> U
+679:15:Name -> U
+679:31:Name -> U
+680:16:Name -> Dict:3
+681:16:Name -> Dict:3
+681:40:Name -> U
+682:16:Name -> Dict:3
+683:20:Call -> U
+683:20:Attribute -> BM:builtins.str.format
+684:46:Name -> U
+684:59:Name -> U
+686:23:Name -> Dict:3
+688:16:Name -> Dict:3
+689:20:Call -> U
+689:20:Attribute -> BM:builtins.str.format
+690:61:Name -> U
+690:74:Name -> U
+694:12:Name -> Dict:3
+695:12:Name -> Dict:3
+695:32:Name -> Const:NoneType:None | U
+696:19:Name -> Dict:3
+698:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+698:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+698:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+698:39:Name -> U
+698:53:Name -> U
+701:12:Call -> U
+701:12:Attribute -> Func:urllib.request.urlopen
+701:12:Attribute -> Module:urllib.request
+701:12:Name -> Module:urllib
+701:35:Name -> U
+702:13:Call -> U
+702:13:Attribute -> Func:salt.utils.files.fopen
+702:13:Attribute -> Module:salt.utils.files
+702:13:Attribute -> Module:salt.utils
+702:13:Name -> Module:salt
+702:36:Name -> U
+703:12:Call -> U
+703:12:Attribute -> U
+703:12:Name -> U
+703:29:Call -> U | Inst:builtins.bytes
+703:29:Attribute -> Func:salt.utils.stringutils.to_bytes
+703:29:Attribute -> Module:salt.utils.stringutils
+703:29:Attribute -> Module:salt.utils
+703:29:Name -> Module:salt
+703:61:Call -> U
+703:61:Attribute -> U
+703:61:Name -> U
+704:8:Name -> Dict:3
+705:8:Name -> Dict:3
+705:28:Call -> Const:str:'\nArtifact downloaded from URL: Uninfer
+705:28:Name -> Func:salt.modules.artifactory.__append_comment
+706:45:Name -> U
+707:12:Name -> Dict:3
+709:8:Name -> Dict:3
+709:47:Name -> U
+710:8:Name -> Dict:3
+710:32:Name -> U
+711:12:Name -> Class:urllib.error.HTTPError
+711:23:Name -> Class:urllib.error.URLError
+712:8:Name -> Dict:3
+713:8:Name -> Dict:3
+713:28:Call -> U
+713:28:Name -> Func:salt.modules.artifactory.__get_error_comment
+713:48:Name -> ExcInst:urllib.error.HTTPError | ExcInst:urllib.error.URLError
+713:51:Name -> U
+715:11:Name -> Dict:3
+719:11:Name -> Const:bool:False | U
+720:20:Call -> U
+720:20:Attribute -> U
+720:20:Name -> U
+721:15:Name -> U
+722:11:Name -> U
+726:21:Name -> U
+726:48:Name -> U
+727:31:Name -> U
+727:17:Name -> U
+731:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+731:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+731:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+731:45:Name -> U
+736:14:Call -> U
+736:14:Attribute -> Func:urllib.request.urlopen
+736:14:Attribute -> Module:urllib.request
+736:14:Name -> Module:urllib
+736:37:Name -> U
+737:18:Call -> U
+737:18:Attribute -> U
+737:18:Name -> U
+739:11:Name -> Class:urllib.error.HTTPError
+740:18:Call -> U
+740:18:Name -> Func:salt.modules.artifactory.__get_error_comment
+740:38:Name -> ExcInst:urllib.error.HTTPError
+740:41:Name -> U
+742:11:Name -> Const:bool:False | Const:bool:True
+742:20:Name -> Const:NoneType:None | U
+742:29:Name -> Const:NoneType:None | U
+746:7:Attribute -> U
+746:7:Name -> U
+746:26:Attribute -> Inst:http.HTTPStatus.NOT_FOUND
+746:26:Attribute -> Module:http.client
+746:26:Name -> Module:http
+747:52:Name -> U
+748:9:Attribute -> U
+748:9:Name -> U
+748:28:Attribute -> Inst:http.HTTPStatus.CONFLICT
+748:28:Attribute -> Module:http.client
+748:28:Name -> Module:http
+750:12:Call -> U
+750:12:Attribute -> BM:builtins.str.format
+752:16:Name -> U
+756:18:Call -> U
+756:18:Attribute -> BM:builtins.str.format
+757:21:Attribute -> U
+757:21:Name -> U
+757:42:Name -> U
+760:11:Name -> U
+764:11:Name -> Const:str:'' | U
+764:36:Name -> U
+767:23:Name -> Class:builtins.Exception
+769:8:Call -> ERR
+769:8:Attribute -> BM:builtins.Exception.__init__ | BM:builtins.BaseException.__init__ | BM:builtins.object.__init__
+769:8:Call -> Super
+769:8:Name -> Class:builtins.super
+770:8:Name -> ExcInst:salt.modules.artifactory.ArtifactoryError
+770:21:Name -> U
+773:15:Call -> ERR
+773:15:Name -> Func:builtins.repr
+773:20:Attribute -> U
+773:20:Name -> ExcInst:salt.modules.artifactory.ArtifactoryError

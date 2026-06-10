@@ -1,0 +1,101 @@
+57:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+57:6:Attribute -> Func:logging.getLogger
+57:6:Name -> Module:logging
+57:24:Name -> Const:str:'salt.roster.dir' | Const:str:'__main__'
+65:17:Call -> ERR
+65:17:Attribute -> ERR
+65:17:Name -> ERR
+67:10:Call -> Dict:0
+67:10:Attribute -> Inst:builtins.builtin_function_or_method
+67:10:Name -> Class:builtins.dict
+67:24:Call -> ERR
+67:24:Attribute -> Func:posix.listdir
+67:24:Name -> Module:os
+67:35:Name -> U
+68:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+68:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+68:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+68:44:Call -> Const:int:0
+68:44:Name -> Func:builtins.len
+68:48:Name -> Dict:0
+68:54:Name -> U
+69:18:Call -> ERR
+69:18:Name -> ERR
+69:54:Name -> Dict:0
+69:59:Name -> U
+69:64:Name -> Const:str:'glob' | U
+71:21:Name -> U
+72:22:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+72:22:Attribute -> Func:salt.utils.verify.clean_path
+72:22:Attribute -> Module:salt.utils.verify
+72:22:Attribute -> Module:salt.utils
+72:22:Name -> Module:salt
+72:51:Name -> U
+72:63:Name -> U
+73:15:Call -> Const:bool:False | Const:bool:True | U
+73:15:Attribute -> Func:genericpath.exists | U
+73:15:Attribute -> Module:posixpath | Module:ntpath
+73:15:Name -> Module:os
+73:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+74:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+74:18:Name -> Class:salt.exceptions.CommandExecutionError
+74:43:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+75:8:Name -> Dict:0
+75:17:Name -> U
+75:30:Call -> Dict:0 | U | Inst:_io.StringIO
+75:30:Name -> Func:salt.roster.dir._render
+75:38:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+75:53:Name -> Dict:0
+76:23:Name -> U
+76:28:Name -> U
+76:50:Call -> DictItems
+76:50:Attribute -> BM:builtins.dict.items
+76:50:Name -> Dict:0
+76:70:Name -> U
+77:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+77:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+77:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+80:8:Call -> Const:int:0
+80:8:Name -> Func:builtins.len
+80:12:Name -> Dict:0
+81:8:Name -> U
+82:8:Name -> Const:str:'glob' | U
+83:8:Call -> Const:int:0
+83:8:Name -> Func:builtins.len
+83:12:Name -> Dict:0
+83:24:Call -> ERR
+83:24:Name -> Func:builtins.len
+83:28:Name -> U
+85:11:Name -> U
+92:16:Call -> Inst:salt.loader.lazy.FilterDictWrapper
+92:16:Attribute -> Func:salt.loader.render
+92:16:Attribute -> Module:salt.loader
+92:16:Name -> Module:salt
+92:35:Name -> ERR
+93:13:Call -> ERR
+93:13:Attribute -> ERR
+93:13:Name -> ERR
+95:17:Call -> Dict:0 | U | Inst:_io.StringIO
+95:17:Attribute -> Func:salt.template.compile_template
+95:17:Attribute -> Module:salt.template
+95:17:Name -> Module:salt
+96:12:Name -> U
+97:12:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+98:12:Name -> ERR
+99:12:Name -> ERR
+100:12:Name -> ERR
+102:14:Name -> Dict:0
+104:8:Call -> U
+104:8:Attribute -> BM:builtins.dict.setdefault | U
+104:8:Name -> Dict:0 | U | Inst:_io.StringIO
+104:37:Call -> U
+104:37:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+104:37:Attribute -> Module:posixpath | Module:ntpath
+104:37:Name -> Module:os
+104:54:Name -> U
+104:69:Name -> U
+105:15:Name -> Dict:0 | U | Inst:_io.StringIO
+107:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+107:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+107:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+107:58:Name -> U

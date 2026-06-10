@@ -1,0 +1,481 @@
+25:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+25:6:Attribute -> Func:logging.getLogger
+25:6:Name -> Module:logging
+25:24:Name -> Const:str:'salt.modules.chroot' | Const:str:'__main__'
+32:7:Call -> ERR
+32:7:Name -> ERR
+52:10:Call -> U
+52:10:Attribute -> Func:posixpath.join | Func:ntpath.join
+52:10:Attribute -> Module:posixpath | Module:ntpath
+52:10:Name -> Module:os
+52:23:Name -> U
+53:11:Call -> U
+53:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+53:11:Attribute -> Module:posixpath | Module:ntpath
+53:11:Name -> Module:os
+53:24:Name -> U
+54:10:Call -> U
+54:10:Attribute -> Func:posixpath.join | Func:ntpath.join
+54:10:Attribute -> Module:posixpath | Module:ntpath
+54:10:Name -> Module:os
+54:23:Name -> U
+55:11:Call -> ERR
+55:11:Name -> Func:builtins.all
+55:15:Call -> Const:bool:False | U
+55:15:Attribute -> Func:genericpath.isdir | U
+55:15:Attribute -> Module:posixpath | Module:ntpath
+55:15:Name -> Module:os
+55:29:Name -> U
+55:42:Name -> U
+55:48:Name -> U
+55:53:Name -> U
+55:59:Name -> U
+76:11:Call -> U
+76:11:Name -> Func:salt.modules.chroot.exist
+76:17:Name -> U
+77:14:Call -> U
+77:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+77:14:Attribute -> Module:posixpath | Module:ntpath
+77:14:Name -> Module:os
+77:27:Name -> U
+78:15:Call -> U
+78:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+78:15:Attribute -> Module:posixpath | Module:ntpath
+78:15:Name -> Module:os
+78:28:Name -> U
+79:14:Call -> U
+79:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+79:14:Attribute -> Module:posixpath | Module:ntpath
+79:14:Name -> Module:os
+79:27:Name -> U
+81:12:Call -> Const:NoneType:None
+81:12:Attribute -> Func:os.makedirs
+81:12:Name -> Module:os
+81:24:Name -> U
+82:12:Call -> Const:NoneType:None
+82:12:Attribute -> Func:os.makedirs
+82:12:Name -> Module:os
+82:24:Name -> U
+83:12:Call -> Const:NoneType:None
+83:12:Attribute -> Func:os.makedirs
+83:12:Name -> Module:os
+83:24:Name -> U
+84:15:Name -> Class:builtins.OSError
+85:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+85:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+85:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+85:76:Name -> ExcInst:builtins.OSError
+110:13:Call -> U
+110:13:Attribute -> Func:salt.utils.files.fopen
+110:13:Attribute -> Module:salt.utils.files
+110:13:Attribute -> Module:salt.utils
+110:13:Name -> Module:salt
+112:22:Call -> U
+112:22:Attribute -> Func:salt.utils.files.fopen
+112:22:Attribute -> Module:salt.utils.files
+112:22:Attribute -> Module:salt.utils
+112:22:Name -> Module:salt
+113:29:Call -> U
+113:29:Attribute -> U
+113:29:Name -> U
+114:29:Call -> U
+114:29:Attribute -> U
+114:29:Name -> U
+115:17:Name -> U
+115:35:Name -> U
+116:11:Name -> Class:builtins.OSError
+119:11:Name -> Const:bool:False | U
+144:11:Name -> U
+145:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+145:14:Attribute -> Class:salt.exceptions.CommandExecutionError
+145:14:Attribute -> Module:salt.exceptions
+145:14:Name -> Module:salt
+147:11:Call -> U
+147:11:Name -> Func:salt.modules.chroot.exist
+147:17:Name -> U
+148:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+148:14:Attribute -> Class:salt.exceptions.CommandExecutionError
+148:14:Attribute -> Module:salt.exceptions
+148:14:Name -> Module:salt
+152:21:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+152:21:Attribute -> Func:tempfile.mkdtemp
+152:21:Name -> Module:tempfile
+152:42:Name -> U
+153:16:Call -> ERR
+153:16:Name -> ERR
+154:8:Name -> ERR
+155:19:Call -> ERR
+155:19:Name -> ERR
+156:16:Call -> ERR
+156:16:Name -> ERR
+164:13:Call -> ERR
+164:13:Name -> ERR
+164:48:Name -> U
+164:65:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+165:7:Name -> U
+166:8:Call -> ERR
+166:8:Name -> ERR
+166:33:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+167:44:Name -> U
+169:18:Call -> U
+169:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+169:18:Attribute -> Module:posixpath | Module:ntpath
+169:18:Name -> Module:os
+169:31:Attribute -> Const:str:'/' | Const:str:'\\'
+169:31:Attribute -> Module:posixpath | Module:ntpath
+169:31:Name -> Module:os
+169:44:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+169:44:Attribute -> Func:posixpath.relpath | Func:ntpath.relpath
+169:44:Attribute -> Module:posixpath | Module:ntpath
+169:44:Name -> Module:os
+169:60:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+169:76:Name -> U
+171:22:Call -> Dict:0
+171:22:Attribute -> Func:salt.utils.args.clean_kwargs
+171:22:Attribute -> Module:salt.utils.args
+171:22:Attribute -> Module:salt.utils
+171:22:Name -> Module:salt
+171:53:Name -> Dict:0
+174:25:Attribute -> U
+174:25:Name -> Module:sys
+175:16:Call -> U
+175:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+175:16:Attribute -> Module:posixpath | Module:ntpath
+175:16:Name -> Module:os
+175:29:Name -> U
+179:16:Call -> U
+179:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+179:16:Attribute -> Module:posixpath | Module:ntpath
+179:16:Name -> Module:os
+179:29:Name -> U
+181:16:Call -> U
+181:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+181:16:Attribute -> Module:posixpath | Module:ntpath
+181:16:Name -> Module:os
+181:29:Name -> U
+187:16:Name -> U
+189:14:Call -> List:0
+189:14:Name -> Class:builtins.list
+189:19:Name -> Tuple:0
+190:18:Name -> U
+190:22:Name -> U
+190:40:Call -> DictItems
+190:40:Attribute -> BM:builtins.dict.items
+190:40:Name -> Dict:0
+192:14:Call -> ERR
+192:14:Name -> ERR
+192:41:Name -> U
+192:48:Call -> Const:str:''
+192:48:Name -> Class:builtins.str
+192:52:Name -> U
+192:64:Name -> U
+196:19:Call -> ERR
+196:19:Name -> ERR
+196:47:Name -> U
+197:20:Call -> U
+197:20:Attribute -> U
+197:20:Name -> U
+197:38:Name -> U
+198:15:Call -> ERR
+198:15:Name -> Func:builtins.isinstance
+198:26:Name -> U
+198:33:Name -> Class:builtins.dict
+198:56:Name -> U
+199:16:Name -> ERR
+199:41:Name -> U
+200:19:Call -> U
+200:19:Attribute -> U
+200:19:Name -> U
+200:39:Name -> U
+201:15:Name -> Class:builtins.ValueError
+204:27:Name -> U
+205:38:Name -> U
+205:63:Name -> U
+208:8:Call -> ERR
+208:8:Name -> ERR
+208:33:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+234:7:Name -> Const:NoneType:None | U
+235:15:Call -> List:1 | U
+235:15:Name -> Func:salt.modules.chroot.sls
+235:19:Name -> U
+235:25:Name -> U
+235:33:Name -> Dict:0
+236:11:Call -> U
+236:11:Name -> Func:salt.modules.chroot.highstate
+236:21:Name -> U
+236:29:Name -> Dict:0
+244:4:Call -> Const:NoneType:None
+244:4:Attribute -> Func:salt.client.ssh.wrapper.state._cleanup_slsmod_low_data
+244:4:Attribute -> Module:salt.client.ssh.wrapper.state
+244:4:Attribute -> Module:salt.client.ssh.wrapper
+244:4:Attribute -> Module:salt.client.ssh
+244:4:Attribute -> Module:salt.client
+244:4:Name -> Module:salt
+244:59:Name -> U
+245:9:Call -> U
+245:9:Attribute -> Func:salt.fileclient.get_file_client
+245:9:Attribute -> Module:salt.fileclient
+245:9:Name -> Module:salt
+245:41:Name -> ERR
+246:20:Call -> Tuple:2 | U
+246:20:Attribute -> Func:salt.client.ssh.state.prep_trans_tar
+246:20:Attribute -> Module:salt.client.ssh.state
+246:20:Attribute -> Module:salt.client.ssh
+246:20:Attribute -> Module:salt.client
+246:20:Name -> Module:salt
+247:12:Name -> U
+248:12:Name -> U
+249:12:Name -> U
+250:12:Call -> ERR
+250:12:Attribute -> ERR
+250:12:Name -> ERR
+251:12:Name -> U
+253:20:Call -> U
+253:20:Attribute -> Func:salt.utils.hashutils.get_hash
+253:20:Attribute -> Module:salt.utils.hashutils
+253:20:Attribute -> Module:salt.utils
+253:20:Name -> Module:salt
+253:50:Name -> Tuple:2 | U
+253:61:Name -> U
+259:22:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+259:22:Attribute -> Func:tempfile.mkdtemp
+259:22:Name -> Module:tempfile
+259:43:Name -> U
+260:22:Call -> U
+260:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+260:22:Attribute -> Module:posixpath | Module:ntpath
+260:22:Name -> Module:os
+260:35:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+261:32:Call -> U
+261:32:Attribute -> U
+261:32:Name -> U
+261:56:Name -> U
+263:8:Call -> Const:NoneType:None
+263:8:Attribute -> Func:salt.utils.files.copyfile
+263:8:Attribute -> Module:salt.utils.files
+263:8:Attribute -> Module:salt.utils
+263:8:Name -> Module:salt
+263:34:Name -> Tuple:2 | U
+263:45:Name -> U
+264:14:Call -> Dict:2 | U | Dict:3
+264:14:Name -> Func:salt.modules.chroot.call
+265:12:Name -> U
+267:12:Name -> U
+268:17:Name -> U
+269:20:Name -> U
+270:22:Name -> U
+273:8:Call -> ERR
+273:8:Name -> ERR
+273:33:Name -> U
+275:11:Name -> Const:NoneType:None | Dict:2 | U | Dict:3
+312:13:Call -> U
+312:13:Attribute -> Func:copy.deepcopy
+312:13:Name -> Module:copy
+312:27:Call -> ERR
+312:27:Attribute -> ERR
+312:27:Name -> ERR
+313:4:Call -> U
+313:4:Attribute -> U
+313:4:Name -> U
+313:18:Call -> ERR
+313:18:Attribute -> BM:builtins.dict.get
+313:18:Name -> Dict:0
+317:11:Call -> Inst:salt.utils.optsdict.OptsDict
+317:11:Attribute -> Func:salt.utils.state.get_sls_opts
+317:11:Attribute -> Module:salt.utils.state
+317:11:Attribute -> Module:salt.utils
+317:11:Name -> Module:salt
+317:41:Name -> ERR
+317:53:Name -> Dict:0
+319:10:Call -> Inst:salt.client.ssh.state.SSHHighState
+319:10:Attribute -> Class:salt.client.ssh.state.SSHHighState
+319:10:Attribute -> Module:salt.client.ssh.state
+319:10:Attribute -> Module:salt.client.ssh
+319:10:Attribute -> Module:salt.client
+319:10:Name -> Module:salt
+320:8:Name -> Inst:salt.utils.optsdict.OptsDict
+320:14:Name -> U
+320:22:Name -> ERR
+320:32:Call -> U
+320:32:Attribute -> Func:salt.fileclient.get_file_client
+320:32:Attribute -> Module:salt.fileclient
+320:32:Name -> Module:salt
+320:64:Name -> ERR
+323:7:Call -> ERR
+323:7:Name -> Func:builtins.isinstance
+323:18:Name -> U
+323:24:Name -> Class:builtins.str
+324:15:Call -> U
+324:15:Attribute -> U
+324:15:Name -> U
+326:9:Name -> Inst:salt.client.ssh.state.SSHHighState
+327:28:Call -> Tuple:2
+327:28:Attribute -> BM:salt.state.BaseHighState.render_highstate
+327:28:Name -> Inst:salt.client.ssh.state.SSHHighState
+327:50:Name -> Const:str:'base' | U
+327:59:Name -> U
+328:11:Name -> Const:NoneType:None | U
+329:15:Call -> ERR
+329:15:Name -> Func:builtins.isinstance
+329:26:Name -> U
+329:35:Name -> Class:builtins.str
+330:26:Call -> U
+330:26:Attribute -> U
+330:26:Name -> U
+331:32:Name -> Inst:salt.utils.datastructures.HashableOrderedDict
+332:16:Call -> ERR
+332:16:Attribute -> ERR
+332:16:Name -> Inst:salt.utils.datastructures.HashableOrderedDict
+332:48:Name -> U
+334:16:Name -> Inst:salt.utils.datastructures.HashableOrderedDict
+334:43:Name -> U
+336:32:Call -> Tuple:2 | Tuple:2
+336:32:Attribute -> BM:salt.state.State.reconcile_extend
+336:32:Attribute -> Inst:salt.client.ssh.state.SSHState
+336:32:Name -> Inst:salt.client.ssh.state.SSHHighState
+336:59:Name -> Inst:salt.utils.datastructures.HashableOrderedDict
+337:18:Name -> List:0
+338:18:Call -> List:1 | List:0
+338:18:Attribute -> BM:salt.state.State.verify_high
+338:18:Attribute -> Inst:salt.client.ssh.state.SSHState
+338:18:Name -> Inst:salt.client.ssh.state.SSHHighState
+338:40:Name -> U
+339:11:Name -> List:1 | List:0
+340:12:Name -> ERR
+340:37:Attribute -> Const:int:1
+340:37:Attribute -> Module:salt.defaults.exitcodes
+340:37:Attribute -> Module:salt.defaults
+340:37:Name -> Module:salt
+341:19:Name -> List:1
+343:35:Call -> Tuple:2
+343:35:Attribute -> BM:salt.state.State.requisite_in
+343:35:Attribute -> Inst:salt.client.ssh.state.SSHState
+343:35:Name -> Inst:salt.client.ssh.state.SSHHighState
+343:58:Name -> U
+344:18:Name -> List:0
+345:11:Name -> List:1 | List:0
+346:12:Name -> ERR
+346:37:Attribute -> Const:int:1
+346:37:Attribute -> Module:salt.defaults.exitcodes
+346:37:Attribute -> Module:salt.defaults
+346:37:Name -> Module:salt
+347:19:Name -> List:1
+349:20:Call -> U
+349:20:Attribute -> BM:salt.state.State.apply_exclude
+349:20:Attribute -> Inst:salt.client.ssh.state.SSHState
+349:20:Name -> Inst:salt.client.ssh.state.SSHHighState
+349:44:Name -> U
+352:25:Call -> Tuple:2
+352:25:Attribute -> BM:salt.state.State.compile_high_data
+352:25:Attribute -> Inst:salt.client.ssh.state.SSHState
+352:25:Name -> Inst:salt.client.ssh.state.SSHHighState
+352:53:Name -> U
+353:11:Name -> List:0
+354:12:Name -> ERR
+354:37:Attribute -> Const:int:1
+354:37:Attribute -> Module:salt.defaults.exitcodes
+354:37:Attribute -> Module:salt.defaults
+354:37:Name -> Module:salt
+355:19:Name -> U
+356:16:Call -> Dict:0
+356:16:Attribute -> Func:salt.client.ssh.state.lowstate_file_refs
+356:16:Attribute -> Module:salt.client.ssh.state
+356:16:Attribute -> Module:salt.client.ssh
+356:16:Attribute -> Module:salt.client
+356:16:Name -> Module:salt
+357:8:Name -> U | List:0
+358:8:Call -> Const:str:''
+358:8:Attribute -> Func:salt.client.ssh.wrapper.state._merge_extra_filerefs
+358:8:Attribute -> Module:salt.client.ssh.wrapper.state
+358:8:Attribute -> Module:salt.client.ssh.wrapper
+358:8:Attribute -> Module:salt.client.ssh
+358:8:Attribute -> Module:salt.client
+358:8:Name -> Module:salt
+359:12:Call -> ERR
+359:12:Attribute -> BM:builtins.dict.get
+359:12:Name -> Dict:0
+359:46:Call -> U | Const:str:''
+359:46:Attribute -> BM:salt.utils.optsdict.OptsDict.get
+359:46:Name -> Inst:salt.utils.optsdict.OptsDict
+363:16:Name -> Inst:salt.utils.optsdict.OptsDict
+364:11:Call -> Const:NoneType:None | Dict:2 | U | Dict:3
+364:11:Name -> Func:salt.modules.chroot._create_and_execute_salt_state
+364:42:Name -> U
+364:48:Name -> U | List:0
+364:56:Name -> Dict:0
+364:67:Name -> Const:NoneType:None | U
+364:73:Name -> U
+388:13:Call -> U
+388:13:Attribute -> Func:copy.deepcopy
+388:13:Name -> Module:copy
+388:27:Call -> ERR
+388:27:Attribute -> ERR
+388:27:Name -> ERR
+389:4:Call -> U
+389:4:Attribute -> U
+389:4:Name -> U
+389:18:Call -> ERR
+389:18:Attribute -> BM:builtins.dict.get
+389:18:Name -> Dict:0
+393:11:Call -> Inst:salt.utils.optsdict.OptsDict
+393:11:Attribute -> Func:salt.utils.state.get_sls_opts
+393:11:Attribute -> Module:salt.utils.state
+393:11:Attribute -> Module:salt.utils
+393:11:Name -> Module:salt
+393:41:Name -> ERR
+393:53:Name -> Dict:0
+394:9:Call -> Inst:salt.client.ssh.state.SSHHighState
+394:9:Attribute -> Class:salt.client.ssh.state.SSHHighState
+394:9:Attribute -> Module:salt.client.ssh.state
+394:9:Attribute -> Module:salt.client.ssh
+394:9:Attribute -> Module:salt.client
+394:9:Name -> Module:salt
+395:8:Name -> Inst:salt.utils.optsdict.OptsDict
+395:14:Name -> U
+395:22:Name -> ERR
+395:32:Call -> U
+395:32:Attribute -> Func:salt.fileclient.get_file_client
+395:32:Attribute -> Module:salt.fileclient
+395:32:Name -> Module:salt
+395:64:Name -> ERR
+399:17:Call -> List:1 | U
+399:17:Attribute -> BM:salt.state.BaseHighState.compile_low_chunks
+399:17:Name -> Inst:salt.client.ssh.state.SSHHighState
+400:20:Call -> Dict:0
+400:20:Attribute -> Func:salt.client.ssh.state.lowstate_file_refs
+400:20:Attribute -> Module:salt.client.ssh.state
+400:20:Attribute -> Module:salt.client.ssh
+400:20:Attribute -> Module:salt.client
+400:20:Name -> Module:salt
+401:12:Name -> List:1 | U
+402:12:Call -> Const:str:''
+402:12:Attribute -> Func:salt.client.ssh.wrapper.state._merge_extra_filerefs
+402:12:Attribute -> Module:salt.client.ssh.wrapper.state
+402:12:Attribute -> Module:salt.client.ssh.wrapper
+402:12:Attribute -> Module:salt.client.ssh
+402:12:Attribute -> Module:salt.client
+402:12:Name -> Module:salt
+403:16:Call -> ERR
+403:16:Attribute -> BM:builtins.dict.get
+403:16:Name -> Dict:0
+403:50:Call -> U | Const:str:''
+403:50:Attribute -> BM:salt.utils.optsdict.OptsDict.get
+403:50:Name -> Inst:salt.utils.optsdict.OptsDict
+407:21:Name -> List:1 | U
+408:19:Call -> Const:bool:False
+408:19:Name -> Func:builtins.isinstance
+408:30:Name -> Const:str:'High data is not a dictionary and is in
+408:37:Name -> Class:builtins.dict
+409:16:Name -> ERR
+410:23:Name -> List:1 | U
+412:15:Call -> ERR
+412:15:Attribute -> BM:builtins.dict.pop
+412:15:Name -> Dict:0
+413:20:Name -> Inst:salt.utils.optsdict.OptsDict
+414:15:Call -> Const:NoneType:None | Dict:2 | U | Dict:3
+414:15:Name -> Func:salt.modules.chroot._create_and_execute_salt_state
+414:46:Name -> U
+414:52:Name -> List:1 | U
+414:60:Name -> Dict:0
+414:71:Name -> U
+414:77:Name -> U

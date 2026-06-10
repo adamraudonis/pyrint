@@ -1,0 +1,524 @@
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'tests.integration.cloud.helpers.cloud_t | Const:str:'__main__'
+25:1:Attribute -> U
+25:1:Attribute -> U
+25:1:Name -> U
+26:16:Name -> Class:tests.support.case.ShellCase
+28:37:Call -> Tuple:0
+28:37:Name -> Class:builtins.tuple
+32:5:Name -> Class:builtins.staticmethod
+38:15:Call -> Const:bool:False | U
+38:15:Attribute -> Func:genericpath.isdir | U
+38:15:Attribute -> Module:posixpath | Module:ntpath
+38:15:Name -> Module:os
+38:29:Name -> U
+40:21:Call -> ERR
+40:21:Attribute -> Func:posix.listdir
+40:21:Name -> Module:os
+40:32:Name -> U
+41:12:Call -> ERR
+41:12:Attribute -> Func:posix.remove
+41:12:Name -> Module:os
+41:22:Call -> U
+41:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+41:22:Attribute -> Module:posixpath | Module:ntpath
+41:22:Name -> Module:os
+41:35:Name -> U
+41:44:Name -> U
+48:12:Call -> U
+48:12:Attribute -> U
+48:12:Name -> U
+49:21:Call -> Const:bool:False | Const:bytes:b'string' | U
+49:21:Attribute -> BM:tests.support.case.ShellCase.run_cloud
+49:21:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+50:15:Call -> U
+50:15:Attribute -> U
+50:15:Call -> U
+50:15:Attribute -> U
+50:15:Call -> U
+50:15:Attribute -> U
+50:15:Name -> U
+59:15:Name -> Const:NoneType:None | U
+60:28:Attribute -> U
+60:28:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+61:15:Name -> Const:NoneType:None | U
+62:20:Call -> U
+62:20:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+62:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+64:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+64:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+64:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+64:45:Name -> Const:NoneType:None | U
+64:60:Name -> Const:NoneType:None | U
+65:11:Call -> ERR
+65:11:Name -> Func:builtins.isinstance
+65:22:Name -> Const:NoneType:None | U
+65:29:Name -> Class:builtins.set
+66:19:Name -> Const:NoneType:None | U
+66:36:Name -> Const:NoneType:None | U
+67:15:Call -> ERR
+67:15:Name -> Func:builtins.any
+67:19:Name -> Const:NoneType:None | U
+67:36:Call -> U
+67:36:Attribute -> U
+67:36:Name -> U
+67:59:Name -> Const:NoneType:None | U
+74:15:Name -> Const:NoneType:None | U
+75:28:Attribute -> U
+75:28:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+78:11:Name -> Const:NoneType:None | U
+79:12:Call -> Const:NoneType:None
+79:12:Attribute -> BM:unittest.case.TestCase.assertIn
+79:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+80:16:Name -> Const:NoneType:None | U
+81:17:Call -> U
+81:17:Attribute -> U
+81:17:Name -> U
+81:40:Name -> U
+82:16:Call -> Const:str:'An error occured during instance creati
+82:16:Attribute -> BM:builtins.str.format
+83:20:Call -> Const:str:''
+83:20:Attribute -> BM:builtins.str.join
+83:32:Name -> U
+88:20:Call -> U
+88:20:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+88:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+89:25:Call -> Inst:builtins.range
+89:25:Name -> Class:builtins.range
+89:31:Attribute -> Const:int:12
+89:31:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+90:19:Call -> U
+90:19:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._instance_exists
+90:19:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+90:41:Name -> Const:NoneType:None | U
+90:56:Name -> U
+91:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+91:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+91:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+93:24:Name -> Const:NoneType:None | U
+94:24:Name -> U
+94:32:Attribute -> Const:int:30
+94:32:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+98:20:Call -> ERR
+98:20:Name -> Func:time.sleep
+98:26:Attribute -> Const:int:30
+98:26:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+99:28:Call -> U
+99:28:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+99:28:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+102:12:Call -> Const:NoneType:None
+102:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+102:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+103:16:Call -> U
+103:16:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._instance_exists
+103:16:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+103:38:Name -> Const:NoneType:None | U
+103:53:Name -> U
+104:16:Call -> U
+104:16:Attribute -> BM:builtins.str.format
+105:20:Attribute -> U
+105:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+105:40:Call -> Const:str:''
+105:40:Attribute -> BM:builtins.str.join
+105:50:Name -> U
+109:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+109:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+109:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+109:63:Name -> Const:NoneType:None | U
+112:11:Name -> Const:NoneType:None | U
+113:22:Name -> Const:int:500
+114:15:Name -> Const:NoneType:None | U
+115:28:Attribute -> U
+115:28:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+116:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+116:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+116:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+116:44:Name -> Const:NoneType:None | U
+117:21:Call -> Const:bool:False | Const:bytes:b'string' | U
+117:21:Attribute -> BM:tests.support.case.ShellCase.run_cloud
+117:21:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+118:18:Name -> Const:NoneType:None | U
+118:67:Name -> Const:NoneType:None | U | Const:int:500
+120:11:Name -> Const:bool:False | Const:bytes:b'string' | U
+121:21:Call -> U
+121:21:Name -> Func:salt.utils.yamlloader.safe_load
+121:31:Call -> Const:str:''
+121:31:Attribute -> BM:builtins.str.join
+121:41:Name -> Const:bytes:b'string' | U
+122:12:Call -> Const:NoneType:None
+122:12:Attribute -> BM:unittest.case.TestCase.assertIn
+122:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+122:26:Attribute -> Const:str:'-config'
+122:26:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+122:44:Name -> U
+123:12:Call -> Const:NoneType:None
+123:12:Attribute -> BM:unittest.case.TestCase.assertIn
+123:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+123:26:Attribute -> Const:str:''
+123:26:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+123:41:Name -> U
+123:48:Attribute -> Const:str:'-config'
+123:48:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+124:12:Call -> Const:NoneType:None
+124:12:Attribute -> BM:unittest.case.TestCase.assertIn
+124:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+124:26:Name -> Const:NoneType:None | U
+124:41:Name -> U
+124:48:Attribute -> Const:str:'-config'
+124:48:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+124:66:Attribute -> Const:str:''
+124:66:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+126:28:Name -> U
+126:35:Attribute -> Const:str:'-config'
+126:35:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+126:53:Attribute -> Const:str:''
+126:53:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+126:68:Name -> Const:NoneType:None | U
+127:15:Call -> ERR
+127:15:Name -> Func:builtins.isinstance
+127:26:Name -> U
+127:41:Name -> Class:builtins.str
+128:16:Call -> Const:NoneType:None
+128:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+128:16:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+128:33:Name -> U
+130:17:Call -> ERR
+130:17:Name -> Func:builtins.isinstance
+130:28:Name -> U
+130:43:Name -> Class:builtins.dict
+131:32:Call -> U
+131:32:Attribute -> U
+131:32:Name -> U
+132:19:Name -> U
+133:23:Call -> U
+133:23:Attribute -> U
+133:23:Name -> U
+134:24:Call -> Const:NoneType:None
+134:24:Attribute -> BM:unittest.case.TestCase.assertIn
+134:24:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+134:49:Call -> U
+134:49:Attribute -> U
+134:49:Name -> U
+137:24:Call -> Const:NoneType:None
+137:24:Attribute -> BM:unittest.case.TestCase.assertEqual
+137:24:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+137:41:Call -> U
+137:41:Attribute -> U
+137:41:Name -> U
+140:16:Call -> U
+140:16:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+140:16:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+142:21:Call -> Inst:builtins.range
+142:21:Name -> Class:builtins.range
+143:15:Call -> U
+143:15:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._instance_exists
+143:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+143:43:Name -> U
+144:16:Call -> ERR
+144:16:Name -> Func:time.sleep
+145:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+145:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+145:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+147:20:Name -> Const:NoneType:None | U
+148:20:Name -> U
+149:20:Name -> U
+151:24:Call -> U
+151:24:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+151:24:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+153:8:Call -> Const:NoneType:None
+153:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+153:8:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+153:25:Name -> Const:NoneType:None | U
+153:40:Call -> U
+153:40:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+153:40:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+155:5:Name -> Class:builtins.property
+157:15:Call -> Const:bool:True
+157:15:Name -> Func:builtins.hasattr
+157:23:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+159:23:Call -> Const:str:''
+159:23:Attribute -> BM:builtins.str.strip
+159:23:Attribute -> Const:str:'CloudTest'
+159:23:Attribute -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+159:23:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+161:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+161:34:Call -> U
+161:34:Attribute -> U
+161:34:Call -> U
+161:34:Name -> U
+162:30:Name -> Const:str:''
+164:15:Attribute -> U
+164:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+166:5:Name -> Class:builtins.property
+168:15:Call -> Const:bool:True
+168:15:Name -> Func:builtins.hasattr
+168:23:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+169:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+169:30:Call -> Const:bool:False | Const:bytes:b'string' | U
+169:30:Attribute -> BM:tests.support.case.ShellCase.run_cloud
+169:30:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+170:15:Attribute -> Const:bool:False | Const:bytes:b'string' | U
+170:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+172:5:Name -> Class:builtins.property
+174:15:Call -> Const:bool:True
+174:15:Name -> Func:builtins.hasattr
+174:23:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+175:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+175:36:Call -> Dict:0
+175:36:Name -> Func:salt.config.cloud_providers_config
+176:16:Call -> U
+176:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+176:16:Attribute -> Module:posixpath | Module:ntpath
+176:16:Name -> Module:os
+177:20:Attribute -> U
+177:20:Name -> Inst:tests.support.runtests.RuntimeVars
+179:20:Attribute -> Const:str:''
+179:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+182:15:Attribute -> Dict:0
+182:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+182:37:Attribute -> Const:str:'-config'
+182:37:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+182:55:Attribute -> Const:str:''
+182:55:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+184:5:Name -> Class:builtins.property
+186:15:Call -> Const:bool:True
+186:15:Name -> Func:builtins.hasattr
+186:23:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+187:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+187:27:Call -> U
+187:27:Name -> Func:salt.config.cloud_config
+188:16:Call -> U
+188:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+188:16:Attribute -> Module:posixpath | Module:ntpath
+188:16:Name -> Module:os
+189:20:Attribute -> U
+189:20:Name -> Inst:tests.support.runtests.RuntimeVars
+191:20:Attribute -> Const:str:''
+191:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+194:15:Attribute -> U
+194:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+196:5:Name -> Class:builtins.property
+198:15:Attribute -> Const:str:''
+198:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+204:20:Call -> U
+204:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+204:20:Attribute -> Module:posixpath | Module:ntpath
+204:20:Name -> Module:os
+204:33:Attribute -> U
+204:33:Name -> Inst:tests.support.runtests.RuntimeVars
+204:80:Name -> U
+205:13:Call -> U
+205:13:Attribute -> Func:salt.utils.files.fopen
+205:13:Attribute -> Module:salt.utils.files
+205:13:Attribute -> Module:salt.utils
+205:13:Name -> Module:salt
+205:36:Name -> U
+206:19:Call -> U
+206:19:Name -> Func:salt.utils.yamlloader.safe_load
+206:29:Name -> U
+207:8:Name -> U
+207:13:Name -> U
+207:28:Call -> U
+207:28:Attribute -> U
+207:28:Name -> U
+207:33:Name -> U
+208:8:Call -> U
+208:8:Attribute -> U
+208:8:Name -> U
+208:13:Name -> U
+208:33:Name -> U
+209:13:Call -> U
+209:13:Attribute -> Func:salt.utils.files.fopen
+209:13:Attribute -> Module:salt.utils.files
+209:13:Attribute -> Module:salt.utils
+209:13:Name -> Module:salt
+209:36:Name -> U
+210:12:Call -> U
+210:12:Attribute -> Func:salt.utils.yamldumper.safe_dump
+210:12:Attribute -> Module:salt.utils.yaml
+210:12:Attribute -> Module:salt.utils
+210:12:Name -> Module:salt
+210:38:Name -> U
+210:44:Name -> U
+216:8:Call -> U
+216:8:Attribute -> BM:unittest.case.TestCase.setUp
+216:8:Call -> Super
+216:8:Name -> Class:builtins.super
+218:15:Attribute -> Const:str:''
+218:15:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+219:12:Call -> U
+219:12:Attribute -> BM:unittest.case.TestCase.fail
+219:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+222:11:Attribute -> Const:str:'-config'
+222:11:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+222:41:Attribute -> Const:bool:False | Const:bytes:b'string' | U
+222:41:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+223:12:Call -> U
+223:12:Attribute -> BM:unittest.case.TestCase.skipTest
+223:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+224:16:Call -> Const:str:'Configuration file for  was not found. 
+224:16:Attribute -> BM:builtins.str.format
+226:20:Attribute -> Const:str:''
+226:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+231:19:Attribute -> Tuple:0
+231:19:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+232:19:Call -> U
+232:19:Attribute -> U
+232:19:Attribute -> U
+232:19:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+232:44:Name -> U
+233:16:Call -> ERR
+233:16:Attribute -> BM:builtins.list.append
+233:16:Name -> List:0
+233:41:Name -> U
+235:11:Name -> List:0
+236:12:Call -> U
+236:12:Attribute -> BM:unittest.case.TestCase.skipTest
+236:12:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+237:16:Call -> Const:str:'Conf items are missing that must be pro
+237:16:Attribute -> BM:builtins.str.format
+238:20:Call -> Const:str:''
+238:20:Attribute -> BM:builtins.str.join
+238:30:Name -> U
+240:18:Call -> Const:str:'\nCheck tests/integration/files/conf/cl
+240:18:Attribute -> BM:builtins.str.format
+241:20:Attribute -> Const:str:''
+241:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+249:16:Call -> U
+249:16:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.query_instances
+249:16:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+250:20:Call -> Set:0
+250:20:Name -> Class:builtins.set
+251:17:Name -> U
+253:15:Call -> U
+253:15:Attribute -> U
+253:15:Name -> U
+253:28:Attribute -> U
+253:28:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+253:56:Call -> U
+253:56:Attribute -> U
+253:56:Call -> U
+253:56:Attribute -> U
+253:56:Name -> U
+256:16:Call -> ERR
+256:16:Attribute -> BM:builtins.set.add
+256:16:Name -> Set:0
+256:30:Name -> U
+257:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+257:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+257:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+258:84:Name -> U
+260:15:Name -> Set:0
+268:15:Name -> Const:NoneType:None | U
+269:28:Attribute -> U
+269:28:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+271:11:Call -> U
+271:11:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._instance_exists
+271:11:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+271:33:Name -> Const:NoneType:None | U
+272:25:Call -> Inst:builtins.range
+272:25:Name -> Class:builtins.range
+274:20:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+274:20:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest.assertDestroyInstance
+274:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+274:47:Name -> Const:NoneType:None | U
+277:24:Call -> U
+277:24:Attribute -> BM:builtins.str.format
+278:40:Name -> Const:NoneType:None | U
+280:23:Name -> Class:builtins.AssertionError
+281:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+281:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+281:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+283:24:Name -> Const:NoneType:None | U
+284:24:Name -> U
+285:24:Call -> Const:str:''
+285:24:Name -> Class:builtins.str
+285:28:Name -> ExcInst:builtins.AssertionError
+287:23:Call -> U
+287:23:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._instance_exists
+287:23:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+291:20:Call -> ERR
+291:20:Name -> Func:time.sleep
+293:19:Name -> Const:bool:False | Const:bool:True
+297:20:Call -> U
+297:20:Attribute -> BM:builtins.str.format
+298:24:Name -> Const:NoneType:None | U
+304:12:Call -> U
+304:12:Attribute -> BM:builtins.str.format
+305:16:Name -> Const:NoneType:None | U
+318:20:Call -> Set:0
+318:20:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._alt_names
+318:20:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+319:24:Name -> Set:0
+320:49:Call -> Tuple:2 | Tuple:2 | Tuple:2
+320:49:Attribute -> BM:tests.integration.cloud.helpers.cloud_test_base.CloudTest._ensure_deletion
+320:49:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+320:71:Name -> U
+321:19:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+323:16:Call -> ERR
+323:16:Attribute -> BM:builtins.list.append
+323:16:Name -> List:0
+323:37:Name -> U
+324:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+324:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+324:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+325:59:Name -> U
+325:69:Name -> U
+327:8:Call -> Const:NoneType:None
+327:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+327:8:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+327:24:Name -> Const:bool:True | Const:bool:False
+327:33:Call -> Const:str:''
+327:33:Attribute -> BM:builtins.str.join
+327:43:Name -> List:0
+328:8:Call -> Const:NoneType:None
+328:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+328:8:Name -> Inst:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+329:12:Name -> Set:0
+332:5:Name -> Class:builtins.classmethod
+334:8:Call -> Const:NoneType:None
+334:8:Attribute -> Func:tests.integration.cloud.helpers.cloud_test_base.CloudTest.clean_cloud_dir
+334:8:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+334:28:Attribute -> U
+334:28:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+336:5:Name -> Class:builtins.classmethod
+339:8:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+339:31:Call -> U
+339:31:Attribute -> Func:posixpath.join | Func:ntpath.join
+339:31:Attribute -> Module:posixpath | Module:ntpath
+339:31:Name -> Module:os
+340:12:Attribute -> U
+340:12:Name -> Inst:tests.support.runtests.RuntimeVars
+342:8:Call -> Const:NoneType:None
+342:8:Attribute -> Func:tests.integration.cloud.helpers.cloud_test_base.CloudTest.clean_cloud_dir
+342:8:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+342:28:Attribute -> U
+342:28:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+345:24:Attribute -> Const:str:''
+345:24:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+346:8:Call -> U
+346:8:Attribute -> Func:shutil.copyfile
+346:8:Name -> Module:shutil
+347:12:Call -> U
+347:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+347:12:Attribute -> Module:posixpath | Module:ntpath
+347:12:Name -> Module:os
+348:16:Call -> U
+348:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+348:16:Attribute -> Module:posixpath | Module:ntpath
+348:16:Name -> Module:os
+348:29:Name -> U
+348:66:Name -> Const:str:'.conf'
+350:12:Call -> U
+350:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+350:12:Attribute -> Module:posixpath | Module:ntpath
+350:12:Name -> Module:os
+350:25:Call -> U
+350:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+350:25:Attribute -> Module:posixpath | Module:ntpath
+350:25:Name -> Module:os
+350:38:Attribute -> U
+350:38:Name -> Class:tests.integration.cloud.helpers.cloud_test_base.CloudTest
+350:60:Name -> Const:str:'.conf'

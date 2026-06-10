@@ -1,0 +1,75 @@
+12:31:Name -> Class:django.test.testcases.SimpleTestCase
+14:8:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+14:24:Call -> Inst:tempfile.TemporaryDirectory
+14:24:Attribute -> Class:tempfile.TemporaryDirectory
+14:24:Name -> Module:tempfile
+15:8:Call -> Const:NoneType:None
+15:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+15:8:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+15:24:Attribute -> BM:tempfile.TemporaryDirectory.cleanup
+15:24:Attribute -> Inst:tempfile.TemporaryDirectory
+15:24:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+16:31:Call -> U
+16:31:Attribute -> Func:posixpath.join | Func:ntpath.join
+16:31:Attribute -> Module:posixpath | Module:ntpath
+16:31:Name -> Module:os
+17:12:Call -> U
+17:12:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+17:12:Attribute -> Module:posixpath | Module:ntpath
+17:12:Name -> Module:os
+17:28:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+17:28:Name -> Module:django.conf
+22:27:Call -> U
+22:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+22:27:Attribute -> Module:posixpath | Module:ntpath
+22:27:Name -> Module:os
+22:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+22:40:Attribute -> Inst:tempfile.TemporaryDirectory
+22:40:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+23:8:Call -> U
+23:8:Attribute -> Func:shutil.copyfile
+23:8:Name -> Module:shutil
+23:24:Name -> U
+23:46:Name -> U
+31:13:Call -> Gen:django.test.utils.extend_sys_path
+31:13:Name -> Func:django.test.utils.extend_sys_path
+31:29:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+31:29:Attribute -> Inst:tempfile.TemporaryDirectory
+31:29:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+34:13:Call -> Inst:django.test.utils.override_settings
+34:13:Attribute -> BM:django.test.testcases.SimpleTestCase.settings
+34:13:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+35:23:Name -> U
+38:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+38:23:Attribute -> BM:django.test.client.Client.get
+38:23:Attribute -> Inst:django.test.client.Client
+38:23:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+39:22:Call -> ERR
+39:22:Name -> Func:builtins.sorted
+39:29:Call -> U
+39:29:Attribute -> U
+39:29:Call -> U
+39:29:Attribute -> U
+39:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+40:12:Call -> Const:NoneType:None
+40:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+40:12:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+41:16:Name -> U
+53:13:Call -> Gen:django.test.utils.extend_sys_path
+53:13:Name -> Func:django.test.utils.extend_sys_path
+53:29:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+53:29:Attribute -> Inst:tempfile.TemporaryDirectory
+53:29:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+56:13:Call -> Inst:django.test.utils.override_settings
+56:13:Attribute -> BM:django.test.testcases.SimpleTestCase.settings
+56:13:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+56:35:Name -> U
+57:22:Attribute -> U
+57:22:Attribute -> Inst:django.core.mail.handler.MailersHandler
+57:22:Name -> Module:django.core.mail
+58:12:Call -> Const:NoneType:None
+58:12:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+58:12:Name -> Inst:tests.project_template.test_settings.TestStartProjectSettings
+58:34:Name -> U
+58:43:Attribute -> Class:django.core.mail.backends.console.EmailBackend
+58:43:Name -> Module:django.core.mail.backends.console

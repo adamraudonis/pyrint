@@ -1,0 +1,420 @@
+64:17:Call -> ERR
+64:17:Attribute -> BM:builtins.set.intersection
+64:17:Name -> Set:11
+64:56:Name -> U
+65:7:Name -> U
+65:35:Name -> U
+66:25:Call -> Const:str:''
+66:25:Attribute -> BM:builtins.str.join
+66:35:Call -> ERR
+66:35:Name -> Func:builtins.sorted
+66:42:Name -> U
+67:14:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+67:14:Name -> Class:django.core.exceptions.ImproperlyConfigured
+69:24:Name -> Const:str:''
+73:24:Name -> Class:builtins.str
+80:15:Call -> Inst:django.conf.SettingsReference
+80:15:Attribute -> BM:builtins.str.__new__
+80:15:Name -> Class:builtins.str
+80:27:Name -> Class:django.conf.SettingsReference
+80:33:Name -> U
+83:8:Name -> Inst:django.conf.SettingsReference
+83:28:Name -> U
+86:19:Name -> Class:django.utils.functional.LazyObject
+99:26:Call -> U | Const:NoneType:None
+99:26:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+99:26:Attribute -> Dict:43 | Inst:os._Environ
+99:26:Name -> Module:os
+99:41:Name -> Const:str:'DJANGO_SETTINGS_MODULE'
+100:15:Name -> U | Const:NoneType:None
+101:44:Name -> Const:NoneType:None | U
+101:35:Name -> U
+102:18:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+102:18:Name -> Class:django.core.exceptions.ImproperlyConfigured
+106:19:Name -> U | Const:str:'settings'
+106:25:Name -> Const:str:'DJANGO_SETTINGS_MODULE'
+109:8:Name -> Inst:django.conf.LazySettings
+109:24:Call -> Inst:django.conf.Settings
+109:24:Name -> Class:django.conf.Settings
+109:33:Name -> U | Const:NoneType:None
+113:11:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+113:11:Name -> Inst:django.conf.LazySettings
+113:28:Name -> Inst:builtins.object
+116:31:Attribute -> U | Const:NoneType:None
+116:31:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+116:31:Name -> Inst:django.conf.LazySettings
+121:24:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+121:24:Name -> Inst:django.conf.LazySettings
+121:42:Name -> Inst:builtins.object
+122:12:Call -> Const:NoneType:None
+122:12:Attribute -> BM:django.conf.LazySettings._setup
+122:12:Name -> Inst:django.conf.LazySettings
+122:24:Name -> U
+123:23:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+123:23:Name -> Inst:django.conf.LazySettings
+124:14:Call -> U
+124:14:Name -> Func:builtins.getattr
+124:22:Name -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+124:32:Name -> U
+127:11:Name -> U
+127:19:Name -> Set:11
+128:15:Call -> Const:bool:False
+128:15:Name -> Func:builtins.hasattr
+128:23:Name -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+129:22:Call -> ExcInst:builtins.AttributeError
+129:22:Name -> Class:builtins.AttributeError
+130:27:Name -> U
+132:12:Call -> Const:NoneType:None
+132:12:Name -> Func:django.conf._show_settings_deprecation_warning
+133:16:Call -> U
+133:16:Attribute -> BM:builtins.str.format
+133:16:Name -> Const:str:'The {name} setting is deprecated. Migra
+133:57:Name -> U
+133:64:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+139:11:Name -> U
+139:51:Name -> U
+140:18:Call -> U
+140:18:Attribute -> Func:django.conf.LazySettings._add_script_prefix
+140:18:Name -> Inst:django.conf.LazySettings
+140:42:Name -> U
+141:13:Name -> U
+141:42:Name -> U
+142:18:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+142:18:Name -> Class:django.core.exceptions.ImproperlyConfigured
+144:8:Attribute -> Dict:1
+144:8:Name -> Inst:django.conf.LazySettings
+144:22:Name -> U
+144:30:Name -> U
+145:15:Name -> U
+152:11:Name -> U
+153:12:Call -> ERR
+153:12:Attribute -> BM:builtins.dict.clear
+153:12:Attribute -> Dict:1
+153:12:Name -> Inst:django.conf.LazySettings
+155:12:Call -> ERR
+155:12:Attribute -> BM:builtins.dict.pop
+155:12:Attribute -> Dict:1
+155:12:Name -> Inst:django.conf.LazySettings
+155:30:Name -> U
+158:11:Name -> U
+159:12:Call -> Const:NoneType:None
+159:12:Name -> Func:django.conf._show_settings_deprecation_warning
+160:16:Name -> Const:str:'The SIGNED_COOKIE_LEGACY_SALT_FALLBACK 
+161:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+164:11:Name -> U
+165:12:Call -> Const:NoneType:None
+165:12:Name -> Func:django.conf._show_settings_deprecation_warning
+166:16:Name -> Const:str:"The USE_BLANK_CHOICE_DASH setting is de
+166:54:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+169:11:Name -> U
+172:27:Name -> Set:11
+173:16:Call -> ERR
+173:16:Attribute -> BM:builtins.dict.pop
+173:16:Attribute -> Dict:1
+173:16:Name -> Inst:django.conf.LazySettings
+173:34:Name -> U
+174:11:Name -> U
+174:19:Name -> Set:11
+175:12:Call -> Const:NoneType:None
+175:12:Name -> Func:django.conf._show_settings_deprecation_warning
+176:16:Call -> U
+176:16:Attribute -> BM:builtins.str.format
+176:16:Name -> Const:str:'The {name} setting is deprecated. Migra
+176:57:Name -> U
+176:64:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+179:8:Call -> Const:NoneType:None
+179:8:Attribute -> BM:django.utils.functional.LazyObject.__setattr__ | BM:builtins.object.__setattr__
+179:8:Call -> Super
+179:8:Name -> Class:builtins.super
+179:28:Name -> U
+179:34:Name -> U
+183:8:Call -> Const:NoneType:None
+183:8:Attribute -> BM:django.utils.functional.LazyObject.__delattr__ | BM:builtins.object.__delattr__
+183:8:Call -> Super
+183:8:Name -> Class:builtins.super
+183:28:Name -> U
+184:8:Call -> ERR
+184:8:Attribute -> BM:builtins.dict.pop
+184:8:Attribute -> Dict:1
+184:8:Name -> Inst:django.conf.LazySettings
+184:26:Name -> U
+188:16:Call -> U
+188:16:Attribute -> BM:django.utils.functional.new_method_proxy.inner | BM:builtins.object.__dir__
+188:16:Call -> Super
+188:16:Name -> Class:builtins.super
+189:11:Call -> Const:bool:False
+189:11:Name -> Func:builtins.hasattr
+189:19:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+189:19:Name -> Inst:django.conf.LazySettings
+193:16:Name -> U
+194:28:Name -> U
+195:19:Name -> U
+195:31:Name -> Set:11
+196:19:Call -> U
+196:19:Attribute -> BM:django.conf.Settings.is_overridden | BM:django.conf.UserSettingsHolder.is_overridden
+196:19:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+196:19:Name -> Inst:django.conf.LazySettings
+196:47:Name -> U
+198:15:Name -> U
+200:41:Name -> Module:django.conf.global_settings
+206:11:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+206:11:Name -> Inst:django.conf.LazySettings
+206:32:Name -> Inst:builtins.object
+207:18:Call -> ExcInst:builtins.RuntimeError
+207:18:Name -> Class:builtins.RuntimeError
+210:8:Call -> Const:NoneType:None
+210:8:Name -> Func:django.conf._check_email_settings_conflicts
+210:40:Call -> DictKeys
+210:40:Attribute -> BM:builtins.dict.keys
+210:40:Name -> Dict:0
+212:17:Call -> Inst:django.conf.UserSettingsHolder
+212:17:Name -> Class:django.conf.UserSettingsHolder
+212:36:Name -> Module:django.conf.global_settings | U
+213:27:Call -> DictItems
+213:27:Attribute -> BM:builtins.dict.items
+213:27:Name -> Dict:0
+214:19:Call -> U
+214:19:Attribute -> U
+214:19:Name -> U
+215:22:Call -> ExcInst:builtins.TypeError
+215:22:Name -> Class:builtins.TypeError
+215:66:Name -> U
+216:12:Call -> ERR
+216:12:Name -> Func:builtins.setattr
+216:20:Name -> Inst:django.conf.UserSettingsHolder
+216:28:Name -> U
+216:34:Name -> U
+217:8:Name -> Inst:django.conf.LazySettings
+217:24:Name -> Inst:django.conf.UserSettingsHolder
+219:5:Name -> Class:builtins.staticmethod
+228:11:Call -> U
+228:11:Attribute -> U
+228:11:Name -> U
+229:19:Name -> U
+232:25:Call -> U
+232:25:Name -> Func:django.urls.base.get_script_prefix
+232:46:Name -> U
+234:5:Name -> Class:builtins.property
+237:15:Attribute -> Inst:django.conf.Settings | Inst:django.conf.UserSettingsHolder | Inst:builtins.object
+237:15:Name -> Inst:django.conf.LazySettings
+237:36:Name -> Inst:builtins.object
+244:23:Call -> ERR
+244:23:Name -> Func:builtins.dir
+244:27:Name -> Module:django.conf.global_settings
+245:15:Call -> U
+245:15:Attribute -> U
+245:15:Name -> U
+246:16:Call -> ERR
+246:16:Name -> Func:builtins.setattr
+246:24:Name -> Inst:django.conf.Settings
+246:30:Name -> U
+246:39:Call -> U
+246:39:Name -> Func:builtins.getattr
+246:47:Name -> Module:django.conf.global_settings
+246:64:Name -> U
+249:8:Name -> Inst:django.conf.Settings
+249:31:Name -> U
+251:14:Call -> U | Const:NoneType:None
+251:14:Attribute -> Func:importlib.import_module | U
+251:14:Name -> Module:importlib
+251:38:Attribute -> U
+251:38:Name -> Inst:django.conf.Settings
+260:8:Name -> Inst:django.conf.Settings
+260:34:Call -> Set:0
+260:34:Name -> Class:builtins.set
+261:23:Call -> ERR
+261:23:Name -> Func:builtins.dir
+261:27:Name -> U | Const:NoneType:None
+262:15:Call -> U
+262:15:Attribute -> U
+262:15:Name -> U
+263:32:Call -> U
+263:32:Name -> Func:builtins.getattr
+263:40:Name -> U | Const:NoneType:None
+263:45:Name -> U
+265:19:Name -> U
+265:30:Name -> Tuple:5
+265:53:Call -> ERR
+265:53:Name -> Func:builtins.isinstance
+266:20:Name -> U
+266:36:Name -> Class:builtins.list
+266:42:Name -> Class:builtins.tuple
+268:26:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+268:26:Name -> Class:django.core.exceptions.ImproperlyConfigured
+269:70:Name -> U
+271:16:Call -> ERR
+271:16:Name -> Func:builtins.setattr
+271:24:Name -> Inst:django.conf.Settings
+271:30:Name -> U
+271:39:Name -> U
+272:16:Call -> ERR
+272:16:Attribute -> BM:builtins.set.add
+272:16:Attribute -> Set:0
+272:16:Name -> Inst:django.conf.Settings
+272:44:Name -> U
+275:51:Attribute -> Set:0
+275:51:Name -> Inst:django.conf.Settings
+276:12:Call -> Const:NoneType:None
+276:12:Attribute -> Func:warnings.warn | Func:_warnings.warn
+276:12:Name -> Module:warnings
+277:16:Name -> Const:str:'The SIGNED_COOKIE_LEGACY_SALT_FALLBACK 
+278:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+279:35:Call -> Tuple:0 | Tuple:1
+279:35:Name -> Func:django.utils.deprecation.django_file_prefixes
+282:38:Attribute -> Set:0
+282:38:Name -> Inst:django.conf.Settings
+283:12:Call -> Const:NoneType:None
+283:12:Attribute -> Func:warnings.warn | Func:_warnings.warn
+283:12:Name -> Module:warnings
+284:16:Name -> Const:str:"The USE_BLANK_CHOICE_DASH setting is de
+285:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+286:35:Call -> Tuple:0 | Tuple:1
+286:35:Name -> Func:django.utils.deprecation.django_file_prefixes
+289:8:Call -> Const:NoneType:None
+289:8:Name -> Func:django.conf._check_email_settings_conflicts
+289:40:Attribute -> Set:0
+289:40:Name -> Inst:django.conf.Settings
+290:20:Call -> ERR
+290:20:Attribute -> BM:builtins.set.intersection
+290:20:Name -> Set:11
+290:59:Attribute -> Set:0
+290:59:Name -> Inst:django.conf.Settings
+291:12:Call -> Const:NoneType:None
+291:12:Attribute -> Func:warnings.warn | Func:_warnings.warn
+291:12:Name -> Module:warnings
+292:16:Call -> U
+292:16:Attribute -> BM:builtins.str.format
+292:16:Name -> Const:str:'The {name} setting is deprecated. Migra
+292:57:Name -> U
+293:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+294:35:Call -> Tuple:0 | Tuple:1
+294:35:Name -> Func:django.utils.deprecation.django_file_prefixes
+297:11:Call -> Const:bool:True
+297:11:Name -> Func:builtins.hasattr
+297:19:Name -> Module:time
+297:38:Attribute -> ERR
+297:38:Name -> Inst:django.conf.Settings
+299:16:Call -> U | Inst:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Inst:zoneinfo._zoneinfo.ZoneInfo
+299:16:Attribute -> U | Class:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Class:zoneinfo._zoneinfo.ZoneInfo
+299:16:Name -> Module:zoneinfo
+299:34:Attribute -> ERR
+299:34:Name -> Inst:django.conf.Settings
+300:19:Attribute -> Class:zoneinfo._common.ZoneInfoNotFoundError
+300:19:Name -> Module:zoneinfo
+301:22:Call -> ExcInst:builtins.ValueError
+301:22:Name -> Class:builtins.ValueError
+301:68:Attribute -> ERR
+301:68:Name -> Inst:django.conf.Settings
+304:12:Attribute -> Dict:43 | Inst:os._Environ
+304:12:Name -> Module:os
+304:31:Attribute -> ERR
+304:31:Name -> Inst:django.conf.Settings
+305:12:Call -> ERR
+305:12:Attribute -> Func:time.tzset
+305:12:Name -> Module:time
+308:15:Name -> U
+308:26:Attribute -> Set:0
+308:26:Name -> Inst:django.conf.Settings
+312:19:Attribute -> Const:str:'Settings'
+312:19:Attribute -> Class:django.conf.Settings
+312:19:Name -> Inst:django.conf.Settings
+313:31:Attribute -> U
+313:31:Name -> Inst:django.conf.Settings
+329:8:Attribute -> Dict:1
+329:8:Name -> Inst:django.conf.UserSettingsHolder
+329:36:Call -> Set:0
+329:36:Name -> Class:builtins.set
+330:8:Name -> Inst:django.conf.UserSettingsHolder
+330:32:Name -> U
+333:15:Call -> U
+333:15:Attribute -> U
+333:15:Name -> U
+333:33:Name -> U
+333:41:Attribute -> U
+333:41:Name -> Inst:django.conf.UserSettingsHolder
+334:18:Name -> Class:builtins.AttributeError
+335:15:Call -> U
+335:15:Name -> Func:builtins.getattr
+335:23:Attribute -> U
+335:23:Name -> Inst:django.conf.UserSettingsHolder
+335:46:Name -> U
+338:8:Call -> U
+338:8:Attribute -> U
+338:8:Attribute -> U
+338:8:Name -> Inst:django.conf.UserSettingsHolder
+338:30:Name -> U
+340:11:Name -> U
+341:12:Call -> Const:NoneType:None
+341:12:Name -> Func:django.conf._show_settings_deprecation_warning
+342:16:Name -> Const:str:'The SIGNED_COOKIE_LEGACY_SALT_FALLBACK 
+343:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+346:11:Name -> U
+347:12:Call -> Const:NoneType:None
+347:12:Name -> Func:django.conf._show_settings_deprecation_warning
+348:16:Name -> Const:str:"The USE_BLANK_CHOICE_DASH setting is de
+348:54:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+351:11:Name -> U
+351:19:Name -> Set:11
+352:12:Call -> Const:NoneType:None
+352:12:Name -> Func:django.conf._show_settings_deprecation_warning
+353:16:Call -> U
+353:16:Attribute -> BM:builtins.str.format
+353:16:Name -> Const:str:'The {name} setting is deprecated. Migra
+353:57:Name -> U
+353:64:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+356:8:Call -> ERR
+356:8:Attribute -> BM:builtins.object.__setattr__
+356:8:Call -> Super
+356:8:Name -> Class:builtins.super
+356:28:Name -> U
+356:34:Name -> U
+359:8:Call -> U
+359:8:Attribute -> U
+359:8:Attribute -> U
+359:8:Name -> Inst:django.conf.UserSettingsHolder
+359:26:Name -> U
+360:11:Call -> U
+360:11:Name -> Func:builtins.hasattr
+360:19:Name -> Inst:django.conf.UserSettingsHolder
+360:25:Name -> U
+361:12:Call -> ERR
+361:12:Attribute -> BM:builtins.object.__delattr__
+361:12:Call -> Super
+361:12:Name -> Class:builtins.super
+361:32:Name -> U
+364:15:Call -> ERR
+364:15:Name -> Func:builtins.sorted
+365:12:Name -> U
+366:23:Attribute -> Dict:1
+366:23:Name -> Inst:django.conf.UserSettingsHolder
+366:39:Call -> ERR
+366:39:Name -> Func:builtins.dir
+366:43:Attribute -> U
+366:43:Name -> Inst:django.conf.UserSettingsHolder
+367:15:Name -> U
+367:24:Attribute -> U
+367:24:Name -> Inst:django.conf.UserSettingsHolder
+371:18:Name -> U
+371:29:Attribute -> U
+371:29:Name -> Inst:django.conf.UserSettingsHolder
+372:22:Name -> U
+372:33:Attribute -> Dict:1
+372:33:Name -> Inst:django.conf.UserSettingsHolder
+373:25:Call -> U
+373:25:Call -> U
+373:25:Name -> Func:builtins.getattr
+374:12:Attribute -> U
+374:12:Name -> Inst:django.conf.UserSettingsHolder
+375:10:Name -> U
+376:15:Name -> U
+376:26:Name -> U
+376:41:Name -> U
+380:19:Attribute -> Const:str:'UserSettingsHolder'
+380:19:Attribute -> Class:django.conf.UserSettingsHolder
+380:19:Name -> Inst:django.conf.UserSettingsHolder
+390:4:Call -> Const:NoneType:None
+390:4:Name -> Func:django.utils.deprecation.warn_about_external_use
+391:8:Name -> U
+392:8:Name -> U
+413:11:Call -> Inst:django.conf.LazySettings
+413:11:Name -> Class:django.conf.LazySettings

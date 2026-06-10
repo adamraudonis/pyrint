@@ -1,0 +1,182 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'salt.engines' | Const:str:'__main__'
+20:12:Call -> Inst:salt.loader.lazy.LazyLoader
+20:12:Attribute -> Func:salt.loader.utils
+20:12:Attribute -> Module:salt.loader
+20:12:Name -> Module:salt
+20:30:Name -> U
+20:42:Name -> Const:NoneType:None | U
+21:7:Name -> U
+22:18:Call -> Inst:salt.loader.lazy.LazyLoader
+22:18:Attribute -> Func:salt.loader.runner
+22:18:Attribute -> Module:salt.loader
+22:18:Name -> Module:salt
+22:37:Name -> U
+22:49:Name -> Inst:salt.loader.lazy.LazyLoader
+25:12:Call -> Inst:salt.loader.lazy.LazyLoader
+25:12:Attribute -> Func:salt.loader.minion_mods
+25:12:Attribute -> Module:salt.loader
+25:12:Name -> Module:salt
+25:36:Name -> U
+25:48:Name -> Inst:salt.loader.lazy.LazyLoader
+25:61:Name -> Const:NoneType:None | U
+26:14:Call -> Inst:salt.loader.lazy.LazyLoader
+26:14:Attribute -> Func:salt.loader.engines
+26:14:Attribute -> Module:salt.loader
+26:14:Name -> Module:salt
+26:34:Name -> U
+26:40:Name -> Inst:salt.loader.lazy.LazyLoader
+26:47:Name -> Inst:salt.loader.lazy.LazyLoader | List:0
+26:56:Name -> Inst:salt.loader.lazy.LazyLoader
+26:69:Name -> Const:NoneType:None | U
+28:18:Call -> U
+28:18:Attribute -> U
+28:18:Name -> U
+29:7:Call -> ERR
+29:7:Name -> Func:builtins.isinstance
+29:18:Name -> U
+29:31:Name -> Class:builtins.dict
+30:24:Name -> U
+30:27:Name -> U
+30:42:Call -> U
+30:42:Attribute -> U
+30:42:Name -> U
+35:7:Call -> U
+35:7:Attribute -> Func:salt.utils.platform.spawning_platform
+35:7:Attribute -> Module:salt.utils.platform
+35:7:Attribute -> Module:salt.utils
+35:7:Name -> Module:salt
+40:18:Name -> U
+41:11:Call -> ERR
+41:11:Name -> Func:builtins.isinstance
+41:22:Name -> U
+41:30:Name -> Class:builtins.dict
+42:34:Call -> ERR
+42:34:Name -> Func:builtins.next
+42:39:Call -> ERR
+42:39:Name -> Func:builtins.iter
+42:44:Call -> U
+42:44:Attribute -> U
+42:44:Name -> U
+46:11:Name -> U | Const:NoneType:None
+46:58:Name -> U | Const:NoneType:None
+47:18:Call -> U
+47:18:Attribute -> BM:builtins.str.format
+47:36:Name -> U | Const:NoneType:None
+48:26:Name -> U
+49:16:Name -> U | Const:NoneType:None
+51:21:Name -> U
+52:11:Name -> U | Const:str:'Uninferable.start'
+52:18:Name -> Inst:salt.loader.lazy.LazyLoader
+53:25:Name -> Inst:salt.loader.lazy.LazyLoader
+53:33:Name -> U | Const:str:'Uninferable.start'
+54:15:Name -> Const:NoneType:None | U
+55:33:Attribute -> U
+55:33:Name -> U
+55:63:Name -> U
+57:33:Attribute -> U
+57:33:Name -> U
+58:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+58:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+58:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+58:36:Name -> Const:str:'Engine(Uninferable, name=Uninferable)' | Const:str:'Engine(Uninferable)'
+59:12:Call -> U
+59:12:Attribute -> U
+59:12:Name -> U
+60:16:Name -> Class:salt.engines.Engine
+61:22:Name -> U
+61:28:Name -> U | Const:str:'Uninferable.start'
+61:33:Name -> U | Const:NoneType:None
+61:46:Name -> Inst:salt.loader.lazy.LazyLoader | Const:NoneType:None
+61:53:Name -> Inst:salt.loader.lazy.LazyLoader | List:0 | Const:NoneType:None
+61:62:Name -> Const:NoneType:None | U
+62:21:Name -> Const:str:'Engine(Uninferable, name=Uninferable)' | Const:str:'Engine(Uninferable)'
+66:13:Attribute -> Class:salt.utils.process.SignalHandlingProcess
+66:13:Attribute -> Module:salt.utils.process
+66:13:Attribute -> Module:salt.utils
+66:13:Name -> Module:salt
+75:8:Call -> Const:NoneType:None
+75:8:Attribute -> BM:multiprocessing.process.BaseProcess.__init__ | BM:builtins.object.__init__
+75:8:Call -> Super
+75:8:Name -> Class:builtins.super
+75:27:Name -> Dict:0
+76:8:Name -> Inst:salt.engines.Engine
+76:20:Name -> U
+77:8:Name -> Inst:salt.engines.Engine
+77:22:Name -> U
+78:8:Name -> Inst:salt.engines.Engine
+78:19:Name -> U
+79:8:Name -> Inst:salt.engines.Engine
+79:21:Name -> U
+80:8:Name -> Inst:salt.engines.Engine
+80:23:Name -> U
+81:8:Name -> Inst:salt.engines.Engine
+81:21:Name -> U
+87:8:Name -> Inst:salt.engines.Engine
+87:21:Call -> Inst:salt.loader.lazy.LazyLoader
+87:21:Attribute -> Func:salt.loader.utils
+87:21:Attribute -> Module:salt.loader
+87:21:Name -> Module:salt
+87:39:Attribute -> U | Dict:1
+87:39:Name -> Inst:salt.engines.Engine
+87:56:Attribute -> U
+87:56:Name -> Inst:salt.engines.Engine
+88:11:Call -> U
+88:11:Attribute -> Func:salt.utils.platform.spawning_platform
+88:11:Attribute -> Module:salt.utils.platform
+88:11:Attribute -> Module:salt.utils
+88:11:Name -> Module:salt
+90:15:Attribute -> U | Dict:1
+90:15:Name -> Inst:salt.engines.Engine
+91:16:Name -> Inst:salt.engines.Engine
+91:31:Call -> Inst:salt.loader.lazy.LazyLoader
+91:31:Attribute -> Func:salt.loader.runner
+91:31:Attribute -> Module:salt.loader
+91:31:Name -> Module:salt
+91:50:Attribute -> U | Dict:1
+91:50:Name -> Inst:salt.engines.Engine
+91:67:Attribute -> Inst:salt.loader.lazy.LazyLoader
+91:67:Name -> Inst:salt.engines.Engine
+93:16:Name -> Inst:salt.engines.Engine
+94:12:Name -> Inst:salt.engines.Engine
+94:25:Call -> Inst:salt.loader.lazy.LazyLoader
+94:25:Attribute -> Func:salt.loader.minion_mods
+94:25:Attribute -> Module:salt.loader
+94:25:Name -> Module:salt
+95:16:Attribute -> U | Dict:1
+95:16:Name -> Inst:salt.engines.Engine
+95:33:Attribute -> Inst:salt.loader.lazy.LazyLoader
+95:33:Name -> Inst:salt.engines.Engine
+95:51:Attribute -> U
+95:51:Name -> Inst:salt.engines.Engine
+98:8:Name -> Inst:salt.engines.Engine
+98:22:Call -> Inst:salt.loader.lazy.LazyLoader
+98:22:Attribute -> Func:salt.loader.engines
+98:22:Attribute -> Module:salt.loader
+98:22:Name -> Module:salt
+99:12:Attribute -> U | Dict:1
+99:12:Name -> Inst:salt.engines.Engine
+99:23:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+99:23:Name -> Inst:salt.engines.Engine
+99:35:Attribute -> U | Inst:salt.loader.lazy.LazyLoader | List:0
+99:35:Name -> Inst:salt.engines.Engine
+99:49:Attribute -> Inst:salt.loader.lazy.LazyLoader
+99:49:Name -> Inst:salt.engines.Engine
+99:67:Attribute -> U
+99:67:Name -> Inst:salt.engines.Engine
+101:17:Attribute -> U
+101:17:Name -> Inst:salt.engines.Engine
+104:12:Call -> U
+104:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+104:12:Name -> Inst:salt.engines.Engine
+104:24:Attribute -> U
+104:24:Name -> Inst:salt.engines.Engine
+104:36:Name -> U
+105:15:Name -> Class:builtins.Exception
+106:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+106:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+106:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+108:16:Attribute -> Const:str:'Engine-' | U | BM:multiprocessing.process.BaseProcess.name
+108:16:Name -> Inst:salt.engines.Engine

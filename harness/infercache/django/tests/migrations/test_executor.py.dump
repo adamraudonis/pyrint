@@ -1,0 +1,1343 @@
+22:1:Call -> Inst:django.test.utils.modify_settings
+22:1:Name -> Class:django.test.utils.modify_settings
+23:20:Name -> Class:tests.migrations.test_base.MigrationTestBase
+38:5:Call -> Inst:django.test.utils.override_settings
+38:5:Name -> Class:django.test.utils.override_settings
+43:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+43:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+43:37:Name -> Inst:django.utils.connection.ConnectionProxy
+45:15:Call -> U | List:0
+45:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+45:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+46:8:Call -> Const:NoneType:None
+46:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+46:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+47:12:Name -> U | List:0
+49:17:Attribute -> Dict:0 | U
+49:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+49:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+49:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+50:17:Attribute -> Dict:0 | U
+50:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+50:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+50:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+54:8:Call -> Const:NoneType:None
+54:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+54:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+55:8:Call -> Const:NoneType:None
+55:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+55:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+57:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+57:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+57:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+59:8:Call -> Const:NoneType:None
+59:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+59:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+60:8:Call -> Const:NoneType:None
+60:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+60:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+62:8:Call -> Const:NoneType:None
+62:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+62:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+62:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+64:15:Call -> U | List:0
+64:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+64:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+65:8:Call -> Const:NoneType:None
+65:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+65:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+66:12:Name -> U | List:0
+68:17:Attribute -> Dict:0 | U
+68:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+68:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+68:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+69:17:Attribute -> Dict:0 | U
+69:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+69:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+69:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+72:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+72:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+72:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+74:8:Call -> Const:NoneType:None
+74:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+74:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+75:8:Call -> Const:NoneType:None
+75:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+75:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+77:5:Call -> Inst:django.test.utils.override_settings
+77:5:Name -> Class:django.test.utils.override_settings
+85:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+85:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+85:37:Name -> Inst:django.utils.connection.ConnectionProxy
+88:12:Name -> U
+88:27:Call -> U
+88:27:Attribute -> BM:django.db.migrations.graph.MigrationGraph.leaf_nodes | U
+88:27:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+88:27:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+88:27:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+88:65:Name -> U
+90:8:Call -> Const:NoneType:None
+90:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+90:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+90:25:Name -> U
+92:15:Call -> U | List:0
+92:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+92:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+93:8:Call -> Const:NoneType:None
+93:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+93:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+94:12:Name -> U | List:0
+97:20:Attribute -> Dict:0 | U
+97:20:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+97:20:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+97:20:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+103:8:Call -> Const:NoneType:None
+103:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+103:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+104:8:Call -> Const:NoneType:None
+104:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+104:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+106:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+106:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+106:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+108:8:Call -> Const:NoneType:None
+108:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+108:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+109:8:Call -> Const:NoneType:None
+109:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+109:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+111:8:Call -> Const:NoneType:None
+111:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+111:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+111:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+113:15:Call -> U | List:0
+113:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+113:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+114:8:Call -> Const:NoneType:None
+114:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+114:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+115:12:Name -> U | List:0
+117:17:Attribute -> Dict:0 | U
+117:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+117:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+117:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+120:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+120:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+120:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+122:8:Call -> Const:NoneType:None
+122:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+122:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+123:8:Call -> Const:NoneType:None
+123:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+123:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+125:5:Call -> Inst:django.test.utils.override_settings
+125:5:Name -> Class:django.test.utils.override_settings
+129:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+129:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+129:37:Name -> Inst:django.utils.connection.ConnectionProxy
+131:12:Call -> Const:NoneType:None
+131:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+131:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+132:12:Call -> Const:NoneType:None
+132:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+132:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+133:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+133:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+133:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+134:12:Call -> Const:NoneType:None
+134:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+134:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+135:12:Call -> Const:NoneType:None
+135:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+135:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+136:12:Call -> Const:NoneType:None
+136:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+136:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+136:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+138:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+138:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+138:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+139:12:Call -> Const:NoneType:None
+139:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+139:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+140:12:Call -> Const:NoneType:None
+140:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+140:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+143:23:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+143:23:Name -> Class:django.db.migrations.executor.MigrationExecutor
+143:41:Name -> Inst:django.utils.connection.ConnectionProxy
+144:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+144:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+144:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+145:12:Call -> Const:NoneType:None
+145:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+145:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+146:12:Call -> Const:NoneType:None
+146:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+146:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+148:5:Call -> Inst:django.test.utils.override_settings
+148:5:Name -> Class:django.test.utils.override_settings
+155:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+155:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+155:37:Name -> Inst:django.utils.connection.ConnectionProxy
+156:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+156:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+156:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+156:38:Name -> Class:builtins.RuntimeError
+157:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+157:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+157:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+158:8:Call -> Const:NoneType:None
+158:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+158:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+159:26:Attribute -> U
+159:26:Call -> Inst:django.db.migrations.state.ProjectState | U
+159:26:Attribute -> BM:django.db.migrations.loader.MigrationLoader.project_state
+159:26:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+159:26:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+162:20:Call -> U
+162:20:Attribute -> U
+162:20:Name -> U
+163:8:Call -> Const:NoneType:None
+163:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+163:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+163:24:Call -> U
+163:24:Attribute -> U
+163:24:Attribute -> U
+163:24:Name -> U
+164:8:Call -> Const:NoneType:None
+164:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+164:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+166:5:Call -> Func:django.test.testcases._deferredSkip.decorator
+166:5:Name -> Func:django.test.testcases.skipUnlessDBFeature
+167:5:Call -> Inst:django.test.utils.override_settings
+167:5:Name -> Class:django.test.utils.override_settings
+175:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+175:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+175:37:Name -> Inst:django.utils.connection.ConnectionProxy
+176:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+176:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+176:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+176:38:Name -> Class:builtins.RuntimeError
+177:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+177:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+177:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+178:26:Attribute -> U
+178:26:Call -> Inst:django.db.migrations.state.ProjectState | U
+178:26:Attribute -> BM:django.db.migrations.loader.MigrationLoader.project_state
+178:26:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+178:26:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+181:17:Call -> U
+181:17:Attribute -> U
+181:17:Name -> U
+182:8:Call -> Const:NoneType:None
+182:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+182:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+182:25:Call -> U
+182:25:Attribute -> U
+182:25:Attribute -> U
+182:25:Name -> U
+184:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+184:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+184:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+186:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+186:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+188:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+188:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+188:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+188:38:Name -> Class:builtins.RuntimeError
+189:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+189:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+189:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+190:8:Call -> Const:NoneType:None
+190:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+190:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+190:25:Call -> U
+190:25:Attribute -> U
+190:25:Attribute -> U
+190:25:Name -> U
+192:5:Call -> Inst:django.test.utils.override_settings
+192:5:Name -> Class:django.test.utils.override_settings
+209:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+209:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+209:37:Name -> Inst:django.utils.connection.ConnectionProxy
+210:15:Call -> U | List:0
+210:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+210:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+216:8:Call -> Const:NoneType:None
+216:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+216:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+217:12:Name -> U | List:0
+219:17:Attribute -> Dict:0 | U
+219:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+219:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+219:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+220:17:Attribute -> Dict:0 | U
+220:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+220:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+220:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+221:17:Attribute -> Dict:0 | U
+221:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+221:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+221:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+225:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+225:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+225:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+229:8:Call -> Const:NoneType:None
+229:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+229:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+229:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+231:15:Call -> U | List:0
+231:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+231:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+237:8:Call -> Const:NoneType:None
+237:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+237:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+237:25:Name -> U | List:0
+239:16:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+239:16:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+239:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+245:8:Call -> Const:NoneType:None
+245:8:Attribute -> BM:unittest.case.TestCase.assertIn
+245:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+245:46:Attribute -> Dict:0 | U
+245:46:Name -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+246:8:Call -> Const:NoneType:None
+246:8:Attribute -> BM:unittest.case.TestCase.assertIn
+246:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+246:48:Attribute -> Dict:0 | U
+246:48:Name -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+247:8:Call -> Const:NoneType:None
+247:8:Attribute -> BM:unittest.case.TestCase.assertIn
+247:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+247:54:Attribute -> Dict:0 | U
+247:54:Name -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+249:8:Call -> Const:NoneType:None
+249:8:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.record_unapplied
+249:8:Attribute -> Inst:django.db.migrations.recorder.MigrationRecorder
+249:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+250:8:Call -> Const:NoneType:None
+250:8:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.record_unapplied
+250:8:Attribute -> Inst:django.db.migrations.recorder.MigrationRecorder
+250:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+251:8:Call -> Const:NoneType:None
+251:8:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.record_unapplied
+251:8:Attribute -> Inst:django.db.migrations.recorder.MigrationRecorder
+251:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+253:5:Call -> Inst:django.test.utils.override_settings
+253:5:Name -> Class:django.test.utils.override_settings
+266:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+266:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+266:37:Name -> Inst:django.utils.connection.ConnectionProxy
+267:15:Call -> U | List:0
+267:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+267:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+268:8:Call -> Const:NoneType:None
+268:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+268:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+269:12:Name -> U | List:0
+271:17:Attribute -> Dict:0 | U
+271:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+271:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+271:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+272:17:Attribute -> Dict:0 | U
+272:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+272:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+272:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+275:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+275:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+275:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+275:31:Name -> U | List:0
+277:8:Call -> Const:NoneType:None
+277:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+277:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+277:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+278:8:Call -> Const:NoneType:None
+278:8:Attribute -> BM:unittest.case.TestCase.assertIn
+278:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+279:44:Attribute -> Const:NoneType:None | Dict:0 | U | Dict:0
+279:44:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+279:44:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+281:8:Call -> Const:NoneType:None
+281:8:Attribute -> BM:unittest.case.TestCase.assertIn
+281:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+281:53:Attribute -> Const:NoneType:None | Dict:0 | U | Dict:0
+281:53:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+281:53:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+282:8:Call -> Const:NoneType:None
+282:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+282:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+283:45:Attribute -> Const:NoneType:None | Dict:0 | U | Dict:0
+283:45:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+283:45:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+287:15:Call -> U | List:0
+287:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+287:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+298:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+298:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+298:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+298:38:Name -> Class:django.db.migrations.exceptions.InvalidMigrationPlan
+298:60:Name -> Const:str:'Migration plans with both forwards and 
+299:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+299:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+299:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+299:35:Name -> U | List:0
+300:8:Call -> Const:NoneType:None
+300:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+300:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+301:12:Attribute -> U
+301:12:Attribute -> U
+301:12:Name -> U
+303:17:Attribute -> Dict:0 | U
+303:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+303:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+303:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+304:17:Attribute -> Dict:0 | U
+304:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+304:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+304:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+305:17:Attribute -> Dict:0 | U
+305:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+305:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+305:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+309:8:Call -> Const:NoneType:None
+309:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+309:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+309:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+310:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+310:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+310:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+317:8:Call -> Const:NoneType:None
+317:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+317:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+318:8:Call -> Const:NoneType:None
+318:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+318:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+319:8:Call -> Const:NoneType:None
+319:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+319:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+321:5:Call -> Inst:django.test.utils.override_settings
+321:5:Name -> Class:django.test.utils.override_settings
+329:12:Name -> Dict:1
+329:29:Name -> Const:NoneType:None | U
+331:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+331:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+331:37:Name -> Inst:django.utils.connection.ConnectionProxy
+331:67:Name -> Func:tests.migrations.test_executor.ExecutorTests.test_soft_apply.fake_storer
+333:8:Call -> Const:NoneType:None
+333:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+333:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+334:8:Call -> Const:NoneType:None
+334:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+334:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+336:8:Call -> Const:NoneType:None
+336:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+336:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+337:12:Call -> U | List:0
+337:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+337:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+339:17:Attribute -> Dict:0 | U
+339:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+339:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+339:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+342:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+342:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+342:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+344:8:Call -> Const:NoneType:None
+344:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+344:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+345:8:Call -> Const:NoneType:None
+345:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+345:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+347:8:Call -> Const:NoneType:None
+347:8:Attribute -> BM:unittest.case.TestCase.assertIs
+347:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+347:22:Name -> Dict:1
+349:8:Call -> Const:NoneType:None
+349:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+349:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+349:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+351:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+351:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+351:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+353:8:Call -> Const:NoneType:None
+353:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+353:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+354:8:Call -> Const:NoneType:None
+354:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+354:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+356:8:Call -> Const:NoneType:None
+356:8:Attribute -> BM:unittest.case.TestCase.assertIs
+356:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+356:22:Name -> Dict:1
+359:8:Call -> Const:NoneType:None
+359:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+359:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+359:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+360:8:Call -> Const:NoneType:None
+360:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+360:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+361:12:Call -> U | List:0
+361:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+361:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+363:17:Attribute -> Dict:0 | U
+363:17:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+363:17:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+363:17:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+368:13:Call -> Inst:unittest.case._AssertRaisesContext
+368:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+368:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+368:31:Name -> Class:django.db.utils.DatabaseError
+369:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+369:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+369:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+373:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+373:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+373:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+374:8:Call -> Const:NoneType:None
+374:8:Attribute -> BM:unittest.case.TestCase.assertIs
+374:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+374:22:Name -> Dict:1
+376:8:Call -> Const:NoneType:None
+376:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+376:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+376:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+377:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+377:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+377:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+378:8:Call -> Const:NoneType:None
+378:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+378:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+379:8:Call -> Const:NoneType:None
+379:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+379:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+381:5:Call -> Inst:django.test.utils.override_settings
+381:5:Name -> Class:django.test.utils.override_settings
+393:13:Call -> Gen:django.test.utils.isolate_lru_cache
+393:13:Name -> Func:django.test.utils.isolate_lru_cache
+393:31:Attribute -> BM:django.apps.registry.Apps.get_swappable_settings_name
+393:31:Name -> Inst:django.apps.registry.Apps
+394:23:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+394:23:Name -> Class:django.db.migrations.executor.MigrationExecutor
+394:41:Name -> Inst:django.utils.connection.ConnectionProxy
+395:12:Call -> Const:NoneType:None
+395:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+395:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+396:12:Call -> Const:NoneType:None
+396:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+396:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+398:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+398:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+398:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+399:12:Call -> Const:NoneType:None
+399:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+399:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+400:12:Call -> Const:NoneType:None
+400:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+400:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+405:17:Call -> U
+405:17:Attribute -> U
+405:17:Name -> Inst:django.utils.connection.ConnectionProxy
+407:20:Name -> U
+408:29:Call -> U
+408:29:Attribute -> U
+408:29:Attribute -> U
+408:29:Name -> Inst:django.utils.connection.ConnectionProxy
+408:66:Name -> U
+409:23:Name -> U
+411:30:Attribute -> U
+411:30:Call -> Inst:django.db.migrations.state.ProjectState | U
+411:30:Attribute -> BM:django.db.migrations.loader.MigrationLoader.project_state
+411:30:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+411:30:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+414:12:Attribute -> U
+414:12:Call -> U
+414:12:Attribute -> BM:django.apps.registry.Apps.get_app_config
+414:12:Name -> Inst:django.apps.registry.Apps
+415:16:Call -> U
+415:16:Attribute -> U
+415:16:Name -> U
+418:21:Call -> Inst:unittest.mock._patch
+418:21:Attribute -> Func:unittest.mock._patch_object
+418:21:Attribute -> Func:unittest.mock.patch
+418:21:Name -> Module:unittest.mock
+419:20:Name -> Class:django.db.backends.base.introspection.BaseDatabaseIntrospection
+421:33:Name -> U
+423:32:Call -> U
+423:32:Attribute -> BM:django.db.migrations.loader.MigrationLoader.get_migration
+423:32:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+423:32:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+424:16:Call -> Const:NoneType:None
+424:16:Attribute -> BM:unittest.case.TestCase.assertIs
+424:16:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+424:30:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+424:30:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.detect_soft_applied
+424:30:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+424:65:Name -> U
+426:20:Attribute -> U
+426:20:Call -> U
+426:20:Attribute -> BM:django.apps.registry.Apps.get_app_config
+426:20:Name -> Inst:django.apps.registry.Apps
+428:16:Call -> Const:NoneType:None
+428:16:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+428:16:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+428:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+429:16:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+429:16:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+429:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+430:16:Call -> Const:NoneType:None
+430:16:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+430:16:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+431:16:Call -> Const:NoneType:None
+431:16:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+431:16:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+433:5:Call -> Inst:django.test.utils.override_settings
+433:5:Name -> Class:django.test.utils.override_settings
+453:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+453:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+453:37:Name -> Inst:django.utils.connection.ConnectionProxy
+456:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+456:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+456:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+457:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+457:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+457:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+458:21:Name -> List:4
+459:12:Call -> Const:NoneType:None
+459:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+459:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+459:35:Name -> Const:str:'migrations_project' | Const:str:'migrations_task' | Const:str:'migrations_project_tasks'
+461:20:Call -> U
+461:20:Attribute -> BM:django.db.migrations.loader.MigrationLoader.get_migration
+461:20:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+461:20:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+462:8:Call -> Const:NoneType:None
+462:8:Attribute -> BM:unittest.case.TestCase.assertIs
+462:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+462:22:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+462:22:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.detect_soft_applied
+462:22:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+462:57:Name -> U
+463:20:Call -> U
+463:20:Attribute -> BM:django.db.migrations.loader.MigrationLoader.get_migration
+463:20:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+463:20:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+464:8:Call -> Const:NoneType:None
+464:8:Attribute -> BM:unittest.case.TestCase.assertIs
+464:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+464:22:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+464:22:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.detect_soft_applied
+464:22:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+464:57:Name -> U
+468:8:Call -> Const:NoneType:None
+468:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+468:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+468:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+469:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+469:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+469:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+470:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+470:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+470:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+471:8:Call -> Const:NoneType:None
+471:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+471:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+471:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+472:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+472:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+472:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+474:20:Call -> U
+474:20:Attribute -> BM:django.db.migrations.loader.MigrationLoader.get_migration
+474:20:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+474:20:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+475:8:Call -> Const:NoneType:None
+475:8:Attribute -> BM:unittest.case.TestCase.assertIs
+475:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+475:22:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+475:22:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.detect_soft_applied
+475:22:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+475:57:Name -> U
+479:13:Call -> U
+479:13:Attribute -> U
+479:13:Name -> Inst:django.utils.connection.ConnectionProxy
+480:25:Name -> List:4
+481:16:Call -> U
+481:16:Attribute -> U
+481:16:Name -> U
+481:31:Attribute -> U
+481:31:Name -> U
+481:67:Name -> Const:str:'migrations_project_tasks' | Const:str:'migrations_task_projects'
+482:20:Call -> U
+482:20:Attribute -> BM:django.db.migrations.loader.MigrationLoader.get_migration
+482:20:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+482:20:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+483:8:Call -> Const:NoneType:None
+483:8:Attribute -> BM:unittest.case.TestCase.assertIs
+483:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+483:22:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+483:22:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.detect_soft_applied
+483:22:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+483:57:Name -> U
+486:13:Call -> U
+486:13:Attribute -> U
+486:13:Name -> Inst:django.utils.connection.ConnectionProxy
+487:25:Name -> List:4
+488:16:Call -> U
+488:16:Attribute -> U
+488:16:Name -> U
+488:31:Attribute -> U
+488:31:Name -> U
+488:67:Name -> Const:str:'migrations_project' | Const:str:'migrations_task'
+489:21:Name -> List:4
+490:12:Call -> Const:NoneType:None
+490:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+490:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+490:38:Name -> Const:str:'migrations_project' | Const:str:'migrations_task' | Const:str:'migrations_project_tasks' | Const:str:'migrations_task_projects'
+492:5:Call -> Inst:django.test.utils.override_settings
+492:5:Name -> Class:django.test.utils.override_settings
+506:23:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+506:23:Name -> Class:django.db.migrations.executor.MigrationExecutor
+506:41:Name -> Inst:django.utils.connection.ConnectionProxy
+507:12:Call -> Const:NoneType:None
+507:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+507:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+508:12:Call -> Const:NoneType:None
+508:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+508:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+509:12:Call -> Const:NoneType:None
+509:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+509:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+510:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+510:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+510:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+511:12:Call -> Const:NoneType:None
+511:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+511:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+513:12:Call -> Const:NoneType:None
+513:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+513:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+513:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+517:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+517:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+517:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+523:12:Call -> Const:NoneType:None
+523:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+523:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+524:12:Call -> Const:NoneType:None
+524:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+524:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+527:12:Call -> Const:NoneType:None
+527:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+527:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+527:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+530:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+530:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+530:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+537:12:Call -> Const:NoneType:None
+537:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+537:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+538:12:Call -> Const:NoneType:None
+538:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+538:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+539:12:Call -> Const:NoneType:None
+539:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+539:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+541:5:Call -> Inst:django.test.utils.override_settings
+541:5:Name -> Class:django.test.utils.override_settings
+555:23:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+555:23:Name -> Class:django.db.migrations.executor.MigrationExecutor
+555:41:Name -> Inst:django.utils.connection.ConnectionProxy
+556:12:Call -> Const:NoneType:None
+556:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+556:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+557:12:Call -> Const:NoneType:None
+557:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+557:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+558:12:Call -> Const:NoneType:None
+558:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+558:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+559:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+559:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+559:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+566:12:Call -> Const:NoneType:None
+566:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+566:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+567:12:Call -> Const:NoneType:None
+567:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+567:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+568:12:Call -> Const:NoneType:None
+568:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+568:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+570:12:Call -> Const:NoneType:None
+570:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+570:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+570:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+574:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+574:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+574:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+577:12:Call -> Const:NoneType:None
+577:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+577:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+577:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+580:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+580:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+580:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+581:12:Call -> Const:NoneType:None
+581:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+581:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+582:12:Call -> Const:NoneType:None
+582:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+582:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+583:12:Call -> Const:NoneType:None
+583:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+583:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+585:5:Call -> Inst:django.test.utils.override_settings
+585:5:Name -> Class:django.test.utils.override_settings
+596:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+596:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+596:37:Name -> Inst:django.utils.connection.ConnectionProxy
+597:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+597:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+597:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+603:8:Call -> Const:NoneType:None
+603:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+603:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+603:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+604:16:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+604:16:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+604:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+609:8:Call -> Const:NoneType:None
+609:8:Attribute -> BM:unittest.case.TestCase.assertIn
+609:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+609:31:Attribute -> ERR
+609:31:Attribute -> Dict:0 | U
+609:31:Name -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+610:8:Call -> Const:NoneType:None
+610:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+610:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+610:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+612:16:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+612:16:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+612:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+617:8:Call -> Const:NoneType:None
+617:8:Attribute -> BM:unittest.case.TestCase.assertIn
+617:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+617:31:Attribute -> ERR
+617:31:Attribute -> Dict:0 | U
+617:31:Name -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+618:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+618:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+618:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+624:5:Call -> Inst:django.test.utils.override_settings
+624:5:Name -> Class:django.test.utils.override_settings
+632:12:Call -> ERR
+632:12:Attribute -> BM:builtins.list.append
+632:12:Name -> List:0
+632:34:Name -> Tuple:0
+634:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+634:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+634:37:Name -> Inst:django.utils.connection.ConnectionProxy
+634:67:Name -> Func:tests.migrations.test_executor.ExecutorTests.test_process_callback.callback
+636:8:Call -> Const:NoneType:None
+636:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+636:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+637:8:Call -> Const:NoneType:None
+637:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+637:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+638:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+638:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+638:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+645:8:Call -> Const:NoneType:None
+645:8:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+645:8:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+645:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+647:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+647:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+647:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+653:8:Call -> Const:NoneType:None
+653:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+653:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+654:8:Call -> Const:NoneType:None
+654:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+654:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+656:21:Attribute -> Dict:0 | U
+656:21:Attribute -> Inst:django.db.migrations.graph.MigrationGraph | U
+656:21:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+656:21:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+660:28:Name -> Dict:0 | U
+661:30:Name -> Dict:0 | U
+662:28:Name -> Dict:0 | U
+663:30:Name -> Dict:0 | U
+666:30:Name -> Dict:0 | U
+667:32:Name -> Dict:0 | U
+668:30:Name -> Dict:0 | U
+669:32:Name -> Dict:0 | U
+671:8:Call -> Const:NoneType:None
+671:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+671:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+671:25:Name -> List:0
+671:41:Name -> List:12
+673:5:Call -> Inst:django.test.utils.override_settings
+673:5:Name -> Class:django.test.utils.override_settings
+681:23:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+681:23:Name -> Class:django.db.migrations.executor.MigrationExecutor
+681:41:Name -> Inst:django.utils.connection.ConnectionProxy
+682:12:Call -> Const:NoneType:None
+682:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+682:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+683:12:Call -> Const:NoneType:None
+683:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+683:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+685:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+685:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+685:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+691:12:Call -> Const:NoneType:None
+691:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+691:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+692:12:Call -> Const:NoneType:None
+692:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableExists
+692:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+694:12:Call -> Const:NoneType:None
+694:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+694:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+694:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+697:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+697:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+697:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+700:12:Call -> Const:NoneType:None
+700:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+700:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+700:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+704:17:Call -> U
+704:17:Attribute -> U
+704:17:Name -> Inst:django.utils.connection.ConnectionProxy
+705:16:Call -> U
+705:16:Attribute -> U
+705:16:Name -> U
+705:31:Attribute -> U
+705:31:Name -> U
+706:16:Call -> U
+706:16:Attribute -> U
+706:16:Name -> U
+706:31:Attribute -> U
+706:31:Name -> U
+707:12:Call -> Const:NoneType:None
+707:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+707:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+708:12:Call -> Const:NoneType:None
+708:12:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+708:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+709:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+709:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+709:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+711:5:Call -> Inst:django.test.utils.override_settings
+711:5:Name -> Class:django.test.utils.override_settings
+718:19:Call -> Inst:django.db.migrations.recorder.MigrationRecorder
+718:19:Name -> Class:django.db.migrations.recorder.MigrationRecorder
+718:37:Name -> Inst:django.utils.connection.ConnectionProxy
+721:8:Call -> Const:NoneType:None
+721:8:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.record_applied
+721:8:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+722:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+722:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+722:37:Name -> Inst:django.utils.connection.ConnectionProxy
+727:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+727:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+727:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+731:8:Call -> Const:NoneType:None
+731:8:Attribute -> BM:unittest.case.TestCase.assertIn
+731:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+733:12:Call -> U | Dict:0
+733:12:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.applied_migrations
+733:12:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+736:5:Call -> Inst:django.test.utils.override_settings
+736:5:Name -> Class:django.test.utils.override_settings
+744:19:Call -> Inst:django.db.migrations.recorder.MigrationRecorder
+744:19:Name -> Class:django.db.migrations.recorder.MigrationRecorder
+744:37:Name -> Inst:django.utils.connection.ConnectionProxy
+746:8:Call -> Const:NoneType:None
+746:8:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.record_applied
+746:8:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+747:8:Call -> Const:NoneType:None
+747:8:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.record_applied
+747:8:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+748:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+748:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+748:37:Name -> Inst:django.utils.connection.ConnectionProxy
+749:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+749:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+749:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+754:8:Call -> Const:NoneType:None
+754:8:Attribute -> BM:unittest.case.TestCase.assertIn
+754:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+756:12:Call -> U | Dict:0
+756:12:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.applied_migrations
+756:12:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+759:5:Call -> Inst:django.test.utils.override_settings
+759:5:Name -> Class:django.test.utils.override_settings
+763:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+763:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+763:37:Name -> Inst:django.utils.connection.ConnectionProxy
+764:8:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+764:8:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+764:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+766:12:Call -> Const:NoneType:None
+766:12:Attribute -> BM:unittest.case.TestCase.assertIn
+766:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+768:16:Call -> U | Dict:0
+768:16:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.applied_migrations
+768:16:Attribute -> Inst:django.db.migrations.recorder.MigrationRecorder
+768:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+771:12:Call -> Const:NoneType:None
+771:12:Attribute -> BM:django.db.migrations.loader.MigrationLoader.build_graph
+771:12:Attribute -> Inst:django.db.migrations.loader.MigrationLoader | Inst:tests.migrations.test_executor.FakeLoader
+771:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+772:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+772:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+772:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+773:12:Call -> Const:NoneType:None
+773:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+773:12:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+775:16:Call -> U | Dict:0
+775:16:Attribute -> BM:django.db.migrations.recorder.MigrationRecorder.applied_migrations
+775:16:Attribute -> Inst:django.db.migrations.recorder.MigrationRecorder
+775:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+780:5:Call -> Func:django.test.testcases._deferredSkip.decorator
+780:5:Name -> Func:django.test.testcases.skipUnlessDBFeature
+784:24:Attribute -> Class:django.db.migrations.migration.Migration
+784:24:Name -> Module:django.db.migrations
+786:16:Call -> Inst:django.db.migrations.operations.models.CreateModel
+786:16:Attribute -> Class:django.db.migrations.operations.models.CreateModel
+786:16:Name -> Module:django.db.migrations
+789:31:Call -> Inst:django.db.models.fields.AutoField
+789:31:Attribute -> Class:django.db.models.fields.AutoField
+789:31:Name -> Module:django.db.models
+794:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+794:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+794:37:Name -> Inst:django.utils.connection.ConnectionProxy
+795:13:Call -> Inst:unittest.mock._patch
+795:13:Attribute -> Func:unittest.mock.patch
+795:13:Name -> Module:unittest.mock
+798:12:Name -> U
+798:43:Call -> ExcInst:builtins.RuntimeError
+798:43:Name -> Class:builtins.RuntimeError
+799:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+799:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+799:17:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+799:42:Name -> Class:builtins.RuntimeError
+800:16:Call -> Inst:django.db.migrations.state.ProjectState | U
+800:16:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.apply_migration
+800:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+801:20:Call -> Inst:django.db.migrations.state.ProjectState
+801:20:Name -> Class:django.db.migrations.state.ProjectState
+802:20:Call -> Inst:tests.migrations.test_executor.ExecutorTests.test_migrations_applied_and_recorded_atomically.Migration
+802:20:Name -> Class:tests.migrations.test_executor.ExecutorTests.test_migrations_applied_and_recorded_atomically.Migration
+804:16:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+804:16:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+804:16:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+806:29:Call -> Inst:django.db.migrations.recorder.MigrationRecorder
+806:29:Name -> Class:django.db.migrations.recorder.MigrationRecorder
+806:47:Name -> Inst:django.utils.connection.ConnectionProxy
+807:8:Call -> Const:NoneType:None
+807:8:Attribute -> BM:unittest.case.TestCase.assertIs
+807:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+808:12:Call -> U
+808:12:Attribute -> U
+808:12:Call -> U
+808:12:Attribute -> U
+808:12:Attribute -> U
+808:12:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+814:8:Call -> Const:NoneType:None
+814:8:Attribute -> BM:tests.migrations.test_base.MigrationTestBase.assertTableNotExists
+814:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+821:22:Call -> ExcInst:django.db.utils.DatabaseError
+821:22:Name -> Class:django.db.utils.DatabaseError
+823:24:Attribute -> Class:django.db.migrations.migration.Migration
+823:24:Name -> Module:django.db.migrations
+827:16:Call -> U
+827:16:Attribute -> U
+827:16:Attribute -> U
+827:16:Name -> U
+827:50:Call -> Inst:tests.migrations.test_executor.ExecutorTests.test_migrations_not_applied_on_deferred_sql_failure.DeferredSQL
+827:50:Name -> Class:tests.migrations.test_executor.ExecutorTests.test_migrations_not_applied_on_deferred_sql_failure.DeferredSQL
+829:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+829:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+829:37:Name -> Inst:django.utils.connection.ConnectionProxy
+830:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+830:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+830:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+830:38:Name -> Class:django.db.utils.DatabaseError
+831:12:Call -> Inst:django.db.migrations.state.ProjectState | U
+831:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.apply_migration
+831:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+832:16:Call -> Inst:django.db.migrations.state.ProjectState
+832:16:Name -> Class:django.db.migrations.state.ProjectState
+833:16:Call -> Inst:tests.migrations.test_executor.ExecutorTests.test_migrations_not_applied_on_deferred_sql_failure.Migration
+833:16:Name -> Class:tests.migrations.test_executor.ExecutorTests.test_migrations_not_applied_on_deferred_sql_failure.Migration
+836:29:Call -> Inst:django.db.migrations.recorder.MigrationRecorder
+836:29:Name -> Class:django.db.migrations.recorder.MigrationRecorder
+836:47:Name -> Inst:django.utils.connection.ConnectionProxy
+837:8:Call -> Const:NoneType:None
+837:8:Attribute -> BM:unittest.case.TestCase.assertIs
+837:8:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+838:12:Call -> U
+838:12:Attribute -> U
+838:12:Call -> U
+838:12:Attribute -> U
+838:12:Attribute -> U
+838:12:Name -> Inst:django.db.migrations.recorder.MigrationRecorder
+845:5:Call -> Inst:unittest.mock._patch
+845:5:Attribute -> Func:unittest.mock._patch_object
+845:5:Attribute -> Func:unittest.mock.patch
+845:5:Name -> Module:unittest.mock
+845:23:Name -> Class:django.db.migrations.recorder.MigrationRecorder
+851:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+851:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+851:37:Name -> Inst:django.utils.connection.ConnectionProxy
+853:13:Call -> Inst:django.test.testcases._AssertNumQueriesContext
+853:13:Attribute -> BM:django.test.testcases.TransactionTestCase.assertNumQueries
+853:13:Name -> Inst:tests.migrations.test_executor.ExecutorTests
+854:12:Call -> Inst:django.db.migrations.state.ProjectState | Const:NoneType:None | U
+854:12:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migrate
+854:12:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+859:8:Name -> Inst:tests.migrations.test_executor.FakeLoader
+859:21:Name -> U
+860:8:Name -> Inst:tests.migrations.test_executor.FakeLoader
+860:34:Name -> U
+861:8:Name -> Inst:tests.migrations.test_executor.FakeLoader
+868:8:Name -> Inst:tests.migrations.test_executor.FakeMigration
+868:20:Name -> U
+871:25:Attribute -> U
+871:25:Name -> Inst:tests.migrations.test_executor.FakeMigration
+874:24:Name -> Class:django.test.testcases.SimpleTestCase
+887:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+887:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+889:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+889:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+891:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+891:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+893:16:Call -> Inst:django.db.migrations.graph.MigrationGraph
+893:16:Name -> Class:django.db.migrations.graph.MigrationGraph
+894:8:Call -> Const:NoneType:None
+894:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+894:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+894:23:Name -> Tuple:2
+894:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+895:8:Call -> Const:NoneType:None
+895:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+895:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+895:23:Name -> Tuple:2
+895:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+896:8:Call -> Const:NoneType:None
+896:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+896:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+896:23:Name -> Tuple:2
+896:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+897:8:Call -> Const:NoneType:None
+897:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+897:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+897:35:Name -> Tuple:2
+897:39:Name -> Tuple:2
+898:8:Call -> Const:NoneType:None
+898:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+898:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+898:35:Name -> Tuple:2
+898:39:Name -> Tuple:2
+900:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+900:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+901:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+901:26:Call -> Inst:tests.migrations.test_executor.FakeLoader
+901:26:Name -> Class:tests.migrations.test_executor.FakeLoader
+902:12:Name -> Inst:django.db.migrations.graph.MigrationGraph
+904:16:Name -> Tuple:2
+904:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+905:16:Name -> Tuple:2
+905:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+906:16:Name -> Tuple:2
+906:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+910:15:Call -> U | List:0
+910:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+910:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+910:40:Name -> Tuple:2
+912:8:Call -> Const:NoneType:None
+912:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+912:8:Name -> Inst:tests.migrations.test_executor.ExecutorUnitTests
+912:25:Name -> U | List:0
+912:33:Name -> Inst:tests.migrations.test_executor.FakeMigration
+923:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+923:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+925:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+925:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+927:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+927:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+929:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+929:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+931:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+931:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+933:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+933:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+935:16:Call -> Inst:django.db.migrations.graph.MigrationGraph
+935:16:Name -> Class:django.db.migrations.graph.MigrationGraph
+936:8:Call -> Const:NoneType:None
+936:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+936:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+936:23:Name -> Tuple:2
+936:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+937:8:Call -> Const:NoneType:None
+937:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+937:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+937:23:Name -> Tuple:2
+937:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+938:8:Call -> Const:NoneType:None
+938:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+938:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+938:23:Name -> Tuple:2
+938:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+939:8:Call -> Const:NoneType:None
+939:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+939:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+939:23:Name -> Tuple:2
+939:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+940:8:Call -> Const:NoneType:None
+940:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+940:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+940:23:Name -> Tuple:2
+940:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+941:8:Call -> Const:NoneType:None
+941:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+941:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+941:23:Name -> Tuple:2
+941:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+942:8:Call -> Const:NoneType:None
+942:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+942:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+942:35:Name -> Tuple:2
+942:39:Name -> Tuple:2
+943:8:Call -> Const:NoneType:None
+943:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+943:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+943:35:Name -> Tuple:2
+943:39:Name -> Tuple:2
+944:8:Call -> Const:NoneType:None
+944:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+944:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+944:35:Name -> Tuple:2
+944:39:Name -> Tuple:2
+945:8:Call -> Const:NoneType:None
+945:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+945:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+945:35:Name -> Tuple:2
+945:39:Name -> Tuple:2
+946:8:Call -> Const:NoneType:None
+946:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+946:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+946:35:Name -> Tuple:2
+946:39:Name -> Tuple:2
+947:8:Call -> Const:NoneType:None
+947:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+947:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+947:35:Name -> Tuple:2
+947:39:Name -> Tuple:2
+948:8:Call -> Const:NoneType:None
+948:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+948:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+948:35:Name -> Tuple:2
+948:39:Name -> Tuple:2
+950:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+950:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+951:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+951:26:Call -> Inst:tests.migrations.test_executor.FakeLoader
+951:26:Name -> Class:tests.migrations.test_executor.FakeLoader
+952:12:Name -> Inst:django.db.migrations.graph.MigrationGraph
+954:16:Name -> Tuple:2
+954:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+955:16:Name -> Tuple:2
+955:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+956:16:Name -> Tuple:2
+956:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+957:16:Name -> Tuple:2
+957:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+958:16:Name -> Tuple:2
+958:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+959:16:Name -> Tuple:2
+959:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+963:15:Call -> U | List:0
+963:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+963:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+963:40:Name -> Tuple:2
+965:33:Name -> Inst:tests.migrations.test_executor.FakeMigration
+965:42:Name -> Inst:tests.migrations.test_executor.FakeMigration
+965:51:Name -> Inst:tests.migrations.test_executor.FakeMigration
+965:60:Name -> Inst:tests.migrations.test_executor.FakeMigration
+966:16:Name -> Inst:tests.migrations.test_executor.FakeMigration
+966:34:Name -> List:4
+967:8:Call -> Const:NoneType:None
+967:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+967:8:Name -> Inst:tests.migrations.test_executor.ExecutorUnitTests
+967:25:Name -> U | List:0
+967:31:Name -> U
+980:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+980:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+982:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+982:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+984:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+984:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+986:18:Call -> Inst:tests.migrations.test_executor.FakeMigration
+986:18:Name -> Class:tests.migrations.test_executor.FakeMigration
+988:16:Call -> Inst:django.db.migrations.graph.MigrationGraph
+988:16:Name -> Class:django.db.migrations.graph.MigrationGraph
+989:8:Call -> Const:NoneType:None
+989:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+989:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+989:23:Name -> Tuple:2
+989:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+990:8:Call -> Const:NoneType:None
+990:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+990:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+990:23:Name -> Tuple:2
+990:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+991:8:Call -> Const:NoneType:None
+991:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+991:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+991:23:Name -> Tuple:2
+991:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+992:8:Call -> Const:NoneType:None
+992:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_node
+992:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+992:23:Name -> Tuple:2
+992:27:Name -> Inst:tests.migrations.test_executor.FakeMigration
+993:8:Call -> Const:NoneType:None
+993:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+993:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+993:35:Name -> Tuple:2
+993:39:Name -> Tuple:2
+994:8:Call -> Const:NoneType:None
+994:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+994:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+994:35:Name -> Tuple:2
+994:39:Name -> Tuple:2
+995:8:Call -> Const:NoneType:None
+995:8:Attribute -> BM:django.db.migrations.graph.MigrationGraph.add_dependency
+995:8:Name -> Inst:django.db.migrations.graph.MigrationGraph
+995:35:Name -> Tuple:2
+995:39:Name -> Tuple:2
+997:19:Call -> Inst:django.db.migrations.executor.MigrationExecutor
+997:19:Name -> Class:django.db.migrations.executor.MigrationExecutor
+998:8:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+998:26:Call -> Inst:tests.migrations.test_executor.FakeLoader
+998:26:Name -> Class:tests.migrations.test_executor.FakeLoader
+999:12:Name -> Inst:django.db.migrations.graph.MigrationGraph
+1001:16:Name -> Tuple:2
+1001:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+1002:16:Name -> Tuple:2
+1002:20:Name -> Inst:tests.migrations.test_executor.FakeMigration
+1006:15:Call -> U | List:0
+1006:15:Attribute -> BM:django.db.migrations.executor.MigrationExecutor.migration_plan
+1006:15:Name -> Inst:django.db.migrations.executor.MigrationExecutor
+1006:40:Name -> Tuple:2
+1008:8:Call -> Const:NoneType:None
+1008:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1008:8:Name -> Inst:tests.migrations.test_executor.ExecutorUnitTests
+1008:25:Name -> U | List:0

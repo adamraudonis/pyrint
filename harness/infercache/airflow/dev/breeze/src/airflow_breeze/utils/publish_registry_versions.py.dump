@@ -1,0 +1,189 @@
+47:22:Name -> Class:builtins.str
+47:30:Name -> Class:builtins.tuple
+47:36:Name -> Class:builtins.str
+47:41:Name -> Class:builtins.str
+59:11:Call -> U
+59:11:Attribute -> U
+59:11:Name -> U
+60:12:Call -> U
+60:12:Attribute -> U
+60:12:Name -> U
+61:13:Name -> U
+62:37:Call -> ERR
+62:37:Name -> Func:builtins.len
+62:41:Name -> U
+62:13:Call -> U
+62:13:Attribute -> U
+62:13:Name -> U
+63:11:Name -> U
+63:19:Name -> U | Const:str:''
+66:32:Name -> Class:builtins.str
+66:45:Name -> Class:builtins.str
+66:53:Name -> Class:builtins.list
+66:58:Name -> Class:builtins.str
+68:16:Call -> U
+68:16:Attribute -> U
+68:16:Name -> U
+69:10:Name -> Class:builtins.list
+69:15:Name -> Class:builtins.str
+70:16:Call -> U
+70:16:Attribute -> U
+70:16:Name -> U
+70:42:Name -> U
+70:57:Name -> U
+71:18:Call -> U
+71:18:Attribute -> U
+71:18:Name -> U
+72:19:Call -> U
+72:19:Attribute -> U
+72:19:Name -> U
+72:32:Call -> ERR
+72:32:Name -> Func:builtins.len
+72:36:Name -> U
+73:15:Name -> U
+74:16:Call -> ERR
+74:16:Attribute -> BM:builtins.list.append
+74:16:Name -> List:0
+74:28:Name -> U
+75:11:Name -> List:0
+78:33:Name -> Class:builtins.list
+78:38:Name -> Class:builtins.str
+78:47:Name -> Class:builtins.list
+78:52:Name -> Class:builtins.str
+81:15:Name -> Class:builtins.str
+83:23:Call -> U
+83:23:Name -> U
+83:31:Name -> U
+84:15:Name -> U
+85:23:Name -> U
+87:11:Call -> ERR
+87:11:Name -> Func:builtins.sorted
+87:18:Name -> U
+87:32:Name -> Func:dev.breeze.src.airflow_breeze.utils.publish_registry_versions.sort_versions_desc.key
+90:43:Name -> Class:builtins.str
+90:51:Name -> Class:builtins.str
+92:22:Name -> U
+93:15:Name -> Dict:2
+94:25:Name -> U
+95:15:Name -> Dict:2
+99:55:Name -> Class:builtins.str
+101:17:Call -> U | Const:str:'0'
+101:17:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+101:17:Attribute -> Dict:43 | Inst:os._Environ
+101:17:Name -> Module:os
+102:4:Call -> U
+102:4:Attribute -> U
+102:4:Name -> U
+103:23:Name -> U
+106:52:Name -> U | Const:str:'0'
+106:65:Call -> Inst:builtins.int
+106:65:Name -> Class:builtins.int
+106:69:Call -> ERR
+106:69:Attribute -> Func:time.time
+106:69:Name -> Module:time
+109:4:Call -> ERR
+109:4:Name -> Func:builtins.print
+109:58:Name -> U
+112:32:Name -> Class:builtins.str
+112:58:Name -> Class:pathlib.Path
+119:7:Name -> Const:NoneType:None | U
+120:30:Call -> Inst:pathlib.Path
+120:30:Name -> Class:pathlib.Path
+121:15:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+121:15:Attribute -> BM:pathlib.Path.exists
+121:15:Name -> Inst:pathlib.Path
+122:34:Call -> Inst:pathlib.Path
+122:34:Name -> Class:pathlib.Path
+124:11:Call -> U | Const:bool:False | Const:bool:False | Const:bool:True
+124:11:Attribute -> U | BM:pathlib.Path.exists
+124:11:Name -> Const:NoneType:None | U | Inst:pathlib.Path
+125:14:Call -> ExcInst:builtins.FileNotFoundError
+125:14:Name -> Class:builtins.FileNotFoundError
+125:63:Name -> Const:NoneType:None | U | Inst:pathlib.Path
+127:16:Call -> U
+127:16:Attribute -> Func:json.loads
+127:16:Name -> Module:json
+127:27:Call -> U
+127:27:Attribute -> U | BM:pathlib.Path.read_text
+127:27:Name -> Const:NoneType:None | U | Inst:pathlib.Path
+129:9:Call -> U
+129:9:Attribute -> U
+129:9:Name -> U
+130:21:Call -> Tuple:2
+130:21:Name -> Func:dev.breeze.src.airflow_breeze.utils.publish_registry_versions.parse_s3_url
+130:34:Name -> U
+132:4:Call -> ERR
+132:4:Name -> Func:builtins.print
+132:42:Call -> ERR
+132:42:Name -> Func:builtins.len
+132:46:Name -> U
+133:4:Call -> ERR
+133:4:Name -> Func:builtins.print
+133:22:Name -> U
+133:39:Name -> U | Const:str:''
+135:20:Name -> U
+136:14:Name -> U
+137:17:Name -> U
+138:57:Name -> U | Const:str:''
+138:29:Name -> U
+138:48:Name -> U
+138:82:Name -> U
+140:19:Call -> List:0
+140:19:Name -> Func:dev.breeze.src.airflow_breeze.utils.publish_registry_versions.list_s3_subdirs
+140:35:Name -> U
+140:39:Name -> U
+140:47:Name -> Const:str:'Uninferable/providers/Uninferable' | Const:str:'providers/Uninferable'
+141:19:Call -> U
+141:19:Name -> Func:dev.breeze.src.airflow_breeze.utils.publish_registry_versions.sort_versions_desc
+141:39:Name -> U
+141:50:Name -> List:0
+141:62:Name -> U
+141:68:Call -> U
+141:68:Attribute -> U
+141:68:Name -> U
+143:15:Name -> U
+144:24:Name -> U
+147:37:Name -> U
+147:47:Name -> U | List:1
+147:27:Name -> U
+147:61:Name -> U | List:1
+148:11:Name -> U
+148:35:Name -> U | List:1
+149:18:Call -> ExcInst:builtins.ValueError
+149:18:Name -> Class:builtins.ValueError
+149:47:Name -> U
+149:93:Name -> U
+150:28:Name -> U | List:1
+150:48:Name -> U
+152:61:Name -> U | Const:str:''
+152:15:Name -> U
+152:38:Name -> U
+152:90:Name -> U
+155:8:Call -> U
+155:8:Attribute -> U
+155:8:Name -> U
+156:19:Name -> U
+157:16:Name -> Const:str:'Uninferable/api/providers/Uninferable/v | Const:str:'api/providers/Uninferable/versions.json
+158:17:Call -> U
+158:17:Attribute -> Func:json.dumps
+158:17:Name -> Module:json
+158:28:Name -> Dict:2
+162:8:Call -> ERR
+162:8:Name -> Func:builtins.print
+162:19:Name -> U
+162:26:Call -> ERR
+162:26:Name -> Func:builtins.len
+162:30:Name -> U | List:1
+164:22:Call -> Const:str:'E26P75MP9PMULE' | Const:str:'E197MS0XRJC5F3' | Const:NoneType:None
+164:22:Name -> Func:dev.breeze.src.airflow_breeze.utils.publish_registry_versions.get_cloudfront_distribution
+164:50:Name -> U
+165:7:Name -> Const:str:'E26P75MP9PMULE' | Const:str:'E197MS0XRJC5F3' | Const:NoneType:None
+166:21:Call -> U
+166:21:Attribute -> U
+166:21:Name -> U
+167:8:Call -> Const:NoneType:None
+167:8:Name -> Func:dev.breeze.src.airflow_breeze.utils.publish_registry_versions.invalidate_cloudfront
+167:30:Name -> U
+167:42:Name -> Const:str:'E26P75MP9PMULE' | Const:str:'E197MS0XRJC5F3'
+169:4:Call -> ERR
+169:4:Name -> Func:builtins.print

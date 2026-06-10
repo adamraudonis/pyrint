@@ -1,0 +1,341 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'salt.modules.kmod' | Const:str:'__main__'
+20:11:Name -> ERR
+28:10:Call -> Set:0
+28:10:Name -> Class:builtins.set
+29:11:Call -> Set:0
+29:11:Name -> Class:builtins.set
+30:15:Name -> U
+31:8:Call -> ERR
+31:8:Attribute -> BM:builtins.set.add
+31:8:Name -> Set:0
+31:16:Name -> U
+32:15:Name -> U
+33:8:Call -> ERR
+33:8:Attribute -> BM:builtins.set.add
+33:8:Name -> Set:0
+33:17:Name -> U
+34:11:Name -> Set:0
+34:18:Name -> Set:0
+42:10:Call -> Set:0
+42:10:Name -> Class:builtins.set
+43:11:Call -> Set:0
+43:11:Name -> Class:builtins.set
+44:15:Name -> U
+45:8:Call -> ERR
+45:8:Attribute -> BM:builtins.set.add
+45:8:Name -> Set:0
+45:16:Name -> U
+46:15:Name -> U
+47:8:Call -> ERR
+47:8:Attribute -> BM:builtins.set.add
+47:8:Name -> Set:0
+47:17:Name -> U
+48:11:Name -> Set:0
+48:17:Name -> Set:0
+56:20:Name -> ERR
+68:7:Call -> U
+68:7:Attribute -> U
+68:7:Name -> U
+70:11:Call -> U
+70:11:Attribute -> U
+70:11:Name -> U
+78:11:Call -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+78:11:Name -> Func:salt.modules.kmod._get_modules_conf
+79:11:Call -> Const:bool:False | Const:bool:True | U
+79:11:Attribute -> Func:genericpath.exists | U
+79:11:Attribute -> Module:posixpath | Module:ntpath
+79:11:Name -> Module:os
+79:26:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+80:8:Call -> ERR
+80:8:Name -> ERR
+80:31:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+81:15:Call -> Const:bool:False | U
+81:15:Name -> Func:salt.modules.kmod._strip_module_name
+81:34:Name -> U
+82:11:Name -> Const:bool:False | U
+82:23:Name -> Const:bool:False | U
+82:35:Call -> U
+82:35:Name -> Func:salt.modules.kmod.mod_list
+82:53:Name -> Const:bool:False | U
+82:69:Call -> U
+82:69:Name -> Func:salt.modules.kmod.available
+83:15:Call -> Set:0
+83:15:Name -> Class:builtins.set
+84:17:Call -> U
+84:17:Attribute -> Func:re.escape
+84:17:Name -> Module:re
+84:27:Name -> U
+86:7:Call -> ERR
+86:7:Name -> ERR
+86:31:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+86:48:Name -> U
+87:8:Call -> ERR
+87:8:Name -> ERR
+87:35:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+87:41:Name -> U
+89:8:Call -> ERR
+89:8:Name -> ERR
+89:32:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+89:38:Name -> U
+90:12:Name -> Const:bool:False | U
+98:11:Call -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+98:11:Name -> Func:salt.modules.kmod._get_modules_conf
+99:15:Call -> Const:bool:False | U
+99:15:Name -> Func:salt.modules.kmod._strip_module_name
+99:34:Name -> U
+100:11:Name -> Const:bool:False | U
+100:23:Name -> Const:bool:False | U
+100:39:Call -> U
+100:39:Name -> Func:salt.modules.kmod.mod_list
+101:15:Call -> Set:0
+101:15:Name -> Class:builtins.set
+102:17:Call -> U
+102:17:Attribute -> Func:re.escape
+102:17:Name -> Module:re
+102:27:Name -> U
+103:7:Name -> U
+104:8:Call -> ERR
+104:8:Name -> ERR
+104:33:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+104:49:Name -> U
+106:8:Call -> ERR
+106:8:Name -> ERR
+106:29:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+106:45:Name -> U
+107:12:Name -> Const:bool:False | U
+114:11:Call -> Const:NoneType:None | U
+114:11:Attribute -> Func:salt.utils.path.which
+114:11:Attribute -> Module:salt.utils.path
+114:11:Attribute -> Module:salt.utils
+114:11:Name -> Module:salt
+114:33:Name -> U
+115:11:Name -> Const:NoneType:None | U
+116:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+116:14:Name -> Class:salt.exceptions.CommandExecutionError
+116:48:Name -> U
+117:11:Name -> Const:NoneType:None | U
+132:14:Call -> U
+132:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+132:14:Attribute -> Module:posixpath | Module:ntpath
+132:14:Name -> Module:os
+132:44:Call -> ERR
+132:44:Attribute -> Func:posix.uname
+132:44:Name -> Module:os
+134:20:Call -> U
+134:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+134:20:Attribute -> Module:posixpath | Module:ntpath
+134:20:Name -> Module:os
+134:33:Name -> U
+135:7:Call -> Const:bool:False | Const:bool:True | U
+135:7:Attribute -> Func:genericpath.exists | U
+135:7:Attribute -> Module:posixpath | Module:ntpath
+135:7:Name -> Module:os
+135:22:Name -> U
+136:13:Call -> U
+136:13:Attribute -> Func:salt.utils.files.fopen
+136:13:Attribute -> Module:salt.utils.files
+136:13:Attribute -> Module:salt.utils
+136:13:Name -> Module:salt
+136:36:Name -> U
+137:24:Name -> U
+139:16:Call -> ERR
+139:16:Attribute -> BM:builtins.list.append
+139:16:Name -> List:0
+139:27:Call -> U
+139:27:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+139:27:Attribute -> Module:posixpath | Module:ntpath
+139:27:Name -> Module:os
+139:44:Name -> U
+141:29:Call -> Gen:salt.utils.path.os_walk
+141:29:Attribute -> Func:salt.utils.path.os_walk
+141:29:Attribute -> Module:salt.utils.path
+141:29:Attribute -> Module:salt.utils
+141:29:Name -> Module:salt
+141:53:Name -> U
+142:19:Name -> U
+143:24:Name -> U
+144:16:Call -> ERR
+144:16:Attribute -> BM:builtins.list.append
+144:16:Name -> List:0
+144:27:Call -> U
+144:27:Attribute -> U
+144:27:Name -> U
+144:33:Call -> U
+144:33:Attribute -> U
+144:33:Name -> U
+146:17:Name -> ERR
+148:54:Call -> ERR
+148:54:Attribute -> Func:posix.uname
+148:54:Name -> Module:os
+149:33:Call -> Gen:salt.utils.path.os_walk
+149:33:Attribute -> Func:salt.utils.path.os_walk
+149:33:Attribute -> Module:salt.utils.path
+149:33:Attribute -> Module:salt.utils
+149:33:Name -> Module:salt
+149:57:Name -> U
+150:23:Name -> U
+151:28:Name -> U
+152:20:Call -> ERR
+152:20:Attribute -> BM:builtins.list.append
+152:20:Name -> List:0
+152:31:Call -> U
+152:31:Attribute -> U
+152:31:Name -> U
+152:37:Call -> U
+152:37:Attribute -> U
+152:37:Name -> U
+154:11:Call -> ERR
+154:11:Name -> Func:builtins.sorted
+154:18:Call -> List:0
+154:18:Name -> Class:builtins.list
+154:23:Name -> List:0
+167:11:Name -> U
+167:18:Call -> U
+167:18:Name -> Func:salt.modules.kmod.available
+181:16:Call -> ERR
+181:16:Attribute -> ERR
+181:16:Call -> ERR
+181:16:Name -> ERR
+181:36:Call -> Const:NoneType:None | U
+181:36:Name -> Func:salt.modules.kmod._which
+182:16:Call -> ERR
+182:16:Attribute -> ERR
+182:16:Name -> ERR
+183:15:Call -> ERR
+183:15:Name -> Func:builtins.len
+183:19:Name -> U
+185:11:Name -> U
+188:20:Name -> U
+189:22:Name -> U
+190:24:Name -> U
+192:11:Call -> ERR
+192:11:Name -> Func:builtins.len
+192:15:Name -> U
+193:12:Name -> Dict:3
+193:27:Call -> U
+193:27:Attribute -> U
+193:27:Name -> U
+195:12:Name -> Dict:3
+196:8:Call -> ERR
+196:8:Attribute -> BM:builtins.list.append
+196:8:Name -> List:0
+196:19:Name -> Dict:3
+197:11:Name -> List:0
+213:11:Call -> Set:0
+213:11:Name -> Class:builtins.set
+214:7:Name -> Const:bool:False | U
+215:15:Call -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+215:15:Name -> Func:salt.modules.kmod._get_modules_conf
+216:11:Call -> Const:bool:False | Const:bool:True | U
+216:11:Attribute -> Func:genericpath.exists | U
+216:11:Attribute -> Module:posixpath | Module:ntpath
+216:11:Name -> Module:os
+216:26:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+218:21:Call -> U
+218:21:Attribute -> Func:salt.utils.files.fopen
+218:21:Attribute -> Module:salt.utils.files
+218:21:Attribute -> Module:salt.utils
+218:21:Name -> Module:salt
+218:44:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+219:32:Name -> U
+220:31:Call -> U
+220:31:Attribute -> U
+220:31:Name -> U
+221:35:Call -> Const:bool:False | U
+221:35:Name -> Func:salt.modules.kmod._strip_module_name
+221:54:Name -> U
+222:31:Call -> U
+222:31:Attribute -> U
+222:31:Name -> U
+222:56:Name -> Const:bool:False | U
+223:28:Call -> ERR
+223:28:Attribute -> BM:builtins.set.add
+223:28:Name -> Set:0
+223:37:Name -> Const:bool:False | U
+224:19:Name -> Class:builtins.OSError
+225:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+225:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+225:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+225:75:Name -> Const:str:'/etc/modules-load.d/salt_managed.conf' | Const:str:'/etc/modules'
+227:19:Call -> List:0
+227:19:Name -> Func:salt.modules.kmod.lsmod
+228:12:Call -> ERR
+228:12:Attribute -> BM:builtins.set.add
+228:12:Name -> Set:0
+228:21:Name -> U
+229:11:Call -> ERR
+229:11:Name -> Func:builtins.sorted
+229:18:Call -> List:0
+229:18:Name -> Class:builtins.list
+229:23:Name -> Set:0
+248:15:Call -> List:0
+248:15:Name -> Func:salt.modules.kmod.lsmod
+249:10:Call -> ERR
+249:10:Name -> ERR
+250:8:Call -> U
+250:8:Attribute -> BM:builtins.str.format
+250:23:Call -> Const:NoneType:None | U
+250:23:Name -> Func:salt.modules.kmod._which
+250:43:Name -> U
+252:7:Name -> U
+253:20:Call -> List:0
+253:20:Name -> Func:salt.modules.kmod.lsmod
+254:15:Call -> U
+254:15:Name -> Func:salt.modules.kmod._new_mods
+254:25:Name -> List:0
+254:35:Name -> List:0
+255:23:Call -> Set:0
+255:23:Name -> Class:builtins.set
+256:11:Name -> Const:bool:False | U
+257:27:Call -> Set:0 | Set:1
+257:27:Name -> Func:salt.modules.kmod._set_persistent_module
+257:50:Name -> U
+258:15:Call -> ERR
+258:15:Name -> Func:builtins.sorted
+258:22:Call -> Inst:builtins.list
+258:22:Name -> Class:builtins.list
+258:27:Name -> U
+258:34:Name -> Set:0 | Set:0 | Set:1
+260:15:Call -> U
+260:15:Attribute -> BM:builtins.str.format
+260:52:Name -> U
+260:57:Name -> U
+273:11:Name -> U
+273:18:Call -> U
+273:18:Name -> Func:salt.modules.kmod.mod_list
+296:15:Call -> List:0
+296:15:Name -> Func:salt.modules.kmod.lsmod
+297:10:Call -> ERR
+297:10:Name -> ERR
+298:8:Call -> U
+298:8:Attribute -> BM:builtins.str.format
+298:23:Call -> Const:NoneType:None | U
+298:23:Name -> Func:salt.modules.kmod._which
+298:40:Name -> U
+300:7:Name -> U
+301:20:Call -> List:0
+301:20:Name -> Func:salt.modules.kmod.lsmod
+302:15:Call -> U
+302:15:Name -> Func:salt.modules.kmod._rm_mods
+302:24:Name -> List:0
+302:34:Name -> List:0
+303:23:Call -> Set:0
+303:23:Name -> Class:builtins.set
+304:11:Name -> Const:bool:False | U
+305:27:Call -> Set:0 | Set:1
+305:27:Name -> Func:salt.modules.kmod._remove_persistent_module
+305:53:Name -> U
+305:58:Name -> Const:bool:True | U
+306:15:Call -> ERR
+306:15:Name -> Func:builtins.sorted
+306:22:Call -> Inst:builtins.list
+306:22:Name -> Class:builtins.list
+306:27:Name -> U
+306:34:Name -> Set:0 | Set:0 | Set:1
+308:15:Call -> U
+308:15:Attribute -> BM:builtins.str.format
+308:53:Name -> U
+308:58:Name -> U

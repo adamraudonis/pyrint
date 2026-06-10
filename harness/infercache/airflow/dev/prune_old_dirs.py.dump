@@ -1,0 +1,127 @@
+44:10:Call -> U
+44:10:Name -> U
+47:9:Call -> Inst:argparse.ArgumentParser
+47:9:Attribute -> Class:argparse.ArgumentParser
+47:9:Name -> Module:argparse
+48:0:Call -> U
+48:0:Attribute -> BM:argparse._ActionsContainer.add_argument
+48:0:Name -> Inst:argparse.ArgumentParser
+49:0:Call -> U
+49:0:Attribute -> BM:argparse._ActionsContainer.add_argument
+49:0:Name -> Inst:argparse.ArgumentParser
+50:7:Call -> U | Inst:argparse.Namespace
+50:7:Attribute -> BM:argparse.ArgumentParser.parse_args
+50:7:Name -> Inst:argparse.ArgumentParser
+55:15:Call -> U
+55:15:Name -> U
+55:23:Name -> U
+56:11:Name -> U
+60:7:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+60:7:Attribute -> Func:posixpath.abspath | U
+60:7:Attribute -> Module:posixpath | Module:ntpath
+60:7:Name -> Module:os
+60:23:Attribute -> U
+60:23:Name -> U | Inst:argparse.Namespace
+61:11:Name -> U
+61:22:Call -> ERR
+61:22:Attribute -> Func:posix.listdir
+61:22:Name -> Module:os
+61:33:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+61:42:Call -> Const:bool:False | U
+61:42:Attribute -> Func:genericpath.isdir | U
+61:42:Attribute -> Module:posixpath | Module:ntpath
+61:42:Name -> Module:os
+61:56:Call -> U
+61:56:Attribute -> Func:posixpath.join | Func:ntpath.join
+61:56:Attribute -> Module:posixpath | Module:ntpath
+61:56:Name -> Module:os
+61:69:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+61:75:Name -> U
+63:12:Name -> U
+64:9:Call -> U | Const:NoneType:None
+64:9:Name -> Func:dev.prune_old_dirs.parse_version
+64:23:Name -> U
+65:7:Name -> U | Const:NoneType:None
+66:8:Call -> ERR
+66:8:Attribute -> BM:builtins.list.append
+66:8:Name -> List:0
+66:23:Name -> U
+66:27:Name -> U
+68:7:Name -> List:0
+69:50:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+70:4:Call -> U
+70:4:Attribute -> U
+70:4:Name -> U
+70:34:Name -> Const:str:"No version-like directories found in b' | Const:str:'No version-like directories found in .' | Const:str:'No version-like directories found in Un | Const:str:"No version-like directories found in b' | Const:str:'No version-like directories found in /'
+71:4:Call -> ERR
+71:4:Attribute -> Func:sys.exit
+71:4:Name -> Module:sys
+74:0:Call -> ERR
+74:0:Attribute -> BM:builtins.list.sort
+74:0:Name -> List:0
+74:26:Name -> U
+75:7:Name -> List:0
+76:13:Name -> U
+76:33:Name -> List:0
+78:18:Name -> U
+79:0:Call -> U
+79:0:Attribute -> U
+79:0:Name -> U
+79:14:Name -> Const:str:'Keeping: Uninferable'
+81:7:Name -> U
+83:4:Call -> U
+83:4:Attribute -> U
+83:4:Name -> U
+83:18:Name -> Const:str:'No older versions to remove.'
+84:4:Call -> ERR
+84:4:Attribute -> Func:sys.exit
+84:4:Name -> Module:sys
+86:12:Name -> U
+87:11:Call -> U
+87:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+87:11:Attribute -> Module:posixpath | Module:ntpath
+87:11:Name -> Module:os
+87:24:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+87:30:Name -> U
+88:24:Name -> U
+89:7:Attribute -> U
+89:7:Name -> U | Inst:argparse.Namespace
+90:30:Call -> Const:str:''
+90:30:Attribute -> BM:builtins.str.join
+90:39:Name -> List:3
+91:8:Call -> U
+91:8:Attribute -> U
+91:8:Name -> U
+91:31:Name -> Const:str:'Executing: '
+92:14:Call -> Inst:subprocess.CompletedProcess
+92:14:Attribute -> Func:subprocess.run
+92:14:Name -> Module:subprocess
+92:29:Name -> List:3
+93:11:Attribute -> U
+93:11:Name -> Inst:subprocess.CompletedProcess
+94:39:Name -> U
+94:47:Call -> U
+94:47:Attribute -> U
+94:47:Attribute -> Const:NoneType:None | U
+94:47:Name -> Inst:subprocess.CompletedProcess
+95:12:Call -> U
+95:12:Attribute -> U
+95:12:Name -> U
+95:39:Name -> Const:str:'svn rm failed for Uninferable: Uninfera
+96:12:Call -> ERR
+96:12:Attribute -> Func:sys.exit
+96:12:Name -> Module:sys
+96:21:Attribute -> U
+96:21:Name -> Inst:subprocess.CompletedProcess
+98:30:Name -> U
+99:12:Call -> U
+99:12:Attribute -> U
+99:12:Name -> U
+99:41:Name -> Const:str:'Removed: Uninferable'
+101:39:Call -> Const:str:''
+101:39:Attribute -> BM:builtins.str.join
+101:48:Name -> List:3
+102:8:Call -> U
+102:8:Attribute -> U
+102:8:Name -> U
+102:31:Name -> Const:str:'Dry-run: would run: '

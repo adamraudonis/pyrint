@@ -1,0 +1,254 @@
+17:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:10:Attribute -> Func:logging.getLogger
+17:10:Name -> Module:logging
+17:28:Name -> Const:str:'homeassistant.components.dialogflow' | Const:str:'__main__'
+21:16:Call -> U
+21:16:Attribute -> U
+21:16:Name -> U
+21:28:Name -> Const:str:'dialogflow'
+21:47:Attribute -> U
+21:47:Name -> U
+27:22:Name -> Class:homeassistant.exceptions.HomeAssistantError
+32:10:Name -> U
+32:37:Name -> Class:builtins.str
+32:51:Attribute -> U
+32:51:Name -> U
+33:5:Attribute -> U
+33:5:Name -> U
+35:20:Call -> U
+35:20:Attribute -> U
+35:20:Name -> U
+37:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+37:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+37:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+37:53:Name -> U
+40:25:Call -> Const:NoneType:None | Const:NoneType:None | Dict:3 | Dict:2
+40:25:Name -> Func:homeassistant.components.dialogflow.async_handle_message
+40:46:Name -> U
+40:52:Name -> U
+41:23:Name -> U
+41:45:Call -> U
+41:45:Attribute -> U
+41:45:Name -> U
+41:63:Name -> U
+43:11:Name -> Class:homeassistant.components.dialogflow.DialogFlowError
+44:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+44:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+44:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+44:24:Call -> Const:str:''
+44:24:Name -> Class:builtins.str
+44:28:Name -> ExcInst:homeassistant.components.dialogflow.DialogFlowError
+45:15:Call -> U
+45:15:Attribute -> U
+45:15:Name -> U
+45:33:Call -> Dict:3 | Dict:2
+45:33:Name -> Func:homeassistant.components.dialogflow.dialogflow_error_response
+45:59:Name -> U
+45:68:Call -> Const:str:''
+45:68:Name -> Class:builtins.str
+45:72:Name -> ExcInst:homeassistant.components.dialogflow.DialogFlowError
+47:11:Attribute -> Class:homeassistant.helpers.intent.UnknownIntent
+47:11:Name -> Module:homeassistant.helpers.intent
+48:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+48:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+48:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+48:24:Call -> Const:str:''
+48:24:Name -> Class:builtins.str
+48:28:Name -> ExcInst:homeassistant.helpers.intent.UnknownIntent
+49:15:Call -> U
+49:15:Attribute -> U
+49:15:Name -> U
+50:12:Call -> Dict:3 | Dict:2
+50:12:Name -> Func:homeassistant.components.dialogflow.dialogflow_error_response
+51:16:Name -> U
+55:11:Attribute -> Class:homeassistant.helpers.intent.InvalidSlotInfo
+55:11:Name -> Module:homeassistant.helpers.intent
+56:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+56:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+56:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+56:24:Call -> Const:str:''
+56:24:Name -> Class:builtins.str
+56:28:Name -> ExcInst:homeassistant.helpers.intent.InvalidSlotInfo
+57:15:Call -> U
+57:15:Attribute -> U
+57:15:Name -> U
+58:12:Call -> Dict:3 | Dict:2
+58:12:Name -> Func:homeassistant.components.dialogflow.dialogflow_error_response
+59:16:Name -> U
+63:11:Attribute -> Class:homeassistant.helpers.intent.IntentError
+63:11:Name -> Module:homeassistant.helpers.intent
+64:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+64:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+64:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+64:24:Call -> Const:str:''
+64:24:Name -> Class:builtins.str
+64:28:Name -> ExcInst:homeassistant.helpers.intent.IntentError
+65:15:Call -> U
+65:15:Attribute -> U
+65:15:Name -> U
+66:12:Call -> Dict:3 | Dict:2
+66:12:Name -> Func:homeassistant.components.dialogflow.dialogflow_error_response
+66:38:Name -> U
+70:34:Name -> U
+70:56:Name -> U
+70:72:Name -> Class:builtins.bool
+72:4:Call -> Const:NoneType:None
+72:4:Attribute -> Func:homeassistant.components.webhook.async_register
+72:4:Name -> Module:homeassistant.components.webhook
+73:8:Name -> U
+73:14:Name -> Const:str:'dialogflow'
+73:36:Attribute -> U
+73:36:Name -> U
+73:47:Name -> Const:str:'webhook_id'
+73:65:Name -> Func:homeassistant.components.dialogflow.handle_webhook
+78:35:Name -> U
+78:57:Name -> U
+78:73:Name -> Class:builtins.bool
+80:4:Call -> Const:NoneType:None
+80:4:Attribute -> Func:homeassistant.components.webhook.async_unregister
+80:4:Name -> Module:homeassistant.components.webhook
+80:29:Name -> U
+80:35:Attribute -> U
+80:35:Name -> U
+80:46:Name -> Const:str:'webhook_id'
+84:21:Attribute -> Func:homeassistant.helpers.config_entry_flow.webhook_async_remove_entry
+84:21:Name -> Module:homeassistant.helpers.config_entry_flow
+89:18:Call -> Const:int:1 | Const:int:2
+89:18:Name -> Func:homeassistant.components.dialogflow.get_api_version
+89:34:Name -> U
+90:7:Name -> Const:int:1 | Const:int:2
+90:22:Name -> Const:int:1
+91:21:Name -> U
+92:9:Name -> Const:int:1 | Const:int:2
+92:24:Name -> Const:int:2
+93:21:Name -> U
+94:26:Call -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+94:26:Name -> Class:homeassistant.components.dialogflow.DialogflowResponse
+94:45:Name -> U
+94:57:Name -> Const:int:1 | Const:int:2
+95:4:Call -> Const:NoneType:None
+95:4:Attribute -> BM:homeassistant.components.dialogflow.DialogflowResponse.add_speech
+95:4:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+95:35:Name -> U
+96:11:Call -> Dict:3 | Dict:2
+96:11:Attribute -> BM:homeassistant.components.dialogflow.DialogflowResponse.as_dict
+96:11:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+101:7:Call -> U
+101:7:Attribute -> U
+101:7:Name -> U
+102:15:Name -> Const:int:1
+103:7:Call -> U
+103:7:Attribute -> U
+103:7:Name -> U
+104:15:Name -> Const:int:2
+106:10:Call -> ExcInst:builtins.ValueError
+106:10:Name -> Class:builtins.ValueError
+106:68:Name -> U
+111:19:Call -> Const:int:1 | Const:int:2
+111:19:Name -> Func:homeassistant.components.dialogflow.get_api_version
+111:35:Name -> U
+112:7:Name -> Const:int:1 | Const:int:2
+112:23:Name -> Const:int:1
+113:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+113:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+113:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+117:14:Call -> U
+117:14:Attribute -> U
+117:14:Name -> U
+118:11:Call -> U
+118:11:Attribute -> U
+118:11:Name -> U
+121:9:Name -> Const:int:1 | Const:int:2
+121:25:Name -> Const:int:2
+122:14:Call -> U
+122:14:Attribute -> U
+122:14:Name -> U
+123:11:Call -> U
+123:11:Attribute -> U
+123:11:Name -> U
+126:13:Call -> U
+126:13:Attribute -> U
+126:13:Name -> U
+127:17:Call -> U
+127:17:Attribute -> U
+127:17:Call -> U
+127:17:Attribute -> U
+127:17:Name -> U
+128:4:Name -> U
+128:37:Name -> U
+129:26:Call -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+129:26:Name -> Class:homeassistant.components.dialogflow.DialogflowResponse
+129:45:Name -> U
+129:57:Name -> Const:int:1 | Const:int:2
+131:7:Name -> U
+132:14:Call -> ExcInst:homeassistant.components.dialogflow.DialogFlowError
+132:14:Name -> Class:homeassistant.components.dialogflow.DialogFlowError
+136:28:Call -> U
+136:28:Attribute -> Func:homeassistant.helpers.intent.async_handle
+136:28:Name -> Module:homeassistant.helpers.intent
+137:8:Name -> U
+138:8:Name -> Const:str:'dialogflow'
+139:8:Name -> U
+140:9:Name -> U
+140:24:Name -> U
+140:49:Call -> U
+140:49:Attribute -> U
+140:49:Name -> U
+143:18:Attribute -> U
+143:18:Name -> U
+144:8:Call -> Const:NoneType:None
+144:8:Attribute -> BM:homeassistant.components.dialogflow.DialogflowResponse.add_speech
+144:8:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+144:39:Attribute -> U
+144:39:Name -> U
+146:11:Call -> Dict:3 | Dict:2
+146:11:Attribute -> BM:homeassistant.components.dialogflow.DialogflowResponse.as_dict
+146:11:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+154:8:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+155:8:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+156:8:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+156:27:Name -> U
+158:26:Call -> U
+158:26:Attribute -> U
+158:26:Name -> U
+159:30:Call -> U
+159:30:Attribute -> U
+159:30:Call -> U
+159:30:Attribute -> U
+159:30:Name -> U
+160:12:Attribute -> Dict:0
+160:12:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+160:28:Name -> U
+160:47:Name -> U
+164:15:Attribute -> Const:NoneType:None | U
+164:15:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+166:11:Call -> ERR
+166:11:Name -> Func:builtins.isinstance
+166:22:Name -> U
+166:28:Attribute -> U
+166:28:Name -> U
+167:19:Call -> U
+167:19:Attribute -> U
+167:19:Name -> U
+167:37:Attribute -> Dict:0
+167:37:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+169:8:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+169:22:Name -> U
+173:11:Attribute -> U
+173:11:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+173:31:Name -> Const:int:1
+174:30:Attribute -> Const:NoneType:None | U
+174:30:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+174:58:Attribute -> Const:NoneType:None | U
+174:58:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+174:81:Name -> Const:str:'Home Assistant Dialogflow'
+176:11:Attribute -> U
+176:11:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+176:31:Name -> Const:int:2
+177:39:Attribute -> Const:NoneType:None | U
+177:39:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse
+177:62:Name -> Const:str:'Home Assistant Dialogflow'
+179:14:Call -> ExcInst:builtins.ValueError
+179:14:Name -> Class:builtins.ValueError
+179:49:Attribute -> U
+179:49:Name -> Inst:homeassistant.components.dialogflow.DialogflowResponse

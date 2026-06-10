@@ -1,0 +1,364 @@
+21:17:Name -> Const:str:'enc:plaintext'
+21:35:Name -> Const:str:'enc:fernet'
+21:50:Name -> Const:str:'enc:tink'
+23:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+23:9:Attribute -> Func:logging.getLogger
+23:9:Name -> Module:logging
+23:27:Name -> Const:str:'src.sentry.db.models.fields.encryption. | Const:str:'__main__'
+26:25:Name -> Class:typing.TypedDict
+27:12:Name -> Class:builtins.str
+28:13:Name -> Class:_collections_abc.Callable
+28:23:Name -> Class:typing.Any
+28:29:Name -> Class:builtins.str
+29:13:Name -> Class:_collections_abc.Callable
+29:23:Name -> Class:builtins.str
+29:29:Name -> Class:builtins.bytes
+32:25:Name -> Func:typing.Literal
+32:48:Name -> Func:typing.Literal
+32:68:Name -> Func:typing.Literal
+35:21:Name -> U
+60:8:Call -> Const:NoneType:None
+60:8:Attribute -> BM:builtins.object.__init__
+60:8:Call -> Super
+60:8:Name -> Class:builtins.super
+60:26:Name -> Tuple:0
+60:34:Name -> Dict:0
+64:8:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+66:8:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+66:35:Name -> Class:builtins.dict
+66:40:Name -> U
+66:59:Name -> Class:src.sentry.db.models.fields.encryption._base._EncryptionHandler
+68:26:Name -> Const:str:'enc:plaintext'
+69:27:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._encrypt_plaintext
+69:27:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+70:27:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._decrypt_plaintext
+70:27:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+73:26:Name -> Const:str:'enc:fernet'
+74:27:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._encrypt_fernet
+74:27:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+75:27:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._decrypt_fernet
+75:27:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+78:26:Name -> Const:str:'enc:tink'
+79:27:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._encrypt_keysets
+79:27:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+80:27:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._decrypt_keysets
+80:27:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+84:39:Name -> Class:builtins.type
+84:51:Name -> Class:builtins.str
+84:70:Name -> Class:builtins.bool
+91:8:Call -> ERR
+91:8:Attribute -> ERR
+91:8:Call -> Super
+91:8:Name -> Class:builtins.super
+91:36:Name -> U
+91:41:Name -> U
+91:60:Name -> Const:bool:False | U
+92:8:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+92:27:Attribute -> U
+92:27:Name -> U
+94:5:Attribute -> U
+94:5:Name -> U
+96:30:Name -> Class:builtins.bytes
+96:45:Name -> Class:builtins.str
+96:58:Name -> Class:builtins.str
+97:9:Name -> Class:builtins.str
+108:23:Call -> U
+108:23:Attribute -> U
+108:23:Call -> U
+108:23:Attribute -> Func:base64.b64encode
+108:23:Name -> Module:base64
+108:40:Name -> U
+109:11:Name -> Const:NoneType:None | U
+110:22:Name -> U
+110:31:Name -> U
+110:40:Name -> U
+112:22:Name -> U
+112:31:Name -> U
+114:5:Attribute -> U
+114:5:Name -> U
+115:36:Name -> Class:typing.Any
+115:44:Name -> Class:typing.Any
+117:16:Call -> ERR
+117:16:Attribute -> ERR
+117:16:Call -> Super
+117:16:Name -> Class:builtins.super
+117:39:Name -> U
+118:11:Name -> U
+119:19:Name -> U
+124:28:Call -> U
+124:28:Attribute -> U
+124:28:Name -> U
+126:11:Name -> U
+126:36:Attribute -> Dict:3
+126:36:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+127:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+127:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+127:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+128:75:Name -> U
+132:18:Attribute -> Dict:3
+132:18:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+132:44:Name -> U | Const:str:'plaintext'
+135:22:Name -> U | Const:str:'plaintext'
+136:26:Attribute -> Const:str:'EncryptedField'
+136:26:Attribute -> Class:src.sentry.db.models.fields.encryption._base.EncryptedField
+136:26:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+137:26:Attribute -> Const:str:'unknown' | U
+137:26:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+141:17:Call -> U
+141:17:Attribute -> U
+141:17:Name -> U
+141:81:Name -> Dict:3
+142:25:Call -> U
+142:25:Name -> U
+142:44:Name -> U
+144:12:Call -> U
+144:12:Attribute -> U
+144:12:Name -> U
+144:69:Name -> Dict:3
+145:19:Name -> U
+146:15:Name -> Class:builtins.Exception
+147:12:Call -> U
+147:12:Attribute -> U
+147:12:Name -> U
+147:69:Name -> Dict:3
+150:5:Attribute -> U
+150:5:Name -> U
+151:35:Name -> Class:typing.Any
+151:52:Name -> Class:typing.Any
+151:69:Name -> Class:typing.Any
+151:77:Name -> Class:builtins.bytes
+151:85:Name -> Class:builtins.str
+152:15:Call -> U
+152:15:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField.to_python
+152:15:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+152:30:Name -> U
+154:5:Attribute -> U
+154:5:Name -> U
+155:31:Name -> Class:typing.Any
+155:39:Name -> Class:typing.Any
+157:11:Name -> U
+158:19:Name -> U
+161:11:Call -> ERR
+161:11:Name -> Func:builtins.isinstance
+161:22:Name -> U
+161:29:Name -> Class:builtins.str
+161:42:Call -> Const:bool:True | Const:bool:False
+161:42:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._is_encrypted_format
+161:42:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+161:68:Name -> U
+162:19:Name -> U
+165:11:Call -> ERR
+165:11:Name -> Func:builtins.isinstance
+165:22:Name -> U
+165:29:Name -> Class:builtins.str
+165:38:Call -> Const:bool:True | Const:bool:False
+165:38:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._is_encrypted_format
+165:38:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+165:64:Name -> U
+166:19:Call -> U
+166:19:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._decrypt_with_fallback
+166:19:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+166:47:Name -> U
+169:15:Call -> ERR
+169:15:Attribute -> ERR
+169:15:Call -> Super
+169:15:Name -> Class:builtins.super
+169:33:Name -> U
+171:42:Name -> Class:builtins.str
+171:50:Name -> Class:builtins.bool
+180:22:Name -> Set:3
+181:15:Call -> U
+181:15:Attribute -> U
+181:15:Name -> U
+181:32:Name -> U
+185:5:Attribute -> U
+185:5:Name -> U
+186:41:Name -> Class:typing.Any
+186:49:Name -> Class:builtins.bytes
+187:11:Call -> ERR
+187:11:Name -> Func:builtins.isinstance
+187:22:Name -> U
+187:29:Name -> Class:builtins.str
+188:19:Call -> U
+188:19:Attribute -> U
+188:19:Name -> U
+189:13:Call -> ERR
+189:13:Name -> Func:builtins.isinstance
+189:24:Name -> U
+189:31:Name -> Class:builtins.bytes
+190:19:Name -> U
+192:19:Call -> Const:bytes:b''
+192:19:Attribute -> BM:builtins.str.encode
+192:19:Call -> Const:str:''
+192:19:Name -> Class:builtins.str
+192:23:Name -> U
+194:5:Attribute -> U
+194:5:Name -> U
+195:40:Name -> Class:typing.Any
+195:48:Name -> Class:builtins.str
+197:22:Call -> U | Const:bytes:b''
+197:22:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._get_value_in_bytes
+197:22:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+197:47:Name -> U
+198:15:Call -> Const:str:'enc:plaintext:Uninferable:Uninferable' | Const:str:'enc:plaintext:Uninferable'
+198:15:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._format_encrypted_value
+198:15:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+198:44:Name -> U | Const:bytes:b''
+198:57:Name -> Const:str:'enc:plaintext'
+200:5:Attribute -> U
+200:5:Name -> U
+201:40:Name -> Class:builtins.str
+201:48:Name -> Class:builtins.bytes
+208:19:Call -> U
+208:19:Attribute -> Func:base64.b64decode
+208:19:Name -> Module:base64
+208:36:Name -> U
+209:19:Name -> U
+210:15:Name -> Class:builtins.Exception
+211:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+211:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+211:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+211:63:Name -> ExcInst:builtins.Exception
+212:18:Call -> ExcInst:builtins.ValueError
+212:18:Name -> Class:builtins.ValueError
+212:61:Name -> ExcInst:builtins.Exception
+214:5:Attribute -> U
+214:5:Name -> U
+215:37:Name -> Class:typing.Any
+215:45:Name -> Class:builtins.str
+222:24:Call -> U
+222:24:Attribute -> U
+222:24:Name -> U
+223:26:Call -> U | Const:bytes:b''
+223:26:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._get_value_in_bytes
+223:26:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+223:51:Name -> U
+224:29:Call -> U
+224:29:Attribute -> U
+224:29:Name -> U
+224:39:Name -> U | Const:bytes:b''
+225:19:Call -> Const:str:'enc:fernet:Uninferable:Uninferable' | Const:str:'enc:fernet:Uninferable'
+225:19:Attribute -> BM:src.sentry.db.models.fields.encryption._base.EncryptedField._format_encrypted_value
+225:19:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+225:48:Name -> U
+225:64:Name -> Const:str:'enc:fernet'
+225:79:Name -> U
+226:15:Name -> Class:builtins.Exception
+227:12:Call -> U
+227:12:Attribute -> U
+227:12:Name -> U
+227:41:Name -> ExcInst:builtins.Exception
+230:5:Attribute -> U
+230:5:Name -> U
+231:37:Name -> Class:builtins.str
+231:45:Name -> Class:builtins.bytes
+237:16:Call -> U
+237:16:Attribute -> U
+237:16:Name -> U
+238:11:Call -> ERR
+238:11:Name -> Func:builtins.len
+238:15:Name -> U
+239:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+239:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+239:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+240:18:Call -> ExcInst:builtins.ValueError
+240:18:Name -> Class:builtins.ValueError
+242:31:Name -> U
+242:41:Name -> U
+246:29:Call -> U
+246:29:Attribute -> Func:base64.b64decode
+246:29:Name -> Module:base64
+246:46:Name -> U
+247:15:Name -> Class:builtins.Exception
+248:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+248:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+248:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+248:63:Name -> ExcInst:builtins.Exception
+249:18:Call -> ExcInst:builtins.ValueError
+249:18:Name -> Class:builtins.ValueError
+249:61:Name -> ExcInst:builtins.Exception
+252:16:Call -> U
+252:16:Attribute -> U
+252:16:Name -> U
+252:53:Name -> U
+253:24:Call -> U
+253:24:Attribute -> U
+253:24:Name -> U
+253:34:Name -> U
+254:19:Name -> U
+255:15:Name -> U
+262:38:Name -> Class:typing.Any
+262:46:Name -> Class:builtins.str
+264:14:Call -> ExcInst:builtins.NotImplementedError
+264:14:Name -> Class:builtins.NotImplementedError
+266:38:Name -> Class:builtins.str
+266:46:Name -> Class:builtins.bytes
+271:14:Call -> ExcInst:builtins.NotImplementedError
+271:14:Name -> Class:builtins.NotImplementedError
+273:5:Attribute -> U
+273:5:Name -> U
+274:44:Name -> Class:builtins.str
+274:52:Name -> Class:builtins.bytes
+274:60:Name -> Class:builtins.str
+281:28:Name -> Set:3
+282:15:Call -> U
+282:15:Attribute -> U
+282:15:Name -> U
+282:32:Name -> U
+283:25:Name -> U
+285:28:Name -> U
+285:34:Call -> ERR
+285:34:Name -> Func:builtins.len
+285:38:Name -> U
+288:15:Name -> Const:NoneType:None | U
+290:19:Name -> U
+293:36:Call -> DictItems
+293:36:Attribute -> BM:builtins.dict.items
+293:36:Attribute -> Dict:3
+293:36:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+294:15:Name -> Dict:3 | Dict:3 | Dict:3
+294:36:Name -> Const:NoneType:None | U
+296:30:Name -> Const:str:'plaintext' | Const:str:'fernet' | Const:str:'keysets'
+297:34:Attribute -> Const:str:'EncryptedField'
+297:34:Attribute -> Class:src.sentry.db.models.fields.encryption._base.EncryptedField
+297:34:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+298:34:Attribute -> Const:str:'unknown' | U
+298:34:Name -> Inst:src.sentry.db.models.fields.encryption._base.EncryptedField
+299:30:Name -> Const:NoneType:None | U
+303:25:Call -> U
+303:25:Attribute -> U
+303:25:Name -> U
+303:89:Name -> Dict:4
+304:33:Call -> U
+304:33:Name -> Dict:3 | Dict:3 | Dict:3
+304:52:Name -> U
+306:20:Call -> U
+306:20:Attribute -> U
+306:20:Name -> U
+307:68:Name -> Dict:4
+309:27:Name -> U
+310:23:Name -> U
+313:20:Call -> U
+313:20:Attribute -> U
+313:20:Name -> U
+314:68:Name -> Dict:4
+316:27:Name -> U
+317:23:Name -> Class:builtins.Exception
+318:20:Call -> U
+318:20:Attribute -> U
+318:20:Name -> U
+318:49:Name -> ExcInst:builtins.Exception
+319:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+319:20:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+319:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+319:66:Name -> Const:str:'plaintext' | Const:str:'fernet' | Const:str:'keysets'
+320:20:Call -> U
+320:20:Attribute -> U
+320:20:Name -> U
+321:68:Name -> Dict:4
+323:27:Name -> U
+326:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+326:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+326:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+326:59:Name -> Const:NoneType:None | U
+327:15:Name -> U

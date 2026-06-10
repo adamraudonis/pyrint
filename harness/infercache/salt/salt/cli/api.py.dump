@@ -1,0 +1,70 @@
+16:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+16:6:Attribute -> Func:logging.getLogger
+16:6:Name -> Module:logging
+16:24:Name -> Const:str:'salt.cli.api' | Const:str:'__main__'
+19:14:Attribute -> Class:salt.utils.parsers.SaltAPIParser
+19:14:Name -> Module:salt.utils.parsers
+32:8:Call -> Const:NoneType:None
+32:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.prepare
+32:8:Call -> Super
+32:8:Name -> Class:builtins.super
+33:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+33:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+33:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+34:8:Name -> Inst:salt.cli.api.SaltAPI
+34:19:Call -> Inst:salt.client.netapi.NetapiClient
+34:19:Attribute -> Class:salt.client.netapi.NetapiClient
+34:19:Attribute -> Module:salt.client.netapi
+34:19:Attribute -> Module:salt.client
+34:19:Name -> Module:salt
+34:51:Attribute -> Const:NoneType:None | U | Dict:1
+34:51:Name -> Inst:salt.cli.api.SaltAPI
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.daemonize_if_required
+35:8:Name -> Inst:salt.cli.api.SaltAPI
+36:8:Call -> Const:NoneType:None
+36:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.set_pidfile
+36:8:Name -> Inst:salt.cli.api.SaltAPI
+48:8:Call -> Const:NoneType:None
+48:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.start
+48:8:Call -> Super
+48:8:Name -> Class:builtins.super
+49:11:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+49:11:Name -> Func:salt.utils.verify.check_user
+49:22:Attribute -> Const:NoneType:None | U | Dict:1
+49:22:Name -> Inst:salt.cli.api.SaltAPI
+50:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+50:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+50:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:12:Call -> Const:NoneType:None
+51:12:Attribute -> BM:salt.client.netapi.NetapiClient.run
+51:12:Attribute -> Inst:salt.client.netapi.NetapiClient
+51:12:Name -> Inst:salt.cli.api.SaltAPI
+57:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+57:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+57:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+59:11:Name -> Const:NoneType:None | U
+60:22:Name -> Const:str:'The salt-api is shutdown. '
+60:28:Name -> U
+62:22:Call -> Const:str:''
+62:22:Attribute -> BM:builtins.str.strip
+62:22:Name -> Const:str:'The salt-api is shutdown. '
+63:8:Call -> Const:NoneType:None
+63:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.shutdown
+63:8:Call -> Super
+63:8:Name -> Class:builtins.super
+63:25:Name -> Const:int:0 | U
+63:35:Name -> Const:NoneType:None | U | Const:str:''
+67:8:Call -> U | U
+67:8:Attribute -> BM:salt.utils.process.ProcessManager._handle_signals
+67:8:Attribute -> Inst:salt.utils.process.ProcessManager
+67:8:Attribute -> Inst:salt.client.netapi.NetapiClient
+67:8:Name -> Inst:salt.cli.api.SaltAPI
+67:49:Name -> U
+67:57:Name -> U
+68:8:Call -> Const:NoneType:None
+68:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn._handle_signals
+68:8:Call -> Super
+68:8:Name -> Class:builtins.super
+68:32:Name -> U
+68:40:Name -> U

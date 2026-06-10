@@ -1,0 +1,111 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'salt.client.netapi' | Const:str:'__main__'
+15:16:Attribute -> Class:salt.utils.process.SignalHandlingProcess
+15:16:Attribute -> Module:salt.utils.process
+15:16:Attribute -> Module:salt.utils
+15:16:Name -> Module:salt
+21:8:Call -> Const:NoneType:None
+21:8:Attribute -> BM:multiprocessing.process.BaseProcess.__init__ | BM:builtins.object.__init__
+21:8:Call -> Super
+21:8:Name -> Class:builtins.super
+21:27:Name -> Dict:0
+22:8:Name -> Inst:salt.client.netapi.RunNetapi
+22:20:Name -> U
+23:8:Name -> Inst:salt.client.netapi.RunNetapi
+23:21:Name -> U
+26:17:Call -> Inst:salt.loader.lazy.LazyLoader
+26:17:Attribute -> Func:salt.loader.netapi
+26:17:Attribute -> Module:salt.loader
+26:17:Name -> Module:salt
+26:36:Attribute -> U | Dict:1
+26:36:Name -> Inst:salt.client.netapi.RunNetapi
+27:22:Name -> Inst:salt.loader.lazy.LazyLoader
+27:29:Attribute -> U
+27:29:Name -> Inst:salt.client.netapi.RunNetapi
+28:8:Call -> U
+28:8:Name -> U
+37:8:Name -> Inst:salt.client.netapi.NetapiClient
+37:20:Name -> U
+38:8:Name -> Inst:salt.client.netapi.NetapiClient
+38:31:Call -> Inst:salt.utils.process.ProcessManager
+38:31:Attribute -> Class:salt.utils.process.ProcessManager
+38:31:Attribute -> Module:salt.utils.process
+38:31:Attribute -> Module:salt.utils
+38:31:Name -> Module:salt
+41:8:Name -> Inst:salt.client.netapi.NetapiClient
+41:22:Call -> Inst:salt.loader.lazy.LazyLoader
+41:22:Attribute -> Func:salt.loader.netapi
+41:22:Attribute -> Module:salt.loader
+41:22:Name -> Module:salt
+41:41:Attribute -> U
+41:41:Name -> Inst:salt.client.netapi.NetapiClient
+47:15:Attribute -> Inst:salt.loader.lazy.LazyLoader
+47:15:Name -> Inst:salt.client.netapi.NetapiClient
+48:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+48:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+48:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+50:19:Attribute -> Inst:salt.loader.lazy.LazyLoader
+50:19:Name -> Inst:salt.client.netapi.NetapiClient
+51:15:Call -> U
+51:15:Attribute -> U
+51:15:Name -> U
+52:36:Attribute -> U
+52:36:Attribute -> Inst:salt.loader.lazy.LazyLoader
+52:36:Name -> Inst:salt.client.netapi.NetapiClient
+52:48:Name -> U
+53:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+53:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+53:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:40:Name -> Const:str:'RunNetapi(Uninferable)'
+54:16:Call -> Inst:salt.client.netapi.RunNetapi | Inst:salt.utils.process.Process
+54:16:Attribute -> BM:salt.utils.process.ProcessManager.add_process
+54:16:Attribute -> Inst:salt.utils.process.ProcessManager
+54:16:Name -> Inst:salt.client.netapi.NetapiClient
+55:20:Name -> Class:salt.client.netapi.RunNetapi
+55:37:Attribute -> U
+55:37:Name -> Inst:salt.client.netapi.NetapiClient
+55:48:Name -> U
+55:59:Name -> Const:str:'RunNetapi(Uninferable)'
+59:11:Call -> U | Inst:signal.Handlers
+59:11:Attribute -> Func:_signal.getsignal | Func:signal.getsignal
+59:11:Name -> Module:signal
+59:28:Attribute -> Const:int:2
+59:28:Name -> Module:signal
+59:46:Attribute -> Const:int:0
+59:46:Name -> Module:signal
+61:12:Call -> U | Inst:signal.Handlers
+61:12:Attribute -> Func:_signal.signal | Func:signal.signal
+61:12:Name -> Module:signal
+61:26:Attribute -> Const:int:2
+61:26:Name -> Module:signal
+61:41:Attribute -> BM:salt.client.netapi.NetapiClient._handle_signals
+61:41:Name -> Inst:salt.client.netapi.NetapiClient
+63:11:Call -> U | Inst:signal.Handlers
+63:11:Attribute -> Func:_signal.getsignal | Func:signal.getsignal
+63:11:Name -> Module:signal
+63:28:Attribute -> Const:int:15
+63:28:Name -> Module:signal
+63:47:Attribute -> Const:int:0
+63:47:Name -> Module:signal
+65:12:Call -> U | Inst:signal.Handlers
+65:12:Attribute -> Func:_signal.signal | Func:signal.signal
+65:12:Name -> Module:signal
+65:26:Attribute -> Const:int:15
+65:26:Name -> Module:signal
+65:42:Attribute -> BM:salt.client.netapi.NetapiClient._handle_signals
+65:42:Name -> Inst:salt.client.netapi.NetapiClient
+67:8:Call -> U
+67:8:Attribute -> Func:asyncio.runners.run
+67:8:Name -> Module:asyncio
+67:20:Call -> Const:NoneType:None
+67:20:Attribute -> BM:salt.utils.process.ProcessManager.run
+67:20:Attribute -> Inst:salt.utils.process.ProcessManager
+67:20:Name -> Inst:salt.client.netapi.NetapiClient
+71:8:Call -> U | U
+71:8:Attribute -> BM:salt.utils.process.ProcessManager._handle_signals
+71:8:Attribute -> Inst:salt.utils.process.ProcessManager
+71:8:Name -> Inst:salt.client.netapi.NetapiClient
+71:45:Name -> U
+71:53:Name -> U

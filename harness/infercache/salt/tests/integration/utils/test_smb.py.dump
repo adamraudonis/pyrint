@@ -1,0 +1,710 @@
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'tests.integration.utils.test_smb' | Const:str:'__main__'
+57:15:Call -> U
+57:15:Name -> Class:builtins.bool
+57:20:Call -> U
+57:20:Attribute -> Func:salt.utils.network.ip_addrs6
+57:20:Attribute -> Module:salt.utils.network
+57:20:Attribute -> Module:salt.utils
+57:20:Name -> Module:salt
+60:1:Call -> U
+60:1:Attribute -> U
+60:1:Attribute -> U
+60:1:Name -> U
+61:8:Attribute -> Const:bool:True | Const:bool:False
+61:8:Attribute -> Module:salt.utils.smb
+61:8:Attribute -> Module:salt.utils
+61:8:Name -> Module:salt
+63:1:Call -> U
+63:1:Attribute -> U
+63:1:Attribute -> U
+63:1:Name -> U
+64:14:Name -> Class:tests.support.unit.TestCase
+68:5:Name -> Class:builtins.staticmethod
+71:12:Call -> ERR
+71:12:Attribute -> Func:posix.kill
+71:12:Name -> Module:os
+71:20:Name -> U
+72:15:Name -> Class:builtins.OSError
+77:5:Name -> Class:builtins.classmethod
+79:17:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+79:17:Attribute -> Func:tempfile.mkdtemp
+79:17:Name -> Module:tempfile
+80:8:Name -> Class:tests.integration.utils.test_smb.TestSmb
+80:24:Call -> U
+80:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+80:24:Attribute -> Module:posixpath | Module:ntpath
+80:24:Name -> Module:os
+80:37:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+81:8:Name -> Class:tests.integration.utils.test_smb.TestSmb
+81:25:Call -> U
+81:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+81:25:Attribute -> Module:posixpath | Module:ntpath
+81:25:Name -> Module:os
+81:38:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+82:8:Call -> Const:NoneType:None
+82:8:Attribute -> Func:os.makedirs
+82:8:Name -> Module:os
+82:20:Attribute -> U
+82:20:Name -> Class:tests.integration.utils.test_smb.TestSmb
+83:8:Call -> Const:NoneType:None
+83:8:Attribute -> Func:os.makedirs
+83:8:Name -> Module:os
+83:20:Attribute -> U
+83:20:Name -> Class:tests.integration.utils.test_smb.TestSmb
+84:8:Call -> ERR
+84:8:Attribute -> Func:posix.chmod
+84:8:Name -> Module:os
+84:17:Attribute -> U
+84:17:Name -> Class:tests.integration.utils.test_smb.TestSmb
+85:8:Call -> ERR
+85:8:Attribute -> Func:posix.chmod
+85:8:Name -> Module:os
+85:17:Attribute -> U
+85:17:Name -> Class:tests.integration.utils.test_smb.TestSmb
+86:18:Call -> U
+86:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+86:18:Attribute -> Module:posixpath | Module:ntpath
+86:18:Name -> Module:os
+86:31:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+87:8:Name -> Class:tests.integration.utils.test_smb.TestSmb
+87:23:Call -> U
+87:23:Attribute -> Func:getpass.getuser
+87:23:Name -> Module:getpass
+88:13:Call -> U
+88:13:Attribute -> Func:salt.utils.files.fopen
+88:13:Attribute -> Module:salt.utils.files
+88:13:Attribute -> Module:salt.utils
+88:13:Name -> Module:salt
+88:36:Name -> U
+89:12:Call -> U
+89:12:Attribute -> U
+89:12:Name -> U
+89:21:Call -> U
+89:21:Attribute -> BM:builtins.str.format
+89:21:Name -> Const:str:'{}:0:XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX:A
+89:32:Attribute -> U
+89:32:Name -> Class:tests.integration.utils.test_smb.TestSmb
+90:21:Call -> U
+90:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+90:21:Attribute -> Module:posixpath | Module:ntpath
+90:21:Name -> Module:os
+90:34:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+91:13:Call -> U
+91:13:Attribute -> Func:salt.utils.files.fopen
+91:13:Attribute -> Module:salt.utils.files
+91:13:Attribute -> Module:salt.utils
+91:13:Name -> Module:salt
+91:36:Name -> U
+92:12:Call -> U
+92:12:Attribute -> U
+92:12:Name -> U
+93:16:Call -> U
+93:16:Attribute -> BM:builtins.str.format
+93:16:Name -> Const:str:'[global]\nrealm = saltstack.com\ninterf
+94:30:Attribute -> U
+94:30:Name -> Class:tests.integration.utils.test_smb.TestSmb
+95:31:Attribute -> U
+95:31:Name -> Class:tests.integration.utils.test_smb.TestSmb
+96:28:Name -> U
+97:25:Attribute -> U
+97:25:Name -> Class:tests.integration.utils.test_smb.TestSmb
+100:8:Name -> Class:tests.integration.utils.test_smb.TestSmb
+100:20:Call -> Inst:subprocess.Popen
+100:20:Attribute -> Class:subprocess.Popen
+100:20:Name -> Module:subprocess
+101:13:Call -> Const:NoneType:None | U
+101:13:Attribute -> Func:shutil.which
+101:13:Name -> Module:shutil
+101:55:Name -> U
+103:8:Call -> ERR
+103:8:Attribute -> Func:time.sleep
+103:8:Name -> Module:time
+104:18:Call -> U
+104:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+104:18:Attribute -> Module:posixpath | Module:ntpath
+104:18:Name -> Module:os
+104:31:Attribute -> U
+104:31:Name -> Class:tests.integration.utils.test_smb.TestSmb
+105:13:Call -> U
+105:13:Attribute -> Func:salt.utils.files.fopen
+105:13:Attribute -> Module:salt.utils.files
+105:13:Attribute -> Module:salt.utils
+105:13:Name -> Module:salt
+105:36:Name -> U
+106:12:Name -> Class:tests.integration.utils.test_smb.TestSmb
+106:23:Call -> Inst:builtins.int
+106:23:Name -> Class:builtins.int
+106:27:Call -> U
+106:27:Attribute -> U
+106:27:Call -> U
+106:27:Attribute -> U
+106:27:Name -> U
+107:15:Call -> Const:bool:False | Const:bool:True
+107:15:Attribute -> Func:tests.integration.utils.test_smb.TestSmb.check_pid
+107:15:Name -> Class:tests.integration.utils.test_smb.TestSmb
+107:29:Attribute -> Inst:builtins.int
+107:29:Name -> Class:tests.integration.utils.test_smb.TestSmb
+108:18:Call -> ExcInst:builtins.Exception
+108:18:Name -> Class:builtins.Exception
+110:5:Name -> Class:builtins.classmethod
+112:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+112:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+112:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+113:8:Call -> ERR
+113:8:Attribute -> Func:posix.kill
+113:8:Name -> Module:os
+113:16:Attribute -> Inst:builtins.int
+113:16:Name -> Class:tests.integration.utils.test_smb.TestSmb
+113:26:Attribute -> Const:int:15
+113:26:Name -> Module:signal
+121:21:Call -> U
+121:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+121:21:Attribute -> Module:posixpath | Module:ntpath
+121:21:Name -> Module:os
+121:34:Attribute -> U
+121:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+121:51:Name -> Const:str:'test_write_file_v4.txt'
+122:19:Call -> Const:bool:False | Const:bool:True | U
+122:19:Attribute -> Func:genericpath.exists | U
+122:19:Attribute -> Module:posixpath | Module:ntpath
+122:19:Name -> Module:os
+122:34:Name -> U
+124:21:Call -> U
+124:21:Attribute -> Func:tempfile.mktemp
+124:21:Name -> Module:tempfile
+125:13:Call -> U
+125:13:Attribute -> Func:salt.utils.files.fopen
+125:13:Attribute -> Module:salt.utils.files
+125:13:Attribute -> Module:salt.utils
+125:13:Name -> Module:salt
+125:36:Name -> U
+126:12:Call -> U
+126:12:Attribute -> U
+126:12:Name -> U
+126:21:Name -> Const:str:'write test file content ipv4'
+127:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+127:15:Attribute -> Func:salt.utils.smb.get_conn
+127:15:Attribute -> Module:salt.utils.smb
+127:15:Attribute -> Module:salt.utils
+127:15:Name -> Module:salt
+127:52:Attribute -> U
+127:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+128:8:Call -> Const:bool:False
+128:8:Attribute -> Func:salt.utils.smb.put_file
+128:8:Attribute -> Module:salt.utils.smb
+128:8:Attribute -> Module:salt.utils
+128:8:Name -> Module:salt
+128:32:Name -> U
+128:44:Name -> Const:str:'test_write_file_v4.txt'
+128:65:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+129:8:Call -> Const:NoneType:None
+129:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+129:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+131:15:Call -> Const:bool:False | Const:bool:True | U
+131:15:Attribute -> Func:genericpath.exists | U
+131:15:Attribute -> Module:posixpath | Module:ntpath
+131:15:Name -> Module:os
+131:30:Name -> U
+132:13:Call -> U
+132:13:Attribute -> Func:salt.utils.files.fopen
+132:13:Attribute -> Module:salt.utils.files
+132:13:Attribute -> Module:salt.utils
+132:13:Name -> Module:salt
+132:36:Name -> U
+133:21:Call -> U
+133:21:Attribute -> U
+133:21:Name -> U
+134:15:Name -> U
+134:25:Name -> Const:str:'write test file content ipv4'
+136:5:Call -> U
+136:5:Attribute -> U
+136:5:Attribute -> U
+136:5:Name -> U
+136:28:Name -> U
+143:21:Call -> U
+143:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+143:21:Attribute -> Module:posixpath | Module:ntpath
+143:21:Name -> Module:os
+143:34:Attribute -> U
+143:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+143:51:Name -> Const:str:'test_write_file_v6.txt'
+144:19:Call -> Const:bool:False | Const:bool:True | U
+144:19:Attribute -> Func:genericpath.exists | U
+144:19:Attribute -> Module:posixpath | Module:ntpath
+144:19:Name -> Module:os
+144:34:Name -> U
+146:21:Call -> U
+146:21:Attribute -> Func:tempfile.mktemp
+146:21:Name -> Module:tempfile
+147:13:Call -> U
+147:13:Attribute -> Func:salt.utils.files.fopen
+147:13:Attribute -> Module:salt.utils.files
+147:13:Attribute -> Module:salt.utils
+147:13:Name -> Module:salt
+147:36:Name -> U
+148:12:Call -> U
+148:12:Attribute -> U
+148:12:Name -> U
+148:21:Name -> Const:str:'write test file content ipv6'
+149:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+149:15:Attribute -> Func:salt.utils.smb.get_conn
+149:15:Attribute -> Module:salt.utils.smb
+149:15:Attribute -> Module:salt.utils
+149:15:Name -> Module:salt
+149:46:Attribute -> U
+149:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+150:8:Call -> Const:bool:False
+150:8:Attribute -> Func:salt.utils.smb.put_file
+150:8:Attribute -> Module:salt.utils.smb
+150:8:Attribute -> Module:salt.utils
+150:8:Name -> Module:salt
+150:32:Name -> U
+150:44:Name -> Const:str:'test_write_file_v6.txt'
+150:65:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+151:8:Call -> Const:NoneType:None
+151:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+151:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+153:15:Call -> Const:bool:False | Const:bool:True | U
+153:15:Attribute -> Func:genericpath.exists | U
+153:15:Attribute -> Module:posixpath | Module:ntpath
+153:15:Name -> Module:os
+153:30:Name -> U
+154:13:Call -> U
+154:13:Attribute -> Func:salt.utils.files.fopen
+154:13:Attribute -> Module:salt.utils.files
+154:13:Attribute -> Module:salt.utils
+154:13:Name -> Module:salt
+154:36:Name -> U
+155:21:Call -> U
+155:21:Attribute -> U
+155:21:Name -> U
+156:15:Name -> U
+156:25:Name -> Const:str:'write test file content ipv6'
+164:21:Call -> U
+164:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+164:21:Attribute -> Module:posixpath | Module:ntpath
+164:21:Name -> Module:os
+164:34:Attribute -> U
+164:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+164:51:Name -> Const:str:'test_write_str.txt'
+165:19:Call -> Const:bool:False | Const:bool:True | U
+165:19:Attribute -> Func:genericpath.exists | U
+165:19:Attribute -> Module:posixpath | Module:ntpath
+165:19:Name -> Module:os
+165:34:Name -> U
+166:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+166:15:Attribute -> Func:salt.utils.smb.get_conn
+166:15:Attribute -> Module:salt.utils.smb
+166:15:Attribute -> Module:salt.utils
+166:15:Name -> Module:salt
+166:52:Attribute -> U
+166:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+167:8:Call -> Const:bool:False
+167:8:Attribute -> Func:salt.utils.smb.put_str
+167:8:Attribute -> Module:salt.utils.smb
+167:8:Attribute -> Module:salt.utils
+167:8:Name -> Module:salt
+167:31:Name -> Const:str:'write test file content'
+167:40:Name -> Const:str:'test_write_str.txt'
+167:61:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+168:8:Call -> Const:NoneType:None
+168:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+168:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+170:15:Call -> Const:bool:False | Const:bool:True | U
+170:15:Attribute -> Func:genericpath.exists | U
+170:15:Attribute -> Module:posixpath | Module:ntpath
+170:15:Name -> Module:os
+170:30:Name -> U
+171:13:Call -> U
+171:13:Attribute -> Func:salt.utils.files.fopen
+171:13:Attribute -> Module:salt.utils.files
+171:13:Attribute -> Module:salt.utils
+171:13:Name -> Module:salt
+171:36:Name -> U
+172:21:Call -> U
+172:21:Attribute -> U
+172:21:Name -> U
+173:15:Name -> U
+173:25:Name -> Const:str:'write test file content'
+175:5:Call -> U
+175:5:Attribute -> U
+175:5:Attribute -> U
+175:5:Name -> U
+175:28:Name -> U
+182:21:Call -> U
+182:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+182:21:Attribute -> Module:posixpath | Module:ntpath
+182:21:Name -> Module:os
+182:34:Attribute -> U
+182:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+182:51:Name -> Const:str:'test_write_str_v6.txt'
+183:19:Call -> Const:bool:False | Const:bool:True | U
+183:19:Attribute -> Func:genericpath.exists | U
+183:19:Attribute -> Module:posixpath | Module:ntpath
+183:19:Name -> Module:os
+183:34:Name -> U
+184:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+184:15:Attribute -> Func:salt.utils.smb.get_conn
+184:15:Attribute -> Module:salt.utils.smb
+184:15:Attribute -> Module:salt.utils
+184:15:Name -> Module:salt
+184:46:Attribute -> U
+184:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+185:8:Call -> Const:bool:False
+185:8:Attribute -> Func:salt.utils.smb.put_str
+185:8:Attribute -> Module:salt.utils.smb
+185:8:Attribute -> Module:salt.utils
+185:8:Name -> Module:salt
+185:31:Name -> Const:str:'write test file content'
+185:40:Name -> Const:str:'test_write_str_v6.txt'
+185:61:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+186:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+188:15:Call -> Const:bool:False | Const:bool:True | U
+188:15:Attribute -> Func:genericpath.exists | U
+188:15:Attribute -> Module:posixpath | Module:ntpath
+188:15:Name -> Module:os
+188:30:Name -> U
+189:13:Call -> U
+189:13:Attribute -> Func:salt.utils.files.fopen
+189:13:Attribute -> Module:salt.utils.files
+189:13:Attribute -> Module:salt.utils
+189:13:Name -> Module:salt
+189:36:Name -> U
+190:21:Call -> U
+190:21:Attribute -> U
+190:21:Name -> U
+191:15:Name -> U
+191:25:Name -> Const:str:'write test file content'
+199:21:Call -> U
+199:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+199:21:Attribute -> Module:posixpath | Module:ntpath
+199:21:Name -> Module:os
+199:34:Attribute -> U
+199:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+199:51:Name -> Const:str:'test_delete_file.txt'
+200:13:Call -> U
+200:13:Attribute -> Func:salt.utils.files.fopen
+200:13:Attribute -> Module:salt.utils.files
+200:13:Attribute -> Module:salt.utils
+200:13:Name -> Module:salt
+200:36:Name -> U
+201:12:Call -> U
+201:12:Attribute -> U
+201:12:Name -> U
+201:21:Name -> Const:str:'read test file content'
+202:15:Call -> Const:bool:False | Const:bool:True | U
+202:15:Attribute -> Func:genericpath.exists | U
+202:15:Attribute -> Module:posixpath | Module:ntpath
+202:15:Name -> Module:os
+202:30:Name -> U
+204:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+204:15:Attribute -> Func:salt.utils.smb.get_conn
+204:15:Attribute -> Module:salt.utils.smb
+204:15:Attribute -> Module:salt.utils
+204:15:Name -> Module:salt
+204:52:Attribute -> U
+204:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+205:8:Call -> Const:bool:False
+205:8:Attribute -> Func:salt.utils.smb.delete_file
+205:8:Attribute -> Module:salt.utils.smb
+205:8:Attribute -> Module:salt.utils
+205:8:Name -> Module:salt
+205:35:Name -> Const:str:'test_delete_file.txt'
+205:56:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+206:8:Call -> Const:NoneType:None
+206:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+206:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+208:19:Call -> Const:bool:False | Const:bool:True | U
+208:19:Attribute -> Func:genericpath.exists | U
+208:19:Attribute -> Module:posixpath | Module:ntpath
+208:19:Name -> Module:os
+208:34:Name -> U
+210:5:Call -> U
+210:5:Attribute -> U
+210:5:Attribute -> U
+210:5:Name -> U
+210:28:Name -> U
+217:21:Call -> U
+217:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+217:21:Attribute -> Module:posixpath | Module:ntpath
+217:21:Name -> Module:os
+217:34:Attribute -> U
+217:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+217:51:Name -> Const:str:'test_delete_file_v6.txt'
+218:13:Call -> U
+218:13:Attribute -> Func:salt.utils.files.fopen
+218:13:Attribute -> Module:salt.utils.files
+218:13:Attribute -> Module:salt.utils
+218:13:Name -> Module:salt
+218:36:Name -> U
+219:12:Call -> U
+219:12:Attribute -> U
+219:12:Name -> U
+219:21:Name -> Const:str:'read test file content'
+220:15:Call -> Const:bool:False | Const:bool:True | U
+220:15:Attribute -> Func:genericpath.exists | U
+220:15:Attribute -> Module:posixpath | Module:ntpath
+220:15:Name -> Module:os
+220:30:Name -> U
+222:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+222:15:Attribute -> Func:salt.utils.smb.get_conn
+222:15:Attribute -> Module:salt.utils.smb
+222:15:Attribute -> Module:salt.utils
+222:15:Name -> Module:salt
+222:46:Attribute -> U
+222:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+223:8:Call -> Const:bool:False
+223:8:Attribute -> Func:salt.utils.smb.delete_file
+223:8:Attribute -> Module:salt.utils.smb
+223:8:Attribute -> Module:salt.utils
+223:8:Name -> Module:salt
+223:35:Name -> Const:str:'test_delete_file_v6.txt'
+223:56:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+224:8:Call -> Const:NoneType:None
+224:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+224:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+226:19:Call -> Const:bool:False | Const:bool:True | U
+226:19:Attribute -> Func:genericpath.exists | U
+226:19:Attribute -> Module:posixpath | Module:ntpath
+226:19:Name -> Module:os
+226:34:Name -> U
+233:21:Call -> U
+233:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+233:21:Attribute -> Module:posixpath | Module:ntpath
+233:21:Name -> Module:os
+233:34:Attribute -> U
+233:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+233:51:Name -> Const:str:'mkdirs/test'
+234:19:Call -> Const:bool:False | Const:bool:True | U
+234:19:Attribute -> Func:genericpath.exists | U
+234:19:Attribute -> Module:posixpath | Module:ntpath
+234:19:Name -> Module:os
+234:34:Name -> U
+236:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+236:15:Attribute -> Func:salt.utils.smb.get_conn
+236:15:Attribute -> Module:salt.utils.smb
+236:15:Attribute -> Module:salt.utils
+236:15:Name -> Module:salt
+236:52:Attribute -> U
+236:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+237:8:Call -> Const:bool:False
+237:8:Attribute -> Func:salt.utils.smb.mkdirs
+237:8:Attribute -> Module:salt.utils.smb
+237:8:Attribute -> Module:salt.utils
+237:8:Name -> Module:salt
+237:30:Name -> Const:str:'mkdirs/test'
+237:55:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+238:8:Call -> Const:NoneType:None
+238:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+238:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+240:15:Call -> Const:bool:False | Const:bool:True | U
+240:15:Attribute -> Func:genericpath.exists | U
+240:15:Attribute -> Module:posixpath | Module:ntpath
+240:15:Name -> Module:os
+240:30:Name -> U
+242:5:Call -> U
+242:5:Attribute -> U
+242:5:Attribute -> U
+242:5:Name -> U
+242:28:Name -> U
+248:21:Call -> U
+248:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+248:21:Attribute -> Module:posixpath | Module:ntpath
+248:21:Name -> Module:os
+248:34:Attribute -> U
+248:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+248:51:Name -> Const:str:'mkdirs/testv6'
+249:19:Call -> Const:bool:False | Const:bool:True | U
+249:19:Attribute -> Func:genericpath.exists | U
+249:19:Attribute -> Module:posixpath | Module:ntpath
+249:19:Name -> Module:os
+249:34:Name -> U
+251:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+251:15:Attribute -> Func:salt.utils.smb.get_conn
+251:15:Attribute -> Module:salt.utils.smb
+251:15:Attribute -> Module:salt.utils
+251:15:Name -> Module:salt
+251:46:Attribute -> U
+251:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+252:8:Call -> Const:bool:False
+252:8:Attribute -> Func:salt.utils.smb.mkdirs
+252:8:Attribute -> Module:salt.utils.smb
+252:8:Attribute -> Module:salt.utils
+252:8:Name -> Module:salt
+252:30:Name -> Const:str:'mkdirs/testv6'
+252:55:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+253:8:Call -> Const:NoneType:None
+253:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+253:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+255:15:Call -> Const:bool:False | Const:bool:True | U
+255:15:Attribute -> Func:genericpath.exists | U
+255:15:Attribute -> Module:posixpath | Module:ntpath
+255:15:Name -> Module:os
+255:30:Name -> U
+263:21:Call -> U
+263:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+263:21:Attribute -> Module:posixpath | Module:ntpath
+263:21:Name -> Module:os
+263:34:Attribute -> U
+263:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+263:51:Name -> Const:str:'deldirs/test'
+264:8:Call -> Const:NoneType:None
+264:8:Attribute -> Func:os.makedirs
+264:8:Name -> Module:os
+264:20:Name -> U
+265:15:Call -> Const:bool:False | Const:bool:True | U
+265:15:Attribute -> Func:genericpath.exists | U
+265:15:Attribute -> Module:posixpath | Module:ntpath
+265:15:Name -> Module:os
+265:30:Name -> U
+267:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+267:15:Attribute -> Func:salt.utils.smb.get_conn
+267:15:Attribute -> Module:salt.utils.smb
+267:15:Attribute -> Module:salt.utils
+267:15:Name -> Module:salt
+267:52:Attribute -> U
+267:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+268:8:Call -> Const:bool:False
+268:8:Attribute -> Func:salt.utils.smb.delete_directory
+268:8:Attribute -> Module:salt.utils.smb
+268:8:Attribute -> Module:salt.utils
+268:8:Name -> Module:salt
+268:40:Name -> Const:str:'deldirs/test'
+268:68:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+269:8:Call -> Const:NoneType:None
+269:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+269:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+271:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+271:15:Attribute -> Func:salt.utils.smb.get_conn
+271:15:Attribute -> Module:salt.utils.smb
+271:15:Attribute -> Module:salt.utils
+271:15:Name -> Module:salt
+271:52:Attribute -> U
+271:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+272:8:Call -> Const:bool:False
+272:8:Attribute -> Func:salt.utils.smb.delete_directory
+272:8:Attribute -> Module:salt.utils.smb
+272:8:Attribute -> Module:salt.utils
+272:8:Name -> Module:salt
+272:40:Name -> Const:str:'deldirs'
+272:65:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+273:8:Call -> Const:NoneType:None
+273:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+273:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+275:19:Call -> Const:bool:False | Const:bool:True | U
+275:19:Attribute -> Func:genericpath.exists | U
+275:19:Attribute -> Module:posixpath | Module:ntpath
+275:19:Name -> Module:os
+275:34:Name -> U
+276:19:Call -> Const:bool:False | Const:bool:True | U
+276:19:Attribute -> Func:genericpath.exists | U
+276:19:Attribute -> Module:posixpath | Module:ntpath
+276:19:Name -> Module:os
+276:34:Call -> U
+276:34:Attribute -> Func:posixpath.join | Func:ntpath.join
+276:34:Attribute -> Module:posixpath | Module:ntpath
+276:34:Name -> Module:os
+276:47:Attribute -> U
+276:47:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+276:64:Name -> Const:str:'deldirs'
+278:5:Call -> U
+278:5:Attribute -> U
+278:5:Attribute -> U
+278:5:Name -> U
+278:28:Name -> U
+285:21:Call -> U
+285:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+285:21:Attribute -> Module:posixpath | Module:ntpath
+285:21:Name -> Module:os
+285:34:Attribute -> U
+285:34:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+285:51:Name -> Const:str:'deldirsv6/test'
+286:8:Call -> Const:NoneType:None
+286:8:Attribute -> Func:os.makedirs
+286:8:Name -> Module:os
+286:20:Name -> U
+287:15:Call -> Const:bool:False | Const:bool:True | U
+287:15:Attribute -> Func:genericpath.exists | U
+287:15:Attribute -> Module:posixpath | Module:ntpath
+287:15:Name -> Module:os
+287:30:Name -> U
+289:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+289:15:Attribute -> Func:salt.utils.smb.get_conn
+289:15:Attribute -> Module:salt.utils.smb
+289:15:Attribute -> Module:salt.utils
+289:15:Name -> Module:salt
+289:46:Attribute -> U
+289:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+290:8:Call -> Const:bool:False
+290:8:Attribute -> Func:salt.utils.smb.delete_directory
+290:8:Attribute -> Module:salt.utils.smb
+290:8:Attribute -> Module:salt.utils
+290:8:Name -> Module:salt
+290:40:Name -> Const:str:'deldirsv6/test'
+290:68:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+291:8:Call -> Const:NoneType:None
+291:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+291:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+293:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+293:15:Attribute -> Func:salt.utils.smb.get_conn
+293:15:Attribute -> Module:salt.utils.smb
+293:15:Attribute -> Module:salt.utils
+293:15:Name -> Module:salt
+293:46:Attribute -> U
+293:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+294:8:Call -> Const:bool:False
+294:8:Attribute -> Func:salt.utils.smb.delete_directory
+294:8:Attribute -> Module:salt.utils.smb
+294:8:Attribute -> Module:salt.utils
+294:8:Name -> Module:salt
+294:40:Name -> Const:str:'deldirsv6'
+294:65:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+295:8:Call -> Const:NoneType:None
+295:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+295:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+297:19:Call -> Const:bool:False | Const:bool:True | U
+297:19:Attribute -> Func:genericpath.exists | U
+297:19:Attribute -> Module:posixpath | Module:ntpath
+297:19:Name -> Module:os
+297:34:Name -> U
+298:19:Call -> Const:bool:False | Const:bool:True | U
+298:19:Attribute -> Func:genericpath.exists | U
+298:19:Attribute -> Module:posixpath | Module:ntpath
+298:19:Name -> Module:os
+298:34:Call -> U
+298:34:Attribute -> Func:posixpath.join | Func:ntpath.join
+298:34:Attribute -> Module:posixpath | Module:ntpath
+298:34:Name -> Module:os
+298:47:Attribute -> U
+298:47:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+298:64:Name -> Const:str:'deldirsv6'
+304:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+304:15:Attribute -> Func:salt.utils.smb.get_conn
+304:15:Attribute -> Module:salt.utils.smb
+304:15:Attribute -> Module:salt.utils
+304:15:Name -> Module:salt
+304:52:Attribute -> U
+304:52:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+305:8:Call -> Const:NoneType:None
+305:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+305:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+307:5:Call -> U
+307:5:Attribute -> U
+307:5:Attribute -> U
+307:5:Name -> U
+307:28:Name -> U
+312:15:Call -> Inst:salt.utils.smb.SMBProto | Const:bool:False
+312:15:Attribute -> Func:salt.utils.smb.get_conn
+312:15:Attribute -> Module:salt.utils.smb
+312:15:Attribute -> Module:salt.utils
+312:15:Name -> Module:salt
+312:46:Attribute -> U
+312:46:Name -> Inst:tests.integration.utils.test_smb.TestSmb
+313:8:Call -> Const:NoneType:None
+313:8:Attribute -> BM:salt.utils.smb.SMBProto.close
+313:8:Name -> Inst:salt.utils.smb.SMBProto | Const:bool:False

@@ -1,0 +1,95 @@
+21:11:Name -> Const:str:'random'
+43:11:Call -> U
+43:11:Attribute -> Func:salt.utils.data.hash
+43:11:Attribute -> Module:salt.utils.data
+43:11:Attribute -> Module:salt.utils
+43:11:Name -> Module:salt
+43:32:Name -> U
+43:49:Name -> Const:str:'sha512' | U
+62:7:Call -> ERR
+62:7:Name -> Func:builtins.isinstance
+62:18:Name -> U
+62:25:Name -> Class:builtins.str
+63:16:Call -> U
+63:16:Attribute -> U
+63:16:Name -> U
+63:29:Name -> ERR
+64:7:Name -> Const:str:'base64' | U
+66:18:Call -> U
+66:18:Attribute -> Func:base64.b64encode
+66:18:Name -> Module:base64
+66:35:Name -> U
+67:18:Call -> U
+67:18:Attribute -> U
+67:18:Name -> U
+67:29:Name -> ERR
+68:15:Name -> Class:builtins.TypeError
+69:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+69:18:Name -> Class:salt.exceptions.SaltInvocationError
+72:18:Call -> U
+72:18:Attribute -> U
+72:18:Name -> U
+72:31:Name -> Const:str:'base64' | U
+73:15:Name -> Class:builtins.LookupError
+74:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+74:18:Name -> Class:salt.exceptions.SaltInvocationError
+75:15:Name -> Class:builtins.AttributeError
+76:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+76:18:Name -> Class:salt.exceptions.SaltInvocationError
+77:11:Name -> U
+172:11:Call -> Const:str:'' | U
+172:11:Attribute -> Func:salt.utils.pycrypto.secure_password
+172:11:Attribute -> Module:salt.utils.pycrypto
+172:11:Attribute -> Module:salt.utils
+172:11:Name -> Module:salt
+173:15:Name -> Const:int:20 | U
+174:14:Name -> Const:NoneType:None | U
+175:18:Name -> Const:bool:True | U
+176:18:Name -> Const:bool:True | U
+177:15:Name -> Const:bool:True | U
+178:20:Name -> Const:bool:True | U
+179:19:Name -> Const:bool:False | U
+180:18:Name -> Const:bool:False | U
+205:11:Call -> U | Const:NoneType:None
+205:11:Attribute -> Func:salt.utils.pycrypto.gen_hash
+205:11:Attribute -> Module:salt.utils.pycrypto
+205:11:Attribute -> Module:salt.utils
+205:11:Name -> Module:salt
+205:40:Name -> Const:NoneType:None | U
+205:52:Name -> Const:NoneType:None | U
+205:62:Name -> Const:str:'sha512' | U
+232:7:Name -> Const:NoneType:None | U
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> BM:random.Random.seed
+233:8:Name -> Module:random
+233:20:Name -> U
+234:11:Call -> U
+234:11:Attribute -> BM:random.Random.randint
+234:11:Name -> Module:random
+234:26:Name -> Const:int:1 | U
+234:33:Name -> Const:int:10 | U
+256:7:Name -> Const:NoneType:None | U
+257:15:Name -> ERR
+259:4:Call -> Const:NoneType:None
+259:4:Attribute -> BM:random.Random.seed
+259:4:Name -> Module:random
+259:16:Name -> Const:NoneType:None | U
+260:11:Call -> U
+260:11:Attribute -> BM:random.Random.randrange
+260:11:Name -> Module:random
+260:28:Name -> Const:int:10 | U
+285:11:Call -> U
+285:11:Attribute -> Func:salt.utils.data.sample
+285:11:Attribute -> Module:salt.utils.data
+285:11:Attribute -> Module:salt.utils
+285:11:Name -> Module:salt
+285:34:Name -> U
+285:41:Name -> U
+285:52:Name -> Const:NoneType:None | U
+307:11:Call -> U
+307:11:Attribute -> Func:salt.utils.data.shuffle
+307:11:Attribute -> Module:salt.utils.data
+307:11:Attribute -> Module:salt.utils
+307:11:Name -> Module:salt
+307:35:Name -> U
+307:47:Name -> Const:NoneType:None | U

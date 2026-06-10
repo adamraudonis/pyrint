@@ -2030,7 +2030,11 @@ impl<'a> Builder<'a> {
             Some(v) => {
                 let name = self.sym(v.name.as_str());
                 let ann = v.annotation.as_ref().map(|a| self.expr(a, id));
-                (Some(name), None, ann)
+                // astroid rebuilder creates a real AssignName for *args
+                // (not part of get_children, but used by Arguments.arguments
+                // / find_argname in inference)
+                let an = self.param_name(v, id);
+                (Some(name), Some(an), ann)
             }
             None => (None, None, None),
         };
@@ -2045,7 +2049,8 @@ impl<'a> Builder<'a> {
             Some(v) => {
                 let name = self.sym(v.name.as_str());
                 let ann = v.annotation.as_ref().map(|a| self.expr(a, id));
-                (Some(name), None, ann)
+                let an = self.param_name(v, id);
+                (Some(name), Some(an), ann)
             }
             None => (None, None, None),
         };

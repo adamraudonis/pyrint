@@ -1,0 +1,156 @@
+15:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:6:Attribute -> Func:logging.getLogger
+15:6:Name -> Module:logging
+15:24:Name -> Const:str:'tests.pytests.unit.modules.win_lgpo.tes | Const:str:'__main__'
+18:4:Attribute -> U
+18:4:Attribute -> U
+18:4:Name -> U
+19:4:Attribute -> U
+19:4:Attribute -> U
+19:4:Name -> U
+20:4:Attribute -> U
+20:4:Attribute -> U
+20:4:Name -> U
+24:1:Attribute -> U
+24:1:Name -> U
+27:8:Name -> Module:salt.modules.win_lgpo
+28:24:Name -> U
+30:36:Attribute -> Func:salt.modules.file.file_exists | Inst:builtins.function
+30:36:Name -> Module:salt.modules.win_file
+31:33:Attribute -> Func:salt.modules.win_file.makedirs_
+31:33:Name -> Module:salt.modules.win_file
+34:8:Name -> Module:salt.modules.win_file
+36:34:Attribute -> Func:salt.utils.win_dacl.set_perms
+36:34:Name -> Module:salt.utils.win_dacl
+42:1:Call -> U
+42:1:Attribute -> U
+42:1:Name -> U
+44:13:Call -> Dict:2
+44:13:Attribute -> Func:salt.grains.core.os_data
+44:13:Attribute -> Module:salt.grains.core
+44:13:Attribute -> Module:salt.grains
+44:13:Name -> Module:salt
+45:10:Call -> ERR
+45:10:Attribute -> BM:builtins.dict.get
+45:10:Name -> Dict:2
+48:1:Attribute -> U
+48:1:Name -> U
+50:14:Call -> Inst:pathlib.Path
+50:14:Attribute -> Class:pathlib.Path
+50:14:Name -> Module:pathlib
+51:8:Call -> U | Const:NoneType:None
+51:8:Attribute -> Func:os.getenv
+51:8:Name -> Module:os
+53:4:Call -> Const:NoneType:None
+53:4:Attribute -> BM:pathlib.Path.unlink
+53:4:Name -> Inst:pathlib.Path
+55:14:Name -> Inst:pathlib.Path
+57:8:Call -> Const:NoneType:None
+57:8:Attribute -> BM:pathlib.Path.unlink
+57:8:Name -> Inst:pathlib.Path
+60:1:Attribute -> U
+60:1:Name -> U
+69:4:Call -> Const:bool:True
+69:4:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+69:4:Name -> Module:salt.modules.win_lgpo
+69:38:Name -> Const:str:'Configure Corporate Windows Error Repor
+69:59:Call -> U | Dict:4
+69:59:Attribute -> Func:copy.copy
+69:59:Name -> Module:copy
+69:69:Name -> Dict:4
+71:14:Name -> Const:str:'Configure Corporate Windows Error Repor
+71:27:Name -> Dict:4
+73:8:Call -> Const:bool:True
+73:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+73:8:Name -> Module:salt.modules.win_lgpo
+73:42:Name -> Const:str:'Configure Corporate Windows Error Repor
+79:7:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U
+79:7:Attribute -> Func:salt.utils.versions.compare
+79:7:Attribute -> Module:salt.utils.versions
+79:7:Attribute -> Module:salt.utils
+79:7:Name -> Module:salt
+79:40:Name -> U
+83:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+83:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+83:13:Name -> Module:salt.modules.win_lgpo
+84:20:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+91:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+91:21:Name -> Const:str:'Not Configured'
+95:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+95:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+95:13:Name -> Module:salt.modules.win_lgpo
+103:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+103:21:Name -> Const:str:'Not Configured'
+109:7:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U
+109:7:Attribute -> Func:salt.utils.versions.compare
+109:7:Attribute -> Module:salt.utils.versions
+109:7:Attribute -> Module:salt.utils
+109:7:Name -> Module:salt
+109:40:Name -> U
+113:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+113:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+113:13:Name -> Module:salt.modules.win_lgpo
+114:20:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+121:16:Call -> U
+121:16:Attribute -> BM:builtins.str.format
+121:16:Name -> Const:str:'Windows Components\\Data Collection and
+121:27:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+122:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+122:21:Name -> Dict:1
+128:7:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U
+128:7:Attribute -> Func:salt.utils.versions.compare
+128:7:Attribute -> Module:salt.utils.versions
+128:7:Attribute -> Module:salt.utils
+128:7:Name -> Module:salt
+128:40:Name -> U
+132:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+132:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+132:13:Name -> Module:salt.modules.win_lgpo
+140:16:Call -> U
+140:16:Attribute -> BM:builtins.str.format
+140:16:Name -> Const:str:'Windows Components\\Data Collection and
+140:27:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+141:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+141:21:Name -> Dict:1
+147:7:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U
+147:7:Attribute -> Func:salt.utils.versions.compare
+147:7:Attribute -> Module:salt.utils.versions
+147:7:Attribute -> Module:salt.utils
+147:7:Name -> Module:salt
+147:40:Name -> U
+151:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+151:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+151:13:Name -> Module:salt.modules.win_lgpo
+152:20:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+159:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+159:21:Name -> Dict:1
+163:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+163:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+163:13:Name -> Module:salt.modules.win_lgpo
+171:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+171:21:Name -> Dict:1
+175:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+175:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+175:13:Name -> Module:salt.modules.win_lgpo
+193:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+193:21:Name -> Dict:1
+199:7:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U
+199:7:Attribute -> Func:salt.utils.versions.compare
+199:7:Attribute -> Module:salt.utils.versions
+199:7:Attribute -> Module:salt.utils
+199:7:Name -> Module:salt
+199:40:Name -> U
+203:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+203:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+203:13:Name -> Module:salt.modules.win_lgpo
+204:20:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+215:24:Name -> Const:str:'Allow Diagnostic Data' | Const:str:'Allow Telemetry'
+221:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+221:21:Name -> Dict:1
+228:28:Name -> U
+229:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+229:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+229:13:Name -> Module:salt.modules.win_lgpo
+229:45:Name -> U
+230:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+230:21:Name -> U

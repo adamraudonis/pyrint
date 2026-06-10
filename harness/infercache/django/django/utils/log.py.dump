@@ -1,0 +1,294 @@
+13:17:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:17:Attribute -> Func:logging.getLogger
+13:17:Name -> Module:logging
+70:7:Name -> U
+72:30:Call -> U
+72:30:Name -> Func:django.utils.module_loading.import_string
+72:44:Name -> U
+74:8:Call -> Const:NoneType:None
+74:8:Attribute -> Func:logging.config.dictConfig
+74:8:Attribute -> Module:logging.config
+74:8:Name -> Module:logging
+74:34:Name -> Dict:6
+77:11:Name -> U
+78:12:Call -> U
+78:12:Name -> U
+78:32:Name -> U
+81:24:Attribute -> Class:logging.Handler
+81:24:Name -> Module:logging
+91:8:Call -> Const:NoneType:None | Const:NoneType:None
+91:8:Attribute -> BM:logging.Handler.__init__ | BM:logging.Filterer.__init__ | BM:builtins.object.__init__
+91:8:Call -> Super
+91:8:Name -> Class:builtins.super
+94:11:Name -> Const:NoneType:None | U
+95:15:Name -> Const:NoneType:None | U
+96:22:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+96:22:Name -> Class:django.core.exceptions.ImproperlyConfigured
+99:15:Attribute -> Const:bool:True
+99:15:Attribute -> Inst:django.core.mail.handler.MailersHandler
+99:15:Name -> Module:django.core.mail
+100:22:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+100:22:Name -> Class:django.core.exceptions.ImproperlyConfigured
+104:12:Call -> Const:NoneType:None
+104:12:Attribute -> Func:warnings.warn | Func:_warnings.warn
+104:12:Name -> Module:warnings
+106:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+107:35:Call -> Tuple:0 | Tuple:1
+107:35:Name -> Func:django.utils.deprecation.django_file_prefixes
+109:11:Call -> Const:bool:False
+109:11:Name -> Func:builtins.hasattr
+109:19:Name -> Inst:django.utils.log.AdminEmailHandler
+110:18:Call -> ExcInst:builtins.AttributeError
+110:18:Name -> Class:builtins.AttributeError
+115:8:Name -> Inst:django.utils.log.AdminEmailHandler
+115:28:Name -> Const:bool:False | U
+116:8:Name -> Inst:django.utils.log.AdminEmailHandler
+116:29:Name -> Const:NoneType:None | U
+117:8:Name -> Inst:django.utils.log.AdminEmailHandler
+117:21:Name -> Const:NoneType:None | U
+118:8:Name -> Inst:django.utils.log.AdminEmailHandler
+118:30:Call -> U
+118:30:Name -> Func:django.utils.module_loading.import_string
+119:12:Name -> Const:NoneType:None | U
+119:30:Attribute -> U
+119:30:Name -> Inst:django.conf.LazySettings
+125:16:Attribute -> U
+125:16:Name -> Inst:django.conf.LazySettings
+127:16:Attribute -> Func:django.utils.log.AdminEmailHandler.send_mail
+127:16:Attribute -> BM:django.utils.log.AdminEmailHandler.send_mail
+127:16:Name -> Inst:django.utils.log.AdminEmailHandler
+127:43:Attribute -> UM:django.utils.log.AdminEmailHandler.send_mail
+127:43:Name -> Class:django.utils.log.AdminEmailHandler
+131:22:Attribute -> U
+131:22:Name -> U
+133:16:Attribute -> U
+133:16:Name -> U
+136:23:Call -> U
+136:23:Attribute -> U
+136:23:Attribute -> U
+136:23:Name -> U
+136:58:Attribute -> U
+136:58:Name -> Inst:django.conf.LazySettings
+139:16:Call -> U
+139:16:Attribute -> U
+139:16:Name -> U
+141:15:Name -> Class:builtins.Exception
+142:34:Attribute -> U
+142:34:Name -> U
+142:52:Call -> U
+142:52:Attribute -> U
+142:52:Name -> U
+144:18:Call -> U
+144:18:Attribute -> BM:django.utils.log.AdminEmailHandler.format_subject
+144:18:Name -> Inst:django.utils.log.AdminEmailHandler
+144:38:Name -> U
+148:24:Call -> U
+148:24:Name -> Func:copy.copy
+148:29:Name -> U
+149:8:Name -> U
+150:8:Name -> U
+152:11:Attribute -> U
+152:11:Name -> U
+153:23:Attribute -> U
+153:23:Name -> U
+155:30:Call -> U
+155:30:Attribute -> U
+155:30:Name -> U
+157:19:Call -> U
+157:19:Attribute -> U
+157:19:Name -> Inst:django.utils.log.AdminEmailHandler
+157:39:Name -> U | Const:NoneType:None
+157:64:Name -> U | Tuple:3
+159:12:Call -> U
+159:12:Attribute -> BM:logging.Handler.format
+159:12:Name -> Inst:django.utils.log.AdminEmailHandler
+159:24:Name -> U
+160:12:Call -> U
+160:12:Attribute -> U
+160:12:Name -> U
+162:56:Attribute -> Const:bool:False | U
+162:56:Name -> Inst:django.utils.log.AdminEmailHandler
+162:23:Call -> U
+162:23:Attribute -> U
+162:23:Name -> U
+163:8:Call -> Const:NoneType:None
+163:8:Attribute -> BM:django.utils.log.AdminEmailHandler.send_mail
+163:8:Name -> Inst:django.utils.log.AdminEmailHandler
+163:23:Name -> U
+163:32:Name -> U
+163:54:Name -> U | Const:NoneType:None
+167:15:Attribute -> Const:bool:True
+167:15:Attribute -> Inst:django.core.mail.handler.MailersHandler
+167:15:Name -> Module:django.core.mail
+168:25:Call -> U
+168:25:Attribute -> Func:django.core.mail.get_connection
+168:25:Name -> Module:django.core.mail
+169:24:Attribute -> Const:NoneType:None | U
+169:24:Name -> Inst:django.utils.log.AdminEmailHandler
+171:12:Call -> Const:NoneType:None
+171:12:Attribute -> Func:django.core.mail.mail_admins
+171:12:Name -> Module:django.core.mail
+171:29:Name -> U
+171:38:Name -> U
+171:48:Name -> Tuple:0
+171:65:Name -> U
+171:79:Name -> Dict:0
+175:12:Call -> Const:NoneType:None
+175:12:Attribute -> Func:django.core.mail.mail_admins
+175:12:Name -> Module:django.core.mail
+175:29:Name -> U
+175:38:Name -> U
+175:48:Name -> Tuple:0
+175:60:Attribute -> Const:NoneType:None | U
+175:60:Name -> Inst:django.utils.log.AdminEmailHandler
+175:74:Name -> Dict:0
+176:15:Attribute -> Class:django.core.mail.exceptions.MailerDoesNotExist
+176:15:Name -> Module:django.core.mail
+183:15:Call -> U
+183:15:Attribute -> U
+183:15:Call -> U
+183:15:Attribute -> U
+183:15:Name -> U
+186:21:Attribute -> Class:logging.Filter
+186:21:Name -> Module:logging
+194:8:Name -> Inst:django.utils.log.CallbackFilter
+194:24:Name -> U
+197:11:Call -> U
+197:11:Attribute -> U
+197:11:Name -> Inst:django.utils.log.CallbackFilter
+197:25:Name -> U
+202:24:Attribute -> Class:logging.Filter
+202:24:Name -> Module:logging
+204:19:Attribute -> Const:NoneType:None | U
+204:19:Name -> Inst:django.conf.LazySettings
+207:23:Attribute -> Class:logging.Filter
+207:23:Name -> Module:logging
+209:15:Attribute -> Const:NoneType:None | U
+209:15:Name -> Inst:django.conf.LazySettings
+212:22:Attribute -> Class:logging.Formatter
+212:22:Name -> Module:logging
+216:8:Name -> Inst:django.utils.log.ServerFormatter
+216:21:Call -> Inst:django.core.management.color.Style
+216:21:Name -> Func:django.core.management.color.color_style
+217:8:Call -> Const:NoneType:None
+217:8:Attribute -> BM:logging.Formatter.__init__ | BM:builtins.object.__init__
+217:8:Call -> Super
+217:8:Name -> Class:builtins.super
+217:26:Name -> Tuple:0
+217:34:Name -> Dict:0
+220:14:Attribute -> U
+220:14:Name -> U
+221:22:Call -> U
+221:22:Name -> Func:builtins.getattr
+221:30:Name -> U
+223:11:Name -> U
+224:22:Name -> U
+226:22:Call -> ERR
+226:22:Attribute -> ERR
+226:22:Attribute -> Inst:django.core.management.color.Style
+226:22:Name -> Inst:django.utils.log.ServerFormatter
+226:46:Name -> U
+227:24:Name -> U
+228:22:Call -> ERR
+228:22:Attribute -> ERR
+228:22:Attribute -> Inst:django.core.management.color.Style
+228:22:Name -> Inst:django.utils.log.ServerFormatter
+228:43:Name -> U
+229:17:Name -> U
+230:22:Call -> ERR
+230:22:Attribute -> ERR
+230:22:Attribute -> Inst:django.core.management.color.Style
+230:22:Name -> Inst:django.utils.log.ServerFormatter
+230:51:Name -> U
+231:24:Name -> U
+232:22:Call -> ERR
+232:22:Attribute -> ERR
+232:22:Attribute -> Inst:django.core.management.color.Style
+232:22:Name -> Inst:django.utils.log.ServerFormatter
+232:47:Name -> U
+233:17:Name -> U
+234:22:Call -> ERR
+234:22:Attribute -> ERR
+234:22:Attribute -> Inst:django.core.management.color.Style
+234:22:Name -> Inst:django.utils.log.ServerFormatter
+234:48:Name -> U
+235:24:Name -> U
+236:22:Call -> ERR
+236:22:Attribute -> ERR
+236:22:Attribute -> Inst:django.core.management.color.Style
+236:22:Name -> Inst:django.utils.log.ServerFormatter
+236:50:Name -> U
+239:22:Call -> ERR
+239:22:Attribute -> ERR
+239:22:Attribute -> Inst:django.core.management.color.Style
+239:22:Name -> Inst:django.utils.log.ServerFormatter
+239:51:Name -> U
+241:11:Call -> U
+241:11:Attribute -> BM:django.utils.log.ServerFormatter.uses_server_time
+241:11:Name -> Inst:django.utils.log.ServerFormatter
+241:43:Call -> U
+241:43:Name -> Func:builtins.hasattr
+241:51:Name -> U
+242:12:Name -> U
+242:33:Call -> U
+242:33:Attribute -> BM:logging.Formatter.formatTime
+242:33:Name -> Inst:django.utils.log.ServerFormatter
+242:49:Name -> U
+242:57:Attribute -> Const:NoneType:None | U
+242:57:Name -> Inst:django.utils.log.ServerFormatter
+244:8:Name -> U
+244:21:Name -> U
+245:15:Call -> U
+245:15:Attribute -> BM:logging.Formatter.format
+245:15:Call -> Super
+245:15:Name -> Class:builtins.super
+245:30:Name -> U
+248:15:Call -> U
+248:15:Attribute -> U
+248:15:Attribute -> U
+248:15:Name -> Inst:django.utils.log.ServerFormatter
+269:24:Name -> Const:NoneType:None | U
+269:35:Name -> Dict:0
+270:7:Name -> Const:NoneType:None | U
+271:8:Name -> U
+271:31:Name -> U
+272:11:Name -> Const:NoneType:None | U
+273:15:Name -> U
+275:17:Name -> U
+278:19:Call -> Inst:builtins.tuple
+278:19:Name -> Class:builtins.tuple
+279:54:Call -> ERR
+279:54:Name -> Func:builtins.isinstance
+279:65:Name -> U
+279:68:Name -> Class:builtins.str
+279:8:Call -> U
+279:8:Attribute -> U
+279:8:Call -> U
+279:8:Attribute -> U
+279:8:Name -> U
+279:78:Name -> U
+280:17:Name -> Tuple:0
+283:4:Call -> U
+283:4:Call -> U
+283:4:Name -> Func:builtins.getattr
+283:12:Name -> U
+283:20:Name -> Const:NoneType:None | U | Const:str:'error' | Const:str:'warning'
+284:8:Name -> U
+285:9:Name -> Inst:builtins.tuple
+286:14:Name -> U
+287:17:Name -> Const:NoneType:None | U
+296:11:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+311:7:Call -> Const:bool:False
+311:7:Name -> Func:builtins.getattr
+311:15:Name -> Const:NoneType:None | U
+314:4:Call -> Const:NoneType:None
+314:4:Name -> Func:django.utils.log.log_message
+315:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+316:8:Name -> U
+317:9:Name -> Tuple:0
+318:14:Name -> Const:NoneType:None | U
+319:20:Attribute -> U
+319:20:Name -> Const:NoneType:None | U
+320:16:Name -> Const:NoneType:None | U
+321:18:Name -> Const:NoneType:None | U
+323:4:Name -> Const:NoneType:None | U

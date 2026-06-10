@@ -1,0 +1,113 @@
+9:20:Name -> Class:django.core.files.storage.base.Storage
+16:15:Name -> U
+19:35:Name -> Class:django.test.testcases.SimpleTestCase
+22:8:Call -> U
+22:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+22:8:Attribute -> Module:posixpath | Module:ntpath
+22:8:Name -> Module:os
+22:35:Attribute -> Const:str:'..'
+22:35:Name -> Module:os
+23:8:Call -> U
+23:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+23:8:Attribute -> Module:posixpath | Module:ntpath
+23:8:Name -> Module:os
+23:21:Attribute -> Const:str:'/' | Const:str:'\\'
+23:21:Attribute -> Module:posixpath | Module:ntpath
+23:21:Name -> Module:os
+28:12:Call -> Inst:tests.file_storage.test_base.CustomStorage
+28:12:Name -> Class:tests.file_storage.test_base.CustomStorage
+30:20:Attribute -> List:2
+30:20:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+32:16:Call -> Gen:unittest.case.TestCase.subTest
+32:16:Attribute -> BM:unittest.case.TestCase.subTest
+32:16:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+32:34:Name -> U
+33:16:Call -> Inst:unittest.mock._patch
+33:16:Attribute -> Func:unittest.mock._patch_object
+33:16:Attribute -> Func:unittest.mock.patch
+33:16:Name -> Module:unittest.mock
+33:34:Name -> Inst:tests.file_storage.test_base.CustomStorage
+34:16:Call -> Inst:unittest.mock._patch
+34:16:Attribute -> Func:unittest.mock._patch_object
+34:16:Attribute -> Func:unittest.mock.patch
+34:16:Name -> Module:unittest.mock
+34:34:Name -> Inst:tests.file_storage.test_base.CustomStorage
+36:21:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+36:21:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+36:21:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+37:20:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+37:45:Attribute -> Const:str:"Detected path traversal attempt in '%s'
+37:45:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+37:62:Name -> U
+39:20:Call -> U
+39:20:Attribute -> BM:django.core.files.storage.base.Storage.save
+39:20:Name -> Inst:tests.file_storage.test_base.CustomStorage
+39:27:Name -> U
+40:16:Call -> Const:NoneType:None
+40:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+40:16:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+40:33:Attribute -> U
+40:33:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+41:16:Call -> Const:NoneType:None
+41:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+41:16:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+41:33:Attribute -> U
+41:33:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+44:12:Call -> Inst:tests.file_storage.test_base.CustomStorage
+44:12:Name -> Class:tests.file_storage.test_base.CustomStorage
+47:20:Attribute -> List:2
+47:20:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+49:16:Call -> Gen:unittest.case.TestCase.subTest
+49:16:Attribute -> BM:unittest.case.TestCase.subTest
+49:16:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+49:34:Name -> U
+50:16:Call -> Inst:unittest.mock._patch
+50:16:Attribute -> Func:unittest.mock._patch_object
+50:16:Attribute -> Func:unittest.mock.patch
+50:16:Name -> Module:unittest.mock
+50:34:Name -> Inst:tests.file_storage.test_base.CustomStorage
+50:72:Name -> U
+51:16:Call -> Inst:unittest.mock._patch
+51:16:Attribute -> Func:unittest.mock._patch_object
+51:16:Attribute -> Func:unittest.mock.patch
+51:16:Name -> Module:unittest.mock
+51:34:Name -> Inst:tests.file_storage.test_base.CustomStorage
+53:21:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+53:21:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+53:21:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+54:20:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+54:45:Attribute -> Const:str:"Detected path traversal attempt in '%s'
+54:45:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+54:62:Name -> U
+56:20:Call -> U
+56:20:Attribute -> BM:django.core.files.storage.base.Storage.save
+56:20:Name -> Inst:tests.file_storage.test_base.CustomStorage
+57:16:Call -> Const:NoneType:None
+57:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+57:16:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+57:33:Attribute -> U
+57:33:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+60:12:Call -> Inst:tests.file_storage.test_base.CustomStorage
+60:12:Name -> Class:tests.file_storage.test_base.CustomStorage
+63:20:Attribute -> List:2
+63:20:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+65:16:Call -> Gen:unittest.case.TestCase.subTest
+65:16:Attribute -> BM:unittest.case.TestCase.subTest
+65:16:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+65:34:Name -> U
+66:16:Call -> Inst:unittest.mock._patch
+66:16:Attribute -> Func:unittest.mock._patch_object
+66:16:Attribute -> Func:unittest.mock.patch
+66:16:Name -> Module:unittest.mock
+66:34:Name -> Inst:tests.file_storage.test_base.CustomStorage
+66:59:Name -> U
+69:21:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+69:21:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+69:21:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+70:20:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+70:45:Attribute -> Const:str:"Detected path traversal attempt in '%s'
+70:45:Name -> Inst:tests.file_storage.test_base.StorageValidateFileNameTests
+70:62:Name -> U
+72:20:Call -> U
+72:20:Attribute -> BM:django.core.files.storage.base.Storage.save
+72:20:Name -> Inst:tests.file_storage.test_base.CustomStorage

@@ -1,0 +1,464 @@
+12:24:Attribute -> Class:unittest.case.TestCase
+12:24:Name -> Module:unittest
+14:14:Call -> Inst:tempfile.TemporaryDirectory
+14:14:Attribute -> Class:tempfile.TemporaryDirectory
+14:14:Name -> Module:tempfile
+15:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+15:20:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+15:20:Name -> Inst:tempfile.TemporaryDirectory
+16:8:Call -> Const:NoneType:None
+16:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+16:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+16:24:Attribute -> BM:tempfile.TemporaryDirectory.cleanup
+16:24:Name -> Inst:tempfile.TemporaryDirectory
+19:8:Call -> Const:NoneType:None
+19:8:Attribute -> BM:unittest.case.TestCase.assertIs
+19:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+19:22:Call -> Const:bool:False | U
+19:22:Attribute -> Func:genericpath.isdir | U
+19:22:Attribute -> Module:posixpath | Module:ntpath
+19:22:Name -> Module:os
+19:36:Name -> U
+20:11:Attribute -> Const:str:'darwin'
+20:11:Name -> Module:sys
+28:8:Call -> Const:NoneType:None
+28:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+28:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+28:25:Call -> U
+28:25:Attribute -> Func:stat.S_IMODE | Func:_stat.S_IMODE
+28:25:Name -> Module:stat
+28:38:Attribute -> ERR
+28:38:Call -> ERR
+28:38:Attribute -> Func:posix.stat
+28:38:Name -> Module:os
+28:46:Name -> U
+28:62:Name -> U | Const:int:511
+31:15:Call -> U
+31:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+31:15:Attribute -> Module:posixpath | Module:ntpath
+31:15:Name -> Module:os
+31:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+31:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+32:8:Call -> Const:NoneType:None
+32:8:Name -> Func:django.utils._os.safe_makedirs
+32:22:Name -> U
+34:8:Call -> Const:NoneType:None
+34:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+34:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+34:27:Call -> U
+34:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+34:27:Attribute -> Module:posixpath | Module:ntpath
+34:27:Name -> Module:os
+34:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+34:40:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+35:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+35:27:Call -> U
+35:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+35:27:Attribute -> Module:posixpath | Module:ntpath
+35:27:Name -> Module:os
+35:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+35:40:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+36:8:Call -> Const:NoneType:None
+36:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+36:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+36:27:Name -> U
+39:15:Call -> U
+39:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+39:15:Attribute -> Module:posixpath | Module:ntpath
+39:15:Name -> Module:os
+39:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+39:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+40:8:Call -> ERR
+40:8:Attribute -> Func:posix.mkdir
+40:8:Name -> Module:os
+40:17:Name -> U
+42:8:Call -> Const:NoneType:None
+42:8:Name -> Func:django.utils._os.safe_makedirs
+42:22:Name -> U
+44:8:Call -> Const:NoneType:None
+44:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+44:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+44:27:Name -> U
+47:15:Call -> U
+47:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+47:15:Attribute -> Module:posixpath | Module:ntpath
+47:15:Name -> Module:os
+47:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+47:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+48:8:Call -> ERR
+48:8:Attribute -> Func:posix.mkdir
+48:8:Name -> Module:os
+48:17:Name -> U
+50:13:Call -> Inst:unittest.case._AssertRaisesContext
+50:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+50:13:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+50:31:Name -> Class:builtins.FileExistsError
+51:12:Call -> Const:NoneType:None
+51:12:Name -> Func:django.utils._os.safe_makedirs
+51:26:Name -> U
+54:15:Call -> U
+54:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+54:15:Attribute -> Module:posixpath | Module:ntpath
+54:15:Name -> Module:os
+54:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+54:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+55:13:Call -> ERR
+55:13:Name -> Func:_io.open
+55:18:Name -> U
+56:12:Call -> U
+56:12:Attribute -> U
+56:12:Name -> U
+58:13:Call -> Inst:unittest.case._AssertRaisesContext
+58:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+58:13:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+58:31:Name -> Class:builtins.FileExistsError
+59:12:Call -> Const:NoneType:None
+59:12:Name -> Func:django.utils._os.safe_makedirs
+59:26:Name -> U
+61:13:Call -> Inst:unittest.case._AssertRaisesContext
+61:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+61:13:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+61:31:Name -> Class:builtins.FileExistsError
+62:12:Call -> Const:NoneType:None
+62:12:Name -> Func:django.utils._os.safe_makedirs
+62:26:Name -> U
+65:20:Call -> U
+65:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+65:20:Attribute -> Module:posixpath | Module:ntpath
+65:20:Name -> Module:os
+65:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+65:33:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+66:13:Call -> ERR
+66:13:Name -> Func:_io.open
+66:18:Name -> U
+67:12:Call -> U
+67:12:Attribute -> U
+67:12:Name -> U
+69:15:Call -> U
+69:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+69:15:Attribute -> Module:posixpath | Module:ntpath
+69:15:Name -> Module:os
+69:28:Name -> U
+71:40:Attribute -> Const:str:'darwin'
+71:40:Name -> Module:sys
+71:19:Name -> Class:builtins.FileNotFoundError
+71:69:Name -> Class:builtins.NotADirectoryError
+73:13:Call -> Inst:unittest.case._AssertRaisesContext
+73:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+73:13:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+73:31:Name -> Class:builtins.NotADirectoryError
+74:12:Call -> Const:NoneType:None
+74:12:Name -> Func:django.utils._os.safe_makedirs
+74:26:Name -> U
+76:13:Call -> Inst:unittest.case._AssertRaisesContext
+76:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+76:13:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+76:31:Name -> Class:builtins.NotADirectoryError
+77:12:Call -> Const:NoneType:None
+77:12:Name -> Func:django.utils._os.safe_makedirs
+77:26:Name -> U
+80:12:Call -> U
+80:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+80:12:Attribute -> Module:posixpath | Module:ntpath
+80:12:Name -> Module:os
+80:25:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+80:25:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+81:12:Call -> U
+81:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+81:12:Attribute -> Module:posixpath | Module:ntpath
+81:12:Name -> Module:os
+81:25:Name -> U
+83:8:Call -> ERR
+83:8:Attribute -> Func:posix.mkdir
+83:8:Name -> Module:os
+83:17:Name -> U
+85:8:Call -> Const:NoneType:None
+85:8:Name -> Func:django.utils._os.safe_makedirs
+85:22:Name -> U
+87:8:Call -> Const:NoneType:None
+87:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+87:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+87:27:Name -> U
+88:8:Call -> Const:NoneType:None
+88:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+88:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+88:27:Name -> U
+90:12:Call -> U
+90:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+90:12:Attribute -> Module:posixpath | Module:ntpath
+90:12:Name -> Module:os
+90:25:Name -> U
+91:8:Call -> Const:NoneType:None
+91:8:Name -> Func:django.utils._os.safe_makedirs
+91:22:Name -> U
+93:8:Call -> Const:NoneType:None
+93:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+93:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+93:27:Name -> U
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+94:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+94:27:Name -> U
+97:15:Call -> U
+97:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+97:15:Attribute -> Module:posixpath | Module:ntpath
+97:15:Name -> Module:os
+97:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+97:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+98:8:Call -> Const:NoneType:None
+98:8:Name -> Func:django.utils._os.safe_makedirs
+98:22:Name -> U
+100:8:Call -> Const:NoneType:None
+100:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+100:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+100:27:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+100:27:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+100:27:Attribute -> Module:posixpath | Module:ntpath
+100:27:Name -> Module:os
+100:44:Name -> U
+101:8:Call -> Const:NoneType:None
+101:8:Attribute -> BM:unittest.case.TestCase.assertIs
+101:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+101:22:Call -> Const:bool:False | U
+101:22:Attribute -> Func:genericpath.isdir | U
+101:22:Attribute -> Module:posixpath | Module:ntpath
+101:22:Name -> Module:os
+101:36:Call -> U
+101:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+101:36:Attribute -> Module:posixpath | Module:ntpath
+101:36:Name -> Module:os
+101:49:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+101:49:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+104:15:Call -> U
+104:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+104:15:Attribute -> Module:posixpath | Module:ntpath
+104:15:Name -> Module:os
+104:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+104:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+106:8:Call -> Const:NoneType:None
+106:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+106:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+106:24:Attribute -> Func:posix.umask
+106:24:Name -> Module:os
+106:34:Call -> ERR
+106:34:Attribute -> Func:posix.umask
+106:34:Name -> Module:os
+108:8:Call -> Const:NoneType:None
+108:8:Name -> Func:django.utils._os.safe_makedirs
+108:22:Name -> U
+110:8:Call -> Const:NoneType:None
+110:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+110:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+110:27:Call -> U
+110:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+110:27:Attribute -> Module:posixpath | Module:ntpath
+110:27:Name -> Module:os
+110:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+110:40:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+111:8:Call -> Const:NoneType:None
+111:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+111:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+111:27:Call -> U
+111:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+111:27:Attribute -> Module:posixpath | Module:ntpath
+111:27:Name -> Module:os
+111:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+111:40:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+112:8:Call -> Const:NoneType:None
+112:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+112:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+112:27:Name -> U
+115:15:Call -> U
+115:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+115:15:Attribute -> Module:posixpath | Module:ntpath
+115:15:Name -> Module:os
+115:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+115:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+116:25:Attribute -> Func:posix.mkdir
+116:25:Name -> Module:os
+118:8:Call -> Const:NoneType:None
+118:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+118:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+118:24:Attribute -> Func:posix.umask
+118:24:Name -> Module:os
+118:34:Call -> ERR
+118:34:Attribute -> Func:posix.umask
+118:34:Name -> Module:os
+122:12:Call -> ERR
+122:12:Attribute -> Func:posix.umask
+122:12:Name -> Module:os
+123:12:Call -> ERR
+123:12:Name -> Func:posix.mkdir
+123:27:Name -> U
+123:30:Name -> U
+125:13:Call -> Inst:unittest.mock._patch
+125:13:Attribute -> Func:unittest.mock.patch
+125:13:Attribute -> Module:unittest.mock
+125:13:Name -> Module:unittest
+125:57:Name -> Func:tests.utils_tests.test_os_utils.SafeMakeDirsTests.test_permissions_correct_despite_concurrent_umask_change.mkdir_changing_umask
+126:12:Call -> Const:NoneType:None
+126:12:Name -> Func:django.utils._os.safe_makedirs
+126:26:Name -> U
+128:8:Call -> Const:NoneType:None
+128:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+128:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+128:27:Call -> U
+128:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+128:27:Attribute -> Module:posixpath | Module:ntpath
+128:27:Name -> Module:os
+128:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+128:40:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+129:8:Call -> Const:NoneType:None
+129:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+129:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+129:27:Call -> U
+129:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+129:27:Attribute -> Module:posixpath | Module:ntpath
+129:27:Name -> Module:os
+129:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+129:40:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+130:8:Call -> Const:NoneType:None
+130:8:Attribute -> BM:tests.utils_tests.test_os_utils.SafeMakeDirsTests.assertDirMode
+130:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+130:27:Name -> U
+133:15:Call -> U
+133:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+133:15:Attribute -> Module:posixpath | Module:ntpath
+133:15:Name -> Module:os
+133:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+133:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+135:25:Attribute -> Func:posix.mkdir
+135:25:Name -> Module:os
+141:12:Name -> List:1
+142:15:Name -> List:1
+143:16:Call -> ERR
+143:16:Name -> Func:posix.mkdir
+143:31:Name -> U
+143:34:Name -> U
+145:22:Call -> ExcInst:builtins.FileExistsError
+145:22:Name -> Class:builtins.FileExistsError
+145:60:Name -> U
+147:13:Call -> Inst:unittest.mock._patch
+147:13:Attribute -> Func:unittest.mock.patch
+147:13:Attribute -> Module:unittest.mock
+147:13:Name -> Module:unittest
+147:57:Name -> Func:tests.utils_tests.test_os_utils.SafeMakeDirsTests.test_race_condition_exist_ok_false.mkdir_with_race
+148:17:Call -> Inst:unittest.case._AssertRaisesContext
+148:17:Attribute -> BM:unittest.case.TestCase.assertRaises
+148:17:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+148:35:Name -> Class:builtins.FileExistsError
+149:16:Call -> Const:NoneType:None
+149:16:Name -> Func:django.utils._os.safe_makedirs
+149:30:Name -> U
+152:15:Call -> U
+152:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+152:15:Attribute -> Module:posixpath | Module:ntpath
+152:15:Name -> Module:os
+152:28:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+152:28:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+154:25:Attribute -> Func:posix.mkdir
+154:25:Name -> Module:os
+158:12:Name -> List:1
+159:15:Name -> List:1
+160:16:Call -> ERR
+160:16:Name -> Func:posix.mkdir
+160:31:Name -> U
+160:34:Name -> U
+164:16:Call -> ERR
+164:16:Name -> Func:posix.mkdir
+164:31:Name -> U
+164:34:Name -> U
+165:22:Call -> ExcInst:builtins.FileExistsError
+165:22:Name -> Class:builtins.FileExistsError
+165:60:Name -> U
+167:13:Call -> Inst:unittest.mock._patch
+167:13:Attribute -> Func:unittest.mock.patch
+167:13:Attribute -> Module:unittest.mock
+167:13:Name -> Module:unittest
+167:57:Name -> Func:tests.utils_tests.test_os_utils.SafeMakeDirsTests.test_race_condition_exist_ok_true.mkdir_with_race
+168:12:Call -> Const:NoneType:None
+168:12:Name -> Func:django.utils._os.safe_makedirs
+168:26:Name -> U
+170:8:Call -> Const:NoneType:None
+170:8:Attribute -> BM:unittest.case.TestCase.assertIs
+170:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeMakeDirsTests
+170:22:Call -> Const:bool:False | U
+170:22:Attribute -> Func:genericpath.isdir | U
+170:22:Attribute -> Module:posixpath | Module:ntpath
+170:22:Name -> Module:os
+170:36:Name -> U
+173:20:Attribute -> Class:unittest.case.TestCase
+173:20:Name -> Module:unittest
+175:22:Call -> Tuple:2 | Tuple:2
+175:22:Attribute -> Func:posixpath.splitdrive | Func:ntpath.splitdrive
+175:22:Attribute -> Module:posixpath | Module:ntpath
+175:22:Name -> Module:os
+175:41:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+175:41:Name -> Func:django.utils._os.safe_join
+176:8:Call -> Const:NoneType:None
+176:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+176:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeJoinTests
+176:25:Name -> U
+176:31:Call -> U
+176:31:Attribute -> BM:builtins.str.format
+176:53:Attribute -> Const:str:'/' | Const:str:'\\'
+176:53:Attribute -> Module:posixpath | Module:ntpath
+176:53:Name -> Module:os
+179:22:Call -> Tuple:2 | Tuple:2
+179:22:Attribute -> Func:posixpath.splitdrive | Func:ntpath.splitdrive
+179:22:Attribute -> Module:posixpath | Module:ntpath
+179:22:Name -> Module:os
+179:41:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+179:41:Name -> Func:django.utils._os.safe_join
+180:8:Call -> Const:NoneType:None
+180:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+180:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeJoinTests
+181:12:Name -> U
+182:12:Call -> U
+182:12:Attribute -> BM:builtins.str.format
+182:28:Attribute -> Const:str:'/' | Const:str:'\\'
+182:28:Attribute -> Module:posixpath | Module:ntpath
+182:28:Name -> Module:os
+185:22:Call -> Tuple:2 | Tuple:2
+185:22:Attribute -> Func:posixpath.splitdrive | Func:ntpath.splitdrive
+185:22:Attribute -> Module:posixpath | Module:ntpath
+185:22:Name -> Module:os
+185:41:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+185:41:Name -> Func:django.utils._os.safe_join
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+186:8:Name -> Inst:tests.utils_tests.test_os_utils.SafeJoinTests
+187:12:Name -> U
+188:12:Attribute -> Const:str:'/' | Const:str:'\\'
+188:12:Attribute -> Module:posixpath | Module:ntpath
+188:12:Name -> Module:os
+192:13:Call -> Inst:unittest.case._AssertRaisesContext
+192:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+192:13:Name -> Inst:tests.utils_tests.test_os_utils.SafeJoinTests
+192:31:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+193:12:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+193:12:Name -> Func:django.utils._os.safe_join
+196:18:Attribute -> Class:unittest.case.TestCase
+196:18:Name -> Module:unittest
+198:43:Call -> Inst:pathlib.Path
+198:43:Name -> Class:pathlib.Path
+199:17:Call -> Gen:unittest.case.TestCase.subTest
+199:17:Attribute -> BM:unittest.case.TestCase.subTest
+199:17:Name -> Inst:tests.utils_tests.test_os_utils.ToPathTests
+199:30:Name -> Const:str:'/tmp/some_file.txt' | Inst:pathlib.Path
+200:16:Call -> Const:NoneType:None
+200:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+200:16:Name -> Inst:tests.utils_tests.test_os_utils.ToPathTests
+200:33:Call -> Const:str:'/tmp/some_file.txt' | Inst:pathlib.Path
+200:33:Name -> Func:django.utils._os.to_path
+200:41:Name -> Const:str:'/tmp/some_file.txt' | Inst:pathlib.Path
+200:48:Call -> Inst:pathlib.Path
+200:48:Name -> Class:pathlib.Path
+203:13:Call -> Inst:unittest.case._AssertRaisesContext
+203:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+203:13:Name -> Inst:tests.utils_tests.test_os_utils.ToPathTests
+203:31:Name -> Class:builtins.TypeError
+204:12:Call -> Const:int:42 | Inst:pathlib.Path
+204:12:Name -> Func:django.utils._os.to_path

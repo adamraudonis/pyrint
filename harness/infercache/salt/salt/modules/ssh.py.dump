@@ -1,0 +1,1399 @@
+27:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:6:Attribute -> Func:logging.getLogger
+27:6:Name -> Module:logging
+27:24:Name -> Const:str:'salt.modules.ssh' | Const:str:'__main__'
+33:11:Call -> Const:NoneType:None | Const:str:'ssh' | U
+33:11:Attribute -> Func:salt.utils.path.which
+33:11:Attribute -> Module:salt.utils.path
+33:11:Attribute -> Module:salt.utils
+33:11:Name -> Module:salt
+71:7:Name -> U
+71:14:Name -> List:3
+73:9:Name -> U
+73:16:Name -> List:4
+75:9:Name -> U
+75:16:Name -> List:5
+78:11:Name -> U
+80:15:Name -> U
+81:9:Name -> U
+81:16:Name -> List:2
+83:9:Name -> U
+83:16:Name -> List:13
+84:15:Name -> U
+86:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+86:14:Name -> Class:salt.exceptions.CommandExecutionError
+86:70:Name -> U
+94:7:Name -> U
+95:16:Call -> Const:str:' '
+95:16:Attribute -> BM:builtins.str.format
+95:29:Call -> Const:str:''
+95:29:Attribute -> BM:builtins.str.join
+95:38:Name -> U
+96:15:Name -> U
+96:21:Name -> U
+96:27:Name -> U
+97:11:Name -> Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:' Uninferable Uninferable Uninferable\n'
+106:16:Name -> U
+107:11:Name -> Const:bool:False
+109:15:Name -> U
+111:17:Name -> U
+112:34:Name -> U
+113:17:Name -> U
+114:34:Name -> U
+116:24:Call -> U
+116:24:Attribute -> BM:builtins.str.format
+117:20:Name -> U
+119:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+119:22:Name -> Class:salt.exceptions.CommandExecutionError
+119:44:Name -> U
+121:13:Name -> U
+124:30:Name -> U
+125:7:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+127:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+127:14:Name -> Class:salt.exceptions.CommandExecutionError
+127:36:Name -> Const:str:"AuthorizedKeysFile path: Last character
+128:11:Name -> Const:str:'' | Const:str:'%' | U
+135:12:Call -> ERR
+135:12:Name -> ERR
+135:34:Name -> U
+136:11:Name -> U
+137:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+137:14:Name -> Class:salt.exceptions.CommandExecutionError
+137:45:Name -> U
+138:11:Name -> U
+139:13:Call -> Const:str:'' | Const:str:'%' | U
+139:13:Name -> Func:salt.modules.ssh._expand_authorized_keys_path
+139:42:Name -> U
+139:50:Name -> U
+139:56:Name -> U
+140:11:Call -> U | Const:bool:True | Const:bool:False
+140:11:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+140:11:Attribute -> Module:posixpath | Module:ntpath
+140:11:Name -> Module:os
+140:25:Name -> Const:str:'' | Const:str:'%' | U
+141:17:Call -> U
+141:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+141:17:Attribute -> Module:posixpath | Module:ntpath
+141:17:Name -> Module:os
+141:30:Name -> U
+141:36:Name -> Const:str:'' | Const:str:'%' | U
+142:11:Name -> Const:str:'' | Const:str:'%' | U
+152:16:Call -> Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'Uninferable Uninferable \n' | Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:' ssh-rsa Uninferable \n' | Const:str:' ssh-rsa Uninferable Uninferable\n' | Const:str:' Uninferable Uninferable \n' | Const:str:' Uninferable Uninferable Uninferable\n'
+152:16:Name -> Func:salt.modules.ssh._format_auth_line
+152:34:Name -> U
+152:39:Name -> Const:str:'ssh-rsa' | U
+152:44:Name -> Const:str:'' | U
+152:53:Name -> Const:NoneType:None | U
+155:11:Call -> Const:str:'' | Const:str:'%' | U
+155:11:Name -> Func:salt.modules.ssh._get_config_file
+155:28:Name -> U
+155:34:Name -> Const:str:'.ssh/authorized_keys' | U
+159:13:Call -> U
+159:13:Attribute -> Func:salt.utils.files.fopen
+159:13:Attribute -> Module:salt.utils.files
+159:13:Attribute -> Module:salt.utils
+159:13:Name -> Module:salt
+159:36:Name -> Const:str:'' | Const:str:'%' | U
+160:24:Name -> U
+162:23:Call -> U
+162:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+162:23:Attribute -> Module:salt.utils.stringutils
+162:23:Attribute -> Module:salt.utils
+162:23:Name -> Module:salt
+162:57:Call -> U
+162:57:Attribute -> U
+162:57:Name -> U
+163:19:Name -> U
+167:19:Call -> U
+167:19:Attribute -> U
+167:19:Name -> U
+169:20:Call -> ERR
+169:20:Attribute -> BM:builtins.list.append
+169:20:Name -> List:0
+169:33:Name -> U
+171:24:Call -> U
+171:24:Attribute -> Func:re.findall
+171:24:Name -> Module:re
+173:20:Name -> U
+175:19:Name -> U
+175:29:Call -> ERR
+175:29:Name -> Func:builtins.len
+175:33:Name -> U
+175:51:Name -> U
+175:66:Name -> U
+177:20:Call -> ERR
+177:20:Attribute -> BM:builtins.list.append
+177:20:Name -> List:0
+177:33:Name -> Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'Uninferable Uninferable \n' | Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:' ssh-rsa Uninferable \n' | Const:str:' ssh-rsa Uninferable Uninferable\n' | Const:str:' Uninferable Uninferable \n' | Const:str:' Uninferable Uninferable Uninferable\n'
+179:20:Call -> ERR
+179:20:Attribute -> BM:builtins.list.append
+179:20:Name -> List:0
+179:33:Name -> U
+180:12:Call -> U
+180:12:Attribute -> U
+180:12:Name -> U
+182:17:Call -> U
+182:17:Attribute -> Func:salt.utils.files.fopen
+182:17:Attribute -> Module:salt.utils.files
+182:17:Attribute -> Module:salt.utils
+182:17:Name -> Module:salt
+182:40:Name -> Const:str:'' | Const:str:'%' | U
+184:16:Call -> U
+184:16:Attribute -> U
+184:16:Name -> U
+184:31:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+184:31:Attribute -> Func:salt.utils.data.encode
+184:31:Attribute -> Module:salt.utils.data
+184:31:Attribute -> Module:salt.utils
+184:31:Name -> Module:salt
+184:54:Name -> List:0
+185:11:Name -> Class:builtins.OSError
+186:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+186:14:Name -> Class:salt.exceptions.CommandExecutionError
+186:79:Name -> ExcInst:builtins.OSError
+194:13:Call -> U
+194:13:Attribute -> Func:re.compile
+194:13:Name -> Module:re
+197:13:Call -> U
+197:13:Attribute -> Func:salt.utils.files.fopen
+197:13:Attribute -> Module:salt.utils.files
+197:13:Attribute -> Module:salt.utils
+197:13:Name -> Module:salt
+197:36:Name -> U
+198:24:Name -> U
+200:23:Call -> U
+200:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+200:23:Attribute -> Module:salt.utils.stringutils
+200:23:Attribute -> Module:salt.utils
+200:23:Name -> Module:salt
+200:57:Call -> U
+200:57:Attribute -> U
+200:57:Name -> U
+201:19:Name -> U
+205:19:Call -> U
+205:19:Attribute -> U
+205:19:Name -> U
+210:25:Call -> U
+210:25:Attribute -> Func:re.search
+210:25:Name -> Module:re
+210:35:Name -> U
+210:43:Name -> U
+211:23:Name -> U
+215:23:Call -> U
+215:23:Attribute -> U
+215:23:Name -> U
+216:24:Call -> U
+216:24:Attribute -> U
+216:24:Call -> U
+216:24:Attribute -> U
+216:24:Name -> U
+218:19:Call -> ERR
+218:19:Name -> Func:builtins.len
+218:23:Name -> U
+222:19:Name -> U
+224:30:Call -> U
+224:30:Attribute -> U
+224:30:Name -> U
+228:22:Name -> U
+229:22:Name -> U
+230:26:Call -> Const:str:''
+230:26:Attribute -> BM:builtins.str.join
+230:35:Name -> U
+231:30:Call -> Const:NoneType:None | Const:str:''
+231:30:Name -> Func:salt.modules.ssh._fingerprint
+231:43:Name -> U
+231:48:Name -> U
+232:19:Name -> Const:NoneType:None | Const:str:''
+235:16:Name -> Dict:0
+235:20:Name -> U
+236:27:Name -> U
+237:31:Name -> Const:str:''
+238:31:Name -> U | List:0
+239:35:Name -> Const:NoneType:None | Const:str:''
+241:11:Name -> Class:builtins.OSError
+242:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+242:14:Name -> Class:salt.exceptions.CommandExecutionError
+242:68:Name -> U
+244:11:Name -> Dict:0
+269:7:Name -> U
+270:20:Call -> U
+270:20:Attribute -> U
+270:20:Name -> U
+275:20:Call -> U
+275:20:Name -> Func:builtins.getattr
+275:28:Name -> Module:hashlib
+275:37:Name -> U | Const:str:'sha256'
+276:11:Name -> Class:builtins.AttributeError
+277:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+277:14:Name -> Class:salt.exceptions.CommandExecutionError
+278:41:Name -> U | Const:str:'sha256'
+282:18:Call -> U
+282:18:Attribute -> Func:base64.b64decode
+282:18:Name -> Module:base64
+282:35:Name -> U
+283:11:Attribute -> Class:binascii.Error
+283:11:Name -> Module:binascii
+286:10:Call -> U
+286:10:Attribute -> U
+286:10:Call -> U
+286:10:Name -> U
+286:20:Name -> U
+288:14:Name -> U
+288:18:Name -> U
+288:22:Name -> U
+288:38:Call -> Inst:builtins.range
+288:38:Name -> Class:builtins.range
+288:47:Call -> ERR
+288:47:Name -> Func:builtins.len
+288:51:Name -> U
+289:11:Call -> Const:str:''
+289:11:Attribute -> BM:builtins.str.join
+289:20:Name -> U
+293:7:Name -> Const:NoneType:None | U
+294:17:Name -> Const:NoneType:None | U
+296:17:Name -> Const:NoneType:None | U
+298:7:Call -> U | Const:bool:True | Const:bool:False
+298:7:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+298:7:Attribute -> Module:posixpath | Module:ntpath
+298:7:Name -> Module:os
+298:21:Name -> Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+299:15:Name -> Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+301:11:Name -> Const:NoneType:None | U
+302:20:Call -> ERR
+302:20:Name -> ERR
+302:42:Name -> U
+303:19:Name -> U
+306:37:Name -> U
+308:19:Call -> U
+308:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+308:19:Attribute -> Module:posixpath | Module:ntpath
+308:19:Name -> Module:os
+308:32:Name -> U
+308:47:Name -> Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+315:11:Name -> Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+332:11:Name -> Const:NoneType:None | U
+333:11:Name -> ERR
+337:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+337:18:Name -> Class:salt.exceptions.SaltInvocationError
+339:11:Call -> U
+339:11:Attribute -> Func:re.compile
+339:11:Name -> Module:re
+340:15:Call -> ERR
+340:15:Attribute -> Func:posix.listdir
+340:15:Name -> Module:os
+340:26:Name -> Const:NoneType:None | U | Const:str:'/etc/ssh'
+341:12:Call -> U
+341:12:Attribute -> U
+341:12:Name -> U
+341:23:Name -> U
+342:11:Name -> U
+343:19:Call -> U
+343:19:Attribute -> U
+343:19:Name -> U
+343:38:Name -> Const:bool:True | U
+344:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+344:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+344:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+344:84:Name -> U
+346:15:Call -> U
+346:15:Attribute -> U
+346:15:Name -> U
+346:35:Name -> Const:bool:True | U
+347:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+347:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+347:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+347:74:Name -> U
+350:20:Call -> U
+350:20:Attribute -> U
+350:20:Name -> U
+351:15:Call -> U
+351:15:Attribute -> U
+351:15:Name -> U
+352:25:Call -> U
+352:25:Attribute -> U
+352:25:Name -> U
+354:21:Call -> U
+354:21:Attribute -> Func:salt.utils.files.fopen
+354:21:Attribute -> Module:salt.utils.files
+354:21:Attribute -> Module:salt.utils
+354:21:Name -> Module:salt
+354:44:Call -> U
+354:44:Attribute -> Func:posixpath.join | Func:ntpath.join
+354:44:Attribute -> Module:posixpath | Module:ntpath
+354:44:Name -> Module:os
+354:57:Name -> Const:NoneType:None | U | Const:str:'/etc/ssh'
+354:65:Name -> U
+360:20:Name -> Dict:0
+360:25:Name -> U
+360:34:Call -> U
+360:34:Attribute -> Func:salt.utils.stringutils.to_unicode
+360:34:Attribute -> Module:salt.utils.stringutils
+360:34:Attribute -> Module:salt.utils
+360:34:Name -> Module:salt
+360:68:Call -> U
+360:68:Attribute -> U
+360:68:Name -> U
+363:23:Name -> Dict:0
+363:28:Name -> U
+364:24:Name -> Dict:0
+364:29:Name -> U
+364:39:Call -> U
+364:39:Attribute -> Func:salt.utils.stringutils.to_unicode
+364:39:Attribute -> Module:salt.utils.stringutils
+364:39:Attribute -> Module:salt.utils
+364:39:Name -> Module:salt
+364:73:Call -> U
+364:73:Attribute -> U
+364:73:Name -> U
+365:20:Name -> Dict:0
+365:25:Name -> U
+365:34:Call -> U
+365:34:Attribute -> U
+365:34:Name -> Dict:0
+365:39:Name -> U
+366:19:Name -> Class:builtins.OSError
+367:16:Name -> Dict:0
+367:21:Name -> U
+368:11:Name -> Dict:0
+384:11:Name -> Const:NoneType:None | U
+385:15:Call -> ERR
+385:15:Name -> ERR
+388:11:Call -> ERR
+388:11:Name -> Func:builtins.isinstance
+388:22:Name -> Const:NoneType:None | U
+388:28:Name -> Class:builtins.list
+389:16:Name -> Const:NoneType:None | U
+393:13:Name -> Const:NoneType:None | U | List:1
+396:19:Call -> Const:str:'' | Const:str:'%' | U
+396:19:Name -> Func:salt.modules.ssh._get_config_file
+396:36:Name -> Const:NoneType:None | U
+396:39:Name -> Const:str:'.ssh/authorized_keys' | U
+397:15:Name -> Class:salt.exceptions.CommandExecutionError
+400:11:Name -> Const:NoneType:None | Const:str:'' | Const:str:'%' | U
+400:20:Call -> Const:bool:False | U
+400:20:Attribute -> Func:genericpath.isfile | U
+400:20:Attribute -> Module:posixpath | Module:ntpath
+400:20:Name -> Module:os
+400:35:Name -> Const:NoneType:None | Const:str:'' | Const:str:'%' | U
+401:12:Name -> Dict:0
+401:17:Name -> Const:NoneType:None | U
+401:22:Call -> Dict:0
+401:22:Name -> Func:salt.modules.ssh._validate_keys
+401:37:Name -> Const:NoneType:None | Const:str:'' | Const:str:'%' | U
+401:43:Name -> Const:NoneType:None | U
+403:7:Name -> Const:bool:False | Const:bool:True
+404:11:Name -> Const:NoneType:None | U | List:1
+404:22:Name -> Dict:0
+405:19:Name -> Dict:0
+405:24:Name -> Const:NoneType:None | U | List:1
+409:11:Name -> Dict:0
+429:14:Call -> ERR
+429:14:Name -> ERR
+429:40:Name -> U
+429:48:Name -> Const:str:'base' | U
+430:11:Name -> U
+432:13:Call -> Dict:0
+432:13:Name -> Func:salt.modules.ssh._validate_keys
+432:28:Name -> U
+432:37:Name -> Const:NoneType:None | U
+433:11:Name -> Dict:0
+434:37:Name -> U
+435:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+435:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+435:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+435:18:Name -> Const:str:'No keys detected in Uninferable. Is fil
+436:8:Name -> ERR
+436:40:Name -> Const:str:'No keys detected in Uninferable. Is fil
+440:19:Name -> U
+441:12:Name -> Dict:0
+441:16:Name -> U
+441:23:Call -> Const:str:'update' | Const:str:'add' | Const:str:'exists'
+441:23:Name -> Func:salt.modules.ssh.check_key
+442:16:Name -> U
+443:16:Name -> U
+444:16:Name -> U
+444:23:Name -> U
+445:16:Name -> U
+445:23:Name -> U
+446:16:Name -> U
+446:23:Name -> U
+447:23:Name -> Const:str:'.ssh/authorized_keys' | U
+448:38:Name -> Const:NoneType:None | U
+450:15:Name -> Dict:0
+472:7:Name -> Const:NoneType:None | U
+474:10:Call -> Const:str:'ssh-rsa' | Const:str:'ssh-dss' | Const:str:'ecdsa-sha2-nistp256' | U | Const:str:'ssh-ed25519'
+474:10:Name -> Func:salt.modules.ssh._refine_enc
+474:22:Name -> U
+475:14:Call -> U | Dict:0 | Dict:0
+475:14:Name -> Func:salt.modules.ssh.auth_keys
+476:8:Name -> U
+476:21:Name -> Const:str:'.ssh/authorized_keys' | U
+476:51:Name -> Const:NoneType:None | U
+478:12:Call -> Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'ssh-dss Uninferable Uninferable\n' | Const:str:'ecdsa-sha2-nistp256 Uninferable Uninfer | Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:'ssh-ed25519 Uninferable Uninferable\n' | Const:str:' ssh-rsa Uninferable Uninferable\n' | Const:str:' ssh-dss Uninferable Uninferable\n' | Const:str:' ecdsa-sha2-nistp256 Uninferable Uninfe | Const:str:' Uninferable Uninferable Uninferable\n' | Const:str:' ssh-ed25519 Uninferable Uninferable\n'
+478:12:Name -> Func:salt.modules.ssh._format_auth_line
+478:30:Name -> U
+478:35:Name -> Const:str:'ssh-rsa' | Const:str:'ssh-dss' | Const:str:'ecdsa-sha2-nistp256' | U | Const:str:'ssh-ed25519'
+478:40:Name -> U
+478:49:Name -> U
+493:7:Name -> U
+493:14:Name -> U | Dict:0 | Dict:0
+494:16:Call -> Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:' Uninferable Uninferable Uninferable\n'
+494:16:Name -> Func:salt.modules.ssh._format_auth_line
+495:12:Name -> U
+495:17:Name -> U | Dict:0 | Dict:0
+495:25:Name -> U
+495:38:Name -> U | Dict:0 | Dict:0
+495:46:Name -> U
+495:63:Name -> U | Dict:0 | Dict:0
+495:71:Name -> U
+497:11:Name -> Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:' Uninferable Uninferable Uninferable\n'
+497:20:Name -> Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'ssh-dss Uninferable Uninferable\n' | Const:str:'ecdsa-sha2-nistp256 Uninferable Uninfer | Const:str:'Uninferable Uninferable Uninferable\n' | Const:str:'ssh-ed25519 Uninferable Uninferable\n' | Const:str:' ssh-rsa Uninferable Uninferable\n' | Const:str:' ssh-dss Uninferable Uninferable\n' | Const:str:' ecdsa-sha2-nistp256 Uninferable Uninfe | Const:str:' Uninferable Uninferable Uninferable\n' | Const:str:' ssh-ed25519 Uninferable Uninferable\n'
+521:12:Call -> ERR
+521:12:Name -> ERR
+521:38:Name -> U
+521:46:Name -> Const:str:'base' | U
+522:11:Call -> Const:bool:False | U
+522:11:Attribute -> Func:genericpath.isfile | U
+522:11:Attribute -> Module:posixpath | Module:ntpath
+522:11:Name -> Module:os
+522:26:Name -> U
+523:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+523:14:Name -> Class:salt.exceptions.CommandExecutionError
+525:13:Call -> Dict:0
+525:13:Name -> Func:salt.modules.ssh._validate_keys
+525:28:Name -> U
+525:35:Name -> Const:NoneType:None | U
+526:11:Name -> Dict:0
+527:37:Name -> U
+528:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+528:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+528:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+528:18:Name -> Const:str:'No keys detected in Uninferable. Is fil
+529:8:Name -> ERR
+529:40:Name -> Const:str:'No keys detected in Uninferable. Is fil
+533:19:Name -> U
+534:20:Call -> Const:str:'Authorized keys file  not present' | Const:str:'Authorized keys file % not present' | Const:str:'Authorized keys file Uninferable not pr | U
+534:20:Name -> Func:salt.modules.ssh.rm_auth_key
+535:16:Name -> U
+535:22:Name -> U
+535:34:Name -> Const:str:'.ssh/authorized_keys' | U
+535:64:Name -> Const:NoneType:None | U
+541:32:Name -> Const:str:'' | Const:str:'Authorized keys file  not present' | Const:str:'Authorized keys file % not present' | Const:str:'Authorized keys file Uninferable not pr | U
+543:30:Name -> Const:str:'' | Const:str:'Authorized keys file  not present' | Const:str:'Authorized keys file % not present' | Const:str:'Authorized keys file Uninferable not pr | U
+559:14:Call -> U | Dict:0 | Dict:0
+559:14:Name -> Func:salt.modules.ssh.auth_keys
+560:8:Name -> U
+560:21:Name -> Const:str:'.ssh/authorized_keys' | U
+560:51:Name -> Const:NoneType:None | U
+562:13:Call -> U
+562:13:Attribute -> Func:re.compile
+562:13:Name -> Module:re
+563:7:Name -> U
+563:14:Name -> U | Dict:0 | Dict:0
+565:15:Call -> Const:str:'' | Const:str:'%' | U
+565:15:Name -> Func:salt.modules.ssh._get_config_file
+565:32:Name -> U
+565:38:Name -> Const:str:'.ssh/authorized_keys' | U
+568:15:Call -> Const:bool:False | U
+568:15:Attribute -> Func:genericpath.isfile | U
+568:15:Attribute -> Module:posixpath | Module:ntpath
+568:15:Name -> Module:os
+568:30:Name -> Const:str:'' | Const:str:'%' | U
+569:43:Name -> Const:str:'' | Const:str:'%' | U
+575:17:Call -> U
+575:17:Attribute -> Func:salt.utils.files.fopen
+575:17:Attribute -> Module:salt.utils.files
+575:17:Attribute -> Module:salt.utils
+575:17:Name -> Module:salt
+575:40:Name -> Const:str:'' | Const:str:'%' | U
+576:28:Name -> U
+578:27:Call -> U
+578:27:Attribute -> Func:salt.utils.stringutils.to_unicode
+578:27:Attribute -> Module:salt.utils.stringutils
+578:27:Attribute -> Module:salt.utils
+578:27:Name -> Module:salt
+578:61:Call -> U
+578:61:Attribute -> U
+578:61:Name -> U
+579:23:Name -> U
+583:23:Call -> U
+583:23:Attribute -> U
+583:23:Name -> U
+585:24:Call -> ERR
+585:24:Attribute -> BM:builtins.list.append
+585:24:Name -> List:0
+585:37:Name -> U
+589:29:Call -> U
+589:29:Attribute -> Func:re.search
+589:29:Name -> Module:re
+589:39:Name -> U
+589:47:Name -> U
+590:27:Name -> U
+594:28:Call -> U
+594:28:Attribute -> U
+594:28:Call -> U
+594:28:Attribute -> U
+594:28:Name -> U
+596:23:Call -> ERR
+596:23:Name -> Func:builtins.len
+596:27:Name -> U
+598:24:Call -> ERR
+598:24:Attribute -> BM:builtins.list.append
+598:24:Name -> List:0
+598:37:Name -> U
+601:27:Name -> U
+605:23:Name -> U
+605:31:Name -> U
+608:20:Call -> ERR
+608:20:Attribute -> BM:builtins.list.append
+608:20:Name -> List:0
+608:33:Name -> U
+612:17:Call -> U
+612:17:Attribute -> Func:salt.utils.files.fopen
+612:17:Attribute -> Module:salt.utils.files
+612:17:Attribute -> Module:salt.utils
+612:17:Name -> Module:salt
+612:40:Name -> Const:str:'' | Const:str:'%' | U
+613:16:Call -> U
+613:16:Attribute -> U
+613:16:Name -> U
+613:31:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+613:31:Attribute -> Func:salt.utils.data.encode
+613:31:Attribute -> Module:salt.utils.data
+613:31:Attribute -> Module:salt.utils
+613:31:Name -> Module:salt
+613:54:Name -> List:0
+614:15:Name -> Class:builtins.OSError
+615:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+615:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+615:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+615:61:Name -> ExcInst:builtins.OSError
+640:12:Call -> ERR
+640:12:Name -> ERR
+640:38:Name -> U
+640:46:Name -> Const:str:'base' | U
+641:11:Call -> Const:bool:False | U
+641:11:Attribute -> Func:genericpath.isfile | U
+641:11:Attribute -> Module:posixpath | Module:ntpath
+641:11:Name -> Module:os
+641:26:Name -> U
+642:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+642:14:Name -> Class:salt.exceptions.CommandExecutionError
+644:13:Call -> Dict:0
+644:13:Name -> Func:salt.modules.ssh._validate_keys
+644:28:Name -> U
+644:35:Name -> Const:NoneType:None | U
+645:11:Name -> Dict:0
+646:37:Name -> U
+647:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+647:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+647:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+647:18:Name -> Const:str:'No keys detected in Uninferable. Is fil
+648:8:Name -> ERR
+648:40:Name -> Const:str:'No keys detected in Uninferable. Is fil
+652:18:Call -> ERR
+652:18:Attribute -> BM:builtins.dict.get
+652:18:Name -> Dict:0
+653:19:Name -> U
+654:20:Call -> Const:str:'invalid' | Const:str:'fail' | Const:str:'Invalid public key' | Const:str:'replace' | Const:str:'no change' | Const:str:'fail' | Const:str:'new'
+654:20:Name -> Func:salt.modules.ssh.set_auth_key
+655:16:Name -> U
+656:16:Name -> U
+657:20:Name -> U
+657:27:Name -> U
+658:24:Name -> U
+658:31:Name -> U
+659:24:Name -> U
+659:35:Name -> U
+659:42:Name -> U
+660:23:Name -> Const:str:'.ssh/authorized_keys' | U
+661:27:Call -> Inst:builtins.list
+661:27:Name -> Class:builtins.list
+661:32:Call -> U
+661:32:Attribute -> U
+661:32:Name -> U
+662:38:Name -> Const:NoneType:None | U
+668:21:Name -> Const:str:'' | Const:str:'invalid' | Const:str:'fail' | Const:str:'Invalid public key' | Const:str:'replace' | Const:str:'no change' | Const:str:'fail' | Const:str:'new'
+670:26:Name -> Const:str:'' | Const:str:'invalid' | Const:str:'fail' | Const:str:'Invalid public key' | Const:str:'replace' | Const:str:'no change' | Const:str:'fail' | Const:str:'new'
+672:22:Name -> Const:str:'' | Const:str:'invalid' | Const:str:'fail' | Const:str:'Invalid public key' | Const:str:'replace' | Const:str:'no change' | Const:str:'fail' | Const:str:'new'
+700:7:Name -> Const:NoneType:None | U
+702:7:Call -> ERR
+702:7:Name -> Func:builtins.len
+702:11:Call -> U
+702:11:Attribute -> U
+702:11:Name -> U
+705:10:Call -> Const:str:'ssh-rsa' | Const:str:'ssh-dss' | Const:str:'ecdsa-sha2-nistp256' | Const:str:'ssh-rsa' | U | Const:str:'ssh-ed25519'
+705:10:Name -> Func:salt.modules.ssh._refine_enc
+705:22:Name -> Const:str:'ssh-rsa' | U
+706:12:Call -> ERR
+706:12:Name -> ERR
+706:34:Name -> U
+707:11:Name -> U
+714:19:Call -> Const:NoneType:None | Const:str:''
+714:19:Name -> Func:salt.modules.ssh._fingerprint
+714:32:Name -> U
+714:37:Name -> Const:NoneType:None | U
+715:11:Name -> U
+718:13:Call -> Const:str:'update' | Const:str:'add' | Const:str:'exists'
+718:13:Name -> Func:salt.modules.ssh.check_key
+719:8:Name -> U
+720:8:Name -> U
+721:8:Name -> Const:str:'ssh-rsa' | Const:str:'ssh-dss' | Const:str:'ecdsa-sha2-nistp256' | Const:str:'ssh-rsa' | U | Const:str:'ssh-ed25519'
+722:8:Name -> Const:str:'' | U
+723:8:Name -> Const:NoneType:None | U
+724:15:Name -> Const:str:'.ssh/authorized_keys' | U
+725:19:Name -> Const:NoneType:None | U | List:0
+726:30:Name -> Const:NoneType:None | U
+728:7:Name -> Const:str:'update' | Const:str:'add' | Const:str:'exists'
+729:8:Call -> Const:NoneType:None
+729:8:Name -> Func:salt.modules.ssh._replace_auth_key
+729:26:Name -> U
+729:32:Name -> U
+729:37:Name -> Const:str:'ssh-rsa' | Const:str:'ssh-dss' | Const:str:'ecdsa-sha2-nistp256' | Const:str:'ssh-rsa' | U | Const:str:'ssh-ed25519'
+729:42:Name -> Const:str:'' | U
+729:51:Name -> Const:NoneType:None | U
+729:66:Name -> Const:str:'.ssh/authorized_keys' | U
+731:9:Name -> Const:str:'update' | Const:str:'add' | Const:str:'exists'
+734:20:Call -> Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'ssh-dss Uninferable \n' | Const:str:'ssh-dss Uninferable Uninferable\n' | Const:str:'ecdsa-sha2-nistp256 Uninferable \n' | Const:str:'ecdsa-sha2-nistp256 Uninferable Uninfer | Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | U
+734:20:Name -> Func:salt.modules.ssh._format_auth_line
+734:38:Name -> U
+734:43:Name -> Const:str:'ssh-rsa' | Const:str:'ssh-dss' | Const:str:'ecdsa-sha2-nistp256' | Const:str:'ssh-rsa' | U | Const:str:'ssh-ed25519'
+734:48:Name -> Const:str:'' | U
+734:57:Name -> Const:NoneType:None | U
+735:18:Call -> Const:str:'' | Const:str:'%' | U
+735:18:Name -> Func:salt.modules.ssh._get_config_file
+735:35:Name -> U
+735:41:Name -> Const:str:'.ssh/authorized_keys' | U
+738:15:Call -> U
+738:15:Attribute -> U
+738:15:Name -> U
+739:11:Call -> U
+739:11:Attribute -> BM:builtins.str.startswith | BM:builtins.str.startswith | U
+739:11:Name -> Const:str:'' | Const:str:'%' | U
+739:30:Name -> U
+739:44:Call -> Const:bool:False | U
+739:44:Attribute -> Func:genericpath.isdir | U
+739:44:Attribute -> Module:posixpath | Module:ntpath
+739:44:Name -> Module:os
+739:58:Name -> U
+741:15:Call -> Const:bool:False | U
+741:15:Attribute -> Func:genericpath.isdir | U
+741:15:Attribute -> Module:posixpath | Module:ntpath
+741:15:Name -> Module:os
+741:29:Call -> U
+741:29:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+741:29:Attribute -> Module:posixpath | Module:ntpath
+741:29:Name -> Module:os
+741:45:Name -> Const:str:'' | Const:str:'%' | U
+742:20:Call -> U
+742:20:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+742:20:Attribute -> Module:posixpath | Module:ntpath
+742:20:Name -> Module:os
+742:36:Name -> Const:str:'' | Const:str:'%' | U
+743:12:Call -> Const:NoneType:None
+743:12:Attribute -> Func:os.makedirs
+743:12:Name -> Module:os
+743:24:Name -> U
+744:19:Call -> U
+744:19:Attribute -> Func:salt.utils.platform.is_windows
+744:19:Attribute -> Module:salt.utils.platform
+744:19:Attribute -> Module:salt.utils
+744:19:Name -> Module:salt
+745:19:Call -> ERR
+745:19:Attribute -> Func:posix.geteuid
+745:19:Name -> Module:os
+746:20:Call -> ERR
+746:20:Attribute -> Func:posix.chown
+746:20:Name -> Module:os
+746:29:Name -> U
+746:36:Name -> U
+746:50:Name -> U
+747:16:Call -> ERR
+747:16:Attribute -> Func:posix.chmod
+747:16:Name -> Module:os
+747:25:Name -> U
+749:19:Call -> Const:NoneType:None | Const:str:'restorecon' | U
+749:19:Attribute -> Func:salt.utils.path.which
+749:19:Attribute -> Module:salt.utils.path
+749:19:Attribute -> Module:salt.utils
+749:19:Name -> Module:salt
+750:15:Name -> Const:NoneType:None | Const:str:'restorecon' | U
+751:23:Name -> Const:str:'restorecon' | U
+751:29:Name -> U
+752:16:Call -> Const:int:0
+752:16:Attribute -> Func:subprocess.call
+752:16:Name -> Module:subprocess
+752:32:Name -> List:2
+754:15:Call -> Const:bool:False | U
+754:15:Attribute -> Func:genericpath.isfile | U
+754:15:Attribute -> Module:posixpath | Module:ntpath
+754:15:Name -> Module:os
+754:30:Name -> Const:str:'' | Const:str:'%' | U
+760:17:Call -> U
+760:17:Attribute -> Func:salt.utils.files.fopen
+760:17:Attribute -> Module:salt.utils.files
+760:17:Attribute -> Module:salt.utils
+760:17:Name -> Module:salt
+760:40:Name -> Const:str:'' | Const:str:'%' | U
+761:19:Name -> Const:bool:True | Const:bool:False
+763:20:Call -> U
+763:20:Attribute -> U
+763:20:Name -> U
+764:23:Call -> U
+764:23:Attribute -> U
+764:23:Name -> U
+767:24:Call -> U
+767:24:Attribute -> U
+767:24:Name -> U
+768:27:Call -> U
+768:27:Attribute -> U
+768:27:Name -> U
+769:28:Call -> U
+769:28:Attribute -> U
+769:28:Name -> U
+770:16:Call -> U
+770:16:Attribute -> U
+770:16:Name -> U
+770:26:Call -> Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'ssh-dss Uninferable \n' | Const:str:'ssh-dss Uninferable Uninferable\n' | Const:str:'ecdsa-sha2-nistp256 Uninferable \n' | Const:str:'ecdsa-sha2-nistp256 Uninferable Uninfer | Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | U | Inst:builtins.bytes | Const:bytes:b''
+770:26:Attribute -> Func:salt.utils.stringutils.to_bytes
+770:26:Attribute -> Module:salt.utils.stringutils
+770:26:Attribute -> Module:salt.utils
+770:26:Name -> Module:salt
+770:58:Name -> Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | Const:str:'ssh-dss Uninferable \n' | Const:str:'ssh-dss Uninferable Uninferable\n' | Const:str:'ecdsa-sha2-nistp256 Uninferable \n' | Const:str:'ecdsa-sha2-nistp256 Uninferable Uninfer | Const:str:'ssh-rsa Uninferable \n' | Const:str:'ssh-rsa Uninferable Uninferable\n' | U
+771:15:Name -> Class:builtins.OSError
+773:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+773:18:Name -> Class:salt.exceptions.CommandExecutionError
+773:40:Call -> U
+773:40:Attribute -> BM:builtins.str.format
+773:40:Name -> Const:str:'Could not write to key file: {0}'
+773:51:Name -> ExcInst:builtins.OSError
+775:11:Name -> Const:bool:True | Const:bool:False
+776:19:Call -> U
+776:19:Attribute -> Func:salt.utils.platform.is_windows
+776:19:Attribute -> Module:salt.utils.platform
+776:19:Attribute -> Module:salt.utils
+776:19:Name -> Module:salt
+777:19:Call -> ERR
+777:19:Attribute -> Func:posix.geteuid
+777:19:Name -> Module:os
+778:20:Call -> ERR
+778:20:Attribute -> Func:posix.chown
+778:20:Name -> Module:os
+778:29:Name -> Const:str:'' | Const:str:'%' | U
+778:38:Name -> U
+778:52:Name -> U
+779:16:Call -> ERR
+779:16:Attribute -> Func:posix.chmod
+779:16:Name -> Module:os
+779:25:Name -> Const:str:'' | Const:str:'%' | U
+781:19:Call -> Const:NoneType:None | Const:str:'restorecon' | U
+781:19:Attribute -> Func:salt.utils.path.which
+781:19:Attribute -> Module:salt.utils.path
+781:19:Attribute -> Module:salt.utils
+781:19:Name -> Module:salt
+782:15:Name -> Const:NoneType:None | Const:str:'restorecon' | U
+783:23:Name -> Const:str:'restorecon' | U | Const:str:'restorecon'
+783:29:Name -> Const:str:'' | Const:str:'%' | U
+784:16:Call -> Const:int:0
+784:16:Attribute -> Func:subprocess.call
+784:16:Name -> Module:subprocess
+784:32:Name -> List:2
+794:19:Call -> Inst:builtins.enumerate
+794:19:Name -> Class:builtins.enumerate
+794:29:Name -> U
+795:11:Name -> U
+796:22:Call -> Inst:builtins.int
+796:22:Name -> Class:builtins.int
+796:26:Call -> U
+796:26:Attribute -> U
+796:26:Call -> U
+796:26:Attribute -> U
+796:26:Name -> U
+797:23:Call -> U
+797:23:Attribute -> U
+797:23:Call -> U
+797:23:Attribute -> U
+797:23:Name -> U
+797:29:Name -> U
+798:15:Name -> U
+798:35:Name -> U
+798:47:Name -> U
+800:18:Name -> Inst:builtins.int
+808:16:Name -> U
+810:15:Call -> U
+810:15:Attribute -> U
+810:15:Name -> U
+811:11:Name -> U
+815:11:Call -> U
+815:11:Attribute -> U
+815:11:Name -> U
+818:33:Call -> U
+818:33:Attribute -> U
+818:33:Name -> U
+819:15:Name -> Class:builtins.ValueError
+821:22:Call -> Const:NoneType:None | Const:str:''
+821:22:Name -> Func:salt.modules.ssh._fingerprint
+821:35:Name -> U
+821:62:Name -> Const:NoneType:None | U
+822:15:Name -> Const:NoneType:None | Const:str:''
+824:27:Name -> U
+824:44:Name -> U
+824:56:Name -> U
+824:76:Name -> Const:NoneType:None | Const:str:''
+827:1:Call -> Func:salt.utils.decorators.path.which.wrapper
+827:1:Attribute -> Func:salt.utils.decorators.path.which
+827:1:Attribute -> Module:salt.utils.decorators.path
+827:1:Attribute -> Module:salt.utils.decorators
+827:1:Attribute -> Module:salt.utils
+827:1:Name -> Module:salt
+843:11:Call -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+843:11:Name -> Func:salt.modules.ssh._get_known_hosts_file
+843:40:Name -> Const:NoneType:None | U
+843:53:Name -> U
+845:7:Call -> ERR
+845:7:Name -> Func:builtins.isinstance
+845:18:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+845:24:Name -> Class:builtins.dict
+846:15:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+848:19:Call -> U | Const:str:'[Uninferable]:None' | Const:str:'[Uninferable]:Uninferable'
+848:19:Name -> Func:salt.modules.ssh._hostname_and_port_to_ssh_hostname
+848:54:Name -> U
+848:64:Name -> Const:NoneType:None | U
+849:31:Name -> U | Const:str:'[Uninferable]:None' | Const:str:'[Uninferable]:Uninferable'
+849:51:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+850:12:Call -> ERR
+850:12:Attribute -> ERR
+850:12:Call -> ERR
+850:12:Name -> ERR
+851:8:Name -> List:5
+853:25:Call -> Inst:builtins.list
+853:25:Name -> Class:builtins.list
+854:8:Call -> Gen:salt.modules.ssh._parse_openssh_output
+854:8:Name -> Func:salt.modules.ssh._parse_openssh_output
+854:30:Name -> U
+854:59:Name -> Const:NoneType:None | U
+856:33:Name -> Inst:builtins.list
+856:11:Name -> Inst:builtins.list
+859:1:Call -> Func:salt.utils.decorators.path.which.wrapper
+859:1:Attribute -> Func:salt.utils.decorators.path.which
+859:1:Attribute -> Module:salt.utils.decorators.path
+859:1:Attribute -> Module:salt.utils.decorators
+859:1:Attribute -> Module:salt.utils
+859:1:Name -> Module:salt
+913:7:Name -> Const:NoneType:None | U
+914:8:Call -> ERR
+914:8:Attribute -> BM:builtins.list.extend
+914:8:Name -> List:1
+914:26:Name -> U
+915:7:Name -> Const:NoneType:None | U
+916:8:Call -> ERR
+916:8:Attribute -> BM:builtins.list.extend
+916:8:Name -> List:1
+916:26:Name -> U
+917:11:Name -> Const:NoneType:None | U
+917:19:Call -> ERR
+917:19:Attribute -> ERR
+917:19:Name -> ERR
+917:49:Name -> Tuple:1
+918:8:Call -> ERR
+918:8:Attribute -> BM:builtins.list.extend
+918:8:Name -> List:1
+919:7:Name -> Const:bool:True | U
+920:8:Call -> ERR
+920:8:Attribute -> BM:builtins.list.append
+920:8:Name -> List:1
+921:4:Call -> ERR
+921:4:Attribute -> BM:builtins.list.extend
+921:4:Name -> List:1
+921:22:Call -> Const:str:''
+921:22:Name -> Class:builtins.str
+921:26:Name -> Const:int:5 | U
+922:4:Call -> ERR
+922:4:Attribute -> BM:builtins.list.append
+922:4:Name -> List:1
+922:15:Name -> U
+925:14:Name -> Const:NoneType:None
+925:24:Name -> Const:int:5
+926:19:Name -> Const:int:5
+927:16:Call -> ERR
+927:16:Attribute -> ERR
+927:16:Call -> ERR
+927:16:Name -> ERR
+927:36:Name -> List:1
+928:25:Call -> Inst:builtins.list
+928:25:Name -> Class:builtins.list
+929:8:Call -> Gen:salt.modules.ssh._parse_openssh_output
+929:8:Name -> Func:salt.modules.ssh._parse_openssh_output
+929:30:Name -> Const:NoneType:None | U
+929:59:Name -> Const:NoneType:None | U
+931:33:Name -> Inst:builtins.list
+931:11:Name -> Inst:builtins.list
+961:11:Name -> Const:NoneType:None | U
+963:11:Name -> Const:NoneType:None | U
+964:17:Name -> Const:NoneType:None | U
+966:17:Name -> Const:NoneType:None | U
+968:25:Call -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+968:25:Name -> Func:salt.modules.ssh.get_known_host_entries
+969:8:Name -> Const:NoneType:None | U
+970:8:Name -> Const:NoneType:None | U
+971:15:Name -> Const:NoneType:None | U | Const:str:'/etc/ssh/ssh_known_hosts' | Const:str:'.ssh/known_hosts'
+972:13:Name -> Const:NoneType:None | U
+973:30:Name -> Const:NoneType:None | U
+975:7:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+975:41:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+976:15:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+977:59:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+977:18:Name -> U
+977:36:Name -> Dict:2 | Dict:2 | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+979:58:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+979:9:Name -> U
+979:35:Name -> Dict:2 | Dict:2 | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+982:11:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+984:7:Name -> Const:NoneType:None | U
+985:27:Name -> U
+985:34:Name -> U
+986:9:Name -> Const:NoneType:None | U
+987:27:Name -> U
+987:42:Name -> U
+1002:11:Name -> Const:NoneType:None | U
+1005:11:Call -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1005:11:Name -> Func:salt.modules.ssh._get_known_hosts_file
+1005:40:Name -> Const:NoneType:None | U
+1005:53:Name -> Const:NoneType:None | U
+1007:7:Call -> ERR
+1007:7:Name -> Func:builtins.isinstance
+1007:18:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1007:24:Name -> Class:builtins.dict
+1008:15:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1010:11:Call -> Const:bool:False | U
+1010:11:Attribute -> Func:genericpath.isfile | U
+1010:11:Attribute -> Module:posixpath | Module:ntpath
+1010:11:Name -> Module:os
+1010:26:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1013:41:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1016:19:Call -> Const:NoneType:None | U | Const:str:'[None]:None' | Const:str:'[None]:Uninferable' | Const:str:'[Uninferable]:None' | Const:str:'[Uninferable]:Uninferable'
+1016:19:Name -> Func:salt.modules.ssh._hostname_and_port_to_ssh_hostname
+1016:54:Name -> Const:NoneType:None | U
+1016:64:Name -> Const:NoneType:None | U
+1017:31:Name -> Const:NoneType:None | U | Const:str:'[None]:None' | Const:str:'[None]:Uninferable' | Const:str:'[Uninferable]:None' | Const:str:'[Uninferable]:Uninferable'
+1017:51:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1018:17:Call -> ERR
+1018:17:Name -> ERR
+1018:37:Name -> List:5
+1019:11:Call -> U
+1019:11:Attribute -> Func:salt.utils.platform.is_windows
+1019:11:Attribute -> Module:salt.utils.platform
+1019:11:Attribute -> Module:salt.utils
+1019:11:Name -> Module:salt
+1021:11:Call -> ERR
+1021:11:Attribute -> Func:posix.geteuid
+1021:11:Name -> Module:os
+1021:33:Name -> Const:NoneType:None | U
+1022:20:Call -> ERR
+1022:20:Name -> ERR
+1022:42:Name -> Const:NoneType:None | U
+1023:12:Call -> ERR
+1023:12:Attribute -> Func:posix.chown
+1023:12:Name -> Module:os
+1023:21:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1023:27:Name -> U
+1023:41:Name -> U
+1024:44:Name -> U
+1101:11:Name -> Const:NoneType:None | U
+1104:7:Name -> Const:NoneType:None | U
+1104:28:Name -> Const:NoneType:None | U
+1104:36:Name -> Const:int:22
+1104:57:Name -> Const:bool:True | U
+1115:26:Call -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1115:26:Name -> Func:salt.modules.ssh.get_known_host_entries
+1116:8:Name -> Const:NoneType:None | U
+1117:8:Name -> Const:NoneType:None | U
+1118:15:Name -> Const:NoneType:None | U
+1119:13:Name -> Const:NoneType:None | U
+1120:30:Name -> Const:NoneType:None | U
+1122:7:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1122:42:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1123:15:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1127:11:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1126:9:Name -> U
+1126:27:Name -> Dict:2 | Dict:2 | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1126:50:Name -> Const:NoneType:None | U
+1126:65:Name -> U
+1126:77:Name -> Const:NoneType:None | U
+1131:59:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1131:9:Name -> U
+1131:35:Name -> Dict:2 | Dict:2 | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1134:11:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1136:9:Name -> Const:NoneType:None | U
+1136:25:Name -> Const:NoneType:None | U
+1136:44:Name -> U
+1138:9:Name -> Const:NoneType:None | U
+1138:17:Name -> Const:NoneType:None | U
+1138:28:Name -> U
+1140:9:Name -> Const:NoneType:None | U
+1140:25:Name -> Const:NoneType:None | U
+1143:11:Name -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True
+1143:35:Name -> Const:bool:False | Const:bool:True
+1144:44:Name -> U
+1146:11:Name -> Const:NoneType:None | U
+1147:30:Call -> Inst:builtins.list | Const:NoneType:None
+1147:30:Name -> Func:salt.modules.ssh.recv_known_host_entries
+1148:12:Name -> Const:NoneType:None | U
+1149:16:Name -> Const:NoneType:None | U
+1150:17:Name -> Const:NoneType:None | U
+1151:29:Name -> Const:bool:True | U
+1152:20:Name -> Const:int:5 | U
+1153:34:Name -> Const:NoneType:None | U
+1157:55:Name -> Inst:builtins.list | Const:NoneType:None
+1157:13:Name -> U
+1157:31:Name -> Inst:builtins.list
+1161:15:Name -> Inst:builtins.list | Const:NoneType:None
+1160:13:Name -> U
+1160:39:Name -> Inst:builtins.list
+1165:15:Name -> Inst:builtins.list | Const:NoneType:None
+1168:11:Name -> Const:NoneType:None | U
+1168:27:Name -> Const:NoneType:None | U
+1168:46:Name -> U
+1177:11:Name -> Const:bool:False | Const:bool:True
+1178:15:Call -> Inst:builtins.set
+1178:15:Name -> Class:builtins.set
+1178:19:Name -> U
+1178:34:Call -> Inst:builtins.set
+1178:34:Name -> Class:builtins.set
+1178:38:Name -> U
+1179:52:Name -> U
+1181:11:Call -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1181:11:Name -> Func:salt.modules.ssh._get_known_hosts_file
+1181:40:Name -> Const:NoneType:None | U
+1181:53:Name -> Const:NoneType:None | U
+1183:7:Call -> ERR
+1183:7:Name -> Func:builtins.isinstance
+1183:18:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1183:24:Name -> Class:builtins.dict
+1184:15:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1186:7:Call -> Const:bool:False | U
+1186:7:Attribute -> Func:genericpath.isfile | U
+1186:7:Attribute -> Module:posixpath | Module:ntpath
+1186:7:Name -> Module:os
+1186:22:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1187:19:Attribute -> ERR
+1187:19:Call -> ERR
+1187:19:Attribute -> Func:posix.stat
+1187:19:Name -> Module:os
+1187:27:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1191:23:Call -> Const:NoneType:None | U | Const:str:'[None]:None' | Const:str:'[None]:Uninferable' | Const:str:'[Uninferable]:None' | Const:str:'[Uninferable]:Uninferable'
+1191:23:Name -> Func:salt.modules.ssh._hostname_and_port_to_ssh_hostname
+1191:58:Name -> Const:NoneType:None | U
+1191:68:Name -> Const:NoneType:None | U
+1192:35:Name -> Const:NoneType:None | U | Const:str:'[None]:None' | Const:str:'[None]:Uninferable' | Const:str:'[Uninferable]:None' | Const:str:'[Uninferable]:Uninferable'
+1192:55:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1193:16:Call -> ERR
+1193:16:Attribute -> ERR
+1193:16:Call -> ERR
+1193:16:Name -> ERR
+1194:12:Name -> List:5
+1196:23:Call -> Inst:builtins.list
+1196:23:Name -> Class:builtins.list
+1196:28:Call -> Gen:salt.modules.ssh._get_matched_host_line_numbers
+1196:28:Name -> Func:salt.modules.ssh._get_matched_host_line_numbers
+1196:59:Name -> U
+1196:66:Name -> Const:NoneType:None | U
+1198:11:Name -> Inst:builtins.list
+1200:21:Call -> U
+1200:21:Attribute -> Func:salt.utils.files.fopen
+1200:21:Attribute -> Module:salt.utils.files
+1200:21:Attribute -> Module:salt.utils
+1200:21:Name -> Module:salt
+1200:44:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1201:40:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+1201:40:Attribute -> Func:salt.utils.data.decode
+1201:40:Attribute -> Module:salt.utils.data
+1201:40:Attribute -> Module:salt.utils
+1201:40:Name -> Module:salt
+1201:63:Call -> Inst:builtins.list
+1201:63:Name -> Class:builtins.list
+1201:68:Name -> U
+1203:35:Call -> ERR
+1203:35:Name -> Func:builtins.sorted
+1203:42:Name -> Inst:builtins.list
+1204:28:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+1204:46:Name -> U
+1206:20:Call -> U
+1206:20:Attribute -> U
+1206:20:Name -> U
+1207:20:Call -> U
+1207:20:Attribute -> U
+1207:20:Name -> U
+1208:20:Call -> U
+1208:20:Attribute -> U
+1208:20:Name -> U
+1209:24:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+1209:24:Attribute -> Func:salt.utils.data.decode
+1209:24:Attribute -> Module:salt.utils.data
+1209:24:Attribute -> Module:salt.utils
+1209:24:Name -> Module:salt
+1209:47:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+1211:19:Name -> Class:builtins.OSError
+1212:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1212:22:Name -> Class:salt.exceptions.CommandExecutionError
+1213:20:Call -> U
+1213:20:Attribute -> BM:builtins.str.format
+1214:24:Name -> ExcInst:builtins.OSError
+1221:7:Name -> Const:NoneType:None | U
+1222:44:Name -> Const:NoneType:None | U
+1222:61:Name -> Const:NoneType:None | U
+1222:73:Name -> U
+1225:17:Name -> Inst:builtins.list | Const:NoneType:None | List:1
+1227:12:Name -> Const:bool:True | U
+1228:15:Name -> Const:NoneType:None | U
+1228:24:Name -> Const:int:22
+1229:22:Name -> Dict:3
+1231:19:Call -> U
+1231:19:Attribute -> BM:builtins.str.format
+1231:55:Name -> Dict:3
+1233:12:Name -> Dict:3
+1233:28:Name -> Const:NoneType:None | U
+1234:19:Call -> U
+1234:19:Attribute -> BM:builtins.str.format
+1234:64:Name -> Dict:3
+1235:8:Call -> U
+1235:8:Attribute -> U | BM:builtins.list.append
+1235:8:Name -> U | List:0
+1235:21:Name -> U
+1238:14:Call -> U
+1238:14:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+1238:14:Attribute -> Module:posixpath | Module:ntpath
+1238:14:Name -> Module:os
+1238:30:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1239:7:Name -> Const:NoneType:None | U
+1240:16:Call -> ERR
+1240:16:Name -> ERR
+1240:38:Name -> U
+1243:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1243:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1243:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1243:57:Name -> U
+1244:8:Call -> Const:NoneType:None
+1244:8:Attribute -> Func:os.makedirs
+1244:8:Name -> Module:os
+1244:20:Name -> U
+1245:11:Name -> Class:builtins.OSError
+1246:11:Attribute -> Tuple:0
+1246:11:Name -> ExcInst:builtins.OSError
+1247:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1247:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1247:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1247:59:Name -> U
+1247:68:Attribute -> Tuple:0
+1247:68:Name -> ExcInst:builtins.OSError
+1248:13:Attribute -> Tuple:0
+1248:13:Name -> ExcInst:builtins.OSError
+1249:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1249:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1249:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1249:65:Name -> U
+1252:11:Name -> Const:NoneType:None | U
+1253:12:Call -> ERR
+1253:12:Attribute -> Func:posix.chown
+1253:12:Name -> Module:os
+1253:21:Name -> U
+1253:30:Name -> U
+1253:44:Name -> U
+1254:12:Call -> ERR
+1254:12:Attribute -> Func:posix.chmod
+1254:12:Name -> Module:os
+1254:21:Name -> U
+1258:13:Call -> U
+1258:13:Attribute -> Func:salt.utils.files.fopen
+1258:13:Attribute -> Module:salt.utils.files
+1258:13:Attribute -> Module:salt.utils
+1258:13:Name -> Module:salt
+1258:36:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1259:12:Call -> U
+1259:12:Attribute -> U
+1259:12:Name -> U
+1259:29:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1259:29:Attribute -> Func:salt.utils.data.encode
+1259:29:Attribute -> Module:salt.utils.data
+1259:29:Attribute -> Module:salt.utils
+1259:29:Name -> Module:salt
+1259:52:Name -> U | List:0
+1260:11:Name -> Class:builtins.OSError
+1261:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1261:14:Name -> Class:salt.exceptions.CommandExecutionError
+1262:53:Name -> ExcInst:builtins.OSError
+1265:11:Call -> U
+1265:11:Attribute -> Func:salt.utils.platform.is_windows
+1265:11:Attribute -> Module:salt.utils.platform
+1265:11:Attribute -> Module:salt.utils
+1265:11:Name -> Module:salt
+1266:11:Call -> ERR
+1266:11:Attribute -> Func:posix.geteuid
+1266:11:Name -> Module:os
+1266:33:Name -> Const:NoneType:None | U
+1267:12:Call -> ERR
+1267:12:Attribute -> Func:posix.chown
+1267:12:Name -> Module:os
+1267:21:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1267:27:Name -> U
+1267:41:Name -> U
+1268:11:Name -> U | Const:NoneType:None
+1269:12:Call -> ERR
+1269:12:Attribute -> Func:posix.chmod
+1269:12:Name -> Module:os
+1269:21:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1269:27:Name -> U
+1271:12:Call -> ERR
+1271:12:Attribute -> Func:posix.chmod
+1271:12:Name -> Module:os
+1271:21:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1273:7:Name -> Const:NoneType:None | U
+1273:15:Name -> Const:bool:True | U
+1274:21:Call -> ERR
+1274:21:Name -> ERR
+1274:59:Name -> Const:NoneType:None | U
+1274:72:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1276:40:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1276:68:Name -> Inst:builtins.list | Const:NoneType:None | List:1
+1277:11:Name -> Dict:3
+1301:11:Name -> Const:NoneType:None | U
+1302:15:Call -> ERR
+1302:15:Name -> ERR
+1304:11:Call -> ERR
+1304:11:Name -> Func:builtins.isinstance
+1304:22:Name -> Const:NoneType:None | U
+1304:28:Name -> Class:builtins.list
+1306:16:Name -> Const:NoneType:None | U
+1309:13:Name -> Const:NoneType:None | U | List:1
+1310:8:Name -> Dict:0
+1310:13:Name -> Const:NoneType:None | U
+1311:19:Call -> ERR
+1311:19:Name -> ERR
+1311:41:Name -> Const:NoneType:None | U
+1313:25:Name -> U
+1319:11:Name -> Const:NoneType:None | U
+1320:12:Call -> ERR
+1320:12:Attribute -> BM:builtins.list.append
+1320:12:Name -> List:0
+1320:28:Name -> U
+1321:13:Name -> Const:NoneType:None | U
+1325:11:Name -> Const:NoneType:None | U
+1326:12:Call -> ERR
+1326:12:Attribute -> BM:builtins.list.append | BM:builtins.list.append
+1326:12:Name -> List:0 | List:4
+1326:28:Name -> U
+1327:13:Name -> Const:NoneType:None | U
+1331:19:Name -> List:0 | List:4 | List:4 | List:8
+1332:15:Call -> ERR
+1332:15:Attribute -> BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith
+1332:15:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519'
+1333:26:Call -> U
+1333:26:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1333:26:Attribute -> Module:posixpath | Module:ntpath
+1333:26:Name -> Module:os
+1333:43:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519'
+1334:22:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519'
+1338:26:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519'
+1339:22:Call -> U
+1339:22:Attribute -> BM:builtins.str.format
+1339:42:Name -> U
+1339:60:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519'
+1341:15:Call -> Const:bool:False | Const:bool:True | U
+1341:15:Attribute -> Func:genericpath.exists | U
+1341:15:Attribute -> Module:posixpath | Module:ntpath
+1341:15:Name -> Module:os
+1341:30:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519' | U
+1343:25:Call -> U
+1343:25:Attribute -> Func:salt.utils.files.fopen
+1343:25:Attribute -> Module:salt.utils.files
+1343:25:Attribute -> Module:salt.utils
+1343:25:Name -> Module:salt
+1343:48:Name -> Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519' | U
+1344:24:Name -> Dict:0
+1344:29:Name -> Const:NoneType:None | U
+1344:32:Name -> U | Const:str:'id_rsa.pub' | Const:str:'id_dsa.pub' | Const:str:'id_ecdsa.pub' | Const:str:'id_ed25519.pub' | Const:str:'id_rsa' | Const:str:'id_dsa' | Const:str:'id_ecdsa' | Const:str:'id_ed25519'
+1344:43:Call -> Const:str:''
+1344:43:Attribute -> BM:builtins.str.strip
+1344:43:Call -> Const:str:''
+1344:43:Attribute -> BM:builtins.str.join
+1345:28:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+1345:28:Attribute -> Func:salt.utils.data.decode
+1345:28:Attribute -> Module:salt.utils.data
+1345:28:Attribute -> Module:salt.utils
+1345:28:Name -> Module:salt
+1345:51:Call -> U
+1345:51:Attribute -> U
+1345:51:Name -> U
+1347:23:Name -> Class:builtins.OSError
+1352:15:Name -> Dict:0
+1353:11:Name -> Dict:0
+1353:16:Name -> U
+1354:12:Name -> Dict:0
+1354:18:Name -> U
+1354:25:Name -> Dict:0
+1354:30:Name -> U
+1355:11:Name -> Dict:0
+1358:1:Call -> Func:salt.utils.decorators.path.which.wrapper
+1358:1:Attribute -> Func:salt.utils.decorators.path.which
+1358:1:Attribute -> Module:salt.utils.decorators.path
+1358:1:Attribute -> Module:salt.utils.decorators
+1358:1:Attribute -> Module:salt.utils
+1358:1:Name -> Module:salt
+1380:11:Call -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1380:11:Name -> Func:salt.modules.ssh._get_known_hosts_file
+1380:40:Name -> Const:NoneType:None | U
+1380:53:Name -> Const:NoneType:None | U
+1382:7:Call -> ERR
+1382:7:Name -> Func:builtins.isinstance
+1382:18:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1382:24:Name -> Class:builtins.dict
+1383:15:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1385:11:Call -> Const:bool:False | U
+1385:11:Attribute -> Func:genericpath.isfile | U
+1385:11:Attribute -> Module:posixpath | Module:ntpath
+1385:11:Name -> Module:os
+1385:26:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1388:41:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1390:15:Attribute -> ERR
+1390:15:Call -> ERR
+1390:15:Attribute -> Func:posix.stat
+1390:15:Name -> Module:os
+1390:23:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1391:37:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1392:17:Call -> ERR
+1392:17:Name -> ERR
+1392:37:Name -> List:4
+1393:4:Call -> ERR
+1393:4:Attribute -> Func:posix.chmod
+1393:4:Name -> Module:os
+1393:13:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1393:19:Name -> U
+1394:11:Call -> U
+1394:11:Attribute -> Func:salt.utils.platform.is_windows
+1394:11:Attribute -> Module:salt.utils.platform
+1394:11:Attribute -> Module:salt.utils
+1394:11:Name -> Module:salt
+1396:11:Call -> ERR
+1396:11:Attribute -> Func:posix.geteuid
+1396:11:Name -> Module:os
+1396:33:Name -> Const:NoneType:None | U
+1397:20:Call -> ERR
+1397:20:Name -> ERR
+1397:42:Name -> Const:NoneType:None | U
+1398:12:Call -> ERR
+1398:12:Attribute -> Func:posix.chown
+1398:12:Name -> Module:os
+1398:21:Name -> Dict:2 | Dict:2 | Const:NoneType:None | U | Const:str:'.ssh/known_hosts' | Const:str:'/etc/ssh/ssh_known_hosts'
+1398:27:Name -> U
+1398:41:Name -> U
+1399:44:Name -> U
+1402:54:Name -> Const:int:22
+1403:11:Name -> Const:int:22 | U
+1403:19:Name -> Const:int:22 | U
+1403:27:Name -> Const:int:22
+1404:15:Name -> U
+1406:19:Name -> U
+1406:31:Name -> Const:int:22 | U
+1425:11:Call -> ERR
+1425:11:Name -> ERR
+1425:45:Name -> U

@@ -1,0 +1,3505 @@
+38:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+38:6:Attribute -> Func:logging.getLogger
+38:6:Name -> Module:logging
+38:24:Name -> Const:str:'salt.cloud' | Const:str:'__main__'
+46:8:Name -> U
+46:26:Name -> U
+49:18:Call -> U
+49:18:Name -> U
+49:24:Name -> U
+49:32:Name -> U
+50:12:Call -> U
+50:12:Attribute -> U
+50:12:Name -> U
+51:15:Name -> Class:builtins.KeyboardInterrupt
+52:20:Call -> Const:str:''
+52:20:Attribute -> Func:traceback.format_exc
+52:20:Name -> Module:traceback
+53:12:Call -> U
+53:12:Attribute -> U
+53:12:Name -> U
+54:12:Call -> U
+54:12:Attribute -> U
+54:12:Name -> U
+55:12:Call -> U
+55:12:Attribute -> U
+55:12:Name -> U
+55:25:Name -> ExcInst:builtins.KeyboardInterrupt
+55:31:Name -> Const:str:''
+56:15:Name -> Class:builtins.Exception
+57:20:Call -> Const:str:''
+57:20:Attribute -> Func:traceback.format_exc
+57:20:Name -> Module:traceback
+58:12:Call -> U
+58:12:Attribute -> U
+58:12:Name -> U
+59:12:Call -> U
+59:12:Attribute -> U
+59:12:Name -> U
+60:12:Call -> U
+60:12:Attribute -> U
+60:12:Name -> U
+60:25:Name -> ExcInst:builtins.Exception
+60:31:Name -> Const:str:''
+61:15:Name -> Class:builtins.SystemExit
+62:20:Call -> Const:str:''
+62:20:Attribute -> Func:traceback.format_exc
+62:20:Name -> Module:traceback
+63:12:Call -> U
+63:12:Attribute -> U
+63:12:Name -> U
+64:12:Call -> U
+64:12:Attribute -> U
+64:12:Name -> U
+65:12:Call -> U
+65:12:Attribute -> U
+65:12:Name -> U
+65:25:Name -> ExcInst:builtins.SystemExit
+65:31:Name -> Const:str:''
+66:15:Name -> Const:NoneType:None | U
+68:11:Name -> Func:salt.cloud.communicator._call
+128:11:Name -> Const:NoneType:None | U
+130:11:Name -> Const:NoneType:None | U
+132:11:Name -> Const:NoneType:None | U
+133:15:Call -> Inst:multiprocessing.pool.Pool
+133:15:Attribute -> BM:multiprocessing.context.BaseContext.Pool
+133:15:Name -> Module:multiprocessing
+133:36:Name -> Const:NoneType:None | U | Const:int:1
+134:11:Name -> Const:NoneType:None | U
+135:18:Call -> Inst:multiprocessing.managers.SyncManager
+135:18:Attribute -> Func:multiprocessing.Manager | BM:multiprocessing.context.BaseContext.Manager
+135:18:Name -> Module:multiprocessing
+136:16:Call -> Inst:queue.Queue
+136:16:Attribute -> Class:queue.Queue
+136:16:Name -> Inst:multiprocessing.managers.SyncManager
+138:7:Name -> Const:NoneType:None | U
+138:39:Name -> Const:NoneType:None | U
+140:12:Call -> U
+140:12:Attribute -> BM:builtins.str.format
+142:34:Name -> U
+144:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+144:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+144:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+144:18:Name -> U
+145:14:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+145:14:Name -> Class:salt.exceptions.SaltCloudSystemExit
+145:55:Name -> U
+146:9:Name -> Const:NoneType:None | U
+147:21:Name -> Const:NoneType:None | U | Inst:queue.Queue
+147:29:Name -> U
+147:35:Name -> Const:NoneType:None | U | Dict:0
+147:54:Name -> U
+148:14:Call -> U
+148:14:Attribute -> U | BM:multiprocessing.pool.Pool.map
+148:14:Name -> Const:NoneType:None | U | Inst:multiprocessing.pool.Pool
+148:28:Name -> U
+148:45:Name -> U
+150:14:Call -> U
+150:14:Attribute -> U | BM:multiprocessing.pool.Pool.apply
+150:14:Name -> Const:NoneType:None | U | Inst:multiprocessing.pool.Pool
+150:25:Name -> U
+150:34:Name -> Const:NoneType:None | U | Inst:queue.Queue
+150:41:Name -> Const:NoneType:None | U
+150:47:Name -> Const:NoneType:None | U | Dict:0
+152:15:Call -> U
+152:15:Attribute -> U | BM:queue.Queue.get
+152:15:Name -> Const:NoneType:None | U | Inst:queue.Queue
+153:11:Name -> U
+154:20:Call -> U
+154:20:Attribute -> U | BM:queue.Queue.get
+154:20:Name -> Const:NoneType:None | U | Inst:queue.Queue
+155:20:Call -> U
+155:20:Attribute -> U | BM:queue.Queue.get
+155:20:Name -> Const:NoneType:None | U | Inst:queue.Queue
+156:28:Name -> U
+157:29:Name -> U
+158:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+158:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+158:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+158:22:Name -> Const:str:'Caught Uninferable, terminating workers
+159:12:Call -> U | Const:NoneType:None
+159:12:Attribute -> U | BM:multiprocessing.pool.Pool.terminate
+159:12:Name -> Const:NoneType:None | U | Inst:multiprocessing.pool.Pool
+160:12:Call -> U | Const:NoneType:None
+160:12:Attribute -> U | BM:multiprocessing.pool.Pool.join
+160:12:Name -> Const:NoneType:None | U | Inst:multiprocessing.pool.Pool
+161:18:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+161:18:Name -> Class:salt.exceptions.SaltCloudSystemExit
+161:59:Name -> Const:str:'Caught Uninferable, terminating workers
+162:13:Name -> U
+162:33:Name -> Const:NoneType:None | U
+162:46:Call -> U
+162:46:Name -> Const:NoneType:None | U
+162:55:Name -> U
+163:12:Call -> U | Const:NoneType:None
+163:12:Attribute -> U | BM:multiprocessing.pool.Pool.close
+163:12:Name -> Const:NoneType:None | U | Inst:multiprocessing.pool.Pool
+164:12:Call -> U | Const:NoneType:None
+164:12:Attribute -> U | BM:multiprocessing.pool.Pool.join
+164:12:Name -> Const:NoneType:None | U | Inst:multiprocessing.pool.Pool
+167:12:Call -> ERR
+167:12:Attribute -> Func:time.sleep
+167:12:Name -> Module:time
+168:11:Name -> U
+177:11:Name -> Const:NoneType:None | U
+178:12:Name -> Inst:salt.cloud.CloudClient
+178:24:Name -> U
+180:12:Name -> Inst:salt.cloud.CloudClient
+180:24:Call -> U
+180:24:Attribute -> Func:salt.config.cloud_config
+180:24:Attribute -> Module:salt.config
+180:24:Name -> Module:salt
+180:49:Name -> Const:NoneType:None | U
+183:18:Attribute -> U
+183:18:Name -> Inst:salt.cloud.CloudClient
+184:8:Call -> Const:NoneType:None
+184:8:Attribute -> Func:salt.utils.verify.verify_env
+184:8:Attribute -> Module:salt.utils.verify
+184:8:Attribute -> Module:salt.utils
+184:8:Name -> Module:salt
+184:37:Name -> List:1
+184:45:Call -> U
+184:45:Attribute -> Func:salt.utils.user.get_user
+184:45:Attribute -> Module:salt.utils.user
+184:45:Attribute -> Module:salt.utils
+184:45:Name -> Module:salt
+186:11:Name -> Const:NoneType:None | U
+187:34:Call -> U
+187:34:Attribute -> U
+187:34:Call -> U
+187:34:Attribute -> U
+187:34:Name -> U
+188:25:Name -> U
+189:16:Name -> U
+190:16:Call -> U
+190:16:Attribute -> U
+190:16:Attribute -> U
+190:16:Name -> Inst:salt.cloud.CloudClient
+190:47:Name -> U
+190:54:Name -> U
+190:62:Name -> U
+191:33:Call -> U
+191:33:Attribute -> U
+191:33:Call -> U
+191:33:Attribute -> U
+191:33:Name -> U
+192:27:Call -> U
+192:27:Attribute -> U
+192:27:Name -> U
+193:25:Call -> ERR
+193:25:Name -> Func:builtins.next
+193:30:Call -> ERR
+193:30:Name -> Func:builtins.iter
+193:35:Call -> U
+193:35:Attribute -> U
+193:35:Attribute -> U
+193:35:Name -> Inst:salt.cloud.CloudClient
+193:58:Name -> U
+194:16:Name -> U
+194:41:Name -> U
+194:52:Name -> U
+195:16:Name -> U
+195:37:Name -> U
+196:16:Call -> U
+196:16:Attribute -> U
+196:16:Attribute -> U
+196:16:Name -> Inst:salt.cloud.CloudClient
+196:46:Name -> U
+196:52:Name -> U
+197:16:Call -> U
+197:16:Attribute -> U
+197:16:Attribute -> U
+197:16:Name -> Inst:salt.cloud.CloudClient
+197:39:Name -> U
+197:49:Name -> U
+198:21:Name -> U
+198:27:Name -> U
+200:33:Call -> U
+200:33:Attribute -> U
+200:33:Call -> U
+200:33:Attribute -> U
+200:33:Name -> U
+201:33:Attribute -> U
+201:33:Name -> Inst:salt.cloud.CloudClient
+202:20:Attribute -> U
+202:20:Name -> Inst:salt.cloud.CloudClient
+203:16:Attribute -> U
+203:16:Name -> Inst:salt.cloud.CloudClient
+203:34:Name -> U
+203:42:Name -> U
+204:12:Call -> U
+204:12:Attribute -> U
+204:12:Attribute -> U
+204:12:Name -> Inst:salt.cloud.CloudClient
+204:29:Name -> U
+212:15:Call -> U
+212:15:Attribute -> BM:salt.utils.immutabletypes.ImmutableDict.copy | U
+212:15:Attribute -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:26
+212:15:Attribute -> Module:salt.config
+212:15:Name -> Module:salt
+214:8:Call -> U
+214:8:Attribute -> U
+214:8:Name -> U
+214:20:Call -> U
+214:20:Attribute -> U
+214:20:Attribute -> U
+214:20:Name -> Inst:salt.cloud.CloudClient
+216:8:Name -> U
+217:8:Name -> U
+218:8:Name -> U
+219:8:Name -> U
+220:8:Name -> U
+221:8:Name -> U
+223:23:Name -> Dict:0
+224:12:Call -> U
+224:12:Attribute -> U
+224:12:Name -> U
+224:24:Name -> Dict:0
+225:8:Call -> U
+225:8:Attribute -> U
+225:8:Name -> U
+225:20:Name -> Dict:0
+226:18:Call -> U
+226:18:Attribute -> U
+226:18:Name -> U
+228:11:Name -> U
+229:27:Call -> U
+229:27:Attribute -> U
+229:27:Call -> U
+229:27:Attribute -> U
+229:27:Name -> U
+230:29:Name -> U
+230:40:Name -> U
+231:23:Name -> U
+231:35:Name -> U
+232:20:Call -> U
+232:20:Attribute -> U
+232:20:Name -> U
+232:37:Name -> U
+237:16:Call -> U
+237:16:Attribute -> U
+237:16:Call -> U
+237:16:Attribute -> U
+237:16:Name -> U
+238:25:Call -> U
+238:25:Attribute -> U
+238:25:Name -> U
+239:19:Call -> U
+239:19:Attribute -> U
+239:19:Name -> U
+241:15:Name -> U
+242:29:Call -> U
+242:29:Attribute -> U
+242:29:Name -> U
+243:32:Call -> U
+243:32:Attribute -> U
+243:32:Name -> U
+244:23:Name -> U
+244:39:Name -> U
+245:24:Call -> U
+245:24:Attribute -> U
+245:24:Name -> U
+245:39:Name -> U
+246:15:Name -> U
+252:16:Call -> U
+252:16:Name -> Func:builtins.getattr
+252:24:Name -> Inst:salt.cloud.CloudClient
+252:30:Name -> U
+253:17:Call -> U
+253:17:Attribute -> Func:salt.utils.args.format_call
+253:17:Attribute -> Module:salt.utils.args
+253:17:Attribute -> Module:salt.utils
+253:17:Name -> Module:salt
+253:45:Name -> U
+253:52:Name -> U
+254:15:Call -> U
+254:15:Name -> U
+254:22:Call -> U
+254:22:Attribute -> U
+254:22:Name -> U
+254:48:Call -> U
+254:48:Attribute -> U
+254:48:Name -> U
+260:17:Call -> Inst:salt.cloud.Map
+260:17:Attribute -> Class:salt.cloud.Map
+260:17:Attribute -> Module:salt.cloud
+260:17:Name -> Module:salt
+260:32:Call -> U
+260:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+260:32:Name -> Inst:salt.cloud.CloudClient
+261:15:Call -> U | List:0 | Dict:0 | Dict:0
+261:15:Attribute -> Func:salt.utils.data.simple_types_filter
+261:15:Attribute -> Module:salt.utils.data
+261:15:Attribute -> Module:salt.utils
+261:15:Name -> Module:salt
+261:51:Call -> Dict:0
+261:51:Attribute -> BM:salt.cloud.Cloud.size_list
+261:51:Name -> Inst:salt.cloud.Map
+261:68:Name -> Const:NoneType:None | U
+267:17:Call -> Inst:salt.cloud.Map
+267:17:Attribute -> Class:salt.cloud.Map
+267:17:Attribute -> Module:salt.cloud
+267:17:Name -> Module:salt
+267:32:Call -> U
+267:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+267:32:Name -> Inst:salt.cloud.CloudClient
+268:15:Call -> U | List:0 | Dict:0 | Dict:0
+268:15:Attribute -> Func:salt.utils.data.simple_types_filter
+268:15:Attribute -> Module:salt.utils.data
+268:15:Attribute -> Module:salt.utils
+268:15:Name -> Module:salt
+268:51:Call -> Dict:0
+268:51:Attribute -> BM:salt.cloud.Cloud.image_list
+268:51:Name -> Inst:salt.cloud.Map
+268:69:Name -> Const:NoneType:None | U
+274:17:Call -> Inst:salt.cloud.Map
+274:17:Attribute -> Class:salt.cloud.Map
+274:17:Attribute -> Module:salt.cloud
+274:17:Name -> Module:salt
+274:32:Call -> U
+274:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+274:32:Name -> Inst:salt.cloud.CloudClient
+275:15:Call -> U | List:0 | Dict:0 | Dict:0
+275:15:Attribute -> Func:salt.utils.data.simple_types_filter
+275:15:Attribute -> Module:salt.utils.data
+275:15:Attribute -> Module:salt.utils
+275:15:Name -> Module:salt
+275:51:Call -> Dict:0
+275:51:Attribute -> BM:salt.cloud.Cloud.location_list
+275:51:Name -> Inst:salt.cloud.Map
+275:72:Name -> Const:NoneType:None | U
+281:17:Call -> Inst:salt.cloud.Map
+281:17:Attribute -> Class:salt.cloud.Map
+281:17:Attribute -> Module:salt.cloud
+281:17:Name -> Module:salt
+281:32:Call -> U
+281:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+281:32:Name -> Inst:salt.cloud.CloudClient
+282:8:Attribute -> U
+282:8:Name -> Inst:salt.cloud.Map
+283:15:Call -> U | Dict:0
+283:15:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+283:15:Name -> Inst:salt.cloud.Map
+283:45:Name -> Const:str:'list_nodes' | U
+289:17:Call -> Inst:salt.cloud.Map
+289:17:Attribute -> Class:salt.cloud.Map
+289:17:Attribute -> Module:salt.cloud
+289:17:Name -> Module:salt
+289:32:Call -> U
+289:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+289:32:Name -> Inst:salt.cloud.CloudClient
+290:8:Attribute -> U
+290:8:Name -> Inst:salt.cloud.Map
+291:15:Call -> U | Dict:0
+291:15:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+291:15:Name -> Inst:salt.cloud.Map
+291:45:Name -> Const:str:'list_nodes_full' | U
+297:17:Call -> Inst:salt.cloud.Map
+297:17:Attribute -> Class:salt.cloud.Map
+297:17:Attribute -> Module:salt.cloud
+297:17:Name -> Module:salt
+297:32:Call -> U
+297:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+297:32:Name -> Inst:salt.cloud.CloudClient
+298:8:Attribute -> U
+298:8:Name -> Inst:salt.cloud.Map
+299:15:Call -> U | Dict:0
+299:15:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+299:15:Name -> Inst:salt.cloud.Map
+299:45:Name -> Const:str:'list_nodes_select' | U
+305:17:Call -> Inst:salt.cloud.Map
+305:17:Attribute -> Class:salt.cloud.Map
+305:17:Attribute -> Module:salt.cloud
+305:17:Name -> Module:salt
+305:32:Call -> U
+305:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+305:32:Name -> Inst:salt.cloud.CloudClient
+306:8:Attribute -> U
+306:8:Name -> Inst:salt.cloud.Map
+307:15:Call -> U | Dict:0
+307:15:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+307:15:Name -> Inst:salt.cloud.Map
+307:45:Name -> Const:str:'list_nodes_min' | U
+341:15:Name -> Const:NoneType:None | U
+343:8:Name -> Dict:0
+343:28:Name -> U
+344:17:Call -> Inst:salt.cloud.Map
+344:17:Attribute -> Class:salt.cloud.Map
+344:17:Attribute -> Module:salt.cloud
+344:17:Name -> Module:salt
+344:32:Call -> U
+344:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+344:32:Name -> Inst:salt.cloud.CloudClient
+344:54:Name -> Dict:0
+345:11:Call -> ERR
+345:11:Name -> Func:builtins.isinstance
+345:22:Name -> U
+345:29:Name -> Class:builtins.str
+346:20:Call -> U
+346:20:Attribute -> U
+346:20:Name -> U
+347:15:Call -> U | List:0 | Dict:0 | Dict:1 | Dict:0
+347:15:Attribute -> Func:salt.utils.data.simple_types_filter
+347:15:Attribute -> Module:salt.utils.data
+347:15:Attribute -> Module:salt.utils
+347:15:Name -> Module:salt
+348:12:Call -> Dict:1 | Dict:0
+348:12:Attribute -> BM:salt.cloud.Cloud.run_profile
+348:12:Name -> Inst:salt.cloud.Map
+348:31:Name -> U
+348:40:Name -> U
+348:60:Name -> Const:NoneType:None | U | Dict:0
+356:11:Name -> Const:NoneType:None | U
+357:12:Name -> Dict:0
+357:27:Name -> U
+358:8:Call -> ERR
+358:8:Attribute -> BM:builtins.dict.update
+358:8:Name -> Dict:0
+358:21:Name -> Dict:0
+359:17:Call -> Inst:salt.cloud.Map
+359:17:Attribute -> Class:salt.cloud.Map
+359:17:Attribute -> Module:salt.cloud
+359:17:Name -> Module:salt
+359:32:Call -> U
+359:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+359:32:Name -> Inst:salt.cloud.CloudClient
+359:54:Name -> Dict:0
+360:15:Call -> Dict:1
+360:15:Attribute -> BM:salt.cloud.Map.map_data
+360:15:Name -> Inst:salt.cloud.Map
+361:15:Call -> U | List:0 | Dict:0 | Dict:0
+361:15:Attribute -> Func:salt.utils.data.simple_types_filter
+361:15:Attribute -> Module:salt.utils.data
+361:15:Attribute -> Module:salt.utils
+361:15:Name -> Module:salt
+361:51:Call -> Dict:0
+361:51:Attribute -> BM:salt.cloud.Map.run_map
+361:51:Name -> Inst:salt.cloud.Map
+361:66:Name -> Dict:1
+367:17:Call -> Inst:salt.cloud.Map
+367:17:Attribute -> Class:salt.cloud.Map
+367:17:Attribute -> Module:salt.cloud
+367:17:Name -> Module:salt
+367:32:Call -> U
+367:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+367:32:Name -> Inst:salt.cloud.CloudClient
+368:11:Call -> ERR
+368:11:Name -> Func:builtins.isinstance
+368:22:Name -> U
+368:29:Name -> Class:builtins.str
+369:20:Call -> U
+369:20:Attribute -> U
+369:20:Name -> U
+370:15:Call -> U | List:0 | Dict:0 | Dict:0
+370:15:Attribute -> Func:salt.utils.data.simple_types_filter
+370:15:Attribute -> Module:salt.utils.data
+370:15:Attribute -> Module:salt.utils
+370:15:Name -> Module:salt
+370:51:Call -> Dict:0
+370:51:Attribute -> BM:salt.cloud.Cloud.destroy
+370:51:Name -> Inst:salt.cloud.Map
+370:66:Name -> U
+384:17:Call -> Inst:salt.cloud.Map
+384:17:Attribute -> Class:salt.cloud.Map
+384:17:Attribute -> Module:salt.cloud
+384:17:Name -> Module:salt
+384:32:Call -> U
+384:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+384:32:Name -> Inst:salt.cloud.CloudClient
+385:20:Attribute -> U
+385:20:Name -> Inst:salt.cloud.CloudClient
+386:11:Name -> U
+386:23:Name -> U
+387:28:Call -> ERR
+387:28:Name -> Func:builtins.next
+387:33:Call -> ERR
+387:33:Name -> Func:builtins.iter
+387:38:Call -> U
+387:38:Attribute -> U
+387:38:Name -> U
+387:48:Name -> U
+390:11:Call -> ERR
+390:11:Name -> Func:builtins.isinstance
+390:22:Name -> U
+390:29:Name -> Class:builtins.str
+391:20:Call -> U
+391:20:Attribute -> U
+391:20:Name -> U
+393:20:Name -> U
+394:18:Call -> Dict:0
+394:18:Attribute -> BM:builtins.dict.copy
+394:18:Name -> Dict:0
+395:12:Name -> Dict:0
+395:26:Name -> U
+396:12:Name -> Dict:0
+396:28:Name -> U
+404:12:Name -> Dict:0
+405:12:Name -> Dict:0
+405:30:Name -> U
+407:12:Name -> Dict:0
+407:16:Name -> U
+407:24:Call -> Const:NoneType:None | U
+407:24:Attribute -> Func:salt.utils.data.simple_types_filter
+407:24:Attribute -> Module:salt.utils.data
+407:24:Attribute -> Module:salt.utils
+407:24:Name -> Module:salt
+407:60:Call -> Const:NoneType:None | Dict:0 | U
+407:60:Attribute -> BM:salt.cloud.Cloud.create
+407:60:Name -> Inst:salt.cloud.Map
+407:74:Name -> Dict:0
+408:15:Name -> Dict:0
+425:17:Call -> Inst:salt.cloud.Map
+425:17:Attribute -> Class:salt.cloud.Map
+425:17:Attribute -> Module:salt.cloud
+425:17:Name -> Module:salt
+425:32:Call -> U
+425:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+425:32:Name -> Inst:salt.cloud.CloudClient
+426:20:Call -> U | Dict:0
+426:20:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+426:20:Name -> Inst:salt.cloud.Map
+427:11:Name -> U
+427:23:Name -> U | Dict:0
+428:28:Call -> ERR
+428:28:Name -> Func:builtins.next
+428:33:Call -> ERR
+428:33:Name -> Func:builtins.iter
+428:38:Call -> U
+428:38:Attribute -> U
+428:38:Name -> U | Dict:0
+428:48:Name -> U
+431:11:Call -> ERR
+431:11:Name -> Func:builtins.isinstance
+431:22:Name -> U
+431:29:Name -> Class:builtins.str
+432:20:Call -> U
+432:20:Attribute -> U
+432:20:Name -> U
+435:20:Name -> U
+436:21:Call -> Dict:0
+436:21:Attribute -> BM:builtins.dict.copy
+436:21:Name -> Dict:0
+437:12:Name -> Dict:0
+437:29:Name -> U
+438:12:Name -> Dict:0
+438:33:Name -> U
+439:12:Name -> Dict:0
+440:12:Name -> Dict:0
+440:31:Name -> U
+441:12:Name -> Dict:0
+441:16:Name -> U
+441:24:Call -> Const:NoneType:None | U | List:0 | Dict:0 | Dict:0
+441:24:Attribute -> Func:salt.utils.data.simple_types_filter
+441:24:Attribute -> Module:salt.utils.data
+441:24:Attribute -> Module:salt.utils
+441:24:Name -> Module:salt
+441:60:Call -> Const:NoneType:None | Dict:0 | U
+441:60:Attribute -> BM:salt.cloud.Cloud.extras
+441:60:Name -> Inst:salt.cloud.Map
+441:74:Name -> Dict:0
+442:15:Name -> Dict:0
+465:11:Name -> Const:NoneType:None | U
+468:17:Call -> Inst:salt.cloud.Map
+468:17:Attribute -> Class:salt.cloud.Map
+468:17:Attribute -> Module:salt.cloud
+468:17:Name -> Module:salt
+468:32:Call -> U
+468:32:Attribute -> BM:salt.cloud.CloudClient._opts_defaults
+468:32:Name -> Inst:salt.cloud.CloudClient
+468:59:Name -> Const:NoneType:None | U
+468:70:Name -> Const:NoneType:None | U
+468:79:Name -> Const:NoneType:None | U | Dict:0
+469:11:Name -> Const:NoneType:None | U
+470:15:Name -> Const:NoneType:None | U
+471:22:Call -> ExcInst:salt.exceptions.SaltCloudConfigError
+471:22:Name -> Class:salt.exceptions.SaltCloudConfigError
+475:21:Name -> U
+477:11:Name -> Const:NoneType:None | U | List:1
+477:25:Name -> Const:NoneType:None | U
+478:12:Attribute -> U
+478:12:Name -> Inst:salt.cloud.CloudClient
+478:34:Name -> Const:NoneType:None | U
+479:19:Call -> Dict:0
+479:19:Attribute -> BM:salt.cloud.Cloud.do_action
+479:19:Name -> Inst:salt.cloud.Map
+479:36:Name -> Const:NoneType:None | U | List:1
+479:43:Name -> Const:NoneType:None | U | Dict:0
+481:11:Name -> Const:NoneType:None | U
+481:28:Name -> Const:NoneType:None | U | List:1
+482:19:Call -> Dict:1 | Dict:1
+482:19:Attribute -> BM:salt.cloud.Cloud.do_function
+482:19:Name -> Inst:salt.cloud.Map
+482:38:Name -> Const:NoneType:None | U
+482:48:Name -> Const:NoneType:None | U
+482:53:Name -> Const:NoneType:None | U | Dict:0
+488:18:Call -> ExcInst:salt.exceptions.SaltCloudConfigError
+488:18:Name -> Class:salt.exceptions.SaltCloudConfigError
+500:8:Name -> Inst:salt.cloud.Cloud
+500:20:Name -> U
+501:8:Name -> Inst:salt.cloud.Cloud
+501:22:Call -> Inst:salt.loader.lazy.LazyLoader
+501:22:Attribute -> Func:salt.loader.clouds
+501:22:Attribute -> Module:salt.loader
+501:22:Name -> Module:salt
+501:41:Attribute -> U
+501:41:Name -> Inst:salt.cloud.Cloud
+502:8:Call -> Const:NoneType:None
+502:8:Attribute -> BM:salt.cloud.Cloud.__filter_non_working_providers
+502:8:Name -> Inst:salt.cloud.Cloud
+503:8:Name -> Inst:salt.cloud.Cloud
+509:20:Call -> Set:0
+509:20:Name -> Class:builtins.set
+510:30:Call -> U
+510:30:Attribute -> U
+510:30:Attribute -> U
+510:30:Name -> Inst:salt.cloud.Cloud
+511:15:Call -> ERR
+511:15:Name -> Func:builtins.len
+511:19:Name -> U
+512:30:Name -> U
+513:20:Call -> ERR
+513:20:Attribute -> BM:builtins.set.add
+513:20:Name -> Set:0
+513:37:Name -> U
+513:45:Name -> U
+515:12:Call -> ERR
+515:12:Attribute -> BM:builtins.set.add
+515:12:Name -> Set:0
+515:26:Name -> U
+516:15:Name -> Set:0
+522:11:Name -> U
+524:11:Name -> U | Const:str:'all'
+525:24:Call -> Set:0
+525:24:Name -> Class:builtins.set
+526:34:Call -> U
+526:34:Attribute -> U
+526:34:Attribute -> U
+526:34:Name -> Inst:salt.cloud.Cloud
+527:30:Name -> U
+528:20:Call -> ERR
+528:20:Attribute -> BM:builtins.set.add
+528:20:Name -> Set:0
+528:35:Name -> U
+528:42:Name -> U
+530:19:Name -> Set:0
+531:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+531:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+533:19:Name -> Set:0
+535:18:Name -> U | Const:str:'all'
+536:28:Call -> U
+536:28:Attribute -> U | BM:builtins.str.split
+536:28:Name -> U | Const:str:'all'
+538:16:Name -> U
+538:29:Attribute -> U
+538:29:Name -> Inst:salt.cloud.Cloud
+539:19:Name -> U
+539:33:Attribute -> U
+539:33:Name -> Inst:salt.cloud.Cloud
+539:56:Name -> U
+541:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+541:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+542:20:Call -> U
+542:20:Attribute -> BM:builtins.str.format
+543:24:Name -> U | Const:str:'all'
+543:32:Call -> Const:str:''
+543:32:Attribute -> BM:builtins.str.join
+543:42:Call -> Set:0
+543:42:Attribute -> BM:salt.cloud.Cloud.get_configured_providers
+543:42:Name -> Inst:salt.cloud.Cloud
+547:20:Call -> Set:0
+547:20:Name -> Class:builtins.set
+548:30:Call -> U
+548:30:Attribute -> U
+548:30:Attribute -> U
+548:30:Name -> Inst:salt.cloud.Cloud
+549:26:Name -> U
+550:19:Name -> U | Const:str:'all'
+550:30:Name -> U
+550:37:Name -> U
+551:20:Call -> ERR
+551:20:Attribute -> BM:builtins.set.add | BM:builtins.set.add
+551:20:Name -> Set:0 | Set:0
+551:35:Name -> U
+551:42:Name -> U
+553:15:Name -> Set:0
+554:18:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+554:18:Name -> Class:salt.exceptions.SaltCloudSystemExit
+555:16:Call -> U
+555:16:Attribute -> BM:builtins.str.format
+556:20:Name -> U | Const:str:'all'
+556:28:Call -> Const:str:''
+556:28:Attribute -> BM:builtins.str.join
+556:38:Call -> Set:0
+556:38:Attribute -> BM:salt.cloud.Cloud.get_configured_providers
+556:38:Name -> Inst:salt.cloud.Cloud
+559:15:Name -> Set:0
+565:11:Name -> U
+567:11:Name -> U
+570:11:Name -> U | Const:str:'all'
+571:23:Call -> Set:0
+571:23:Name -> Class:builtins.set
+572:32:Call -> Set:0
+572:32:Name -> Class:builtins.set
+573:31:Call -> U
+573:31:Attribute -> U
+573:31:Attribute -> U
+573:31:Name -> Inst:salt.cloud.Cloud
+574:28:Call -> U
+574:28:Attribute -> U
+574:28:Name -> U
+576:19:Name -> U
+577:38:Call -> U
+577:38:Attribute -> U
+577:38:Name -> U
+578:37:Call -> U
+578:37:Attribute -> U
+578:37:Name -> U
+579:23:Name -> U
+579:42:Name -> U | Const:str:'all'
+580:24:Call -> ERR
+580:24:Attribute -> BM:builtins.set.add
+580:24:Name -> Set:0
+580:47:Name -> U
+580:54:Name -> U
+581:25:Name -> U
+581:43:Name -> U | Const:str:'all'
+582:24:Call -> ERR
+582:24:Attribute -> BM:builtins.set.add
+582:24:Name -> Set:0
+582:47:Name -> U
+582:54:Name -> U
+583:20:Call -> ERR
+583:20:Attribute -> BM:builtins.set.add
+583:20:Name -> Set:0
+583:34:Name -> U
+583:41:Name -> U
+585:19:Name -> Set:0
+586:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+586:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+588:15:Name -> U | Const:str:'all'
+589:23:Name -> Set:0
+591:19:Name -> Set:0
+598:11:Name -> Const:bool:False | U
+598:30:Name -> Const:str:'list_nodes' | U
+598:39:Attribute -> Dict:0
+598:39:Name -> Inst:salt.cloud.Cloud
+599:19:Attribute -> Dict:0
+599:19:Name -> Inst:salt.cloud.Cloud
+599:50:Name -> Const:str:'list_nodes' | U
+602:30:Call -> U
+602:30:Attribute -> U
+602:30:Attribute -> U
+602:30:Name -> Inst:salt.cloud.Cloud
+603:35:Call -> U
+603:35:Attribute -> U
+603:35:Name -> U
+604:25:Name -> U
+604:34:Name -> Const:str:'list_nodes' | U
+605:19:Name -> Const:str:'Uninferable.list_nodes' | Const:str:'Uninferable.Uninferable'
+605:30:Attribute -> Inst:salt.loader.lazy.LazyLoader
+605:30:Name -> Inst:salt.cloud.Cloud
+606:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+606:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+606:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+606:75:Name -> U
+608:19:Name -> U
+608:32:Name -> Dict:0
+609:20:Name -> Dict:0
+609:25:Name -> U
+612:25:Call -> Gen:salt.utils.context.func_globals_inject
+612:25:Attribute -> Func:salt.utils.context.func_globals_inject
+612:25:Attribute -> Module:salt.utils.context
+612:25:Attribute -> Module:salt.utils
+612:25:Name -> Module:salt
+613:24:Attribute -> Inst:salt.loader.lazy.LazyLoader
+613:24:Name -> Inst:salt.cloud.Cloud
+613:36:Name -> Const:str:'Uninferable.list_nodes' | Const:str:'Uninferable.Uninferable'
+614:49:Call -> Const:str:''
+614:49:Attribute -> BM:builtins.str.join
+614:59:Name -> U
+614:66:Name -> U
+616:24:Name -> Dict:0
+616:29:Name -> U
+616:36:Name -> U
+616:46:Call -> U
+616:46:Attribute -> Inst:salt.loader.lazy.LazyLoader
+616:46:Name -> Inst:salt.cloud.Cloud
+616:58:Name -> Const:str:'Uninferable.list_nodes' | Const:str:'Uninferable.Uninferable'
+617:23:Name -> Class:builtins.Exception
+618:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+618:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+618:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+620:24:Name -> Const:str:'Uninferable.list_nodes' | Const:str:'Uninferable.Uninferable'
+621:24:Name -> ExcInst:builtins.Exception
+622:45:Attribute -> Const:int:10
+622:45:Name -> Module:logging
+626:20:Name -> Dict:0
+626:25:Name -> U
+626:32:Name -> U
+627:8:Attribute -> Dict:0
+627:8:Name -> Inst:salt.cloud.Cloud
+627:39:Name -> Const:str:'list_nodes' | U
+627:48:Name -> Dict:0
+628:15:Name -> Dict:0
+637:11:Name -> Const:bool:False | U
+637:30:Name -> Const:str:'list_nodes' | U
+637:39:Attribute -> Dict:0
+637:39:Name -> Inst:salt.cloud.Cloud
+638:19:Attribute -> Dict:0
+638:19:Name -> Inst:salt.cloud.Cloud
+638:50:Name -> Const:str:'list_nodes' | U
+640:15:Call -> U
+640:15:Attribute -> U
+640:15:Attribute -> U
+640:15:Name -> Inst:salt.cloud.Cloud
+644:8:Name -> U
+644:28:Call -> Dict:0
+644:28:Attribute -> BM:salt.cloud.Cloud._optimize_providers
+644:28:Name -> Inst:salt.cloud.Cloud
+644:53:Name -> U
+645:30:Call -> U
+645:30:Attribute -> U
+645:30:Name -> U
+647:25:Name -> Const:str:'list_nodes' | U
+648:35:Call -> U
+648:35:Attribute -> U
+648:35:Name -> U
+653:20:Call -> U
+653:20:Attribute -> U
+653:20:Name -> U
+654:27:Name -> U
+654:54:Attribute -> Inst:salt.loader.lazy.LazyLoader
+654:54:Name -> Inst:salt.cloud.Cloud
+658:25:Name -> U
+658:34:Name -> Const:str:'list_nodes' | U | Const:str:'list_nodes_min'
+659:19:Name -> Const:str:'Uninferable.list_nodes' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.list_nodes_min'
+659:30:Attribute -> Inst:salt.loader.lazy.LazyLoader
+659:30:Name -> Inst:salt.cloud.Cloud
+660:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+660:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+660:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+660:75:Name -> U
+663:16:Call -> ERR
+663:16:Attribute -> BM:builtins.list.append
+663:16:Name -> List:0
+665:31:Name -> Const:str:'Uninferable.list_nodes' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.list_nodes_min'
+666:32:Name -> U
+667:33:Name -> Const:str:'list_nodes' | U | Const:str:'list_nodes_min'
+668:33:Name -> U
+669:34:Name -> U
+673:15:Name -> List:0
+674:19:Name -> Dict:0
+676:21:Call -> Const:int:0
+676:21:Name -> Func:builtins.len
+676:25:Name -> List:0
+677:15:Call -> Inst:multiprocessing.pool.Pool
+677:15:Attribute -> BM:multiprocessing.context.BaseContext.Pool
+677:15:Name -> Module:multiprocessing
+678:12:Name -> Const:int:0
+678:32:Name -> Const:int:0
+678:50:Name -> Func:salt.cloud.init_pool_worker
+680:24:Call -> U
+680:24:Name -> Func:salt.cloud.enter_mainloop
+681:12:Name -> Func:salt.cloud._run_parallel_map_providers_query
+681:47:Name -> List:0
+681:74:Name -> Inst:multiprocessing.pool.Pool
+683:38:Name -> U
+684:19:Name -> U
+687:15:Name -> U
+687:28:Name -> Dict:0
+688:16:Name -> Dict:0
+688:23:Name -> U
+689:12:Name -> Dict:0
+689:19:Name -> U
+689:26:Name -> U
+689:36:Name -> U
+691:8:Attribute -> Dict:0
+691:8:Name -> Inst:salt.cloud.Cloud
+691:39:Name -> Const:str:'list_nodes' | U
+691:48:Name -> Dict:0
+692:15:Name -> Dict:0
+697:11:Call -> ERR
+697:11:Name -> Func:builtins.isinstance
+697:22:Name -> U
+697:29:Name -> Class:builtins.str
+698:21:Name -> U
+702:27:Call -> U | Dict:0
+702:27:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+702:27:Name -> Inst:salt.cloud.Cloud
+702:55:Name -> Const:str:'list_nodes' | U
+702:69:Name -> Const:bool:False | U
+703:30:Call -> U | DictItems
+703:30:Attribute -> U | BM:builtins.dict.items
+703:30:Name -> U | Dict:0
+704:31:Call -> U
+704:31:Attribute -> U
+704:31:Name -> U
+705:19:Name -> U
+705:33:Name -> Dict:0
+706:20:Name -> Dict:0
+706:36:Name -> U
+706:46:Name -> U
+716:20:Name -> Const:NoneType:None | U
+717:24:Name -> U
+718:27:Call -> U
+718:27:Attribute -> U
+718:27:Attribute -> U
+718:27:Name -> Inst:salt.cloud.Cloud
+718:49:Name -> Const:NoneType:None | U
+722:40:Call -> U
+722:40:Attribute -> U
+722:40:Name -> U
+725:23:Name -> U
+725:38:Name -> U | List:1
+729:24:Name -> U
+730:37:Name -> Dict:0
+731:37:Name -> Dict:0
+731:45:Name -> Dict:0
+732:28:Name -> U
+732:39:Name -> Dict:0
+732:47:Name -> Dict:0
+736:24:Name -> U
+737:37:Name -> Dict:0
+738:37:Name -> Dict:0
+738:45:Name -> Dict:0
+739:28:Name -> U
+739:39:Name -> Dict:0
+739:47:Name -> Dict:0
+743:23:Name -> U
+743:36:Name -> Dict:0
+744:24:Name -> Dict:0
+744:32:Name -> U
+745:23:Name -> U
+745:37:Name -> Dict:0
+745:45:Name -> U
+746:24:Name -> Dict:0
+746:32:Name -> U
+746:39:Name -> U
+747:20:Name -> Dict:0
+747:28:Name -> U
+747:35:Name -> U
+747:43:Name -> U
+747:54:Name -> U
+749:15:Name -> Dict:0
+758:29:Call -> U
+758:29:Attribute -> U
+758:29:Name -> U
+759:30:Call -> U
+759:30:Attribute -> U
+759:30:Name -> U
+760:19:Name -> U
+760:31:Name -> Dict:0
+761:20:Name -> Dict:0
+761:39:Name -> U
+763:16:Name -> Dict:0
+763:35:Name -> U
+763:41:Name -> U
+763:50:Name -> U
+765:38:Call -> DictItems
+765:38:Attribute -> BM:builtins.dict.items
+765:38:Name -> Dict:0
+766:21:Name -> U
+767:15:Name -> Const:str:'Uninferable.optimize_providers'
+767:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+767:26:Name -> Inst:salt.cloud.Cloud
+768:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+768:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+768:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+768:78:Name -> U
+770:39:Call -> U
+770:39:Attribute -> U
+770:39:Name -> U
+771:23:Name -> U
+771:35:Name -> Dict:0
+772:24:Name -> Dict:0
+772:38:Name -> U
+773:20:Name -> Dict:0
+773:34:Name -> U
+773:40:Name -> U
+773:50:Name -> U
+776:23:Call -> U
+776:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+776:23:Name -> Inst:salt.cloud.Cloud
+776:35:Name -> Const:str:'Uninferable.optimize_providers'
+776:40:Name -> U
+777:15:Name -> U
+778:39:Call -> U
+778:39:Attribute -> U
+778:39:Name -> U
+779:23:Name -> U
+779:35:Name -> Dict:0
+780:24:Name -> Dict:0
+780:38:Name -> U
+781:20:Name -> Dict:0
+781:34:Name -> U
+781:40:Name -> U
+781:50:Name -> U
+783:15:Name -> Dict:0
+791:18:Call -> Set:0 | Set:0
+791:18:Attribute -> BM:salt.cloud.Cloud.lookup_providers
+791:18:Name -> Inst:salt.cloud.Cloud
+791:40:Name -> Const:str:'all' | U
+792:15:Name -> Set:0 | Set:0
+793:19:Name -> Dict:0
+795:29:Name -> Set:0 | Set:0
+796:21:Name -> U
+797:15:Name -> Const:str:'Uninferable.avail_locations'
+797:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+797:26:Name -> Inst:salt.cloud.Cloud
+800:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+800:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+800:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+803:20:Name -> U
+804:20:Name -> U
+808:15:Name -> U
+808:28:Name -> Dict:0
+809:16:Name -> Dict:0
+809:21:Name -> U
+813:21:Call -> Gen:salt.utils.context.func_globals_inject
+813:21:Attribute -> Func:salt.utils.context.func_globals_inject
+813:21:Attribute -> Module:salt.utils.context
+813:21:Attribute -> Module:salt.utils
+813:21:Name -> Module:salt
+814:20:Attribute -> Inst:salt.loader.lazy.LazyLoader
+814:20:Name -> Inst:salt.cloud.Cloud
+814:32:Name -> Const:str:'Uninferable.avail_locations'
+814:63:Call -> Const:str:''
+814:63:Attribute -> BM:builtins.str.join
+814:73:Name -> U
+814:80:Name -> U
+816:20:Name -> Dict:0
+816:25:Name -> U
+816:32:Name -> U
+816:42:Call -> U
+816:42:Attribute -> Inst:salt.loader.lazy.LazyLoader
+816:42:Name -> Inst:salt.cloud.Cloud
+816:54:Name -> Const:str:'Uninferable.avail_locations'
+817:19:Name -> Class:builtins.Exception
+818:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+818:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+818:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+820:20:Name -> Const:str:'Uninferable.avail_locations'
+821:20:Name -> ExcInst:builtins.Exception
+822:41:Attribute -> Const:int:10
+822:41:Name -> Module:logging
+824:15:Name -> Dict:0
+832:18:Call -> Set:0 | Set:0
+832:18:Attribute -> BM:salt.cloud.Cloud.lookup_providers
+832:18:Name -> Inst:salt.cloud.Cloud
+832:40:Name -> Const:str:'all' | U
+833:15:Name -> Set:0 | Set:0
+834:19:Name -> Dict:0
+836:29:Name -> Set:0 | Set:0
+837:21:Name -> U
+838:15:Name -> Const:str:'Uninferable.avail_images'
+838:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+838:26:Name -> Inst:salt.cloud.Cloud
+841:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+841:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+841:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+844:20:Name -> U
+845:20:Name -> U
+849:15:Name -> U
+849:28:Name -> Dict:0
+850:16:Name -> Dict:0
+850:21:Name -> U
+853:21:Call -> Gen:salt.utils.context.func_globals_inject
+853:21:Attribute -> Func:salt.utils.context.func_globals_inject
+853:21:Attribute -> Module:salt.utils.context
+853:21:Attribute -> Module:salt.utils
+853:21:Name -> Module:salt
+854:20:Attribute -> Inst:salt.loader.lazy.LazyLoader
+854:20:Name -> Inst:salt.cloud.Cloud
+854:32:Name -> Const:str:'Uninferable.avail_images'
+854:63:Call -> Const:str:''
+854:63:Attribute -> BM:builtins.str.join
+854:73:Name -> U
+854:80:Name -> U
+856:20:Name -> Dict:0
+856:25:Name -> U
+856:32:Name -> U
+856:42:Call -> U
+856:42:Attribute -> Inst:salt.loader.lazy.LazyLoader
+856:42:Name -> Inst:salt.cloud.Cloud
+856:54:Name -> Const:str:'Uninferable.avail_images'
+857:19:Name -> Class:builtins.Exception
+858:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+858:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+858:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+860:20:Name -> Const:str:'Uninferable.avail_images'
+861:20:Name -> ExcInst:builtins.Exception
+862:41:Attribute -> Const:int:10
+862:41:Name -> Module:logging
+864:15:Name -> Dict:0
+872:18:Call -> Set:0 | Set:0
+872:18:Attribute -> BM:salt.cloud.Cloud.lookup_providers
+872:18:Name -> Inst:salt.cloud.Cloud
+872:40:Name -> Const:str:'all' | U
+873:15:Name -> Set:0 | Set:0
+874:19:Name -> Dict:0
+876:29:Name -> Set:0 | Set:0
+877:21:Name -> U
+878:15:Name -> Const:str:'Uninferable.avail_sizes'
+878:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+878:26:Name -> Inst:salt.cloud.Cloud
+881:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+881:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+881:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+884:20:Name -> U
+885:20:Name -> U
+889:15:Name -> U
+889:28:Name -> Dict:0
+890:16:Name -> Dict:0
+890:21:Name -> U
+893:21:Call -> Gen:salt.utils.context.func_globals_inject
+893:21:Attribute -> Func:salt.utils.context.func_globals_inject
+893:21:Attribute -> Module:salt.utils.context
+893:21:Attribute -> Module:salt.utils
+893:21:Name -> Module:salt
+894:20:Attribute -> Inst:salt.loader.lazy.LazyLoader
+894:20:Name -> Inst:salt.cloud.Cloud
+894:32:Name -> Const:str:'Uninferable.avail_sizes'
+894:63:Call -> Const:str:''
+894:63:Attribute -> BM:builtins.str.join
+894:73:Name -> U
+894:80:Name -> U
+896:20:Name -> Dict:0
+896:25:Name -> U
+896:32:Name -> U
+896:42:Call -> U
+896:42:Attribute -> Inst:salt.loader.lazy.LazyLoader
+896:42:Name -> Inst:salt.cloud.Cloud
+896:54:Name -> Const:str:'Uninferable.avail_sizes'
+897:19:Name -> Class:builtins.Exception
+898:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+898:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+898:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+900:20:Name -> Const:str:'Uninferable.avail_sizes'
+901:20:Name -> ExcInst:builtins.Exception
+902:41:Attribute -> Const:int:10
+902:41:Name -> Module:logging
+904:15:Name -> Dict:0
+911:18:Call -> Set:0 | Set:0
+911:18:Attribute -> BM:salt.cloud.Cloud.lookup_providers
+911:18:Name -> Inst:salt.cloud.Cloud
+911:40:Name -> Const:str:'all' | U
+912:15:Name -> Set:0 | Set:0
+913:19:Name -> Dict:0
+915:29:Name -> Set:0 | Set:0
+916:15:Name -> U
+916:28:Name -> Dict:0
+917:16:Name -> Dict:0
+917:21:Name -> U
+918:15:Name -> U
+918:29:Name -> Dict:0
+918:34:Name -> U
+919:16:Name -> Dict:0
+919:21:Name -> U
+919:28:Name -> U
+920:15:Name -> Dict:0
+927:18:Call -> Set:0 | Set:0
+927:18:Attribute -> BM:salt.cloud.Cloud.lookup_profiles
+927:18:Name -> Inst:salt.cloud.Cloud
+927:39:Name -> U
+927:49:Name -> Const:str:'all' | U
+929:15:Name -> Set:0 | Set:0
+930:19:Name -> Dict:0
+932:29:Name -> Set:0 | Set:0
+933:15:Name -> U
+933:28:Name -> Dict:0
+934:16:Name -> Dict:0
+934:21:Name -> U
+935:15:Name -> U
+935:29:Name -> Dict:0
+935:34:Name -> U
+936:16:Name -> Dict:0
+936:21:Name -> U
+936:28:Name -> U
+937:15:Name -> Dict:0
+945:35:Call -> U
+945:35:Attribute -> U
+945:35:Attribute -> U
+945:35:Name -> Inst:salt.cloud.Cloud
+946:12:Call -> ERR
+946:12:Attribute -> BM:builtins.list.append
+946:12:Name -> List:0
+946:24:Name -> U
+946:33:Call -> Const:NoneType:None | Dict:0 | U
+946:33:Attribute -> BM:salt.cloud.Cloud.create
+946:33:Name -> Inst:salt.cloud.Cloud
+946:45:Name -> U
+948:15:Name -> List:0
+955:16:Call -> Inst:builtins.set
+955:16:Name -> Class:builtins.set
+955:20:Name -> U
+956:19:Call -> Dict:0
+956:19:Attribute -> BM:salt.cloud.Cloud.get_running_by_names
+956:19:Name -> Inst:salt.cloud.Cloud
+956:45:Name -> Inst:builtins.set
+956:59:Name -> Const:bool:False | U
+957:25:Call -> Set:0
+957:25:Name -> Class:builtins.set
+959:30:Call -> DictItems
+959:30:Attribute -> BM:builtins.dict.items
+959:30:Name -> Dict:0
+960:31:Call -> U
+960:31:Attribute -> U
+960:31:Name -> U
+961:28:Name -> U
+962:23:Name -> U
+962:31:Name -> Inst:builtins.set
+963:24:Call -> ERR
+963:24:Attribute -> BM:builtins.set.add
+963:24:Name -> Set:0
+963:44:Name -> U
+963:51:Name -> U
+963:59:Name -> U
+964:27:Attribute -> U
+964:27:Name -> Inst:salt.cloud.Cloud
+965:28:Call -> ERR
+965:28:Attribute -> BM:builtins.list.append
+965:28:Name -> List:0
+967:44:Attribute -> U
+967:44:Name -> Inst:salt.cloud.Cloud
+968:44:Name -> U
+969:45:Name -> U
+970:46:Name -> U
+975:11:Attribute -> U
+975:11:Name -> Inst:salt.cloud.Cloud
+975:37:Name -> List:0
+978:30:Attribute -> U
+978:30:Name -> Inst:salt.cloud.Cloud
+979:28:Attribute -> U
+979:28:Name -> Inst:salt.cloud.Cloud
+981:28:Call -> Const:int:0
+981:28:Name -> Func:builtins.len
+981:32:Name -> List:0
+982:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+982:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+982:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+982:73:Name -> U | Const:int:0
+985:28:Call -> U
+985:28:Name -> Func:salt.cloud.enter_mainloop
+986:16:Name -> Func:salt.cloud._destroy_multiprocessing
+986:42:Name -> List:0
+986:67:Name -> U | Const:int:0
+991:23:Name -> U
+992:16:Call -> ERR
+992:16:Attribute -> BM:builtins.dict.update
+992:16:Name -> Dict:0
+992:34:Name -> U
+996:23:Name -> List:0
+997:24:Name -> U
+998:25:Name -> U
+999:23:Name -> U
+1000:19:Name -> U
+1000:32:Name -> Dict:0
+1001:20:Name -> Dict:0
+1001:30:Name -> U
+1002:19:Name -> U
+1002:33:Name -> Dict:0
+1002:43:Name -> U
+1003:20:Name -> Dict:0
+1003:30:Name -> U
+1003:37:Name -> U
+1004:16:Name -> Dict:0
+1004:26:Name -> U
+1004:33:Name -> U
+1004:41:Name -> U
+1004:49:Name -> Dict:0
+1004:60:Name -> U
+1005:19:Name -> U
+1005:27:Name -> Inst:builtins.set
+1006:20:Call -> ERR
+1006:20:Attribute -> BM:builtins.set.remove
+1006:20:Name -> Inst:builtins.set
+1006:33:Name -> U
+1010:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1010:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1010:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1011:39:Name -> Set:0
+1012:25:Name -> U
+1013:21:Call -> Gen:salt.utils.context.func_globals_inject
+1013:21:Attribute -> Func:salt.utils.context.func_globals_inject
+1013:21:Attribute -> Module:salt.utils.context
+1013:21:Attribute -> Module:salt.utils
+1013:21:Name -> Module:salt
+1014:20:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1014:20:Name -> Inst:salt.cloud.Cloud
+1014:32:Name -> Const:str:'Uninferable.destroy'
+1014:63:Call -> Const:str:''
+1014:63:Attribute -> BM:builtins.str.join
+1014:73:Name -> U
+1014:80:Name -> U
+1016:26:Call -> U
+1016:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1016:26:Name -> Inst:salt.cloud.Cloud
+1016:38:Name -> Const:str:'Uninferable.destroy'
+1016:43:Name -> U
+1017:19:Name -> U
+1017:32:Name -> Dict:0
+1018:20:Name -> Dict:0
+1018:30:Name -> U
+1019:19:Name -> U
+1019:33:Name -> Dict:0
+1019:43:Name -> U
+1020:20:Name -> Dict:0
+1020:30:Name -> U
+1020:37:Name -> U
+1021:16:Name -> Dict:0
+1021:26:Name -> U
+1021:33:Name -> U
+1021:41:Name -> U
+1021:49:Name -> U
+1022:19:Name -> U
+1022:27:Name -> Inst:builtins.set
+1023:20:Call -> ERR
+1023:20:Attribute -> BM:builtins.set.remove
+1023:20:Name -> Inst:builtins.set
+1023:33:Name -> U
+1028:35:Name -> Set:0
+1029:18:Name -> Dict:0
+1029:28:Name -> U
+1029:35:Name -> U
+1029:43:Name -> U
+1030:19:Name -> U
+1034:24:Name -> U
+1036:28:Call -> Const:str:''
+1036:28:Attribute -> BM:builtins.str.join
+1036:38:Name -> U
+1036:45:Name -> U
+1037:26:Name -> U
+1039:26:Call -> Dict:0 | U
+1039:26:Attribute -> Func:salt.config.get_cloud_config_value
+1039:26:Attribute -> Module:salt.config
+1039:26:Name -> Module:salt
+1040:26:Name -> Dict:4
+1040:31:Attribute -> U
+1040:31:Name -> Inst:salt.cloud.Cloud
+1042:23:Call -> U
+1042:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+1042:23:Attribute -> Module:posixpath | Module:ntpath
+1042:23:Name -> Module:os
+1043:16:Attribute -> U
+1043:16:Name -> Inst:salt.cloud.Cloud
+1043:49:Call -> U
+1043:49:Attribute -> BM:builtins.dict.get | U
+1043:49:Name -> Dict:0 | U
+1043:71:Name -> U
+1045:31:Call -> Inst:builtins.list
+1045:31:Attribute -> Func:glob.glob
+1045:31:Name -> Module:glob
+1045:44:Name -> U
+1047:19:Call -> Const:bool:False | U
+1047:19:Attribute -> Func:genericpath.isfile | U
+1047:19:Attribute -> Module:posixpath | Module:ntpath
+1047:19:Name -> Module:os
+1047:34:Name -> U
+1047:52:Name -> Inst:builtins.list
+1049:19:Call -> ERR
+1049:19:Name -> Func:builtins.isinstance
+1049:30:Name -> U
+1049:35:Name -> Class:builtins.dict
+1049:58:Name -> U
+1050:20:Call -> Const:NoneType:None
+1050:20:Attribute -> Func:salt.utils.cloud.remove_key
+1050:20:Attribute -> Module:salt.utils.cloud
+1050:20:Attribute -> Module:salt.utils
+1050:20:Name -> Module:salt
+1050:48:Attribute -> U
+1050:48:Name -> Inst:salt.cloud.Cloud
+1050:70:Name -> U
+1053:15:Call -> Const:bool:False | U
+1053:15:Attribute -> Func:genericpath.isfile | U
+1053:15:Attribute -> Module:posixpath | Module:ntpath
+1053:15:Name -> Module:os
+1053:30:Name -> U
+1053:48:Name -> Inst:builtins.list
+1055:16:Call -> Const:NoneType:None
+1055:16:Attribute -> Func:salt.utils.cloud.remove_key
+1055:16:Attribute -> Module:salt.utils.cloud
+1055:16:Attribute -> Module:salt.utils
+1055:16:Name -> Module:salt
+1056:20:Attribute -> U
+1056:20:Name -> Inst:salt.cloud.Cloud
+1056:42:Call -> U
+1056:42:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1056:42:Attribute -> Module:posixpath | Module:ntpath
+1056:42:Name -> Module:os
+1056:59:Name -> U
+1063:20:Call -> Const:bool:False | U
+1063:20:Attribute -> Func:genericpath.isfile | U
+1063:20:Attribute -> Module:posixpath | Module:ntpath
+1063:20:Name -> Module:os
+1063:35:Name -> U
+1064:20:Name -> Inst:builtins.list
+1065:20:Call -> ERR
+1065:20:Name -> Func:builtins.len
+1065:24:Name -> Inst:builtins.list
+1068:16:Call -> Const:NoneType:None
+1068:16:Attribute -> Func:salt.utils.cloud.remove_key
+1068:16:Attribute -> Module:salt.utils.cloud
+1068:16:Attribute -> Module:salt.utils
+1068:16:Name -> Module:salt
+1069:20:Attribute -> U
+1069:20:Name -> Inst:salt.cloud.Cloud
+1069:42:Call -> U
+1069:42:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1069:42:Attribute -> Module:posixpath | Module:ntpath
+1069:42:Name -> Module:os
+1069:59:Name -> Inst:builtins.list
+1078:12:Call -> ERR
+1078:12:Name -> Func:builtins.print
+1079:16:Call -> U
+1079:16:Attribute -> BM:builtins.str.format
+1081:34:Name -> U
+1084:37:Call -> Inst:builtins.enumerate
+1084:37:Name -> Class:builtins.enumerate
+1084:47:Name -> Inst:builtins.list
+1085:20:Call -> ERR
+1085:20:Name -> Func:builtins.print
+1085:30:Name -> U
+1085:37:Call -> U
+1085:37:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1085:37:Attribute -> Module:posixpath | Module:ntpath
+1085:37:Name -> Module:os
+1085:54:Name -> U
+1086:28:Call -> ERR
+1086:28:Name -> Func:builtins.input
+1088:32:Call -> Inst:builtins.int
+1088:32:Name -> Class:builtins.int
+1088:36:Name -> U
+1089:23:Name -> Class:builtins.ValueError
+1090:20:Call -> ERR
+1090:20:Name -> Func:builtins.print
+1090:30:Name -> U
+1093:31:Call -> U
+1093:31:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1093:31:Attribute -> Module:posixpath | Module:ntpath
+1093:31:Name -> Module:os
+1093:48:Call -> ERR
+1093:48:Attribute -> BM:builtins.list.pop
+1093:48:Name -> Inst:builtins.list
+1093:69:Name -> U | Inst:builtins.int
+1094:23:Name -> Class:builtins.Exception
+1097:25:Call -> ERR
+1097:25:Name -> Func:builtins.input
+1097:42:Name -> U
+1098:19:Name -> U
+1098:35:Call -> U
+1098:35:Attribute -> U
+1098:35:Call -> U
+1098:35:Attribute -> U
+1098:35:Name -> U
+1099:20:Call -> Const:NoneType:None
+1099:20:Attribute -> Func:salt.utils.cloud.remove_key
+1099:20:Attribute -> Module:salt.utils.cloud
+1099:20:Attribute -> Module:salt.utils
+1099:20:Name -> Module:salt
+1099:48:Attribute -> U
+1099:48:Name -> Inst:salt.cloud.Cloud
+1099:70:Name -> U
+1100:20:Call -> ERR
+1100:20:Name -> Func:builtins.print
+1100:38:Name -> U
+1103:16:Call -> ERR
+1103:16:Name -> Func:builtins.print
+1103:41:Name -> U
+1106:11:Name -> Inst:builtins.set
+1106:25:Name -> Dict:0
+1108:18:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+1108:18:Name -> Class:salt.exceptions.SaltCloudSystemExit
+1109:16:Call -> Const:str:"The following VM's were not found: "
+1109:16:Attribute -> BM:builtins.str.format
+1109:63:Call -> Const:str:''
+1109:63:Attribute -> BM:builtins.str.join
+1109:73:Name -> Inst:builtins.set
+1112:13:Name -> Inst:builtins.set
+1112:23:Name -> Dict:0
+1113:12:Name -> Dict:0
+1113:37:Name -> Inst:builtins.set
+1115:17:Name -> Dict:0
+1116:18:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+1116:18:Name -> Class:salt.exceptions.SaltCloudSystemExit
+1118:15:Name -> Dict:0
+1125:15:Call -> U | Dict:0
+1125:15:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+1125:15:Name -> Inst:salt.cloud.Cloud
+1127:27:Call -> U | DictItems
+1127:27:Attribute -> U | BM:builtins.dict.items
+1127:27:Name -> U | Dict:0
+1128:12:Name -> Dict:0
+1128:17:Name -> U
+1129:24:Name -> U
+1130:19:Name -> U
+1130:27:Name -> U
+1131:20:Call -> U
+1131:20:Attribute -> U
+1131:20:Name -> Dict:0
+1131:25:Name -> U
+1131:38:Name -> U
+1132:28:Call -> DictItems
+1132:28:Attribute -> BM:builtins.dict.items
+1132:28:Name -> Dict:0
+1133:21:Name -> U
+1134:24:Name -> U
+1135:16:Call -> ERR
+1135:16:Attribute -> BM:builtins.list.append
+1135:16:Name -> List:0
+1135:28:Name -> U
+1135:34:Call -> U
+1135:34:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1135:34:Name -> Inst:salt.cloud.Cloud
+1135:46:Name -> Const:str:'Uninferable.reboot'
+1135:51:Name -> U
+1137:15:Name -> List:0
+1145:22:Call -> Dict:0 | U
+1145:22:Attribute -> Func:salt.config.get_cloud_config_value
+1145:22:Attribute -> Module:salt.config
+1145:22:Name -> Module:salt
+1146:22:Name -> U
+1146:27:Attribute -> U
+1146:27:Name -> Inst:salt.cloud.Cloud
+1149:24:Call -> U
+1149:24:Attribute -> U
+1149:24:Name -> U
+1150:17:Name -> U
+1151:11:Name -> Const:str:'Uninferable.create'
+1151:22:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1151:22:Name -> Inst:salt.cloud.Cloud
+1152:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1152:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1152:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1155:16:Name -> U
+1156:16:Name -> U
+1157:16:Name -> U
+1161:17:Call -> Const:NoneType:None | U
+1161:17:Attribute -> Func:salt.config.get_cloud_config_value
+1161:17:Attribute -> Module:salt.config
+1161:17:Name -> Module:salt
+1161:62:Name -> U
+1161:67:Attribute -> U
+1161:67:Name -> Inst:salt.cloud.Cloud
+1162:22:Call -> Const:NoneType:None | U
+1162:22:Attribute -> Func:salt.config.get_cloud_config_value
+1162:22:Attribute -> Module:salt.config
+1162:22:Name -> Module:salt
+1162:72:Name -> U
+1162:77:Attribute -> U
+1162:77:Name -> Inst:salt.cloud.Cloud
+1164:11:Name -> Const:NoneType:None | U
+1165:19:Name -> Const:NoneType:None | U
+1165:51:Name -> Dict:0 | U
+1166:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1166:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1166:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1167:74:Name -> U
+1170:32:Name -> U
+1170:58:Name -> U
+1171:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1171:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1171:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1171:61:Name -> U
+1172:28:Call -> Tuple:2
+1172:28:Attribute -> Func:salt.utils.cloud.gen_keys
+1172:28:Attribute -> Module:salt.utils.cloud
+1172:28:Attribute -> Module:salt.utils
+1172:28:Name -> Module:salt
+1173:20:Call -> Const:NoneType:None | U
+1173:20:Attribute -> Func:salt.config.get_cloud_config_value
+1173:20:Attribute -> Module:salt.config
+1173:20:Name -> Module:salt
+1173:66:Name -> U
+1173:71:Attribute -> U
+1173:71:Name -> Inst:salt.cloud.Cloud
+1175:16:Name -> U
+1175:33:Name -> U
+1176:16:Name -> U
+1176:34:Name -> U
+1180:12:Name -> U
+1181:12:Name -> U
+1183:17:Call -> U
+1183:17:Attribute -> BM:builtins.dict.get | U
+1183:17:Name -> Dict:0 | U
+1183:39:Name -> U
+1185:17:Call -> U
+1185:17:Attribute -> U
+1185:17:Name -> U
+1186:11:Call -> U
+1186:11:Attribute -> U
+1186:11:Name -> U
+1186:35:Name -> U
+1187:12:Name -> Dict:0 | U
+1187:43:Name -> U
+1189:30:Name -> Dict:0 | U
+1190:21:Call -> Const:str:''
+1190:21:Attribute -> BM:builtins.str.join
+1190:31:Name -> U
+1190:39:Name -> Dict:0 | U
+1192:11:Name -> Const:NoneType:None | U
+1192:55:Name -> U
+1192:83:Name -> U
+1193:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1193:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1193:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1193:61:Name -> U
+1194:38:Call -> Tuple:2
+1194:38:Attribute -> Func:salt.utils.cloud.gen_keys
+1194:38:Attribute -> Module:salt.utils.cloud
+1194:38:Attribute -> Module:salt.utils
+1194:38:Name -> Module:salt
+1195:16:Call -> Const:NoneType:None | U
+1195:16:Attribute -> Func:salt.config.get_cloud_config_value
+1195:16:Attribute -> Module:salt.config
+1195:16:Name -> Module:salt
+1195:62:Name -> U
+1195:67:Attribute -> U
+1195:67:Name -> Inst:salt.cloud.Cloud
+1197:12:Name -> U
+1197:32:Name -> U
+1198:12:Name -> U
+1198:32:Name -> U
+1200:11:Name -> Const:bool:True | U
+1200:36:Name -> Const:NoneType:None | U
+1202:12:Call -> Const:NoneType:None
+1202:12:Attribute -> Func:salt.utils.cloud.accept_key
+1202:12:Attribute -> Module:salt.utils.cloud
+1202:12:Attribute -> Module:salt.utils
+1202:12:Name -> Module:salt
+1202:40:Attribute -> U
+1202:40:Name -> Inst:salt.cloud.Cloud
+1202:62:Name -> U
+1202:78:Name -> U | Const:str:''
+1204:8:Name -> U
+1204:20:Call -> Const:NoneType:None | U
+1204:20:Attribute -> Func:salt.config.get_cloud_config_value
+1204:20:Attribute -> Module:salt.config
+1204:20:Name -> Module:salt
+1204:65:Name -> U
+1204:70:Attribute -> U
+1204:70:Name -> Inst:salt.cloud.Cloud
+1207:12:Name -> U
+1207:35:Call -> Const:NoneType:None | U
+1207:35:Attribute -> Func:salt.config.get_cloud_config_value
+1207:35:Attribute -> Module:salt.config
+1207:35:Name -> Module:salt
+1208:33:Name -> U
+1208:38:Attribute -> U
+1208:38:Name -> Inst:salt.cloud.Cloud
+1210:15:Name -> Class:builtins.KeyError
+1214:28:Call -> U
+1214:28:Attribute -> U
+1214:28:Name -> U
+1215:22:Name -> U
+1216:17:Call -> Gen:salt.utils.context.func_globals_inject
+1216:17:Attribute -> Func:salt.utils.context.func_globals_inject
+1216:17:Attribute -> Module:salt.utils.context
+1216:17:Attribute -> Module:salt.utils
+1216:17:Name -> Module:salt
+1217:16:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1217:16:Name -> Inst:salt.cloud.Cloud
+1217:28:Name -> Const:str:'Uninferable.create'
+1217:59:Call -> Const:str:''
+1217:59:Attribute -> BM:builtins.str.join
+1217:69:Name -> U
+1217:76:Name -> U
+1219:25:Call -> U
+1219:25:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1219:25:Name -> Inst:salt.cloud.Cloud
+1219:37:Name -> Const:str:'Uninferable.create'
+1219:43:Name -> U
+1220:15:Name -> Dict:0 | U
+1220:63:Attribute -> U
+1220:63:Name -> Inst:salt.cloud.Cloud
+1221:19:Attribute -> U
+1221:19:Name -> Inst:salt.cloud.Cloud
+1221:55:Attribute -> U
+1221:55:Name -> Inst:salt.cloud.Cloud
+1244:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1244:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1244:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1247:20:Attribute -> U
+1247:20:Name -> Inst:salt.cloud.Cloud
+1250:16:Call -> ERR
+1250:16:Attribute -> Func:time.sleep
+1250:16:Name -> Module:time
+1250:27:Name -> Const:int:3 | U
+1252:34:Call -> ERR
+1252:34:Attribute -> Func:time.time
+1252:34:Name -> Module:time
+1253:22:Call -> ERR
+1253:22:Attribute -> Func:time.time
+1253:22:Name -> Module:time
+1253:36:Name -> U
+1255:29:Call -> U
+1255:29:Attribute -> Func:copy.deepcopy
+1255:29:Name -> Module:copy
+1255:43:Attribute -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | U
+1255:43:Attribute -> Module:salt.config
+1255:43:Name -> Module:salt
+1256:32:Call -> Const:str:''
+1256:32:Attribute -> BM:builtins.str.join
+1256:41:Call -> U
+1256:41:Attribute -> U
+1256:41:Attribute -> U
+1256:41:Name -> Inst:salt.cloud.Cloud
+1257:20:Call -> U
+1257:20:Attribute -> U
+1257:20:Name -> U
+1258:24:Call -> Inst:salt.utils.optsdict.OptsDict
+1258:24:Attribute -> Func:salt.config.master_config
+1258:24:Attribute -> Module:salt.config
+1258:24:Name -> Module:salt
+1258:50:Call -> U
+1258:50:Attribute -> Func:posixpath.join | Func:ntpath.join
+1258:50:Attribute -> Module:posixpath | Module:ntpath
+1258:50:Name -> Module:os
+1258:63:Name -> Const:str:''
+1261:25:Call -> Inst:salt.client.LocalClient
+1261:25:Attribute -> Func:salt.client.get_local_client
+1261:25:Attribute -> Module:salt.client
+1261:25:Name -> Module:salt
+1261:60:Name -> U
+1262:30:Call -> U
+1262:30:Attribute -> U
+1262:30:Name -> Inst:salt.client.LocalClient
+1263:28:Name -> U
+1264:28:Call -> U
+1264:28:Attribute -> BM:builtins.str.format
+1264:54:Attribute -> U
+1264:54:Name -> Inst:salt.cloud.Cloud
+1265:36:Attribute -> U
+1265:36:Name -> Inst:salt.cloud.Cloud
+1267:27:Name -> U
+1268:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+1268:28:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1268:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1269:82:Name -> U
+1272:15:Name -> Class:builtins.KeyError
+1273:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1273:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+1273:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1275:16:Name -> U
+1276:16:Name -> ExcInst:builtins.KeyError
+1281:22:Attribute -> U
+1281:22:Name -> Inst:salt.cloud.Cloud
+1282:15:Name -> Class:builtins.KeyError
+1284:11:Attribute -> U
+1284:11:Name -> Inst:salt.cloud.Cloud
+1284:37:Attribute -> U
+1284:37:Name -> Inst:salt.cloud.Cloud
+1284:71:Name -> U | Const:bool:False
+1285:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1285:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1285:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1285:41:Attribute -> U
+1285:41:Name -> Inst:salt.cloud.Cloud
+1285:68:Name -> U
+1286:17:Call -> Inst:salt.client.LocalClient
+1286:17:Attribute -> Func:salt.client.get_local_client
+1286:17:Attribute -> Module:salt.client
+1286:17:Name -> Module:salt
+1286:52:Attribute -> U
+1286:52:Name -> Inst:salt.cloud.Cloud
+1287:29:Call -> U
+1287:29:Attribute -> U
+1287:29:Name -> Inst:salt.client.LocalClient
+1288:20:Name -> U
+1289:20:Attribute -> U
+1289:20:Name -> Inst:salt.cloud.Cloud
+1290:28:Attribute -> U
+1290:28:Name -> Inst:salt.cloud.Cloud
+1292:12:Name -> Dict:0 | U
+1292:28:Name -> U
+1293:15:Name -> Dict:0 | U
+1295:5:Name -> Class:builtins.staticmethod
+1306:13:Call -> U
+1306:13:Attribute -> U
+1306:13:Name -> U
+1307:13:Call -> U
+1307:13:Attribute -> Func:salt.utils.dictupdate.update
+1307:13:Attribute -> Module:salt.utils.dictupdate
+1307:13:Attribute -> Module:salt.utils
+1307:13:Name -> Module:salt
+1307:42:Name -> U
+1307:46:Name -> U
+1308:13:Call -> U
+1308:13:Attribute -> Func:salt.utils.dictupdate.update
+1308:13:Attribute -> Module:salt.utils.dictupdate
+1308:13:Attribute -> Module:salt.utils
+1308:13:Name -> Module:salt
+1308:42:Name -> U
+1308:46:Name -> U
+1309:13:Call -> U
+1309:13:Attribute -> Func:salt.utils.dictupdate.update
+1309:13:Attribute -> Module:salt.utils.dictupdate
+1309:13:Attribute -> Module:salt.utils
+1309:13:Name -> Module:salt
+1309:42:Name -> U
+1309:46:Call -> U
+1309:46:Attribute -> U
+1309:46:Name -> U
+1309:60:Name -> U
+1310:8:Name -> U
+1310:21:Name -> U
+1311:15:Name -> U
+1319:24:Call -> U
+1319:24:Attribute -> U
+1319:24:Name -> U
+1320:14:Call -> U
+1320:14:Attribute -> BM:builtins.str.format
+1320:29:Name -> U
+1320:37:Name -> U
+1321:11:Name -> U
+1321:22:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1321:22:Name -> Inst:salt.cloud.Cloud
+1322:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1322:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1322:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1325:16:Name -> U
+1326:16:Name -> U
+1327:16:Name -> U
+1332:17:Call -> Gen:salt.utils.context.func_globals_inject
+1332:17:Attribute -> Func:salt.utils.context.func_globals_inject
+1332:17:Attribute -> Module:salt.utils.context
+1332:17:Attribute -> Module:salt.utils
+1332:17:Name -> Module:salt
+1333:16:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1333:16:Name -> Inst:salt.cloud.Cloud
+1333:28:Name -> U
+1333:59:Name -> U
+1335:25:Call -> U
+1335:25:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1335:25:Name -> Inst:salt.cloud.Cloud
+1335:37:Name -> U
+1335:44:Name -> U
+1336:15:Name -> Class:builtins.KeyError
+1337:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1337:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+1337:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1339:16:Name -> U
+1340:16:Name -> U
+1341:16:Name -> U
+1342:16:Name -> ExcInst:builtins.KeyError
+1344:15:Name -> Dict:0 | U
+1351:11:Name -> U
+1351:26:Attribute -> U
+1351:26:Name -> Inst:salt.cloud.Cloud
+1352:29:Name -> U
+1353:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1353:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1353:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1353:22:Name -> Const:str:'Profile Uninferable is not defined'
+1354:29:Name -> Const:str:'Profile Uninferable is not defined'
+1357:15:Name -> Const:NoneType:None | U
+1361:17:Call -> U
+1361:17:Attribute -> Func:salt.utils.files.fopen
+1361:17:Attribute -> Module:salt.utils.files
+1361:17:Attribute -> Module:salt.utils
+1361:17:Name -> Module:salt
+1361:40:Attribute -> U
+1361:40:Name -> Inst:salt.cloud.Cloud
+1362:36:Call -> U
+1362:36:Attribute -> Func:salt.utils.yamlloader.safe_load
+1362:36:Attribute -> Module:salt.utils.yaml
+1362:36:Attribute -> Module:salt.utils
+1362:36:Name -> Module:salt
+1362:62:Name -> U
+1363:19:Name -> U
+1365:15:Name -> Class:builtins.KeyError
+1367:15:Name -> Class:builtins.OSError
+1370:11:Name -> U | Dict:0 | Dict:0 | Dict:0
+1373:27:Call -> U | Dict:0
+1373:27:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+1373:27:Name -> Inst:salt.cloud.Cloud
+1374:26:Attribute -> U
+1374:26:Name -> Inst:salt.cloud.Cloud
+1374:48:Name -> U
+1376:25:Call -> U | DictItems
+1376:25:Attribute -> U | BM:builtins.dict.items
+1376:25:Name -> U | Dict:0
+1377:24:Call -> ERR
+1377:24:Name -> Func:builtins.next
+1377:29:Call -> ERR
+1377:29:Name -> Func:builtins.iter
+1377:34:Name -> U
+1378:24:Name -> U | Dict:0
+1378:41:Name -> U
+1378:47:Name -> U
+1379:16:Name -> Dict:0
+1379:20:Name -> U
+1379:28:Name -> U | Dict:0
+1379:45:Name -> U
+1379:51:Name -> U
+1379:62:Name -> U
+1380:16:Name -> Dict:0
+1380:20:Name -> U
+1380:40:Name -> U
+1381:16:Name -> Dict:0
+1381:20:Name -> U
+1381:38:Name -> U
+1382:24:Call -> U
+1382:24:Attribute -> U
+1382:24:Name -> U
+1384:27:Call -> U
+1384:27:Attribute -> U
+1384:27:Attribute -> U
+1384:27:Name -> Inst:salt.cloud.Cloud
+1384:50:Name -> U
+1384:57:Name -> U
+1385:12:Name -> U
+1387:20:Name -> U
+1388:15:Name -> U
+1388:23:Name -> Dict:0
+1389:23:Name -> Dict:0
+1389:27:Name -> U
+1390:23:Name -> Dict:0
+1390:27:Name -> U
+1391:25:Name -> U
+1391:53:Name -> U
+1391:60:Name -> U
+1392:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1392:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1392:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1392:26:Name -> Const:str:'Uninferable already exists under Uninfe
+1393:16:Name -> Dict:0
+1393:20:Name -> U
+1393:38:Name -> Const:str:'Uninferable already exists under Uninfe
+1396:18:Call -> U
+1396:18:Attribute -> Func:salt.cloud.Cloud.vm_config
+1396:18:Name -> Inst:salt.cloud.Cloud
+1397:16:Name -> U
+1398:16:Name -> U | Dict:0 | Dict:0 | Dict:0 | Dict:0
+1399:16:Name -> U
+1400:16:Name -> U
+1401:16:Name -> Const:NoneType:None | U | Dict:0
+1403:15:Attribute -> U
+1403:15:Name -> Inst:salt.cloud.Cloud
+1404:26:Call -> Inst:multiprocessing.context.Process
+1404:26:Attribute -> Class:multiprocessing.context.Process
+1404:26:Name -> Module:multiprocessing
+1404:57:Attribute -> BM:salt.cloud.Cloud.create
+1404:57:Name -> Inst:salt.cloud.Cloud
+1404:76:Name -> U
+1405:16:Call -> Const:NoneType:None
+1405:16:Attribute -> BM:multiprocessing.process.BaseProcess.start
+1405:16:Name -> Inst:multiprocessing.context.Process
+1406:16:Name -> Dict:0
+1406:20:Name -> U
+1407:36:Call -> U
+1407:36:Attribute -> BM:builtins.str.format
+1408:24:Attribute -> U
+1408:24:Name -> Inst:multiprocessing.context.Process
+1416:16:Name -> Dict:0
+1416:20:Name -> U
+1416:28:Call -> Const:NoneType:None | Dict:0 | U
+1416:28:Attribute -> BM:salt.cloud.Cloud.create
+1416:28:Name -> Inst:salt.cloud.Cloud
+1416:40:Name -> U
+1417:23:Name -> Dict:0
+1417:27:Name -> U
+1418:20:Name -> Dict:0
+1418:24:Name -> U
+1419:23:Call -> ERR
+1419:23:Name -> Func:builtins.len
+1419:27:Name -> U
+1420:30:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+1420:30:Name -> Class:salt.exceptions.SaltCloudSystemExit
+1422:19:Call -> U
+1422:19:Attribute -> U
+1422:19:Attribute -> U
+1422:19:Name -> Inst:salt.cloud.Cloud
+1423:23:Call -> ERR
+1423:23:Name -> Func:builtins.isinstance
+1423:34:Name -> Dict:0
+1423:38:Name -> U
+1423:45:Name -> Class:builtins.dict
+1424:24:Call -> U
+1424:24:Attribute -> U
+1424:24:Name -> Dict:0
+1424:28:Name -> U
+1425:20:Name -> Class:salt.exceptions.SaltCloudSystemExit
+1425:41:Name -> Class:salt.exceptions.SaltCloudConfigError
+1426:19:Call -> ERR
+1426:19:Name -> Func:builtins.len
+1426:23:Name -> U
+1428:16:Name -> Dict:0
+1428:20:Name -> U
+1428:38:Call -> Const:str:''
+1428:38:Name -> Class:builtins.str
+1428:42:Name -> ExcInst:salt.exceptions.SaltCloudSystemExit | ExcInst:salt.exceptions.SaltCloudConfigError
+1430:15:Name -> Dict:0
+1438:16:Call -> Inst:builtins.set
+1438:16:Name -> Class:builtins.set
+1438:20:Name -> U
+1440:30:Call -> U | DictItems
+1440:30:Attribute -> U | BM:builtins.dict.items
+1440:30:Call -> U | Dict:0
+1440:30:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+1440:30:Name -> Inst:salt.cloud.Cloud
+1441:19:Name -> Inst:builtins.set
+1443:31:Call -> U
+1443:31:Attribute -> U
+1443:31:Name -> U
+1444:23:Name -> Inst:builtins.set
+1447:22:Call -> U
+1447:22:Attribute -> BM:builtins.str.format
+1447:37:Name -> U
+1447:45:Attribute -> U
+1447:45:Name -> Inst:salt.cloud.Cloud
+1448:19:Name -> U
+1448:30:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1448:30:Name -> Inst:salt.cloud.Cloud
+1449:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1449:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1449:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1449:74:Name -> U
+1451:43:Call -> U
+1451:43:Attribute -> U
+1451:43:Name -> U
+1452:27:Name -> Inst:builtins.set
+1454:23:Name -> U
+1454:38:Name -> Inst:builtins.set
+1455:31:Call -> ERR
+1455:31:Name -> Func:builtins.isinstance
+1455:42:Name -> U
+1455:54:Name -> Class:builtins.dict
+1457:35:Name -> U | Dict:0
+1457:50:Name -> U | Dict:0
+1457:70:Name -> Inst:builtins.set
+1458:38:Name -> U | Dict:0
+1460:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+1460:28:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1460:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1462:32:Name -> U
+1463:32:Name -> U
+1464:32:Name -> Inst:builtins.set
+1469:23:Name -> Const:bool:True | Const:bool:False
+1470:27:Call -> ERR
+1470:27:Attribute -> BM:builtins.dict.get
+1470:27:Name -> Dict:0
+1470:49:Name -> U
+1471:28:Call -> ERR
+1471:28:Attribute -> BM:builtins.dict.update
+1471:28:Name -> Dict:0
+1471:54:Name -> U
+1472:24:Call -> U
+1472:24:Attribute -> U
+1472:24:Name -> Dict:0
+1472:42:Name -> U
+1472:54:Name -> U
+1475:25:Call -> Gen:salt.utils.context.func_globals_inject
+1475:25:Attribute -> Func:salt.utils.context.func_globals_inject
+1475:25:Attribute -> Module:salt.utils.context
+1475:25:Attribute -> Module:salt.utils
+1475:25:Name -> Module:salt
+1476:24:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1476:24:Name -> Inst:salt.cloud.Cloud
+1476:36:Name -> U
+1477:49:Call -> Const:str:''
+1477:49:Attribute -> BM:builtins.str.join
+1477:59:Name -> U
+1477:66:Name -> U
+1479:27:Name -> U
+1479:40:Name -> Dict:0
+1480:28:Name -> Dict:0
+1480:32:Name -> U
+1481:27:Name -> U
+1481:41:Name -> Dict:0
+1481:45:Name -> U
+1482:28:Name -> Dict:0
+1482:32:Name -> U
+1482:39:Name -> U
+1487:33:Call -> Dict:0
+1487:33:Attribute -> Func:salt.utils.args.clean_kwargs
+1487:33:Attribute -> Module:salt.utils.args
+1487:33:Attribute -> Module:salt.utils
+1487:33:Name -> Module:salt
+1487:64:Name -> U
+1489:27:Name -> Dict:0
+1490:28:Name -> Dict:0
+1490:32:Name -> U
+1490:39:Name -> U
+1490:47:Name -> U
+1490:58:Call -> U
+1490:58:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1490:58:Name -> Inst:salt.cloud.Cloud
+1490:70:Name -> U
+1491:32:Name -> U
+1491:41:Name -> U
+1494:28:Name -> Dict:0
+1494:32:Name -> U
+1494:39:Name -> U
+1494:47:Name -> U
+1494:58:Call -> U
+1494:58:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1494:58:Name -> Inst:salt.cloud.Cloud
+1494:70:Name -> U
+1495:32:Name -> U
+1497:24:Call -> ERR
+1497:24:Attribute -> BM:builtins.set.remove
+1497:24:Name -> Inst:builtins.set
+1497:37:Name -> U
+1500:22:Call -> Set:0
+1500:22:Name -> Class:builtins.set
+1501:11:Name -> Dict:0
+1502:12:Name -> Dict:0
+1502:37:Name -> U
+1503:31:Call -> Set:0
+1503:31:Name -> Class:builtins.set
+1504:28:Call -> U
+1504:28:Attribute -> U
+1504:28:Name -> U
+1505:35:Call -> ERR
+1505:35:Attribute -> BM:builtins.set.union
+1505:35:Name -> Set:0
+1505:58:Call -> Inst:builtins.set
+1505:58:Name -> Class:builtins.set
+1505:62:Name -> U
+1508:26:Call -> ERR
+1508:26:Attribute -> BM:builtins.set.difference
+1508:26:Name -> Inst:builtins.set
+1508:43:Name -> Set:0 | U
+1509:15:Name -> U
+1510:16:Name -> Dict:0
+1510:35:Call -> Inst:builtins.list
+1510:35:Name -> Class:builtins.list
+1510:40:Name -> U
+1511:16:Name -> Dict:0
+1511:50:Call -> Inst:builtins.list
+1511:50:Name -> Class:builtins.list
+1511:55:Name -> Inst:builtins.set
+1513:15:Name -> Inst:builtins.set
+1514:19:Name -> Dict:0
+1519:11:Name -> Set:0 | U
+1520:19:Name -> Dict:0
+1524:8:Name -> Dict:0
+1524:42:Call -> Inst:builtins.list
+1524:42:Name -> Class:builtins.list
+1524:47:Name -> Inst:builtins.set
+1525:8:Name -> Dict:0
+1525:27:Call -> Inst:builtins.list
+1525:27:Name -> Class:builtins.list
+1525:32:Name -> Inst:builtins.set
+1526:15:Name -> Dict:0
+1532:18:Call -> Set:0 | Set:0
+1532:18:Attribute -> BM:salt.cloud.Cloud.lookup_providers
+1532:18:Name -> Inst:salt.cloud.Cloud
+1532:40:Name -> U
+1533:11:Call -> ERR
+1533:11:Name -> Func:builtins.len
+1533:15:Name -> Set:0 | Set:0
+1534:18:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+1534:18:Name -> Class:salt.exceptions.SaltCloudSystemExit
+1535:16:Call -> U
+1535:16:Attribute -> BM:builtins.str.format
+1536:20:Name -> U
+1537:20:Call -> Const:str:''
+1537:20:Attribute -> BM:builtins.str.join
+1537:34:Name -> U
+1537:42:Name -> U
+1537:74:Name -> Set:0 | Set:0
+1541:24:Call -> ERR
+1541:24:Attribute -> BM:builtins.set.pop | BM:builtins.set.pop
+1541:24:Name -> Set:0 | Set:0
+1542:17:Name -> U
+1542:26:Name -> U
+1543:11:Name -> Const:str:'Uninferable.Uninferable'
+1543:22:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1543:22:Name -> Inst:salt.cloud.Cloud
+1544:18:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+1544:18:Name -> Class:salt.exceptions.SaltCloudSystemExit
+1545:16:Call -> U
+1545:16:Attribute -> BM:builtins.str.format
+1546:54:Name -> U
+1546:61:Name -> U
+1546:69:Name -> U
+1549:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1549:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1549:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1549:74:Name -> Const:str:'Uninferable.Uninferable'
+1549:79:Name -> U
+1551:13:Call -> Gen:salt.utils.context.func_globals_inject
+1551:13:Attribute -> Func:salt.utils.context.func_globals_inject
+1551:13:Attribute -> Module:salt.utils.context
+1551:13:Attribute -> Module:salt.utils
+1551:13:Name -> Module:salt
+1552:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1552:12:Name -> Inst:salt.cloud.Cloud
+1552:24:Name -> Const:str:'Uninferable.Uninferable'
+1552:55:Call -> Const:str:''
+1552:55:Attribute -> BM:builtins.str.join
+1552:65:Name -> U
+1552:72:Name -> U
+1554:15:Name -> U
+1556:20:Name -> U
+1556:28:Name -> U
+1556:36:Call -> U
+1556:36:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1556:36:Name -> Inst:salt.cloud.Cloud
+1556:48:Name -> Const:str:'Uninferable.Uninferable'
+1556:77:Name -> U
+1558:20:Name -> U
+1558:28:Name -> U
+1558:36:Call -> U
+1558:36:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1558:36:Name -> Inst:salt.cloud.Cloud
+1558:48:Name -> Const:str:'Uninferable.Uninferable'
+1564:30:Call -> ERR
+1564:30:Attribute -> ERR
+1564:30:Call -> U
+1564:30:Attribute -> U
+1564:30:Attribute -> U
+1564:30:Name -> Inst:salt.cloud.Cloud
+1565:26:Call -> U
+1565:26:Attribute -> U
+1565:26:Name -> U
+1566:25:Name -> U
+1567:19:Name -> Const:str:'Uninferable.get_configured_provider'
+1567:30:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1567:30:Name -> Inst:salt.cloud.Cloud
+1569:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1569:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1569:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1578:24:Name -> U
+1579:24:Name -> U
+1580:24:Name -> U
+1581:24:Name -> Const:str:'Uninferable.get_configured_provider'
+1582:24:Name -> U
+1584:20:Call -> U
+1584:20:Attribute -> U
+1584:20:Attribute -> U
+1584:20:Name -> Inst:salt.cloud.Cloud
+1584:43:Name -> U
+1584:54:Name -> U
+1586:23:Name -> U
+1586:36:Attribute -> U
+1586:36:Name -> Inst:salt.cloud.Cloud
+1589:27:Attribute -> U
+1589:27:Name -> Inst:salt.cloud.Cloud
+1589:50:Name -> U
+1590:24:Call -> U
+1590:24:Attribute -> U
+1590:24:Attribute -> U
+1590:24:Name -> Inst:salt.cloud.Cloud
+1590:51:Name -> U
+1593:21:Call -> Gen:salt.utils.context.func_globals_inject
+1593:21:Attribute -> Func:salt.utils.context.func_globals_inject
+1593:21:Attribute -> Module:salt.utils.context
+1593:21:Attribute -> Module:salt.utils
+1593:21:Name -> Module:salt
+1594:20:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1594:20:Name -> Inst:salt.cloud.Cloud
+1594:32:Name -> Const:str:'Uninferable.get_configured_provider'
+1594:63:Call -> Const:str:''
+1594:63:Attribute -> BM:builtins.str.join
+1594:73:Name -> U
+1594:80:Name -> U
+1596:23:Call -> U
+1596:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1596:23:Name -> Inst:salt.cloud.Cloud
+1596:35:Name -> Const:str:'Uninferable.get_configured_provider'
+1597:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1597:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1597:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1602:28:Name -> U
+1603:28:Name -> U
+1605:24:Call -> U
+1605:24:Attribute -> U
+1605:24:Attribute -> U
+1605:24:Name -> Inst:salt.cloud.Cloud
+1605:47:Name -> U
+1605:58:Name -> U
+1607:15:Name -> U
+1607:28:Attribute -> U
+1607:28:Name -> Inst:salt.cloud.Cloud
+1610:19:Attribute -> U
+1610:19:Name -> Inst:salt.cloud.Cloud
+1610:42:Name -> U
+1611:16:Call -> U
+1611:16:Attribute -> U
+1611:16:Attribute -> U
+1611:16:Name -> Inst:salt.cloud.Cloud
+1611:43:Name -> U
+1614:10:Name -> Class:salt.cloud.Cloud
+1620:8:Call -> Const:NoneType:None
+1620:8:Attribute -> UM:salt.cloud.Cloud.__init__
+1620:8:Name -> Class:salt.cloud.Cloud
+1620:23:Name -> Inst:salt.cloud.Map
+1620:29:Name -> U
+1621:8:Name -> Inst:salt.cloud.Map
+1621:28:Call -> Dict:0 | Dict:0 | Dict:0 | Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO
+1621:28:Attribute -> BM:salt.cloud.Map.read
+1621:28:Name -> Inst:salt.cloud.Map
+1624:23:Call -> U
+1624:23:Attribute -> BM:builtins.dict.copy | BM:builtins.dict.copy | BM:builtins.dict.copy | U | BM:builtins.dict.copy
+1624:23:Call -> Dict:0 | Dict:0 | Dict:0 | Const:NoneType:None | U | Dict:0
+1624:23:Attribute -> BM:salt.cloud.Map.read
+1624:23:Name -> Inst:salt.cloud.Map
+1627:35:Call -> U
+1627:35:Attribute -> U
+1627:35:Name -> U
+1628:20:Call -> Inst:builtins.set
+1628:20:Name -> Class:builtins.set
+1628:24:Name -> U
+1629:15:Name -> U
+1629:30:Attribute -> U
+1629:30:Name -> Inst:salt.cloud.Map
+1630:35:Name -> Dict:0
+1631:20:Name -> Dict:0
+1633:20:Call -> U
+1633:20:Attribute -> BM:builtins.str.format
+1634:45:Name -> U
+1634:54:Call -> Const:str:''
+1634:54:Attribute -> BM:builtins.str.join
+1634:64:Name -> Inst:builtins.set
+1636:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1636:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1636:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1636:25:Name -> U
+1637:16:Name -> Dict:0
+1637:43:Name -> U
+1637:54:Name -> U
+1640:23:Call -> Dict:0
+1640:23:Attribute -> BM:salt.cloud.Cloud.get_running_by_names
+1640:23:Name -> Inst:salt.cloud.Map
+1640:49:Name -> Inst:builtins.set
+1640:56:Name -> Const:str:'list_nodes' | U
+1640:63:Name -> Const:bool:False | U
+1641:34:Call -> DictItems
+1641:34:Attribute -> BM:builtins.dict.items
+1641:34:Name -> Dict:0
+1642:35:Call -> U
+1642:35:Attribute -> U
+1642:35:Name -> U
+1643:47:Call -> U
+1643:47:Attribute -> U
+1643:47:Name -> U
+1644:27:Name -> U
+1644:40:Name -> Dict:0
+1645:28:Name -> Dict:0
+1645:45:Name -> U
+1646:27:Name -> U
+1646:41:Name -> Dict:0
+1646:58:Name -> U
+1647:28:Name -> Dict:0
+1647:45:Name -> U
+1647:52:Name -> U
+1648:24:Name -> Dict:0
+1648:41:Name -> U
+1648:48:Name -> U
+1648:56:Name -> U
+1648:67:Name -> U
+1650:28:Call -> ERR
+1650:28:Attribute -> BM:builtins.set.remove
+1650:28:Name -> Inst:builtins.set
+1650:41:Name -> U
+1651:31:Name -> Class:builtins.KeyError
+1655:19:Name -> Inst:builtins.set
+1658:30:Attribute -> U
+1658:30:Name -> Inst:salt.cloud.Map
+1658:52:Name -> U
+1659:28:Call -> U
+1659:28:Attribute -> U
+1659:28:Name -> U
+1660:27:Name -> Inst:builtins.set
+1661:19:Name -> U
+1661:32:Name -> Dict:0
+1662:20:Name -> Dict:0
+1662:37:Name -> U
+1663:19:Name -> U
+1663:33:Name -> Dict:0
+1663:50:Name -> U
+1664:20:Name -> Dict:0
+1664:37:Name -> U
+1664:44:Name -> U
+1665:16:Name -> Dict:0
+1665:33:Name -> U
+1665:40:Name -> U
+1665:48:Name -> U
+1667:15:Name -> Dict:0
+1670:20:Call -> Dict:0
+1670:20:Attribute -> BM:salt.cloud.Map.interpolated_map
+1670:20:Name -> Inst:salt.cloud.Map
+1670:48:Name -> Const:NoneType:None | U
+1671:30:Call -> DictItems
+1671:30:Attribute -> BM:builtins.dict.items
+1671:30:Call -> Dict:0
+1671:30:Attribute -> BM:builtins.dict.copy
+1671:30:Name -> Dict:0
+1672:15:Name -> U
+1674:31:Call -> ERR
+1674:31:Attribute -> ERR
+1674:31:Call -> U
+1674:31:Attribute -> U
+1674:31:Name -> U
+1675:43:Call -> ERR
+1675:43:Attribute -> ERR
+1675:43:Call -> U
+1675:43:Attribute -> U
+1675:43:Name -> U
+1676:23:Name -> U
+1677:24:Call -> U
+1677:24:Attribute -> U
+1677:24:Name -> Dict:0
+1677:34:Name -> U
+1677:41:Name -> U
+1677:53:Name -> U
+1678:23:Name -> Dict:0
+1678:33:Name -> U
+1678:40:Name -> U
+1679:20:Call -> U
+1679:20:Attribute -> U
+1679:20:Name -> Dict:0
+1679:30:Name -> U
+1679:41:Name -> U
+1680:19:Name -> Dict:0
+1680:29:Name -> U
+1681:16:Call -> ERR
+1681:16:Attribute -> BM:builtins.dict.pop
+1681:16:Name -> Dict:0
+1681:30:Name -> U
+1682:15:Name -> Dict:0
+1685:20:Call -> Dict:0
+1685:20:Attribute -> BM:salt.cloud.Map.interpolated_map
+1685:20:Name -> Inst:salt.cloud.Map
+1692:30:Call -> DictItems
+1692:30:Attribute -> BM:builtins.dict.items
+1692:30:Name -> Dict:0
+1693:31:Call -> U
+1693:31:Attribute -> U
+1693:31:Name -> U
+1694:43:Call -> U
+1694:43:Attribute -> U
+1694:43:Name -> U
+1699:39:Name -> Dict:3
+1699:55:Name -> U
+1700:27:Name -> Class:builtins.KeyError
+1701:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1701:24:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1701:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1705:28:Name -> U
+1707:30:Call -> ExcInst:salt.exceptions.SaltCloudException
+1707:30:Name -> Class:salt.exceptions.SaltCloudException
+1709:24:Name -> U
+1710:28:Call -> U
+1710:28:Attribute -> U
+1710:28:Name -> U
+1710:59:Name -> U
+1712:24:Call -> ERR
+1712:24:Attribute -> BM:builtins.list.append
+1712:24:Name -> List:0
+1712:40:Name -> U
+1713:15:Name -> List:0
+1720:11:Call -> U
+1720:11:Attribute -> U
+1720:11:Attribute -> U
+1720:11:Name -> Inst:salt.cloud.Map
+1721:15:Call -> U
+1721:15:Attribute -> U
+1721:15:Attribute -> U
+1721:15:Name -> Inst:salt.cloud.Map
+1722:19:Call -> U
+1722:19:Attribute -> U
+1722:19:Attribute -> U
+1722:19:Name -> Inst:salt.cloud.Map
+1724:21:Call -> U
+1724:21:Attribute -> U
+1724:21:Attribute -> U
+1724:21:Name -> Inst:salt.cloud.Map
+1724:56:Call -> U
+1724:56:Attribute -> U
+1724:56:Attribute -> U
+1724:56:Name -> Inst:salt.cloud.Map
+1725:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1725:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1725:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1727:24:Attribute -> U
+1727:24:Name -> Inst:salt.cloud.Map
+1729:26:Call -> ExcInst:salt.exceptions.SaltCloudNotFound
+1729:26:Name -> Class:salt.exceptions.SaltCloudNotFound
+1732:27:Attribute -> U
+1732:27:Name -> Inst:salt.cloud.Map
+1732:45:Call -> U
+1732:45:Attribute -> U
+1732:45:Attribute -> U
+1732:45:Name -> Inst:salt.cloud.Map
+1735:23:Attribute -> U
+1735:23:Name -> Inst:salt.cloud.Map
+1738:32:Call -> U
+1738:32:Attribute -> Func:copy.deepcopy
+1738:32:Name -> Module:copy
+1738:46:Attribute -> U
+1738:46:Name -> Inst:salt.cloud.Map
+1739:12:Name -> U
+1740:12:Name -> Inst:salt.cloud.Map
+1740:26:Call -> Inst:salt.minion.MasterMinion
+1740:26:Attribute -> Class:salt.minion.MasterMinion
+1740:26:Attribute -> Module:salt.minion
+1740:26:Name -> Module:salt
+1740:51:Name -> U
+1742:19:Call -> Const:bool:False | U
+1742:19:Attribute -> Func:genericpath.isfile | U
+1742:19:Attribute -> Module:posixpath | Module:ntpath
+1742:19:Name -> Module:os
+1742:34:Attribute -> U
+1742:34:Name -> Inst:salt.cloud.Map
+1743:23:Call -> U
+1743:23:Attribute -> U
+1743:24:Attribute -> U
+1743:24:Name -> Inst:salt.cloud.Map
+1744:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1744:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1744:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1745:71:Attribute -> U
+1745:71:Name -> Inst:salt.cloud.Map
+1747:26:Call -> ExcInst:salt.exceptions.SaltCloudNotFound
+1747:26:Name -> Class:salt.exceptions.SaltCloudNotFound
+1748:15:Call -> U
+1748:15:Attribute -> U
+1748:16:Attribute -> U
+1748:16:Name -> Inst:salt.cloud.Map
+1749:29:Call -> U
+1749:29:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1749:29:Attribute -> Inst:salt.minion.MasterMinion
+1749:29:Name -> Inst:salt.cloud.Map
+1749:68:Attribute -> U
+1749:68:Name -> Inst:salt.cloud.Map
+1751:29:Attribute -> U
+1751:29:Name -> Inst:salt.cloud.Map
+1753:27:Call -> U
+1753:27:Attribute -> U
+1753:27:Attribute -> U
+1753:27:Name -> Inst:salt.cloud.Map
+1754:23:Call -> Inst:salt.loader.lazy.FilterDictWrapper
+1754:23:Attribute -> Func:salt.loader.render
+1754:23:Attribute -> Module:salt.loader
+1754:23:Name -> Module:salt
+1754:42:Attribute -> U
+1754:42:Name -> Inst:salt.cloud.Map
+1755:28:Call -> U
+1755:28:Attribute -> U
+1755:28:Attribute -> U
+1755:28:Name -> Inst:salt.cloud.Map
+1756:28:Call -> U
+1756:28:Attribute -> U
+1756:28:Attribute -> U
+1756:28:Name -> Inst:salt.cloud.Map
+1757:23:Call -> Dict:0 | U | Inst:_io.StringIO
+1757:23:Name -> Func:salt.template.compile_template
+1758:20:Name -> U
+1758:32:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+1758:38:Name -> U
+1758:48:Name -> U
+1758:59:Name -> U
+1760:19:Name -> Class:builtins.Exception
+1761:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1761:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1761:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1763:20:Attribute -> U
+1763:20:Name -> Inst:salt.cloud.Map
+1764:20:Name -> ExcInst:builtins.Exception
+1765:41:Attribute -> Const:int:10
+1765:41:Name -> Module:logging
+1769:28:Name -> Const:NoneType:None | Dict:0 | U | Inst:_io.StringIO
+1770:23:Call -> Dict:0 | Dict:0 | Dict:0
+1770:23:Attribute -> Func:salt.config.include_config
+1770:23:Attribute -> Module:salt.config
+1770:23:Name -> Module:salt
+1770:50:Name -> Const:NoneType:None | Dict:0 | U | Inst:_io.StringIO
+1770:56:Attribute -> U
+1770:56:Name -> Inst:salt.cloud.Map
+1772:15:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1776:31:Call -> ERR
+1776:31:Attribute -> ERR
+1776:31:Call -> U
+1776:31:Attribute -> U | BM:builtins.dict.copy | BM:builtins.dict.copy | BM:builtins.dict.copy | BM:builtins.dict.copy
+1776:31:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1777:15:Call -> ERR
+1777:15:Name -> Func:builtins.isinstance
+1777:26:Name -> U
+1777:35:Name -> Class:builtins.list
+1777:41:Name -> Class:builtins.tuple
+1779:31:Name -> U
+1780:23:Call -> ERR
+1780:23:Name -> Func:builtins.isinstance
+1780:34:Name -> U
+1780:43:Name -> Class:builtins.str
+1784:35:Name -> U
+1785:43:Call -> U | DictItems
+1785:43:Attribute -> U | BM:builtins.dict.items
+1785:43:Name -> U | Dict:1
+1786:27:Name -> Const:NoneType:None
+1786:48:Call -> Const:bool:False
+1786:48:Name -> Func:builtins.isinstance
+1786:59:Name -> Const:NoneType:None
+1786:70:Name -> Class:builtins.bool
+1792:28:Call -> ERR
+1792:28:Attribute -> BM:builtins.dict.setdefault
+1792:28:Name -> Const:NoneType:None | Dict:0
+1792:57:Name -> U
+1793:31:Name -> Class:builtins.AttributeError
+1794:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+1794:28:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1794:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1800:24:Name -> Dict:0
+1800:32:Name -> U
+1800:40:Name -> Const:NoneType:None | Dict:0
+1801:16:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1801:21:Name -> U
+1801:32:Name -> Dict:0
+1804:15:Call -> ERR
+1804:15:Name -> Func:builtins.isinstance
+1804:26:Name -> U
+1804:34:Name -> Class:builtins.dict
+1814:39:Call -> U
+1814:39:Attribute -> U
+1814:39:Name -> U
+1815:20:Call -> U
+1815:20:Attribute -> U
+1815:20:Name -> U
+1815:49:Name -> U
+1816:20:Name -> Dict:0 | Dict:0
+1816:28:Name -> U
+1816:36:Name -> U
+1817:16:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1817:21:Name -> U
+1817:32:Name -> Dict:0
+1820:15:Call -> ERR
+1820:15:Name -> Func:builtins.isinstance
+1820:26:Name -> U
+1820:34:Name -> Class:builtins.str
+1823:26:Name -> U
+1825:12:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1825:17:Name -> U
+1826:24:Name -> U | List:1
+1827:16:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1827:21:Name -> U
+1827:30:Name -> U
+1827:47:Name -> U
+1828:15:Name -> Const:NoneType:None | U | Dict:0 | Inst:_io.StringIO | Dict:0 | Dict:0 | Dict:0
+1831:11:Name -> Const:NoneType:None | U
+1832:26:Call -> U
+1832:26:Attribute -> U
+1832:26:Name -> U
+1835:31:Name -> U
+1836:23:Name -> Class:builtins.KeyError
+1838:31:Name -> U | List:0
+1839:23:Call -> Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+1839:23:Attribute -> BM:salt.cloud.Map._has_loop
+1839:23:Name -> Inst:salt.cloud.Map
+1839:38:Name -> U
+1839:49:Call -> Inst:builtins.list
+1839:49:Name -> Class:builtins.list
+1839:54:Name -> Const:NoneType:None | U | List:0
+1839:65:Name -> U
+1842:15:Name -> Const:NoneType:None | U
+1842:22:Name -> U
+1845:12:Call -> U
+1845:12:Attribute -> U
+1845:12:Name -> U
+1845:24:Name -> Const:NoneType:None | U
+1847:27:Name -> U
+1847:42:Name -> Const:NoneType:None | U
+1848:19:Name -> Class:builtins.KeyError
+1851:27:Name -> U | List:0
+1852:19:Call -> Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+1852:19:Attribute -> BM:salt.cloud.Map._has_loop
+1852:19:Name -> Inst:salt.cloud.Map
+1852:34:Name -> U
+1852:45:Call -> Inst:builtins.list
+1852:45:Name -> Class:builtins.list
+1852:50:Name -> U
+1852:61:Name -> U
+1858:22:Name -> U
+1859:15:Name -> Class:builtins.KeyError
+1860:19:Name -> U
+1862:20:Name -> U
+1864:23:Name -> U
+1864:38:Name -> U
+1865:19:Name -> Class:builtins.KeyError
+1867:27:Name -> U
+1867:44:Name -> U
+1868:23:Name -> Class:builtins.KeyError
+1870:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1870:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1870:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1870:30:Name -> Const:str:'Missing dependency in cloud map'
+1871:26:Call -> ExcInst:salt.exceptions.SaltCloudException
+1871:26:Name -> Class:salt.exceptions.SaltCloudException
+1871:45:Name -> Const:str:'Missing dependency in cloud map'
+1872:12:Call -> ERR
+1872:12:Attribute -> BM:builtins.list.append
+1872:12:Name -> List:0
+1872:26:Call -> U
+1872:26:Attribute -> BM:salt.cloud.Map._calcdep
+1872:26:Name -> Inst:salt.cloud.Map
+1872:40:Name -> U
+1872:46:Name -> U
+1872:52:Name -> U
+1872:58:Name -> U
+1873:16:Call -> ERR
+1873:16:Name -> Func:builtins.max
+1873:20:Name -> List:0
+1874:15:Name -> U
+1881:15:Call -> U | Dict:0
+1881:15:Attribute -> BM:salt.cloud.Cloud.map_providers_parallel
+1881:15:Name -> Inst:salt.cloud.Map
+1881:50:Name -> Const:bool:False | U
+1882:16:Call -> Set:0
+1882:16:Name -> Class:builtins.set
+1883:18:Call -> Set:0
+1883:18:Name -> Class:builtins.set
+1884:23:Call -> U
+1884:23:Attribute -> Func:copy.deepcopy
+1884:23:Name -> Module:copy
+1884:37:Attribute -> Dict:0 | Dict:0 | Dict:0 | Const:NoneType:None | U | Dict:0
+1884:37:Name -> Inst:salt.cloud.Map
+1885:35:Call -> U
+1885:35:Attribute -> U
+1885:35:Name -> U
+1886:15:Name -> U
+1886:35:Attribute -> U
+1886:35:Name -> Inst:salt.cloud.Map
+1888:20:Call -> U
+1888:20:Attribute -> BM:builtins.str.format
+1891:24:Name -> U
+1891:38:Call -> Const:str:''
+1891:38:Attribute -> BM:builtins.str.join
+1891:52:Name -> U
+1891:72:Name -> U
+1894:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1894:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1894:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1894:26:Name -> U
+1895:35:Name -> Dict:1
+1896:20:Name -> Dict:1
+1897:16:Name -> Dict:1
+1897:30:Name -> U
+1897:46:Name -> U
+1900:27:Call -> U
+1900:27:Attribute -> U
+1900:27:Attribute -> U
+1900:27:Name -> Inst:salt.cloud.Map
+1900:53:Name -> U
+1902:39:Call -> U
+1902:39:Attribute -> U
+1902:39:Name -> U
+1906:34:Name -> U
+1907:24:Name -> U
+1907:49:Name -> U
+1909:36:Call -> U
+1909:36:Attribute -> U
+1909:36:Call -> U
+1909:36:Attribute -> U
+1909:36:Name -> U
+1911:36:Call -> U
+1911:36:Attribute -> U
+1911:36:Call -> U
+1911:36:Attribute -> U
+1911:36:Name -> U
+1913:35:Call -> U
+1913:35:Attribute -> Func:copy.deepcopy
+1913:35:Name -> Module:copy
+1913:49:Attribute -> U
+1913:49:Name -> Inst:salt.cloud.Map
+1913:72:Name -> U
+1913:79:Name -> U
+1914:20:Name -> U
+1919:16:Call -> U
+1919:16:Attribute -> Func:salt.utils.dictupdate.update
+1919:16:Attribute -> Module:salt.utils.dictupdate
+1919:16:Attribute -> Module:salt.utils
+1919:16:Name -> Module:salt
+1919:45:Name -> U
+1919:63:Name -> U
+1920:27:Call -> U
+1920:27:Attribute -> Func:copy.deepcopy
+1920:27:Name -> Module:copy
+1920:41:Name -> U
+1924:40:Name -> Const:str:'grains' | Const:str:'master' | Const:str:'minion' | Const:str:'volumes' | Const:str:'requires'
+1925:23:Name -> Const:str:'map_grains' | Const:str:'map_master' | Const:str:'map_minion' | Const:str:'map_volumes' | Const:str:'map_requires'
+1925:37:Name -> U
+1926:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1926:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1926:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1932:28:Name -> Const:str:'map_grains' | Const:str:'map_master' | Const:str:'map_minion' | Const:str:'map_volumes' | Const:str:'map_requires'
+1933:28:Name -> U
+1934:28:Name -> Const:str:'grains' | Const:str:'master' | Const:str:'minion' | Const:str:'volumes' | Const:str:'requires'
+1936:24:Name -> U
+1936:34:Name -> Const:str:'grains' | Const:str:'master' | Const:str:'minion' | Const:str:'volumes' | Const:str:'requires'
+1936:45:Call -> U
+1936:45:Attribute -> U
+1936:45:Name -> U
+1936:59:Name -> Const:str:'map_grains' | Const:str:'map_master' | Const:str:'map_minion' | Const:str:'map_volumes' | Const:str:'map_requires'
+1940:32:Name -> U
+1941:36:Name -> U
+1942:36:Name -> U
+1943:36:Name -> U
+1945:20:Call -> U
+1945:20:Attribute -> U
+1945:20:Name -> U
+1945:56:Name -> U
+1946:24:Name -> U
+1948:27:Name -> U
+1949:28:Name -> U
+1951:27:Call -> U
+1951:27:Attribute -> Func:salt.utils.dictupdate.update
+1951:27:Attribute -> Module:salt.utils.dictupdate
+1951:27:Attribute -> Module:salt.utils
+1951:27:Name -> Module:salt
+1951:56:Name -> U
+1951:66:Name -> U
+1953:16:Name -> Dict:1
+1953:30:Name -> U
+1953:42:Name -> U
+1955:32:Call -> U
+1955:32:Attribute -> U
+1955:32:Name -> U
+1956:16:Call -> ERR
+1956:16:Attribute -> BM:builtins.set.add
+1956:16:Name -> Set:0
+1956:29:Name -> U
+1956:36:Name -> U
+1956:44:Name -> U
+1960:34:Call -> U | DictItems
+1960:34:Attribute -> U | BM:builtins.dict.items
+1960:34:Name -> U | Dict:0
+1961:35:Call -> U
+1961:35:Attribute -> U
+1961:35:Name -> U
+1962:44:Call -> U
+1962:44:Attribute -> U
+1962:44:Name -> U
+1963:27:Name -> U
+1963:38:Name -> U
+1963:47:Name -> U
+1963:61:Name -> Dict:0
+1964:28:Name -> Dict:0
+1964:36:Name -> U
+1964:46:Name -> U
+1965:19:Name -> Dict:0
+1967:30:Call -> U | DictItems
+1967:30:Attribute -> U | BM:builtins.dict.items
+1967:30:Name -> U | Dict:0
+1968:31:Call -> U
+1968:31:Attribute -> U
+1968:31:Name -> U
+1969:37:Call -> U
+1969:37:Attribute -> U
+1969:37:Name -> U
+1970:20:Call -> ERR
+1970:20:Attribute -> BM:builtins.set.add
+1970:20:Name -> Set:0
+1970:31:Name -> U
+1970:38:Name -> U
+1970:46:Name -> U
+1971:23:Name -> U
+1971:35:Name -> Dict:1
+1975:31:Call -> Dict:0
+1975:31:Name -> Func:salt.cloud.Map.map_data.get_matching_by_name
+1975:52:Name -> U
+1976:27:Name -> Dict:0
+1980:32:Name -> Dict:0
+1981:27:Name -> U
+1981:39:Name -> Dict:1
+1985:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1985:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1985:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1986:80:Name -> U
+1989:45:Name -> Dict:1
+1990:28:Name -> Dict:1
+1991:24:Name -> Dict:1
+1991:40:Name -> U
+1991:48:Call -> ERR
+1991:48:Attribute -> BM:builtins.dict.pop
+1991:48:Name -> Dict:1
+1991:66:Name -> U
+1993:21:Attribute -> U
+1993:21:Name -> Inst:salt.cloud.Map
+1993:35:Attribute -> U
+1993:35:Name -> Inst:salt.cloud.Map
+1994:15:Attribute -> U
+1994:15:Name -> Inst:salt.cloud.Map
+1995:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+1995:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+2003:12:Name -> Dict:1
+2003:29:Call -> ERR
+2003:29:Attribute -> BM:builtins.set.difference
+2003:29:Name -> Set:0
+2003:46:Name -> Set:0
+2004:15:Name -> Dict:1
+2010:11:Call -> Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+2010:11:Attribute -> BM:salt.cloud.Map._has_loop
+2010:11:Name -> Inst:salt.cloud.Map
+2010:26:Name -> U
+2012:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2012:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+2012:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2012:22:Name -> Const:str:'Uh-oh, that cloud map has a dependency 
+2013:18:Call -> ExcInst:salt.exceptions.SaltCloudException
+2013:18:Name -> Class:salt.exceptions.SaltCloudException
+2013:37:Name -> Const:str:'Uh-oh, that cloud map has a dependency 
+2015:24:Call -> U
+2015:24:Attribute -> U
+2015:24:Name -> U
+2016:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2016:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+2016:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2016:56:Name -> U
+2018:20:Call -> Const:int:0 | U
+2018:20:Attribute -> BM:salt.cloud.Map._calcdep
+2018:20:Name -> Inst:salt.cloud.Map
+2018:34:Name -> U
+2018:40:Name -> U
+2018:45:Name -> U
+2018:50:Name -> Const:int:0
+2019:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2019:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2019:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2019:55:Name -> Const:int:0 | U
+2019:62:Name -> U
+2020:12:Name -> U
+2020:27:Name -> U
+2020:43:Name -> Const:int:0 | U
+2023:28:Call -> U
+2023:28:Attribute -> U
+2023:28:Name -> U
+2024:15:Name -> Class:builtins.KeyError
+2025:28:Call -> DictItems
+2025:28:Attribute -> BM:builtins.dict.items
+2027:24:Name -> U | DictItems
+2028:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2028:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+2028:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2028:56:Name -> U
+2030:20:Call -> Const:int:0 | U
+2030:20:Attribute -> BM:salt.cloud.Map._calcdep
+2030:20:Name -> Inst:salt.cloud.Map
+2030:34:Name -> U
+2030:40:Name -> U
+2030:45:Name -> U
+2030:50:Name -> Const:int:0
+2031:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2031:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2031:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2031:55:Name -> Const:int:0 | U
+2031:62:Name -> U
+2032:12:Name -> U
+2032:29:Name -> U
+2032:45:Name -> Const:int:0 | U
+2035:22:Call -> ERR
+2035:22:Name -> Func:builtins.sorted
+2035:29:Call -> U
+2035:29:Attribute -> U
+2035:29:Name -> U
+2035:67:Name -> U
+2037:11:Attribute -> U
+2037:11:Name -> Inst:salt.cloud.Map
+2044:42:Call -> ERR
+2044:42:Name -> Func:builtins.next
+2046:21:Name -> U
+2046:27:Name -> U
+2047:41:Name -> U
+2048:23:Call -> U
+2048:23:Attribute -> U
+2048:23:Name -> U
+2051:33:Name -> U
+2052:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2052:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2052:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2052:50:Name -> U
+2054:16:Call -> Const:NoneType:None | U
+2054:16:Attribute -> Func:salt.config.get_cloud_config_value
+2054:16:Attribute -> Module:salt.config
+2054:16:Name -> Module:salt
+2054:61:Name -> U
+2054:77:Attribute -> U
+2054:77:Name -> Inst:salt.cloud.Map
+2057:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+2057:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+2063:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2063:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2063:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2063:57:Name -> U
+2064:24:Call -> Tuple:2
+2064:24:Attribute -> Func:salt.utils.cloud.gen_keys
+2064:24:Attribute -> Module:salt.utils.cloud
+2064:24:Attribute -> Module:salt.utils
+2064:24:Name -> Module:salt
+2065:16:Call -> Const:NoneType:None | U
+2065:16:Attribute -> Func:salt.config.get_cloud_config_value
+2065:16:Attribute -> Module:salt.config
+2065:16:Name -> Module:salt
+2065:62:Name -> U
+2065:78:Attribute -> U
+2065:78:Name -> Inst:salt.cloud.Map
+2067:12:Name -> U
+2067:43:Name -> U
+2068:12:Name -> U
+2068:43:Name -> U
+2072:30:Call -> Tuple:2 | U
+2072:30:Attribute -> Func:salt.utils.files.mkstemp
+2072:30:Attribute -> Module:salt.utils.files
+2072:30:Attribute -> Module:salt.utils
+2072:30:Name -> Module:salt
+2073:17:Call -> U
+2073:17:Attribute -> Func:salt.utils.files.fopen
+2073:17:Attribute -> Module:salt.utils.files
+2073:17:Attribute -> Module:salt.utils
+2073:17:Name -> Module:salt
+2073:40:Name -> Tuple:2 | U
+2074:16:Call -> U
+2074:16:Attribute -> U
+2074:16:Name -> U
+2074:26:Name -> U
+2075:28:Call -> Const:str:'' | Const:str:'' | U
+2075:28:Attribute -> Func:salt.utils.crypt.pem_finger
+2075:28:Attribute -> Module:salt.utils.crypt
+2075:28:Attribute -> Module:salt.utils
+2075:28:Name -> Module:salt
+2076:16:Name -> Tuple:2 | U
+2076:42:Attribute -> U
+2076:42:Name -> Inst:salt.cloud.Map
+2078:12:Call -> ERR
+2078:12:Attribute -> Func:posix.unlink
+2078:12:Name -> Module:os
+2078:22:Name -> Tuple:2 | U
+2080:15:Call -> U
+2080:15:Attribute -> U
+2080:15:Name -> U
+2081:16:Call -> U
+2081:16:Attribute -> U
+2081:16:Name -> U
+2082:27:Name -> U
+2083:41:Name -> U
+2085:35:Name -> U
+2086:20:Name -> U
+2087:23:Name -> Const:NoneType:None | Const:str:'' | Const:str:'' | U
+2088:24:Name -> U
+2088:58:Name -> Const:str:'' | Const:str:'' | U
+2091:33:Name -> U
+2092:30:Call -> Const:bool:True | U
+2092:30:Attribute -> Func:salt.config.get_cloud_config_value
+2092:30:Attribute -> Module:salt.config
+2092:30:Name -> Module:salt
+2093:35:Name -> U
+2093:44:Attribute -> U
+2093:44:Name -> Inst:salt.cloud.Map
+2095:19:Name -> Const:bool:True | U
+2098:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+2098:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2098:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2098:61:Name -> U
+2099:28:Call -> Tuple:2
+2099:28:Attribute -> Func:salt.utils.cloud.gen_keys
+2099:28:Attribute -> Module:salt.utils.cloud
+2099:28:Attribute -> Module:salt.utils
+2099:28:Name -> Module:salt
+2100:20:Call -> Const:NoneType:None | U
+2100:20:Attribute -> Func:salt.config.get_cloud_config_value
+2100:20:Attribute -> Module:salt.config
+2100:20:Name -> Module:salt
+2100:66:Name -> U
+2100:75:Attribute -> U
+2100:75:Name -> Inst:salt.cloud.Map
+2102:16:Name -> U
+2102:37:Name -> U
+2103:16:Name -> U
+2103:38:Name -> U
+2106:16:Call -> U
+2106:16:Attribute -> U
+2106:16:Name -> U
+2107:16:Call -> U
+2107:16:Attribute -> U
+2107:16:Name -> U
+2107:62:Name -> U
+2107:68:Name -> U
+2111:16:Call -> U
+2111:16:Attribute -> U
+2111:16:Name -> U
+2112:20:Call -> U
+2112:20:Attribute -> U
+2112:20:Name -> U
+2118:18:Call -> Const:NoneType:None | Dict:0 | U
+2118:18:Attribute -> BM:salt.cloud.Cloud.create
+2118:18:Name -> Inst:salt.cloud.Map
+2118:30:Name -> U
+2118:59:Name -> Const:bool:False | Const:bool:True
+2120:19:Call -> ERR
+2120:19:Name -> Func:builtins.isinstance
+2120:30:Name -> Const:NoneType:None | Dict:0 | U
+2120:35:Name -> Class:builtins.dict
+2121:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+2121:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2121:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2121:77:Name -> Const:NoneType:None | Dict:0 | U
+2123:29:Name -> Const:NoneType:None | Dict:0 | U
+2124:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+2124:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+2125:20:Call -> U
+2125:20:Attribute -> BM:builtins.str.format
+2126:44:Name -> Const:NoneType:None | Dict:0 | U
+2130:16:Call -> U
+2130:16:Attribute -> U
+2130:16:Attribute -> U
+2130:16:Name -> Inst:salt.cloud.Map
+2133:16:Call -> U
+2133:16:Attribute -> BM:builtins.dict.get | U
+2133:16:Name -> Const:NoneType:None | Dict:0 | U
+2137:16:Call -> U
+2137:16:Attribute -> BM:builtins.dict.pop | U
+2137:16:Name -> Const:NoneType:None | Dict:0 | U
+2140:26:Call -> U
+2140:26:Attribute -> U
+2140:26:Name -> U
+2141:29:Call -> U
+2141:29:Attribute -> U
+2141:29:Name -> U
+2143:15:Name -> U
+2144:22:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+2144:22:Name -> Class:salt.exceptions.SaltCloudSystemExit
+2145:20:Call -> U
+2145:20:Attribute -> BM:builtins.str.format
+2146:24:Name -> Const:NoneType:None | U
+2149:12:Name -> Dict:0
+2149:19:Name -> U
+2149:34:Name -> Const:NoneType:None | Dict:0 | U
+2150:15:Name -> Class:builtins.StopIteration
+2151:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2151:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2151:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2155:25:Call -> U
+2155:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+2155:25:Attribute -> Module:posixpath | Module:ntpath
+2155:25:Name -> Module:os
+2155:38:Attribute -> U
+2155:38:Name -> Inst:salt.cloud.Map
+2156:15:Call -> Const:bool:False | U
+2156:15:Attribute -> Func:genericpath.isfile | U
+2156:15:Attribute -> Module:posixpath | Module:ntpath
+2156:15:Name -> Module:os
+2156:30:Name -> U
+2157:32:Call -> Const:str:'' | Const:str:'' | U
+2157:32:Attribute -> Func:salt.utils.crypt.pem_finger
+2157:32:Attribute -> Module:salt.utils.crypt
+2157:32:Attribute -> Module:salt.utils
+2157:32:Name -> Module:salt
+2158:20:Name -> U
+2158:41:Attribute -> U
+2158:41:Name -> Inst:salt.cloud.Map
+2161:15:Call -> U
+2161:15:Attribute -> U
+2161:15:Attribute -> U
+2161:15:Name -> Inst:salt.cloud.Map
+2162:11:Attribute -> U
+2162:11:Name -> Inst:salt.cloud.Map
+2165:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2165:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+2165:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2169:12:Name -> U
+2171:23:Name -> Const:NoneType:None | U
+2173:29:Name -> U
+2174:15:Name -> U
+2174:24:Name -> Const:NoneType:None | U
+2174:37:Name -> Const:NoneType:None | U
+2179:28:Name -> U
+2180:20:Call -> U
+2180:20:Attribute -> U
+2180:20:Name -> U
+2181:20:Call -> U
+2181:20:Attribute -> U
+2181:20:Name -> U
+2187:15:Name -> Const:NoneType:None | Const:str:'' | Const:str:'' | U
+2187:45:Name -> Const:bool:False | Const:bool:True | U | Const:bool:True
+2188:16:Name -> U
+2188:43:Name -> Const:NoneType:None | Const:str:'' | Const:str:'' | U
+2190:15:Name -> Const:NoneType:None | U
+2191:16:Call -> U
+2191:16:Attribute -> U
+2191:16:Name -> U
+2192:16:Call -> U
+2192:16:Attribute -> U
+2192:16:Name -> U
+2192:55:Name -> U
+2194:15:Attribute -> U
+2194:15:Name -> Inst:salt.cloud.Map
+2195:16:Call -> ERR
+2195:16:Attribute -> BM:builtins.list.append
+2195:16:Name -> List:0
+2197:32:Name -> U
+2198:32:Name -> U
+2199:35:Name -> U
+2200:40:Name -> Const:bool:False | Const:bool:True | U | Const:bool:True
+2207:16:Name -> Dict:0
+2207:23:Name -> U
+2207:31:Call -> Const:NoneType:None | Dict:0 | U
+2207:31:Attribute -> BM:salt.cloud.Cloud.create
+2207:31:Name -> Inst:salt.cloud.Map
+2207:43:Name -> U
+2207:65:Name -> Const:bool:False | Const:bool:True | U | Const:bool:True
+2209:20:Call -> U
+2209:20:Attribute -> U
+2209:20:Attribute -> U
+2209:20:Name -> Inst:salt.cloud.Map
+2210:43:Name -> Dict:0
+2211:24:Call -> ERR
+2211:24:Name -> Func:builtins.isinstance
+2211:35:Name -> Dict:0
+2211:42:Name -> U
+2211:49:Name -> Class:builtins.dict
+2213:20:Call -> U
+2213:20:Attribute -> U
+2213:20:Name -> Dict:0
+2213:27:Name -> U
+2214:19:Name -> Class:salt.exceptions.SaltCloudException
+2215:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+2215:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+2215:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2217:20:Name -> U
+2218:20:Name -> ExcInst:salt.exceptions.SaltCloudException
+2219:41:Attribute -> Const:int:10
+2219:41:Name -> Module:logging
+2221:16:Name -> Dict:0
+2221:23:Name -> U
+2221:41:Call -> Const:str:''
+2221:41:Name -> Class:builtins.str
+2221:45:Name -> ExcInst:salt.exceptions.SaltCloudException
+2223:20:Call -> U
+2223:20:Attribute -> U
+2223:20:Name -> U
+2224:12:Name -> Dict:0
+2224:19:Name -> U
+2224:27:Call -> Dict:0
+2224:27:Attribute -> BM:salt.cloud.Cloud.destroy
+2224:27:Name -> Inst:salt.cloud.Map
+2224:40:Name -> U
+2226:11:Attribute -> U
+2226:11:Name -> Inst:salt.cloud.Map
+2226:37:Name -> List:0
+2227:30:Attribute -> U
+2227:30:Name -> Inst:salt.cloud.Map
+2228:28:Attribute -> U
+2228:28:Name -> Inst:salt.cloud.Map
+2230:28:Call -> Const:int:0
+2230:28:Name -> Func:builtins.len
+2230:32:Name -> List:0
+2231:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2231:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+2231:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2231:44:Name -> U | Const:int:0
+2232:28:Call -> U
+2232:28:Name -> Func:salt.cloud.enter_mainloop
+2233:16:Name -> Func:salt.cloud._create_multiprocessing
+2233:41:Name -> List:0
+2233:66:Name -> U | Const:int:0
+2237:15:Attribute -> U
+2237:15:Name -> Inst:salt.cloud.Map
+2240:32:Call -> Inst:itertools.groupby
+2240:32:Name -> Class:itertools.groupby
+2240:40:Call -> U
+2240:40:Attribute -> U
+2240:40:Name -> U
+2240:75:Name -> U
+2241:20:Call -> ERR
+2241:20:Attribute -> BM:builtins.list.append
+2241:20:Name -> List:0
+2243:32:Name -> U
+2244:24:Call -> ERR
+2244:24:Attribute -> ERR
+2244:24:Name -> List:0
+2244:35:Name -> Const:int:-1 | Const:int:0
+2244:47:Name -> U
+2247:29:Name -> List:0
+2248:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+2248:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+2248:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2249:44:Attribute -> U
+2249:44:Name -> Inst:salt.cloud.Map
+2249:71:Call -> Const:str:''
+2249:71:Attribute -> BM:builtins.str.join
+2249:81:Name -> U
+2251:25:Call -> Inst:salt.client.LocalClient
+2251:25:Attribute -> Func:salt.client.get_local_client
+2251:25:Attribute -> Module:salt.client
+2251:25:Name -> Module:salt
+2252:24:Call -> U
+2252:24:Attribute -> BM:builtins.dict.update | U | BM:builtins.dict.update
+2252:24:Name -> Const:NoneType:None | Dict:0 | U | Dict:0
+2253:28:Call -> U
+2253:28:Attribute -> U
+2253:28:Name -> Inst:salt.client.LocalClient
+2254:32:Call -> Const:str:''
+2254:32:Attribute -> BM:builtins.str.join
+2254:41:Name -> U
+2255:32:Attribute -> U
+2255:32:Name -> Inst:salt.cloud.Map
+2256:40:Attribute -> U
+2256:40:Name -> Inst:salt.cloud.Map
+2260:27:Name -> U
+2261:20:Call -> ERR
+2261:20:Name -> Func:builtins.next
+2261:25:Call -> ERR
+2261:25:Name -> Func:builtins.iter
+2261:30:Call -> U
+2261:30:Attribute -> U
+2261:30:Name -> U
+2261:54:Name -> Const:NoneType:None | Dict:0 | U | Dict:0
+2261:58:Call -> ERR
+2261:58:Name -> Func:builtins.next
+2261:63:Call -> ERR
+2261:63:Name -> Func:builtins.iter
+2261:68:Call -> U
+2261:68:Attribute -> U
+2261:68:Name -> U
+2262:20:Call -> ERR
+2262:20:Attribute -> BM:builtins.dict.update
+2262:20:Name -> Dict:0
+2262:34:Name -> U
+2264:27:Name -> U
+2265:20:Call -> ERR
+2265:20:Attribute -> BM:builtins.dict.update
+2265:20:Name -> Dict:0
+2265:34:Name -> U
+2267:15:Name -> Dict:0
+2275:4:Call -> U | Inst:signal.Handlers
+2275:4:Attribute -> Func:_signal.signal | Func:signal.signal
+2275:4:Name -> Module:signal
+2275:18:Attribute -> Const:int:2
+2275:18:Name -> Module:signal
+2275:33:Attribute -> Const:int:1
+2275:33:Name -> Module:signal
+2283:4:Name -> U
+2284:12:Call -> Inst:salt.cloud.Cloud
+2284:12:Name -> Class:salt.cloud.Cloud
+2284:18:Name -> U
+2286:17:Call -> Const:NoneType:None | Dict:0 | U
+2286:17:Attribute -> BM:salt.cloud.Cloud.create
+2286:17:Name -> Inst:salt.cloud.Cloud
+2287:12:Name -> U
+2287:51:Name -> U
+2289:11:Name -> Class:salt.exceptions.SaltCloudException
+2290:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+2290:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+2290:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2292:12:Name -> U
+2293:12:Name -> ExcInst:salt.exceptions.SaltCloudException
+2294:33:Attribute -> Const:int:10
+2294:33:Name -> Module:logging
+2296:16:Name -> U
+2296:49:Call -> Const:str:''
+2296:49:Name -> Class:builtins.str
+2296:53:Name -> ExcInst:salt.exceptions.SaltCloudException
+2298:7:Call -> U
+2298:7:Attribute -> U
+2298:7:Name -> U
+2298:73:Call -> ERR
+2298:73:Name -> Func:builtins.isinstance
+2299:8:Name -> Const:NoneType:None | Dict:0 | U
+2299:16:Name -> Class:builtins.dict
+2301:8:Call -> U
+2301:8:Attribute -> BM:builtins.dict.pop | U
+2301:8:Name -> Const:NoneType:None | Dict:0 | U
+2303:12:Name -> U
+2303:35:Call -> Const:NoneType:None | U | List:0 | Dict:0 | Dict:0
+2303:35:Attribute -> Func:salt.utils.data.simple_types_filter
+2303:35:Attribute -> Module:salt.utils.data
+2303:35:Attribute -> Module:salt.utils
+2303:35:Name -> Module:salt
+2303:71:Name -> Const:NoneType:None | Dict:0 | U
+2311:4:Name -> U
+2312:13:Call -> Inst:salt.loader.lazy.LazyLoader
+2312:13:Attribute -> Func:salt.loader.clouds
+2312:13:Attribute -> Module:salt.loader
+2312:13:Name -> Module:salt
+2312:32:Name -> U
+2315:14:Name -> Inst:salt.loader.lazy.LazyLoader
+2315:21:Call -> U
+2315:21:Attribute -> BM:builtins.str.format
+2315:41:Name -> U
+2316:13:Call -> Gen:salt.utils.context.func_globals_inject
+2316:13:Attribute -> Func:salt.utils.context.func_globals_inject
+2316:13:Attribute -> Module:salt.utils.context
+2316:13:Attribute -> Module:salt.utils
+2316:13:Name -> Module:salt
+2317:12:Name -> U
+2318:37:Call -> Const:str:''
+2318:37:Attribute -> BM:builtins.str.join
+2319:17:Name -> U
+2319:41:Name -> U
+2322:21:Call -> U
+2322:21:Name -> U
+2322:25:Name -> U
+2324:11:Name -> Class:salt.exceptions.SaltCloudException
+2325:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+2325:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+2325:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2327:12:Name -> U
+2328:12:Name -> ExcInst:salt.exceptions.SaltCloudException
+2329:33:Attribute -> Const:int:10
+2329:33:Name -> Module:logging
+2331:16:Name -> U
+2331:49:Call -> Const:str:''
+2331:49:Name -> Class:builtins.str
+2331:53:Name -> ExcInst:salt.exceptions.SaltCloudException
+2333:12:Name -> U
+2333:35:Call -> U | List:0 | Dict:0
+2333:35:Attribute -> Func:salt.utils.data.simple_types_filter
+2333:35:Attribute -> Module:salt.utils.data
+2333:35:Attribute -> Module:salt.utils
+2333:35:Name -> Module:salt
+2333:71:Name -> U
+2341:12:Call -> Inst:salt.cloud.Cloud
+2341:12:Name -> Class:salt.cloud.Cloud
+2341:18:Name -> U
+2343:13:Call -> Gen:salt.utils.context.func_globals_inject
+2343:13:Attribute -> Func:salt.utils.context.func_globals_inject
+2343:13:Attribute -> Module:salt.utils.context
+2343:13:Attribute -> Module:salt.utils
+2343:13:Name -> Module:salt
+2344:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+2344:12:Name -> Inst:salt.cloud.Cloud
+2344:25:Name -> U
+2345:37:Call -> Const:str:''
+2345:37:Attribute -> BM:builtins.str.join
+2345:47:Name -> U
+2345:62:Name -> U
+2348:16:Name -> U
+2349:16:Name -> U
+2350:16:Call -> U | List:0 | Dict:0
+2350:16:Attribute -> Func:salt.utils.data.simple_types_filter
+2350:16:Attribute -> Module:salt.utils.data
+2350:16:Attribute -> Module:salt.utils
+2350:16:Name -> Module:salt
+2350:52:Call -> U
+2350:52:Attribute -> Inst:salt.loader.lazy.LazyLoader
+2350:52:Name -> Inst:salt.cloud.Cloud
+2350:65:Name -> U
+2352:11:Name -> Class:builtins.Exception
+2353:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+2353:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2353:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2355:12:Name -> U
+2356:12:Name -> ExcInst:builtins.Exception
+2357:33:Attribute -> Const:int:10
+2357:33:Name -> Module:logging
+2360:15:Name -> U
+2360:30:Name -> U
+2365:11:Call -> Const:NoneType:None | U
+2365:11:Call -> Func:salt.cloud.communicator._call
+2365:11:Name -> Func:salt.cloud.communicator
+2365:24:Name -> Func:salt.cloud.run_parallel_map_providers_query
+2365:59:Name -> Tuple:0
+2365:70:Name -> Dict:0
+2369:11:Call -> Const:NoneType:None | U
+2369:11:Call -> Func:salt.cloud.communicator._call
+2369:11:Name -> Func:salt.cloud.communicator
+2369:24:Name -> Func:salt.cloud.destroy_multiprocessing
+2369:50:Name -> Tuple:0
+2369:61:Name -> Dict:0
+2373:11:Call -> Const:NoneType:None | U
+2373:11:Call -> Func:salt.cloud.communicator._call
+2373:11:Name -> Func:salt.cloud.communicator
+2373:24:Name -> Func:salt.cloud.create_multiprocessing
+2373:49:Name -> Tuple:0
+2373:60:Name -> Dict:0

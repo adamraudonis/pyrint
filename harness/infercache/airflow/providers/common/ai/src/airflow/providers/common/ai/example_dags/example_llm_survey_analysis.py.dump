@@ -1,0 +1,190 @@
+76:18:Call -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+76:18:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+76:18:Attribute -> Dict:43 | Inst:os._Environ
+76:18:Name -> Module:os
+80:27:Name -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+83:21:Call -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+83:21:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+83:21:Attribute -> Dict:43 | Inst:os._Environ
+83:21:Name -> Module:os
+87:30:Name -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+91:15:Call -> U | Const:NoneType:None
+91:15:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+91:15:Attribute -> Dict:43 | Inst:os._Environ
+91:15:Name -> Module:os
+92:15:Call -> U | Const:NoneType:None
+92:15:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+92:15:Attribute -> Dict:43 | Inst:os._Environ
+92:15:Name -> Module:os
+127:20:Call -> U
+127:20:Name -> U
+130:8:Name -> Const:str:'file://Uninferable' | Const:str:'file:///opt/airflow/data/airflow-user-s
+134:23:Call -> U
+134:23:Name -> U
+137:8:Name -> Const:str:'file://Uninferable' | Const:str:'file:///opt/airflow/data/airflow-user-s
+148:1:Call -> U
+148:1:Name -> U
+169:26:Call -> U
+169:26:Name -> U
+173:22:Call -> U
+173:22:Name -> U
+174:16:Name -> Const:str:'How does AI tool usage for writing Airf
+179:25:Call -> Inst:_pydatetime.timedelta
+179:25:Attribute -> Class:_pydatetime.timedelta
+179:25:Name -> Module:datetime
+185:19:Call -> U
+185:19:Name -> U
+188:20:Name -> Const:str:'pydanticai_default'
+189:26:Name -> U
+190:23:Name -> Const:str:'\nTable: survey\nKey columns (quote all
+196:16:Call -> U
+196:16:Name -> U
+198:28:Name -> U
+208:5:Name -> U
+209:26:Name -> Class:builtins.str
+209:34:Name -> Class:builtins.str
+210:18:Call -> U
+210:18:Attribute -> Func:json.loads
+210:18:Name -> Module:json
+210:29:Name -> U
+211:16:Name -> U
+211:32:Name -> U
+211:51:Name -> U
+212:15:Call -> U
+212:15:Attribute -> Func:json.dumps
+212:15:Name -> Module:json
+212:26:Name -> U
+214:18:Call -> U
+214:18:Name -> Func:providers.common.ai.src.airflow.providers.common.ai.example_dags.example_llm_survey_analysis.example_llm_survey_interactive.extract_data
+214:31:Attribute -> U
+214:31:Name -> U
+219:26:Call -> U
+219:26:Name -> U
+222:13:Name -> U
+223:25:Call -> Inst:_pydatetime.timedelta
+223:25:Attribute -> Class:_pydatetime.timedelta
+223:25:Name -> Module:datetime
+226:4:Name -> U
+226:27:Name -> U
+226:43:Name -> U
+231:0:Call -> Const:NoneType:None
+231:0:Name -> Func:providers.common.ai.src.airflow.providers.common.ai.example_dags.example_llm_survey_analysis.example_llm_survey_interactive
+240:1:Call -> U
+240:1:Name -> U
+240:37:Call -> Inst:_pydatetime.datetime
+240:37:Attribute -> Class:_pydatetime.datetime
+240:37:Name -> Module:datetime
+268:22:Call -> U
+268:22:Name -> U
+270:21:Name -> Const:str:'airflow_website'
+271:17:Name -> Const:str:'/survey/airflow-user-survey-2025.csv'
+273:34:Attribute -> U
+273:34:Name -> U
+281:5:Name -> U
+282:30:Name -> Class:builtins.str
+283:8:Call -> Const:NoneType:None
+283:8:Attribute -> Func:os.makedirs
+283:8:Name -> Module:os
+283:20:Call -> U
+283:20:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+283:20:Attribute -> Module:posixpath | Module:ntpath
+283:20:Name -> Module:os
+283:36:Name -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+284:13:Call -> ERR
+284:13:Name -> Func:_io.open
+284:18:Name -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+285:12:Call -> U
+285:12:Attribute -> U
+285:12:Name -> U
+285:20:Name -> U
+289:8:Call -> Const:NoneType:None
+289:8:Attribute -> Func:os.makedirs
+289:8:Name -> Module:os
+289:20:Call -> U
+289:20:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+289:20:Attribute -> Module:posixpath | Module:ntpath
+289:20:Name -> Module:os
+289:36:Name -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+290:19:Call -> U
+290:19:Attribute -> U
+290:19:Name -> U
+290:50:Call -> ERR
+290:50:Attribute -> BM:builtins.str.splitlines
+290:50:Call -> Const:str:''
+290:50:Attribute -> BM:builtins.str.strip
+290:50:Name -> Const:str:'\nTable: survey\nKey columns (quote all
+290:95:Name -> U
+291:13:Call -> ERR
+291:13:Name -> Func:_io.open
+291:18:Name -> U | Const:str:'/opt/airflow/data/airflow-user-survey-2
+292:12:Call -> ERR
+292:12:Attribute -> ERR
+292:12:Call -> ERR
+292:12:Attribute -> Func:_csv.writer
+292:12:Name -> Module:csv
+292:27:Name -> U
+292:41:Name -> U
+294:16:Call -> Const:NoneType:None
+294:16:Name -> Func:providers.common.ai.src.airflow.providers.common.ai.example_dags.example_llm_survey_analysis.example_llm_survey_scheduled.prepare_csv
+294:28:Attribute -> U
+294:28:Name -> U
+300:19:Call -> U
+300:19:Name -> U
+305:20:Name -> Const:str:'pydanticai_default'
+306:22:Name -> U
+306:41:Name -> U
+309:4:Name -> Const:NoneType:None
+309:17:Name -> U
+314:19:Call -> U
+314:19:Name -> U
+316:15:Name -> Const:str:'What is the breakdown of respondents by
+317:20:Name -> Const:str:'pydanticai_default'
+318:26:Name -> U
+319:23:Name -> Const:str:'\nTable: survey\nKey columns (quote all
+321:4:Name -> U
+321:20:Name -> U
+326:16:Call -> U
+326:16:Name -> U
+328:28:Name -> U
+337:5:Name -> U
+338:26:Name -> Class:builtins.str
+338:34:Name -> Class:builtins.str
+339:18:Call -> U
+339:18:Attribute -> Func:json.loads
+339:18:Name -> Module:json
+339:29:Name -> U
+340:16:Name -> U
+340:32:Name -> U
+340:51:Name -> U
+341:15:Call -> U
+341:15:Attribute -> Func:json.dumps
+341:15:Name -> Module:json
+341:26:Name -> U
+343:18:Call -> U
+343:18:Name -> Func:providers.common.ai.src.airflow.providers.common.ai.example_dags.example_llm_survey_analysis.example_llm_survey_scheduled.extract_data
+343:31:Attribute -> U
+343:31:Name -> U
+350:5:Name -> U
+351:26:Name -> Class:builtins.str
+352:11:Name -> U | Const:NoneType:None
+352:28:Name -> U | Const:NoneType:None
+355:17:Call -> U
+355:17:Name -> U
+355:39:Name -> U | Const:NoneType:None
+356:16:Call -> U
+356:16:Attribute -> U
+356:16:Name -> U
+357:23:Name -> U | Const:NoneType:None
+358:56:Name -> Const:str:'What is the breakdown of respondents by
+359:41:Name -> U
+362:12:Call -> ERR
+362:12:Name -> Func:builtins.print
+362:46:Name -> U
+364:4:Name -> U
+364:20:Name -> U
+364:33:Name -> U
+364:48:Call -> Const:NoneType:None
+364:48:Name -> Func:providers.common.ai.src.airflow.providers.common.ai.example_dags.example_llm_survey_analysis.example_llm_survey_scheduled.send_result
+364:60:Name -> U
+369:0:Call -> Const:NoneType:None
+369:0:Name -> Func:providers.common.ai.src.airflow.providers.common.ai.example_dags.example_llm_survey_analysis.example_llm_survey_scheduled

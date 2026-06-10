@@ -1,0 +1,229 @@
+19:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:6:Attribute -> Func:logging.getLogger
+19:6:Name -> Module:logging
+19:24:Name -> Const:str:'salt.modules.rsync' | Const:str:'__main__'
+28:7:Call -> Const:NoneType:None | Const:str:'rsync' | U
+28:7:Attribute -> Func:salt.utils.path.which
+28:7:Attribute -> Module:salt.utils.path
+28:7:Attribute -> Module:salt.utils
+28:7:Name -> Module:salt
+29:15:Name -> Const:str:'rsync'
+43:7:Name -> U
+44:8:Call -> ERR
+44:8:Attribute -> BM:builtins.list.append
+44:8:Name -> List:1
+45:7:Name -> U
+46:8:Call -> ERR
+46:8:Attribute -> BM:builtins.list.append
+46:8:Name -> List:1
+47:7:Name -> U
+48:8:Call -> ERR
+48:8:Attribute -> BM:builtins.list.append
+48:8:Name -> List:1
+49:7:Name -> U
+50:8:Call -> ERR
+50:8:Attribute -> BM:builtins.list.append
+50:8:Name -> List:1
+50:32:Name -> U
+51:7:Name -> U
+52:8:Call -> ERR
+52:8:Attribute -> BM:builtins.list.extend
+52:8:Name -> List:1
+52:43:Name -> U
+53:7:Name -> U
+54:8:Call -> ERR
+54:8:Attribute -> BM:builtins.list.extend
+54:8:Name -> List:1
+54:42:Name -> U
+55:11:Name -> U
+57:7:Name -> U | Const:bool:False
+58:11:Call -> ERR
+58:11:Name -> Func:builtins.isinstance
+58:22:Name -> U
+58:31:Name -> Class:builtins.list
+59:23:Name -> U
+60:16:Call -> ERR
+60:16:Attribute -> BM:builtins.list.extend
+60:16:Name -> List:1
+60:45:Name -> U
+62:12:Call -> ERR
+62:12:Attribute -> BM:builtins.list.extend
+62:12:Name -> List:1
+62:41:Name -> U
+63:7:Name -> U
+64:8:Call -> ERR
+64:8:Attribute -> BM:builtins.list.append
+64:8:Name -> List:1
+65:11:Name -> List:1
+145:11:Name -> U
+146:14:Call -> ERR
+146:14:Name -> ERR
+147:11:Name -> U
+148:14:Call -> ERR
+148:14:Name -> ERR
+149:11:Name -> Const:bool:False | U
+150:17:Call -> ERR
+150:17:Name -> ERR
+151:11:Name -> Const:bool:False | U
+152:16:Call -> ERR
+152:16:Name -> ERR
+153:11:Name -> Const:bool:False | U
+154:17:Call -> ERR
+154:17:Name -> ERR
+155:11:Name -> Const:NoneType:None | U
+156:23:Call -> ERR
+156:23:Name -> ERR
+157:11:Name -> Const:NoneType:None | U
+158:18:Call -> ERR
+158:18:Name -> ERR
+159:11:Name -> Const:NoneType:None | U
+160:22:Call -> ERR
+160:22:Name -> ERR
+161:11:Name -> Const:bool:False | U
+162:17:Call -> ERR
+162:17:Name -> ERR
+163:11:Name -> Const:NoneType:None | U
+164:14:Call -> ERR
+164:14:Name -> ERR
+165:11:Name -> U
+165:22:Name -> U
+166:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+166:14:Name -> Class:salt.exceptions.SaltInvocationError
+169:7:Call -> U
+169:7:Attribute -> U
+169:7:Name -> U
+170:15:Name -> U
+171:16:Call -> U
+171:16:Attribute -> Func:re.sub
+171:16:Name -> Module:re
+171:38:Name -> U
+173:11:Name -> U
+173:20:Call -> ERR
+173:20:Name -> ERR
+173:60:Name -> Const:str:'base' | U
+176:11:Name -> Const:bool:False | Const:bool:True
+177:22:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+177:22:Attribute -> Func:tempfile.mkdtemp
+177:22:Name -> Module:tempfile
+178:22:Call -> ERR
+178:22:Name -> ERR
+178:45:Name -> U
+178:51:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+178:60:Name -> Const:str:'base' | U
+179:15:Name -> U
+180:22:Name -> Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+184:23:Call -> U
+184:23:Attribute -> BM:builtins.bytes.endswith | BM:builtins.str.endswith | U | BM:builtins.bytes.endswith | BM:builtins.str.endswith
+184:23:Name -> Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+185:29:Name -> U | Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+187:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+187:22:Name -> Class:salt.exceptions.CommandExecutionError
+187:47:Name -> U
+189:22:Call -> Tuple:2 | U
+189:22:Attribute -> Func:salt.utils.files.mkstemp
+189:22:Attribute -> Module:salt.utils.files
+189:22:Attribute -> Module:salt.utils
+189:22:Name -> Module:salt
+190:23:Call -> ERR
+190:23:Name -> ERR
+190:47:Name -> U
+190:53:Name -> Tuple:2 | U
+190:62:Name -> Const:str:'base' | U
+191:15:Name -> U
+192:22:Name -> Const:NoneType:None | Tuple:2 | U
+194:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+194:22:Name -> Class:salt.exceptions.CommandExecutionError
+194:47:Name -> U
+196:13:Call -> List:1
+196:13:Name -> Func:salt.modules.rsync._check
+197:8:Name -> Const:bool:False | U
+197:16:Name -> Const:bool:False | U
+197:23:Name -> Const:bool:False | U
+197:31:Name -> Const:NoneType:None | U
+197:45:Name -> Const:NoneType:None | U
+197:54:Name -> Const:NoneType:None | U
+197:67:Name -> Const:bool:False | U
+197:75:Name -> Const:NoneType:None | U
+200:7:Name -> Const:NoneType:None | U
+200:27:Call -> ERR
+200:27:Name -> Func:builtins.isinstance
+200:38:Name -> Const:NoneType:None | U
+200:55:Name -> Class:builtins.list
+201:17:Name -> List:1
+201:26:Name -> Const:NoneType:None | U
+203:22:Name -> List:1 | U
+203:32:Name -> U | Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/' | Const:str:'Uninferable/' | Const:str:'None/' | Const:str:"b'.'/" | Const:str:'./' | Const:str:"b'/'/" | Const:str:'//' | Tuple:2
+203:37:Name -> U
+204:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+204:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+204:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+204:43:Name -> U
+206:15:Call -> ERR
+206:15:Name -> ERR
+206:39:Name -> U
+207:11:Name -> Class:builtins.OSError
+208:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+208:14:Name -> Class:salt.exceptions.CommandExecutionError
+208:36:Attribute -> Const:str:''
+208:36:Name -> ExcInst:builtins.OSError
+210:11:Name -> Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Tuple:2
+211:12:Call -> ERR
+211:12:Name -> ERR
+211:36:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Tuple:2
+230:14:Call -> ERR
+230:14:Name -> ERR
+231:11:Name -> Class:builtins.OSError
+232:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+232:14:Name -> Class:salt.exceptions.CommandExecutionError
+232:36:Attribute -> Const:str:''
+232:36:Name -> ExcInst:builtins.OSError
+234:15:Call -> U
+234:15:Attribute -> U
+234:15:Call -> U
+234:15:Attribute -> U
+234:15:Name -> U
+235:11:Name -> Class:builtins.IndexError
+236:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+236:14:Name -> Class:salt.exceptions.CommandExecutionError
+259:13:Call -> U
+259:13:Attribute -> Func:salt.utils.files.fopen
+259:13:Attribute -> Module:salt.utils.files
+259:13:Attribute -> Module:salt.utils
+259:13:Name -> Module:salt
+259:36:Name -> Const:str:'/etc/rsyncd.conf' | U
+260:24:Name -> U
+261:23:Call -> U
+261:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+261:23:Attribute -> Module:salt.utils.stringutils
+261:23:Attribute -> Module:salt.utils
+261:23:Name -> Module:salt
+261:57:Name -> U
+262:11:Name -> Class:builtins.OSError
+263:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+263:11:Name -> ExcInst:builtins.OSError
+263:24:Attribute -> Const:int:2
+263:24:Name -> Module:errno
+264:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+264:18:Name -> Class:salt.exceptions.CommandExecutionError
+264:43:Name -> Const:str:'/etc/rsyncd.conf' | U
+265:13:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+265:13:Name -> ExcInst:builtins.OSError
+265:26:Attribute -> Const:int:13
+265:26:Name -> Module:errno
+266:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+266:18:Name -> Class:salt.exceptions.CommandExecutionError
+266:58:Name -> Const:str:'/etc/rsyncd.conf' | U
+267:13:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+267:13:Name -> ExcInst:builtins.OSError
+267:26:Attribute -> Const:int:21
+267:26:Name -> Module:errno
+268:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+268:18:Name -> Class:salt.exceptions.CommandExecutionError
+269:34:Name -> Const:str:'/etc/rsyncd.conf' | U
+272:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+272:18:Name -> Class:salt.exceptions.CommandExecutionError
+272:49:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+272:49:Name -> ExcInst:builtins.OSError
+272:62:Attribute -> Const:str:''
+272:62:Name -> ExcInst:builtins.OSError
+274:15:Name -> Const:str:'' | U

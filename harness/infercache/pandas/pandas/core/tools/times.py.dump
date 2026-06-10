@@ -1,0 +1,163 @@
+19:3:Name -> Const:bool:False
+25:12:Name -> Class:builtins.str
+26:23:Name -> Class:builtins.bool
+27:12:Name -> Class:.Literal
+54:7:Name -> Const:str:'raise' | U
+55:14:Call -> ExcInst:builtins.ValueError
+55:14:Name -> Class:builtins.ValueError
+58:11:Call -> ERR
+58:11:Name -> Func:builtins.isinstance
+58:22:Name -> U
+58:28:Name -> Class:builtins.list
+58:34:Name -> Class:builtins.tuple
+59:18:Call -> Inst:.ndarray
+59:18:Attribute -> Func:.array
+59:18:Name -> U
+59:27:Name -> U
+61:13:Call -> U
+61:13:Name -> Func:builtins.getattr
+61:21:Name -> U
+62:18:Call -> ExcInst:builtins.TypeError
+62:18:Name -> Class:builtins.TypeError
+66:14:Call -> U
+66:14:Attribute -> U
+66:14:Name -> U
+66:25:Name -> U | Inst:.ndarray
+68:11:Name -> Const:bool:False | U
+68:33:Name -> U
+69:21:Call -> Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p' | Const:NoneType:None
+69:21:Name -> Func:pandas.core.tools.times._guess_time_format_for_array
+69:50:Name -> Inst:.ndarray | U
+71:15:Name -> Class:builtins.list
+71:20:Name -> Class:_pydatetime.time
+72:11:Name -> U | Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p' | Const:NoneType:None
+73:27:Name -> Inst:.ndarray | U
+75:20:Call -> ERR
+75:20:Attribute -> BM:builtins.list.append
+75:20:Name -> List:0
+75:33:Call -> Inst:_pydatetime.time
+75:33:Attribute -> BM:_pydatetime.datetime.time
+75:33:Call -> Inst:_pydatetime.datetime
+75:33:Attribute -> BM:_pydatetime.datetime.strptime
+75:33:Name -> Class:_pydatetime.datetime
+75:51:Name -> U
+75:60:Name -> U | Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p'
+76:24:Name -> Class:builtins.ValueError
+76:36:Name -> Class:builtins.TypeError
+77:23:Name -> Const:str:'raise' | U
+79:46:Name -> U
+80:38:Name -> U | Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p'
+82:30:Call -> ExcInst:builtins.ValueError
+82:30:Name -> Class:builtins.ValueError
+82:41:Name -> Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi | Const:str:'Cannot convert Uninferable to a time wi
+82:51:Name -> ExcInst:builtins.ValueError | ExcInst:builtins.TypeError
+83:20:Call -> ERR
+83:20:Attribute -> BM:builtins.list.append
+83:20:Name -> List:0
+85:22:Name -> List:8
+87:27:Name -> Inst:.ndarray | U
+90:34:Call -> Inst:_pydatetime.time
+90:34:Attribute -> BM:_pydatetime.time.fromisoformat
+90:34:Name -> Class:_pydatetime.time
+90:53:Name -> U
+91:24:Name -> Class:builtins.ValueError
+91:36:Name -> Class:builtins.TypeError
+92:39:Name -> List:8
+94:42:Call -> Inst:_pydatetime.time
+94:42:Attribute -> BM:_pydatetime.datetime.time
+94:42:Call -> Inst:_pydatetime.datetime
+94:42:Attribute -> BM:_pydatetime.datetime.strptime
+94:42:Name -> Class:_pydatetime.datetime
+94:60:Name -> U
+94:69:Name -> Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p'
+95:35:Name -> Const:bool:False
+97:38:Call -> ERR
+97:38:Attribute -> BM:builtins.list.pop
+97:38:Name -> List:8
+97:50:Call -> ERR
+97:50:Attribute -> BM:builtins.list.index
+97:50:Name -> List:8
+97:64:Name -> Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p'
+98:32:Call -> ERR
+98:32:Attribute -> BM:builtins.list.insert
+98:32:Name -> List:8
+98:50:Name -> U
+101:32:Name -> Class:builtins.ValueError
+101:44:Name -> Class:builtins.TypeError
+104:19:Name -> Const:NoneType:None | Inst:_pydatetime.time
+105:20:Call -> ERR
+105:20:Attribute -> BM:builtins.list.append
+105:20:Name -> List:0
+105:33:Name -> Inst:_pydatetime.time
+106:21:Name -> Const:str:'raise' | U
+107:26:Call -> ExcInst:builtins.ValueError
+107:26:Name -> Class:builtins.ValueError
+107:59:Name -> Inst:.ndarray | U
+109:20:Call -> ERR
+109:20:Attribute -> BM:builtins.list.append
+109:20:Name -> List:0
+111:15:Name -> List:0
+113:7:Name -> U
+114:15:Name -> U
+115:9:Call -> ERR
+115:9:Name -> Func:builtins.isinstance
+115:20:Name -> U
+115:25:Name -> Class:_pydatetime.time
+116:15:Name -> U
+117:9:Call -> ERR
+117:9:Name -> Func:builtins.isinstance
+117:20:Name -> U
+117:25:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCSeries
+118:17:Call -> List:0
+118:17:Name -> Func:pandas.core.tools.times.to_time._convert_listlike
+118:35:Attribute -> U
+118:35:Name -> U
+118:48:Name -> Const:NoneType:None | U
+119:15:Call -> U
+119:15:Attribute -> U
+119:15:Name -> U
+119:32:Name -> List:0
+119:46:Attribute -> U
+119:46:Name -> U
+119:62:Attribute -> U
+119:62:Name -> U
+120:9:Call -> ERR
+120:9:Name -> Func:builtins.isinstance
+120:20:Name -> U
+120:25:Name -> Class:pandas.core.dtypes.generic.create_pandas_abc_type.ABCIndex
+121:15:Call -> List:0
+121:15:Name -> Func:pandas.core.tools.times.to_time._convert_listlike
+121:33:Name -> U
+121:38:Name -> Const:NoneType:None | U
+122:9:Call -> Const:NoneType:None
+122:9:Name -> Func:pandas._libs.lib.is_list_like
+122:22:Name -> U
+123:15:Call -> List:0
+123:15:Name -> Func:pandas.core.tools.times.to_time._convert_listlike
+123:33:Name -> U
+123:38:Name -> Const:NoneType:None | U
+125:11:Call -> List:0
+125:11:Name -> Func:pandas.core.tools.times.to_time._convert_listlike
+125:29:Call -> Inst:.ndarray
+125:29:Attribute -> Func:.array
+125:29:Name -> U
+125:39:Name -> U
+125:46:Name -> Const:NoneType:None | U
+143:23:Call -> U
+143:23:Attribute -> U
+143:23:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:bool:True | Const:bool:True | U | Const:bool:False
+143:23:Name -> Func:pandas.core.dtypes.missing.notna | Func:pandas.core.dtypes.missing.notna | Func:pandas.core.dtypes.missing.notna | Func:pandas.core.dtypes.missing.notna | Func:pandas.core.dtypes.missing.notna | Func:pandas.core.dtypes.missing.notna
+143:29:Name -> U
+144:7:Call -> ERR
+144:7:Name -> Func:builtins.len
+144:11:Name -> U
+145:18:Name -> U
+145:22:Name -> U
+146:27:Name -> List:8
+148:16:Call -> Inst:_pydatetime.datetime
+148:16:Attribute -> BM:_pydatetime.datetime.strptime
+148:16:Name -> Class:_pydatetime.datetime
+148:34:Name -> U
+148:43:Name -> Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p'
+149:23:Name -> Const:str:'%H:%M' | Const:str:'%H%M' | Const:str:'%I:%M%p' | Const:str:'%I%M%p' | Const:str:'%H:%M:%S' | Const:str:'%H%M%S' | Const:str:'%I:%M:%S%p' | Const:str:'%I%M%S%p'
+150:19:Name -> Class:builtins.ValueError

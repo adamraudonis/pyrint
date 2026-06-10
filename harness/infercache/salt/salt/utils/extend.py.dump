@@ -1,0 +1,376 @@
+29:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+29:6:Attribute -> Func:logging.getLogger
+29:6:Name -> Module:logging
+29:24:Name -> Const:str:'salt.utils.extend' | Const:str:'__main__'
+35:7:Name -> Class:builtins.ImportError
+54:9:Call -> U
+54:9:Attribute -> Func:salt.utils.files.fopen
+54:9:Attribute -> Module:salt.utils.files
+54:9:Attribute -> Module:salt.utils
+54:9:Name -> Module:salt
+54:32:Name -> U
+55:19:Call -> U
+55:19:Name -> Func:salt.serializers.yaml.deserialize
+55:31:Name -> U
+56:16:Name -> U
+56:28:Call -> U
+56:28:Attribute -> U
+56:28:Name -> U
+56:61:Name -> U
+57:11:Name -> Tuple:3
+71:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+71:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+71:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+71:40:Name -> U
+72:16:Call -> ERR
+72:16:Attribute -> Func:posix.listdir
+72:16:Name -> Module:os
+72:27:Name -> U
+73:12:Call -> U
+73:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+73:12:Attribute -> Module:posixpath | Module:ntpath
+73:12:Name -> Module:os
+73:25:Name -> U
+73:30:Name -> U
+74:11:Call -> Const:bool:False | U
+74:11:Attribute -> Func:genericpath.isdir | U
+74:11:Attribute -> Module:posixpath | Module:ntpath
+74:11:Name -> Module:os
+74:25:Name -> U
+75:28:Call -> U
+75:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+75:28:Attribute -> Module:posixpath | Module:ntpath
+75:28:Name -> Module:os
+75:41:Name -> U
+75:44:Name -> Const:str:'template.yml'
+76:15:Call -> Const:bool:False | U
+76:15:Attribute -> Func:genericpath.isfile | U
+76:15:Attribute -> Module:posixpath | Module:ntpath
+76:15:Name -> Module:os
+76:30:Name -> U
+77:16:Call -> ERR
+77:16:Attribute -> BM:builtins.list.append
+77:16:Name -> List:0
+77:33:Call -> Tuple:3
+77:33:Name -> Func:salt.utils.extend._get_template
+77:47:Name -> U
+77:62:Name -> U
+79:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+79:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+81:20:Name -> U
+82:20:Name -> Const:str:'template.yml'
+84:11:Name -> List:0
+97:16:Call -> ERR
+97:16:Attribute -> Func:posix.listdir
+97:16:Name -> Module:os
+97:27:Name -> U
+98:12:Call -> U
+98:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+98:12:Attribute -> Module:posixpath | Module:ntpath
+98:12:Name -> Module:os
+98:25:Name -> U
+98:30:Name -> U
+99:12:Call -> U
+99:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+99:12:Attribute -> Module:posixpath | Module:ntpath
+99:12:Name -> Module:os
+99:25:Name -> U
+99:30:Name -> U
+100:11:Call -> Const:bool:False | U
+100:11:Attribute -> Func:genericpath.isdir | U
+100:11:Attribute -> Module:posixpath | Module:ntpath
+100:11:Name -> Module:os
+100:25:Name -> U
+101:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+101:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+101:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+101:48:Name -> U
+101:51:Name -> U
+102:15:Call -> Const:bool:False | Const:bool:True | U
+102:15:Attribute -> Func:genericpath.exists | U
+102:15:Attribute -> Module:posixpath | Module:ntpath
+102:15:Name -> Module:os
+102:30:Name -> U
+103:16:Call -> Const:NoneType:None
+103:16:Name -> Func:salt.utils.extend._mergetree
+103:27:Name -> U
+103:30:Name -> U
+105:16:Call -> U
+105:16:Attribute -> Func:shutil.copytree
+105:16:Name -> Module:shutil
+105:32:Name -> U
+105:35:Name -> U
+107:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+107:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+107:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+107:46:Name -> U
+107:49:Name -> U
+108:12:Call -> U
+108:12:Attribute -> Func:shutil.copy2
+108:12:Name -> Module:shutil
+108:25:Name -> U
+108:28:Name -> U
+125:16:Call -> ERR
+125:16:Attribute -> Func:posix.listdir
+125:16:Name -> Module:os
+125:27:Name -> U
+126:12:Call -> U
+126:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+126:12:Attribute -> Module:posixpath | Module:ntpath
+126:12:Name -> Module:os
+126:25:Name -> U
+126:30:Name -> U
+127:12:Call -> U
+127:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+127:12:Attribute -> Module:posixpath | Module:ntpath
+127:12:Name -> Module:os
+127:25:Name -> U
+127:30:Name -> U
+128:11:Call -> Const:bool:False | U
+128:11:Attribute -> Func:genericpath.isdir | U
+128:11:Attribute -> Module:posixpath | Module:ntpath
+128:11:Name -> Module:os
+128:25:Name -> U
+129:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+129:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+129:48:Name -> U
+129:51:Name -> U
+130:15:Call -> Const:bool:False | Const:bool:True | U
+130:15:Attribute -> Func:genericpath.exists | U
+130:15:Attribute -> Module:posixpath | Module:ntpath
+130:15:Name -> Module:os
+130:30:Name -> U
+131:16:Call -> Const:NoneType:None
+131:16:Name -> Func:salt.utils.extend._mergetreejinja
+131:32:Name -> U
+131:35:Name -> U
+131:38:Name -> U
+133:16:Call -> ERR
+133:16:Attribute -> Func:posix.mkdir
+133:16:Name -> Module:os
+133:25:Name -> U
+134:16:Call -> Const:NoneType:None
+134:16:Name -> Func:salt.utils.extend._mergetreejinja
+134:32:Name -> U
+134:35:Name -> U
+134:38:Name -> U
+136:15:Name -> U
+136:23:Name -> Const:str:'template.yml'
+137:20:Call -> U
+137:20:Attribute -> U
+137:20:Call -> U
+137:20:Name -> U
+137:29:Name -> U
+137:39:Name -> U
+138:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+138:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+138:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+138:50:Name -> U
+138:53:Name -> U
+139:21:Call -> U
+139:21:Attribute -> Func:salt.utils.files.fopen
+139:21:Attribute -> Module:salt.utils.files
+139:21:Attribute -> Module:salt.utils
+139:21:Name -> Module:salt
+139:44:Name -> U
+140:35:Call -> U
+140:35:Attribute -> Func:salt.utils.stringutils.to_unicode
+140:35:Attribute -> Module:salt.utils.stringutils
+140:35:Attribute -> Module:salt.utils
+140:35:Name -> Module:salt
+140:69:Call -> U
+140:69:Attribute -> U
+140:69:Name -> U
+141:36:Call -> U
+141:36:Attribute -> U
+141:36:Call -> U
+141:36:Name -> U
+141:45:Name -> U
+141:66:Name -> U
+142:21:Call -> U
+142:21:Attribute -> Func:salt.utils.files.fopen
+142:21:Attribute -> Module:salt.utils.files
+142:21:Attribute -> Module:salt.utils
+142:21:Name -> Module:salt
+142:44:Name -> U
+143:20:Call -> U
+143:20:Attribute -> U
+143:20:Name -> U
+143:36:Call -> U
+143:36:Attribute -> Func:salt.utils.stringutils.to_str
+143:36:Attribute -> Module:salt.utils.stringutils
+143:36:Attribute -> Module:salt.utils
+143:36:Name -> Module:salt
+143:66:Name -> U
+159:11:Call -> U
+159:11:Attribute -> U
+159:11:Name -> U
+159:24:Name -> U
+159:42:Name -> U
+176:17:Call -> Inst:collections.OrderedDict
+176:17:Name -> Class:collections.OrderedDict
+177:12:Name -> U
+177:17:Name -> U
+177:40:Call -> Inst:builtins.enumerate
+177:40:Name -> Class:builtins.enumerate
+177:50:Name -> U
+177:65:Name -> U
+179:14:Call -> ERR
+179:14:Attribute -> BM:builtins.dict.keys
+179:14:Name -> Inst:collections.OrderedDict
+182:23:Name -> U
+182:32:Name -> U
+182:44:Name -> U
+182:63:Call -> ERR
+182:63:Attribute -> BM:builtins.dict.items
+182:63:Name -> Inst:collections.OrderedDict
+183:13:Call -> Const:str:''
+183:13:Attribute -> BM:builtins.str.join
+185:22:Name -> U
+186:12:Call -> Const:str:''
+186:12:Attribute -> BM:builtins.str.join
+186:22:Name -> U
+187:12:Call -> Const:str:'Choose from '
+187:12:Attribute -> BM:builtins.str.format
+187:36:Call -> Const:str:''
+187:36:Attribute -> BM:builtins.str.join
+187:46:Name -> U
+191:18:Call -> U
+191:18:Attribute -> U
+191:18:Name -> U
+191:31:Name -> Const:str:''
+191:44:Call -> U
+191:44:Attribute -> U
+191:44:Name -> U
+191:57:Name -> U
+191:75:Name -> Const:str:'1'
+192:11:Name -> Inst:collections.OrderedDict
+192:22:Name -> U
+209:4:Call -> Const:NoneType:None
+209:4:Name -> Func:salt.utils.extend._mergetreejinja
+209:20:Name -> U
+209:34:Name -> U
+209:46:Name -> U
+241:11:Name -> Const:bool:True | Const:bool:False
+242:8:Call -> ERR
+242:8:Name -> Func:builtins.print
+243:8:Call -> ERR
+243:8:Attribute -> Func:sys.exit
+243:8:Name -> Module:sys
+245:7:Name -> Const:NoneType:None | U
+248:21:Call -> List:0
+248:21:Name -> Func:salt.utils.extend._fetch_templates
+248:38:Call -> U
+248:38:Attribute -> Func:posixpath.join | Func:ntpath.join
+248:38:Attribute -> Module:posixpath | Module:ntpath
+248:38:Name -> Module:os
+248:51:Name -> Const:NoneType:None | U | Const:str:'.'
+250:7:Name -> Const:NoneType:None | U
+251:8:Call -> ERR
+251:8:Name -> Func:builtins.print
+253:27:Call -> U
+253:27:Name -> Func:salt.utils.extend._prompt_choice
+253:42:Name -> Const:str:'Extension type'
+253:58:Name -> List:0
+255:11:Name -> U
+255:28:Call -> Inst:builtins.list
+255:28:Name -> Class:builtins.list
+255:33:Call -> Inst:builtins.zip
+255:33:Name -> Class:builtins.zip
+255:38:Name -> List:0
+256:12:Call -> ERR
+256:12:Name -> Func:builtins.print
+257:12:Call -> ERR
+257:12:Attribute -> Func:sys.exit
+257:12:Name -> Module:sys
+259:28:Name -> U
+259:39:Name -> List:0
+259:57:Name -> U
+259:65:Name -> U
+261:21:Name -> U
+262:24:Name -> U
+264:7:Name -> Const:NoneType:None | U
+265:8:Call -> ERR
+265:8:Name -> Func:builtins.print
+266:15:Call -> U
+266:15:Name -> Func:salt.utils.extend._prompt_user_variable
+268:7:Name -> Const:NoneType:None | U
+269:22:Call -> U
+269:22:Name -> Func:salt.utils.extend._prompt_user_variable
+271:32:Name -> U
+272:18:Name -> Const:NoneType:None | U
+275:19:Attribute -> U
+275:19:Call -> Inst:salt.version.SaltStackVersion
+275:19:Attribute -> BM:salt.version.SaltStackVersion.next_release
+275:19:Attribute -> Class:salt.version.SaltStackVersion
+275:19:Attribute -> Module:salt.version
+275:19:Name -> Module:salt
+276:23:Name -> Const:NoneType:None | U
+277:29:Name -> Const:NoneType:None | U
+278:24:Call -> U
+278:24:Attribute -> BM:_pydatetime.date.strftime
+278:24:Call -> Inst:_pydatetime.date
+278:24:Attribute -> BM:_pydatetime.date.today
+278:24:Name -> Class:_pydatetime.date
+279:16:Call -> U
+279:16:Attribute -> BM:_pydatetime.date.strftime
+279:16:Call -> Inst:_pydatetime.date
+279:16:Attribute -> BM:_pydatetime.date.today
+279:16:Name -> Class:_pydatetime.date
+284:20:Call -> U
+284:20:Attribute -> U
+284:20:Call -> U
+284:20:Attribute -> U
+284:20:Name -> U
+286:18:Call -> U
+286:18:Attribute -> U
+286:18:Call -> U
+286:18:Name -> U
+286:27:Call -> U
+286:27:Attribute -> U
+286:27:Name -> U
+286:58:Name -> Dict:5
+288:21:Call -> U
+288:21:Name -> Func:salt.utils.extend._prompt_user_variable
+288:43:Name -> U
+288:60:Name -> U
+289:8:Name -> Dict:0
+289:27:Name -> U
+289:34:Name -> U
+291:14:Call -> Dict:5
+291:14:Attribute -> BM:builtins.dict.copy
+291:14:Name -> Dict:5
+292:4:Call -> ERR
+292:4:Attribute -> BM:builtins.dict.update
+292:4:Name -> Dict:5
+292:19:Name -> U
+293:4:Call -> ERR
+293:4:Attribute -> BM:builtins.dict.update
+293:4:Name -> Dict:5
+293:19:Name -> Dict:0
+295:7:Name -> Const:NoneType:None | U
+296:19:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+296:19:Attribute -> Func:tempfile.mkdtemp
+296:19:Name -> Module:tempfile
+298:4:Call -> Const:NoneType:None
+298:4:Name -> Func:salt.utils.extend.apply_template
+298:19:Name -> Const:str:'templates/Uninferable'
+298:33:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+298:43:Name -> Dict:5
+300:11:Name -> Const:bool:False | U
+301:15:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+303:8:Call -> Const:NoneType:None
+303:8:Name -> Func:salt.utils.extend._mergetree
+303:19:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+303:29:Name -> Const:NoneType:None | U | Const:str:'.'
+304:15:Name -> Const:NoneType:None | U | Const:str:'.'
+306:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+306:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+306:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+306:40:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/' | Const:NoneType:None | Const:str:'.'
+307:11:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/' | Const:NoneType:None | Const:str:'.'
+310:3:Name -> Const:str:'salt.utils.extend' | Const:str:'__main__'
+311:4:Call -> Const:NoneType:None | Const:bytes:b'.' | Const:str:'.' | U
+311:4:Name -> Func:salt.utils.extend.run

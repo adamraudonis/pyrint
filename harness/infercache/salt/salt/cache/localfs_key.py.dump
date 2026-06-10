@@ -1,0 +1,667 @@
+28:7:Name -> Class:builtins.ImportError
+41:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+41:6:Attribute -> Func:logging.getLogger
+41:6:Name -> Module:logging
+41:24:Name -> Const:str:'salt.cache.localfs_key' | Const:str:'__main__'
+63:7:Name -> ERR
+68:15:Name -> ERR
+69:15:Name -> ERR
+70:15:Call -> ERR
+70:15:Attribute -> ERR
+70:15:Name -> ERR
+71:15:Call -> ERR
+71:15:Attribute -> ERR
+71:15:Name -> ERR
+72:12:Call -> ERR
+72:12:Attribute -> ERR
+72:12:Name -> ERR
+73:46:Name -> ERR
+77:20:Name -> U
+78:18:Name -> U
+79:9:Call -> ERR
+79:9:Attribute -> ERR
+79:9:Name -> ERR
+80:18:Name -> ERR
+82:18:Name -> ERR
+84:11:Call -> U
+84:11:Attribute -> U
+84:11:Name -> U
+84:30:Call -> ERR
+84:30:Attribute -> ERR
+84:30:Name -> ERR
+86:24:Name -> U
+86:41:Name -> U
+95:7:Name -> U
+95:47:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+95:47:Name -> Func:salt.utils.verify.valid_id
+95:56:Name -> ERR
+95:66:Name -> U
+96:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+96:14:Name -> Class:salt.exceptions.SaltCacheError
+96:36:Name -> U
+98:7:Name -> U
+99:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+99:14:Name -> Class:salt.exceptions.SaltCacheError
+99:51:Name -> U
+101:7:Name -> ERR
+106:7:Name -> U
+107:11:Name -> U
+109:13:Name -> U
+111:13:Name -> U
+114:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+114:18:Name -> Class:salt.exceptions.SaltCacheError
+114:33:Call -> U
+114:33:Attribute -> BM:builtins.str.format
+114:69:Name -> U
+115:15:Name -> U
+116:9:Name -> U
+118:15:Name -> U
+120:9:Name -> U
+126:11:Name -> U
+126:18:Name -> List:0 | List:7
+127:23:Name -> ERR
+129:13:Call -> Inst:pathlib.Path
+129:13:Name -> Class:pathlib.Path
+129:18:Name -> U
+129:30:Name -> Const:NoneType:None | Const:str:'minions_rejected' | Const:str:'minions_pre' | Const:str:'minions' | Const:str:'minions_denied' | Const:str:''
+129:37:Name -> U
+130:15:Attribute -> U
+130:15:Name -> U
+132:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+132:11:Name -> Func:salt.utils.verify.clean_path
+132:22:Name -> U
+132:32:Call -> Const:str:''
+132:32:Name -> Class:builtins.str
+132:36:Name -> U
+133:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+133:14:Name -> Class:salt.exceptions.SaltCacheError
+133:36:Name -> U
+136:8:Call -> Const:NoneType:None
+136:8:Attribute -> Func:os.makedirs
+136:8:Name -> Module:os
+136:20:Name -> U
+137:11:Name -> Class:builtins.OSError
+138:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+138:11:Name -> ExcInst:builtins.OSError
+138:24:Attribute -> Const:int:17
+138:24:Name -> Module:errno
+139:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+139:18:Name -> Class:salt.exceptions.SaltCacheError
+140:40:Name -> U
+140:74:Name -> ExcInst:builtins.OSError
+144:4:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+144:4:Name -> Func:salt.cache.localfs_key.flush
+144:10:Name -> U
+144:16:Name -> U
+144:21:Name -> U
+144:33:Name -> Dict:0
+146:22:Call -> Tuple:2
+146:22:Attribute -> Func:tempfile.mkstemp
+146:22:Name -> Module:tempfile
+146:43:Name -> U
+147:4:Call -> ERR
+147:4:Attribute -> Func:posix.close
+147:4:Name -> Module:os
+147:13:Name -> U
+149:7:Name -> U
+149:20:Call -> U
+149:20:Attribute -> Func:salt.utils.platform.is_windows
+149:20:Attribute -> Module:salt.utils.platform
+149:20:Attribute -> Module:salt.utils
+149:20:Name -> Module:salt
+151:18:Attribute -> ERR
+151:18:Call -> ERR
+151:18:Attribute -> Func:pwd.getpwnam
+151:18:Name -> Module:pwd | Const:NoneType:None
+151:31:Name -> U
+152:12:Call -> ERR
+152:12:Attribute -> Func:posix.chown
+152:12:Name -> Module:os
+152:21:Name -> U
+152:31:Name -> U
+153:16:Name -> Class:builtins.KeyError
+153:26:Name -> Class:builtins.ImportError
+153:39:Name -> Class:builtins.OSError
+153:48:Name -> Class:builtins.NameError
+159:13:Call -> Gen:salt.utils.files.set_umask
+159:13:Attribute -> Func:salt.utils.files.set_umask
+159:13:Attribute -> Module:salt.utils.files
+159:13:Attribute -> Module:salt.utils
+159:13:Name -> Module:salt
+159:40:Name -> Const:int:448 | Const:int:488 | Const:int:191
+160:17:Call -> U
+160:17:Attribute -> Func:salt.utils.files.fopen
+160:17:Attribute -> Module:salt.utils.files
+160:17:Attribute -> Module:salt.utils
+160:17:Name -> Module:salt
+160:40:Name -> U
+161:16:Call -> U
+161:16:Attribute -> U
+161:16:Name -> U
+161:26:Call -> U | Inst:builtins.bytes
+161:26:Attribute -> Func:salt.utils.stringutils.to_bytes
+161:26:Attribute -> Module:salt.utils.stringutils
+161:26:Attribute -> Module:salt.utils
+161:26:Name -> Module:salt
+161:58:Name -> U
+163:15:Name -> U
+164:16:Call -> ERR
+164:16:Attribute -> Func:posix.chmod
+164:16:Name -> Module:os
+164:25:Name -> U
+167:8:Call -> Const:NoneType:None
+167:8:Attribute -> Func:salt.utils.atomicfile.atomic_rename | Func:posix.rename
+167:8:Attribute -> Module:salt.utils.atomicfile
+167:8:Attribute -> Module:salt.utils
+167:8:Name -> Module:salt
+167:44:Name -> U
+167:54:Name -> U
+168:11:Name -> Class:builtins.OSError
+169:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+169:14:Name -> Class:salt.exceptions.SaltCacheError
+170:63:Name -> Const:NoneType:None | Const:str:'minions_rejected' | Const:str:'minions_pre' | Const:str:'minions' | Const:str:'minions_denied' | Const:str:''
+170:71:Name -> ExcInst:builtins.OSError
+178:7:Name -> U
+178:47:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+178:47:Name -> Func:salt.utils.verify.valid_id
+178:56:Name -> ERR
+178:66:Name -> U
+179:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+179:14:Name -> Class:salt.exceptions.SaltCacheError
+179:36:Name -> U
+181:7:Name -> U
+182:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+182:14:Name -> Class:salt.exceptions.SaltCacheError
+182:51:Name -> U
+184:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+184:11:Name -> Func:salt.utils.verify.clean_path
+184:22:Name -> U
+184:32:Name -> U
+185:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+185:14:Name -> Class:salt.exceptions.SaltCacheError
+185:36:Name -> U
+187:7:Name -> U
+188:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+188:14:Name -> Class:salt.exceptions.SaltCacheError
+190:11:Name -> U
+196:26:Call -> Inst:pathlib.Path
+196:26:Name -> Class:pathlib.Path
+196:31:Name -> U
+196:41:Name -> Const:str:'minions_rejected' | Const:str:'minions_pre' | Const:str:'minions'
+196:47:Name -> U
+198:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+198:23:Name -> Func:salt.utils.verify.clean_path
+198:34:Name -> U
+198:44:Call -> Const:str:''
+198:44:Name -> Class:builtins.str
+198:48:Name -> Inst:pathlib.Path
+199:26:Call -> ExcInst:salt.exceptions.SaltCacheError
+199:26:Name -> Class:salt.exceptions.SaltCacheError
+199:48:Name -> U
+201:19:Call -> U | Const:bool:False | Const:bool:False
+201:19:Attribute -> BM:pathlib.Path.is_file
+201:19:Name -> Inst:pathlib.Path
+201:45:Call -> U | Const:bool:False | Const:bool:False
+201:45:Attribute -> BM:pathlib.Path.is_symlink
+201:45:Name -> Inst:pathlib.Path
+202:25:Call -> U
+202:25:Attribute -> Func:salt.utils.files.fopen
+202:25:Attribute -> Module:salt.utils.files
+202:25:Attribute -> Module:salt.utils
+202:25:Name -> Module:salt
+202:48:Name -> Inst:pathlib.Path
+203:41:Name -> Const:str:'rejected' | Const:str:'pending' | Const:str:'accepted'
+203:55:Call -> U
+203:55:Attribute -> U
+203:55:Name -> U
+205:13:Name -> U
+208:27:Call -> U
+208:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+208:27:Attribute -> Module:posixpath | Module:ntpath
+208:27:Name -> Module:os
+208:40:Name -> U
+208:68:Name -> U
+210:19:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+210:19:Name -> Func:salt.utils.verify.clean_path
+210:30:Name -> U
+210:40:Name -> U
+211:22:Call -> ExcInst:salt.exceptions.SaltCacheError
+211:22:Name -> Class:salt.exceptions.SaltCacheError
+211:44:Name -> U
+213:15:Call -> Const:bool:False | U
+213:15:Attribute -> Func:genericpath.isfile | U
+213:15:Attribute -> Module:posixpath | Module:ntpath
+213:15:Name -> Module:os
+213:30:Name -> U
+214:21:Call -> U
+214:21:Attribute -> Func:salt.utils.files.fopen
+214:21:Attribute -> Module:salt.utils.files
+214:21:Attribute -> Module:salt.utils
+214:21:Name -> Module:salt
+214:44:Name -> U
+215:28:Call -> U
+215:28:Attribute -> U
+215:28:Name -> U
+216:13:Name -> U
+217:15:Name -> U
+217:22:Name -> List:0 | List:7
+218:27:Name -> ERR
+220:22:Call -> Inst:pathlib.Path
+220:22:Name -> Class:pathlib.Path
+220:27:Name -> U
+220:37:Name -> U
+222:19:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+222:19:Name -> Func:salt.utils.verify.clean_path
+222:30:Name -> U
+222:40:Call -> Const:str:''
+222:40:Name -> Class:builtins.str
+222:44:Name -> Inst:pathlib.Path
+223:22:Call -> ExcInst:salt.exceptions.SaltCacheError
+223:22:Name -> Class:salt.exceptions.SaltCacheError
+223:44:Name -> U
+225:15:Call -> U | Const:bool:False | Const:bool:False
+225:15:Attribute -> BM:pathlib.Path.is_file
+225:15:Name -> Inst:pathlib.Path
+225:41:Call -> U | Const:bool:False | Const:bool:False
+225:41:Attribute -> BM:pathlib.Path.is_symlink
+225:41:Name -> Inst:pathlib.Path
+226:21:Call -> U
+226:21:Attribute -> Func:salt.utils.files.fopen
+226:21:Attribute -> Module:salt.utils.files
+226:21:Attribute -> Module:salt.utils
+226:21:Name -> Module:salt
+226:44:Name -> Inst:pathlib.Path
+227:27:Call -> U
+227:27:Attribute -> U
+227:27:Name -> U
+229:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+229:18:Name -> Class:salt.exceptions.SaltCacheError
+229:55:Name -> U
+230:11:Name -> Class:builtins.OSError
+231:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+231:14:Name -> Class:salt.exceptions.SaltCacheError
+232:12:Call -> U
+232:12:Attribute -> BM:builtins.str.format
+233:16:Name -> U
+233:22:Name -> U
+233:27:Name -> ExcInst:builtins.OSError
+242:11:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+242:11:Name -> Func:salt.utils.verify.valid_id
+242:20:Name -> ERR
+242:30:Name -> U
+243:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+243:14:Name -> Class:salt.exceptions.SaltCacheError
+243:36:Name -> U
+245:7:Name -> U
+246:17:Name -> U
+246:34:Name -> Dict:4
+246:50:Name -> U
+247:9:Name -> U
+249:9:Name -> U
+250:11:Name -> U
+250:18:Name -> List:0 | List:7
+251:23:Name -> ERR
+254:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+254:14:Name -> Class:salt.exceptions.SaltCacheError
+254:51:Name -> U
+256:15:Name -> U | List:1 | List:1
+257:18:Call -> Inst:pathlib.Path
+257:18:Name -> Class:pathlib.Path
+257:23:Name -> U
+257:33:Name -> Const:str:'minions_denied' | Const:str:''
+257:38:Name -> U
+259:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+259:15:Name -> Func:salt.utils.verify.clean_path
+259:26:Name -> U
+259:36:Call -> Const:str:''
+259:36:Name -> Class:builtins.str
+259:40:Name -> Inst:pathlib.Path
+260:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+260:18:Name -> Class:salt.exceptions.SaltCacheError
+260:40:Name -> U
+262:11:Call -> U | Const:bool:False | Const:bool:False
+262:11:Attribute -> BM:pathlib.Path.is_file
+262:11:Name -> Inst:pathlib.Path
+262:37:Call -> U | Const:bool:False | Const:bool:False
+262:37:Attribute -> BM:pathlib.Path.is_symlink
+262:37:Name -> Inst:pathlib.Path
+264:23:Call -> Inst:builtins.int
+264:23:Name -> Class:builtins.int
+264:27:Call -> U
+264:27:Attribute -> Func:genericpath.getmtime
+264:27:Attribute -> Module:posixpath | Module:ntpath
+264:27:Name -> Module:os
+264:44:Name -> Inst:pathlib.Path
+265:19:Name -> Class:builtins.OSError
+266:22:Call -> ExcInst:salt.exceptions.SaltCacheError
+266:22:Name -> Class:salt.exceptions.SaltCacheError
+267:20:Call -> U
+267:20:Attribute -> BM:builtins.str.format
+268:24:Name -> Inst:pathlib.Path
+268:33:Name -> ExcInst:builtins.OSError
+271:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+271:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+271:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+271:75:Name -> U
+280:7:Name -> U
+280:47:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+280:47:Name -> Func:salt.utils.verify.valid_id
+280:56:Name -> ERR
+280:66:Name -> Const:NoneType:None | U
+281:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+281:14:Name -> Class:salt.exceptions.SaltCacheError
+281:36:Name -> Const:NoneType:None | U
+283:7:Name -> Const:NoneType:None | U
+284:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+284:14:Name -> Class:salt.exceptions.SaltCacheError
+286:7:Name -> U
+287:17:Name -> U
+287:34:Name -> Dict:4
+287:50:Name -> U
+288:9:Name -> U
+290:9:Name -> U
+291:11:Name -> Const:NoneType:None | U
+291:18:Name -> List:0 | List:7
+292:23:Name -> ERR
+295:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+295:14:Name -> Class:salt.exceptions.SaltCacheError
+295:51:Name -> U
+299:16:Name -> U | List:1 | List:1
+301:15:Name -> Const:NoneType:None | U
+302:25:Call -> U
+302:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+302:25:Attribute -> Module:posixpath | Module:ntpath
+302:25:Name -> Module:os
+302:38:Name -> Const:NoneType:None | U
+302:48:Name -> Const:str:'minions_denied' | Const:str:''
+303:23:Call -> Const:bool:False | U
+303:23:Attribute -> Func:genericpath.isdir | U
+303:23:Attribute -> Module:posixpath | Module:ntpath
+303:23:Name -> Module:os
+303:37:Name -> U
+305:16:Call -> Const:NoneType:None | Const:NoneType:None
+305:16:Attribute -> Func:shutil.rmtree
+305:16:Name -> Module:shutil
+305:30:Name -> U
+307:25:Call -> U
+307:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+307:25:Attribute -> Module:posixpath | Module:ntpath
+307:25:Name -> Module:os
+307:38:Name -> Const:NoneType:None | U
+307:48:Name -> Const:str:'minions_denied' | Const:str:''
+307:54:Name -> U
+309:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+309:23:Name -> Func:salt.utils.verify.clean_path
+309:34:Name -> Const:NoneType:None | U
+309:44:Name -> U
+310:26:Call -> ExcInst:salt.exceptions.SaltCacheError
+310:26:Name -> Class:salt.exceptions.SaltCacheError
+310:48:Name -> U
+312:23:Call -> Const:bool:False | U
+312:23:Attribute -> Func:genericpath.isfile | U
+312:23:Attribute -> Module:posixpath | Module:ntpath
+312:23:Name -> Module:os
+312:38:Name -> U
+316:16:Call -> ERR
+316:16:Attribute -> Func:posix.chmod
+316:16:Name -> Module:os
+316:25:Name -> U
+316:33:Attribute -> Const:int:128 | Const:int:128
+316:33:Name -> Module:stat
+318:16:Call -> ERR
+318:16:Attribute -> Func:posix.remove
+318:16:Name -> Module:os
+318:26:Name -> U
+320:15:Name -> Class:builtins.OSError
+321:15:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+321:15:Name -> ExcInst:builtins.OSError
+321:28:Attribute -> Const:int:2
+321:28:Name -> Module:errno
+322:22:Call -> ExcInst:salt.exceptions.SaltCacheError
+322:22:Name -> Class:salt.exceptions.SaltCacheError
+322:69:Name -> ERR
+322:80:Name -> ExcInst:builtins.OSError
+324:11:Name -> Const:bool:False | Const:bool:True
+332:7:Name -> U
+333:17:Name -> U
+333:34:Name -> Dict:4
+333:50:Name -> U
+334:9:Name -> U
+336:9:Name -> U
+339:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+339:14:Name -> Class:salt.exceptions.SaltCacheError
+339:51:Name -> U
+342:16:Name -> U | List:1 | List:1
+343:15:Call -> U
+343:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+343:15:Attribute -> Module:posixpath | Module:ntpath
+343:15:Name -> Module:os
+343:28:Name -> U
+343:38:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+343:38:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+343:38:Attribute -> Module:posixpath | Module:ntpath
+343:38:Name -> Module:os
+343:55:Name -> Const:str:'minions_denied' | Const:str:''
+344:15:Call -> Const:bool:False | U
+344:15:Attribute -> Func:genericpath.isdir | U
+344:15:Attribute -> Module:posixpath | Module:ntpath
+344:15:Name -> Module:os
+344:29:Name -> U
+347:20:Call -> ERR
+347:20:Attribute -> Func:posix.listdir
+347:20:Name -> Module:os
+347:31:Name -> Const:str:'minions_denied' | Const:str:'' | U
+348:15:Name -> Class:builtins.OSError
+349:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+349:18:Name -> Class:salt.exceptions.SaltCacheError
+350:59:Name -> Const:str:'minions_denied' | Const:str:'' | U
+350:68:Name -> ExcInst:builtins.OSError
+352:20:Name -> U
+354:15:Name -> U
+357:22:Call -> Inst:pathlib.Path
+357:22:Name -> Class:pathlib.Path
+357:27:Name -> U
+357:37:Name -> Const:str:'minions_denied' | Const:str:'' | U
+357:43:Name -> U
+360:16:Name -> U
+360:56:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+360:56:Name -> Func:salt.utils.verify.valid_id
+360:65:Name -> ERR
+360:75:Name -> U
+361:21:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+361:21:Name -> Func:salt.utils.verify.clean_path
+361:32:Name -> U
+361:42:Call -> Const:str:''
+361:42:Name -> Class:builtins.str
+361:46:Name -> Inst:pathlib.Path
+362:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+362:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+362:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+362:59:Name -> U
+365:15:Call -> U | Const:bool:False | Const:bool:False
+365:15:Attribute -> BM:pathlib.Path.is_file
+365:15:Name -> Inst:pathlib.Path
+365:41:Call -> U | Const:bool:False | Const:bool:False
+365:41:Attribute -> BM:pathlib.Path.is_symlink
+365:41:Name -> Inst:pathlib.Path
+366:16:Call -> ERR
+366:16:Attribute -> BM:builtins.list.append
+366:16:Name -> List:0
+366:27:Name -> U
+367:11:Name -> List:0
+379:7:Name -> U
+380:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+380:14:Name -> Class:salt.exceptions.SaltCacheError
+380:51:Name -> U
+384:7:Name -> U
+392:31:Call -> DictItems
+392:31:Attribute -> BM:builtins.dict.items
+392:31:Name -> Dict:3
+393:23:Call -> U
+393:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+393:23:Attribute -> Module:posixpath | Module:ntpath
+393:23:Name -> Module:os
+393:36:Name -> U
+393:46:Name -> Const:str:'minions' | Const:str:'minions_pre' | Const:str:'minions_rejected'
+394:19:Call -> Const:bool:False | U
+394:19:Attribute -> Func:genericpath.isdir | U
+394:19:Attribute -> Module:posixpath | Module:ntpath
+394:19:Name -> Module:os
+394:33:Name -> U
+398:21:Call -> ERR
+398:21:Attribute -> Func:posix.scandir
+398:21:Name -> Module:os
+398:32:Name -> U
+399:33:Name -> U
+400:31:Call -> U
+400:31:Attribute -> U
+400:31:Name -> U
+400:50:Call -> U
+400:50:Attribute -> U
+400:50:Name -> U
+402:27:Call -> U
+402:27:Attribute -> U
+402:27:Attribute -> U
+402:27:Name -> U
+404:31:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+404:31:Name -> Func:salt.utils.verify.valid_id
+404:40:Name -> ERR
+404:50:Attribute -> U
+404:50:Name -> U
+406:31:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+406:31:Name -> Func:salt.utils.verify.clean_path
+406:42:Name -> U
+406:52:Attribute -> U
+406:52:Name -> U
+409:27:Name -> Const:bool:False | U
+413:37:Call -> U
+413:37:Attribute -> Func:salt.utils.files.fopen
+413:37:Attribute -> Module:salt.utils.files
+413:37:Attribute -> Module:salt.utils
+413:37:Name -> Module:salt
+413:60:Attribute -> U
+413:60:Name -> U
+414:46:Call -> U
+414:46:Attribute -> U
+414:46:Name -> U
+415:32:Name -> Dict:0
+415:36:Attribute -> U
+415:36:Name -> U
+415:60:Name -> Const:str:'accepted' | Const:str:'pending' | Const:str:'rejected'
+415:74:Name -> U
+416:35:Name -> Class:builtins.OSError
+417:32:Call -> Const:NoneType:None | U | Const:NoneType:None
+417:32:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+417:32:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+418:69:Attribute -> U
+418:69:Name -> U
+418:81:Name -> ExcInst:builtins.OSError
+422:28:Name -> Dict:0
+422:32:Attribute -> U
+422:32:Name -> U
+422:56:Name -> Const:str:'accepted' | Const:str:'pending' | Const:str:'rejected'
+423:19:Name -> Class:builtins.OSError
+424:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+424:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+424:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+424:61:Name -> U
+424:71:Name -> ExcInst:builtins.OSError
+426:9:Name -> U
+428:19:Call -> U
+428:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+428:19:Attribute -> Module:posixpath | Module:ntpath
+428:19:Name -> Module:os
+428:32:Name -> U
+429:11:Call -> Const:bool:False | U
+429:11:Attribute -> Func:genericpath.isdir | U
+429:11:Attribute -> Module:posixpath | Module:ntpath
+429:11:Name -> Module:os
+429:25:Name -> U
+431:21:Call -> ERR
+431:21:Attribute -> Func:posix.scandir
+431:21:Name -> Module:os
+431:32:Name -> U
+432:33:Name -> U
+433:31:Call -> U
+433:31:Attribute -> U
+433:31:Name -> U
+433:50:Call -> U
+433:50:Attribute -> U
+433:50:Name -> U
+435:31:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+435:31:Name -> Func:salt.utils.verify.valid_id
+435:40:Name -> ERR
+435:50:Attribute -> U
+435:50:Name -> U
+437:31:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+437:31:Name -> Func:salt.utils.verify.clean_path
+437:42:Name -> U
+437:52:Attribute -> U
+437:52:Name -> U
+441:33:Call -> U
+441:33:Attribute -> Func:salt.utils.files.fopen
+441:33:Attribute -> Module:salt.utils.files
+441:33:Attribute -> Module:salt.utils
+441:33:Name -> Module:salt
+441:56:Attribute -> U
+441:56:Name -> U
+442:32:Name -> Dict:0
+442:36:Attribute -> U
+442:36:Name -> U
+442:50:Call -> U
+442:50:Attribute -> U
+442:50:Name -> U
+443:31:Name -> Class:builtins.OSError
+444:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+444:28:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+444:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+445:67:Attribute -> U
+445:67:Name -> U
+445:79:Name -> ExcInst:builtins.OSError
+447:19:Name -> Class:builtins.OSError
+448:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+448:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+448:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+448:70:Name -> ExcInst:builtins.OSError
+450:11:Name -> Dict:0
+458:7:Name -> U
+458:47:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+458:47:Name -> Func:salt.utils.verify.valid_id
+458:56:Name -> ERR
+458:66:Name -> U
+459:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+459:14:Name -> Class:salt.exceptions.SaltCacheError
+459:36:Name -> U
+461:7:Name -> U
+462:17:Name -> U
+462:34:Name -> Dict:4
+462:50:Name -> U
+463:9:Name -> U
+465:9:Name -> U
+466:11:Name -> U
+466:18:Name -> List:0 | List:7
+467:23:Name -> ERR
+470:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+470:14:Name -> Class:salt.exceptions.SaltCacheError
+470:51:Name -> U
+472:16:Name -> U | List:1 | List:1
+473:18:Call -> Inst:pathlib.Path
+473:18:Name -> Class:pathlib.Path
+473:23:Name -> U
+473:33:Name -> Const:str:'minions_denied' | Const:str:''
+473:39:Name -> U
+475:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+475:15:Name -> Func:salt.utils.verify.clean_path
+475:26:Name -> U
+475:36:Call -> Const:str:''
+475:36:Name -> Class:builtins.str
+475:40:Name -> Inst:pathlib.Path
+476:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+476:18:Name -> Class:salt.exceptions.SaltCacheError
+476:40:Name -> U
+478:11:Call -> U | Const:bool:False | Const:bool:False
+478:11:Attribute -> BM:pathlib.Path.is_file
+478:11:Name -> Inst:pathlib.Path
+478:37:Call -> U | Const:bool:False | Const:bool:False
+478:37:Attribute -> BM:pathlib.Path.is_symlink
+478:37:Name -> Inst:pathlib.Path

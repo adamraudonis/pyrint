@@ -1,0 +1,81 @@
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'tests.integration.states.test_host' | Const:str:'__main__'
+20:1:Attribute -> U
+20:1:Attribute -> U
+20:1:Name -> U
+21:15:Name -> Class:tests.support.case.ModuleCase
+21:27:Name -> Class:tests.support.mixins.SaltReturnAssertsMixin
+26:5:Name -> Class:builtins.classmethod
+28:8:Name -> Class:tests.integration.states.test_host.HostTest
+28:25:Call -> U
+28:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+28:25:Attribute -> Module:posixpath | Module:ntpath
+28:25:Name -> Module:os
+28:38:Attribute -> U
+28:38:Name -> Inst:tests.support.runtests.RuntimeVars
+34:11:Call -> Const:bool:False | U
+34:11:Attribute -> Func:genericpath.isfile | U
+34:11:Attribute -> Module:posixpath | Module:ntpath
+34:11:Name -> Module:os
+34:26:Attribute -> U
+34:26:Name -> Inst:tests.integration.states.test_host.HostTest
+35:12:Call -> ERR
+35:12:Attribute -> Func:posix.remove
+35:12:Name -> Module:os
+35:22:Attribute -> U
+35:22:Name -> Inst:tests.integration.states.test_host.HostTest
+38:8:Call -> U
+38:8:Attribute -> Func:shutil.copyfile
+38:8:Name -> Module:shutil
+38:24:Call -> U
+38:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+38:24:Attribute -> Module:posixpath | Module:ntpath
+38:24:Name -> Module:os
+38:37:Attribute -> U
+38:37:Name -> Inst:tests.support.runtests.RuntimeVars
+38:67:Attribute -> U
+38:67:Name -> Inst:tests.integration.states.test_host.HostTest
+39:8:Call -> Const:NoneType:None
+39:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+39:8:Name -> Inst:tests.integration.states.test_host.HostTest
+39:24:Attribute -> BM:tests.integration.states.test_host.HostTest.__clear_hosts
+39:24:Name -> Inst:tests.integration.states.test_host.HostTest
+40:8:Call -> U
+40:8:Attribute -> BM:unittest.case.TestCase.setUp
+40:8:Call -> Super
+40:8:Name -> Class:builtins.super
+42:5:Attribute -> U
+42:5:Attribute -> U
+42:5:Name -> U
+49:14:Call -> U
+49:14:Attribute -> BM:tests.support.case.ModuleCase.run_state
+49:14:Name -> Inst:tests.integration.states.test_host.HostTest
+49:50:Name -> Const:str:'spam.bacon'
+49:59:Name -> Const:str:'10.10.10.10'
+50:8:Call -> Const:NoneType:None
+50:8:Attribute -> BM:tests.support.mixins.SaltReturnAssertsMixin.assertSaltTrueReturn
+50:8:Name -> Inst:tests.integration.states.test_host.HostTest
+50:34:Name -> U
+51:13:Call -> U
+51:13:Attribute -> Func:salt.utils.files.fopen
+51:13:Attribute -> Module:salt.utils.files
+51:13:Attribute -> Module:salt.utils
+51:13:Name -> Module:salt
+51:36:Attribute -> U
+51:36:Name -> Inst:tests.integration.states.test_host.HostTest
+52:21:Call -> U
+52:21:Attribute -> Func:salt.utils.stringutils.to_unicode
+52:21:Attribute -> Module:salt.utils.stringutils
+52:21:Attribute -> Module:salt.utils
+52:21:Name -> Module:salt
+52:55:Call -> U
+52:55:Attribute -> U
+52:55:Name -> U
+53:12:Call -> Const:NoneType:None
+53:12:Attribute -> BM:unittest.case.TestCase.assertIn
+53:12:Name -> Inst:tests.integration.states.test_host.HostTest
+53:29:Name -> Const:str:'10.10.10.10'
+53:37:Name -> Const:str:'spam.bacon'
+53:45:Name -> U

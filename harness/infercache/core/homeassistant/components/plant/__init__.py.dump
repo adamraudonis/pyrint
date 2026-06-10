@@ -1,0 +1,632 @@
+73:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+73:10:Attribute -> Func:logging.getLogger
+73:10:Name -> Module:logging
+73:28:Name -> Const:str:'homeassistant.components.plant' | Const:str:'__main__'
+75:28:Name -> Const:str:'battery'
+76:23:Name -> Const:str:'moisture'
+77:27:Name -> Const:str:'conductivity'
+78:26:Name -> Const:str:'temperature'
+79:25:Name -> Const:str:'brightness'
+82:17:Call -> U
+82:17:Attribute -> U
+82:17:Name -> U
+84:8:Call -> U
+84:8:Attribute -> U
+84:8:Name -> U
+84:21:Name -> Const:str:'battery'
+84:49:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+84:49:Name -> Module:homeassistant.helpers.config_validation
+85:8:Call -> U
+85:8:Attribute -> U
+85:8:Name -> U
+85:21:Name -> Const:str:'moisture'
+85:44:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+85:44:Name -> Module:homeassistant.helpers.config_validation
+86:8:Call -> U
+86:8:Attribute -> U
+86:8:Name -> U
+86:21:Name -> Const:str:'conductivity'
+86:48:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+86:48:Name -> Module:homeassistant.helpers.config_validation
+87:8:Call -> U
+87:8:Attribute -> U
+87:8:Name -> U
+87:21:Name -> Const:str:'temperature'
+87:47:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+87:47:Name -> Module:homeassistant.helpers.config_validation
+88:8:Call -> U
+88:8:Attribute -> U
+88:8:Name -> U
+88:21:Name -> Const:str:'brightness'
+88:46:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+88:46:Name -> Module:homeassistant.helpers.config_validation
+92:15:Call -> U
+92:15:Attribute -> U
+92:15:Name -> U
+94:8:Call -> U
+94:8:Attribute -> U
+94:8:Name -> U
+94:21:Name -> Const:str:'sensors'
+94:36:Call -> U
+94:36:Attribute -> U
+94:36:Name -> U
+94:47:Name -> U
+95:8:Call -> U
+95:8:Attribute -> U
+95:8:Name -> U
+96:12:Name -> Const:str:'min_battery'
+96:44:Name -> Const:int:20
+97:11:Attribute -> U
+97:11:Name -> Module:homeassistant.helpers.config_validation
+98:8:Call -> U
+98:8:Attribute -> U
+98:8:Name -> U
+98:21:Name -> Const:str:'min_temperature'
+98:44:Call -> U
+98:44:Attribute -> U
+98:44:Name -> U
+98:55:Name -> Class:builtins.float
+99:8:Call -> U
+99:8:Attribute -> U
+99:8:Name -> U
+99:21:Name -> Const:str:'max_temperature'
+99:44:Call -> U
+99:44:Attribute -> U
+99:44:Name -> U
+99:55:Name -> Class:builtins.float
+100:8:Call -> U
+100:8:Attribute -> U
+100:8:Name -> U
+100:21:Name -> Const:str:'min_moisture'
+100:48:Name -> Const:int:20
+100:71:Attribute -> U
+100:71:Name -> Module:homeassistant.helpers.config_validation
+101:8:Call -> U
+101:8:Attribute -> U
+101:8:Name -> U
+101:21:Name -> Const:str:'max_moisture'
+101:48:Name -> Const:int:60
+101:71:Attribute -> U
+101:71:Name -> Module:homeassistant.helpers.config_validation
+102:8:Call -> U
+102:8:Attribute -> U
+102:8:Name -> U
+103:12:Name -> Const:str:'min_conductivity'
+103:43:Name -> Const:int:500
+104:11:Attribute -> U
+104:11:Name -> Module:homeassistant.helpers.config_validation
+105:8:Call -> U
+105:8:Attribute -> U
+105:8:Name -> U
+106:12:Name -> Const:str:'max_conductivity'
+106:43:Name -> Const:int:3000
+107:11:Attribute -> U
+107:11:Name -> Module:homeassistant.helpers.config_validation
+108:8:Call -> U
+108:8:Attribute -> U
+108:8:Name -> U
+108:21:Name -> Const:str:'min_brightness'
+108:43:Attribute -> U
+108:43:Name -> Module:homeassistant.helpers.config_validation
+109:8:Call -> U
+109:8:Attribute -> U
+109:8:Name -> U
+109:21:Name -> Const:str:'max_brightness'
+109:43:Attribute -> U
+109:43:Name -> Module:homeassistant.helpers.config_validation
+110:8:Call -> U
+110:8:Attribute -> U
+110:8:Name -> U
+110:21:Name -> Const:str:'check_days'
+110:46:Name -> Const:int:3
+110:67:Attribute -> U
+110:67:Name -> Module:homeassistant.helpers.config_validation
+114:16:Call -> U
+114:16:Attribute -> U
+114:16:Name -> U
+114:28:Name -> Const:str:'plant'
+114:37:Attribute -> Func:homeassistant.helpers.config_validation.string
+114:37:Name -> Module:homeassistant.helpers.config_validation
+114:48:Name -> U
+114:70:Attribute -> U
+114:70:Name -> U
+117:28:Name -> U
+117:51:Name -> Class:builtins.dict
+117:66:Name -> Class:builtins.bool
+119:16:Call -> U
+119:16:Name -> U
+119:32:Name -> Class:homeassistant.components.plant.Plant
+119:39:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+119:48:Name -> Const:str:'plant'
+119:56:Name -> U
+122:36:Call -> U
+122:36:Attribute -> U
+122:36:Name -> U
+122:43:Name -> Const:str:'plant'
+123:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+123:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+123:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+123:39:Name -> U
+124:17:Call -> Inst:homeassistant.components.plant.Plant
+124:17:Name -> Class:homeassistant.components.plant.Plant
+124:23:Name -> U
+124:35:Name -> U
+125:8:Call -> ERR
+125:8:Attribute -> BM:builtins.list.append
+125:8:Name -> List:0
+125:24:Name -> Inst:homeassistant.components.plant.Plant
+127:10:Call -> U
+127:10:Attribute -> U
+127:10:Name -> U
+127:39:Name -> List:0
+131:12:Name -> Class:homeassistant.helpers.entity.Entity
+144:8:Name -> Const:str:'battery'
+145:12:Name -> Const:str:'unit_of_measurement'
+145:38:Name -> Const:str:'%'
+146:19:Name -> Const:str:'min_battery'
+148:8:Name -> Const:str:'temperature'
+149:12:Name -> Const:str:'unit_of_measurement'
+149:38:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+149:38:Name -> Class:homeassistant.const.UnitOfTemperature
+150:19:Name -> Const:str:'min_temperature'
+151:19:Name -> Const:str:'max_temperature'
+153:8:Name -> Const:str:'moisture'
+154:12:Name -> Const:str:'unit_of_measurement'
+154:38:Name -> Const:str:'%'
+155:19:Name -> Const:str:'min_moisture'
+156:19:Name -> Const:str:'max_moisture'
+158:8:Name -> Const:str:'conductivity'
+159:12:Name -> Const:str:'unit_of_measurement'
+159:38:Attribute -> Inst:homeassistant.const.UnitOfConductivity.MICROSIEMENS_PER_CM
+159:38:Name -> Class:homeassistant.const.UnitOfConductivity
+160:19:Name -> Const:str:'min_conductivity'
+161:19:Name -> Const:str:'max_conductivity'
+163:8:Name -> Const:str:'brightness'
+164:12:Name -> Const:str:'unit_of_measurement'
+164:38:Name -> Const:str:'lx'
+165:19:Name -> Const:str:'min_brightness'
+166:19:Name -> Const:str:'max_brightness'
+172:8:Name -> Inst:homeassistant.components.plant.Plant
+172:23:Name -> U
+173:8:Name -> Inst:homeassistant.components.plant.Plant
+174:8:Name -> Inst:homeassistant.components.plant.Plant
+175:8:Name -> Inst:homeassistant.components.plant.Plant
+176:34:Call -> U
+176:34:Attribute -> U
+176:34:Name -> U
+177:12:Attribute -> Dict:0
+177:12:Name -> Inst:homeassistant.components.plant.Plant
+177:28:Name -> U
+177:41:Name -> U
+178:12:Attribute -> Dict:0
+178:12:Name -> Inst:homeassistant.components.plant.Plant
+178:29:Name -> U
+178:40:Name -> U
+179:8:Name -> Inst:homeassistant.components.plant.Plant
+180:8:Name -> Inst:homeassistant.components.plant.Plant
+180:21:Name -> U
+181:8:Name -> Inst:homeassistant.components.plant.Plant
+182:8:Name -> Inst:homeassistant.components.plant.Plant
+183:8:Name -> Inst:homeassistant.components.plant.Plant
+184:8:Name -> Inst:homeassistant.components.plant.Plant
+185:8:Name -> Inst:homeassistant.components.plant.Plant
+186:8:Name -> Inst:homeassistant.components.plant.Plant
+186:25:Name -> Const:str:'none'
+188:8:Name -> Inst:homeassistant.components.plant.Plant
+189:11:Name -> Const:str:'check_days'
+189:30:Attribute -> U
+189:30:Name -> Inst:homeassistant.components.plant.Plant
+190:12:Name -> Inst:homeassistant.components.plant.Plant
+190:36:Attribute -> U
+190:36:Name -> Inst:homeassistant.components.plant.Plant
+190:49:Name -> Const:str:'check_days'
+191:8:Name -> Inst:homeassistant.components.plant.Plant
+191:35:Call -> Inst:homeassistant.components.plant.DailyHistory
+191:35:Name -> Class:homeassistant.components.plant.DailyHistory
+191:48:Attribute -> Const:int:3 | U
+191:48:Name -> Inst:homeassistant.components.plant.Plant
+193:5:Name -> U
+194:42:Name -> U
+194:48:Name -> U
+196:8:Call -> Const:NoneType:None | Const:NoneType:None
+196:8:Attribute -> BM:homeassistant.components.plant.Plant.state_changed
+196:8:Name -> Inst:homeassistant.components.plant.Plant
+196:27:Attribute -> U
+196:27:Name -> U
+196:52:Attribute -> U
+196:52:Name -> U
+198:5:Name -> U
+199:39:Name -> Class:builtins.str
+199:55:Name -> U
+201:11:Name -> U
+203:15:Name -> Class:builtins.str
+203:21:Name -> Class:builtins.float
+204:16:Attribute -> U
+204:16:Name -> U
+205:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+205:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+205:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+205:65:Name -> U
+205:76:Name -> U
+206:11:Name -> U
+206:20:Name -> Const:str:'unknown'
+209:18:Attribute -> Dict:0
+209:18:Name -> Inst:homeassistant.components.plant.Plant
+209:34:Name -> U
+210:11:Name -> U
+210:22:Name -> Const:str:'moisture'
+211:15:Name -> U
+211:24:Name -> Const:str:'unavailable'
+212:24:Call -> Const:int:0
+212:24:Name -> Class:builtins.int
+212:28:Call -> Inst:builtins.float
+212:28:Name -> Class:builtins.float
+212:34:Name -> U
+213:12:Name -> Inst:homeassistant.components.plant.Plant
+213:29:Name -> U | Const:int:0
+214:13:Name -> U
+214:24:Name -> Const:str:'battery'
+215:15:Name -> U
+215:24:Name -> Const:str:'unavailable'
+216:24:Call -> Const:int:0
+216:24:Name -> Class:builtins.int
+216:28:Call -> Inst:builtins.float
+216:28:Name -> Class:builtins.float
+216:34:Name -> U
+217:12:Name -> Inst:homeassistant.components.plant.Plant
+217:28:Name -> U | Const:int:0
+218:13:Name -> U
+218:24:Name -> Const:str:'temperature'
+219:15:Name -> U
+219:24:Name -> Const:str:'unavailable'
+220:24:Call -> Inst:builtins.float
+220:24:Name -> Class:builtins.float
+220:30:Name -> U
+221:12:Name -> Inst:homeassistant.components.plant.Plant
+221:32:Name -> U | Inst:builtins.float
+222:13:Name -> U
+222:24:Name -> Const:str:'conductivity'
+223:15:Name -> U
+223:24:Name -> Const:str:'unavailable'
+224:24:Call -> Const:int:0
+224:24:Name -> Class:builtins.int
+224:28:Call -> Inst:builtins.float
+224:28:Name -> Class:builtins.float
+224:34:Name -> U
+225:12:Name -> Inst:homeassistant.components.plant.Plant
+225:33:Name -> U | Const:int:0
+226:13:Name -> U
+226:24:Name -> Const:str:'brightness'
+227:15:Name -> U
+227:24:Name -> Const:str:'unavailable'
+228:24:Call -> Const:int:0
+228:24:Name -> Class:builtins.int
+228:28:Call -> Inst:builtins.float
+228:28:Name -> Class:builtins.float
+228:34:Name -> U
+229:12:Name -> Inst:homeassistant.components.plant.Plant
+229:31:Name -> U | Const:int:0
+230:12:Call -> Const:NoneType:None
+230:12:Attribute -> BM:homeassistant.components.plant.DailyHistory.add_measurement
+230:12:Attribute -> Inst:homeassistant.components.plant.DailyHistory
+230:12:Name -> Inst:homeassistant.components.plant.Plant
+231:16:Attribute -> Const:NoneType:None | U | Const:int:0
+231:16:Name -> Inst:homeassistant.components.plant.Plant
+231:34:Attribute -> U
+231:34:Name -> U
+234:18:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+234:18:Name -> Class:homeassistant.exceptions.HomeAssistantError
+235:47:Name -> U
+235:60:Name -> U
+237:11:Name -> Const:str:'unit_of_measurement'
+237:39:Attribute -> U
+237:39:Name -> U
+238:12:Attribute -> Dict:0
+238:12:Name -> Inst:homeassistant.components.plant.Plant
+238:38:Name -> U
+238:49:Call -> U
+238:49:Attribute -> U
+238:49:Attribute -> U
+238:49:Name -> U
+239:16:Name -> Const:str:'unit_of_measurement'
+241:8:Call -> Const:NoneType:None
+241:8:Attribute -> BM:homeassistant.components.plant.Plant._update_state
+241:8:Name -> Inst:homeassistant.components.plant.Plant
+246:27:Call -> DictValues
+246:27:Attribute -> BM:builtins.dict.values
+246:27:Attribute -> Dict:0
+246:27:Name -> Inst:homeassistant.components.plant.Plant
+247:21:Attribute -> Dict:5
+247:21:Name -> Inst:homeassistant.components.plant.Plant
+247:35:Name -> U
+248:25:Call -> ERR
+248:25:Name -> Func:builtins.getattr
+248:33:Name -> Inst:homeassistant.components.plant.Plant
+248:43:Name -> U
+249:19:Name -> U
+249:28:Name -> Const:str:'unavailable'
+250:20:Call -> ERR
+250:20:Attribute -> BM:builtins.list.append
+250:20:Name -> List:0
+250:37:Name -> U
+252:23:Name -> U
+252:38:Name -> Const:str:'brightness'
+253:24:Call -> ERR
+253:24:Attribute -> BM:builtins.list.append
+253:24:Name -> List:0
+254:28:Call -> Const:str:'Uninferable low' | Const:NoneType:None
+254:28:Attribute -> BM:homeassistant.components.plant.Plant._check_min
+254:28:Name -> Inst:homeassistant.components.plant.Plant
+255:32:Name -> U
+255:45:Attribute -> Const:NoneType:None | U
+255:45:Attribute -> Inst:homeassistant.components.plant.DailyHistory
+255:45:Name -> Inst:homeassistant.components.plant.Plant
+255:75:Name -> U
+259:24:Call -> ERR
+259:24:Attribute -> BM:builtins.list.append
+259:24:Name -> List:0
+259:38:Call -> Const:str:'Uninferable low' | Const:NoneType:None
+259:38:Attribute -> BM:homeassistant.components.plant.Plant._check_min
+259:38:Name -> Inst:homeassistant.components.plant.Plant
+259:54:Name -> U
+259:67:Name -> U
+259:74:Name -> U
+260:20:Call -> ERR
+260:20:Attribute -> BM:builtins.list.append
+260:20:Name -> List:0
+260:34:Call -> Const:str:'Uninferable high' | Const:NoneType:None
+260:34:Attribute -> BM:homeassistant.components.plant.Plant._check_max
+260:34:Name -> Inst:homeassistant.components.plant.Plant
+260:50:Name -> U
+260:63:Name -> U
+260:70:Name -> U
+262:18:Name -> U
+262:29:Name -> List:0
+262:39:Name -> U
+264:11:Name -> U
+265:12:Name -> Inst:homeassistant.components.plant.Plant
+265:26:Name -> Const:str:'problem'
+266:12:Name -> Inst:homeassistant.components.plant.Plant
+266:29:Call -> Const:str:''
+266:29:Attribute -> BM:builtins.str.join
+266:39:Name -> U
+268:12:Name -> Inst:homeassistant.components.plant.Plant
+268:26:Name -> Const:str:'ok'
+269:12:Name -> Inst:homeassistant.components.plant.Plant
+269:29:Name -> Const:str:'none'
+270:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+270:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+270:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+271:8:Call -> Const:NoneType:None
+271:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+271:8:Name -> Inst:homeassistant.components.plant.Plant
+275:20:Name -> U
+275:31:Name -> U
+275:48:Attribute -> U
+275:48:Name -> Inst:homeassistant.components.plant.Plant
+276:24:Attribute -> U
+276:24:Name -> Inst:homeassistant.components.plant.Plant
+276:37:Name -> U
+277:15:Name -> U
+277:23:Name -> U
+278:26:Name -> U
+283:20:Name -> U
+283:31:Name -> U
+283:48:Attribute -> U
+283:48:Name -> Inst:homeassistant.components.plant.Plant
+284:24:Attribute -> U
+284:24:Name -> Inst:homeassistant.components.plant.Plant
+284:37:Name -> U
+285:15:Name -> U
+285:23:Name -> U
+286:26:Name -> U
+291:25:Attribute -> U
+291:25:Attribute -> U
+291:25:Attribute -> U | Const:NoneType:None
+291:25:Name -> Inst:homeassistant.components.plant.Plant
+293:18:Call -> U
+293:18:Attribute -> U
+293:18:Call -> U
+293:18:Name -> Func:homeassistant.helpers.recorder.get_instance
+293:31:Attribute -> U | Const:NoneType:None
+293:31:Name -> Inst:homeassistant.components.plant.Plant
+294:16:Attribute -> BM:homeassistant.components.plant.Plant._load_history_from_db
+294:16:Name -> Inst:homeassistant.components.plant.Plant
+296:12:Call -> Const:NoneType:None
+296:12:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+296:12:Name -> Inst:homeassistant.components.plant.Plant
+298:8:Call -> Func:homeassistant.helpers.event._remove_empty_listener | Partial:PartialFunction
+298:8:Name -> Func:homeassistant.helpers.event.async_track_state_change_event
+299:12:Attribute -> U | Const:NoneType:None
+299:12:Name -> Inst:homeassistant.components.plant.Plant
+299:23:Call -> List:0
+299:23:Name -> Class:builtins.list
+299:28:Attribute -> Dict:0
+299:28:Name -> Inst:homeassistant.components.plant.Plant
+299:46:Attribute -> BM:homeassistant.components.plant.Plant._state_changed_event
+299:46:Name -> Inst:homeassistant.components.plant.Plant
+302:25:Attribute -> Dict:0
+302:25:Name -> Inst:homeassistant.components.plant.Plant
+303:25:Call -> U
+303:25:Attribute -> U
+303:25:Attribute -> U
+303:25:Attribute -> U | Const:NoneType:None
+303:25:Name -> Inst:homeassistant.components.plant.Plant
+303:46:Name -> U
+304:16:Call -> Const:NoneType:None | Const:NoneType:None
+304:16:Attribute -> BM:homeassistant.components.plant.Plant.state_changed
+304:16:Name -> Inst:homeassistant.components.plant.Plant
+304:35:Name -> U
+304:46:Name -> U
+312:21:Call -> U
+312:21:Attribute -> U
+312:21:Name -> U
+312:40:Call -> Inst:_pydatetime.timedelta
+312:40:Name -> Class:_pydatetime.timedelta
+312:55:Attribute -> Const:int:3 | U
+312:55:Name -> Inst:homeassistant.components.plant.Plant
+313:20:Call -> ERR
+313:20:Attribute -> BM:builtins.dict.get
+313:20:Attribute -> Dict:0
+313:20:Name -> Inst:homeassistant.components.plant.Plant
+313:41:Name -> Const:str:'brightness'
+314:11:Name -> U
+315:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+315:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+315:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+320:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+320:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+320:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+320:70:Attribute -> U
+320:70:Name -> Inst:homeassistant.components.plant.Plant
+321:26:Call -> U
+321:26:Attribute -> U
+321:26:Name -> U
+322:23:Call -> Dict:0 | U
+322:23:Attribute -> Func:homeassistant.components.recorder.history.state_changes_during_period
+322:23:Name -> Module:homeassistant.components.recorder.history
+323:12:Attribute -> U | Const:NoneType:None
+323:12:Name -> Inst:homeassistant.components.plant.Plant
+324:12:Name -> U
+325:22:Name -> U
+328:21:Call -> U
+328:21:Attribute -> BM:builtins.dict.get | U
+328:21:Name -> Dict:0 | U
+328:38:Name -> U
+331:17:Call -> Inst:contextlib.suppress
+331:17:Name -> Class:contextlib.suppress
+331:26:Name -> Class:builtins.ValueError
+332:16:Call -> Const:NoneType:None
+332:16:Attribute -> BM:homeassistant.components.plant.DailyHistory.add_measurement
+332:16:Attribute -> Inst:homeassistant.components.plant.DailyHistory
+332:16:Name -> Inst:homeassistant.components.plant.Plant
+333:20:Call -> Inst:builtins.int
+333:20:Name -> Class:builtins.int
+333:24:Attribute -> U
+333:24:Name -> U
+333:38:Attribute -> U
+333:38:Name -> U
+336:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+336:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+336:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+338:5:Name -> Class:builtins.property
+341:15:Attribute -> U
+341:15:Name -> Inst:homeassistant.components.plant.Plant
+343:5:Name -> Class:builtins.property
+346:15:Attribute -> Const:NoneType:None | Const:str:'problem' | Const:str:'ok'
+346:15:Name -> Inst:homeassistant.components.plant.Plant
+348:5:Name -> Class:builtins.property
+349:40:Name -> Class:builtins.dict
+349:45:Name -> Class:builtins.str
+349:50:Name -> Class:typing.Any
+356:12:Name -> Const:str:'problem'
+356:26:Attribute -> Const:str:'none' | Const:str:''
+356:26:Name -> Inst:homeassistant.components.plant.Plant
+357:12:Name -> Const:str:'sensors'
+357:26:Attribute -> Dict:0
+357:26:Name -> Inst:homeassistant.components.plant.Plant
+358:12:Name -> Const:str:'unit_of_measurement_dict'
+358:47:Attribute -> Dict:0
+358:47:Name -> Inst:homeassistant.components.plant.Plant
+361:23:Call -> DictValues
+361:23:Attribute -> BM:builtins.dict.values
+361:23:Attribute -> Dict:0
+361:23:Name -> Inst:homeassistant.components.plant.Plant
+362:12:Name -> Dict:3
+362:19:Name -> U
+362:30:Call -> ERR
+362:30:Name -> Func:builtins.getattr
+362:38:Name -> Inst:homeassistant.components.plant.Plant
+362:48:Name -> U
+364:11:Attribute -> Const:NoneType:None | U
+364:11:Attribute -> Inst:homeassistant.components.plant.DailyHistory
+364:11:Name -> Inst:homeassistant.components.plant.Plant
+365:12:Name -> Dict:3
+365:19:Name -> Const:str:'max_brightness'
+365:50:Attribute -> U
+365:50:Attribute -> Inst:homeassistant.components.plant.DailyHistory
+365:50:Name -> Inst:homeassistant.components.plant.Plant
+367:15:Name -> Dict:3
+381:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+381:26:Name -> U
+382:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+383:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+384:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+388:14:Call -> Inst:_pydatetime.date | U
+388:14:Attribute -> BM:_pydatetime.datetime.date | U
+388:15:Name -> Const:NoneType:None | U
+388:28:Call -> Inst:_pydatetime.datetime | U
+388:28:Attribute -> BM:_pydatetime.datetime.now
+388:28:Name -> Class:_pydatetime.datetime
+389:15:Call -> ERR
+389:15:Name -> Func:builtins.isinstance
+389:26:Name -> U
+389:34:Name -> Class:builtins.int
+389:39:Name -> Class:builtins.float
+391:11:Attribute -> Const:NoneType:None | Inst:collections.deque
+391:11:Name -> Inst:homeassistant.components.plant.DailyHistory
+392:12:Name -> Inst:homeassistant.components.plant.DailyHistory
+392:25:Call -> Inst:collections.deque
+392:25:Name -> Class:collections.deque
+393:12:Call -> Const:NoneType:None
+393:12:Attribute -> BM:homeassistant.components.plant.DailyHistory._add_day
+393:12:Name -> Inst:homeassistant.components.plant.DailyHistory
+393:26:Name -> Inst:_pydatetime.date | U
+393:31:Name -> U
+395:26:Attribute -> Inst:collections.deque
+395:26:Name -> Inst:homeassistant.components.plant.DailyHistory
+396:15:Name -> Inst:_pydatetime.date | U
+396:22:Name -> U
+397:16:Attribute -> Dict:0
+397:16:Name -> Inst:homeassistant.components.plant.DailyHistory
+397:31:Name -> Inst:_pydatetime.date | U
+397:38:Call -> ERR
+397:38:Name -> Func:builtins.max
+397:42:Name -> U
+397:49:Attribute -> Dict:0
+397:49:Name -> Inst:homeassistant.components.plant.DailyHistory
+397:64:Name -> Inst:_pydatetime.date | U
+398:17:Name -> Inst:_pydatetime.date | U
+398:23:Name -> U
+399:16:Call -> Const:NoneType:None
+399:16:Attribute -> BM:homeassistant.components.plant.DailyHistory._add_day
+399:16:Name -> Inst:homeassistant.components.plant.DailyHistory
+399:30:Name -> Inst:_pydatetime.date | U
+399:35:Name -> U
+401:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+401:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+401:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+403:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+403:19:Call -> ERR
+403:19:Name -> Func:builtins.max
+403:23:Call -> DictValues
+403:23:Attribute -> BM:builtins.dict.values
+403:23:Attribute -> Dict:0
+403:23:Name -> Inst:homeassistant.components.plant.DailyHistory
+410:11:Call -> ERR
+410:11:Name -> Func:builtins.len
+410:15:Attribute -> Const:NoneType:None | Inst:collections.deque
+410:15:Name -> Inst:homeassistant.components.plant.DailyHistory
+410:30:Attribute -> U
+410:30:Name -> Inst:homeassistant.components.plant.DailyHistory
+411:21:Call -> U
+411:21:Attribute -> BM:collections.deque.popleft
+411:21:Attribute -> Const:NoneType:None | Inst:collections.deque
+411:21:Name -> Inst:homeassistant.components.plant.DailyHistory
+412:16:Attribute -> Dict:0
+412:16:Name -> Inst:homeassistant.components.plant.DailyHistory
+412:31:Name -> U
+413:8:Call -> U
+413:8:Attribute -> BM:collections.deque.append
+413:8:Attribute -> Const:NoneType:None | Inst:collections.deque
+413:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+413:26:Name -> U
+414:15:Call -> ERR
+414:15:Name -> Func:builtins.isinstance
+414:26:Name -> U
+414:34:Name -> Class:builtins.int
+414:39:Name -> Class:builtins.float
+416:8:Attribute -> Dict:0
+416:8:Name -> Inst:homeassistant.components.plant.DailyHistory
+416:23:Name -> U
+416:30:Name -> U

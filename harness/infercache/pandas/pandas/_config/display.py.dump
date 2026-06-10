@@ -1,0 +1,42 @@
+14:22:Name -> Class:builtins.str
+17:33:Name -> Class:builtins.str
+26:19:Attribute -> Class:_io.TextIOWrapper.encoding | U | Class:_io.StringIO.encoding
+26:19:Attribute -> Inst:_io.TextIOWrapper | U | Inst:doctest._SpoofOut
+26:19:Name -> Module:sys
+26:42:Attribute -> Class:_io.TextIOWrapper.encoding | U
+26:42:Attribute -> Inst:_io.TextIOWrapper | U | Const:NoneType:None
+26:42:Name -> Module:sys
+27:12:Name -> Class:builtins.AttributeError
+27:28:Name -> Class:builtins.OSError
+31:11:Name -> Const:NoneType:None | Class:_io.TextIOWrapper.encoding | U | Class:_io.StringIO.encoding
+31:34:Call -> U
+31:34:Attribute -> U
+31:34:Name -> Const:NoneType:None | Class:_io.TextIOWrapper.encoding | U | Class:_io.StringIO.encoding
+33:23:Call -> Const:str:'utf-8' | Const:str:'utf-8' | U | Const:str:'iso-8859-15' | Const:str:'utf-8' | Const:str:'utf-8'
+33:23:Attribute -> Func:locale.getpreferredencoding | Func:locale.getpreferredencoding
+33:23:Name -> Module:locale
+34:15:Attribute -> U | Class:builtins.ValueError
+34:15:Name -> Module:locale
+41:11:Name -> Const:NoneType:None | Class:_io.TextIOWrapper.encoding | U | Class:_io.StringIO.encoding | Const:str:'utf-8' | Const:str:'utf-8' | Const:str:'iso-8859-15' | Const:str:'utf-8' | Const:str:'utf-8'
+41:34:Call -> U | Const:str:''
+41:34:Attribute -> U | BM:builtins.str.lower | BM:builtins.str.lower | BM:builtins.str.lower | BM:builtins.str.lower | BM:builtins.str.lower
+41:34:Name -> Const:NoneType:None | Class:_io.TextIOWrapper.encoding | U | Class:_io.StringIO.encoding | Const:str:'utf-8' | Const:str:'utf-8' | Const:str:'iso-8859-15' | Const:str:'utf-8' | Const:str:'utf-8'
+42:19:Call -> ERR
+42:19:Attribute -> Func:sys.getdefaultencoding
+42:19:Name -> Module:sys
+46:11:Name -> Const:NoneType:None | U
+47:31:Call -> ERR
+47:31:Attribute -> Func:sys.getdefaultencoding
+47:31:Name -> Module:sys
+49:11:Name -> Const:NoneType:None | Class:_io.TextIOWrapper.encoding | U | Class:_io.StringIO.encoding | Const:str:'utf-8' | Const:str:'utf-8' | Const:str:'iso-8859-15' | Const:str:'utf-8' | Const:str:'utf-8'
+59:5:Call -> Gen:pandas._config.config.config_prefix
+59:5:Attribute -> Func:pandas._config.config.config_prefix
+59:5:Name -> Module:pandas._config.config
+60:4:Call -> Const:NoneType:None | U
+60:4:Attribute -> Func:pandas._config.config.register_option | Func:pandas._config.config.config_prefix.wrap.inner | U
+60:4:Name -> Module:pandas._config.config
+61:20:Call -> Const:NoneType:None | U
+61:20:Name -> Func:pandas._config.display.detect_console_encoding
+61:47:Name -> Const:str:'\n: str/unicode\n    Defaults to the de
+61:74:Attribute -> Func:pandas._config.config.is_instance_factory.inner
+61:74:Name -> Module:pandas._config.config

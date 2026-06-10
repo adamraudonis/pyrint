@@ -1,0 +1,728 @@
+31:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+31:6:Attribute -> Func:logging.getLogger
+31:6:Name -> Module:logging
+31:24:Name -> Const:str:'salt.modules.mac_brew_pkg' | Const:str:'__main__'
+41:7:Name -> ERR
+43:11:Call -> U | Const:NoneType:None
+43:11:Name -> Func:salt.modules.mac_brew_pkg._homebrew_bin
+45:11:Name -> Const:str:'pkg'
+52:11:Call -> U
+52:11:Attribute -> U
+52:11:Call -> U
+52:11:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+59:11:Call -> U
+59:11:Attribute -> U
+59:11:Call -> U
+59:11:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+67:8:Call -> U
+67:8:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+67:26:Name -> U
+68:11:Name -> Class:salt.exceptions.CommandExecutionError
+69:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+69:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+69:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+69:40:Name -> U
+80:8:Call -> U
+80:8:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+80:28:Name -> U
+81:11:Name -> Class:salt.exceptions.CommandExecutionError
+82:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+82:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+82:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+82:42:Name -> U
+93:7:Name -> U
+93:14:Call -> U
+93:14:Name -> Func:salt.modules.mac_brew_pkg._list_taps
+97:8:Call -> U
+97:8:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+97:26:Name -> U
+98:11:Name -> Class:salt.exceptions.CommandExecutionError
+99:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+99:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+99:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+99:40:Name -> U
+110:20:Call -> U | Const:NoneType:None
+110:20:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+110:20:Attribute -> Dict:43 | Inst:os._Environ
+110:20:Name -> Module:os
+114:23:Name -> U | Const:NoneType:None
+116:11:Name -> Const:str:'/opt/homebrew/bin'
+116:32:Call -> U
+116:32:Attribute -> U | BM:builtins.str.split
+116:32:Name -> U | Const:str:''
+116:51:Attribute -> Const:str:':' | Const:str:';'
+116:51:Attribute -> Module:posixpath | Module:ntpath
+116:51:Name -> Module:os
+117:28:Call -> Const:str:''
+117:28:Attribute -> BM:builtins.str.join | BM:builtins.str.join
+117:28:Attribute -> Const:str:':' | Const:str:';'
+117:28:Attribute -> Module:posixpath | Module:ntpath
+117:28:Name -> Module:os
+117:50:Name -> U | Const:str:''
+117:64:Name -> Const:str:'/opt/homebrew/bin'
+118:12:Attribute -> Dict:43 | Inst:os._Environ
+118:12:Name -> Module:os
+118:33:Call -> Const:str:''
+118:33:Attribute -> BM:builtins.str.lstrip
+118:33:Name -> Const:str:''
+118:54:Attribute -> Const:str:':' | Const:str:';'
+118:54:Attribute -> Module:posixpath | Module:ntpath
+118:54:Name -> Module:os
+121:15:Call -> Const:NoneType:None | Const:str:'brew' | U
+121:15:Attribute -> Func:salt.utils.path.which
+121:15:Attribute -> Module:salt.utils.path
+121:15:Attribute -> Module:salt.utils
+121:15:Name -> Module:salt
+124:11:Name -> U | Const:NoneType:None
+125:16:Attribute -> Dict:43 | Inst:os._Environ
+125:16:Name -> Module:os
+127:12:Attribute -> Dict:43 | Inst:os._Environ
+127:12:Name -> Module:os
+127:33:Name -> U
+129:11:Name -> Const:NoneType:None | Const:str:'brew' | U
+136:10:Call -> U | Const:NoneType:None
+136:10:Name -> Func:salt.modules.mac_brew_pkg.homebrew_prefix
+137:7:Name -> U | Const:NoneType:None
+140:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+140:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+140:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+142:11:Name -> U | Const:NoneType:None
+149:16:Call -> U | Const:NoneType:None
+149:16:Name -> Func:salt.modules.mac_brew_pkg._homebrew_bin
+151:11:Call -> ERR
+151:11:Name -> ERR
+151:37:Name -> U | Const:NoneType:None
+152:20:Name -> U
+152:28:Name -> ERR
+152:12:Name -> U
+154:7:Name -> U | Const:NoneType:None
+155:36:Name -> U
+156:11:Name -> List:0 | List:1
+156:19:Name -> U | Const:NoneType:None
+156:32:Call -> List:0
+156:32:Name -> Class:builtins.list
+156:37:Name -> Tuple:0
+157:11:Call -> Const:str:''
+157:11:Attribute -> BM:builtins.str.join
+157:20:Name -> U
+160:13:Call -> ERR
+160:13:Name -> ERR
+161:12:Name -> Const:str:''
+162:14:Name -> Const:NoneType:None
+166:7:Name -> Const:bool:True | U
+166:20:Name -> U
+167:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+167:14:Name -> Class:salt.exceptions.CommandExecutionError
+167:75:Name -> U
+168:11:Name -> U
+175:7:Name -> U
+176:15:Name -> ERR
+178:14:Call -> U
+178:14:Attribute -> Func:copy.deepcopy
+178:14:Name -> Module:copy
+178:28:Name -> ERR
+179:8:Call -> ERR
+179:8:Name -> ERR
+179:43:Name -> U
+180:15:Name -> U
+196:7:Name -> Const:str:'HOMEBREW_PREFIX'
+196:30:Attribute -> Dict:43 | Inst:os._Environ
+196:30:Name -> Module:os
+197:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+197:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+197:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+197:62:Name -> Const:str:'HOMEBREW_PREFIX'
+198:15:Attribute -> Dict:43 | Inst:os._Environ
+198:15:Name -> Module:os
+198:26:Name -> Const:str:'HOMEBREW_PREFIX'
+202:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+202:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+202:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+204:15:Call -> Const:NoneType:None | Const:str:'brew' | U
+204:15:Name -> Func:salt.modules.mac_brew_pkg._homebrew_os_bin
+205:11:Name -> Const:NoneType:None | Const:str:'brew' | U
+210:20:Call -> U
+210:20:Attribute -> Func:salt.modules.file.get_user
+210:20:Attribute -> Module:salt.modules.file
+210:20:Attribute -> Module:salt.modules
+210:20:Name -> Module:salt
+210:47:Name -> Const:str:'brew' | U
+211:18:Call -> U
+211:18:Attribute -> Func:salt.modules.cmdmod.run
+211:18:Attribute -> Module:salt.modules.cmdmod
+211:18:Attribute -> Module:salt.modules
+211:18:Name -> Module:salt
+212:39:Name -> U
+215:19:Name -> U
+216:11:Name -> Class:salt.exceptions.CommandExecutionError
+217:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+217:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+217:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+218:84:Name -> ExcInst:salt.exceptions.CommandExecutionError
+236:23:Call -> U | Const:bool:False | Const:bool:False
+236:23:Attribute -> Func:salt.utils.data.is_true
+236:23:Attribute -> Module:salt.utils.data
+236:23:Attribute -> Module:salt.utils
+236:23:Name -> Module:salt
+236:47:Name -> Const:bool:False | U
+238:7:Call -> ERR
+238:7:Name -> Func:builtins.any
+239:9:Call -> U | Const:bool:False
+239:9:Attribute -> Func:salt.utils.data.is_true
+239:9:Attribute -> Module:salt.utils.data
+239:9:Attribute -> Module:salt.utils
+239:9:Name -> Module:salt
+239:33:Call -> ERR
+239:33:Attribute -> BM:builtins.dict.get
+239:33:Name -> Dict:0
+239:44:Name -> Const:str:'removed' | Const:str:'purge_desired'
+243:26:Name -> ERR
+243:42:Call -> ERR
+243:42:Attribute -> BM:builtins.dict.get
+243:42:Name -> Dict:0
+244:15:Call -> U
+244:15:Name -> Func:salt.modules.mac_brew_pkg._list_pkgs_from_context
+244:39:Name -> U | Const:bool:False | Const:bool:False
+247:19:Call -> U
+247:19:Attribute -> Func:salt.utils.json.loads
+247:19:Attribute -> Module:salt.utils.json
+247:19:Attribute -> Module:salt.utils
+247:19:Name -> Module:salt
+248:8:Call -> U
+248:8:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+251:19:Name -> U
+254:24:Name -> U
+254:46:Name -> U
+257:20:Name -> U
+257:42:Name -> U
+257:59:Name -> U
+260:25:Name -> U
+260:28:Name -> U
+260:40:Name -> U
+260:59:Name -> U
+262:37:Name -> U
+263:12:Call -> ERR
+263:12:Name -> ERR
+263:45:Name -> Dict:0
+263:50:Name -> U
+263:60:Name -> U
+265:19:Name -> U
+266:22:Name -> U
+267:11:Name -> U
+269:21:Name -> U
+269:44:Name -> U
+270:18:Call -> U
+270:18:Attribute -> U
+270:18:Name -> U
+274:15:Name -> U
+277:8:Call -> ERR
+277:8:Attribute -> BM:builtins.set.add
+277:8:Name -> Set:2
+277:22:Call -> Const:str:''
+277:22:Attribute -> BM:builtins.str.join
+277:32:Name -> U | Const:str:'homebrew/cask'
+277:41:Name -> U
+278:25:Name -> U
+278:40:Name -> Set:2
+278:53:Name -> U
+279:12:Call -> ERR
+279:12:Name -> ERR
+279:45:Name -> Dict:0
+279:50:Name -> U
+279:60:Name -> U | Const:str:''
+281:4:Call -> ERR
+281:4:Name -> ERR
+281:42:Name -> Dict:0
+282:4:Name -> ERR
+282:35:Call -> U | Dict:0
+282:35:Attribute -> Func:copy.deepcopy
+282:35:Name -> Module:copy
+282:49:Name -> Dict:0
+283:11:Name -> U | Const:bool:False | Const:bool:False
+284:8:Call -> ERR
+284:8:Name -> ERR
+284:43:Name -> Dict:0
+285:11:Name -> Dict:0
+301:11:Call -> ERR
+301:11:Name -> ERR
+301:45:Name -> Tuple:0
+301:54:Name -> Dict:0
+326:14:Call -> U | Const:bool:False
+326:14:Attribute -> Func:salt.utils.data.is_true
+326:14:Attribute -> Module:salt.utils.data
+326:14:Attribute -> Module:salt.utils
+326:14:Name -> Module:salt
+326:38:Call -> ERR
+326:38:Attribute -> BM:builtins.dict.pop
+326:38:Name -> Dict:0
+327:7:Name -> U | Const:bool:False
+328:8:Call -> Const:bool:False | Const:bool:True
+328:8:Name -> Func:salt.modules.mac_brew_pkg.refresh_db
+331:25:Call -> U
+331:25:Attribute -> U
+331:25:Name -> U
+335:16:Name -> U
+335:50:Name -> U
+337:15:Name -> U
+337:50:Name -> U
+338:33:Name -> U
+338:47:Name -> U
+339:19:Name -> U | Const:str:'Uninferable_Uninferable'
+341:24:Call -> U
+341:24:Attribute -> U
+341:24:Name -> U
+343:19:Name -> U
+348:8:Name -> U
+348:13:Call -> U | Const:str:'Uninferable_Uninferable' | Const:NoneType:None
+348:13:Name -> Func:salt.modules.mac_brew_pkg.latest_version.get_version
+348:25:Name -> U
+348:46:Call -> DictItems | DictItems
+348:46:Attribute -> BM:builtins.dict.items | BM:builtins.dict.items
+348:46:Call -> Dict:0 | Dict:0
+348:46:Name -> Func:salt.modules.mac_brew_pkg._info
+348:53:Name -> Tuple:0
+348:68:Name -> Const:NoneType:None | U
+351:7:Call -> Const:int:0
+351:7:Name -> Func:builtins.len
+351:11:Name -> Tuple:0
+352:15:Call -> ERR
+352:15:Name -> Func:builtins.next
+352:20:Call -> ERR
+352:20:Name -> Func:builtins.iter
+352:25:Call -> U
+352:25:Attribute -> U
+352:25:Name -> U
+354:11:Name -> U
+358:20:Call -> Inst:builtins.function
+358:20:Attribute -> Func:salt.utils.functools.alias_function
+358:20:Attribute -> Module:salt.utils.functools
+358:20:Attribute -> Module:salt.utils
+358:20:Name -> Module:salt
+359:4:Name -> Func:salt.modules.mac_brew_pkg.latest_version
+398:21:Call -> ERR
+398:21:Name -> ERR
+398:60:Name -> Const:NoneType:None | U
+398:66:Name -> Const:NoneType:None | U
+398:74:Name -> Dict:0
+399:11:Name -> Class:salt.exceptions.MinionError
+400:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+400:14:Name -> Class:salt.exceptions.CommandExecutionError
+400:36:Name -> ExcInst:salt.exceptions.MinionError
+402:10:Call -> Dict:0 | U | Dict:0
+402:10:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+403:15:Name -> U
+403:26:Name -> U
+403:40:Name -> U
+403:45:Name -> Dict:0 | U | Dict:0
+404:11:Name -> U
+408:7:Name -> Const:NoneType:None | U
+409:8:Call -> ERR
+409:8:Attribute -> BM:builtins.list.extend
+409:8:Name -> List:1
+409:19:Name -> U
+410:4:Call -> ERR
+410:4:Attribute -> BM:builtins.list.extend
+410:4:Name -> List:1
+410:15:Call -> Inst:builtins.list
+410:15:Name -> Class:builtins.list
+410:20:Name -> U
+412:10:Call -> U
+412:10:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+412:22:Name -> List:1
+413:7:Name -> U
+413:31:Name -> U
+414:18:Name -> U
+418:4:Call -> ERR
+418:4:Attribute -> ERR
+418:4:Name -> ERR
+419:10:Call -> Dict:0 | U | Dict:0
+419:10:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+420:10:Call -> Dict:0
+420:10:Attribute -> Func:salt.utils.data.compare_dicts
+420:10:Attribute -> Module:salt.utils.data
+420:10:Attribute -> Module:salt.utils
+420:10:Name -> Module:salt
+420:40:Name -> Dict:0 | U | Dict:0
+420:45:Name -> Dict:0 | U | Dict:0
+422:7:Name -> List:1 | List:0
+423:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+423:14:Name -> Class:salt.exceptions.CommandExecutionError
+425:28:Name -> List:1
+425:47:Name -> Dict:0
+428:11:Name -> Dict:0
+442:4:Call -> Const:NoneType:None
+442:4:Attribute -> Func:salt.utils.pkg.clear_rtag
+442:4:Attribute -> Module:salt.utils.pkg
+442:4:Attribute -> Module:salt.utils
+442:4:Name -> Module:salt
+442:30:Name -> ERR
+443:7:Call -> U
+443:7:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+444:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+444:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+444:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+472:7:Name -> Const:NoneType:None | U
+473:8:Call -> ERR
+473:8:Attribute -> BM:builtins.list.extend
+473:8:Name -> List:2
+473:19:Name -> U
+475:18:Call -> U
+475:18:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+475:30:Name -> List:2
+475:36:Name -> Tuple:0
+476:7:Name -> U
+477:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+477:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+477:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+477:59:Call -> Const:str:''
+477:59:Attribute -> BM:builtins.str.join
+477:68:Name -> Tuple:0
+479:13:Call -> U
+479:13:Attribute -> Func:salt.utils.json.loads
+479:13:Attribute -> Module:salt.utils.json
+479:13:Attribute -> Module:salt.utils
+479:13:Name -> Module:salt
+479:35:Name -> U
+486:16:Call -> Dict:0
+486:16:Name -> Class:builtins.dict
+487:21:Call -> DictItems
+487:21:Attribute -> BM:builtins.dict.items
+487:21:Name -> Dict:2
+488:15:Name -> U
+488:22:Name -> Const:str:'formulae' | Const:str:'casks'
+489:11:Call -> ERR
+489:11:Name -> Func:builtins.len
+489:15:Name -> U
+492:20:Name -> U
+494:23:Name -> List:3 | List:2
+495:16:Call -> ERR
+495:16:Attribute -> BM:builtins.list.append
+495:16:Name -> List:0
+495:33:Name -> U
+495:38:Name -> Const:str:'name' | Const:str:'full_name' | Const:str:'aliases' | Const:str:'token' | Const:str:'full_token'
+496:24:Call -> Set:0
+496:24:Name -> Class:builtins.set
+496:28:Call -> List:0
+496:28:Attribute -> Func:salt.utils.data.flatten
+496:28:Attribute -> Module:salt.utils.data
+496:28:Attribute -> Module:salt.utils
+496:28:Name -> Module:salt
+496:52:Name -> List:0
+498:24:Name -> Set:0
+499:19:Name -> U
+499:27:Name -> Tuple:0
+500:20:Name -> Dict:0
+500:30:Name -> U
+500:38:Name -> U
+502:11:Name -> Dict:0
+570:31:Call -> ERR
+570:31:Name -> ERR
+571:12:Name -> Const:NoneType:None | U
+571:18:Name -> Const:NoneType:None | U
+571:24:Call -> ERR
+571:24:Attribute -> BM:builtins.dict.get
+571:24:Name -> Dict:0
+573:11:Name -> Class:salt.exceptions.MinionError
+574:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+574:14:Name -> Class:salt.exceptions.CommandExecutionError
+574:36:Name -> ExcInst:salt.exceptions.MinionError
+576:11:Name -> ERR
+580:4:Call -> ERR
+580:4:Attribute -> BM:builtins.list.extend
+580:4:Name -> List:1
+580:15:Call -> Inst:builtins.list
+580:15:Name -> Class:builtins.list
+580:20:Name -> ERR
+582:10:Call -> Dict:0 | U | Dict:0
+582:10:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+585:7:Name -> Const:NoneType:None | U
+586:15:Call -> ERR
+586:15:Name -> Func:builtins.isinstance
+586:26:Name -> U
+586:32:Name -> Class:builtins.list
+589:20:Name -> U
+591:19:Name -> U | List:1
+592:12:Call -> Const:bool:True | Const:bool:False | Const:bool:True
+592:12:Name -> Func:salt.modules.mac_brew_pkg._tap
+592:17:Name -> U
+594:7:Name -> Const:NoneType:None | U
+595:8:Call -> ERR
+595:8:Attribute -> BM:builtins.list.extend
+595:8:Name -> List:1
+595:19:Name -> U
+597:10:Call -> U
+597:10:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+597:22:Name -> List:1
+598:7:Name -> U
+598:31:Name -> U
+599:18:Name -> U
+603:4:Call -> ERR
+603:4:Attribute -> ERR
+603:4:Name -> ERR
+604:10:Call -> Dict:0 | U | Dict:0
+604:10:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+605:10:Call -> Dict:0
+605:10:Attribute -> Func:salt.utils.data.compare_dicts
+605:10:Attribute -> Module:salt.utils.data
+605:10:Attribute -> Module:salt.utils
+605:10:Name -> Module:salt
+605:40:Name -> Dict:0 | U | Dict:0
+605:45:Name -> Dict:0 | U | Dict:0
+607:7:Name -> List:1 | List:0
+608:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+608:14:Name -> Class:salt.exceptions.CommandExecutionError
+610:28:Name -> List:1
+610:47:Name -> Dict:0
+613:11:Name -> Dict:0
+642:7:Name -> Const:bool:True | U
+643:8:Call -> Const:bool:False | Const:bool:True
+643:8:Name -> Func:salt.modules.mac_brew_pkg.refresh_db
+646:7:Name -> Const:NoneType:None | U
+647:8:Call -> ERR
+647:8:Attribute -> BM:builtins.list.extend
+647:8:Name -> List:2
+647:19:Name -> U
+649:10:Call -> U
+649:10:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+649:22:Name -> List:2
+653:15:Call -> U
+653:15:Attribute -> Func:salt.utils.json.loads
+653:15:Attribute -> Module:salt.utils.json
+653:15:Attribute -> Module:salt.utils
+653:15:Name -> Module:salt
+653:37:Name -> U
+654:11:Name -> Class:builtins.ValueError
+655:66:Name -> ExcInst:builtins.ValueError
+656:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+656:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+656:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+656:18:Name -> Const:str:'unable to interpret output from "brew o
+657:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+657:14:Name -> Class:salt.exceptions.CommandExecutionError
+657:36:Name -> Const:str:'unable to interpret output from "brew o
+659:15:Name -> U
+661:8:Name -> Dict:0
+661:12:Name -> U
+661:27:Name -> U
+663:7:Name -> Const:bool:False | U
+664:19:Name -> U
+666:12:Name -> Dict:0
+666:16:Name -> U
+666:31:Name -> U
+668:11:Name -> Dict:0
+681:11:Name -> U
+681:18:Call -> Dict:0
+681:18:Name -> Func:salt.modules.mac_brew_pkg.list_upgrades
+681:34:Name -> Dict:0
+710:10:Call -> Dict:0 | U | Dict:0
+710:10:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+712:7:Call -> U | Const:bool:False | Const:bool:True
+712:7:Attribute -> Func:salt.utils.data.is_true
+712:7:Attribute -> Module:salt.utils.data
+712:7:Attribute -> Module:salt.utils
+712:7:Name -> Module:salt
+712:31:Name -> Const:bool:True | U
+713:8:Call -> Const:bool:False | Const:bool:True
+713:8:Name -> Func:salt.modules.mac_brew_pkg.refresh_db
+715:13:Call -> U
+715:13:Name -> Func:salt.modules.mac_brew_pkg._call_brew
+716:4:Call -> ERR
+716:4:Attribute -> ERR
+716:4:Name -> ERR
+717:10:Call -> Dict:0 | U | Dict:0
+717:10:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+718:10:Call -> Dict:0
+718:10:Attribute -> Func:salt.utils.data.compare_dicts
+718:10:Attribute -> Module:salt.utils.data
+718:10:Attribute -> Module:salt.utils
+718:10:Name -> Module:salt
+718:40:Name -> Dict:0 | U | Dict:0
+718:45:Name -> Dict:0 | U | Dict:0
+720:7:Name -> U
+721:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+721:14:Name -> Class:salt.exceptions.CommandExecutionError
+723:29:Name -> Dict:0
+723:44:Name -> U
+726:11:Name -> Dict:0
+752:11:Call -> Dict:0 | Dict:0
+752:11:Name -> Func:salt.modules.mac_brew_pkg._info
+752:18:Name -> Tuple:0
+752:27:Name -> Dict:0
+779:11:Name -> Const:NoneType:None | U
+779:24:Name -> Const:NoneType:None | U
+779:37:Name -> Const:NoneType:None | U
+780:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+780:14:Name -> Class:salt.exceptions.SaltInvocationError
+781:7:Name -> Const:NoneType:None | U
+781:16:Name -> Const:NoneType:None | U
+782:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+782:14:Name -> Class:salt.exceptions.SaltInvocationError
+785:7:Name -> Const:NoneType:None | U
+786:8:Call -> ERR
+786:8:Attribute -> BM:builtins.list.extend
+786:8:Name -> List:0
+786:23:Name -> U
+787:9:Name -> Const:NoneType:None | U
+788:22:Name -> U
+789:12:Call -> ERR
+789:12:Attribute -> BM:builtins.list.append
+789:12:Name -> List:0
+789:27:Call -> ERR
+789:27:Name -> Func:builtins.next
+789:32:Call -> ERR
+789:32:Name -> Func:builtins.iter
+789:37:Name -> U
+791:8:Call -> ERR
+791:8:Attribute -> BM:builtins.list.append
+791:8:Name -> List:0
+791:23:Name -> Const:NoneType:None | U
+794:13:Call -> U
+794:13:Name -> Func:salt.modules.mac_brew_pkg._list_pinned
+795:16:Call -> Dict:0 | U | Dict:0
+795:16:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+796:18:Name -> List:0
+797:11:Call -> ERR
+797:11:Name -> Func:builtins.isinstance
+797:22:Name -> U
+797:30:Name -> Class:builtins.dict
+798:21:Call -> ERR
+798:21:Name -> Func:builtins.next
+798:26:Call -> ERR
+798:26:Name -> Func:builtins.iter
+798:31:Name -> U
+800:8:Name -> Dict:0
+800:12:Name -> U
+800:31:Name -> U
+802:11:Name -> U
+802:25:Name -> Dict:0 | U | Dict:0
+803:12:Name -> Dict:0
+803:16:Name -> U
+803:48:Name -> U
+804:13:Name -> U
+804:27:Name -> U
+805:25:Name -> ERR
+805:38:Name -> ERR
+806:16:Call -> U
+806:16:Attribute -> U
+806:16:Name -> Dict:0
+806:20:Name -> U
+807:16:Name -> Dict:0
+807:20:Name -> U
+807:52:Name -> U
+809:25:Call -> Const:bool:False | Const:bool:True
+809:25:Name -> Func:salt.modules.mac_brew_pkg._pin
+809:30:Name -> U
+810:19:Name -> Const:bool:False | Const:bool:True
+812:20:Call -> U
+812:20:Attribute -> U
+812:20:Name -> Dict:0
+812:24:Name -> U
+812:47:Name -> Dict:2
+813:20:Name -> Dict:0
+813:24:Name -> U
+813:56:Name -> U
+815:20:Call -> U
+815:20:Attribute -> U
+815:20:Name -> Dict:0
+815:24:Name -> U
+816:20:Name -> Dict:0
+816:24:Name -> U
+816:71:Name -> U
+818:12:Call -> U
+818:12:Attribute -> U
+818:12:Name -> Dict:0
+818:16:Name -> U
+819:12:Name -> Dict:0
+819:16:Name -> U
+819:48:Name -> U
+820:11:Name -> Dict:0
+823:6:Name -> Func:salt.modules.mac_brew_pkg.hold
+851:11:Name -> Const:NoneType:None | U
+851:24:Name -> Const:NoneType:None | U
+851:37:Name -> Const:NoneType:None | U
+852:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+852:14:Name -> Class:salt.exceptions.SaltInvocationError
+853:7:Name -> Const:NoneType:None | U
+853:16:Name -> Const:NoneType:None | U
+854:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+854:14:Name -> Class:salt.exceptions.SaltInvocationError
+857:7:Name -> Const:NoneType:None | U
+858:8:Call -> ERR
+858:8:Attribute -> BM:builtins.list.extend
+858:8:Name -> List:0
+858:23:Name -> U
+859:9:Name -> Const:NoneType:None | U
+860:22:Name -> U
+861:12:Call -> ERR
+861:12:Attribute -> BM:builtins.list.append
+861:12:Name -> List:0
+861:27:Call -> ERR
+861:27:Name -> Func:builtins.next
+861:32:Call -> ERR
+861:32:Name -> Func:builtins.iter
+861:37:Name -> U
+863:8:Call -> ERR
+863:8:Attribute -> BM:builtins.list.append
+863:8:Name -> List:0
+863:23:Name -> Const:NoneType:None | U
+866:13:Call -> U
+866:13:Name -> Func:salt.modules.mac_brew_pkg._list_pinned
+867:16:Call -> Dict:0 | U | Dict:0
+867:16:Name -> Func:salt.modules.mac_brew_pkg.list_pkgs
+868:18:Name -> List:0
+869:11:Call -> ERR
+869:11:Name -> Func:builtins.isinstance
+869:22:Name -> U
+869:30:Name -> Class:builtins.dict
+870:21:Call -> ERR
+870:21:Name -> Func:builtins.next
+870:26:Call -> ERR
+870:26:Name -> Func:builtins.iter
+870:31:Name -> U
+872:8:Name -> Dict:0
+872:12:Name -> U
+872:31:Name -> U
+874:11:Name -> U
+874:25:Name -> Dict:0 | U | Dict:0
+875:12:Name -> Dict:0
+875:16:Name -> U
+875:48:Name -> U
+876:13:Name -> U
+876:23:Name -> U
+877:25:Name -> ERR
+877:38:Name -> ERR
+878:16:Call -> U
+878:16:Attribute -> U
+878:16:Name -> Dict:0
+878:20:Name -> U
+879:16:Name -> Dict:0
+879:20:Name -> U
+879:52:Name -> U
+881:25:Call -> Const:bool:False | Const:bool:True
+881:25:Name -> Func:salt.modules.mac_brew_pkg._unpin
+881:32:Name -> U
+882:19:Name -> Const:bool:False | Const:bool:True
+884:20:Call -> U
+884:20:Attribute -> U
+884:20:Name -> Dict:0
+884:24:Name -> U
+884:47:Name -> Dict:2
+885:20:Name -> Dict:0
+885:24:Name -> U
+887:35:Name -> U
+889:20:Call -> U
+889:20:Attribute -> U
+889:20:Name -> Dict:0
+889:24:Name -> U
+890:20:Name -> Dict:0
+890:24:Name -> U
+890:73:Name -> U
+892:12:Call -> U
+892:12:Attribute -> U
+892:12:Name -> Dict:0
+892:16:Name -> U
+893:12:Name -> Dict:0
+893:16:Name -> U
+893:48:Name -> U
+894:11:Name -> Dict:0
+897:8:Name -> Func:salt.modules.mac_brew_pkg.unhold

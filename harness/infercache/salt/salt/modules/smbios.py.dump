@@ -1,0 +1,279 @@
+23:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+23:6:Attribute -> Func:logging.getLogger
+23:6:Name -> Module:logging
+23:24:Name -> Const:str:'salt.modules.smbios' | Const:str:'__main__'
+31:8:Call -> Const:bool:False
+31:8:Name -> Class:builtins.bool
+31:13:Call -> Const:NoneType:None | Const:NoneType:None | U
+31:13:Attribute -> Func:salt.utils.path.which_bin
+31:13:Attribute -> Module:salt.utils.path
+31:13:Attribute -> Module:salt.utils
+31:13:Name -> Module:salt
+78:10:Call -> U
+78:10:Attribute -> U
+78:10:Call -> U
+78:10:Name -> Func:salt.modules.smbios._dmidecoder
+78:28:Name -> U
+81:10:Call -> Const:str:''
+81:10:Attribute -> BM:builtins.str.join
+81:21:Name -> U
+81:32:Call -> U
+81:32:Attribute -> U
+81:32:Name -> U
+81:55:Call -> U
+81:55:Attribute -> U
+81:55:Name -> U
+82:7:Call -> ERR
+82:7:Attribute -> BM:builtins.str.startswith
+82:7:Name -> Const:str:''
+82:37:Name -> Const:bool:True | U
+82:51:Call -> Const:bool:False | Const:bool:True | Const:bool:False | U
+82:51:Name -> Func:salt.modules.smbios._dmi_isclean
+82:64:Name -> U
+82:72:Name -> Const:str:''
+85:11:Name -> Const:str:'' | Const:NoneType:None
+158:7:Name -> Const:NoneType:None | U
+159:17:Call -> List:0
+159:17:Name -> Func:salt.modules.smbios._dmi_parse
+159:28:Call -> U
+159:28:Name -> Func:salt.modules.smbios._dmidecoder
+159:43:Name -> Const:bool:True | U
+159:50:Name -> Const:NoneType:None | U
+161:17:Call -> List:0
+161:17:Name -> Func:salt.modules.smbios._dmi_parse
+161:28:Call -> U
+161:28:Name -> Func:salt.modules.smbios._dmidecoder
+161:46:Name -> U
+161:59:Name -> Const:bool:True | U
+161:66:Name -> Const:NoneType:None | U
+163:11:Name -> List:0
+174:16:Call -> U
+174:16:Attribute -> Func:re.compile
+174:16:Name -> Module:re
+175:44:Attribute -> Const:int:8
+175:44:Name -> Module:re
+175:59:Attribute -> Const:int:2
+175:59:Name -> Module:re
+177:14:Call -> ERR
+177:14:Name -> Func:builtins.iter
+177:19:Call -> U
+177:19:Attribute -> Func:re.split
+177:19:Name -> Module:re
+177:28:Name -> U
+177:39:Name -> U
+178:27:Call -> Inst:builtins.zip
+178:27:Name -> Class:builtins.zip
+178:31:Name -> U
+178:40:Name -> U
+179:25:Call -> U
+179:25:Attribute -> U
+179:25:Name -> U
+179:56:Call -> U
+179:56:Attribute -> U
+179:56:Name -> U
+180:18:Call -> U
+180:18:Attribute -> U
+180:18:Name -> U
+182:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+182:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+182:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+182:39:Name -> U
+186:22:Name -> U
+187:27:Call -> U
+187:27:Attribute -> U
+187:27:Call -> U
+187:27:Attribute -> U
+187:27:Name -> U
+188:20:Call -> Inst:builtins.int
+188:20:Name -> Class:builtins.int
+188:24:Name -> U
+191:15:Name -> U
+193:19:Name -> Const:bool:True | U
+194:16:Call -> ERR
+194:16:Attribute -> BM:builtins.list.append
+194:16:Name -> List:0
+194:27:Name -> Dict:3
+198:19:Call -> Dict:0
+198:19:Name -> Func:salt.modules.smbios._dmi_data
+198:29:Name -> U
+198:38:Name -> Const:bool:True | U
+198:45:Name -> Const:NoneType:None | U
+199:11:Name -> Dict:0
+200:12:Name -> Dict:3
+200:29:Name -> U
+201:12:Call -> ERR
+201:12:Attribute -> BM:builtins.list.append
+201:12:Name -> List:0
+201:23:Name -> Dict:3
+202:17:Name -> Const:bool:True | U
+203:12:Call -> ERR
+203:12:Attribute -> BM:builtins.list.append
+203:12:Name -> List:0
+203:23:Name -> Dict:3
+205:11:Name -> List:0
+217:16:Name -> U
+218:11:Call -> U
+218:11:Attribute -> Func:re.match
+218:11:Name -> Module:re
+218:33:Name -> U
+220:15:Name -> Const:NoneType:None
+222:31:Name -> List:2
+223:19:Name -> List:0
+224:23:Name -> Const:NoneType:None
+229:24:Call -> U
+229:24:Attribute -> U
+229:24:Name -> U
+229:40:Name -> U
+230:20:Name -> Dict:0
+230:29:Name -> U
+230:36:Name -> U
+231:21:Name -> Const:NoneType:None
+232:20:Name -> Dict:0
+232:29:Name -> U
+232:36:Name -> U
+236:23:Call -> U
+236:23:Attribute -> U
+236:23:Name -> U
+237:18:Call -> U
+237:18:Attribute -> U
+237:18:Call -> U
+237:18:Attribute -> U
+237:18:Call -> U
+237:18:Attribute -> U
+237:18:Name -> U
+238:16:Name -> U
+238:26:Name -> U
+238:56:Name -> U
+238:67:Name -> U
+238:78:Name -> U
+242:28:Call -> Const:NoneType:None | U | Inst:builtins.int
+242:28:Name -> Func:salt.modules.smbios._dmi_cast
+242:38:Name -> Const:NoneType:None | U
+242:43:Call -> U
+242:43:Attribute -> U
+242:43:Name -> U
+242:56:Name -> U
+243:13:Name -> Const:NoneType:None
+245:13:Call -> U
+245:13:Attribute -> Func:re.match
+245:13:Name -> Module:re
+245:37:Name -> U
+251:18:Call -> Const:NoneType:None | U | Inst:builtins.int
+251:18:Name -> Func:salt.modules.smbios._dmi_cast
+251:28:Name -> U
+251:33:Call -> U
+251:33:Attribute -> U
+251:33:Name -> U
+251:47:Name -> U
+252:15:Name -> Const:NoneType:None | U | Inst:builtins.int
+254:16:Call -> ERR
+254:16:Attribute -> BM:builtins.list.append
+254:16:Name -> List:2
+254:35:Name -> U | Inst:builtins.int
+256:11:Name -> Dict:0
+263:7:Name -> Const:bool:True | U
+263:21:Call -> Const:bool:False | Const:bool:True | Const:bool:False | U
+263:21:Name -> Func:salt.modules.smbios._dmi_isclean
+263:34:Name -> U
+263:39:Name -> U
+265:13:Call -> U
+265:13:Attribute -> Func:re.match
+265:13:Name -> Module:re
+265:52:Name -> U
+265:63:Attribute -> Const:int:2
+265:63:Name -> Module:re
+266:18:Name -> U
+267:19:Call -> U
+267:19:Attribute -> U
+267:19:Name -> U
+267:40:Call -> U
+267:40:Attribute -> U
+267:40:Name -> U
+270:22:Call -> Inst:builtins.int
+270:22:Name -> Class:builtins.int
+270:26:Name -> U
+271:19:Name -> Class:builtins.Exception
+274:11:Name -> U | Inst:builtins.int
+281:11:Name -> U
+281:18:Call -> U
+281:18:Attribute -> Func:re.match
+281:18:Name -> Module:re
+281:35:Name -> U
+281:46:Attribute -> Const:int:2
+281:46:Name -> Module:re
+284:19:Name -> U
+286:23:Call -> Inst:builtins.range
+286:23:Name -> Class:builtins.range
+288:16:Call -> Inst:uuid.UUID
+288:16:Attribute -> Class:uuid.UUID
+288:16:Name -> Module:uuid
+288:26:Name -> U
+288:39:Name -> U
+290:19:Name -> Class:builtins.ValueError
+292:8:Call -> U
+292:8:Attribute -> U
+292:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+292:56:Name -> U
+292:61:Call -> U
+292:61:Attribute -> U
+292:61:Name -> U
+294:9:Call -> U
+294:9:Attribute -> Func:re.search
+294:9:Name -> Module:re
+294:42:Name -> U
+301:16:Call -> U
+301:16:Attribute -> Func:re.match
+301:16:Name -> Module:re
+301:36:Name -> U
+302:20:Call -> U
+302:20:Attribute -> Func:re.match
+302:20:Name -> Module:re
+302:57:Name -> U
+303:20:Call -> U
+303:20:Attribute -> Func:re.search
+303:20:Name -> Module:re
+305:16:Name -> U
+306:22:Attribute -> Const:int:2
+306:22:Name -> Module:re
+309:9:Call -> U
+309:9:Attribute -> Func:re.search
+309:9:Name -> Module:re
+309:41:Name -> U
+311:19:Call -> U
+311:19:Attribute -> Func:re.search
+311:19:Name -> Module:re
+313:12:Name -> U
+314:18:Attribute -> Const:int:2
+314:18:Name -> Module:re
+318:19:Call -> U
+318:19:Attribute -> Func:re.search
+318:19:Name -> Module:re
+319:29:Name -> U
+319:40:Attribute -> Const:int:2
+319:40:Name -> Module:re
+320:18:Call -> U
+320:18:Attribute -> Func:re.search
+320:18:Name -> Module:re
+323:12:Name -> U
+324:18:Attribute -> Const:int:2
+324:18:Name -> Module:re
+332:17:Call -> Const:NoneType:None | Const:NoneType:None | U
+332:17:Attribute -> Func:salt.utils.path.which_bin
+332:17:Attribute -> Module:salt.utils.path
+332:17:Attribute -> Module:salt.utils
+332:17:Name -> Module:salt
+334:11:Name -> Const:NoneType:None | U
+335:14:Call -> U
+335:14:Attribute -> Func:salt.modules.cmdmod._run_quiet
+335:14:Attribute -> Module:salt.modules.cmdmod
+335:14:Attribute -> Module:salt.modules
+335:14:Name -> Module:salt
+335:45:Name -> Const:NoneType:None | Const:NoneType:None | U
+337:14:Call -> U
+337:14:Attribute -> Func:salt.modules.cmdmod._run_quiet
+337:14:Attribute -> Module:salt.modules.cmdmod
+337:14:Attribute -> Module:salt.modules
+337:14:Name -> Module:salt
+337:48:Name -> Const:NoneType:None | Const:NoneType:None | U
+337:61:Name -> U
+339:11:Name -> U

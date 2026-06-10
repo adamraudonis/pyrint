@@ -1,0 +1,275 @@
+28:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:10:Attribute -> Func:logging.getLogger
+28:10:Name -> Module:logging
+28:28:Name -> Const:str:'homeassistant.components.rtorrent.senso | Const:str:'__main__'
+41:14:Name -> Class:builtins.tuple
+41:20:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+42:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+42:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+43:12:Name -> Const:str:'current_status'
+46:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+46:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+47:12:Name -> Const:str:'download_speed'
+49:21:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.DATA_RATE
+49:21:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+50:35:Attribute -> Inst:homeassistant.const.UnitOfDataRate.KILOBYTES_PER_SECOND
+50:35:Name -> Class:homeassistant.const.UnitOfDataRate
+52:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+52:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+53:12:Name -> Const:str:'upload_speed'
+55:21:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.DATA_RATE
+55:21:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+56:35:Attribute -> Inst:homeassistant.const.UnitOfDataRate.KILOBYTES_PER_SECOND
+56:35:Name -> Class:homeassistant.const.UnitOfDataRate
+58:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+58:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+59:12:Name -> Const:str:'all_torrents'
+62:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+62:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+63:12:Name -> Const:str:'stopped_torrents'
+66:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+66:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+67:12:Name -> Const:str:'complete_torrents'
+70:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+70:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+71:12:Name -> Const:str:'uploading_torrents'
+74:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+74:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+75:12:Name -> Const:str:'downloading_torrents'
+78:4:Call -> Inst:homeassistant.components.sensor.SensorEntityDescription
+78:4:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+79:12:Name -> Const:str:'active_torrents'
+84:13:Name -> Class:builtins.list
+84:18:Name -> Class:builtins.str
+84:26:Attribute -> ERR
+84:26:Name -> Inst:homeassistant.components.sensor.SensorEntityDescription
+84:47:Name -> Tuple:9
+86:18:Call -> U
+86:18:Attribute -> U
+86:18:Name -> U
+88:8:Call -> U
+88:8:Attribute -> U
+88:8:Name -> U
+88:21:Name -> Const:str:'url'
+88:32:Attribute -> Func:homeassistant.helpers.config_validation.url
+88:32:Name -> Module:homeassistant.helpers.config_validation
+89:8:Call -> U
+89:8:Attribute -> U
+89:8:Name -> U
+89:21:Name -> Const:str:'name'
+89:40:Name -> Const:str:'rtorrent'
+89:55:Attribute -> Func:homeassistant.helpers.config_validation.string
+89:55:Name -> Module:homeassistant.helpers.config_validation
+90:8:Call -> U
+90:8:Attribute -> U
+90:8:Name -> U
+90:21:Name -> Const:str:'monitored_variables'
+90:55:Name -> U
+90:69:Call -> U
+90:69:Attribute -> U
+90:69:Name -> U
+91:12:Attribute -> Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list
+91:12:Name -> Module:homeassistant.helpers.config_validation
+91:29:Call -> U
+91:29:Attribute -> U
+91:29:Name -> U
+91:36:Name -> U
+98:10:Name -> U
+99:12:Name -> Class:builtins.dict
+100:18:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+101:20:Name -> Class:builtins.dict
+104:10:Name -> U
+104:17:Name -> Const:str:'url'
+105:11:Name -> U
+105:18:Name -> Const:str:'name'
+108:19:Call -> Inst:xmlrpc.client.ServerProxy
+108:19:Attribute -> Class:xmlrpc.client.ServerProxy
+108:19:Attribute -> Module:xmlrpc.client
+108:19:Name -> Module:xmlrpc
+108:45:Name -> U
+109:12:Attribute -> Class:xmlrpc.client.ProtocolError
+109:12:Attribute -> Module:xmlrpc.client
+109:12:Name -> Module:xmlrpc
+109:41:Name -> Class:builtins.ConnectionRefusedError
+110:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+110:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+110:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+111:14:Name -> Class:homeassistant.exceptions.PlatformNotReady
+111:36:Name -> ExcInst:xmlrpc.client.ProtocolError | ExcInst:builtins.ConnectionRefusedError
+112:26:Name -> U
+112:33:Name -> Const:str:'monitored_variables'
+114:8:Call -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+114:8:Name -> Class:homeassistant.components.rtorrent.sensor.RTorrentSensor
+114:23:Name -> Inst:xmlrpc.client.ServerProxy
+114:33:Name -> U
+114:39:Name -> Inst:homeassistant.components.sensor.SensorEntityDescription
+115:27:Name -> Tuple:9
+116:11:Attribute -> ERR
+116:11:Name -> Inst:homeassistant.components.sensor.SensorEntityDescription
+116:30:Name -> U
+119:4:Call -> U
+119:4:Name -> U
+119:17:Name -> U
+124:13:Call -> Inst:builtins.float
+124:13:Name -> Class:builtins.float
+124:19:Name -> U
+125:11:Call -> ERR
+125:11:Name -> Func:builtins.round
+125:17:Name -> U
+125:30:Name -> U
+128:20:Name -> Class:builtins.tuple
+128:26:Name -> Class:builtins.float
+128:33:Name -> Class:builtins.float
+128:40:Name -> Class:builtins.list
+128:46:Name -> Class:builtins.list
+128:52:Name -> Class:builtins.list
+128:58:Name -> Class:builtins.list
+128:64:Name -> Class:builtins.list
+131:21:Name -> Class:homeassistant.components.sensor.SensorEntity
+135:57:Name -> Class:homeassistant.components.sensor.SensorEntityDescription
+138:8:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+138:34:Name -> U
+139:8:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+139:22:Name -> U
+140:8:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+140:19:Name -> Class:builtins.tuple
+142:8:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+142:29:Name -> U
+142:43:Attribute -> U
+142:43:Name -> U
+143:8:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+147:20:Call -> Inst:xmlrpc.client.MultiCall
+147:20:Attribute -> Class:xmlrpc.client.MultiCall
+147:20:Attribute -> Module:xmlrpc.client
+147:20:Name -> Module:xmlrpc
+147:44:Attribute -> U
+147:44:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+148:8:Call -> U
+148:8:Attribute -> U
+148:8:Attribute -> U
+148:8:Attribute -> U
+148:8:Name -> Inst:xmlrpc.client.MultiCall
+149:8:Call -> U
+149:8:Attribute -> U
+149:8:Attribute -> U
+149:8:Attribute -> U
+149:8:Name -> Inst:xmlrpc.client.MultiCall
+150:8:Call -> U
+150:8:Attribute -> U
+150:8:Attribute -> U
+150:8:Name -> Inst:xmlrpc.client.MultiCall
+151:8:Call -> U
+151:8:Attribute -> U
+151:8:Attribute -> U
+151:8:Name -> Inst:xmlrpc.client.MultiCall
+152:8:Call -> U
+152:8:Attribute -> U
+152:8:Attribute -> U
+152:8:Name -> Inst:xmlrpc.client.MultiCall
+153:8:Call -> U
+153:8:Attribute -> U
+153:8:Attribute -> U
+153:8:Name -> Inst:xmlrpc.client.MultiCall
+154:8:Call -> U
+154:8:Attribute -> U
+154:8:Attribute -> U
+154:8:Name -> Inst:xmlrpc.client.MultiCall
+157:12:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+157:24:Call -> Inst:xmlrpc.client.MultiCallIterator
+157:24:Name -> Func:typing.cast
+157:29:Name -> Class:builtins.tuple
+157:43:Call -> Inst:xmlrpc.client.MultiCallIterator
+157:43:Name -> Inst:xmlrpc.client.MultiCall
+158:12:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+159:16:Attribute -> Class:xmlrpc.client.ProtocolError
+159:16:Attribute -> Module:xmlrpc.client
+159:16:Name -> Module:xmlrpc
+159:45:Name -> Class:builtins.OSError
+160:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+160:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+160:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+160:64:Name -> ExcInst:xmlrpc.client.ProtocolError | ExcInst:builtins.OSError
+161:12:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+164:17:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+164:17:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+165:19:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+165:19:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+166:23:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+166:23:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+167:27:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+167:27:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+168:28:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+168:28:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+169:22:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+169:22:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+170:24:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+170:24:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+173:26:Name -> U
+174:15:Name -> U
+178:28:Name -> U
+179:15:Name -> U
+182:26:Name -> Const:int:0 | Const:int:1
+182:47:Name -> Const:int:0 | Const:int:1
+184:22:Attribute -> U
+184:22:Attribute -> U | Inst:homeassistant.components.sensor.SensorEntityDescription | Inst:homeassistant.helpers.entity.EntityDescription
+184:22:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+185:11:Name -> U
+185:26:Name -> Const:str:'current_status'
+186:15:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+186:15:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+187:19:Name -> U
+187:34:Name -> U
+188:20:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+189:21:Name -> U
+189:36:Name -> U
+190:20:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+191:21:Name -> U
+191:37:Name -> U
+192:20:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+194:20:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+194:46:Name -> Const:str:'idle'
+196:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+198:11:Attribute -> Const:NoneType:None | Inst:xmlrpc.client.MultiCallIterator
+198:11:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+199:15:Name -> U
+199:30:Name -> Const:str:'download_speed'
+200:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+200:42:Call -> U
+200:42:Name -> Func:homeassistant.components.rtorrent.sensor.format_speed
+200:55:Name -> U
+201:17:Name -> U
+201:32:Name -> Const:str:'upload_speed'
+202:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+202:42:Call -> U
+202:42:Name -> Func:homeassistant.components.rtorrent.sensor.format_speed
+202:55:Name -> U
+203:17:Name -> U
+203:32:Name -> Const:str:'all_torrents'
+204:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+204:42:Call -> ERR
+204:42:Name -> Func:builtins.len
+204:46:Name -> U
+205:17:Name -> U
+205:32:Name -> Const:str:'stopped_torrents'
+206:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+206:42:Call -> ERR
+206:42:Name -> Func:builtins.len
+206:46:Name -> U
+207:17:Name -> U
+207:32:Name -> Const:str:'complete_torrents'
+208:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+208:42:Call -> ERR
+208:42:Name -> Func:builtins.len
+208:46:Name -> U
+209:17:Name -> U
+209:32:Name -> Const:str:'uploading_torrents'
+210:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+210:42:Name -> Const:int:0 | Const:int:1
+211:17:Name -> U
+211:32:Name -> Const:str:'downloading_torrents'
+212:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+212:42:Name -> Const:int:0 | Const:int:1
+213:17:Name -> U
+213:32:Name -> Const:str:'active_torrents'
+214:16:Name -> Inst:homeassistant.components.rtorrent.sensor.RTorrentSensor
+214:42:Name -> Const:int:0 | Const:int:1 | Const:int:1 | Const:int:2

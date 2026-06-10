@@ -1,0 +1,417 @@
+29:1:Call -> Inst:django.test.utils.override_settings
+29:1:Name -> Class:django.test.utils.override_settings
+30:20:Name -> Class:django.test.testcases.SimpleTestCase
+36:11:Name -> Const:NoneType:None | U
+37:21:Name -> U
+38:8:Call -> Const:NoneType:None
+38:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+38:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+38:25:Call -> U
+38:25:Name -> U
+38:34:Name -> U
+38:42:Name -> Const:NoneType:None | U
+50:29:Name -> Tuple:5
+51:17:Call -> Gen:unittest.case.TestCase.subTest
+51:17:Attribute -> BM:unittest.case.TestCase.subTest
+51:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+51:36:Name -> Const:str:'&' | Const:str:'<' | Const:str:'>' | Const:str:'"' | Const:str:"'"
+51:50:Name -> Const:str:'&amp;' | Const:str:'&lt;' | Const:str:'&gt;' | Const:str:'&quot;' | Const:str:'&#x27;'
+52:31:Name -> Tuple:4
+53:25:Call -> Gen:unittest.case.TestCase.subTest
+53:25:Attribute -> BM:unittest.case.TestCase.subTest
+53:25:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+53:44:Name -> Const:str:'&' | Const:str:'<' | Const:str:'>' | Const:str:'"' | Const:str:"'"
+53:58:Name -> Const:str:'&amp;' | Const:str:'&lt;' | Const:str:'&gt;' | Const:str:'&quot;' | Const:str:'&#x27;'
+53:74:Name -> Const:str:'%s' | Const:str:'asdf%sfdsa' | Const:str:'%s1' | Const:str:'1%sb'
+54:24:Call -> Const:NoneType:None
+54:24:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+54:24:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+54:42:Name -> Func:django.utils.html.escape
+54:50:Name -> Const:str:'%s' | Const:str:'asdf%sfdsa' | Const:str:'%s1' | Const:str:'1%sb'
+54:60:Name -> Const:str:'&' | Const:str:'<' | Const:str:'>' | Const:str:'"' | Const:str:"'"
+54:67:Name -> Const:str:'%s' | Const:str:'asdf%sfdsa' | Const:str:'%s1' | Const:str:'1%sb'
+54:77:Name -> Const:str:'&amp;' | Const:str:'&lt;' | Const:str:'&gt;' | Const:str:'&quot;' | Const:str:'&#x27;'
+55:24:Call -> Const:NoneType:None
+55:24:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+55:24:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+56:28:Name -> Func:django.utils.html.escape
+56:36:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+56:36:Name -> Func:django.utils.functional.lazystr
+56:44:Name -> Const:str:'%s' | Const:str:'asdf%sfdsa' | Const:str:'%s1' | Const:str:'1%sb'
+56:54:Name -> Const:str:'&' | Const:str:'<' | Const:str:'>' | Const:str:'"' | Const:str:"'"
+56:62:Name -> Const:str:'%s' | Const:str:'asdf%sfdsa' | Const:str:'%s1' | Const:str:'1%sb'
+56:72:Name -> Const:str:'&amp;' | Const:str:'&lt;' | Const:str:'&gt;' | Const:str:'&quot;' | Const:str:'&#x27;'
+59:16:Call -> Const:NoneType:None
+59:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+59:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+59:34:Name -> Func:django.utils.html.escape
+59:42:Name -> Const:str:'&' | Const:str:'<' | Const:str:'>' | Const:str:'"' | Const:str:"'"
+59:53:Name -> Const:str:'&amp;' | Const:str:'&lt;' | Const:str:'&gt;' | Const:str:'&quot;' | Const:str:'&#x27;'
+61:8:Call -> Const:NoneType:None
+61:8:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+61:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+61:26:Name -> Func:django.utils.html.escape
+64:8:Call -> Const:NoneType:None
+64:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+64:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+65:12:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+65:12:Name -> Func:django.utils.html.format_html
+68:16:Call -> Const:str:'<b>safe</b>' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+68:16:Name -> Func:django.utils.safestring.mark_safe
+70:23:Call -> Const:str:'<i>safe again</i>' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+70:23:Name -> Func:django.utils.safestring.mark_safe
+77:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+77:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+77:13:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+77:38:Name -> Class:builtins.TypeError
+77:49:Name -> Const:str:'args or kwargs must be provided.'
+79:12:Call -> Const:NoneType:None
+79:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+79:12:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+79:29:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+79:29:Name -> Func:django.utils.html.format_html
+79:47:Name -> Const:str:'Adam'
+82:8:Call -> Const:NoneType:None
+82:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+82:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+83:12:Call -> U | Const:str:'' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+83:12:Name -> Func:django.utils.html.format_html_join
+92:8:Call -> Const:NoneType:None
+92:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+92:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+93:12:Call -> U | Const:str:'' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+93:12:Name -> Func:django.utils.html.format_html_join
+114:29:Name -> Tuple:4
+115:17:Call -> Gen:unittest.case.TestCase.subTest
+115:17:Attribute -> BM:unittest.case.TestCase.subTest
+115:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+115:36:Name -> Const:str:'para1\n\npara2\r\rpara3' | Const:str:'para1\nsub1\rsub2\n\npara2' | Const:str:'para1\r\n\r\npara2\rsub1\r\rpara4' | Const:str:'para1\tmore\n\npara2'
+115:50:Name -> Const:str:'<p>para1</p>\n\n<p>para2</p>\n\n<p>para | Const:str:'<p>para1<br>sub1<br>sub2</p>\n\n<p>para | Const:str:'<p>para1</p>\n\n<p>para2<br>sub1</p>\n\ | Const:str:'<p>para1\tmore</p>\n\n<p>para2</p>'
+116:16:Call -> Const:NoneType:None
+116:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+116:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+116:34:Name -> Func:django.utils.html.linebreaks
+116:46:Name -> Const:str:'para1\n\npara2\r\rpara3' | Const:str:'para1\nsub1\rsub2\n\npara2' | Const:str:'para1\r\n\r\npara2\rsub1\r\rpara4' | Const:str:'para1\tmore\n\npara2'
+116:53:Name -> Const:str:'<p>para1</p>\n\n<p>para2</p>\n\n<p>para | Const:str:'<p>para1<br>sub1<br>sub2</p>\n\n<p>para | Const:str:'<p>para1</p>\n\n<p>para2<br>sub1</p>\n\ | Const:str:'<p>para1\tmore</p>\n\n<p>para2</p>'
+117:16:Call -> Const:NoneType:None
+117:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+117:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+117:34:Name -> Func:django.utils.html.linebreaks
+117:46:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+117:46:Name -> Func:django.utils.functional.lazystr
+117:54:Name -> Const:str:'para1\n\npara2\r\rpara3' | Const:str:'para1\nsub1\rsub2\n\npara2' | Const:str:'para1\r\n\r\npara2\rsub1\r\rpara4' | Const:str:'para1\tmore\n\npara2'
+117:62:Name -> Const:str:'<p>para1</p>\n\n<p>para2</p>\n\n<p>para | Const:str:'<p>para1<br>sub1<br>sub2</p>\n\n<p>para | Const:str:'<p>para1</p>\n\n<p>para2<br>sub1</p>\n\ | Const:str:'<p>para1\tmore</p>\n\n<p>para2</p>'
+135:29:Attribute -> Const:float:inf
+135:29:Name -> Module:math
+137:24:Attribute -> U
+137:24:Name -> Module:sys
+138:36:Attribute -> U
+138:36:Name -> Module:sys
+138:56:Call -> ERR
+138:56:Attribute -> BM:builtins.dict.get
+138:56:Name -> Dict:2
+139:12:Name -> U
+139:27:Name -> U
+142:12:Attribute -> U
+142:12:Name -> Module:sys
+143:15:Call -> ERR
+143:15:Attribute -> BM:builtins.dict.get
+143:15:Name -> Dict:3
+143:49:Name -> U
+143:64:Name -> U
+173:32:Name -> U
+177:23:Name -> U
+183:23:Name -> U
+188:29:Name -> Tuple:24
+189:17:Call -> Gen:unittest.case.TestCase.subTest
+189:17:Attribute -> BM:unittest.case.TestCase.subTest
+189:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+189:36:Name -> Const:str:'<p>See: &#39;&eacute; is an apostrophe  | Const:str:'<p>See: &#x27;&eacute; is an apostrophe | Const:str:'<adf>a' | Const:str:'</adf>a' | Const:str:'<asdf><asdf>e' | Const:str:'hi, <f x' | Const:str:'234<235, right?' | Const:str:'a4<a5 right?' | Const:str:'b7>b2!' | Const:str:'</fe' | Const:str:'<x>b<y>' | Const:str:'a<p onclick="alert(\'<test>\')">b</p>c' | Const:str:'a<p a >b</p>c' | Const:str:'d<a:b c:d>e</p>f' | Const:str:'<strong>foo</strong><a href="http://exa | Const:str:'&gotcha&#;<>' | Const:str:'<sc<!-- -->ript>test<<!-- -->/script>' | Const:str:'<script>alert()</script>&h' | Const:str:'><!&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& | Const:str:'X<<<<br>br>br>br>X' | Const:str:'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< | Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a< | Const:str:'<aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+189:50:Name -> Const:str:'See: &#39;&eacute; is an apostrophe fol | Const:str:'See: &#x27;&eacute; is an apostrophe fo | Const:str:'a' | Const:str:'a' | Const:str:'e' | Const:str:'hi, <f x' | Const:str:'234<235, right?' | Const:str:'a4<a5 right?' | Const:str:'b7>b2!' | Const:str:'</fe' | Const:str:'b' | Const:str:'abc' | Const:str:'abc' | Const:str:'def' | Const:str:'foobar' | Const:str:'&gotcha&#;<>' | Const:str:'ript>test' | Const:str:'alert()&h;' | Const:str:'alert()h' | Const:str:'>' | Const:str:'><!&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& | Const:str:'XX' | Const:str:'' | Const:str:'>' | Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a< | U
+190:16:Call -> Const:NoneType:None
+190:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+190:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+190:34:Name -> Func:django.utils.html.strip_tags
+190:46:Name -> Const:str:'<p>See: &#39;&eacute; is an apostrophe  | Const:str:'<p>See: &#x27;&eacute; is an apostrophe | Const:str:'<adf>a' | Const:str:'</adf>a' | Const:str:'<asdf><asdf>e' | Const:str:'hi, <f x' | Const:str:'234<235, right?' | Const:str:'a4<a5 right?' | Const:str:'b7>b2!' | Const:str:'</fe' | Const:str:'<x>b<y>' | Const:str:'a<p onclick="alert(\'<test>\')">b</p>c' | Const:str:'a<p a >b</p>c' | Const:str:'d<a:b c:d>e</p>f' | Const:str:'<strong>foo</strong><a href="http://exa | Const:str:'&gotcha&#;<>' | Const:str:'<sc<!-- -->ript>test<<!-- -->/script>' | Const:str:'<script>alert()</script>&h' | Const:str:'><!&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& | Const:str:'X<<<<br>br>br>br>X' | Const:str:'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< | Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a< | Const:str:'<aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+190:53:Name -> Const:str:'See: &#39;&eacute; is an apostrophe fol | Const:str:'See: &#x27;&eacute; is an apostrophe fo | Const:str:'a' | Const:str:'a' | Const:str:'e' | Const:str:'hi, <f x' | Const:str:'234<235, right?' | Const:str:'a4<a5 right?' | Const:str:'b7>b2!' | Const:str:'</fe' | Const:str:'b' | Const:str:'abc' | Const:str:'abc' | Const:str:'def' | Const:str:'foobar' | Const:str:'&gotcha&#;<>' | Const:str:'ript>test' | Const:str:'alert()&h;' | Const:str:'alert()h' | Const:str:'>' | Const:str:'><!&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& | Const:str:'XX' | Const:str:'' | Const:str:'>' | Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a< | U
+191:16:Call -> Const:NoneType:None
+191:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+191:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+191:34:Name -> Func:django.utils.html.strip_tags
+191:46:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+191:46:Name -> Func:django.utils.functional.lazystr
+191:54:Name -> Const:str:'<p>See: &#39;&eacute; is an apostrophe  | Const:str:'<p>See: &#x27;&eacute; is an apostrophe | Const:str:'<adf>a' | Const:str:'</adf>a' | Const:str:'<asdf><asdf>e' | Const:str:'hi, <f x' | Const:str:'234<235, right?' | Const:str:'a4<a5 right?' | Const:str:'b7>b2!' | Const:str:'</fe' | Const:str:'<x>b<y>' | Const:str:'a<p onclick="alert(\'<test>\')">b</p>c' | Const:str:'a<p a >b</p>c' | Const:str:'d<a:b c:d>e</p>f' | Const:str:'<strong>foo</strong><a href="http://exa | Const:str:'&gotcha&#;<>' | Const:str:'<sc<!-- -->ript>test<<!-- -->/script>' | Const:str:'<script>alert()</script>&h' | Const:str:'><!&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& | Const:str:'X<<<<br>br>br>br>X' | Const:str:'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< | Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a< | Const:str:'<aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+191:62:Name -> Const:str:'See: &#39;&eacute; is an apostrophe fol | Const:str:'See: &#x27;&eacute; is an apostrophe fo | Const:str:'a' | Const:str:'a' | Const:str:'e' | Const:str:'hi, <f x' | Const:str:'234<235, right?' | Const:str:'a4<a5 right?' | Const:str:'b7>b2!' | Const:str:'</fe' | Const:str:'b' | Const:str:'abc' | Const:str:'abc' | Const:str:'def' | Const:str:'foobar' | Const:str:'&gotcha&#;<>' | Const:str:'ript>test' | Const:str:'alert()&h;' | Const:str:'alert()h' | Const:str:'>' | Const:str:'><!&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&& | Const:str:'XX' | Const:str:'' | Const:str:'>' | Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a< | U
+195:13:Call -> Inst:unittest.case._AssertRaisesContext
+195:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+195:13:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+195:31:Name -> Class:django.core.exceptions.SuspiciousOperation
+196:12:Call -> Const:str:'' | Const:str:''
+196:12:Name -> Func:django.utils.html.strip_tags
+196:23:Name -> Tuple:2
+203:21:Name -> List:2
+204:17:Call -> Gen:unittest.case.TestCase.subTest
+204:17:Attribute -> BM:unittest.case.TestCase.subTest
+204:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+204:36:Name -> Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<
+205:21:Call -> Inst:unittest.case._AssertRaisesContext
+205:21:Attribute -> BM:unittest.case.TestCase.assertRaises
+205:21:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+205:39:Name -> Class:django.core.exceptions.SuspiciousOperation
+206:20:Call -> Const:str:'' | Const:str:''
+206:20:Name -> Func:django.utils.html.strip_tags
+206:31:Name -> Const:str:'><a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a | Const:str:'<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<a<
+212:17:Call -> Gen:unittest.case.TestCase.subTest
+212:17:Attribute -> BM:unittest.case.TestCase.subTest
+212:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+212:39:Name -> Const:str:'strip_tags1.html' | Const:str:'strip_tags2.txt'
+213:23:Call -> U
+213:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+213:23:Attribute -> Module:posixpath | Module:ntpath
+213:23:Name -> Module:os
+213:36:Call -> U
+213:36:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+213:36:Attribute -> Module:posixpath | Module:ntpath
+213:36:Name -> Module:os
+213:52:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+213:72:Name -> Const:str:'strip_tags1.html' | Const:str:'strip_tags2.txt'
+214:21:Call -> ERR
+214:21:Name -> Func:_io.open
+214:26:Name -> U
+215:30:Call -> U
+215:30:Attribute -> U
+215:30:Name -> U
+216:28:Call -> Inst:_pydatetime.datetime | U
+216:28:Attribute -> BM:_pydatetime.datetime.now
+216:28:Name -> Class:_pydatetime.datetime
+217:31:Call -> Const:str:'' | Const:str:''
+217:31:Name -> Func:django.utils.html.strip_tags
+217:42:Name -> U
+218:30:Call -> Inst:_pydatetime.datetime | U
+218:30:Attribute -> BM:_pydatetime.datetime.now
+218:30:Name -> Class:_pydatetime.datetime
+218:47:Name -> Inst:_pydatetime.datetime | U
+219:16:Call -> Const:NoneType:None
+219:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+219:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+219:33:Attribute -> U
+219:33:Name -> U
+220:16:Call -> Const:NoneType:None
+220:16:Attribute -> BM:unittest.case.TestCase.assertIn
+220:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+220:73:Name -> Const:str:'' | Const:str:''
+221:16:Call -> Const:NoneType:None
+221:16:Attribute -> BM:unittest.case.TestCase.assertNotIn
+221:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+221:38:Name -> Const:str:'' | Const:str:''
+226:21:Name -> Tuple:4
+227:17:Call -> Gen:unittest.case.TestCase.subTest
+227:17:Attribute -> BM:unittest.case.TestCase.subTest
+227:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+227:36:Name -> Const:str:' <adf>' | Const:str:'<adf> ' | Const:str:' </adf> ' | Const:str:' <f> x</f>'
+228:16:Call -> Const:NoneType:None
+228:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+228:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+228:34:Name -> Func:django.utils.html.strip_spaces_between_tags
+228:61:Name -> Const:str:' <adf>' | Const:str:'<adf> ' | Const:str:' </adf> ' | Const:str:' <f> x</f>'
+229:16:Call -> Const:NoneType:None
+229:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+229:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+229:34:Name -> Func:django.utils.html.strip_spaces_between_tags
+229:61:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+229:61:Name -> Func:django.utils.functional.lazystr
+229:69:Name -> Const:str:' <adf>' | Const:str:'<adf> ' | Const:str:' </adf> ' | Const:str:' <f> x</f>'
+237:29:Name -> Tuple:3
+238:17:Call -> Gen:unittest.case.TestCase.subTest
+238:17:Attribute -> BM:unittest.case.TestCase.subTest
+238:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+238:36:Name -> Const:str:'<d> </d>' | Const:str:'<p>hello </p>\n<p> world</p>' | Const:str:'\n<p>\t</p>\n<p> </p>\n'
+238:50:Name -> Const:str:'<d></d>' | Const:str:'<p>hello </p><p> world</p>' | Const:str:'\n<p></p><p></p>\n'
+239:16:Call -> Const:NoneType:None
+239:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+239:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+239:34:Name -> Func:django.utils.html.strip_spaces_between_tags
+239:61:Name -> Const:str:'<d> </d>' | Const:str:'<p>hello </p>\n<p> world</p>' | Const:str:'\n<p>\t</p>\n<p> </p>\n'
+239:68:Name -> Const:str:'<d></d>' | Const:str:'<p>hello </p><p> world</p>' | Const:str:'\n<p></p><p></p>\n'
+240:16:Call -> Const:NoneType:None
+240:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+240:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+240:34:Name -> Func:django.utils.html.strip_spaces_between_tags
+240:61:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+240:61:Name -> Func:django.utils.functional.lazystr
+240:69:Name -> Const:str:'<d> </d>' | Const:str:'<p>hello </p>\n<p> world</p>' | Const:str:'\n<p>\t</p>\n<p> </p>\n'
+240:77:Name -> Const:str:'<d></d>' | Const:str:'<p>hello </p><p> world</p>' | Const:str:'\n<p></p><p></p>\n'
+266:29:Name -> Tuple:9
+267:17:Call -> Gen:unittest.case.TestCase.subTest
+267:17:Attribute -> BM:unittest.case.TestCase.subTest
+267:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+267:36:Name -> Const:str:'"double quotes" and \'single quotes\'' | Const:str:'\\ : backslashes, too' | Const:str:'and lots of whitespace: \r\n\t\x0b\x0c\ | Const:str:'<script>and this</script>' | Const:str:'paragraph separator:\u2029and line sepa | Const:str:'`' | Const:str:'\x7f' | Const:str:'\x80' | Const:str:'\x9f'
+267:50:Name -> Const:str:'\\u0022double quotes\\u0022 and \\u0027 | Const:str:'\\u005C : backslashes, too' | Const:str:'and lots of whitespace: \\u000D\\u000A\ | Const:str:'\\u003Cscript\\u003Eand this\\u003C/scr | Const:str:'paragraph separator:\\u2029and line sep | Const:str:'\\u0060' | Const:str:'\\u007F' | Const:str:'\\u0080' | Const:str:'\\u009F'
+268:16:Call -> Const:NoneType:None
+268:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+268:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+268:34:Name -> Func:django.utils.html.escapejs
+268:44:Name -> Const:str:'"double quotes" and \'single quotes\'' | Const:str:'\\ : backslashes, too' | Const:str:'and lots of whitespace: \r\n\t\x0b\x0c\ | Const:str:'<script>and this</script>' | Const:str:'paragraph separator:\u2029and line sepa | Const:str:'`' | Const:str:'\x7f' | Const:str:'\x80' | Const:str:'\x9f'
+268:51:Name -> Const:str:'\\u0022double quotes\\u0022 and \\u0027 | Const:str:'\\u005C : backslashes, too' | Const:str:'and lots of whitespace: \\u000D\\u000A\ | Const:str:'\\u003Cscript\\u003Eand this\\u003C/scr | Const:str:'paragraph separator:\\u2029and line sep | Const:str:'\\u0060' | Const:str:'\\u007F' | Const:str:'\\u0080' | Const:str:'\\u009F'
+269:16:Call -> Const:NoneType:None
+269:16:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.check_output
+269:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+269:34:Name -> Func:django.utils.html.escapejs
+269:44:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+269:44:Name -> Func:django.utils.functional.lazystr
+269:52:Name -> Const:str:'"double quotes" and \'single quotes\'' | Const:str:'\\ : backslashes, too' | Const:str:'and lots of whitespace: \r\n\t\x0b\x0c\ | Const:str:'<script>and this</script>' | Const:str:'paragraph separator:\u2029and line sepa | Const:str:'`' | Const:str:'\x7f' | Const:str:'\x80' | Const:str:'\x9f'
+269:60:Name -> Const:str:'\\u0022double quotes\\u0022 and \\u0027 | Const:str:'\\u005C : backslashes, too' | Const:str:'and lots of whitespace: \\u000D\\u000A\ | Const:str:'\\u003Cscript\\u003Eand this\\u003C/scr | Const:str:'paragraph separator:\\u2029and line sep | Const:str:'\\u0060' | Const:str:'\\u007F' | Const:str:'\\u0080' | Const:str:'\\u009F'
+290:16:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+290:16:Name -> Func:django.utils.functional.lazystr
+295:22:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+295:22:Name -> Func:django.utils.functional.lazystr
+301:29:Name -> Tuple:4
+302:17:Call -> Gen:unittest.case.TestCase.subTest
+302:17:Attribute -> BM:unittest.case.TestCase.subTest
+302:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+302:34:Name -> Const:str:'&<>' | Dict:1 | U | Inst:django.utils.functional.lazy.__proxy__ | Dict:1
+303:16:Call -> Const:NoneType:None
+303:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+303:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+303:33:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+303:33:Name -> Func:django.utils.html.json_script
+303:45:Name -> Const:str:'&<>' | Dict:1 | U | Inst:django.utils.functional.lazy.__proxy__ | Dict:1
+303:62:Name -> Const:str:'<script id="test_id" type="application/ | Const:str:'<script id="test_id" type="application/ | Const:str:'<script id="test_id" type="application/ | Const:str:'<script id="test_id" type="application/
+306:38:Name -> Class:django.core.serializers.json.DjangoJSONEncoder
+310:8:Call -> Const:NoneType:None
+310:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertHTMLEqual
+310:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+311:12:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+311:12:Name -> Func:django.utils.html.json_script
+311:36:Name -> Class:tests.utils_tests.test_html.TestUtilsHtml.test_json_script_custom_encoder.CustomDjangoJSONEncoder
+316:8:Call -> Const:NoneType:None
+316:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertHTMLEqual
+316:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+317:12:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+317:12:Name -> Func:django.utils.html.json_script
+368:29:Name -> Tuple:17
+369:17:Call -> Gen:unittest.case.TestCase.subTest
+369:17:Attribute -> BM:unittest.case.TestCase.subTest
+369:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+369:36:Name -> Const:str:'http://öäü.com/' | Const:str:'https://faß.example.com' | Const:str:'http://öäü.com/öäü/' | Const:str:'https://މިހާރު.com' | Const:str:'http://👓.ws' | Const:str:'http://xn--iny-zx5a.com/idna2003' | Const:str:'http://xn--fa-hia.com/idna2008' | Const:str:'http://example.com/path/öäü/' | Const:str:'http://example.com/%C3%B6/ä/' | Const:str:'http://example.com/?x=1&y=2+3&z=' | Const:str:'http://example.com/?x=<>"\'' | Const:str:'http://example.com/?q=http://example.co | Const:str:'http://example.com/?q=http%3A%2F%2Fexam | Const:str:'http://.www.f oo.bar/' | Const:str:'http://example.com">' | Const:str:'http://10.22.1.1/' | Const:str:'http://[fd00::1]/'
+369:50:Name -> Const:str:'http://%C3%B6%C3%A4%C3%BC.com/' | Const:str:'https://fa%C3%9F.example.com' | Const:str:'http://%C3%B6%C3%A4%C3%BC.com/%C3%B6%C3 | Const:str:'https://%DE%89%DE%A8%DE%80%DE%A7%DE%83% | Const:str:'http://%F0%9F%91%93.ws' | Const:str:'http://xn--iny-zx5a.com/idna2003' | Const:str:'http://xn--fa-hia.com/idna2008' | Const:str:'http://example.com/path/%C3%B6%C3%A4%C3 | Const:str:'http://example.com/%C3%B6/%C3%A4/' | Const:str:'http://example.com/?x=1&y=2+3&z=' | Const:str:'http://example.com/?x=%3C%3E%22%27' | Const:str:'http://example.com/?q=http%3A%2F%2Fexam | Const:str:'http://example.com/?q=http%3A%2F%2Fexam | Const:str:'http://.www.f%20oo.bar/' | Const:str:'http://example.com%22%3E' | Const:str:'http://10.22.1.1/' | Const:str:'http://[fd00::1]/'
+370:16:Call -> Const:NoneType:None
+370:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+370:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+370:33:Call -> Const:str:'' | U | Const:str:'' | Const:str:''
+370:33:Name -> Func:django.utils.html.smart_urlquote
+370:48:Name -> Const:str:'http://öäü.com/' | Const:str:'https://faß.example.com' | Const:str:'http://öäü.com/öäü/' | Const:str:'https://މިހާރު.com' | Const:str:'http://👓.ws' | Const:str:'http://xn--iny-zx5a.com/idna2003' | Const:str:'http://xn--fa-hia.com/idna2008' | Const:str:'http://example.com/path/öäü/' | Const:str:'http://example.com/%C3%B6/ä/' | Const:str:'http://example.com/?x=1&y=2+3&z=' | Const:str:'http://example.com/?x=<>"\'' | Const:str:'http://example.com/?q=http://example.co | Const:str:'http://example.com/?q=http%3A%2F%2Fexam | Const:str:'http://.www.f oo.bar/' | Const:str:'http://example.com">' | Const:str:'http://10.22.1.1/' | Const:str:'http://[fd00::1]/'
+370:56:Name -> Const:str:'http://%C3%B6%C3%A4%C3%BC.com/' | Const:str:'https://fa%C3%9F.example.com' | Const:str:'http://%C3%B6%C3%A4%C3%BC.com/%C3%B6%C3 | Const:str:'https://%DE%89%DE%A8%DE%80%DE%A7%DE%83% | Const:str:'http://%F0%9F%91%93.ws' | Const:str:'http://xn--iny-zx5a.com/idna2003' | Const:str:'http://xn--fa-hia.com/idna2008' | Const:str:'http://example.com/path/%C3%B6%C3%A4%C3 | Const:str:'http://example.com/%C3%B6/%C3%A4/' | Const:str:'http://example.com/?x=1&y=2+3&z=' | Const:str:'http://example.com/?x=%3C%3E%22%27' | Const:str:'http://example.com/?q=http%3A%2F%2Fexam | Const:str:'http://example.com/?q=http%3A%2F%2Fexam | Const:str:'http://.www.f%20oo.bar/' | Const:str:'http://example.com%22%3E' | Const:str:'http://10.22.1.1/' | Const:str:'http://[fd00::1]/'
+374:8:Call -> Const:NoneType:None
+374:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+374:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+374:25:Call -> U | Inst:django.utils.safestring.SafeString
+374:25:Name -> Func:django.utils.html.conditional_escape
+374:44:Name -> Const:str:'<h1>interop</h1>'
+375:8:Call -> Const:NoneType:None
+375:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+375:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+375:25:Call -> Inst:django.utils.safestring.SafeString
+375:25:Name -> Func:django.utils.html.conditional_escape
+375:44:Call -> Const:str:'<h1>interop</h1>' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+375:44:Name -> Func:django.utils.safestring.mark_safe
+375:54:Name -> Const:str:'<h1>interop</h1>'
+375:59:Name -> Const:str:'<h1>interop</h1>'
+376:8:Call -> Const:NoneType:None
+376:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+376:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+376:25:Call -> U | Inst:django.utils.safestring.SafeString
+376:25:Name -> Func:django.utils.html.conditional_escape
+376:44:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+376:44:Name -> Func:django.utils.functional.lazystr
+376:52:Call -> Const:str:'<h1>interop</h1>' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+376:52:Name -> Func:django.utils.safestring.mark_safe
+376:62:Name -> Const:str:'<h1>interop</h1>'
+376:68:Name -> Const:str:'<h1>interop</h1>'
+379:9:Name -> Func:django.utils.html.html_safe
+384:19:Call -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe.HtmlClass
+384:19:Name -> Class:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe.HtmlClass
+385:8:Call -> Const:NoneType:None
+385:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+385:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+385:24:Call -> Const:bool:False
+385:24:Name -> Func:builtins.hasattr
+385:32:Name -> Class:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe.HtmlClass
+386:8:Call -> Const:NoneType:None
+386:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+386:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+386:24:Call -> Const:bool:False
+386:24:Name -> Func:builtins.hasattr
+386:32:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe.HtmlClass
+387:8:Call -> Const:NoneType:None
+387:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+387:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+387:25:Call -> Const:str:''
+387:25:Name -> Class:builtins.str
+387:29:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe.HtmlClass
+387:40:Call -> ERR
+387:40:Attribute -> ERR
+387:40:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe.HtmlClass
+398:9:Name -> Func:django.utils.html.html_safe
+399:23:Name -> Class:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe_subclass.BaseClass
+404:23:Call -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe_subclass.Subclass
+404:23:Name -> Class:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe_subclass.Subclass
+405:8:Call -> Const:NoneType:None
+405:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+405:8:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+405:25:Call -> Const:str:''
+405:25:Name -> Class:builtins.str
+405:29:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe_subclass.Subclass
+405:44:Call -> Const:str:'some html content'
+405:44:Attribute -> BM:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe_subclass.BaseClass.__html__
+405:44:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml.test_html_safe_subclass.Subclass
+409:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+409:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+409:13:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+409:38:Name -> Class:builtins.ValueError
+409:50:Name -> Const:str:"can't apply @html_safe to HtmlClass bec
+411:13:Name -> Func:django.utils.html.html_safe
+418:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+418:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+418:13:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+418:38:Name -> Class:builtins.ValueError
+418:50:Name -> Const:str:"can't apply @html_safe to HtmlClass bec
+420:13:Name -> Func:django.utils.html.html_safe
+437:16:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+437:16:Name -> Func:django.utils.functional.lazystr
+481:29:Name -> Tuple:11
+482:17:Call -> Gen:unittest.case.TestCase.subTest
+482:17:Attribute -> BM:unittest.case.TestCase.subTest
+482:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+482:36:Name -> Const:str:'Search for google.com/?q=! and see.' | Const:str:'Search for google.com/?q=1&lt! and see. | U | Inst:django.utils.functional.lazy.__proxy__ | Const:str:'http://www.foo.bar/' | Const:str:'Look on www.نامه\u200cای.com.' | Const:str:'foo@example.com' | Const:str:'test@한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한. | Const:str:'yes+this=is&a%valid!email@example.com' | Const:str:'foo@faß.example.com' | Const:str:'idna-2008@މިހާރު.example.mv' | Const:str:'host.djangoproject.com'
+483:16:Call -> Const:NoneType:None
+483:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+483:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+483:33:Call -> Const:str:''
+483:33:Name -> Func:django.utils.html.urlize
+483:40:Name -> Const:str:'Search for google.com/?q=! and see.' | Const:str:'Search for google.com/?q=1&lt! and see. | U | Inst:django.utils.functional.lazy.__proxy__ | Const:str:'http://www.foo.bar/' | Const:str:'Look on www.نامه\u200cای.com.' | Const:str:'foo@example.com' | Const:str:'test@한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한. | Const:str:'yes+this=is&a%valid!email@example.com' | Const:str:'foo@faß.example.com' | Const:str:'idna-2008@މިހާރު.example.mv' | Const:str:'host.djangoproject.com'
+483:48:Name -> Const:str:'Search for <a href="https://google.com/ | Const:str:'Search for <a href="https://google.com/ | Const:str:'Search for <a href="https://google.com/ | Const:str:'<a href="http://www.foo.bar/">http://ww | Const:str:'Look on <a href="https://www.%D9%86%D8% | Const:str:'<a href="mailto:foo@example.com">foo@ex | Const:str:'<a href="mailto:test@%ED%95%9C.%EA%B8%8 | Const:str:'<a href="mailto:yes%2Bthis%3Dis%26a%25v | Const:str:'<a href="mailto:foo@fa%C3%9F.example.co | Const:str:'<a href="mailto:idna-2008@%DE%89%DE%A8% | Const:str:'<a href="https://host.djangoproject.com
+485:5:Call -> Inst:django.test.utils.override_settings
+485:5:Name -> Class:django.test.utils.override_settings
+492:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+492:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertWarnsMessage
+492:13:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+492:37:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+492:63:Name -> Const:str:'The default protocol will be changed fr
+493:12:Call -> Const:NoneType:None
+493:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+493:12:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+494:16:Call -> Const:str:''
+494:16:Name -> Func:django.utils.html.urlize
+525:21:Name -> Tuple:22
+526:17:Call -> Gen:unittest.case.TestCase.subTest
+526:17:Attribute -> BM:unittest.case.TestCase.subTest
+526:17:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+526:36:Name -> Const:str:'a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a | Const:str:'a@한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한 | Const:str:'http://한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글. | Const:str:'www.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글 | Const:str:'a...................................... | Const:str:'foo@' | Const:str:'@foo.com' | Const:str:'foo@.example.com' | Const:str:'foo@localhost' | Const:str:'foo@localhost.' | Const:str:'test@example?;+!.com' | Const:str:"email me@example.com,then I'll respond" | Const:str:'[a link](https://www.djangoproject.com/ | Const:str:'((((((((((((((((((((((((((((((((((((((( | Const:str:'((((((((((((((((((((((((((((((((((((((( | Const:str:'([([([([([([([([([([([([([([([([([([([( | U
+527:16:Call -> Const:NoneType:None
+527:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+527:16:Name -> Inst:tests.utils_tests.test_html.TestUtilsHtml
+527:33:Call -> Const:str:''
+527:33:Name -> Func:django.utils.html.urlize
+527:40:Name -> Const:str:'a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a | Const:str:'a@한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한 | Const:str:'http://한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글. | Const:str:'www.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글 | Const:str:'a...................................... | Const:str:'foo@' | Const:str:'@foo.com' | Const:str:'foo@.example.com' | Const:str:'foo@localhost' | Const:str:'foo@localhost.' | Const:str:'test@example?;+!.com' | Const:str:"email me@example.com,then I'll respond" | Const:str:'[a link](https://www.djangoproject.com/ | Const:str:'((((((((((((((((((((((((((((((((((((((( | Const:str:'((((((((((((((((((((((((((((((((((((((( | Const:str:'([([([([([([([([([([([([([([([([([([([( | U | Const:str:'([[([[([[([[([[([[([[([[([[([[([[([[([[ | Const:str:'&:;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; | Const:str:'&.;&.;&.;&.;&.;&.;&.;&.;&.;&.;&.;&.;&.; | Const:str:'.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;. | Const:str:'&;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:
+527:48:Name -> Const:str:'a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a@a | Const:str:'a@한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한 | Const:str:'http://한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글. | Const:str:'www.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글.한.글 | Const:str:'a...................................... | Const:str:'foo@' | Const:str:'@foo.com' | Const:str:'foo@.example.com' | Const:str:'foo@localhost' | Const:str:'foo@localhost.' | Const:str:'test@example?;+!.com' | Const:str:"email me@example.com,then I'll respond" | Const:str:'[a link](https://www.djangoproject.com/ | Const:str:'((((((((((((((((((((((((((((((((((((((( | Const:str:'((((((((((((((((((((((((((((((((((((((( | Const:str:'([([([([([([([([([([([([([([([([([([([( | U | Const:str:'([[([[([[([[([[([[([[([[([[([[([[([[([[ | Const:str:'&:;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; | Const:str:'&.;&.;&.;&.;&.;&.;&.;&.;&.;&.;&.;&.;&.; | Const:str:'.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;.;. | Const:str:'&;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:;:

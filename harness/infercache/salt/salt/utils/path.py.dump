@@ -1,0 +1,406 @@
+23:7:Name -> Class:builtins.ImportError
+26:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+26:6:Attribute -> Func:logging.getLogger
+26:6:Name -> Module:logging
+26:24:Name -> Const:str:'salt.utils.path' | Const:str:'__main__'
+39:7:Call -> U
+39:7:Attribute -> Func:salt.utils.platform.is_windows
+39:7:Attribute -> Module:salt.utils.platform
+39:7:Attribute -> Module:salt.utils
+39:7:Name -> Module:salt
+40:15:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+40:15:Name -> Func:salt.utils.path._is_reparse_point
+40:33:Name -> U
+42:11:Call -> Const:bool:False | U
+42:11:Attribute -> Func:genericpath.islink | U
+42:11:Attribute -> Module:posixpath | Module:ntpath
+42:11:Name -> Module:os
+42:26:Name -> U
+49:11:Call -> ERR
+49:11:Attribute -> Func:posix.readlink
+49:11:Name -> Module:os
+49:23:Name -> U
+50:7:Call -> U
+50:7:Attribute -> Func:salt.utils.platform.is_windows
+50:7:Attribute -> Module:salt.utils.platform
+50:7:Attribute -> Module:salt.utils
+50:7:Name -> Module:salt
+54:11:Call -> U
+54:11:Attribute -> U
+54:11:Name -> U
+55:19:Name -> U
+56:11:Name -> U
+64:13:Call -> U
+64:13:Attribute -> U
+64:13:Name -> U
+64:42:Name -> U
+67:7:Name -> U
+71:19:Name -> U
+71:28:Attribute -> U
+71:28:Name -> U
+84:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+84:11:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+84:11:Attribute -> Module:posixpath | Module:ntpath
+84:11:Name -> Module:os
+84:28:Name -> U
+86:11:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+86:11:Name -> Func:salt.utils.path._is_reparse_point
+86:29:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+91:21:Call -> U
+91:21:Attribute -> U
+91:21:Name -> U
+92:12:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+101:22:Call -> U
+101:22:Attribute -> U
+101:22:Name -> U
+102:12:Name -> U
+109:11:Name -> U
+110:12:Call -> U
+110:12:Attribute -> U
+110:12:Name -> U
+110:34:Name -> U
+112:11:Name -> U
+115:1:Call -> Inst:salt.utils.decorators.jinja.JinjaFilter
+115:1:Name -> Class:salt.utils.decorators.jinja.JinjaFilter
+121:11:Name -> Const:NoneType:None | U
+122:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+122:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+122:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+131:15:Call -> Const:bool:False | U
+131:15:Attribute -> Func:genericpath.isfile | U
+131:15:Attribute -> Module:posixpath | Module:ntpath
+131:15:Name -> Module:os
+131:30:Name -> U
+131:40:Call -> ERR
+131:40:Attribute -> Func:posix.access
+131:40:Name -> Module:os
+131:50:Name -> U
+131:56:Attribute -> Const:int:1
+131:56:Name -> Module:os
+138:14:Call -> Const:bool:False | U
+138:14:Attribute -> Func:genericpath.islink | U
+138:14:Attribute -> Module:posixpath | Module:ntpath
+138:14:Name -> Module:os
+138:29:Name -> U
+139:18:Call -> U
+139:18:Name -> Func:salt.utils.path.readlink
+139:27:Name -> U
+143:19:Call -> U | Const:bool:True | Const:bool:False
+143:19:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+143:19:Attribute -> Module:posixpath | Module:ntpath
+143:19:Name -> Module:os
+143:33:Name -> U
+144:31:Call -> Tuple:2 | Tuple:2
+144:31:Attribute -> Func:posixpath.split | Func:ntpath.split
+144:31:Attribute -> Module:posixpath | Module:ntpath
+144:31:Name -> Module:os
+144:45:Name -> U
+145:22:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+145:22:Name -> Func:salt.utils.path.join
+145:27:Name -> U
+145:38:Name -> U
+146:19:Name -> U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+147:15:Name -> U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+155:17:Call -> Tuple:2 | Tuple:2
+155:17:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+155:17:Attribute -> Module:posixpath | Module:ntpath
+155:17:Name -> Module:os
+155:34:Name -> U
+156:15:Call -> U
+156:15:Attribute -> U
+156:15:Name -> U
+156:30:Name -> U
+159:10:Call -> U
+159:10:Attribute -> Func:salt.utils.stringutils.to_unicode
+159:10:Attribute -> Module:salt.utils.stringutils
+159:10:Attribute -> Module:salt.utils
+159:10:Name -> Module:salt
+159:44:Call -> U | Const:str:''
+159:44:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+159:44:Attribute -> Dict:43 | Inst:os._Environ
+159:44:Name -> Module:os
+160:18:Call -> U
+160:18:Attribute -> U
+160:18:Name -> U
+160:28:Attribute -> Const:str:':'
+160:28:Name -> Module:os
+163:11:Call -> U
+163:11:Attribute -> Func:salt.utils.platform.is_windows
+163:11:Attribute -> Module:salt.utils.platform
+163:11:Attribute -> Module:salt.utils
+163:11:Name -> Module:salt
+164:14:Call -> Inst:builtins.set
+164:14:Name -> Class:builtins.set
+164:18:Name -> U
+173:8:Call -> U
+173:8:Attribute -> U
+173:8:Name -> U
+173:28:Name -> Const:str:'/sbin' | Const:str:'/bin' | Const:str:'/usr/sbin' | Const:str:'/usr/bin' | Const:str:'/usr/local/sbin' | Const:str:'/usr/local/bin'
+173:39:Name -> List:6
+173:56:Name -> Const:str:'/sbin' | Const:str:'/bin' | Const:str:'/usr/sbin' | Const:str:'/usr/bin' | Const:str:'/usr/local/sbin' | Const:str:'/usr/local/bin'
+173:65:Name -> Inst:builtins.set
+176:7:Call -> U
+176:7:Attribute -> Func:salt.utils.platform.is_windows
+176:7:Attribute -> Module:salt.utils.platform
+176:7:Attribute -> Module:salt.utils
+176:7:Name -> Module:salt
+178:14:Call -> U
+178:14:Attribute -> Func:salt.utils.stringutils.to_str
+178:14:Attribute -> Module:salt.utils.stringutils
+178:14:Attribute -> Module:salt.utils
+178:14:Name -> Module:salt
+178:44:Call -> U | Const:str:'.EXE'
+178:44:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+178:44:Attribute -> Dict:43 | Inst:os._Environ
+178:44:Name -> Module:os
+184:18:Call -> U
+184:18:Attribute -> U
+184:18:Name -> U
+184:28:Attribute -> Const:str:':'
+184:28:Name -> Module:os
+185:15:Call -> U
+185:15:Attribute -> U
+185:15:Name -> U
+185:38:Name -> U
+188:17:Call -> Tuple:2 | Tuple:2
+188:17:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+188:17:Attribute -> Module:posixpath | Module:ntpath
+188:17:Name -> Module:os
+188:34:Name -> Const:NoneType:None | U
+189:11:Call -> U
+189:11:Attribute -> U
+189:11:Name -> U
+189:26:Name -> U
+192:28:Name -> Func:salt.utils.path.which.is_executable_common
+198:47:Name -> U | Inst:builtins.set
+199:23:Call -> U
+199:23:Name -> Func:salt.utils.path.which.is_executable_common
+199:44:Name -> U
+199:54:Call -> U
+199:54:Name -> Func:salt.utils.path.which.has_executable_ext
+200:20:Name -> U
+200:26:Name -> U | Inst:builtins.set
+208:24:Name -> Func:salt.utils.path.which.is_executable_common
+214:7:Call -> U
+214:7:Name -> Func:salt.utils.path.which.is_executable_common | Func:salt.utils.path.which.is_executable | U
+214:21:Name -> Const:NoneType:None | U
+215:15:Name -> Const:NoneType:None | U
+218:16:Name -> U
+219:12:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+219:12:Name -> Func:salt.utils.path.join
+219:17:Call -> U
+219:17:Attribute -> Func:posixpath.expandvars | Func:ntpath.expandvars
+219:17:Attribute -> Module:posixpath | Module:ntpath
+219:17:Name -> Module:os
+219:36:Name -> U
+219:43:Name -> Const:NoneType:None | U
+222:19:Name -> U | List:1 | List:1
+223:19:Name -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+223:23:Name -> Const:str:'' | Const:str:''
+225:21:Call -> Const:str:'' | Const:str:'' | U | Const:str:'.' | Const:str:'.' | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+225:21:Name -> Func:salt.utils.path.which.resolve
+225:29:Name -> Const:str:'' | Const:str:'' | U | Const:str:'.' | Const:str:'.'
+226:19:Name -> Class:builtins.OSError
+228:15:Call -> U
+228:15:Name -> Func:salt.utils.path.which.is_executable_common | Func:salt.utils.path.which.is_executable
+228:29:Name -> Const:str:'' | Const:str:'' | U | Const:str:'.' | Const:str:'.' | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+229:23:Name -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+229:27:Name -> Const:str:'' | Const:str:''
+234:4:Call -> U
+234:4:Attribute -> U
+234:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+235:70:Name -> Const:NoneType:None | U
+235:75:Name -> U
+244:7:Call -> ERR
+244:7:Name -> Func:builtins.isinstance
+244:18:Name -> U
+244:24:Name -> Class:builtins.str
+245:16:Name -> U
+246:11:Call -> ERR
+246:11:Name -> Func:builtins.isinstance
+246:22:Name -> U | List:1
+246:28:Name -> Class:_collections_abc.Iterable
+248:15:Name -> U | List:1
+249:15:Call -> Const:NoneType:None | U
+249:15:Name -> Func:salt.utils.path.which
+249:21:Name -> U
+250:15:Name -> Const:NoneType:None | U
+252:15:Name -> Const:NoneType:None | U
+256:1:Call -> Inst:salt.utils.decorators.jinja.JinjaFilter
+256:1:Name -> Class:salt.utils.decorators.jinja.JinjaFilter
+268:13:Call -> U
+268:13:Attribute -> Func:salt.utils.stringutils.to_str
+268:13:Attribute -> Module:salt.utils.stringutils
+268:13:Attribute -> Module:salt.utils
+268:13:Name -> Module:salt
+268:43:Name -> U
+268:61:Name -> Tuple:0
+270:13:Call -> Dict:0
+270:13:Attribute -> Func:salt.utils.args.clean_kwargs
+270:13:Attribute -> Module:salt.utils.args
+270:13:Attribute -> Module:salt.utils
+270:13:Name -> Module:salt
+270:44:Name -> Dict:0
+271:20:Call -> ERR
+271:20:Attribute -> BM:builtins.dict.pop
+271:20:Name -> Dict:0
+272:7:Name -> Dict:0
+273:8:Call -> Const:str:'The following keyword arguments are not
+273:8:Attribute -> Func:salt.utils.args.invalid_kwargs
+273:8:Attribute -> Module:salt.utils.args
+273:8:Attribute -> Module:salt.utils
+273:8:Name -> Module:salt
+273:39:Name -> U
+275:27:Name -> U
+275:14:Name -> Module:posixpath
+275:46:Attribute -> Module:posixpath | Module:ntpath
+275:46:Name -> Module:os
+278:13:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+278:13:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+278:13:Name -> Module:posixpath | Module:ntpath
+278:30:Name -> U
+278:42:Name -> U
+281:15:Call -> U
+281:15:Attribute -> U
+281:15:Name -> U
+282:11:Name -> Class:builtins.IndexError
+286:11:Call -> U
+286:11:Attribute -> Func:salt.utils.stringutils.to_unicode
+286:11:Attribute -> Module:salt.utils.stringutils
+286:11:Attribute -> Module:salt.utils
+286:11:Name -> Module:salt
+286:45:Name -> U
+287:11:Name -> U
+288:14:Name -> U
+290:20:Call -> U
+290:20:Attribute -> U
+290:20:Name -> U
+290:29:Attribute -> Const:str:'/'
+290:29:Name -> Module:os
+290:46:Name -> U
+291:14:Call -> U
+291:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+291:14:Name -> Module:posixpath | Module:ntpath
+291:27:Name -> U
+291:34:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+291:34:Attribute -> Func:salt.utils.data.decode
+291:34:Attribute -> Module:salt.utils.data
+291:34:Attribute -> Module:salt.utils
+291:34:Name -> Module:salt
+291:57:Name -> U
+292:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+292:11:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+292:11:Name -> Module:posixpath | Module:ntpath
+292:28:Name -> U
+303:7:Name -> U
+304:14:Call -> ExcInst:salt.exceptions.CommandNotFoundError
+304:14:Name -> Class:salt.exceptions.CommandNotFoundError
+306:11:Call -> Const:NoneType:None | U
+306:11:Name -> Func:salt.utils.path.which
+306:17:Name -> U
+307:14:Call -> ExcInst:salt.exceptions.CommandNotFoundError
+307:14:Name -> Class:salt.exceptions.CommandNotFoundError
+307:39:Name -> U
+315:7:Call -> ERR
+315:7:Name -> Func:builtins.isinstance
+315:18:Name -> U
+315:27:Name -> Class:builtins.str
+316:18:Call -> U
+316:18:Attribute -> U
+316:18:Name -> U
+316:37:Call -> ERR
+316:37:Name -> Func:builtins.ord
+316:41:Name -> U
+316:58:Name -> Const:str:'<>:|?*'
+317:9:Call -> ERR
+317:9:Name -> Func:builtins.isinstance
+317:20:Name -> U
+317:29:Name -> Class:builtins.str
+318:23:Call -> Const:int:6
+318:23:Name -> Func:builtins.len
+318:27:Name -> Const:str:'<>:|?*'
+319:18:Call -> ERR
+319:18:Attribute -> Inst:builtins.builtin_function_or_method
+319:31:Name -> Const:str:'<>:|?*'
+319:38:Name -> Const:str:'______'
+320:18:Call -> U
+320:18:Attribute -> U
+320:18:Name -> U
+320:36:Name -> U
+321:11:Name -> U
+347:18:Call -> U | Const:str:'C:\\Windows'
+347:18:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+347:18:Attribute -> Dict:43 | Inst:os._Environ
+347:18:Name -> Module:os
+351:8:Call -> U
+351:8:Attribute -> Func:re.escape
+351:8:Name -> Module:re
+351:18:Name -> U | Const:str:'C:\\Windows'
+355:7:Name -> Const:NoneType:None | U
+355:26:Call -> ERR
+355:26:Name -> Func:builtins.isinstance
+355:37:Name -> Const:NoneType:None | U
+355:49:Name -> Class:builtins.list
+356:22:Name -> Const:NoneType:None | U
+359:18:Call -> List:0
+359:18:Name -> Class:builtins.list
+360:7:Name -> Const:NoneType:None | U | List:1
+361:20:Name -> U | List:1
+362:12:Call -> ERR
+362:12:Attribute -> BM:builtins.list.append
+362:12:Name -> List:0
+362:31:Call -> U
+362:31:Attribute -> Func:re.escape
+362:31:Name -> Module:re
+362:41:Name -> Const:NoneType:None | U
+366:18:Name -> Tuple:3
+367:11:Call -> U
+367:11:Attribute -> Func:re.match
+367:11:Name -> Module:re
+367:20:Name -> Const:str:'[a-z]\\:\\\\$' | Const:str:'\\\\$' | U
+367:28:Name -> U
+367:40:Attribute -> Const:int:2
+367:40:Name -> Module:re
+372:11:Name -> Const:bool:True | Const:bool:False
+373:22:Name -> List:0
+374:15:Call -> U
+374:15:Attribute -> Func:re.match
+374:15:Name -> Module:re
+374:24:Name -> U
+374:32:Name -> U
+374:44:Attribute -> Const:int:2
+374:44:Name -> Module:re
+378:11:Name -> Const:bool:True | Const:bool:False | Const:bool:True
+386:16:Call -> U
+386:16:Attribute -> Func:salt.utils.stringutils.to_str
+386:16:Attribute -> Module:salt.utils.stringutils
+386:16:Attribute -> Module:salt.utils
+386:16:Name -> Module:salt
+386:46:Name -> U
+387:16:Call -> Gen:os.walk
+387:16:Attribute -> Func:os.walk
+387:16:Name -> Module:os
+387:24:Name -> U
+387:36:Name -> Tuple:0
+387:44:Name -> Dict:0
+388:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Tuple:0
+388:14:Attribute -> Func:salt.utils.data.decode
+388:14:Attribute -> Module:salt.utils.data
+388:14:Attribute -> Module:salt.utils
+388:14:Name -> Module:salt
+388:37:Name -> U
+403:11:Call -> U
+403:11:Attribute -> Func:posixpath.expanduser | U
+403:11:Attribute -> Module:posixpath | Module:ntpath
+403:11:Name -> Module:os
+403:30:Name -> U
+404:11:Call -> U
+404:11:Attribute -> Func:posixpath.expandvars | Func:ntpath.expandvars
+404:11:Attribute -> Module:posixpath | Module:ntpath
+404:11:Name -> Module:os
+404:30:Name -> U
+405:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+405:11:Attribute -> Func:posixpath.realpath | U
+405:11:Attribute -> Module:posixpath | Module:ntpath
+405:11:Name -> Module:os
+405:28:Name -> U

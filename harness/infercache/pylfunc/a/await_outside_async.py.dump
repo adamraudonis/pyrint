@@ -1,0 +1,24 @@
+8:4:Call -> Const:int:42
+8:4:Name -> Func:pylfunc.a.await_outside_async.nested
+9:4:Call -> ERR
+9:4:Name -> Func:builtins.print
+9:16:Call -> Const:int:42
+9:16:Name -> Func:pylfunc.a.await_outside_async.nested
+12:4:Call -> ERR
+12:4:Name -> Func:builtins.print
+12:16:Call -> Const:int:42
+12:16:Name -> Func:pylfunc.a.await_outside_async.nested
+16:11:Name -> U
+19:17:Call -> U
+19:17:Name -> Func:pylfunc.a.await_outside_async.func
+19:22:Name -> U
+19:34:Call -> Inst:builtins.range
+19:34:Name -> Class:builtins.range
+25:14:Call -> Const:NoneType:None | U
+25:14:Attribute -> Func:asyncio.tasks.sleep
+25:14:Name -> Module:asyncio
+30:14:Call -> Const:NoneType:None | U
+30:14:Attribute -> Func:asyncio.tasks.sleep
+30:14:Name -> Module:asyncio
+34:22:Call -> Const:int:42
+34:22:Name -> Func:pylfunc.a.await_outside_async.nested

@@ -1,0 +1,57 @@
+11:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+11:6:Attribute -> Func:logging.getLogger
+11:6:Name -> Module:logging
+11:24:Name -> Const:str:'salt.modules.win_ntp' | Const:str:'__main__'
+21:11:Call -> U
+21:11:Attribute -> Func:salt.utils.platform.is_windows
+21:11:Attribute -> Module:salt.utils.platform
+21:11:Attribute -> Module:salt.utils
+21:11:Name -> Module:salt
+23:11:Name -> Const:str:'ntp'
+41:11:Call -> ERR
+41:11:Name -> ERR
+41:38:Name -> Const:str:'w32time'
+42:15:Call -> ERR
+42:15:Name -> ERR
+42:41:Name -> Const:str:'w32time'
+49:8:Call -> Const:str:'/manualpeerlist:'
+49:8:Attribute -> BM:builtins.str.format
+49:36:Call -> Const:str:''
+49:36:Attribute -> BM:builtins.str.join
+49:45:Name -> Tuple:0
+54:15:Name -> List:4
+54:27:Name -> List:3
+54:41:Name -> List:3
+55:8:Call -> ERR
+55:8:Name -> ERR
+55:28:Name -> List:4 | List:3 | List:3
+57:11:Call -> ERR
+57:11:Name -> Func:builtins.sorted
+57:18:Call -> List:0
+57:18:Name -> Class:builtins.list
+57:23:Name -> Tuple:0
+57:36:Call -> U | Const:bool:False | Const:bool:False
+57:36:Name -> Func:salt.modules.win_ntp.get_servers
+60:4:Call -> ERR
+60:4:Name -> ERR
+60:32:Name -> Const:str:'w32time'
+75:12:Call -> ERR
+75:12:Attribute -> ERR
+75:12:Call -> ERR
+75:12:Name -> ERR
+75:32:Name -> List:3
+76:16:Name -> U
+78:15:Call -> U
+78:15:Attribute -> U
+78:15:Name -> U
+79:29:Call -> U
+79:29:Attribute -> U
+79:29:Call -> U
+79:29:Attribute -> U
+79:29:Name -> U
+80:23:Call -> ERR
+80:23:Name -> Func:builtins.sorted
+80:30:Call -> U
+80:30:Attribute -> U
+80:30:Name -> U
+81:15:Name -> Class:builtins.ValueError

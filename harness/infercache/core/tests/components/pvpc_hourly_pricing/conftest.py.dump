@@ -1,0 +1,106 @@
+18:37:Name -> Class:builtins.str
+20:11:Name -> U
+22:8:Attribute -> U
+22:8:Name -> U
+22:25:Name -> Const:str:'unit_of_measurement'
+23:14:Name -> Const:str:'€'
+23:30:Attribute -> Inst:homeassistant.const.UnitOfEnergy.KILO_WATT_HOUR
+23:30:Name -> Class:homeassistant.const.UnitOfEnergy
+26:12:Call -> Inst:builtins.float
+26:12:Name -> Class:builtins.float
+26:18:Attribute -> U
+26:18:Name -> U
+28:22:Call -> Inst:builtins.float
+28:22:Name -> Class:builtins.float
+28:28:Attribute -> U
+28:28:Name -> U
+29:15:Attribute -> U
+29:15:Name -> U
+29:32:Name -> Const:str:'tariff'
+29:48:Name -> U
+30:11:Name -> Class:builtins.ValueError
+33:7:Name -> Const:NoneType:None | U
+33:29:Call -> ERR
+33:29:Name -> Func:builtins.isinstance
+33:40:Name -> Const:NoneType:None | U
+33:47:Name -> Class:builtins.str
+34:15:Attribute -> U
+34:15:Name -> U
+34:30:Name -> Const:NoneType:None | U
+35:9:Name -> Const:NoneType:None | U
+36:15:Call -> ERR
+36:15:Name -> Func:builtins.abs
+36:19:Call -> Inst:builtins.float
+36:19:Name -> Class:builtins.float
+36:25:Attribute -> U
+36:25:Name -> U
+36:40:Name -> U
+37:7:Name -> Const:NoneType:None | U
+38:15:Call -> ERR
+38:15:Name -> Func:builtins.abs
+38:19:Call -> Inst:builtins.float
+38:19:Name -> Class:builtins.float
+38:25:Attribute -> U
+38:25:Name -> U
+38:40:Attribute -> U
+38:40:Name -> U
+38:57:Name -> U
+41:1:Attribute -> U
+41:1:Name -> U
+42:40:Name -> Class:tests.test_util.aiohttp.AiohttpClientMocker
+52:4:Call -> U
+52:4:Attribute -> U
+52:4:Name -> U
+53:8:Call -> Const:str:'https://api.esios.ree.es/archives/70/do
+53:8:Attribute -> BM:builtins.str.format
+53:8:Name -> Const:str:'https://api.esios.ree.es/archives/70/do
+53:31:Name -> Const:str:'2023-01-06'
+54:13:Call -> U
+54:13:Name -> U
+54:29:Name -> Const:str:'pvpc_hourly_pricing'
+54:38:Name -> Const:str:'PVPC_DATA_2023_01_06.json'
+56:21:Name -> Tuple:4
+57:8:Call -> U
+57:8:Attribute -> U
+57:8:Name -> U
+58:12:Call -> U
+58:12:Attribute -> BM:builtins.str.format
+58:12:Name -> Const:str:'https://api.esios.ree.es/indicators/{0}
+58:34:Name -> Const:str:'1001' | Const:str:'1739' | Const:str:'1900' | Const:str:'10211'
+58:45:Name -> Const:str:'2023-01-06'
+59:17:Call -> U
+59:17:Name -> U
+59:33:Name -> Const:str:'pvpc_hourly_pricing'
+59:42:Name -> Const:str:'PRICES_ESIOS_1001_2023_01_06.json'
+63:4:Call -> U
+63:4:Attribute -> U
+63:4:Name -> U
+64:8:Call -> Const:str:'https://api.esios.ree.es/archives/70/do
+64:8:Attribute -> BM:builtins.str.format
+64:8:Name -> Const:str:'https://api.esios.ree.es/archives/70/do
+65:15:Attribute -> Inst:http.HTTPStatus.OK
+65:15:Name -> Class:http.HTTPStatus
+68:21:Name -> Tuple:4
+69:8:Call -> U
+69:8:Attribute -> U
+69:8:Name -> U
+70:12:Call -> U
+70:12:Attribute -> BM:builtins.str.format
+70:12:Name -> Const:str:'https://api.esios.ree.es/indicators/{0}
+70:34:Name -> Const:str:'1001' | Const:str:'1739' | Const:str:'1900' | Const:str:'10211'
+71:19:Attribute -> Inst:http.HTTPStatus.OK
+71:19:Name -> Class:http.HTTPStatus
+72:17:Call -> Const:str:''
+72:17:Attribute -> BM:builtins.str.replace
+78:30:Name -> Const:str:'1001' | Const:str:'1739' | Const:str:'1900' | Const:str:'10211'
+81:21:Name -> Tuple:4
+82:8:Call -> U
+82:8:Attribute -> U
+82:8:Name -> U
+83:12:Call -> U
+83:12:Attribute -> BM:builtins.str.format
+83:12:Name -> Const:str:'https://api.esios.ree.es/indicators/{0}
+83:34:Name -> Const:str:'1001' | Const:str:'1739' | Const:str:'1900' | Const:str:'10211'
+84:19:Attribute -> Inst:http.HTTPStatus.UNAUTHORIZED
+84:19:Name -> Class:http.HTTPStatus
+88:11:Name -> U

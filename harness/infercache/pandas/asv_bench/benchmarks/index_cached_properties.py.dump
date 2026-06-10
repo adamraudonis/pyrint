@@ -1,0 +1,112 @@
+26:11:Name -> U
+27:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+27:23:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+27:23:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_product
+27:23:Attribute -> Class:pandas.core.indexes.multi.MultiIndex
+27:23:Name -> Module:pandas
+28:17:Call -> Inst:pandas.core.indexes.datetimes.DatetimeIndex
+28:17:Attribute -> Func:pandas.core.indexes.datetimes.date_range
+28:17:Name -> Module:pandas
+28:63:Name -> Const:int:100000
+30:13:Name -> U
+31:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+31:23:Call -> Inst:pandas.core.indexes.datetimes.DatetimeIndex
+31:23:Attribute -> Func:pandas.core.indexes.datetimes.date_range
+31:23:Name -> Module:pandas
+31:69:Name -> Const:int:100000
+32:13:Name -> U
+33:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+33:23:Call -> Inst:pandas.core.indexes.base.Index
+33:23:Attribute -> Class:pandas.core.indexes.base.Index
+33:23:Name -> Module:pandas
+33:32:Call -> Inst:builtins.range
+33:32:Name -> Class:builtins.range
+33:38:Name -> Const:int:100000
+34:13:Name -> U
+35:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+35:23:Call -> Inst:pandas.core.indexes.period.PeriodIndex
+35:23:Attribute -> Func:pandas.core.indexes.period.period_range
+35:23:Name -> Module:pandas
+35:71:Name -> Const:int:100000
+36:13:Name -> U
+37:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+37:23:Call -> Inst:pandas.core.indexes.range.RangeIndex
+37:23:Attribute -> Class:pandas.core.indexes.range.RangeIndex
+37:23:Name -> Module:pandas
+37:51:Name -> Const:int:100000
+38:13:Name -> U
+39:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+39:23:Call -> Inst:pandas.core.indexes.interval.IntervalIndex
+39:23:Attribute -> BM:pandas.core.indexes.interval.IntervalIndex.from_arrays
+39:23:Attribute -> Class:pandas.core.indexes.interval.IntervalIndex
+39:23:Name -> Module:pandas
+39:52:Call -> Inst:builtins.range
+39:52:Name -> Class:builtins.range
+39:58:Name -> Const:int:100000
+39:62:Call -> Inst:builtins.range
+39:62:Name -> Class:builtins.range
+39:71:Name -> Const:int:100000
+40:13:Name -> U
+41:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+41:23:Call -> Inst:pandas.core.indexes.timedeltas.TimedeltaIndex
+41:23:Attribute -> Class:pandas.core.indexes.timedeltas.TimedeltaIndex
+41:23:Name -> Module:pandas
+41:41:Call -> Inst:builtins.range
+41:41:Name -> Class:builtins.range
+41:47:Name -> Const:int:100000
+42:13:Name -> U
+43:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+43:23:Call -> Inst:pandas.core.indexes.base.Index
+43:23:Attribute -> Class:pandas.core.indexes.base.Index
+43:23:Name -> Module:pandas
+43:32:Call -> Inst:builtins.range
+43:32:Name -> Class:builtins.range
+43:38:Name -> Const:int:100000
+44:13:Name -> U
+45:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+45:23:Call -> Inst:pandas.core.indexes.base.Index
+45:23:Attribute -> Class:pandas.core.indexes.base.Index
+45:23:Name -> Module:pandas
+45:32:Call -> Inst:builtins.range
+45:32:Name -> Class:builtins.range
+45:38:Name -> Const:int:100000
+46:13:Name -> U
+47:12:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+47:23:Call -> Inst:pandas.core.indexes.category.CategoricalIndex
+47:23:Attribute -> Class:pandas.core.indexes.category.CategoricalIndex
+47:23:Name -> Module:pandas
+47:43:Call -> Inst:builtins.range
+47:43:Name -> Class:builtins.range
+47:49:Name -> Const:int:100000
+47:53:Call -> Inst:builtins.range
+47:53:Name -> Class:builtins.range
+47:59:Name -> Const:int:100000
+49:18:Name -> Class:builtins.ValueError
+50:15:Call -> ERR
+50:15:Name -> Func:builtins.len
+50:19:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | U
+50:19:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+50:32:Name -> Const:int:100000
+51:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | Inst:pandas.core.indexes.period.PeriodIndex | Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.indexes.interval.IntervalIndex | U
+51:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+54:8:Attribute -> Const:NoneType:None | U
+54:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | U
+54:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+57:8:Attribute -> Tuple:1 | U
+57:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | U
+57:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+60:8:Attribute -> U
+60:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | U
+60:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+63:8:Attribute -> Const:bool:False | Const:NoneType:None | U
+63:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | U
+63:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+66:8:Attribute -> Const:bool:False | U
+66:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | U
+66:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+69:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndexPyIntEngine | Inst:pandas.core.indexes.multi.MultiIndexUInt64Engine | Inst:pandas.core.indexes.multi.MultiIndexUInt32Engine | Inst:pandas.core.indexes.multi.MultiIndexUInt16Engine | U
+69:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | U
+69:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache
+72:8:Attribute -> Const:str:'mixed' | U
+72:8:Attribute -> Inst:pandas.core.indexes.multi.MultiIndex | Inst:pandas.core.indexes.datetimes.DatetimeIndex | Inst:pandas.core.indexes.base.Index | U
+72:8:Name -> Inst:asv_bench.benchmarks.index_cached_properties.IndexCache

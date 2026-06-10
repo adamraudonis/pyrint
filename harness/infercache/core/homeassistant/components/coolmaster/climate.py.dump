@@ -1,0 +1,269 @@
+27:12:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.HEAT
+27:12:Name -> Class:homeassistant.components.climate.const.HVACMode
+28:12:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.COOL
+28:12:Name -> Class:homeassistant.components.climate.const.HVACMode
+29:12:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.HEAT_COOL
+29:12:Name -> Class:homeassistant.components.climate.const.HVACMode
+30:11:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.DRY
+30:11:Name -> Class:homeassistant.components.climate.const.HVACMode
+31:11:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.FAN_ONLY
+31:11:Name -> Class:homeassistant.components.climate.const.HVACMode
+34:18:Name -> Inst:homeassistant.components.climate.const.HVACMode.HEAT | Inst:homeassistant.components.climate.const.HVACMode.COOL | Inst:homeassistant.components.climate.const.HVACMode.HEAT_COOL | Inst:homeassistant.components.climate.const.HVACMode.DRY | Inst:homeassistant.components.climate.const.HVACMode.FAN_ONLY
+34:25:Name -> Const:str:'heat' | Const:str:'cool' | Const:str:'auto' | Const:str:'dry' | Const:str:'fan'
+34:47:Call -> DictItems
+34:47:Attribute -> BM:builtins.dict.items
+34:47:Name -> Dict:5
+37:11:Name -> Const:str:'low'
+38:11:Name -> Const:str:'medium'
+39:12:Name -> Const:str:'high'
+40:12:Name -> Const:str:'auto'
+43:16:Name -> Const:str:'low' | Const:str:'medium' | Const:str:'high' | Const:str:'auto'
+43:23:Name -> Const:str:'low' | Const:str:'med' | Const:str:'high' | Const:str:'auto'
+43:45:Call -> DictItems
+43:45:Attribute -> BM:builtins.dict.items
+43:45:Name -> Dict:4
+45:12:Call -> List:4
+45:12:Name -> Class:builtins.list
+45:17:Call -> DictValues
+45:17:Attribute -> BM:builtins.dict.values
+45:17:Name -> Dict:4
+47:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+47:10:Attribute -> Func:logging.getLogger
+47:10:Name -> Module:logging
+47:28:Name -> Const:str:'homeassistant.components.coolmaster.cli | Const:str:'__main__'
+51:10:Name -> U
+52:18:Name -> U
+53:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+56:18:Attribute -> U
+56:18:Name -> U
+57:21:Name -> Class:builtins.list
+57:26:Name -> Class:builtins.str
+57:33:Attribute -> U
+57:33:Name -> U
+57:51:Name -> Const:str:'supported_modes'
+58:4:Call -> U
+58:4:Name -> U
+59:8:Call -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+59:8:Name -> Class:homeassistant.components.coolmaster.climate.CoolmasterClimate
+60:12:Name -> U
+60:25:Name -> U
+60:35:Call -> Const:str:'' | U
+60:35:Name -> Class:homeassistant.components.climate.const.HVACMode
+60:44:Name -> U
+60:62:Name -> U
+62:23:Attribute -> U
+62:23:Name -> U
+66:24:Name -> Class:homeassistant.components.coolmaster.entity.CoolmasterEntity
+66:42:Name -> Class:homeassistant.components.climate.ClimateEntity
+74:31:Name -> Class:builtins.set
+74:35:Name -> Class:builtins.str
+74:42:Call -> Set:0
+74:42:Name -> Class:builtins.set
+78:21:Name -> Class:homeassistant.components.coolmaster.coordinator.CoolmasterDataUpdateCoordinator
+79:17:Name -> Class:builtins.str
+80:25:Name -> Class:builtins.list
+80:30:Name -> Class:homeassistant.components.climate.const.HVACMode
+83:8:Call -> Const:NoneType:None
+83:8:Attribute -> BM:homeassistant.components.coolmaster.entity.CoolmasterEntity.__init__ | BM:builtins.object.__init__
+83:8:Call -> Super
+83:8:Name -> Class:builtins.super
+83:25:Name -> U
+83:38:Name -> U
+84:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+84:32:Name -> U
+85:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+85:31:Name -> U
+87:5:Name -> Class:builtins.property
+88:36:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+91:12:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.TARGET_TEMPERATURE
+91:12:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+92:14:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.FAN_MODE
+92:14:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+93:14:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.TURN_OFF
+93:14:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+94:14:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.TURN_ON
+94:14:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+96:11:Attribute -> U
+96:11:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+97:34:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.SWING_MODE
+97:34:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+98:15:Name -> U
+100:5:Name -> Class:builtins.property
+101:34:Name -> Class:builtins.str
+103:11:Attribute -> U
+103:11:Attribute -> U
+103:11:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+104:19:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+104:19:Name -> Class:homeassistant.const.UnitOfTemperature
+106:15:Attribute -> Inst:homeassistant.const.UnitOfTemperature.FAHRENHEIT
+106:15:Name -> Class:homeassistant.const.UnitOfTemperature
+108:5:Name -> Class:builtins.property
+109:37:Name -> Class:builtins.float
+111:15:Attribute -> U
+111:15:Attribute -> U
+111:15:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+113:5:Name -> Class:builtins.property
+114:36:Name -> Class:builtins.float
+116:15:Attribute -> U
+116:15:Attribute -> U
+116:15:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+118:5:Name -> Class:builtins.property
+119:27:Name -> Class:homeassistant.components.climate.const.HVACMode
+121:15:Attribute -> U
+121:15:Attribute -> U
+121:15:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+122:15:Attribute -> U
+122:15:Attribute -> U
+122:15:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+123:19:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.OFF
+123:19:Name -> Class:homeassistant.components.climate.const.HVACMode
+125:15:Name -> Dict:5
+125:30:Name -> U
+127:5:Name -> Class:builtins.property
+128:26:Name -> Class:builtins.str
+132:26:Call -> U
+132:26:Attribute -> U
+132:26:Attribute -> U
+132:26:Attribute -> U
+132:26:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+133:11:Name -> U
+133:34:Name -> Dict:4
+135:15:Name -> U
+135:38:Attribute -> Set:0
+135:38:Name -> Class:homeassistant.components.coolmaster.climate.CoolmasterClimate
+136:16:Call -> ERR
+136:16:Attribute -> BM:builtins.set.add
+136:16:Attribute -> Set:0
+136:16:Name -> Class:homeassistant.components.coolmaster.climate.CoolmasterClimate
+136:64:Name -> U
+137:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+137:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+137:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+140:20:Name -> U
+142:19:Name -> U
+144:15:Name -> Dict:4
+144:28:Name -> U
+146:5:Name -> Class:builtins.property
+147:27:Name -> Class:builtins.list
+147:32:Name -> Class:builtins.str
+149:15:Name -> List:4
+151:5:Name -> Class:builtins.property
+152:28:Name -> Class:builtins.str
+154:15:Attribute -> U
+154:15:Attribute -> U
+154:15:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+156:5:Name -> Class:builtins.property
+157:29:Name -> Class:builtins.list
+157:34:Name -> Class:builtins.str
+159:30:Attribute -> U
+159:30:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+159:15:Name -> U
+161:52:Name -> Class:typing.Any
+163:20:Call -> ERR
+163:20:Attribute -> BM:builtins.dict.get
+163:20:Name -> Dict:0
+163:31:Name -> Const:str:'temperature'
+164:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+164:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+164:54:Attribute -> BM:homeassistant.helpers.entity.Entity.unique_id
+164:54:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+164:70:Call -> Const:str:''
+164:70:Name -> Class:builtins.str
+164:74:Name -> U
+165:12:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+165:31:Call -> U
+165:31:Attribute -> U
+165:31:Attribute -> U
+165:31:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+165:57:Name -> U
+166:12:Call -> Const:NoneType:None
+166:12:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+166:12:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+168:49:Name -> Class:builtins.str
+170:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+170:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+170:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+170:54:Attribute -> BM:homeassistant.helpers.entity.Entity.unique_id
+170:54:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+170:70:Name -> U
+171:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+171:27:Call -> U
+171:27:Attribute -> U
+171:27:Attribute -> U
+171:27:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+171:52:Name -> U
+171:65:Name -> U
+172:8:Call -> Const:NoneType:None
+172:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+172:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+174:53:Name -> Class:builtins.str
+176:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+176:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+176:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+176:56:Attribute -> BM:homeassistant.helpers.entity.Entity.unique_id
+176:56:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+176:72:Name -> U
+178:12:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+178:31:Call -> U
+178:31:Attribute -> U
+178:31:Attribute -> U
+178:31:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+178:52:Name -> U
+179:15:Name -> Class:builtins.ValueError
+180:18:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+180:18:Name -> Class:homeassistant.exceptions.HomeAssistantError
+180:37:Name -> ExcInst:builtins.ValueError
+180:49:Name -> ExcInst:builtins.ValueError
+181:8:Call -> Const:NoneType:None
+181:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+181:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+183:51:Name -> Class:homeassistant.components.climate.const.HVACMode
+185:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+185:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+185:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+185:60:Attribute -> BM:homeassistant.helpers.entity.Entity.unique_id
+185:60:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+185:76:Name -> U
+187:11:Name -> U
+187:24:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.OFF
+187:24:Name -> Class:homeassistant.components.climate.const.HVACMode
+188:18:Call -> Const:NoneType:None
+188:18:Attribute -> BM:homeassistant.components.coolmaster.climate.CoolmasterClimate.async_turn_off
+188:18:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+190:12:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+190:31:Call -> U
+190:31:Attribute -> U
+190:31:Attribute -> U
+190:31:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+190:51:Name -> U
+190:66:Name -> U
+191:18:Call -> Const:NoneType:None
+191:18:Attribute -> BM:homeassistant.components.coolmaster.climate.CoolmasterClimate.async_turn_on
+191:18:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+195:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+195:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+195:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+195:39:Attribute -> BM:homeassistant.helpers.entity.Entity.unique_id
+195:39:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+196:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+196:27:Call -> U
+196:27:Attribute -> U
+196:27:Attribute -> U
+196:27:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+197:8:Call -> Const:NoneType:None
+197:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+197:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+201:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+201:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+201:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+201:40:Attribute -> BM:homeassistant.helpers.entity.Entity.unique_id
+201:40:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+202:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+202:27:Call -> U
+202:27:Attribute -> U
+202:27:Attribute -> U
+202:27:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate
+203:8:Call -> Const:NoneType:None
+203:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+203:8:Name -> Inst:homeassistant.components.coolmaster.climate.CoolmasterClimate

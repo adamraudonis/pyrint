@@ -1,0 +1,262 @@
+17:12:Name -> Class:builtins.Exception
+21:21:Name -> Class:django.db.utils.Error
+25:20:Name -> Class:django.db.utils.Error
+29:16:Name -> Class:django.db.utils.DatabaseError
+33:23:Name -> Class:django.db.utils.DatabaseError
+37:21:Name -> Class:django.db.utils.DatabaseError
+41:20:Name -> Class:django.db.utils.DatabaseError
+45:23:Name -> Class:django.db.utils.DatabaseError
+49:24:Name -> Class:django.db.utils.DatabaseError
+65:8:Name -> Inst:django.db.utils.DatabaseErrorWrapper
+65:23:Name -> U
+68:12:Name -> Inst:django.db.utils.DatabaseErrorWrapper
+74:11:Name -> U
+77:12:Name -> Class:django.db.utils.DataError
+78:12:Name -> Class:django.db.utils.OperationalError
+79:12:Name -> Class:django.db.utils.IntegrityError
+80:12:Name -> Class:django.db.utils.InternalError
+81:12:Name -> Class:django.db.utils.ProgrammingError
+82:12:Name -> Class:django.db.utils.NotSupportedError
+83:12:Name -> Class:django.db.utils.DatabaseError
+84:12:Name -> Class:django.db.utils.InterfaceError
+85:12:Name -> Class:django.db.utils.Error
+87:26:Call -> U
+87:26:Name -> Func:builtins.getattr
+87:34:Attribute -> U
+87:34:Attribute -> U
+87:34:Name -> Inst:django.db.utils.DatabaseErrorWrapper
+87:57:Attribute -> Const:str:'DataError' | Const:str:'OperationalError' | Const:str:'IntegrityError' | Const:str:'InternalError' | Const:str:'ProgrammingError' | Const:str:'NotSupportedError' | Const:str:'DatabaseError' | Const:str:'InterfaceError' | U
+87:57:Name -> Class:django.db.utils.DataError | Class:django.db.utils.OperationalError | Class:django.db.utils.IntegrityError | Class:django.db.utils.InternalError | Class:django.db.utils.ProgrammingError | Class:django.db.utils.NotSupportedError | Class:django.db.utils.DatabaseError | Class:django.db.utils.InterfaceError | Class:django.db.utils.Error
+88:15:Call -> ERR
+88:15:Name -> Func:builtins.issubclass
+88:26:Name -> U
+88:36:Name -> U
+89:31:Call -> ExcInst:django.db.utils.DataError | ExcInst:django.db.utils.OperationalError | ExcInst:django.db.utils.IntegrityError | ExcInst:django.db.utils.InternalError | ExcInst:django.db.utils.ProgrammingError | ExcInst:django.db.utils.NotSupportedError | ExcInst:django.db.utils.DatabaseError | ExcInst:django.db.utils.InterfaceError | ExcInst:django.db.utils.Error
+89:31:Name -> Class:django.db.utils.DataError | Class:django.db.utils.OperationalError | Class:django.db.utils.IntegrityError | Class:django.db.utils.InternalError | Class:django.db.utils.ProgrammingError | Class:django.db.utils.NotSupportedError | Class:django.db.utils.DatabaseError | Class:django.db.utils.InterfaceError | Class:django.db.utils.Error
+89:44:Attribute -> U
+89:44:Name -> U
+92:19:Name -> Class:django.db.utils.DataError | Class:django.db.utils.OperationalError | Class:django.db.utils.IntegrityError | Class:django.db.utils.InternalError | Class:django.db.utils.ProgrammingError | Class:django.db.utils.NotSupportedError | Class:django.db.utils.DatabaseError | Class:django.db.utils.InterfaceError | Class:django.db.utils.Error
+92:39:Name -> Class:django.db.utils.DataError
+92:50:Name -> Class:django.db.utils.IntegrityError
+93:20:Attribute -> U
+93:20:Name -> Inst:django.db.utils.DatabaseErrorWrapper
+94:22:Call -> U
+94:22:Attribute -> BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback | BM:builtins.Exception.with_traceback
+94:22:Name -> ExcInst:django.db.utils.DataError | ExcInst:django.db.utils.OperationalError | ExcInst:django.db.utils.IntegrityError | ExcInst:django.db.utils.InternalError | ExcInst:django.db.utils.ProgrammingError | ExcInst:django.db.utils.NotSupportedError | ExcInst:django.db.utils.DatabaseError | ExcInst:django.db.utils.InterfaceError | ExcInst:django.db.utils.Error
+94:50:Name -> U
+94:66:Name -> U
+100:17:Name -> Inst:django.db.utils.DatabaseErrorWrapper
+101:23:Call -> U
+101:23:Name -> U
+101:29:Name -> Tuple:0
+101:37:Name -> Dict:0
+103:15:Name -> Func:django.db.utils.DatabaseErrorWrapper.__call__.inner
+112:7:Name -> U
+116:15:Call -> U | Const:NoneType:None
+116:15:Name -> Func:importlib.import_module | U
+116:41:Name -> U | Const:str:'django.db.backends.postgresql'
+117:11:Name -> Class:builtins.ImportError
+123:12:Name -> U
+124:34:Call -> Gen:pkgutil.iter_modules
+124:34:Attribute -> Func:pkgutil.iter_modules
+124:34:Name -> Module:pkgutil
+124:55:Attribute -> List:1
+124:55:Attribute -> Module:django.db.backends
+124:55:Attribute -> Module:django.db
+124:55:Name -> Module:django
+125:15:Name -> U
+125:25:Name -> U
+127:11:Name -> U | Const:str:'django.db.backends.postgresql'
+127:58:Name -> U
+127:69:Name -> U
+128:28:Call -> Inst:builtins.map
+128:28:Name -> Class:builtins.map
+128:32:Name -> Func:builtins.repr
+128:38:Call -> ERR
+128:38:Name -> Func:builtins.sorted
+128:45:Name -> U
+129:18:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+129:18:Name -> Class:django.core.exceptions.ImproperlyConfigured
+134:28:Name -> U | Const:str:'django.db.backends.postgresql'
+134:42:Call -> Const:str:''
+134:42:Attribute -> BM:builtins.str.join
+134:52:Name -> Inst:builtins.map
+135:19:Name -> ExcInst:builtins.ImportError
+141:24:Name -> Class:django.utils.connection.BaseConnectionHandler
+151:20:Call -> U
+151:20:Attribute -> BM:django.utils.connection.BaseConnectionHandler.configure_settings
+151:20:Call -> Super
+151:20:Name -> Class:builtins.super
+151:47:Name -> U
+152:11:Name -> U
+153:12:Name -> U
+153:22:Name -> Const:str:'default'
+154:13:Name -> Const:str:'default'
+154:37:Name -> U
+155:18:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+155:18:Name -> Class:django.core.exceptions.ImproperlyConfigured
+156:38:Name -> Const:str:'default'
+158:13:Name -> U
+158:23:Name -> Const:str:'default'
+159:12:Name -> U
+159:22:Name -> Const:str:'default'
+162:20:Call -> U
+162:20:Attribute -> U
+162:20:Name -> U
+163:12:Call -> U
+163:12:Attribute -> U
+163:12:Name -> U
+164:12:Call -> U
+164:12:Attribute -> U
+164:12:Name -> U
+165:12:Call -> U
+165:12:Attribute -> U
+165:12:Name -> U
+166:15:Name -> U
+166:62:Name -> U
+167:16:Name -> U
+168:12:Call -> U
+168:12:Attribute -> U
+168:12:Name -> U
+169:12:Call -> U
+169:12:Attribute -> U
+169:12:Name -> U
+170:12:Call -> U
+170:12:Attribute -> U
+170:12:Name -> U
+171:12:Call -> U
+171:12:Attribute -> U
+171:12:Name -> U
+173:16:Call -> U
+173:16:Attribute -> U
+173:16:Name -> U
+173:32:Name -> Const:str:'NAME' | Const:str:'USER' | Const:str:'PASSWORD' | Const:str:'HOST' | Const:str:'PORT'
+175:28:Call -> U
+175:28:Attribute -> U
+175:28:Name -> U
+183:30:Name -> List:5
+184:16:Call -> U
+184:16:Attribute -> U
+184:16:Name -> U
+184:41:Name -> Const:str:'CHARSET' | Const:str:'COLLATION' | Const:str:'MIGRATE' | Const:str:'MIRROR' | Const:str:'NAME'
+184:46:Name -> Const:NoneType:None | Const:NoneType:None | Const:bool:True | Const:NoneType:None | Const:NoneType:None
+185:15:Name -> U
+187:5:Name -> Class:builtins.property
+192:15:Attribute -> Const:NoneType:None | U
+192:15:Name -> Inst:django.db.utils.ConnectionHandler
+195:13:Attribute -> Const:NoneType:None | U
+195:13:Name -> Inst:django.db.utils.ConnectionHandler
+195:27:Name -> U
+196:18:Call -> U | Const:NoneType:None
+196:18:Name -> Func:django.db.utils.load_backend
+196:31:Name -> U
+197:15:Call -> U
+197:15:Attribute -> U
+197:15:Name -> U | Const:NoneType:None
+197:39:Name -> U
+197:43:Name -> U
+205:8:Name -> Inst:django.db.utils.ConnectionRouter
+205:24:Name -> Const:NoneType:None | U
+207:5:Name -> Class:django.utils.functional.cached_property
+209:11:Attribute -> Const:NoneType:None | U
+209:11:Name -> Inst:django.db.utils.ConnectionRouter
+210:12:Name -> Inst:django.db.utils.ConnectionRouter
+210:28:Attribute -> U
+210:28:Name -> Inst:django.conf.LazySettings
+212:17:Attribute -> Const:NoneType:None | U
+212:17:Name -> Inst:django.db.utils.ConnectionRouter
+213:15:Call -> ERR
+213:15:Name -> Func:builtins.isinstance
+213:26:Name -> U
+213:29:Name -> Class:builtins.str
+214:25:Call -> U
+214:25:Call -> U
+214:25:Name -> Func:django.utils.module_loading.import_string
+214:39:Name -> U
+216:25:Name -> U
+217:12:Call -> ERR
+217:12:Attribute -> BM:builtins.list.append
+217:12:Name -> List:0
+217:27:Name -> U
+218:15:Name -> List:0
+223:26:Attribute -> U
+223:26:Name -> U
+225:29:Call -> U
+225:29:Name -> Func:builtins.getattr
+225:37:Name -> U
+225:45:Name -> Inst:django.db.utils.ConnectionRouter
+226:23:Name -> Class:builtins.AttributeError
+231:32:Call -> U
+231:32:Name -> U
+231:39:Name -> U
+231:48:Name -> Dict:0
+232:23:Name -> U
+233:31:Name -> U
+234:23:Call -> ERR
+234:23:Attribute -> BM:builtins.dict.get
+234:23:Name -> Dict:0
+235:15:Name -> U
+235:40:Attribute -> U
+235:40:Attribute -> U
+235:40:Name -> U
+236:23:Attribute -> U
+236:23:Attribute -> U
+236:23:Name -> U
+237:19:Name -> Const:str:'default'
+239:15:Name -> Func:django.db.utils.ConnectionRouter._router_func._route_db
+241:18:Call -> Func:django.db.utils.ConnectionRouter._router_func._route_db
+241:18:Name -> Func:django.db.utils.ConnectionRouter._router_func
+242:19:Call -> Func:django.db.utils.ConnectionRouter._router_func._route_db
+242:19:Name -> Func:django.db.utils.ConnectionRouter._router_func
+245:22:Attribute -> U
+245:22:Name -> Inst:django.db.utils.ConnectionRouter
+247:25:Attribute -> U
+247:25:Name -> U
+248:19:Name -> Class:builtins.AttributeError
+252:24:Call -> U
+252:24:Name -> U
+252:31:Name -> U
+252:37:Name -> U
+252:45:Name -> Dict:0
+253:19:Name -> U
+254:27:Name -> U
+255:15:Attribute -> U
+255:15:Attribute -> U
+255:15:Name -> U
+255:33:Attribute -> U
+255:33:Attribute -> U
+255:33:Name -> U
+258:22:Attribute -> U
+258:22:Name -> Inst:django.db.utils.ConnectionRouter
+260:25:Attribute -> U
+260:25:Name -> U
+261:19:Name -> Class:builtins.AttributeError
+265:20:Call -> U
+265:20:Name -> U
+265:27:Name -> U
+265:31:Name -> U
+265:44:Name -> Dict:0
+267:15:Name -> U
+268:23:Name -> U
+272:15:Call -> U | Const:bool:True
+272:15:Attribute -> BM:django.db.utils.ConnectionRouter.allow_migrate
+272:15:Name -> Inst:django.db.utils.ConnectionRouter
+273:12:Name -> U
+274:12:Attribute -> U
+274:12:Attribute -> U
+274:12:Name -> U
+275:23:Attribute -> U
+275:23:Attribute -> U
+275:23:Name -> U
+276:18:Name -> U
+281:17:Call -> U
+281:17:Attribute -> U
+281:17:Name -> U
+281:60:Name -> Const:bool:False | U
+282:16:Name -> U
+282:35:Name -> U
+282:45:Call -> U | Const:bool:True
+282:45:Attribute -> BM:django.db.utils.ConnectionRouter.allow_migrate_model
+282:45:Name -> Inst:django.db.utils.ConnectionRouter
+282:70:Name -> U
+282:74:Name -> U

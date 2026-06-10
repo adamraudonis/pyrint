@@ -1,0 +1,1259 @@
+31:13:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+31:13:Attribute -> Func:tempfile.mkdtemp
+31:13:Name -> Module:tempfile
+33:12:Call -> U
+33:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+33:12:Attribute -> Module:posixpath | Module:ntpath
+33:12:Name -> Module:os
+33:25:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+33:37:Name -> Const:str:'test_upload'
+62:1:Call -> Inst:django.test.utils.override_settings
+62:1:Name -> Class:django.test.utils.override_settings
+63:15:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+65:22:Name -> Class:django.test.testcases.TestCase
+66:5:Name -> Class:builtins.classmethod
+68:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+68:8:Attribute -> BM:django.test.testcases.TestCase.setUpClass | BM:django.test.testcases.TransactionTestCase.setUpClass | BM:django.test.testcases.SimpleTestCase.setUpClass | BM:unittest.case.TestCase.setUpClass
+68:8:Call -> Super
+68:8:Name -> Class:builtins.super
+69:8:Call -> Const:NoneType:None | Const:NoneType:None | U
+69:8:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+69:8:Name -> Module:os
+69:20:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+70:8:Call -> Const:NoneType:None
+70:8:Attribute -> BM:unittest.case.TestCase.addClassCleanup
+70:8:Name -> Class:tests.file_uploads.tests.FileUploadTests
+70:28:Attribute -> Func:shutil.rmtree
+70:28:Name -> Module:shutil
+70:43:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+78:11:Attribute -> Const:str:'darwin'
+78:11:Name -> Module:sys
+79:12:Call -> ERR
+79:12:Attribute -> BM:builtins.list.extend
+79:12:Name -> List:3
+86:25:Name -> List:3
+87:17:Call -> Gen:unittest.case.TestCase.subTest
+87:17:Attribute -> BM:unittest.case.TestCase.subTest
+87:17:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+87:40:Name -> Const:str:'/tmp/' | Const:str:'/tmp/..' | Const:str:'/tmp/.'
+88:16:Call -> Inst:unittest.case._AssertRaisesContext
+88:16:Attribute -> BM:unittest.case.TestCase.assertRaises
+88:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+88:34:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+88:59:Name -> Class:django.core.files.uploadedfile.UploadedFile
+88:78:Name -> Const:str:'/tmp/' | Const:str:'/tmp/..' | Const:str:'/tmp/.'
+91:13:Call -> ERR
+91:13:Name -> Func:_io.open
+91:18:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+94:30:Name -> U
+96:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+96:23:Attribute -> BM:django.test.client.Client.post
+96:23:Attribute -> Inst:django.test.client.Client
+96:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+96:52:Name -> Dict:2
+97:8:Call -> Const:NoneType:None
+97:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+97:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+97:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+97:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+100:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+100:15:Name -> Module:django.core.files.temp
+101:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+101:13:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+101:45:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+101:45:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+102:12:Call -> U
+102:12:Attribute -> U
+102:12:Name -> Inst:django.core.files.temp.TemporaryFile
+103:12:Call -> U
+103:12:Attribute -> U
+103:12:Name -> Inst:django.core.files.temp.TemporaryFile
+105:12:Call -> U
+105:12:Attribute -> U
+105:12:Name -> Inst:django.core.files.temp.TemporaryFile
+106:12:Call -> U
+106:12:Attribute -> U
+106:12:Name -> Inst:django.core.files.temp.TemporaryFile
+110:31:Name -> Inst:django.core.files.temp.TemporaryFile
+111:31:Name -> Inst:django.core.files.temp.TemporaryFile
+114:23:Call -> List:3
+114:23:Name -> Class:builtins.list
+114:28:Name -> Dict:3
+116:20:Name -> Dict:3
+116:30:Name -> Const:str:'name' | Const:str:'file_field1' | Const:str:'file_field2'
+116:47:Call -> Const:str:''
+116:47:Attribute -> BM:hashlib.sha1.hexdigest
+116:47:Call -> Inst:hashlib.sha1
+116:47:Attribute -> Class:hashlib.sha1
+116:47:Name -> Module:hashlib
+117:24:Call -> U
+117:24:Attribute -> U
+117:24:Name -> Dict:3
+117:34:Name -> Const:str:'name' | Const:str:'file_field1' | Const:str:'file_field2'
+119:20:Call -> U
+119:20:Attribute -> U
+119:20:Name -> Dict:3
+119:30:Name -> Const:str:'name' | Const:str:'file_field1' | Const:str:'file_field2'
+120:23:Name -> Class:builtins.AttributeError
+121:20:Name -> Dict:3
+121:30:Name -> Const:str:'name' | Const:str:'file_field1' | Const:str:'file_field2'
+121:47:Call -> Const:str:''
+121:47:Attribute -> BM:hashlib.sha1.hexdigest
+121:47:Call -> Inst:hashlib.sha1
+121:47:Attribute -> Class:hashlib.sha1
+121:47:Name -> Module:hashlib
+122:24:Call -> Const:bytes:b''
+122:24:Attribute -> BM:builtins.str.encode
+122:24:Name -> Dict:3
+122:34:Name -> Const:str:'name' | Const:str:'file_field1' | Const:str:'file_field2'
+125:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+125:23:Attribute -> BM:django.test.client.Client.post
+125:23:Attribute -> Inst:django.test.client.Client
+125:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+125:52:Name -> Dict:3
+127:12:Call -> Const:NoneType:None
+127:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+127:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+127:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+127:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+129:50:Attribute -> Func:base64.b64encode
+129:50:Name -> Module:base64
+130:18:Call -> Inst:django.test.client.FakePayload
+130:18:Attribute -> Class:django.test.client.FakePayload
+130:18:Name -> Module:django.test.client
+131:12:Call -> Const:str:''
+131:12:Attribute -> BM:builtins.str.join
+133:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+133:27:Name -> Module:django.test.client
+141:8:Call -> Const:NoneType:None
+141:8:Attribute -> BM:django.test.client.FakePayload.write
+141:8:Name -> Inst:django.test.client.FakePayload
+141:32:Call -> U
+141:32:Name -> Func:base64.b64encode | U
+141:39:Call -> U
+141:39:Attribute -> U
+141:39:Name -> U
+142:8:Call -> Const:NoneType:None
+142:8:Attribute -> BM:django.test.client.FakePayload.write
+142:8:Name -> Inst:django.test.client.FakePayload
+142:29:Attribute -> Const:str:'BoUnDaRyStRiNg'
+142:29:Name -> Module:django.test.client
+144:30:Call -> Const:int:0
+144:30:Name -> Func:builtins.len
+144:34:Name -> Inst:django.test.client.FakePayload
+145:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+145:28:Name -> Module:django.test.client
+148:26:Name -> Inst:django.test.client.FakePayload
+150:19:Call -> U
+150:19:Attribute -> BM:django.test.client.Client.request
+150:19:Attribute -> Inst:django.test.client.Client
+150:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+150:41:Name -> Dict:5
+151:8:Call -> Const:NoneType:None
+151:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+151:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+151:25:Call -> U
+151:25:Attribute -> U
+151:25:Name -> U
+151:50:Name -> U
+154:8:Call -> Const:NoneType:None
+154:8:Attribute -> BM:tests.file_uploads.tests.FileUploadTests._test_base64_upload
+154:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+157:8:Call -> Const:NoneType:None
+157:8:Attribute -> BM:tests.file_uploads.tests.FileUploadTests._test_base64_upload
+157:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+160:8:Call -> Const:NoneType:None
+160:8:Attribute -> BM:tests.file_uploads.tests.FileUploadTests._test_base64_upload
+160:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+160:60:Attribute -> Func:base64.encodebytes
+160:60:Name -> Module:base64
+163:18:Call -> Inst:django.test.client.FakePayload
+163:18:Attribute -> Class:django.test.client.FakePayload
+163:18:Name -> Module:django.test.client
+164:12:Call -> Const:str:''
+164:12:Attribute -> BM:builtins.str.join
+166:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+166:27:Name -> Module:django.test.client
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:django.test.client.FakePayload.write
+174:8:Name -> Inst:django.test.client.FakePayload
+175:8:Call -> Const:NoneType:None
+175:8:Attribute -> BM:django.test.client.FakePayload.write
+175:8:Name -> Inst:django.test.client.FakePayload
+175:29:Attribute -> Const:str:'BoUnDaRyStRiNg'
+175:29:Name -> Module:django.test.client
+176:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+176:18:Name -> Class:django.core.handlers.wsgi.WSGIRequest
+178:34:Call -> Const:int:0
+178:34:Name -> Func:builtins.len
+178:38:Name -> Inst:django.test.client.FakePayload
+179:32:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+179:32:Name -> Module:django.test.client
+182:30:Name -> Inst:django.test.client.FakePayload
+186:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+186:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+186:13:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+186:38:Name -> Class:django.http.multipartparser.MultiPartParserError
+186:60:Name -> Const:str:'Could not decode base64 data.'
+187:12:Attribute -> Dict:1 | Inst:django.http.request.QueryDict | Dict:3 | Dict:1 | Dict:1 | Dict:1
+187:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+190:13:Call -> Inst:tempfile.TemporaryDirectory
+190:13:Attribute -> Class:tempfile.TemporaryDirectory
+190:13:Name -> Module:tempfile
+193:17:Call -> ERR
+193:17:Name -> Func:_io.open
+193:22:Call -> U
+193:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+193:22:Attribute -> Module:posixpath | Module:ntpath
+193:22:Name -> Module:os
+193:35:Name -> U
+193:45:Name -> Const:str:'test-0123456789_中文_Orléans.jpg'
+194:16:Call -> U
+194:16:Attribute -> U
+194:16:Name -> U
+195:16:Call -> U
+195:16:Attribute -> U
+195:16:Name -> U
+196:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+196:27:Attribute -> BM:django.test.client.Client.post
+196:27:Attribute -> Inst:django.test.client.Client
+196:27:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+196:79:Name -> U
+197:12:Call -> Const:NoneType:None
+197:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+197:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+197:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+197:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+203:18:Call -> Inst:django.test.client.FakePayload
+203:18:Attribute -> Class:django.test.client.FakePayload
+203:18:Name -> Module:django.test.client
+204:8:Call -> Const:NoneType:None
+204:8:Attribute -> BM:django.test.client.FakePayload.write
+204:8:Name -> Inst:django.test.client.FakePayload
+205:12:Call -> Const:str:''
+205:12:Attribute -> BM:builtins.str.join
+207:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+207:27:Name -> Module:django.test.client
+209:44:Call -> U | Const:str:'' | Const:str:''
+209:44:Name -> Func:urllib.parse.quote
+209:50:Name -> Const:str:'test-0123456789_中文_Orléans.jpg'
+213:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+213:31:Name -> Module:django.test.client
+219:30:Call -> Const:int:0
+219:30:Name -> Func:builtins.len
+219:34:Name -> Inst:django.test.client.FakePayload
+220:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+220:28:Name -> Module:django.test.client
+223:26:Name -> Inst:django.test.client.FakePayload
+225:19:Call -> U
+225:19:Attribute -> BM:django.test.client.Client.request
+225:19:Attribute -> Inst:django.test.client.Client
+225:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+225:41:Name -> Dict:5
+226:8:Call -> Const:NoneType:None
+226:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+226:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+226:25:Attribute -> U
+226:25:Name -> U
+232:18:Call -> Inst:django.test.client.FakePayload
+232:18:Attribute -> Class:django.test.client.FakePayload
+232:18:Name -> Module:django.test.client
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> BM:django.test.client.FakePayload.write
+233:8:Name -> Inst:django.test.client.FakePayload
+234:12:Call -> Const:str:''
+234:12:Attribute -> BM:builtins.str.join
+236:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+236:27:Name -> Module:django.test.client
+238:44:Call -> U | Const:str:'' | Const:str:''
+238:44:Name -> Func:urllib.parse.quote
+238:50:Name -> Const:str:'test-0123456789_中文_Orléans.jpg'
+242:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+242:31:Name -> Module:django.test.client
+248:30:Call -> Const:int:0
+248:30:Name -> Func:builtins.len
+248:34:Name -> Inst:django.test.client.FakePayload
+249:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+249:28:Name -> Module:django.test.client
+252:26:Name -> Inst:django.test.client.FakePayload
+254:19:Call -> U
+254:19:Attribute -> BM:django.test.client.Client.request
+254:19:Attribute -> Inst:django.test.client.Client
+254:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+254:41:Name -> Dict:5
+255:8:Call -> Const:NoneType:None
+255:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+255:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+255:25:Attribute -> U
+255:25:Name -> U
+258:18:Call -> Inst:django.test.client.FakePayload
+258:18:Attribute -> Class:django.test.client.FakePayload
+258:18:Name -> Module:django.test.client
+259:8:Call -> Const:NoneType:None
+259:8:Attribute -> BM:django.test.client.FakePayload.write
+259:8:Name -> Inst:django.test.client.FakePayload
+260:12:Call -> Const:str:''
+260:12:Attribute -> BM:builtins.str.join
+262:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+262:27:Name -> Module:django.test.client
+264:48:Call -> U | Const:str:'' | Const:str:''
+264:48:Name -> Func:urllib.parse.quote
+264:54:Name -> Const:str:'test-0123456789_中文_Orléans.jpg'
+268:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+268:31:Name -> Module:django.test.client
+273:30:Call -> Const:int:0
+273:30:Name -> Func:builtins.len
+273:34:Name -> Inst:django.test.client.FakePayload
+274:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+274:28:Name -> Module:django.test.client
+277:26:Name -> Inst:django.test.client.FakePayload
+279:19:Call -> U
+279:19:Attribute -> BM:django.test.client.Client.request
+279:19:Attribute -> Inst:django.test.client.Client
+279:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+279:41:Name -> Dict:5
+280:8:Call -> Const:NoneType:None
+280:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+280:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+280:25:Attribute -> U
+280:25:Name -> U
+283:18:Call -> Inst:django.test.client.FakePayload
+283:18:Attribute -> Class:django.test.client.FakePayload
+283:18:Name -> Module:django.test.client
+284:8:Call -> Const:NoneType:None
+284:8:Attribute -> BM:django.test.client.FakePayload.write
+284:8:Name -> Inst:django.test.client.FakePayload
+285:12:Call -> Const:str:''
+285:12:Attribute -> BM:builtins.str.join
+287:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+287:27:Name -> Module:django.test.client
+289:48:Call -> U | Const:str:'' | Const:str:''
+289:48:Name -> Func:urllib.parse.quote
+289:54:Name -> Const:str:'test-0123456789_中文_Orléans.jpg'
+293:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+293:31:Name -> Module:django.test.client
+298:30:Call -> Const:int:0
+298:30:Name -> Func:builtins.len
+298:34:Name -> Inst:django.test.client.FakePayload
+299:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+299:28:Name -> Module:django.test.client
+302:26:Name -> Inst:django.test.client.FakePayload
+304:19:Call -> U
+304:19:Attribute -> BM:django.test.client.Client.request
+304:19:Attribute -> Inst:django.test.client.Client
+304:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+304:41:Name -> Dict:5
+305:8:Call -> Const:NoneType:None
+305:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+305:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+305:25:Attribute -> U
+305:25:Name -> U
+320:18:Call -> Inst:django.test.client.FakePayload
+320:18:Attribute -> Class:django.test.client.FakePayload
+320:18:Name -> Module:django.test.client
+321:23:Call -> Inst:builtins.enumerate
+321:23:Name -> Class:builtins.enumerate
+321:33:Name -> List:4
+322:12:Call -> Const:NoneType:None
+322:12:Attribute -> BM:django.test.client.FakePayload.write
+322:12:Name -> Inst:django.test.client.FakePayload
+323:16:Call -> Const:str:''
+323:16:Attribute -> BM:builtins.str.join
+325:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+325:31:Name -> Module:django.test.client
+327:27:Name -> U
+327:30:Name -> U
+334:8:Call -> Const:NoneType:None
+334:8:Attribute -> BM:django.test.client.FakePayload.write
+334:8:Name -> Inst:django.test.client.FakePayload
+334:33:Attribute -> Const:str:'BoUnDaRyStRiNg'
+334:33:Name -> Module:django.test.client
+337:30:Call -> Const:int:0
+337:30:Name -> Func:builtins.len
+337:34:Name -> Inst:django.test.client.FakePayload
+338:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+338:28:Name -> Module:django.test.client
+341:26:Name -> Inst:django.test.client.FakePayload
+343:19:Call -> U
+343:19:Attribute -> BM:django.test.client.Client.request
+343:19:Attribute -> Inst:django.test.client.Client
+343:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+343:41:Name -> Dict:5
+344:8:Call -> Const:NoneType:None
+344:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+344:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+344:25:Attribute -> U
+344:25:Name -> U
+347:19:Call -> U
+347:19:Attribute -> U
+347:19:Name -> U
+348:23:Call -> Inst:builtins.enumerate
+348:23:Name -> Class:builtins.enumerate
+348:33:Name -> List:4
+349:12:Call -> Const:NoneType:None
+349:12:Attribute -> BM:unittest.case.TestCase.assertIsNone
+349:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+349:30:Call -> U
+349:30:Attribute -> U
+349:30:Name -> U
+349:54:Name -> U
+353:18:Call -> Inst:django.test.client.FakePayload
+353:18:Attribute -> Class:django.test.client.FakePayload
+353:18:Name -> Module:django.test.client
+354:8:Call -> Const:NoneType:None
+354:8:Attribute -> BM:django.test.client.FakePayload.write
+354:8:Name -> Inst:django.test.client.FakePayload
+355:12:Call -> Const:str:''
+355:12:Attribute -> BM:builtins.str.join
+357:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+357:27:Name -> Module:django.test.client
+359:33:Name -> Const:str:'non-\x00printable\x00\n_chars.txt\x00'
+366:8:Call -> Const:NoneType:None
+366:8:Attribute -> BM:django.test.client.FakePayload.write
+366:8:Name -> Inst:django.test.client.FakePayload
+366:33:Attribute -> Const:str:'BoUnDaRyStRiNg'
+366:33:Name -> Module:django.test.client
+368:30:Call -> Const:int:0
+368:30:Name -> Func:builtins.len
+368:34:Name -> Inst:django.test.client.FakePayload
+369:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+369:28:Name -> Module:django.test.client
+372:26:Name -> Inst:django.test.client.FakePayload
+374:19:Call -> U
+374:19:Attribute -> BM:django.test.client.Client.request
+374:19:Attribute -> Inst:django.test.client.Client
+374:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+374:41:Name -> Dict:5
+376:19:Call -> U
+376:19:Attribute -> U
+376:19:Name -> U
+377:8:Call -> Const:NoneType:None
+377:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+377:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+377:25:Name -> U
+388:18:Call -> Inst:django.test.client.FakePayload
+388:18:Attribute -> Class:django.test.client.FakePayload
+388:18:Name -> Module:django.test.client
+389:23:Call -> Inst:builtins.enumerate
+389:23:Name -> Class:builtins.enumerate
+389:33:Name -> List:13
+390:12:Call -> Const:NoneType:None
+390:12:Attribute -> BM:django.test.client.FakePayload.write
+390:12:Name -> Inst:django.test.client.FakePayload
+391:16:Call -> Const:str:''
+391:16:Attribute -> BM:builtins.str.join
+393:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+393:31:Name -> Module:django.test.client
+395:27:Name -> U
+395:30:Name -> U
+402:8:Call -> Const:NoneType:None
+402:8:Attribute -> BM:django.test.client.FakePayload.write
+402:8:Name -> Inst:django.test.client.FakePayload
+402:33:Attribute -> Const:str:'BoUnDaRyStRiNg'
+402:33:Name -> Module:django.test.client
+405:30:Call -> Const:int:0
+405:30:Name -> Func:builtins.len
+405:34:Name -> Inst:django.test.client.FakePayload
+406:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+406:28:Name -> Module:django.test.client
+409:26:Name -> Inst:django.test.client.FakePayload
+411:19:Call -> U
+411:19:Attribute -> BM:django.test.client.Client.request
+411:19:Attribute -> Inst:django.test.client.Client
+411:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+411:41:Name -> Dict:5
+414:19:Call -> U
+414:19:Attribute -> U
+414:19:Name -> U
+415:23:Call -> Inst:builtins.enumerate
+415:23:Name -> Class:builtins.enumerate
+415:33:Name -> List:13
+416:18:Name -> U
+416:38:Name -> U
+417:12:Call -> Const:NoneType:None
+417:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+417:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+417:29:Name -> U
+427:41:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+427:62:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+428:42:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+428:60:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+429:29:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+429:39:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+430:36:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+430:54:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+431:43:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+431:53:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+431:72:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff
+433:18:Call -> Inst:django.test.client.FakePayload
+433:18:Attribute -> Class:django.test.client.FakePayload
+433:18:Name -> Module:django.test.client
+434:33:Name -> List:5
+435:12:Call -> Const:NoneType:None
+435:12:Attribute -> BM:django.test.client.FakePayload.write
+435:12:Name -> Inst:django.test.client.FakePayload
+436:16:Call -> Const:str:''
+436:16:Attribute -> BM:builtins.str.format
+436:16:Call -> Const:str:''
+436:16:Attribute -> BM:builtins.str.join
+438:31:Attribute -> Const:str:'BoUnDaRyStRiNg'
+438:31:Name -> Module:django.test.client
+445:25:Name -> Const:str:'long_filename' | Const:str:'long_extension' | Const:str:'no_extension' | Const:str:'no_filename' | Const:str:'long_everything'
+445:31:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff | Const:str:'foo.fffffffffffffffffffffffffffffffffff | Const:str:'fffffffffffffffffffffffffffffffffffffff | Const:str:'.ffffffffffffffffffffffffffffffffffffff | Const:str:'fffffffffffffffffffffffffffffffffffffff
+447:8:Call -> Const:NoneType:None
+447:8:Attribute -> BM:django.test.client.FakePayload.write
+447:8:Name -> Inst:django.test.client.FakePayload
+447:33:Attribute -> Const:str:'BoUnDaRyStRiNg'
+447:33:Name -> Module:django.test.client
+449:30:Call -> Const:int:0
+449:30:Name -> Func:builtins.len
+449:34:Name -> Inst:django.test.client.FakePayload
+450:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+450:28:Name -> Module:django.test.client
+453:26:Name -> Inst:django.test.client.FakePayload
+455:19:Call -> U
+455:19:Attribute -> BM:django.test.client.Client.request
+455:19:Attribute -> Inst:django.test.client.Client
+455:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+455:41:Name -> Dict:5
+456:17:Call -> U
+456:17:Attribute -> U
+456:17:Name -> U
+457:33:Name -> List:5
+458:18:Name -> U
+458:25:Name -> Const:str:'long_filename' | Const:str:'long_extension' | Const:str:'no_extension' | Const:str:'no_filename' | Const:str:'long_everything'
+459:12:Call -> Const:NoneType:None
+459:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+459:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+459:29:Name -> Const:str:'fffffffffffffffffffffffffffffffffffffff | Const:str:'.ffffffffffffffffffffffffffffffffffffff | Const:str:'fffffffffffffffffffffffffffffffffffffff | Const:str:'.ffffffffffffffffffffffffffffffffffffff | Const:str:'.ffffffffffffffffffffffffffffffffffffff
+459:39:Name -> U
+459:44:Call -> U
+459:44:Attribute -> BM:builtins.str.format
+459:69:Name -> Const:str:'long_filename' | Const:str:'long_extension' | Const:str:'no_extension' | Const:str:'no_filename' | Const:str:'long_everything'
+460:12:Call -> Const:NoneType:None
+460:12:Attribute -> BM:unittest.case.TestCase.assertLess
+460:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+461:16:Call -> ERR
+461:16:Name -> Func:builtins.len
+461:20:Name -> U
+461:73:Call -> ERR
+461:73:Name -> Func:builtins.len
+461:77:Name -> U
+465:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+465:15:Name -> Module:django.core.files.temp
+467:12:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+467:12:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+468:12:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+468:12:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+470:12:Call -> U
+470:12:Attribute -> U
+470:12:Name -> Inst:django.core.files.temp.TemporaryFile
+471:12:Call -> U
+471:12:Attribute -> U
+471:12:Name -> Inst:django.core.files.temp.TemporaryFile
+473:12:Call -> U
+473:12:Attribute -> U
+473:12:Name -> Inst:django.core.files.temp.TemporaryFile
+474:12:Call -> U
+474:12:Attribute -> U
+474:12:Name -> Inst:django.core.files.temp.TemporaryFile
+475:12:Name -> Inst:django.core.files.temp.TemporaryFile
+477:24:Call -> Inst:_io.StringIO
+477:24:Name -> Class:_io.StringIO
+478:23:Call -> Inst:_io.BytesIO
+478:23:Name -> Class:_io.BytesIO
+480:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+480:23:Attribute -> BM:django.test.client.Client.post
+480:23:Attribute -> Inst:django.test.client.Client
+480:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+483:39:Name -> Inst:django.core.files.temp.TemporaryFile
+484:35:Name -> Inst:django.core.files.temp.TemporaryFile
+485:30:Name -> Inst:_io.StringIO
+486:30:Name -> Inst:_io.BytesIO
+489:23:Call -> U
+489:23:Attribute -> U
+489:23:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+490:12:Call -> Const:NoneType:None
+490:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+490:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+490:29:Name -> U
+491:12:Call -> Const:NoneType:None
+491:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+491:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+491:29:Name -> U
+492:12:Call -> Const:NoneType:None
+492:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+492:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+492:29:Name -> U
+493:12:Call -> Const:NoneType:None
+493:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+493:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+493:29:Name -> U
+497:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+497:15:Name -> Module:django.core.files.temp
+499:12:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+499:12:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+500:12:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+500:12:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+502:12:Call -> U
+502:12:Attribute -> U
+502:12:Name -> Inst:django.core.files.temp.TemporaryFile
+503:12:Call -> U
+503:12:Attribute -> U
+503:12:Name -> Inst:django.core.files.temp.TemporaryFile
+505:12:Call -> U
+505:12:Attribute -> U
+505:12:Name -> Inst:django.core.files.temp.TemporaryFile
+506:12:Call -> U
+506:12:Attribute -> U
+506:12:Name -> Inst:django.core.files.temp.TemporaryFile
+507:12:Name -> Inst:django.core.files.temp.TemporaryFile
+509:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+509:23:Attribute -> BM:django.test.client.Client.post
+509:23:Attribute -> Inst:django.test.client.Client
+509:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+512:39:Name -> Inst:django.core.files.temp.TemporaryFile
+513:35:Name -> Inst:django.core.files.temp.TemporaryFile
+516:23:Call -> U
+516:23:Attribute -> U
+516:23:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+517:12:Call -> Const:NoneType:None
+517:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+517:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+517:29:Name -> U
+518:12:Call -> Const:NoneType:None
+518:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+518:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+518:29:Name -> U
+526:22:Call -> Const:str:''
+526:22:Attribute -> BM:builtins.str.join
+528:23:Attribute -> Const:str:'BoUnDaRyStRiNg'
+528:23:Name -> Module:django.test.client
+532:39:Attribute -> Const:str:'BoUnDaRyStRiNg'
+532:39:Name -> Module:django.test.client
+536:18:Call -> Inst:django.test.client.FakePayload
+536:18:Attribute -> Class:django.test.client.FakePayload
+536:18:Name -> Module:django.test.client
+536:37:Name -> Const:str:''
+538:30:Call -> Const:int:0
+538:30:Name -> Func:builtins.len
+538:34:Name -> Inst:django.test.client.FakePayload
+539:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+539:28:Name -> Module:django.test.client
+542:26:Name -> Inst:django.test.client.FakePayload
+544:8:Call -> Const:NoneType:None
+544:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+544:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+544:25:Call -> U
+544:25:Attribute -> U
+544:25:Call -> U
+544:25:Attribute -> BM:django.test.client.Client.request
+544:25:Attribute -> Inst:django.test.client.Client
+544:25:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+544:47:Name -> Dict:5
+553:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+553:28:Name -> Module:django.test.client
+556:26:Call -> Inst:django.test.client.FakePayload
+556:26:Attribute -> Class:django.test.client.FakePayload
+556:26:Name -> Module:django.test.client
+558:8:Call -> Const:NoneType:None
+558:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+558:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+558:25:Call -> U
+558:25:Attribute -> U
+558:25:Call -> U
+558:25:Attribute -> BM:django.test.client.Client.request
+558:25:Attribute -> Inst:django.test.client.Client
+558:25:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+558:47:Name -> Dict:5
+561:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+561:15:Name -> Module:django.core.files.temp
+562:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+562:13:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+562:34:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+562:34:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+564:12:Call -> U
+564:12:Attribute -> U
+564:12:Name -> Inst:django.core.files.temp.TemporaryFile
+565:12:Call -> U
+565:12:Attribute -> U
+565:12:Name -> Inst:django.core.files.temp.TemporaryFile
+568:12:Call -> U
+568:12:Attribute -> U
+568:12:Name -> Inst:django.core.files.temp.TemporaryFile
+569:12:Call -> U
+569:12:Attribute -> U
+569:12:Name -> Inst:django.core.files.temp.TemporaryFile
+572:12:Call -> Const:NoneType:None
+572:12:Attribute -> BM:unittest.case.TestCase.assertIn
+572:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+572:31:Call -> U
+572:31:Attribute -> U
+572:31:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+572:31:Attribute -> BM:django.test.client.Client.post
+572:31:Attribute -> Inst:django.test.client.Client
+572:31:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+572:65:Name -> Inst:django.core.files.temp.TemporaryFile
+575:12:Call -> Const:NoneType:None
+575:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+575:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+575:34:Call -> U
+575:34:Attribute -> U
+575:34:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+575:34:Attribute -> BM:django.test.client.Client.post
+575:34:Attribute -> Inst:django.test.client.Client
+575:34:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+575:68:Name -> Inst:django.core.files.temp.TemporaryFile
+578:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+578:13:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+578:13:Name -> Module:django.core.files.temp
+579:12:Call -> U
+579:12:Attribute -> U
+579:12:Name -> Inst:django.core.files.temp.TemporaryFile
+580:12:Call -> U
+580:12:Attribute -> U
+580:12:Name -> Inst:django.core.files.temp.TemporaryFile
+585:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+585:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+585:17:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+585:42:Name -> Class:builtins.AttributeError
+585:58:Name -> Const:str:'You cannot alter upload handlers after 
+586:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+586:16:Attribute -> BM:django.test.client.Client.post
+586:16:Attribute -> Inst:django.test.client.Client
+586:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+586:57:Name -> Inst:django.core.files.temp.TemporaryFile
+589:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+589:13:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+589:13:Name -> Module:django.core.files.temp
+590:12:Call -> U
+590:12:Attribute -> U
+590:12:Name -> Inst:django.core.files.temp.TemporaryFile
+591:12:Call -> U
+591:12:Attribute -> U
+591:12:Name -> Inst:django.core.files.temp.TemporaryFile
+592:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+592:23:Attribute -> BM:django.test.client.Client.post
+592:23:Attribute -> Inst:django.test.client.Client
+592:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+592:76:Name -> Inst:django.core.files.temp.TemporaryFile
+593:24:Call -> U
+593:24:Attribute -> U
+593:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+594:12:Call -> Const:NoneType:None
+594:12:Attribute -> BM:unittest.case.TestCase.assertIs
+594:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+594:26:Call -> Const:bool:False | Const:bool:True | U
+594:26:Attribute -> Func:genericpath.exists | U
+594:26:Attribute -> Module:posixpath | Module:ntpath
+594:26:Name -> Module:os
+594:41:Name -> U
+598:27:Name -> Class:django.http.multipartparser.Parser
+600:28:Call -> Gen:django.http.multipartparser.Parser.__iter__
+600:28:Attribute -> BM:django.http.multipartparser.Parser.__iter__
+600:28:Call -> Super
+600:28:Name -> Class:builtins.super
+601:57:Name -> U
+602:26:Name -> U
+602:37:Name -> U
+602:48:Name -> U
+603:23:Name -> U
+603:36:Name -> Const:str:'file'
+606:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+606:13:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+606:13:Name -> Module:django.core.files.temp
+607:12:Call -> U
+607:12:Attribute -> U
+607:12:Name -> Inst:django.core.files.temp.TemporaryFile
+608:12:Call -> U
+608:12:Attribute -> U
+608:12:Name -> Inst:django.core.files.temp.TemporaryFile
+609:17:Call -> Inst:unittest.mock._patch
+609:17:Attribute -> Func:unittest.mock.patch
+609:17:Name -> Module:unittest.mock
+611:16:Name -> Class:tests.file_uploads.tests.FileUploadTests.test_upload_interrupted_temporary_file_handler.MockedParser
+613:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+613:27:Attribute -> BM:django.test.client.Client.post
+613:27:Attribute -> Inst:django.test.client.Client
+613:27:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+615:29:Name -> Inst:django.core.files.temp.TemporaryFile
+617:24:Call -> U
+617:24:Attribute -> U
+617:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+618:12:Call -> Const:NoneType:None
+618:12:Attribute -> BM:unittest.case.TestCase.assertIs
+618:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+618:26:Call -> Const:bool:False | Const:bool:True | U
+618:26:Attribute -> Func:genericpath.exists | U
+618:26:Attribute -> Module:posixpath | Module:ntpath
+618:26:Name -> Module:os
+618:41:Name -> U
+621:18:Call -> Inst:django.test.client.FakePayload
+621:18:Attribute -> Class:django.test.client.FakePayload
+621:18:Name -> Module:django.test.client
+622:12:Call -> Const:str:''
+622:12:Attribute -> BM:builtins.str.join
+624:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+624:27:Name -> Module:django.test.client
+631:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+631:27:Name -> Module:django.test.client
+636:30:Call -> Const:int:0
+636:30:Name -> Func:builtins.len
+636:34:Name -> Inst:django.test.client.FakePayload
+637:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+637:28:Name -> Module:django.test.client
+640:26:Name -> Inst:django.test.client.FakePayload
+642:19:Call -> U
+642:19:Attribute -> BM:django.test.client.Client.request
+642:19:Attribute -> Inst:django.test.client.Client
+642:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+642:41:Name -> Dict:5
+643:8:Call -> Const:NoneType:None
+643:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+643:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+643:25:Attribute -> U
+643:25:Name -> U
+644:8:Call -> Const:NoneType:None
+644:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+644:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+644:25:Call -> U
+644:25:Attribute -> U
+644:25:Name -> U
+647:18:Call -> Inst:django.test.client.FakePayload
+647:18:Attribute -> Class:django.test.client.FakePayload
+647:18:Name -> Module:django.test.client
+648:12:Call -> Const:str:''
+648:12:Attribute -> BM:builtins.str.join
+650:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+650:27:Name -> Module:django.test.client
+654:50:Name -> Const:int:1024
+657:27:Attribute -> Const:str:'BoUnDaRyStRiNg'
+657:27:Name -> Module:django.test.client
+662:30:Call -> Const:int:0
+662:30:Name -> Func:builtins.len
+662:34:Name -> Inst:django.test.client.FakePayload
+663:28:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+663:28:Name -> Module:django.test.client
+666:26:Name -> Inst:django.test.client.FakePayload
+668:19:Call -> U
+668:19:Attribute -> BM:django.test.client.Client.request
+668:19:Attribute -> Inst:django.test.client.Client
+668:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+668:41:Name -> Dict:5
+669:8:Call -> Const:NoneType:None
+669:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+669:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+669:25:Attribute -> U
+669:25:Name -> U
+672:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+672:15:Name -> Module:django.core.files.temp
+673:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+673:13:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+673:30:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+673:30:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+673:47:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+673:47:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+674:12:Call -> U
+674:12:Attribute -> U
+674:12:Name -> Inst:django.core.files.temp.TemporaryFile
+675:12:Call -> U
+675:12:Attribute -> U
+675:12:Name -> Inst:django.core.files.temp.TemporaryFile
+677:12:Call -> U
+677:12:Attribute -> U
+677:12:Name -> Inst:django.core.files.temp.TemporaryFile
+678:12:Call -> U
+678:12:Attribute -> U
+678:12:Name -> Inst:django.core.files.temp.TemporaryFile
+680:12:Call -> U
+680:12:Attribute -> U
+680:12:Name -> Inst:django.core.files.temp.TemporaryFile
+681:12:Call -> U
+681:12:Attribute -> U
+681:12:Name -> Inst:django.core.files.temp.TemporaryFile
+683:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+683:23:Attribute -> BM:django.test.client.Client.post
+683:23:Attribute -> Inst:django.test.client.Client
+683:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+686:29:Name -> Inst:django.core.files.temp.TemporaryFile
+692:30:Name -> Inst:django.core.files.temp.TemporaryFile
+692:37:Name -> Inst:django.core.files.temp.TemporaryFile
+695:18:Call -> U
+695:18:Attribute -> U
+695:18:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+696:12:Call -> Const:NoneType:None
+696:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+696:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+696:29:Call -> U
+696:29:Attribute -> U
+696:29:Name -> U
+697:12:Call -> Const:NoneType:None
+697:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+697:12:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+697:29:Call -> U
+697:29:Attribute -> U
+697:29:Name -> U
+700:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+700:15:Name -> Module:django.core.files.temp
+701:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+701:13:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+701:27:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+701:27:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+701:42:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+701:42:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+702:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+702:23:Attribute -> BM:django.test.client.Client.post
+702:23:Attribute -> Inst:django.test.client.Client
+702:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+705:28:Name -> Inst:django.core.files.temp.TemporaryFile
+706:30:Name -> Inst:django.core.files.temp.TemporaryFile
+706:35:Name -> Inst:django.core.files.temp.TemporaryFile
+710:18:Attribute -> U
+710:18:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+712:8:Call -> Const:NoneType:None
+712:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+712:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+712:24:Call -> U
+712:24:Name -> Func:builtins.hasattr
+712:32:Name -> U
+714:15:Attribute -> U
+714:15:Name -> U
+715:8:Call -> Const:NoneType:None
+715:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+715:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+715:24:Attribute -> U
+715:24:Name -> U
+717:16:Call -> U
+717:16:Attribute -> U
+717:16:Attribute -> U
+717:16:Name -> U
+718:8:Call -> Const:NoneType:None
+718:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+718:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+718:24:Attribute -> U
+718:24:Name -> U
+719:8:Call -> Const:NoneType:None
+719:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+719:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+719:24:Attribute -> U
+719:24:Name -> U
+722:15:Attribute -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+722:15:Name -> Module:django.core.files.temp
+723:13:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+723:13:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+723:27:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+723:27:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+723:42:Call -> Inst:django.core.files.temp.TemporaryFile | Inst:tempfile._TemporaryFileWrapper
+723:42:Name -> Class:django.core.files.temp.TemporaryFile | Func:tempfile.NamedTemporaryFile
+724:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+724:23:Attribute -> BM:django.test.client.Client.post
+724:23:Attribute -> Inst:django.test.client.Client
+724:23:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+727:28:Name -> Inst:django.core.files.temp.TemporaryFile
+728:30:Name -> Inst:django.core.files.temp.TemporaryFile
+728:35:Name -> Inst:django.core.files.temp.TemporaryFile
+732:18:Attribute -> U
+732:18:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+734:8:Call -> Const:NoneType:None
+734:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+734:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+734:25:Call -> U
+734:25:Name -> Func:builtins.hasattr
+734:33:Name -> U
+744:35:Attribute -> Class:django.test.client.ClientHandler
+744:35:Name -> Module:django.test.client
+748:22:Call -> ERR
+748:22:Attribute -> ERR
+748:22:Call -> Super
+748:22:Name -> Class:builtins.super
+748:56:Name -> U
+748:65:Name -> U
+748:75:Name -> U
+749:16:Attribute -> U
+749:16:Name -> U
+750:23:Name -> U
+758:12:Call -> U
+758:12:Attribute -> BM:django.test.client.FakePayload.read
+758:12:Call -> Inst:django.test.client.FakePayload
+758:12:Attribute -> Class:django.test.client.FakePayload
+758:12:Name -> Module:django.test.client
+759:15:Name -> Class:builtins.Exception
+760:30:Name -> ExcInst:builtins.Exception
+763:8:Attribute -> Inst:django.test.client.Client
+763:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+763:30:Call -> Inst:tests.file_uploads.tests.FileUploadTests.test_file_error_blocking.POSTAccessingHandler
+763:30:Name -> Class:tests.file_uploads.tests.FileUploadTests.test_file_error_blocking.POSTAccessingHandler
+765:13:Call -> ERR
+765:13:Name -> Func:_io.open
+765:18:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+768:30:Name -> U
+771:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+771:16:Attribute -> BM:django.test.client.Client.post
+771:16:Attribute -> Inst:django.test.client.Client
+771:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+771:52:Name -> Dict:2
+772:19:Attribute -> Class:builtins.Exception
+772:19:Name -> ExcInst:builtins.Exception
+773:16:Call -> Const:NoneType:None
+773:16:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+773:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+774:20:Call -> Const:str:''
+774:20:Name -> Class:builtins.str
+774:24:Name -> ExcInst:builtins.Exception
+775:20:Call -> Const:str:''
+775:20:Name -> Class:builtins.str
+775:24:Name -> ExcInst:builtins.Exception
+779:19:Name -> Class:builtins.Exception
+781:16:Call -> Const:NoneType:None
+781:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+781:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+781:33:Attribute -> Class:builtins.Exception
+781:33:Name -> ExcInst:builtins.Exception
+781:48:Attribute -> Class:tests.file_uploads.uploadhandler.CustomUploadError
+781:48:Name -> Module:tests.file_uploads.uploadhandler
+801:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+801:19:Attribute -> BM:django.test.client.Client.post
+801:19:Attribute -> Inst:django.test.client.Client
+801:19:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+803:12:Call -> Const:str:''
+803:12:Attribute -> BM:builtins.str.join
+803:24:Name -> List:6
+803:37:Name -> Dict:1
+804:59:Name -> Dict:1
+806:8:Call -> Const:NoneType:None
+806:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+806:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+806:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+806:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+807:14:Call -> ERR
+807:14:Attribute -> ERR
+807:14:Attribute -> ERR
+807:14:Name -> Class:tests.file_uploads.models.FileModel
+807:39:Call -> U
+807:39:Attribute -> U
+807:39:Attribute -> U
+807:39:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+810:8:Call -> Const:NoneType:None
+810:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+810:8:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+810:25:Call -> U
+810:25:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+810:25:Attribute -> Module:posixpath | Module:ntpath
+810:25:Name -> Module:os
+810:42:Attribute -> U
+810:42:Attribute -> U
+810:42:Name -> U
+813:8:Call -> Const:NoneType:None | Const:NoneType:None | U
+813:8:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+813:8:Name -> Module:os
+813:20:Name -> U
+818:25:Name -> List:2
+819:17:Call -> Gen:unittest.case.TestCase.subTest
+819:17:Attribute -> BM:unittest.case.TestCase.subTest
+819:17:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+819:40:Name -> Const:str:'..&#x2F;test.txt' | Const:str:'..&sol;test.txt'
+820:26:Call -> Inst:django.test.client.FakePayload
+820:26:Attribute -> Class:django.test.client.FakePayload
+820:26:Name -> Module:django.test.client
+821:16:Call -> Const:NoneType:None
+821:16:Attribute -> BM:django.test.client.FakePayload.write
+821:16:Name -> Inst:django.test.client.FakePayload
+822:20:Call -> Const:str:''
+822:20:Attribute -> BM:builtins.str.join
+824:35:Attribute -> Const:str:'BoUnDaRyStRiNg'
+824:35:Name -> Module:django.test.client
+826:47:Name -> Const:str:'..&#x2F;test.txt' | Const:str:'..&sol;test.txt'
+830:39:Attribute -> Const:str:'BoUnDaRyStRiNg'
+830:39:Name -> Module:django.test.client
+835:38:Call -> Const:int:0
+835:38:Name -> Func:builtins.len
+835:42:Name -> Inst:django.test.client.FakePayload
+836:36:Attribute -> Const:str:'multipart/form-data; boundary=BoUnDaRyS
+836:36:Name -> Module:django.test.client
+839:34:Name -> Inst:django.test.client.FakePayload
+841:27:Call -> U
+841:27:Attribute -> BM:django.test.client.Client.request
+841:27:Attribute -> Inst:django.test.client.Client
+841:27:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+841:49:Name -> Dict:5
+842:25:Call -> U
+842:25:Attribute -> U
+842:25:Name -> U
+843:16:Call -> Const:NoneType:None
+843:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+843:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+843:33:Attribute -> U
+843:33:Name -> U
+844:16:Call -> Const:NoneType:None
+844:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+844:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+844:33:Name -> U
+845:16:Call -> Const:NoneType:None
+845:16:Attribute -> BM:unittest.case.TestCase.assertIs
+845:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+846:20:Call -> Const:bool:False | Const:bool:True | U
+846:20:Attribute -> Func:genericpath.exists | U
+846:20:Attribute -> Module:posixpath | Module:ntpath
+846:20:Name -> Module:os
+846:35:Call -> U
+846:35:Attribute -> Func:posixpath.join | Func:ntpath.join
+846:35:Attribute -> Module:posixpath | Module:ntpath
+846:35:Name -> Module:os
+846:48:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+849:16:Call -> Const:NoneType:None
+849:16:Attribute -> BM:unittest.case.TestCase.assertIs
+849:16:Name -> Inst:tests.file_uploads.tests.FileUploadTests
+850:20:Call -> Const:bool:False | Const:bool:True | U
+850:20:Attribute -> Func:genericpath.exists | U
+850:20:Attribute -> Module:posixpath | Module:ntpath
+850:20:Name -> Module:os
+850:35:Call -> U
+850:35:Attribute -> Func:posixpath.join | Func:ntpath.join
+850:35:Attribute -> Module:posixpath | Module:ntpath
+850:35:Name -> Module:os
+850:48:Name -> U
+855:1:Call -> Inst:django.test.utils.override_settings
+855:1:Name -> Class:django.test.utils.override_settings
+855:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+856:29:Name -> Class:django.test.testcases.SimpleTestCase
+862:5:Name -> Class:builtins.classmethod
+864:8:Call -> Const:NoneType:None
+864:8:Attribute -> BM:django.test.testcases.SimpleTestCase.setUpClass | BM:unittest.case.TestCase.setUpClass
+864:8:Call -> Super
+864:8:Name -> Class:builtins.super
+865:8:Call -> Const:NoneType:None | Const:NoneType:None | U
+865:8:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+865:8:Name -> Module:os
+865:20:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+866:8:Call -> Const:NoneType:None
+866:8:Attribute -> BM:unittest.case.TestCase.addClassCleanup
+866:8:Name -> Class:tests.file_uploads.tests.DirectoryCreationTests
+866:28:Attribute -> Func:shutil.rmtree
+866:28:Name -> Module:shutil
+866:43:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+869:8:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+869:19:Call -> Inst:tests.file_uploads.models.FileModel
+869:19:Name -> Class:tests.file_uploads.models.FileModel
+871:5:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+871:5:Attribute -> Func:unittest.case.skipIf
+871:5:Name -> Module:unittest
+872:8:Attribute -> Const:str:'darwin'
+872:8:Name -> Module:sys
+874:5:Call -> Inst:django.test.utils.override_settings
+874:5:Name -> Class:django.test.utils.override_settings
+876:12:Name -> Const:str:'default'
+883:8:Call -> ERR
+883:8:Attribute -> Func:posix.chmod
+883:8:Name -> Module:os
+883:17:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+884:8:Call -> Const:NoneType:None
+884:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+884:8:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+884:24:Attribute -> Func:posix.chmod
+884:24:Name -> Module:os
+884:34:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+885:13:Call -> Inst:unittest.case._AssertRaisesContext
+885:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+885:13:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+885:31:Name -> Class:builtins.PermissionError
+886:12:Call -> ERR
+886:12:Attribute -> ERR
+886:12:Attribute -> Inst:django.db.models.fields.files.FileField
+886:12:Attribute -> Inst:tests.file_uploads.models.FileModel
+886:12:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+887:27:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+887:27:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+891:8:Call -> U
+891:8:Attribute -> U
+891:8:Name -> Inst:django.core.files.storage.DefaultStorage
+891:31:Name -> U
+893:13:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+893:13:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+893:32:Name -> U
+894:12:Call -> U
+894:12:Attribute -> U
+894:12:Name -> Inst:django.core.files.storage.DefaultStorage
+894:33:Name -> Const:str:'test_upload'
+894:48:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+895:8:Call -> Const:NoneType:None
+895:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+895:8:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+895:24:Attribute -> U
+895:24:Name -> Inst:django.core.files.storage.DefaultStorage
+895:48:Name -> U
+896:52:Name -> U
+897:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+897:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+897:13:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+897:38:Name -> Class:builtins.FileExistsError
+897:55:Name -> U
+898:17:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+898:17:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+899:16:Call -> ERR
+899:16:Attribute -> ERR
+899:16:Attribute -> Inst:django.db.models.fields.files.FileField
+899:16:Attribute -> Inst:tests.file_uploads.models.FileModel
+899:16:Name -> Inst:tests.file_uploads.tests.DirectoryCreationTests
+899:50:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+902:23:Name -> Class:django.test.testcases.SimpleTestCase
+906:8:Call -> Inst:django.http.multipartparser.MultiPartParser
+906:8:Name -> Class:django.http.multipartparser.MultiPartParser
+911:12:Call -> Inst:_io.StringIO
+911:12:Name -> Class:_io.StringIO
+917:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+917:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+917:13:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+918:12:Name -> Class:django.http.multipartparser.MultiPartParserError
+920:12:Call -> Inst:django.http.multipartparser.MultiPartParser
+920:12:Name -> Class:django.http.multipartparser.MultiPartParser
+925:16:Call -> Inst:_io.StringIO
+925:16:Name -> Class:_io.StringIO
+931:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+931:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+931:13:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+932:12:Name -> Class:django.http.multipartparser.MultiPartParserError
+934:12:Call -> Inst:django.http.multipartparser.MultiPartParser
+934:12:Name -> Class:django.http.multipartparser.MultiPartParser
+939:16:Call -> Inst:_io.StringIO
+939:16:Name -> Class:_io.StringIO
+945:27:Call -> Inst:django.http.multipartparser.MultiPartParser
+945:27:Name -> Class:django.http.multipartparser.MultiPartParser
+950:12:Call -> Inst:_io.StringIO
+950:12:Name -> Class:_io.StringIO
+954:8:Call -> Const:NoneType:None
+954:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+954:8:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+954:25:Attribute -> Inst:builtins.int | Const:int:0
+954:25:Name -> Inst:django.http.multipartparser.MultiPartParser
+957:17:Call -> Inst:django.http.multipartparser.MultiPartParser
+957:17:Name -> Class:django.http.multipartparser.MultiPartParser
+962:12:Call -> Inst:_io.StringIO
+962:12:Name -> Class:_io.StringIO
+966:25:Name -> List:13
+967:17:Call -> Gen:unittest.case.TestCase.subTest
+967:17:Attribute -> BM:unittest.case.TestCase.subTest
+967:17:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+967:40:Name -> Const:str:'/tmp/hax0rd.txt' | Const:str:'C:\\Windows\\hax0rd.txt' | Const:str:'C:/Windows/hax0rd.txt' | Const:str:'\\tmp\\hax0rd.txt' | Const:str:'/tmp\\hax0rd.txt' | Const:str:'subdir/hax0rd.txt' | Const:str:'subdir\\hax0rd.txt' | Const:str:'sub/dir\\hax0rd.txt' | Const:str:'../../hax0rd.txt' | Const:str:'..\\..\\hax0rd.txt' | Const:str:'../..\\hax0rd.txt' | Const:str:'..&#x2F;hax0rd.txt' | Const:str:'..&sol;hax0rd.txt'
+968:16:Call -> Const:NoneType:None
+968:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+968:16:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+968:33:Call -> Const:NoneType:None | Const:str:''
+968:33:Attribute -> BM:django.http.multipartparser.MultiPartParser.sanitize_file_name
+968:33:Name -> Inst:django.http.multipartparser.MultiPartParser
+968:59:Name -> Const:str:'/tmp/hax0rd.txt' | Const:str:'C:\\Windows\\hax0rd.txt' | Const:str:'C:/Windows/hax0rd.txt' | Const:str:'\\tmp\\hax0rd.txt' | Const:str:'/tmp\\hax0rd.txt' | Const:str:'subdir/hax0rd.txt' | Const:str:'subdir\\hax0rd.txt' | Const:str:'sub/dir\\hax0rd.txt' | Const:str:'../../hax0rd.txt' | Const:str:'..\\..\\hax0rd.txt' | Const:str:'../..\\hax0rd.txt' | Const:str:'..&#x2F;hax0rd.txt' | Const:str:'..&sol;hax0rd.txt'
+971:17:Call -> Inst:django.http.multipartparser.MultiPartParser
+971:17:Name -> Class:django.http.multipartparser.MultiPartParser
+976:12:Call -> Inst:_io.StringIO
+976:12:Name -> Class:_io.StringIO
+980:25:Name -> List:7
+981:17:Call -> Gen:unittest.case.TestCase.subTest
+981:17:Attribute -> BM:unittest.case.TestCase.subTest
+981:17:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+981:40:Name -> Const:str:'/tmp/' | Const:str:'c:\\tmp\\' | Const:str:'/tmp/.' | Const:str:'c:\\tmp\\.' | Const:str:'/tmp/..' | Const:str:'c:\\tmp\\..' | Const:str:''
+982:16:Call -> Const:NoneType:None
+982:16:Attribute -> BM:unittest.case.TestCase.assertIsNone
+982:16:Name -> Inst:tests.file_uploads.tests.MultiParserTests
+982:34:Call -> Const:NoneType:None | Const:str:''
+982:34:Attribute -> BM:django.http.multipartparser.MultiPartParser.sanitize_file_name
+982:34:Name -> Inst:django.http.multipartparser.MultiPartParser
+982:60:Name -> Const:str:'/tmp/' | Const:str:'c:\\tmp\\' | Const:str:'/tmp/.' | Const:str:'c:\\tmp\\.' | Const:str:'/tmp/..' | Const:str:'c:\\tmp\\..' | Const:str:''

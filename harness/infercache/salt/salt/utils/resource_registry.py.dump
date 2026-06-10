@@ -1,0 +1,740 @@
+91:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+91:6:Attribute -> Func:logging.getLogger
+91:6:Name -> Module:logging
+91:24:Name -> Const:str:'salt.utils.resource_registry' | Const:str:'__main__'
+163:11:Name -> U
+163:29:Call -> ERR
+163:29:Name -> Func:builtins.isinstance
+163:40:Name -> U
+163:52:Name -> Class:builtins.str
+165:22:Call -> U
+165:22:Attribute -> U
+165:22:Name -> U
+166:11:Name -> U
+167:24:Name -> U
+168:20:Name -> U
+168:41:Name -> U
+182:14:Name -> U
+182:30:Name -> U
+193:11:Call -> U
+193:11:Attribute -> Func:json.dumps
+193:11:Name -> Module:json
+193:28:Name -> U
+193:44:Name -> U
+204:7:Name -> U
+204:22:Name -> U
+206:11:Call -> ERR
+206:11:Name -> Func:builtins.isinstance
+206:22:Name -> U
+206:27:Name -> Class:builtins.str
+209:14:Call -> U
+209:14:Attribute -> Func:json.loads
+209:14:Name -> Module:json
+209:25:Name -> U
+210:12:Name -> Class:builtins.TypeError
+210:23:Name -> Class:builtins.ValueError
+211:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+211:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+211:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+211:69:Name -> U
+213:11:Call -> ERR
+213:11:Name -> Func:builtins.isinstance
+213:22:Name -> U
+213:27:Name -> Class:builtins.dict
+215:22:Call -> U
+215:22:Attribute -> U
+215:22:Name -> U
+215:44:Call -> U
+215:44:Attribute -> U
+215:44:Name -> U
+255:17:Name -> Const:int:2097152
+256:18:Name -> Const:int:128
+264:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+264:21:Name -> U
+265:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+265:25:Name -> Const:int:2097152 | U
+266:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+266:26:Name -> Const:int:128 | U
+268:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+268:24:Call -> Inst:salt.utils.mmap_cache.MmapCache
+268:24:Attribute -> Class:salt.utils.mmap_cache.MmapCache
+268:24:Attribute -> Module:salt.utils.mmap_cache
+268:24:Attribute -> Module:salt.utils
+268:24:Name -> Module:salt
+269:12:Name -> U
+270:17:Name -> Const:int:2097152 | U
+271:22:Name -> Const:int:128 | U
+272:37:Name -> Const:float:0.25
+278:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+278:29:Call -> Inst:threading.lock
+278:29:Attribute -> Func:threading.Lock
+278:29:Name -> Module:threading
+279:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+280:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+280:23:Name -> Class:builtins.dict
+281:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+281:25:Name -> Class:builtins.dict
+286:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+286:30:Name -> Class:builtins.float
+287:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+295:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+295:32:Name -> Class:builtins.int
+301:8:Call -> Const:NoneType:None
+301:8:Attribute -> BM:salt.utils.mmap_cache.MmapCache.close
+301:8:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+301:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+314:14:Call -> Const:NoneType:None | Const:bool:True | Const:bool:True | U | Const:NoneType:None | Const:NoneType:None | Inst:builtins.bytes | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+314:14:Attribute -> BM:salt.utils.mmap_cache.MmapCache.get
+314:14:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+314:14:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+314:32:Name -> U
+315:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2
+315:15:Name -> Func:salt.utils.resource_registry._decode_by_id_value
+315:35:Name -> Const:NoneType:None | Const:bool:True | Const:bool:True | U | Const:NoneType:None | Const:NoneType:None | Inst:builtins.bytes | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+335:15:Call -> U
+335:15:Name -> Func:salt.utils.resource_registry._encode_by_id_value
+335:35:Name -> U
+335:46:Name -> U
+336:13:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+336:13:Attribute -> BM:salt.utils.mmap_cache.MmapCache.put
+336:13:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+336:13:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+336:31:Name -> U
+336:40:Name -> U
+337:11:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+338:12:Call -> Const:NoneType:None
+338:12:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._invalidate_version_cache
+338:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+339:12:Call -> Const:NoneType:None
+339:12:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._touch_primary_mtime
+339:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+340:15:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+347:13:Call -> Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False
+347:13:Attribute -> BM:salt.utils.mmap_cache.MmapCache.delete
+347:13:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+347:13:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+347:34:Name -> U
+348:11:Name -> Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False
+349:12:Call -> Const:NoneType:None
+349:12:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._invalidate_version_cache
+349:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+350:12:Call -> Const:NoneType:None
+350:12:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._touch_primary_mtime
+350:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+351:15:Name -> Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False
+364:12:Call -> ERR
+364:12:Attribute -> Func:posix.utime
+364:12:Name -> Module:os
+364:21:Attribute -> U
+364:21:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+365:15:Name -> Class:builtins.OSError
+378:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+379:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+384:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+400:41:Name -> U
+401:19:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+401:19:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.put
+401:19:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+401:28:Name -> U
+401:37:Name -> U
+401:48:Name -> U
+403:15:Name -> Const:bool:True | Const:bool:False
+410:17:Name -> U
+411:12:Call -> Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False
+411:12:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.delete
+411:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+411:24:Name -> U
+429:17:Call -> ERR
+429:17:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+429:17:Call -> Dict:7 | Dict:7
+429:17:Attribute -> BM:salt.utils.mmap_cache.MmapCache.get_stats
+429:17:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+429:17:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+434:16:Call -> List:0 | List:0 | List:0
+434:16:Attribute -> BM:salt.utils.mmap_cache.MmapCache.list_items
+434:16:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+434:16:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+435:13:Call -> Const:bool:True | Const:bool:False
+435:13:Attribute -> BM:salt.utils.mmap_cache.MmapCache.atomic_rebuild
+435:13:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+435:13:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+435:42:Name -> List:0 | List:0 | List:0
+436:15:Name -> Const:bool:True | Const:bool:False
+437:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+437:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+437:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+437:73:Attribute -> U
+437:73:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+438:19:Name -> U
+438:27:Name -> U
+443:13:Attribute -> Inst:threading.lock
+443:13:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+444:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+445:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+446:16:Call -> ERR
+446:16:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+446:16:Call -> Dict:7 | Dict:7
+446:16:Attribute -> BM:salt.utils.mmap_cache.MmapCache.get_stats
+446:16:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+446:16:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+447:15:Name -> U
+447:23:Name -> U
+460:8:Call -> Const:NoneType:None | Const:NoneType:None
+460:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._ensure_derived_fresh
+460:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+461:15:Call -> Inst:builtins.list
+461:15:Name -> Class:builtins.list
+461:20:Call -> ERR
+461:20:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+461:20:Attribute -> Dict:0 | Dict:0
+461:20:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+461:38:Name -> U
+469:8:Call -> Const:NoneType:None | Const:NoneType:None
+469:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._ensure_derived_fresh
+469:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+470:15:Call -> Tuple:0
+470:15:Name -> Class:builtins.tuple
+470:21:Call -> DictKeys | DictKeys
+470:21:Attribute -> BM:builtins.dict.keys | BM:builtins.dict.keys
+470:21:Attribute -> Dict:0 | Dict:0
+470:21:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+478:8:Call -> Const:NoneType:None | Const:NoneType:None
+478:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._ensure_derived_fresh
+478:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+480:12:Name -> U
+480:16:Call -> Inst:builtins.list
+480:16:Name -> Class:builtins.list
+480:21:Name -> U
+480:43:Call -> ERR
+480:43:Attribute -> ERR
+480:43:Call -> ERR
+480:43:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+480:43:Attribute -> Dict:0 | Dict:0
+480:43:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+480:63:Name -> U
+490:8:Call -> Const:NoneType:None | Const:NoneType:None
+490:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._ensure_derived_fresh
+490:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+491:14:Call -> Set:0
+491:14:Name -> Class:builtins.set
+492:29:Call -> DictItems | DictItems
+492:29:Attribute -> BM:builtins.dict.items | BM:builtins.dict.items
+492:29:Attribute -> Dict:0 | Dict:0
+492:29:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+493:15:Name -> U
+493:32:Name -> U
+494:16:Call -> ERR
+494:16:Attribute -> BM:builtins.set.add
+494:16:Name -> Set:0
+494:24:Name -> U
+495:15:Name -> Set:0
+516:14:Call -> ERR
+516:14:Attribute -> Func:time.monotonic
+516:14:Name -> Module:time
+518:12:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Tuple:2
+518:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+519:16:Name -> U
+519:22:Attribute -> Const:float:0.0 | Const:float:0.0 | U
+519:22:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+519:45:Name -> Const:float:0.25
+521:19:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Tuple:2
+521:19:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+523:25:Call -> Tuple:3 | Tuple:3 | Const:NoneType:None
+523:25:Attribute -> BM:salt.utils.mmap_cache.MmapCache._get_cache_id
+523:25:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+523:25:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+524:15:Name -> Class:builtins.OSError
+526:19:Name -> Tuple:3 | Tuple:3 | Const:NoneType:None | Const:NoneType:None
+526:31:Attribute -> Const:int:0 | U
+526:31:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+527:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+527:29:Name -> Tuple:2
+528:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+528:31:Name -> U
+529:15:Name -> Tuple:2
+545:18:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Tuple:2
+545:18:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._current_version
+545:18:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+546:11:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Tuple:2
+546:22:Attribute -> Const:NoneType:None | Const:NoneType:None | U
+546:22:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+548:13:Attribute -> Inst:threading.lock
+548:13:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+549:15:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Tuple:2
+549:26:Attribute -> Const:NoneType:None | Const:NoneType:None | U
+549:26:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+551:12:Call -> Const:NoneType:None
+551:12:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore._rebuild_derived
+551:12:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+551:34:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Tuple:2
+560:13:Call -> ERR
+560:13:Attribute -> Func:time.perf_counter
+560:13:Name -> Module:time
+561:17:Name -> Class:builtins.dict
+562:19:Name -> Class:builtins.dict
+566:28:Call -> List:0 | List:0 | List:0
+566:28:Attribute -> BM:salt.utils.mmap_cache.MmapCache.list_items
+566:28:Attribute -> Inst:salt.utils.mmap_cache.MmapCache
+566:28:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+567:22:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2
+567:22:Name -> Func:salt.utils.resource_registry._decode_by_id_value
+567:42:Name -> U
+568:19:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2
+570:18:Call -> ERR
+570:18:Attribute -> BM:builtins.dict.get
+570:18:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2
+571:20:Call -> ERR
+571:20:Attribute -> BM:builtins.dict.get
+571:20:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2
+572:19:Name -> U
+572:30:Name -> U
+577:38:Call -> U
+577:38:Attribute -> U
+577:38:Name -> U
+578:19:Name -> U
+580:12:Call -> ERR
+580:12:Attribute -> ERR
+580:12:Call -> ERR
+580:12:Attribute -> BM:builtins.dict.setdefault
+580:12:Name -> Dict:0
+580:31:Name -> U
+580:49:Name -> U
+581:12:Call -> ERR
+581:12:Attribute -> ERR
+581:12:Call -> ERR
+581:12:Attribute -> ERR
+581:12:Call -> ERR
+581:12:Attribute -> BM:builtins.dict.setdefault
+581:12:Name -> Dict:0
+581:33:Name -> U
+581:53:Name -> U
+581:71:Name -> U
+583:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+583:24:Name -> Dict:0
+584:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+584:26:Name -> Dict:0
+585:8:Name -> Inst:salt.utils.resource_registry._ResourceIndexStore
+585:32:Name -> U
+586:18:Call -> ERR
+586:18:Attribute -> Func:time.perf_counter
+586:18:Name -> Module:time
+586:40:Name -> U
+587:11:Name -> U
+587:21:Name -> Const:float:2.0
+588:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+588:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+588:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+591:16:Name -> U
+592:16:Name -> Const:float:2.0
+593:16:Call -> Const:int:0
+593:16:Name -> Func:builtins.len
+593:20:Name -> Dict:0
+594:16:Call -> Const:int:0
+594:16:Name -> Func:builtins.len
+594:20:Name -> Dict:0
+597:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+597:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+597:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+600:16:Name -> U
+601:16:Call -> Const:int:0
+601:16:Name -> Func:builtins.len
+601:20:Name -> Dict:0
+602:16:Call -> Const:int:0
+602:16:Name -> Func:builtins.len
+602:20:Name -> Dict:0
+603:16:Name -> U
+634:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+634:21:Name -> U
+635:20:Call -> U
+635:20:Attribute -> U
+635:20:Name -> U
+636:15:Name -> U
+637:18:Call -> ExcInst:builtins.ValueError
+637:18:Name -> Class:builtins.ValueError
+638:21:Call -> U
+638:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+638:21:Attribute -> Module:posixpath | Module:ntpath
+638:21:Name -> Module:os
+639:12:Name -> U
+639:23:Name -> Const:str:'resources'
+639:45:Name -> Const:str:'resource_index.by_id.mmap'
+641:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+641:22:Name -> Const:NoneType:None | U
+641:31:Call -> Inst:salt.utils.resource_registry._ResourceIndexStore
+641:31:Name -> Class:salt.utils.resource_registry._ResourceIndexStore
+642:12:Name -> U
+643:21:Call -> U
+643:21:Attribute -> U
+643:21:Name -> U
+644:51:Name -> Const:int:2097152
+646:22:Call -> U
+646:22:Attribute -> U
+646:22:Name -> U
+646:67:Name -> Const:int:128
+652:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+652:22:Name -> Const:NoneType:None | U
+652:31:Call -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+652:31:Attribute -> Func:salt.cache.factory
+652:31:Attribute -> Module:salt.cache
+652:31:Name -> Module:salt
+652:50:Name -> U
+655:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+655:36:Call -> Inst:builtins.float
+655:36:Name -> Class:builtins.float
+656:12:Call -> U
+656:12:Attribute -> U
+656:12:Name -> U
+658:16:Name -> Const:float:0.6
+661:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+661:40:Call -> Inst:builtins.float
+661:40:Name -> Class:builtins.float
+662:12:Call -> U
+662:12:Attribute -> U
+662:12:Name -> U
+664:16:Name -> Const:float:0.2
+667:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+667:37:Call -> Inst:builtins.float
+667:37:Name -> Class:builtins.float
+668:12:Call -> U
+668:12:Attribute -> U
+668:12:Name -> U
+670:16:Name -> Const:float:30.0
+673:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+680:8:Call -> Const:NoneType:None | U
+680:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.close | U
+680:8:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+680:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+695:19:Call -> U
+695:19:Attribute -> BM:salt.cache.MemCache.fetch | BM:salt.cache.Cache.fetch | U
+695:19:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | U
+695:19:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+695:37:Name -> Const:str:'resources'
+695:52:Name -> U
+696:15:Name -> Class:builtins.Exception
+697:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+697:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+697:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+699:16:Name -> Const:str:'resources'
+700:16:Name -> U
+701:16:Name -> ExcInst:builtins.Exception
+712:18:Call -> ERR
+712:18:Name -> Func:builtins.sorted
+712:25:Call -> Set:0 | U
+712:25:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.all_minions_by_type | U
+712:25:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+712:25:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+712:57:Name -> U
+713:27:Name -> U
+725:14:Call -> Const:str:'Uninferable:Uninferable'
+725:14:Name -> Func:salt.utils.resource_registry.resource_index_srn_key
+725:37:Name -> U
+725:52:Name -> U
+726:14:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+726:14:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.get | U
+726:14:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+726:14:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+726:30:Name -> Const:str:'Uninferable:Uninferable'
+727:15:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+729:14:Call -> U
+729:14:Attribute -> BM:builtins.dict.get | U
+729:14:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+730:24:Name -> U
+730:16:Name -> U
+743:15:Call -> U
+743:15:Attribute -> BM:salt.utils.resource_registry.ResourceRegistry.get_resource
+743:15:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+743:33:Name -> U
+744:15:Name -> U
+746:19:Call -> U
+746:19:Attribute -> U
+746:19:Name -> U
+747:15:Name -> U
+749:15:Call -> Inst:builtins.list
+749:15:Name -> Class:builtins.list
+749:20:Name -> U
+757:15:Call -> U
+757:15:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.resources_by_minion | U
+757:15:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+757:15:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+757:47:Name -> U
+764:15:Name -> U
+764:32:Call -> U
+764:32:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.resources_by_minion | U
+764:32:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+764:32:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+764:64:Name -> U
+771:14:Call -> Const:str:'Uninferable:Uninferable'
+771:14:Name -> Func:salt.utils.resource_registry.resource_index_srn_key
+771:37:Name -> U
+771:52:Name -> U
+772:14:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+772:14:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.get | U
+772:14:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+772:14:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+772:30:Name -> Const:str:'Uninferable:Uninferable'
+773:15:Call -> Const:bool:False
+773:15:Name -> Class:builtins.bool
+773:20:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+773:29:Call -> U
+773:29:Attribute -> BM:builtins.dict.get | U
+773:29:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+773:50:Name -> U
+781:14:Call -> Const:str:'Uninferable:Uninferable'
+781:14:Name -> Func:salt.utils.resource_registry.resource_index_srn_key
+781:37:Name -> U
+781:52:Name -> U
+782:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Dict:2 | U
+782:15:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.get | U
+782:15:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+782:15:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+782:31:Name -> Const:str:'Uninferable:Uninferable'
+794:15:Name -> U
+794:34:Call -> ERR
+794:34:Name -> Func:builtins.isinstance
+794:45:Name -> U
+794:58:Name -> Class:builtins.str
+798:25:Call -> Tuple:0 | U
+798:25:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.resource_types | U
+798:25:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+798:25:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+799:19:Name -> U
+799:34:Call -> Inst:builtins.list | U
+799:34:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.rids_by_type | U
+799:34:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+799:34:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+799:59:Name -> U
+800:20:Call -> ERR
+800:20:Attribute -> BM:builtins.list.append
+800:20:Name -> List:0
+800:32:Name -> U
+800:39:Name -> U
+801:15:Name -> Class:builtins.Exception
+802:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+802:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+802:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+804:16:Name -> U
+805:16:Name -> ExcInst:builtins.Exception
+807:15:Name -> List:0
+816:15:Call -> Inst:builtins.list | U
+816:15:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.rids_by_type | U
+816:15:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+816:15:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+816:40:Name -> U
+833:19:Call -> U
+833:19:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.resources_by_minion | U
+833:19:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+833:19:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+833:51:Name -> U
+835:19:Call -> Set:0
+835:19:Name -> Class:builtins.set
+837:27:Call -> U
+837:27:Attribute -> U
+837:28:Name -> U
+838:23:Name -> U
+839:22:Call -> Const:str:'Uninferable:Uninferable'
+839:22:Name -> Func:salt.utils.resource_registry.resource_index_srn_key
+839:45:Name -> U
+839:52:Name -> U
+840:16:Call -> ERR
+840:16:Attribute -> BM:builtins.set.add
+840:16:Name -> Set:0
+840:29:Name -> Const:str:'Uninferable:Uninferable'
+841:16:Call -> ERR
+841:16:Attribute -> BM:builtins.list.append
+841:16:Name -> List:0
+841:31:Name -> Const:str:'Uninferable:Uninferable'
+841:36:Name -> U
+841:47:Name -> U
+844:27:Call -> U
+844:27:Attribute -> U
+844:27:Name -> U
+845:23:Name -> U
+846:22:Call -> Const:str:'Uninferable:Uninferable'
+846:22:Name -> Func:salt.utils.resource_registry.resource_index_srn_key
+846:45:Name -> U
+846:52:Name -> U
+847:19:Name -> Const:str:'Uninferable:Uninferable'
+847:30:Name -> Set:0
+848:20:Call -> ERR
+848:20:Attribute -> BM:builtins.list.append
+848:20:Name -> List:0
+848:37:Name -> Const:str:'Uninferable:Uninferable' | Const:str:'Uninferable:Uninferable'
+853:8:Call -> Const:bool:True | Const:bool:False | U
+853:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.put_many | U
+853:8:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+853:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+853:29:Name -> List:0
+854:8:Call -> Const:bool:True | U
+854:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.delete_many | U
+854:8:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+854:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+854:32:Name -> List:0
+859:8:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+859:8:Attribute -> BM:salt.utils.resource_registry.ResourceRegistry.maybe_compact
+859:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+861:15:Call -> Const:int:0
+861:15:Name -> Func:builtins.len
+861:19:Name -> List:0
+861:28:Call -> Const:int:0
+861:28:Name -> Func:builtins.len
+861:32:Name -> List:0
+870:19:Call -> U
+870:19:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.resources_by_minion | U
+870:19:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+870:19:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+870:51:Name -> U
+872:12:Call -> Const:str:'Uninferable:Uninferable'
+872:12:Name -> Func:salt.utils.resource_registry.resource_index_srn_key
+872:35:Name -> U
+872:42:Name -> U
+873:31:Call -> U
+873:31:Attribute -> U
+873:31:Name -> U
+874:23:Name -> U
+876:8:Call -> Const:bool:True | U
+876:8:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.delete_many | U
+876:8:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+876:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+876:32:Name -> U
+877:15:Call -> ERR
+877:15:Name -> Func:builtins.len
+877:19:Name -> U
+895:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+895:35:Call -> ERR
+895:35:Attribute -> Func:time.monotonic
+895:35:Name -> Module:time
+896:15:Call -> Tuple:2 | Tuple:2 | U
+896:15:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.compact | U
+896:15:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+896:15:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+919:14:Call -> ERR
+919:14:Attribute -> Func:time.monotonic
+919:14:Name -> Module:time
+921:16:Name -> Const:bool:False | U
+922:17:Name -> U
+922:23:Attribute -> Const:float:0.0 | U
+922:23:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+922:51:Attribute -> Inst:builtins.float
+922:51:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+926:8:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+926:35:Name -> U
+928:20:Call -> Dict:7 | Dict:7 | U
+928:20:Attribute -> BM:salt.utils.mmap_cache.MmapCache.get_stats | U
+928:20:Attribute -> Inst:salt.utils.mmap_cache.MmapCache | U
+928:20:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+928:20:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+929:15:Name -> Class:builtins.Exception
+930:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+930:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+930:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+936:19:Call -> U
+936:19:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get | U
+936:19:Name -> Dict:7 | Dict:7 | U
+937:18:Call -> U
+937:18:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get | U
+937:18:Name -> Dict:7 | Dict:7 | U
+938:16:Call -> U
+938:16:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get | U
+938:16:Name -> Dict:7 | Dict:7 | U
+939:22:Call -> U
+939:22:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get | U
+939:22:Name -> Dict:7 | Dict:7 | U
+939:48:Name -> U
+939:59:Name -> U
+939:70:Name -> U
+940:50:Name -> U
+940:27:Name -> U
+940:37:Name -> U
+943:12:Name -> U
+943:26:Attribute -> Inst:builtins.float
+943:26:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+944:15:Name -> U | Const:float:0.0
+944:33:Attribute -> Inst:builtins.float
+944:33:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+946:15:Name -> U
+947:26:Name -> Dict:7 | Dict:7 | U
+949:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+949:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+949:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+952:12:Name -> U
+953:12:Name -> U | Const:float:0.0
+954:12:Name -> U
+955:12:Name -> U
+957:24:Call -> Tuple:2 | Tuple:2 | U
+957:24:Attribute -> BM:salt.utils.resource_registry._ResourceIndexStore.compact | U
+957:24:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+957:24:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+958:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+958:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+958:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+960:12:Name -> U
+961:12:Name -> U
+963:21:Name -> Dict:7 | Dict:7 | U
+972:18:Call -> Dict:7 | Dict:7 | U
+972:18:Attribute -> BM:salt.utils.mmap_cache.MmapCache.get_stats | U
+972:18:Attribute -> Inst:salt.utils.mmap_cache.MmapCache | U
+972:18:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+972:18:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+974:23:Name -> Dict:7 | Dict:7 | U
+975:31:Attribute -> Const:NoneType:None | Const:NoneType:None | U
+975:31:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+975:31:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+976:37:Call -> ERR
+976:37:Name -> Func:builtins.len
+976:41:Attribute -> Dict:0 | Dict:0 | U
+976:41:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+976:41:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+977:39:Call -> ERR
+977:39:Name -> Func:builtins.len
+977:43:Attribute -> Dict:0 | Dict:0 | U
+977:43:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+977:43:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+978:20:Attribute -> U
+978:20:Attribute -> Inst:salt.utils.resource_registry._ResourceIndexStore | U
+978:20:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+1040:17:Call -> Inst:threading.lock
+1040:17:Attribute -> Func:threading.Lock
+1040:17:Name -> Module:threading
+1062:15:Call -> U
+1062:15:Attribute -> U
+1062:15:Name -> U
+1063:11:Name -> U
+1064:11:Name -> Const:NoneType:None | Inst:salt.utils.resource_registry._NullResourceRegistry
+1065:17:Name -> Inst:threading.lock
+1066:19:Name -> Const:NoneType:None | Inst:salt.utils.resource_registry._NullResourceRegistry
+1067:47:Call -> Inst:salt.utils.resource_registry._NullResourceRegistry
+1067:47:Name -> Class:salt.utils.resource_registry._NullResourceRegistry
+1068:15:Name -> Const:NoneType:None | Inst:salt.utils.resource_registry._NullResourceRegistry
+1069:7:Name -> Const:NoneType:None | Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1069:43:Name -> Const:NoneType:None | U | Const:NoneType:None
+1069:65:Name -> U
+1070:15:Name -> Const:NoneType:None | Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1071:9:Name -> Inst:threading.lock
+1072:11:Name -> Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1072:47:Name -> U | Const:NoneType:None
+1072:69:Name -> U
+1073:19:Name -> Const:NoneType:None | Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1074:14:Name -> Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1075:11:Name -> Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1077:16:Call -> Const:NoneType:None
+1077:16:Attribute -> BM:salt.utils.resource_registry.ResourceRegistry.close
+1077:16:Name -> Inst:salt.utils.resource_registry.ResourceRegistry
+1078:19:Name -> Class:builtins.Exception
+1079:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1079:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1079:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1083:30:Call -> Inst:salt.utils.resource_registry.ResourceRegistry
+1083:30:Name -> Class:salt.utils.resource_registry.ResourceRegistry
+1083:47:Name -> U
+1084:29:Name -> U
+1085:15:Name -> Inst:salt.utils.resource_registry.ResourceRegistry | Const:NoneType:None
+1097:9:Name -> Inst:threading.lock
+1098:14:Name -> Const:NoneType:None
+1101:7:Name -> Const:NoneType:None
+1103:12:Call -> U
+1103:12:Attribute -> U
+1103:12:Name -> U
+1104:15:Name -> Class:builtins.Exception
+1105:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1105:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1105:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

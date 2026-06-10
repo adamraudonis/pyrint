@@ -1,0 +1,79 @@
+9:14:Call -> U
+9:14:Attribute -> Func:importlib.metadata.version
+9:14:Attribute -> Module:importlib.metadata
+9:14:Name -> Module:importlib
+10:7:Attribute -> Class:importlib.metadata.PackageNotFoundError
+10:7:Attribute -> Module:importlib.metadata
+10:7:Name -> Module:importlib
+15:11:Call -> Const:bool:False | Const:bool:True | U
+15:11:Attribute -> Func:genericpath.exists | U
+15:11:Attribute -> Module:posixpath | Module:ntpath
+15:11:Name -> Module:os
+15:26:Call -> U
+15:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+15:26:Attribute -> Module:posixpath | Module:ntpath
+15:26:Name -> Module:os
+15:39:Name -> U
+18:19:Call -> Const:str:'' | Const:bytes:b''
+18:19:Name -> Func:subprocess.check_output
+18:66:Name -> U
+18:76:Attribute -> Dict:43 | Inst:os._Environ
+18:76:Name -> Module:os
+19:11:Name -> Class:builtins.Exception
+22:11:Call -> Const:str:'' | Const:str:''
+22:11:Attribute -> BM:builtins.str.decode | BM:builtins.bytes.decode
+22:11:Call -> Const:str:'' | Const:bytes:b''
+22:11:Attribute -> BM:builtins.str.strip | BM:builtins.bytes.strip
+22:11:Name -> Const:str:'' | Const:bytes:b''
+30:25:Attribute -> Dict:43 | Inst:os._Environ
+30:25:Name -> Module:os
+31:15:Attribute -> Dict:43 | Inst:os._Environ
+31:15:Name -> Module:os
+32:18:Call -> U
+32:18:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+32:18:Attribute -> Module:posixpath | Module:ntpath
+32:18:Name -> Module:os
+32:34:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+33:19:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+33:19:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+33:19:Attribute -> Module:posixpath | Module:ntpath
+33:19:Name -> Module:os
+33:36:Call -> U
+33:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+33:36:Attribute -> Module:posixpath | Module:ntpath
+33:36:Name -> Module:os
+33:49:Name -> U
+33:62:Attribute -> Const:str:'..'
+33:62:Name -> Module:os
+33:73:Attribute -> Const:str:'..'
+33:73:Name -> Module:os
+34:11:Call -> U
+34:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+34:11:Attribute -> Module:posixpath | Module:ntpath
+34:11:Name -> Module:os
+34:24:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+35:7:Call -> Const:bool:False | Const:bool:True | U
+35:7:Attribute -> Func:genericpath.exists | U
+35:7:Attribute -> Module:posixpath | Module:ntpath
+35:7:Name -> Module:os
+35:22:Name -> U
+36:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:str:''
+36:15:Name -> Func:src.sentry._get_git_revision
+36:33:Name -> U
+41:7:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:str:''
+42:18:Name -> U | Const:str:'unknown'
+42:32:Name -> U
+43:11:Name -> U | Const:str:'unknown'
+51:31:Attribute -> Dict:43 | Inst:os._Environ
+51:31:Name -> Module:os
+51:63:Attribute -> Dict:43 | Inst:os._Environ
+51:63:Name -> Module:os
+54:14:Name -> U | Const:str:'unknown'
+55:12:Call -> U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:str:''
+55:12:Name -> Func:src.sentry.get_revision
+61:38:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:str:''
+61:23:Name -> U | Const:str:'unknown'
+61:64:Name -> U | Const:str:'unknown'
+61:78:Name -> U | Const:str:'' | Const:str:''
+65:0:Call -> ERR
+65:0:Name -> Func:builtins.__import__

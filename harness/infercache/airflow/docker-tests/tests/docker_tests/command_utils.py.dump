@@ -1,0 +1,48 @@
+24:9:Name -> Class:builtins.list
+24:14:Name -> Class:builtins.str
+24:46:Name -> Class:builtins.bool
+24:74:Name -> Class:builtins.bool
+25:5:Name -> Class:builtins.str
+25:11:Name -> Class:builtins.bool
+26:4:Call -> ERR
+26:4:Name -> Func:builtins.print
+26:30:Call -> Const:str:''
+26:30:Attribute -> BM:builtins.str.join
+26:39:Call -> Const:str:"''" | U
+26:39:Attribute -> Func:shlex.quote
+26:39:Name -> Module:shlex
+26:51:Name -> U
+26:63:Name -> U
+28:11:Name -> Const:bool:False | U
+29:19:Call -> Const:str:'' | Const:str:''
+29:19:Attribute -> BM:builtins.str.decode | BM:builtins.bytes.decode
+29:19:Call -> Const:str:'' | Const:bytes:b''
+29:19:Attribute -> Func:subprocess.check_output
+29:19:Name -> Module:subprocess
+29:43:Name -> U
+29:50:Name -> Dict:0
+31:21:Call -> Inst:subprocess.CompletedProcess
+31:21:Attribute -> Func:subprocess.run
+31:21:Name -> Module:subprocess
+31:36:Name -> U
+31:47:Name -> Const:bool:True | U
+31:56:Name -> Dict:0
+32:19:Attribute -> U
+32:19:Name -> Inst:subprocess.CompletedProcess
+33:15:Name -> Class:builtins.FileNotFoundError
+34:15:Name -> Const:bool:True | U
+37:11:Attribute -> Class:subprocess.CalledProcessError
+37:11:Name -> Module:subprocess
+38:11:Name -> Const:bool:True | U
+39:12:Call -> ERR
+39:12:Name -> Func:builtins.print
+40:12:Call -> ERR
+40:12:Name -> Func:builtins.print
+40:18:Attribute -> Const:NoneType:None | U
+40:18:Name -> ExcInst:subprocess.CalledProcessError
+41:12:Call -> ERR
+41:12:Name -> Func:builtins.print
+41:18:Attribute -> Const:NoneType:None | U | BM:subprocess.CalledProcessError.stdout
+41:18:Name -> ExcInst:subprocess.CalledProcessError
+42:12:Call -> ERR
+42:12:Name -> Func:builtins.print

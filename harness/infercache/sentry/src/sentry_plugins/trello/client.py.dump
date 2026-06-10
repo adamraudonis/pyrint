@@ -1,0 +1,96 @@
+12:14:Call -> Const:str:''
+12:14:Attribute -> BM:builtins.str.join
+15:22:Name -> U
+20:8:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+20:23:Name -> U
+21:8:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+21:21:Name -> Const:NoneType:None | U
+22:8:Call -> Const:NoneType:None
+22:8:Attribute -> BM:builtins.object.__init__
+22:8:Call -> Super
+22:8:Name -> Class:builtins.super
+22:27:Name -> Dict:0
+25:23:Name -> Const:NoneType:None | U
+25:43:Call -> U
+25:43:Attribute -> U
+25:43:Name -> U
+26:8:Name -> Dict:0 | U
+26:26:Attribute -> Const:NoneType:None | U
+26:26:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+27:8:Name -> Dict:0 | U
+27:24:Attribute -> U
+27:24:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+28:15:Call -> ERR
+28:15:Attribute -> ERR
+28:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+28:29:Name -> Const:str:'GET' | U
+28:37:Name -> Const:str:'' | U
+28:48:Name -> Const:NoneType:None | U
+28:61:Name -> Dict:0 | U
+28:71:Name -> Dict:0
+34:15:Call -> U
+34:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+34:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+34:33:Name -> Const:str:'/organizations/%s/boards'
+34:51:Name -> U
+34:86:Name -> Const:NoneType:None | U
+40:15:Call -> U
+40:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+40:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+40:33:Name -> Const:str:'/members/me/boards'
+40:70:Name -> Const:NoneType:None | U
+46:11:Name -> Const:NoneType:None | U
+47:19:Call -> U
+47:19:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.get_organization_boards
+47:19:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+47:48:Name -> U
+48:15:Call -> U
+48:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.get_member_boards
+48:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+54:15:Call -> U
+54:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+54:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+54:33:Name -> Const:str:'/members/me/organizations'
+54:68:Name -> Const:NoneType:None | U
+60:15:Call -> U
+60:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+60:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+60:33:Name -> Const:str:'/boards/%s/lists'
+60:56:Name -> U
+60:85:Name -> Const:NoneType:None | U
+66:15:Call -> U
+66:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+66:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+67:32:Name -> Const:str:'/cards'
+67:61:Name -> U
+67:77:Name -> U
+67:94:Name -> Const:NoneType:None | U
+74:24:Call -> U
+74:24:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.get_organization_list
+74:24:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+75:17:Name -> U
+75:28:Name -> U
+75:52:Name -> U
+82:21:Name -> U
+86:27:Name -> Const:str:''
+88:11:Name -> Const:NoneType:None | U
+89:12:Name -> Dict:5
+89:40:Name -> U
+90:19:Call -> U
+90:19:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+90:19:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+90:37:Name -> Const:str:'/search'
+90:57:Name -> Dict:5
+91:15:Name -> U
+97:15:Call -> U
+97:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+97:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+98:17:Name -> Const:str:'/cards/%s'
+98:36:Name -> U
+98:77:Name -> Const:str:''
+105:15:Call -> U
+105:15:Attribute -> BM:src.sentry_plugins.trello.client.TrelloApiClient.request
+105:15:Name -> Inst:src.sentry_plugins.trello.client.TrelloApiClient
+106:32:Name -> Const:str:'/cards/%s/actions/comments'
+106:51:Name -> U
+106:90:Name -> U

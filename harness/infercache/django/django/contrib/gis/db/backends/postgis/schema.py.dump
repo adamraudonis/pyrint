@@ -1,0 +1,170 @@
+6:26:Name -> Class:django.db.backends.postgresql.schema.DatabaseSchemaEditor
+19:15:Call -> U
+19:15:Attribute -> U
+19:15:Attribute -> U
+19:15:Attribute -> U
+19:15:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+19:50:Name -> U
+22:11:Call -> U
+22:11:Name -> Func:builtins.getattr
+22:19:Name -> U
+24:15:Call -> U
+24:15:Attribute -> BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor._field_should_be_indexed
+24:15:Call -> Super
+24:15:Name -> Class:builtins.super
+24:48:Name -> U
+24:55:Name -> U
+27:11:Name -> Const:NoneType:None | U
+27:29:Call -> ERR
+27:29:Name -> Func:builtins.len
+27:33:Name -> Const:NoneType:None | U
+27:53:Call -> U
+27:53:Name -> Func:builtins.hasattr
+27:61:Name -> Const:NoneType:None | U
+28:19:Call -> Inst:django.db.backends.ddl_references.Statement
+28:19:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor._create_index_sql | BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor._create_index_sql
+28:19:Call -> Super
+28:19:Name -> Class:builtins.super
+28:45:Name -> U
+28:59:Name -> Const:NoneType:None | U
+28:69:Name -> Dict:0
+30:15:Call -> Inst:django.db.backends.ddl_references.Statement
+30:15:Attribute -> BM:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor._create_spatial_index_sql
+30:15:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+30:46:Name -> U
+30:53:Name -> Const:NoneType:None | U
+30:66:Name -> Dict:0
+38:15:Call -> U
+38:15:Name -> Func:builtins.hasattr
+38:23:Name -> U
+38:48:Call -> U
+38:48:Name -> Func:builtins.hasattr
+38:56:Name -> U
+39:19:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+39:19:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor._alter_column_type_sql | BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor._alter_column_type_sql
+39:19:Call -> Super
+39:19:Name -> Class:builtins.super
+40:16:Name -> U
+40:23:Name -> U
+40:34:Name -> U
+40:45:Name -> U
+40:55:Name -> U
+40:70:Name -> U
+43:11:Attribute -> U
+43:11:Name -> U
+43:34:Attribute -> U
+43:34:Name -> U
+44:24:Attribute -> Const:str:'ALTER COLUMN %(column)s TYPE %(type)s U
+44:24:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+45:13:Attribute -> U
+45:13:Name -> U
+45:36:Attribute -> U
+45:36:Name -> U
+46:24:Attribute -> Const:str:'ALTER COLUMN %(column)s TYPE %(type)s U
+46:24:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+48:24:Attribute -> Const:str:'ALTER COLUMN %(column)s TYPE %(type)s%( | U
+48:24:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+51:16:Name -> Const:str:'ALTER COLUMN %(column)s TYPE %(type)s U | Const:str:'ALTER COLUMN %(column)s TYPE %(type)s U | Const:str:'ALTER COLUMN %(column)s TYPE %(type)s%( | U
+53:30:Call -> U
+53:30:Attribute -> BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor.quote_name
+53:30:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+53:46:Attribute -> U
+53:46:Name -> U
+54:28:Name -> U
+73:8:Call -> Const:NoneType:None | Const:NoneType:None
+73:8:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor._alter_field | BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor._alter_field
+73:8:Call -> Super
+73:8:Name -> Class:builtins.super
+74:12:Name -> U
+75:12:Name -> U
+76:12:Name -> U
+77:12:Name -> U
+78:12:Name -> U
+79:12:Name -> U
+80:12:Name -> U
+81:19:Name -> Const:bool:False | U
+85:12:Call -> ERR
+85:12:Name -> Func:builtins.isinstance
+85:23:Name -> U
+85:34:Name -> Class:django.contrib.gis.db.models.fields.GeometryField
+85:53:Attribute -> U
+85:53:Name -> U
+88:12:Call -> ERR
+88:12:Name -> Func:builtins.isinstance
+88:23:Name -> U
+88:34:Name -> Class:django.contrib.gis.db.models.fields.GeometryField
+88:53:Attribute -> U
+88:53:Name -> U
+90:15:Name -> U
+90:43:Name -> U
+91:12:Call -> Const:NoneType:None | Const:NoneType:None
+91:12:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor.execute
+91:12:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+91:25:Call -> Inst:django.db.backends.ddl_references.Statement
+91:25:Attribute -> BM:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor._create_spatial_index_sql
+91:25:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+91:56:Name -> U
+91:63:Name -> U
+92:13:Name -> U
+92:45:Name -> U
+93:12:Call -> Const:NoneType:None | Const:NoneType:None
+93:12:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor.execute
+93:12:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+93:25:Call -> Inst:django.db.backends.ddl_references.Statement
+93:25:Attribute -> BM:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor._delete_spatial_index_sql
+93:25:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+93:56:Name -> U
+93:63:Name -> U
+96:15:Call -> U
+96:15:Attribute -> BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor._create_index_name
+96:15:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+96:39:Attribute -> U
+96:39:Attribute -> U
+96:39:Name -> U
+96:62:Attribute -> U
+96:62:Name -> U
+101:18:Name -> U
+102:11:Attribute -> U
+102:11:Name -> U
+106:26:Call -> Inst:django.db.models.expressions.Func
+106:26:Name -> Class:django.db.models.expressions.Func
+106:31:Call -> Inst:django.db.models.expressions.Col
+106:31:Name -> Class:django.db.models.expressions.Col
+106:41:Name -> U
+106:58:Attribute -> Const:str:'ST_ConvexHull(%(expressions)s)'
+106:58:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+108:13:Attribute -> U
+108:13:Name -> U
+108:35:Attribute -> U
+108:35:Name -> U
+110:25:Attribute -> Const:str:'GIST_GEOMETRY_OPS_ND'
+110:25:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+111:24:Call -> ERR
+111:24:Attribute -> BM:builtins.dict.get
+111:24:Name -> Dict:0
+112:19:Call -> U
+112:19:Attribute -> BM:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor._create_spatial_index_name
+112:19:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+112:51:Name -> U
+112:58:Name -> U
+114:15:Call -> Inst:django.db.backends.ddl_references.Statement
+114:15:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor._create_index_sql | BM:django.db.backends.base.schema.BaseDatabaseSchemaEditor._create_index_sql
+114:15:Call -> Super
+114:15:Name -> Class:builtins.super
+115:12:Name -> U
+116:19:Name -> List:1 | Const:NoneType:None
+117:17:Name -> U
+118:32:Attribute -> Const:str:'GIST'
+118:32:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+119:22:Name -> Const:NoneType:None | List:1
+120:24:Name -> Const:NoneType:None | Inst:django.db.models.expressions.Func
+124:21:Call -> U
+124:21:Attribute -> BM:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor._create_spatial_index_name
+124:21:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+124:53:Name -> U
+124:60:Name -> U
+125:15:Call -> Inst:django.db.backends.ddl_references.Statement
+125:15:Attribute -> BM:django.db.backends.postgresql.schema.DatabaseSchemaEditor._delete_index_sql
+125:15:Name -> Inst:django.contrib.gis.db.backends.postgis.schema.PostGISSchemaEditor
+125:38:Name -> U
+125:45:Name -> U

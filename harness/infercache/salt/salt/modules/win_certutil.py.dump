@@ -1,0 +1,93 @@
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'salt.modules.win_certutil' | Const:str:'__main__'
+25:7:Call -> U
+25:7:Attribute -> Func:salt.utils.platform.is_windows
+25:7:Attribute -> Module:salt.utils.platform
+25:7:Attribute -> Module:salt.utils
+25:7:Name -> Module:salt
+26:15:Name -> Const:str:'certutil'
+53:16:Call -> ERR
+53:16:Name -> ERR
+53:42:Name -> U
+53:53:Name -> Const:str:'base' | U
+56:11:Call -> Const:bool:False | Const:bool:True | U
+56:11:Attribute -> Func:genericpath.exists | U
+56:11:Attribute -> Module:posixpath | Module:ntpath
+56:11:Name -> Module:os
+56:26:Name -> U
+57:38:Name -> U
+58:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+58:14:Name -> Class:salt.exceptions.CommandExecutionError
+58:36:Name -> Const:str:'cert_file not found: Uninferable'
+60:43:Name -> U
+61:10:Call -> ERR
+61:10:Name -> ERR
+61:30:Name -> Const:str:'certutil.exe -silent -verify "Uninferab
+63:14:Call -> U
+63:14:Attribute -> Func:re.search
+63:14:Name -> Module:re
+63:46:Name -> U
+64:7:Name -> U
+65:15:Call -> U
+65:15:Attribute -> U
+65:15:Call -> U
+65:15:Attribute -> U
+65:15:Name -> U
+86:34:Name -> U
+87:10:Call -> ERR
+87:10:Name -> ERR
+87:30:Name -> Const:str:'certutil.exe -store "Uninferable"'
+89:14:Call -> U
+89:14:Attribute -> Func:re.findall
+89:14:Name -> Module:re
+89:54:Name -> U
+90:11:Name -> U
+121:13:Call -> ERR
+121:13:Name -> ERR
+121:39:Name -> U
+121:47:Name -> Const:str:'base' | U
+124:11:Call -> Const:bool:False | Const:bool:True | U
+124:11:Attribute -> Func:genericpath.exists | U
+124:11:Attribute -> Module:posixpath | Module:ntpath
+124:11:Name -> Module:os
+124:26:Name -> U
+125:38:Name -> U
+126:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+126:14:Name -> Class:salt.exceptions.CommandExecutionError
+126:36:Name -> Const:str:'cert_file not found: Uninferable'
+128:36:Name -> U
+128:45:Name -> U
+129:7:Name -> Const:bool:False | U
+130:15:Call -> ERR
+130:15:Name -> ERR
+130:39:Name -> Const:str:'certutil.exe -addstore Uninferable "Uni
+132:15:Call -> ERR
+132:15:Name -> ERR
+132:35:Name -> Const:str:'certutil.exe -addstore Uninferable "Uni
+163:13:Call -> ERR
+163:13:Name -> ERR
+163:39:Name -> U
+163:47:Name -> Const:str:'base' | U
+166:11:Call -> Const:bool:False | Const:bool:True | U
+166:11:Attribute -> Func:genericpath.exists | U
+166:11:Attribute -> Module:posixpath | Module:ntpath
+166:11:Name -> Module:os
+166:26:Name -> U
+167:38:Name -> U
+168:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+168:14:Name -> Class:salt.exceptions.CommandExecutionError
+168:36:Name -> Const:str:'cert_file not found: Uninferable'
+170:13:Call -> U | Const:NoneType:None
+170:13:Name -> Func:salt.modules.win_certutil.get_cert_serial
+170:29:Name -> U
+171:36:Name -> U
+171:45:Name -> U | Const:NoneType:None
+172:7:Name -> Const:bool:False | U
+173:15:Call -> ERR
+173:15:Name -> ERR
+173:39:Name -> Const:str:'certutil.exe -delstore Uninferable "Uni | Const:str:'certutil.exe -delstore Uninferable "Non
+175:15:Call -> ERR
+175:15:Name -> ERR
+175:35:Name -> Const:str:'certutil.exe -delstore Uninferable "Uni | Const:str:'certutil.exe -delstore Uninferable "Non

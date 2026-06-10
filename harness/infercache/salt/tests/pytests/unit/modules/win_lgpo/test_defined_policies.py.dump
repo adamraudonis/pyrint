@@ -1,0 +1,170 @@
+12:4:Attribute -> U
+12:4:Attribute -> U
+12:4:Name -> U
+13:4:Attribute -> U
+13:4:Attribute -> U
+13:4:Name -> U
+14:4:Attribute -> U
+14:4:Attribute -> U
+14:4:Name -> U
+18:1:Attribute -> U
+18:1:Name -> U
+20:16:Name -> U
+21:4:Call -> U
+21:4:Attribute -> U
+21:4:Name -> U
+23:8:Name -> Module:salt.modules.win_lgpo
+25:36:Attribute -> Func:salt.modules.file.file_exists | Inst:builtins.function
+25:36:Name -> Module:salt.modules.win_file
+26:33:Attribute -> Func:salt.modules.win_file.makedirs_
+26:33:Name -> Module:salt.modules.win_file
+29:28:Call -> Const:str:''
+29:28:Name -> Class:builtins.str
+29:32:Name -> U
+32:33:Attribute -> Func:salt.utils.win_reg.set_value
+32:33:Name -> Module:salt.utils.win_reg
+33:34:Attribute -> Func:salt.utils.win_reg.read_value
+33:34:Name -> Module:salt.utils.win_reg
+34:36:Attribute -> Func:salt.utils.win_reg.delete_value
+34:36:Name -> Module:salt.utils.win_reg
+41:1:Attribute -> U
+41:1:Attribute -> U
+41:1:Name -> U
+46:4:Call -> Const:bool:True | Const:NoneType:None
+46:4:Attribute -> Func:salt.utils.win_reg.delete_value
+46:4:Name -> Module:salt.utils.win_reg
+46:42:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+46:53:Name -> Const:str:'VulnerableChannelAllowList'
+48:8:Call -> Const:bool:True
+48:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+48:8:Name -> Module:salt.modules.win_lgpo
+48:42:Name -> Const:str:'VulnerableChannelAllowList'
+48:57:Name -> Const:str:'O:BAG:BAD:(A;;RC;;;BA)'
+49:17:Call -> Dict:6
+49:17:Attribute -> Func:salt.utils.win_reg.read_value
+49:17:Name -> Module:salt.utils.win_reg
+49:53:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+49:64:Name -> Const:str:'VulnerableChannelAllowList'
+50:15:Name -> Dict:6
+50:34:Name -> Const:str:'O:BAG:BAD:(A;;RC;;;BA)'
+52:8:Call -> Const:bool:True | Const:NoneType:None
+52:8:Attribute -> Func:salt.utils.win_reg.delete_value
+52:8:Name -> Module:salt.utils.win_reg
+52:46:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+52:57:Name -> Const:str:'VulnerableChannelAllowList'
+55:1:Attribute -> U
+55:1:Attribute -> U
+55:1:Name -> U
+59:4:Call -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False
+59:4:Attribute -> Func:salt.utils.win_reg.set_value
+59:4:Name -> Module:salt.utils.win_reg
+59:39:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+59:50:Name -> Const:str:'VulnerableChannelAllowList'
+61:8:Call -> Const:bool:True
+61:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+61:8:Name -> Module:salt.modules.win_lgpo
+61:42:Name -> Const:str:'VulnerableChannelAllowList'
+62:19:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+62:19:Attribute -> Func:salt.utils.win_reg.value_exists
+62:19:Name -> Module:salt.utils.win_reg
+62:57:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+62:68:Name -> Const:str:'VulnerableChannelAllowList'
+64:8:Call -> Const:bool:True | Const:NoneType:None
+64:8:Attribute -> Func:salt.utils.win_reg.delete_value
+64:8:Name -> Module:salt.utils.win_reg
+64:46:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+64:57:Name -> Const:str:'VulnerableChannelAllowList'
+67:1:Attribute -> U
+67:1:Attribute -> U
+67:1:Name -> U
+72:4:Call -> Const:bool:True | Const:NoneType:None
+72:4:Attribute -> Func:salt.utils.win_reg.delete_value
+72:4:Name -> Module:salt.utils.win_reg
+72:42:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+72:53:Name -> Const:str:'LdapEnforceChannelBinding'
+74:8:Call -> Const:bool:True
+74:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+74:8:Name -> Module:salt.modules.win_lgpo
+74:42:Name -> Const:str:'LdapEnforceChannelBinding'
+74:57:Name -> Const:str:'Never'
+75:17:Call -> Dict:6
+75:17:Attribute -> Func:salt.utils.win_reg.read_value
+75:17:Name -> Module:salt.utils.win_reg
+75:53:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+75:64:Name -> Const:str:'LdapEnforceChannelBinding'
+76:15:Name -> Dict:6
+79:8:Call -> Const:bool:True | Const:NoneType:None
+79:8:Attribute -> Func:salt.utils.win_reg.delete_value
+79:8:Name -> Module:salt.utils.win_reg
+79:46:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+79:57:Name -> Const:str:'LdapEnforceChannelBinding'
+82:1:Attribute -> U
+82:1:Attribute -> U
+82:1:Name -> U
+87:4:Call -> Const:bool:True | Const:NoneType:None
+87:4:Attribute -> Func:salt.utils.win_reg.delete_value
+87:4:Name -> Module:salt.utils.win_reg
+87:42:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+87:53:Name -> Const:str:'LdapEnforceChannelBinding'
+89:8:Call -> Const:bool:True
+89:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+89:8:Name -> Module:salt.modules.win_lgpo
+89:42:Name -> Const:str:'LdapEnforceChannelBinding'
+89:57:Name -> Const:str:'When supported'
+90:17:Call -> Dict:6
+90:17:Attribute -> Func:salt.utils.win_reg.read_value
+90:17:Name -> Module:salt.utils.win_reg
+90:53:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+90:64:Name -> Const:str:'LdapEnforceChannelBinding'
+91:15:Name -> Dict:6
+94:8:Call -> Const:bool:True | Const:NoneType:None
+94:8:Attribute -> Func:salt.utils.win_reg.delete_value
+94:8:Name -> Module:salt.utils.win_reg
+94:46:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+94:57:Name -> Const:str:'LdapEnforceChannelBinding'
+97:1:Attribute -> U
+97:1:Attribute -> U
+97:1:Name -> U
+102:4:Call -> Const:bool:True | Const:NoneType:None
+102:4:Attribute -> Func:salt.utils.win_reg.delete_value
+102:4:Name -> Module:salt.utils.win_reg
+102:42:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+102:53:Name -> Const:str:'LdapEnforceChannelBinding'
+104:8:Call -> Const:bool:True
+104:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+104:8:Name -> Module:salt.modules.win_lgpo
+104:42:Name -> Const:str:'LdapEnforceChannelBinding'
+104:57:Name -> Const:str:'Always'
+105:17:Call -> Dict:6
+105:17:Attribute -> Func:salt.utils.win_reg.read_value
+105:17:Name -> Module:salt.utils.win_reg
+105:53:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+105:64:Name -> Const:str:'LdapEnforceChannelBinding'
+106:15:Name -> Dict:6
+109:8:Call -> Const:bool:True | Const:NoneType:None
+109:8:Attribute -> Func:salt.utils.win_reg.delete_value
+109:8:Name -> Module:salt.utils.win_reg
+109:46:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+109:57:Name -> Const:str:'LdapEnforceChannelBinding'
+112:1:Attribute -> U
+112:1:Attribute -> U
+112:1:Name -> U
+116:4:Call -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False
+116:4:Attribute -> Func:salt.utils.win_reg.set_value
+116:4:Name -> Module:salt.utils.win_reg
+116:39:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+116:50:Name -> Const:str:'LdapEnforceChannelBinding'
+118:8:Call -> Const:bool:True
+118:8:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+118:8:Name -> Module:salt.modules.win_lgpo
+118:42:Name -> Const:str:'LdapEnforceChannelBinding'
+119:19:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+119:19:Attribute -> Func:salt.utils.win_reg.value_exists
+119:19:Name -> Module:salt.utils.win_reg
+119:57:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+119:68:Name -> Const:str:'LdapEnforceChannelBinding'
+121:8:Call -> Const:bool:True | Const:NoneType:None
+121:8:Attribute -> Func:salt.utils.win_reg.delete_value
+121:8:Name -> Module:salt.utils.win_reg
+121:46:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\NT
+121:57:Name -> Const:str:'LdapEnforceChannelBinding'

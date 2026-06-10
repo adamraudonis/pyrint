@@ -1,0 +1,136 @@
+25:11:Attribute -> Inst:pathlib.Path
+25:11:Call -> Inst:pathlib.Path
+25:11:Name -> Class:pathlib.Path
+25:16:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+25:49:Name -> U
+44:11:Call -> Const:bytes:b'' | Const:str:'' | U
+44:11:Attribute -> BM:builtins.bytes.lstrip | BM:builtins.str.lstrip | U
+44:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+44:11:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath
+44:11:Name -> Module:posixpath
+44:30:Name -> U
+45:15:Call -> Inst:pathlib.Path
+45:15:Name -> Class:pathlib.Path
+45:20:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+45:20:Name -> Func:django.utils._os.safe_join
+45:30:Name -> Const:NoneType:None | U
+45:45:Name -> Const:bytes:b'' | Const:str:'' | U
+46:7:Call -> U | Const:bool:False | Const:bool:False
+46:7:Attribute -> BM:pathlib.Path.is_dir
+46:7:Name -> Inst:pathlib.Path
+47:11:Name -> Const:bool:False | U
+48:19:Call -> Inst:django.http.response.HttpResponse
+48:19:Name -> Func:django.views.static.directory_index
+48:35:Name -> Const:bytes:b'' | Const:str:'' | U
+48:41:Name -> Inst:pathlib.Path
+49:14:Call -> ExcInst:django.http.response.Http404
+49:14:Name -> Class:django.http.response.Http404
+49:22:Call -> U
+49:22:Name -> Func:django.utils.translation.gettext
+50:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+50:11:Attribute -> BM:pathlib.Path.exists
+50:11:Name -> Inst:pathlib.Path
+51:14:Call -> ExcInst:django.http.response.Http404
+51:14:Name -> Class:django.http.response.Http404
+51:22:Call -> U
+51:22:Name -> Func:django.utils.translation.gettext
+51:68:Name -> Inst:pathlib.Path
+53:14:Call -> U
+53:14:Attribute -> BM:pathlib.Path.stat
+53:14:Name -> Inst:pathlib.Path
+54:11:Call -> Const:bool:True | Const:bool:False
+54:11:Name -> Func:django.views.static.was_modified_since
+55:8:Call -> U
+55:8:Attribute -> U
+55:8:Attribute -> U
+55:8:Name -> U
+55:52:Attribute -> U
+55:52:Name -> U
+57:15:Call -> Inst:django.http.response.HttpResponseNotModified
+57:15:Name -> Class:django.http.response.HttpResponseNotModified
+58:29:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | U
+58:29:Attribute -> Func:mimetypes.guess_type
+58:29:Name -> Module:mimetypes
+58:50:Call -> Const:str:''
+58:50:Name -> Class:builtins.str
+58:54:Name -> Inst:pathlib.Path
+59:19:Name -> Const:NoneType:None | U | Const:str:'text/plain' | Const:NoneType:None | Const:NoneType:None
+60:15:Call -> Inst:django.http.response.FileResponse
+60:15:Name -> Class:django.http.response.FileResponse
+60:28:Call -> U
+60:28:Attribute -> BM:pathlib.Path.open
+60:28:Name -> Inst:pathlib.Path
+60:62:Name -> Const:str:'application/octet-stream' | U | Const:str:'text/plain'
+61:4:Attribute -> Inst:django.http.response.ResponseHeaders
+61:4:Name -> Inst:django.http.response.FileResponse
+61:40:Call -> U
+61:40:Name -> Func:django.utils.http.http_date
+61:50:Attribute -> U
+61:50:Name -> U
+62:7:Name -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+63:8:Attribute -> Inst:django.http.response.ResponseHeaders
+63:8:Name -> Inst:django.http.response.FileResponse
+63:47:Name -> U
+64:11:Name -> Inst:django.http.response.FileResponse
+68:24:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+68:24:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+73:12:Call -> U
+73:12:Attribute -> Func:django.template.loader.select_template
+73:12:Name -> Module:django.template.loader
+79:11:Name -> Class:django.template.exceptions.TemplateDoesNotExist
+80:13:Call -> U
+80:13:Attribute -> U
+80:13:Call -> U
+80:13:Name -> Func:django.views.static.builtin_template_path
+81:16:Call -> Inst:django.template.base.Template
+81:16:Attribute -> BM:django.template.engine.Engine.from_string
+81:16:Call -> Inst:django.template.engine.Engine
+81:16:Name -> Class:django.template.engine.Engine
+82:16:Call -> U
+82:16:Attribute -> U
+82:16:Name -> U
+84:12:Call -> Inst:django.template.context.Context
+84:12:Name -> Class:django.template.context.Context
+88:13:Call -> U
+88:13:Attribute -> U
+88:13:Name -> U
+89:15:Call -> U
+89:15:Attribute -> U
+89:15:Attribute -> U
+89:15:Name -> U
+90:18:Call -> Const:str:''
+90:18:Name -> Class:builtins.str
+90:22:Call -> U
+90:22:Attribute -> U
+90:22:Name -> U
+90:36:Name -> U
+91:15:Call -> U
+91:15:Attribute -> U
+91:15:Name -> U
+93:12:Call -> ERR
+93:12:Attribute -> BM:builtins.list.append
+93:12:Name -> List:0
+93:25:Name -> Const:str:'' | Const:str:'/'
+94:4:Call -> Inst:django.template.context.ContextDict
+94:4:Attribute -> BM:django.template.context.Context.update | BM:builtins.dict.update
+94:4:Name -> Inst:django.template.context.Context | Dict:0
+96:25:Name -> U
+97:25:Name -> List:0
+100:11:Call -> Inst:django.http.response.HttpResponse
+100:11:Name -> Class:django.http.response.HttpResponse
+100:24:Call -> U | Inst:django.utils.safestring.SafeString
+100:24:Attribute -> U | BM:django.template.base.Template.render
+100:24:Name -> U | Inst:django.template.base.Template
+100:33:Name -> Inst:django.template.context.Context | Dict:0
+115:11:Name -> Const:NoneType:None | U
+116:18:Name -> Class:builtins.ValueError
+117:23:Call -> U
+117:23:Name -> Func:django.utils.http.parse_http_date
+117:39:Name -> Const:NoneType:None | U
+118:11:Call -> Const:int:0
+118:11:Name -> Class:builtins.int
+118:15:Name -> Const:int:0 | U
+118:24:Name -> U
+119:18:Name -> Class:builtins.ValueError
+120:12:Name -> Class:builtins.ValueError
+120:24:Name -> Class:builtins.OverflowError

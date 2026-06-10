@@ -1,0 +1,62 @@
+13:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:10:Attribute -> Func:logging.getLogger
+13:10:Name -> Module:logging
+13:28:Name -> Const:str:'homeassistant.components.nice_go.event' | Const:str:'__main__'
+17:10:Name -> U
+18:18:Name -> U
+19:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+23:18:Attribute -> U
+23:18:Name -> U
+25:4:Call -> U
+25:4:Name -> U
+26:8:Call -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+26:8:Name -> Class:homeassistant.components.nice_go.event.NiceGOEventEntity
+26:26:Name -> U
+26:39:Name -> U
+26:50:Attribute -> U
+26:50:Name -> U
+27:38:Call -> U
+27:38:Attribute -> U
+27:38:Attribute -> U
+27:38:Name -> U
+34:24:Name -> Class:homeassistant.components.nice_go.entity.NiceGOEntity
+34:38:Name -> Class:homeassistant.components.event.EventEntity
+38:25:Name -> Const:str:'barrier_obstructed'
+42:14:Call -> ERR
+42:14:Attribute -> BM:homeassistant.helpers.entity.Entity.async_added_to_hass
+42:14:Call -> Super
+42:14:Name -> Class:builtins.super
+43:8:Call -> Const:NoneType:None
+43:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_on_remove
+43:8:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+44:12:Call -> ERR
+44:12:Attribute -> ERR
+44:12:Attribute -> ERR
+44:12:Attribute -> ERR
+44:12:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+45:41:Attribute -> BM:homeassistant.components.nice_go.event.NiceGOEventEntity.on_barrier_obstructed
+45:41:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+49:48:Name -> Class:builtins.dict
+49:53:Name -> Class:builtins.str
+49:58:Name -> Class:typing.Any
+51:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+51:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+51:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:54:Name -> U
+52:11:Name -> U
+52:31:Attribute -> U
+52:31:Attribute -> U
+52:31:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+53:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+53:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+53:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:73:Attribute -> U
+53:73:Attribute -> U
+53:73:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+54:12:Call -> Const:NoneType:None
+54:12:Attribute -> BM:homeassistant.components.event.EventEntity._trigger_event
+54:12:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity
+54:32:Name -> Const:str:'barrier_obstructed'
+55:12:Call -> Const:NoneType:None
+55:12:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+55:12:Name -> Inst:homeassistant.components.nice_go.event.NiceGOEventEntity

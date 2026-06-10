@@ -1,0 +1,274 @@
+7:11:Call -> Inst:django.template.library.Library
+7:11:Attribute -> Class:django.template.library.Library
+7:11:Name -> Module:django.template
+10:1:Attribute -> BM:django.template.library.Library.filter
+10:1:Name -> Inst:django.template.library.Library
+11:1:Name -> Func:django.template.defaultfilters.stringfilter
+13:11:Name -> U
+13:18:Name -> U
+16:1:Attribute -> BM:django.template.library.Library.filter
+16:1:Name -> Inst:django.template.library.Library
+17:1:Name -> Func:django.utils.safestring.mark_safe
+20:42:Name -> U
+23:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+23:1:Name -> Inst:django.template.library.Library
+25:11:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+25:11:Name -> Func:django.utils.html.format_html
+25:48:Name -> Const:str:'test' | U
+25:52:Name -> U
+28:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+28:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+28:1:Name -> Inst:django.template.library.Library
+30:11:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+30:11:Name -> Func:django.utils.html.format_html
+30:40:Name -> U
+33:1:Attribute -> BM:django.template.library.Library.filter
+33:1:Name -> Inst:django.template.library.Library
+38:11:Name -> U
+41:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+41:1:Attribute -> BM:django.template.library.Library.simple_tag
+41:1:Name -> Inst:django.template.library.Library
+43:11:Call -> ERR
+43:11:Name -> Func:builtins.len
+43:15:Attribute -> U
+43:15:Name -> U
+46:1:Attribute -> BM:django.template.library.Library.simple_tag
+46:1:Name -> Inst:django.template.library.Library
+52:0:Name -> Func:tests.template_tests.templatetags.custom.no_params
+55:1:Attribute -> BM:django.template.library.Library.simple_tag
+55:1:Name -> Inst:django.template.library.Library
+58:47:Name -> U
+61:0:Name -> Func:tests.template_tests.templatetags.custom.one_param
+64:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+64:1:Name -> Inst:django.template.library.Library
+67:49:Name -> U
+67:68:Name -> U
+70:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+70:1:Attribute -> BM:django.template.library.Library.simple_tag
+70:1:Name -> Inst:django.template.library.Library
+73:57:Name -> U
+76:0:Name -> Func:tests.template_tests.templatetags.custom.explicit_no_context
+79:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+79:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+79:1:Name -> Inst:django.template.library.Library
+82:59:Name -> U
+82:78:Name -> U
+85:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+85:1:Attribute -> BM:django.template.library.Library.simple_tag
+85:1:Name -> Inst:django.template.library.Library
+90:10:Name -> U
+94:0:Name -> Func:tests.template_tests.templatetags.custom.no_params_with_context
+97:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+97:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+97:1:Name -> Inst:django.template.library.Library
+102:33:Name -> U
+102:51:Name -> U
+106:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+106:1:Attribute -> BM:django.template.library.Library.simple_tag
+106:1:Name -> Inst:django.template.library.Library
+110:8:Name -> U
+111:8:Name -> U
+115:0:Name -> Func:tests.template_tests.templatetags.custom.params_and_context
+118:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+118:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+118:1:Name -> Inst:django.template.library.Library
+125:12:Name -> U
+126:12:Name -> U
+127:12:Name -> U
+132:1:Attribute -> BM:django.template.library.Library.simple_tag
+132:1:Name -> Inst:django.template.library.Library
+135:60:Name -> U
+135:65:Name -> U
+138:0:Name -> Func:tests.template_tests.templatetags.custom.simple_two_params
+141:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+141:1:Name -> Inst:django.template.library.Library
+145:8:Name -> U
+146:8:Name -> U
+147:8:Name -> U
+151:1:Attribute -> BM:django.template.library.Library.simple_tag
+151:1:Name -> Inst:django.template.library.Library
+153:63:Name -> U
+156:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+156:1:Name -> Inst:django.template.library.Library
+161:12:Name -> U
+162:12:Name -> U
+167:1:Attribute -> BM:django.template.library.Library.simple_tag
+167:1:Name -> Inst:django.template.library.Library
+169:65:Name -> Const:int:42 | U
+172:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+172:1:Name -> Inst:django.template.library.Library
+177:12:Name -> U
+178:12:Name -> Const:int:42 | U
+183:1:Attribute -> BM:django.template.library.Library.simple_tag
+183:1:Name -> Inst:django.template.library.Library
+186:61:Name -> U
+186:66:Name -> Const:str:'hi' | U
+189:0:Name -> Func:tests.template_tests.templatetags.custom.simple_one_default
+192:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+192:1:Name -> Inst:django.template.library.Library
+196:8:Name -> U
+197:8:Name -> U
+198:8:Name -> Const:str:'hi' | U
+202:1:Attribute -> BM:django.template.library.Library.simple_tag
+202:1:Name -> Inst:django.template.library.Library
+206:8:Call -> Const:str:''
+206:8:Attribute -> BM:builtins.str.join
+206:18:Call -> Const:str:''
+206:18:Name -> Class:builtins.str
+206:22:Name -> U | Const:str:'hi'
+206:39:Name -> U
+206:44:Name -> Const:str:'hi' | U
+206:50:Name -> Tuple:0
+210:0:Name -> Func:tests.template_tests.templatetags.custom.simple_unlimited_args
+213:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+213:1:Name -> Inst:django.template.library.Library
+217:8:Name -> U
+218:8:Call -> Const:str:''
+218:8:Attribute -> BM:builtins.str.join
+218:18:Call -> Const:str:''
+218:18:Name -> Class:builtins.str
+218:22:Name -> U | Const:str:'hi'
+218:39:Name -> U
+218:44:Name -> Const:str:'hi' | U
+218:50:Name -> Tuple:0
+222:1:Attribute -> BM:django.template.library.Library.simple_tag
+222:1:Name -> Inst:django.template.library.Library
+225:64:Call -> Const:str:''
+225:64:Attribute -> BM:builtins.str.join
+226:8:Call -> Const:str:''
+226:8:Name -> Class:builtins.str
+226:12:Name -> U
+226:28:Name -> Tuple:0
+230:0:Name -> Func:tests.template_tests.templatetags.custom.simple_only_unlimited_args
+233:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+233:1:Name -> Inst:django.template.library.Library
+239:12:Name -> U
+240:12:Call -> Const:str:''
+240:12:Attribute -> BM:builtins.str.join
+240:22:Call -> Const:str:''
+240:22:Name -> Class:builtins.str
+240:26:Name -> U
+240:42:Name -> Tuple:0
+245:1:Attribute -> BM:django.template.library.Library.simple_tag
+245:1:Name -> Inst:django.template.library.Library
+249:8:Call -> Const:str:''
+249:8:Attribute -> BM:builtins.str.join
+249:18:Call -> Const:str:''
+249:18:Name -> Class:builtins.str
+249:22:Name -> U | Const:str:'hi'
+249:39:Name -> U
+249:44:Name -> Const:str:'hi' | U
+249:50:Name -> Tuple:0
+250:8:Call -> Const:str:''
+250:8:Attribute -> BM:builtins.str.join
+250:29:Name -> U
+250:32:Name -> U
+250:49:Call -> DictItems
+250:49:Attribute -> BM:builtins.dict.items
+250:49:Name -> Dict:0
+254:0:Name -> Func:tests.template_tests.templatetags.custom.simple_unlimited_args_kwargs
+257:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+257:1:Name -> Inst:django.template.library.Library
+264:12:Name -> U
+265:12:Call -> Const:str:''
+265:12:Attribute -> BM:builtins.str.join
+265:22:Call -> Const:str:''
+265:22:Name -> Class:builtins.str
+265:26:Name -> U | Const:str:'hi'
+265:43:Name -> U
+265:48:Name -> Const:str:'hi' | U
+265:54:Name -> Tuple:0
+266:12:Call -> Const:str:''
+266:12:Attribute -> BM:builtins.str.join
+266:33:Name -> U
+266:36:Name -> U
+266:53:Call -> DictItems
+266:53:Attribute -> BM:builtins.dict.items
+266:53:Name -> Dict:0
+271:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+271:1:Attribute -> BM:django.template.library.Library.simple_tag
+271:1:Name -> Inst:django.template.library.Library
+274:11:Call -> U
+274:11:Attribute -> BM:builtins.str.format
+274:30:Name -> U
+277:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+277:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+277:1:Name -> Inst:django.template.library.Library
+280:11:Call -> U
+280:11:Attribute -> BM:builtins.str.format
+280:34:Name -> U
+280:51:Name -> U
+283:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+283:1:Attribute -> BM:django.template.library.Library.simple_tag
+283:1:Name -> Inst:django.template.library.Library
+286:11:Call -> Inst:django.utils.safestring.SafeString
+286:11:Name -> Func:django.utils.html.escape
+286:18:Call -> U
+286:18:Attribute -> BM:builtins.str.format
+286:37:Name -> U
+289:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+289:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+289:1:Name -> Inst:django.template.library.Library
+292:11:Call -> Inst:django.utils.safestring.SafeString
+292:11:Name -> Func:django.utils.html.escape
+292:18:Call -> U
+292:18:Attribute -> BM:builtins.str.format
+292:41:Name -> U
+292:58:Name -> U
+295:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+295:1:Attribute -> BM:django.template.library.Library.simple_tag
+295:1:Name -> Inst:django.template.library.Library
+298:11:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+298:11:Name -> Func:django.utils.html.format_html
+298:37:Name -> U
+301:1:Call -> Func:django.template.library.Library.simple_block_tag.dec | U
+301:1:Attribute -> BM:django.template.library.Library.simple_block_tag
+301:1:Name -> Inst:django.template.library.Library
+304:11:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+304:11:Name -> Func:django.utils.html.format_html
+304:42:Name -> U
+304:59:Name -> U
+307:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+307:1:Attribute -> BM:django.template.library.Library.simple_tag
+307:1:Name -> Inst:django.template.library.Library
+309:11:Call -> Const:str:''
+309:11:Name -> Class:builtins.str
+309:15:Attribute -> U
+309:15:Name -> U
+312:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+312:1:Attribute -> BM:django.template.library.Library.simple_tag
+312:1:Name -> Inst:django.template.library.Library
+314:11:Call -> Const:str:''
+314:11:Name -> Class:builtins.str
+314:15:Attribute -> U
+314:15:Name -> U
+317:1:Call -> Func:django.template.library.Library.simple_tag.dec | U
+317:1:Attribute -> BM:django.template.library.Library.simple_tag
+317:1:Name -> Inst:django.template.library.Library
+319:11:Name -> U
+322:0:Call -> Func:django.template.library.Library.simple_tag.dec | U
+322:0:Attribute -> BM:django.template.library.Library.simple_tag
+322:0:Name -> Inst:django.template.library.Library
+322:30:Name -> U
+325:1:Call -> BM:django.template.library.Library.tag_function | Const:NoneType:None | U | Func:django.template.library.Library.tag.dec | Const:NoneType:None
+325:1:Attribute -> BM:django.template.library.Library.tag
+325:1:Name -> Inst:django.template.library.Library
+327:11:Call -> Inst:tests.template_tests.templatetags.custom.CounterNode
+327:11:Name -> Class:tests.template_tests.templatetags.custom.CounterNode
+330:18:Attribute -> Class:django.template.base.Node
+330:18:Name -> Module:django.template
+332:8:Name -> Inst:tests.template_tests.templatetags.custom.CounterNode
+335:16:Attribute -> Const:int:0 | U
+335:16:Name -> Inst:tests.template_tests.templatetags.custom.CounterNode
+336:8:Name -> Inst:tests.template_tests.templatetags.custom.CounterNode
+336:21:Name -> Const:int:0 | U
+337:15:Call -> Const:str:''
+337:15:Name -> Class:builtins.str
+337:19:Name -> Const:int:0 | U
+340:1:Call -> BM:django.template.library.Library.tag_function | Const:NoneType:None | U | Func:django.template.library.Library.tag.dec | Const:NoneType:None
+340:1:Attribute -> BM:django.template.library.Library.tag
+340:1:Name -> Inst:django.template.library.Library
+342:4:Attribute -> U
+342:4:Name -> U
+343:11:Call -> Inst:django.template.base.TextNode
+343:11:Name -> Class:django.template.base.TextNode

@@ -1,0 +1,810 @@
+38:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+38:10:Attribute -> Func:logging.getLogger
+38:10:Name -> Module:logging
+38:28:Name -> Const:str:'homeassistant.components.assist_satelli | Const:str:'__main__'
+41:27:Name -> Class:enum.StrEnum
+57:39:Name -> Class:homeassistant.helpers.entity.EntityDescription
+61:1:Call -> Func:dataclasses.dataclass.wrap | U
+61:1:Name -> Func:dataclasses.dataclass
+65:8:Name -> Class:builtins.str
+68:15:Name -> Class:builtins.str
+71:23:Name -> Class:builtins.list
+71:28:Name -> Class:builtins.str
+75:1:Name -> Func:dataclasses.dataclass
+79:26:Name -> Class:builtins.list
+79:31:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteWakeWord
+82:23:Name -> Class:builtins.list
+82:28:Name -> Class:builtins.str
+85:27:Name -> Class:builtins.int
+89:1:Name -> Func:dataclasses.dataclass
+93:13:Name -> Class:builtins.str
+96:14:Name -> Class:builtins.str
+99:23:Name -> Class:builtins.str
+102:15:Name -> Class:builtins.str
+105:21:Name -> Func:typing.Literal
+108:26:Name -> Class:builtins.str
+112:1:Name -> Func:dataclasses.dataclass
+116:8:Name -> Class:builtins.str
+119:14:Name -> Class:builtins.str
+122:11:Name -> Class:builtins.dict
+122:16:Name -> Class:builtins.str
+122:21:Name -> Class:typing.Any
+122:28:Call -> Dict:0
+122:28:Name -> Func:dataclasses.field
+122:50:Name -> Class:builtins.dict
+126:28:Attribute -> Class:homeassistant.helpers.entity.Entity
+126:28:Name -> Module:homeassistant.helpers.entity
+129:24:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteEntityDescription
+131:31:Call -> Inst:homeassistant.components.assist_satellite.const.AssistSatelliteEntityFeature | U
+131:31:Name -> Class:homeassistant.components.assist_satellite.const.AssistSatelliteEntityFeature
+132:30:Name -> Class:builtins.str
+133:37:Name -> Class:builtins.str
+135:22:Name -> Class:builtins.str
+137:18:Name -> Class:builtins.bool
+139:26:Name -> Class:builtins.str
+140:33:Attribute -> Class:asyncio.futures.Future | Class:_asyncio.Future
+140:33:Name -> Module:asyncio
+140:48:Name -> Class:builtins.str
+141:23:Name -> Class:builtins.dict
+141:28:Name -> Class:builtins.str
+141:33:Name -> Class:typing.Any
+142:20:Attribute -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+142:20:Name -> Module:asyncio
+143:26:Attribute -> Class:asyncio.futures.Future | Class:_asyncio.Future
+143:26:Name -> Module:asyncio
+143:41:Name -> Class:builtins.str
+145:31:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+145:31:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+147:5:Name -> Func:typing.final
+148:5:Name -> Class:builtins.property
+149:23:Name -> Class:builtins.str
+151:15:Attribute -> U
+151:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+153:5:Name -> Class:builtins.property
+154:36:Name -> Class:builtins.str
+156:15:Attribute -> Const:NoneType:None
+156:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+158:5:Name -> Class:builtins.property
+159:43:Name -> Class:builtins.str
+161:15:Attribute -> Const:NoneType:None
+161:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+163:5:Name -> Class:builtins.property
+164:29:Name -> Class:builtins.dict
+164:34:Name -> Class:builtins.str
+164:39:Name -> Class:typing.Any
+166:15:Attribute -> Const:NoneType:None
+166:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+168:5:Name -> U
+169:5:Name -> Func:abc.abstractmethod
+170:41:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteConfiguration
+173:5:Name -> Func:abc.abstractmethod
+175:22:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteConfiguration
+179:49:Name -> Class:builtins.str
+184:11:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+184:11:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+185:18:Call -> ExcInst:homeassistant.components.assist_satellite.errors.SatelliteBusyError
+185:18:Name -> Class:homeassistant.components.assist_satellite.errors.SatelliteBusyError
+189:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+189:43:Call -> Inst:asyncio.futures.Future | Inst:_asyncio.Future
+189:43:Attribute -> Class:asyncio.futures.Future | Class:_asyncio.Future
+189:43:Name -> Module:asyncio
+191:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+191:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+191:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+191:64:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid'
+191:64:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+194:25:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+194:25:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+196:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+203:36:Name -> Const:str:'/api/assist_satellite/static/preannounc
+200:17:Name -> Class:builtins.str
+201:18:Name -> Class:builtins.str
+202:21:Name -> Class:builtins.bool
+203:30:Name -> Class:builtins.str
+218:14:Call -> Const:NoneType:None
+218:14:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._cancel_running_pipeline
+218:14:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+220:11:Name -> Const:NoneType:None | U
+223:29:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+223:29:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_announcement_media_id
+223:29:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+224:12:Name -> Const:NoneType:None | U | Const:str:''
+225:12:Name -> Const:NoneType:None | U
+226:57:Name -> Const:bool:True | U
+226:33:Name -> Const:str:'/api/assist_satellite/static/preannounc | U
+229:11:Attribute -> Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False
+229:11:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+230:18:Name -> Class:homeassistant.components.assist_satellite.errors.SatelliteBusyError
+232:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+233:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+233:24:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.RESPONDING
+233:24:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+237:18:Call -> U
+237:18:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity.async_announce
+237:18:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+237:38:Name -> U
+239:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+240:12:Call -> Const:NoneType:None
+240:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+240:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+240:28:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+240:28:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+242:49:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+247:14:Name -> Class:builtins.NotImplementedError
+255:36:Name -> Const:str:'/api/assist_satellite/static/preannounc
+251:23:Name -> Class:builtins.str
+252:24:Name -> Class:builtins.str
+253:29:Name -> Class:builtins.str
+254:21:Name -> Class:builtins.bool
+255:30:Name -> Class:builtins.str
+270:14:Call -> Const:NoneType:None
+270:14:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._cancel_running_pipeline
+270:14:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+273:19:Call -> U
+273:19:Name -> U
+273:38:Attribute -> U | Const:NoneType:None
+273:38:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+273:49:Call -> Const:NoneType:None | U | Const:NoneType:None
+273:49:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_pipeline
+273:49:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+274:11:Attribute -> U
+274:11:Name -> U
+274:43:Attribute -> Const:str:'conversation.home_assistant'
+274:43:Name -> Module:homeassistant.components.conversation
+275:18:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+275:18:Name -> Class:homeassistant.exceptions.HomeAssistantError
+279:11:Name -> Const:NoneType:None | U
+282:29:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+282:29:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_announcement_media_id
+282:29:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+283:12:Name -> Const:NoneType:None | U | Const:str:''
+284:12:Name -> Const:NoneType:None | U
+285:57:Name -> Const:bool:True | U
+285:33:Name -> Const:str:'/api/assist_satellite/static/preannounc | U
+288:11:Attribute -> Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False
+288:11:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+289:18:Name -> Class:homeassistant.components.assist_satellite.errors.SatelliteBusyError
+291:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+292:8:Call -> Const:NoneType:None
+292:8:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+292:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+292:24:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.RESPONDING
+292:24:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+296:11:Name -> Const:NoneType:None | U
+297:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+297:40:Name -> U
+299:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+299:40:Name -> Const:NoneType:None | U | Const:str:''
+303:12:Call -> Gen:homeassistant.helpers.chat_session.async_get_chat_session
+303:12:Attribute -> Func:homeassistant.helpers.chat_session.async_get_chat_session
+303:12:Name -> Module:homeassistant.helpers.chat_session
+303:48:Attribute -> U | Const:NoneType:None
+303:48:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+304:12:Call -> Gen:homeassistant.components.conversation.chat_log.async_get_chat_log
+304:12:Attribute -> Func:homeassistant.components.conversation.chat_log.async_get_chat_log
+304:12:Name -> Module:homeassistant.components.conversation
+304:44:Attribute -> U | Const:NoneType:None
+304:44:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+304:55:Name -> ERR
+306:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+306:36:Attribute -> U
+306:36:Name -> U
+308:15:Name -> Const:NoneType:None | U | Const:str:''
+309:16:Call -> U
+309:16:Attribute -> U
+309:16:Name -> U
+310:20:Call -> Inst:homeassistant.components.conversation.chat_log.AssistantContent
+310:20:Attribute -> Class:homeassistant.components.conversation.chat_log.AssistantContent
+310:20:Name -> Module:homeassistant.components.conversation
+311:33:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid'
+311:33:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+311:57:Name -> U
+316:18:Call -> U
+316:18:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity.async_start_conversation
+316:18:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+316:48:Name -> U
+317:15:Name -> Class:builtins.Exception
+319:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+320:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+323:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+324:12:Call -> Const:NoneType:None
+324:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+324:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+324:28:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+324:28:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+327:34:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+330:14:Name -> Class:builtins.NotImplementedError
+337:36:Name -> Const:str:'/api/assist_satellite/static/preannounc
+334:18:Name -> Class:builtins.str
+335:27:Name -> Class:builtins.str
+336:21:Name -> Class:builtins.bool
+337:30:Name -> Class:builtins.str
+338:17:Name -> Class:builtins.list
+338:22:Name -> Class:builtins.dict
+338:27:Name -> Class:builtins.str
+338:32:Name -> Class:typing.Any
+339:9:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+353:14:Call -> Const:NoneType:None
+353:14:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._cancel_running_pipeline
+353:14:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+355:11:Name -> Const:NoneType:None | U
+358:29:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+358:29:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_announcement_media_id
+358:29:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+359:12:Name -> Const:NoneType:None | U | Const:str:''
+360:12:Name -> Const:NoneType:None | U
+361:57:Name -> Const:bool:True | U
+361:33:Name -> Const:str:'/api/assist_satellite/static/preannounc | U
+364:11:Attribute -> Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False
+364:11:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+365:18:Name -> Class:homeassistant.components.assist_satellite.errors.SatelliteBusyError
+367:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+368:8:Call -> Const:NoneType:None
+368:8:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+368:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+368:24:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.RESPONDING
+368:24:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+369:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+369:36:Call -> Inst:asyncio.futures.Future | Inst:_asyncio.Future
+369:36:Attribute -> Class:asyncio.futures.Future | Class:_asyncio.Future
+369:36:Name -> Module:asyncio
+373:18:Call -> U
+373:18:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity.async_start_conversation
+373:18:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+373:48:Name -> U
+376:34:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+376:34:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+377:15:Name -> U
+378:22:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+378:22:Name -> Class:homeassistant.exceptions.HomeAssistantError
+380:19:Name -> Const:NoneType:None | U
+381:23:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+381:23:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+381:63:Name -> U
+383:19:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+383:19:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._question_response_to_answer
+383:19:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+383:53:Name -> U
+383:68:Name -> Const:NoneType:None | U
+385:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+386:12:Call -> Const:NoneType:None
+386:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+386:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+386:28:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+386:28:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+387:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+390:29:Name -> Class:builtins.str
+390:43:Name -> Class:builtins.list
+390:48:Name -> Class:builtins.dict
+390:53:Name -> Class:builtins.str
+390:58:Name -> Class:typing.Any
+391:9:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+395:18:Call -> U
+395:18:Attribute -> U
+395:18:Name -> U
+397:28:Attribute -> U
+397:28:Attribute -> U
+397:28:Attribute -> U | Const:NoneType:None
+397:28:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+402:45:Name -> U
+403:58:Name -> U
+405:42:Name -> U
+413:24:Name -> Class:builtins.set
+413:28:Name -> Class:builtins.str
+413:35:Call -> Set:0
+413:35:Name -> Class:builtins.set
+414:22:Call -> U
+414:22:Attribute -> U
+414:22:Attribute -> U
+414:22:Name -> U
+415:31:Attribute -> U
+415:31:Name -> U
+416:32:Attribute -> U
+416:32:Name -> U
+417:20:Call -> Const:NoneType:None
+417:20:Name -> Func:homeassistant.components.assist_satellite.entity._collect_list_references
+417:45:Attribute -> U
+417:45:Name -> U
+417:66:Name -> Set:0
+419:29:Name -> Set:0
+420:12:Attribute -> U
+420:12:Name -> U
+420:31:Name -> U
+420:48:Call -> U
+420:48:Name -> U
+420:65:Name -> U
+423:17:Call -> U
+423:17:Name -> U
+423:27:Name -> U
+423:42:Name -> U
+424:11:Name -> U
+426:19:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+426:19:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+426:59:Name -> U
+428:15:Attribute -> U
+428:15:Name -> U
+429:15:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+429:15:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnswer
+430:15:Attribute -> U
+430:15:Name -> U
+431:21:Name -> U
+433:16:Name -> U
+433:29:Attribute -> U
+433:29:Name -> U
+434:43:Call -> U
+434:43:Attribute -> U
+434:43:Attribute -> U
+434:43:Name -> U
+441:37:Attribute -> U
+441:37:Name -> U
+442:35:Attribute -> U
+442:35:Name -> U
+440:22:Name -> Class:_collections_abc.AsyncIterable
+440:36:Name -> Class:builtins.bytes
+441:21:Name -> U
+442:19:Name -> U
+443:26:Name -> Class:builtins.str
+446:14:Call -> Const:NoneType:None
+446:14:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._cancel_running_pipeline
+446:14:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+449:30:Attribute -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+449:30:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+450:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+452:11:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+452:11:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+452:48:Name -> U
+453:12:Attribute -> U
+453:12:Name -> U
+454:12:Attribute -> U
+454:12:Name -> U
+456:15:Name -> U
+456:30:Attribute -> U
+456:30:Name -> U
+457:16:Call -> Const:NoneType:None
+457:16:Attribute -> BM:asyncio.futures.Future.set_exception | BM:_asyncio.Future.set_exception
+457:16:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+457:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+458:20:Call -> ExcInst:homeassistant.components.assist_satellite.errors.AssistSatelliteError
+458:20:Name -> Class:homeassistant.components.assist_satellite.errors.AssistSatelliteError
+465:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+465:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+465:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+467:16:Name -> Const:NoneType:None | U
+468:16:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid'
+468:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+471:15:Name -> Const:NoneType:None | U
+472:16:Call -> Const:NoneType:None
+472:16:Attribute -> BM:asyncio.futures.Future.set_exception | BM:_asyncio.Future.set_exception
+472:16:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+472:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+473:20:Call -> ExcInst:homeassistant.components.assist_satellite.errors.AssistSatelliteError
+473:20:Name -> Class:homeassistant.components.assist_satellite.errors.AssistSatelliteError
+476:16:Call -> Const:NoneType:None
+476:16:Attribute -> BM:asyncio.futures.Future.set_result | BM:_asyncio.Future.set_result
+476:16:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+476:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+476:60:Name -> U
+477:12:Call -> Const:NoneType:None
+477:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._internal_on_pipeline_event
+477:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+477:45:Call -> U
+477:45:Name -> U
+477:59:Attribute -> U
+477:59:Name -> U
+480:12:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+480:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+481:12:Name -> U
+481:27:Attribute -> U
+481:27:Name -> U
+483:24:Attribute -> U
+483:24:Name -> U
+485:53:Attribute -> U | Const:NoneType:None
+485:53:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+485:20:Attribute -> U
+485:20:Attribute -> U
+485:20:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+489:13:Attribute -> U | Const:NoneType:None
+489:13:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+490:16:Attribute -> U | Const:NoneType:None
+490:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+491:17:Call -> ERR
+491:17:Attribute -> Func:time.time
+491:17:Name -> Module:time
+491:31:Attribute -> U | Const:NoneType:None
+491:31:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+491:52:Attribute -> Const:int:5
+491:52:Name -> Module:homeassistant.helpers.entity
+493:12:Call -> Const:NoneType:None
+493:12:Attribute -> BM:homeassistant.helpers.entity.Entity.async_set_context
+493:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+493:35:Call -> U
+493:35:Name -> U
+495:15:Attribute -> U | Const:NoneType:None
+495:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+498:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+500:15:Attribute -> U | Const:NoneType:None
+500:15:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+500:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+502:13:Call -> Gen:homeassistant.helpers.chat_session.async_get_chat_session
+502:13:Attribute -> Func:homeassistant.helpers.chat_session.async_get_chat_session
+502:13:Name -> Module:homeassistant.helpers.chat_session
+503:12:Attribute -> U | Const:NoneType:None
+503:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+503:23:Attribute -> U | Const:NoneType:None
+503:23:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+507:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+507:36:Attribute -> U
+507:36:Name -> U
+508:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+509:16:Call -> U
+509:16:Attribute -> U
+509:16:Attribute -> U | Const:NoneType:None
+509:16:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+509:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+510:20:Attribute -> U | Const:NoneType:None
+510:20:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+511:20:Call -> Const:NoneType:None
+511:20:Name -> Func:homeassistant.components.assist_pipeline.async_pipeline_from_audio_stream
+512:24:Attribute -> U | Const:NoneType:None
+512:24:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+513:32:Attribute -> U | Const:NoneType:None
+513:32:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+514:39:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._internal_on_pipeline_event
+514:39:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+515:37:Call -> Inst:homeassistant.components.stt.models.SpeechMetadata
+515:37:Attribute -> Class:homeassistant.components.stt.models.SpeechMetadata
+515:37:Name -> Module:homeassistant.components.stt
+517:35:Attribute -> Inst:homeassistant.components.stt.const.AudioFormats.WAV
+517:35:Attribute -> Class:homeassistant.components.stt.const.AudioFormats
+517:35:Name -> Module:homeassistant.components.stt
+518:34:Attribute -> Inst:homeassistant.components.stt.const.AudioCodecs.PCM
+518:34:Attribute -> Class:homeassistant.components.stt.const.AudioCodecs
+518:34:Name -> Module:homeassistant.components.stt
+519:37:Attribute -> Inst:homeassistant.components.stt.const.AudioBitRates.BITRATE_16
+519:37:Attribute -> Class:homeassistant.components.stt.const.AudioBitRates
+519:37:Name -> Module:homeassistant.components.stt
+520:40:Attribute -> Inst:homeassistant.components.stt.const.AudioSampleRates.SAMPLERATE_16000
+520:40:Attribute -> Class:homeassistant.components.stt.const.AudioSampleRates
+520:40:Name -> Module:homeassistant.components.stt
+521:36:Attribute -> Inst:homeassistant.components.stt.const.AudioChannels.CHANNEL_MONO
+521:36:Attribute -> Class:homeassistant.components.stt.const.AudioChannels
+521:36:Name -> Module:homeassistant.components.stt
+523:35:Name -> U
+524:36:Call -> Const:NoneType:None | U | Const:NoneType:None
+524:36:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_pipeline
+524:36:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+525:40:Attribute -> U
+525:40:Name -> U
+526:34:Name -> U | Const:NoneType:None
+527:37:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid'
+527:37:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+528:41:Attribute -> Const:NoneType:None
+528:41:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+529:41:Name -> Const:NoneType:None | U
+530:39:Call -> U
+530:39:Name -> U
+531:44:Call -> Const:float:1.25 | Const:float:0.25 | Const:float:0.7
+531:44:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_vad_sensitivity
+531:44:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+533:36:Name -> U
+534:34:Name -> U
+535:57:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+537:23:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid'
+537:23:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+542:22:Attribute -> U | Const:NoneType:None | Const:NoneType:None
+542:22:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+544:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+548:11:Attribute -> U | Const:NoneType:None
+548:11:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+549:12:Call -> U
+549:12:Attribute -> U
+549:12:Attribute -> U
+549:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+550:17:Call -> Inst:contextlib.suppress
+550:17:Attribute -> Class:contextlib.suppress
+550:17:Name -> Module:contextlib
+550:37:Attribute -> Class:asyncio.exceptions.CancelledError
+550:37:Name -> Module:asyncio
+551:22:Attribute -> U
+551:22:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+553:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+555:5:Name -> Func:abc.abstractmethod
+556:39:Name -> U
+559:5:Name -> U
+560:49:Name -> U
+562:11:Attribute -> U
+562:11:Name -> U
+562:25:Attribute -> U
+562:25:Name -> U
+565:15:Attribute -> U
+565:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+565:29:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.RESPONDING
+565:29:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+566:16:Call -> Const:NoneType:None
+566:16:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+566:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+566:32:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+566:32:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+567:13:Attribute -> U
+567:13:Name -> U
+567:27:Attribute -> U
+567:27:Name -> U
+568:12:Call -> Const:NoneType:None
+568:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+568:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+568:28:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.LISTENING
+568:28:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+569:13:Attribute -> U
+569:13:Name -> U
+569:27:Attribute -> U
+569:27:Name -> U
+572:17:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+572:17:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+573:25:Call -> U
+573:25:Attribute -> BM:asyncio.futures.Future.done | BM:_asyncio.Future.done
+573:25:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+573:25:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+574:20:Attribute -> U
+574:20:Name -> U
+576:16:Call -> Const:NoneType:None
+576:16:Attribute -> BM:asyncio.futures.Future.set_result | BM:_asyncio.Future.set_result
+576:16:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+576:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+577:20:Call -> U
+577:20:Attribute -> U
+577:20:Call -> U
+577:20:Attribute -> U
+577:20:Attribute -> U
+577:20:Name -> U
+579:13:Attribute -> U
+579:13:Name -> U
+579:27:Attribute -> U
+579:27:Name -> U
+580:12:Call -> Const:NoneType:None
+580:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+580:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+580:28:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.PROCESSING
+580:28:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+581:13:Attribute -> U
+581:13:Name -> U
+581:27:Attribute -> U
+581:27:Name -> U
+583:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+584:12:Call -> Const:NoneType:None
+584:12:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+584:12:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+584:28:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.RESPONDING
+584:28:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+585:13:Attribute -> U
+585:13:Name -> U
+585:27:Attribute -> U
+585:27:Name -> U
+586:19:Attribute -> Const:bool:False | Const:bool:True
+586:19:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+587:16:Call -> Const:NoneType:None
+587:16:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+587:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+587:32:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+587:32:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+589:16:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+589:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+590:20:Call -> U
+590:20:Attribute -> BM:asyncio.futures.Future.done | BM:_asyncio.Future.done
+590:20:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+590:20:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+593:16:Call -> Const:NoneType:None
+593:16:Attribute -> BM:asyncio.futures.Future.set_result | BM:_asyncio.Future.set_result
+593:16:Attribute -> Inst:asyncio.futures.Future | Inst:_asyncio.Future | Const:NoneType:None
+593:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+595:8:Call -> ERR
+595:8:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity.on_pipeline_event
+595:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+595:31:Name -> U
+597:5:Name -> U
+598:32:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+600:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+600:40:Name -> U
+601:8:Call -> Const:NoneType:None
+601:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+601:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+603:5:Name -> U
+606:8:Call -> Const:NoneType:None
+606:8:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._set_state
+606:8:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+606:24:Attribute -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteState.IDLE
+606:24:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteState
+608:5:Name -> U
+609:35:Name -> Class:builtins.str
+614:38:Attribute -> Const:NoneType:None
+614:38:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+617:37:Call -> U
+617:37:Attribute -> U
+617:37:Attribute -> U
+617:37:Attribute -> U | Const:NoneType:None
+617:37:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+617:58:Name -> Const:NoneType:None
+618:18:Call -> ExcInst:builtins.RuntimeError
+618:18:Name -> Class:builtins.RuntimeError
+620:11:Attribute -> U
+620:11:Name -> U
+620:42:Name -> Const:str:'preferred'
+622:28:Call -> U
+622:28:Name -> U
+622:48:Attribute -> U | Const:NoneType:None
+622:48:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+623:19:Attribute -> U
+623:19:Name -> U
+623:36:Attribute -> U
+623:36:Name -> U
+624:27:Attribute -> U
+624:27:Name -> U
+628:5:Name -> U
+629:42:Name -> Class:builtins.float
+631:26:Attribute -> Inst:homeassistant.components.assist_pipeline.vad.VadSensitivity.DEFAULT
+631:26:Attribute -> Class:homeassistant.components.assist_pipeline.vad.VadSensitivity
+631:26:Name -> Module:homeassistant.components.assist_pipeline.vad
+633:40:Attribute -> Const:NoneType:None
+633:40:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+635:41:Call -> U
+635:41:Attribute -> U
+635:41:Attribute -> U
+635:41:Attribute -> U | Const:NoneType:None
+635:41:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+635:62:Name -> Const:NoneType:None
+637:22:Call -> ExcInst:builtins.RuntimeError
+637:22:Name -> Class:builtins.RuntimeError
+639:30:Call -> Const:str:'' | U
+639:30:Attribute -> Class:homeassistant.components.assist_pipeline.vad.VadSensitivity
+639:30:Name -> Module:homeassistant.components.assist_pipeline.vad
+639:49:Attribute -> U
+639:49:Name -> U
+641:15:Call -> Const:float:1.25 | Const:float:0.25 | Const:float:0.7
+641:15:Attribute -> Func:homeassistant.components.assist_pipeline.vad.VadSensitivity.to_seconds
+641:15:Attribute -> Class:homeassistant.components.assist_pipeline.vad.VadSensitivity
+641:15:Name -> Module:homeassistant.components.assist_pipeline.vad
+641:45:Name -> Inst:homeassistant.components.assist_pipeline.vad.VadSensitivity.DEFAULT | Const:str:'' | U
+645:17:Name -> Class:builtins.str
+646:18:Name -> Class:builtins.str
+647:30:Name -> Class:builtins.str
+648:9:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+650:25:Name -> Func:typing.Literal
+651:19:Name -> Class:builtins.str
+653:11:Name -> U
+654:32:Name -> U
+658:26:Call -> Const:NoneType:None | U | Const:NoneType:None
+658:26:Attribute -> BM:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity._resolve_pipeline
+658:26:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+659:23:Call -> U
+659:23:Name -> U
+659:42:Attribute -> U | Const:NoneType:None
+659:42:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+659:53:Name -> Const:NoneType:None | U | Const:NoneType:None
+661:21:Call -> U
+661:21:Attribute -> U
+661:21:Name -> U
+661:46:Attribute -> U | Const:NoneType:None
+661:46:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+661:57:Attribute -> U
+661:57:Name -> U
+662:15:Name -> U
+663:22:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+663:22:Name -> Class:homeassistant.exceptions.HomeAssistantError
+663:55:Attribute -> U
+663:55:Name -> U
+665:25:Name -> Class:builtins.dict
+665:30:Name -> Class:builtins.str
+665:35:Name -> Class:typing.Any
+666:15:Attribute -> U
+666:15:Name -> U
+667:16:Name -> Dict:0
+667:28:Attribute -> U
+667:28:Name -> U
+667:46:Attribute -> U
+667:46:Name -> U
+669:15:Attribute -> Const:NoneType:None
+669:15:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+670:16:Call -> ERR
+670:16:Attribute -> BM:builtins.dict.update
+670:16:Name -> Dict:0
+670:35:Attribute -> Const:NoneType:None
+670:35:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+672:21:Call -> U
+672:21:Attribute -> U
+672:21:Name -> U
+673:16:Attribute -> U | Const:NoneType:None
+673:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+674:23:Name -> U
+675:25:Attribute -> U
+675:25:Name -> U
+676:24:Name -> Dict:0
+678:12:Call -> U
+678:12:Attribute -> U
+678:12:Name -> U
+678:37:Name -> U
+680:24:Attribute -> U
+680:24:Name -> U
+681:23:Attribute -> U
+681:23:Name -> U
+682:32:Call -> U
+682:32:Attribute -> U
+682:32:Name -> U
+683:16:Attribute -> U | Const:NoneType:None
+683:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+684:16:Name -> U
+685:23:Name -> U
+686:25:Attribute -> U
+686:25:Name -> U
+687:24:Name -> Dict:0
+690:11:Call -> U
+690:11:Attribute -> Func:homeassistant.components.media_source.is_media_source_id
+690:11:Name -> Module:homeassistant.components.media_source
+690:43:Name -> U
+691:19:Name -> Const:NoneType:None | Const:str:'tts'
+693:26:Call -> U
+693:26:Attribute -> Func:homeassistant.components.media_source.helper.async_resolve_media
+693:26:Name -> Module:homeassistant.components.media_source
+694:16:Attribute -> U | Const:NoneType:None
+694:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+695:16:Name -> U
+698:23:Attribute -> U
+698:23:Name -> U
+700:15:Name -> Const:NoneType:None | Const:str:'tts' | Const:str:'media_id'
+704:19:Call -> U | Const:str:'' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:''
+704:19:Name -> Func:homeassistant.components.media_player.browse_media.async_process_play_media_url
+704:48:Attribute -> U | Const:NoneType:None
+704:48:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+704:59:Name -> U
+707:11:Name -> Const:NoneType:None | U
+708:15:Call -> U
+708:15:Attribute -> Func:homeassistant.components.media_source.is_media_source_id
+708:15:Name -> Module:homeassistant.components.media_source
+708:47:Name -> U
+709:42:Call -> U
+709:42:Attribute -> Func:homeassistant.components.media_source.helper.async_resolve_media
+709:42:Name -> Module:homeassistant.components.media_source
+710:20:Attribute -> U | Const:NoneType:None
+710:20:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+711:20:Name -> U
+714:39:Attribute -> U
+714:39:Name -> U
+717:35:Call -> U | Const:str:'' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:''
+717:35:Name -> Func:homeassistant.components.media_player.browse_media.async_process_play_media_url
+718:16:Attribute -> U | Const:NoneType:None
+718:16:Name -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteEntity
+718:27:Name -> U
+721:15:Call -> Inst:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+721:15:Name -> Class:homeassistant.components.assist_satellite.entity.AssistSatelliteAnnouncement
+722:20:Name -> U
+723:21:Name -> U | Const:str:'' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:''
+724:30:Name -> U
+725:22:Name -> Const:NoneType:None | U
+726:28:Name -> Const:NoneType:None | Const:str:'tts' | Const:str:'media_id' | Const:str:'url'
+727:33:Name -> Const:NoneType:None | U | Const:str:'' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'NoneUninferable' | Const:str:'None' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:'' | Const:str:'Uninferable' | Const:str:''
+731:41:Name -> U
+731:65:Name -> Class:builtins.set
+731:69:Name -> Class:builtins.str
+733:7:Call -> ERR
+733:7:Name -> Func:builtins.isinstance
+733:18:Name -> U
+733:30:Name -> U
+734:13:Name -> U
+734:21:Name -> U
+735:20:Attribute -> U
+735:20:Name -> U
+736:12:Call -> Const:NoneType:None
+736:12:Name -> Func:homeassistant.components.assist_satellite.entity._collect_list_references
+736:37:Name -> U
+736:43:Name -> U
+737:9:Call -> ERR
+737:9:Name -> Func:builtins.isinstance
+737:20:Name -> U
+737:32:Name -> U
+739:18:Name -> U
+739:34:Name -> U
+740:8:Call -> U
+740:8:Attribute -> U
+740:8:Name -> U
+740:23:Attribute -> U
+740:23:Name -> U

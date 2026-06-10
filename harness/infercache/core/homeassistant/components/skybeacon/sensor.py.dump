@@ -1,0 +1,218 @@
+31:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+31:10:Attribute -> Func:logging.getLogger
+31:10:Name -> Module:logging
+31:28:Name -> Const:str:'homeassistant.components.skybeacon.sens | Const:str:'__main__'
+38:15:Call -> Inst:threading.lock
+38:15:Attribute -> Func:threading.Lock
+38:15:Name -> Module:threading
+45:18:Call -> U
+45:18:Attribute -> U
+45:18:Name -> U
+47:8:Call -> U
+47:8:Attribute -> U
+47:8:Name -> U
+47:21:Name -> Const:str:'mac'
+47:32:Attribute -> Func:homeassistant.helpers.config_validation.string
+47:32:Name -> Module:homeassistant.helpers.config_validation
+48:8:Call -> U
+48:8:Attribute -> U
+48:8:Name -> U
+48:21:Name -> Const:str:'name'
+48:40:Name -> Const:str:'Skybeacon'
+48:55:Attribute -> Func:homeassistant.helpers.config_validation.string
+48:55:Name -> Module:homeassistant.helpers.config_validation
+54:10:Name -> U
+55:12:Name -> Class:builtins.dict
+56:18:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+57:20:Name -> Class:builtins.dict
+60:10:Name -> Class:builtins.str
+60:16:Name -> U
+60:23:Name -> Const:str:'name'
+61:9:Name -> Class:builtins.str
+61:15:Name -> U
+61:22:Name -> Const:str:'mac'
+62:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+62:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+62:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+64:10:Call -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+64:10:Name -> Class:homeassistant.components.skybeacon.sensor.Monitor
+64:18:Name -> U
+64:24:Name -> U
+64:29:Name -> U
+65:4:Call -> U
+65:4:Name -> U
+65:18:Call -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconTemp
+65:18:Name -> Class:homeassistant.components.skybeacon.sensor.SkybeaconTemp
+65:32:Name -> U
+65:38:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+66:4:Call -> U
+66:4:Name -> U
+66:18:Call -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconHumid
+66:18:Name -> Class:homeassistant.components.skybeacon.sensor.SkybeaconHumid
+66:33:Name -> U
+66:39:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+70:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+70:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+70:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+70:49:Name -> U
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:homeassistant.components.skybeacon.sensor.Monitor.terminate
+71:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+73:4:Call -> U
+73:4:Attribute -> U
+73:4:Attribute -> U
+73:4:Name -> U
+73:25:Name -> U
+73:51:Name -> Func:homeassistant.components.skybeacon.sensor.setup_platform.monitor_stop
+74:4:Call -> Const:NoneType:None
+74:4:Attribute -> BM:threading.Thread.start
+74:4:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+77:21:Name -> Class:homeassistant.components.sensor.SensorEntity
+80:36:Name -> Const:str:'device'
+80:62:Name -> Const:str:'model'
+81:39:Name -> Const:str:'%'
+83:29:Name -> Class:builtins.str
+83:39:Name -> Class:homeassistant.components.skybeacon.sensor.Monitor
+85:8:Name -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconHumid
+85:19:Name -> U
+86:8:Name -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconHumid
+86:26:Name -> U
+88:5:Name -> Class:builtins.property
+91:15:Attribute -> U
+91:15:Attribute -> U
+91:15:Name -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconHumid
+94:20:Name -> Class:homeassistant.components.sensor.SensorEntity
+97:25:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.TEMPERATURE
+97:25:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+98:36:Name -> Const:str:'device'
+98:62:Name -> Const:str:'model'
+99:39:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+99:39:Name -> Class:homeassistant.const.UnitOfTemperature
+101:29:Name -> Class:builtins.str
+101:39:Name -> Class:homeassistant.components.skybeacon.sensor.Monitor
+103:8:Name -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconTemp
+103:19:Name -> U
+104:8:Name -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconTemp
+104:26:Name -> U
+106:5:Name -> Class:builtins.property
+109:15:Attribute -> U
+109:15:Attribute -> U
+109:15:Name -> Inst:homeassistant.components.skybeacon.sensor.SkybeaconTemp
+112:14:Attribute -> Class:threading.Thread
+112:14:Name -> Module:threading
+112:32:Name -> Class:homeassistant.components.sensor.SensorEntity
+117:8:Call -> Const:NoneType:None
+117:8:Attribute -> UM:threading.Thread.__init__
+117:8:Attribute -> Class:threading.Thread
+117:8:Name -> Module:threading
+117:34:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+118:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+119:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+119:20:Name -> U
+120:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+120:19:Name -> U
+121:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+121:20:Name -> U
+122:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+122:29:Name -> Const:str:'unknown'
+122:53:Name -> Const:str:'unknown'
+123:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+124:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+124:21:Call -> Inst:threading.Event
+124:21:Attribute -> Class:threading.Event
+124:21:Name -> Module:threading
+128:22:Call -> U
+128:22:Name -> U
+128:37:Name -> Const:str:'0000ff92-0000-1000-8000-00805f9b34fb'
+128:52:Name -> Const:int:36
+129:18:Call -> U
+129:18:Name -> U
+132:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+132:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+132:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+132:50:Attribute -> U
+132:50:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+134:16:Call -> U
+134:16:Attribute -> U
+134:16:Name -> U
+136:21:Name -> Inst:threading.lock
+137:29:Call -> U
+137:29:Attribute -> U
+137:29:Name -> U
+138:24:Attribute -> U
+138:24:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+138:34:Name -> Const:int:30
+138:51:Attribute -> U
+138:51:Name -> U
+140:19:Name -> Const:bool:True
+142:20:Attribute -> U
+142:20:Name -> U
+142:44:Call -> Inst:uuid.UUID
+142:44:Name -> Class:uuid.UUID
+142:49:Name -> Const:str:'0000ff92-0000-1000-8000-00805f9b34fb'
+142:67:Name -> U
+144:16:Call -> U
+144:16:Attribute -> U
+144:16:Name -> U
+144:47:Call -> Inst:builtins.bytearray
+144:47:Name -> Class:builtins.bytearray
+145:16:Call -> U
+145:16:Attribute -> U
+145:16:Name -> U
+145:33:Name -> Const:str:'0000ff92-0000-1000-8000-00805f9b34fb'
+145:48:Attribute -> BM:homeassistant.components.skybeacon.sensor.Monitor._update
+145:48:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+146:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+146:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+146:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+146:50:Attribute -> U
+146:50:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+147:22:Attribute -> Const:bool:True | Const:bool:False
+147:22:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+149:20:Call -> U
+149:20:Attribute -> U
+149:20:Name -> U
+149:37:Name -> Const:str:'0000ff92-0000-1000-8000-00805f9b34fb'
+149:60:Name -> Const:int:30
+150:20:Call -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | U
+150:20:Attribute -> BM:threading.Event.wait
+150:20:Attribute -> Inst:threading.Event
+150:20:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+152:20:Name -> U
+152:30:Name -> U
+152:49:Name -> U
+153:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+153:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+153:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+153:48:Call -> Const:str:''
+153:48:Name -> Class:builtins.str
+153:52:Name -> U
+155:16:Call -> U
+155:16:Attribute -> U
+155:16:Name -> U
+159:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+159:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+159:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+161:12:Name -> U
+162:12:Attribute -> U
+162:12:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+163:12:Name -> U
+164:12:Name -> U
+165:12:Name -> U
+167:8:Attribute -> Dict:2
+167:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+167:28:Call -> Inst:builtins.float
+167:28:Name -> Class:builtins.float
+167:37:Name -> U
+167:48:Name -> U
+168:8:Attribute -> Dict:2
+168:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+168:29:Name -> U
+172:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+173:8:Call -> Const:NoneType:None
+173:8:Attribute -> BM:threading.Event.set
+173:8:Attribute -> Inst:threading.Event
+173:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:threading.Thread.join
+174:8:Name -> Inst:homeassistant.components.skybeacon.sensor.Monitor

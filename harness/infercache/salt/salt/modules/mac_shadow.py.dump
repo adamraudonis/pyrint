@@ -1,0 +1,278 @@
+24:7:Name -> Class:builtins.ImportError
+28:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:6:Attribute -> Func:logging.getLogger
+28:6:Name -> Module:logging
+28:24:Name -> Const:str:'salt.modules.mac_shadow' | Const:str:'__main__'
+35:11:Call -> U
+35:11:Attribute -> Func:salt.utils.platform.is_darwin
+35:11:Attribute -> Module:salt.utils.platform
+35:11:Attribute -> Module:salt.utils
+35:11:Name -> Module:salt
+38:7:Name -> Const:bool:True | Const:bool:False
+39:15:Name -> Const:str:'shadow'
+57:25:Name -> U
+59:14:Call -> U
+59:14:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+59:14:Attribute -> Module:salt.utils.mac_utils
+59:14:Attribute -> Module:salt.utils
+59:14:Name -> Module:salt
+59:57:Name -> Const:str:'pwpolicy -u Uninferable -getpolicy'
+60:11:Name -> Class:salt.exceptions.CommandExecutionError
+61:27:Name -> U
+61:48:Attribute -> Const:str:'' | U | Const:str:''
+61:48:Name -> ExcInst:salt.exceptions.CommandExecutionError
+62:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+62:18:Name -> Class:salt.exceptions.CommandExecutionError
+62:59:Name -> U
+63:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+63:14:Name -> Class:salt.exceptions.CommandExecutionError
+63:54:Attribute -> Const:str:'' | U | Const:str:''
+63:54:Name -> ExcInst:salt.exceptions.CommandExecutionError
+66:22:Call -> U
+66:22:Attribute -> U
+66:22:Call -> U
+66:22:Attribute -> U
+66:22:Name -> U
+68:22:Name -> U
+69:22:Name -> U
+70:29:Call -> U
+70:29:Attribute -> U
+70:29:Name -> U
+71:16:Name -> Dict:0
+71:28:Name -> U
+71:35:Name -> U
+72:15:Name -> Dict:0
+73:11:Name -> Class:builtins.IndexError
+89:25:Name -> U
+89:44:Name -> U
+92:15:Call -> Const:bool:True
+92:15:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+92:15:Attribute -> Module:salt.utils.mac_utils
+92:15:Attribute -> Module:salt.utils
+92:15:Name -> Module:salt
+92:59:Name -> Const:str:'pwpolicy -u Uninferable -setpolicy "Uni
+93:11:Name -> Class:salt.exceptions.CommandExecutionError
+94:27:Name -> U
+94:48:Attribute -> Const:str:'' | U | Const:str:''
+94:48:Name -> ExcInst:salt.exceptions.CommandExecutionError
+95:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+95:18:Name -> Class:salt.exceptions.CommandExecutionError
+95:59:Name -> U
+96:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+96:14:Name -> Class:salt.exceptions.CommandExecutionError
+96:54:Attribute -> Const:str:'' | U | Const:str:''
+96:54:Name -> ExcInst:salt.exceptions.CommandExecutionError
+112:35:Name -> U
+112:60:Name -> U
+114:14:Call -> U
+114:14:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+114:14:Attribute -> Module:salt.utils.mac_utils
+114:14:Attribute -> Module:salt.utils
+114:14:Name -> Module:salt
+114:57:Name -> Const:str:'dscl . -readpl /Users/Uninferable accou
+115:11:Name -> Class:salt.exceptions.CommandExecutionError
+116:35:Attribute -> Const:str:'' | U | Const:str:''
+116:35:Name -> ExcInst:salt.exceptions.CommandExecutionError
+117:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+117:18:Name -> Class:salt.exceptions.CommandExecutionError
+117:59:Name -> U
+118:36:Attribute -> Const:str:'' | U | Const:str:''
+118:36:Name -> ExcInst:salt.exceptions.CommandExecutionError
+119:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+119:18:Name -> Class:salt.exceptions.CommandExecutionError
+119:60:Name -> U
+120:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+120:14:Name -> Class:salt.exceptions.CommandExecutionError
+120:54:Attribute -> Const:str:'' | U | Const:str:''
+120:54:Name -> ExcInst:salt.exceptions.CommandExecutionError
+122:11:Name -> U
+135:25:Call -> Inst:builtins.float
+135:25:Name -> Class:builtins.float
+135:31:Name -> U
+136:15:Call -> U
+136:15:Attribute -> BM:_pydatetime.date.strftime | U
+136:15:Call -> Inst:_pydatetime.datetime | U
+136:15:Attribute -> BM:_pydatetime.datetime.fromtimestamp
+136:15:Name -> Class:_pydatetime.datetime
+136:38:Name -> Inst:builtins.float
+137:12:Name -> Class:builtins.ValueError
+137:24:Name -> Class:builtins.TypeError
+157:15:Call -> ERR
+157:15:Attribute -> Func:pwd.getpwnam
+157:15:Name -> Module:pwd
+157:28:Name -> U
+159:20:Attribute -> U
+159:20:Name -> U
+160:22:Attribute -> U
+160:22:Name -> U
+161:31:Call -> Const:str:'0' | U | Const:str:'Invalid Timestamp'
+161:31:Name -> Func:salt.modules.mac_shadow.get_account_created
+161:51:Name -> U
+162:34:Call -> Const:str:'0' | U
+162:34:Name -> Func:salt.modules.mac_shadow.get_login_failed_count
+162:57:Name -> U
+163:33:Call -> Const:str:'0' | U | Const:str:'Invalid Timestamp'
+163:33:Name -> Func:salt.modules.mac_shadow.get_login_failed_last
+163:55:Name -> U
+164:22:Call -> Const:str:'0' | U | Const:str:'Invalid Timestamp'
+164:22:Name -> Func:salt.modules.mac_shadow.get_last_change
+164:38:Name -> U
+165:19:Call -> U | Const:int:0
+165:19:Name -> Func:salt.modules.mac_shadow.get_maxdays
+165:31:Name -> U
+166:22:Call -> U | Const:str:'Value not set'
+166:22:Name -> Func:salt.modules.mac_shadow.get_expire
+166:33:Name -> U
+167:22:Call -> U | Const:str:'Value not set'
+167:22:Name -> Func:salt.modules.mac_shadow.get_change
+167:33:Name -> U
+173:11:Name -> Class:builtins.KeyError
+174:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+174:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+174:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+174:40:Name -> U
+210:14:Call -> U
+210:14:Name -> Func:salt.modules.mac_shadow._get_account_policy_data_value
+210:45:Name -> U
+211:11:Name -> Class:salt.exceptions.CommandExecutionError
+212:32:Attribute -> Const:str:'' | U | Const:str:''
+212:32:Name -> ExcInst:salt.exceptions.CommandExecutionError
+217:21:Call -> U
+217:21:Attribute -> Func:salt.utils.mac_utils.parse_return
+217:21:Attribute -> Module:salt.utils.mac_utils
+217:21:Attribute -> Module:salt.utils
+217:21:Name -> Module:salt
+217:55:Name -> U
+218:11:Call -> U | Const:str:'Invalid Timestamp'
+218:11:Name -> Func:salt.modules.mac_shadow._convert_to_datetime
+218:32:Name -> U
+240:14:Call -> U
+240:14:Name -> Func:salt.modules.mac_shadow._get_account_policy_data_value
+240:45:Name -> U
+241:11:Name -> Class:salt.exceptions.CommandExecutionError
+242:32:Attribute -> Const:str:'' | U | Const:str:''
+242:32:Name -> ExcInst:salt.exceptions.CommandExecutionError
+247:21:Call -> U
+247:21:Attribute -> Func:salt.utils.mac_utils.parse_return
+247:21:Attribute -> Module:salt.utils.mac_utils
+247:21:Attribute -> Module:salt.utils
+247:21:Name -> Module:salt
+247:55:Name -> U
+248:11:Call -> U | Const:str:'Invalid Timestamp'
+248:11:Name -> Func:salt.modules.mac_shadow._convert_to_datetime
+248:32:Name -> U
+270:14:Call -> U
+270:14:Name -> Func:salt.modules.mac_shadow._get_account_policy_data_value
+270:45:Name -> U
+271:11:Name -> Class:salt.exceptions.CommandExecutionError
+272:32:Attribute -> Const:str:'' | U | Const:str:''
+272:32:Name -> ExcInst:salt.exceptions.CommandExecutionError
+276:11:Call -> U
+276:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+276:11:Attribute -> Module:salt.utils.mac_utils
+276:11:Attribute -> Module:salt.utils
+276:11:Name -> Module:salt
+276:45:Name -> U
+298:14:Call -> U
+298:14:Name -> Func:salt.modules.mac_shadow._get_account_policy_data_value
+298:45:Name -> U
+299:11:Name -> Class:salt.exceptions.CommandExecutionError
+300:32:Attribute -> Const:str:'' | U | Const:str:''
+300:32:Name -> ExcInst:salt.exceptions.CommandExecutionError
+305:21:Call -> U
+305:21:Attribute -> Func:salt.utils.mac_utils.parse_return
+305:21:Attribute -> Module:salt.utils.mac_utils
+305:21:Attribute -> Module:salt.utils
+305:21:Name -> Module:salt
+305:55:Name -> U
+306:11:Call -> U | Const:str:'Invalid Timestamp'
+306:11:Name -> Func:salt.modules.mac_shadow._convert_to_datetime
+306:32:Name -> U
+328:14:Name -> U
+330:4:Call -> Const:bool:True
+330:4:Name -> Func:salt.modules.mac_shadow._set_account_policy
+330:24:Name -> U
+330:63:Name -> U
+332:11:Call -> U | Const:int:0
+332:11:Name -> Func:salt.modules.mac_shadow.get_maxdays
+332:23:Name -> U
+332:32:Name -> U
+352:15:Call -> Dict:0 | Dict:0
+352:15:Name -> Func:salt.modules.mac_shadow._get_account_policy
+352:35:Name -> U
+354:42:Name -> Dict:0 | Dict:0
+355:22:Name -> Dict:0 | Dict:0
+356:15:Call -> Inst:builtins.int
+356:15:Name -> Class:builtins.int
+356:19:Name -> U
+444:4:Call -> Const:bool:True
+444:4:Name -> Func:salt.modules.mac_shadow._set_account_policy
+444:24:Name -> U
+444:73:Name -> U
+446:11:Call -> U | Const:str:'Value not set'
+446:11:Name -> Func:salt.modules.mac_shadow.get_change
+446:22:Name -> U
+446:31:Name -> U
+466:15:Call -> Dict:0 | Dict:0
+466:15:Name -> Func:salt.modules.mac_shadow._get_account_policy
+466:35:Name -> U
+468:30:Name -> Dict:0 | Dict:0
+469:15:Name -> Dict:0 | Dict:0
+495:4:Call -> Const:bool:True
+495:4:Name -> Func:salt.modules.mac_shadow._set_account_policy
+495:24:Name -> U
+495:77:Name -> U
+497:11:Call -> U | Const:str:'Value not set'
+497:11:Name -> Func:salt.modules.mac_shadow.get_expire
+497:22:Name -> U
+497:31:Name -> U
+517:15:Call -> Dict:0 | Dict:0
+517:15:Name -> Func:salt.modules.mac_shadow._get_account_policy
+517:35:Name -> U
+519:30:Name -> Dict:0 | Dict:0
+520:15:Name -> Dict:0 | Dict:0
+543:35:Name -> U
+545:8:Call -> Const:bool:True
+545:8:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+545:8:Attribute -> Module:salt.utils.mac_utils
+545:8:Attribute -> Module:salt.utils
+545:8:Name -> Module:salt
+545:52:Name -> Const:str:"dscl . -passwd /Users/Uninferable ''"
+546:11:Name -> Class:salt.exceptions.CommandExecutionError
+547:35:Attribute -> Const:str:'' | U | Const:str:''
+547:35:Name -> ExcInst:salt.exceptions.CommandExecutionError
+548:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+548:18:Name -> Class:salt.exceptions.CommandExecutionError
+548:59:Name -> U
+549:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+549:14:Name -> Class:salt.exceptions.CommandExecutionError
+549:54:Attribute -> Const:str:'' | U | Const:str:''
+549:54:Name -> ExcInst:salt.exceptions.CommandExecutionError
+552:35:Name -> U
+553:4:Call -> Const:bool:True
+553:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+553:4:Attribute -> Module:salt.utils.mac_utils
+553:4:Attribute -> Module:salt.utils
+553:4:Name -> Module:salt
+553:48:Name -> Const:str:"dscl . -create /Users/Uninferable Passw
+555:11:Call -> Dict:12 | Dict:12
+555:11:Name -> Func:salt.modules.mac_shadow.info
+555:16:Name -> U
+579:35:Name -> U
+579:43:Name -> U
+581:8:Call -> Const:bool:True
+581:8:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+581:8:Attribute -> Module:salt.utils.mac_utils
+581:8:Attribute -> Module:salt.utils
+581:8:Name -> Module:salt
+581:52:Name -> Const:str:"dscl . -passwd /Users/Uninferable 'Unin
+582:11:Name -> Class:salt.exceptions.CommandExecutionError
+583:35:Attribute -> Const:str:'' | U | Const:str:''
+583:35:Name -> ExcInst:salt.exceptions.CommandExecutionError
+584:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+584:18:Name -> Class:salt.exceptions.CommandExecutionError
+584:59:Name -> U
+585:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+585:14:Name -> Class:salt.exceptions.CommandExecutionError
+585:54:Attribute -> Const:str:'' | U | Const:str:''
+585:54:Name -> ExcInst:salt.exceptions.CommandExecutionError

@@ -1,0 +1,59 @@
+30:8:Call -> ERR
+30:8:Attribute -> BM:builtins.object.__init__
+30:8:Call -> Super
+30:8:Name -> Class:builtins.super
+31:8:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+31:23:Name -> Const:int:1 | U
+32:8:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+32:29:Name -> Const:str:'Timeout' | U
+32:57:Call -> Const:str:''
+32:57:Name -> Class:builtins.str
+32:61:Call -> ERR
+32:61:Attribute -> Func:posix.getpid
+32:61:Name -> Module:os
+33:8:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+33:19:Call -> U
+33:19:Attribute -> U
+33:19:Name -> U
+34:8:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+38:8:Call -> U
+38:8:Attribute -> U
+38:8:Attribute -> U
+38:8:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+38:48:Call -> ERR
+38:48:Attribute -> Func:posix.getpid
+38:48:Name -> Module:os
+39:14:Call -> U
+39:14:Name -> U
+39:33:Attribute -> Const:str:'Timeout, PID: ' | U
+39:33:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+45:12:Call -> U | Inst:signal.Handlers
+45:12:Attribute -> Func:_signal.signal | Func:signal.signal
+45:12:Name -> Module:signal
+45:26:Attribute -> Const:int:14
+45:26:Name -> Module:signal
+45:42:Attribute -> BM:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix.handle_timeout
+45:42:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+46:12:Call -> ERR
+46:12:Attribute -> Func:_signal.setitimer
+46:12:Name -> Module:signal
+46:29:Attribute -> Const:int:0
+46:29:Name -> Module:signal
+46:49:Attribute -> Const:int:1 | U
+46:49:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+47:12:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+48:16:Name -> Class:builtins.AttributeError
+48:32:Name -> Class:builtins.ValueError
+49:12:Call -> U
+49:12:Attribute -> U
+49:12:Attribute -> U
+49:12:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+52:15:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+55:15:Attribute -> Const:bool:False | Const:bool:True
+55:15:Name -> Inst:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix
+59:8:Call -> ERR
+59:8:Attribute -> Func:_signal.setitimer
+59:8:Name -> Module:signal
+59:25:Attribute -> Const:int:0
+59:25:Name -> Module:signal
+62:10:Name -> Class:task-sdk.src.airflow.sdk.execution_time.timeout.TimeoutPosix

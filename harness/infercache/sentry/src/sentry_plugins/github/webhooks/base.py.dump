@@ -1,0 +1,158 @@
+20:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:9:Attribute -> Func:logging.getLogger
+20:9:Name -> Module:logging
+23:24:Name -> U
+23:30:Attribute -> Class:abc.ABC
+23:30:Name -> Module:abc
+24:25:Name -> Class:src.sentry_plugins.github.webhooks.events.push.PushEventWebhook
+24:59:Name -> Class:src.sentry_plugins.github.webhooks.events.pull_request.PullRequestEventWebhook
+28:15:Call -> ERR
+28:15:Attribute -> BM:builtins.dict.get
+28:15:Attribute -> Dict:2
+28:15:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+28:34:Name -> U
+31:11:Name -> U
+32:18:Attribute -> Class:hashlib.sha1
+32:18:Name -> Module:hashlib
+34:18:Call -> ExcInst:builtins.NotImplementedError
+34:18:Name -> Class:builtins.NotImplementedError
+34:58:Name -> U
+35:19:Call -> U
+35:19:Attribute -> BM:hmac.HMAC.hexdigest
+35:19:Call -> Inst:hmac.HMAC
+35:19:Attribute -> Func:hmac.new
+35:19:Name -> Module:hmac
+35:32:Call -> U
+35:32:Attribute -> U
+35:32:Name -> U
+35:60:Name -> U
+35:76:Name -> Class:hashlib.sha1
+36:15:Call -> U
+36:15:Name -> U
+36:37:Name -> U
+36:47:Name -> U
+38:5:Call -> U
+38:5:Name -> U
+38:22:Name -> U
+39:32:Name -> U
+39:65:Name -> U
+40:11:Attribute -> U
+40:11:Name -> U
+41:19:Call -> U
+41:19:Name -> U
+43:15:Call -> ERR
+43:15:Attribute -> ERR
+43:15:Call -> Super
+43:15:Name -> Class:builtins.super
+43:32:Name -> U
+43:42:Name -> Tuple:0
+43:50:Name -> Dict:0
+48:39:Name -> U
+48:56:Name -> Class:builtins.str
+49:14:Name -> Class:builtins.NotImplementedError
+51:30:Name -> U
+51:65:Name -> U
+52:17:Call -> U
+52:17:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_secret
+52:17:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+52:33:Name -> Const:NoneType:None | U
+53:11:Name -> U
+54:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+54:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+54:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:63:Call -> U
+54:63:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_logging_data
+54:63:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+54:85:Name -> Const:NoneType:None | U
+55:19:Call -> U
+55:19:Name -> U
+57:15:Call -> Inst:builtins.bytes
+57:15:Name -> Class:builtins.bytes
+57:21:Attribute -> U
+57:21:Name -> U
+58:15:Name -> Inst:builtins.bytes
+59:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+59:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+59:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+59:64:Call -> U
+59:64:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_logging_data
+59:64:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+59:86:Name -> Const:NoneType:None | U
+60:19:Call -> U
+60:19:Name -> U
+63:22:Call -> U
+63:22:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_handler
+63:22:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+63:39:Attribute -> U
+63:39:Name -> U
+64:15:Name -> Class:builtins.KeyError
+65:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+65:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+65:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+66:54:Call -> U
+66:54:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_logging_data
+66:54:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+66:76:Name -> Const:NoneType:None | U
+68:19:Call -> U
+68:19:Name -> U
+70:15:Name -> U
+71:19:Call -> U
+71:19:Name -> U
+74:32:Call -> U
+74:32:Attribute -> U
+74:32:Attribute -> U
+74:32:Name -> U
+75:16:Name -> Class:builtins.KeyError
+75:26:Name -> Class:builtins.IndexError
+76:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+76:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+76:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+77:58:Call -> U
+77:58:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_logging_data
+77:58:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+77:80:Name -> Const:NoneType:None | U
+79:19:Call -> U
+79:19:Name -> U
+81:15:Call -> U
+81:15:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.is_valid_signature
+81:15:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+81:39:Name -> U
+81:47:Name -> Inst:builtins.bytes
+81:53:Call -> U
+81:53:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_secret
+81:53:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+81:69:Name -> Const:NoneType:None | U
+81:84:Name -> U
+82:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+82:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+82:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+83:58:Call -> U
+83:58:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_logging_data
+83:58:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+83:80:Name -> Const:NoneType:None | U
+85:19:Call -> U
+85:19:Name -> U
+88:20:Call -> U
+88:20:Attribute -> U
+88:20:Name -> U
+88:31:Call -> Const:str:''
+88:31:Attribute -> BM:builtins.bytes.decode
+88:31:Name -> Inst:builtins.bytes
+89:15:Attribute -> U
+89:15:Name -> U
+90:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+90:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+90:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+92:22:Call -> U
+92:22:Attribute -> BM:src.sentry_plugins.github.webhooks.base.GithubWebhookBase.get_logging_data
+92:22:Name -> Inst:src.sentry_plugins.github.webhooks.base.GithubWebhookBase
+92:44:Name -> Const:NoneType:None | U
+94:19:Call -> U
+94:19:Name -> U
+96:8:Call -> U
+96:8:Call -> U
+96:8:Name -> U
+96:18:Name -> U
+96:38:Name -> Const:NoneType:None | U
+97:15:Call -> U
+97:15:Name -> U

@@ -1,0 +1,1747 @@
+//! Attribute access: Module/ClassDef/Instance getattr & igetattr, MRO,
+//! metaclass resolution, FunctionDef.type, property detection, object
+//! models (subset). Ports of astroid scoped_nodes.py + bases.py +
+//! interpreter/objectmodel.py — notes/07 §12-13.
+
+use std::rc::Rc;
+
+use indexmap::IndexMap;
+use pyast::tree::{ConstValue, NodeKind};
+use pyast::NodeId;
+
+use crate::ctx::{copy_context, CallCtx, Ctx};
+use crate::graph::{Engine, FType};
+use crate::value::{DictRef, ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
+
+const PROPERTIES: [&str; 4] = [
+    "builtins.property",
+    "abc.abstractproperty",
+    "functools.cached_property",
+    "enum.property",
+];
+const POSSIBLE_PROPERTIES: [&str; 12] = [
+    "cached_property",
+    "cachedproperty",
+    "lazyproperty",
+    "lazy_property",
+    "reify",
+    "lazyattribute",
+    "lazy_attribute",
+    "LazyProperty",
+    "lazy",
+    "cache_readonly",
+    "DynamicClassAttribute",
+    "AwaitableProperty", // not in astroid 4.0.4; removed if diffs say so
+];
+
+impl Engine {
+    // ---------- dispatch igetattr over a value ----------
+
+    pub fn igetattr_value(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
+        match owner {
+            Value::Uninferable => Ok(Flow::uninferable()),
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Module(_) => {
+                        let stmts = self.module_getattr(g.m, name, false).map_err(|e| e)?;
+                        let ctx2 = copy_context(ctx);
+                        ctx2.lookupname.set(Some(name));
+                        let f = self.infer_stmts(&stmts, Some(&ctx2), Some(*g));
+                        if f.vals.is_empty() && f.err.is_some() {
+                            return Err(ErrKind::Inference);
+                        }
+                        Ok(f)
+                    }
+                    NodeKind::ClassDef(_) => self.class_igetattr(*g, name, ctx, true),
+                    NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                    | NodeKind::Lambda(_) => self.function_igetattr(*g, name, ctx),
+                    NodeKind::Slice { .. } => self.slice_igetattr(*g, name, ctx),
+                    // Const / containers: instances of builtin classes
+                    NodeKind::Const(_)
+                    | NodeKind::List { .. }
+                    | NodeKind::Tuple { .. }
+                    | NodeKind::Set { .. }
+                    | NodeKind::Dict { .. } => self.instance_igetattr(owner, name, ctx),
+                    _ => Err(ErrKind::Attribute),
+                }
+            }
+            Value::Inst { .. }
+            | Value::ExcInst { .. }
+            | Value::SynthConst(_)
+            | Value::SynthSeq { .. }
+            | Value::SynthDict { .. }
+            | Value::FrozenSet { .. }
+            | Value::Generator { .. }
+            | Value::UnionType => self.instance_igetattr(owner, name, ctx),
+            Value::SynthSlice { .. } => self.synth_slice_igetattr(owner, name, ctx),
+            Value::BoundMethod { func, bound } => {
+                self.method_igetattr(*func, Some(bound), name, ctx)
+            }
+            Value::UnboundMethod { func } => self.method_igetattr(*func, None, name, ctx),
+            Value::Property { func } | Value::Partial { func, .. } => {
+                self.property_igetattr(owner, *func, name, ctx)
+            }
+            Value::Super { .. } => self.super_igetattr(owner, name, ctx),
+            Value::DictItems(_) | Value::DictKeys(_) | Value::DictValues(_) => {
+                Err(ErrKind::Attribute)
+            }
+        }
+    }
+
+    // ---------- Module getattr (§12.6) ----------
+
+    pub fn module_getattr(
+        &self,
+        m: crate::value::ModId,
+        name: GSym,
+        ignore_locals: bool,
+    ) -> Result<Vec<NV>, ErrKind> {
+        let md = self.md(m);
+        let name_str = self.sname(name);
+        if name_str.is_empty() {
+            return Err(ErrKind::Attribute);
+        }
+        let mut result: Vec<NV> = Vec::new();
+        let name_in_locals = {
+            let locals = md.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .map(|l| l.contains_key(&name))
+                .unwrap_or(false)
+        };
+        if MODULE_MODEL_ATTRS.contains(&name_str.as_str()) && !ignore_locals && !name_in_locals {
+            result = vec![NV::V(self.module_model_attr(&md, &name_str))];
+            if name_str == "__name__" {
+                result.push(NV::V(Value::SynthConst(Rc::new(ConstValue::Str(
+                    "__main__".into(),
+                )))));
+            }
+        } else if !ignore_locals && name_in_locals {
+            let locals = md.locals.borrow();
+            result = locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&name))
+                .map(|v| v.iter().map(|&g| NV::N(g)).collect())
+                .unwrap_or_default();
+        } else if md.package {
+            // submodule import fallback (relative_only=True)
+            let submod = format!("{}.{}", md.name, name_str);
+            match self.ast_from_module_name(&submod, true) {
+                Ok(mid) => {
+                    result = vec![NV::N(GNode {
+                        m: mid,
+                        n: NodeId::MODULE,
+                    })]
+                }
+                Err(_) => return Err(ErrKind::Attribute),
+            }
+        }
+        // filter DelName
+        result.retain(|nv| match nv {
+            NV::N(g) => !self.kind_is(*g, |k| matches!(k, NodeKind::DelName { .. })),
+            NV::V(_) => true,
+        });
+        if result.is_empty() {
+            return Err(ErrKind::Attribute);
+        }
+        Ok(result)
+    }
+
+    fn module_model_attr(&self, md: &crate::graph::Module, name: &str) -> Value {
+        match name {
+            "__name__" => Value::SynthConst(Rc::new(ConstValue::Str(md.name.clone().into()))),
+            "__file__" => Value::SynthConst(Rc::new(ConstValue::Str(md.file.clone().into()))),
+            "__doc__" => {
+                let doc = self.module_doc(md);
+                Value::SynthConst(Rc::new(doc))
+            }
+            "__package__" => {
+                let v = if md.package { md.name.clone() } else { String::new() };
+                Value::SynthConst(Rc::new(ConstValue::Str(v.into())))
+            }
+            "__path__" => {
+                if !md.package {
+                    return Value::Uninferable; // AttributeInferenceError-ish
+                }
+                let p = std::path::Path::new(&md.file)
+                    .parent()
+                    .map(|x| x.to_string_lossy().into_owned())
+                    .unwrap_or_default();
+                Value::SynthSeq {
+                    kind: SeqKind::List,
+                    elems: Rc::new(vec![Value::SynthConst(Rc::new(ConstValue::Str(p.into())))]),
+                }
+            }
+            "__dict__" | "builtins" => self.dunder_dict_of_locals(md),
+            // __spec__/__loader__/__cached__ are Unknown -> infer Uninferable
+            _ => Value::Uninferable,
+        }
+    }
+
+    fn module_doc(&self, md: &crate::graph::Module) -> ConstValue {
+        match &md.tree.nodes[NodeId::MODULE.idx()].kind {
+            NodeKind::Module(d) => match d.doc_node {
+                Some(doc) => match &md.tree.nodes[doc.idx()].kind {
+                    NodeKind::Const(c) => c.clone(),
+                    _ => ConstValue::None,
+                },
+                None => ConstValue::None,
+            },
+            _ => ConstValue::None,
+        }
+    }
+
+    fn dunder_dict_of_locals(&self, md: &crate::graph::Module) -> Value {
+        let locals = md.locals.borrow();
+        let items: Vec<(Value, Value)> = locals
+            .get(&NodeId::MODULE)
+            .map(|l| {
+                l.iter()
+                    .filter(|(_, v)| !v.is_empty())
+                    .map(|(&k, v)| {
+                        (
+                            Value::SynthConst(Rc::new(ConstValue::Str(
+                                self.sname(k).into(),
+                            ))),
+                            Value::Node(v[0]),
+                        )
+                    })
+                    .collect()
+            })
+            .unwrap_or_default();
+        Value::SynthDict {
+            items: Rc::new(items),
+        }
+    }
+
+    // ---------- ClassDef getattr / igetattr (§12.4-12.5) ----------
+
+    pub fn class_locals_get(&self, cls: GNode, name: GSym) -> Vec<GNode> {
+        let md = self.md(cls.m);
+        let locals = md.locals.borrow();
+        locals
+            .get(&cls.n)
+            .and_then(|l| l.get(&name))
+            .cloned()
+            .unwrap_or_default()
+    }
+
+    pub fn class_getattr(
+        &self,
+        cls: GNode,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+        class_context: bool,
+    ) -> Result<Vec<NV>, ErrKind> {
+        let name_str = self.sname(name);
+        if name_str.is_empty() {
+            return Err(ErrKind::Attribute);
+        }
+        let mut values: Vec<NV> = self
+            .class_locals_get(cls, name)
+            .into_iter()
+            .map(NV::N)
+            .collect();
+        for anc in self.ancestors(cls, true, ctx) {
+            values.extend(self.class_locals_get(anc, name).into_iter().map(NV::N));
+        }
+        if CLASS_MODEL_ATTRS.contains(&name_str.as_str()) && class_context && values.is_empty() {
+            return Ok(vec![NV::V(self.class_model_attr(cls, &name_str, ctx))]);
+        }
+        if class_context {
+            values.extend(self.metaclass_lookup_attribute(cls, name, ctx));
+        }
+        // filter bare AnnAssign declarations
+        let mut result: Vec<NV> = Vec::new();
+        for v in values {
+            if let NV::N(g) = &v {
+                if self.kind_is(*g, |k| matches!(k, NodeKind::AssignName { .. })) {
+                    if let Some(stmt) = self.statement(*g) {
+                        let md = self.md(stmt.m);
+                        if let NodeKind::AnnAssign { value, .. } =
+                            &md.tree.nodes[stmt.n.idx()].kind
+                        {
+                            if value.is_none() {
+                                continue;
+                            }
+                        }
+                    }
+                }
+            }
+            result.push(v);
+        }
+        if result.is_empty() {
+            return Err(ErrKind::Attribute);
+        }
+        Ok(result)
+    }
+
+    /// _metaclass_lookup_attribute (scoped_nodes.py:2375-2415).
+    /// astroid collects into a set (id-ordered); we use insertion order:
+    /// implicit metaclass first, declared metaclass second (notes/07 §21.4).
+    fn metaclass_lookup_attribute(&self, cls: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Vec<NV> {
+        let mut out = Vec::new();
+        let implicit = self.builtins().type_;
+        let metaclass = self.metaclass(cls, ctx);
+        // scoped_nodes.py:2375-2386: `if cls and cls != self` — the
+        // implicit metaclass of `type` is `type` itself; without this guard
+        // the lookup recurses forever.
+        let mut metaclasses: Vec<GNode> = Vec::new();
+        if implicit != cls {
+            metaclasses.push(implicit);
+        }
+        if let Some(Value::Node(g)) = metaclass {
+            if g != cls && !metaclasses.contains(&g) {
+                metaclasses.push(g);
+            }
+        }
+        for meta in metaclasses {
+            if let Ok(attrs) = self.class_getattr(meta, name, ctx, true) {
+                for attr in attrs {
+                    match attr {
+                        NV::N(g) if self.kind_is(g, |k| {
+                            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                        }) =>
+                        {
+                            // _get_attribute_from_metaclass
+                            match self.func_type(g) {
+                                FType::ClassMethod => {
+                                    let bound = Value::Node(cls);
+                                    out.push(NV::V(Value::BoundMethod {
+                                        func: g,
+                                        bound: Rc::new(bound),
+                                    }));
+                                }
+                                FType::StaticMethod => out.push(NV::N(g)),
+                                _ => {
+                                    if self.is_property(g, &copy_context(ctx)) {
+                                        out.push(NV::N(g));
+                                    } else {
+                                        out.push(NV::V(Value::BoundMethod {
+                                            func: g,
+                                            bound: Rc::new(Value::Node(cls)),
+                                        }));
+                                    }
+                                }
+                            }
+                        }
+                        other => out.push(other),
+                    }
+                }
+            }
+        }
+        out
+    }
+
+    pub fn class_igetattr(
+        &self,
+        cls: GNode,
+        name: GSym,
+        ctx_in: Option<&Rc<Ctx>>,
+        class_context: bool,
+    ) -> Result<Flow, ErrKind> {
+        let ctx = copy_context(ctx_in);
+        ctx.lookupname.set(Some(name));
+        let metaclass = self.metaclass(cls, Some(&ctx));
+        match self.class_getattr(cls, name, Some(&ctx), class_context) {
+            Ok(mut attributes) => {
+                // same-scope filtering for multiple attributes
+                if attributes.len() > 1 {
+                    if let NV::N(first) = attributes[0] {
+                        let first_scope = self.parent(first).map(|p| self.scope(p));
+                        let mut filtered = vec![attributes[0].clone()];
+                        for attr in &attributes[1..] {
+                            match attr {
+                                NV::N(g) => {
+                                    let scope = self.parent(*g).map(|p| self.scope(p));
+                                    if scope == first_scope {
+                                        filtered.push(attr.clone());
+                                    }
+                                }
+                                NV::V(_) => filtered.push(attr.clone()),
+                            }
+                        }
+                        attributes = filtered;
+                    }
+                }
+                let functions: Vec<GNode> = attributes
+                    .iter()
+                    .filter_map(|a| match a {
+                        NV::N(g)
+                            if self.kind_is(*g, |k| {
+                                matches!(
+                                    k,
+                                    NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                                )
+                            }) =>
+                        {
+                            Some(*g)
+                        }
+                        _ => None,
+                    })
+                    .collect();
+                // setter scan
+                let mut setter: Option<GNode> = None;
+                'outer: for function in &functions {
+                    for dec_name in self.decoratornames(*function, Some(&ctx)).into_iter().flatten() {
+                        if dec_name.rsplit('.').next() == Some("setter") {
+                            setter = Some(*function);
+                            break 'outer;
+                        }
+                    }
+                }
+                if !functions.is_empty() {
+                    let last_function = *functions.last().unwrap();
+                    attributes.retain(|a| match a {
+                        NV::N(g) => {
+                            !functions.contains(g)
+                                || *g == last_function
+                                || self.is_property(*g, &copy_context(Some(&ctx)))
+                        }
+                        NV::V(_) => true,
+                    });
+                }
+                let inferred_flow = self.infer_stmts(&attributes, Some(&ctx), Some(cls));
+                let mut out: Vec<Value> = Vec::new();
+                for inferred in &inferred_flow.vals {
+                    let is_const = self.value_const(inferred).is_some();
+                    let is_instance = matches!(
+                        inferred,
+                        Value::Inst { .. }
+                            | Value::ExcInst { .. }
+                            | Value::SynthSeq { .. }
+                            | Value::SynthDict { .. }
+                            | Value::FrozenSet { .. }
+                            | Value::Generator { .. }
+                    ) || matches!(inferred, Value::Node(g)
+                        if self.kind_is(*g, |k| matches!(k,
+                            NodeKind::List{..} | NodeKind::Tuple{..} | NodeKind::Set{..} | NodeKind::Dict{..})));
+                    if !is_const && is_instance {
+                        // descriptor check: instance of a class with __get__
+                        if let Some(pcls) = self.proxied_class(inferred) {
+                            let get_sym = self.sym("__get__");
+                            if self.class_getattr(pcls, get_sym, Some(&ctx), true).is_ok() {
+                                out.push(Value::Uninferable);
+                            } else {
+                                out.push(inferred.clone());
+                            }
+                        } else {
+                            out.push(inferred.clone());
+                        }
+                    } else if let Value::Property { func } = inferred {
+                        if !class_context {
+                            if ctx.callcontext.borrow().is_none() && setter.is_none() {
+                                let args = self.func_arg_nodes(*func);
+                                *ctx.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
+                                    id: self.next_callctx_id(),
+                                    args: std::cell::RefCell::new(
+                                        args.into_iter().map(crate::value::NV::N).collect(),
+                                    ),
+                                    keywords: std::cell::RefCell::new(Vec::new()),
+                                    callee: std::cell::RefCell::new(Some(inferred.clone())),
+                                }));
+                            }
+                            let f = self.function_infer_call_result(*func, Some(cls), Some(&ctx));
+                            out.extend(f.vals);
+                        } else if metaclass.is_some() && {
+                            let fscope = self.parent(*func).map(|p| self.scope(p));
+                            match (&fscope, &metaclass) {
+                                (Some(fs), Some(Value::Node(mg))) => fs == mg,
+                                _ => false,
+                            }
+                        } {
+                            let f = self.function_infer_call_result(*func, Some(cls), Some(&ctx));
+                            out.extend(f.vals);
+                        } else {
+                            out.push(inferred.clone());
+                        }
+                    } else {
+                        out.push(self.function_to_method(inferred, cls));
+                    }
+                }
+                if let Some(e) = inferred_flow.err {
+                    if out.is_empty() {
+                        return self.class_igetattr_fallback(cls, name, &ctx, e);
+                    }
+                }
+                Ok(Flow::ok(out))
+            }
+            Err(e) => self.class_igetattr_fallback(cls, name, &ctx, e),
+        }
+    }
+
+    fn class_igetattr_fallback(
+        &self,
+        cls: GNode,
+        name: GSym,
+        ctx: &Rc<Ctx>,
+        _e: ErrKind,
+    ) -> Result<Flow, ErrKind> {
+        let name_str = self.sname(name);
+        if !name_str.starts_with("__") && self.has_dynamic_getattr(cls, ctx) {
+            Ok(Flow::uninferable())
+        } else {
+            Err(ErrKind::Inference)
+        }
+    }
+
+    /// scoped_nodes.py:166-174 function_to_method
+    fn function_to_method(&self, v: &Value, klass: GNode) -> Value {
+        if let Value::Node(g) = v {
+            if self.kind_is(*g, |k| {
+                matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+            }) {
+                return match self.func_type(*g) {
+                    FType::ClassMethod => Value::BoundMethod {
+                        func: *g,
+                        bound: Rc::new(Value::Node(klass)),
+                    },
+                    FType::StaticMethod => v.clone(),
+                    _ => Value::UnboundMethod { func: *g },
+                };
+            }
+        }
+        v.clone()
+    }
+
+    /// scoped_nodes.py:2516-2538 has_dynamic_getattr
+    pub fn has_dynamic_getattr(&self, cls: GNode, ctx: &Rc<Ctx>) -> bool {
+        let look = |name: &str| -> bool {
+            let sym = self.sym(name);
+            match self.class_getattr(cls, sym, Some(ctx), true) {
+                Ok(attrs) => attrs.iter().any(|a| match a {
+                    NV::N(g) => {
+                        let md = self.md(g.m);
+                        md.pure_python && md.name != "builtins"
+                    }
+                    NV::V(_) => false,
+                }),
+                Err(_) => false,
+            }
+        };
+        look("__getattr__") || look("__getattribute__")
+    }
+
+    // ---------- Instance getattr / igetattr (§12.2-12.3) ----------
+
+    /// ClassDef.instance_attr (scoped_nodes.py:2281-2301)
+    pub fn instance_attr(&self, cls: GNode, name: GSym) -> Result<Vec<GNode>, ErrKind> {
+        let mut values: Vec<GNode> = self
+            .iattrs
+            .borrow()
+            .get(&cls)
+            .and_then(|m| m.get(&name))
+            .cloned()
+            .unwrap_or_default();
+        for anc in self.ancestors(cls, true, None) {
+            if let Some(v) = self.iattrs.borrow().get(&anc).and_then(|m| m.get(&name)) {
+                values.extend(v.iter().copied());
+            }
+        }
+        values.retain(|g| !self.kind_is(*g, |k| matches!(k, NodeKind::DelAttr { .. })));
+        if values.is_empty() {
+            Err(ErrKind::Attribute)
+        } else {
+            Ok(values)
+        }
+    }
+
+    /// BaseInstance.getattr (bases.py:243-272)
+    pub fn instance_getattr(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+        lookupclass: bool,
+    ) -> Result<Vec<NV>, ErrKind> {
+        let cls = match self.proxied_class(owner) {
+            Some(c) => c,
+            None => return Err(ErrKind::Attribute),
+        };
+        match self.instance_attr(cls, name) {
+            Err(_) => {
+                let name_str = self.sname(name);
+                if let Some(v) = self.instance_special_attr(owner, &name_str, ctx) {
+                    return Ok(vec![NV::V(v)]);
+                }
+                if lookupclass {
+                    return self.class_getattr(cls, name, ctx, false);
+                }
+                Err(ErrKind::Attribute)
+            }
+            Ok(values) => {
+                let mut out: Vec<NV> = values.into_iter().map(NV::N).collect();
+                if lookupclass {
+                    if let Ok(cv) = self.class_getattr(cls, name, ctx, false) {
+                        out.extend(cv);
+                    }
+                }
+                Ok(out)
+            }
+        }
+    }
+
+    /// BaseInstance.igetattr (bases.py:274-297)
+    pub fn instance_igetattr(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx_in: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
+        let ctx = match ctx_in {
+            Some(c) => Rc::clone(c),
+            None => Ctx::new(),
+        };
+        ctx.lookupname.set(Some(name));
+        match self.instance_getattr(owner, name, Some(&ctx), false) {
+            Ok(attrs) => {
+                let wrapped = self.wrap_attrs(owner, attrs, &ctx);
+                let f = self.infer_stmts_wrapped(wrapped, &ctx, owner);
+                Ok(f)
+            }
+            Err(_) => {
+                // fallback to class igetattr (descriptor logic)
+                let cls = match self.proxied_class(owner) {
+                    Some(c) => c,
+                    None => return Err(ErrKind::Inference),
+                };
+                match self.class_igetattr(cls, name, Some(&ctx), false) {
+                    Ok(flow) => {
+                        // _wrap_attr over inferred results
+                        let wrapped = self.wrap_values(owner, flow.vals, &ctx);
+                        Ok(Flow {
+                            vals: wrapped,
+                            err: flow.err,
+                        })
+                    }
+                    Err(_) => Err(ErrKind::Inference),
+                }
+            }
+        }
+    }
+
+    /// _wrap_attr (bases.py:299-315) over raw getattr nodes: applied via
+    /// _infer_stmts in astroid; we infer first then wrap, except properties.
+    fn infer_stmts_wrapped(&self, attrs: Vec<NV>, ctx: &Rc<Ctx>, owner: &Value) -> Flow {
+        let flow = self.infer_stmts(&attrs, Some(ctx), None);
+        let vals = self.wrap_values(owner, flow.vals, ctx);
+        Flow {
+            vals,
+            err: flow.err,
+        }
+    }
+
+    fn wrap_attrs(&self, _owner: &Value, attrs: Vec<NV>, _ctx: &Rc<Ctx>) -> Vec<NV> {
+        attrs
+    }
+
+    fn wrap_values(&self, owner: &Value, vals: Vec<Value>, ctx: &Rc<Ctx>) -> Vec<Value> {
+        let mut out = Vec::new();
+        for v in vals {
+            match &v {
+                Value::UnboundMethod { func } => {
+                    if self.is_property(*func, ctx) {
+                        let f = self.function_infer_call_result(*func, None, Some(ctx));
+                        out.extend(f.vals);
+                    } else {
+                        out.push(Value::BoundMethod {
+                            func: *func,
+                            bound: Rc::new(owner.clone()),
+                        });
+                    }
+                }
+                Value::Node(g)
+                    if self.kind_is(*g, |k| matches!(k, NodeKind::Lambda(_))) =>
+                {
+                    // bind lambdas whose first arg is literally `self`
+                    let md = self.md(g.m);
+                    let first_arg_self = match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::Lambda(d) => match &md.tree.nodes[d.args.idx()].kind {
+                            NodeKind::Arguments(a) => a.args.first().map(|&arg| {
+                                match &md.tree.nodes[arg.idx()].kind {
+                                    NodeKind::AssignName { name } => {
+                                        md.tree.s(*name) == "self"
+                                    }
+                                    _ => false,
+                                }
+                            }) == Some(true),
+                            _ => false,
+                        },
+                        _ => false,
+                    };
+                    if first_arg_self {
+                        out.push(Value::BoundMethod {
+                            func: *g,
+                            bound: Rc::new(owner.clone()),
+                        });
+                    } else {
+                        out.push(v);
+                    }
+                }
+                _ => out.push(v),
+            }
+        }
+        out
+    }
+
+    fn instance_special_attr(
+        &self,
+        owner: &Value,
+        name: &str,
+        _ctx: Option<&Rc<Ctx>>,
+    ) -> Option<Value> {
+        let cls = self.proxied_class(owner)?;
+        // Exception instance extras first
+        if let Value::ExcInst { exceptions, .. } = owner {
+            match name {
+                "args" => {
+                    return Some(Value::SynthSeq {
+                        kind: SeqKind::Tuple,
+                        elems: Rc::new(Vec::new()),
+                    })
+                }
+                "__traceback__" => {
+                    let tb = self.builtins().traceback;
+                    return Some(Value::Inst { cls: tb });
+                }
+                "exceptions" => {
+                    if let Some(ex) = exceptions {
+                        return Some(Value::SynthSeq {
+                            kind: SeqKind::List,
+                            elems: Rc::new(ex.to_vec()),
+                        });
+                    }
+                }
+                "text" => {
+                    // SyntaxError model
+                    if self.qname(cls) == "builtins.SyntaxError" {
+                        return Some(Value::SynthConst(Rc::new(ConstValue::Str("".into()))));
+                    }
+                }
+                _ => {}
+            }
+        }
+        // Dict model
+        if matches!(owner, Value::SynthDict { .. })
+            || matches!(owner, Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })))
+        {
+            let dr = match owner {
+                Value::SynthDict { items } => DictRef::Synth(Rc::clone(items)),
+                Value::Node(g) => DictRef::Node(*g),
+                _ => unreachable!(),
+            };
+            match name {
+                "items" => return Some(Value::DictItems(Rc::new(dr))),
+                "keys" => return Some(Value::DictKeys(Rc::new(dr))),
+                "values" => return Some(Value::DictValues(Rc::new(dr))),
+                _ => {}
+            }
+        }
+        match name {
+            "__class__" => Some(Value::Node(cls)),
+            "__module__" => Some(Value::SynthConst(Rc::new(ConstValue::Str(
+                self.md(cls.m).name.clone().into(),
+            )))),
+            "__doc__" => Some(Value::SynthConst(Rc::new(ConstValue::None))),
+            "__dict__" => Some(Value::SynthDict {
+                items: Rc::new(Vec::new()),
+            }),
+            _ => None,
+        }
+    }
+
+    // ---------- FunctionDef getattr ----------
+
+    fn function_igetattr(
+        &self,
+        func: GNode,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
+        // instance_attrs first (scoped_nodes.py:1298-1311)
+        if let Some(vals) = self
+            .iattrs
+            .borrow()
+            .get(&func)
+            .and_then(|m| m.get(&name))
+            .cloned()
+        {
+            if !vals.is_empty() {
+                let nv: Vec<NV> = vals.into_iter().map(NV::N).collect();
+                let ctx2 = copy_context(ctx);
+                ctx2.lookupname.set(Some(name));
+                return Ok(self.infer_stmts(&nv, Some(&ctx2), None));
+            }
+        }
+        let name_str = self.sname(name);
+        if let Some(v) = self.function_model_attr(func, &name_str) {
+            return Ok(Flow::one(v));
+        }
+        Err(ErrKind::Inference)
+    }
+
+    fn method_igetattr(
+        &self,
+        func: GNode,
+        bound: Option<&Rc<Value>>,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
+        let name_str = self.sname(name);
+        match name_str.as_str() {
+            "__func__" => return Ok(Flow::one(Value::Node(func))),
+            "__self__" => {
+                return Ok(Flow::one(match bound {
+                    Some(b) => (**b).clone(),
+                    None => Value::SynthConst(Rc::new(ConstValue::None)),
+                }))
+            }
+            _ => {}
+        }
+        self.function_igetattr(func, name, ctx)
+    }
+
+    fn property_igetattr(
+        &self,
+        owner: &Value,
+        func: GNode,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
+        let name_str = self.sname(name);
+        match name_str.as_str() {
+            "fget" => return Ok(Flow::one(Value::Node(func))),
+            "fset" | "deleter" | "getter" | "setter" => {
+                // PropertyModel: functions; approximate with the function
+                let _ = owner;
+                return Ok(Flow::one(Value::Node(func)));
+            }
+            _ => {}
+        }
+        self.function_igetattr(func, name, ctx)
+    }
+
+    fn function_model_attr(&self, func: GNode, name: &str) -> Option<Value> {
+        let md = self.md(func.m);
+        match name {
+            "__name__" => self
+                .node_name(func)
+                .map(|n| Value::SynthConst(Rc::new(ConstValue::Str(n.into())))),
+            "__qualname__" => Some(Value::SynthConst(Rc::new(ConstValue::Str(
+                self.qname(func).into(),
+            )))),
+            "__module__" => Some(Value::SynthConst(Rc::new(ConstValue::Str(
+                md.name.clone().into(),
+            )))),
+            "__doc__" => {
+                let doc = match &md.tree.nodes[func.n.idx()].kind {
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d
+                        .doc_node
+                        .and_then(|doc| match &md.tree.nodes[doc.idx()].kind {
+                            NodeKind::Const(c) => Some(c.clone()),
+                            _ => None,
+                        }),
+                    _ => None,
+                };
+                Some(Value::SynthConst(Rc::new(doc.unwrap_or(ConstValue::None))))
+            }
+            "__dict__" => Some(Value::SynthDict {
+                items: Rc::new(Vec::new()),
+            }),
+            "__defaults__" | "__kwdefaults__" | "__annotations__" => Some(Value::Uninferable),
+            "__class__" => Some(Value::Node(self.builtins().function)),
+            _ => None,
+        }
+    }
+
+    // ---------- Slice ----------
+
+    fn slice_igetattr(&self, g: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Result<Flow, ErrKind> {
+        let md = self.md(g.m);
+        let (lower, upper, step) = match &md.tree.nodes[g.n.idx()].kind {
+            NodeKind::Slice { lower, upper, step } => (*lower, *upper, *step),
+            _ => return Err(ErrKind::Attribute),
+        };
+        let name_str = self.sname(name);
+        let child = match name_str.as_str() {
+            "start" => lower,
+            "stop" => upper,
+            "step" => step,
+            _ => {
+                // class getattr on builtin slice
+                let cls = self.builtins().slice;
+                return self
+                    .class_igetattr(cls, name, ctx, false)
+                    .map_err(|_| ErrKind::Inference);
+            }
+        };
+        match child {
+            Some(c) => Ok(self.infer(GNode { m: g.m, n: c }, &copy_context(ctx))),
+            None => Ok(Flow::one(Value::SynthConst(Rc::new(ConstValue::None)))),
+        }
+    }
+
+    fn synth_slice_igetattr(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
+        let bounds = match owner {
+            Value::SynthSlice { bounds } => bounds,
+            _ => return Err(ErrKind::Attribute),
+        };
+        let name_str = self.sname(name);
+        let idx = match name_str.as_str() {
+            "start" => 0,
+            "stop" => 1,
+            "step" => 2,
+            _ => {
+                let cls = self.builtins().slice;
+                return self
+                    .class_igetattr(cls, name, ctx, false)
+                    .map_err(|_| ErrKind::Inference);
+            }
+        };
+        Ok(Flow::one(Value::SynthConst(Rc::new(
+            bounds[idx].clone().unwrap_or(ConstValue::None),
+        ))))
+    }
+
+    // ---------- Super (§12.8) ----------
+
+    pub fn super_mro(&self, owner: &Value) -> Result<Vec<GNode>, ErrKind> {
+        let (mro_pointer, mro_type) = match owner {
+            Value::Super {
+                mro_pointer,
+                mro_type,
+                ..
+            } => (*mro_pointer, mro_type),
+            _ => return Err(ErrKind::Super),
+        };
+        let cls = match &**mro_type {
+            Value::Node(g) => *g,
+            Value::Inst { cls } | Value::ExcInst { cls, .. } => *cls,
+            _ => return Err(ErrKind::Super),
+        };
+        let mro = self.mro(cls, None).map_err(|_| ErrKind::Super)?;
+        match mro.iter().position(|&c| c == mro_pointer) {
+            Some(i) => Ok(mro[i + 1..].to_vec()),
+            None => Err(ErrKind::Super),
+        }
+    }
+
+    fn super_igetattr(&self, owner: &Value, name: GSym, ctx: Option<&Rc<Ctx>>) -> Result<Flow, ErrKind> {
+        let name_str = self.sname(name);
+        let (mro_type, scope) = match owner {
+            Value::Super { mro_type, scope, .. } => (Rc::clone(mro_type), *scope),
+            _ => return Err(ErrKind::Attribute),
+        };
+        if name_str == "__class__" {
+            return Ok(Flow::one(Value::Node(self.builtins().super_)));
+        }
+        let mro = match self.super_mro(owner) {
+            Ok(m) => m,
+            Err(_) => return Err(ErrKind::Attribute),
+        };
+        let mut out: Vec<Value> = Vec::new();
+        let mut found = false;
+        for cls in mro {
+            let locs = self.class_locals_get(cls, name);
+            if locs.is_empty() {
+                continue;
+            }
+            found = true;
+            let ctx2 = copy_context(ctx);
+            ctx2.lookupname.set(Some(name));
+            let nv: Vec<NV> = locs.into_iter().map(NV::N).collect();
+            let flow = self.infer_stmts(&nv, Some(&ctx2), Some(cls));
+            for inferred in flow.vals {
+                match &inferred {
+                    Value::Node(g)
+                        if self.kind_is(*g, |k| {
+                            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                        }) =>
+                    {
+                        let ft = self.func_type(*g);
+                        // scope is the calling method
+                        let caller_is_classmethod =
+                            self.func_type(scope) == FType::ClassMethod;
+                        match ft {
+                            FType::ClassMethod => out.push(Value::BoundMethod {
+                                func: *g,
+                                bound: Rc::new(Value::Node(cls)),
+                            }),
+                            FType::StaticMethod => out.push(inferred.clone()),
+                            FType::Method if caller_is_classmethod => {
+                                out.push(inferred.clone())
+                            }
+                            _ => {
+                                let class_based = matches!(
+                                    &*mro_type,
+                                    Value::Node(g2) if self.kind_is(*g2, |k| matches!(k, NodeKind::ClassDef(_)))
+                                );
+                                if class_based {
+                                    out.push(inferred.clone());
+                                } else {
+                                    out.push(Value::BoundMethod {
+                                        func: *g,
+                                        bound: Rc::new((*mro_type).clone()),
+                                    });
+                                }
+                            }
+                        }
+                    }
+                    Value::Property { func } => {
+                        let f = self.function_infer_call_result(*func, None, ctx);
+                        out.extend(f.vals);
+                    }
+                    _ => out.push(inferred),
+                }
+            }
+        }
+        if !found {
+            return Err(ErrKind::Attribute);
+        }
+        Ok(Flow::ok(out))
+    }
+
+    // ---------- MRO / ancestors (§13) ----------
+
+    pub fn class_bases(&self, cls: GNode) -> Vec<GNode> {
+        let md = self.md(cls.m);
+        match &md.tree.nodes[cls.n.idx()].kind {
+            NodeKind::ClassDef(d) => d
+                .bases
+                .iter()
+                .map(|&b| GNode { m: cls.m, n: b })
+                .collect(),
+            _ => Vec::new(),
+        }
+    }
+
+    /// ancestors() (scoped_nodes.py:2167-2211) — prefix DFS
+    pub fn ancestors(&self, cls: GNode, recurs: bool, ctx: Option<&Rc<Ctx>>) -> Vec<GNode> {
+        let mut yielded: rustc_hash::FxHashSet<GNode> = Default::default();
+        yielded.insert(cls);
+        let mut out = Vec::new();
+        let ctx = copy_context(ctx);
+        self.ancestors_into(cls, recurs, &ctx, &mut yielded, &mut out, cls, 0);
+        out
+    }
+
+    fn ancestors_into(
+        &self,
+        cls: GNode,
+        recurs: bool,
+        ctx: &Rc<Ctx>,
+        yielded: &mut rustc_hash::FxHashSet<GNode>,
+        out: &mut Vec<GNode>,
+        self_class: GNode,
+        depth: u32,
+    ) {
+        if depth > 100 {
+            return;
+        }
+        let bases = self.class_bases(cls);
+        if bases.is_empty() {
+            if self.qname(cls) != "builtins.object" {
+                let obj = self.builtins().object;
+                if yielded.insert(obj) {
+                    out.push(obj);
+                }
+            }
+            return;
+        }
+        for base in bases {
+            // restore_path
+            let saved_path = ctx.path.borrow().clone();
+            let flow = self.infer(base, ctx);
+            *ctx.path.borrow_mut() = saved_path;
+            for baseobj in &flow.vals {
+                let basecls = match baseobj {
+                    Value::Node(g)
+                        if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
+                    {
+                        *g
+                    }
+                    Value::Inst { cls } | Value::ExcInst { cls, .. } => *cls,
+                    _ => continue,
+                };
+                if yielded.insert(basecls) {
+                    out.push(basecls);
+                }
+                if !recurs {
+                    continue;
+                }
+                // grandparents: stop the chain at self
+                let mut grand: Vec<GNode> = Vec::new();
+                let mut sub_yielded = yielded.clone();
+                self.ancestors_into(basecls, true, ctx, &mut sub_yielded, &mut grand, self_class, depth + 1);
+                for gp in grand {
+                    if gp == self_class {
+                        break;
+                    }
+                    if yielded.insert(gp) {
+                        out.push(gp);
+                    }
+                }
+            }
+        }
+    }
+
+    /// _compute_mro / mro() (scoped_nodes.py:2837-2863) — C3
+    pub fn mro(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Result<Vec<GNode>, ErrKind> {
+        self.compute_mro(cls, ctx, 0)
+    }
+
+    fn compute_mro(&self, cls: GNode, ctx: Option<&Rc<Ctx>>, depth: u32) -> Result<Vec<GNode>, ErrKind> {
+        if depth > 100 {
+            return Err(ErrKind::Mro);
+        }
+        if self.qname(cls) == "builtins.object" {
+            return Ok(vec![cls]);
+        }
+        let inferred_bases = self.inferred_bases(cls, ctx);
+        let mut bases_mro: Vec<Vec<GNode>> = Vec::new();
+        for &base in &inferred_bases {
+            if base == cls {
+                continue;
+            }
+            let mro = self.compute_mro(base, ctx, depth + 1)?;
+            bases_mro.push(mro);
+        }
+        let mut unmerged: Vec<Vec<GNode>> = Vec::new();
+        unmerged.push(vec![cls]);
+        unmerged.extend(bases_mro);
+        unmerged.push(inferred_bases);
+        // clean_duplicates_mro: dedupe key (lineno, qname)
+        for seq in &unmerged {
+            let mut seen: rustc_hash::FxHashSet<(u32, String)> = Default::default();
+            for &node in seq {
+                let key = (self.fromlineno(node), self.qname(node));
+                if !seen.insert(key) {
+                    return Err(ErrKind::Mro);
+                }
+            }
+        }
+        self.clean_typing_generic_mro(&mut unmerged);
+        c3_merge(unmerged).ok_or(ErrKind::Mro)
+    }
+
+    fn clean_typing_generic_mro(&self, sequences: &mut Vec<Vec<GNode>>) {
+        let n = sequences.len();
+        if n < 2 {
+            return;
+        }
+        let pos_in_inferred = {
+            let inferred = &sequences[n - 1];
+            inferred
+                .iter()
+                .position(|&b| self.qname(b) == "typing.Generic")
+        };
+        let pos = match pos_in_inferred {
+            Some(p) => p,
+            None => return,
+        };
+        let mut found = false;
+        for (i, seq) in sequences[1..n - 1].iter().enumerate() {
+            if i == pos {
+                continue;
+            }
+            if seq.iter().any(|&b| self.qname(b) == "typing.Generic") {
+                found = true;
+                break;
+            }
+        }
+        if !found {
+            return;
+        }
+        // remove from inferred_bases and its bases_mro entry
+        sequences[n - 1].remove(pos);
+        if pos + 1 < n - 1 {
+            sequences.remove(pos + 1);
+        }
+    }
+
+    /// _inferred_bases (scoped_nodes.py:2803-2835)
+    fn inferred_bases(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Vec<GNode> {
+        let bases = self.class_bases(cls);
+        if bases.is_empty() {
+            if self.qname(cls) != "builtins.object" {
+                return vec![self.builtins().object];
+            }
+            return Vec::new();
+        }
+        let mut out = Vec::new();
+        for base in bases {
+            // _infer_last with a cloned context
+            let c = match ctx {
+                Some(c) => c.clone_ctx(),
+                None => Ctx::new(),
+            };
+            let flow = self.infer(base, &c);
+            let last = flow.vals.last().cloned();
+            let Some(last) = last else { continue };
+            let basecls = match last {
+                Value::Inst { cls } | Value::ExcInst { cls, .. } => cls,
+                Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
+                _ => continue,
+            };
+            out.push(basecls);
+        }
+        out
+    }
+
+    /// is_subtype_of (scoped_nodes.py:2004-2015)
+    pub fn is_subtype_of(&self, cls: GNode, type_name: &str, ctx: Option<&Rc<Ctx>>) -> bool {
+        if self.qname(cls) == type_name {
+            return true;
+        }
+        self.ancestors(cls, true, ctx)
+            .iter()
+            .any(|&a| self.qname(a) == type_name)
+    }
+
+    // ---------- metaclass ----------
+
+    pub fn declared_metaclass(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Option<Value> {
+        let md = self.md(cls.m);
+        let meta = match &md.tree.nodes[cls.n.idx()].kind {
+            NodeKind::ClassDef(d) => d.metaclass,
+            _ => None,
+        }?;
+        let c = copy_context(ctx);
+        let flow = self.infer(GNode { m: cls.m, n: meta }, &c);
+        flow.vals.into_iter().find(|v| !v.is_uninferable())
+    }
+
+    pub fn metaclass(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Option<Value> {
+        self.find_metaclass(cls, &mut Default::default(), ctx)
+    }
+
+    fn find_metaclass(
+        &self,
+        cls: GNode,
+        seen: &mut rustc_hash::FxHashSet<GNode>,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Option<Value> {
+        seen.insert(cls);
+        if let Some(k) = self.declared_metaclass(cls, ctx) {
+            return Some(k);
+        }
+        for parent in self.ancestors(cls, true, ctx) {
+            if !seen.contains(&parent) {
+                if let Some(k) = self.find_metaclass(parent, seen, ctx) {
+                    return Some(k);
+                }
+            }
+        }
+        None
+    }
+
+    // ---------- ClassDef.type / instantiate_class ----------
+
+    /// instantiate_class (scoped_nodes.py:2303-2316)
+    pub fn instantiate_class(&self, cls: GNode) -> Value {
+        if let Ok(mro) = self.mro(cls, None) {
+            let is_exc = mro.iter().any(|&c| {
+                self.node_name(c)
+                    .map(|n| n == "Exception" || n == "BaseException")
+                    .unwrap_or(false)
+            });
+            if is_exc {
+                return Value::ExcInst {
+                    cls,
+                    exceptions: None,
+                };
+            }
+        }
+        Value::Inst { cls }
+    }
+
+    /// FunctionDef.type (scoped_nodes.py:1313-1384), cached
+    pub fn func_type(&self, func: GNode) -> FType {
+        if let Some(&t) = self.ftype_cache.borrow().get(&func) {
+            return t;
+        }
+        let md = self.md(func.m);
+        if let Some(&t) = md.ftype.get(&func.n) {
+            self.ftype_cache.borrow_mut().insert(func, t);
+            return t;
+        }
+        let t = self.compute_func_type(func);
+        self.ftype_cache.borrow_mut().insert(func, t);
+        t
+    }
+
+    fn compute_func_type(&self, func: GNode) -> FType {
+        let md = self.md(func.m);
+        let (name, decorators) = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                (md.tree.s(d.name).to_string(), d.decorators)
+            }
+            NodeKind::Lambda(_) => return FType::Function,
+            _ => return FType::Function,
+        };
+        // extra_decorators: `meth = staticmethod(meth)` in the class body
+        let parent_frame = self.parent(func).map(|p| self.frame(p));
+        let in_class = parent_frame
+            .map(|f| self.kind_is(f, |k| matches!(k, NodeKind::ClassDef(_))))
+            .unwrap_or(false);
+        if in_class {
+            for call in self.extra_decorators(func, parent_frame.unwrap(), &name) {
+                let cmd = self.md(call.m);
+                if let NodeKind::Call { func: cf, .. } = &cmd.tree.nodes[call.n.idx()].kind {
+                    if let NodeKind::Name { name: cn } = &cmd.tree.nodes[cf.idx()].kind {
+                        match cmd.tree.s(*cn) {
+                            "classmethod" => return FType::ClassMethod,
+                            "staticmethod" => return FType::StaticMethod,
+                            _ => {}
+                        }
+                    }
+                }
+            }
+        }
+        let mut type_ = FType::Function;
+        if in_class {
+            if matches!(name.as_str(), "__new__" | "__init_subclass__" | "__class_getitem__") {
+                return FType::ClassMethod;
+            }
+            type_ = FType::Method;
+        }
+        let Some(dec) = decorators else { return type_ };
+        let dec_nodes: Vec<NodeId> = match &md.tree.nodes[dec.idx()].kind {
+            NodeKind::Decorators { nodes } => nodes.clone(),
+            _ => Vec::new(),
+        };
+        for dn in dec_nodes {
+            match &md.tree.nodes[dn.idx()].kind {
+                NodeKind::Name { name: n } => match md.tree.s(*n) {
+                    "classmethod" => return FType::ClassMethod,
+                    "staticmethod" => return FType::StaticMethod,
+                    _ => {}
+                },
+                NodeKind::Attribute { expr, attrname, .. } => {
+                    if let NodeKind::Name { name: en } = &md.tree.nodes[expr.idx()].kind {
+                        if md.tree.s(*en) == "builtins" {
+                            match md.tree.s(*attrname) {
+                                "classmethod" => return FType::ClassMethod,
+                                "staticmethod" => return FType::StaticMethod,
+                                _ => {}
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+            // decorator call chains + inferred classes: infer the decorator
+            let g = GNode { m: func.m, n: dn };
+            let ctx = Ctx::new();
+            if let NodeKind::Call { func: cf, .. } = &md.tree.nodes[dn.idx()].kind {
+                let cg = GNode { m: func.m, n: *cf };
+                let f = self.infer(cg, &ctx);
+                if let Some(current) = f.vals.first() {
+                    if let Some(t) = self.infer_decorator_callchain(current) {
+                        return t;
+                    }
+                }
+            }
+            let flow = self.infer(g, &ctx);
+            if flow.err.map(|e| e.is_inference()).unwrap_or(false) && flow.vals.is_empty() {
+                continue;
+            }
+            for inferred in &flow.vals {
+                if let Some(t) = self.infer_decorator_callchain(inferred) {
+                    return t;
+                }
+                let icls = match inferred {
+                    Value::Node(g2)
+                        if self.kind_is(*g2, |k| matches!(k, NodeKind::ClassDef(_))) =>
+                    {
+                        *g2
+                    }
+                    _ => continue,
+                };
+                for ancestor in self.ancestors(icls, true, None) {
+                    if self.is_subtype_of(ancestor, "builtins.classmethod", None) {
+                        return FType::ClassMethod;
+                    }
+                    if self.is_subtype_of(ancestor, "builtins.staticmethod", None) {
+                        return FType::StaticMethod;
+                    }
+                }
+            }
+        }
+        type_
+    }
+
+    /// _infer_decorator_callchain (scoped_nodes.py:846-881)
+    fn infer_decorator_callchain(&self, v: &Value) -> Option<FType> {
+        let func = match v {
+            Value::Node(g)
+                if self.kind_is(*g, |k| {
+                    matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                }) =>
+            {
+                *g
+            }
+            _ => return None,
+        };
+        let flow = self.function_infer_call_result(func, None, None);
+        let result = flow.vals.first()?;
+        let rescls = match result {
+            Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(*cls),
+            Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) => Some(*g),
+            _ => None,
+        };
+        if let Some(c) = rescls {
+            if self.is_subtype_of(c, "builtins.classmethod", None) {
+                return Some(FType::ClassMethod);
+            }
+            if self.is_subtype_of(c, "builtins.staticmethod", None) {
+                return Some(FType::StaticMethod);
+            }
+        }
+        if let Value::Node(g) = result {
+            let md = self.md(g.m);
+            if let NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) =
+                &md.tree.nodes[g.n.idx()].kind
+            {
+                if let Some(dec) = d.decorators {
+                    if let NodeKind::Decorators { nodes } = &md.tree.nodes[dec.idx()].kind {
+                        for dn in nodes {
+                            match &md.tree.nodes[dn.idx()].kind {
+                                NodeKind::Name { name } => match md.tree.s(*name) {
+                                    "classmethod" => return Some(FType::ClassMethod),
+                                    "staticmethod" => return Some(FType::StaticMethod),
+                                    _ => {}
+                                },
+                                _ => {}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        None
+    }
+
+    /// extra_decorators (scoped_nodes.py:1221-1259): Assign nodes in the
+    /// class body of form `name = callable(name)`.
+    fn extra_decorators(&self, func: GNode, frame: GNode, name: &str) -> Vec<GNode> {
+        let md = self.md(frame.m);
+        let mut out = Vec::new();
+        // _assign_nodes_in_scope: all Assigns in the class scope (recursive
+        // through non-frame statements)
+        let mut stack: Vec<NodeId> = Vec::new();
+        let mut buf = Vec::new();
+        md.tree.push_children(frame.n, &mut buf);
+        stack.extend(buf.iter().copied());
+        while let Some(n) = stack.pop() {
+            if matches!(
+                md.tree.nodes[n.idx()].kind,
+                NodeKind::FunctionDef(_)
+                    | NodeKind::AsyncFunctionDef(_)
+                    | NodeKind::ClassDef(_)
+                    | NodeKind::Lambda(_)
+            ) {
+                continue;
+            }
+            if let NodeKind::Assign { targets, value } = &md.tree.nodes[n.idx()].kind {
+                let value_is_call_of_name = match &md.tree.nodes[value.idx()].kind {
+                    NodeKind::Call { func: cf, .. } => {
+                        matches!(md.tree.nodes[cf.idx()].kind, NodeKind::Name { .. })
+                    }
+                    _ => false,
+                };
+                if value_is_call_of_name {
+                    for t in targets {
+                        if let NodeKind::AssignName { name: tn } = &md.tree.nodes[t.idx()].kind {
+                            if md.tree.s(*tn) == name {
+                                // meth must be a FunctionDef in this frame
+                                let sym = self.g(&md, *tn);
+                                let locs = self.class_locals_get(frame, sym);
+                                if let Some(meth) = locs.last() {
+                                    if self.kind_is(*meth, |k| {
+                                        matches!(
+                                            k,
+                                            NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                                        )
+                                    }) && func.m == frame.m
+                                    {
+                                        out.push(GNode { m: frame.m, n: *value });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            buf.clear();
+            md.tree.push_children(n, &mut buf);
+            stack.extend(buf.iter().copied());
+        }
+        out
+    }
+
+    // ---------- property detection (§11.2) ----------
+
+    pub fn decoratornames(&self, func: GNode, ctx: Option<&Rc<Ctx>>) -> Vec<Option<String>> {
+        let md = self.md(func.m);
+        let mut result = Vec::new();
+        let decorators = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.decorators,
+            _ => None,
+        };
+        let mut decnodes: Vec<GNode> = Vec::new();
+        if let Some(dec) = decorators {
+            if let NodeKind::Decorators { nodes } = &md.tree.nodes[dec.idx()].kind {
+                decnodes.extend(nodes.iter().map(|&n| GNode { m: func.m, n }));
+            }
+        }
+        for dn in decnodes {
+            let c = copy_context(ctx);
+            let flow = self.infer(dn, &c);
+            for v in &flow.vals {
+                result.push(self.value_qname(v));
+            }
+        }
+        result
+    }
+
+    /// qname of an inference result (proxies forward to _proxied)
+    pub fn value_qname(&self, v: &Value) -> Option<String> {
+        match v {
+            Value::Uninferable => None,
+            Value::Node(g) => Some(self.qname(*g)),
+            Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(self.qname(*cls)),
+            Value::BoundMethod { func, .. }
+            | Value::UnboundMethod { func }
+            | Value::Property { func }
+            | Value::Partial { func, .. } => Some(self.qname(*func)),
+            Value::Generator { is_async, .. } => Some(if *is_async {
+                "builtins.async_generator".to_string()
+            } else {
+                "builtins.generator".to_string()
+            }),
+            v => self
+                .proxied_class(v)
+                .map(|c| self.qname(c)),
+        }
+    }
+
+    /// bases._is_property (bases.py:69-108)
+    pub fn is_property(&self, func: GNode, ctx: &Rc<Ctx>) -> bool {
+        let md = self.md(func.m);
+        let decorators = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.decorators,
+            _ => return false,
+        };
+        if decorators.is_none() {
+            return false;
+        }
+        let decnames = self.decoratornames(func, Some(ctx));
+        for n in decnames.iter().flatten() {
+            if PROPERTIES.contains(&n.as_str()) {
+                return true;
+            }
+        }
+        for n in decnames.iter().flatten() {
+            let stripped = n.rsplit('.').next().unwrap_or("");
+            if POSSIBLE_PROPERTIES.contains(&stripped) {
+                return true;
+            }
+        }
+        // decorator classes subtyping a property class
+        let dec = decorators.unwrap();
+        let dec_nodes: Vec<NodeId> = match &md.tree.nodes[dec.idx()].kind {
+            NodeKind::Decorators { nodes } => nodes.clone(),
+            _ => Vec::new(),
+        };
+        for dn in dec_nodes {
+            let g = GNode { m: func.m, n: dn };
+            let inferred = self.safe_infer(g, &copy_context(Some(ctx)));
+            let Some(inferred) = inferred else { continue };
+            if let Value::Node(icls) = inferred {
+                if self.kind_is(icls, |k| matches!(k, NodeKind::ClassDef(_))) {
+                    if PROPERTIES
+                        .iter()
+                        .any(|p| self.is_subtype_of(icls, p, Some(ctx)))
+                    {
+                        return true;
+                    }
+                    // Subscript functools.cached_property base
+                    let cmd = self.md(icls.m);
+                    if let NodeKind::ClassDef(d) = &cmd.tree.nodes[icls.n.idx()].kind {
+                        for &b in &d.bases {
+                            if let NodeKind::Subscript { value, .. } =
+                                &cmd.tree.nodes[b.idx()].kind
+                            {
+                                let vg = GNode { m: icls.m, n: *value };
+                                if let Some(Value::Node(vcls)) =
+                                    self.safe_infer(vg, &copy_context(Some(ctx)))
+                                {
+                                    if self.node_name(vcls).as_deref() == Some("cached_property")
+                                        && self.md(vcls.m).name == "functools"
+                                    {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        false
+    }
+
+    /// arguments node ids of a function (for the property callcontext hack)
+    pub fn func_arg_nodes(&self, func: GNode) -> Vec<GNode> {
+        let md = self.md(func.m);
+        let args = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+            NodeKind::Lambda(d) => d.args,
+            _ => return Vec::new(),
+        };
+        match &md.tree.nodes[args.idx()].kind {
+            NodeKind::Arguments(a) => {
+                let mut v: Vec<GNode> = Vec::new();
+                v.extend(a.posonlyargs.iter().map(|&n| GNode { m: func.m, n }));
+                v.extend(a.args.iter().map(|&n| GNode { m: func.m, n }));
+                if let Some(vn) = a.vararg_node {
+                    v.push(GNode { m: func.m, n: vn });
+                }
+                v.extend(a.kwonlyargs.iter().map(|&n| GNode { m: func.m, n }));
+                if let Some(kn) = a.kwarg_node {
+                    v.push(GNode { m: func.m, n: kn });
+                }
+                v
+            }
+            _ => Vec::new(),
+        }
+    }
+
+    /// instance_attrs map handle for tests/checkers
+    pub fn instance_attrs_of(&self, cls: GNode) -> IndexMap<GSym, Vec<GNode>> {
+        self.iattrs.borrow().get(&cls).cloned().unwrap_or_default()
+    }
+}
+
+const MODULE_MODEL_ATTRS: [&str; 12] = [
+    "__name__",
+    "__doc__",
+    "__file__",
+    "__dict__",
+    "__package__",
+    "__path__",
+    "__spec__",
+    "__loader__",
+    "__cached__",
+    "builtins",
+    "__init__",
+    "__new__",
+];
+
+const CLASS_MODEL_ATTRS: [&str; 14] = [
+    "__module__",
+    "__name__",
+    "__qualname__",
+    "__doc__",
+    "__mro__",
+    "mro",
+    "__bases__",
+    "__class__",
+    "__subclasses__",
+    "__dict__",
+    "__call__",
+    "__annotations__",
+    "__init__",
+    "__new__",
+];
+
+impl Engine {
+    fn class_model_attr(&self, cls: GNode, name: &str, ctx: Option<&Rc<Ctx>>) -> Value {
+        match name {
+            "__name__" => Value::SynthConst(Rc::new(ConstValue::Str(
+                self.node_name(cls).unwrap_or_default().into(),
+            ))),
+            "__qualname__" => {
+                let q = self.qname(cls);
+                let q = q
+                    .split_once('.')
+                    .map(|(_, rest)| rest.to_string())
+                    .unwrap_or(q);
+                Value::SynthConst(Rc::new(ConstValue::Str(q.into())))
+            }
+            "__module__" => Value::SynthConst(Rc::new(ConstValue::Str(
+                self.md(cls.m).name.clone().into(),
+            ))),
+            "__doc__" => Value::SynthConst(Rc::new(ConstValue::None)),
+            "__mro__" => match self.mro(cls, ctx) {
+                Ok(m) => Value::SynthSeq {
+                    kind: SeqKind::Tuple,
+                    elems: Rc::new(m.into_iter().map(Value::Node).collect()),
+                },
+                Err(_) => Value::Uninferable,
+            },
+            "__bases__" => {
+                let elems: Vec<Value> = self
+                    .inferred_bases(cls, ctx)
+                    .into_iter()
+                    .map(Value::Node)
+                    .collect();
+                Value::SynthSeq {
+                    kind: SeqKind::Tuple,
+                    elems: Rc::new(elems),
+                }
+            }
+            "__class__" => match self.metaclass(cls, ctx) {
+                Some(m) => m,
+                None => Value::Node(self.builtins().type_),
+            },
+            "__subclasses__" | "mro" | "__call__" | "__new__" | "__init__" => Value::Uninferable,
+            "__dict__" => Value::SynthDict {
+                items: Rc::new(Vec::new()),
+            },
+            "__annotations__" => Value::Uninferable,
+            _ => Value::Uninferable,
+        }
+    }
+}
+
+/// _c3_merge (scoped_nodes.py:72-107)
+fn c3_merge(mut sequences: Vec<Vec<GNode>>) -> Option<Vec<GNode>> {
+    let mut result: Vec<GNode> = Vec::new();
+    loop {
+        sequences.retain(|s| !s.is_empty());
+        if sequences.is_empty() {
+            return Some(result);
+        }
+        let mut head: Option<GNode> = None;
+        'search: for s1 in &sequences {
+            let candidate = s1[0];
+            for s2 in &sequences {
+                if s2[1..].contains(&candidate) {
+                    continue 'search;
+                }
+            }
+            head = Some(candidate);
+            break;
+        }
+        let head = head?;
+        result.push(head);
+        for seq in &mut sequences {
+            if seq.first() == Some(&head) {
+                seq.remove(0);
+            }
+        }
+    }
+}

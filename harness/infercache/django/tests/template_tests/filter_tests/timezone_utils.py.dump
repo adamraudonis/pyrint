@@ -1,0 +1,27 @@
+7:23:Name -> Class:django.test.testcases.SimpleTestCase
+9:8:Name -> Inst:tests.template_tests.filter_tests.timezone_utils.TimezoneTestCase
+9:19:Call -> Inst:_pydatetime.datetime | U
+9:19:Attribute -> BM:_pydatetime.datetime.now
+9:19:Name -> Class:_pydatetime.datetime
+10:8:Name -> Inst:tests.template_tests.filter_tests.timezone_utils.TimezoneTestCase
+10:22:Call -> Inst:_pydatetime.datetime | U
+10:22:Attribute -> Func:django.utils.timezone.make_aware
+10:22:Name -> Module:django.utils.timezone
+11:12:Attribute -> Inst:_pydatetime.datetime | U
+11:12:Name -> Inst:tests.template_tests.filter_tests.timezone_utils.TimezoneTestCase
+12:12:Call -> U | Inst:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Inst:zoneinfo._zoneinfo.ZoneInfo
+12:12:Attribute -> Func:django.utils.timezone.get_default_timezone
+12:12:Name -> Module:django.utils.timezone
+14:8:Name -> Inst:tests.template_tests.filter_tests.timezone_utils.TimezoneTestCase
+14:24:Call -> Inst:_pydatetime.datetime | U
+14:24:Attribute -> Func:django.utils.timezone.localtime
+14:24:Name -> Module:django.utils.timezone
+15:12:Attribute -> Inst:_pydatetime.datetime | U
+15:12:Name -> Inst:tests.template_tests.filter_tests.timezone_utils.TimezoneTestCase
+16:12:Call -> Inst:_pydatetime.timezone
+16:12:Attribute -> Func:django.utils.timezone.get_fixed_timezone
+16:12:Name -> Module:django.utils.timezone
+18:8:Name -> Inst:tests.template_tests.filter_tests.timezone_utils.TimezoneTestCase
+18:21:Call -> Inst:_pydatetime.date
+18:21:Attribute -> BM:_pydatetime.date.today
+18:21:Name -> Class:_pydatetime.date

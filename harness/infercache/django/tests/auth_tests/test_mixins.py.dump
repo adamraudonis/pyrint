@@ -1,0 +1,495 @@
+16:22:Name -> Class:django.contrib.auth.mixins.UserPassesTestMixin
+21:23:Name -> Class:django.contrib.auth.mixins.UserPassesTestMixin
+26:24:Name -> Class:django.views.generic.base.View
+28:15:Call -> Inst:django.http.response.HttpResponse
+28:15:Name -> Class:django.http.response.HttpResponse
+31:21:Name -> Class:tests.auth_tests.test_mixins.AlwaysTrueMixin
+31:38:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+35:22:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseMixin
+35:40:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+40:4:Name -> Class:django.contrib.auth.mixins.LoginRequiredMixin
+40:24:Name -> Class:django.contrib.auth.mixins.PermissionRequiredMixin
+40:49:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+47:4:Name -> Class:django.contrib.auth.mixins.PermissionRequiredMixin
+47:29:Name -> Class:django.contrib.auth.mixins.LoginRequiredMixin
+47:49:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+53:23:Name -> Class:django.test.testcases.TestCase
+54:14:Call -> Inst:django.test.client.RequestFactory
+54:14:Name -> Class:django.test.client.RequestFactory
+57:15:Call -> ERR
+57:15:Attribute -> ERR
+57:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+57:15:Attribute -> Class:django.contrib.auth.models.User
+57:15:Name -> Module:django.contrib.auth.models
+58:16:Call -> ERR
+58:16:Attribute -> ERR
+58:16:Attribute -> Inst:django.contrib.auth.models.PermissionManager
+58:16:Attribute -> Class:django.contrib.auth.models.Permission
+58:16:Name -> Module:django.contrib.auth.models
+61:8:Call -> U
+61:8:Attribute -> U
+61:8:Attribute -> U
+61:8:Name -> U
+61:35:Name -> U
+62:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+62:18:Attribute -> BM:django.test.client.RequestFactory.get
+62:18:Attribute -> Inst:django.test.client.RequestFactory
+62:18:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+63:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+63:23:Name -> U
+65:15:Call -> Func:django.views.generic.base.View.as_view.view
+65:15:Attribute -> BM:django.views.generic.base.View.as_view
+65:15:Name -> Class:tests.auth_tests.test_mixins.StackedMixinsView1
+66:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+66:19:Name -> Func:django.views.generic.base.View.as_view.view
+66:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+67:8:Call -> Const:NoneType:None
+67:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+67:8:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+67:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+67:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+69:15:Call -> Func:django.views.generic.base.View.as_view.view
+69:15:Attribute -> BM:django.views.generic.base.View.as_view
+69:15:Name -> Class:tests.auth_tests.test_mixins.StackedMixinsView2
+70:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+70:19:Name -> Func:django.views.generic.base.View.as_view.view
+70:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+71:8:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+71:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+71:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+74:15:Call -> ERR
+74:15:Attribute -> ERR
+74:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+74:15:Attribute -> Class:django.contrib.auth.models.User
+74:15:Name -> Module:django.contrib.auth.models
+75:16:Call -> ERR
+75:16:Attribute -> ERR
+75:16:Attribute -> Inst:django.contrib.auth.models.PermissionManager
+75:16:Attribute -> Class:django.contrib.auth.models.Permission
+75:16:Name -> Module:django.contrib.auth.models
+76:8:Call -> U
+76:8:Attribute -> U
+76:8:Attribute -> U
+76:8:Name -> U
+76:35:Name -> U
+77:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+77:18:Attribute -> BM:django.test.client.RequestFactory.get
+77:18:Attribute -> Inst:django.test.client.RequestFactory
+77:18:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+78:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+78:23:Name -> U
+80:15:Call -> Func:django.views.generic.base.View.as_view.view
+80:15:Attribute -> BM:django.views.generic.base.View.as_view
+80:15:Name -> Class:tests.auth_tests.test_mixins.StackedMixinsView1
+81:13:Call -> Inst:unittest.case._AssertRaisesContext
+81:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+81:13:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+81:31:Name -> Class:django.core.exceptions.PermissionDenied
+82:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+82:12:Name -> Func:django.views.generic.base.View.as_view.view
+82:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+84:15:Call -> Func:django.views.generic.base.View.as_view.view
+84:15:Attribute -> BM:django.views.generic.base.View.as_view
+84:15:Name -> Class:tests.auth_tests.test_mixins.StackedMixinsView2
+85:13:Call -> Inst:unittest.case._AssertRaisesContext
+85:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+85:13:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+85:31:Name -> Class:django.core.exceptions.PermissionDenied
+86:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+86:12:Name -> Func:django.views.generic.base.View.as_view.view
+86:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+89:15:Call -> ERR
+89:15:Attribute -> ERR
+89:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+89:15:Attribute -> Class:django.contrib.auth.models.User
+89:15:Name -> Module:django.contrib.auth.models
+91:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+91:18:Attribute -> BM:django.test.client.RequestFactory.get
+91:18:Attribute -> Inst:django.test.client.RequestFactory
+91:18:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+92:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+92:23:Name -> U
+93:15:Call -> Func:django.views.generic.base.View.as_view.view
+93:15:Attribute -> BM:django.views.generic.base.View.as_view
+93:15:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+94:13:Call -> Inst:unittest.case._AssertRaisesContext
+94:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+94:13:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+94:31:Name -> Class:django.core.exceptions.PermissionDenied
+95:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+95:12:Name -> Func:django.views.generic.base.View.as_view.view
+95:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+97:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+97:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+97:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+98:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+98:19:Name -> Func:django.views.generic.base.View.as_view.view
+98:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+99:8:Call -> Const:NoneType:None
+99:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+99:8:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+99:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+99:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+100:8:Call -> Const:NoneType:None
+100:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+100:8:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+100:25:Attribute -> U
+100:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+103:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+106:15:Call -> Func:django.views.generic.base.View.as_view.view
+106:15:Attribute -> BM:django.views.generic.base.View.as_view
+106:15:Name -> Class:tests.auth_tests.test_mixins.AccessMixinTests.test_access_mixin_permission_denied_remote_login_url.AView
+107:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+107:18:Attribute -> BM:django.test.client.RequestFactory.get
+107:18:Attribute -> Inst:django.test.client.RequestFactory
+107:18:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+108:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+108:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+108:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+109:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+109:19:Name -> Func:django.views.generic.base.View.as_view.view
+109:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+110:8:Call -> Const:NoneType:None
+110:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+110:8:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+110:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+110:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+111:8:Call -> Const:NoneType:None
+111:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+111:8:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+112:12:Attribute -> U
+112:12:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+116:5:Call -> Inst:unittest.mock._patch
+116:5:Attribute -> Func:unittest.mock._patch_object
+116:5:Attribute -> Func:unittest.mock.patch
+116:5:Name -> Module:unittest.mock
+116:23:Attribute -> Class:django.contrib.auth.models.User
+116:23:Name -> Module:django.contrib.auth.models
+118:15:Call -> ERR
+118:15:Attribute -> ERR
+118:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+118:15:Attribute -> Class:django.contrib.auth.models.User
+118:15:Name -> Module:django.contrib.auth.models
+119:16:Call -> ERR
+119:16:Attribute -> ERR
+119:16:Attribute -> Inst:django.contrib.auth.models.PermissionManager
+119:16:Attribute -> Class:django.contrib.auth.models.Permission
+119:16:Name -> Module:django.contrib.auth.models
+122:8:Call -> U
+122:8:Attribute -> U
+122:8:Attribute -> U
+122:8:Name -> U
+122:35:Name -> U
+123:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+123:18:Attribute -> BM:django.test.client.RequestFactory.get
+123:18:Attribute -> Inst:django.test.client.RequestFactory
+123:18:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+124:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+124:23:Name -> U
+126:15:Call -> Func:django.views.generic.base.View.as_view.view
+126:15:Attribute -> BM:django.views.generic.base.View.as_view
+126:15:Name -> Class:tests.auth_tests.test_mixins.StackedMixinsView1
+127:13:Call -> Inst:unittest.case._AssertRaisesContext
+127:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+127:13:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+127:31:Name -> Class:django.core.exceptions.PermissionDenied
+128:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+128:12:Name -> Func:django.views.generic.base.View.as_view.view
+128:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+130:15:Call -> Func:django.views.generic.base.View.as_view.view
+130:15:Attribute -> BM:django.views.generic.base.View.as_view
+130:15:Name -> Class:tests.auth_tests.test_mixins.StackedMixinsView2
+131:13:Call -> Inst:unittest.case._AssertRaisesContext
+131:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+131:13:Name -> Inst:tests.auth_tests.test_mixins.AccessMixinTests
+131:31:Name -> Class:django.core.exceptions.PermissionDenied
+132:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+132:12:Name -> Func:django.views.generic.base.View.as_view.view
+132:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+135:26:Name -> Class:django.test.testcases.SimpleTestCase
+136:14:Call -> Inst:django.test.client.RequestFactory
+136:14:Name -> Class:django.test.client.RequestFactory
+139:15:Name -> Const:NoneType:None | U
+140:19:Call -> Func:django.views.generic.base.View.as_view.view
+140:19:Attribute -> BM:django.views.generic.base.View.as_view
+140:19:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+141:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+141:18:Attribute -> BM:django.test.client.RequestFactory.get
+141:18:Attribute -> Inst:django.test.client.RequestFactory
+141:18:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+142:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+142:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+142:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+143:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+143:19:Name -> Const:NoneType:None | U | Func:django.views.generic.base.View.as_view.view
+143:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+144:8:Call -> Const:NoneType:None
+144:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+144:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+144:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+144:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+145:8:Call -> Const:NoneType:None
+145:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+145:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+145:25:Attribute -> U
+145:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+145:39:Name -> Const:str:'/accounts/login/?next=/rand' | U
+148:8:Call -> Const:NoneType:None
+148:8:Attribute -> BM:tests.auth_tests.test_mixins.UserPassesTestTests._test_redirect
+148:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+151:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+154:8:Call -> Const:NoneType:None
+154:8:Attribute -> BM:tests.auth_tests.test_mixins.UserPassesTestTests._test_redirect
+154:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+154:28:Call -> Func:django.views.generic.base.View.as_view.view
+154:28:Attribute -> BM:django.views.generic.base.View.as_view
+154:28:Name -> Class:tests.auth_tests.test_mixins.UserPassesTestTests.test_custom_redirect_url.AView
+157:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+160:8:Call -> Const:NoneType:None
+160:8:Attribute -> BM:tests.auth_tests.test_mixins.UserPassesTestTests._test_redirect
+160:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+160:28:Call -> Func:django.views.generic.base.View.as_view.view
+160:28:Attribute -> BM:django.views.generic.base.View.as_view
+160:28:Name -> Class:tests.auth_tests.test_mixins.UserPassesTestTests.test_custom_redirect_parameter.AView
+163:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+166:8:Call -> Const:NoneType:None
+166:8:Attribute -> BM:tests.auth_tests.test_mixins.UserPassesTestTests._test_redirect
+166:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+166:28:Call -> Func:django.views.generic.base.View.as_view.view
+166:28:Attribute -> BM:django.views.generic.base.View.as_view
+166:28:Name -> Class:tests.auth_tests.test_mixins.UserPassesTestTests.test_no_redirect_parameter.AView
+169:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+172:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+172:18:Attribute -> BM:django.test.client.RequestFactory.get
+172:18:Attribute -> Inst:django.test.client.RequestFactory
+172:18:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+173:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+173:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+173:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+174:13:Call -> Inst:unittest.case._AssertRaisesContext
+174:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+174:13:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+174:31:Name -> Class:django.core.exceptions.PermissionDenied
+175:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+175:12:Call -> Func:django.views.generic.base.View.as_view.view
+175:12:Attribute -> BM:django.views.generic.base.View.as_view
+175:12:Name -> Class:tests.auth_tests.test_mixins.UserPassesTestTests.test_raise_exception.AView
+175:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+180:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+182:40:Name -> Const:str:"You don't have access here"
+184:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+184:18:Attribute -> BM:django.test.client.RequestFactory.get
+184:18:Attribute -> Inst:django.test.client.RequestFactory
+184:18:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+185:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+185:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+185:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+186:15:Call -> Func:django.views.generic.base.View.as_view.view
+186:15:Attribute -> BM:django.views.generic.base.View.as_view
+186:15:Name -> Class:tests.auth_tests.test_mixins.UserPassesTestTests.test_raise_exception_custom_message.AView
+187:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+187:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+187:13:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+187:38:Name -> Class:django.core.exceptions.PermissionDenied
+187:56:Name -> Const:str:"You don't have access here"
+188:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+188:12:Name -> Func:django.views.generic.base.View.as_view.view
+188:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+193:20:Name -> Class:tests.auth_tests.test_mixins.AlwaysFalseView
+197:23:Name -> Const:str:"You don't have access here"
+199:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+199:18:Attribute -> BM:django.test.client.RequestFactory.get
+199:18:Attribute -> Inst:django.test.client.RequestFactory
+199:18:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+200:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+200:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+200:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+201:15:Call -> Func:django.views.generic.base.View.as_view.view
+201:15:Attribute -> BM:django.views.generic.base.View.as_view
+201:15:Name -> Class:tests.auth_tests.test_mixins.UserPassesTestTests.test_raise_exception_custom_message_function.AView
+202:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+202:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+202:13:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+202:38:Name -> Class:django.core.exceptions.PermissionDenied
+202:56:Name -> Const:str:"You don't have access here"
+203:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+203:12:Name -> Func:django.views.generic.base.View.as_view.view
+203:17:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+206:15:Call -> Func:django.views.generic.base.View.as_view.view
+206:15:Attribute -> BM:django.views.generic.base.View.as_view
+206:15:Name -> Class:tests.auth_tests.test_mixins.AlwaysTrueView
+207:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+207:18:Attribute -> BM:django.test.client.RequestFactory.get
+207:18:Attribute -> Inst:django.test.client.RequestFactory
+207:18:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+208:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+208:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+208:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+209:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+209:19:Name -> Func:django.views.generic.base.View.as_view.view
+209:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+210:8:Call -> Const:NoneType:None
+210:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+210:8:Name -> Inst:tests.auth_tests.test_mixins.UserPassesTestTests
+210:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+210:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+213:30:Name -> Class:django.test.testcases.TestCase
+214:14:Call -> Inst:django.test.client.RequestFactory
+214:14:Name -> Class:django.test.client.RequestFactory
+216:5:Name -> Class:builtins.classmethod
+218:8:Name -> Class:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+218:19:Call -> ERR
+218:19:Attribute -> ERR
+218:19:Attribute -> Inst:django.contrib.auth.models.UserManager
+218:19:Attribute -> Class:django.contrib.auth.models.User
+218:19:Name -> Module:django.contrib.auth.models
+226:20:Name -> Class:django.contrib.auth.mixins.LoginRequiredMixin
+226:40:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+229:15:Call -> Func:django.views.generic.base.View.as_view.view
+229:15:Attribute -> BM:django.views.generic.base.View.as_view
+229:15:Name -> Class:tests.auth_tests.test_mixins.LoginRequiredMixinTests.test_login_required.AView
+231:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+231:18:Attribute -> BM:django.test.client.RequestFactory.get
+231:18:Attribute -> Inst:django.test.client.RequestFactory
+231:18:Name -> Inst:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+232:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+232:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+232:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+233:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+233:19:Name -> Func:django.views.generic.base.View.as_view.view
+233:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+234:8:Call -> Const:NoneType:None
+234:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+234:8:Name -> Inst:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+234:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+234:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+235:8:Call -> Const:NoneType:None
+235:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+235:8:Name -> Inst:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+235:56:Attribute -> U
+235:56:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+236:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+236:18:Attribute -> BM:django.test.client.RequestFactory.get
+236:18:Attribute -> Inst:django.test.client.RequestFactory
+236:18:Name -> Inst:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+237:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+237:23:Attribute -> U
+237:23:Name -> Inst:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+238:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+238:19:Name -> Func:django.views.generic.base.View.as_view.view
+238:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+239:8:Call -> Const:NoneType:None
+239:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+239:8:Name -> Inst:tests.auth_tests.test_mixins.LoginRequiredMixinTests
+239:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+239:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+242:36:Name -> Class:django.test.testcases.TestCase
+243:14:Call -> Inst:django.test.client.RequestFactory
+243:14:Name -> Class:django.test.client.RequestFactory
+245:5:Name -> Class:builtins.classmethod
+247:8:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+247:19:Call -> ERR
+247:19:Attribute -> ERR
+247:19:Attribute -> Inst:django.contrib.auth.models.UserManager
+247:19:Attribute -> Class:django.contrib.auth.models.User
+247:19:Name -> Module:django.contrib.auth.models
+248:16:Call -> ERR
+248:16:Attribute -> ERR
+248:16:Attribute -> Inst:django.contrib.auth.models.PermissionManager
+248:16:Attribute -> Class:django.contrib.auth.models.Permission
+248:16:Name -> Module:django.contrib.auth.models
+251:8:Call -> U
+251:8:Attribute -> U
+251:8:Attribute -> U
+251:8:Attribute -> U
+251:8:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+251:39:Name -> U
+254:20:Name -> Class:django.contrib.auth.mixins.PermissionRequiredMixin
+254:45:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+260:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+260:18:Attribute -> BM:django.test.client.RequestFactory.get
+260:18:Attribute -> Inst:django.test.client.RequestFactory
+260:18:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+261:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+261:23:Attribute -> U
+261:23:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+262:15:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+262:15:Call -> Func:django.views.generic.base.View.as_view.view
+262:15:Attribute -> BM:django.views.generic.base.View.as_view
+262:15:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests.test_many_permissions_pass.AView
+262:31:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+263:8:Call -> Const:NoneType:None
+263:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+263:8:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+263:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+263:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+266:20:Name -> Class:django.contrib.auth.mixins.PermissionRequiredMixin
+266:45:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+269:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+269:18:Attribute -> BM:django.test.client.RequestFactory.get
+269:18:Attribute -> Inst:django.test.client.RequestFactory
+269:18:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+270:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+270:23:Attribute -> U
+270:23:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+271:15:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+271:15:Call -> Func:django.views.generic.base.View.as_view.view
+271:15:Attribute -> BM:django.views.generic.base.View.as_view
+271:15:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests.test_single_permission_pass.AView
+271:31:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+272:8:Call -> Const:NoneType:None
+272:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+272:8:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+272:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+272:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+275:20:Name -> Class:django.contrib.auth.mixins.PermissionRequiredMixin
+275:45:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+283:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+283:18:Attribute -> BM:django.test.client.RequestFactory.get
+283:18:Attribute -> Inst:django.test.client.RequestFactory
+283:18:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+284:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+284:23:Attribute -> U
+284:23:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+285:13:Call -> Inst:unittest.case._AssertRaisesContext
+285:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+285:13:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+285:31:Name -> Class:django.core.exceptions.PermissionDenied
+286:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+286:12:Call -> Func:django.views.generic.base.View.as_view.view
+286:12:Attribute -> BM:django.views.generic.base.View.as_view
+286:12:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests.test_permissioned_denied_redirect.AView
+286:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+288:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+288:23:Call -> Inst:django.contrib.auth.models.AnonymousUser
+288:23:Name -> Class:django.contrib.auth.models.AnonymousUser
+289:15:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+289:15:Call -> Func:django.views.generic.base.View.as_view.view
+289:15:Attribute -> BM:django.views.generic.base.View.as_view
+289:15:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests.test_permissioned_denied_redirect.AView
+289:31:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+290:8:Call -> Const:NoneType:None
+290:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+290:8:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+290:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+290:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+293:20:Name -> Class:django.contrib.auth.mixins.PermissionRequiredMixin
+293:45:Name -> Class:tests.auth_tests.test_mixins.EmptyResponseView
+301:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+301:18:Attribute -> BM:django.test.client.RequestFactory.get
+301:18:Attribute -> Inst:django.test.client.RequestFactory
+301:18:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+302:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+302:23:Attribute -> U
+302:23:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+303:13:Call -> Inst:unittest.case._AssertRaisesContext
+303:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+303:13:Name -> Inst:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests
+303:31:Name -> Class:django.core.exceptions.PermissionDenied
+304:12:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+304:12:Call -> Func:django.views.generic.base.View.as_view.view
+304:12:Attribute -> BM:django.views.generic.base.View.as_view
+304:12:Name -> Class:tests.auth_tests.test_mixins.PermissionsRequiredMixinTests.test_permissioned_denied_exception_raised.AView
+304:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest

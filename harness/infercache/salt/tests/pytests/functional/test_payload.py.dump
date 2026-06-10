@@ -1,0 +1,216 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'tests.pytests.functional.test_payload' | Const:str:'__main__'
+15:1:Attribute -> U
+15:1:Name -> U
+22:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+22:30:Call -> Inst:threading.Event
+22:30:Attribute -> Class:threading.Event
+22:30:Name -> Module:threading
+23:8:Call -> Const:NoneType:None
+23:8:Attribute -> BM:threading.Event.set
+23:8:Attribute -> Inst:threading.Event
+23:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+24:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+24:20:Name -> Const:int:8845 | U
+25:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+25:22:Call -> Inst:threading.Thread
+25:22:Attribute -> Class:threading.Thread
+25:22:Name -> Module:threading
+26:19:Attribute -> Func:tests.pytests.functional.test_payload.EchoServer.echo_server
+26:19:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+26:43:Name -> Const:int:8845 | U
+26:49:Attribute -> Inst:threading.Event
+26:49:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+30:8:Call -> Const:NoneType:None
+30:8:Attribute -> BM:threading.Thread.start
+30:8:Attribute -> Inst:threading.Thread
+30:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+31:8:Call -> ERR
+31:8:Attribute -> Func:time.sleep
+31:8:Name -> Module:time
+34:8:Call -> Const:NoneType:None
+34:8:Attribute -> BM:threading.Event.clear
+34:8:Attribute -> Inst:threading.Event
+34:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:threading.Thread.join
+35:8:Attribute -> Inst:threading.Thread
+35:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+37:5:Name -> Class:builtins.staticmethod
+44:18:Call -> U
+44:18:Attribute -> U
+44:18:Name -> U
+45:17:Call -> U
+45:17:Attribute -> U
+45:17:Name -> U
+45:32:Attribute -> U
+45:32:Name -> U
+46:8:Call -> U
+46:8:Attribute -> U
+46:8:Name -> U
+46:31:Name -> U
+47:14:Call -> U
+47:14:Attribute -> U
+47:14:Name -> U
+50:26:Call -> U
+50:26:Attribute -> U
+50:26:Name -> U
+50:38:Attribute -> U
+50:38:Name -> U
+51:35:Call -> U | Dict:0 | List:0
+51:35:Attribute -> Func:salt.payload.loads
+51:35:Attribute -> Module:salt.payload
+51:35:Name -> Module:salt
+51:54:Name -> U
+52:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+52:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+52:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+52:61:Name -> U | Dict:0 | List:0
+53:19:Call -> ERR
+53:19:Name -> Func:builtins.isinstance
+53:30:Name -> U | Dict:0 | List:0
+53:56:Name -> Class:builtins.dict
+53:66:Call -> U
+53:66:Attribute -> U
+53:66:Name -> U | Dict:0 | List:0
+56:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+56:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+56:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+58:24:Name -> U | Dict:0 | List:0
+60:20:Call -> ERR
+60:20:Attribute -> Func:time.sleep
+60:20:Name -> Module:time
+60:31:Name -> U | Dict:0 | List:0
+61:16:Call -> U
+61:16:Attribute -> U
+61:16:Name -> U
+61:28:Name -> U
+62:19:Attribute -> U
+62:19:Name -> U
+63:19:Attribute -> U
+63:19:Name -> U
+63:32:Attribute -> Const:int:35
+63:32:Name -> Module:errno
+68:1:Attribute -> U
+68:1:Name -> U
+70:13:Call -> Inst:tests.pytests.functional.test_payload.EchoServer
+70:13:Name -> Class:tests.pytests.functional.test_payload.EchoServer
+71:4:Call -> Const:NoneType:None
+71:4:Attribute -> BM:tests.pytests.functional.test_payload.EchoServer.start
+71:4:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+73:14:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+75:8:Call -> Const:NoneType:None
+75:8:Attribute -> BM:tests.pytests.functional.test_payload.EchoServer.stop
+75:8:Name -> Inst:tests.pytests.functional.test_payload.EchoServer
+78:1:Attribute -> U
+78:1:Name -> U
+80:10:Call -> Inst:salt.payload.SREQ
+80:10:Attribute -> Class:salt.payload.SREQ
+80:10:Attribute -> Module:salt.payload
+80:10:Name -> Module:salt
+80:47:Name -> U
+83:1:Attribute -> U
+83:1:Attribute -> U
+83:1:Name -> U
+89:11:Call -> U
+89:11:Attribute -> U
+89:11:Name -> U
+92:11:Call -> U
+92:11:Attribute -> U
+92:11:Name -> U
+95:1:Attribute -> U
+95:1:Attribute -> U
+95:1:Name -> U
+97:11:Call -> U
+97:11:Attribute -> U
+97:11:Name -> U
+100:1:Call -> U
+100:1:Attribute -> U
+100:1:Attribute -> U
+100:1:Name -> U
+106:12:Call -> ERR
+106:12:Attribute -> Func:time.time
+106:12:Name -> Module:time
+110:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+110:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+110:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+112:8:Call -> U
+112:8:Attribute -> U
+112:8:Name -> U
+113:11:Attribute -> Class:salt.exceptions.SaltReqTimeoutError
+113:11:Attribute -> Module:salt.exceptions
+113:11:Name -> Module:salt
+115:11:Call -> ERR
+115:11:Attribute -> Func:time.time
+115:11:Name -> Module:time
+115:25:Name -> U
+118:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+118:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+118:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+119:12:Call -> ERR
+119:12:Attribute -> Func:time.time
+119:12:Name -> Module:time
+120:9:Call -> U
+120:9:Attribute -> U
+120:9:Name -> U
+120:23:Attribute -> Class:salt.exceptions.SaltReqTimeoutError
+120:23:Attribute -> Module:salt.exceptions
+120:23:Name -> Module:salt
+121:8:Call -> U
+121:8:Attribute -> U
+121:8:Name -> U
+122:11:Call -> ERR
+122:11:Attribute -> Func:time.time
+122:11:Name -> Module:time
+122:25:Name -> U
+125:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+125:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+125:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+126:12:Call -> ERR
+126:12:Attribute -> Func:time.time
+126:12:Name -> Module:time
+127:9:Call -> U
+127:9:Attribute -> U
+127:9:Name -> U
+127:23:Attribute -> Class:salt.exceptions.SaltReqTimeoutError
+127:23:Attribute -> Module:salt.exceptions
+127:23:Name -> Module:salt
+128:8:Call -> U
+128:8:Attribute -> U
+128:8:Name -> U
+129:11:Call -> ERR
+129:11:Attribute -> Func:time.time
+129:11:Name -> Module:time
+129:25:Name -> U
+132:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+132:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+132:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+133:11:Call -> U
+133:11:Attribute -> U
+133:11:Name -> U
+136:1:Attribute -> U
+136:1:Attribute -> U
+136:1:Name -> U
+143:11:Call -> U
+143:11:Attribute -> U
+143:11:Name -> U
+146:4:Call -> U
+146:4:Attribute -> U
+146:4:Name -> U
+149:1:Attribute -> U
+149:1:Attribute -> U
+149:1:Name -> U
+153:11:Call -> U
+153:11:Attribute -> U
+153:11:Name -> U
+154:11:Call -> U
+154:11:Name -> Func:builtins.hasattr
+154:19:Name -> U
+155:4:Call -> U
+155:4:Attribute -> U
+155:4:Name -> U
+156:11:Call -> U
+156:11:Name -> Func:builtins.hasattr
+156:19:Name -> U

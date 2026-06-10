@@ -1,0 +1,389 @@
+61:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+61:10:Attribute -> Func:logging.getLogger
+61:10:Name -> Module:logging
+61:28:Name -> Const:str:'homeassistant.components.squeezebox' | Const:str:'__main__'
+63:16:Call -> Func:homeassistant.helpers.config_validation._no_yaml_config_schema.validator
+63:16:Attribute -> Func:homeassistant.helpers.config_validation.config_entry_only_config_schema
+63:16:Name -> Module:homeassistant.helpers.config_validation
+63:51:Name -> Const:str:'squeezebox'
+65:4:Attribute -> Inst:homeassistant.generated.entity_platforms.EntityPlatforms.BINARY_SENSOR
+65:4:Name -> Class:homeassistant.generated.entity_platforms.EntityPlatforms
+66:4:Attribute -> Inst:homeassistant.generated.entity_platforms.EntityPlatforms.BUTTON
+66:4:Name -> Class:homeassistant.generated.entity_platforms.EntityPlatforms
+67:4:Attribute -> Inst:homeassistant.generated.entity_platforms.EntityPlatforms.MEDIA_PLAYER
+67:4:Name -> Class:homeassistant.generated.entity_platforms.EntityPlatforms
+68:4:Attribute -> Inst:homeassistant.generated.entity_platforms.EntityPlatforms.SENSOR
+68:4:Name -> Class:homeassistant.generated.entity_platforms.EntityPlatforms
+69:4:Attribute -> Inst:homeassistant.generated.entity_platforms.EntityPlatforms.SWITCH
+69:4:Name -> Class:homeassistant.generated.entity_platforms.EntityPlatforms
+70:4:Attribute -> Inst:homeassistant.generated.entity_platforms.EntityPlatforms.UPDATE
+70:4:Name -> Class:homeassistant.generated.entity_platforms.EntityPlatforms
+73:22:Name -> Class:homeassistant.util.hass_dict.HassKey
+73:30:Attribute -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+73:30:Name -> Module:asyncio
+73:46:Call -> Inst:homeassistant.util.hass_dict.HassKey
+73:46:Name -> Class:homeassistant.util.hass_dict.HassKey
+73:54:Name -> Const:str:'squeezebox'
+76:1:Name -> Func:dataclasses.dataclass
+80:17:Name -> Class:homeassistant.components.squeezebox.coordinator.LMSStatusDataUpdateCoordinator
+81:12:Name -> U
+82:25:Name -> Class:builtins.dict
+82:30:Name -> Class:builtins.str
+82:35:Name -> Class:homeassistant.components.squeezebox.coordinator.SqueezeBoxPlayerUpdateCoordinator
+82:72:Call -> Dict:0
+82:72:Name -> Func:dataclasses.field
+83:24:Name -> Class:builtins.dict
+85:22:Name -> Class:builtins.set
+85:26:Name -> Class:builtins.str
+85:33:Call -> Set:0
+85:33:Name -> Func:dataclasses.field
+85:55:Name -> Class:builtins.set
+88:29:Name -> U
+88:41:Name -> Class:homeassistant.components.squeezebox.SqueezeboxData
+91:28:Name -> U
+91:51:Name -> Class:builtins.dict
+91:66:Name -> Class:builtins.bool
+93:4:Call -> Const:NoneType:None
+93:4:Name -> Func:homeassistant.components.squeezebox.services.async_setup_services
+93:25:Name -> U
+97:34:Name -> U
+97:56:Name -> U
+97:82:Name -> Class:builtins.bool
+99:13:Attribute -> U
+99:13:Name -> U
+100:14:Call -> U
+100:14:Name -> Func:homeassistant.helpers.aiohttp_client.async_get_clientsession
+100:38:Name -> U
+101:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+101:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+101:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+102:53:Name -> U
+102:60:Name -> Const:str:'host'
+102:72:Attribute -> U
+102:72:Name -> U
+105:15:Call -> U
+105:15:Attribute -> U
+105:15:Name -> U
+105:26:Name -> Const:str:'username'
+106:15:Call -> U
+106:15:Attribute -> U
+106:15:Name -> U
+106:26:Name -> Const:str:'password'
+107:12:Call -> U
+107:12:Attribute -> U
+107:12:Name -> U
+107:23:Name -> Const:str:'https'
+108:11:Name -> U
+108:18:Name -> Const:str:'host'
+109:11:Name -> U
+109:18:Name -> Const:str:'port'
+111:10:Call -> U
+111:10:Name -> U
+111:17:Name -> U
+111:26:Name -> U
+111:32:Name -> U
+111:38:Name -> U
+111:48:Name -> U
+111:64:Name -> U
+112:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+112:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+112:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+112:39:Name -> U
+115:19:Call -> Inst:asyncio.timeouts.Timeout
+115:19:Name -> Func:asyncio.timeouts.timeout
+115:27:Name -> Const:int:10
+116:27:Call -> U
+116:27:Attribute -> U
+116:27:Name -> U
+119:11:Name -> Class:builtins.TimeoutError
+120:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+120:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+120:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+120:60:Name -> U
+120:66:Name -> ExcInst:builtins.TimeoutError
+121:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryNotReady
+121:14:Name -> Class:homeassistant.exceptions.ConfigEntryNotReady
+122:31:Name -> Const:str:'squeezebox'
+125:24:Call -> Const:str:''
+125:24:Name -> Class:builtins.str
+125:28:Name -> U
+127:15:Name -> ExcInst:builtins.TimeoutError
+129:11:Name -> U
+133:11:Attribute -> U
+133:11:Name -> U
+133:30:Attribute -> Inst:http.HTTPStatus.UNAUTHORIZED
+133:30:Name -> Class:http.HTTPStatus
+134:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+134:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+134:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+134:78:Name -> U
+135:18:Call -> ExcInst:homeassistant.exceptions.ConfigEntryAuthFailed
+135:18:Name -> Class:homeassistant.exceptions.ConfigEntryAuthFailed
+136:35:Name -> Const:str:'squeezebox'
+139:28:Call -> Const:str:''
+139:28:Name -> Class:builtins.str
+139:32:Name -> U
+145:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+145:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+145:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+147:12:Name -> U
+148:12:Attribute -> U
+148:12:Name -> U
+150:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryNotReady
+150:14:Name -> Class:homeassistant.exceptions.ConfigEntryNotReady
+151:31:Name -> Const:str:'squeezebox'
+154:24:Call -> Const:str:''
+154:24:Name -> Class:builtins.str
+154:28:Name -> U
+155:31:Call -> Const:str:''
+155:31:Name -> Class:builtins.str
+155:35:Attribute -> U
+155:35:Name -> U
+160:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+160:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+160:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+160:48:Name -> U
+163:7:Name -> Const:str:'uuid'
+163:32:Name -> U
+164:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+164:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+164:61:Name -> U
+166:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryError
+166:14:Name -> Class:homeassistant.exceptions.ConfigEntryError
+167:31:Name -> Const:str:'squeezebox'
+170:24:Call -> Const:str:''
+170:24:Name -> Class:builtins.str
+170:28:Name -> U
+174:4:Name -> U
+174:15:Name -> U
+174:22:Name -> Const:str:'uuid'
+175:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+175:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+175:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+175:51:Attribute -> U
+175:51:Name -> U
+175:61:Name -> U
+175:67:Attribute -> U
+175:67:Name -> U
+176:4:Name -> U
+177:9:Name -> Const:str:'libraryname'
+177:37:Name -> U
+177:48:Name -> U
+177:55:Name -> Const:str:'libraryname'
+178:12:Name -> U
+178:19:Name -> Const:str:'libraryname'
+179:9:Name -> U
+180:15:Name -> Const:str:'version'
+180:39:Name -> U
+180:50:Name -> U
+180:57:Name -> Const:str:'version'
+184:11:Name -> Const:str:'mac'
+184:31:Name -> U
+183:10:Name -> U
+183:34:Call -> U
+183:34:Name -> U
+183:45:Name -> U
+183:52:Name -> Const:str:'mac'
+188:22:Call -> U
+188:22:Attribute -> U
+188:22:Name -> U
+188:35:Name -> U
+189:13:Call -> U
+189:13:Attribute -> U
+189:13:Name -> U
+190:24:Attribute -> U
+190:24:Name -> U
+191:22:Name -> Const:str:'squeezebox'
+191:30:Attribute -> U
+191:30:Name -> U
+192:13:Attribute -> U
+192:13:Name -> U
+193:21:Name -> Const:str:'https://lyrion.org/'
+194:14:Name -> Const:str:'Lyrion Music Server'
+195:17:Name -> Const:str:'LMS'
+196:19:Name -> U
+197:19:Attribute -> U
+197:19:Name -> U
+198:20:Name -> Set:1 | Const:NoneType:None
+200:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+200:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+200:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+200:35:Name -> U
+202:25:Call -> Inst:homeassistant.components.squeezebox.coordinator.LMSStatusDataUpdateCoordinator
+202:25:Name -> Class:homeassistant.components.squeezebox.coordinator.LMSStatusDataUpdateCoordinator
+202:56:Name -> U
+202:62:Name -> U
+202:69:Name -> U
+204:4:Name -> U
+204:25:Call -> Inst:homeassistant.components.squeezebox.SqueezeboxData
+204:25:Name -> Class:homeassistant.components.squeezebox.SqueezeboxData
+204:52:Name -> Inst:homeassistant.components.squeezebox.coordinator.LMSStatusDataUpdateCoordinator
+204:79:Name -> U
+206:37:Name -> Class:_pydatetime.datetime
+209:45:Name -> U
+211:15:Attribute -> U
+211:15:Name -> U
+211:35:Attribute -> U
+211:35:Attribute -> U
+211:35:Name -> U
+212:22:Call -> U
+212:22:Attribute -> U
+212:22:Name -> U
+213:16:Call -> U
+213:16:Name -> U
+214:20:Name -> U
+215:20:Name -> Const:str:'squeezebox_player_rediscovered'
+215:49:Attribute -> U
+215:49:Name -> U
+216:20:Attribute -> U
+216:20:Name -> U
+217:20:Attribute -> U
+217:20:Name -> U
+220:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+220:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+220:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+220:55:Name -> U
+221:37:Call -> Inst:homeassistant.components.squeezebox.coordinator.SqueezeBoxPlayerUpdateCoordinator
+221:37:Name -> Class:homeassistant.components.squeezebox.coordinator.SqueezeBoxPlayerUpdateCoordinator
+222:20:Name -> U
+222:26:Name -> U
+222:33:Name -> U
+222:41:Attribute -> U
+222:41:Name -> U
+224:22:Call -> ERR
+224:22:Attribute -> ERR
+224:22:Name -> Inst:homeassistant.components.squeezebox.coordinator.SqueezeBoxPlayerUpdateCoordinator
+225:16:Attribute -> U
+225:16:Attribute -> U
+225:16:Name -> U
+225:55:Attribute -> U
+225:55:Name -> U
+226:20:Name -> Inst:homeassistant.components.squeezebox.coordinator.SqueezeBoxPlayerUpdateCoordinator
+228:16:Call -> U
+228:16:Attribute -> U
+228:16:Attribute -> U
+228:16:Attribute -> U
+228:16:Name -> U
+228:56:Attribute -> U
+228:56:Name -> U
+229:16:Call -> U
+229:16:Name -> U
+230:20:Name -> U
+230:26:Name -> Const:str:'squeezebox_player_discovered'
+230:53:Attribute -> U
+230:53:Name -> U
+230:69:Name -> Inst:homeassistant.components.squeezebox.coordinator.SqueezeBoxPlayerUpdateCoordinator
+233:28:Call -> U
+233:28:Attribute -> U
+233:28:Name -> U
+234:26:Name -> U
+235:16:Call -> U
+235:16:Attribute -> U
+235:16:Name -> U
+235:39:Call -> Const:NoneType:None
+235:39:Name -> Func:homeassistant.components.squeezebox.async_setup_entry._player_discovery._discovered_player
+235:58:Name -> U
+237:8:Call -> U
+237:8:Attribute -> U
+237:8:Name -> U
+238:12:Call -> U
+238:12:Name -> Func:homeassistant.helpers.event.async_call_later
+238:29:Name -> U
+238:35:Name -> Const:int:60
+238:55:Name -> Func:homeassistant.components.squeezebox.async_setup_entry._player_discovery
+241:10:Call -> ERR
+241:10:Attribute -> ERR
+241:10:Name -> Inst:homeassistant.components.squeezebox.coordinator.LMSStatusDataUpdateCoordinator
+242:10:Call -> U
+242:10:Attribute -> U
+242:10:Attribute -> U
+242:10:Name -> U
+242:57:Name -> U
+242:64:Name -> List:6
+244:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+244:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+244:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+245:58:Attribute -> U
+245:58:Name -> U
+245:69:Name -> Const:str:'host'
+247:4:Call -> U
+247:4:Attribute -> U
+247:4:Name -> U
+248:8:Name -> U
+248:14:Call -> Const:NoneType:None
+248:14:Name -> Func:homeassistant.components.squeezebox.async_setup_entry._player_discovery
+254:35:Name -> U
+254:57:Name -> U
+254:83:Name -> Class:builtins.bool
+257:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+257:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+257:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+259:8:Attribute -> U
+259:8:Attribute -> U
+259:8:Attribute -> U
+259:8:Name -> U
+260:8:Attribute -> U
+260:8:Name -> U
+264:22:Call -> U
+264:22:Attribute -> U
+264:22:Attribute -> U
+264:22:Name -> U
+264:56:Name -> Const:str:'squeezebox'
+265:7:Call -> ERR
+265:7:Name -> Func:builtins.len
+265:11:Name -> U
+265:37:Name -> U
+265:59:Name -> U
+266:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+266:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+266:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+267:8:Call -> U
+267:8:Attribute -> U
+267:8:Attribute -> U
+267:8:Name -> U
+267:18:Name -> Inst:homeassistant.util.hass_dict.HassKey
+268:8:Call -> U
+268:8:Attribute -> U
+268:8:Attribute -> U
+268:8:Name -> U
+268:22:Name -> Inst:homeassistant.util.hass_dict.HassKey
+270:17:Call -> U
+270:17:Attribute -> U
+270:17:Attribute -> U
+270:17:Name -> U
+270:60:Name -> U
+270:67:Name -> List:6
+274:10:Name -> U
+275:18:Name -> U
+276:18:Name -> U
+277:5:Name -> Class:builtins.bool
+279:7:Attribute -> U
+279:7:Name -> U
+279:34:Attribute -> U
+279:34:Name -> U
+280:14:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+280:14:Name -> Class:homeassistant.exceptions.HomeAssistantError
+281:50:Attribute -> U
+281:50:Name -> U
+285:16:Call -> ERR
+285:16:Name -> Func:builtins.next
+286:9:Name -> U
+286:32:Attribute -> U
+286:32:Name -> U
+286:60:Name -> U
+286:70:Name -> Const:str:'squeezebox'
+289:11:Name -> U
+292:18:Call -> U
+292:18:Attribute -> U
+292:18:Attribute -> U
+292:18:Attribute -> U
+292:18:Name -> U
+292:68:Name -> U
+294:7:Name -> U
+297:7:Attribute -> U
+297:7:Name -> U
+298:14:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+298:14:Name -> Class:homeassistant.exceptions.HomeAssistantError
+299:48:Attribute -> U
+299:48:Name -> U

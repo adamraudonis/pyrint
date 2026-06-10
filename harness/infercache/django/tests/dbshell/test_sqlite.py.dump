@@ -1,0 +1,47 @@
+11:35:Name -> Class:django.test.testcases.SimpleTestCase
+13:11:Name -> Const:NoneType:None | U
+15:15:Call -> Tuple:2
+15:15:Attribute -> BM:django.db.backends.sqlite3.client.DatabaseClient.settings_to_cmd_args_env
+15:15:Name -> Class:django.db.backends.sqlite3.client.DatabaseClient
+15:55:Name -> U
+15:70:Name -> Const:NoneType:None | U | List:0
+18:8:Call -> Const:NoneType:None
+18:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+18:8:Name -> Inst:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase
+19:12:Call -> Tuple:2
+19:12:Attribute -> BM:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase.settings_to_cmd_args_env
+19:12:Name -> Inst:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase
+19:51:Call -> Inst:pathlib.Path
+19:51:Name -> Class:pathlib.Path
+20:25:Call -> Inst:pathlib.Path
+20:25:Name -> Class:pathlib.Path
+24:8:Call -> Const:NoneType:None
+24:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+24:8:Name -> Inst:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase
+25:12:Call -> Tuple:2
+25:12:Attribute -> BM:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase.settings_to_cmd_args_env
+25:12:Name -> Inst:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase
+29:5:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+29:5:Name -> Func:unittest.case.skipUnless
+29:16:Attribute -> U
+29:16:Name -> Inst:django.utils.connection.ConnectionProxy
+33:20:Call -> Inst:pathlib.Path
+33:20:Name -> Class:pathlib.Path
+35:19:Call -> Tuple:2
+35:19:Attribute -> BM:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase.settings_to_cmd_args_env
+35:19:Name -> Inst:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase
+35:49:Name -> Dict:2
+39:12:Call -> Inst:unittest.mock._patch
+39:12:Attribute -> Func:unittest.mock.patch
+39:12:Name -> Module:unittest.mock
+41:28:Call -> ExcInst:subprocess.CalledProcessError
+41:28:Attribute -> Class:subprocess.CalledProcessError
+41:28:Name -> Module:subprocess
+41:76:Name -> U
+43:12:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+43:12:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+43:12:Name -> Inst:tests.dbshell.test_sqlite.SqliteDbshellCommandTestCase
+43:37:Name -> Class:django.core.management.base.CommandError
+43:51:Name -> Const:str:'"sqlite3 test.db.sqlite3" returned non-
+45:12:Call -> U
+45:12:Name -> Func:django.core.management.call_command

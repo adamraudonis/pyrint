@@ -1,0 +1,244 @@
+11:31:Name -> Class:builtins.UnicodeDecodeError
+14:12:Call -> ERR
+14:12:Attribute -> BM:builtins.UnicodeDecodeError.__str__ | BM:builtins.UnicodeError.__str__ | BM:builtins.ValueError.__str__ | BM:builtins.Exception.__str__ | BM:builtins.BaseException.__str__ | BM:builtins.object.__str__
+14:12:Call -> Super
+14:12:Name -> Class:builtins.super
+15:12:Attribute -> Class:builtins.UnicodeDecodeError.object
+15:12:Name -> ExcInst:django.utils.encoding.DjangoUnicodeDecodeError
+16:12:Call -> Class:builtins.type
+16:12:Name -> Class:builtins.type
+16:17:Attribute -> Class:builtins.UnicodeDecodeError.object
+16:17:Name -> ExcInst:django.utils.encoding.DjangoUnicodeDecodeError
+27:7:Call -> ERR
+27:7:Name -> Func:builtins.isinstance
+27:18:Name -> U
+27:21:Name -> Class:django.utils.functional.Promise
+29:15:Name -> U
+30:11:Call -> U | Const:str:'' | Const:str:''
+30:11:Name -> Func:django.utils.encoding.force_str
+30:21:Name -> U
+30:24:Name -> Const:str:'utf-8' | U
+30:34:Name -> Const:bool:False | U
+30:48:Name -> Const:str:'strict' | U
+34:4:Name -> Class:builtins.NoneType
+35:4:Name -> Class:builtins.int
+36:4:Name -> Class:builtins.float
+37:4:Name -> Class:_decimal.Decimal | Class:_pydecimal.Decimal
+38:4:Attribute -> Class:_pydatetime.datetime
+38:4:Name -> Module:datetime
+39:4:Attribute -> Class:_pydatetime.date
+39:4:Name -> Module:datetime
+40:4:Attribute -> Class:_pydatetime.time
+40:4:Name -> Module:datetime
+50:11:Call -> ERR
+50:11:Name -> Func:builtins.isinstance
+50:22:Name -> U
+50:27:Name -> Tuple:7
+61:7:Call -> ERR
+61:7:Name -> Func:builtins.issubclass
+61:18:Call -> U
+61:18:Name -> Class:builtins.type
+61:23:Name -> U
+61:27:Name -> Class:builtins.str
+62:15:Name -> U
+63:7:Name -> Const:bool:False | U
+63:24:Call -> U
+63:24:Name -> Func:django.utils.encoding.is_protected_type
+63:42:Name -> U
+64:15:Name -> U
+66:11:Call -> ERR
+66:11:Name -> Func:builtins.isinstance
+66:22:Name -> U
+66:25:Name -> Class:builtins.bytes
+67:16:Call -> Const:str:''
+67:16:Name -> Class:builtins.str
+67:20:Name -> U
+67:23:Name -> Const:str:'utf-8' | U
+67:33:Name -> Const:str:'strict' | U
+69:16:Call -> Const:str:''
+69:16:Name -> Class:builtins.str
+69:20:Name -> U
+70:11:Name -> Class:builtins.UnicodeDecodeError
+71:14:Call -> ExcInst:django.utils.encoding.DjangoUnicodeDecodeError
+71:14:Name -> Class:django.utils.encoding.DjangoUnicodeDecodeError
+71:40:Attribute -> Tuple:1 | U | Tuple:1 | Tuple:1
+71:40:Name -> ExcInst:builtins.UnicodeDecodeError
+72:11:Name -> U | Const:str:'' | Const:str:''
+81:7:Call -> ERR
+81:7:Name -> Func:builtins.isinstance
+81:18:Name -> U
+81:21:Name -> Class:django.utils.functional.Promise
+83:15:Name -> U
+84:11:Call -> U | Inst:builtins.bytes | Const:bytes:b''
+84:11:Name -> Func:django.utils.encoding.force_bytes
+84:23:Name -> U
+84:26:Name -> Const:str:'utf-8' | U
+84:36:Name -> Const:bool:False | U
+84:50:Name -> Const:str:'strict' | U
+95:7:Call -> ERR
+95:7:Name -> Func:builtins.isinstance
+95:18:Name -> U
+95:21:Name -> Class:builtins.bytes
+96:11:Name -> Const:str:'utf-8' | U
+97:19:Name -> U
+99:19:Call -> U
+99:19:Attribute -> U
+99:19:Call -> U
+99:19:Attribute -> U
+99:19:Name -> U
+99:37:Name -> Const:str:'strict' | U
+99:52:Name -> Const:str:'utf-8' | U
+99:62:Name -> Const:str:'strict' | U
+100:7:Name -> Const:bool:False | U
+100:24:Call -> U
+100:24:Name -> Func:django.utils.encoding.is_protected_type
+100:42:Name -> U
+101:15:Name -> U
+102:7:Call -> ERR
+102:7:Name -> Func:builtins.isinstance
+102:18:Name -> U
+102:21:Name -> Class:builtins.memoryview
+103:15:Call -> Inst:builtins.bytes
+103:15:Name -> Class:builtins.bytes
+103:21:Name -> U
+104:11:Call -> Const:bytes:b''
+104:11:Attribute -> BM:builtins.str.encode
+104:11:Call -> Const:str:''
+104:11:Name -> Class:builtins.str
+104:15:Name -> U
+104:25:Name -> Const:str:'utf-8' | U
+104:35:Name -> Const:str:'strict' | U
+131:7:Name -> U
+132:15:Name -> U
+133:9:Call -> ERR
+133:9:Name -> Func:builtins.isinstance
+133:20:Name -> U
+133:25:Name -> Class:django.utils.functional.Promise
+134:14:Call -> Const:str:''
+134:14:Name -> Class:builtins.str
+134:18:Name -> U
+135:11:Call -> U | Const:str:'' | Const:str:'' | Const:str:''
+135:11:Name -> Func:urllib.parse.quote
+135:17:Name -> U | Const:str:''
+140:36:Call -> Inst:builtins.range
+140:36:Name -> Class:builtins.range
+140:51:Call -> Inst:builtins.range
+140:51:Name -> Class:builtins.range
+142:4:Call -> Const:bytes:b''
+142:4:Attribute -> BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode
+142:5:Name -> Const:str:'%02x' | Const:str:'%02X'
+142:11:Name -> Const:int:45 | Const:int:46 | Const:int:95 | Const:int:126
+142:27:Call -> Inst:builtins.bytes
+142:27:Name -> Class:builtins.bytes
+142:34:Name -> Const:int:45 | Const:int:46 | Const:int:95 | Const:int:126
+143:23:Name -> List:3
+144:16:Name -> List:4 | Inst:builtins.range
+150:0:Call -> U
+150:0:Attribute -> U
+150:0:Name -> U
+151:5:Call -> U
+151:5:Attribute -> U
+151:6:Name -> U
+151:10:Name -> U
+151:23:Call -> ERR
+151:23:Attribute -> Inst:builtins.builtin_function_or_method
+151:23:Name -> Class:builtins.bytes
+151:37:Name -> U
+151:41:Name -> U
+151:53:Name -> Const:str:'0123456789ABCDEFabcdef'
+151:74:Name -> Const:str:'0123456789ABCDEFabcdef'
+165:7:Name -> U
+166:15:Name -> U
+167:10:Call -> U | Inst:builtins.bytes | Const:bytes:b''
+167:10:Name -> Func:django.utils.encoding.force_bytes
+167:22:Name -> U
+172:11:Call -> U
+172:11:Attribute -> U | BM:builtins.bytes.split | BM:builtins.bytes.split
+172:11:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+173:7:Call -> ERR
+173:7:Name -> Func:builtins.len
+173:11:Name -> U
+174:14:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+176:17:Name -> U
+177:17:Attribute -> BM:builtins.list.append
+177:17:Name -> List:1
+178:20:Name -> U
+179:20:Name -> U
+180:18:Name -> U
+181:15:Name -> U
+181:22:Name -> U
+182:16:Call -> ERR
+182:16:Name -> BM:builtins.list.append
+182:23:Name -> U
+182:33:Name -> U
+183:16:Call -> ERR
+183:16:Name -> BM:builtins.list.append
+183:23:Name -> U
+185:16:Call -> ERR
+185:16:Name -> BM:builtins.list.append
+186:16:Call -> ERR
+186:16:Name -> BM:builtins.list.append
+186:23:Name -> U
+187:14:Call -> Const:bytes:b''
+187:14:Attribute -> BM:builtins.bytes.join
+187:23:Name -> List:1
+188:11:Call -> U
+188:11:Attribute -> U
+188:11:Call -> U
+188:11:Name -> Func:django.utils.encoding.repercent_broken_unicode
+188:36:Name -> U | Inst:builtins.bytes | Const:bytes:b'' | Const:bytes:b''
+205:11:Call -> U | Const:str:'' | Const:str:''
+205:11:Name -> Func:urllib.parse.quote
+205:17:Name -> U
+210:11:Call -> U
+210:11:Attribute -> U
+210:11:Call -> U
+210:11:Attribute -> U
+210:11:Name -> U
+222:12:Call -> U
+222:12:Attribute -> U
+222:12:Name -> U
+223:15:Name -> Class:builtins.UnicodeDecodeError
+226:24:Call -> U | Const:str:'' | Const:str:''
+226:24:Name -> Func:urllib.parse.quote
+226:30:Name -> U
+226:35:Attribute -> Class:builtins.UnicodeDecodeError.start
+226:35:Name -> ExcInst:builtins.UnicodeDecodeError
+226:45:Attribute -> Class:builtins.UnicodeDecodeError.end
+226:45:Name -> ExcInst:builtins.UnicodeDecodeError
+227:12:Call -> ERR
+227:12:Attribute -> BM:builtins.list.append
+227:12:Name -> List:0
+227:33:Name -> U
+227:40:Attribute -> Class:builtins.UnicodeDecodeError.start
+227:40:Name -> ExcInst:builtins.UnicodeDecodeError
+227:51:Call -> U | Const:bytes:b''
+227:51:Attribute -> U | BM:builtins.str.encode | BM:builtins.str.encode
+227:51:Name -> U | Const:str:'' | Const:str:''
+228:19:Name -> U
+228:24:Attribute -> Class:builtins.UnicodeDecodeError.end
+228:24:Name -> ExcInst:builtins.UnicodeDecodeError
+230:19:Call -> Const:bytes:b''
+230:19:Attribute -> BM:builtins.bytes.join
+230:28:Name -> List:0
+230:45:Name -> U
+241:7:Name -> U
+242:15:Name -> U
+245:11:Call -> Const:str:'' | Const:str:'' | U | Const:str:''
+245:11:Name -> Func:urllib.parse.quote
+245:17:Call -> Const:str:''
+245:17:Attribute -> BM:builtins.str.replace
+245:17:Call -> Const:str:''
+245:17:Name -> Class:builtins.str
+245:21:Name -> U
+255:19:Call -> Tuple:2 | Inst:builtins.tuple | Tuple:2 | Tuple:2
+255:19:Attribute -> Func:locale.getlocale
+255:19:Name -> Module:locale
+256:8:Call -> ERR
+256:8:Attribute -> Func:_codecs.lookup
+256:8:Name -> Module:codecs
+256:22:Name -> U
+257:11:Name -> Class:builtins.Exception
+259:11:Name -> U | Const:str:'ascii'
+262:26:Call -> U | Const:str:'ascii'
+262:26:Name -> Func:django.utils.encoding.get_system_encoding

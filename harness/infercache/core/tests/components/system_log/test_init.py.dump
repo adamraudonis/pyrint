@@ -1,0 +1,755 @@
+19:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:10:Attribute -> Func:logging.getLogger
+19:10:Name -> Module:logging
+25:19:Call -> U
+25:19:Name -> U
+26:10:Call -> U
+26:10:Attribute -> U
+26:10:Name -> U
+28:16:Call -> U
+28:16:Attribute -> U
+28:16:Name -> U
+30:11:Name -> U
+31:11:Name -> U
+32:11:Name -> U
+37:14:Call -> ExcInst:builtins.Exception
+37:14:Name -> Class:builtins.Exception
+37:24:Name -> U
+38:11:Name -> Class:builtins.Exception
+39:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+39:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+39:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+39:26:Name -> U
+44:11:Call -> ERR
+44:11:Name -> Func:builtins.isinstance
+44:22:Name -> U
+44:29:Name -> Class:builtins.tuple
+45:17:Name -> U
+46:10:Call -> ERR
+46:10:Name -> Func:builtins.next
+47:9:Name -> U
+47:24:Name -> U
+47:32:Name -> U
+47:48:Name -> U | Tuple:1
+47:58:Name -> U
+50:11:Name -> U
+51:11:Name -> U
+56:11:Call -> ERR
+56:11:Name -> Func:builtins.isinstance
+56:22:Name -> U
+56:31:Name -> Class:builtins.list
+57:19:Name -> U
+59:11:Name -> U
+60:11:Name -> U
+60:24:Name -> U
+61:11:Name -> U | List:1
+61:22:Name -> U
+62:11:Name -> U
+62:20:Name -> U
+63:26:Name -> U
+66:27:Attribute -> Class:homeassistant.components.system_log.LogErrorHandler
+66:27:Name -> Module:homeassistant.components.system_log
+69:15:Name -> Class:builtins.list
+69:20:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+71:30:Name -> Class:typing.Any
+71:45:Name -> Class:typing.Any
+73:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+73:8:Attribute -> BM:homeassistant.components.system_log.LogErrorHandler.__init__ | BM:logging.Handler.__init__ | BM:logging.Filterer.__init__ | BM:builtins.object.__init__
+73:8:Call -> Super
+73:8:Name -> Class:builtins.super
+73:26:Name -> Tuple:0
+73:34:Name -> Dict:0
+74:8:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+74:28:Name -> Class:builtins.str
+75:8:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+75:26:Attribute -> Class:asyncio.locks.Event
+75:26:Name -> Module:asyncio
+75:49:Call -> Inst:asyncio.locks.Event
+75:49:Attribute -> Class:asyncio.locks.Event
+75:49:Name -> Module:asyncio
+76:8:Call -> ERR
+76:8:Attribute -> BM:builtins.list.append
+76:8:Attribute -> List:0
+76:8:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+76:46:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+78:33:Name -> Class:builtins.str
+78:41:Name -> Class:_collections_abc.Awaitable
+80:8:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+80:27:Call -> Inst:asyncio.locks.Event
+80:27:Attribute -> Class:asyncio.locks.Event
+80:27:Name -> Module:asyncio
+81:8:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+81:29:Name -> U
+82:15:Call -> Const:bool:True | Const:bool:True
+82:15:Attribute -> BM:asyncio.locks.Event.wait
+82:15:Attribute -> Inst:asyncio.locks.Event
+82:15:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+84:29:Attribute -> Class:logging.LogRecord
+84:29:Name -> Module:logging
+86:8:Call -> Const:bool:False | U
+86:8:Attribute -> BM:logging.Handler.handle
+86:8:Call -> Super
+86:8:Name -> Class:builtins.super
+86:23:Name -> U
+87:11:Attribute -> U
+87:11:Name -> U
+87:29:Attribute -> Const:NoneType:None | U
+87:29:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+88:12:Call -> Const:NoneType:None
+88:12:Attribute -> BM:asyncio.locks.Event.set
+88:12:Attribute -> Inst:asyncio.locks.Event
+88:12:Name -> Inst:tests.components.system_log.test_init.WatchLogErrorHandler
+92:10:Name -> U
+92:33:Name -> Class:builtins.dict
+93:5:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+95:4:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+96:9:Call -> Inst:unittest.mock._patch
+96:9:Name -> Func:unittest.mock.patch
+97:63:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+99:14:Call -> Const:bool:True | U
+99:14:Name -> Func:homeassistant.setup.async_setup_component
+99:36:Name -> U
+99:42:Attribute -> Const:str:'system_log'
+99:42:Name -> Module:homeassistant.components.system_log
+99:61:Name -> U
+100:14:Call -> U
+100:14:Attribute -> U
+100:14:Name -> U
+102:11:Call -> Const:int:0
+102:11:Name -> Func:builtins.len
+102:15:Attribute -> List:0
+102:15:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+103:11:Call -> ERR
+103:11:Attribute -> BM:builtins.list.pop
+103:11:Attribute -> List:0
+103:11:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+107:10:Name -> U
+107:41:Name -> Class:_collections_abc.Callable
+110:10:Call -> Const:bool:True | U
+110:10:Name -> Func:homeassistant.setup.async_setup_component
+110:32:Name -> U
+110:38:Attribute -> Const:str:'system_log'
+110:38:Name -> Module:homeassistant.components.system_log
+110:57:Name -> Dict:1
+111:10:Call -> U
+111:10:Attribute -> U
+111:10:Name -> U
+112:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+112:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+112:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+113:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+113:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+113:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+116:17:Call -> U
+116:17:Name -> Func:tests.components.system_log.test_init.get_error_log
+116:31:Name -> U
+117:11:Call -> ERR
+117:11:Name -> Func:builtins.len
+117:16:Name -> U
+117:31:Name -> U
+117:39:Name -> U
+121:10:Name -> U
+121:41:Name -> Class:_collections_abc.Callable
+124:10:Call -> Const:bool:True | U
+124:10:Name -> Func:homeassistant.setup.async_setup_component
+124:32:Name -> U
+124:38:Attribute -> Const:str:'system_log'
+124:38:Name -> Module:homeassistant.components.system_log
+124:57:Name -> Dict:1
+125:10:Call -> U
+125:10:Attribute -> U
+125:10:Name -> U
+127:4:Call -> Const:NoneType:None
+127:4:Name -> Func:tests.components.system_log.test_init._generate_and_log_exception
+128:10:Call -> U
+128:10:Name -> Func:tests.components.system_log.test_init.find_log
+128:25:Call -> U
+128:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+128:39:Name -> U
+129:11:Name -> U
+130:4:Call -> Const:NoneType:None
+130:4:Name -> Func:tests.components.system_log.test_init.assert_log
+130:15:Name -> U
+133:29:Name -> U
+133:60:Name -> Class:_collections_abc.Callable
+135:10:Call -> Const:bool:True | U
+135:10:Name -> Func:homeassistant.setup.async_setup_component
+135:32:Name -> U
+135:38:Attribute -> Const:str:'system_log'
+135:38:Name -> Module:homeassistant.components.system_log
+135:57:Name -> Dict:1
+136:10:Call -> U
+136:10:Attribute -> U
+136:10:Name -> U
+137:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+137:4:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+137:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+139:10:Call -> U
+139:10:Name -> Func:tests.components.system_log.test_init.find_log
+139:25:Call -> U
+139:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+139:39:Name -> U
+140:4:Call -> Const:NoneType:None
+140:4:Name -> Func:tests.components.system_log.test_init.assert_log
+140:15:Name -> U
+144:10:Name -> U
+144:41:Name -> Class:_collections_abc.Callable
+147:10:Call -> Const:bool:True | U
+147:10:Name -> Func:homeassistant.setup.async_setup_component
+147:32:Name -> U
+147:38:Attribute -> Const:str:'system_log'
+147:38:Name -> Module:homeassistant.components.system_log
+147:57:Name -> Dict:1
+148:10:Call -> U
+148:10:Attribute -> U
+148:10:Name -> U
+149:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+149:4:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+149:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+150:10:Call -> U
+150:10:Attribute -> U
+150:10:Name -> U
+152:10:Call -> U
+152:10:Name -> Func:tests.components.system_log.test_init.find_log
+152:25:Call -> U
+152:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+152:39:Name -> U
+153:4:Call -> Const:NoneType:None
+153:4:Name -> Func:tests.components.system_log.test_init.assert_log
+153:15:Name -> U
+157:10:Name -> U
+157:41:Name -> Class:_collections_abc.Callable
+160:10:Call -> Const:bool:True | U
+160:10:Name -> Func:homeassistant.setup.async_setup_component
+160:32:Name -> U
+160:38:Attribute -> Const:str:'system_log'
+160:38:Name -> Module:homeassistant.components.system_log
+160:57:Name -> Dict:1
+161:10:Call -> U
+161:10:Attribute -> U
+161:10:Name -> U
+162:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+162:4:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+162:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+163:10:Call -> U
+163:10:Attribute -> U
+163:10:Name -> U
+165:10:Call -> U
+165:10:Name -> Func:tests.components.system_log.test_init.find_log
+165:25:Call -> U
+165:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+165:39:Name -> U
+166:4:Call -> Const:NoneType:None
+166:4:Name -> Func:tests.components.system_log.test_init.assert_log
+166:15:Name -> U
+169:27:Name -> U
+169:58:Name -> Class:_collections_abc.Callable
+171:10:Call -> Const:bool:True | U
+171:10:Name -> Func:homeassistant.setup.async_setup_component
+171:32:Name -> U
+171:38:Attribute -> Const:str:'system_log'
+171:38:Name -> Module:homeassistant.components.system_log
+171:57:Name -> Dict:1
+172:10:Call -> U
+172:10:Attribute -> U
+172:10:Name -> U
+174:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+174:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+174:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+176:10:Call -> U
+176:10:Name -> Func:tests.components.system_log.test_init.find_log
+176:25:Call -> U
+176:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+176:39:Name -> U
+177:4:Call -> Const:NoneType:None
+177:4:Name -> Func:tests.components.system_log.test_init.assert_log
+177:15:Name -> U
+180:43:Name -> U
+182:10:Call -> Const:bool:True | U
+182:10:Name -> Func:homeassistant.setup.async_setup_component
+182:32:Name -> U
+182:38:Attribute -> Const:str:'system_log'
+182:38:Name -> Module:homeassistant.components.system_log
+182:57:Name -> Dict:1
+183:10:Call -> U
+183:10:Attribute -> U
+183:10:Name -> U
+186:5:Name -> U
+189:8:Call -> ERR
+189:8:Attribute -> BM:builtins.list.append
+189:8:Name -> List:0
+189:22:Name -> U
+191:4:Call -> U
+191:4:Attribute -> U
+191:4:Attribute -> U
+191:4:Name -> U
+191:26:Attribute -> Const:str:'system_log_event'
+191:26:Name -> Module:homeassistant.components.system_log
+191:55:Name -> Func:tests.components.system_log.test_init.test_config_not_fire_event.event_listener
+193:10:Call -> U
+193:10:Attribute -> U
+193:10:Name -> U
+194:10:Call -> U
+194:10:Attribute -> U
+194:10:Name -> U
+196:11:Call -> Const:int:0
+196:11:Name -> Func:builtins.len
+196:15:Name -> List:0
+199:43:Name -> U
+201:20:Call -> U
+201:20:Name -> Func:tests.components.system_log.test_init.async_setup_system_log
+202:8:Name -> U
+204:17:Call -> U
+204:17:Attribute -> U
+204:17:Name -> U
+206:13:Call -> U
+206:13:Name -> U
+206:34:Name -> U
+206:40:Attribute -> Const:str:'system_log_event'
+206:40:Name -> Module:homeassistant.components.system_log
+208:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+208:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+208:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+209:10:Name -> U
+210:10:Call -> U
+210:10:Attribute -> U
+210:10:Name -> U
+211:10:Call -> U
+211:10:Attribute -> U
+211:10:Name -> U
+213:11:Call -> ERR
+213:11:Name -> Func:builtins.len
+213:15:Name -> U
+214:4:Call -> Const:NoneType:None
+214:4:Name -> Func:tests.components.system_log.test_init.assert_log
+214:15:Attribute -> U
+214:15:Name -> U
+218:10:Name -> U
+218:41:Name -> Class:_collections_abc.Callable
+221:10:Call -> Const:bool:True | U
+221:10:Name -> Func:homeassistant.setup.async_setup_component
+221:32:Name -> U
+221:38:Attribute -> Const:str:'system_log'
+221:38:Name -> Module:homeassistant.components.system_log
+221:57:Name -> Dict:1
+222:10:Call -> U
+222:10:Attribute -> U
+222:10:Name -> U
+224:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+224:4:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+224:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+226:10:Call -> U
+226:10:Name -> Func:tests.components.system_log.test_init.find_log
+226:25:Call -> U
+226:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+226:39:Name -> U
+227:4:Call -> Const:NoneType:None
+227:4:Name -> Func:tests.components.system_log.test_init.assert_log
+227:15:Name -> U
+231:10:Name -> U
+231:41:Name -> Class:_collections_abc.Callable
+234:10:Call -> Const:bool:True | U
+234:10:Name -> Func:homeassistant.setup.async_setup_component
+234:32:Name -> U
+234:38:Attribute -> Const:str:'system_log'
+234:38:Name -> Module:homeassistant.components.system_log
+234:57:Name -> Dict:1
+235:10:Call -> U
+235:10:Attribute -> U
+235:10:Name -> U
+236:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+236:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+236:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+237:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+237:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+237:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+238:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+238:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+238:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+239:10:Call -> U
+239:10:Attribute -> U
+239:10:Name -> U
+240:16:Call -> U
+240:16:Name -> Func:tests.components.system_log.test_init.get_error_log
+240:30:Name -> U
+241:4:Call -> Const:NoneType:None
+241:4:Name -> Func:tests.components.system_log.test_init.assert_log
+241:15:Name -> U
+242:4:Call -> Const:NoneType:None
+242:4:Name -> Func:tests.components.system_log.test_init.assert_log
+242:15:Name -> U
+247:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+247:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+247:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+247:38:Name -> Const:int:2 | U
+251:10:Name -> U
+251:41:Name -> Class:_collections_abc.Callable
+254:10:Call -> Const:bool:True | U
+254:10:Name -> Func:homeassistant.setup.async_setup_component
+254:32:Name -> U
+254:38:Attribute -> Const:str:'system_log'
+254:38:Name -> Module:homeassistant.components.system_log
+254:57:Name -> Dict:1
+255:10:Call -> U
+255:10:Attribute -> U
+255:10:Name -> U
+256:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+256:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+256:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+257:4:Call -> Const:NoneType:None
+257:4:Name -> Func:tests.components.system_log.test_init.log_msg
+258:4:Call -> Const:NoneType:None
+258:4:Name -> Func:tests.components.system_log.test_init.log_msg
+259:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+259:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+259:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+261:16:Call -> U
+261:16:Name -> Func:tests.components.system_log.test_init.get_error_log
+261:30:Name -> U
+262:4:Call -> Const:NoneType:None
+262:4:Name -> Func:tests.components.system_log.test_init.assert_log
+262:15:Name -> U
+263:11:Name -> U
+264:4:Call -> Const:NoneType:None
+264:4:Name -> Func:tests.components.system_log.test_init.assert_log
+264:15:Name -> U
+266:4:Call -> Const:NoneType:None
+266:4:Name -> Func:tests.components.system_log.test_init.log_msg
+267:16:Call -> U
+267:16:Name -> Func:tests.components.system_log.test_init.get_error_log
+267:30:Name -> U
+268:4:Call -> Const:NoneType:None
+268:4:Name -> Func:tests.components.system_log.test_init.assert_log
+268:15:Name -> U
+269:11:Name -> U
+269:33:Name -> U
+271:4:Call -> Const:NoneType:None
+271:4:Name -> Func:tests.components.system_log.test_init.log_msg
+272:4:Call -> Const:NoneType:None
+272:4:Name -> Func:tests.components.system_log.test_init.log_msg
+273:4:Call -> Const:NoneType:None
+273:4:Name -> Func:tests.components.system_log.test_init.log_msg
+274:4:Call -> Const:NoneType:None
+274:4:Name -> Func:tests.components.system_log.test_init.log_msg
+276:16:Call -> U
+276:16:Name -> Func:tests.components.system_log.test_init.get_error_log
+276:30:Name -> U
+277:4:Call -> Const:NoneType:None
+277:4:Name -> Func:tests.components.system_log.test_init.assert_log
+278:8:Name -> U
+292:10:Name -> U
+292:41:Name -> Class:_collections_abc.Callable
+295:10:Call -> Const:bool:True | U
+295:10:Name -> Func:homeassistant.setup.async_setup_component
+295:32:Name -> U
+295:38:Attribute -> Const:str:'system_log'
+295:38:Name -> Module:homeassistant.components.system_log
+295:57:Name -> Dict:1
+296:10:Call -> U
+296:10:Attribute -> U
+296:10:Name -> U
+297:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+297:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+297:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+299:10:Call -> U
+299:10:Attribute -> U
+299:10:Attribute -> U
+299:10:Name -> U
+299:35:Attribute -> Const:str:'system_log'
+299:35:Name -> Module:homeassistant.components.system_log
+299:54:Attribute -> Const:str:'clear'
+299:54:Name -> Module:homeassistant.components.system_log
+300:10:Call -> U
+300:10:Attribute -> U
+300:10:Name -> U
+302:10:Call -> U
+302:10:Name -> Func:tests.components.system_log.test_init.get_error_log
+302:24:Name -> U
+305:31:Name -> U
+307:10:Call -> Const:bool:True | U
+307:10:Name -> Func:homeassistant.setup.async_setup_component
+307:32:Name -> U
+307:38:Attribute -> Const:str:'system_log'
+307:38:Name -> Module:homeassistant.components.system_log
+307:57:Name -> Dict:1
+308:10:Call -> U
+308:10:Attribute -> U
+308:10:Name -> U
+310:13:Call -> Inst:unittest.mock.MagicMock
+310:13:Name -> Class:unittest.mock.MagicMock
+311:9:Call -> Inst:unittest.mock._patch
+311:9:Name -> Func:unittest.mock.patch
+311:49:Name -> Inst:unittest.mock.MagicMock
+312:14:Call -> U
+312:14:Attribute -> U
+312:14:Attribute -> U
+312:14:Name -> U
+313:12:Attribute -> Const:str:'system_log'
+313:12:Name -> Module:homeassistant.components.system_log
+313:31:Attribute -> Const:str:'write'
+313:31:Name -> Module:homeassistant.components.system_log
+315:14:Call -> U
+315:14:Attribute -> U
+315:14:Name -> U
+316:4:Call -> U
+316:4:Attribute -> U | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with
+316:4:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+317:11:Attribute -> Inst:unittest.mock._CallList
+317:11:Name -> Inst:unittest.mock.MagicMock
+320:41:Name -> U
+322:10:Call -> Const:bool:True | U
+322:10:Name -> Func:homeassistant.setup.async_setup_component
+322:32:Name -> U
+322:38:Attribute -> Const:str:'system_log'
+322:38:Name -> Module:homeassistant.components.system_log
+322:57:Name -> Dict:1
+323:10:Call -> U
+323:10:Attribute -> U
+323:10:Name -> U
+325:9:Call -> Inst:unittest.mock._patch
+325:9:Name -> Func:unittest.mock.patch
+326:14:Call -> U
+326:14:Attribute -> U
+326:14:Attribute -> U
+326:14:Name -> U
+327:12:Attribute -> Const:str:'system_log'
+327:12:Name -> Module:homeassistant.components.system_log
+328:12:Attribute -> Const:str:'write'
+328:12:Name -> Module:homeassistant.components.system_log
+331:14:Call -> U
+331:14:Attribute -> U
+331:14:Name -> U
+332:4:Call -> U
+332:4:Attribute -> U | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with
+332:4:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+335:40:Name -> U
+337:10:Call -> Const:bool:True | U
+337:10:Name -> Func:homeassistant.setup.async_setup_component
+337:32:Name -> U
+337:38:Attribute -> Const:str:'system_log'
+337:38:Name -> Module:homeassistant.components.system_log
+337:57:Name -> Dict:1
+338:10:Call -> U
+338:10:Attribute -> U
+338:10:Name -> U
+340:13:Call -> Inst:unittest.mock.MagicMock
+340:13:Name -> Class:unittest.mock.MagicMock
+341:9:Call -> Inst:unittest.mock._patch
+341:9:Name -> Func:unittest.mock.patch
+341:49:Name -> Inst:unittest.mock.MagicMock
+342:14:Call -> U
+342:14:Attribute -> U
+342:14:Attribute -> U
+342:14:Name -> U
+343:12:Attribute -> Const:str:'system_log'
+343:12:Name -> Module:homeassistant.components.system_log
+344:12:Attribute -> Const:str:'write'
+344:12:Name -> Module:homeassistant.components.system_log
+347:14:Call -> U
+347:14:Attribute -> U
+347:14:Name -> U
+348:11:Attribute -> Inst:unittest.mock._CallList
+348:11:Name -> Inst:unittest.mock.MagicMock
+352:10:Name -> U
+352:41:Name -> Class:_collections_abc.Callable
+355:10:Call -> Const:bool:True | U
+355:10:Name -> Func:homeassistant.setup.async_setup_component
+355:32:Name -> U
+355:38:Attribute -> Const:str:'system_log'
+355:38:Name -> Module:homeassistant.components.system_log
+355:57:Name -> Dict:1
+356:10:Call -> U
+356:10:Attribute -> U
+356:10:Name -> U
+357:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+357:25:Call -> Inst:unittest.mock.MagicMock
+357:25:Name -> Class:unittest.mock.MagicMock
+358:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+358:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+358:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+359:17:Call -> U
+359:17:Name -> Func:tests.components.system_log.test_init.get_error_log
+359:31:Name -> U
+360:11:Name -> U
+363:20:Name -> Class:builtins.str
+363:41:Name -> Class:unittest.mock.MagicMock
+363:62:Name -> Class:unittest.mock.MagicMock
+365:11:Call -> Inst:unittest.mock.MagicMock
+365:11:Name -> Class:unittest.mock.MagicMock
+366:15:Name -> U
+367:15:Call -> Inst:unittest.mock.MagicMock
+367:15:Name -> Class:unittest.mock.MagicMock
+367:37:Name -> U
+373:10:Name -> U
+373:31:Name -> Class:builtins.str
+373:45:Name -> Class:tests.components.system_log.test_init.WatchLogErrorHandler
+377:17:Call -> Inst:unittest.mock.MagicMock
+377:17:Name -> Func:tests.components.system_log.test_init.get_frame
+378:17:Call -> Inst:unittest.mock.MagicMock
+378:17:Name -> Func:tests.components.system_log.test_init.get_frame
+378:27:Name -> U
+378:33:Name -> Inst:unittest.mock.MagicMock
+379:22:Call -> Inst:unittest.mock.MagicMock
+379:22:Name -> Func:tests.components.system_log.test_init.get_frame
+379:32:Name -> Const:str:'internal_path.py'
+379:43:Name -> Inst:unittest.mock.MagicMock
+380:19:Call -> Inst:unittest.mock.MagicMock
+380:19:Name -> Func:tests.components.system_log.test_init.get_frame
+380:57:Name -> Inst:unittest.mock.MagicMock
+383:8:Call -> Inst:unittest.mock._patch
+383:8:Attribute -> Func:unittest.mock._patch_object
+383:8:Name -> Func:unittest.mock.patch
+384:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+384:35:Call -> Inst:unittest.mock.MagicMock
+384:35:Name -> Class:unittest.mock.MagicMock
+384:59:Name -> Const:str:'internal_path.py'
+386:8:Call -> Inst:unittest.mock._patch
+386:8:Name -> Func:unittest.mock.patch
+388:25:Name -> Inst:unittest.mock.MagicMock
+391:21:Call -> U
+391:21:Attribute -> U
+391:21:Name -> U
+392:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+392:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+392:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+393:14:Name -> U
+397:10:Name -> U
+397:41:Name -> Class:_collections_abc.Callable
+401:9:Call -> Inst:unittest.mock._patch
+401:9:Name -> Func:unittest.mock.patch
+405:24:Call -> U
+405:24:Name -> Func:tests.components.system_log.test_init.async_setup_system_log
+405:47:Name -> U
+405:53:Name -> Dict:1
+406:14:Call -> Const:NoneType:None
+406:14:Name -> Func:tests.components.system_log.test_init.async_log_error_from_test_path
+407:12:Name -> U
+407:68:Name -> U
+409:21:Call -> U
+409:21:Name -> Func:tests.components.system_log.test_init.get_error_log
+409:35:Name -> U
+410:11:Name -> U
+414:10:Name -> U
+414:41:Name -> Class:_collections_abc.Callable
+418:9:Call -> Inst:unittest.mock._patch
+418:9:Attribute -> Func:unittest.mock._patch_object
+418:9:Name -> Func:unittest.mock.patch
+418:22:Attribute -> U
+418:22:Name -> U
+419:24:Call -> U
+419:24:Name -> Func:tests.components.system_log.test_init.async_setup_system_log
+419:47:Name -> U
+419:53:Name -> Dict:1
+421:14:Call -> Const:NoneType:None
+421:14:Name -> Func:tests.components.system_log.test_init.async_log_error_from_test_path
+422:12:Name -> U
+422:53:Name -> U
+424:21:Call -> U
+424:21:Name -> Func:tests.components.system_log.test_init.get_error_log
+424:35:Name -> U
+425:11:Name -> U
+429:10:Name -> U
+429:41:Name -> Class:_collections_abc.Callable
+432:10:Call -> Const:bool:True | U
+432:10:Name -> Func:homeassistant.setup.async_setup_component
+432:32:Name -> U
+432:38:Attribute -> Const:str:'system_log'
+432:38:Name -> Module:homeassistant.components.system_log
+432:57:Name -> Dict:1
+433:10:Call -> U
+433:10:Attribute -> U
+433:10:Name -> U
+440:25:Call -> Inst:traceback.StackSummary
+440:25:Attribute -> Func:traceback.extract_stack
+440:25:Name -> Module:traceback
+441:60:Attribute -> U
+441:60:Name -> U
+444:15:Name -> Const:bool:False | Const:bool:True
+445:22:Call -> ExcInst:builtins.ValueError
+445:22:Name -> Class:builtins.ValueError
+448:24:Call -> Inst:tests.components.system_log.test_init.test_raise_during_log_capture.RaisesDuringRepr
+448:24:Name -> Class:tests.components.system_log.test_init.test_raise_during_log_capture.RaisesDuringRepr
+450:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+450:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+450:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+450:43:Name -> Inst:tests.components.system_log.test_init.test_raise_during_log_capture.RaisesDuringRepr
+451:10:Call -> U
+451:10:Name -> Func:tests.components.system_log.test_init.find_log
+451:25:Call -> U
+451:25:Name -> Func:tests.components.system_log.test_init.get_error_log
+451:39:Name -> U
+452:11:Name -> U
+453:4:Call -> Const:NoneType:None
+453:4:Name -> Func:tests.components.system_log.test_init.assert_log
+453:15:Name -> U
+456:40:Name -> U
+464:14:Call -> ExcInst:builtins.ValueError
+464:14:Name -> Class:builtins.ValueError
+465:11:Name -> Class:builtins.ValueError
+466:20:Call -> Class:builtins.ValueError
+466:20:Name -> Class:builtins.type
+466:25:Name -> ExcInst:builtins.ValueError
+466:30:Name -> ExcInst:builtins.ValueError
+466:34:Attribute -> U
+466:34:Name -> ExcInst:builtins.ValueError
+467:18:Call -> Inst:unittest.mock.MagicMock
+467:18:Name -> Class:unittest.mock.MagicMock
+470:17:Name -> Tuple:3
+472:20:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+473:15:Call -> U
+473:15:Attribute -> Func:re.compile
+473:15:Name -> Module:re
+473:26:Name -> Const:str:'(/Users/adamraudonis/Desktop/Projects/p
+474:20:Call -> Tuple:2 | Tuple:2 | Tuple:2
+474:20:Attribute -> Func:homeassistant.components.system_log._figure_out_source
+474:20:Name -> Module:homeassistant.components.system_log
+475:8:Name -> Inst:unittest.mock.MagicMock
+476:8:Name -> U
+477:8:Call -> Inst:builtins.list
+477:8:Name -> Class:builtins.list
+477:13:Call -> Gen:traceback.walk_tb
+477:13:Attribute -> Func:traceback.walk_tb
+477:13:Name -> Module:traceback
+477:31:Name -> Tuple:3
+479:11:Name -> U
+479:19:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+480:11:Name -> U
+482:12:Call -> Inst:homeassistant.components.system_log.LogEntry
+482:12:Attribute -> Class:homeassistant.components.system_log.LogEntry
+482:12:Name -> Module:homeassistant.components.system_log
+482:32:Name -> Inst:unittest.mock.MagicMock
+482:45:Name -> U
+483:11:Attribute -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+483:11:Name -> Inst:homeassistant.components.system_log.LogEntry
+486:42:Name -> U
+489:14:Call -> ExcInst:builtins.ValueError
+489:14:Name -> Class:builtins.ValueError
+490:11:Name -> Class:builtins.ValueError
+491:20:Call -> Class:builtins.ValueError
+491:20:Name -> Class:builtins.type
+491:25:Name -> ExcInst:builtins.ValueError
+491:30:Name -> ExcInst:builtins.ValueError
+491:34:Attribute -> U
+491:34:Name -> ExcInst:builtins.ValueError
+492:18:Call -> Inst:unittest.mock.MagicMock
+492:18:Name -> Class:unittest.mock.MagicMock
+495:17:Name -> Tuple:3
+498:20:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+499:15:Call -> U
+499:15:Attribute -> Func:re.compile
+499:15:Name -> Module:re
+499:26:Name -> Const:str:'(/Users/adamraudonis/Desktop/Projects/p
+501:21:Call -> Inst:unittest.mock.MagicMock
+501:21:Name -> Class:unittest.mock.MagicMock
+502:24:Call -> Inst:unittest.mock.MagicMock
+502:24:Name -> Class:unittest.mock.MagicMock
+504:12:Call -> Inst:homeassistant.components.system_log.LogEntry
+504:12:Attribute -> Class:homeassistant.components.system_log.LogEntry
+504:12:Name -> Module:homeassistant.components.system_log
+505:8:Name -> Inst:unittest.mock.MagicMock
+505:21:Name -> U
+505:41:Name -> Inst:unittest.mock.MagicMock
+507:11:Attribute -> Const:str:'' | U
+507:11:Name -> Inst:homeassistant.components.system_log.LogEntry
+508:11:Attribute -> U
+508:11:Name -> Inst:unittest.mock.MagicMock

@@ -1,0 +1,309 @@
+16:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+16:6:Attribute -> Func:logging.getLogger
+16:6:Name -> Module:logging
+16:24:Name -> Const:str:'salt.modules.npm' | Const:str:'__main__'
+27:11:Call -> Const:NoneType:None | Const:str:'npm' | U
+27:11:Attribute -> Func:salt.utils.path.which
+27:11:Attribute -> Module:salt.utils.path
+27:11:Attribute -> Module:salt.utils
+27:11:Name -> Module:salt
+28:12:Call -> Const:NoneType:None
+28:12:Name -> Func:salt.modules.npm._check_valid_version
+36:11:Name -> Class:salt.exceptions.CommandExecutionError
+37:23:Call -> Const:str:''
+37:23:Name -> Class:builtins.str
+37:27:Name -> ExcInst:salt.exceptions.CommandExecutionError
+47:15:Call -> Const:NoneType:None | Const:str:'npm' | U
+47:15:Attribute -> Func:salt.utils.path.which
+47:15:Attribute -> Module:salt.utils.path
+47:15:Attribute -> Module:salt.utils
+47:15:Name -> Module:salt
+50:10:Call -> U
+50:10:Attribute -> Func:salt.modules.cmdmod.run
+50:10:Attribute -> Module:salt.modules.cmdmod
+50:10:Attribute -> Module:salt.modules
+50:10:Name -> Module:salt
+50:37:Name -> Const:NoneType:None | Const:str:'npm' | U
+51:18:Call -> Inst:salt.utils.versions.Version
+51:18:Name -> Class:salt.utils.versions.Version
+51:26:Name -> U
+52:20:Call -> Inst:salt.utils.versions.Version
+52:20:Name -> Class:salt.utils.versions.Version
+54:7:Name -> Inst:salt.utils.versions.Version
+54:21:Name -> Inst:salt.utils.versions.Version
+55:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+55:14:Name -> Class:salt.exceptions.CommandExecutionError
+56:12:Call -> U
+56:12:Attribute -> BM:builtins.str.format
+57:16:Name -> Inst:salt.utils.versions.Version
+57:29:Name -> Inst:salt.utils.versions.Version
+132:7:Name -> Const:NoneType:None | U
+133:16:Call -> Const:str:"''" | U
+133:16:Attribute -> Func:shlex.quote
+133:16:Name -> Module:shlex
+133:28:Name -> U
+134:9:Name -> Const:NoneType:None | U
+135:16:Call -> Const:str:"''" | U
+135:16:Attribute -> Func:shlex.quote
+135:16:Name -> Module:shlex
+135:28:Name -> U
+135:40:Name -> U
+138:7:Name -> Const:NoneType:None | U
+139:19:Call -> Const:str:"''" | U
+139:19:Attribute -> Func:shlex.quote
+139:19:Name -> Module:shlex
+139:31:Name -> U
+142:7:Name -> Const:bool:True | U
+143:8:Call -> ERR
+143:8:Attribute -> BM:builtins.list.append
+143:8:Name -> List:3
+145:11:Name -> Const:NoneType:None | U
+146:14:Call -> U
+146:14:Attribute -> Func:tempfile.gettempdir
+146:14:Name -> Module:tempfile
+147:8:Call -> ERR
+147:8:Attribute -> BM:builtins.list.append
+147:8:Name -> List:3
+149:14:Name -> U
+151:7:Name -> Const:NoneType:None | U | Const:str:"''"
+152:8:Call -> ERR
+152:8:Attribute -> BM:builtins.list.append
+152:8:Name -> List:3
+152:34:Name -> U | Const:str:"''"
+154:7:Name -> Const:bool:False | U
+155:8:Call -> ERR
+155:8:Attribute -> BM:builtins.list.append
+155:8:Name -> List:3
+157:4:Call -> ERR
+157:4:Attribute -> BM:builtins.list.extend
+157:4:Name -> List:3
+157:15:Name -> Const:NoneType:None | U | List:1 | List:0
+159:10:Name -> Const:NoneType:None | U
+161:7:Name -> Const:NoneType:None | U
+162:14:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+162:14:Attribute -> Func:salt.utils.user.get_uid
+162:14:Attribute -> Module:salt.utils.user
+162:14:Attribute -> Module:salt.utils
+162:14:Name -> Module:salt
+162:38:Name -> U
+163:11:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+164:12:Call -> U
+164:12:Attribute -> BM:builtins.dict.update | U
+164:12:Name -> Dict:0 | U
+164:36:Name -> U
+166:10:Call -> Const:str:''
+166:10:Attribute -> BM:builtins.str.join
+166:19:Name -> List:3
+167:13:Call -> ERR
+167:13:Name -> ERR
+168:8:Name -> Const:str:''
+168:36:Name -> U
+168:47:Name -> Const:NoneType:None | U
+168:58:Name -> Dict:0 | U
+171:7:Name -> U
+172:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+172:14:Name -> Class:salt.exceptions.CommandExecutionError
+172:36:Name -> U
+175:17:Name -> U
+175:37:Name -> U
+177:15:Call -> U
+177:15:Attribute -> Func:salt.utils.json.find_json
+177:15:Attribute -> Module:salt.utils.json
+177:15:Attribute -> Module:salt.utils
+177:15:Name -> Module:salt
+177:41:Name -> U
+178:11:Name -> Class:builtins.ValueError
+179:15:Name -> U
+213:7:Name -> U
+214:14:Call -> Const:str:"''" | U
+214:14:Attribute -> Func:shlex.quote
+214:14:Name -> Module:shlex
+214:26:Name -> U
+216:10:Name -> Const:NoneType:None | U
+218:7:Name -> Const:NoneType:None | U
+219:14:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+219:14:Attribute -> Func:salt.utils.user.get_uid
+219:14:Attribute -> Module:salt.utils.user
+219:14:Attribute -> Module:salt.utils
+219:14:Name -> Module:salt
+219:38:Name -> U
+220:11:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+221:12:Call -> U
+221:12:Attribute -> BM:builtins.dict.update | U
+221:12:Name -> Dict:0 | U
+221:36:Name -> U
+223:35:Name -> U | Const:str:"''"
+224:11:Name -> Const:NoneType:None | U
+225:8:Call -> ERR
+225:8:Attribute -> BM:builtins.list.append
+225:8:Name -> List:3
+227:10:Call -> Const:str:''
+227:10:Attribute -> BM:builtins.str.join
+227:19:Name -> List:3
+229:13:Call -> ERR
+229:13:Name -> ERR
+230:8:Name -> Const:str:''
+230:36:Name -> Const:NoneType:None | U
+230:47:Name -> Const:NoneType:None | U
+230:58:Name -> Dict:0 | U
+233:7:Name -> U
+234:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+234:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+234:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+234:18:Name -> U
+277:10:Name -> Const:NoneType:None | U
+279:7:Name -> Const:NoneType:None | U
+280:14:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+280:14:Attribute -> Func:salt.utils.user.get_uid
+280:14:Attribute -> Module:salt.utils.user
+280:14:Attribute -> Module:salt.utils
+280:14:Name -> Module:salt
+280:38:Name -> U
+281:11:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+282:12:Call -> U
+282:12:Attribute -> BM:builtins.dict.update | U
+282:12:Name -> Dict:0 | U
+282:36:Name -> U
+286:11:Name -> Const:NoneType:None | U
+287:8:Call -> ERR
+287:8:Attribute -> BM:builtins.list.append
+287:8:Name -> List:4
+289:7:Name -> Const:NoneType:None | U
+290:15:Call -> ERR
+290:15:Name -> Func:builtins.isinstance
+290:26:Name -> U
+290:34:Name -> Class:builtins.int
+290:39:Name -> Class:builtins.float
+291:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+291:18:Attribute -> Class:salt.exceptions.SaltInvocationError
+291:18:Attribute -> Module:salt.exceptions
+291:18:Name -> Module:salt
+292:32:Name -> U
+294:8:Call -> ERR
+294:8:Attribute -> BM:builtins.list.append
+294:8:Name -> List:4
+294:30:Call -> Inst:builtins.int
+294:30:Name -> Class:builtins.int
+294:34:Name -> U
+296:7:Name -> Const:NoneType:None | U
+298:14:Call -> Const:str:"''" | U
+298:14:Attribute -> Func:shlex.quote
+298:14:Name -> Module:shlex
+298:26:Name -> U
+299:8:Call -> ERR
+299:8:Attribute -> BM:builtins.list.append
+299:8:Name -> List:4
+299:23:Name -> Const:str:"''" | U
+300:10:Call -> Const:str:''
+300:10:Attribute -> BM:builtins.str.join
+300:19:Name -> List:4
+302:13:Call -> ERR
+302:13:Name -> ERR
+303:8:Name -> Const:str:''
+303:17:Name -> Const:NoneType:None | U
+303:28:Name -> Const:NoneType:None | U
+303:39:Name -> Dict:0 | U
+308:7:Name -> U
+308:34:Name -> U
+309:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+309:14:Name -> Class:salt.exceptions.CommandExecutionError
+309:36:Name -> U
+311:11:Call -> U
+311:11:Attribute -> U
+311:11:Call -> U
+311:11:Attribute -> Func:salt.utils.json.loads
+311:11:Attribute -> Module:salt.utils.json
+311:11:Attribute -> Module:salt.utils
+311:11:Name -> Module:salt
+311:33:Name -> U
+343:10:Name -> Const:NoneType:None | U
+345:7:Name -> Const:NoneType:None | U
+346:14:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+346:14:Attribute -> Func:salt.utils.user.get_uid
+346:14:Attribute -> Module:salt.utils.user
+346:14:Attribute -> Module:salt.utils
+346:14:Name -> Module:salt
+346:38:Name -> U
+347:11:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+348:12:Call -> U
+348:12:Attribute -> BM:builtins.dict.update | U
+348:12:Name -> Dict:0 | U
+348:36:Name -> U
+351:7:Name -> Const:NoneType:None | U
+352:8:Call -> ERR
+352:8:Attribute -> BM:builtins.list.append
+352:8:Name -> List:3
+352:19:Name -> U
+353:7:Name -> Const:bool:False | U
+354:8:Call -> ERR
+354:8:Attribute -> BM:builtins.list.append
+354:8:Name -> List:3
+356:10:Call -> Const:str:''
+356:10:Attribute -> BM:builtins.str.join
+356:19:Name -> List:3
+357:13:Call -> ERR
+357:13:Name -> ERR
+358:8:Name -> Const:str:''
+358:29:Name -> Const:NoneType:None | U
+358:40:Name -> Dict:0 | U
+361:7:Name -> U
+362:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+362:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+362:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+362:18:Name -> U
+391:10:Name -> Const:NoneType:None | U
+393:7:Name -> Const:NoneType:None | U
+394:14:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+394:14:Attribute -> Func:salt.utils.user.get_uid
+394:14:Attribute -> Module:salt.utils.user
+394:14:Attribute -> Module:salt.utils
+394:14:Name -> Module:salt
+394:38:Name -> U
+395:11:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+396:12:Call -> U
+396:12:Attribute -> BM:builtins.dict.update | U
+396:12:Name -> Dict:0 | U
+396:36:Name -> U
+399:7:Name -> Const:NoneType:None | U
+400:8:Call -> ERR
+400:8:Attribute -> BM:builtins.list.append
+400:8:Name -> List:3
+400:19:Name -> U
+402:10:Call -> Const:str:''
+402:10:Attribute -> BM:builtins.str.join
+402:19:Name -> List:3
+403:13:Call -> ERR
+403:13:Name -> ERR
+404:8:Name -> Const:str:''
+404:29:Name -> Const:NoneType:None | U
+404:40:Name -> Dict:0 | U
+407:7:Name -> U
+407:34:Name -> U
+408:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+408:14:Name -> Class:salt.exceptions.CommandExecutionError
+408:36:Name -> U
+410:11:Name -> U
+432:10:Name -> Const:NoneType:None | U
+434:7:Name -> Const:NoneType:None | U
+435:14:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+435:14:Attribute -> Func:salt.utils.user.get_uid
+435:14:Attribute -> Module:salt.utils.user
+435:14:Attribute -> Module:salt.utils
+435:14:Name -> Module:salt
+435:38:Name -> U
+436:11:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+437:12:Call -> U
+437:12:Attribute -> BM:builtins.dict.update | U
+437:12:Name -> Dict:0 | U
+437:36:Name -> U
+441:13:Call -> ERR
+441:13:Name -> ERR
+442:8:Name -> Const:str:'npm config get cache'
+442:29:Name -> Const:NoneType:None | U
+442:40:Name -> Dict:0 | U
+445:11:Call -> U
+445:11:Attribute -> U
+445:11:Name -> U
+445:35:Call -> U
+445:35:Attribute -> U
+445:35:Name -> U

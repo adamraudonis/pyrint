@@ -1,0 +1,135 @@
+7:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+7:6:Attribute -> Func:logging.getLogger
+7:6:Name -> Module:logging
+7:24:Name -> Const:str:'salt.utils.resources' | Const:str:'__main__'
+17:10:Call -> U
+17:10:Attribute -> U
+17:10:Name -> U
+18:11:Name -> U
+19:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+19:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+19:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+24:11:Name -> U | Const:str:'resources'
+34:10:Call -> U | Const:str:'resources'
+34:10:Name -> Func:salt.utils.resources.resource_pillar_key
+34:30:Name -> U
+35:13:Call -> U
+35:13:Attribute -> U
+35:13:Name -> U
+36:7:Name -> U | Const:str:'resources'
+36:18:Name -> U
+38:9:Call -> U
+38:9:Attribute -> U
+38:9:Name -> U
+38:20:Name -> U | Const:str:'resources'
+39:17:Call -> ERR
+39:17:Name -> Func:builtins.isinstance
+39:28:Name -> U
+39:32:Name -> Class:builtins.dict
+39:11:Name -> U
+49:11:Call -> ERR
+49:11:Name -> Func:builtins.isinstance
+49:22:Name -> U
+49:28:Name -> Class:builtins.dict
+52:15:Call -> U
+52:15:Attribute -> U
+52:15:Name -> U
+53:11:Call -> ERR
+53:11:Name -> Func:builtins.isinstance
+53:22:Name -> U
+53:27:Name -> Class:builtins.list
+54:12:Call -> ERR
+54:12:Attribute -> BM:builtins.list.extend
+54:12:Name -> List:0
+54:23:Name -> U
+55:13:Call -> ERR
+55:13:Name -> Func:builtins.isinstance
+55:24:Name -> U
+55:29:Name -> Class:builtins.dict
+56:18:Call -> U
+56:18:Attribute -> U
+56:18:Name -> U
+57:15:Call -> ERR
+57:15:Name -> Func:builtins.isinstance
+57:26:Name -> U
+57:31:Name -> Class:builtins.list
+58:16:Call -> ERR
+58:16:Attribute -> BM:builtins.list.extend
+58:16:Name -> List:0
+58:27:Name -> U
+59:11:Name -> List:0
+79:11:Call -> U
+79:11:Attribute -> U
+79:11:Name -> U
+79:48:Name -> U
+84:32:Name -> Const:NoneType:None | U
+84:23:Name -> U
+84:55:Call -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+84:55:Attribute -> Func:salt.cache.factory
+84:55:Attribute -> Module:salt.cache
+84:55:Name -> Module:salt
+84:74:Name -> U
+85:24:Call -> U
+85:24:Attribute -> U
+85:24:Name -> U
+88:15:Name -> U
+87:12:Call -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+87:12:Attribute -> Func:salt.cache.factory
+87:12:Attribute -> Module:salt.cache
+87:12:Name -> Module:salt
+87:31:Name -> U
+87:44:Name -> U
+89:17:Name -> U | Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+91:13:Call -> U | Const:str:'resources'
+91:13:Name -> Func:salt.utils.resources.resource_pillar_key
+91:33:Name -> U
+93:21:Call -> U
+93:21:Attribute -> BM:salt.cache.Cache.list | U
+93:21:Name -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | U
+94:15:Name -> Class:builtins.Exception
+96:19:Name -> U | List:0
+98:23:Call -> U
+98:23:Attribute -> BM:salt.cache.MemCache.fetch | U
+98:23:Name -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | U
+98:52:Name -> U
+99:19:Name -> Class:builtins.Exception
+101:19:Call -> ERR
+101:19:Name -> Func:builtins.isinstance
+101:30:Name -> U
+101:36:Name -> Class:builtins.dict
+103:22:Call -> U
+103:22:Attribute -> U
+103:22:Name -> U
+103:31:Name -> U | Const:str:'resources'
+104:18:Call -> List:0 | List:0
+104:18:Name -> Func:salt.utils.resources.bare_resource_ids_from_decl
+104:46:Name -> U
+105:15:Name -> U
+105:30:Name -> List:0 | List:0
+109:21:Call -> U
+109:21:Attribute -> U | BM:salt.cache.Cache.list
+109:21:Name -> U | Inst:salt.cache.MemCache | U
+110:15:Name -> Class:builtins.Exception
+112:19:Name -> U | List:0
+114:23:Call -> U
+114:23:Attribute -> U | BM:salt.cache.MemCache.fetch
+114:23:Name -> U | Inst:salt.cache.MemCache | U
+114:52:Name -> U
+115:19:Name -> Class:builtins.Exception
+117:19:Call -> ERR
+117:19:Name -> Func:builtins.isinstance
+117:30:Name -> U
+117:36:Name -> Class:builtins.dict
+119:18:Call -> List:0 | List:0
+119:18:Name -> Func:salt.utils.resources.bare_resource_ids_from_decl
+119:46:Call -> U
+119:46:Attribute -> U
+119:46:Name -> U
+120:15:Name -> U
+120:30:Name -> List:0 | List:0
+122:11:Name -> Class:builtins.Exception
+123:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+123:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+123:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+125:12:Name -> U
+126:12:Name -> ExcInst:builtins.Exception

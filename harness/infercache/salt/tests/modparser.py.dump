@@ -1,0 +1,135 @@
+17:13:Call -> Inst:argparse.ArgumentParser
+17:13:Attribute -> Class:argparse.ArgumentParser
+17:13:Name -> Module:argparse
+18:4:Call -> U
+18:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+18:4:Name -> Inst:argparse.ArgumentParser
+25:4:Call -> U
+25:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+25:4:Name -> Inst:argparse.ArgumentParser
+26:4:Call -> U
+26:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+26:4:Name -> Inst:argparse.ArgumentParser
+29:10:Call -> U | Inst:argparse.Namespace
+29:10:Attribute -> BM:argparse.ArgumentParser.parse_args
+29:10:Name -> Inst:argparse.ArgumentParser
+30:11:Attribute -> U | Dict:0
+30:11:Name -> U | Inst:argparse.Namespace
+38:13:Call -> Inst:modulefinder.ModuleFinder
+38:13:Attribute -> Class:modulefinder.ModuleFinder
+38:13:Name -> Module:modulefinder
+40:8:Call -> Const:NoneType:None
+40:8:Attribute -> BM:modulefinder.ModuleFinder.load_file
+40:8:Name -> Inst:modulefinder.ModuleFinder
+40:25:Name -> U
+41:11:Name -> Class:builtins.ImportError
+42:8:Call -> ERR
+42:8:Name -> Func:builtins.print
+42:31:Name -> U
+42:47:Name -> ExcInst:builtins.ImportError
+42:60:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+42:60:Name -> Module:sys
+43:15:Name -> Dict:0
+44:21:Call -> DictItems
+44:21:Attribute -> BM:builtins.dict.items
+44:21:Attribute -> Dict:0
+44:21:Name -> Inst:modulefinder.ModuleFinder
+45:18:Call -> U
+45:18:Attribute -> U
+45:18:Name -> U
+46:11:Name -> U
+46:22:Name -> Dict:0
+48:11:Call -> U
+48:11:Attribute -> U
+48:11:Name -> U
+50:15:Attribute -> U
+50:15:Name -> U
+52:11:Name -> U
+52:30:Attribute -> U
+52:30:Name -> U
+55:11:Name -> U
+55:19:Call -> U
+55:19:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+55:19:Attribute -> Module:posixpath | Module:ntpath
+55:19:Name -> Module:os
+55:36:Attribute -> U
+55:36:Name -> U
+57:8:Name -> Dict:0
+57:12:Name -> U
+57:23:Attribute -> U
+57:23:Name -> U
+58:21:Call -> DictItems
+58:21:Attribute -> BM:builtins.dict.items
+58:21:Attribute -> Dict:0
+58:21:Name -> Inst:modulefinder.ModuleFinder
+59:18:Call -> U
+59:18:Attribute -> U
+59:18:Name -> U
+60:11:Name -> U
+60:22:Name -> Dict:0
+62:11:Call -> U
+62:11:Attribute -> U
+62:11:Name -> U
+64:8:Name -> Dict:0
+64:12:Name -> U
+64:23:Name -> U
+65:11:Name -> Dict:0
+73:29:Call -> Gen:os.walk
+73:29:Attribute -> Func:os.walk
+73:29:Name -> Module:os
+73:37:Name -> U
+74:19:Name -> U
+75:19:Call -> U
+75:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+75:19:Attribute -> Module:posixpath | Module:ntpath
+75:19:Name -> Module:os
+75:32:Name -> U
+75:38:Name -> U
+76:15:Call -> U
+76:15:Attribute -> U
+76:15:Name -> U
+77:16:Call -> ERR
+77:16:Attribute -> BM:builtins.dict.update
+77:16:Name -> Dict:0
+77:27:Call -> Dict:0
+77:27:Name -> Func:tests.modparser.mod_data
+77:36:Name -> U
+77:42:Name -> U
+78:11:Name -> Dict:0
+81:3:Name -> Const:str:'tests.modparser' | Const:str:'__main__'
+82:11:Call -> U | Dict:0
+82:11:Name -> Func:tests.modparser.parse
+84:16:Call -> Dict:0
+84:16:Name -> Func:tests.modparser.scan
+84:21:Name -> U | Dict:0
+85:11:Name -> U | Dict:0
+86:12:Call -> ERR
+86:12:Name -> Func:builtins.print
+86:18:Call -> U
+86:18:Attribute -> Func:salt.utils.yamldumper.safe_dump
+86:18:Attribute -> Module:salt.utils.yaml
+86:18:Attribute -> Module:salt.utils
+86:18:Name -> Module:salt
+86:44:Name -> Dict:0
+87:11:Name -> U | Dict:0
+88:12:Call -> ERR
+88:12:Name -> Func:builtins.print
+88:18:Call -> U
+88:18:Attribute -> Func:salt.utils.json.dumps
+88:18:Attribute -> Module:salt.utils.json
+88:18:Attribute -> Module:salt.utils
+88:18:Name -> Module:salt
+88:40:Name -> Dict:0
+90:12:Call -> Const:NoneType:None
+90:12:Attribute -> Func:pprint.pprint
+90:12:Name -> Module:pprint
+90:26:Name -> Dict:0
+91:8:Call -> Const:NoneType:None
+91:8:Name -> Inst:_sitebuiltins.Quitter
+92:11:Name -> Class:builtins.KeyboardInterrupt
+93:8:Call -> ERR
+93:8:Name -> Func:builtins.print
+93:52:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+93:52:Name -> Module:sys
+94:8:Call -> Const:NoneType:None
+94:8:Name -> Inst:_sitebuiltins.Quitter

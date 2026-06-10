@@ -1,0 +1,129 @@
+14:51:Name -> Const:str:'next'
+24:19:Call -> U
+24:19:Attribute -> U
+24:19:Name -> U
+25:33:Call -> U | Const:str:'' | Const:str:'' | Const:str:''
+25:33:Name -> Func:django.shortcuts.resolve_url
+25:45:Name -> Const:NoneType:None | U
+25:58:Attribute -> U
+25:58:Name -> Inst:django.conf.LazySettings
+28:41:Call -> U
+28:41:Name -> Func:urllib.parse.urlsplit
+28:50:Name -> U | Const:str:'' | Const:str:'' | Const:str:''
+29:45:Call -> Inst:urllib.parse.SplitResult
+29:45:Name -> Func:urllib.parse.urlsplit
+29:54:Name -> U
+30:20:Name -> U
+30:36:Name -> U
+30:52:Name -> U
+31:20:Name -> U
+31:36:Name -> U
+31:52:Name -> U
+33:23:Call -> U
+33:23:Attribute -> U
+33:23:Name -> U
+36:19:Call -> Inst:django.http.response.HttpResponseRedirect
+36:19:Name -> Func:django.contrib.auth.views.redirect_to_login
+36:37:Name -> U
+36:43:Name -> U | Const:str:''
+36:63:Name -> Const:str:'next' | U
+38:11:Call -> U
+38:11:Name -> Func:inspect.iscoroutinefunction
+38:31:Name -> U
+41:30:Call -> U
+41:30:Attribute -> U
+41:30:Name -> U
+42:19:Call -> U
+42:19:Name -> Func:inspect.iscoroutinefunction
+42:39:Name -> U
+43:38:Call -> U
+43:38:Name -> U
+43:48:Name -> U
+45:38:Call -> U
+45:38:Call -> U
+45:38:Name -> U
+45:52:Name -> U
+45:63:Name -> U
+47:19:Name -> U
+48:33:Call -> U
+48:33:Name -> U
+48:43:Name -> U
+48:53:Name -> Tuple:0
+48:61:Name -> Dict:0
+49:23:Call -> Inst:django.http.response.HttpResponseRedirect
+49:23:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator._redirect_to_login
+49:42:Name -> U
+54:19:Call -> U
+54:19:Name -> Func:inspect.iscoroutinefunction
+54:39:Name -> U
+55:32:Call -> U
+55:32:Call -> U
+55:32:Name -> U
+55:46:Name -> U
+55:57:Attribute -> U
+55:57:Name -> U
+57:32:Call -> U
+57:32:Name -> U
+57:42:Attribute -> U
+57:42:Name -> U
+59:19:Name -> U
+60:27:Call -> U
+60:27:Name -> U
+60:37:Name -> U
+60:47:Name -> Tuple:0
+60:55:Name -> Dict:0
+61:23:Call -> Inst:django.http.response.HttpResponseRedirect
+61:23:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator._redirect_to_login
+61:42:Name -> U
+64:8:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper | Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper
+64:34:Name -> Const:NoneType:None | U
+65:8:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper | Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper
+65:44:Name -> Const:str:'next' | U
+67:15:Call -> Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper | Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper
+67:15:Call -> Partial:PartialFunction
+67:15:Name -> Func:functools.wraps
+67:21:Name -> U
+67:32:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper | Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper
+69:11:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator
+73:39:Name -> Const:str:'next'
+79:23:Call -> Func:django.contrib.auth.decorators.user_passes_test.decorator
+79:23:Name -> Func:django.contrib.auth.decorators.user_passes_test
+80:18:Attribute -> U
+80:18:Name -> U
+81:18:Name -> Const:NoneType:None | U
+82:28:Name -> Const:str:'next' | U
+84:7:Name -> Const:NoneType:None | U
+85:15:Call -> Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper | Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper
+85:15:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator
+85:32:Name -> U
+86:11:Name -> Func:django.contrib.auth.decorators.user_passes_test.decorator
+93:4:Name -> U
+94:11:Name -> U
+104:7:Call -> ERR
+104:7:Name -> Func:builtins.isinstance
+104:18:Name -> U
+104:24:Name -> Class:builtins.str
+105:17:Name -> U
+107:16:Name -> U
+110:11:Call -> U
+110:11:Name -> Func:inspect.iscoroutinefunction
+110:31:Name -> U
+114:25:Call -> U
+114:25:Attribute -> U
+114:25:Name -> U
+114:41:Name -> Tuple:1 | U
+117:19:Name -> Const:bool:False | U
+118:26:Name -> Class:django.core.exceptions.PermissionDenied
+126:19:Call -> U
+126:19:Attribute -> U
+126:19:Name -> U
+126:34:Name -> Tuple:1 | U
+129:19:Name -> Const:bool:False | U
+130:26:Name -> Class:django.core.exceptions.PermissionDenied
+134:15:Call -> Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper | Func:django.contrib.auth.decorators.user_passes_test.decorator._view_wrapper
+134:15:Call -> Func:django.contrib.auth.decorators.user_passes_test.decorator
+134:15:Name -> Func:django.contrib.auth.decorators.user_passes_test
+134:32:Name -> Func:django.contrib.auth.decorators.permission_required.decorator.check_perms | Func:django.contrib.auth.decorators.permission_required.decorator.check_perms
+134:55:Name -> Const:NoneType:None | U
+134:66:Name -> U
+136:11:Name -> Func:django.contrib.auth.decorators.permission_required.decorator

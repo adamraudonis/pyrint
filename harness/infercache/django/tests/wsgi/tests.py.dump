@@ -1,0 +1,143 @@
+11:1:Call -> Inst:django.test.utils.override_settings
+11:1:Name -> Class:django.test.utils.override_settings
+12:15:Name -> Class:django.test.testcases.SimpleTestCase
+13:22:Call -> Inst:django.test.client.RequestFactory
+13:22:Name -> Class:django.test.client.RequestFactory
+16:8:Call -> Const:bool:False | Const:bool:True
+16:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+16:8:Name -> Inst:django.dispatch.dispatcher.Signal
+16:35:Name -> Func:django.db.close_old_connections
+17:8:Call -> Const:NoneType:None
+17:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+17:8:Name -> Inst:tests.wsgi.tests.WSGITest
+17:24:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+17:24:Name -> Inst:django.dispatch.dispatcher.Signal
+17:49:Name -> Func:django.db.close_old_connections
+23:22:Call -> Inst:django.core.handlers.wsgi.WSGIHandler
+23:22:Name -> Func:django.core.wsgi.get_wsgi_application
+25:18:Call -> Dict:16
+25:18:Attribute -> BM:django.test.client.RequestFactory._base_environ
+25:18:Attribute -> Inst:django.test.client.RequestFactory
+25:18:Name -> Inst:tests.wsgi.tests.WSGITest
+32:12:Name -> Dict:0
+32:38:Name -> U
+33:12:Name -> Dict:0
+33:39:Name -> U
+35:19:Call -> U | Inst:django.http.response.HttpResponse
+35:19:Name -> Inst:django.core.handlers.wsgi.WSGIHandler
+35:31:Name -> Dict:16
+35:40:Name -> Func:tests.wsgi.tests.WSGITest.test_get_wsgi_application.start_response
+37:8:Call -> Const:NoneType:None
+37:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+37:8:Name -> Inst:tests.wsgi.tests.WSGITest
+37:25:Name -> Dict:0
+38:8:Call -> Const:NoneType:None
+38:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+38:8:Name -> Inst:tests.wsgi.tests.WSGITest
+39:12:Call -> Inst:builtins.set
+39:12:Name -> Class:builtins.set
+39:16:Name -> Dict:0
+42:8:Call -> Const:NoneType:None
+42:8:Attribute -> BM:unittest.case.TestCase.assertIn
+42:8:Name -> Inst:tests.wsgi.tests.WSGITest
+43:12:Call -> Inst:builtins.bytes
+43:12:Name -> Class:builtins.bytes
+43:18:Name -> U | Inst:django.http.response.HttpResponse
+56:12:Name -> Dict:0
+56:39:Name -> U
+58:22:Call -> Inst:django.core.handlers.wsgi.WSGIHandler
+58:22:Name -> Func:django.core.wsgi.get_wsgi_application
+59:18:Call -> Dict:15
+59:18:Attribute -> BM:django.test.client.RequestFactory._base_environ
+59:18:Attribute -> Inst:django.test.client.RequestFactory
+59:18:Name -> Inst:tests.wsgi.tests.WSGITest
+62:8:Call -> U | Inst:django.http.response.HttpResponse
+62:8:Name -> Inst:django.core.handlers.wsgi.WSGIHandler
+62:20:Name -> Dict:15
+62:29:Name -> Func:tests.wsgi.tests.WSGITest.test_wsgi_cookies.start_response
+63:8:Call -> Const:NoneType:None
+63:8:Attribute -> BM:unittest.case.TestCase.assertIn
+63:8:Name -> Inst:tests.wsgi.tests.WSGITest
+63:59:Name -> Dict:0
+72:16:Name -> Inst:tests.wsgi.tests.WSGITest.test_file_wrapper.FileWrapper
+72:34:Name -> Const:NoneType:None | U
+73:16:Call -> U
+73:16:Attribute -> U
+73:16:Name -> U
+75:22:Call -> Inst:django.core.handlers.wsgi.WSGIHandler
+75:22:Name -> Func:django.core.wsgi.get_wsgi_application
+76:18:Call -> Dict:16
+76:18:Attribute -> BM:django.test.client.RequestFactory._base_environ
+76:18:Attribute -> Inst:django.test.client.RequestFactory
+76:18:Name -> Inst:tests.wsgi.tests.WSGITest
+79:36:Name -> Class:tests.wsgi.tests.WSGITest.test_file_wrapper.FileWrapper
+84:12:Name -> Dict:0
+84:38:Name -> U
+85:12:Name -> Dict:0
+85:39:Name -> U
+87:19:Call -> U | Inst:django.http.response.HttpResponse
+87:19:Name -> Inst:django.core.handlers.wsgi.WSGIHandler
+87:31:Name -> Dict:16
+87:40:Name -> Func:tests.wsgi.tests.WSGITest.test_file_wrapper.start_response
+88:8:Call -> Const:NoneType:None
+88:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+88:8:Name -> Inst:tests.wsgi.tests.WSGITest
+88:25:Name -> Dict:0
+89:8:Call -> Const:NoneType:None
+89:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+89:8:Name -> Inst:tests.wsgi.tests.WSGITest
+89:30:Name -> U | Inst:django.http.response.HttpResponse
+89:40:Name -> Class:tests.wsgi.tests.WSGITest.test_file_wrapper.FileWrapper
+90:8:Call -> Const:NoneType:None
+90:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+90:8:Name -> Inst:tests.wsgi.tests.WSGITest
+90:25:Attribute -> U
+90:25:Name -> U | Inst:django.http.response.HttpResponse
+90:46:Attribute -> Const:int:4096
+90:46:Name -> Class:django.http.response.FileResponse
+93:37:Name -> Class:django.test.testcases.SimpleTestCase
+94:5:Call -> Inst:django.test.utils.override_settings
+94:5:Name -> Class:django.test.utils.override_settings
+100:14:Call -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+100:14:Name -> Func:django.core.servers.basehttp.get_internal_wsgi_application
+104:8:Call -> Const:NoneType:None
+104:8:Attribute -> BM:unittest.case.TestCase.assertIs
+104:8:Name -> Inst:tests.wsgi.tests.GetInternalWSGIApplicationTest
+104:22:Name -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+104:27:Name -> Inst:builtins.object
+106:5:Call -> Inst:django.test.utils.override_settings
+106:5:Name -> Class:django.test.utils.override_settings
+113:19:Call -> Inst:builtins.object
+113:19:Name -> Class:builtins.object
+116:19:Name -> Inst:builtins.object
+120:29:Attribute -> Func:django.core.wsgi.get_wsgi_application | Func:tests.wsgi.tests.GetInternalWSGIApplicationTest.test_default.mock_get_wsgi_app | U
+120:29:Name -> Module:django.core.servers.basehttp
+121:8:Name -> Module:django.core.servers.basehttp
+121:40:Name -> Func:tests.wsgi.tests.GetInternalWSGIApplicationTest.test_default.mock_get_wsgi_app
+124:18:Call -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+124:18:Name -> Func:django.core.servers.basehttp.get_internal_wsgi_application
+126:12:Call -> Const:NoneType:None
+126:12:Attribute -> BM:unittest.case.TestCase.assertIs
+126:12:Name -> Inst:tests.wsgi.tests.GetInternalWSGIApplicationTest
+126:26:Name -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+126:31:Name -> Inst:builtins.object
+128:12:Name -> Module:django.core.servers.basehttp
+128:44:Name -> Func:django.core.wsgi.get_wsgi_application | Func:tests.wsgi.tests.GetInternalWSGIApplicationTest.test_default.mock_get_wsgi_app | U
+130:5:Call -> Inst:django.test.utils.override_settings
+130:5:Name -> Class:django.test.utils.override_settings
+133:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+133:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+133:13:Name -> Inst:tests.wsgi.tests.GetInternalWSGIApplicationTest
+133:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+133:60:Name -> Const:str:"WSGI application 'wsgi.noexist.app' cou
+134:12:Call -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+134:12:Name -> Func:django.core.servers.basehttp.get_internal_wsgi_application
+136:5:Call -> Inst:django.test.utils.override_settings
+136:5:Name -> Class:django.test.utils.override_settings
+141:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+141:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+141:13:Name -> Inst:tests.wsgi.tests.GetInternalWSGIApplicationTest
+141:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+141:60:Name -> Const:str:"WSGI application 'wsgi.wsgi.noexist' co
+142:12:Call -> Inst:django.core.handlers.wsgi.WSGIHandler | Inst:builtins.object | U
+142:12:Name -> Func:django.core.servers.basehttp.get_internal_wsgi_application

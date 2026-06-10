@@ -1,0 +1,320 @@
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'tests.pytests.unit._logging.handlers.te | Const:str:'__main__'
+22:9:Call -> Inst:tests.support.helpers.CaptureOutput
+22:9:Name -> Class:tests.support.helpers.CaptureOutput
+23:18:Call -> Inst:salt._logging.handlers.DeferredStreamHandler
+23:18:Name -> Class:salt._logging.handlers.DeferredStreamHandler
+23:40:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+23:40:Name -> Module:sys
+24:8:Call -> Const:NoneType:None
+24:8:Name -> Func:salt._logging.impl.set_lowest_log_level
+24:29:Attribute -> Const:int:10
+24:29:Name -> Module:logging
+25:20:Call -> Inst:logging.Formatter
+25:20:Attribute -> Class:logging.Formatter
+25:20:Name -> Module:logging
+26:8:Call -> Const:NoneType:None
+26:8:Attribute -> BM:logging.Handler.setFormatter
+26:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+26:29:Name -> Inst:logging.Formatter
+27:8:Call -> Const:NoneType:None
+27:8:Attribute -> BM:logging.Logger.addHandler
+27:8:Attribute -> Inst:logging.RootLogger
+27:8:Name -> Module:logging
+27:32:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+28:17:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:17:Attribute -> Func:logging.getLogger
+28:17:Name -> Module:logging
+28:35:Name -> Const:str:'tests.pytests.unit._logging.handlers.te | Const:str:'__main__'
+29:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+29:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+29:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+30:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+30:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+30:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+31:8:Call -> Const:NoneType:None
+31:8:Attribute -> BM:logging.Logger.removeHandler
+31:8:Attribute -> Inst:logging.RootLogger
+31:8:Name -> Module:logging
+31:35:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+33:19:Attribute -> Const:NoneType:None | U
+33:19:Name -> Inst:tests.support.helpers.CaptureOutput
+34:19:Attribute -> Const:NoneType:None | U
+34:19:Name -> Inst:tests.support.helpers.CaptureOutput
+36:25:Call -> Inst:logging.StreamHandler
+36:25:Attribute -> Class:logging.StreamHandler
+36:25:Name -> Module:logging
+36:47:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+36:47:Name -> Module:sys
+39:8:Call -> Const:NoneType:None
+39:8:Attribute -> BM:salt._logging.handlers.DeferredStreamHandler.sync_with_handlers
+39:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+39:36:Name -> Inst:logging.StreamHandler
+41:19:Attribute -> Const:NoneType:None | U
+41:19:Name -> Inst:tests.support.helpers.CaptureOutput
+42:15:Attribute -> Const:NoneType:None | U
+42:15:Name -> Inst:tests.support.helpers.CaptureOutput
+47:9:Call -> Inst:tests.support.helpers.CaptureOutput
+47:9:Name -> Class:tests.support.helpers.CaptureOutput
+48:18:Call -> Inst:salt._logging.handlers.DeferredStreamHandler
+48:18:Name -> Class:salt._logging.handlers.DeferredStreamHandler
+48:40:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U | Const:NoneType:None
+48:40:Name -> Module:sys
+49:8:Call -> Const:NoneType:None
+49:8:Name -> Func:salt._logging.impl.set_lowest_log_level
+49:29:Attribute -> Const:int:10
+49:29:Name -> Module:logging
+50:20:Call -> Inst:logging.Formatter
+50:20:Attribute -> Class:logging.Formatter
+50:20:Name -> Module:logging
+51:8:Call -> Const:NoneType:None
+51:8:Attribute -> BM:logging.Handler.setFormatter
+51:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+51:29:Name -> Inst:logging.Formatter
+52:8:Call -> Const:NoneType:None
+52:8:Attribute -> BM:logging.Logger.addHandler
+52:8:Attribute -> Inst:logging.RootLogger
+52:8:Name -> Module:logging
+52:32:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+53:17:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:17:Attribute -> Func:logging.getLogger
+53:17:Name -> Module:logging
+53:35:Name -> Const:str:'tests.pytests.unit._logging.handlers.te | Const:str:'__main__'
+54:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+54:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+54:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+55:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+55:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+55:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+56:8:Call -> Const:NoneType:None
+56:8:Attribute -> BM:logging.Logger.removeHandler
+56:8:Attribute -> Inst:logging.RootLogger
+56:8:Name -> Module:logging
+56:35:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+58:19:Attribute -> Const:NoneType:None | U
+58:19:Name -> Inst:tests.support.helpers.CaptureOutput
+59:19:Attribute -> Const:NoneType:None | U
+59:19:Name -> Inst:tests.support.helpers.CaptureOutput
+62:8:Call -> Const:NoneType:None
+62:8:Attribute -> BM:salt._logging.handlers.DeferredStreamHandler.flush
+62:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+63:19:Attribute -> Const:NoneType:None | U
+63:19:Name -> Inst:tests.support.helpers.CaptureOutput
+64:15:Attribute -> Const:NoneType:None | U
+64:15:Name -> Inst:tests.support.helpers.CaptureOutput
+68:11:Call -> Inst:multiprocessing.context.Process
+68:11:Attribute -> Class:multiprocessing.context.Process
+68:11:Name -> Module:multiprocessing
+68:42:Name -> Func:tests.pytests.unit._logging.handlers.test_deferred_stream_handler._sync_with_handlers_proc_target
+69:4:Call -> Const:NoneType:None
+69:4:Attribute -> BM:multiprocessing.process.BaseProcess.start
+69:4:Name -> Inst:multiprocessing.context.Process
+70:4:Call -> Const:NoneType:None
+70:4:Attribute -> BM:multiprocessing.process.BaseProcess.join
+70:4:Name -> Inst:multiprocessing.context.Process
+71:11:Attribute -> Const:NoneType:None | U
+71:11:Name -> Inst:multiprocessing.context.Process
+75:11:Call -> Inst:multiprocessing.context.Process
+75:11:Attribute -> Class:multiprocessing.context.Process
+75:11:Name -> Module:multiprocessing
+75:42:Name -> Func:tests.pytests.unit._logging.handlers.test_deferred_stream_handler._deferred_write_on_flush_proc_target
+76:4:Call -> Const:NoneType:None
+76:4:Attribute -> BM:multiprocessing.process.BaseProcess.start
+76:4:Name -> Inst:multiprocessing.context.Process
+77:4:Call -> Const:NoneType:None
+77:4:Attribute -> BM:multiprocessing.process.BaseProcess.join
+77:4:Name -> Inst:multiprocessing.context.Process
+78:11:Attribute -> Const:NoneType:None | U
+78:11:Name -> Inst:multiprocessing.context.Process
+84:15:Call -> U | Inst:builtins.bytes
+84:15:Name -> Func:tests.support.helpers.dedent
+85:8:Call -> U
+85:8:Attribute -> BM:builtins.str.format
+109:12:Attribute -> U
+109:12:Name -> Inst:tests.support.runtests.RuntimeVars
+112:18:Name -> U
+113:4:Call -> U
+113:4:Attribute -> U
+113:4:Name -> U
+113:27:Name -> U | Inst:builtins.bytes
+115:11:Call -> Inst:salt.utils.nb_popen.NonBlockingPopen
+115:11:Name -> Class:salt.utils.nb_popen.NonBlockingPopen
+116:9:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+116:9:Name -> Module:sys
+116:25:Call -> Const:str:''
+116:25:Name -> Class:builtins.str
+116:29:Name -> U
+117:15:Attribute -> Const:int:-1
+117:15:Name -> Module:subprocess
+118:15:Attribute -> Const:int:-1
+118:15:Name -> Module:subprocess
+125:15:Call -> ERR
+125:15:Attribute -> Func:time.time
+125:15:Name -> Module:time
+125:29:Name -> Const:int:5
+129:15:Call -> ERR
+129:15:Attribute -> Func:time.time
+129:15:Name -> Module:time
+129:29:Name -> U
+130:16:Call -> U
+130:16:Attribute -> U
+130:16:Name -> U
+130:56:Name -> Const:int:5
+132:12:Call -> ERR
+132:12:Attribute -> Func:time.sleep
+132:12:Name -> Module:time
+133:19:Call -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+133:19:Attribute -> BM:salt.utils.nb_popen.NonBlockingPopen.recv
+133:19:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+134:19:Call -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+134:19:Attribute -> BM:salt.utils.nb_popen.NonBlockingPopen.recv_err
+134:19:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+135:15:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+136:23:Name -> U
+137:15:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+138:23:Name -> U
+140:15:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+140:32:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+144:15:Call -> Const:int:0
+144:15:Attribute -> BM:subprocess.Popen.poll
+144:15:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+148:8:Call -> U
+148:8:Name -> U
+148:26:Attribute -> Const:int:0
+148:26:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+149:21:Name -> Const:bytes:b'' | U
+150:8:Call -> U
+150:8:Attribute -> U
+150:8:Name -> U
+150:63:Name -> Const:bytes:b'' | U
+153:1:Call -> U
+153:1:Attribute -> U
+153:1:Attribute -> U
+153:1:Name -> U
+155:15:Call -> U | Inst:builtins.bytes
+155:15:Name -> Func:tests.support.helpers.dedent
+156:8:Call -> U
+156:8:Attribute -> BM:builtins.str.format
+201:12:Attribute -> U
+201:12:Name -> Inst:tests.support.runtests.RuntimeVars
+204:18:Name -> U
+205:4:Call -> U
+205:4:Attribute -> U
+205:4:Name -> U
+205:27:Name -> U | Inst:builtins.bytes
+207:11:Call -> Inst:salt.utils.nb_popen.NonBlockingPopen
+207:11:Name -> Class:salt.utils.nb_popen.NonBlockingPopen
+208:9:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+208:9:Name -> Module:sys
+208:25:Call -> Const:str:''
+208:25:Name -> Class:builtins.str
+208:29:Name -> U
+209:15:Attribute -> Const:int:-1
+209:15:Name -> Module:subprocess
+210:15:Attribute -> Const:int:-1
+210:15:Name -> Module:subprocess
+217:12:Call -> ERR
+217:12:Attribute -> Func:time.time
+217:12:Name -> Module:time
+218:15:Call -> ERR
+218:15:Attribute -> Func:time.time
+218:15:Name -> Module:time
+218:29:Name -> Const:int:10
+221:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+221:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+221:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+224:12:Call -> ERR
+224:12:Attribute -> Func:time.sleep
+224:12:Name -> Module:time
+225:19:Call -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+225:19:Attribute -> BM:salt.utils.nb_popen.NonBlockingPopen.recv
+225:19:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+226:19:Call -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+226:19:Attribute -> BM:salt.utils.nb_popen.NonBlockingPopen.recv_err
+226:19:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+227:15:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+228:23:Name -> U
+229:15:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+230:23:Name -> U
+232:29:Name -> Const:bytes:b'' | U
+232:41:Name -> Const:bool:False
+234:16:Call -> U
+234:16:Attribute -> BM:subprocess.Popen.send_signal
+234:16:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+234:33:Attribute -> Const:int:2
+234:33:Name -> Module:signal
+236:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+236:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+236:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+236:51:Call -> ERR
+236:51:Attribute -> Func:time.time
+236:51:Name -> Module:time
+236:65:Name -> U
+238:15:Name -> Const:bool:False | Const:bool:True
+239:19:Name -> Const:bytes:b'' | U
+240:20:Call -> U
+240:20:Attribute -> U
+240:20:Name -> U
+241:24:Call -> U
+241:24:Attribute -> BM:builtins.str.format
+242:28:Name -> U
+245:19:Name -> Const:bytes:b'' | U
+246:20:Call -> U
+246:20:Attribute -> U
+246:20:Name -> U
+247:24:Call -> U
+247:24:Attribute -> BM:builtins.str.format
+248:28:Name -> U
+252:15:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+252:32:Name -> Const:NoneType:None | Const:str:'' | Const:NoneType:None | U
+253:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+253:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+253:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+254:33:Name -> Const:bytes:b'' | U
+255:20:Call -> U
+255:20:Attribute -> U
+255:20:Name -> U
+256:24:Call -> U
+256:24:Attribute -> BM:builtins.str.format
+257:28:Name -> Const:bytes:b'' | U
+262:15:Call -> Const:int:0
+262:15:Attribute -> BM:subprocess.Popen.poll
+262:15:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+263:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+263:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+263:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+264:33:Name -> Const:bytes:b'' | U
+265:20:Call -> U
+265:20:Attribute -> U
+265:20:Name -> U
+266:24:Call -> U
+266:24:Attribute -> BM:builtins.str.format
+267:28:Name -> Const:bytes:b'' | U
+272:15:Call -> ERR
+272:15:Attribute -> Func:time.time
+272:15:Name -> Module:time
+272:29:Name -> U
+273:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+273:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+273:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+274:33:Name -> Const:bytes:b'' | U
+275:20:Call -> U
+275:20:Attribute -> U
+275:20:Name -> U
+276:24:Call -> U
+276:24:Attribute -> BM:builtins.str.format
+277:38:Name -> Const:bytes:b'' | U
+277:43:Name -> Const:bytes:b'' | U
+281:8:Call -> U
+281:8:Name -> U
+281:26:Attribute -> Const:int:0
+281:26:Name -> Inst:salt.utils.nb_popen.NonBlockingPopen
+282:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+282:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+282:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+282:38:Call -> ERR
+282:38:Attribute -> Func:time.time
+282:38:Name -> Module:time
+282:52:Name -> U

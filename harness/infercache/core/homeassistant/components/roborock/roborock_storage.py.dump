@@ -1,0 +1,116 @@
+15:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:10:Attribute -> Func:logging.getLogger
+15:10:Name -> Module:logging
+15:28:Name -> Const:str:'homeassistant.components.roborock.robor | Const:str:'__main__'
+17:27:Name -> Const:str:'roborock'
+22:31:Name -> U
+22:56:Name -> Class:builtins.str
+22:64:Name -> Class:pathlib.Path
+24:11:Call -> Inst:pathlib.Path
+24:11:Name -> Class:pathlib.Path
+24:16:Call -> U
+24:16:Attribute -> U
+24:16:Attribute -> U
+24:16:Name -> U
+24:33:Name -> Const:str:'.storage/roborock'
+24:50:Name -> U
+27:42:Name -> U
+27:67:Name -> Class:builtins.str
+34:28:Name -> Class:pathlib.Path
+36:15:Call -> U
+36:15:Attribute -> U
+36:15:Name -> U
+36:40:Call -> U
+36:40:Attribute -> U
+36:40:Name -> U
+37:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+37:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+37:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+37:67:Name -> U
+38:16:Call -> Const:NoneType:None | Const:NoneType:None
+38:16:Attribute -> Func:shutil.rmtree
+38:16:Name -> Module:shutil
+38:30:Name -> U
+39:15:Name -> Class:builtins.OSError
+40:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+40:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+40:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+40:66:Name -> U
+40:79:Name -> ExcInst:builtins.OSError
+42:18:Call -> U
+42:18:Name -> Func:homeassistant.components.roborock.roborock_storage._storage_path_prefix
+42:39:Name -> U
+42:45:Name -> U
+43:10:Call -> U
+43:10:Attribute -> U
+43:10:Name -> U
+43:38:Name -> Func:homeassistant.components.roborock.roborock_storage.async_cleanup_map_storage.remove
+43:46:Name -> U
+46:16:Name -> Class:homeassistant.helpers.storage.Store
+46:22:Name -> Class:builtins.dict
+46:27:Name -> Class:builtins.str
+46:32:Name -> Class:typing.Any
+49:29:Name -> U
+49:54:Name -> Class:builtins.str
+51:8:Call -> Const:NoneType:None
+51:8:Attribute -> BM:homeassistant.helpers.storage.Store.__init__ | BM:builtins.object.__init__
+51:8:Call -> Super
+51:8:Name -> Class:builtins.super
+52:12:Name -> U
+53:20:Name -> Const:int:2
+54:19:Name -> Const:str:'roborock'
+54:28:Name -> U
+60:27:Name -> Class:builtins.int
+61:27:Name -> Class:builtins.int
+62:18:Name -> Class:builtins.dict
+62:23:Name -> Class:builtins.str
+62:28:Name -> Class:typing.Any
+63:9:Name -> Class:builtins.dict
+63:14:Name -> Class:builtins.str
+63:19:Name -> Class:typing.Any
+65:11:Name -> U
+68:15:Name -> U
+71:17:Name -> U
+80:29:Name -> U
+80:54:Name -> Class:builtins.str
+82:8:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+82:28:Call -> Inst:homeassistant.components.roborock.roborock_storage.StoreImpl
+82:28:Name -> Class:homeassistant.components.roborock.roborock_storage.StoreImpl
+82:38:Name -> U
+82:44:Name -> U
+83:8:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+83:26:Name -> U
+85:27:Name -> U
+87:11:Attribute -> Const:NoneType:None | U
+87:11:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+88:29:Call -> U
+88:29:Attribute -> BM:homeassistant.helpers.storage.Store.async_load
+88:29:Attribute -> Inst:homeassistant.components.roborock.roborock_storage.StoreImpl
+88:29:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+89:16:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+89:35:Call -> U
+89:35:Attribute -> U
+89:35:Name -> U
+89:55:Name -> U
+91:16:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+91:35:Call -> U
+91:35:Name -> U
+93:15:Attribute -> Const:NoneType:None | U
+93:15:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+95:31:Name -> U
+97:8:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+97:27:Name -> U
+101:11:Attribute -> Const:NoneType:None | U
+101:11:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+102:18:Call -> Const:NoneType:None
+102:18:Attribute -> BM:homeassistant.helpers.storage.Store.async_save
+102:18:Attribute -> Inst:homeassistant.components.roborock.roborock_storage.StoreImpl
+102:18:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+102:47:Call -> U
+102:47:Attribute -> U
+102:47:Attribute -> U
+102:47:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore
+106:14:Call -> Const:NoneType:None
+106:14:Attribute -> BM:homeassistant.helpers.storage.Store.async_remove
+106:14:Attribute -> Inst:homeassistant.components.roborock.roborock_storage.StoreImpl
+106:14:Name -> Inst:homeassistant.components.roborock.roborock_storage.CacheStore

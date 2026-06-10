@@ -1,0 +1,281 @@
+27:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:10:Attribute -> Func:logging.getLogger
+27:10:Name -> Module:logging
+27:28:Name -> Const:str:'homeassistant.components.image_processi | Const:str:'__main__'
+30:16:Call -> Inst:_pydatetime.timedelta
+30:16:Name -> Class:_pydatetime.timedelta
+33:33:Name -> Class:enum.StrEnum
+51:17:Name -> Func:typing.Final
+55:13:Name -> Func:typing.Final
+63:16:Call -> U
+63:16:Attribute -> U
+63:16:Name -> U
+65:8:Call -> U
+65:8:Attribute -> U
+65:8:Name -> U
+65:21:Name -> Const:str:'entity_id'
+65:38:Call -> Func:homeassistant.helpers.config_validation.entity_domain.validate
+65:38:Attribute -> Func:homeassistant.helpers.config_validation.entity_domain
+65:38:Name -> Module:homeassistant.helpers.config_validation
+66:8:Call -> U
+66:8:Attribute -> U
+66:8:Name -> U
+66:21:Name -> Const:str:'name'
+66:33:Attribute -> Func:homeassistant.helpers.config_validation.string
+66:33:Name -> Module:homeassistant.helpers.config_validation
+70:18:Call -> U
+70:18:Attribute -> U
+70:18:Attribute -> U
+70:18:Name -> Module:homeassistant.helpers.config_validation
+72:8:Call -> U
+72:8:Attribute -> U
+72:8:Name -> U
+72:21:Name -> Const:str:'source'
+72:35:Call -> U
+72:35:Attribute -> U
+72:35:Name -> U
+72:43:Attribute -> Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list
+72:43:Name -> Module:homeassistant.helpers.config_validation
+72:60:Name -> U
+73:8:Call -> U
+73:8:Attribute -> U
+73:8:Name -> U
+73:21:Name -> Const:str:'confidence'
+73:46:Name -> Const:int:80
+73:67:Call -> U
+73:67:Attribute -> U
+73:67:Name -> U
+74:12:Call -> U
+74:12:Attribute -> U
+74:12:Name -> U
+74:23:Name -> Class:builtins.float
+74:31:Call -> U
+74:31:Attribute -> U
+74:31:Name -> U
+78:23:Call -> U
+78:23:Attribute -> U
+78:23:Attribute -> U
+78:23:Name -> Module:homeassistant.helpers.config_validation
+78:54:Attribute -> U
+78:54:Name -> U
+81:22:Name -> Class:typing.TypedDict
+84:16:Name -> Class:builtins.float
+85:10:Name -> Class:builtins.str
+86:9:Name -> Class:builtins.float
+87:12:Name -> Class:builtins.str
+88:12:Name -> Class:builtins.str
+89:13:Name -> Class:builtins.str
+90:15:Name -> Class:builtins.str
+93:28:Name -> U
+93:51:Name -> Class:builtins.dict
+93:66:Name -> Class:builtins.bool
+95:16:Call -> U
+95:16:Name -> U
+95:32:Name -> Class:homeassistant.components.image_processing.ImageProcessingEntity
+96:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+96:17:Name -> Const:str:'image_processing'
+96:25:Name -> U
+96:31:Name -> Inst:_pydatetime.timedelta
+99:10:Call -> U
+99:10:Attribute -> U
+99:10:Name -> U
+99:32:Name -> U
+101:42:Name -> U
+103:31:Call -> U
+103:31:Attribute -> U
+103:31:Name -> U
+103:68:Name -> U
+106:22:Name -> U
+107:12:Call -> U
+107:12:Attribute -> U
+107:12:Name -> U
+107:37:Attribute -> U
+107:37:Name -> U
+108:12:Call -> ERR
+108:12:Attribute -> BM:builtins.list.append
+108:12:Name -> List:0
+108:32:Call -> U
+108:32:Attribute -> Func:asyncio.tasks.create_task
+108:32:Name -> Module:asyncio
+108:52:Call -> U
+108:52:Attribute -> U
+108:52:Name -> U
+110:11:Name -> List:0
+111:18:Call -> U
+111:18:Attribute -> Func:asyncio.tasks.wait
+111:18:Name -> Module:asyncio
+111:31:Name -> U
+113:4:Call -> U
+113:4:Attribute -> U
+113:4:Attribute -> U
+113:4:Name -> U
+114:8:Name -> Const:str:'image_processing'
+114:16:Name -> Const:str:'scan'
+114:30:Name -> Func:homeassistant.components.image_processing.async_setup.async_scan_service
+114:57:Call -> U
+114:57:Name -> Func:homeassistant.helpers.config_validation.make_entity_service_schema
+120:39:Name -> Class:homeassistant.helpers.entity.EntityDescription
+123:18:Name -> Class:homeassistant.components.image_processing.ImageProcessingDeviceClass
+124:19:Name -> Class:builtins.str
+125:16:Name -> Class:builtins.float
+128:28:Name -> Class:homeassistant.helpers.entity.Entity
+131:24:Name -> Class:homeassistant.components.image_processing.ImageProcessingEntityDescription
+132:24:Name -> Class:homeassistant.components.image_processing.ImageProcessingDeviceClass
+133:25:Name -> Class:builtins.str
+134:22:Name -> Class:builtins.float
+135:14:Name -> Const:int:10
+137:5:Name -> Class:builtins.property
+138:31:Name -> Class:builtins.str
+140:11:Call -> Const:bool:False
+140:11:Name -> Func:builtins.hasattr
+140:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+141:19:Attribute -> ERR
+141:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+142:11:Call -> Const:bool:True
+142:11:Name -> Func:builtins.hasattr
+142:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+143:19:Attribute -> ERR
+143:19:Attribute -> Inst:homeassistant.helpers.entity.EntityDescription
+143:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+146:5:Name -> Class:builtins.property
+147:28:Name -> Class:builtins.float
+149:11:Call -> Const:bool:False
+149:11:Name -> Func:builtins.hasattr
+149:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+150:19:Attribute -> ERR
+150:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+151:11:Call -> Const:bool:True
+151:11:Name -> Func:builtins.hasattr
+151:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+152:19:Attribute -> ERR
+152:19:Attribute -> Inst:homeassistant.helpers.entity.EntityDescription
+152:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+155:5:Name -> Class:builtins.property
+156:30:Name -> Class:homeassistant.components.image_processing.ImageProcessingDeviceClass
+158:11:Call -> Const:bool:True
+158:11:Name -> Func:builtins.hasattr
+158:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+159:19:Attribute -> Const:str:'test_class'
+159:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+160:11:Call -> Const:bool:True
+160:11:Name -> Func:builtins.hasattr
+160:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+161:19:Attribute -> Const:NoneType:None
+161:19:Attribute -> Inst:homeassistant.helpers.entity.EntityDescription
+161:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+164:35:Name -> Class:builtins.bytes
+166:14:Name -> Class:builtins.NotImplementedError
+168:47:Name -> Class:builtins.bytes
+170:21:Call -> U
+170:21:Attribute -> U
+170:21:Attribute -> U | Const:NoneType:None
+170:21:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+170:54:Attribute -> BM:homeassistant.components.image_processing.ImageProcessingEntity.process_image
+170:54:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+170:74:Name -> U
+177:11:Attribute -> U | Const:NoneType:None
+177:11:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+178:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+178:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+178:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+184:26:Call -> U
+184:26:Name -> Func:homeassistant.components.camera.async_get_image
+185:16:Attribute -> U | Const:NoneType:None
+185:16:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+185:27:Attribute -> U | Const:NoneType:None
+185:27:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+185:55:Attribute -> Const:int:10
+185:55:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+187:15:Name -> Class:homeassistant.exceptions.HomeAssistantError
+188:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+188:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+188:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+188:68:Name -> ExcInst:homeassistant.exceptions.HomeAssistantError
+192:14:Call -> U
+192:14:Attribute -> BM:homeassistant.components.image_processing.ImageProcessingEntity.async_process_image
+192:14:Name -> Inst:homeassistant.components.image_processing.ImageProcessingEntity
+192:39:Attribute -> U
+192:39:Name -> U
+195:32:Name -> Class:homeassistant.components.image_processing.ImageProcessingEntity
+198:25:Attribute -> Inst:homeassistant.components.image_processing.ImageProcessingDeviceClass.FACE
+198:25:Name -> Class:homeassistant.components.image_processing.ImageProcessingDeviceClass
+202:8:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+202:20:Name -> Class:builtins.list
+202:25:Name -> Class:homeassistant.components.image_processing.FaceInformation
+203:8:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+205:5:Name -> Class:builtins.property
+206:23:Name -> Class:builtins.str
+206:29:Name -> Class:builtins.int
+208:20:Name -> Class:builtins.float
+212:15:Attribute -> U | Const:NoneType:None
+212:15:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+213:19:Attribute -> Const:int:0 | U
+213:19:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+216:20:Attribute -> List:0 | U
+216:20:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+217:15:Name -> Const:str:'confidence'
+217:38:Name -> U
+220:24:Name -> U
+220:29:Name -> Const:str:'confidence'
+220:49:Name -> Const:int:0
+221:29:Name -> U
+222:29:Name -> Const:str:'name'
+222:40:Name -> Const:str:'motion'
+223:23:Name -> Const:str:'name' | Const:str:'motion'
+223:31:Name -> U
+224:32:Name -> U
+224:37:Name -> Const:str:'name' | Const:str:'motion'
+227:15:Name -> Const:NoneType:None | U
+229:5:Name -> Func:typing.final
+230:5:Name -> Class:builtins.property
+231:34:Name -> Class:builtins.dict
+231:39:Name -> Class:builtins.str
+231:44:Name -> Class:typing.Any
+233:16:Name -> Const:str:'faces'
+233:28:Attribute -> List:0 | U
+233:28:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+233:40:Name -> Const:str:'total_faces'
+233:58:Attribute -> Const:int:0 | U
+233:58:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+235:35:Name -> Class:builtins.list
+235:40:Name -> Class:homeassistant.components.image_processing.FaceInformation
+235:65:Name -> Class:builtins.int
+237:8:Call -> U
+237:8:Attribute -> U
+237:8:Attribute -> U
+237:8:Attribute -> U | Const:NoneType:None
+237:8:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+237:44:Attribute -> BM:homeassistant.components.image_processing.ImageProcessingFaceEntity.async_process_faces
+237:44:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+237:70:Name -> U
+237:77:Name -> U
+239:5:Name -> U
+240:41:Name -> Class:builtins.list
+240:46:Name -> Class:homeassistant.components.image_processing.FaceInformation
+240:71:Name -> Class:builtins.int
+258:20:Name -> U
+260:16:Name -> Const:str:'confidence'
+260:35:Name -> U
+261:20:Attribute -> U | Const:NoneType:None
+261:20:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+262:20:Name -> U
+262:25:Name -> Const:str:'confidence'
+262:44:Attribute -> U | Const:NoneType:None
+262:44:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+266:12:Call -> U
+266:12:Attribute -> U
+266:12:Name -> U
+266:25:Name -> Const:str:'entity_id'
+266:41:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid'
+266:41:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+267:12:Call -> U
+267:12:Attribute -> U
+267:12:Attribute -> U
+267:12:Attribute -> U | Const:NoneType:None
+267:12:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+267:37:Name -> Const:str:'image_processing.detect_face'
+267:56:Name -> U
+270:8:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+270:21:Name -> U
+271:8:Name -> Inst:homeassistant.components.image_processing.ImageProcessingFaceEntity
+271:27:Name -> U

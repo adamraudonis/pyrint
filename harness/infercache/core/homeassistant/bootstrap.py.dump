@@ -1,0 +1,1204 @@
+113:5:Call -> Inst:contextlib.suppress
+113:5:Attribute -> Class:contextlib.suppress
+113:5:Name -> Module:contextlib
+113:25:Name -> Class:builtins.ImportError
+117:5:Call -> Inst:contextlib.suppress
+117:5:Attribute -> Class:contextlib.suppress
+117:5:Name -> Module:contextlib
+117:25:Name -> Class:builtins.ImportError
+123:3:Name -> Const:bool:False
+126:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+126:10:Attribute -> Func:logging.getLogger
+126:10:Name -> Module:logging
+126:28:Name -> Const:str:'homeassistant.bootstrap' | Const:str:'__main__'
+128:23:Call -> Partial:PartialFunction
+128:23:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+128:31:Name -> Func:operator.contains | Func:_operator.contains
+128:41:Name -> U
+134:24:Name -> Class:homeassistant.util.hass_dict.HassKey
+134:40:Call -> Inst:homeassistant.util.hass_dict.HassKey
+134:40:Name -> Class:homeassistant.util.hass_dict.HassKey
+179:27:Name -> Set:5
+181:23:Name -> Const:int:60
+183:17:Name -> Set:1
+187:30:Name -> Const:int:60
+189:31:Name -> Const:int:60
+200:5:Name -> Tuple:4
+246:6:Name -> U
+304:20:Name -> Class:homeassistant.runner.RuntimeConfig
+305:5:Attribute -> U
+305:5:Name -> U
+308:31:Attribute -> U
+308:31:Name -> U
+310:15:Call -> U
+310:15:Attribute -> U
+310:15:Name -> U
+310:34:Attribute -> U
+310:34:Name -> U
+311:8:Call -> Const:NoneType:None
+311:8:Attribute -> Func:homeassistant.loader.async_setup
+311:8:Name -> Module:homeassistant.loader
+311:27:Name -> U
+313:14:Call -> Const:NoneType:None
+313:14:Name -> Func:homeassistant.bootstrap.async_enable_logging
+314:12:Name -> U
+315:12:Attribute -> U
+315:12:Name -> U
+316:12:Attribute -> U
+316:12:Name -> U
+317:12:Attribute -> U
+317:12:Name -> U
+318:12:Attribute -> U
+318:12:Name -> U
+321:11:Attribute -> U
+321:11:Name -> U
+321:35:Call -> U
+321:35:Attribute -> U
+321:35:Attribute -> U
+321:35:Name -> U
+322:12:Attribute -> U
+322:12:Name -> U
+324:8:Attribute -> U
+324:8:Name -> U
+324:32:Attribute -> U
+324:32:Name -> U
+325:8:Attribute -> U
+325:8:Name -> U
+325:31:Attribute -> U
+325:31:Name -> U
+326:8:Attribute -> U
+326:8:Name -> U
+326:40:Attribute -> U
+326:40:Name -> U
+328:15:Name -> U
+330:17:Call -> U
+330:17:Name -> Func:homeassistant.bootstrap.async_setup_hass.create_hass
+332:7:Attribute -> U
+332:7:Name -> U
+332:34:Attribute -> U
+332:34:Name -> U
+333:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+333:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+333:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+337:17:Call -> U
+337:17:Attribute -> U
+337:17:Name -> U
+337:54:Name -> U
+338:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+338:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+338:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+341:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+341:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+341:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+341:41:Attribute -> U
+341:41:Name -> U
+343:4:Call -> Const:NoneType:None
+343:4:Attribute -> Func:homeassistant.block_async_io.enable
+343:4:Name -> Module:homeassistant.block_async_io
+345:29:Attribute -> U
+345:29:Name -> U
+349:14:Call -> U
+349:14:Attribute -> U
+349:14:Name -> U
+349:42:Attribute -> U
+349:42:Name -> U
+349:79:Name -> U
+352:32:Call -> U
+352:32:Attribute -> U
+352:32:Name -> U
+352:65:Name -> U
+353:15:Name -> Class:homeassistant.exceptions.HomeAssistantError
+354:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+354:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+354:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+356:16:Name -> ExcInst:homeassistant.exceptions.HomeAssistantError
+359:19:Call -> Const:bool:True
+359:19:Name -> Func:homeassistant.util.package.is_virtual_env
+360:22:Call -> U
+360:22:Name -> Func:homeassistant.bootstrap.async_mount_local_lib_path
+360:49:Attribute -> U
+360:49:Name -> U
+362:15:Attribute -> U
+362:15:Attribute -> U
+362:15:Name -> U
+363:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+363:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+363:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+366:22:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+366:22:Name -> Func:homeassistant.bootstrap.async_from_config_dict
+366:45:Name -> U
+366:58:Name -> U
+369:11:Name -> Const:NoneType:None | U
+371:18:Call -> U
+371:18:Attribute -> U
+371:18:Name -> U
+372:25:Call -> U
+372:25:Name -> Func:homeassistant.bootstrap.async_setup_hass.create_hass
+374:17:Name -> Const:bool:False | U
+375:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+375:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+375:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+379:18:Call -> U
+379:18:Attribute -> U
+379:18:Name -> U
+380:25:Call -> U
+380:25:Name -> Func:homeassistant.bootstrap.async_setup_hass.create_hass
+382:13:Call -> ERR
+382:13:Name -> Func:builtins.any
+383:12:Name -> U
+383:26:Attribute -> U
+383:26:Attribute -> U
+383:26:Name -> U
+383:63:Name -> Set:1
+385:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+385:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+385:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+387:16:Call -> Const:str:''
+387:16:Attribute -> BM:builtins.str.join
+387:25:Name -> Set:1
+390:25:Attribute -> U
+390:25:Name -> U
+391:26:Call -> U
+391:26:Attribute -> U
+391:26:Attribute -> U
+391:26:Name -> U
+391:40:Name -> Inst:homeassistant.util.hass_dict.HassKey
+394:18:Call -> U
+394:18:Attribute -> U
+394:18:Name -> U
+395:25:Call -> U
+395:25:Name -> Func:homeassistant.bootstrap.async_setup_hass.create_hass
+397:15:Name -> U
+398:16:Attribute -> U
+398:16:Name -> U
+398:26:Name -> Inst:homeassistant.util.hass_dict.HassKey
+398:42:Name -> U
+399:12:Attribute -> U
+399:12:Name -> U
+399:32:Attribute -> U
+399:32:Name -> U
+400:12:Attribute -> U
+400:12:Name -> U
+400:35:Attribute -> U
+400:35:Name -> U
+401:12:Attribute -> U
+401:12:Name -> U
+401:44:Attribute -> U
+401:44:Name -> U
+402:12:Attribute -> U
+402:12:Name -> U
+402:39:Attribute -> U
+402:39:Name -> U
+403:12:Attribute -> U
+403:12:Name -> U
+403:39:Attribute -> U
+403:39:Name -> U
+405:12:Call -> Const:NoneType:None
+405:12:Attribute -> Func:homeassistant.loader.async_setup
+405:12:Name -> Module:homeassistant.loader
+405:31:Name -> U
+407:7:Name -> U | Const:bool:True | Const:bool:True | Const:bool:True
+408:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+408:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+408:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+409:8:Attribute -> U
+409:8:Name -> U
+411:27:Call -> U
+411:27:Attribute -> Func:homeassistant.components.http.async_get_last_config
+411:27:Name -> Module:homeassistant.components.http
+411:54:Name -> U
+413:14:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+413:14:Name -> Func:homeassistant.bootstrap.async_from_config_dict
+414:42:Name -> U
+415:12:Name -> U
+418:7:Attribute -> U
+418:7:Name -> U
+419:8:Call -> U
+419:8:Attribute -> U
+419:8:Name -> U
+419:21:Name -> Func:homeassistant.bootstrap.open_hass_ui
+419:35:Name -> U
+421:11:Name -> U
+424:23:Attribute -> U
+424:23:Name -> U
+428:7:Attribute -> U
+428:7:Attribute -> U
+428:7:Name -> U
+428:52:Attribute -> U
+428:52:Attribute -> U
+428:52:Name -> U
+429:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+429:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+429:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+432:24:Attribute -> U
+432:24:Attribute -> U
+432:24:Attribute -> U
+432:24:Name -> U
+433:10:Call -> Const:str:''
+433:10:Name -> Class:builtins.str
+434:8:Call -> U
+434:8:Attribute -> U
+434:8:Attribute -> U
+434:8:Name -> U
+434:30:Name -> Const:str:'https' | Const:str:'http'
+434:61:Attribute -> U
+434:61:Attribute -> U
+434:61:Attribute -> U
+434:61:Name -> U
+437:11:Call -> Const:bool:True | Const:bool:False
+437:11:Attribute -> Func:webbrowser.open
+437:11:Name -> Module:webbrowser
+437:27:Name -> Const:str:''
+438:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+438:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+438:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+440:12:Name -> Const:str:''
+451:8:Attribute -> Const:str:''
+451:8:Call -> Inst:platform.uname_result
+451:8:Attribute -> Func:platform.uname
+451:8:Name -> Module:platform
+454:4:Call -> Const:NoneType:None
+454:4:Attribute -> Func:mimetypes.init
+454:4:Name -> Module:mimetypes
+457:4:Call -> Const:bool:False | U
+457:4:Name -> Func:homeassistant.util.system_info.is_official_image
+458:4:Call -> U
+458:4:Name -> Func:homeassistant.util.package.is_docker_env
+461:46:Attribute -> U
+461:46:Name -> U
+461:69:Name -> Class:builtins.bool
+466:7:Name -> Inst:homeassistant.util.hass_dict.HassKey
+466:33:Attribute -> U
+466:33:Name -> U
+469:4:Attribute -> U
+469:4:Name -> U
+469:14:Name -> Inst:homeassistant.util.hass_dict.HassKey
+470:4:Call -> Const:NoneType:None
+470:4:Attribute -> Func:homeassistant.helpers.entity.async_setup
+470:4:Name -> Module:homeassistant.helpers.entity
+470:23:Name -> U
+471:4:Call -> Const:NoneType:None
+471:4:Attribute -> Func:homeassistant.helpers.frame.async_setup
+471:4:Name -> Module:homeassistant.helpers.frame
+471:22:Name -> U
+472:4:Call -> U
+472:4:Attribute -> U
+472:4:Name -> U
+472:25:Name -> U
+473:4:Call -> Const:NoneType:None
+473:4:Attribute -> Func:homeassistant.helpers.translation.async_setup
+473:4:Name -> Module:homeassistant.helpers.translation
+473:28:Name -> U
+475:15:Attribute -> U
+475:15:Attribute -> U
+475:15:Name -> U
+476:4:Call -> U
+476:4:Attribute -> U
+476:4:Name -> U
+476:32:Name -> U
+478:14:Call -> U | Inst:asyncio.tasks._GatheringFuture
+478:14:Attribute -> Func:asyncio.tasks.gather
+478:14:Name -> Module:asyncio
+479:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+479:12:Name -> Func:homeassistant.util.async_.create_eager_task
+479:30:Call -> U
+479:30:Attribute -> U
+479:30:Call -> U
+479:30:Name -> Func:homeassistant.helpers.storage.get_internal_store_manager
+479:57:Name -> U
+480:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+480:12:Name -> Func:homeassistant.util.async_.create_eager_task
+480:30:Call -> Const:NoneType:None
+480:30:Attribute -> Func:homeassistant.helpers.area_registry.async_load
+480:30:Name -> Module:homeassistant.helpers.area_registry
+480:55:Name -> U
+480:72:Name -> U
+481:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+481:12:Name -> Func:homeassistant.util.async_.create_eager_task
+481:30:Call -> Const:NoneType:None
+481:30:Attribute -> Func:homeassistant.helpers.category_registry.async_load
+481:30:Name -> Module:homeassistant.helpers.category_registry
+481:59:Name -> U
+481:76:Name -> U
+482:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+482:12:Name -> Func:homeassistant.util.async_.create_eager_task
+482:30:Call -> U
+482:30:Attribute -> U
+482:30:Name -> U
+482:57:Name -> U
+482:74:Name -> U
+483:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+483:12:Name -> Func:homeassistant.util.async_.create_eager_task
+483:30:Call -> U
+483:30:Attribute -> U
+483:30:Name -> U
+483:57:Name -> U
+483:74:Name -> U
+484:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+484:12:Name -> Func:homeassistant.util.async_.create_eager_task
+484:30:Call -> Const:NoneType:None
+484:30:Attribute -> Func:homeassistant.helpers.floor_registry.async_load
+484:30:Name -> Module:homeassistant.helpers.floor_registry
+484:56:Name -> U
+484:73:Name -> U
+485:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+485:12:Name -> Func:homeassistant.util.async_.create_eager_task
+485:30:Call -> Const:NoneType:None
+485:30:Attribute -> Func:homeassistant.helpers.issue_registry.async_load
+485:30:Name -> Module:homeassistant.helpers.issue_registry
+485:56:Name -> U
+485:73:Name -> U
+486:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+486:12:Name -> Func:homeassistant.util.async_.create_eager_task
+486:30:Call -> Const:NoneType:None
+486:30:Attribute -> Func:homeassistant.helpers.label_registry.async_load
+486:30:Name -> Module:homeassistant.helpers.label_registry
+486:56:Name -> U
+486:73:Name -> U
+487:12:Call -> U
+487:12:Attribute -> U
+487:12:Name -> U
+487:40:Name -> Func:homeassistant.bootstrap._init_blocking_io_modules_in_executor
+488:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+488:12:Name -> Func:homeassistant.util.async_.create_eager_task
+488:30:Call -> U
+488:30:Attribute -> U
+488:30:Name -> U
+488:67:Name -> U
+489:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+489:12:Name -> Func:homeassistant.util.async_.create_eager_task
+489:30:Call -> Const:NoneType:None
+489:30:Attribute -> Func:homeassistant.helpers.restore_state.async_load
+489:30:Name -> Module:homeassistant.helpers.restore_state
+489:55:Name -> U
+489:72:Name -> U
+490:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+490:12:Name -> Func:homeassistant.util.async_.create_eager_task
+490:30:Call -> U
+490:30:Attribute -> U
+490:30:Attribute -> U
+490:30:Name -> U
+491:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+491:12:Name -> Func:homeassistant.util.async_.create_eager_task
+491:30:Call -> U
+491:30:Name -> U
+491:52:Name -> U
+492:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+492:12:Name -> Func:homeassistant.util.async_.create_eager_task
+492:30:Call -> U
+492:30:Attribute -> U
+492:30:Name -> U
+492:52:Name -> U
+493:12:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+493:12:Name -> Func:homeassistant.util.async_.create_eager_task
+493:30:Call -> U
+493:30:Attribute -> U
+493:30:Name -> U
+493:50:Name -> U
+495:11:Name -> Class:homeassistant.exceptions.UnsupportedStorageVersionError
+498:11:Name -> U
+501:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+501:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+501:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+505:12:Attribute -> U
+505:12:Name -> ExcInst:homeassistant.exceptions.UnsupportedStorageVersionError
+506:12:Attribute -> U
+506:12:Name -> ExcInst:homeassistant.exceptions.UnsupportedStorageVersionError
+507:12:Attribute -> U
+507:12:Name -> ExcInst:homeassistant.exceptions.UnsupportedStorageVersionError
+515:12:Name -> Class:builtins.dict
+515:30:Attribute -> U
+515:30:Name -> U
+516:5:Attribute -> U
+516:5:Name -> U
+522:12:Call -> ERR
+522:12:Name -> Func:time.monotonic
+524:4:Name -> U
+524:26:Call -> U
+524:26:Attribute -> U
+524:26:Name -> U
+524:55:Name -> U
+524:61:Name -> U
+527:10:Call -> U
+527:10:Attribute -> Func:homeassistant.loader.async_get_custom_components
+527:10:Name -> Module:homeassistant.loader
+527:45:Name -> U
+529:17:Call -> Const:bool:True | Const:bool:False | Const:bool:True
+529:17:Name -> Func:homeassistant.bootstrap.async_load_base_functionality
+529:47:Name -> U
+533:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+533:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+533:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+533:35:Name -> Set:2
+535:11:Call -> ERR
+535:11:Name -> Func:builtins.all
+536:14:Call -> U | Inst:asyncio.tasks._GatheringFuture
+536:14:Attribute -> Func:asyncio.tasks.gather
+536:14:Name -> Module:asyncio
+538:16:Call -> Inst:asyncio.tasks.Task | Inst:_asyncio.Task
+538:16:Name -> Func:homeassistant.util.async_.create_eager_task
+539:20:Call -> Const:bool:True | U
+539:20:Name -> Func:homeassistant.setup.async_setup_component
+539:42:Name -> U
+539:48:Name -> U
+539:56:Name -> U
+540:44:Name -> U
+541:25:Attribute -> U
+541:25:Name -> U
+543:30:Name -> Set:2
+547:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+547:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+547:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+550:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+550:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+550:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+552:18:Call -> U
+552:18:Attribute -> U
+552:18:Name -> U
+552:29:Attribute -> U
+552:29:Name -> U
+555:14:Call -> U
+555:14:Name -> U
+555:43:Name -> U
+555:49:Name -> U
+556:11:Attribute -> U
+556:11:Name -> U
+557:8:Call -> U
+557:8:Attribute -> U
+557:8:Name -> U
+557:41:Name -> U
+557:53:Attribute -> U
+557:53:Name -> U
+557:66:Name -> U
+557:79:Name -> U
+558:8:Call -> Const:NoneType:None
+558:8:Name -> Func:homeassistant.setup.async_notify_setup_error
+558:33:Name -> U
+558:39:Attribute -> U
+558:39:Name -> U
+560:11:Name -> Class:homeassistant.exceptions.HomeAssistantError
+561:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+561:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+561:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+566:10:Call -> Const:NoneType:None
+566:10:Name -> Func:homeassistant.bootstrap._async_set_up_integrations
+566:37:Name -> U
+566:43:Name -> U
+568:11:Call -> ERR
+568:11:Name -> Func:time.monotonic
+569:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+569:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+569:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+569:56:Name -> U
+569:63:Name -> U
+570:11:Name -> U
+574:10:Attribute -> U
+574:10:Name -> U
+575:13:Name -> Class:builtins.bool
+576:21:Name -> Class:builtins.int
+577:14:Name -> Class:builtins.str
+578:18:Name -> Class:builtins.bool
+588:11:Name -> Const:bool:False | U
+594:12:Call -> Const:NoneType:None
+594:12:Attribute -> Func:logging.basicConfig
+594:12:Name -> Module:logging
+594:38:Attribute -> Const:int:20
+594:38:Name -> Module:logging
+596:39:Name -> Const:str:'%(asctime)s.%(msecs)03d %(levelname)s (
+597:12:Call -> ERR
+597:12:Attribute -> ERR
+597:12:Attribute -> List:0 | U
+597:12:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+597:12:Attribute -> Func:logging.getLogger
+597:12:Name -> Module:logging
+598:16:Call -> U
+598:16:Name -> U
+599:20:Name -> Const:str:'%(log_color)s%(asctime)s.%(msecs)03d %(
+600:28:Name -> Const:str:'%Y-%m-%d %H:%M:%S'
+611:15:Name -> Class:builtins.ImportError
+616:4:Call -> Const:NoneType:None
+616:4:Attribute -> Func:logging.basicConfig
+616:4:Name -> Module:logging
+616:31:Name -> Const:str:'%(asctime)s.%(msecs)03d %(levelname)s (
+616:44:Name -> Const:str:'%Y-%m-%d %H:%M:%S'
+616:67:Attribute -> Const:int:20
+616:67:Name -> Module:logging
+621:4:Call -> Const:NoneType:None
+621:4:Attribute -> Func:logging.captureWarnings
+621:4:Name -> Module:logging
+624:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+624:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+624:4:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+624:4:Attribute -> Func:logging.getLogger
+624:4:Name -> Module:logging
+624:43:Attribute -> Const:int:30
+624:43:Name -> Module:logging
+625:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+625:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+625:4:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+625:4:Attribute -> Func:logging.getLogger
+625:4:Name -> Module:logging
+625:42:Attribute -> Const:int:30
+625:42:Name -> Module:logging
+626:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+626:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+626:4:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+626:4:Attribute -> Func:logging.getLogger
+626:4:Name -> Module:logging
+626:49:Attribute -> Const:int:30
+626:49:Name -> Module:logging
+627:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+627:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+627:4:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+627:4:Attribute -> Func:logging.getLogger
+627:4:Name -> Module:logging
+627:40:Attribute -> Const:int:30
+627:40:Name -> Module:logging
+629:4:Name -> Module:sys
+629:35:Call -> Const:NoneType:None | U | Const:NoneType:None
+629:35:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+629:35:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+629:35:Attribute -> Func:logging.getLogger
+629:35:Name -> Module:logging
+630:39:Name -> Tuple:0
+632:4:Name -> Module:threading
+632:40:Call -> Const:NoneType:None | U | Const:NoneType:None
+632:40:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+632:40:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+632:40:Attribute -> Func:logging.getLogger
+632:40:Name -> Module:logging
+635:12:Attribute -> U
+635:12:Name -> U
+636:12:Attribute -> U
+636:12:Name -> U
+637:12:Attribute -> U
+637:12:Name -> U
+641:13:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+641:13:Attribute -> Func:logging.getLogger
+641:13:Name -> Module:logging
+642:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+642:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+642:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+642:36:Name -> Const:bool:False | U
+642:20:Attribute -> Const:int:20
+642:20:Name -> Module:logging
+642:49:Attribute -> Const:int:30
+642:49:Name -> Module:logging
+644:7:Name -> Const:NoneType:None | U
+645:27:Call -> U
+645:27:Attribute -> U
+645:27:Attribute -> U
+645:27:Name -> U
+645:44:Name -> Const:str:'home-assistant.log'
+646:27:Attribute -> Dict:43 | Inst:os._Environ
+646:27:Name -> Module:os
+646:73:Attribute -> Dict:43 | Inst:os._Environ
+646:73:Name -> Module:os
+651:19:Call -> Const:bool:False | U
+651:19:Attribute -> Func:genericpath.isfile | U
+651:19:Attribute -> Module:posixpath | Module:ntpath
+651:19:Name -> Module:os
+651:34:Name -> U
+652:25:Call -> Inst:contextlib.suppress
+652:25:Attribute -> Class:contextlib.suppress
+652:25:Name -> Module:contextlib
+652:45:Name -> Class:builtins.OSError
+653:24:Call -> ERR
+653:24:Attribute -> Func:posix.rename
+653:24:Name -> Module:os
+653:34:Name -> U
+653:55:Name -> U
+655:18:Call -> U
+655:18:Attribute -> U
+655:18:Name -> U
+655:46:Name -> Func:homeassistant.bootstrap.async_enable_logging.rename_old_file
+658:27:Name -> U
+660:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+660:23:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+660:23:Attribute -> Module:posixpath | Module:ntpath
+660:23:Name -> Module:os
+660:39:Name -> U
+662:7:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+663:28:Call -> U
+663:28:Attribute -> U
+663:28:Name -> U
+664:12:Name -> Func:homeassistant.bootstrap._create_log_file
+664:30:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+664:44:Name -> Const:NoneType:None | U
+667:8:Call -> U
+667:8:Attribute -> U
+667:8:Name -> U
+667:33:Call -> Inst:logging.Formatter
+667:33:Attribute -> Class:logging.Formatter
+667:33:Name -> Module:logging
+667:51:Name -> Const:str:'%(asctime)s.%(msecs)03d %(levelname)s (
+667:64:Name -> Const:str:'%Y-%m-%d %H:%M:%S'
+668:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+668:8:Attribute -> BM:logging.Logger.addHandler | U | BM:logging.Logger.addHandler
+668:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+668:26:Name -> U
+671:8:Attribute -> U
+671:8:Name -> U
+671:18:Name -> Inst:homeassistant.util.hass_dict.HassKey
+671:34:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+673:4:Call -> Const:NoneType:None
+673:4:Name -> Func:homeassistant.util.logging.async_activate_log_queue_handler
+673:37:Name -> U
+677:18:Name -> Class:builtins.str
+677:40:Name -> Class:builtins.int
+678:5:Name -> Class:logging.handlers.RotatingFileHandler
+678:27:Name -> Class:logging.handlers.TimedRotatingFileHandler
+680:17:Name -> Class:logging.handlers.RotatingFileHandler
+680:39:Name -> Class:logging.handlers.TimedRotatingFileHandler
+681:7:Name -> U
+682:22:Call -> Inst:logging.handlers.TimedRotatingFileHandler
+682:22:Name -> Class:logging.handlers.TimedRotatingFileHandler
+683:12:Name -> U
+683:55:Name -> U
+686:22:Call -> Inst:homeassistant.bootstrap._RotatingFileHandlerWithoutShouldRollOver
+686:22:Name -> Class:homeassistant.bootstrap._RotatingFileHandlerWithoutShouldRollOver
+687:12:Name -> U
+690:12:Call -> U | Const:NoneType:None
+690:12:Attribute -> U | BM:logging.handlers.RotatingFileHandler.doRollover
+690:12:Name -> U | Inst:homeassistant.bootstrap._RotatingFileHandlerWithoutShouldRollOver
+691:15:Name -> Class:builtins.OSError
+692:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+692:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+692:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+692:61:Name -> ExcInst:builtins.OSError
+694:11:Name -> U | Inst:logging.handlers.TimedRotatingFileHandler | Inst:homeassistant.bootstrap._RotatingFileHandlerWithoutShouldRollOver
+697:48:Name -> Class:logging.handlers.RotatingFileHandler
+700:37:Attribute -> Class:logging.LogRecord
+700:37:Name -> Module:logging
+700:59:Name -> Class:builtins.bool
+710:49:Name -> Class:builtins.str
+710:57:Name -> Class:builtins.str
+715:15:Call -> U
+715:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+715:15:Attribute -> Module:posixpath | Module:ntpath
+715:15:Name -> Module:os
+715:28:Name -> U
+716:25:Call -> U
+716:25:Name -> Func:homeassistant.util.package.async_get_user_site
+716:45:Name -> U
+716:63:Attribute -> List:6 | List:6 | U
+716:63:Name -> Module:sys
+717:8:Call -> U
+717:8:Attribute -> BM:builtins.list.insert | BM:builtins.list.insert | U
+717:8:Attribute -> List:6 | List:6 | U
+717:8:Name -> Module:sys
+717:27:Name -> U
+718:11:Name -> U
+721:23:Attribute -> U
+721:23:Name -> U
+721:51:Name -> Class:builtins.dict
+721:56:Name -> Class:builtins.str
+721:61:Name -> Class:typing.Any
+721:70:Name -> Class:builtins.set
+721:74:Name -> Class:builtins.str
+726:15:Call -> U
+726:15:Attribute -> Func:homeassistant.helpers.config_validation.domain_key
+726:15:Name -> Module:homeassistant.helpers.config_validation
+726:29:Name -> U
+726:45:Name -> U
+729:11:Attribute -> U
+729:11:Attribute -> U
+729:11:Name -> U
+730:8:Call -> U
+730:8:Attribute -> U
+730:8:Name -> U
+730:23:Name -> U
+731:8:Call -> U
+731:8:Attribute -> U
+731:8:Name -> U
+731:23:Call -> U
+731:23:Attribute -> U
+731:23:Attribute -> U
+731:23:Name -> U
+733:8:Call -> U
+733:8:Attribute -> U
+733:8:Name -> U
+733:23:Name -> Set:3
+736:23:Attribute -> Dict:43 | Inst:os._Environ
+736:23:Name -> Module:os
+737:8:Call -> U
+737:8:Attribute -> U
+737:8:Name -> U
+737:23:Name -> Set:1
+739:11:Name -> U
+743:10:Attribute -> U
+743:10:Name -> U
+743:38:Name -> Class:builtins.dict
+743:43:Name -> Class:builtins.str
+743:48:Name -> Class:typing.Any
+744:5:Name -> Class:builtins.tuple
+744:11:Name -> Class:builtins.dict
+744:16:Name -> Class:builtins.str
+744:21:Name -> Class:homeassistant.loader.Integration
+744:35:Name -> Class:builtins.dict
+744:40:Name -> Class:builtins.str
+744:45:Name -> Class:homeassistant.loader.Integration
+753:23:Call -> U
+753:23:Name -> Func:homeassistant.bootstrap._get_domains
+753:36:Name -> U
+753:42:Name -> U
+773:28:Call -> U
+773:28:Attribute -> U
+773:28:Name -> U
+774:8:Name -> U
+774:16:Name -> U
+777:9:Name -> U
+778:9:Call -> ERR
+778:9:Attribute -> Inst:builtins.builtin_function_or_method
+778:9:Name -> Class:itertools.chain
+778:29:Call -> U
+778:29:Attribute -> U
+778:29:Name -> U
+783:33:Call -> Dict:0
+783:33:Attribute -> Func:homeassistant.loader.async_get_integrations
+783:33:Name -> Module:homeassistant.loader
+784:8:Name -> U
+784:16:Name -> U
+784:35:Name -> U
+788:8:Name -> U
+788:16:Name -> U
+789:27:Call -> U
+789:27:Attribute -> U
+789:27:Name -> U
+790:11:Call -> ERR
+790:11:Name -> Func:builtins.isinstance
+790:22:Name -> U
+790:27:Name -> Class:homeassistant.loader.Integration
+792:38:Call -> U
+792:38:Attribute -> Func:homeassistant.loader.resolve_integrations_dependencies
+792:38:Name -> Module:homeassistant.loader
+793:8:Name -> U
+793:14:Call -> U
+793:14:Attribute -> U
+793:14:Name -> U
+797:8:Name -> U
+797:16:Name -> U
+797:40:Name -> U
+797:62:Name -> U
+801:8:Name -> U
+801:16:Name -> U
+802:27:Call -> U
+802:27:Attribute -> U
+802:27:Name -> U
+803:11:Name -> U
+803:21:Name -> U
+805:32:Call -> U
+805:32:Attribute -> U
+805:32:Name -> U
+806:4:Call -> U
+806:4:Attribute -> U
+806:4:Name -> U
+807:9:Name -> U
+807:14:Call -> U
+807:14:Attribute -> Func:homeassistant.loader.async_get_loaded_integration
+807:14:Name -> Module:homeassistant.loader
+807:50:Name -> U
+807:56:Name -> U
+808:22:Name -> U
+809:19:Call -> U
+809:19:Attribute -> U
+809:19:Name -> U
+809:45:Name -> U
+810:12:Name -> U
+819:14:Call -> U
+819:14:Attribute -> Func:homeassistant.loader.resolve_integrations_after_dependencies
+819:14:Name -> Module:homeassistant.loader
+820:12:Name -> U
+820:18:Call -> U
+820:18:Attribute -> U
+820:18:Name -> U
+824:8:Name -> U
+824:16:Attribute -> U
+824:16:Name -> U
+824:52:Call -> U
+824:52:Attribute -> U
+824:52:Name -> U
+826:4:Call -> U
+826:4:Attribute -> U
+826:4:Name -> U
+827:9:Name -> U
+827:14:Attribute -> U
+827:14:Call -> U
+827:14:Attribute -> Func:homeassistant.loader.async_get_loaded_integration
+827:14:Name -> Module:homeassistant.loader
+827:50:Name -> U
+827:56:Name -> U
+828:20:Call -> U
+828:20:Attribute -> U
+828:20:Name -> U
+829:19:Call -> U
+829:19:Attribute -> U
+829:19:Name -> U
+829:35:Name -> U
+831:23:Call -> Inst:builtins.set
+831:23:Name -> Class:builtins.set
+831:27:Call -> ERR
+831:27:Attribute -> Inst:builtins.builtin_function_or_method
+831:27:Name -> Class:itertools.chain
+831:47:Call -> U
+831:47:Attribute -> U
+831:47:Name -> U
+836:4:Call -> U
+836:4:Attribute -> U
+836:4:Name -> U
+837:8:Call -> Const:NoneType:None
+837:8:Attribute -> Func:homeassistant.requirements.async_load_installed_versions
+837:8:Name -> Module:homeassistant.requirements
+837:51:Name -> U
+837:57:Name -> Inst:builtins.set
+852:29:Name -> U
+852:57:Name -> U
+853:4:Call -> U
+853:4:Attribute -> U
+853:4:Name -> U
+854:8:Call -> Const:NoneType:None
+854:8:Attribute -> Func:homeassistant.helpers.translation.async_load_integrations
+854:8:Name -> Module:homeassistant.helpers.translation
+854:44:Name -> U
+854:50:Name -> U
+862:4:Call -> U
+862:4:Attribute -> U
+862:4:Name -> U
+863:8:Call -> U
+863:8:Attribute -> U
+863:8:Call -> U
+863:8:Name -> Func:homeassistant.helpers.storage.get_internal_store_manager
+863:35:Name -> U
+864:14:Name -> List:14
+864:32:Name -> U
+870:11:Name -> U
+870:34:Name -> U
+874:10:Attribute -> U
+874:10:Name -> U
+874:38:Name -> Class:builtins.dict
+874:43:Name -> Class:builtins.str
+874:48:Name -> Class:typing.Any
+877:14:Call -> Inst:homeassistant.bootstrap._WatchPendingSetups
+877:14:Name -> Class:homeassistant.bootstrap._WatchPendingSetups
+877:34:Name -> U
+877:40:Call -> Dict:0
+877:40:Name -> Func:homeassistant.setup._setup_started
+877:55:Name -> U
+878:4:Call -> Const:NoneType:None
+878:4:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups.async_start
+878:4:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+880:43:Call -> Tuple:2
+880:43:Name -> Func:homeassistant.bootstrap._async_resolve_domains_and_preload
+881:8:Name -> U
+881:14:Name -> U
+885:14:Call -> U
+885:14:Attribute -> Func:homeassistant.loader.resolve_integrations_after_dependencies
+885:14:Name -> Module:homeassistant.loader
+886:12:Name -> U
+886:18:Call -> U
+886:18:Attribute -> U
+886:18:Name -> U
+886:45:Call -> Inst:builtins.set
+886:45:Name -> Class:builtins.set
+886:49:Name -> U
+889:18:Call -> Inst:builtins.set
+889:18:Name -> Class:builtins.set
+889:22:Name -> U
+890:14:Call -> Inst:builtins.set
+890:14:Name -> Class:builtins.set
+890:18:Name -> U
+890:34:Name -> Inst:builtins.set
+892:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+892:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+892:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+894:8:Name -> U
+895:9:Name -> Inst:builtins.set
+895:23:Name -> U
+898:4:Call -> Const:NoneType:None
+898:4:Name -> Func:homeassistant.setup.async_set_domains_to_be_loaded
+898:35:Name -> U
+898:41:Name -> Inst:builtins.set
+901:21:Name -> Inst:builtins.set
+902:8:Call -> Const:NoneType:None
+902:8:Attribute -> Func:homeassistant.helpers.recorder.async_initialize_recorder
+902:8:Name -> Module:homeassistant.helpers.recorder
+902:43:Name -> U
+904:12:Name -> Class:builtins.list
+904:17:Name -> Class:builtins.tuple
+904:23:Name -> Class:builtins.str
+904:28:Name -> Class:builtins.set
+904:32:Name -> Class:builtins.str
+904:38:Name -> Class:builtins.int
+906:13:Name -> Const:str:'logging, http deps' | Const:str:'labs' | Const:str:'frontend' | Const:str:'recorder' | Const:str:'debugger' | Const:str:'zeroconf'
+906:19:Name -> Set:5 | Set:1 | Set:1 | Set:1 | Set:1 | Set:1
+906:33:Name -> Const:NoneType:None | Const:int:60 | Const:NoneType:None | Const:NoneType:None
+907:47:Name -> Tuple:6
+909:14:Name -> Set:7
+909:36:Name -> Const:int:120
+910:14:Name -> U
+910:23:Name -> Const:int:300
+913:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+913:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+913:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+914:39:Name -> U
+915:35:Name -> U
+915:50:Name -> Inst:builtins.set
+916:15:Name -> U
+917:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+917:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+917:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+917:62:Name -> U
+917:68:Name -> U
+920:24:Name -> U
+920:51:Attribute -> U
+920:51:Attribute -> U
+920:51:Name -> U
+921:15:Name -> U
+922:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+922:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+922:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+922:56:Name -> U
+922:62:Name -> U
+926:12:Name -> U
+927:26:Name -> U
+928:23:Name -> U
+928:55:Name -> U
+929:15:Name -> U
+929:26:Name -> U
+931:28:Name -> U
+931:59:Attribute -> U
+931:59:Attribute -> U
+931:59:Name -> U
+933:28:Name -> U
+933:44:Name -> U
+935:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+935:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+935:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+938:12:Name -> U
+939:12:Name -> U
+940:13:Name -> U
+940:40:Name -> U
+941:12:Name -> U
+942:13:Name -> U
+942:44:Name -> U
+945:11:Name -> U
+946:18:Call -> Const:NoneType:None
+946:18:Name -> Func:homeassistant.bootstrap._async_setup_multi_components
+946:48:Name -> U
+946:54:Name -> U
+946:73:Name -> U
+949:23:Call -> U
+949:23:Attribute -> U
+949:23:Attribute -> U
+949:23:Name -> U
+950:16:Name -> U
+951:26:Name -> Const:int:60
+952:50:Name -> U
+954:22:Call -> Const:NoneType:None
+954:22:Name -> Func:homeassistant.bootstrap._async_setup_multi_components
+954:52:Name -> U
+954:58:Name -> U
+954:77:Name -> U
+955:15:Name -> Class:builtins.TimeoutError
+956:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+956:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+956:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+958:16:Name -> U
+959:16:Attribute -> U
+959:16:Name -> U
+963:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+963:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+963:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+965:19:Call -> U
+965:19:Attribute -> U
+965:19:Attribute -> U
+965:19:Name -> U
+966:12:Name -> Const:int:300
+967:22:Name -> Const:int:60
+970:18:Call -> U
+970:18:Attribute -> U
+970:18:Name -> U
+971:11:Name -> Class:builtins.TimeoutError
+972:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+972:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+972:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+974:12:Attribute -> U
+974:12:Name -> U
+977:4:Call -> Const:NoneType:None
+977:4:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups.async_stop
+977:4:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+979:7:Call -> Const:bool:False | U | Const:bool:False
+979:7:Attribute -> BM:logging.Logger.isEnabledFor | U | BM:logging.Logger.isEnabledFor
+979:7:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+979:28:Attribute -> Const:int:10
+979:28:Name -> Module:logging
+980:21:Call -> Dict:0
+980:21:Name -> Func:homeassistant.setup.async_get_setup_timings
+980:45:Name -> U
+981:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+981:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+981:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+983:12:Call -> Inst:builtins.dict
+983:12:Name -> Class:builtins.dict
+983:17:Call -> ERR
+983:17:Name -> Func:builtins.sorted
+983:24:Call -> DictItems
+983:24:Attribute -> BM:builtins.dict.items
+983:24:Name -> Dict:0
+983:48:Call -> Inst:operator.itemgetter | Inst:_operator.operator.itemgetter | U
+983:48:Name -> Class:operator.itemgetter | Class:_operator.operator.itemgetter | U
+992:14:Attribute -> U
+992:14:Name -> U
+993:23:Name -> Class:builtins.dict
+993:28:Name -> Class:builtins.tuple
+993:34:Name -> Class:builtins.str
+993:39:Name -> Class:builtins.str
+993:52:Name -> Class:builtins.float
+996:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+996:21:Name -> U
+997:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+997:30:Name -> U
+998:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+999:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+999:22:Attribute -> Class:asyncio.events.TimerHandle
+999:22:Name -> Module:asyncio
+1000:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1001:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1001:21:Attribute -> U
+1001:21:Name -> U
+1005:14:Call -> ERR
+1005:14:Name -> Func:time.monotonic
+1006:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1006:32:Name -> Const:int:1
+1008:38:Name -> Class:collections.defaultdict
+1008:50:Name -> Class:builtins.str
+1008:55:Name -> Class:builtins.float
+1008:64:Call -> Inst:collections.defaultdict
+1008:64:Name -> Class:collections.defaultdict
+1008:76:Name -> Class:builtins.float
+1009:45:Call -> U
+1009:45:Attribute -> U
+1009:45:Attribute -> U
+1009:45:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1010:24:Name -> U
+1011:12:Name -> Inst:collections.defaultdict
+1011:41:Name -> U
+1011:52:Name -> U
+1011:58:Name -> U
+1013:11:Name -> Inst:collections.defaultdict
+1014:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1014:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1014:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1014:55:Name -> Inst:collections.defaultdict
+1015:30:Attribute -> U
+1015:30:Attribute -> U
+1015:30:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1016:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1016:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1016:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1016:50:Name -> U
+1017:8:Call -> Const:NoneType:None
+1017:8:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups._async_dispatch
+1017:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1017:29:Name -> Inst:collections.defaultdict
+1019:12:Attribute -> U
+1019:12:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1020:16:Attribute -> Const:int:0 | U
+1020:16:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1020:39:Name -> Const:int:60
+1024:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1024:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1024:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1026:16:Attribute -> U
+1026:16:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1029:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1029:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1029:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1029:51:Attribute -> U
+1029:51:Attribute -> U
+1029:51:Attribute -> U
+1029:51:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1030:8:Call -> Const:NoneType:None
+1030:8:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups._async_schedule_next
+1030:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1032:60:Name -> Class:builtins.dict
+1032:65:Name -> Class:builtins.str
+1032:70:Name -> Class:builtins.float
+1034:11:Name -> U
+1034:47:Attribute -> Const:bool:True | U
+1034:47:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1035:12:Call -> U
+1035:12:Name -> U
+1036:16:Attribute -> U
+1036:16:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1036:28:Name -> Inst:homeassistant.util.signal_type.SignalType
+1036:59:Name -> U
+1038:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1038:39:Name -> U
+1042:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1042:23:Call -> U
+1042:23:Attribute -> U
+1042:23:Attribute -> U
+1042:23:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1043:12:Name -> Const:int:1
+1043:41:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups._async_watch
+1043:41:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1048:8:Call -> Const:NoneType:None
+1048:8:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups._async_schedule_next
+1048:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1052:8:Call -> Const:NoneType:None
+1052:8:Attribute -> BM:homeassistant.bootstrap._WatchPendingSetups._async_dispatch
+1052:8:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1053:11:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+1053:11:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1054:12:Call -> U
+1054:12:Attribute -> U
+1054:12:Attribute -> U | Const:NoneType:None
+1054:12:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1055:12:Name -> Inst:homeassistant.bootstrap._WatchPendingSetups
+1059:10:Attribute -> U
+1059:10:Name -> U
+1060:13:Name -> Class:builtins.set
+1060:17:Name -> Class:builtins.str
+1061:12:Name -> Class:builtins.dict
+1061:17:Name -> Class:builtins.str
+1061:22:Name -> Class:typing.Any
+1068:8:Name -> U
+1068:16:Call -> U
+1068:16:Attribute -> U
+1068:16:Name -> U
+1069:12:Call -> Const:bool:True | U
+1069:12:Name -> Func:homeassistant.setup.async_setup_component
+1069:34:Name -> U
+1069:40:Name -> U
+1069:48:Name -> U
+1070:31:Name -> U
+1073:22:Call -> ERR
+1073:22:Name -> Func:builtins.sorted
+1073:29:Name -> U
+1073:42:Name -> Partial:PartialFunction
+1075:20:Call -> U | Inst:asyncio.tasks._GatheringFuture
+1075:20:Attribute -> Func:asyncio.tasks.gather
+1075:20:Name -> Module:asyncio
+1075:36:Call -> U
+1075:36:Attribute -> U
+1075:36:Name -> U
+1076:23:Call -> Inst:builtins.enumerate
+1076:23:Name -> Class:builtins.enumerate
+1076:33:Name -> U
+1077:17:Name -> U
+1077:25:Name -> U
+1078:11:Call -> ERR
+1078:11:Name -> Func:builtins.isinstance
+1078:22:Name -> U
+1078:30:Name -> Class:builtins.BaseException
+1079:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1079:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1079:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1081:16:Name -> U
+1082:26:Call -> U
+1082:26:Name -> Class:builtins.type
+1082:31:Name -> U
+1082:40:Name -> U
+1082:48:Attribute -> U
+1082:48:Name -> U

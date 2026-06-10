@@ -1,0 +1,87 @@
+15:4:Call -> U
+15:4:Attribute -> U
+15:4:Name -> U
+17:4:Name -> Class:builtins.AttributeError
+18:4:Name -> Class:builtins.ImportError
+21:4:Name -> Class:builtins.OSError
+42:15:Name -> Class:builtins.ImportError
+46:26:Call -> U
+46:26:Attribute -> U
+46:26:Name -> U
+46:41:Attribute -> U
+46:41:Name -> U
+47:35:Call -> U
+47:35:Attribute -> U
+47:35:Name -> U
+47:55:Name -> U
+48:19:Name -> Class:builtins.FileNotFoundError
+51:23:Name -> U
+54:15:Call -> Const:bool:True
+54:15:Name -> Func:builtins.hasattr
+54:23:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+54:23:Name -> Module:sys
+54:49:Call -> Const:bool:True | Const:bool:True | U
+54:49:Attribute -> BM:_io.TextIOWrapper.isatty | Lambda:tests.fixtures.tests:801 | Lambda:tests.fixtures.tests:819 | U
+54:49:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+54:49:Name -> Module:sys
+56:11:Name -> Const:bool:True | Const:bool:True | U
+57:8:Attribute -> Const:str:'darwin'
+57:8:Name -> Module:sys
+58:12:Name -> Const:bool:False | Const:bool:True
+58:29:Call -> U
+58:29:Name -> Func:builtins.getattr
+58:37:Name -> U
+59:24:Attribute -> Dict:43 | Inst:os._Environ
+59:24:Name -> Module:os
+62:24:Attribute -> Dict:43 | Inst:os._Environ
+62:24:Name -> Module:os
+65:8:Call -> U | Const:NoneType:None
+65:8:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+65:8:Attribute -> Dict:43 | Inst:os._Environ
+65:8:Name -> Module:os
+66:11:Call -> Const:bool:False | Const:bool:False | U
+66:11:Name -> Func:django.core.management.color.supports_color.vt_codes_enabled_in_windows_registry
+81:12:Call -> Inst:django.core.management.color.Style
+81:12:Name -> Class:django.core.management.color.Style
+83:21:Call -> Dict:20 | Const:NoneType:None | Dict:20
+83:21:Attribute -> Func:django.utils.termcolors.parse_color_setting
+83:21:Name -> Module:django.utils.termcolors
+83:52:Name -> Const:str:'' | U
+88:16:Attribute -> Dict:3
+88:16:Name -> Module:django.utils.termcolors
+88:36:Attribute -> Const:str:'nocolor'
+88:36:Name -> Module:django.utils.termcolors
+89:11:Name -> Dict:20 | Const:NoneType:None | Dict:20
+90:21:Call -> ERR
+90:21:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+90:21:Name -> Dict:20 | Dict:20
+90:40:Name -> U
+91:25:Call -> Lambda:django.utils.termcolors:74
+91:25:Attribute -> Func:django.utils.termcolors.make_style
+91:25:Name -> Module:django.utils.termcolors
+91:49:Name -> U
+95:23:Name -> U
+97:8:Call -> ERR
+97:8:Name -> Func:builtins.setattr
+97:16:Name -> Inst:django.core.management.color.Style
+97:23:Name -> U
+97:29:Name -> Lambda:django.utils.termcolors:74 | Func:django.core.management.color.make_style.style_func
+101:4:Name -> Inst:django.core.management.color.Style
+101:25:Attribute -> ERR
+101:25:Name -> Inst:django.core.management.color.Style
+103:11:Name -> Inst:django.core.management.color.Style
+106:1:Attribute -> Func:functools.cache
+106:1:Name -> Module:functools
+111:11:Call -> Inst:django.core.management.color.Style
+111:11:Name -> Func:django.core.management.color.make_style
+118:11:Name -> Const:bool:False | U
+118:31:Call -> U
+118:31:Name -> Func:django.core.management.color.supports_color
+119:15:Call -> Inst:django.core.management.color.Style
+119:15:Name -> Func:django.core.management.color.no_style
+120:11:Call -> Inst:django.core.management.color.Style
+120:11:Name -> Func:django.core.management.color.make_style
+120:22:Call -> U | Const:str:''
+120:22:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+120:22:Attribute -> Dict:43 | Inst:os._Environ
+120:22:Name -> Module:os

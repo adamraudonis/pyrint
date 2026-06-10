@@ -1,0 +1,689 @@
+24:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+24:6:Attribute -> Func:logging.getLogger
+24:6:Name -> Module:logging
+24:24:Name -> Const:str:'salt.runners.cluster' | Const:str:'__main__'
+74:14:Call -> ERR
+74:14:Attribute -> ERR
+74:14:Name -> ERR
+74:36:Call -> ERR
+74:36:Attribute -> ERR
+74:36:Name -> ERR
+76:20:Call -> Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+76:20:Name -> Class:salt.cluster.consensus.raft.log.MembershipStateMachine
+77:14:Call -> Inst:salt.cluster.consensus.storage.SaltStorage
+77:14:Name -> Class:salt.cluster.consensus.storage.SaltStorage
+77:26:Name -> U
+77:35:Name -> ERR
+81:11:Call -> Inst:salt.cluster.consensus.raft.log.Log
+81:11:Name -> Class:salt.cluster.consensus.raft.log.Log
+82:16:Name -> Inst:salt.cluster.consensus.storage.SaltStorage
+83:41:Name -> Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+89:17:Attribute -> List:0 | U | List:0 | List:0
+89:17:Name -> Inst:salt.cluster.consensus.raft.log.Log
+90:11:Attribute -> U
+90:11:Name -> U
+90:25:Attribute -> Const:int:1
+90:25:Name -> Class:salt.cluster.consensus.raft.log.LogEntryType
+91:12:Call -> Const:NoneType:None
+91:12:Attribute -> BM:salt.cluster.consensus.raft.log.MembershipStateMachine.apply
+91:12:Name -> Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+91:32:Attribute -> U
+91:32:Name -> U
+91:49:Attribute -> U
+91:49:Name -> U
+93:13:Call -> U
+93:13:Attribute -> BM:salt.cluster.consensus.raft.log.MembershipStateMachine.current_voters
+93:13:Name -> Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+94:15:Call -> U
+94:15:Attribute -> BM:salt.cluster.consensus.raft.log.MembershipStateMachine.current_learners
+94:15:Name -> Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+103:16:Call -> Dict:3 | U | Dict:0
+103:16:Attribute -> BM:salt.cluster.consensus.storage.SaltStorage.load_state
+103:16:Name -> Inst:salt.cluster.consensus.storage.SaltStorage
+104:11:Call -> U
+104:11:Attribute -> BM:builtins.dict.get | U | BM:builtins.dict.get
+104:11:Name -> Dict:3 | U | Dict:0
+105:16:Call -> U
+105:16:Attribute -> BM:builtins.dict.get | U | BM:builtins.dict.get
+105:16:Name -> Dict:3 | U | Dict:0
+111:13:Call -> Dict:0 | U
+111:13:Name -> Func:salt.runners.cluster._read_health_sentinel
+113:19:Name -> U
+114:18:Name -> U
+115:20:Name -> U
+116:30:Attribute -> Const:int:-1 | Const:int:-1 | U
+116:30:Name -> Inst:salt.cluster.consensus.raft.log.MembershipStateMachine
+117:23:Call -> ERR
+117:23:Name -> Func:builtins.len
+117:27:Name -> U
+118:25:Call -> ERR
+118:25:Name -> Func:builtins.len
+118:29:Name -> U
+119:21:Name -> U
+120:16:Name -> U
+121:28:Call -> U
+121:28:Attribute -> BM:builtins.dict.get | U
+121:28:Name -> Dict:0 | U
+122:28:Call -> U
+122:28:Attribute -> BM:builtins.dict.get | U
+122:28:Name -> Dict:0 | U
+172:14:Call -> ERR
+172:14:Attribute -> ERR
+172:14:Name -> ERR
+172:36:Call -> ERR
+172:36:Attribute -> ERR
+172:36:Name -> ERR
+173:18:Call -> Inst:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+173:18:Name -> Class:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+174:14:Call -> Inst:salt.cluster.consensus.storage.SaltStorage
+174:14:Name -> Class:salt.cluster.consensus.storage.SaltStorage
+174:26:Name -> U
+174:35:Name -> ERR
+175:11:Call -> Inst:salt.cluster.consensus.raft.log.Log
+175:11:Name -> Class:salt.cluster.consensus.raft.log.Log
+176:16:Name -> Inst:salt.cluster.consensus.storage.SaltStorage
+177:44:Name -> Inst:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+179:17:Attribute -> List:0 | U | List:0 | List:0
+179:17:Name -> Inst:salt.cluster.consensus.raft.log.Log
+180:11:Attribute -> U
+180:11:Name -> U
+180:25:Attribute -> Const:int:4
+180:25:Name -> Class:salt.cluster.consensus.raft.log.LogEntryType
+181:12:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+181:12:Attribute -> BM:salt.cluster.consensus.raft.log.RingRegistryStateMachine.apply
+181:12:Name -> Inst:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+181:30:Attribute -> U
+181:30:Name -> U
+181:47:Attribute -> U
+181:47:Name -> U
+184:19:Name -> U
+185:17:Call -> U
+185:17:Attribute -> BM:salt.cluster.consensus.raft.log.RingRegistryStateMachine.rings
+185:17:Name -> Inst:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+186:24:Call -> U
+186:24:Attribute -> BM:salt.cluster.consensus.raft.log.RingRegistryStateMachine.active_rings
+186:24:Name -> Inst:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+187:28:Attribute -> Const:int:-1 | Const:int:-1 | U
+187:28:Name -> Inst:salt.cluster.consensus.raft.log.RingRegistryStateMachine
+249:14:Call -> ERR
+249:14:Attribute -> ERR
+249:14:Name -> ERR
+249:36:Call -> ERR
+249:36:Attribute -> ERR
+249:36:Name -> ERR
+250:17:Call -> Inst:salt.cluster.consensus.raft.log.RoutingStateMachine
+250:17:Name -> Class:salt.cluster.consensus.raft.log.RoutingStateMachine
+251:14:Call -> Inst:salt.cluster.consensus.storage.SaltStorage
+251:14:Name -> Class:salt.cluster.consensus.storage.SaltStorage
+251:26:Name -> U
+251:35:Name -> ERR
+252:11:Call -> Inst:salt.cluster.consensus.raft.log.Log
+252:11:Name -> Class:salt.cluster.consensus.raft.log.Log
+253:16:Name -> Inst:salt.cluster.consensus.storage.SaltStorage
+254:38:Name -> Inst:salt.cluster.consensus.raft.log.RoutingStateMachine
+256:17:Attribute -> List:0 | U | List:0 | List:0
+256:17:Name -> Inst:salt.cluster.consensus.raft.log.Log
+257:11:Attribute -> U
+257:11:Name -> U
+257:25:Attribute -> Const:int:5
+257:25:Name -> Class:salt.cluster.consensus.raft.log.LogEntryType
+258:12:Call -> Const:NoneType:None | Const:NoneType:None
+258:12:Attribute -> BM:salt.cluster.consensus.raft.log.RoutingStateMachine.apply
+258:12:Name -> Inst:salt.cluster.consensus.raft.log.RoutingStateMachine
+258:29:Attribute -> U
+258:29:Name -> U
+258:46:Attribute -> U
+258:46:Name -> U
+261:19:Name -> U
+262:18:Call -> Dict:0
+262:18:Attribute -> BM:salt.cluster.consensus.raft.log.RoutingStateMachine.routes
+262:18:Name -> Inst:salt.cluster.consensus.raft.log.RoutingStateMachine
+263:27:Attribute -> Const:int:-1 | Const:int:-1 | U
+263:27:Name -> Inst:salt.cluster.consensus.raft.log.RoutingStateMachine
+264:22:Call -> Dict:0
+264:22:Attribute -> Func:salt.cluster.ring_membership.drop_stats
+264:22:Name -> Module:salt.cluster.ring_membership
+284:15:Call -> ERR
+284:15:Attribute -> ERR
+284:15:Name -> ERR
+285:11:Name -> U
+287:11:Call -> U
+287:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+287:11:Attribute -> Module:posixpath | Module:ntpath
+287:11:Name -> Module:os
+287:24:Name -> U
+289:13:Call -> U
+289:13:Attribute -> Func:salt.utils.files.fopen
+289:13:Attribute -> Module:salt.utils.files
+289:13:Attribute -> Module:salt.utils
+289:13:Name -> Module:salt
+289:36:Name -> U
+290:19:Call -> U
+290:19:Attribute -> Func:json.load
+290:19:Name -> Module:json
+290:29:Name -> U
+291:12:Name -> Class:builtins.OSError
+291:21:Name -> Class:builtins.ValueError
+328:7:Name -> Const:str:'both' | U
+329:14:Call -> ExcInst:builtins.ValueError
+329:14:Name -> Class:builtins.ValueError
+329:75:Name -> Const:str:'both' | U
+333:17:Call -> ERR
+333:17:Attribute -> ERR
+333:17:Name -> ERR
+334:11:Name -> U
+341:7:Name -> Const:str:'both' | U
+342:8:Call -> ERR
+342:8:Attribute -> BM:builtins.list.append
+342:8:Name -> List:0
+343:7:Name -> Const:str:'both' | U
+344:8:Call -> ERR
+344:8:Attribute -> BM:builtins.list.append
+344:8:Name -> List:0
+346:9:Call -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent
+346:9:Attribute -> Func:salt.utils.event.get_event
+346:9:Attribute -> Module:salt.utils.event
+346:9:Attribute -> Module:salt.utils
+346:9:Name -> Module:salt
+348:17:Name -> ERR
+349:13:Name -> ERR
+352:8:Call -> Const:bool:False | Const:bool:True
+352:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event
+352:8:Name -> Inst:salt.utils.event.MasterEvent
+353:25:Name -> List:0
+358:20:Name -> List:0
+359:22:Name -> U
+402:11:Call -> U | Inst:salt.cluster.ring.HashRing
+402:11:Attribute -> Func:salt.cluster.ring_membership.get_ring
+402:11:Name -> Module:salt.cluster.ring_membership
+404:24:Call -> U
+404:24:Name -> Class:builtins.bool
+404:29:Attribute -> U | Const:bool:False
+404:29:Name -> U | Inst:salt.cluster.ring.HashRing
+405:22:Call -> U | Const:int:0
+405:22:Attribute -> U | BM:salt.cluster.ring.HashRing.node_count
+405:22:Name -> U | Inst:salt.cluster.ring.HashRing
+406:17:Call -> ERR
+406:17:Name -> Func:builtins.sorted
+406:24:Call -> U
+406:24:Attribute -> U | BM:salt.cluster.ring.HashRing.nodes
+406:24:Name -> U | Inst:salt.cluster.ring.HashRing
+407:18:Call -> U | Const:int:0
+407:18:Attribute -> U | BM:salt.cluster.ring.HashRing.token_count
+407:18:Name -> U | Inst:salt.cluster.ring.HashRing
+407:40:Call -> ERR
+407:40:Name -> Func:builtins.max
+407:47:Call -> U | Const:int:0
+407:47:Attribute -> U | BM:salt.cluster.ring.HashRing.node_count
+407:47:Name -> U | Inst:salt.cluster.ring.HashRing
+424:17:Call -> ERR
+424:17:Attribute -> ERR
+424:17:Name -> ERR
+425:11:Name -> U
+430:9:Call -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent
+430:9:Attribute -> Func:salt.utils.event.get_event
+430:9:Attribute -> Module:salt.utils.event
+430:9:Attribute -> Module:salt.utils
+430:9:Name -> Module:salt
+432:17:Name -> ERR
+433:13:Name -> ERR
+436:8:Call -> Const:bool:False | Const:bool:True
+436:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event
+436:8:Name -> Inst:salt.utils.event.MasterEvent
+436:25:Name -> U
+436:31:Name -> U
+437:50:Name -> U
+437:63:Name -> U
+464:11:Name -> U
+465:14:Call -> ExcInst:builtins.ValueError
+465:14:Name -> Class:builtins.ValueError
+466:11:Name -> U
+467:14:Call -> ExcInst:builtins.ValueError
+467:14:Name -> Class:builtins.ValueError
+468:11:Call -> Dict:2 | Dict:3
+468:11:Name -> Func:salt.runners.cluster._fire_cluster_event
+470:20:Name -> U
+470:45:Call -> Inst:builtins.list
+470:45:Name -> Class:builtins.list
+470:50:Name -> U
+494:11:Name -> U
+495:14:Call -> ExcInst:builtins.ValueError
+495:14:Name -> Class:builtins.ValueError
+496:11:Call -> Dict:2 | Dict:3
+496:11:Name -> Func:salt.runners.cluster._fire_cluster_event
+498:20:Name -> U
+522:11:Name -> U
+523:14:Call -> ExcInst:builtins.ValueError
+523:14:Name -> Class:builtins.ValueError
+524:11:Name -> U
+525:14:Call -> ExcInst:builtins.ValueError
+525:14:Name -> Class:builtins.ValueError
+526:11:Call -> Dict:2 | Dict:3
+526:11:Name -> Func:salt.runners.cluster._fire_cluster_event
+528:22:Name -> U
+528:44:Name -> U
+549:11:Name -> U
+550:14:Call -> ExcInst:builtins.ValueError
+550:14:Name -> Class:builtins.ValueError
+551:11:Call -> Dict:2 | Dict:3
+551:11:Name -> Func:salt.runners.cluster._fire_cluster_event
+553:22:Name -> U
+568:10:Name -> Tuple:4
+569:21:Name -> Const:str:'jobs/returns/{key}'
+641:11:Name -> U
+642:14:Call -> ExcInst:builtins.ValueError
+642:14:Name -> Class:builtins.ValueError
+643:11:Name -> Tuple:4 | U
+644:14:Call -> ExcInst:builtins.ValueError
+644:14:Name -> Class:builtins.ValueError
+651:13:Call -> Dict:7 | Dict:7 | Dict:7 | Dict:6
+651:13:Attribute -> Func:salt.cluster.migration.perform_shed
+651:13:Name -> Module:salt.cluster.migration
+652:8:Name -> ERR
+653:8:Name -> U
+654:14:Name -> Tuple:4 | U
+655:25:Name -> Const:str:'jobs/returns/{key}' | U
+656:15:Name -> Const:NoneType:None | U
+657:16:Name -> Const:bool:False | U
+659:4:Call -> Const:NoneType:None
+659:4:Attribute -> Func:salt.cluster.migration.write_shed_status
+659:4:Name -> Module:salt.cluster.migration
+659:32:Name -> ERR
+659:42:Name -> Dict:7 | Dict:7 | Dict:7 | Dict:6
+660:11:Name -> Dict:7 | Dict:7 | Dict:7 | Dict:6
+673:10:Name -> Tuple:4
+674:21:Name -> Const:str:'jobs/returns/{key}'
+730:11:Name -> U
+731:14:Call -> ExcInst:builtins.ValueError
+731:14:Name -> Class:builtins.ValueError
+733:19:Name -> U
+734:17:Call -> List:4
+734:17:Name -> Class:builtins.list
+734:22:Name -> Tuple:4 | U
+735:28:Name -> Const:str:'jobs/returns/{key}' | U
+736:18:Name -> Const:NoneType:None | U
+737:19:Call -> Const:bool:False
+737:19:Name -> Class:builtins.bool
+737:24:Name -> Const:bool:False | U
+740:14:Call -> Dict:2 | Dict:3
+740:14:Name -> Func:salt.runners.cluster._fire_cluster_event
+740:69:Name -> Dict:5
+743:12:Call -> Dict:7 | Dict:7 | Dict:7 | Dict:6
+743:12:Name -> Func:salt.runners.cluster.shed_unowned
+744:8:Name -> U
+745:14:Name -> Tuple:4 | U
+746:25:Name -> Const:str:'jobs/returns/{key}' | U
+747:15:Name -> Const:NoneType:None | U
+748:16:Name -> Const:bool:False | U
+751:19:Name -> Dict:2 | Dict:3
+752:17:Name -> Dict:7 | Dict:7 | Dict:7 | Dict:6
+781:15:Call -> ERR
+781:15:Attribute -> ERR
+781:15:Name -> ERR
+782:11:Name -> U
+784:11:Call -> U
+784:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+784:11:Attribute -> Module:posixpath | Module:ntpath
+784:11:Name -> Module:os
+784:24:Name -> U
+786:13:Call -> U
+786:13:Attribute -> Func:salt.utils.files.fopen
+786:13:Attribute -> Module:salt.utils.files
+786:13:Attribute -> Module:salt.utils
+786:13:Name -> Module:salt
+786:36:Name -> U
+787:19:Call -> U
+787:19:Attribute -> Func:json.load
+787:19:Name -> Module:json
+787:29:Name -> U
+788:12:Name -> Class:builtins.OSError
+788:21:Name -> Class:builtins.ValueError
+789:45:Name -> U
+792:42:Name -> Tuple:4
+854:30:Name -> Tuple:0 | U
+854:12:Call -> Inst:builtins.list
+854:12:Name -> Class:builtins.list
+854:17:Name -> U
+855:31:Name -> Tuple:4 | U
+855:16:Call -> List:4
+855:16:Name -> Class:builtins.list
+855:21:Name -> Tuple:4 | U
+856:15:Name -> U
+856:28:Name -> Inst:builtins.list | List:0
+856:37:Name -> U
+857:7:Name -> U
+858:14:Call -> ExcInst:builtins.ValueError
+858:14:Name -> Class:builtins.ValueError
+859:70:Name -> U
+863:11:Name -> Inst:builtins.list | List:0
+863:25:Name -> List:4 | List:0
+864:14:Call -> ExcInst:builtins.ValueError
+864:14:Name -> Class:builtins.ValueError
+867:16:Name -> Inst:builtins.list | List:0
+867:28:Name -> Const:str:'bank:'
+867:49:Name -> Const:str:'jobs/loads' | Const:str:'jobs/minions' | Const:str:'jobs/endtimes' | Const:str:'jobs/nocache'
+867:62:Name -> List:4 | List:0
+868:11:Call -> Dict:2 | Dict:3
+868:11:Name -> Func:salt.runners.cluster._fire_cluster_event
+870:21:Name -> U
+900:11:Name -> Const:NoneType:None | U
+901:14:Call -> ExcInst:builtins.ValueError
+901:14:Name -> Class:builtins.ValueError
+902:26:Name -> Const:NoneType:None | U
+903:7:Name -> Const:NoneType:None | U
+904:8:Name -> Dict:1
+904:29:Name -> U
+905:7:Name -> Const:NoneType:None | U
+906:8:Name -> Dict:1
+906:30:Call -> Inst:builtins.int
+906:30:Name -> Class:builtins.int
+906:34:Name -> U
+907:11:Call -> Dict:2 | Dict:3
+907:11:Name -> Func:salt.runners.cluster._fire_cluster_event
+907:58:Name -> Dict:1
+987:15:Call -> ERR
+987:15:Attribute -> ERR
+987:15:Name -> ERR
+988:11:Name -> U
+996:23:Name -> Const:bool:False | U
+999:16:Call -> U
+999:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+999:16:Attribute -> Module:posixpath | Module:ntpath
+999:16:Name -> Module:os
+999:29:Name -> U
+1000:11:Call -> Const:bool:False | U
+1000:11:Attribute -> Func:genericpath.isdir | U
+1000:11:Attribute -> Module:posixpath | Module:ntpath
+1000:11:Name -> Module:os
+1000:25:Name -> U
+1003:53:Name -> U
+1008:23:Name -> Const:bool:False | U
+1009:25:Name -> U
+1014:11:Name -> Const:bool:False | U
+1015:13:Call -> Inst:salt.cache.Cache
+1015:13:Attribute -> Class:salt.cache.Cache
+1015:13:Attribute -> Module:salt.cache
+1015:13:Name -> Module:salt
+1016:12:Name -> ERR
+1017:19:Call -> ERR
+1017:19:Attribute -> ERR
+1017:19:Name -> ERR
+1017:44:Call -> ERR
+1017:44:Attribute -> ERR
+1017:44:Name -> ERR
+1023:15:Call -> ERR
+1023:15:Name -> Func:builtins.sorted
+1023:22:Call -> ERR
+1023:22:Attribute -> Func:posix.listdir
+1023:22:Name -> Module:os
+1023:33:Name -> U
+1024:17:Call -> U
+1024:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+1024:17:Attribute -> Module:posixpath | Module:ntpath
+1024:17:Name -> Module:os
+1024:30:Name -> U
+1024:41:Name -> U
+1025:15:Call -> Const:bool:False | U
+1025:15:Attribute -> Func:genericpath.isdir | U
+1025:15:Attribute -> Module:posixpath | Module:ntpath
+1025:15:Name -> Module:os
+1025:29:Name -> U
+1027:24:Call -> ERR
+1027:24:Name -> Func:builtins.sorted
+1027:31:Call -> ERR
+1027:31:Attribute -> Func:posix.listdir
+1027:31:Name -> Module:os
+1027:42:Name -> U
+1028:22:Call -> U
+1028:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+1028:22:Attribute -> Module:posixpath | Module:ntpath
+1028:22:Name -> Module:os
+1028:35:Name -> U
+1028:43:Name -> U
+1029:19:Call -> Const:bool:False | U
+1029:19:Attribute -> Func:genericpath.isdir | U
+1029:19:Attribute -> Module:posixpath | Module:ntpath
+1029:19:Name -> Module:os
+1029:33:Name -> U
+1033:32:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+1033:32:Name -> Func:salt.runners.cluster._migrate_one_jid
+1034:20:Name -> U
+1034:29:Name -> Const:NoneType:None | Inst:salt.cache.Cache
+1034:36:Name -> Const:bool:False | U
+1034:45:Attribute -> Module:salt.utils.files
+1034:45:Attribute -> Module:salt.utils
+1034:45:Name -> Module:salt
+1034:63:Attribute -> Module:salt.payload
+1034:63:Name -> Module:salt
+1036:19:Name -> Class:builtins.Exception
+1037:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1037:16:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+1037:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1039:20:Name -> U
+1043:15:Name -> Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True
+1045:36:Name -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0
+1049:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+1049:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1049:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1052:8:Name -> Const:int:0 | Const:int:1
+1053:8:Name -> Const:int:0 | Const:int:1
+1054:8:Name -> Const:int:0 | Const:int:1 | Const:int:1 | Const:int:2
+1055:8:Name -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0
+1056:8:Name -> Const:bool:False | U
+1057:8:Name -> U
+1061:19:Name -> Const:int:0 | Const:int:1
+1062:20:Name -> Const:int:0 | Const:int:1
+1063:19:Name -> Const:int:0 | Const:int:1 | Const:int:1 | Const:int:2
+1064:28:Name -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0
+1065:19:Name -> Const:bool:False | U
+1066:21:Name -> U
+1081:16:Call -> U
+1081:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+1081:16:Attribute -> Module:posixpath | Module:ntpath
+1081:16:Name -> Module:os
+1081:29:Name -> U
+1081:38:Name -> Const:str:'.load.p'
+1082:11:Call -> Const:bool:False | U
+1082:11:Attribute -> Func:genericpath.isfile | U
+1082:11:Attribute -> Module:posixpath | Module:ntpath
+1082:11:Name -> Module:os
+1082:26:Name -> U
+1084:9:Call -> U
+1084:9:Attribute -> U
+1084:9:Name -> U
+1084:25:Name -> U
+1085:15:Call -> U
+1085:15:Attribute -> U
+1085:15:Name -> U
+1085:32:Name -> U
+1086:11:Call -> ERR
+1086:11:Name -> Func:builtins.isinstance
+1086:22:Name -> U
+1086:28:Name -> Class:builtins.dict
+1088:10:Call -> U
+1088:10:Attribute -> U
+1088:10:Name -> U
+1088:29:Call -> U
+1088:29:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1088:29:Attribute -> Module:posixpath | Module:ntpath
+1088:29:Name -> Module:os
+1088:46:Name -> U
+1093:14:Call -> Set:0
+1093:14:Name -> Class:builtins.set
+1094:17:Call -> ERR
+1094:17:Attribute -> Func:posix.listdir
+1094:17:Name -> Module:os
+1094:28:Name -> U
+1095:11:Name -> U
+1095:20:Name -> Const:str:'.minions.p'
+1096:12:Call -> U
+1096:12:Attribute -> U
+1096:12:Name -> U
+1096:29:Name -> Const:str:'.minions.'
+1096:60:Call -> U
+1096:60:Attribute -> U
+1096:60:Name -> U
+1099:21:Call -> U
+1099:21:Attribute -> U
+1099:21:Name -> U
+1099:37:Call -> U
+1099:37:Attribute -> Func:posixpath.join | Func:ntpath.join
+1099:37:Attribute -> Module:posixpath | Module:ntpath
+1099:37:Name -> Module:os
+1099:50:Name -> U
+1099:59:Name -> U
+1100:27:Call -> U
+1100:27:Attribute -> U
+1100:27:Name -> U
+1100:44:Name -> U
+1101:19:Name -> Class:builtins.Exception
+1103:15:Call -> ERR
+1103:15:Name -> Func:builtins.isinstance
+1103:26:Name -> U
+1103:33:Name -> Class:builtins.list
+1103:39:Name -> Class:builtins.tuple
+1103:46:Name -> Class:builtins.set
+1104:16:Call -> ERR
+1104:16:Attribute -> BM:builtins.set.update
+1104:16:Name -> Set:0
+1104:31:Name -> U
+1105:19:Call -> ERR
+1105:19:Name -> Func:builtins.sorted
+1105:26:Name -> Set:0
+1109:19:Call -> U
+1109:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1109:19:Attribute -> Module:posixpath | Module:ntpath
+1109:19:Name -> Module:os
+1109:32:Name -> U
+1109:41:Name -> Const:str:'endtime'
+1110:7:Call -> Const:bool:False | U
+1110:7:Attribute -> Func:genericpath.isfile | U
+1110:7:Attribute -> Module:posixpath | Module:ntpath
+1110:7:Name -> Module:os
+1110:22:Name -> U
+1112:17:Call -> U
+1112:17:Attribute -> U
+1112:17:Name -> U
+1112:33:Name -> U
+1113:26:Call -> Inst:builtins.float
+1113:26:Name -> Class:builtins.float
+1113:32:Call -> U
+1113:32:Attribute -> U
+1113:32:Call -> U
+1113:32:Attribute -> U
+1113:32:Name -> U
+1114:16:Name -> Class:builtins.OSError
+1114:25:Name -> Class:builtins.ValueError
+1117:14:Call -> Const:bool:False | U
+1117:14:Attribute -> Func:genericpath.isfile | U
+1117:14:Attribute -> Module:posixpath | Module:ntpath
+1117:14:Name -> Module:os
+1117:29:Call -> U
+1117:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+1117:29:Attribute -> Module:posixpath | Module:ntpath
+1117:29:Name -> Module:os
+1117:42:Name -> U
+1117:51:Name -> Const:str:'nocache'
+1121:17:Call -> ERR
+1121:17:Attribute -> Func:posix.listdir
+1121:17:Name -> Module:os
+1121:28:Name -> U
+1122:14:Call -> U
+1122:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+1122:14:Attribute -> Module:posixpath | Module:ntpath
+1122:14:Name -> Module:os
+1122:27:Name -> U
+1122:36:Name -> U
+1123:15:Call -> Const:bool:False | U
+1123:15:Attribute -> Func:genericpath.isdir | U
+1123:15:Attribute -> Module:posixpath | Module:ntpath
+1123:15:Name -> Module:os
+1123:29:Name -> U
+1125:19:Call -> U
+1125:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1125:19:Attribute -> Module:posixpath | Module:ntpath
+1125:19:Name -> Module:os
+1125:32:Name -> U
+1125:37:Name -> Const:str:'return.p'
+1126:15:Call -> Const:bool:False | U
+1126:15:Attribute -> Func:genericpath.isfile | U
+1126:15:Attribute -> Module:posixpath | Module:ntpath
+1126:15:Name -> Module:os
+1126:30:Name -> U
+1129:17:Call -> U
+1129:17:Attribute -> U
+1129:17:Name -> U
+1129:33:Name -> U
+1130:25:Call -> U
+1130:25:Attribute -> U
+1130:25:Name -> U
+1130:42:Name -> U
+1131:15:Name -> Class:builtins.Exception
+1133:15:Call -> ERR
+1133:15:Name -> Func:builtins.isinstance
+1133:26:Name -> U
+1133:34:Name -> Class:builtins.dict
+1133:59:Name -> U
+1137:32:Name -> U
+1138:19:Call -> U
+1138:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1138:19:Attribute -> Module:posixpath | Module:ntpath
+1138:19:Name -> Module:os
+1138:32:Name -> U
+1138:37:Name -> Const:str:'out.p'
+1139:11:Call -> Const:bool:False | U
+1139:11:Attribute -> Func:genericpath.isfile | U
+1139:11:Attribute -> Module:posixpath | Module:ntpath
+1139:11:Name -> Module:os
+1139:26:Name -> U
+1141:21:Call -> U
+1141:21:Attribute -> U
+1141:21:Name -> U
+1141:37:Name -> U
+1142:20:Name -> U | Dict:1
+1142:36:Call -> U
+1142:36:Attribute -> U
+1142:36:Name -> U
+1142:53:Name -> U
+1143:19:Name -> Class:builtins.Exception
+1145:8:Name -> Dict:0
+1145:16:Name -> U
+1145:25:Name -> U | Dict:1
+1147:7:Name -> U
+1148:21:Call -> Const:int:0
+1148:21:Name -> Func:builtins.len
+1148:25:Name -> Dict:0
+1150:4:Call -> U
+1150:4:Attribute -> U
+1150:4:Name -> U
+1150:30:Name -> U
+1150:35:Name -> U
+1151:7:Name -> U
+1152:8:Call -> U
+1152:8:Attribute -> U
+1152:8:Name -> U
+1152:36:Name -> U
+1152:41:Name -> U
+1153:7:Name -> Const:NoneType:None | Inst:builtins.float | Const:NoneType:None
+1154:8:Call -> U
+1154:8:Attribute -> U
+1154:8:Name -> U
+1154:37:Name -> U
+1154:42:Name -> Inst:builtins.float
+1155:7:Name -> Const:bool:False | U
+1156:8:Call -> U
+1156:8:Attribute -> U
+1156:8:Name -> U
+1156:36:Name -> U
+1157:29:Call -> DictItems
+1157:29:Attribute -> BM:builtins.dict.items
+1157:29:Name -> Dict:0
+1158:8:Call -> U
+1158:8:Attribute -> U
+1158:8:Name -> U
+1158:36:Name -> U
+1158:43:Name -> U
+1158:54:Name -> U
+1160:17:Call -> Const:int:0
+1160:17:Name -> Func:builtins.len
+1160:21:Name -> Dict:0

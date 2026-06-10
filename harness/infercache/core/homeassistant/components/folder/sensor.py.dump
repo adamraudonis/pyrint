@@ -1,0 +1,123 @@
+21:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+21:10:Attribute -> Func:logging.getLogger
+21:10:Name -> Module:logging
+21:28:Name -> Const:str:'homeassistant.components.folder.sensor' | Const:str:'__main__'
+27:16:Call -> Inst:_pydatetime.timedelta
+27:16:Name -> Class:_pydatetime.timedelta
+29:18:Call -> U
+29:18:Attribute -> U
+29:18:Name -> U
+31:8:Call -> U
+31:8:Attribute -> U
+31:8:Name -> U
+31:21:Name -> Const:str:'folder'
+31:41:Attribute -> Func:homeassistant.helpers.config_validation.isdir
+31:41:Name -> Module:homeassistant.helpers.config_validation
+32:8:Call -> U
+32:8:Attribute -> U
+32:8:Name -> U
+32:21:Name -> Const:str:'filter'
+32:42:Name -> Const:str:'*'
+32:59:Attribute -> Func:homeassistant.helpers.config_validation.string
+32:59:Name -> Module:homeassistant.helpers.config_validation
+37:32:Name -> Class:builtins.str
+37:50:Name -> Class:builtins.str
+37:58:Name -> Class:builtins.list
+37:63:Name -> Class:builtins.str
+39:12:Name -> U
+39:26:Name -> U
+40:11:Call -> Inst:builtins.list
+40:11:Attribute -> Func:glob.glob
+40:11:Name -> Module:glob
+40:21:Name -> U
+43:25:Name -> Class:builtins.list
+43:30:Name -> Class:builtins.str
+43:39:Name -> Class:builtins.int
+45:17:Attribute -> ERR
+45:17:Call -> ERR
+45:17:Attribute -> Func:posix.stat
+45:17:Name -> Module:os
+45:25:Name -> U
+45:45:Name -> U
+45:59:Call -> Const:bool:False | U
+45:59:Attribute -> Func:genericpath.isfile | U
+45:59:Attribute -> Module:posixpath | Module:ntpath
+45:59:Name -> Module:os
+45:74:Name -> U
+46:11:Call -> ERR
+46:11:Name -> Func:builtins.sum
+46:15:Name -> U
+50:10:Name -> U
+51:12:Name -> Class:builtins.dict
+52:18:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+53:20:Name -> Class:builtins.dict
+56:10:Name -> Class:builtins.str
+56:16:Name -> U
+56:23:Name -> Const:str:'folder'
+58:11:Call -> U
+58:11:Attribute -> U
+58:11:Attribute -> U
+58:11:Name -> U
+58:39:Name -> U
+59:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+59:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+59:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+59:59:Name -> U
+61:17:Call -> Inst:homeassistant.components.folder.sensor.Folder
+61:17:Name -> Class:homeassistant.components.folder.sensor.Folder
+61:24:Name -> U
+61:30:Name -> U
+61:37:Name -> Const:str:'filter'
+62:8:Call -> U
+62:8:Name -> U
+62:22:Name -> Inst:homeassistant.components.folder.sensor.Folder
+65:13:Name -> Class:homeassistant.components.sensor.SensorEntity
+68:25:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.DATA_SIZE
+68:25:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+70:39:Attribute -> Inst:homeassistant.const.UnitOfInformation.MEGABYTES
+70:39:Name -> Class:homeassistant.const.UnitOfInformation
+72:36:Name -> Class:builtins.str
+72:54:Name -> Class:builtins.str
+74:22:Call -> U
+74:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+74:22:Attribute -> Module:posixpath | Module:ntpath
+74:22:Name -> Module:os
+74:35:Name -> U
+75:8:Name -> Inst:homeassistant.components.folder.sensor.Folder
+75:28:Name -> U
+76:8:Name -> Inst:homeassistant.components.folder.sensor.Folder
+76:28:Name -> U
+77:8:Name -> Inst:homeassistant.components.folder.sensor.Folder
+77:26:Call -> Tuple:2 | Tuple:2
+77:26:Attribute -> Func:posixpath.split | Func:ntpath.split
+77:26:Attribute -> Module:posixpath | Module:ntpath
+77:26:Name -> Module:os
+77:40:Call -> Tuple:2 | Tuple:2
+77:40:Attribute -> Func:posixpath.split | Func:ntpath.split
+77:40:Attribute -> Module:posixpath | Module:ntpath
+77:40:Name -> Module:os
+77:54:Name -> U
+81:21:Call -> Inst:builtins.list
+81:21:Name -> Func:homeassistant.components.folder.sensor.get_files_list
+81:36:Attribute -> U
+81:36:Name -> Inst:homeassistant.components.folder.sensor.Folder
+81:55:Attribute -> U
+81:55:Name -> Inst:homeassistant.components.folder.sensor.Folder
+82:26:Call -> ERR
+82:26:Name -> Func:builtins.len
+82:30:Name -> Inst:builtins.list
+83:15:Call -> U
+83:15:Name -> Func:homeassistant.components.folder.sensor.get_size
+83:24:Name -> Inst:builtins.list
+85:8:Name -> Inst:homeassistant.components.folder.sensor.Folder
+85:34:Call -> ERR
+85:34:Name -> Func:builtins.round
+85:40:Name -> U
+86:8:Name -> Inst:homeassistant.components.folder.sensor.Folder
+87:20:Attribute -> U
+87:20:Name -> Inst:homeassistant.components.folder.sensor.Folder
+88:22:Attribute -> U
+88:22:Name -> Inst:homeassistant.components.folder.sensor.Folder
+89:31:Name -> U
+90:21:Name -> U
+91:25:Name -> Inst:builtins.list

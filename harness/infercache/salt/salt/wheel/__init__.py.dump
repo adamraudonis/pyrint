@@ -1,0 +1,99 @@
+16:4:Attribute -> Class:salt.client.mixins.SyncClientMixin
+16:4:Attribute -> Module:salt.client.mixins
+16:4:Attribute -> Module:salt.client
+16:4:Name -> Module:salt
+16:40:Attribute -> Class:salt.client.mixins.AsyncClientMixin
+16:40:Attribute -> Module:salt.client.mixins
+16:40:Attribute -> Module:salt.client
+16:40:Name -> Module:salt
+43:8:Call -> Const:NoneType:None
+43:8:Attribute -> BM:salt.client.mixins.ClientStateMixin.__init__ | BM:builtins.object.__init__
+43:8:Call -> Super
+43:8:Name -> Class:builtins.super
+43:25:Name -> U
+43:39:Name -> Const:NoneType:None | U
+44:8:Name -> Inst:salt.wheel.WheelClient
+44:25:Call -> Inst:salt.loader.lazy.LazyLoader
+44:25:Attribute -> Func:salt.loader.wheels
+44:25:Attribute -> Module:salt.loader
+44:25:Name -> Module:salt
+44:44:Name -> U
+44:58:Attribute -> Const:NoneType:None | U | Dict:0
+44:58:Name -> Inst:salt.wheel.WheelClient
+51:15:Call -> Dict:3 | U
+51:15:Attribute -> BM:salt.client.mixins.SyncClientMixin.low
+51:15:Name -> Inst:salt.wheel.WheelClient
+52:12:Name -> U
+53:12:Name -> Dict:0
+54:24:Call -> ERR
+54:24:Attribute -> BM:builtins.dict.get
+54:24:Name -> Dict:0
+55:24:Call -> ERR
+55:24:Attribute -> BM:builtins.dict.get
+55:24:Name -> Dict:0
+64:15:Name -> Dict:0
+65:8:Name -> Dict:0
+66:20:Attribute -> U
+66:20:Name -> Inst:salt.wheel.WheelClient
+67:11:Name -> U
+69:11:Name -> U | Const:str:'127.0.0.1'
+71:21:Call -> U
+71:21:Attribute -> BM:builtins.str.format
+72:12:Call -> U
+72:12:Attribute -> Func:salt.utils.network.ip_bracket
+72:12:Attribute -> Module:salt.utils.network
+72:12:Attribute -> Module:salt.utils
+72:12:Name -> Module:salt
+72:42:Name -> U | Const:str:'127.0.0.1' | Const:str:'::1'
+73:12:Call -> Const:str:''
+73:12:Name -> Class:builtins.str
+73:16:Attribute -> U
+73:16:Name -> Inst:salt.wheel.WheelClient
+75:13:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+75:13:Attribute -> Func:salt.channel.client.ReqChannel.factory
+75:13:Attribute -> Class:salt.channel.client.ReqChannel
+75:13:Attribute -> Module:salt.channel.client
+75:13:Attribute -> Module:salt.channel
+75:13:Name -> Module:salt
+76:12:Attribute -> U
+76:12:Name -> Inst:salt.wheel.WheelClient
+76:49:Name -> U
+78:18:Call -> U
+78:18:Attribute -> U
+78:18:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+78:31:Name -> Dict:0
+80:11:Call -> ERR
+80:11:Name -> Func:builtins.isinstance
+80:22:Name -> U
+80:27:Name -> Class:_collections_abc.Mapping
+81:26:Name -> U
+82:16:Call -> Const:NoneType:None
+82:16:Attribute -> Func:salt.utils.error.raise_error
+82:16:Attribute -> Module:salt.utils.error
+82:16:Attribute -> Module:salt.utils
+82:16:Name -> Module:salt
+82:47:Name -> U
+84:15:Name -> U
+104:15:Call -> U
+104:15:Attribute -> BM:salt.wheel.WheelClient.master_call
+104:15:Name -> Inst:salt.wheel.WheelClient
+104:34:Name -> U
+126:14:Call -> U
+126:14:Attribute -> U
+126:14:Name -> U
+127:15:Call -> U | Dict:2
+127:15:Attribute -> BM:salt.client.mixins.AsyncClientMixin.asynchronous
+127:15:Name -> Inst:salt.wheel.WheelClient
+127:33:Name -> U
+127:38:Name -> U
+146:15:Call -> Dict:3 | U
+146:15:Attribute -> BM:salt.client.mixins.SyncClientMixin.cmd
+146:15:Call -> Super
+146:15:Name -> Class:builtins.super
+146:27:Name -> U
+146:32:Name -> Const:NoneType:None | U
+146:37:Name -> Const:NoneType:None | U
+146:47:Name -> Const:NoneType:None | U
+146:54:Name -> Const:bool:True | U
+146:67:Name -> Const:bool:False | U
+149:8:Name -> Class:salt.wheel.WheelClient

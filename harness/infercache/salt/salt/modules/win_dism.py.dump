@@ -1,0 +1,375 @@
+15:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:6:Attribute -> Func:logging.getLogger
+15:6:Name -> Module:logging
+15:24:Name -> Const:str:'salt.modules.win_dism' | Const:str:'__main__'
+26:11:Call -> U
+26:11:Attribute -> Func:salt.utils.platform.is_windows
+26:11:Attribute -> Module:salt.utils.platform
+26:11:Attribute -> Module:salt.utils
+26:11:Name -> Module:salt
+27:14:Name -> Class:builtins.OSError
+29:7:Call -> Const:bool:False | Const:bool:True | U
+29:7:Attribute -> Func:genericpath.exists | U
+29:7:Attribute -> Module:posixpath | Module:ntpath
+29:7:Name -> Module:os
+29:22:Call -> U
+29:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+29:22:Attribute -> Module:posixpath | Module:ntpath
+29:22:Name -> Module:os
+29:35:Call -> U | Const:NoneType:None
+29:35:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+29:35:Attribute -> Dict:43 | Inst:os._Environ
+29:35:Name -> Module:os
+30:19:Call -> U
+30:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+30:19:Attribute -> Module:posixpath | Module:ntpath
+30:19:Name -> Module:os
+30:32:Call -> U | Const:NoneType:None
+30:32:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+30:32:Attribute -> Dict:43 | Inst:os._Environ
+30:32:Name -> Module:os
+32:19:Call -> U
+32:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+32:19:Attribute -> Module:posixpath | Module:ntpath
+32:19:Name -> Module:os
+32:32:Call -> U | Const:NoneType:None
+32:32:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+32:32:Attribute -> Dict:43 | Inst:os._Environ
+32:32:Name -> Module:os
+33:15:Call -> U
+33:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+33:15:Attribute -> Module:posixpath | Module:ntpath
+33:15:Name -> Module:os
+33:28:Name -> U
+35:7:Name -> Class:builtins.OSError
+36:4:Call -> U
+36:4:Attribute -> U
+36:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+44:11:Call -> U
+44:11:Attribute -> Func:salt.utils.platform.is_windows
+44:11:Attribute -> Module:salt.utils.platform
+44:11:Attribute -> Module:salt.utils
+44:11:Name -> Module:salt
+47:11:Name -> Const:str:'dism'
+52:8:Name -> U | Const:str:'dism.exe'
+54:29:Name -> Const:NoneType:None | U
+54:18:Name -> U
+55:16:Name -> U
+57:10:Call -> ERR
+57:10:Name -> ERR
+57:30:Name -> List:4
+58:7:Name -> U
+59:22:Name -> U
+59:55:Name -> U
+61:22:Name -> U
+62:19:Call -> U
+62:19:Attribute -> Func:re.findall
+62:19:Name -> Module:re
+62:30:Name -> Const:str:'Uninferable : (.*)\\r\\n.*State : Uninf | Const:str:'Uninferable : (.*)\\r\\n.*'
+62:39:Name -> U
+62:44:Attribute -> Const:int:8
+62:44:Name -> Module:re
+63:4:Call -> U
+63:4:Attribute -> U
+63:4:Name -> U
+64:11:Name -> U
+108:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+108:7:Attribute -> Func:salt.utils.versions.version_cmp
+108:7:Attribute -> Module:salt.utils.versions
+108:7:Attribute -> Module:salt.utils
+108:7:Name -> Module:salt
+108:39:Name -> ERR
+109:14:Call -> ExcInst:builtins.NotImplementedError
+109:14:Name -> Class:builtins.NotImplementedError
+111:15:Name -> ERR
+115:8:Name -> U | Const:str:'dism.exe'
+117:29:Name -> Const:NoneType:None | U
+117:18:Name -> U
+119:27:Name -> U
+122:7:Name -> Const:NoneType:None | U
+123:8:Call -> ERR
+123:8:Attribute -> BM:builtins.list.append
+123:8:Name -> List:5
+123:30:Name -> U
+124:7:Name -> Const:bool:False | U
+125:8:Call -> ERR
+125:8:Attribute -> BM:builtins.list.append
+125:8:Name -> List:5
+126:11:Name -> Const:bool:False | U
+127:8:Call -> ERR
+127:8:Attribute -> BM:builtins.list.append
+127:8:Name -> List:5
+129:11:Call -> ERR
+129:11:Name -> ERR
+129:35:Name -> List:5
+162:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+162:7:Attribute -> Func:salt.utils.versions.version_cmp
+162:7:Attribute -> Module:salt.utils.versions
+162:7:Attribute -> Module:salt.utils
+162:7:Name -> Module:salt
+162:39:Name -> ERR
+163:14:Call -> ExcInst:builtins.NotImplementedError
+163:14:Name -> Class:builtins.NotImplementedError
+165:24:Name -> ERR
+169:8:Name -> U | Const:str:'dism.exe'
+171:29:Name -> Const:NoneType:None | U
+171:18:Name -> U
+173:27:Name -> U
+176:11:Name -> Const:bool:False | U
+177:8:Call -> ERR
+177:8:Attribute -> BM:builtins.list.append
+177:8:Name -> List:5
+179:11:Call -> ERR
+179:11:Name -> ERR
+179:35:Name -> List:5
+206:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+206:7:Attribute -> Func:salt.utils.versions.version_cmp
+206:7:Attribute -> Module:salt.utils.versions
+206:7:Attribute -> Module:salt.utils
+206:7:Name -> Module:salt
+206:39:Name -> ERR
+207:14:Call -> ExcInst:builtins.NotImplementedError
+207:14:Name -> Class:builtins.NotImplementedError
+209:24:Name -> ERR
+213:8:Name -> U | Const:str:'dism.exe'
+215:29:Name -> Const:NoneType:None | U
+215:18:Name -> U
+218:10:Call -> ERR
+218:10:Name -> ERR
+218:30:Name -> List:4
+221:19:Call -> U
+221:19:Attribute -> Func:re.findall
+221:19:Name -> Module:re
+221:30:Name -> Const:str:'Capability Identity : (.*)\\r\\n'
+221:39:Name -> U
+221:44:Attribute -> Const:int:8
+221:44:Name -> Module:re
+222:4:Call -> U
+222:4:Attribute -> U
+222:4:Name -> U
+224:11:Name -> U
+251:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+251:7:Attribute -> Func:salt.utils.versions.version_cmp
+251:7:Attribute -> Module:salt.utils.versions
+251:7:Attribute -> Module:salt.utils
+251:7:Name -> Module:salt
+251:39:Name -> ERR
+252:14:Call -> ExcInst:builtins.NotImplementedError
+252:14:Name -> Class:builtins.NotImplementedError
+254:24:Name -> ERR
+256:11:Call -> U
+256:11:Name -> Func:salt.modules.win_dism._get_components
+260:14:Name -> Const:NoneType:None | U
+288:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+288:7:Attribute -> Func:salt.utils.versions.version_cmp
+288:7:Attribute -> Module:salt.utils.versions
+288:7:Attribute -> Module:salt.utils
+288:7:Name -> Module:salt
+288:39:Name -> ERR
+289:14:Call -> ExcInst:builtins.NotImplementedError
+289:14:Name -> Class:builtins.NotImplementedError
+291:24:Name -> ERR
+293:11:Call -> U
+293:11:Name -> Func:salt.modules.win_dism._get_components
+297:14:Name -> Const:NoneType:None | U
+355:8:Name -> U | Const:str:'dism.exe'
+357:29:Name -> Const:NoneType:None | U
+357:18:Name -> U
+359:24:Name -> U
+361:7:Name -> Const:NoneType:None | U
+362:8:Call -> ERR
+362:8:Attribute -> BM:builtins.list.append
+362:8:Name -> List:5
+362:35:Name -> U
+363:7:Name -> Const:NoneType:None | U
+364:8:Call -> ERR
+364:8:Attribute -> BM:builtins.list.append
+364:8:Name -> List:5
+364:30:Name -> U
+365:7:Name -> Const:bool:False | U
+366:8:Call -> ERR
+366:8:Attribute -> BM:builtins.list.append
+366:8:Name -> List:5
+367:7:Name -> Const:bool:False | U
+368:8:Call -> ERR
+368:8:Attribute -> BM:builtins.list.append
+368:8:Name -> List:5
+369:11:Name -> Const:bool:False | U
+370:8:Call -> ERR
+370:8:Attribute -> BM:builtins.list.append
+370:8:Name -> List:5
+372:11:Call -> ERR
+372:11:Name -> ERR
+372:35:Name -> List:5
+407:8:Name -> U | Const:str:'dism.exe'
+409:29:Name -> Const:NoneType:None | U
+409:18:Name -> U
+411:24:Name -> U
+414:7:Name -> Const:bool:False | U
+415:8:Call -> ERR
+415:8:Attribute -> BM:builtins.list.append
+415:8:Name -> List:5
+416:11:Name -> Const:bool:False | U
+417:8:Call -> ERR
+417:8:Attribute -> BM:builtins.list.append
+417:8:Name -> List:5
+419:11:Call -> ERR
+419:11:Name -> ERR
+419:35:Name -> List:5
+461:8:Name -> U | Const:str:'dism.exe'
+463:29:Name -> Const:NoneType:None | U
+463:18:Name -> U
+467:7:Name -> Const:NoneType:None | U
+468:18:Name -> U
+469:12:Call -> ERR
+469:12:Attribute -> BM:builtins.list.append
+469:12:Name -> List:4
+469:39:Name -> U
+471:12:Call -> ERR
+471:12:Attribute -> BM:builtins.list.append
+471:12:Name -> List:4
+471:39:Name -> U
+473:10:Call -> ERR
+473:10:Name -> ERR
+473:30:Name -> List:4
+476:15:Call -> U
+476:15:Attribute -> Func:re.findall
+476:15:Name -> Module:re
+476:26:Name -> Const:str:'Feature Name : (.*)\\r\\n'
+476:35:Name -> U
+476:40:Attribute -> Const:int:8
+476:40:Name -> Module:re
+477:4:Call -> U
+477:4:Attribute -> U
+477:4:Name -> U
+479:11:Name -> U
+502:11:Call -> U
+502:11:Name -> Func:salt.modules.win_dism._get_components
+506:14:Name -> Const:NoneType:None | U
+530:11:Call -> U
+530:11:Name -> Func:salt.modules.win_dism._get_components
+534:14:Name -> Const:NoneType:None | U
+581:8:Name -> U | Const:str:'dism.exe'
+583:29:Name -> Const:NoneType:None | U
+583:18:Name -> U
+585:24:Name -> U
+588:7:Name -> Const:bool:False | U
+589:8:Call -> ERR
+589:8:Attribute -> BM:builtins.list.append
+589:8:Name -> List:5
+590:7:Name -> Const:bool:False | U
+591:8:Call -> ERR
+591:8:Attribute -> BM:builtins.list.append
+591:8:Name -> List:5
+592:11:Name -> Const:bool:False | U
+593:8:Call -> ERR
+593:8:Attribute -> BM:builtins.list.append
+593:8:Name -> List:5
+595:11:Call -> ERR
+595:11:Name -> ERR
+595:35:Name -> List:5
+638:8:Name -> U | Const:str:'dism.exe'
+640:29:Name -> Const:NoneType:None | U
+640:18:Name -> U
+642:24:Name -> U
+646:11:Name -> Const:bool:False | U
+647:8:Call -> ERR
+647:8:Attribute -> BM:builtins.list.append
+647:8:Name -> List:6
+649:11:Call -> ERR
+649:11:Name -> ERR
+649:35:Name -> List:6
+687:8:Name -> U | Const:str:'dism.exe'
+689:29:Name -> Const:NoneType:None | U
+689:18:Name -> U
+693:11:Name -> Const:bool:False | U
+694:8:Call -> ERR
+694:8:Attribute -> BM:builtins.list.append
+694:8:Name -> List:4
+696:14:Name -> U
+697:8:Call -> ERR
+697:8:Attribute -> BM:builtins.list.append
+697:8:Name -> List:4
+697:35:Name -> U
+699:8:Call -> ERR
+699:8:Attribute -> BM:builtins.list.append
+699:8:Name -> List:4
+699:35:Name -> U
+701:11:Call -> ERR
+701:11:Name -> ERR
+701:35:Name -> List:4
+733:15:Call -> U
+733:15:Name -> Func:salt.modules.win_dism.installed_packages
+733:40:Name -> Const:NoneType:None | U
+734:27:Call -> U
+734:27:Attribute -> U
+734:27:Call -> U
+734:27:Attribute -> U
+734:27:Name -> U
+734:13:Call -> U
+734:13:Attribute -> U
+734:13:Name -> U
+734:65:Name -> U
+735:19:Name -> U
+736:15:Name -> U | Const:str:'KBUninferable'
+736:28:Name -> U
+737:19:Name -> U
+775:15:Call -> U | Const:NoneType:None
+775:15:Name -> Func:salt.modules.win_dism.get_kb_package_name
+775:38:Name -> U
+775:48:Name -> Const:NoneType:None | U
+776:7:Name -> U | Const:NoneType:None
+777:17:Name -> U
+778:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+778:14:Name -> Class:salt.exceptions.CommandExecutionError
+778:36:Name -> Const:str:'Uninferable not installed'
+779:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+779:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+779:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+779:27:Name -> U | Const:NoneType:None
+780:11:Call -> U
+780:11:Name -> Func:salt.modules.win_dism.remove_package
+780:34:Name -> U | Const:NoneType:None
+780:50:Name -> Const:NoneType:None | U
+780:65:Name -> Const:bool:False | U
+803:11:Call -> U
+803:11:Name -> Func:salt.modules.win_dism._get_components
+807:14:Name -> Const:NoneType:None | U
+831:11:Call -> U
+831:11:Name -> Func:salt.modules.win_dism._get_components
+835:14:Name -> Const:NoneType:None | U
+866:8:Name -> U | Const:str:'dism.exe'
+868:29:Name -> Const:NoneType:None | U
+868:18:Name -> U
+872:14:Name -> U
+873:8:Call -> ERR
+873:8:Attribute -> BM:builtins.list.append
+873:8:Name -> List:4
+873:35:Name -> U
+875:8:Call -> ERR
+875:8:Attribute -> BM:builtins.list.append
+875:8:Name -> List:4
+875:35:Name -> U
+877:10:Call -> ERR
+877:10:Name -> ERR
+877:34:Name -> List:4
+879:7:Name -> U
+880:14:Call -> Dict:0
+880:14:Name -> Class:builtins.dict
+881:20:Call -> ERR
+881:20:Attribute -> BM:builtins.str.splitlines
+881:20:Call -> Const:str:''
+881:20:Name -> Class:builtins.str
+881:24:Name -> U
+882:24:Name -> U
+883:23:Call -> U
+883:23:Attribute -> U
+883:23:Name -> U
+884:19:Call -> ERR
+884:19:Name -> Func:builtins.len
+884:23:Name -> U
+886:16:Name -> Dict:0
+886:20:Name -> U
+886:31:Name -> U
+888:14:Name -> U
+890:11:Name -> Dict:0 | U

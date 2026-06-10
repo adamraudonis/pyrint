@@ -1,0 +1,136 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'tests.unit.test_virtualname' | Const:str:'__main__'
+18:8:Name -> Inst:tests.unit.test_virtualname.FakeEntry
+18:20:Name -> U
+19:8:Name -> Inst:tests.unit.test_virtualname.FakeEntry
+19:20:Name -> U
+20:8:Name -> Inst:tests.unit.test_virtualname.FakeEntry
+20:24:Name -> Const:bool:True | U
+23:15:Attribute -> Const:bool:True | U
+23:15:Name -> Inst:tests.unit.test_virtualname.FakeEntry
+26:26:Name -> Class:tests.support.unit.TestCase
+34:5:Name -> Class:builtins.staticmethod
+36:15:Call -> Const:NoneType:None | U
+36:15:Attribute -> Func:importlib._bootstrap_external.spec_from_file_location
+36:15:Attribute -> Module:importlib.util
+36:15:Name -> Module:importlib
+36:67:Name -> U
+37:17:Call -> Const:NoneType:None | U
+37:17:Attribute -> Func:importlib._bootstrap.module_from_spec
+37:17:Attribute -> Module:importlib.util
+37:17:Name -> Module:importlib
+37:49:Name -> Const:NoneType:None | U
+38:8:Call -> U
+38:8:Attribute -> U
+38:8:Attribute -> U
+38:8:Name -> Const:NoneType:None | U
+38:32:Name -> Const:NoneType:None | U
+39:15:Name -> Const:NoneType:None | U
+46:21:Call -> ERR
+46:21:Attribute -> Func:posix.listdir
+46:21:Name -> Module:os
+46:32:Name -> U
+47:25:Call -> Tuple:2 | Tuple:2
+47:25:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+47:25:Attribute -> Module:posixpath | Module:ntpath
+47:25:Name -> Module:os
+47:42:Call -> U
+47:42:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+47:42:Attribute -> Module:posixpath | Module:ntpath
+47:42:Name -> Module:os
+47:59:Name -> U
+47:71:Name -> U
+48:15:Call -> U
+48:15:Attribute -> U
+48:15:Name -> U
+48:39:Call -> U
+48:39:Attribute -> U
+48:39:Name -> U
+50:15:Call -> Const:bool:False | U
+50:15:Attribute -> Func:genericpath.isfile | U
+50:15:Attribute -> Module:posixpath | Module:ntpath
+50:15:Name -> Module:os
+50:30:Name -> U
+50:44:Call -> U
+50:44:Attribute -> U
+50:44:Name -> U
+53:24:Call -> Const:bool:False | U
+53:24:Attribute -> Func:genericpath.isfile | U
+53:24:Attribute -> Module:posixpath | Module:ntpath
+53:24:Name -> Module:os
+53:39:Name -> U
+53:16:Name -> U
+53:50:Call -> U
+53:50:Attribute -> Func:posixpath.join | Func:ntpath.join
+53:50:Attribute -> Module:posixpath | Module:ntpath
+53:50:Name -> Module:os
+53:63:Name -> U
+55:21:Call -> Const:NoneType:None | U
+55:21:Attribute -> Func:tests.unit.test_virtualname.VirtualNameTestCase._import_module
+55:21:Name -> Inst:tests.unit.test_virtualname.VirtualNameTestCase
+55:41:Name -> U
+56:15:Call -> Const:bool:False
+56:15:Name -> Func:builtins.hasattr
+56:23:Name -> Const:NoneType:None | U
+57:19:Attribute -> U
+57:19:Name -> Const:NoneType:None | U
+57:49:Name -> U
+58:20:Call -> ERR
+58:20:Attribute -> BM:builtins.list.append
+58:20:Name -> List:0
+59:24:Call -> U
+59:24:Attribute -> BM:builtins.str.format
+60:28:Attribute -> U
+60:28:Name -> Const:NoneType:None | U
+60:52:Name -> U
+60:58:Name -> U
+63:15:Name -> List:0
+70:21:Call -> ERR
+70:21:Attribute -> Func:posix.listdir
+70:21:Name -> Module:os
+70:32:Attribute -> U
+70:32:Name -> Inst:tests.support.runtests.RuntimeVars
+71:25:Call -> Tuple:2 | Tuple:2
+71:25:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+71:25:Attribute -> Module:posixpath | Module:ntpath
+71:25:Name -> Module:os
+71:42:Call -> U
+71:42:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+71:42:Attribute -> Module:posixpath | Module:ntpath
+71:42:Name -> Module:os
+71:59:Name -> U
+71:71:Name -> U
+72:15:Call -> U
+72:15:Attribute -> U
+72:15:Name -> U
+72:39:Call -> U
+72:39:Attribute -> U
+72:39:Name -> U
+72:67:Call -> Const:bool:False | U
+72:67:Attribute -> Func:genericpath.isdir | U
+72:67:Attribute -> Module:posixpath | Module:ntpath
+72:67:Name -> Module:os
+72:81:Name -> U
+74:15:Name -> U
+76:15:Name -> U
+77:24:Call -> U
+77:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+77:24:Attribute -> Module:posixpath | Module:ntpath
+77:24:Name -> Module:os
+77:37:Attribute -> U
+77:37:Name -> Inst:tests.support.runtests.RuntimeVars
+78:12:Call -> ERR
+78:12:Attribute -> BM:builtins.list.extend
+78:12:Name -> List:0
+78:26:Call -> List:0
+78:26:Attribute -> BM:tests.unit.test_virtualname.VirtualNameTestCase._check_modules
+78:26:Name -> Inst:tests.unit.test_virtualname.VirtualNameTestCase
+78:46:Name -> U
+79:21:Name -> List:0
+80:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+80:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+80:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+80:25:Name -> U
+81:19:Name -> List:0

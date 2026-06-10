@@ -1,0 +1,143 @@
+12:29:Name -> Class:django.test.testcases.SimpleTestCase
+22:17:Call -> Gen:unittest.case.TestCase.subTest
+22:17:Attribute -> BM:unittest.case.TestCase.subTest
+22:17:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+22:40:Name -> Dict:0 | Dict:1
+23:16:Call -> Const:NoneType:None
+23:16:Attribute -> BM:tests.db_utils.tests.ConnectionHandlerTests.assertImproperlyConfigured
+23:16:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+23:48:Name -> Dict:0 | Dict:1
+26:16:Call -> Inst:django.db.utils.ConnectionHandler
+26:16:Name -> Class:django.db.utils.ConnectionHandler
+26:34:Name -> U
+27:8:Call -> Const:NoneType:None
+27:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+27:8:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+28:12:Attribute -> U
+28:12:Name -> Inst:django.db.utils.ConnectionHandler
+28:18:Name -> Const:str:'default'
+34:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+34:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+34:13:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+34:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+34:60:Name -> Const:str:'settings.DATABASES is improperly config
+35:12:Call -> U
+35:12:Attribute -> U
+35:12:Name -> Inst:django.db.utils.ConnectionHandler
+35:18:Name -> Const:str:'default'
+39:16:Call -> Inst:django.db.utils.ConnectionHandler
+39:16:Name -> Class:django.db.utils.ConnectionHandler
+39:34:Name -> Dict:1
+41:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+41:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+41:13:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+41:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+41:60:Name -> Const:str:"You must define a 'default' database."
+42:12:Call -> U
+42:12:Attribute -> U
+42:12:Name -> Inst:django.db.utils.ConnectionHandler
+48:15:Call -> Inst:django.db.utils.ConnectionHandler
+48:15:Name -> Class:django.db.utils.ConnectionHandler
+49:8:Call -> Const:NoneType:None
+49:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+49:8:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+49:28:Attribute -> Const:NoneType:None | U
+49:28:Name -> Inst:django.db.utils.ConnectionHandler
+50:8:Call -> Const:NoneType:None
+50:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+50:8:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+50:25:Attribute -> Const:NoneType:None | U
+50:25:Name -> Inst:django.db.utils.ConnectionHandler
+50:40:Attribute -> Const:NoneType:None | U
+50:40:Name -> Inst:django.db.utils.ConnectionHandler
+54:16:Call -> Inst:django.db.utils.ConnectionHandler
+54:16:Name -> Class:django.db.utils.ConnectionHandler
+56:16:Name -> Const:str:'default'
+59:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+59:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+59:13:Name -> Inst:tests.db_utils.tests.ConnectionHandlerTests
+59:38:Name -> Class:django.utils.connection.ConnectionDoesNotExist
+59:62:Name -> Const:str:"The connection 'nonexistent' doesn't ex
+60:12:Name -> Inst:django.db.utils.ConnectionHandler
+63:32:Name -> Class:django.test.testcases.TestCase
+64:5:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+64:5:Attribute -> Func:unittest.case.skipUnless
+64:5:Name -> Module:unittest
+64:25:Attribute -> U
+64:25:Name -> Inst:django.utils.connection.ConnectionProxy
+68:13:Call -> U
+68:13:Attribute -> U
+68:13:Name -> Inst:django.utils.connection.ConnectionProxy
+70:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+70:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+70:17:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+70:42:Name -> Class:django.db.utils.ProgrammingError
+70:60:Name -> Const:str:'table "X" does not exist'
+71:16:Call -> U
+71:16:Attribute -> U
+71:16:Name -> U
+72:8:Call -> Const:NoneType:None
+72:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+72:8:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+72:28:Call -> U
+72:28:Name -> Class:builtins.type
+72:33:Attribute -> U
+72:33:Name -> U
+72:48:Call -> U
+72:48:Name -> Class:builtins.type
+72:53:Attribute -> U
+72:53:Attribute -> U
+72:53:Name -> U
+73:8:Call -> Const:NoneType:None
+73:8:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+73:8:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+73:29:Attribute -> U
+73:29:Attribute -> U
+73:29:Name -> U
+74:11:Name -> Const:bool:True | Const:bool:False
+75:12:Call -> Const:NoneType:None
+75:12:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+75:12:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+75:33:Attribute -> U
+75:33:Attribute -> U
+75:33:Attribute -> U
+75:33:Attribute -> U
+75:33:Name -> U
+76:12:Call -> Const:NoneType:None
+76:12:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+76:12:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+76:33:Attribute -> U
+76:33:Attribute -> U
+76:33:Attribute -> U
+76:33:Attribute -> U
+76:33:Name -> U
+78:12:Call -> Const:NoneType:None
+78:12:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+78:12:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+78:33:Attribute -> U
+78:33:Attribute -> U
+78:33:Attribute -> U
+78:33:Name -> U
+79:12:Call -> Const:NoneType:None
+79:12:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+79:12:Name -> Inst:tests.db_utils.tests.DatabaseErrorWrapperTests
+79:33:Attribute -> U
+79:33:Attribute -> U
+79:33:Attribute -> U
+79:33:Name -> U
+82:23:Name -> Class:django.test.testcases.SimpleTestCase
+90:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+90:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+90:13:Name -> Inst:tests.db_utils.tests.LoadBackendTests
+90:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+90:60:Name -> Const:str:"'foo' isn't an available database backe
+91:12:Call -> U | Const:NoneType:None
+91:12:Name -> Func:django.db.utils.load_backend
+92:8:Call -> Const:NoneType:None
+92:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+92:8:Name -> Inst:tests.db_utils.tests.LoadBackendTests
+92:25:Call -> Const:str:''
+92:25:Name -> Class:builtins.str
+92:29:Attribute -> U
+92:29:Attribute -> U
+92:29:Name -> U

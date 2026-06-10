@@ -1,0 +1,222 @@
+78:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+78:6:Attribute -> Func:logging.getLogger
+78:6:Name -> Module:logging
+78:24:Name -> Const:str:'salt.states.reg' | Const:str:'__main__'
+92:11:Call -> U
+92:11:Attribute -> U
+92:11:Name -> U
+93:11:Call -> U
+93:11:Attribute -> U
+93:11:Name -> U
+94:10:Call -> Const:str:''
+94:10:Attribute -> BM:builtins.str.join
+94:20:Name -> U
+95:11:Name -> U
+95:17:Name -> Const:str:''
+371:19:Name -> U
+373:16:Call -> Tuple:2
+373:16:Name -> Func:salt.states.reg._parse_key
+373:27:Name -> U
+376:18:Call -> Dict:6
+376:18:Attribute -> Func:salt.utils.win_reg.read_value
+376:18:Name -> Module:salt.utils.win_reg
+377:13:Name -> U
+377:23:Name -> Const:str:''
+377:34:Name -> Const:NoneType:None | U
+377:60:Name -> Const:bool:False | U
+381:20:Call -> U | Const:NoneType:None | Const:int:0 | Const:int:0
+381:20:Attribute -> Func:salt.utils.win_reg.cast_vdata
+381:20:Name -> Module:salt.utils.win_reg
+381:41:Name -> Const:NoneType:None | U
+381:54:Name -> Const:str:'REG_SZ' | U
+386:7:Name -> U | Const:NoneType:None | Const:int:0 | Const:int:0
+386:24:Name -> Dict:6
+386:49:Name -> Dict:6
+387:8:Name -> Dict:4
+387:25:Call -> U
+387:25:Attribute -> BM:builtins.str.format
+388:65:Name -> Const:NoneType:None | U
+388:12:Call -> U
+388:12:Attribute -> Func:salt.utils.stringutils.to_unicode
+388:12:Attribute -> Module:salt.utils.stringutils
+388:12:Attribute -> Module:salt.utils
+388:12:Name -> Module:salt
+388:46:Name -> U
+389:12:Call -> U
+389:12:Attribute -> Func:salt.utils.stringutils.to_unicode
+389:12:Attribute -> Module:salt.utils.stringutils
+389:12:Attribute -> Module:salt.utils
+389:12:Name -> Module:salt
+389:46:Name -> U
+391:15:Call -> Dict:4 | Dict:4 | U
+391:15:Attribute -> Func:salt.utils.win_dacl.check_perms
+391:15:Name -> Module:salt.utils.win_dacl
+392:21:Call -> Const:str:''
+392:21:Attribute -> BM:builtins.str.join
+392:32:Name -> U
+392:38:Name -> Const:str:''
+393:37:Name -> Const:bool:False | U
+394:16:Name -> Dict:4
+395:18:Name -> Const:NoneType:None | U
+396:24:Name -> Const:NoneType:None | U
+397:23:Name -> Const:NoneType:None | U
+398:24:Name -> Const:bool:True | U
+399:18:Name -> Const:bool:False | U
+403:19:Name -> U
+403:26:Name -> Const:str:''
+404:17:Call -> U
+404:17:Attribute -> BM:builtins.str.format
+405:65:Name -> Const:NoneType:None | U
+405:12:Call -> U
+405:12:Attribute -> Func:salt.utils.stringutils.to_unicode
+405:12:Attribute -> Module:salt.utils.stringutils
+405:12:Attribute -> Module:salt.utils
+405:12:Name -> Module:salt
+405:46:Name -> U
+407:17:Name -> U | Const:NoneType:None | Const:int:0 | Const:int:0
+408:17:Name -> Const:NoneType:None | U
+409:27:Name -> Const:NoneType:None | U
+409:46:Name -> Const:NoneType:None | U
+410:23:Name -> Const:bool:True | U
+414:7:Name -> ERR
+415:8:Name -> Dict:4
+416:8:Name -> Dict:4
+416:46:Name -> Dict:6
+417:8:Name -> Dict:4
+417:38:Name -> Const:NoneType:None | U
+417:49:Name -> U
+417:56:Name -> Const:str:''
+418:15:Name -> Dict:4
+421:4:Name -> Dict:4
+421:20:Call -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False
+421:20:Attribute -> Func:salt.utils.win_reg.set_value
+421:20:Name -> Module:salt.utils.win_reg
+422:13:Name -> U
+423:12:Name -> Const:str:''
+424:14:Name -> Const:NoneType:None | U
+425:14:Name -> Const:NoneType:None | U
+426:14:Name -> Const:str:'REG_SZ' | U
+427:27:Name -> Const:bool:False | U
+430:11:Name -> Dict:4
+431:8:Name -> Dict:4
+432:8:Name -> Dict:4
+432:43:Name -> Const:NoneType:None | U
+432:54:Name -> U
+432:61:Name -> Const:str:''
+434:8:Name -> Dict:4
+434:43:Name -> Dict:6
+435:8:Name -> Dict:4
+435:35:Name -> Const:NoneType:None | U
+435:46:Name -> U
+435:53:Name -> Const:str:''
+437:7:Name -> Dict:4
+438:14:Call -> Dict:4 | Dict:4 | U
+438:14:Attribute -> Func:salt.utils.win_dacl.check_perms
+438:14:Name -> Module:salt.utils.win_dacl
+439:21:Call -> Const:str:''
+439:21:Attribute -> BM:builtins.str.join
+439:32:Name -> U
+439:38:Name -> Const:str:''
+440:37:Name -> Const:bool:False | U
+441:16:Name -> Dict:4
+442:18:Name -> Const:NoneType:None | U
+443:24:Name -> Const:NoneType:None | U
+444:23:Name -> Const:NoneType:None | U
+445:24:Name -> Const:bool:True | U
+446:18:Name -> Const:bool:False | U
+449:11:Name -> Dict:4 | Dict:4 | U
+493:19:Name -> U
+495:16:Call -> Tuple:2
+495:16:Name -> Func:salt.states.reg._parse_key
+495:27:Name -> U
+498:16:Call -> Dict:6
+498:16:Attribute -> Func:salt.utils.win_reg.read_value
+498:16:Name -> Module:salt.utils.win_reg
+499:13:Name -> U
+499:23:Name -> Const:str:''
+499:34:Name -> Const:NoneType:None | U
+499:60:Name -> Const:bool:False | U
+501:11:Name -> Dict:6
+501:35:Name -> Dict:6
+502:8:Name -> Dict:4
+502:28:Name -> U
+503:15:Name -> Dict:4
+506:19:Name -> U
+506:26:Name -> Const:str:''
+507:17:Call -> U
+507:17:Attribute -> BM:builtins.str.format
+507:38:Name -> Const:NoneType:None | U
+507:29:Name -> U
+511:7:Name -> ERR
+512:8:Name -> Dict:4
+513:8:Name -> Dict:4
+513:49:Name -> Dict:2
+514:8:Name -> Dict:4
+514:41:Name -> Const:NoneType:None | U
+514:52:Name -> U
+514:59:Name -> Const:str:''
+515:15:Name -> Dict:4
+518:4:Name -> Dict:4
+518:20:Call -> Const:bool:True | Const:NoneType:None
+518:20:Attribute -> Func:salt.utils.win_reg.delete_value
+518:20:Name -> Module:salt.utils.win_reg
+519:13:Name -> U
+519:23:Name -> Const:str:''
+519:34:Name -> Const:NoneType:None | U
+519:60:Name -> Const:bool:False | U
+521:11:Name -> Dict:4
+522:8:Name -> Dict:4
+523:8:Name -> Dict:4
+523:46:Name -> Const:str:''
+523:57:Name -> U
+525:8:Name -> Dict:4
+525:45:Name -> Dict:2
+526:8:Name -> Dict:4
+526:37:Name -> Const:str:''
+526:48:Name -> U
+528:11:Name -> Dict:4
+572:19:Name -> U
+574:16:Call -> Tuple:2
+574:16:Name -> Func:salt.states.reg._parse_key
+574:27:Name -> U
+577:11:Call -> Dict:6
+577:11:Attribute -> Func:salt.utils.win_reg.read_value
+577:11:Name -> Module:salt.utils.win_reg
+577:31:Name -> U
+577:41:Name -> Const:str:''
+577:65:Name -> Const:bool:False | U
+580:8:Name -> Dict:4
+580:28:Name -> U
+581:15:Name -> Dict:4
+583:4:Name -> Dict:4
+583:53:Name -> U
+583:60:Name -> Const:str:''
+584:4:Name -> Dict:4
+584:33:Name -> U
+584:40:Name -> Const:str:''
+587:7:Name -> ERR
+588:8:Name -> Dict:4
+589:8:Name -> Dict:4
+589:61:Name -> U
+589:68:Name -> Const:str:''
+590:8:Name -> Dict:4
+590:41:Name -> U
+590:48:Name -> Const:str:''
+591:15:Name -> Dict:4
+594:4:Call -> Const:bool:False | Const:bool:False | Dict:2
+594:4:Attribute -> Func:salt.utils.win_reg.delete_key_recursive
+594:4:Name -> Module:salt.utils.win_reg
+594:34:Name -> U
+594:44:Name -> Const:str:''
+594:68:Name -> Const:bool:False | U
+595:7:Call -> Dict:6
+595:7:Attribute -> Func:salt.utils.win_reg.read_value
+595:7:Name -> Module:salt.utils.win_reg
+595:27:Name -> U
+595:37:Name -> Const:str:''
+595:61:Name -> Const:bool:False | U
+598:8:Name -> Dict:4
+599:8:Name -> Dict:4
+600:8:Name -> Dict:4
+600:58:Name -> U
+602:11:Name -> Dict:4

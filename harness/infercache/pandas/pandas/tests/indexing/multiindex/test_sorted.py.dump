@@ -1,0 +1,299 @@
+16:24:Call -> List:3
+16:24:Name -> Class:builtins.list
+17:13:Call -> Inst:pandas.core.frame.DataFrame
+17:13:Name -> Class:pandas.core.frame.DataFrame
+18:56:Name -> List:3
+20:13:Call -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+20:13:Attribute -> BM:pandas.core.frame.DataFrame.set_index
+20:13:Name -> Inst:pandas.core.frame.DataFrame
+20:26:Name -> List:3
+21:22:Attribute -> Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.frame.DataFrame | U
+21:22:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+22:13:Attribute -> Inst:pandas.core.indexing._LocIndexer | U
+22:13:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+22:20:Name -> Inst:pandas.core.indexes.range.RangeIndex | U
+24:17:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+24:17:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_tuples
+24:17:Name -> Class:pandas.core.indexes.multi.MultiIndex
+25:13:Call -> Inst:pandas.core.series.Series
+25:13:Name -> Class:pandas.core.series.Series
+25:33:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+26:8:Call -> Const:NoneType:None
+26:8:Attribute -> Func:pandas._testing.asserters.assert_series_equal
+26:8:Name -> Module:pandas._testing
+26:31:Name -> U
+26:35:Name -> Inst:pandas.core.series.Series
+29:16:Name -> U
+30:13:Attribute -> U
+30:13:Call -> U
+30:13:Attribute -> U
+30:13:Name -> U
+33:17:Attribute -> U
+33:17:Name -> U
+33:30:Call -> U
+33:30:Attribute -> U
+33:30:Name -> U
+34:19:Call -> U
+34:19:Attribute -> U
+34:19:Name -> U
+34:38:Attribute -> U
+34:38:Name -> U
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+35:8:Name -> Module:pandas._testing
+35:30:Name -> U
+35:38:Name -> U
+37:5:Call -> U
+37:5:Attribute -> U
+37:5:Attribute -> U
+37:5:Name -> U
+37:53:Name -> ERR
+40:13:Call -> Inst:pandas.core.frame.DataFrame
+40:13:Name -> Class:pandas.core.frame.DataFrame
+48:14:Call -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+48:14:Attribute -> BM:pandas.core.frame.DataFrame.set_index
+48:14:Name -> Inst:pandas.core.frame.DataFrame
+49:23:Call -> U
+49:23:Attribute -> BM:pandas.core.generic.NDFrame.copy | U
+49:23:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+51:8:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+51:20:Call -> U
+51:20:Attribute -> U
+51:20:Attribute -> Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.frame.DataFrame | Inst:pandas.core.indexes.base.Index | U
+51:20:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+52:8:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+52:20:Call -> U
+52:20:Attribute -> U
+52:20:Attribute -> Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.frame.DataFrame | Inst:pandas.core.indexes.base.Index | U
+52:20:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+53:19:Attribute -> U
+53:19:Attribute -> Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.frame.DataFrame | U
+53:19:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+55:15:Call -> U
+55:15:Attribute -> U
+55:15:Attribute -> U
+55:15:Name -> U
+55:41:Attribute -> Inst:pandas.core.indexes.range.RangeIndex | Inst:pandas.core.frame.DataFrame | Inst:pandas.core.indexes.base.Index | U
+55:41:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+56:19:Call -> Const:NoneType:None | U
+56:19:Attribute -> BM:pandas.core.frame.DataFrame.sort_index | U
+56:19:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+56:38:Name -> U
+57:15:Attribute -> U
+57:15:Attribute -> U
+57:15:Name -> Const:NoneType:None | U
+59:17:Call -> Const:NoneType:None | U
+59:17:Attribute -> BM:pandas.core.frame.DataFrame.sort_index | U
+59:17:Name -> Inst:pandas.core.frame.DataFrame | U | Const:NoneType:None
+59:45:Name -> U
+60:15:Attribute -> U
+60:15:Attribute -> U
+60:15:Name -> Const:NoneType:None | U
+61:8:Call -> Const:NoneType:None
+61:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+61:8:Name -> Module:pandas._testing
+61:30:Name -> Const:NoneType:None | U
+61:38:Name -> Const:NoneType:None | U
+68:17:Call -> Inst:builtins.zip
+68:17:Name -> Class:builtins.zip
+68:22:Name -> List:2
+69:16:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+69:16:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_tuples
+69:16:Name -> Class:pandas.core.indexes.multi.MultiIndex
+69:39:Name -> Inst:builtins.zip
+70:16:Call -> Tuple:2 | U | Tuple:2 | Inst:pandas.core.indexes.multi.MultiIndex
+70:16:Attribute -> BM:pandas.core.indexes.base.Index.sort_values
+70:16:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+71:26:Call -> U
+71:26:Attribute -> U
+71:26:Name -> U
+71:46:Name -> U
+73:17:Call -> Inst:pandas.core.frame.DataFrame
+73:17:Name -> Class:pandas.core.frame.DataFrame
+73:27:Call -> Inst:builtins.range
+73:27:Name -> Class:builtins.range
+73:43:Name -> Tuple:2 | U | Tuple:2 | Inst:pandas.core.indexes.multi.MultiIndex
+79:17:Call -> Inst:builtins.zip
+79:17:Name -> Class:builtins.zip
+79:22:Name -> List:2
+80:16:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+80:16:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_tuples
+80:16:Name -> Class:pandas.core.indexes.multi.MultiIndex
+80:39:Name -> Inst:builtins.zip
+81:19:Call -> Inst:pandas.core.frame.DataFrame
+81:19:Name -> Class:pandas.core.frame.DataFrame
+81:29:Call -> Inst:builtins.range
+81:29:Name -> Class:builtins.range
+81:45:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+83:8:Call -> Const:NoneType:None
+83:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+83:8:Name -> Module:pandas._testing
+83:30:Name -> Inst:pandas.core.frame.DataFrame
+83:38:Name -> Inst:pandas.core.frame.DataFrame
+88:12:Call -> U
+88:12:Name -> Func:pandas.core.construction.array
+88:22:Name -> U
+89:12:Call -> U
+89:12:Name -> Func:pandas.core.construction.array
+91:16:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+91:16:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_arrays
+91:16:Name -> Class:pandas.core.indexes.multi.MultiIndex
+91:39:Name -> List:2
+92:17:Call -> Inst:.ndarray
+92:17:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.argsort
+92:17:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+93:19:Call -> Inst:.ndarray
+93:19:Attribute -> Func:.array
+93:19:Name -> U
+93:45:Attribute -> U
+93:45:Name -> U
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> Func:pandas._testing.asserters.assert_numpy_array_equal
+94:8:Name -> Module:pandas._testing
+94:36:Name -> Inst:.ndarray
+94:44:Name -> Inst:.ndarray
+99:12:Call -> U
+99:12:Name -> Func:pandas.core.construction.array
+99:22:Name -> U
+100:12:Call -> U
+100:12:Name -> Func:pandas.core.construction.array
+102:16:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+102:16:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_arrays
+102:16:Name -> Class:pandas.core.indexes.multi.MultiIndex
+102:39:Name -> List:2
+103:16:Call -> Tuple:2 | U | Tuple:2 | Inst:pandas.core.indexes.multi.MultiIndex
+103:16:Attribute -> BM:pandas.core.indexes.base.Index.sort_values
+103:16:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+104:17:Call -> Inst:pandas.core.frame.DataFrame
+104:17:Name -> Class:pandas.core.frame.DataFrame
+104:27:Call -> Inst:builtins.range
+104:27:Name -> Class:builtins.range
+104:43:Name -> Tuple:2 | U | Tuple:2 | Inst:pandas.core.indexes.multi.MultiIndex
+107:12:Call -> U
+107:12:Name -> Func:pandas.core.construction.array
+107:25:Name -> U
+108:12:Call -> U
+108:12:Name -> Func:pandas.core.construction.array
+110:16:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+110:16:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_arrays
+110:16:Name -> Class:pandas.core.indexes.multi.MultiIndex
+110:39:Name -> List:2
+111:19:Call -> Inst:pandas.core.frame.DataFrame
+111:19:Name -> Class:pandas.core.frame.DataFrame
+111:29:Call -> Inst:builtins.range
+111:29:Name -> Class:builtins.range
+111:45:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+113:8:Call -> Const:NoneType:None
+113:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+113:8:Name -> Module:pandas._testing
+113:30:Name -> Inst:pandas.core.frame.DataFrame
+113:38:Name -> Inst:pandas.core.frame.DataFrame
+116:16:Name -> U
+117:13:Attribute -> U
+117:13:Name -> U
+118:8:Name -> U
+120:18:Call -> Inst:.ndarray
+120:18:Attribute -> Func:.array
+120:18:Name -> U
+120:27:Name -> U
+120:39:Call -> Inst:builtins.zip
+120:39:Name -> Class:builtins.zip
+120:44:Attribute -> U
+120:44:Attribute -> U
+120:44:Name -> U
+122:17:Name -> U
+123:18:Attribute -> U
+123:18:Name -> U
+124:19:Call -> U
+124:19:Attribute -> U
+124:19:Name -> U
+124:38:Attribute -> U
+124:38:Name -> U
+124:49:Name -> U
+125:8:Name -> U
+125:27:Call -> U
+125:27:Attribute -> U
+125:27:Attribute -> U
+125:27:Name -> U
+126:8:Call -> Const:NoneType:None
+126:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+126:8:Name -> Module:pandas._testing
+126:30:Name -> U
+126:38:Name -> U
+127:8:Call -> Const:NoneType:None
+127:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+127:8:Name -> Module:pandas._testing
+127:30:Name -> U
+127:39:Name -> U
+129:13:Attribute -> U
+129:13:Name -> U
+130:17:Call -> U
+130:17:Attribute -> U
+130:17:Name -> U
+131:18:Attribute -> U
+131:18:Name -> U
+132:19:Call -> U
+132:19:Attribute -> U
+132:19:Name -> U
+132:30:Attribute -> U
+132:30:Name -> U
+132:39:Name -> U
+133:8:Name -> U
+133:25:Call -> U
+133:25:Attribute -> U
+133:25:Attribute -> U
+133:25:Name -> U
+134:8:Call -> Const:NoneType:None
+134:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+134:8:Name -> Module:pandas._testing
+134:30:Name -> U
+134:38:Name -> U
+135:8:Call -> Const:NoneType:None
+135:8:Attribute -> Func:pandas._testing.asserters.assert_frame_equal
+135:8:Name -> Module:pandas._testing
+135:30:Name -> U
+135:39:Name -> U
+142:17:Call -> Inst:builtins.zip
+142:17:Name -> Class:builtins.zip
+142:22:Name -> List:2
+143:16:Call -> Inst:pandas.core.indexes.multi.MultiIndex
+143:16:Attribute -> BM:pandas.core.indexes.multi.MultiIndex.from_tuples
+143:16:Name -> Class:pandas.core.indexes.multi.MultiIndex
+143:39:Name -> Inst:builtins.zip
+144:12:Call -> Inst:pandas.core.series.Series
+144:12:Name -> Class:pandas.core.series.Series
+144:19:Call -> U
+144:19:Attribute -> U
+144:19:Call -> U
+144:19:Attribute -> U
+144:19:Attribute -> U
+144:19:Name -> U
+144:70:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+146:18:Call -> Inst:.ndarray
+146:18:Attribute -> Func:.array
+146:18:Name -> U
+146:27:Name -> U
+146:39:Call -> Inst:builtins.zip
+146:39:Name -> Class:builtins.zip
+146:44:Attribute -> Const:NoneType:None | U
+146:44:Name -> Inst:pandas.core.indexes.multi.MultiIndex
+148:17:Name -> Inst:pandas.core.series.Series
+149:18:Attribute -> Inst:pandas.core.indexing._LocIndexer
+149:18:Name -> Inst:pandas.core.series.Series
+150:19:Name -> Inst:pandas.core.series.Series
+150:21:Name -> U
+151:8:Name -> U
+151:25:Call -> U
+151:25:Attribute -> U
+151:25:Attribute -> U
+151:25:Name -> U
+152:8:Call -> Const:NoneType:None
+152:8:Attribute -> Func:pandas._testing.asserters.assert_series_equal
+152:8:Name -> Module:pandas._testing
+152:31:Name -> U
+152:39:Name -> U
+153:8:Call -> Const:NoneType:None
+153:8:Attribute -> Func:pandas._testing.asserters.assert_series_equal
+153:8:Name -> Module:pandas._testing
+153:31:Name -> U
+153:40:Name -> U

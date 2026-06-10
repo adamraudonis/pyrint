@@ -1,0 +1,120 @@
+21:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+21:10:Attribute -> Func:logging.getLogger
+21:10:Name -> Module:logging
+21:28:Name -> Const:str:'homeassistant.components.smarty.fan' | Const:str:'__main__'
+28:10:Name -> U
+29:11:Name -> U
+30:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+34:18:Attribute -> U
+34:18:Name -> U
+36:4:Call -> U
+36:4:Name -> U
+36:24:Call -> Inst:homeassistant.components.smarty.fan.SmartyFan
+36:24:Name -> Class:homeassistant.components.smarty.fan.SmartyFan
+36:34:Name -> U
+39:16:Name -> Class:homeassistant.components.smarty.entity.SmartyEntity
+39:30:Name -> Class:homeassistant.components.fan.FanEntity
+45:8:Attribute -> Inst:homeassistant.components.fan.FanEntityFeature.SET_SPEED
+45:8:Name -> Class:homeassistant.components.fan.FanEntityFeature
+46:10:Attribute -> Inst:homeassistant.components.fan.FanEntityFeature.TURN_OFF
+46:10:Name -> Class:homeassistant.components.fan.FanEntityFeature
+47:10:Attribute -> Inst:homeassistant.components.fan.FanEntityFeature.TURN_ON
+47:10:Name -> Class:homeassistant.components.fan.FanEntityFeature
+50:36:Name -> Class:homeassistant.components.smarty.coordinator.SmartyCoordinator
+52:8:Call -> Const:NoneType:None
+52:8:Attribute -> BM:homeassistant.components.smarty.entity.SmartyEntity.__init__ | BM:builtins.object.__init__
+52:8:Call -> Super
+52:8:Name -> Class:builtins.super
+52:25:Name -> U
+53:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+54:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+54:23:Attribute -> U
+54:23:Name -> U
+55:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+55:31:Attribute -> U
+55:31:Attribute -> U
+55:31:Name -> U
+57:5:Name -> Class:builtins.property
+58:23:Name -> Class:builtins.bool
+60:15:Call -> Const:bool:False
+60:15:Name -> Class:builtins.bool
+60:20:Attribute -> Const:int:0 | U | Const:int:0
+60:20:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+62:5:Name -> Class:builtins.property
+63:29:Name -> Class:builtins.int
+65:15:Call -> Inst:builtins.int
+65:15:Name -> Func:homeassistant.util.scaling.int_states_in_range
+65:35:Name -> Tuple:2
+67:5:Name -> Class:builtins.property
+68:28:Name -> Class:builtins.int
+70:11:Attribute -> Const:int:0 | U | Const:int:0
+70:11:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+72:15:Call -> Inst:builtins.int
+72:15:Name -> Func:homeassistant.util.percentage.ranged_value_to_percentage
+72:42:Name -> Tuple:2
+72:55:Attribute -> Const:int:0 | U | Const:int:0
+72:55:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+74:41:Name -> Class:builtins.int
+76:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+76:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+76:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+76:54:Name -> U
+77:11:Name -> U
+78:12:Call -> Const:NoneType:None
+78:12:Attribute -> BM:homeassistant.components.smarty.fan.SmartyFan.turn_off
+78:12:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+81:20:Call -> ERR
+81:20:Attribute -> Func:math.ceil
+81:20:Name -> Module:math
+81:30:Call -> U
+81:30:Name -> Func:homeassistant.util.percentage.percentage_to_ranged_value
+81:57:Name -> Tuple:2
+81:70:Name -> U
+82:15:Call -> U
+82:15:Attribute -> U
+82:15:Attribute -> U
+82:15:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+82:42:Name -> U
+83:18:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+83:18:Name -> Class:homeassistant.exceptions.HomeAssistantError
+84:61:Name -> U
+87:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+87:33:Name -> U
+88:8:Call -> Const:NoneType:None
+88:8:Attribute -> BM:homeassistant.helpers.entity.Entity.schedule_update_ha_state
+88:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+92:20:Name -> Class:builtins.int
+93:21:Name -> Class:builtins.str
+94:18:Name -> Class:typing.Any
+97:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+97:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+97:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+97:58:Name -> Const:NoneType:None | U
+98:8:Call -> Const:NoneType:None
+98:8:Attribute -> BM:homeassistant.components.smarty.fan.SmartyFan.set_percentage
+98:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+98:28:Name -> Const:NoneType:None | U
+98:42:Name -> Const:int:66
+100:33:Name -> Class:typing.Any
+102:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+102:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+102:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+103:15:Call -> U
+103:15:Attribute -> U
+103:15:Attribute -> U
+103:15:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+104:18:Call -> ExcInst:homeassistant.exceptions.HomeAssistantError
+104:18:Name -> Class:homeassistant.exceptions.HomeAssistantError
+106:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+107:8:Call -> Const:NoneType:None
+107:8:Attribute -> BM:homeassistant.helpers.entity.Entity.schedule_update_ha_state
+107:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+109:5:Name -> U
+112:8:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+112:33:Attribute -> U
+112:33:Attribute -> U
+112:33:Name -> Inst:homeassistant.components.smarty.fan.SmartyFan
+113:8:Call -> ERR
+113:8:Attribute -> ERR
+113:8:Call -> Super
+113:8:Name -> Class:builtins.super

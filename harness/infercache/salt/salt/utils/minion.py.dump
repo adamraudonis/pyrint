@@ -1,0 +1,258 @@
+14:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+14:6:Attribute -> Func:logging.getLogger
+14:6:Name -> Module:logging
+14:24:Name -> Const:str:'salt.utils.minion' | Const:str:'__main__'
+23:15:Call -> U
+23:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+23:15:Attribute -> Module:posixpath | Module:ntpath
+23:15:Name -> Module:os
+23:28:Name -> U
+24:11:Call -> Const:bool:False | U
+24:11:Attribute -> Func:genericpath.isdir | U
+24:11:Attribute -> Module:posixpath | Module:ntpath
+24:11:Name -> Module:os
+24:25:Name -> U
+25:15:Name -> List:0
+26:15:Call -> ERR
+26:15:Attribute -> Func:posix.listdir
+26:15:Name -> Module:os
+26:26:Name -> U
+27:15:Call -> U
+27:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+27:15:Attribute -> Module:posixpath | Module:ntpath
+27:15:Name -> Module:os
+27:28:Name -> U
+27:38:Name -> U
+29:19:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U | Dict:0
+29:19:Name -> Func:salt.utils.minion._read_proc_file
+29:35:Name -> U
+29:41:Name -> U
+30:15:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U | Dict:0
+31:16:Call -> ERR
+31:16:Attribute -> BM:builtins.list.append
+31:16:Name -> List:0
+31:27:Name -> U | Dict:0
+32:15:Name -> Class:builtins.OSError
+37:11:Name -> List:0
+44:10:Call -> U
+44:10:Attribute -> Func:posixpath.join | Func:ntpath.join
+44:10:Attribute -> Module:posixpath | Module:ntpath
+44:10:Name -> Module:os
+44:23:Name -> U
+44:56:Call -> Const:str:''
+44:56:Name -> Class:builtins.str
+44:60:Name -> U
+45:11:Call -> U
+45:11:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+45:11:Attribute -> Module:posixpath | Module:ntpath
+45:11:Name -> Module:os
+45:27:Name -> U
+46:11:Call -> Const:bool:False | U
+46:11:Attribute -> Func:genericpath.isdir | U
+46:11:Attribute -> Module:posixpath | Module:ntpath
+46:11:Name -> Module:os
+46:25:Name -> U
+47:8:Call -> Const:NoneType:None
+47:8:Attribute -> Func:os.makedirs
+47:8:Name -> Module:os
+47:20:Name -> U
+48:9:Call -> U
+48:9:Attribute -> Func:salt.utils.files.fopen
+48:9:Attribute -> Module:salt.utils.files
+48:9:Attribute -> Module:salt.utils
+48:9:Name -> Module:salt
+48:32:Name -> U
+49:8:Call -> U
+49:8:Attribute -> U
+49:8:Name -> U
+49:18:Call -> U
+49:18:Attribute -> Func:salt.payload.dumps
+49:18:Attribute -> Module:salt.payload
+49:18:Name -> Module:salt
+49:37:Name -> U
+56:21:Attribute -> U
+56:21:Call -> U | Inst:threading._DummyThread
+56:21:Attribute -> Func:threading.current_thread
+56:21:Name -> Module:threading
+57:10:Call -> ERR
+57:10:Attribute -> Func:posix.getpid
+57:10:Name -> Module:os
+58:9:Call -> U
+58:9:Attribute -> Func:salt.utils.files.fopen
+58:9:Attribute -> Module:salt.utils.files
+58:9:Attribute -> Module:salt.utils
+58:9:Name -> Module:salt
+58:32:Name -> U
+59:14:Call -> U
+59:14:Attribute -> U
+59:14:Name -> U
+60:8:Call -> U
+60:8:Attribute -> U
+60:8:Name -> U
+61:11:Name -> U
+62:19:Call -> U | Dict:0 | List:0
+62:19:Attribute -> Func:salt.payload.loads
+62:19:Attribute -> Module:salt.payload
+62:19:Name -> Module:salt
+62:38:Name -> U
+66:16:Call -> ERR
+66:16:Attribute -> Func:posix.remove
+66:16:Name -> Module:os
+66:26:Name -> U
+67:19:Name -> Class:builtins.OSError
+68:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+68:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+68:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+68:60:Name -> U
+70:11:Call -> ERR
+70:11:Name -> Func:builtins.isinstance
+70:22:Name -> U | Dict:0 | List:0
+70:28:Name -> Class:builtins.dict
+73:11:Call -> U | Const:bool:True | Const:bool:False
+73:11:Attribute -> Func:salt.utils.process.os_is_running
+73:11:Attribute -> Module:salt.utils.process
+73:11:Attribute -> Module:salt.utils
+73:11:Name -> Module:salt
+73:44:Name -> U | Dict:0 | List:0
+77:12:Call -> ERR
+77:12:Attribute -> Func:posix.remove
+77:12:Name -> Module:os
+77:22:Name -> U
+78:15:Name -> Class:builtins.OSError
+79:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+79:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+79:56:Name -> U
+81:7:Call -> U
+81:7:Attribute -> U
+81:7:Name -> U
+82:11:Call -> U
+82:11:Attribute -> U | BM:builtins.dict.get
+82:11:Name -> U | Dict:0 | List:0
+82:30:Name -> U
+85:11:Call -> U
+85:11:Attribute -> U | BM:builtins.dict.get
+85:11:Name -> U | Dict:0 | List:0
+85:30:Name -> U
+87:16:Call -> ERR
+87:16:Attribute -> Func:posix.remove
+87:16:Name -> Module:os
+87:26:Name -> U
+88:19:Name -> Class:builtins.OSError
+89:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+89:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+89:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+89:60:Name -> U
+91:22:Call -> U
+91:22:Attribute -> BM:builtins.str.format
+91:41:Call -> U
+91:41:Attribute -> U | BM:builtins.dict.get
+91:41:Name -> U | Dict:0 | List:0
+91:58:Call -> U
+91:58:Attribute -> U | BM:builtins.dict.get
+91:58:Name -> U | Dict:0 | List:0
+92:18:Call -> U
+92:18:Attribute -> BM:builtins.str.format
+92:50:Call -> U
+92:50:Attribute -> U | BM:builtins.dict.get
+92:50:Name -> U | Dict:0 | List:0
+94:12:Call -> U
+94:12:Attribute -> U | BM:builtins.dict.get
+94:12:Name -> U | Dict:0 | List:0
+94:31:Name -> U
+95:15:Name -> U
+95:30:Name -> U
+96:15:Name -> U
+96:26:Name -> U
+99:16:Call -> U
+99:16:Attribute -> U | BM:builtins.dict.get
+99:16:Name -> U | Dict:0 | List:0
+100:12:Attribute -> U
+100:12:Name -> U
+100:28:Call -> List:0
+100:28:Attribute -> Func:threading.enumerate
+100:28:Name -> Module:threading
+101:13:Name -> U
+101:29:Attribute -> U
+101:29:Name -> U
+101:45:Call -> List:0
+101:45:Attribute -> Func:threading.enumerate
+101:45:Name -> Module:threading
+102:15:Name -> U
+103:20:Name -> U
+103:32:Attribute -> U
+103:32:Name -> U
+103:48:Call -> List:0
+103:48:Attribute -> Func:threading.enumerate
+103:48:Name -> Module:threading
+104:15:Name -> U
+105:20:Name -> U
+105:36:Attribute -> U
+105:36:Name -> U
+105:52:Call -> List:0
+105:52:Attribute -> Func:threading.enumerate
+105:52:Name -> Module:threading
+106:15:Name -> U
+108:16:Call -> ERR
+108:16:Attribute -> Func:posix.remove
+108:16:Name -> Module:os
+108:26:Name -> U
+109:19:Name -> Class:builtins.OSError
+110:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+110:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+110:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+110:60:Name -> U
+113:11:Call -> Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | U | Const:bool:False
+113:11:Name -> Func:salt.utils.minion._check_cmdline
+113:26:Name -> U | Dict:0 | List:0
+114:14:Call -> U
+114:14:Attribute -> U | BM:builtins.dict.get
+114:14:Name -> U | Dict:0 | List:0
+115:11:Name -> U
+116:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+116:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+116:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+116:83:Name -> U
+118:12:Call -> ERR
+118:12:Attribute -> Func:posix.remove
+118:12:Name -> Module:os
+118:22:Name -> U
+119:15:Name -> Class:builtins.OSError
+120:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+120:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+120:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+120:56:Name -> U
+122:11:Name -> U | Dict:0 | List:0
+134:11:Call -> U
+134:11:Attribute -> Func:salt.utils.platform.is_linux
+134:11:Attribute -> Module:salt.utils.platform
+134:11:Attribute -> Module:salt.utils
+134:11:Name -> Module:salt
+136:10:Call -> U
+136:10:Attribute -> U
+136:10:Name -> U
+137:11:Name -> U
+139:11:Call -> Const:bool:False | U
+139:11:Attribute -> Func:genericpath.isdir | U
+139:11:Attribute -> Module:posixpath | Module:ntpath
+139:11:Name -> Module:os
+141:11:Call -> U
+141:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+141:11:Attribute -> Module:posixpath | Module:ntpath
+141:11:Name -> Module:os
+141:33:Name -> U
+142:11:Call -> Const:bool:False | U
+142:11:Attribute -> Func:genericpath.isfile | U
+142:11:Attribute -> Module:posixpath | Module:ntpath
+142:11:Name -> Module:os
+142:26:Name -> U
+145:13:Call -> U
+145:13:Attribute -> Func:salt.utils.files.fopen
+145:13:Attribute -> Module:salt.utils.files
+145:13:Attribute -> Module:salt.utils
+145:13:Name -> Module:salt
+145:36:Name -> U
+146:30:Call -> U
+146:30:Attribute -> U
+146:30:Name -> U
+147:11:Name -> Class:builtins.OSError

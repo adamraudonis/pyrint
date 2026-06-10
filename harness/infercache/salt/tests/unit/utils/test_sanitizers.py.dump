@@ -1,0 +1,32 @@
+5:25:Name -> Class:tests.support.unit.TestCase
+15:19:Call -> Const:str:''
+15:19:Attribute -> Func:salt.utils.sanitizers.InputSanitizer.trim
+15:19:Name -> Inst:salt.utils.sanitizers.InputSanitizer
+15:30:Name -> Const:str:' sample '
+16:15:Name -> Const:str:''
+17:15:Call -> Class:builtins.str
+17:15:Name -> Class:builtins.type
+17:20:Name -> Const:str:''
+17:33:Name -> Class:builtins.str
+24:19:Call -> U
+24:19:Attribute -> Func:salt.utils.sanitizers.InputSanitizer.filename
+24:19:Name -> Inst:salt.utils.sanitizers.InputSanitizer
+24:34:Name -> Const:str:'/absolute/path/to/the/file.txt'
+25:15:Name -> U
+28:19:Call -> U
+28:19:Attribute -> Func:salt.utils.sanitizers.InputSanitizer.filename
+28:19:Name -> Inst:salt.utils.sanitizers.InputSanitizer
+28:34:Name -> Const:str:'../relative/path/to/the/file.txt'
+29:15:Name -> U
+36:19:Call -> U
+36:19:Attribute -> Func:salt.utils.sanitizers.InputSanitizer.hostname
+36:19:Name -> Inst:salt.utils.sanitizers.InputSanitizer
+36:34:Name -> Const:str:'   ../ ../some/dubious/hostname      '
+37:15:Name -> U
+39:24:Name -> Func:tests.unit.utils.test_sanitizers.SanitizersTestCase.test_sanitized_hostname
+46:14:Call -> Const:str:'quantum: fluctuations' | Const:str:''
+46:14:Name -> Func:salt.utils.sanitizers.mask_args_value
+47:15:Name -> Const:str:'quantum: fluctuations' | Const:str:''
+54:14:Call -> Const:str:'quantum fluctuations' | Const:str:''
+54:14:Name -> Func:salt.utils.sanitizers.mask_args_value
+55:15:Name -> Const:str:'quantum fluctuations' | Const:str:''

@@ -1,0 +1,55 @@
+10:28:Name -> Class:django.test.testcases.SimpleTestCase
+22:13:Call -> Inst:collections.UserList
+22:13:Name -> Class:collections.UserList
+26:13:Call -> Inst:collections.defaultdict
+26:13:Name -> Class:collections.defaultdict
+26:25:Name -> Class:builtins.list
+27:13:Call -> Inst:builtins.float
+27:13:Name -> Class:builtins.float
+28:13:Call -> Inst:builtins.float
+28:13:Name -> Class:builtins.float
+29:13:Call -> Inst:builtins.float
+29:13:Name -> Class:builtins.float
+31:17:Call -> Gen:unittest.case.TestCase.subTest
+31:17:Attribute -> BM:unittest.case.TestCase.subTest
+31:17:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase
+31:30:Name -> Const:NoneType:None | Const:bool:True | Const:bool:False | Const:int:2 | Const:float:3.0 | Const:float:1e+23 | Const:str:'1' | Const:bytes:b'hello' | List:0 | Inst:collections.UserList | Dict:0 | Dict:1 | Dict:1 | Inst:collections.defaultdict | Inst:builtins.float
+32:29:Call -> U | Const:str:'' | Const:str:''
+32:29:Name -> Func:django.utils.json.normalize_json
+32:44:Name -> Const:NoneType:None | Const:bool:True | Const:bool:False | Const:int:2 | Const:float:3.0 | Const:float:1e+23 | Const:str:'1' | Const:bytes:b'hello' | List:0 | Inst:collections.UserList | Dict:0 | Dict:1 | Dict:1 | Inst:collections.defaultdict | Inst:builtins.float
+34:16:Call -> Const:NoneType:None
+34:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+34:16:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase
+34:33:Call -> U
+34:33:Attribute -> Func:json.dumps
+34:33:Name -> Module:json
+34:44:Name -> U | Const:str:'' | Const:str:''
+34:57:Name -> Const:str:'null' | Const:str:'true' | Const:str:'false' | Const:str:'2' | Const:str:'3.0' | Const:str:'1e+23' | Const:str:'"1"' | Const:str:'"hello"' | Const:str:'[]' | Const:str:'[1, 2]' | Const:str:'{}' | Const:str:'{"1": "a"}' | Const:str:'{"foo": [1, 2, 3]}' | Const:str:'{}' | Const:str:'NaN' | Const:str:'Infinity' | Const:str:'-Infinity'
+37:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+37:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+37:13:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase
+37:38:Name -> Class:builtins.ValueError
+38:12:Call -> U | Const:str:'' | Const:bytes:b'\xff'
+38:12:Name -> Func:django.utils.json.normalize_json
+41:26:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase
+41:32:Name -> Func:builtins.any
+41:37:Call -> Inst:builtins.object
+41:37:Name -> Class:builtins.object
+41:47:Call -> Inst:_pydatetime.datetime | U
+41:47:Attribute -> BM:_pydatetime.datetime.now
+41:47:Name -> Class:_pydatetime.datetime
+41:63:Call -> Set:0
+41:63:Name -> Class:builtins.set
+41:70:Call -> Inst:_decimal.Decimal | Inst:_pydecimal.Decimal
+41:70:Name -> Class:_decimal.Decimal | Class:_pydecimal.Decimal
+43:16:Call -> Gen:unittest.case.TestCase.subTest
+43:16:Attribute -> BM:unittest.case.TestCase.subTest
+43:16:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase
+43:29:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase | Func:builtins.any | Inst:builtins.object | Inst:_pydatetime.datetime | U | Set:0 | Inst:_decimal.Decimal | Inst:_pydecimal.Decimal
+44:16:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+44:16:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+44:16:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase
+44:41:Name -> Class:builtins.TypeError
+46:16:Call -> U | Inst:tests.utils_tests.test_json.JSONNormalizeTestCase | Func:builtins.any | Inst:builtins.object | Inst:_pydatetime.datetime | Set:0 | Inst:_decimal.Decimal | Inst:_pydecimal.Decimal
+46:16:Name -> Func:django.utils.json.normalize_json
+46:31:Name -> Inst:tests.utils_tests.test_json.JSONNormalizeTestCase | Func:builtins.any | Inst:builtins.object | Inst:_pydatetime.datetime | U | Set:0 | Inst:_decimal.Decimal | Inst:_pydecimal.Decimal

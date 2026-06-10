@@ -1,0 +1,79 @@
+6:21:Name -> Class:django.test.testcases.SimpleTestCase
+8:12:Call -> Inst:django.forms.fields.ComboField
+8:12:Name -> Class:django.forms.fields.ComboField
+8:31:Call -> Inst:django.forms.fields.CharField
+8:31:Name -> Class:django.forms.fields.CharField
+8:57:Call -> Inst:django.forms.fields.EmailField
+8:57:Name -> Class:django.forms.fields.EmailField
+9:8:Call -> Const:NoneType:None
+9:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+9:8:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+9:45:Call -> Const:str:'test@example.com' | U
+9:45:Attribute -> BM:django.forms.fields.ComboField.clean
+9:45:Name -> Inst:django.forms.fields.ComboField
+10:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+10:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+10:13:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+11:12:Name -> Class:django.core.exceptions.ValidationError
+14:12:Call -> Const:str:'longemailaddress@example.com' | U
+14:12:Attribute -> BM:django.forms.fields.ComboField.clean
+14:12:Name -> Inst:django.forms.fields.ComboField
+15:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+15:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+15:13:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+16:12:Name -> Class:django.core.exceptions.ValidationError
+18:12:Call -> Const:str:'not an email' | U
+18:12:Attribute -> BM:django.forms.fields.ComboField.clean
+18:12:Name -> Inst:django.forms.fields.ComboField
+19:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+19:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+19:13:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+19:38:Name -> Class:django.core.exceptions.ValidationError
+20:12:Call -> Const:str:'' | U
+20:12:Attribute -> BM:django.forms.fields.ComboField.clean
+20:12:Name -> Inst:django.forms.fields.ComboField
+21:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+21:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+21:13:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+21:38:Name -> Class:django.core.exceptions.ValidationError
+22:12:Call -> Const:NoneType:None | U
+22:12:Attribute -> BM:django.forms.fields.ComboField.clean
+22:12:Name -> Inst:django.forms.fields.ComboField
+25:12:Call -> Inst:django.forms.fields.ComboField
+25:12:Name -> Class:django.forms.fields.ComboField
+25:31:Call -> Inst:django.forms.fields.CharField
+25:31:Name -> Class:django.forms.fields.CharField
+25:57:Call -> Inst:django.forms.fields.EmailField
+25:57:Name -> Class:django.forms.fields.EmailField
+26:8:Call -> Const:NoneType:None
+26:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+26:8:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+26:45:Call -> Const:str:'test@example.com' | U
+26:45:Attribute -> BM:django.forms.fields.ComboField.clean
+26:45:Name -> Inst:django.forms.fields.ComboField
+27:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+27:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+27:13:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+28:12:Name -> Class:django.core.exceptions.ValidationError
+31:12:Call -> Const:str:'longemailaddress@example.com' | U
+31:12:Attribute -> BM:django.forms.fields.ComboField.clean
+31:12:Name -> Inst:django.forms.fields.ComboField
+32:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+32:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+32:13:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+33:12:Name -> Class:django.core.exceptions.ValidationError
+35:12:Call -> Const:str:'not an email' | U
+35:12:Attribute -> BM:django.forms.fields.ComboField.clean
+35:12:Name -> Inst:django.forms.fields.ComboField
+36:8:Call -> Const:NoneType:None
+36:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+36:8:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+36:29:Call -> Const:str:'' | U
+36:29:Attribute -> BM:django.forms.fields.ComboField.clean
+36:29:Name -> Inst:django.forms.fields.ComboField
+37:8:Call -> Const:NoneType:None
+37:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+37:8:Name -> Inst:tests.forms_tests.field_tests.test_combofield.ComboFieldTest
+37:29:Call -> Const:NoneType:None | U
+37:29:Attribute -> BM:django.forms.fields.ComboField.clean
+37:29:Name -> Inst:django.forms.fields.ComboField

@@ -1,0 +1,86 @@
+18:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:10:Attribute -> Func:logging.getLogger
+18:10:Name -> Module:logging
+18:28:Name -> Const:str:'homeassistant.components.netatmo.fan' | Const:str:'__main__'
+20:20:Name -> Func:typing.Final
+23:11:Name -> Const:int:1 | Const:int:2
+23:14:Name -> Const:str:'slow' | Const:str:'fast'
+23:28:Call -> DictItems
+23:28:Attribute -> BM:builtins.dict.items
+23:28:Name -> Dict:2
+27:10:Name -> U
+28:11:Name -> U
+29:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+33:5:Name -> U
+34:39:Name -> Class:homeassistant.components.netatmo.data_handler.NetatmoDevice
+35:17:Call -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+35:17:Name -> Class:homeassistant.components.netatmo.fan.NetatmoFan
+35:28:Name -> U
+36:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+36:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+36:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+36:39:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+37:8:Call -> U
+37:8:Name -> U
+37:28:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+39:4:Call -> U
+39:4:Attribute -> U
+39:4:Name -> U
+40:8:Call -> U
+40:8:Name -> U
+40:33:Name -> U
+40:39:Name -> Const:str:'netatmo_create_fan'
+40:59:Name -> Func:homeassistant.components.netatmo.fan.async_setup_entry._create_entity
+44:17:Name -> Class:homeassistant.components.netatmo.entity.NetatmoModuleEntity
+44:38:Name -> Class:homeassistant.components.fan.FanEntity
+48:31:Attribute -> Inst:homeassistant.components.fan.FanEntityFeature.PRESET_MODE
+48:31:Name -> Class:homeassistant.components.fan.FanEntityFeature
+49:30:Name -> Const:str:'https://home.netatmo.com/control'
+51:12:Attribute -> U
+51:12:Name -> U
+53:39:Name -> Class:homeassistant.components.netatmo.data_handler.NetatmoDevice
+55:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+55:8:Attribute -> BM:homeassistant.components.netatmo.entity.NetatmoModuleEntity.__init__ | BM:homeassistant.components.netatmo.entity.NetatmoDeviceEntity.__init__ | BM:homeassistant.components.netatmo.entity.NetatmoBaseEntity.__init__ | BM:builtins.object.__init__
+55:8:Call -> Super
+55:8:Name -> Class:builtins.super
+55:25:Name -> U
+56:8:Call -> ERR
+56:8:Attribute -> BM:builtins.list.extend
+56:8:Attribute -> List:0
+56:8:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+59:28:Name -> Const:str:'home'
+60:31:Attribute -> U
+60:31:Attribute -> U
+60:31:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+61:20:Name -> Const:str:'signal_name'
+61:36:Name -> Const:str:'home'
+61:43:Attribute -> U
+61:43:Attribute -> U
+61:43:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+66:8:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+67:15:Attribute -> U
+67:15:Attribute -> U
+67:15:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+67:39:Call -> Const:str:'Uninferable.Uninferable'
+67:39:Name -> Func:homeassistant.components.netatmo.helper.device_type_to_str
+67:58:Attribute -> U
+67:58:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+70:55:Name -> Class:builtins.str
+72:14:Call -> U
+72:14:Attribute -> U
+72:14:Attribute -> U
+72:14:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+72:46:Name -> Dict:2
+72:61:Name -> U
+74:5:Name -> U
+77:11:Attribute -> U
+77:11:Attribute -> U
+77:11:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+78:12:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+80:8:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan
+80:33:Call -> U
+80:33:Attribute -> U
+80:33:Name -> U
+80:45:Attribute -> U
+80:45:Attribute -> U
+80:45:Name -> Inst:homeassistant.components.netatmo.fan.NetatmoFan

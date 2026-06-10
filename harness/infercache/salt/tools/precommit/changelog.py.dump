@@ -1,0 +1,180 @@
+18:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:6:Attribute -> Func:logging.getLogger
+18:6:Name -> Module:logging
+18:24:Name -> Const:str:'tools.precommit.changelog' | Const:str:'__main__'
+20:20:Call -> U
+20:20:Attribute -> Func:re.compile
+20:20:Name -> Module:re
+29:21:Call -> U
+29:21:Attribute -> Func:re.compile
+29:21:Name -> Module:re
+30:4:Call -> Const:str:'([\\d]+|(CVE|cve)-[\\d]{4}-[\\d]+)\\.()
+30:4:Attribute -> BM:builtins.str.format
+30:62:Call -> Const:str:''
+30:62:Attribute -> BM:builtins.str.join
+30:71:Name -> Tuple:6
+34:12:Call -> U
+34:12:Name -> U
+37:16:Name -> Const:str:'\nThese commands are used to validate c
+38:16:Call -> U
+38:16:Name -> U
+41:12:Attribute -> Inst:pathlib.Path | U
+41:12:Attribute -> Module:tools.utils
+41:12:Name -> Module:tools
+45:14:Call -> U
+45:14:Attribute -> BM:builtins.str.format
+45:32:Attribute -> U
+45:32:Name -> Module:sys
+53:1:Call -> U
+53:1:Attribute -> U
+53:1:Name -> U
+61:33:Name -> U
+61:49:Name -> Class:builtins.list
+61:54:Attribute -> Class:pathlib.Path
+61:54:Name -> Module:pathlib
+65:16:Attribute -> Inst:pathlib.Path | U
+65:16:Attribute -> Module:tools.utils
+65:16:Name -> Module:tools
+67:8:Attribute -> Inst:pathlib.Path | U
+67:8:Attribute -> Module:tools.utils
+67:8:Name -> Module:tools
+69:29:Attribute -> Inst:pathlib.Path | U
+69:29:Attribute -> Module:tools.utils
+69:29:Name -> Module:tools
+71:17:Name -> U
+72:15:Call -> Inst:pathlib.Path
+72:15:Attribute -> BM:pathlib.Path.resolve
+72:15:Call -> Inst:pathlib.Path
+72:15:Attribute -> Class:pathlib.Path
+72:15:Name -> Module:pathlib
+72:28:Name -> U
+75:12:Call -> Inst:pathlib.Path
+75:12:Attribute -> BM:pathlib.PurePath.relative_to
+75:12:Name -> Inst:pathlib.Path
+75:29:Name -> U
+76:15:Attribute -> Const:str:'' | U
+76:15:Name -> Inst:pathlib.Path
+80:19:Call -> U
+80:19:Attribute -> U
+80:19:Name -> U
+80:44:Attribute -> Const:str:'' | U
+80:44:Name -> Inst:pathlib.Path
+81:16:Call -> U
+81:16:Attribute -> U
+81:16:Name -> U
+82:20:Call -> U
+82:20:Attribute -> BM:builtins.str.format
+83:24:Call -> Inst:pathlib.Path
+83:24:Attribute -> BM:pathlib.PurePath.relative_to
+83:24:Name -> Inst:pathlib.Path
+83:41:Attribute -> Inst:pathlib.Path | U
+83:41:Attribute -> Module:tools.utils
+83:41:Name -> Module:tools
+84:24:Call -> Const:str:''
+84:24:Attribute -> BM:builtins.str.join
+84:37:Name -> Const:str:'removed' | Const:str:'deprecated' | Const:str:'changed' | Const:str:'fixed' | Const:str:'added' | Const:str:'security'
+84:57:Name -> Tuple:6
+89:15:Attribute -> U | Const:str:''
+89:15:Name -> Inst:pathlib.Path
+90:16:Call -> U
+90:16:Attribute -> U
+90:16:Name -> U
+91:38:Call -> Inst:pathlib.Path
+91:38:Attribute -> BM:pathlib.PurePath.relative_to
+91:38:Name -> Inst:pathlib.Path
+91:55:Attribute -> Inst:pathlib.Path | U
+91:55:Attribute -> Module:tools.utils
+91:55:Name -> Module:tools
+92:24:Call -> Inst:pathlib.Path
+92:24:Attribute -> BM:pathlib.PurePath.relative_to
+92:24:Name -> Inst:pathlib.Path
+92:41:Attribute -> Inst:pathlib.Path | U
+92:41:Attribute -> Module:tools.utils
+92:41:Name -> Module:tools
+96:15:Name -> Class:builtins.ValueError
+100:11:Call -> U
+100:11:Attribute -> U
+100:11:Name -> U
+100:35:Attribute -> Const:str:'' | U
+100:35:Name -> Inst:pathlib.Path
+100:54:Call -> U
+100:54:Attribute -> U
+100:54:Name -> U
+101:12:Attribute -> Const:str:'' | U
+101:12:Name -> Inst:pathlib.Path
+105:16:Call -> Inst:pathlib.Path
+105:16:Attribute -> BM:pathlib.PurePath.relative_to
+105:16:Name -> Inst:pathlib.Path
+105:33:Name -> U
+108:19:Name -> Class:builtins.ValueError
+113:16:Call -> Inst:pathlib.Path
+113:16:Attribute -> BM:pathlib.PurePath.relative_to
+113:16:Name -> Inst:pathlib.Path
+113:33:Name -> U
+116:19:Name -> Class:builtins.ValueError
+119:12:Call -> U
+119:12:Attribute -> U
+119:12:Name -> U
+120:16:Call -> U
+120:16:Attribute -> BM:builtins.str.format
+121:20:Call -> Inst:pathlib.Path
+121:20:Attribute -> BM:pathlib.PurePath.relative_to
+121:20:Name -> Inst:pathlib.Path
+121:37:Attribute -> Inst:pathlib.Path | U
+121:37:Attribute -> Module:tools.utils
+121:37:Name -> Module:tools
+122:20:Call -> Const:str:''
+122:20:Attribute -> BM:builtins.str.join
+122:33:Name -> Const:str:'removed' | Const:str:'deprecated' | Const:str:'changed' | Const:str:'fixed' | Const:str:'added' | Const:str:'security'
+122:53:Name -> Tuple:6
+128:15:Call -> U
+128:15:Attribute -> U
+128:15:Name -> U
+128:40:Attribute -> Const:str:'' | U
+128:40:Name -> Inst:pathlib.Path
+133:12:Call -> Inst:pathlib.Path
+133:12:Attribute -> BM:pathlib.PurePath.relative_to
+133:12:Name -> Inst:pathlib.Path
+133:29:Name -> U
+134:15:Name -> Class:builtins.ValueError
+136:12:Call -> U
+136:12:Attribute -> U
+136:12:Name -> U
+137:16:Call -> U
+137:16:Attribute -> BM:builtins.str.format
+138:20:Attribute -> Const:str:'' | U
+138:20:Name -> Inst:pathlib.Path
+139:20:Call -> U
+139:20:Attribute -> U
+139:20:Name -> U
+139:55:Attribute -> Inst:pathlib.Path | U
+139:55:Attribute -> Module:tools.utils
+139:55:Name -> Module:tools
+140:20:Attribute -> Inst:pathlib.Path
+140:20:Call -> Inst:pathlib.Path
+140:20:Attribute -> BM:pathlib.PurePath.relative_to
+140:20:Name -> Inst:pathlib.Path
+140:37:Attribute -> Inst:pathlib.Path | U
+140:37:Attribute -> Module:tools.utils
+140:37:Name -> Module:tools
+143:11:Attribute -> U | Const:str:''
+143:11:Name -> Inst:pathlib.Path
+144:12:Call -> U
+144:12:Attribute -> U
+144:12:Name -> U
+145:34:Call -> Inst:pathlib.Path
+145:34:Attribute -> BM:pathlib.PurePath.relative_to
+145:34:Name -> Inst:pathlib.Path
+145:51:Attribute -> Inst:pathlib.Path | U
+145:51:Attribute -> Module:tools.utils
+145:51:Name -> Module:tools
+146:20:Call -> Inst:pathlib.Path
+146:20:Attribute -> BM:pathlib.PurePath.relative_to
+146:20:Name -> Inst:pathlib.Path
+146:37:Attribute -> Inst:pathlib.Path | U
+146:37:Attribute -> Module:tools.utils
+146:37:Name -> Module:tools
+149:4:Call -> U
+149:4:Attribute -> U
+149:4:Name -> U
+149:13:Name -> Const:int:0 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1 | Const:int:1

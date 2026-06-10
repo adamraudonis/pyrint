@@ -1,0 +1,130 @@
+9:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+9:6:Attribute -> Func:logging.getLogger
+9:6:Name -> Module:logging
+9:24:Name -> Const:str:'salt.utils.msgpack' | Const:str:'__main__'
+12:3:Attribute -> U
+12:3:Attribute -> Inst:salt.utils.versions.Requirements
+12:3:Attribute -> Module:salt.utils.versions
+12:3:Attribute -> Module:salt.utils
+12:3:Name -> Module:salt
+13:14:Attribute -> U
+13:14:Attribute -> U
+13:14:Attribute -> Inst:salt.utils.versions.Requirements
+13:14:Attribute -> Module:salt.utils.versions
+13:14:Attribute -> Module:salt.utils
+13:14:Name -> Module:salt
+17:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+17:4:Attribute -> BM:logging.Logger.fatal | U | BM:logging.Logger.fatal
+17:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:3:Name -> Const:NoneType:None | U
+19:19:Call -> Const:bool:False
+19:19:Name -> Func:builtins.hasattr
+19:27:Name -> Const:NoneType:None | U
+21:25:Name -> Class:builtins.Exception
+31:25:Call -> ExcInst:salt.utils.msgpack.PackValueError
+31:25:Name -> Class:salt.utils.msgpack.PackValueError
+33:17:Call -> Inst:salt.utils.msgpack._exceptions
+33:17:Name -> Class:salt.utils.msgpack._exceptions
+34:5:Name -> Const:NoneType:None | U
+35:17:Attribute -> U
+35:17:Name -> U
+41:3:Name -> Const:NoneType:None | U
+42:13:Attribute -> U
+42:13:Name -> U
+43:14:Attribute -> U
+43:14:Name -> U
+44:14:Attribute -> U
+44:14:Name -> U
+52:11:Call -> ERR
+52:11:Name -> Func:builtins.isinstance
+52:22:Name -> U
+52:30:Name -> Class:builtins.dict
+53:7:Call -> U
+53:7:Attribute -> U
+53:7:Name -> U
+54:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+54:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+54:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+56:11:Name -> U
+65:11:Call -> ERR
+65:11:Name -> Func:builtins.isinstance
+65:22:Name -> U
+65:30:Name -> Class:builtins.dict
+66:7:Attribute -> U
+66:7:Attribute -> Inst:salt.utils.versions.Requirements
+66:7:Attribute -> Module:salt.utils.versions
+66:7:Attribute -> Module:salt.utils
+66:7:Name -> Module:salt
+67:11:Attribute -> U
+67:11:Attribute -> Inst:salt.utils.versions.Requirements
+67:11:Attribute -> Module:salt.utils.versions
+67:11:Attribute -> Module:salt.utils
+67:11:Name -> Module:salt
+68:12:Call -> U
+68:12:Attribute -> U
+68:12:Name -> U
+69:12:Call -> U
+69:12:Attribute -> U
+69:12:Name -> U
+70:11:Call -> U
+70:11:Name -> Func:salt.utils.msgpack._sanitize_msgpack_kwargs
+70:36:Name -> U
+73:3:Name -> Const:NoneType:None | U
+75:19:Attribute -> U
+75:19:Name -> U
+81:12:Call -> U
+81:12:Attribute -> U
+81:12:Attribute -> U
+81:12:Name -> U
+82:16:Name -> Inst:salt.utils.msgpack.Unpacker
+82:23:Name -> Tuple:0
+82:31:Call -> U
+82:31:Name -> Func:salt.utils.msgpack._sanitize_msgpack_unpack_kwargs
+82:63:Name -> Dict:0
+93:18:Call -> ExcInst:builtins.RuntimeError
+93:18:Name -> Class:builtins.RuntimeError
+106:11:Name -> Const:NoneType:None | U
+107:14:Call -> ExcInst:builtins.RuntimeError
+107:14:Name -> Class:builtins.RuntimeError
+109:4:Call -> U
+109:4:Attribute -> U
+109:4:Name -> Const:NoneType:None | U
+109:17:Name -> U
+109:20:Name -> U
+109:30:Call -> Dict:0
+109:30:Name -> Func:salt.utils.msgpack._sanitize_msgpack_kwargs
+109:55:Name -> Dict:0
+122:11:Name -> Const:NoneType:None | U
+123:14:Call -> ExcInst:builtins.RuntimeError
+123:14:Name -> Class:builtins.RuntimeError
+124:11:Call -> U
+124:11:Attribute -> U
+124:11:Name -> Const:NoneType:None | U
+124:25:Name -> U
+124:30:Call -> Dict:0
+124:30:Name -> Func:salt.utils.msgpack._sanitize_msgpack_kwargs
+124:55:Name -> Dict:0
+136:11:Name -> Const:NoneType:None | U
+137:14:Call -> ExcInst:builtins.RuntimeError
+137:14:Name -> Class:builtins.RuntimeError
+138:11:Call -> U
+138:11:Attribute -> U
+138:11:Name -> Const:NoneType:None | U
+138:26:Name -> U
+138:36:Call -> U
+138:36:Name -> Func:salt.utils.msgpack._sanitize_msgpack_unpack_kwargs
+138:68:Name -> Dict:0
+150:11:Name -> Const:NoneType:None | U
+151:14:Call -> ExcInst:builtins.RuntimeError
+151:14:Name -> Class:builtins.RuntimeError
+152:11:Call -> U
+152:11:Attribute -> U
+152:11:Name -> Const:NoneType:None | U
+152:27:Name -> U
+152:37:Call -> U
+152:37:Name -> Func:salt.utils.msgpack._sanitize_msgpack_unpack_kwargs
+152:69:Name -> Dict:0
+156:7:Name -> Func:salt.utils.msgpack.unpack
+157:8:Name -> Func:salt.utils.msgpack.unpackb
+159:7:Name -> Func:salt.utils.msgpack.pack
+160:8:Name -> Func:salt.utils.msgpack.packb

@@ -1,0 +1,433 @@
+20:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:6:Attribute -> Func:logging.getLogger
+20:6:Name -> Module:logging
+20:24:Name -> Const:str:'salt.modules.rh_service' | Const:str:'__main__'
+29:3:Call -> Const:NoneType:None | Const:str:'initctl' | U
+29:3:Attribute -> Func:salt.utils.path.which
+29:3:Attribute -> Module:salt.utils.path
+29:3:Attribute -> Module:salt.utils
+29:3:Name -> Module:salt
+38:11:Name -> Class:builtins.Exception
+39:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+39:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+39:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+40:79:Name -> ExcInst:builtins.Exception
+52:7:Call -> ERR
+52:7:Name -> ERR
+52:35:Name -> ERR
+76:7:Name -> ERR
+76:27:Name -> Set:14
+78:11:Name -> ERR
+79:15:Call -> ERR
+79:15:Attribute -> BM:builtins.str.startswith
+79:15:Call -> Const:str:''
+79:15:Name -> Class:builtins.str
+79:19:Name -> ERR
+80:23:Name -> Const:str:'service'
+84:26:Call -> ERR
+84:26:Attribute -> ERR
+84:26:Name -> ERR
+86:11:Name -> ERR
+87:15:Name -> U
+93:19:Name -> Const:str:'service'
+95:11:Name -> ERR
+96:15:Name -> U
+102:11:Name -> ERR
+109:15:Name -> U
+115:15:Name -> Const:str:'service'
+116:63:Name -> Set:14
+123:10:Call -> ERR
+123:10:Name -> ERR
+128:20:Name -> U
+131:15:Call -> U
+131:15:Attribute -> U
+131:15:Name -> U
+140:35:Name -> U
+141:7:Call -> ERR
+141:7:Name -> ERR
+141:31:Name -> Const:str:'/sbin/chkconfig --add Uninferable'
+142:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+142:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+142:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+142:55:Name -> U
+145:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+145:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+145:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+145:64:Name -> U
+153:11:Name -> Const:bool:False | Const:bool:True
+153:27:Call -> Const:bool:False | Const:bool:True | U
+153:27:Attribute -> Func:genericpath.exists | U
+153:27:Attribute -> Module:posixpath | Module:ntpath
+153:27:Name -> Module:os
+153:55:Name -> U
+163:15:Call -> U
+163:15:Name -> Class:builtins.bool
+163:20:Attribute -> ERR
+163:20:Call -> ERR
+163:20:Attribute -> Func:posix.stat
+163:20:Name -> Module:os
+163:28:Call -> U
+163:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+163:28:Attribute -> Module:posixpath | Module:ntpath
+163:28:Name -> Module:os
+163:56:Name -> U
+163:73:Attribute -> Const:int:64 | Const:int:64
+163:73:Name -> Module:stat
+164:11:Name -> Class:builtins.OSError
+172:40:Name -> U
+174:8:Call -> ERR
+174:8:Name -> ERR
+174:32:Name -> Const:str:'/sbin/chkconfig --list Uninferable'
+185:13:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+185:13:Name -> Func:salt.modules.rh_service._chkconfig_is_enabled
+185:35:Name -> U
+185:41:Name -> Const:NoneType:None | U
+186:7:Name -> Const:bool:True | Const:bool:True | Const:bool:False
+189:7:Name -> Const:NoneType:None | U
+190:19:Call -> Const:str:'3' | U
+190:19:Name -> Func:salt.modules.rh_service._runlevel
+191:11:Call -> ERR
+191:11:Name -> Func:builtins.len
+191:15:Call -> Inst:builtins.list
+191:15:Attribute -> Func:glob.glob
+191:15:Name -> Module:glob
+191:40:Name -> Const:NoneType:None | U | Const:str:'3'
+191:56:Name -> U
+200:40:Name -> U
+201:13:Call -> ERR
+201:13:Name -> ERR
+201:37:Name -> Const:str:'/sbin/chkconfig --list Uninferable'
+203:7:Name -> Const:NoneType:None | U
+204:19:Call -> Const:str:'3' | U
+204:19:Name -> Func:salt.modules.rh_service._runlevel
+205:7:Name -> U
+206:19:Call -> U
+206:19:Attribute -> U
+206:19:Name -> U
+207:18:Name -> Const:NoneType:None | U | Const:str:'3'
+207:35:Name -> U
+208:19:Call -> U
+208:19:Attribute -> U
+208:19:Name -> U
+208:37:Name -> U
+210:17:Call -> U
+210:17:Attribute -> U
+210:17:Name -> U
+210:33:Name -> U
+221:11:Call -> U
+221:11:Name -> Func:salt.modules.rh_service._service_is_chkconfig
+221:33:Name -> U
+221:47:Call -> Const:bool:True | Const:bool:False
+221:47:Name -> Func:salt.modules.rh_service._chkconfig_add
+221:62:Name -> U
+223:29:Name -> U
+224:15:Call -> ERR
+224:15:Name -> ERR
+224:39:Name -> Const:str:'/sbin/chkconfig Uninferable on'
+234:11:Call -> U
+234:11:Name -> Func:salt.modules.rh_service._service_is_chkconfig
+234:33:Name -> U
+234:47:Call -> Const:bool:True | Const:bool:False
+234:47:Name -> Func:salt.modules.rh_service._chkconfig_add
+234:62:Name -> U
+236:29:Name -> U
+237:15:Call -> ERR
+237:15:Name -> ERR
+237:39:Name -> Const:str:'/sbin/chkconfig Uninferable off'
+245:11:Call -> U
+245:11:Name -> Func:salt.modules.rh_service._service_is_chkconfig
+245:33:Name -> U
+247:35:Name -> U
+248:15:Call -> ERR
+248:15:Name -> ERR
+248:39:Name -> Const:str:'/sbin/chkconfig --del Uninferable'
+255:7:Name -> Const:bool:False | Const:bool:True
+256:11:Call -> Const:bool:False | Const:bool:True | U
+256:11:Attribute -> Func:genericpath.exists | U
+256:11:Attribute -> Module:posixpath | Module:ntpath
+256:11:Name -> Module:os
+256:39:Name -> U
+257:12:Call -> ERR
+257:12:Attribute -> Func:posix.rename
+257:12:Name -> Module:os
+258:29:Name -> U
+259:29:Name -> U
+268:7:Name -> Const:bool:False | Const:bool:True
+269:16:Call -> U
+269:16:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+269:16:Attribute -> Module:posixpath | Module:ntpath
+269:16:Name -> Module:os
+269:33:Name -> U
+269:56:Call -> Inst:builtins.list
+269:56:Attribute -> Func:glob.glob
+269:56:Name -> Module:glob
+279:13:Call -> ERR
+279:13:Name -> ERR
+280:16:Call -> U
+280:16:Attribute -> U
+280:16:Name -> U
+281:16:Call -> U
+281:16:Attribute -> U
+281:16:Name -> U
+283:15:Call -> U
+283:15:Attribute -> U
+283:15:Name -> U
+284:16:Call -> ERR
+284:16:Attribute -> BM:builtins.list.append
+284:16:Name -> List:0
+284:33:Name -> U
+285:15:Name -> Class:builtins.IndexError
+288:12:Name -> U
+288:23:Name -> List:0
+288:36:Call -> U | Const:bool:False
+288:36:Name -> Func:salt.modules.rh_service._service_is_sysv
+288:53:Name -> U
+304:12:Call -> Const:str:'' | U
+304:12:Attribute -> BM:builtins.str.lower | U
+304:12:Name -> Const:str:'' | U
+305:7:Name -> Const:str:'' | U
+306:15:Call -> ERR
+306:15:Name -> Func:builtins.sorted
+306:22:Name -> U
+306:39:Call -> U | List:0
+306:39:Name -> Func:salt.modules.rh_service._upstart_services
+306:62:Call -> Const:bool:False | Const:bool:True
+306:62:Name -> Func:salt.modules.upstart_service._upstart_is_enabled
+306:82:Name -> U
+307:9:Name -> Const:str:'' | U
+308:19:Call -> Const:str:'3' | U
+308:19:Name -> Func:salt.modules.rh_service._runlevel
+309:15:Call -> ERR
+309:15:Name -> Func:builtins.sorted
+310:12:Name -> U
+310:29:Call -> U
+310:29:Name -> Func:salt.modules.rh_service._sysv_services
+310:49:Call -> Const:bool:True | U
+310:49:Name -> Func:salt.modules.rh_service._sysv_is_enabled
+310:66:Name -> U
+310:72:Name -> Const:str:'3' | U
+313:19:Call -> Const:str:'3' | U
+313:19:Name -> Func:salt.modules.rh_service._runlevel
+314:15:Call -> ERR
+314:15:Name -> Func:builtins.sorted
+315:13:Name -> U
+315:30:Call -> U | List:0
+315:30:Name -> Func:salt.modules.rh_service._upstart_services
+315:53:Call -> Const:bool:False | Const:bool:True
+315:53:Name -> Func:salt.modules.upstart_service._upstart_is_enabled
+315:73:Name -> U
+316:15:Name -> U
+316:32:Call -> U
+316:32:Name -> Func:salt.modules.rh_service._sysv_services
+316:52:Call -> Const:bool:True | U
+316:52:Name -> Func:salt.modules.rh_service._sysv_is_enabled
+316:69:Name -> U
+316:75:Name -> Const:str:'3' | U
+333:12:Call -> Const:str:'' | U
+333:12:Attribute -> BM:builtins.str.lower | U
+333:12:Name -> Const:str:'' | U
+334:7:Name -> Const:str:'' | U
+335:15:Call -> ERR
+335:15:Name -> Func:builtins.sorted
+336:12:Name -> U
+336:29:Call -> U | List:0
+336:29:Name -> Func:salt.modules.rh_service._upstart_services
+336:56:Call -> Const:bool:False | Const:bool:True
+336:56:Name -> Func:salt.modules.upstart_service._upstart_is_enabled
+336:76:Name -> U
+338:9:Name -> Const:str:'' | U
+339:19:Call -> Const:str:'3' | U
+339:19:Name -> Func:salt.modules.rh_service._runlevel
+340:15:Call -> ERR
+340:15:Name -> Func:builtins.sorted
+341:12:Name -> U
+341:29:Call -> U
+341:29:Name -> Func:salt.modules.rh_service._sysv_services
+341:53:Call -> Const:bool:True | U
+341:53:Name -> Func:salt.modules.rh_service._sysv_is_enabled
+341:70:Name -> U
+341:76:Name -> Const:str:'3' | U
+344:19:Call -> Const:str:'3' | U
+344:19:Name -> Func:salt.modules.rh_service._runlevel
+345:15:Call -> ERR
+345:15:Name -> Func:builtins.sorted
+346:13:Name -> U
+346:30:Call -> U | List:0
+346:30:Name -> Func:salt.modules.rh_service._upstart_services
+346:57:Call -> Const:bool:False | Const:bool:True
+346:57:Name -> Func:salt.modules.upstart_service._upstart_is_enabled
+346:77:Name -> U
+348:16:Name -> U
+349:28:Call -> U
+349:28:Name -> Func:salt.modules.rh_service._sysv_services
+350:23:Call -> Const:bool:True | U
+350:23:Name -> Func:salt.modules.rh_service._sysv_is_enabled
+350:40:Name -> U
+350:46:Name -> Const:str:'3' | U
+368:12:Call -> Const:str:'' | U
+368:12:Attribute -> BM:builtins.str.lower | U
+368:12:Name -> Const:str:'' | U
+369:7:Name -> Const:str:'' | U
+370:15:Call -> ERR
+370:15:Name -> Func:builtins.sorted
+370:22:Call -> U | List:0
+370:22:Name -> Func:salt.modules.rh_service._upstart_services
+371:9:Name -> Const:str:'' | U
+372:15:Call -> ERR
+372:15:Name -> Func:builtins.sorted
+372:22:Call -> U
+372:22:Name -> Func:salt.modules.rh_service._sysv_services
+374:15:Call -> ERR
+374:15:Name -> Func:builtins.sorted
+374:22:Call -> U
+374:22:Name -> Func:salt.modules.rh_service._sysv_services
+374:41:Call -> U | List:0
+374:41:Name -> Func:salt.modules.rh_service._upstart_services
+390:7:Name -> Const:str:'' | U
+391:15:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+391:15:Name -> Func:salt.modules.rh_service._service_is_upstart
+391:35:Name -> U
+392:9:Name -> Const:str:'' | U
+393:15:Call -> U | Const:bool:False
+393:15:Name -> Func:salt.modules.rh_service._service_is_sysv
+393:32:Name -> U
+396:12:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+396:12:Name -> Func:salt.modules.rh_service._service_is_upstart
+396:32:Name -> U
+397:15:Call -> U | Const:bool:False
+397:15:Name -> Func:salt.modules.rh_service._service_is_sysv
+397:32:Name -> U
+398:15:Call -> U
+398:15:Name -> Func:salt.modules.rh_service._service_is_chkconfig
+398:37:Name -> U
+416:7:Name -> Const:str:'' | U
+417:19:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+417:19:Name -> Func:salt.modules.rh_service._service_is_upstart
+417:39:Name -> U
+418:9:Name -> Const:str:'' | U
+419:19:Call -> U | Const:bool:False
+419:19:Name -> Func:salt.modules.rh_service._service_is_sysv
+419:36:Name -> U
+421:11:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+421:11:Name -> Func:salt.modules.rh_service._service_is_upstart
+421:31:Name -> U
+421:40:Call -> U | Const:bool:False
+421:40:Name -> Func:salt.modules.rh_service._service_is_sysv
+421:57:Name -> U
+437:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+437:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+437:27:Name -> U
+438:23:Name -> U
+440:31:Name -> U
+441:15:Call -> ERR
+441:15:Name -> ERR
+441:39:Name -> Const:str:'start Uninferable' | Const:str:'/sbin/service Uninferable start'
+454:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+454:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+454:27:Name -> U
+455:22:Name -> U
+457:31:Name -> U
+458:15:Call -> ERR
+458:15:Name -> ERR
+458:39:Name -> Const:str:'stop Uninferable' | Const:str:'/sbin/service Uninferable stop'
+471:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+471:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+471:27:Name -> U
+472:25:Name -> U
+474:31:Name -> U
+475:15:Call -> ERR
+475:15:Name -> ERR
+475:39:Name -> Const:str:'restart Uninferable' | Const:str:'/sbin/service Uninferable restart'
+488:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+488:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+488:27:Name -> U
+489:24:Name -> U
+491:31:Name -> U
+492:15:Call -> ERR
+492:15:Name -> ERR
+492:39:Name -> Const:str:'reload Uninferable' | Const:str:'/sbin/service Uninferable reload'
+518:7:Name -> Const:NoneType:None | U
+519:15:Call -> U
+519:15:Name -> Class:builtins.bool
+519:20:Call -> ERR
+519:20:Name -> ERR
+519:43:Name -> U
+521:24:Call -> U
+521:24:Name -> Class:builtins.bool
+521:29:Call -> U
+521:29:Attribute -> Func:re.search
+521:29:Name -> Module:re
+521:56:Name -> U
+522:7:Name -> U
+523:19:Call -> List:0
+523:19:Attribute -> Func:fnmatch.filter
+523:19:Name -> Module:fnmatch
+523:34:Call -> U
+523:34:Name -> Func:salt.modules.rh_service.get_all
+523:45:Name -> U
+525:20:Name -> U
+527:19:Name -> List:0 | List:1
+528:11:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+528:11:Name -> Func:salt.modules.rh_service._service_is_upstart
+528:31:Name -> U
+529:28:Name -> U
+530:12:Name -> Dict:0
+530:20:Name -> U
+530:50:Call -> ERR
+530:50:Name -> ERR
+531:16:Name -> Const:str:'status Uninferable'
+534:35:Name -> U
+535:12:Name -> Dict:0
+535:20:Name -> U
+536:16:Call -> ERR
+536:16:Name -> ERR
+536:40:Name -> Const:str:'/sbin/service Uninferable status'
+539:7:Name -> U
+540:15:Name -> Dict:0
+541:11:Name -> Dict:0
+541:19:Name -> U
+556:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+556:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+556:27:Name -> U
+557:15:Call -> Const:bool:True
+557:15:Name -> Func:salt.modules.rh_service._upstart_delete
+557:31:Name -> U
+559:15:Call -> Const:bool:False | U
+559:15:Name -> Func:salt.modules.rh_service._sysv_delete
+559:28:Name -> U
+572:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+572:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+572:27:Name -> U
+573:15:Call -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True
+573:15:Name -> Func:salt.modules.upstart_service._upstart_enable
+573:31:Name -> U
+575:15:Call -> Const:bool:False | U
+575:15:Name -> Func:salt.modules.rh_service._sysv_enable
+575:28:Name -> U
+588:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+588:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+588:27:Name -> U
+589:15:Call -> Const:bool:True | Const:bool:False
+589:15:Name -> Func:salt.modules.upstart_service._upstart_disable
+589:32:Name -> U
+591:15:Call -> Const:bool:False | U
+591:15:Name -> Func:salt.modules.rh_service._sysv_disable
+591:29:Name -> U
+604:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+604:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+604:27:Name -> U
+605:15:Call -> Const:bool:False | Const:bool:True
+605:15:Name -> Func:salt.modules.upstart_service._upstart_is_enabled
+605:35:Name -> U
+607:15:Call -> Const:bool:True | U
+607:15:Name -> Func:salt.modules.rh_service._sysv_is_enabled
+607:32:Name -> U
+620:7:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True
+620:7:Name -> Func:salt.modules.rh_service._service_is_upstart
+620:27:Name -> U
+621:19:Call -> Const:bool:False | Const:bool:True
+621:19:Name -> Func:salt.modules.upstart_service._upstart_is_enabled
+621:39:Name -> U
+623:19:Call -> Const:bool:True | U
+623:19:Name -> Func:salt.modules.rh_service._sysv_is_enabled
+623:36:Name -> U

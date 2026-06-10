@@ -1,0 +1,34 @@
+6:32:Name -> Class:django.test.testcases.SimpleTestCase
+7:5:Call -> Inst:django.test.utils.override_settings
+7:5:Name -> Class:django.test.utils.override_settings
+22:8:Call -> Const:NoneType:None
+22:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+22:8:Name -> Inst:tests.auth_tests.test_templatetags.RenderPasswordAsHashTests
+22:25:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+22:25:Name -> Func:django.contrib.auth.templatetags.auth.render_password_as_hash
+22:49:Name -> Const:str:'pbkdf2_sha256$100000$a6Pucb1qSFcD$WmCkn
+22:57:Name -> Const:str:'<p><strong>algorithm</strong>: <bdi>pbk
+30:17:Call -> Gen:unittest.case.TestCase.subTest
+30:17:Attribute -> BM:unittest.case.TestCase.subTest
+30:17:Name -> Inst:tests.auth_tests.test_templatetags.RenderPasswordAsHashTests
+30:36:Name -> Const:str:'pbkdf2_sh' | Const:str:'md5$password' | Const:str:'invalid' | Const:str:'testhash$password'
+31:16:Call -> Const:NoneType:None
+31:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+31:16:Name -> Inst:tests.auth_tests.test_templatetags.RenderPasswordAsHashTests
+31:33:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+31:33:Name -> Func:django.contrib.auth.templatetags.auth.render_password_as_hash
+31:57:Name -> Const:str:'pbkdf2_sh' | Const:str:'md5$password' | Const:str:'invalid' | Const:str:'testhash$password'
+31:65:Name -> Const:str:'<p><strong>Invalid password format or u
+35:32:Call -> Const:str:'!' | Const:bytes:b'' | U
+35:32:Name -> Func:django.contrib.auth.hashers.make_password
+36:17:Call -> Gen:unittest.case.TestCase.subTest
+36:17:Attribute -> BM:unittest.case.TestCase.subTest
+36:17:Name -> Inst:tests.auth_tests.test_templatetags.RenderPasswordAsHashTests
+36:36:Name -> Const:str:'' | Const:NoneType:None | Const:str:'!' | Const:bytes:b'' | U
+37:16:Call -> Const:NoneType:None
+37:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+37:16:Name -> Inst:tests.auth_tests.test_templatetags.RenderPasswordAsHashTests
+37:33:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+37:33:Name -> Func:django.contrib.auth.templatetags.auth.render_password_as_hash
+37:57:Name -> Const:str:'' | Const:NoneType:None | Const:str:'!' | Const:bytes:b'' | U
+37:65:Name -> Const:str:'<p><strong>No password set.</strong></p

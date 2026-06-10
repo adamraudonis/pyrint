@@ -1,0 +1,722 @@
+16:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+16:6:Attribute -> Func:logging.getLogger
+16:6:Name -> Module:logging
+16:24:Name -> Const:str:'salt.auth.ldap' | Const:str:'__main__'
+26:7:Name -> Class:builtins.ImportError
+56:11:Name -> Const:NoneType:None | U
+57:20:Name -> U
+57:38:Name -> U
+59:20:Name -> ERR
+59:42:Name -> U
+60:11:Name -> Class:builtins.KeyError
+62:20:Name -> Dict:17
+62:45:Name -> U
+63:15:Name -> Class:builtins.KeyError
+64:15:Name -> Const:bool:True | U
+65:43:Name -> U
+66:22:Call -> ExcInst:salt.exceptions.SaltInvocationError
+66:22:Name -> Class:salt.exceptions.SaltInvocationError
+66:42:Name -> Const:str:'missing auth.ldap.Uninferable in master
+68:11:Name -> U
+75:10:Call -> U
+75:10:Name -> U
+76:15:Call -> U
+76:15:Attribute -> U
+76:15:Name -> U
+76:31:Name -> U
+77:29:Name -> U
+78:11:Call -> U
+78:11:Attribute -> U
+78:11:Name -> U
+78:27:Name -> Dict:1
+103:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+103:19:Name -> U
+104:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+104:22:Name -> U
+105:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+105:20:Name -> U
+106:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+106:24:Name -> U
+107:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+107:19:Name -> U
+108:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+108:22:Name -> U
+109:8:Name -> Inst:salt.auth.ldap._LDAPConnection
+109:22:Name -> U
+110:15:Name -> Const:bool:True | Const:bool:False
+111:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+111:18:Name -> Class:salt.exceptions.CommandExecutionError
+115:11:Attribute -> U
+115:11:Name -> Inst:salt.auth.ldap._LDAPConnection
+115:29:Attribute -> U
+115:29:Name -> Inst:salt.auth.ldap._LDAPConnection
+116:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+116:18:Name -> Class:salt.exceptions.CommandExecutionError
+121:28:Name -> U
+122:11:Attribute -> U | Const:str:'ldaps://Uninferable:Uninferable' | Const:str:'ldap://Uninferable:Uninferable'
+122:11:Name -> Inst:salt.auth.ldap._LDAPConnection
+123:12:Name -> Inst:salt.auth.ldap._LDAPConnection
+123:26:Name -> Const:str:'ldaps' | Const:str:'ldap'
+123:37:Attribute -> U
+123:37:Name -> Inst:salt.auth.ldap._LDAPConnection
+123:51:Attribute -> U
+123:51:Name -> Inst:salt.auth.ldap._LDAPConnection
+126:15:Name -> U
+127:16:Call -> U
+127:16:Attribute -> U
+127:16:Name -> U
+127:32:Attribute -> U
+127:32:Name -> U
+127:61:Attribute -> U
+127:61:Name -> U
+129:12:Name -> Inst:salt.auth.ldap._LDAPConnection
+129:24:Call -> U
+129:24:Attribute -> U
+129:24:Name -> U
+129:43:Attribute -> U | Const:str:'ldaps://Uninferable:Uninferable' | Const:str:'ldap://Uninferable:Uninferable'
+129:43:Name -> Inst:salt.auth.ldap._LDAPConnection
+130:12:Attribute -> U
+130:12:Name -> Inst:salt.auth.ldap._LDAPConnection
+131:12:Call -> U
+131:12:Attribute -> U
+131:12:Attribute -> U
+131:12:Name -> Inst:salt.auth.ldap._LDAPConnection
+131:33:Attribute -> U
+131:33:Name -> U
+133:19:Name -> U
+134:23:Attribute -> U
+134:23:Name -> Inst:salt.auth.ldap._LDAPConnection
+135:26:Call -> ExcInst:salt.exceptions.CommandExecutionError
+135:26:Name -> Class:salt.exceptions.CommandExecutionError
+138:19:Attribute -> U
+138:19:Name -> Inst:salt.auth.ldap._LDAPConnection
+139:20:Call -> U
+139:20:Attribute -> U
+139:20:Attribute -> U
+139:20:Name -> Inst:salt.auth.ldap._LDAPConnection
+140:16:Call -> U
+140:16:Attribute -> U
+140:16:Attribute -> U
+140:16:Name -> Inst:salt.auth.ldap._LDAPConnection
+140:40:Attribute -> U
+140:40:Name -> Inst:salt.auth.ldap._LDAPConnection
+140:53:Attribute -> U
+140:53:Name -> Inst:salt.auth.ldap._LDAPConnection
+141:15:Name -> Class:builtins.Exception
+142:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+142:18:Name -> Class:salt.exceptions.CommandExecutionError
+143:16:Call -> U
+143:16:Attribute -> BM:builtins.str.format
+144:20:Attribute -> U | Const:str:'ldaps://Uninferable:Uninferable' | Const:str:'ldap://Uninferable:Uninferable'
+144:20:Name -> Inst:salt.auth.ldap._LDAPConnection
+144:30:Attribute -> U
+144:30:Name -> Inst:salt.auth.ldap._LDAPConnection
+144:43:Name -> ExcInst:builtins.Exception
+182:17:Name -> Dict:2
+183:8:Name -> Dict:0
+183:20:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+183:29:Call -> Const:bool:False | U | Const:str:'' | Const:str:'localhost' | Const:str:'389' | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:str:'memberUid'
+183:29:Name -> Func:salt.auth.ldap._config
+183:37:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+183:49:Name -> Const:NoneType:None | U
+185:17:Name -> Dict:2
+186:8:Name -> Dict:0
+186:20:Name -> Const:str:'binddn' | Const:str:'bindpw' | Const:str:'filter' | Const:str:'groupclass' | Const:str:'auth_by_group_membership_only'
+186:29:Call -> Const:bool:False | U
+186:29:Name -> Func:salt.auth.ldap._config
+186:37:Name -> Const:str:'binddn' | Const:str:'bindpw' | Const:str:'filter' | Const:str:'groupclass' | Const:str:'auth_by_group_membership_only'
+186:66:Name -> Const:NoneType:None | U
+188:4:Name -> Dict:0
+188:31:Name -> Const:bool:False | U
+194:7:Name -> Dict:0
+195:8:Name -> Dict:0
+195:29:Name -> Dict:0
+196:11:Name -> Dict:0
+197:12:Call -> ERR
+197:12:Attribute -> BM:builtins.list.append
+197:12:Name -> Dict:2
+199:16:Name -> Dict:2
+200:8:Name -> Dict:0
+200:17:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+200:25:Name -> Dict:0
+200:37:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+202:11:Name -> Dict:0
+203:11:Name -> Dict:0
+203:37:Name -> Dict:0
+205:19:Attribute -> U
+205:19:Call -> Inst:salt.auth.ldap._LDAPConnection
+205:19:Name -> Class:salt.auth.ldap._LDAPConnection
+205:37:Name -> Dict:0
+213:13:Call -> Const:bool:False | U | Const:str:''
+213:13:Name -> Func:salt.auth.ldap._config
+213:36:Name -> Const:NoneType:None | U
+214:12:Call -> Const:bool:False | U | Const:int:2
+214:12:Name -> Func:salt.auth.ldap._config
+214:34:Name -> Const:NoneType:None | U
+240:17:Name -> Dict:2
+241:8:Name -> Dict:0
+241:20:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+241:29:Call -> Const:bool:False | U | Const:str:'' | Const:str:'localhost' | Const:str:'389' | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:str:'memberUid'
+241:29:Name -> Func:salt.auth.ldap._config
+241:37:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+241:49:Name -> Const:NoneType:None | U
+243:17:Name -> Dict:2
+244:8:Name -> Dict:0
+244:20:Name -> Const:str:'binddn' | Const:str:'bindpw' | Const:str:'filter' | Const:str:'groupclass' | Const:str:'auth_by_group_membership_only'
+244:29:Call -> Const:bool:False | U
+244:29:Name -> Func:salt.auth.ldap._config
+244:37:Name -> Const:str:'binddn' | Const:str:'bindpw' | Const:str:'filter' | Const:str:'groupclass' | Const:str:'auth_by_group_membership_only'
+244:66:Name -> Const:NoneType:None | U
+246:4:Name -> Dict:0
+246:31:Name -> Const:bool:False | U
+247:7:Name -> Dict:0
+252:8:Name -> Dict:0
+252:32:Call -> U
+252:32:Name -> Func:salt.auth.ldap._render_template
+252:49:Name -> Dict:0
+252:72:Name -> U
+253:8:Name -> Dict:0
+253:32:Call -> U
+253:32:Attribute -> U
+253:32:Attribute -> U
+253:32:Name -> U
+253:64:Name -> Dict:0
+255:7:Name -> Dict:0
+256:27:Call -> U
+256:27:Attribute -> U
+256:27:Attribute -> U
+256:27:Name -> U
+256:59:Name -> U
+257:8:Name -> Dict:0
+257:32:Call -> U
+257:32:Name -> Func:salt.auth.ldap._render_template
+258:12:Name -> Dict:0
+258:35:Name -> U
+265:7:Name -> Dict:0
+266:8:Name -> Dict:0
+266:29:Name -> Dict:0
+267:11:Name -> Dict:0
+268:12:Call -> ERR
+268:12:Attribute -> BM:builtins.list.append
+268:12:Name -> Dict:2
+270:16:Name -> Dict:2
+271:8:Name -> Dict:0
+271:17:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+271:25:Name -> Dict:0
+271:37:Name -> Const:str:'uri' | Const:str:'server' | Const:str:'port' | Const:str:'starttls' | Const:str:'tls' | Const:str:'no_verify' | Const:str:'anonymous' | Const:str:'accountattributename' | Const:str:'activedirectory'
+273:11:Name -> Dict:0
+274:11:Name -> Dict:0
+274:37:Name -> Dict:0
+276:20:Attribute -> U
+276:20:Call -> Inst:salt.auth.ldap._LDAPConnection
+276:20:Name -> Class:salt.auth.ldap._LDAPConnection
+276:38:Name -> Dict:0
+277:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+277:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+277:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+279:16:Name -> Dict:0
+280:16:Name -> Const:bool:False | U | Const:str:''
+281:16:Name -> Const:bool:False | U | Const:int:2
+283:21:Call -> U
+283:21:Attribute -> U
+283:21:Name -> U
+283:36:Name -> Const:bool:False | U | Const:str:''
+283:44:Call -> Const:int:0
+283:44:Name -> Class:builtins.int
+283:48:Name -> Const:bool:False | U | Const:int:2
+283:56:Name -> Dict:0
+284:19:Name -> U
+285:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+285:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+285:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+285:54:Name -> U
+287:17:Call -> ERR
+287:17:Name -> Func:builtins.len
+287:21:Name -> U
+298:23:Name -> U
+298:41:Name -> U
+299:33:Call -> ERR
+299:33:Name -> Func:builtins.sum
+299:48:Name -> U
+299:55:Name -> U
+300:19:Name -> U
+301:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+301:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+301:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+302:74:Name -> U
+305:21:Name -> U
+306:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+306:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+306:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+307:75:Name -> U
+311:12:Name -> Dict:0
+311:33:Name -> U
+312:11:Name -> Dict:0
+312:41:Name -> Dict:0
+313:12:Name -> Dict:0
+313:33:Name -> Dict:0
+314:9:Name -> Dict:0
+314:39:Name -> Dict:0
+315:8:Name -> Dict:0
+315:29:Name -> Dict:0
+318:4:Name -> Dict:0
+318:25:Name -> U
+321:7:Name -> Dict:0
+322:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+322:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+322:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+324:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+324:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+324:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+324:59:Name -> Dict:0
+326:20:Attribute -> U
+326:20:Call -> Inst:salt.auth.ldap._LDAPConnection
+326:20:Name -> Class:salt.auth.ldap._LDAPConnection
+326:38:Name -> Dict:0
+327:11:Name -> Class:builtins.Exception
+328:8:Call -> ERR
+328:8:Attribute -> BM:builtins.dict.pop
+328:8:Name -> Dict:0
+329:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+329:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+329:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+329:65:Name -> Dict:0
+330:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+330:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+330:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+332:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+332:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:65:Name -> Dict:0
+333:11:Name -> U
+340:11:Name -> Const:bool:True | Const:bool:False
+341:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+341:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+341:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+347:7:Call -> Const:bool:False | U
+347:7:Name -> Func:salt.auth.ldap._config
+347:46:Call -> Const:bool:False | U
+347:46:Name -> Func:salt.auth.ldap._config
+348:22:Call -> U
+348:22:Name -> Func:salt.auth.ldap._bind_for_search
+348:49:Call -> Const:bool:False | U | Const:bool:False
+348:49:Name -> Func:salt.auth.ldap._config
+351:11:Name -> U
+351:27:Name -> U
+351:40:Name -> U
+352:19:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | U
+352:19:Name -> Func:salt.auth.ldap._bind
+353:16:Name -> U
+354:16:Name -> U
+355:26:Call -> Const:bool:False | U
+355:26:Name -> Func:salt.auth.ldap._config
+356:20:Call -> Const:bool:False | U | Const:bool:False
+356:20:Name -> Func:salt.auth.ldap._config
+359:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | U
+359:15:Name -> Func:salt.auth.ldap._bind
+360:12:Name -> U
+361:12:Name -> U
+362:22:Call -> Const:bool:False | U
+362:22:Name -> Func:salt.auth.ldap._config
+363:16:Call -> Const:bool:False | U | Const:bool:False
+363:16:Name -> Func:salt.auth.ldap._config
+366:7:Name -> Const:NoneType:None | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | U
+367:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+367:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+367:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+368:15:Name -> U
+370:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+370:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+370:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+392:7:Call -> Const:bool:False | U
+392:7:Name -> Func:salt.auth.ldap._config
+392:46:Call -> Const:bool:False | U
+392:46:Name -> Func:salt.auth.ldap._config
+393:15:Call -> U
+393:15:Name -> Func:salt.auth.ldap._bind_for_search
+393:42:Call -> Const:bool:False | U | Const:bool:False
+393:42:Name -> Func:salt.auth.ldap._config
+395:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | U
+395:15:Name -> Func:salt.auth.ldap._bind
+396:12:Name -> U
+397:12:Call -> ERR
+397:12:Attribute -> BM:builtins.dict.get
+397:12:Name -> Dict:0
+398:22:Call -> Const:bool:False | U
+398:22:Name -> Func:salt.auth.ldap._config
+399:16:Call -> Const:bool:False | U | Const:bool:False
+399:16:Name -> Func:salt.auth.ldap._config
+402:7:Name -> U | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False
+403:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+403:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+403:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+405:11:Call -> Const:bool:False | U | Const:bool:False
+405:11:Name -> Func:salt.auth.ldap._config
+407:37:Call -> U
+407:37:Attribute -> BM:builtins.str.format
+408:20:Call -> Const:bool:False | U | Const:str:'memberUid'
+408:20:Name -> Func:salt.auth.ldap._config
+408:53:Name -> U
+408:63:Call -> Const:bool:False | U | Const:str:'person'
+408:63:Name -> Func:salt.auth.ldap._config
+410:34:Call -> U
+410:34:Attribute -> U
+410:34:Name -> U
+411:20:Call -> Const:bool:False | U | Const:str:''
+411:20:Name -> Func:salt.auth.ldap._config
+412:20:Attribute -> U
+412:20:Name -> U
+413:20:Name -> U
+416:19:Name -> Class:builtins.Exception
+417:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+417:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+417:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+417:81:Name -> ExcInst:builtins.Exception
+418:23:Name -> List:0
+419:19:Name -> U
+420:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+420:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+420:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+420:74:Name -> U
+421:23:Name -> List:0
+423:17:Call -> U
+423:17:Attribute -> U
+423:17:Attribute -> U
+423:17:Name -> U
+423:49:Name -> U
+424:33:Call -> U
+424:33:Attribute -> BM:builtins.str.format
+425:16:Name -> U
+425:20:Call -> Const:bool:False | U | Const:str:'posixGroup'
+425:20:Name -> Func:salt.auth.ldap._config
+427:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+427:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+427:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+427:66:Name -> U
+429:33:Call -> U
+429:33:Attribute -> U
+429:33:Name -> U
+430:20:Call -> Const:bool:False | U | Const:str:''
+430:20:Name -> Func:salt.auth.ldap._config
+431:20:Attribute -> U
+431:20:Name -> U
+432:20:Name -> U
+434:24:Call -> U
+434:24:Attribute -> Func:salt.utils.stringutils.to_str
+434:24:Attribute -> Module:salt.utils.stringutils
+434:24:Attribute -> Module:salt.utils
+434:24:Name -> Module:salt
+434:54:Call -> Const:bool:False | U | Const:str:'memberUid'
+434:54:Name -> Func:salt.auth.ldap._config
+438:19:Name -> Class:builtins.Exception
+439:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+439:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+439:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+440:84:Name -> ExcInst:builtins.Exception
+442:23:Name -> List:0
+443:28:Name -> U
+444:27:Name -> U
+445:20:Call -> ERR
+445:20:Attribute -> BM:builtins.list.append
+445:20:Name -> List:0
+445:38:Call -> U
+445:38:Attribute -> Func:salt.utils.stringutils.to_unicode
+445:38:Attribute -> Module:salt.utils.stringutils
+445:38:Attribute -> Module:salt.utils
+445:38:Name -> Module:salt
+445:72:Name -> U
+446:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+446:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+446:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+446:59:Name -> U
+446:69:Name -> List:0
+448:13:Call -> Const:bool:False | U | Const:bool:False
+448:13:Name -> Func:salt.auth.ldap._config
+449:31:Call -> U
+449:31:Attribute -> U
+449:31:Attribute -> U
+449:31:Name -> U
+449:63:Name -> U
+450:26:Call -> Const:bool:False | U
+450:26:Name -> Func:salt.auth.ldap._config
+451:28:Call -> U
+451:28:Name -> Func:salt.auth.ldap._render_template
+451:45:Call -> Const:bool:False | U
+451:45:Name -> Func:salt.auth.ldap._config
+451:70:Name -> U
+452:29:Call -> U
+452:29:Attribute -> U
+452:29:Name -> U
+453:16:Name -> Const:bool:False | U
+454:16:Attribute -> U
+454:16:Name -> U
+455:16:Name -> U
+457:20:Call -> U
+457:20:Attribute -> Func:salt.utils.stringutils.to_str
+457:20:Attribute -> Module:salt.utils.stringutils
+457:20:Attribute -> Module:salt.utils
+457:20:Name -> Module:salt
+457:50:Call -> Const:bool:False | U | Const:str:'memberUid'
+457:50:Name -> Func:salt.auth.ldap._config
+458:20:Call -> U
+458:20:Attribute -> Func:salt.utils.stringutils.to_str
+458:20:Attribute -> Module:salt.utils.stringutils
+458:20:Attribute -> Module:salt.utils
+458:20:Name -> Module:salt
+458:50:Call -> Const:bool:False | U | Const:str:'memberOf'
+458:50:Name -> Func:salt.auth.ldap._config
+463:33:Name -> U
+464:28:Call -> Inst:itertools.chain
+464:28:Attribute -> Class:itertools.chain
+464:28:Name -> Module:itertools
+465:20:Call -> U
+465:20:Attribute -> U
+465:20:Name -> U
+465:31:Call -> Const:bool:False | U | Const:str:'memberUid'
+465:31:Name -> Func:salt.auth.ldap._config
+466:20:Call -> U
+466:20:Attribute -> U
+466:20:Name -> U
+466:31:Call -> Const:bool:False | U | Const:str:'memberOf'
+466:31:Name -> Func:salt.auth.ldap._config
+469:24:Name -> U
+470:27:Call -> U
+470:27:Attribute -> U
+470:27:Call -> U
+470:27:Attribute -> U
+470:27:Call -> U
+470:27:Attribute -> Func:salt.utils.stringutils.to_unicode
+470:27:Attribute -> Module:salt.utils.stringutils
+470:27:Attribute -> Module:salt.utils
+470:27:Name -> Module:salt
+470:61:Name -> U
+474:24:Call -> ERR
+474:24:Attribute -> BM:builtins.list.append
+474:24:Name -> List:0
+474:42:Call -> U
+474:42:Attribute -> U
+474:42:Call -> U
+474:42:Attribute -> U
+474:42:Name -> U
+476:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+476:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+476:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+476:59:Name -> U
+476:69:Name -> List:0
+478:19:Call -> Const:bool:False | U | Const:bool:False
+478:19:Name -> Func:salt.auth.ldap.auth
+478:24:Name -> U
+478:34:Name -> Dict:0
+479:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+479:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+479:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+482:15:Call -> Const:bool:False | U | Const:str:'Groups'
+482:15:Name -> Func:salt.auth.ldap._config
+483:30:Call -> U
+483:30:Attribute -> BM:builtins.str.format
+483:48:Call -> Const:bool:False | U | Const:str:'Groups'
+483:48:Name -> Func:salt.auth.ldap._config
+483:68:Call -> Const:bool:False | U | Const:str:''
+483:68:Name -> Func:salt.auth.ldap._config
+485:30:Call -> U
+485:30:Attribute -> BM:builtins.str.format
+485:42:Call -> Const:bool:False | U | Const:str:''
+485:42:Name -> Func:salt.auth.ldap._config
+486:28:Call -> U
+486:28:Attribute -> BM:builtins.str.format
+487:16:Call -> Const:bool:False | U | Const:str:'memberUid'
+487:16:Name -> Func:salt.auth.ldap._config
+487:49:Name -> U
+487:59:Call -> Const:bool:False | U | Const:str:'posixGroup'
+487:59:Name -> Func:salt.auth.ldap._config
+489:29:Call -> U
+489:29:Attribute -> U
+489:29:Name -> U
+490:16:Name -> U
+491:16:Attribute -> U
+491:16:Name -> U
+492:16:Name -> U
+494:20:Call -> U
+494:20:Attribute -> Func:salt.utils.stringutils.to_str
+494:20:Attribute -> Module:salt.utils.stringutils
+494:20:Attribute -> Module:salt.utils
+494:20:Name -> Module:salt
+494:50:Call -> Const:bool:False | U | Const:str:'memberUid'
+494:50:Name -> Func:salt.auth.ldap._config
+496:20:Call -> U
+496:20:Attribute -> Func:salt.utils.stringutils.to_str
+496:20:Attribute -> Module:salt.utils.stringutils
+496:20:Attribute -> Module:salt.utils
+496:20:Name -> Module:salt
+496:50:Call -> Const:bool:False | U | Const:str:'memberOf'
+496:50:Name -> Func:salt.auth.ldap._config
+499:28:Name -> U
+500:19:Name -> U
+500:31:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+500:31:Attribute -> Func:salt.utils.data.decode
+500:31:Attribute -> Module:salt.utils.data
+500:31:Attribute -> Module:salt.utils
+500:31:Name -> Module:salt
+501:20:Name -> U
+501:26:Call -> Const:bool:False | U | Const:str:'memberUid'
+501:26:Name -> Func:salt.auth.ldap._config
+503:20:Call -> ERR
+503:20:Attribute -> BM:builtins.list.append
+503:20:Name -> List:0
+503:38:Call -> U
+503:38:Attribute -> Func:salt.utils.stringutils.to_unicode
+503:38:Attribute -> Module:salt.utils.stringutils
+503:38:Attribute -> Module:salt.utils
+503:38:Name -> Module:salt
+503:72:Name -> U
+504:31:Name -> U
+506:20:Name -> U
+507:23:Call -> U
+507:23:Attribute -> U
+507:23:Call -> U
+507:23:Attribute -> U
+507:23:Call -> U
+507:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+507:23:Attribute -> Module:salt.utils.stringutils
+507:23:Attribute -> Module:salt.utils
+507:23:Name -> Module:salt
+507:57:Name -> U
+511:33:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+511:33:Attribute -> Func:salt.utils.data.decode
+511:33:Attribute -> Module:salt.utils.data
+511:33:Attribute -> Module:salt.utils
+511:33:Name -> Module:salt
+512:24:Name -> U
+512:30:Call -> Const:bool:False | U | Const:str:'memberOf'
+512:30:Name -> Func:salt.auth.ldap._config
+514:24:Call -> ERR
+514:24:Attribute -> BM:builtins.list.append
+514:24:Name -> List:0
+515:28:Call -> U
+515:28:Attribute -> U
+515:28:Call -> U
+515:28:Attribute -> U
+515:28:Call -> U
+515:28:Attribute -> Func:salt.utils.stringutils.to_unicode
+515:28:Attribute -> Module:salt.utils.stringutils
+515:28:Attribute -> Module:salt.utils
+515:28:Name -> Module:salt
+515:62:Name -> U
+519:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+519:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+519:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+519:59:Name -> U
+519:69:Name -> List:0
+523:29:Name -> Dict:0
+523:44:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | U
+523:44:Name -> Func:salt.auth.ldap._bind
+524:16:Name -> U
+525:16:Call -> ERR
+525:16:Attribute -> BM:builtins.dict.get
+525:16:Name -> Dict:0
+526:26:Call -> Const:bool:False | U
+526:26:Name -> Func:salt.auth.ldap._config
+527:20:Call -> Const:bool:False | U | Const:bool:False
+527:20:Name -> Func:salt.auth.ldap._config
+529:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+529:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+529:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+532:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+532:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+532:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+534:11:Name -> List:0
+558:11:Call -> U
+558:11:Name -> Func:salt.auth.ldap._bind_for_search
+558:33:Name -> Const:NoneType:None | U
+560:30:Name -> U
+561:15:Call -> ERR
+561:15:Name -> Func:builtins.isinstance
+561:26:Name -> U
+561:46:Name -> Class:builtins.dict
+562:12:Call -> ERR
+562:12:Attribute -> BM:builtins.list.append
+562:12:Name -> List:0
+562:28:Name -> U
+564:38:Call -> U
+564:38:Attribute -> U
+564:38:Name -> U
+565:26:Name -> U
+567:15:Call -> U
+567:15:Attribute -> U
+567:15:Name -> U
+568:30:Call -> U
+568:30:Attribute -> U
+568:30:Call -> U
+568:30:Attribute -> U
+568:30:Name -> U
+572:37:Call -> U
+572:37:Attribute -> U
+572:37:Name -> U
+573:24:Name -> U
+573:37:Attribute -> U
+573:37:Name -> U
+573:57:Name -> Const:str:'(objectClass=computer)'
+575:38:Name -> U
+577:40:Call -> U
+577:40:Attribute -> U
+577:40:Name -> U
+582:31:Call -> U
+582:31:Attribute -> U
+582:31:Name -> Const:NoneType:None | U
+583:46:Name -> Const:NoneType:None | U
+584:39:Call -> U
+584:39:Attribute -> U
+584:39:Name -> U
+584:58:Name -> U
+585:52:Name -> U
+585:65:Call -> ERR
+585:65:Name -> Func:builtins.len
+585:69:Name -> U
+587:28:Call -> ERR
+587:28:Attribute -> BM:builtins.list.append
+587:28:Name -> List:0
+587:56:Name -> U
+588:31:Name -> Class:builtins.TypeError
+594:37:Name -> List:0
+595:24:Call -> ERR
+595:24:Attribute -> BM:builtins.list.append
+595:24:Name -> List:0
+595:41:Name -> U
+595:52:Name -> U
+596:20:Call -> U
+596:20:Attribute -> U
+596:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+596:58:Name -> List:0
+597:23:Attribute -> U
+597:23:Name -> U
+600:16:Call -> ERR
+600:16:Attribute -> BM:builtins.list.append
+600:16:Name -> List:0
+600:33:Name -> U
+600:47:Name -> U
+602:4:Call -> U
+602:4:Attribute -> U
+602:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+602:43:Name -> List:0
+603:11:Name -> List:0
+616:16:Name -> U
+617:11:Call -> ERR
+617:11:Name -> Func:builtins.isinstance
+617:22:Name -> U
+617:28:Name -> Class:builtins.str
+619:8:Call -> ERR
+619:8:Attribute -> BM:builtins.list.extend
+619:8:Name -> List:0
+621:16:Name -> U
+622:36:Call -> U
+622:36:Attribute -> U
+622:36:Name -> U
+623:19:Call -> U
+623:19:Attribute -> U
+623:19:Name -> U
+626:7:Name -> List:0
+627:20:Call -> List:0
+627:20:Name -> Func:salt.auth.ldap.__expand_ldap_entries
+627:42:Name -> U
+627:53:Name -> Const:NoneType:None | U
+628:11:Name -> U | List:0

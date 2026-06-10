@@ -1,0 +1,236 @@
+13:7:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:7:Attribute -> Func:logging.getLogger
+13:7:Name -> Module:logging
+13:25:Name -> Const:str:'salt.modules.logrotate' | Const:str:'__main__'
+25:7:Call -> U
+25:7:Attribute -> Func:salt.utils.platform.is_windows
+25:7:Attribute -> Module:salt.utils.platform
+25:7:Attribute -> Module:salt.utils
+25:7:Name -> Module:salt
+44:16:Call -> Const:int:0
+44:16:Name -> Class:builtins.int
+44:20:Call -> Const:str:''
+44:20:Name -> Class:builtins.str
+44:24:Name -> U
+45:11:Name -> Class:builtins.ValueError
+47:11:Name -> U | Const:int:0
+50:26:Name -> Const:str:'/etc/logrotate.conf'
+65:9:Call -> U
+65:9:Attribute -> Func:salt.utils.files.fopen
+65:9:Attribute -> Module:salt.utils.files
+65:9:Attribute -> Module:salt.utils
+65:9:Name -> Module:salt
+65:32:Name -> Const:str:'/etc/logrotate.conf' | U
+66:20:Name -> U
+67:19:Call -> U
+67:19:Attribute -> U
+67:19:Call -> U
+67:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+67:19:Attribute -> Module:salt.utils.stringutils
+67:19:Attribute -> Module:salt.utils
+67:19:Name -> Module:salt
+67:53:Name -> U
+68:19:Name -> U
+70:15:Call -> U
+70:15:Attribute -> U
+70:15:Name -> U
+73:20:Call -> U
+73:20:Attribute -> U
+73:20:Name -> U
+74:22:Name -> U
+74:42:Name -> U
+76:19:Call -> ERR
+76:19:Name -> Func:builtins.len
+76:23:Name -> U
+76:39:Name -> Const:NoneType:None
+77:34:Name -> Const:NoneType:None
+79:34:Name -> U
+80:20:Call -> U
+80:20:Attribute -> U
+80:20:Name -> U
+82:22:Name -> U
+84:34:Name -> List:0 | Const:NoneType:None | U
+85:20:Name -> Dict:0
+85:24:Name -> U
+85:38:Name -> Dict:0
+90:15:Name -> Const:str:'single' | Const:str:'multi' | Const:str:'single'
+91:22:Name -> Dict:0
+93:22:Name -> Dict:0 | Dict:0
+95:15:Name -> U
+96:42:Name -> Dict:0
+97:20:Name -> Dict:0
+98:31:Call -> ERR
+98:31:Attribute -> Func:posix.listdir
+98:31:Name -> Module:os
+98:42:Name -> U
+99:23:Name -> U
+99:38:Name -> Dict:0
+100:24:Name -> Dict:0
+100:45:Name -> U
+102:35:Call -> U
+102:35:Attribute -> Func:posixpath.join | Func:ntpath.join
+102:35:Attribute -> Module:posixpath | Module:ntpath
+102:35:Name -> Module:os
+102:48:Name -> U
+102:58:Name -> U
+103:35:Call -> Dict:0
+103:35:Name -> Func:salt.modules.logrotate._parse_conf
+103:47:Name -> U
+105:36:Name -> Dict:0
+106:24:Name -> Dict:0
+106:28:Name -> U
+106:40:Name -> Dict:0
+106:53:Name -> U
+107:24:Call -> ERR
+107:24:Attribute -> ERR
+107:24:Name -> Dict:0
+107:45:Name -> U
+107:61:Name -> U
+109:25:Name -> U
+110:15:Call -> ERR
+110:15:Name -> Func:builtins.len
+110:19:Name -> U
+111:16:Name -> Dict:0 | Dict:0 | Dict:0
+111:20:Name -> U
+111:32:Call -> Const:str:''
+111:32:Attribute -> BM:builtins.str.join
+111:41:Name -> U
+112:17:Call -> ERR
+112:17:Name -> Func:builtins.len
+112:21:Name -> U
+113:16:Name -> Dict:0 | Dict:0 | Dict:0
+113:20:Name -> U
+113:32:Call -> U | Const:int:0
+113:32:Name -> Func:salt.modules.logrotate._convert_if_int
+113:48:Name -> U
+115:16:Name -> Dict:0 | Dict:0 | Dict:0
+115:20:Name -> U
+116:11:Name -> Dict:0
+119:24:Name -> Const:str:'/etc/logrotate.conf'
+134:11:Call -> Dict:0
+134:11:Name -> Func:salt.modules.logrotate._parse_conf
+134:23:Name -> Const:str:'/etc/logrotate.conf' | U
+137:35:Name -> Const:str:'/etc/logrotate.conf'
+156:19:Call -> Dict:0
+156:19:Name -> Func:salt.modules.logrotate._parse_conf
+156:31:Name -> Const:str:'/etc/logrotate.conf' | U
+157:13:Call -> ERR
+157:13:Attribute -> BM:builtins.dict.get
+157:13:Name -> Dict:0
+157:30:Name -> U
+159:7:Name -> Const:NoneType:None | U
+160:11:Name -> U
+161:19:Call -> U
+161:19:Attribute -> U
+161:19:Name -> U
+161:30:Name -> U
+162:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+162:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+162:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+162:55:Name -> U
+163:11:Name -> U
+166:45:Name -> Const:str:'/etc/logrotate.conf'
+204:11:Call -> Dict:0
+204:11:Name -> Func:salt.modules.logrotate._parse_conf
+204:23:Name -> Const:str:'/etc/logrotate.conf' | U
+205:19:Name -> Dict:0
+206:11:Name -> U
+206:18:Name -> Dict:0
+206:40:Name -> U
+207:24:Call -> U
+207:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+207:24:Attribute -> Module:posixpath | Module:ntpath
+207:24:Name -> Module:os
+207:37:Name -> Dict:0
+207:54:Name -> U
+213:16:Name -> Const:str:'/etc/logrotate.conf' | U
+214:23:Name -> U
+218:7:Name -> Const:NoneType:None | U
+219:24:Call -> ERR
+219:24:Attribute -> BM:builtins.dict.get
+219:24:Name -> Dict:0
+219:33:Name -> U
+221:11:Call -> ERR
+221:11:Name -> Func:builtins.isinstance
+221:22:Name -> U
+221:37:Name -> Class:builtins.dict
+222:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+222:18:Name -> Class:salt.exceptions.SaltInvocationError
+223:16:Call -> U
+223:16:Attribute -> BM:builtins.str.format
+224:47:Name -> U
+227:11:Name -> U
+227:20:Name -> U
+228:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+228:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+228:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+228:55:Name -> U
+228:60:Name -> U
+232:11:Name -> U
+233:23:Name -> U
+234:13:Name -> U
+235:26:Name -> U
+235:32:Name -> U
+237:8:Call -> ERR
+237:8:Attribute -> BM:builtins.dict.update
+237:8:Name -> Dict:5
+239:17:Call -> ERR
+239:17:Attribute -> BM:builtins.dict.get
+239:17:Name -> Dict:0
+239:26:Name -> U
+239:31:Call -> Dict:0
+239:31:Name -> Class:builtins.dict
+241:11:Name -> U
+241:26:Call -> ERR
+241:26:Name -> Func:builtins.isinstance
+241:37:Name -> U
+241:45:Name -> Class:builtins.dict
+246:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+246:18:Name -> Class:salt.exceptions.SaltInvocationError
+246:38:Name -> Const:str:'Error: A setting for a dict was declare
+248:11:Name -> U
+248:22:Call -> U
+248:22:Attribute -> U
+248:22:Name -> U
+248:33:Name -> U
+249:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+249:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+249:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+249:55:Name -> U
+249:62:Name -> U
+253:11:Name -> U
+254:12:Name -> U
+254:19:Name -> U
+254:28:Name -> U
+256:16:Name -> U
+256:23:Name -> U
+258:19:Call -> Const:str:'Uninferable {\n}' | Const:str:'Uninferable {\n    Uninferable Uninfera
+258:19:Name -> Func:salt.modules.logrotate._dict_to_stanza
+258:35:Name -> U
+258:40:Name -> U
+260:8:Call -> ERR
+260:8:Attribute -> BM:builtins.dict.update
+260:8:Name -> Dict:5
+262:31:Name -> U
+268:4:Call -> ERR
+268:4:Attribute -> BM:builtins.dict.update
+268:4:Name -> Dict:5
+268:27:Name -> Const:str:'' | U | Const:str:'Uninferable Uninferable' | Const:str:'Uninferable {\n}' | Const:str:'Uninferable {\n    Uninferable Uninfera
+269:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+269:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+269:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+269:45:Name -> Const:str:'/etc/logrotate.conf' | U
+269:56:Name -> Const:str:'' | U | Const:str:'Uninferable Uninferable' | Const:str:'Uninferable {\n}' | Const:str:'Uninferable {\n    Uninferable Uninfera
+271:11:Call -> ERR
+271:11:Name -> ERR
+271:38:Name -> Dict:5
+279:16:Name -> U
+280:11:Name -> U
+280:18:Name -> U
+281:12:Name -> U
+281:19:Name -> U
+282:22:Name -> U
+282:29:Name -> U
+282:36:Name -> U
+283:14:Name -> U
+283:24:Name -> Const:str:'' | Const:str:'    Uninferable Uninferable\n'

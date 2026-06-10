@@ -1,0 +1,55 @@
+8:25:Name -> Class:django.test.testcases.SimpleTestCase
+11:19:Call -> Inst:django.http.response.HttpResponse
+11:19:Name -> Class:django.http.response.HttpResponse
+13:23:Call -> Func:django.views.decorators.common.no_append_slash._view_wrapper | Func:django.views.decorators.common.no_append_slash._view_wrapper
+13:23:Name -> Func:django.views.decorators.common.no_append_slash
+13:39:Name -> Func:tests.decorators.test_common.NoAppendSlashTests.test_wrapped_sync_function_is_not_coroutine_function.sync_view
+14:8:Call -> Const:NoneType:None
+14:8:Attribute -> BM:unittest.case.TestCase.assertIs
+14:8:Name -> Inst:tests.decorators.test_common.NoAppendSlashTests
+14:22:Call -> U
+14:22:Name -> Func:inspect.iscoroutinefunction
+14:42:Name -> Func:django.views.decorators.common.no_append_slash._view_wrapper | Func:django.views.decorators.common.no_append_slash._view_wrapper
+18:19:Call -> Inst:django.http.response.HttpResponse
+18:19:Name -> Class:django.http.response.HttpResponse
+20:23:Call -> Func:django.views.decorators.common.no_append_slash._view_wrapper | Func:django.views.decorators.common.no_append_slash._view_wrapper
+20:23:Name -> Func:django.views.decorators.common.no_append_slash
+20:39:Name -> Func:tests.decorators.test_common.NoAppendSlashTests.test_wrapped_async_function_is_coroutine_function.async_view
+21:8:Call -> Const:NoneType:None
+21:8:Attribute -> BM:unittest.case.TestCase.assertIs
+21:8:Name -> Inst:tests.decorators.test_common.NoAppendSlashTests
+21:22:Call -> U
+21:22:Name -> Func:inspect.iscoroutinefunction
+21:42:Name -> Func:django.views.decorators.common.no_append_slash._view_wrapper | Func:django.views.decorators.common.no_append_slash._view_wrapper
+24:9:Name -> Func:django.views.decorators.common.no_append_slash
+26:19:Call -> Inst:django.http.response.HttpResponse
+26:19:Name -> Class:django.http.response.HttpResponse
+28:8:Call -> Const:NoneType:None
+28:8:Attribute -> BM:unittest.case.TestCase.assertIs
+28:8:Name -> Inst:tests.decorators.test_common.NoAppendSlashTests
+28:22:Attribute -> ERR
+28:22:Name -> Func:tests.decorators.test_common.NoAppendSlashTests.test_no_append_slash_decorator.sync_view
+29:8:Call -> Const:NoneType:None
+29:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+29:8:Name -> Inst:tests.decorators.test_common.NoAppendSlashTests
+29:30:Call -> Inst:django.http.response.HttpResponse
+29:30:Name -> Func:tests.decorators.test_common.NoAppendSlashTests.test_no_append_slash_decorator.sync_view
+29:40:Call -> Inst:django.http.request.HttpRequest
+29:40:Name -> Class:django.http.request.HttpRequest
+29:56:Name -> Class:django.http.response.HttpResponse
+32:9:Name -> Func:django.views.decorators.common.no_append_slash
+34:19:Call -> Inst:django.http.response.HttpResponse
+34:19:Name -> Class:django.http.response.HttpResponse
+36:8:Call -> Const:NoneType:None
+36:8:Attribute -> BM:unittest.case.TestCase.assertIs
+36:8:Name -> Inst:tests.decorators.test_common.NoAppendSlashTests
+36:22:Attribute -> ERR
+36:22:Name -> Func:tests.decorators.test_common.NoAppendSlashTests.test_no_append_slash_decorator_async_view.async_view
+37:8:Call -> Const:NoneType:None
+37:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+37:8:Name -> Inst:tests.decorators.test_common.NoAppendSlashTests
+37:36:Call -> Inst:django.http.response.HttpResponse
+37:36:Name -> Func:tests.decorators.test_common.NoAppendSlashTests.test_no_append_slash_decorator_async_view.async_view
+37:47:Call -> Inst:django.http.request.HttpRequest
+37:47:Name -> Class:django.http.request.HttpRequest
+37:63:Name -> Class:django.http.response.HttpResponse

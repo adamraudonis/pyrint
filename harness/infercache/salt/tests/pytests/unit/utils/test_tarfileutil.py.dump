@@ -1,0 +1,153 @@
+11:29:Name -> Class:builtins.str
+11:54:Name -> Class:builtins.bytes
+11:72:Name -> Class:builtins.bytes
+12:10:Call -> Inst:_io.BytesIO
+12:10:Attribute -> Class:_io.BytesIO
+12:10:Name -> Module:io
+13:9:Call -> U | Inst:tarfile.TarFile
+13:9:Attribute -> BM:tarfile.TarFile.open
+13:9:Name -> Module:tarfile
+13:30:Name -> Inst:_io.BytesIO
+14:13:Call -> Inst:tarfile.TarInfo
+14:13:Attribute -> Class:tarfile.TarInfo
+14:13:Name -> Module:tarfile
+14:34:Name -> Const:str:'hello.txt' | U
+15:8:Name -> Inst:tarfile.TarInfo
+15:18:Call -> ERR
+15:18:Name -> Func:builtins.len
+15:22:Name -> Const:bytes:b'hi' | U
+16:8:Call -> U
+16:8:Attribute -> U
+16:8:Name -> U
+16:19:Name -> Inst:tarfile.TarInfo
+16:23:Call -> Inst:_io.BytesIO
+16:23:Attribute -> Class:_io.BytesIO
+16:23:Name -> Module:io
+16:34:Name -> Const:bytes:b'hi' | U
+17:11:Call -> ERR
+17:11:Attribute -> BM:_io.BytesIO.getvalue
+17:11:Name -> Inst:_io.BytesIO
+21:11:Call -> U
+21:11:Name -> Func:tests.pytests.unit.utils.test_tarfileutil._minimal_tar_bytes
+22:9:Call -> U | Inst:tarfile.TarFile
+22:9:Attribute -> BM:tarfile.TarFile.open
+22:9:Name -> Module:tarfile
+22:30:Call -> Inst:_io.BytesIO
+22:30:Attribute -> Class:_io.BytesIO
+22:30:Name -> Module:io
+22:41:Name -> U
+23:8:Call -> Const:NoneType:None
+23:8:Attribute -> Func:salt.utils.tarfileutil.extractall
+23:8:Name -> Module:salt.utils.tarfileutil
+23:26:Name -> U
+23:31:Call -> Const:str:''
+23:31:Name -> Class:builtins.str
+23:35:Name -> U
+24:11:Call -> U
+24:11:Attribute -> U
+24:12:Name -> U
+28:11:Call -> U
+28:11:Name -> Func:tests.pytests.unit.utils.test_tarfileutil._minimal_tar_bytes
+29:9:Call -> U | Inst:tarfile.TarFile
+29:9:Attribute -> BM:tarfile.TarFile.open
+29:9:Name -> Module:tarfile
+29:30:Call -> Inst:_io.BytesIO
+29:30:Attribute -> Class:_io.BytesIO
+29:30:Name -> Module:io
+29:41:Name -> U
+30:17:Call -> U
+30:17:Attribute -> U
+30:17:Name -> U
+31:8:Call -> Const:NoneType:None
+31:8:Attribute -> Func:salt.utils.tarfileutil.extract
+31:8:Name -> Module:salt.utils.tarfileutil
+31:23:Name -> U
+31:28:Name -> U
+31:36:Call -> Const:str:''
+31:36:Name -> Class:builtins.str
+31:40:Name -> U
+32:11:Call -> U
+32:11:Attribute -> U
+32:12:Name -> U
+35:1:Call -> U
+35:1:Attribute -> U
+35:1:Attribute -> U
+35:1:Name -> U
+36:4:Attribute -> U
+36:4:Name -> Module:sys
+39:11:Call -> U
+39:11:Name -> Func:tests.pytests.unit.utils.test_tarfileutil._minimal_tar_bytes
+40:10:Call -> U | Inst:tarfile.TarFile
+40:10:Attribute -> BM:tarfile.TarFile.open
+40:10:Name -> Module:tarfile
+40:31:Call -> Inst:_io.BytesIO
+40:31:Attribute -> Class:_io.BytesIO
+40:31:Name -> Module:io
+40:42:Name -> U
+42:13:Call -> U
+42:13:Attribute -> U
+42:13:Name -> U
+42:26:Name -> U | Inst:tarfile.TarFile
+42:51:Attribute -> U | BM:tarfile.TarFile.extractall
+42:51:Name -> U | Inst:tarfile.TarFile
+43:12:Call -> Const:NoneType:None
+43:12:Attribute -> Func:salt.utils.tarfileutil.extractall
+43:12:Name -> Module:salt.utils.tarfileutil
+43:30:Name -> U | Inst:tarfile.TarFile
+43:35:Call -> Const:str:''
+43:35:Name -> Class:builtins.str
+43:39:Name -> U
+44:8:Call -> U
+44:8:Attribute -> U
+44:8:Name -> U
+45:20:Attribute -> U
+45:20:Name -> U
+46:15:Call -> U
+46:15:Attribute -> U
+46:15:Name -> U
+48:8:Call -> U | Const:NoneType:None
+48:8:Attribute -> U | BM:tarfile.TarFile.close
+48:8:Name -> U | Inst:tarfile.TarFile
+51:1:Call -> U
+51:1:Attribute -> U
+51:1:Attribute -> U
+51:1:Name -> U
+52:4:Attribute -> U
+52:4:Name -> Module:sys
+55:11:Call -> U
+55:11:Name -> Func:tests.pytests.unit.utils.test_tarfileutil._minimal_tar_bytes
+56:10:Call -> U | Inst:tarfile.TarFile
+56:10:Attribute -> BM:tarfile.TarFile.open
+56:10:Name -> Module:tarfile
+56:31:Call -> Inst:_io.BytesIO
+56:31:Attribute -> Class:_io.BytesIO
+56:31:Name -> Module:io
+56:42:Name -> U
+58:17:Call -> U
+58:17:Attribute -> U | BM:tarfile.TarFile.getmember
+58:17:Name -> U | Inst:tarfile.TarFile
+59:13:Call -> U
+59:13:Attribute -> U
+59:13:Name -> U
+59:26:Name -> U | Inst:tarfile.TarFile
+59:48:Attribute -> U | BM:tarfile.TarFile.extract
+59:48:Name -> U | Inst:tarfile.TarFile
+60:12:Call -> Const:NoneType:None
+60:12:Attribute -> Func:salt.utils.tarfileutil.extract
+60:12:Name -> Module:salt.utils.tarfileutil
+60:27:Name -> U | Inst:tarfile.TarFile
+60:32:Name -> U
+60:40:Call -> Const:str:''
+60:40:Name -> Class:builtins.str
+60:44:Name -> U
+61:8:Call -> U
+61:8:Attribute -> U
+61:8:Name -> U
+62:20:Attribute -> U
+62:20:Name -> U
+63:15:Call -> U
+63:15:Attribute -> U
+63:15:Name -> U
+65:8:Call -> U | Const:NoneType:None
+65:8:Attribute -> U | BM:tarfile.TarFile.close
+65:8:Name -> U | Inst:tarfile.TarFile

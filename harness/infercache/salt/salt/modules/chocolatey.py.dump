@@ -1,0 +1,972 @@
+27:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:6:Attribute -> Func:logging.getLogger
+27:6:Name -> Module:logging
+27:24:Name -> Const:str:'salt.modules.chocolatey' | Const:str:'__main__'
+43:11:Call -> U
+43:11:Attribute -> Func:salt.utils.platform.is_windows
+43:11:Attribute -> Module:salt.utils.platform
+43:11:Attribute -> Module:salt.utils
+43:11:Name -> Module:salt
+46:7:Name -> ERR
+49:11:Name -> Const:str:'chocolatey'
+57:19:Name -> ERR
+57:30:Name -> ERR
+57:45:Call -> ERR
+57:45:Attribute -> ERR
+57:45:Name -> ERR
+58:15:Name -> U
+59:8:Call -> ERR
+59:8:Attribute -> ERR
+59:8:Name -> ERR
+59:24:Name -> U
+67:28:Name -> ERR
+68:15:Name -> ERR
+69:7:Call -> Inst:salt.utils.versions.Version
+69:7:Name -> Class:salt.utils.versions.Version
+69:15:Call -> U
+69:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+69:40:Call -> Inst:salt.utils.versions.Version
+69:40:Name -> Class:salt.utils.versions.Version
+73:4:Name -> ERR
+73:37:Name -> List:1 | List:0
+74:11:Name -> ERR
+82:36:Name -> ERR
+83:15:Name -> ERR
+84:7:Call -> Inst:salt.utils.versions.Version
+84:7:Name -> Class:salt.utils.versions.Version
+84:15:Call -> U
+84:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+84:40:Call -> Inst:salt.utils.versions.Version
+84:40:Name -> Class:salt.utils.versions.Version
+87:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+87:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+87:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+89:4:Name -> ERR
+89:45:Name -> List:1 | List:0
+90:11:Name -> ERR
+106:7:Name -> Const:bool:False | U
+107:8:Call -> ERR
+107:8:Attribute -> ERR
+107:8:Name -> ERR
+110:29:Name -> ERR
+111:15:Name -> ERR
+114:16:Call -> ERR
+114:16:Name -> ERR
+115:7:Name -> U
+116:8:Name -> ERR
+116:42:Name -> U
+117:15:Name -> ERR
+121:8:Call -> U
+121:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+121:8:Attribute -> Module:posixpath | Module:ntpath
+121:8:Name -> Module:os
+122:12:Call -> U | Const:NoneType:None
+122:12:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+122:12:Attribute -> Dict:43 | Inst:os._Environ
+122:12:Name -> Module:os
+124:8:Call -> U
+124:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+124:8:Attribute -> Module:posixpath | Module:ntpath
+124:8:Name -> Module:os
+124:21:Call -> U | Const:NoneType:None
+124:21:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+124:21:Attribute -> Dict:43 | Inst:os._Environ
+124:21:Name -> Module:os
+125:8:Call -> U
+125:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+125:8:Attribute -> Module:posixpath | Module:ntpath
+125:8:Name -> Module:os
+126:12:Call -> U | Const:NoneType:None
+126:12:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+126:12:Attribute -> Dict:43 | Inst:os._Environ
+126:12:Name -> Module:os
+129:20:Name -> List:3
+130:11:Call -> Const:bool:False | U
+130:11:Attribute -> Func:genericpath.isfile | U
+130:11:Attribute -> Module:posixpath | Module:ntpath
+130:11:Name -> Module:os
+130:26:Name -> U
+131:12:Name -> ERR
+131:46:Name -> U
+132:19:Name -> ERR
+139:10:Call -> ExcInst:salt.exceptions.CommandExecutionError
+139:10:Name -> Class:salt.exceptions.CommandExecutionError
+139:32:Name -> Const:str:'Chocolatey not installed. Use chocolate
+159:7:Name -> Const:bool:False | U
+160:8:Call -> ERR
+160:8:Attribute -> ERR
+160:8:Name -> ERR
+162:32:Name -> ERR
+163:15:Name -> ERR
+165:11:Call -> U
+165:11:Name -> Func:salt.modules.chocolatey._find_chocolatey
+165:36:Name -> Const:bool:False | U
+166:10:Call -> ERR
+166:10:Name -> ERR
+166:30:Name -> List:2
+167:4:Name -> ERR
+167:41:Name -> U
+169:11:Name -> ERR
+240:20:Call -> U
+240:20:Name -> Func:salt.modules.chocolatey._find_chocolatey
+241:11:Name -> Class:salt.exceptions.CommandExecutionError
+243:7:Name -> U | Const:NoneType:None
+243:25:Name -> Const:bool:False | U
+244:38:Name -> U | Const:NoneType:None
+246:15:Call -> U
+246:15:Attribute -> Func:tempfile.gettempdir
+246:15:Name -> Module:tempfile
+250:22:Call -> ERR
+250:22:Name -> ERR
+251:11:Name -> U
+275:12:Name -> ERR
+275:37:Name -> ERR
+275:63:Name -> Dict:4
+278:18:Name -> Dict:4
+278:32:Name -> ERR
+278:57:Name -> ERR
+279:19:Call -> U
+279:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+279:19:Attribute -> Module:posixpath | Module:ntpath
+279:19:Name -> Module:os
+279:32:Name -> U
+279:42:Call -> U
+279:42:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+279:42:Attribute -> Module:posixpath | Module:ntpath
+279:42:Name -> Module:os
+279:59:Name -> U
+282:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+282:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+282:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+283:16:Call -> ERR
+283:16:Name -> ERR
+283:44:Name -> U
+283:54:Name -> U
+284:19:Name -> Class:salt.exceptions.MinionError
+285:22:Call -> U
+285:22:Attribute -> BM:builtins.str.format
+286:20:Name -> ERR
+288:19:Name -> Const:NoneType:None | U
+289:26:Call -> ExcInst:salt.exceptions.CommandExecutionError
+289:26:Name -> Class:salt.exceptions.CommandExecutionError
+290:24:Call -> U
+290:24:Attribute -> BM:builtins.str.format
+291:45:Name -> U
+293:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+293:22:Name -> Class:salt.exceptions.CommandExecutionError
+293:44:Name -> U
+295:19:Name -> U
+296:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+296:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+296:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+297:21:Call -> ERR
+297:21:Name -> ERR
+297:45:Name -> List:3
+298:15:Name -> U
+303:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+303:22:Name -> Class:salt.exceptions.CommandExecutionError
+303:44:Name -> Const:str:'Failed to install PowerShell KB. For mo
+306:18:Call -> ExcInst:salt.exceptions.CommandNotFoundError
+306:18:Name -> Class:salt.exceptions.CommandNotFoundError
+306:39:Name -> Const:str:'Windows PowerShell Installation not ava
+311:11:Call -> Const:bool:True | Const:bool:False
+311:11:Attribute -> Func:salt.utils.win_dotnet.version_at_least
+311:11:Attribute -> Module:salt.utils.win_dotnet
+311:11:Attribute -> Module:salt.utils
+311:11:Name -> Module:salt
+315:15:Call -> U
+315:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+315:15:Attribute -> Module:posixpath | Module:ntpath
+315:15:Name -> Module:os
+315:28:Name -> U
+315:38:Call -> U
+315:38:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+315:38:Attribute -> Module:posixpath | Module:ntpath
+315:38:Name -> Module:os
+315:55:Name -> Const:str:'http://download.microsoft.com/download/
+318:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+318:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+318:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+319:12:Call -> ERR
+319:12:Name -> ERR
+319:40:Name -> U | Const:str:'http://download.microsoft.com/download/
+319:50:Name -> U
+320:15:Name -> Class:salt.exceptions.MinionError
+322:15:Name -> Const:NoneType:None | U
+324:20:Call -> U
+324:20:Attribute -> BM:builtins.str.format
+325:52:Name -> U | Const:str:'Failed to install PowerShell KB. For mo | Const:str:'Windows PowerShell Installation not ava | Const:str:'Failed to download .NET v4.0 Web Instal
+327:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+327:18:Name -> Class:salt.exceptions.CommandExecutionError
+327:40:Name -> Const:str:'Failed to download .NET v4.0 Web Instal | U
+330:15:Name -> U
+331:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+331:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+331:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:17:Call -> ERR
+332:17:Name -> ERR
+332:41:Name -> List:3
+333:11:Name -> U
+338:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+338:18:Name -> Class:salt.exceptions.CommandExecutionError
+338:40:Name -> Const:str:'Failed to install .NET v4.0 failed. For
+341:7:Name -> Const:NoneType:None | U
+342:14:Name -> U
+345:11:Call -> U
+345:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+345:11:Attribute -> Module:posixpath | Module:ntpath
+345:11:Name -> Module:os
+345:24:Name -> U
+345:34:Call -> U
+345:34:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+345:34:Attribute -> Module:posixpath | Module:ntpath
+345:34:Name -> Module:os
+345:51:Name -> U | Const:str:'http://download.microsoft.com/download/ | Const:str:'https://chocolatey.org/install.ps1'
+349:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+349:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+349:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+349:48:Call -> U
+349:48:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+349:48:Attribute -> Module:posixpath | Module:ntpath
+349:48:Name -> Module:os
+349:65:Name -> U | Const:str:'http://download.microsoft.com/download/ | Const:str:'https://chocolatey.org/install.ps1'
+350:17:Call -> ERR
+350:17:Name -> ERR
+350:45:Name -> U | Const:str:'http://download.microsoft.com/download/ | Const:str:'https://chocolatey.org/install.ps1'
+350:55:Name -> U
+351:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+351:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+351:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+351:32:Name -> U
+352:11:Name -> Class:salt.exceptions.MinionError
+354:11:Name -> Const:NoneType:None | U
+356:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+356:14:Name -> Class:salt.exceptions.CommandExecutionError
+356:36:Name -> Const:str:'Failed to download Chocolatey Installer | Const:str:'{0} from source'
+359:7:Call -> Tuple:2 | Tuple:2
+359:7:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+359:7:Attribute -> Module:posixpath | Module:ntpath
+359:7:Name -> Module:os
+359:24:Call -> U
+359:24:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+359:24:Attribute -> Module:posixpath | Module:ntpath
+359:24:Name -> Module:os
+359:41:Name -> U
+360:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+360:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+360:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+360:46:Name -> U
+361:8:Call -> ERR
+361:8:Name -> ERR
+362:21:Name -> U
+363:17:Call -> U
+363:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+363:17:Attribute -> Module:posixpath | Module:ntpath
+363:17:Name -> Module:os
+363:30:Call -> U
+363:30:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+363:30:Attribute -> Module:posixpath | Module:ntpath
+363:30:Name -> Module:os
+363:46:Name -> U
+366:17:Call -> U
+366:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+366:17:Attribute -> Module:posixpath | Module:ntpath
+366:17:Name -> Module:os
+367:12:Call -> U
+367:12:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+367:12:Attribute -> Module:posixpath | Module:ntpath
+367:12:Name -> Module:os
+367:28:Name -> U
+370:11:Call -> Const:bool:False | Const:bool:True | U
+370:11:Attribute -> Func:genericpath.exists | U
+370:11:Attribute -> Module:posixpath | Module:ntpath
+370:11:Name -> Module:os
+370:26:Name -> U
+371:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+371:14:Name -> Class:salt.exceptions.CommandExecutionError
+372:62:Name -> U
+377:7:Name -> Const:NoneType:None | U
+378:36:Name -> U
+383:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+383:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+383:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+383:43:Name -> U
+384:13:Call -> ERR
+384:13:Name -> ERR
+385:15:Name -> U
+386:12:Call -> U
+386:12:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+386:12:Attribute -> Module:posixpath | Module:ntpath
+386:12:Name -> Module:os
+386:28:Name -> U
+389:12:Name -> Dict:1 | Const:NoneType:None
+391:7:Name -> U
+392:14:Call -> U
+392:14:Attribute -> BM:builtins.str.format
+392:59:Name -> U
+393:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+393:14:Name -> Class:salt.exceptions.CommandExecutionError
+393:36:Name -> U
+395:11:Name -> U
+420:7:Call -> U | Const:bool:False
+420:7:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+420:7:Attribute -> Dict:43 | Inst:os._Environ
+420:7:Name -> Module:os
+421:8:Call -> ERR
+421:8:Attribute -> BM:builtins.list.append
+421:8:Name -> List:0
+421:27:Call -> U | Const:NoneType:None
+421:27:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+421:27:Attribute -> Dict:43 | Inst:os._Environ
+421:27:Name -> Module:os
+422:4:Call -> ERR
+422:4:Attribute -> BM:builtins.list.extend
+422:4:Name -> List:0
+425:12:Call -> U
+425:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+425:12:Attribute -> Module:posixpath | Module:ntpath
+425:12:Name -> Module:os
+425:25:Call -> U | Const:NoneType:None
+425:25:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+425:25:Attribute -> Dict:43 | Inst:os._Environ
+425:25:Name -> Module:os
+427:12:Call -> U
+427:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+427:12:Attribute -> Module:posixpath | Module:ntpath
+427:12:Name -> Module:os
+427:25:Call -> U | Const:NoneType:None
+427:25:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+427:25:Attribute -> Dict:43 | Inst:os._Environ
+427:25:Name -> Module:os
+431:16:Name -> List:0
+432:11:Call -> Const:bool:False | Const:bool:True | U
+432:11:Attribute -> Func:genericpath.exists | U
+432:11:Attribute -> Module:posixpath | Module:ntpath
+432:11:Name -> Module:os
+432:26:Name -> U
+433:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+433:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+433:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+433:59:Name -> U
+434:12:Call -> ERR
+434:12:Name -> ERR
+434:41:Name -> U
+435:12:Call -> ERR
+435:12:Attribute -> BM:builtins.list.append
+435:12:Name -> List:0
+435:49:Name -> U
+438:19:Call -> ERR
+438:19:Name -> ERR
+439:11:Call -> ERR
+439:11:Attribute -> ERR
+439:11:Call -> ERR
+439:11:Attribute -> ERR
+439:11:Name -> ERR
+440:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+440:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+440:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+440:70:Name -> ERR
+441:12:Call -> ERR
+441:12:Name -> ERR
+442:20:Name -> ERR
+444:12:Call -> ERR
+444:12:Name -> ERR
+445:20:Name -> ERR
+447:12:Call -> ERR
+447:12:Attribute -> BM:builtins.list.append
+447:12:Name -> List:0
+447:55:Name -> ERR
+450:16:Call -> ERR
+450:16:Name -> ERR
+451:27:Call -> ERR
+451:27:Attribute -> ERR
+451:27:Name -> ERR
+452:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+452:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+452:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+452:59:Name -> ERR
+453:12:Call -> ERR
+453:12:Name -> ERR
+453:45:Name -> ERR
+454:12:Call -> ERR
+454:12:Attribute -> BM:builtins.list.append
+454:12:Name -> List:0
+454:49:Name -> ERR
+456:11:Name -> List:0
+506:16:Call -> U
+506:16:Name -> Func:salt.modules.chocolatey._find_chocolatey
+508:7:Call -> Inst:salt.utils.versions.Version
+508:7:Name -> Class:salt.utils.versions.Version
+508:15:Call -> U
+508:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+508:39:Call -> Inst:salt.utils.versions.Version
+508:39:Name -> Class:salt.utils.versions.Version
+509:15:Name -> U
+510:11:Name -> Const:bool:False | U
+511:12:Call -> ERR
+511:12:Attribute -> BM:builtins.list.append
+511:12:Name -> List:2
+513:11:Name -> Const:bool:False | U
+515:19:Name -> U
+517:19:Name -> U
+518:7:Name -> Const:NoneType:None | U
+519:8:Call -> ERR
+519:8:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+519:8:Name -> List:2 | List:2 | List:2
+519:19:Name -> U
+520:7:Call -> U | Const:bool:False | Const:bool:False
+520:7:Attribute -> Func:salt.utils.data.is_true
+520:7:Attribute -> Module:salt.utils.data
+520:7:Attribute -> Module:salt.utils
+520:7:Name -> Module:salt
+520:31:Name -> Const:bool:False | U
+521:8:Call -> ERR
+521:8:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+521:8:Name -> List:2 | List:2 | List:2
+522:7:Call -> U | Const:bool:False | Const:bool:False
+522:7:Attribute -> Func:salt.utils.data.is_true
+522:7:Attribute -> Module:salt.utils.data
+522:7:Attribute -> Module:salt.utils
+522:7:Name -> Module:salt
+522:31:Name -> Const:bool:False | U
+523:8:Call -> ERR
+523:8:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+523:8:Name -> List:2 | List:2 | List:2
+524:7:Name -> Const:NoneType:None | U
+525:8:Call -> ERR
+525:8:Attribute -> BM:builtins.list.extend | BM:builtins.list.extend | BM:builtins.list.extend
+525:8:Name -> List:2 | List:2 | List:2
+525:32:Name -> U
+526:7:Name -> Const:bool:False | U
+527:8:Call -> ERR
+527:8:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+527:8:Name -> List:2 | List:2 | List:2
+530:4:Call -> ERR
+530:4:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+530:4:Name -> List:2 | List:2 | List:2
+532:13:Call -> ERR
+532:13:Name -> ERR
+532:37:Name -> List:2 | List:2 | List:2
+539:7:Name -> U
+540:14:Call -> U
+540:14:Attribute -> BM:builtins.str.format
+540:53:Name -> U
+541:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+541:14:Name -> Class:salt.exceptions.CommandExecutionError
+541:36:Name -> U
+543:10:Call -> Inst:salt.utils.data.CaseInsensitiveDict
+543:10:Name -> Class:salt.utils.data.CaseInsensitiveDict
+544:13:Call -> U
+544:13:Attribute -> Func:re.compile
+544:13:Name -> Module:re
+545:16:Call -> U
+545:16:Attribute -> U
+545:16:Name -> U
+546:11:Call -> U
+546:11:Attribute -> U
+546:11:Name -> U
+547:19:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+548:25:Call -> U
+548:25:Attribute -> U
+548:25:Name -> U
+548:40:Name -> U
+549:31:Name -> U
+551:15:Name -> U
+551:27:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+552:16:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+552:20:Name -> U
+553:12:Call -> U
+553:12:Attribute -> U
+553:12:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+553:16:Name -> U
+553:29:Name -> U
+555:11:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+572:16:Call -> U
+572:16:Name -> Func:salt.modules.chocolatey._find_chocolatey
+574:7:Call -> Inst:salt.utils.versions.Version
+574:7:Name -> Class:salt.utils.versions.Version
+574:15:Call -> U
+574:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+574:39:Call -> Inst:salt.utils.versions.Version
+574:39:Name -> Class:salt.utils.versions.Version
+575:15:Name -> U
+577:15:Name -> U
+578:13:Call -> ERR
+578:13:Name -> ERR
+578:37:Name -> List:4 | List:4
+580:7:Name -> U
+581:14:Call -> U
+581:14:Attribute -> BM:builtins.str.format
+581:53:Name -> U
+582:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+582:14:Name -> Class:salt.exceptions.CommandExecutionError
+582:36:Name -> U
+584:11:Name -> U
+601:16:Call -> U
+601:16:Name -> Func:salt.modules.chocolatey._find_chocolatey
+603:7:Call -> Inst:salt.utils.versions.Version
+603:7:Name -> Class:salt.utils.versions.Version
+603:15:Call -> U
+603:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+603:39:Call -> Inst:salt.utils.versions.Version
+603:39:Name -> Class:salt.utils.versions.Version
+604:15:Name -> U
+606:15:Name -> U
+607:13:Call -> ERR
+607:13:Name -> ERR
+607:37:Name -> List:4 | List:4
+609:7:Name -> U
+610:14:Call -> U
+610:14:Attribute -> BM:builtins.str.format
+610:53:Name -> U
+611:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+611:14:Name -> Class:salt.exceptions.CommandExecutionError
+611:36:Name -> U
+613:11:Name -> U
+711:7:Name -> Const:bool:False | U
+711:17:Name -> Const:bool:False | U
+712:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+712:14:Name -> Class:salt.exceptions.SaltInvocationError
+716:16:Call -> U
+716:16:Name -> Func:salt.modules.chocolatey._find_chocolatey
+720:11:Name -> U
+720:33:Name -> U
+721:7:Name -> Const:NoneType:None | U
+722:8:Call -> ERR
+722:8:Attribute -> BM:builtins.list.extend
+722:8:Name -> List:3
+722:33:Name -> U
+723:7:Name -> Const:NoneType:None | U
+724:8:Call -> ERR
+724:8:Attribute -> BM:builtins.list.extend
+724:8:Name -> List:3
+724:32:Name -> U
+725:7:Call -> U | Const:bool:False | Const:bool:False
+725:7:Attribute -> Func:salt.utils.data.is_true
+725:7:Attribute -> Module:salt.utils.data
+725:7:Attribute -> Module:salt.utils
+725:7:Name -> Module:salt
+725:31:Name -> Const:bool:False | U
+726:8:Call -> ERR
+726:8:Attribute -> BM:builtins.list.append
+726:8:Name -> List:3
+727:7:Call -> U | Const:bool:False | Const:bool:False
+727:7:Attribute -> Func:salt.utils.data.is_true
+727:7:Attribute -> Module:salt.utils.data
+727:7:Attribute -> Module:salt.utils
+727:7:Name -> Module:salt
+727:31:Name -> Const:bool:False | U
+728:8:Call -> ERR
+728:8:Attribute -> BM:builtins.list.append
+728:8:Name -> List:3
+729:7:Name -> Const:NoneType:None | U
+730:8:Call -> ERR
+730:8:Attribute -> BM:builtins.list.extend
+730:8:Name -> List:3
+730:42:Name -> U
+731:7:Name -> Const:bool:False | U
+732:8:Call -> ERR
+732:8:Attribute -> BM:builtins.list.append
+732:8:Name -> List:3
+733:7:Name -> Const:bool:False | U
+734:8:Call -> ERR
+734:8:Attribute -> BM:builtins.list.append
+734:8:Name -> List:3
+735:7:Name -> Const:NoneType:None | U
+736:8:Call -> ERR
+736:8:Attribute -> BM:builtins.list.extend
+736:8:Name -> List:3
+736:43:Name -> U
+737:7:Name -> Const:bool:False | U
+738:8:Call -> ERR
+738:8:Attribute -> BM:builtins.list.append
+738:8:Name -> List:3
+739:7:Name -> Const:NoneType:None | U
+740:8:Call -> ERR
+740:8:Attribute -> BM:builtins.list.extend
+740:8:Name -> List:3
+740:43:Name -> U
+741:7:Name -> Const:NoneType:None | U
+742:37:Name -> U
+743:8:Call -> ERR
+743:8:Attribute -> BM:builtins.list.append
+743:8:Name -> List:3
+743:19:Name -> Const:str:'--viruscheck' | Const:str:'--skipviruscheck'
+746:4:Call -> ERR
+746:4:Attribute -> BM:builtins.list.extend
+746:4:Name -> List:3
+746:15:Call -> U
+746:15:Name -> Func:salt.modules.chocolatey._no_progress
+747:4:Call -> ERR
+747:4:Attribute -> BM:builtins.list.extend
+747:4:Name -> List:3
+747:15:Call -> U
+747:15:Name -> Func:salt.modules.chocolatey._yes
+748:13:Call -> ERR
+748:13:Name -> ERR
+748:37:Name -> List:3
+750:7:Name -> U
+751:14:Call -> U
+751:14:Attribute -> BM:builtins.str.format
+751:53:Name -> U
+752:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+752:14:Name -> Class:salt.exceptions.CommandExecutionError
+752:36:Name -> U
+754:7:Name -> U
+755:8:Call -> Const:NoneType:None
+755:8:Name -> Func:salt.modules.chocolatey._clear_context
+757:11:Name -> U
+787:11:Call -> U
+787:11:Name -> Func:salt.modules.chocolatey.install
+788:8:Name -> U
+788:44:Name -> Const:NoneType:None | U
+788:72:Name -> Const:bool:False | U
+824:11:Call -> U
+824:11:Name -> Func:salt.modules.chocolatey.install
+825:8:Name -> U
+826:16:Name -> Const:NoneType:None | U
+828:21:Name -> Const:NoneType:None | U
+829:22:Name -> Const:bool:False | U
+864:7:Call -> Inst:salt.utils.versions.Version
+864:7:Name -> Class:salt.utils.versions.Version
+864:15:Call -> U
+864:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+864:40:Call -> Inst:salt.utils.versions.Version
+864:40:Name -> Class:salt.utils.versions.Version
+865:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+865:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+865:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+866:15:Call -> U
+866:15:Name -> Func:salt.modules.chocolatey.install
+866:23:Name -> U
+866:37:Name -> Const:NoneType:None | U
+869:11:Call -> U
+869:11:Name -> Func:salt.modules.chocolatey._find_chocolatey
+869:49:Name -> U
+870:7:Name -> Const:NoneType:None | U
+871:8:Call -> ERR
+871:8:Attribute -> BM:builtins.list.extend
+871:8:Name -> List:3
+871:33:Name -> U
+872:7:Name -> Const:NoneType:None | U
+873:8:Call -> ERR
+873:8:Attribute -> BM:builtins.list.extend
+873:8:Name -> List:3
+873:32:Name -> U
+875:4:Call -> ERR
+875:4:Attribute -> BM:builtins.list.extend
+875:4:Name -> List:3
+875:15:Call -> U
+875:15:Name -> Func:salt.modules.chocolatey._yes
+876:13:Call -> ERR
+876:13:Name -> ERR
+876:37:Name -> List:3
+878:7:Name -> U
+879:14:Call -> U
+879:14:Attribute -> BM:builtins.str.format
+879:53:Name -> U
+880:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+880:14:Name -> Class:salt.exceptions.CommandExecutionError
+880:36:Name -> U
+882:11:Name -> U
+917:11:Call -> U
+917:11:Name -> Func:salt.modules.chocolatey.install
+918:8:Name -> U
+919:16:Name -> Const:NoneType:None | U
+921:21:Name -> Const:NoneType:None | U
+922:22:Name -> Const:bool:False | U
+943:11:Call -> U
+943:11:Name -> Func:salt.modules.chocolatey.install
+943:19:Name -> U
+973:11:Call -> U
+973:11:Name -> Func:salt.modules.chocolatey.install
+974:8:Name -> U
+974:43:Name -> Const:NoneType:None | U
+974:71:Name -> Const:bool:False | U
+1017:11:Call -> U
+1017:11:Name -> Func:salt.modules.chocolatey._find_chocolatey
+1017:44:Name -> U
+1018:7:Name -> Const:NoneType:None | U
+1019:8:Call -> ERR
+1019:8:Attribute -> BM:builtins.list.extend
+1019:8:Name -> List:3
+1019:33:Name -> U
+1020:7:Name -> Const:NoneType:None | U
+1021:8:Call -> ERR
+1021:8:Attribute -> BM:builtins.list.extend
+1021:8:Name -> List:3
+1021:44:Name -> U
+1022:7:Name -> Const:bool:False | U
+1023:8:Call -> ERR
+1023:8:Attribute -> BM:builtins.list.append
+1023:8:Name -> List:3
+1024:7:Name -> Const:bool:False | U
+1025:8:Call -> ERR
+1025:8:Attribute -> BM:builtins.list.append
+1025:8:Name -> List:3
+1026:4:Call -> ERR
+1026:4:Attribute -> BM:builtins.list.extend
+1026:4:Name -> List:3
+1026:15:Call -> U
+1026:15:Name -> Func:salt.modules.chocolatey._yes
+1027:13:Call -> ERR
+1027:13:Name -> ERR
+1027:37:Name -> List:3
+1029:7:Name -> U
+1030:14:Call -> U
+1030:14:Attribute -> BM:builtins.str.format
+1030:53:Name -> U
+1031:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1031:14:Name -> Class:salt.exceptions.CommandExecutionError
+1031:36:Name -> U
+1033:11:Name -> U
+1101:11:Call -> U
+1101:11:Name -> Func:salt.modules.chocolatey._find_chocolatey
+1101:42:Name -> U
+1102:7:Name -> Const:NoneType:None | U
+1103:8:Call -> ERR
+1103:8:Attribute -> BM:builtins.list.extend
+1103:8:Name -> List:3
+1103:33:Name -> U
+1104:7:Name -> Const:NoneType:None | U
+1105:8:Call -> ERR
+1105:8:Attribute -> BM:builtins.list.extend
+1105:8:Name -> List:3
+1105:32:Name -> U
+1106:7:Call -> U | Const:bool:False | Const:bool:False
+1106:7:Attribute -> Func:salt.utils.data.is_true
+1106:7:Attribute -> Module:salt.utils.data
+1106:7:Attribute -> Module:salt.utils
+1106:7:Name -> Module:salt
+1106:31:Name -> Const:bool:False | U
+1107:8:Call -> ERR
+1107:8:Attribute -> BM:builtins.list.append
+1107:8:Name -> List:3
+1108:7:Call -> U | Const:bool:False | Const:bool:False
+1108:7:Attribute -> Func:salt.utils.data.is_true
+1108:7:Attribute -> Module:salt.utils.data
+1108:7:Attribute -> Module:salt.utils
+1108:7:Name -> Module:salt
+1108:31:Name -> Const:bool:False | U
+1109:8:Call -> ERR
+1109:8:Attribute -> BM:builtins.list.append
+1109:8:Name -> List:3
+1110:7:Name -> Const:NoneType:None | U
+1111:8:Call -> ERR
+1111:8:Attribute -> BM:builtins.list.extend
+1111:8:Name -> List:3
+1111:42:Name -> U
+1112:7:Name -> Const:bool:False | U
+1113:8:Call -> ERR
+1113:8:Attribute -> BM:builtins.list.append
+1113:8:Name -> List:3
+1114:7:Name -> Const:bool:False | U
+1115:8:Call -> ERR
+1115:8:Attribute -> BM:builtins.list.append
+1115:8:Name -> List:3
+1116:7:Name -> Const:NoneType:None | U
+1117:8:Call -> ERR
+1117:8:Attribute -> BM:builtins.list.extend
+1117:8:Name -> List:3
+1117:43:Name -> U
+1120:4:Call -> ERR
+1120:4:Attribute -> BM:builtins.list.extend
+1120:4:Name -> List:3
+1120:15:Call -> U
+1120:15:Name -> Func:salt.modules.chocolatey._no_progress
+1121:4:Call -> ERR
+1121:4:Attribute -> BM:builtins.list.extend
+1121:4:Name -> List:3
+1121:15:Call -> U
+1121:15:Name -> Func:salt.modules.chocolatey._yes
+1123:13:Call -> ERR
+1123:13:Name -> ERR
+1123:37:Name -> List:3
+1125:7:Name -> U
+1126:14:Call -> U
+1126:14:Attribute -> BM:builtins.str.format
+1126:53:Name -> U
+1127:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1127:14:Name -> Class:salt.exceptions.CommandExecutionError
+1127:36:Name -> U
+1129:11:Name -> U
+1157:7:Call -> Inst:salt.utils.versions.Version
+1157:7:Name -> Class:salt.utils.versions.Version
+1157:15:Call -> U
+1157:15:Name -> Func:salt.modules.chocolatey.chocolatey_version
+1157:40:Call -> Inst:salt.utils.versions.Version
+1157:40:Name -> Class:salt.utils.versions.Version
+1158:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1158:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1158:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1159:15:Call -> U
+1159:15:Name -> Func:salt.modules.chocolatey.upgrade
+1159:23:Name -> U
+1159:36:Name -> Const:NoneType:None | U
+1159:57:Name -> Const:bool:False | U
+1161:11:Call -> U
+1161:11:Name -> Func:salt.modules.chocolatey._find_chocolatey
+1161:41:Name -> U
+1162:7:Name -> Const:NoneType:None | U
+1163:8:Call -> ERR
+1163:8:Attribute -> BM:builtins.list.extend
+1163:8:Name -> List:3
+1163:32:Name -> U
+1164:7:Call -> U | Const:bool:False | Const:bool:False
+1164:7:Attribute -> Func:salt.utils.data.is_true
+1164:7:Attribute -> Module:salt.utils.data
+1164:7:Attribute -> Module:salt.utils
+1164:7:Name -> Module:salt
+1164:31:Name -> Const:bool:False | U
+1165:8:Call -> ERR
+1165:8:Attribute -> BM:builtins.list.append
+1165:8:Name -> List:3
+1168:4:Call -> ERR
+1168:4:Attribute -> BM:builtins.list.extend
+1168:4:Name -> List:3
+1168:15:Call -> U
+1168:15:Name -> Func:salt.modules.chocolatey._no_progress
+1169:4:Call -> ERR
+1169:4:Attribute -> BM:builtins.list.extend
+1169:4:Name -> List:3
+1169:15:Call -> U
+1169:15:Name -> Func:salt.modules.chocolatey._yes
+1170:13:Call -> ERR
+1170:13:Name -> ERR
+1170:37:Name -> List:3
+1172:7:Name -> U
+1173:14:Call -> U
+1173:14:Attribute -> BM:builtins.str.format
+1173:53:Name -> U
+1174:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1174:14:Name -> Class:salt.exceptions.CommandExecutionError
+1174:36:Name -> U
+1176:11:Name -> U
+1211:16:Call -> Inst:salt.utils.data.CaseInsensitiveDict
+1211:16:Name -> Func:salt.modules.chocolatey.list_
+1211:29:Name -> U
+1214:17:Call -> U
+1214:17:Attribute -> U
+1214:17:Name -> U
+1215:7:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1216:19:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1217:15:Name -> U
+1217:29:Call -> U
+1217:29:Attribute -> U
+1217:29:Name -> U
+1218:16:Call -> ERR
+1218:16:Attribute -> BM:builtins.dict.setdefault
+1218:16:Name -> Dict:0
+1218:36:Name -> U
+1219:16:Name -> Dict:0
+1219:25:Name -> U
+1219:52:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1219:62:Name -> U
+1221:7:Name -> Const:bool:False | U
+1224:20:Call -> Inst:salt.utils.data.CaseInsensitiveDict
+1224:20:Name -> Func:salt.modules.chocolatey.list_
+1225:19:Name -> U
+1225:56:Name -> Const:bool:False | U
+1225:77:Name -> Const:NoneType:None | U
+1227:11:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1228:23:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1229:19:Name -> U
+1229:33:Call -> U
+1229:33:Attribute -> U
+1229:33:Name -> U
+1230:20:Call -> ERR
+1230:20:Attribute -> BM:builtins.dict.setdefault
+1230:20:Name -> Dict:0
+1230:40:Name -> U
+1231:20:Name -> Dict:0
+1231:29:Name -> U
+1231:56:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1231:66:Name -> U
+1233:11:Name -> Dict:0
+1272:8:Call -> U
+1272:8:Name -> Func:salt.modules.chocolatey._find_chocolatey
+1276:8:Name -> U
+1278:8:Name -> U
+1280:7:Name -> Const:NoneType:None | U
+1281:8:Call -> ERR
+1281:8:Attribute -> BM:builtins.list.extend
+1281:8:Name -> List:7
+1281:30:Name -> U
+1282:7:Name -> Const:NoneType:None | U
+1283:8:Call -> ERR
+1283:8:Attribute -> BM:builtins.list.extend
+1283:8:Name -> List:7
+1283:34:Name -> U
+1284:7:Name -> Const:NoneType:None | U
+1285:8:Call -> ERR
+1285:8:Attribute -> BM:builtins.list.extend
+1285:8:Name -> List:7
+1285:34:Name -> U
+1286:13:Call -> ERR
+1286:13:Name -> ERR
+1286:37:Name -> List:7
+1288:7:Name -> U
+1289:14:Call -> U
+1289:14:Attribute -> BM:builtins.str.format
+1289:53:Name -> U
+1290:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1290:14:Name -> Class:salt.exceptions.CommandExecutionError
+1290:36:Name -> U
+1292:11:Name -> U
+1307:11:Call -> U
+1307:11:Name -> Func:salt.modules.chocolatey._find_chocolatey
+1307:41:Name -> U
+1307:58:Name -> U
+1308:13:Call -> ERR
+1308:13:Name -> ERR
+1308:37:Name -> List:5
+1310:7:Name -> U
+1311:14:Call -> U
+1311:14:Attribute -> BM:builtins.str.format
+1311:53:Name -> U
+1312:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1312:14:Name -> Class:salt.exceptions.CommandExecutionError
+1312:36:Name -> U
+1314:11:Name -> U
+1333:11:Call -> U
+1333:11:Name -> Func:salt.modules.chocolatey._change_source_state
+1333:32:Name -> U
+1351:11:Call -> U
+1351:11:Name -> Func:salt.modules.chocolatey._change_source_state
+1351:32:Name -> U
+1364:16:Call -> U
+1364:16:Name -> Func:salt.modules.chocolatey._find_chocolatey
+1365:11:Name -> U
+1368:4:Call -> ERR
+1368:4:Attribute -> BM:builtins.list.append
+1368:4:Name -> List:2
+1370:13:Call -> ERR
+1370:13:Name -> ERR
+1370:37:Name -> List:2
+1377:7:Name -> U
+1378:14:Call -> U
+1378:14:Attribute -> BM:builtins.str.format
+1378:53:Name -> U
+1379:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1379:14:Name -> Class:salt.exceptions.CommandExecutionError
+1379:36:Name -> U
+1381:10:Call -> Inst:salt.utils.data.CaseInsensitiveDict
+1381:10:Name -> Class:salt.utils.data.CaseInsensitiveDict
+1382:13:Call -> U
+1382:13:Attribute -> Func:re.compile
+1382:13:Name -> Module:re
+1383:16:Call -> U
+1383:16:Attribute -> U
+1383:16:Name -> U
+1384:41:Call -> U
+1384:41:Attribute -> U
+1384:41:Name -> U
+1384:56:Name -> U
+1385:15:Name -> U
+1385:27:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1386:16:Name -> Inst:salt.utils.data.CaseInsensitiveDict
+1386:20:Name -> U
+1386:38:Name -> U
+1386:55:Name -> U
+1386:75:Name -> U
+1388:11:Name -> Inst:salt.utils.data.CaseInsensitiveDict

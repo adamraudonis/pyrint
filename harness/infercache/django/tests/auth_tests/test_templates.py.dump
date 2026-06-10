@@ -1,0 +1,276 @@
+21:1:Call -> Inst:django.test.utils.override_settings
+21:1:Name -> Class:django.test.utils.override_settings
+22:24:Name -> Class:django.test.testcases.TestCase
+23:22:Call -> Inst:django.test.client.RequestFactory
+23:22:Name -> Class:django.test.client.RequestFactory
+25:5:Name -> Class:builtins.classmethod
+27:15:Call -> U
+27:15:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+27:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+27:15:Name -> Class:django.contrib.auth.models.User
+28:15:Call -> U
+28:15:Name -> Func:django.contrib.auth.authenticate
+28:37:Attribute -> U
+28:37:Name -> U
+29:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+29:18:Attribute -> BM:django.test.client.RequestFactory.get
+29:18:Attribute -> Inst:django.test.client.RequestFactory
+29:18:Name -> Class:tests.auth_tests.test_templates.AuthTemplateTests
+30:8:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+30:23:Name -> U
+31:8:Name -> Class:tests.auth_tests.test_templates.AuthTemplateTests
+31:18:Name -> Class:tests.auth_tests.test_templates.AuthTemplateTests
+31:32:Name -> U
+31:38:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+34:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+34:19:Call -> Func:django.views.generic.base.View.as_view.view
+34:19:Attribute -> BM:django.views.generic.base.View.as_view
+34:19:Name -> Class:django.contrib.auth.views.PasswordResetView
+34:67:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+34:67:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+35:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+36:12:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+38:8:Call -> Const:NoneType:None
+38:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+38:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+38:28:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+41:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+41:19:Attribute -> BM:django.test.client.Client.post
+41:19:Attribute -> Inst:django.test.client.Client
+41:19:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+41:36:Call -> U | Const:str:'' | Const:str:''
+41:36:Name -> Func:django.urls.base.reverse
+42:8:Call -> Const:NoneType:None
+42:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+42:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+43:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+55:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+55:19:Attribute -> BM:django.test.client.Client.post
+55:19:Attribute -> Inst:django.test.client.Client
+55:19:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+55:36:Call -> U | Const:str:'' | Const:str:''
+55:36:Name -> Func:django.urls.base.reverse
+56:8:Call -> Const:NoneType:None
+56:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+56:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+57:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+61:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+61:19:Call -> Func:django.views.generic.base.View.as_view.view
+61:19:Attribute -> BM:django.views.generic.base.View.as_view
+61:19:Name -> Class:django.contrib.auth.views.PasswordResetDoneView
+61:51:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+61:51:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+62:8:Call -> Const:NoneType:None
+62:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+62:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+63:12:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+65:8:Call -> Const:NoneType:None
+65:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+65:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+65:28:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+69:17:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+69:17:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+70:14:Call -> U | Const:str:'' | Const:str:''
+70:14:Name -> Func:django.urls.base.reverse
+73:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+73:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+73:19:Name -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+73:30:Name -> U | Const:str:'' | Const:str:''
+74:8:Call -> Const:NoneType:None
+74:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+74:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+75:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+77:8:Call -> Const:NoneType:None
+77:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+77:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+77:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+81:17:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+81:17:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+82:34:Call -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+82:34:Name -> Class:django.contrib.auth.tokens.PasswordResetTokenGenerator
+83:16:Call -> U
+83:16:Attribute -> BM:django.contrib.auth.tokens.PasswordResetTokenGenerator.make_token
+83:16:Name -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+83:51:Attribute -> U
+83:51:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+84:17:Call -> U
+84:17:Name -> Func:django.utils.http.urlsafe_base64_encode
+84:39:Call -> Const:bytes:b''
+84:39:Attribute -> BM:builtins.str.encode
+84:39:Call -> Const:str:''
+84:39:Name -> Class:builtins.str
+84:43:Attribute -> U
+84:43:Attribute -> U
+84:43:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+85:14:Call -> U | Const:str:'' | Const:str:''
+85:14:Name -> Func:django.urls.base.reverse
+86:56:Name -> U
+86:73:Name -> U
+88:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+88:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+88:19:Name -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+88:30:Name -> U | Const:str:'' | Const:str:''
+89:8:Call -> Const:NoneType:None
+89:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+89:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+90:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+92:8:Call -> Const:NoneType:None
+92:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+92:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+92:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+95:8:Call -> Const:NoneType:None
+95:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+95:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+96:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+101:17:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+101:17:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+102:34:Call -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+102:34:Name -> Class:django.contrib.auth.tokens.PasswordResetTokenGenerator
+103:16:Call -> U
+103:16:Attribute -> BM:django.contrib.auth.tokens.PasswordResetTokenGenerator.make_token
+103:16:Name -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+103:51:Attribute -> U
+103:51:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+104:17:Call -> U
+104:17:Name -> Func:django.utils.http.urlsafe_base64_encode
+104:39:Call -> Const:bytes:b''
+104:39:Attribute -> BM:builtins.str.encode
+104:39:Call -> Const:str:''
+104:39:Name -> Class:builtins.str
+104:43:Attribute -> U
+104:43:Attribute -> U
+104:43:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+105:14:Call -> U | Const:str:'' | Const:str:''
+105:14:Name -> Func:django.urls.base.reverse
+106:56:Name -> U
+106:73:Name -> U
+108:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+108:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+108:19:Name -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+108:31:Name -> U | Const:str:'' | Const:str:''
+109:8:Call -> Const:NoneType:None
+109:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+109:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+110:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+114:17:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+114:17:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+115:34:Call -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+115:34:Name -> Class:django.contrib.auth.tokens.PasswordResetTokenGenerator
+116:16:Call -> U
+116:16:Attribute -> BM:django.contrib.auth.tokens.PasswordResetTokenGenerator.make_token
+116:16:Name -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+116:51:Attribute -> U
+116:51:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+117:17:Call -> U
+117:17:Name -> Func:django.utils.http.urlsafe_base64_encode
+117:39:Call -> Const:bytes:b''
+117:39:Attribute -> BM:builtins.str.encode
+117:39:Call -> Const:str:''
+117:39:Name -> Class:builtins.str
+117:43:Attribute -> U
+117:43:Attribute -> U
+117:43:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+118:14:Call -> U | Const:str:'' | Const:str:''
+118:14:Name -> Func:django.urls.base.reverse
+119:56:Name -> U
+119:73:Name -> U
+121:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+121:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+121:19:Name -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+121:31:Name -> U | Const:str:'' | Const:str:''
+122:8:Call -> Const:NoneType:None
+122:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+122:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+123:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+133:8:Call -> Const:NoneType:None
+133:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+133:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+134:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+145:5:Call -> Inst:django.test.utils.override_settings
+145:5:Name -> Class:django.test.utils.override_settings
+147:22:Call -> U
+147:22:Attribute -> BM:tests.auth_tests.models.custom_user.CustomUserManager.create_user
+147:22:Attribute -> Inst:tests.auth_tests.models.custom_user.CustomUserManager
+147:22:Name -> Class:tests.auth_tests.models.custom_user.CustomUser
+149:26:Call -> Inst:_pydatetime.date
+149:26:Name -> Class:_pydatetime.date
+152:17:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+152:17:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+153:34:Call -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+153:34:Name -> Class:django.contrib.auth.tokens.PasswordResetTokenGenerator
+154:16:Call -> U
+154:16:Attribute -> BM:django.contrib.auth.tokens.PasswordResetTokenGenerator.make_token
+154:16:Name -> Inst:django.contrib.auth.tokens.PasswordResetTokenGenerator
+154:51:Name -> U
+155:17:Call -> U
+155:17:Name -> Func:django.utils.http.urlsafe_base64_encode
+155:39:Call -> Const:bytes:b''
+155:39:Attribute -> BM:builtins.str.encode
+155:39:Call -> Const:str:''
+155:39:Name -> Class:builtins.str
+155:43:Attribute -> U
+155:43:Name -> U
+156:14:Call -> U | Const:str:'' | Const:str:''
+156:14:Name -> Func:django.urls.base.reverse
+157:56:Name -> U
+157:73:Name -> U
+159:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+159:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+159:19:Name -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+159:30:Name -> U | Const:str:'' | Const:str:''
+160:8:Call -> Const:NoneType:None
+160:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+160:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+161:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+164:8:Call -> Const:NoneType:None
+164:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+164:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+164:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+167:8:Call -> Const:NoneType:None
+167:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+167:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+168:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+173:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+173:19:Call -> Func:django.views.generic.base.View.as_view.view
+173:19:Attribute -> BM:django.views.generic.base.View.as_view
+173:19:Name -> Class:django.contrib.auth.views.PasswordResetCompleteView
+173:55:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+173:55:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+174:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+175:12:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+177:8:Call -> Const:NoneType:None
+177:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+177:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+177:28:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+180:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+180:19:Call -> Func:django.views.generic.base.View.as_view.view
+180:19:Attribute -> BM:django.views.generic.base.View.as_view
+180:19:Name -> Class:django.contrib.auth.views.PasswordChangeView
+180:68:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+180:68:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+181:8:Call -> Const:NoneType:None
+181:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+181:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+182:12:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+184:8:Call -> Const:NoneType:None
+184:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+184:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+184:28:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+187:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+187:19:Call -> Func:django.views.generic.base.View.as_view.view
+187:19:Attribute -> BM:django.views.generic.base.View.as_view
+187:19:Name -> Class:django.contrib.auth.views.PasswordChangeDoneView
+187:52:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+187:52:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+188:8:Call -> Const:NoneType:None
+188:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+188:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+189:12:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+191:8:Call -> Const:NoneType:None
+191:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+191:8:Name -> Inst:tests.auth_tests.test_templates.AuthTemplateTests
+191:28:Name -> U | Inst:django.http.response.HttpResponseNotAllowed

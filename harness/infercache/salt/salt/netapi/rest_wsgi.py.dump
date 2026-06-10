@@ -1,0 +1,192 @@
+146:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+146:9:Attribute -> Func:logging.getLogger
+146:9:Name -> Module:logging
+146:27:Name -> Const:str:'rest_wsgi'
+150:15:Call -> ERR
+150:15:Attribute -> ERR
+150:15:Name -> ERR
+150:28:Name -> Const:str:'rest_wsgi'
+152:17:Name -> U
+153:15:Name -> Const:str:'rest_wsgi'
+158:16:Name -> Class:builtins.Exception
+164:8:Name -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+164:20:Name -> U
+165:8:Call -> ERR
+165:8:Attribute -> UM:builtins.Exception.__init__
+165:8:Name -> Class:builtins.Exception
+165:27:Name -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+165:36:Name -> U
+165:44:Name -> U
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> Func:os.makedirs
+174:8:Name -> Module:os
+174:20:Name -> U
+175:11:Name -> Class:builtins.OSError
+176:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+176:11:Name -> ExcInst:builtins.OSError
+176:24:Attribute -> Const:int:17
+176:24:Name -> Module:errno
+176:41:Call -> Const:bool:False | U
+176:41:Attribute -> Func:genericpath.isdir | U
+176:41:Attribute -> Module:posixpath | Module:ntpath
+176:41:Name -> Module:os
+176:55:Name -> U
+186:13:Call -> U
+186:13:Attribute -> U
+186:13:Name -> U
+187:18:Name -> U
+187:36:Call -> Inst:builtins.int
+187:36:Name -> Class:builtins.int
+187:40:Name -> U
+189:11:Call -> U
+189:11:Attribute -> U
+189:11:Name -> U
+189:38:Name -> Const:int:0 | Inst:builtins.int
+196:19:Call -> U
+196:19:Attribute -> U
+196:19:Name -> U
+197:7:Name -> U
+198:14:Call -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+198:14:Name -> Class:salt.netapi.rest_wsgi.HTTPError
+201:15:Call -> U
+201:15:Attribute -> Func:salt.utils.json.loads
+201:15:Attribute -> Module:salt.utils.json
+201:15:Attribute -> Module:salt.utils
+201:15:Name -> Module:salt
+201:37:Call -> U
+201:37:Name -> Func:salt.netapi.rest_wsgi.read_body
+201:47:Name -> U
+202:11:Name -> Class:builtins.ValueError
+203:14:Call -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+203:14:Name -> Class:salt.netapi.rest_wsgi.HTTPError
+203:29:Name -> ExcInst:builtins.ValueError
+212:26:Call -> Const:str:''
+212:26:Name -> Class:builtins.str
+212:30:Call -> ERR
+212:30:Name -> Func:builtins.len
+212:34:Name -> U
+215:7:Name -> Const:NoneType:None | U
+216:8:Call -> ERR
+216:8:Attribute -> BM:builtins.dict.update
+216:8:Name -> Dict:1
+216:32:Name -> U
+218:11:Call -> List:1
+218:11:Name -> Class:builtins.list
+218:16:Call -> DictItems
+218:16:Attribute -> BM:builtins.dict.items
+218:16:Name -> Dict:1
+226:13:Name -> U
+228:17:Name -> U
+229:14:Call -> U
+229:14:Attribute -> U
+229:14:Name -> U
+229:25:Name -> U
+237:13:Call -> U
+237:13:Attribute -> U
+237:13:Name -> U
+239:7:Name -> U
+241:9:Name -> U
+242:15:Call -> U
+242:15:Name -> Func:salt.netapi.rest_wsgi.get_json
+242:24:Name -> U
+243:15:Call -> Gen:salt.netapi.rest_wsgi.run_chunk
+243:15:Name -> Func:salt.netapi.rest_wsgi.run_chunk
+243:25:Name -> U
+243:34:Name -> U
+245:14:Call -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+245:14:Name -> Class:salt.netapi.rest_wsgi.HTTPError
+252:25:Call -> ERR
+252:25:Name -> Func:builtins.locals
+255:19:Call -> Inst:salt.utils.optsdict.OptsDict
+255:19:Attribute -> Func:salt.config.client_config
+255:19:Attribute -> Module:salt.config
+255:19:Name -> Module:salt
+256:12:Call -> U | Const:str:'/etc/salt/master'
+256:12:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+256:12:Attribute -> Dict:43 | Inst:os._Environ
+256:12:Name -> Module:os
+259:4:Name -> U
+259:27:Name -> Inst:salt.utils.optsdict.OptsDict
+260:4:Name -> U
+260:32:Call -> Inst:salt.netapi.NetapiClient
+260:32:Attribute -> Class:salt.netapi.NetapiClient
+260:32:Attribute -> Module:salt.netapi
+260:32:Name -> Module:salt
+260:57:Name -> Inst:salt.utils.optsdict.OptsDict
+269:4:Call -> Const:NoneType:None
+269:4:Name -> Func:salt.netapi.rest_wsgi.saltenviron
+269:16:Name -> U
+273:15:Call -> List:70
+273:15:Name -> Class:builtins.list
+273:20:Call -> Const:str:"They found me. I don't know how, but th | Gen:salt.netapi.rest_wsgi.run_chunk
+273:20:Name -> Func:salt.netapi.rest_wsgi.dispatch
+273:29:Name -> U
+275:11:Name -> Class:salt.netapi.rest_wsgi.HTTPError
+276:15:Attribute -> U
+276:15:Name -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+277:15:Call -> Const:str:''
+277:15:Name -> Class:builtins.str
+277:19:Name -> ExcInst:salt.netapi.rest_wsgi.HTTPError
+278:11:Attribute -> Class:salt.exceptions.EauthAuthenticationError
+278:11:Attribute -> Module:salt.exceptions
+278:11:Name -> Module:salt
+280:15:Call -> Const:str:''
+280:15:Name -> Class:builtins.str
+280:19:Name -> ExcInst:salt.exceptions.EauthAuthenticationError
+281:11:Name -> Class:builtins.Exception
+283:15:Call -> Const:str:''
+283:15:Name -> Class:builtins.str
+283:19:Name -> ExcInst:builtins.Exception
+287:14:Call -> U
+287:14:Attribute -> Func:salt.utils.json.dumps
+287:14:Attribute -> Module:salt.utils.json
+287:14:Attribute -> Module:salt.utils
+287:14:Name -> Module:salt
+287:47:Name -> List:70 | Const:str:'' | Const:str:'' | Const:str:''
+288:11:Name -> Class:builtins.TypeError
+290:14:Call -> Const:str:''
+290:14:Name -> Class:builtins.str
+290:18:Name -> ExcInst:builtins.TypeError
+293:4:Call -> U
+293:4:Name -> U
+293:19:Name -> Dict:7
+293:21:Name -> Const:int:200 | U | Const:int:401 | Const:int:500 | Const:int:500
+293:28:Call -> List:1
+293:28:Name -> Func:salt.netapi.rest_wsgi.get_headers
+293:40:Name -> U | Const:str:''
+294:12:Name -> U | Const:str:''
+303:11:Call -> Inst:salt.utils.optsdict.OptsDict
+303:11:Attribute -> Func:salt.config.client_config
+303:11:Attribute -> Module:salt.config
+303:11:Name -> Module:salt
+304:8:Call -> U | Const:str:'/etc/salt/master'
+304:8:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+304:8:Attribute -> Dict:43 | Inst:os._Environ
+304:8:Name -> Module:os
+315:25:Call -> ERR
+315:25:Name -> Func:builtins.globals
+316:8:Call -> ERR
+316:8:Name -> Func:builtins.globals
+316:32:Call -> Inst:salt.utils.optsdict.OptsDict
+316:32:Name -> Func:salt.netapi.rest_wsgi.get_opts
+318:11:Call -> Const:str:'rest_wsgi' | Const:bool:False
+318:11:Name -> Func:salt.netapi.rest_wsgi.__virtual__
+319:18:Call -> ExcInst:builtins.SystemExit
+319:18:Name -> Class:builtins.SystemExit
+321:15:Call -> ERR
+321:15:Attribute -> ERR
+321:15:Name -> ERR
+321:28:Name -> Const:str:'rest_wsgi'
+324:12:Call -> Inst:wsgiref.simple_server.WSGIServer
+324:12:Name -> Func:wsgiref.simple_server.make_server
+324:37:Name -> U
+324:55:Name -> Func:salt.netapi.rest_wsgi.application
+327:8:Call -> Const:NoneType:None
+327:8:Attribute -> BM:socketserver.BaseServer.serve_forever
+327:8:Name -> Inst:wsgiref.simple_server.WSGIServer
+328:11:Name -> Class:builtins.KeyboardInterrupt
+329:14:Call -> ExcInst:builtins.SystemExit
+329:14:Name -> Class:builtins.SystemExit
+332:3:Name -> Const:str:'salt.netapi.rest_wsgi' | Const:str:'__main__'
+333:4:Call -> Const:NoneType:None
+333:4:Name -> Func:salt.netapi.rest_wsgi.start

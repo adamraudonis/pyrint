@@ -1,0 +1,124 @@
+15:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:10:Attribute -> Func:logging.getLogger
+15:10:Name -> Module:logging
+15:28:Name -> Const:str:'homeassistant.components.fitbit.config_ | Const:str:'__main__'
+19:4:Attribute -> U
+19:4:Name -> U
+19:63:Name -> Const:str:'fitbit'
+23:13:Name -> Const:str:'fitbit'
+25:5:Name -> Class:builtins.property
+26:24:Attribute -> Class:logging.Logger
+26:24:Name -> Module:logging
+28:15:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:15:Attribute -> Func:logging.getLogger
+28:15:Name -> Module:logging
+28:33:Name -> Const:str:'homeassistant.components.fitbit.config_ | Const:str:'__main__'
+30:5:Name -> Class:builtins.property
+31:38:Name -> Class:builtins.dict
+31:43:Name -> Class:builtins.str
+31:48:Name -> Class:builtins.str
+34:21:Call -> Const:str:''
+34:21:Attribute -> BM:builtins.str.join
+34:30:Name -> U
+35:35:Attribute -> ERR
+35:35:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+35:50:Name -> U
+39:26:Name -> Class:_collections_abc.Mapping
+39:34:Name -> Class:builtins.str
+39:39:Name -> Class:typing.Any
+40:9:Name -> U
+42:21:Call -> U
+42:21:Attribute -> BM:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler.async_step_reauth_confirm
+42:21:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+45:26:Name -> Class:builtins.dict
+45:31:Name -> Class:builtins.str
+45:36:Name -> Class:typing.Any
+46:9:Name -> U
+48:11:Name -> Const:NoneType:None | U
+49:19:Call -> ERR
+49:19:Attribute -> ERR
+49:19:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+50:21:Call -> ERR
+50:21:Attribute -> ERR
+50:21:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+53:26:Name -> Class:builtins.dict
+53:31:Name -> Class:builtins.str
+53:36:Name -> Class:typing.Any
+54:9:Name -> U
+60:25:Call -> ERR
+60:25:Attribute -> ERR
+60:25:Call -> Super
+60:25:Name -> Class:builtins.super
+61:15:Name -> Class:homeassistant.components.fitbit.exceptions.FitbitAuthException
+62:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+62:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+62:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+63:79:Name -> ExcInst:homeassistant.components.fitbit.exceptions.FitbitAuthException
+65:19:Call -> ERR
+65:19:Attribute -> ERR
+65:19:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+66:15:Name -> Class:homeassistant.components.fitbit.exceptions.FitbitApiException
+67:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+67:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+67:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+67:69:Name -> ExcInst:homeassistant.components.fitbit.exceptions.FitbitApiException
+68:19:Call -> ERR
+68:19:Attribute -> ERR
+68:19:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+70:51:Name -> Class:builtins.dict
+70:56:Name -> Class:builtins.str
+70:61:Name -> Class:typing.Any
+70:70:Name -> U
+73:17:Call -> Inst:homeassistant.components.fitbit.api.ConfigFlowFitbitApi
+73:17:Attribute -> Class:homeassistant.components.fitbit.api.ConfigFlowFitbitApi
+73:17:Name -> Module:homeassistant.components.fitbit.api
+73:41:Attribute -> ERR
+73:41:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+73:52:Name -> U
+73:57:Name -> Const:str:'token'
+75:28:Call -> Const:NoneType:None | U
+75:28:Attribute -> BM:homeassistant.components.fitbit.api.FitbitApi.async_get_user_profile
+75:28:Name -> Inst:homeassistant.components.fitbit.api.ConfigFlowFitbitApi
+76:15:Name -> Class:homeassistant.components.fitbit.exceptions.FitbitAuthException
+77:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+77:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+77:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+77:72:Name -> ExcInst:homeassistant.components.fitbit.exceptions.FitbitAuthException
+78:19:Call -> ERR
+78:19:Attribute -> ERR
+78:19:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+79:15:Name -> Class:homeassistant.components.fitbit.exceptions.FitbitApiException
+80:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+80:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+80:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+80:77:Name -> ExcInst:homeassistant.components.fitbit.exceptions.FitbitApiException
+81:19:Call -> ERR
+81:19:Attribute -> ERR
+81:19:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+83:14:Call -> ERR
+83:14:Attribute -> ERR
+83:14:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+83:39:Attribute -> U
+83:39:Name -> U
+84:11:Attribute -> ERR
+84:11:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+84:26:Name -> U
+85:12:Call -> ERR
+85:12:Attribute -> ERR
+85:12:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+86:19:Call -> ERR
+86:19:Attribute -> ERR
+86:19:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+87:16:Call -> ERR
+87:16:Attribute -> ERR
+87:16:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+87:47:Name -> U
+90:8:Call -> ERR
+90:8:Attribute -> ERR
+90:8:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+91:15:Call -> ERR
+91:15:Attribute -> ERR
+91:15:Name -> Inst:homeassistant.components.fitbit.config_flow.OAuth2FlowHandler
+92:18:Attribute -> U
+92:18:Name -> U
+92:57:Name -> U

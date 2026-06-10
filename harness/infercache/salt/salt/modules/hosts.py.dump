@@ -1,0 +1,506 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'salt.modules.hosts' | Const:str:'__main__'
+22:15:Name -> ERR
+23:11:Name -> Class:builtins.KeyError
+24:8:Name -> ERR
+24:52:Call -> ERR
+24:52:Name -> ERR
+27:15:Name -> ERR
+35:10:Call -> U
+35:10:Name -> Func:salt.modules.hosts.__get_hosts_filename
+36:7:Name -> U
+38:11:Call -> Const:bool:False | Const:bool:True | U
+38:11:Attribute -> Func:genericpath.exists | U
+38:11:Attribute -> Module:posixpath | Module:ntpath
+38:11:Name -> Module:os
+38:26:Name -> U | Const:str:''
+39:13:Call -> U
+39:13:Attribute -> Func:salt.utils.files.fopen
+39:13:Attribute -> Module:salt.utils.files
+39:13:Attribute -> Module:salt.utils
+39:13:Name -> Module:salt
+39:36:Name -> U | Const:str:''
+41:11:Name -> U | Const:str:''
+49:15:Name -> ERR
+50:11:Name -> Class:builtins.KeyError
+52:14:Call -> U
+52:14:Name -> Func:salt.modules.hosts.__get_hosts_filename
+53:14:Call -> Inst:collections.OrderedDict
+53:14:Name -> Class:collections.OrderedDict
+55:17:Call -> U
+55:17:Attribute -> Func:salt.utils.files.fopen
+55:17:Attribute -> Module:salt.utils.files
+55:17:Attribute -> Module:salt.utils
+55:17:Name -> Module:salt
+55:40:Name -> U
+56:28:Name -> U
+57:27:Call -> U
+57:27:Attribute -> U
+57:27:Call -> U
+57:27:Attribute -> Func:salt.utils.stringutils.to_unicode
+57:27:Attribute -> Module:salt.utils.stringutils
+57:27:Attribute -> Module:salt.utils
+57:27:Name -> Module:salt
+57:61:Name -> U
+58:27:Name -> U
+60:23:Call -> U
+60:23:Attribute -> U
+60:23:Name -> U
+61:24:Call -> ERR
+61:24:Attribute -> ERR
+61:24:Call -> ERR
+61:24:Attribute -> BM:builtins.dict.setdefault
+61:24:Name -> Inst:collections.OrderedDict
+61:50:Name -> Const:int:0
+61:70:Name -> U
+65:30:Name -> U
+66:34:Call -> U
+66:34:Attribute -> U
+66:34:Name -> U
+66:39:Call -> U
+66:39:Attribute -> U
+66:39:Name -> U
+67:31:Call -> U
+67:31:Attribute -> U
+67:31:Name -> U
+67:38:Call -> U
+67:38:Attribute -> U
+67:38:Name -> U
+68:28:Call -> U
+68:28:Attribute -> U
+68:28:Name -> U
+69:25:Call -> U
+69:25:Attribute -> U
+69:25:Name -> U
+70:23:Name -> Const:NoneType:None | U
+71:24:Call -> ERR
+71:24:Attribute -> ERR
+71:24:Call -> ERR
+71:24:Attribute -> ERR
+71:24:Call -> ERR
+71:24:Attribute -> BM:builtins.dict.setdefault
+71:24:Name -> Inst:collections.OrderedDict
+71:39:Name -> U
+71:80:Name -> U
+72:24:Call -> ERR
+72:24:Attribute -> ERR
+72:24:Call -> ERR
+72:24:Attribute -> BM:builtins.dict.setdefault
+72:24:Name -> Inst:collections.OrderedDict
+72:39:Name -> U
+72:66:Name -> U
+74:24:Call -> ERR
+74:24:Attribute -> ERR
+74:24:Call -> ERR
+74:24:Attribute -> ERR
+74:24:Call -> ERR
+74:24:Attribute -> BM:builtins.dict.setdefault
+74:24:Name -> Inst:collections.OrderedDict
+74:39:Name -> U
+74:80:Name -> U
+75:15:Name -> Class:builtins.OSError
+76:12:Call -> Const:NoneType:None
+76:12:Attribute -> Func:salt.utils.files.process_read_exception
+76:12:Attribute -> Module:salt.utils.files
+76:12:Attribute -> Module:salt.utils
+76:12:Name -> Module:salt
+76:52:Name -> ExcInst:builtins.OSError
+76:57:Name -> U
+76:69:Attribute -> Const:int:2
+76:69:Name -> Module:errno
+79:19:Name -> Inst:collections.OrderedDict
+81:8:Name -> ERR
+81:43:Name -> Inst:collections.OrderedDict
+82:15:Name -> Inst:collections.OrderedDict
+98:11:Call -> Inst:builtins.dict
+98:11:Name -> Class:builtins.dict
+98:16:Call -> U | Inst:collections.OrderedDict
+98:16:Name -> Func:salt.modules.hosts._list_hosts
+111:12:Call -> U | Inst:collections.OrderedDict
+111:12:Name -> Func:salt.modules.hosts._list_hosts
+112:11:Name -> U | Inst:collections.OrderedDict
+115:16:Name -> U | Inst:collections.OrderedDict
+116:11:Call -> ERR
+116:11:Name -> Func:builtins.isinstance
+116:22:Name -> U | Inst:collections.OrderedDict
+116:28:Name -> U
+116:35:Name -> Class:builtins.dict
+116:58:Name -> U | Inst:collections.OrderedDict
+116:64:Name -> U
+117:21:Name -> U | Inst:collections.OrderedDict
+117:27:Name -> U
+118:15:Name -> U
+118:23:Name -> U
+119:23:Name -> U
+138:12:Call -> U | Inst:collections.OrderedDict
+138:12:Name -> Func:salt.modules.hosts._list_hosts
+139:7:Name -> U
+139:13:Call -> Inst:builtins.list
+139:13:Name -> Class:builtins.list
+139:18:Name -> U | Inst:collections.OrderedDict
+140:15:Name -> U | Inst:collections.OrderedDict
+140:21:Name -> U
+154:12:Call -> U | Inst:collections.OrderedDict
+154:12:Name -> Func:salt.modules.hosts._list_hosts
+156:11:Call -> ERR
+156:11:Name -> Func:builtins.isinstance
+156:22:Name -> U
+156:29:Name -> Class:builtins.list
+157:19:Call -> ERR
+157:19:Attribute -> BM:builtins.set.issubset
+157:19:Call -> Inst:builtins.set
+157:19:Name -> Class:builtins.set
+157:23:Name -> U
+157:39:Name -> U | Inst:collections.OrderedDict
+157:45:Name -> U
+159:19:Name -> U
+159:28:Name -> U | Inst:collections.OrderedDict
+159:34:Name -> U
+160:11:Name -> Class:builtins.KeyError
+180:10:Call -> U | Const:str:''
+180:10:Name -> Func:salt.modules.hosts._get_or_create_hostfile
+182:11:Call -> Const:bool:False | U
+182:11:Attribute -> Func:genericpath.isfile | U
+182:11:Attribute -> Module:posixpath | Module:ntpath
+182:11:Name -> Module:os
+182:26:Name -> U | Const:str:''
+186:4:Call -> ERR
+186:4:Attribute -> ERR
+186:4:Name -> ERR
+188:7:Name -> Const:NoneType:None | U
+189:22:Call -> U | Inst:builtins.bytes
+189:22:Attribute -> Func:salt.utils.stringutils.to_bytes
+189:22:Attribute -> Module:salt.utils.stringutils
+189:22:Attribute -> Module:salt.utils
+189:22:Name -> Module:salt
+190:12:Name -> U
+190:26:Name -> U
+190:45:Name -> U
+190:55:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+190:55:Name -> Module:os
+193:22:Call -> U | Inst:builtins.bytes
+193:22:Attribute -> Func:salt.utils.stringutils.to_bytes
+193:22:Attribute -> Module:salt.utils.stringutils
+193:22:Attribute -> Module:salt.utils
+193:22:Name -> Module:salt
+193:54:Name -> U
+193:68:Name -> U
+193:76:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+193:76:Name -> Module:os
+195:11:Call -> U
+195:11:Attribute -> U
+195:11:Name -> U
+198:9:Call -> U
+198:9:Attribute -> Func:salt.utils.files.fopen
+198:9:Attribute -> Module:salt.utils.files
+198:9:Attribute -> Module:salt.utils
+198:9:Name -> Module:salt
+198:32:Name -> U | Const:str:''
+199:16:Call -> U
+199:16:Attribute -> U
+199:16:Name -> U
+200:18:Call -> Inst:builtins.enumerate
+200:18:Name -> Class:builtins.enumerate
+200:28:Name -> U
+201:18:Call -> U
+201:18:Attribute -> U
+201:18:Name -> U
+201:24:Name -> U
+202:15:Name -> U
+204:11:Call -> U
+204:11:Attribute -> U
+204:11:Name -> U
+206:16:Call -> U
+206:16:Attribute -> U
+206:16:Name -> U
+207:11:Name -> U
+207:23:Call -> U | Inst:builtins.bytes
+207:23:Attribute -> Func:salt.utils.stringutils.to_bytes
+207:23:Attribute -> Module:salt.utils.stringutils
+207:23:Attribute -> Module:salt.utils
+207:23:Name -> Module:salt
+207:55:Name -> U
+208:19:Name -> Const:bool:False
+209:16:Name -> U
+209:22:Name -> U
+209:29:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+212:16:Name -> U
+212:22:Name -> U
+213:20:Call -> Const:str:'\n' | Const:str:'\r\n' | Inst:builtins.bytes | Const:bytes:b''
+213:20:Attribute -> Func:salt.utils.stringutils.to_bytes
+213:20:Attribute -> Module:salt.utils.stringutils
+213:20:Attribute -> Module:salt.utils
+213:20:Name -> Module:salt
+213:52:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+213:52:Name -> Module:os
+214:11:Name -> Const:bool:False | Const:bool:True
+216:11:Name -> U
+216:25:Call -> U
+216:25:Attribute -> U
+216:25:Name -> U
+216:44:Name -> Const:str:'\n' | Const:str:'\r\n' | Inst:builtins.bytes | Const:bytes:b''
+217:12:Name -> U
+217:25:Name -> Const:str:'\n' | Const:str:'\r\n' | Inst:builtins.bytes | Const:bytes:b''
+218:15:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+219:8:Call -> U
+219:8:Attribute -> U
+219:8:Name -> U
+219:21:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+220:9:Call -> U
+220:9:Attribute -> Func:salt.utils.files.fopen
+220:9:Attribute -> Module:salt.utils.files
+220:9:Attribute -> Module:salt.utils
+220:9:Name -> Module:salt
+220:32:Name -> U | Const:str:''
+221:8:Call -> U
+221:8:Attribute -> U
+221:8:Name -> U
+221:25:Name -> U
+235:11:Call -> U | Const:bool:False
+235:11:Name -> Func:salt.modules.hosts.has_pair
+235:20:Name -> U
+235:24:Name -> U
+238:4:Call -> ERR
+238:4:Attribute -> ERR
+238:4:Name -> ERR
+239:10:Call -> U | Const:str:''
+239:10:Name -> Func:salt.modules.hosts._get_or_create_hostfile
+240:9:Call -> U
+240:9:Attribute -> Func:salt.utils.files.fopen
+240:9:Attribute -> Module:salt.utils.files
+240:9:Attribute -> Module:salt.utils
+240:9:Name -> Module:salt
+240:32:Name -> U | Const:str:''
+241:16:Call -> U
+241:16:Attribute -> U
+241:16:Name -> U
+242:18:Call -> Inst:builtins.enumerate
+242:18:Name -> Class:builtins.enumerate
+242:28:Name -> U
+243:18:Call -> U
+243:18:Attribute -> U
+243:18:Name -> U
+243:24:Name -> U
+244:15:Name -> U
+246:11:Call -> U
+246:11:Attribute -> U
+246:11:Name -> U
+248:16:Call -> U
+248:16:Attribute -> U
+248:16:Name -> U
+250:19:Name -> U
+251:33:Call -> U
+251:33:Attribute -> U
+251:33:Name -> U
+252:22:Call -> U | Const:bytes:b''
+252:22:Attribute -> U | BM:builtins.bytes.lstrip
+252:22:Call -> U | Inst:builtins.bytes
+252:22:Attribute -> Func:salt.utils.stringutils.to_bytes
+252:22:Attribute -> Module:salt.utils.stringutils
+252:22:Attribute -> Module:salt.utils
+252:22:Name -> Module:salt
+252:54:Name -> U
+254:24:Name -> U
+255:20:Call -> U | Inst:builtins.bytes
+255:20:Attribute -> Func:salt.utils.stringutils.to_bytes
+255:20:Attribute -> Module:salt.utils.stringutils
+255:20:Attribute -> Module:salt.utils
+255:20:Name -> Module:salt
+255:52:Name -> U
+256:16:Call -> U
+256:16:Attribute -> U | BM:builtins.bytes.split
+256:16:Name -> U | Inst:builtins.bytes
+257:15:Call -> U | Inst:builtins.bytes
+257:15:Attribute -> Func:salt.utils.stringutils.to_bytes
+257:15:Attribute -> Module:salt.utils.stringutils
+257:15:Attribute -> Module:salt.utils
+257:15:Name -> Module:salt
+257:47:Name -> U
+258:18:Call -> U | Inst:builtins.bytes
+258:18:Attribute -> Func:salt.utils.stringutils.to_bytes
+258:18:Attribute -> Module:salt.utils.stringutils
+258:18:Attribute -> Module:salt.utils
+258:18:Name -> Module:salt
+258:50:Name -> U
+259:11:Name -> U
+259:23:Name -> U | Inst:builtins.bytes
+260:22:Name -> U
+261:28:Name -> U
+262:19:Name -> U
+262:31:Name -> U | Inst:builtins.bytes
+264:27:Name -> U
+265:15:Call -> U
+265:15:Attribute -> U
+265:15:Name -> U
+265:34:Name -> U | Inst:builtins.bytes
+267:16:Name -> U
+267:22:Name -> U
+270:19:Name -> Const:NoneType:None | U | Const:bytes:b''
+271:20:Name -> U
+271:26:Name -> U
+272:24:Name -> U
+274:26:Name -> U
+275:26:Call -> Const:str:'\n' | Const:str:'\r\n' | Inst:builtins.bytes | Const:bytes:b''
+275:26:Attribute -> Func:salt.utils.stringutils.to_bytes
+275:26:Attribute -> Module:salt.utils.stringutils
+275:26:Attribute -> Module:salt.utils
+275:26:Name -> Module:salt
+275:58:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+275:58:Name -> Module:os
+278:20:Name -> U
+278:26:Name -> U
+278:33:Name -> U
+278:43:Call -> Const:str:'\n' | Const:str:'\r\n' | Inst:builtins.bytes | Const:bytes:b''
+278:43:Attribute -> Func:salt.utils.stringutils.to_bytes
+278:43:Attribute -> Module:salt.utils.stringutils
+278:43:Attribute -> Module:salt.utils
+278:43:Name -> Module:salt
+278:75:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+278:75:Name -> Module:os
+279:9:Call -> U
+279:9:Attribute -> Func:salt.utils.files.fopen
+279:9:Attribute -> Module:salt.utils.files
+279:9:Attribute -> Module:salt.utils
+279:9:Name -> Module:salt
+279:32:Name -> U | Const:str:''
+280:8:Call -> U
+280:8:Attribute -> U
+280:8:Name -> U
+280:25:Name -> U
+295:10:Call -> U | Const:str:''
+295:10:Name -> Func:salt.modules.hosts._get_or_create_hostfile
+296:11:Call -> Const:bool:False | U
+296:11:Attribute -> Func:genericpath.isfile | U
+296:11:Attribute -> Module:posixpath | Module:ntpath
+296:11:Name -> Module:os
+296:26:Name -> U | Const:str:''
+299:7:Call -> U | Const:bool:False
+299:7:Name -> Func:salt.modules.hosts.has_pair
+299:16:Name -> U
+299:20:Name -> U
+302:12:Call -> U | Inst:collections.OrderedDict
+302:12:Name -> Func:salt.modules.hosts._list_hosts
+305:4:Call -> ERR
+305:4:Attribute -> ERR
+305:4:Name -> ERR
+308:16:Call -> U
+308:16:Attribute -> U | BM:builtins.dict.items
+308:16:Name -> U | Inst:collections.OrderedDict
+309:25:Call -> Inst:builtins.enumerate
+309:25:Name -> Class:builtins.enumerate
+309:35:Name -> U
+310:15:Call -> ERR
+310:15:Name -> Func:builtins.isinstance
+310:26:Name -> U
+310:29:Name -> Class:builtins.list
+311:19:Call -> U
+311:19:Attribute -> U
+311:19:Name -> U
+311:44:Name -> U
+311:49:Name -> U
+312:20:Call -> U
+312:20:Attribute -> U
+312:20:Name -> U
+312:29:Name -> U
+312:34:Name -> U
+314:11:Name -> Const:bool:False | Const:bool:True
+315:8:Call -> U
+315:8:Attribute -> U
+315:8:Call -> U
+315:8:Attribute -> U
+315:8:Call -> U
+315:8:Attribute -> U | BM:builtins.dict.setdefault
+315:8:Name -> U | Inst:collections.OrderedDict
+315:25:Name -> U
+315:66:Name -> U
+316:4:Call -> Const:NoneType:None
+316:4:Name -> Func:salt.modules.hosts._write_hosts
+316:17:Name -> U | Inst:collections.OrderedDict
+331:10:Call -> U | Const:str:''
+331:10:Name -> Func:salt.modules.hosts._get_or_create_hostfile
+332:11:Call -> Const:bool:False | U
+332:11:Attribute -> Func:genericpath.isfile | U
+332:11:Attribute -> Module:posixpath | Module:ntpath
+332:11:Name -> Module:os
+332:26:Name -> U | Const:str:''
+335:12:Call -> U | Inst:collections.OrderedDict
+335:12:Name -> Func:salt.modules.hosts._list_hosts
+338:4:Call -> ERR
+338:4:Attribute -> ERR
+338:4:Name -> ERR
+340:7:Name -> U
+340:17:Name -> U | Inst:collections.OrderedDict
+343:20:Name -> U | Inst:collections.OrderedDict
+343:26:Name -> U
+344:11:Name -> U
+344:22:Name -> U | Inst:collections.OrderedDict
+344:28:Name -> U
+345:12:Name -> U | Inst:collections.OrderedDict
+345:18:Name -> U
+345:35:Name -> U
+346:12:Call -> Const:NoneType:None
+346:12:Name -> Func:salt.modules.hosts._write_hosts
+346:25:Name -> U | Inst:collections.OrderedDict
+350:8:Name -> U | Inst:collections.OrderedDict
+350:14:Name -> U
+350:31:Name -> U
+351:8:Call -> Const:NoneType:None
+351:8:Name -> Func:salt.modules.hosts._write_hosts
+351:21:Name -> U | Inst:collections.OrderedDict
+357:25:Call -> U
+357:25:Attribute -> U
+357:25:Name -> U
+358:11:Name -> U
+359:15:Call -> U
+359:15:Attribute -> U
+359:15:Name -> U
+360:23:Call -> Const:str:''
+360:23:Attribute -> BM:builtins.str.join
+360:31:Name -> U
+362:32:Name -> U
+363:27:Call -> U
+363:27:Attribute -> BM:builtins.str.format
+364:24:Name -> U
+364:28:Call -> Const:str:''
+364:28:Attribute -> BM:builtins.str.join
+364:37:Name -> U
+364:60:Name -> U
+367:27:Call -> U
+367:27:Attribute -> BM:builtins.str.format
+367:45:Name -> U
+367:49:Call -> Const:str:''
+367:49:Attribute -> BM:builtins.str.join
+367:58:Name -> U
+368:8:Call -> ERR
+368:8:Attribute -> BM:builtins.list.append
+368:8:Name -> List:0
+368:21:Name -> Const:str:'' | U
+370:10:Call -> U | Const:str:''
+370:10:Name -> Func:salt.modules.hosts._get_or_create_hostfile
+371:9:Call -> U
+371:9:Attribute -> Func:salt.utils.files.fopen
+371:9:Attribute -> Module:salt.utils.files
+371:9:Attribute -> Module:salt.utils
+371:9:Name -> Module:salt
+371:32:Name -> U | Const:str:''
+372:20:Name -> List:0
+373:15:Call -> U
+373:15:Attribute -> U
+373:15:Name -> U
+376:16:Call -> U
+376:16:Attribute -> U
+376:16:Name -> U
+377:20:Call -> U
+377:20:Attribute -> Func:salt.utils.stringutils.to_str
+377:20:Attribute -> Module:salt.utils.stringutils
+377:20:Attribute -> Module:salt.utils
+377:20:Name -> Module:salt
+377:50:Call -> U
+377:50:Attribute -> U
+377:50:Name -> U
+377:65:Call -> Const:str:''
+377:65:Name -> Class:builtins.str
+377:69:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+377:69:Name -> Module:os

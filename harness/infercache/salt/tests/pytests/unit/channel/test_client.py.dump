@@ -1,0 +1,92 @@
+11:8:Attribute -> Class:salt.channel.client.AsyncReqChannel
+11:8:Attribute -> Module:salt.channel.client
+11:8:Attribute -> Module:salt.channel
+11:8:Name -> Module:salt
+12:8:Attribute -> Class:salt.channel.client.AsyncPubChannel
+12:8:Attribute -> Module:salt.channel.client
+12:8:Attribute -> Module:salt.channel
+12:8:Name -> Module:salt
+18:15:Name -> List:2
+19:20:Name -> List:2
+20:19:Call -> Const:bool:True
+20:19:Name -> Func:builtins.hasattr
+20:27:Name -> Class:salt.channel.client.AsyncReqChannel | Class:salt.channel.client.AsyncPubChannel
+20:32:Name -> Const:str:'async_methods' | Const:str:'close_methods'
+21:19:Call -> Const:bool:True
+21:19:Name -> Func:builtins.isinstance
+21:30:Call -> List:5
+21:30:Name -> Func:builtins.getattr
+21:38:Name -> Class:salt.channel.client.AsyncReqChannel | Class:salt.channel.client.AsyncPubChannel
+21:43:Name -> Const:str:'async_methods' | Const:str:'close_methods'
+21:50:Name -> Class:builtins.list
+22:24:Call -> List:5
+22:24:Name -> Func:builtins.getattr
+22:32:Name -> Class:salt.channel.client.AsyncReqChannel | Class:salt.channel.client.AsyncPubChannel
+22:37:Name -> Const:str:'async_methods' | Const:str:'close_methods'
+23:23:Call -> Const:bool:True
+23:23:Name -> Func:builtins.hasattr
+23:31:Name -> Class:salt.channel.client.AsyncReqChannel | Class:salt.channel.client.AsyncPubChannel
+23:36:Name -> Const:str:'crypted_transfer_decode_dictentry' | Const:str:'_crypted_transfer' | Const:str:'_uncrypted_transfer' | Const:str:'send' | Const:str:'connect'
+38:4:Name -> U
+38:29:Call -> Const:str:''
+38:29:Name -> Class:builtins.str
+38:33:Name -> U
+39:4:Name -> U
+40:4:Name -> U
+43:4:Call -> Inst:salt.channel.client.AsyncPubChannel
+43:4:Attribute -> BM:salt.channel.client.AsyncPubChannel.factory
+43:4:Attribute -> Class:salt.channel.client.AsyncPubChannel
+43:4:Attribute -> Module:salt.channel.client
+43:4:Attribute -> Module:salt.channel
+43:4:Name -> Module:salt
+43:48:Name -> U
+47:15:Name -> U
+48:4:Call -> U
+48:4:Attribute -> U
+48:4:Name -> U
+49:4:Call -> U
+49:4:Attribute -> U
+49:4:Name -> U
+52:9:Call -> U
+52:9:Attribute -> U
+52:9:Name -> U
+52:23:Attribute -> Class:salt.exceptions.SaltClientError
+52:23:Attribute -> Module:salt.exceptions
+52:23:Name -> Module:salt
+53:8:Call -> Inst:salt.channel.client.AsyncPubChannel
+53:8:Attribute -> BM:salt.channel.client.AsyncPubChannel.factory
+53:8:Attribute -> Class:salt.channel.client.AsyncPubChannel
+53:8:Attribute -> Module:salt.channel.client
+53:8:Attribute -> Module:salt.channel
+53:8:Name -> Module:salt
+53:52:Name -> U
+56:1:Attribute -> U
+56:1:Attribute -> U
+56:1:Name -> U
+65:18:Call -> ExcInst:salt.exceptions.AuthenticationError
+65:18:Attribute -> Class:salt.exceptions.AuthenticationError
+65:18:Attribute -> Module:salt.crypt
+65:18:Name -> Module:salt
+69:12:Name -> Inst:tests.pytests.unit.channel.test_client.test_async_pub_channel_decode_payload_drops_undecrypted_payload.DummyAuth
+69:29:Call -> Inst:tests.pytests.unit.channel.test_client.test_async_pub_channel_decode_payload_drops_undecrypted_payload.DummyCrypticle
+69:29:Name -> Class:tests.pytests.unit.channel.test_client.test_async_pub_channel_decode_payload_drops_undecrypted_payload.DummyCrypticle
+70:12:Name -> Inst:tests.pytests.unit.channel.test_client.test_async_pub_channel_decode_payload_drops_undecrypted_payload.DummyAuth
+73:18:Call -> ExcInst:salt.exceptions.AuthenticationError
+73:18:Attribute -> Class:salt.exceptions.AuthenticationError
+73:18:Attribute -> Module:salt.crypt
+73:18:Name -> Module:salt
+75:14:Call -> Inst:salt.channel.client.AsyncPubChannel
+75:14:Attribute -> BM:builtins.object.__new__ | BM:builtins.object.__new__
+75:14:Name -> Class:builtins.object
+75:29:Attribute -> Class:salt.channel.client.AsyncPubChannel
+75:29:Attribute -> Module:salt.channel.client
+75:29:Attribute -> Module:salt.channel
+75:29:Name -> Module:salt
+76:4:Name -> Inst:salt.channel.client.AsyncPubChannel
+77:4:Name -> Inst:salt.channel.client.AsyncPubChannel
+77:19:Call -> Inst:tests.pytests.unit.channel.test_client.test_async_pub_channel_decode_payload_drops_undecrypted_payload.DummyAuth
+77:19:Name -> Class:tests.pytests.unit.channel.test_client.test_async_pub_channel_decode_payload_drops_undecrypted_payload.DummyAuth
+81:17:Call -> Const:NoneType:None | Const:NoneType:None | Dict:2
+81:17:Attribute -> BM:salt.channel.client.AsyncPubChannel._decode_payload
+81:17:Name -> Inst:salt.channel.client.AsyncPubChannel
+81:41:Name -> Dict:2

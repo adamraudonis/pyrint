@@ -1,0 +1,114 @@
+20:11:Call -> U
+20:11:Attribute -> Func:salt.utils.platform.is_windows
+20:11:Attribute -> Module:salt.utils.platform
+20:11:Attribute -> Module:salt.utils
+20:11:Name -> Module:salt
+23:11:Name -> Const:str:'dotnet'
+38:15:Call -> Tuple:2 | Tuple:2 | List:0
+38:15:Attribute -> Func:salt.utils.win_reg.list_keys
+38:15:Name -> Module:salt.utils.win_reg
+38:38:Name -> Const:str:'HKLM'
+38:48:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+41:11:Name -> U
+43:11:Name -> U
+45:11:Name -> U
+47:11:Name -> U
+49:11:Name -> U
+51:11:Name -> U
+53:11:Name -> U
+55:11:Name -> U
+57:11:Name -> U
+59:11:Name -> U
+63:19:Name -> Tuple:2 | Tuple:2 | List:0
+65:11:Call -> ERR
+65:11:Attribute -> BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith
+65:11:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+66:15:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+66:15:Attribute -> Func:salt.utils.win_reg.value_exists
+66:15:Name -> Module:salt.utils.win_reg
+67:21:Name -> Const:str:'HKLM'
+67:31:Call -> Const:str:''
+67:31:Attribute -> BM:builtins.str.join
+67:42:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+67:47:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+70:26:Call -> Dict:6
+70:26:Attribute -> Func:salt.utils.win_reg.read_value
+70:26:Name -> Module:salt.utils.win_reg
+71:25:Name -> Const:str:'HKLM'
+71:35:Call -> Const:str:''
+71:35:Attribute -> BM:builtins.str.join
+71:46:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+71:51:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+73:23:Name -> Const:NoneType:None
+75:26:Call -> Dict:6
+75:26:Attribute -> Func:salt.utils.win_reg.read_value
+75:26:Name -> Module:salt.utils.win_reg
+76:25:Name -> Const:str:'HKLM'
+76:35:Call -> Const:str:''
+76:35:Attribute -> BM:builtins.str.join
+76:46:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+76:51:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+78:21:Call -> Dict:6
+78:21:Attribute -> Func:salt.utils.win_reg.read_value
+78:21:Name -> Module:salt.utils.win_reg
+79:25:Name -> Const:str:'HKLM'
+79:35:Call -> Const:str:''
+79:35:Attribute -> BM:builtins.str.join
+79:46:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+79:51:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+81:17:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+81:17:Attribute -> Func:salt.utils.win_reg.value_exists
+81:17:Name -> Module:salt.utils.win_reg
+82:21:Name -> Const:str:'HKLM'
+82:31:Call -> Const:str:''
+82:31:Attribute -> BM:builtins.str.join
+82:42:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+82:47:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+85:26:Call -> Dict:6
+85:26:Attribute -> Func:salt.utils.win_reg.read_value
+85:26:Name -> Module:salt.utils.win_reg
+86:25:Name -> Const:str:'HKLM'
+86:35:Call -> Const:str:''
+86:35:Attribute -> BM:builtins.str.join
+86:46:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+86:51:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+88:23:Name -> Const:NoneType:None
+90:26:Call -> Const:str:'4.8' | Const:str:'4.7.2' | Const:str:'4.7.1' | Const:str:'4.7' | Const:str:'4.6.2' | Const:str:'4.6.1' | Const:str:'4.6' | Const:str:'4.5.2' | Const:str:'4.5.1' | Const:str:'4.5'
+90:26:Name -> Func:salt.utils.win_dotnet.versions.dotnet_45_plus_versions
+91:20:Call -> Dict:6
+91:20:Attribute -> Func:salt.utils.win_reg.read_value
+91:20:Name -> Module:salt.utils.win_reg
+92:29:Name -> Const:str:'HKLM'
+93:28:Call -> Const:str:''
+93:28:Attribute -> BM:builtins.str.join
+93:39:Name -> Const:str:'SOFTWARE\\Microsoft\\NET Framework Setu
+93:44:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+101:41:Name -> Const:NoneType:None | Const:str:'N/A'
+101:33:Name -> Const:NoneType:None | Const:str:'N/A'
+102:12:Call -> ERR
+102:12:Attribute -> BM:builtins.list.append
+102:12:Name -> Dict:2
+102:43:Name -> Const:NoneType:None | Const:str:'4.8' | Const:str:'4.7.2' | Const:str:'4.7.1' | Const:str:'4.7' | Const:str:'4.6.2' | Const:str:'4.6.1' | Const:str:'4.6' | Const:str:'4.5.2' | Const:str:'4.5.1' | Const:str:'4.5'
+103:12:Name -> Dict:2
+103:35:Name -> Const:bool:False | Const:str:'Cannot find key: Uninferable\\None' | Const:str:'Cannot find key: Uninferable\\Uninferab | Const:bool:False | Const:str:'Access is denied: Uninferable\\None' | Const:str:'Access is denied: Uninferable\\Uninfera
+104:27:Name -> Const:NoneType:None | Const:str:'4.8' | Const:str:'4.7.2' | Const:str:'4.7.1' | Const:str:'4.7' | Const:str:'4.6.2' | Const:str:'4.6.1' | Const:str:'4.6' | Const:str:'4.5.2' | Const:str:'4.5.1' | Const:str:'4.5'
+105:32:Name -> Const:NoneType:None | Const:str:'N/A'
+106:27:Name -> Const:NoneType:None | Const:str:'4.8' | Const:str:'4.7.2' | Const:str:'4.7.1' | Const:str:'4.7' | Const:str:'4.6.2' | Const:str:'4.6.1' | Const:str:'4.6' | Const:str:'4.5.2' | Const:str:'4.5.1' | Const:str:'4.5'
+106:36:Name -> Const:str:' SPNone' | Const:str:' SPN/A' | Const:str:''
+109:11:Name -> Dict:2
+119:11:Call -> ERR
+119:11:Name -> Func:builtins.sorted
+119:18:Call -> Dict:2
+119:18:Name -> Func:salt.utils.win_dotnet.versions
+133:11:Call -> Dict:2
+133:11:Name -> Func:salt.utils.win_dotnet.versions
+149:26:Call -> U
+149:26:Name -> Func:salt.utils.win_dotnet.versions_list
+150:11:Call -> Inst:salt.utils.versions.Version
+150:11:Name -> Class:salt.utils.versions.Version
+150:19:Name -> U
+150:38:Call -> Inst:salt.utils.versions.Version
+150:38:Name -> Class:salt.utils.versions.Version
+150:46:Call -> Const:str:''
+150:46:Name -> Class:builtins.str
+150:50:Name -> U

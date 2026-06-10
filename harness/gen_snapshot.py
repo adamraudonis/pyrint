@@ -57,6 +57,36 @@ def const_value(v):
     return {"t": "other", "repr": repr(v)[:200]}
 
 
+def _empty_inf(node):
+    """What this EmptyNode infers to (EmptyNode._infer ->
+    infer_ast_from_something on the live object), as resolvable
+    descriptors: the Rust engine cannot introspect live objects."""
+    from astroid import bases as _bases, util as _util
+
+    try:
+        vals = list(node.infer())
+    except Exception:  # noqa: BLE001
+        return None
+    out = []
+    for v in vals[:4]:
+        try:
+            if isinstance(v, _util.UninferableBase):
+                out.append({"t": "u"})
+            elif isinstance(v, nodes.Const):
+                out.append({"t": "const", "v": const_value(v.value)})
+            elif isinstance(v, nodes.ClassDef):
+                out.append({"t": "class", "q": v.qname()})
+            elif isinstance(v, nodes.FunctionDef):
+                out.append({"t": "func", "q": v.qname()})
+            elif isinstance(v, _bases.Instance):
+                out.append({"t": "inst", "q": v._proxied.qname()})
+            else:
+                out.append({"t": "u"})
+        except Exception:  # noqa: BLE001
+            out.append({"t": "u"})
+    return out
+
+
 def ser(node):
     global COUNTER
     if node is None:
@@ -83,6 +113,16 @@ def ser(node):
         d["gnames"] = list(node.names)
     if isinstance(node, nodes.FunctionDef):
         d["ftype"] = node.type  # method/function/classmethod/staticmethod
+    if isinstance(node, (nodes.ClassDef, nodes.FunctionDef)):
+        # raw-built nodes are appended/reparented by add_local_node and the
+        # same object can serialize at several tree positions; record the
+        # authoritative runtime qname so the Rust side renders identically.
+        try:
+            d["qn"] = node.qname()
+        except Exception:  # noqa: BLE001
+            pass
+    if type(node).__name__ == "EmptyNode":
+        d["einf"] = _empty_inf(node)
     # children in _astroid_fields order
     ch = {}
     for field in node._astroid_fields:
@@ -93,17 +133,34 @@ def ser(node):
     if hasattr(node, "locals") and isinstance(
         node, (nodes.Module, nodes.ClassDef, nodes.FunctionDef, nodes.Lambda)
     ):
+        # Nodes reachable only through locals (brain-replaced str/bytes
+        # methods, bootstrap set_local extras like 'generator') are
+        # serialized into an "xtra" sidecar list so locals refs resolve.
         loc = {}
+        xtra = []
         for name, vals in node.locals.items():
-            ids = [NODE_IDS[id(v)] for v in vals if id(v) in NODE_IDS]
+            ids = []
+            for v in vals:
+                if id(v) not in NODE_IDS:
+                    xtra.append(ser(v))
+                ids.append(NODE_IDS[id(v)])
             loc[name] = ids
         d["locals"] = loc
+        if xtra:
+            d["xtra"] = xtra
     if isinstance(node, nodes.ClassDef):
         ia = {}
+        xtra_ia = []
         for name, vals in node.instance_attrs.items():
-            ids = [NODE_IDS[id(v)] for v in vals if id(v) in NODE_IDS]
+            ids = []
+            for v in vals:
+                if id(v) not in NODE_IDS:
+                    xtra_ia.append(ser(v))
+                ids.append(NODE_IDS[id(v)])
             ia[name] = ids
         d["iattrs"] = ia
+        if xtra_ia:
+            d["xtra_iattrs"] = xtra_ia
         d["basenames"] = list(node.basenames)
     return d
 
@@ -127,6 +184,14 @@ def snapshot_module(modname):
 
 
 def main():
+    # Force bootstrap FIRST so that 'builtins' is the bootstrap module
+    # (brain str/bytes method stubs, synthetic generator/async_generator
+    # classes, NoneType/... extras). Without this, ast_from_module_name
+    # ('builtins') as the very first astroid call builds an UNEXTENDED
+    # duplicate (manager.module_build path) and we'd snapshot that.
+    from astroid.builder import AstroidBuilder
+
+    AstroidBuilder(MANAGER)  # triggers manager.bootstrap() once
     os.makedirs(OUT_DIR, exist_ok=True)
     mods = ["builtins"]
     mods += [m for m in sys.builtin_module_names if not m.startswith("_") or True]

@@ -1,0 +1,132 @@
+51:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:6:Attribute -> Func:logging.getLogger
+51:6:Name -> Module:logging
+51:24:Name -> Const:str:'salt.cluster.healthchecks' | Const:str:'__main__'
+82:15:Call -> U
+82:15:Attribute -> U
+82:15:Name -> U
+83:11:Name -> U
+85:11:Call -> Inst:pathlib.Path
+85:11:Attribute -> Class:pathlib.Path
+85:11:Name -> Module:pathlib
+85:24:Name -> U
+85:36:Name -> Const:str:'health'
+100:11:Call -> Const:NoneType:None | U
+100:11:Name -> Func:salt.cluster.healthchecks.health_dir
+100:22:Name -> U
+101:7:Name -> Const:NoneType:None | U
+104:11:Call -> U
+104:11:Attribute -> U
+104:11:Name -> Const:NoneType:None | U
+105:12:Call -> Const:NoneType:None | Const:NoneType:None
+105:12:Attribute -> Func:shutil.rmtree
+105:12:Name -> Module:shutil
+105:26:Name -> Const:NoneType:None | U
+106:8:Call -> U
+106:8:Attribute -> U
+106:8:Name -> Const:NoneType:None | U
+107:11:Name -> Class:builtins.OSError
+108:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+108:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+108:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+108:60:Name -> Const:NoneType:None | U
+108:66:Name -> ExcInst:builtins.OSError
+113:11:Call -> Const:NoneType:None | U
+113:11:Name -> Func:salt.cluster.healthchecks.health_dir
+113:22:Name -> U
+114:7:Name -> Const:NoneType:None | U
+116:11:Name -> Const:NoneType:None | U
+116:18:Name -> U
+118:8:Call -> U
+118:8:Attribute -> U
+118:8:Attribute -> U
+118:8:Name -> U
+122:14:Call -> U
+122:14:Attribute -> U
+122:14:Name -> U
+122:31:Attribute -> U
+122:31:Name -> U
+123:8:Call -> U
+123:8:Attribute -> U
+123:8:Name -> U
+123:23:Name -> Const:str:'' | U
+124:8:Call -> U
+124:8:Attribute -> U
+124:8:Name -> U
+124:20:Name -> U
+125:11:Name -> Class:builtins.OSError
+126:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+126:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+126:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+126:60:Name -> U
+126:66:Name -> ExcInst:builtins.OSError
+136:4:Call -> Const:NoneType:None
+136:4:Name -> Func:salt.cluster.healthchecks._write_sentinel
+136:20:Name -> U
+136:26:Name -> Const:str:'startup'
+136:49:Call -> Const:str:''
+136:49:Name -> Class:builtins.str
+136:53:Call -> Inst:builtins.int
+136:53:Name -> Class:builtins.int
+136:57:Call -> ERR
+136:57:Attribute -> Func:time.time
+136:57:Name -> Module:time
+137:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+137:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+137:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+137:61:Call -> Const:NoneType:None | U
+137:61:Name -> Func:salt.cluster.healthchecks.health_dir
+137:72:Name -> U
+145:4:Call -> Const:NoneType:None
+145:4:Name -> Func:salt.cluster.healthchecks._write_sentinel
+145:20:Name -> U
+145:26:Name -> Const:str:'ready'
+145:47:Call -> Const:str:''
+145:47:Name -> Class:builtins.str
+145:51:Call -> Inst:builtins.int
+145:51:Name -> Class:builtins.int
+145:55:Call -> ERR
+145:55:Attribute -> Func:time.time
+145:55:Name -> Module:time
+146:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+146:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+146:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+146:63:Call -> Const:NoneType:None | U
+146:63:Name -> Func:salt.cluster.healthchecks.health_dir
+146:74:Name -> U
+158:11:Call -> Const:NoneType:None | U
+158:11:Name -> Func:salt.cluster.healthchecks.health_dir
+158:22:Name -> U
+159:7:Name -> Const:NoneType:None | U
+161:11:Name -> Const:NoneType:None | U
+161:18:Name -> Const:str:'alive'
+163:8:Call -> U
+163:8:Attribute -> U
+163:8:Attribute -> U
+163:8:Name -> U
+166:8:Call -> U
+166:8:Attribute -> U
+166:8:Name -> U
+171:14:Call -> ERR
+171:14:Attribute -> Func:time.time
+171:14:Name -> Module:time
+172:8:Call -> ERR
+172:8:Attribute -> Func:posix.utime
+172:8:Name -> Module:os
+172:17:Name -> U
+172:24:Name -> U
+172:29:Name -> U
+173:11:Name -> Class:builtins.OSError
+174:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+174:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+174:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+174:60:Name -> U
+174:66:Name -> ExcInst:builtins.OSError
+179:11:Call -> U
+179:11:Name -> Class:builtins.bool
+179:16:Call -> U
+179:16:Attribute -> U
+179:16:Name -> U
+179:43:Call -> U
+179:43:Attribute -> U
+179:43:Name -> U

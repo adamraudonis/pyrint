@@ -1,0 +1,125 @@
+17:15:Name -> U
+17:20:Name -> U
+17:36:Attribute -> Const:str:' \t\n\r\x0b\x0c'
+17:36:Name -> Module:string
+18:7:Call -> ERR
+18:7:Name -> Func:builtins.any
+18:11:Name -> U
+19:14:Call -> ExcInst:django.core.exceptions.ValidationError
+19:14:Name -> Class:django.core.exceptions.ValidationError
+20:12:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+20:12:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+25:18:Attribute -> Class:django.db.models.manager.Manager
+25:18:Name -> Module:django.db.models
+29:11:Name -> U
+29:26:Name -> Dict:0 | Dict:0
+30:19:Call -> ERR
+30:19:Attribute -> ERR
+30:19:Name -> Inst:django.contrib.sites.models.SiteManager
+30:31:Name -> U
+31:12:Name -> Dict:0 | Dict:0
+31:23:Name -> U
+31:34:Name -> U
+32:15:Name -> Dict:0 | Dict:0
+32:26:Name -> U
+35:15:Call -> U
+35:15:Attribute -> U
+35:15:Name -> U
+38:15:Name -> U
+38:27:Name -> Dict:0 | Dict:0
+39:16:Name -> Dict:0 | Dict:0
+39:27:Name -> U
+39:35:Call -> ERR
+39:35:Attribute -> ERR
+39:35:Name -> Inst:django.contrib.sites.models.SiteManager
+39:59:Name -> U
+40:19:Name -> Dict:0 | Dict:0
+40:30:Name -> U
+41:15:Attribute -> ERR
+41:15:Name -> Class:django.contrib.sites.models.Site
+43:27:Call -> Tuple:2 | Tuple:2
+43:27:Name -> Func:django.http.request.split_domain_port
+43:45:Name -> U
+44:15:Name -> U | Const:str:''
+44:29:Name -> Dict:0 | Dict:0
+45:16:Name -> Dict:0 | Dict:0
+45:27:Name -> U | Const:str:''
+45:37:Call -> ERR
+45:37:Attribute -> ERR
+45:37:Name -> Inst:django.contrib.sites.models.SiteManager
+45:61:Name -> U | Const:str:''
+46:19:Name -> Dict:0 | Dict:0
+46:30:Name -> U | Const:str:''
+57:11:Call -> Const:int:1
+57:11:Name -> Func:builtins.getattr
+57:19:Name -> Inst:django.conf.LazySettings
+58:22:Attribute -> Const:int:1
+58:22:Name -> Inst:django.conf.LazySettings
+59:19:Call -> U
+59:19:Attribute -> BM:django.contrib.sites.models.SiteManager._get_site_by_id
+59:19:Name -> Inst:django.contrib.sites.models.SiteManager
+59:40:Name -> Const:int:1
+60:13:Name -> Const:NoneType:None | U
+61:19:Call -> U
+61:19:Attribute -> BM:django.contrib.sites.models.SiteManager._get_site_by_request
+61:19:Name -> Inst:django.contrib.sites.models.SiteManager
+61:45:Name -> U
+63:14:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+63:14:Name -> Class:django.core.exceptions.ImproperlyConfigured
+76:15:Call -> ERR
+76:15:Attribute -> ERR
+76:15:Name -> Inst:django.contrib.sites.models.SiteManager
+76:31:Name -> U
+79:11:Attribute -> Class:django.db.models.base.Model
+79:11:Name -> Module:django.db.models
+80:13:Call -> Inst:django.db.models.fields.CharField
+80:13:Attribute -> Class:django.db.models.fields.CharField
+80:13:Name -> Module:django.db.models
+81:8:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+81:8:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+83:20:Name -> Func:django.contrib.sites.models._simple_domain_name_validator
+86:11:Call -> Inst:django.db.models.fields.CharField
+86:11:Attribute -> Class:django.db.models.fields.CharField
+86:11:Name -> Module:django.db.models
+86:28:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+86:28:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+88:14:Call -> Inst:django.contrib.sites.models.SiteManager
+88:14:Name -> Class:django.contrib.sites.models.SiteManager
+92:23:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+92:23:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+93:30:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+93:30:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+97:15:Attribute -> Const:str:'test\ttest' | Const:str:'test\ntest'
+97:15:Name -> Inst:django.contrib.sites.models.Site
+100:16:Attribute -> Const:str:'test\ttest' | Const:str:'test\ntest'
+100:16:Name -> Inst:django.contrib.sites.models.Site
+107:15:Name -> Dict:0
+108:12:Name -> Dict:0
+110:12:Name -> Dict:0 | Dict:0
+110:23:Attribute -> U
+110:23:Name -> U
+111:11:Name -> Class:builtins.KeyError
+114:12:Name -> Dict:0 | Dict:0
+114:23:Attribute -> ERR
+114:23:Call -> ERR
+114:23:Attribute -> ERR
+114:23:Call -> ERR
+114:23:Attribute -> ERR
+114:23:Attribute -> Inst:django.contrib.sites.models.SiteManager
+114:23:Name -> Class:django.contrib.sites.models.Site
+114:42:Name -> U
+114:56:Attribute -> U
+114:56:Name -> U
+115:12:Name -> Class:builtins.KeyError
+115:22:Attribute -> ERR
+115:22:Name -> Class:django.contrib.sites.models.Site
+119:0:Call -> Const:NoneType:None
+119:0:Attribute -> BM:django.db.models.signals.ModelSignal.connect
+119:0:Name -> Inst:django.db.models.signals.ModelSignal
+119:17:Name -> Func:django.contrib.sites.models.clear_site_cache
+119:42:Name -> Class:django.contrib.sites.models.Site
+120:0:Call -> Const:NoneType:None
+120:0:Attribute -> BM:django.db.models.signals.ModelSignal.connect
+120:0:Name -> Inst:django.db.models.signals.ModelSignal
+120:19:Name -> Func:django.contrib.sites.models.clear_site_cache
+120:44:Name -> Class:django.contrib.sites.models.Site

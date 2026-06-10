@@ -1,0 +1,500 @@
+100:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+100:6:Attribute -> Func:logging.getLogger
+100:6:Name -> Module:logging
+100:24:Name -> Const:str:'salt.modules.nxos' | Const:str:'__main__'
+116:11:Name -> Const:str:'nxos'
+127:7:Call -> Const:bool:False | Const:bool:True
+127:7:Attribute -> Func:salt.utils.platform.is_proxy
+127:7:Attribute -> Module:salt.utils.platform
+127:7:Attribute -> Module:salt.utils
+127:7:Name -> Module:salt
+128:15:Call -> ERR
+128:15:Name -> ERR
+129:11:Call -> ERR
+129:11:Name -> ERR
+129:36:Name -> Dict:0
+162:20:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+162:20:Name -> Func:salt.modules.nxos.get_user
+162:29:Name -> U
+162:41:Name -> Dict:0
+163:11:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+165:14:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+167:15:Call -> U
+167:15:Attribute -> U
+167:15:Call -> U
+167:15:Attribute -> Func:re.search
+167:15:Name -> Module:re
+167:52:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+168:7:Name -> Const:bool:False | U
+169:43:Call -> U
+169:43:Attribute -> U
+169:43:Call -> U
+169:43:Attribute -> Func:re.search
+169:43:Name -> Module:re
+170:43:Name -> U
+172:19:Call -> U | Const:NoneType:None
+172:19:Name -> Func:salt.utils.pycrypto.gen_hash
+173:23:Name -> U
+174:21:Name -> U
+175:22:Name -> Dict:4
+175:38:Name -> U
+178:19:Name -> U
+179:7:Name -> U | Const:NoneType:None
+179:19:Name -> U
+192:11:Name -> U
+192:19:Call -> List:0 | U | List:0
+192:19:Name -> Func:salt.modules.nxos.get_roles
+192:29:Name -> U
+192:41:Name -> Dict:0
+207:14:Call -> U
+207:14:Attribute -> Func:re.compile
+207:14:Name -> Module:re
+207:25:Name -> U
+207:34:Attribute -> Const:int:8
+207:34:Name -> Module:re
+208:11:Call -> U
+208:11:Attribute -> U
+208:11:Name -> U
+208:27:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+208:27:Name -> Func:salt.modules.nxos.show_run
+208:38:Name -> Dict:0
+219:11:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+219:11:Name -> Func:salt.modules.nxos.get_user
+219:20:Name -> U
+220:11:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+222:35:Name -> U
+223:11:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+223:11:Name -> Func:salt.modules.nxos.sendline
+223:20:Name -> Const:str:'show user-account Uninferable'
+223:31:Name -> Dict:0
+224:7:Call -> ERR
+224:7:Name -> Func:builtins.isinstance
+224:18:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+224:24:Name -> Class:builtins.list
+225:15:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+226:12:Call -> U
+226:12:Attribute -> Func:re.search
+226:12:Name -> Module:re
+226:42:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+226:48:Attribute -> Const:int:8
+226:48:Name -> Module:re
+227:7:Name -> U
+228:16:Call -> U
+228:16:Attribute -> U
+228:16:Call -> U
+228:16:Attribute -> U
+228:16:Call -> U
+228:16:Attribute -> U
+228:16:Name -> U
+231:11:Name -> U | List:0
+242:47:Name -> U
+243:11:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+243:11:Name -> Func:salt.modules.nxos.sendline
+243:20:Name -> Const:str:'show run | include "^username Uninferab
+243:31:Name -> Dict:0
+244:7:Call -> ERR
+244:7:Name -> Func:builtins.isinstance
+244:18:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+244:24:Name -> Class:builtins.list
+245:15:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+246:11:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+257:11:Name -> Dict:1
+258:14:Call -> Dict:0 | Dict:1
+258:14:Attribute -> Func:salt.utils.nxos.system_info
+258:14:Attribute -> Module:salt.utils.nxos
+258:14:Attribute -> Module:salt.utils
+258:14:Name -> Module:salt
+258:42:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+258:42:Name -> Func:salt.modules.nxos.show_ver
+258:53:Name -> Dict:0
+259:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+259:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+259:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+259:18:Name -> Dict:0 | Dict:1
+260:8:Call -> ERR
+260:8:Attribute -> BM:builtins.dict.update
+260:8:Name -> Dict:1
+260:46:Name -> Dict:0 | Dict:1
+261:11:Name -> Dict:1
+272:4:Name -> Dict:1
+273:11:Call -> Dict:0
+273:11:Name -> Func:salt.modules.nxos.grains
+273:20:Name -> Dict:0
+305:7:Name -> Const:str:'cli_show_ascii' | U
+305:21:Name -> List:3
+306:14:Call -> U
+306:14:Attribute -> BM:builtins.str.format
+311:12:Name -> List:3
+311:22:Name -> Const:str:'cli_show_ascii' | U
+313:15:Name -> U
+316:11:Call -> Const:bool:False | Const:bool:True
+316:11:Attribute -> Func:salt.utils.platform.is_proxy
+316:11:Attribute -> Module:salt.utils.platform
+316:11:Attribute -> Module:salt.utils
+316:11:Name -> Module:salt
+317:19:Call -> ERR
+317:19:Name -> ERR
+317:46:Name -> U
+317:55:Name -> Const:str:'cli_show_ascii' | U
+317:65:Name -> Dict:0
+319:19:Call -> U
+319:19:Name -> Func:salt.modules.nxos._nxapi_request
+319:34:Name -> U
+319:43:Name -> Const:str:'cli_show_ascii' | U
+319:53:Name -> Dict:0
+320:11:Name -> Class:builtins.OSError
+321:15:Attribute -> Const:str:''
+321:15:Name -> ExcInst:builtins.OSError
+321:35:Name -> Const:str:"\n    Unable to send command to the NX-
+322:11:Name -> Class:salt.exceptions.NxosError
+323:15:Attribute -> Const:str:'' | U | Const:str:''
+323:15:Name -> ExcInst:salt.exceptions.NxosError
+323:35:Name -> Const:str:"\n    Unable to send command to the NX-
+335:11:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+335:11:Name -> Func:salt.modules.nxos.sendline
+335:20:Name -> Const:str:'show version'
+335:31:Name -> Dict:0
+336:7:Call -> ERR
+336:7:Name -> Func:builtins.isinstance
+336:18:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+336:24:Name -> Class:builtins.list
+337:15:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+338:11:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+350:11:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+350:11:Name -> Func:salt.modules.nxos.sendline
+350:20:Name -> Const:str:'show running-config'
+350:31:Name -> Dict:0
+351:7:Call -> ERR
+351:7:Name -> Func:builtins.isinstance
+351:18:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+351:24:Name -> Class:builtins.list
+352:15:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+353:11:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+431:13:Call -> Dict:0
+431:13:Name -> Func:salt.utils.args.clean_kwargs
+431:28:Name -> Dict:0
+432:21:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+432:21:Name -> Func:salt.modules.nxos.sendline
+432:55:Name -> Dict:0
+433:7:Call -> ERR
+433:7:Name -> Func:builtins.isinstance
+433:18:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+433:34:Name -> Class:builtins.list
+434:25:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+435:7:Name -> Const:NoneType:None | U
+436:19:Call -> ERR
+436:19:Name -> ERR
+436:47:Name -> U
+436:68:Name -> Const:str:'base' | U
+437:11:Name -> U
+438:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+438:18:Name -> Class:salt.exceptions.CommandExecutionError
+438:55:Name -> U
+439:9:Name -> Const:NoneType:None | U
+440:11:Call -> ERR
+440:11:Name -> Func:builtins.isinstance
+440:22:Name -> U
+440:32:Name -> Class:builtins.str
+441:24:Name -> U
+442:19:Call -> Const:str:''
+442:19:Attribute -> BM:builtins.str.join
+442:29:Name -> U | List:1
+445:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+445:14:Name -> Class:salt.exceptions.CommandExecutionError
+448:7:Name -> Const:str:'jinja' | U
+449:19:Call -> ERR
+449:19:Name -> ERR
+450:12:Name -> U | Const:str:''
+450:22:Name -> Const:str:'jinja' | U
+450:39:Name -> Const:NoneType:None | U
+450:48:Name -> Const:NoneType:None | U
+450:58:Name -> Const:str:'base' | U
+453:16:Name -> U
+453:33:Call -> U
+453:33:Attribute -> U | BM:builtins.str.splitlines
+453:33:Name -> U | Const:str:''
+453:58:Call -> U
+453:58:Attribute -> U
+453:58:Name -> U
+455:24:Call -> U | List:2 | List:2
+455:24:Name -> Func:salt.modules.nxos._configure_device
+455:42:Name -> List:1 | U
+455:54:Name -> Dict:0
+456:11:Name -> Class:builtins.OSError
+457:15:Attribute -> Const:str:''
+457:15:Name -> ExcInst:builtins.OSError
+457:35:Name -> Const:str:"\n    Unable to send command to the NX-
+458:11:Name -> Class:salt.exceptions.NxosError
+459:15:Attribute -> Const:str:'' | U | Const:str:''
+459:15:Name -> ExcInst:salt.exceptions.NxosError
+459:35:Name -> Const:str:"\n    Unable to send command to the NX-
+461:20:Call -> List:2
+461:20:Name -> Func:salt.modules.nxos._parse_config_result
+461:41:Name -> U | List:2 | List:2
+462:21:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+462:21:Name -> Func:salt.modules.nxos.sendline
+462:55:Name -> Dict:0
+463:7:Call -> ERR
+463:7:Name -> Func:builtins.isinstance
+463:18:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+463:34:Name -> Class:builtins.list
+464:25:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+465:11:Call -> Gen:difflib.unified_diff
+465:11:Attribute -> Func:difflib.unified_diff
+465:11:Name -> Module:difflib
+466:8:Call -> U
+466:8:Attribute -> U | BM:builtins.str.splitlines | BM:builtins.str.splitlines
+466:8:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+466:42:Call -> U
+466:42:Attribute -> U | BM:builtins.str.splitlines | BM:builtins.str.splitlines
+466:42:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+468:17:Call -> Const:str:''
+468:17:Attribute -> BM:builtins.str.join
+468:26:Call -> U
+468:26:Attribute -> U
+468:26:Name -> U
+468:55:Name -> Gen:difflib.unified_diff
+470:9:Name -> List:2
+471:9:Name -> List:2
+472:11:Name -> Const:str:'COMMAND_LIST: '
+472:18:Name -> Const:str:''
+472:30:Name -> U | Const:str:''
+472:42:Name -> Const:str:''
+476:19:Call -> Const:str:''
+476:19:Attribute -> BM:builtins.str.join
+476:31:Call -> U
+476:31:Attribute -> U
+476:31:Name -> U
+476:50:Name -> U
+477:20:Name -> U
+478:7:Call -> ERR
+478:7:Name -> Func:builtins.isinstance
+478:18:Name -> U
+478:33:Name -> Class:builtins.list
+480:11:Call -> ERR
+480:11:Name -> Func:builtins.isinstance
+480:22:Name -> U
+480:40:Name -> Class:builtins.dict
+481:23:Name -> U
+482:26:Name -> U
+482:43:Name -> U
+483:28:Name -> Const:str:'' | U
+485:28:Name -> U
+486:12:Name -> Const:str:''
+486:26:Name -> U | Const:str:''
+508:11:Call -> ERR
+508:11:Name -> Func:builtins.isinstance
+508:22:Name -> U
+508:29:Name -> Class:builtins.list
+509:17:Name -> U
+510:16:Call -> Inst:builtins.enumerate
+510:16:Name -> Class:builtins.enumerate
+510:26:Name -> U | List:1
+511:8:Name -> U | List:1
+511:14:Name -> U
+511:27:Name -> U | List:1
+511:33:Name -> U
+514:17:Call -> Dict:0
+514:17:Name -> Func:salt.utils.args.clean_kwargs
+514:32:Name -> Dict:0
+515:17:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+515:17:Name -> Func:salt.modules.nxos.config
+515:24:Name -> U | List:1
+515:33:Name -> Dict:0
+516:11:Name -> Class:salt.exceptions.CommandExecutionError
+519:11:Call -> U | Inst:builtins.tuple | Inst:builtins.list | Inst:builtins.set | Set:0 | Inst:builtins.dict
+519:11:Attribute -> Func:ast.literal_eval
+519:11:Name -> Module:ast
+519:28:Attribute -> Const:str:'' | U | Const:str:''
+519:28:Name -> ExcInst:salt.exceptions.CommandExecutionError
+521:11:Name -> Const:NoneType:None | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+540:31:Name -> U
+541:13:Call -> Dict:0
+541:13:Name -> Func:salt.utils.args.clean_kwargs
+541:28:Name -> Dict:0
+542:11:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+542:11:Name -> Func:salt.modules.nxos.config
+542:18:Name -> Const:str:'no username Uninferable'
+542:31:Name -> Dict:0
+556:7:Name -> Const:bool:False | U
+557:18:Call -> U
+557:18:Attribute -> Func:re.compile
+557:18:Name -> Module:re
+557:35:Call -> U
+557:35:Attribute -> Func:re.escape
+557:35:Name -> Module:re
+557:45:Name -> U
+557:62:Attribute -> Const:int:8
+557:62:Name -> Module:re
+558:15:Call -> U
+558:15:Attribute -> Func:re.compile
+558:15:Name -> Module:re
+558:26:Call -> U
+558:26:Attribute -> Func:re.escape
+558:26:Name -> Module:re
+558:36:Name -> U
+560:18:Call -> U
+560:18:Attribute -> Func:re.compile
+560:18:Name -> Module:re
+560:29:Name -> U
+560:40:Attribute -> Const:int:8
+560:40:Name -> Module:re
+561:15:Call -> U
+561:15:Attribute -> Func:re.compile
+561:15:Name -> Module:re
+561:26:Name -> U
+564:16:Call -> U
+564:16:Attribute -> U
+564:16:Name -> U
+564:33:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+564:33:Name -> Func:salt.modules.nxos.show_run
+565:8:Call -> ERR
+565:8:Attribute -> BM:builtins.list.append
+565:8:Name -> Dict:2
+565:28:Call -> U
+565:28:Attribute -> U
+565:28:Name -> U
+566:8:Call -> ERR
+566:8:Attribute -> BM:builtins.list.append
+566:8:Name -> Dict:2
+566:28:Call -> U
+566:28:Attribute -> U
+566:28:Name -> U
+566:37:Name -> U
+566:48:Call -> U
+566:48:Attribute -> U
+566:48:Name -> U
+568:13:Call -> Dict:0
+568:13:Name -> Func:salt.utils.args.clean_kwargs
+568:28:Name -> Dict:0
+569:7:Name -> Dict:2
+570:8:Call -> Const:NoneType:None | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+570:8:Name -> Func:salt.modules.nxos.delete_config
+570:22:Name -> Dict:2
+570:38:Name -> Dict:0
+571:7:Name -> Dict:2
+572:8:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+572:8:Name -> Func:salt.modules.nxos.config
+572:15:Name -> Dict:2
+572:31:Name -> Dict:0
+574:11:Name -> Dict:2
+585:11:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+585:11:Name -> Func:salt.modules.nxos.config
+585:18:Name -> Const:str:'copy running-config startup-config'
+585:29:Name -> Dict:0
+634:7:Name -> Const:str:'sha256' | U
+635:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+635:14:Name -> Class:salt.exceptions.SaltInvocationError
+636:4:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+636:4:Name -> Func:salt.modules.nxos.get_user
+636:13:Name -> U
+636:25:Name -> Dict:0
+637:7:Name -> Const:bool:False | U
+638:22:Call -> U | Const:NoneType:None
+638:22:Name -> Func:salt.utils.pycrypto.gen_hash
+639:23:Name -> Const:NoneType:None | U
+639:44:Name -> U
+639:64:Name -> Const:str:'sha256' | U
+642:22:Name -> U
+643:32:Name -> U
+643:54:Name -> U | Const:NoneType:None
+644:7:Name -> Const:NoneType:None | U
+645:34:Name -> U
+646:13:Call -> Dict:0
+646:13:Name -> Func:salt.utils.args.clean_kwargs
+646:28:Name -> Dict:0
+647:11:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+647:11:Name -> Func:salt.modules.nxos.config
+647:18:Name -> Const:str:'username Uninferable password 5 Uninfer | Const:str:'username Uninferable password 5 None' | Const:str:'username Uninferable password 5 Uninfer | Const:str:'username Uninferable password 5 None ro
+647:35:Name -> Dict:0
+669:28:Name -> U
+669:44:Name -> U
+670:13:Call -> Dict:0
+670:13:Name -> Func:salt.utils.args.clean_kwargs
+670:28:Name -> Dict:0
+671:11:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+671:11:Name -> Func:salt.modules.nxos.config
+671:18:Name -> Const:str:'username Uninferable role Uninferable'
+671:31:Name -> Dict:0
+693:31:Name -> U
+693:47:Name -> U
+694:13:Call -> Dict:0
+694:13:Name -> Func:salt.utils.args.clean_kwargs
+694:28:Name -> Dict:0
+695:11:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+695:11:Name -> Func:salt.modules.nxos.config
+695:18:Name -> Const:str:'no username Uninferable role Uninferabl
+695:31:Name -> Dict:0
+706:7:Call -> Const:bool:False | Const:bool:True
+706:7:Attribute -> Func:salt.utils.platform.is_proxy
+706:7:Attribute -> Module:salt.utils.platform
+706:7:Attribute -> Module:salt.utils
+706:7:Name -> Module:salt
+707:15:Call -> ERR
+707:15:Name -> ERR
+707:46:Name -> U
+707:58:Name -> Dict:0
+709:15:Call -> List:2 | List:2
+709:15:Name -> Func:salt.modules.nxos._nxapi_config
+709:29:Name -> U
+709:41:Name -> Dict:0
+716:17:Call -> ERR
+716:17:Name -> ERR
+717:4:Call -> U
+717:4:Attribute -> U
+717:4:Name -> U
+717:24:Name -> Dict:0
+718:11:Call -> ERR
+718:11:Name -> Func:builtins.isinstance
+718:22:Name -> U
+718:32:Name -> Class:builtins.list
+719:20:Name -> U
+721:14:Call -> U
+721:14:Name -> Func:salt.modules.nxos._nxapi_request
+721:29:Name -> U | List:1
+721:41:Name -> Dict:0
+722:11:Call -> U
+722:11:Attribute -> U
+722:11:Name -> U
+723:12:Call -> U
+723:12:Name -> Func:salt.modules.nxos._nxapi_request
+723:27:Name -> Const:str:'copy running-config startup-config'
+723:38:Name -> Dict:0
+724:20:Name -> U
+725:28:Name -> U
+726:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+726:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+726:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+726:26:Name -> U
+727:11:Name -> Class:salt.exceptions.CommandExecutionError
+728:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+728:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+728:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+728:18:Name -> ExcInst:salt.exceptions.CommandExecutionError
+729:16:Name -> U | List:1
+729:26:Call -> ERR
+729:26:Name -> Func:builtins.repr
+729:31:Name -> ExcInst:salt.exceptions.CommandExecutionError
+730:12:Name -> U | List:1
+730:22:Name -> U
+746:7:Call -> Const:bool:False | Const:bool:True
+746:7:Attribute -> Func:salt.utils.platform.is_proxy
+746:7:Attribute -> Module:salt.utils.platform
+746:7:Attribute -> Module:salt.utils
+746:7:Name -> Module:salt
+747:15:Call -> ERR
+747:15:Name -> ERR
+747:48:Name -> U
+747:65:Name -> Const:str:'cli_conf' | U
+747:75:Name -> Dict:0
+749:21:Call -> ERR
+749:21:Name -> ERR
+750:8:Call -> U
+750:8:Attribute -> U
+750:8:Name -> U
+750:28:Name -> Dict:0
+751:15:Call -> ERR
+751:15:Name -> ERR
+751:47:Name -> U
+751:64:Name -> Const:str:'cli_conf' | U
+751:74:Name -> U

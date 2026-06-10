@@ -1,0 +1,137 @@
+13:3:Name -> Const:bool:False
+23:26:Name -> Class:builtins.str
+32:11:Name -> U
+35:23:Name -> Class:builtins.dict
+35:28:Name -> Class:builtins.str
+35:33:Name -> Union
+39:19:Call -> Inst:platform.uname_result
+39:19:Attribute -> Func:platform.uname
+39:19:Name -> Module:platform
+40:30:Call -> Tuple:2 | Inst:builtins.tuple | Tuple:2 | Tuple:2
+40:30:Attribute -> Func:locale.getlocale
+40:30:Name -> Module:locale
+42:18:Call -> U
+42:18:Name -> Func:pandas.util._print_versions._get_commit_hash
+43:18:Call -> U
+43:18:Attribute -> Func:platform.python_version
+43:18:Name -> Module:platform
+44:23:Call -> ERR
+44:23:Attribute -> Func:_struct.calcsize
+44:23:Name -> Module:struct
+45:14:Attribute -> U
+45:14:Name -> Inst:platform.uname_result
+46:22:Attribute -> U
+46:22:Name -> Inst:platform.uname_result
+47:19:Attribute -> U
+47:19:Name -> Inst:platform.uname_result
+48:19:Attribute -> U
+48:19:Name -> Inst:platform.uname_result
+49:21:Attribute -> Const:str:''
+49:21:Name -> Inst:platform.uname_result
+50:21:Attribute -> Const:str:'little'
+50:21:Name -> Module:sys
+51:18:Call -> U | Const:NoneType:None
+51:18:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+51:18:Attribute -> Dict:43 | Inst:os._Environ
+51:18:Name -> Module:os
+52:16:Call -> U | Const:NoneType:None
+52:16:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+52:16:Attribute -> Dict:43 | Inst:os._Environ
+52:16:Name -> Module:os
+53:36:Name -> U
+53:63:Name -> Const:str:'iso-8859-15'
+57:30:Name -> Class:builtins.dict
+57:35:Name -> Class:builtins.str
+57:40:Name -> Union
+75:4:Call -> ERR
+75:4:Attribute -> BM:builtins.list.extend
+75:4:Name -> List:7
+75:16:Call -> List:36
+75:16:Name -> Class:builtins.list
+75:21:Name -> Dict:36
+77:12:Name -> Class:builtins.dict
+77:17:Name -> Class:builtins.str
+77:22:Name -> Union
+78:19:Name -> List:7
+80:18:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+80:18:Name -> Func:pandas.compat._optional.import_optional_dependency | Func:pandas.compat._optional.import_optional_dependency | Func:pandas.compat._optional.import_optional_dependency
+80:45:Name -> Const:str:'pandas' | Const:str:'numpy' | Const:str:'dateutil' | Const:str:'pip' | Const:str:'Cython' | Const:str:'sphinx' | Const:str:'IPython'
+81:15:Name -> Class:builtins.Exception
+83:12:Name -> Dict:0
+83:19:Name -> Const:str:'pandas' | Const:str:'numpy' | Const:str:'dateutil' | Const:str:'pip' | Const:str:'Cython' | Const:str:'sphinx' | Const:str:'IPython'
+85:12:Name -> Dict:0
+85:19:Name -> Const:str:'pandas' | Const:str:'numpy' | Const:str:'dateutil' | Const:str:'pip' | Const:str:'Cython' | Const:str:'sphinx' | Const:str:'IPython'
+85:50:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+85:30:Call -> U
+85:30:Name -> Func:pandas.compat._optional.get_version
+85:42:Name -> U
+86:11:Name -> Dict:0
+89:1:Call -> Func:pandas.util._decorators.set_module.decorator
+89:1:Name -> Func:pandas.util._decorators.set_module
+90:27:Name -> Class:builtins.str
+90:33:Name -> Class:builtins.bool
+132:15:Call -> Dict:12
+132:15:Name -> Func:pandas.util._print_versions._get_sys_info
+133:11:Call -> Dict:0
+133:11:Name -> Func:pandas.util._print_versions._get_dependency_info
+135:7:Name -> Const:bool:False | U
+136:23:Name -> Dict:12
+136:49:Name -> Dict:0
+138:11:Name -> U
+139:12:Call -> U
+139:12:Attribute -> BM:_io.TextIOWrapper.writelines | U | BM:_io.StringIO.writelines
+139:12:Attribute -> Inst:_io.TextIOWrapper | U | Inst:doctest._SpoofOut
+139:12:Name -> Module:sys
+139:34:Call -> U
+139:34:Attribute -> Func:json.dumps
+139:34:Name -> Module:json
+139:45:Name -> Dict:2
+141:19:Call -> ERR
+141:19:Name -> Func:builtins.isinstance
+141:30:Name -> U
+141:39:Name -> Class:builtins.str
+142:17:Call -> ERR
+142:17:Name -> Func:_io.open
+142:22:Name -> U
+143:16:Call -> Const:NoneType:None
+143:16:Attribute -> Func:json.dump
+143:16:Name -> Module:json
+143:26:Name -> Dict:2
+143:29:Name -> U
+146:15:Call -> Const:bool:True
+146:15:Name -> Func:builtins.isinstance
+146:26:Name -> Dict:12
+146:46:Name -> Class:builtins.dict
+147:24:Name -> Dict:12
+148:19:Name -> Dict:12
+149:8:Name -> Dict:12
+149:32:Name -> U
+149:48:Name -> Const:str:'iso-8859-15'
+151:17:Call -> ERR
+151:17:Name -> Func:builtins.max
+151:21:Call -> ERR
+151:21:Name -> Func:builtins.len
+151:25:Name -> U
+151:37:Name -> Dict:0
+152:8:Call -> ERR
+152:8:Name -> Func:builtins.print
+153:8:Call -> ERR
+153:8:Name -> Func:builtins.print
+154:20:Call -> DictItems
+154:20:Attribute -> BM:builtins.dict.items
+154:20:Name -> Dict:12
+155:12:Call -> ERR
+155:12:Name -> Func:builtins.print
+155:21:Name -> Const:str:'commit' | Const:str:'python' | Const:str:'python-bits' | Const:str:'OS' | Const:str:'OS-release' | Const:str:'Version' | Const:str:'machine' | Const:str:'processor' | Const:str:'byteorder' | Const:str:'LC_ALL' | Const:str:'LANG' | Const:str:'LOCALE'
+155:25:Name -> U
+155:36:Name -> U
+156:8:Call -> ERR
+156:8:Name -> Func:builtins.print
+157:20:Call -> DictItems
+157:20:Attribute -> BM:builtins.dict.items
+157:20:Name -> Dict:0
+158:12:Call -> ERR
+158:12:Name -> Func:builtins.print
+158:21:Name -> U
+158:25:Name -> U
+158:36:Name -> U

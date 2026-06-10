@@ -1,0 +1,910 @@
+17:0:Call -> Const:NoneType:None
+17:0:Attribute -> Func:warnings.filterwarnings
+17:0:Name -> Module:warnings
+20:4:Name -> Class:builtins.DeprecationWarning
+26:0:Call -> Const:NoneType:None
+26:0:Attribute -> Func:warnings.filterwarnings
+26:0:Name -> Module:warnings
+29:4:Name -> Class:builtins.DeprecationWarning
+34:0:Call -> Const:NoneType:None
+34:0:Attribute -> Func:warnings.filterwarnings
+34:0:Name -> Module:warnings
+38:4:Name -> Class:builtins.UserWarning
+49:7:Name -> Class:builtins.ImportError
+50:7:Attribute -> Tuple:0
+50:7:Name -> ExcInst:builtins.ImportError
+54:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:6:Attribute -> Func:logging.getLogger
+54:6:Name -> Module:logging
+54:24:Name -> Const:str:'salt.cli.daemons' | Const:str:'__main__'
+68:11:Call -> ERR
+68:11:Attribute -> ERR
+68:11:Attribute -> ERR
+68:11:Name -> Inst:salt.cli.daemons.DaemonsMixin
+69:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+69:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+69:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+72:16:Attribute -> ERR
+72:16:Name -> Inst:salt.cli.daemons.DaemonsMixin
+73:16:Attribute -> Const:str:'DaemonsMixin'
+73:16:Attribute -> Class:salt.cli.daemons.DaemonsMixin
+73:16:Name -> Inst:salt.cli.daemons.DaemonsMixin
+83:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+83:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+83:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+83:35:Name -> U
+83:43:Attribute -> Const:str:'DaemonsMixin'
+83:43:Attribute -> Class:salt.cli.daemons.DaemonsMixin
+83:43:Name -> Inst:salt.cli.daemons.DaemonsMixin
+91:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+91:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+91:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+91:47:Attribute -> Const:str:'DaemonsMixin'
+91:47:Attribute -> Class:salt.cli.daemons.DaemonsMixin
+91:47:Name -> Inst:salt.cli.daemons.DaemonsMixin
+99:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+99:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+99:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+99:45:Attribute -> Const:str:'DaemonsMixin'
+99:45:Attribute -> Class:salt.cli.daemons.DaemonsMixin
+99:45:Name -> Inst:salt.cli.daemons.DaemonsMixin
+108:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+108:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+108:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+110:12:Attribute -> Const:str:'DaemonsMixin'
+110:12:Attribute -> Class:salt.cli.daemons.DaemonsMixin
+110:12:Name -> Inst:salt.cli.daemons.DaemonsMixin
+111:12:Call -> U | Const:str:''
+111:12:Name -> Func:salt.exceptions.get_error_message
+111:30:Name -> U
+113:8:Call -> ERR
+113:8:Attribute -> ERR
+113:8:Name -> Inst:salt.cli.daemons.DaemonsMixin
+113:22:Name -> U
+117:4:Attribute -> Class:salt.utils.parsers.MasterOptionParser
+117:4:Attribute -> Module:salt.utils.parsers
+117:4:Attribute -> Module:salt.utils
+117:4:Name -> Module:salt
+117:43:Name -> Class:salt.cli.daemons.DaemonsMixin
+124:11:Call -> Const:bool:True
+124:11:Name -> Func:builtins.hasattr
+124:19:Attribute -> Inst:salt.master.Master
+124:19:Name -> Inst:salt.cli.daemons.Master
+126:12:Call -> U | U
+126:12:Attribute -> BM:salt.utils.process.ProcessManager._handle_signals
+126:12:Attribute -> Inst:salt.utils.process.ProcessManager
+126:12:Attribute -> Inst:salt.master.Master
+126:12:Name -> Inst:salt.cli.daemons.Master
+126:56:Name -> U
+126:64:Name -> U
+127:8:Call -> Const:NoneType:None
+127:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn._handle_signals
+127:8:Call -> Super
+127:8:Name -> Class:builtins.super
+127:32:Name -> U
+127:40:Name -> U
+130:15:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+130:15:Name -> Inst:salt.cli.daemons.Master
+133:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+133:12:Name -> Inst:salt.cli.daemons.Master
+134:12:Call -> U
+134:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+134:12:Attribute -> Module:posixpath | Module:ntpath
+134:12:Name -> Module:os
+134:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+134:25:Name -> Inst:salt.cli.daemons.Master
+135:12:Call -> U
+135:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+135:12:Attribute -> Module:posixpath | Module:ntpath
+135:12:Name -> Module:os
+135:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+135:25:Name -> Inst:salt.cli.daemons.Master
+136:12:Call -> U
+136:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+136:12:Attribute -> Module:posixpath | Module:ntpath
+136:12:Name -> Module:os
+136:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+136:25:Name -> Inst:salt.cli.daemons.Master
+137:12:Call -> U
+137:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+137:12:Attribute -> Module:posixpath | Module:ntpath
+137:12:Name -> Module:os
+137:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+137:25:Name -> Inst:salt.cli.daemons.Master
+138:12:Call -> U
+138:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+138:12:Attribute -> Module:posixpath | Module:ntpath
+138:12:Name -> Module:os
+138:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+138:25:Name -> Inst:salt.cli.daemons.Master
+139:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+139:12:Name -> Inst:salt.cli.daemons.Master
+140:12:Call -> U
+140:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+140:12:Attribute -> Module:posixpath | Module:ntpath
+140:12:Name -> Module:os
+140:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+140:25:Name -> Inst:salt.cli.daemons.Master
+141:12:Call -> U
+141:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+141:12:Attribute -> Module:posixpath | Module:ntpath
+141:12:Name -> Module:os
+141:25:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+141:25:Name -> Inst:salt.cli.daemons.Master
+142:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+142:12:Name -> Inst:salt.cli.daemons.Master
+143:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+143:12:Name -> Inst:salt.cli.daemons.Master
+144:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+144:12:Name -> Inst:salt.cli.daemons.Master
+145:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+145:12:Name -> Inst:salt.cli.daemons.Master
+147:18:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+147:18:Name -> Inst:salt.cli.daemons.Master
+149:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+149:12:Name -> Inst:salt.cli.daemons.Master
+150:16:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+150:16:Name -> Inst:salt.cli.daemons.Master
+153:12:Call -> ERR
+153:12:Attribute -> BM:builtins.list.extend
+153:12:Name -> List:13
+155:20:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+155:20:Name -> Inst:salt.cli.daemons.Master
+156:20:Call -> U
+156:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+156:20:Attribute -> Module:posixpath | Module:ntpath
+156:20:Name -> Module:os
+156:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+156:33:Name -> Inst:salt.cli.daemons.Master
+157:20:Call -> U
+157:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+157:20:Attribute -> Module:posixpath | Module:ntpath
+157:20:Name -> Module:os
+157:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+157:33:Name -> Inst:salt.cli.daemons.Master
+158:20:Call -> U
+158:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+158:20:Attribute -> Module:posixpath | Module:ntpath
+158:20:Name -> Module:os
+158:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+158:33:Name -> Inst:salt.cli.daemons.Master
+159:20:Call -> U
+159:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+159:20:Attribute -> Module:posixpath | Module:ntpath
+159:20:Name -> Module:os
+159:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+159:33:Name -> Inst:salt.cli.daemons.Master
+160:20:Call -> U
+160:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+160:20:Attribute -> Module:posixpath | Module:ntpath
+160:20:Name -> Module:os
+160:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+160:33:Name -> Inst:salt.cli.daemons.Master
+161:20:Call -> U
+161:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+161:20:Attribute -> Module:posixpath | Module:ntpath
+161:20:Name -> Module:os
+161:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+161:33:Name -> Inst:salt.cli.daemons.Master
+164:23:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+164:23:Name -> Inst:salt.cli.daemons.Master
+164:47:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+164:47:Name -> Inst:salt.cli.daemons.Master
+166:8:Call -> Const:NoneType:None
+166:8:Name -> Func:salt.utils.verify.verify_env
+167:12:Name -> List:13
+168:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+168:12:Name -> Inst:salt.cli.daemons.Master
+169:23:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+169:23:Name -> Inst:salt.cli.daemons.Master
+170:21:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+170:21:Name -> Inst:salt.cli.daemons.Master
+171:20:Name -> U | List:2
+182:8:Call -> Const:NoneType:None
+182:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.prepare
+182:8:Call -> Super
+182:8:Name -> Class:builtins.super
+183:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+183:8:Attribute -> Func:salt.utils.ostruststore.apply_if_enabled
+183:8:Name -> Module:salt.utils.ostruststore
+183:39:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+183:39:Name -> Inst:salt.cli.daemons.Master
+186:12:Call -> Const:NoneType:None
+186:12:Attribute -> BM:salt.cli.daemons.Master.verify_environment
+186:12:Name -> Inst:salt.cli.daemons.Master
+187:15:Name -> Class:builtins.OSError
+188:12:Call -> Const:NoneType:None
+188:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.environment_failure
+188:12:Name -> Inst:salt.cli.daemons.Master
+188:37:Name -> ExcInst:builtins.OSError
+190:8:Call -> Const:NoneType:None
+190:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+190:8:Name -> Inst:salt.cli.daemons.Master
+193:15:Call -> Const:bool:False | Const:bool:True
+193:15:Name -> Func:salt.utils.verify.verify_socket
+194:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+194:12:Name -> Inst:salt.cli.daemons.Master
+195:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+195:12:Name -> Inst:salt.cli.daemons.Master
+196:12:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+196:12:Name -> Inst:salt.cli.daemons.Master
+198:12:Call -> Const:NoneType:None
+198:12:Attribute -> BM:salt.cli.daemons.Master.shutdown
+198:12:Name -> Inst:salt.cli.daemons.Master
+199:8:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+199:8:Name -> Inst:salt.cli.daemons.Master
+199:35:Call -> U
+199:35:Name -> Func:salt.utils.network.ip_bracket
+199:46:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+199:46:Name -> Inst:salt.cli.daemons.Master
+200:8:Call -> Const:NoneType:None
+200:8:Attribute -> Func:salt.utils.migrations.migrate_paths
+200:8:Name -> Module:salt.utils.migrations
+200:33:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+200:33:Name -> Inst:salt.cli.daemons.Master
+205:8:Name -> Inst:salt.cli.daemons.Master
+205:22:Call -> Inst:salt.master.Master
+205:22:Attribute -> Class:salt.master.Master
+205:22:Attribute -> Module:salt.master
+205:22:Name -> Module:salt
+205:41:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+205:41:Name -> Inst:salt.cli.daemons.Master
+207:8:Call -> Const:NoneType:None
+207:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.daemonize_if_required
+207:8:Name -> Inst:salt.cli.daemons.Master
+208:8:Call -> Const:NoneType:None
+208:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.set_pidfile
+208:8:Name -> Inst:salt.cli.daemons.Master
+209:8:Call -> Const:bool:True | Const:bool:True | Const:bool:False | U
+209:8:Attribute -> Func:salt.utils.process.notify_systemd
+209:8:Attribute -> Module:salt.utils.process
+209:8:Attribute -> Module:salt.utils
+209:8:Name -> Module:salt
+221:8:Call -> Const:NoneType:None
+221:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.start
+221:8:Call -> Super
+221:8:Name -> Class:builtins.super
+222:11:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+222:11:Name -> Func:salt.utils.verify.check_user
+222:22:Attribute -> Dict:2 | Dict:11 | Dict:11 | Dict:12 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+222:22:Name -> Inst:salt.cli.daemons.Master
+223:12:Call -> Const:NoneType:None
+223:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+223:12:Name -> Inst:salt.cli.daemons.Master
+224:12:Call -> Const:NoneType:None
+224:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.verify_hash_type
+224:12:Name -> Inst:salt.cli.daemons.Master
+225:12:Call -> Const:NoneType:None
+225:12:Attribute -> BM:salt.master.Master.start
+225:12:Attribute -> Inst:salt.master.Master
+225:12:Name -> Inst:salt.cli.daemons.Master
+231:8:Call -> Const:NoneType:None
+231:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.shutdown_log_info
+231:8:Name -> Inst:salt.cli.daemons.Master
+233:11:Name -> Const:NoneType:None | U
+234:22:Name -> Const:str:'The salt master is shutdown. '
+234:28:Name -> U
+236:22:Call -> Const:str:''
+236:22:Attribute -> BM:builtins.str.strip
+236:22:Name -> Const:str:'The salt master is shutdown. '
+237:8:Call -> Const:NoneType:None
+237:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.shutdown
+237:8:Call -> Super
+237:8:Name -> Class:builtins.super
+237:25:Name -> Const:int:0 | U
+237:35:Name -> Const:NoneType:None | U | Const:str:''
+241:4:Attribute -> Class:salt.utils.parsers.MinionOptionParser
+241:4:Attribute -> Module:salt.utils.parsers
+241:4:Attribute -> Module:salt.utils
+241:4:Name -> Module:salt
+241:43:Name -> Class:salt.cli.daemons.DaemonsMixin
+249:11:Call -> Const:bool:True
+249:11:Name -> Func:builtins.hasattr
+249:19:Attribute -> Inst:salt.minion.MinionManager
+249:19:Name -> Inst:salt.cli.daemons.Minion
+252:12:Call -> Const:NoneType:None
+252:12:Attribute -> BM:salt.minion.MinionManager.stop
+252:12:Attribute -> Inst:salt.minion.MinionManager
+252:12:Name -> Inst:salt.cli.daemons.Minion
+252:29:Name -> U
+252:37:Attribute -> BM:salt.utils.parsers.DaemonMixIn._handle_signals
+252:37:Call -> Super
+252:37:Name -> Class:builtins.super
+254:12:Call -> Const:NoneType:None
+254:12:Attribute -> BM:salt.utils.parsers.DaemonMixIn._handle_signals
+254:12:Call -> Super
+254:12:Name -> Class:builtins.super
+254:36:Name -> U
+254:44:Name -> U
+265:8:Call -> Const:NoneType:None
+265:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.prepare
+265:8:Call -> Super
+265:8:Name -> Class:builtins.super
+266:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+266:8:Attribute -> Func:salt.utils.ostruststore.apply_if_enabled
+266:8:Name -> Module:salt.utils.ostruststore
+266:39:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+266:39:Name -> Inst:salt.cli.daemons.Minion
+269:15:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+269:15:Name -> Inst:salt.cli.daemons.Minion
+270:24:Call -> U | Const:NoneType:None
+270:24:Attribute -> BM:builtins.dict.get | BM:salt.utils.optsdict.OptsDict.get | BM:builtins.dict.get
+270:24:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+270:24:Name -> Inst:salt.cli.daemons.Minion
+271:19:Name -> U | Const:NoneType:None
+273:30:Name -> U
+275:32:Call -> U
+275:32:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+275:32:Attribute -> Module:posixpath | Module:ntpath
+275:32:Name -> Module:os
+275:48:Name -> U
+276:27:Call -> U | Const:bool:True | Const:bool:False
+276:27:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+276:27:Attribute -> Module:posixpath | Module:ntpath
+276:27:Name -> Module:os
+276:41:Name -> U
+280:32:Call -> U
+280:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+280:32:Attribute -> Module:posixpath | Module:ntpath
+280:32:Name -> Module:os
+281:28:Call -> U
+281:28:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+281:28:Attribute -> Module:posixpath | Module:ntpath
+281:28:Name -> Module:os
+281:44:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+281:44:Name -> Inst:salt.cli.daemons.Minion
+281:71:Name -> U
+284:28:Call -> U
+284:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+284:28:Attribute -> Module:posixpath | Module:ntpath
+284:28:Name -> Module:os
+285:24:Call -> U
+285:24:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+285:24:Attribute -> Module:posixpath | Module:ntpath
+285:24:Name -> Module:os
+285:40:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+285:40:Name -> Inst:salt.cli.daemons.Minion
+289:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+289:20:Name -> Inst:salt.cli.daemons.Minion
+290:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+290:20:Name -> Inst:salt.cli.daemons.Minion
+291:20:Call -> U
+291:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+291:20:Attribute -> Module:posixpath | Module:ntpath
+291:20:Name -> Module:os
+292:24:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+292:24:Name -> Inst:salt.cli.daemons.Minion
+294:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+294:20:Name -> Inst:salt.cli.daemons.Minion
+295:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+295:20:Name -> Inst:salt.cli.daemons.Minion
+296:20:Name -> U | Const:NoneType:None
+299:16:Call -> Const:NoneType:None
+299:16:Name -> Func:salt.utils.verify.verify_env
+300:20:Name -> List:6
+301:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+301:20:Name -> Inst:salt.cli.daemons.Minion
+302:31:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+302:31:Name -> Inst:salt.cli.daemons.Minion
+303:29:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+303:29:Name -> Inst:salt.cli.daemons.Minion
+304:28:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+304:28:Name -> Inst:salt.cli.daemons.Minion
+306:15:Name -> Class:builtins.OSError
+307:12:Call -> Const:NoneType:None
+307:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.environment_failure
+307:12:Name -> Inst:salt.cli.daemons.Minion
+307:37:Name -> ExcInst:builtins.OSError
+309:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+309:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+309:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+309:52:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+309:52:Name -> Inst:salt.cli.daemons.Minion
+310:8:Call -> Const:NoneType:None
+310:8:Attribute -> Func:salt.utils.migrations.migrate_paths
+310:8:Name -> Module:salt.utils.migrations
+310:33:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+310:33:Name -> Inst:salt.cli.daemons.Minion
+313:12:Name -> Const:bool:False | Const:bool:True
+313:31:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+313:31:Attribute -> BM:salt.utils.parsers.DaemonMixIn.claim_process_responsibility
+313:31:Name -> Inst:salt.cli.daemons.Minion
+314:16:Name -> Const:bool:False | Const:bool:True
+314:31:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+314:31:Attribute -> BM:salt.utils.parsers.DaemonMixIn.check_running
+314:31:Name -> Inst:salt.cli.daemons.Minion
+316:12:Call -> Const:NoneType:None
+316:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+316:12:Name -> Inst:salt.cli.daemons.Minion
+317:12:Call -> Const:NoneType:None
+317:12:Attribute -> BM:salt.cli.daemons.Minion.shutdown
+317:12:Name -> Inst:salt.cli.daemons.Minion
+319:20:Call -> U
+319:20:Attribute -> U
+319:20:Call -> U | Const:NoneType:None
+319:20:Attribute -> BM:builtins.dict.get | BM:salt.utils.optsdict.OptsDict.get | BM:builtins.dict.get
+319:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+319:20:Name -> Inst:salt.cli.daemons.Minion
+329:12:Call -> Const:NoneType:None
+329:12:Attribute -> BM:salt.utils.parsers.DaemonMixIn.daemonize_if_required
+329:12:Name -> Inst:salt.cli.daemons.Minion
+330:12:Call -> Const:NoneType:None
+330:12:Attribute -> BM:salt.utils.parsers.DaemonMixIn.set_pidfile
+330:12:Name -> Inst:salt.cli.daemons.Minion
+331:15:Call -> U | Const:NoneType:None
+331:15:Attribute -> BM:builtins.dict.get | BM:salt.utils.optsdict.OptsDict.get | BM:builtins.dict.get
+331:15:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+331:15:Name -> Inst:salt.cli.daemons.Minion
+332:16:Call -> Const:NoneType:None
+332:16:Attribute -> Func:salt.minion.eval_master_func
+332:16:Attribute -> Module:salt.minion
+332:16:Name -> Module:salt
+332:45:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+332:45:Name -> Inst:salt.cli.daemons.Minion
+333:12:Name -> Inst:salt.cli.daemons.Minion
+333:26:Call -> Inst:salt.minion.MinionManager
+333:26:Attribute -> Class:salt.minion.MinionManager
+333:26:Attribute -> Module:salt.minion
+333:26:Name -> Module:salt
+333:52:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+333:52:Name -> Inst:salt.cli.daemons.Minion
+334:15:Name -> Class:builtins.Exception
+335:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+335:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+335:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+338:12:Call -> Const:NoneType:None
+338:12:Attribute -> BM:salt.cli.daemons.Minion.shutdown
+338:12:Name -> Inst:salt.cli.daemons.Minion
+350:8:Call -> Const:NoneType:None
+350:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.start
+350:8:Call -> Super
+350:8:Name -> Class:builtins.super
+353:16:Call -> Const:NoneType:None
+353:16:Attribute -> BM:salt.cli.daemons.Minion._real_start
+353:16:Name -> Inst:salt.cli.daemons.Minion
+354:19:Name -> Class:salt.exceptions.SaltClientError
+356:19:Attribute -> U
+356:19:Attribute -> U
+356:19:Name -> Inst:salt.cli.daemons.Minion
+362:15:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+362:15:Name -> Func:salt.utils.verify.check_user
+362:26:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+362:26:Name -> Inst:salt.cli.daemons.Minion
+363:16:Call -> Const:NoneType:None
+363:16:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+363:16:Name -> Inst:salt.cli.daemons.Minion
+364:16:Call -> Const:NoneType:None
+364:16:Attribute -> BM:salt.cli.daemons.DaemonsMixin.verify_hash_type
+364:16:Name -> Inst:salt.cli.daemons.Minion
+365:16:Call -> Const:NoneType:None
+365:16:Attribute -> BM:salt.minion.MinionManager.tune_in
+365:16:Attribute -> Inst:salt.minion.MinionManager
+365:16:Name -> Inst:salt.cli.daemons.Minion
+366:19:Attribute -> Const:bool:True | Const:bool:False
+366:19:Attribute -> Inst:salt.minion.MinionManager
+366:19:Name -> Inst:salt.cli.daemons.Minion
+367:26:Call -> ExcInst:salt.exceptions.SaltClientError
+367:26:Name -> Class:salt.exceptions.SaltClientError
+368:16:Name -> Class:builtins.KeyboardInterrupt
+368:35:Name -> Class:salt.exceptions.SaltSystemExit
+369:12:Call -> Const:NoneType:None
+369:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+369:12:Name -> Inst:salt.cli.daemons.Minion
+370:15:Call -> ERR
+370:15:Name -> Func:builtins.isinstance
+370:26:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+370:33:Name -> Class:builtins.KeyboardInterrupt
+371:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+371:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+371:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+372:16:Call -> Const:NoneType:None
+372:16:Attribute -> BM:salt.cli.daemons.Minion.shutdown
+372:16:Name -> Inst:salt.cli.daemons.Minion
+374:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+374:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+374:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+374:26:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+375:16:Call -> Const:NoneType:None
+375:16:Attribute -> BM:salt.cli.daemons.Minion.shutdown
+375:16:Name -> Inst:salt.cli.daemons.Minion
+375:30:Attribute -> Class:builtins.SystemExit.code
+375:30:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+391:12:Call -> Const:NoneType:None
+391:12:Attribute -> BM:salt.cli.daemons.Minion.prepare
+391:12:Name -> Inst:salt.cli.daemons.Minion
+392:15:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+392:15:Name -> Func:salt.utils.verify.check_user
+392:26:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+392:26:Name -> Inst:salt.cli.daemons.Minion
+393:16:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+393:16:Attribute -> Inst:salt.minion.MinionManager
+393:16:Name -> Inst:salt.cli.daemons.Minion
+393:45:Attribute -> Inst:collections.OrderedDict
+393:45:Name -> Module:salt.utils.kinds
+394:20:Attribute -> U
+394:20:Attribute -> U
+394:20:Name -> Module:salt.utils.kinds
+396:16:Call -> ERR
+396:16:Attribute -> ERR
+396:16:Attribute -> Inst:salt.minion.MinionManager
+396:16:Name -> Inst:salt.cli.daemons.Minion
+397:16:Name -> Class:builtins.KeyboardInterrupt
+397:35:Name -> Class:salt.exceptions.SaltSystemExit
+398:12:Call -> Const:NoneType:None
+398:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+398:12:Name -> Inst:salt.cli.daemons.Minion
+399:15:Call -> ERR
+399:15:Name -> Func:builtins.isinstance
+399:26:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+399:31:Name -> Class:builtins.KeyboardInterrupt
+400:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+400:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+400:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+401:16:Call -> Const:NoneType:None
+401:16:Attribute -> BM:salt.cli.daemons.Minion.shutdown
+401:16:Name -> Inst:salt.cli.daemons.Minion
+403:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+403:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+403:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+403:26:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+404:16:Call -> Const:NoneType:None
+404:16:Attribute -> BM:salt.cli.daemons.Minion.shutdown
+404:16:Name -> Inst:salt.cli.daemons.Minion
+404:30:Attribute -> Class:builtins.SystemExit.code
+404:30:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+413:8:Call -> Const:NoneType:None
+413:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+413:8:Name -> Inst:salt.cli.daemons.Minion
+414:11:Call -> Const:bool:True
+414:11:Name -> Func:builtins.hasattr
+414:19:Name -> Inst:salt.cli.daemons.Minion
+414:39:Call -> Const:bool:True
+414:39:Name -> Func:builtins.hasattr
+414:47:Attribute -> Inst:salt.minion.MinionManager
+414:47:Name -> Inst:salt.cli.daemons.Minion
+415:12:Call -> Const:NoneType:None
+415:12:Attribute -> BM:salt.minion.MinionManager.destroy
+415:12:Attribute -> Inst:salt.minion.MinionManager
+415:12:Name -> Inst:salt.cli.daemons.Minion
+416:8:Call -> Const:NoneType:None
+416:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.shutdown
+416:8:Call -> Super
+416:8:Name -> Class:builtins.super
+417:12:Name -> Const:int:0 | U
+419:16:Call -> U
+419:16:Attribute -> U
+419:16:Call -> U
+419:16:Attribute -> BM:builtins.str.format
+420:20:Attribute -> Const:str:'Minion'
+420:20:Attribute -> Class:salt.cli.daemons.Minion
+420:20:Name -> Inst:salt.cli.daemons.Minion
+420:46:Name -> Const:NoneType:None | U
+429:4:Attribute -> Class:salt.utils.parsers.ProxyMinionOptionParser
+429:4:Attribute -> Module:salt.utils.parsers
+429:4:Attribute -> Module:salt.utils
+429:4:Name -> Module:salt
+429:48:Name -> Class:salt.cli.daemons.DaemonsMixin
+437:8:Call -> Const:NoneType:None
+437:8:Attribute -> BM:salt.minion.MinionManager.stop
+437:8:Attribute -> Inst:salt.minion.ProxyMinionManager
+437:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+437:25:Name -> U
+437:33:Attribute -> BM:salt.utils.parsers.DaemonMixIn._handle_signals
+437:33:Call -> Super
+437:33:Name -> Class:builtins.super
+438:8:Call -> Const:NoneType:None
+438:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn._handle_signals
+438:8:Call -> Super
+438:8:Name -> Class:builtins.super
+438:32:Name -> U
+438:40:Name -> U
+449:8:Call -> Const:NoneType:None
+449:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.prepare
+449:8:Call -> Super
+449:8:Name -> Class:builtins.super
+450:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+450:8:Attribute -> Func:salt.utils.ostruststore.apply_if_enabled
+450:8:Name -> Module:salt.utils.ostruststore
+450:39:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+450:39:Name -> Inst:salt.cli.daemons.ProxyMinion
+453:15:Call -> U
+453:15:Name -> Func:salt.utils.platform.is_junos
+454:19:Attribute -> U
+454:19:Attribute -> Const:NoneType:None | Const:NoneType:None | U | Inst:optparse.Values
+454:19:Name -> Inst:salt.cli.daemons.ProxyMinion
+455:16:Call -> Const:NoneType:None
+455:16:Attribute -> BM:salt.utils.parsers.OptionParser.error
+455:16:Name -> Inst:salt.cli.daemons.ProxyMinion
+464:15:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+464:15:Name -> Inst:salt.cli.daemons.ProxyMinion
+465:24:Call -> U | Const:NoneType:None
+465:24:Attribute -> BM:builtins.dict.get | BM:salt.utils.optsdict.OptsDict.get | BM:builtins.dict.get
+465:24:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+465:24:Name -> Inst:salt.cli.daemons.ProxyMinion
+466:19:Name -> U | Const:NoneType:None
+468:30:Name -> U
+470:32:Call -> U
+470:32:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+470:32:Attribute -> Module:posixpath | Module:ntpath
+470:32:Name -> Module:os
+470:48:Name -> U
+471:27:Call -> U | Const:bool:True | Const:bool:False
+471:27:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+471:27:Attribute -> Module:posixpath | Module:ntpath
+471:27:Name -> Module:os
+471:41:Name -> U
+475:32:Call -> U
+475:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+475:32:Attribute -> Module:posixpath | Module:ntpath
+475:32:Name -> Module:os
+476:28:Call -> U
+476:28:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+476:28:Attribute -> Module:posixpath | Module:ntpath
+476:28:Name -> Module:os
+476:44:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+476:44:Name -> Inst:salt.cli.daemons.ProxyMinion
+476:71:Name -> U
+479:28:Call -> U
+479:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+479:28:Attribute -> Module:posixpath | Module:ntpath
+479:28:Name -> Module:os
+480:24:Call -> U
+480:24:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+480:24:Attribute -> Module:posixpath | Module:ntpath
+480:24:Name -> Module:os
+480:40:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+480:40:Name -> Inst:salt.cli.daemons.ProxyMinion
+484:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+484:20:Name -> Inst:salt.cli.daemons.ProxyMinion
+485:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+485:20:Name -> Inst:salt.cli.daemons.ProxyMinion
+486:20:Call -> U
+486:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+486:20:Attribute -> Module:posixpath | Module:ntpath
+486:20:Name -> Module:os
+487:24:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+487:24:Name -> Inst:salt.cli.daemons.ProxyMinion
+489:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+489:20:Name -> Inst:salt.cli.daemons.ProxyMinion
+490:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+490:20:Name -> Inst:salt.cli.daemons.ProxyMinion
+491:20:Name -> U | Const:NoneType:None
+494:16:Call -> Const:NoneType:None
+494:16:Name -> Func:salt.utils.verify.verify_env
+495:20:Name -> List:6
+496:20:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+496:20:Name -> Inst:salt.cli.daemons.ProxyMinion
+497:31:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+497:31:Name -> Inst:salt.cli.daemons.ProxyMinion
+498:29:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+498:29:Name -> Inst:salt.cli.daemons.ProxyMinion
+499:28:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+499:28:Name -> Inst:salt.cli.daemons.ProxyMinion
+501:15:Name -> Class:builtins.OSError
+502:12:Call -> Const:NoneType:None
+502:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.environment_failure
+502:12:Name -> Inst:salt.cli.daemons.ProxyMinion
+502:37:Name -> ExcInst:builtins.OSError
+504:8:Call -> Const:NoneType:None
+504:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+504:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+504:29:Call -> U
+504:29:Attribute -> BM:builtins.str.format
+504:54:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+504:54:Name -> Inst:salt.cli.daemons.ProxyMinion
+506:8:Call -> Const:NoneType:None
+506:8:Attribute -> Func:salt.utils.migrations.migrate_paths
+506:8:Name -> Module:salt.utils.migrations
+506:33:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+506:33:Name -> Inst:salt.cli.daemons.ProxyMinion
+509:11:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+509:11:Attribute -> BM:salt.utils.parsers.DaemonMixIn.check_running
+509:11:Name -> Inst:salt.cli.daemons.ProxyMinion
+510:12:Call -> Const:NoneType:None
+510:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+510:12:Name -> Inst:salt.cli.daemons.ProxyMinion
+511:12:Call -> Const:NoneType:None
+511:12:Attribute -> BM:salt.cli.daemons.ProxyMinion.shutdown
+511:12:Name -> Inst:salt.cli.daemons.ProxyMinion
+521:8:Call -> Const:NoneType:None
+521:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.daemonize_if_required
+521:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+522:8:Call -> Const:NoneType:None
+522:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.set_pidfile
+522:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+523:11:Call -> U | Const:NoneType:None
+523:11:Attribute -> BM:builtins.dict.get | BM:salt.utils.optsdict.OptsDict.get | BM:builtins.dict.get
+523:11:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+523:11:Name -> Inst:salt.cli.daemons.ProxyMinion
+524:12:Call -> Const:NoneType:None
+524:12:Attribute -> Func:salt.minion.eval_master_func
+524:12:Attribute -> Module:salt.minion
+524:12:Name -> Module:salt
+524:41:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+524:41:Name -> Inst:salt.cli.daemons.ProxyMinion
+525:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+525:22:Call -> Inst:salt.minion.ProxyMinionManager
+525:22:Attribute -> Class:salt.minion.ProxyMinionManager
+525:22:Attribute -> Module:salt.minion
+525:22:Name -> Module:salt
+525:53:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | Dict:1
+525:53:Name -> Inst:salt.cli.daemons.ProxyMinion
+537:8:Call -> Const:NoneType:None
+537:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.start
+537:8:Call -> Super
+537:8:Name -> Class:builtins.super
+539:15:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+539:15:Name -> Func:salt.utils.verify.check_user
+539:26:Attribute -> Dict:2 | Const:NoneType:None | Inst:salt.utils.optsdict.OptsDict | U
+539:26:Name -> Inst:salt.cli.daemons.ProxyMinion
+540:16:Call -> Const:NoneType:None
+540:16:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+540:16:Name -> Inst:salt.cli.daemons.ProxyMinion
+541:16:Call -> Const:NoneType:None
+541:16:Attribute -> BM:salt.cli.daemons.DaemonsMixin.verify_hash_type
+541:16:Name -> Inst:salt.cli.daemons.ProxyMinion
+542:16:Call -> Const:NoneType:None
+542:16:Attribute -> BM:salt.minion.MinionManager.tune_in
+542:16:Attribute -> Inst:salt.minion.ProxyMinionManager
+542:16:Name -> Inst:salt.cli.daemons.ProxyMinion
+543:19:Attribute -> Const:bool:False
+543:19:Attribute -> Inst:salt.minion.ProxyMinionManager
+543:19:Name -> Inst:salt.cli.daemons.ProxyMinion
+544:26:Call -> ExcInst:salt.exceptions.SaltClientError
+544:26:Name -> Class:salt.exceptions.SaltClientError
+545:16:Name -> Class:builtins.KeyboardInterrupt
+545:35:Name -> Class:salt.exceptions.SaltSystemExit
+546:12:Call -> Const:NoneType:None
+546:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+546:12:Name -> Inst:salt.cli.daemons.ProxyMinion
+547:15:Call -> ERR
+547:15:Name -> Func:builtins.isinstance
+547:26:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+547:31:Name -> Class:builtins.KeyboardInterrupt
+548:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+548:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+548:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+549:16:Call -> Const:NoneType:None
+549:16:Attribute -> BM:salt.cli.daemons.ProxyMinion.shutdown
+549:16:Name -> Inst:salt.cli.daemons.ProxyMinion
+551:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+551:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+551:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+551:26:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+552:16:Call -> Const:NoneType:None
+552:16:Attribute -> BM:salt.cli.daemons.ProxyMinion.shutdown
+552:16:Name -> Inst:salt.cli.daemons.ProxyMinion
+552:30:Attribute -> Class:builtins.SystemExit.code
+552:30:Name -> ExcInst:builtins.KeyboardInterrupt | ExcInst:salt.exceptions.SaltSystemExit
+561:11:Call -> Const:bool:True
+561:11:Name -> Func:builtins.hasattr
+561:19:Name -> Inst:salt.cli.daemons.ProxyMinion
+561:56:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+561:56:Attribute -> Inst:salt.minion.ProxyMinionManager
+561:56:Name -> Inst:salt.cli.daemons.ProxyMinion
+562:23:Attribute -> U
+562:23:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+562:23:Attribute -> Inst:salt.minion.ProxyMinionManager
+562:23:Name -> Inst:salt.cli.daemons.ProxyMinion
+563:12:Call -> U
+563:12:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+563:12:Attribute -> Inst:salt.minion.ProxyMinionManager
+563:12:Name -> Inst:salt.cli.daemons.ProxyMinion
+563:44:Name -> U
+563:54:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+563:54:Attribute -> Inst:salt.minion.ProxyMinionManager
+563:54:Name -> Inst:salt.cli.daemons.ProxyMinion
+564:8:Call -> Const:NoneType:None
+564:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+564:8:Name -> Inst:salt.cli.daemons.ProxyMinion
+565:8:Call -> Const:NoneType:None
+565:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.shutdown
+565:8:Call -> Super
+565:8:Name -> Class:builtins.super
+566:12:Name -> Const:int:0 | U
+568:16:Call -> U
+568:16:Attribute -> U
+568:16:Call -> U
+568:16:Attribute -> BM:builtins.str.format
+569:20:Attribute -> Const:str:'ProxyMinion'
+569:20:Attribute -> Class:salt.cli.daemons.ProxyMinion
+569:20:Name -> Inst:salt.cli.daemons.ProxyMinion
+569:46:Name -> Const:NoneType:None | U
+578:4:Attribute -> Class:salt.utils.parsers.SyndicOptionParser
+578:4:Attribute -> Module:salt.utils.parsers
+578:4:Attribute -> Module:salt.utils
+578:4:Name -> Module:salt
+578:43:Name -> Class:salt.cli.daemons.DaemonsMixin
+592:8:Call -> Const:NoneType:None
+592:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.prepare
+592:8:Call -> Super
+592:8:Name -> Class:builtins.super
+593:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+593:8:Attribute -> Func:salt.utils.ostruststore.apply_if_enabled
+593:8:Name -> Module:salt.utils.ostruststore
+593:39:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+593:39:Name -> Inst:salt.cli.daemons.Syndic
+595:15:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+595:15:Name -> Inst:salt.cli.daemons.Syndic
+596:16:Call -> Const:NoneType:None
+596:16:Name -> Func:salt.utils.verify.verify_env
+598:24:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+598:24:Name -> Inst:salt.cli.daemons.Syndic
+599:24:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+599:24:Name -> Inst:salt.cli.daemons.Syndic
+600:24:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+600:24:Name -> Inst:salt.cli.daemons.Syndic
+602:20:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+602:20:Name -> Inst:salt.cli.daemons.Syndic
+603:31:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+603:31:Name -> Inst:salt.cli.daemons.Syndic
+604:29:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+604:29:Name -> Inst:salt.cli.daemons.Syndic
+605:28:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+605:28:Name -> Inst:salt.cli.daemons.Syndic
+607:15:Name -> Class:builtins.OSError
+608:12:Call -> Const:NoneType:None
+608:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.environment_failure
+608:12:Name -> Inst:salt.cli.daemons.Syndic
+608:37:Name -> ExcInst:builtins.OSError
+610:8:Call -> Const:NoneType:None
+610:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+610:8:Name -> Inst:salt.cli.daemons.Syndic
+610:29:Call -> U
+610:29:Attribute -> BM:builtins.str.format
+610:54:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+610:54:Name -> Inst:salt.cli.daemons.Syndic
+615:8:Call -> Const:NoneType:None
+615:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.daemonize_if_required
+615:8:Name -> Inst:salt.cli.daemons.Syndic
+616:8:Name -> Inst:salt.cli.daemons.Syndic
+616:22:Call -> Inst:salt.minion.SyndicManager
+616:22:Attribute -> Class:salt.minion.SyndicManager
+616:22:Attribute -> Module:salt.minion
+616:22:Name -> Module:salt
+616:48:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+616:48:Name -> Inst:salt.cli.daemons.Syndic
+617:8:Call -> Const:NoneType:None
+617:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.set_pidfile
+617:8:Name -> Inst:salt.cli.daemons.Syndic
+629:8:Call -> Const:NoneType:None
+629:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.start
+629:8:Call -> Super
+629:8:Name -> Class:builtins.super
+630:11:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+630:11:Name -> Func:salt.utils.verify.check_user
+630:22:Attribute -> Dict:2 | Const:NoneType:None | Dict:0 | Dict:1
+630:22:Name -> Inst:salt.cli.daemons.Syndic
+631:12:Call -> Const:NoneType:None
+631:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+631:12:Name -> Inst:salt.cli.daemons.Syndic
+632:12:Call -> Const:NoneType:None
+632:12:Attribute -> BM:salt.cli.daemons.DaemonsMixin.verify_hash_type
+632:12:Name -> Inst:salt.cli.daemons.Syndic
+634:16:Call -> Const:NoneType:None
+634:16:Attribute -> BM:salt.minion.SyndicManager.tune_in
+634:16:Attribute -> Inst:salt.minion.SyndicManager
+634:16:Name -> Inst:salt.cli.daemons.Syndic
+635:19:Name -> Class:builtins.KeyboardInterrupt
+636:16:Call -> Const:NoneType:None
+636:16:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+636:16:Name -> Inst:salt.cli.daemons.Syndic
+637:16:Call -> Const:NoneType:None
+637:16:Attribute -> BM:salt.cli.daemons.Syndic.shutdown
+637:16:Name -> Inst:salt.cli.daemons.Syndic
+646:8:Call -> Const:NoneType:None
+646:8:Attribute -> BM:salt.cli.daemons.DaemonsMixin.action_log_info
+646:8:Name -> Inst:salt.cli.daemons.Syndic
+647:8:Call -> Const:NoneType:None
+647:8:Attribute -> BM:salt.utils.parsers.DaemonMixIn.shutdown
+647:8:Call -> Super
+647:8:Name -> Class:builtins.super
+648:12:Name -> Const:int:0 | U
+650:16:Call -> U
+650:16:Attribute -> U
+650:16:Call -> U
+650:16:Attribute -> BM:builtins.str.format
+651:20:Attribute -> Const:str:'Syndic'
+651:20:Attribute -> Class:salt.cli.daemons.Syndic
+651:20:Name -> Inst:salt.cli.daemons.Syndic
+651:46:Name -> Const:NoneType:None | U

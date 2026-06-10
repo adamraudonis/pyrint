@@ -1,0 +1,584 @@
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'salt.modules.aixpkg' | Const:str:'__main__'
+32:7:Name -> ERR
+33:15:Name -> Const:str:'pkg'
+42:36:Name -> U
+43:13:Call -> ERR
+43:13:Name -> ERR
+43:37:Name -> List:3
+45:12:Name -> U
+49:16:Call -> U
+49:16:Attribute -> U
+49:16:Name -> U
+50:20:Name -> U
+51:15:Call -> U
+51:15:Attribute -> U
+51:15:Name -> U
+54:20:Call -> U
+54:20:Attribute -> U
+54:20:Name -> U
+55:15:Call -> ERR
+55:15:Name -> Func:builtins.len
+55:19:Name -> U
+56:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+56:22:Name -> Class:salt.exceptions.CommandExecutionError
+58:36:Call -> U
+58:36:Attribute -> U
+58:36:Name -> U
+62:22:Name -> U
+63:23:Name -> U
+66:23:Name -> U
+68:26:Name -> U
+71:15:Name -> Const:str:'' | U
+71:21:Name -> Const:str:'' | U
+71:34:Name -> Const:bool:False | Const:bool:True
+73:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+73:14:Name -> Class:salt.exceptions.CommandExecutionError
+75:28:Call -> U
+75:28:Attribute -> U
+75:28:Name -> U
+83:33:Name -> U
+84:11:Call -> ERR
+84:11:Name -> ERR
+84:35:Name -> List:3
+91:7:Name -> U
+92:15:Name -> ERR
+94:14:Call -> U
+94:14:Attribute -> Func:copy.deepcopy
+94:14:Name -> Module:copy
+94:28:Name -> ERR
+95:8:Call -> ERR
+95:8:Name -> ERR
+95:43:Name -> U
+96:15:Name -> U
+114:23:Call -> U | Const:bool:False | Const:bool:False
+114:23:Attribute -> Func:salt.utils.data.is_true
+114:23:Attribute -> Module:salt.utils.data
+114:23:Attribute -> Module:salt.utils
+114:23:Name -> Module:salt
+114:47:Name -> Const:bool:False | U
+116:7:Call -> ERR
+116:7:Name -> Func:builtins.any
+117:9:Call -> U | Const:bool:False
+117:9:Attribute -> Func:salt.utils.data.is_true
+117:9:Attribute -> Module:salt.utils.data
+117:9:Attribute -> Module:salt.utils
+117:9:Name -> Module:salt
+117:33:Call -> ERR
+117:33:Attribute -> BM:builtins.dict.get
+117:33:Name -> Dict:0
+117:44:Name -> Const:str:'removed' | Const:str:'purge_desired'
+119:15:Name -> Dict:0
+121:26:Name -> ERR
+121:42:Call -> ERR
+121:42:Attribute -> BM:builtins.dict.get
+121:42:Name -> Dict:0
+122:15:Call -> U
+122:15:Name -> Func:salt.modules.aixpkg._list_pkgs_from_context
+122:39:Name -> U | Const:bool:False | Const:bool:False
+136:12:Call -> ERR
+136:12:Attribute -> ERR
+136:12:Call -> ERR
+136:12:Name -> ERR
+136:32:Name -> Const:str:'/usr/bin/lslpp -Lc'
+138:16:Name -> U
+139:11:Call -> U
+139:11:Attribute -> U
+139:11:Name -> U
+142:16:Call -> U
+142:16:Attribute -> U
+142:16:Name -> U
+143:11:Call -> ERR
+143:11:Name -> Func:builtins.len
+143:15:Name -> U
+146:18:Name -> U
+147:19:Name -> U
+149:19:Name -> U
+151:22:Name -> U
+152:8:Call -> ERR
+152:8:Name -> ERR
+152:41:Name -> Dict:0
+152:46:Name -> U
+152:52:Name -> U
+154:4:Call -> ERR
+154:4:Name -> ERR
+154:42:Name -> Dict:0
+155:4:Name -> ERR
+155:35:Call -> U | Dict:0
+155:35:Attribute -> Func:copy.deepcopy
+155:35:Name -> Module:copy
+155:49:Name -> Dict:0
+157:11:Name -> U | Const:bool:False | Const:bool:False
+158:8:Call -> ERR
+158:8:Name -> ERR
+158:43:Name -> Dict:0
+160:11:Name -> Dict:0
+179:4:Call -> ERR
+179:4:Attribute -> BM:builtins.dict.pop
+179:4:Name -> Dict:0
+182:11:Name -> Tuple:0
+184:16:Name -> Tuple:0
+187:27:Name -> U
+188:19:Call -> ERR
+188:19:Name -> ERR
+188:43:Name -> Const:str:'lslpp -Lq Uninferable'
+189:16:Name -> U
+190:28:Call -> U
+190:28:Attribute -> U
+190:28:Name -> U
+191:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+191:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+191:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+193:16:Name -> U
+194:16:Name -> U
+196:28:Name -> U
+197:19:Name -> U
+197:27:Name -> U
+198:35:Call -> U
+198:35:Attribute -> U
+198:35:Name -> U
+199:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+199:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+199:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+201:24:Name -> U
+202:24:Name -> U
+204:36:Name -> U
+205:23:Name -> U
+206:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+206:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+206:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+208:28:Name -> U
+209:28:Name -> U
+213:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+213:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+213:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+213:77:Name -> U
+215:8:Name -> Dict:0
+215:12:Name -> U
+215:20:Name -> Const:str:'' | U
+218:7:Call -> Const:int:0
+218:7:Name -> Func:builtins.len
+218:11:Name -> Tuple:0
+219:15:Name -> Dict:0
+219:19:Name -> Tuple:0
+220:11:Name -> Dict:0
+233:36:Name -> U
+234:11:Call -> ERR
+234:11:Name -> ERR
+234:35:Name -> List:3
+311:51:Name -> Const:NoneType:None | U
+311:14:Call -> Inst:builtins.list
+311:14:Attribute -> Func:salt.utils.args.split_input
+311:14:Attribute -> Module:salt.utils.args
+311:14:Attribute -> Module:salt.utils
+311:14:Name -> Module:salt
+311:42:Name -> U
+311:62:Name -> Const:NoneType:None | U
+312:11:Name -> Inst:builtins.list | List:1
+315:7:Name -> Const:NoneType:None | U
+316:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+316:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+316:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+316:71:Name -> Const:NoneType:None | U
+316:77:Name -> Inst:builtins.list | List:1
+319:10:Call -> Dict:0 | U
+319:10:Name -> Func:salt.modules.aixpkg.list_pkgs
+323:18:Name -> Inst:builtins.list | List:1
+324:19:Call -> U
+324:19:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+324:19:Attribute -> Module:posixpath | Module:ntpath
+324:19:Name -> Module:os
+324:36:Name -> Const:NoneType:None | U
+330:11:Call -> U
+330:11:Attribute -> U
+330:11:Name -> U
+330:40:Call -> U
+330:40:Attribute -> U
+330:40:Name -> U
+332:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+332:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+332:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:58:Name -> U
+334:15:Call -> U
+334:15:Attribute -> U
+334:15:Name -> U
+336:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+336:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+336:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+336:58:Name -> U
+338:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+338:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+338:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+338:71:Name -> U
+343:15:Call -> U | Const:bool:False | Const:bool:False
+343:15:Attribute -> BM:pathlib.Path.is_file
+343:15:Call -> Inst:pathlib.Path
+343:15:Attribute -> Class:pathlib.Path
+343:15:Name -> Module:pathlib
+346:19:Name -> Const:bool:False | U
+350:19:Name -> Const:bool:False | U
+353:25:Name -> Const:str:'/opt/freeware/bin/dnf'
+353:34:Name -> Const:str:'install --allowerasing ' | Const:str:'install --assumeno ' | Const:str:'install --allowerasing --assumeno ' | Const:str:'install --assumeyes ' | Const:str:'install --allowerasing --assumeyes ' | Const:str:'install --refresh ' | Const:str:'install --allowerasing --refresh ' | Const:str:'install --assumeno --refresh ' | Const:str:'install --allowerasing --assumeno --ref | Const:str:'install --assumeyes --refresh ' | Const:str:'install --allowerasing --assumeyes --re
+353:45:Name -> Const:NoneType:None | U
+354:22:Call -> ERR
+354:22:Name -> ERR
+355:20:Name -> Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --assumen | Const:str:'/opt/freeware/bin/dnf install --assumen | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --assumey | Const:str:'/opt/freeware/bin/dnf install --assumey | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --refresh | Const:str:'/opt/freeware/bin/dnf install --refresh | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --assumen | Const:str:'/opt/freeware/bin/dnf install --assumen | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --assumey | Const:str:'/opt/freeware/bin/dnf install --assumey | Const:str:'/opt/freeware/bin/dnf install --allower | Const:str:'/opt/freeware/bin/dnf install --allower
+357:24:Name -> Dict:1
+361:17:Call -> U | Const:bool:False | Const:bool:False
+361:17:Attribute -> BM:pathlib.Path.is_file
+361:17:Call -> Inst:pathlib.Path
+361:17:Attribute -> Class:pathlib.Path
+361:17:Name -> Module:pathlib
+364:19:Name -> Const:bool:False | U
+369:25:Name -> Const:str:'/usr/bin/yum'
+369:34:Name -> Const:str:'install ' | Const:str:'install --assumeno ' | Const:str:'install --assumeyes '
+369:45:Name -> Const:NoneType:None | U
+370:22:Call -> ERR
+370:22:Name -> ERR
+371:20:Name -> Const:str:'/usr/bin/yum install  None' | Const:str:'/usr/bin/yum install  Uninferable' | Const:str:'/usr/bin/yum install --assumeno  None' | Const:str:'/usr/bin/yum install --assumeno  Uninfe | Const:str:'/usr/bin/yum install --assumeyes  None' | Const:str:'/usr/bin/yum install --assumeyes  Uninf
+373:24:Name -> Dict:1
+377:17:Call -> U | Const:bool:False | Const:bool:False
+377:17:Attribute -> BM:pathlib.Path.is_file
+377:17:Call -> Inst:pathlib.Path
+377:17:Attribute -> Class:pathlib.Path
+377:17:Name -> Module:pathlib
+380:19:Name -> Const:bool:False | U
+384:19:Name -> Const:bool:False | U
+387:25:Name -> Const:str:'/opt/freeware/bin/yum'
+387:34:Name -> Const:str:'install --allowerasing ' | Const:str:'install --assumeno ' | Const:str:'install --allowerasing --assumeno ' | Const:str:'install --assumeyes ' | Const:str:'install --allowerasing --assumeyes ' | Const:str:'install --refresh ' | Const:str:'install --allowerasing --refresh ' | Const:str:'install --assumeno --refresh ' | Const:str:'install --allowerasing --assumeno --ref | Const:str:'install --assumeyes --refresh ' | Const:str:'install --allowerasing --assumeyes --re
+387:45:Name -> Const:NoneType:None | U
+388:22:Call -> ERR
+388:22:Name -> ERR
+389:20:Name -> Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --assumen | Const:str:'/opt/freeware/bin/yum install --assumen | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --assumey | Const:str:'/opt/freeware/bin/yum install --assumey | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --refresh | Const:str:'/opt/freeware/bin/yum install --refresh | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --assumen | Const:str:'/opt/freeware/bin/yum install --assumen | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --assumey | Const:str:'/opt/freeware/bin/yum install --assumey | Const:str:'/opt/freeware/bin/yum install --allower | Const:str:'/opt/freeware/bin/yum install --allower
+391:24:Name -> Dict:1
+398:19:Name -> Const:bool:False | U
+401:25:Name -> Const:str:'/usr/bin/rpm'
+401:34:Name -> Const:str:'-Uivh ' | Const:str:'install --test' | Const:str:'-Uivh --test'
+401:45:Name -> Const:NoneType:None | U
+402:22:Call -> ERR
+402:22:Name -> ERR
+402:46:Name -> Const:str:'/usr/bin/rpm -Uivh  None' | Const:str:'/usr/bin/rpm -Uivh  Uninferable' | Const:str:'/usr/bin/rpm install --test None' | Const:str:'/usr/bin/rpm install --test Uninferable | Const:str:'/usr/bin/rpm -Uivh --test None' | Const:str:'/usr/bin/rpm -Uivh --test Uninferable'
+404:24:Name -> Dict:0 | U
+404:42:Name -> Dict:0 | U
+404:67:Name -> Dict:0 | U
+405:19:Name -> Const:bool:False | Const:bool:True
+407:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+407:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+407:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+409:20:Name -> U
+412:16:Call -> ERR
+412:16:Attribute -> BM:builtins.list.append
+412:16:Name -> List:0
+412:30:Name -> Dict:0 | U
+413:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+413:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+413:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+415:20:Name -> Dict:0 | U
+416:20:Name -> List:0
+419:11:Name -> Const:bool:False | Const:bool:True
+419:27:Name -> Const:bool:False | Const:bool:True
+423:15:Name -> Const:bool:False | U
+426:22:Call -> U
+426:22:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+426:22:Attribute -> Module:posixpath | Module:ntpath
+426:22:Name -> Module:os
+426:38:Name -> Const:NoneType:None | U
+427:19:Name -> U
+427:35:Name -> U
+428:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+428:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+428:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+428:64:Name -> U
+429:18:Call -> ERR
+429:18:Name -> ERR
+429:42:Name -> U
+430:20:Name -> U
+431:16:Call -> ERR
+431:16:Attribute -> BM:builtins.list.append
+431:16:Name -> List:0
+431:30:Name -> Dict:0 | U
+432:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+432:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+432:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+434:20:Name -> Dict:0 | U
+435:20:Name -> List:0
+439:4:Call -> ERR
+439:4:Attribute -> ERR
+439:4:Name -> ERR
+440:10:Call -> Dict:0 | U
+440:10:Name -> Func:salt.modules.aixpkg.list_pkgs
+441:10:Call -> Dict:0
+441:10:Attribute -> Func:salt.utils.data.compare_dicts
+441:10:Attribute -> Module:salt.utils.data
+441:10:Attribute -> Module:salt.utils
+441:10:Name -> Module:salt
+441:40:Name -> Dict:0 | U
+441:45:Name -> Dict:0 | U
+443:7:Name -> List:0
+444:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+444:14:Name -> Class:salt.exceptions.CommandExecutionError
+446:29:Name -> Dict:0
+446:44:Name -> U
+450:7:Name -> Const:bool:False | U
+453:11:Name -> Dict:0
+489:51:Name -> Const:NoneType:None | U
+489:14:Call -> Inst:builtins.list
+489:14:Attribute -> Func:salt.utils.args.split_input
+489:14:Attribute -> Module:salt.utils.args
+489:14:Attribute -> Module:salt.utils
+489:14:Name -> Module:salt
+489:42:Name -> U
+489:62:Name -> Const:NoneType:None | U
+490:11:Name -> Inst:builtins.list | List:1
+493:7:Name -> Const:NoneType:None | U
+494:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+494:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+494:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+494:69:Name -> Const:NoneType:None | U
+494:75:Name -> Inst:builtins.list | List:1
+499:10:Call -> Dict:0 | U
+499:10:Name -> Func:salt.modules.aixpkg.list_pkgs
+502:18:Name -> Inst:builtins.list | List:1
+506:40:Call -> Tuple:3
+506:40:Name -> Func:salt.modules.aixpkg._check_pkg
+506:51:Name -> Const:NoneType:None | U
+507:15:Name -> Class:salt.exceptions.CommandExecutionError
+508:15:Attribute -> Const:NoneType:None | U
+508:15:Name -> ExcInst:salt.exceptions.CommandExecutionError
+509:16:Call -> ERR
+509:16:Attribute -> BM:builtins.list.append
+509:16:Name -> List:0
+509:30:Attribute -> U
+509:30:Name -> ExcInst:salt.exceptions.CommandExecutionError
+512:11:Name -> Const:bool:False | Const:bool:True
+517:15:Call -> U | Const:bool:False | Const:bool:False
+517:15:Attribute -> BM:pathlib.Path.is_file
+517:15:Call -> Inst:pathlib.Path
+517:15:Attribute -> Class:pathlib.Path
+517:15:Name -> Module:pathlib
+519:25:Name -> Const:str:'/opt/freeware/bin/dnf'
+519:34:Name -> Const:str:'-y remove'
+519:45:Name -> Const:NoneType:None | U
+520:22:Call -> ERR
+520:22:Name -> ERR
+521:20:Name -> Const:str:'/opt/freeware/bin/dnf -y remove None' | Const:str:'/opt/freeware/bin/dnf -y remove Uninfer
+523:24:Name -> Dict:1
+526:17:Call -> U | Const:bool:False | Const:bool:False
+526:17:Attribute -> BM:pathlib.Path.is_file
+526:17:Call -> Inst:pathlib.Path
+526:17:Attribute -> Class:pathlib.Path
+526:17:Name -> Module:pathlib
+528:25:Name -> Const:str:'/opt/freeware/bin/yum'
+528:34:Name -> Const:str:'-y remove'
+528:45:Name -> Const:NoneType:None | U
+529:22:Call -> ERR
+529:22:Name -> ERR
+530:20:Name -> Const:str:'/opt/freeware/bin/yum -y remove None' | Const:str:'/opt/freeware/bin/yum -y remove Uninfer
+532:24:Name -> Dict:1
+535:17:Call -> U | Const:bool:False | Const:bool:False
+535:17:Attribute -> BM:pathlib.Path.is_file
+535:17:Call -> Inst:pathlib.Path
+535:17:Attribute -> Class:pathlib.Path
+535:17:Name -> Module:pathlib
+537:25:Name -> Const:str:'/usr/bin/yum'
+537:34:Name -> Const:str:'-y remove'
+537:45:Name -> Const:NoneType:None | U
+538:22:Call -> ERR
+538:22:Name -> ERR
+539:20:Name -> Const:str:'/usr/bin/yum -y remove None' | Const:str:'/usr/bin/yum -y remove Uninferable'
+541:24:Name -> Dict:1
+547:25:Name -> Const:str:'/usr/bin/rpm'
+547:34:Name -> Const:str:'-e'
+547:45:Name -> Const:NoneType:None | U
+548:22:Call -> ERR
+548:22:Name -> ERR
+548:46:Name -> Const:str:'/usr/bin/rpm -e None' | Const:str:'/usr/bin/rpm -e Uninferable'
+550:47:Name -> Const:str:'' | U
+551:18:Call -> ERR
+551:18:Name -> ERR
+551:42:Name -> List:3
+553:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+553:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+553:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+553:70:Name -> Const:str:'' | Const:str:'/opt/freeware/bin/dnf -y remove None' | Const:str:'/opt/freeware/bin/dnf -y remove Uninfer | Const:str:'/opt/freeware/bin/yum -y remove None' | Const:str:'/opt/freeware/bin/yum -y remove Uninfer | Const:str:'/usr/bin/yum -y remove None' | Const:str:'/usr/bin/yum -y remove Uninferable' | Const:str:'/usr/bin/rpm -e None' | Const:str:'/usr/bin/rpm -e Uninferable' | List:3
+553:75:Name -> Dict:0 | U
+556:4:Call -> ERR
+556:4:Attribute -> ERR
+556:4:Name -> ERR
+557:10:Call -> Dict:0 | U
+557:10:Name -> Func:salt.modules.aixpkg.list_pkgs
+558:10:Call -> Dict:0
+558:10:Attribute -> Func:salt.utils.data.compare_dicts
+558:10:Attribute -> Module:salt.utils.data
+558:10:Attribute -> Module:salt.utils
+558:10:Name -> Module:salt
+558:40:Name -> Dict:0 | U
+558:45:Name -> Dict:0 | U
+560:7:Name -> List:0
+561:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+561:14:Name -> Class:salt.exceptions.CommandExecutionError
+563:29:Name -> Dict:0
+563:44:Name -> U
+566:11:Name -> Dict:0
+592:4:Call -> ERR
+592:4:Attribute -> BM:builtins.dict.pop
+592:4:Name -> Dict:0
+595:11:Name -> Tuple:0
+597:16:Name -> Tuple:0
+601:11:Call -> U | Const:bool:False | Const:bool:False
+601:11:Attribute -> BM:pathlib.Path.is_file
+601:11:Call -> Inst:pathlib.Path
+601:11:Attribute -> Class:pathlib.Path
+601:11:Name -> Module:pathlib
+603:21:Name -> Const:str:'/opt/freeware/bin/dnf'
+603:43:Name -> U
+604:29:Call -> ERR
+604:29:Name -> ERR
+605:16:Name -> Const:str:'/opt/freeware/bin/dnf check-update Unin
+605:45:Name -> Dict:1
+607:13:Call -> U | Const:bool:False | Const:bool:False
+607:13:Attribute -> BM:pathlib.Path.is_file
+607:13:Call -> Inst:pathlib.Path
+607:13:Attribute -> Class:pathlib.Path
+607:13:Name -> Module:pathlib
+609:21:Name -> Const:str:'/opt/freeware/bin/yum'
+609:43:Name -> U
+610:29:Call -> ERR
+610:29:Name -> ERR
+611:16:Name -> Const:str:'/opt/freeware/bin/yum check-update Unin
+611:45:Name -> Dict:1
+613:13:Call -> U | Const:bool:False | Const:bool:False
+613:13:Attribute -> BM:pathlib.Path.is_file
+613:13:Call -> Inst:pathlib.Path
+613:13:Attribute -> Class:pathlib.Path
+613:13:Name -> Module:pathlib
+615:21:Name -> Const:str:'/usr/bin/yum'
+615:43:Name -> U
+616:29:Call -> ERR
+616:29:Name -> ERR
+617:16:Name -> Const:str:'/usr/bin/yum check-update Uninferable'
+617:45:Name -> Dict:1
+623:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+623:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+623:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+625:12:Name -> U | Const:NoneType:None
+627:11:Name -> U | Const:NoneType:None
+628:17:Name -> U | Const:NoneType:None
+628:53:Name -> U | Const:NoneType:None
+630:31:Name -> U | Const:NoneType:None
+631:15:Name -> U
+632:33:Call -> U
+632:33:Attribute -> U
+632:33:Name -> U
+634:32:Name -> U
+636:23:Call -> U
+636:23:Attribute -> U
+636:23:Name -> U
+636:43:Name -> U
+638:36:Call -> U
+638:36:Attribute -> U
+638:36:Name -> U
+639:27:Name -> U
+639:35:Name -> U
+641:25:Name -> Const:bool:False
+643:40:Name -> U
+646:11:Name -> Const:str:'' | U
+647:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+647:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+647:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+649:16:Name -> U
+650:16:Name -> U
+653:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+653:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+653:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+653:75:Name -> U
+655:8:Name -> Dict:0
+655:12:Name -> U
+655:20:Name -> Const:str:'' | U
+658:7:Call -> Const:int:0
+658:7:Name -> Func:builtins.len
+658:11:Name -> Tuple:0
+659:15:Name -> Dict:0
+659:19:Name -> Tuple:0
+660:11:Name -> Dict:0
+664:20:Call -> Inst:builtins.function
+664:20:Attribute -> Func:salt.utils.functools.alias_function
+664:20:Attribute -> Module:salt.utils.functools
+664:20:Attribute -> Module:salt.utils
+664:20:Name -> Module:salt
+665:4:Name -> Func:salt.modules.aixpkg.latest_version
+690:7:Call -> U | Const:bool:False | Const:bool:False
+690:7:Attribute -> BM:pathlib.Path.is_file
+690:7:Call -> Inst:pathlib.Path
+690:7:Attribute -> Class:pathlib.Path
+690:7:Name -> Module:pathlib
+692:17:Name -> Const:str:'/opt/freeware/bin/dnf'
+692:39:Name -> U
+693:25:Call -> ERR
+693:25:Name -> ERR
+694:12:Name -> Const:str:'/opt/freeware/bin/dnf check-update Unin
+694:41:Name -> Dict:1
+696:9:Call -> U | Const:bool:False | Const:bool:False
+696:9:Attribute -> BM:pathlib.Path.is_file
+696:9:Call -> Inst:pathlib.Path
+696:9:Attribute -> Class:pathlib.Path
+696:9:Name -> Module:pathlib
+698:17:Name -> Const:str:'/opt/freeware/bin/yum'
+698:39:Name -> U
+699:25:Call -> ERR
+699:25:Name -> ERR
+700:12:Name -> Const:str:'/opt/freeware/bin/yum check-update Unin
+700:41:Name -> Dict:1
+702:9:Call -> U | Const:bool:False | Const:bool:False
+702:9:Attribute -> BM:pathlib.Path.is_file
+702:9:Call -> Inst:pathlib.Path
+702:9:Attribute -> Class:pathlib.Path
+702:9:Name -> Module:pathlib
+704:17:Name -> Const:str:'/usr/bin/yum'
+704:39:Name -> U
+705:25:Call -> ERR
+705:25:Name -> ERR
+706:12:Name -> Const:str:'/usr/bin/yum check-update Uninferable'
+706:41:Name -> Dict:1
+712:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+712:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+712:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+714:8:Name -> Const:str:'/opt/freeware/bin/dnf check-update Unin | Const:str:'/opt/freeware/bin/yum check-update Unin | Const:str:'/usr/bin/yum check-update Uninferable'
+715:8:Name -> U
+717:12:Name -> U
+717:48:Name -> U
+718:27:Name -> U
+719:11:Name -> U
+720:29:Call -> U
+720:29:Attribute -> U
+720:29:Name -> U
+722:28:Name -> U
+724:19:Call -> U
+724:19:Attribute -> U
+724:19:Name -> U
+724:39:Name -> U
+726:32:Call -> U
+726:32:Attribute -> U
+726:32:Name -> U
+727:23:Name -> U
+727:31:Name -> U
+729:21:Name -> Const:bool:False
+731:36:Name -> U
+734:26:Call -> Const:str:'' | U | Dict:0
+734:26:Name -> Func:salt.modules.aixpkg.version
+734:34:Name -> U
+735:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+735:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+735:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+737:12:Name -> U
+738:12:Name -> Const:str:'' | U | Dict:0
+739:12:Name -> Const:str:'' | U
+742:7:Name -> Const:str:'' | U
+743:15:Name -> Const:str:'' | U | Dict:0
+743:34:Name -> U
+745:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+745:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+745:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+745:77:Name -> U

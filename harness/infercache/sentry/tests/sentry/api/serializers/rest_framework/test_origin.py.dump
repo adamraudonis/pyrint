@@ -1,0 +1,19 @@
+7:22:Attribute -> U
+7:22:Name -> U
+8:19:Call -> U
+8:19:Name -> U
+11:22:Name -> U
+14:19:Name -> List:5
+15:25:Call -> Inst:tests.sentry.api.serializers.rest_framework.test_origin.DummySerializer
+15:25:Name -> Class:tests.sentry.api.serializers.rest_framework.test_origin.DummySerializer
+15:63:Name -> Const:str:'https://www.foo.com' | Const:str:'*' | Const:str:'*.domain.com' | Const:str:'*:80' | Const:str:'localhost:8080'
+16:19:Call -> ERR
+16:19:Attribute -> ERR
+16:19:Name -> Inst:tests.sentry.api.serializers.rest_framework.test_origin.DummySerializer
+20:19:Name -> List:2
+21:25:Call -> Inst:tests.sentry.api.serializers.rest_framework.test_origin.DummySerializer
+21:25:Name -> Class:tests.sentry.api.serializers.rest_framework.test_origin.DummySerializer
+21:63:Name -> Const:str:'https://www.foo.com:*' | Const:str:'localhost:*'
+22:19:Call -> ERR
+22:19:Attribute -> ERR
+22:19:Name -> Inst:tests.sentry.api.serializers.rest_framework.test_origin.DummySerializer

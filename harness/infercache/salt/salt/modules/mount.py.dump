@@ -1,0 +1,2307 @@
+19:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:6:Attribute -> Func:logging.getLogger
+19:6:Name -> Module:logging
+19:24:Name -> Const:str:'salt.modules.mount' | Const:str:'__main__'
+29:7:Call -> U
+29:7:Attribute -> Func:salt.utils.platform.is_windows
+29:7:Attribute -> Module:salt.utils.platform
+29:7:Attribute -> Module:salt.utils
+29:7:Name -> Module:salt
+36:7:Name -> ERR
+37:17:Call -> ERR
+37:17:Name -> ERR
+39:17:Call -> ERR
+39:17:Name -> ERR
+41:16:Call -> U
+41:16:Attribute -> U
+41:16:Name -> U
+42:16:Call -> U
+42:16:Attribute -> U
+42:16:Call -> U
+42:16:Attribute -> Func:re.sub
+42:16:Name -> Module:re
+42:36:Name -> U
+43:11:Call -> ERR
+43:11:Name -> Func:builtins.len
+43:15:Name -> U
+44:12:Name -> Dict:0
+44:16:Name -> U
+44:28:Name -> U
+45:11:Name -> Dict:0
+49:12:Call -> Dict:0
+49:12:Name -> Func:salt.modules.mount._list_mounts
+51:11:Call -> ERR
+51:11:Attribute -> Func:posix.access
+51:11:Name -> Module:os
+51:21:Name -> Const:str:'/proc/self/mountinfo'
+51:31:Attribute -> Const:int:4
+51:31:Name -> Module:os
+53:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+53:14:Name -> Class:salt.exceptions.CommandExecutionError
+53:36:Call -> Const:str:'File not readable /proc/self/mountinfo'
+53:36:Attribute -> BM:builtins.str.format
+53:36:Name -> Const:str:'File not readable {0}'
+53:47:Name -> Const:str:'/proc/self/mountinfo'
+55:27:Name -> ERR
+56:8:Name -> ERR
+56:36:Call -> ERR
+56:36:Name -> ERR
+57:17:Name -> ERR
+59:9:Call -> U
+59:9:Attribute -> Func:salt.utils.files.fopen
+59:9:Attribute -> Module:salt.utils.files
+59:9:Attribute -> Module:salt.utils
+59:9:Name -> Module:salt
+59:32:Name -> Const:str:'/proc/self/mountinfo'
+60:20:Name -> U
+61:20:Call -> U
+61:20:Attribute -> U
+61:20:Call -> U
+61:20:Attribute -> Func:salt.utils.stringutils.to_unicode
+61:20:Attribute -> Module:salt.utils.stringutils
+61:20:Attribute -> Module:salt.utils
+61:20:Name -> Module:salt
+61:54:Name -> U
+62:21:Call -> U
+62:21:Attribute -> U
+62:21:Name -> U
+68:19:Call -> U
+68:19:Attribute -> U
+68:19:Name -> U
+69:26:Name -> U
+69:32:Name -> U
+72:15:Name -> U
+73:30:Call -> U
+73:30:Attribute -> U
+73:30:Call -> U
+73:30:Attribute -> U
+73:30:Name -> U
+73:45:Name -> U
+74:30:Name -> U
+74:46:Call -> U
+74:46:Attribute -> U
+74:46:Name -> U
+75:31:Call -> U
+75:31:Attribute -> U
+75:31:Call -> U
+75:31:Attribute -> U
+75:31:Name -> U
+75:46:Name -> U
+76:12:Name -> U
+76:16:Name -> U
+77:27:Name -> U
+78:28:Name -> U
+79:25:Name -> U
+80:25:Name -> U
+81:24:Name -> U
+82:24:Call -> U
+82:24:Name -> Func:salt.modules.mount._resolve_user_group_names
+82:50:Call -> U
+82:50:Attribute -> U
+82:50:Name -> U
+83:26:Name -> U
+83:32:Name -> U
+84:26:Call -> U
+84:26:Attribute -> U
+84:26:Name -> U
+85:30:Call -> ERR
+85:30:Attribute -> BM:builtins.dict.get
+85:30:Name -> Dict:0
+85:40:Name -> U
+86:29:Call -> U
+86:29:Name -> Func:salt.modules.mount._resolve_user_group_names
+86:55:Call -> U
+86:55:Attribute -> U
+86:55:Name -> U
+86:61:Name -> U
+87:31:Name -> Const:NoneType:None | U
+88:32:Name -> Const:NoneType:None | U
+90:11:Name -> U
+97:12:Call -> Dict:0
+97:12:Name -> Func:salt.modules.mount._list_mounts
+99:11:Call -> ERR
+99:11:Attribute -> Func:posix.access
+99:11:Name -> Module:os
+99:21:Name -> Const:str:'/proc/self/mounts'
+99:31:Attribute -> Const:int:4
+99:31:Name -> Module:os
+101:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+101:14:Name -> Class:salt.exceptions.CommandExecutionError
+101:36:Call -> Const:str:'File not readable /proc/self/mounts'
+101:36:Attribute -> BM:builtins.str.format
+101:36:Name -> Const:str:'File not readable {0}'
+101:47:Name -> Const:str:'/proc/self/mounts'
+103:9:Call -> U
+103:9:Attribute -> Func:salt.utils.files.fopen
+103:9:Attribute -> Module:salt.utils.files
+103:9:Attribute -> Module:salt.utils
+103:9:Name -> Module:salt
+103:32:Name -> Const:str:'/proc/self/mounts'
+104:20:Name -> U
+105:20:Call -> U
+105:20:Attribute -> U
+105:20:Call -> U
+105:20:Attribute -> Func:salt.utils.stringutils.to_unicode
+105:20:Attribute -> Module:salt.utils.stringutils
+105:20:Attribute -> Module:salt.utils
+105:20:Name -> Module:salt
+105:54:Name -> U
+106:12:Name -> U
+106:16:Name -> U
+107:26:Name -> U
+108:30:Call -> ERR
+108:30:Attribute -> BM:builtins.dict.get
+108:30:Name -> Dict:0
+108:40:Name -> U
+109:26:Name -> U
+110:24:Call -> U
+110:24:Name -> Func:salt.modules.mount._resolve_user_group_names
+110:50:Call -> U
+110:50:Attribute -> U
+110:50:Name -> U
+112:11:Name -> U
+119:16:Call -> ERR
+119:16:Attribute -> ERR
+119:16:Call -> ERR
+119:16:Name -> ERR
+120:16:Call -> U
+120:16:Attribute -> U
+120:16:Call -> U
+120:16:Attribute -> Func:re.sub
+120:16:Name -> Module:re
+120:36:Name -> ERR
+121:11:Name -> U
+122:15:Name -> U
+122:37:Name -> U
+124:24:Call -> ERR
+124:24:Name -> Func:builtins.len
+124:28:Name -> U
+125:15:Call -> ERR
+125:15:Attribute -> ERR
+125:15:Name -> ERR
+128:28:Name -> U
+127:20:Call -> U
+127:20:Name -> Func:salt.modules.mount._resolve_user_group_names
+127:46:Call -> U
+127:46:Attribute -> U
+127:46:Name -> U
+131:19:Name -> U | List:0
+132:20:Name -> U
+132:24:Name -> U
+133:34:Name -> U
+134:34:Name -> U
+135:32:Name -> U
+138:20:Name -> U
+138:24:Name -> U
+138:47:Name -> U
+138:67:Name -> U
+142:28:Name -> U
+141:20:Call -> U
+141:20:Name -> Func:salt.modules.mount._resolve_user_group_names
+141:46:Call -> U
+141:46:Attribute -> U
+141:46:Name -> U
+145:19:Name -> U | List:0
+146:20:Name -> U
+146:24:Name -> U
+147:32:Name -> U
+148:34:Name -> U
+149:34:Name -> U
+150:32:Name -> U
+153:20:Name -> U
+153:24:Name -> U
+154:32:Name -> U
+155:34:Name -> U
+156:34:Name -> U
+158:11:Name -> U
+165:16:Call -> ERR
+165:16:Attribute -> ERR
+165:16:Call -> ERR
+165:16:Name -> ERR
+166:16:Call -> U
+166:16:Attribute -> U
+166:16:Call -> U
+166:16:Attribute -> Func:re.sub
+166:16:Name -> Module:re
+166:36:Name -> ERR
+167:8:Name -> U
+167:12:Name -> U
+168:22:Name -> U
+169:22:Name -> U
+170:20:Call -> U
+170:20:Name -> Func:salt.modules.mount._resolve_user_group_names
+170:46:Call -> U
+170:46:Attribute -> U
+170:46:Name -> U
+172:11:Name -> U
+179:16:Call -> ERR
+179:16:Attribute -> ERR
+179:16:Call -> ERR
+179:16:Name -> ERR
+180:16:Call -> U
+180:16:Attribute -> U
+180:16:Call -> U
+180:16:Attribute -> Func:re.sub
+180:16:Name -> Module:re
+180:36:Name -> ERR
+181:8:Name -> U
+181:12:Name -> U
+182:22:Name -> U
+183:22:Name -> U
+184:20:Call -> U
+184:20:Name -> Func:salt.modules.mount._resolve_user_group_names
+184:46:Call -> U
+184:46:Attribute -> U
+184:46:Name -> U
+186:11:Name -> U
+193:16:Call -> ERR
+193:16:Attribute -> ERR
+193:16:Call -> ERR
+193:16:Name -> ERR
+194:16:Call -> U
+194:16:Attribute -> U
+194:16:Call -> U
+194:16:Attribute -> Func:re.sub
+194:16:Name -> Module:re
+194:36:Name -> ERR
+195:17:Call -> U
+195:17:Attribute -> Func:re.findall
+195:17:Name -> Module:re
+195:42:Name -> ERR
+195:48:Attribute -> Const:int:16
+195:48:Name -> Module:re
+196:11:Call -> ERR
+196:11:Name -> Func:builtins.len
+196:15:Name -> U
+197:18:Call -> ERR
+197:18:Name -> ERR
+197:54:Name -> U
+198:18:Call -> ERR
+198:18:Attribute -> BM:builtins.str.split
+198:18:Call -> Const:str:''
+198:18:Attribute -> BM:builtins.str.join
+198:27:Call -> U
+198:27:Attribute -> U
+198:27:Name -> U
+199:12:Name -> U
+199:16:Name -> U
+200:26:Name -> U
+201:26:Name -> U
+202:24:Call -> U
+202:24:Name -> Func:salt.modules.mount._resolve_user_group_names
+202:50:Call -> U
+202:50:Attribute -> U
+202:50:Name -> U
+203:25:Call -> Const:str:''
+203:25:Name -> Class:builtins.str
+203:29:Call -> U
+203:29:Attribute -> U
+203:29:Name -> U
+204:25:Call -> Const:str:''
+204:25:Name -> Class:builtins.str
+204:29:Name -> U
+205:31:Name -> U
+208:12:Name -> U
+208:16:Name -> U
+209:26:Name -> U
+210:26:Name -> U
+211:24:Call -> U
+211:24:Name -> Func:salt.modules.mount._resolve_user_group_names
+211:50:Call -> U
+211:50:Attribute -> U
+211:50:Name -> U
+213:11:Name -> U
+220:16:Call -> ERR
+220:16:Attribute -> ERR
+220:16:Call -> ERR
+220:16:Name -> ERR
+221:16:Call -> U
+221:16:Attribute -> U
+221:16:Call -> U
+221:16:Attribute -> Func:re.sub
+221:16:Name -> Module:re
+221:36:Name -> ERR
+222:17:Call -> U
+222:17:Attribute -> U
+222:17:Call -> U
+222:17:Attribute -> Func:re.findall
+222:17:Name -> Module:re
+222:42:Name -> ERR
+222:48:Attribute -> Const:int:16
+222:48:Name -> Module:re
+223:8:Name -> U
+223:12:Name -> U
+224:22:Name -> U
+225:22:Name -> U
+226:20:Call -> U
+226:20:Name -> Func:salt.modules.mount._resolve_user_group_names
+226:46:Name -> U
+228:11:Name -> U
+236:20:Call -> Inst:builtins.enumerate
+236:20:Name -> Class:builtins.enumerate
+236:30:Name -> U
+237:11:Call -> U
+237:11:Attribute -> U
+237:11:Name -> U
+237:32:Name -> Dict:2
+238:23:Call -> U
+238:23:Attribute -> U
+238:23:Name -> U
+239:21:Call -> U
+239:21:Attribute -> U
+239:21:Name -> U
+240:18:Name -> U
+241:19:Call -> U
+241:19:Attribute -> Func:re.match
+241:19:Name -> Module:re
+241:39:Name -> U
+242:24:Call -> ERR
+242:24:Name -> ERR
+242:33:Name -> Dict:2
+242:46:Name -> U
+242:55:Name -> U
+243:19:Name -> U
+243:29:Name -> U
+243:39:Name -> U
+244:26:Name -> U
+244:32:Name -> U
+245:12:Name -> U
+245:17:Name -> U
+245:24:Name -> U
+245:39:Call -> Const:str:''
+245:39:Name -> Class:builtins.str
+245:43:Name -> U
+246:8:Name -> U
+246:13:Name -> U
+246:20:Call -> U
+246:20:Attribute -> U
+246:20:Name -> U
+246:25:Name -> U
+247:11:Name -> U
+261:7:Name -> ERR
+262:8:Call -> Dict:0
+262:8:Name -> Func:salt.modules.mount._active_mounts_freebsd
+262:31:Name -> Dict:0
+263:18:Name -> ERR
+264:8:Call -> Dict:0
+264:8:Name -> Func:salt.modules.mount._active_mounts_aix
+264:27:Name -> Dict:0
+265:9:Name -> ERR
+266:8:Call -> Dict:0
+266:8:Name -> Func:salt.modules.mount._active_mounts_solaris
+266:31:Name -> Dict:0
+267:9:Name -> ERR
+268:8:Call -> Dict:0
+268:8:Name -> Func:salt.modules.mount._active_mounts_openbsd
+268:31:Name -> Dict:0
+269:9:Name -> ERR
+270:8:Call -> Dict:0
+270:8:Name -> Func:salt.modules.mount._active_mounts_darwin
+270:30:Name -> Dict:0
+272:11:Name -> Const:bool:False | U
+274:16:Call -> Dict:0
+274:16:Name -> Func:salt.modules.mount._active_mountinfo
+274:34:Name -> Dict:0
+275:19:Name -> Class:salt.exceptions.CommandExecutionError
+276:16:Call -> Dict:0
+276:16:Name -> Func:salt.modules.mount._active_mounts
+276:31:Name -> Dict:0
+278:12:Call -> Dict:0
+278:12:Name -> Func:salt.modules.mount._active_mounts
+278:27:Name -> Dict:0
+279:11:Name -> Dict:0
+291:21:Name -> Class:builtins.ValueError
+303:5:Name -> Class:builtins.classmethod
+304:39:Name -> Tuple:6
+305:11:Call -> ERR
+305:11:Name -> Func:builtins.len
+305:15:Name -> Tuple:6 | U
+306:18:Call -> ExcInst:builtins.ValueError
+306:18:Name -> Class:builtins.ValueError
+306:51:Name -> Tuple:6 | U
+307:11:Call -> U
+307:11:Attribute -> U
+307:11:Name -> U
+308:18:Call -> ExcInst:salt.modules.mount._fstab_entry.ParseError
+308:18:Attribute -> Class:salt.modules.mount._fstab_entry.ParseError
+308:18:Name -> Class:salt.modules.mount._fstab_entry
+310:16:Call -> U
+310:16:Attribute -> U
+310:16:Name -> U
+311:11:Call -> ERR
+311:11:Name -> Func:builtins.len
+311:15:Name -> U
+311:29:Call -> ERR
+311:29:Name -> Func:builtins.len
+311:33:Name -> U
+312:18:Call -> ExcInst:salt.modules.mount._fstab_entry.ParseError
+312:18:Attribute -> Class:salt.modules.mount._fstab_entry.ParseError
+312:18:Name -> Class:salt.modules.mount._fstab_entry
+314:8:Call -> U
+314:8:Attribute -> U
+314:8:Name -> U
+314:30:Call -> ERR
+314:30:Name -> Func:builtins.len
+314:34:Name -> Tuple:6 | U
+314:42:Call -> ERR
+314:42:Name -> Func:builtins.len
+314:46:Name -> U
+316:15:Call -> Inst:builtins.dict
+316:15:Name -> Class:builtins.dict
+316:20:Call -> Inst:builtins.zip
+316:20:Name -> Class:builtins.zip
+316:24:Name -> Tuple:6 | U
+316:30:Name -> U
+318:5:Name -> Class:builtins.classmethod
+320:15:Call -> Inst:salt.modules.mount._fstab_entry
+320:15:Name -> Class:salt.modules.mount._fstab_entry
+320:21:Call -> Inst:builtins.dict
+320:21:Attribute -> BM:salt.modules.mount._fstab_entry.dict_from_line
+320:21:Name -> Class:salt.modules.mount._fstab_entry
+320:41:Name -> Tuple:0
+320:49:Name -> Dict:0
+322:5:Name -> Class:builtins.classmethod
+324:15:Call -> Const:str:''
+324:15:Attribute -> BM:builtins.str.format
+324:15:Attribute -> Const:str:'{device}\t\t{name}\t{fstype}\t{opts}\t{
+324:15:Name -> Class:salt.modules.mount._fstab_entry
+324:41:Name -> U
+330:15:Call -> Const:str:''
+330:15:Attribute -> BM:salt.modules.mount._fstab_entry.dict_to_line
+330:15:Name -> Inst:salt.modules.mount._fstab_entry
+330:33:Attribute -> Inst:builtins.dict
+330:33:Name -> Inst:salt.modules.mount._fstab_entry
+336:15:Call -> ERR
+336:15:Name -> Func:builtins.repr
+336:20:Attribute -> Inst:builtins.dict
+336:20:Name -> Inst:salt.modules.mount._fstab_entry
+342:18:Name -> U
+342:23:Attribute -> Inst:builtins.dict
+342:23:Name -> Inst:salt.modules.mount._fstab_entry
+342:37:Name -> U
+342:53:Name -> U
+343:15:Call -> Inst:salt.modules.mount._fstab_entry
+343:15:Attribute -> Class:salt.modules.mount._fstab_entry
+343:15:Name -> Inst:salt.modules.mount._fstab_entry
+343:32:Name -> U
+350:12:Name -> U
+350:39:Call -> DictItems
+350:39:Attribute -> BM:builtins.dict.items
+350:39:Name -> Dict:0
+350:59:Name -> U
+352:18:Name -> U
+352:33:Call -> Const:str:''
+352:33:Name -> Class:builtins.str
+352:37:Name -> U
+352:71:Name -> U
+353:8:Name -> Inst:salt.modules.mount._fstab_entry
+353:24:Call -> Inst:builtins.dict
+353:24:Name -> Class:builtins.dict
+353:29:Name -> U
+355:5:Name -> Class:builtins.staticmethod
+360:15:Call -> U
+360:15:Attribute -> Func:posixpath.normcase | Func:ntpath.normcase | Func:ntpath.normcase
+360:15:Attribute -> Module:posixpath | Module:ntpath
+360:15:Name -> Module:os
+360:32:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+360:32:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+360:32:Attribute -> Module:posixpath | Module:ntpath
+360:32:Name -> Module:os
+360:49:Name -> U
+366:16:Call -> Inst:builtins.dict
+366:16:Attribute -> BM:salt.modules.mount._fstab_entry.dict_from_line
+366:16:Name -> Inst:salt.modules.mount._fstab_entry
+366:36:Name -> U
+367:26:Call -> ERR
+367:26:Attribute -> BM:builtins.dict.items
+367:26:Attribute -> Inst:builtins.dict
+367:26:Name -> Inst:salt.modules.mount._fstab_entry
+368:15:Name -> U
+369:26:Call -> ERR
+369:26:Name -> Func:builtins.sorted
+369:33:Call -> ERR
+369:33:Attribute -> ERR
+369:33:Call -> ERR
+369:33:Attribute -> BM:builtins.dict.get
+369:33:Name -> Inst:builtins.dict
+369:43:Name -> U
+370:26:Call -> ERR
+370:26:Name -> Func:builtins.sorted
+370:33:Call -> U
+370:33:Attribute -> U
+370:33:Name -> U
+371:19:Name -> U
+371:30:Name -> U
+373:17:Name -> Inst:builtins.dict
+373:23:Name -> U
+373:31:Name -> U
+393:21:Name -> Class:builtins.ValueError
+411:5:Name -> Class:builtins.classmethod
+413:11:Call -> U
+413:11:Attribute -> U
+413:11:Name -> U
+414:18:Call -> ExcInst:salt.modules.mount._vfstab_entry.ParseError
+414:18:Attribute -> Class:salt.modules.mount._vfstab_entry.ParseError
+414:18:Name -> Class:salt.modules.mount._vfstab_entry
+416:16:Call -> U
+416:16:Attribute -> U
+416:16:Name -> U
+417:11:Call -> ERR
+417:11:Name -> Func:builtins.len
+417:15:Name -> U
+418:18:Call -> ExcInst:salt.modules.mount._vfstab_entry.ParseError
+418:18:Attribute -> Class:salt.modules.mount._vfstab_entry.ParseError
+418:18:Name -> Class:salt.modules.mount._vfstab_entry
+420:15:Call -> Inst:builtins.dict
+420:15:Name -> Class:builtins.dict
+420:20:Call -> Inst:builtins.zip
+420:20:Name -> Class:builtins.zip
+420:24:Attribute -> Tuple:7
+420:24:Name -> Class:salt.modules.mount._vfstab_entry
+420:41:Name -> U
+422:5:Name -> Class:builtins.classmethod
+424:15:Call -> Inst:salt.modules.mount._vfstab_entry
+424:15:Name -> Class:salt.modules.mount._vfstab_entry
+424:21:Call -> Inst:builtins.dict
+424:21:Attribute -> BM:salt.modules.mount._vfstab_entry.dict_from_line
+424:21:Name -> Class:salt.modules.mount._vfstab_entry
+424:41:Name -> Tuple:0
+424:49:Name -> Dict:0
+426:5:Name -> Class:builtins.classmethod
+428:15:Call -> Const:str:''
+428:15:Attribute -> BM:builtins.str.format
+428:15:Attribute -> Const:str:'{device:<11} {device_fsck:<3} {name:<19
+428:15:Name -> Class:salt.modules.mount._vfstab_entry
+428:42:Name -> U
+434:15:Call -> Const:str:''
+434:15:Attribute -> BM:salt.modules.mount._vfstab_entry.dict_to_line
+434:15:Name -> Inst:salt.modules.mount._vfstab_entry
+434:33:Attribute -> Inst:builtins.dict
+434:33:Name -> Inst:salt.modules.mount._vfstab_entry
+440:15:Call -> ERR
+440:15:Name -> Func:builtins.repr
+440:20:Attribute -> Inst:builtins.dict
+440:20:Name -> Inst:salt.modules.mount._vfstab_entry
+446:18:Name -> U
+446:23:Attribute -> Inst:builtins.dict
+446:23:Name -> Inst:salt.modules.mount._vfstab_entry
+446:37:Name -> U
+446:53:Name -> U
+447:15:Call -> Inst:salt.modules.mount._vfstab_entry
+447:15:Attribute -> Class:salt.modules.mount._vfstab_entry
+447:15:Name -> Inst:salt.modules.mount._vfstab_entry
+447:32:Name -> U
+454:12:Name -> U
+454:39:Call -> DictItems
+454:39:Attribute -> BM:builtins.dict.items
+454:39:Name -> Dict:0
+454:59:Name -> U
+456:18:Name -> U
+456:33:Call -> Const:str:''
+456:33:Name -> Class:builtins.str
+456:37:Name -> U
+456:71:Name -> U
+457:8:Name -> Inst:salt.modules.mount._vfstab_entry
+457:24:Call -> Inst:builtins.dict
+457:24:Name -> Class:builtins.dict
+457:29:Name -> U
+459:5:Name -> Class:builtins.staticmethod
+464:15:Call -> U
+464:15:Attribute -> Func:posixpath.normcase | Func:ntpath.normcase | Func:ntpath.normcase
+464:15:Attribute -> Module:posixpath | Module:ntpath
+464:15:Name -> Module:os
+464:32:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+464:32:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+464:32:Attribute -> Module:posixpath | Module:ntpath
+464:32:Name -> Module:os
+464:49:Name -> U
+470:16:Call -> Inst:builtins.dict
+470:16:Attribute -> BM:salt.modules.mount._vfstab_entry.dict_from_line
+470:16:Name -> Inst:salt.modules.mount._vfstab_entry
+470:36:Name -> U
+471:26:Call -> ERR
+471:26:Attribute -> BM:builtins.dict.items
+471:26:Attribute -> Inst:builtins.dict
+471:26:Name -> Inst:salt.modules.mount._vfstab_entry
+472:15:Name -> U
+473:26:Call -> ERR
+473:26:Name -> Func:builtins.sorted
+473:33:Call -> ERR
+473:33:Attribute -> ERR
+473:33:Call -> ERR
+473:33:Attribute -> BM:builtins.dict.get
+473:33:Name -> Inst:builtins.dict
+473:43:Name -> U
+474:26:Call -> ERR
+474:26:Name -> Func:builtins.sorted
+474:33:Call -> U
+474:33:Attribute -> U
+474:33:Name -> U
+475:19:Name -> U
+475:30:Name -> U
+477:17:Name -> Inst:builtins.dict
+477:23:Name -> U
+477:31:Name -> U
+491:21:Name -> Class:builtins.ValueError
+520:5:Name -> Class:builtins.classmethod
+521:41:Name -> Tuple:6
+522:11:Call -> ERR
+522:11:Name -> Func:builtins.len
+522:15:Name -> U
+523:18:Call -> ExcInst:builtins.ValueError
+523:18:Name -> Class:builtins.ValueError
+523:57:Name -> U
+524:15:Name -> Tuple:6 | U
+526:19:Attribute -> Tuple:6
+526:19:Name -> Class:salt.modules.mount._FileSystemsEntry
+527:13:Call -> ERR
+527:13:Name -> Func:builtins.len
+527:17:Name -> Tuple:6 | U
+528:18:Call -> ExcInst:builtins.ValueError
+528:18:Name -> Class:builtins.ValueError
+528:56:Name -> Tuple:6 | U
+530:20:Name -> U
+531:18:Call -> Inst:collections.OrderedDict
+531:18:Name -> Class:collections.OrderedDict
+532:8:Name -> Inst:collections.OrderedDict
+532:26:Call -> U
+532:26:Attribute -> U
+532:26:Call -> U
+532:26:Attribute -> U
+532:26:Name -> U
+533:8:Call -> U
+533:8:Attribute -> U
+533:8:Name -> U
+534:20:Name -> U
+535:15:Call -> U
+535:15:Attribute -> U
+535:15:Name -> U
+536:22:Call -> ExcInst:salt.modules.mount._FileSystemsEntry.ParseError
+536:22:Attribute -> Class:salt.modules.mount._FileSystemsEntry.ParseError
+536:22:Name -> Class:salt.modules.mount._FileSystemsEntry
+538:20:Call -> U
+538:20:Attribute -> U
+538:20:Name -> U
+539:15:Call -> ERR
+539:15:Name -> Func:builtins.len
+539:19:Name -> U
+540:22:Call -> ExcInst:salt.modules.mount._FileSystemsEntry.ParseError
+540:22:Attribute -> Class:salt.modules.mount._FileSystemsEntry.ParseError
+540:22:Name -> Class:salt.modules.mount._FileSystemsEntry
+542:23:Call -> U
+542:23:Attribute -> U
+542:23:Name -> U
+543:15:Name -> U
+543:27:Name -> Tuple:6 | U
+544:16:Name -> Inst:collections.OrderedDict
+544:24:Name -> U
+544:36:Call -> U
+544:36:Attribute -> U
+544:36:Name -> U
+546:22:Call -> ExcInst:builtins.ValueError
+546:22:Name -> Class:builtins.ValueError
+546:73:Name -> U
+548:15:Name -> Inst:collections.OrderedDict
+550:5:Name -> Class:builtins.classmethod
+552:21:Name -> U
+553:11:Name -> U
+554:30:Call -> U
+554:30:Attribute -> U
+554:30:Name -> U
+556:19:Call -> U
+556:19:Attribute -> U
+556:19:Name -> U
+558:19:Name -> U
+558:26:Attribute -> Tuple:18
+558:26:Name -> Class:salt.modules.mount._FileSystemsEntry
+559:20:Name -> U
+559:31:Name -> U
+559:38:Name -> U
+561:15:Name -> U
+563:5:Name -> Class:builtins.classmethod
+565:15:Call -> Inst:salt.modules.mount._FileSystemsEntry
+565:15:Name -> Class:salt.modules.mount._FileSystemsEntry
+565:21:Call -> U
+565:21:Attribute -> BM:salt.modules.mount._FileSystemsEntry.dict_from_cmd_line
+565:21:Name -> Class:salt.modules.mount._FileSystemsEntry
+565:45:Name -> Tuple:0
+565:53:Name -> Dict:0
+567:5:Name -> Class:builtins.classmethod
+569:16:Name -> U
+570:19:Name -> U
+570:41:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+570:41:Name -> Module:os
+571:20:Call -> U
+571:20:Attribute -> U
+571:20:Name -> U
+572:29:Name -> U
+573:33:Name -> U
+573:42:Name -> U
+573:48:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+573:48:Name -> Module:os
+574:20:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+574:20:Name -> Module:os
+575:15:Call -> Const:str:''
+575:15:Name -> Class:builtins.str
+575:19:Name -> U
+577:5:Name -> Class:builtins.classmethod
+579:16:Name -> U
+581:8:Call -> ERR
+581:8:Attribute -> BM:builtins.list.append
+581:8:Name -> List:0
+581:24:Call -> Const:str:''
+581:24:Name -> Class:builtins.str
+581:28:Name -> U
+581:50:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+581:50:Name -> Module:os
+582:20:Call -> U
+582:20:Attribute -> U
+582:20:Name -> U
+583:29:Name -> U
+584:16:Call -> ERR
+584:16:Attribute -> BM:builtins.list.append
+584:16:Name -> List:0
+584:32:Call -> Const:str:''
+584:32:Name -> Class:builtins.str
+584:41:Name -> U
+584:50:Name -> U
+584:56:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+584:56:Name -> Module:os
+585:8:Call -> ERR
+585:8:Attribute -> BM:builtins.list.append
+585:8:Name -> List:0
+585:24:Call -> Const:str:''
+585:24:Name -> Class:builtins.str
+585:28:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+585:28:Name -> Module:os
+586:15:Name -> List:0
+589:14:Call -> Inst:collections.OrderedDict
+589:14:Name -> Class:collections.OrderedDict
+590:8:Name -> Inst:collections.OrderedDict
+590:12:Attribute -> Inst:collections.OrderedDict
+590:12:Name -> Inst:salt.modules.mount._FileSystemsEntry
+590:37:Attribute -> Inst:collections.OrderedDict
+590:37:Name -> Inst:salt.modules.mount._FileSystemsEntry
+591:15:Name -> Inst:collections.OrderedDict
+597:15:Call -> Const:str:''
+597:15:Attribute -> BM:salt.modules.mount._FileSystemsEntry.dict_to_lines
+597:15:Name -> Inst:salt.modules.mount._FileSystemsEntry
+597:34:Attribute -> Inst:collections.OrderedDict
+597:34:Name -> Inst:salt.modules.mount._FileSystemsEntry
+603:15:Call -> ERR
+603:15:Name -> Func:builtins.repr
+603:20:Attribute -> Inst:collections.OrderedDict
+603:20:Name -> Inst:salt.modules.mount._FileSystemsEntry
+609:18:Name -> U
+609:23:Attribute -> Inst:collections.OrderedDict
+609:23:Name -> Inst:salt.modules.mount._FileSystemsEntry
+609:37:Name -> U
+609:53:Name -> U
+610:15:Call -> Inst:salt.modules.mount._FileSystemsEntry
+610:15:Attribute -> Class:salt.modules.mount._FileSystemsEntry
+610:15:Name -> Inst:salt.modules.mount._FileSystemsEntry
+610:32:Name -> U
+617:12:Name -> U
+617:39:Call -> DictItems
+617:39:Attribute -> BM:builtins.dict.items
+617:39:Name -> Dict:0
+617:59:Name -> U
+619:18:Name -> U
+619:33:Call -> Const:str:''
+619:33:Name -> Class:builtins.str
+619:37:Name -> U
+619:71:Name -> U
+620:8:Name -> Inst:salt.modules.mount._FileSystemsEntry
+620:24:Call -> Inst:collections.OrderedDict
+620:24:Name -> Class:collections.OrderedDict
+620:36:Name -> U
+622:5:Name -> Class:builtins.staticmethod
+627:15:Call -> U
+627:15:Attribute -> Func:posixpath.normcase | Func:ntpath.normcase | Func:ntpath.normcase
+627:15:Attribute -> Module:posixpath | Module:ntpath
+627:15:Name -> Module:os
+627:32:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+627:32:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+627:32:Attribute -> Module:posixpath | Module:ntpath
+627:32:Name -> Module:os
+627:49:Name -> U
+633:22:Name -> U
+634:26:Call -> ERR
+634:26:Attribute -> BM:builtins.dict.items
+634:26:Attribute -> Inst:collections.OrderedDict
+634:26:Name -> Inst:salt.modules.mount._FileSystemsEntry
+635:15:Name -> U
+635:22:Name -> U
+636:19:Name -> U
+637:30:Call -> ERR
+637:30:Name -> Func:builtins.sorted
+637:37:Call -> U
+637:37:Attribute -> U
+637:37:Call -> U
+637:37:Attribute -> U
+637:37:Name -> U
+637:53:Name -> U
+638:30:Call -> ERR
+638:30:Name -> Func:builtins.sorted
+638:37:Call -> U
+638:37:Attribute -> U
+638:37:Name -> U
+639:23:Name -> U
+639:34:Name -> U
+641:21:Name -> U
+641:33:Name -> U
+641:41:Name -> U
+651:15:Attribute -> Inst:collections.OrderedDict
+651:15:Name -> Inst:salt.modules.mount._FileSystemsEntry
+651:29:Name -> U
+667:11:Call -> Const:bool:False | U
+667:11:Attribute -> Func:genericpath.isfile | U
+667:11:Attribute -> Module:posixpath | Module:ntpath
+667:11:Name -> Module:os
+667:26:Name -> Const:str:'/etc/fstab' | U
+668:15:Name -> Dict:0
+669:9:Call -> U
+669:9:Attribute -> Func:salt.utils.files.fopen
+669:9:Attribute -> Module:salt.utils.files
+669:9:Attribute -> Module:salt.utils
+669:9:Name -> Module:salt
+669:32:Name -> Const:str:'/etc/fstab' | U
+670:20:Name -> U
+671:19:Call -> U
+671:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+671:19:Attribute -> Module:salt.utils.stringutils
+671:19:Attribute -> Module:salt.utils
+671:19:Name -> Module:salt
+671:53:Name -> U
+673:19:Name -> ERR
+675:23:Name -> U
+677:28:Call -> Inst:builtins.dict
+677:28:Attribute -> BM:salt.modules.mount._vfstab_entry.dict_from_line
+677:28:Name -> Class:salt.modules.mount._vfstab_entry
+677:57:Name -> U
+679:28:Call -> Inst:builtins.dict
+679:28:Attribute -> BM:salt.modules.mount._fstab_entry.dict_from_line
+679:28:Name -> Class:salt.modules.mount._fstab_entry
+680:24:Name -> U
+680:30:Attribute -> Tuple:6
+680:30:Name -> Class:salt.modules.mount._fstab_entry
+683:16:Name -> Inst:builtins.dict
+683:32:Call -> ERR
+683:32:Attribute -> ERR
+683:32:Name -> Inst:builtins.dict
+684:22:Name -> Inst:builtins.dict
+684:39:Name -> Dict:0
+685:20:Name -> Inst:builtins.dict
+687:16:Name -> Dict:0
+687:20:Call -> ERR
+687:20:Attribute -> BM:builtins.dict.pop
+687:20:Name -> Inst:builtins.dict
+687:41:Name -> Inst:builtins.dict
+688:19:Attribute -> Class:salt.modules.mount._fstab_entry.ParseError
+688:19:Name -> Class:salt.modules.mount._fstab_entry
+690:19:Attribute -> Class:salt.modules.mount._vfstab_entry.ParseError
+690:19:Name -> Class:salt.modules.mount._vfstab_entry
+693:11:Name -> Dict:0
+709:11:Call -> Dict:0
+709:11:Name -> Func:salt.modules.mount.fstab
+709:17:Name -> Const:str:'/etc/vfstab' | U
+726:7:Name -> ERR
+727:19:Call -> Inst:salt.modules.mount._vfstab_entry
+727:19:Name -> Class:salt.modules.mount._vfstab_entry
+727:38:Name -> U
+727:51:Name -> U
+729:19:Call -> Inst:salt.modules.mount._fstab_entry
+729:19:Name -> Class:salt.modules.mount._fstab_entry
+729:37:Name -> U
+729:50:Name -> U
+733:13:Call -> U
+733:13:Attribute -> Func:salt.utils.files.fopen
+733:13:Attribute -> Module:salt.utils.files
+733:13:Attribute -> Module:salt.utils
+733:13:Name -> Module:salt
+733:36:Name -> Const:str:'/etc/fstab' | U
+734:24:Name -> U
+735:23:Call -> U
+735:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+735:23:Attribute -> Module:salt.utils.stringutils
+735:23:Attribute -> Module:salt.utils
+735:23:Name -> Module:salt
+735:57:Name -> U
+737:23:Call -> Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True
+737:23:Attribute -> BM:salt.modules.mount._vfstab_entry.match | BM:salt.modules.mount._fstab_entry.match
+737:23:Name -> Inst:salt.modules.mount._vfstab_entry | Inst:salt.modules.mount._fstab_entry
+737:38:Name -> U
+740:24:Call -> ERR
+740:24:Attribute -> BM:builtins.list.append
+740:24:Name -> List:0
+740:37:Name -> U
+742:23:Attribute -> Class:salt.modules.mount._fstab_entry.ParseError
+742:23:Name -> Class:salt.modules.mount._fstab_entry
+743:20:Call -> ERR
+743:20:Attribute -> BM:builtins.list.append
+743:20:Name -> List:0
+743:33:Name -> U
+744:23:Attribute -> Class:salt.modules.mount._vfstab_entry.ParseError
+744:23:Name -> Class:salt.modules.mount._vfstab_entry
+745:20:Call -> ERR
+745:20:Attribute -> BM:builtins.list.append
+745:20:Name -> List:0
+745:33:Name -> U
+747:11:Name -> Class:builtins.OSError
+749:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+749:14:Name -> Class:salt.exceptions.CommandExecutionError
+749:36:Call -> U
+749:36:Attribute -> BM:builtins.str.format
+749:36:Name -> Const:str:"Couldn't read from {0}: {1}"
+749:47:Name -> Const:str:'/etc/fstab' | U
+749:55:Name -> ExcInst:builtins.OSError
+751:7:Name -> Const:bool:False | Const:bool:True
+753:17:Call -> U
+753:17:Attribute -> Func:salt.utils.files.fopen
+753:17:Attribute -> Module:salt.utils.files
+753:17:Attribute -> Module:salt.utils
+753:17:Name -> Module:salt
+753:40:Name -> Const:str:'/etc/fstab' | U
+754:16:Call -> U
+754:16:Attribute -> U
+754:16:Name -> U
+754:33:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+754:33:Attribute -> Func:salt.utils.data.encode
+754:33:Attribute -> Module:salt.utils.data
+754:33:Attribute -> Module:salt.utils
+754:33:Name -> Module:salt
+754:56:Name -> List:0
+755:15:Name -> Class:builtins.OSError
+757:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+757:18:Name -> Class:salt.exceptions.CommandExecutionError
+757:40:Call -> U
+757:40:Attribute -> BM:builtins.str.format
+757:40:Name -> Const:str:"Couldn't write to {0}: {1}"
+757:51:Name -> Const:str:'/etc/fstab' | U
+757:59:Name -> ExcInst:builtins.OSError
+777:11:Call -> Const:bool:True
+777:11:Name -> Func:salt.modules.mount.rm_fstab
+777:20:Name -> U
+777:26:Name -> U
+777:34:Name -> Const:str:'/etc/vfstab' | U
+808:7:Call -> ERR
+808:7:Name -> Func:builtins.isinstance
+808:18:Name -> Const:str:'defaults' | U
+808:24:Name -> Class:builtins.list
+809:15:Call -> Const:str:''
+809:15:Attribute -> BM:builtins.str.join
+809:24:Name -> Const:str:'defaults' | U
+813:16:Name -> U
+814:18:Call -> U
+814:18:Attribute -> U
+814:18:Name -> U
+815:18:Name -> U
+816:16:Call -> Const:str:'' | U
+816:16:Attribute -> BM:builtins.str.replace | U | BM:builtins.str.replace
+816:16:Name -> Const:str:'defaults' | U | Const:str:''
+817:16:Name -> Const:int:0 | U
+818:20:Name -> Const:int:0 | U
+825:7:Call -> ERR
+825:7:Name -> Func:builtins.isinstance
+825:18:Name -> Const:str:'auto' | U
+825:28:Name -> Class:builtins.list
+827:13:Call -> ERR
+827:13:Name -> Func:builtins.isinstance
+827:24:Name -> Const:str:'auto' | U
+827:34:Name -> Class:builtins.str
+829:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+829:14:Name -> Class:salt.exceptions.CommandExecutionError
+829:36:Name -> Const:str:'match_on must be a string or list of st
+830:9:Name -> Const:str:'auto' | U
+833:22:Call -> Frozen
+833:22:Name -> Class:builtins.frozenset
+852:11:Name -> U
+852:21:Name -> Frozen
+857:20:Name -> Const:str:'auto' | U
+860:12:Call -> Inst:salt.modules.mount._fstab_entry
+860:12:Name -> Class:salt.modules.mount._fstab_entry
+860:27:Name -> Dict:6
+862:19:Call -> Inst:salt.modules.mount._fstab_entry
+862:19:Attribute -> BM:salt.modules.mount._fstab_entry.pick
+862:19:Name -> Inst:salt.modules.mount._fstab_entry
+862:30:Name -> Const:str:'auto' | U | List:1 | List:1 | List:1
+864:11:Name -> Class:builtins.KeyError
+867:19:Name -> U
+867:30:Attribute -> Tuple:6
+867:30:Name -> Class:salt.modules.mount._fstab_entry
+869:23:Call -> Inst:builtins.filter
+869:23:Name -> Class:builtins.filter
+869:30:Name -> Func:salt.modules.mount.set_fstab.filterFn
+869:40:Name -> Const:str:'auto' | U | List:1 | List:1 | List:1
+871:49:Name -> Inst:builtins.filter
+872:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+872:14:Name -> Class:salt.exceptions.CommandExecutionError
+872:36:Name -> Const:str:'Unrecognized keys in match_on: "Instanc
+875:11:Call -> Const:bool:False | U
+875:11:Attribute -> Func:genericpath.isfile | U
+875:11:Attribute -> Module:posixpath | Module:ntpath
+875:11:Name -> Module:os
+875:26:Name -> Const:str:'/etc/fstab' | U
+876:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+876:14:Name -> Class:salt.exceptions.CommandExecutionError
+876:56:Name -> Const:str:'/etc/fstab' | U
+879:13:Call -> U
+879:13:Attribute -> Func:salt.utils.files.fopen
+879:13:Attribute -> Module:salt.utils.files
+879:13:Attribute -> Module:salt.utils
+879:13:Name -> Module:salt
+879:36:Name -> Const:str:'/etc/fstab' | U
+880:24:Name -> U
+881:23:Call -> U
+881:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+881:23:Attribute -> Module:salt.utils.stringutils
+881:23:Attribute -> Module:salt.utils
+881:23:Name -> Module:salt
+881:57:Name -> U
+883:23:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+883:23:Attribute -> BM:salt.modules.mount._fstab_entry.match
+883:23:Name -> Inst:salt.modules.mount._fstab_entry
+883:38:Name -> U
+887:27:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+887:27:Attribute -> BM:salt.modules.mount._fstab_entry.match
+887:27:Name -> Inst:salt.modules.mount._fstab_entry
+887:39:Name -> U
+887:48:Name -> Const:bool:False | U
+888:28:Call -> ERR
+888:28:Attribute -> BM:builtins.list.append
+888:28:Name -> List:0
+888:41:Name -> U
+891:28:Call -> ERR
+891:28:Attribute -> BM:builtins.list.append
+891:28:Name -> List:0
+891:41:Call -> Const:str:''
+891:41:Name -> Class:builtins.str
+891:45:Name -> Inst:salt.modules.mount._fstab_entry
+893:24:Call -> ERR
+893:24:Attribute -> BM:builtins.list.append
+893:24:Name -> List:0
+893:37:Name -> U
+895:23:Attribute -> Class:salt.modules.mount._fstab_entry.ParseError
+895:23:Name -> Class:salt.modules.mount._fstab_entry
+896:20:Call -> ERR
+896:20:Attribute -> BM:builtins.list.append
+896:20:Name -> List:0
+896:33:Name -> U
+898:11:Name -> Class:builtins.OSError
+900:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+900:14:Name -> Class:salt.exceptions.CommandExecutionError
+900:36:Call -> U
+900:36:Attribute -> BM:builtins.str.format
+900:36:Name -> Const:str:"Couldn't read from {0}: {1}"
+900:47:Name -> Const:str:'/etc/fstab' | U
+900:55:Name -> ExcInst:builtins.OSError
+903:7:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change'
+904:8:Call -> ERR
+904:8:Attribute -> BM:builtins.list.append
+904:8:Name -> List:0
+904:21:Call -> Const:str:''
+904:21:Name -> Class:builtins.str
+904:25:Name -> Inst:salt.modules.mount._fstab_entry
+907:7:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change' | Const:str:'new'
+908:15:Call -> Const:bool:True | Const:bool:False
+908:15:Attribute -> Func:salt.utils.args.test_mode
+908:15:Attribute -> Module:salt.utils.args
+908:15:Attribute -> Module:salt.utils
+908:15:Name -> Module:salt
+908:46:Name -> Const:bool:False | U
+908:54:Name -> Dict:0
+910:21:Call -> U
+910:21:Attribute -> Func:salt.utils.files.fopen
+910:21:Attribute -> Module:salt.utils.files
+910:21:Attribute -> Module:salt.utils
+910:21:Name -> Module:salt
+910:44:Name -> Const:str:'/etc/fstab' | U
+912:20:Call -> U
+912:20:Attribute -> U
+912:20:Name -> U
+912:37:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+912:37:Attribute -> Func:salt.utils.data.encode
+912:37:Attribute -> Module:salt.utils.data
+912:37:Attribute -> Module:salt.utils
+912:37:Name -> Module:salt
+912:60:Name -> List:0
+913:19:Name -> Class:builtins.OSError
+915:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+915:22:Name -> Class:salt.exceptions.CommandExecutionError
+915:44:Call -> U
+915:44:Attribute -> BM:builtins.str.format
+915:44:Name -> Const:str:'File not writable {0}'
+915:55:Name -> Const:str:'/etc/fstab' | U
+917:11:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change' | Const:str:'new'
+951:7:Call -> ERR
+951:7:Name -> Func:builtins.isinstance
+951:18:Name -> Const:str:'-' | U
+951:24:Name -> Class:builtins.list
+952:15:Call -> Const:str:''
+952:15:Attribute -> BM:builtins.str.join
+952:24:Name -> Const:str:'-' | U
+955:7:Name -> Const:str:'yes' | U
+960:16:Name -> U
+961:18:Name -> U
+962:18:Name -> U
+963:16:Name -> Const:str:'-' | U | Const:str:''
+964:23:Name -> Const:str:'-' | U
+965:21:Name -> Const:str:'-' | U
+966:25:Name -> Const:str:'yes' | U | Const:str:'no'
+973:7:Call -> ERR
+973:7:Name -> Func:builtins.isinstance
+973:18:Name -> Const:str:'auto' | U
+973:28:Name -> Class:builtins.list
+975:13:Call -> ERR
+975:13:Name -> Func:builtins.isinstance
+975:24:Name -> Const:str:'auto' | U
+975:34:Name -> Class:builtins.str
+977:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+977:14:Name -> Class:salt.exceptions.CommandExecutionError
+977:36:Name -> Const:str:'match_on must be a string or list of st
+978:9:Name -> Const:str:'auto' | U
+981:22:Call -> Frozen
+981:22:Name -> Class:builtins.frozenset
+985:11:Name -> U
+985:21:Name -> Frozen
+990:20:Name -> Const:str:'auto' | U
+993:12:Call -> Inst:salt.modules.mount._vfstab_entry
+993:12:Name -> Class:salt.modules.mount._vfstab_entry
+993:28:Name -> Dict:7
+995:19:Call -> Inst:salt.modules.mount._vfstab_entry
+995:19:Attribute -> BM:salt.modules.mount._vfstab_entry.pick
+995:19:Name -> Inst:salt.modules.mount._vfstab_entry
+995:30:Name -> Const:str:'auto' | U | List:1 | List:1 | List:1
+997:11:Name -> Class:builtins.KeyError
+1000:19:Name -> U
+1000:30:Attribute -> Tuple:7
+1000:30:Name -> Class:salt.modules.mount._vfstab_entry
+1002:23:Call -> Inst:builtins.filter
+1002:23:Name -> Class:builtins.filter
+1002:30:Name -> Func:salt.modules.mount.set_vfstab.filterFn
+1002:40:Name -> Const:str:'auto' | U | List:1 | List:1 | List:1
+1004:49:Name -> Inst:builtins.filter
+1005:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1005:14:Name -> Class:salt.exceptions.CommandExecutionError
+1005:36:Name -> Const:str:'Unrecognized keys in match_on: "Instanc
+1008:11:Call -> Const:bool:False | U
+1008:11:Attribute -> Func:genericpath.isfile | U
+1008:11:Attribute -> Module:posixpath | Module:ntpath
+1008:11:Name -> Module:os
+1008:26:Name -> Const:str:'/etc/vfstab' | U
+1009:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1009:14:Name -> Class:salt.exceptions.CommandExecutionError
+1009:56:Name -> Const:str:'/etc/vfstab' | U
+1012:13:Call -> U
+1012:13:Attribute -> Func:salt.utils.files.fopen
+1012:13:Attribute -> Module:salt.utils.files
+1012:13:Attribute -> Module:salt.utils
+1012:13:Name -> Module:salt
+1012:36:Name -> Const:str:'/etc/vfstab' | U
+1013:24:Name -> U
+1014:23:Call -> U
+1014:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+1014:23:Attribute -> Module:salt.utils.stringutils
+1014:23:Attribute -> Module:salt.utils
+1014:23:Name -> Module:salt
+1014:57:Name -> U
+1016:23:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+1016:23:Attribute -> BM:salt.modules.mount._vfstab_entry.match
+1016:23:Name -> Inst:salt.modules.mount._vfstab_entry
+1016:38:Name -> U
+1020:27:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+1020:27:Attribute -> BM:salt.modules.mount._vfstab_entry.match
+1020:27:Name -> Inst:salt.modules.mount._vfstab_entry
+1020:39:Name -> U
+1020:48:Name -> Const:bool:False | U
+1021:28:Call -> ERR
+1021:28:Attribute -> BM:builtins.list.append
+1021:28:Name -> List:0
+1021:41:Name -> U
+1024:28:Call -> ERR
+1024:28:Attribute -> BM:builtins.list.append
+1024:28:Name -> List:0
+1024:41:Call -> Const:str:''
+1024:41:Name -> Class:builtins.str
+1024:45:Name -> Inst:salt.modules.mount._vfstab_entry
+1026:24:Call -> ERR
+1026:24:Attribute -> BM:builtins.list.append
+1026:24:Name -> List:0
+1026:37:Name -> U
+1028:23:Attribute -> Class:salt.modules.mount._vfstab_entry.ParseError
+1028:23:Name -> Class:salt.modules.mount._vfstab_entry
+1029:20:Call -> ERR
+1029:20:Attribute -> BM:builtins.list.append
+1029:20:Name -> List:0
+1029:33:Name -> U
+1031:11:Name -> Class:builtins.OSError
+1033:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1033:14:Name -> Class:salt.exceptions.CommandExecutionError
+1033:36:Call -> U
+1033:36:Attribute -> BM:builtins.str.format
+1033:36:Name -> Const:str:"Couldn't read from {0}: {1}"
+1033:47:Name -> Const:str:'/etc/vfstab' | U
+1033:55:Name -> ExcInst:builtins.OSError
+1036:7:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change'
+1037:8:Call -> ERR
+1037:8:Attribute -> BM:builtins.list.append
+1037:8:Name -> List:0
+1037:21:Call -> Const:str:''
+1037:21:Name -> Class:builtins.str
+1037:25:Name -> Inst:salt.modules.mount._vfstab_entry
+1040:7:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change' | Const:str:'new'
+1041:15:Call -> Const:bool:True | Const:bool:False
+1041:15:Attribute -> Func:salt.utils.args.test_mode
+1041:15:Attribute -> Module:salt.utils.args
+1041:15:Attribute -> Module:salt.utils
+1041:15:Name -> Module:salt
+1041:46:Name -> Const:bool:False | U
+1041:54:Name -> Dict:0
+1043:21:Call -> U
+1043:21:Attribute -> Func:salt.utils.files.fopen
+1043:21:Attribute -> Module:salt.utils.files
+1043:21:Attribute -> Module:salt.utils
+1043:21:Name -> Module:salt
+1043:44:Name -> Const:str:'/etc/vfstab' | U
+1045:20:Call -> U
+1045:20:Attribute -> U
+1045:20:Name -> U
+1045:37:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1045:37:Attribute -> Func:salt.utils.data.encode
+1045:37:Attribute -> Module:salt.utils.data
+1045:37:Attribute -> Module:salt.utils
+1045:37:Name -> Module:salt
+1045:60:Name -> List:0
+1046:19:Name -> Class:builtins.OSError
+1048:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1048:22:Name -> Class:salt.exceptions.CommandExecutionError
+1048:44:Call -> U
+1048:44:Attribute -> BM:builtins.str.format
+1048:44:Name -> Const:str:'File not writable {0}'
+1048:55:Name -> Const:str:'/etc/vfstab' | U
+1050:11:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change' | Const:str:'new'
+1063:15:Call -> Dict:0
+1063:15:Name -> Func:salt.modules.mount.automaster
+1063:26:Name -> Const:str:'/etc/auto_salt' | U
+1064:7:Name -> U
+1064:19:Name -> Dict:0
+1069:13:Call -> U
+1069:13:Attribute -> Func:salt.utils.files.fopen
+1069:13:Attribute -> Module:salt.utils.files
+1069:13:Attribute -> Module:salt.utils
+1069:13:Name -> Module:salt
+1069:36:Name -> Const:str:'/etc/auto_salt' | U
+1070:24:Name -> U
+1071:23:Call -> U
+1071:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+1071:23:Attribute -> Module:salt.utils.stringutils
+1071:23:Attribute -> Module:salt.utils
+1071:23:Name -> Module:salt
+1071:57:Name -> U
+1072:19:Call -> U
+1072:19:Attribute -> U
+1072:19:Name -> U
+1074:20:Call -> ERR
+1074:20:Attribute -> BM:builtins.list.append
+1074:20:Name -> List:0
+1074:33:Name -> U
+1076:23:Call -> U
+1076:23:Attribute -> U
+1076:23:Name -> U
+1078:20:Call -> ERR
+1078:20:Attribute -> BM:builtins.list.append
+1078:20:Name -> List:0
+1078:33:Name -> U
+1080:24:Call -> U
+1080:24:Attribute -> U
+1080:24:Name -> U
+1081:19:Call -> ERR
+1081:19:Name -> Func:builtins.len
+1081:23:Name -> U
+1083:20:Call -> ERR
+1083:20:Attribute -> BM:builtins.list.append
+1083:20:Name -> List:0
+1083:33:Name -> U
+1086:24:Call -> U
+1086:24:Attribute -> U
+1086:24:Name -> U
+1088:27:Call -> U
+1088:27:Attribute -> U
+1088:27:Name -> U
+1088:44:Name -> Const:str:'/..'
+1089:29:Call -> U
+1089:29:Attribute -> U
+1089:29:Name -> U
+1091:19:Name -> U
+1092:23:Name -> U
+1092:35:Name -> U
+1092:44:Name -> U
+1092:61:Name -> U
+1095:23:Name -> U
+1095:35:Name -> U
+1097:16:Call -> ERR
+1097:16:Attribute -> BM:builtins.list.append
+1097:16:Name -> List:0
+1097:29:Name -> U
+1098:11:Name -> Class:builtins.OSError
+1100:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1100:14:Name -> Class:salt.exceptions.CommandExecutionError
+1100:36:Call -> U
+1100:36:Attribute -> BM:builtins.str.format
+1100:36:Name -> Const:str:"Couldn't read from {0}: {1}"
+1100:47:Name -> Const:str:'/etc/auto_salt' | U
+1100:55:Name -> ExcInst:builtins.OSError
+1103:13:Call -> U
+1103:13:Attribute -> Func:salt.utils.files.fopen
+1103:13:Attribute -> Module:salt.utils.files
+1103:13:Attribute -> Module:salt.utils
+1103:13:Name -> Module:salt
+1103:36:Name -> Const:str:'/etc/auto_salt' | U
+1104:12:Call -> U
+1104:12:Attribute -> U
+1104:12:Name -> U
+1104:29:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1104:29:Attribute -> Func:salt.utils.data.encode
+1104:29:Attribute -> Module:salt.utils.data
+1104:29:Attribute -> Module:salt.utils
+1104:29:Name -> Module:salt
+1104:52:Name -> List:0
+1105:11:Name -> Class:builtins.OSError
+1107:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1107:14:Name -> Class:salt.exceptions.CommandExecutionError
+1107:36:Call -> U
+1107:36:Attribute -> BM:builtins.str.format
+1107:36:Name -> Const:str:"Couldn't write to {0}: {1}"
+1107:47:Name -> Const:str:'/etc/auto_salt' | U
+1107:55:Name -> ExcInst:builtins.OSError
+1110:4:Call -> ERR
+1110:4:Name -> ERR
+1135:7:Call -> ERR
+1135:7:Name -> Func:builtins.isinstance
+1135:18:Name -> Const:str:'' | U
+1135:24:Name -> Class:builtins.list
+1136:15:Call -> Const:str:''
+1136:15:Attribute -> BM:builtins.str.join
+1136:24:Name -> Const:str:'' | U
+1142:11:Call -> Const:bool:False | U
+1142:11:Attribute -> Func:genericpath.isfile | U
+1142:11:Attribute -> Module:posixpath | Module:ntpath
+1142:11:Name -> Module:os
+1142:26:Name -> Const:str:'/etc/auto_salt' | U
+1143:8:Call -> ERR
+1143:8:Name -> ERR
+1143:31:Name -> Const:str:'/etc/auto_salt' | U
+1144:8:Call -> ERR
+1144:8:Name -> ERR
+1144:32:Name -> Const:str:'/etc/auto_master'
+1144:60:Name -> Const:str:'/etc/auto_salt' | U
+1146:17:Name -> U
+1147:20:Name -> U
+1147:29:Name -> U
+1148:27:Name -> U
+1148:36:Name -> Const:str:'' | U | Const:str:''
+1150:7:Name -> U
+1151:21:Call -> Const:str:''
+1151:21:Attribute -> BM:builtins.str.replace
+1151:21:Name -> Const:str:'Uninferable:Uninferable'
+1151:40:Name -> U
+1154:13:Call -> U
+1154:13:Attribute -> Func:salt.utils.files.fopen
+1154:13:Attribute -> Module:salt.utils.files
+1154:13:Attribute -> Module:salt.utils
+1154:13:Name -> Module:salt
+1154:36:Name -> Const:str:'/etc/auto_salt' | U
+1155:24:Name -> U
+1156:23:Call -> U
+1156:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+1156:23:Attribute -> Module:salt.utils.stringutils
+1156:23:Attribute -> Module:salt.utils
+1156:23:Name -> Module:salt
+1156:57:Name -> U
+1157:19:Call -> U
+1157:19:Attribute -> U
+1157:19:Name -> U
+1159:20:Call -> ERR
+1159:20:Attribute -> BM:builtins.list.append
+1159:20:Name -> List:0
+1159:33:Name -> U
+1161:23:Call -> U
+1161:23:Attribute -> U
+1161:23:Name -> U
+1163:20:Call -> ERR
+1163:20:Attribute -> BM:builtins.list.append
+1163:20:Name -> List:0
+1163:33:Name -> U
+1165:24:Call -> U
+1165:24:Attribute -> U
+1165:24:Name -> U
+1166:19:Call -> ERR
+1166:19:Name -> Func:builtins.len
+1166:23:Name -> U
+1168:20:Call -> ERR
+1168:20:Attribute -> BM:builtins.list.append
+1168:20:Name -> List:0
+1168:33:Name -> U
+1170:19:Name -> U
+1170:31:Name -> Const:str:'/..Uninferable'
+1170:39:Name -> U
+1170:51:Name -> Const:str:'Uninferable:Uninferable' | Const:str:''
+1172:23:Name -> Const:bool:False | U
+1176:23:Name -> U
+1176:35:Name -> Const:str:'/..Uninferable'
+1178:24:Name -> U
+1178:35:Name -> Const:str:'/..Uninferable'
+1179:23:Name -> U
+1179:35:Name -> Const:str:'-fstype=Uninferable,' | Const:str:'-fstype=Uninferable,Uninferable' | Const:str:'-fstype=Uninferable,'
+1181:24:Name -> U
+1181:35:Name -> Const:str:'-fstype=Uninferable,' | Const:str:'-fstype=Uninferable,Uninferable' | Const:str:'-fstype=Uninferable,'
+1182:23:Name -> U
+1182:35:Name -> Const:str:'Uninferable:Uninferable' | Const:str:''
+1184:24:Name -> U
+1184:35:Name -> Const:str:'Uninferable:Uninferable' | Const:str:''
+1185:23:Name -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True
+1186:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1186:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1186:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1188:28:Name -> Const:str:'/..Uninferable'
+1190:37:Name -> Const:str:'/..Uninferable'
+1190:45:Name -> Const:str:'-fstype=Uninferable,' | Const:str:'-fstype=Uninferable,Uninferable' | Const:str:'-fstype=Uninferable,'
+1190:58:Name -> Const:str:'Uninferable:Uninferable' | Const:str:''
+1191:24:Call -> ERR
+1191:24:Attribute -> BM:builtins.list.append
+1191:24:Name -> List:0
+1191:37:Name -> Const:str:'/..Uninferable\t-fstype=Uninferable,\tU | Const:str:'/..Uninferable\t-fstype=Uninferable,\t\ | Const:str:'/..Uninferable\t-fstype=Uninferable,Uni | Const:str:'/..Uninferable\t-fstype=Uninferable,Uni | Const:str:'/..Uninferable\t-fstype=Uninferable,\tU | Const:str:'/..Uninferable\t-fstype=Uninferable,\t\
+1193:20:Call -> ERR
+1193:20:Attribute -> BM:builtins.list.append
+1193:20:Name -> List:0
+1193:33:Name -> U
+1194:11:Name -> Class:builtins.OSError
+1196:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1196:14:Name -> Class:salt.exceptions.CommandExecutionError
+1196:36:Call -> U
+1196:36:Attribute -> BM:builtins.str.format
+1196:36:Name -> Const:str:"Couldn't read from {0}: {1}"
+1196:47:Name -> Const:str:'/etc/auto_salt' | U
+1196:55:Name -> ExcInst:builtins.OSError
+1198:7:Name -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True
+1199:15:Call -> Const:bool:True | Const:bool:False
+1199:15:Attribute -> Func:salt.utils.args.test_mode
+1199:15:Attribute -> Module:salt.utils.args
+1199:15:Attribute -> Module:salt.utils
+1199:15:Name -> Module:salt
+1199:46:Name -> Const:bool:False | U
+1199:54:Name -> Dict:0
+1201:21:Call -> U
+1201:21:Attribute -> Func:salt.utils.files.fopen
+1201:21:Attribute -> Module:salt.utils.files
+1201:21:Attribute -> Module:salt.utils
+1201:21:Name -> Module:salt
+1201:44:Name -> Const:str:'/etc/auto_salt' | U
+1203:20:Call -> U
+1203:20:Attribute -> U
+1203:20:Name -> U
+1203:37:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1203:37:Attribute -> Func:salt.utils.data.encode
+1203:37:Attribute -> Module:salt.utils.data
+1203:37:Attribute -> Module:salt.utils
+1203:37:Name -> Module:salt
+1203:60:Name -> List:0
+1204:19:Name -> Class:builtins.OSError
+1206:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1206:22:Name -> Class:salt.exceptions.CommandExecutionError
+1206:44:Call -> U
+1206:44:Attribute -> BM:builtins.str.format
+1206:44:Name -> Const:str:'File not writable {0}'
+1206:55:Name -> Const:str:'/etc/auto_salt' | U
+1210:11:Name -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True
+1211:11:Name -> Const:bool:False | Const:bool:True
+1215:19:Call -> Const:bool:True | Const:bool:False
+1215:19:Attribute -> Func:salt.utils.args.test_mode
+1215:19:Attribute -> Module:salt.utils.args
+1215:19:Attribute -> Module:salt.utils
+1215:19:Name -> Module:salt
+1215:50:Name -> Const:bool:False | U
+1215:58:Name -> Dict:0
+1217:29:Name -> Const:str:'/..Uninferable'
+1217:37:Name -> Const:str:'-fstype=Uninferable,' | Const:str:'-fstype=Uninferable,Uninferable' | Const:str:'-fstype=Uninferable,'
+1217:50:Name -> Const:str:'Uninferable:Uninferable' | Const:str:''
+1218:16:Call -> ERR
+1218:16:Attribute -> BM:builtins.list.append
+1218:16:Name -> List:0
+1218:29:Name -> Const:str:'/..Uninferable\t-fstype=Uninferable,\tU | Const:str:'/..Uninferable\t-fstype=Uninferable,\t\ | Const:str:'/..Uninferable\t-fstype=Uninferable,Uni | Const:str:'/..Uninferable\t-fstype=Uninferable,Uni | Const:str:'/..Uninferable\t-fstype=Uninferable,\tU | Const:str:'/..Uninferable\t-fstype=Uninferable,\t\
+1220:25:Call -> U
+1220:25:Attribute -> Func:salt.utils.files.fopen
+1220:25:Attribute -> Module:salt.utils.files
+1220:25:Attribute -> Module:salt.utils
+1220:25:Name -> Module:salt
+1220:48:Name -> Const:str:'/etc/auto_salt' | U
+1222:24:Call -> U
+1222:24:Attribute -> U
+1222:24:Name -> U
+1222:41:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1222:41:Attribute -> Func:salt.utils.data.encode
+1222:41:Attribute -> Module:salt.utils.data
+1222:41:Attribute -> Module:salt.utils
+1222:41:Name -> Module:salt
+1222:64:Name -> List:0
+1223:23:Name -> Class:builtins.OSError
+1224:26:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1224:26:Name -> Class:salt.exceptions.CommandExecutionError
+1224:69:Name -> Const:str:'/etc/auto_salt' | U
+1239:11:Call -> Const:bool:False | U
+1239:11:Attribute -> Func:genericpath.isfile | U
+1239:11:Attribute -> Module:posixpath | Module:ntpath
+1239:11:Name -> Module:os
+1239:26:Name -> Const:str:'/etc/auto_salt' | U
+1240:15:Name -> Dict:0
+1241:9:Call -> U
+1241:9:Attribute -> Func:salt.utils.files.fopen
+1241:9:Attribute -> Module:salt.utils.files
+1241:9:Attribute -> Module:salt.utils
+1241:9:Name -> Module:salt
+1241:32:Name -> Const:str:'/etc/auto_salt' | U
+1242:20:Name -> U
+1243:19:Call -> U
+1243:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+1243:19:Attribute -> Module:salt.utils.stringutils
+1243:19:Attribute -> Module:salt.utils
+1243:19:Name -> Module:salt
+1243:53:Name -> U
+1244:15:Call -> U
+1244:15:Attribute -> U
+1244:15:Name -> U
+1247:19:Call -> U
+1247:19:Attribute -> U
+1247:19:Name -> U
+1250:20:Call -> U
+1250:20:Attribute -> U
+1250:20:Name -> U
+1251:15:Call -> ERR
+1251:15:Name -> Func:builtins.len
+1251:19:Name -> U
+1256:19:Call -> U
+1256:19:Attribute -> U
+1256:19:Name -> U
+1256:36:Name -> Const:str:'/..'
+1257:25:Call -> U
+1257:25:Attribute -> U
+1257:25:Name -> U
+1258:19:Call -> U
+1258:19:Attribute -> U
+1258:19:Name -> U
+1260:12:Name -> Dict:0
+1260:16:Name -> U
+1260:35:Name -> U
+1260:60:Name -> U
+1260:77:Name -> U
+1261:11:Name -> Dict:0
+1276:7:Name -> Const:str:'mount' | U
+1278:11:Name -> Const:str:'mount' | U
+1279:19:Call -> ERR
+1279:19:Name -> ERR
+1279:45:Name -> U
+1279:56:Name -> Const:bool:False | U
+1280:13:Name -> Const:str:'mount' | U
+1281:18:Call -> ERR
+1281:18:Name -> ERR
+1281:44:Name -> U
+1281:50:Name -> Const:bool:False | U
+1282:19:Name -> U
+1284:20:Call -> ERR
+1284:20:Name -> Func:builtins.next
+1284:25:Call -> ERR
+1284:25:Name -> Func:builtins.iter
+1284:30:Call -> U
+1284:30:Attribute -> U
+1284:30:Name -> U
+1285:12:Name -> ERR
+1285:35:Name -> U
+1285:46:Name -> U
+1286:19:Name -> U
+1290:21:Name -> Const:str:'defaults' | U
+1290:30:Name -> ERR
+1293:7:Call -> ERR
+1293:7:Name -> Func:builtins.isinstance
+1293:18:Name -> Const:str:'defaults' | U | Const:NoneType:None
+1293:24:Name -> Class:builtins.str
+1294:15:Call -> U
+1294:15:Attribute -> BM:builtins.str.split | U
+1294:15:Name -> Const:str:'defaults' | U | Const:NoneType:None
+1296:11:Call -> Const:bool:False | Const:bool:True | U
+1296:11:Attribute -> Func:genericpath.exists | U
+1296:11:Attribute -> Module:posixpath | Module:ntpath
+1296:11:Name -> Module:os
+1296:26:Name -> U
+1296:36:Name -> Const:bool:False | U
+1297:8:Call -> ERR
+1297:8:Name -> ERR
+1297:31:Name -> U
+1297:42:Name -> Const:NoneType:None | U
+1300:7:Name -> Const:str:'defaults' | U | Const:NoneType:None
+1301:16:Call -> Const:str:''
+1301:16:Attribute -> BM:builtins.str.join
+1301:25:Name -> Const:str:'defaults' | U
+1302:21:Name -> Const:str:''
+1304:7:Name -> Const:str:'' | U
+1308:20:Name -> ERR
+1309:27:Name -> U
+1310:26:Call -> ERR
+1310:26:Attribute -> ERR
+1310:26:Name -> ERR
+1311:27:Name -> U
+1313:27:Name -> U
+1316:7:Name -> Const:bool:False | U
+1317:18:Name -> Const:str:'' | Const:str:'-o ' | Const:str:' -v Uninferable' | Const:str:'-o  -v Uninferable' | Const:str:' -F Uninferable' | Const:str:'-o  -F Uninferable' | Const:str:' -t Uninferable' | Const:str:'-o  -t Uninferable'
+1317:26:Name -> U
+1317:37:Name -> U
+1319:19:Name -> U
+1320:10:Call -> ERR
+1320:10:Name -> ERR
+1320:34:Name -> Const:str:'mount ' | Const:str:"mount  'Uninferable' 'Uninferable' " | Const:str:"mount -o  'Uninferable' 'Uninferable' " | Const:str:"mount  -v Uninferable 'Uninferable' 'Un | Const:str:"mount -o  -v Uninferable 'Uninferable'  | Const:str:"mount  -F Uninferable 'Uninferable' 'Un | Const:str:"mount -o  -F Uninferable 'Uninferable'  | Const:str:"mount  -t Uninferable 'Uninferable' 'Un | Const:str:"mount -o  -t Uninferable 'Uninferable'  | Const:str:"mount 'Uninferable' "
+1320:45:Name -> Const:NoneType:None | U
+1321:7:Name -> U
+1322:15:Name -> U
+1338:7:Name -> ERR
+1339:11:Name -> Const:str:'defaults' | U
+1341:11:Name -> Const:str:'' | U
+1344:16:Name -> ERR
+1345:11:Name -> Const:str:'defaults' | U | Const:str:'noowners'
+1348:7:Call -> ERR
+1348:7:Name -> Func:builtins.isinstance
+1348:18:Name -> Const:str:'defaults' | U | Const:str:'noowners' | List:0
+1348:24:Name -> Class:builtins.str
+1349:15:Call -> U
+1349:15:Attribute -> BM:builtins.str.split | U | BM:builtins.str.split
+1349:15:Name -> Const:str:'defaults' | U | Const:str:'noowners' | List:0
+1350:11:Call -> Dict:0
+1350:11:Name -> Func:salt.modules.mount.active
+1351:7:Name -> U
+1351:15:Name -> Dict:0
+1353:28:Name -> Const:str:'defaults' | U | Const:str:'noowners' | List:0
+1353:37:Name -> ERR
+1358:12:Call -> U
+1358:12:Attribute -> U | BM:builtins.list.append
+1358:12:Name -> Const:str:'defaults' | U | Const:str:'noowners' | List:0
+1359:11:Name -> Const:bool:False | Const:bool:True
+1361:12:Call -> Const:NoneType:None | Const:NoneType:None | Const:str:'Uninferable does not have anything moun | U | Const:bool:True
+1361:12:Name -> Func:salt.modules.mount.umount
+1361:19:Name -> U
+1361:25:Name -> U
+1361:38:Name -> Const:NoneType:None | U
+1363:11:Name -> Const:str:'defaults' | U | Const:str:'noowners' | List:0
+1364:20:Call -> Const:str:''
+1364:20:Attribute -> BM:builtins.str.join
+1364:29:Name -> Const:str:'defaults' | U | Const:str:'noowners'
+1365:25:Name -> Const:str:''
+1367:11:Name -> Const:str:'' | U
+1371:24:Name -> ERR
+1372:31:Name -> U
+1373:30:Call -> ERR
+1373:30:Attribute -> ERR
+1373:30:Name -> ERR
+1374:31:Name -> U
+1376:31:Name -> U
+1378:11:Name -> ERR
+1378:69:Name -> Const:bool:False | Const:bool:True
+1379:27:Name -> Const:str:'' | Const:str:'-o ' | Const:str:' -v Uninferable' | Const:str:'-o  -v Uninferable' | Const:str:' -F Uninferable' | Const:str:'-o  -F Uninferable' | Const:str:' -t Uninferable' | Const:str:'-o  -t Uninferable'
+1379:35:Name -> U
+1379:46:Name -> U
+1381:30:Name -> Const:str:'' | Const:str:'-o ' | Const:str:' -v Uninferable' | Const:str:'-o  -v Uninferable' | Const:str:' -F Uninferable' | Const:str:'-o  -F Uninferable' | Const:str:' -t Uninferable' | Const:str:'-o  -t Uninferable'
+1381:38:Name -> U
+1381:49:Name -> U
+1382:14:Call -> ERR
+1382:14:Name -> ERR
+1382:38:Name -> Const:str:"mount  'Uninferable' 'Uninferable' " | Const:str:"mount -o  'Uninferable' 'Uninferable' " | Const:str:"mount  -v Uninferable 'Uninferable' 'Un | Const:str:"mount -o  -v Uninferable 'Uninferable'  | Const:str:"mount  -F Uninferable 'Uninferable' 'Un | Const:str:"mount -o  -F Uninferable 'Uninferable'  | Const:str:"mount  -t Uninferable 'Uninferable' 'Un | Const:str:"mount -o  -t Uninferable 'Uninferable'  | Const:str:"mount -u  'Uninferable' 'Uninferable' " | Const:str:"mount -u -o  'Uninferable' 'Uninferable | Const:str:"mount -u  -v Uninferable 'Uninferable'  | Const:str:"mount -u -o  -v Uninferable 'Uninferabl | Const:str:"mount -u  -F Uninferable 'Uninferable'  | Const:str:"mount -u -o  -F Uninferable 'Uninferabl | Const:str:"mount -u  -t Uninferable 'Uninferable'  | Const:str:"mount -u -o  -t Uninferable 'Uninferabl
+1382:49:Name -> Const:NoneType:None | U
+1383:11:Name -> U
+1384:19:Name -> U
+1387:11:Call -> U | Const:bool:False | Const:bool:False | Const:bool:True
+1387:11:Name -> Func:salt.modules.mount.mount
+1387:17:Name -> U
+1387:23:Name -> U
+1387:31:Name -> Const:bool:False | U
+1387:38:Name -> Const:str:'' | U
+1387:46:Name -> Const:str:'defaults' | U | Const:str:'noowners' | List:0
+1387:57:Name -> Const:NoneType:None | U
+1406:7:Name -> Const:str:'mount' | U
+1407:8:Call -> ERR
+1407:8:Name -> ERR
+1407:35:Name -> U
+1407:46:Name -> Const:NoneType:None | U
+1409:9:Name -> Const:str:'mount' | U
+1411:31:Name -> ERR
+1412:26:Name -> U
+1412:36:Name -> ERR
+1413:16:Call -> ERR
+1413:16:Name -> ERR
+1413:43:Name -> ERR
+1413:66:Name -> U
+1416:11:Call -> Dict:0
+1416:11:Name -> Func:salt.modules.mount.active
+1417:7:Name -> U
+1417:19:Name -> Dict:0
+1418:18:Name -> U
+1421:7:Name -> Const:bool:False | U
+1422:17:Name -> Const:str:'umount'
+1423:11:Name -> Const:NoneType:None | U
+1424:17:Name -> Const:str:'umount' | Const:str:'umount -l'
+1424:24:Name -> U
+1426:17:Name -> Const:str:'umount' | Const:str:'umount -l'
+1426:24:Name -> U
+1428:10:Call -> ERR
+1428:10:Name -> ERR
+1428:34:Name -> Const:str:'umount' | Const:str:'umount -l' | Const:str:"umount 'Uninferable'" | Const:str:"umount -l 'Uninferable'" | Const:str:"umount 'Uninferable'" | Const:str:"umount -l 'Uninferable'"
+1428:45:Name -> Const:NoneType:None | U
+1429:7:Name -> U
+1430:15:Name -> U
+1444:15:Call -> Const:NoneType:None | U
+1444:15:Attribute -> Func:salt.utils.path.which
+1444:15:Attribute -> Module:salt.utils.path
+1444:15:Attribute -> Module:salt.utils
+1444:15:Name -> Module:salt
+1444:37:Name -> U
+1447:11:Name -> Const:NoneType:None | U
+1449:13:Call -> Const:NoneType:None | Const:str:'ldd' | U
+1449:13:Attribute -> Func:salt.utils.path.which
+1449:13:Attribute -> Module:salt.utils.path
+1449:13:Attribute -> Module:salt.utils
+1449:13:Name -> Module:salt
+1450:14:Call -> ExcInst:salt.exceptions.CommandNotFoundError
+1450:14:Name -> Class:salt.exceptions.CommandNotFoundError
+1452:10:Call -> ERR
+1452:10:Name -> ERR
+1452:37:Name -> Const:NoneType:None | U
+1453:24:Name -> U
+1469:7:Name -> ERR
+1470:20:Call -> ERR
+1470:20:Attribute -> ERR
+1470:20:Call -> ERR
+1470:20:Name -> ERR
+1471:15:Call -> ERR
+1471:15:Attribute -> ERR
+1471:15:Name -> ERR
+1473:20:Call -> ERR
+1473:20:Attribute -> ERR
+1473:20:Name -> ERR
+1474:12:Name -> Dict:0
+1474:16:Name -> U
+1475:36:Call -> U
+1475:36:Attribute -> U
+1475:36:Name -> U
+1476:24:Call -> Inst:builtins.int
+1476:24:Name -> Class:builtins.int
+1476:28:Name -> U
+1477:25:Call -> Inst:builtins.int
+1477:25:Name -> Class:builtins.int
+1477:29:Name -> U
+1477:41:Call -> Inst:builtins.int
+1477:41:Name -> Class:builtins.int
+1477:45:Name -> U
+1480:18:Name -> ERR
+1481:20:Call -> ERR
+1481:20:Attribute -> ERR
+1481:20:Call -> ERR
+1481:20:Name -> ERR
+1482:15:Call -> ERR
+1482:15:Attribute -> ERR
+1482:15:Name -> ERR
+1484:20:Call -> ERR
+1484:20:Attribute -> ERR
+1484:20:Name -> ERR
+1487:12:Name -> Dict:0
+1487:16:Name -> U
+1489:24:Call -> Inst:builtins.int
+1489:24:Name -> Class:builtins.int
+1489:28:Name -> U
+1490:25:Call -> Inst:builtins.int
+1490:25:Name -> Class:builtins.int
+1490:29:Name -> U
+1490:46:Call -> Inst:builtins.int
+1490:46:Name -> Class:builtins.int
+1490:50:Name -> U
+1493:9:Name -> ERR
+1494:13:Call -> U
+1494:13:Attribute -> Func:salt.utils.files.fopen
+1494:13:Attribute -> Module:salt.utils.files
+1494:13:Attribute -> Module:salt.utils
+1494:13:Name -> Module:salt
+1495:24:Name -> U
+1496:23:Call -> U
+1496:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+1496:23:Attribute -> Module:salt.utils.stringutils
+1496:23:Attribute -> Module:salt.utils
+1496:23:Name -> Module:salt
+1496:57:Name -> U
+1497:19:Call -> U
+1497:19:Attribute -> U
+1497:19:Name -> U
+1499:24:Call -> U
+1499:24:Attribute -> U
+1499:24:Name -> U
+1500:16:Name -> Dict:0
+1500:20:Name -> U
+1501:28:Name -> U
+1502:28:Name -> U
+1503:28:Name -> U
+1504:32:Name -> U
+1507:20:Call -> ERR
+1507:20:Attribute -> ERR
+1507:20:Call -> ERR
+1507:20:Name -> ERR
+1508:15:Call -> ERR
+1508:15:Attribute -> ERR
+1508:15:Name -> ERR
+1511:20:Call -> ERR
+1511:20:Attribute -> ERR
+1511:20:Name -> ERR
+1512:15:Call -> U
+1512:15:Attribute -> U
+1512:15:Name -> U
+1514:12:Name -> Dict:0
+1514:16:Name -> U
+1515:24:Name -> Const:str:'file' | Const:str:'partition'
+1516:24:Name -> U
+1517:24:Name -> U
+1518:28:Name -> U
+1520:11:Name -> Dict:0
+1536:10:Call -> Dict:0
+1536:10:Name -> Func:salt.modules.mount.swaps
+1537:7:Name -> U
+1537:15:Name -> Dict:0
+1538:8:Name -> Dict:0
+1538:23:Name -> Dict:0
+1538:27:Name -> U
+1539:8:Name -> Dict:0
+1540:15:Name -> Dict:0
+1542:7:Name -> ERR
+1543:11:Name -> ERR
+1544:12:Call -> ERR
+1544:12:Name -> ERR
+1544:44:Name -> U
+1548:25:Name -> U
+1549:11:Name -> Const:NoneType:None | U
+1549:37:Name -> ERR
+1550:26:Name -> Const:NoneType:None | U
+1551:8:Call -> ERR
+1551:8:Name -> ERR
+1551:28:Name -> Const:str:"swapon 'Uninferable'" | Const:str:"swapon 'Uninferable' -p None" | Const:str:"swapon 'Uninferable' -p Uninferable"
+1553:10:Call -> Dict:0
+1553:10:Name -> Func:salt.modules.mount.swaps
+1554:7:Name -> U
+1554:15:Name -> Dict:0
+1555:8:Name -> Dict:0
+1555:23:Name -> Dict:0
+1555:27:Name -> U
+1556:8:Name -> Dict:0
+1557:15:Name -> Dict:0
+1559:11:Name -> Dict:0
+1574:10:Call -> Dict:0
+1574:10:Name -> Func:salt.modules.mount.swaps
+1575:7:Name -> U
+1575:15:Name -> Dict:0
+1576:11:Name -> ERR
+1577:15:Name -> ERR
+1578:16:Call -> ERR
+1578:16:Name -> ERR
+1578:48:Name -> U
+1581:13:Name -> ERR
+1582:12:Call -> ERR
+1582:12:Name -> ERR
+1582:44:Name -> U
+1584:12:Call -> ERR
+1584:12:Name -> ERR
+1584:47:Name -> U
+1585:14:Call -> Dict:0
+1585:14:Name -> Func:salt.modules.mount.swaps
+1586:11:Name -> U
+1586:19:Name -> Dict:0
+1604:14:Call -> Dict:0
+1604:14:Name -> Func:salt.modules.mount.active
+1605:7:Name -> U
+1605:15:Name -> Dict:0
+1623:12:Call -> U | Dict:0
+1623:12:Attribute -> Func:salt.utils.mount.read_cache
+1623:12:Attribute -> Module:salt.utils.mount
+1623:12:Attribute -> Module:salt.utils
+1623:12:Name -> Module:salt
+1623:40:Name -> ERR
+1624:7:Name -> U | Dict:0
+1625:23:Name -> U
+1625:33:Name -> U
+1626:15:Name -> U
+1626:23:Name -> U
+1627:23:Name -> U
+1627:39:Name -> U
+1650:12:Call -> U | Dict:0
+1650:12:Attribute -> Func:salt.utils.mount.read_cache
+1650:12:Attribute -> Module:salt.utils.mount
+1650:12:Attribute -> Module:salt.utils
+1650:12:Name -> Module:salt
+1650:40:Name -> ERR
+1652:11:Name -> U | Dict:0
+1654:8:Name -> Dict:0
+1656:27:Name -> U
+1657:12:Name -> U
+1659:4:Name -> U | Dict:0 | Dict:0
+1659:20:Name -> U
+1660:18:Name -> U
+1661:18:Name -> U
+1662:17:Name -> U
+1663:16:Name -> U
+1666:18:Call -> Const:bool:True | Const:bool:False
+1666:18:Attribute -> Func:salt.utils.mount.write_cache
+1666:18:Attribute -> Module:salt.utils.mount
+1666:18:Attribute -> Module:salt.utils
+1666:18:Name -> Module:salt
+1666:47:Name -> U | Dict:0 | Dict:0
+1666:54:Name -> ERR
+1667:7:Name -> Const:bool:True | Const:bool:False
+1670:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1670:14:Name -> Class:salt.exceptions.CommandExecutionError
+1685:12:Call -> U | Dict:0
+1685:12:Attribute -> Func:salt.utils.mount.read_cache
+1685:12:Attribute -> Module:salt.utils.mount
+1685:12:Attribute -> Module:salt.utils
+1685:12:Name -> Module:salt
+1685:40:Name -> ERR
+1687:7:Name -> U | Dict:0
+1688:23:Name -> U
+1689:15:Name -> U
+1689:28:Name -> U
+1690:20:Name -> U
+1690:36:Name -> U
+1691:30:Call -> Const:bool:True | Const:bool:False
+1691:30:Attribute -> Func:salt.utils.mount.write_cache
+1691:30:Attribute -> Module:salt.utils.mount
+1691:30:Attribute -> Module:salt.utils
+1691:30:Name -> Module:salt
+1691:59:Name -> U
+1691:66:Name -> ERR
+1692:23:Name -> Const:bool:True | Const:bool:False
+1693:26:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1693:26:Name -> Class:salt.exceptions.CommandExecutionError
+1711:10:Call -> Inst:collections.OrderedDict
+1711:10:Name -> Class:collections.OrderedDict
+1714:11:Call -> Const:bool:False | U
+1714:11:Attribute -> Func:genericpath.isfile | U
+1714:11:Attribute -> Module:posixpath | Module:ntpath
+1714:11:Name -> Module:os
+1714:26:Name -> Const:str:'/etc/filesystems' | U
+1714:50:Name -> ERR
+1715:15:Name -> Inst:collections.OrderedDict
+1718:9:Call -> U
+1718:9:Attribute -> Func:salt.utils.files.fopen
+1718:9:Attribute -> Module:salt.utils.files
+1718:9:Attribute -> Module:salt.utils
+1718:9:Name -> Module:salt
+1718:32:Name -> Const:str:'/etc/filesystems' | U
+1719:20:Name -> U
+1720:19:Call -> U
+1720:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+1720:19:Attribute -> Module:salt.utils.stringutils
+1720:19:Attribute -> Module:salt.utils
+1720:19:Name -> Module:salt
+1720:53:Name -> U
+1723:19:Call -> U
+1723:19:Attribute -> U
+1723:19:Name -> U
+1723:48:Name -> Const:bool:False
+1726:15:Call -> U
+1726:15:Attribute -> U
+1726:15:Name -> U
+1728:16:Call -> ERR
+1728:16:Attribute -> BM:builtins.list.append
+1728:16:Name -> List:0
+1728:29:Name -> U
+1729:21:Call -> U
+1729:21:Attribute -> U
+1729:21:Name -> U
+1732:28:Call -> Inst:collections.OrderedDict
+1732:28:Attribute -> BM:salt.modules.mount._FileSystemsEntry.dict_from_lines
+1732:28:Name -> Class:salt.modules.mount._FileSystemsEntry
+1733:24:Name -> List:0
+1733:31:Attribute -> Tuple:18
+1733:31:Name -> Class:salt.modules.mount._FileSystemsEntry
+1736:33:Name -> Inst:collections.OrderedDict
+1737:24:Name -> Inst:collections.OrderedDict
+1737:40:Call -> ERR
+1737:40:Attribute -> ERR
+1737:40:Name -> Inst:collections.OrderedDict
+1738:26:Name -> Inst:collections.OrderedDict
+1738:43:Name -> Inst:collections.OrderedDict
+1739:24:Name -> Inst:collections.OrderedDict
+1741:23:Name -> Const:bool:True | U
+1742:24:Name -> Inst:collections.OrderedDict
+1742:28:Call -> ERR
+1742:28:Attribute -> BM:builtins.dict.pop
+1742:28:Name -> Inst:collections.OrderedDict
+1742:49:Name -> Inst:collections.OrderedDict
+1744:24:Name -> Inst:collections.OrderedDict
+1744:28:Name -> Inst:collections.OrderedDict
+1744:45:Name -> Inst:collections.OrderedDict
+1746:23:Attribute -> Class:salt.modules.mount._FileSystemsEntry.ParseError
+1746:23:Name -> Class:salt.modules.mount._FileSystemsEntry
+1749:16:Call -> ERR
+1749:16:Attribute -> BM:builtins.list.append
+1749:16:Name -> List:0
+1749:29:Name -> U
+1751:11:Name -> Inst:collections.OrderedDict
+1767:20:Name -> ERR
+1768:15:Name -> Dict:0
+1770:15:Call -> Inst:collections.OrderedDict
+1770:15:Name -> Func:salt.modules.mount._filesystems
+1770:28:Name -> Const:str:'/etc/filesystems' | U
+1771:7:Name -> Inst:collections.OrderedDict
+1772:18:Call -> ERR
+1772:18:Name -> Func:builtins.next
+1772:23:Call -> ERR
+1772:23:Name -> Func:builtins.iter
+1772:28:Call -> ERR
+1772:28:Attribute -> BM:builtins.dict.keys
+1772:28:Name -> Inst:collections.OrderedDict
+1773:15:Name -> U
+1773:24:Call -> Inst:builtins.dict
+1773:24:Name -> Class:builtins.dict
+1773:29:Name -> Inst:collections.OrderedDict
+1773:38:Name -> U
+1775:11:Name -> Dict:0 | Dict:1
+1816:7:Call -> ERR
+1816:7:Name -> Func:builtins.isinstance
+1816:18:Name -> Const:str:'-' | U
+1816:24:Name -> Class:builtins.list
+1817:15:Call -> Const:str:''
+1817:15:Attribute -> BM:builtins.str.join
+1817:24:Name -> Const:str:'-' | U
+1821:16:Name -> U
+1822:15:Call -> U
+1822:15:Attribute -> U
+1822:15:Name -> U
+1823:19:Name -> U
+1824:16:Name -> Const:str:'-' | U | Const:str:''
+1825:17:Name -> Const:str:'true' | U
+1831:20:Name -> ERR
+1832:15:Name -> Const:NoneType:None
+1835:7:Call -> ERR
+1835:7:Name -> Func:builtins.isinstance
+1835:18:Name -> Const:str:'auto' | U
+1835:28:Name -> Class:builtins.list
+1837:13:Call -> ERR
+1837:13:Name -> Func:builtins.isinstance
+1837:24:Name -> Const:str:'auto' | U
+1837:34:Name -> Class:builtins.str
+1838:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1838:14:Name -> Class:salt.exceptions.CommandExecutionError
+1839:9:Name -> Const:str:'auto' | U
+1843:22:Call -> Frozen
+1843:22:Name -> Class:builtins.frozenset
+1874:11:Name -> U
+1874:22:Name -> Frozen
+1879:20:Name -> Const:str:'auto' | U
+1882:15:Call -> Inst:salt.modules.mount._FileSystemsEntry
+1882:15:Attribute -> BM:salt.modules.mount._FileSystemsEntry.from_line
+1882:15:Name -> Class:salt.modules.mount._FileSystemsEntry
+1882:43:Name -> Dict:5
+1882:55:Name -> Dict:0
+1884:19:Call -> Inst:salt.modules.mount._FileSystemsEntry
+1884:19:Attribute -> BM:salt.modules.mount._FileSystemsEntry.pick
+1884:19:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1884:33:Name -> Const:str:'auto' | U | List:1 | List:1 | List:1
+1886:11:Name -> Class:builtins.KeyError
+1889:19:Name -> U
+1889:30:Attribute -> Tuple:18
+1889:30:Name -> Class:salt.modules.mount._FileSystemsEntry
+1891:23:Call -> Inst:builtins.filter
+1891:23:Name -> Class:builtins.filter
+1891:30:Name -> Func:salt.modules.mount.set_filesystems.filterFn
+1891:40:Name -> Const:str:'auto' | U | List:1 | List:1 | List:1
+1892:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1892:14:Name -> Class:salt.exceptions.CommandExecutionError
+1892:71:Name -> Inst:builtins.filter
+1895:11:Call -> Const:bool:False | U
+1895:11:Attribute -> Func:genericpath.isfile | U
+1895:11:Attribute -> Module:posixpath | Module:ntpath
+1895:11:Name -> Module:os
+1895:26:Name -> Const:str:'/etc/filesystems' | U
+1896:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1896:14:Name -> Class:salt.exceptions.CommandExecutionError
+1896:56:Name -> Const:str:'/etc/filesystems' | U
+1900:24:Call -> Inst:collections.OrderedDict
+1900:24:Name -> Func:salt.modules.mount._filesystems
+1900:37:Name -> Const:str:'/etc/filesystems' | U
+1901:25:Call -> ERR
+1901:25:Attribute -> BM:builtins.dict.items
+1901:25:Name -> Inst:collections.OrderedDict
+1902:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+1902:15:Attribute -> BM:salt.modules.mount._FileSystemsEntry.match
+1902:15:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1902:30:Name -> U
+1904:19:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+1904:19:Attribute -> BM:salt.modules.mount._FileSystemsEntry.match
+1904:19:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1904:34:Name -> U
+1904:48:Name -> Const:bool:False | U
+1905:20:Call -> ERR
+1905:20:Attribute -> BM:builtins.list.append
+1905:20:Name -> List:0
+1905:38:Name -> U
+1908:25:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1909:20:Call -> ERR
+1909:20:Attribute -> BM:builtins.list.append
+1909:20:Name -> List:0
+1909:39:Name -> U
+1909:43:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1911:16:Call -> ERR
+1911:16:Attribute -> BM:builtins.list.append
+1911:16:Name -> List:0
+1911:34:Name -> U
+1913:11:Name -> Class:builtins.OSError
+1914:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1914:14:Name -> Class:salt.exceptions.CommandExecutionError
+1914:58:Name -> Const:str:'/etc/filesystems' | U
+1914:68:Name -> ExcInst:builtins.OSError
+1917:7:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change'
+1918:25:Call -> ERR
+1918:25:Attribute -> BM:builtins.dict.items
+1918:25:Call -> Inst:collections.OrderedDict
+1918:25:Attribute -> BM:salt.modules.mount._FileSystemsEntry.dict_from_entry
+1918:25:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1919:12:Call -> ERR
+1919:12:Attribute -> BM:builtins.list.append
+1919:12:Name -> List:0
+1919:30:Name -> U
+1922:7:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change' | Const:str:'new'
+1924:17:Call -> U
+1924:17:Attribute -> Func:salt.utils.files.fopen
+1924:17:Attribute -> Module:salt.utils.files
+1924:17:Attribute -> Module:salt.utils
+1924:17:Name -> Module:salt
+1924:40:Name -> Const:str:'/etc/filesystems' | U
+1926:33:Name -> List:0
+1927:28:Name -> U
+1928:33:Call -> List:0
+1928:33:Attribute -> BM:salt.modules.mount._FileSystemsEntry.dict_to_list_lines
+1928:33:Name -> Class:salt.modules.mount._FileSystemsEntry
+1928:70:Name -> U
+1929:20:Call -> U
+1929:20:Attribute -> U
+1929:20:Name -> U
+1929:37:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1929:37:Attribute -> Func:salt.utils.data.encode
+1929:37:Attribute -> Module:salt.utils.data
+1929:37:Attribute -> Module:salt.utils
+1929:37:Name -> Module:salt
+1929:60:Name -> List:0
+1931:15:Name -> Class:builtins.OSError
+1932:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1932:18:Name -> Class:salt.exceptions.CommandExecutionError
+1932:61:Name -> Const:str:'/etc/filesystems' | U
+1933:15:Name -> Class:builtins.Exception
+1934:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1934:18:Name -> Class:salt.exceptions.CommandExecutionError
+1934:75:Name -> ExcInst:builtins.Exception
+1936:11:Name -> Const:NoneType:None | Const:str:'present' | Const:str:'change' | Const:str:'new'
+1954:20:Name -> ERR
+1955:15:Name -> Const:bool:False
+1957:15:Call -> Inst:salt.modules.mount._FileSystemsEntry
+1957:15:Name -> Class:salt.modules.mount._FileSystemsEntry
+1957:38:Name -> U
+1957:48:Name -> U
+1959:24:Call -> Inst:collections.OrderedDict
+1959:24:Name -> Func:salt.modules.mount._filesystems
+1959:37:Name -> Const:str:'/etc/filesystems' | U
+1960:25:Call -> ERR
+1960:25:Attribute -> BM:builtins.dict.items
+1960:25:Name -> Inst:collections.OrderedDict
+1962:19:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+1962:19:Attribute -> BM:salt.modules.mount._FileSystemsEntry.match
+1962:19:Name -> Inst:salt.modules.mount._FileSystemsEntry
+1962:34:Name -> U
+1965:20:Call -> ERR
+1965:20:Attribute -> BM:builtins.list.append
+1965:20:Name -> List:0
+1965:38:Name -> U
+1967:19:Attribute -> Class:salt.modules.mount._FileSystemsEntry.ParseError
+1967:19:Name -> Class:salt.modules.mount._FileSystemsEntry
+1968:16:Call -> ERR
+1968:16:Attribute -> BM:builtins.list.append
+1968:16:Name -> List:0
+1968:34:Name -> U
+1970:11:Name -> Class:builtins.OSError
+1971:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1971:14:Name -> Class:salt.exceptions.CommandExecutionError
+1971:58:Name -> Const:str:'/etc/filesystems' | U
+1971:68:Name -> ExcInst:builtins.OSError
+1973:7:Name -> Const:bool:False | Const:bool:True
+1975:17:Call -> U
+1975:17:Attribute -> Func:salt.utils.files.fopen
+1975:17:Attribute -> Module:salt.utils.files
+1975:17:Attribute -> Module:salt.utils
+1975:17:Name -> Module:salt
+1975:40:Name -> Const:str:'/etc/filesystems' | U
+1976:33:Name -> List:0
+1977:28:Name -> U
+1978:33:Call -> List:0
+1978:33:Attribute -> BM:salt.modules.mount._FileSystemsEntry.dict_to_list_lines
+1978:33:Name -> Class:salt.modules.mount._FileSystemsEntry
+1978:70:Name -> U
+1979:20:Call -> U
+1979:20:Attribute -> U
+1979:20:Name -> U
+1979:37:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0 | Const:NoneType:None | Inst:builtins.bytes
+1979:37:Attribute -> Func:salt.utils.data.encode
+1979:37:Attribute -> Module:salt.utils.data
+1979:37:Attribute -> Module:salt.utils
+1979:37:Name -> Module:salt
+1979:60:Name -> List:0
+1980:15:Name -> Class:builtins.OSError
+1981:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1981:18:Name -> Class:salt.exceptions.CommandExecutionError
+1981:61:Name -> Const:str:'/etc/filesystems' | U
+1981:71:Name -> ExcInst:builtins.OSError
+1982:15:Name -> Class:builtins.Exception
+1983:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+1983:18:Name -> Class:salt.exceptions.CommandExecutionError
+1983:74:Name -> ExcInst:builtins.Exception
+1985:11:Name -> Const:bool:False | Const:bool:True
+2003:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2003:11:Attribute -> Func:posixpath.realpath | U
+2003:11:Attribute -> Module:posixpath | Module:ntpath
+2003:11:Name -> Module:os
+2003:28:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2003:28:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+2003:28:Attribute -> Module:posixpath | Module:ntpath
+2003:28:Name -> Module:os
+2003:44:Name -> U
+2004:10:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2004:18:Attribute -> Const:str:'/' | Const:str:'\\'
+2004:18:Attribute -> Module:posixpath | Module:ntpath
+2004:18:Name -> Module:os
+2005:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True | U | Const:bool:True
+2005:11:Attribute -> Func:posixpath.ismount | Func:ntpath.ismount
+2005:11:Attribute -> Module:posixpath | Module:ntpath
+2005:11:Name -> Module:os
+2005:27:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2006:19:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2007:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2007:15:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+2007:15:Attribute -> Module:posixpath | Module:ntpath
+2007:15:Name -> Module:os
+2007:31:Call -> U
+2007:31:Attribute -> Func:posixpath.join | Func:ntpath.join
+2007:31:Attribute -> Module:posixpath | Module:ntpath
+2007:31:Name -> Module:os
+2007:44:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+2007:50:Attribute -> Const:str:'..'
+2007:50:Name -> Module:os
+2008:11:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Const:bytes:b'/' | Const:str:'/'
+2026:12:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+2026:12:Name -> Func:salt.modules.mount.get_mount_from_path
+2026:32:Name -> U
+2027:13:Call -> Dict:0
+2027:13:Name -> Func:salt.modules.mount.active
+2028:11:Call -> ERR
+2028:11:Attribute -> ERR
+2028:11:Call -> ERR
+2028:11:Attribute -> BM:builtins.dict.get
+2028:11:Name -> Dict:0
+2028:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'

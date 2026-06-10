@@ -1,0 +1,282 @@
+12:19:Name -> Class:django.contrib.sessions.backends.base.SessionBase
+18:8:Call -> Const:NoneType:None
+18:8:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.__init__ | BM:builtins.object.__init__
+18:8:Call -> Super
+18:8:Name -> Class:builtins.super
+18:25:Name -> Const:NoneType:None | U
+20:5:Name -> Class:builtins.classmethod
+26:15:Name -> Class:django.contrib.sessions.models.Session
+28:5:Name -> Class:django.utils.functional.cached_property
+30:15:Call -> Class:django.contrib.sessions.models.Session
+30:15:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.get_model_class
+30:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+34:19:Call -> ERR
+34:19:Attribute -> ERR
+34:19:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+34:19:Attribute -> Class:django.contrib.sessions.models.Session
+34:19:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+35:28:Attribute -> U | Const:NoneType:None
+35:28:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+35:62:Call -> Inst:_pydatetime.datetime | U
+35:62:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+35:62:Name -> Module:django.utils.timezone
+37:16:Attribute -> ERR
+37:16:Attribute -> Class:django.contrib.sessions.models.Session
+37:16:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+37:41:Name -> Class:django.core.exceptions.SuspiciousOperation
+38:15:Call -> ERR
+38:15:Name -> Func:builtins.isinstance
+38:26:Name -> U
+38:29:Name -> Class:django.core.exceptions.SuspiciousOperation
+39:25:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+39:25:Attribute -> Func:logging.getLogger
+39:25:Name -> Module:logging
+39:66:Attribute -> U
+39:66:Attribute -> U
+39:66:Name -> U
+40:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+40:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+40:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+40:31:Call -> Const:str:''
+40:31:Name -> Class:builtins.str
+40:35:Name -> U
+41:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+45:25:Call -> ERR
+45:25:Attribute -> ERR
+45:25:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+45:25:Attribute -> Class:django.contrib.sessions.models.Session
+45:25:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+46:28:Attribute -> U | Const:NoneType:None
+46:28:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+46:62:Call -> Inst:_pydatetime.datetime | U
+46:62:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+46:62:Name -> Module:django.utils.timezone
+48:16:Attribute -> ERR
+48:16:Attribute -> Class:django.contrib.sessions.models.Session
+48:16:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+48:41:Name -> Class:django.core.exceptions.SuspiciousOperation
+49:15:Call -> ERR
+49:15:Name -> Func:builtins.isinstance
+49:26:Name -> U
+49:29:Name -> Class:django.core.exceptions.SuspiciousOperation
+50:25:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+50:25:Attribute -> Func:logging.getLogger
+50:25:Name -> Module:logging
+50:66:Attribute -> U
+50:66:Attribute -> U
+50:66:Name -> U
+51:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+51:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+51:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:31:Call -> Const:str:''
+51:31:Name -> Class:builtins.str
+51:35:Name -> U
+52:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+55:12:Call -> U
+55:12:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore._get_session_from_db
+55:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+56:46:Name -> U
+56:15:Call -> U
+56:15:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.decode
+56:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+56:27:Attribute -> U
+56:27:Name -> U
+59:18:Call -> U
+59:18:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore._aget_session_from_db
+59:18:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+60:46:Name -> U
+60:15:Call -> U
+60:15:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.decode
+60:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+60:27:Attribute -> U
+60:27:Name -> U
+63:15:Call -> ERR
+63:15:Attribute -> ERR
+63:15:Call -> ERR
+63:15:Attribute -> ERR
+63:15:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+63:15:Attribute -> Class:django.contrib.sessions.models.Session
+63:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+63:53:Name -> U
+66:21:Call -> ERR
+66:21:Attribute -> ERR
+66:21:Call -> ERR
+66:21:Attribute -> ERR
+66:21:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+66:21:Attribute -> Class:django.contrib.sessions.models.Session
+66:21:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+66:59:Name -> U
+70:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+70:32:Call -> Const:str:''
+70:32:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase._get_new_session_key
+70:32:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+74:16:Call -> Const:NoneType:None
+74:16:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.save
+74:16:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+75:19:Name -> Class:django.contrib.sessions.backends.base.CreateError
+78:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+83:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+83:38:Call -> Const:str:''
+83:38:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase._aget_new_session_key
+83:38:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+87:22:Call -> U
+87:22:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.asave
+87:22:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+88:19:Name -> Class:django.contrib.sessions.backends.base.CreateError
+91:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+100:15:Call -> Inst:django.contrib.sessions.models.Session
+100:15:Attribute -> Class:django.contrib.sessions.models.Session
+100:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+101:24:Call -> Const:NoneType:None | Const:NoneType:None | Const:str:'' | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'testkey1234'
+101:24:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase._get_or_create_session_key
+101:24:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+102:25:Call -> U
+102:25:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.encode
+102:25:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+102:37:Name -> U
+103:24:Call -> U
+103:24:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.get_expiry_date
+103:24:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+108:15:Call -> Inst:django.contrib.sessions.models.Session
+108:15:Attribute -> Class:django.contrib.sessions.models.Session
+108:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+109:30:Call -> Const:NoneType:None | Const:NoneType:None | Const:str:'' | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'testkey1234'
+109:30:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase._aget_or_create_session_key
+109:30:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+110:25:Call -> U
+110:25:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.encode
+110:25:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+110:37:Name -> U
+111:30:Call -> U | Inst:_pydatetime.datetime
+111:30:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase.aget_expiry_date
+111:30:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+120:11:Attribute -> U | Const:NoneType:None
+120:11:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+121:19:Call -> Const:NoneType:None
+121:19:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.create
+121:19:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+122:15:Call -> Dict:0 | Dict:0 | U
+122:15:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase._get_session
+122:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+122:41:Name -> Const:bool:False | U
+123:14:Call -> Inst:django.contrib.sessions.models.Session
+123:14:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.create_model_instance
+123:14:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+123:41:Name -> Dict:0 | Dict:0 | U
+124:16:Call -> U | Const:str:'default'
+124:16:Attribute -> BM:django.db.utils.ConnectionRouter._router_func._route_db
+124:16:Name -> Inst:django.db.utils.ConnectionRouter
+124:36:Attribute -> Class:django.contrib.sessions.models.Session
+124:36:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+124:57:Name -> Inst:django.contrib.sessions.models.Session
+126:17:Call -> Func:contextlib.ContextDecorator.__call__.inner | Inst:django.db.transaction.Atomic
+126:17:Attribute -> Func:django.db.transaction.atomic
+126:17:Name -> Module:django.db.transaction
+126:42:Name -> U | Const:str:'default'
+127:16:Call -> Const:NoneType:None
+127:16:Attribute -> BM:django.db.models.base.Model.save
+127:16:Name -> Inst:django.contrib.sessions.models.Session
+128:33:Name -> Const:bool:False | U
+128:63:Name -> Const:bool:False | U
+128:82:Name -> U | Const:str:'default'
+130:15:Name -> Class:django.db.utils.IntegrityError
+131:15:Name -> Const:bool:False | U
+132:22:Name -> Class:django.contrib.sessions.backends.base.CreateError
+134:15:Name -> Class:django.db.utils.DatabaseError
+135:19:Name -> Const:bool:False | U
+136:22:Name -> Class:django.contrib.sessions.backends.base.UpdateError
+141:11:Attribute -> U | Const:NoneType:None
+141:11:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+142:25:Call -> Const:NoneType:None
+142:25:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.acreate
+142:25:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+143:21:Call -> Dict:0 | Dict:0 | U
+143:21:Attribute -> BM:django.contrib.sessions.backends.base.SessionBase._aget_session
+143:21:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+143:48:Name -> Const:bool:False | U
+144:20:Call -> Inst:django.contrib.sessions.models.Session
+144:20:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.acreate_model_instance
+144:20:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+144:48:Name -> U
+145:16:Call -> U | Const:str:'default'
+145:16:Attribute -> BM:django.db.utils.ConnectionRouter._router_func._route_db
+145:16:Name -> Inst:django.db.utils.ConnectionRouter
+145:36:Attribute -> Class:django.contrib.sessions.models.Session
+145:36:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+145:57:Name -> U
+150:13:Name -> U
+152:21:Call -> Func:contextlib.ContextDecorator.__call__.inner | Inst:django.db.transaction.Atomic
+152:21:Attribute -> Func:django.db.transaction.atomic
+152:21:Name -> Module:django.db.transaction
+152:46:Name -> U | Const:str:'default'
+153:20:Call -> U
+153:20:Attribute -> U
+153:20:Name -> U
+154:37:Name -> Const:bool:False | U
+155:41:Name -> Const:bool:False | U
+156:30:Name -> U | Const:str:'default'
+159:18:Call -> Const:NoneType:None
+159:18:Name -> Func:django.contrib.sessions.backends.db.SessionStore.asave.sync_transaction
+160:15:Name -> Class:django.db.utils.IntegrityError
+161:15:Name -> Const:bool:False | U
+162:22:Name -> Class:django.contrib.sessions.backends.base.CreateError
+164:15:Name -> Class:django.db.utils.DatabaseError
+165:19:Name -> Const:bool:False | U
+166:22:Name -> Class:django.contrib.sessions.backends.base.UpdateError
+170:11:Name -> Const:NoneType:None | U
+171:15:Attribute -> U | Const:NoneType:None
+171:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+173:26:Attribute -> U | Const:NoneType:None
+173:26:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+175:12:Call -> ERR
+175:12:Attribute -> ERR
+175:12:Call -> ERR
+175:12:Attribute -> ERR
+175:12:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+175:12:Attribute -> Class:django.contrib.sessions.models.Session
+175:12:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+175:47:Name -> Const:NoneType:None | U | Const:NoneType:None
+176:15:Attribute -> ERR
+176:15:Attribute -> Class:django.contrib.sessions.models.Session
+176:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+180:11:Name -> Const:NoneType:None | U
+181:15:Attribute -> U | Const:NoneType:None
+181:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+183:26:Attribute -> U | Const:NoneType:None
+183:26:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+185:24:Call -> ERR
+185:24:Attribute -> ERR
+185:24:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+185:24:Attribute -> Class:django.contrib.sessions.models.Session
+185:24:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+185:60:Name -> Const:NoneType:None | U | Const:NoneType:None
+186:18:Call -> U
+186:18:Attribute -> U
+186:18:Name -> U
+187:15:Attribute -> ERR
+187:15:Attribute -> Class:django.contrib.sessions.models.Session
+187:15:Name -> Inst:django.contrib.sessions.backends.db.SessionStore
+190:5:Name -> Class:builtins.classmethod
+192:8:Call -> ERR
+192:8:Attribute -> ERR
+192:8:Call -> ERR
+192:8:Attribute -> ERR
+192:8:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+192:8:Call -> Class:django.contrib.sessions.models.Session
+192:8:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.get_model_class
+192:8:Name -> Class:django.contrib.sessions.backends.db.SessionStore
+192:61:Call -> Inst:_pydatetime.datetime | U
+192:61:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+192:61:Name -> Module:django.utils.timezone
+194:5:Name -> Class:builtins.classmethod
+196:14:Call -> ERR
+196:14:Attribute -> ERR
+196:14:Call -> ERR
+196:14:Attribute -> ERR
+196:14:Attribute -> Inst:django.contrib.sessions.models.SessionManager
+196:14:Call -> Class:django.contrib.sessions.models.Session
+196:14:Attribute -> BM:django.contrib.sessions.backends.db.SessionStore.get_model_class
+196:14:Name -> Class:django.contrib.sessions.backends.db.SessionStore
+197:28:Call -> Inst:_pydatetime.datetime | U
+197:28:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+197:28:Name -> Module:django.utils.timezone

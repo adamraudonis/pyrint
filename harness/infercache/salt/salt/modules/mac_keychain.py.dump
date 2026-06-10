@@ -1,0 +1,104 @@
+14:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+14:6:Attribute -> Func:logging.getLogger
+14:6:Name -> Module:logging
+14:24:Name -> Const:str:'salt.modules.mac_keychain' | Const:str:'__main__'
+23:7:Call -> U
+23:7:Attribute -> Func:salt.utils.platform.is_darwin
+23:7:Attribute -> Module:salt.utils.platform
+23:7:Attribute -> Module:salt.utils
+23:7:Name -> Module:salt
+24:15:Name -> Const:str:'keychain'
+68:7:Name -> Const:NoneType:None | U
+69:8:Call -> Const:NoneType:None
+69:8:Name -> Func:salt.modules.mac_keychain.unlock_keychain
+69:24:Name -> Const:str:'/Library/Keychains/System.keychain' | U
+69:34:Name -> U
+71:29:Name -> U
+71:39:Name -> U
+71:53:Name -> Const:str:'/Library/Keychains/System.keychain' | U
+72:7:Name -> Const:bool:False | U
+74:11:Call -> ERR
+74:11:Name -> ERR
+74:31:Name -> Const:str:'security import Uninferable -P Uninfera | Const:str:'security import Uninferable -P Uninfera | Const:str:'security import Uninferable -P Uninfera | Const:str:'security import Uninferable -P Uninfera
+103:7:Name -> Const:NoneType:None | U
+104:8:Call -> Const:NoneType:None
+104:8:Name -> Func:salt.modules.mac_keychain.unlock_keychain
+104:24:Name -> Const:str:'/Library/Keychains/System.keychain' | U
+104:34:Name -> U
+106:45:Name -> U
+106:58:Name -> Const:str:'/Library/Keychains/System.keychain' | U
+107:11:Call -> ERR
+107:11:Name -> ERR
+107:31:Name -> Const:str:'security delete-certificate -c "Uninfer | Const:str:'security delete-certificate -c "Uninfer
+125:8:Call -> U
+125:8:Attribute -> BM:builtins.str.format
+126:54:Call -> Const:str:"''" | Const:str:'/Library/Keychains/System.keychain' | U | Const:str:"''"
+126:54:Attribute -> Func:shlex.quote
+126:54:Name -> Module:shlex
+126:66:Name -> Const:str:'/Library/Keychains/System.keychain' | U
+128:10:Call -> ERR
+128:10:Name -> ERR
+128:30:Name -> U
+129:11:Call -> U
+129:11:Attribute -> U
+129:11:Call -> U
+129:11:Attribute -> U
+129:11:Name -> U
+158:7:Name -> Const:bool:False | U
+159:25:Name -> Const:str:'openssl pkcs12'
+162:8:Call -> U
+162:8:Attribute -> BM:builtins.str.format
+164:12:Name -> Const:str:'openssl pkcs12' | Const:str:'openssl pkcs12 -legacy'
+164:25:Call -> Const:str:"''" | U
+164:25:Attribute -> Func:shlex.quote
+164:25:Name -> Module:shlex
+164:37:Name -> U
+164:44:Call -> Const:str:"''" | U
+164:44:Attribute -> Func:shlex.quote
+164:44:Name -> Module:shlex
+164:56:Name -> U
+167:10:Call -> ERR
+167:10:Name -> ERR
+167:30:Name -> U
+168:11:Call -> U
+168:11:Attribute -> U
+168:11:Call -> U
+168:11:Attribute -> U
+168:11:Name -> U
+187:42:Name -> Const:str:'user' | U
+188:11:Call -> ERR
+188:11:Name -> ERR
+188:31:Name -> Const:str:'security default-keychain -d user' | Const:str:'security default-keychain -d Uninferabl
+188:42:Name -> Const:NoneType:None | U
+210:42:Name -> Const:str:'user' | U
+210:54:Name -> U
+211:11:Call -> ERR
+211:11:Name -> ERR
+211:31:Name -> Const:str:'security default-keychain -d user -s Un | Const:str:'security default-keychain -d Uninferabl
+211:42:Name -> Const:NoneType:None | U
+233:41:Name -> U
+233:52:Name -> U
+234:4:Call -> ERR
+234:4:Name -> ERR
+234:24:Name -> Const:str:'security unlock-keychain -p Uninferable
+256:17:Name -> U
+257:14:Call -> U
+257:14:Attribute -> BM:builtins.str.format
+258:12:Name -> U
+258:18:Name -> Const:NoneType:None | U
+261:47:Name -> U
+263:10:Call -> ERR
+263:10:Name -> ERR
+263:30:Name -> U | Const:str:'security find-certificate -c "Uninferab
+264:14:Call -> U
+264:14:Attribute -> Func:re.search
+264:14:Name -> Module:re
+266:8:Name -> U
+267:8:Attribute -> Const:int:16
+267:8:Name -> Module:re
+267:20:Attribute -> Const:int:8
+267:20:Name -> Module:re
+269:7:Name -> U
+270:15:Call -> U
+270:15:Attribute -> U
+270:15:Name -> U

@@ -1,0 +1,231 @@
+30:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+30:10:Attribute -> Func:logging.getLogger
+30:10:Name -> Module:logging
+30:28:Name -> Const:str:'homeassistant.components.yi.camera' | Const:str:'__main__'
+41:18:Call -> U
+41:18:Attribute -> U
+41:18:Name -> U
+43:8:Call -> U
+43:8:Attribute -> U
+43:8:Name -> U
+43:21:Name -> Const:str:'name'
+43:33:Attribute -> Func:homeassistant.helpers.config_validation.string
+43:33:Name -> Module:homeassistant.helpers.config_validation
+44:8:Call -> U
+44:8:Attribute -> U
+44:8:Name -> U
+44:21:Name -> Const:str:'host'
+44:33:Attribute -> Func:homeassistant.helpers.config_validation.string
+44:33:Name -> Module:homeassistant.helpers.config_validation
+45:8:Call -> U
+45:8:Attribute -> U
+45:8:Name -> U
+45:21:Name -> Const:str:'port'
+45:40:Name -> Const:int:21
+45:55:Attribute -> U
+45:55:Name -> Module:homeassistant.helpers.config_validation
+46:8:Call -> U
+46:8:Attribute -> U
+46:8:Name -> U
+46:21:Name -> Const:str:'path'
+46:40:Name -> Const:str:'/tmp/sd/record'
+46:55:Attribute -> Func:homeassistant.helpers.config_validation.string
+46:55:Name -> Module:homeassistant.helpers.config_validation
+47:8:Call -> U
+47:8:Attribute -> U
+47:8:Name -> U
+47:21:Name -> Const:str:'username'
+47:44:Name -> Const:str:'root'
+47:63:Attribute -> Func:homeassistant.helpers.config_validation.string
+47:63:Name -> Module:homeassistant.helpers.config_validation
+48:8:Call -> U
+48:8:Attribute -> U
+48:8:Name -> U
+48:21:Name -> Const:str:'password'
+48:37:Attribute -> Func:homeassistant.helpers.config_validation.string
+48:37:Name -> Module:homeassistant.helpers.config_validation
+49:8:Call -> U
+49:8:Attribute -> U
+49:8:Name -> U
+49:21:Name -> Const:str:'ffmpeg_arguments'
+49:52:Name -> Const:str:'-pred 1'
+49:72:Attribute -> Func:homeassistant.helpers.config_validation.string
+49:72:Name -> Module:homeassistant.helpers.config_validation
+55:10:Name -> U
+56:12:Name -> Class:builtins.dict
+57:24:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+58:20:Name -> Class:builtins.dict
+61:4:Call -> U
+61:4:Name -> U
+61:24:Call -> Inst:homeassistant.components.yi.camera.YiCamera
+61:24:Name -> Class:homeassistant.components.yi.camera.YiCamera
+61:33:Name -> U
+61:39:Name -> U
+64:15:Name -> Class:homeassistant.components.camera.Camera
+67:18:Name -> Const:str:'YI Home Camera'
+69:29:Name -> U
+69:52:Name -> Class:builtins.dict
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:homeassistant.components.camera.Camera.__init__ | BM:builtins.object.__init__
+71:8:Call -> Super
+71:8:Name -> Class:builtins.super
+72:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+72:32:Call -> U
+72:32:Attribute -> U
+72:32:Name -> U
+72:43:Name -> Const:str:'ffmpeg_arguments'
+73:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+73:26:Name -> Class:builtins.bytes
+74:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+75:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+75:24:Call -> U
+75:24:Name -> Func:homeassistant.components.ffmpeg.get_ffmpeg_manager
+75:43:Name -> U
+76:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+76:26:Name -> U
+76:33:Name -> Const:str:'name'
+77:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+77:20:Name -> U
+77:27:Name -> Const:str:'host'
+78:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+78:20:Name -> U
+78:27:Name -> Const:str:'port'
+79:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+79:20:Name -> U
+79:27:Name -> Const:str:'path'
+80:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+80:20:Name -> U
+80:27:Name -> Const:str:'username'
+81:8:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+81:22:Name -> U
+81:29:Name -> Const:str:'password'
+85:14:Call -> U
+85:14:Name -> U
+87:18:Call -> U
+87:18:Attribute -> U
+87:18:Name -> U
+87:30:Attribute -> U
+87:30:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+88:18:Call -> U
+88:18:Attribute -> U
+88:18:Name -> U
+88:28:Attribute -> U
+88:28:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+88:39:Attribute -> U
+88:39:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+89:16:Name -> Class:builtins.ConnectionRefusedError
+89:40:Name -> U
+90:18:Call -> ExcInst:homeassistant.exceptions.PlatformNotReady
+90:18:Name -> Class:homeassistant.exceptions.PlatformNotReady
+90:35:Name -> ExcInst:builtins.ConnectionRefusedError | U
+90:45:Name -> ExcInst:builtins.ConnectionRefusedError | U
+93:18:Call -> U
+93:18:Attribute -> U
+93:18:Name -> U
+93:39:Attribute -> U
+93:39:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+95:37:Call -> U
+95:37:Attribute -> U
+95:37:Name -> U
+96:19:Name -> U
+96:57:Call -> Const:str:''
+96:57:Name -> Class:builtins.str
+96:61:Name -> U
+97:20:Call -> ERR
+97:20:Attribute -> BM:builtins.list.append
+97:20:Name -> List:0
+97:32:Name -> U
+98:25:Name -> List:0
+99:18:Call -> U
+99:18:Attribute -> U
+99:18:Name -> U
+99:39:Name -> U
+102:33:Call -> U
+102:33:Attribute -> U
+102:33:Name -> U
+103:16:Call -> ERR
+103:16:Attribute -> BM:builtins.list.append
+103:16:Name -> List:0
+103:30:Name -> U
+104:19:Name -> List:0
+105:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+105:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+105:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+105:66:Name -> U
+108:18:Call -> U
+108:18:Attribute -> U
+108:18:Name -> U
+109:12:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+111:25:Attribute -> U
+111:25:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+111:37:Attribute -> U
+111:37:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+111:51:Attribute -> U
+111:51:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+112:19:Attribute -> U
+112:19:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+112:30:Attribute -> U
+112:30:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+112:42:Name -> U
+112:55:Name -> List:0
+114:16:Name -> Class:builtins.ConnectionRefusedError
+114:40:Name -> U
+115:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+115:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+115:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+115:60:Name -> ExcInst:builtins.ConnectionRefusedError | U
+116:12:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+120:21:Name -> Class:builtins.int
+120:48:Name -> Class:builtins.int
+121:9:Name -> Class:builtins.bytes
+123:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+123:20:Attribute -> BM:homeassistant.components.yi.camera.YiCamera._get_latest_video_url
+123:20:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+124:11:Name -> U
+124:19:Name -> U
+124:26:Attribute -> Const:NoneType:None | U
+124:26:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+125:12:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+125:37:Call -> U
+125:37:Attribute -> Func:homeassistant.components.ffmpeg.async_get_image
+125:37:Name -> Module:homeassistant.components.ffmpeg
+126:16:Attribute -> U | Const:NoneType:None
+126:16:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+127:16:Name -> U
+128:26:Attribute -> U
+128:26:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+129:22:Name -> Const:NoneType:None | U
+130:23:Name -> Const:NoneType:None | U
+132:12:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+132:29:Name -> U
+134:15:Attribute -> Const:NoneType:None | U
+134:15:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+138:15:Attribute -> Const:bool:True | Const:bool:False
+138:15:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+141:17:Call -> U
+141:17:Name -> U
+141:29:Attribute -> U
+141:29:Attribute -> U
+141:29:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+142:14:Call -> U
+142:14:Attribute -> U
+142:14:Name -> U
+142:33:Attribute -> Const:NoneType:None | U
+142:33:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+142:59:Attribute -> U
+142:59:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+145:34:Call -> U
+145:34:Attribute -> U
+145:34:Name -> U
+146:25:Call -> U
+146:25:Name -> Func:homeassistant.helpers.aiohttp_client.async_aiohttp_proxy_stream
+147:16:Attribute -> U | Const:NoneType:None
+147:16:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+148:16:Name -> U
+149:16:Name -> U
+150:16:Attribute -> U
+150:16:Attribute -> U
+150:16:Name -> Inst:homeassistant.components.yi.camera.YiCamera
+153:18:Call -> U
+153:18:Attribute -> U
+153:18:Name -> U

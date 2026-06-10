@@ -1,0 +1,531 @@
+28:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:6:Attribute -> Func:logging.getLogger
+28:6:Name -> Module:logging
+28:24:Name -> Const:str:'salt.modules.parted_partition' | Const:str:'__main__'
+85:7:Call -> U
+85:7:Attribute -> Func:salt.utils.platform.is_windows
+85:7:Attribute -> Module:salt.utils.platform
+85:7:Attribute -> Module:salt.utils
+85:7:Name -> Module:salt
+91:11:Call -> Const:NoneType:None | Const:str:'parted' | U
+91:11:Attribute -> Func:salt.utils.path.which
+91:11:Attribute -> Module:salt.utils.path
+91:11:Attribute -> Module:salt.utils
+91:11:Name -> Module:salt
+97:11:Call -> Const:NoneType:None | Const:str:'lsblk' | U
+97:11:Attribute -> Func:salt.utils.path.which
+97:11:Attribute -> Module:salt.utils.path
+97:11:Attribute -> Module:salt.utils
+97:11:Name -> Module:salt
+103:11:Call -> Const:NoneType:None | Const:str:'partprobe' | U
+103:11:Attribute -> Func:salt.utils.path.which
+103:11:Attribute -> Module:salt.utils.path
+103:11:Attribute -> Module:salt.utils
+103:11:Name -> Module:salt
+109:11:Name -> Const:str:'partition'
+124:7:Call -> Const:bool:False | Const:bool:True | U
+124:7:Attribute -> Func:genericpath.exists | U
+124:7:Attribute -> Module:posixpath | Module:ntpath
+124:7:Name -> Module:os
+124:22:Name -> U
+125:14:Attribute -> ERR
+125:14:Call -> ERR
+125:14:Attribute -> Func:posix.stat
+125:14:Name -> Module:os
+125:22:Name -> U
+127:11:Call -> U
+127:11:Attribute -> Func:stat.S_ISBLK | Func:_stat.S_ISBLK
+127:11:Name -> Module:stat
+127:24:Name -> U
+130:10:Call -> ExcInst:salt.exceptions.CommandExecutionError
+130:10:Name -> Class:salt.exceptions.CommandExecutionError
+137:15:Call -> Const:str:''
+137:15:Name -> Class:builtins.str
+137:19:Name -> U
+138:12:Call -> U
+138:12:Attribute -> Func:re.search
+138:12:Name -> Module:re
+138:42:Name -> Const:str:''
+139:7:Name -> U
+140:15:Call -> U
+140:15:Attribute -> U
+140:15:Name -> U
+141:15:Name -> U
+141:23:Name -> U
+141:31:Name -> Set:13
+143:10:Call -> ExcInst:salt.exceptions.CommandExecutionError
+143:10:Name -> Class:salt.exceptions.CommandExecutionError
+143:71:Name -> Const:str:''
+162:18:Name -> Tuple:0
+163:8:Call -> Const:NoneType:None
+163:8:Name -> Func:salt.modules.parted_partition._validate_device
+163:25:Name -> U
+165:10:Call -> Const:str:'partprobe -- '
+165:10:Attribute -> BM:builtins.str.format
+165:35:Call -> Const:str:''
+165:35:Attribute -> BM:builtins.str.join
+165:44:Name -> Tuple:0
+166:10:Call -> ERR
+166:10:Attribute -> ERR
+166:10:Call -> ERR
+166:10:Name -> ERR
+166:30:Name -> Const:str:'partprobe -- '
+167:11:Name -> U
+182:4:Call -> Const:NoneType:None
+182:4:Name -> Func:salt.modules.parted_partition._validate_device
+182:21:Name -> U
+184:7:Name -> Const:NoneType:None | U
+185:11:Name -> U
+185:23:Name -> Set:13
+186:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+186:18:Name -> Class:salt.exceptions.CommandExecutionError
+187:30:Name -> U
+187:44:Name -> U
+189:30:Name -> U
+191:10:Call -> ERR
+191:10:Attribute -> ERR
+191:10:Call -> ERR
+191:10:Name -> ERR
+191:37:Name -> Const:str:'parted -m -s Uninferable unit Uninferab | Const:str:'parted -m -s Uninferable print'
+194:16:Name -> U
+195:11:Name -> U
+197:15:Call -> U
+197:15:Attribute -> U
+197:15:Call -> U
+197:15:Attribute -> U
+197:15:Name -> U
+198:11:Name -> Const:str:'info'
+199:20:Call -> ERR
+199:20:Name -> Func:builtins.len
+199:24:Name -> U
+200:16:Name -> Dict:2
+201:28:Name -> U
+202:28:Name -> U
+203:33:Name -> U
+204:38:Name -> U
+205:39:Name -> U
+206:39:Name -> U
+207:29:Name -> U
+209:19:Call -> ERR
+209:19:Name -> Func:builtins.len
+209:23:Name -> U
+210:20:Name -> Dict:2
+210:48:Name -> U
+217:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+217:22:Name -> Class:salt.exceptions.CommandExecutionError
+232:15:Name -> Const:NoneType:None | U
+233:16:Call -> ERR
+233:16:Attribute -> BM:builtins.list.append
+233:16:Name -> List:3
+234:15:Name -> U
+236:16:Call -> U
+236:16:Attribute -> U
+236:16:Name -> U
+238:16:Call -> ERR
+238:16:Attribute -> BM:builtins.list.extend
+238:16:Name -> List:3
+239:15:Call -> Const:int:3
+239:15:Name -> Func:builtins.len
+239:19:Name -> List:3
+239:30:Call -> ERR
+239:30:Name -> Func:builtins.len
+239:34:Name -> U
+240:16:Name -> Dict:2
+240:34:Name -> U
+240:45:Call -> Inst:builtins.dict
+240:45:Name -> Class:builtins.dict
+240:50:Call -> Inst:builtins.zip
+240:50:Name -> Class:builtins.zip
+240:54:Name -> List:3
+240:62:Name -> U
+242:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+242:22:Name -> Class:salt.exceptions.CommandExecutionError
+245:11:Name -> Dict:2
+259:4:Call -> Const:NoneType:None
+259:4:Name -> Func:salt.modules.parted_partition._validate_device
+259:21:Name -> U
+261:7:Name -> U
+262:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+262:14:Name -> Class:salt.exceptions.CommandExecutionError
+265:8:Call -> Inst:builtins.int
+265:8:Name -> Class:builtins.int
+265:12:Name -> U
+266:11:Name -> Class:builtins.Exception
+267:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+267:14:Name -> Class:salt.exceptions.CommandExecutionError
+269:23:Name -> U
+269:44:Name -> U
+269:56:Name -> U
+270:10:Call -> ERR
+270:10:Attribute -> ERR
+270:10:Call -> ERR
+270:10:Name -> ERR
+270:30:Name -> Const:str:'parted -m Uninferable align-check Uninf
+271:11:Name -> U
+284:4:Call -> Const:NoneType:None
+284:4:Name -> Func:salt.modules.parted_partition._validate_device
+284:21:Name -> U
+287:8:Call -> Inst:builtins.int
+287:8:Name -> Class:builtins.int
+287:12:Name -> U
+288:11:Name -> Class:builtins.Exception
+289:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+289:14:Name -> Class:salt.exceptions.CommandExecutionError
+291:26:Name -> U
+291:41:Name -> U
+292:10:Call -> ERR
+292:10:Attribute -> ERR
+292:10:Call -> ERR
+292:10:Name -> ERR
+292:30:Name -> Const:str:'parted -m -s Uninferable check Uninfera
+293:11:Name -> U
+308:4:Call -> Const:NoneType:None
+308:4:Name -> Func:salt.modules.parted_partition._validate_device
+308:21:Name -> U
+311:8:Call -> Inst:builtins.int
+311:8:Name -> Class:builtins.int
+311:12:Name -> U
+312:8:Call -> Inst:builtins.int
+312:8:Name -> Class:builtins.int
+312:12:Name -> U
+313:11:Name -> Class:builtins.Exception
+314:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+314:14:Name -> Class:salt.exceptions.CommandExecutionError
+316:26:Name -> U
+316:38:Name -> U
+316:51:Name -> U
+317:10:Call -> ERR
+317:10:Attribute -> ERR
+317:10:Call -> ERR
+317:10:Name -> ERR
+317:30:Name -> Const:str:'parted -m -s Uninferable cp Uninferable
+318:11:Name -> U
+338:4:Call -> Const:NoneType:None
+338:4:Name -> Func:salt.modules.parted_partition._validate_device
+338:21:Name -> U
+341:8:Call -> Inst:builtins.int
+341:8:Name -> Class:builtins.int
+341:12:Name -> U
+342:11:Name -> Class:builtins.Exception
+343:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+343:14:Name -> Class:salt.exceptions.CommandExecutionError
+345:31:Name -> U
+345:40:Name -> U
+346:10:Call -> ERR
+346:10:Attribute -> ERR
+346:10:Call -> ERR
+346:10:Name -> ERR
+346:30:Name -> Const:str:'sfdisk --print-id Uninferable Uninferab
+347:11:Name -> U
+367:4:Call -> Const:NoneType:None
+367:4:Name -> Func:salt.modules.parted_partition._validate_device
+367:21:Name -> U
+370:8:Call -> Inst:builtins.int
+370:8:Name -> Class:builtins.int
+370:12:Name -> U
+371:11:Name -> Class:builtins.Exception
+372:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+372:14:Name -> Class:salt.exceptions.CommandExecutionError
+374:7:Name -> U
+374:24:Call -> Dict:0
+374:24:Name -> Func:salt.modules.parted_partition.system_types
+375:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+375:14:Name -> Class:salt.exceptions.CommandExecutionError
+377:32:Name -> U
+377:41:Name -> U
+377:49:Name -> U
+378:10:Call -> ERR
+378:10:Attribute -> ERR
+378:10:Call -> ERR
+378:10:Name -> ERR
+378:30:Name -> Const:str:'sfdisk --change-id Uninferable Uninfera
+379:11:Name -> U
+393:16:Call -> ERR
+393:16:Attribute -> ERR
+393:16:Call -> ERR
+393:16:Name -> ERR
+394:15:Name -> ERR
+396:11:Call -> ERR
+396:11:Attribute -> ERR
+396:11:Name -> ERR
+398:16:Call -> ERR
+398:16:Attribute -> ERR
+398:16:Call -> ERR
+398:16:Attribute -> ERR
+398:16:Name -> ERR
+399:8:Name -> Dict:0
+399:12:Name -> U
+399:24:Name -> U
+400:11:Name -> Dict:0
+409:11:Name -> U
+441:4:Call -> Const:NoneType:None
+441:4:Name -> Func:salt.modules.parted_partition._validate_device
+441:21:Name -> U
+443:11:Call -> U
+443:11:Name -> Func:salt.modules.parted_partition._is_fstype
+443:22:Name -> U
+444:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+444:14:Name -> Class:salt.exceptions.CommandExecutionError
+446:7:Name -> U
+449:7:Name -> U | Const:str:'ntfs'
+452:27:Name -> U | Const:str:'ntfs'
+454:11:Call -> Const:NoneType:None | Const:str:'mkswap' | Const:str:'mkfs.Uninferable' | Const:str:'mkfs.ntfs' | U
+454:11:Attribute -> Func:salt.utils.path.which
+454:11:Attribute -> Module:salt.utils.path
+454:11:Attribute -> Module:salt.utils
+454:11:Name -> Module:salt
+454:33:Name -> Const:str:'mkswap' | Const:str:'mkfs.Uninferable' | Const:str:'mkfs.ntfs'
+455:25:Name -> Const:str:'mkswap' | Const:str:'mkfs.Uninferable' | Const:str:'mkfs.ntfs'
+456:13:Name -> Const:str:'mkswap' | Const:str:'mkfs.Uninferable' | Const:str:'mkfs.ntfs'
+456:24:Name -> U
+457:10:Call -> ERR
+457:10:Attribute -> ERR
+457:10:Call -> ERR
+457:10:Name -> ERR
+457:30:Name -> Const:str:'mkswap Uninferable' | Const:str:'mkfs.Uninferable Uninferable' | Const:str:'mkfs.ntfs Uninferable'
+458:11:Name -> U
+474:7:Name -> U
+486:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+486:14:Name -> Class:salt.exceptions.CommandExecutionError
+488:33:Name -> U
+488:52:Name -> U
+489:10:Call -> ERR
+489:10:Attribute -> ERR
+489:10:Call -> ERR
+489:10:Name -> ERR
+489:30:Name -> Tuple:6
+490:11:Name -> U
+506:4:Call -> Const:NoneType:None
+506:4:Name -> Func:salt.modules.parted_partition._validate_device
+506:21:Name -> U
+508:7:Name -> U
+509:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+509:14:Name -> Class:salt.exceptions.CommandExecutionError
+511:7:Name -> Const:NoneType:None | U
+511:23:Call -> U
+511:23:Name -> Func:salt.modules.parted_partition._is_fstype
+511:34:Name -> Const:NoneType:None | U
+512:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+512:14:Name -> Class:salt.exceptions.CommandExecutionError
+514:7:Name -> Const:NoneType:None | U
+514:29:Name -> Const:NoneType:None | U
+515:8:Call -> Const:NoneType:None
+515:8:Name -> Func:salt.modules.parted_partition._validate_partition_boundary
+515:37:Name -> Const:NoneType:None | U
+516:8:Call -> Const:NoneType:None
+516:8:Name -> Func:salt.modules.parted_partition._validate_partition_boundary
+516:37:Name -> Const:NoneType:None | U
+518:7:Name -> Const:NoneType:None | U
+521:7:Name -> Const:NoneType:None | U
+524:7:Name -> Const:NoneType:None | U
+530:12:Name -> U
+532:12:Name -> U
+533:12:Name -> U
+534:12:Name -> Const:NoneType:None | U | Const:str:''
+535:12:Name -> Const:NoneType:None | U | Const:str:''
+538:43:Name -> U
+538:61:Name -> U
+538:72:Name -> Const:NoneType:None | U | Const:str:''
+538:79:Name -> Const:NoneType:None | U | Const:str:''
+540:10:Call -> ERR
+540:10:Attribute -> ERR
+540:10:Call -> ERR
+540:10:Name -> ERR
+540:30:Name -> Tuple:10 | Tuple:9
+541:11:Name -> U
+556:10:Call -> U
+556:10:Name -> Func:salt.modules.parted_partition.mkpart
+556:17:Name -> U
+556:25:Name -> U
+556:36:Name -> Const:NoneType:None | U
+556:45:Name -> Const:NoneType:None | U
+556:52:Name -> Const:NoneType:None | U
+557:11:Name -> U
+571:4:Call -> Const:NoneType:None
+571:4:Name -> Func:salt.modules.parted_partition._validate_device
+571:21:Name -> U
+574:8:Call -> Inst:builtins.int
+574:8:Name -> Class:builtins.int
+574:12:Name -> U
+575:11:Name -> Class:builtins.Exception
+576:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+576:14:Name -> Class:salt.exceptions.CommandExecutionError
+578:12:Attribute -> Const:str:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLM
+578:12:Name -> Module:string
+578:35:Attribute -> Const:str:'0123456789'
+578:35:Name -> Module:string
+579:18:Name -> U
+580:11:Name -> U
+580:25:Name -> Const:str:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLM
+581:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+581:18:Name -> Class:salt.exceptions.CommandExecutionError
+583:28:Name -> U
+583:42:Name -> U
+583:56:Name -> U
+584:10:Call -> ERR
+584:10:Attribute -> ERR
+584:10:Call -> ERR
+584:10:Name -> ERR
+584:30:Name -> Const:str:'parted -m -s Uninferable name Uninferab
+585:11:Name -> U
+600:4:Call -> Const:NoneType:None
+600:4:Name -> Func:salt.modules.parted_partition._validate_device
+600:21:Name -> U
+601:4:Call -> Const:NoneType:None
+601:4:Name -> Func:salt.modules.parted_partition._validate_partition_boundary
+601:33:Name -> U
+602:4:Call -> Const:NoneType:None
+602:4:Name -> Func:salt.modules.parted_partition._validate_partition_boundary
+602:33:Name -> U
+604:26:Name -> U
+604:42:Name -> U
+604:50:Name -> U
+605:10:Call -> ERR
+605:10:Attribute -> ERR
+605:10:Call -> ERR
+605:10:Name -> ERR
+605:30:Name -> Const:str:'parted -m -s Uninferable rescue Uninfer
+606:11:Name -> U
+624:4:Call -> Const:NoneType:None
+624:4:Name -> Func:salt.modules.parted_partition._validate_device
+624:21:Name -> U
+627:8:Call -> Inst:builtins.int
+627:8:Name -> Class:builtins.int
+627:12:Name -> U
+628:11:Name -> Class:builtins.Exception
+629:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+629:14:Name -> Class:salt.exceptions.CommandExecutionError
+631:4:Call -> Const:NoneType:None
+631:4:Name -> Func:salt.modules.parted_partition._validate_partition_boundary
+631:33:Name -> U
+632:4:Call -> Const:NoneType:None
+632:4:Name -> Func:salt.modules.parted_partition._validate_partition_boundary
+632:33:Name -> U
+634:10:Call -> ERR
+634:10:Name -> ERR
+634:49:Name -> U
+634:65:Name -> U
+634:73:Name -> U
+634:81:Name -> U
+635:11:Call -> U
+635:11:Attribute -> U
+635:11:Name -> U
+648:4:Call -> Const:NoneType:None
+648:4:Name -> Func:salt.modules.parted_partition._validate_device
+648:21:Name -> U
+651:8:Call -> Inst:builtins.int
+651:8:Name -> Class:builtins.int
+651:12:Name -> U
+652:11:Name -> Class:builtins.Exception
+653:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+653:14:Name -> Class:salt.exceptions.CommandExecutionError
+655:26:Name -> U
+655:38:Name -> U
+656:10:Call -> ERR
+656:10:Attribute -> ERR
+656:10:Call -> ERR
+656:10:Name -> ERR
+656:30:Name -> Const:str:'parted -m -s Uninferable rm Uninferable
+657:11:Name -> U
+695:4:Call -> Const:NoneType:None
+695:4:Name -> Func:salt.modules.parted_partition._validate_device
+695:21:Name -> U
+698:8:Call -> Inst:builtins.int
+698:8:Name -> Class:builtins.int
+698:12:Name -> U
+699:11:Name -> Class:builtins.Exception
+700:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+700:14:Name -> Class:salt.exceptions.CommandExecutionError
+702:7:Name -> U
+702:19:Name -> Set:19
+703:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+703:14:Name -> Class:salt.exceptions.CommandExecutionError
+705:7:Name -> U
+706:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+706:14:Name -> Class:salt.exceptions.CommandExecutionError
+708:26:Name -> U
+708:39:Name -> U
+708:47:Name -> U
+708:54:Name -> U
+709:10:Call -> ERR
+709:10:Attribute -> ERR
+709:10:Call -> ERR
+709:10:Name -> ERR
+709:30:Name -> Const:str:'parted -m -s Uninferable set Uninferabl
+710:11:Name -> U
+724:4:Call -> Const:NoneType:None
+724:4:Name -> Func:salt.modules.parted_partition._validate_device
+724:21:Name -> U
+727:8:Call -> Inst:builtins.int
+727:8:Name -> Class:builtins.int
+727:12:Name -> U
+728:11:Name -> Class:builtins.Exception
+729:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+729:14:Name -> Class:salt.exceptions.CommandExecutionError
+733:7:Name -> U
+733:19:Name -> Set:19
+734:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+734:14:Name -> Class:salt.exceptions.CommandExecutionError
+736:26:Name -> U
+736:42:Name -> U
+736:54:Name -> U
+737:10:Call -> ERR
+737:10:Attribute -> ERR
+737:10:Call -> ERR
+737:10:Name -> ERR
+737:30:Name -> Const:str:'parted -m -s Uninferable toggle Uninfer
+738:11:Name -> U
+761:4:Call -> Const:NoneType:None
+761:4:Name -> Func:salt.modules.parted_partition._validate_device
+761:21:Name -> U
+763:7:Name -> U
+763:19:Name -> Set:3
+764:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+764:14:Name -> Class:salt.exceptions.CommandExecutionError
+766:7:Name -> U
+767:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+767:14:Name -> Class:salt.exceptions.CommandExecutionError
+769:33:Name -> U
+769:53:Name -> U
+769:59:Name -> U
+770:10:Call -> ERR
+770:10:Attribute -> ERR
+770:10:Call -> ERR
+770:10:Name -> ERR
+770:30:Name -> List:7
+771:11:Name -> U
+785:4:Call -> Const:NoneType:None
+785:4:Name -> Func:salt.modules.parted_partition._validate_device
+785:21:Name -> U
+787:7:Name -> U
+787:19:Name -> Set:3
+788:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+788:14:Name -> Class:salt.exceptions.CommandExecutionError
+790:33:Name -> U
+790:56:Name -> U
+791:10:Call -> ERR
+791:10:Attribute -> ERR
+791:10:Call -> ERR
+791:10:Name -> ERR
+791:30:Name -> List:6
+792:11:Name -> U
+805:7:Call -> Const:bool:False | Const:bool:True | U
+805:7:Attribute -> Func:genericpath.exists | U
+805:7:Attribute -> Module:posixpath | Module:ntpath
+805:7:Name -> Module:os
+805:22:Name -> Const:str:'' | U
+806:14:Attribute -> ERR
+806:14:Call -> ERR
+806:14:Attribute -> Func:posix.stat
+806:14:Name -> Module:os
+806:22:Name -> Const:str:'' | U
+808:11:Call -> U
+808:11:Attribute -> Func:stat.S_ISBLK | Func:_stat.S_ISBLK
+808:11:Name -> Module:stat
+808:24:Name -> U
+827:11:Call -> ERR
+827:11:Attribute -> ERR
+827:11:Call -> ERR
+827:11:Name -> ERR
+827:31:Name -> Const:str:'lsblk -n -io KNAME -d -e 1,7,11 -l'
+828:11:Name -> U

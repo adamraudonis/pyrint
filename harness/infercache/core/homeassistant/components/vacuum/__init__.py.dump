@@ -1,0 +1,689 @@
+40:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+40:10:Attribute -> Func:logging.getLogger
+40:10:Name -> Module:logging
+40:28:Name -> Const:str:'homeassistant.components.vacuum' | Const:str:'__main__'
+42:19:Name -> Const:str:'vacuum'
+43:18:Attribute -> U
+43:18:Name -> Module:homeassistant.helpers.config_validation
+44:23:Attribute -> U
+44:23:Name -> Module:homeassistant.helpers.config_validation
+45:16:Call -> Inst:_pydatetime.timedelta
+45:16:Name -> Class:_pydatetime.timedelta
+75:16:Name -> U
+75:42:Name -> Class:builtins.str
+75:50:Name -> Class:builtins.bool
+77:11:Call -> U
+77:11:Attribute -> U
+77:11:Attribute -> U
+77:11:Name -> U
+77:32:Name -> U
+77:43:Name -> Const:str:'on'
+80:28:Name -> U
+80:51:Name -> Class:builtins.dict
+80:66:Name -> Class:builtins.bool
+82:16:Attribute -> U
+82:16:Name -> U
+82:26:Name -> Inst:homeassistant.util.hass_dict.HassKey
+82:44:Call -> U
+82:44:Name -> U
+82:60:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+83:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+83:17:Name -> Const:str:'vacuum'
+83:25:Name -> U
+83:31:Name -> Inst:_pydatetime.timedelta
+86:10:Call -> U
+86:10:Attribute -> U
+86:10:Name -> U
+86:32:Name -> U
+88:4:Call -> Const:NoneType:None
+88:4:Name -> Func:homeassistant.components.vacuum.websocket.async_register_websocket_handlers
+88:38:Name -> U
+90:4:Call -> U
+90:4:Attribute -> U
+90:4:Name -> U
+91:8:Name -> Const:str:'start'
+94:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.START
+94:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+96:4:Call -> U
+96:4:Attribute -> U
+96:4:Name -> U
+97:8:Name -> Const:str:'pause'
+100:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.PAUSE
+100:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+102:4:Call -> U
+102:4:Attribute -> U
+102:4:Name -> U
+103:8:Name -> Const:str:'return_to_base'
+106:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.RETURN_HOME
+106:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+108:4:Call -> U
+108:4:Attribute -> U
+108:4:Name -> U
+109:8:Name -> Const:str:'clean_spot'
+112:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.CLEAN_SPOT
+112:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+114:4:Call -> U
+114:4:Attribute -> U
+114:4:Name -> U
+115:8:Name -> Const:str:'clean_area'
+117:12:Call -> U
+117:12:Attribute -> U
+117:12:Name -> U
+117:46:Call -> U
+117:46:Attribute -> U
+117:46:Name -> U
+117:54:Attribute -> Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list
+117:54:Name -> Module:homeassistant.helpers.config_validation
+117:71:Name -> Class:builtins.str
+119:8:Attribute -> Func:homeassistant.components.vacuum.StateVacuumEntity.async_internal_clean_area
+119:8:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+120:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.CLEAN_AREA
+120:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+122:4:Call -> U
+122:4:Attribute -> U
+122:4:Name -> U
+123:8:Name -> Const:str:'locate'
+126:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.LOCATE
+126:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+128:4:Call -> U
+128:4:Attribute -> U
+128:4:Name -> U
+129:8:Name -> Const:str:'stop'
+132:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.STOP
+132:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+134:4:Call -> U
+134:4:Attribute -> U
+134:4:Name -> U
+135:8:Name -> Const:str:'set_fan_speed'
+136:9:Call -> U
+136:9:Attribute -> U
+136:9:Name -> U
+136:22:Name -> Const:str:'fan_speed'
+136:39:Attribute -> Func:homeassistant.helpers.config_validation.string
+136:39:Name -> Module:homeassistant.helpers.config_validation
+138:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.FAN_SPEED
+138:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+140:4:Call -> U
+140:4:Attribute -> U
+140:4:Name -> U
+141:8:Name -> Const:str:'send_command'
+143:12:Call -> U
+143:12:Attribute -> U
+143:12:Name -> U
+143:25:Name -> Const:str:'command'
+143:40:Attribute -> Func:homeassistant.helpers.config_validation.string
+143:40:Name -> Module:homeassistant.helpers.config_validation
+144:12:Call -> U
+144:12:Attribute -> U
+144:12:Name -> U
+144:25:Name -> Const:str:'params'
+144:39:Call -> U
+144:39:Attribute -> U
+144:39:Name -> U
+144:47:Name -> Class:builtins.dict
+144:53:Attribute -> Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list
+144:53:Name -> Module:homeassistant.helpers.config_validation
+147:9:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.SEND_COMMAND
+147:9:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+153:34:Name -> U
+153:56:Name -> U
+153:72:Name -> Class:builtins.bool
+155:17:Call -> U
+155:17:Attribute -> U
+155:17:Attribute -> U
+155:17:Name -> U
+155:27:Name -> Inst:homeassistant.util.hass_dict.HassKey
+155:61:Name -> U
+158:35:Name -> U
+158:57:Name -> U
+158:73:Name -> Class:builtins.bool
+160:17:Call -> U
+160:17:Attribute -> U
+160:17:Attribute -> U
+160:17:Name -> U
+160:27:Name -> Inst:homeassistant.util.hass_dict.HassKey
+160:62:Name -> U
+163:35:Name -> Class:homeassistant.helpers.entity.EntityDescription
+178:4:Name -> Class:homeassistant.helpers.entity.Entity
+178:30:Name -> Set:6
+182:24:Name -> Class:homeassistant.components.vacuum.StateVacuumEntityDescription
+184:46:Call -> Frozen
+184:46:Name -> Class:builtins.frozenset
+184:57:Name -> Const:str:'fan_speed_list'
+186:24:Name -> Class:builtins.str
+187:25:Name -> Class:builtins.int
+188:21:Name -> Class:builtins.str
+189:26:Name -> Class:builtins.list
+189:31:Name -> Class:builtins.str
+190:20:Name -> Class:homeassistant.components.vacuum.const.VacuumActivity
+191:30:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+191:52:Call -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature | U
+191:52:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+193:44:Name -> Class:builtins.bool
+194:33:Name -> Class:builtins.list
+194:38:Name -> Class:builtins.dict
+194:43:Name -> Class:builtins.str
+194:48:Name -> Class:typing.Any
+196:35:Name -> Class:builtins.bool
+197:34:Name -> Class:builtins.bool
+198:37:Name -> Class:builtins.bool
+200:41:Name -> Class:typing.Any
+202:8:Call -> Const:NoneType:None | Inst:builtins.builtin_function_or_method
+202:8:Attribute -> BM:homeassistant.helpers.entity.Entity.__init_subclass__ | Inst:builtins.builtin_function_or_method
+202:8:Call -> Super
+202:8:Name -> Class:builtins.super
+202:36:Name -> Dict:0
+203:11:Call -> ERR
+203:11:Name -> Func:builtins.any
+204:12:Name -> Const:str:'_attr_battery_level' | Const:str:'battery_level'
+204:22:Attribute -> Dict:0
+204:22:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+208:12:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+209:11:Call -> ERR
+209:11:Name -> Func:builtins.any
+210:12:Name -> Const:str:'_attr_battery_icon' | Const:str:'battery_icon'
+210:22:Attribute -> Dict:0
+210:22:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+213:12:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+215:32:Name -> Class:builtins.str
+215:44:Name -> Class:typing.Any
+221:11:Name -> U
+222:12:Call -> Const:NoneType:None
+222:12:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity._report_deprecated_battery_properties
+222:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+222:55:Name -> U
+223:15:Call -> ERR
+223:15:Attribute -> BM:builtins.object.__setattr__
+223:15:Call -> Super
+223:15:Name -> Class:builtins.super
+223:35:Name -> U
+223:41:Name -> U
+225:5:Name -> U
+228:14:Name -> U
+229:18:Name -> Class:homeassistant.helpers.entity_platform.EntityPlatform
+230:26:Attribute -> Class:asyncio.locks.Semaphore
+230:26:Name -> Module:asyncio
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> BM:homeassistant.helpers.entity.Entity.add_to_platform_start
+233:8:Call -> Super
+233:8:Name -> Class:builtins.super
+233:38:Name -> U
+233:44:Name -> U
+233:54:Name -> U
+234:11:Attribute -> Const:bool:False
+234:11:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+235:12:Call -> Const:NoneType:None
+235:12:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity._report_deprecated_battery_properties
+235:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+236:11:Attribute -> Const:bool:False
+236:11:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+237:12:Call -> Const:NoneType:None
+237:12:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity._report_deprecated_battery_properties
+237:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+239:5:Name -> U
+242:8:Call -> Const:NoneType:None
+242:8:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity._async_check_segments_issues
+242:8:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+244:5:Name -> U
+245:62:Name -> Class:builtins.str
+251:12:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+251:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+252:16:Attribute -> U | Const:str:'hue' | Const:str:'ironing_robot'
+252:16:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+252:16:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+253:19:Name -> Tuple:1
+256:12:Call -> Const:NoneType:None
+256:12:Name -> Func:homeassistant.helpers.frame.report_usage
+257:34:Name -> U
+258:32:Attribute -> U | Const:str:'hue' | Const:str:'ironing_robot'
+258:32:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+258:32:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+260:42:Attribute -> Inst:homeassistant.helpers.frame.ReportBehavior.IGNORE
+260:42:Name -> Class:homeassistant.helpers.frame.ReportBehavior
+261:44:Attribute -> Inst:homeassistant.helpers.frame.ReportBehavior.LOG
+261:44:Name -> Class:homeassistant.helpers.frame.ReportBehavior
+263:35:Attribute -> U | Const:str:'hue' | Const:str:'ironing_robot'
+263:35:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+263:35:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+264:38:Name -> Const:str:'vacuum'
+267:5:Name -> U
+275:12:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+275:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+276:16:Attribute -> U | Const:str:'hue' | Const:str:'ironing_robot'
+276:16:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+276:16:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+277:19:Name -> Tuple:1
+280:12:Call -> Const:NoneType:None
+280:12:Name -> Func:homeassistant.helpers.frame.report_usage
+282:32:Attribute -> U | Const:str:'hue' | Const:str:'ironing_robot'
+282:32:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+282:32:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+285:30:Attribute -> Inst:homeassistant.helpers.frame.ReportBehavior.LOG
+285:30:Name -> Class:homeassistant.helpers.frame.ReportBehavior
+286:42:Attribute -> Inst:homeassistant.helpers.frame.ReportBehavior.IGNORE
+286:42:Name -> Class:homeassistant.helpers.frame.ReportBehavior
+287:44:Attribute -> Inst:homeassistant.helpers.frame.ReportBehavior.LOG
+287:44:Name -> Class:homeassistant.helpers.frame.ReportBehavior
+289:35:Attribute -> U | Const:str:'hue' | Const:str:'ironing_robot'
+289:35:Attribute -> U | Const:NoneType:None | Inst:unittest.mock.MagicMock | Const:NoneType:None | Inst:homeassistant.helpers.entity_platform.EntityPlatform
+289:35:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+290:38:Name -> Const:str:'vacuum'
+293:5:Name -> U
+294:31:Name -> Class:builtins.int
+296:15:Attribute -> Const:NoneType:None
+296:15:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+298:5:Name -> Class:builtins.property
+299:30:Name -> Class:builtins.str
+301:19:Call -> U
+301:19:Name -> Class:builtins.bool
+301:24:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.activity
+301:24:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+301:41:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumActivity.DOCKED
+301:41:Name -> Class:homeassistant.components.vacuum.const.VacuumActivity
+303:15:Call -> Const:str:'mdi:battery-unknown' | Const:str:'mdi:battery' | U | Const:str:'mdi:battery-outline' | Const:str:'mdi:battery-alert'
+303:15:Name -> Func:homeassistant.helpers.icon.icon_for_battery_level
+304:26:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.battery_level
+304:26:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+304:55:Name -> U
+307:5:Name -> Class:builtins.property
+308:39:Name -> Class:builtins.dict
+308:44:Name -> Class:builtins.str
+308:49:Name -> Class:typing.Any
+310:11:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.FAN_SPEED
+310:11:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+310:44:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.supported_features
+310:44:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+311:20:Name -> Const:str:'fan_speed_list'
+311:41:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.fan_speed_list
+311:41:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+314:5:Name -> U
+315:27:Name -> Class:builtins.str
+317:15:Attribute -> Const:NoneType:None
+317:15:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+319:5:Name -> U
+320:32:Name -> Class:builtins.list
+320:37:Name -> Class:builtins.str
+322:15:Attribute -> ERR
+322:15:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+324:5:Name -> Class:builtins.property
+325:34:Name -> Class:builtins.dict
+325:39:Name -> Class:builtins.str
+325:44:Name -> Class:typing.Any
+327:14:Name -> Class:builtins.dict
+327:19:Name -> Class:builtins.str
+327:24:Name -> Class:typing.Any
+328:29:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.supported_features
+328:29:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+330:11:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.BATTERY
+330:11:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+330:42:Name -> BM:homeassistant.components.vacuum.StateVacuumEntity.supported_features
+331:15:Attribute -> Const:bool:True
+331:15:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+332:16:Call -> Const:NoneType:None
+332:16:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity._report_deprecated_battery_feature
+332:16:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+333:16:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+334:12:Name -> Dict:0
+334:17:Name -> Const:str:'battery_level'
+334:39:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.battery_level
+334:39:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+335:12:Name -> Dict:0
+335:17:Name -> Const:str:'battery_icon'
+335:38:Attribute -> Const:str:'mdi:battery-unknown' | Const:str:'mdi:battery' | U | Const:str:'mdi:battery-outline' | Const:str:'mdi:battery-alert'
+335:38:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+337:11:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.FAN_SPEED
+337:11:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+337:44:Name -> BM:homeassistant.components.vacuum.StateVacuumEntity.supported_features
+338:12:Name -> Dict:0
+338:17:Name -> Const:str:'fan_speed'
+338:35:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.fan_speed
+338:35:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+340:15:Name -> Dict:0
+342:5:Name -> Func:typing.final
+343:5:Name -> Class:builtins.property
+344:23:Name -> Class:builtins.str
+346:24:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.activity
+346:24:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+347:19:Name -> BM:homeassistant.components.vacuum.StateVacuumEntity.activity
+350:5:Name -> U
+351:26:Name -> Class:homeassistant.components.vacuum.const.VacuumActivity
+357:15:Attribute -> Const:NoneType:None
+357:15:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+359:5:Name -> U
+360:36:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+362:15:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature | U
+362:15:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+364:29:Name -> Class:typing.Any
+366:14:Name -> Class:builtins.NotImplementedError
+368:41:Name -> Class:typing.Any
+373:14:Call -> U
+373:14:Attribute -> U
+373:14:Attribute -> U | Const:NoneType:None
+373:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+373:47:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+373:47:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+373:55:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.stop
+373:55:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+373:68:Name -> Dict:0
+375:39:Name -> Class:typing.Any
+377:14:Name -> Class:builtins.NotImplementedError
+379:51:Name -> Class:typing.Any
+384:14:Call -> U
+384:14:Attribute -> U
+384:14:Attribute -> U | Const:NoneType:None
+384:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+384:47:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+384:47:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+384:55:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.return_to_base
+384:55:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+384:78:Name -> Dict:0
+386:35:Name -> Class:typing.Any
+388:14:Name -> Class:builtins.NotImplementedError
+390:47:Name -> Class:typing.Any
+395:14:Call -> U
+395:14:Attribute -> U
+395:14:Attribute -> U | Const:NoneType:None
+395:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+395:47:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+395:47:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+395:55:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.clean_spot
+395:55:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+395:74:Name -> Dict:0
+397:42:Name -> Class:builtins.list
+397:47:Name -> Class:homeassistant.components.vacuum.Segment
+402:14:Name -> Class:builtins.NotImplementedError
+404:5:Name -> Func:typing.final
+405:5:Name -> Class:builtins.property
+406:36:Name -> Class:builtins.list
+406:41:Name -> Class:homeassistant.components.vacuum.Segment
+413:11:Attribute -> U | Const:NoneType:None
+413:11:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+414:18:Call -> ExcInst:builtins.RuntimeError
+414:18:Name -> Class:builtins.RuntimeError
+416:20:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid' | Const:str:'test.any' | Const:str:'test.any2' | Const:str:'test.any'
+416:20:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+419:17:Name -> Class:_collections_abc.Mapping
+419:25:Name -> Class:builtins.str
+419:30:Name -> Class:typing.Any
+419:37:Call -> U
+419:37:Attribute -> U
+419:37:Attribute -> U
+419:37:Attribute -> U | Const:NoneType:None
+419:37:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+419:69:Name -> Const:str:'vacuum'
+420:29:Call -> U
+420:29:Attribute -> U
+420:29:Name -> U
+422:11:Name -> U
+425:16:Call -> Inst:homeassistant.components.vacuum.Segment
+425:16:Name -> Class:homeassistant.components.vacuum.Segment
+425:26:Name -> U
+425:50:Name -> U
+427:5:Name -> Func:typing.final
+428:5:Name -> Class:builtins.staticmethod
+430:18:Name -> Class:builtins.list
+430:23:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+430:49:Name -> U
+436:15:Call -> Inst:builtins.dict
+436:15:Name -> Class:builtins.dict
+436:20:Attribute -> U
+436:20:Name -> U
+437:26:Name -> Class:builtins.list
+437:31:Name -> Class:builtins.str
+437:38:Call -> ERR
+437:38:Attribute -> BM:builtins.dict.pop
+437:38:Name -> Inst:builtins.dict
+439:21:Name -> Class:builtins.list
+439:26:Name -> Class:builtins.tuple
+439:32:Name -> Class:homeassistant.components.vacuum.StateVacuumEntity
+439:51:Name -> Class:builtins.dict
+439:56:Name -> Class:builtins.str
+439:61:Name -> Class:typing.Any
+440:23:Name -> Class:builtins.set
+440:27:Name -> Class:builtins.str
+440:34:Call -> Set:0
+440:34:Name -> Class:builtins.set
+441:22:Name -> U
+442:15:Attribute -> U
+442:15:Name -> U
+443:22:Call -> ExcInst:builtins.RuntimeError
+443:22:Name -> Class:builtins.RuntimeError
+445:24:Attribute -> U
+445:24:Name -> U
+448:21:Name -> Class:_collections_abc.Mapping
+448:29:Name -> Class:builtins.str
+448:34:Name -> Class:typing.Any
+448:41:Call -> U
+448:41:Attribute -> U
+448:41:Attribute -> U
+448:41:Attribute -> U
+448:41:Name -> U
+448:75:Name -> Const:str:'vacuum'
+449:26:Name -> Class:builtins.dict
+449:31:Name -> Class:builtins.str
+449:36:Name -> Class:builtins.list
+449:41:Name -> Class:builtins.str
+449:56:Call -> U
+449:56:Attribute -> U
+449:56:Name -> U
+451:15:Name -> U
+452:22:Call -> ExcInst:homeassistant.exceptions.ServiceValidationError
+452:22:Name -> Class:homeassistant.exceptions.ServiceValidationError
+453:39:Name -> Const:str:'vacuum'
+455:59:Attribute -> U
+455:59:Name -> U
+459:25:Name -> Class:builtins.dict
+459:30:Name -> Class:builtins.str
+460:27:Name -> U
+461:32:Call -> U
+461:32:Attribute -> U
+461:32:Name -> U
+461:49:Name -> U
+463:16:Call -> ERR
+463:16:Attribute -> BM:builtins.set.add
+463:16:Name -> Set:0
+463:34:Name -> U
+464:34:Name -> U
+465:20:Name -> Dict:0
+465:32:Name -> U
+467:19:Name -> Dict:0
+468:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+468:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+468:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+470:20:Name -> U
+471:20:Attribute -> U
+471:20:Name -> U
+475:12:Call -> ERR
+475:12:Attribute -> BM:builtins.list.append
+475:12:Name -> List:0
+475:32:Name -> U
+475:56:Call -> List:0
+475:56:Name -> Class:builtins.list
+475:61:Name -> Dict:0
+475:77:Name -> Inst:builtins.dict
+477:11:Name -> List:0
+478:18:Call -> U
+478:18:Attribute -> Func:homeassistant.helpers.service.async_handle_entity_calls
+478:18:Name -> Module:homeassistant.helpers.service
+479:40:Name -> U
+479:61:Attribute -> U
+479:61:Name -> U
+482:26:Call -> Inst:builtins.set
+482:26:Name -> Class:builtins.set
+482:30:Name -> U
+482:50:Name -> Set:0
+483:11:Name -> U
+484:18:Call -> ExcInst:homeassistant.exceptions.ServiceValidationError
+484:18:Name -> Class:homeassistant.exceptions.ServiceValidationError
+485:35:Name -> Const:str:'vacuum'
+487:51:Call -> Const:str:''
+487:51:Attribute -> BM:builtins.str.join
+487:61:Call -> ERR
+487:61:Name -> Func:builtins.sorted
+487:68:Name -> U
+490:42:Name -> Class:builtins.list
+490:47:Name -> Class:builtins.str
+490:63:Name -> Class:typing.Any
+492:14:Name -> Class:builtins.NotImplementedError
+494:54:Name -> Class:builtins.list
+494:59:Name -> Class:builtins.str
+494:75:Name -> Class:typing.Any
+496:14:Call -> U
+496:14:Attribute -> U
+496:14:Attribute -> U | Const:NoneType:None
+496:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+497:12:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+497:12:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+497:20:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.clean_segments
+497:20:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+497:41:Name -> U
+497:56:Name -> Dict:0
+500:5:Name -> U
+510:11:Attribute -> U | Const:NoneType:None
+510:11:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+511:18:Call -> ExcInst:builtins.RuntimeError
+511:18:Name -> Class:builtins.RuntimeError
+513:20:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid' | Const:str:'test.any' | Const:str:'test.any2' | Const:str:'test.any'
+513:20:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+516:22:Name -> Const:str:'segments_changed'
+516:47:Attribute -> U
+516:47:Attribute -> U | Const:NoneType:None
+516:47:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+517:8:Call -> Const:NoneType:None
+517:8:Attribute -> Func:homeassistant.helpers.issue_registry.async_create_issue
+517:8:Name -> Module:homeassistant.helpers.issue_registry
+518:12:Attribute -> U | Const:NoneType:None
+518:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+519:12:Name -> Const:str:'vacuum'
+520:12:Name -> Const:str:'segments_changed_Uninferable'
+522:28:Attribute -> U
+522:28:Attribute -> U | Const:NoneType:None
+522:28:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+523:29:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid' | Const:str:'test.any' | Const:str:'test.any2' | Const:str:'test.any'
+523:29:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+526:21:Attribute -> Inst:homeassistant.helpers.issue_registry.IssueSeverity.WARNING
+526:21:Attribute -> Class:homeassistant.helpers.issue_registry.IssueSeverity
+526:21:Name -> Module:homeassistant.helpers.issue_registry
+527:28:Name -> Const:str:'segments_changed'
+529:29:Attribute -> U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'test.test' | Const:str:'comp_test.test_entity' | Const:str:'invalid' | Const:str:'test.any' | Const:str:'test.any2' | Const:str:'test.any'
+529:29:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+532:17:Name -> Class:_collections_abc.Mapping
+532:25:Name -> Class:builtins.str
+532:30:Name -> Class:typing.Any
+532:37:Call -> U
+532:37:Attribute -> U
+532:37:Attribute -> U
+532:37:Attribute -> U | Const:NoneType:None
+532:37:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+532:69:Name -> Const:str:'vacuum'
+533:8:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+533:43:Call -> U
+533:43:Attribute -> U
+533:43:Name -> U
+535:5:Name -> U
+538:11:Attribute -> U | Const:NoneType:None
+538:11:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+541:17:Name -> Class:_collections_abc.Mapping
+541:25:Name -> Class:builtins.str
+541:30:Name -> Class:typing.Any
+541:37:Call -> U
+541:37:Attribute -> U
+541:37:Attribute -> U
+541:37:Attribute -> U | Const:NoneType:None
+541:37:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+541:69:Name -> Const:str:'vacuum'
+543:11:Attribute -> U | Const:NoneType:None
+543:11:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+544:12:Attribute -> Inst:homeassistant.components.vacuum.const.VacuumEntityFeature.CLEAN_AREA
+544:12:Name -> Class:homeassistant.components.vacuum.const.VacuumEntityFeature
+544:50:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.supported_features
+544:50:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+545:15:Call -> U
+545:15:Attribute -> U
+545:15:Name -> U
+545:52:Attribute -> U | Const:NoneType:None
+545:52:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+547:26:Name -> Const:str:'segments_changed'
+547:51:Attribute -> U
+547:51:Attribute -> U | Const:NoneType:None
+547:51:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+548:12:Call -> Const:NoneType:None
+548:12:Attribute -> Func:homeassistant.helpers.issue_registry.async_delete_issue
+548:12:Name -> Module:homeassistant.helpers.issue_registry
+548:34:Attribute -> U | Const:NoneType:None
+548:34:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+548:45:Name -> Const:str:'vacuum'
+548:53:Name -> Const:str:'segments_changed_Uninferable'
+549:12:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+551:31:Name -> Class:typing.Any
+553:14:Name -> Class:builtins.NotImplementedError
+555:43:Name -> Class:typing.Any
+560:14:Call -> U
+560:14:Attribute -> U
+560:14:Attribute -> U | Const:NoneType:None
+560:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+560:47:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+560:47:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+560:55:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.locate
+560:55:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+560:70:Name -> Dict:0
+562:39:Name -> Class:builtins.str
+562:54:Name -> Class:typing.Any
+564:14:Name -> Class:builtins.NotImplementedError
+566:51:Name -> Class:builtins.str
+566:66:Name -> Class:typing.Any
+571:14:Call -> U
+571:14:Attribute -> U
+571:14:Attribute -> U | Const:NoneType:None
+571:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+572:12:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+572:12:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+572:20:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.set_fan_speed
+572:20:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+572:40:Name -> U
+572:53:Name -> Dict:0
+577:17:Name -> Class:builtins.str
+578:16:Name -> Class:builtins.dict
+578:21:Name -> Class:builtins.str
+578:26:Name -> Class:typing.Any
+578:33:Name -> Class:builtins.list
+578:38:Name -> Class:typing.Any
+579:18:Name -> Class:typing.Any
+582:14:Name -> Class:builtins.NotImplementedError
+586:17:Name -> Class:builtins.str
+587:16:Name -> Class:builtins.dict
+587:21:Name -> Class:builtins.str
+587:26:Name -> Class:typing.Any
+587:33:Name -> Class:builtins.list
+587:38:Name -> Class:typing.Any
+588:18:Name -> Class:typing.Any
+594:14:Call -> U
+594:14:Attribute -> U
+594:14:Attribute -> U | Const:NoneType:None
+594:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+595:12:Call -> Inst:functools.partial | Inst:_functools.functools.partial | U
+595:12:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+595:20:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.send_command
+595:20:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+595:39:Name -> U
+595:55:Name -> Const:NoneType:None | U
+595:65:Name -> Dict:0
+600:14:Name -> Class:builtins.NotImplementedError
+607:14:Call -> U
+607:14:Attribute -> U
+607:14:Attribute -> U | Const:NoneType:None
+607:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+607:47:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.start
+607:47:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+611:14:Name -> Class:builtins.NotImplementedError
+618:14:Call -> U
+618:14:Attribute -> U
+618:14:Attribute -> U | Const:NoneType:None
+618:14:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+618:47:Attribute -> BM:homeassistant.components.vacuum.StateVacuumEntity.pause
+618:47:Name -> Inst:homeassistant.components.vacuum.StateVacuumEntity
+621:1:Call -> Func:dataclasses.dataclass.wrap | U
+621:1:Name -> Func:dataclasses.dataclass
+625:8:Name -> Class:builtins.str
+626:10:Name -> Class:builtins.str
+627:11:Name -> Class:builtins.str

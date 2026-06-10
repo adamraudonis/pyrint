@@ -1,0 +1,635 @@
+167:7:Name -> Class:builtins.ImportError
+171:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+171:6:Attribute -> Func:logging.getLogger
+171:6:Name -> Module:logging
+171:24:Name -> Const:str:'salt.states.ssh_pki' | Const:str:'__main__'
+177:11:Name -> Const:bool:True | Const:bool:False
+179:11:Name -> Const:str:'ssh_pki'
+316:16:Name -> U
+324:14:Name -> Const:NoneType:None | U
+325:19:Name -> Const:NoneType:None | U
+327:30:Call -> Tuple:2
+327:30:Attribute -> Func:salt.utils.sshpki.split_file_kwargs
+327:30:Name -> Module:salt.utils.sshpki
+328:8:Call -> U
+328:8:Name -> Func:salt.states.ssh_pki._filter_state_internal_kwargs
+328:38:Name -> Dict:0
+330:20:Name -> U
+330:35:Name -> Dict:0
+330:55:Call -> U
+330:55:Attribute -> U
+330:55:Name -> U
+331:7:Name -> U
+332:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+332:14:Name -> Class:salt.exceptions.SaltInvocationError
+333:60:Call -> Const:str:''
+333:60:Attribute -> BM:builtins.str.join
+333:70:Name -> U
+337:28:Call -> U
+337:28:Name -> Func:salt.states.ssh_pki._file_managed
+337:42:Name -> U
+337:76:Name -> Dict:1
+338:11:Name -> U
+339:12:Name -> Dict:4
+340:12:Name -> Dict:4
+343:12:Call -> Const:NoneType:None
+343:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+343:31:Name -> Dict:4
+343:36:Name -> U
+344:19:Name -> Dict:4
+346:59:Name -> U
+347:12:Call -> Const:NoneType:None
+347:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+347:31:Name -> Dict:4
+347:36:Name -> U
+348:19:Name -> Dict:4
+350:20:Name -> U
+354:11:Call -> ERR
+354:11:Name -> ERR
+354:36:Name -> U
+355:15:Call -> ERR
+355:15:Attribute -> BM:builtins.dict.get
+355:15:Name -> Dict:1
+356:28:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+356:28:Attribute -> Func:posixpath.realpath | U
+356:28:Attribute -> Module:posixpath | Module:ntpath
+356:28:Name -> Module:os
+356:45:Name -> U
+359:16:Call -> ERR
+359:16:Name -> ERR
+359:40:Name -> U
+362:11:Call -> ERR
+362:11:Name -> ERR
+362:40:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+363:38:Call -> ERR
+363:38:Name -> ERR
+363:50:Name -> Const:str:'ssh_pki' | U
+364:16:Name -> Const:NoneType:None | U
+364:42:Name -> Const:NoneType:None | U
+364:56:Name -> Dict:0 | U
+366:48:Call -> Tuple:3
+366:48:Attribute -> Func:salt.utils.sshpki.check_cert_changes
+366:48:Name -> Module:salt.utils.sshpki
+367:16:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+368:26:Name -> Const:NoneType:None | U
+369:24:Name -> Const:str:'ssh_pki' | U
+370:40:Name -> U
+371:36:Name -> Const:NoneType:None | U
+372:47:Name -> Const:NoneType:None | U
+373:26:Name -> Const:NoneType:None | U
+374:27:Name -> Const:NoneType:None | U
+375:28:Name -> Const:NoneType:None | U
+376:39:Name -> Const:NoneType:None | U
+377:30:Name -> Const:NoneType:None | U
+378:27:Name -> Const:NoneType:None | U
+379:26:Name -> Const:NoneType:None | U
+380:20:Name -> Const:NoneType:None | U
+381:30:Name -> Const:NoneType:None | U
+382:33:Name -> Const:NoneType:None | U
+383:27:Name -> Const:NoneType:None | U
+384:33:Name -> Const:NoneType:None | U
+385:31:Name -> Const:bool:False | U
+386:23:Name -> Const:NoneType:None | U
+388:12:Call -> ERR
+388:12:Attribute -> BM:builtins.dict.update
+388:12:Name -> Dict:0
+388:27:Name -> Dict:0
+390:12:Name -> Dict:0
+390:33:Name -> U
+392:11:Name -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True
+393:12:Name -> Dict:0
+393:34:Name -> U
+396:16:Name -> Dict:0
+397:16:Name -> U
+398:20:Name -> U
+400:12:Call -> Const:NoneType:None
+400:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+400:31:Name -> Dict:4
+400:36:Name -> U
+401:19:Name -> Dict:4
+403:8:Name -> Dict:4
+403:25:Name -> Dict:0
+404:11:Name -> Const:NoneType:None | Const:NoneType:None | U
+404:23:Name -> Dict:0
+407:11:Name -> ERR
+408:12:Name -> Dict:4
+408:36:Name -> Dict:0
+409:12:Name -> Dict:4
+411:19:Name -> Dict:0
+410:51:Name -> Const:str:'create' | Const:str:'recreate'
+412:21:Name -> Dict:4
+414:12:Call -> Const:NoneType:None
+414:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+414:31:Name -> Dict:4
+414:36:Name -> U
+415:19:Name -> Dict:4
+417:11:Name -> Dict:0
+419:19:Call -> ERR
+419:19:Name -> ERR
+419:31:Name -> Const:str:'ssh_pki' | U
+420:26:Name -> Const:NoneType:None | U
+421:26:Name -> Const:NoneType:None | U
+422:31:Name -> Const:NoneType:None | U
+423:36:Name -> Const:NoneType:None | U
+424:47:Name -> Const:NoneType:None | U
+425:27:Name -> Const:NoneType:None | U
+426:28:Name -> Const:NoneType:None | U
+427:39:Name -> Const:NoneType:None | U
+428:30:Name -> Const:NoneType:None | U
+429:27:Name -> Const:NoneType:None | U
+430:26:Name -> Const:NoneType:None | U
+431:20:Name -> Const:NoneType:None | U
+432:33:Name -> Const:NoneType:None | U
+433:27:Name -> Const:NoneType:None | U
+434:33:Name -> Const:NoneType:None | U
+435:31:Name -> Const:bool:False | U
+436:23:Name -> Const:NoneType:None | U
+437:25:Name -> Const:NoneType:None | U
+438:18:Name -> Dict:0 | U
+440:12:Name -> Dict:4
+440:57:Name -> Const:str:'create' | Const:str:'recreate'
+442:18:Call -> Const:bool:False
+442:18:Name -> Class:builtins.bool
+442:23:Name -> Dict:0
+443:27:Name -> Const:bool:False
+443:19:Name -> U
+444:27:Call -> U
+444:27:Name -> Func:salt.states.ssh_pki._file_managed
+445:12:Name -> U
+445:27:Name -> Const:NoneType:None
+445:45:Name -> Const:bool:False
+445:56:Name -> Dict:1
+447:8:Call -> Const:NoneType:None
+447:8:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+447:27:Name -> Dict:4
+447:32:Name -> U
+448:15:Call -> Const:bool:False | Const:bool:True
+448:15:Name -> Func:salt.states.ssh_pki._check_file_ret
+448:31:Name -> U
+448:49:Name -> Dict:4
+448:54:Name -> Const:NoneType:None | Const:NoneType:None | U
+449:19:Name -> Dict:4
+451:12:Name -> Class:salt.exceptions.CommandExecutionError
+451:35:Name -> Class:salt.exceptions.SaltInvocationError
+452:8:Name -> Dict:4
+453:8:Name -> Dict:4
+453:25:Call -> Const:str:''
+453:25:Name -> Class:builtins.str
+453:29:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+454:8:Name -> Dict:4
+455:11:Name -> Dict:4
+524:16:Name -> U
+532:30:Call -> Tuple:2
+532:30:Attribute -> Func:salt.utils.sshpki.split_file_kwargs
+532:30:Name -> Module:salt.utils.sshpki
+533:8:Call -> U
+533:8:Name -> Func:salt.states.ssh_pki._filter_state_internal_kwargs
+533:38:Name -> Dict:0
+535:20:Name -> U
+535:35:Name -> Dict:0
+535:55:Call -> U
+535:55:Attribute -> U
+535:55:Name -> U
+536:7:Name -> U
+537:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+537:14:Name -> Class:salt.exceptions.SaltInvocationError
+538:60:Call -> Const:str:''
+538:60:Attribute -> BM:builtins.str.join
+538:70:Name -> U
+541:11:Call -> ERR
+541:11:Attribute -> BM:builtins.dict.get
+541:11:Name -> Dict:1
+543:8:Name -> Dict:1
+546:11:Name -> Const:NoneType:None | U
+546:23:Name -> Const:str:'rsa' | U
+547:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+547:18:Name -> Class:salt.exceptions.SaltInvocationError
+547:77:Name -> Const:str:'rsa' | U
+550:28:Call -> U
+550:28:Name -> Func:salt.states.ssh_pki._file_managed
+550:42:Name -> U
+550:76:Name -> Dict:1
+552:11:Name -> U
+553:12:Name -> Dict:4
+554:12:Name -> Dict:4
+557:12:Call -> Const:NoneType:None
+557:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+557:31:Name -> Dict:4
+557:36:Name -> U
+558:19:Name -> Dict:4
+560:59:Name -> U
+561:12:Call -> Const:NoneType:None
+561:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+561:31:Name -> Dict:4
+561:36:Name -> U
+562:19:Name -> Dict:4
+564:20:Name -> U
+568:11:Call -> ERR
+568:11:Name -> ERR
+568:36:Name -> U
+569:15:Call -> ERR
+569:15:Attribute -> BM:builtins.dict.get
+569:15:Name -> Dict:1
+570:28:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+570:28:Attribute -> Func:posixpath.realpath | U
+570:28:Attribute -> Module:posixpath | Module:ntpath
+570:28:Name -> Module:os
+570:45:Name -> U
+573:16:Call -> ERR
+573:16:Name -> ERR
+573:40:Name -> U
+576:22:Call -> ERR
+576:22:Name -> ERR
+576:51:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+578:11:Name -> U
+578:31:Name -> Const:bool:False | U
+581:26:Call -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+581:26:Attribute -> Func:salt.utils.sshpki.load_privkey
+581:26:Name -> Module:salt.utils.sshpki
+581:46:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+581:68:Name -> Const:NoneType:None | U
+582:19:Name -> Const:NoneType:None | U
+586:24:Call -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+586:24:Attribute -> Func:salt.utils.sshpki.load_privkey
+586:24:Name -> Module:salt.utils.sshpki
+586:44:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+588:24:Name -> Class:salt.exceptions.CommandExecutionError
+589:24:Name -> Class:salt.exceptions.SaltInvocationError
+591:48:Call -> Const:str:''
+591:48:Name -> Class:builtins.str
+592:28:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+593:68:Call -> Const:str:''
+593:68:Name -> Class:builtins.str
+593:72:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+597:20:Name -> Class:salt.exceptions.CommandExecutionError
+597:43:Name -> Class:salt.exceptions.SaltInvocationError
+598:36:Call -> Const:str:''
+598:36:Name -> Class:builtins.str
+598:40:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+599:27:Name -> Const:bool:False | U
+600:30:Call -> ExcInst:salt.exceptions.CommandExecutionError
+600:30:Name -> Class:salt.exceptions.CommandExecutionError
+603:31:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+604:20:Name -> Dict:0
+605:55:Call -> Const:str:''
+605:55:Name -> Class:builtins.str
+605:59:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+606:20:Name -> Dict:0
+609:30:Call -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+609:30:Attribute -> Func:salt.utils.sshpki.load_privkey
+609:30:Name -> Module:salt.utils.sshpki
+609:50:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+610:51:Call -> Const:str:''
+610:51:Name -> Class:builtins.str
+610:55:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+611:27:Name -> Const:bool:False | U
+612:30:Call -> ExcInst:salt.exceptions.CommandExecutionError
+612:30:Name -> Class:salt.exceptions.CommandExecutionError
+615:31:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+616:20:Name -> Dict:0
+617:21:Call -> ERR
+617:21:Name -> Func:builtins.any
+619:63:Call -> Const:str:''
+619:63:Name -> Class:builtins.str
+619:67:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+620:52:Call -> Const:str:''
+620:52:Name -> Class:builtins.str
+620:56:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+623:27:Name -> Const:bool:False | U
+624:30:Call -> ExcInst:salt.exceptions.CommandExecutionError
+624:30:Name -> Class:salt.exceptions.CommandExecutionError
+627:31:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+631:11:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+632:23:Call -> Const:NoneType:None | Const:str:'rsa' | Const:str:'ec' | Const:str:'ed25519' | Const:str:'ed448' | U
+632:23:Attribute -> Func:salt.utils.x509.get_key_type
+632:23:Name -> Module:salt.utils.x509
+632:45:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+633:28:Name -> Const:NoneType:None | U
+634:15:Name -> Const:NoneType:None | U
+635:19:Name -> Const:str:'rsa' | U
+637:21:Name -> Const:str:'rsa' | U
+639:15:Call -> ERR
+639:15:Name -> Func:builtins.any
+641:21:Name -> Const:str:'rsa' | U
+641:43:Name -> Const:NoneType:None | Const:str:'rsa' | Const:str:'ec' | Const:str:'ed25519' | Const:str:'ed448' | U
+641:55:Attribute -> Inst:salt.utils.x509.KEY_TYPE.RSA
+641:55:Attribute -> Class:salt.utils.x509.KEY_TYPE
+641:55:Name -> Module:salt.utils.x509
+642:21:Name -> Const:str:'rsa' | U
+642:42:Name -> Const:NoneType:None | Const:str:'rsa' | Const:str:'ec' | Const:str:'ed25519' | Const:str:'ed448' | U
+642:54:Attribute -> Inst:salt.utils.x509.KEY_TYPE.EC
+642:54:Attribute -> Class:salt.utils.x509.KEY_TYPE
+642:54:Name -> Module:salt.utils.x509
+643:21:Name -> Const:str:'rsa' | U
+643:47:Name -> Const:NoneType:None | Const:str:'rsa' | Const:str:'ec' | Const:str:'ed25519' | Const:str:'ed448' | U
+643:59:Attribute -> Inst:salt.utils.x509.KEY_TYPE.ED25519
+643:59:Attribute -> Class:salt.utils.x509.KEY_TYPE
+643:59:Name -> Module:salt.utils.x509
+646:16:Name -> Dict:0
+646:34:Name -> Const:str:'rsa' | U
+648:30:Name -> Dict:0
+649:20:Name -> Const:str:'rsa' | U
+650:20:Attribute -> U
+650:20:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+650:40:Name -> Const:NoneType:None | U | Const:int:3072 | Const:int:256
+652:16:Name -> Dict:0
+652:37:Name -> Const:NoneType:None | U | Const:int:3072 | Const:int:256
+653:15:Name -> Const:NoneType:None | U
+653:34:Name -> Const:bool:False | Const:bool:True
+656:16:Name -> Dict:0
+658:13:Name -> U
+659:12:Name -> Dict:0
+659:34:Name -> U
+661:12:Name -> Dict:0
+661:33:Name -> U
+664:16:Name -> Dict:0
+665:16:Name -> U
+666:20:Name -> U
+668:12:Call -> Const:NoneType:None
+668:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+668:31:Name -> Dict:4
+668:36:Name -> U
+669:19:Name -> Dict:4
+671:8:Name -> Dict:4
+671:25:Name -> Dict:0
+672:11:Name -> U
+672:27:Name -> Dict:0
+675:11:Name -> ERR
+676:12:Name -> Dict:4
+676:36:Name -> Dict:0
+677:12:Name -> Dict:4
+679:19:Name -> Dict:0
+678:51:Name -> Const:str:'create' | Const:str:'recreate'
+680:21:Name -> Dict:4
+682:12:Call -> Const:NoneType:None
+682:12:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+682:31:Name -> Dict:4
+682:36:Name -> U
+683:19:Name -> Dict:4
+685:11:Name -> Dict:0
+686:15:Call -> Inst:builtins.set
+686:15:Name -> Class:builtins.set
+686:19:Name -> U
+687:21:Call -> ERR
+687:21:Name -> ERR
+688:20:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+688:40:Name -> Const:NoneType:None | U
+692:21:Call -> ERR
+692:21:Name -> ERR
+693:25:Name -> Const:str:'rsa' | U
+694:28:Name -> Const:NoneType:None | U
+695:31:Name -> Const:NoneType:None | U
+697:12:Name -> Dict:4
+697:57:Name -> Const:str:'create' | Const:str:'recreate' | Const:str:'encrypte'
+699:18:Call -> Const:bool:False
+699:18:Name -> Class:builtins.bool
+699:23:Name -> Dict:0
+700:25:Name -> Const:bool:False
+700:19:Name -> U
+701:27:Call -> U
+701:27:Name -> Func:salt.states.ssh_pki._file_managed
+702:12:Name -> U
+702:27:Name -> Const:NoneType:None
+702:45:Name -> Const:bool:False
+702:56:Name -> Dict:1
+704:8:Call -> Const:NoneType:None
+704:8:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+704:27:Name -> Dict:4
+704:32:Name -> U
+705:15:Call -> Const:bool:False | Const:bool:True
+705:15:Name -> Func:salt.states.ssh_pki._check_file_ret
+705:31:Name -> U
+705:49:Name -> Dict:4
+705:54:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+706:19:Name -> Dict:4
+707:12:Name -> Class:salt.exceptions.CommandExecutionError
+707:35:Name -> Class:salt.exceptions.SaltInvocationError
+708:8:Name -> Dict:4
+709:8:Name -> Dict:4
+709:25:Call -> Const:str:''
+709:25:Name -> Class:builtins.str
+709:29:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+710:8:Name -> Dict:4
+711:11:Name -> Dict:4
+736:16:Name -> U
+743:30:Call -> Tuple:2
+743:30:Attribute -> Func:salt.utils.sshpki.split_file_kwargs
+743:30:Name -> Module:salt.utils.sshpki
+744:8:Call -> U
+744:8:Name -> Func:salt.states.ssh_pki._filter_state_internal_kwargs
+744:38:Name -> Dict:0
+746:20:Name -> U
+746:35:Name -> Dict:0
+746:55:Call -> U
+746:55:Attribute -> U
+746:55:Name -> U
+747:7:Name -> U
+748:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+748:14:Name -> Class:salt.exceptions.SaltInvocationError
+749:60:Call -> Const:str:''
+749:60:Attribute -> BM:builtins.str.join
+749:70:Name -> U
+753:20:Name -> U
+757:11:Call -> ERR
+757:11:Name -> ERR
+757:36:Name -> U
+758:15:Call -> ERR
+758:15:Attribute -> BM:builtins.dict.get
+758:15:Name -> Dict:1
+759:28:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+759:28:Attribute -> Func:posixpath.realpath | U
+759:28:Attribute -> Module:posixpath | Module:ntpath
+759:28:Name -> Module:os
+759:45:Name -> U
+762:16:Call -> ERR
+762:16:Name -> ERR
+762:40:Name -> U
+765:25:Call -> ERR
+765:25:Name -> ERR
+766:16:Name -> U
+766:46:Name -> Const:NoneType:None | U
+768:15:Name -> Class:salt.exceptions.CommandExecutionError
+769:19:Name -> ERR
+769:70:Call -> Const:str:''
+769:70:Name -> Class:builtins.str
+769:74:Name -> ExcInst:salt.exceptions.CommandExecutionError
+772:22:Call -> ERR
+772:22:Name -> ERR
+772:51:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+774:11:Name -> U
+775:22:Call -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+775:22:Attribute -> Func:salt.utils.sshpki.load_pubkey
+775:22:Name -> Module:salt.utils.sshpki
+775:41:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+776:15:Name -> U | Const:NoneType:None
+776:30:Call -> Const:bool:False | U
+776:30:Attribute -> Func:salt.utils.x509.match_pubkey
+776:30:Name -> Module:salt.utils.x509
+777:16:Call -> U | Const:NoneType:None
+777:16:Attribute -> Func:salt.utils.sshpki.load_pubkey
+777:16:Name -> Module:salt.utils.sshpki
+777:35:Name -> U | Const:NoneType:None
+777:48:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+783:11:Name -> Const:bool:True | Const:bool:False
+784:12:Name -> Dict:4
+784:30:Name -> Const:str:'create' | Const:str:'update'
+784:41:Name -> U
+785:15:Name -> ERR
+786:16:Name -> Dict:4
+787:16:Name -> Dict:4
+787:67:Name -> Const:str:'create' | Const:str:'update'
+788:23:Name -> U | Const:NoneType:None
+789:20:Name -> Dict:4
+793:23:Name -> Dict:4
+794:27:Call -> U
+794:27:Name -> Func:salt.states.ssh_pki._file_managed
+795:12:Name -> U
+795:41:Name -> Const:bool:True | Const:bool:False
+795:27:Name -> U | Const:NoneType:None
+795:68:Name -> Const:bool:True | Const:bool:False
+795:79:Name -> Dict:1
+797:8:Call -> Const:NoneType:None
+797:8:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+797:27:Name -> Dict:4
+797:32:Name -> U
+798:15:Call -> Const:bool:False | Const:bool:True
+798:15:Name -> Func:salt.states.ssh_pki._check_file_ret
+798:31:Name -> U
+798:49:Name -> Dict:4
+798:54:Name -> Const:NoneType:None | U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+799:19:Name -> Dict:4
+800:11:Name -> Const:bool:True | Const:bool:False
+801:12:Name -> Dict:4
+801:56:Name -> Const:str:'create' | Const:str:'update'
+802:12:Name -> Class:salt.exceptions.CommandExecutionError
+802:35:Name -> Class:salt.exceptions.SaltInvocationError
+803:8:Name -> Dict:4
+804:8:Name -> Dict:4
+804:25:Call -> Const:str:''
+804:25:Name -> Class:builtins.str
+804:29:Name -> ExcInst:salt.exceptions.CommandExecutionError | ExcInst:salt.exceptions.SaltInvocationError
+805:8:Name -> Dict:4
+806:11:Name -> Dict:4
+815:19:Name -> U
+815:35:Name -> U
+815:54:Name -> U
+815:74:Name -> U
+816:11:Name -> U
+817:15:Name -> Dict:4
+818:23:Call -> U
+818:23:Name -> Func:salt.states.ssh_pki._file_managed
+818:37:Name -> U
+818:60:Name -> Dict:0
+819:4:Call -> Const:NoneType:None
+819:4:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+819:23:Name -> Dict:4
+819:28:Name -> U
+820:11:Call -> Const:bool:False | Const:bool:True
+820:11:Name -> Func:salt.states.ssh_pki._check_file_ret
+820:27:Name -> U
+820:45:Name -> Dict:4
+820:50:Call -> ERR
+820:50:Name -> ERR
+820:79:Name -> U
+821:15:Name -> Dict:4
+822:7:Name -> Const:NoneType:None | U
+823:11:Name -> ERR
+824:12:Name -> Dict:4
+828:19:Name -> Dict:4
+829:19:Call -> U
+829:19:Attribute -> U
+829:19:Name -> U
+830:8:Call -> Const:NoneType:None
+830:8:Attribute -> Func:salt.utils.atomicfile.safe_atomic_write
+830:8:Attribute -> Module:salt.utils.atomicfile
+830:8:Attribute -> Module:salt.utils
+830:8:Name -> Module:salt
+831:12:Name -> U
+832:12:Name -> U
+833:12:Call -> ERR
+833:12:Name -> ERR
+833:43:Call -> ERR
+833:43:Attribute -> BM:builtins.dict.get
+833:43:Name -> Dict:0
+834:12:Name -> ERR
+836:11:Name -> Dict:4
+844:19:Name -> U
+844:35:Name -> U
+844:54:Name -> U
+844:74:Name -> U
+845:11:Name -> U
+846:15:Name -> Dict:4
+847:23:Call -> U
+847:23:Name -> Func:salt.states.ssh_pki._file_managed
+847:37:Name -> U
+847:60:Name -> Dict:0
+848:7:Name -> Const:NoneType:None | U
+849:11:Name -> ERR
+850:12:Name -> Dict:4
+855:16:Call -> ERR
+855:16:Name -> ERR
+855:40:Name -> U
+856:19:Name -> Class:builtins.Exception
+858:19:Name -> Dict:4
+861:12:Call -> ERR
+861:12:Name -> ERR
+861:34:Name -> U
+861:44:Name -> U
+862:15:Name -> Class:builtins.Exception
+863:12:Name -> Dict:4
+864:12:Name -> Dict:4
+864:82:Name -> ExcInst:builtins.Exception
+865:12:Name -> Dict:4
+866:19:Name -> Dict:4
+867:4:Call -> Const:NoneType:None
+867:4:Name -> Func:salt.states.ssh_pki._add_sub_state_run
+867:23:Name -> Dict:4
+867:28:Name -> U
+868:11:Name -> Dict:4
+873:13:Call -> Inst:builtins.set
+873:13:Name -> Class:builtins.set
+873:17:Name -> U
+874:12:Name -> U
+874:15:Name -> U
+874:29:Call -> U
+874:29:Attribute -> U
+874:29:Name -> U
+874:47:Name -> U
+874:56:Name -> U
+878:4:Name -> U
+879:16:Name -> U
+881:18:Name -> ERR
+884:30:Name -> U
+885:8:Name -> U
+886:4:Call -> U
+886:4:Attribute -> U
+886:4:Name -> U
+886:32:Name -> U
+890:7:Name -> Const:NoneType:None | U
+891:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+891:14:Name -> Class:salt.exceptions.SaltInvocationError
+892:11:Name -> Const:NoneType:None | U
+892:19:Name -> ERR
+893:10:Call -> ERR
+893:10:Name -> ERR
+894:24:Name -> U
+894:35:Name -> U
+894:60:Name -> Dict:0
+896:11:Call -> ERR
+896:11:Name -> Func:builtins.isinstance
+896:22:Name -> U
+896:27:Name -> Class:builtins.dict
+897:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+897:14:Name -> Class:salt.exceptions.CommandExecutionError
+898:61:Name -> U
+900:11:Name -> U
+900:15:Call -> ERR
+900:15:Name -> Func:builtins.next
+900:20:Call -> ERR
+900:20:Name -> Func:builtins.iter
+900:25:Name -> U
+904:7:Name -> U
+905:8:Name -> U
+906:8:Name -> U
+907:41:Name -> U
+909:8:Name -> U

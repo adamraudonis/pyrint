@@ -1,0 +1,262 @@
+27:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:9:Attribute -> Func:logging.getLogger
+27:9:Name -> Module:logging
+29:3:Name -> Const:bool:False
+36:27:Name -> Class:typing.TypedDict
+37:8:Name -> Class:builtins.str
+38:13:Name -> Class:builtins.str
+39:20:Name -> Class:builtins.str
+40:17:Name -> Class:builtins.str
+41:18:Name -> Class:builtins.str
+42:20:Name -> Class:builtins.str
+43:21:Name -> Class:builtins.str
+46:34:Name -> Class:typing.TypedDict
+47:12:Name -> Class:src.sentry.integrations.gitlab.blame.GitLabCommitResponse
+48:11:Name -> Class:_collections_abc.Sequence
+48:20:Name -> Class:builtins.str
+52:12:Name -> U
+52:36:Name -> Class:_collections_abc.Sequence
+52:45:Name -> U
+52:69:Name -> Class:_collections_abc.Mapping
+52:77:Name -> Class:builtins.str
+52:82:Name -> Class:typing.Any
+53:5:Name -> Class:builtins.list
+53:10:Name -> U
+56:19:Call -> Inst:builtins.enumerate
+56:19:Name -> Class:builtins.enumerate
+56:29:Name -> U
+58:38:Call -> Tuple:2
+58:38:Name -> Func:src.sentry.integrations.gitlab.blame._fetch_file_blame
+58:56:Name -> U
+58:64:Name -> U
+58:70:Name -> U
+59:15:Name -> Const:NoneType:None | Const:NoneType:None | U
+60:16:Call -> ERR
+60:16:Attribute -> BM:builtins.list.append
+60:16:Name -> List:0
+60:30:Call -> U
+60:30:Name -> Func:src.sentry.integrations.gitlab.blame._create_file_blame_info
+60:54:Name -> U
+60:62:Name -> U
+61:15:Name -> U
+62:12:Call -> Const:NoneType:None
+62:12:Name -> Func:src.sentry.integrations.gitlab.blame._handle_file_blame_error
+62:37:Name -> U
+62:40:Name -> U
+62:46:Name -> U
+66:16:Name -> U
+67:20:Call -> ERR
+67:20:Name -> Func:builtins.len
+67:24:Name -> U
+68:20:Name -> U
+69:20:Attribute -> U
+69:20:Name -> U
+69:49:Name -> Const:int:100
+69:68:Call -> ERR
+69:68:Name -> Func:builtins.len
+69:72:Name -> U
+71:16:Call -> U
+71:16:Attribute -> U
+71:16:Name -> U
+72:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+72:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+72:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+75:26:Name -> U
+76:37:Call -> ERR
+76:37:Name -> Func:builtins.len
+76:41:Name -> U
+77:46:Attribute -> U
+77:46:Name -> U
+78:42:Attribute -> U
+78:42:Name -> U
+79:39:Call -> U
+79:39:Attribute -> U
+79:39:Name -> U
+82:22:Call -> U
+82:22:Name -> U
+84:11:Name -> List:0
+88:12:Name -> U
+88:35:Name -> U
+88:58:Name -> Class:_collections_abc.Mapping
+88:66:Name -> Class:builtins.str
+88:71:Name -> Class:typing.Any
+89:5:Name -> Class:builtins.tuple
+89:11:Name -> U
+89:30:Name -> U
+90:17:Call -> U
+90:17:Attribute -> U
+90:17:Attribute -> U
+90:17:Attribute -> U
+90:17:Name -> U
+93:19:Call -> U | Const:str:'' | Const:str:''
+93:19:Name -> Func:urllib.parse.quote
+93:25:Call -> U
+93:25:Attribute -> U
+93:25:Attribute -> U
+93:25:Name -> U
+94:19:Call -> U
+94:19:Attribute -> U
+94:19:Attribute -> U
+94:19:Name -> U
+95:16:Call -> U
+95:16:Name -> U
+95:27:Name -> U
+95:45:Name -> U | Const:str:'' | Const:str:''
+97:21:Attribute -> U
+97:21:Name -> U
+97:47:Attribute -> U
+97:47:Name -> U
+97:74:Attribute -> U
+97:74:Name -> U
+99:16:Call -> U
+99:16:Attribute -> U
+99:16:Name -> U
+99:37:Name -> U
+99:51:Call -> U
+99:51:Attribute -> U
+99:51:Call -> U
+99:51:Attribute -> U
+99:51:Name -> U
+99:64:Name -> Dict:3
+100:15:Call -> U
+100:15:Attribute -> U
+100:15:Name -> U
+100:34:Name -> U
+101:7:Name -> U
+102:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+102:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+102:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+104:18:Name -> U
+107:19:Call -> U
+107:19:Attribute -> U
+107:19:Name -> U
+108:12:Name -> U
+109:19:Name -> Dict:3
+111:8:Call -> U
+111:8:Attribute -> U
+111:8:Name -> U
+111:25:Name -> U
+111:36:Name -> U
+113:11:Call -> ERR
+113:11:Name -> Func:builtins.isinstance
+113:22:Name -> U
+113:32:Name -> U
+114:14:Call -> U
+114:14:Name -> U
+116:22:Call -> U
+116:22:Name -> U
+116:56:Name -> U
+118:11:Call -> Const:NoneType:None | Const:NoneType:None | U
+118:11:Name -> Func:src.sentry.integrations.gitlab.blame._get_commit_info_from_blame_response
+118:48:Name -> U
+118:64:Name -> U
+118:72:Name -> U
+121:36:Name -> U
+121:54:Name -> U
+121:73:Name -> U
+122:11:Call -> U
+122:11:Name -> U
+123:10:Call -> U | Inst:builtins.dict
+123:10:Name -> Func:dataclasses.asdict
+123:17:Name -> U
+124:15:Name -> U
+129:11:Name -> U
+129:27:Name -> U
+129:50:Name -> Class:_collections_abc.Mapping
+129:58:Name -> Class:builtins.str
+129:63:Name -> Class:typing.Any
+132:7:Attribute -> U
+132:7:Name -> U
+133:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+133:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+133:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+136:18:Name -> U
+137:24:Attribute -> U
+137:24:Name -> U
+138:33:Attribute -> U
+138:33:Name -> U
+139:29:Attribute -> U
+139:29:Attribute -> U
+139:29:Name -> U
+140:29:Attribute -> U
+140:29:Name -> U
+141:31:Attribute -> U
+141:31:Name -> U
+142:31:Attribute -> U
+142:31:Name -> U
+147:10:Name -> U
+151:14:Name -> Class:_collections_abc.Sequence
+151:23:Name -> Class:src.sentry.integrations.gitlab.blame.GitLabFileBlameResponseItem
+151:67:Name -> Class:_collections_abc.Mapping
+151:75:Name -> Class:builtins.str
+151:80:Name -> Class:typing.Any
+152:5:Name -> U
+153:7:Name -> U
+156:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+156:15:Name -> Func:src.sentry.integrations.gitlab.blame._create_commit_from_blame
+156:41:Call -> U
+156:41:Attribute -> U
+156:41:Name -> U
+156:61:Name -> U
+156:80:Name -> U
+157:34:Name -> U
+157:55:Name -> U
+157:66:Name -> U
+159:11:Name -> U
+162:11:Call -> ERR
+162:11:Name -> Func:builtins.max
+162:15:Name -> U
+162:62:Attribute -> U
+162:62:Name -> U
+166:12:Name -> Class:src.sentry.integrations.gitlab.blame.GitLabCommitResponse
+166:48:Name -> Class:_collections_abc.Mapping
+166:56:Name -> Class:builtins.str
+166:61:Name -> Class:typing.Any
+167:5:Name -> U
+168:11:Name -> U
+169:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+169:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+169:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+169:74:Name -> U
+172:16:Call -> U
+172:16:Attribute -> U
+172:16:Name -> U
+173:21:Call -> U
+173:21:Attribute -> U
+173:21:Name -> U
+175:11:Name -> U
+176:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+176:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+176:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+177:68:Name -> U
+181:11:Name -> U
+182:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+182:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+182:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+184:21:Name -> U
+184:41:Name -> U
+189:15:Call -> U
+189:15:Name -> U
+190:21:Name -> U
+191:26:Call -> U
+191:26:Attribute -> U
+191:26:Name -> U
+192:29:Call -> U
+192:29:Attribute -> U
+192:29:Name -> U
+193:30:Call -> U
+193:30:Attribute -> U
+193:30:Name -> U
+194:26:Call -> Inst:_pydatetime.datetime
+194:26:Attribute -> BM:_pydatetime.datetime.replace
+194:26:Call -> Inst:_pydatetime.datetime
+194:26:Attribute -> BM:_pydatetime.datetime.fromisoformat
+194:26:Name -> Class:_pydatetime.datetime
+194:49:Name -> U
+194:80:Attribute -> Inst:_pydatetime.timezone
+194:80:Name -> Class:_pydatetime.timezone
+196:11:Name -> Class:builtins.Exception
+197:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+197:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+197:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+197:76:Name -> U

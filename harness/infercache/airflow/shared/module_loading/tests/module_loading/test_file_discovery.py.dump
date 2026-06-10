@@ -1,0 +1,243 @@
+29:5:Attribute -> U
+29:5:Name -> U
+32:17:Call -> U
+32:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+32:17:Attribute -> Module:posixpath | Module:ntpath
+32:17:Name -> Module:os
+32:30:Name -> U
+33:17:Call -> U
+33:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+33:17:Attribute -> Module:posixpath | Module:ntpath
+33:17:Name -> Module:os
+33:30:Name -> U
+34:18:Call -> U
+34:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+34:18:Attribute -> Module:posixpath | Module:ntpath
+34:18:Name -> Module:os
+34:31:Name -> U
+35:22:Call -> U
+35:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+35:22:Attribute -> Module:posixpath | Module:ntpath
+35:22:Name -> Module:os
+35:35:Name -> U
+36:8:Call -> ERR
+36:8:Attribute -> Func:posix.mkdir
+36:8:Name -> Module:os
+36:17:Name -> U
+37:8:Call -> ERR
+37:8:Attribute -> Func:posix.symlink
+37:8:Name -> Module:os
+37:19:Name -> U
+37:27:Name -> U
+39:13:Call -> ERR
+39:13:Name -> Func:_io.open
+39:18:Name -> U
+40:12:Call -> U
+40:12:Attribute -> U
+40:12:Name -> U
+42:13:Call -> ERR
+42:13:Name -> Func:_io.open
+42:18:Name -> U
+43:12:Call -> U
+43:12:Attribute -> U
+43:12:Name -> U
+44:15:Name -> U
+48:16:Call -> Inst:builtins.list
+48:16:Name -> Class:builtins.list
+48:21:Call -> U
+48:21:Name -> U
+48:46:Name -> U
+48:56:Name -> Const:str:'.airflowignore'
+50:15:Call -> U
+50:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+50:15:Attribute -> Module:posixpath | Module:ntpath
+50:15:Name -> Module:os
+50:28:Name -> U
+50:70:Name -> Inst:builtins.list
+51:15:Call -> U
+51:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+51:15:Attribute -> Module:posixpath | Module:ntpath
+51:15:Name -> Module:os
+51:28:Name -> U
+51:73:Name -> Inst:builtins.list
+55:16:Call -> Inst:builtins.list
+55:16:Name -> Class:builtins.list
+55:21:Call -> U
+55:21:Name -> U
+55:46:Name -> U
+55:56:Name -> Const:str:'.airflowignore'
+57:15:Call -> U
+57:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+57:15:Attribute -> Module:posixpath | Module:ntpath
+57:15:Name -> Module:os
+57:28:Name -> U
+57:70:Name -> Inst:builtins.list
+58:15:Call -> U
+58:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+58:15:Attribute -> Module:posixpath | Module:ntpath
+58:15:Name -> Module:os
+58:28:Name -> U
+58:73:Name -> Inst:builtins.list
+62:24:Call -> U
+62:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+62:24:Attribute -> Module:posixpath | Module:ntpath
+62:24:Name -> Module:os
+62:37:Name -> U
+63:24:Call -> U
+63:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+63:24:Attribute -> Module:posixpath | Module:ntpath
+63:24:Name -> Module:os
+63:37:Name -> U
+64:8:Call -> ERR
+64:8:Attribute -> Func:posix.mkdir
+64:8:Name -> Module:os
+64:17:Name -> U
+65:8:Call -> ERR
+65:8:Attribute -> Func:posix.symlink
+65:8:Name -> Module:os
+65:19:Name -> U
+65:34:Name -> U
+70:66:Name -> U
+71:15:Call -> Inst:pathlib.Path
+71:15:Attribute -> BM:pathlib.Path.resolve
+71:15:Call -> Inst:pathlib.Path
+71:15:Name -> Class:pathlib.Path
+71:20:Name -> U
+73:13:Call -> U
+73:13:Attribute -> U
+73:13:Name -> U
+73:27:Name -> Class:builtins.RuntimeError
+73:47:Name -> Const:str:'Detected recursive loop when walking DA
+74:12:Call -> Inst:builtins.list
+74:12:Name -> Class:builtins.list
+74:17:Call -> U
+74:17:Name -> U
+74:42:Name -> U
+74:52:Name -> Const:str:'.airflowignore'
+84:20:Name -> U
+85:8:Call -> U
+85:8:Attribute -> U
+85:9:Name -> U
+87:8:Call -> U
+87:8:Attribute -> U
+87:9:Name -> U
+88:8:Call -> U
+88:8:Attribute -> U
+88:9:Name -> U
+89:8:Call -> U
+89:8:Attribute -> U
+89:9:Name -> U
+91:8:Call -> U
+91:8:Attribute -> U
+91:9:Name -> U
+92:12:Call -> Const:str:''
+92:12:Attribute -> BM:builtins.str.join
+101:19:Call -> Set:0
+101:19:Name -> Class:builtins.set
+102:19:Call -> U
+102:19:Name -> U
+102:44:Name -> U
+103:16:Call -> Inst:pathlib.Path
+103:16:Name -> Class:pathlib.Path
+103:21:Name -> U
+104:15:Call -> U | Const:bool:False | Const:bool:False
+104:15:Attribute -> BM:pathlib.Path.is_file
+104:15:Name -> Inst:pathlib.Path
+104:31:Attribute -> U | Const:str:''
+104:31:Name -> Inst:pathlib.Path
+105:16:Call -> ERR
+105:16:Attribute -> BM:builtins.set.add
+105:16:Name -> Set:0
+105:29:Call -> Const:str:''
+105:29:Attribute -> BM:pathlib.PurePath.as_posix
+105:29:Call -> Inst:pathlib.Path
+105:29:Attribute -> BM:pathlib.PurePath.relative_to
+105:29:Name -> Inst:pathlib.Path
+105:43:Name -> U
+107:15:Name -> Set:0
+111:20:Name -> U
+112:17:Name -> U
+113:8:Call -> U
+113:8:Attribute -> U
+113:8:Name -> U
+116:8:Call -> U
+116:8:Attribute -> U
+116:9:Name -> U
+117:8:Call -> U
+117:8:Attribute -> U
+117:9:Name -> U
+118:8:Call -> U
+118:8:Attribute -> U
+118:9:Name -> U
+120:8:Call -> U
+120:8:Attribute -> U
+120:9:Name -> U
+121:12:Call -> Const:str:''
+121:12:Attribute -> BM:builtins.str.join
+133:19:Call -> Set:0
+133:19:Name -> Class:builtins.set
+134:19:Call -> U
+134:19:Name -> U
+134:44:Name -> U
+135:16:Call -> Inst:pathlib.Path
+135:16:Name -> Class:pathlib.Path
+135:21:Name -> U
+136:15:Call -> U | Const:bool:False | Const:bool:False
+136:15:Attribute -> BM:pathlib.Path.is_file
+136:15:Name -> Inst:pathlib.Path
+136:31:Attribute -> U | Const:str:''
+136:31:Name -> Inst:pathlib.Path
+137:16:Call -> ERR
+137:16:Attribute -> BM:builtins.set.add
+137:16:Name -> Set:0
+137:29:Call -> Const:str:''
+137:29:Attribute -> BM:pathlib.PurePath.as_posix
+137:29:Call -> Inst:pathlib.Path
+137:29:Attribute -> BM:pathlib.PurePath.relative_to
+137:29:Name -> Inst:pathlib.Path
+137:43:Name -> U
+139:15:Name -> Set:0
+153:20:Name -> U
+154:8:Call -> U
+154:8:Attribute -> U
+154:9:Name -> U
+157:8:Call -> U
+157:8:Attribute -> U
+157:9:Name -> U
+158:8:Call -> U
+158:8:Attribute -> U
+158:9:Name -> U
+159:8:Call -> U
+159:8:Attribute -> U
+159:9:Name -> U
+160:8:Call -> U
+160:8:Attribute -> U
+160:9:Name -> U
+162:8:Call -> U
+162:8:Attribute -> U
+162:9:Name -> U
+163:12:Call -> Const:str:''
+163:12:Attribute -> BM:builtins.str.join
+174:19:Call -> Set:0
+174:19:Name -> Class:builtins.set
+175:19:Call -> U
+175:19:Name -> U
+175:44:Name -> U
+176:16:Call -> Inst:pathlib.Path
+176:16:Name -> Class:pathlib.Path
+176:21:Name -> U
+177:15:Call -> U | Const:bool:False | Const:bool:False
+177:15:Attribute -> BM:pathlib.Path.is_file
+177:15:Name -> Inst:pathlib.Path
+177:31:Attribute -> U | Const:str:''
+177:31:Name -> Inst:pathlib.Path
+178:16:Call -> ERR
+178:16:Attribute -> BM:builtins.set.add
+178:16:Name -> Set:0
+178:29:Call -> Const:str:''
+178:29:Attribute -> BM:pathlib.PurePath.as_posix
+178:29:Call -> Inst:pathlib.Path
+178:29:Attribute -> BM:pathlib.PurePath.relative_to
+178:29:Name -> Inst:pathlib.Path
+178:43:Name -> U
+180:15:Name -> Set:0

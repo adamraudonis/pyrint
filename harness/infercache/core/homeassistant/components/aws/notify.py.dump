@@ -1,0 +1,394 @@
+30:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+30:10:Attribute -> Func:logging.getLogger
+30:10:Name -> Module:logging
+30:28:Name -> Const:str:'homeassistant.components.aws.notify' | Const:str:'__main__'
+35:14:Call -> U
+35:14:Name -> U
+36:17:Call -> U
+36:17:Attribute -> U
+36:17:Name -> U
+36:47:Name -> U
+40:10:Name -> U
+41:12:Name -> Class:builtins.dict
+42:20:Name -> Class:builtins.dict
+43:5:Name -> ERR
+45:7:Name -> Const:NoneType:None | U
+46:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+46:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+46:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:11:Name -> Const:NoneType:None | U
+53:14:Name -> Const:NoneType:None | U
+53:19:Name -> Const:str:'service'
+54:18:Name -> Const:NoneType:None | U
+54:23:Name -> Const:str:'region_name'
+56:30:Call -> U
+56:30:Name -> Func:homeassistant.components.aws.notify.get_available_regions
+56:52:Name -> U
+56:58:Name -> U
+57:7:Name -> U
+57:26:Name -> U
+58:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+58:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+58:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+60:12:Name -> U
+61:12:Name -> U
+62:12:Name -> U
+66:17:Call -> U
+66:17:Attribute -> U
+66:17:Name -> Const:NoneType:None | U
+68:8:Name -> U
+68:19:Name -> Const:str:'service'
+69:8:Name -> U
+69:19:Name -> Const:str:'region_name'
+70:7:Name -> Const:str:'platform'
+70:24:Name -> U
+71:12:Name -> U
+71:23:Name -> Const:str:'platform'
+72:7:Name -> Const:str:'name'
+72:20:Name -> U
+73:12:Name -> U
+73:23:Name -> Const:str:'name'
+74:7:Name -> Const:str:'context'
+74:23:Name -> U
+75:12:Name -> U
+75:23:Name -> Const:str:'context'
+77:15:Attribute -> U
+77:15:Attribute -> U
+77:15:Name -> U
+77:25:Name -> Inst:homeassistant.util.hass_dict.HassKey
+79:11:Name -> U
+81:11:Name -> U
+82:22:Call -> ERR
+82:22:Name -> Func:builtins.next
+82:27:Call -> ERR
+82:27:Name -> Func:builtins.iter
+82:32:Call -> U
+82:32:Attribute -> U
+82:32:Name -> U
+84:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+84:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+84:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+84:59:Name -> U
+84:66:Name -> Const:str:'name'
+87:7:Name -> Const:NoneType:None | U
+88:26:Call -> U
+88:26:Attribute -> U
+88:26:Name -> U
+88:41:Name -> Const:str:'credential_name'
+89:11:Name -> U
+90:22:Call -> U
+90:22:Attribute -> U
+90:22:Name -> U
+90:35:Name -> U
+91:15:Name -> U
+92:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+92:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+92:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+92:67:Name -> U
+93:16:Name -> U
+93:27:Name -> Const:str:'credential_name'
+95:7:Name -> Const:NoneType:None | U
+96:23:Call -> U
+96:23:Attribute -> U
+96:23:Name -> U
+96:38:Name -> Const:str:'profile_name'
+97:22:Call -> U
+97:22:Name -> U
+97:41:Name -> U
+98:16:Name -> U
+98:27:Name -> Const:str:'profile_name'
+100:22:Call -> U
+100:22:Name -> U
+102:4:Name -> U
+102:15:Name -> Const:str:'region_name'
+102:30:Name -> U
+104:7:Name -> U
+105:22:Call -> U
+105:22:Attribute -> Func:json.dumps
+105:22:Name -> Module:json
+106:23:Call -> U
+106:23:Attribute -> U
+106:23:Name -> Const:NoneType:None | U
+106:32:Name -> Const:str:'context'
+106:56:Name -> U
+108:22:Call -> U
+108:22:Attribute -> Func:base64.b64encode
+108:22:Name -> Module:base64
+108:39:Call -> U
+108:39:Attribute -> U
+108:39:Name -> U
+109:18:Call -> U
+109:18:Attribute -> U
+109:18:Name -> U
+110:15:Call -> Inst:homeassistant.components.aws.notify.AWSLambda
+110:15:Name -> Class:homeassistant.components.aws.notify.AWSLambda
+110:25:Name -> Const:NoneType:None | U
+110:34:Name -> U
+110:46:Name -> U
+112:7:Name -> U
+113:15:Call -> Inst:homeassistant.components.aws.notify.AWSSNS
+113:15:Name -> Class:homeassistant.components.aws.notify.AWSSNS
+113:22:Name -> Const:NoneType:None | U
+113:31:Name -> U
+115:7:Name -> U
+116:15:Call -> Inst:homeassistant.components.aws.notify.AWSSQS
+116:15:Name -> Class:homeassistant.components.aws.notify.AWSSQS
+116:22:Name -> Const:NoneType:None | U
+116:31:Name -> U
+118:7:Name -> U
+119:15:Call -> Inst:homeassistant.components.aws.notify.AWSEventBridge
+119:15:Name -> Class:homeassistant.components.aws.notify.AWSEventBridge
+119:30:Name -> Const:NoneType:None | U
+119:39:Name -> U
+125:16:Name -> Class:homeassistant.components.notify.legacy.BaseNotificationService
+130:8:Name -> Inst:homeassistant.components.aws.notify.AWSNotify
+130:23:Name -> U
+131:8:Name -> Inst:homeassistant.components.aws.notify.AWSNotify
+131:26:Name -> U
+134:16:Name -> Class:homeassistant.components.aws.notify.AWSNotify
+141:8:Call -> Const:NoneType:None
+141:8:Attribute -> BM:homeassistant.components.aws.notify.AWSNotify.__init__ | BM:builtins.object.__init__
+141:8:Call -> Super
+141:8:Name -> Class:builtins.super
+141:25:Name -> U
+141:34:Name -> U
+142:8:Name -> Inst:homeassistant.components.aws.notify.AWSLambda
+142:23:Name -> U
+144:48:Name -> Class:builtins.str
+144:68:Name -> Class:typing.Any
+146:15:Call -> ERR
+146:15:Attribute -> BM:builtins.dict.get
+146:15:Name -> Dict:0
+146:26:Name -> Const:str:'target'
+147:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+147:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+147:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+150:26:Name -> U
+150:29:Name -> U
+150:43:Call -> DictItems
+150:43:Attribute -> BM:builtins.dict.items
+150:43:Name -> Dict:0
+150:61:Name -> U
+151:30:Name -> Const:str:'' | U
+152:8:Call -> ERR
+152:8:Attribute -> BM:builtins.dict.update
+152:8:Name -> Dict:1
+152:23:Name -> U
+153:23:Call -> U
+153:23:Attribute -> Func:json.dumps
+153:23:Name -> Module:json
+153:34:Name -> Dict:1
+155:19:Call -> U
+155:19:Attribute -> U
+155:19:Attribute -> U
+155:19:Name -> Inst:homeassistant.components.aws.notify.AWSLambda
+156:12:Attribute -> Const:str:'lambda'
+156:12:Name -> Inst:homeassistant.components.aws.notify.AWSLambda
+156:28:Attribute -> U
+156:28:Name -> Inst:homeassistant.components.aws.notify.AWSLambda
+159:16:Call -> U
+159:16:Attribute -> U
+159:16:Name -> U
+160:33:Name -> U
+161:28:Name -> U
+162:34:Attribute -> U
+162:34:Name -> Inst:homeassistant.components.aws.notify.AWSLambda
+164:30:Call -> ERR
+164:30:Attribute -> BM:builtins.dict.get
+164:30:Name -> Dict:0
+164:41:Name -> Const:str:'target'
+167:15:Name -> U
+168:22:Call -> U | Inst:asyncio.tasks._GatheringFuture
+168:22:Attribute -> Func:asyncio.tasks.gather
+168:22:Name -> Module:asyncio
+168:38:Name -> U
+171:13:Name -> Class:homeassistant.components.aws.notify.AWSNotify
+176:48:Name -> Class:builtins.str
+176:68:Name -> Class:typing.Any
+178:15:Call -> ERR
+178:15:Attribute -> BM:builtins.dict.get
+178:15:Name -> Dict:0
+178:26:Name -> Const:str:'target'
+179:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+179:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+179:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+183:19:Call -> ERR
+183:19:Attribute -> BM:builtins.dict.get
+183:19:Name -> Dict:0
+183:30:Name -> Const:str:'data'
+185:16:Name -> U
+185:35:Name -> U
+186:28:Call -> U
+186:28:Attribute -> U
+186:28:Name -> U
+187:19:Name -> U
+189:18:Call -> ERR
+189:18:Attribute -> BM:builtins.dict.get
+189:18:Name -> Dict:0
+189:29:Name -> Const:str:'title'
+189:41:Name -> Const:str:'Home Assistant'
+191:19:Call -> U
+191:19:Attribute -> U
+191:19:Attribute -> U
+191:19:Name -> Inst:homeassistant.components.aws.notify.AWSSNS
+192:12:Attribute -> Const:str:'sns'
+192:12:Name -> Inst:homeassistant.components.aws.notify.AWSSNS
+192:28:Attribute -> U
+192:28:Name -> Inst:homeassistant.components.aws.notify.AWSSNS
+195:16:Call -> U
+195:16:Attribute -> U
+195:16:Name -> U
+196:30:Name -> U
+197:28:Name -> Const:str:'' | U
+198:28:Name -> U
+199:38:Name -> Dict:0 | U
+201:30:Call -> ERR
+201:30:Attribute -> BM:builtins.dict.get
+201:30:Name -> Dict:0
+201:41:Name -> Const:str:'target'
+204:15:Name -> U
+205:22:Call -> U | Inst:asyncio.tasks._GatheringFuture
+205:22:Attribute -> Func:asyncio.tasks.gather
+205:22:Name -> Module:asyncio
+205:38:Name -> U
+208:13:Name -> Class:homeassistant.components.aws.notify.AWSNotify
+213:48:Name -> Class:builtins.str
+213:68:Name -> Class:typing.Any
+215:15:Call -> ERR
+215:15:Attribute -> BM:builtins.dict.get
+215:15:Name -> Dict:0
+215:26:Name -> Const:str:'target'
+216:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+216:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+216:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+219:26:Name -> U
+219:29:Name -> U
+219:43:Call -> DictItems
+219:43:Attribute -> BM:builtins.dict.items
+219:43:Name -> Dict:0
+219:61:Name -> U
+220:35:Name -> Const:str:'' | U
+221:8:Call -> ERR
+221:8:Attribute -> BM:builtins.dict.update
+221:8:Name -> Dict:1
+221:28:Name -> U
+222:20:Call -> U
+222:20:Attribute -> Func:json.dumps
+222:20:Name -> Module:json
+222:31:Name -> Dict:1
+224:24:Call -> U
+224:24:Attribute -> U
+224:24:Name -> U
+225:12:Name -> Dict:0
+225:31:Name -> U
+226:31:Call -> U
+226:31:Attribute -> Func:json.dumps
+226:31:Name -> Module:json
+226:42:Name -> U
+230:19:Call -> U
+230:19:Attribute -> U
+230:19:Attribute -> U
+230:19:Name -> Inst:homeassistant.components.aws.notify.AWSSQS
+231:12:Attribute -> Const:str:'sqs'
+231:12:Name -> Inst:homeassistant.components.aws.notify.AWSSQS
+231:28:Attribute -> U
+231:28:Name -> Inst:homeassistant.components.aws.notify.AWSSQS
+234:16:Call -> U
+234:16:Attribute -> U
+234:16:Name -> U
+235:29:Name -> U
+236:32:Name -> U
+237:38:Name -> Dict:0
+239:30:Call -> ERR
+239:30:Attribute -> BM:builtins.dict.get
+239:30:Name -> Dict:0
+239:41:Name -> Const:str:'target'
+242:15:Name -> U
+243:22:Call -> U | Inst:asyncio.tasks._GatheringFuture
+243:22:Attribute -> Func:asyncio.tasks.gather
+243:22:Name -> Module:asyncio
+243:38:Name -> U
+246:21:Name -> Class:homeassistant.components.aws.notify.AWSNotify
+251:48:Name -> Class:builtins.str
+251:68:Name -> Class:typing.Any
+254:26:Name -> U
+254:29:Name -> U
+254:43:Call -> DictItems
+254:43:Attribute -> BM:builtins.dict.items
+254:43:Name -> Dict:0
+254:61:Name -> U
+255:15:Call -> U
+255:15:Attribute -> U
+255:15:Name -> U
+255:34:Name -> Const:str:'data'
+258:27:Name -> U
+257:12:Call -> U
+257:12:Attribute -> Func:json.dumps
+257:12:Name -> Module:json
+257:23:Name -> U
+259:17:Call -> U
+259:17:Attribute -> Func:json.dumps
+259:17:Name -> Module:json
+259:40:Name -> Const:str:'' | U
+262:19:Call -> U
+262:19:Attribute -> U
+262:19:Attribute -> U
+262:19:Name -> Inst:homeassistant.components.aws.notify.AWSEventBridge
+263:12:Attribute -> Const:str:'events'
+263:12:Name -> Inst:homeassistant.components.aws.notify.AWSEventBridge
+263:28:Attribute -> U
+263:28:Name -> Inst:homeassistant.components.aws.notify.AWSEventBridge
+266:26:Call -> ERR
+266:26:Attribute -> BM:builtins.dict.get
+266:26:Name -> Dict:0
+266:37:Name -> Const:str:'target'
+268:30:Call -> U
+268:30:Attribute -> U
+268:30:Name -> U
+269:33:Call -> U
+269:33:Attribute -> U
+269:33:Name -> U
+270:30:Name -> U
+271:34:Call -> U
+271:34:Attribute -> U
+271:34:Name -> U
+273:19:Name -> U
+274:20:Name -> Dict:4
+274:44:Name -> U
+276:16:Call -> ERR
+276:16:Attribute -> BM:builtins.list.append
+276:16:Name -> List:0
+276:31:Name -> Dict:4
+278:16:Call -> U
+278:16:Attribute -> U
+278:16:Name -> U
+278:42:Name -> List:0
+278:50:Name -> U
+278:54:Call -> ERR
+278:54:Name -> Func:builtins.min
+278:58:Name -> U
+278:66:Call -> Const:int:0
+278:66:Name -> Func:builtins.len
+278:70:Name -> List:0
+279:25:Call -> Inst:builtins.range
+279:25:Name -> Class:builtins.range
+279:34:Call -> Const:int:0
+279:34:Name -> Func:builtins.len
+279:38:Name -> List:0
+282:15:Name -> U
+283:32:Call -> U | Inst:asyncio.tasks._GatheringFuture
+283:32:Attribute -> Func:asyncio.tasks.gather
+283:32:Name -> Module:asyncio
+283:48:Name -> U
+284:30:Name -> U
+285:33:Name -> U
+286:27:Call -> ERR
+286:27:Name -> Func:builtins.len
+286:31:Call -> U
+286:31:Attribute -> U
+286:31:Name -> U
+287:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+287:28:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+287:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+289:32:Name -> U
+290:32:Name -> U

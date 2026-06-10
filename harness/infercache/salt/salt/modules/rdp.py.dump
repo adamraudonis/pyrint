@@ -1,0 +1,176 @@
+16:7:Name -> Class:builtins.ImportError
+19:7:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:7:Attribute -> Func:logging.getLogger
+19:7:Name -> Module:logging
+19:25:Name -> Const:str:'salt.modules.rdp' | Const:str:'__main__'
+26:7:Call -> U
+26:7:Attribute -> Func:salt.utils.platform.is_windows
+26:7:Attribute -> Module:salt.utils.platform
+26:7:Attribute -> Module:salt.utils
+26:7:Name -> Module:salt
+36:12:Call -> U
+36:12:Attribute -> Func:re.search
+36:12:Name -> Module:re
+36:48:Name -> U
+37:11:Name -> U
+40:15:Call -> Inst:builtins.int
+40:15:Name -> Class:builtins.int
+40:19:Call -> U
+40:19:Attribute -> U
+40:19:Name -> U
+53:11:Call -> ERR
+53:11:Name -> ERR
+53:34:Name -> Const:str:'$RDP = Get-WmiObject -Class Win32_Termi
+53:42:Name -> U
+67:11:Call -> Tuple:2 | Inst:builtins.int
+67:11:Name -> Func:salt.modules.rdp._parse_return_code_powershell
+67:41:Call -> U
+67:41:Name -> Func:salt.modules.rdp._psrdp
+81:11:Call -> Tuple:2 | Inst:builtins.int
+81:11:Name -> Func:salt.modules.rdp._parse_return_code_powershell
+81:41:Call -> U
+81:41:Name -> Func:salt.modules.rdp._psrdp
+95:10:Call -> Inst:builtins.int
+95:10:Name -> Class:builtins.int
+95:14:Call -> U
+95:14:Attribute -> U
+95:14:Call -> U
+95:14:Name -> Func:salt.modules.rdp._psrdp
+96:11:Name -> Inst:builtins.int
+99:1:Call -> Inst:salt.utils.decorators.Depends
+99:1:Name -> Class:salt.utils.decorators.Depends
+99:9:Name -> Const:bool:True | Const:bool:False
+115:10:Call -> List:0
+115:10:Name -> Class:builtins.list
+116:13:Attribute -> U
+116:13:Name -> U
+118:8:Attribute -> U
+118:8:Name -> U
+119:8:Attribute -> U
+119:8:Name -> U
+120:8:Attribute -> U
+120:8:Name -> U
+123:8:Attribute -> U
+123:8:Name -> U
+124:8:Attribute -> U
+124:8:Name -> U
+125:8:Attribute -> U
+125:8:Name -> U
+126:8:Attribute -> U
+126:8:Name -> U
+127:8:Attribute -> U
+127:8:Name -> U
+128:8:Attribute -> U
+128:8:Name -> U
+129:8:Attribute -> U
+129:8:Name -> U
+130:8:Attribute -> U
+130:8:Name -> U
+131:8:Attribute -> U
+131:8:Name -> U
+132:8:Attribute -> U
+132:8:Name -> U
+135:19:Call -> U
+135:19:Attribute -> U
+135:19:Name -> U
+135:48:Name -> U
+137:12:Call -> U
+137:12:Attribute -> U
+137:12:Name -> U
+138:16:Name -> U
+138:24:Name -> U
+138:46:Attribute -> U
+138:46:Name -> U
+142:22:Call -> U
+142:22:Attribute -> U
+142:22:Name -> U
+143:12:Name -> U
+143:20:Name -> U
+143:42:Attribute -> U
+143:42:Name -> U
+145:20:Call -> U
+145:20:Attribute -> U
+145:20:Name -> U
+146:12:Name -> U
+146:20:Name -> U
+146:42:Attribute -> U
+146:42:Name -> U
+148:19:Call -> ERR
+148:19:Attribute -> BM:builtins.dict.get
+148:19:Name -> Dict:3
+148:33:Name -> U
+149:28:Call -> ERR
+149:28:Attribute -> BM:builtins.dict.get
+149:28:Name -> Dict:10
+149:41:Name -> U
+150:18:Name -> U
+152:33:Name -> U
+153:24:Name -> U
+154:26:Name -> U
+155:23:Name -> U
+156:20:Name -> U
+158:11:Name -> Const:bool:False | U
+159:15:Name -> U
+160:16:Call -> ERR
+160:16:Attribute -> BM:builtins.list.append
+160:16:Name -> List:0
+160:27:Name -> Dict:5
+162:12:Call -> ERR
+162:12:Attribute -> BM:builtins.list.append
+162:12:Name -> List:0
+162:23:Name -> Dict:5
+164:11:Name -> List:0
+165:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+165:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+165:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+166:11:Call -> ERR
+166:11:Name -> Func:builtins.sorted
+166:18:Name -> List:0
+166:37:Name -> U
+169:1:Call -> Inst:salt.utils.decorators.Depends
+169:1:Name -> Class:salt.utils.decorators.Depends
+169:9:Name -> Const:bool:True | Const:bool:False
+187:10:Call -> Dict:0
+187:10:Name -> Class:builtins.dict
+188:15:Call -> U
+188:15:Name -> Func:salt.modules.rdp.list_sessions
+189:15:Name -> U
+189:32:Name -> U
+189:44:Name -> U
+189:66:Name -> U
+191:7:Name -> U
+192:14:Name -> U
+194:11:Name -> Dict:0 | U
+195:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+195:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+195:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+195:52:Name -> U
+196:11:Name -> Dict:0 | U
+199:1:Call -> Inst:salt.utils.decorators.Depends
+199:1:Name -> Class:salt.utils.decorators.Depends
+199:9:Name -> Const:bool:True | Const:bool:False
+218:8:Call -> U
+218:8:Attribute -> U
+218:8:Name -> U
+219:12:Attribute -> U
+219:12:Name -> U
+219:47:Name -> U
+221:11:Name -> U
+222:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+222:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+222:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+222:61:Name -> U
+227:1:Call -> Inst:salt.utils.decorators.Depends
+227:1:Name -> Class:salt.utils.decorators.Depends
+227:9:Name -> Const:bool:True | Const:bool:False
+246:8:Call -> U
+246:8:Attribute -> U
+246:8:Name -> U
+246:33:Attribute -> U
+246:33:Name -> U
+246:68:Name -> U
+247:11:Name -> U
+248:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+248:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+248:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+248:57:Name -> U

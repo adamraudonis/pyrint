@@ -1,0 +1,166 @@
+10:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+10:6:Attribute -> Func:logging.getLogger
+10:6:Name -> Module:logging
+10:24:Name -> Const:str:'salt.runners.pillar' | Const:str:'__main__'
+24:21:Call -> Tuple:3
+24:21:Attribute -> Func:salt.utils.minions.get_minion_data
+24:21:Attribute -> Module:salt.utils.minions
+24:21:Attribute -> Module:salt.utils
+24:21:Name -> Module:salt
+24:56:Name -> Const:NoneType:None | U
+24:64:Name -> ERR
+25:13:Call -> Inst:salt.pillar.Pillar
+25:13:Attribute -> Class:salt.pillar.Pillar
+25:13:Attribute -> Module:salt.pillar
+25:13:Name -> Module:salt
+25:32:Name -> ERR
+25:42:Name -> Const:NoneType:None | U
+25:50:Name -> U | Const:NoneType:None
+25:55:Name -> Const:str:'base' | U
+27:18:Call -> Tuple:2
+27:18:Attribute -> BM:salt.pillar.Pillar.get_top
+27:18:Name -> Inst:salt.pillar.Pillar
+29:7:Name -> List:0
+30:8:Call -> ERR
+30:8:Attribute -> ERR
+30:8:Name -> ERR
+30:42:Name -> U
+31:15:Name -> U
+33:11:Name -> Inst:collections.defaultdict | Inst:collections.OrderedDict
+84:21:Call -> Tuple:3
+84:21:Attribute -> Func:salt.utils.minions.get_minion_data
+84:21:Attribute -> Module:salt.utils.minions
+84:21:Attribute -> Module:salt.utils
+84:21:Name -> Module:salt
+84:56:Name -> Const:str:'*' | U
+84:64:Name -> ERR
+85:7:Name -> Const:NoneType:None | U
+86:26:Name -> Const:str:'*' | U
+88:15:Name -> Dict:0
+89:11:Name -> U
+90:22:Name -> Dict:0
+90:29:Name -> U
+91:13:Name -> U
+93:24:Name -> Dict:0
+93:31:Name -> U
+95:12:Name -> Const:NoneType:None | U | Dict:1
+95:19:Name -> U
+95:26:Name -> Dict:0
+95:33:Name -> U
+97:13:Call -> Inst:salt.pillar.Pillar
+97:13:Attribute -> Class:salt.pillar.Pillar
+97:13:Attribute -> Module:salt.pillar
+97:13:Name -> Module:salt
+97:32:Name -> ERR
+97:42:Name -> Const:NoneType:None | U | Dict:1
+97:50:Name -> U | Const:NoneType:None
+97:55:Name -> Const:str:'base' | U
+97:74:Name -> Const:NoneType:None | U
+99:11:Call -> U | Dict:0 | Inst:builtins.dict
+99:11:Attribute -> BM:salt.pillar.Pillar.compile_pillar
+99:11:Name -> Inst:salt.pillar.Pillar
+120:12:Call -> ERR
+120:12:Attribute -> ERR
+120:12:Name -> ERR
+120:44:Call -> ERR
+120:44:Attribute -> ERR
+120:44:Name -> ERR
+121:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+121:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+121:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+124:16:Call -> Inst:salt.utils.minions.CkMinions
+124:16:Attribute -> Class:salt.utils.minions.CkMinions
+124:16:Attribute -> Module:salt.utils.minions
+124:16:Attribute -> Module:salt.utils
+124:16:Name -> Module:salt
+124:45:Name -> ERR
+125:10:Call -> Dict:2 | Dict:2
+125:10:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+125:10:Name -> Inst:salt.utils.minions.CkMinions
+125:34:Name -> Const:str:'*' | U
+127:16:Call -> ERR
+127:16:Attribute -> BM:builtins.dict.pop
+127:16:Name -> Dict:0
+128:14:Call -> ERR
+128:14:Attribute -> BM:builtins.dict.pop
+128:14:Name -> Dict:0
+130:15:Call -> ERR
+130:15:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+130:15:Name -> Dict:2 | Dict:2
+131:25:Call -> Tuple:3
+131:25:Attribute -> Func:salt.utils.minions.get_minion_data
+131:25:Attribute -> Module:salt.utils.minions
+131:25:Attribute -> Module:salt.utils
+131:25:Name -> Module:salt
+131:60:Name -> U
+131:65:Name -> ERR
+133:19:Name -> Dict:0
+134:12:Name -> Const:NoneType:None | U
+134:19:Name -> U
+134:26:Name -> Dict:0
+134:33:Name -> U
+136:11:Name -> Const:NoneType:None | U
+137:30:Name -> Const:str:'*' | U
+139:17:Call -> Inst:salt.pillar.PillarCache
+139:17:Attribute -> Class:salt.pillar.PillarCache
+139:17:Attribute -> Module:salt.pillar
+139:17:Name -> Module:salt
+140:12:Name -> ERR
+140:22:Name -> Const:NoneType:None | U | Dict:1
+140:30:Name -> U | Const:NoneType:None
+140:35:Name -> U
+140:54:Name -> U
+142:8:Call -> U
+142:8:Attribute -> BM:salt.pillar.PillarCache.clear_pillar
+142:8:Name -> Inst:salt.pillar.PillarCache
+163:12:Call -> ERR
+163:12:Attribute -> ERR
+163:12:Name -> ERR
+163:44:Call -> ERR
+163:44:Attribute -> ERR
+163:44:Name -> ERR
+164:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+164:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+167:16:Call -> Inst:salt.utils.minions.CkMinions
+167:16:Attribute -> Class:salt.utils.minions.CkMinions
+167:16:Attribute -> Module:salt.utils.minions
+167:16:Attribute -> Module:salt.utils
+167:16:Name -> Module:salt
+167:45:Name -> ERR
+168:10:Call -> Dict:2 | Dict:2
+168:10:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+168:10:Name -> Inst:salt.utils.minions.CkMinions
+168:34:Name -> Const:str:'*' | U
+170:16:Call -> ERR
+170:16:Attribute -> BM:builtins.dict.pop
+170:16:Name -> Dict:0
+171:14:Call -> ERR
+171:14:Attribute -> BM:builtins.dict.pop
+171:14:Name -> Dict:0
+175:15:Call -> ERR
+175:15:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+175:15:Name -> Dict:2 | Dict:2
+176:25:Call -> Tuple:3
+176:25:Attribute -> Func:salt.utils.minions.get_minion_data
+176:25:Attribute -> Module:salt.utils.minions
+176:25:Attribute -> Module:salt.utils
+176:25:Name -> Module:salt
+176:60:Name -> U
+176:65:Name -> ERR
+178:17:Call -> U
+178:17:Attribute -> BM:salt.pillar.PillarCache.cached_pillar
+178:17:Call -> Inst:salt.pillar.PillarCache
+178:17:Attribute -> Class:salt.pillar.PillarCache
+178:17:Attribute -> Module:salt.pillar
+178:17:Name -> Module:salt
+179:12:Name -> ERR
+179:22:Name -> Const:NoneType:None | U
+179:30:Name -> U | Const:NoneType:None
+179:35:Name -> U
+179:54:Name -> U
+181:11:Name -> U
+182:12:Name -> Dict:0
+182:25:Name -> U
+182:32:Name -> U
+184:11:Name -> Dict:0

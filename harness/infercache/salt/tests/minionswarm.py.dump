@@ -1,0 +1,576 @@
+48:13:Call -> Inst:optparse.OptionParser
+48:13:Attribute -> Class:optparse.OptionParser
+48:13:Name -> Module:optparse
+49:4:Call -> U | Const:str:'--minions'
+49:4:Attribute -> BM:optparse.OptionContainer.add_option
+49:4:Name -> Inst:optparse.OptionParser
+57:4:Call -> U
+57:4:Attribute -> BM:optparse.OptionContainer.add_option
+57:4:Name -> Inst:optparse.OptionParser
+64:4:Call -> U
+64:4:Attribute -> BM:optparse.OptionContainer.add_option
+64:4:Name -> Inst:optparse.OptionParser
+70:4:Call -> U | Const:str:'-n'
+70:4:Attribute -> BM:optparse.OptionContainer.add_option
+70:4:Name -> Inst:optparse.OptionParser
+81:4:Call -> U
+81:4:Attribute -> BM:optparse.OptionContainer.add_option
+81:4:Name -> Inst:optparse.OptionParser
+88:4:Call -> U
+88:4:Attribute -> BM:optparse.OptionContainer.add_option
+88:4:Name -> Inst:optparse.OptionParser
+95:4:Call -> U
+95:4:Attribute -> BM:optparse.OptionContainer.add_option
+95:4:Name -> Inst:optparse.OptionParser
+102:4:Call -> U
+102:4:Attribute -> BM:optparse.OptionContainer.add_option
+102:4:Name -> Inst:optparse.OptionParser
+109:4:Call -> U | Const:str:'--keep-modules'
+109:4:Attribute -> BM:optparse.OptionContainer.add_option
+109:4:Name -> Inst:optparse.OptionParser
+116:4:Call -> U | Const:str:'--foreground'
+116:4:Attribute -> BM:optparse.OptionContainer.add_option
+116:4:Name -> Inst:optparse.OptionParser
+124:4:Call -> U
+124:4:Attribute -> BM:optparse.OptionContainer.add_option
+124:4:Name -> Inst:optparse.OptionParser
+130:4:Call -> U
+130:4:Attribute -> BM:optparse.OptionContainer.add_option
+130:4:Name -> Inst:optparse.OptionParser
+136:4:Call -> U
+136:4:Attribute -> BM:optparse.OptionContainer.add_option
+136:4:Name -> Inst:optparse.OptionParser
+142:4:Call -> U
+142:4:Attribute -> BM:optparse.OptionContainer.add_option
+142:4:Name -> Inst:optparse.OptionParser
+148:4:Call -> U
+148:4:Attribute -> BM:optparse.OptionContainer.add_option
+148:4:Name -> Inst:optparse.OptionParser
+155:4:Call -> U | Const:str:'--config-dir'
+155:4:Attribute -> BM:optparse.OptionContainer.add_option
+155:4:Name -> Inst:optparse.OptionParser
+161:4:Call -> U | Const:str:'--user'
+161:4:Attribute -> BM:optparse.OptionContainer.add_option
+161:4:Name -> Inst:optparse.OptionParser
+161:46:Call -> Const:bool:False | U | Const:str:'SYSTEM' | Const:str:'SYSTEM'
+161:46:Attribute -> Func:tests.support.runtests.this_user
+161:46:Attribute -> Module:tests.support.runtests
+161:46:Attribute -> Module:tests.support
+161:46:Name -> Module:tests
+163:21:Call -> Tuple:2
+163:21:Attribute -> BM:optparse.OptionParser.parse_args
+163:21:Name -> Inst:optparse.OptionParser
+167:20:Call -> U
+167:20:Attribute -> U
+167:20:Attribute -> U
+167:20:Name -> U
+168:8:Name -> Dict:0
+168:13:Name -> U
+168:20:Name -> U
+170:11:Name -> Dict:0
+179:8:Name -> Inst:tests.minionswarm.Swarm
+179:20:Name -> U
+182:11:Name -> U
+183:12:Name -> Inst:tests.minionswarm.Swarm
+183:30:Name -> U
+186:15:Name -> U
+187:25:Call -> U
+187:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+187:25:Attribute -> Module:posixpath | Module:ntpath
+187:25:Name -> Module:os
+187:38:Name -> U
+189:25:Name -> U
+190:12:Name -> Inst:tests.minionswarm.Swarm
+190:30:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+190:30:Attribute -> Func:tempfile.mkdtemp
+190:30:Name -> Module:tempfile
+191:55:Name -> U
+194:11:Attribute -> U
+194:11:Name -> Inst:tests.minionswarm.Swarm
+195:12:Name -> Inst:tests.minionswarm.Swarm
+195:23:Call -> U
+195:23:Attribute -> BM:tests.minionswarm.Swarm._pki_dir
+195:23:Name -> Inst:tests.minionswarm.Swarm
+196:8:Name -> Inst:tests.minionswarm.Swarm
+196:21:Call -> Const:int:0
+196:21:Name -> Func:builtins.len
+196:25:Call -> Const:str:''
+196:25:Name -> Class:builtins.str
+196:29:Attribute -> U
+196:29:Name -> Inst:tests.minionswarm.Swarm
+198:8:Name -> Inst:tests.minionswarm.Swarm
+198:21:Call -> Set:0
+198:21:Name -> Class:builtins.set
+200:8:Call -> Const:NoneType:None
+200:8:Attribute -> BM:random.Random.seed
+200:8:Name -> Module:random
+206:15:Call -> U
+206:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+206:15:Attribute -> Module:posixpath | Module:ntpath
+206:15:Name -> Module:os
+206:28:Attribute -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/'
+206:28:Name -> Inst:tests.minionswarm.Swarm
+207:15:Call -> Const:bool:False | Const:bool:True | U
+207:15:Attribute -> Func:genericpath.exists | U
+207:15:Attribute -> Module:posixpath | Module:ntpath
+207:15:Name -> Module:os
+207:30:Name -> U
+208:12:Call -> Const:NoneType:None
+208:12:Attribute -> Func:os.makedirs
+208:12:Name -> Module:os
+208:24:Name -> U
+210:12:Call -> ERR
+210:12:Name -> Func:builtins.print
+210:64:Name -> U
+211:12:Call -> Const:int:0
+211:12:Attribute -> Func:subprocess.call
+211:12:Name -> Module:subprocess
+212:16:Call -> U
+212:16:Attribute -> BM:builtins.str.format
+214:20:Name -> U
+215:20:Call -> U
+215:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+215:20:Attribute -> Module:posixpath | Module:ntpath
+215:20:Name -> Module:os
+215:33:Name -> U
+216:20:Attribute -> U
+216:20:Name -> Inst:tests.minionswarm.Swarm
+220:12:Call -> ERR
+220:12:Name -> Func:builtins.print
+221:15:Name -> U
+227:11:Attribute -> U
+227:11:Name -> Inst:tests.minionswarm.Swarm
+228:27:Call -> Inst:tests.minionswarm.MasterSwarm
+228:27:Name -> Class:tests.minionswarm.MasterSwarm
+228:39:Attribute -> U
+228:39:Name -> Inst:tests.minionswarm.Swarm
+229:12:Call -> Const:NoneType:None
+229:12:Attribute -> BM:tests.minionswarm.MasterSwarm.start
+229:12:Name -> Inst:tests.minionswarm.MasterSwarm
+230:18:Call -> Inst:tests.minionswarm.MinionSwarm
+230:18:Name -> Class:tests.minionswarm.MinionSwarm
+230:30:Attribute -> U
+230:30:Name -> Inst:tests.minionswarm.Swarm
+231:8:Call -> Const:NoneType:None
+231:8:Attribute -> BM:tests.minionswarm.MinionSwarm.start_minions
+231:8:Name -> Inst:tests.minionswarm.MinionSwarm
+232:8:Call -> ERR
+232:8:Name -> Func:builtins.print
+234:8:Call -> ERR
+234:8:Name -> Func:builtins.print
+234:14:Call -> U
+234:14:Attribute -> BM:builtins.str.format
+234:52:Attribute -> U
+234:52:Name -> Inst:tests.minionswarm.Swarm
+235:8:Call -> ERR
+235:8:Name -> Func:builtins.print
+238:16:Call -> ERR
+238:16:Attribute -> Func:time.sleep
+238:16:Name -> Module:time
+239:19:Name -> Class:builtins.KeyboardInterrupt
+240:16:Call -> ERR
+240:16:Name -> Func:builtins.print
+241:16:Call -> Const:NoneType:None
+241:16:Attribute -> BM:tests.minionswarm.Swarm.clean_configs
+241:16:Name -> Inst:tests.minionswarm.Swarm
+248:8:Call -> ERR
+248:8:Name -> Func:builtins.print
+249:8:Call -> Const:int:0
+249:8:Attribute -> Func:subprocess.call
+249:8:Name -> Module:subprocess
+250:11:Attribute -> U
+250:11:Name -> Inst:tests.minionswarm.Swarm
+251:12:Call -> ERR
+251:12:Name -> Func:builtins.print
+252:12:Call -> Const:int:0
+252:12:Attribute -> Func:subprocess.call
+252:12:Name -> Module:subprocess
+253:15:Attribute -> U
+253:15:Name -> Inst:tests.minionswarm.Swarm
+254:12:Call -> ERR
+254:12:Name -> Func:builtins.print
+255:12:Call -> Const:NoneType:None | Const:NoneType:None
+255:12:Attribute -> Func:shutil.rmtree
+255:12:Name -> Module:shutil
+255:26:Attribute -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/'
+255:26:Name -> Inst:tests.minionswarm.Swarm
+256:8:Call -> ERR
+256:8:Name -> Func:builtins.print
+262:20:Attribute -> Set:0
+262:20:Name -> Inst:tests.minionswarm.Swarm
+263:25:Name -> U
+266:25:Call -> U
+266:25:Attribute -> Func:salt.utils.files.fopen
+266:25:Attribute -> Module:salt.utils.files
+266:25:Attribute -> Module:salt.utils
+266:25:Name -> Module:salt
+266:48:Name -> Const:str:'Uninferable.pid'
+267:30:Call -> Inst:builtins.int
+267:30:Name -> Class:builtins.int
+267:34:Call -> U
+267:34:Attribute -> U
+267:34:Call -> U
+267:34:Attribute -> U
+267:34:Name -> U
+268:20:Call -> ERR
+268:20:Attribute -> Func:posix.kill
+268:20:Name -> Module:os
+268:28:Name -> Inst:builtins.int
+268:33:Attribute -> Const:int:15
+268:33:Name -> Module:signal
+269:23:Name -> Class:builtins.ValueError
+271:19:Call -> Const:bool:False | Const:bool:True | U
+271:19:Attribute -> Func:genericpath.exists | U
+271:19:Attribute -> Module:posixpath | Module:ntpath
+271:19:Name -> Module:os
+271:34:Name -> Const:str:'Uninferable.pid'
+272:20:Call -> ERR
+272:20:Attribute -> Func:posix.remove
+272:20:Name -> Module:os
+272:30:Name -> Const:str:'Uninferable.pid'
+273:23:Attribute -> U
+273:23:Name -> Inst:tests.minionswarm.Swarm
+274:20:Call -> Const:NoneType:None | Const:NoneType:None
+274:20:Attribute -> Func:shutil.rmtree
+274:20:Name -> Module:shutil
+274:34:Name -> U
+275:19:Name -> Class:builtins.OSError
+279:18:Name -> Class:tests.minionswarm.Swarm
+288:8:Call -> Const:NoneType:None
+288:8:Attribute -> BM:tests.minionswarm.MinionSwarm.prep_configs
+288:8:Name -> Inst:tests.minionswarm.MinionSwarm
+289:20:Attribute -> Set:0
+289:20:Name -> Inst:tests.minionswarm.MinionSwarm
+290:18:Call -> U
+290:18:Attribute -> BM:builtins.str.format
+290:59:Name -> U
+290:68:Name -> U
+291:15:Attribute -> U
+291:15:Name -> Inst:tests.minionswarm.MinionSwarm
+295:12:Call -> Const:int:0
+295:12:Attribute -> Func:subprocess.call
+295:12:Name -> Module:subprocess
+295:28:Name -> U
+296:12:Call -> ERR
+296:12:Attribute -> Func:time.sleep
+296:12:Name -> Module:time
+296:23:Attribute -> U
+296:23:Name -> Inst:tests.minionswarm.MinionSwarm
+303:11:Attribute -> U
+303:11:Name -> Inst:tests.minionswarm.MinionSwarm
+304:20:Call -> U
+304:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+304:20:Attribute -> Module:posixpath | Module:ntpath
+304:20:Name -> Module:os
+304:33:Attribute -> U
+304:33:Name -> Inst:tests.minionswarm.MinionSwarm
+305:17:Call -> U
+305:17:Attribute -> Func:salt.utils.files.fopen
+305:17:Attribute -> Module:salt.utils.files
+305:17:Attribute -> Module:salt.utils
+305:17:Name -> Module:salt
+305:40:Name -> U
+306:23:Call -> U
+306:23:Attribute -> Func:salt.utils.yamlloader.safe_load
+306:23:Attribute -> Module:salt.utils.yaml
+306:23:Attribute -> Module:salt.utils
+306:23:Name -> Module:salt
+306:49:Name -> U
+307:20:Call -> U
+307:20:Attribute -> BM:builtins.str.format
+307:35:Attribute -> U
+307:35:Name -> Inst:tests.minionswarm.MinionSwarm
+307:54:Call -> ERR
+307:54:Attribute -> BM:builtins.str.zfill
+307:54:Call -> Const:str:''
+307:54:Name -> Class:builtins.str
+307:58:Name -> U
+307:69:Attribute -> Const:int:0
+307:69:Name -> Inst:tests.minionswarm.MinionSwarm
+309:16:Call -> U
+309:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+309:16:Attribute -> Module:posixpath | Module:ntpath
+309:16:Name -> Module:os
+309:29:Attribute -> U | Const:bytes:b'.' | Const:str:'.'
+309:29:Name -> Inst:tests.minionswarm.MinionSwarm
+309:46:Name -> U
+310:15:Call -> Const:bool:False | Const:bool:True | U
+310:15:Attribute -> Func:genericpath.exists | U
+310:15:Attribute -> Module:posixpath | Module:ntpath
+310:15:Name -> Module:os
+310:30:Name -> U
+311:12:Call -> Const:NoneType:None
+311:12:Attribute -> Func:os.makedirs
+311:12:Name -> Module:os
+311:24:Name -> U
+313:8:Call -> U
+313:8:Attribute -> BM:builtins.dict.update | U
+313:8:Name -> Dict:0 | U
+315:22:Name -> U
+316:24:Attribute -> U
+316:24:Name -> Inst:tests.minionswarm.MinionSwarm
+317:28:Call -> U
+317:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+317:28:Attribute -> Module:posixpath | Module:ntpath
+317:28:Name -> Module:os
+317:41:Name -> U
+318:26:Attribute -> U
+318:26:Name -> Inst:tests.minionswarm.MinionSwarm
+319:28:Call -> U
+319:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+319:28:Attribute -> Module:posixpath | Module:ntpath
+319:28:Name -> Module:os
+319:41:Name -> U
+324:11:Attribute -> U
+324:11:Name -> Inst:tests.minionswarm.MinionSwarm
+325:28:Call -> U
+325:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+325:28:Attribute -> Module:posixpath | Module:ntpath
+325:28:Name -> Module:os
+325:41:Name -> U
+326:19:Call -> Const:bool:False | Const:bool:True | U
+326:19:Attribute -> Func:genericpath.exists | U
+326:19:Attribute -> Module:posixpath | Module:ntpath
+326:19:Name -> Module:os
+326:34:Name -> U
+327:16:Call -> Const:NoneType:None
+327:16:Attribute -> Func:os.makedirs
+327:16:Name -> Module:os
+327:28:Name -> U
+328:29:Call -> U
+328:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+328:29:Attribute -> Module:posixpath | Module:ntpath
+328:29:Name -> Module:os
+328:42:Attribute -> U
+328:42:Name -> Inst:tests.minionswarm.MinionSwarm
+329:29:Call -> U
+329:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+329:29:Attribute -> Module:posixpath | Module:ntpath
+329:29:Name -> Module:os
+329:42:Attribute -> U
+329:42:Name -> Inst:tests.minionswarm.MinionSwarm
+330:16:Call -> U
+330:16:Attribute -> Func:shutil.copy
+330:16:Name -> Module:shutil
+330:28:Name -> U
+330:40:Name -> U
+331:16:Call -> U
+331:16:Attribute -> Func:shutil.copy
+331:16:Name -> Module:shutil
+331:28:Name -> U
+331:40:Name -> U
+332:12:Name -> Dict:0 | U
+332:30:Name -> U
+333:13:Attribute -> U
+333:13:Name -> Inst:tests.minionswarm.MinionSwarm
+334:12:Name -> Dict:0 | U
+336:11:Attribute -> U
+336:11:Name -> Inst:tests.minionswarm.MinionSwarm
+337:12:Name -> Dict:0 | U
+337:31:Attribute -> U
+337:31:Name -> Inst:tests.minionswarm.MinionSwarm
+339:15:Call -> U
+339:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+339:15:Attribute -> Module:posixpath | Module:ntpath
+339:15:Name -> Module:os
+339:28:Name -> U
+341:11:Attribute -> U
+341:11:Name -> Inst:tests.minionswarm.MinionSwarm
+342:19:Call -> U
+342:19:Attribute -> U
+342:19:Attribute -> U
+342:19:Name -> Inst:tests.minionswarm.MinionSwarm
+343:22:Call -> U
+343:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+343:22:Attribute -> Module:posixpath | Module:ntpath
+343:22:Name -> Module:os
+343:35:Call -> U
+343:35:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+343:35:Attribute -> Module:posixpath | Module:ntpath
+343:35:Name -> Module:os
+343:51:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+343:51:Name -> Module:salt
+344:27:Call -> U
+344:27:Attribute -> U
+344:27:Name -> U
+344:60:Call -> ERR
+344:60:Attribute -> Func:posix.listdir
+344:60:Name -> Module:os
+344:71:Name -> U
+345:22:Name -> U
+345:49:Name -> U
+345:64:Name -> U
+345:81:Name -> U
+346:12:Name -> Dict:0 | U
+346:38:Name -> U
+348:11:Attribute -> U
+348:11:Name -> Inst:tests.minionswarm.MinionSwarm
+349:12:Name -> Dict:0 | U
+349:35:Call -> U
+349:35:Attribute -> BM:random.Random.choice
+349:35:Name -> Module:random
+349:49:Name -> List:8
+350:11:Attribute -> U
+350:11:Name -> Inst:tests.minionswarm.MinionSwarm
+351:12:Name -> Dict:0 | U
+351:44:Call -> U
+351:44:Attribute -> BM:random.Random.choice
+351:44:Name -> Module:random
+351:58:Name -> List:4
+352:11:Attribute -> U
+352:11:Name -> Inst:tests.minionswarm.MinionSwarm
+353:12:Name -> Dict:0 | U
+353:43:Call -> Const:str:''
+353:43:Attribute -> BM:hashlib.md5.hexdigest
+353:43:Call -> Inst:hashlib.md5
+353:43:Attribute -> Class:hashlib.md5
+353:43:Name -> Module:hashlib
+353:55:Name -> U
+354:11:Attribute -> U
+354:11:Name -> Inst:tests.minionswarm.MinionSwarm
+355:12:Name -> Dict:0 | U
+355:37:Call -> Const:str:''
+355:37:Name -> Class:builtins.str
+355:41:Call -> Inst:uuid.UUID
+355:41:Attribute -> Func:uuid.uuid4
+355:41:Name -> Module:uuid
+357:13:Call -> U
+357:13:Attribute -> Func:salt.utils.files.fopen
+357:13:Attribute -> Module:salt.utils.files
+357:13:Attribute -> Module:salt.utils
+357:13:Name -> Module:salt
+357:36:Name -> U
+358:12:Call -> U
+358:12:Attribute -> Func:salt.utils.yamldumper.safe_dump
+358:12:Attribute -> Module:salt.utils.yaml
+358:12:Attribute -> Module:salt.utils
+358:12:Name -> Module:salt
+358:38:Name -> Dict:0 | U
+358:44:Name -> U
+359:8:Call -> ERR
+359:8:Attribute -> BM:builtins.set.add
+359:8:Attribute -> Set:0
+359:8:Name -> Inst:tests.minionswarm.MinionSwarm
+359:23:Name -> U
+365:19:Call -> Inst:builtins.range
+365:19:Name -> Class:builtins.range
+365:25:Attribute -> U
+365:25:Name -> Inst:tests.minionswarm.MinionSwarm
+366:12:Call -> Const:NoneType:None
+366:12:Attribute -> BM:tests.minionswarm.MinionSwarm.mkconf
+366:12:Name -> Inst:tests.minionswarm.MinionSwarm
+366:24:Name -> U
+369:18:Name -> Class:tests.minionswarm.Swarm
+375:8:Call -> Const:NoneType:None
+375:8:Attribute -> BM:tests.minionswarm.Swarm.__init__ | BM:builtins.object.__init__
+375:8:Call -> Super
+375:8:Name -> Class:builtins.super
+375:25:Name -> U
+376:8:Name -> Inst:tests.minionswarm.MasterSwarm
+376:20:Call -> U
+376:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+376:20:Attribute -> Module:posixpath | Module:ntpath
+376:20:Name -> Module:os
+376:33:Attribute -> U | Const:bytes:b'.' | Const:str:'.'
+376:33:Name -> Inst:tests.minionswarm.MasterSwarm
+383:8:Call -> U
+383:8:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+383:8:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+383:8:Name -> Module:sys
+384:8:Call -> Const:NoneType:None
+384:8:Attribute -> BM:tests.minionswarm.MasterSwarm.mkconf
+384:8:Name -> Inst:tests.minionswarm.MasterSwarm
+385:8:Call -> ERR
+385:8:Name -> Func:builtins.print
+387:8:Call -> U
+387:8:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+387:8:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+387:8:Name -> Module:sys
+388:8:Call -> Const:NoneType:None
+388:8:Attribute -> BM:tests.minionswarm.MasterSwarm.start_master
+388:8:Name -> Inst:tests.minionswarm.MasterSwarm
+389:8:Call -> ERR
+389:8:Name -> Func:builtins.print
+395:14:Call -> U
+395:14:Attribute -> BM:builtins.str.format
+395:55:Attribute -> U
+395:55:Name -> Inst:tests.minionswarm.MasterSwarm
+395:69:Attribute -> U
+395:69:Name -> Inst:tests.minionswarm.MasterSwarm
+396:11:Attribute -> U
+396:11:Name -> Inst:tests.minionswarm.MasterSwarm
+400:8:Call -> Const:int:0
+400:8:Attribute -> Func:subprocess.call
+400:8:Name -> Module:subprocess
+400:24:Name -> U
+407:11:Attribute -> U
+407:11:Name -> Inst:tests.minionswarm.MasterSwarm
+408:20:Call -> U
+408:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+408:20:Attribute -> Module:posixpath | Module:ntpath
+408:20:Name -> Module:os
+408:33:Attribute -> U
+408:33:Name -> Inst:tests.minionswarm.MasterSwarm
+409:17:Call -> U
+409:17:Attribute -> Func:salt.utils.files.fopen
+409:17:Attribute -> Module:salt.utils.files
+409:17:Attribute -> Module:salt.utils
+409:17:Name -> Module:salt
+409:40:Name -> U
+410:23:Call -> U
+410:23:Attribute -> Func:salt.utils.yamlloader.safe_load
+410:23:Attribute -> Module:salt.utils.yaml
+410:23:Attribute -> Module:salt.utils
+410:23:Name -> Module:salt
+410:49:Name -> U
+411:8:Call -> U
+411:8:Attribute -> BM:builtins.dict.update | U
+411:8:Name -> Dict:0 | U
+413:28:Call -> U
+413:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+413:28:Attribute -> Module:posixpath | Module:ntpath
+413:28:Name -> Module:os
+413:41:Attribute -> U
+413:41:Name -> Inst:tests.minionswarm.MasterSwarm
+418:8:Call -> Const:NoneType:None
+418:8:Attribute -> Func:os.makedirs
+418:8:Name -> Module:os
+418:20:Attribute -> U
+418:20:Name -> Inst:tests.minionswarm.MasterSwarm
+419:15:Call -> U
+419:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+419:15:Attribute -> Module:posixpath | Module:ntpath
+419:15:Name -> Module:os
+419:28:Attribute -> U
+419:28:Name -> Inst:tests.minionswarm.MasterSwarm
+421:13:Call -> U
+421:13:Attribute -> Func:salt.utils.files.fopen
+421:13:Attribute -> Module:salt.utils.files
+421:13:Attribute -> Module:salt.utils
+421:13:Name -> Module:salt
+421:36:Name -> U
+422:12:Call -> U
+422:12:Attribute -> Func:salt.utils.yamldumper.safe_dump
+422:12:Attribute -> Module:salt.utils.yaml
+422:12:Attribute -> Module:salt.utils
+422:12:Name -> Module:salt
+422:38:Name -> Dict:0 | U
+422:44:Name -> U
+425:8:Call -> ERR
+425:8:Name -> Func:builtins.print
+426:8:Call -> Const:int:0
+426:8:Attribute -> Func:subprocess.call
+426:8:Name -> Module:subprocess
+427:8:Call -> ERR
+427:8:Name -> Func:builtins.print
+431:3:Name -> Const:str:'tests.minionswarm' | Const:str:'__main__'
+432:12:Call -> Inst:tests.minionswarm.Swarm
+432:12:Name -> Class:tests.minionswarm.Swarm
+432:18:Call -> Dict:0
+432:18:Name -> Func:tests.minionswarm.parse
+434:8:Call -> Const:NoneType:None
+434:8:Attribute -> BM:tests.minionswarm.Swarm.start
+434:8:Name -> Inst:tests.minionswarm.Swarm
+436:8:Call -> Const:NoneType:None
+436:8:Attribute -> BM:tests.minionswarm.Swarm.shutdown
+436:8:Name -> Inst:tests.minionswarm.Swarm

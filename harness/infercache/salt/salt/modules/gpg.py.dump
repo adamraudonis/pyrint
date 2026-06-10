@@ -1,0 +1,1322 @@
+39:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+39:6:Attribute -> Func:logging.getLogger
+39:6:Name -> Module:logging
+39:24:Name -> Const:str:'salt.modules.gpg' | Const:str:'__main__'
+45:7:Name -> Class:builtins.ImportError
+52:20:Call -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:8
+52:20:Attribute -> Func:salt.utils.immutabletypes.freeze
+52:20:Name -> Module:salt.utils.immutabletypes
+68:26:Call -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+68:26:Attribute -> Func:salt.utils.immutabletypes.freeze
+68:26:Name -> Module:salt.utils.immutabletypes
+81:17:Call -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+81:17:Attribute -> Func:salt.utils.immutabletypes.freeze
+81:17:Name -> Module:salt.utils.immutabletypes
+93:21:Call -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+93:21:Attribute -> Func:salt.utils.immutabletypes.freeze
+93:21:Name -> Module:salt.utils.immutabletypes
+105:7:Name -> Const:bool:True | Const:bool:False
+107:5:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+107:5:Attribute -> Func:salt.utils.versions.version_cmp
+107:5:Attribute -> Module:salt.utils.versions
+107:5:Attribute -> Module:salt.utils
+107:5:Name -> Module:salt
+107:37:Attribute -> U
+107:37:Name -> U
+108:26:Call -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+108:26:Attribute -> Func:salt.utils.immutabletypes.freeze
+108:26:Name -> Module:salt.utils.immutabletypes
+119:26:Call -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:5
+119:26:Attribute -> Func:salt.utils.immutabletypes.freeze
+119:26:Name -> Module:salt.utils.immutabletypes
+137:11:Call -> Const:NoneType:None | Const:str:'gpg' | U
+137:11:Attribute -> Func:salt.utils.path.which
+137:11:Attribute -> Module:salt.utils.path
+137:11:Attribute -> Module:salt.utils
+137:11:Name -> Module:salt
+144:11:Call -> Const:NoneType:None | Const:str:'gpg' | U
+144:11:Name -> Func:salt.modules.gpg._gpg
+152:11:Name -> Const:bool:True | Const:bool:False
+151:8:Name -> Const:str:'gpg'
+166:11:Name -> Const:NoneType:None | U
+168:15:Call -> ERR
+168:15:Name -> ERR
+172:11:Call -> U
+172:11:Attribute -> Func:salt.utils.platform.is_windows
+172:11:Attribute -> Module:salt.utils.platform
+172:11:Attribute -> Module:salt.utils
+172:11:Name -> Module:salt
+172:56:Name -> U
+175:19:Call -> U
+175:19:Attribute -> U
+175:19:Name -> Const:NoneType:None | U
+177:15:Call -> ERR
+177:15:Name -> ERR
+177:37:Name -> Const:NoneType:None | U
+179:11:Name -> U
+180:11:Name -> Const:NoneType:None | U
+180:34:Name -> Const:bool:False | Const:bool:True
+183:23:Call -> U
+183:23:Name -> Func:salt.modules.gpg._get_user_info
+185:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+185:18:Name -> Class:salt.exceptions.SaltInvocationError
+185:46:Name -> Const:NoneType:None | U
+187:11:Name -> U
+194:7:Name -> U
+195:15:Call -> U
+195:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+195:15:Attribute -> Module:posixpath | Module:ntpath
+195:15:Name -> Module:os
+195:28:Call -> ERR
+195:28:Name -> ERR
+198:7:Name -> U
+199:24:Call -> ERR
+199:24:Name -> ERR
+202:11:Call -> U
+202:11:Attribute -> Func:salt.utils.platform.is_windows
+202:11:Attribute -> Module:salt.utils.platform
+202:11:Attribute -> Module:salt.utils
+202:11:Name -> Module:salt
+204:24:Call -> ERR
+204:24:Attribute -> ERR
+204:24:Call -> ERR
+204:24:Name -> ERR
+205:12:Name -> Const:str:'echo -n "$GNUPGHOME"' | Const:str:'echo %GNUPGHOME%'
+205:42:Name -> U
+207:11:Call -> U
+207:11:Attribute -> U
+207:11:Name -> U
+210:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+210:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+210:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+213:11:Name -> U | Const:str:''
+213:28:Call -> U
+213:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+213:28:Attribute -> Module:posixpath | Module:ntpath
+213:28:Name -> Module:os
+213:41:Call -> U
+213:41:Name -> Func:salt.modules.gpg._get_user_info
+213:56:Name -> U
+217:5:Call -> Partial:PartialFunction
+217:5:Attribute -> Func:functools.wraps
+217:5:Name -> Module:functools
+217:21:Name -> U
+222:15:Call -> ERR
+222:15:Attribute -> BM:builtins.dict.get
+222:15:Name -> Dict:0
+223:20:Call -> ERR
+223:20:Attribute -> BM:builtins.dict.get
+223:20:Name -> Dict:0
+223:47:Call -> U
+223:47:Name -> Func:salt.modules.gpg._get_user_gnupghome
+223:67:Name -> U
+224:18:Call -> ERR
+224:18:Attribute -> BM:builtins.dict.get
+224:18:Name -> Dict:0
+226:19:Call -> U
+226:19:Name -> Func:salt.modules.gpg._get_user_info
+226:34:Name -> U
+227:19:Call -> U
+227:19:Name -> Func:salt.modules.gpg._get_user_info
+229:15:Call -> Const:bool:False | Const:bool:True | U
+229:15:Attribute -> Func:genericpath.exists | U
+229:15:Attribute -> Module:posixpath | Module:ntpath
+229:15:Name -> Module:os
+229:30:Name -> U
+230:12:Call -> Const:NoneType:None
+230:12:Name -> Func:salt.modules.gpg._create_gnupghome
+230:30:Name -> U
+230:36:Name -> U
+232:11:Name -> U
+232:30:Name -> U
+235:25:Name -> U
+235:38:Call -> ERR
+235:38:Name -> ERR
+235:60:Name -> U
+236:16:Call -> ERR
+236:16:Name -> ERR
+237:20:Name -> ERR
+237:31:Name -> U
+237:54:Name -> U
+239:15:Name -> U
+239:27:Call -> Const:bool:False | Const:bool:True | U
+239:27:Attribute -> Func:genericpath.exists | U
+239:27:Attribute -> Module:posixpath | Module:ntpath
+239:27:Name -> Module:os
+239:42:Name -> U
+240:16:Call -> ERR
+240:16:Name -> ERR
+241:20:Name -> U
+241:34:Name -> U
+241:57:Name -> U
+245:27:Name -> U
+245:30:Name -> U
+245:44:Call -> DictItems
+245:44:Attribute -> BM:builtins.dict.items
+245:44:Name -> Dict:0
+245:66:Call -> U
+245:66:Attribute -> U
+245:66:Name -> U
+247:14:Call -> U
+247:14:Name -> U
+247:20:Name -> Tuple:0
+247:28:Name -> U
+249:11:Name -> U
+249:30:Name -> U
+250:25:Name -> U
+250:38:Call -> ERR
+250:38:Name -> ERR
+250:60:Name -> U
+251:16:Call -> ERR
+251:16:Name -> ERR
+252:20:Name -> ERR
+252:31:Name -> U
+252:54:Name -> U
+254:15:Name -> U
+254:27:Call -> Const:bool:False | Const:bool:True | U
+254:27:Attribute -> Func:genericpath.exists | U
+254:27:Attribute -> Module:posixpath | Module:ntpath
+254:27:Name -> Module:os
+254:42:Name -> U
+255:16:Call -> ERR
+255:16:Name -> ERR
+256:20:Name -> U
+256:34:Name -> U
+256:57:Name -> U
+258:15:Name -> U
+260:11:Name -> Func:salt.modules.gpg._restore_ownership.func_wrapper
+290:7:Call -> U
+290:7:Attribute -> Func:salt.utils.platform.is_windows
+290:7:Attribute -> Module:salt.utils.platform
+290:7:Attribute -> Module:salt.utils
+290:7:Name -> Module:salt
+291:17:Call -> Const:NoneType:None | Const:NoneType:None | U
+291:17:Attribute -> Func:salt.utils.path.which_bin
+291:17:Attribute -> Module:salt.utils.path
+291:17:Attribute -> Module:salt.utils
+291:17:Name -> Module:salt
+292:20:Name -> Const:NoneType:None | Const:NoneType:None | U
+293:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+293:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+293:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+293:61:Name -> Const:NoneType:None | Const:NoneType:None | U
+294:20:Call -> Inst:pathlib.Path
+294:20:Attribute -> Class:pathlib.Path
+294:20:Name -> Module:pathlib
+294:33:Name -> U
+295:24:Call -> Const:str:'' | Const:bytes:b'' | U
+295:24:Attribute -> BM:builtins.str.lower | BM:builtins.bytes.lower | U
+295:24:Call -> Const:str:'' | Const:bytes:b'' | U
+295:24:Attribute -> BM:builtins.str.replace | BM:builtins.bytes.replace | BM:builtins.str.replace | U
+295:24:Attribute -> Const:str:'' | Const:bytes:b'' | Const:str:'' | U
+295:24:Name -> Inst:pathlib.Path
+296:25:Call -> Const:str:''
+296:25:Attribute -> BM:builtins.str.replace
+296:25:Call -> Const:str:''
+296:25:Attribute -> BM:pathlib.PurePath.as_posix
+296:25:Name -> Inst:pathlib.Path
+296:50:Attribute -> Const:str:'' | Const:bytes:b'' | Const:str:'' | U
+296:50:Name -> Inst:pathlib.Path
+296:63:Name -> Const:str:'' | Const:bytes:b'' | U
+297:11:Call -> Const:str:''
+297:11:Name -> Class:builtins.str
+297:15:Name -> U
+304:11:Name -> Const:NoneType:None | U
+305:20:Call -> U
+305:20:Name -> Func:salt.modules.gpg._get_user_gnupghome
+305:40:Name -> Const:NoneType:None | U
+307:7:Name -> Const:NoneType:None | U
+307:23:Call -> ERR
+307:23:Name -> Func:builtins.isinstance
+307:34:Name -> Const:NoneType:None | U
+307:43:Name -> Class:builtins.str
+308:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+308:14:Name -> Class:salt.exceptions.SaltInvocationError
+313:14:Call -> U
+313:14:Attribute -> U
+313:14:Name -> U
+313:34:Name -> Const:NoneType:None | U
+313:53:Name -> Const:NoneType:None | U
+314:11:Name -> Class:builtins.ValueError
+315:15:Call -> ERR
+315:15:Attribute -> BM:builtins.str.startswith
+315:15:Call -> Const:str:''
+315:15:Name -> Class:builtins.str
+315:19:Name -> ExcInst:builtins.ValueError
+317:8:Call -> Const:NoneType:None
+317:8:Name -> Func:salt.modules.gpg._create_gnupghome
+317:26:Name -> Const:NoneType:None | U
+317:32:Name -> Const:NoneType:None | U
+318:14:Call -> U
+318:14:Attribute -> U
+318:14:Name -> U
+318:34:Name -> Const:NoneType:None | U
+318:53:Name -> Const:NoneType:None | U
+319:4:Name -> U
+319:20:Call -> Const:str:'/' | Const:str:''
+319:20:Name -> Func:salt.modules.gpg._homedir_fix
+319:33:Name -> Const:NoneType:None | U
+320:11:Name -> U
+324:16:Call -> U
+324:16:Name -> Func:salt.modules.gpg._get_user_info
+324:31:Name -> U
+325:4:Call -> ERR
+325:4:Name -> ERR
+326:8:Name -> U
+326:24:Name -> U
+326:48:Name -> U
+334:10:Call -> U
+334:10:Name -> Func:salt.modules.gpg._create_gpg
+334:27:Name -> Const:NoneType:None | U
+334:43:Name -> Const:NoneType:None | U
+334:62:Name -> Const:NoneType:None | U
+335:12:Call -> U
+335:12:Attribute -> U
+335:12:Name -> U
+335:26:Name -> Const:bool:False | U
+336:11:Name -> U
+343:10:Call -> U
+343:10:Name -> Func:salt.modules.gpg._create_gpg
+343:27:Name -> Const:NoneType:None | U
+343:43:Name -> Const:NoneType:None | U
+344:7:Name -> U
+345:16:Call -> U
+345:16:Attribute -> U
+345:16:Name -> U
+345:32:Name -> U
+345:38:Name -> U
+347:16:Call -> U
+347:16:Attribute -> U
+347:16:Name -> U
+347:32:Name -> U
+348:11:Name -> U
+382:11:Name -> Const:NoneType:None | U
+383:20:Name -> Const:str:'keys.openpgp.org'
+386:16:Call -> U
+386:16:Name -> Func:salt.modules.gpg._search_keys
+386:29:Name -> U
+386:35:Name -> Const:NoneType:None | U | Const:str:'keys.openpgp.org'
+386:51:Name -> Const:NoneType:None | U
+386:67:Name -> Const:NoneType:None | U
+387:8:Call -> ERR
+387:8:Attribute -> BM:builtins.list.append
+387:8:Name -> List:0
+387:21:Call -> Dict:1
+387:21:Name -> Func:salt.modules.gpg._render_key
+387:33:Name -> U
+388:11:Name -> List:0
+417:16:Call -> U
+417:16:Name -> Func:salt.modules.gpg._list_keys
+417:32:Name -> Const:NoneType:None | U
+417:48:Name -> Const:NoneType:None | U
+417:67:Name -> Const:NoneType:None | U
+418:8:Call -> ERR
+418:8:Attribute -> BM:builtins.list.append
+418:8:Name -> List:0
+418:21:Call -> Dict:1
+418:21:Name -> Func:salt.modules.gpg._render_key
+418:33:Name -> U
+419:11:Name -> List:0
+448:16:Call -> U
+448:16:Name -> Func:salt.modules.gpg._list_keys
+449:13:Name -> Const:NoneType:None | U
+449:29:Name -> Const:NoneType:None | U
+449:48:Name -> Const:NoneType:None | U
+451:8:Call -> ERR
+451:8:Attribute -> BM:builtins.list.append
+451:8:Name -> List:0
+451:21:Call -> Dict:1
+451:21:Name -> Func:salt.modules.gpg._render_key
+451:33:Name -> U
+452:11:Name -> List:0
+457:17:Name -> U
+459:17:Name -> U
+460:8:Name -> Dict:1
+460:22:Name -> U
+461:24:Name -> U
+462:8:Name -> Dict:1
+462:29:Name -> U
+464:14:Call -> U
+464:14:Attribute -> U
+464:14:Name -> U
+465:11:Call -> U
+465:11:Attribute -> U
+465:11:Name -> U
+466:13:Call -> U
+466:13:Attribute -> U
+466:13:Name -> U
+467:18:Call -> U
+467:18:Attribute -> U
+467:18:Name -> U
+468:12:Call -> U
+468:12:Attribute -> U
+468:12:Name -> U
+469:14:Call -> U
+469:14:Attribute -> U
+469:14:Name -> U
+471:7:Name -> U
+472:8:Name -> Dict:1
+472:25:Call -> ERR
+472:25:Attribute -> Func:time.strftime
+472:25:Name -> Module:time
+473:24:Call -> ERR
+473:24:Attribute -> Func:time.localtime
+473:24:Name -> Module:time
+473:39:Call -> Inst:builtins.float
+473:39:Name -> Class:builtins.float
+473:45:Name -> U
+475:8:Name -> Dict:1
+475:25:Call -> ERR
+475:25:Attribute -> Func:time.time
+475:25:Name -> Module:time
+475:40:Call -> Inst:builtins.float
+475:40:Name -> Class:builtins.float
+475:46:Name -> U
+476:7:Name -> U
+477:8:Name -> Dict:1
+477:25:Call -> ERR
+477:25:Attribute -> Func:time.strftime
+477:25:Name -> Module:time
+477:51:Call -> ERR
+477:51:Attribute -> Func:time.localtime
+477:51:Name -> Module:time
+477:66:Call -> Inst:builtins.float
+477:66:Name -> Class:builtins.float
+477:72:Name -> U
+478:7:Name -> U
+479:8:Name -> Dict:1
+479:27:Name -> U
+480:7:Name -> U
+481:8:Name -> Dict:1
+481:28:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:8
+481:46:Name -> U
+482:7:Name -> U
+483:8:Name -> Dict:1
+483:23:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:8
+483:41:Name -> U
+484:16:Call -> U
+484:16:Attribute -> U
+484:16:Name -> U
+485:8:Call -> ERR
+485:8:Attribute -> ERR
+485:8:Call -> ERR
+485:8:Attribute -> BM:builtins.dict.setdefault
+485:8:Name -> Dict:1
+485:45:Call -> Dict:1
+485:45:Name -> Func:salt.modules.gpg._render_key
+485:57:Name -> U
+486:11:Name -> Dict:1
+489:1:Name -> Func:salt.modules.gpg._restore_ownership
+575:20:Name -> Const:str:'RSA' | U
+576:22:Name -> Const:int:1024 | U
+577:21:Name -> Const:str:'Autogenerated Key' | U
+578:24:Name -> Const:str:'Generated by SaltStack' | U
+581:10:Call -> U
+581:10:Name -> Func:salt.modules.gpg._create_gpg
+581:27:Name -> Const:NoneType:None | U
+581:43:Name -> Const:NoneType:None | U
+581:62:Name -> Const:NoneType:None | U
+583:7:Name -> Const:NoneType:None | U
+584:8:Name -> Dict:4
+584:38:Name -> U
+586:7:Name -> Const:NoneType:None | U
+587:8:Name -> Dict:4
+587:39:Name -> U
+589:7:Name -> Const:NoneType:None | U
+590:8:Name -> Dict:4
+590:41:Name -> U
+592:7:Name -> Const:NoneType:None | U
+593:8:Name -> Dict:4
+593:39:Name -> U
+595:7:Name -> Const:bool:False | U
+596:25:Call -> ERR
+596:25:Name -> ERR
+597:15:Name -> U
+598:12:Name -> Dict:3
+599:12:Name -> Dict:3
+600:19:Name -> Dict:3
+602:12:Name -> Dict:4
+602:42:Name -> U
+604:8:Name -> Dict:4
+606:17:Call -> U
+606:17:Attribute -> U
+606:17:Name -> U
+606:37:Name -> Dict:4
+611:32:Name -> U
+612:20:Call -> U
+612:20:Attribute -> U
+612:20:Name -> U
+613:8:Call -> U
+613:8:Attribute -> U
+613:8:Name -> U
+614:8:Call -> U
+614:8:Attribute -> U
+614:8:Name -> U
+614:25:Call -> U
+614:25:Attribute -> U
+614:25:Name -> U
+615:21:Call -> Const:str:''
+615:21:Attribute -> BM:builtins.str.join
+615:31:Name -> U
+617:10:Call -> U
+617:10:Attribute -> U
+617:10:Name -> U
+617:22:Name -> U | Const:str:'\n'
+618:7:Attribute -> U
+618:7:Name -> U
+619:8:Name -> Dict:3
+619:29:Attribute -> U
+619:29:Name -> U
+620:8:Name -> Dict:3
+622:8:Name -> Dict:3
+623:8:Name -> Dict:3
+624:11:Name -> Dict:3
+685:7:Name -> Const:NoneType:None | U
+685:23:Name -> Const:NoneType:None | U
+686:8:Name -> Dict:2
+687:8:Name -> Dict:2
+688:15:Name -> Dict:2
+690:11:Name -> Const:NoneType:None | U
+690:31:Name -> Const:NoneType:None | U
+691:8:Name -> Dict:2
+692:8:Name -> Dict:2
+693:15:Name -> Dict:2
+695:10:Call -> U
+695:10:Name -> Func:salt.modules.gpg._create_gpg
+695:27:Name -> Const:NoneType:None | U
+695:43:Name -> Const:NoneType:None | U
+695:62:Name -> Const:NoneType:None | U
+696:10:Call -> Dict:1 | Const:bool:False
+696:10:Name -> Func:salt.modules.gpg.get_key
+697:14:Name -> Const:NoneType:None | U
+698:20:Name -> Const:NoneType:None | U
+699:13:Name -> Const:NoneType:None | U
+700:18:Name -> Const:NoneType:None | U
+701:16:Name -> Const:NoneType:None | U
+705:11:Name -> U
+705:22:Name -> U
+706:29:Call -> ERR
+706:29:Name -> ERR
+707:19:Name -> U
+710:22:Call -> U
+710:22:Attribute -> U
+710:22:Name -> U
+710:38:Name -> U
+710:51:Name -> U
+710:70:Name -> U
+712:18:Call -> U
+712:18:Attribute -> U
+712:18:Name -> U
+712:34:Name -> U
+712:47:Name -> U
+713:15:Name -> U
+715:7:Name -> Dict:1 | Const:bool:False
+716:22:Name -> Dict:1
+717:15:Call -> Dict:1 | Const:bool:False
+717:15:Name -> Func:salt.modules.gpg.get_secret_key
+718:18:Name -> Const:NoneType:None | U
+719:24:Name -> U
+720:17:Name -> Const:NoneType:None | U
+721:22:Name -> Const:NoneType:None | U
+722:20:Name -> Const:NoneType:None | U
+724:11:Name -> Dict:1 | Const:bool:False
+725:19:Name -> Const:bool:False | U
+726:16:Name -> Dict:2
+727:16:Name -> Dict:2
+730:23:Name -> Dict:2
+732:22:Call -> Const:str:'gpg_passphrase not available in pillar. | U
+732:22:Name -> Func:salt.modules.gpg.delete_key.__delete_key
+732:35:Name -> Const:NoneType:None | U
+732:54:Name -> Const:bool:True | U
+733:19:Call -> Const:str:''
+733:19:Name -> Class:builtins.str
+733:23:Name -> Const:str:'gpg_passphrase not available in pillar. | U
+735:20:Name -> Dict:2
+735:55:Name -> Const:NoneType:None | U
+737:20:Name -> Dict:2
+738:20:Name -> Dict:2
+739:59:Name -> Const:NoneType:None | U
+739:74:Name -> Const:str:'gpg_passphrase not available in pillar. | U
+741:27:Name -> Dict:2
+744:14:Call -> Const:str:'gpg_passphrase not available in pillar. | U
+744:14:Name -> Func:salt.modules.gpg.delete_key.__delete_key
+744:27:Name -> U
+744:47:Name -> Const:bool:True | U
+745:11:Call -> Const:str:''
+745:11:Name -> Class:builtins.str
+745:15:Name -> Const:str:'gpg_passphrase not available in pillar. | U
+746:12:Name -> Dict:2
+747:12:Name -> Dict:2
+747:48:Name -> Const:NoneType:None | U
+749:12:Name -> Dict:2
+750:12:Name -> Dict:2
+750:65:Name -> Const:NoneType:None | U
+750:80:Name -> Const:str:'gpg_passphrase not available in pillar. | U
+752:8:Name -> Dict:2
+753:8:Name -> Dict:2
+754:11:Name -> Dict:2
+792:16:Call -> U
+792:16:Name -> Func:salt.modules.gpg._list_keys
+792:32:Name -> Const:NoneType:None | U
+792:48:Name -> Const:NoneType:None | U
+792:67:Name -> Const:NoneType:None | U
+794:12:Name -> U
+794:35:Name -> Const:NoneType:None | U
+795:15:Name -> U
+795:32:Name -> Const:NoneType:None | U
+796:15:Name -> U
+796:36:Name -> Const:NoneType:None | U
+798:19:Call -> Dict:1
+798:19:Name -> Func:salt.modules.gpg._render_key
+798:31:Name -> U
+839:16:Call -> U
+839:16:Name -> Func:salt.modules.gpg._list_keys
+840:13:Name -> Const:NoneType:None | U
+840:29:Name -> Const:NoneType:None | U
+840:48:Name -> Const:NoneType:None | U
+843:12:Name -> U
+843:35:Name -> Const:NoneType:None | U
+844:15:Name -> U
+844:32:Name -> Const:NoneType:None | U
+845:15:Name -> U
+845:36:Name -> Const:NoneType:None | U
+847:19:Call -> Dict:1
+847:19:Name -> Func:salt.modules.gpg._render_key
+847:31:Name -> U
+851:1:Name -> Func:salt.modules.gpg._restore_ownership
+895:11:Name -> Const:NoneType:None | U
+898:36:Call -> U
+898:36:Attribute -> U
+898:36:Name -> U
+898:57:Name -> U
+899:23:Name -> Class:builtins.AttributeError
+901:25:Call -> Gen:salt.utils.files.flopen
+901:25:Attribute -> Func:salt.utils.files.flopen
+901:25:Attribute -> Module:salt.utils.files
+901:25:Attribute -> Module:salt.utils
+901:25:Name -> Module:salt
+901:49:Name -> Const:NoneType:None | U | Const:NoneType:None
+902:31:Call -> U
+902:31:Attribute -> Func:salt.utils.stringutils.to_unicode
+902:31:Attribute -> Module:salt.utils.stringutils
+902:31:Attribute -> Module:salt.utils
+902:31:Name -> Module:salt
+902:65:Call -> U
+902:65:Attribute -> U
+902:65:Name -> U
+903:19:Name -> Class:builtins.OSError
+904:22:Call -> ExcInst:salt.exceptions.SaltInvocationError
+904:22:Name -> Class:salt.exceptions.SaltInvocationError
+905:11:Name -> Const:NoneType:None | U
+906:28:Call -> U
+906:28:Attribute -> U
+906:28:Name -> U
+906:44:Name -> U
+907:59:Attribute -> U
+907:59:Name -> U
+908:11:Attribute -> U
+908:11:Name -> U
+908:37:Attribute -> U
+908:37:Name -> U
+909:12:Name -> Dict:3
+910:13:Attribute -> U
+910:13:Name -> U
+911:12:Name -> Dict:3
+912:13:Attribute -> U
+912:13:Name -> U
+913:12:Name -> Dict:3
+914:12:Name -> Dict:3
+915:17:Attribute -> U
+915:17:Name -> U
+916:12:Name -> Dict:3
+917:12:Name -> Dict:3
+918:15:Name -> Dict:3
+920:12:Name -> Const:NoneType:None | U
+920:20:Name -> Const:NoneType:None | U
+921:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+921:14:Name -> Class:salt.exceptions.SaltInvocationError
+922:7:Name -> Const:NoneType:None | U
+922:16:Name -> Const:NoneType:None | U
+923:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+923:14:Name -> Class:salt.exceptions.SaltInvocationError
+925:13:Name -> Const:NoneType:None | U
+926:11:Call -> ERR
+926:11:Name -> Func:builtins.isinstance
+926:22:Name -> List:0 | U
+926:30:Name -> Class:builtins.list
+927:18:Name -> List:0 | U
+929:7:Name -> List:0 | U | List:1
+932:21:Call -> ERR
+932:21:Name -> ERR
+933:17:Call -> U
+933:17:Name -> Func:salt.modules.gpg._create_gpg
+933:34:Name -> Const:NoneType:None | U
+933:50:Name -> Const:NoneType:None | U
+933:69:Name -> U
+934:14:Call -> Dict:3
+934:14:Name -> Func:salt.modules.gpg.import_key._import
+934:22:Name -> U
+934:35:Name -> Const:NoneType:None | U
+934:50:Name -> Const:NoneType:None | U
+935:15:Name -> Dict:3
+936:19:Name -> Dict:3
+937:15:Call -> U
+937:15:Attribute -> U
+937:15:Name -> U
+937:34:Name -> U | List:1
+938:15:Name -> U
+946:10:Call -> U
+946:10:Name -> Func:salt.modules.gpg._create_gpg
+946:27:Name -> Const:NoneType:None | U
+946:43:Name -> Const:NoneType:None | U
+946:62:Name -> Const:NoneType:None | U
+947:11:Call -> Dict:3
+947:11:Name -> Func:salt.modules.gpg.import_key._import
+947:19:Name -> U
+947:29:Name -> Const:NoneType:None | U | Const:NoneType:None
+947:44:Name -> Const:NoneType:None | U
+1014:10:Call -> U
+1014:10:Name -> Func:salt.modules.gpg._create_gpg
+1014:27:Name -> Const:NoneType:None | U
+1014:43:Name -> Const:NoneType:None | U
+1014:62:Name -> Const:NoneType:None | U
+1016:7:Call -> ERR
+1016:7:Name -> Func:builtins.isinstance
+1016:18:Name -> Const:NoneType:None | U
+1016:26:Name -> Class:builtins.str
+1017:17:Call -> U
+1017:17:Attribute -> U
+1017:17:Name -> Const:NoneType:None | U
+1019:7:Name -> Const:bool:False | U
+1019:18:Name -> Const:bool:False | U
+1020:25:Call -> ERR
+1020:25:Name -> ERR
+1021:15:Name -> U
+1022:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1022:18:Name -> Class:salt.exceptions.SaltInvocationError
+1023:17:Call -> U
+1023:17:Attribute -> U
+1023:17:Name -> U
+1023:33:Name -> Const:NoneType:None | U
+1023:41:Name -> Const:bool:False | U
+1023:60:Name -> U
+1025:17:Call -> U
+1025:17:Attribute -> U
+1025:17:Name -> U
+1025:33:Name -> Const:NoneType:None | U
+1025:41:Name -> Const:bool:False | U
+1027:7:Name -> U
+1027:18:Name -> Const:NoneType:None | U
+1028:13:Call -> Gen:salt.utils.files.flopen
+1028:13:Attribute -> Func:salt.utils.files.flopen
+1028:13:Attribute -> Module:salt.utils.files
+1028:13:Attribute -> Module:salt.utils
+1028:13:Name -> Module:salt
+1028:37:Name -> Const:NoneType:None | U
+1029:12:Call -> U
+1029:12:Attribute -> U
+1029:12:Name -> U
+1029:23:Call -> U
+1029:23:Attribute -> Func:salt.utils.stringutils.to_str
+1029:23:Attribute -> Module:salt.utils.stringutils
+1029:23:Attribute -> Module:salt.utils
+1029:23:Name -> Module:salt
+1029:53:Name -> U
+1031:7:Name -> U
+1032:15:Name -> Const:bool:False | U
+1033:15:Name -> Const:NoneType:None | U
+1034:16:Name -> Dict:1
+1034:74:Name -> U
+1036:16:Name -> Dict:1
+1036:33:Name -> U
+1038:18:Name -> U
+1040:15:Name -> Const:bool:False | U
+1041:12:Name -> Dict:1
+1045:11:Name -> Dict:1 | U | Const:bool:False
+1089:12:Name -> Const:NoneType:None | U
+1089:20:Name -> Const:NoneType:None | U
+1090:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1090:14:Name -> Class:salt.exceptions.SaltInvocationError
+1091:7:Name -> Const:NoneType:None | U
+1091:16:Name -> Const:NoneType:None | U
+1092:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1092:14:Name -> Class:salt.exceptions.SaltInvocationError
+1093:10:Call -> U
+1093:10:Name -> Func:salt.modules.gpg._create_gpg
+1093:27:Name -> Const:NoneType:None | U
+1093:43:Name -> Const:NoneType:None | U
+1094:7:Name -> Const:NoneType:None | U
+1095:15:Call -> U
+1095:15:Attribute -> U
+1095:15:Name -> U
+1095:29:Name -> U
+1097:15:Call -> U
+1097:15:Attribute -> U
+1097:15:Name -> U
+1097:33:Name -> Const:NoneType:None | U
+1100:16:Name -> U
+1102:17:Name -> Const:NoneType:None | U
+1102:32:Name -> Const:NoneType:None | U
+1103:15:Name -> U
+1103:38:Name -> Const:NoneType:None | U
+1104:15:Name -> U
+1104:32:Name -> Const:NoneType:None | U
+1105:15:Name -> U
+1105:36:Name -> Const:NoneType:None | U
+1107:12:Call -> ERR
+1107:12:Attribute -> BM:builtins.list.append
+1107:12:Name -> List:0
+1107:24:Call -> Dict:1
+1107:24:Name -> Func:salt.modules.gpg._render_key
+1107:36:Name -> U
+1108:11:Name -> List:0
+1111:1:Name -> Func:salt.modules.gpg._restore_ownership
+1150:10:Call -> U
+1150:10:Name -> Func:salt.modules.gpg._create_gpg
+1150:27:Name -> Const:NoneType:None | U
+1150:43:Name -> Const:NoneType:None | U
+1150:62:Name -> Const:NoneType:None | U
+1152:11:Name -> Const:NoneType:None | U
+1153:20:Name -> Const:str:'keys.openpgp.org'
+1155:7:Call -> ERR
+1155:7:Name -> Func:builtins.isinstance
+1155:18:Name -> Const:NoneType:None | U
+1155:24:Name -> Class:builtins.str
+1156:15:Call -> U
+1156:15:Attribute -> U
+1156:15:Name -> Const:NoneType:None | U
+1158:16:Call -> U
+1158:16:Attribute -> U
+1158:16:Name -> U
+1158:30:Name -> Const:NoneType:None | U | Const:str:'keys.openpgp.org'
+1158:42:Name -> Const:NoneType:None | U
+1160:11:Attribute -> U
+1160:11:Name -> U
+1161:26:Attribute -> U
+1161:26:Name -> U
+1162:27:Name -> U
+1163:23:Name -> U
+1164:24:Call -> ERR
+1164:24:Attribute -> BM:builtins.list.append
+1164:24:Name -> Dict:2
+1165:35:Name -> U
+1167:25:Name -> U
+1168:24:Call -> ERR
+1168:24:Attribute -> BM:builtins.list.append
+1168:24:Name -> Dict:2
+1169:35:Name -> U
+1171:25:Name -> U
+1172:24:Call -> ERR
+1172:24:Attribute -> BM:builtins.list.append
+1172:24:Name -> Dict:2
+1173:35:Name -> U
+1175:25:Name -> U
+1176:24:Call -> ERR
+1176:24:Attribute -> BM:builtins.list.append
+1176:24:Name -> Dict:2
+1177:35:Name -> U
+1179:34:Name -> U
+1180:20:Call -> ERR
+1180:20:Attribute -> BM:builtins.list.append
+1180:20:Name -> Dict:2
+1181:58:Call -> U
+1181:58:Attribute -> U
+1181:58:Name -> U
+1184:15:Name -> U
+1185:12:Name -> Dict:2
+1186:12:Call -> ERR
+1186:12:Attribute -> BM:builtins.list.append
+1186:12:Name -> Dict:2
+1186:59:Attribute -> U
+1186:59:Name -> U
+1187:11:Name -> Class:builtins.AttributeError
+1188:8:Name -> Dict:2
+1189:8:Name -> Dict:2
+1191:11:Name -> Dict:2
+1243:11:Call -> U
+1243:11:Attribute -> Func:salt.utils.data.exactly_one
+1243:11:Attribute -> Module:salt.utils.data
+1243:11:Attribute -> Module:salt.utils
+1243:11:Name -> Module:salt
+1243:40:Name -> Const:NoneType:None | U
+1243:47:Name -> Const:NoneType:None | U
+1244:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1244:14:Name -> Class:salt.exceptions.SaltInvocationError
+1246:7:Name -> Const:NoneType:None | U
+1246:26:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1247:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1247:14:Name -> Class:salt.exceptions.SaltInvocationError
+1248:12:Call -> Const:str:'ERROR: Valid trust levels - '
+1248:12:Attribute -> BM:builtins.str.format
+1248:52:Call -> Const:str:''
+1248:52:Attribute -> BM:builtins.str.join
+1248:61:Call -> Inst:_collections_abc.KeysView | DictKeys
+1248:61:Attribute -> BM:_collections_abc.Mapping.keys | BM:builtins.dict.keys
+1248:61:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1251:10:Call -> Dict:1 | Const:bool:False
+1251:10:Name -> Func:salt.modules.gpg.get_key
+1252:14:Name -> Const:NoneType:None | U
+1253:20:Name -> Const:NoneType:None | U
+1254:13:Name -> Const:NoneType:None | U
+1255:18:Name -> Const:NoneType:None | U
+1256:16:Name -> Const:NoneType:None | U
+1258:11:Name -> Dict:1 | Const:bool:False
+1259:8:Name -> Dict:2
+1260:8:Name -> Dict:2
+1260:32:Name -> Const:NoneType:None | U
+1260:41:Name -> Const:NoneType:None | U
+1261:15:Name -> Dict:2
+1262:11:Name -> Const:NoneType:None | U
+1262:48:Name -> Dict:1 | Const:bool:False
+1263:8:Name -> Dict:2
+1264:8:Name -> Dict:2
+1264:60:Name -> Const:NoneType:None | U
+1265:15:Name -> Dict:2
+1266:18:Name -> Const:NoneType:None | U
+1266:33:Name -> Dict:1 | Const:bool:False
+1267:10:Call -> U
+1267:10:Name -> Func:salt.modules.gpg._create_gpg
+1267:27:Name -> Const:NoneType:None | U
+1267:43:Name -> Const:NoneType:None | U
+1267:62:Name -> Const:NoneType:None | U
+1270:14:Call -> U
+1270:14:Attribute -> U
+1270:14:Name -> U
+1270:29:Name -> U
+1270:42:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1270:66:Name -> Const:NoneType:None | U
+1271:11:Name -> Class:builtins.AttributeError
+1273:19:Name -> U
+1273:33:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1273:48:Name -> Const:NoneType:None | U
+1274:20:Name -> Const:NoneType:None | U
+1274:33:Call -> U
+1274:33:Name -> Func:salt.modules.gpg._get_user_gnupghome
+1274:53:Name -> Const:NoneType:None | U
+1275:15:Call -> Const:NoneType:None | Const:str:'gpg' | U
+1275:15:Name -> Func:salt.modules.gpg._gpg
+1275:36:Name -> U
+1276:24:Name -> Const:NoneType:None | U
+1276:16:Name -> Const:NoneType:None | U
+1278:11:Name -> Const:NoneType:None | U
+1279:19:Call -> ERR
+1279:19:Name -> Func:builtins.isinstance
+1279:30:Name -> U
+1279:39:Name -> Class:builtins.str
+1280:22:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1280:22:Name -> Class:salt.exceptions.SaltInvocationError
+1283:12:Call -> ERR
+1283:12:Attribute -> BM:builtins.list.extend
+1283:12:Name -> List:4
+1283:61:Name -> U
+1285:14:Call -> ERR
+1285:14:Name -> ERR
+1285:38:Name -> List:4
+1285:49:Name -> Const:str:'Uninferable:Instance of salt.utils.immu | Const:str:'Uninferable:Uninferable\n'
+1285:62:Name -> Const:NoneType:None | U | Const:NoneType:None
+1287:15:Name -> U
+1288:12:Name -> Dict:2
+1289:12:Name -> Dict:2
+1289:29:Name -> U
+1291:15:Name -> U
+1292:25:Call -> U
+1292:25:Attribute -> Func:re.findall
+1292:25:Name -> Module:re
+1292:43:Name -> U
+1293:19:Call -> ERR
+1293:19:Name -> Func:builtins.len
+1293:23:Name -> U
+1294:20:Name -> Dict:2
+1294:41:Name -> U
+1295:20:Name -> Dict:2
+1295:37:Call -> U
+1295:37:Attribute -> BM:builtins.str.format
+1296:24:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1296:43:Name -> U
+1296:55:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1296:74:Name -> U
+1299:20:Name -> Dict:2
+1299:41:Name -> U
+1300:20:Name -> Dict:2
+1300:37:Call -> U
+1300:37:Attribute -> BM:builtins.str.format
+1301:24:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1301:43:Name -> U
+1304:16:Name -> Dict:2
+1304:33:Name -> U
+1306:11:Attribute -> U
+1306:11:Name -> U
+1307:12:Name -> Dict:2
+1308:12:Name -> Dict:2
+1308:33:Name -> U
+1309:12:Name -> Dict:2
+1309:29:Call -> U
+1309:29:Attribute -> BM:builtins.str.format
+1310:16:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1310:35:Name -> Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6
+1310:50:Name -> Const:NoneType:None | U
+1313:12:Name -> Dict:2
+1314:12:Name -> Dict:2
+1314:29:Attribute -> U
+1314:29:Name -> U
+1316:11:Name -> Dict:2
+1374:7:Name -> Const:bool:False | U
+1375:25:Call -> ERR
+1375:25:Name -> ERR
+1376:15:Name -> U
+1377:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1377:18:Name -> Class:salt.exceptions.SaltInvocationError
+1381:10:Call -> U
+1381:10:Name -> Func:salt.modules.gpg._create_gpg
+1381:27:Name -> Const:NoneType:None | U
+1381:43:Name -> Const:NoneType:None | U
+1381:62:Name -> Const:NoneType:None | U
+1383:7:Name -> Const:NoneType:None | U
+1384:22:Call -> U
+1384:22:Attribute -> U
+1384:22:Name -> U
+1384:31:Name -> U
+1384:43:Name -> Const:NoneType:None | U
+1384:61:Name -> U | Const:NoneType:None
+1385:9:Name -> Const:NoneType:None | U
+1386:13:Call -> Gen:salt.utils.files.flopen
+1386:13:Attribute -> Func:salt.utils.files.flopen
+1386:13:Attribute -> Module:salt.utils.files
+1386:13:Attribute -> Module:salt.utils
+1386:13:Name -> Module:salt
+1386:37:Name -> U
+1387:26:Call -> U
+1387:26:Attribute -> U
+1387:26:Name -> U
+1387:40:Name -> U
+1387:51:Name -> Const:NoneType:None | U
+1387:69:Name -> U | Const:NoneType:None
+1388:11:Name -> Const:NoneType:None | U
+1389:17:Call -> Gen:salt.utils.files.flopen
+1389:17:Attribute -> Func:salt.utils.files.flopen
+1389:17:Attribute -> Module:salt.utils.files
+1389:17:Attribute -> Module:salt.utils
+1389:17:Name -> Module:salt
+1389:41:Name -> U
+1390:16:Call -> U
+1390:16:Attribute -> U
+1390:16:Name -> U
+1390:27:Call -> U | Inst:builtins.bytes
+1390:27:Attribute -> Func:salt.utils.stringutils.to_bytes
+1390:27:Attribute -> Module:salt.utils.stringutils
+1390:27:Attribute -> Module:salt.utils
+1390:27:Name -> Module:salt
+1390:59:Attribute -> U
+1390:59:Name -> U
+1392:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1392:14:Name -> Class:salt.exceptions.SaltInvocationError
+1394:11:Attribute -> U
+1394:11:Name -> U
+1475:7:Name -> Const:NoneType:None | U
+1475:22:Name -> Const:NoneType:None | U
+1475:40:Name -> Tuple:7
+1476:14:Call -> U
+1476:14:Attribute -> BM:builtins.str.format
+1477:12:Name -> Const:NoneType:None | U
+1477:24:Call -> Const:str:''
+1477:24:Attribute -> BM:builtins.str.join
+1477:34:Name -> Tuple:7
+1479:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1479:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1479:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1479:20:Name -> U
+1480:41:Name -> U
+1482:10:Call -> U
+1482:10:Name -> Func:salt.modules.gpg._create_gpg
+1482:27:Name -> Const:NoneType:None | U
+1482:43:Name -> Const:NoneType:None | U
+1482:62:Name -> Const:NoneType:None | U
+1485:7:Name -> Const:NoneType:None | U
+1486:8:Call -> ERR
+1486:8:Attribute -> BM:builtins.list.extend
+1486:8:Name -> List:0
+1486:44:Name -> U
+1488:7:Name -> Const:NoneType:None | U
+1488:24:Name -> Const:NoneType:None | U
+1491:8:Call -> ERR
+1491:8:Attribute -> BM:builtins.list.append
+1491:8:Name -> List:0
+1494:11:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+1494:11:Attribute -> Func:salt.utils.versions.version_cmp
+1494:11:Attribute -> Module:salt.utils.versions
+1494:11:Attribute -> Module:salt.utils
+1494:11:Name -> Module:salt
+1494:43:Attribute -> U
+1494:43:Name -> U
+1495:12:Attribute -> U
+1495:12:Name -> U
+1495:39:Name -> Class:salt.modules.gpg.FixedVerify
+1497:7:Name -> Const:NoneType:None | U
+1498:19:Call -> U
+1498:19:Attribute -> U
+1498:19:Name -> U
+1498:30:Name -> U
+1498:47:Name -> List:0
+1499:9:Name -> Const:NoneType:None | U
+1500:11:Name -> Const:NoneType:None | U
+1503:17:Call -> U
+1503:17:Attribute -> Func:salt.utils.files.fopen
+1503:17:Attribute -> Module:salt.utils.files
+1503:17:Attribute -> Module:salt.utils
+1503:17:Name -> Module:salt
+1503:40:Name -> U
+1504:27:Call -> U
+1504:27:Attribute -> U
+1504:27:Name -> U
+1504:43:Name -> U
+1504:48:Name -> U
+1504:69:Name -> List:0
+1506:17:Call -> Gen:salt.utils.files.flopen
+1506:17:Attribute -> Func:salt.utils.files.flopen
+1506:17:Attribute -> Module:salt.utils.files
+1506:17:Attribute -> Module:salt.utils
+1506:17:Name -> Module:salt
+1506:41:Name -> U
+1507:27:Call -> U
+1507:27:Attribute -> U
+1507:27:Name -> U
+1507:43:Name -> U
+1507:59:Name -> List:0
+1509:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1509:14:Name -> Class:salt.exceptions.SaltInvocationError
+1511:12:Name -> Const:NoneType:None | U
+1511:29:Name -> Const:NoneType:None | U
+1513:11:Attribute -> U
+1513:11:Name -> U
+1514:12:Name -> Dict:0
+1515:12:Name -> Dict:0
+1515:30:Attribute -> U
+1515:30:Name -> U
+1516:12:Name -> Dict:0
+1516:28:Attribute -> U
+1516:28:Name -> U
+1517:12:Name -> Dict:0
+1517:33:Name -> Dict:0 | Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6 | Dict:5
+1517:53:Call -> Const:str:''
+1517:53:Name -> Class:builtins.str
+1517:57:Attribute -> U
+1517:57:Name -> U
+1518:12:Name -> Dict:0
+1520:12:Name -> Dict:0
+1521:12:Name -> Dict:0
+1523:15:Name -> Dict:0
+1527:24:Call -> U
+1527:24:Attribute -> U
+1527:24:Name -> U
+1528:22:Name -> U
+1529:27:Name -> U
+1532:36:Name -> U
+1531:16:Name -> Dict:0 | Inst:salt.utils.immutabletypes.ImmutableDict | Inst:salt.utils.immutabletypes.ImmutableList | Inst:salt.utils.immutabletypes.ImmutableSet | Dict:6 | Dict:5
+1531:36:Call -> Const:str:''
+1531:36:Name -> Class:builtins.str
+1531:40:Name -> U
+1535:22:Name -> U
+1537:19:Call -> U
+1537:19:Attribute -> U
+1537:19:Attribute -> U
+1537:19:Name -> U
+1539:54:Name -> U
+1544:7:Name -> Const:NoneType:None | U
+1545:15:Call -> ERR
+1545:15:Name -> Func:builtins.isinstance
+1545:26:Name -> U
+1545:41:Name -> Class:builtins.list
+1546:29:Name -> U
+1548:22:Name -> U | List:1
+1549:21:Call -> Const:str:''
+1549:21:Name -> Class:builtins.str
+1549:25:Name -> U
+1551:19:Call -> ERR
+1551:19:Name -> Func:builtins.any
+1552:20:Name -> U
+1552:53:Call -> Const:str:''
+1552:53:Name -> Class:builtins.str
+1552:57:Name -> U
+1552:78:Name -> U | Const:str:''
+1553:29:Name -> U
+1557:20:Name -> Class:builtins.KeyError
+1557:30:Name -> Class:builtins.IndexError
+1560:15:Name -> Const:bool:False | Const:bool:True
+1561:12:Name -> Dict:0 | Dict:3
+1562:12:Name -> Dict:0 | Dict:3
+1565:19:Name -> Dict:0 | Dict:3
+1568:7:Name -> Const:NoneType:None | U
+1569:15:Call -> ERR
+1569:15:Name -> Func:builtins.isinstance
+1569:26:Name -> U
+1569:41:Name -> Class:builtins.list
+1570:29:Name -> U
+1571:22:Name -> U | List:1
+1572:21:Call -> Const:str:''
+1572:21:Name -> Class:builtins.str
+1572:25:Name -> U
+1574:19:Call -> ERR
+1574:19:Name -> Func:builtins.any
+1575:20:Name -> U
+1575:53:Call -> Const:str:''
+1575:53:Name -> Class:builtins.str
+1575:57:Name -> U
+1575:78:Name -> U | Const:str:''
+1576:29:Name -> U
+1579:20:Name -> Class:builtins.KeyError
+1579:30:Name -> Class:builtins.IndexError
+1581:12:Name -> Dict:0 | Dict:3
+1582:12:Name -> Dict:0 | Dict:3
+1583:30:Name -> Const:str:''
+1585:19:Name -> Dict:0 | Dict:3
+1588:7:Call -> Const:bool:False
+1588:7:Name -> Class:builtins.bool
+1588:12:Name -> Const:NoneType:None | U | List:1
+1588:30:Name -> Const:bool:False | Const:bool:True
+1588:44:Call -> Const:bool:False
+1588:44:Name -> Class:builtins.bool
+1588:49:Name -> Const:NoneType:None | U | List:1
+1588:67:Name -> Const:bool:False | Const:bool:True
+1589:8:Name -> Dict:0 | Dict:3
+1590:8:Name -> Dict:0 | Dict:3
+1591:15:Name -> Dict:0 | Dict:3
+1593:4:Name -> Dict:3
+1594:4:Name -> Dict:3
+1597:11:Name -> Dict:3
+1673:7:Name -> Const:NoneType:None | U
+1673:16:Name -> Const:bool:False | U
+1674:25:Call -> ERR
+1674:25:Name -> ERR
+1675:15:Name -> U
+1676:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1676:18:Name -> Class:salt.exceptions.SaltInvocationError
+1680:10:Call -> U
+1680:10:Name -> Func:salt.modules.gpg._create_gpg
+1680:27:Name -> Const:NoneType:None | U
+1680:43:Name -> Const:NoneType:None | U
+1680:62:Name -> Const:NoneType:None | U
+1682:7:Name -> Const:NoneType:None | U
+1683:17:Call -> U
+1683:17:Attribute -> U
+1683:17:Name -> U
+1684:12:Name -> U
+1685:12:Name -> Const:NoneType:None | U
+1686:17:Name -> Const:NoneType:None | U
+1687:23:Name -> U | Const:NoneType:None
+1688:25:Name -> Const:bool:False | U
+1689:19:Name -> Const:NoneType:None | U
+1691:9:Name -> Const:NoneType:None | U
+1692:13:Call -> Gen:salt.utils.files.flopen
+1692:13:Attribute -> Func:salt.utils.files.flopen
+1692:13:Attribute -> Module:salt.utils.files
+1692:13:Attribute -> Module:salt.utils
+1692:13:Name -> Module:salt
+1692:37:Name -> U
+1693:21:Call -> U
+1693:21:Attribute -> U
+1693:21:Name -> U
+1694:16:Name -> U
+1695:16:Name -> Const:NoneType:None | U
+1696:21:Name -> Const:NoneType:None | U
+1697:27:Name -> U | Const:NoneType:None
+1698:29:Name -> Const:bool:False | U
+1699:23:Name -> Const:NoneType:None | U
+1702:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1702:14:Name -> Class:salt.exceptions.SaltInvocationError
+1704:7:Attribute -> U
+1704:7:Name -> U
+1705:15:Name -> Const:bool:False | U
+1706:15:Name -> Const:NoneType:None | U
+1707:16:Name -> Dict:2
+1707:71:Name -> U
+1709:16:Name -> Dict:2
+1709:33:Attribute -> U
+1709:33:Name -> U
+1711:18:Attribute -> U
+1711:18:Name -> U
+1713:15:Name -> Const:bool:False | U
+1714:12:Name -> Dict:2
+1715:12:Name -> Dict:2
+1715:32:Attribute -> U
+1715:32:Name -> U
+1719:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1719:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1719:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1719:18:Attribute -> U
+1719:18:Name -> U
+1721:11:Name -> Dict:2 | U | Const:bool:False
+1778:7:Name -> Const:bool:False | U
+1779:25:Call -> ERR
+1779:25:Name -> ERR
+1780:15:Name -> U
+1781:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1781:18:Name -> Class:salt.exceptions.SaltInvocationError
+1785:10:Call -> U
+1785:10:Name -> Func:salt.modules.gpg._create_gpg
+1785:27:Name -> Const:NoneType:None | U
+1785:43:Name -> Const:NoneType:None | U
+1785:62:Name -> Const:NoneType:None | U
+1787:7:Name -> Const:NoneType:None | U
+1788:17:Call -> U
+1788:17:Attribute -> U
+1788:17:Name -> U
+1788:29:Name -> U
+1788:46:Name -> U | Const:NoneType:None
+1789:9:Name -> Const:NoneType:None | U
+1790:13:Call -> Gen:salt.utils.files.flopen
+1790:13:Attribute -> Func:salt.utils.files.flopen
+1790:13:Attribute -> Module:salt.utils.files
+1790:13:Attribute -> Module:salt.utils
+1790:13:Name -> Module:salt
+1790:37:Name -> U
+1791:15:Name -> Const:NoneType:None | U
+1792:25:Call -> U
+1792:25:Attribute -> U
+1792:25:Name -> U
+1792:42:Name -> U
+1792:58:Name -> U | Const:NoneType:None
+1792:81:Name -> U
+1794:25:Call -> U
+1794:25:Attribute -> U
+1794:25:Name -> U
+1794:42:Name -> U
+1794:58:Name -> U | Const:NoneType:None
+1796:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+1796:14:Name -> Class:salt.exceptions.SaltInvocationError
+1798:7:Attribute -> U
+1798:7:Name -> U
+1799:15:Name -> Const:bool:False | U
+1800:15:Name -> Const:NoneType:None | U
+1801:16:Name -> Dict:2
+1801:71:Name -> U
+1803:16:Name -> Dict:2
+1803:33:Attribute -> U
+1803:33:Name -> U
+1805:18:Attribute -> U
+1805:18:Name -> U
+1807:15:Name -> Const:bool:False | U
+1808:12:Name -> Dict:2
+1809:12:Name -> Dict:2
+1809:32:Attribute -> U
+1809:32:Name -> U
+1813:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1813:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1813:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1813:18:Attribute -> U
+1813:18:Name -> U
+1815:11:Name -> Dict:2 | U | Const:bool:False
+1818:3:Name -> Const:bool:True | Const:bool:False
+1820:22:Attribute -> U
+1820:22:Name -> U
+1830:27:Name -> U
+1831:16:Name -> Inst:salt.modules.gpg.FixedVerify
+1832:12:Call -> ERR
+1832:12:Attribute -> ERR
+1832:12:Call -> Super
+1832:12:Name -> Class:builtins.super
+1832:34:Name -> U
+1832:39:Name -> U
+1833:15:Name -> U
+1833:22:Attribute -> ERR
+1833:22:Name -> Inst:salt.modules.gpg.FixedVerify
+1834:16:Name -> Inst:salt.modules.gpg.FixedVerify

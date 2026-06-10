@@ -1,0 +1,288 @@
+26:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+26:6:Attribute -> Func:logging.getLogger
+26:6:Name -> Module:logging
+26:24:Name -> Const:str:'tools.testsuite.download' | Const:str:'__main__'
+30:11:Call -> U
+30:11:Name -> U
+33:16:Name -> Const:str:'\nThese commands are related to downloa
+39:7:Attribute -> Const:str:'darwin'
+39:7:Name -> Module:sys
+41:9:Attribute -> Const:str:'darwin'
+41:9:Name -> Module:sys
+43:9:Attribute -> Const:str:'darwin'
+43:9:Name -> Module:sys
+49:7:Call -> U
+49:7:Attribute -> Func:platform.machine
+49:7:Name -> Module:platform
+54:1:Call -> U
+54:1:Attribute -> U
+54:1:Name -> U
+64:23:Call -> Const:str:'linux' | Const:str:'windows' | Const:str:'macos' | Const:str:'unknown'
+64:23:Name -> Func:tools.testsuite.download.default_platform
+76:9:Name -> U
+77:12:Name -> Class:builtins.int
+78:14:Name -> Class:builtins.str
+79:10:Name -> Class:builtins.str
+80:16:Name -> Class:builtins.str
+85:7:Name -> Const:bool:False
+86:15:Name -> Const:NoneType:None | U
+87:15:Name -> Const:NoneType:None | U
+89:15:Call -> Inst:tools.utils.ExitCode.FAIL | Inst:tools.utils.ExitCode.SOFT_FAIL | Inst:tools.utils.ExitCode.OK
+89:15:Attribute -> Func:tools.utils.gh.download_onedir_artifact
+89:15:Attribute -> Module:tools.utils.gh
+89:15:Attribute -> Module:tools.utils
+89:15:Name -> Module:tools
+90:12:Name -> U
+90:24:Name -> Const:NoneType:None | U
+90:41:Name -> Const:NoneType:None | U
+90:56:Name -> Const:str:'x86_64' | U
+90:73:Name -> Const:str:'saltstack/salt' | U
+92:4:Call -> U
+92:4:Attribute -> U
+92:4:Name -> U
+92:13:Name -> Inst:tools.utils.ExitCode.FAIL | Inst:tools.utils.ExitCode.SOFT_FAIL | Inst:tools.utils.ExitCode.OK
+95:1:Call -> U
+95:1:Attribute -> U
+95:1:Name -> U
+121:9:Name -> U
+122:12:Name -> Class:builtins.int
+123:14:Name -> Class:builtins.str
+124:10:Name -> Class:builtins.str
+125:13:Name -> Class:builtins.str
+126:16:Name -> Class:builtins.str
+131:7:Name -> Const:bool:False
+132:15:Name -> Const:NoneType:None | U
+133:15:Name -> Const:NoneType:None | U
+134:15:Name -> Const:NoneType:None | U
+136:15:Call -> Inst:tools.utils.ExitCode.FAIL | Inst:tools.utils.ExitCode.SOFT_FAIL | Inst:tools.utils.ExitCode.OK
+136:15:Attribute -> Func:tools.utils.gh.download_nox_artifact
+136:15:Attribute -> Module:tools.utils.gh
+136:15:Attribute -> Module:tools.utils
+136:15:Name -> Module:tools
+137:12:Name -> U
+138:15:Name -> Const:NoneType:None | U
+139:17:Name -> Const:NoneType:None | U
+140:13:Name -> Const:NoneType:None | U
+141:16:Name -> Const:str:'ci-test-onedir' | U
+142:19:Name -> Const:str:'saltstack/salt' | U
+144:4:Call -> U
+144:4:Attribute -> U
+144:4:Name -> U
+144:13:Name -> Inst:tools.utils.ExitCode.FAIL | Inst:tools.utils.ExitCode.SOFT_FAIL | Inst:tools.utils.ExitCode.OK
+147:1:Call -> U
+147:1:Attribute -> U
+147:1:Name -> U
+157:23:Call -> ERR
+157:23:Name -> Func:builtins.sorted
+157:30:Call -> List:0
+157:30:Name -> Func:tools.precommit.workflows.slugs
+165:9:Name -> U
+166:12:Name -> Class:builtins.int
+167:10:Name -> Class:builtins.str
+168:16:Name -> Class:builtins.str
+173:7:Name -> Const:bool:False
+174:15:Name -> Const:NoneType:None | U
+175:15:Name -> Const:NoneType:None | U
+177:15:Call -> Inst:tools.utils.ExitCode.FAIL | Inst:tools.utils.ExitCode.OK
+177:15:Attribute -> Func:tools.utils.gh.download_pkgs_artifact
+177:15:Attribute -> Module:tools.utils.gh
+177:15:Attribute -> Module:tools.utils
+177:15:Name -> Module:tools
+178:12:Name -> U
+178:24:Name -> Const:NoneType:None | U
+178:37:Name -> Const:NoneType:None | U
+178:54:Name -> Const:str:'saltstack/salt' | U
+180:4:Call -> U
+180:4:Attribute -> U
+180:4:Name -> U
+180:13:Name -> Inst:tools.utils.ExitCode.FAIL | Inst:tools.utils.ExitCode.OK
+183:1:Call -> U
+183:1:Attribute -> U
+183:1:Name -> U
+213:9:Name -> U
+214:19:Attribute -> Class:pathlib.Path
+214:19:Name -> Module:pathlib
+215:10:Attribute -> Class:pathlib.Path
+215:10:Name -> Module:pathlib
+216:12:Name -> Class:builtins.int
+217:12:Name -> Class:builtins.str
+218:13:Name -> Class:builtins.str
+219:8:Name -> Class:builtins.int
+220:16:Name -> Class:builtins.str
+225:7:Name -> Const:bool:False
+226:15:Name -> U
+227:15:Name -> U
+229:7:Name -> Const:NoneType:None | U
+230:24:Name -> U
+232:27:Call -> Const:NoneType:None | U
+232:27:Attribute -> Func:tools.utils.gh.discover_run_id
+232:27:Attribute -> Module:tools.utils.gh
+232:27:Attribute -> Module:tools.utils
+232:27:Name -> Module:tools
+233:12:Name -> U
+233:24:Name -> Const:NoneType:None | U
+233:40:Name -> Const:NoneType:None | U
+233:52:Name -> Const:NoneType:None | U
+233:67:Name -> Const:str:'saltstack/salt' | U
+235:11:Name -> Const:NoneType:None | U
+236:28:Name -> U
+238:12:Call -> U
+238:12:Attribute -> U
+238:12:Name -> U
+240:16:Call -> Const:NoneType:None | U
+240:16:Attribute -> Func:tools.utils.gh.download_artifact
+240:16:Attribute -> Module:tools.utils.gh
+240:16:Attribute -> Module:tools.utils
+240:16:Name -> Module:tools
+241:8:Name -> U
+242:8:Name -> U
+243:8:Name -> U
+244:19:Name -> Const:str:'saltstack/salt' | U
+245:22:Call -> Const:str:''
+245:22:Name -> Class:builtins.str
+245:26:Name -> U
+247:7:Name -> Const:bool:False
+248:15:Name -> Const:NoneType:None | U
+249:4:Call -> U
+249:4:Attribute -> U
+249:4:Name -> U
+249:13:Name -> Const:NoneType:None | U
+250:7:Name -> Const:NoneType:None | U
+251:8:Call -> U
+251:8:Attribute -> U
+251:8:Name -> U
+251:31:Name -> U
+251:50:Name -> U
+252:8:Call -> U
+252:8:Attribute -> U
+252:8:Name -> U
+254:8:Call -> U
+254:8:Attribute -> U
+254:8:Name -> U
+257:1:Call -> U
+257:1:Attribute -> U
+257:1:Name -> U
+272:9:Name -> U
+273:12:Name -> Class:builtins.str
+274:10:Name -> Class:builtins.str
+275:16:Name -> Class:builtins.str
+282:20:Name -> List:3
+283:17:Name -> Inst:tools.utils.PlatformDefinitions
+283:35:Name -> Const:str:'linux' | Const:str:'macos' | Const:str:'windows'
+284:15:Attribute -> U
+284:15:Name -> U
+284:25:Name -> U
+285:16:Call -> U
+285:16:Attribute -> U
+285:16:Name -> U
+285:54:Name -> U
+286:26:Name -> U
+292:11:Name -> Const:NoneType:None | U
+293:24:Name -> List:3
+294:21:Name -> Inst:tools.utils.PlatformDefinitions
+294:43:Name -> Const:str:'linux' | Const:str:'macos' | Const:str:'windows'
+295:19:Attribute -> U
+295:19:Name -> U
+295:29:Name -> U
+296:20:Call -> U
+296:20:Attribute -> U
+296:20:Name -> U
+296:64:Name -> U
+297:30:Name -> U
+299:15:Name -> Const:NoneType:None | U
+302:11:Name -> Const:NoneType:None | U
+303:8:Call -> U
+303:8:Attribute -> U
+303:8:Name -> U
+303:54:Name -> U
+304:8:Call -> U
+304:8:Attribute -> U
+304:8:Name -> U
+307:20:Name -> List:3
+308:17:Name -> Inst:tools.utils.PlatformDefinitions
+308:39:Name -> Const:str:'linux' | Const:str:'macos' | Const:str:'windows'
+309:15:Attribute -> U
+309:15:Name -> U
+309:25:Name -> U
+310:16:Call -> U
+310:16:Attribute -> U
+310:16:Name -> U
+310:49:Name -> U
+311:16:Call -> ERR
+311:16:Attribute -> BM:builtins.list.append
+311:16:Name -> List:0
+311:30:Name -> U
+314:19:Name -> Const:str:'linux' | Const:str:'macos' | Const:str:'windows'
+317:11:Name -> List:0
+318:8:Call -> U
+318:8:Attribute -> U
+318:8:Name -> U
+318:52:Name -> U
+327:29:Attribute -> U
+327:29:Name -> Const:NoneType:None | U
+327:48:Attribute -> U
+327:48:Name -> Const:NoneType:None | U
+329:22:Attribute -> U
+329:22:Name -> Const:NoneType:None | U
+329:41:Attribute -> U
+329:41:Name -> Const:NoneType:None | U
+331:7:Name -> List:0
+332:17:Name -> U
+334:12:Call -> ERR
+334:12:Attribute -> BM:builtins.list.append
+334:12:Name -> List:2
+334:58:Attribute -> U
+334:58:Name -> U
+334:67:Attribute -> U
+334:67:Name -> U
+335:31:Name -> List:2
+336:20:Call -> Const:NoneType:None | U
+336:20:Attribute -> Func:tools.utils.gh.download_artifact
+336:20:Attribute -> Module:tools.utils.gh
+336:20:Attribute -> Module:tools.utils
+336:20:Name -> Module:tools
+337:12:Name -> U
+338:12:Call -> Inst:pathlib.Path
+338:12:Attribute -> Class:pathlib.Path
+338:12:Name -> Module:pathlib
+338:25:Name -> Const:str:'artifacts/' | Const:str:'./'
+339:12:Call -> Inst:builtins.int
+339:12:Name -> Class:builtins.int
+339:16:Name -> U
+340:23:Name -> Const:str:'saltstack/salt' | U
+341:26:Name -> Const:str:'salt-*-onedir-Uninferable-Uninferable.t | Const:str:'nox-Uninferable-Uninferable-ci-test-one
+343:11:Name -> Const:NoneType:None | U
+344:12:Call -> U
+344:12:Attribute -> U
+344:12:Name -> U
+344:35:Name -> U
+344:50:Name -> Const:str:'artifacts/' | Const:str:'./'
+346:12:Call -> U
+346:12:Attribute -> U
+346:12:Name -> U
+347:12:Call -> U
+347:12:Attribute -> U
+347:12:Name -> U
+348:11:Call -> U
+348:11:Attribute -> U
+348:11:Name -> Const:NoneType:None | U
+349:12:Call -> U
+349:12:Attribute -> U
+349:12:Name -> U
+349:35:Name -> Const:NoneType:None | U
+349:50:Name -> Const:str:'artifacts/' | Const:str:'./'
+350:23:Call -> Inst:pathlib.Path
+350:23:Attribute -> Class:pathlib.Path
+350:23:Name -> Module:pathlib
+350:36:Name -> Const:str:'artifacts/' | Const:str:'./'
+351:17:Call -> U | Inst:tarfile.TarFile
+351:17:Attribute -> BM:tarfile.TarFile.open
+351:17:Name -> Module:tarfile
+351:30:Call -> Const:str:''
+351:30:Name -> Class:builtins.str
+351:34:Name -> Inst:pathlib.Path
+351:45:Name -> Const:NoneType:None | U
+352:16:Call -> U
+352:16:Attribute -> U
+352:16:Name -> U
+352:40:Name -> Const:str:'artifacts/' | Const:str:'./'

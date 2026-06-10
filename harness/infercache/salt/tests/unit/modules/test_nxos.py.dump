@@ -1,0 +1,1035 @@
+47:19:Name -> Class:tests.support.unit.TestCase
+47:29:Name -> Class:tests.support.mixins.LoaderModuleMockMixin
+53:19:Call -> U
+53:19:Name -> U
+54:12:Attribute -> Func:salt.modules.nxos.sendline
+54:12:Name -> Module:salt.modules.nxos
+56:16:Name -> Module:salt.modules.nxos
+56:61:Name -> U
+58:5:Name -> Class:builtins.staticmethod
+62:17:Call -> Const:str:'nxos'
+62:17:Attribute -> Func:salt.modules.nxos.__virtual__
+62:17:Name -> Module:salt.modules.nxos
+63:25:Name -> Const:str:'nxos'
+67:13:Call -> U
+67:13:Name -> U
+68:17:Call -> U
+68:17:Attribute -> U
+68:17:Name -> U
+69:16:Attribute -> ERR
+69:16:Name -> Module:salt.modules.nxos
+69:53:Call -> U
+69:53:Name -> U
+71:25:Call -> U
+71:25:Attribute -> Func:salt.modules.nxos.ping
+71:25:Name -> Module:salt.modules.nxos
+72:16:Call -> Const:NoneType:None
+72:16:Attribute -> BM:unittest.case.TestCase.assertTrue
+72:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+72:32:Name -> U
+77:13:Call -> U
+77:13:Name -> U
+78:17:Call -> U
+78:17:Attribute -> U
+78:17:Name -> U
+79:16:Attribute -> ERR
+79:16:Name -> Module:salt.modules.nxos
+79:53:Call -> U
+79:53:Name -> U
+81:25:Call -> U
+81:25:Attribute -> Func:salt.modules.nxos.ping
+81:25:Name -> Module:salt.modules.nxos
+82:16:Call -> Const:NoneType:None
+82:16:Attribute -> BM:unittest.case.TestCase.assertTrue
+82:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+82:32:Name -> U
+90:13:Call -> U
+90:13:Name -> U
+91:21:Call -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+91:21:Attribute -> Func:salt.modules.nxos.check_password
+91:21:Name -> Module:salt.modules.nxos
+91:48:Name -> Const:str:'admin'
+91:58:Name -> Const:str:'foo'
+92:12:Call -> Const:NoneType:None
+92:12:Attribute -> BM:unittest.case.TestCase.assertIsNone
+92:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+92:30:Name -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+100:13:Call -> U
+100:13:Name -> U
+101:21:Call -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+101:21:Attribute -> Func:salt.modules.nxos.check_password
+101:21:Name -> Module:salt.modules.nxos
+101:48:Name -> Const:str:'admin'
+101:58:Name -> Const:str:'foo'
+102:12:Call -> Const:NoneType:None
+102:12:Attribute -> BM:unittest.case.TestCase.assertFalse
+102:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+102:29:Name -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+104:5:Call -> U
+104:5:Attribute -> U
+104:5:Attribute -> U
+104:5:Name -> U
+105:24:Attribute -> U | Dict:0
+105:24:Attribute -> Module:salt.utils.pycrypto
+105:24:Attribute -> Module:salt.utils
+105:24:Name -> Module:salt
+114:13:Call -> U
+114:13:Name -> U
+116:25:Name -> Const:str:'username salt_test password 5 $5$mkXh6O
+119:21:Call -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+119:21:Attribute -> Func:salt.modules.nxos.check_password
+119:21:Name -> Module:salt.modules.nxos
+119:48:Name -> Const:str:'salt_test'
+119:58:Name -> Const:str:'foobar123&'
+120:12:Call -> Const:NoneType:None
+120:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+120:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+120:28:Name -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+128:13:Call -> U
+128:13:Name -> U
+130:25:Name -> Const:str:'username salt_test password 5 $5$mkXh6O
+133:21:Call -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+133:21:Attribute -> Func:salt.modules.nxos.check_password
+133:21:Name -> Module:salt.modules.nxos
+133:48:Name -> Const:str:'salt_test'
+133:58:Name -> Const:str:'$5$mkXh6O4T$YUVtA89HbXCnue63kgghPlaqPHy
+134:12:Call -> Const:NoneType:None
+134:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+134:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+134:28:Name -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+142:13:Call -> U
+142:13:Name -> U
+143:55:Name -> Const:str:'\n!Command: show running-config\n!Runni
+145:21:Call -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+145:21:Attribute -> Func:salt.modules.nxos.check_password
+145:21:Name -> Module:salt.modules.nxos
+145:48:Name -> Const:str:'salt_test'
+145:58:Name -> Const:str:'foobar123&'
+146:12:Call -> Const:NoneType:None
+146:12:Attribute -> BM:unittest.case.TestCase.assertFalse
+146:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+146:29:Name -> Const:NoneType:None | Const:bool:False | Const:bool:True | Const:bool:False
+154:13:Call -> U
+154:13:Name -> U
+154:63:Name -> List:2
+155:21:Call -> U
+155:21:Attribute -> Func:salt.modules.nxos.check_role
+155:21:Name -> Module:salt.modules.nxos
+155:44:Name -> Const:str:'salt_test'
+156:12:Call -> Const:NoneType:None
+156:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+156:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+156:28:Name -> U
+164:13:Call -> U
+164:13:Name -> U
+164:63:Name -> List:2
+165:21:Call -> U
+165:21:Attribute -> Func:salt.modules.nxos.check_role
+165:21:Name -> Module:salt.modules.nxos
+165:44:Name -> Const:str:'salt_test'
+166:12:Call -> Const:NoneType:None
+166:12:Attribute -> BM:unittest.case.TestCase.assertFalse
+166:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+166:29:Name -> U
+171:13:Call -> U
+171:13:Name -> U
+176:21:Call -> U
+176:21:Attribute -> Func:salt.modules.nxos.check_role
+176:21:Name -> Module:salt.modules.nxos
+179:12:Call -> Const:NoneType:None
+179:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+179:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+179:28:Name -> U
+184:19:Call -> Const:bool:False
+184:19:Name -> Func:builtins.hasattr
+184:27:Name -> Module:salt.modules.nxos
+192:13:Call -> U
+192:13:Name -> U
+193:55:Name -> Const:str:'\n!Command: show running-config\n!Runni
+195:21:Call -> U
+195:21:Attribute -> Func:salt.modules.nxos.find
+195:21:Name -> Module:salt.modules.nxos
+195:38:Name -> Const:str:'^vrf context testing$'
+196:12:Call -> Const:NoneType:None
+196:12:Attribute -> BM:unittest.case.TestCase.assertIn
+196:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+196:26:Name -> Const:str:'vrf context testing'
+196:39:Name -> U
+204:13:Call -> U
+204:13:Name -> U
+205:55:Name -> Const:str:'\n!Command: show running-config\n!Runni
+207:21:Call -> U
+207:21:Attribute -> Func:salt.modules.nxos.find
+207:21:Name -> Module:salt.modules.nxos
+207:38:Name -> Const:str:'^no logging.*$'
+208:12:Call -> Const:NoneType:None
+208:12:Attribute -> BM:unittest.case.TestCase.assertIn
+208:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+208:26:Name -> Const:str:'no logging event link-status enable'
+208:39:Name -> U
+209:12:Call -> Const:NoneType:None
+209:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+209:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+209:29:Call -> ERR
+209:29:Name -> Func:builtins.len
+209:33:Name -> U
+217:13:Call -> U
+217:13:Name -> U
+217:62:Name -> Const:str:''
+218:21:Call -> List:0 | U | List:0
+218:21:Attribute -> Func:salt.modules.nxos.get_roles
+218:21:Name -> Module:salt.modules.nxos
+218:43:Name -> Const:str:'salt_does_not_exist'
+219:12:Call -> Const:NoneType:None
+219:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+219:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+219:29:Name -> List:0 | U | List:0
+227:13:Call -> U
+227:13:Name -> U
+227:62:Name -> Const:str:'salt_test'
+228:23:Name -> Const:str:'\nuser:salt_test\n        this user acc
+228:46:Name -> List:1
+229:21:Call -> U
+229:21:Name -> U
+230:63:Name -> Const:str:'\nuser:salt_test\n        this user acc | List:1
+232:29:Call -> List:0 | U | List:0
+232:29:Attribute -> Func:salt.modules.nxos.get_roles
+232:29:Name -> Module:salt.modules.nxos
+232:51:Name -> Const:str:'salt_test'
+233:20:Call -> Const:NoneType:None
+233:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+233:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+233:37:Call -> U
+233:37:Attribute -> BM:builtins.list.sort | U | BM:builtins.list.sort
+233:37:Name -> List:0 | U | List:0
+233:52:Call -> ERR
+233:52:Attribute -> BM:builtins.list.sort
+233:52:Name -> List:3
+240:13:Call -> U
+240:13:Name -> U
+240:62:Name -> Const:str:'salt_test'
+241:17:Call -> U
+241:17:Name -> U
+242:25:Call -> List:0 | U | List:0
+242:25:Attribute -> Func:salt.modules.nxos.get_roles
+242:25:Name -> Module:salt.modules.nxos
+242:47:Name -> Const:str:'salt_test'
+243:16:Call -> Const:NoneType:None
+243:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+243:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+243:33:Name -> List:0 | U | List:0
+249:26:Name -> List:1
+252:12:Name -> List:1
+253:12:Name -> List:1
+255:17:Call -> U
+255:17:Name -> U
+255:66:Name -> Const:str:'username salt_test password 5 $5$ALIDDA | List:1
+256:25:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+256:25:Attribute -> Func:salt.modules.nxos.get_user
+256:25:Name -> Module:salt.modules.nxos
+256:46:Name -> Const:str:'salt_test'
+257:16:Call -> Const:NoneType:None
+257:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+257:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+257:33:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+257:41:Name -> Const:str:'username salt_test password 5 $5$ALIDDA
+262:8:Attribute -> Dict:1
+262:8:Name -> Module:salt.modules.nxos
+274:13:Call -> U
+274:13:Attribute -> U
+274:13:Name -> U
+275:12:Attribute -> ERR
+275:12:Name -> Module:salt.modules.nxos
+277:42:Call -> U
+277:42:Name -> U
+278:20:Attribute -> Func:salt.utils.nxos.system_info
+278:20:Name -> Module:salt.utils.nxos
+278:57:Name -> Dict:1
+282:17:Call -> U
+282:17:Name -> U
+283:59:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+285:25:Call -> Dict:0
+285:25:Attribute -> Func:salt.modules.nxos.grains
+285:25:Name -> Module:salt.modules.nxos
+286:16:Call -> Const:NoneType:None
+286:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+286:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+286:33:Name -> Dict:0
+286:41:Name -> Dict:3
+302:8:Attribute -> Dict:1
+302:8:Name -> Module:salt.modules.nxos
+302:53:Name -> Dict:3
+303:13:Call -> U
+303:13:Attribute -> U
+303:13:Name -> U
+304:12:Attribute -> ERR
+304:12:Name -> Module:salt.modules.nxos
+306:42:Call -> U
+306:42:Name -> U
+307:20:Attribute -> Func:salt.utils.nxos.system_info
+307:20:Name -> Module:salt.utils.nxos
+307:57:Name -> Dict:1
+311:17:Call -> U
+311:17:Name -> U
+312:59:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+314:25:Call -> Dict:0
+314:25:Attribute -> Func:salt.modules.nxos.grains
+314:25:Name -> Module:salt.modules.nxos
+315:16:Call -> Const:NoneType:None
+315:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+315:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+315:33:Name -> Dict:0
+315:41:Name -> Dict:3
+332:13:Call -> U
+332:13:Name -> U
+333:53:Name -> Dict:3
+335:21:Call -> Dict:0
+335:21:Attribute -> Func:salt.modules.nxos.grains_refresh
+335:21:Name -> Module:salt.modules.nxos
+336:12:Call -> Const:NoneType:None
+336:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+336:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+336:29:Name -> Dict:0
+336:37:Name -> Dict:3
+341:17:Call -> Dict:0 | Dict:1
+341:17:Attribute -> Func:salt.utils.nxos.system_info
+341:17:Name -> Module:salt.utils.nxos
+341:40:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+342:8:Call -> Const:NoneType:None
+342:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+342:8:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+342:25:Name -> Dict:0 | Dict:1
+342:33:Name -> Dict:1
+351:17:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+351:17:Attribute -> Func:salt.modules.nxos.sendline
+351:17:Name -> Module:salt.modules.nxos
+351:38:Name -> Const:str:'show version'
+351:47:Name -> Const:str:'invalid'
+353:8:Call -> Const:NoneType:None
+353:8:Attribute -> BM:unittest.case.TestCase.assertIn
+353:8:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+353:37:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+361:13:Call -> U
+361:13:Name -> U
+362:17:Call -> U
+362:17:Attribute -> U
+362:17:Name -> U
+363:16:Attribute -> ERR
+363:16:Name -> Module:salt.modules.nxos
+364:34:Call -> U
+364:34:Name -> U
+364:57:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+366:25:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+366:25:Attribute -> Func:salt.modules.nxos.sendline
+366:25:Name -> Module:salt.modules.nxos
+366:46:Name -> Const:str:'show version'
+366:55:Name -> Const:str:'cli_show_ascii'
+367:16:Call -> Const:NoneType:None
+367:16:Attribute -> BM:unittest.case.TestCase.assertIn
+367:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+367:30:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+367:44:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+375:13:Call -> U
+375:13:Name -> U
+375:51:Call -> U
+375:51:Name -> U
+376:17:Call -> U
+376:17:Name -> U
+378:29:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+381:25:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+381:25:Attribute -> Func:salt.modules.nxos.sendline
+381:25:Name -> Module:salt.modules.nxos
+381:46:Name -> Const:str:'show version'
+381:55:Name -> Const:str:'cli_show_ascii'
+382:16:Call -> Const:NoneType:None
+382:16:Attribute -> BM:unittest.case.TestCase.assertIn
+382:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+382:30:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+382:44:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+388:17:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+388:17:Attribute -> Func:salt.modules.nxos.sendline
+388:17:Name -> Module:salt.modules.nxos
+388:38:Name -> Const:str:'show version'
+389:8:Call -> Const:NoneType:None
+389:8:Attribute -> BM:unittest.case.TestCase.assertIn
+389:8:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+389:37:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+396:13:Call -> U
+396:13:Name -> U
+397:70:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+399:21:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+399:21:Attribute -> Func:salt.modules.nxos.sendline
+399:21:Name -> Module:salt.modules.nxos
+399:42:Name -> Const:str:'show version'
+400:12:Call -> Const:NoneType:None
+400:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+400:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+400:29:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+400:37:Name -> Const:str:'\nCisco Nexus Operating System (NX-OS) 
+408:13:Call -> U
+408:13:Name -> U
+408:77:Name -> List:2
+409:21:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+409:21:Attribute -> Func:salt.modules.nxos.sendline
+409:21:Name -> Module:salt.modules.nxos
+409:42:Name -> Const:str:'show bgp sessions ; show processes'
+410:12:Call -> Const:NoneType:None
+410:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+410:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+410:29:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+410:37:Name -> List:2
+417:13:Call -> U
+417:13:Name -> U
+420:25:Name -> List:2
+422:21:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+422:21:Attribute -> Func:salt.modules.nxos.sendline
+422:21:Name -> Module:salt.modules.nxos
+422:42:Name -> Const:str:'show version; show interface eth1/1'
+423:12:Call -> Const:NoneType:None
+423:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+423:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+423:29:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+423:40:Name -> List:2
+424:12:Call -> Const:NoneType:None
+424:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+424:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+424:29:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+424:40:Name -> List:2
+431:13:Call -> U
+431:13:Name -> U
+434:25:Name -> List:2
+436:21:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+436:21:Attribute -> Func:salt.modules.nxos.sendline
+436:21:Name -> Module:salt.modules.nxos
+436:42:Name -> Const:str:'show version; show interface eth1/1'
+437:12:Call -> Const:NoneType:None
+437:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+437:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+437:29:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+437:40:Name -> List:2
+438:12:Call -> Const:NoneType:None
+438:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+438:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+438:29:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+438:40:Name -> List:2
+443:26:Name -> List:1
+445:19:Name -> List:1
+445:52:Name -> List:1
+446:17:Call -> U
+446:17:Name -> U
+446:81:Name -> Const:str:'\n!Command: show running-config\n!No co | List:1
+447:25:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+447:25:Attribute -> Func:salt.modules.nxos.show_run
+447:25:Name -> Module:salt.modules.nxos
+448:16:Call -> Const:NoneType:None
+448:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+448:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+448:33:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+448:41:Name -> Const:str:'\n!Command: show running-config\n!No co
+453:26:Name -> List:1
+455:19:Name -> List:1
+455:41:Name -> List:1
+456:17:Call -> U
+456:17:Name -> U
+456:81:Name -> Const:str:'Cisco Nexus Operating System (NX-OS) So | List:1
+457:25:Call -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+457:25:Attribute -> Func:salt.modules.nxos.show_ver
+457:25:Name -> Module:salt.modules.nxos
+458:16:Call -> Const:NoneType:None
+458:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+458:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+458:33:Name -> U | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N
+458:41:Name -> Const:str:'Cisco Nexus Operating System (NX-OS) So
+470:23:Name -> List:2
+471:17:Call -> U
+471:17:Name -> U
+474:29:Name -> List:1
+474:45:Name -> List:1
+476:27:Call -> U
+476:27:Name -> U
+477:20:Attribute -> Func:salt.modules.file.apply_template_on_contents
+477:20:Name -> Module:salt.modules.file
+478:33:Name -> Const:str:'no feature ospf'
+480:21:Call -> U
+480:21:Attribute -> U
+480:21:Name -> U
+481:20:Attribute -> ERR
+481:20:Name -> Module:salt.modules.nxos
+481:78:Name -> U
+483:25:Call -> U
+483:25:Name -> U
+486:37:Name -> List:2
+488:33:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+488:33:Attribute -> Func:salt.modules.nxos.config
+488:33:Name -> Module:salt.modules.nxos
+488:52:Name -> Const:str:'no feature ospf' | List:1
+489:24:Call -> Const:NoneType:None
+489:24:Attribute -> BM:unittest.case.TestCase.assertEqual
+489:24:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+489:41:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+489:49:Name -> Const:str:'COMMAND_LIST: no feature ospf\n\n--- \n
+501:23:Name -> List:2
+502:17:Call -> U
+502:17:Name -> U
+505:29:Name -> List:1
+505:45:Name -> List:1
+507:27:Call -> U
+507:27:Name -> U
+508:20:Attribute -> Func:salt.modules.file.apply_template_on_contents
+508:20:Name -> Module:salt.modules.file
+509:33:Name -> Const:str:'no feature ospf'
+511:21:Call -> U
+511:21:Attribute -> U
+511:21:Name -> U
+512:20:Attribute -> ERR
+512:20:Name -> Module:salt.modules.nxos
+512:78:Name -> U
+514:25:Call -> U
+514:25:Name -> U
+517:37:Name -> List:2
+519:33:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+519:33:Attribute -> Func:salt.modules.nxos.config
+519:33:Name -> Module:salt.modules.nxos
+519:52:Name -> Const:str:'no feature ospf' | List:1
+520:24:Call -> Const:NoneType:None
+520:24:Attribute -> BM:unittest.case.TestCase.assertEqual
+520:24:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+520:41:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+520:49:Name -> Const:str:'COMMAND_LIST: no feature ospf\n\n--- \n
+532:13:Call -> U
+532:13:Name -> U
+535:25:Name -> List:1
+535:44:Name -> List:1
+537:23:Call -> U
+537:23:Name -> U
+538:16:Attribute -> Func:salt.modules.file.apply_template_on_contents
+538:16:Name -> Module:salt.modules.file
+539:29:Name -> Const:str:'no feature ospf'
+541:17:Call -> U
+541:17:Attribute -> U
+541:17:Name -> U
+542:16:Attribute -> ERR
+542:16:Name -> Module:salt.modules.nxos
+542:74:Name -> U
+544:21:Call -> U
+544:21:Name -> U
+547:33:Name -> List:2
+549:29:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+549:29:Attribute -> Func:salt.modules.nxos.config
+549:29:Name -> Module:salt.modules.nxos
+549:48:Name -> Const:str:'no feature ospf'
+550:20:Call -> Const:NoneType:None
+550:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+550:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+550:37:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+550:45:Name -> Const:str:'COMMAND_LIST: no feature ospf\n\n--- \n
+567:13:Call -> U
+567:13:Name -> U
+570:25:Name -> List:1
+570:46:Name -> List:1
+572:23:Call -> U
+572:23:Name -> U
+573:16:Attribute -> Func:salt.modules.cp.get_file_str
+573:16:Name -> Module:salt.modules.cp
+573:53:Name -> Const:str:'\nfeature bgp\n!\nrouter bgp 55\n  addr
+575:17:Call -> U
+575:17:Attribute -> U
+575:17:Name -> U
+575:28:Attribute -> ERR
+575:28:Name -> Module:salt.modules.nxos
+575:70:Name -> U
+576:27:Call -> U
+576:27:Name -> U
+577:20:Attribute -> Func:salt.modules.file.apply_template_on_contents
+577:20:Name -> Module:salt.modules.file
+578:33:Name -> Const:str:'\nfeature bgp\n!\nrouter bgp 55\n  addr
+580:21:Call -> U
+580:21:Attribute -> U
+580:21:Name -> U
+581:20:Attribute -> ERR
+581:20:Name -> Module:salt.modules.nxos
+581:78:Name -> U
+583:25:Call -> U
+583:25:Name -> U
+586:37:Name -> List:2
+588:33:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+588:33:Attribute -> Func:salt.modules.nxos.config
+588:33:Name -> Module:salt.modules.nxos
+588:64:Name -> Const:str:'salt://bgp_config.txt'
+589:24:Call -> Const:NoneType:None
+589:24:Attribute -> BM:unittest.case.TestCase.assertEqual
+589:24:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+589:41:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+589:49:Name -> Const:str:'COMMAND_LIST: feature bgp ; ! ; router 
+596:13:Call -> U
+596:13:Name -> U
+599:25:Name -> List:1
+599:46:Name -> List:1
+601:23:Call -> U
+601:23:Name -> U
+601:39:Attribute -> Func:salt.modules.cp.get_file_str
+601:39:Name -> Module:salt.modules.cp
+602:17:Call -> U
+602:17:Attribute -> U
+602:17:Name -> U
+602:28:Attribute -> ERR
+602:28:Name -> Module:salt.modules.nxos
+602:70:Name -> U
+603:27:Call -> U
+603:27:Name -> U
+604:20:Attribute -> Func:salt.modules.file.apply_template_on_contents
+604:20:Name -> Module:salt.modules.file
+605:33:Name -> Const:str:'\nfeature bgp\n!\nrouter bgp 55\n  addr
+607:21:Call -> U
+607:21:Attribute -> U
+607:21:Name -> U
+608:20:Attribute -> ERR
+608:20:Name -> Module:salt.modules.nxos
+608:78:Name -> U
+610:25:Call -> U
+610:25:Name -> U
+613:37:Name -> List:2
+615:29:Call -> Inst:unittest.case._AssertRaisesContext
+615:29:Attribute -> BM:unittest.case.TestCase.assertRaises
+615:29:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+615:47:Name -> Class:salt.exceptions.CommandExecutionError
+616:28:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+616:28:Attribute -> Func:salt.modules.nxos.config
+616:28:Name -> Module:salt.modules.nxos
+616:59:Name -> Const:str:'salt://bgp_config.txt'
+633:13:Call -> U
+633:13:Name -> U
+636:25:Name -> List:1
+636:44:Name -> List:1
+638:23:Call -> U
+638:23:Name -> U
+639:16:Attribute -> Func:salt.modules.file.apply_template_on_contents
+639:16:Name -> Module:salt.modules.file
+640:29:Name -> Const:str:'no feature ospf'
+642:17:Call -> U
+642:17:Attribute -> U
+642:17:Name -> U
+643:16:Attribute -> ERR
+643:16:Name -> Module:salt.modules.nxos
+643:74:Name -> U
+645:21:Call -> U
+645:21:Name -> U
+648:33:Name -> List:2
+650:29:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+650:29:Attribute -> Func:salt.modules.nxos.config
+650:29:Name -> Module:salt.modules.nxos
+650:48:Name -> List:2
+651:20:Call -> Const:NoneType:None
+651:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+651:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+651:37:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+651:45:Name -> Const:str:'COMMAND_LIST: feature bgp ; router bgp 
+658:13:Call -> U
+658:13:Name -> U
+661:25:Name -> List:1
+661:46:Name -> List:1
+663:23:Call -> U
+663:23:Name -> U
+663:39:Attribute -> Func:salt.modules.cp.get_file_str
+663:39:Name -> Module:salt.modules.cp
+664:17:Call -> U
+664:17:Attribute -> U
+664:17:Name -> U
+664:28:Attribute -> ERR
+664:28:Name -> Module:salt.modules.nxos
+664:70:Name -> U
+665:27:Call -> U
+665:27:Name -> U
+666:20:Attribute -> Func:salt.modules.file.apply_template_on_contents
+666:20:Name -> Module:salt.modules.file
+667:33:Name -> Const:str:'\nfeature bgp\n!\nrouter bgp 55\n  addr
+669:21:Call -> U
+669:21:Attribute -> U
+669:21:Name -> U
+670:20:Attribute -> ERR
+670:20:Name -> Module:salt.modules.nxos
+670:78:Name -> U
+672:25:Call -> U
+672:25:Name -> U
+675:37:Name -> List:2
+677:29:Call -> Inst:unittest.case._AssertRaisesContext
+677:29:Attribute -> BM:unittest.case.TestCase.assertRaises
+677:29:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+677:47:Name -> Class:salt.exceptions.CommandExecutionError
+678:28:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+678:28:Attribute -> Func:salt.modules.nxos.config
+678:28:Name -> Module:salt.modules.nxos
+678:56:Name -> Const:NoneType:None
+685:13:Call -> U
+685:13:Name -> U
+688:25:Name -> List:1
+688:46:Name -> List:1
+690:23:Call -> U
+690:23:Name -> U
+690:39:Attribute -> Func:salt.modules.cp.get_file_str
+690:39:Name -> Module:salt.modules.cp
+691:17:Call -> U
+691:17:Attribute -> U
+691:17:Name -> U
+691:28:Attribute -> ERR
+691:28:Name -> Module:salt.modules.nxos
+691:70:Name -> U
+692:27:Call -> U
+692:27:Name -> U
+693:20:Attribute -> Func:salt.modules.file.apply_template_on_contents
+693:20:Name -> Module:salt.modules.file
+694:33:Name -> Const:str:'\nfeature bgp\n!\nrouter bgp 55\n  addr
+696:21:Call -> U
+696:21:Attribute -> U
+696:21:Name -> U
+697:20:Attribute -> ERR
+697:20:Name -> Module:salt.modules.nxos
+697:78:Name -> U
+699:25:Call -> U
+699:25:Name -> U
+702:37:Name -> List:2
+704:29:Call -> Inst:unittest.case._AssertRaisesContext
+704:29:Attribute -> BM:unittest.case.TestCase.assertRaises
+704:29:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+704:47:Name -> Class:salt.exceptions.CommandExecutionError
+705:28:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+705:28:Attribute -> Func:salt.modules.nxos.config
+705:28:Name -> Module:salt.modules.nxos
+705:59:Name -> Const:NoneType:None
+711:17:Call -> U
+711:17:Name -> U
+712:25:Call -> Const:NoneType:None | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+712:25:Attribute -> Func:salt.modules.nxos.delete_config
+712:25:Name -> Module:salt.modules.nxos
+712:51:Name -> Const:str:'feature bgp' | List:1
+713:16:Call -> ERR
+713:16:Attribute -> ERR
+713:16:Attribute -> Func:salt.modules.nxos.config
+713:16:Name -> Module:salt.modules.nxos
+714:16:Call -> Const:NoneType:None
+714:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+714:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+714:33:Name -> Const:NoneType:None | Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+714:41:Attribute -> ERR
+714:41:Attribute -> Func:salt.modules.nxos.config
+714:41:Name -> Module:salt.modules.nxos
+719:13:Call -> U
+719:13:Name -> U
+720:21:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+720:21:Attribute -> Func:salt.modules.nxos.remove_user
+720:21:Name -> Module:salt.modules.nxos
+721:12:Call -> ERR
+721:12:Attribute -> ERR
+721:12:Attribute -> Func:salt.modules.nxos.config
+721:12:Name -> Module:salt.modules.nxos
+722:12:Call -> Const:NoneType:None
+722:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+722:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+722:29:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+722:37:Attribute -> ERR
+722:37:Attribute -> Func:salt.modules.nxos.config
+722:37:Name -> Module:salt.modules.nxos
+730:13:Call -> U
+730:13:Name -> U
+733:25:Name -> List:1
+735:17:Call -> U
+735:17:Name -> U
+738:21:Call -> U
+738:21:Name -> U
+741:29:Call -> Dict:2
+741:29:Attribute -> Func:salt.modules.nxos.replace
+741:29:Name -> Module:salt.modules.nxos
+741:49:Name -> Const:str:'feature bgp'
+741:60:Name -> Const:str:'feature ospf'
+742:20:Call -> Const:NoneType:None
+742:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+742:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+742:37:Name -> Dict:2
+743:20:Call -> Const:NoneType:None
+743:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+743:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+743:37:Name -> Dict:2
+751:13:Call -> U
+751:13:Name -> U
+754:25:Name -> List:1
+756:17:Call -> U
+756:17:Name -> U
+759:21:Call -> U
+759:21:Name -> U
+762:29:Call -> Dict:2
+762:29:Attribute -> Func:salt.modules.nxos.replace
+762:29:Name -> Module:salt.modules.nxos
+762:49:Name -> Const:str:'feature bgp'
+762:60:Name -> Const:str:'feature ospf'
+763:20:Call -> Const:NoneType:None
+763:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+763:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+763:37:Name -> Dict:2
+764:20:Call -> Const:NoneType:None
+764:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+764:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+764:37:Name -> Dict:2
+772:13:Call -> U
+772:13:Name -> U
+775:25:Name -> List:1
+777:17:Call -> U
+777:17:Name -> U
+780:21:Call -> U
+780:21:Name -> U
+783:29:Call -> Dict:2
+783:29:Attribute -> Func:salt.modules.nxos.replace
+783:29:Name -> Module:salt.modules.nxos
+783:49:Name -> Const:str:'feature does_not_exist'
+783:60:Name -> Const:str:'feature ospf'
+784:20:Call -> Const:NoneType:None
+784:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+784:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+784:37:Name -> Dict:2
+785:20:Call -> Const:NoneType:None
+785:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+785:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+785:37:Name -> Dict:2
+790:13:Call -> U
+790:13:Name -> U
+791:68:Name -> Const:str:'\nCOMMAND_LIST: copy running-config sta
+793:21:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+793:21:Attribute -> Func:salt.modules.nxos.save_running_config
+793:21:Name -> Module:salt.modules.nxos
+794:12:Call -> Const:NoneType:None
+794:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+794:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+794:29:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+794:37:Name -> Const:str:'\nCOMMAND_LIST: copy running-config sta
+807:13:Call -> U
+807:13:Name -> U
+808:17:Call -> U
+808:17:Name -> U
+809:74:Name -> Const:str:'$5$ZcZqm15X$exHN2m6yrPKpYhGArK3Vml3ZjNb
+811:21:Call -> U
+811:21:Name -> U
+816:29:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+816:29:Attribute -> Func:salt.modules.nxos.set_password
+816:29:Name -> Module:salt.modules.nxos
+816:54:Name -> Const:str:'devops'
+816:64:Name -> Const:str:'test123TMM^&'
+817:20:Call -> U
+817:20:Attribute -> U
+817:20:Name -> U
+817:46:Name -> Const:str:'username devops password 5 $5$ZcZqm15X$
+818:20:Call -> Const:NoneType:None
+818:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+818:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+818:53:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+832:13:Call -> U
+832:13:Name -> U
+833:17:Call -> U
+833:17:Name -> U
+834:74:Name -> Const:str:'$5$ZcZqm15X$exHN2m6yrPKpYhGArK3Vml3ZjNb
+836:21:Call -> U
+836:21:Name -> U
+841:29:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+841:29:Attribute -> Func:salt.modules.nxos.set_password
+841:29:Name -> Module:salt.modules.nxos
+842:24:Name -> Const:str:'devops'
+842:34:Name -> Const:str:'test123TMM^&'
+842:55:Name -> Const:str:'ZcZqm15X'
+844:20:Call -> U
+844:20:Attribute -> U
+844:20:Name -> U
+844:46:Name -> Const:str:'username devops password 5 $5$ZcZqm15X$
+845:20:Call -> Const:NoneType:None
+845:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+845:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+845:53:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+855:13:Call -> U
+855:13:Name -> U
+856:17:Call -> U
+856:17:Name -> U
+857:74:Name -> Const:str:'$5$ZcZqm15X$exHN2m6yrPKpYhGArK3Vml3ZjNb
+859:21:Call -> U
+859:21:Name -> U
+864:29:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+864:29:Attribute -> Func:salt.modules.nxos.set_password
+864:29:Name -> Module:salt.modules.nxos
+865:24:Name -> Const:str:'devops'
+865:34:Name -> Const:str:'test123TMM^&'
+867:20:Call -> U
+867:20:Attribute -> U
+867:20:Name -> U
+867:46:Name -> Const:str:'username devops password 5 test123TMM^&
+868:20:Call -> Const:NoneType:None
+868:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+868:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+868:53:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+878:13:Call -> U
+878:13:Name -> U
+879:17:Call -> U
+879:17:Name -> U
+880:74:Name -> Const:str:'$5$ZcZqm15X$exHN2m6yrPKpYhGArK3Vml3ZjNb
+882:21:Call -> U
+882:21:Name -> U
+888:29:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+888:29:Attribute -> Func:salt.modules.nxos.set_password
+888:29:Name -> Module:salt.modules.nxos
+889:24:Name -> Const:str:'devops'
+889:34:Name -> Const:str:'test123TMM^&'
+891:20:Call -> U
+891:20:Attribute -> U
+891:20:Name -> U
+891:46:Name -> Const:str:'username devops password 5 test123TMM^&
+892:20:Call -> Const:NoneType:None
+892:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+892:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+892:53:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+897:13:Call -> Inst:unittest.case._AssertRaisesContext
+897:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+897:13:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+897:31:Name -> Class:salt.exceptions.SaltInvocationError
+898:12:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+898:12:Attribute -> Func:salt.modules.nxos.set_password
+898:12:Name -> Module:salt.modules.nxos
+908:13:Call -> U
+908:13:Name -> U
+908:75:Name -> Const:str:'\nCOMMAND_LIST: username salt_test role
+909:21:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+909:21:Attribute -> Func:salt.modules.nxos.set_role
+909:21:Name -> Module:salt.modules.nxos
+909:42:Name -> Const:str:'salt_test'
+909:52:Name -> Const:str:'vdc-admin'
+910:12:Call -> Const:NoneType:None
+910:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+910:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+910:29:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+910:37:Name -> Const:str:'\nCOMMAND_LIST: username salt_test role
+918:13:Call -> U
+918:13:Name -> U
+918:75:Name -> Const:str:'\nCOMMAND_LIST: no username salt_test r
+919:21:Call -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+919:21:Attribute -> Func:salt.modules.nxos.unset_role
+919:21:Name -> Module:salt.modules.nxos
+919:44:Name -> Const:str:'salt_test'
+919:54:Name -> Const:str:'vdc-admin'
+920:12:Call -> Const:NoneType:None
+920:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+920:12:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+920:29:Name -> Const:str:"\n\n    Unable to send command to the N | Const:str:"\n\n    Unable to send command to the N | U
+920:37:Name -> Const:str:'\nCOMMAND_LIST: no username salt_test r
+925:13:Call -> U
+925:13:Name -> U
+926:17:Call -> U
+926:17:Attribute -> U
+926:17:Name -> U
+927:16:Attribute -> ERR
+927:16:Name -> Module:salt.modules.nxos
+928:38:Call -> U
+928:38:Name -> U
+930:25:Call -> U | List:2 | List:2
+930:25:Attribute -> Func:salt.modules.nxos._configure_device
+930:25:Name -> Module:salt.modules.nxos
+931:16:Call -> Const:NoneType:None
+931:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+931:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+931:33:Name -> U | List:2 | List:2
+933:13:Call -> U
+933:13:Name -> U
+934:17:Call -> U
+934:17:Attribute -> U
+934:17:Name -> U
+935:16:Name -> Module:salt.modules.nxos
+935:46:Call -> U
+935:46:Name -> U
+937:16:Call -> U | List:2 | List:2
+937:16:Attribute -> Func:salt.modules.nxos._configure_device
+937:16:Name -> Module:salt.modules.nxos
+938:16:Call -> Const:NoneType:None
+938:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+938:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+938:33:Name -> U | List:2 | List:2
+943:19:Call -> U
+943:19:Name -> U
+944:13:Call -> U
+944:13:Attribute -> U
+944:13:Name -> U
+944:24:Attribute -> ERR
+944:24:Name -> Module:salt.modules.nxos
+944:61:Name -> U
+945:17:Call -> U
+945:17:Name -> U
+950:25:Call -> List:2 | List:2
+950:25:Attribute -> Func:salt.modules.nxos._nxapi_config
+950:25:Name -> Module:salt.modules.nxos
+951:16:Call -> Const:NoneType:None
+951:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+951:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+951:33:Name -> List:2 | List:2
+958:19:Call -> U
+958:19:Name -> U
+959:13:Call -> U
+959:13:Attribute -> U
+959:13:Name -> U
+959:24:Attribute -> ERR
+959:24:Name -> Module:salt.modules.nxos
+959:61:Name -> U
+960:17:Call -> U
+960:17:Name -> U
+962:28:Name -> List:2
+965:25:Call -> List:2 | List:2
+965:25:Attribute -> Func:salt.modules.nxos._nxapi_config
+965:25:Name -> Module:salt.modules.nxos
+966:16:Call -> Const:NoneType:None
+966:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+966:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+966:33:Name -> List:2 | List:2
+971:13:Call -> U
+971:13:Name -> U
+972:27:Call -> U
+972:27:Name -> U
+973:16:Attribute -> Func:salt.utils.nxos.nxapi_request
+973:16:Name -> Module:salt.utils.nxos
+975:17:Call -> U
+975:17:Attribute -> U
+975:17:Name -> U
+976:16:Attribute -> ERR
+976:16:Name -> Module:salt.modules.nxos
+976:63:Name -> U
+978:25:Call -> U
+978:25:Attribute -> Func:salt.modules.nxos._nxapi_request
+978:25:Name -> Module:salt.modules.nxos
+979:16:Call -> Const:NoneType:None
+979:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+979:16:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+979:33:Name -> U
+984:13:Call -> U
+984:13:Name -> U
+985:23:Call -> U
+985:23:Name -> U
+986:17:Call -> U
+986:17:Attribute -> U
+986:17:Name -> U
+986:28:Attribute -> ERR
+986:28:Name -> Module:salt.modules.nxos
+986:65:Name -> U
+987:31:Call -> U
+987:31:Name -> U
+987:47:Attribute -> Func:salt.utils.nxos.nxapi_request
+987:47:Name -> Module:salt.utils.nxos
+988:21:Call -> U
+988:21:Attribute -> U
+988:21:Name -> U
+989:20:Attribute -> ERR
+989:20:Name -> Module:salt.modules.nxos
+989:66:Name -> U
+991:29:Call -> U
+991:29:Attribute -> Func:salt.modules.nxos._nxapi_request
+991:29:Name -> Module:salt.modules.nxos
+992:20:Call -> Const:NoneType:None
+992:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+992:20:Name -> Inst:tests.unit.modules.test_nxos.NxosTestCase
+992:37:Name -> U
+992:45:Attribute -> U
+992:45:Name -> U
+993:20:Call -> U
+993:20:Attribute -> U
+993:20:Name -> U
+994:54:Attribute -> U
+994:54:Name -> U

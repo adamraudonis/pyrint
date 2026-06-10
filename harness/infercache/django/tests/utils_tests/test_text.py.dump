@@ -1,0 +1,834 @@
+12:16:Call -> Const:int:1
+12:16:Name -> Func:builtins.len
+15:20:Name -> Class:django.test.testcases.SimpleTestCase
+17:8:Call -> Const:NoneType:None
+17:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+17:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+17:25:Call -> Const:str:'' | Const:str:'' | U
+17:25:Attribute -> Func:django.utils.text.get_text_list
+17:25:Name -> Module:django.utils.text
+18:8:Call -> Const:NoneType:None
+18:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+18:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+18:25:Call -> Const:str:'' | Const:str:'' | U
+18:25:Attribute -> Func:django.utils.text.get_text_list
+18:25:Name -> Module:django.utils.text
+19:8:Call -> Const:NoneType:None
+19:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+19:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+19:25:Call -> Const:str:'' | Const:str:'' | U
+19:25:Attribute -> Func:django.utils.text.get_text_list
+19:25:Name -> Module:django.utils.text
+20:8:Call -> Const:NoneType:None
+20:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+20:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+20:25:Call -> Const:str:'' | Const:str:'' | U
+20:25:Attribute -> Func:django.utils.text.get_text_list
+20:25:Name -> Module:django.utils.text
+21:8:Call -> Const:NoneType:None
+21:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+21:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+21:25:Call -> Const:str:'' | Const:str:'' | U
+21:25:Attribute -> Func:django.utils.text.get_text_list
+21:25:Name -> Module:django.utils.text
+22:13:Call -> Inst:django.utils.translation.override
+22:13:Name -> Class:django.utils.translation.override
+23:12:Call -> Const:NoneType:None
+23:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+23:12:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+23:29:Call -> Const:str:'' | Const:str:'' | U
+23:29:Attribute -> Func:django.utils.text.get_text_list
+23:29:Name -> Module:django.utils.text
+54:13:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+54:13:Name -> Func:django.utils.functional.lazystr
+56:30:Name -> List:13
+57:17:Call -> Gen:unittest.case.TestCase.subTest
+57:17:Attribute -> BM:unittest.case.TestCase.subTest
+57:17:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+57:36:Name -> Const:str:'This is "a person" test.' | Const:str:'This is "a person\'s" test.' | Const:str:'This is "a person\\"s" test.' | Const:str:'"a \'one' | Const:str:"all friends' tests" | Const:str:'url search_page words="something else"' | Const:str:"url search_page words='something else'" | Const:str:'url search_page words "something else"' | Const:str:'url search_page words-"something else"' | Const:str:'url search_page words=hello' | Const:str:'url search_page words="something else' | Const:str:"cut:','|cut:' '" | U | Inst:django.utils.functional.lazy.__proxy__
+58:16:Call -> Const:NoneType:None
+58:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+58:16:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+58:33:Call -> Inst:builtins.list
+58:33:Name -> Class:builtins.list
+58:38:Call -> Gen:django.utils.text.smart_split
+58:38:Attribute -> Func:django.utils.text.smart_split
+58:38:Name -> Module:django.utils.text
+58:55:Name -> Const:str:'This is "a person" test.' | Const:str:'This is "a person\'s" test.' | Const:str:'This is "a person\\"s" test.' | Const:str:'"a \'one' | Const:str:"all friends' tests" | Const:str:'url search_page words="something else"' | Const:str:"url search_page words='something else'" | Const:str:'url search_page words "something else"' | Const:str:'url search_page words-"something else"' | Const:str:'url search_page words=hello' | Const:str:'url search_page words="something else' | Const:str:"cut:','|cut:' '" | U | Inst:django.utils.functional.lazy.__proxy__
+58:63:Name -> List:4 | List:4 | List:4 | List:2 | List:3 | List:3 | List:3 | List:4 | List:3 | List:3 | List:4 | List:1 | List:4
+61:20:Call -> Inst:django.utils.text.Truncator
+61:20:Attribute -> Class:django.utils.text.Truncator
+61:20:Name -> Module:django.utils.text
+62:8:Call -> Const:NoneType:None
+62:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+62:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+63:61:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+63:61:Attribute -> BM:django.utils.text.Truncator.chars
+63:61:Name -> Inst:django.utils.text.Truncator
+65:8:Call -> Const:NoneType:None
+65:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+65:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+65:52:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+65:52:Attribute -> BM:django.utils.text.Truncator.chars
+65:52:Name -> Inst:django.utils.text.Truncator
+66:8:Call -> Const:NoneType:None
+66:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+66:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+66:52:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+66:52:Attribute -> BM:django.utils.text.Truncator.chars
+66:52:Name -> Inst:django.utils.text.Truncator
+67:8:Call -> Const:NoneType:None
+67:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+67:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+67:34:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+67:34:Attribute -> BM:django.utils.text.Truncator.chars
+67:34:Name -> Inst:django.utils.text.Truncator
+69:14:Call -> Inst:django.utils.text.Truncator
+69:14:Attribute -> Class:django.utils.text.Truncator
+69:14:Name -> Module:django.utils.text
+70:14:Call -> Inst:django.utils.text.Truncator
+70:14:Attribute -> Class:django.utils.text.Truncator
+70:14:Name -> Module:django.utils.text
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+71:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+71:41:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+71:41:Attribute -> BM:django.utils.text.Truncator.chars
+71:41:Name -> Inst:django.utils.text.Truncator
+72:8:Call -> Const:NoneType:None
+72:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+72:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+72:41:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+72:41:Attribute -> BM:django.utils.text.Truncator.chars
+72:41:Name -> Inst:django.utils.text.Truncator
+73:8:Call -> Const:NoneType:None
+73:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+73:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+73:35:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+73:35:Attribute -> BM:django.utils.text.Truncator.chars
+73:35:Name -> Inst:django.utils.text.Truncator
+74:8:Call -> Const:NoneType:None
+74:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+74:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+74:35:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+74:35:Attribute -> BM:django.utils.text.Truncator.chars
+74:35:Name -> Inst:django.utils.text.Truncator
+79:20:Call -> Inst:django.utils.text.Truncator
+79:20:Attribute -> Class:django.utils.text.Truncator
+79:20:Name -> Module:django.utils.text
+80:8:Call -> Const:NoneType:None
+80:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+80:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+80:40:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+80:40:Attribute -> BM:django.utils.text.Truncator.chars
+80:40:Name -> Inst:django.utils.text.Truncator
+81:8:Call -> Const:NoneType:None
+81:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+81:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+81:48:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+81:48:Attribute -> BM:django.utils.text.Truncator.chars
+81:48:Name -> Inst:django.utils.text.Truncator
+82:8:Call -> Const:NoneType:None
+82:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+82:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+82:49:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+82:49:Attribute -> BM:django.utils.text.Truncator.chars
+82:49:Name -> Inst:django.utils.text.Truncator
+86:20:Call -> Inst:django.utils.text.Truncator
+86:20:Attribute -> Class:django.utils.text.Truncator
+86:20:Name -> Module:django.utils.text
+87:8:Call -> Const:NoneType:None
+87:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+87:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+87:39:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+87:39:Attribute -> BM:django.utils.text.Truncator.chars
+87:39:Name -> Inst:django.utils.text.Truncator
+88:8:Call -> Const:NoneType:None
+88:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+88:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+88:34:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+88:34:Attribute -> BM:django.utils.text.Truncator.chars
+88:34:Name -> Inst:django.utils.text.Truncator
+92:8:Call -> Const:NoneType:None
+92:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+92:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+92:32:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+92:32:Attribute -> BM:django.utils.text.Truncator.chars
+92:32:Call -> Inst:django.utils.text.Truncator
+92:32:Attribute -> Class:django.utils.text.Truncator
+92:32:Name -> Module:django.utils.text
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+94:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+95:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+95:12:Attribute -> BM:django.utils.text.Truncator.chars
+95:12:Call -> Inst:django.utils.text.Truncator
+95:12:Attribute -> Class:django.utils.text.Truncator
+95:12:Name -> Module:django.utils.text
+95:27:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+95:27:Name -> Func:django.utils.functional.lazystr
+99:20:Call -> Inst:django.utils.text.Truncator
+99:20:Attribute -> Class:django.utils.text.Truncator
+99:20:Name -> Module:django.utils.text
+103:8:Call -> Const:NoneType:None
+103:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+103:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+106:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+106:12:Attribute -> BM:django.utils.text.Truncator.chars
+106:12:Name -> Inst:django.utils.text.Truncator
+108:8:Call -> Const:NoneType:None
+108:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+108:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+111:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+111:12:Attribute -> BM:django.utils.text.Truncator.chars
+111:12:Name -> Inst:django.utils.text.Truncator
+113:8:Call -> Const:NoneType:None
+113:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+113:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+116:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+116:12:Attribute -> BM:django.utils.text.Truncator.chars
+116:12:Name -> Inst:django.utils.text.Truncator
+118:8:Call -> Const:NoneType:None
+118:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+118:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+120:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+120:12:Attribute -> BM:django.utils.text.Truncator.chars
+120:12:Name -> Inst:django.utils.text.Truncator
+122:8:Call -> Const:NoneType:None
+122:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+122:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+124:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+124:12:Attribute -> BM:django.utils.text.Truncator.chars
+124:12:Name -> Inst:django.utils.text.Truncator
+126:8:Call -> Const:NoneType:None
+126:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+126:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+126:29:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+126:29:Attribute -> BM:django.utils.text.Truncator.chars
+126:29:Name -> Inst:django.utils.text.Truncator
+127:8:Call -> Const:NoneType:None
+127:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+127:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+127:29:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+127:29:Attribute -> BM:django.utils.text.Truncator.chars
+127:29:Name -> Inst:django.utils.text.Truncator
+128:8:Call -> Const:NoneType:None
+128:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+128:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+130:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+130:12:Attribute -> BM:django.utils.text.Truncator.chars
+130:12:Name -> Inst:django.utils.text.Truncator
+132:8:Call -> Const:NoneType:None
+132:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+132:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+134:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+134:12:Attribute -> BM:django.utils.text.Truncator.chars
+134:12:Name -> Inst:django.utils.text.Truncator
+136:20:Call -> Inst:django.utils.text.Truncator
+136:20:Attribute -> Class:django.utils.text.Truncator
+136:20:Name -> Module:django.utils.text
+137:8:Call -> Const:NoneType:None
+137:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+137:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+137:36:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+137:36:Attribute -> BM:django.utils.text.Truncator.chars
+137:36:Name -> Inst:django.utils.text.Truncator
+140:20:Call -> Inst:django.utils.text.Truncator
+140:20:Attribute -> Class:django.utils.text.Truncator
+140:20:Name -> Module:django.utils.text
+144:8:Call -> Const:NoneType:None
+144:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+144:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+146:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+146:12:Attribute -> BM:django.utils.text.Truncator.chars
+146:12:Name -> Inst:django.utils.text.Truncator
+148:8:Call -> Const:NoneType:None
+148:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+148:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+150:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+150:12:Attribute -> BM:django.utils.text.Truncator.chars
+150:12:Name -> Inst:django.utils.text.Truncator
+154:20:Call -> Inst:django.utils.text.Truncator
+154:20:Attribute -> Class:django.utils.text.Truncator
+154:20:Name -> Module:django.utils.text
+157:8:Call -> Const:NoneType:None
+157:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+157:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+157:58:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+157:58:Attribute -> BM:django.utils.text.Truncator.chars
+157:58:Name -> Inst:django.utils.text.Truncator
+158:20:Call -> Inst:django.utils.text.Truncator
+158:20:Attribute -> Class:django.utils.text.Truncator
+158:20:Name -> Module:django.utils.text
+161:8:Call -> Const:NoneType:None
+161:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+161:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+162:52:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+162:52:Attribute -> BM:django.utils.text.Truncator.chars
+162:52:Name -> Inst:django.utils.text.Truncator
+164:8:Call -> Const:NoneType:None
+164:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+164:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+164:46:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+164:46:Attribute -> BM:django.utils.text.Truncator.chars
+164:46:Name -> Inst:django.utils.text.Truncator
+165:8:Call -> Const:NoneType:None
+165:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+165:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+165:45:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+165:45:Attribute -> BM:django.utils.text.Truncator.chars
+165:45:Name -> Inst:django.utils.text.Truncator
+166:8:Call -> Const:NoneType:None
+166:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+166:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+166:39:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+166:39:Attribute -> BM:django.utils.text.Truncator.chars
+166:39:Name -> Inst:django.utils.text.Truncator
+167:8:Call -> Const:NoneType:None
+167:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+167:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+167:38:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+167:38:Attribute -> BM:django.utils.text.Truncator.chars
+167:38:Name -> Inst:django.utils.text.Truncator
+170:20:Call -> Inst:django.utils.text.Truncator
+170:20:Attribute -> Class:django.utils.text.Truncator
+170:20:Name -> Module:django.utils.text
+173:8:Call -> Const:NoneType:None
+173:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+173:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+175:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+175:12:Attribute -> BM:django.utils.text.Truncator.chars
+175:12:Name -> Inst:django.utils.text.Truncator
+177:8:Call -> Const:NoneType:None
+177:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+177:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+179:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+179:12:Attribute -> BM:django.utils.text.Truncator.chars
+179:12:Name -> Inst:django.utils.text.Truncator
+181:8:Call -> Const:NoneType:None
+181:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+181:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+183:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+183:12:Attribute -> BM:django.utils.text.Truncator.chars
+183:12:Name -> Inst:django.utils.text.Truncator
+185:20:Call -> Inst:django.utils.text.Truncator
+185:20:Attribute -> Class:django.utils.text.Truncator
+185:20:Name -> Module:django.utils.text
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+186:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+186:57:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+186:57:Attribute -> BM:django.utils.text.Truncator.chars
+186:57:Name -> Inst:django.utils.text.Truncator
+192:20:Call -> Inst:django.utils.text.Truncator
+192:20:Attribute -> Class:django.utils.text.Truncator
+192:20:Name -> Module:django.utils.text
+193:8:Call -> Const:NoneType:None
+193:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+193:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+194:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'UninferableUninferable'
+194:12:Attribute -> BM:django.utils.text.Truncator.chars
+194:12:Name -> Inst:django.utils.text.Truncator
+199:20:Call -> Inst:django.utils.text.Truncator
+199:20:Attribute -> Class:django.utils.text.Truncator
+199:20:Name -> Module:django.utils.text
+200:8:Call -> Const:NoneType:None
+200:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+200:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+201:61:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+201:61:Attribute -> BM:django.utils.text.Truncator.words
+201:61:Name -> Inst:django.utils.text.Truncator
+203:8:Call -> Const:NoneType:None
+203:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+203:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+203:51:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+203:51:Attribute -> BM:django.utils.text.Truncator.words
+203:51:Name -> Inst:django.utils.text.Truncator
+204:8:Call -> Const:NoneType:None
+204:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+204:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+204:54:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+204:54:Attribute -> BM:django.utils.text.Truncator.words
+204:54:Name -> Inst:django.utils.text.Truncator
+206:20:Call -> Inst:django.utils.text.Truncator
+206:20:Attribute -> Class:django.utils.text.Truncator
+206:20:Name -> Module:django.utils.text
+207:12:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+207:12:Name -> Func:django.utils.functional.lazystr
+209:8:Call -> Const:NoneType:None
+209:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+209:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+209:51:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+209:51:Attribute -> BM:django.utils.text.Truncator.words
+209:51:Name -> Inst:django.utils.text.Truncator
+210:8:Call -> Const:NoneType:None
+210:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+210:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+210:29:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+210:29:Attribute -> BM:django.utils.text.Truncator.words
+210:29:Name -> Inst:django.utils.text.Truncator
+211:8:Call -> Const:NoneType:None
+211:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+211:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+211:29:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+211:29:Attribute -> BM:django.utils.text.Truncator.words
+211:29:Name -> Inst:django.utils.text.Truncator
+214:20:Call -> Inst:django.utils.text.Truncator
+214:20:Attribute -> Class:django.utils.text.Truncator
+214:20:Name -> Module:django.utils.text
+218:8:Call -> Const:NoneType:None
+218:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+218:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+221:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+221:12:Attribute -> BM:django.utils.text.Truncator.words
+221:12:Name -> Inst:django.utils.text.Truncator
+223:8:Call -> Const:NoneType:None
+223:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+223:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+225:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+225:12:Attribute -> BM:django.utils.text.Truncator.words
+225:12:Name -> Inst:django.utils.text.Truncator
+227:8:Call -> Const:NoneType:None
+227:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+227:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+229:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+229:12:Attribute -> BM:django.utils.text.Truncator.words
+229:12:Name -> Inst:django.utils.text.Truncator
+231:8:Call -> Const:NoneType:None
+231:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+231:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+233:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+233:12:Attribute -> BM:django.utils.text.Truncator.words
+233:12:Name -> Inst:django.utils.text.Truncator
+235:8:Call -> Const:NoneType:None
+235:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+235:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+237:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+237:12:Attribute -> BM:django.utils.text.Truncator.words
+237:12:Name -> Inst:django.utils.text.Truncator
+240:20:Call -> Inst:django.utils.text.Truncator
+240:20:Attribute -> Class:django.utils.text.Truncator
+240:20:Name -> Module:django.utils.text
+243:8:Call -> Const:NoneType:None
+243:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+243:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+245:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+245:12:Attribute -> BM:django.utils.text.Truncator.words
+245:12:Name -> Inst:django.utils.text.Truncator
+249:20:Call -> Inst:django.utils.text.Truncator
+249:20:Attribute -> Class:django.utils.text.Truncator
+249:20:Name -> Module:django.utils.text
+253:8:Call -> Const:NoneType:None
+253:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+253:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+255:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+255:12:Attribute -> BM:django.utils.text.Truncator.words
+255:12:Name -> Inst:django.utils.text.Truncator
+257:8:Call -> Const:NoneType:None
+257:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+257:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+259:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+259:12:Attribute -> BM:django.utils.text.Truncator.words
+259:12:Name -> Inst:django.utils.text.Truncator
+263:20:Call -> Inst:django.utils.text.Truncator
+263:20:Attribute -> Class:django.utils.text.Truncator
+263:20:Name -> Module:django.utils.text
+266:8:Call -> Const:NoneType:None
+266:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+266:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+266:58:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+266:58:Attribute -> BM:django.utils.text.Truncator.words
+266:58:Name -> Inst:django.utils.text.Truncator
+267:20:Call -> Inst:django.utils.text.Truncator
+267:20:Attribute -> Class:django.utils.text.Truncator
+267:20:Name -> Module:django.utils.text
+270:8:Call -> Const:NoneType:None
+270:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+270:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+271:52:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+271:52:Attribute -> BM:django.utils.text.Truncator.words
+271:52:Name -> Inst:django.utils.text.Truncator
+275:20:Call -> Inst:django.utils.text.Truncator
+275:20:Attribute -> Class:django.utils.text.Truncator
+275:20:Name -> Module:django.utils.text
+278:8:Call -> Const:NoneType:None
+278:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+278:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+280:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+280:12:Attribute -> BM:django.utils.text.Truncator.words
+280:12:Name -> Inst:django.utils.text.Truncator
+282:20:Call -> Inst:django.utils.text.Truncator
+282:20:Attribute -> Class:django.utils.text.Truncator
+282:20:Name -> Module:django.utils.text
+283:8:Call -> Const:NoneType:None
+283:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+283:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+283:54:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+283:54:Attribute -> BM:django.utils.text.Truncator.words
+283:54:Name -> Inst:django.utils.text.Truncator
+285:20:Call -> Inst:django.utils.text.Truncator
+285:20:Attribute -> Class:django.utils.text.Truncator
+285:20:Name -> Module:django.utils.text
+286:8:Call -> Const:NoneType:None
+286:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+286:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+286:36:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+286:36:Attribute -> BM:django.utils.text.Truncator.words
+286:36:Name -> Inst:django.utils.text.Truncator
+289:20:Call -> Inst:django.utils.text.Truncator
+289:20:Attribute -> Class:django.utils.text.Truncator
+289:20:Name -> Module:django.utils.text
+290:8:Call -> Const:NoneType:None
+290:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+290:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+290:25:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+290:25:Attribute -> BM:django.utils.text.Truncator.words
+290:25:Name -> Inst:django.utils.text.Truncator
+293:20:Call -> Inst:django.utils.text.Truncator
+293:20:Attribute -> Class:django.utils.text.Truncator
+293:20:Name -> Module:django.utils.text
+296:8:Call -> Const:NoneType:None
+296:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+296:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+298:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+298:12:Attribute -> BM:django.utils.text.Truncator.words
+298:12:Name -> Inst:django.utils.text.Truncator
+302:20:Call -> Inst:django.utils.text.Truncator
+302:20:Attribute -> Class:django.utils.text.Truncator
+302:20:Name -> Module:django.utils.text
+303:8:Call -> Const:NoneType:None
+303:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+303:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+305:12:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+305:12:Attribute -> BM:django.utils.text.Truncator.words
+305:12:Name -> Inst:django.utils.text.Truncator
+309:20:Call -> Inst:django.utils.text.Truncator
+309:20:Attribute -> Class:django.utils.text.Truncator
+309:20:Name -> Module:django.utils.text
+310:8:Call -> Const:NoneType:None
+310:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+310:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+310:25:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+310:25:Attribute -> BM:django.utils.text.Truncator.words
+310:25:Name -> Inst:django.utils.text.Truncator
+311:8:Call -> Const:NoneType:None
+311:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+311:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+311:25:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+311:25:Attribute -> BM:django.utils.text.Truncator.words
+311:25:Name -> Inst:django.utils.text.Truncator
+312:8:Call -> Const:NoneType:None
+312:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+312:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+312:25:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+312:25:Attribute -> BM:django.utils.text.Truncator.words
+312:25:Name -> Inst:django.utils.text.Truncator
+313:8:Call -> Const:NoneType:None
+313:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+313:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+313:25:Call -> Const:str:'' | Const:str:'' | U | Const:str:'Uninferable'
+313:25:Attribute -> BM:django.utils.text.Truncator.words
+313:25:Name -> Inst:django.utils.text.Truncator
+317:8:Call -> Const:NoneType:None
+317:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+317:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+317:25:Call -> Const:str:''
+317:25:Attribute -> Func:django.utils.text.wrap
+317:25:Name -> Module:django.utils.text
+317:35:Name -> Const:str:'1234 67 9'
+318:8:Call -> Const:NoneType:None
+318:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+318:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+318:25:Call -> Const:str:''
+318:25:Attribute -> Func:django.utils.text.wrap
+318:25:Name -> Module:django.utils.text
+318:35:Name -> Const:str:'1234 67 9'
+319:8:Call -> Const:NoneType:None
+319:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+319:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+319:25:Call -> Const:str:''
+319:25:Attribute -> Func:django.utils.text.wrap
+319:25:Name -> Module:django.utils.text
+319:35:Name -> Const:str:'1234 67 9'
+321:8:Call -> Const:NoneType:None
+321:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+321:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+321:25:Call -> Const:str:''
+321:25:Attribute -> Func:django.utils.text.wrap
+321:25:Name -> Module:django.utils.text
+322:8:Call -> Const:NoneType:None
+322:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+322:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+323:12:Call -> Const:str:''
+323:12:Attribute -> Func:django.utils.text.wrap
+323:12:Name -> Module:django.utils.text
+328:8:Call -> Const:NoneType:None
+328:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+328:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+328:25:Call -> Const:str:''
+328:25:Attribute -> Func:django.utils.text.wrap
+328:25:Name -> Module:django.utils.text
+328:35:Name -> Const:str:'loooooooooooooooooooong'
+328:51:Name -> Const:str:'loooooooooooooooooooong'
+329:8:Call -> Const:NoneType:None
+329:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+329:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+330:12:Call -> Const:str:''
+330:12:Attribute -> Func:django.utils.text.wrap
+330:12:Name -> Module:django.utils.text
+330:36:Name -> Const:str:'loooooooooooooooooooong'
+330:68:Name -> Const:str:'loooooooooooooooooooong'
+332:8:Call -> Const:NoneType:None
+332:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+332:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+332:25:Call -> Const:str:''
+332:25:Attribute -> Func:django.utils.text.wrap
+332:25:Name -> Module:django.utils.text
+332:35:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+332:35:Name -> Func:django.utils.functional.lazystr
+332:43:Name -> Const:str:'1234 67 9'
+335:8:Call -> Const:NoneType:None
+335:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+335:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+336:12:Call -> U
+336:12:Attribute -> Func:django.utils.text.normalize_newlines
+336:12:Name -> Module:django.utils.text
+338:8:Call -> Const:NoneType:None
+338:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+338:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+338:25:Call -> U
+338:25:Attribute -> Func:django.utils.text.normalize_newlines
+338:25:Name -> Module:django.utils.text
+339:8:Call -> Const:NoneType:None
+339:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+339:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+339:25:Call -> U
+339:25:Attribute -> Func:django.utils.text.normalize_newlines
+339:25:Name -> Module:django.utils.text
+340:8:Call -> Const:NoneType:None
+340:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+340:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+340:25:Call -> U
+340:25:Attribute -> Func:django.utils.text.normalize_newlines
+340:25:Name -> Module:django.utils.text
+341:8:Call -> Const:NoneType:None
+341:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+341:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+342:12:Call -> U
+342:12:Attribute -> Func:django.utils.text.normalize_newlines
+342:12:Name -> Module:django.utils.text
+342:36:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+342:36:Name -> Func:django.utils.functional.lazystr
+346:18:Call -> Const:str:''
+346:18:Attribute -> Func:django.utils.text.phone2numeric
+346:18:Name -> Module:django.utils.text
+347:8:Call -> Const:NoneType:None
+347:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+347:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+347:25:Name -> Const:str:''
+348:23:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+348:23:Name -> Func:django.utils.functional.lazystr
+348:31:Call -> Const:str:''
+348:31:Attribute -> Func:django.utils.text.phone2numeric
+348:31:Name -> Module:django.utils.text
+349:8:Call -> Const:NoneType:None
+349:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+349:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+349:25:Name -> U | Inst:django.utils.functional.lazy.__proxy__
+369:41:Name -> Tuple:14
+370:17:Call -> Gen:unittest.case.TestCase.subTest
+370:17:Attribute -> BM:unittest.case.TestCase.subTest
+370:17:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+370:36:Name -> Const:str:'Hello, World!' | Const:str:'spam & eggs' | Const:str:' multiple---dash and  space ' | Const:str:'\t whitespace-in-value \n' | Const:str:'underscore_in-value' | Const:str:'__strip__underscore-value___' | Const:str:'--strip-dash-value---' | Const:str:'__strip-mixed-value---' | Const:str:'_ -strip-mixed-value _-' | Const:str:'spam & ıçüş' | Const:str:'foo ıç bar' | Const:str:'    foo ıç bar' | Const:str:'你好' | Const:str:'İstanbul'
+371:16:Call -> Const:NoneType:None
+371:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+371:16:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+371:33:Call -> U
+371:33:Attribute -> Func:django.utils.text.slugify
+371:33:Name -> Module:django.utils.text
+371:46:Name -> Const:str:'Hello, World!' | Const:str:'spam & eggs' | Const:str:' multiple---dash and  space ' | Const:str:'\t whitespace-in-value \n' | Const:str:'underscore_in-value' | Const:str:'__strip__underscore-value___' | Const:str:'--strip-dash-value---' | Const:str:'__strip-mixed-value---' | Const:str:'_ -strip-mixed-value _-' | Const:str:'spam & ıçüş' | Const:str:'foo ıç bar' | Const:str:'    foo ıç bar' | Const:str:'你好' | Const:str:'İstanbul'
+371:67:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:True
+371:80:Name -> Const:str:'hello-world' | Const:str:'spam-eggs' | Const:str:'multiple-dash-and-space' | Const:str:'whitespace-in-value' | Const:str:'underscore_in-value' | Const:str:'strip__underscore-value' | Const:str:'strip-dash-value' | Const:str:'strip-mixed-value' | Const:str:'strip-mixed-value' | Const:str:'spam-ıçüş' | Const:str:'foo-ıç-bar' | Const:str:'foo-ıç-bar' | Const:str:'你好' | Const:str:'istanbul'
+373:13:Call -> Gen:unittest.case.TestCase.subTest
+373:13:Attribute -> BM:unittest.case.TestCase.subTest
+373:13:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+374:12:Call -> Const:NoneType:None
+374:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+374:12:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+374:29:Call -> ERR
+374:29:Attribute -> Func:sys.intern
+374:29:Name -> Module:sys
+374:40:Call -> U
+374:40:Attribute -> Func:django.utils.text.slugify
+374:40:Name -> Module:django.utils.text
+383:29:Name -> List:4
+384:17:Call -> Gen:unittest.case.TestCase.subTest
+384:17:Attribute -> BM:unittest.case.TestCase.subTest
+384:17:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+384:36:Name -> Const:str:'"abc"' | Const:str:"'abc'" | Const:str:'"a "bc""' | Const:str:"''ab' c'"
+385:16:Call -> Const:NoneType:None
+385:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+385:16:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+385:33:Call -> Const:str:'' | U
+385:33:Attribute -> Func:django.utils.text.unescape_string_literal
+385:33:Name -> Module:django.utils.text
+385:62:Name -> Const:str:'"abc"' | Const:str:"'abc'" | Const:str:'"a "bc""' | Const:str:"''ab' c'"
+385:70:Name -> Const:str:'abc' | Const:str:'abc' | Const:str:'a "bc"' | Const:str:"'ab' c"
+386:16:Call -> Const:NoneType:None
+386:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+386:16:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+386:33:Call -> U
+386:33:Attribute -> Func:django.utils.text.unescape_string_literal
+386:33:Name -> Module:django.utils.text
+386:62:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+386:62:Name -> Func:django.utils.functional.lazystr
+386:70:Name -> Const:str:'"abc"' | Const:str:"'abc'" | Const:str:'"a "bc""' | Const:str:"''ab' c'"
+386:79:Name -> Const:str:'abc' | Const:str:'abc' | Const:str:'a "bc"' | Const:str:"'ab' c"
+390:20:Name -> List:3
+391:43:Name -> Const:str:'' | Const:str:'abc' | Const:str:'\'abc"'
+392:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+392:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+392:17:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+392:42:Name -> Class:builtins.ValueError
+392:54:Name -> Const:str:'Not a string literal: ' | Const:str:'Not a string literal: abc' | Const:str:'Not a string literal: \'abc"'
+393:16:Call -> Const:str:'' | U
+393:16:Attribute -> Func:django.utils.text.unescape_string_literal
+393:16:Name -> Module:django.utils.text
+393:45:Name -> Const:str:'' | Const:str:'abc' | Const:str:'\'abc"'
+397:8:Call -> Const:NoneType:None
+397:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+397:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+397:25:Call -> U
+397:25:Attribute -> Func:django.utils.text.get_valid_filename
+397:25:Name -> Module:django.utils.text
+397:49:Name -> Const:str:"^&'@{}[],$=!-#()%+~_123.txt"
+398:8:Call -> Const:NoneType:None
+398:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+398:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+398:25:Call -> U
+398:25:Attribute -> Func:django.utils.text.get_valid_filename
+398:25:Name -> Module:django.utils.text
+398:49:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+398:49:Name -> Func:django.utils.functional.lazystr
+398:57:Name -> Const:str:"^&'@{}[],$=!-#()%+~_123.txt"
+400:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+400:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+400:13:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+400:38:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+400:63:Name -> Const:str:"Could not derive file name from '???'"
+401:12:Call -> U
+401:12:Attribute -> Func:django.utils.text.get_valid_filename
+401:12:Name -> Module:django.utils.text
+404:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+404:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+404:13:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+404:38:Name -> Class:django.core.exceptions.SuspiciousFileOperation
+404:63:Name -> Const:str:"Could not derive file name from '$.$.$'
+405:12:Call -> U
+405:12:Attribute -> Func:django.utils.text.get_valid_filename
+405:12:Name -> Module:django.utils.text
+408:24:Name -> U
+408:36:Call -> Inst:builtins.range
+408:36:Name -> Class:builtins.range
+409:15:Call -> U
+409:15:Attribute -> U
+409:15:Name -> U
+409:35:Call -> Gen:json.encoder._make_iterencode._iterencode
+409:35:Attribute -> BM:json.encoder.JSONEncoder.iterencode
+409:35:Call -> Inst:json.encoder.JSONEncoder
+409:35:Attribute -> Class:json.encoder.JSONEncoder
+409:35:Name -> Module:json
+409:65:Name -> U
+410:19:Call -> Const:bytes:b''
+410:19:Attribute -> BM:builtins.bytes.join
+410:28:Name -> U
+413:12:Name -> Const:bytes:b''
+413:21:Name -> U
+413:25:Name -> U
+413:29:Name -> Const:int:256
+413:50:Call -> Inst:builtins.range
+413:50:Name -> Class:builtins.range
+413:59:Call -> Const:int:0
+413:59:Name -> Func:builtins.len
+413:63:Name -> Const:bytes:b''
+413:74:Name -> Const:int:256
+415:28:Call -> Inst:builtins.list
+415:28:Name -> Class:builtins.list
+415:33:Call -> Gen:django.utils.text.compress_sequence
+415:33:Attribute -> Func:django.utils.text.compress_sequence
+415:33:Name -> Module:django.utils.text
+415:56:Name -> U
+416:14:Call -> Const:bytes:b''
+416:14:Attribute -> BM:builtins.bytes.join
+416:23:Name -> Inst:builtins.list
+417:8:Call -> Const:NoneType:None
+417:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+417:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+417:25:Call -> Const:bytes:b''
+417:25:Attribute -> Func:gzip.decompress
+417:25:Name -> Module:gzip
+417:41:Name -> Const:bytes:b''
+417:47:Name -> Const:bytes:b''
+418:8:Call -> Const:NoneType:None
+418:8:Attribute -> BM:unittest.case.TestCase.assertLess
+418:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+418:24:Call -> Const:int:0
+418:24:Name -> Func:builtins.len
+418:28:Name -> Const:bytes:b''
+418:34:Call -> Const:int:0
+418:34:Name -> Func:builtins.len
+418:38:Name -> Const:bytes:b''
+419:8:Call -> Const:NoneType:None
+419:8:Attribute -> BM:unittest.case.TestCase.assertGreater
+419:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+419:27:Call -> ERR
+419:27:Name -> Func:builtins.len
+419:31:Name -> Inst:builtins.list
+422:8:Call -> Const:NoneType:None
+422:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+422:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+422:40:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+422:40:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+422:71:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+422:71:Name -> Func:django.utils.functional.lazystr
+423:8:Call -> Const:NoneType:None
+423:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+423:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+423:40:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+423:40:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+424:8:Call -> Const:NoneType:None
+424:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+424:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+425:27:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+425:27:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+427:8:Call -> Const:NoneType:None
+427:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+427:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+428:27:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+428:27:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+432:12:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+432:12:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+432:41:Name -> Dict:0
+432:46:Name -> Dict:0
+433:8:Name -> Dict:0
+433:17:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+433:17:Name -> Func:django.utils.functional.lazystr
+434:8:Call -> Const:NoneType:None
+434:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+434:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+434:42:Name -> U | Inst:django.utils.functional.lazy.__proxy__
+435:8:Name -> Dict:0
+436:8:Call -> Const:NoneType:None
+436:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+436:8:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+436:42:Name -> U | Inst:django.utils.functional.lazy.__proxy__
+439:12:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+439:12:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+440:12:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+440:12:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+444:13:Call -> Inst:django.utils.translation.override
+444:13:Name -> Class:django.utils.translation.override
+445:12:Call -> Const:NoneType:None
+445:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+445:12:Name -> Inst:tests.utils_tests.test_text.TestUtilsText
+445:75:Name -> U | Inst:django.utils.functional.lazy.__proxy__

@@ -1,0 +1,224 @@
+105:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+105:6:Attribute -> Func:logging.getLogger
+105:6:Name -> Module:logging
+105:24:Name -> Const:str:'salt.roster.cache' | Const:str:'__main__'
+115:14:Call -> Inst:salt.utils.minions.CkMinions
+115:14:Attribute -> Class:salt.utils.minions.CkMinions
+115:14:Attribute -> Module:salt.utils.minions
+115:14:Attribute -> Module:salt.utils
+115:14:Name -> Module:salt
+115:43:Name -> ERR
+116:11:Call -> Dict:2 | Dict:2
+116:11:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+116:11:Name -> Inst:salt.utils.minions.CkMinions
+116:33:Name -> U
+116:38:Name -> Const:str:'glob' | U
+117:14:Name -> Dict:2 | Dict:2
+120:11:Name -> List:0 | Inst:builtins.list | List:1 | List:0
+121:15:Name -> Dict:0
+124:12:Call -> Inst:salt.cache.Cache
+124:12:Attribute -> Class:salt.cache.Cache
+124:12:Attribute -> Module:salt.cache
+124:12:Name -> Module:salt
+124:29:Name -> ERR
+126:19:Call -> ERR
+126:19:Attribute -> ERR
+126:19:Name -> ERR
+132:21:Name -> List:0 | Inst:builtins.list | List:1 | List:0
+134:21:Call -> Tuple:4
+134:21:Name -> Func:salt.roster.cache._load_minion
+134:34:Name -> U
+134:45:Name -> Inst:salt.cache.Cache
+135:15:Name -> Class:builtins.LookupError
+138:21:Call -> U
+138:21:Attribute -> Func:copy.deepcopy
+138:21:Name -> Module:copy
+138:35:Call -> ERR
+138:35:Attribute -> ERR
+138:35:Name -> ERR
+139:28:Call -> U
+139:28:Attribute -> U
+139:28:Name -> U
+140:19:Call -> ERR
+140:19:Name -> Func:builtins.isinstance
+140:30:Name -> U
+140:38:Name -> Class:builtins.list
+140:44:Name -> Class:builtins.tuple
+141:25:Name -> U
+142:23:Name -> U | List:1
+143:23:Call -> U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:str:''
+143:23:Name -> Func:salt.roster.cache._minion_lookup
+143:38:Name -> U
+143:49:Name -> U
+143:54:Name -> Tuple:4
+144:19:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:str:''
+145:20:Name -> U
+145:31:Name -> U
+145:40:Name -> U
+148:21:Name -> U
+149:12:Name -> Dict:0
+149:16:Name -> U
+149:29:Name -> U
+151:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+151:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+151:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+151:78:Name -> U
+153:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+153:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+153:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+153:42:Name -> Dict:0
+155:11:Name -> Dict:0
+159:34:Call -> Tuple:3
+159:34:Attribute -> Func:salt.utils.minions.get_minion_data
+159:34:Attribute -> Module:salt.utils.minions
+159:34:Attribute -> Module:salt.utils
+159:34:Name -> Module:salt
+160:8:Name -> U
+160:19:Name -> ERR
+163:7:Name -> U
+163:20:Name -> U | Const:NoneType:None
+164:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+164:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+164:49:Name -> U
+164:60:Name -> U | Const:NoneType:None
+165:14:Name -> Class:builtins.LookupError
+167:11:Name -> Const:NoneType:None | U
+168:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+168:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+168:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+168:54:Name -> U
+171:11:Name -> Const:NoneType:None | U
+172:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+172:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+172:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+172:55:Name -> U
+176:11:Call -> ERR
+176:11:Name -> Func:builtins.sorted
+176:18:Call -> Inst:ipaddress.IPv4Address | Inst:salt.ext.ipaddress.IPv4Address
+176:18:Attribute -> Class:ipaddress.IPv4Address | Class:salt.ext.ipaddress.IPv4Address
+176:18:Name -> Module:ipaddress | Module:salt.ext.ipaddress
+176:40:Name -> U
+176:58:Call -> U
+176:58:Attribute -> U | BM:builtins.dict.get
+176:58:Name -> Const:NoneType:None | U | Dict:0
+177:11:Call -> ERR
+177:11:Name -> Func:builtins.sorted
+177:18:Call -> Inst:ipaddress.IPv6Address | Inst:salt.ext.ipaddress.IPv6Address
+177:18:Attribute -> Class:ipaddress.IPv6Address | Class:salt.ext.ipaddress.IPv6Address
+177:18:Name -> Module:ipaddress | Module:salt.ext.ipaddress
+177:40:Name -> U
+177:58:Call -> U
+177:58:Attribute -> U | BM:builtins.dict.get
+177:58:Name -> Const:NoneType:None | U | Dict:0
+180:11:Call -> U
+180:11:Attribute -> U
+180:11:Name -> U
+180:31:Name -> U
+182:11:Name -> Const:NoneType:None | U | Dict:0
+182:19:Name -> Const:NoneType:None | U | Dict:0
+182:27:Name -> Dict:2
+182:34:Name -> U
+186:7:Call -> ERR
+186:7:Name -> Func:builtins.isinstance
+186:18:Name -> U
+186:26:Name -> Class:builtins.str
+187:18:Name -> U
+190:20:Name -> U | List:1
+191:15:Call -> Const:NoneType:None | U
+191:15:Attribute -> Func:salt.utils.data.traverse_dict_and_list
+191:15:Attribute -> Module:salt.utils.data
+191:15:Attribute -> Module:salt.utils
+191:15:Name -> Module:salt
+191:54:Name -> U
+191:59:Name -> U
+193:11:Name -> Const:NoneType:None | U
+194:12:Call -> ERR
+194:12:Attribute -> BM:builtins.list.append
+194:12:Name -> List:0
+194:23:Name -> U
+196:11:Name -> List:0
+200:34:Name -> U
+202:7:Name -> U
+204:15:Name -> U
+205:9:Call -> ERR
+205:9:Name -> Func:builtins.isinstance
+205:20:Name -> U
+205:25:Name -> Class:builtins.dict
+207:31:Call -> U
+207:31:Attribute -> U
+207:31:Name -> U
+208:29:Name -> U
+208:46:Name -> U
+208:62:Name -> U
+210:21:Call -> List:0
+210:21:Name -> Func:salt.roster.cache._data_lookup
+210:34:Name -> Dict:3
+210:38:Name -> U
+210:48:Name -> U
+211:19:Name -> U
+212:27:Name -> U
+215:9:Call -> U
+215:9:Attribute -> U
+215:9:Name -> U
+217:15:Call -> ERR
+217:15:Name -> Module:salt
+217:31:Name -> U
+218:9:Call -> U
+218:9:Attribute -> Func:re.match
+218:9:Name -> Module:re
+218:40:Name -> U
+221:18:Call -> Inst:ipaddress.IPv4Network | Inst:ipaddress.IPv6Network | Inst:salt.ext.ipaddress.IPv4Network | Inst:salt.ext.ipaddress.IPv6Network
+221:18:Attribute -> Func:ipaddress.ip_network | Func:salt.ext.ipaddress.ip_network
+221:18:Name -> Module:ipaddress | Module:salt.ext.ipaddress
+221:39:Name -> U
+222:15:Name -> Class:builtins.ValueError
+223:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+223:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+223:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+223:55:Name -> U
+226:20:Name -> U
+226:26:Attribute -> Const:int:4 | Const:int:6 | Const:int:4 | Const:int:6
+226:26:Name -> Inst:ipaddress.IPv4Network | Inst:ipaddress.IPv6Network | Inst:salt.ext.ipaddress.IPv4Network | Inst:salt.ext.ipaddress.IPv6Network
+227:15:Name -> U
+227:23:Name -> Inst:ipaddress.IPv4Network | Inst:ipaddress.IPv6Network | Inst:salt.ext.ipaddress.IPv4Network | Inst:salt.ext.ipaddress.IPv6Network
+228:23:Call -> Const:str:''
+228:23:Name -> Class:builtins.str
+228:27:Name -> U
+233:34:Attribute -> U
+233:34:Name -> U
+233:16:Attribute -> U
+233:16:Name -> U
+233:61:Attribute -> U
+233:61:Name -> U
+235:39:Attribute -> U
+235:39:Name -> U
+236:36:Attribute -> U
+236:36:Name -> U
+237:20:Attribute -> U
+237:20:Name -> U
+238:20:Attribute -> U
+238:20:Name -> U
+239:34:Attribute -> U
+239:34:Name -> U
+243:11:Call -> U
+243:11:Attribute -> U
+243:11:Name -> U
+244:23:Call -> Inst:builtins.int
+244:23:Name -> Class:builtins.int
+244:27:Name -> U
+245:18:Name -> U
+247:22:Name -> List:2 | List:1
+249:28:Name -> U
+249:34:Name -> Const:int:4 | Const:int:6 | Inst:builtins.int
+250:23:Call -> U
+250:23:Name -> Dict:4
+250:31:Name -> U
+250:36:Name -> U
+251:31:Call -> Const:str:''
+251:31:Name -> Class:builtins.str
+251:35:Name -> U
+252:19:Name -> Class:builtins.KeyError
+253:22:Call -> ExcInst:builtins.KeyError
+253:22:Name -> Class:builtins.KeyError
+253:49:Name -> U

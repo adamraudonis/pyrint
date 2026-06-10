@@ -1,0 +1,200 @@
+15:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:6:Attribute -> Func:logging.getLogger
+15:6:Name -> Module:logging
+15:24:Name -> Const:str:'salt.modules.publish' | Const:str:'__main__'
+23:11:Call -> ERR
+23:11:Attribute -> ERR
+23:11:Name -> ERR
+23:44:Attribute -> Tuple:3
+23:44:Attribute -> Module:salt.transport
+23:44:Name -> Module:salt
+22:8:Name -> Const:str:'publish'
+32:16:Call -> U | Const:NoneType:None
+32:16:Attribute -> Func:salt.utils.args.yamlify_arg
+32:16:Attribute -> Module:salt.utils.args
+32:16:Attribute -> Module:salt.utils
+32:16:Name -> Module:salt
+32:44:Name -> U
+34:7:Name -> U | Const:NoneType:None
+36:13:Call -> ERR
+36:13:Name -> Func:builtins.isinstance
+36:24:Name -> U
+36:35:Name -> Class:builtins.list
+37:16:Name -> U
+39:15:Name -> U
+72:27:Name -> ERR
+73:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+73:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+73:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+78:7:Call -> U
+78:7:Attribute -> U
+78:7:Name -> U
+79:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+79:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+82:10:Call -> List:0 | List:1 | U
+82:10:Name -> Func:salt.modules.publish._parse_args
+82:22:Name -> Const:NoneType:None | U
+84:7:Name -> Const:NoneType:None | U
+85:36:Name -> ERR
+86:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+86:18:Name -> Class:salt.exceptions.SaltInvocationError
+95:16:Name -> ERR
+96:30:Name -> ERR
+97:24:Name -> U
+97:41:Name -> ERR
+100:19:Name -> U
+101:22:Call -> ExcInst:salt.exceptions.SaltInvocationError
+101:22:Name -> Class:salt.exceptions.SaltInvocationError
+102:20:Call -> U
+102:20:Attribute -> BM:builtins.str.format
+104:24:Name -> U
+104:36:Name -> ERR
+108:15:Call -> ERR
+108:15:Name -> Func:builtins.len
+108:19:Name -> U
+111:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+111:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+111:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+115:20:Name -> U
+116:20:Name -> ERR
+118:25:Call -> U
+118:25:Attribute -> U
+118:25:Name -> U
+122:21:Name -> ERR
+124:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+124:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+124:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+124:38:Name -> U
+124:43:Name -> U
+127:15:Name -> U
+128:15:Name -> List:0 | List:1 | U
+129:15:Name -> U
+130:20:Name -> Const:str:'glob' | U
+131:15:Name -> Const:str:'' | U
+132:15:Name -> Const:int:5 | U
+133:16:Name -> Const:str:'clean' | U
+134:14:Name -> ERR
+135:20:Call -> ERR
+135:20:Attribute -> ERR
+135:20:Name -> ERR
+138:9:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+138:9:Attribute -> Func:salt.channel.client.ReqChannel.factory
+138:9:Attribute -> Class:salt.channel.client.ReqChannel
+138:9:Attribute -> Module:salt.channel.client
+138:9:Attribute -> Module:salt.channel
+138:9:Name -> Module:salt
+139:8:Name -> ERR
+139:29:Name -> U
+142:24:Call -> U
+142:24:Attribute -> U
+142:24:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+142:37:Name -> Dict:10
+143:15:Name -> Class:salt.exceptions.SaltReqTimeoutError
+144:23:Name -> U
+145:15:Name -> U
+148:11:Name -> Const:bool:False | U
+150:30:Call -> Inst:builtins.set
+150:30:Name -> Class:builtins.set
+150:34:Name -> U
+151:31:Call -> Set:0
+151:31:Name -> Class:builtins.set
+153:18:Name -> Set:0
+153:37:Name -> Inst:builtins.set
+156:26:Name -> ERR
+157:27:Name -> U
+159:22:Call -> U
+159:22:Attribute -> U
+159:22:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+159:35:Name -> Dict:3
+160:35:Call -> Inst:builtins.set
+160:35:Name -> Class:builtins.set
+160:39:Call -> U
+160:39:Attribute -> U
+160:39:Name -> U
+163:19:Name -> Inst:builtins.set
+163:39:Name -> Inst:builtins.set
+165:22:Name -> Const:float:0.3
+165:38:Name -> Const:int:0
+165:54:Name -> Const:int:5 | U
+167:27:Name -> Set:0 | Inst:builtins.set
+171:19:Name -> Const:bool:False | Const:bool:True | Const:bool:True
+172:23:Name -> Const:str:'clean' | U
+174:36:Name -> U
+175:28:Name -> Dict:0
+175:33:Name -> U
+175:41:Name -> U
+175:45:Name -> U
+176:31:Name -> Dict:0
+178:31:Name -> U
+179:31:Name -> Const:int:0
+180:16:Call -> ERR
+180:16:Attribute -> Func:time.sleep
+180:16:Name -> Module:time
+180:27:Name -> Const:float:0.3
+182:12:Call -> ERR
+182:12:Attribute -> Func:time.sleep
+182:12:Name -> Module:time
+182:23:Call -> Inst:builtins.float
+182:23:Name -> Class:builtins.float
+182:29:Name -> Const:int:5 | U
+185:22:Name -> ERR
+186:23:Name -> U
+188:18:Call -> U
+188:18:Attribute -> U
+188:18:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+188:31:Name -> Dict:3
+189:15:Name -> Const:str:'clean' | U
+191:28:Name -> U
+192:20:Name -> Dict:0
+192:25:Name -> U
+192:33:Name -> U
+192:37:Name -> U
+193:23:Name -> Dict:0
+195:23:Name -> U
+267:11:Call -> Dict:0 | Dict:0 | Const:str:"'Uninferable' publish timed out" | Dict:0 | Dict:0 | Dict:0 | U | Dict:0
+267:11:Name -> Func:salt.modules.publish._publish
+268:8:Name -> U
+269:8:Name -> U
+270:12:Name -> Const:NoneType:None | U
+271:17:Name -> Const:str:'glob' | U
+272:17:Name -> Const:str:'' | U
+273:16:Name -> Const:int:5 | U
+276:19:Name -> Const:NoneType:None | U
+302:11:Call -> Dict:0 | Dict:0 | Const:str:"'Uninferable' publish timed out" | Dict:0 | Dict:0 | Dict:0 | U | Dict:0
+302:11:Name -> Func:salt.modules.publish._publish
+303:8:Name -> U
+304:8:Name -> U
+305:12:Name -> Const:NoneType:None | U
+306:17:Name -> Const:str:'glob' | U
+307:17:Name -> Const:str:'' | U
+308:16:Name -> Const:int:5 | U
+325:10:Call -> List:0 | List:1 | U
+325:10:Name -> Func:salt.modules.publish._parse_args
+325:22:Name -> Const:NoneType:None | U
+327:27:Name -> ERR
+329:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+329:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+329:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+329:45:Name -> U
+329:50:Name -> ERR
+332:15:Name -> U
+333:15:Name -> List:0 | List:1 | U
+334:15:Name -> Const:int:5 | U
+335:14:Name -> ERR
+336:20:Call -> ERR
+336:20:Attribute -> ERR
+336:20:Name -> ERR
+339:9:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+339:9:Attribute -> Func:salt.channel.client.ReqChannel.factory
+339:9:Attribute -> Class:salt.channel.client.ReqChannel
+339:9:Attribute -> Module:salt.channel.client
+339:9:Attribute -> Module:salt.channel
+339:9:Name -> Module:salt
+339:48:Name -> ERR
+341:19:Call -> U
+341:19:Attribute -> U
+341:19:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+341:32:Name -> Dict:6
+342:15:Name -> Class:salt.exceptions.SaltReqTimeoutError
+343:23:Name -> U

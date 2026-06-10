@@ -1,0 +1,599 @@
+54:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:10:Attribute -> Func:logging.getLogger
+54:10:Name -> Module:logging
+54:28:Name -> Const:str:'homeassistant.components.mold_indicator | Const:str:'__main__'
+63:18:Call -> U
+63:18:Attribute -> U
+63:18:Name -> U
+65:8:Call -> U
+65:8:Attribute -> U
+65:8:Name -> U
+65:21:Name -> Const:str:'indoor_temp_sensor'
+65:40:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+65:40:Name -> Module:homeassistant.helpers.config_validation
+66:8:Call -> U
+66:8:Attribute -> U
+66:8:Name -> U
+66:21:Name -> Const:str:'outdoor_temp_sensor'
+66:41:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+66:41:Name -> Module:homeassistant.helpers.config_validation
+67:8:Call -> U
+67:8:Attribute -> U
+67:8:Name -> U
+67:21:Name -> Const:str:'indoor_humidity_sensor'
+67:44:Attribute -> Func:homeassistant.helpers.config_validation.entity_id
+67:44:Name -> Module:homeassistant.helpers.config_validation
+68:8:Call -> U
+68:8:Attribute -> U
+68:8:Name -> U
+68:21:Name -> Const:str:'calibration_factor'
+68:47:Call -> U
+68:47:Attribute -> U
+68:47:Name -> U
+68:58:Name -> Class:builtins.float
+69:8:Call -> U
+69:8:Attribute -> U
+69:8:Name -> U
+69:21:Name -> Const:str:'name'
+69:40:Name -> Const:str:'Mold Indicator'
+69:55:Attribute -> Func:homeassistant.helpers.config_validation.string
+69:55:Name -> Module:homeassistant.helpers.config_validation
+70:8:Call -> U
+70:8:Attribute -> U
+70:8:Name -> U
+70:21:Name -> Const:str:'unique_id'
+70:38:Attribute -> Func:homeassistant.helpers.config_validation.string
+70:38:Name -> Module:homeassistant.helpers.config_validation
+76:10:Name -> U
+77:12:Name -> Class:builtins.dict
+78:24:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+79:20:Name -> Class:builtins.dict
+82:10:Name -> Class:builtins.str
+82:16:Call -> U
+82:16:Attribute -> U
+82:16:Name -> U
+82:27:Name -> Const:str:'name'
+82:38:Name -> Const:str:'Mold Indicator'
+83:24:Name -> Class:builtins.str
+83:30:Name -> U
+83:37:Name -> Const:str:'indoor_temp_sensor'
+84:25:Name -> Class:builtins.str
+84:31:Name -> U
+84:38:Name -> Const:str:'outdoor_temp_sensor'
+85:28:Name -> Class:builtins.str
+85:34:Name -> U
+85:41:Name -> Const:str:'indoor_humidity_sensor'
+86:18:Name -> Class:builtins.float
+86:26:Name -> U
+86:33:Name -> Const:str:'calibration_factor'
+87:15:Name -> Class:builtins.str
+87:28:Call -> U
+87:28:Attribute -> U
+87:28:Name -> U
+87:39:Name -> Const:str:'unique_id'
+89:4:Call -> U
+89:4:Name -> U
+91:12:Call -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+91:12:Name -> Class:homeassistant.components.mold_indicator.sensor.MoldIndicator
+92:16:Name -> U
+93:16:Name -> U
+94:16:Attribute -> U
+94:16:Attribute -> U
+94:16:Name -> U
+94:37:Name -> Inst:homeassistant.util.unit_system.UnitSystem
+95:16:Name -> U
+96:16:Name -> U
+97:16:Name -> U
+98:16:Name -> U
+99:16:Name -> U
+107:10:Name -> U
+108:11:Name -> U
+109:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+112:10:Name -> Class:builtins.str
+112:16:Attribute -> U
+112:16:Name -> U
+112:30:Name -> Const:str:'name'
+113:24:Name -> Class:builtins.str
+113:30:Attribute -> U
+113:30:Name -> U
+113:44:Name -> Const:str:'indoor_temp_sensor'
+114:25:Name -> Class:builtins.str
+114:31:Attribute -> U
+114:31:Name -> U
+114:45:Name -> Const:str:'outdoor_temp_sensor'
+115:28:Name -> Class:builtins.str
+115:34:Attribute -> U
+115:34:Name -> U
+115:48:Name -> Const:str:'indoor_humidity_sensor'
+116:18:Name -> Class:builtins.float
+116:26:Attribute -> U
+116:26:Name -> U
+116:40:Name -> Const:str:'calibration_factor'
+118:4:Call -> U
+118:4:Name -> U
+120:12:Call -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+120:12:Name -> Class:homeassistant.components.mold_indicator.sensor.MoldIndicator
+121:16:Name -> U
+122:16:Name -> U
+123:16:Attribute -> U
+123:16:Attribute -> U
+123:16:Name -> U
+123:37:Name -> Inst:homeassistant.util.unit_system.UnitSystem
+124:16:Name -> U
+125:16:Name -> U
+126:16:Name -> U
+127:16:Name -> U
+128:16:Attribute -> U
+128:16:Name -> U
+135:20:Name -> Class:homeassistant.components.sensor.SensorEntity
+139:39:Name -> Const:str:'%'
+140:25:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.HUMIDITY
+140:25:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+141:24:Attribute -> Inst:homeassistant.components.sensor.const.SensorStateClass.MEASUREMENT
+141:24:Name -> Class:homeassistant.components.sensor.const.SensorStateClass
+145:14:Name -> U
+146:14:Name -> Class:builtins.str
+147:19:Name -> Class:builtins.bool
+148:28:Name -> Class:builtins.str
+149:29:Name -> Class:builtins.str
+150:32:Name -> Class:builtins.str
+151:22:Name -> Class:builtins.float
+152:19:Name -> Class:builtins.str
+155:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+155:26:Name -> U
+156:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+156:31:Name -> U
+158:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+159:12:Name -> Const:str:'indoor_temp_sensor'
+159:30:Name -> U
+160:12:Name -> Const:str:'outdoor_temp_sensor'
+160:31:Name -> U
+161:12:Name -> Const:str:'indoor_humidity_sensor'
+161:34:Name -> U
+163:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+163:29:Name -> U
+164:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+164:26:Name -> U
+165:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+166:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+166:24:Name -> Class:builtins.float
+167:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+167:27:Name -> Class:builtins.float
+168:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+168:28:Name -> Class:builtins.float
+169:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+169:26:Name -> Class:builtins.float
+170:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+170:25:Name -> Class:builtins.float
+171:11:Name -> U
+172:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+172:32:Call -> Const:NoneType:None | U
+172:32:Name -> Func:homeassistant.helpers.device.async_entity_id_to_device
+173:16:Name -> U
+174:16:Name -> U
+176:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+176:32:Name -> Class:_collections_abc.Callable
+176:42:Name -> Class:builtins.str
+176:47:Name -> Class:_collections_abc.Mapping
+176:55:Name -> Class:builtins.str
+176:60:Name -> Class:typing.Any
+178:5:Name -> U
+181:26:Name -> Class:_collections_abc.Callable
+181:36:Name -> Class:builtins.str
+181:41:Name -> Class:_collections_abc.Mapping
+181:49:Name -> Class:builtins.str
+181:54:Name -> Class:typing.Any
+182:9:Name -> U
+185:15:Call -> ERR
+185:15:Name -> Func:builtins.all
+185:21:Call -> DictValues
+185:21:Attribute -> BM:builtins.dict.values
+185:21:Attribute -> Dict:3
+185:21:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+185:46:Attribute -> U
+185:46:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+186:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+187:31:Call -> Inst:homeassistant.helpers.entity.CalculatedState
+187:31:Attribute -> BM:homeassistant.helpers.entity.Entity._async_calculate_state
+187:31:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+188:12:Call -> U
+188:12:Name -> U
+188:29:Attribute -> Inst:builtins.str
+188:29:Name -> Inst:homeassistant.helpers.entity.CalculatedState
+188:53:Attribute -> Inst:builtins.dict
+188:53:Name -> Inst:homeassistant.helpers.entity.CalculatedState
+189:19:Attribute -> BM:homeassistant.helpers.entity.Entity._call_on_remove_callbacks
+189:19:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+191:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+191:33:Name -> U
+193:8:Call -> Const:NoneType:None
+193:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._async_setup_sensor
+193:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+194:15:Attribute -> BM:homeassistant.helpers.entity.Entity._call_on_remove_callbacks
+194:15:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+198:8:Call -> Const:NoneType:None
+198:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._async_setup_sensor
+198:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+200:5:Name -> U
+204:8:Call -> Const:NoneType:None
+204:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_on_remove
+204:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+205:12:Call -> Func:homeassistant.helpers.event._remove_empty_listener | Partial:PartialFunction
+205:12:Name -> Func:homeassistant.helpers.event.async_track_state_change_event
+206:16:Attribute -> U | Const:NoneType:None
+206:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+207:16:Call -> DictValues
+207:16:Attribute -> BM:builtins.dict.values
+207:16:Attribute -> Dict:3
+207:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+208:16:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._async_mold_indicator_sensor_state_listener
+208:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+213:25:Call -> DictValues
+213:25:Attribute -> BM:builtins.dict.values
+213:25:Attribute -> Dict:3
+213:25:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+214:20:Call -> U
+214:20:Attribute -> U
+214:20:Attribute -> U
+214:20:Attribute -> U | Const:NoneType:None
+214:20:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+214:41:Name -> U
+215:12:Call -> Const:NoneType:None
+215:12:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._update_cached_values
+215:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+215:39:Name -> U
+215:50:Name -> U
+217:8:Call -> Const:NoneType:None
+217:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._recalculate
+217:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+219:11:Attribute -> Const:NoneType:None | U
+219:11:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+220:31:Call -> Inst:homeassistant.helpers.entity.CalculatedState
+220:31:Attribute -> BM:homeassistant.helpers.entity.Entity._async_calculate_state
+220:31:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+221:12:Call -> U
+221:12:Attribute -> U
+221:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+221:35:Attribute -> Inst:builtins.str
+221:35:Name -> Inst:homeassistant.helpers.entity.CalculatedState
+221:59:Attribute -> Inst:builtins.dict
+221:59:Name -> Inst:homeassistant.helpers.entity.CalculatedState
+223:5:Name -> U
+224:47:Name -> Class:builtins.str
+224:63:Name -> U
+226:11:Name -> U
+226:24:Attribute -> Dict:3
+226:24:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+226:39:Name -> Const:str:'indoor_temp_sensor'
+227:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+227:32:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+227:32:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_temperature_from_state
+227:32:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+227:65:Name -> U
+228:13:Name -> U
+228:26:Attribute -> Dict:3
+228:26:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+228:41:Name -> Const:str:'outdoor_temp_sensor'
+229:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+229:33:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+229:33:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_temperature_from_state
+229:33:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+229:66:Name -> U
+230:13:Name -> U
+230:26:Attribute -> Dict:3
+230:26:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+230:41:Name -> Const:str:'indoor_humidity_sensor'
+231:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+231:31:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+231:31:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_humidity_from_state
+231:31:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+231:61:Name -> U
+233:5:Name -> U
+235:21:Name -> U
+235:27:Name -> U
+238:20:Attribute -> U
+238:20:Name -> U
+239:20:Attribute -> U
+239:20:Name -> U
+241:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+241:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+241:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+243:12:Name -> U
+244:12:Attribute -> U
+244:12:Name -> U
+245:12:Name -> U
+248:8:Call -> Const:NoneType:None
+248:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._update_cached_values
+248:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+248:35:Name -> U
+248:46:Name -> U
+250:8:Call -> Const:NoneType:None
+250:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._recalculate
+250:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+252:11:Attribute -> Const:NoneType:None | U
+252:11:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+253:31:Call -> Inst:homeassistant.helpers.entity.CalculatedState
+253:31:Attribute -> BM:homeassistant.helpers.entity.Entity._async_calculate_state
+253:31:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+254:12:Call -> U
+254:12:Attribute -> U
+254:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+254:35:Attribute -> Inst:builtins.str
+254:35:Name -> Inst:homeassistant.helpers.entity.CalculatedState
+254:59:Attribute -> Inst:builtins.dict
+254:59:Name -> Inst:homeassistant.helpers.entity.CalculatedState
+257:12:Call -> Const:NoneType:None
+257:12:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+257:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+259:5:Name -> U
+263:20:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+263:20:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+263:39:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+263:39:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+263:57:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+263:57:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+264:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+265:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+266:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+267:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+271:8:Call -> Const:NoneType:None
+271:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._calc_dewpoint
+271:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+272:8:Call -> Const:NoneType:None
+272:8:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._calc_moldindicator
+272:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+273:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+273:31:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:100 | Const:int:0 | Inst:builtins.int
+273:31:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+277:15:Name -> U
+278:19:Name -> Class:_collections_abc.Callable
+278:29:Name -> Class:builtins.float
+278:36:Name -> Class:builtins.str
+278:49:Name -> Class:builtins.float
+279:9:Name -> Class:builtins.float
+281:11:Name -> U
+284:11:Attribute -> U
+284:11:Name -> U
+284:27:Name -> Const:str:'unknown'
+284:42:Name -> Const:str:'unavailable'
+285:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+285:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+285:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+287:16:Attribute -> U
+287:16:Name -> U
+288:16:Attribute -> U
+288:16:Name -> U
+292:21:Call -> U
+292:21:Attribute -> U
+292:21:Name -> U
+292:34:Attribute -> U
+292:34:Name -> U
+292:47:Name -> Class:builtins.float
+293:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+293:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+293:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+295:16:Attribute -> U
+295:16:Name -> U
+296:16:Attribute -> U
+296:16:Name -> U
+300:15:Call -> U
+300:15:Name -> U
+300:25:Name -> U
+300:32:Call -> U
+300:32:Attribute -> U
+300:32:Attribute -> U
+300:32:Name -> U
+300:53:Name -> Const:str:'unit_of_measurement'
+302:49:Name -> U
+302:66:Name -> Class:builtins.float
+305:40:Name -> Class:builtins.float
+305:53:Name -> Class:builtins.str
+305:68:Name -> Class:builtins.float
+306:15:Name -> Const:bool:False
+307:23:Name -> U
+309:15:Name -> U
+309:27:Name -> Class:homeassistant.const.UnitOfTemperature
+310:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+310:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+310:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+312:20:Attribute -> U
+312:20:Name -> U
+313:20:Name -> U
+314:20:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+314:20:Name -> Class:homeassistant.const.UnitOfTemperature
+315:20:Attribute -> Inst:homeassistant.const.UnitOfTemperature.FAHRENHEIT
+315:20:Name -> Class:homeassistant.const.UnitOfTemperature
+318:19:Call -> U
+318:19:Attribute -> BM:homeassistant.util.unit_conversion.BaseUnitConverter.convert
+318:19:Name -> Class:homeassistant.util.unit_conversion.TemperatureConverter
+318:48:Name -> U
+318:55:Name -> U
+318:61:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+318:61:Name -> Class:homeassistant.const.UnitOfTemperature
+320:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+320:15:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_value_from_state
+320:15:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+320:42:Name -> U
+320:49:Name -> Func:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_temperature_from_state.validate_temperature
+322:46:Name -> U
+322:63:Name -> Class:builtins.float
+325:37:Name -> Class:builtins.float
+325:50:Name -> Class:builtins.str
+325:65:Name -> Class:builtins.float
+326:15:Name -> Const:bool:False
+327:23:Name -> U
+329:15:Name -> U
+329:23:Name -> Const:str:'%'
+330:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+330:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+330:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:20:Attribute -> U
+332:20:Name -> U
+333:20:Name -> U
+334:20:Name -> Const:str:'%'
+337:24:Name -> U
+338:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+338:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+338:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+340:20:Attribute -> U
+340:20:Name -> U
+341:20:Name -> U
+344:19:Name -> U
+346:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+346:15:Attribute -> BM:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_value_from_state
+346:15:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+346:42:Name -> U
+346:49:Name -> Func:homeassistant.components.mold_indicator.sensor.MoldIndicator._get_humidity_from_state.validate_humidity
+351:11:Name -> Const:bool:False
+352:19:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+352:19:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+352:41:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+352:41:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+353:16:Name -> Const:float:17.62
+353:28:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+353:28:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+353:49:Name -> Const:float:243.12
+353:61:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+353:61:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+354:15:Name -> Const:float:17.62
+354:27:Name -> Const:float:243.12
+354:40:Name -> Const:float:243.12
+354:52:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+354:52:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+356:11:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+356:11:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+357:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+359:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+360:16:Name -> Const:float:243.12
+361:19:Name -> U
+361:27:Call -> ERR
+361:27:Attribute -> Func:math.log
+361:27:Name -> Module:math
+361:36:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+361:36:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+362:19:Name -> U
+362:26:Call -> ERR
+362:26:Attribute -> Func:math.log
+362:26:Name -> Module:math
+362:35:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+362:35:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+364:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+364:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+364:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+364:41:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+364:41:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+364:57:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+364:57:Name -> Class:homeassistant.const.UnitOfTemperature
+368:11:Name -> Const:bool:False
+369:19:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+369:19:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+369:42:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+369:42:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+369:64:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+369:64:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+371:20:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+371:20:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+371:36:Attribute -> U
+371:36:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+371:59:Attribute -> U
+371:59:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+372:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+372:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+372:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+374:16:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+374:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+375:16:Attribute -> U
+375:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+377:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+378:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+382:8:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+383:12:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+383:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+384:15:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+384:15:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+384:35:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+384:35:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+384:57:Attribute -> U
+384:57:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+387:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+387:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+387:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+389:12:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+389:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+390:12:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+390:12:Name -> Class:homeassistant.const.UnitOfTemperature
+394:16:Name -> Const:float:17.62
+394:28:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+394:28:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+394:47:Name -> Const:float:243.12
+394:59:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+394:59:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+395:15:Name -> Const:float:17.62
+395:27:Name -> Const:float:243.12
+395:40:Name -> Const:float:243.12
+395:52:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+395:52:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+398:12:Call -> ERR
+398:12:Attribute -> Func:math.exp
+398:12:Name -> Module:math
+399:17:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+399:17:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+399:34:Name -> U
+399:41:Name -> Const:float:243.12
+399:53:Name -> U
+400:19:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+400:19:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+400:36:Name -> Const:float:243.12
+406:11:Name -> U
+407:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+408:13:Name -> U
+409:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+411:12:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+411:38:Call -> Inst:builtins.int
+411:38:Name -> Class:builtins.int
+411:42:Name -> U
+413:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+413:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+413:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+413:53:Attribute -> BM:homeassistant.components.sensor.SensorEntity.native_value
+413:53:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+415:5:Name -> Class:builtins.property
+416:40:Name -> Class:builtins.dict
+416:45:Name -> Class:builtins.str
+416:50:Name -> Class:typing.Any
+418:11:Attribute -> U
+418:11:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+419:25:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+419:25:Name -> Class:homeassistant.const.UnitOfTemperature
+421:25:Attribute -> Inst:homeassistant.const.UnitOfTemperature.FAHRENHEIT
+421:25:Name -> Class:homeassistant.const.UnitOfTemperature
+427:15:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:int:-50 | U
+427:15:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+424:12:Call -> U
+424:12:Attribute -> BM:homeassistant.util.unit_conversion.BaseUnitConverter.convert
+424:12:Name -> Class:homeassistant.util.unit_conversion.TemperatureConverter
+425:16:Attribute -> Const:int:-50 | U
+425:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+425:32:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+425:32:Name -> Class:homeassistant.const.UnitOfTemperature
+425:59:Name -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS | Inst:homeassistant.const.UnitOfTemperature.FAHRENHEIT
+435:15:Attribute -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+435:15:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+432:12:Call -> U
+432:12:Attribute -> BM:homeassistant.util.unit_conversion.BaseUnitConverter.convert
+432:12:Name -> Class:homeassistant.util.unit_conversion.TemperatureConverter
+433:16:Attribute -> U
+433:16:Name -> Inst:homeassistant.components.mold_indicator.sensor.MoldIndicator
+433:33:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+433:33:Name -> Class:homeassistant.const.UnitOfTemperature
+433:60:Name -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS | Inst:homeassistant.const.UnitOfTemperature.FAHRENHEIT
+440:12:Name -> Const:str:'dewpoint'
+440:49:Name -> U | Const:NoneType:None
+440:27:Call -> ERR
+440:27:Name -> Func:builtins.round
+440:33:Name -> U
+441:12:Name -> Const:str:'estimated_critical_temp'
+441:55:Name -> U | Const:NoneType:None
+441:32:Call -> ERR
+441:32:Name -> Func:builtins.round
+441:38:Name -> U

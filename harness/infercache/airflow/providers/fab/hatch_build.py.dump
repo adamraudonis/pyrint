@@ -1,0 +1,93 @@
+31:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+31:6:Attribute -> Func:logging.getLogger
+31:6:Name -> Module:logging
+31:24:Name -> Const:str:'providers.fab.hatch_build' | Const:str:'__main__'
+32:12:Call -> U
+32:12:Attribute -> Func:logging.getLevelName
+32:12:Name -> Module:logging
+32:33:Call -> U | Const:NoneType:None
+32:33:Attribute -> Func:os.getenv
+32:33:Name -> Module:os
+33:0:Call -> Const:NoneType:None | U | Const:NoneType:None
+33:0:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+33:0:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+33:13:Name -> U
+36:18:Name -> U
+36:35:Name -> U
+36:50:Name -> U
+44:5:Name -> Class:builtins.staticmethod
+45:24:Name -> Class:pathlib.Path
+46:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+46:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+46:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+46:46:Name -> U
+47:8:Call -> Const:NoneType:None | Const:NoneType:None
+47:8:Attribute -> Func:shutil.rmtree
+47:8:Name -> Module:shutil
+47:22:Name -> U
+49:31:Name -> Class:builtins.str
+49:46:Name -> Class:_collections_abc.Iterable
+49:55:Name -> Class:builtins.str
+50:19:Call -> Inst:pathlib.Path
+50:19:Name -> Class:pathlib.Path
+50:24:Attribute -> ERR
+50:24:Name -> Inst:providers.fab.hatch_build.CustomBuild
+51:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+51:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+51:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:65:Name -> Inst:pathlib.Path
+52:26:Name -> Inst:pathlib.Path
+53:22:Name -> U
+54:8:Call -> Const:NoneType:None
+54:8:Attribute -> Func:providers.fab.hatch_build.CustomBuild.clean_dir
+54:8:Name -> Inst:providers.fab.hatch_build.CustomBuild
+54:23:Name -> U
+55:8:Call -> Const:NoneType:None
+55:8:Attribute -> Func:providers.fab.hatch_build.CustomBuild.clean_dir
+55:8:Name -> Inst:providers.fab.hatch_build.CustomBuild
+55:23:Name -> U
+56:8:Call -> Const:NoneType:None
+56:8:Attribute -> Func:providers.fab.hatch_build.CustomBuild.clean_dir
+56:8:Name -> Inst:providers.fab.hatch_build.CustomBuild
+56:23:Name -> U
+57:8:Call -> U
+57:8:Attribute -> U
+57:9:Name -> Inst:pathlib.Path
+59:33:Name -> Class:builtins.dict
+59:38:Name -> Class:builtins.str
+59:43:Name -> Class:_collections_abc.Callable
+59:57:Name -> Class:builtins.str
+61:28:Attribute -> BM:providers.fab.hatch_build.CustomBuild.build_standard
+61:28:Name -> Inst:providers.fab.hatch_build.CustomBuild
+63:40:Name -> Class:builtins.str
+63:56:Name -> Class:typing.Any
+63:75:Name -> Class:typing.Any
+63:83:Name -> Class:builtins.str
+65:19:Call -> Inst:pathlib.Path
+65:19:Attribute -> BM:pathlib.Path.resolve
+65:19:Attribute -> Inst:pathlib._PathParents
+65:19:Call -> Inst:pathlib.Path
+65:19:Name -> Class:pathlib.Path
+65:24:Attribute -> ERR
+65:24:Name -> Inst:providers.fab.hatch_build.CustomBuild
+67:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+67:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+67:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+67:43:Call -> Const:str:''
+67:43:Attribute -> BM:builtins.str.join
+67:52:Name -> List:4
+68:8:Call -> Inst:subprocess.CompletedProcess
+68:8:Name -> Func:subprocess.run
+68:12:Name -> List:4
+68:21:Call -> Const:str:''
+68:21:Attribute -> BM:pathlib.PurePath.as_posix
+68:21:Name -> Inst:pathlib.Path
+69:20:Call -> Inst:pathlib.Path
+69:20:Name -> Class:pathlib.Path
+69:25:Attribute -> ERR
+69:25:Name -> Inst:providers.fab.hatch_build.CustomBuild
+70:15:Call -> U
+70:15:Attribute -> U
+70:15:Call -> U
+70:15:Attribute -> U
+70:15:Name -> U

@@ -1,0 +1,2903 @@
+45:28:Name -> Class:django.test.testcases.TestCase
+46:5:Call -> Inst:django.test.utils.override_settings
+46:5:Name -> Class:django.test.utils.override_settings
+48:30:Name -> Class:django.contrib.auth.views.RedirectURLMixin
+51:8:Call -> Const:NoneType:None
+51:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+51:8:Name -> Inst:tests.auth_tests.test_views.RedirectURLMixinTests
+51:25:Call -> U | Const:str:'' | Const:str:''
+51:25:Attribute -> BM:django.contrib.auth.views.RedirectURLMixin.get_default_redirect_url
+51:25:Call -> Inst:tests.auth_tests.test_views.RedirectURLMixinTests.test_get_default_redirect_url_next_page.RedirectURLView
+51:25:Name -> Class:tests.auth_tests.test_views.RedirectURLMixinTests.test_get_default_redirect_url_next_page.RedirectURLView
+55:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+55:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+55:13:Name -> Inst:tests.auth_tests.test_views.RedirectURLMixinTests
+55:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+55:60:Name -> Const:str:'No URL to redirect to. Provide a next_p
+56:12:Call -> U | Const:str:'' | Const:str:'' | Const:str:''
+56:12:Attribute -> BM:django.contrib.auth.views.RedirectURLMixin.get_default_redirect_url
+56:12:Call -> Inst:django.contrib.auth.views.RedirectURLMixin
+56:12:Name -> Class:django.contrib.auth.views.RedirectURLMixin
+59:1:Call -> Inst:django.test.utils.override_settings
+59:1:Name -> Class:django.test.utils.override_settings
+62:14:Name -> List:1
+66:24:Name -> Class:django.test.testcases.TestCase
+71:5:Name -> Class:builtins.classmethod
+73:8:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+73:17:Call -> U
+73:17:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+73:17:Attribute -> Inst:django.contrib.auth.models.UserManager
+73:17:Name -> Class:django.contrib.auth.models.User
+76:8:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+76:17:Call -> U
+76:17:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+76:17:Attribute -> Inst:django.contrib.auth.models.UserManager
+76:17:Name -> Class:django.contrib.auth.models.User
+81:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+81:19:Attribute -> BM:django.test.client.Client.post
+81:19:Attribute -> Inst:django.test.client.Client
+81:19:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+82:12:Name -> Const:str:'/login/' | U
+84:28:Name -> Const:str:'testclient' | U
+85:28:Name -> Const:str:'password' | U
+88:8:Call -> Const:NoneType:None
+88:8:Attribute -> BM:unittest.case.TestCase.assertIn
+88:8:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+88:22:Name -> Const:str:'_auth_user_id'
+88:35:Attribute -> U
+88:35:Attribute -> Inst:django.test.client.Client
+88:35:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+89:15:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+92:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+92:19:Attribute -> BM:django.test.client.Client.post
+92:19:Attribute -> Inst:django.test.client.Client
+92:19:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+93:8:Call -> Const:NoneType:None
+93:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+93:8:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+93:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+93:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+94:8:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+94:25:Name -> Const:str:'_auth_user_id'
+94:38:Attribute -> U
+94:38:Attribute -> Inst:django.test.client.Client
+94:38:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+98:22:Call -> Inst:builtins.list
+98:22:Name -> Class:builtins.list
+98:27:Call -> Inst:itertools.chain
+98:27:Attribute -> Class:itertools.chain
+98:27:Name -> Module:itertools
+98:44:Call -> U
+98:44:Attribute -> U
+98:44:Attribute -> U
+98:44:Attribute -> U
+98:44:Name -> U
+99:8:Call -> Const:NoneType:None
+99:8:Attribute -> BM:unittest.case.TestCase.assertIn
+99:8:Name -> Inst:tests.auth_tests.test_views.AuthViewsTestCase
+99:22:Call -> Const:str:''
+99:22:Name -> Class:builtins.str
+99:26:Name -> U
+99:34:Name -> Inst:builtins.list
+102:1:Call -> Inst:django.test.utils.override_settings
+102:1:Name -> Class:django.test.utils.override_settings
+103:28:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+123:34:Name -> List:8
+124:17:Call -> Gen:unittest.case.TestCase.subTest
+124:17:Attribute -> BM:unittest.case.TestCase.subTest
+124:17:Name -> Inst:tests.auth_tests.test_views.AuthViewNamedURLTests
+124:35:Name -> Const:str:'login' | Const:str:'logout' | Const:str:'password_change' | Const:str:'password_change_done' | Const:str:'password_reset' | Const:str:'password_reset_done' | Const:str:'password_reset_confirm' | Const:str:'password_reset_complete'
+126:20:Call -> U | Const:str:'' | Const:str:''
+126:20:Name -> Func:django.urls.base.reverse
+126:28:Name -> Const:str:'login' | Const:str:'logout' | Const:str:'password_change' | Const:str:'password_change_done' | Const:str:'password_reset' | Const:str:'password_reset_done' | Const:str:'password_reset_confirm' | Const:str:'password_reset_complete'
+126:39:Name -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+126:52:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | Dict:0 | Dict:0 | Dict:2 | Dict:0
+127:23:Name -> Class:django.urls.exceptions.NoReverseMatch
+128:20:Call -> U
+128:20:Attribute -> BM:unittest.case.TestCase.fail
+128:20:Name -> Inst:tests.auth_tests.test_views.AuthViewNamedURLTests
+129:82:Name -> Const:str:'login' | Const:str:'logout' | Const:str:'password_change' | Const:str:'password_change_done' | Const:str:'password_reset' | Const:str:'password_reset_done' | Const:str:'password_reset_confirm' | Const:str:'password_reset_complete'
+133:24:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+135:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+135:22:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+135:22:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+140:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+140:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+140:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+140:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+141:8:Call -> Const:NoneType:None
+141:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+141:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+141:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+141:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+142:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+142:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+142:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+142:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+145:8:Call -> Const:NoneType:None
+145:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+145:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+145:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+145:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+146:8:Call -> Const:NoneType:None
+146:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+146:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+146:25:Call -> ERR
+146:25:Name -> Func:builtins.len
+146:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+146:29:Name -> Module:django.core.mail
+150:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+150:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+150:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+150:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+153:8:Call -> Const:NoneType:None
+153:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+153:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+153:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+153:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+154:8:Call -> Const:NoneType:None
+154:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+154:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+154:25:Call -> ERR
+154:25:Name -> Func:builtins.len
+154:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+154:29:Name -> Module:django.core.mail
+155:8:Call -> Const:NoneType:None
+155:8:Attribute -> BM:unittest.case.TestCase.assertIn
+155:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+155:33:Attribute -> ERR
+155:33:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+155:33:Name -> Module:django.core.mail
+156:8:Call -> Const:NoneType:None
+156:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+156:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+156:25:Attribute -> U
+156:25:Name -> Inst:django.conf.LazySettings
+156:54:Attribute -> ERR
+156:54:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+156:54:Name -> Module:django.core.mail
+159:8:Call -> Const:NoneType:None
+159:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+159:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+159:25:Call -> ERR
+159:25:Attribute -> ERR
+159:25:Call -> ERR
+159:25:Attribute -> ERR
+159:25:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+159:25:Name -> Module:django.core.mail
+165:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+165:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+165:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+165:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+169:8:Call -> Const:NoneType:None
+169:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+169:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+169:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+169:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+170:8:Call -> Const:NoneType:None
+170:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+170:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+170:25:Call -> ERR
+170:25:Name -> Func:builtins.len
+170:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+170:29:Name -> Module:django.core.mail
+171:8:Call -> Const:NoneType:None
+171:8:Attribute -> BM:unittest.case.TestCase.assertIn
+171:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+171:55:Attribute -> ERR
+171:55:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+171:55:Name -> Module:django.core.mail
+172:8:Call -> Const:NoneType:None
+172:8:Attribute -> BM:unittest.case.TestCase.assertIn
+172:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+172:58:Attribute -> ERR
+172:58:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+172:58:Name -> Module:django.core.mail
+179:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+179:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+179:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+179:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+182:8:Call -> Const:NoneType:None
+182:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+182:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+182:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+182:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+183:8:Call -> Const:NoneType:None
+183:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+183:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+183:25:Call -> ERR
+183:25:Name -> Func:builtins.len
+183:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+183:29:Name -> Module:django.core.mail
+184:18:Call -> ERR
+184:18:Attribute -> ERR
+184:18:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+184:18:Name -> Module:django.core.mail
+185:8:Call -> Const:NoneType:None
+185:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+185:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+185:25:Call -> ERR
+185:25:Name -> Func:builtins.len
+185:29:Call -> U
+185:29:Attribute -> U
+185:29:Name -> U
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+186:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+186:24:Call -> U
+186:24:Attribute -> U
+186:24:Name -> U
+187:8:Call -> Const:NoneType:None
+187:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+187:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+187:25:Call -> U
+187:25:Attribute -> U
+187:25:Call -> U
+187:25:Attribute -> U
+187:25:Name -> U
+188:8:Call -> Const:NoneType:None
+188:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+188:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+188:25:Call -> U
+188:25:Attribute -> U
+188:25:Call -> U
+188:25:Attribute -> U
+188:25:Name -> U
+189:8:Call -> Const:NoneType:None
+189:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+189:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+189:35:Call -> U
+189:35:Attribute -> U
+189:35:Call -> U
+189:35:Attribute -> U
+189:35:Name -> U
+190:8:Call -> Const:NoneType:None
+190:8:Attribute -> BM:unittest.case.TestCase.assertIn
+190:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+190:32:Call -> U
+190:32:Attribute -> U
+190:32:Call -> U
+190:32:Attribute -> U
+190:32:Name -> U
+197:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+197:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+197:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+197:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+200:8:Call -> Const:NoneType:None
+200:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+200:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+200:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+200:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+201:8:Call -> Const:NoneType:None
+201:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+201:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+201:25:Call -> ERR
+201:25:Name -> Func:builtins.len
+201:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+201:29:Name -> Module:django.core.mail
+202:8:Call -> Const:NoneType:None
+202:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+202:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+202:52:Attribute -> ERR
+202:52:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+202:52:Name -> Module:django.core.mail
+205:5:Call -> Inst:django.test.utils.override_settings
+205:5:Name -> Class:django.test.utils.override_settings
+215:13:Call -> Inst:unittest._log._AssertLogsContext
+215:13:Attribute -> BM:unittest.case.TestCase.assertLogs
+215:13:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+216:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+216:23:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+216:23:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+216:23:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+221:8:Call -> Const:NoneType:None
+221:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+221:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+221:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+221:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+222:8:Call -> Const:NoneType:None
+222:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+222:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+222:25:Call -> ERR
+222:25:Name -> Func:builtins.len
+222:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+222:29:Name -> Module:django.core.mail
+225:5:Call -> Inst:django.test.utils.override_settings
+225:5:Name -> Class:django.test.utils.override_settings
+231:13:Call -> Inst:unittest._log._AssertLogsContext
+231:13:Attribute -> BM:unittest.case.TestCase.assertLogs
+231:13:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+232:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+232:23:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+232:23:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+232:23:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+237:8:Call -> Const:NoneType:None
+237:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+237:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+237:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+237:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+238:8:Call -> Const:NoneType:None
+238:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+238:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+238:25:Call -> ERR
+238:25:Name -> Func:builtins.len
+238:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+238:29:Name -> Module:django.core.mail
+242:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+242:8:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+242:8:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+242:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+243:8:Call -> Const:NoneType:None
+243:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+243:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+243:25:Call -> ERR
+243:25:Name -> Func:builtins.len
+243:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+243:29:Name -> Module:django.core.mail
+244:15:Call -> Tuple:2
+244:15:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._read_signup_email
+244:15:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+244:39:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+244:39:Name -> Module:django.core.mail
+247:19:Call -> U
+247:19:Attribute -> Func:re.search
+247:19:Name -> Module:re
+247:62:Attribute -> U
+247:62:Name -> U
+248:8:Call -> Const:NoneType:None
+248:8:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+248:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+248:29:Name -> U
+249:15:Name -> U
+249:28:Name -> U
+252:20:Call -> Tuple:2
+252:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+252:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+253:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+253:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+253:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+253:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+253:35:Name -> U
+255:8:Call -> Const:NoneType:None
+255:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+255:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+255:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+258:20:Call -> Tuple:2
+258:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+258:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+261:15:Name -> U
+261:39:Name -> U
+263:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+263:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+263:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+263:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+263:35:Name -> U
+264:8:Call -> Const:NoneType:None
+264:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+264:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+264:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+268:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+268:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+268:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+268:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+269:8:Call -> Const:NoneType:None
+269:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+269:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+269:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+273:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+273:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+273:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+273:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+274:8:Call -> Const:NoneType:None
+274:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+274:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+274:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+278:20:Call -> Tuple:2
+278:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+278:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+279:15:Name -> U
+279:39:Name -> U
+281:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+281:8:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+281:8:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+281:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+282:12:Name -> U
+289:12:Call -> ERR
+289:12:Attribute -> ERR
+289:12:Attribute -> Inst:django.contrib.auth.models.UserManager
+289:12:Name -> Class:django.contrib.auth.models.User
+290:8:Call -> Const:NoneType:None
+290:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+290:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+290:28:Call -> U
+290:28:Attribute -> U
+290:28:Name -> U
+294:12:Call -> ERR
+294:12:Attribute -> ERR
+294:12:Attribute -> Inst:django.contrib.auth.models.UserManager
+294:12:Name -> Class:django.contrib.auth.models.User
+295:28:Attribute -> U
+295:28:Name -> U
+296:20:Call -> Tuple:2
+296:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+296:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+297:21:Call -> U
+297:21:Attribute -> U
+297:21:Name -> U
+298:8:Name -> U
+299:15:Call -> Const:str:''
+299:15:Attribute -> BM:builtins.str.join
+299:24:Name -> U
+301:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+301:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+301:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+301:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+302:12:Name -> Const:str:''
+308:8:Call -> Const:NoneType:None
+308:8:Attribute -> BM:unittest.case.TestCase.assertIs
+308:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+308:22:Attribute -> U
+308:22:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+309:8:Call -> U
+309:8:Attribute -> U
+309:8:Name -> U
+310:8:Call -> Const:NoneType:None
+310:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+310:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+310:25:Name -> U
+310:44:Attribute -> U
+310:44:Name -> U
+313:20:Call -> Tuple:2
+313:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+313:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+314:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+314:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+314:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+314:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+315:12:Name -> U
+318:12:Call -> ERR
+318:12:Attribute -> ERR
+318:12:Attribute -> Inst:django.contrib.auth.models.UserManager
+318:12:Name -> Class:django.contrib.auth.models.User
+319:8:Call -> Const:NoneType:None
+319:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+319:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+319:24:Call -> U
+319:24:Attribute -> U
+319:24:Name -> U
+321:8:Call -> Const:NoneType:None
+321:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+321:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+321:25:Name -> Const:str:'_password_reset_token'
+321:55:Attribute -> U
+321:55:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+321:55:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+324:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+324:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+324:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+324:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+324:35:Name -> U
+325:8:Call -> Const:NoneType:None
+325:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+325:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+325:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+328:20:Call -> Tuple:2
+328:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+328:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+329:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+329:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+329:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+329:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+330:12:Name -> U
+332:8:Call -> Const:NoneType:None
+332:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.assertFormError
+332:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+333:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+333:22:Attribute -> Dict:1
+333:22:Name -> Class:django.contrib.auth.forms.SetPasswordForm
+337:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+337:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+337:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+337:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+340:8:Call -> Const:NoneType:None
+340:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+340:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+341:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+345:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+345:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+345:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+345:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+348:8:Call -> Const:NoneType:None
+348:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+348:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+348:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+351:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+351:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+351:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+351:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+355:8:Call -> Const:NoneType:None
+355:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+355:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+356:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+360:20:Call -> Tuple:2
+360:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+360:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+361:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+361:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+361:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+361:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+362:12:Name -> U
+364:8:Call -> Const:NoneType:None
+364:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+364:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+364:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+367:20:Call -> Tuple:2
+367:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+367:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+368:15:Call -> U
+368:15:Attribute -> U
+368:15:Name -> U
+369:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+369:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+369:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+369:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+370:12:Name -> U
+372:8:Call -> Const:NoneType:None
+372:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+372:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+372:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+375:20:Call -> Tuple:2
+375:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+375:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+376:15:Call -> U
+376:15:Attribute -> U
+376:15:Name -> U
+377:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+377:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+377:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+377:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+378:12:Name -> U
+380:8:Call -> Const:NoneType:None
+380:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+380:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+381:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+385:20:Call -> Tuple:2
+385:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+385:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+386:15:Call -> U
+386:15:Attribute -> U
+386:15:Name -> U
+387:8:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+387:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+388:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+388:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+388:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+388:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+389:12:Name -> U
+392:8:Call -> Const:NoneType:None
+392:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+392:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+392:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+395:20:Call -> Tuple:2
+395:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+395:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+396:15:Call -> U
+396:15:Attribute -> U
+396:15:Name -> U
+397:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+397:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+397:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+397:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+398:12:Name -> U
+400:8:Call -> Const:NoneType:None
+400:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+400:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+400:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+401:8:Call -> Const:NoneType:None
+401:8:Attribute -> BM:unittest.case.TestCase.assertIn
+401:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+401:22:Name -> Const:str:'_auth_user_id'
+401:35:Attribute -> U
+401:35:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+401:35:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+403:5:Call -> Inst:django.test.utils.override_settings
+403:5:Name -> Class:django.test.utils.override_settings
+412:20:Call -> Tuple:2
+412:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+412:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+413:15:Call -> U
+413:15:Attribute -> U
+413:15:Name -> U
+414:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+414:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+414:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+414:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+415:12:Name -> U
+417:8:Call -> Const:NoneType:None
+417:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+417:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+417:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+418:8:Call -> Const:NoneType:None
+418:8:Attribute -> BM:unittest.case.TestCase.assertIn
+418:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+418:22:Name -> Const:str:'_auth_user_id'
+418:35:Attribute -> U
+418:35:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+418:35:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+419:8:Call -> Const:NoneType:None
+419:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+419:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+419:25:Attribute -> U
+419:25:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+419:25:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+419:45:Name -> Const:str:'_auth_user_backend'
+419:67:Name -> Const:str:'django.contrib.auth.backends.AllowAllUs
+422:20:Call -> Tuple:2
+422:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+422:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+423:15:Call -> U
+423:15:Attribute -> U
+423:15:Name -> U
+424:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+424:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+424:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+425:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+425:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+425:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+425:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+426:12:Name -> U
+428:8:Call -> Const:NoneType:None
+428:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+428:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+428:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+429:8:Call -> Const:NoneType:None
+429:8:Attribute -> BM:unittest.case.TestCase.assertIn
+429:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+429:22:Name -> Const:str:'_auth_user_id'
+429:35:Attribute -> U
+429:35:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+429:35:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+432:20:Call -> Tuple:2
+432:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+432:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+433:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+433:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+433:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+433:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+433:35:Name -> U
+438:19:Attribute -> ERR
+438:19:Call -> ERR
+438:19:Attribute -> ERR
+438:19:Attribute -> Inst:django.contrib.auth.models.UserManager
+438:19:Name -> Class:django.contrib.auth.models.User
+439:8:Call -> Const:NoneType:None
+439:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+439:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+439:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+439:53:Name -> U
+442:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+442:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+442:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+442:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+443:8:Call -> Const:NoneType:None
+443:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+443:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+443:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+446:20:Call -> Tuple:2
+446:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+446:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+449:17:Call -> Inst:django.test.client.Client
+449:17:Name -> Class:django.test.client.Client
+450:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+450:19:Attribute -> BM:django.test.client.Client.get
+450:19:Name -> Inst:django.test.client.Client
+450:30:Name -> U
+451:16:Attribute -> U
+451:16:Attribute -> Const:NoneType:None | Inst:django.urls.resolvers.ResolverMatch | Const:NoneType:None | U
+451:16:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+452:18:Attribute -> U
+452:18:Attribute -> Const:NoneType:None | Inst:django.urls.resolvers.ResolverMatch | Const:NoneType:None | U
+452:18:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+453:8:Call -> Const:NoneType:None
+453:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+453:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+453:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+453:67:Name -> U
+454:8:Call -> Const:NoneType:None
+454:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+454:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+454:25:Attribute -> U
+454:25:Name -> Inst:django.test.client.Client
+454:66:Name -> U
+457:20:Call -> Tuple:2
+457:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+457:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+458:15:Call -> U
+458:15:Attribute -> U
+458:15:Name -> U
+459:17:Call -> Inst:django.test.client.Client
+459:17:Name -> Class:django.test.client.Client
+460:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+460:19:Attribute -> BM:django.test.client.Client.get
+460:19:Name -> Inst:django.test.client.Client
+460:30:Name -> U
+461:16:Attribute -> U
+461:16:Attribute -> Const:NoneType:None | Inst:django.urls.resolvers.ResolverMatch | Const:NoneType:None | U
+461:16:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+462:18:Attribute -> U
+462:18:Attribute -> Const:NoneType:None | Inst:django.urls.resolvers.ResolverMatch | Const:NoneType:None | U
+462:18:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+463:8:Call -> Const:NoneType:None
+463:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+463:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+464:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+464:69:Name -> U
+466:8:Call -> Const:NoneType:None
+466:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+466:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+466:25:Attribute -> U
+466:25:Name -> Inst:django.test.client.Client
+466:66:Name -> U
+469:20:Call -> Tuple:2
+469:20:Attribute -> BM:tests.auth_tests.test_views.PasswordResetTest._test_confirm_start
+469:20:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+470:24:Call -> U
+470:24:Attribute -> U
+470:24:Call -> U
+470:24:Attribute -> U
+470:24:Name -> U
+471:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+471:19:Attribute -> BM:django.test.client.Client.get
+471:19:Call -> Inst:django.test.client.Client
+471:19:Name -> Class:django.test.client.Client
+471:60:Name -> U
+472:8:Call -> Const:NoneType:None
+472:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+472:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+472:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+476:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+476:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+476:13:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+476:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+476:60:Name -> Const:str:"The URL path must contain 'uidb64' and 
+477:12:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+477:12:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+477:12:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+477:12:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+479:5:Call -> Inst:django.test.utils.modify_settings
+479:5:Name -> Class:django.test.utils.modify_settings
+484:12:Call -> U | Const:str:'' | Const:str:''
+484:12:Name -> Func:django.urls.base.reverse
+485:12:Call -> U | Const:str:'' | Const:str:''
+485:12:Name -> Func:django.urls.base.reverse
+486:12:Call -> U | Const:str:'' | Const:str:''
+486:12:Name -> Func:django.urls.base.reverse
+487:12:Call -> U | Const:str:'' | Const:str:''
+487:12:Name -> Func:django.urls.base.reverse
+490:19:Name -> List:4
+491:17:Call -> Gen:unittest.case.TestCase.subTest
+491:17:Attribute -> BM:unittest.case.TestCase.subTest
+491:17:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+491:34:Name -> U | Const:str:'' | Const:str:''
+492:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+492:27:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+492:27:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+492:27:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+492:43:Name -> U | Const:str:'' | Const:str:''
+493:16:Call -> Const:NoneType:None
+493:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+493:16:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+493:33:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+493:33:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+495:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+495:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+495:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+495:19:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+498:8:Call -> Const:NoneType:None
+498:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+498:8:Name -> Inst:tests.auth_tests.test_views.PasswordResetTest
+499:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+503:1:Call -> Inst:django.test.utils.override_settings
+503:1:Name -> Class:django.test.utils.override_settings
+504:34:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+507:5:Name -> Class:builtins.classmethod
+509:8:Name -> Class:tests.auth_tests.test_views.CustomUserPasswordResetTest
+509:17:Call -> ERR
+509:17:Attribute -> ERR
+509:17:Attribute -> Inst:tests.auth_tests.models.custom_user.CustomUserManager
+509:17:Name -> Class:tests.auth_tests.models.custom_user.CustomUser
+511:26:Call -> Inst:_pydatetime.date
+511:26:Attribute -> Class:_pydatetime.date
+511:26:Name -> Module:datetime
+513:8:Call -> U
+513:8:Attribute -> U
+513:8:Attribute -> U
+513:8:Name -> Class:tests.auth_tests.test_views.CustomUserPasswordResetTest
+514:8:Call -> U
+514:8:Attribute -> U
+514:8:Attribute -> U
+514:8:Name -> Class:tests.auth_tests.test_views.CustomUserPasswordResetTest
+517:8:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+517:22:Call -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+517:22:Name -> Class:tests.auth_tests.client.PasswordResetConfirmClient
+521:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+521:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+521:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+521:19:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+521:66:Attribute -> Const:str:'staffmember@example.com'
+521:66:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+522:8:Call -> Const:NoneType:None
+522:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+522:8:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+522:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+522:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+523:8:Call -> Const:NoneType:None
+523:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+523:8:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+523:25:Call -> ERR
+523:25:Name -> Func:builtins.len
+523:29:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+523:29:Name -> Module:django.core.mail
+524:15:Call -> Tuple:2
+524:15:Attribute -> BM:tests.auth_tests.test_views.CustomUserPasswordResetTest._read_signup_email
+524:15:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+524:39:Attribute -> List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0 | List:0
+524:39:Name -> Module:django.core.mail
+527:19:Call -> U
+527:19:Attribute -> Func:re.search
+527:19:Name -> Module:re
+527:62:Attribute -> U
+527:62:Name -> U
+528:8:Call -> Const:NoneType:None
+528:8:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+528:8:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+528:29:Name -> U
+529:15:Name -> U
+529:28:Name -> U
+532:20:Call -> Tuple:2
+532:20:Attribute -> BM:tests.auth_tests.test_views.CustomUserPasswordResetTest._test_confirm_start
+532:20:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+533:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+533:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+533:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+533:19:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+533:35:Name -> U
+535:8:Call -> Const:NoneType:None
+535:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+535:8:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+535:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+537:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+537:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.post
+537:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+537:19:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+538:12:Name -> U
+544:8:Call -> Const:NoneType:None
+544:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+544:8:Name -> Inst:tests.auth_tests.test_views.CustomUserPasswordResetTest
+544:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+547:1:Call -> Inst:django.test.utils.override_settings
+547:1:Name -> Class:django.test.utils.override_settings
+548:53:Name -> Class:tests.auth_tests.test_views.CustomUserPasswordResetTest
+549:5:Name -> Class:builtins.classmethod
+551:8:Name -> Class:tests.auth_tests.test_views.CustomUserCompositePrimaryKeyPasswordResetTest
+551:17:Call -> ERR
+551:17:Attribute -> ERR
+551:17:Attribute -> Inst:tests.auth_tests.models.custom_user.CustomUserManager
+551:17:Name -> Class:tests.auth_tests.models.custom_user.CustomUserCompositePrimaryKey
+553:26:Call -> Inst:_pydatetime.date
+553:26:Attribute -> Class:_pydatetime.date
+553:26:Name -> Module:datetime
+555:8:Call -> U
+555:8:Attribute -> U
+555:8:Attribute -> U
+555:8:Name -> Class:tests.auth_tests.test_views.CustomUserCompositePrimaryKeyPasswordResetTest
+556:8:Call -> U
+556:8:Attribute -> U
+556:8:Attribute -> U
+556:8:Name -> Class:tests.auth_tests.test_views.CustomUserCompositePrimaryKeyPasswordResetTest
+559:1:Call -> Inst:django.test.utils.override_settings
+559:1:Name -> Class:django.test.utils.override_settings
+560:32:Name -> Class:tests.auth_tests.test_views.CustomUserPasswordResetTest
+563:8:Call -> U
+563:8:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+563:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+563:8:Name -> Class:tests.auth_tests.models.uuid_pk.UUIDUser
+564:18:Attribute -> Const:str:'staffmember@example.com'
+564:18:Name -> Inst:tests.auth_tests.test_views.UUIDUserPasswordResetTest
+568:15:Call -> Tuple:2
+568:15:Attribute -> BM:tests.auth_tests.test_views.CustomUserPasswordResetTest._test_confirm_start
+568:15:Call -> Super
+568:15:Name -> Class:builtins.super
+572:18:Call -> Tuple:2
+572:18:Attribute -> BM:tests.auth_tests.test_views.UUIDUserPasswordResetTest._test_confirm_start
+572:18:Name -> Inst:tests.auth_tests.test_views.UUIDUserPasswordResetTest
+573:25:Call -> U
+573:25:Name -> Func:django.utils.http.urlsafe_base64_encode
+574:35:Call -> U
+574:35:Attribute -> U
+574:35:Call -> U
+574:35:Attribute -> U
+574:35:Name -> U
+575:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+575:19:Attribute -> BM:tests.auth_tests.client.PasswordResetConfirmClient.get
+575:19:Attribute -> Inst:tests.auth_tests.client.PasswordResetConfirmClient
+575:19:Name -> Inst:tests.auth_tests.test_views.UUIDUserPasswordResetTest
+576:18:Call -> Const:str:''
+576:18:Attribute -> BM:builtins.str.join
+576:28:Name -> U
+576:35:Name -> U
+576:51:Name -> U
+578:8:Call -> Const:NoneType:None
+578:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+578:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserPasswordResetTest
+578:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+581:25:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+583:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+583:19:Attribute -> BM:django.test.client.Client.post
+583:19:Attribute -> Inst:django.test.client.Client
+583:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+590:8:Call -> Const:NoneType:None
+590:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.assertFormError
+590:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+591:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+592:12:Attribute -> Dict:2
+592:12:Name -> Class:django.contrib.auth.forms.AuthenticationForm
+593:27:Attribute -> ERR
+593:27:Call -> ERR
+593:27:Attribute -> ERR
+593:27:Attribute -> ERR
+593:27:Name -> Class:django.contrib.auth.models.User
+597:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+597:8:Attribute -> BM:django.test.client.Client.post
+597:8:Attribute -> Inst:django.test.client.Client
+597:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+600:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+600:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+600:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+601:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+601:19:Attribute -> BM:django.test.client.Client.post
+601:19:Attribute -> Inst:django.test.client.Client
+601:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+609:8:Call -> Const:NoneType:None
+609:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.assertFormError
+609:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+610:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+610:22:Attribute -> U
+610:22:Name -> Class:django.contrib.auth.forms.PasswordChangeForm
+614:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+614:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+614:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+615:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+615:19:Attribute -> BM:django.test.client.Client.post
+615:19:Attribute -> Inst:django.test.client.Client
+615:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+623:8:Call -> Const:NoneType:None
+623:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.assertFormError
+623:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+624:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+624:22:Attribute -> Dict:1
+624:22:Name -> Class:django.contrib.auth.forms.SetPasswordForm
+628:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+628:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+628:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+629:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+629:8:Attribute -> BM:django.test.client.Client.post
+629:8:Attribute -> Inst:django.test.client.Client
+629:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+637:8:Call -> Const:NoneType:None
+637:8:Attribute -> BM:tests.auth_tests.test_views.ChangePasswordTest.fail_login
+637:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+638:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+638:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+638:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+641:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+641:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+641:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+642:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+642:19:Attribute -> BM:django.test.client.Client.post
+642:19:Attribute -> Inst:django.test.client.Client
+642:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+650:8:Call -> Const:NoneType:None
+650:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+650:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+651:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+654:5:Call -> Inst:django.test.utils.override_settings
+654:5:Name -> Class:django.test.utils.override_settings
+656:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+656:19:Attribute -> BM:django.test.client.Client.get
+656:19:Attribute -> Inst:django.test.client.Client
+656:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+657:8:Call -> Const:NoneType:None
+657:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+657:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+658:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+664:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+664:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+664:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+665:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+665:19:Attribute -> BM:django.test.client.Client.post
+665:19:Attribute -> Inst:django.test.client.Client
+665:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+673:8:Call -> Const:NoneType:None
+673:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+673:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+674:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+678:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+678:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+678:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+679:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+679:19:Attribute -> BM:django.test.client.Client.post
+679:19:Attribute -> Inst:django.test.client.Client
+679:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+687:8:Call -> Const:NoneType:None
+687:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+687:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+687:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+690:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+690:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+690:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+691:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+691:19:Attribute -> BM:django.test.client.Client.post
+691:19:Attribute -> Inst:django.test.client.Client
+691:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+699:8:Call -> Const:NoneType:None
+699:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+699:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+700:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+703:5:Call -> Inst:django.test.utils.modify_settings
+703:5:Name -> Class:django.test.utils.modify_settings
+707:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+707:19:Attribute -> BM:django.test.client.Client.post
+707:19:Attribute -> Inst:django.test.client.Client
+707:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+715:8:Call -> Const:NoneType:None
+715:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+715:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+716:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+717:12:Attribute -> U
+717:12:Name -> Inst:django.conf.LazySettings
+721:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+721:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+721:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+723:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+723:19:Attribute -> BM:django.test.client.Client.post
+723:19:Attribute -> Inst:django.test.client.Client
+723:19:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+731:8:Call -> Const:NoneType:None
+731:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+731:8:Name -> Inst:tests.auth_tests.test_views.ChangePasswordTest
+732:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+736:33:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+743:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+743:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+743:8:Name -> Inst:tests.auth_tests.test_views.SessionAuthenticationTests
+744:31:Attribute -> U
+744:31:Attribute -> U
+744:31:Attribute -> Inst:django.test.client.Client
+744:31:Name -> Inst:tests.auth_tests.test_views.SessionAuthenticationTests
+745:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+745:19:Attribute -> BM:django.test.client.Client.post
+745:19:Attribute -> Inst:django.test.client.Client
+745:19:Name -> Inst:tests.auth_tests.test_views.SessionAuthenticationTests
+754:8:Call -> Const:NoneType:None
+754:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+754:8:Name -> Inst:tests.auth_tests.test_views.SessionAuthenticationTests
+754:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+756:8:Call -> Const:NoneType:None
+756:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+756:8:Name -> Inst:tests.auth_tests.test_views.SessionAuthenticationTests
+756:28:Name -> U
+756:50:Attribute -> U
+756:50:Attribute -> U
+756:50:Attribute -> Inst:django.test.client.Client
+756:50:Name -> Inst:tests.auth_tests.test_views.SessionAuthenticationTests
+759:16:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+761:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+761:19:Attribute -> BM:django.test.client.Client.get
+761:19:Attribute -> Inst:django.test.client.Client
+761:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+761:35:Call -> U | Const:str:'' | Const:str:''
+761:35:Name -> Func:django.urls.base.reverse
+762:8:Call -> Const:NoneType:None
+762:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+762:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+762:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+762:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+763:11:Call -> U
+763:11:Attribute -> BM:django.apps.registry.Apps.is_installed
+763:11:Name -> Inst:django.apps.registry.Apps
+764:19:Call -> U
+764:19:Attribute -> BM:django.apps.registry.Apps.get_model
+764:19:Name -> Inst:django.apps.registry.Apps
+765:19:Call -> U
+765:19:Attribute -> U
+765:19:Attribute -> U
+765:19:Name -> U
+766:12:Call -> Const:NoneType:None
+766:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+766:12:Name -> Inst:tests.auth_tests.test_views.LoginTest
+766:29:Attribute -> U
+766:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+766:55:Name -> U
+767:12:Call -> Const:NoneType:None
+767:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+767:12:Name -> Inst:tests.auth_tests.test_views.LoginTest
+767:29:Attribute -> U
+767:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+767:60:Attribute -> U
+767:60:Name -> U
+769:12:Call -> Const:NoneType:None
+769:12:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+769:12:Name -> Inst:tests.auth_tests.test_views.LoginTest
+769:34:Attribute -> U
+769:34:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+769:60:Name -> Class:django.contrib.sites.requests.RequestSite
+770:8:Call -> Const:NoneType:None
+770:8:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+770:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+770:30:Attribute -> U
+770:30:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+770:56:Name -> Class:django.contrib.auth.forms.AuthenticationForm
+773:20:Call -> U | Const:str:'' | Const:str:''
+773:20:Name -> Func:django.urls.base.reverse
+785:23:Name -> Tuple:7
+786:17:Call -> Gen:unittest.case.TestCase.subTest
+786:17:Attribute -> BM:unittest.case.TestCase.subTest
+786:17:Name -> Inst:tests.auth_tests.test_views.LoginTest
+786:38:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+788:27:Name -> U | Const:str:'' | Const:str:''
+789:28:Name -> Const:str:'next'
+790:31:Call -> U | Const:str:'' | Const:str:''
+790:31:Name -> Func:urllib.parse.quote
+790:37:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+792:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+792:27:Attribute -> BM:django.test.client.Client.post
+792:27:Attribute -> Inst:django.test.client.Client
+792:27:Name -> Inst:tests.auth_tests.test_views.LoginTest
+793:20:Name -> U
+799:16:Call -> Const:NoneType:None
+799:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+799:16:Name -> Inst:tests.auth_tests.test_views.LoginTest
+799:33:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+799:33:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+800:16:Call -> Const:NoneType:None
+800:16:Attribute -> BM:unittest.case.TestCase.assertNotIn
+800:16:Name -> Inst:tests.auth_tests.test_views.LoginTest
+801:20:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+801:29:Attribute -> U
+801:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+801:68:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+815:24:Name -> Tuple:8
+816:17:Call -> Gen:unittest.case.TestCase.subTest
+816:17:Attribute -> BM:unittest.case.TestCase.subTest
+816:17:Name -> Inst:tests.auth_tests.test_views.LoginTest
+816:39:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+818:27:Name -> U | Const:str:'' | Const:str:''
+819:28:Name -> Const:str:'next'
+820:32:Call -> U | Const:str:'' | Const:str:''
+820:32:Name -> Func:urllib.parse.quote
+820:38:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+822:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+822:27:Attribute -> BM:django.test.client.Client.post
+822:27:Attribute -> Inst:django.test.client.Client
+822:27:Name -> Inst:tests.auth_tests.test_views.LoginTest
+823:20:Name -> U
+829:16:Call -> Const:NoneType:None
+829:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+829:16:Name -> Inst:tests.auth_tests.test_views.LoginTest
+829:33:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+829:33:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+830:16:Call -> Const:NoneType:None
+830:16:Attribute -> BM:unittest.case.TestCase.assertIn
+830:16:Name -> Inst:tests.auth_tests.test_views.LoginTest
+830:30:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+830:40:Attribute -> U
+830:40:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+830:79:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+833:20:Call -> U | Const:str:'' | Const:str:''
+833:20:Name -> Func:django.urls.base.reverse
+836:19:Name -> U | Const:str:'' | Const:str:''
+837:20:Name -> Const:str:'next'
+838:24:Call -> U | Const:str:'' | Const:str:''
+838:24:Name -> Func:urllib.parse.quote
+838:30:Name -> Const:str:'http://testserver/path'
+844:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+844:19:Attribute -> BM:django.test.client.Client.post
+844:19:Attribute -> Inst:django.test.client.Client
+844:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+844:36:Name -> U
+844:53:Name -> Dict:2
+845:8:Call -> Const:NoneType:None
+845:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+845:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+845:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+845:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+846:8:Call -> Const:NoneType:None
+846:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+846:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+846:28:Attribute -> U
+846:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+846:42:Name -> Const:str:'http://testserver/path'
+847:8:Call -> Const:NoneType:None
+847:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+847:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+847:25:Attribute -> U
+847:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+847:39:Attribute -> U
+847:39:Name -> Inst:django.conf.LazySettings
+852:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+852:19:Attribute -> BM:django.test.client.Client.post
+852:19:Attribute -> Inst:django.test.client.Client
+852:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+860:8:Call -> Const:NoneType:None
+860:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+860:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+861:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+861:22:Attribute -> U
+861:22:Name -> Inst:django.conf.LazySettings
+870:19:Call -> Inst:django.http.response.HttpResponse
+870:19:Name -> Class:django.http.response.HttpResponse
+874:14:Call -> Inst:django.http.request.HttpRequest
+874:14:Name -> Class:django.http.request.HttpRequest
+875:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+875:8:Attribute -> BM:django.middleware.csrf.CsrfViewMiddleware.process_view
+875:8:Call -> Inst:django.middleware.csrf.CsrfViewMiddleware
+875:8:Name -> Class:django.middleware.csrf.CsrfViewMiddleware
+875:27:Name -> Func:tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.get_response
+875:54:Name -> Inst:django.http.request.HttpRequest
+875:59:Call -> Func:django.views.generic.base.View.as_view.view
+875:59:Attribute -> BM:django.views.generic.base.View.as_view
+875:59:Name -> Class:django.contrib.auth.views.LoginView
+877:8:Call -> Const:str:''
+877:8:Name -> Func:django.middleware.csrf.get_token
+877:18:Name -> Inst:django.http.request.HttpRequest
+878:15:Call -> U | Const:NoneType:None
+878:15:Call -> Inst:django.middleware.csrf.CsrfViewMiddleware
+878:15:Name -> Class:django.middleware.csrf.CsrfViewMiddleware
+878:34:Call -> Func:django.views.generic.base.View.as_view.view
+878:34:Attribute -> BM:django.views.generic.base.View.as_view
+878:34:Name -> Class:django.contrib.auth.views.LoginView
+878:55:Name -> Inst:django.http.request.HttpRequest
+879:22:Call -> U
+879:22:Attribute -> U
+879:22:Attribute -> U
+879:22:Name -> U | Const:NoneType:None
+879:39:Attribute -> U
+879:39:Name -> Inst:django.conf.LazySettings
+880:17:Attribute -> U
+880:17:Name -> U
+883:14:Call -> Inst:django.http.request.HttpRequest
+883:14:Name -> Class:django.http.request.HttpRequest
+884:8:Attribute -> Dict:0 | Dict:1
+884:8:Name -> Inst:django.http.request.HttpRequest
+884:20:Attribute -> U
+884:20:Name -> Inst:django.conf.LazySettings
+884:49:Name -> U
+885:8:Name -> Inst:django.http.request.HttpRequest
+886:8:Name -> Inst:django.http.request.HttpRequest
+889:35:Name -> U
+893:8:Call -> Const:NoneType:None
+893:8:Attribute -> BM:django.contrib.sessions.middleware.SessionMiddleware.process_request
+893:8:Call -> Inst:django.contrib.sessions.middleware.SessionMiddleware
+893:8:Name -> Class:django.contrib.sessions.middleware.SessionMiddleware
+893:26:Name -> Func:tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.get_response
+893:56:Name -> Inst:django.http.request.HttpRequest
+894:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+894:8:Attribute -> BM:django.middleware.csrf.CsrfViewMiddleware.process_view
+894:8:Call -> Inst:django.middleware.csrf.CsrfViewMiddleware
+894:8:Name -> Class:django.middleware.csrf.CsrfViewMiddleware
+894:27:Name -> Func:tests.auth_tests.test_views.LoginTest.test_login_csrf_rotate.get_response
+894:54:Name -> Inst:django.http.request.HttpRequest
+894:59:Call -> Func:django.views.generic.base.View.as_view.view
+894:59:Attribute -> BM:django.views.generic.base.View.as_view
+894:59:Name -> Class:django.contrib.auth.views.LoginView
+895:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+895:8:Name -> Inst:django.http.request.HttpRequest
+898:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+898:8:Name -> Inst:django.http.request.HttpRequest
+899:15:Call -> U | Const:NoneType:None
+899:15:Call -> Inst:django.middleware.csrf.CsrfViewMiddleware
+899:15:Name -> Class:django.middleware.csrf.CsrfViewMiddleware
+899:34:Call -> Func:django.views.generic.base.View.as_view.view
+899:34:Attribute -> BM:django.views.generic.base.View.as_view
+899:34:Name -> Class:django.contrib.auth.views.LoginView
+899:55:Name -> Inst:django.http.request.HttpRequest
+900:22:Call -> U
+900:22:Attribute -> U
+900:22:Attribute -> U
+900:22:Name -> U | Const:NoneType:None
+900:39:Attribute -> U
+900:39:Name -> Inst:django.conf.LazySettings
+901:17:Attribute -> U
+901:17:Name -> U
+904:8:Call -> Const:NoneType:None
+904:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+904:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+904:28:Name -> U
+904:36:Name -> U
+912:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+912:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+912:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+913:31:Attribute -> U
+913:31:Attribute -> U
+913:31:Attribute -> Inst:django.test.client.Client
+913:31:Name -> Inst:tests.auth_tests.test_views.LoginTest
+915:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+915:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+915:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+916:8:Call -> Const:NoneType:None
+916:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+916:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+916:28:Name -> U
+916:50:Attribute -> U
+916:50:Attribute -> U
+916:50:Attribute -> Inst:django.test.client.Client
+916:50:Name -> Inst:tests.auth_tests.test_views.LoginTest
+922:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+922:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+922:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+923:31:Attribute -> U
+923:31:Attribute -> U
+923:31:Attribute -> Inst:django.test.client.Client
+923:31:Name -> Inst:tests.auth_tests.test_views.LoginTest
+926:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+926:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+926:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+927:8:Call -> Const:NoneType:None
+927:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+927:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+927:25:Name -> U
+927:47:Attribute -> U
+927:47:Attribute -> U
+927:47:Attribute -> Inst:django.test.client.Client
+927:47:Name -> Inst:tests.auth_tests.test_views.LoginTest
+929:15:Call -> ERR
+929:15:Attribute -> ERR
+929:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+929:15:Name -> Class:django.contrib.auth.models.User
+930:8:Call -> U
+930:8:Attribute -> U
+930:8:Name -> U
+931:8:Call -> U
+931:8:Attribute -> U
+931:8:Name -> U
+933:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+933:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+933:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+934:8:Call -> Const:NoneType:None
+934:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+934:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+934:28:Name -> U
+934:50:Attribute -> U
+934:50:Attribute -> U
+934:50:Attribute -> Inst:django.test.client.Client
+934:50:Name -> Inst:tests.auth_tests.test_views.LoginTest
+941:15:Call -> ERR
+941:15:Attribute -> ERR
+941:15:Attribute -> Inst:django.contrib.auth.models.UserManager
+941:15:Name -> Class:django.contrib.auth.models.User
+942:17:Call -> U | Const:NoneType:None
+942:17:Name -> Func:importlib.import_module | BM:tests.serializers.test_yaml.YamlImportModuleMock.import_module | U
+942:31:Attribute -> U
+942:31:Name -> Inst:django.conf.LazySettings
+943:18:Call -> U
+943:18:Attribute -> U
+943:18:Name -> U | Const:NoneType:None
+944:8:Name -> U
+944:16:Name -> Const:str:'_auth_user_id'
+944:31:Attribute -> U
+944:31:Name -> U
+945:8:Call -> U
+945:8:Attribute -> U
+945:8:Name -> U
+946:31:Attribute -> U
+946:31:Name -> U
+947:8:Attribute -> Inst:http.cookies.SimpleCookie
+947:8:Attribute -> Inst:django.test.client.Client
+947:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+947:28:Attribute -> U
+947:28:Name -> Inst:django.conf.LazySettings
+947:60:Name -> U
+949:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+949:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+949:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+950:8:Call -> Const:NoneType:None
+950:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+950:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+950:28:Name -> U
+950:50:Attribute -> U
+950:50:Attribute -> U
+950:50:Attribute -> Inst:django.test.client.Client
+950:50:Name -> Inst:tests.auth_tests.test_views.LoginTest
+953:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+953:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+953:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+954:8:Call -> Const:NoneType:None
+954:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+954:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+954:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+957:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+957:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+957:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+958:8:Call -> Const:NoneType:None
+958:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+958:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+958:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+961:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+961:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+961:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+962:8:Call -> Const:NoneType:None
+962:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+962:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+963:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+966:5:Call -> Inst:django.test.utils.override_settings
+966:5:Name -> Class:django.test.utils.override_settings
+968:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+968:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+968:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+969:8:Call -> Const:NoneType:None
+969:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+969:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+969:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+972:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+972:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+972:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+973:8:Call -> Const:NoneType:None
+973:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+973:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+973:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+976:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+976:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+976:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+977:8:Call -> Const:NoneType:None
+977:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+977:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+977:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+979:5:Call -> Inst:django.test.utils.modify_settings
+979:5:Name -> Class:django.test.utils.modify_settings
+983:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+983:19:Attribute -> BM:django.test.client.Client.get
+983:19:Attribute -> Inst:django.test.client.Client
+983:19:Name -> Inst:tests.auth_tests.test_views.LoginTest
+983:35:Call -> U | Const:str:'' | Const:str:''
+983:35:Name -> Func:django.urls.base.reverse
+984:8:Call -> Const:NoneType:None
+984:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+984:8:Name -> Inst:tests.auth_tests.test_views.LoginTest
+984:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+984:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+987:23:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+991:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+991:19:Attribute -> BM:django.test.client.Client.get
+991:19:Attribute -> Inst:django.test.client.Client
+991:19:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+992:8:Call -> Const:NoneType:None
+992:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+992:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+992:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+992:39:Name -> U
+994:5:Call -> Inst:django.test.utils.override_settings
+994:5:Name -> Class:django.test.utils.override_settings
+996:8:Call -> Const:NoneType:None
+996:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+996:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+998:5:Call -> Inst:django.test.utils.override_settings
+998:5:Name -> Class:django.test.utils.override_settings
+1000:8:Call -> Const:NoneType:None
+1000:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+1000:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+1002:5:Call -> Inst:django.test.utils.override_settings
+1002:5:Name -> Class:django.test.utils.override_settings
+1004:22:Call -> U | Const:str:'' | Const:str:''
+1004:22:Name -> Func:urllib.parse.quote
+1005:63:Name -> U | Const:str:'' | Const:str:''
+1006:8:Call -> Const:NoneType:None
+1006:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+1006:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+1006:34:Name -> U
+1008:5:Call -> Inst:django.test.utils.override_settings
+1008:5:Name -> Class:django.test.utils.override_settings
+1010:22:Call -> U | Const:str:'' | Const:str:''
+1010:22:Name -> Func:urllib.parse.quote
+1011:47:Name -> U | Const:str:'' | Const:str:''
+1012:8:Call -> Const:NoneType:None
+1012:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+1012:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+1012:34:Name -> U
+1014:5:Call -> Inst:django.test.utils.override_settings
+1014:5:Name -> Class:django.test.utils.override_settings
+1016:8:Call -> Const:NoneType:None
+1016:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+1016:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+1018:5:Call -> Inst:django.test.utils.override_settings
+1018:5:Name -> Class:django.test.utils.override_settings
+1020:22:Call -> U | Const:str:'' | Const:str:''
+1020:22:Name -> Func:urllib.parse.quote
+1021:64:Name -> U | Const:str:'' | Const:str:''
+1022:8:Call -> Const:NoneType:None
+1022:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+1022:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+1022:34:Name -> U
+1024:5:Call -> Inst:django.test.utils.override_settings
+1024:5:Name -> Class:django.test.utils.override_settings
+1024:33:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+1024:33:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+1026:8:Call -> Const:NoneType:None
+1026:8:Attribute -> BM:tests.auth_tests.test_views.LoginURLSettings.assertLoginURLEquals
+1026:8:Name -> Inst:tests.auth_tests.test_views.LoginURLSettings
+1029:27:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1033:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1033:19:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1033:19:Name -> Inst:tests.auth_tests.test_views.LoginRedirectUrlTest
+1034:8:Call -> Const:NoneType:None
+1034:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1034:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectUrlTest
+1034:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1034:39:Name -> U
+1037:8:Call -> Const:NoneType:None
+1037:8:Attribute -> BM:tests.auth_tests.test_views.LoginRedirectUrlTest.assertLoginRedirectURLEqual
+1037:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectUrlTest
+1039:5:Call -> Inst:django.test.utils.override_settings
+1039:5:Name -> Class:django.test.utils.override_settings
+1041:8:Call -> Const:NoneType:None
+1041:8:Attribute -> BM:tests.auth_tests.test_views.LoginRedirectUrlTest.assertLoginRedirectURLEqual
+1041:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectUrlTest
+1043:5:Call -> Inst:django.test.utils.override_settings
+1043:5:Name -> Class:django.test.utils.override_settings
+1045:8:Call -> Const:NoneType:None
+1045:8:Attribute -> BM:tests.auth_tests.test_views.LoginRedirectUrlTest.assertLoginRedirectURLEqual
+1045:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectUrlTest
+1047:5:Call -> Inst:django.test.utils.override_settings
+1047:5:Name -> Class:django.test.utils.override_settings
+1049:8:Call -> Const:NoneType:None
+1049:8:Attribute -> BM:tests.auth_tests.test_views.LoginRedirectUrlTest.assertLoginRedirectURLEqual
+1049:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectUrlTest
+1052:27:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1055:5:Call -> Inst:django.test.utils.override_settings
+1055:5:Name -> Class:django.test.utils.override_settings
+1055:33:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+1055:33:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+1057:34:Call -> Inst:django.http.response.HttpResponseRedirect
+1057:34:Name -> Func:django.contrib.auth.views.redirect_to_login
+1059:8:Call -> Const:NoneType:None
+1059:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1059:8:Name -> Inst:tests.auth_tests.test_views.RedirectToLoginTests
+1059:25:Name -> Const:str:'/login/?next=/else/where/'
+1059:35:Attribute -> U
+1059:35:Name -> Inst:django.http.response.HttpResponseRedirect
+1061:5:Call -> Inst:django.test.utils.override_settings
+1061:5:Name -> Class:django.test.utils.override_settings
+1061:33:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+1061:33:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+1063:34:Call -> Inst:django.http.response.HttpResponseRedirect
+1063:34:Name -> Func:django.contrib.auth.views.redirect_to_login
+1065:8:Call -> Const:NoneType:None
+1065:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1065:8:Name -> Inst:tests.auth_tests.test_views.RedirectToLoginTests
+1065:25:Name -> Const:str:'/login/?next=/else/where/%E0%A4%9D/'
+1065:35:Attribute -> U
+1065:35:Name -> Inst:django.http.response.HttpResponseRedirect
+1068:27:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1072:8:Call -> Const:NoneType:None
+1072:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+1072:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1072:25:Name -> Const:str:'_auth_user_id'
+1072:38:Attribute -> U
+1072:38:Attribute -> Inst:django.test.client.Client
+1072:38:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1074:5:Call -> Inst:django.test.utils.override_settings
+1074:5:Name -> Class:django.test.utils.override_settings
+1076:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1076:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1076:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1077:14:Call -> Inst:django.http.request.HttpRequest
+1077:14:Name -> Class:django.http.request.HttpRequest
+1078:8:Name -> Inst:django.http.request.HttpRequest
+1079:21:Call -> Const:str:''
+1079:21:Name -> Func:django.middleware.csrf.get_token
+1079:31:Name -> Inst:django.http.request.HttpRequest
+1080:8:Attribute -> Dict:0 | Dict:1
+1080:8:Name -> Inst:django.http.request.HttpRequest
+1080:20:Attribute -> U
+1080:20:Name -> Inst:django.conf.LazySettings
+1080:49:Name -> Const:str:''
+1081:8:Name -> Inst:django.http.request.HttpRequest
+1081:43:Name -> Const:str:''
+1082:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+1082:8:Name -> Inst:django.http.request.HttpRequest
+1083:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+1083:8:Name -> Inst:django.http.request.HttpRequest
+1084:8:Name -> Inst:django.http.request.HttpRequest
+1084:22:Attribute -> U
+1084:22:Attribute -> Inst:django.test.client.Client
+1084:22:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1085:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+1085:19:Name -> Func:django.contrib.auth.views.logout_then_login
+1085:37:Name -> Inst:django.http.request.HttpRequest
+1086:8:Call -> Const:NoneType:None
+1086:8:Attribute -> BM:tests.auth_tests.test_views.LogoutThenLoginTests.confirm_logged_out
+1086:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1087:8:Call -> Const:NoneType:None
+1087:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1087:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1087:29:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+1090:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1090:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1090:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1091:14:Call -> Inst:django.http.request.HttpRequest
+1091:14:Name -> Class:django.http.request.HttpRequest
+1092:8:Name -> Inst:django.http.request.HttpRequest
+1093:21:Call -> Const:str:''
+1093:21:Name -> Func:django.middleware.csrf.get_token
+1093:31:Name -> Inst:django.http.request.HttpRequest
+1094:8:Attribute -> Dict:0 | Dict:1
+1094:8:Name -> Inst:django.http.request.HttpRequest
+1094:20:Attribute -> U
+1094:20:Name -> Inst:django.conf.LazySettings
+1094:49:Name -> Const:str:''
+1095:8:Name -> Inst:django.http.request.HttpRequest
+1095:43:Name -> Const:str:''
+1096:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+1096:8:Name -> Inst:django.http.request.HttpRequest
+1097:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+1097:8:Name -> Inst:django.http.request.HttpRequest
+1098:8:Name -> Inst:django.http.request.HttpRequest
+1098:22:Attribute -> U
+1098:22:Attribute -> Inst:django.test.client.Client
+1098:22:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1099:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+1099:19:Name -> Func:django.contrib.auth.views.logout_then_login
+1099:37:Name -> Inst:django.http.request.HttpRequest
+1100:8:Call -> Const:NoneType:None
+1100:8:Attribute -> BM:tests.auth_tests.test_views.LogoutThenLoginTests.confirm_logged_out
+1100:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1101:8:Call -> Const:NoneType:None
+1101:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1101:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1101:29:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+1103:5:Call -> Inst:django.test.utils.override_settings
+1103:5:Name -> Class:django.test.utils.override_settings
+1105:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1105:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1105:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1106:14:Call -> Inst:django.http.request.HttpRequest
+1106:14:Name -> Class:django.http.request.HttpRequest
+1107:8:Name -> Inst:django.http.request.HttpRequest
+1108:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+1108:8:Name -> Inst:django.http.request.HttpRequest
+1109:8:Attribute -> Dict:0 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:4 | Dict:3 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:2 | Dict:1 | Dict:2 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | Dict:1 | U | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:1 | Dict:1 | Dict:1
+1109:8:Name -> Inst:django.http.request.HttpRequest
+1110:8:Name -> Inst:django.http.request.HttpRequest
+1110:22:Attribute -> U
+1110:22:Attribute -> Inst:django.test.client.Client
+1110:22:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1111:19:Call -> U | Inst:django.http.response.HttpResponseNotAllowed
+1111:19:Name -> Func:django.contrib.auth.views.logout_then_login
+1111:37:Name -> Inst:django.http.request.HttpRequest
+1112:8:Call -> Const:NoneType:None
+1112:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1112:8:Name -> Inst:tests.auth_tests.test_views.LogoutThenLoginTests
+1112:25:Attribute -> U | Const:int:200 | Const:int:404 | Const:int:500 | Const:int:503 | Const:int:503 | Inst:builtins.int
+1112:25:Name -> U | Inst:django.http.response.HttpResponseNotAllowed
+1115:37:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1121:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1121:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1121:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1122:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1122:19:Attribute -> BM:django.test.client.Client.get
+1122:19:Attribute -> Inst:django.test.client.Client
+1122:19:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1122:35:Attribute -> Const:str:'/login/redirect_authenticated_user_defa
+1122:35:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1123:8:Call -> Const:NoneType:None
+1123:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1123:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1123:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1123:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1124:8:Call -> Const:NoneType:None
+1124:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1124:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1124:25:Attribute -> U
+1124:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1128:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1128:19:Attribute -> BM:django.test.client.Client.get
+1128:19:Attribute -> Inst:django.test.client.Client
+1128:19:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1128:35:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1128:35:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1129:8:Call -> Const:NoneType:None
+1129:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1129:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1129:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1129:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1133:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1133:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1133:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1134:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1134:19:Attribute -> BM:django.test.client.Client.get
+1134:19:Attribute -> Inst:django.test.client.Client
+1134:19:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1134:35:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1134:35:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1135:8:Call -> Const:NoneType:None
+1135:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1135:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1136:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1139:5:Call -> Inst:django.test.utils.override_settings
+1139:5:Name -> Class:django.test.utils.override_settings
+1142:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1142:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1142:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1143:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1143:19:Attribute -> BM:django.test.client.Client.get
+1143:19:Attribute -> Inst:django.test.client.Client
+1143:19:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1143:35:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1143:35:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1144:8:Call -> Const:NoneType:None
+1144:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1144:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1144:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1148:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1148:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1148:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1149:14:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1149:14:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1150:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1150:19:Attribute -> BM:django.test.client.Client.get
+1150:19:Attribute -> Inst:django.test.client.Client
+1150:19:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1150:35:Name -> Const:str:'/login/redirect_authenticated_user/?nex
+1151:8:Call -> Const:NoneType:None
+1151:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1151:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1151:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1158:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1158:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1158:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1163:13:Call -> Inst:django.test.utils.override_settings
+1163:13:Attribute -> BM:django.test.testcases.SimpleTestCase.settings
+1163:13:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1163:46:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1163:46:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1164:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+1164:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+1164:17:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1164:42:Name -> Class:builtins.ValueError
+1164:54:Name -> Const:str:"Redirection loop for authenticated user
+1165:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1165:16:Attribute -> BM:django.test.client.Client.get
+1165:16:Attribute -> Inst:django.test.client.Client
+1165:16:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1165:32:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1165:32:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1167:18:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1167:18:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1168:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+1168:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+1168:17:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1168:42:Name -> Class:builtins.ValueError
+1168:54:Name -> Const:str:"Redirection loop for authenticated user
+1169:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1169:16:Attribute -> BM:django.test.client.Client.get
+1169:16:Attribute -> Inst:django.test.client.Client
+1169:16:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1169:32:Name -> Const:str:'/login/redirect_authenticated_user/?bla
+1173:13:Call -> Inst:django.test.utils.override_settings
+1173:13:Attribute -> BM:django.test.testcases.SimpleTestCase.settings
+1173:13:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1173:37:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1173:37:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1175:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1175:23:Attribute -> BM:django.test.client.Client.get
+1175:23:Attribute -> Inst:django.test.client.Client
+1175:23:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1176:12:Call -> Const:NoneType:None
+1176:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+1176:12:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1176:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1176:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1178:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1178:23:Attribute -> BM:django.test.client.Client.get
+1178:23:Attribute -> Inst:django.test.client.Client
+1178:23:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1179:12:Call -> Const:NoneType:None
+1179:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+1179:12:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1179:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1179:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1181:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1181:23:Attribute -> BM:django.test.client.Client.get
+1181:23:Attribute -> Inst:django.test.client.Client
+1181:23:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1184:12:Call -> Const:NoneType:None
+1184:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+1184:12:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1184:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1184:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1187:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1187:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1187:8:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1189:13:Call -> Inst:django.test.utils.override_settings
+1189:13:Attribute -> BM:django.test.testcases.SimpleTestCase.settings
+1189:13:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1189:37:Attribute -> Const:str:'/login/redirect_authenticated_user/'
+1189:37:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1191:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+1191:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+1191:17:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1192:16:Name -> Class:django.test.client.RedirectCycleError
+1194:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1194:16:Attribute -> BM:django.test.client.Client.get
+1194:16:Attribute -> Inst:django.test.client.Client
+1194:16:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1196:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1196:23:Attribute -> BM:django.test.client.Client.get
+1196:23:Attribute -> Inst:django.test.client.Client
+1196:23:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1197:12:Call -> Const:NoneType:None
+1197:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+1197:12:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1197:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1197:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1199:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1199:23:Attribute -> BM:django.test.client.Client.get
+1199:23:Attribute -> Inst:django.test.client.Client
+1199:23:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1202:12:Call -> Const:NoneType:None
+1202:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+1202:12:Name -> Inst:tests.auth_tests.test_views.LoginRedirectAuthenticatedUser
+1202:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1202:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1205:38:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1207:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1207:19:Attribute -> BM:django.test.client.Client.post
+1207:19:Attribute -> Inst:django.test.client.Client
+1207:19:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1215:8:Call -> Const:NoneType:None
+1215:8:Attribute -> BM:unittest.case.TestCase.assertIn
+1215:8:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1215:22:Name -> Const:str:'_auth_user_id'
+1215:35:Attribute -> U
+1215:35:Attribute -> Inst:django.test.client.Client
+1215:35:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1216:8:Call -> Const:NoneType:None
+1216:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1216:8:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1217:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1221:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1221:19:Attribute -> BM:django.test.client.Client.post
+1221:19:Attribute -> Inst:django.test.client.Client
+1221:19:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1229:8:Call -> Const:NoneType:None
+1229:8:Attribute -> BM:unittest.case.TestCase.assertIn
+1229:8:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1229:22:Name -> Const:str:'_auth_user_id'
+1229:35:Attribute -> U
+1229:35:Attribute -> Inst:django.test.client.Client
+1229:35:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1230:8:Call -> Const:NoneType:None
+1230:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1230:8:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1231:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1235:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1235:19:Attribute -> BM:django.test.client.Client.post
+1235:19:Attribute -> Inst:django.test.client.Client
+1235:19:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1243:8:Call -> Const:NoneType:None
+1243:8:Attribute -> BM:unittest.case.TestCase.assertIn
+1243:8:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1243:22:Name -> Const:str:'_auth_user_id'
+1243:35:Attribute -> U
+1243:35:Attribute -> Inst:django.test.client.Client
+1243:35:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1244:8:Call -> Const:NoneType:None
+1244:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1244:8:Name -> Inst:tests.auth_tests.test_views.LoginSuccessURLAllowedHostsTest
+1245:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1249:17:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1251:8:Call -> Const:NoneType:None
+1251:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+1251:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1251:25:Name -> Const:str:'_auth_user_id'
+1251:38:Attribute -> U
+1251:38:Attribute -> Inst:django.test.client.Client
+1251:38:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1255:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1255:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1255:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1256:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1256:19:Attribute -> BM:django.test.client.Client.post
+1256:19:Attribute -> Inst:django.test.client.Client
+1256:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1257:8:Call -> Const:NoneType:None
+1257:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1257:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1257:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1258:8:Call -> Const:NoneType:None
+1258:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1258:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1261:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1261:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1261:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1262:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1262:19:Attribute -> BM:django.test.client.Client.post
+1262:19:Attribute -> Inst:django.test.client.Client
+1262:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1263:8:Call -> Const:NoneType:None
+1263:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1263:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1263:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1264:8:Call -> Const:NoneType:None
+1264:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1264:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1268:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1268:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1268:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1269:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1269:19:Attribute -> BM:django.test.client.Client.post
+1269:19:Attribute -> Inst:django.test.client.Client
+1269:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1270:8:Call -> Const:NoneType:None
+1270:8:Attribute -> BM:unittest.case.TestCase.assertIn
+1270:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1270:30:Attribute -> U
+1270:30:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1277:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1277:19:Attribute -> BM:django.test.client.Client.post
+1277:19:Attribute -> Inst:django.test.client.Client
+1277:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1278:8:Call -> Const:NoneType:None
+1278:8:Attribute -> BM:unittest.case.TestCase.assertIn
+1278:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1278:34:Attribute -> Inst:django.http.request.HttpHeaders | U
+1278:34:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1282:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1282:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1282:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1283:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1283:19:Attribute -> BM:django.test.client.Client.post
+1283:19:Attribute -> Inst:django.test.client.Client
+1283:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1284:8:Call -> Const:NoneType:None
+1284:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1284:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1284:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1286:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1286:19:Attribute -> BM:django.test.client.Client.post
+1286:19:Attribute -> Inst:django.test.client.Client
+1286:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1287:8:Call -> Const:NoneType:None
+1287:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1287:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1287:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1289:8:Call -> Const:NoneType:None
+1289:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1289:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1293:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1293:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1293:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1294:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1294:19:Attribute -> BM:django.test.client.Client.post
+1294:19:Attribute -> Inst:django.test.client.Client
+1294:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1295:8:Call -> Const:NoneType:None
+1295:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1295:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1295:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1296:8:Call -> Const:NoneType:None
+1296:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1296:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1300:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1300:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1300:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1301:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1301:19:Attribute -> BM:django.test.client.Client.post
+1301:19:Attribute -> Inst:django.test.client.Client
+1301:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1302:8:Call -> Const:NoneType:None
+1302:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1302:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1302:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1303:8:Call -> Const:NoneType:None
+1303:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1303:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1307:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1307:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1307:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1308:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1308:19:Attribute -> BM:django.test.client.Client.post
+1308:19:Attribute -> Inst:django.test.client.Client
+1308:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1309:8:Call -> Const:NoneType:None
+1309:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1309:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1309:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1310:8:Call -> Const:NoneType:None
+1310:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1310:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1314:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1314:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1314:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1315:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1315:19:Attribute -> BM:django.test.client.Client.post
+1315:19:Attribute -> Inst:django.test.client.Client
+1315:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1316:8:Call -> Const:NoneType:None
+1316:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1316:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1317:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1319:8:Call -> Const:NoneType:None
+1319:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1319:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1322:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1322:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1322:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1323:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1323:19:Attribute -> BM:django.test.client.Client.post
+1323:19:Attribute -> Inst:django.test.client.Client
+1323:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1324:8:Call -> Const:NoneType:None
+1324:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1324:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1325:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1327:8:Call -> Const:NoneType:None
+1327:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1327:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1330:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1330:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1330:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1331:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1331:19:Attribute -> BM:django.test.client.Client.post
+1331:19:Attribute -> Inst:django.test.client.Client
+1331:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1332:8:Call -> Const:NoneType:None
+1332:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1332:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1333:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1335:8:Call -> Const:NoneType:None
+1335:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1335:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1338:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1338:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1338:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1339:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1339:19:Attribute -> BM:django.test.client.Client.post
+1339:19:Attribute -> Inst:django.test.client.Client
+1339:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1340:8:Call -> Const:NoneType:None
+1340:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1340:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1341:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1343:8:Call -> Const:NoneType:None
+1343:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1343:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1346:21:Call -> U | Const:str:'' | Const:str:''
+1346:21:Name -> Func:django.urls.base.reverse
+1358:23:Name -> Tuple:7
+1359:17:Call -> Gen:unittest.case.TestCase.subTest
+1359:17:Attribute -> BM:unittest.case.TestCase.subTest
+1359:17:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1359:38:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+1361:27:Name -> U | Const:str:'' | Const:str:''
+1362:28:Name -> Const:str:'next'
+1363:31:Call -> U | Const:str:'' | Const:str:''
+1363:31:Name -> Func:urllib.parse.quote
+1363:37:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+1365:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1365:16:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1365:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1366:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1366:27:Attribute -> BM:django.test.client.Client.post
+1366:27:Attribute -> Inst:django.test.client.Client
+1366:27:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1366:44:Name -> U
+1367:16:Call -> Const:NoneType:None
+1367:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+1367:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1367:33:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1367:33:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1368:16:Call -> Const:NoneType:None
+1368:16:Attribute -> BM:unittest.case.TestCase.assertNotIn
+1368:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1369:20:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+1369:29:Attribute -> U
+1369:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1369:68:Name -> Const:str:'http://example.com' | Const:str:'http:///example.com' | Const:str:'https://example.com' | Const:str:'ftp://example.com' | Const:str:'///example.com' | Const:str:'//example.com' | Const:str:'javascript:alert("XSS")'
+1371:16:Call -> Const:NoneType:None
+1371:16:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1371:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1384:24:Name -> Tuple:8
+1385:17:Call -> Gen:unittest.case.TestCase.subTest
+1385:17:Attribute -> BM:unittest.case.TestCase.subTest
+1385:17:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1385:39:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+1387:27:Name -> U | Const:str:'' | Const:str:''
+1388:28:Name -> Const:str:'next'
+1389:32:Call -> U | Const:str:'' | Const:str:''
+1389:32:Name -> Func:urllib.parse.quote
+1389:38:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+1391:16:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1391:16:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1391:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1392:27:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1392:27:Attribute -> BM:django.test.client.Client.post
+1392:27:Attribute -> Inst:django.test.client.Client
+1392:27:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1392:44:Name -> U
+1393:16:Call -> Const:NoneType:None
+1393:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+1393:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1393:33:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1393:33:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1394:16:Call -> Const:NoneType:None
+1394:16:Attribute -> BM:unittest.case.TestCase.assertIn
+1394:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1394:30:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+1394:40:Attribute -> U
+1394:40:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1394:79:Name -> Const:str:'/view/?param=http://example.com' | Const:str:'/view/?param=https://example.com' | Const:str:'/view?param=ftp://example.com' | Const:str:'view/?param=//example.com' | Const:str:'https://testserver/' | Const:str:'HTTPS://testserver/' | Const:str:'//testserver/' | Const:str:'/url%20with%20spaces/'
+1395:16:Call -> Const:NoneType:None
+1395:16:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1395:16:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1398:21:Call -> U | Const:str:'' | Const:str:''
+1398:21:Name -> Func:django.urls.base.reverse
+1401:19:Name -> U | Const:str:'' | Const:str:''
+1402:20:Name -> Const:str:'next'
+1403:24:Call -> U | Const:str:'' | Const:str:''
+1403:24:Name -> Func:urllib.parse.quote
+1403:30:Name -> Const:str:'http://testserver/'
+1405:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1405:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1405:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1406:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1406:19:Attribute -> BM:django.test.client.Client.post
+1406:19:Attribute -> Inst:django.test.client.Client
+1406:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1406:36:Name -> U
+1407:8:Call -> Const:NoneType:None
+1407:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1407:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1407:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1407:39:Name -> U | Const:str:'' | Const:str:''
+1408:8:Call -> Const:NoneType:None
+1408:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1408:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1412:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1412:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1412:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1413:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1413:8:Attribute -> BM:django.test.client.Client.post
+1413:8:Attribute -> Inst:django.test.client.Client
+1413:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1414:8:Call -> Const:NoneType:None
+1414:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1414:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1414:25:Attribute -> U
+1414:25:Attribute -> Inst:http.cookies.SimpleCookie
+1414:25:Attribute -> Inst:django.test.client.Client
+1414:25:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1414:45:Attribute -> U
+1414:45:Name -> Inst:django.conf.LazySettings
+1415:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1415:8:Attribute -> BM:django.test.client.Client.post
+1415:8:Attribute -> Inst:django.test.client.Client
+1415:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1416:8:Call -> Const:NoneType:None
+1416:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1416:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1416:25:Attribute -> U
+1416:25:Attribute -> Inst:http.cookies.SimpleCookie
+1416:25:Attribute -> Inst:django.test.client.Client
+1416:25:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1416:45:Attribute -> U
+1416:45:Name -> Inst:django.conf.LazySettings
+1418:5:Call -> Inst:django.test.utils.override_settings
+1418:5:Name -> Class:django.test.utils.override_settings
+1420:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1420:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1420:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1421:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1421:19:Attribute -> BM:django.test.client.Client.post
+1421:19:Attribute -> Inst:django.test.client.Client
+1421:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1422:8:Call -> Const:NoneType:None
+1422:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1422:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1422:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1424:5:Call -> Inst:django.test.utils.override_settings
+1424:5:Name -> Class:django.test.utils.override_settings
+1426:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1426:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1426:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1427:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1427:19:Attribute -> BM:django.test.client.Client.post
+1427:19:Attribute -> Inst:django.test.client.Client
+1427:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1428:8:Call -> Const:NoneType:None
+1428:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1428:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1428:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1430:5:Call -> Inst:django.test.utils.override_settings
+1430:5:Name -> Class:django.test.utils.override_settings
+1432:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1432:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1432:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1433:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1433:19:Attribute -> BM:django.test.client.Client.post
+1433:19:Attribute -> Inst:django.test.client.Client
+1433:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1434:8:Call -> Const:NoneType:None
+1434:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1434:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1434:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1435:8:Call -> Const:NoneType:None
+1435:8:Attribute -> BM:tests.auth_tests.test_views.LogoutTest.confirm_logged_out
+1435:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1437:5:Call -> Inst:django.test.utils.modify_settings
+1437:5:Name -> Class:django.test.utils.modify_settings
+1441:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1441:19:Attribute -> BM:django.test.client.Client.post
+1441:19:Attribute -> Inst:django.test.client.Client
+1441:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1442:8:Call -> Const:NoneType:None
+1442:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1442:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1443:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1444:12:Attribute -> U
+1444:12:Name -> Inst:django.conf.LazySettings
+1448:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1448:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1448:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1450:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1450:19:Attribute -> BM:django.test.client.Client.post
+1450:19:Attribute -> Inst:django.test.client.Client
+1450:19:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1451:8:Call -> Const:NoneType:None
+1451:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1451:8:Name -> Inst:tests.auth_tests.test_views.LogoutTest
+1451:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1451:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1455:9:Call -> U
+1455:9:Attribute -> BM:django.contrib.contenttypes.models.ContentTypeManager.get_for_model
+1455:9:Attribute -> Inst:django.contrib.contenttypes.models.ContentTypeManager
+1455:9:Name -> Class:django.contrib.contenttypes.models.ContentType
+1455:43:Name -> U
+1456:11:Call -> ERR
+1456:11:Attribute -> ERR
+1456:11:Attribute -> Inst:django.contrib.auth.models.PermissionManager
+1456:11:Name -> Class:django.contrib.auth.models.Permission
+1456:47:Name -> U
+1456:60:Name -> U
+1461:1:Call -> Inst:django.test.utils.override_settings
+1461:1:Name -> Class:django.test.utils.override_settings
+1465:22:Name -> Class:django.contrib.messages.test.MessagesTestMixin
+1465:41:Name -> Class:tests.auth_tests.test_views.AuthViewsTestCase
+1466:5:Name -> Class:builtins.classmethod
+1468:8:Call -> Const:NoneType:None | U
+1468:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.setUpTestData | BM:django.test.testcases.TestCase.setUpTestData
+1468:8:Call -> Super
+1468:8:Name -> Class:builtins.super
+1470:8:Call -> ERR
+1470:8:Attribute -> ERR
+1470:8:Call -> ERR
+1470:8:Attribute -> ERR
+1470:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+1470:8:Name -> Class:django.contrib.auth.models.User
+1475:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1475:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1475:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1477:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1477:21:Call -> ERR
+1477:21:Attribute -> ERR
+1477:21:Attribute -> Inst:django.contrib.auth.models.UserManager
+1477:21:Name -> Class:django.contrib.auth.models.User
+1477:41:Attribute -> U
+1477:41:Attribute -> U
+1477:41:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1481:24:Attribute -> U
+1481:24:Name -> U
+1482:24:Attribute -> U
+1482:24:Name -> U
+1483:21:Attribute -> U
+1483:21:Name -> U
+1484:25:Attribute -> U
+1484:25:Name -> U
+1485:24:Attribute -> U
+1485:24:Name -> U
+1486:28:Attribute -> U
+1486:28:Name -> U
+1487:28:Call -> U
+1487:28:Attribute -> U
+1487:28:Attribute -> U
+1487:28:Name -> U
+1488:28:Call -> U
+1488:28:Attribute -> U
+1488:28:Attribute -> U
+1488:28:Name -> U
+1489:36:Call -> U
+1489:36:Attribute -> U
+1489:36:Attribute -> U
+1489:36:Name -> U
+1490:36:Call -> U
+1490:36:Attribute -> U
+1490:36:Attribute -> U
+1490:36:Name -> U
+1491:29:Call -> U
+1491:29:Attribute -> U
+1491:29:Attribute -> U
+1491:29:Name -> U
+1492:29:Call -> U
+1492:29:Attribute -> U
+1492:29:Attribute -> U
+1492:29:Name -> U
+1493:37:Call -> U
+1493:37:Attribute -> U
+1493:37:Attribute -> U
+1493:37:Name -> U
+1494:37:Call -> U
+1494:37:Attribute -> U
+1494:37:Attribute -> U
+1494:37:Name -> U
+1495:26:Attribute -> U
+1495:26:Name -> U
+1496:25:Attribute -> U
+1496:25:Name -> U
+1503:13:Call -> Inst:unittest._log._AssertLogsContext
+1503:13:Attribute -> BM:unittest.case.TestCase.assertLogs
+1503:13:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1504:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1504:23:Attribute -> BM:django.test.client.Client.get
+1504:23:Attribute -> Inst:django.test.client.Client
+1504:23:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1505:16:Call -> U | Const:str:'' | Const:str:''
+1505:16:Name -> Func:django.urls.base.reverse
+1508:8:Call -> Const:NoneType:None
+1508:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1508:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1508:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1508:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1511:15:Call -> Dict:16
+1511:15:Attribute -> BM:tests.auth_tests.test_views.ChangelistTests.get_user_data
+1511:15:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1511:34:Attribute -> U
+1511:34:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1512:8:Name -> Dict:16
+1512:33:Name -> Dict:16
+1513:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1513:19:Attribute -> BM:django.test.client.Client.post
+1513:19:Attribute -> Inst:django.test.client.Client
+1513:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1514:12:Call -> U | Const:str:'' | Const:str:''
+1514:12:Name -> Func:django.urls.base.reverse
+1514:62:Attribute -> U
+1514:62:Attribute -> U
+1514:62:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1514:80:Name -> Dict:16
+1516:8:Call -> Const:NoneType:None
+1516:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1516:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1516:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1516:39:Call -> U | Const:str:'' | Const:str:''
+1516:39:Name -> Func:django.urls.base.reverse
+1517:14:Call -> ERR
+1517:14:Attribute -> ERR
+1517:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1517:14:Name -> Class:django.contrib.admin.models.LogEntry
+1518:8:Call -> Const:NoneType:None
+1518:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1518:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1518:25:Call -> U
+1518:25:Attribute -> U
+1518:25:Name -> U
+1521:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1521:19:Attribute -> BM:django.test.client.Client.post
+1521:19:Attribute -> Inst:django.test.client.Client
+1521:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1522:12:Call -> U | Const:str:'' | Const:str:''
+1522:12:Name -> Func:django.urls.base.reverse
+1522:62:Attribute -> U
+1522:62:Attribute -> U
+1522:62:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1523:12:Call -> Dict:16
+1523:12:Attribute -> BM:tests.auth_tests.test_views.ChangelistTests.get_user_data
+1523:12:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1523:31:Attribute -> U
+1523:31:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1525:8:Call -> Const:NoneType:None
+1525:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1525:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1525:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1525:39:Call -> U | Const:str:'' | Const:str:''
+1525:39:Name -> Func:django.urls.base.reverse
+1526:14:Call -> ERR
+1526:14:Attribute -> ERR
+1526:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1526:14:Name -> Class:django.contrib.admin.models.LogEntry
+1527:8:Call -> Const:NoneType:None
+1527:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1527:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1527:25:Call -> U
+1527:25:Attribute -> U
+1527:25:Name -> U
+1530:26:Call -> U | Const:str:'' | Const:str:''
+1530:26:Name -> Func:django.urls.base.reverse
+1531:54:Attribute -> U
+1531:54:Attribute -> U
+1531:54:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1533:30:Call -> U | Const:str:'' | Const:str:''
+1533:30:Name -> Func:django.urls.base.reverse
+1534:63:Attribute -> U
+1534:63:Attribute -> U
+1534:63:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1537:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1537:19:Attribute -> BM:django.test.client.Client.get
+1537:19:Attribute -> Inst:django.test.client.Client
+1537:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1537:35:Name -> U | Const:str:'' | Const:str:''
+1539:19:Call -> U
+1539:19:Attribute -> Func:re.search
+1539:19:Name -> Module:re
+1541:12:Attribute -> U
+1541:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1543:8:Call -> Const:NoneType:None
+1543:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1543:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1543:25:Call -> U | Const:str:'' | Const:str:''
+1543:25:Name -> Func:urllib.parse.urljoin
+1543:33:Name -> U | Const:str:'' | Const:str:''
+1543:50:Name -> U
+1543:61:Name -> U | Const:str:'' | Const:str:''
+1545:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1545:19:Attribute -> BM:django.test.client.Client.get
+1545:19:Attribute -> Inst:django.test.client.Client
+1545:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1545:35:Name -> U | Const:str:'' | Const:str:''
+1547:8:Call -> Const:NoneType:None
+1547:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1547:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1548:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1548:46:Attribute -> U
+1548:46:Attribute -> U
+1548:46:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1551:8:Call -> Const:NoneType:None
+1551:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1551:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1552:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1553:15:Attribute -> U
+1553:15:Attribute -> U
+1553:15:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1557:8:Call -> Const:NoneType:None
+1557:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1557:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1558:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1563:8:Call -> Const:NoneType:None
+1563:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1563:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1563:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1564:8:Call -> Const:NoneType:None
+1564:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1564:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1564:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1567:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1567:19:Attribute -> BM:django.test.client.Client.post
+1567:19:Attribute -> Inst:django.test.client.Client
+1567:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1568:12:Name -> U | Const:str:'' | Const:str:''
+1574:8:Call -> Const:NoneType:None
+1574:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1574:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1574:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1574:39:Name -> U | Const:str:'' | Const:str:''
+1575:8:Call -> Const:NoneType:None
+1575:8:Attribute -> BM:django.contrib.messages.test.MessagesTestMixin.assertMessages
+1575:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1576:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1576:23:Call -> Inst:django.contrib.messages.storage.base.Message
+1576:23:Name -> Class:django.contrib.messages.storage.base.Message
+1578:14:Call -> ERR
+1578:14:Attribute -> ERR
+1578:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1578:14:Name -> Class:django.contrib.admin.models.LogEntry
+1579:8:Call -> Const:NoneType:None
+1579:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1579:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1579:25:Call -> U
+1579:25:Attribute -> U
+1579:25:Name -> U
+1580:8:Call -> Const:NoneType:None
+1580:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.logout
+1580:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1581:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1581:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1581:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1584:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1584:19:Attribute -> BM:django.test.client.Client.post
+1584:19:Attribute -> Inst:django.test.client.Client
+1584:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1585:12:Name -> U | Const:str:'' | Const:str:''
+1592:8:Call -> Const:NoneType:None
+1592:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1592:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1592:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1592:39:Name -> U | Const:str:'' | Const:str:''
+1593:8:Call -> Const:NoneType:None
+1593:8:Attribute -> BM:django.contrib.messages.test.MessagesTestMixin.assertMessages
+1593:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1594:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1596:16:Call -> Inst:django.contrib.messages.storage.base.Message
+1596:16:Name -> Class:django.contrib.messages.storage.base.Message
+1603:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1603:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1603:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1606:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1606:19:Attribute -> BM:django.test.client.Client.post
+1606:19:Attribute -> Inst:django.test.client.Client
+1606:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1607:12:Name -> U | Const:str:'' | Const:str:''
+1615:8:Call -> Const:NoneType:None
+1615:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1615:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1615:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1615:39:Name -> U | Const:str:'' | Const:str:''
+1616:8:Call -> Const:NoneType:None
+1616:8:Attribute -> BM:django.contrib.messages.test.MessagesTestMixin.assertMessages
+1616:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1617:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1618:13:Call -> Inst:django.contrib.messages.storage.base.Message
+1618:13:Name -> Class:django.contrib.messages.storage.base.Message
+1620:14:Call -> ERR
+1620:14:Attribute -> ERR
+1620:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1620:14:Name -> Class:django.contrib.admin.models.LogEntry
+1621:8:Call -> Const:NoneType:None
+1621:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1621:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1621:25:Call -> U
+1621:25:Attribute -> U
+1621:25:Name -> U
+1622:8:Call -> Const:NoneType:None
+1622:8:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.logout
+1622:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1624:13:Call -> Inst:unittest.case._AssertRaisesContext
+1624:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+1624:13:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1624:31:Name -> Class:builtins.AssertionError
+1625:12:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1625:12:Attribute -> BM:tests.auth_tests.test_views.AuthViewsTestCase.login
+1625:12:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1626:8:Call -> U
+1626:8:Attribute -> U
+1626:8:Attribute -> U
+1626:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1627:8:Call -> Const:NoneType:None
+1627:8:Attribute -> BM:unittest.case.TestCase.assertIs
+1627:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1627:22:Call -> U
+1627:22:Attribute -> U
+1627:22:Attribute -> U
+1627:22:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1631:20:Call -> ERR
+1631:20:Attribute -> ERR
+1631:20:Attribute -> Inst:django.contrib.auth.models.UserManager
+1631:20:Name -> Class:django.contrib.auth.models.User
+1632:8:Call -> U
+1632:8:Attribute -> U
+1632:8:Name -> U
+1633:8:Call -> U
+1633:8:Attribute -> U
+1633:8:Name -> U
+1634:26:Call -> U | Const:str:'' | Const:str:''
+1634:26:Name -> Func:django.urls.base.reverse
+1635:54:Attribute -> U
+1635:54:Name -> U
+1637:30:Call -> U | Const:str:'' | Const:str:''
+1637:30:Name -> Func:django.urls.base.reverse
+1638:63:Attribute -> U
+1638:63:Name -> U
+1641:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1641:19:Attribute -> BM:django.test.client.Client.get
+1641:19:Attribute -> Inst:django.test.client.Client
+1641:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1641:35:Name -> U | Const:str:'' | Const:str:''
+1643:19:Call -> U
+1643:19:Attribute -> Func:re.search
+1643:19:Name -> Module:re
+1645:12:Attribute -> U
+1645:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1647:8:Call -> Const:NoneType:None
+1647:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1647:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1647:25:Call -> U | Const:str:'' | Const:str:''
+1647:25:Name -> Func:urllib.parse.urljoin
+1647:33:Name -> U | Const:str:'' | Const:str:''
+1647:50:Name -> U
+1647:61:Name -> U | Const:str:'' | Const:str:''
+1649:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1649:19:Attribute -> BM:django.test.client.Client.get
+1649:19:Attribute -> Inst:django.test.client.Client
+1649:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1649:35:Name -> U | Const:str:'' | Const:str:''
+1651:8:Call -> Const:NoneType:None
+1651:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1651:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1651:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1651:59:Attribute -> U
+1651:59:Name -> U
+1653:8:Call -> Const:NoneType:None
+1653:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1653:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1654:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1655:15:Attribute -> U
+1655:15:Name -> U
+1659:8:Call -> Const:NoneType:None
+1659:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1659:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1659:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1660:8:Call -> Const:NoneType:None
+1660:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertNotContains
+1660:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1660:31:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1662:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1662:19:Attribute -> BM:django.test.client.Client.post
+1662:19:Attribute -> Inst:django.test.client.Client
+1662:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1663:12:Name -> U | Const:str:'' | Const:str:''
+1669:8:Call -> Const:NoneType:None
+1669:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1669:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1669:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1669:39:Name -> U | Const:str:'' | Const:str:''
+1670:8:Call -> Const:NoneType:None
+1670:8:Attribute -> BM:django.contrib.messages.test.MessagesTestMixin.assertMessages
+1670:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1671:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1671:23:Call -> Inst:django.contrib.messages.storage.base.Message
+1671:23:Name -> Class:django.contrib.messages.storage.base.Message
+1673:14:Call -> ERR
+1673:14:Attribute -> ERR
+1673:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1673:14:Name -> Class:django.contrib.admin.models.LogEntry
+1674:8:Call -> Const:NoneType:None
+1674:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1674:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1674:25:Call -> U
+1674:25:Attribute -> U
+1674:25:Name -> U
+1677:12:Call -> ERR
+1677:12:Attribute -> ERR
+1677:12:Attribute -> Inst:django.contrib.auth.models.UserManager
+1677:12:Name -> Class:django.contrib.auth.models.User
+1678:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1678:19:Attribute -> BM:django.test.client.Client.post
+1678:19:Attribute -> Inst:django.test.client.Client
+1678:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1679:12:Call -> U | Const:str:'' | Const:str:''
+1679:12:Name -> Func:django.urls.base.reverse
+1679:71:Attribute -> U
+1679:71:Name -> U
+1685:8:Call -> Const:NoneType:None
+1685:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1685:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1686:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1686:22:Call -> U | Const:str:'' | Const:str:''
+1686:22:Name -> Func:django.urls.base.reverse
+1686:72:Attribute -> U
+1686:72:Name -> U
+1688:14:Call -> ERR
+1688:14:Attribute -> ERR
+1688:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1688:14:Name -> Class:django.contrib.admin.models.LogEntry
+1689:8:Call -> Const:NoneType:None
+1689:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1689:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1689:25:Attribute -> U
+1689:25:Name -> U
+1689:38:Attribute -> U
+1689:38:Attribute -> U
+1689:38:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1690:8:Call -> Const:NoneType:None
+1690:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1690:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1690:25:Attribute -> U
+1690:25:Name -> U
+1690:40:Call -> Const:str:''
+1690:40:Name -> Class:builtins.str
+1690:44:Attribute -> U
+1690:44:Name -> U
+1691:8:Call -> Const:NoneType:None
+1691:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1691:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1691:25:Call -> U
+1691:25:Attribute -> U
+1691:25:Name -> U
+1694:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1694:19:Attribute -> BM:django.test.client.Client.get
+1694:19:Attribute -> Inst:django.test.client.Client
+1694:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1695:12:Call -> U | Const:str:'' | Const:str:''
+1695:12:Name -> Func:django.urls.base.reverse
+1697:8:Call -> Const:NoneType:None
+1697:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1697:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1697:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1697:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1699:5:Call -> Inst:unittest.mock._patch
+1699:5:Attribute -> Func:unittest.mock.patch
+1699:5:Name -> Module:unittest.mock
+1703:14:Call -> U | Const:str:'' | Const:str:''
+1703:14:Name -> Func:django.urls.base.reverse
+1704:63:Attribute -> U
+1704:63:Attribute -> U
+1704:63:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1706:8:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1706:8:Attribute -> BM:django.test.client.Client.post
+1706:8:Attribute -> Inst:django.test.client.Client
+1706:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1706:25:Name -> U | Const:str:'' | Const:str:''
+1707:36:Attribute -> U
+1707:36:Name -> U
+1708:8:Call -> Const:NoneType:None
+1708:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1708:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1708:25:Attribute -> U
+1708:25:Name -> U
+1708:34:Attribute -> U
+1708:34:Attribute -> U
+1708:34:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1711:12:Call -> ERR
+1711:12:Attribute -> ERR
+1711:12:Attribute -> Inst:django.contrib.auth.models.UserManager
+1711:12:Name -> Class:django.contrib.auth.models.User
+1712:8:Name -> U
+1713:8:Call -> U
+1713:8:Attribute -> U
+1713:8:Name -> U
+1714:28:Attribute -> U
+1714:28:Name -> U
+1715:8:Call -> U
+1715:8:Attribute -> U
+1715:8:Attribute -> U
+1715:8:Name -> U
+1715:31:Call -> U
+1715:31:Name -> Func:tests.auth_tests.test_views.get_perm
+1715:40:Name -> Class:django.contrib.auth.models.User
+1716:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1716:19:Attribute -> BM:django.test.client.Client.get
+1716:19:Attribute -> Inst:django.test.client.Client
+1716:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1717:12:Call -> U | Const:str:'' | Const:str:''
+1717:12:Name -> Func:django.urls.base.reverse
+1717:62:Attribute -> U
+1717:62:Name -> U
+1719:34:Call -> U
+1719:34:Attribute -> U
+1719:34:Attribute -> U
+1719:34:Name -> U
+1720:8:Call -> Const:NoneType:None
+1720:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1720:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1720:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1722:8:Call -> Const:NoneType:None
+1722:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1722:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1723:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1728:16:Name -> U
+1729:16:Name -> U
+1730:16:Name -> U
+1734:8:Call -> Const:NoneType:None
+1734:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertNotContains
+1734:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1735:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1739:15:Call -> Dict:16
+1739:15:Attribute -> BM:tests.auth_tests.test_views.ChangelistTests.get_user_data
+1739:15:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1739:34:Name -> U
+1740:8:Name -> Dict:16
+1741:21:Call -> U | Const:str:'' | Const:str:''
+1741:21:Name -> Func:django.urls.base.reverse
+1741:71:Attribute -> U
+1741:71:Name -> U
+1742:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1742:19:Attribute -> BM:django.test.client.Client.post
+1742:19:Attribute -> Inst:django.test.client.Client
+1742:19:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1742:36:Name -> U | Const:str:'' | Const:str:''
+1742:48:Name -> Dict:16
+1743:8:Call -> Const:NoneType:None
+1743:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1743:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1743:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1743:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1744:8:Call -> U
+1744:8:Attribute -> U
+1744:8:Name -> U
+1745:8:Call -> Const:NoneType:None
+1745:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1745:8:Name -> Inst:tests.auth_tests.test_views.ChangelistTests
+1745:25:Attribute -> U
+1745:25:Name -> U
+1745:37:Name -> U
+1748:1:Call -> Inst:django.test.utils.override_settings
+1748:1:Name -> Class:django.test.utils.override_settings
+1752:20:Name -> Class:django.test.testcases.TestCase
+1754:12:Call -> U
+1754:12:Attribute -> BM:django.contrib.auth.models.UserManager.create_superuser
+1754:12:Attribute -> Inst:django.contrib.auth.models.UserManager
+1754:12:Name -> Class:tests.auth_tests.models.uuid_pk.UUIDUser
+1757:8:Call -> Const:NoneType:None
+1757:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+1757:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1757:24:Call -> Const:bool:True | Const:bool:False
+1757:24:Attribute -> BM:django.test.client.ClientMixin.login
+1757:24:Attribute -> Inst:django.test.client.Client
+1757:24:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1759:26:Call -> U | Const:str:'' | Const:str:''
+1759:26:Name -> Func:django.urls.base.reverse
+1760:66:Attribute -> U
+1760:66:Name -> U
+1762:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1762:19:Attribute -> BM:django.test.client.Client.get
+1762:19:Attribute -> Inst:django.test.client.Client
+1762:19:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1762:35:Name -> U | Const:str:'' | Const:str:''
+1763:8:Call -> Const:NoneType:None
+1763:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1763:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1763:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+1763:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1765:30:Call -> U | Const:str:'' | Const:str:''
+1765:30:Name -> Func:django.urls.base.reverse
+1766:65:Attribute -> U
+1766:65:Name -> U
+1768:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1768:19:Attribute -> BM:django.test.client.Client.get
+1768:19:Attribute -> Inst:django.test.client.Client
+1768:19:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1768:35:Name -> U | Const:str:'' | Const:str:''
+1770:8:Call -> Const:NoneType:None
+1770:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+1770:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1770:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1773:13:Call -> U
+1773:13:Attribute -> U
+1773:13:Name -> Inst:django.utils.connection.ConnectionProxy
+1774:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1774:23:Attribute -> BM:django.test.client.Client.post
+1774:23:Attribute -> Inst:django.test.client.Client
+1774:23:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1775:16:Name -> U | Const:str:'' | Const:str:''
+1781:8:Call -> Const:NoneType:None
+1781:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+1781:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1781:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+1781:39:Name -> U | Const:str:'' | Const:str:''
+1782:14:Call -> ERR
+1782:14:Attribute -> ERR
+1782:14:Attribute -> Inst:django.contrib.admin.models.LogEntryManager
+1782:14:Name -> Class:django.contrib.admin.models.LogEntry
+1783:8:Call -> Const:NoneType:None
+1783:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1783:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1783:25:Attribute -> U
+1783:25:Name -> U
+1784:8:Call -> Const:NoneType:None
+1784:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1784:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1784:25:Attribute -> U
+1784:25:Name -> U
+1784:40:Call -> Const:str:''
+1784:40:Name -> Class:builtins.str
+1784:44:Attribute -> U
+1784:44:Name -> U
+1785:8:Call -> Const:NoneType:None
+1785:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1785:8:Name -> Inst:tests.auth_tests.test_views.UUIDUserTests
+1785:25:Call -> U
+1785:25:Attribute -> U
+1785:25:Name -> U
+1791:8:Call -> U
+1791:8:Attribute -> U
+1791:8:Name -> U

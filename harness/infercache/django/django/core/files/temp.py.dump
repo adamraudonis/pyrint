@@ -1,0 +1,55 @@
+30:3:Attribute -> Const:str:'posix' | Const:str:'nt'
+30:3:Name -> Module:os
+32:24:Name -> Class:django.core.files.utils.FileProxyMixin
+43:23:Call -> Tuple:2
+43:23:Attribute -> Func:tempfile.mkstemp
+43:23:Name -> Module:tempfile
+43:47:Name -> Const:str:'' | U
+43:62:Name -> Const:str:'' | U
+43:74:Name -> Const:NoneType:None | U
+44:12:Name -> Inst:django.core.files.temp.TemporaryFile
+44:24:Name -> U
+45:12:Name -> Inst:django.core.files.temp.TemporaryFile
+45:24:Call -> U
+45:24:Attribute -> Func:os.fdopen
+45:24:Name -> Module:os
+45:34:Name -> U
+45:38:Name -> Const:str:'w+b' | U
+45:44:Name -> Const:int:-1 | U
+46:12:Name -> Inst:django.core.files.temp.TemporaryFile
+51:17:Attribute -> Func:posix.unlink
+51:17:Name -> Module:os
+54:19:Attribute -> Const:bool:False | Const:bool:True
+54:19:Name -> Inst:django.core.files.temp.TemporaryFile
+55:16:Name -> Inst:django.core.files.temp.TemporaryFile
+57:20:Call -> U
+57:20:Attribute -> U
+57:20:Attribute -> U
+57:20:Name -> Inst:django.core.files.temp.TemporaryFile
+58:23:Name -> Class:builtins.OSError
+61:20:Call -> ERR
+61:20:Attribute -> BM:posix.unlink
+61:20:Name -> Inst:django.core.files.temp.TemporaryFile
+61:32:Attribute -> U
+61:32:Name -> Inst:django.core.files.temp.TemporaryFile
+62:23:Name -> Class:builtins.OSError
+66:12:Call -> Const:NoneType:None
+66:12:Attribute -> BM:django.core.files.temp.TemporaryFile.close
+66:12:Name -> Inst:django.core.files.temp.TemporaryFile
+69:12:Call -> U
+69:12:Attribute -> U
+69:12:Attribute -> U
+69:12:Name -> Inst:django.core.files.temp.TemporaryFile
+70:19:Name -> Inst:django.core.files.temp.TemporaryFile
+73:12:Call -> U
+73:12:Attribute -> U
+73:12:Attribute -> U
+73:12:Name -> Inst:django.core.files.temp.TemporaryFile
+73:31:Name -> U
+73:36:Name -> U
+73:43:Name -> U
+75:25:Name -> Class:django.core.files.temp.TemporaryFile
+77:25:Attribute -> Func:tempfile.NamedTemporaryFile
+77:25:Name -> Module:tempfile
+79:13:Attribute -> Func:tempfile.gettempdir
+79:13:Name -> Module:tempfile

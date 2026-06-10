@@ -1,0 +1,251 @@
+10:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+10:6:Attribute -> Func:logging.getLogger
+10:6:Name -> Module:logging
+10:24:Name -> Const:str:'tests.pytests.integration.ssh.conftest' | Const:str:'__main__'
+13:1:Call -> U
+13:1:Attribute -> U
+13:1:Name -> U
+27:19:Call -> U
+27:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+27:19:Attribute -> Module:posixpath | Module:ntpath
+27:19:Name -> Module:os
+27:32:Call -> U
+27:32:Attribute -> Func:tempfile.gettempdir
+27:32:Name -> Module:tempfile
+28:4:Call -> Const:NoneType:None
+28:4:Attribute -> Func:os.makedirs
+28:4:Name -> Module:os
+28:16:Name -> U
+31:13:Call -> U | Const:str:''
+31:13:Attribute -> U | BM:builtins.str.lower
+31:13:Call -> U | Const:str:'windows'
+31:13:Attribute -> Func:platform.system | Lambda:tests.unit.utils.test_path:93 | BM:platform.system | U
+31:13:Name -> Module:platform
+32:7:Name -> U | Const:str:''
+34:9:Name -> U | Const:str:''
+39:14:Call -> U
+39:14:Attribute -> U
+39:14:Call -> U
+39:14:Attribute -> Func:platform.machine
+39:14:Name -> Module:platform
+40:7:Name -> U
+42:9:Name -> U
+45:18:Name -> U
+47:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+47:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+47:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+49:8:Name -> U | Const:str:'' | Const:str:'darwin' | Const:str:'windows' | Const:str:'linux'
+50:8:Name -> Const:str:'x86_64' | Const:str:'arm64' | U
+51:8:Name -> U
+58:57:Name -> U | Const:str:'' | Const:str:'darwin' | Const:str:'windows' | Const:str:'linux'
+58:66:Name -> Const:str:'x86_64' | Const:str:'arm64' | U
+59:21:Call -> Inst:builtins.list
+59:21:Attribute -> Func:glob.glob
+59:21:Name -> Module:glob
+59:31:Name -> Const:str:'/salt/artifacts/salt-*-onedir-Uninferab | Const:str:'/salt/artifacts/salt-*-onedir-Uninferab | Const:str:'/salt/artifacts/salt-*-onedir-Uninferab | Const:str:'/salt/artifacts/salt-*-onedir--x86_64.t | Const:str:'/salt/artifacts/salt-*-onedir--arm64.ta | Const:str:'/salt/artifacts/salt-*-onedir--Uninfera
+60:7:Name -> Inst:builtins.list
+61:25:Name -> Inst:builtins.list
+62:19:Call -> U
+62:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+62:19:Attribute -> Module:posixpath | Module:ntpath
+62:19:Name -> Module:os
+62:32:Name -> U
+62:56:Name -> U | Const:str:''
+62:64:Name -> Const:str:'x86_64' | Const:str:'arm64' | U
+63:8:Call -> Const:NoneType:None
+63:8:Attribute -> Func:os.makedirs
+63:8:Name -> Module:os
+63:20:Name -> U
+64:23:Call -> U
+64:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+64:23:Attribute -> Module:posixpath | Module:ntpath
+64:23:Name -> Module:os
+64:36:Name -> U
+67:12:Call -> U
+67:12:Attribute -> Func:shutil.copy
+67:12:Name -> Module:shutil
+67:24:Name -> U
+67:40:Name -> U
+68:24:Call -> U
+68:24:Attribute -> Func:genericpath.getsize
+68:24:Attribute -> Module:posixpath | Module:ntpath
+68:24:Name -> Module:os
+68:40:Name -> U
+69:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+69:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+69:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+71:16:Name -> U
+72:16:Name -> U
+73:16:Name -> U
+75:19:Name -> U
+76:15:Name -> Class:builtins.Exception
+77:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+77:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+77:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+77:60:Name -> ExcInst:builtins.Exception
+81:23:Call -> Const:bool:False | U
+81:23:Attribute -> Func:salt.utils.relenv.gen_relenv
+81:23:Attribute -> Module:salt.utils.relenv
+81:23:Attribute -> Module:salt.utils
+81:23:Name -> Module:salt
+81:52:Name -> U
+81:66:Name -> U | Const:str:''
+81:74:Name -> Const:str:'x86_64' | Const:str:'arm64' | U
+82:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+82:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+82:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+82:49:Name -> Const:bool:False | U
+84:11:Call -> Const:bool:False | Const:bool:True | U
+84:11:Attribute -> Func:genericpath.exists | U
+84:11:Attribute -> Module:posixpath | Module:ntpath
+84:11:Name -> Module:os
+84:26:Name -> Const:bool:False | U
+85:24:Call -> U
+85:24:Attribute -> Func:genericpath.getsize
+85:24:Attribute -> Module:posixpath | Module:ntpath
+85:24:Name -> Module:os
+85:40:Name -> Const:bool:False | U
+86:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+86:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+86:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+86:53:Name -> U
+87:19:Name -> Const:bool:False | U
+89:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+89:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+89:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+90:72:Name -> Const:bool:False | U
+93:12:Name -> Class:builtins.OSError
+93:21:Name -> Class:builtins.ValueError
+97:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+97:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+97:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+97:62:Name -> ExcInst:builtins.OSError | ExcInst:builtins.ValueError
+101:1:Call -> U
+101:1:Attribute -> U
+101:1:Name -> U
+107:7:Attribute -> U
+107:7:Name -> U
+107:37:Name -> U
+108:8:Call -> U
+108:8:Attribute -> U
+108:8:Name -> U
+109:11:Attribute -> U
+109:11:Name -> U
+112:1:Call -> U
+112:1:Attribute -> U
+112:1:Name -> U
+128:11:Call -> U
+128:11:Attribute -> U
+128:11:Name -> U
+129:10:Call -> U
+129:10:Attribute -> U
+129:10:Name -> U
+131:20:Name -> U
+133:19:Call -> Const:str:''
+133:19:Name -> Class:builtins.str
+133:23:Name -> U
+137:19:Attribute -> U
+137:19:Name -> U
+140:11:Name -> U
+142:28:Call -> Inst:builtins.tuple
+142:28:Name -> Class:builtins.tuple
+142:34:Name -> U
+142:49:Name -> Tuple:0
+142:57:Name -> U
+144:35:Name -> Inst:builtins.tuple
+145:15:Call -> U
+145:15:Name -> U
+145:29:Name -> Tuple:0 | U
+145:37:Name -> Dict:0
+147:4:Name -> U
+147:14:Name -> Func:tests.pytests.integration.ssh.conftest.salt_ssh_cli_parameterized.run_with_deployment
+148:11:Name -> U
+151:1:Call -> U
+151:1:Attribute -> U
+151:1:Name -> U
+154:8:Name -> U
+155:11:Name -> U
+157:8:Call -> U
+157:8:Attribute -> U
+157:8:Name -> U
+165:7:Call -> Inst:builtins.tuple
+165:7:Name -> Func:tests.support.helpers.system_python_version
+166:8:Call -> U
+166:8:Attribute -> U
+166:8:Name -> U
+169:1:Call -> U
+169:1:Attribute -> U
+169:1:Name -> U
+178:11:Call -> U
+178:11:Attribute -> U
+178:11:Name -> U
+184:17:Call -> Inst:subprocess.CompletedProcess
+184:17:Attribute -> Func:subprocess.run
+184:17:Name -> Module:subprocess
+191:28:Call -> U
+191:28:Attribute -> U
+191:28:Attribute -> Const:NoneType:None | U
+191:28:Name -> Inst:subprocess.CompletedProcess
+194:11:Name -> U
+198:12:Call -> U
+198:12:Attribute -> U
+198:12:Name -> U
+199:37:Name -> U
+202:12:Name -> Class:builtins.OSError
+202:21:Attribute -> Class:subprocess.SubprocessError
+202:21:Name -> Module:subprocess
+202:49:Attribute -> Class:subprocess.TimeoutExpired
+202:49:Name -> Module:subprocess
+207:1:Call -> U
+207:1:Attribute -> U
+207:1:Name -> U
+211:9:Call -> Gen:tests.support.pytest.helpers.reap_stray_processes
+211:9:Name -> Func:tests.support.pytest.helpers.reap_stray_processes
+216:1:Call -> U
+216:1:Attribute -> U
+216:1:Name -> U
+237:19:Call -> U
+237:19:Attribute -> U
+237:19:Attribute -> U
+237:19:Name -> U
+238:19:Name -> Const:str:"\n    base:\n      'localhost':\n      
+238:29:Name -> U
+240:19:Call -> U
+240:19:Attribute -> U
+240:19:Attribute -> U
+240:19:Name -> U
+241:21:Name -> Const:str:'\n    {%- set abc = "def" %}\n    '
+241:31:Name -> U
+243:21:Call -> U
+243:21:Attribute -> U
+243:21:Attribute -> U
+243:21:Name -> U
+244:20:Name -> Const:str:'\n    {%- from "map.jinja" import abc w
+244:32:Name -> U
+246:9:Name -> U
+246:23:Name -> U
+246:37:Name -> U
+250:1:Call -> U
+250:1:Attribute -> U
+250:1:Name -> U
+277:19:Call -> U
+277:19:Attribute -> U
+277:19:Attribute -> U
+277:19:Name -> U
+278:19:Name -> Const:str:"\n    base:\n      'localhost':\n      
+278:29:Name -> U
+280:19:Call -> U
+280:19:Attribute -> U
+280:19:Attribute -> U
+280:19:Name -> U
+281:28:Name -> Const:str:'\n    {%- set abc = "def" %}\n    '
+281:38:Name -> U
+284:21:Call -> U
+284:21:Attribute -> U
+284:21:Attribute -> U
+284:21:Name -> U
+285:23:Name -> Const:str:'\n    {%- from "subdir/map.jinja" impor
+285:35:Name -> U
+288:9:Name -> U
+288:23:Name -> U
+288:37:Name -> U

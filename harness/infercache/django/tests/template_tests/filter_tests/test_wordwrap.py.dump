@@ -1,0 +1,95 @@
+9:20:Name -> Class:django.test.testcases.SimpleTestCase
+10:5:Call -> Func:tests.template_tests.utils.setup.decorator
+10:5:Name -> Func:tests.template_tests.utils.setup
+19:17:Call -> ERR
+19:17:Attribute -> ERR
+19:17:Attribute -> ERR
+19:17:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.WordwrapTests
+20:46:Call -> Const:str:'a & b' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+20:46:Name -> Func:django.utils.safestring.mark_safe
+22:8:Call -> Const:NoneType:None
+22:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+22:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.WordwrapTests
+22:25:Name -> U
+24:5:Call -> Func:tests.template_tests.utils.setup.decorator
+24:5:Name -> Func:tests.template_tests.utils.setup
+26:17:Call -> ERR
+26:17:Attribute -> ERR
+26:17:Attribute -> ERR
+26:17:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.WordwrapTests
+27:46:Call -> Const:str:'a & b' | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+27:46:Name -> Func:django.utils.safestring.mark_safe
+29:8:Call -> Const:NoneType:None
+29:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+29:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.WordwrapTests
+29:25:Name -> U
+32:20:Name -> Class:django.test.testcases.SimpleTestCase
+34:8:Call -> Const:NoneType:None
+34:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+34:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+35:12:Call -> Const:str:''
+35:12:Name -> Func:django.template.defaultfilters.wordwrap
+45:8:Call -> Const:NoneType:None
+45:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+45:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+46:12:Call -> Const:str:''
+46:12:Name -> Func:django.template.defaultfilters.wordwrap
+56:8:Call -> Const:NoneType:None
+56:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+56:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+57:12:Call -> Const:str:''
+57:12:Name -> Func:django.template.defaultfilters.wordwrap
+67:8:Call -> Const:NoneType:None
+67:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+67:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+67:25:Call -> Const:str:''
+67:25:Name -> Func:django.template.defaultfilters.wordwrap
+70:8:Call -> Const:NoneType:None
+70:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+70:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+71:12:Call -> Const:str:''
+71:12:Name -> Func:django.template.defaultfilters.wordwrap
+72:16:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+72:16:Name -> Func:django.utils.functional.lazystr
+87:8:Call -> Const:NoneType:None
+87:8:Attribute -> BM:unittest.case.TestCase.assertIn
+87:8:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+90:12:Call -> Const:str:''
+90:12:Name -> Func:django.template.defaultfilters.wordwrap
+90:21:Name -> Const:str:"this is a long paragraph of text that r
+105:37:Name -> List:3
+106:17:Call -> Gen:unittest.case.TestCase.subTest
+106:17:Attribute -> BM:unittest.case.TestCase.subTest
+106:17:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+106:35:Name -> Const:str:'this is a long paragraph of text that r | Const:str:'\n\n\n' | Const:str:'\n\n\n\n\n\n'
+107:16:Call -> Const:NoneType:None
+107:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+107:16:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+107:33:Call -> Const:str:''
+107:33:Name -> Func:django.template.defaultfilters.wordwrap
+107:42:Name -> Const:str:'this is a long paragraph of text that r | Const:str:'\n\n\n' | Const:str:'\n\n\n\n\n\n'
+107:48:Name -> Const:int:30 | Const:int:5 | Const:int:5
+107:56:Name -> Const:str:'this is a long paragraph of\ntext that  | Const:str:'\n\n\n' | Const:str:'\n\n\n\n\n\n'
+111:29:Name -> Const:int:5
+114:31:Name -> Const:str:'     '
+115:32:Name -> Const:str:'     '
+122:31:Name -> Const:str:'     '
+122:67:Name -> Const:str:'     '
+123:32:Name -> Const:str:'     '
+126:31:Name -> Const:str:'     '
+126:45:Name -> Const:str:'     '
+127:32:Name -> Const:str:'     '
+127:46:Name -> Const:str:'     '
+130:30:Name -> List:4
+131:17:Call -> Gen:unittest.case.TestCase.subTest
+131:17:Attribute -> BM:unittest.case.TestCase.subTest
+131:17:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+131:35:Name -> Const:str:'first line\n     \nsecond line' | Const:str:'first line\n \t\t\t \nsecond line' | Const:str:'first line\n     \nsecond line\n\nthird | Const:str:'first line\n          \nsecond line'
+132:16:Call -> Const:NoneType:None
+132:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+132:16:Name -> Inst:tests.template_tests.filter_tests.test_wordwrap.FunctionTests
+132:33:Call -> Const:str:''
+132:33:Name -> Func:django.template.defaultfilters.wordwrap
+132:42:Name -> Const:str:'first line\n     \nsecond line' | Const:str:'first line\n \t\t\t \nsecond line' | Const:str:'first line\n     \nsecond line\n\nthird | Const:str:'first line\n          \nsecond line'
+132:48:Name -> Const:int:5
+132:56:Name -> Const:str:'first\nline\n     \nsecond\nline' | Const:str:'first\nline\n \t\t\t \nsecond\nline' | Const:str:'first\nline\n     \nsecond\nline\n\nthi | Const:str:'first\nline\n          \nsecond\nline'

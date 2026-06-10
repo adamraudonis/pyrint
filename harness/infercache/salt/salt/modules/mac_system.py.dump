@@ -1,0 +1,321 @@
+24:11:Call -> U
+24:11:Attribute -> Func:salt.utils.platform.is_darwin
+24:11:Attribute -> Module:salt.utils.platform
+24:11:Attribute -> Module:salt.utils
+24:11:Name -> Module:salt
+31:7:Call -> U
+31:7:Attribute -> Func:getpass.getuser
+31:7:Name -> Module:getpass
+34:11:Call -> U | Const:bool:False
+34:11:Name -> Func:salt.modules.mac_system._atrun_enabled
+35:15:Call -> Const:bool:False | U | Const:bool:False
+35:15:Name -> Func:salt.modules.mac_system._enable_atrun
+38:11:Name -> Const:str:'system'
+46:15:Call -> ERR
+46:15:Name -> ERR
+47:11:Name -> Class:salt.exceptions.CommandExecutionError
+57:8:Call -> ERR
+57:8:Name -> ERR
+57:35:Name -> Const:str:'com.apple.atrun'
+58:8:Call -> ERR
+58:8:Name -> ERR
+58:34:Name -> Const:str:'com.apple.atrun'
+59:11:Name -> Class:salt.exceptions.CommandExecutionError
+61:11:Call -> U | Const:bool:False
+61:11:Name -> Func:salt.modules.mac_system._atrun_enabled
+74:7:Name -> Const:NoneType:None | U
+75:23:Name -> U
+75:35:Call -> Const:str:"''" | U
+75:35:Attribute -> Func:shlex.quote
+75:35:Name -> Module:shlex
+75:47:Name -> U
+76:15:Call -> U
+76:15:Name -> Class:builtins.bool
+76:20:Call -> ERR
+76:20:Name -> ERR
+76:44:Name -> U | Const:str:"echo 'Uninferable' | at ''" | Const:str:"echo 'Uninferable' | at Uninferable"
+105:11:Call -> U
+105:11:Name -> Func:salt.modules.mac_system._execute_command
+105:28:Name -> Const:str:'shutdown -h now'
+105:33:Name -> Const:NoneType:None | U
+135:11:Call -> U
+135:11:Name -> Func:salt.modules.mac_system._execute_command
+135:28:Name -> Const:str:'shutdown -s now'
+135:33:Name -> Const:NoneType:None | U
+164:11:Call -> U
+164:11:Name -> Func:salt.modules.mac_system._execute_command
+164:28:Name -> Const:str:'shutdown -r now'
+164:33:Name -> Const:NoneType:None | U
+192:11:Call -> U
+192:11:Name -> Func:salt.modules.mac_system.halt
+192:16:Name -> Const:NoneType:None | U
+208:10:Call -> U
+208:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+208:10:Attribute -> Module:salt.utils.mac_utils
+208:10:Attribute -> Module:salt.utils
+208:10:Name -> Module:salt
+210:14:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+210:14:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+210:14:Attribute -> Module:salt.utils.mac_utils
+210:14:Attribute -> Module:salt.utils
+210:14:Name -> Module:salt
+211:8:Call -> U
+211:8:Attribute -> Func:salt.utils.mac_utils.parse_return
+211:8:Attribute -> Module:salt.utils.mac_utils
+211:8:Attribute -> Module:salt.utils
+211:8:Name -> Module:salt
+211:42:Name -> U
+214:11:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+234:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+234:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+234:12:Attribute -> Module:salt.utils.mac_utils
+234:12:Attribute -> Module:salt.utils
+234:12:Name -> Module:salt
+234:50:Name -> U
+236:44:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+237:4:Call -> Const:bool:True
+237:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+237:4:Attribute -> Module:salt.utils.mac_utils
+237:4:Attribute -> Module:salt.utils
+237:4:Name -> Module:salt
+237:48:Name -> Const:str:'systemsetup -f -setremotelogin on' | Const:str:'systemsetup -f -setremotelogin off' | Const:str:'systemsetup -f -setremotelogin on' | Const:str:'systemsetup -f -setremotelogin off'
+239:11:Call -> Const:bool:True | Const:bool:False
+239:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+239:11:Attribute -> Module:salt.utils.mac_utils
+239:11:Attribute -> Module:salt.utils
+239:11:Name -> Module:salt
+240:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+240:15:Name -> Func:salt.modules.mac_system.get_remote_login
+257:10:Call -> U
+257:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+257:10:Attribute -> Module:salt.utils.mac_utils
+257:10:Attribute -> Module:salt.utils
+257:10:Name -> Module:salt
+261:14:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+261:14:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+261:14:Attribute -> Module:salt.utils.mac_utils
+261:14:Attribute -> Module:salt.utils
+261:14:Name -> Module:salt
+262:8:Call -> U
+262:8:Attribute -> Func:salt.utils.mac_utils.parse_return
+262:8:Attribute -> Module:salt.utils.mac_utils
+262:8:Attribute -> Module:salt.utils
+262:8:Name -> Module:salt
+262:42:Name -> U
+265:11:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+286:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+286:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+286:12:Attribute -> Module:salt.utils.mac_utils
+286:12:Attribute -> Module:salt.utils
+286:12:Name -> Module:salt
+286:50:Name -> U
+288:47:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+289:4:Call -> Const:bool:True
+289:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+289:4:Attribute -> Module:salt.utils.mac_utils
+289:4:Attribute -> Module:salt.utils
+289:4:Name -> Module:salt
+289:48:Name -> Const:str:'systemsetup -setremoteappleevents on' | Const:str:'systemsetup -setremoteappleevents off' | Const:str:'systemsetup -setremoteappleevents on' | Const:str:'systemsetup -setremoteappleevents off'
+291:11:Call -> Const:bool:True | Const:bool:False
+291:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+291:11:Attribute -> Module:salt.utils.mac_utils
+291:11:Attribute -> Module:salt.utils
+291:11:Name -> Module:salt
+292:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+293:8:Name -> Func:salt.modules.mac_system.get_remote_events
+311:10:Call -> U
+311:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+311:10:Attribute -> Module:salt.utils.mac_utils
+311:10:Attribute -> Module:salt.utils
+311:10:Name -> Module:salt
+313:11:Call -> U
+313:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+313:11:Attribute -> Module:salt.utils.mac_utils
+313:11:Attribute -> Module:salt.utils
+313:11:Name -> Module:salt
+313:45:Name -> U
+331:40:Name -> U
+332:4:Call -> Const:bool:True
+332:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+332:4:Attribute -> Module:salt.utils.mac_utils
+332:4:Attribute -> Module:salt.utils
+332:4:Name -> Module:salt
+332:48:Name -> Const:str:'scutil --set ComputerName "Uninferable"
+334:11:Call -> Const:bool:True | Const:bool:False
+334:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+334:11:Attribute -> Module:salt.utils.mac_utils
+334:11:Attribute -> Module:salt.utils
+334:11:Name -> Module:salt
+335:8:Name -> U
+336:8:Name -> Func:salt.modules.mac_system.get_computer_name
+353:10:Call -> U
+353:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+353:10:Attribute -> Module:salt.utils.mac_utils
+353:10:Attribute -> Module:salt.utils
+353:10:Name -> Module:salt
+355:11:Call -> U
+355:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+355:11:Attribute -> Module:salt.utils.mac_utils
+355:11:Attribute -> Module:salt.utils
+355:11:Name -> Module:salt
+355:45:Name -> U
+377:46:Name -> U
+378:4:Call -> Const:bool:True
+378:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+378:4:Attribute -> Module:salt.utils.mac_utils
+378:4:Attribute -> Module:salt.utils
+378:4:Name -> Module:salt
+378:48:Name -> Const:str:'systemsetup -setlocalsubnetname "Uninfe
+380:11:Call -> Const:bool:True | Const:bool:False
+380:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+380:11:Attribute -> Module:salt.utils.mac_utils
+380:11:Attribute -> Module:salt.utils
+380:11:Name -> Module:salt
+381:8:Name -> U
+382:8:Name -> Func:salt.modules.mac_system.get_subnet_name
+399:10:Call -> U
+399:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+399:10:Attribute -> Module:salt.utils.mac_utils
+399:10:Attribute -> Module:salt.utils
+399:10:Name -> Module:salt
+401:11:Call -> U
+401:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+401:11:Attribute -> Module:salt.utils.mac_utils
+401:11:Attribute -> Module:salt.utils
+401:11:Name -> Module:salt
+401:45:Name -> U
+417:10:Call -> U
+417:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+417:10:Attribute -> Module:salt.utils.mac_utils
+417:10:Attribute -> Module:salt.utils
+417:10:Name -> Module:salt
+419:11:Call -> U
+419:11:Attribute -> U
+419:11:Name -> U
+438:7:Name -> U
+438:19:Call -> U
+438:19:Name -> Func:salt.modules.mac_system.list_startup_disks
+440:12:Call -> U
+440:12:Attribute -> BM:builtins.str.format
+443:32:Name -> U
+445:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+445:14:Name -> Class:salt.exceptions.SaltInvocationError
+445:34:Name -> U
+447:41:Name -> U
+448:4:Call -> U
+448:4:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+448:4:Attribute -> Module:salt.utils.mac_utils
+448:4:Attribute -> Module:salt.utils
+448:4:Name -> Module:salt
+448:47:Name -> Const:str:'systemsetup -setstartupdisk Uninferable
+450:11:Call -> Const:bool:True | Const:bool:False
+450:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+450:11:Attribute -> Module:salt.utils.mac_utils
+450:11:Attribute -> Module:salt.utils
+450:11:Name -> Module:salt
+451:8:Name -> U
+452:8:Name -> Func:salt.modules.mac_system.get_startup_disk
+471:10:Call -> U
+471:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+471:10:Attribute -> Module:salt.utils.mac_utils
+471:10:Attribute -> Module:salt.utils
+471:10:Name -> Module:salt
+475:11:Call -> U
+475:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+475:11:Attribute -> Module:salt.utils.mac_utils
+475:11:Attribute -> Module:salt.utils
+475:11:Name -> Module:salt
+475:45:Name -> U
+506:7:Name -> U
+508:12:Call -> U
+508:12:Attribute -> BM:builtins.str.format
+510:32:Name -> U
+512:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+512:14:Name -> Class:salt.exceptions.SaltInvocationError
+512:34:Name -> U
+514:61:Name -> U
+515:4:Call -> Const:bool:True
+515:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+515:4:Attribute -> Module:salt.utils.mac_utils
+515:4:Attribute -> Module:salt.utils
+515:4:Name -> Module:salt
+515:48:Name -> Const:str:'systemsetup -setwaitforstartupafterpowe
+517:11:Call -> Const:bool:True | Const:bool:False
+517:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+517:11:Attribute -> Module:salt.utils.mac_utils
+517:11:Attribute -> Module:salt.utils
+517:11:Name -> Module:salt
+518:8:Name -> U
+519:8:Name -> Func:salt.modules.mac_system.get_restart_delay
+537:10:Call -> U
+537:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+537:10:Attribute -> Module:salt.utils.mac_utils
+537:10:Attribute -> Module:salt.utils
+537:10:Name -> Module:salt
+541:14:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+541:14:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+541:14:Attribute -> Module:salt.utils.mac_utils
+541:14:Attribute -> Module:salt.utils
+541:14:Name -> Module:salt
+542:8:Call -> U
+542:8:Attribute -> Func:salt.utils.mac_utils.parse_return
+542:8:Attribute -> Module:salt.utils.mac_utils
+542:8:Attribute -> Module:salt.utils
+542:8:Name -> Module:salt
+542:42:Name -> U
+545:11:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+566:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+566:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+566:12:Attribute -> Module:salt.utils.mac_utils
+566:12:Attribute -> Module:salt.utils
+566:12:Name -> Module:salt
+566:50:Name -> U
+568:71:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+569:4:Call -> Const:bool:True
+569:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+569:4:Attribute -> Module:salt.utils.mac_utils
+569:4:Attribute -> Module:salt.utils
+569:4:Name -> Module:salt
+569:48:Name -> Const:str:'systemsetup -setdisablekeyboardwhenencl | Const:str:'systemsetup -setdisablekeyboardwhenencl | Const:str:'systemsetup -setdisablekeyboardwhenencl | Const:str:'systemsetup -setdisablekeyboardwhenencl
+571:11:Call -> Const:bool:True | Const:bool:False
+571:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+571:11:Attribute -> Module:salt.utils.mac_utils
+571:11:Attribute -> Module:salt.utils
+571:11:Name -> Module:salt
+572:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+573:8:Name -> Func:salt.modules.mac_system.get_disable_keyboard_on_lock
+591:10:Call -> U
+591:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+591:10:Attribute -> Module:salt.utils.mac_utils
+591:10:Attribute -> Module:salt.utils
+591:10:Name -> Module:salt
+595:11:Call -> U
+595:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+595:11:Attribute -> Module:salt.utils.mac_utils
+595:11:Attribute -> Module:salt.utils
+595:11:Name -> Module:salt
+595:45:Name -> U
+597:20:Name -> U
+599:19:Name -> U
+601:21:Name -> U
+633:7:Name -> Const:str:'default' | U
+635:12:Call -> U
+635:12:Attribute -> BM:builtins.str.format
+637:32:Name -> Const:str:'default' | U
+639:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+639:14:Name -> Class:salt.exceptions.SaltInvocationError
+639:34:Name -> U
+641:52:Name -> Const:str:'default' | U
+642:4:Call -> Const:bool:True
+642:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+642:4:Attribute -> Module:salt.utils.mac_utils
+642:4:Attribute -> Module:salt.utils
+642:4:Name -> Module:salt
+642:48:Name -> Const:str:'systemsetup -setkernelbootarchitecture  | Const:str:'systemsetup -setkernelbootarchitecture 
+644:11:Call -> Const:bool:True | Const:bool:False
+644:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+644:11:Attribute -> Module:salt.utils.mac_utils
+644:11:Attribute -> Module:salt.utils
+644:11:Name -> Module:salt
+645:8:Name -> Const:str:'default' | U
+646:8:Name -> Func:salt.modules.mac_system.get_boot_arch

@@ -1,0 +1,75 @@
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'salt.states.ntp' | Const:str:'__main__'
+29:11:Call -> U
+29:11:Attribute -> Func:salt.utils.platform.is_windows
+29:11:Attribute -> Module:salt.utils.platform
+29:11:Attribute -> Module:salt.utils
+29:11:Name -> Module:salt
+35:11:Call -> ERR
+35:11:Name -> Func:builtins.isinstance
+35:22:Name -> U
+35:31:Name -> Class:builtins.list
+37:18:Name -> U
+38:15:Call -> ERR
+38:15:Name -> Func:builtins.isinstance
+38:26:Name -> U
+38:34:Name -> Class:builtins.str
+45:15:Call -> Inst:builtins.set
+45:15:Name -> Class:builtins.set
+45:19:Call -> ERR
+45:19:Name -> ERR
+46:11:Name -> Class:builtins.TypeError
+58:16:Name -> U
+64:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+64:11:Name -> Func:salt.states.ntp._check_servers
+64:26:Name -> Const:NoneType:None | U
+65:8:Name -> Dict:4
+66:8:Name -> Dict:4
+68:21:Call -> Inst:builtins.set | Set:1
+68:21:Name -> Func:salt.states.ntp._get_servers
+69:22:Call -> Inst:builtins.set
+69:22:Name -> Class:builtins.set
+69:26:Name -> Const:NoneType:None | U
+71:7:Name -> Inst:builtins.set | Set:1
+71:25:Name -> Inst:builtins.set
+72:15:Name -> Dict:4
+74:7:Name -> ERR
+75:8:Name -> Dict:4
+76:8:Name -> Dict:4
+76:25:Call -> Const:str:'NTP servers will be updated to: '
+76:25:Attribute -> BM:builtins.str.format
+77:12:Call -> Const:str:''
+77:12:Attribute -> BM:builtins.str.join
+77:22:Call -> ERR
+77:22:Name -> Func:builtins.sorted
+77:29:Name -> Inst:builtins.set
+79:15:Name -> Dict:4
+81:4:Call -> ERR
+81:4:Name -> ERR
+81:33:Name -> Inst:builtins.set
+82:20:Call -> Inst:builtins.set | Set:1
+82:20:Name -> Func:salt.states.ntp._get_servers
+84:7:Name -> Inst:builtins.set | Set:1
+84:24:Name -> Inst:builtins.set
+85:8:Name -> Dict:4
+86:8:Name -> Dict:4
+86:33:Call -> ERR
+86:33:Name -> Func:builtins.sorted
+86:40:Name -> Inst:builtins.set | Set:1
+86:64:Call -> ERR
+86:64:Name -> Func:builtins.sorted
+86:71:Name -> Inst:builtins.set | Set:1
+88:8:Name -> Dict:4
+89:8:Name -> Dict:4
+90:11:Name -> Inst:builtins.set | Set:1
+90:29:Name -> Inst:builtins.set | Set:1
+91:12:Name -> Dict:4
+92:23:Call -> ERR
+92:23:Name -> Func:builtins.sorted
+92:30:Name -> Inst:builtins.set | Set:1
+93:23:Call -> ERR
+93:23:Name -> Func:builtins.sorted
+93:30:Name -> Inst:builtins.set | Set:1
+96:11:Name -> Dict:4

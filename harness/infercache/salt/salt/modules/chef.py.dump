@@ -1,0 +1,107 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'salt.modules.chef' | Const:str:'__main__'
+20:11:Call -> Const:NoneType:None | Const:str:'chef-client' | U
+20:11:Attribute -> Func:salt.utils.path.which
+20:11:Attribute -> Module:salt.utils.path
+20:11:Attribute -> Module:salt.utils
+20:11:Name -> Module:salt
+29:7:Call -> U
+29:7:Attribute -> Func:salt.utils.platform.is_windows
+29:7:Attribute -> Module:salt.utils.platform
+29:7:Attribute -> Module:salt.utils
+29:7:Name -> Module:salt
+30:18:Call -> U
+30:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+30:18:Attribute -> Module:posixpath | Module:ntpath
+30:18:Name -> Module:os
+30:31:Name -> ERR
+31:15:Call -> Const:bool:False | U
+31:15:Attribute -> Func:genericpath.isdir | U
+31:15:Attribute -> Module:posixpath | Module:ntpath
+31:15:Name -> Module:os
+31:29:Name -> U
+32:12:Call -> ERR
+32:12:Attribute -> Func:posix.mkdir
+32:12:Name -> Module:os
+32:21:Name -> U
+33:22:Call -> Inst:tempfile._TemporaryFileWrapper
+33:22:Attribute -> Func:tempfile.NamedTemporaryFile
+33:22:Name -> Module:tempfile
+34:16:Name -> U
+34:32:Name -> U
+36:18:Attribute -> U
+36:18:Name -> Inst:tempfile._TemporaryFileWrapper
+37:8:Call -> Const:NoneType:None
+37:8:Attribute -> BM:tempfile._TemporaryFileWrapper.close
+37:8:Name -> Inst:tempfile._TemporaryFileWrapper
+39:18:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+39:18:Attribute -> Func:salt.utils.path.join
+39:18:Attribute -> Module:salt.utils.path
+39:18:Attribute -> Module:salt.utils
+39:18:Name -> Module:salt
+39:54:Name -> U
+41:11:Name -> U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+44:1:Call -> Func:salt.utils.decorators.path.which.wrapper
+44:1:Attribute -> Func:salt.utils.decorators.path.which
+44:1:Attribute -> Module:salt.utils.decorators.path
+44:1:Attribute -> Module:salt.utils.decorators
+44:1:Attribute -> Module:salt.utils
+44:1:Name -> Module:salt
+113:7:Name -> Const:NoneType:None | U
+114:18:Call -> U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+114:18:Name -> Func:salt.modules.chef._default_logfile
+119:22:Name -> Const:NoneType:None | U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+123:7:Name -> Const:bool:False | U
+124:8:Call -> ERR
+124:8:Attribute -> BM:builtins.list.append
+124:8:Name -> List:5
+126:7:Name -> Const:bool:False | U
+127:8:Call -> ERR
+127:8:Attribute -> BM:builtins.list.append
+127:8:Name -> List:5
+129:11:Call -> U
+129:11:Name -> Func:salt.modules.chef._exec_cmd
+129:22:Name -> List:5
+129:30:Name -> Dict:0
+132:1:Call -> Func:salt.utils.decorators.path.which.wrapper
+132:1:Attribute -> Func:salt.utils.decorators.path.which
+132:1:Attribute -> Module:salt.utils.decorators.path
+132:1:Attribute -> Module:salt.utils.decorators
+132:1:Attribute -> Module:salt.utils
+132:1:Name -> Module:salt
+182:7:Name -> Const:NoneType:None | U
+183:18:Call -> U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+183:18:Name -> Func:salt.modules.chef._default_logfile
+187:22:Name -> Const:NoneType:None | U | Const:str:'' | Const:bytes:b'.' | Const:str:'.'
+191:7:Name -> Const:bool:False | U
+192:8:Call -> ERR
+192:8:Attribute -> BM:builtins.list.append
+192:8:Name -> List:4
+194:11:Call -> U
+194:11:Name -> Func:salt.modules.chef._exec_cmd
+194:22:Name -> List:4
+194:30:Name -> Dict:0
+200:15:Call -> Const:str:''
+200:15:Attribute -> BM:builtins.str.join
+200:24:Name -> Tuple:0
+201:17:Call -> Const:str:''
+201:17:Attribute -> BM:builtins.str.join
+202:15:Name -> U
+202:19:Name -> U
+202:35:Call -> DictItems
+202:35:Attribute -> BM:builtins.dict.items
+202:35:Name -> Dict:0
+202:57:Call -> U
+202:57:Attribute -> U
+202:57:Name -> U
+204:18:Name -> Const:str:''
+204:28:Name -> Const:str:''
+205:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+205:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+205:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+205:34:Name -> Const:str:''
+207:11:Call -> ERR
+207:11:Name -> ERR
+207:35:Name -> Const:str:''

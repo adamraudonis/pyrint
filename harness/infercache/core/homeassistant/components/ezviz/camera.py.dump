@@ -1,0 +1,217 @@
+31:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+31:10:Attribute -> Func:logging.getLogger
+31:10:Name -> Module:logging
+31:28:Name -> Const:str:'homeassistant.components.ezviz.camera' | Const:str:'__main__'
+35:10:Name -> U
+36:11:Name -> U
+37:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+41:18:Attribute -> U
+41:18:Name -> U
+45:25:Call -> U
+45:25:Attribute -> U
+45:25:Attribute -> U
+45:25:Name -> U
+47:12:Name -> U
+48:24:Call -> U
+48:24:Attribute -> U
+48:24:Attribute -> U
+48:24:Name -> U
+48:58:Name -> Const:str:'ezviz'
+49:15:Attribute -> U
+49:15:Name -> U
+49:33:Name -> U
+49:44:Attribute -> U
+49:44:Name -> U
+49:59:Name -> U
+52:11:Name -> U
+53:31:Attribute -> U
+53:31:Name -> U
+53:60:Name -> Const:str:'ffmpeg_arguments'
+54:30:Attribute -> U
+54:30:Name -> U
+54:56:Name -> Const:str:'username'
+55:30:Attribute -> U
+55:30:Name -> U
+55:56:Name -> Const:str:'password'
+57:43:Name -> U
+57:61:Name -> U
+57:79:Name -> U
+57:99:Name -> U
+57:125:Name -> U
+58:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+58:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+58:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+60:16:Name -> U
+61:16:Name -> U
+62:16:Name -> U
+63:16:Name -> U
+67:12:Call -> Const:NoneType:None
+67:12:Attribute -> Func:homeassistant.helpers.discovery_flow.async_create_flow
+67:12:Name -> Module:homeassistant.helpers.discovery_flow
+68:16:Name -> U
+69:16:Name -> Const:str:'ezviz'
+70:35:Name -> U
+72:20:Name -> Const:str:'serial'
+72:33:Name -> U
+73:20:Name -> Const:str:'ip_address'
+73:37:Name -> U
+77:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+77:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+77:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+82:16:Name -> U
+85:31:Name -> Const:str:'/Streaming/Channels/102'
+86:30:Name -> Const:str:'admin'
+90:8:Call -> ERR
+90:8:Attribute -> BM:builtins.list.append
+90:8:Name -> List:0
+91:12:Call -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+91:12:Name -> Class:homeassistant.components.ezviz.camera.EzvizCamera
+92:16:Name -> U
+93:16:Name -> U
+94:16:Name -> U
+95:16:Name -> U | Const:str:'admin'
+96:16:Name -> U | Const:NoneType:None
+97:16:Name -> Const:str:'rtsp://Uninferable:Uninferable@Uninfera | Const:str:''
+98:16:Name -> U
+99:16:Name -> U | Const:str:'/Streaming/Channels/102'
+103:4:Call -> U
+103:4:Name -> U
+103:23:Name -> List:0
+105:15:Call -> U
+105:15:Name -> Func:homeassistant.helpers.entity_platform.async_get_current_platform
+107:4:Call -> U
+107:4:Attribute -> U
+107:4:Name -> U
+108:8:Name -> Const:str:'wake_device'
+112:18:Name -> Class:homeassistant.components.ezviz.entity.EzvizEntity
+112:31:Name -> Class:homeassistant.components.camera.Camera
+119:14:Name -> U
+120:21:Name -> Class:homeassistant.components.ezviz.coordinator.EzvizDataUpdateCoordinator
+121:16:Name -> Class:builtins.str
+122:25:Name -> Class:builtins.str
+123:25:Name -> Class:builtins.str
+124:28:Name -> Class:builtins.str
+125:25:Name -> Class:builtins.int
+126:26:Name -> Class:builtins.str
+129:8:Call -> Const:NoneType:None | Const:NoneType:None
+129:8:Attribute -> BM:homeassistant.components.ezviz.entity.EzvizEntity.__init__ | BM:homeassistant.components.camera.Camera.__init__ | BM:builtins.object.__init__
+129:8:Call -> Super
+129:8:Name -> Class:builtins.super
+129:25:Name -> U
+129:38:Name -> U
+130:8:Call -> Const:NoneType:None
+130:8:Attribute -> UM:homeassistant.components.camera.Camera.__init__
+130:8:Name -> Class:homeassistant.components.camera.Camera
+130:24:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+131:8:Attribute -> Dict:0
+131:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+131:28:Name -> Const:str:'use_wallclock_as_timestamps'
+132:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+132:25:Name -> U
+133:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+133:25:Name -> U
+134:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+134:28:Name -> U
+135:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+135:32:Name -> U
+136:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+136:33:Name -> U
+137:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+137:23:Call -> U
+137:23:Name -> Func:homeassistant.components.ffmpeg.get_ffmpeg_manager
+137:42:Name -> U
+138:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+138:31:Name -> U
+139:11:Name -> U
+140:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+140:44:Attribute -> Inst:homeassistant.components.camera.CameraEntityFeature.STREAM
+140:44:Name -> Class:homeassistant.components.camera.CameraEntityFeature
+142:5:Name -> Class:builtins.property
+143:23:Name -> Class:builtins.bool
+145:15:Call -> U
+145:15:Name -> Class:builtins.bool
+145:20:Attribute -> U
+145:20:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+147:5:Name -> Class:builtins.property
+148:30:Name -> Class:builtins.bool
+150:15:Attribute -> U
+150:15:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+152:5:Name -> Class:builtins.property
+153:42:Name -> Class:builtins.bool
+155:15:Attribute -> U
+155:15:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+160:12:Call -> ERR
+160:12:Attribute -> ERR
+160:12:Attribute -> ERR
+160:12:Attribute -> ERR
+160:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+160:61:Attribute -> U
+160:61:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+162:15:Name -> U
+163:18:Call -> U
+163:18:Name -> U
+163:70:Name -> U
+168:12:Call -> ERR
+168:12:Attribute -> ERR
+168:12:Attribute -> ERR
+168:12:Attribute -> ERR
+168:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+168:61:Attribute -> U
+168:61:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+170:15:Name -> U
+171:18:Call -> U
+171:18:Name -> U
+171:71:Name -> U
+174:21:Name -> Class:builtins.int
+174:48:Name -> Class:builtins.int
+175:9:Name -> Class:builtins.bytes
+177:11:Attribute -> U
+177:11:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+179:21:Call -> U
+179:21:Attribute -> Func:homeassistant.components.ffmpeg.async_get_image
+179:21:Name -> Module:homeassistant.components.ffmpeg
+180:12:Attribute -> U | Const:NoneType:None
+180:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+180:23:Attribute -> U
+180:23:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+180:48:Name -> Const:NoneType:None | U
+180:62:Name -> Const:NoneType:None | U
+183:37:Name -> Class:builtins.str
+185:11:Attribute -> U
+185:11:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+187:19:Attribute -> U
+187:19:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+188:8:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+189:22:Attribute -> U
+189:22:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+189:39:Attribute -> U
+189:39:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+190:15:Name -> U
+190:26:Attribute -> U
+190:26:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+190:49:Attribute -> U
+190:49:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+192:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+192:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+192:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+194:12:Attribute -> U
+194:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+195:12:Name -> U
+196:12:Attribute -> U
+196:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+197:12:Attribute -> U
+197:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+200:15:Attribute -> U
+200:15:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+205:12:Call -> ERR
+205:12:Attribute -> ERR
+205:12:Attribute -> ERR
+205:12:Attribute -> ERR
+205:12:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+205:68:Attribute -> U
+205:68:Name -> Inst:homeassistant.components.ezviz.camera.EzvizCamera
+206:16:Name -> U
+206:27:Name -> U
+207:18:Call -> U
+207:18:Name -> U
+207:58:Name -> U

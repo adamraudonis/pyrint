@@ -1,0 +1,185 @@
+20:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:6:Attribute -> Func:logging.getLogger
+20:6:Name -> Module:logging
+20:24:Name -> Const:str:'salt.modules.win_servermanager' | Const:str:'__main__'
+29:11:Call -> U
+29:11:Attribute -> Func:salt.utils.platform.is_windows
+29:11:Attribute -> Module:salt.utils.platform
+29:11:Attribute -> Module:salt.utils
+29:11:Name -> Module:salt
+35:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+35:7:Attribute -> Func:salt.utils.versions.version_cmp
+35:7:Attribute -> Module:salt.utils.versions
+35:7:Attribute -> Module:salt.utils
+35:7:Name -> Module:salt
+35:39:Name -> ERR
+43:11:Call -> Const:bool:False
+43:11:Attribute -> Func:salt.utils.powershell.module_exists
+43:11:Attribute -> Module:salt.utils.powershell
+43:11:Attribute -> Module:salt.utils
+43:11:Name -> Module:salt
+51:11:Name -> Const:str:'win_servermanager'
+74:11:Call -> ERR
+74:11:Name -> ERR
+74:33:Name -> Const:str:'Import-Module ServerManager; Get-Window
+97:15:Call -> Dict:0 | Dict:2 | U
+97:15:Attribute -> Func:salt.utils.win_pwsh.run_dict
+97:15:Attribute -> Module:salt.utils.win_pwsh
+97:15:Attribute -> Module:salt.utils
+97:15:Name -> Module:salt
+97:44:Name -> Const:str:'Get-WindowsFeature -ErrorAction Silentl
+100:17:Name -> Dict:0 | Dict:2 | U
+101:11:Name -> U
+102:12:Name -> Dict:0
+102:16:Name -> U
+102:33:Name -> U
+104:11:Name -> Dict:0
+185:7:Call -> ERR
+185:7:Name -> Func:builtins.isinstance
+185:18:Name -> U
+185:27:Name -> Class:builtins.list
+186:18:Call -> Const:str:''
+186:18:Attribute -> BM:builtins.str.join
+186:27:Name -> U
+194:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+194:7:Attribute -> Func:salt.utils.versions.version_cmp
+194:7:Attribute -> Module:salt.utils.versions
+194:7:Attribute -> Module:salt.utils
+194:7:Name -> Module:salt
+194:39:Name -> ERR
+198:10:Call -> U
+198:10:Attribute -> BM:builtins.str.format
+199:8:Name -> Const:str:'Add-WindowsFeature' | Const:str:'Install-WindowsFeature'
+200:8:Call -> Const:str:"''" | U | Const:str:''
+200:8:Attribute -> Func:shlex.quote
+200:8:Name -> Module:shlex
+200:20:Name -> U | Const:str:''
+201:8:Name -> Const:str:'' | Const:str:'-IncludeManagementTools'
+202:35:Name -> Const:bool:False | U
+203:14:Name -> Const:NoneType:None | U
+203:45:Name -> U
+205:10:Call -> Dict:0 | Dict:2 | U
+205:10:Attribute -> Func:salt.utils.win_pwsh.run_dict
+205:10:Attribute -> Module:salt.utils.win_pwsh
+205:10:Attribute -> Module:salt.utils
+205:10:Name -> Module:salt
+205:39:Name -> U
+210:7:Name -> Const:NoneType:None | U
+211:18:Call -> Dict:5 | Dict:5
+211:18:Name -> Func:salt.modules.win_servermanager.remove
+211:25:Name -> U
+214:7:Name -> Dict:0 | Dict:2 | U
+216:24:Name -> Dict:0 | Dict:2 | U
+220:23:Name -> Dict:0 | Dict:2 | U
+224:20:Name -> Dict:0 | Dict:2 | U
+225:12:Name -> Dict:5
+225:28:Name -> U
+226:31:Name -> U
+227:27:Name -> U
+228:33:Name -> U
+229:30:Name -> U
+230:27:Name -> U
+233:15:Name -> U
+234:16:Name -> Dict:5
+238:20:Call -> U
+238:20:Attribute -> U | BM:builtins.str.split
+238:20:Name -> U | Const:str:''
+239:15:Name -> U
+239:27:Name -> Dict:5
+240:16:Name -> Dict:5
+240:32:Name -> U
+244:11:Name -> Const:NoneType:None | U
+246:24:Name -> Dict:5 | Dict:5
+247:19:Name -> U
+247:27:Name -> Dict:5
+248:20:Name -> Dict:5
+248:36:Name -> U
+250:39:Name -> Dict:5 | Dict:5
+250:59:Name -> U
+251:41:Name -> Dict:5 | Dict:5
+251:61:Name -> U
+252:38:Name -> Dict:5 | Dict:5
+252:58:Name -> U
+253:35:Name -> Dict:5 | Dict:5
+253:55:Name -> U
+257:23:Name -> Dict:5 | Dict:5
+257:43:Name -> U
+258:24:Name -> Dict:5
+261:11:Name -> Const:bool:False | U
+262:15:Name -> Dict:5
+263:19:Call -> ERR
+263:19:Name -> ERR
+264:20:Name -> Dict:5
+266:15:Name -> Dict:5
+272:24:Name -> Dict:0 | Dict:2 | U
+276:23:Name -> Dict:0 | Dict:2 | U
+279:20:Call -> U
+279:20:Attribute -> U | BM:builtins.str.split
+279:20:Name -> U | Const:str:''
+280:12:Name -> Dict:5
+280:28:Name -> U
+282:15:Name -> Dict:5
+328:7:Call -> ERR
+328:7:Name -> Func:builtins.isinstance
+328:18:Name -> U
+328:27:Name -> Class:builtins.list
+329:18:Call -> Const:str:''
+329:18:Attribute -> BM:builtins.str.join
+329:27:Name -> U
+338:7:Call -> Const:int:-1 | Const:int:0 | Const:int:1 | Const:NoneType:None
+338:7:Attribute -> Func:salt.utils.versions.version_cmp
+338:7:Attribute -> Module:salt.utils.versions
+338:7:Attribute -> Module:salt.utils
+338:7:Name -> Module:salt
+338:39:Name -> ERR
+343:11:Name -> Const:bool:False | U
+346:10:Call -> U
+346:10:Attribute -> BM:builtins.str.format
+347:8:Name -> Const:str:'Remove-WindowsFeature' | Const:str:'Uninstall-WindowsFeature'
+348:8:Call -> Const:str:"''" | U | Const:str:''
+348:8:Attribute -> Func:shlex.quote
+348:8:Name -> Module:shlex
+348:20:Name -> U | Const:str:''
+349:8:Name -> Const:str:'' | Const:str:'-IncludeManagementTools'
+350:8:Name -> Const:str:'' | Const:str:'-Remove'
+351:22:Name -> Const:bool:False | U
+354:14:Call -> Dict:0 | Dict:2 | U
+354:14:Attribute -> Func:salt.utils.win_pwsh.run_dict
+354:14:Attribute -> Module:salt.utils.win_pwsh
+354:14:Attribute -> Module:salt.utils
+354:14:Name -> Module:salt
+354:43:Name -> U
+355:11:Name -> Class:salt.exceptions.CommandExecutionError
+356:33:Attribute -> Const:str:'' | U | Const:str:''
+356:33:Name -> ExcInst:salt.exceptions.CommandExecutionError
+357:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+357:18:Name -> Class:salt.exceptions.CommandExecutionError
+357:69:Attribute -> Const:NoneType:None | U
+357:69:Name -> ExcInst:salt.exceptions.CommandExecutionError
+361:7:Name -> Dict:0 | Dict:2 | U
+363:24:Name -> Dict:0 | Dict:2 | U
+367:23:Name -> Dict:0 | Dict:2 | U
+370:20:Name -> Dict:0 | Dict:2 | U
+371:12:Name -> Dict:5
+371:28:Name -> U
+372:31:Name -> U
+373:27:Name -> U
+374:33:Name -> U
+375:30:Name -> U
+376:27:Name -> U
+381:20:Call -> U
+381:20:Attribute -> U | BM:builtins.str.split
+381:20:Name -> U | Const:str:''
+382:15:Name -> U
+382:27:Name -> Dict:5
+383:16:Name -> Dict:5
+383:32:Name -> U
+385:15:Name -> Dict:5
+391:24:Name -> Dict:0 | Dict:2 | U
+395:23:Name -> Dict:0 | Dict:2 | U
+398:20:Call -> U
+398:20:Attribute -> U | BM:builtins.str.split
+398:20:Name -> U | Const:str:''
+399:12:Name -> Dict:5
+399:28:Name -> U
+401:15:Name -> Dict:5

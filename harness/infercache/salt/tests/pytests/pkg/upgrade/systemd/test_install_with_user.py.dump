@@ -1,0 +1,535 @@
+14:4:Call -> U
+14:4:Attribute -> U
+14:4:Attribute -> U
+14:4:Name -> U
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'tests.pytests.pkg.upgrade.systemd.test_ | Const:str:'__main__'
+20:1:Attribute -> U
+20:1:Name -> U
+33:14:Call -> U
+33:14:Attribute -> U
+33:14:Attribute -> U
+33:14:Name -> U
+35:7:Name -> U
+46:1:Attribute -> U
+46:1:Name -> U
+70:7:Call -> Const:bool:False | Const:bool:True | U
+70:7:Attribute -> Func:genericpath.exists | U
+70:7:Attribute -> Module:posixpath | Module:ntpath
+70:7:Name -> Module:os
+71:8:Call -> Const:str:'/etc/salt/minion.bak' | U
+71:8:Attribute -> Func:shutil.copy
+71:8:Name -> Module:shutil
+74:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+74:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+74:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+76:4:Call -> Inst:subprocess.CompletedProcess
+76:4:Attribute -> Func:subprocess.run
+76:4:Name -> Module:subprocess
+79:7:Call -> Const:bool:False | Const:bool:True | U
+79:7:Attribute -> Func:genericpath.exists | U
+79:7:Attribute -> Module:posixpath | Module:ntpath
+79:7:Name -> Module:os
+80:8:Call -> Const:NoneType:None | Const:str:'/etc/salt/minion' | U
+80:8:Attribute -> Func:shutil.move
+80:8:Name -> Module:shutil
+83:7:Call -> Const:bool:False | Const:bool:True | U
+83:7:Attribute -> Func:genericpath.exists | U
+83:7:Attribute -> Module:posixpath | Module:ntpath
+83:7:Name -> Module:os
+84:8:Call -> ERR
+84:8:Attribute -> Func:posix.remove
+84:8:Name -> Module:os
+87:7:Call -> Const:bool:False | Const:bool:True | U
+87:7:Attribute -> Func:genericpath.exists | U
+87:7:Attribute -> Module:posixpath | Module:ntpath
+87:7:Name -> Module:os
+88:8:Call -> ERR
+88:8:Attribute -> Func:posix.remove
+88:8:Name -> Module:os
+89:8:Call -> Inst:subprocess.CompletedProcess
+89:8:Attribute -> Func:subprocess.run
+89:8:Name -> Module:subprocess
+100:13:Name -> List:6
+101:11:Call -> Const:bool:False | Const:bool:True | U
+101:11:Attribute -> Func:genericpath.exists | U
+101:11:Attribute -> Module:posixpath | Module:ntpath
+101:11:Name -> Module:os
+101:26:Name -> Const:str:'/etc/salt/pki/minion' | Const:str:'/var/cache/salt/minion' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt/minion' | Const:str:'/etc/salt/minion.d' | Const:str:'/opt/saltstack/salt'
+102:12:Call -> Inst:subprocess.CompletedProcess
+102:12:Attribute -> Func:subprocess.run
+102:12:Name -> Module:subprocess
+102:56:Name -> Const:str:'/etc/salt/pki/minion' | Const:str:'/var/cache/salt/minion' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt/minion' | Const:str:'/etc/salt/minion.d' | Const:str:'/opt/saltstack/salt'
+105:7:Call -> Const:bool:False | Const:bool:True | U
+105:7:Attribute -> Func:genericpath.exists | U
+105:7:Attribute -> Module:posixpath | Module:ntpath
+105:7:Name -> Module:os
+106:8:Call -> Inst:subprocess.CompletedProcess
+106:8:Attribute -> Func:subprocess.run
+106:8:Name -> Module:subprocess
+109:7:Call -> Const:bool:False | Const:bool:True | U
+109:7:Attribute -> Func:genericpath.exists | U
+109:7:Attribute -> Module:posixpath | Module:ntpath
+109:7:Name -> Module:os
+110:8:Call -> ERR
+110:8:Attribute -> Func:posix.remove
+110:8:Name -> Module:os
+113:4:Call -> Inst:subprocess.CompletedProcess
+113:4:Attribute -> Func:subprocess.run
+113:4:Name -> Module:subprocess
+134:11:Attribute -> U
+134:11:Name -> U
+135:8:Call -> U
+135:8:Attribute -> U
+135:8:Name -> U
+137:22:Call -> U
+137:22:Attribute -> U
+137:22:Attribute -> U
+137:22:Name -> U
+137:46:Attribute -> U
+137:46:Name -> U
+140:10:Call -> U
+140:10:Attribute -> U
+140:10:Name -> U
+141:11:Attribute -> U
+141:11:Name -> U
+142:24:Call -> U
+142:24:Attribute -> U
+142:24:Attribute -> U
+142:24:Name -> U
+142:48:Attribute -> U
+142:48:Name -> U
+146:7:Name -> U
+146:28:Name -> U
+147:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+147:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+147:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+152:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+152:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+152:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+154:8:Name -> U
+155:8:Name -> U
+164:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+164:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+167:8:Call -> Inst:subprocess.CompletedProcess
+167:8:Attribute -> Func:subprocess.run
+167:8:Name -> Module:subprocess
+170:19:Attribute -> Const:int:-3
+170:19:Name -> Module:subprocess
+171:19:Attribute -> Const:int:-3
+171:19:Name -> Module:subprocess
+174:8:Call -> Inst:subprocess.CompletedProcess
+174:8:Attribute -> Func:subprocess.run
+174:8:Name -> Module:subprocess
+175:11:Attribute -> Class:subprocess.CalledProcessError
+175:11:Name -> Module:subprocess
+177:8:Call -> Inst:subprocess.CompletedProcess
+177:8:Attribute -> Func:subprocess.run
+177:8:Name -> Module:subprocess
+181:15:Call -> U
+181:15:Attribute -> U
+181:15:Name -> U
+182:32:Attribute -> U
+182:32:Name -> U
+196:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+196:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+196:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+199:4:Call -> Inst:subprocess.CompletedProcess
+199:4:Attribute -> Func:subprocess.run
+199:4:Name -> Module:subprocess
+201:20:Name -> List:5
+202:11:Call -> Const:bool:False | Const:bool:True | U
+202:11:Attribute -> Func:genericpath.exists | U
+202:11:Attribute -> Module:posixpath | Module:ntpath
+202:11:Name -> Module:os
+202:26:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+203:12:Call -> Inst:subprocess.CompletedProcess
+203:12:Attribute -> Func:subprocess.run
+203:12:Name -> Module:subprocess
+203:56:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+205:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+205:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+205:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+205:71:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+208:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+208:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+208:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+209:4:Call -> Inst:subprocess.CompletedProcess
+209:4:Attribute -> Func:subprocess.run
+209:4:Name -> Module:subprocess
+212:4:Call -> Inst:subprocess.CompletedProcess
+212:4:Attribute -> Func:subprocess.run
+212:4:Name -> Module:subprocess
+213:4:Call -> Inst:subprocess.CompletedProcess
+213:4:Attribute -> Func:subprocess.run
+213:4:Name -> Module:subprocess
+217:7:Call -> Const:bool:False | Const:bool:True | U
+217:7:Attribute -> Func:genericpath.exists | U
+217:7:Attribute -> Module:posixpath | Module:ntpath
+217:7:Name -> Module:os
+218:13:Call -> U
+218:13:Attribute -> Func:salt.utils.files.fopen
+218:13:Attribute -> Module:salt.utils.files
+218:13:Attribute -> Module:salt.utils
+218:13:Name -> Module:salt
+219:22:Call -> U
+219:22:Attribute -> U
+219:22:Name -> U
+225:8:Name -> U
+226:20:Name -> U | List:0
+227:15:Call -> U
+227:15:Attribute -> U
+227:15:Call -> U
+227:15:Attribute -> U
+227:15:Name -> U
+228:16:Call -> U
+228:16:Attribute -> U
+228:16:Call -> U
+228:16:Attribute -> U
+228:16:Name -> U
+232:7:Name -> U
+232:23:Call -> U
+232:23:Attribute -> U
+232:23:Name -> U
+233:8:Call -> U
+233:8:Attribute -> U | BM:builtins.list.append
+233:8:Name -> U | List:0
+234:4:Call -> U
+234:4:Attribute -> U
+234:4:Name -> U
+235:4:Call -> U
+235:4:Attribute -> U
+235:4:Name -> U
+237:9:Call -> U
+237:9:Attribute -> Func:salt.utils.files.fopen
+237:9:Attribute -> Module:salt.utils.files
+237:9:Attribute -> Module:salt.utils
+237:9:Name -> Module:salt
+238:8:Call -> U
+238:8:Attribute -> U
+238:8:Name -> U
+238:21:Name -> U | List:0
+241:9:Call -> U
+241:9:Attribute -> Func:salt.utils.files.fopen
+241:9:Attribute -> Module:salt.utils.files
+241:9:Attribute -> Module:salt.utils
+241:9:Name -> Module:salt
+242:8:Call -> U
+242:8:Attribute -> U
+242:8:Name -> U
+243:8:Call -> U
+243:8:Attribute -> U
+243:8:Name -> U
+249:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+249:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+249:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+251:4:Call -> Inst:subprocess.CompletedProcess
+251:4:Attribute -> Func:subprocess.run
+251:4:Name -> Module:subprocess
+254:9:Call -> U
+254:9:Attribute -> Func:salt.utils.files.fopen
+254:9:Attribute -> Module:salt.utils.files
+254:9:Attribute -> Module:salt.utils
+254:9:Name -> Module:salt
+257:8:Call -> U
+257:8:Attribute -> U
+257:8:Name -> U
+257:16:Name -> Const:str:'[Service]\nUser=salt\nGroup=salt'
+258:4:Call -> Inst:subprocess.CompletedProcess
+258:4:Attribute -> Func:subprocess.run
+258:4:Name -> Module:subprocess
+262:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+262:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+262:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+263:4:Call -> Inst:subprocess.CompletedProcess
+263:4:Attribute -> Func:subprocess.run
+263:4:Name -> Module:subprocess
+264:4:Call -> ERR
+264:4:Attribute -> Func:time.sleep
+264:4:Name -> Module:time
+270:12:Call -> Const:str:''
+270:12:Attribute -> BM:builtins.str.strip | BM:builtins.str.strip
+270:12:Call -> Const:str:'' | Const:str:''
+270:12:Attribute -> BM:builtins.str.decode | BM:builtins.bytes.decode
+270:12:Call -> Const:str:'' | Const:bytes:b''
+270:12:Attribute -> Func:subprocess.check_output
+270:12:Name -> Module:subprocess
+272:15:Name -> Const:str:''
+273:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+273:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+273:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+276:18:Call -> U
+276:18:Attribute -> U
+276:18:Name -> U
+278:16:Call -> Const:str:''
+278:16:Attribute -> BM:builtins.str.strip | BM:builtins.str.strip
+278:16:Call -> Const:str:'' | Const:str:''
+278:16:Attribute -> BM:builtins.str.decode | BM:builtins.bytes.decode
+278:16:Call -> Const:str:'' | Const:bytes:b''
+278:16:Attribute -> Func:subprocess.check_output
+278:16:Name -> Module:subprocess
+278:68:Name -> U
+282:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+282:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+282:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+282:71:Name -> U
+282:76:Name -> Const:str:''
+283:12:Attribute -> Class:subprocess.CalledProcessError
+283:12:Name -> Module:subprocess
+283:43:Name -> Class:builtins.ValueError
+283:55:Name -> Class:builtins.OSError
+284:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+284:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+284:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+284:56:Name -> ExcInst:subprocess.CalledProcessError | ExcInst:builtins.ValueError | ExcInst:builtins.OSError
+286:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+286:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+286:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+287:20:Name -> List:5
+288:29:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+289:14:Call -> U
+289:14:Attribute -> U
+289:14:Name -> U
+289:49:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d'
+290:11:Attribute -> U
+290:11:Name -> U
+291:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+291:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+291:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+291:65:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+296:16:Call -> U
+296:16:Attribute -> U
+296:16:Call -> U
+296:16:Attribute -> U
+296:16:Attribute -> U
+296:16:Name -> U
+297:20:Name -> U
+298:21:Name -> U
+301:12:Name -> U
+302:39:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+302:69:Name -> U
+302:95:Attribute -> U
+302:95:Name -> U
+304:12:Name -> U
+305:39:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+305:66:Name -> U
+305:93:Attribute -> U
+305:93:Name -> U
+310:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+310:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+310:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+312:4:Call -> Inst:subprocess.CompletedProcess
+312:4:Attribute -> Func:subprocess.run
+312:4:Name -> Module:subprocess
+313:4:Call -> ERR
+313:4:Attribute -> Func:time.sleep
+313:4:Name -> Module:time
+317:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+317:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+317:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+317:70:Name -> U
+318:4:Call -> U
+318:4:Attribute -> U
+318:4:Name -> U
+319:4:Call -> ERR
+319:4:Attribute -> Func:time.sleep
+319:4:Name -> Module:time
+322:15:Call -> U
+322:15:Attribute -> U
+322:15:Name -> U
+323:32:Attribute -> U
+323:32:Name -> U
+326:7:Name -> U
+327:14:Call -> U
+327:14:Attribute -> U
+327:14:Name -> U
+329:14:Call -> U
+329:14:Attribute -> U
+329:14:Name -> U
+330:11:Attribute -> U
+330:11:Name -> U
+331:24:Call -> U
+331:24:Attribute -> U
+331:24:Attribute -> U
+331:24:Name -> U
+331:48:Attribute -> U
+331:48:Name -> U
+334:8:Name -> U
+334:29:Name -> U
+335:30:Name -> U
+335:53:Name -> U
+338:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+338:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+338:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+339:20:Name -> List:5
+340:29:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+341:11:Name -> U
+342:18:Call -> U
+342:18:Attribute -> U
+342:18:Name -> U
+342:68:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d'
+344:18:Call -> U
+344:18:Attribute -> U
+344:18:Name -> U
+344:53:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d'
+345:11:Attribute -> U
+345:11:Name -> U
+346:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+346:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+346:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+346:65:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+350:16:Call -> U
+350:16:Attribute -> U
+350:16:Call -> U
+350:16:Attribute -> U
+350:16:Attribute -> U
+350:16:Name -> U
+351:20:Name -> U
+352:21:Name -> U
+355:12:Name -> U
+356:38:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+356:68:Name -> U
+356:123:Attribute -> U
+356:123:Name -> U
+358:12:Name -> U
+359:38:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+359:65:Name -> U
+359:121:Attribute -> U
+359:121:Name -> U
+361:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+361:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+361:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+365:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+365:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+365:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+372:10:Call -> U
+372:10:Attribute -> U
+372:10:Name -> U
+373:11:Attribute -> U
+373:11:Name -> U
+377:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+377:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+377:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+379:10:Call -> U
+379:10:Attribute -> U
+379:10:Name -> U
+380:11:Attribute -> U
+380:11:Name -> U
+383:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+383:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+383:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+384:20:Name -> List:5
+389:16:Call -> Const:str:''
+389:16:Attribute -> BM:builtins.str.strip | BM:builtins.str.strip
+389:16:Call -> Const:str:'' | Const:str:''
+389:16:Attribute -> BM:builtins.str.decode | BM:builtins.bytes.decode
+389:16:Call -> Const:str:'' | Const:bytes:b''
+389:16:Attribute -> Func:subprocess.check_output
+389:16:Name -> Module:subprocess
+390:29:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+391:27:Attribute -> Const:int:-3
+391:27:Name -> Module:subprocess
+397:15:Name -> Const:str:''
+399:35:Call -> U
+399:35:Attribute -> U
+399:35:Name -> U
+404:20:Name -> U
+404:31:Name -> U
+404:55:Call -> U
+404:55:Attribute -> U
+404:55:Name -> U
+407:19:Name -> U
+408:20:Call -> U
+408:20:Attribute -> U
+408:20:Name -> U
+409:53:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+410:26:Call -> Const:str:''
+410:26:Attribute -> BM:builtins.str.join
+410:36:Name -> U
+411:36:Call -> ERR
+411:36:Name -> Func:builtins.len
+411:40:Name -> U
+413:15:Attribute -> Class:subprocess.CalledProcessError
+413:15:Name -> Module:subprocess
+415:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+415:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+415:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+415:70:Name -> Const:str:'/etc/salt/pki' | Const:str:'/var/cache/salt' | Const:str:'/var/log/salt' | Const:str:'/var/run/salt' | Const:str:'/etc/salt/minion.d'
+418:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+418:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+418:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+420:7:Name -> U
+421:14:Call -> U
+421:14:Attribute -> U
+421:14:Name -> U
+421:64:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /opt/saltstack/salt'
+423:14:Call -> U
+423:14:Attribute -> U
+423:14:Name -> U
+423:49:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /opt/saltstack/salt'
+424:7:Attribute -> U
+424:7:Name -> U
+425:16:Call -> U
+425:16:Attribute -> U
+425:16:Call -> U
+425:16:Attribute -> U
+425:16:Attribute -> U
+425:16:Name -> U
+426:23:Name -> U
+427:24:Name -> U
+429:12:Name -> U
+430:66:Name -> U
+432:12:Name -> U
+433:63:Name -> U
+436:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+436:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+436:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+438:10:Call -> U
+438:10:Attribute -> U
+438:10:Name -> U
+439:11:Attribute -> U
+439:11:Name -> U
+439:57:Attribute -> U
+439:57:Name -> U
+443:38:Attribute -> U
+443:38:Attribute -> U
+443:38:Name -> Module:sys
+443:63:Attribute -> U
+443:63:Attribute -> U
+443:63:Name -> Module:sys
+445:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+445:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+445:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+446:73:Name -> Const:str:'/opt/saltstack/salt/extras-Uninferable.
+448:25:Name -> Const:str:'/opt/saltstack/salt/extras-Uninferable.
+449:7:Name -> U
+450:14:Call -> U
+450:14:Attribute -> U
+450:14:Name -> U
+450:64:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:"ls -ld /opt/saltstack/salt/extras-Uninf
+452:14:Call -> U
+452:14:Attribute -> U
+452:14:Name -> U
+452:49:Name -> Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:'ls -ld /etc/salt/pki' | Const:str:'ls -ld /var/cache/salt' | Const:str:'ls -ld /var/log/salt' | Const:str:'ls -ld /var/run/salt' | Const:str:'ls -ld /etc/salt/minion.d' | Const:str:"ls -ld /opt/saltstack/salt/extras-Uninf
+453:36:Attribute -> U
+453:36:Name -> U
+454:16:Call -> U
+454:16:Attribute -> U
+454:16:Call -> U
+454:16:Attribute -> U
+454:16:Attribute -> U
+454:16:Name -> U
+455:22:Name -> U
+456:23:Name -> U
+458:12:Name -> U
+459:31:Name -> Const:str:'/opt/saltstack/salt/extras-Uninferable.
+459:53:Name -> U
+461:12:Name -> U
+462:31:Name -> Const:str:'/opt/saltstack/salt/extras-Uninferable.
+462:50:Name -> U
+464:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+464:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+464:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

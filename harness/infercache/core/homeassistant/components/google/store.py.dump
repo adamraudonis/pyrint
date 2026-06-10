@@ -1,0 +1,58 @@
+16:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+16:10:Attribute -> Func:logging.getLogger
+16:10:Name -> Module:logging
+16:28:Name -> Const:str:'homeassistant.components.google.store' | Const:str:'__main__'
+23:25:Name -> U
+23:37:Name -> ERR
+26:1:Name -> Func:dataclasses.dataclass
+30:13:Name -> U
+31:11:Name -> Class:homeassistant.components.google.store.LocalCalendarStore
+34:25:Name -> U
+37:29:Name -> U
+37:54:Name -> Class:builtins.str
+39:8:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+39:22:Call -> Inst:homeassistant.helpers.storage.Store
+39:22:Name -> Class:homeassistant.helpers.storage.Store
+39:28:Name -> Class:builtins.dict
+39:33:Name -> Class:builtins.str
+39:38:Name -> Class:typing.Any
+40:12:Name -> U
+41:12:Name -> Const:int:1
+42:12:Call -> U
+42:12:Attribute -> BM:builtins.str.format
+42:12:Name -> Const:str:'{domain}.{entry_id}'
+42:45:Name -> Const:str:'google'
+42:62:Name -> U
+45:8:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+45:20:Name -> Class:builtins.dict
+45:25:Name -> Class:builtins.str
+45:30:Name -> Class:typing.Any
+47:34:Name -> Class:builtins.dict
+47:39:Name -> Class:builtins.str
+47:44:Name -> Class:typing.Any
+49:11:Attribute -> Const:NoneType:None | U
+49:11:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+50:12:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+50:31:Call -> U
+50:31:Attribute -> BM:homeassistant.helpers.storage.Store.async_load
+50:31:Attribute -> Inst:homeassistant.helpers.storage.Store
+50:31:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+51:15:Attribute -> Const:NoneType:None | U
+51:15:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+53:37:Name -> Class:builtins.dict
+53:42:Name -> Class:builtins.str
+53:47:Name -> Class:typing.Any
+55:8:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+55:21:Name -> U
+57:30:Name -> Class:builtins.dict
+58:19:Name -> U
+60:8:Call -> Const:NoneType:None | Const:NoneType:None
+60:8:Attribute -> BM:homeassistant.helpers.storage.Store.async_delay_save
+60:8:Attribute -> Inst:homeassistant.helpers.storage.Store
+60:8:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore
+60:37:Name -> Func:homeassistant.components.google.store.LocalCalendarStore.async_save.provide_data
+60:51:Name -> Const:int:120
+64:14:Call -> Const:NoneType:None
+64:14:Attribute -> BM:homeassistant.helpers.storage.Store.async_remove
+64:14:Attribute -> Inst:homeassistant.helpers.storage.Store
+64:14:Name -> Inst:homeassistant.components.google.store.LocalCalendarStore

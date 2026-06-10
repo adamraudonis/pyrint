@@ -1,0 +1,396 @@
+53:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:10:Attribute -> Func:logging.getLogger
+53:10:Name -> Module:logging
+53:28:Name -> Const:str:'homeassistant.components.netatmo' | Const:str:'__main__'
+55:16:Call -> Func:homeassistant.helpers.config_validation._no_yaml_config_schema.validator
+55:16:Attribute -> Func:homeassistant.helpers.config_validation.config_entry_only_config_schema
+55:16:Name -> Module:homeassistant.helpers.config_validation
+55:51:Name -> Const:str:'netatmo'
+60:28:Name -> U
+60:51:Name -> Class:builtins.dict
+60:66:Name -> Class:builtins.bool
+64:4:Attribute -> U
+64:4:Name -> U
+64:14:Name -> Const:str:'netatmo'
+65:8:Name -> Const:str:'netatmo_persons'
+66:8:Name -> Const:str:'netatmo_device_ids'
+67:8:Name -> Const:str:'netatmo_schedules'
+68:8:Name -> Const:str:'netatmo_homes'
+69:8:Name -> Const:str:'netatmo_events'
+70:8:Name -> Const:str:'cameras'
+76:34:Name -> U
+76:56:Name -> U
+76:79:Name -> Class:builtins.bool
+79:31:Call -> U
+79:31:Name -> U
+79:69:Name -> U
+79:75:Name -> U
+80:11:Name -> U
+81:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryNotReady
+81:14:Name -> Class:homeassistant.exceptions.ConfigEntryNotReady
+82:31:Name -> Const:str:'netatmo'
+84:15:Name -> U
+87:11:Attribute -> U
+87:11:Name -> U
+88:8:Call -> U
+88:8:Attribute -> U
+88:8:Attribute -> U
+88:8:Name -> U
+88:47:Name -> U
+88:64:Name -> Const:str:'netatmo'
+90:14:Call -> U
+90:14:Name -> U
+90:28:Name -> U
+90:34:Name -> U
+90:41:Name -> U
+92:14:Call -> U
+92:14:Attribute -> U
+92:14:Name -> U
+93:11:Name -> Class:homeassistant.exceptions.OAuth2TokenRequestReauthError
+94:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryAuthFailed
+94:14:Name -> Class:homeassistant.exceptions.ConfigEntryAuthFailed
+94:77:Name -> ExcInst:homeassistant.exceptions.OAuth2TokenRequestReauthError
+95:12:Name -> Class:homeassistant.exceptions.OAuth2TokenRequestError
+95:37:Name -> U
+96:14:Name -> Class:homeassistant.exceptions.ConfigEntryNotReady
+96:39:Name -> ExcInst:homeassistant.exceptions.OAuth2TokenRequestError | U
+98:22:Call -> Inst:builtins.set | U
+98:22:Attribute -> Func:homeassistant.components.netatmo.api.get_api_scopes
+98:22:Name -> Module:homeassistant.components.netatmo.api
+98:41:Attribute -> U
+98:41:Name -> U
+99:12:Call -> Inst:builtins.set
+99:12:Name -> Class:builtins.set
+99:16:Attribute -> U
+99:16:Name -> U
+99:42:Call -> Inst:builtins.set
+99:42:Name -> Class:builtins.set
+99:46:Name -> Inst:builtins.set | U
+100:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+100:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+100:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+102:12:Call -> Inst:builtins.set
+102:12:Name -> Class:builtins.set
+102:16:Name -> Inst:builtins.set | U
+102:35:Call -> Inst:builtins.set
+102:35:Name -> Class:builtins.set
+102:39:Attribute -> U
+102:39:Name -> U
+104:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryAuthFailed
+104:14:Name -> Class:homeassistant.exceptions.ConfigEntryAuthFailed
+106:11:Call -> Inst:homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth
+106:11:Attribute -> Class:homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth
+106:11:Name -> Module:homeassistant.components.netatmo.api
+107:8:Call -> U
+107:8:Attribute -> Func:homeassistant.helpers.aiohttp_client.async_get_clientsession
+107:8:Name -> Module:homeassistant.helpers.aiohttp_client
+107:47:Name -> U
+107:54:Name -> U
+110:19:Call -> Inst:homeassistant.components.netatmo.data_handler.NetatmoDataHandler
+110:19:Name -> Class:homeassistant.components.netatmo.data_handler.NetatmoDataHandler
+110:38:Name -> U
+110:44:Name -> U
+110:51:Name -> Inst:homeassistant.components.netatmo.api.AsyncConfigEntryNetatmoAuth
+111:4:Name -> U
+111:25:Name -> Inst:homeassistant.components.netatmo.data_handler.NetatmoDataHandler
+112:10:Call -> Const:NoneType:None
+112:10:Attribute -> BM:homeassistant.components.netatmo.data_handler.NetatmoDataHandler.async_setup
+112:10:Name -> Inst:homeassistant.components.netatmo.data_handler.NetatmoDataHandler
+115:11:Name -> Class:typing.Any
+117:11:Name -> Const:str:'webhook_id'
+117:34:Attribute -> U
+117:34:Name -> U
+119:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+119:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+119:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+119:57:Attribute -> U
+119:57:Name -> U
+119:68:Name -> Const:str:'webhook_id'
+120:8:Call -> U
+120:8:Name -> U
+121:12:Name -> U
+122:22:Name -> Const:str:'netatmo'
+123:38:Name -> Const:str:'push_type'
+123:57:Name -> Const:str:'webhook_deactivation'
+125:8:Call -> Const:NoneType:None
+125:8:Name -> Func:homeassistant.components.webhook.async_unregister
+125:27:Name -> U
+125:33:Attribute -> U
+125:33:Name -> U
+125:44:Name -> Const:str:'webhook_id'
+127:18:Call -> U
+127:18:Attribute -> U
+127:18:Attribute -> U
+127:18:Attribute -> U
+127:18:Name -> U
+128:15:Attribute -> U
+128:15:Name -> U
+129:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+129:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+130:51:Attribute -> U
+130:51:Name -> U
+130:62:Name -> Const:str:'webhook_id'
+134:11:Name -> Class:typing.Any
+136:11:Name -> Const:str:'webhook_id'
+136:34:Attribute -> U
+136:34:Name -> U
+137:22:Attribute -> U
+137:22:Name -> U
+137:34:Name -> Const:str:'webhook_id'
+137:51:Call -> U
+137:51:Attribute -> Func:secrets.token_hex
+137:51:Name -> Module:secrets
+138:12:Call -> U
+138:12:Attribute -> U
+138:12:Attribute -> U
+138:12:Name -> U
+138:51:Name -> U
+138:63:Name -> U
+140:11:Call -> U
+140:11:Attribute -> Func:homeassistant.components.cloud.async_active_subscription
+140:11:Name -> Module:homeassistant.components.cloud
+140:43:Name -> U
+141:32:Call -> U | Const:str:''
+141:32:Name -> Func:homeassistant.components.netatmo.async_cloudhook_generate_url
+141:61:Name -> U
+141:67:Name -> U
+143:26:Call -> Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | U
+143:26:Name -> Func:homeassistant.components.webhook.async_generate_url
+143:47:Name -> U
+143:53:Attribute -> U
+143:53:Name -> U
+143:64:Name -> Const:str:'webhook_id'
+145:11:Attribute -> U
+145:11:Name -> U
+147:13:Attribute -> Const:str:'cloud'
+147:13:Name -> Module:homeassistant.components.cloud
+147:34:Call -> U
+147:34:Attribute -> U | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith
+147:34:Name -> U | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable'
+148:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+148:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+148:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+154:8:Call -> Const:NoneType:None
+154:8:Name -> Func:homeassistant.components.webhook.async_register
+155:12:Name -> U
+156:12:Name -> Const:str:'netatmo'
+158:12:Attribute -> U
+158:12:Name -> U
+158:23:Name -> Const:str:'webhook_id'
+159:12:Name -> Func:homeassistant.components.netatmo.webhook.async_handle_webhook
+163:18:Call -> U
+163:18:Attribute -> U
+163:18:Attribute -> U
+163:18:Attribute -> U
+163:18:Name -> U
+163:59:Name -> U | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable'
+164:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+164:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+164:58:Name -> U | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable' | Const:str:'Uninferable'
+166:15:Attribute -> U
+166:15:Name -> U
+167:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+167:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+167:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+167:68:Name -> U
+169:12:Call -> U
+169:12:Attribute -> U
+169:12:Name -> U
+170:16:Call -> U
+170:16:Attribute -> U
+170:16:Attribute -> U
+170:16:Name -> U
+170:43:Name -> U
+170:69:Name -> Func:homeassistant.components.netatmo.async_setup_entry.unregister_webhook
+173:38:Attribute -> Class:homeassistant.components.cloud.CloudConnectionState
+173:38:Name -> Module:homeassistant.components.cloud
+174:11:Name -> U
+174:20:Attribute -> Inst:homeassistant.components.cloud.CloudConnectionState.CLOUD_CONNECTED
+174:20:Attribute -> Class:homeassistant.components.cloud.CloudConnectionState
+174:20:Name -> Module:homeassistant.components.cloud
+175:18:Call -> Const:NoneType:None
+175:18:Name -> Func:homeassistant.components.netatmo.async_setup_entry.register_webhook
+177:11:Name -> U
+177:20:Attribute -> Inst:homeassistant.components.cloud.CloudConnectionState.CLOUD_DISCONNECTED
+177:20:Attribute -> Class:homeassistant.components.cloud.CloudConnectionState
+177:20:Name -> Module:homeassistant.components.cloud
+178:18:Call -> Const:NoneType:None
+178:18:Name -> Func:homeassistant.components.netatmo.async_setup_entry.unregister_webhook
+179:12:Call -> U
+179:12:Attribute -> U
+179:12:Name -> U
+179:34:Call -> U
+179:34:Name -> Func:homeassistant.helpers.event.async_call_later
+179:51:Name -> U
+179:61:Name -> Func:homeassistant.components.netatmo.async_setup_entry.register_webhook
+181:7:Call -> U
+181:7:Attribute -> Func:homeassistant.components.cloud.async_active_subscription
+181:7:Name -> Module:homeassistant.components.cloud
+181:39:Name -> U
+182:11:Call -> U
+182:11:Attribute -> Func:homeassistant.components.cloud.async_is_connected
+182:11:Name -> Module:homeassistant.components.cloud
+182:36:Name -> U
+183:18:Call -> Const:NoneType:None
+183:18:Name -> Func:homeassistant.components.netatmo.async_setup_entry.register_webhook
+184:8:Call -> U
+184:8:Attribute -> U
+184:8:Name -> U
+185:12:Call -> U
+185:12:Attribute -> Func:homeassistant.components.cloud.async_listen_connection_change
+185:12:Name -> Module:homeassistant.components.cloud
+185:49:Name -> U
+185:55:Name -> Func:homeassistant.components.netatmo.async_setup_entry.manage_cloudhook
+188:8:Call -> U
+188:8:Attribute -> U
+188:8:Name -> U
+188:30:Call -> Lambda:homeassistant.helpers.start:35 | Func:homeassistant.helpers.start._async_at_core_state.cancel
+188:30:Name -> Func:homeassistant.helpers.start.async_at_started
+188:47:Name -> U
+188:53:Name -> Func:homeassistant.components.netatmo.async_setup_entry.register_webhook
+191:4:Call -> U
+191:4:Attribute -> U
+191:4:Attribute -> U
+191:4:Name -> U
+191:33:Name -> Const:str:'netatmo'
+191:61:Name -> Func:homeassistant.components.netatmo.async_setup_entry.register_webhook
+193:4:Call -> U
+193:4:Attribute -> U
+193:4:Attribute -> U
+193:4:Name -> U
+193:33:Name -> Const:str:'netatmo'
+193:63:Name -> Func:homeassistant.components.netatmo.async_setup_entry.unregister_webhook
+195:4:Call -> U
+195:4:Attribute -> U
+195:4:Name -> U
+195:26:Call -> U
+195:26:Attribute -> U
+195:26:Name -> U
+195:52:Name -> Func:homeassistant.components.netatmo.async_config_entry_updated
+201:10:Name -> U
+201:32:Name -> U
+202:5:Name -> Class:builtins.str
+204:7:Name -> Const:str:'cloudhook_url'
+204:33:Attribute -> U
+204:33:Name -> U
+205:28:Call -> U
+205:28:Attribute -> Func:homeassistant.components.cloud.async_create_cloudhook
+205:28:Name -> Module:homeassistant.components.cloud
+206:12:Name -> U
+206:18:Attribute -> U
+206:18:Name -> U
+206:29:Name -> Const:str:'webhook_id'
+208:18:Attribute -> U
+208:18:Name -> U
+208:30:Name -> Const:str:'cloudhook_url'
+208:50:Name -> U
+209:8:Call -> U
+209:8:Attribute -> U
+209:8:Attribute -> U
+209:8:Name -> U
+209:47:Name -> U
+209:59:Name -> U
+210:15:Name -> U
+211:11:Call -> Const:str:''
+211:11:Name -> Class:builtins.str
+211:15:Attribute -> U
+211:15:Name -> U
+211:26:Name -> Const:str:'cloudhook_url'
+215:10:Name -> U
+215:32:Name -> U
+218:4:Call -> U
+218:4:Name -> U
+218:26:Name -> U
+218:42:Name -> Const:str:'netatmo'
+218:65:Attribute -> U
+218:65:Name -> U
+221:35:Name -> U
+221:57:Name -> U
+221:80:Name -> Class:builtins.bool
+223:7:Name -> Const:str:'webhook_id'
+223:26:Attribute -> U
+223:26:Name -> U
+224:8:Call -> Const:NoneType:None
+224:8:Name -> Func:homeassistant.components.webhook.async_unregister
+224:27:Name -> U
+224:33:Attribute -> U
+224:33:Name -> U
+224:44:Name -> Const:str:'webhook_id'
+226:18:Call -> U
+226:18:Attribute -> U
+226:18:Attribute -> U
+226:18:Attribute -> U
+226:18:Name -> U
+227:15:Attribute -> U
+227:15:Name -> U
+228:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+228:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+228:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+229:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+229:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+229:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+231:17:Call -> U
+231:17:Attribute -> U
+231:17:Attribute -> U
+231:17:Name -> U
+231:60:Name -> U
+231:67:Name -> List:10
+234:35:Name -> U
+234:57:Name -> U
+236:7:Name -> Const:str:'webhook_id'
+236:26:Attribute -> U
+236:26:Name -> U
+236:41:Call -> U
+236:41:Attribute -> Func:homeassistant.components.cloud.async_active_subscription
+236:41:Name -> Module:homeassistant.components.cloud
+236:73:Name -> U
+238:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+238:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+238:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+239:51:Attribute -> U
+239:51:Name -> U
+239:62:Name -> Const:str:'webhook_id'
+241:18:Call -> Const:NoneType:None
+241:18:Attribute -> Func:homeassistant.components.cloud.async_delete_cloudhook
+241:18:Name -> Module:homeassistant.components.cloud
+241:47:Name -> U
+241:53:Attribute -> U
+241:53:Name -> U
+241:64:Name -> Const:str:'webhook_id'
+242:15:Attribute -> Class:homeassistant.components.cloud.CloudNotAvailable
+242:15:Name -> Module:homeassistant.components.cloud
+247:10:Name -> U
+247:39:Name -> U
+247:73:Name -> U
+248:5:Name -> Class:builtins.bool
+250:11:Attribute -> U
+250:11:Name -> U
+251:15:Name -> U
+251:26:Call -> U
+251:26:Attribute -> U
+251:26:Attribute -> U
+251:26:Attribute -> U
+251:26:Name -> U
+251:63:Attribute -> U
+251:63:Name -> U
+252:13:Name -> U
+252:24:Call -> U
+252:24:Attribute -> U
+252:24:Attribute -> U
+252:24:Attribute -> U
+252:24:Name -> U
+252:61:Attribute -> U
+252:61:Name -> U
+254:15:Call -> ERR
+254:15:Name -> Func:builtins.any
+255:8:Name -> U
+256:26:Attribute -> U
+256:26:Name -> U
+257:12:Name -> U
+257:29:Name -> Const:str:'netatmo'
+257:40:Name -> U
+257:57:Name -> U
+258:11:Name -> U
+258:28:Name -> U

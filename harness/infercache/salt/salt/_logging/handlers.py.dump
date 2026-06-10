@@ -1,0 +1,129 @@
+15:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:6:Attribute -> Func:logging.getLogger
+15:6:Name -> Module:logging
+15:24:Name -> Const:str:'salt._logging.handlers' | Const:str:'__main__'
+18:20:Name -> Class:salt._logging.mixins.ExcInfoOnLogLevelFormatMixin
+18:50:Attribute -> Class:logging.StreamHandler
+18:50:Name -> Module:logging
+24:28:Name -> Class:salt._logging.handlers.StreamHandler
+44:8:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+44:8:Attribute -> BM:logging.StreamHandler.__init__ | BM:logging.Handler.__init__ | BM:logging.Filterer.__init__ | BM:builtins.object.__init__
+44:8:Call -> Super
+44:8:Name -> Class:builtins.super
+44:25:Name -> U
+45:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+45:26:Call -> Inst:collections.deque
+45:26:Name -> Class:collections.deque
+45:39:Name -> Const:int:10000 | U
+46:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+49:8:Call -> Const:NoneType:None
+49:8:Attribute -> BM:logging.Handler.acquire
+49:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+50:8:Call -> U
+50:8:Attribute -> BM:collections.deque.append
+50:8:Attribute -> Inst:collections.deque
+50:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+50:31:Name -> U
+51:8:Call -> Const:NoneType:None
+51:8:Attribute -> BM:logging.Handler.release
+51:8:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+54:11:Attribute -> Const:bool:False | Const:bool:True | Const:bool:False
+54:11:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+58:14:Attribute -> Inst:collections.deque
+58:14:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+60:16:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+61:25:Call -> U
+61:25:Attribute -> BM:collections.deque.popleft
+61:25:Attribute -> Inst:collections.deque
+61:25:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+65:16:Call -> Const:bool:False | U
+65:16:Attribute -> BM:logging.Handler.handle
+65:16:Call -> Super
+65:16:Name -> Class:builtins.super
+65:31:Name -> U
+67:16:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+71:15:Attribute -> U | Class:_io.TextIOWrapper.closed | Class:_io.StringIO.closed
+71:15:Attribute -> Const:NoneType:None | U | Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO
+71:15:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+72:12:Call -> Const:NoneType:None | U
+72:12:Attribute -> BM:logging.StreamHandler.flush | BM:logging.Handler.flush
+72:12:Call -> Super
+72:12:Name -> Class:builtins.super
+78:14:Attribute -> Inst:collections.deque
+78:14:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+79:21:Call -> U
+79:21:Attribute -> BM:collections.deque.popleft
+79:21:Attribute -> Inst:collections.deque
+79:21:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+80:27:Name -> Tuple:0 | U
+81:19:Name -> U
+81:30:Name -> Inst:salt._logging.handlers.DeferredStreamHandler
+83:16:Call -> U
+83:16:Attribute -> U
+83:16:Name -> U
+83:31:Name -> U
+86:18:Name -> Class:salt._logging.mixins.ExcInfoOnLogLevelFormatMixin
+86:48:Attribute -> Class:logging.FileHandler
+86:48:Name -> Module:logging
+92:20:Name -> Class:salt._logging.mixins.ExcInfoOnLogLevelFormatMixin
+92:50:Attribute -> Class:logging.handlers.SysLogHandler
+92:50:Attribute -> Module:logging.handlers
+92:50:Name -> Module:logging
+103:11:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+103:11:Name -> Module:sys
+104:43:Call -> ERR
+104:43:Attribute -> Func:sys.exc_info
+104:43:Name -> Module:sys
+106:19:Attribute -> U
+106:19:Name -> U
+107:20:Call -> U
+107:20:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+107:20:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+107:20:Name -> Module:sys
+117:15:Name -> Const:bool:False | Const:bool:True
+118:12:Call -> Const:NoneType:None
+118:12:Attribute -> BM:logging.Handler.handleError
+118:12:Call -> Super
+118:12:Name -> Class:builtins.super
+118:32:Name -> U
+122:4:Name -> Class:salt._logging.mixins.ExcInfoOnLogLevelFormatMixin
+122:34:Attribute -> Class:logging.handlers.RotatingFileHandler
+122:34:Attribute -> Module:logging.handlers
+122:34:Name -> Module:logging
+139:12:Call -> ERR
+139:12:Attribute -> BM:builtins.str.startswith
+139:12:Attribute -> Const:str:'darwin'
+139:12:Name -> Module:sys
+139:47:Attribute -> Const:bool:True
+139:47:Name -> Module:logging
+139:75:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+139:75:Name -> Module:sys
+141:43:Call -> ERR
+141:43:Attribute -> Func:sys.exc_info
+141:43:Name -> Module:sys
+146:20:Attribute -> U
+146:20:Name -> U
+147:24:Attribute -> U
+147:24:Name -> U
+149:23:Attribute -> Const:int:0 | U
+149:23:Name -> Inst:salt._logging.handlers.RotatingFileHandler
+149:37:Attribute -> Const:int:30
+149:37:Name -> Module:logging
+150:24:Call -> U
+150:24:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+150:24:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+150:24:Name -> Module:sys
+151:28:Call -> U
+151:28:Attribute -> BM:builtins.str.format
+152:60:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+152:60:Name -> Inst:salt._logging.handlers.RotatingFileHandler
+160:15:Name -> Const:bool:False | Const:bool:True
+161:12:Call -> Const:NoneType:None
+161:12:Attribute -> BM:logging.Handler.handleError
+161:12:Call -> Super
+161:12:Name -> Class:builtins.super
+161:32:Name -> U
+165:4:Name -> Class:salt._logging.mixins.ExcInfoOnLogLevelFormatMixin
+165:34:Attribute -> Class:logging.handlers.WatchedFileHandler
+165:34:Attribute -> Module:logging.handlers
+165:34:Name -> Module:logging

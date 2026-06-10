@@ -1,0 +1,102 @@
+22:3:Name -> Const:bool:False
+35:1:Call -> Func:pandas.util._decorators.set_module.decorator
+35:1:Name -> Func:pandas.util._decorators.set_module
+36:16:Name -> Class:_collections_abc.Iterator
+36:39:Name -> Class:abc.ABC
+41:5:Name -> Func:abc.abstractmethod
+42:26:Name -> Class:builtins.int
+42:48:Name -> Class:pandas.core.frame.DataFrame
+44:5:Name -> Func:abc.abstractmethod
+47:27:Name -> Func:typing.Self
+48:15:Name -> Inst:pandas.io.sas.sasreader.SASReader
+52:18:Name -> Class:.type
+52:23:Name -> Class:builtins.BaseException
+53:19:Name -> Class:builtins.BaseException
+54:19:Name -> U
+56:8:Call -> U
+56:8:Attribute -> BM:pandas.io.sas.sasreader.SASReader.close
+56:8:Name -> Inst:pandas.io.sas.sasreader.SASReader
+59:1:Name -> Func:typing.overload
+61:24:Name -> U
+61:35:Name -> Class:pandas._typing.ReadBuffer
+61:46:Name -> Class:builtins.bytes
+63:12:Name -> Class:builtins.str
+64:11:Name -> Class:_collections_abc.Hashable
+65:14:Name -> Class:builtins.str
+66:15:Name -> Class:builtins.int
+67:14:Name -> Class:builtins.bool
+68:17:Name -> U
+69:5:Name -> Class:pandas.io.sas.sasreader.SASReader
+72:1:Name -> Func:typing.overload
+74:24:Name -> U
+74:35:Name -> Class:pandas._typing.ReadBuffer
+74:46:Name -> Class:builtins.bytes
+76:12:Name -> Class:builtins.str
+77:11:Name -> Class:_collections_abc.Hashable
+78:14:Name -> Class:builtins.str
+80:14:Name -> Class:builtins.bool
+81:17:Name -> U
+82:5:Name -> Class:pandas.core.frame.DataFrame
+82:17:Name -> Class:pandas.io.sas.sasreader.SASReader
+85:1:Call -> Func:pandas.util._decorators.set_module.decorator
+85:1:Name -> Func:pandas.util._decorators.set_module
+87:24:Name -> U
+87:35:Name -> Class:pandas._typing.ReadBuffer
+87:46:Name -> Class:builtins.bytes
+89:12:Name -> Class:builtins.str
+90:11:Name -> Class:_collections_abc.Hashable
+91:14:Name -> Class:builtins.str
+92:15:Name -> Class:builtins.int
+93:14:Name -> Class:builtins.bool
+94:17:Name -> U
+95:5:Name -> Class:pandas.core.frame.DataFrame
+95:17:Name -> Class:pandas.io.sas.sasreader.SASReader
+158:7:Name -> Const:NoneType:None | U
+163:29:Call -> Const:NoneType:None | Const:NoneType:None | U
+163:29:Name -> Func:pandas.io.common.stringify_path | Func:pandas.io.common.stringify_path | Func:pandas.io.common.stringify_path
+163:44:Name -> U
+164:15:Call -> ERR
+164:15:Name -> Func:builtins.isinstance
+164:26:Name -> Const:NoneType:None | Const:NoneType:None | U
+164:46:Name -> Class:builtins.str
+165:18:Call -> ExcInst:builtins.ValueError
+165:18:Name -> Class:builtins.ValueError
+165:29:Name -> Const:str:'If this is a buffer object rather than 
+166:16:Call -> U
+166:16:Attribute -> U
+166:16:Name -> Const:NoneType:None | Const:NoneType:None | U
+167:21:Name -> U
+169:28:Name -> U
+172:18:Call -> ExcInst:builtins.ValueError
+172:18:Name -> Class:builtins.ValueError
+173:69:Name -> U
+176:12:Name -> Class:pandas.io.sas.sasreader.SASReader
+177:7:Call -> U | Const:str:''
+177:7:Attribute -> U | BM:builtins.str.lower | BM:builtins.str.lower
+177:7:Name -> Const:NoneType:None | U | Const:str:'xport' | Const:str:'sas7bdat'
+180:17:Call -> Inst:pandas.io.sas.sas_xport.XportReader
+180:17:Name -> Class:pandas.io.sas.sas_xport.XportReader
+181:12:Name -> U | Const:NoneType:None | Const:NoneType:None
+182:18:Name -> Const:NoneType:None | U
+183:21:Name -> Const:NoneType:None | U
+184:22:Name -> Const:NoneType:None | U
+185:24:Name -> Const:str:'infer' | U
+187:9:Call -> U | Const:str:''
+187:9:Attribute -> U | BM:builtins.str.lower | BM:builtins.str.lower
+187:9:Name -> Const:NoneType:None | U | Const:str:'xport' | Const:str:'sas7bdat'
+190:17:Call -> Inst:pandas.io.sas.sas7bdat.SAS7BDATReader
+190:17:Name -> Class:pandas.io.sas.sas7bdat.SAS7BDATReader
+191:12:Name -> U | Const:NoneType:None | Const:NoneType:None
+192:18:Name -> Const:NoneType:None | U
+193:21:Name -> Const:NoneType:None | U
+194:22:Name -> Const:NoneType:None | U
+195:24:Name -> Const:str:'infer' | U
+198:14:Call -> ExcInst:builtins.ValueError
+198:14:Name -> Class:builtins.ValueError
+200:7:Name -> Const:bool:False | U
+200:19:Name -> Const:NoneType:None | U
+201:15:Name -> U | Inst:pandas.io.sas.sas_xport.XportReader | Inst:pandas.io.sas.sas7bdat.SAS7BDATReader
+203:9:Name -> U | Inst:pandas.io.sas.sas_xport.XportReader | Inst:pandas.io.sas.sas7bdat.SAS7BDATReader
+204:15:Call -> U | Inst:pandas.core.frame.DataFrame | Const:NoneType:None
+204:15:Attribute -> U | BM:pandas.io.sas.sas_xport.XportReader.read
+204:15:Name -> U | Inst:pandas.io.sas.sas_xport.XportReader | Inst:pandas.io.sas.sas7bdat.SAS7BDATReader

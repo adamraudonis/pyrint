@@ -1,0 +1,738 @@
+29:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+29:6:Attribute -> Func:logging.getLogger
+29:6:Name -> Module:logging
+29:24:Name -> Const:str:'salt.utils.aws' | Const:str:'__main__'
+67:4:Call -> ERR
+67:4:Attribute -> Func:time.sleep
+67:4:Name -> Module:time
+67:15:Call -> U
+67:15:Attribute -> BM:random.Random.uniform
+67:15:Name -> Module:random
+67:36:Name -> U
+81:7:Name -> Const:NoneType:None | U
+82:8:Name -> Dict:0
+82:46:Name -> U
+85:13:Call -> U
+85:13:Attribute -> U
+85:13:Name -> U
+86:41:Name -> U
+88:16:Name -> Dict:0
+89:16:Name -> Const:float:3.05
+92:7:Attribute -> U
+92:7:Name -> U
+92:37:Name -> Const:bool:True | U
+94:23:Call -> U
+94:23:Attribute -> U
+94:23:Name -> U
+98:20:Name -> Const:float:3.05
+100:25:Attribute -> U
+100:25:Name -> U
+101:11:Attribute -> U
+101:11:Name -> U
+102:19:Call -> U
+102:19:Name -> Func:salt.utils.aws.get_metadata
+102:32:Name -> U
+104:4:Call -> U
+104:4:Attribute -> U
+104:4:Name -> U
+105:11:Name -> U
+122:7:Name -> U
+122:25:Name -> Const:str:'use-instance-role-credentials'
+122:39:Name -> U
+122:58:Name -> Const:str:'use-instance-role-credentials'
+124:15:Name -> Const:str:'' | U
+124:33:Name -> Const:str:'' | U
+124:50:Call -> U
+124:50:Attribute -> BM:_pydatetime.date.strftime | U
+124:50:Call -> Inst:_pydatetime.datetime | U
+124:50:Attribute -> Func:salt.utils.timeutil.utcnow
+124:50:Attribute -> Module:salt.utils.timeutil
+124:50:Attribute -> Module:salt.utils
+124:50:Name -> Module:salt
+129:25:Call -> U
+129:25:Name -> Func:salt.utils.aws.get_metadata
+130:23:Attribute -> U
+130:23:Name -> U
+131:20:Attribute -> U
+131:20:Attribute -> U
+131:20:Name -> U
+131:51:Attribute -> U
+131:51:Attribute -> U
+131:51:Name -> U
+132:23:Name -> U
+132:39:Name -> U
+135:25:Call -> U
+135:25:Name -> Func:salt.utils.aws.get_metadata
+135:76:Name -> U
+136:20:Attribute -> U
+136:20:Attribute -> U
+136:20:Name -> U
+136:51:Attribute -> U
+136:51:Attribute -> U
+136:51:Name -> U
+137:23:Name -> U
+137:39:Name -> U
+139:19:Call -> U
+139:19:Attribute -> U
+139:19:Name -> U
+140:30:Name -> U
+141:34:Name -> U
+142:24:Name -> U
+143:29:Name -> U
+145:26:Name -> Const:str:'' | U
+145:43:Name -> Const:str:'' | U
+145:64:Name -> Const:str:'' | U
+147:26:Name -> U
+147:42:Name -> U
+149:7:Call -> U
+149:7:Attribute -> U
+149:7:Name -> U
+150:26:Call -> U
+150:26:Attribute -> U
+150:26:Name -> U
+151:8:Call -> U
+151:8:Attribute -> U
+151:8:Name -> U
+152:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+152:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+152:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+152:42:Call -> U
+152:42:Attribute -> U
+152:42:Name -> U
+153:26:Call -> Tuple:3 | Tuple:3
+153:26:Name -> Func:salt.utils.aws.assumed_creds
+154:12:Name -> U
+154:38:Call -> U
+154:38:Attribute -> U
+154:38:Name -> U
+157:11:Name -> Tuple:0 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3
+167:14:Call -> Inst:_pydatetime.datetime | U
+167:14:Attribute -> Func:salt.utils.timeutil.utcnow
+167:14:Attribute -> Module:salt.utils.timeutil
+167:14:Attribute -> Module:salt.utils
+167:14:Name -> Module:salt
+168:16:Call -> U
+168:16:Attribute -> BM:_pydatetime.date.strftime | U
+168:16:Name -> Inst:_pydatetime.datetime | U
+171:46:Call -> Tuple:3 | Tuple:3 | Tuple:0 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3
+171:46:Name -> Func:salt.utils.aws.creds
+171:52:Name -> U
+173:26:Call -> U
+173:26:Attribute -> U
+173:26:Name -> U
+174:4:Name -> U
+174:44:Name -> U
+175:4:Name -> U
+176:4:Name -> U
+177:4:Name -> U
+177:42:Name -> U
+178:4:Name -> U
+178:37:Name -> U
+179:11:Call -> ERR
+179:11:Name -> Func:builtins.sorted
+179:18:Call -> U
+179:18:Attribute -> U
+179:18:Name -> U
+180:13:Call -> Inst:builtins.list
+180:13:Name -> Class:builtins.list
+180:18:Call -> Inst:builtins.list
+180:18:Name -> Class:builtins.list
+180:23:Call -> Inst:builtins.map
+180:23:Name -> Class:builtins.map
+180:27:Attribute -> U
+180:27:Name -> U
+180:52:Name -> U
+181:18:Call -> Const:str:''
+181:18:Attribute -> Func:urllib.parse.urlencode
+181:18:Attribute -> Module:urllib.parse
+181:18:Name -> Module:urllib
+181:41:Call -> Inst:builtins.list
+181:41:Name -> Class:builtins.list
+181:46:Call -> Inst:builtins.zip
+181:46:Name -> Class:builtins.zip
+181:50:Name -> U
+181:56:Name -> Inst:builtins.list
+183:16:Call -> U
+183:16:Attribute -> BM:builtins.str.format
+184:8:Call -> U
+184:8:Attribute -> U
+184:8:Name -> U
+185:8:Call -> U
+185:8:Attribute -> U
+185:8:Name -> U
+186:8:Call -> Const:bytes:b''
+186:8:Attribute -> BM:builtins.str.encode
+186:8:Name -> Const:str:''
+189:13:Call -> Inst:hmac.HMAC
+189:13:Attribute -> Func:hmac.new
+189:13:Name -> Module:hmac
+189:22:Name -> U
+189:41:Name -> U
+189:52:Attribute -> Class:hashlib.sha256
+189:52:Name -> Module:hashlib
+190:10:Call -> ERR
+190:10:Attribute -> Func:binascii.b2a_base64
+190:10:Name -> Module:binascii
+190:30:Call -> U
+190:30:Attribute -> BM:hmac.HMAC.digest
+190:30:Name -> Inst:hmac.HMAC
+191:4:Name -> U
+191:39:Call -> U
+191:39:Attribute -> U
+191:39:Name -> U
+194:7:Name -> Const:str:'' | Const:str:''
+195:8:Name -> U
+195:47:Name -> Const:str:'' | Const:str:''
+197:11:Name -> U
+201:28:Call -> U
+201:28:Attribute -> Func:re.compile
+201:28:Name -> Module:re
+204:10:Call -> ERR
+204:10:Attribute -> Func:time.mktime
+204:10:Name -> Module:time
+204:22:Call -> Inst:time.struct_time | U
+204:22:Attribute -> BM:_pydatetime.datetime.timetuple | U
+204:22:Call -> Inst:_pydatetime.datetime | U
+204:22:Attribute -> Func:salt.utils.timeutil.utcnow
+204:22:Attribute -> Module:salt.utils.timeutil
+204:22:Attribute -> Module:salt.utils
+204:22:Name -> Module:salt
+206:22:Call -> U | DictItems
+206:22:Attribute -> U | BM:builtins.dict.items
+206:22:Call -> U | Dict:0
+206:22:Attribute -> Func:copy.deepcopy
+206:22:Name -> Module:copy
+206:36:Name -> Dict:0
+207:12:Name -> U
+207:34:Name -> U
+208:16:Name -> Dict:0
+208:32:Name -> U
+210:7:Name -> U
+210:19:Name -> Dict:0
+211:12:Name -> Dict:0
+211:28:Name -> U
+212:15:Name -> U
+212:33:Name -> U
+212:55:Name -> U
+215:19:Call -> U
+215:19:Attribute -> U
+215:19:Name -> U
+216:12:Call -> Tuple:2 | Tuple:2
+216:12:Attribute -> Func:salt.config.get_id
+216:12:Attribute -> Module:salt.config
+216:12:Name -> Module:salt
+219:26:Call -> Tuple:2
+219:26:Name -> Func:salt.utils.aws.sig4
+223:23:Name -> Const:str:'2011-06-15'
+225:31:Name -> U
+226:23:Name -> U
+233:24:Name -> Const:str:'2011-06-15'
+236:18:Name -> U
+238:17:Name -> Const:NoneType:None | U
+241:4:Name -> Dict:0 | U
+242:13:Call -> U
+242:13:Attribute -> U
+242:13:Name -> U
+244:8:Name -> Const:str:'None?' | Const:str:'Uninferable?'
+245:16:Name -> Dict:0 | U
+248:16:Name -> Const:float:3.05
+251:7:Attribute -> U
+251:7:Name -> U
+252:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+252:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+252:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+252:44:Attribute -> U
+252:44:Name -> U
+253:4:Call -> U
+253:4:Attribute -> U
+253:4:Name -> U
+254:11:Call -> U
+254:11:Attribute -> U
+254:11:Name -> U
+256:11:Name -> U
+257:4:Name -> Dict:0
+257:20:Name -> U
+257:32:Name -> U
+258:11:Name -> U
+258:32:Name -> U
+258:57:Name -> U
+266:20:Name -> Const:str:'2016-11-15'
+284:14:Call -> Inst:_pydatetime.datetime | U
+284:14:Attribute -> Func:salt.utils.timeutil.utcnow
+284:14:Attribute -> Module:salt.utils.timeutil
+284:14:Attribute -> Module:salt.utils
+284:14:Name -> Module:salt
+287:7:Name -> Const:NoneType:None | U
+288:50:Call -> Tuple:3 | Tuple:3 | Tuple:0 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3
+288:50:Name -> Func:salt.utils.aws.creds
+288:56:Name -> U
+290:50:Call -> Tuple:3 | Tuple:3
+290:50:Name -> Func:salt.utils.aws.assumed_creds
+291:12:Name -> U
+291:23:Name -> U
+291:42:Name -> Const:NoneType:None | U
+294:7:Name -> Const:NoneType:None | U
+295:19:Call -> Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+295:19:Name -> Func:salt.utils.aws.get_region_from_metadata
+296:7:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+297:19:Name -> Const:str:'us-east-1'
+299:26:Call -> U
+299:26:Attribute -> U
+299:26:Name -> U
+300:7:Name -> Const:str:'ec2' | U
+301:8:Name -> U
+301:41:Name -> Const:str:'2016-11-15' | U
+302:11:Call -> ERR
+302:11:Name -> Func:builtins.sorted
+302:18:Call -> U
+302:18:Attribute -> U
+302:18:Name -> U
+303:13:Call -> Inst:builtins.list
+303:13:Name -> Class:builtins.list
+303:18:Call -> Inst:builtins.map
+303:18:Name -> Class:builtins.map
+303:22:Attribute -> U
+303:22:Name -> U
+303:47:Name -> U
+304:18:Call -> Const:str:''
+304:18:Attribute -> BM:builtins.str.replace
+304:18:Call -> Const:str:''
+304:18:Attribute -> Func:urllib.parse.urlencode
+304:18:Attribute -> Module:urllib.parse
+304:18:Name -> Module:urllib
+304:41:Call -> Inst:builtins.list
+304:41:Name -> Class:builtins.list
+304:46:Call -> Inst:builtins.zip
+304:46:Name -> Class:builtins.zip
+304:50:Name -> U
+304:56:Name -> Inst:builtins.list
+306:14:Call -> U
+306:14:Attribute -> BM:_pydatetime.date.strftime | U
+306:14:Name -> Inst:_pydatetime.datetime | U
+307:16:Call -> U
+307:16:Attribute -> BM:_pydatetime.date.strftime | U
+307:16:Name -> Inst:_pydatetime.datetime | U
+309:7:Call -> ERR
+309:7:Name -> Func:builtins.isinstance
+309:18:Name -> Const:NoneType:None | U
+309:27:Name -> Class:builtins.dict
+310:22:Call -> U
+310:22:Attribute -> U
+310:22:Name -> Const:NoneType:None | U
+314:11:Name -> Const:NoneType:None | U
+315:23:Call -> U
+315:23:Attribute -> Func:salt.utils.hashutils.sha256_digest
+315:23:Attribute -> Module:salt.utils.hashutils
+315:23:Attribute -> Module:salt.utils
+315:23:Name -> Module:salt
+315:58:Name -> Const:str:'' | U
+317:4:Name -> Dict:0 | U
+317:32:Name -> U
+318:4:Name -> Dict:0 | U
+318:26:Name -> U
+319:4:Name -> Dict:0 | U
+319:42:Name -> Const:NoneType:None | U
+323:7:Name -> Const:str:'' | Const:str:'' | U
+324:8:Name -> Dict:0 | U
+324:46:Name -> Const:str:'' | Const:str:'' | U
+326:18:Call -> ERR
+326:18:Name -> Func:builtins.sorted
+326:25:Call -> DictKeys | U
+326:25:Attribute -> BM:builtins.dict.keys | U
+326:25:Name -> Dict:0 | U
+326:49:Attribute -> UM:builtins.str.lower
+326:49:Name -> Class:builtins.str
+327:23:Call -> U
+327:23:Attribute -> U
+327:23:Name -> U
+328:8:Call -> ERR
+328:8:Attribute -> BM:builtins.list.append
+328:8:Name -> List:0
+328:38:Name -> U
+328:53:Call -> U
+328:53:Attribute -> U
+328:53:Name -> Dict:0 | U
+328:65:Name -> U
+329:8:Call -> ERR
+329:8:Attribute -> BM:builtins.list.append
+329:8:Name -> List:0
+329:32:Name -> U
+330:24:Call -> Const:str:''
+330:24:Attribute -> BM:builtins.str.join
+330:34:Name -> List:0
+331:21:Call -> Const:str:''
+331:21:Attribute -> BM:builtins.str.join
+331:30:Name -> List:0
+336:24:Call -> Const:str:''
+336:24:Attribute -> BM:builtins.str.join
+337:9:Name -> U
+337:17:Name -> Const:str:'/' | U
+337:22:Name -> Const:str:''
+337:35:Name -> Const:str:'\n'
+337:54:Name -> Const:str:''
+337:70:Name -> Const:NoneType:None | U
+341:23:Call -> Const:str:''
+341:23:Attribute -> BM:builtins.str.join
+341:33:Name -> U
+341:44:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'us-east-1'
+341:54:Name -> Const:str:'ec2' | U
+342:21:Call -> Const:str:''
+342:21:Attribute -> BM:builtins.str.join
+344:12:Name -> Const:str:'AWS4-HMAC-SHA256'
+345:12:Name -> U
+346:12:Name -> Const:str:''
+347:12:Call -> U
+347:12:Attribute -> Func:salt.utils.hashutils.sha256_digest
+347:12:Attribute -> Module:salt.utils.hashutils
+347:12:Attribute -> Module:salt.utils
+347:12:Name -> Module:salt
+347:47:Name -> Const:str:''
+352:18:Call -> U
+352:18:Name -> Func:salt.utils.aws._sig_key
+352:27:Name -> U
+352:46:Name -> U
+352:57:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'us-east-1'
+352:67:Name -> Const:str:'ec2' | U
+355:16:Call -> U
+355:16:Attribute -> BM:hmac.HMAC.hexdigest
+355:16:Call -> Inst:hmac.HMAC
+355:16:Attribute -> Func:hmac.new
+355:16:Name -> Module:hmac
+356:8:Name -> U
+356:21:Call -> Const:bytes:b''
+356:21:Attribute -> BM:builtins.str.encode
+356:21:Name -> Const:str:''
+356:53:Attribute -> Class:hashlib.sha256
+356:53:Name -> Module:hashlib
+360:27:Call -> U
+360:27:Attribute -> BM:builtins.str.format
+361:8:Name -> Const:str:'AWS4-HMAC-SHA256'
+362:8:Name -> U
+363:8:Name -> Const:str:''
+364:8:Name -> Const:str:''
+365:8:Name -> U
+368:4:Name -> Dict:0 | U
+368:35:Name -> U
+370:20:Name -> Const:NoneType:None | U
+370:33:Name -> Const:str:''
+371:11:Name -> Dict:0 | U
+371:24:Name -> Const:str:'None?' | Const:str:'Uninferable?'
+380:11:Call -> U
+380:11:Attribute -> BM:hmac.HMAC.digest
+380:11:Call -> Inst:hmac.HMAC
+380:11:Attribute -> Func:hmac.new
+380:11:Name -> Module:hmac
+380:20:Name -> U
+380:25:Call -> U
+380:25:Attribute -> U
+380:25:Name -> U
+380:46:Attribute -> Class:hashlib.sha256
+380:46:Name -> Module:hashlib
+389:12:Call -> U
+389:12:Name -> Func:salt.utils.aws._sign
+389:18:Call -> U
+389:18:Attribute -> U
+389:28:Name -> U
+389:50:Name -> U
+390:7:Name -> U
+391:18:Call -> U
+391:18:Name -> Func:salt.utils.aws._sign
+391:24:Name -> U
+391:31:Name -> U
+392:19:Call -> U
+392:19:Name -> Func:salt.utils.aws._sign
+392:25:Name -> U
+392:34:Name -> U
+394:19:Call -> U
+394:19:Name -> Func:salt.utils.aws._sign
+394:25:Name -> U
+394:32:Name -> U
+395:15:Call -> U
+395:15:Name -> Func:salt.utils.aws._sign
+395:21:Name -> U
+396:11:Name -> U
+441:7:Name -> Const:NoneType:None | U
+444:7:Name -> Const:NoneType:None | U
+447:15:Call -> U
+447:15:Attribute -> U | BM:builtins.dict.get
+447:15:Name -> Const:NoneType:None | U | Dict:0
+447:43:Name -> Const:str:'ec2' | U
+448:16:Call -> U
+448:16:Attribute -> U | BM:builtins.dict.get
+448:16:Name -> Const:NoneType:None | U | Dict:0
+450:7:Name -> Const:NoneType:None | U
+451:20:Call -> U
+451:20:Attribute -> U
+451:20:Call -> U
+451:20:Attribute -> U
+451:20:Name -> U
+451:34:Name -> U
+451:55:Name -> Const:str:'ec2' | U
+452:11:Name -> U
+453:21:Call -> Inst:builtins.list
+453:21:Name -> Class:builtins.list
+453:26:Call -> Inst:builtins.list
+453:26:Name -> Class:builtins.list
+453:31:Call -> U
+453:31:Attribute -> U
+453:31:Name -> U
+454:23:Call -> U
+454:23:Attribute -> U
+454:23:Name -> U
+454:37:Name -> U
+454:45:Name -> Const:str:'ec2' | U
+456:20:Call -> U
+456:20:Attribute -> U
+456:20:Call -> U
+456:20:Attribute -> U
+456:20:Name -> U
+456:34:Name -> U
+456:52:Name -> Const:str:'ec2' | U
+458:18:Call -> U
+458:18:Attribute -> U
+458:18:Name -> U
+460:11:Name -> Const:NoneType:None | U
+461:19:Call -> U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'us-east-1'
+461:19:Name -> Func:salt.utils.aws.get_location
+461:32:Name -> Const:NoneType:None | U | Dict:0
+461:38:Name -> U
+463:7:Name -> Const:NoneType:None | U
+464:15:Name -> Const:NoneType:None | U
+465:23:Call -> U
+465:23:Attribute -> U
+465:23:Name -> U
+465:52:Name -> Const:str:'ec2' | U
+465:62:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'us-east-1'
+465:73:Name -> U
+467:36:Name -> U
+469:23:Attribute -> U
+469:23:Call -> Inst:urllib.parse.ParseResult
+469:23:Attribute -> Func:urllib.parse.urlparse
+469:23:Attribute -> Module:urllib.parse
+469:23:Name -> Module:urllib
+469:45:Name -> U
+470:15:Name -> U
+472:20:Call -> U
+472:20:Attribute -> BM:builtins.str.format
+474:66:Name -> U
+476:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+476:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+476:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+476:26:Name -> U
+477:19:Name -> Const:bool:False | U
+478:37:Name -> U
+478:52:Name -> U
+479:33:Name -> U
+481:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+481:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+481:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+481:40:Name -> Const:NoneType:None | U
+484:22:Call -> U
+484:22:Attribute -> U
+484:22:Name -> U
+486:8:Call -> U
+486:8:Attribute -> U
+486:8:Name -> U
+486:25:Name -> Const:str:'ec2' | U
+486:48:Name -> Const:str:'2016-11-15'
+490:11:Call -> U
+490:11:Attribute -> U
+490:11:Name -> U
+491:8:Name -> U
+491:26:Call -> U
+491:26:Attribute -> U
+491:26:Call -> U
+491:26:Attribute -> U
+491:26:Call -> U
+491:26:Attribute -> U
+491:26:Name -> U
+491:40:Name -> Const:NoneType:None | U
+492:8:Name -> U
+492:27:Call -> U
+492:27:Attribute -> U
+492:27:Call -> U
+492:27:Attribute -> U
+492:27:Call -> U
+492:27:Attribute -> U
+492:27:Name -> U
+492:41:Name -> Const:NoneType:None | U
+494:7:Name -> Const:str:'2' | U
+495:30:Call -> Tuple:2
+495:30:Name -> Func:salt.utils.aws.sig4
+496:12:Name -> Const:str:'GET'
+497:12:Name -> Const:NoneType:None | U
+498:12:Name -> Const:NoneType:None | U | Dict:0
+499:12:Name -> U
+500:12:Name -> U
+501:12:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'us-east-1'
+502:12:Name -> Const:str:'ec2' | U
+503:23:Name -> Const:NoneType:None | U | Const:str:'https://Uninferable/'
+507:30:Call -> U
+507:30:Name -> Func:salt.utils.aws.sig2
+507:35:Name -> Const:str:'GET'
+507:43:Name -> Const:NoneType:None | U
+507:53:Name -> Const:NoneType:None | U | Dict:0
+507:61:Name -> U
+507:72:Name -> U
+511:10:Name -> Const:int:0
+511:21:Name -> Const:int:7
+512:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+512:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+512:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+512:37:Name -> Const:NoneType:None | U | Const:str:'https://Uninferable/' | Const:str:'None?' | Const:str:'Uninferable?'
+513:8:Call -> U
+513:8:Attribute -> U
+513:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+513:48:Name -> Dict:0 | U
+515:21:Call -> U
+515:21:Attribute -> U
+515:21:Name -> U
+516:16:Name -> Const:NoneType:None | U | Const:str:'https://Uninferable/' | Const:str:'None?' | Const:str:'Uninferable?'
+517:24:Name -> Dict:0 | U | Dict:0
+518:23:Name -> Dict:0 | U
+519:24:Name -> Const:float:3.05
+521:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+521:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+521:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+521:54:Attribute -> U
+521:54:Name -> U
+522:12:Call -> U
+522:12:Attribute -> U
+522:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+522:47:Attribute -> U
+522:47:Name -> U
+523:12:Call -> U
+523:12:Attribute -> U
+523:12:Name -> U
+525:15:Attribute -> U
+525:15:Attribute -> U
+525:15:Name -> U
+526:19:Call -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+526:19:Attribute -> Func:xml.etree.ElementTree.XML
+526:19:Name -> Module:xml.etree.ElementTree
+526:33:Attribute -> U
+526:33:Attribute -> U
+526:33:Name -> U
+527:19:Call -> U | Dict:0 | Dict:1 | Dict:0
+527:19:Attribute -> Func:salt.utils.xmlutil.to_dict
+527:19:Name -> Module:salt.utils.xmlutil
+527:31:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+530:23:Call -> U
+530:23:Attribute -> U
+530:23:Call -> U
+530:23:Attribute -> U
+530:23:Call -> U
+530:23:Attribute -> U | BM:builtins.dict.get | BM:builtins.dict.get | BM:builtins.dict.get
+530:23:Name -> U | Dict:0 | Dict:1 | Dict:0
+531:15:Name -> Const:int:0
+531:26:Name -> Const:int:7
+531:46:Name -> U
+531:59:Name -> U
+531:71:Name -> List:6
+533:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+533:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+533:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+536:20:Attribute -> U
+536:20:Attribute -> U
+536:20:Name -> U
+537:20:Name -> U
+538:20:Name -> U | Dict:0 | Dict:1 | Dict:0
+539:20:Name -> Const:int:1
+541:16:Call -> Const:NoneType:None
+541:16:Name -> Func:salt.utils.aws.sleep_exponential_backoff
+541:42:Name -> Const:int:1
+544:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+544:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+544:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+546:16:Attribute -> U
+546:16:Attribute -> U
+546:16:Name -> U
+547:16:Name -> U
+548:16:Name -> U | Dict:0 | Dict:1 | Dict:0
+550:15:Name -> Const:bool:False | U
+551:33:Name -> U | Dict:0 | Dict:1 | Dict:0
+551:40:Name -> Const:NoneType:None | U | Const:str:'https://Uninferable/' | Const:str:'None?' | Const:str:'Uninferable?'
+552:29:Name -> U | Dict:0 | Dict:1 | Dict:0
+554:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+554:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+554:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+556:12:Attribute -> ERR
+556:12:Attribute -> ERR
+556:12:Name -> ERR
+557:12:Name -> ERR
+558:12:Name -> U | Dict:0 | Dict:1 | Dict:0
+560:11:Name -> Const:bool:False | U
+561:29:Name -> U | Dict:0 | Dict:1 | Dict:0
+561:36:Name -> Const:NoneType:None | U | Const:str:'https://Uninferable/' | Const:str:'None?' | Const:str:'Uninferable?'
+562:25:Name -> U | Dict:0 | Dict:1 | Dict:0
+564:11:Call -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+564:11:Attribute -> Func:xml.etree.ElementTree.XML
+564:11:Name -> Module:xml.etree.ElementTree
+564:25:Attribute -> U
+564:25:Name -> U
+565:12:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+566:7:Name -> Const:bool:False | U
+567:16:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+569:7:Name -> Const:NoneType:None | U
+570:25:Call -> Inst:builtins.enumerate
+570:25:Name -> Class:builtins.enumerate
+570:35:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+571:20:Call -> U
+571:20:Attribute -> U
+571:20:Attribute -> U
+571:20:Name -> U
+572:15:Name -> U
+572:27:Name -> U
+573:24:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+573:29:Name -> U
+576:16:Name -> U | Const:NoneType:None | Inst:xml.etree.ElementTree.Element
+577:8:Call -> ERR
+577:8:Attribute -> BM:builtins.list.append
+577:8:Name -> List:0
+577:19:Call -> U | Dict:0 | Dict:1 | Dict:0
+577:19:Attribute -> Func:salt.utils.xmlutil.to_dict
+577:19:Name -> Module:salt.utils.xmlutil
+577:31:Name -> U
+579:7:Name -> Const:bool:False | U
+580:15:Name -> List:0
+580:20:Name -> Const:NoneType:None | U | Const:str:'https://Uninferable/' | Const:str:'None?' | Const:str:'Uninferable?'
+582:11:Name -> List:0
+593:7:Name -> Const:str:'' | Const:str:'do-not-get-from-metadata' | U
+594:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+594:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+594:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+600:7:Name -> Const:str:'' | Const:str:'do-not-get-from-metadata' | U
+601:15:Name -> Const:str:'' | Const:str:'do-not-get-from-metadata' | U
+604:17:Call -> U
+604:17:Name -> Func:salt.utils.aws.get_metadata
+605:11:Attribute -> U
+605:11:Attribute -> U
+605:11:Name -> U
+606:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+606:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+606:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+612:17:Call -> U
+612:17:Attribute -> U
+612:17:Name -> U
+613:23:Name -> U
+614:15:Name -> U
+615:12:Name -> Class:builtins.ValueError
+615:24:Name -> Class:builtins.KeyError
+616:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+616:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+616:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+630:7:Name -> Const:NoneType:None | U
+632:10:Call -> U
+632:10:Attribute -> U | BM:builtins.dict.get
+632:10:Name -> Const:NoneType:None | U | Dict:0
+633:7:Name -> U
+633:23:Name -> Const:NoneType:None | U
+634:14:Call -> U
+634:14:Attribute -> U
+634:14:Name -> Const:NoneType:None | U
+635:7:Name -> U
+636:14:Call -> Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+636:14:Name -> Func:salt.utils.aws.get_region_from_metadata
+637:7:Name -> U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+638:14:Name -> Const:str:'us-east-1'
+639:11:Name -> U | Const:NoneType:None | Const:str:'' | Const:str:'do-not-get-from-metadata' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'us-east-1'

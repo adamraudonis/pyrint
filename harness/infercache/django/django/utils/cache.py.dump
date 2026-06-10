@@ -1,0 +1,485 @@
+51:12:Call -> U
+51:12:Attribute -> U
+51:12:Name -> U
+52:11:Call -> ERR
+52:11:Name -> Func:builtins.len
+52:15:Name -> U
+53:20:Call -> U
+53:20:Attribute -> U
+53:20:Name -> U
+53:34:Name -> U
+55:20:Call -> U
+55:20:Attribute -> U
+55:20:Name -> U
+58:11:Name -> Tuple:0
+59:19:Name -> Tuple:0
+61:30:Name -> Tuple:0
+61:36:Name -> Tuple:0
+63:9:Call -> Inst:collections.defaultdict
+63:9:Name -> Class:collections.defaultdict
+63:21:Name -> Class:builtins.set
+64:7:Call -> U
+64:7:Attribute -> U
+64:7:Name -> U
+65:21:Call -> Gen:django.utils.http.split_header_value
+65:21:Name -> Func:django.utils.http.split_header_value
+65:40:Attribute -> U
+65:40:Name -> U
+66:31:Call -> Tuple:2 | Tuple:2
+66:31:Name -> Func:django.utils.cache.patch_cache_control.dictitem
+66:40:Name -> U
+67:15:Name -> U
+69:16:Call -> U
+69:16:Attribute -> U
+69:16:Name -> Inst:collections.defaultdict
+69:19:Name -> U
+69:34:Name -> U | Const:bool:True
+71:16:Name -> Inst:collections.defaultdict
+71:19:Name -> U
+71:32:Name -> U | Const:bool:True
+76:20:Name -> Inst:collections.defaultdict
+76:40:Name -> Dict:0
+77:8:Name -> Dict:0
+77:28:Call -> ERR
+77:28:Name -> Func:builtins.min
+77:32:Call -> Inst:builtins.int
+77:32:Name -> Class:builtins.int
+77:36:Name -> Inst:collections.defaultdict
+77:52:Name -> Dict:0
+80:20:Name -> Inst:collections.defaultdict
+80:39:Name -> Dict:0
+81:12:Name -> Inst:collections.defaultdict
+82:21:Name -> Inst:collections.defaultdict
+82:41:Name -> Dict:0
+83:12:Name -> Inst:collections.defaultdict
+85:16:Call -> DictItems
+85:16:Attribute -> BM:builtins.dict.items
+85:16:Name -> Dict:0
+86:20:Call -> U
+86:20:Attribute -> U
+86:20:Name -> U
+87:11:Name -> U
+89:12:Call -> U
+89:12:Attribute -> U
+89:12:Name -> Inst:collections.defaultdict
+89:15:Name -> U
+89:30:Name -> U
+91:12:Name -> Inst:collections.defaultdict
+91:15:Name -> U
+91:28:Name -> U
+94:29:Call -> ERR
+94:29:Attribute -> BM:builtins.dict.items
+94:29:Name -> Inst:collections.defaultdict
+95:11:Call -> ERR
+95:11:Name -> Func:builtins.isinstance
+95:22:Name -> U
+95:30:Name -> Class:builtins.set
+96:23:Name -> U
+99:12:Call -> ERR
+99:12:Attribute -> BM:builtins.list.extend
+99:12:Name -> List:0
+99:31:Call -> U
+99:31:Name -> Func:django.utils.cache.patch_cache_control.dictvalue
+99:41:Name -> U
+99:52:Name -> U
+99:72:Name -> U | Set:1
+101:12:Call -> ERR
+101:12:Attribute -> BM:builtins.list.append
+101:12:Name -> List:0
+101:30:Call -> U
+101:30:Name -> Func:django.utils.cache.patch_cache_control.dictvalue
+101:40:Name -> U
+101:51:Name -> U
+102:9:Call -> Const:str:''
+102:9:Attribute -> BM:builtins.str.join
+102:19:Name -> List:0
+103:4:Attribute -> U
+103:4:Name -> U
+103:40:Name -> Const:str:''
+111:11:Call -> U
+111:11:Attribute -> U
+111:11:Name -> U
+113:9:Call -> Inst:builtins.dict
+113:9:Name -> Class:builtins.dict
+114:8:Call -> Tuple:2 | Tuple:2
+114:8:Name -> Func:django.utils.cache._to_tuple
+114:18:Name -> U
+114:32:Call -> Gen:django.utils.http.split_header_value
+114:32:Name -> Func:django.utils.http.split_header_value
+114:51:Attribute -> U
+114:51:Name -> U
+117:15:Call -> Inst:builtins.int
+117:15:Name -> Class:builtins.int
+117:19:Name -> Inst:builtins.dict
+118:12:Name -> Class:builtins.ValueError
+118:24:Name -> Class:builtins.TypeError
+118:35:Name -> Class:builtins.KeyError
+123:11:Attribute -> U
+123:11:Name -> U
+123:34:Attribute -> U
+123:34:Name -> U
+124:8:Attribute -> U
+124:8:Name -> U
+124:35:Call -> Const:str:'' | Const:str:'""'
+124:35:Name -> Func:django.utils.http.quote_etag
+125:12:Call -> Const:str:''
+125:12:Attribute -> BM:hashlib.md5.hexdigest
+125:12:Call -> Inst:hashlib.md5
+125:12:Name -> Class:hashlib.md5
+125:16:Attribute -> U
+125:16:Name -> U
+127:11:Name -> U
+131:15:Call -> Inst:django.http.response.HttpResponse
+131:15:Name -> Class:django.http.response.HttpResponse
+132:4:Call -> Const:NoneType:None
+132:4:Name -> Func:django.utils.log.log_response
+134:8:Attribute -> U
+134:8:Name -> U
+135:17:Name -> Inst:django.http.response.HttpResponse
+136:16:Name -> U
+138:11:Name -> Inst:django.http.response.HttpResponse
+142:19:Call -> Inst:django.http.response.HttpResponseNotModified
+142:19:Name -> Class:django.http.response.HttpResponseNotModified
+143:7:Name -> Const:NoneType:None | U
+155:15:Name -> Const:str:'Cache-Control' | Const:str:'Content-Location' | Const:str:'Date' | Const:str:'ETag' | Const:str:'Expires' | Const:str:'Last-Modified' | Const:str:'Vary'
+155:25:Name -> U
+156:16:Attribute -> Inst:django.http.response.ResponseHeaders
+156:16:Name -> Inst:django.http.response.HttpResponseNotModified
+156:37:Name -> Const:str:'Cache-Control' | Const:str:'Content-Location' | Const:str:'Date' | Const:str:'ETag' | Const:str:'Expires' | Const:str:'Last-Modified' | Const:str:'Vary'
+156:47:Attribute -> U
+156:47:Name -> U
+156:64:Name -> Const:str:'Cache-Control' | Const:str:'Content-Location' | Const:str:'Date' | Const:str:'ETag' | Const:str:'Expires' | Const:str:'Last-Modified' | Const:str:'Vary'
+163:8:Name -> Inst:django.http.response.HttpResponseNotModified
+163:31:Attribute -> U
+163:31:Name -> U
+164:11:Name -> Inst:django.http.response.HttpResponseNotModified
+169:7:Name -> Const:NoneType:None | U
+169:32:Attribute -> U
+169:32:Name -> Const:NoneType:None | U
+170:15:Name -> Const:NoneType:None | U
+173:21:Call -> List:1 | U
+173:21:Name -> Func:django.utils.http.parse_etags
+173:33:Call -> U
+173:33:Attribute -> U
+173:33:Attribute -> U
+173:33:Name -> U
+174:26:Call -> U
+174:26:Attribute -> U
+174:26:Attribute -> U
+174:26:Name -> U
+175:26:Name -> U
+175:50:Call -> U
+175:50:Name -> Func:django.utils.http.parse_http_date_safe
+176:8:Name -> U
+178:26:Call -> List:1 | U
+178:26:Name -> Func:django.utils.http.parse_etags
+178:38:Call -> U
+178:38:Attribute -> U
+178:38:Attribute -> U
+178:38:Name -> U
+179:24:Call -> U
+179:24:Attribute -> U
+179:24:Attribute -> U
+179:24:Name -> U
+180:24:Name -> U
+180:46:Call -> U
+180:46:Name -> Func:django.utils.http.parse_http_date_safe
+180:67:Name -> U
+185:7:Name -> List:1 | U
+185:30:Call -> Const:bool:False | Const:bool:True | Const:bool:False | U
+185:30:Name -> Func:django.utils.cache._if_match_passes
+185:47:Name -> Const:NoneType:None | U
+185:53:Name -> List:1 | U
+186:15:Call -> Inst:django.http.response.HttpResponse
+186:15:Name -> Func:django.utils.cache._precondition_failed
+186:36:Name -> U
+190:12:Name -> List:1 | U
+191:12:Name -> U
+192:16:Call -> U
+192:16:Name -> Func:django.utils.cache._if_unmodified_since_passes
+192:44:Name -> Const:NoneType:None | U
+192:59:Name -> U
+194:15:Call -> Inst:django.http.response.HttpResponse
+194:15:Name -> Func:django.utils.cache._precondition_failed
+194:36:Name -> U
+197:7:Name -> List:1 | U
+197:35:Call -> Const:bool:True | Const:bool:False | U
+197:35:Name -> Func:django.utils.cache._if_none_match_passes
+197:57:Name -> Const:NoneType:None | U
+197:63:Name -> List:1 | U
+198:11:Attribute -> U
+198:11:Name -> U
+199:19:Call -> Inst:django.http.response.HttpResponseNotModified
+199:19:Name -> Func:django.utils.cache._not_modified
+199:33:Name -> U
+199:42:Name -> Const:NoneType:None | U
+201:19:Call -> Inst:django.http.response.HttpResponse
+201:19:Name -> Func:django.utils.cache._precondition_failed
+201:40:Name -> U
+205:12:Name -> List:1 | U
+206:12:Name -> U
+207:16:Call -> U
+207:16:Name -> Func:django.utils.cache._if_modified_since_passes
+207:42:Name -> Const:NoneType:None | U
+207:57:Name -> U
+208:12:Attribute -> U
+208:12:Name -> U
+210:15:Call -> Inst:django.http.response.HttpResponseNotModified
+210:15:Name -> Func:django.utils.cache._not_modified
+210:29:Name -> U
+210:38:Name -> Const:NoneType:None | U
+215:11:Name -> Const:NoneType:None | U
+222:11:Name -> U
+225:9:Name -> U
+230:9:Call -> U
+230:9:Attribute -> U
+230:9:Name -> U
+236:15:Name -> U
+236:30:Name -> U
+244:11:Name -> U
+244:29:Name -> U
+244:46:Name -> U
+251:11:Name -> U
+254:9:Name -> U
+261:22:Call -> U
+261:22:Attribute -> U
+261:22:Name -> U
+262:17:Call -> U
+262:17:Attribute -> U
+262:17:Name -> U
+262:46:Name -> U
+263:15:Name -> U
+263:34:Name -> U
+271:15:Name -> U
+271:32:Name -> U
+271:48:Name -> U
+284:7:Name -> Const:NoneType:None | U
+285:24:Attribute -> U
+285:24:Name -> Inst:django.conf.LazySettings
+286:7:Name -> Const:NoneType:None | U
+288:11:Call -> U
+288:11:Attribute -> U
+288:11:Name -> U
+289:8:Attribute -> U
+289:8:Name -> U
+289:38:Call -> U
+289:38:Name -> Func:django.utils.http.http_date
+289:48:Call -> U
+289:48:Attribute -> Func:time.time | Lambda:django.test.utils:869 | U
+289:48:Name -> Module:time
+289:62:Name -> Const:NoneType:None | U | Const:int:0
+290:4:Call -> Const:NoneType:None
+290:4:Name -> Func:django.utils.cache.patch_cache_control
+290:24:Name -> U
+290:42:Name -> Const:NoneType:None | U | Const:int:0
+297:4:Call -> Const:NoneType:None
+297:4:Name -> Func:django.utils.cache.patch_response_headers
+297:27:Name -> U
+298:4:Call -> Const:NoneType:None
+298:4:Name -> Func:django.utils.cache.patch_cache_control
+299:8:Name -> U
+313:7:Call -> U
+313:7:Attribute -> U
+313:7:Name -> U
+314:23:Call -> Inst:builtins.list
+314:23:Name -> Class:builtins.list
+314:28:Call -> Gen:django.utils.http.split_header_value
+314:28:Name -> Func:django.utils.http.split_header_value
+314:47:Attribute -> U
+314:47:Name -> U
+318:24:Call -> U
+318:24:Attribute -> U
+318:24:Name -> U
+318:53:Name -> Inst:builtins.list | List:0
+319:18:Call -> U
+319:18:Attribute -> U
+319:18:Name -> U
+319:53:Name -> U
+321:8:Name -> U
+322:25:Name -> U
+323:11:Call -> U
+323:11:Attribute -> U
+323:11:Name -> U
+323:36:Name -> U
+325:20:Name -> U
+326:14:Name -> U
+327:8:Attribute -> U
+327:8:Name -> U
+329:8:Attribute -> U
+329:8:Name -> U
+329:35:Call -> Const:str:''
+329:35:Attribute -> BM:builtins.str.join
+329:45:Name -> Inst:builtins.list | List:0 | U
+336:11:Call -> U
+336:11:Attribute -> U
+336:11:Name -> U
+338:24:Call -> U
+338:24:Attribute -> U
+338:24:Name -> U
+338:43:Call -> Gen:django.utils.http.split_header_value
+338:43:Name -> Func:django.utils.http.split_header_value
+338:62:Attribute -> U
+338:62:Name -> U
+339:11:Call -> U
+339:11:Attribute -> U
+339:11:Call -> U
+339:11:Attribute -> U
+339:11:Name -> U
+339:43:Name -> U
+344:7:Attribute -> U
+344:7:Name -> Inst:django.conf.LazySettings
+348:29:Call -> U
+348:29:Name -> Func:builtins.getattr
+348:37:Name -> U
+348:63:Call -> U
+348:63:Name -> Func:django.utils.translation.get_language
+349:7:Attribute -> U
+349:7:Name -> Inst:django.conf.LazySettings
+350:29:Call -> U
+350:29:Name -> Func:django.utils.timezone.get_current_timezone_name
+351:11:Name -> U
+356:10:Call -> Inst:hashlib.md5
+356:10:Name -> Class:hashlib.md5
+357:18:Name -> U
+358:16:Call -> U
+358:16:Attribute -> U
+358:16:Attribute -> U
+358:16:Name -> U
+358:33:Name -> U
+359:11:Name -> U
+360:12:Call -> U
+360:12:Attribute -> BM:hashlib.md5.update
+360:12:Name -> Inst:hashlib.md5
+360:23:Call -> U
+360:23:Attribute -> U
+360:23:Name -> U
+361:10:Call -> Inst:hashlib.md5
+361:10:Name -> Class:hashlib.md5
+361:14:Call -> U
+361:14:Attribute -> U
+361:14:Call -> U
+361:14:Attribute -> U
+361:14:Name -> U
+363:8:Name -> U
+364:8:Name -> U
+365:8:Call -> Const:str:''
+365:8:Attribute -> BM:hashlib.md5.hexdigest
+365:8:Name -> Inst:hashlib.md5
+366:8:Call -> Const:str:''
+366:8:Attribute -> BM:hashlib.md5.hexdigest
+366:8:Name -> Inst:hashlib.md5
+368:11:Call -> U
+368:11:Name -> Func:django.utils.cache._i18n_cache_key_suffix
+368:34:Name -> U
+368:43:Name -> U
+373:10:Call -> Inst:hashlib.md5
+373:10:Name -> Class:hashlib.md5
+373:14:Call -> U
+373:14:Attribute -> U
+373:14:Call -> U
+373:14:Attribute -> U
+373:14:Name -> U
+375:8:Name -> U
+376:8:Call -> Const:str:''
+376:8:Attribute -> BM:hashlib.md5.hexdigest
+376:8:Name -> Inst:hashlib.md5
+378:11:Call -> U
+378:11:Name -> Func:django.utils.cache._i18n_cache_key_suffix
+378:34:Name -> U
+378:43:Name -> U
+391:7:Name -> Const:NoneType:None | U
+392:21:Attribute -> U
+392:21:Name -> Inst:django.conf.LazySettings
+393:16:Call -> U
+393:16:Name -> Func:django.utils.cache._generate_cache_header_key
+393:43:Name -> Const:NoneType:None | U
+393:55:Name -> U
+394:7:Name -> Const:NoneType:None | U
+395:16:Name -> Inst:django.core.cache.CacheHandler
+395:23:Attribute -> U
+395:23:Name -> Inst:django.conf.LazySettings
+396:17:Call -> U
+396:17:Attribute -> U
+396:17:Name -> Const:NoneType:None | U
+396:27:Name -> U
+397:7:Name -> U
+398:15:Call -> U
+398:15:Name -> Func:django.utils.cache._generate_cache_key
+398:35:Name -> U
+398:44:Name -> Const:str:'GET' | U
+398:52:Name -> U
+398:64:Name -> Const:NoneType:None | U
+416:7:Name -> Const:NoneType:None | U
+417:21:Attribute -> U
+417:21:Name -> Inst:django.conf.LazySettings
+418:7:Name -> Const:NoneType:None | U
+419:24:Attribute -> U
+419:24:Name -> Inst:django.conf.LazySettings
+420:16:Call -> U
+420:16:Name -> Func:django.utils.cache._generate_cache_header_key
+420:43:Name -> Const:NoneType:None | U
+420:55:Name -> U
+421:7:Name -> Const:NoneType:None | U
+422:16:Name -> Inst:django.core.cache.CacheHandler
+422:23:Attribute -> U
+422:23:Name -> Inst:django.conf.LazySettings
+423:7:Call -> U
+423:7:Attribute -> U
+423:7:Name -> U
+424:39:Attribute -> U
+424:39:Name -> Inst:django.conf.LazySettings
+430:22:Call -> Gen:django.utils.http.split_header_value
+430:22:Name -> Func:django.utils.http.split_header_value
+430:41:Attribute -> U
+430:41:Name -> U
+431:21:Call -> U
+431:21:Attribute -> U
+431:21:Call -> U
+431:21:Attribute -> U
+431:21:Name -> U
+432:15:Name -> U
+432:50:Name -> U
+433:16:Call -> ERR
+433:16:Attribute -> BM:builtins.list.append
+433:16:Name -> List:0
+433:44:Name -> U
+434:8:Call -> ERR
+434:8:Attribute -> BM:builtins.list.sort
+434:8:Name -> List:0
+435:8:Call -> U
+435:8:Attribute -> U
+435:8:Name -> Const:NoneType:None | U
+435:18:Name -> U
+435:29:Name -> List:0
+435:41:Name -> Const:NoneType:None | U
+436:15:Call -> U
+436:15:Name -> Func:django.utils.cache._generate_cache_key
+436:35:Name -> U
+436:44:Attribute -> U
+436:44:Name -> U
+436:60:Name -> List:0
+436:72:Name -> Const:NoneType:None | U
+440:8:Call -> U
+440:8:Attribute -> U
+440:8:Name -> Const:NoneType:None | U
+440:18:Name -> U
+440:33:Name -> Const:NoneType:None | U
+441:15:Call -> U
+441:15:Name -> Func:django.utils.cache._generate_cache_key
+441:35:Name -> U
+441:44:Attribute -> U
+441:44:Name -> U
+441:64:Name -> Const:NoneType:None | U
+445:8:Call -> U
+445:8:Attribute -> U
+445:8:Name -> U
+446:7:Call -> ERR
+446:7:Name -> Func:builtins.len
+446:11:Name -> U
+447:15:Call -> U
+447:15:Attribute -> U
+447:15:Name -> U
+447:29:Name -> U
+448:11:Call -> U
+448:11:Attribute -> U
+448:11:Name -> U

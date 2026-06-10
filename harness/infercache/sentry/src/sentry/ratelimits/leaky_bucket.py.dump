@@ -1,0 +1,238 @@
+15:4:Call -> Inst:typing.ParamSpec
+15:4:Name -> Class:typing.ParamSpec
+16:4:Call -> Class:.R
+16:4:Name -> Class:typing.TypeVar
+18:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:9:Attribute -> Func:logging.getLogger
+18:9:Name -> Module:logging
+18:27:Name -> Const:str:'src.sentry.ratelimits.leaky_bucket' | Const:str:'__main__'
+21:20:Call -> U
+21:20:Attribute -> U
+21:20:Name -> U
+24:1:Name -> Func:dataclasses.dataclass
+26:17:Name -> Class:builtins.int
+27:15:Name -> Class:builtins.int
+28:15:Name -> Class:builtins.float
+29:19:Name -> Class:builtins.float
+30:15:Name -> Class:builtins.float
+36:24:Name -> Class:builtins.Exception
+37:33:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+38:12:Name -> ExcInst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.LimitExceeded
+38:24:Name -> U
+40:36:Name -> Class:builtins.int
+40:52:Name -> Class:builtins.int
+40:62:Name -> Class:builtins.str
+41:22:Attribute -> U
+41:22:Name -> U
+42:8:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+42:22:Call -> U
+42:22:Attribute -> U
+42:22:Attribute -> U
+42:22:Name -> U
+42:47:Name -> U
+43:8:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+43:27:Name -> U
+44:8:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+44:25:Name -> U
+45:8:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+45:27:Name -> Const:NoneType:None | U
+47:30:Name -> Class:builtins.str
+47:52:Name -> Class:builtins.str
+48:14:Name -> Const:NoneType:None | U
+48:21:Attribute -> Const:NoneType:None | U
+48:21:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+49:15:Name -> Const:NoneType:None | U
+50:18:Call -> ExcInst:builtins.ValueError
+50:18:Name -> Class:builtins.ValueError
+51:18:Attribute -> Const:str:'leaky_bucket_limiter'
+51:18:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+51:35:Name -> Const:NoneType:None | U
+55:12:Call -> U
+55:12:Attribute -> U
+55:12:Attribute -> U
+55:12:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+56:12:Call -> U
+56:12:Attribute -> U
+56:12:Attribute -> U
+56:12:Attribute -> U
+56:12:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+57:15:Name -> Class:builtins.Exception
+58:18:Call -> U
+58:18:Name -> U
+58:39:Call -> Const:str:''
+58:39:Name -> Class:builtins.str
+58:43:Name -> ExcInst:builtins.Exception
+62:13:Name -> Class:builtins.str
+63:19:Name -> Class:builtins.float
+64:17:Name -> Class:builtins.int
+65:9:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+73:22:Call -> Const:int:1
+73:22:Name -> Class:builtins.int
+73:26:Name -> Const:int:1 | U
+75:15:Name -> Const:int:1
+76:22:Name -> Class:builtins.ValueError
+77:15:Name -> Class:builtins.ValueError
+78:18:Call -> ExcInst:builtins.ValueError
+78:18:Name -> Class:builtins.ValueError
+80:11:Name -> Const:NoneType:None | U
+81:24:Call -> U
+81:24:Name -> Func:time.time | Lambda:tests.sentry.models.test_debugfile:411 | U
+83:20:Call -> Const:str:'leaky_bucket_limiter:None' | Const:str:'leaky_bucket_limiter:Uninferable'
+83:20:Attribute -> BM:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter._redis_key
+83:20:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+83:36:Name -> Const:NoneType:None | U
+85:74:Call -> U
+85:74:Name -> U
+86:17:Name -> Const:str:'leaky_bucket_limiter:None' | Const:str:'leaky_bucket_limiter:Uninferable'
+87:17:Attribute -> U
+87:17:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+87:35:Attribute -> U
+87:35:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+87:51:Name -> Const:NoneType:None | U
+87:62:Name -> Const:int:1 | U | Const:int:1
+88:23:Attribute -> U
+88:23:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+91:16:Call -> Inst:builtins.float
+91:16:Name -> Class:builtins.float
+91:22:Name -> U
+92:16:Call -> Inst:builtins.float
+92:16:Name -> Class:builtins.float
+92:22:Name -> U
+93:16:Call -> Inst:builtins.float
+93:16:Name -> Class:builtins.float
+93:22:Name -> U
+95:19:Call -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+95:19:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+95:40:Name -> U
+95:53:Name -> U
+95:64:Name -> Inst:builtins.float
+95:75:Name -> Inst:builtins.float
+95:90:Name -> Inst:builtins.float
+96:15:Name -> Class:builtins.Exception
+97:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+97:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+97:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+98:66:Call -> Dict:1
+98:66:Name -> Class:builtins.dict
+98:81:Name -> Const:str:'leaky_bucket_limiter:None' | Const:str:'leaky_bucket_limiter:Uninferable'
+101:15:Call -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+101:15:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+101:36:Attribute -> U
+101:36:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+101:54:Attribute -> U
+101:54:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+104:19:Name -> Class:builtins.str
+104:49:Name -> Class:builtins.float
+104:79:Name -> Class:builtins.int
+105:9:Name -> Class:builtins.bool
+106:15:Call -> Const:bool:False
+106:15:Name -> Class:builtins.bool
+106:20:Attribute -> Const:int:0 | Inst:builtins.float
+106:20:Call -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+106:20:Attribute -> BM:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.use_and_get_info
+106:20:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+106:42:Name -> Const:NoneType:None | U
+106:47:Name -> Const:NoneType:None | U
+106:58:Name -> Const:int:1 | U
+108:36:Name -> Class:builtins.str
+108:58:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+113:39:Call -> Inst:builtins.map
+113:39:Name -> Class:builtins.map
+114:26:Call -> Inst:builtins.float
+114:26:Name -> Class:builtins.float
+114:32:Name -> U
+115:16:Call -> U
+115:16:Attribute -> U
+115:16:Attribute -> U
+115:16:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+116:20:Call -> Const:str:'leaky_bucket_limiter:None' | Const:str:'leaky_bucket_limiter:Uninferable'
+116:20:Attribute -> BM:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter._redis_key
+116:20:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+116:36:Name -> Const:NoneType:None | U
+120:15:Name -> Class:builtins.Exception
+121:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+121:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+121:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+121:73:Call -> Const:str:'leaky_bucket_limiter:None' | Const:str:'leaky_bucket_limiter:Uninferable'
+121:73:Attribute -> BM:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter._redis_key
+121:73:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+121:89:Name -> Const:NoneType:None | U
+122:19:Call -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+122:19:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+122:40:Attribute -> U
+122:40:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+122:58:Attribute -> U
+122:58:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+124:15:Call -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+124:15:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+125:12:Attribute -> U
+125:12:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+126:12:Attribute -> U
+126:12:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+127:12:Name -> U
+128:12:Name -> U
+129:12:Call -> ERR
+129:12:Name -> Func:builtins.max
+129:20:Name -> U
+129:36:Attribute -> U
+129:36:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+129:56:Attribute -> U
+129:56:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+134:22:Name -> Class:builtins.str
+135:25:Name -> Class:_collections_abc.Callable
+135:35:Name -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+135:57:Name -> Class:builtins.dict
+135:62:Name -> Class:builtins.str
+135:67:Name -> Class:typing.Any
+135:74:Name -> Class:.R
+136:25:Name -> Class:builtins.bool
+137:9:Name -> Class:_collections_abc.Callable
+137:19:Name -> Class:_collections_abc.Callable
+137:28:Name -> Inst:typing.ParamSpec
+137:31:Name -> Class:.R
+137:36:Name -> Class:_collections_abc.Callable
+137:45:Name -> Inst:typing.ParamSpec
+137:48:Name -> Class:.R
+204:28:Name -> Class:_collections_abc.Callable
+204:37:Name -> Inst:typing.ParamSpec
+204:40:Name -> Class:.R
+204:47:Name -> Class:_collections_abc.Callable
+204:56:Name -> Inst:typing.ParamSpec
+204:59:Name -> Class:.R
+205:13:Call -> Partial:PartialFunction
+205:13:Attribute -> Func:functools.wraps
+205:13:Name -> Module:functools
+205:29:Name -> U
+206:31:Name -> Class:typing.Any
+206:46:Name -> Class:typing.Any
+206:54:Name -> Class:typing.Any
+208:26:Name -> Const:NoneType:None | U
+208:42:Attribute -> U
+208:42:Name -> U
+209:27:Call -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+209:27:Attribute -> BM:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.use_and_get_info
+209:27:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+209:49:Name -> U
+210:23:Attribute -> Const:int:0 | Inst:builtins.float
+210:23:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+211:30:Call -> ExcInst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.LimitExceeded
+211:30:Attribute -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.LimitExceeded
+211:30:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+211:49:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketLimitInfo
+212:27:Call -> U
+212:27:Name -> U
+212:33:Name -> Tuple:0
+212:41:Name -> Dict:0
+213:23:Attribute -> Class:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.LimitExceeded
+213:23:Name -> Inst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter
+214:23:Name -> Const:NoneType:None | U
+215:31:Call -> U
+215:31:Name -> U
+215:47:Attribute -> U
+215:47:Name -> ExcInst:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.LimitExceeded
+215:64:Name -> Tuple:0
+215:80:Name -> Dict:0
+216:23:Name -> Const:bool:False | U
+219:19:Name -> Func:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.decorator.decorator.wrapper
+221:15:Name -> Func:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.decorator.decorator
+223:15:Name -> Func:src.sentry.ratelimits.leaky_bucket.LeakyBucketRateLimiter.decorator

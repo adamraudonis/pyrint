@@ -1,0 +1,604 @@
+12:11:Name -> U
+17:15:Name -> U
+20:15:Name -> U
+23:11:Call -> Inst:django.dispatch.dispatcher.Signal
+23:11:Name -> Class:django.dispatch.dispatcher.Signal
+24:11:Call -> Inst:django.dispatch.dispatcher.Signal
+24:11:Name -> Class:django.dispatch.dispatcher.Signal
+25:11:Call -> Inst:django.dispatch.dispatcher.Signal
+25:11:Name -> Class:django.dispatch.dispatcher.Signal
+26:11:Call -> Inst:django.dispatch.dispatcher.Signal
+26:11:Name -> Class:django.dispatch.dispatcher.Signal
+29:22:Name -> Class:django.test.testcases.SimpleTestCase
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+35:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+35:25:Call -> U
+35:25:Attribute -> U
+35:25:Name -> U
+36:8:Call -> Const:NoneType:None
+36:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+36:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+36:25:Attribute -> U
+36:25:Name -> U
+38:5:Call -> Inst:django.test.utils.override_settings
+38:5:Name -> Class:django.test.utils.override_settings
+44:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+44:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+44:13:Name -> Inst:tests.dispatch.tests.DispatcherTests
+44:38:Name -> Class:builtins.ValueError
+44:50:Name -> Const:str:'Signal receivers must accept keyword ar
+45:12:Call -> Const:NoneType:None
+45:12:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+45:12:Name -> Inst:django.dispatch.dispatcher.Signal
+45:29:Name -> Func:tests.dispatch.tests.DispatcherTests.test_cannot_connect_no_kwargs.receiver_no_kwargs
+46:8:Call -> Const:NoneType:None
+46:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+46:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+46:31:Name -> Inst:django.dispatch.dispatcher.Signal
+48:5:Call -> Inst:django.test.utils.override_settings
+48:5:Name -> Class:django.test.utils.override_settings
+51:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+51:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+51:13:Name -> Inst:tests.dispatch.tests.DispatcherTests
+51:38:Name -> Class:builtins.TypeError
+51:49:Name -> Const:str:'Signal receivers must be callable.'
+52:12:Call -> Const:NoneType:None
+52:12:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+52:12:Name -> Inst:django.dispatch.dispatcher.Signal
+52:29:Call -> Inst:builtins.object
+52:29:Name -> Class:builtins.object
+53:8:Call -> Const:NoneType:None
+53:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+53:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+53:31:Name -> Inst:django.dispatch.dispatcher.Signal
+56:8:Call -> Const:NoneType:None
+56:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+56:8:Name -> Inst:django.dispatch.dispatcher.Signal
+56:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+56:48:Name -> Inst:tests.dispatch.tests.DispatcherTests
+57:17:Call -> List:0 | List:0
+57:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+57:17:Name -> Inst:django.dispatch.dispatcher.Signal
+57:38:Name -> Inst:tests.dispatch.tests.DispatcherTests
+58:8:Call -> Const:NoneType:None
+58:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+58:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+58:25:Name -> List:0 | List:0
+58:35:Name -> Func:tests.dispatch.tests.receiver_1_arg
+59:8:Call -> Const:bool:False | Const:bool:True
+59:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+59:8:Name -> Inst:django.dispatch.dispatcher.Signal
+59:28:Name -> Func:tests.dispatch.tests.receiver_1_arg
+59:51:Name -> Inst:tests.dispatch.tests.DispatcherTests
+60:8:Call -> Const:NoneType:None
+60:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+60:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+60:31:Name -> Inst:django.dispatch.dispatcher.Signal
+63:17:Call -> List:0 | List:0
+63:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+63:17:Name -> Inst:django.dispatch.dispatcher.Signal
+63:38:Name -> Inst:tests.dispatch.tests.DispatcherTests
+64:8:Call -> Const:NoneType:None
+64:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+64:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+64:25:Name -> List:0 | List:0
+67:8:Call -> Const:NoneType:None
+67:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+67:8:Name -> Inst:django.dispatch.dispatcher.Signal
+67:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+68:17:Call -> List:0 | List:0
+68:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+68:17:Name -> Inst:django.dispatch.dispatcher.Signal
+68:38:Name -> Inst:tests.dispatch.tests.DispatcherTests
+69:8:Call -> Const:NoneType:None
+69:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+69:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+69:25:Name -> List:0 | List:0
+69:35:Name -> Func:tests.dispatch.tests.receiver_1_arg
+70:8:Call -> Const:bool:False | Const:bool:True
+70:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+70:8:Name -> Inst:django.dispatch.dispatcher.Signal
+70:28:Name -> Func:tests.dispatch.tests.receiver_1_arg
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+71:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+71:31:Name -> Inst:django.dispatch.dispatcher.Signal
+74:8:Call -> Const:NoneType:None
+74:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+74:8:Name -> Inst:django.dispatch.dispatcher.Signal
+74:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+74:48:Name -> Class:builtins.object
+75:17:Call -> List:0 | List:0
+75:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+75:17:Name -> Inst:django.dispatch.dispatcher.Signal
+75:38:Name -> Inst:tests.dispatch.tests.DispatcherTests
+76:8:Call -> Const:NoneType:None
+76:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+76:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+76:25:Name -> List:0 | List:0
+77:8:Call -> Const:bool:False | Const:bool:True
+77:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+77:8:Name -> Inst:django.dispatch.dispatcher.Signal
+77:28:Name -> Func:tests.dispatch.tests.receiver_1_arg
+77:51:Name -> Class:builtins.object
+78:8:Call -> Const:NoneType:None
+78:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+78:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+78:31:Name -> Inst:django.dispatch.dispatcher.Signal
+81:17:Call -> Inst:builtins.object
+81:17:Name -> Class:builtins.object
+82:8:Call -> Const:NoneType:None
+82:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+82:8:Name -> Inst:django.dispatch.dispatcher.Signal
+82:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+82:48:Name -> Inst:builtins.object
+83:17:Call -> List:0 | List:0
+83:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+83:17:Name -> Inst:django.dispatch.dispatcher.Signal
+83:38:Name -> Inst:builtins.object
+84:8:Call -> Const:NoneType:None
+84:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+84:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+84:25:Name -> List:0 | List:0
+84:35:Name -> Func:tests.dispatch.tests.receiver_1_arg
+85:8:Call -> Const:bool:False | Const:bool:True
+85:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+85:8:Name -> Inst:django.dispatch.dispatcher.Signal
+85:28:Name -> Func:tests.dispatch.tests.receiver_1_arg
+85:51:Name -> Inst:builtins.object
+86:8:Call -> Const:NoneType:None
+86:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+86:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+86:31:Name -> Inst:django.dispatch.dispatcher.Signal
+89:12:Call -> Inst:tests.dispatch.tests.Callable
+89:12:Name -> Class:tests.dispatch.tests.Callable
+90:8:Call -> Const:NoneType:None
+90:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+90:8:Name -> Inst:django.dispatch.dispatcher.Signal
+90:25:Attribute -> BM:tests.dispatch.tests.Callable.a
+90:25:Name -> Inst:tests.dispatch.tests.Callable
+90:37:Name -> Inst:tests.dispatch.tests.DispatcherTests
+92:8:Call -> Const:NoneType:None
+92:8:Name -> Func:django.test.utils.garbage_collect
+93:17:Call -> List:0 | List:0
+93:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+93:17:Name -> Inst:django.dispatch.dispatcher.Signal
+93:38:Name -> Inst:tests.dispatch.tests.DispatcherTests
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+94:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+94:25:Name -> List:0 | List:0
+95:8:Call -> Const:NoneType:None
+95:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+95:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+95:31:Name -> Inst:django.dispatch.dispatcher.Signal
+98:17:Call -> Inst:django.dispatch.dispatcher.Signal
+98:17:Name -> Class:django.dispatch.dispatcher.Signal
+108:15:Call -> ERR
+108:15:Name -> Func:builtins.isinstance
+108:26:Name -> U
+108:34:Name -> Class:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+110:19:Call -> Tuple:2 | U
+110:19:Name -> Func:django.dispatch.dispatcher._make_id
+110:28:Name -> U
+113:19:Name -> U
+116:19:Name -> U
+118:13:Call -> Inst:unittest.mock._patch
+118:13:Attribute -> Func:unittest.mock.patch
+118:13:Name -> Module:unittest.mock
+118:63:Name -> Func:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.make_id
+119:21:Call -> Inst:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+119:21:Name -> Class:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+120:12:Call -> Const:NoneType:None
+120:12:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+120:12:Name -> Inst:django.dispatch.dispatcher.Signal
+120:27:Name -> Func:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.first_receiver
+120:43:Name -> Inst:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+121:21:Call -> List:0 | List:0
+121:21:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+121:21:Name -> Inst:django.dispatch.dispatcher.Signal
+121:33:Name -> Inst:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+122:12:Call -> Const:NoneType:None
+122:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+122:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+122:29:Name -> List:0 | List:0
+122:39:Name -> Func:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.first_receiver
+125:12:Call -> Const:NoneType:None
+125:12:Name -> Func:django.test.utils.garbage_collect
+127:21:Call -> Inst:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+127:21:Name -> Class:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+128:12:Call -> Const:NoneType:None
+128:12:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+128:12:Name -> Inst:django.dispatch.dispatcher.Signal
+128:27:Name -> Func:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.second_receiver
+128:44:Name -> Inst:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+129:21:Call -> List:0 | List:0
+129:21:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+129:21:Name -> Inst:django.dispatch.dispatcher.Signal
+129:33:Name -> Inst:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.Sender
+130:12:Call -> Const:NoneType:None
+130:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+130:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+130:29:Name -> List:0 | List:0
+130:39:Name -> Func:tests.dispatch.tests.DispatcherTests.test_garbage_collected_sender.second_receiver
+141:15:Call -> U
+141:15:Attribute -> U
+141:15:Name -> Module:weakref
+141:27:Name -> Class:tests.dispatch.tests.DispatcherTests.test_cached_garbaged_collected.sender
+142:8:Call -> Const:NoneType:None
+142:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+142:8:Name -> Inst:django.dispatch.dispatcher.Signal
+142:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+143:8:Call -> List:0 | List:0
+143:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+143:8:Name -> Inst:django.dispatch.dispatcher.Signal
+143:22:Name -> Class:tests.dispatch.tests.DispatcherTests.test_cached_garbaged_collected.sender
+145:8:Call -> Const:NoneType:None
+145:8:Name -> Func:django.test.utils.garbage_collect
+147:12:Call -> Const:NoneType:None
+147:12:Attribute -> BM:unittest.case.TestCase.assertIsNone
+147:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+147:30:Call -> U
+147:30:Name -> U
+151:12:Call -> Const:bool:False | Const:bool:True
+151:12:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+151:12:Name -> Inst:django.dispatch.dispatcher.Signal
+151:32:Name -> Func:tests.dispatch.tests.receiver_1_arg
+154:12:Call -> Inst:tests.dispatch.tests.Callable
+154:12:Name -> Class:tests.dispatch.tests.Callable
+155:8:Call -> Const:NoneType:None
+155:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+155:8:Name -> Inst:django.dispatch.dispatcher.Signal
+155:25:Name -> Inst:tests.dispatch.tests.Callable
+156:8:Call -> Const:NoneType:None
+156:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+156:8:Name -> Inst:django.dispatch.dispatcher.Signal
+156:25:Name -> Inst:tests.dispatch.tests.Callable
+157:8:Call -> Const:NoneType:None
+157:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+157:8:Name -> Inst:django.dispatch.dispatcher.Signal
+157:25:Name -> Inst:tests.dispatch.tests.Callable
+158:8:Call -> Const:NoneType:None
+158:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+158:8:Name -> Inst:django.dispatch.dispatcher.Signal
+158:25:Name -> Inst:tests.dispatch.tests.Callable
+159:8:Call -> Const:NoneType:None
+159:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+159:8:Name -> Inst:django.dispatch.dispatcher.Signal
+159:25:Name -> Inst:tests.dispatch.tests.Callable
+160:8:Call -> Const:NoneType:None
+160:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+160:8:Name -> Inst:django.dispatch.dispatcher.Signal
+160:25:Name -> Inst:tests.dispatch.tests.Callable
+161:17:Call -> List:0 | List:0
+161:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+161:17:Name -> Inst:django.dispatch.dispatcher.Signal
+161:38:Name -> Inst:tests.dispatch.tests.DispatcherTests
+162:8:Call -> Const:NoneType:None
+162:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+162:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+162:25:Call -> ERR
+162:25:Name -> Func:builtins.len
+162:29:Name -> List:0 | List:0
+163:8:Call -> Const:NoneType:None
+163:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+163:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+163:25:Call -> ERR
+163:25:Name -> Func:builtins.len
+163:29:Attribute -> List:0 | U | List:0
+163:29:Name -> Inst:django.dispatch.dispatcher.Signal
+166:8:Call -> Const:NoneType:None
+166:8:Name -> Func:django.test.utils.garbage_collect
+167:8:Call -> Const:NoneType:None
+167:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+167:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+167:31:Name -> Inst:django.dispatch.dispatcher.Signal
+176:8:Call -> Const:NoneType:None
+176:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+176:8:Name -> Inst:django.dispatch.dispatcher.Signal
+176:25:Name -> Func:tests.dispatch.tests.DispatcherTests.test_uid_registration.uid_based_receiver_1
+177:8:Call -> Const:NoneType:None
+177:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+177:8:Name -> Inst:django.dispatch.dispatcher.Signal
+177:25:Name -> Func:tests.dispatch.tests.DispatcherTests.test_uid_registration.uid_based_receiver_2
+178:8:Call -> Const:NoneType:None
+178:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+178:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+178:25:Call -> ERR
+178:25:Name -> Func:builtins.len
+178:29:Attribute -> List:0 | U | List:0
+178:29:Name -> Inst:django.dispatch.dispatcher.Signal
+179:8:Call -> Const:bool:False | Const:bool:True
+179:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+179:8:Name -> Inst:django.dispatch.dispatcher.Signal
+180:8:Call -> Const:NoneType:None
+180:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+180:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+180:31:Name -> Inst:django.dispatch.dispatcher.Signal
+183:8:Call -> Const:NoneType:None
+183:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+183:8:Name -> Inst:django.dispatch.dispatcher.Signal
+183:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+184:17:Call -> List:0 | List:0
+184:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send_robust
+184:17:Name -> Inst:django.dispatch.dispatcher.Signal
+184:45:Name -> Inst:tests.dispatch.tests.DispatcherTests
+185:8:Call -> Const:NoneType:None
+185:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+185:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+185:25:Name -> List:0 | List:0
+185:35:Name -> Func:tests.dispatch.tests.receiver_1_arg
+186:8:Call -> Const:bool:False | Const:bool:True
+186:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+186:8:Name -> Inst:django.dispatch.dispatcher.Signal
+186:28:Name -> Func:tests.dispatch.tests.receiver_1_arg
+187:8:Call -> Const:NoneType:None
+187:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+187:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+187:31:Name -> Inst:django.dispatch.dispatcher.Signal
+190:17:Call -> List:0 | List:0
+190:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send_robust
+190:17:Name -> Inst:django.dispatch.dispatcher.Signal
+190:45:Name -> Inst:tests.dispatch.tests.DispatcherTests
+191:8:Call -> Const:NoneType:None
+191:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+191:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+191:25:Name -> List:0 | List:0
+194:8:Call -> Const:NoneType:None
+194:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+194:8:Name -> Inst:django.dispatch.dispatcher.Signal
+194:25:Name -> Func:tests.dispatch.tests.receiver_1_arg
+195:17:Call -> List:0 | List:0
+195:17:Attribute -> BM:django.dispatch.dispatcher.Signal.send_robust
+195:17:Name -> Inst:django.dispatch.dispatcher.Signal
+195:45:Name -> Inst:tests.dispatch.tests.DispatcherTests
+196:8:Call -> Const:NoneType:None
+196:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+196:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+196:25:Name -> List:0 | List:0
+196:35:Name -> Func:tests.dispatch.tests.receiver_1_arg
+197:8:Call -> Const:bool:False | Const:bool:True
+197:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+197:8:Name -> Inst:django.dispatch.dispatcher.Signal
+197:28:Name -> Func:tests.dispatch.tests.receiver_1_arg
+198:8:Call -> Const:NoneType:None
+198:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+198:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+198:31:Name -> Inst:django.dispatch.dispatcher.Signal
+202:18:Call -> ExcInst:builtins.ValueError
+202:18:Name -> Class:builtins.ValueError
+204:8:Call -> Const:NoneType:None
+204:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+204:8:Name -> Inst:django.dispatch.dispatcher.Signal
+204:25:Name -> Func:tests.dispatch.tests.DispatcherTests.test_send_robust_fail.fails
+206:17:Call -> Inst:unittest._log._AssertLogsContext
+206:17:Attribute -> BM:unittest.case.TestCase.assertLogs
+206:17:Name -> Inst:tests.dispatch.tests.DispatcherTests
+207:25:Call -> List:0 | List:0
+207:25:Attribute -> BM:django.dispatch.dispatcher.Signal.send_robust
+207:25:Name -> Inst:django.dispatch.dispatcher.Signal
+207:53:Name -> Inst:tests.dispatch.tests.DispatcherTests
+208:18:Name -> List:0 | List:0
+209:12:Call -> Const:NoneType:None
+209:12:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+209:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+209:34:Name -> U
+209:39:Name -> Class:builtins.ValueError
+210:12:Call -> Const:NoneType:None
+210:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+210:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+210:29:Attribute -> U
+210:29:Name -> U
+211:12:Call -> Const:NoneType:None
+211:12:Attribute -> BM:unittest.case.TestCase.assertIs
+211:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+211:26:Call -> U
+211:26:Name -> Func:builtins.hasattr
+211:34:Name -> U
+212:12:Call -> Const:NoneType:None
+212:12:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+212:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+212:34:Attribute -> U
+212:34:Name -> U
+212:53:Name -> U
+214:25:Attribute -> U
+214:25:Name -> Const:NoneType:None | Inst:__astroid_synthetic._LoggingWatcher
+215:12:Call -> Const:NoneType:None
+215:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+215:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+216:16:Call -> U
+216:16:Attribute -> U
+216:16:Name -> U
+221:12:Call -> Const:NoneType:None
+221:12:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+221:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+221:33:Attribute -> U
+221:33:Name -> U
+222:30:Attribute -> U
+222:30:Name -> U
+223:12:Call -> Const:NoneType:None
+223:12:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+223:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+223:34:Name -> U
+223:45:Name -> Class:builtins.ValueError
+224:12:Call -> Const:NoneType:None
+224:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+224:12:Name -> Inst:tests.dispatch.tests.DispatcherTests
+224:29:Call -> Const:str:''
+224:29:Name -> Class:builtins.str
+224:33:Name -> U
+226:12:Call -> Const:bool:False | Const:bool:True
+226:12:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+226:12:Name -> Inst:django.dispatch.dispatcher.Signal
+226:32:Name -> Func:tests.dispatch.tests.DispatcherTests.test_send_robust_fail.fails
+227:8:Call -> Const:NoneType:None
+227:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+227:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+227:31:Name -> Inst:django.dispatch.dispatcher.Signal
+230:21:Call -> Inst:tests.dispatch.tests.Callable
+230:21:Name -> Class:tests.dispatch.tests.Callable
+231:21:Call -> Inst:tests.dispatch.tests.Callable
+231:21:Name -> Class:tests.dispatch.tests.Callable
+232:21:Call -> Inst:tests.dispatch.tests.Callable
+232:21:Name -> Class:tests.dispatch.tests.Callable
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+233:8:Name -> Inst:django.dispatch.dispatcher.Signal
+233:25:Name -> Inst:tests.dispatch.tests.Callable
+234:8:Call -> Const:NoneType:None
+234:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+234:8:Name -> Inst:django.dispatch.dispatcher.Signal
+234:25:Name -> Inst:tests.dispatch.tests.Callable
+235:8:Call -> Const:NoneType:None
+235:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+235:8:Name -> Inst:django.dispatch.dispatcher.Signal
+235:25:Name -> Inst:tests.dispatch.tests.Callable
+236:8:Call -> Const:bool:False | Const:bool:True
+236:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+236:8:Name -> Inst:django.dispatch.dispatcher.Signal
+236:28:Name -> Inst:tests.dispatch.tests.Callable
+238:8:Call -> Const:NoneType:None
+238:8:Name -> Func:django.test.utils.garbage_collect
+239:8:Call -> Const:bool:False | Const:bool:True
+239:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+239:8:Name -> Inst:django.dispatch.dispatcher.Signal
+239:28:Name -> Inst:tests.dispatch.tests.Callable
+240:8:Call -> Const:NoneType:None
+240:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+240:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+240:31:Name -> Inst:django.dispatch.dispatcher.Signal
+243:21:Call -> Inst:tests.dispatch.tests.Callable
+243:21:Name -> Class:tests.dispatch.tests.Callable
+244:21:Call -> Inst:tests.dispatch.tests.Callable
+244:21:Name -> Class:tests.dispatch.tests.Callable
+245:8:Call -> Const:NoneType:None
+245:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+245:8:Name -> Inst:django.dispatch.dispatcher.Signal
+245:25:Name -> Inst:tests.dispatch.tests.Callable
+246:34:Call -> Const:bool:False | Const:bool:True
+246:34:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+246:34:Name -> Inst:django.dispatch.dispatcher.Signal
+246:54:Name -> Inst:tests.dispatch.tests.Callable
+247:34:Call -> Const:bool:False | Const:bool:True
+247:34:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+247:34:Name -> Inst:django.dispatch.dispatcher.Signal
+247:54:Name -> Inst:tests.dispatch.tests.Callable
+248:8:Call -> Const:NoneType:None
+248:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+248:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+248:24:Name -> Const:bool:False | Const:bool:True
+249:8:Call -> Const:NoneType:None
+249:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+249:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+249:25:Name -> Const:bool:False | Const:bool:True
+250:8:Call -> Const:NoneType:None
+250:8:Attribute -> BM:tests.dispatch.tests.DispatcherTests.assertTestIsClean
+250:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+250:31:Name -> Inst:django.dispatch.dispatcher.Signal
+253:8:Call -> Const:NoneType:None
+253:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+253:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+253:25:Call -> Const:bool:False
+253:25:Attribute -> BM:django.dispatch.dispatcher.Signal.has_listeners
+253:25:Name -> Inst:django.dispatch.dispatcher.Signal
+254:8:Call -> Const:NoneType:None
+254:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+254:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+254:25:Call -> Const:bool:False
+254:25:Attribute -> BM:django.dispatch.dispatcher.Signal.has_listeners
+254:25:Name -> Inst:django.dispatch.dispatcher.Signal
+254:55:Call -> Inst:builtins.object
+254:55:Name -> Class:builtins.object
+255:21:Call -> Inst:tests.dispatch.tests.Callable
+255:21:Name -> Class:tests.dispatch.tests.Callable
+256:8:Call -> Const:NoneType:None
+256:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+256:8:Name -> Inst:django.dispatch.dispatcher.Signal
+256:25:Name -> Inst:tests.dispatch.tests.Callable
+257:8:Call -> Const:NoneType:None
+257:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+257:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+257:24:Call -> Const:bool:False
+257:24:Attribute -> BM:django.dispatch.dispatcher.Signal.has_listeners
+257:24:Name -> Inst:django.dispatch.dispatcher.Signal
+258:8:Call -> Const:NoneType:None
+258:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+258:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+258:24:Call -> Const:bool:False
+258:24:Attribute -> BM:django.dispatch.dispatcher.Signal.has_listeners
+258:24:Name -> Inst:django.dispatch.dispatcher.Signal
+258:54:Call -> Inst:builtins.object
+258:54:Name -> Class:builtins.object
+259:8:Call -> Const:bool:False | Const:bool:True
+259:8:Attribute -> BM:django.dispatch.dispatcher.Signal.disconnect
+259:8:Name -> Inst:django.dispatch.dispatcher.Signal
+259:28:Name -> Inst:tests.dispatch.tests.Callable
+260:8:Call -> Const:NoneType:None
+260:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+260:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+260:25:Call -> Const:bool:False
+260:25:Attribute -> BM:django.dispatch.dispatcher.Signal.has_listeners
+260:25:Name -> Inst:django.dispatch.dispatcher.Signal
+261:8:Call -> Const:NoneType:None
+261:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+261:8:Name -> Inst:tests.dispatch.tests.DispatcherTests
+261:25:Call -> Const:bool:False
+261:25:Attribute -> BM:django.dispatch.dispatcher.Signal.has_listeners
+261:25:Name -> Inst:django.dispatch.dispatcher.Signal
+261:55:Call -> Inst:builtins.object
+261:55:Name -> Class:builtins.object
+264:23:Name -> Class:django.test.testcases.SimpleTestCase
+266:9:Call -> Func:django.dispatch.dispatcher.receiver._decorator
+266:9:Name -> Func:django.dispatch.dispatcher.receiver
+266:18:Name -> Inst:django.dispatch.dispatcher.Signal
+268:12:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+268:25:Name -> U
+270:8:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+271:8:Call -> List:0 | List:0
+271:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+271:8:Name -> Inst:django.dispatch.dispatcher.Signal
+271:29:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+272:8:Call -> Const:NoneType:None
+272:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+272:8:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+272:24:Attribute -> U | Const:bool:False | List:0
+272:24:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+275:9:Call -> Func:django.dispatch.dispatcher.receiver._decorator
+275:9:Name -> Func:django.dispatch.dispatcher.receiver
+275:19:Name -> Inst:django.dispatch.dispatcher.Signal
+275:29:Name -> Inst:django.dispatch.dispatcher.Signal
+275:39:Name -> Inst:django.dispatch.dispatcher.Signal
+277:12:Call -> U
+277:12:Attribute -> U | BM:builtins.list.append
+277:12:Attribute -> U | Const:bool:False | List:0
+277:12:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+277:30:Name -> U
+279:8:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+280:8:Call -> List:0 | List:0
+280:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+280:8:Name -> Inst:django.dispatch.dispatcher.Signal
+280:29:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+281:8:Call -> List:0 | List:0
+281:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+281:8:Name -> Inst:django.dispatch.dispatcher.Signal
+281:29:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+282:8:Call -> List:0 | List:0
+282:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+282:8:Name -> Inst:django.dispatch.dispatcher.Signal
+282:29:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+283:8:Call -> Const:NoneType:None
+283:8:Attribute -> BM:unittest.case.TestCase.assertIn
+283:8:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+283:27:Attribute -> U | Const:bool:False | List:0
+283:27:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+284:8:Call -> Const:NoneType:None
+284:8:Attribute -> BM:unittest.case.TestCase.assertIn
+284:8:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+284:27:Attribute -> U | Const:bool:False | List:0
+284:27:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+285:8:Call -> Const:NoneType:None
+285:8:Attribute -> BM:unittest.case.TestCase.assertIn
+285:8:Name -> Inst:tests.dispatch.tests.ReceiverTestCase
+285:27:Attribute -> U | Const:bool:False | List:0
+285:27:Name -> Inst:tests.dispatch.tests.ReceiverTestCase

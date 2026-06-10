@@ -1,0 +1,596 @@
+22:13:Call -> U
+22:13:Name -> Func:django.core.management.utils.find_command
+25:1:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+25:1:Attribute -> Func:unittest.case.skipUnless
+25:1:Name -> Module:unittest
+25:21:Name -> U
+26:30:Name -> Class:tests.i18n.utils.RunInTmpDirMixin
+26:48:Name -> Class:django.test.testcases.SimpleTestCase
+30:18:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+32:50:Name -> Const:str:'es_AR'
+36:17:Call -> Inst:_io.StringIO
+36:17:Name -> Class:_io.StringIO
+37:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+37:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+37:13:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+38:12:Name -> Class:django.core.management.base.CommandError
+40:12:Call -> U
+40:12:Name -> Func:django.core.management.call_command
+41:43:Attribute -> Const:str:'es_AR'
+41:43:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+41:77:Name -> Inst:_io.StringIO
+43:8:Call -> Const:NoneType:None
+43:8:Attribute -> BM:unittest.case.TestCase.assertIn
+43:8:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+43:58:Call -> ERR
+43:58:Attribute -> BM:_io.StringIO.getvalue
+43:58:Name -> Inst:_io.StringIO
+44:8:Call -> Const:NoneType:None
+44:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+44:8:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+44:25:Call -> Const:bool:False | Const:bool:True | U
+44:25:Attribute -> Func:genericpath.exists | U
+44:25:Attribute -> Module:posixpath | Module:ntpath
+44:25:Name -> Module:os
+44:40:Attribute -> Const:str:'locale/es_AR/LC_MESSAGES/django.mo'
+44:40:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+47:21:Call -> Inst:pathlib.Path
+47:21:Name -> Class:pathlib.Path
+47:26:Attribute -> Const:str:'locale/en/LC_MESSAGES/django.mo'
+47:26:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+48:21:Call -> Inst:_io.StringIO
+48:21:Name -> Class:_io.StringIO
+50:19:Attribute -> U
+50:19:Call -> U
+50:19:Attribute -> BM:pathlib.Path.stat
+50:19:Attribute -> Inst:pathlib.Path
+50:19:Name -> Inst:pathlib.Path
+51:8:Call -> Const:NoneType:None
+51:8:Attribute -> BM:pathlib.Path.chmod
+51:8:Attribute -> Inst:pathlib.Path
+51:8:Name -> Inst:pathlib.Path
+51:32:Attribute -> Const:int:256 | Const:int:256
+51:32:Name -> Module:stat
+51:47:Attribute -> Const:int:64 | Const:int:64
+51:47:Name -> Module:stat
+53:8:Call -> Const:NoneType:None
+53:8:Attribute -> BM:pathlib.Path.touch
+53:8:Call -> Inst:pathlib.Path
+53:8:Attribute -> BM:pathlib.PurePath.with_suffix
+53:8:Name -> Inst:pathlib.Path
+55:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+55:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+55:17:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+56:16:Name -> Class:django.core.management.base.CommandError
+58:16:Call -> U
+58:16:Name -> Func:django.core.management.call_command
+59:61:Name -> Inst:_io.StringIO
+61:12:Call -> Const:NoneType:None
+61:12:Attribute -> BM:unittest.case.TestCase.assertIn
+61:12:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+61:51:Call -> ERR
+61:51:Attribute -> BM:_io.StringIO.getvalue
+61:51:Name -> Inst:_io.StringIO
+63:12:Call -> Const:NoneType:None
+63:12:Attribute -> BM:pathlib.Path.chmod
+63:12:Attribute -> Inst:pathlib.Path
+63:12:Name -> Inst:pathlib.Path
+63:36:Name -> U
+66:21:Call -> Inst:pathlib.Path
+66:21:Name -> Class:pathlib.Path
+66:26:Attribute -> Const:str:'locale/en/LC_MESSAGES/django.mo'
+66:26:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+67:8:Call -> Const:NoneType:None
+67:8:Attribute -> BM:pathlib.Path.touch
+67:8:Name -> Inst:pathlib.Path
+68:17:Call -> Inst:_io.StringIO
+68:17:Name -> Class:_io.StringIO
+69:8:Call -> U
+69:8:Name -> Func:django.core.management.call_command
+69:62:Name -> Inst:_io.StringIO
+70:60:Call -> Inst:pathlib.Path
+70:60:Attribute -> BM:pathlib.PurePath.with_suffix
+70:60:Name -> Inst:pathlib.Path
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:unittest.case.TestCase.assertIn
+71:8:Name -> Inst:tests.i18n.test_compilation.PoFileTests
+71:22:Name -> U
+71:27:Call -> ERR
+71:27:Attribute -> BM:_io.StringIO.getvalue
+71:27:Name -> Inst:_io.StringIO
+74:26:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+78:50:Name -> Const:str:'fr'
+81:8:Call -> U
+81:8:Name -> Func:django.core.management.call_command
+81:48:Attribute -> Const:str:'fr'
+81:48:Name -> Inst:tests.i18n.test_compilation.PoFileContentsTests
+82:8:Call -> Const:NoneType:None
+82:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+82:8:Name -> Inst:tests.i18n.test_compilation.PoFileContentsTests
+82:24:Call -> Const:bool:False | Const:bool:True | U
+82:24:Attribute -> Func:genericpath.exists | U
+82:24:Attribute -> Module:posixpath | Module:ntpath
+82:24:Name -> Module:os
+82:39:Attribute -> Const:str:'locale/fr/LC_MESSAGES/django.mo'
+82:39:Name -> Inst:tests.i18n.test_compilation.PoFileContentsTests
+85:37:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+90:8:Call -> Const:NoneType:None | U
+90:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+90:8:Call -> Super
+90:8:Name -> Class:builtins.super
+91:20:Call -> U
+91:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+91:20:Attribute -> Module:posixpath | Module:ntpath
+91:20:Name -> Module:os
+91:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+91:33:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+92:8:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+92:26:Call -> U
+92:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+92:26:Attribute -> Module:posixpath | Module:ntpath
+92:26:Name -> Module:os
+92:39:Name -> U
+93:8:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+93:26:Call -> U
+93:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+93:26:Attribute -> Module:posixpath | Module:ntpath
+93:26:Name -> Module:os
+93:39:Name -> U
+96:13:Call -> Inst:django.test.utils.override_settings
+96:13:Name -> Class:django.test.utils.override_settings
+96:45:Call -> U
+96:45:Attribute -> Func:posixpath.join | Func:ntpath.join
+96:45:Attribute -> Module:posixpath | Module:ntpath
+96:45:Name -> Module:os
+96:58:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+96:58:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+97:12:Call -> U
+97:12:Name -> Func:django.core.management.call_command
+99:12:Call -> Const:NoneType:None
+99:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+99:12:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+99:28:Call -> Const:bool:False | Const:bool:True | U
+99:28:Attribute -> Func:genericpath.exists | U
+99:28:Attribute -> Module:posixpath | Module:ntpath
+99:28:Name -> Module:os
+99:43:Attribute -> U
+99:43:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+102:13:Call -> Inst:django.test.utils.override_settings
+102:13:Name -> Class:django.test.utils.override_settings
+102:45:Call -> U
+102:45:Attribute -> Func:posixpath.join | Func:ntpath.join
+102:45:Attribute -> Module:posixpath | Module:ntpath
+102:45:Name -> Module:os
+102:58:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+102:58:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+103:12:Call -> U
+103:12:Name -> Func:django.core.management.call_command
+105:12:Call -> Const:NoneType:None
+105:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+105:12:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+105:28:Call -> Const:bool:False | Const:bool:True | U
+105:28:Attribute -> Func:genericpath.exists | U
+105:28:Attribute -> Module:posixpath | Module:ntpath
+105:28:Name -> Module:os
+105:43:Attribute -> U
+105:43:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+106:12:Call -> Const:NoneType:None
+106:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+106:12:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+106:28:Call -> Const:bool:False | Const:bool:True | U
+106:28:Attribute -> Func:genericpath.exists | U
+106:28:Attribute -> Module:posixpath | Module:ntpath
+106:28:Name -> Module:os
+106:43:Attribute -> U
+106:43:Name -> Inst:tests.i18n.test_compilation.MultipleLocaleCompilationTests
+109:37:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+115:8:Call -> Const:NoneType:None | U
+115:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+115:8:Call -> Super
+115:8:Name -> Class:builtins.super
+116:8:Call -> Const:NoneType:None
+116:8:Name -> Func:tests.i18n.utils.copytree
+119:13:Call -> Gen:django.test.utils.captured_output
+119:13:Name -> Func:django.test.utils.captured_stdout
+119:32:Call -> Gen:django.test.utils.captured_output
+119:32:Name -> Func:django.test.utils.captured_stderr
+123:12:Call -> Const:NoneType:None
+123:12:Name -> Func:django.core.management.execute_from_command_line
+126:8:Call -> U
+126:8:Name -> Func:django.core.management.call_command
+127:8:Call -> Const:NoneType:None
+127:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+127:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+127:24:Call -> Const:bool:False | Const:bool:True | U
+127:24:Attribute -> Func:genericpath.exists | U
+127:24:Attribute -> Module:posixpath | Module:ntpath
+127:24:Name -> Module:os
+127:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+127:39:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+128:8:Call -> Const:NoneType:None
+128:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+128:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+128:24:Call -> Const:bool:False | Const:bool:True | U
+128:24:Attribute -> Func:genericpath.exists | U
+128:24:Attribute -> Module:posixpath | Module:ntpath
+128:24:Name -> Module:os
+128:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+128:39:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+129:8:Call -> Const:NoneType:None
+129:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+129:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+129:25:Call -> Const:bool:False | Const:bool:True | U
+129:25:Attribute -> Func:genericpath.exists | U
+129:25:Attribute -> Module:posixpath | Module:ntpath
+129:25:Name -> Module:os
+129:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+129:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+132:8:Call -> U
+132:8:Name -> Func:django.core.management.call_command
+133:8:Call -> Const:NoneType:None
+133:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+133:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+133:24:Call -> Const:bool:False | Const:bool:True | U
+133:24:Attribute -> Func:genericpath.exists | U
+133:24:Attribute -> Module:posixpath | Module:ntpath
+133:24:Name -> Module:os
+133:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+133:39:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+134:8:Call -> Const:NoneType:None
+134:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+134:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+134:25:Call -> Const:bool:False | Const:bool:True | U
+134:25:Attribute -> Func:genericpath.exists | U
+134:25:Attribute -> Module:posixpath | Module:ntpath
+134:25:Name -> Module:os
+134:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+134:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+135:8:Call -> Const:NoneType:None
+135:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+135:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+135:25:Call -> Const:bool:False | Const:bool:True | U
+135:25:Attribute -> Func:genericpath.exists | U
+135:25:Attribute -> Module:posixpath | Module:ntpath
+135:25:Name -> Module:os
+135:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+135:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+138:8:Call -> U
+138:8:Name -> Func:django.core.management.call_command
+141:8:Call -> Const:NoneType:None
+141:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+141:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+141:24:Call -> Const:bool:False | Const:bool:True | U
+141:24:Attribute -> Func:genericpath.exists | U
+141:24:Attribute -> Module:posixpath | Module:ntpath
+141:24:Name -> Module:os
+141:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+141:39:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+142:8:Call -> Const:NoneType:None
+142:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+142:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+142:25:Call -> Const:bool:False | Const:bool:True | U
+142:25:Attribute -> Func:genericpath.exists | U
+142:25:Attribute -> Module:posixpath | Module:ntpath
+142:25:Name -> Module:os
+142:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+142:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+143:8:Call -> Const:NoneType:None
+143:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+143:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+143:25:Call -> Const:bool:False | Const:bool:True | U
+143:25:Attribute -> Func:genericpath.exists | U
+143:25:Attribute -> Module:posixpath | Module:ntpath
+143:25:Name -> Module:os
+143:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+143:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+146:8:Call -> U
+146:8:Name -> Func:django.core.management.call_command
+152:8:Call -> Const:NoneType:None
+152:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+152:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+152:24:Call -> Const:bool:False | Const:bool:True | U
+152:24:Attribute -> Func:genericpath.exists | U
+152:24:Attribute -> Module:posixpath | Module:ntpath
+152:24:Name -> Module:os
+152:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+152:39:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+153:8:Call -> Const:NoneType:None
+153:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+153:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+153:25:Call -> Const:bool:False | Const:bool:True | U
+153:25:Attribute -> Func:genericpath.exists | U
+153:25:Attribute -> Module:posixpath | Module:ntpath
+153:25:Name -> Module:os
+153:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+153:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+154:8:Call -> Const:NoneType:None
+154:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+154:8:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+154:25:Call -> Const:bool:False | Const:bool:True | U
+154:25:Attribute -> Func:genericpath.exists | U
+154:25:Attribute -> Module:posixpath | Module:ntpath
+154:25:Name -> Module:os
+154:40:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.mo'
+154:40:Name -> Inst:tests.i18n.test_compilation.ExcludedLocaleCompilationTests
+157:38:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+161:16:Call -> Inst:pathlib.Path
+161:16:Name -> Class:pathlib.Path
+162:17:Call -> Inst:pathlib.Path
+162:17:Name -> Class:pathlib.Path
+165:8:Call -> Const:NoneType:None | U
+165:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+165:8:Call -> Super
+165:8:Name -> Class:builtins.super
+166:8:Call -> Const:NoneType:None
+166:8:Name -> Func:tests.i18n.utils.copytree
+167:8:Call -> Const:NoneType:None
+167:8:Name -> Func:tests.i18n.utils.copytree
+167:34:Attribute -> U
+167:34:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+168:8:Call -> Const:NoneType:None
+168:8:Name -> Func:tests.i18n.utils.copytree
+168:34:Attribute -> U
+168:34:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+171:8:Call -> Const:NoneType:None
+171:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+171:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+172:12:Call -> ERR
+172:12:Name -> Func:builtins.all
+172:16:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+172:16:Attribute -> BM:pathlib.Path.exists
+172:16:Call -> Inst:pathlib.Path
+172:16:Name -> Class:pathlib.Path
+172:21:Attribute -> Const:str:'%s/%s/LC_MESSAGES/django.mo'
+172:21:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+172:37:Name -> U
+172:42:Name -> U
+172:70:Name -> U
+176:8:Call -> Const:NoneType:None
+176:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+176:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+177:12:Call -> ERR
+177:12:Name -> Func:builtins.all
+177:16:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+177:16:Attribute -> BM:pathlib.Path.exists
+177:16:Call -> Inst:pathlib.Path
+177:16:Name -> Class:pathlib.Path
+177:21:Attribute -> Const:str:'%s/%s/LC_MESSAGES/django.mo'
+177:21:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+177:37:Name -> U
+177:42:Name -> U
+177:79:Name -> U
+181:8:Call -> U
+181:8:Name -> Func:django.core.management.call_command
+182:8:Call -> Const:NoneType:None
+182:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertAllExist
+182:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+183:8:Call -> Const:NoneType:None
+183:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertNoneExist
+183:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+183:29:Attribute -> U
+183:29:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+184:8:Call -> Const:NoneType:None
+184:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertAllExist
+184:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+184:28:Attribute -> U
+184:28:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+187:8:Call -> U
+187:8:Name -> Func:django.core.management.call_command
+190:8:Call -> Const:NoneType:None
+190:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertAllExist
+190:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+191:8:Call -> Const:NoneType:None
+191:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertNoneExist
+191:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+191:29:Attribute -> U
+191:29:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+192:8:Call -> Const:NoneType:None
+192:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertNoneExist
+192:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+192:29:Attribute -> U
+192:29:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+195:8:Call -> U
+195:8:Name -> Func:django.core.management.call_command
+196:8:Call -> Const:NoneType:None
+196:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertAllExist
+196:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+197:8:Call -> Const:NoneType:None
+197:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertNoneExist
+197:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+197:29:Attribute -> U
+197:29:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+198:8:Call -> Const:NoneType:None
+198:8:Attribute -> BM:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests.assertNoneExist
+198:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+198:29:Attribute -> U
+198:29:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+226:13:Call -> Inst:unittest.mock._patch
+226:13:Attribute -> Func:unittest.mock.patch
+226:13:Name -> Module:unittest.mock
+226:27:Name -> Const:str:'django.core.management.commands.compile
+226:62:Name -> List:10
+227:17:Call -> Inst:unittest.mock._patch
+227:17:Attribute -> Func:unittest.mock.patch
+227:17:Name -> Module:unittest.mock
+227:31:Name -> Const:str:'django.core.management.commands.compile
+228:21:Call -> Inst:unittest.mock._patch
+228:21:Attribute -> Func:unittest.mock.patch
+228:21:Name -> Module:unittest.mock
+229:23:Name -> Const:str:'django.core.management.commands.compile
+231:20:Call -> U
+231:20:Name -> Func:django.core.management.call_command
+256:8:Call -> Const:NoneType:None
+256:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+256:8:Name -> Inst:tests.i18n.test_compilation.IgnoreDirectoryCompilationTests
+256:26:Attribute -> U
+256:26:Name -> U
+256:42:Attribute -> U
+256:42:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+256:77:Name -> List:3
+259:31:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+260:5:Name -> Class:django.utils.functional.cached_property
+264:27:Call -> Tuple:3
+264:27:Name -> Func:django.core.management.utils.popen_wrapper
+266:28:Name -> U | Const:str:'ascii'
+268:12:Call -> U
+268:12:Attribute -> Func:re.search
+268:12:Name -> Module:re
+268:48:Name -> U
+269:15:Call -> Inst:builtins.tuple
+269:15:Name -> Class:builtins.tuple
+269:21:Call -> Inst:builtins.int
+269:21:Name -> Class:builtins.int
+269:25:Name -> U
+269:37:Call -> U
+269:37:Attribute -> U
+269:37:Name -> U
+269:51:Name -> U
+273:13:Call -> Inst:unittest.case._AssertRaisesContext
+273:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+273:13:Name -> Inst:tests.i18n.test_compilation.CompilationErrorHandling
+273:31:Name -> Class:django.core.management.base.CommandError
+274:12:Call -> U
+274:12:Name -> Func:django.core.management.call_command
+276:13:Call -> Inst:unittest.case._AssertRaisesContext
+276:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+276:13:Name -> Inst:tests.i18n.test_compilation.CompilationErrorHandling
+276:31:Name -> Class:django.core.management.base.CommandError
+277:12:Call -> U
+277:12:Name -> Func:django.core.management.call_command
+283:14:Call -> Inst:builtins.dict
+283:14:Attribute -> BM:builtins.dict.copy | BM:os._Environ.copy
+283:14:Attribute -> Dict:43 | Inst:os._Environ
+283:14:Name -> Module:os
+284:8:Call -> ERR
+284:8:Attribute -> BM:builtins.dict.update
+284:8:Name -> Inst:builtins.dict
+285:13:Call -> Inst:unittest.mock._patch
+285:13:Attribute -> Func:unittest.mock.patch
+285:13:Name -> Module:unittest.mock
+287:36:Call -> Inst:subprocess.CompletedProcess
+287:36:Name -> Func:subprocess.run
+287:41:Name -> Tuple:0
+287:51:Name -> Inst:builtins.dict
+287:58:Name -> Dict:0
+289:21:Call -> Inst:_io.StringIO
+289:21:Name -> Class:_io.StringIO
+290:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+290:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+290:17:Name -> Inst:tests.i18n.test_compilation.CompilationErrorHandling
+291:16:Name -> Class:django.core.management.base.CommandError
+293:16:Call -> U
+293:16:Name -> Func:django.core.management.call_command
+294:61:Call -> Inst:_io.StringIO
+294:61:Name -> Class:_io.StringIO
+294:80:Name -> Inst:_io.StringIO
+296:15:Attribute -> Inst:builtins.tuple
+296:15:Name -> Inst:tests.i18n.test_compilation.CompilationErrorHandling
+303:12:Call -> Const:NoneType:None
+303:12:Attribute -> BM:unittest.case.TestCase.assertIn
+303:12:Name -> Inst:tests.i18n.test_compilation.CompilationErrorHandling
+303:26:Name -> Const:str:"' cannot start a field name" | Const:str:'a field name starts with a character th
+303:37:Call -> ERR
+303:37:Attribute -> BM:_io.StringIO.getvalue
+303:37:Name -> Inst:_io.StringIO
+306:25:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+308:58:Name -> Const:str:'ru'
+309:70:Name -> Const:str:'ru'
+312:27:Name -> Class:tests.i18n.test_compilation.ProjectAndAppTests
+314:8:Call -> Const:NoneType:None | U
+314:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+314:8:Call -> Super
+314:8:Name -> Class:builtins.super
+315:8:Name -> Module:gettext
+318:13:Call -> Inst:django.test.utils.override_settings
+318:13:Name -> Class:django.test.utils.override_settings
+318:45:Call -> U
+318:45:Attribute -> Func:posixpath.join | Func:ntpath.join
+318:45:Attribute -> Module:posixpath | Module:ntpath
+318:45:Name -> Module:os
+318:58:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+318:58:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+319:12:Call -> U
+319:12:Name -> Func:django.core.management.call_command
+319:52:Attribute -> Const:str:'ru'
+319:52:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+320:17:Call -> Inst:django.utils.translation.override
+320:17:Attribute -> Class:django.utils.translation.override
+320:17:Name -> Module:django.utils.translation
+320:38:Attribute -> Const:str:'ru'
+320:38:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+321:16:Call -> Const:NoneType:None
+321:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+321:16:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+321:33:Call -> U
+321:33:Name -> Func:django.utils.translation.gettext
+322:16:Call -> Const:NoneType:None
+322:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+322:16:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+322:33:Call -> U
+322:33:Name -> Func:django.utils.translation.gettext
+325:13:Call -> Inst:django.test.utils.override_settings
+325:13:Name -> Class:django.test.utils.override_settings
+325:45:Call -> U
+325:45:Attribute -> Func:posixpath.join | Func:ntpath.join
+325:45:Attribute -> Module:posixpath | Module:ntpath
+325:45:Name -> Module:os
+325:58:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+325:58:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+326:12:Call -> U
+326:12:Name -> Func:django.core.management.call_command
+327:43:Attribute -> Const:str:'ru'
+327:43:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+329:17:Call -> Inst:django.utils.translation.override
+329:17:Attribute -> Class:django.utils.translation.override
+329:17:Name -> Module:django.utils.translation
+329:38:Attribute -> Const:str:'ru'
+329:38:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+330:16:Call -> Const:NoneType:None
+330:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+330:16:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+330:33:Call -> U
+330:33:Name -> Func:django.utils.translation.gettext
+331:16:Call -> Const:NoneType:None
+331:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+331:16:Name -> Inst:tests.i18n.test_compilation.FuzzyTranslationTest
+331:33:Call -> U
+331:33:Name -> Func:django.utils.translation.gettext
+334:25:Name -> Class:tests.i18n.test_compilation.ProjectAndAppTests
+336:8:Call -> U
+336:8:Name -> Func:django.core.management.call_command
+336:48:Attribute -> Const:str:'ru'
+336:48:Name -> Inst:tests.i18n.test_compilation.AppCompilationTest
+337:8:Call -> Const:NoneType:None
+337:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+337:8:Name -> Inst:tests.i18n.test_compilation.AppCompilationTest
+337:24:Call -> Const:bool:False | Const:bool:True | U
+337:24:Attribute -> Func:genericpath.exists | U
+337:24:Attribute -> Module:posixpath | Module:ntpath
+337:24:Name -> Module:os
+337:39:Attribute -> Const:str:'locale/ru/LC_MESSAGES/django.mo'
+337:39:Name -> Inst:tests.i18n.test_compilation.AppCompilationTest
+338:8:Call -> Const:NoneType:None
+338:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+338:8:Name -> Inst:tests.i18n.test_compilation.AppCompilationTest
+338:24:Call -> Const:bool:False | Const:bool:True | U
+338:24:Attribute -> Func:genericpath.exists | U
+338:24:Attribute -> Module:posixpath | Module:ntpath
+338:24:Name -> Module:os
+338:39:Attribute -> Const:str:'app_with_locale/locale/ru/LC_MESSAGES/d
+338:39:Name -> Inst:tests.i18n.test_compilation.AppCompilationTest
+341:36:Name -> Class:tests.i18n.test_compilation.MessageCompilationTests
+345:13:Call -> Inst:django.test.utils.override_settings
+345:13:Name -> Class:django.test.utils.override_settings
+345:45:Call -> Inst:pathlib.Path
+345:45:Name -> Class:pathlib.Path
+345:50:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+345:50:Name -> Inst:tests.i18n.test_compilation.PathLibLocaleCompilationTests
+346:12:Call -> U
+346:12:Name -> Func:django.core.management.call_command
+347:12:Call -> Const:NoneType:None
+347:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+347:12:Name -> Inst:tests.i18n.test_compilation.PathLibLocaleCompilationTests
+347:28:Call -> Const:bool:False | Const:bool:True | U
+347:28:Attribute -> Func:genericpath.exists | U
+347:28:Attribute -> Module:posixpath | Module:ntpath
+347:28:Name -> Module:os

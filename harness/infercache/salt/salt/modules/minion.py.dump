@@ -1,0 +1,386 @@
+18:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:6:Attribute -> Func:logging.getLogger
+18:6:Name -> Module:logging
+18:24:Name -> Const:str:'salt.modules.minion' | Const:str:'__main__'
+28:15:Call -> ERR
+28:15:Attribute -> ERR
+28:15:Name -> ERR
+29:16:Call -> U | Const:bool:False
+29:16:Attribute -> Func:salt.utils.systemd.booted
+29:16:Attribute -> Module:salt.utils.systemd
+29:16:Attribute -> Module:salt.utils
+29:16:Name -> Module:salt
+29:42:Name -> ERR
+30:7:Name -> U
+30:20:Name -> U | Const:bool:False
+39:11:Call -> ERR
+39:11:Attribute -> ERR
+39:11:Name -> ERR
+46:11:Call -> Const:bool:True | Const:bool:False
+46:11:Name -> Func:salt.modules.minion._is_systemd_system
+51:8:Call -> Const:NoneType:None | Const:str:'systemd-run' | U
+51:8:Attribute -> Func:salt.utils.path.which
+51:8:Attribute -> Module:salt.utils.path
+51:8:Attribute -> Module:salt.utils
+51:8:Name -> Module:salt
+52:23:Name -> U
+58:10:Call -> ERR
+58:10:Name -> ERR
+58:34:Name -> List:5
+59:7:Name -> U
+60:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+60:14:Name -> Class:salt.exceptions.CommandExecutionError
+60:36:Name -> U
+61:11:Name -> U
+68:11:Call -> U
+68:11:Name -> Func:salt.modules.minion._is_windows_system
+71:11:Call -> Inst:_pydatetime.datetime | U
+71:11:Attribute -> BM:_pydatetime.datetime.now
+71:11:Attribute -> Class:_pydatetime.datetime
+71:11:Name -> Module:datetime
+71:37:Call -> Inst:_pydatetime.timedelta
+71:37:Attribute -> Class:_pydatetime.timedelta
+71:37:Name -> Module:datetime
+71:64:Name -> U
+72:10:Call -> Const:NoneType:None | Const:str:'powershell.exe' | U
+72:10:Attribute -> Func:salt.utils.path.which
+72:10:Attribute -> Module:salt.utils.path
+72:10:Attribute -> Module:salt.utils
+72:10:Name -> Module:salt
+74:10:Call -> ERR
+74:10:Name -> ERR
+79:12:Name -> Const:NoneType:None | Const:str:'powershell.exe' | U
+80:18:Name -> Const:str:'-ExecutionPolicy Bypass -NoProfile -Win
+82:19:Call -> U
+82:19:Attribute -> U
+82:19:Name -> U
+83:19:Call -> U
+83:19:Attribute -> U
+83:19:Name -> U
+85:11:Name -> U
+86:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+86:14:Name -> Class:salt.exceptions.CommandExecutionError
+87:11:Name -> U
+97:8:Call -> Inst:builtins.int
+97:8:Name -> Class:builtins.int
+97:12:Name -> U
+98:12:Name -> Class:builtins.ValueError
+98:24:Name -> Class:builtins.TypeError
+99:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+99:14:Name -> Class:salt.exceptions.CommandExecutionError
+100:12:Call -> U
+100:12:Attribute -> BM:builtins.str.format
+101:16:Name -> U
+104:7:Call -> Const:bool:True | Const:bool:False
+104:7:Name -> Func:salt.modules.minion._is_systemd_system
+105:15:Call -> Const:bool:False | U
+105:15:Name -> Func:salt.modules.minion._schedule_retry_systemd
+105:39:Name -> U
+106:9:Call -> U
+106:9:Name -> Func:salt.modules.minion._is_windows_system
+107:15:Call -> Const:bool:False | U
+107:15:Name -> Func:salt.modules.minion._schedule_retry_windows
+107:39:Name -> U
+121:11:Name -> U
+122:12:Name -> Dict:1
+125:20:Call -> Const:bool:False | U | Const:bool:False | Const:bool:False
+125:20:Name -> Func:salt.modules.minion._schedule_retry
+125:36:Name -> U
+128:15:Call -> Const:bool:True | Const:bool:False
+128:15:Name -> Func:salt.modules.minion._is_systemd_system
+129:16:Name -> Dict:1
+129:69:Call -> U
+129:69:Attribute -> U
+129:69:Name -> Const:bool:False | U | Const:bool:False | Const:bool:False
+132:12:Name -> Dict:1
+132:64:Name -> U
+133:12:Call -> U
+133:12:Attribute -> U
+133:12:Name -> U
+134:57:Name -> U
+138:11:Name -> Const:bool:False | U
+139:12:Name -> Dict:1
+139:47:Call -> ERR
+139:47:Name -> ERR
+140:16:Name -> U
+143:12:Name -> Dict:1
+143:47:Call -> ERR
+143:47:Name -> ERR
+143:75:Name -> U
+144:19:Name -> Dict:1
+145:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+145:22:Name -> Class:salt.exceptions.CommandExecutionError
+145:65:Name -> U
+147:8:Call -> U
+147:8:Attribute -> U
+147:8:Name -> U
+148:8:Name -> Dict:1
+150:11:Name -> Class:salt.exceptions.CommandExecutionError
+151:8:Call -> U
+151:8:Attribute -> U
+151:8:Name -> U
+153:15:Name -> Const:bool:False
+156:8:Name -> Dict:1
+157:8:Name -> Dict:1
+157:43:Call -> Const:str:''
+157:43:Name -> Class:builtins.str
+157:47:Name -> ExcInst:salt.exceptions.CommandExecutionError
+158:8:Name -> Dict:1
+158:25:Attribute -> Const:int:70
+158:25:Attribute -> Module:salt.defaults.exitcodes
+158:25:Attribute -> Module:salt.defaults
+158:25:Name -> Module:salt
+160:11:Name -> Dict:1
+174:14:Call -> ERR
+174:14:Name -> ERR
+177:14:Call -> U
+177:14:Attribute -> U
+177:14:Name -> U
+180:15:Call -> Tuple:4
+180:15:Name -> Func:salt.modules.minion._check_minions_directories
+180:42:Name -> U
+184:16:Name -> Tuple:4
+185:8:Name -> Dict:0
+185:12:Call -> U
+185:12:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+185:12:Attribute -> Module:posixpath | Module:ntpath
+185:12:Name -> Module:os
+185:29:Name -> U
+187:23:Call -> U
+187:23:Attribute -> Func:salt.utils.data.sorted_ignorecase
+187:23:Attribute -> Module:salt.utils.data
+187:23:Attribute -> Module:salt.utils
+187:23:Name -> Module:salt
+187:57:Call -> ERR
+187:57:Attribute -> Func:posix.listdir
+187:57:Name -> Module:os
+187:68:Name -> U
+188:23:Call -> U
+188:23:Attribute -> U
+188:23:Name -> U
+189:23:Call -> Const:bool:False | U
+189:23:Attribute -> Func:genericpath.isfile | U
+189:23:Attribute -> Module:posixpath | Module:ntpath
+189:23:Name -> Module:os
+189:38:Call -> U
+189:38:Attribute -> Func:posixpath.join | Func:ntpath.join
+189:38:Attribute -> Module:posixpath | Module:ntpath
+189:38:Name -> Module:os
+189:51:Name -> U
+189:57:Name -> U
+190:24:Call -> U
+190:24:Attribute -> U
+190:24:Name -> Dict:0
+190:28:Call -> U
+190:28:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+190:28:Attribute -> Module:posixpath | Module:ntpath
+190:28:Name -> Module:os
+190:45:Name -> U
+190:59:Name -> U
+191:15:Name -> Class:builtins.OSError
+195:11:Name -> Dict:0
+204:23:Call -> U
+204:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+204:23:Attribute -> Module:posixpath | Module:ntpath
+204:23:Name -> Module:os
+204:36:Name -> U
+204:45:Attribute -> Const:str:'minions'
+204:45:Attribute -> Class:salt.key.Key
+204:45:Attribute -> Module:salt.key
+204:45:Name -> Module:salt
+205:18:Call -> U
+205:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+205:18:Attribute -> Module:posixpath | Module:ntpath
+205:18:Name -> Module:os
+205:31:Name -> U
+205:40:Attribute -> Const:str:'minions_pre'
+205:40:Attribute -> Class:salt.key.Key
+205:40:Attribute -> Module:salt.key
+205:40:Name -> Module:salt
+206:23:Call -> U
+206:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+206:23:Attribute -> Module:posixpath | Module:ntpath
+206:23:Name -> Module:os
+206:36:Name -> U
+206:45:Attribute -> Const:str:'minions_rejected'
+206:45:Attribute -> Class:salt.key.Key
+206:45:Attribute -> Module:salt.key
+206:45:Name -> Module:salt
+207:21:Call -> U
+207:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+207:21:Attribute -> Module:posixpath | Module:ntpath
+207:21:Name -> Module:os
+207:34:Name -> U
+207:43:Attribute -> Const:str:'minions_denied'
+207:43:Attribute -> Class:salt.key.Key
+207:43:Attribute -> Module:salt.key
+207:43:Name -> Module:salt
+209:11:Name -> U
+209:29:Name -> U
+209:42:Name -> U
+209:60:Name -> U
+251:10:Call -> ERR
+251:10:Attribute -> ERR
+251:10:Name -> ERR
+252:11:Name -> U
+253:8:Call -> ERR
+253:8:Attribute -> BM:builtins.list.append
+253:8:Name -> List:0
+254:8:Name -> Dict:2
+254:25:Attribute -> Const:int:70
+254:25:Attribute -> Module:salt.defaults.exitcodes
+254:25:Attribute -> Module:salt.defaults
+254:25:Name -> Module:salt
+256:32:Name -> ERR
+257:12:Call -> ERR
+257:12:Attribute -> BM:builtins.list.append
+257:12:Name -> List:0
+258:12:Name -> Dict:2
+258:29:Attribute -> Const:int:70
+258:29:Attribute -> Module:salt.defaults.exitcodes
+258:29:Attribute -> Module:salt.defaults
+258:29:Name -> Module:salt
+261:12:Name -> Dict:2
+261:29:Call -> Inst:builtins.int
+261:29:Name -> Class:builtins.int
+261:37:Call -> ERR
+261:37:Name -> ERR
+261:61:Name -> U
+266:15:Name -> Dict:2
+267:16:Call -> ERR
+267:16:Attribute -> BM:builtins.list.append
+267:16:Name -> List:0
+269:25:Call -> Inst:builtins.range
+269:25:Name -> Class:builtins.range
+269:31:Name -> Const:int:15 | U
+270:20:Call -> ERR
+270:20:Attribute -> Func:time.sleep
+270:20:Name -> Module:time
+271:31:Call -> ERR
+271:31:Name -> ERR
+271:55:Name -> U
+272:27:Name -> U
+273:24:Name -> Dict:2
+273:40:Name -> U
+277:20:Call -> ERR
+277:20:Attribute -> BM:builtins.list.append
+277:20:Name -> List:0
+278:20:Name -> Dict:2
+278:37:Attribute -> Const:int:75
+278:37:Attribute -> Module:salt.defaults.exitcodes
+278:37:Attribute -> Module:salt.defaults
+278:37:Name -> Module:salt
+280:7:Name -> List:0
+281:8:Name -> Dict:2
+281:25:Name -> U
+282:11:Name -> Dict:2
+431:18:Call -> ERR
+431:18:Name -> ERR
+432:7:Name -> U
+433:8:Call -> ERR
+433:8:Attribute -> BM:builtins.list.append
+433:8:Name -> List:0
+434:8:Call -> ERR
+434:8:Attribute -> BM:builtins.list.extend
+434:8:Name -> List:0
+434:31:Name -> U
+434:48:Name -> U
+435:9:Name -> Const:bool:True | U
+435:21:Call -> Const:bool:True | Const:bool:False
+435:21:Name -> Func:salt.modules.minion._is_systemd_system
+438:8:Call -> ERR
+438:8:Attribute -> BM:builtins.list.append
+438:8:Name -> List:0
+441:9:Name -> Const:bool:True | U
+441:25:Call -> U
+441:25:Name -> Func:salt.modules.minion._is_windows_system
+444:8:Call -> ERR
+444:8:Attribute -> BM:builtins.list.append
+444:8:Name -> List:0
+448:19:Attribute -> U
+448:19:Name -> Module:sys
+449:26:Attribute -> U
+449:26:Name -> Module:sys
+450:12:Call -> ERR
+450:12:Attribute -> BM:builtins.list.append
+450:12:Name -> List:0
+451:12:Call -> ERR
+451:12:Attribute -> BM:builtins.list.extend
+451:12:Name -> List:0
+451:35:Name -> U
+451:52:Name -> U
+454:12:Call -> ERR
+454:12:Attribute -> BM:builtins.list.append
+454:12:Name -> List:0
+458:7:Name -> Const:bool:True | Const:bool:False | Const:bool:False
+459:8:Call -> ERR
+459:8:Attribute -> BM:builtins.dict.update
+459:8:Name -> Dict:4
+459:19:Call -> Dict:2
+459:19:Name -> Func:salt.modules.minion.kill
+460:24:Name -> Dict:4
+460:32:Name -> Dict:4
+461:15:Call -> ERR
+461:15:Name -> Func:builtins.isinstance
+461:26:Name -> Dict:4
+461:42:Name -> Class:builtins.str
+462:16:Call -> ERR
+462:16:Attribute -> BM:builtins.list.append
+462:16:Name -> List:0
+462:31:Name -> Dict:4
+464:16:Call -> ERR
+464:16:Attribute -> BM:builtins.list.extend
+464:16:Name -> List:0
+464:31:Name -> Dict:4
+465:11:Name -> Dict:4
+466:12:Call -> ERR
+466:12:Attribute -> BM:builtins.list.append
+466:12:Name -> List:0
+469:7:Name -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False
+470:8:Name -> Dict:4
+470:25:Call -> ERR
+470:25:Name -> ERR
+470:49:Name -> U
+470:66:Attribute -> Dict:43 | Inst:os._Environ
+470:66:Name -> Module:os
+474:20:Name -> Dict:4
+475:16:Name -> Dict:4
+476:11:Call -> ERR
+476:11:Attribute -> BM:builtins.dict.get
+476:11:Name -> Dict:4
+477:12:Call -> ERR
+477:12:Attribute -> BM:builtins.list.append
+477:12:Name -> List:0
+478:12:Name -> Dict:4
+478:29:Name -> Dict:4
+479:24:Name -> Dict:4
+481:16:Name -> Dict:4
+483:11:Name -> U
+484:11:Name -> Const:bool:True | U
+484:23:Call -> Const:bool:True | Const:bool:False
+484:23:Name -> Func:salt.modules.minion._is_systemd_system
+485:29:Call -> Dict:1
+485:29:Name -> Func:salt.modules.minion._restart_service
+486:31:Name -> Const:bool:False | U
+486:47:Name -> Const:int:180 | U
+486:60:Name -> List:0
+488:12:Call -> ERR
+488:12:Attribute -> BM:builtins.dict.update
+488:12:Name -> Dict:4
+488:23:Name -> Dict:1
+489:13:Name -> Const:bool:True | U
+489:29:Call -> U
+489:29:Name -> Func:salt.modules.minion._is_windows_system
+490:29:Call -> Dict:1
+490:29:Name -> Func:salt.modules.minion._restart_service
+491:31:Name -> Const:bool:False | U
+491:47:Name -> Const:int:180 | U
+491:60:Name -> List:0
+493:12:Call -> ERR
+493:12:Attribute -> BM:builtins.dict.update
+493:12:Name -> Dict:4
+493:23:Name -> Dict:1
+495:7:Name -> List:0
+496:8:Name -> Dict:4
+496:25:Name -> U
+498:11:Name -> Dict:4

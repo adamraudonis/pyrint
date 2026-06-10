@@ -1,0 +1,545 @@
+37:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+37:9:Attribute -> Func:logging.getLogger
+37:9:Name -> Module:logging
+37:27:Name -> Const:str:'src.sentry.lang.native.symbolicator' | Const:str:'__main__'
+40:27:Name -> Const:NoneType:None | Class:enum.Enum
+49:17:Name -> Const:NoneType:None | Class:enum.Enum
+61:1:Call -> Func:dataclasses.dataclass.wrap | U
+61:1:Name -> Func:dataclasses.dataclass
+67:14:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPlatform
+68:21:Name -> Class:builtins.bool
+70:38:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPlatform
+70:63:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorTaskKind
+71:15:Call -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorTaskKind
+71:15:Attribute -> Func:dataclasses.replace
+71:15:Name -> Module:dataclasses
+71:35:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorTaskKind
+71:50:Name -> U
+74:24:Name -> Const:NoneType:None | Class:enum.Enum
+80:32:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPlatform
+80:57:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPools
+84:10:Name -> U
+85:13:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPlatform.native
+85:13:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPlatform
+86:19:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.default
+86:19:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPools
+87:13:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPlatform.js
+87:13:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPlatform
+88:19:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.js
+88:19:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPools
+89:13:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPlatform.jvm
+89:13:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPlatform
+90:19:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.jvm
+90:19:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPools
+96:19:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorTaskKind
+97:20:Name -> Class:_collections_abc.Callable
+98:17:Name -> U
+99:18:Name -> Class:builtins.str
+101:15:Attribute -> U
+101:15:Name -> U
+102:15:Call -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.default | Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.js | Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.jvm
+102:15:Name -> Func:src.sentry.lang.native.symbolicator.pool_for_platform
+102:33:Attribute -> U
+102:33:Name -> U
+105:12:Call -> U
+105:12:Attribute -> U
+105:12:Name -> U
+105:21:Attribute -> Const:str:'default' | Const:str:'js' | Const:str:'jvm'
+105:21:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.default | Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.js | Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.jvm
+106:15:Call -> U
+106:15:Attribute -> U
+106:15:Name -> U
+106:24:Attribute -> Const:str:'default'
+106:24:Attribute -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorPools.default
+106:24:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorPools
+107:15:Call -> U
+107:15:Attribute -> U
+107:15:Name -> U
+109:19:Call -> U
+109:19:Attribute -> U
+109:19:Name -> U
+110:15:Name -> U
+112:8:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+112:24:Name -> U
+113:8:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+113:26:Name -> U
+114:8:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+114:23:Name -> U
+115:8:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+115:24:Name -> U
+119:19:Name -> Class:builtins.str
+120:14:Name -> Class:builtins.str
+121:19:Name -> Class:_collections_abc.Callable
+121:32:Name -> Class:builtins.dict
+121:37:Name -> Class:builtins.str
+121:42:Name -> Class:typing.Any
+122:18:Name -> Class:typing.Any
+123:9:Name -> Class:typing.Any
+133:18:Call -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+133:18:Name -> Class:src.sentry.lang.native.symbolicator.SymbolicatorSession
+134:16:Attribute -> U
+134:16:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+135:23:Call -> Const:str:''
+135:23:Name -> Class:builtins.str
+135:27:Attribute -> U
+135:27:Attribute -> U
+135:27:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+136:21:Call -> Const:str:''
+136:21:Name -> Class:builtins.str
+136:25:Attribute -> U
+136:25:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+137:20:Attribute -> U
+137:20:Name -> U
+140:17:Name -> Class:builtins.str
+143:18:Call -> U
+143:18:Name -> U
+143:26:Name -> Const:float:0.1
+143:43:Name -> Const:int:5
+145:13:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+148:27:Name -> Const:NoneType:None
+150:43:Name -> Dict:0
+150:69:Name -> Const:NoneType:None | U
+150:54:Call -> U
+150:54:Name -> U
+151:40:Call -> U | Dict:2
+151:40:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession.create_task
+151:40:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+151:60:Name -> U
+151:68:Name -> U
+154:40:Call -> U | Dict:2
+154:40:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession.query_task
+154:40:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+154:59:Name -> U
+155:23:Name -> Class:src.sentry.lang.native.symbolicator.TaskIdNotFound
+163:20:Call -> U
+163:20:Attribute -> U
+163:20:Name -> U
+165:23:Name -> Class:src.sentry.lang.native.symbolicator.ServiceUnavailable
+169:20:Call -> Const:NoneType:None
+169:20:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession.reset_worker_id
+169:20:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+172:20:Call -> U
+172:20:Attribute -> U
+172:20:Name -> U
+175:20:Call -> U
+175:20:Attribute -> U
+175:20:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+177:16:Call -> U
+177:16:Attribute -> U
+177:16:Name -> U
+178:16:Call -> U
+178:16:Attribute -> U
+178:16:Name -> U
+181:36:Call -> U
+181:36:Attribute -> U | BM:builtins.dict.get
+181:36:Name -> Const:NoneType:None | U | Dict:2
+182:37:Name -> U
+186:19:Name -> Const:NoneType:None | U | Dict:2
+189:30:Name -> Const:NoneType:None | U | Dict:2
+193:23:Name -> Const:NoneType:None | U | Dict:2
+196:24:Name -> Class:builtins.str
+196:39:Name -> U
+196:79:Name -> Class:builtins.list
+196:84:Name -> Class:typing.Any
+198:38:Call -> U
+198:38:Name -> U
+198:64:Attribute -> U
+198:64:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+199:26:Call -> U
+199:26:Name -> U
+199:46:Attribute -> U
+199:46:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+201:11:Attribute -> U
+201:11:Name -> U
+202:22:Call -> U
+202:22:Name -> U
+202:46:Attribute -> U
+202:46:Attribute -> U
+202:46:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+202:76:Attribute -> U
+202:76:Attribute -> U
+202:76:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+203:26:Call -> U
+203:26:Name -> U
+203:47:Name -> U
+203:56:Attribute -> U
+203:56:Name -> U
+204:18:Name -> Class:builtins.dict
+204:23:Name -> Class:builtins.str
+204:28:Name -> Class:typing.Any
+205:28:Name -> U
+206:27:Name -> U
+207:28:Name -> U
+211:35:Name -> U
+212:44:Name -> U
+216:24:Name -> Class:builtins.dict
+216:29:Name -> Class:builtins.str
+216:34:Name -> Class:typing.Any
+217:16:Name -> Dict:5
+217:55:Call -> U
+217:55:Attribute -> U
+217:55:Name -> U
+218:32:Name -> Dict:5
+220:18:Call -> Const:NoneType:None | U | Dict:2
+220:18:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+220:18:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+220:81:Name -> Func:src.sentry.lang.native.symbolicator.Symbolicator.process_minidump.cb
+221:19:Call -> U
+221:19:Name -> U
+221:36:Name -> Const:NoneType:None | U | Dict:2
+224:24:Call -> U
+224:24:Attribute -> U
+224:24:Call -> U
+224:24:Attribute -> U
+224:24:Name -> U
+224:37:Name -> U
+225:23:Call -> U
+225:23:Attribute -> U
+225:23:Call -> U
+225:23:Attribute -> U
+225:23:Name -> U
+225:36:Name -> U
+226:24:Call -> U
+226:24:Attribute -> U
+226:24:Call -> U
+226:24:Attribute -> U
+226:24:Name -> U
+226:37:Name -> U
+228:36:Call -> U
+228:36:Attribute -> U
+228:36:Call -> U
+228:36:Attribute -> U
+228:36:Name -> U
+228:49:Name -> U
+230:41:Call -> U
+230:41:Attribute -> U
+230:41:Name -> U
+230:60:Attribute -> U
+230:60:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+232:14:Call -> Const:NoneType:None | U | Dict:2
+232:14:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+232:14:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+232:65:Name -> Dict:5
+232:77:Name -> Dict:1
+233:15:Call -> U
+233:15:Name -> U
+233:32:Name -> Const:NoneType:None | U | Dict:2
+235:49:Name -> Class:builtins.str
+235:62:Name -> U
+236:38:Call -> U
+236:38:Name -> U
+236:64:Attribute -> U
+236:64:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+237:26:Call -> U
+237:26:Name -> U
+237:46:Attribute -> U
+237:46:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+239:11:Attribute -> U
+239:11:Name -> U
+240:22:Call -> U
+240:22:Name -> U
+240:46:Attribute -> U
+240:46:Attribute -> U
+240:46:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+240:76:Attribute -> U
+240:76:Attribute -> U
+240:76:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+241:26:Call -> U
+241:26:Name -> U
+241:47:Name -> U
+241:56:Attribute -> U
+241:56:Name -> U
+242:18:Name -> Class:builtins.dict
+242:23:Name -> Class:builtins.str
+242:28:Name -> Class:typing.Any
+243:28:Name -> U
+244:27:Name -> U
+245:28:Name -> U
+249:35:Name -> U
+253:24:Name -> Class:builtins.dict
+253:29:Name -> Class:builtins.str
+253:34:Name -> Class:typing.Any
+254:16:Name -> Dict:5
+254:55:Call -> U
+254:55:Attribute -> U
+254:55:Name -> U
+255:32:Name -> Dict:5
+257:18:Call -> Const:NoneType:None | U | Dict:2
+257:18:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+257:18:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+257:89:Name -> Func:src.sentry.lang.native.symbolicator.Symbolicator.process_applecrashreport.cb
+258:19:Call -> U
+258:19:Name -> U
+258:36:Name -> Const:NoneType:None | U | Dict:2
+261:24:Call -> U
+261:24:Attribute -> U
+261:24:Call -> U
+261:24:Attribute -> U
+261:24:Name -> U
+261:37:Name -> U
+262:23:Call -> U
+262:23:Attribute -> U
+262:23:Call -> U
+262:23:Attribute -> U
+262:23:Name -> U
+262:36:Name -> U
+263:24:Call -> U
+263:24:Attribute -> U
+263:24:Call -> U
+263:24:Attribute -> U
+263:24:Name -> U
+263:37:Name -> U
+266:39:Call -> U
+266:39:Attribute -> U
+266:39:Name -> U
+266:56:Attribute -> U
+266:56:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+268:14:Call -> Const:NoneType:None | U | Dict:2
+268:14:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+268:14:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+268:81:Name -> Dict:4
+268:93:Name -> Dict:1
+269:15:Call -> U
+269:15:Name -> U
+269:32:Name -> Const:NoneType:None | U | Dict:2
+286:38:Call -> U
+286:38:Name -> U
+286:64:Attribute -> U
+286:64:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+287:26:Call -> U
+287:26:Name -> U
+287:46:Attribute -> U
+287:46:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+289:24:Name -> U
+290:23:Name -> U
+293:40:Name -> Const:bool:True | U
+294:31:Attribute -> U
+294:31:Name -> U
+296:27:Name -> U
+297:23:Name -> U
+298:24:Name -> U
+301:11:Name -> Const:NoneType:None | U
+302:12:Name -> Dict:6
+302:29:Name -> U
+304:14:Call -> Const:NoneType:None | U | Dict:2
+304:14:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+304:14:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+304:75:Name -> Dict:6
+305:15:Call -> U
+305:15:Name -> U
+305:32:Name -> Const:NoneType:None | U | Dict:2
+323:17:Call -> U
+323:17:Name -> U
+323:53:Attribute -> U
+323:53:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+324:26:Call -> U
+324:26:Name -> U
+324:46:Attribute -> U
+324:46:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+327:24:Name -> U
+328:22:Name -> U
+329:27:Name -> U
+330:23:Name -> U
+332:40:Name -> Const:bool:True | U
+333:31:Attribute -> U
+333:31:Name -> U
+335:24:Name -> U
+338:11:Name -> U
+339:12:Name -> Dict:6
+339:30:Name -> U
+340:11:Name -> U
+341:12:Name -> Dict:6
+341:27:Name -> U
+343:15:Call -> Const:NoneType:None | U | Dict:2
+343:15:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+343:15:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+343:82:Name -> Dict:6
+371:17:Call -> U
+371:17:Name -> U
+371:37:Attribute -> U
+371:37:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+374:24:Name -> U
+375:24:Name -> U
+376:26:Name -> U
+377:27:Name -> U
+378:23:Name -> U
+379:23:Name -> U
+381:40:Name -> Const:bool:True | U
+382:31:Attribute -> U
+382:31:Name -> U
+386:11:Name -> U
+387:12:Name -> Dict:7
+387:38:Name -> U
+389:15:Call -> Const:NoneType:None | U | Dict:2
+389:15:Attribute -> BM:src.sentry.lang.native.symbolicator.Symbolicator._process
+389:15:Name -> Inst:src.sentry.lang.native.symbolicator.Symbolicator
+389:84:Name -> Dict:7
+392:21:Name -> Class:builtins.Exception
+396:25:Name -> Class:builtins.Exception
+417:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+417:19:Name -> Const:NoneType:None | U
+418:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+418:26:Name -> Const:NoneType:None | U
+419:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+419:24:Name -> Const:NoneType:None | U
+420:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+420:23:Name -> Const:NoneType:None | U
+421:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+422:8:Call -> Const:NoneType:None
+422:8:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession.reset_worker_id
+422:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+425:8:Call -> Const:NoneType:None
+425:8:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession.open
+425:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+426:15:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+429:8:Call -> Const:NoneType:None
+429:8:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession.close
+429:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+432:11:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+432:11:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+433:12:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+433:27:Call -> U
+433:27:Name -> U
+436:11:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+436:11:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+437:12:Call -> U
+437:12:Attribute -> U
+437:12:Attribute -> U | Const:NoneType:None
+437:12:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+438:12:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+441:15:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+441:15:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+442:18:Call -> ExcInst:builtins.RuntimeError
+442:18:Name -> Class:builtins.RuntimeError
+444:14:Call -> U | Const:NoneType:None
+444:14:Name -> Func:urllib.parse.urljoin
+444:22:Attribute -> Const:NoneType:None | U
+444:22:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+444:32:Name -> U
+447:8:Call -> ERR
+447:8:Attribute -> BM:builtins.dict.setdefault
+447:8:Name -> Dict:0
+447:66:Attribute -> Const:NoneType:None | U
+447:66:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+448:8:Call -> ERR
+448:8:Attribute -> BM:builtins.dict.setdefault
+448:8:Name -> Dict:0
+448:64:Attribute -> Const:NoneType:None | U
+448:64:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+449:8:Call -> ERR
+449:8:Attribute -> BM:builtins.dict.setdefault
+449:8:Name -> Dict:0
+449:65:Attribute -> Const:str:'00000000000000000000000000000000'
+449:65:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+456:21:Call -> U
+456:21:Attribute -> U
+456:21:Name -> U
+457:76:Name -> Const:int:0
+459:31:Call -> U
+459:31:Attribute -> U
+459:31:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+459:31:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+459:52:Name -> U
+459:60:Name -> U | Const:NoneType:None
+459:73:Attribute -> Const:NoneType:None | U
+459:73:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+459:93:Name -> Dict:0
+461:16:Call -> U
+461:16:Attribute -> U
+461:16:Name -> U
+463:41:Attribute -> U
+463:41:Name -> U
+467:20:Call -> U
+467:20:Attribute -> U
+467:20:Name -> U
+468:24:Call -> U
+468:24:Attribute -> U
+468:24:Name -> U
+469:24:Attribute -> U
+469:24:Name -> U
+475:26:Call -> ExcInst:src.sentry.lang.native.symbolicator.TaskIdNotFound
+475:26:Name -> Class:src.sentry.lang.native.symbolicator.TaskIdNotFound
+477:19:Attribute -> U
+477:19:Name -> U
+478:26:Call -> ExcInst:src.sentry.lang.native.symbolicator.ServiceUnavailable
+478:26:Name -> Class:src.sentry.lang.native.symbolicator.ServiceUnavailable
+480:19:Attribute -> U
+480:19:Name -> U
+481:27:Call -> U
+481:27:Attribute -> U
+481:27:Name -> U
+483:23:Name -> U
+484:24:Call -> U
+484:24:Attribute -> U
+484:24:Name -> U
+486:28:Call -> ERR
+486:28:Name -> Func:builtins.len
+486:32:Attribute -> U
+486:32:Name -> U
+490:25:Call -> U
+490:25:Attribute -> U
+490:25:Name -> U
+491:24:Call -> U
+491:24:Attribute -> U
+491:24:Name -> U
+491:70:Attribute -> U
+491:70:Name -> U
+492:24:Call -> U
+492:24:Attribute -> U
+492:24:Name -> U
+496:23:Name -> U | Dict:2
+497:20:Name -> Class:builtins.OSError
+497:29:Name -> U
+498:16:Call -> U
+498:16:Attribute -> U
+498:16:Name -> U
+501:31:Call -> Const:str:''
+501:31:Attribute -> BM:builtins.str.join
+501:41:Attribute -> Const:str:'builtins' | U
+501:41:Attribute -> Class:builtins.OSError | U
+501:41:Name -> ExcInst:builtins.OSError | U
+501:65:Attribute -> Const:str:'OSError' | U
+501:65:Attribute -> Class:builtins.OSError | U
+501:65:Name -> ExcInst:builtins.OSError | U
+502:35:Name -> Const:int:0
+511:19:Name -> Const:int:1
+511:30:Name -> Const:int:3
+512:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+512:20:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+512:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+515:16:Call -> ERR
+515:16:Attribute -> Func:time.sleep
+515:16:Name -> Module:time
+515:27:Name -> Const:float:0.5
+519:29:Attribute -> Const:NoneType:None | U
+519:29:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+519:52:Attribute -> Const:NoneType:None | U
+519:52:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+521:13:Call -> U
+521:13:Attribute -> U
+521:13:Name -> U
+523:26:Name -> U
+525:19:Call -> U | Dict:2
+525:19:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession._request
+525:19:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+525:53:Name -> U
+525:66:Name -> Dict:2
+525:76:Name -> Dict:0
+528:29:Attribute -> Const:NoneType:None | U
+528:29:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+528:52:Attribute -> Const:NoneType:None | U
+528:52:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+529:31:Name -> U
+531:13:Call -> U
+531:13:Attribute -> U
+531:13:Name -> U
+532:19:Call -> U | Dict:2
+532:19:Attribute -> BM:src.sentry.lang.native.symbolicator.SymbolicatorSession._request
+532:19:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+532:40:Name -> Const:str:'requests/Uninferable'
+532:57:Name -> Dict:2
+535:8:Name -> Inst:src.sentry.lang.native.symbolicator.SymbolicatorSession
+535:25:Attribute -> Const:str:'00000000000000000000000000000000'
+535:25:Call -> Inst:uuid.UUID
+535:25:Attribute -> Func:uuid.uuid4
+535:25:Name -> Module:uuid

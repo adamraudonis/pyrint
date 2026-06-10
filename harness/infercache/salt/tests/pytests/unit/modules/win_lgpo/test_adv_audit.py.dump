@@ -1,0 +1,191 @@
+13:4:Attribute -> U
+13:4:Attribute -> U
+13:4:Name -> U
+14:4:Attribute -> U
+14:4:Attribute -> U
+14:4:Name -> U
+15:4:Attribute -> U
+15:4:Attribute -> U
+15:4:Name -> U
+16:4:Attribute -> U
+16:4:Attribute -> U
+16:4:Name -> U
+20:1:Attribute -> U
+20:1:Name -> U
+22:15:Name -> U
+23:4:Call -> U
+23:4:Attribute -> U
+23:4:Name -> U
+25:8:Name -> Module:salt.modules.win_lgpo
+26:37:Name -> U
+28:29:Attribute -> Func:salt.modules.file.copy | Inst:builtins.function
+28:29:Name -> Module:salt.modules.win_file
+29:36:Attribute -> Func:salt.modules.file.file_exists | Inst:builtins.function
+29:36:Name -> Module:salt.modules.win_file
+30:33:Attribute -> Func:salt.modules.win_file.makedirs_
+30:33:Name -> Module:salt.modules.win_file
+31:31:Attribute -> Func:salt.modules.win_file.remove
+31:31:Name -> Module:salt.modules.win_file
+32:30:Attribute -> Func:salt.modules.file.write | Inst:builtins.function
+32:30:Name -> Module:salt.modules.win_file
+35:53:Attribute -> Func:salt.utils.win_lgpo_auditpol.get_advaudit_policy_rows
+35:53:Name -> Module:salt.utils.win_lgpo_auditpol
+36:46:Attribute -> Func:salt.utils.win_lgpo_auditpol.get_auditpol_dump
+36:46:Name -> Module:salt.utils.win_lgpo_auditpol
+37:40:Attribute -> Func:salt.utils.win_lgpo_auditpol.set_setting
+37:40:Name -> Module:salt.utils.win_lgpo_auditpol
+40:8:Name -> Module:salt.utils.win_lgpo_auditpol
+43:8:Name -> Module:salt.modules.win_file
+45:34:Attribute -> Func:salt.utils.win_dacl.set_perms
+45:34:Name -> Module:salt.utils.win_dacl
+51:1:Call -> U
+51:1:Attribute -> U
+51:1:Name -> U
+59:18:Call -> U | Inst:salt.minion.SMinion
+59:18:Name -> Func:tests.support.sminion.create_sminion
+61:27:Call -> U
+61:27:Attribute -> U
+61:27:Attribute -> U
+61:27:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+61:27:Name -> U | Inst:salt.minion.SMinion
+64:24:Call -> U
+64:24:Attribute -> U
+64:24:Attribute -> U
+64:24:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+64:24:Name -> U | Inst:salt.minion.SMinion
+68:11:Name -> U
+68:35:Name -> Const:str:'Enabled'
+69:12:Call -> U
+69:12:Attribute -> U
+69:12:Attribute -> U
+69:12:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+69:12:Name -> U | Inst:salt.minion.SMinion
+70:60:Name -> Const:str:'Enabled'
+73:16:Call -> U
+73:16:Attribute -> U
+73:16:Attribute -> U
+73:16:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+73:16:Name -> U | Inst:salt.minion.SMinion
+76:19:Name -> Const:str:'Enabled'
+80:8:Call -> U
+80:8:Attribute -> U
+80:8:Attribute -> U
+80:8:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+80:8:Name -> U | Inst:salt.minion.SMinion
+81:56:Name -> U
+83:8:Call -> U
+83:8:Attribute -> U
+83:8:Attribute -> U
+83:8:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+83:8:Name -> U | Inst:salt.minion.SMinion
+84:58:Name -> U
+88:1:Attribute -> U
+88:1:Name -> U
+92:4:Call -> Const:bool:True
+92:4:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+92:4:Name -> Module:salt.modules.win_lgpo
+93:54:Name -> Const:str:'No Auditing'
+96:8:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+96:8:Attribute -> Func:salt.modules.win_lgpo.get_policy
+96:8:Name -> Module:salt.modules.win_lgpo
+99:11:Name -> Const:str:'No Auditing'
+103:1:Attribute -> U
+103:1:Name -> U
+107:4:Call -> Const:bool:True
+107:4:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+107:4:Name -> Module:salt.modules.win_lgpo
+108:54:Name -> Const:str:'Success'
+111:8:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+111:8:Attribute -> Func:salt.modules.win_lgpo.get_policy
+111:8:Name -> Module:salt.modules.win_lgpo
+114:11:Name -> Const:str:'Success'
+118:1:Call -> U
+118:1:Attribute -> U
+118:1:Attribute -> U
+118:1:Name -> U
+131:4:Call -> Const:bool:True
+131:4:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+131:4:Name -> Module:salt.modules.win_lgpo
+131:79:Name -> U
+133:13:Call -> U
+133:13:Attribute -> Func:salt.modules.win_lgpo._get_advaudit_value
+133:13:Name -> Module:salt.modules.win_lgpo
+134:11:Name -> U
+134:21:Name -> U
+138:20:Call -> U
+138:20:Attribute -> U
+138:20:Name -> U
+138:31:Attribute -> ERR
+138:31:Name -> Module:salt.modules.win_lgpo
+139:17:Call -> U
+139:17:Attribute -> U
+139:17:Name -> U
+140:8:Attribute -> ERR
+140:8:Name -> Module:salt.modules.win_lgpo
+142:49:Attribute -> Func:salt.utils.win_lgpo_auditpol.get_advaudit_policy_rows
+142:49:Name -> Module:salt.utils.win_lgpo_auditpol
+143:42:Attribute -> Func:salt.utils.win_lgpo_auditpol.get_auditpol_dump
+143:42:Name -> Module:salt.utils.win_lgpo_auditpol
+146:9:Name -> U
+146:24:Name -> U
+147:33:Call -> U
+147:33:Attribute -> Func:salt.modules.win_lgpo._get_advaudit_defaults
+147:33:Name -> Module:salt.modules.win_lgpo
+150:20:Call -> U
+150:20:Attribute -> U
+150:20:Name -> U
+151:8:Attribute -> ERR
+151:8:Name -> Module:salt.modules.win_lgpo
+151:54:Name -> Dict:1
+153:9:Name -> U
+153:24:Name -> U
+154:15:Call -> U
+154:15:Attribute -> Func:salt.modules.win_lgpo._get_advaudit_defaults
+154:15:Name -> Module:salt.modules.win_lgpo
+154:52:Name -> Dict:1
+158:25:Call -> U
+158:25:Name -> U
+159:9:Call -> U
+159:9:Attribute -> U
+159:9:Name -> U
+159:22:Name -> Module:salt.modules.win_lgpo
+159:59:Name -> U
+160:13:Call -> U
+160:13:Attribute -> U
+160:13:Name -> U
+160:27:Name -> Class:salt.exceptions.CommandExecutionError
+161:12:Call -> Const:bool:True
+161:12:Attribute -> Func:salt.modules.win_lgpo._set_advaudit_value
+161:12:Name -> Module:salt.modules.win_lgpo
+165:25:Call -> U
+165:25:Name -> U
+166:24:Call -> U
+166:24:Name -> U
+168:9:Call -> U
+168:9:Attribute -> U
+168:9:Name -> U
+168:25:Attribute -> Const:int:10
+168:25:Name -> Module:logging
+169:13:Call -> U
+169:13:Attribute -> U
+169:13:Name -> U
+170:12:Name -> Module:salt.modules.win_lgpo
+170:49:Name -> U
+171:11:Call -> U
+171:11:Attribute -> U
+171:11:Name -> U
+172:12:Name -> Module:salt.modules.win_lgpo
+172:48:Name -> U
+173:11:Call -> U
+173:11:Attribute -> U
+173:11:Name -> U
+174:12:Attribute -> ERR
+174:12:Name -> Module:salt.modules.win_lgpo
+174:34:Name -> Dict:1
+176:12:Call -> Const:bool:True
+176:12:Attribute -> Func:salt.modules.win_lgpo._set_advaudit_value
+176:12:Name -> Module:salt.modules.win_lgpo
+177:55:Attribute -> U
+177:55:Name -> U
+178:56:Attribute -> U
+178:56:Name -> U

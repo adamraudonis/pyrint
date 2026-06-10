@@ -1,0 +1,247 @@
+32:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+32:10:Attribute -> Func:logging.getLogger
+32:10:Name -> Module:logging
+32:28:Name -> Const:str:'homeassistant.components.telnet.switch' | Const:str:'__main__'
+37:16:Call -> U
+37:16:Attribute -> U
+37:16:Name -> U
+39:8:Call -> U
+39:8:Attribute -> U
+39:8:Name -> U
+39:21:Name -> Const:str:'command_off'
+39:40:Attribute -> Func:homeassistant.helpers.config_validation.string
+39:40:Name -> Module:homeassistant.helpers.config_validation
+40:8:Call -> U
+40:8:Attribute -> U
+40:8:Name -> U
+40:21:Name -> Const:str:'command_on'
+40:39:Attribute -> Func:homeassistant.helpers.config_validation.string
+40:39:Name -> Module:homeassistant.helpers.config_validation
+41:8:Call -> U
+41:8:Attribute -> U
+41:8:Name -> U
+41:21:Name -> Const:str:'resource'
+41:37:Attribute -> Func:homeassistant.helpers.config_validation.string
+41:37:Name -> Module:homeassistant.helpers.config_validation
+42:8:Call -> U
+42:8:Attribute -> U
+42:8:Name -> U
+42:21:Name -> Const:str:'value_template'
+42:43:Attribute -> Func:homeassistant.helpers.config_validation.template
+42:43:Name -> Module:homeassistant.helpers.config_validation
+43:8:Call -> U
+43:8:Attribute -> U
+43:8:Name -> U
+43:21:Name -> Const:str:'command_state'
+43:42:Attribute -> Func:homeassistant.helpers.config_validation.string
+43:42:Name -> Module:homeassistant.helpers.config_validation
+44:8:Call -> U
+44:8:Attribute -> U
+44:8:Name -> U
+44:21:Name -> Const:str:'name'
+44:33:Attribute -> Func:homeassistant.helpers.config_validation.string
+44:33:Name -> Module:homeassistant.helpers.config_validation
+45:8:Call -> U
+45:8:Attribute -> U
+45:8:Name -> U
+45:21:Name -> Const:str:'port'
+45:40:Name -> Const:int:23
+45:55:Attribute -> U
+45:55:Name -> Module:homeassistant.helpers.config_validation
+46:8:Call -> U
+46:8:Attribute -> U
+46:8:Name -> U
+46:21:Name -> Const:str:'timeout'
+46:43:Name -> Const:float:0.2
+46:61:Call -> U
+46:61:Attribute -> U
+46:61:Name -> U
+46:72:Name -> Class:builtins.float
+50:18:Call -> U
+50:18:Attribute -> U
+50:18:Name -> U
+51:5:Call -> U
+51:5:Attribute -> U
+51:5:Name -> U
+51:18:Name -> Const:str:'switches'
+51:34:Call -> Func:homeassistant.helpers.config_validation.schema_with_slug_keys.verify
+51:34:Attribute -> Func:homeassistant.helpers.config_validation.schema_with_slug_keys
+51:34:Name -> Module:homeassistant.helpers.config_validation
+51:59:Name -> U
+54:16:Call -> Inst:_pydatetime.timedelta
+54:16:Name -> Class:_pydatetime.timedelta
+58:10:Name -> U
+59:12:Name -> Class:builtins.dict
+60:18:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+61:20:Name -> Class:builtins.dict
+64:13:Name -> Class:builtins.dict
+64:18:Name -> Class:builtins.str
+64:23:Name -> Class:typing.Any
+64:30:Name -> U
+64:37:Name -> Const:str:'switches'
+67:36:Call -> U
+67:36:Attribute -> U
+67:36:Name -> U
+68:8:Call -> ERR
+68:8:Attribute -> BM:builtins.list.append
+68:8:Name -> List:0
+69:12:Call -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+69:12:Name -> Class:homeassistant.components.telnet.switch.TelnetSwitch
+70:16:Name -> U
+71:16:Name -> U
+71:30:Name -> Const:str:'resource'
+72:16:Name -> U
+72:30:Name -> Const:str:'port'
+73:16:Call -> U
+73:16:Attribute -> U
+73:16:Name -> U
+73:34:Name -> Const:str:'name'
+73:45:Name -> U
+74:16:Name -> U
+74:30:Name -> Const:str:'command_on'
+75:16:Name -> U
+75:30:Name -> Const:str:'command_off'
+76:16:Call -> U
+76:16:Attribute -> U
+76:16:Name -> U
+76:34:Name -> Const:str:'command_state'
+77:16:Call -> U
+77:16:Attribute -> U
+77:16:Name -> U
+77:34:Name -> Const:str:'value_template'
+78:16:Name -> U
+78:30:Name -> Const:str:'timeout'
+82:11:Name -> List:0
+83:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+83:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+83:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+86:4:Call -> U
+86:4:Name -> U
+86:17:Name -> List:0
+89:19:Name -> Class:homeassistant.components.switch.SwitchEntity
+94:19:Name -> Class:builtins.str
+95:18:Name -> Class:builtins.str
+96:14:Name -> Class:builtins.int
+97:23:Name -> Class:builtins.str
+98:20:Name -> Class:builtins.str
+99:21:Name -> Class:builtins.str
+100:23:Name -> Class:builtins.str
+101:24:Name -> U
+102:17:Name -> Class:builtins.float
+105:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+105:25:Call -> U
+105:25:Attribute -> BM:builtins.str.format
+105:25:Name -> Const:str:'switch.{}'
+105:49:Name -> U
+106:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+106:25:Name -> U
+107:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+107:21:Name -> U
+108:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+108:26:Name -> U
+109:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+110:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+110:27:Name -> U
+111:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+111:28:Name -> U
+112:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+112:30:Name -> U
+113:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+113:31:Name -> U
+114:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+114:24:Name -> U
+115:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+115:33:Call -> U
+115:33:Name -> Class:builtins.bool
+115:38:Name -> U
+116:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+116:35:Call -> U
+116:35:Name -> Class:builtins.bool
+116:40:Name -> U
+118:39:Name -> Class:builtins.str
+118:47:Name -> Class:builtins.str
+120:21:Call -> Inst:telnetlib.Telnet
+120:21:Attribute -> Class:telnetlib.Telnet
+120:21:Name -> Module:telnetlib
+120:38:Attribute -> U
+120:38:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+120:54:Attribute -> U
+120:54:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+121:12:Call -> Const:NoneType:None
+121:12:Attribute -> BM:telnetlib.Telnet.write
+121:12:Name -> Inst:telnetlib.Telnet
+121:25:Call -> U
+121:25:Attribute -> U
+121:25:Name -> U
+122:23:Call -> Const:bytes:b'' | U
+122:23:Attribute -> BM:telnetlib.Telnet.read_until
+122:23:Name -> Inst:telnetlib.Telnet
+122:56:Attribute -> U
+122:56:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+123:15:Name -> Class:builtins.OSError
+124:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+124:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+124:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+125:58:Name -> U
+125:67:Call -> ERR
+125:67:Name -> Func:builtins.repr
+125:72:Name -> ExcInst:builtins.OSError
+128:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+128:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+128:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+128:45:Call -> Const:str:'' | U
+128:45:Attribute -> BM:builtins.str.strip | U
+128:45:Call -> Const:str:'' | U
+128:45:Attribute -> BM:builtins.bytes.decode | U
+128:45:Name -> Const:bytes:b'' | U
+129:15:Call -> Const:str:'' | U
+129:15:Attribute -> BM:builtins.str.strip | U
+129:15:Call -> Const:str:'' | U
+129:15:Attribute -> BM:builtins.bytes.decode | U
+129:15:Name -> Const:bytes:b'' | U
+133:15:Attribute -> U
+133:15:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+135:19:Call -> Const:NoneType:None | Const:str:'' | U
+135:19:Attribute -> BM:homeassistant.components.telnet.switch.TelnetSwitch._telnet_command
+135:19:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+135:40:Attribute -> U
+135:40:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+136:11:Name -> Const:NoneType:None | Const:str:'' | U
+136:24:Attribute -> U
+136:24:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+137:23:Call -> U
+137:23:Attribute -> U
+137:23:Attribute -> U
+137:23:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+137:76:Name -> Const:NoneType:None | Const:str:'' | U
+139:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+139:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+139:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+139:62:Attribute -> U
+139:62:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+141:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+141:27:Name -> U
+143:32:Name -> Class:typing.Any
+145:8:Call -> Const:NoneType:None | U
+145:8:Attribute -> BM:homeassistant.components.telnet.switch.TelnetSwitch._telnet_command
+145:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+145:29:Attribute -> U
+145:29:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+146:11:Attribute -> BM:homeassistant.helpers.entity.Entity.assumed_state
+146:11:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+147:12:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+148:12:Call -> Const:NoneType:None
+148:12:Attribute -> BM:homeassistant.helpers.entity.Entity.schedule_update_ha_state
+148:12:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+150:33:Name -> Class:typing.Any
+152:8:Call -> Const:NoneType:None | U
+152:8:Attribute -> BM:homeassistant.components.telnet.switch.TelnetSwitch._telnet_command
+152:8:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+152:29:Attribute -> U
+152:29:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+153:11:Attribute -> BM:homeassistant.helpers.entity.Entity.assumed_state
+153:11:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+154:12:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch
+155:12:Call -> Const:NoneType:None
+155:12:Attribute -> BM:homeassistant.helpers.entity.Entity.schedule_update_ha_state
+155:12:Name -> Inst:homeassistant.components.telnet.switch.TelnetSwitch

@@ -1,0 +1,61 @@
+10:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+10:6:Attribute -> Func:logging.getLogger
+10:6:Name -> Module:logging
+10:24:Name -> Const:str:'salt.modules.keyboard' | Const:str:'__main__'
+17:7:Call -> Const:NoneType:None | Const:str:'localectl' | U
+17:7:Attribute -> Func:salt.utils.path.which
+17:7:Attribute -> Module:salt.utils.path
+17:7:Attribute -> Module:salt.utils
+17:7:Name -> Module:salt
+17:45:Name -> ERR
+42:7:Call -> Const:NoneType:None | Const:str:'localectl' | U
+42:7:Attribute -> Func:salt.utils.path.which
+42:7:Attribute -> Module:salt.utils.path
+42:7:Attribute -> Module:salt.utils
+42:7:Name -> Module:salt
+44:21:Name -> ERR
+46:21:Name -> ERR
+48:21:Name -> ERR
+50:10:Call -> ERR
+50:10:Attribute -> ERR
+50:10:Call -> ERR
+50:10:Name -> ERR
+50:30:Name -> Const:str:'' | Const:str:'localectl | grep Keymap | sed -e"s/: /= | Const:str:'grep LAYOUT /etc/sysconfig/keyboard | g | Const:str:'grep XKBLAYOUT /etc/default/keyboard |  | Const:str:'grep "^keymap" /etc/conf.d/keymaps | gr
+51:10:Call -> U
+51:10:Attribute -> U
+51:10:Name -> U
+52:11:Name -> U
+65:7:Call -> Const:NoneType:None | Const:str:'localectl' | U
+65:7:Attribute -> Func:salt.utils.path.which
+65:7:Attribute -> Module:salt.utils.path
+65:7:Attribute -> Module:salt.utils
+65:7:Name -> Module:salt
+66:8:Call -> ERR
+66:8:Name -> ERR
+66:52:Name -> U
+67:21:Name -> ERR
+68:8:Call -> ERR
+68:8:Name -> ERR
+69:63:Name -> U
+71:21:Name -> ERR
+72:8:Call -> ERR
+72:8:Name -> ERR
+73:67:Name -> U
+75:21:Name -> ERR
+76:8:Call -> ERR
+76:8:Name -> ERR
+76:76:Name -> U
+77:11:Name -> U
+91:10:Call -> ERR
+91:10:Attribute -> ERR
+91:10:Call -> ERR
+91:10:Name -> ERR
+91:30:Name -> Const:str:'setxkbmap -query | grep layout'
+92:11:Call -> U
+92:11:Attribute -> U
+92:11:Name -> U
+105:23:Name -> U
+106:4:Call -> ERR
+106:4:Name -> ERR
+106:24:Name -> Const:str:'setxkbmap Uninferable'
+107:11:Name -> U

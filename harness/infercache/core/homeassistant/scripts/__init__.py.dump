@@ -1,0 +1,125 @@
+20:14:Name -> Class:builtins.list
+20:19:Name -> Class:builtins.str
+20:28:Name -> Class:builtins.int
+23:11:Call -> U
+23:11:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+23:11:Attribute -> Module:posixpath | Module:ntpath
+23:11:Name -> Module:os
+23:27:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+24:15:Call -> ERR
+24:15:Attribute -> Func:posix.listdir
+24:15:Name -> Module:os
+24:26:Name -> U
+25:11:Name -> U
+28:11:Call -> Const:bool:False | U
+28:11:Attribute -> Func:genericpath.isdir | U
+28:11:Attribute -> Module:posixpath | Module:ntpath
+28:11:Name -> Module:os
+28:25:Call -> U
+28:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+28:25:Attribute -> Module:posixpath | Module:ntpath
+28:25:Name -> Module:os
+28:38:Name -> U
+28:44:Name -> U
+29:12:Call -> ERR
+29:12:Attribute -> BM:builtins.list.append
+29:12:Name -> List:0
+29:27:Name -> U
+30:13:Name -> U
+30:38:Call -> U
+30:38:Attribute -> U
+30:38:Name -> U
+31:12:Call -> ERR
+31:12:Attribute -> BM:builtins.list.append
+31:12:Name -> List:0
+31:27:Name -> U
+33:11:Name -> U
+34:8:Call -> ERR
+34:8:Name -> Func:builtins.print
+35:8:Call -> ERR
+35:8:Name -> Func:builtins.print
+35:36:Call -> Const:str:''
+35:36:Attribute -> BM:builtins.str.join
+35:46:Name -> List:0
+38:7:Name -> U
+38:22:Name -> List:0
+39:8:Call -> ERR
+39:8:Name -> Func:builtins.print
+40:8:Call -> ERR
+40:8:Name -> Func:builtins.print
+40:36:Call -> Const:str:''
+40:36:Attribute -> BM:builtins.str.join
+40:46:Name -> List:0
+43:13:Call -> U | Const:NoneType:None
+43:13:Attribute -> Func:importlib.import_module
+43:13:Name -> Module:importlib
+43:62:Name -> U
+45:17:Call -> U
+45:17:Name -> Func:homeassistant.scripts.extract_config_dir
+47:11:Call -> U
+47:11:Name -> Func:homeassistant.util.package.is_virtual_env
+48:8:Call -> U
+48:8:Attribute -> Func:asyncio.runners.run
+48:8:Name -> Module:asyncio
+48:20:Call -> U
+48:20:Name -> Func:homeassistant.bootstrap.async_mount_local_lib_path
+48:47:Name -> U
+50:18:Call -> Dict:2
+50:18:Name -> Func:homeassistant.requirements.pip_kwargs
+50:29:Name -> U
+52:4:Call -> Const:NoneType:None
+52:4:Attribute -> Func:logging.basicConfig
+52:4:Name -> Module:logging
+52:31:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None
+52:31:Name -> Module:sys
+52:49:Attribute -> Const:int:20
+52:49:Name -> Module:logging
+54:15:Call -> U
+54:15:Name -> Func:builtins.getattr
+54:23:Name -> U | Const:NoneType:None
+55:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+55:11:Name -> Func:homeassistant.util.package.is_installed
+55:24:Name -> U
+58:15:Call -> Const:bool:False | Const:bool:True
+58:15:Name -> Func:homeassistant.util.package.install_package
+58:31:Name -> U
+58:38:Name -> Dict:2
+59:12:Call -> ERR
+59:12:Name -> Func:builtins.print
+59:67:Name -> U
+62:4:Call -> Const:NoneType:None | Const:NoneType:None
+62:4:Attribute -> Func:asyncio.events.set_event_loop_policy | Lambda:tests.conftest:156
+62:4:Name -> Module:asyncio
+62:34:Call -> Inst:homeassistant.runner.HassEventLoopPolicy
+62:34:Attribute -> Class:homeassistant.runner.HassEventLoopPolicy
+62:34:Name -> Module:homeassistant.runner
+64:11:Call -> U
+64:11:Attribute -> U
+64:11:Name -> U | Const:NoneType:None
+64:22:Name -> U
+67:29:Name -> Class:_collections_abc.Sequence
+67:38:Name -> Class:builtins.str
+67:61:Name -> Class:builtins.str
+69:13:Call -> Inst:argparse.ArgumentParser
+69:13:Attribute -> Class:argparse.ArgumentParser
+69:13:Name -> Module:argparse
+70:4:Call -> U
+70:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+70:4:Name -> Inst:argparse.ArgumentParser
+71:18:Call -> Tuple:2
+71:18:Attribute -> BM:argparse.ArgumentParser.parse_known_args
+71:18:Name -> Inst:argparse.ArgumentParser
+71:42:Name -> Const:NoneType:None | U
+74:11:Attribute -> U
+74:11:Name -> U | Inst:argparse.Namespace
+73:8:Call -> U
+73:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+73:8:Attribute -> Module:posixpath | Module:ntpath
+73:8:Name -> Module:os
+73:21:Call -> ERR
+73:21:Attribute -> Func:posix.getcwd
+73:21:Name -> Module:os
+73:34:Attribute -> U
+73:34:Name -> U | Inst:argparse.Namespace
+75:13:Call -> U
+75:13:Name -> U

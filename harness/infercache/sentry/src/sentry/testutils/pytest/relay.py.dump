@@ -1,0 +1,280 @@
+19:7:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:7:Attribute -> Func:logging.getLogger
+19:7:Name -> Module:logging
+19:25:Name -> Const:str:'src.sentry.testutils.pytest.relay' | Const:str:'__main__'
+23:19:Call -> U | Const:str:'ghcr.io/getsentry/relay:nightly'
+23:19:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+23:19:Name -> Dict:43 | Inst:os._Environ
+26:38:Name -> Class:builtins.str
+27:7:Attribute -> U
+27:7:Name -> U
+28:43:Attribute -> U
+28:43:Name -> U
+33:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+33:11:Attribute -> Func:posixpath.abspath | U
+33:11:Name -> Module:posixpath | Module:ntpath
+33:24:Call -> U
+33:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+33:24:Name -> Module:posixpath | Module:ntpath
+33:34:Call -> U
+33:34:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+33:34:Name -> Module:posixpath | Module:ntpath
+33:47:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+38:20:Call -> U
+38:20:Attribute -> U
+38:20:Attribute -> U
+38:20:Name -> U
+38:49:Name -> U
+39:11:Name -> Class:builtins.Exception
+43:20:Call -> U
+43:20:Attribute -> U
+43:20:Name -> U
+44:20:Call -> U
+44:20:Attribute -> U
+44:20:Name -> U
+45:20:Call -> U
+45:20:Attribute -> U
+45:20:Name -> U
+47:22:Name -> List:3
+49:16:Call -> U
+49:16:Name -> Lambda:src.sentry.testutils.pytest.relay:43 | Lambda:src.sentry.testutils.pytest.relay:44 | Lambda:src.sentry.testutils.pytest.relay:45
+50:19:Name -> Class:builtins.Exception
+54:1:Call -> U
+54:1:Attribute -> U
+54:1:Name -> U
+56:13:Call -> U
+56:13:Attribute -> BM:builtins.str.format
+57:8:Call -> U
+57:8:Attribute -> BM:_pydatetime.date.strftime | U
+57:8:Call -> Inst:_pydatetime.datetime | U
+57:8:Attribute -> BM:_pydatetime.datetime.now
+57:8:Attribute -> Class:_pydatetime.datetime
+57:8:Name -> Module:datetime
+59:18:Call -> U
+59:18:Attribute -> U
+59:18:Name -> U
+59:40:Name -> U
+60:4:Call -> U
+60:4:Attribute -> U
+60:4:Name -> U
+61:18:Call -> Const:str:''
+61:18:Name -> Class:builtins.str
+61:22:Name -> U
+63:29:Call -> Inst:urllib.parse.ParseResult
+63:29:Name -> Func:urllib.parse.urlparse
+63:38:Attribute -> U
+63:38:Name -> U
+64:7:Attribute -> U | Const:NoneType:None | Inst:builtins.int
+64:7:Name -> Inst:urllib.parse.ParseResult
+65:15:Attribute -> U | Const:NoneType:None | Inst:builtins.int
+65:15:Name -> Inst:urllib.parse.ParseResult
+69:20:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+69:20:Name -> Func:src.sentry.testutils.pytest.relay._get_template_dir
+72:17:Call -> U
+72:17:Attribute -> U
+72:17:Name -> U
+74:15:Call -> U
+74:15:Attribute -> U
+74:15:Name -> U
+79:28:Call -> U
+79:28:Attribute -> U
+79:28:Attribute -> U
+79:28:Name -> U
+80:8:Name -> U
+82:11:Name -> U
+82:23:Attribute -> U
+82:23:Attribute -> U
+82:23:Attribute -> U
+82:23:Name -> U
+85:54:Name -> U | Const:NoneType:None | Inst:builtins.int | Const:int:80
+86:22:Name -> U
+89:20:Name -> U
+90:30:Call -> U
+90:30:Attribute -> U
+90:30:Name -> U
+91:32:Call -> U
+91:32:Attribute -> U
+91:32:Name -> U
+94:18:Name -> List:2
+95:22:Call -> U
+95:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+95:22:Name -> Module:posixpath | Module:ntpath
+95:32:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+95:47:Name -> Const:str:'config.yml' | Const:str:'credentials.json'
+96:20:Call -> U
+96:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+96:20:Name -> Module:posixpath | Module:ntpath
+96:30:Name -> Const:str:''
+96:43:Name -> Const:str:'config.yml' | Const:str:'credentials.json'
+97:13:Call -> ERR
+97:13:Name -> Func:_io.open
+97:18:Name -> U
+98:22:Call -> U
+98:22:Attribute -> U
+98:22:Name -> U
+100:33:Call -> DictItems
+100:33:Attribute -> BM:builtins.dict.items
+100:33:Name -> Dict:7
+101:22:Call -> U
+101:22:Attribute -> U
+101:22:Name -> U
+101:48:Name -> Const:str:'SENTRY_HOST' | Const:str:'RELAY_PORT' | Const:str:'KAFKA_HOST' | Const:str:'REDIS_HOST' | Const:str:'REDIS_DB' | Const:str:'KAFKA_TOPIC_EVENTS' | Const:str:'KAFKA_TOPIC_OUTCOMES'
+101:58:Call -> Const:str:''
+101:58:Name -> Class:builtins.str
+101:62:Name -> Const:str:'http://host.docker.internal:Uninferable | Const:str:'http://host.docker.internal:None/' | Const:str:'http://host.docker.internal:Instance of | Const:str:'http://host.docker.internal:80/' | U | Const:str:'kafka' | Const:str:'redis'
+103:13:Call -> ERR
+103:13:Name -> Func:_io.open
+103:18:Name -> U
+104:12:Call -> U
+104:12:Attribute -> U
+104:12:Name -> U
+104:25:Name -> U
+108:9:Call -> U
+108:9:Name -> U
+109:25:Call -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+109:25:Name -> Func:src.sentry.testutils.pytest.relay._relay_server_container_name
+110:8:Call -> Const:NoneType:None
+110:8:Name -> Func:src.sentry.testutils.pytest.relay._remove_container_if_exists
+110:36:Name -> U
+110:51:Name -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+113:17:Name -> U | Const:str:'ghcr.io/getsentry/relay:nightly'
+114:29:Name -> U
+114:41:Name -> U
+117:16:Name -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+118:20:Name -> Const:str:''
+124:46:Name -> U
+124:71:Name -> Dict:8
+126:10:Name -> Dict:2
+129:4:Call -> Const:NoneType:None | Const:NoneType:None
+129:4:Attribute -> Func:shutil.rmtree
+129:4:Name -> Module:shutil
+129:18:Name -> Const:str:''
+130:11:Call -> U | Const:bool:False
+130:11:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+130:11:Name -> Dict:43 | Inst:os._Environ
+131:13:Call -> U
+131:13:Name -> U
+132:12:Call -> Const:NoneType:None
+132:12:Name -> Func:src.sentry.testutils.pytest.relay._remove_container_if_exists
+132:40:Name -> U
+132:55:Name -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+135:1:Call -> U
+135:1:Attribute -> U
+135:1:Name -> U
+137:4:Call -> Const:NoneType:None
+137:4:Name -> Func:src.sentry.testutils.pytest.relay.adjust_settings_for_relay_tests
+137:36:Name -> U
+138:14:Name -> U
+139:9:Call -> U
+139:9:Name -> U
+140:25:Call -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+140:25:Name -> Func:src.sentry.testutils.pytest.relay._relay_server_container_name
+141:8:Call -> Const:NoneType:None
+141:8:Name -> Func:src.sentry.testutils.pytest.relay._remove_container_if_exists
+141:36:Name -> U
+141:51:Name -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+144:23:Call -> Inst:builtins.range
+144:23:Name -> Class:builtins.range
+146:28:Call -> U
+146:28:Attribute -> U
+146:28:Attribute -> U
+146:28:Name -> U
+146:59:Name -> U
+148:19:Attribute -> U
+148:19:Attribute -> U
+148:19:Name -> U
+149:47:Call -> Const:str:''
+149:47:Name -> Class:builtins.str
+149:51:Name -> U
+149:58:Name -> U
+150:20:Call -> ERR
+150:20:Attribute -> Func:time.sleep
+150:20:Name -> Module:time
+150:40:Name -> U
+151:20:Call -> Const:NoneType:None
+151:20:Name -> Func:src.sentry.testutils.pytest.relay._remove_container_if_exists
+151:48:Name -> U
+151:63:Name -> Const:str:'sentry_test_relay_server_Uninferable' | Const:str:'sentry_test_relay_server'
+155:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+155:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+155:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+157:10:Name -> U
+159:13:Call -> Inst:builtins.range
+159:13:Name -> Class:builtins.range
+161:12:Call -> U
+161:12:Attribute -> U
+161:12:Name -> U
+161:25:Name -> U
+163:15:Name -> Class:builtins.Exception
+164:15:Name -> U
+165:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+165:16:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+165:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+165:31:Call -> Const:str:''
+165:31:Name -> Class:builtins.str
+165:35:Name -> ExcInst:builtins.Exception
+166:22:Call -> ExcInst:builtins.ValueError
+166:22:Name -> Class:builtins.ValueError
+167:57:Call -> U
+167:57:Attribute -> BM:_pydatetime.datetime.isoformat | U
+167:57:Call -> Inst:_pydatetime.datetime | U
+167:57:Attribute -> BM:_pydatetime.datetime.now
+167:57:Attribute -> Class:_pydatetime.datetime
+167:57:Name -> Module:datetime
+167:96:Name -> U
+167:104:Call -> U
+167:104:Attribute -> U
+167:104:Call -> U
+167:104:Attribute -> U
+167:104:Name -> U
+168:23:Name -> ExcInst:builtins.Exception
+169:12:Call -> ERR
+169:12:Attribute -> Func:time.sleep
+169:12:Name -> Module:time
+169:32:Name -> U
+171:14:Call -> ExcInst:builtins.ValueError
+171:14:Name -> Class:builtins.ValueError
+173:18:Name -> U
+183:4:Name -> U
+190:4:Name -> U
+199:4:Name -> U
+200:4:Name -> U
+203:1:Attribute -> U
+203:1:Name -> U
+206:15:Call -> U
+206:15:Attribute -> BM:builtins.str.format
+206:41:Name -> U
+206:62:Name -> U
+208:11:Name -> Func:src.sentry.testutils.pytest.relay.get_relay_store_url.inner
+211:1:Attribute -> U
+211:1:Name -> U
+214:15:Call -> U
+214:15:Attribute -> BM:builtins.str.format
+214:58:Name -> U
+214:79:Name -> U
+214:91:Name -> U
+216:11:Name -> Func:src.sentry.testutils.pytest.relay.get_relay_security_url.inner
+219:1:Attribute -> U
+219:1:Name -> U
+222:15:Call -> U
+222:15:Attribute -> BM:builtins.str.format
+222:58:Name -> U
+222:79:Name -> U
+222:91:Name -> U
+224:11:Name -> Func:src.sentry.testutils.pytest.relay.get_relay_minidump_url.inner
+227:1:Attribute -> U
+227:1:Name -> U
+230:15:Call -> U
+230:15:Attribute -> BM:builtins.str.format
+230:45:Name -> U
+230:66:Name -> U
+230:78:Name -> U
+232:11:Name -> Func:src.sentry.testutils.pytest.relay.get_relay_unreal_url.inner
+235:1:Attribute -> U
+235:1:Name -> U
+238:15:Call -> U
+238:15:Attribute -> BM:builtins.str.format
+238:57:Name -> U
+238:78:Name -> U
+238:90:Name -> U
+240:11:Name -> Func:src.sentry.testutils.pytest.relay.get_relay_attachments_url.inner

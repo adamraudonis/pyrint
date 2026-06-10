@@ -1,0 +1,107 @@
+11:7:Name -> Class:builtins.ImportError
+15:1:Call -> U
+15:1:Attribute -> U
+15:1:Attribute -> U
+15:1:Name -> U
+15:24:Name -> Const:bool:True | Const:bool:False
+16:1:Attribute -> U
+16:1:Attribute -> U
+16:1:Name -> U
+17:21:Name -> Class:tests.support.unit.TestCase
+18:5:Attribute -> U
+18:5:Attribute -> U
+18:5:Name -> U
+21:18:Call -> U
+21:18:Attribute -> Func:salt.utils.win_pdh.list_objects
+21:18:Name -> Module:salt.utils.win_pdh
+22:20:Name -> List:5
+23:12:Call -> Const:NoneType:None
+23:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+23:12:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+23:28:Name -> Const:str:'Cache' | Const:str:'Memory' | Const:str:'Process' | Const:str:'Processor' | Const:str:'System'
+23:36:Name -> U
+26:19:Call -> U
+26:19:Attribute -> Func:salt.utils.win_pdh.list_counters
+26:19:Name -> Module:salt.utils.win_pdh
+28:20:Name -> List:3
+29:12:Call -> Const:NoneType:None
+29:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+29:12:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+29:28:Name -> Const:str:'% Processor Time' | Const:str:'% User Time' | Const:str:'% DPC Time'
+29:36:Name -> U
+32:20:Call -> U
+32:20:Attribute -> Func:salt.utils.win_pdh.list_instances
+32:20:Name -> Module:salt.utils.win_pdh
+34:20:Name -> List:2
+35:12:Call -> Const:NoneType:None
+35:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+35:12:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+35:28:Name -> Const:str:'0' | Const:str:'_Total'
+35:36:Name -> U
+46:25:Call -> List:0
+46:25:Attribute -> Func:salt.utils.win_pdh.build_counter_list
+46:25:Name -> Module:salt.utils.win_pdh
+46:52:Name -> List:6
+47:23:Name -> List:0
+48:12:Call -> Const:NoneType:None
+48:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+48:12:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+48:28:Call -> ERR
+48:28:Name -> Func:builtins.isinstance
+48:39:Name -> U
+48:48:Attribute -> Class:salt.utils.win_pdh.Counter
+48:48:Name -> Module:salt.utils.win_pdh
+51:23:Name -> List:0
+52:12:Call -> ERR
+52:12:Attribute -> BM:builtins.list.append
+52:12:Name -> List:0
+52:35:Attribute -> U
+52:35:Name -> U
+62:8:Call -> Const:NoneType:None
+62:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+62:8:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+62:25:Name -> List:0
+62:42:Name -> List:6
+64:5:Attribute -> U
+64:5:Attribute -> U
+64:5:Name -> U
+66:18:Call -> Dict:0
+66:18:Attribute -> Func:salt.utils.win_pdh.get_all_counters
+66:18:Name -> Module:salt.utils.win_pdh
+76:20:Name -> List:7
+77:12:Call -> Const:NoneType:None
+77:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+77:12:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+77:28:Name -> Const:str:'\\Processor(*)\\% Processor Time' | Const:str:'\\Processor(*)\\% Idle Time' | Const:str:'\\Processor(*)\\DPC Rate' | Const:str:'\\Processor(*)\\% Privileged Time' | Const:str:'\\Processor(*)\\DPCs Queued/sec' | Const:str:'\\Processor(*)\\% Interrupt Time' | Const:str:'\\Processor(*)\\Interrupts/sec'
+77:36:Name -> Dict:0
+79:5:Attribute -> U
+79:5:Attribute -> U
+79:5:Name -> U
+89:18:Call -> Dict:0 | Dict:0
+89:18:Attribute -> Func:salt.utils.win_pdh.get_counters
+89:18:Name -> Module:salt.utils.win_pdh
+89:39:Name -> List:6
+98:20:Name -> List:6
+99:12:Call -> Const:NoneType:None
+99:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+99:12:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+99:28:Name -> Const:str:'\\Memory\\Available Bytes' | Const:str:'\\Paging File(*)\\% Usage' | Const:str:'\\Processor(*)\\% Processor Time' | Const:str:'\\Server\\Work Item Shortages' | Const:str:'\\Server Work Queues(*)\\Queue Length' | Const:str:'\\System\\Context Switches/sec'
+99:36:Name -> Dict:0 | Dict:0
+102:18:Call -> Dict:0 | Dict:0
+102:18:Attribute -> Func:salt.utils.win_pdh.get_counter
+102:18:Name -> Module:salt.utils.win_pdh
+103:8:Call -> Const:NoneType:None
+103:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+103:8:Name -> Inst:tests.unit.utils.test_win_pdh.WinPdhTestCase
+103:62:Name -> Dict:0 | Dict:0
+105:5:Call -> U
+105:5:Name -> U
+107:8:Name -> U
+107:33:Call -> U
+107:33:Attribute -> U
+107:33:Name -> U
+118:18:Call -> Dict:0 | Dict:0
+118:18:Attribute -> Func:salt.utils.win_pdh.get_counters
+118:18:Name -> Module:salt.utils.win_pdh
+118:39:Name -> List:6
+119:15:Name -> Dict:0 | Dict:0

@@ -1,0 +1,198 @@
+26:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+26:10:Attribute -> Func:logging.getLogger
+26:10:Name -> Module:logging
+26:28:Name -> Const:str:'homeassistant.components.dnsip' | Const:str:'__main__'
+29:1:Name -> Func:dataclasses.dataclass
+33:19:Attribute -> U
+33:19:Name -> U
+34:19:Attribute -> U
+34:19:Name -> U
+37:24:Name -> U
+37:36:Name -> Class:homeassistant.components.dnsip.DnsIPRuntimeData
+40:34:Name -> U
+40:56:Name -> U
+40:77:Name -> Class:builtins.bool
+43:15:Attribute -> U
+43:15:Name -> U
+43:26:Name -> Const:str:'hostname'
+44:19:Attribute -> U
+44:19:Name -> U
+45:19:Attribute -> U
+45:19:Name -> U
+46:13:Name -> Class:builtins.list
+48:7:Attribute -> U
+48:7:Name -> U
+48:18:Name -> Const:str:'ipv4'
+49:24:Call -> U
+49:24:Attribute -> U
+49:24:Name -> U
+50:25:Attribute -> U
+50:25:Name -> U
+50:39:Name -> Const:str:'resolver'
+51:21:Attribute -> U
+51:21:Name -> U
+51:35:Name -> Const:str:'port'
+52:21:Attribute -> U
+52:21:Name -> U
+52:35:Name -> Const:str:'port'
+54:8:Call -> ERR
+54:8:Attribute -> BM:builtins.list.append
+54:8:Name -> List:0
+54:23:Call -> U
+54:23:Attribute -> U
+54:23:Name -> U
+54:47:Name -> U
+56:7:Attribute -> U
+56:7:Name -> U
+56:18:Name -> Const:str:'ipv6'
+57:24:Call -> U
+57:24:Attribute -> U
+57:24:Name -> U
+58:25:Attribute -> U
+58:25:Name -> U
+58:39:Name -> Const:str:'resolver_ipv6'
+59:21:Attribute -> U
+59:21:Name -> U
+59:35:Name -> Const:str:'port_ipv6'
+60:21:Attribute -> U
+60:21:Name -> U
+60:35:Name -> Const:str:'port_ipv6'
+62:8:Call -> ERR
+62:8:Attribute -> BM:builtins.list.append
+62:8:Name -> List:0
+62:23:Call -> U
+62:23:Attribute -> U
+62:23:Name -> U
+62:47:Name -> U
+65:11:Name -> Const:NoneType:None | U
+66:18:Call -> U
+66:18:Attribute -> U
+66:18:Name -> U
+67:11:Name -> Const:NoneType:None | U
+68:18:Call -> U
+68:18:Attribute -> U
+68:18:Name -> U
+71:19:Call -> Inst:asyncio.timeouts.Timeout
+71:19:Attribute -> Func:asyncio.timeouts.timeout
+71:19:Name -> Module:asyncio
+72:28:Call -> U | Inst:asyncio.tasks._GatheringFuture
+72:28:Attribute -> Func:asyncio.tasks.gather
+72:28:Name -> Module:asyncio
+72:44:Name -> List:0
+73:11:Name -> Class:builtins.TimeoutError
+74:14:Call -> Const:NoneType:None
+74:14:Name -> Func:homeassistant.components.dnsip.async_setup_entry._close_resolvers
+75:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryNotReady
+75:14:Name -> Class:homeassistant.exceptions.ConfigEntryNotReady
+76:40:Name -> U
+76:52:Name -> ExcInst:builtins.TimeoutError
+77:15:Name -> ExcInst:builtins.TimeoutError
+80:8:Name -> U
+80:29:Name -> U
+80:40:Call -> ERR
+80:40:Name -> Func:builtins.isinstance
+80:51:Name -> U
+80:60:Name -> Class:builtins.TimeoutError
+80:74:Name -> U
+82:7:Name -> U
+82:18:Call -> ERR
+82:18:Name -> Func:builtins.len
+82:22:Name -> U
+82:33:Call -> ERR
+82:33:Name -> Func:builtins.len
+82:37:Name -> U
+83:14:Call -> Const:NoneType:None
+83:14:Name -> Func:homeassistant.components.dnsip.async_setup_entry._close_resolvers
+84:14:Call -> ExcInst:homeassistant.exceptions.ConfigEntryNotReady
+84:14:Name -> Class:homeassistant.exceptions.ConfigEntryNotReady
+85:37:Name -> U
+85:49:Name -> U
+86:15:Name -> U
+88:4:Name -> U
+88:25:Call -> Inst:homeassistant.components.dnsip.DnsIPRuntimeData
+88:25:Name -> Class:homeassistant.components.dnsip.DnsIPRuntimeData
+89:22:Name -> Const:NoneType:None | U
+90:22:Name -> Const:NoneType:None | U
+93:10:Call -> U
+93:10:Attribute -> U
+93:10:Attribute -> U
+93:10:Name -> U
+93:57:Name -> U
+93:64:Name -> List:1
+97:35:Name -> U
+97:57:Name -> U
+97:78:Name -> Class:builtins.bool
+100:22:Call -> U
+100:22:Attribute -> U
+100:22:Attribute -> U
+100:22:Name -> U
+100:65:Name -> U
+100:72:Name -> List:1
+101:7:Name -> U
+102:11:Attribute -> U
+102:11:Attribute -> U
+102:11:Name -> U
+103:18:Call -> U
+103:18:Attribute -> U
+103:18:Attribute -> U
+103:18:Attribute -> U
+103:18:Name -> U
+104:11:Attribute -> U
+104:11:Attribute -> U
+104:11:Name -> U
+105:18:Call -> U
+105:18:Attribute -> U
+105:18:Attribute -> U
+105:18:Attribute -> U
+105:18:Name -> U
+106:11:Name -> U
+110:10:Name -> U
+110:39:Name -> U
+111:5:Name -> Class:builtins.bool
+114:7:Attribute -> U
+114:7:Name -> U
+114:36:Attribute -> U
+114:36:Name -> U
+115:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+115:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+115:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+117:12:Attribute -> U
+117:12:Name -> U
+118:12:Attribute -> U
+118:12:Name -> U
+121:25:Attribute -> U
+121:25:Name -> U
+122:8:Name -> U
+122:20:Name -> Const:str:'port'
+122:33:Name -> Const:int:53
+123:8:Name -> U
+123:20:Name -> Const:str:'port_ipv6'
+123:38:Name -> Const:int:53
+125:8:Call -> U
+125:8:Attribute -> U
+125:8:Attribute -> U
+125:8:Name -> U
+126:12:Name -> U
+126:34:Name -> U
+129:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+129:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+131:7:Attribute -> U
+131:7:Name -> U
+131:36:Attribute -> U
+131:36:Name -> U
+132:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+132:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+132:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+134:12:Attribute -> U
+134:12:Name -> U
+135:12:Attribute -> U
+135:12:Name -> U
+138:8:Call -> U
+138:8:Attribute -> U
+138:8:Attribute -> U
+138:8:Name -> U
+139:12:Name -> U
+142:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+142:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+142:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

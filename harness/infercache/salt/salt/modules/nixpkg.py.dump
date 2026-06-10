@@ -1,0 +1,479 @@
+33:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+33:9:Attribute -> Func:logging.getLogger
+33:9:Name -> Module:logging
+33:27:Name -> Const:str:'salt.modules.nixpkg' | Const:str:'__main__'
+42:14:Call -> U
+42:14:Name -> Func:salt.modules.nixpkg._nix_home
+43:7:Call -> Const:NoneType:None | U
+43:7:Attribute -> Func:salt.utils.path.which
+43:7:Attribute -> Module:salt.utils.path
+43:7:Attribute -> Module:salt.utils
+43:7:Name -> Module:salt
+43:29:Call -> U
+43:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+43:29:Attribute -> Module:posixpath | Module:ntpath
+43:29:Name -> Module:os
+43:42:Name -> U
+43:63:Call -> Const:NoneType:None | U
+43:63:Attribute -> Func:salt.utils.path.which
+43:63:Attribute -> Module:salt.utils.path
+43:63:Attribute -> Module:salt.utils
+43:63:Name -> Module:salt
+44:8:Call -> U
+44:8:Attribute -> Func:posixpath.join | Func:ntpath.join
+44:8:Attribute -> Module:posixpath | Module:ntpath
+44:8:Name -> Module:os
+44:21:Name -> U
+46:15:Name -> Const:str:'pkg'
+60:11:Call -> ERR
+60:11:Attribute -> ERR
+60:11:Name -> ERR
+60:39:Call -> ERR
+60:39:Attribute -> ERR
+60:39:Name -> ERR
+60:64:Name -> ERR
+67:11:Call -> U
+67:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+67:11:Attribute -> Module:posixpath | Module:ntpath
+67:11:Name -> Module:os
+67:24:Call -> U
+67:24:Attribute -> Func:posixpath.expanduser | U
+67:24:Attribute -> Module:posixpath | Module:ntpath
+67:24:Name -> Module:os
+67:47:Call -> U
+67:47:Name -> Func:salt.modules.nixpkg._nix_user
+74:11:Call -> ERR
+74:11:Name -> ERR
+74:35:Name -> U
+74:46:Call -> U
+74:46:Name -> Func:salt.modules.nixpkg._nix_user
+81:12:Call -> U
+81:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+81:12:Attribute -> Module:posixpath | Module:ntpath
+81:12:Name -> Module:os
+81:25:Call -> U
+81:25:Name -> Func:salt.modules.nixpkg._nix_home
+88:12:Call -> U
+88:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+88:12:Attribute -> Module:posixpath | Module:ntpath
+88:12:Name -> Module:os
+88:25:Call -> U
+88:25:Name -> Func:salt.modules.nixpkg._nix_home
+109:7:Call -> U | Const:bool:False
+109:7:Attribute -> Func:salt.utils.data.is_true
+109:7:Attribute -> Module:salt.utils.data
+109:7:Attribute -> Module:salt.utils
+109:7:Name -> Module:salt
+109:31:Call -> ERR
+109:31:Attribute -> BM:builtins.dict.get
+109:31:Name -> Dict:0
+110:8:Call -> U
+110:8:Name -> Func:salt.modules.nixpkg.refresh_db
+112:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+112:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+112:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+112:42:Name -> Tuple:0
+114:10:Call -> Dict:0 | U | Dict:0
+114:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+115:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+115:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+115:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+115:41:Name -> Dict:0 | U | Dict:0
+117:10:Call -> List:2
+117:10:Name -> Func:salt.modules.nixpkg._nix_profile
+118:4:Call -> ERR
+118:4:Attribute -> BM:builtins.list.append
+118:4:Name -> List:2
+119:7:Name -> Tuple:0
+120:8:Call -> ERR
+120:8:Attribute -> BM:builtins.list.extend
+120:8:Name -> List:2
+120:19:Name -> U
+122:8:Call -> ERR
+122:8:Attribute -> BM:builtins.list.append
+122:8:Name -> List:2
+124:10:Call -> U
+124:10:Name -> Func:salt.modules.nixpkg._run
+124:15:Name -> List:2
+125:7:Name -> U
+125:31:Name -> U
+126:18:Name -> U
+130:4:Call -> ERR
+130:4:Attribute -> ERR
+130:4:Name -> ERR
+131:10:Call -> Dict:0 | U | Dict:0
+131:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+132:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+132:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+132:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+132:39:Name -> Dict:0 | U | Dict:0
+134:10:Call -> Dict:0
+134:10:Attribute -> Func:salt.utils.data.compare_dicts
+134:10:Attribute -> Module:salt.utils.data
+134:10:Attribute -> Module:salt.utils
+134:10:Name -> Module:salt
+134:40:Name -> Dict:0 | U | Dict:0
+134:45:Name -> Dict:0 | U | Dict:0
+135:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+135:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+135:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+135:40:Name -> Dict:0
+137:7:Name -> List:1 | List:0
+138:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+138:14:Name -> Class:salt.exceptions.CommandExecutionError
+140:28:Name -> List:1
+140:47:Name -> Dict:0
+143:11:Name -> Dict:0
+156:7:Call -> U | Const:bool:False | Const:bool:True
+156:7:Attribute -> Func:salt.utils.data.is_true
+156:7:Attribute -> Module:salt.utils.data
+156:7:Attribute -> Module:salt.utils
+156:7:Name -> Module:salt
+156:31:Name -> Const:bool:True | U
+157:8:Call -> U
+157:8:Name -> Func:salt.modules.nixpkg.refresh_db
+159:10:Call -> Dict:0 | U | Dict:0
+159:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+161:20:Name -> Dict:0 | U | Dict:0
+162:17:Call -> U | Dict:0
+162:17:Name -> Func:salt.modules.nixpkg.latest_version
+162:32:Name -> U
+163:11:Name -> U | Dict:0
+164:12:Name -> Dict:0
+164:16:Name -> U
+164:28:Name -> U
+165:11:Name -> Dict:0
+169:42:Name -> U
+169:22:Name -> U
+169:51:Name -> U
+195:28:Call -> ERR
+195:28:Name -> ERR
+196:12:Name -> Const:NoneType:None | U
+196:18:Name -> Const:NoneType:None | U
+196:24:Call -> ERR
+196:24:Attribute -> BM:builtins.dict.get
+196:24:Name -> Dict:0
+198:11:Name -> Class:salt.exceptions.MinionError
+199:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+199:14:Name -> Class:salt.exceptions.CommandExecutionError
+199:36:Name -> ExcInst:salt.exceptions.MinionError
+201:11:Name -> ERR
+204:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+204:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+204:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+204:43:Name -> ERR
+206:10:Call -> Dict:0 | U | Dict:0
+206:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+207:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+207:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+207:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+207:41:Name -> Dict:0 | U | Dict:0
+209:10:Call -> List:2
+209:10:Name -> Func:salt.modules.nixpkg._nix_profile
+210:4:Call -> ERR
+210:4:Attribute -> BM:builtins.list.append
+210:4:Name -> List:2
+211:4:Call -> ERR
+211:4:Attribute -> BM:builtins.list.extend
+211:4:Name -> List:2
+211:15:Call -> Inst:builtins.list
+211:15:Name -> Class:builtins.list
+211:20:Call -> Inst:builtins.map
+211:20:Name -> Class:builtins.map
+211:24:Name -> Func:salt.modules.nixpkg._add_source
+211:37:Name -> ERR
+213:10:Call -> U
+213:10:Name -> Func:salt.modules.nixpkg._run
+213:15:Name -> List:2
+214:7:Name -> U
+214:31:Name -> U
+215:18:Name -> U
+219:4:Call -> ERR
+219:4:Attribute -> ERR
+219:4:Name -> ERR
+220:10:Call -> Dict:0 | U | Dict:0
+220:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+221:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+221:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+221:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+221:39:Name -> Dict:0 | U | Dict:0
+223:10:Call -> Dict:0
+223:10:Attribute -> Func:salt.utils.data.compare_dicts
+223:10:Attribute -> Module:salt.utils.data
+223:10:Attribute -> Module:salt.utils
+223:10:Name -> Module:salt
+223:40:Name -> Dict:0 | U | Dict:0
+223:45:Name -> Dict:0 | U | Dict:0
+224:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+224:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+224:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+224:40:Name -> Dict:0
+226:7:Name -> List:1 | List:0
+227:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+227:14:Name -> Class:salt.exceptions.CommandExecutionError
+229:28:Name -> List:1
+229:47:Name -> Dict:0
+232:11:Name -> Dict:0
+239:7:Name -> U
+240:15:Name -> ERR
+242:10:Call -> U
+242:10:Attribute -> Func:copy.deepcopy
+242:10:Name -> Module:copy
+242:24:Name -> ERR
+243:4:Call -> ERR
+243:4:Name -> ERR
+243:39:Name -> U
+244:11:Name -> U
+253:22:Call -> U
+253:22:Attribute -> U
+253:22:Name -> U
+254:19:Call -> U
+254:19:Attribute -> U
+254:19:Name -> U
+256:21:Call -> U
+256:21:Attribute -> U
+256:21:Name -> U
+257:15:Name -> U
+260:16:Call -> U
+260:16:Attribute -> U
+260:16:Name -> U
+261:20:Name -> U
+262:15:Name -> U
+262:24:Call -> U
+262:24:Attribute -> Func:re.match
+262:24:Name -> Module:re
+262:40:Name -> U
+263:23:Name -> U
+286:7:Call -> ERR
+286:7:Attribute -> BM:builtins.dict.get
+286:7:Name -> Dict:0
+289:23:Call -> U | Const:bool:False | Const:bool:False
+289:23:Attribute -> Func:salt.utils.data.is_true
+289:23:Attribute -> Module:salt.utils.data
+289:23:Attribute -> Module:salt.utils
+289:23:Name -> Module:salt
+289:47:Name -> Const:bool:False | U
+291:26:Name -> ERR
+291:42:Call -> ERR
+291:42:Attribute -> BM:builtins.dict.get
+291:42:Name -> Dict:0
+292:15:Call -> U
+292:15:Name -> Func:salt.modules.nixpkg._list_pkgs_from_context
+292:39:Name -> U | Const:bool:False | Const:bool:False
+294:10:Call -> List:2
+294:10:Name -> Func:salt.modules.nixpkg._nix_profile
+295:4:Call -> ERR
+295:4:Attribute -> BM:builtins.list.append
+295:4:Name -> List:2
+296:4:Call -> ERR
+296:4:Attribute -> BM:builtins.list.append
+296:4:Name -> List:2
+298:19:Call -> U
+298:19:Attribute -> Func:salt.utils.json.loads
+298:19:Attribute -> Module:salt.utils.json
+298:19:Attribute -> Module:salt.utils
+298:19:Name -> Module:salt
+298:41:Call -> U
+298:41:Name -> Func:salt.modules.nixpkg._run
+298:46:Name -> List:2
+299:19:Call -> U
+299:19:Attribute -> U
+299:19:Name -> U
+302:26:Call -> U
+302:26:Attribute -> U
+302:26:Name -> U
+303:18:Call -> U | Const:str:'unknown'
+303:18:Name -> Func:salt.modules.nixpkg._extract_version
+303:35:Name -> U
+304:8:Call -> ERR
+304:8:Name -> ERR
+304:41:Name -> Dict:0
+304:46:Name -> U
+304:56:Name -> U | Const:str:'unknown'
+306:4:Call -> ERR
+306:4:Name -> ERR
+306:42:Name -> Dict:0
+307:4:Name -> ERR
+307:35:Call -> U | Dict:0
+307:35:Attribute -> Func:copy.deepcopy
+307:35:Name -> Module:copy
+307:49:Name -> Dict:0
+308:11:Name -> U | Const:bool:False | Const:bool:False
+309:8:Call -> ERR
+309:8:Name -> ERR
+309:43:Name -> Dict:0
+311:11:Name -> Dict:0
+327:11:Call -> ERR
+327:11:Name -> ERR
+327:45:Name -> Tuple:0
+327:54:Name -> Dict:0
+348:14:Call -> U | Const:bool:False
+348:14:Attribute -> Func:salt.utils.data.is_true
+348:14:Attribute -> Module:salt.utils.data
+348:14:Attribute -> Module:salt.utils
+348:14:Name -> Module:salt
+348:38:Call -> ERR
+348:38:Attribute -> BM:builtins.dict.get
+348:38:Name -> Dict:0
+349:7:Name -> U | Const:bool:False
+350:8:Call -> U
+350:8:Name -> Func:salt.modules.nixpkg.refresh_db
+352:16:Call -> Dict:0 | U | Dict:0
+352:16:Name -> Func:salt.modules.nixpkg.list_pkgs
+355:16:Name -> Tuple:0
+356:15:Call -> U
+356:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+356:15:Attribute -> Module:posixpath | Module:ntpath
+356:15:Name -> Module:os
+356:28:Call -> U
+356:28:Name -> Func:salt.modules.nixpkg._nix_home
+356:70:Name -> U
+357:14:Call -> U
+357:14:Name -> Func:salt.modules.nixpkg._run
+357:19:Name -> List:5
+358:11:Name -> U
+359:12:Name -> Dict:0
+359:16:Name -> U
+363:29:Call -> U
+363:29:Attribute -> Func:salt.utils.json.loads
+363:29:Attribute -> Module:salt.utils.json
+363:29:Attribute -> Module:salt.utils
+363:29:Name -> Module:salt
+363:51:Name -> U
+364:15:Name -> Class:builtins.ValueError
+365:12:Name -> Dict:0
+365:16:Name -> U
+371:31:Call -> U
+371:31:Attribute -> U
+371:31:Name -> U
+372:62:Name -> U
+372:23:Call -> U
+372:23:Attribute -> U
+372:23:Name -> U
+372:77:Name -> U
+373:15:Name -> U
+373:27:Name -> U
+374:31:Call -> U
+374:31:Attribute -> U
+374:31:Name -> U
+378:24:Call -> U
+378:24:Attribute -> U
+378:24:Name -> U
+379:31:Call -> U
+379:31:Attribute -> U
+379:31:Name -> U
+383:11:Name -> U
+383:19:Name -> Dict:0 | U | Dict:0
+383:33:Name -> Dict:0 | U | Dict:0
+383:43:Name -> U
+383:52:Name -> Const:str:'' | U
+384:12:Name -> Dict:0
+384:16:Name -> U
+386:12:Name -> Dict:0
+386:16:Name -> U
+386:24:Name -> Const:str:'' | U
+388:7:Call -> Const:int:0
+388:7:Name -> Func:builtins.len
+388:11:Name -> Tuple:0
+389:15:Call -> ERR
+389:15:Attribute -> BM:builtins.dict.get
+389:15:Name -> Dict:0
+389:23:Name -> Tuple:0
+390:11:Name -> Dict:0
+394:20:Call -> Inst:builtins.function
+394:20:Attribute -> Func:salt.utils.functools.alias_function
+394:20:Attribute -> Module:salt.utils.functools
+394:20:Attribute -> Module:salt.utils
+394:20:Name -> Module:salt
+395:4:Name -> Func:salt.modules.nixpkg.latest_version
+410:11:Call -> U
+410:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+410:11:Attribute -> Module:posixpath | Module:ntpath
+410:11:Name -> Module:os
+410:24:Call -> U
+410:24:Name -> Func:salt.modules.nixpkg._nix_home
+411:10:Call -> U
+411:10:Name -> Func:salt.modules.nixpkg._run
+411:15:Name -> List:4
+412:11:Name -> U
+437:11:Call -> Dict:0 | Dict:0
+437:11:Name -> Func:salt.modules.nixpkg.remove
+437:23:Name -> Tuple:0
+460:21:Call -> ERR
+460:21:Name -> ERR
+460:60:Name -> Const:NoneType:None | U
+460:66:Name -> Const:NoneType:None | U
+460:74:Name -> Dict:0
+461:11:Name -> Class:salt.exceptions.MinionError
+462:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+462:14:Name -> Class:salt.exceptions.CommandExecutionError
+462:36:Name -> ExcInst:salt.exceptions.MinionError
+464:10:Call -> Dict:0 | U | Dict:0
+464:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+465:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+465:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+465:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+465:41:Name -> Dict:0 | U | Dict:0
+467:15:Name -> U
+467:26:Name -> U
+467:40:Name -> U
+467:45:Name -> Dict:0 | U | Dict:0
+468:11:Name -> U
+471:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+471:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+471:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+471:41:Name -> U
+473:10:Call -> List:2
+473:10:Name -> Func:salt.modules.nixpkg._nix_profile
+474:4:Call -> ERR
+474:4:Attribute -> BM:builtins.list.append
+474:4:Name -> List:2
+475:4:Call -> ERR
+475:4:Attribute -> BM:builtins.list.extend
+475:4:Name -> List:2
+475:15:Call -> Inst:builtins.list
+475:15:Name -> Class:builtins.list
+475:20:Name -> U
+477:10:Call -> U
+477:10:Name -> Func:salt.modules.nixpkg._run
+477:15:Name -> List:2
+478:7:Name -> U
+478:31:Name -> U
+479:18:Name -> U
+483:4:Call -> ERR
+483:4:Attribute -> ERR
+483:4:Name -> ERR
+484:10:Call -> Dict:0 | U | Dict:0
+484:10:Name -> Func:salt.modules.nixpkg.list_pkgs
+485:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+485:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+485:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+485:39:Name -> Dict:0 | U | Dict:0
+487:10:Call -> Dict:0
+487:10:Attribute -> Func:salt.utils.data.compare_dicts
+487:10:Attribute -> Module:salt.utils.data
+487:10:Attribute -> Module:salt.utils
+487:10:Name -> Module:salt
+487:40:Name -> Dict:0 | U | Dict:0
+487:45:Name -> Dict:0 | U | Dict:0
+488:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+488:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+488:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+488:40:Name -> Dict:0
+490:7:Name -> List:1 | List:0
+491:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+491:14:Name -> Class:salt.exceptions.CommandExecutionError
+493:28:Name -> List:1
+493:47:Name -> Dict:0
+496:11:Name -> Dict:0
+517:10:Call -> List:1
+517:10:Name -> Func:salt.modules.nixpkg._nix_collect_garbage
+518:4:Call -> ERR
+518:4:Attribute -> BM:builtins.list.append
+518:4:Name -> List:1
+520:10:Call -> U
+520:10:Name -> Func:salt.modules.nixpkg._run
+520:15:Name -> List:1
+522:11:Call -> U
+522:11:Attribute -> U
+522:11:Name -> U

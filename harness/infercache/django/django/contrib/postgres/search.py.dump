@@ -1,0 +1,724 @@
+18:3:Name -> Const:bool:True | Const:bool:False
+21:21:Name -> U
+23:19:Call -> Inst:builtins.bytes
+23:19:Name -> Class:builtins.bytes
+23:25:Name -> U
+26:15:Call -> ERR
+26:15:Attribute -> ERR
+26:15:Call -> ERR
+26:15:Attribute -> ERR
+26:15:Call -> Inst:django.contrib.postgres.search.UTF8Dumper
+26:15:Name -> Class:django.contrib.postgres.search.UTF8Dumper
+26:26:Name -> Class:builtins.str
+26:37:Call -> Const:NoneType:None | U
+26:37:Name -> Func:django.contrib.postgres.search.psql_escape
+26:49:Name -> U
+32:18:Call -> U
+32:18:Name -> U
+32:24:Call -> Const:NoneType:None | U
+32:24:Name -> Func:django.contrib.postgres.search.psql_escape
+32:36:Name -> U
+33:8:Name -> U
+34:15:Call -> U
+34:15:Attribute -> U
+34:15:Call -> U
+34:15:Attribute -> U
+34:15:Name -> U
+37:16:Call -> Inst:django.utils.functional.SimpleLazyObject
+37:16:Name -> Func:django.utils.regex_helper._lazy_re_compile
+38:21:Call -> Inst:django.utils.functional.SimpleLazyObject
+38:21:Name -> Func:django.utils.regex_helper._lazy_re_compile
+43:19:Call -> U
+43:19:Attribute -> U
+43:19:Name -> U
+45:11:Call -> U
+45:11:Attribute -> U
+45:11:Name -> Inst:django.utils.functional.SimpleLazyObject
+45:39:Name -> U
+50:12:Call -> U
+50:12:Attribute -> U
+50:12:Name -> Inst:django.utils.functional.SimpleLazyObject
+50:35:Name -> U
+51:11:Call -> Const:NoneType:None | U
+51:11:Name -> Func:django.contrib.postgres.search.normalize_spaces
+51:28:Name -> U
+54:24:Name -> Class:django.db.models.lookups.Lookup
+58:15:Call -> ERR
+58:15:Name -> Func:builtins.isinstance
+58:26:Attribute -> Inst:django.contrib.postgres.search.SearchQuery | U
+58:26:Name -> Inst:django.contrib.postgres.search.SearchVectorExact
+58:37:Name -> Class:django.contrib.postgres.search.SearchQuery
+58:50:Name -> Class:django.contrib.postgres.search.CombinedSearchQuery
+59:21:Call -> U
+59:21:Name -> Func:builtins.getattr
+59:29:Attribute -> U | Inst:django.db.models.expressions.Value
+59:29:Name -> Inst:django.contrib.postgres.search.SearchVectorExact
+60:12:Name -> Inst:django.contrib.postgres.search.SearchVectorExact
+60:23:Call -> Inst:django.contrib.postgres.search.SearchQuery
+60:23:Name -> Class:django.contrib.postgres.search.SearchQuery
+60:35:Attribute -> Inst:django.contrib.postgres.search.SearchQuery | U
+60:35:Name -> Inst:django.contrib.postgres.search.SearchVectorExact
+60:52:Name -> U
+61:26:Call -> Tuple:2 | Tuple:2
+61:26:Attribute -> BM:django.db.models.lookups.Lookup.process_rhs
+61:26:Call -> Super
+61:26:Name -> Class:builtins.super
+61:46:Name -> U
+61:50:Name -> U
+62:15:Name -> U | Const:str:'%s'
+62:20:Name -> U | Tuple:1
+65:26:Call -> Tuple:2
+65:26:Attribute -> BM:django.db.models.lookups.Lookup.process_lhs
+65:26:Name -> Inst:django.contrib.postgres.search.SearchVectorExact
+65:43:Name -> U
+65:47:Name -> U
+66:26:Call -> Tuple:2
+66:26:Attribute -> BM:django.contrib.postgres.search.SearchVectorExact.process_rhs
+66:26:Name -> Inst:django.contrib.postgres.search.SearchVectorExact
+66:43:Name -> U
+66:47:Name -> U
+67:19:Name -> U
+67:32:Name -> U | Tuple:1
+68:29:Name -> U | Const:str:'(Uninferable)'
+68:34:Name -> U | Const:str:'%s'
+68:40:Name -> U
+71:24:Name -> Class:django.contrib.postgres.utils.CheckPostgresInstalledMixin
+71:53:Name -> Class:django.db.models.fields.Field
+76:23:Name -> Class:django.contrib.postgres.utils.CheckPostgresInstalledMixin
+76:52:Name -> Class:django.db.models.fields.Field
+81:19:Name -> Class:django.db.models.fields.Field
+86:19:Name -> Class:django.db.models.expressions.Expression
+88:8:Call -> Const:NoneType:None
+88:8:Attribute -> BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+88:8:Call -> Super
+88:8:Name -> Class:builtins.super
+89:15:Call -> U
+89:15:Name -> Func:builtins.hasattr
+89:23:Name -> U
+90:21:Call -> Inst:django.db.models.expressions.Value
+90:21:Name -> Class:django.db.models.expressions.Value
+90:27:Name -> U
+91:8:Name -> Inst:django.contrib.postgres.search.SearchConfig
+91:22:Name -> U | Inst:django.db.models.expressions.Value
+93:5:Name -> Class:builtins.classmethod
+95:11:Name -> U
+95:29:Call -> ERR
+95:29:Name -> Func:builtins.isinstance
+95:40:Name -> U
+95:48:Name -> Class:django.contrib.postgres.search.SearchConfig
+96:19:Name -> U
+97:15:Call -> Inst:django.contrib.postgres.search.SearchConfig
+97:15:Name -> Class:django.contrib.postgres.search.SearchConfig
+97:19:Name -> U
+100:16:Attribute -> U | Inst:django.db.models.expressions.Value
+100:16:Name -> Inst:django.contrib.postgres.search.SearchConfig
+103:9:Name -> Inst:django.contrib.postgres.search.SearchConfig
+103:25:Name -> U
+106:22:Call -> U
+106:22:Attribute -> U
+106:22:Name -> U
+106:39:Attribute -> U | Inst:django.db.models.expressions.Value
+106:39:Name -> Inst:django.contrib.postgres.search.SearchConfig
+107:33:Name -> U
+107:38:Name -> U
+114:15:Call -> ERR
+114:15:Name -> Func:builtins.isinstance
+114:26:Name -> U
+114:33:Name -> Class:django.contrib.postgres.search.SearchVectorCombinable
+115:18:Call -> ExcInst:builtins.TypeError
+115:18:Name -> Class:builtins.TypeError
+117:39:Attribute -> U
+117:39:Call -> U
+117:39:Name -> Class:builtins.type
+117:44:Name -> U
+119:11:Name -> U
+120:19:Call -> Inst:django.contrib.postgres.search.CombinedSearchVector
+120:19:Name -> Class:django.contrib.postgres.search.CombinedSearchVector
+120:40:Name -> U
+120:47:Name -> U
+120:58:Name -> Inst:django.contrib.postgres.search.SearchVectorCombinable
+120:64:Attribute -> ERR
+120:64:Name -> Inst:django.contrib.postgres.search.SearchVectorCombinable
+121:15:Call -> Inst:django.contrib.postgres.search.CombinedSearchVector
+121:15:Name -> Class:django.contrib.postgres.search.CombinedSearchVector
+121:36:Name -> Inst:django.contrib.postgres.search.SearchVectorCombinable
+121:42:Name -> U
+121:53:Name -> U
+121:60:Attribute -> ERR
+121:60:Name -> Inst:django.contrib.postgres.search.SearchVectorCombinable
+124:0:Call -> Const:NoneType:None
+124:0:Name -> Func:django.db.models.expressions.register_combinable_fields
+125:4:Name -> Class:django.contrib.postgres.search.SearchVectorField
+125:23:Attribute -> Const:str:'||'
+125:23:Name -> Class:django.contrib.postgres.search.SearchVectorCombinable
+125:51:Name -> Class:django.contrib.postgres.search.SearchVectorField
+125:70:Name -> Class:django.contrib.postgres.search.SearchVectorField
+129:19:Name -> Class:django.contrib.postgres.search.SearchVectorCombinable
+129:43:Name -> Class:django.db.models.expressions.Func
+132:19:Call -> Inst:django.contrib.postgres.search.SearchVectorField
+132:19:Name -> Class:django.contrib.postgres.search.SearchVectorField
+135:8:Call -> Const:NoneType:None | Const:NoneType:None
+135:8:Attribute -> BM:django.db.models.expressions.Func.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+135:8:Call -> Super
+135:8:Name -> Class:builtins.super
+135:26:Name -> Tuple:0
+136:8:Name -> Inst:django.contrib.postgres.search.SearchVector
+136:22:Call -> Const:NoneType:None | U | Inst:django.contrib.postgres.search.SearchConfig
+136:22:Attribute -> BM:django.contrib.postgres.search.SearchConfig.from_parameter
+136:22:Name -> Class:django.contrib.postgres.search.SearchConfig
+136:50:Name -> Const:NoneType:None | U
+137:11:Name -> Const:NoneType:None | U
+137:38:Call -> Const:bool:False
+137:38:Name -> Func:builtins.hasattr
+137:46:Name -> Const:NoneType:None | U
+138:21:Call -> Inst:django.db.models.expressions.Value
+138:21:Name -> Class:django.db.models.expressions.Value
+138:27:Name -> Const:NoneType:None | U
+139:8:Name -> Inst:django.contrib.postgres.search.SearchVector
+139:22:Name -> Const:NoneType:None | U | Inst:django.db.models.expressions.Value
+144:19:Call -> U
+144:19:Attribute -> BM:django.db.models.expressions.BaseExpression.resolve_expression
+144:19:Call -> Super
+144:19:Name -> Class:builtins.super
+145:12:Name -> Const:NoneType:None | U
+145:19:Name -> Const:bool:True | U
+145:32:Name -> Const:NoneType:None | U
+145:39:Name -> Const:bool:False | U
+145:50:Name -> Const:bool:False | U
+147:11:Attribute -> Const:NoneType:None | U | Inst:django.contrib.postgres.search.SearchConfig
+147:11:Name -> Inst:django.contrib.postgres.search.SearchVector
+148:12:Name -> U
+148:30:Call -> U
+148:30:Attribute -> U | BM:django.db.models.expressions.BaseExpression.resolve_expression
+148:30:Attribute -> U | Inst:django.contrib.postgres.search.SearchConfig
+148:30:Name -> Inst:django.contrib.postgres.search.SearchVector
+149:16:Name -> Const:NoneType:None | U
+149:23:Name -> Const:bool:True | U
+149:36:Name -> Const:NoneType:None | U
+149:43:Name -> Const:bool:False | U
+149:54:Name -> Const:bool:False | U
+151:15:Name -> U
+154:16:Call -> U
+154:16:Attribute -> BM:django.db.models.expressions.Func.copy
+154:16:Name -> Inst:django.contrib.postgres.search.SearchVector
+155:8:Call -> U
+155:8:Attribute -> U
+155:8:Name -> U
+157:16:Call -> Inst:django.db.models.functions.comparison.Coalesce
+157:16:Name -> Class:django.db.models.functions.comparison.Coalesce
+160:27:Call -> ERR
+160:27:Name -> Func:builtins.isinstance
+160:38:Attribute -> U
+160:38:Name -> U
+160:64:Name -> Class:django.db.models.fields.CharField
+160:75:Name -> Class:django.db.models.fields.TextField
+159:24:Name -> U
+161:29:Call -> Inst:django.db.models.functions.comparison.Cast
+161:29:Name -> Class:django.db.models.functions.comparison.Cast
+161:34:Name -> U
+161:46:Call -> Inst:django.db.models.fields.TextField
+161:46:Name -> Class:django.db.models.fields.TextField
+163:20:Call -> Inst:django.db.models.expressions.Value
+163:20:Name -> Class:django.db.models.expressions.Value
+165:34:Call -> U
+165:34:Attribute -> U
+165:34:Name -> U
+170:11:Name -> Const:NoneType:None | U
+171:15:Attribute -> U
+171:15:Name -> U
+172:44:Call -> U
+172:44:Attribute -> U
+172:44:Name -> U
+172:61:Attribute -> U
+172:61:Name -> U
+175:27:Attribute -> U
+175:27:Name -> U
+176:22:Call -> ERR
+176:22:Attribute -> ERR
+176:22:Call -> Inst:builtins.super
+176:22:Name -> Class:builtins.super
+176:28:Name -> Class:django.contrib.postgres.search.SearchVector
+176:42:Name -> U
+177:12:Name -> U
+178:12:Name -> U
+179:21:Name -> Const:NoneType:None | U
+180:21:Name -> Const:NoneType:None | U | Const:str:'%(function)s(%(config)s, %(expressions)
+181:19:Name -> Const:NoneType:None | U
+184:11:Attribute -> U
+184:11:Name -> U
+185:39:Call -> U
+185:39:Attribute -> U
+185:39:Name -> U
+185:56:Attribute -> U
+185:56:Name -> U
+186:18:Call -> U
+186:18:Attribute -> BM:builtins.str.format
+186:45:Name -> U
+186:50:Name -> U
+188:15:Name -> U
+188:22:Name -> List:0 | U
+188:38:Name -> U
+188:47:Name -> List:0 | U
+191:27:Name -> Class:django.contrib.postgres.search.SearchVectorCombinable
+191:51:Name -> Class:django.db.models.expressions.CombinedExpression
+193:8:Name -> Inst:django.contrib.postgres.search.CombinedSearchVector
+193:22:Name -> U
+194:8:Call -> Const:NoneType:None | Const:NoneType:None
+194:8:Attribute -> BM:django.db.models.expressions.CombinedExpression.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+194:8:Call -> Super
+194:8:Name -> Class:builtins.super
+194:25:Name -> U
+194:30:Name -> U
+194:41:Name -> U
+194:46:Name -> Const:NoneType:None | U
+202:15:Call -> ERR
+202:15:Name -> Func:builtins.isinstance
+202:26:Name -> U
+202:33:Name -> Class:django.contrib.postgres.search.SearchQueryCombinable
+203:18:Call -> ExcInst:builtins.TypeError
+203:18:Name -> Class:builtins.TypeError
+205:39:Attribute -> U
+205:39:Call -> U
+205:39:Name -> Class:builtins.type
+205:44:Name -> U
+207:11:Name -> U
+208:19:Call -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+208:19:Name -> Class:django.contrib.postgres.search.CombinedSearchQuery
+208:39:Name -> U
+208:46:Name -> U
+208:57:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+208:63:Attribute -> ERR
+208:63:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+209:15:Call -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+209:15:Name -> Class:django.contrib.postgres.search.CombinedSearchQuery
+209:35:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+209:41:Name -> U
+209:52:Name -> U
+209:59:Attribute -> ERR
+209:59:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+215:15:Call -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+215:15:Attribute -> BM:django.contrib.postgres.search.SearchQueryCombinable._combine
+215:15:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+215:29:Name -> U
+215:36:Attribute -> Const:str:'||'
+215:36:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+218:15:Call -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+218:15:Attribute -> BM:django.contrib.postgres.search.SearchQueryCombinable._combine
+218:15:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+218:29:Name -> U
+218:36:Attribute -> Const:str:'||'
+218:36:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+221:15:Call -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+221:15:Attribute -> BM:django.contrib.postgres.search.SearchQueryCombinable._combine
+221:15:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+221:29:Name -> U
+221:36:Attribute -> Const:str:'&&'
+221:36:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+224:15:Call -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+224:15:Attribute -> BM:django.contrib.postgres.search.SearchQueryCombinable._combine
+224:15:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+224:29:Name -> U
+224:36:Attribute -> Const:str:'&&'
+224:36:Name -> Inst:django.contrib.postgres.search.SearchQueryCombinable
+227:18:Name -> Class:django.contrib.postgres.search.SearchQueryCombinable
+227:41:Name -> Class:django.db.models.expressions.Func
+228:19:Call -> Inst:django.contrib.postgres.search.SearchQueryField
+228:19:Name -> Class:django.contrib.postgres.search.SearchQueryField
+245:11:Call -> ERR
+245:11:Name -> Func:builtins.isinstance
+245:22:Name -> U
+245:29:Name -> Class:django.contrib.postgres.search.LexemeCombinable
+248:8:Name -> Inst:django.contrib.postgres.search.SearchQuery
+248:24:Call -> ERR
+248:24:Attribute -> BM:builtins.dict.get
+248:24:Attribute -> Dict:4
+248:24:Name -> Inst:django.contrib.postgres.search.SearchQuery
+248:46:Name -> Const:str:'plain' | U | Const:str:'raw'
+249:11:Attribute -> U
+249:11:Name -> Inst:django.contrib.postgres.search.SearchQuery
+250:18:Call -> ExcInst:builtins.ValueError
+250:18:Name -> Class:builtins.ValueError
+250:68:Name -> Const:str:'plain' | U | Const:str:'raw'
+251:15:Call -> U
+251:15:Name -> Func:builtins.hasattr
+251:23:Name -> U
+252:20:Call -> Inst:django.db.models.expressions.Value
+252:20:Name -> Class:django.db.models.expressions.Value
+252:26:Name -> U
+253:23:Name -> U | Inst:django.db.models.expressions.Value
+254:8:Name -> Inst:django.contrib.postgres.search.SearchQuery
+254:22:Call -> Const:NoneType:None | U | Inst:django.contrib.postgres.search.SearchConfig
+254:22:Attribute -> BM:django.contrib.postgres.search.SearchConfig.from_parameter
+254:22:Name -> Class:django.contrib.postgres.search.SearchConfig
+254:50:Name -> Const:NoneType:None | U
+255:11:Attribute -> Const:NoneType:None | U | Inst:django.contrib.postgres.search.SearchConfig
+255:11:Name -> Inst:django.contrib.postgres.search.SearchQuery
+256:27:Attribute -> U | Inst:django.contrib.postgres.search.SearchConfig
+256:27:Name -> Inst:django.contrib.postgres.search.SearchQuery
+256:41:Name -> Tuple:1
+257:8:Name -> Inst:django.contrib.postgres.search.SearchQuery
+257:22:Name -> Const:bool:False | U
+258:8:Call -> Const:NoneType:None | Const:NoneType:None
+258:8:Attribute -> BM:django.db.models.expressions.Func.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+258:8:Call -> Super
+258:8:Name -> Class:builtins.super
+258:26:Name -> Tuple:1 | List:2
+258:52:Name -> Const:NoneType:None | U
+261:22:Call -> Tuple:2 | U
+261:22:Attribute -> BM:django.db.models.expressions.Func.as_sql | BM:django.db.models.expressions.BaseExpression.as_sql
+261:22:Call -> Super
+261:22:Name -> Class:builtins.super
+261:37:Name -> U
+261:47:Name -> U
+261:59:Name -> Const:NoneType:None | U
+261:69:Name -> Const:NoneType:None | U
+262:11:Attribute -> Const:bool:False | U
+262:11:Name -> Inst:django.contrib.postgres.search.SearchQuery
+263:29:Name -> U
+264:15:Name -> U
+264:20:Name -> Tuple:0
+267:16:Call -> U
+267:16:Attribute -> BM:django.db.models.expressions.Func.copy
+267:16:Name -> Inst:django.contrib.postgres.search.SearchQuery
+268:8:Name -> U
+268:27:Attribute -> Const:bool:False | U
+268:27:Name -> Inst:django.contrib.postgres.search.SearchQuery
+269:15:Name -> U
+272:17:Call -> ERR
+272:17:Attribute -> BM:builtins.object.__str__
+272:17:Call -> Super
+272:17:Name -> Class:builtins.super
+273:35:Attribute -> Const:bool:False | U
+273:35:Name -> Inst:django.contrib.postgres.search.SearchQuery
+273:24:Name -> U
+273:52:Name -> U
+276:26:Name -> Class:django.contrib.postgres.search.SearchQueryCombinable
+276:49:Name -> Class:django.db.models.expressions.CombinedExpression
+278:8:Name -> Inst:django.contrib.postgres.search.CombinedSearchQuery
+278:22:Name -> U
+279:8:Call -> Const:NoneType:None | Const:NoneType:None
+279:8:Attribute -> BM:django.db.models.expressions.CombinedExpression.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+279:8:Call -> Super
+279:8:Name -> Class:builtins.super
+279:25:Name -> U
+279:30:Name -> U
+279:41:Name -> U
+279:46:Name -> Const:NoneType:None | U
+282:24:Call -> U
+282:24:Attribute -> BM:django.db.models.expressions.CombinedExpression.__str__ | BM:builtins.object.__str__
+282:24:Call -> Super
+282:24:Name -> Class:builtins.super
+285:17:Name -> Class:django.db.models.expressions.Func
+287:19:Call -> Inst:django.db.models.fields.FloatField
+287:19:Name -> Class:django.db.models.fields.FloatField
+299:15:Call -> U
+299:15:Name -> Func:builtins.hasattr
+299:23:Name -> U
+300:21:Call -> Inst:django.contrib.postgres.search.SearchVector
+300:21:Name -> Class:django.contrib.postgres.search.SearchVector
+300:34:Name -> U
+301:15:Call -> U
+301:15:Name -> Func:builtins.hasattr
+301:23:Name -> U
+302:20:Call -> Inst:django.contrib.postgres.search.SearchQuery
+302:20:Name -> Class:django.contrib.postgres.search.SearchQuery
+302:32:Name -> U
+303:23:Name -> U | Inst:django.contrib.postgres.search.SearchVector
+303:31:Name -> U | Inst:django.contrib.postgres.search.SearchQuery
+304:11:Name -> Const:NoneType:None | U
+305:19:Call -> U
+305:19:Name -> Func:builtins.hasattr
+305:27:Name -> U
+306:26:Call -> Inst:django.db.models.expressions.Value
+306:26:Name -> Class:django.db.models.expressions.Value
+306:32:Name -> U
+307:22:Call -> Inst:django.db.models.functions.comparison.Cast
+307:22:Name -> Class:django.db.models.functions.comparison.Cast
+307:27:Name -> U | Inst:django.db.models.expressions.Value
+307:36:Call -> Inst:django.contrib.postgres.fields.array.ArrayField
+307:36:Name -> Class:django.contrib.postgres.fields.array.ArrayField
+307:47:Call -> Inst:django.contrib.postgres.search._Float4Field
+307:47:Name -> Class:django.contrib.postgres.search._Float4Field
+308:27:Name -> Inst:django.db.models.functions.comparison.Cast
+308:37:Name -> List:2
+309:11:Name -> Const:NoneType:None | U
+310:19:Call -> U
+310:19:Name -> Func:builtins.hasattr
+310:27:Name -> U
+311:32:Call -> Inst:django.db.models.expressions.Value
+311:32:Name -> Class:django.db.models.expressions.Value
+311:38:Name -> U
+312:12:Call -> ERR
+312:12:Attribute -> BM:builtins.list.append | BM:builtins.list.append
+312:12:Name -> List:2 | List:3
+312:31:Name -> U | Inst:django.db.models.expressions.Value
+313:11:Name -> Const:bool:False | U
+314:12:Name -> Inst:django.contrib.postgres.search.SearchRank
+315:8:Call -> Const:NoneType:None | Const:NoneType:None
+315:8:Attribute -> BM:django.db.models.expressions.Func.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+315:8:Call -> Super
+315:8:Name -> Class:builtins.super
+315:26:Name -> List:2 | List:3
+318:21:Name -> Class:django.db.models.expressions.Func
+321:19:Call -> Inst:django.db.models.fields.TextField
+321:19:Name -> Class:django.db.models.fields.TextField
+338:15:Call -> U
+338:15:Name -> Func:builtins.hasattr
+338:23:Name -> U
+339:20:Call -> Inst:django.contrib.postgres.search.SearchQuery
+339:20:Name -> Class:django.contrib.postgres.search.SearchQuery
+339:32:Name -> U
+341:24:Name -> Const:NoneType:None | U
+342:23:Name -> Const:NoneType:None | U
+343:24:Name -> Const:NoneType:None | U
+344:24:Name -> Const:NoneType:None | U
+345:25:Name -> Const:NoneType:None | U
+346:28:Name -> Const:NoneType:None | U
+347:28:Name -> Const:NoneType:None | U
+348:33:Name -> Const:NoneType:None | U
+350:8:Name -> Inst:django.contrib.postgres.search.SearchHeadline
+351:12:Name -> Const:str:'StartSel' | Const:str:'StopSel' | Const:str:'MaxWords' | Const:str:'MinWords' | Const:str:'ShortWord' | Const:str:'HighlightAll' | Const:str:'MaxFragments' | Const:str:'FragmentDelimiter'
+351:20:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+351:47:Call -> DictItems
+351:47:Attribute -> BM:builtins.dict.items
+351:47:Name -> Dict:8
+351:66:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+353:23:Name -> U
+353:35:Name -> U | Inst:django.contrib.postgres.search.SearchQuery
+354:11:Name -> Const:NoneType:None | U
+355:21:Call -> U | Inst:django.contrib.postgres.search.SearchConfig
+355:21:Attribute -> BM:django.contrib.postgres.search.SearchConfig.from_parameter
+355:21:Name -> Class:django.contrib.postgres.search.SearchConfig
+355:49:Name -> U
+356:27:Name -> U | Inst:django.contrib.postgres.search.SearchConfig
+356:36:Name -> Tuple:2
+357:8:Call -> Const:NoneType:None | Const:NoneType:None
+357:8:Attribute -> BM:django.db.models.expressions.Func.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+357:8:Call -> Super
+357:8:Name -> Class:builtins.super
+357:26:Name -> Tuple:2 | Tuple:3
+362:11:Attribute -> U
+362:11:Name -> Inst:django.contrib.postgres.search.SearchHeadline
+364:16:Call -> Const:str:''
+364:16:Attribute -> BM:builtins.str.join
+365:20:Call -> U
+365:20:Attribute -> U
+365:20:Attribute -> U
+365:20:Name -> U
+365:50:Name -> U
+365:64:Name -> U
+366:41:Call -> U
+366:41:Attribute -> U
+366:41:Attribute -> U
+366:41:Name -> Inst:django.contrib.postgres.search.SearchHeadline
+370:22:Call -> Tuple:2 | U
+370:22:Attribute -> BM:django.db.models.expressions.Func.as_sql | BM:django.db.models.expressions.BaseExpression.as_sql
+370:22:Call -> Super
+370:22:Name -> Class:builtins.super
+371:12:Name -> U
+372:12:Name -> U
+373:21:Name -> Const:NoneType:None | U
+374:21:Name -> Const:NoneType:None | U
+375:20:Name -> Const:str:'' | Const:str:', %s'
+377:15:Name -> U
+377:20:Name -> Tuple:0
+377:29:Name -> Tuple:0 | Tuple:1
+380:0:Call -> U
+380:0:Attribute -> U
+380:0:Name -> Class:django.contrib.postgres.search.SearchVectorField
+380:34:Name -> Class:django.contrib.postgres.search.SearchVectorExact
+383:18:Name -> Class:django.db.models.expressions.Func
+384:19:Call -> Inst:django.db.models.fields.FloatField
+384:19:Name -> Class:django.db.models.fields.FloatField
+387:15:Call -> U
+387:15:Name -> Func:builtins.hasattr
+387:23:Name -> U
+388:21:Call -> Inst:django.db.models.expressions.Value
+388:21:Name -> Class:django.db.models.expressions.Value
+388:27:Name -> U
+389:8:Call -> Const:NoneType:None | Const:NoneType:None
+389:8:Attribute -> BM:django.db.models.expressions.Func.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+389:8:Call -> Super
+389:8:Name -> Class:builtins.super
+389:25:Name -> U
+389:37:Name -> U | Inst:django.db.models.expressions.Value
+389:47:Name -> Dict:0
+392:22:Name -> Class:django.db.models.expressions.Func
+393:19:Call -> Inst:django.db.models.fields.FloatField
+393:19:Name -> Class:django.db.models.fields.FloatField
+396:15:Call -> U
+396:15:Name -> Func:builtins.hasattr
+396:23:Name -> U
+397:21:Call -> Inst:django.db.models.expressions.Value
+397:21:Name -> Class:django.db.models.expressions.Value
+397:27:Name -> U
+398:8:Call -> Const:NoneType:None | Const:NoneType:None
+398:8:Attribute -> BM:django.db.models.expressions.Func.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+398:8:Call -> Super
+398:8:Name -> Class:builtins.super
+398:25:Name -> U | Inst:django.db.models.expressions.Value
+398:33:Name -> U
+398:47:Name -> Dict:0
+401:24:Name -> Class:django.contrib.postgres.search.TrigramBase
+405:22:Name -> Class:django.contrib.postgres.search.TrigramBase
+410:26:Name -> Class:django.contrib.postgres.search.TrigramWordBase
+415:32:Name -> Class:django.contrib.postgres.search.TrigramWordBase
+420:28:Name -> Class:django.contrib.postgres.search.TrigramWordBase
+424:34:Name -> Class:django.contrib.postgres.search.TrigramWordBase
+433:15:Call -> ERR
+433:15:Name -> Func:builtins.isinstance
+433:26:Name -> U
+433:33:Name -> Class:django.contrib.postgres.search.LexemeCombinable
+434:18:Call -> ExcInst:builtins.TypeError
+434:18:Name -> Class:builtins.TypeError
+436:23:Attribute -> U
+436:23:Attribute -> U
+436:23:Name -> U
+438:11:Name -> U
+439:19:Call -> Inst:django.contrib.postgres.search.CombinedLexeme
+439:19:Name -> Class:django.contrib.postgres.search.CombinedLexeme
+439:34:Name -> U
+439:41:Name -> U
+439:52:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+440:15:Call -> Inst:django.contrib.postgres.search.CombinedLexeme
+440:15:Name -> Class:django.contrib.postgres.search.CombinedLexeme
+440:30:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+440:36:Name -> U
+440:47:Name -> U
+446:15:Call -> Inst:django.contrib.postgres.search.CombinedLexeme
+446:15:Attribute -> BM:django.contrib.postgres.search.LexemeCombinable._combine
+446:15:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+446:29:Name -> U
+446:36:Attribute -> Const:str:'|'
+446:36:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+449:15:Call -> Inst:django.contrib.postgres.search.CombinedLexeme
+449:15:Attribute -> BM:django.contrib.postgres.search.LexemeCombinable._combine
+449:15:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+449:29:Name -> U
+449:36:Attribute -> Const:str:'|'
+449:36:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+452:15:Call -> Inst:django.contrib.postgres.search.CombinedLexeme
+452:15:Attribute -> BM:django.contrib.postgres.search.LexemeCombinable._combine
+452:15:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+452:29:Name -> U
+452:36:Attribute -> Const:str:'&'
+452:36:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+455:15:Call -> Inst:django.contrib.postgres.search.CombinedLexeme
+455:15:Attribute -> BM:django.contrib.postgres.search.LexemeCombinable._combine
+455:15:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+455:29:Name -> U
+455:36:Attribute -> Const:str:'&'
+455:36:Name -> Inst:django.contrib.postgres.search.LexemeCombinable
+458:13:Name -> Class:django.contrib.postgres.search.LexemeCombinable
+458:31:Name -> Class:django.db.models.expressions.Value
+459:20:Call -> Inst:django.contrib.postgres.search.SearchQueryField
+459:20:Name -> Class:django.contrib.postgres.search.SearchQueryField
+464:11:Name -> U
+465:18:Call -> ExcInst:builtins.ValueError
+465:18:Name -> Class:builtins.ValueError
+467:15:Call -> ERR
+467:15:Name -> Func:builtins.isinstance
+467:26:Name -> U
+467:33:Name -> Class:builtins.str
+468:18:Call -> ExcInst:builtins.TypeError
+468:18:Name -> Class:builtins.TypeError
+469:54:Attribute -> U
+469:54:Attribute -> U
+469:54:Name -> U
+472:11:Name -> Const:NoneType:None | U
+473:16:Call -> ERR
+473:16:Name -> Func:builtins.isinstance
+473:27:Name -> Const:NoneType:None | U
+473:35:Name -> Class:builtins.str
+473:43:Call -> U
+473:43:Attribute -> U
+473:43:Name -> Const:NoneType:None | U
+475:18:Call -> ExcInst:builtins.ValueError
+475:18:Name -> Class:builtins.ValueError
+476:69:Name -> Const:NoneType:None | U
+479:8:Name -> Inst:django.contrib.postgres.search.Lexeme
+479:22:Name -> Const:bool:False | U
+480:8:Name -> Inst:django.contrib.postgres.search.Lexeme
+480:22:Name -> Const:bool:False | U
+481:8:Name -> Inst:django.contrib.postgres.search.Lexeme
+481:22:Name -> Const:NoneType:None | U
+482:8:Call -> Const:NoneType:None | Const:NoneType:None
+482:8:Attribute -> BM:django.db.models.expressions.Value.__init__ | BM:django.db.models.expressions.BaseExpression.__init__ | BM:builtins.object.__init__
+482:8:Call -> Super
+482:8:Name -> Class:builtins.super
+482:25:Name -> U
+482:45:Name -> Const:NoneType:None | U
+485:16:Call -> U
+485:16:Name -> Func:django.contrib.postgres.search.quote_lexeme | Func:django.contrib.postgres.search.quote_lexeme
+485:29:Attribute -> U
+485:29:Name -> Inst:django.contrib.postgres.search.Lexeme
+487:11:Attribute -> Const:bool:False | U
+487:11:Name -> Inst:django.contrib.postgres.search.Lexeme
+489:11:Attribute -> Const:NoneType:None | U
+489:11:Name -> Inst:django.contrib.postgres.search.Lexeme
+490:21:Attribute -> U
+490:21:Name -> Inst:django.contrib.postgres.search.Lexeme
+492:11:Name -> Const:str:'' | Const:str:'*' | U
+493:23:Name -> U
+493:31:Name -> Const:str:'*' | U
+494:11:Attribute -> Const:bool:False | U
+494:11:Name -> Inst:django.contrib.postgres.search.Lexeme
+495:24:Name -> U | Const:str:'Uninferable:*' | Const:str:'Uninferable:Uninferable'
+497:22:Name -> U | Const:str:'Uninferable:*' | Const:str:'Uninferable:Uninferable' | Const:str:'!Uninferable' | Const:str:'!Uninferable:*' | Const:str:'!Uninferable:Uninferable'
+500:17:Call -> U
+500:17:Attribute -> BM:django.db.models.expressions.BaseExpression.copy
+500:17:Name -> Inst:django.contrib.postgres.search.Lexeme
+501:8:Name -> U
+501:28:Attribute -> Const:bool:False | U
+501:28:Name -> Inst:django.contrib.postgres.search.Lexeme
+502:15:Name -> U
+505:21:Name -> Class:django.contrib.postgres.search.LexemeCombinable
+505:39:Name -> Class:django.db.models.expressions.CombinedExpression
+506:20:Call -> Inst:django.contrib.postgres.search.SearchQueryField
+506:20:Name -> Class:django.contrib.postgres.search.SearchQueryField
+510:23:Call -> U
+510:23:Attribute -> U
+510:23:Name -> U
+510:40:Attribute -> U
+510:40:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+511:8:Call -> ERR
+511:8:Attribute -> BM:builtins.list.extend
+511:8:Name -> List:0
+511:28:Name -> U
+513:23:Call -> U
+513:23:Attribute -> U
+513:23:Name -> U
+513:40:Attribute -> U
+513:40:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+514:8:Call -> ERR
+514:8:Attribute -> BM:builtins.list.extend
+514:8:Name -> List:0
+514:28:Name -> U
+516:27:Name -> U
+516:34:Attribute -> U
+516:34:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+516:51:Name -> U
+517:25:Name -> Const:str:'(Uninferable Uninferable Uninferable)'
+517:40:Call -> Tuple:0
+517:40:Name -> Class:builtins.tuple
+517:46:Name -> List:0
+518:22:Name -> Const:str:'(Uninferable Uninferable Uninferable)'
+522:17:Call -> U
+522:17:Attribute -> BM:django.db.models.expressions.BaseExpression.copy
+522:17:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+523:8:Name -> U
+523:42:Attribute -> U
+523:42:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+523:60:Attribute -> Const:str:'|'
+523:60:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+523:27:Attribute -> Const:str:'&'
+523:27:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+523:76:Attribute -> Const:str:'|'
+523:76:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+524:8:Name -> U
+524:22:Attribute -> U
+524:22:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+525:8:Name -> U
+525:22:Attribute -> U
+525:22:Name -> Inst:django.contrib.postgres.search.CombinedLexeme
+526:15:Name -> U

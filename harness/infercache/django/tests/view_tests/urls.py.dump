@@ -1,0 +1,190 @@
+11:11:Call -> U
+11:11:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+11:11:Attribute -> Module:posixpath | Module:ntpath
+11:11:Name -> Module:os
+11:27:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+11:27:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+11:27:Attribute -> Module:posixpath | Module:ntpath
+11:27:Name -> Module:os
+11:43:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+12:12:Call -> U
+12:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+12:12:Attribute -> Module:posixpath | Module:ntpath
+12:12:Name -> Module:os
+12:25:Name -> U
+13:13:Call -> U
+13:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+13:13:Attribute -> Module:posixpath | Module:ntpath
+13:13:Name -> Module:os
+13:26:Name -> U
+16:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+16:4:Name -> Partial:PartialFunction
+16:13:Attribute -> Func:tests.view_tests.views.index_page
+16:13:Name -> Module:tests.view_tests.views
+18:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+18:4:Name -> Partial:PartialFunction
+18:29:Call -> Partial:PartialFunction
+18:29:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+18:37:Attribute -> Func:django.views.defaults.page_not_found
+18:37:Name -> Module:django.views.defaults
+19:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+19:4:Name -> Partial:PartialFunction
+19:26:Attribute -> Func:django.views.defaults.server_error
+19:26:Name -> Module:django.views.defaults
+21:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+21:4:Name -> Partial:PartialFunction
+21:20:Attribute -> Func:tests.view_tests.views.raises
+21:20:Name -> Module:tests.view_tests.views
+22:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+22:4:Name -> Partial:PartialFunction
+22:23:Attribute -> Func:tests.view_tests.views.raises400
+22:23:Name -> Module:tests.view_tests.views
+23:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+23:4:Name -> Partial:PartialFunction
+23:35:Attribute -> Func:tests.view_tests.views.raises400_bad_request
+23:35:Name -> Module:tests.view_tests.views
+24:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+24:4:Name -> Partial:PartialFunction
+24:23:Attribute -> Func:tests.view_tests.views.raises403
+24:23:Name -> Module:tests.view_tests.views
+25:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+25:4:Name -> Partial:PartialFunction
+25:23:Attribute -> Func:tests.view_tests.views.raises404
+25:23:Name -> Module:tests.view_tests.views
+26:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+26:4:Name -> Partial:PartialFunction
+26:23:Attribute -> Func:tests.view_tests.views.raises500
+26:23:Name -> Module:tests.view_tests.views
+27:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+27:4:Name -> Partial:PartialFunction
+27:40:Attribute -> Func:tests.view_tests.views.custom_reporter_class_view
+27:40:Name -> Module:tests.view_tests.views
+28:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+28:4:Name -> Partial:PartialFunction
+28:26:Attribute -> Func:tests.view_tests.views.technical404
+28:26:Name -> Module:tests.view_tests.views
+29:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+29:4:Name -> Partial:PartialFunction
+29:27:Call -> Func:django.views.generic.base.View.as_view.view
+29:27:Attribute -> BM:django.views.generic.base.View.as_view
+29:27:Attribute -> Class:tests.view_tests.views.Http404View
+29:27:Name -> Module:tests.view_tests.views
+30:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+30:4:Name -> Partial:PartialFunction
+30:27:Call -> Func:django.views.generic.base.View.as_view.view
+30:27:Attribute -> BM:django.views.generic.base.View.as_view
+30:27:Attribute -> Class:tests.view_tests.views.Raises500View
+30:27:Name -> Module:tests.view_tests.views
+32:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+32:4:Name -> Partial:PartialFunction
+32:18:Call -> Tuple:3
+32:18:Name -> Func:django.urls.conf.include
+33:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+33:4:Name -> Partial:PartialFunction
+33:20:Call -> Func:django.views.generic.base.View.as_view.view
+33:20:Attribute -> BM:django.views.generic.base.View.as_view
+33:20:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+33:20:Name -> Module:django.views.i18n
+34:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+34:4:Name -> Partial:PartialFunction
+34:32:Call -> Func:django.views.generic.base.View.as_view.view
+34:32:Attribute -> BM:django.views.generic.base.View.as_view
+34:32:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+34:32:Name -> Module:django.views.i18n
+35:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+35:4:Name -> Partial:PartialFunction
+35:25:Call -> Func:django.views.generic.base.View.as_view.view
+35:25:Attribute -> BM:django.views.generic.base.View.as_view
+35:25:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+35:25:Name -> Module:django.views.i18n
+36:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+36:4:Name -> Partial:PartialFunction
+36:25:Call -> Func:django.views.generic.base.View.as_view.view
+36:25:Attribute -> BM:django.views.generic.base.View.as_view
+36:25:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+36:25:Name -> Module:django.views.i18n
+37:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+37:4:Name -> Partial:PartialFunction
+37:25:Call -> Func:django.views.generic.base.View.as_view.view
+37:25:Attribute -> BM:django.views.generic.base.View.as_view
+37:25:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+37:25:Name -> Module:django.views.i18n
+38:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+38:4:Name -> Partial:PartialFunction
+40:8:Call -> Func:django.views.generic.base.View.as_view.view
+40:8:Attribute -> BM:django.views.generic.base.View.as_view
+40:8:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+40:8:Name -> Module:django.views.i18n
+42:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+42:4:Name -> Partial:PartialFunction
+44:8:Call -> Func:django.views.generic.base.View.as_view.view
+44:8:Attribute -> BM:django.views.generic.base.View.as_view
+44:8:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+44:8:Name -> Module:django.views.i18n
+46:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+46:4:Name -> Partial:PartialFunction
+48:8:Call -> Func:django.views.generic.base.View.as_view.view
+48:8:Attribute -> BM:django.views.generic.base.View.as_view
+48:8:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+48:8:Name -> Module:django.views.i18n
+50:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+50:4:Name -> Partial:PartialFunction
+52:8:Call -> Func:django.views.generic.base.View.as_view.view
+52:8:Attribute -> BM:django.views.generic.base.View.as_view
+52:8:Attribute -> Class:django.views.i18n.JavaScriptCatalog
+52:8:Name -> Module:django.views.i18n
+54:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+54:4:Name -> Partial:PartialFunction
+54:29:Attribute -> Func:tests.view_tests.views.jsi18n
+54:29:Name -> Module:tests.view_tests.views
+55:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+55:4:Name -> Partial:PartialFunction
+55:35:Attribute -> Func:tests.view_tests.views.jsi18n_multi_catalogs
+55:35:Name -> Module:tests.view_tests.views
+56:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+56:4:Name -> Partial:PartialFunction
+56:22:Call -> Func:django.views.generic.base.View.as_view.view
+56:22:Attribute -> BM:django.views.generic.base.View.as_view
+56:22:Attribute -> Class:django.views.i18n.JSONCatalog
+56:22:Name -> Module:django.views.i18n
+58:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+58:4:Name -> Partial:PartialFunction
+60:8:Attribute -> Func:django.views.static.serve
+60:8:Name -> Module:django.views.static
+61:26:Name -> U
+65:15:Call -> List:0 | List:1
+65:15:Name -> Func:django.conf.urls.i18n.i18n_patterns
+66:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+66:4:Name -> Partial:PartialFunction
+66:12:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+66:12:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+66:33:Attribute -> Func:tests.view_tests.views.index_page
+66:33:Name -> Module:tests.view_tests.views
+70:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+70:4:Name -> Partial:PartialFunction
+72:8:Attribute -> Func:tests.view_tests.views.safestring_in_template_exception
+72:8:Name -> Module:tests.view_tests.views
+75:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+75:4:Name -> Partial:PartialFunction
+75:32:Attribute -> Func:tests.view_tests.views.template_exception
+75:32:Name -> Module:tests.view_tests.views
+76:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+76:4:Name -> Partial:PartialFunction
+78:8:Attribute -> Func:tests.view_tests.views.raises_template_does_not_exist
+78:8:Name -> Module:tests.view_tests.views
+81:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+81:4:Name -> Partial:PartialFunction
+81:32:Attribute -> Func:tests.view_tests.views.render_no_template
+81:32:Name -> Module:tests.view_tests.views
+82:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+82:4:Name -> Partial:PartialFunction
+84:8:Attribute -> Func:tests.view_tests.views.with_parameter
+84:8:Name -> Module:tests.view_tests.views
+88:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+88:4:Name -> Partial:PartialFunction
+88:45:Attribute -> Func:tests.view_tests.views.index_page
+88:45:Name -> Module:tests.view_tests.views
+89:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+89:4:Name -> Partial:PartialFunction
+89:32:Attribute -> Func:tests.view_tests.views.index_page
+89:32:Name -> Module:tests.view_tests.views

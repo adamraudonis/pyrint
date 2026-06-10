@@ -1,0 +1,82 @@
+16:3:Name -> Const:bool:False
+29:27:Name -> Class:typing.Any
+29:42:Name -> Class:pathlib.Path
+29:51:Name -> Class:pandas.core.frame.DataFrame
+29:63:Name -> Class:pandas.core.series.Series
+45:4:Call -> Const:NoneType:None
+45:4:Attribute -> Func:pandas.io.pickle.to_pickle
+45:4:Name -> Module:pandas
+45:17:Name -> U
+45:22:Name -> U
+46:11:Call -> U
+46:11:Attribute -> Func:pandas.io.pickle.read_pickle
+46:11:Name -> Module:pandas
+46:26:Name -> U
+50:12:Name -> Class:_collections_abc.Callable
+50:30:Name -> Class:_collections_abc.Callable
+50:50:Name -> Class:pathlib.Path
+51:5:Name -> Class:pandas.core.frame.DataFrame
+51:17:Name -> Class:pandas.core.series.Series
+69:4:Call -> U
+69:4:Name -> U
+69:11:Name -> U
+70:10:Call -> U
+70:10:Name -> U
+70:17:Name -> U
+71:11:Name -> U
+75:17:Name -> Class:builtins.str
+75:28:Name -> Class:builtins.str
+75:39:Name -> Inst:_io.BytesIO
+75:52:Name -> Class:builtins.str
+95:10:Name -> Class:builtins.tuple
+95:16:Name -> Class:typing.Any
+95:29:Name -> U
+98:21:Name -> Class:_collections_abc.Callable
+100:7:Name -> U
+101:26:Attribute -> Class:zipfile.ZipFile
+101:26:Name -> Module:zipfile
+103:16:Name -> Const:str:'test' | U
+103:22:Name -> U
+105:9:Name -> U
+106:26:Attribute -> Class:tarfile.TarFile
+106:26:Name -> Module:tarfile
+108:15:Call -> Inst:tarfile.TarInfo
+108:15:Attribute -> Class:tarfile.TarInfo
+108:15:Name -> Module:tarfile
+108:36:Name -> Const:str:'test' | U
+109:16:Call -> Inst:_io.BytesIO
+109:16:Attribute -> Class:_io.BytesIO
+109:16:Name -> Module:io
+109:27:Name -> U
+110:8:Name -> Inst:tarfile.TarInfo
+110:20:Call -> ERR
+110:20:Name -> Func:builtins.len
+110:24:Name -> U
+111:16:Name -> Inst:tarfile.TarInfo
+111:22:Name -> Inst:_io.BytesIO
+113:9:Name -> U
+114:26:Attribute -> Class:gzip.GzipFile
+114:26:Name -> Module:gzip
+115:9:Name -> U
+118:26:Attribute -> Class:bz2.BZ2File
+118:26:Name -> Module:bz2
+119:9:Name -> U
+120:26:Attribute -> U
+120:26:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+120:26:Name -> Func:pandas.compat._optional.import_optional_dependency | Func:pandas.compat._optional.import_optional_dependency | Func:pandas.compat._optional.import_optional_dependency
+121:9:Name -> U
+124:26:Attribute -> Class:lzma.LZMAFile
+124:26:Name -> Module:lzma
+126:14:Call -> ExcInst:builtins.ValueError
+126:14:Name -> Class:builtins.ValueError
+126:59:Name -> U
+132:9:Call -> U | Inst:zipfile.ZipFile | Inst:tarfile.TarFile | Inst:gzip.GzipFile | Inst:bz2.BZ2File | Inst:lzma.LZMAFile
+132:9:Name -> U | Class:zipfile.ZipFile | Class:tarfile.TarFile | Class:gzip.GzipFile | Class:bz2.BZ2File | Class:lzma.LZMAFile
+132:25:Name -> U
+132:36:Name -> Const:str:'wb' | Const:str:'w' | Const:str:'w'
+133:8:Call -> U
+133:8:Call -> U
+133:8:Name -> Func:builtins.getattr
+133:16:Name -> U
+133:19:Name -> Const:str:'write' | Const:str:'writestr' | Const:str:'addfile'
+133:28:Name -> Tuple:1 | Tuple:2 | Tuple:2

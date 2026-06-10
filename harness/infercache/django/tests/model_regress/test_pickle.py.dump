@@ -1,0 +1,89 @@
+8:23:Name -> Class:django.test.testcases.SimpleTestCase
+15:35:Attribute -> Class:django.db.models.base.Model
+15:35:Name -> Module:django.db.models
+16:20:Call -> Inst:django.db.models.fields.CharField
+16:20:Attribute -> Class:django.db.models.fields.CharField
+16:20:Name -> Module:django.db.models
+19:30:Call -> Tuple:3
+19:30:Attribute -> BM:django.db.models.base.Model.__reduce__ | BM:builtins.object.__reduce__
+19:30:Call -> Super
+19:30:Name -> Class:builtins.super
+20:23:Name -> Tuple:3
+21:20:Name -> Dict:3
+21:25:Name -> Const:str:'_django_version'
+22:23:Name -> Tuple:3
+24:12:Call -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_missing_django_version_unpickling.MissingDjangoVersion
+24:12:Name -> Class:tests.model_regress.test_pickle.ModelPickleTests.test_missing_django_version_unpickling.MissingDjangoVersion
+26:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+26:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+26:13:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests
+26:38:Name -> Class:builtins.RuntimeWarning
+26:54:Name -> Const:str:"Pickled model instance's Django version
+27:12:Call -> U
+27:12:Attribute -> Func:_pickle.loads | Func:pickle._loads
+27:12:Name -> Module:pickle
+27:25:Call -> U
+27:25:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+27:25:Name -> Module:pickle
+27:38:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_missing_django_version_unpickling.MissingDjangoVersion
+35:37:Attribute -> Class:django.db.models.base.Model
+35:37:Name -> Module:django.db.models
+36:20:Call -> Inst:django.db.models.fields.CharField
+36:20:Attribute -> Class:django.db.models.fields.CharField
+36:20:Name -> Module:django.db.models
+39:30:Call -> Tuple:3
+39:30:Attribute -> BM:django.db.models.base.Model.__reduce__ | BM:builtins.object.__reduce__
+39:30:Call -> Super
+39:30:Name -> Class:builtins.super
+40:23:Name -> Tuple:3
+41:16:Name -> Dict:3
+41:21:Name -> Const:str:'_django_version'
+42:23:Name -> Tuple:3
+44:12:Call -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_unsupported_unpickle.DifferentDjangoVersion
+44:12:Name -> Class:tests.model_regress.test_pickle.ModelPickleTests.test_unsupported_unpickle.DifferentDjangoVersion
+47:36:Attribute -> U
+47:36:Name -> Module:django
+49:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+49:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+49:13:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests
+49:38:Name -> Class:builtins.RuntimeWarning
+49:54:Name -> U
+50:12:Call -> U
+50:12:Attribute -> Func:_pickle.loads | Func:pickle._loads
+50:12:Name -> Module:pickle
+50:25:Call -> U
+50:25:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+50:25:Name -> Module:pickle
+50:38:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_unsupported_unpickle.DifferentDjangoVersion
+57:27:Attribute -> Class:django.db.models.base.Model
+57:27:Name -> Module:django.db.models
+59:24:Call -> Dict:3
+59:24:Attribute -> BM:builtins.dict.copy
+59:24:Call -> Dict:3
+59:24:Attribute -> BM:django.db.models.base.Model.__getstate__ | BM:builtins.object.__getstate__
+59:24:Call -> Super
+59:24:Name -> Class:builtins.super
+60:20:Name -> Dict:3
+61:23:Name -> Dict:3
+63:12:Call -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_with_getstate.PickledModel
+63:12:Name -> Class:tests.model_regress.test_pickle.ModelPickleTests.test_with_getstate.PickledModel
+64:8:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_with_getstate.PickledModel
+65:17:Call -> U
+65:17:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+65:17:Name -> Module:pickle
+65:30:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_with_getstate.PickledModel
+66:8:Call -> Const:NoneType:None
+66:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+66:8:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests
+66:25:Attribute -> Const:int:1
+66:25:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests.test_with_getstate.PickledModel
+67:19:Call -> U
+67:19:Attribute -> Func:_pickle.loads | Func:pickle._loads
+67:19:Name -> Module:pickle
+67:32:Name -> U
+68:8:Call -> Const:NoneType:None
+68:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+68:8:Name -> Inst:tests.model_regress.test_pickle.ModelPickleTests
+68:25:Call -> U
+68:25:Name -> Func:builtins.hasattr
+68:33:Name -> U

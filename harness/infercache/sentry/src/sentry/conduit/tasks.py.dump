@@ -1,0 +1,196 @@
+22:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:9:Attribute -> Func:logging.getLogger
+22:9:Name -> Module:logging
+22:27:Name -> Const:str:'src.sentry.conduit.tasks' | Const:str:'__main__'
+32:1:Call -> U
+32:1:Name -> U
+34:14:Name -> U
+35:33:Name -> Const:int:180
+36:14:Attribute -> U
+36:14:Name -> U
+38:29:Name -> Class:builtins.int
+38:46:Name -> Class:builtins.str
+41:16:Call -> U
+41:16:Name -> Func:src.sentry.conduit.tasks.generate_jwt
+42:11:Name -> Class:builtins.ValueError
+43:8:Call -> U
+43:8:Attribute -> U
+43:8:Name -> U
+43:37:Name -> ExcInst:builtins.ValueError
+45:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+45:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+45:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+46:61:Name -> U
+46:83:Name -> U
+49:28:Call -> U
+49:28:Name -> U
+50:19:Name -> U
+51:19:Call -> Const:str:''
+51:19:Name -> Class:builtins.str
+51:23:Call -> Inst:uuid.UUID
+51:23:Name -> Func:uuid.uuid4
+52:17:Name -> Const:int:0
+53:25:Call -> U
+53:25:Name -> Func:src.sentry.conduit.tasks.get_timestamp
+54:14:Attribute -> U
+54:14:Name -> U
+56:4:Call -> U
+56:4:Name -> Func:src.sentry.conduit.tasks.publish_data
+56:17:Name -> U
+56:25:Name -> U
+56:48:Name -> U
+59:13:Call -> Inst:builtins.range
+59:13:Name -> Class:builtins.range
+59:19:Name -> Const:int:100
+60:18:Call -> U
+60:18:Name -> U
+61:8:Call -> U
+61:8:Attribute -> U
+61:8:Name -> U
+61:33:Call -> Const:str:''
+61:33:Name -> Class:builtins.str
+61:37:Name -> U
+62:32:Call -> U
+62:32:Name -> U
+63:23:Name -> U
+64:23:Call -> Const:str:''
+64:23:Name -> Class:builtins.str
+64:27:Call -> Inst:uuid.UUID
+64:27:Name -> Func:uuid.uuid4
+65:21:Name -> Const:int:1
+66:29:Call -> U
+66:29:Name -> Func:src.sentry.conduit.tasks.get_timestamp
+67:18:Attribute -> U
+67:18:Name -> U
+68:20:Name -> U
+70:8:Call -> U
+70:8:Name -> Func:src.sentry.conduit.tasks.publish_data
+70:21:Name -> U
+70:29:Name -> U
+70:52:Name -> U
+72:8:Call -> ERR
+72:8:Attribute -> Func:time.sleep
+72:8:Name -> Module:time
+72:19:Name -> Const:float:0.15
+74:26:Call -> U
+74:26:Name -> U
+75:19:Name -> U
+76:19:Call -> Const:str:''
+76:19:Name -> Class:builtins.str
+76:23:Call -> Inst:uuid.UUID
+76:23:Name -> Func:uuid.uuid4
+77:17:Name -> Const:int:1 | Const:int:2
+78:25:Call -> U
+78:25:Name -> Func:src.sentry.conduit.tasks.get_timestamp
+79:14:Attribute -> U
+79:14:Name -> U
+81:4:Call -> U
+81:4:Name -> Func:src.sentry.conduit.tasks.publish_data
+81:17:Name -> U
+81:25:Name -> U
+81:46:Name -> U
+82:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+82:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+82:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+83:59:Name -> U
+83:81:Name -> U
+88:13:Name -> Class:builtins.str
+88:26:Name -> Class:builtins.str
+88:55:Name -> Class:builtins.str
+88:82:Name -> Class:builtins.str
+89:5:Name -> Class:builtins.str
+95:7:Name -> Const:NoneType:None | U
+96:17:Attribute -> U
+96:17:Name -> U
+97:7:Name -> Const:NoneType:None | U
+98:19:Attribute -> U
+98:19:Name -> U
+99:7:Name -> Const:NoneType:None | U
+100:17:Attribute -> U
+100:17:Name -> U
+101:11:Name -> U
+102:18:Call -> ExcInst:builtins.ValueError
+102:18:Name -> Class:builtins.ValueError
+104:15:Name -> U
+105:15:Name -> Const:NoneType:None | U
+106:15:Name -> Const:NoneType:None | U
+107:15:Call -> Inst:builtins.int
+107:15:Name -> Class:builtins.int
+107:19:Call -> U
+107:19:Attribute -> Func:time.time | Lambda:tests.sentry.models.test_debugfile:411 | U
+107:19:Name -> Module:time
+107:34:Name -> Const:int:300
+109:11:Call -> U
+109:11:Attribute -> U
+109:11:Name -> U
+109:22:Name -> Dict:4
+109:30:Name -> Const:NoneType:None | U
+112:34:Name -> Class:builtins.int
+112:50:Name -> Class:builtins.Exception
+112:64:Name -> Class:builtins.bool
+113:11:Name -> U
+113:21:Name -> Const:int:5
+113:53:Call -> ERR
+113:53:Name -> Func:builtins.isinstance
+113:64:Name -> U
+113:75:Name -> U
+116:23:Call -> U
+116:23:Name -> U
+117:4:Name -> Func:src.sentry.conduit.tasks.should_retry_publish
+118:4:Call -> U
+118:4:Name -> U
+123:12:Name -> Class:builtins.int
+124:21:Name -> U
+125:11:Name -> Class:builtins.str
+126:17:Name -> Class:builtins.str
+127:5:Name -> U
+133:7:Name -> Const:NoneType:None | U
+134:22:Attribute -> U
+134:22:Name -> U
+135:11:Call -> U
+135:11:Name -> U
+136:8:Call -> Partial:PartialFunction
+136:8:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+137:12:Name -> Func:src.sentry.conduit.tasks._do_publish
+138:19:Name -> U
+139:28:Name -> U
+140:18:Name -> U
+141:24:Name -> Const:NoneType:None | U
+147:12:Name -> Class:builtins.int
+148:21:Name -> U
+149:11:Name -> Class:builtins.str
+150:17:Name -> Class:builtins.str
+151:5:Name -> U
+152:15:Call -> U
+152:15:Attribute -> U
+152:15:Name -> U
+153:15:Name -> U
+153:37:Name -> U
+153:46:Attribute -> U
+153:46:Name -> U
+155:39:Name -> U
+158:13:Call -> U
+158:13:Attribute -> U
+158:13:Name -> U
+159:16:Name -> Const:int:5
+161:4:Call -> U
+161:4:Attribute -> U
+161:4:Name -> U
+162:11:Name -> U
+165:22:Attribute -> Class:_pydatetime.datetime
+165:22:Name -> Module:datetime
+165:58:Name -> U
+166:7:Name -> Const:NoneType:None | U
+167:13:Call -> Inst:_pydatetime.datetime | U
+167:13:Attribute -> BM:_pydatetime.datetime.now
+167:13:Attribute -> Class:_pydatetime.datetime
+167:13:Name -> Module:datetime
+167:35:Attribute -> Inst:_pydatetime.timezone
+167:35:Name -> Module:datetime
+168:16:Call -> U
+168:16:Name -> U
+169:4:Call -> U
+169:4:Attribute -> U
+169:4:Name -> U
+169:27:Name -> Const:NoneType:None | U | Inst:_pydatetime.datetime
+170:11:Name -> U

@@ -1,0 +1,370 @@
+121:7:Name -> Class:builtins.ImportError
+124:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+124:6:Attribute -> Func:logging.getLogger
+124:6:Name -> Module:logging
+124:24:Name -> Const:str:'salt.returners.postgres_local_cache' | Const:str:'__main__'
+130:11:Name -> Const:bool:True | Const:bool:False
+132:11:Name -> Const:str:'postgres_local_cache'
+140:15:Call -> U
+140:15:Attribute -> U
+140:15:Name -> U
+141:17:Name -> ERR
+142:17:Name -> ERR
+143:21:Name -> ERR
+144:21:Name -> ERR
+145:17:Name -> ERR
+147:11:Attribute -> U
+147:11:Name -> U
+148:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+148:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+148:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+148:57:Call -> ERR
+148:57:Attribute -> Func:sys.exc_info
+148:57:Name -> Module:sys
+150:11:Name -> U
+157:4:Call -> U
+157:4:Attribute -> U
+157:4:Name -> U
+158:4:Call -> U
+158:4:Attribute -> U
+158:4:Name -> U
+166:20:Call -> U
+166:20:Attribute -> U
+166:20:Name -> U
+167:21:Call -> U
+167:21:Attribute -> Func:salt.utils.json.loads
+167:21:Attribute -> Module:salt.utils.json
+167:21:Attribute -> Module:salt.utils
+167:21:Name -> Module:salt
+167:43:Call -> U
+167:43:Attribute -> U
+167:43:Name -> U
+169:18:Call -> U
+169:18:Attribute -> U
+169:18:Name -> U
+170:23:Call -> U
+170:23:Attribute -> U
+170:23:Name -> U
+171:16:Call -> U
+171:16:Attribute -> U
+171:16:Name -> U
+174:11:Name -> Dict:5
+181:10:Call -> Dict:5
+181:10:Name -> Func:salt.returners.postgres_local_cache._format_job_instance
+181:31:Name -> U
+182:4:Call -> ERR
+182:4:Attribute -> BM:builtins.dict.update
+182:4:Name -> Dict:5
+182:29:Call -> Const:str:'' | U
+182:29:Attribute -> Func:salt.utils.jid.jid_to_time
+182:29:Attribute -> Module:salt.utils.jid
+182:29:Attribute -> Module:salt.utils
+182:29:Name -> Module:salt
+182:56:Name -> U
+183:11:Name -> Dict:5
+190:10:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+190:10:Attribute -> Func:salt.utils.jid.gen_jid
+190:10:Attribute -> Module:salt.utils.jid
+190:10:Attribute -> Module:salt.utils
+190:10:Name -> Module:salt
+190:33:Name -> ERR
+192:4:Call -> U
+192:4:Attribute -> U
+192:4:Name -> U
+192:16:Name -> Const:str:'SELECT jid FROM jids WHERE jid = %s'
+192:22:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+193:11:Call -> U
+193:11:Attribute -> U
+193:11:Name -> U
+194:11:Name -> U
+195:15:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+206:11:Call -> Const:NoneType:None | U
+206:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+207:7:Name -> Const:NoneType:None | U
+209:10:Call -> U
+209:10:Attribute -> U
+209:10:Name -> Const:NoneType:None | U
+210:7:Name -> Const:NoneType:None | U
+211:14:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+211:14:Name -> Func:salt.returners.postgres_local_cache._gen_jid
+211:23:Name -> U
+213:14:Name -> U
+214:14:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+215:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+215:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+215:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+216:14:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+216:14:Name -> Func:salt.returners.postgres_local_cache._gen_jid
+216:23:Name -> U
+218:4:Call -> U
+218:4:Attribute -> U
+218:4:Name -> U
+219:4:Call -> U
+219:4:Attribute -> U
+219:4:Name -> Const:NoneType:None | U
+220:11:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}' | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+227:11:Call -> Const:NoneType:None | U
+227:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+228:7:Name -> Const:NoneType:None | U
+230:10:Call -> U
+230:10:Attribute -> U
+230:10:Name -> Const:NoneType:None | U
+234:10:Call -> Const:str:''
+234:10:Name -> Class:builtins.str
+234:14:Name -> U
+235:25:Name -> Const:str:''
+236:20:Name -> U
+237:8:Name -> Dict:1
+237:29:Name -> U
+238:20:Name -> U
+239:8:Name -> Dict:1
+239:29:Name -> U
+240:4:Call -> U
+240:4:Attribute -> U
+240:4:Name -> U
+241:8:Name -> Const:str:'INSERT INTO salt_returns\n            (
+243:12:Name -> U
+244:12:Name -> U
+245:12:Call -> U
+245:12:Attribute -> Func:salt.utils.json.dumps
+245:12:Attribute -> Module:salt.utils.json
+245:12:Attribute -> Module:salt.utils
+245:12:Name -> Module:salt
+245:34:Name -> Dict:1
+246:12:Name -> U
+247:12:Call -> U
+247:12:Attribute -> U
+247:12:Name -> U
+250:4:Call -> Const:NoneType:None
+250:4:Name -> Func:salt.returners.postgres_local_cache._close_conn
+250:16:Name -> Const:NoneType:None | U
+260:11:Call -> Const:NoneType:None | U
+260:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+261:7:Name -> Const:NoneType:None | U
+263:10:Call -> U
+263:10:Attribute -> U
+263:10:Name -> Const:NoneType:None | U
+264:17:Name -> U
+265:14:Call -> U
+265:14:Attribute -> U
+265:14:Name -> U
+266:15:Call -> U
+266:15:Attribute -> U
+266:15:Name -> U
+270:8:Call -> U
+270:8:Attribute -> U
+270:8:Name -> U
+270:20:Name -> Const:str:'INSERT INTO salt_events\n              
+270:26:Name -> U
+270:31:Call -> U
+270:31:Attribute -> Func:salt.utils.json.dumps
+270:31:Attribute -> Module:salt.utils.json
+270:31:Attribute -> Module:salt.utils
+270:31:Name -> Module:salt
+270:53:Name -> U
+270:60:Name -> ERR
+271:4:Call -> Const:NoneType:None
+271:4:Name -> Func:salt.returners.postgres_local_cache._close_conn
+271:16:Name -> Const:NoneType:None | U
+278:10:Call -> U
+278:10:Name -> Func:salt.returners.postgres_local_cache._escape_jid
+278:22:Name -> U
+279:11:Call -> Const:NoneType:None | U
+279:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+280:7:Name -> Const:NoneType:None | U
+282:10:Call -> U
+282:10:Attribute -> U
+282:10:Name -> Const:NoneType:None | U
+290:4:Call -> U
+290:4:Attribute -> U
+290:4:Name -> U
+291:8:Name -> Const:str:'INSERT INTO jids (jid, started, tgt_typ
+293:12:Name -> U
+294:12:Call -> Const:str:'' | U
+294:12:Attribute -> Func:salt.utils.jid.jid_to_time
+294:12:Attribute -> Module:salt.utils.jid
+294:12:Attribute -> Module:salt.utils
+294:12:Name -> Module:salt
+294:39:Name -> U
+295:12:Call -> Const:str:''
+295:12:Name -> Class:builtins.str
+295:16:Call -> U
+295:16:Attribute -> U
+295:16:Name -> U
+296:12:Call -> Const:str:''
+296:12:Name -> Class:builtins.str
+296:16:Call -> U
+296:16:Attribute -> U
+296:16:Name -> U
+297:12:Call -> Const:str:''
+297:12:Name -> Class:builtins.str
+297:16:Call -> U
+297:16:Attribute -> U
+297:16:Name -> U
+298:12:Call -> Const:str:''
+298:12:Name -> Class:builtins.str
+298:16:Call -> U
+298:16:Attribute -> U
+298:16:Name -> U
+299:12:Call -> Const:str:''
+299:12:Name -> Class:builtins.str
+299:16:Call -> U
+299:16:Attribute -> U
+299:16:Name -> U
+300:12:Call -> Const:str:''
+300:12:Name -> Class:builtins.str
+300:16:Call -> U
+300:16:Attribute -> U
+300:16:Name -> U
+301:12:Call -> Const:str:''
+301:12:Name -> Class:builtins.str
+301:16:Call -> U
+301:16:Attribute -> Func:salt.utils.json.dumps
+301:16:Attribute -> Module:salt.utils.json
+301:16:Attribute -> Module:salt.utils
+301:16:Name -> Module:salt
+301:38:Call -> U
+301:38:Attribute -> U
+301:38:Name -> U
+302:12:Call -> Const:str:''
+302:12:Name -> Class:builtins.str
+302:16:Call -> U
+302:16:Attribute -> U
+302:16:Name -> U
+306:4:Call -> Const:NoneType:None
+306:4:Name -> Func:salt.returners.postgres_local_cache._close_conn
+306:16:Name -> Const:NoneType:None | U
+319:10:Call -> Const:str:''
+319:10:Name -> Class:builtins.str
+319:14:Name -> U
+320:10:Call -> U
+320:10:Attribute -> Func:re.sub
+320:10:Name -> Module:re
+320:28:Name -> Const:str:''
+321:11:Name -> U
+330:4:Name -> Dict:0
+330:20:Name -> U
+331:4:Name -> Dict:0
+331:25:Name -> U
+332:4:Name -> Dict:0
+332:20:Name -> U
+333:4:Name -> Dict:0
+333:20:Name -> U
+334:4:Name -> Dict:0
+334:23:Name -> U
+335:4:Name -> Dict:0
+335:20:Name -> U
+336:4:Name -> Dict:0
+336:21:Name -> U
+337:4:Name -> Dict:0
+337:20:Name -> U
+338:4:Name -> Dict:0
+338:20:Name -> U
+339:11:Name -> Dict:0
+346:10:Call -> U
+346:10:Name -> Func:salt.returners.postgres_local_cache._escape_jid
+346:22:Name -> U
+347:11:Call -> Const:NoneType:None | U
+347:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+348:7:Name -> Const:NoneType:None | U
+350:10:Call -> U
+350:10:Attribute -> U
+350:10:Name -> Const:NoneType:None | U
+355:4:Call -> U
+355:4:Attribute -> U
+355:4:Name -> U
+355:16:Name -> Const:str:'SELECT jid, tgt_type, cmd, tgt, kwargs,
+355:22:Name -> U
+356:11:Call -> U
+356:11:Attribute -> U
+356:11:Name -> U
+357:7:Name -> U
+358:15:Call -> Dict:0
+358:15:Name -> Func:salt.returners.postgres_local_cache._build_dict
+358:27:Name -> U
+359:4:Call -> Const:NoneType:None
+359:4:Name -> Func:salt.returners.postgres_local_cache._close_conn
+359:16:Name -> Const:NoneType:None | U
+367:10:Call -> U
+367:10:Name -> Func:salt.returners.postgres_local_cache._escape_jid
+367:22:Name -> U
+368:11:Call -> Const:NoneType:None | U
+368:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+369:7:Name -> Const:NoneType:None | U
+371:10:Call -> U
+371:10:Attribute -> U
+371:10:Name -> Const:NoneType:None | U
+374:4:Call -> U
+374:4:Attribute -> U
+374:4:Name -> U
+374:16:Name -> Const:str:'SELECT id, return FROM salt_returns WHE
+374:22:Name -> U
+375:11:Call -> U
+375:11:Attribute -> U
+375:11:Name -> U
+377:7:Name -> U
+378:32:Name -> U
+379:23:Call -> U
+379:23:Attribute -> Func:salt.utils.json.loads
+379:23:Attribute -> Module:salt.utils.json
+379:23:Attribute -> Module:salt.utils
+379:23:Name -> Module:salt
+379:45:Name -> U
+380:19:Call -> ERR
+380:19:Name -> Func:builtins.isinstance
+380:30:Name -> U
+380:40:Name -> Class:builtins.dict
+380:65:Name -> U
+383:38:Name -> U
+384:12:Name -> Dict:0
+384:16:Name -> U
+384:26:Name -> U | Dict:1
+385:4:Call -> Const:NoneType:None
+385:4:Name -> Func:salt.returners.postgres_local_cache._close_conn
+385:16:Name -> Const:NoneType:None | U
+386:11:Name -> Dict:0
+394:11:Call -> Const:NoneType:None | U
+394:11:Name -> Func:salt.returners.postgres_local_cache._get_conn
+395:10:Call -> U
+395:10:Attribute -> U
+395:10:Name -> Const:NoneType:None | U
+401:24:Call -> Inst:builtins.int
+401:24:Name -> Class:builtins.int
+401:28:Call -> U
+401:28:Attribute -> Func:salt.utils.job.get_keep_jobs_seconds
+401:28:Attribute -> Module:salt.utils.job
+401:28:Attribute -> Module:salt.utils
+401:28:Name -> Module:salt
+401:65:Name -> ERR
+402:7:Name -> Inst:builtins.int
+404:12:Name -> Const:str:'SELECT jid, tgt_type, cmd, tgt, kwargs,
+406:14:Call -> Const:str:''
+406:14:Name -> Class:builtins.str
+406:18:Name -> Inst:builtins.int
+410:4:Call -> U
+410:4:Attribute -> U
+410:4:Name -> U
+410:16:Name -> Const:str:'SELECT jid, tgt_type, cmd, tgt, kwargs, | Const:str:"SELECT jid, tgt_type, cmd, tgt, kwargs,
+412:11:Call -> U
+412:11:Attribute -> U
+412:11:Name -> U
+413:10:Name -> U
+414:20:Call -> Dict:0
+414:20:Name -> Func:salt.returners.postgres_local_cache._build_dict
+414:32:Name -> U
+415:8:Name -> Dict:0
+415:12:Name -> Dict:0
+415:32:Call -> Dict:5
+415:32:Name -> Func:salt.returners.postgres_local_cache._format_jid_instance
+415:53:Name -> Dict:0
+415:71:Name -> Dict:0
+416:15:Call -> U
+416:15:Attribute -> U
+416:15:Name -> U
+417:4:Call -> U
+417:4:Attribute -> U
+417:4:Name -> U
+418:4:Call -> U
+418:4:Attribute -> U
+418:4:Name -> Const:NoneType:None | U
+419:11:Name -> Dict:0

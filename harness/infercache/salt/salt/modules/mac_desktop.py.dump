@@ -1,0 +1,62 @@
+16:7:Call -> U
+16:7:Attribute -> Func:salt.utils.platform.is_darwin
+16:7:Attribute -> Module:salt.utils.platform
+16:7:Attribute -> Module:salt.utils
+16:7:Name -> Module:salt
+17:15:Name -> Const:str:'desktop'
+32:11:Call -> ERR
+32:11:Name -> ERR
+32:35:Name -> Const:str:'osascript -e "get output volume of (get
+33:4:Call -> U
+33:4:Name -> Func:salt.modules.mac_desktop._check_cmd
+33:15:Name -> U
+35:11:Call -> U
+35:11:Attribute -> U
+35:11:Name -> U
+51:52:Name -> U
+52:11:Call -> ERR
+52:11:Name -> ERR
+52:35:Name -> Const:str:'osascript -e "set volume output volume 
+53:4:Call -> U
+53:4:Name -> Func:salt.modules.mac_desktop._check_cmd
+53:15:Name -> U
+55:11:Call -> U
+55:11:Name -> Func:salt.modules.mac_desktop.get_output_volume
+69:11:Call -> ERR
+69:11:Name -> ERR
+69:35:Name -> Const:str:'open /System/Library/Frameworks/ScreenS
+70:4:Call -> U
+70:4:Name -> Func:salt.modules.mac_desktop._check_cmd
+70:15:Name -> U
+89:11:Call -> ERR
+89:11:Name -> ERR
+89:35:Name -> Const:str:'/System/Library/CoreServices/Menu\\ Ext
+90:4:Call -> U
+90:4:Name -> Func:salt.modules.mac_desktop._check_cmd
+90:15:Name -> U
+108:10:Call -> Const:str:'say '
+108:10:Attribute -> BM:builtins.str.format
+108:26:Call -> Const:str:''
+108:26:Attribute -> BM:builtins.str.join
+108:35:Name -> Tuple:0
+109:11:Call -> ERR
+109:11:Name -> ERR
+109:35:Name -> Const:str:'say '
+110:4:Call -> U
+110:4:Name -> Func:salt.modules.mac_desktop._check_cmd
+110:15:Name -> U
+119:7:Name -> U
+121:18:Call -> U
+121:18:Attribute -> U
+121:18:Name -> U
+122:18:Call -> U
+122:18:Attribute -> U
+122:18:Name -> U
+123:11:Name -> U
+124:23:Name -> U
+125:11:Name -> U
+126:23:Name -> U
+128:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+128:14:Name -> Class:salt.exceptions.CommandExecutionError
+128:62:Name -> Const:str:'' | U
+130:11:Name -> U

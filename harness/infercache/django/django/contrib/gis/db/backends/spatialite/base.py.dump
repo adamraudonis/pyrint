@@ -1,0 +1,72 @@
+14:22:Name -> Class:django.db.backends.sqlite3.base.DatabaseWrapper
+15:24:Name -> Class:django.contrib.gis.db.backends.spatialite.schema.SpatialiteSchemaEditor
+17:19:Name -> Class:django.contrib.gis.db.backends.spatialite.client.SpatiaLiteClient
+18:21:Name -> Class:django.contrib.gis.db.backends.spatialite.features.DatabaseFeatures
+19:26:Name -> Class:django.contrib.gis.db.backends.spatialite.introspection.SpatiaLiteIntrospection
+20:16:Name -> Class:django.contrib.gis.db.backends.spatialite.operations.SpatiaLiteOperations
+28:8:Name -> Inst:django.contrib.gis.db.backends.spatialite.base.DatabaseWrapper
+29:12:Name -> U | Const:str:'mod_spatialite.so' | Const:str:'mod_spatialite' | Const:NoneType:None | Const:NoneType:None
+31:16:Call -> U
+31:16:Name -> Func:builtins.getattr
+31:24:Name -> Inst:django.conf.LazySettings
+34:16:Call -> Const:NoneType:None | Const:NoneType:None | U
+34:16:Name -> Func:ctypes.util.find_library | Func:ctypes.util.find_library | Func:ctypes._aix.find_library | Func:ctypes.util.find_library | Func:ctypes.util.find_library | Func:ctypes.util.find_library
+36:15:Name -> U | Const:str:'mod_spatialite.so' | Const:str:'mod_spatialite' | Const:NoneType:None | Const:NoneType:None
+38:8:Call -> Const:NoneType:None
+38:8:Attribute -> BM:django.db.backends.base.base.BaseDatabaseWrapper.__init__ | BM:builtins.object.__init__
+38:8:Call -> Super
+38:8:Name -> Class:builtins.super
+38:26:Name -> Tuple:0
+38:34:Name -> Dict:0
+41:15:Call -> U
+41:15:Attribute -> BM:django.db.backends.sqlite3.base.DatabaseWrapper.get_new_connection | BM:django.db.backends.base.base.BaseDatabaseWrapper.get_new_connection
+41:15:Call -> Super
+41:15:Name -> Class:builtins.super
+41:42:Name -> U
+44:12:Call -> U
+44:12:Attribute -> U
+44:12:Name -> U
+45:15:Name -> Class:builtins.AttributeError
+46:18:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+46:18:Name -> Class:django.core.exceptions.ImproperlyConfigured
+51:20:Attribute -> U
+51:20:Name -> Inst:django.contrib.gis.db.backends.spatialite.base.DatabaseWrapper
+53:16:Call -> U
+53:16:Attribute -> U
+53:16:Name -> U
+53:36:Name -> U
+54:19:Name -> Class:builtins.Exception
+55:19:Call -> U
+55:19:Name -> Func:builtins.getattr
+55:27:Name -> Inst:django.conf.LazySettings
+56:26:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+56:26:Name -> Class:django.core.exceptions.ImproperlyConfigured
+64:18:Call -> ExcInst:django.core.exceptions.ImproperlyConfigured
+64:18:Name -> Class:django.core.exceptions.ImproperlyConfigured
+66:44:Call -> Const:str:''
+66:44:Attribute -> BM:builtins.str.join
+66:54:Attribute -> U
+66:54:Name -> Inst:django.contrib.gis.db.backends.spatialite.base.DatabaseWrapper
+68:15:Name -> U
+71:8:Call -> U
+71:8:Attribute -> BM:django.db.backends.base.base.BaseDatabaseWrapper.prepare_database
+71:8:Call -> Super
+71:8:Name -> Class:builtins.super
+73:13:Call -> Inst:django.db.backends.utils.CursorDebugWrapper | Inst:django.db.backends.utils.CursorWrapper
+73:13:Attribute -> BM:django.db.backends.base.base.BaseDatabaseWrapper.cursor
+73:13:Name -> Inst:django.contrib.gis.db.backends.spatialite.base.DatabaseWrapper
+74:12:Call -> U
+74:12:Attribute -> BM:django.db.backends.utils.CursorDebugWrapper.execute
+74:12:Name -> Inst:django.db.backends.utils.CursorDebugWrapper
+75:15:Call -> U
+75:15:Attribute -> U
+75:15:Name -> Inst:django.db.backends.utils.CursorDebugWrapper
+76:19:Attribute -> Tuple:0
+76:19:Attribute -> Inst:django.contrib.gis.db.backends.spatialite.operations.SpatiaLiteOperations
+76:19:Name -> Inst:django.contrib.gis.db.backends.spatialite.base.DatabaseWrapper
+77:20:Call -> U
+77:20:Attribute -> BM:django.db.backends.utils.CursorDebugWrapper.execute
+77:20:Name -> Inst:django.db.backends.utils.CursorDebugWrapper
+79:20:Call -> U
+79:20:Attribute -> BM:django.db.backends.utils.CursorDebugWrapper.execute
+79:20:Name -> Inst:django.db.backends.utils.CursorDebugWrapper

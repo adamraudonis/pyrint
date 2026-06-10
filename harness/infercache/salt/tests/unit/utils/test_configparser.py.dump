@@ -1,0 +1,431 @@
+20:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:6:Attribute -> Func:logging.getLogger
+20:6:Name -> Module:logging
+20:24:Name -> Const:str:'tests.unit.utils.test_configparser' | Const:str:'__main__'
+25:14:Call -> ERR
+25:14:Attribute -> BM:builtins.str.split
+51:26:Name -> Class:tests.support.unit.TestCase
+57:18:Call -> U
+57:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+57:18:Attribute -> Module:posixpath | Module:ntpath
+57:18:Name -> Module:os
+57:31:Attribute -> U
+57:31:Name -> Inst:tests.support.runtests.RuntimeVars
+58:17:Call -> U
+58:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+58:17:Attribute -> Module:posixpath | Module:ntpath
+58:17:Name -> Module:os
+58:30:Attribute -> U
+58:30:Name -> Inst:tests.support.runtests.RuntimeVars
+62:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+64:12:Call -> ERR
+64:12:Attribute -> Func:posix.remove
+64:12:Name -> Module:os
+64:22:Attribute -> U
+64:22:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+65:15:Name -> Class:builtins.OSError
+66:15:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+66:15:Name -> ExcInst:builtins.OSError
+66:28:Attribute -> Const:int:2
+66:28:Name -> Module:errno
+70:15:Call -> Const:bool:False | Const:bool:True | U
+70:15:Attribute -> Func:genericpath.exists | U
+70:15:Attribute -> Module:posixpath | Module:ntpath
+70:15:Name -> Module:os
+70:30:Attribute -> U
+70:30:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+71:17:Call -> U
+71:17:Attribute -> Func:salt.utils.files.fopen
+71:17:Attribute -> Module:salt.utils.files
+71:17:Attribute -> Module:salt.utils
+71:17:Name -> Module:salt
+71:40:Attribute -> U
+71:40:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+72:16:Call -> U
+72:16:Attribute -> U
+72:16:Name -> U
+72:26:Call -> Const:str:'' | Inst:builtins.bytes | Const:bytes:b''
+72:26:Attribute -> Func:salt.utils.stringutils.to_bytes
+72:26:Attribute -> Module:salt.utils.stringutils
+72:26:Attribute -> Module:salt.utils
+72:26:Name -> Module:salt
+72:58:Call -> Const:str:''
+72:58:Attribute -> BM:builtins.str.join | BM:builtins.str.join
+72:58:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+72:58:Name -> Module:os
+72:74:Name -> U
+73:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+73:20:Call -> Inst:salt.utils.configparser.GitConfigParser
+73:20:Attribute -> Class:salt.utils.configparser.GitConfigParser
+73:20:Attribute -> Module:salt.utils.configparser
+73:20:Attribute -> Module:salt.utils
+73:20:Name -> Module:salt
+74:13:Call -> U
+74:13:Attribute -> Func:salt.utils.files.fopen
+74:13:Attribute -> Module:salt.utils.files
+74:13:Attribute -> Module:salt.utils
+74:13:Name -> Module:salt
+74:36:Attribute -> U
+74:36:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+75:12:Call -> Const:NoneType:None
+75:12:Attribute -> BM:salt.utils.configparser.GitConfigParser._read
+75:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+75:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+75:28:Name -> U
+75:32:Attribute -> U
+75:32:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+77:5:Name -> Class:builtins.classmethod
+80:12:Call -> ERR
+80:12:Attribute -> Func:posix.remove
+80:12:Name -> Module:os
+80:22:Attribute -> U
+80:22:Name -> Class:tests.unit.utils.test_configparser.TestGitConfigParser
+81:15:Name -> Class:builtins.OSError
+82:15:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+82:15:Name -> ExcInst:builtins.OSError
+82:28:Attribute -> Const:int:2
+82:28:Name -> Module:errno
+85:5:Name -> Class:builtins.staticmethod
+91:14:Call -> U
+91:14:Attribute -> Func:copy.copy
+91:14:Name -> Module:copy
+91:24:Name -> U
+92:20:Call -> Inst:builtins.enumerate
+92:20:Name -> Class:builtins.enumerate
+92:30:Name -> U
+93:15:Call -> U
+93:15:Attribute -> U
+93:15:Name -> U
+93:19:Name -> U
+93:33:Attribute -> Const:str:'        '
+93:33:Attribute -> Class:salt.utils.configparser.GitConfigParser
+93:33:Attribute -> Module:salt.utils.configparser
+93:33:Attribute -> Module:salt.utils
+93:33:Name -> Module:salt
+94:16:Name -> U
+94:20:Name -> U
+94:25:Call -> U
+94:25:Attribute -> U
+94:25:Name -> U
+94:29:Name -> U
+95:20:Attribute -> Const:str:'        '
+95:20:Attribute -> Class:salt.utils.configparser.GitConfigParser
+95:20:Attribute -> Module:salt.utils.configparser
+95:20:Attribute -> Module:salt.utils
+95:20:Name -> Module:salt
+97:15:Name -> U
+99:5:Name -> Class:builtins.staticmethod
+101:13:Call -> U
+101:13:Attribute -> Func:salt.utils.files.fopen
+101:13:Attribute -> Module:salt.utils.files
+101:13:Attribute -> Module:salt.utils
+101:13:Name -> Module:salt
+101:36:Name -> U
+102:19:Call -> U
+102:19:Attribute -> U
+102:19:Call -> U
+102:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+102:19:Attribute -> Module:salt.utils.stringutils
+102:19:Attribute -> Module:salt.utils
+102:19:Name -> Module:salt
+102:53:Call -> U
+102:53:Attribute -> U
+102:53:Name -> U
+105:26:Name -> U
+106:11:Call -> U
+106:11:Attribute -> Func:salt.utils.platform.is_windows
+106:11:Attribute -> Module:salt.utils.platform
+106:11:Attribute -> Module:salt.utils
+106:11:Name -> Module:salt
+106:59:Name -> U
+107:12:Name -> Dict:1
+108:13:Call -> U
+108:13:Attribute -> Func:salt.utils.files.fopen
+108:13:Attribute -> Module:salt.utils.files
+108:13:Attribute -> Module:salt.utils
+108:13:Name -> Module:salt
+108:36:Attribute -> U
+108:36:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+108:55:Name -> Dict:1
+109:12:Call -> Const:NoneType:None
+109:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.write
+109:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+109:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+109:28:Name -> U
+110:8:Call -> Const:NoneType:None
+110:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+110:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+110:25:Call -> U
+110:25:Attribute -> Func:tests.unit.utils.test_configparser.TestGitConfigParser.get_lines
+110:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+110:40:Attribute -> U
+110:40:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+110:58:Call -> U
+110:58:Attribute -> Func:tests.unit.utils.test_configparser.TestGitConfigParser.fix_indent
+110:58:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+110:74:Name -> U
+117:8:Call -> Const:NoneType:None
+117:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+117:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+117:25:Call -> Inst:builtins.object | U
+117:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+117:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+117:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+120:8:Call -> Const:NoneType:None
+120:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+120:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+121:12:Call -> Inst:builtins.object | U
+121:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+121:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+121:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+124:8:Call -> Const:NoneType:None
+124:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+124:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+125:12:Call -> Inst:builtins.object | U
+125:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+125:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+125:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+126:12:Call -> U
+126:12:Attribute -> Func:salt.utils.stringutils.to_unicode
+126:12:Attribute -> Module:salt.utils.stringutils
+126:12:Attribute -> Module:salt.utils
+126:12:Name -> Module:salt
+137:8:Call -> Const:NoneType:None
+137:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+137:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+137:25:Call -> Inst:builtins.object | U
+137:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+137:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+137:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+143:8:Call -> Const:NoneType:None
+143:8:Attribute -> BM:salt.utils.configparser.GitConfigParser.set
+143:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+143:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+144:8:Call -> Const:NoneType:None
+144:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+144:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+144:25:Call -> Inst:builtins.object | U
+144:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+144:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+144:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+150:8:Call -> Const:NoneType:None
+150:8:Attribute -> BM:configparser.RawConfigParser.add_section
+150:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+150:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+151:8:Call -> Const:NoneType:None
+151:8:Attribute -> BM:salt.utils.configparser.GitConfigParser.set
+151:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+151:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+152:8:Call -> Const:NoneType:None
+152:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+152:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+152:25:Call -> Inst:builtins.object | U
+152:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+152:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+152:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+160:8:Call -> Const:NoneType:None
+160:8:Attribute -> BM:salt.utils.configparser.GitConfigParser.set
+160:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+160:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+161:8:Call -> Const:NoneType:None
+161:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+161:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+161:25:Call -> Inst:builtins.object | U
+161:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+161:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+161:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+170:8:Call -> Const:NoneType:None
+170:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+170:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+170:25:Call -> Inst:builtins.object | U
+170:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+170:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+170:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+170:39:Attribute -> Const:str:'remote "origin"'
+170:39:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+170:62:Name -> Const:str:'+refs/heads/*:refs/remotes/origin/*'
+172:8:Call -> Const:NoneType:None
+172:8:Attribute -> BM:salt.utils.configparser.GitConfigParser.set_multivar
+172:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+172:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+172:31:Attribute -> Const:str:'remote "origin"'
+172:31:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+172:53:Name -> Const:str:'+refs/tags/*:refs/tags/*'
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+174:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+175:12:Call -> Inst:builtins.object | U
+175:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+175:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+175:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+175:26:Attribute -> Const:str:'remote "origin"'
+175:26:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+175:50:Name -> Const:str:'+refs/heads/*:refs/remotes/origin/*'
+175:64:Name -> Const:str:'+refs/tags/*:refs/tags/*'
+178:13:Call -> U
+178:13:Attribute -> Func:salt.utils.files.fopen
+178:13:Attribute -> Module:salt.utils.files
+178:13:Attribute -> Module:salt.utils
+178:13:Name -> Module:salt
+178:36:Attribute -> U
+178:36:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+179:12:Call -> Const:NoneType:None
+179:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.write
+179:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+179:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+179:28:Name -> U
+181:19:Call -> U
+181:19:Attribute -> Func:tests.unit.utils.test_configparser.TestGitConfigParser.fix_indent
+181:19:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+181:35:Name -> U
+182:8:Call -> U
+182:8:Attribute -> U
+182:8:Name -> U
+182:40:Name -> Const:str:'+refs/tags/*:refs/tags/*'
+183:8:Call -> Const:NoneType:None
+183:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+183:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+183:25:Call -> U
+183:25:Attribute -> Func:tests.unit.utils.test_configparser.TestGitConfigParser.get_lines
+183:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+183:40:Attribute -> U
+183:40:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+183:58:Name -> U
+190:12:Call -> U
+190:12:Attribute -> BM:configparser.RawConfigParser.remove_option
+190:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+190:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+190:36:Attribute -> Const:str:'remote "origin"'
+190:36:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+190:49:Name -> Const:str:'fetch' | Const:str:'pushurl'
+193:12:Call -> Inst:unittest.case._AssertRaisesContext
+193:12:Attribute -> BM:unittest.case.TestCase.assertRaises
+193:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+194:16:Attribute -> Class:configparser.NoOptionError
+194:16:Attribute -> Module:salt.utils.configparser
+194:16:Attribute -> Module:salt.utils
+194:16:Name -> Module:salt
+194:55:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+194:55:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+194:55:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+194:70:Attribute -> Const:str:'remote "origin"'
+194:70:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+194:83:Name -> Const:str:'fetch' | Const:str:'pushurl'
+205:8:Call -> Const:NoneType:None
+205:8:Attribute -> BM:salt.utils.configparser.GitConfigParser.set_multivar
+205:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+205:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+205:31:Attribute -> Const:str:'remote "origin"'
+205:31:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+205:53:Name -> Const:str:'+refs/tags/*:refs/tags/*'
+206:8:Call -> Const:NoneType:None
+206:8:Attribute -> BM:salt.utils.configparser.GitConfigParser.set_multivar
+206:8:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+206:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+206:31:Attribute -> Const:str:'remote "origin"'
+206:31:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+206:53:Name -> Const:str:'+refs/foo/*:refs/foo/*'
+208:8:Call -> Const:NoneType:None
+208:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+208:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+209:12:Call -> Inst:builtins.object | U
+209:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+209:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+209:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+209:26:Attribute -> Const:str:'remote "origin"'
+209:26:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+210:13:Name -> Const:str:'+refs/heads/*:refs/remotes/origin/*'
+210:27:Name -> Const:str:'+refs/tags/*:refs/tags/*'
+210:42:Name -> Const:str:'+refs/foo/*:refs/foo/*'
+213:8:Call -> Const:NoneType:None
+213:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+213:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+214:12:Call -> Const:bool:False | U
+214:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.remove_option_regexp
+214:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+214:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+215:16:Attribute -> Const:str:'remote "origin"'
+215:16:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+217:16:Call -> U
+217:16:Attribute -> Func:salt.utils.stringutils.to_unicode
+217:16:Attribute -> Module:salt.utils.stringutils
+217:16:Attribute -> Module:salt.utils
+217:16:Name -> Module:salt
+222:8:Call -> Const:NoneType:None
+222:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+222:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+223:12:Call -> Inst:builtins.object | U
+223:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+223:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+223:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+223:26:Attribute -> Const:str:'remote "origin"'
+223:26:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+224:13:Name -> Const:str:'+refs/heads/*:refs/remotes/origin/*'
+224:27:Name -> Const:str:'+refs/tags/*:refs/tags/*'
+224:42:Name -> Const:str:'+refs/foo/*:refs/foo/*'
+227:8:Call -> Const:NoneType:None
+227:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+227:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+227:24:Call -> Const:bool:False | U
+227:24:Attribute -> BM:salt.utils.configparser.GitConfigParser.remove_option_regexp
+227:24:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+227:24:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+227:55:Attribute -> Const:str:'remote "origin"'
+227:55:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+229:8:Call -> Const:NoneType:None
+229:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+229:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+230:12:Call -> Inst:builtins.object | U
+230:12:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+230:12:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+230:12:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+230:26:Attribute -> Const:str:'remote "origin"'
+230:26:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+230:50:Name -> Const:str:'+refs/heads/*:refs/remotes/origin/*'
+230:64:Name -> Const:str:'+refs/foo/*:refs/foo/*'
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+233:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+233:24:Call -> Const:bool:False | U
+233:24:Attribute -> BM:salt.utils.configparser.GitConfigParser.remove_option_regexp
+233:24:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+233:24:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+233:55:Attribute -> Const:str:'remote "origin"'
+233:55:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+235:8:Call -> Const:NoneType:None
+235:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+235:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+235:25:Call -> Inst:builtins.object | U
+235:25:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+235:25:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+235:25:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+235:39:Attribute -> Const:str:'remote "origin"'
+235:39:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+235:62:Name -> Const:str:'+refs/heads/*:refs/remotes/origin/*'
+237:8:Call -> Const:NoneType:None
+237:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+237:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+237:24:Call -> Const:bool:False | U
+237:24:Attribute -> BM:salt.utils.configparser.GitConfigParser.remove_option_regexp
+237:24:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+237:24:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+237:55:Attribute -> Const:str:'remote "origin"'
+237:55:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+239:8:Call -> Inst:unittest.case._AssertRaisesContext
+239:8:Attribute -> BM:unittest.case.TestCase.assertRaises
+239:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+240:12:Attribute -> Class:configparser.NoOptionError
+240:12:Attribute -> Module:salt.utils.configparser
+240:12:Attribute -> Module:salt.utils
+240:12:Name -> Module:salt
+240:51:Attribute -> BM:salt.utils.configparser.GitConfigParser.get
+240:51:Attribute -> Inst:salt.utils.configparser.GitConfigParser
+240:51:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+240:66:Attribute -> Const:str:'remote "origin"'
+240:66:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+247:8:Call -> Const:NoneType:None
+247:8:Attribute -> BM:tests.unit.utils.test_configparser.TestGitConfigParser._test_write
+247:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser
+253:8:Call -> Const:NoneType:None
+253:8:Attribute -> BM:tests.unit.utils.test_configparser.TestGitConfigParser._test_write
+253:8:Name -> Inst:tests.unit.utils.test_configparser.TestGitConfigParser

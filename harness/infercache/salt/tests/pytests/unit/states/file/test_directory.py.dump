@@ -1,0 +1,453 @@
+18:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:6:Attribute -> Func:logging.getLogger
+18:6:Name -> Module:logging
+18:24:Name -> Const:str:'tests.pytests.unit.states.file.test_dir | Const:str:'__main__'
+21:1:Attribute -> U
+21:1:Name -> U
+24:8:Name -> Module:salt.states.file
+28:34:Attribute -> Func:salt.serializers.yaml.serialize
+28:34:Name -> Module:salt.serializers.yaml
+29:36:Attribute -> Func:salt.serializers.yaml.serialize
+29:36:Name -> Module:salt.serializers.yaml
+30:34:Attribute -> Func:salt.serializers.json.serialize
+30:34:Name -> Module:salt.serializers.json
+31:37:Attribute -> Func:salt.serializers.msgpack.serialize
+31:37:Name -> Module:salt.serializers.msgpack
+49:7:Call -> U
+49:7:Attribute -> Func:salt.utils.platform.is_windows
+49:7:Attribute -> Module:salt.utils.platform
+49:7:Attribute -> Module:salt.utils
+49:7:Name -> Module:salt
+50:15:Call -> Const:str:''
+50:15:Attribute -> BM:builtins.str.replace
+50:15:Name -> Const:str:'/etc/testdir'
+52:19:Name -> Const:str:'/etc/testdir' | Const:str:''
+54:31:Name -> Const:str:'/etc/testdir' | Const:str:''
+57:4:Call -> ERR
+57:4:Attribute -> BM:builtins.dict.update
+57:4:Name -> Dict:4
+57:27:Name -> Const:str:'Must provide name to file.directory'
+58:11:Call -> Dict:4 | U
+58:11:Attribute -> Func:salt.states.file.directory
+58:11:Name -> Module:salt.states.file
+58:38:Name -> Dict:4
+61:4:Call -> ERR
+61:4:Attribute -> BM:builtins.dict.update
+61:4:Name -> Dict:4
+61:27:Name -> Const:str:'Cannot specify both max_depth and clean
+61:41:Name -> Const:str:'/etc/testdir' | Const:str:''
+62:11:Call -> Dict:4 | U
+62:11:Attribute -> Func:salt.states.file.directory
+62:11:Name -> Module:salt.states.file
+62:31:Name -> Const:str:'/etc/testdir' | Const:str:''
+62:65:Name -> Dict:4
+64:13:Call -> U
+64:13:Name -> U
+65:13:Call -> U
+65:13:Name -> U
+66:7:Call -> U
+66:7:Attribute -> Func:salt.utils.platform.is_windows
+66:7:Attribute -> Module:salt.utils.platform
+66:7:Attribute -> Module:salt.utils
+66:7:Name -> Module:salt
+67:21:Call -> U
+67:21:Name -> U
+67:44:Name -> Dict:4
+69:21:Call -> U
+69:21:Name -> U
+69:45:Name -> Dict:4
+70:15:Call -> U
+70:15:Name -> U
+85:15:Call -> U
+85:15:Name -> U
+100:17:Call -> U
+100:17:Name -> U
+103:30:Name -> Const:str:'/etc/testdir' | Const:str:''
+104:13:Name -> Const:str:'/etc/testdir' | Const:str:''
+107:17:Name -> Class:salt.exceptions.CommandExecutionError
+108:9:Call -> U
+108:9:Attribute -> U
+108:9:Name -> U
+109:8:Attribute -> ERR
+109:8:Name -> Module:salt.states.file
+111:34:Name -> U
+112:32:Name -> U
+113:33:Name -> U
+114:26:Name -> U
+115:32:Name -> U
+116:26:Name -> U
+118:7:Call -> U
+118:7:Name -> U
+118:44:Name -> Class:salt.exceptions.CommandExecutionError
+118:57:Call -> U
+118:57:Name -> U
+119:25:Name -> U
+120:7:Call -> U
+120:7:Name -> U
+121:49:Name -> U
+123:11:Call -> U
+123:11:Attribute -> Func:salt.utils.platform.is_windows
+123:11:Attribute -> Module:salt.utils.platform
+123:11:Attribute -> Module:salt.utils
+123:11:Name -> Module:salt
+127:8:Call -> ERR
+127:8:Attribute -> BM:builtins.dict.update
+127:8:Name -> Dict:4
+127:31:Name -> Const:str:'Cannot specify both max_depth and clean | Const:str:'' | Const:str:'User salt is not available Group saltst
+127:45:Name -> Const:str:'/etc/testdir' | Const:str:''
+128:15:Call -> Dict:4 | U
+128:15:Attribute -> Func:salt.states.file.directory
+128:15:Name -> Module:salt.states.file
+128:35:Name -> Const:str:'/etc/testdir' | Const:str:''
+128:46:Name -> Const:str:'salt'
+128:58:Name -> Const:str:'saltstack'
+128:68:Name -> Dict:4
+130:13:Call -> U
+130:13:Attribute -> U
+130:13:Name -> U
+130:26:Attribute -> Module:posixpath | Module:ntpath
+130:26:Name -> Module:os
+130:44:Name -> U
+131:37:Name -> Const:str:'/etc/testdir' | Const:str:''
+132:12:Call -> ERR
+132:12:Attribute -> BM:builtins.dict.update
+132:12:Name -> Dict:4
+132:35:Name -> Const:str:'Specified file /etc/testdir is not an a | Const:str:'Specified file  is not an absolute path
+133:19:Call -> Dict:4 | U
+133:19:Attribute -> Func:salt.states.file.directory
+133:19:Name -> Module:salt.states.file
+133:39:Name -> Const:str:'/etc/testdir' | Const:str:''
+133:50:Name -> Const:str:'salt'
+133:62:Name -> Const:str:'saltstack'
+133:72:Name -> Dict:4
+135:13:Call -> U
+135:13:Attribute -> U
+135:13:Name -> U
+135:26:Attribute -> Module:posixpath | Module:ntpath
+135:26:Name -> Module:os
+135:44:Name -> U
+136:17:Call -> U
+136:17:Attribute -> U
+136:17:Name -> U
+137:16:Attribute -> Module:posixpath | Module:ntpath
+137:16:Name -> Module:os
+139:16:Call -> U
+139:16:Name -> U
+141:21:Call -> U
+141:21:Attribute -> U
+141:21:Name -> U
+141:34:Attribute -> Module:posixpath | Module:ntpath
+141:34:Name -> Module:os
+141:54:Name -> U
+143:20:Call -> ERR
+143:20:Attribute -> BM:builtins.dict.update
+143:20:Name -> Dict:4
+143:43:Name -> Const:str:'File exists where the backup target A s
+145:24:Call -> Dict:4 | U
+145:24:Attribute -> Func:salt.states.file.directory
+145:24:Name -> Module:salt.states.file
+146:28:Name -> Const:str:'/etc/testdir' | Const:str:''
+146:39:Name -> Const:str:'salt'
+146:51:Name -> Const:str:'saltstack'
+148:27:Name -> Dict:4
+151:21:Call -> U
+151:21:Attribute -> U
+151:21:Name -> U
+151:34:Attribute -> Module:posixpath | Module:ntpath
+151:34:Name -> Module:os
+151:53:Name -> U
+152:49:Name -> Const:str:'/etc/testdir' | Const:str:''
+153:20:Call -> ERR
+153:20:Attribute -> BM:builtins.dict.update
+153:20:Name -> Dict:4
+153:43:Name -> Const:str:'Specified location /etc/testdir exists  | Const:str:'Specified location  exists and is a fil
+154:27:Call -> Dict:4 | U
+154:27:Attribute -> Func:salt.states.file.directory
+154:27:Name -> Module:salt.states.file
+154:47:Name -> Const:str:'/etc/testdir' | Const:str:''
+154:58:Name -> Const:str:'salt'
+154:70:Name -> Const:str:'saltstack'
+154:80:Name -> Dict:4
+156:21:Call -> U
+156:21:Attribute -> U
+156:21:Name -> U
+156:34:Attribute -> Module:posixpath | Module:ntpath
+156:34:Name -> Module:os
+156:53:Name -> U
+157:49:Name -> Const:str:'/etc/testdir' | Const:str:''
+158:20:Call -> ERR
+158:20:Attribute -> BM:builtins.dict.update
+158:20:Name -> Dict:4
+158:43:Name -> Const:str:'Specified location /etc/testdir exists  | Const:str:'Specified location  exists and is a sym
+159:27:Call -> Dict:4 | U
+159:27:Attribute -> Func:salt.states.file.directory
+159:27:Name -> Module:salt.states.file
+159:47:Name -> Const:str:'/etc/testdir' | Const:str:''
+159:58:Name -> Const:str:'salt'
+159:70:Name -> Const:str:'saltstack'
+159:80:Name -> Dict:4
+161:17:Call -> U
+161:17:Attribute -> U
+161:17:Name -> U
+161:30:Attribute -> Module:posixpath | Module:ntpath
+161:30:Name -> Module:os
+161:48:Name -> U
+162:21:Call -> U
+162:21:Attribute -> U
+162:21:Name -> U
+162:32:Attribute -> ERR
+162:32:Name -> Module:salt.states.file
+163:23:Call -> U
+163:23:Attribute -> Func:salt.utils.platform.is_windows
+163:23:Attribute -> Module:salt.utils.platform
+163:23:Attribute -> Module:salt.utils
+163:23:Name -> Module:salt
+164:31:Call -> U
+164:31:Attribute -> BM:builtins.str.format
+164:78:Name -> Const:str:'/etc/testdir' | Const:str:''
+167:28:Call -> U
+167:28:Attribute -> BM:builtins.str.format
+168:56:Name -> Const:str:'/etc/testdir' | Const:str:''
+170:20:Call -> ERR
+170:20:Attribute -> BM:builtins.dict.update
+170:20:Name -> Dict:4
+172:39:Name -> Const:str:'Cannot specify both max_depth and clean | Const:str:'' | Const:str:'User salt is not available Group saltst | Const:str:'Specified file /etc/testdir is not an a | Const:str:'Specified file  is not an absolute path | Const:str:'File exists where the backup target A s | Const:str:'Specified location /etc/testdir exists  | Const:str:'Specified location  exists and is a fil | Const:str:'Specified location /etc/testdir exists  | Const:str:'Specified location  exists and is a sym | U
+174:40:Name -> Const:str:'/etc/testdir' | Const:str:''
+177:27:Call -> Dict:4 | U
+177:27:Attribute -> Func:salt.states.file.directory
+177:27:Name -> Module:salt.states.file
+177:47:Name -> Const:str:'/etc/testdir' | Const:str:''
+177:58:Name -> Const:str:'salt'
+177:70:Name -> Const:str:'saltstack'
+177:80:Name -> Dict:4
+179:21:Call -> U
+179:21:Attribute -> U
+179:21:Name -> U
+179:32:Attribute -> ERR
+179:32:Name -> Module:salt.states.file
+180:25:Call -> U
+180:25:Attribute -> U
+180:25:Name -> U
+180:38:Attribute -> Module:posixpath | Module:ntpath
+180:38:Name -> Module:os
+180:56:Name -> U
+181:57:Name -> Const:str:'/etc/testdir' | Const:str:''
+182:24:Call -> ERR
+182:24:Attribute -> BM:builtins.dict.update
+182:24:Name -> Dict:4
+182:47:Name -> Const:str:'No directory to create /etc/testdir in' | Const:str:'No directory to create  in'
+183:31:Call -> Dict:4 | U
+183:31:Attribute -> Func:salt.states.file.directory
+183:31:Name -> Module:salt.states.file
+183:51:Name -> Const:str:'/etc/testdir' | Const:str:''
+183:62:Name -> Const:str:'salt'
+183:74:Name -> Const:str:'saltstack'
+183:84:Name -> Dict:4
+185:23:Call -> U
+185:23:Attribute -> Func:salt.utils.platform.is_windows
+185:23:Attribute -> Module:salt.utils.platform
+185:23:Attribute -> Module:salt.utils
+185:23:Name -> Module:salt
+189:25:Call -> U
+189:25:Attribute -> U
+189:25:Name -> U
+190:24:Attribute -> Module:posixpath | Module:ntpath
+190:24:Name -> Module:os
+190:42:Call -> U
+190:42:Name -> U
+190:64:Name -> List:3 | List:4
+192:61:Name -> Const:str:'/etc/testdir' | Const:str:''
+193:24:Call -> ERR
+193:24:Attribute -> BM:builtins.dict.update
+193:24:Name -> Dict:4
+195:43:Name -> Const:str:'Failed to create directory /etc/testdir | Const:str:'Failed to create directory '
+197:44:Name -> Const:str:'/etc/testdir' | Const:str:''
+200:31:Call -> Dict:4 | U
+200:31:Attribute -> Func:salt.states.file.directory
+200:31:Name -> Module:salt.states.file
+200:51:Name -> Const:str:'/etc/testdir' | Const:str:''
+200:62:Name -> Const:str:'salt'
+200:74:Name -> Const:str:'saltstack'
+200:84:Name -> Dict:4
+203:32:Name -> Const:str:'/etc/testdir' | Const:str:''
+208:23:Call -> U
+208:23:Attribute -> Func:salt.utils.platform.is_windows
+208:23:Attribute -> Module:salt.utils.platform
+208:23:Attribute -> Module:salt.utils
+208:23:Name -> Module:salt
+209:37:Call -> U
+209:37:Name -> U
+209:60:Name -> Dict:4 | Dict:4
+211:37:Call -> U
+211:37:Name -> U
+211:61:Name -> Dict:4 | Dict:4
+215:32:Name -> Const:str:'/etc/testdir' | Const:str:''
+220:23:Call -> U
+220:23:Attribute -> Func:salt.utils.platform.is_windows
+220:23:Attribute -> Module:salt.utils.platform
+220:23:Attribute -> Module:salt.utils
+220:23:Name -> Module:salt
+221:24:Name -> Dict:4 | Dict:4
+221:41:Call -> Const:str:''
+221:41:Attribute -> BM:builtins.str.replace | BM:builtins.str.replace
+221:41:Name -> Dict:4 | Dict:4
+222:25:Call -> U
+222:25:Attribute -> U
+222:25:Name -> U
+223:24:Attribute -> ERR
+223:24:Name -> Module:salt.states.file
+223:65:Name -> U
+225:29:Call -> U
+225:29:Attribute -> U
+225:29:Name -> U
+225:42:Attribute -> Module:posixpath | Module:ntpath
+225:42:Name -> Module:os
+225:60:Name -> U
+227:32:Call -> Dict:4 | U
+227:32:Attribute -> Func:salt.states.file.directory
+227:32:Name -> Module:salt.states.file
+228:36:Name -> Const:str:'/etc/testdir' | Const:str:''
+228:47:Name -> Const:str:'salt'
+228:61:Name -> List:1
+228:76:Name -> Const:str:'saltstack'
+230:35:Name -> Dict:4 | Dict:4
+234:32:Name -> Const:str:'/etc/testdir' | Const:str:''
+239:23:Call -> U
+239:23:Attribute -> Func:salt.utils.platform.is_windows
+239:23:Attribute -> Module:salt.utils.platform
+239:23:Attribute -> Module:salt.utils
+239:23:Name -> Module:salt
+240:37:Call -> U
+240:37:Name -> U
+240:60:Name -> Dict:4 | Dict:4
+242:37:Call -> U
+242:37:Name -> U
+242:61:Name -> Dict:4 | Dict:4
+246:32:Name -> Const:str:'/etc/testdir' | Const:str:''
+254:25:Call -> U
+254:25:Attribute -> U
+254:25:Name -> U
+255:24:Attribute -> ERR
+255:24:Name -> Module:salt.states.file
+255:65:Name -> U
+257:29:Call -> U
+257:29:Attribute -> U
+257:29:Name -> U
+257:42:Attribute -> Module:posixpath | Module:ntpath
+257:42:Name -> Module:os
+257:60:Name -> U
+259:32:Call -> Dict:4 | U
+259:32:Attribute -> Func:salt.states.file.directory
+259:32:Name -> Module:salt.states.file
+260:36:Name -> Const:str:'/etc/testdir' | Const:str:''
+260:47:Name -> Const:str:'salt'
+260:61:Name -> List:2
+260:76:Name -> Const:str:'saltstack'
+262:35:Name -> Dict:4 | Dict:4
+265:40:Name -> Const:str:'/etc/testdir' | Const:str:''
+267:32:Name -> Const:str:'/etc/testdir' | Const:str:''
+269:35:Name -> Const:str:'Directory /etc/testdir updated' | Const:str:'Directory  updated'
+274:32:Name -> Const:str:'/etc/testdir' | Const:str:''
+280:23:Call -> U
+280:23:Attribute -> Func:salt.utils.platform.is_windows
+280:23:Attribute -> Module:salt.utils.platform
+280:23:Attribute -> Module:salt.utils
+280:23:Name -> Module:salt
+281:38:Call -> U
+281:38:Name -> U
+281:61:Name -> Dict:4 | Dict:4
+283:38:Call -> U
+283:38:Name -> U
+283:62:Name -> Dict:4 | Dict:4
+284:25:Call -> U
+284:25:Attribute -> U
+284:25:Name -> U
+284:38:Attribute -> Module:posixpath | Module:ntpath
+284:38:Name -> Module:os
+284:56:Name -> U
+285:29:Call -> U
+285:29:Attribute -> U
+285:29:Name -> U
+286:28:Attribute -> ERR
+286:28:Name -> Module:salt.states.file
+286:69:Name -> U
+289:32:Call -> Dict:4 | U
+289:32:Attribute -> Func:salt.states.file.directory
+289:32:Name -> Module:salt.states.file
+289:52:Name -> Const:str:'/etc/testdir' | Const:str:''
+289:63:Name -> Const:str:'salt'
+289:75:Name -> Const:str:'saltstack'
+289:85:Name -> Dict:4 | Dict:4
+297:7:Call -> U
+297:7:Attribute -> Func:salt.utils.platform.is_windows
+297:7:Attribute -> Module:salt.utils.platform
+297:7:Attribute -> Module:salt.utils
+297:7:Name -> Module:salt
+298:15:Call -> Const:str:''
+298:15:Attribute -> BM:builtins.str.replace
+298:15:Name -> Const:str:'/etc/testdir'
+301:16:Name -> Const:str:'/etc/testdir' | Const:str:''
+304:20:Name -> Const:str:'/etc/testdir' | Const:str:''
+307:7:Call -> U
+307:7:Attribute -> Func:salt.utils.platform.is_windows
+307:7:Attribute -> Module:salt.utils.platform
+307:7:Attribute -> Module:salt.utils
+307:7:Name -> Module:salt
+308:15:Call -> U
+308:15:Attribute -> BM:builtins.str.format
+308:62:Name -> Const:str:'/etc/testdir' | Const:str:''
+310:15:Call -> U
+310:15:Attribute -> BM:builtins.str.format
+311:12:Name -> Const:str:'/etc/testdir' | Const:str:''
+313:4:Name -> Dict:4
+313:21:Name -> U
+315:13:Call -> U
+315:13:Name -> U
+316:15:Call -> U
+316:15:Name -> U
+323:15:Call -> U
+323:15:Name -> U
+330:17:Name -> Class:salt.exceptions.CommandExecutionError
+331:9:Call -> U
+331:9:Attribute -> U
+331:9:Name -> U
+332:8:Attribute -> ERR
+332:8:Name -> Module:salt.states.file
+334:32:Name -> U
+335:33:Name -> U
+336:26:Name -> U
+338:7:Call -> U
+338:7:Name -> U
+338:44:Name -> Class:salt.exceptions.CommandExecutionError
+338:57:Call -> U
+338:57:Attribute -> U
+338:57:Name -> U
+339:8:Attribute -> Module:posixpath | Module:ntpath
+339:8:Name -> Module:os
+339:26:Name -> U
+340:7:Call -> U
+340:7:Attribute -> U
+340:7:Name -> U
+341:8:Attribute -> ERR
+341:8:Name -> Module:salt.states.file
+343:15:Call -> Dict:4 | U
+343:15:Attribute -> Func:salt.states.file.directory
+343:15:Name -> Module:salt.states.file
+343:35:Name -> Const:str:'/etc/testdir' | Const:str:''
+343:46:Name -> Const:str:'salt'
+343:58:Name -> Const:str:'saltstack'
+343:68:Name -> Dict:4
+344:15:Call -> Dict:4 | U
+344:15:Attribute -> Func:salt.states.file.directory
+344:15:Name -> Module:salt.states.file
+344:35:Name -> Const:str:'/etc/testdir' | Const:str:''
+344:46:Name -> Const:str:'salt'
+344:58:Name -> Const:str:'saltstack'
+344:68:Name -> Dict:4
+345:15:Call -> Dict:4 | U
+345:15:Attribute -> Func:salt.states.file.directory
+345:15:Name -> Module:salt.states.file
+345:35:Name -> Const:str:'/etc/testdir' | Const:str:''
+345:46:Name -> Const:str:'salt'
+345:58:Name -> Const:str:'saltstack'
+345:68:Name -> Dict:4

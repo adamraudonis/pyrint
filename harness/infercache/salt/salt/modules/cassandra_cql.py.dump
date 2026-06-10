@@ -1,0 +1,729 @@
+106:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+106:6:Attribute -> Func:logging.getLogger
+106:6:Name -> Module:logging
+106:24:Name -> Const:str:'salt.modules.cassandra_cql' | Const:str:'__main__'
+141:24:Name -> U
+142:31:Name -> U
+143:28:Name -> U
+144:35:Name -> U
+145:37:Name -> U
+146:28:Name -> U
+147:28:Name -> U
+148:34:Name -> U
+149:41:Name -> U
+150:23:Name -> U
+151:30:Name -> U
+152:38:Name -> U
+153:40:Name -> U
+156:7:Name -> Class:builtins.ImportError
+167:7:Name -> Const:bool:False | Const:bool:True
+168:15:Name -> Const:str:'cassandra_cql'
+173:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+173:4:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+173:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+173:62:Name -> U
+180:7:Name -> U
+180:15:Name -> Dict:13
+181:15:Call -> ERR
+181:15:Call -> ERR
+181:15:Attribute -> BM:builtins.dict.get
+181:15:Name -> Dict:13
+181:45:Name -> U
+181:53:Name -> Dict:0
+183:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+183:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+183:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+183:52:Name -> U
+201:11:Name -> U
+202:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+202:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+202:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+206:22:Call -> ERR
+206:22:Name -> ERR
+207:15:Name -> Class:builtins.BaseException
+208:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+208:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+208:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+208:76:Name -> ExcInst:builtins.BaseException
+211:26:Call -> U
+211:26:Attribute -> U
+211:26:Name -> U
+211:38:Name -> U
+212:15:Name -> U
+213:15:Name -> Const:bool:False | U
+214:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+214:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+214:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+214:64:Name -> U
+214:79:Name -> Const:NoneType:None | U
+215:34:Name -> Const:NoneType:None | U
+217:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+217:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+217:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+220:20:Name -> U
+222:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+222:22:Name -> Class:salt.exceptions.CommandExecutionError
+223:40:Name -> U
+225:15:Name -> U | Const:NoneType:None
+226:11:Name -> U
+234:14:Call -> ERR
+234:14:Attribute -> ERR
+234:14:Call -> ERR
+234:14:Name -> ERR
+239:7:Name -> U
+240:8:Name -> Dict:0
+240:31:Name -> U
+241:11:Name -> Const:str:'ssl_version'
+241:26:Name -> U
+242:19:Call -> U
+242:19:Attribute -> U
+242:19:Name -> U
+242:27:Name -> Const:str:'ssl_version'
+243:29:Call -> Const:str:''
+243:29:Attribute -> BM:builtins.str.join
+244:21:Name -> U
+244:32:Call -> ERR
+244:32:Name -> Func:builtins.dir
+244:36:Name -> Module:ssl
+244:44:Call -> U
+244:44:Attribute -> U
+244:44:Name -> U
+246:22:Call -> ExcInst:salt.exceptions.CommandExecutionError
+246:22:Name -> Class:salt.exceptions.CommandExecutionError
+247:20:Call -> Const:str:'Invalid protocol_version specified! Ple
+247:20:Attribute -> BM:builtins.str.format
+249:58:Name -> Const:str:''
+252:16:Name -> Dict:0
+252:25:Name -> Const:str:'ssl_version'
+252:40:Call -> U
+252:40:Name -> Func:builtins.getattr
+252:48:Name -> Module:ssl
+252:53:Name -> U
+252:61:Name -> Const:str:'ssl_version'
+253:15:Name -> Dict:0
+304:8:Name -> ERR
+305:48:Name -> ERR
+306:48:Name -> ERR
+309:12:Name -> ERR
+310:12:Name -> ERR
+313:11:Name -> Const:NoneType:None | U
+314:29:Call -> U | Const:NoneType:None | Const:NoneType:None
+314:29:Name -> Func:salt.modules.cassandra_cql._load_properties
+315:30:Name -> Const:NoneType:None | U
+319:15:Call -> ERR
+319:15:Name -> Func:builtins.isinstance
+319:26:Name -> Const:NoneType:None | U | Const:NoneType:None
+319:42:Name -> Class:builtins.list
+318:12:Name -> Const:NoneType:None | U | Const:NoneType:None
+320:17:Call -> U
+320:17:Attribute -> U
+320:17:Name -> Const:NoneType:None | U | Const:NoneType:None
+322:11:Name -> Const:NoneType:None | U
+323:19:Call -> U | Const:int:9042 | Const:NoneType:None
+323:19:Name -> Func:salt.modules.cassandra_cql._load_properties
+324:30:Name -> Const:NoneType:None | U
+326:11:Name -> Const:NoneType:None | U
+327:23:Call -> U | Const:str:'cassandra' | Const:NoneType:None
+327:23:Name -> Func:salt.modules.cassandra_cql._load_properties
+328:30:Name -> Const:NoneType:None | U
+333:11:Name -> Const:NoneType:None | U
+334:23:Call -> U | Const:str:'cassandra' | Const:NoneType:None
+334:23:Name -> Func:salt.modules.cassandra_cql._load_properties
+335:30:Name -> Const:NoneType:None | U
+340:11:Name -> Const:NoneType:None | U
+341:31:Call -> U | Const:int:4 | Const:NoneType:None
+341:31:Name -> Func:salt.modules.cassandra_cql._load_properties
+342:30:Name -> Const:NoneType:None | U
+348:11:Name -> Const:NoneType:None | U
+349:41:Call -> U | Dict:0 | Const:NoneType:None
+349:41:Name -> Func:salt.modules.cassandra_cql._load_properties
+350:30:Name -> Const:NoneType:None | U
+356:11:Name -> Const:NoneType:None | U
+357:36:Call -> U | Const:str:'RoundRobinPolicy' | Const:NoneType:None
+357:36:Name -> Func:salt.modules.cassandra_cql._load_properties
+358:30:Name -> Const:NoneType:None | U
+364:11:Name -> Const:NoneType:None | U | Dict:0
+365:29:Call -> U
+365:29:Name -> Func:salt.modules.cassandra_cql._get_lbp_policy
+366:16:Name -> Const:NoneType:None | U | Const:str:'RoundRobinPolicy'
+366:41:Name -> U
+369:29:Call -> U
+369:29:Name -> Func:salt.modules.cassandra_cql._get_lbp_policy
+369:45:Name -> Const:NoneType:None | U | Const:str:'RoundRobinPolicy'
+372:28:Call -> U
+372:28:Name -> U
+372:59:Name -> Const:NoneType:None | U | Const:str:'cassandra'
+372:78:Name -> Const:NoneType:None | U | Const:str:'cassandra'
+373:15:Name -> Const:NoneType:None | U
+374:27:Call -> Dict:0 | Const:NoneType:None
+374:27:Name -> Func:salt.modules.cassandra_cql._get_ssl_opts
+376:27:Name -> U
+377:15:Name -> Dict:0 | Const:NoneType:None | U
+378:26:Call -> U
+378:26:Name -> U
+379:20:Name -> Const:NoneType:None | U | Const:NoneType:None
+380:25:Name -> Const:NoneType:None | U | Const:int:9042
+381:34:Name -> U
+382:32:Name -> U
+383:37:Name -> Const:NoneType:None | U | Const:int:4
+384:42:Name -> U
+388:26:Call -> U
+388:26:Name -> U
+389:20:Name -> Const:NoneType:None | U | Const:NoneType:None
+390:25:Name -> Const:NoneType:None | U | Const:int:9042
+391:34:Name -> U
+392:37:Name -> Const:NoneType:None | U | Const:int:4
+393:42:Name -> U
+396:30:Call -> Inst:builtins.range
+396:30:Name -> Class:builtins.range
+398:30:Call -> U
+398:30:Attribute -> U
+398:30:Name -> U
+400:23:Name -> U
+401:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+401:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+401:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+402:71:Name -> U
+404:23:Name -> U
+408:12:Name -> ERR
+408:60:Name -> U
+409:12:Name -> ERR
+409:60:Name -> U
+410:12:Name -> ERR
+412:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+412:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+412:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+413:69:Name -> Const:NoneType:None | U | Const:NoneType:None
+415:19:Name -> U
+415:28:Name -> U
+416:15:Name -> Class:builtins.TypeError
+418:16:Name -> U
+418:37:Name -> U
+418:57:Name -> U
+419:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+419:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+419:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+419:70:Name -> Const:NoneType:None | U | Const:NoneType:None
+420:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+420:18:Name -> Class:salt.exceptions.CommandExecutionError
+420:40:Call -> Const:str:''
+420:40:Name -> Class:builtins.str
+420:44:Name -> U
+467:27:Call -> Tuple:2 | Tuple:2
+467:27:Name -> Func:salt.modules.cassandra_cql._connect
+468:27:Name -> Const:NoneType:None | U
+469:17:Name -> Const:NoneType:None | U
+470:21:Name -> Const:NoneType:None | U
+471:21:Name -> Const:NoneType:None | U
+472:29:Name -> Const:NoneType:None | U
+473:34:Name -> Const:NoneType:None | U
+474:39:Name -> Const:NoneType:None | U
+475:24:Name -> Const:NoneType:None | U
+477:11:Name -> Class:salt.exceptions.CommandExecutionError
+478:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+478:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+478:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+480:11:Name -> Class:builtins.BaseException
+481:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+481:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+481:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+481:85:Name -> ExcInst:builtins.BaseException
+484:4:Name -> U
+484:26:Name -> U
+491:7:Call -> ERR
+491:7:Name -> Func:builtins.isinstance
+491:18:Name -> U
+491:25:Name -> Class:builtins.dict
+492:26:Call -> U
+492:26:Name -> Func:salt.modules.cassandra_cql.version
+493:27:Name -> Const:NoneType:None | U
+494:17:Name -> Const:NoneType:None | U
+495:21:Name -> Const:NoneType:None | U
+496:21:Name -> Const:NoneType:None | U
+498:16:Call -> U
+498:16:Attribute -> Func:re.match
+498:16:Name -> Module:re
+498:55:Name -> U
+499:30:Call -> U
+499:30:Attribute -> U
+499:30:Name -> U
+504:20:Name -> U
+504:26:Name -> U
+505:15:Name -> Class:builtins.KeyError
+506:20:Call -> U
+506:20:Attribute -> U
+506:20:Name -> U
+506:30:Name -> U
+506:37:Call -> ERR
+506:37:Name -> Func:builtins.max
+506:41:Name -> U
+507:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+507:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+507:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+507:38:Name -> U
+510:18:Call -> U
+510:18:Attribute -> U
+510:18:Name -> U
+510:34:Name -> U
+511:11:Name -> Class:builtins.BaseException
+512:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+512:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+512:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+512:62:Name -> U
+512:69:Name -> ExcInst:builtins.BaseException
+513:48:Name -> U
+513:64:Name -> ExcInst:builtins.BaseException
+514:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+514:14:Name -> Class:salt.exceptions.CommandExecutionError
+514:36:Name -> Const:str:'ERROR: Cassandra query failed: Uninfera
+516:7:Name -> U
+517:22:Name -> U
+519:30:Call -> U
+519:30:Attribute -> U
+519:30:Name -> U
+521:23:Call -> ERR
+521:23:Name -> Func:builtins.isinstance
+521:34:Name -> U
+521:41:Name -> Class:builtins.str
+524:27:Call -> ERR
+524:27:Name -> Func:builtins.isinstance
+524:38:Name -> U
+524:46:Name -> Class:builtins.set
+524:51:Name -> Class:builtins.list
+524:57:Name -> Class:builtins.dict
+525:32:Call -> Const:str:''
+525:32:Name -> Class:builtins.str
+525:36:Name -> U
+526:16:Name -> Dict:0
+526:23:Name -> U
+526:30:Name -> U | Const:str:''
+527:12:Call -> ERR
+527:12:Attribute -> BM:builtins.list.append
+527:12:Name -> List:0
+527:23:Name -> Dict:0
+529:11:Name -> List:0
+602:18:Name -> Dict:0
+603:23:Call -> ERR
+603:23:Attribute -> BM:builtins.dict.get
+603:23:Name -> Dict:0
+605:27:Call -> Tuple:2 | Tuple:2
+605:27:Name -> Func:salt.modules.cassandra_cql._connect
+606:27:Name -> Const:NoneType:None | U
+607:17:Name -> Const:NoneType:None | U
+608:21:Name -> Const:NoneType:None | U
+609:21:Name -> Const:NoneType:None | U
+611:34:Name -> Const:NoneType:None | U
+612:39:Name -> Const:NoneType:None | U
+615:11:Name -> Class:salt.exceptions.CommandExecutionError
+616:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+616:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+616:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+618:11:Name -> Class:builtins.BaseException
+619:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+619:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+619:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+619:85:Name -> ExcInst:builtins.BaseException
+622:7:Name -> U
+622:29:Name -> ERR
+624:30:Call -> U
+624:30:Attribute -> U
+624:30:Name -> U
+624:46:Name -> U
+625:12:Name -> ERR
+625:50:Name -> U
+625:68:Name -> U
+626:15:Name -> Class:builtins.BaseException
+627:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+627:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+627:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+627:79:Name -> ExcInst:builtins.BaseException
+630:26:Name -> ERR
+630:64:Name -> U
+632:4:Name -> U
+632:26:Name -> U
+636:11:Name -> Const:bool:False | U
+637:29:Call -> U
+637:29:Attribute -> U
+637:29:Name -> U
+638:16:Call -> U
+638:16:Attribute -> U
+638:16:Name -> U
+638:37:Name -> U
+642:22:Call -> U
+642:22:Attribute -> U
+642:22:Name -> U
+642:38:Call -> U
+642:38:Attribute -> U
+642:38:Name -> U
+642:59:Name -> U
+643:11:Name -> Class:builtins.BaseException
+644:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+644:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+644:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+644:62:Name -> U
+644:69:Name -> ExcInst:builtins.BaseException
+645:48:Name -> U
+645:64:Name -> ExcInst:builtins.BaseException
+646:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+646:14:Name -> Class:salt.exceptions.CommandExecutionError
+646:36:Name -> Const:str:'ERROR: Cassandra query failed: Uninfera
+648:11:Name -> Const:bool:False | U
+648:28:Name -> U
+649:22:Name -> U
+651:30:Call -> U
+651:30:Attribute -> U
+651:30:Name -> U
+653:23:Call -> ERR
+653:23:Name -> Func:builtins.isinstance
+653:34:Name -> U
+653:41:Name -> Class:builtins.str
+656:27:Call -> ERR
+656:27:Name -> Func:builtins.isinstance
+656:38:Name -> U
+656:46:Name -> Class:builtins.set
+656:51:Name -> Class:builtins.list
+656:57:Name -> Class:builtins.dict
+657:32:Call -> Const:str:''
+657:32:Name -> Class:builtins.str
+657:36:Name -> U
+658:16:Name -> Dict:0
+658:23:Name -> U
+658:30:Name -> U | Const:str:''
+659:12:Call -> ERR
+659:12:Attribute -> BM:builtins.list.append
+659:12:Name -> List:0
+659:23:Name -> Dict:0
+664:11:Name -> List:0
+710:14:Call -> List:0
+710:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+711:12:Name -> Const:str:'select release_version from system.loca
+712:27:Name -> Const:NoneType:None | U
+713:17:Name -> Const:NoneType:None | U
+714:21:Name -> Const:NoneType:None | U
+715:21:Name -> Const:NoneType:None | U
+716:29:Name -> Const:NoneType:None | U
+717:34:Name -> Const:NoneType:None | U
+718:39:Name -> Const:NoneType:None | U
+719:24:Name -> Const:NoneType:None | U
+721:11:Name -> Class:salt.exceptions.CommandExecutionError
+722:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+722:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+722:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+724:11:Name -> Class:builtins.BaseException
+725:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+725:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+725:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+725:77:Name -> ExcInst:builtins.BaseException
+728:11:Call -> ERR
+728:11:Attribute -> ERR
+728:11:Name -> List:0
+787:14:Call -> List:0
+787:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+788:12:Name -> Const:str:'select cluster_name,\n                 
+789:27:Name -> Const:NoneType:None | U
+790:17:Name -> Const:NoneType:None | U
+791:21:Name -> Const:NoneType:None | U
+792:21:Name -> Const:NoneType:None | U
+793:29:Name -> Const:NoneType:None | U
+794:34:Name -> Const:NoneType:None | U
+795:39:Name -> Const:NoneType:None | U
+796:24:Name -> Const:NoneType:None | U
+798:11:Name -> Class:salt.exceptions.CommandExecutionError
+799:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+799:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+799:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+801:11:Name -> Class:builtins.BaseException
+802:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+802:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+802:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+802:74:Name -> ExcInst:builtins.BaseException
+805:11:Name -> Dict:0 | List:0
+856:14:Call -> List:0
+856:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+857:12:Name -> Dict:2
+858:27:Name -> Const:NoneType:None | U
+859:17:Name -> Const:NoneType:None | U
+860:21:Name -> Const:NoneType:None | U
+861:21:Name -> Const:NoneType:None | U
+862:29:Name -> Const:NoneType:None | U
+863:34:Name -> Const:NoneType:None | U
+864:39:Name -> Const:NoneType:None | U
+865:24:Name -> Const:NoneType:None | U
+867:11:Name -> Class:salt.exceptions.CommandExecutionError
+868:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+868:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+868:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+870:11:Name -> Class:builtins.BaseException
+871:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+871:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+871:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+871:69:Name -> ExcInst:builtins.BaseException
+874:11:Name -> Dict:0 | List:0
+922:60:Name -> Const:NoneType:None | U
+922:45:Name -> U
+925:13:Call -> U
+925:13:Attribute -> BM:builtins.str.format
+926:12:Name -> Const:str:"where keyspace_name = 'Uninferable'" | Const:str:''
+928:62:Name -> Const:str:"where keyspace_name = 'Uninferable'" | Const:str:''
+934:14:Call -> List:0
+934:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+935:12:Name -> Dict:2
+936:27:Name -> Const:NoneType:None | U
+937:17:Name -> Const:NoneType:None | U
+938:21:Name -> Const:NoneType:None | U
+939:21:Name -> Const:NoneType:None | U
+940:29:Name -> Const:NoneType:None | U
+941:34:Name -> Const:NoneType:None | U
+942:39:Name -> Const:NoneType:None | U
+943:24:Name -> Const:NoneType:None | U
+945:11:Name -> Class:salt.exceptions.CommandExecutionError
+946:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+946:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+946:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+948:11:Name -> Class:builtins.BaseException
+949:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+949:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+949:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+949:75:Name -> ExcInst:builtins.BaseException
+952:11:Name -> Dict:0 | List:0
+998:12:Call -> U
+998:12:Attribute -> BM:builtins.str.format
+999:28:Name -> U
+1002:12:Call -> U
+1002:12:Attribute -> BM:builtins.str.format
+1003:28:Name -> U
+1008:14:Call -> List:0
+1008:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+1009:12:Name -> Dict:2
+1010:27:Name -> Const:NoneType:None | U
+1011:17:Name -> Const:NoneType:None | U
+1012:21:Name -> Const:NoneType:None | U
+1013:21:Name -> Const:NoneType:None | U
+1014:29:Name -> Const:NoneType:None | U
+1015:34:Name -> Const:NoneType:None | U
+1016:39:Name -> Const:NoneType:None | U
+1017:24:Name -> Const:NoneType:None | U
+1019:11:Name -> Class:salt.exceptions.CommandExecutionError
+1020:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1020:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1020:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1022:11:Name -> Class:builtins.BaseException
+1023:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1023:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1023:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1023:82:Name -> ExcInst:builtins.BaseException
+1026:19:Name -> List:0
+1084:24:Call -> Const:bool:False
+1084:24:Name -> Func:salt.modules.cassandra_cql.keyspace_exists
+1085:8:Name -> U
+1086:23:Name -> Const:NoneType:None | U
+1087:17:Name -> Const:NoneType:None | U
+1088:17:Name -> Const:NoneType:None | U
+1089:13:Name -> Const:NoneType:None | U
+1090:25:Name -> Const:NoneType:None | U
+1091:30:Name -> Const:NoneType:None | U
+1092:35:Name -> Const:NoneType:None | U
+1093:20:Name -> Const:NoneType:None | U
+1095:11:Name -> Const:bool:False
+1097:36:Name -> Const:str:'SimpleStrategy' | U
+1099:11:Name -> Const:NoneType:None | U
+1100:15:Call -> ERR
+1100:15:Name -> Func:builtins.isinstance
+1100:26:Name -> U
+1100:51:Name -> Class:builtins.str
+1102:49:Call -> U
+1102:49:Attribute -> Func:salt.utils.json.loads
+1102:49:Attribute -> Module:salt.utils.json
+1102:49:Attribute -> Module:salt.utils
+1102:49:Name -> Module:salt
+1103:24:Name -> U
+1105:20:Call -> ERR
+1105:20:Attribute -> BM:builtins.dict.update
+1105:20:Name -> Dict:1
+1105:45:Name -> U
+1106:23:Name -> Class:builtins.BaseException
+1107:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1107:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1107:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1110:16:Call -> ERR
+1110:16:Attribute -> BM:builtins.dict.update
+1110:16:Name -> Dict:1
+1110:41:Name -> U
+1112:12:Name -> Dict:1
+1112:52:Name -> Const:int:1 | U
+1114:16:Call -> U
+1114:16:Attribute -> BM:builtins.str.format
+1115:12:Name -> U
+1115:22:Name -> Dict:1
+1119:12:Call -> List:0
+1119:12:Name -> Func:salt.modules.cassandra_cql.cql_query
+1120:16:Name -> U
+1121:31:Name -> Const:NoneType:None | U
+1122:21:Name -> Const:NoneType:None | U
+1123:25:Name -> Const:NoneType:None | U
+1124:25:Name -> Const:NoneType:None | U
+1125:33:Name -> Const:NoneType:None | U
+1126:38:Name -> Const:NoneType:None | U
+1127:43:Name -> Const:NoneType:None | U
+1128:28:Name -> Const:NoneType:None | U
+1130:15:Name -> Class:salt.exceptions.CommandExecutionError
+1131:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1131:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1131:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1133:15:Name -> Class:builtins.BaseException
+1134:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1134:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1134:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1134:73:Name -> ExcInst:builtins.BaseException
+1181:24:Call -> Const:bool:False
+1181:24:Name -> Func:salt.modules.cassandra_cql.keyspace_exists
+1182:8:Name -> U
+1183:23:Name -> Const:NoneType:None | U
+1184:17:Name -> Const:NoneType:None | U
+1185:17:Name -> Const:NoneType:None | U
+1186:13:Name -> Const:NoneType:None | U
+1187:25:Name -> Const:NoneType:None | U
+1188:30:Name -> Const:NoneType:None | U
+1189:35:Name -> Const:NoneType:None | U
+1190:20:Name -> Const:NoneType:None | U
+1192:7:Name -> Const:bool:False
+1193:35:Name -> U
+1195:12:Call -> List:0
+1195:12:Name -> Func:salt.modules.cassandra_cql.cql_query
+1196:16:Name -> Const:str:'drop keyspace Uninferable;'
+1197:31:Name -> Const:NoneType:None | U
+1198:21:Name -> Const:NoneType:None | U
+1199:25:Name -> Const:NoneType:None | U
+1200:25:Name -> Const:NoneType:None | U
+1201:33:Name -> Const:NoneType:None | U
+1202:38:Name -> Const:NoneType:None | U
+1203:43:Name -> Const:NoneType:None | U
+1204:28:Name -> Const:NoneType:None | U
+1206:15:Name -> Class:salt.exceptions.CommandExecutionError
+1207:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1207:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1207:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1209:15:Name -> Class:builtins.BaseException
+1210:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1210:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1210:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1210:73:Name -> ExcInst:builtins.BaseException
+1261:14:Call -> List:0
+1261:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+1262:12:Name -> Const:str:'list users;'
+1263:27:Name -> Const:NoneType:None | U
+1264:17:Name -> Const:NoneType:None | U
+1265:21:Name -> Const:NoneType:None | U
+1266:21:Name -> Const:NoneType:None | U
+1267:29:Name -> Const:NoneType:None | U
+1268:34:Name -> Const:NoneType:None | U
+1269:39:Name -> Const:NoneType:None | U
+1270:24:Name -> Const:NoneType:None | U
+1272:11:Name -> Class:salt.exceptions.CommandExecutionError
+1273:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1273:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1273:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1275:11:Name -> Class:builtins.BaseException
+1276:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1276:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1276:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1276:65:Name -> ExcInst:builtins.BaseException
+1279:11:Name -> Dict:0 | List:0
+1333:35:Name -> Const:bool:False | U
+1334:12:Call -> U
+1334:12:Attribute -> BM:builtins.str.format
+1335:8:Name -> U
+1335:18:Name -> U
+1335:28:Name -> Const:str:'superuser' | Const:str:'nosuperuser'
+1337:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+1337:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1337:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1339:8:Name -> U
+1340:8:Name -> Const:str:'superuser' | Const:str:'nosuperuser'
+1346:8:Call -> List:0
+1346:8:Name -> Func:salt.modules.cassandra_cql.cql_query
+1347:12:Name -> U
+1348:27:Name -> Const:NoneType:None | U
+1349:17:Name -> Const:NoneType:None | U
+1350:21:Name -> Const:NoneType:None | U
+1351:21:Name -> Const:NoneType:None | U
+1352:29:Name -> Const:NoneType:None | U
+1353:34:Name -> Const:NoneType:None | U
+1354:39:Name -> Const:NoneType:None | U
+1355:24:Name -> Const:NoneType:None | U
+1357:11:Name -> Class:salt.exceptions.CommandExecutionError
+1358:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1358:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1358:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1360:11:Name -> Class:builtins.BaseException
+1361:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1361:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1361:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1361:65:Name -> ExcInst:builtins.BaseException
+1422:52:Name -> Const:NoneType:None | U
+1422:22:Name -> Const:str:'keyspace' | U
+1422:38:Name -> U
+1423:51:Name -> Const:NoneType:None | U
+1423:24:Name -> U
+1424:20:Name -> Const:str:'Uninferable permission' | Const:str:'all permissions'
+1424:40:Name -> Const:str:'keyspace Uninferable' | Const:str:'Uninferable Uninferable' | Const:str:'all keyspaces'
+1426:7:Name -> Const:NoneType:None | U
+1427:19:Name -> Const:str:'list Uninferable permission on keyspace | Const:str:'list Uninferable permission on Uninfera | Const:str:'list Uninferable permission on all keys | Const:str:'list all permissions on keyspace Uninfe | Const:str:'list all permissions on Uninferable Uni | Const:str:'list all permissions on all keyspaces'
+1427:30:Name -> U
+1429:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+1429:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1429:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1429:64:Name -> Const:str:'list Uninferable permission on keyspace | Const:str:'list Uninferable permission on Uninfera | Const:str:'list Uninferable permission on all keys | Const:str:'list all permissions on keyspace Uninfe | Const:str:'list all permissions on Uninferable Uni | Const:str:'list all permissions on all keyspaces' | Const:str:'list Uninferable permission on keyspace | Const:str:'list Uninferable permission on Uninfera | Const:str:'list Uninferable permission on all keys | Const:str:'list all permissions on keyspace Uninfe | Const:str:'list all permissions on Uninferable Uni | Const:str:'list all permissions on all keyspaces o
+1434:14:Call -> List:0
+1434:14:Name -> Func:salt.modules.cassandra_cql.cql_query
+1435:12:Name -> Const:str:'list Uninferable permission on keyspace | Const:str:'list Uninferable permission on Uninfera | Const:str:'list Uninferable permission on all keys | Const:str:'list all permissions on keyspace Uninfe | Const:str:'list all permissions on Uninferable Uni | Const:str:'list all permissions on all keyspaces' | Const:str:'list Uninferable permission on keyspace | Const:str:'list Uninferable permission on Uninfera | Const:str:'list Uninferable permission on all keys | Const:str:'list all permissions on keyspace Uninfe | Const:str:'list all permissions on Uninferable Uni | Const:str:'list all permissions on all keyspaces o
+1436:27:Name -> Const:NoneType:None | U
+1437:17:Name -> Const:NoneType:None | U
+1438:21:Name -> Const:NoneType:None | U
+1439:21:Name -> Const:NoneType:None | U
+1440:29:Name -> Const:NoneType:None | U
+1441:34:Name -> Const:NoneType:None | U
+1442:39:Name -> Const:NoneType:None | U
+1443:24:Name -> Const:NoneType:None | U
+1445:11:Name -> Class:salt.exceptions.CommandExecutionError
+1446:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1446:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1446:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1448:11:Name -> Class:builtins.BaseException
+1449:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1449:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1449:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1449:71:Name -> ExcInst:builtins.BaseException
+1452:11:Name -> Dict:0 | List:0
+1510:46:Name -> Const:NoneType:None | U
+1510:30:Name -> U
+1511:55:Name -> Const:NoneType:None | U
+1511:25:Name -> Const:str:'keyspace' | U
+1511:41:Name -> U
+1512:15:Name -> Const:str:'grant Uninferable' | Const:str:'grant all permissions'
+1512:32:Name -> Const:str:'on keyspace Uninferable' | Const:str:'on Uninferable Uninferable' | Const:str:'on all keyspaces'
+1512:50:Name -> U
+1513:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+1513:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1513:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1513:65:Name -> Const:str:'grant Uninferable on keyspace Uninferab | Const:str:'grant Uninferable on Uninferable Uninfe | Const:str:'grant Uninferable on all keyspaces to U | Const:str:'grant all permissions on keyspace Uninf | Const:str:'grant all permissions on Uninferable Un | Const:str:'grant all permissions on all keyspaces 
+1516:8:Call -> List:0
+1516:8:Name -> Func:salt.modules.cassandra_cql.cql_query
+1517:12:Name -> Const:str:'grant Uninferable on keyspace Uninferab | Const:str:'grant Uninferable on Uninferable Uninfe | Const:str:'grant Uninferable on all keyspaces to U | Const:str:'grant all permissions on keyspace Uninf | Const:str:'grant all permissions on Uninferable Un | Const:str:'grant all permissions on all keyspaces 
+1518:27:Name -> Const:NoneType:None | U
+1519:17:Name -> Const:NoneType:None | U
+1520:21:Name -> Const:NoneType:None | U
+1521:21:Name -> Const:NoneType:None | U
+1522:29:Name -> Const:NoneType:None | U
+1523:34:Name -> Const:NoneType:None | U
+1524:39:Name -> Const:NoneType:None | U
+1525:24:Name -> Const:NoneType:None | U
+1527:11:Name -> Class:salt.exceptions.CommandExecutionError
+1528:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1528:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1528:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1530:11:Name -> Class:builtins.BaseException
+1531:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1531:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1531:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1531:72:Name -> ExcInst:builtins.BaseException

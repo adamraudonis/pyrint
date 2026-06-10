@@ -1,0 +1,733 @@
+50:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+50:9:Attribute -> Func:logging.getLogger
+50:9:Name -> Module:logging
+50:27:Name -> Const:str:'providers.edge3.src.airflow.providers.e | Const:str:'__main__'
+51:21:Call -> Const:str:''
+51:21:Attribute -> BM:builtins.str.join
+63:1:Name -> U
+73:4:Attribute -> Dict:43 | Inst:os._Environ
+73:4:Name -> Module:os
+74:4:Attribute -> Dict:43 | Inst:os._Environ
+74:4:Name -> Module:os
+75:20:Attribute -> U
+75:20:Name -> Module:sys
+75:36:Attribute -> U
+75:36:Name -> Module:sys
+76:18:Call -> U
+76:18:Attribute -> U
+76:18:Name -> U
+77:15:Name -> U
+78:18:Call -> ExcInst:builtins.SystemExit
+78:18:Name -> Class:builtins.SystemExit
+79:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+79:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+79:60:Name -> U
+80:8:Attribute -> Dict:43 | Inst:os._Environ
+80:8:Name -> Module:os
+80:56:Name -> U
+83:0:Call -> Const:NoneType:None
+83:0:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command.force_use_internal_api_on_edge_worker
+86:1:Name -> U
+88:4:Call -> ERR
+88:4:Name -> Func:builtins.print
+88:10:Attribute -> U
+88:10:Name -> U
+89:4:Call -> ERR
+89:4:Name -> Func:builtins.print
+89:10:Name -> Const:str:''
+93:18:Call -> U
+93:18:Name -> U
+94:22:Call -> U
+94:22:Name -> U
+94:36:Attribute -> U
+94:36:Name -> U
+95:17:Attribute -> U
+95:17:Name -> U
+95:39:Call -> U
+95:39:Name -> U
+96:41:Attribute -> U
+96:41:Name -> U
+96:15:Call -> U
+96:15:Attribute -> U
+96:15:Attribute -> U
+96:15:Name -> U
+97:20:Attribute -> U
+97:20:Name -> U
+98:15:Attribute -> U
+98:15:Name -> U
+99:18:Call -> U
+99:18:Name -> Func:builtins.getattr
+99:26:Name -> U
+101:4:Call -> U
+101:4:Attribute -> Func:asyncio.runners.run
+101:4:Name -> Module:asyncio
+101:16:Call -> U
+101:16:Attribute -> U
+101:16:Name -> U
+104:1:Call -> U
+104:1:Attribute -> U
+104:1:Name -> U
+105:1:Name -> U
+108:12:Attribute -> U
+108:12:Name -> U
+108:26:Call -> U
+108:26:Attribute -> U
+108:26:Name -> U
+108:68:Attribute -> U
+108:68:Name -> U
+110:4:Call -> U
+110:4:Name -> U
+111:13:Name -> U
+112:21:Name -> U
+113:25:Call -> Const:NoneType:None
+113:25:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._launch_worker
+113:40:Name -> U
+115:17:Call -> U
+115:17:Name -> U
+115:31:Attribute -> U
+115:31:Name -> U
+116:14:Name -> U
+120:1:Call -> U
+120:1:Attribute -> U
+120:1:Name -> U
+121:1:Name -> U
+126:10:Call -> U
+126:10:Name -> U
+126:18:Attribute -> U
+126:18:Name -> U
+129:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+129:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+129:54:Name -> U
+130:22:Call -> ERR
+130:22:Name -> Func:time.time
+131:18:Call -> Inst:pathlib.Path
+131:18:Name -> Class:pathlib.Path
+131:23:Call -> U
+131:23:Name -> U
+131:40:Attribute -> U
+131:40:Name -> U
+132:21:Call -> U
+132:21:Attribute -> U
+132:21:Name -> U
+132:36:Name -> U
+133:4:Call -> U
+133:4:Attribute -> U
+133:4:Name -> U
+133:31:Name -> U
+134:10:Call -> U
+134:10:Attribute -> U
+134:10:Name -> U
+134:28:Name -> U
+135:12:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+135:12:Attribute -> BM:pathlib.Path.exists
+135:12:Name -> Inst:pathlib.Path
+135:36:Attribute -> U
+135:36:Call -> U
+135:36:Attribute -> BM:pathlib.Path.stat
+135:36:Name -> Inst:pathlib.Path
+135:66:Name -> U
+137:8:Call -> ERR
+137:8:Name -> Func:time.sleep
+138:11:Call -> U
+138:11:Attribute -> U
+138:11:Name -> U
+138:29:Name -> U
+139:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+139:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+139:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+140:8:Call -> ERR
+140:8:Attribute -> Func:sys.exit
+140:8:Name -> Module:sys
+141:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+141:11:Attribute -> BM:pathlib.Path.exists
+141:11:Name -> Inst:pathlib.Path
+141:35:Attribute -> U
+141:35:Call -> U
+141:35:Attribute -> BM:pathlib.Path.stat
+141:35:Name -> Inst:pathlib.Path
+141:65:Name -> U
+142:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+142:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+142:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+143:8:Call -> ERR
+143:8:Attribute -> Func:sys.exit
+143:8:Name -> Module:sys
+144:13:Call -> U
+144:13:Attribute -> U
+144:13:Name -> U
+144:36:Call -> U
+144:36:Attribute -> BM:pathlib.Path.read_text
+144:36:Name -> Inst:pathlib.Path
+145:4:Call -> ERR
+145:4:Name -> Func:builtins.print
+145:10:Call -> U
+145:10:Attribute -> Func:json.dumps
+145:10:Name -> Module:json
+145:21:Call -> U | Inst:builtins.dict
+145:21:Name -> Func:dataclasses.asdict
+145:28:Name -> U
+148:1:Call -> U
+148:1:Attribute -> U
+148:1:Name -> U
+149:1:Name -> U
+154:7:Attribute -> U
+154:7:Name -> U
+154:40:Attribute -> U
+154:40:Name -> U
+155:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+155:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+155:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+156:8:Call -> ERR
+156:8:Attribute -> Func:sys.exit
+156:8:Name -> Module:sys
+158:10:Call -> U
+158:10:Name -> U
+158:18:Attribute -> U
+158:18:Name -> U
+163:18:Call -> Inst:pathlib.Path
+163:18:Name -> Class:pathlib.Path
+163:23:Call -> U
+163:23:Name -> U
+163:52:Attribute -> U
+163:52:Name -> U
+164:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+164:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+164:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+164:59:Name -> Inst:pathlib.Path
+165:4:Call -> U
+165:4:Attribute -> BM:pathlib.Path.write_text
+165:4:Name -> Inst:pathlib.Path
+166:8:Attribute -> U
+166:8:Call -> U
+166:8:Name -> U
+167:24:Attribute -> U
+167:24:Name -> U
+170:15:Attribute -> U
+170:15:Name -> U
+168:25:Call -> U
+168:25:Attribute -> BM:_pydatetime.date.strftime | U
+168:25:Call -> Inst:_pydatetime.datetime | U
+168:25:Attribute -> BM:_pydatetime.datetime.now
+168:25:Name -> Class:_pydatetime.datetime
+168:72:Call -> U
+168:72:Name -> Func:getpass.getuser
+169:60:Attribute -> U
+169:60:Name -> U
+176:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+176:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+176:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+176:54:Name -> U
+177:22:Call -> ERR
+177:22:Name -> Func:time.time
+178:18:Call -> Inst:pathlib.Path
+178:18:Name -> Class:pathlib.Path
+178:23:Call -> U
+178:23:Name -> U
+178:40:Attribute -> U
+178:40:Name -> U
+179:21:Call -> U
+179:21:Attribute -> U
+179:21:Name -> U
+179:36:Name -> U
+180:4:Call -> U
+180:4:Attribute -> U
+180:4:Name -> U
+180:31:Name -> U
+181:10:Call -> U
+181:10:Attribute -> U
+181:10:Name -> U
+181:28:Name -> U
+182:12:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+182:12:Attribute -> BM:pathlib.Path.exists
+182:12:Name -> Inst:pathlib.Path
+182:36:Attribute -> U
+182:36:Call -> U
+182:36:Attribute -> BM:pathlib.Path.stat
+182:36:Name -> Inst:pathlib.Path
+182:66:Name -> U
+184:8:Call -> ERR
+184:8:Name -> Func:time.sleep
+185:11:Call -> U
+185:11:Attribute -> U
+185:11:Name -> U
+185:29:Name -> U
+186:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+186:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+186:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+187:8:Call -> ERR
+187:8:Attribute -> Func:sys.exit
+187:8:Name -> Module:sys
+188:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+188:11:Attribute -> BM:pathlib.Path.exists
+188:11:Name -> Inst:pathlib.Path
+188:35:Attribute -> U
+188:35:Call -> U
+188:35:Attribute -> BM:pathlib.Path.stat
+188:35:Name -> Inst:pathlib.Path
+188:65:Name -> U
+189:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+189:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+189:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+190:8:Call -> ERR
+190:8:Attribute -> Func:sys.exit
+190:8:Name -> Module:sys
+191:13:Call -> U
+191:13:Attribute -> U
+191:13:Name -> U
+191:36:Call -> U
+191:36:Attribute -> BM:pathlib.Path.read_text
+191:36:Name -> Inst:pathlib.Path
+193:7:Attribute -> U
+193:7:Name -> U
+194:11:Attribute -> U
+194:11:Name -> U
+194:40:Attribute -> U
+194:40:Name -> U
+194:56:Attribute -> U
+194:56:Name -> U
+195:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+195:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+195:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+197:16:Call -> ERR
+197:16:Name -> Func:time.sleep
+198:16:Call -> U
+198:16:Attribute -> U
+198:16:Name -> U
+198:43:Name -> U
+199:16:Call -> ERR
+199:16:Name -> Func:time.sleep
+200:25:Call -> U
+200:25:Attribute -> U
+200:25:Name -> U
+200:48:Call -> U
+200:48:Attribute -> BM:pathlib.Path.read_text
+200:48:Name -> Inst:pathlib.Path
+201:19:Attribute -> U
+201:19:Name -> U
+201:35:Attribute -> U
+201:35:Name -> U
+202:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+202:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+202:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+204:19:Attribute -> U
+204:19:Name -> U
+205:20:Attribute -> U
+205:20:Name -> U
+206:20:Attribute -> U
+206:20:Name -> U
+208:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+208:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+208:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+210:11:Attribute -> U
+210:11:Name -> U
+210:41:Attribute -> U
+210:41:Name -> U
+210:57:Attribute -> U
+210:57:Name -> U
+211:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+211:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+211:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+212:18:Attribute -> U
+212:18:Name -> U
+212:35:Attribute -> U
+212:35:Name -> U
+212:69:Attribute -> U
+212:69:Name -> U
+213:16:Call -> ERR
+213:16:Name -> Func:time.sleep
+214:16:Call -> U
+214:16:Attribute -> U
+214:16:Name -> U
+214:43:Name -> U
+215:16:Call -> ERR
+215:16:Name -> Func:time.sleep
+216:25:Call -> U
+216:25:Attribute -> U
+216:25:Name -> U
+216:48:Call -> U
+216:48:Attribute -> BM:pathlib.Path.read_text
+216:48:Name -> Inst:pathlib.Path
+218:4:Call -> ERR
+218:4:Name -> Func:builtins.print
+218:10:Call -> U
+218:10:Attribute -> Func:json.dumps
+218:10:Name -> Module:json
+218:21:Call -> U | Inst:builtins.dict
+218:21:Name -> Func:dataclasses.asdict
+218:28:Name -> U
+221:1:Call -> U
+221:1:Attribute -> U
+221:1:Name -> U
+222:1:Name -> U
+225:10:Call -> U
+225:10:Name -> U
+225:18:Attribute -> U
+225:18:Name -> U
+227:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+227:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+227:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+227:52:Name -> U
+228:21:Call -> U
+228:21:Attribute -> U
+228:21:Name -> U
+228:36:Name -> U
+229:4:Call -> U
+229:4:Attribute -> U
+229:4:Name -> U
+229:31:Attribute -> Const:int:2
+229:31:Name -> Module:signal
+231:7:Attribute -> U
+231:7:Name -> U
+232:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+232:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+232:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+233:14:Call -> U
+233:14:Attribute -> U
+233:14:Name -> U
+233:32:Name -> U
+234:12:Call -> ERR
+234:12:Name -> Func:time.sleep
+235:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+235:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+235:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+240:14:Call -> U
+240:14:Attribute -> U
+240:14:Name -> U
+241:17:Call -> U
+241:17:Attribute -> U
+241:17:Name -> U
+242:7:Name -> U
+242:18:Name -> U
+243:14:Call -> ExcInst:builtins.SystemExit
+243:14:Name -> Class:builtins.SystemExit
+248:45:Name -> Class:builtins.str
+252:11:Call -> U
+252:11:Name -> U
+252:46:Name -> U
+253:14:Call -> ExcInst:builtins.SystemExit
+253:14:Name -> Class:builtins.SystemExit
+253:47:Name -> U
+256:1:Call -> U
+256:1:Attribute -> U
+256:1:Name -> U
+257:1:Name -> U
+260:4:Call -> Const:NoneType:None
+260:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+263:21:Call -> U
+263:21:Name -> U
+263:54:Attribute -> U
+263:54:Name -> U
+276:16:Name -> U
+278:12:Name -> Const:str:'worker_name' | Const:str:'state' | Const:str:'queues' | Const:str:'jobs_active' | Const:str:'concurrency' | Const:str:'free_concurrency' | Const:str:'maintenance_comment'
+278:15:Call -> U
+278:15:Name -> Func:builtins.getattr
+278:23:Name -> U
+278:29:Name -> Const:str:'worker_name' | Const:str:'state' | Const:str:'queues' | Const:str:'jobs_active' | Const:str:'concurrency' | Const:str:'free_concurrency' | Const:str:'maintenance_comment'
+278:47:Name -> List:7
+278:57:Name -> Const:str:'worker_name' | Const:str:'state' | Const:str:'queues' | Const:str:'jobs_active' | Const:str:'concurrency' | Const:str:'free_concurrency' | Const:str:'maintenance_comment'
+281:22:Call -> U
+281:22:Attribute -> Func:json.loads
+281:22:Name -> Module:json
+281:33:Attribute -> U
+281:33:Name -> U
+282:12:Name -> U
+282:39:Call -> U
+282:39:Attribute -> U
+282:39:Name -> U
+283:12:Name -> U
+283:44:Call -> U
+283:44:Attribute -> U
+283:44:Name -> U
+284:16:Attribute -> Class:json.decoder.JSONDecodeError
+284:16:Name -> Module:json
+284:38:Name -> Class:builtins.TypeError
+285:12:Name -> U
+286:12:Name -> U
+287:8:Call -> ERR
+287:8:Attribute -> BM:builtins.list.append
+287:8:Name -> List:0
+287:25:Name -> U
+289:4:Call -> U
+289:4:Attribute -> U
+289:4:Call -> U
+289:4:Name -> U
+289:35:Name -> List:0
+289:53:Attribute -> U
+289:53:Name -> U
+292:1:Call -> U
+292:1:Attribute -> U
+292:1:Name -> U
+293:1:Name -> U
+296:4:Call -> Const:NoneType:None
+296:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+297:4:Call -> Const:NoneType:None
+297:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+297:44:Attribute -> U
+297:44:Name -> U
+300:4:Call -> U
+300:4:Name -> U
+300:24:Attribute -> U
+300:24:Name -> U
+300:44:Attribute -> U
+300:44:Name -> U
+301:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+301:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+301:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+301:57:Attribute -> U
+301:57:Name -> U
+301:77:Call -> U
+301:77:Name -> Func:getpass.getuser
+304:1:Call -> U
+304:1:Attribute -> U
+304:1:Name -> U
+305:1:Name -> U
+308:4:Call -> Const:NoneType:None
+308:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+309:4:Call -> Const:NoneType:None
+309:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+309:44:Attribute -> U
+309:44:Name -> U
+312:4:Call -> U
+312:4:Name -> U
+312:21:Attribute -> U
+312:21:Name -> U
+313:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+313:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+313:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+313:63:Attribute -> U
+313:63:Name -> U
+313:83:Call -> U
+313:83:Name -> Func:getpass.getuser
+316:1:Call -> U
+316:1:Attribute -> U
+316:1:Name -> U
+317:1:Name -> U
+320:4:Call -> Const:NoneType:None
+320:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+321:4:Call -> Const:NoneType:None
+321:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+321:44:Attribute -> U
+321:44:Name -> U
+325:8:Call -> U
+325:8:Name -> U
+325:35:Attribute -> U
+325:35:Name -> U
+325:55:Attribute -> U
+325:55:Name -> U
+326:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+326:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+326:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+326:66:Attribute -> U
+326:66:Name -> U
+326:86:Call -> U
+326:86:Name -> Func:getpass.getuser
+327:11:Name -> Class:builtins.TypeError
+328:14:Name -> Class:builtins.SystemExit
+331:1:Call -> U
+331:1:Attribute -> U
+331:1:Name -> U
+332:1:Name -> U
+335:4:Call -> Const:NoneType:None
+335:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+336:4:Call -> Const:NoneType:None
+336:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+336:44:Attribute -> U
+336:44:Name -> U
+340:8:Call -> U
+340:8:Name -> U
+340:22:Attribute -> U
+340:22:Name -> U
+341:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+341:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+341:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+341:58:Attribute -> U
+341:58:Name -> U
+341:78:Call -> U
+341:78:Name -> Func:getpass.getuser
+342:11:Name -> Class:builtins.TypeError
+343:14:Name -> Class:builtins.SystemExit
+346:1:Call -> U
+346:1:Attribute -> U
+346:1:Name -> U
+347:1:Name -> U
+350:4:Call -> Const:NoneType:None
+350:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+351:4:Call -> Const:NoneType:None
+351:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+351:44:Attribute -> U
+351:44:Name -> U
+354:4:Call -> U
+354:4:Name -> U
+354:21:Attribute -> U
+354:21:Name -> U
+355:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+355:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+355:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+355:68:Attribute -> U
+355:68:Name -> U
+355:88:Call -> U
+355:88:Name -> Func:getpass.getuser
+358:1:Call -> U
+358:1:Attribute -> U
+358:1:Name -> U
+359:1:Name -> U
+362:4:Call -> Const:NoneType:None
+362:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+364:8:Attribute -> U
+364:8:Name -> U
+365:11:Call -> ERR
+365:11:Attribute -> ERR
+365:11:Call -> ERR
+365:11:Name -> Func:builtins.input
+368:14:Call -> ExcInst:builtins.SystemExit
+368:14:Name -> Class:builtins.SystemExit
+372:16:Call -> Inst:builtins.list
+372:16:Name -> Class:builtins.list
+372:21:Call -> U
+372:21:Name -> U
+373:11:Name -> Inst:builtins.list
+374:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+374:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+374:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+378:16:Name -> Inst:builtins.list
+380:12:Call -> U
+380:12:Name -> U
+380:29:Attribute -> U
+380:29:Name -> U
+381:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+381:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+381:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+381:69:Attribute -> U
+381:69:Name -> U
+383:15:Name -> Class:builtins.Exception
+384:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+384:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+384:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+384:71:Attribute -> U
+384:71:Name -> U
+384:89:Name -> ExcInst:builtins.Exception
+386:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+386:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+386:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+386:64:Name -> Const:int:0 | Const:int:1
+386:80:Call -> U
+386:80:Name -> Func:getpass.getuser
+389:1:Call -> U
+389:1:Attribute -> U
+389:1:Name -> U
+390:1:Name -> U
+393:4:Call -> Const:NoneType:None
+393:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+394:4:Call -> Const:NoneType:None
+394:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+394:44:Attribute -> U
+394:44:Name -> U
+397:39:Attribute -> U
+397:39:Name -> U
+397:13:Call -> U
+397:13:Attribute -> U
+397:13:Attribute -> U
+397:13:Name -> U
+398:11:Name -> U | List:0
+399:14:Call -> ExcInst:builtins.SystemExit
+399:14:Name -> Class:builtins.SystemExit
+402:8:Call -> U
+402:8:Name -> U
+402:26:Attribute -> U
+402:26:Name -> U
+402:46:Name -> U | List:0
+403:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+403:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+403:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+403:69:Name -> U | List:0
+403:77:Attribute -> U
+403:77:Name -> U
+403:97:Call -> U
+403:97:Name -> Func:getpass.getuser
+404:11:Name -> Class:builtins.TypeError
+405:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+405:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+405:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+405:21:Call -> Const:str:''
+405:21:Name -> Class:builtins.str
+405:25:Name -> ExcInst:builtins.TypeError
+406:14:Name -> Class:builtins.SystemExit
+409:1:Call -> U
+409:1:Attribute -> U
+409:1:Name -> U
+410:1:Name -> U
+413:4:Call -> Const:NoneType:None
+413:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+414:4:Call -> Const:NoneType:None
+414:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+414:44:Attribute -> U
+414:44:Name -> U
+417:39:Attribute -> U
+417:39:Name -> U
+417:13:Call -> U
+417:13:Attribute -> U
+417:13:Attribute -> U
+417:13:Name -> U
+418:11:Name -> U | List:0
+419:14:Call -> ExcInst:builtins.SystemExit
+419:14:Name -> Class:builtins.SystemExit
+422:8:Call -> U
+422:8:Name -> U
+422:29:Attribute -> U
+422:29:Name -> U
+422:49:Name -> U | List:0
+423:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+423:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+423:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+424:65:Name -> U | List:0
+424:73:Attribute -> U
+424:73:Name -> U
+424:93:Call -> U
+424:93:Name -> Func:getpass.getuser
+426:11:Name -> Class:builtins.TypeError
+427:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+427:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+427:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+427:21:Call -> Const:str:''
+427:21:Name -> Class:builtins.str
+427:25:Name -> ExcInst:builtins.TypeError
+428:14:Name -> Class:builtins.SystemExit
+431:1:Call -> U
+431:1:Attribute -> U
+431:1:Name -> U
+432:1:Name -> U
+435:4:Call -> Const:NoneType:None
+435:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_valid_db_connection
+436:4:Call -> Const:NoneType:None
+436:4:Name -> Func:providers.edge3.src.airflow.providers.edge3.cli.edge_command._check_if_registered_edge_host
+436:44:Attribute -> U
+436:44:Name -> U
+439:7:Attribute -> U
+439:7:Name -> U
+440:14:Call -> ExcInst:builtins.SystemExit
+440:14:Name -> Class:builtins.SystemExit
+443:8:Call -> U
+443:8:Name -> U
+443:31:Attribute -> U
+443:31:Name -> U
+443:51:Attribute -> U
+443:51:Name -> U
+444:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+444:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+444:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+446:12:Attribute -> U
+446:12:Name -> U
+447:12:Attribute -> U
+447:12:Name -> U
+448:12:Call -> U
+448:12:Name -> Func:getpass.getuser
+450:11:Name -> Class:builtins.TypeError
+451:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+451:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+451:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+451:21:Call -> Const:str:''
+451:21:Name -> Class:builtins.str
+451:25:Name -> ExcInst:builtins.TypeError
+452:14:Name -> Class:builtins.SystemExit

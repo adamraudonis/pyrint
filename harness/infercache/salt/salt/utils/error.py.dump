@@ -1,0 +1,57 @@
+18:11:Name -> Const:NoneType:None | U
+19:7:Call -> Const:bool:False
+19:7:Name -> Func:builtins.hasattr
+19:15:Attribute -> Module:salt.exceptions
+19:15:Name -> Module:salt
+19:32:Name -> Const:str:'Exception' | U
+20:13:Call -> ERR
+20:13:Name -> Func:builtins.getattr
+20:21:Attribute -> Module:salt.exceptions
+20:21:Name -> Module:salt
+20:38:Name -> Const:str:'Exception' | U
+21:9:Call -> Const:bool:True
+21:9:Name -> Func:builtins.hasattr
+21:17:Name -> Module:builtins
+21:27:Name -> Const:str:'Exception' | U
+22:13:Call -> Class:builtins.Exception
+22:13:Name -> Func:builtins.getattr
+22:21:Name -> Module:builtins
+22:31:Name -> Const:str:'Exception' | U
+25:13:Call -> Class:salt.exceptions.SaltException
+25:13:Name -> Func:builtins.getattr
+25:21:Attribute -> Module:salt.exceptions
+25:21:Name -> Module:salt
+25:38:Name -> Const:str:'SaltException'
+26:7:Name -> Const:NoneType:None | U
+27:14:Call -> U | ExcInst:builtins.Exception | ExcInst:salt.exceptions.SaltException
+27:14:Name -> U | Class:builtins.Exception | Class:salt.exceptions.SaltException
+27:18:Name -> U
+29:14:Call -> U | ExcInst:builtins.Exception | ExcInst:salt.exceptions.SaltException
+29:14:Name -> U | Class:builtins.Exception | Class:salt.exceptions.SaltException
+29:17:Name -> Const:str:'' | U
+33:7:Call -> U
+33:7:Name -> Func:builtins.hasattr
+33:15:Name -> U
+34:27:Call -> U
+34:27:Attribute -> U
+34:27:Name -> U
+36:39:Call -> U
+36:39:Attribute -> U
+36:39:Name -> U
+36:66:Attribute -> U
+36:66:Name -> U
+37:11:Name -> U | Dict:2
+44:7:Name -> Const:NoneType:None | U
+46:12:Call -> Inst:salt.utils.event.SaltEvent
+46:12:Attribute -> Class:salt.utils.event.SaltEvent
+46:12:Attribute -> Module:salt.utils.event
+46:12:Attribute -> Module:salt.utils
+46:12:Name -> Module:salt
+46:39:Name -> Const:str:'minion' | U
+46:50:Name -> U
+47:4:Call -> Const:bool:False | Const:bool:True
+47:4:Attribute -> BM:salt.utils.event.SaltEvent.fire_event
+47:4:Name -> Inst:salt.utils.event.SaltEvent
+47:21:Call -> U | Dict:2
+47:21:Name -> Func:salt.utils.error.pack_exception
+47:36:Name -> U

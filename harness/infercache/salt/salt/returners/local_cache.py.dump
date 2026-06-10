@@ -1,0 +1,1004 @@
+25:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+25:6:Attribute -> Func:logging.getLogger
+25:6:Name -> Module:logging
+25:24:Name -> Const:str:'salt.returners.local_cache' | Const:str:'__main__'
+47:11:Call -> U
+47:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+47:11:Attribute -> Module:posixpath | Module:ntpath
+47:11:Name -> Module:os
+47:24:Name -> ERR
+55:15:Call -> ERR
+55:15:Attribute -> Func:posix.listdir
+55:15:Name -> Module:os
+55:26:Name -> U
+56:17:Call -> U
+56:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+56:17:Attribute -> Module:posixpath | Module:ntpath
+56:17:Name -> Module:os
+56:30:Name -> U
+56:39:Name -> U
+58:15:Call -> Const:bool:False | Const:bool:True | U
+58:15:Attribute -> Func:genericpath.exists | U
+58:15:Attribute -> Module:posixpath | Module:ntpath
+58:15:Name -> Module:os
+58:30:Name -> U
+61:21:Call -> ERR
+61:21:Attribute -> Func:posix.listdir
+61:21:Name -> Module:os
+61:32:Name -> U
+62:24:Call -> U
+62:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+62:24:Attribute -> Module:posixpath | Module:ntpath
+62:24:Name -> Module:os
+62:37:Name -> U
+62:45:Name -> U
+62:52:Name -> Const:str:'.load.p'
+64:19:Call -> Const:bool:False | U
+64:19:Attribute -> Func:genericpath.isfile | U
+64:19:Attribute -> Module:posixpath | Module:ntpath
+64:19:Name -> Module:os
+64:34:Name -> U
+67:17:Call -> U
+67:17:Attribute -> Func:salt.utils.files.fopen
+67:17:Attribute -> Module:salt.utils.files
+67:17:Attribute -> Module:salt.utils
+67:17:Name -> Module:salt
+67:40:Name -> U
+69:26:Call -> U | Dict:0 | List:0
+69:26:Attribute -> Func:salt.payload.load
+69:26:Attribute -> Module:salt.payload
+69:26:Name -> Module:salt
+69:44:Name -> U
+70:23:Name -> Class:builtins.Exception
+71:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+71:20:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+71:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+71:62:Name -> U
+73:23:Name -> U | Dict:0 | List:0
+74:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+74:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+74:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+76:24:Name -> U
+79:22:Name -> U | Dict:0 | List:0
+80:22:Name -> U
+80:27:Name -> U | Dict:0 | List:0
+80:32:Name -> U
+80:40:Name -> U
+92:7:Name -> Const:int:0 | U
+93:54:Name -> Const:int:0 | U
+94:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+94:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+94:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+94:18:Name -> Const:str:'prep_jid could not store a jid after 0  | Const:str:'prep_jid could not store a jid after Un
+95:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+95:14:Attribute -> Class:salt.exceptions.SaltCacheError
+95:14:Attribute -> Module:salt.exceptions
+95:14:Name -> Module:salt
+95:45:Name -> Const:str:'prep_jid could not store a jid after 0  | Const:str:'prep_jid could not store a jid after Un
+96:7:Name -> Const:NoneType:None | U
+97:14:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+97:14:Attribute -> Func:salt.utils.jid.gen_jid
+97:14:Attribute -> Module:salt.utils.jid
+97:14:Attribute -> Module:salt.utils
+97:14:Name -> Module:salt
+97:37:Name -> ERR
+99:14:Name -> U
+101:14:Call -> U
+101:14:Attribute -> Func:salt.utils.jid.jid_dir
+101:14:Attribute -> Module:salt.utils.jid
+101:14:Attribute -> Module:salt.utils
+101:14:Name -> Module:salt
+101:37:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+101:42:Call -> U
+101:42:Name -> Func:salt.returners.local_cache._job_dir
+101:54:Name -> ERR
+105:11:Call -> Const:bool:False | U
+105:11:Attribute -> Func:genericpath.isdir | U
+105:11:Attribute -> Module:posixpath | Module:ntpath
+105:11:Name -> Module:os
+105:25:Name -> U
+107:12:Call -> Const:NoneType:None
+107:12:Attribute -> Func:os.makedirs
+107:12:Name -> Module:os
+107:24:Name -> U
+108:15:Name -> Class:builtins.OSError
+109:12:Call -> ERR
+109:12:Attribute -> Func:time.sleep
+109:12:Name -> Module:time
+110:15:Name -> Const:NoneType:None | U
+111:23:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+111:23:Name -> Func:salt.returners.local_cache.prep_jid
+111:40:Name -> Const:bool:False | U
+111:63:Name -> Const:int:0 | U
+114:13:Call -> U
+114:13:Attribute -> Func:salt.utils.files.fopen
+114:13:Attribute -> Module:salt.utils.files
+114:13:Attribute -> Module:salt.utils
+114:13:Name -> Module:salt
+114:36:Call -> U
+114:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+114:36:Attribute -> Module:posixpath | Module:ntpath
+114:36:Name -> Module:os
+114:49:Name -> U
+115:12:Call -> U
+115:12:Attribute -> U
+115:12:Name -> U
+115:22:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}' | Inst:builtins.bytes | Const:bytes:b''
+115:22:Attribute -> Func:salt.utils.stringutils.to_bytes
+115:22:Attribute -> Module:salt.utils.stringutils
+115:22:Attribute -> Module:salt.utils
+115:22:Name -> Module:salt
+115:54:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+116:11:Name -> Const:bool:False | U
+117:17:Call -> U
+117:17:Attribute -> Func:salt.utils.files.fopen
+117:17:Attribute -> Module:salt.utils.files
+117:17:Attribute -> Module:salt.utils
+117:17:Name -> Module:salt
+117:40:Call -> U
+117:40:Attribute -> Func:posixpath.join | Func:ntpath.join
+117:40:Attribute -> Module:posixpath | Module:ntpath
+117:40:Name -> Module:os
+117:53:Name -> U
+119:11:Name -> Class:builtins.OSError
+120:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+120:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+120:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+120:74:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+121:8:Call -> ERR
+121:8:Attribute -> Func:time.sleep
+121:8:Name -> Module:time
+122:15:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+122:15:Name -> Func:salt.returners.local_cache.prep_jid
+123:23:Name -> U
+123:36:Name -> Const:bool:False | U
+123:59:Name -> Const:int:0 | U
+126:11:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+135:7:Name -> U
+136:8:Name -> U
+136:22:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+136:22:Name -> Func:salt.returners.local_cache.prep_jid
+136:39:Call -> U
+136:39:Attribute -> U
+136:39:Name -> U
+138:14:Call -> U
+138:14:Attribute -> Func:salt.utils.jid.jid_dir
+138:14:Attribute -> Module:salt.utils.jid
+138:14:Attribute -> Module:salt.utils
+138:14:Name -> Module:salt
+138:37:Name -> U
+138:50:Call -> U
+138:50:Name -> Func:salt.returners.local_cache._job_dir
+138:62:Name -> ERR
+139:7:Call -> Const:bool:False | Const:bool:True | U
+139:7:Attribute -> Func:genericpath.exists | U
+139:7:Attribute -> Module:posixpath | Module:ntpath
+139:7:Name -> Module:os
+139:22:Call -> U
+139:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+139:22:Attribute -> Module:posixpath | Module:ntpath
+139:22:Name -> Module:os
+139:35:Name -> U
+142:13:Call -> U
+142:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+142:13:Attribute -> Module:posixpath | Module:ntpath
+142:13:Name -> Module:os
+142:26:Name -> U
+142:35:Name -> U
+145:8:Call -> Const:NoneType:None
+145:8:Attribute -> Func:os.makedirs
+145:8:Name -> Module:os
+145:20:Name -> U
+146:11:Name -> Class:builtins.OSError
+147:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+147:11:Name -> ExcInst:builtins.OSError
+147:24:Attribute -> Const:int:17
+147:24:Name -> Module:errno
+149:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+149:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+149:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+152:16:Name -> U
+155:13:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+155:13:Name -> ExcInst:builtins.OSError
+155:26:Attribute -> Const:int:2
+155:26:Name -> Module:errno
+156:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+156:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+156:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+159:16:Name -> U
+164:4:Call -> Const:NoneType:None
+164:4:Attribute -> Func:salt.payload.dump
+164:4:Attribute -> Module:salt.payload
+164:4:Name -> Module:salt
+165:9:Name -> Const:str:'return' | Const:str:'retcode' | Const:str:'success'
+165:14:Name -> U
+165:19:Name -> Const:str:'return' | Const:str:'retcode' | Const:str:'success'
+165:71:Name -> Const:str:'return' | Const:str:'retcode' | Const:str:'success'
+165:78:Name -> U
+168:8:Call -> Inst:salt.utils.atomicfile._AtomicWFile
+168:8:Attribute -> Func:salt.utils.atomicfile.atomic_open
+168:8:Attribute -> Module:salt.utils.atomicfile
+168:8:Attribute -> Module:salt.utils
+168:8:Name -> Module:salt
+168:42:Call -> U
+168:42:Attribute -> Func:posixpath.join | Func:ntpath.join
+168:42:Attribute -> Module:posixpath | Module:ntpath
+168:42:Name -> Module:os
+168:55:Name -> U
+168:63:Name -> Const:str:'return.p'
+171:16:Name -> U
+172:8:Call -> Const:NoneType:None
+172:8:Attribute -> Func:salt.payload.dump
+172:8:Attribute -> Module:salt.payload
+172:8:Name -> Module:salt
+173:12:Name -> U
+176:12:Call -> Inst:salt.utils.atomicfile._AtomicWFile
+176:12:Attribute -> Func:salt.utils.atomicfile.atomic_open
+176:12:Attribute -> Module:salt.utils.atomicfile
+176:12:Attribute -> Module:salt.utils
+176:12:Name -> Module:salt
+176:46:Call -> U
+176:46:Attribute -> Func:posixpath.join | Func:ntpath.join
+176:46:Attribute -> Module:posixpath | Module:ntpath
+176:46:Name -> Module:os
+176:59:Name -> U
+176:67:Name -> Const:str:'out.p'
+188:7:Name -> Const:int:0 | U
+189:14:Call -> U
+189:14:Attribute -> BM:builtins.str.format
+190:12:Name -> Const:int:0 | U
+192:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+192:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+192:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+192:18:Name -> U
+193:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+193:14:Attribute -> Class:salt.exceptions.SaltCacheError
+193:14:Attribute -> Module:salt.exceptions
+193:14:Name -> Module:salt
+193:45:Name -> U
+195:14:Call -> U
+195:14:Attribute -> Func:salt.utils.jid.jid_dir
+195:14:Attribute -> Module:salt.utils.jid
+195:14:Attribute -> Module:salt.utils
+195:14:Name -> Module:salt
+195:37:Name -> U
+195:42:Call -> U
+195:42:Name -> Func:salt.returners.local_cache._job_dir
+195:54:Name -> ERR
+199:15:Call -> Const:bool:False | Const:bool:True | U
+199:15:Attribute -> Func:genericpath.exists | U
+199:15:Attribute -> Module:posixpath | Module:ntpath
+199:15:Name -> Module:os
+199:30:Name -> U
+200:12:Call -> Const:NoneType:None
+200:12:Attribute -> Func:os.makedirs
+200:12:Name -> Module:os
+200:24:Name -> U
+201:11:Name -> Class:builtins.OSError
+202:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+202:11:Name -> ExcInst:builtins.OSError
+202:24:Attribute -> Const:int:17
+202:24:Name -> Module:errno
+210:13:Call -> Inst:salt.utils.atomicfile._AtomicWFile
+210:13:Attribute -> Func:salt.utils.atomicfile.atomic_open
+210:13:Attribute -> Module:salt.utils.atomicfile
+210:13:Attribute -> Module:salt.utils
+210:13:Name -> Module:salt
+211:12:Call -> U
+211:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+211:12:Attribute -> Module:posixpath | Module:ntpath
+211:12:Name -> Module:os
+211:25:Name -> U
+211:34:Name -> Const:str:'.load.p'
+213:12:Call -> Const:NoneType:None
+213:12:Attribute -> Func:salt.payload.dump
+213:12:Attribute -> Module:salt.payload
+213:12:Name -> Module:salt
+213:30:Name -> U
+213:42:Name -> Inst:salt.utils.atomicfile._AtomicWFile
+214:11:Name -> Class:builtins.OSError
+215:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+215:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+215:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+215:69:Name -> ExcInst:builtins.OSError
+216:8:Call -> ERR
+216:8:Attribute -> Func:time.sleep
+216:8:Name -> Module:time
+217:15:Call -> U
+217:15:Name -> Func:salt.returners.local_cache.save_load
+218:16:Name -> U
+218:32:Name -> U
+218:58:Name -> Const:int:0 | U
+222:16:Name -> U
+222:31:Name -> U
+223:11:Name -> Const:NoneType:None | U
+224:24:Call -> Inst:salt.utils.minions.CkMinions
+224:24:Attribute -> Class:salt.utils.minions.CkMinions
+224:24:Attribute -> Module:salt.utils.minions
+224:24:Attribute -> Module:salt.utils
+224:24:Name -> Module:salt
+224:53:Name -> ERR
+226:19:Call -> U | Dict:2
+226:19:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+226:19:Name -> Inst:salt.utils.minions.CkMinions
+227:16:Name -> U
+227:35:Call -> U
+227:35:Attribute -> U
+227:35:Name -> U
+229:22:Name -> U | Dict:2
+231:8:Call -> Const:NoneType:None
+231:8:Name -> Func:salt.returners.local_cache.save_minions
+231:21:Name -> U
+231:26:Name -> Const:NoneType:None | U
+241:14:Call -> Inst:builtins.list
+241:14:Name -> Class:builtins.list
+241:19:Name -> U
+243:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+243:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+243:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+245:8:Name -> U
+246:48:Name -> Const:NoneType:None | U
+246:32:Name -> U
+247:8:Name -> Inst:builtins.list
+250:14:Call -> U
+250:14:Attribute -> Func:salt.utils.jid.jid_dir
+250:14:Attribute -> Module:salt.utils.jid
+250:14:Attribute -> Module:salt.utils
+250:14:Name -> Module:salt
+250:37:Name -> U
+250:42:Call -> U
+250:42:Name -> Func:salt.returners.local_cache._job_dir
+250:54:Name -> ERR
+253:15:Call -> Const:bool:False | Const:bool:True | U
+253:15:Attribute -> Func:genericpath.exists | U
+253:15:Attribute -> Module:posixpath | Module:ntpath
+253:15:Name -> Module:os
+253:30:Name -> U
+254:12:Call -> Const:NoneType:None
+254:12:Attribute -> Func:os.makedirs
+254:12:Name -> Module:os
+254:24:Name -> U
+255:11:Name -> Class:builtins.OSError
+256:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+256:11:Name -> ExcInst:builtins.OSError
+256:24:Attribute -> Const:int:17
+256:24:Name -> Module:errno
+264:11:Name -> Const:NoneType:None | U
+265:19:Call -> U
+265:19:Attribute -> BM:builtins.str.format
+265:19:Name -> Const:str:'.minions.{0}.p'
+265:43:Name -> U
+267:19:Name -> Const:str:'.minions.p'
+268:23:Call -> U
+268:23:Attribute -> Func:salt.utils.verify.clean_join
+268:23:Attribute -> Module:salt.utils.verify
+268:23:Attribute -> Module:salt.utils
+268:23:Name -> Module:salt
+268:52:Name -> U
+268:61:Name -> U | Const:str:'.minions.p'
+269:22:Attribute -> Const:str:'' | U
+269:22:Call -> Inst:pathlib.Path
+269:22:Attribute -> BM:pathlib.Path.resolve
+269:22:Call -> Inst:pathlib.Path
+269:22:Attribute -> Class:pathlib.Path
+269:22:Name -> Module:pathlib
+269:35:Name -> U
+270:11:Name -> U | Const:str:'.minions.p'
+270:19:Name -> Const:str:'' | U
+271:18:Call -> ExcInst:salt.exceptions.SaltValidationError
+271:18:Attribute -> Class:salt.exceptions.SaltValidationError
+271:18:Attribute -> Module:salt.exceptions
+271:18:Name -> Module:salt
+272:43:Name -> U | Const:str:'.minions.p'
+272:53:Name -> Const:str:'' | U
+274:11:Attribute -> Class:salt.exceptions.SaltValidationError
+274:11:Attribute -> Module:salt.exceptions
+274:11:Name -> Module:salt
+275:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+275:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+275:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+275:30:Name -> ExcInst:salt.exceptions.SaltValidationError
+279:15:Call -> Const:bool:False | Const:bool:True | U
+279:15:Attribute -> Func:genericpath.exists | U
+279:15:Attribute -> Module:posixpath | Module:ntpath
+279:15:Name -> Module:os
+279:30:Name -> U
+281:16:Call -> Const:NoneType:None
+281:16:Attribute -> Func:os.makedirs
+281:16:Name -> Module:os
+281:28:Name -> U
+282:19:Name -> Class:builtins.OSError
+287:27:Call -> Set:0
+287:27:Name -> Class:builtins.set
+288:11:Call -> Const:bool:False | U
+288:11:Attribute -> Func:genericpath.isfile | U
+288:11:Attribute -> Module:posixpath | Module:ntpath
+288:11:Name -> Module:os
+288:26:Name -> U
+290:21:Call -> U
+290:21:Attribute -> Func:salt.utils.files.fopen
+290:21:Attribute -> Module:salt.utils.files
+290:21:Attribute -> Module:salt.utils
+290:21:Name -> Module:salt
+290:44:Name -> U
+291:36:Call -> U | Dict:0 | List:0
+291:36:Attribute -> Func:salt.payload.load
+291:36:Attribute -> Module:salt.payload
+291:36:Name -> Module:salt
+291:54:Name -> U
+292:23:Name -> U | Dict:0 | List:0
+294:28:Call -> ERR
+294:28:Attribute -> BM:builtins.set.update
+294:28:Name -> Set:0
+294:52:Name -> U | Dict:0 | List:0
+295:32:Name -> Class:builtins.TypeError
+295:43:Name -> Class:builtins.ValueError
+297:20:Name -> Class:builtins.OSError
+297:29:Attribute -> Class:salt.exceptions.SaltDeserializationError
+297:29:Attribute -> Module:salt.exceptions
+297:29:Name -> Module:salt
+300:25:Call -> ERR
+300:25:Name -> Func:builtins.sorted
+300:32:Call -> ERR
+300:32:Attribute -> BM:builtins.set.union
+300:32:Name -> Set:0
+300:55:Name -> Inst:builtins.list
+302:13:Call -> Inst:salt.utils.atomicfile._AtomicWFile
+302:13:Attribute -> Func:salt.utils.atomicfile.atomic_open
+302:13:Attribute -> Module:salt.utils.atomicfile
+302:13:Attribute -> Module:salt.utils
+302:13:Name -> Module:salt
+302:47:Name -> U
+303:12:Call -> Const:NoneType:None
+303:12:Attribute -> Func:salt.payload.dump
+303:12:Attribute -> Module:salt.payload
+303:12:Name -> Module:salt
+303:30:Name -> U
+303:46:Name -> Inst:salt.utils.atomicfile._AtomicWFile
+304:11:Name -> Class:builtins.OSError
+305:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+305:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+305:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+307:12:Name -> Inst:builtins.list
+308:12:Name -> U
+309:12:Name -> ExcInst:builtins.OSError
+317:14:Call -> U
+317:14:Attribute -> Func:salt.utils.jid.jid_dir
+317:14:Attribute -> Module:salt.utils.jid
+317:14:Attribute -> Module:salt.utils
+317:14:Name -> Module:salt
+317:37:Name -> U
+317:42:Call -> U
+317:42:Name -> Func:salt.returners.local_cache._job_dir
+317:54:Name -> ERR
+318:14:Call -> U
+318:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+318:14:Attribute -> Module:posixpath | Module:ntpath
+318:14:Name -> Module:os
+318:27:Name -> U
+318:36:Name -> Const:str:'.load.p'
+319:11:Call -> Const:bool:False | Const:bool:True | U
+319:11:Attribute -> Func:genericpath.exists | U
+319:11:Attribute -> Module:posixpath | Module:ntpath
+319:11:Name -> Module:os
+319:26:Name -> U
+319:42:Call -> Const:bool:False | Const:bool:True | U
+319:42:Attribute -> Func:genericpath.exists | U
+319:42:Attribute -> Module:posixpath | Module:ntpath
+319:42:Name -> Module:os
+319:57:Name -> U
+322:13:Call -> U
+322:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+322:13:Attribute -> Module:posixpath | Module:ntpath
+322:13:Name -> Module:os
+322:26:Name -> U
+322:35:Name -> Const:str:'.load.p'
+325:17:Call -> Inst:builtins.range
+325:17:Name -> Class:builtins.range
+325:26:Name -> Const:int:5
+326:13:Call -> U
+326:13:Attribute -> Func:salt.utils.files.fopen
+326:13:Attribute -> Module:salt.utils.files
+326:13:Attribute -> Module:salt.utils
+326:13:Name -> Module:salt
+326:36:Name -> U
+328:22:Call -> U | Dict:0 | List:0
+328:22:Attribute -> Func:salt.payload.load
+328:22:Attribute -> Module:salt.payload
+328:22:Name -> Module:salt
+328:40:Name -> U
+330:19:Name -> Class:builtins.Exception
+331:22:Name -> ExcInst:builtins.Exception
+332:19:Name -> U
+332:27:Name -> Const:int:5
+333:20:Call -> ERR
+333:20:Attribute -> Func:time.sleep
+333:20:Name -> Module:time
+335:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+335:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+335:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+335:44:Name -> U
+336:11:Name -> Const:NoneType:None | ExcInst:builtins.Exception
+337:18:Name -> ExcInst:builtins.Exception
+338:7:Name -> Dict:0 | U | Dict:0 | List:0
+340:21:Call -> U
+340:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+340:21:Attribute -> Module:posixpath | Module:ntpath
+340:21:Name -> Module:os
+340:34:Name -> U
+340:43:Name -> Const:str:'.minions.p'
+341:4:Call -> ERR
+341:4:Attribute -> BM:builtins.list.extend
+341:4:Name -> List:1
+341:25:Call -> Inst:builtins.list
+341:25:Attribute -> Func:glob.glob
+341:25:Name -> Module:glob
+341:35:Call -> U
+341:35:Attribute -> Func:posixpath.join | Func:ntpath.join
+341:35:Attribute -> Module:posixpath | Module:ntpath
+341:35:Name -> Module:os
+341:48:Name -> U
+341:57:Call -> Const:str:'.minions.*.p'
+341:57:Attribute -> BM:builtins.str.format
+341:57:Name -> Const:str:'.minions.{0}.p'
+342:18:Call -> Set:0
+342:18:Name -> Class:builtins.set
+343:24:Name -> List:1
+344:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+344:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+344:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+344:49:Name -> U
+346:17:Call -> U
+346:17:Attribute -> Func:salt.utils.files.fopen
+346:17:Attribute -> Module:salt.utils.files
+346:17:Attribute -> Module:salt.utils
+346:17:Name -> Module:salt
+346:40:Name -> U
+347:31:Call -> U | Dict:0 | List:0
+347:31:Attribute -> Func:salt.payload.load
+347:31:Attribute -> Module:salt.payload
+347:31:Name -> Module:salt
+347:49:Name -> U
+348:19:Name -> U | Dict:0 | List:0
+350:24:Call -> ERR
+350:24:Attribute -> BM:builtins.set.update
+350:24:Name -> Set:0
+350:43:Name -> U | Dict:0 | List:0
+351:28:Name -> Class:builtins.TypeError
+351:39:Name -> Class:builtins.ValueError
+352:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+352:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+352:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+354:28:Name -> U
+356:15:Name -> Class:builtins.OSError
+357:12:Call -> Const:NoneType:None
+357:12:Attribute -> Func:salt.utils.files.process_read_exception
+357:12:Attribute -> Module:salt.utils.files
+357:12:Attribute -> Module:salt.utils
+357:12:Name -> Module:salt
+357:52:Name -> ExcInst:builtins.OSError
+357:57:Name -> U
+359:7:Name -> Set:0
+360:8:Name -> Dict:0 | U | Dict:0 | List:0 | Dict:0
+360:25:Call -> ERR
+360:25:Name -> Func:builtins.sorted
+360:32:Name -> U
+362:11:Name -> Dict:0 | U | Dict:0 | List:0 | Dict:0
+369:14:Call -> U
+369:14:Attribute -> Func:salt.utils.jid.jid_dir
+369:14:Attribute -> Module:salt.utils.jid
+369:14:Attribute -> Module:salt.utils
+369:14:Name -> Module:salt
+369:37:Name -> U
+369:42:Call -> U
+369:42:Name -> Func:salt.returners.local_cache._job_dir
+369:54:Name -> ERR
+373:11:Call -> Const:bool:False | U
+373:11:Attribute -> Func:genericpath.isdir | U
+373:11:Attribute -> Module:posixpath | Module:ntpath
+373:11:Name -> Module:os
+373:25:Name -> U
+374:15:Name -> Dict:0
+375:15:Call -> ERR
+375:15:Attribute -> Func:posix.listdir
+375:15:Name -> Module:os
+375:26:Name -> U
+376:11:Call -> U
+376:11:Attribute -> U
+376:11:Name -> U
+378:11:Name -> U
+378:22:Name -> Dict:0
+379:19:Call -> U
+379:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+379:19:Attribute -> Module:posixpath | Module:ntpath
+379:19:Name -> Module:os
+379:32:Name -> U
+379:41:Name -> U
+379:46:Name -> Const:str:'return.p'
+380:19:Call -> U
+380:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+380:19:Attribute -> Module:posixpath | Module:ntpath
+380:19:Name -> Module:os
+380:32:Name -> U
+380:41:Name -> U
+380:46:Name -> Const:str:'out.p'
+381:19:Call -> Const:bool:False | U
+381:19:Attribute -> Func:genericpath.isfile | U
+381:19:Attribute -> Module:posixpath | Module:ntpath
+381:19:Name -> Module:os
+381:34:Name -> U
+383:18:Name -> U
+383:29:Name -> Dict:0
+385:25:Call -> U
+385:25:Attribute -> Func:salt.utils.files.fopen
+385:25:Attribute -> Module:salt.utils.files
+385:25:Attribute -> Module:salt.utils
+385:25:Name -> Module:salt
+385:48:Name -> U
+386:35:Call -> U | Dict:0 | List:0
+386:35:Attribute -> Func:salt.payload.load
+386:35:Attribute -> Module:salt.payload
+386:35:Name -> Module:salt
+386:53:Name -> U
+387:27:Call -> ERR
+387:27:Name -> Func:builtins.isinstance
+387:38:Name -> U | Dict:0 | List:0
+387:48:Name -> Class:builtins.dict
+387:73:Name -> U | Dict:0 | List:0
+391:46:Name -> U | Dict:0 | List:0
+392:20:Name -> Dict:0
+392:24:Name -> U
+392:31:Name -> U | Dict:0 | List:0 | Dict:1
+393:23:Call -> Const:bool:False | U
+393:23:Attribute -> Func:genericpath.isfile | U
+393:23:Attribute -> Module:posixpath | Module:ntpath
+393:23:Name -> Module:os
+393:38:Name -> U
+394:29:Call -> U
+394:29:Attribute -> Func:salt.utils.files.fopen
+394:29:Attribute -> Module:salt.utils.files
+394:29:Attribute -> Module:salt.utils
+394:29:Name -> Module:salt
+394:52:Name -> U
+395:28:Name -> Dict:0
+395:32:Name -> U
+395:46:Call -> U | Dict:0 | List:0
+395:46:Attribute -> Func:salt.payload.load
+395:46:Attribute -> Module:salt.payload
+395:46:Name -> Module:salt
+395:64:Name -> U
+396:23:Name -> Class:builtins.Exception
+397:47:Call -> Const:str:''
+397:47:Name -> Class:builtins.str
+397:51:Name -> ExcInst:builtins.Exception
+399:11:Name -> Dict:0
+407:26:Call -> Gen:salt.returners.local_cache._walk_through
+407:26:Name -> Func:salt.returners.local_cache._walk_through
+407:40:Call -> U
+407:40:Name -> Func:salt.returners.local_cache._job_dir
+408:8:Name -> Dict:0
+408:12:Name -> U
+408:19:Call -> Dict:5
+408:19:Attribute -> Func:salt.utils.jid.format_jid_instance
+408:19:Attribute -> Module:salt.utils.jid
+408:19:Attribute -> Module:salt.utils
+408:19:Name -> Module:salt
+408:54:Name -> U
+408:59:Name -> U
+410:11:Call -> ERR
+410:11:Attribute -> ERR
+410:11:Name -> ERR
+411:22:Call -> Const:bool:False | U
+411:22:Name -> Func:salt.returners.local_cache.get_endtime
+411:34:Name -> U
+412:15:Name -> Const:bool:False | U
+413:16:Name -> Dict:0
+413:20:Name -> U
+413:38:Name -> U
+415:11:Name -> Dict:0
+426:26:Call -> Gen:salt.returners.local_cache._walk_through
+426:26:Name -> Func:salt.returners.local_cache._walk_through
+426:40:Call -> U
+426:40:Name -> Func:salt.returners.local_cache._job_dir
+427:14:Call -> Dict:5
+427:14:Attribute -> Func:salt.utils.jid.format_jid_instance_ext
+427:14:Attribute -> Module:salt.utils.jid
+427:14:Attribute -> Module:salt.utils
+427:14:Name -> Module:salt
+427:53:Name -> U
+427:58:Name -> U
+428:11:Name -> Const:bool:True | U
+428:31:Name -> Dict:5
+430:12:Call -> Const:int:0 | U
+430:12:Attribute -> Func:bisect.bisect_right | Func:_bisect.bisect_right
+430:12:Name -> Module:bisect
+430:26:Name -> List:0
+430:32:Name -> U
+431:11:Call -> Const:int:0
+431:11:Name -> Func:builtins.len
+431:15:Name -> List:0
+431:24:Name -> U
+431:34:Name -> Const:int:0 | U
+433:8:Call -> ERR
+433:8:Attribute -> BM:builtins.list.insert
+433:8:Name -> List:0
+433:20:Name -> Const:int:0 | U
+433:23:Name -> U
+434:8:Call -> ERR
+434:8:Attribute -> BM:builtins.list.insert
+434:8:Name -> List:0
+434:19:Name -> Const:int:0 | U
+434:22:Name -> Dict:5
+435:11:Call -> Const:int:0
+435:11:Name -> Func:builtins.len
+435:15:Name -> List:0
+435:23:Name -> U
+436:16:Name -> List:0
+437:16:Name -> List:0
+438:11:Name -> List:0
+448:8:Call -> Const:NoneType:None | Const:NoneType:None
+448:8:Attribute -> Func:shutil.rmtree
+448:8:Name -> Module:shutil
+448:22:Name -> U
+449:12:Name -> Class:builtins.NotADirectoryError
+449:32:Name -> Class:builtins.OSError
+450:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+450:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+450:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+450:45:Name -> U
+450:55:Name -> ExcInst:builtins.NotADirectoryError | ExcInst:builtins.OSError
+459:24:Call -> U
+459:24:Attribute -> Func:salt.utils.job.get_keep_jobs_seconds
+459:24:Attribute -> Module:salt.utils.job
+459:24:Attribute -> Module:salt.utils
+459:24:Name -> Module:salt
+459:61:Name -> ERR
+460:7:Name -> U
+461:19:Call -> U
+461:19:Name -> Func:salt.returners.local_cache._job_dir
+463:15:Call -> Const:bool:False | Const:bool:True | U
+463:15:Attribute -> Func:genericpath.exists | U
+463:15:Attribute -> Module:posixpath | Module:ntpath
+463:15:Name -> Module:os
+463:30:Name -> U
+467:25:Call -> Set:0
+467:25:Name -> Class:builtins.set
+469:19:Call -> ERR
+469:19:Attribute -> Func:posix.listdir
+469:19:Name -> Module:os
+469:30:Name -> U
+470:21:Call -> U
+470:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+470:21:Attribute -> Module:posixpath | Module:ntpath
+470:21:Name -> Module:os
+470:34:Name -> U
+470:44:Name -> U
+472:19:Call -> Const:bool:False | Const:bool:True | U
+472:19:Attribute -> Func:genericpath.exists | U
+472:19:Attribute -> Module:posixpath | Module:ntpath
+472:19:Name -> Module:os
+472:34:Name -> U
+476:26:Call -> ERR
+476:26:Attribute -> Func:posix.listdir
+476:26:Name -> Module:os
+476:37:Name -> U
+477:19:Name -> U
+477:35:Name -> U
+477:49:Name -> Set:0
+478:16:Call -> ERR
+478:16:Attribute -> BM:builtins.set.add
+478:16:Name -> Set:0
+478:35:Name -> U
+481:25:Name -> U
+482:25:Call -> U
+482:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+482:25:Attribute -> Module:posixpath | Module:ntpath
+482:25:Name -> Module:os
+482:38:Name -> U
+482:46:Name -> U
+483:27:Call -> U
+483:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+483:27:Attribute -> Module:posixpath | Module:ntpath
+483:27:Name -> Module:os
+483:40:Name -> U
+484:23:Call -> Const:bool:False | U
+484:23:Attribute -> Func:genericpath.isfile | U
+484:23:Attribute -> Module:posixpath | Module:ntpath
+484:23:Name -> Module:os
+484:38:Name -> U
+484:52:Call -> Const:bool:False | Const:bool:True | U
+484:52:Attribute -> Func:genericpath.exists | U
+484:52:Attribute -> Module:posixpath | Module:ntpath
+484:52:Name -> Module:os
+484:67:Name -> U
+487:20:Call -> Const:bool:False | Const:bool:True
+487:20:Name -> Func:salt.returners.local_cache._remove_job_dir
+487:36:Name -> U
+488:21:Call -> Const:bool:False | U
+488:21:Attribute -> Func:genericpath.isfile | U
+488:21:Attribute -> Module:posixpath | Module:ntpath
+488:21:Name -> Module:os
+488:36:Name -> U
+489:32:Attribute -> ERR
+489:32:Call -> ERR
+489:32:Attribute -> Func:posix.stat
+489:32:Name -> Module:os
+489:40:Name -> U
+490:41:Call -> ERR
+490:41:Attribute -> Func:time.time
+490:41:Name -> Module:time
+490:55:Name -> U
+491:23:Name -> U
+491:44:Name -> U
+491:66:Call -> Const:bool:False | Const:bool:True | U
+491:66:Attribute -> Func:genericpath.exists | U
+491:66:Attribute -> Module:posixpath | Module:ntpath
+491:66:Name -> Module:os
+492:24:Name -> U
+495:24:Call -> Const:bool:False | Const:bool:True
+495:24:Name -> Func:salt.returners.local_cache._remove_job_dir
+495:40:Name -> U
+501:11:Name -> Set:0
+502:26:Name -> U
+505:31:Attribute -> ERR
+505:31:Call -> ERR
+505:31:Attribute -> Func:posix.stat
+505:31:Name -> Module:os
+505:39:Name -> U
+506:37:Call -> ERR
+506:37:Attribute -> Func:time.time
+506:37:Name -> Module:time
+506:51:Name -> U
+507:19:Name -> U
+507:40:Name -> U
+508:20:Call -> Const:bool:False | Const:bool:True
+508:20:Name -> Func:salt.returners.local_cache._remove_job_dir
+508:36:Name -> U
+517:14:Call -> U
+517:14:Attribute -> Func:salt.utils.jid.jid_dir
+517:14:Attribute -> Module:salt.utils.jid
+517:14:Attribute -> Module:salt.utils
+517:14:Name -> Module:salt
+517:37:Name -> U
+517:42:Call -> U
+517:42:Name -> Func:salt.returners.local_cache._job_dir
+517:54:Name -> ERR
+519:15:Call -> Const:bool:False | Const:bool:True | U
+519:15:Attribute -> Func:genericpath.exists | U
+519:15:Attribute -> Module:posixpath | Module:ntpath
+519:15:Name -> Module:os
+519:30:Name -> U
+520:12:Call -> Const:NoneType:None
+520:12:Attribute -> Func:os.makedirs
+520:12:Name -> Module:os
+520:24:Name -> U
+521:13:Call -> U
+521:13:Attribute -> Func:salt.utils.files.fopen
+521:13:Attribute -> Module:salt.utils.files
+521:13:Attribute -> Module:salt.utils
+521:13:Name -> Module:salt
+521:36:Call -> U
+521:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+521:36:Attribute -> Module:posixpath | Module:ntpath
+521:36:Name -> Module:os
+521:49:Name -> U
+521:58:Name -> Const:str:'endtime'
+522:12:Call -> U
+522:12:Attribute -> U
+522:12:Name -> U
+522:25:Call -> U
+522:25:Attribute -> Func:salt.utils.stringutils.to_str
+522:25:Attribute -> Module:salt.utils.stringutils
+522:25:Attribute -> Module:salt.utils
+522:25:Name -> Module:salt
+522:55:Name -> U
+523:11:Name -> Class:builtins.OSError
+524:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+524:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+524:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+524:69:Name -> ExcInst:builtins.OSError
+533:14:Call -> U
+533:14:Attribute -> Func:salt.utils.jid.jid_dir
+533:14:Attribute -> Module:salt.utils.jid
+533:14:Attribute -> Module:salt.utils
+533:14:Name -> Module:salt
+533:37:Name -> U
+533:42:Call -> U
+533:42:Name -> Func:salt.returners.local_cache._job_dir
+533:54:Name -> ERR
+534:13:Call -> U
+534:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+534:13:Attribute -> Module:posixpath | Module:ntpath
+534:13:Name -> Module:os
+534:26:Name -> U
+534:35:Name -> Const:str:'endtime'
+535:11:Call -> Const:bool:False | Const:bool:True | U
+535:11:Attribute -> Func:genericpath.exists | U
+535:11:Attribute -> Module:posixpath | Module:ntpath
+535:11:Name -> Module:os
+535:26:Name -> U
+537:9:Call -> U
+537:9:Attribute -> Func:salt.utils.files.fopen
+537:9:Attribute -> Module:salt.utils.files
+537:9:Attribute -> Module:salt.utils
+537:9:Name -> Module:salt
+537:32:Name -> U
+538:18:Call -> U
+538:18:Attribute -> U
+538:18:Call -> U
+538:18:Attribute -> Func:salt.utils.stringutils.to_unicode
+538:18:Attribute -> Module:salt.utils.stringutils
+538:18:Attribute -> Module:salt.utils
+538:18:Name -> Module:salt
+538:52:Call -> U
+538:52:Attribute -> U
+538:52:Name -> U
+539:11:Name -> U
+546:11:Call -> U
+546:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+546:11:Attribute -> Module:posixpath | Module:ntpath
+546:11:Name -> Module:os
+546:24:Name -> ERR
+553:14:Call -> U
+553:14:Name -> Func:salt.returners.local_cache._reg_dir
+554:14:Call -> U
+554:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+554:14:Attribute -> Module:posixpath | Module:ntpath
+554:14:Name -> Module:os
+554:27:Name -> U
+556:15:Call -> Const:bool:False | Const:bool:True | U
+556:15:Attribute -> Func:genericpath.exists | U
+556:15:Attribute -> Module:posixpath | Module:ntpath
+556:15:Name -> Module:os
+556:30:Name -> U
+557:12:Call -> Const:NoneType:None
+557:12:Attribute -> Func:os.makedirs
+557:12:Name -> Module:os
+557:24:Name -> U
+558:11:Name -> Class:builtins.OSError
+559:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+559:11:Name -> ExcInst:builtins.OSError
+559:24:Attribute -> Const:int:17
+559:24:Name -> Module:errno
+564:13:Call -> U
+564:13:Attribute -> Func:salt.utils.files.fopen
+564:13:Attribute -> Module:salt.utils.files
+564:13:Attribute -> Module:salt.utils
+564:13:Name -> Module:salt
+564:36:Name -> U
+565:12:Call -> Const:NoneType:None
+565:12:Attribute -> Func:salt.utils.msgpack.pack
+565:12:Attribute -> Module:salt.utils.msgpack
+565:12:Attribute -> Module:salt.utils
+565:12:Name -> Module:salt
+565:36:Name -> U
+565:42:Name -> U
+566:11:Name -> Class:builtins.Exception
+567:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+567:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+567:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+567:56:Name -> ERR
+575:14:Call -> U
+575:14:Name -> Func:salt.returners.local_cache._reg_dir
+576:14:Call -> U
+576:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+576:14:Attribute -> Module:posixpath | Module:ntpath
+576:14:Name -> Module:os
+576:27:Name -> U
+578:13:Call -> U
+578:13:Attribute -> Func:salt.utils.files.fopen
+578:13:Attribute -> Module:salt.utils.files
+578:13:Attribute -> Module:salt.utils
+578:13:Name -> Module:salt
+578:36:Name -> U
+579:19:Call -> U
+579:19:Attribute -> Func:salt.utils.msgpack.unpack
+579:19:Attribute -> Module:salt.utils.msgpack
+579:19:Attribute -> Module:salt.utils
+579:19:Name -> Module:salt
+579:43:Name -> U
+580:11:Name -> Class:builtins.Exception
+581:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+581:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+581:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+581:56:Name -> ERR

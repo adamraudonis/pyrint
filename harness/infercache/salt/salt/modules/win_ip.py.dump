@@ -1,0 +1,782 @@
+16:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+16:6:Attribute -> Func:logging.getLogger
+16:6:Name -> Module:logging
+16:24:Name -> Const:str:'salt.modules.win_ip' | Const:str:'__main__'
+26:11:Call -> U
+26:11:Attribute -> Func:salt.utils.platform.is_windows
+26:11:Attribute -> Module:salt.utils.platform
+26:11:Attribute -> Module:salt.utils
+26:11:Name -> Module:salt
+28:11:Attribute -> Const:bool:False | Const:bool:True
+28:11:Attribute -> Module:salt.utils.win_pwsh
+28:11:Attribute -> Module:salt.utils
+28:11:Name -> Module:salt
+30:11:Attribute -> Const:bool:False | Const:bool:True
+30:11:Attribute -> Module:salt.utils.win_pwsh
+30:11:Attribute -> Module:salt.utils
+30:11:Name -> Module:salt
+35:11:Name -> Const:str:'ip'
+48:14:Call -> U
+48:14:Attribute -> U
+48:14:Name -> U
+48:23:Name -> Const:str:'ipv4_gateways' | Const:str:'ipv6_gateways'
+49:11:Call -> ERR
+49:11:Name -> Func:builtins.isinstance
+49:22:Name -> U
+49:27:Name -> Class:builtins.dict
+50:12:Name -> U
+50:17:Name -> Const:str:'ipv4_gateways' | Const:str:'ipv6_gateways'
+50:25:Name -> U
+51:11:Name -> U
+60:7:Name -> Const:NoneType:None | U
+61:21:Call -> Dict:1
+61:21:Name -> Func:salt.modules.win_ip.get_interface_new
+61:39:Name -> U
+63:21:Call -> List:0 | U | Const:NoneType:None | List:1 | Dict:0
+63:21:Name -> Func:salt.modules.win_ip.list_interfaces
+66:22:Call -> DictItems | U | DictItems
+66:22:Attribute -> BM:builtins.dict.items | U | BM:builtins.dict.items
+66:22:Name -> Dict:1 | List:0 | U | Const:NoneType:None | List:1 | Dict:0
+67:18:Name -> U | Const:NoneType:None
+70:8:Name -> Dict:0
+70:15:Name -> U
+71:37:Name -> U | Const:NoneType:None
+72:31:Name -> U | Const:NoneType:None
+74:34:Name -> U | Const:NoneType:None
+78:8:Name -> Dict:0
+78:15:Name -> U
+79:11:Call -> ERR
+79:11:Name -> Func:builtins.isinstance
+79:22:Name -> U | Const:NoneType:None
+79:44:Name -> Class:builtins.str
+80:12:Name -> U | Const:NoneType:None
+80:36:Name -> U | Const:NoneType:None
+81:20:Name -> U | Const:NoneType:None
+82:22:Call -> Inst:ipaddress.IPv4Interface
+82:22:Attribute -> Class:ipaddress.IPv4Interface
+82:22:Name -> Module:ipaddress
+82:46:Name -> U
+83:12:Call -> U
+83:12:Attribute -> U
+83:12:Name -> Dict:0
+83:19:Name -> U
+85:34:Call -> Const:str:''
+85:34:Attribute -> BM:ipaddress._BaseV4._string_from_ip_int
+85:34:Name -> Inst:ipaddress.IPv4Interface
+85:62:Attribute -> U
+85:62:Name -> Inst:ipaddress.IPv4Interface
+86:31:Call -> Const:str:''
+86:31:Name -> Class:builtins.str
+86:35:Attribute -> U
+86:35:Name -> Inst:ipaddress.IPv4Interface
+87:30:Call -> Const:str:''
+87:30:Name -> Class:builtins.str
+87:34:Attribute -> Inst:ipaddress.IPv4Network
+87:34:Name -> Inst:ipaddress.IPv4Interface
+92:11:Name -> U | Const:NoneType:None
+93:15:Call -> ERR
+93:15:Name -> Func:builtins.isinstance
+93:26:Name -> U | Const:NoneType:None
+93:44:Name -> Class:builtins.str
+94:29:Name -> U | Const:NoneType:None
+96:28:Name -> U | Const:NoneType:None
+99:11:Name -> U | Const:NoneType:None
+100:15:Call -> ERR
+100:15:Name -> Func:builtins.isinstance
+100:26:Name -> U | Const:NoneType:None
+100:45:Name -> Class:builtins.str
+101:30:Name -> U | Const:NoneType:None
+103:29:Name -> U | Const:NoneType:None
+106:11:Name -> U
+107:12:Name -> Dict:0
+107:19:Name -> U
+107:66:Name -> List:1 | U | List:1
+108:12:Name -> Dict:0
+108:19:Name -> U
+108:67:Name -> List:1 | U | List:1
+110:12:Name -> Dict:0
+110:19:Name -> U
+110:64:Name -> List:1 | U | List:1
+111:12:Name -> Dict:0
+111:19:Name -> U
+111:65:Name -> List:1 | U | List:1
+114:15:Name -> U
+114:26:Name -> U | Const:NoneType:None
+114:51:Call -> U
+114:51:Attribute -> U
+114:51:Name -> U
+115:11:Name -> U
+116:12:Name -> Dict:0
+116:19:Name -> U
+116:46:Name -> U
+117:12:Name -> Dict:0
+117:19:Name -> U
+117:45:Name -> U
+119:11:Name -> Dict:0
+135:11:Call -> ERR
+135:11:Name -> ERR
+135:31:Name -> List:5
+159:11:Call -> Dict:0
+159:11:Name -> Func:salt.modules.win_ip._get_interfaces_legacy_format
+176:11:Call -> Dict:0
+176:11:Name -> Func:salt.modules.win_ip._get_interfaces_legacy_format
+176:41:Name -> U
+193:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+193:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+193:9:Attribute -> Module:salt.utils.win_pwsh
+193:9:Attribute -> Module:salt.utils
+193:9:Name -> Module:salt
+196:41:Name -> U
+199:17:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+199:17:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+199:17:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+199:29:Name -> Const:str:"\n            [int](Get-NetAdapter -Nam
+203:17:Call -> Const:int:0
+203:17:Name -> Class:builtins.int
+203:31:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+203:21:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+204:12:Name -> Class:builtins.ValueError
+204:24:Name -> Class:builtins.TypeError
+205:28:Name -> U
+206:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+206:14:Name -> Class:salt.exceptions.CommandExecutionError
+206:36:Name -> Const:str:"Interface 'Uninferable' not found or in
+208:7:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:int:0
+209:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+209:14:Name -> Class:salt.exceptions.CommandExecutionError
+209:50:Name -> U
+211:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:int:0
+228:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+228:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+228:9:Attribute -> Module:salt.utils.win_pwsh
+228:9:Attribute -> Module:salt.utils
+228:9:Name -> Module:salt
+231:41:Name -> U
+234:17:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+234:17:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+234:17:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+234:29:Name -> Const:str:"\n            [int](Get-NetAdapter -Nam
+238:17:Call -> Const:int:0
+238:17:Name -> Class:builtins.int
+238:31:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+238:21:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+239:12:Name -> Class:builtins.ValueError
+239:24:Name -> Class:builtins.TypeError
+240:28:Name -> U
+241:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+241:14:Name -> Class:salt.exceptions.CommandExecutionError
+241:36:Name -> Const:str:"Interface 'Uninferable' not found or in
+243:7:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:int:0
+244:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+244:14:Name -> Class:salt.exceptions.CommandExecutionError
+244:50:Name -> U
+246:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:int:0
+263:4:Call -> Const:bool:True
+263:4:Name -> Func:salt.modules.win_ip.set_interface
+263:18:Name -> U
+280:4:Call -> Const:bool:True
+280:4:Name -> Func:salt.modules.win_ip.set_interface
+280:18:Name -> U
+297:11:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+297:11:Attribute -> Func:salt.utils.validate.net.netmask
+297:11:Attribute -> Module:salt.utils.validate.net
+297:11:Attribute -> Module:salt.utils.validate
+297:11:Attribute -> Module:salt.utils
+297:11:Name -> Module:salt
+297:43:Name -> U
+298:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+298:14:Name -> Class:salt.exceptions.SaltInvocationError
+298:38:Name -> U
+299:11:Call -> U
+299:11:Attribute -> Func:salt.utils.network.get_net_size
+299:11:Attribute -> Module:salt.utils.network
+299:11:Attribute -> Module:salt.utils
+299:11:Name -> Module:salt
+299:43:Name -> U
+345:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+345:11:Attribute -> Func:salt.utils.validate.net.ipv4_addr
+345:11:Attribute -> Module:salt.utils.validate.net
+345:11:Attribute -> Module:salt.utils.validate
+345:11:Attribute -> Module:salt.utils
+345:11:Name -> Module:salt
+345:45:Name -> U
+346:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+346:14:Name -> Class:salt.exceptions.SaltInvocationError
+346:54:Name -> U
+348:7:Name -> Const:NoneType:None | U
+348:23:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+348:23:Attribute -> Func:salt.utils.validate.net.ipv4_addr
+348:23:Attribute -> Module:salt.utils.validate.net
+348:23:Attribute -> Module:salt.utils.validate
+348:23:Attribute -> Module:salt.utils
+348:23:Name -> Module:salt
+348:57:Name -> Const:NoneType:None | U
+349:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+349:14:Name -> Class:salt.exceptions.SaltInvocationError
+349:62:Name -> Const:NoneType:None | U
+351:18:Name -> U
+354:38:Name -> U
+354:12:Call -> U
+354:12:Attribute -> U
+354:12:Name -> U
+354:49:Name -> U
+356:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+356:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+356:9:Attribute -> Module:salt.utils.win_pwsh
+356:9:Attribute -> Module:salt.utils
+356:9:Name -> Module:salt
+359:16:Call -> Inst:builtins.int | Const:int:0
+359:16:Name -> Func:salt.modules.win_ip.get_interface_index
+359:36:Name -> U
+359:43:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+362:47:Name -> Inst:builtins.int | Const:int:0
+366:17:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+366:17:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+366:17:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+366:29:Name -> Const:str:'\n            (Get-NetIPAddress -Interf | Const:str:'\n            (Get-NetIPAddress -Interf
+368:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+370:13:Call -> ERR
+370:13:Name -> Func:builtins.isinstance
+370:24:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+370:32:Name -> Class:builtins.list
+371:21:Name -> U
+371:27:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+373:21:Name -> U
+373:27:Call -> Const:str:'' | U
+373:27:Attribute -> BM:builtins.str.strip | U | BM:builtins.str.strip | BM:builtins.str.strip
+373:27:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+375:7:Name -> Const:bool:False | U
+376:26:Name -> U
+376:51:Name -> U
+377:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+377:14:Name -> Class:salt.exceptions.CommandExecutionError
+377:36:Name -> Const:str:"Address 'Uninferable' already exists on
+379:4:Call -> Const:bool:True
+379:4:Name -> Func:salt.modules.win_ip.set_interface
+380:14:Name -> U
+381:21:Name -> U
+382:33:Name -> Const:NoneType:None | U
+382:22:Name -> U
+383:15:Name -> Const:bool:False | U
+386:19:Call -> Dict:1
+386:19:Name -> Func:salt.modules.win_ip.get_interface_new
+386:37:Name -> U
+386:44:Name -> U
+388:27:Name -> U
+389:7:Name -> Const:NoneType:None | U
+390:15:Name -> U
+390:26:Name -> U
+390:59:Call -> U
+390:59:Attribute -> U
+390:59:Name -> U
+391:11:Name -> U
+392:12:Name -> Dict:1
+392:37:Name -> U
+394:11:Name -> Dict:1
+419:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+419:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+419:9:Attribute -> Module:salt.utils.win_pwsh
+419:9:Attribute -> Module:salt.utils
+419:9:Name -> Module:salt
+420:16:Call -> Inst:builtins.int | Const:int:0
+420:16:Name -> Func:salt.modules.win_ip.get_interface_index
+420:36:Name -> U
+420:43:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+424:54:Name -> Inst:builtins.int | Const:int:0
+428:23:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+428:23:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+428:23:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+428:35:Name -> Const:str:'\n            [int](Get-NetIPInterface  | Const:str:'\n            [int](Get-NetIPInterface 
+430:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+434:4:Call -> Const:bool:True
+434:4:Name -> Func:salt.modules.win_ip.set_interface
+434:18:Name -> U
+436:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+436:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+436:9:Attribute -> Module:salt.utils.win_pwsh
+436:9:Attribute -> Module:salt.utils
+436:9:Name -> Module:salt
+437:16:Call -> Inst:builtins.int | Const:int:0
+437:16:Name -> Func:salt.modules.win_ip.get_interface_index
+437:36:Name -> U
+437:43:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+441:49:Name -> Inst:builtins.int | Const:int:0
+445:23:Call -> U | Const:NoneType:None
+445:23:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run_json
+445:23:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+445:40:Name -> Const:str:'\n            (Get-NetIPInterface -Inte | Const:str:'\n            (Get-NetIPInterface -Inte
+446:11:Name -> U | Const:NoneType:None
+447:33:Name -> U
+449:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+449:18:Name -> Class:salt.exceptions.CommandExecutionError
+476:11:Name -> Tuple:0
+476:20:Call -> Const:str:''
+476:20:Attribute -> BM:builtins.str.lower
+476:20:Call -> Const:str:''
+476:20:Name -> Class:builtins.str
+476:24:Name -> Tuple:0
+477:29:Name -> U
+480:7:Call -> Const:str:''
+480:7:Attribute -> BM:builtins.str.lower
+480:7:Call -> Const:str:''
+480:7:Name -> Class:builtins.str
+480:11:Name -> Tuple:0
+482:15:Call -> Dict:0 | Dict:2
+482:15:Name -> Func:salt.modules.win_ip.set_dhcp_dns
+482:28:Name -> U
+485:12:Call -> Inst:builtins.int | Const:int:0
+485:12:Name -> Func:salt.modules.win_ip.get_interface_index
+485:32:Name -> U
+487:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+487:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+487:9:Attribute -> Module:salt.utils.win_pwsh
+487:9:Attribute -> Module:salt.utils
+487:9:Name -> Module:salt
+490:57:Name -> Inst:builtins.int | Const:int:0
+494:22:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+494:22:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+494:22:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+494:34:Name -> Const:str:'\n            (Get-DnsClientServerAddre | Const:str:'\n            (Get-DnsClientServerAddre
+497:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+500:13:Call -> ERR
+500:13:Name -> Func:builtins.isinstance
+500:24:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+500:37:Name -> Class:builtins.str
+503:16:Call -> U
+503:16:Attribute -> U
+503:16:Name -> U
+504:25:Call -> U
+504:25:Attribute -> BM:builtins.str.splitlines | U
+504:25:Call -> Const:str:'' | U
+504:25:Attribute -> BM:builtins.str.replace | U | BM:builtins.str.replace | BM:builtins.str.replace
+504:25:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:str:''
+505:19:Call -> U
+505:19:Attribute -> U
+505:19:Name -> U
+509:24:Call -> List:0
+509:24:Name -> Class:builtins.list
+509:29:Name -> Tuple:0
+510:11:Call -> Set:13
+510:11:Name -> Class:builtins.set
+510:15:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | List:0
+510:31:Call -> Set:0
+510:31:Name -> Class:builtins.set
+510:35:Name -> List:0
+514:18:Call -> Const:str:''
+514:18:Attribute -> BM:builtins.str.join
+514:32:Name -> U
+514:46:Name -> List:0
+516:56:Name -> Inst:builtins.int | Const:int:0
+517:58:Name -> Const:str:''
+519:8:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+519:8:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+519:8:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+519:20:Name -> Const:str:'\n            Set-DnsClientServerAddres | Const:str:'\n            Set-DnsClientServerAddres
+523:57:Name -> Inst:builtins.int | Const:int:0
+527:22:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+527:22:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+527:22:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+527:34:Name -> Const:str:'\n            (Get-DnsClientServerAddre | Const:str:'\n            (Get-DnsClientServerAddre
+529:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+532:13:Call -> ERR
+532:13:Name -> Func:builtins.isinstance
+532:24:Name -> List:0 | U | Const:str:'Unknown PowerShell Error' | Const:str:'' | Const:str:''
+532:37:Name -> Class:builtins.str
+535:16:Call -> U
+535:16:Attribute -> U
+535:16:Name -> U
+536:25:Call -> U
+536:25:Attribute -> U | BM:builtins.str.splitlines
+536:25:Call -> U | Const:str:''
+536:25:Attribute -> U | BM:builtins.str.replace | BM:builtins.str.replace | BM:builtins.str.replace
+536:25:Name -> List:0 | U | Const:str:'Unknown PowerShell Error' | Const:str:'' | Const:str:''
+537:19:Call -> U
+537:19:Attribute -> U
+537:19:Name -> U
+539:11:Call -> Set:13
+539:11:Name -> Class:builtins.set
+539:15:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | List:0
+539:31:Call -> Set:0
+539:31:Name -> Class:builtins.set
+539:35:Name -> List:0
+540:33:Name -> U
+540:54:Name -> List:0 | U | Const:str:'Unknown PowerShell Error' | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:'' | List:0
+542:10:Call -> ExcInst:salt.exceptions.CommandExecutionError
+542:10:Name -> Class:salt.exceptions.CommandExecutionError
+566:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+566:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+566:9:Attribute -> Module:salt.utils.win_pwsh
+566:9:Attribute -> Module:salt.utils
+566:9:Name -> Module:salt
+568:16:Call -> Inst:builtins.int | Const:int:0
+568:16:Name -> Func:salt.modules.win_ip.get_interface_index
+568:36:Name -> U
+568:43:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+572:57:Name -> Inst:builtins.int | Const:int:0
+576:22:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+576:22:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+576:22:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+576:34:Name -> Const:str:'\n            (Get-DnsClientServerAddre | Const:str:'\n            (Get-DnsClientServerAddre
+579:15:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+585:56:Name -> Inst:builtins.int | Const:int:0
+588:8:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+588:8:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+588:8:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+588:20:Name -> Const:str:'\n            Set-DnsClientServerAddres | Const:str:'\n            Set-DnsClientServerAddres
+593:57:Name -> Inst:builtins.int | Const:int:0
+596:14:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+596:14:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+596:14:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+596:26:Name -> Const:str:'\n            (Get-DnsClientServerAddre | Const:str:'\n            (Get-DnsClientServerAddre
+599:15:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+600:33:Name -> U
+602:10:Call -> ExcInst:salt.exceptions.CommandExecutionError
+602:10:Name -> Class:salt.exceptions.CommandExecutionError
+625:4:Call -> Dict:0 | Dict:2
+625:4:Name -> Func:salt.modules.win_ip.set_dhcp_ip
+625:16:Name -> U
+626:4:Call -> Dict:0 | Dict:2
+626:4:Name -> Func:salt.modules.win_ip.set_dhcp_dns
+626:17:Name -> U
+627:25:Name -> U
+659:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+659:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+659:9:Attribute -> Module:salt.utils.win_pwsh
+659:9:Attribute -> Module:salt.utils
+659:9:Name -> Module:salt
+661:11:Name -> Const:NoneType:None | U
+662:20:Call -> Inst:builtins.int | Const:int:0
+662:20:Name -> Func:salt.modules.win_ip.get_interface_index
+662:40:Name -> U
+665:46:Name -> Inst:builtins.int | Const:int:0
+678:18:Call -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+678:18:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run
+678:18:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+678:30:Name -> Const:str:"\n                Get-NetRoute -Destina | Const:str:"\n                Get-NetRoute -Destina | Const:str:"\n                Get-NetRoute -Destina
+680:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+681:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+681:14:Name -> Class:salt.exceptions.CommandExecutionError
+683:11:Name -> Const:str:'Unknown PowerShell Error' | U | Const:str:'' | Const:NoneType:None | Const:NoneType:None | Const:str:''
+712:42:Name -> U
+715:60:Name -> U
+723:20:Call -> U
+723:20:Attribute -> U
+723:20:Name -> U
+723:26:Name -> Const:str:'\n        $adapter = Get-NetAdapter -Na
+725:20:Call -> Inst:builtins.int
+725:20:Name -> Class:builtins.int
+725:24:Name -> U
+726:16:Name -> Class:builtins.ValueError
+726:28:Name -> Class:builtins.TypeError
+727:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+727:18:Name -> Class:salt.exceptions.CommandExecutionError
+728:59:Name -> U
+730:11:Name -> Inst:builtins.int
+731:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+731:18:Name -> Class:salt.exceptions.CommandExecutionError
+731:64:Name -> U
+732:15:Name -> Inst:builtins.int
+734:7:Name -> Const:NoneType:None | U
+735:15:Call -> Inst:builtins.int
+735:15:Name -> Func:salt.modules.win_ip.get_interface_index._run
+735:20:Name -> U
+736:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+736:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+736:9:Attribute -> Module:salt.utils.win_pwsh
+736:9:Attribute -> Module:salt.utils
+736:9:Name -> Module:salt
+737:15:Call -> Const:int:0
+737:15:Name -> Func:salt.modules.win_ip.get_interface_index._run
+737:20:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+952:7:Name -> Const:NoneType:None | U
+952:24:Call -> U
+952:24:Attribute -> U
+952:24:Name -> Const:NoneType:None | U
+953:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+953:14:Name -> Class:salt.exceptions.SaltInvocationError
+953:62:Name -> Const:NoneType:None | U
+955:7:Name -> Const:NoneType:None | U
+955:28:Name -> Const:NoneType:None | U
+955:41:Name -> Const:NoneType:None | U
+956:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+956:14:Name -> Class:salt.exceptions.SaltInvocationError
+960:11:Call -> ERR
+960:11:Name -> Func:builtins.isinstance
+960:22:Name -> Const:NoneType:None | U
+960:36:Name -> Class:builtins.list
+959:8:Name -> Const:NoneType:None | U
+961:32:Name -> Const:NoneType:None | U
+961:15:Name -> U
+965:11:Call -> ERR
+965:11:Name -> Func:builtins.isinstance
+965:22:Name -> Const:NoneType:None | U
+965:36:Name -> Class:builtins.list
+964:8:Name -> Const:NoneType:None | U
+966:32:Name -> Const:NoneType:None | U
+966:15:Name -> U
+970:12:Call -> Inst:builtins.int | Const:int:0
+970:12:Name -> Func:salt.modules.win_ip.get_interface_index
+970:32:Name -> U
+972:16:Call -> U
+972:16:Attribute -> Func:textwrap.dedent
+972:16:Name -> Module:textwrap
+974:16:Name -> Inst:builtins.int | Const:int:0
+1008:7:Name -> Const:NoneType:None | U
+1009:40:Name -> U
+1010:21:Call -> U
+1010:21:Attribute -> Func:textwrap.dedent
+1010:21:Name -> Module:textwrap
+1012:51:Name -> Const:str:'Enable-NetAdapter' | Const:str:'Disable-NetAdapter'
+1015:7:Name -> Const:NoneType:None | U
+1016:21:Call -> U
+1016:21:Attribute -> Func:textwrap.dedent
+1016:21:Name -> Module:textwrap
+1020:44:Name -> U
+1024:21:Call -> U
+1024:21:Attribute -> Func:textwrap.dedent
+1024:21:Name -> Module:textwrap
+1028:44:Name -> U
+1035:17:Name -> Const:NoneType:None | U
+1035:31:Name -> Const:NoneType:None | U
+1035:42:Name -> Const:NoneType:None | U
+1035:59:Name -> Const:NoneType:None | U
+1036:17:Name -> Const:NoneType:None | U
+1036:31:Name -> Const:NoneType:None | U
+1036:42:Name -> Const:NoneType:None | U
+1036:59:Name -> Const:NoneType:None | U
+1038:11:Name -> Const:NoneType:None | U | Const:NoneType:None
+1039:33:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1041:46:Name -> U
+1045:25:Call -> U
+1045:25:Attribute -> Func:textwrap.dedent
+1045:25:Name -> Module:textwrap
+1047:55:Name -> Const:str:'Enable-NetAdapterBinding' | Const:str:'Disable-NetAdapterBinding'
+1047:78:Name -> Const:str:'ms_tcpip' | Const:str:'ms_tcpip6'
+1051:11:Call -> ERR
+1051:11:Name -> Func:builtins.any
+1051:15:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+1051:39:Name -> Const:NoneType:None | U | Const:NoneType:None
+1051:45:Name -> Const:NoneType:None | U | Const:NoneType:None
+1051:54:Name -> Const:NoneType:None | U | Const:NoneType:None
+1052:76:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1053:15:Name -> Const:NoneType:None | U | Const:NoneType:None
+1054:46:Name -> U
+1055:15:Name -> Const:NoneType:None | U | Const:NoneType:None
+1056:52:Name -> U
+1057:15:Name -> Const:NoneType:None | U | Const:NoneType:None
+1058:19:Name -> U
+1061:74:Name -> U
+1062:25:Call -> U
+1062:25:Attribute -> Func:textwrap.dedent
+1062:25:Name -> Module:textwrap
+1064:17:Name -> Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | Const:str:'Set-NetIPInterface -InterfaceIndex $idx | U
+1068:15:Name -> Const:NoneType:None | U | Const:NoneType:None
+1069:29:Call -> U
+1069:29:Attribute -> Func:textwrap.dedent
+1069:29:Name -> Module:textwrap
+1071:53:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1076:17:Name -> Const:NoneType:None | U | List:1 | List:0
+1076:29:Name -> Const:NoneType:None | U
+1077:17:Name -> Const:NoneType:None | U | List:1 | List:0
+1077:29:Name -> Const:NoneType:None | U
+1079:11:Name -> Const:NoneType:None | U | List:1 | List:0 | Const:NoneType:None | List:1 | List:0
+1079:25:Name -> Const:NoneType:None | U | Const:NoneType:None
+1080:19:Name -> Const:bool:False | U
+1081:29:Call -> U
+1081:29:Attribute -> Func:textwrap.dedent
+1081:29:Name -> Module:textwrap
+1085:57:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1096:21:Name -> Const:NoneType:None | U | List:1 | List:0 | Const:NoneType:None | List:1 | List:0
+1098:24:Call -> U
+1098:24:Attribute -> U
+1098:24:Name -> U
+1099:21:Name -> U
+1101:32:Call -> ERR
+1101:32:Name -> Func:builtins.len
+1101:36:Name -> U
+1101:20:Name -> U
+1101:61:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1104:29:Call -> U
+1104:29:Attribute -> Func:textwrap.dedent
+1104:29:Name -> Module:textwrap
+1107:50:Name -> U
+1108:52:Name -> U | Const:str:'24' | Const:str:'64'
+1109:53:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1115:17:Name -> Const:NoneType:None | U
+1115:32:Name -> Const:NoneType:None | U
+1116:17:Name -> Const:NoneType:None | U
+1116:32:Name -> Const:NoneType:None | U
+1118:11:Name -> Const:NoneType:None | U | Const:NoneType:None
+1119:36:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1121:25:Call -> U
+1121:25:Attribute -> Func:textwrap.dedent
+1121:25:Name -> Module:textwrap
+1125:54:Name -> Const:str:'0.0.0.0/0' | Const:str:'::/0'
+1133:34:Call -> ERR
+1133:34:Name -> Func:builtins.isinstance
+1133:45:Name -> U
+1133:55:Name -> Class:builtins.list
+1133:22:Name -> U
+1133:67:Name -> U
+1134:22:Name -> U | List:1
+1135:19:Call -> ERR
+1135:19:Name -> Func:builtins.isinstance
+1135:30:Name -> U
+1135:34:Name -> Class:builtins.dict
+1136:30:Call -> U
+1136:30:Attribute -> U
+1136:30:Name -> U
+1136:44:Call -> U
+1136:44:Attribute -> U
+1136:44:Name -> U
+1137:53:Name -> Const:NoneType:None | U | Const:NoneType:None
+1137:34:Name -> U
+1140:30:Name -> U
+1140:54:Name -> Const:NoneType:None | U | Const:NoneType:None
+1140:35:Name -> U
+1141:19:Name -> U
+1142:33:Call -> U
+1142:33:Attribute -> Func:textwrap.dedent
+1142:33:Name -> Module:textwrap
+1145:58:Name -> Const:str:'0.0.0.0/0' | Const:str:'::/0'
+1146:48:Name -> U
+1147:51:Name -> U | Const:int:0
+1152:7:Name -> Const:NoneType:None | U
+1153:21:Call -> U
+1153:21:Attribute -> Func:textwrap.dedent
+1153:21:Name -> Module:textwrap
+1156:54:Name -> U
+1158:7:Name -> Const:NoneType:None | U
+1159:21:Call -> U
+1159:21:Attribute -> Func:textwrap.dedent
+1159:21:Name -> Module:textwrap
+1162:70:Name -> U
+1165:41:Name -> Const:NoneType:None | U
+1165:61:Name -> Const:NoneType:None | U
+1166:11:Name -> Const:NoneType:None | U | Const:NoneType:None
+1167:19:Name -> U
+1168:29:Call -> U
+1168:29:Attribute -> Func:textwrap.dedent
+1168:29:Name -> Module:textwrap
+1171:63:Name -> Const:str:'IPv4' | Const:str:'IPv6'
+1175:40:Call -> ERR
+1175:40:Name -> Func:builtins.isinstance
+1175:51:Name -> U
+1175:64:Name -> Class:builtins.list
+1175:25:Name -> U
+1175:76:Name -> U
+1178:39:Call -> Const:str:''
+1178:39:Attribute -> BM:builtins.str.join
+1178:53:Name -> U
+1178:67:Name -> U | List:1
+1179:29:Call -> U
+1179:29:Attribute -> Func:textwrap.dedent
+1179:29:Name -> Module:textwrap
+1182:65:Name -> Const:str:'@()'
+1185:7:Name -> Const:NoneType:None | U
+1186:25:Call -> ERR
+1186:25:Name -> Func:builtins.isinstance
+1186:36:Name -> U
+1186:47:Name -> Class:builtins.list
+1186:12:Name -> U
+1186:59:Name -> U
+1187:24:Call -> ERR
+1187:24:Name -> Func:builtins.len
+1187:28:Name -> U | List:1
+1187:16:Name -> U | List:1
+1187:54:Call -> ERR
+1187:54:Name -> Func:builtins.len
+1187:58:Name -> U | List:1
+1187:46:Name -> U | List:1
+1188:21:Call -> U
+1188:21:Attribute -> Func:textwrap.dedent
+1188:21:Name -> Module:textwrap
+1193:72:Name -> U | Const:str:''
+1193:99:Name -> U | Const:str:''
+1197:7:Name -> Const:NoneType:None | U
+1198:59:Call -> U
+1198:59:Attribute -> U
+1198:59:Name -> U
+1199:21:Call -> U
+1199:21:Attribute -> Func:textwrap.dedent
+1199:21:Name -> Module:textwrap
+1203:48:Name -> U
+1207:7:Name -> Const:NoneType:None | U
+1207:17:Name -> Const:NoneType:None | U
+1207:26:Name -> U
+1208:21:Call -> U
+1208:21:Attribute -> Func:textwrap.dedent
+1208:21:Name -> Module:textwrap
+1211:41:Name -> Const:NoneType:None | U
+1215:17:Call -> U
+1215:17:Attribute -> Func:textwrap.dedent
+1215:17:Name -> Module:textwrap
+1239:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+1239:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+1239:9:Attribute -> Module:salt.utils.win_pwsh
+1239:9:Attribute -> Module:salt.utils
+1239:9:Name -> Module:salt
+1240:8:Call -> Const:NoneType:None
+1240:8:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.import_modules
+1240:8:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1241:8:Call -> Const:NoneType:None | Const:NoneType:None | U | Const:str:''
+1241:8:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run_strict
+1241:8:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1241:27:Name -> U
+1329:12:Call -> Inst:builtins.int | Const:int:0
+1329:12:Name -> Func:salt.modules.win_ip.get_interface_index
+1329:32:Name -> U
+1333:16:Name -> Inst:builtins.int | Const:int:0
+1400:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+1400:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+1400:9:Attribute -> Module:salt.utils.win_pwsh
+1400:9:Attribute -> Module:salt.utils
+1400:9:Name -> Module:salt
+1402:8:Call -> Const:NoneType:None
+1402:8:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.import_modules
+1402:8:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1403:15:Call -> U | Const:NoneType:None
+1403:15:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run_json
+1403:15:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1403:32:Name -> Const:str:'\n        $idx = Instance of builtins.i | Const:str:'\n        $idx = 0\n        $adapter = 
+1405:7:Name -> U | Const:NoneType:None
+1406:8:Call -> U
+1406:8:Name -> Func:salt.modules.win_ip._normalize_gateway_fields
+1406:34:Name -> U
+1408:12:Name -> U
+1408:19:Name -> U | Const:NoneType:None
+1444:9:Call -> Inst:salt.utils.win_pwsh.PowerShellSession
+1444:9:Attribute -> Class:salt.utils.win_pwsh.PowerShellSession
+1444:9:Attribute -> Module:salt.utils.win_pwsh
+1444:9:Attribute -> Module:salt.utils
+1444:9:Name -> Module:salt
+1445:8:Call -> Const:NoneType:None
+1445:8:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.import_modules
+1445:8:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1447:15:Name -> Const:bool:False | U
+1448:19:Call -> U | Const:NoneType:None
+1448:19:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run_json
+1448:19:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1449:19:Name -> U | Const:NoneType:None
+1451:27:Call -> ERR
+1451:27:Name -> Func:builtins.isinstance
+1451:38:Name -> U | Const:NoneType:None
+1451:44:Name -> Class:builtins.list
+1451:19:Name -> U | Const:NoneType:None
+1451:56:Name -> U | Const:NoneType:None
+1519:15:Call -> U | Const:NoneType:None
+1519:15:Attribute -> BM:salt.utils.win_pwsh.PowerShellSession.run_json
+1519:15:Name -> Inst:salt.utils.win_pwsh.PowerShellSession
+1519:32:Name -> Const:str:'\n            function Get-CIDR {\n    
+1520:15:Name -> U | Const:NoneType:None
+1522:28:Call -> U
+1522:28:Attribute -> U
+1522:28:Name -> U | Const:NoneType:None
+1523:15:Call -> ERR
+1523:15:Name -> Func:builtins.isinstance
+1523:26:Name -> U
+1523:40:Name -> Class:builtins.dict
+1524:16:Call -> U
+1524:16:Name -> Func:salt.modules.win_ip._normalize_gateway_fields
+1524:42:Name -> U
+1525:15:Name -> U | Const:NoneType:None

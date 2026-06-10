@@ -1,0 +1,2307 @@
+30:15:Call -> U
+30:15:Name -> Func:django.core.management.utils.find_command
+33:1:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+33:1:Name -> Func:unittest.case.skipUnless
+33:12:Name -> U
+34:21:Name -> Class:tests.i18n.utils.POFileAssertionMixin
+34:43:Name -> Class:tests.i18n.utils.RunInTmpDirMixin
+34:61:Name -> Class:django.test.testcases.SimpleTestCase
+37:50:Name -> Const:str:'de'
+40:14:Call -> Inst:_io.StringIO
+40:14:Name -> Class:_io.StringIO
+41:8:Call -> U
+41:8:Attribute -> Func:django.core.management.call_command
+41:8:Name -> Module:django.core.management
+42:36:Name -> Const:str:'de'
+42:65:Name -> Inst:_io.StringIO
+42:72:Name -> Dict:0
+44:17:Call -> ERR
+44:17:Attribute -> BM:_io.StringIO.getvalue
+44:17:Name -> Inst:_io.StringIO
+45:8:Call -> Const:NoneType:None
+45:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+45:8:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+45:24:Call -> Const:bool:False | Const:bool:True | U
+45:24:Attribute -> Func:genericpath.exists | U
+45:24:Attribute -> Module:posixpath | Module:ntpath
+45:24:Name -> Module:os
+45:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+45:39:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+46:13:Call -> ERR
+46:13:Name -> Func:_io.open
+46:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+46:18:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+47:26:Call -> U
+47:26:Attribute -> U
+47:26:Name -> U
+48:15:Name -> U
+48:23:Name -> U
+51:15:Call -> Const:NoneType:None
+51:15:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin._assertPoKeyword
+51:15:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+52:28:Name -> U
+52:35:Name -> U
+52:56:Name -> Const:bool:True | U
+56:15:Call -> Const:NoneType:None
+56:15:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin._assertPoKeyword
+56:15:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+56:47:Name -> U
+56:55:Name -> U
+56:76:Name -> Const:bool:True | U
+59:11:Name -> Const:bool:True | U
+60:29:Name -> U
+61:16:Call -> U
+61:16:Attribute -> Func:re.escape
+61:16:Name -> Module:re
+61:26:Name -> U
+62:15:Call -> Const:NoneType:None
+62:15:Attribute -> BM:unittest.case.TestCase.assertTrue
+62:15:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+62:35:Call -> U
+62:35:Attribute -> Func:re.search
+62:35:Name -> Module:re
+62:59:Name -> U
+62:66:Name -> U
+62:69:Attribute -> Const:int:8
+62:69:Name -> Module:re
+67:13:Call -> ERR
+67:13:Name -> Func:_io.open
+67:18:Name -> U
+68:26:Call -> U
+68:26:Attribute -> U
+68:26:Name -> U
+69:11:Attribute -> Const:str:'posix' | Const:str:'nt'
+69:11:Name -> Module:os
+71:35:Attribute -> Const:str:'.'
+71:35:Name -> Module:os
+71:46:Attribute -> Const:str:'/'
+71:46:Name -> Module:os
+76:15:Call -> U
+76:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+76:15:Attribute -> Module:posixpath | Module:ntpath
+76:15:Name -> Module:os
+76:28:Name -> Const:str:'./' | Const:str:''
+76:41:Name -> Tuple:0
+77:17:Name -> U
+79:11:Call -> ERR
+79:11:Name -> Func:builtins.isinstance
+79:22:Name -> U
+79:35:Name -> Class:builtins.str
+80:26:Call -> U
+80:26:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._get_token_line_number
+80:26:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+80:54:Name -> U
+80:60:Name -> U
+81:11:Name -> U
+82:12:Call -> ERR
+82:12:Attribute -> BM:builtins.list.append
+82:12:Name -> List:1
+82:33:Name -> U
+84:17:Call -> Const:str:''
+84:17:Attribute -> BM:builtins.str.join
+84:25:Name -> List:1
+85:18:Call -> U
+85:18:Attribute -> Func:re.compile
+85:18:Name -> Module:re
+85:42:Call -> U
+85:42:Attribute -> Func:re.escape
+85:42:Name -> Module:re
+85:52:Name -> Const:str:''
+85:61:Attribute -> Const:int:8
+85:61:Name -> Module:re
+86:11:Name -> U
+87:19:Call -> Const:NoneType:None
+87:19:Attribute -> BM:unittest.case.TestCase.assertRegex
+87:19:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+88:16:Name -> U
+88:29:Name -> U
+88:76:Name -> Const:str:''
+91:19:Call -> Const:NoneType:None
+91:19:Attribute -> BM:unittest.case.TestCase.assertNotRegex
+91:19:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+92:16:Name -> U
+92:29:Name -> U
+92:80:Name -> Const:str:''
+96:13:Call -> ERR
+96:13:Name -> Func:_io.open
+96:18:Name -> U
+97:33:Call -> Inst:builtins.enumerate
+97:33:Name -> Class:builtins.enumerate
+97:43:Name -> U
+98:19:Name -> U
+98:28:Name -> U
+99:27:Name -> U
+100:8:Call -> U
+100:8:Attribute -> BM:unittest.case.TestCase.fail
+100:8:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+102:15:Name -> U
+102:22:Name -> U
+123:15:Call -> Const:NoneType:None | Const:NoneType:None
+123:15:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._assertPoLocComment
+123:15:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+123:46:Name -> U
+123:59:Name -> U
+123:73:Name -> Tuple:0
+127:15:Call -> Const:NoneType:None | Const:NoneType:None
+127:15:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._assertPoLocComment
+127:15:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+127:47:Name -> U
+127:60:Name -> U
+127:74:Name -> Tuple:0
+134:16:Call -> U
+134:16:Attribute -> Func:time.time | Lambda:django.test.utils:869 | U
+134:16:Name -> Module:time
+134:30:Attribute -> ERR
+134:30:Call -> ERR
+134:30:Attribute -> Func:posix.stat
+134:30:Name -> Module:os
+134:38:Name -> U
+135:8:Call -> Const:NoneType:None
+135:8:Attribute -> BM:unittest.case.TestCase.assertLess
+135:8:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+135:24:Name -> U
+135:64:Name -> U
+142:16:Call -> U
+142:16:Attribute -> Func:time.time | Lambda:django.test.utils:869 | U
+142:16:Name -> Module:time
+142:30:Attribute -> ERR
+142:30:Call -> ERR
+142:30:Attribute -> Func:posix.stat
+142:30:Name -> Module:os
+142:38:Name -> U
+143:8:Call -> Const:NoneType:None
+143:8:Attribute -> BM:unittest.case.TestCase.assertGreater
+143:8:Name -> Inst:tests.i18n.test_extraction.ExtractorTests
+143:27:Name -> U
+143:70:Name -> U
+146:26:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+147:5:Call -> Inst:django.test.utils.override_settings
+147:5:Name -> Class:django.test.utils.override_settings
+152:8:Call -> U
+152:8:Attribute -> Func:django.core.management.call_command
+152:8:Name -> Module:django.core.management
+152:56:Name -> Const:str:'de'
+153:8:Call -> Const:NoneType:None
+153:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+153:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+153:24:Call -> Const:bool:False | Const:bool:True | U
+153:24:Attribute -> Func:genericpath.exists | U
+153:24:Attribute -> Module:posixpath | Module:ntpath
+153:24:Name -> Module:os
+153:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+153:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+154:13:Call -> ERR
+154:13:Name -> Func:_io.open
+154:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+154:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+155:26:Call -> U
+155:26:Attribute -> U
+155:26:Name -> U
+157:12:Call -> Const:NoneType:None
+157:12:Attribute -> BM:unittest.case.TestCase.assertIn
+157:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+157:76:Name -> U
+158:12:Call -> Const:NoneType:None
+158:12:Attribute -> BM:unittest.case.TestCase.assertIn
+158:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+158:64:Name -> U
+163:13:Call -> Inst:unittest.mock._patch
+163:13:Attribute -> Func:unittest.mock.patch
+163:13:Name -> Module:unittest.mock
+167:17:Call -> Inst:unittest.case._AssertRaisesContext
+167:17:Attribute -> BM:unittest.case.TestCase.assertRaisesRegex
+167:17:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+167:40:Name -> Class:django.core.management.base.CommandError
+167:54:Name -> Const:str:"Type 'manage.py help makemessages' for 
+168:16:Call -> U
+168:16:Attribute -> Func:django.core.management.call_command
+168:16:Name -> Module:django.core.management
+171:14:Call -> Inst:_io.StringIO
+171:14:Name -> Class:_io.StringIO
+172:8:Call -> U
+172:8:Attribute -> Func:django.core.management.call_command
+172:8:Name -> Module:django.core.management
+172:70:Name -> Inst:_io.StringIO
+173:8:Call -> Const:NoneType:None
+173:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+173:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+173:46:Call -> ERR
+173:46:Attribute -> BM:_io.StringIO.getvalue
+173:46:Name -> Inst:_io.StringIO
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:unittest.case.TestCase.assertIn
+174:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+174:46:Call -> ERR
+174:46:Attribute -> BM:_io.StringIO.getvalue
+174:46:Name -> Inst:_io.StringIO
+175:8:Call -> Const:NoneType:None
+175:8:Attribute -> BM:unittest.case.TestCase.assertIs
+175:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+175:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+175:22:Attribute -> BM:pathlib.Path.exists
+175:22:Call -> Inst:pathlib.Path
+175:22:Name -> Class:pathlib.Path
+175:27:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+175:27:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+178:14:Call -> Inst:_io.StringIO
+178:14:Name -> Class:_io.StringIO
+179:8:Call -> U
+179:8:Attribute -> Func:django.core.management.call_command
+179:8:Name -> Module:django.core.management
+180:53:Name -> Inst:_io.StringIO
+182:8:Call -> Const:NoneType:None
+182:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+182:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+182:49:Call -> ERR
+182:49:Attribute -> BM:_io.StringIO.getvalue
+182:49:Name -> Inst:_io.StringIO
+183:8:Call -> Const:NoneType:None
+183:8:Attribute -> BM:unittest.case.TestCase.assertIn
+183:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+183:49:Call -> ERR
+183:49:Attribute -> BM:_io.StringIO.getvalue
+183:49:Name -> Inst:_io.StringIO
+184:8:Call -> Const:NoneType:None
+184:8:Attribute -> BM:unittest.case.TestCase.assertIs
+184:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+184:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+184:22:Attribute -> BM:pathlib.Path.exists
+184:22:Call -> Inst:pathlib.Path
+184:22:Name -> Class:pathlib.Path
+187:14:Call -> Inst:_io.StringIO
+187:14:Name -> Class:_io.StringIO
+188:8:Call -> U
+188:8:Attribute -> Func:django.core.management.call_command
+188:8:Name -> Module:django.core.management
+189:54:Name -> Inst:_io.StringIO
+191:8:Call -> Const:NoneType:None
+191:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+191:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+191:50:Call -> ERR
+191:50:Attribute -> BM:_io.StringIO.getvalue
+191:50:Name -> Inst:_io.StringIO
+192:8:Call -> Const:NoneType:None
+192:8:Attribute -> BM:unittest.case.TestCase.assertIn
+192:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+192:50:Call -> ERR
+192:50:Attribute -> BM:_io.StringIO.getvalue
+192:50:Name -> Inst:_io.StringIO
+193:8:Call -> Const:NoneType:None
+193:8:Attribute -> BM:unittest.case.TestCase.assertIs
+193:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+193:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+193:22:Attribute -> BM:pathlib.Path.exists
+193:22:Call -> Inst:pathlib.Path
+193:22:Name -> Class:pathlib.Path
+196:14:Call -> Inst:_io.StringIO
+196:14:Name -> Class:_io.StringIO
+197:8:Call -> U
+197:8:Attribute -> Func:django.core.management.call_command
+197:8:Name -> Module:django.core.management
+198:59:Name -> Inst:_io.StringIO
+200:8:Call -> Const:NoneType:None
+200:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+200:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+200:55:Call -> ERR
+200:55:Attribute -> BM:_io.StringIO.getvalue
+200:55:Name -> Inst:_io.StringIO
+201:8:Call -> Const:NoneType:None
+201:8:Attribute -> BM:unittest.case.TestCase.assertIn
+201:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+201:55:Call -> ERR
+201:55:Attribute -> BM:_io.StringIO.getvalue
+201:55:Name -> Inst:_io.StringIO
+202:8:Call -> Const:NoneType:None
+202:8:Attribute -> BM:unittest.case.TestCase.assertIs
+202:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+202:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+202:22:Attribute -> BM:pathlib.Path.exists
+202:22:Call -> Inst:pathlib.Path
+202:22:Name -> Class:pathlib.Path
+205:14:Call -> Inst:_io.StringIO
+205:14:Name -> Class:_io.StringIO
+206:8:Call -> U
+206:8:Attribute -> Func:django.core.management.call_command
+206:8:Name -> Module:django.core.management
+207:64:Name -> Inst:_io.StringIO
+209:8:Call -> Const:NoneType:None
+209:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+209:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+209:60:Call -> ERR
+209:60:Attribute -> BM:_io.StringIO.getvalue
+209:60:Name -> Inst:_io.StringIO
+210:8:Call -> Const:NoneType:None
+210:8:Attribute -> BM:unittest.case.TestCase.assertIn
+210:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+210:60:Call -> ERR
+210:60:Attribute -> BM:_io.StringIO.getvalue
+210:60:Name -> Inst:_io.StringIO
+211:8:Call -> Const:NoneType:None
+211:8:Attribute -> BM:unittest.case.TestCase.assertIs
+211:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+212:12:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+212:12:Attribute -> BM:pathlib.Path.exists
+212:12:Call -> Inst:pathlib.Path
+212:12:Name -> Class:pathlib.Path
+216:14:Call -> Inst:_io.StringIO
+216:14:Name -> Class:_io.StringIO
+217:8:Call -> U
+217:8:Attribute -> Func:django.core.management.call_command
+217:8:Name -> Module:django.core.management
+217:70:Name -> Inst:_io.StringIO
+218:8:Call -> Const:NoneType:None
+218:8:Attribute -> BM:unittest.case.TestCase.assertIn
+218:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+218:61:Call -> ERR
+218:61:Attribute -> BM:_io.StringIO.getvalue
+218:61:Name -> Inst:_io.StringIO
+219:8:Call -> Const:NoneType:None
+219:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+219:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+219:49:Call -> ERR
+219:49:Attribute -> BM:_io.StringIO.getvalue
+219:49:Name -> Inst:_io.StringIO
+220:8:Call -> Const:NoneType:None
+220:8:Attribute -> BM:unittest.case.TestCase.assertIs
+220:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+220:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+220:22:Attribute -> BM:pathlib.Path.exists
+220:22:Call -> Inst:pathlib.Path
+220:22:Name -> Class:pathlib.Path
+223:14:Call -> Inst:_io.StringIO
+223:14:Name -> Class:_io.StringIO
+224:8:Call -> U
+224:8:Attribute -> Func:django.core.management.call_command
+224:8:Name -> Module:django.core.management
+225:53:Name -> Inst:_io.StringIO
+227:8:Call -> Const:NoneType:None
+227:8:Attribute -> BM:unittest.case.TestCase.assertIn
+227:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+227:67:Call -> ERR
+227:67:Attribute -> BM:_io.StringIO.getvalue
+227:67:Name -> Inst:_io.StringIO
+228:8:Call -> Const:NoneType:None
+228:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+228:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+228:52:Call -> ERR
+228:52:Attribute -> BM:_io.StringIO.getvalue
+228:52:Name -> Inst:_io.StringIO
+229:8:Call -> Const:NoneType:None
+229:8:Attribute -> BM:unittest.case.TestCase.assertIs
+229:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+229:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+229:22:Attribute -> BM:pathlib.Path.exists
+229:22:Call -> Inst:pathlib.Path
+229:22:Name -> Class:pathlib.Path
+232:14:Call -> Inst:_io.StringIO
+232:14:Name -> Class:_io.StringIO
+233:8:Call -> U
+233:8:Attribute -> Func:django.core.management.call_command
+233:8:Name -> Module:django.core.management
+234:53:Name -> Inst:_io.StringIO
+236:8:Call -> Const:NoneType:None
+236:8:Attribute -> BM:unittest.case.TestCase.assertIn
+236:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+236:67:Call -> ERR
+236:67:Attribute -> BM:_io.StringIO.getvalue
+236:67:Name -> Inst:_io.StringIO
+237:8:Call -> Const:NoneType:None
+237:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+237:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+237:52:Call -> ERR
+237:52:Attribute -> BM:_io.StringIO.getvalue
+237:52:Name -> Inst:_io.StringIO
+238:8:Call -> Const:NoneType:None
+238:8:Attribute -> BM:unittest.case.TestCase.assertIs
+238:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+238:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+238:22:Attribute -> BM:pathlib.Path.exists
+238:22:Call -> Inst:pathlib.Path
+238:22:Name -> Class:pathlib.Path
+241:14:Call -> Inst:_io.StringIO
+241:14:Name -> Class:_io.StringIO
+242:8:Call -> U
+242:8:Attribute -> Func:django.core.management.call_command
+242:8:Name -> Module:django.core.management
+243:64:Name -> Inst:_io.StringIO
+245:8:Call -> Const:NoneType:None
+245:8:Attribute -> BM:unittest.case.TestCase.assertIn
+245:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+247:12:Call -> ERR
+247:12:Attribute -> BM:_io.StringIO.getvalue
+247:12:Name -> Inst:_io.StringIO
+249:8:Call -> Const:NoneType:None
+249:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+249:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+249:63:Call -> ERR
+249:63:Attribute -> BM:_io.StringIO.getvalue
+249:63:Name -> Inst:_io.StringIO
+250:8:Call -> Const:NoneType:None
+250:8:Attribute -> BM:unittest.case.TestCase.assertIs
+250:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+251:12:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+251:12:Attribute -> BM:pathlib.Path.exists
+251:12:Call -> Inst:pathlib.Path
+251:12:Name -> Class:pathlib.Path
+255:14:Call -> Inst:_io.StringIO
+255:14:Name -> Class:_io.StringIO
+256:8:Call -> U
+256:8:Attribute -> Func:django.core.management.call_command
+256:8:Name -> Module:django.core.management
+257:53:Name -> Inst:_io.StringIO
+259:8:Call -> Const:NoneType:None
+259:8:Attribute -> BM:unittest.case.TestCase.assertIn
+259:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+259:67:Call -> ERR
+259:67:Attribute -> BM:_io.StringIO.getvalue
+259:67:Name -> Inst:_io.StringIO
+260:8:Call -> Const:NoneType:None
+260:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+260:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+260:52:Call -> ERR
+260:52:Attribute -> BM:_io.StringIO.getvalue
+260:52:Name -> Inst:_io.StringIO
+261:8:Call -> Const:NoneType:None
+261:8:Attribute -> BM:unittest.case.TestCase.assertIs
+261:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+261:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+261:22:Attribute -> BM:pathlib.Path.exists
+261:22:Call -> Inst:pathlib.Path
+261:22:Name -> Class:pathlib.Path
+264:14:Call -> Inst:_io.StringIO
+264:14:Name -> Class:_io.StringIO
+265:8:Call -> U
+265:8:Attribute -> Func:django.core.management.call_command
+265:8:Name -> Module:django.core.management
+265:71:Name -> Inst:_io.StringIO
+266:8:Call -> Const:NoneType:None
+266:8:Attribute -> BM:unittest.case.TestCase.assertIn
+266:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+266:44:Call -> ERR
+266:44:Attribute -> BM:_io.StringIO.getvalue
+266:44:Name -> Inst:_io.StringIO
+267:8:Call -> Const:NoneType:None
+267:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+267:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+267:50:Call -> ERR
+267:50:Attribute -> BM:_io.StringIO.getvalue
+267:50:Name -> Inst:_io.StringIO
+268:8:Call -> Const:NoneType:None
+268:8:Attribute -> BM:unittest.case.TestCase.assertIs
+268:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+268:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+268:22:Attribute -> BM:pathlib.Path.exists
+268:22:Call -> Inst:pathlib.Path
+268:22:Name -> Class:pathlib.Path
+271:14:Call -> Inst:_io.StringIO
+271:14:Name -> Class:_io.StringIO
+272:8:Call -> U
+272:8:Attribute -> Func:django.core.management.call_command
+272:8:Name -> Module:django.core.management
+272:71:Name -> Inst:_io.StringIO
+273:8:Call -> Const:NoneType:None
+273:8:Attribute -> BM:unittest.case.TestCase.assertIn
+273:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+273:44:Call -> ERR
+273:44:Attribute -> BM:_io.StringIO.getvalue
+273:44:Name -> Inst:_io.StringIO
+274:8:Call -> Const:NoneType:None
+274:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+274:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+274:50:Call -> ERR
+274:50:Attribute -> BM:_io.StringIO.getvalue
+274:50:Name -> Inst:_io.StringIO
+275:8:Call -> Const:NoneType:None
+275:8:Attribute -> BM:unittest.case.TestCase.assertIs
+275:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+275:22:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+275:22:Attribute -> BM:pathlib.Path.exists
+275:22:Call -> Inst:pathlib.Path
+275:22:Name -> Class:pathlib.Path
+278:8:Call -> U
+278:8:Attribute -> Func:django.core.management.call_command
+278:8:Name -> Module:django.core.management
+278:56:Name -> Const:str:'de'
+279:8:Call -> Const:NoneType:None
+279:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+279:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+279:24:Call -> Const:bool:False | Const:bool:True | U
+279:24:Attribute -> Func:genericpath.exists | U
+279:24:Attribute -> Module:posixpath | Module:ntpath
+279:24:Name -> Module:os
+279:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+279:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+280:13:Call -> ERR
+280:13:Name -> Func:_io.open
+280:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+280:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+281:26:Call -> U
+281:26:Attribute -> U
+281:26:Name -> U
+282:12:Call -> Const:NoneType:None
+282:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+282:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+282:69:Name -> U
+285:12:Call -> Const:NoneType:None
+285:12:Attribute -> BM:unittest.case.TestCase.assertIn
+285:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+286:68:Name -> U
+288:12:Call -> Const:NoneType:None
+288:12:Attribute -> BM:unittest.case.TestCase.assertIn
+288:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+291:16:Name -> U
+293:12:Call -> Const:NoneType:None
+293:12:Attribute -> BM:unittest.case.TestCase.assertIn
+293:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+293:76:Name -> U
+294:12:Call -> Const:NoneType:None
+294:12:Attribute -> BM:unittest.case.TestCase.assertIn
+294:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+296:16:Name -> U
+298:12:Call -> Const:NoneType:None
+298:12:Attribute -> BM:unittest.case.TestCase.assertIn
+298:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+298:76:Name -> U
+299:12:Call -> Const:NoneType:None
+299:12:Attribute -> BM:unittest.case.TestCase.assertIn
+299:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+301:16:Name -> U
+303:12:Call -> Const:NoneType:None
+303:12:Attribute -> BM:unittest.case.TestCase.assertIn
+303:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+303:76:Name -> U
+304:12:Call -> Const:NoneType:None
+304:12:Attribute -> BM:unittest.case.TestCase.assertIn
+304:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+306:16:Name -> U
+308:12:Call -> Const:NoneType:None
+308:12:Attribute -> BM:unittest.case.TestCase.assertIn
+308:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+308:76:Name -> U
+309:12:Call -> Const:NoneType:None
+309:12:Attribute -> BM:unittest.case.TestCase.assertIn
+309:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+311:16:Name -> U
+313:12:Call -> Const:NoneType:None
+313:12:Attribute -> BM:unittest.case.TestCase.assertIn
+313:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+316:16:Name -> U
+318:12:Call -> Const:NoneType:None
+318:12:Attribute -> BM:unittest.case.TestCase.assertIn
+318:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+321:16:Name -> U
+325:8:Call -> U
+325:8:Attribute -> Func:django.core.management.call_command
+325:8:Name -> Module:django.core.management
+325:56:Name -> Const:str:'de'
+326:8:Call -> Const:NoneType:None
+326:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+326:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+326:24:Call -> Const:bool:False | Const:bool:True | U
+326:24:Attribute -> Func:genericpath.exists | U
+326:24:Attribute -> Module:posixpath | Module:ntpath
+326:24:Name -> Module:os
+326:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+326:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+327:13:Call -> ERR
+327:13:Name -> Func:_io.open
+327:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+327:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+328:26:Call -> U
+328:26:Attribute -> U
+328:26:Name -> U
+329:12:Call -> Const:NoneType:None
+329:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+329:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+329:58:Name -> U
+332:8:Call -> U
+332:8:Attribute -> Func:django.core.management.call_command
+332:8:Name -> Module:django.core.management
+332:56:Name -> Const:str:'de'
+333:8:Call -> Const:NoneType:None
+333:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+333:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+333:24:Call -> Const:bool:False | Const:bool:True | U
+333:24:Attribute -> Func:genericpath.exists | U
+333:24:Attribute -> Module:posixpath | Module:ntpath
+333:24:Name -> Module:os
+333:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+333:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+334:13:Call -> ERR
+334:13:Name -> Func:_io.open
+334:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+334:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+335:26:Call -> U
+335:26:Attribute -> U
+335:26:Name -> U
+337:12:Call -> Const:NoneType:None
+337:12:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotMsgId
+337:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+337:64:Name -> U
+339:12:Call -> Const:NoneType:None
+339:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+339:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+341:16:Name -> U
+344:8:Call -> Const:NoneType:None
+344:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+344:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+344:47:Name -> U
+345:8:Call -> Const:NoneType:None | Const:NoneType:None
+345:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentPresent
+345:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+346:12:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+346:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+352:34:Call -> U
+352:34:Attribute -> Func:posixpath.join | Func:ntpath.join
+352:34:Attribute -> Module:posixpath | Module:ntpath
+352:34:Name -> Module:os
+354:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+354:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+354:13:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+354:38:Name -> Class:builtins.SyntaxError
+354:51:Name -> U
+355:12:Call -> U
+355:12:Attribute -> Func:django.core.management.call_command
+355:12:Name -> Module:django.core.management
+356:40:Name -> Const:str:'de'
+359:8:Call -> Const:NoneType:None
+359:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+359:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+359:25:Call -> Const:bool:False | Const:bool:True | U
+359:25:Attribute -> Func:genericpath.exists | U
+359:25:Attribute -> Module:posixpath | Module:ntpath
+359:25:Name -> Module:os
+360:8:Call -> Const:NoneType:None
+360:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+360:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+360:25:Call -> Const:bool:False | Const:bool:True | U
+360:25:Attribute -> Func:genericpath.exists | U
+360:25:Attribute -> Module:posixpath | Module:ntpath
+360:25:Name -> Module:os
+363:8:Call -> Const:str:'./not_utf8.txt'
+363:8:Attribute -> Func:shutil.copyfile
+363:8:Name -> Module:shutil
+364:14:Call -> Inst:_io.StringIO
+364:14:Name -> Class:_io.StringIO
+365:8:Call -> U
+365:8:Attribute -> Func:django.core.management.call_command
+365:8:Name -> Module:django.core.management
+365:56:Name -> Const:str:'de'
+365:72:Name -> Inst:_io.StringIO
+366:8:Call -> Const:NoneType:None
+366:8:Attribute -> BM:unittest.case.TestCase.assertIn
+366:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+367:66:Call -> ERR
+367:66:Attribute -> BM:_io.StringIO.getvalue
+367:66:Name -> Inst:_io.StringIO
+371:8:Call -> ERR
+371:8:Attribute -> ERR
+371:8:Call -> ERR
+371:8:Name -> Func:_io.open
+371:13:Call -> U
+371:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+371:13:Attribute -> Module:posixpath | Module:ntpath
+371:13:Name -> Module:os
+371:26:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+371:26:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+372:8:Call -> U
+372:8:Attribute -> Func:django.core.management.call_command
+372:8:Name -> Module:django.core.management
+372:56:Name -> Const:str:'de'
+378:8:Call -> Const:str:'./code_sample.py'
+378:8:Attribute -> Func:shutil.copyfile
+378:8:Name -> Module:shutil
+379:14:Call -> Inst:_io.StringIO
+379:14:Name -> Class:_io.StringIO
+380:8:Call -> U
+380:8:Attribute -> Func:django.core.management.call_command
+380:8:Name -> Module:django.core.management
+380:56:Name -> Const:str:'de'
+380:72:Name -> Inst:_io.StringIO
+381:8:Call -> Const:NoneType:None
+381:8:Attribute -> BM:unittest.case.TestCase.assertIn
+381:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+381:42:Call -> ERR
+381:42:Attribute -> BM:_io.StringIO.getvalue
+381:42:Name -> Inst:_io.StringIO
+388:8:Call -> U
+388:8:Attribute -> Func:django.core.management.call_command
+388:8:Name -> Module:django.core.management
+388:56:Name -> Const:str:'de'
+389:8:Call -> Const:NoneType:None
+389:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+389:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+389:24:Call -> Const:bool:False | Const:bool:True | U
+389:24:Attribute -> Func:genericpath.exists | U
+389:24:Attribute -> Module:posixpath | Module:ntpath
+389:24:Name -> Module:os
+389:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+389:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+390:13:Call -> ERR
+390:13:Name -> Func:_io.open
+390:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+390:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+391:26:Call -> U
+391:26:Attribute -> U
+391:26:Name -> U
+393:12:Call -> Const:NoneType:None
+393:12:Attribute -> BM:unittest.case.TestCase.assertIn
+393:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+393:64:Name -> U
+394:12:Call -> Const:NoneType:None
+394:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+394:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+394:57:Name -> U
+395:12:Call -> Const:NoneType:None
+395:12:Attribute -> BM:unittest.case.TestCase.assertIn
+395:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+395:64:Name -> U
+396:12:Call -> Const:NoneType:None
+396:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+396:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+396:57:Name -> U
+397:12:Call -> Const:NoneType:None
+397:12:Attribute -> BM:unittest.case.TestCase.assertIn
+397:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+397:64:Name -> U
+398:12:Call -> Const:NoneType:None
+398:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+398:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+398:57:Name -> U
+404:16:Call -> Const:NoneType:None
+404:16:Attribute -> BM:unittest.case.TestCase.assertIn
+404:16:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+405:20:Call -> U
+405:20:Attribute -> BM:builtins.str.format
+405:54:Name -> U
+405:67:Name -> U
+407:16:Call -> Const:NoneType:None
+407:16:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+407:16:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+408:20:Call -> U
+408:20:Attribute -> BM:builtins.str.format
+408:57:Name -> U
+408:70:Name -> U
+412:12:Call -> Const:NoneType:None
+412:12:Attribute -> BM:unittest.case.TestCase.assertIn
+412:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+412:73:Name -> U
+413:12:Call -> Const:NoneType:None
+413:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+413:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+413:57:Name -> U
+414:12:Call -> Const:NoneType:None
+414:12:Attribute -> BM:unittest.case.TestCase.assertIn
+414:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+414:73:Name -> U
+415:12:Call -> Const:NoneType:None
+415:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+415:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+415:66:Name -> U
+416:12:Call -> Const:NoneType:None
+416:12:Attribute -> BM:unittest.case.TestCase.assertIn
+416:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+416:61:Name -> U
+417:12:Call -> Const:NoneType:None
+417:12:Attribute -> BM:unittest.case.TestCase.assertIn
+417:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+417:73:Name -> U
+418:12:Call -> Const:NoneType:None
+418:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+418:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+418:66:Name -> U
+419:12:Call -> Const:NoneType:None
+419:12:Attribute -> BM:unittest.case.TestCase.assertIn
+419:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+419:61:Name -> U
+420:12:Call -> Const:NoneType:None
+420:12:Attribute -> BM:unittest.case.TestCase.assertIn
+420:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+420:73:Name -> U
+421:12:Call -> Const:NoneType:None
+421:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+421:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+421:63:Name -> U
+424:12:Call -> Const:NoneType:None
+424:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+424:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+424:43:Name -> U
+425:12:Call -> Const:NoneType:None
+425:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+425:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+425:48:Name -> U
+428:8:Call -> U
+428:8:Attribute -> Func:django.core.management.call_command
+428:8:Name -> Module:django.core.management
+428:56:Name -> Const:str:'de'
+429:8:Call -> Const:NoneType:None
+429:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+429:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+429:24:Call -> Const:bool:False | Const:bool:True | U
+429:24:Attribute -> Func:genericpath.exists | U
+429:24:Attribute -> Module:posixpath | Module:ntpath
+429:24:Name -> Module:os
+429:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+429:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+430:13:Call -> ERR
+430:13:Name -> Func:_io.open
+430:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+430:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+431:26:Call -> U
+431:26:Attribute -> U
+431:26:Name -> U
+433:12:Call -> Const:NoneType:None
+433:12:Attribute -> BM:unittest.case.TestCase.assertIn
+433:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+433:72:Name -> U
+434:12:Call -> Const:NoneType:None
+434:12:Attribute -> BM:unittest.case.TestCase.assertIn
+434:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+434:72:Name -> U
+437:12:Call -> Const:NoneType:None
+437:12:Attribute -> BM:unittest.case.TestCase.assertIn
+437:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+439:16:Name -> U
+441:12:Call -> Const:NoneType:None
+441:12:Attribute -> BM:unittest.case.TestCase.assertIn
+441:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+443:16:Name -> U
+452:13:Call -> Inst:warnings.catch_warnings
+452:13:Attribute -> Class:warnings.catch_warnings
+452:13:Name -> Module:warnings
+453:12:Call -> Const:NoneType:None
+453:12:Attribute -> Func:warnings.simplefilter
+453:12:Name -> Module:warnings
+454:12:Call -> U
+454:12:Attribute -> Func:django.core.management.call_command
+454:12:Name -> Module:django.core.management
+455:40:Name -> Const:str:'de'
+457:12:Call -> Const:NoneType:None
+457:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+457:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+457:29:Call -> ERR
+457:29:Name -> Func:builtins.len
+457:33:Name -> List:0 | Const:NoneType:None
+458:21:Name -> List:0 | Const:NoneType:None
+459:16:Call -> Const:NoneType:None
+459:16:Attribute -> BM:unittest.case.TestCase.assertTrue
+459:16:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+459:32:Call -> ERR
+459:32:Name -> Func:builtins.issubclass
+459:43:Attribute -> U
+459:43:Name -> U
+459:55:Name -> Class:django.utils.translation.TranslatorCommentWarning
+460:12:Call -> Const:NoneType:None
+460:12:Attribute -> BM:unittest.case.TestCase.assertRegex
+460:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+461:16:Call -> Const:str:''
+461:16:Name -> Class:builtins.str
+461:20:Attribute -> ERR
+461:20:Name -> List:0 | Const:NoneType:None
+466:12:Call -> Const:NoneType:None
+466:12:Attribute -> BM:unittest.case.TestCase.assertRegex
+466:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+467:16:Call -> Const:str:''
+467:16:Name -> Class:builtins.str
+467:20:Attribute -> ERR
+467:20:Name -> List:0 | Const:NoneType:None
+472:12:Call -> Const:NoneType:None
+472:12:Attribute -> BM:unittest.case.TestCase.assertRegex
+472:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+473:16:Call -> Const:str:''
+473:16:Name -> Class:builtins.str
+473:20:Attribute -> ERR
+473:20:Name -> List:0 | Const:NoneType:None
+479:8:Call -> Const:NoneType:None
+479:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+479:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+479:24:Call -> Const:bool:False | Const:bool:True | U
+479:24:Attribute -> Func:genericpath.exists | U
+479:24:Attribute -> Module:posixpath | Module:ntpath
+479:24:Name -> Module:os
+479:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+479:39:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+480:13:Call -> ERR
+480:13:Name -> Func:_io.open
+480:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+480:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+481:26:Call -> U
+481:26:Attribute -> U
+481:26:Name -> U
+483:12:Call -> Const:NoneType:None
+483:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+483:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+483:57:Name -> U
+484:12:Call -> Const:NoneType:None
+484:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+484:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+484:51:Name -> U
+486:12:Call -> Const:NoneType:None
+486:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+486:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+486:69:Name -> U
+487:12:Call -> Const:NoneType:None
+487:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+487:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+487:57:Name -> U
+489:12:Call -> Const:NoneType:None
+489:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+489:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+489:56:Name -> U
+490:12:Call -> Const:NoneType:None
+490:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+490:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+490:51:Name -> U
+491:12:Call -> Const:NoneType:None
+491:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+491:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+491:57:Name -> U
+493:12:Call -> Const:NoneType:None
+493:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+493:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+493:51:Name -> U
+494:12:Call -> Const:NoneType:None
+494:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+494:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+494:56:Name -> U
+495:12:Call -> Const:NoneType:None
+495:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+495:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+495:57:Name -> U
+497:12:Call -> Const:NoneType:None
+497:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+497:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+497:51:Name -> U
+498:12:Call -> Const:NoneType:None
+498:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+498:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+498:57:Name -> U
+499:12:Call -> Const:NoneType:None
+499:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+499:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+499:51:Name -> U
+501:12:Call -> Const:NoneType:None
+501:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+501:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+501:56:Name -> U
+502:12:Call -> Const:NoneType:None
+502:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+502:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+502:57:Name -> U
+503:12:Call -> Const:NoneType:None
+503:12:Attribute -> BM:unittest.case.TestCase.assertIn
+503:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+503:67:Name -> U
+505:12:Call -> Const:NoneType:None
+505:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+505:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+505:57:Name -> U
+506:12:Call -> Const:NoneType:None
+506:12:Attribute -> BM:unittest.case.TestCase.assertIn
+506:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+506:67:Name -> U
+507:12:Call -> Const:NoneType:None
+507:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+507:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+507:57:Name -> U
+508:12:Call -> Const:NoneType:None
+508:12:Attribute -> BM:unittest.case.TestCase.assertIn
+508:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+508:67:Name -> U
+509:12:Call -> Const:NoneType:None
+509:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+509:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+509:57:Name -> U
+511:12:Call -> Const:NoneType:None
+511:12:Attribute -> BM:unittest.case.TestCase.assertRegex
+511:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+511:29:Name -> U
+512:12:Call -> Const:NoneType:None
+512:12:Attribute -> BM:unittest.case.TestCase.assertRegex
+512:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+512:29:Name -> U
+513:12:Call -> Const:NoneType:None
+513:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+513:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+513:57:Name -> U
+519:14:Call -> Inst:django.core.management.commands.makemessages.Command
+519:14:Name -> Class:django.core.management.commands.makemessages.Command
+520:8:Name -> Inst:django.core.management.commands.makemessages.Command
+521:8:Name -> Inst:django.core.management.commands.makemessages.Command
+522:8:Name -> Inst:django.core.management.commands.makemessages.Command
+523:8:Name -> Inst:django.core.management.commands.makemessages.Command
+524:8:Name -> Inst:django.core.management.commands.makemessages.Command
+525:8:Name -> Inst:django.core.management.commands.makemessages.Command
+526:8:Name -> Inst:django.core.management.commands.makemessages.Command
+526:34:Call -> U
+526:34:Attribute -> Func:posixpath.join | Func:ntpath.join
+526:34:Attribute -> Module:posixpath | Module:ntpath
+526:34:Name -> Module:os
+526:47:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+526:47:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+527:22:Call -> U
+527:22:Attribute -> BM:django.core.management.commands.makemessages.Command.find_files
+527:22:Name -> Inst:django.core.management.commands.makemessages.Command
+527:37:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+527:37:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+528:8:Call -> Const:NoneType:None
+528:8:Attribute -> BM:unittest.case.TestCase.assertGreater
+528:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+528:27:Call -> ERR
+528:27:Name -> Func:builtins.len
+528:31:Name -> U
+529:22:Call -> Tuple:2 | Tuple:2
+529:22:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+529:22:Attribute -> Module:posixpath | Module:ntpath
+529:22:Name -> Module:os
+529:39:Attribute -> U
+529:39:Name -> U
+529:67:Name -> U
+530:8:Call -> Const:NoneType:None
+530:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+530:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+530:25:Call -> U
+530:25:Attribute -> U
+530:25:Name -> U
+530:74:Call -> Set:0
+530:74:Name -> Class:builtins.set
+532:8:Name -> Inst:django.core.management.commands.makemessages.Command
+533:8:Name -> Inst:django.core.management.commands.makemessages.Command
+534:22:Call -> U
+534:22:Attribute -> BM:django.core.management.commands.makemessages.Command.find_files
+534:22:Name -> Inst:django.core.management.commands.makemessages.Command
+534:37:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+534:37:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+535:8:Call -> Const:NoneType:None
+535:8:Attribute -> BM:unittest.case.TestCase.assertGreater
+535:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+535:27:Call -> ERR
+535:27:Name -> Func:builtins.len
+535:31:Name -> U
+536:22:Call -> Tuple:2 | Tuple:2
+536:22:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+536:22:Attribute -> Module:posixpath | Module:ntpath
+536:22:Name -> Module:os
+536:39:Attribute -> U
+536:39:Name -> U
+536:67:Name -> U
+537:8:Call -> Const:NoneType:None
+537:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+537:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+537:25:Call -> U
+537:25:Attribute -> U
+537:25:Name -> U
+537:57:Call -> Set:0
+537:57:Name -> Class:builtins.set
+539:5:Call -> Inst:unittest.mock._patch
+539:5:Attribute -> Func:unittest.mock.patch
+539:5:Name -> Module:unittest.mock
+542:8:Name -> U
+553:14:Call -> Inst:django.core.management.commands.makemessages.Command
+553:14:Name -> Class:django.core.management.commands.makemessages.Command
+554:8:Call -> Const:NoneType:None
+554:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+554:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+554:25:Attribute -> Inst:builtins.tuple
+554:25:Name -> Inst:django.core.management.commands.makemessages.Command
+557:8:Name -> U
+562:14:Call -> Inst:django.core.management.commands.makemessages.Command
+562:14:Name -> Class:django.core.management.commands.makemessages.Command
+563:8:Call -> Const:NoneType:None
+563:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+563:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+563:25:Attribute -> Inst:builtins.tuple
+563:25:Name -> Inst:django.core.management.commands.makemessages.Command
+566:8:Name -> U
+567:14:Call -> Inst:django.core.management.commands.makemessages.Command
+567:14:Name -> Class:django.core.management.commands.makemessages.Command
+568:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+568:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+568:13:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+569:12:Name -> Class:django.core.management.base.CommandError
+571:12:Attribute -> Inst:builtins.tuple
+571:12:Name -> Inst:django.core.management.commands.makemessages.Command
+579:8:Call -> Const:str:'locale/pt_BR/LC_MESSAGES/django.po'
+579:8:Attribute -> Func:shutil.copyfile
+579:8:Name -> Module:shutil
+579:24:Name -> Const:str:'locale/pt_BR/LC_MESSAGES/django'
+579:50:Name -> Const:str:'locale/pt_BR/LC_MESSAGES/django'
+580:8:Call -> U
+580:8:Attribute -> Func:django.core.management.call_command
+580:8:Name -> Module:django.core.management
+581:8:Call -> Const:NoneType:None
+581:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+581:8:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+581:24:Call -> Const:bool:False | Const:bool:True | U
+581:24:Attribute -> Func:genericpath.exists | U
+581:24:Attribute -> Module:posixpath | Module:ntpath
+581:24:Name -> Module:os
+581:39:Name -> Const:str:'locale/pt_BR/LC_MESSAGES/django'
+582:13:Call -> ERR
+582:13:Name -> Func:_io.open
+582:18:Name -> Const:str:'locale/pt_BR/LC_MESSAGES/django'
+583:26:Call -> U
+583:26:Attribute -> U
+583:26:Name -> U
+584:12:Call -> Const:NoneType:None
+584:12:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertMsgStr
+584:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+584:41:Name -> U
+598:13:Call -> Inst:tempfile._TemporaryFileWrapper
+598:13:Attribute -> Func:tempfile.NamedTemporaryFile
+598:13:Name -> Module:tempfile
+599:27:Attribute -> U
+599:27:Name -> Inst:tempfile._TemporaryFileWrapper
+600:8:Call -> Const:NoneType:None
+600:8:Name -> Func:django.core.management.commands.makemessages.write_pot_file
+600:23:Name -> U
+600:37:Name -> Const:str:'# SOME DESCRIPTIVE TITLE.\n# (some line
+601:13:Call -> ERR
+601:13:Name -> Func:_io.open
+601:18:Name -> U
+602:27:Call -> U
+602:27:Attribute -> U
+602:27:Name -> U
+603:12:Call -> Const:NoneType:None
+603:12:Attribute -> BM:unittest.case.TestCase.assertIn
+603:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+603:69:Name -> U
+604:12:Call -> Const:NoneType:None
+604:12:Attribute -> BM:unittest.case.TestCase.assertIn
+604:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+604:54:Name -> U
+609:13:Call -> U
+609:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+609:13:Attribute -> Module:posixpath | Module:ntpath
+609:13:Name -> Module:os
+609:26:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+609:26:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+610:13:Call -> Inst:pathlib.Path
+610:13:Name -> Class:pathlib.Path
+610:18:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+610:18:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+612:17:Call -> Gen:unittest.case.TestCase.subTest
+612:17:Attribute -> BM:unittest.case.TestCase.subTest
+612:17:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+612:43:Name -> List:0 | List:1 | List:1
+613:21:Call -> Inst:django.test.utils.override_settings
+613:21:Name -> Class:django.test.utils.override_settings
+613:52:Name -> List:0 | List:1 | List:1
+614:26:Call -> Inst:django.core.management.commands.makemessages.Command
+614:26:Name -> Class:django.core.management.commands.makemessages.Command
+615:20:Call -> U
+615:20:Attribute -> Func:django.core.management.call_command
+615:20:Name -> Module:django.core.management
+615:44:Name -> Inst:django.core.management.commands.makemessages.Command
+616:20:Call -> Const:NoneType:None
+616:20:Attribute -> BM:unittest.case.TestCase.assertTrue
+616:20:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+617:24:Call -> ERR
+617:24:Name -> Func:builtins.all
+617:28:Call -> ERR
+617:28:Name -> Func:builtins.isinstance
+617:39:Name -> Const:bytes:b'.' | Const:str:'.' | U
+617:45:Name -> Class:builtins.str
+617:62:Attribute -> List:0 | List:1 | List:0
+617:62:Name -> Inst:django.core.management.commands.makemessages.Command
+619:20:Call -> Const:NoneType:None
+619:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+619:20:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+619:37:Call -> ERR
+619:37:Name -> Func:builtins.len
+619:41:Attribute -> List:0 | List:1 | List:0
+619:41:Name -> Inst:django.core.management.commands.makemessages.Command
+619:60:Call -> Const:int:0
+619:60:Name -> Func:builtins.len
+619:64:Call -> Set:0
+619:64:Name -> Class:builtins.set
+619:68:Attribute -> List:0 | List:1 | List:0
+619:68:Name -> Inst:django.core.management.commands.makemessages.Command
+622:13:Call -> Inst:unittest.mock._patch
+622:13:Attribute -> Func:unittest.mock._patch_object
+622:13:Attribute -> Func:unittest.mock.patch
+622:13:Name -> Module:unittest.mock
+623:12:Name -> Class:django.core.management.commands.makemessages.Command
+625:18:Call -> Inst:django.core.management.commands.makemessages.Command
+625:18:Name -> Class:django.core.management.commands.makemessages.Command
+626:12:Call -> U
+626:12:Attribute -> Func:django.core.management.call_command
+626:12:Name -> Module:django.core.management
+626:36:Name -> Inst:django.core.management.commands.makemessages.Command
+627:12:Call -> Const:NoneType:None
+627:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+627:12:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+628:16:Call -> ERR
+628:16:Name -> Func:builtins.len
+628:20:Attribute -> U
+628:20:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+629:16:Call -> ERR
+629:16:Name -> Func:builtins.len
+629:21:Attribute -> U
+629:21:Name -> U
+629:43:Attribute -> U | Inst:unittest.mock._CallList
+629:43:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+634:33:Attribute -> Class:unittest.mock.Mock
+634:33:Name -> Module:unittest.mock
+636:16:Call -> Const:NoneType:None | Const:NoneType:None | U
+636:16:Attribute -> BM:unittest.mock.CallableMixin.__init__ | BM:unittest.mock.NonCallableMock.__init__ | BM:unittest.mock.Base.__init__ | BM:builtins.object.__init__
+636:16:Call -> Super
+636:16:Name -> Class:builtins.super
+636:34:Name -> Tuple:0
+636:42:Name -> Dict:0
+637:16:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+640:24:Call -> U
+640:24:Attribute -> BM:unittest.mock.CallableMixin.__call__
+640:24:Call -> Super
+640:24:Name -> Class:builtins.super
+640:42:Name -> Tuple:0
+640:50:Name -> Dict:0
+641:16:Call -> ERR
+641:16:Attribute -> BM:builtins.list.append
+641:16:Attribute -> List:0
+641:16:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+641:51:Name -> U
+642:23:Name -> U
+647:16:Call -> U
+647:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+647:16:Attribute -> Module:posixpath | Module:ntpath
+647:16:Name -> Module:os
+647:29:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+647:29:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+650:16:Call -> U
+650:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+650:16:Attribute -> Module:posixpath | Module:ntpath
+650:16:Name -> Module:os
+650:29:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+650:29:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+651:16:Call -> U
+651:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+651:16:Attribute -> Module:posixpath | Module:ntpath
+651:16:Name -> Module:os
+651:29:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+651:29:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+654:17:Call -> Gen:unittest.case.TestCase.subTest
+654:17:Attribute -> BM:unittest.case.TestCase.subTest
+654:17:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+654:43:Name -> List:0 | List:1 | List:2
+655:21:Call -> Inst:django.test.utils.override_settings
+655:21:Name -> Class:django.test.utils.override_settings
+655:52:Name -> List:0 | List:1 | List:2
+656:26:Call -> Inst:django.core.management.commands.makemessages.Command
+656:26:Name -> Class:django.core.management.commands.makemessages.Command
+657:26:Call -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+657:26:Name -> Class:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+657:51:Attribute -> BM:django.core.management.commands.makemessages.Command.find_files
+657:51:Name -> Inst:django.core.management.commands.makemessages.Command
+659:25:Call -> Inst:unittest.mock._patch
+659:25:Attribute -> Func:unittest.mock._patch_object
+659:25:Attribute -> Func:unittest.mock.patch
+659:25:Name -> Module:unittest.mock
+659:43:Name -> Inst:django.core.management.commands.makemessages.Command
+659:66:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+660:24:Call -> U
+660:24:Attribute -> Func:django.core.management.call_command
+660:24:Name -> Module:django.core.management
+660:48:Name -> Inst:django.core.management.commands.makemessages.Command
+661:24:Call -> Const:NoneType:None
+661:24:Attribute -> BM:unittest.case.TestCase.assertEqual
+661:24:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+661:41:Call -> ERR
+661:41:Name -> Func:builtins.len
+661:45:Attribute -> Inst:unittest.mock._CallList
+661:45:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+662:24:Call -> Const:NoneType:None
+662:24:Attribute -> BM:unittest.case.TestCase.assertEqual
+662:24:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+662:41:Call -> Const:int:0
+662:41:Name -> Func:builtins.len
+662:45:Attribute -> List:0
+662:45:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+664:34:Attribute -> List:0
+664:34:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests.test_correct_translatable_file_locale_dir.ReturnTrackingMock
+665:28:Call -> Const:NoneType:None
+665:28:Attribute -> BM:unittest.case.TestCase.assertIsInstance
+665:28:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+665:50:Name -> U
+665:54:Name -> Class:django.core.management.commands.makemessages.TranslatableFile
+666:44:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+666:44:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+666:44:Attribute -> Module:posixpath | Module:ntpath
+666:44:Name -> Module:os
+667:32:Call -> U
+667:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+667:32:Attribute -> Module:posixpath | Module:ntpath
+667:32:Name -> Module:os
+667:45:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+667:45:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+667:60:Attribute -> U
+667:60:Name -> U
+667:72:Attribute -> U
+667:72:Name -> U
+669:46:Call -> ERR
+669:46:Name -> Func:builtins.max
+671:36:Call -> Const:bytes:b'/' | U | Const:str:'/' | Const:bytes:b'' | Const:str:''
+671:36:Attribute -> Func:posixpath.commonpath | Func:ntpath.commonpath
+671:36:Attribute -> Module:posixpath | Module:ntpath
+671:36:Name -> Module:os
+671:56:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+671:71:Name -> Const:bytes:b'.' | Const:str:'.' | U
+672:55:Attribute -> List:0 | List:1 | List:0
+672:55:Name -> Inst:django.core.management.commands.makemessages.Command
+674:36:Name -> Func:builtins.len
+676:49:Call -> U
+676:49:Attribute -> Func:posixpath.join | Func:ntpath.join
+676:49:Attribute -> Module:posixpath | Module:ntpath
+676:49:Name -> Module:os
+676:62:Name -> U
+677:28:Call -> Const:NoneType:None
+677:28:Attribute -> BM:unittest.case.TestCase.assertEqual
+677:28:Name -> Inst:tests.i18n.test_extraction.BasicExtractorTests
+677:45:Attribute -> U
+677:45:Name -> U
+677:60:Name -> U
+680:31:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+681:52:Name -> Const:str:'de'
+684:25:Call -> Tuple:2
+684:25:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+684:25:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+685:8:Call -> Const:NoneType:None
+685:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+685:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+685:61:Name -> U
+686:8:Call -> Const:NoneType:None
+686:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+686:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+686:54:Name -> U
+687:8:Call -> Const:NoneType:None
+687:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+687:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+687:46:Name -> U
+688:8:Call -> Const:NoneType:None
+688:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+688:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+688:49:Name -> U
+689:8:Call -> Const:NoneType:None
+689:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+689:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+689:34:Name -> U
+690:8:Call -> Const:NoneType:None
+690:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+690:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+690:33:Name -> U
+691:8:Call -> Const:NoneType:None
+691:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+691:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+691:55:Name -> U
+692:8:Call -> Const:NoneType:None
+692:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+692:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+692:35:Name -> U
+693:8:Call -> Const:NoneType:None
+693:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+693:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+695:12:Name -> U
+697:8:Call -> Const:NoneType:None
+697:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+697:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+697:32:Name -> U
+698:8:Call -> Const:NoneType:None
+698:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+698:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+698:32:Name -> U
+699:8:Call -> Const:NoneType:None
+699:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+699:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+699:32:Name -> U
+700:8:Call -> Const:NoneType:None
+700:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+700:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+700:32:Name -> U
+701:8:Call -> Const:NoneType:None
+701:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+701:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+701:35:Name -> U
+707:13:Call -> Inst:django.test.utils.override_settings
+707:13:Name -> Class:django.test.utils.override_settings
+708:24:Call -> U
+708:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+708:24:Attribute -> Module:posixpath | Module:ntpath
+708:24:Name -> Module:os
+708:37:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+708:37:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+709:23:Call -> U
+709:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+709:23:Attribute -> Module:posixpath | Module:ntpath
+709:23:Name -> Module:os
+709:36:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+709:36:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+711:29:Call -> Tuple:2
+711:29:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+711:29:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+712:12:Call -> Const:NoneType:None
+712:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+712:12:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+713:65:Name -> U
+715:12:Call -> Const:NoneType:None
+715:12:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotMsgId
+715:12:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+716:67:Name -> U
+719:5:Call -> Inst:django.test.utils.override_settings
+719:5:Name -> Class:django.test.utils.override_settings
+724:25:Call -> Tuple:2
+724:25:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+724:25:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+725:8:Call -> Const:NoneType:None
+725:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+725:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+725:74:Name -> U
+730:8:Call -> Const:NoneType:None | Const:NoneType:None | U
+730:8:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+730:8:Name -> Module:os
+730:20:Call -> U
+730:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+730:20:Attribute -> Module:posixpath | Module:ntpath
+730:20:Name -> Module:os
+731:30:Call -> U
+731:30:Attribute -> Func:posixpath.join | Func:ntpath.join
+731:30:Attribute -> Module:posixpath | Module:ntpath
+731:30:Name -> Module:os
+731:43:Attribute -> Const:str:'.' | Const:str:'.'
+731:43:Attribute -> Module:posixpath | Module:ntpath
+731:43:Name -> Module:os
+732:8:Call -> Const:NoneType:None | Const:NoneType:None | U
+732:8:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+732:8:Name -> Module:os
+732:20:Name -> U
+733:8:Call -> ERR
+733:8:Attribute -> ERR
+733:8:Call -> ERR
+733:8:Name -> Func:_io.open
+733:13:Call -> U
+733:13:Attribute -> Func:posixpath.join | Func:ntpath.join
+733:13:Attribute -> Module:posixpath | Module:ntpath
+733:13:Name -> Module:os
+733:26:Name -> U
+735:17:Call -> Tuple:2
+735:17:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+735:17:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+736:8:Call -> Const:NoneType:None
+736:8:Attribute -> BM:unittest.case.TestCase.assertIn
+736:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+736:58:Name -> U
+736:81:Name -> U
+742:8:Call -> Const:NoneType:None
+742:8:Attribute -> BM:unittest.case.TestCase.assertIs
+742:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+742:22:Call -> Const:bool:False | Const:bool:True | U
+742:22:Attribute -> Func:genericpath.exists | U
+742:22:Attribute -> Module:posixpath | Module:ntpath
+742:22:Name -> Module:os
+742:37:Call -> U
+742:37:Attribute -> Func:posixpath.join | Func:ntpath.join
+742:37:Attribute -> Module:posixpath | Module:ntpath
+742:37:Name -> Module:os
+743:26:Call -> U
+743:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+743:26:Attribute -> Module:posixpath | Module:ntpath
+743:26:Name -> Module:os
+744:8:Call -> Const:NoneType:None | Const:NoneType:None | U
+744:8:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+744:8:Name -> Module:os
+744:20:Call -> U
+744:20:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+744:20:Attribute -> Module:posixpath | Module:ntpath
+744:20:Name -> Module:os
+744:36:Name -> U
+745:8:Call -> ERR
+745:8:Attribute -> ERR
+745:8:Call -> ERR
+745:8:Name -> Func:_io.open
+745:13:Name -> U
+747:17:Call -> Tuple:2
+747:17:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+747:17:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+748:8:Call -> Const:NoneType:None
+748:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+748:8:Name -> Inst:tests.i18n.test_extraction.JavaScriptExtractorTests
+748:58:Name -> U
+751:28:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+753:27:Call -> Tuple:2
+753:27:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+753:27:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+755:16:Call -> U
+755:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+755:16:Attribute -> Module:posixpath | Module:ntpath
+755:16:Name -> Module:os
+758:8:Call -> Const:NoneType:None
+758:8:Attribute -> BM:unittest.case.TestCase.assertIn
+758:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+758:55:Name -> U
+759:8:Call -> Const:NoneType:None
+759:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+759:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+759:61:Name -> U
+760:8:Call -> Const:NoneType:None
+760:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotMsgId
+760:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+760:55:Name -> U
+763:27:Call -> Tuple:2
+763:27:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+763:27:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+769:8:Call -> Const:NoneType:None
+769:8:Attribute -> BM:unittest.case.TestCase.assertIn
+769:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+769:51:Name -> U
+770:8:Call -> Const:NoneType:None
+770:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotMsgId
+770:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+770:66:Name -> U
+773:27:Call -> Tuple:2
+773:27:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+773:27:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+778:8:Call -> Const:NoneType:None
+778:8:Attribute -> BM:unittest.case.TestCase.assertIn
+778:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+778:56:Name -> U
+779:8:Call -> Const:NoneType:None
+779:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotMsgId
+779:8:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+779:59:Name -> U
+782:13:Call -> Inst:django.test.utils.override_settings
+782:13:Name -> Class:django.test.utils.override_settings
+783:24:Call -> U
+783:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+783:24:Attribute -> Module:posixpath | Module:ntpath
+783:24:Name -> Module:os
+783:37:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+783:37:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+784:23:Call -> U
+784:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+784:23:Attribute -> Module:posixpath | Module:ntpath
+784:23:Name -> Module:os
+784:36:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+784:36:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+786:21:Call -> Tuple:2
+786:21:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+786:21:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+787:12:Call -> Const:NoneType:None
+787:12:Attribute -> BM:unittest.case.TestCase.assertIn
+787:12:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+787:55:Name -> U
+788:12:Call -> Const:NoneType:None
+788:12:Attribute -> BM:unittest.case.TestCase.assertIn
+788:12:Name -> Inst:tests.i18n.test_extraction.IgnoredExtractorTests
+788:59:Name -> U
+791:28:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+793:8:Call -> Const:NoneType:None | U
+793:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+793:8:Call -> Super
+793:8:Name -> Class:builtins.super
+794:8:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+794:29:Call -> U
+794:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+794:29:Attribute -> Module:posixpath | Module:ntpath
+794:29:Name -> Module:os
+794:42:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+794:42:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+797:11:Call -> Const:bool:True | Const:bool:False
+797:11:Name -> Func:django.utils._os.symlinks_supported
+798:12:Call -> ERR
+798:12:Attribute -> Func:posix.symlink
+798:12:Name -> Module:os
+798:23:Call -> U
+798:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+798:23:Attribute -> Module:posixpath | Module:ntpath
+798:23:Name -> Module:os
+798:36:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+798:36:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+798:65:Attribute -> U
+798:65:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+800:12:Call -> U
+800:12:Attribute -> BM:unittest.case.TestCase.skipTest
+800:12:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+803:8:Call -> U
+803:8:Attribute -> Func:django.core.management.call_command
+803:8:Name -> Module:django.core.management
+804:36:Name -> Const:str:'de'
+806:8:Call -> Const:NoneType:None
+806:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+806:8:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+806:24:Call -> Const:bool:False | Const:bool:True | U
+806:24:Attribute -> Func:genericpath.exists | U
+806:24:Attribute -> Module:posixpath | Module:ntpath
+806:24:Name -> Module:os
+806:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+806:39:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+807:13:Call -> ERR
+807:13:Name -> Func:_io.open
+807:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+807:18:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+808:26:Call -> U
+808:26:Attribute -> U
+808:26:Name -> U
+809:12:Call -> Const:NoneType:None
+809:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+809:12:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+809:65:Name -> U
+810:8:Call -> Const:NoneType:None | Const:NoneType:None
+810:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentPresent
+810:8:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+811:12:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+811:12:Name -> Inst:tests.i18n.test_extraction.SymlinkExtractorTests
+815:36:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+819:8:Call -> U
+819:8:Attribute -> Func:django.core.management.call_command
+819:8:Name -> Module:django.core.management
+819:56:Name -> Const:str:'de'
+820:8:Call -> Const:NoneType:None
+820:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+820:8:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+820:24:Call -> Const:bool:False | Const:bool:True | U
+820:24:Attribute -> Func:genericpath.exists | U
+820:24:Attribute -> Module:posixpath | Module:ntpath
+820:24:Name -> Module:os
+820:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+820:39:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+821:13:Call -> ERR
+821:13:Name -> Func:_io.open
+821:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+821:18:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+822:26:Call -> U
+822:26:Attribute -> U
+822:26:Name -> U
+823:12:Call -> Const:NoneType:None
+823:12:Attribute -> BM:unittest.case.TestCase.assertIn
+823:12:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+823:71:Name -> U
+827:8:Call -> U
+827:8:Attribute -> Func:django.core.management.call_command
+827:8:Name -> Module:django.core.management
+830:8:Call -> Const:NoneType:None
+830:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+830:8:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+830:24:Call -> Const:bool:False | Const:bool:True | U
+830:24:Attribute -> Func:genericpath.exists | U
+830:24:Attribute -> Module:posixpath | Module:ntpath
+830:24:Name -> Module:os
+830:39:Attribute -> Const:str:'locale/es/LC_MESSAGES/django.po'
+830:39:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+831:13:Call -> ERR
+831:13:Name -> Func:_io.open
+831:18:Attribute -> Const:str:'locale/es/LC_MESSAGES/django.po'
+831:18:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+832:26:Call -> U
+832:26:Attribute -> U
+832:26:Name -> U
+833:20:Call -> U
+833:20:Attribute -> Func:re.findall
+833:20:Name -> Module:re
+835:16:Name -> U
+836:16:Attribute -> Const:int:8
+836:16:Name -> Module:re
+836:31:Attribute -> Const:int:16
+836:31:Name -> Module:re
+838:12:Call -> Const:NoneType:None
+838:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+838:12:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+838:32:Call -> ERR
+838:32:Name -> Func:builtins.len
+838:36:Name -> U
+846:8:Call -> U
+846:8:Attribute -> Func:django.core.management.call_command
+846:8:Name -> Module:django.core.management
+847:36:Name -> Const:str:'de'
+849:8:Call -> Const:NoneType:None
+849:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+849:8:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+849:24:Call -> Const:bool:False | Const:bool:True | U
+849:24:Attribute -> Func:genericpath.exists | U
+849:24:Attribute -> Module:posixpath | Module:ntpath
+849:24:Name -> Module:os
+849:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+849:39:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+850:13:Call -> ERR
+850:13:Name -> Func:_io.open
+850:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+850:18:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+851:26:Call -> U
+851:26:Attribute -> U
+851:26:Name -> U
+852:12:Call -> Const:NoneType:None
+852:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+852:12:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+853:73:Name -> U
+855:12:Call -> Const:NoneType:None
+855:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+855:12:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+856:74:Name -> U
+858:12:Call -> Const:NoneType:None
+858:12:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertMsgIdPlural
+858:12:Name -> Inst:tests.i18n.test_extraction.CopyPluralFormsExtractorTests
+860:16:Name -> U
+864:27:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+866:8:Call -> U
+866:8:Attribute -> Func:django.core.management.call_command
+866:8:Name -> Module:django.core.management
+867:36:Name -> Const:str:'de'
+869:8:Call -> Const:NoneType:None
+869:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+869:8:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+869:24:Call -> Const:bool:False | Const:bool:True | U
+869:24:Attribute -> Func:genericpath.exists | U
+869:24:Attribute -> Module:posixpath | Module:ntpath
+869:24:Name -> Module:os
+869:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+869:39:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+870:13:Call -> ERR
+870:13:Name -> Func:_io.open
+870:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+870:18:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+871:26:Call -> U
+871:26:Attribute -> U
+871:26:Name -> U
+872:12:Call -> Const:NoneType:None
+872:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+872:12:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+875:16:Name -> U
+879:8:Call -> U
+879:8:Attribute -> Func:django.core.management.call_command
+879:8:Name -> Module:django.core.management
+880:36:Name -> Const:str:'de'
+882:8:Call -> Const:NoneType:None
+882:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+882:8:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+882:24:Call -> Const:bool:False | Const:bool:True | U
+882:24:Attribute -> Func:genericpath.exists | U
+882:24:Attribute -> Module:posixpath | Module:ntpath
+882:24:Name -> Module:os
+882:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+882:39:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+883:13:Call -> ERR
+883:13:Name -> Func:_io.open
+883:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+883:18:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+884:26:Call -> U
+884:26:Attribute -> U
+884:26:Name -> U
+885:12:Call -> Const:NoneType:None
+885:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+885:12:Name -> Inst:tests.i18n.test_extraction.NoWrapExtractorTests
+888:16:Name -> U
+893:28:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+898:8:Call -> U
+898:8:Attribute -> Func:django.core.management.call_command
+898:8:Name -> Module:django.core.management
+899:36:Name -> Const:str:'de'
+901:8:Call -> Const:NoneType:None
+901:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+901:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+901:24:Call -> Const:bool:False | Const:bool:True | U
+901:24:Attribute -> Func:genericpath.exists | U
+901:24:Attribute -> Module:posixpath | Module:ntpath
+901:24:Name -> Module:os
+901:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+901:39:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+902:8:Call -> Const:NoneType:None | Const:NoneType:None
+902:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentNotPresent
+902:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+902:45:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+902:45:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+906:8:Call -> U
+906:8:Attribute -> Func:django.core.management.call_command
+906:8:Name -> Module:django.core.management
+907:36:Name -> Const:str:'de'
+909:8:Call -> Const:NoneType:None
+909:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+909:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+909:24:Call -> Const:bool:False | Const:bool:True | U
+909:24:Attribute -> Func:genericpath.exists | U
+909:24:Attribute -> Module:posixpath | Module:ntpath
+909:24:Name -> Module:os
+909:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+909:39:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+912:8:Call -> Const:NoneType:None | Const:NoneType:None
+912:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentPresent
+912:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+913:12:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+913:12:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+921:8:Call -> U
+921:8:Attribute -> Func:django.core.management.call_command
+921:8:Name -> Module:django.core.management
+921:56:Name -> Const:str:'de'
+922:8:Call -> Const:NoneType:None
+922:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+922:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+922:24:Call -> Const:bool:False | Const:bool:True | U
+922:24:Attribute -> Func:genericpath.exists | U
+922:24:Attribute -> Module:posixpath | Module:ntpath
+922:24:Name -> Module:os
+922:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+922:39:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+923:13:Call -> ERR
+923:13:Name -> Func:_io.open
+923:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+923:18:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+924:26:Call -> U
+924:26:Attribute -> U
+924:26:Name -> U
+925:8:Call -> Const:NoneType:None
+925:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+925:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+925:54:Name -> U
+926:8:Call -> Const:NoneType:None | Const:NoneType:None
+926:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentNotPresent
+926:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+926:45:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+926:45:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+927:8:Call -> Const:NoneType:None | Const:NoneType:None
+927:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentPresent
+927:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+927:42:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+927:42:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+931:8:Call -> U
+931:8:Attribute -> Func:django.core.management.call_command
+931:8:Name -> Module:django.core.management
+932:36:Name -> Const:str:'de'
+934:8:Call -> Const:NoneType:None
+934:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+934:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+934:24:Call -> Const:bool:False | Const:bool:True | U
+934:24:Attribute -> Func:genericpath.exists | U
+934:24:Attribute -> Module:posixpath | Module:ntpath
+934:24:Name -> Module:os
+934:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+934:39:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+936:8:Call -> Const:NoneType:None | Const:NoneType:None
+936:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentPresent
+936:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+937:12:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+937:12:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+942:8:Call -> U
+942:8:Attribute -> Func:django.core.management.call_command
+942:8:Name -> Module:django.core.management
+943:36:Name -> Const:str:'de'
+945:8:Call -> Const:NoneType:None
+945:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+945:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+945:24:Call -> Const:bool:False | Const:bool:True | U
+945:24:Attribute -> Func:genericpath.exists | U
+945:24:Attribute -> Module:posixpath | Module:ntpath
+945:24:Name -> Module:os
+945:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+945:39:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+947:8:Call -> Const:NoneType:None | Const:NoneType:None
+947:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentPresent
+947:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+947:42:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+947:42:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+949:8:Call -> Const:NoneType:None | Const:NoneType:None
+949:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentNotPresent
+949:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+950:12:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+950:12:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+955:8:Call -> U
+955:8:Attribute -> Func:django.core.management.call_command
+955:8:Name -> Module:django.core.management
+956:36:Name -> Const:str:'de'
+958:8:Call -> Const:NoneType:None
+958:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+958:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+958:24:Call -> Const:bool:False | Const:bool:True | U
+958:24:Attribute -> Func:genericpath.exists | U
+958:24:Attribute -> Module:posixpath | Module:ntpath
+958:24:Name -> Module:os
+958:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+958:39:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+959:8:Call -> Const:NoneType:None | Const:NoneType:None
+959:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertLocationCommentNotPresent
+959:8:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+959:45:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+959:45:Name -> Inst:tests.i18n.test_extraction.LocationCommentsTests
+962:31:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+966:8:Call -> U
+966:8:Attribute -> Func:django.core.management.call_command
+966:8:Name -> Module:django.core.management
+967:36:Name -> Const:str:'de'
+969:8:Call -> Const:NoneType:None
+969:8:Attribute -> BM:unittest.case.TestCase.assertIs
+969:8:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+969:22:Call -> Const:bool:False | Const:bool:True | U
+969:22:Attribute -> Func:genericpath.exists | U
+969:22:Attribute -> Module:posixpath | Module:ntpath
+969:22:Name -> Module:os
+969:37:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+969:37:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+970:13:Call -> ERR
+970:13:Name -> Func:_io.open
+970:18:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+970:18:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+971:26:Call -> U
+971:26:Attribute -> U
+971:26:Name -> U
+972:12:Call -> Const:NoneType:None
+972:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+972:12:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+972:60:Name -> U
+973:12:Call -> Const:NoneType:None
+973:12:Attribute -> BM:unittest.case.TestCase.assertNotIn
+973:12:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+973:72:Name -> U
+974:12:Call -> Const:NoneType:None
+974:12:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+974:12:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+974:63:Name -> U
+975:12:Call -> Const:NoneType:None
+975:12:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertMsgStr
+975:12:Name -> Inst:tests.i18n.test_extraction.NoObsoleteExtractorTests
+975:62:Name -> U
+978:32:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+982:8:Call -> U
+982:8:Attribute -> Func:django.core.management.call_command
+982:8:Name -> Module:django.core.management
+982:56:Name -> Const:str:'de'
+983:8:Call -> Const:NoneType:None
+983:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+983:8:Name -> Inst:tests.i18n.test_extraction.KeepPotFileExtractorTests
+983:25:Call -> Const:bool:False | Const:bool:True | U
+983:25:Attribute -> Func:genericpath.exists | U
+983:25:Attribute -> Module:posixpath | Module:ntpath
+983:25:Name -> Module:os
+983:40:Attribute -> Const:str:'locale/django.pot'
+983:40:Name -> Inst:tests.i18n.test_extraction.KeepPotFileExtractorTests
+986:8:Call -> U
+986:8:Attribute -> Func:django.core.management.call_command
+986:8:Name -> Module:django.core.management
+987:36:Name -> Const:str:'de'
+989:8:Call -> Const:NoneType:None
+989:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+989:8:Name -> Inst:tests.i18n.test_extraction.KeepPotFileExtractorTests
+989:25:Call -> Const:bool:False | Const:bool:True | U
+989:25:Attribute -> Func:genericpath.exists | U
+989:25:Attribute -> Module:posixpath | Module:ntpath
+989:25:Name -> Module:os
+989:40:Attribute -> Const:str:'locale/django.pot'
+989:40:Name -> Inst:tests.i18n.test_extraction.KeepPotFileExtractorTests
+992:8:Call -> U
+992:8:Attribute -> Func:django.core.management.call_command
+992:8:Name -> Module:django.core.management
+993:36:Name -> Const:str:'de'
+995:8:Call -> Const:NoneType:None
+995:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+995:8:Name -> Inst:tests.i18n.test_extraction.KeepPotFileExtractorTests
+995:24:Call -> Const:bool:False | Const:bool:True | U
+995:24:Attribute -> Func:genericpath.exists | U
+995:24:Attribute -> Module:posixpath | Module:ntpath
+995:24:Name -> Module:os
+995:39:Attribute -> Const:str:'locale/django.pot'
+995:39:Name -> Inst:tests.i18n.test_extraction.KeepPotFileExtractorTests
+998:36:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+1005:8:Call -> U
+1005:8:Attribute -> Func:django.core.management.call_command
+1005:8:Name -> Module:django.core.management
+1006:8:Call -> Const:NoneType:None
+1006:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+1006:8:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1006:24:Call -> Const:bool:False | Const:bool:True | U
+1006:24:Attribute -> Func:genericpath.exists | U
+1006:24:Attribute -> Module:posixpath | Module:ntpath
+1006:24:Name -> Module:os
+1006:39:Attribute -> Const:str:'locale/pt/LC_MESSAGES/django.po'
+1006:39:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1007:8:Call -> Const:NoneType:None
+1007:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+1007:8:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1007:24:Call -> Const:bool:False | Const:bool:True | U
+1007:24:Attribute -> Func:genericpath.exists | U
+1007:24:Attribute -> Module:posixpath | Module:ntpath
+1007:24:Name -> Module:os
+1007:39:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+1007:39:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1015:8:Call -> ERR
+1015:8:Attribute -> Func:posix.mkdir
+1015:8:Name -> Module:os
+1015:17:Call -> U
+1015:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+1015:17:Attribute -> Module:posixpath | Module:ntpath
+1015:17:Name -> Module:os
+1017:8:Call -> U
+1017:8:Attribute -> Func:django.core.management.call_command
+1017:8:Name -> Module:django.core.management
+1018:8:Call -> Const:NoneType:None
+1018:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+1018:8:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1018:24:Call -> Const:bool:False | Const:bool:True | U
+1018:24:Attribute -> Func:genericpath.exists | U
+1018:24:Attribute -> Module:posixpath | Module:ntpath
+1018:24:Name -> Module:os
+1018:39:Attribute -> Const:str:'locale/ko/LC_MESSAGES/django.po'
+1018:39:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1019:8:Call -> Const:NoneType:None
+1019:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+1019:8:Name -> Inst:tests.i18n.test_extraction.MultipleLocaleExtractionTests
+1019:25:Call -> Const:bool:False | Const:bool:True | U
+1019:25:Attribute -> Func:genericpath.exists | U
+1019:25:Attribute -> Module:posixpath | Module:ntpath
+1019:25:Name -> Module:os
+1022:36:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+1033:22:Attribute -> List:3
+1033:22:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1034:12:Call -> ERR
+1034:12:Attribute -> Func:posix.utime
+1034:12:Name -> Module:os
+1034:21:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1034:21:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1034:36:Name -> Const:str:'en' | Const:str:'fr' | Const:str:'it'
+1037:8:Call -> Const:NoneType:None | U
+1037:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+1037:8:Call -> Super
+1037:8:Name -> Class:builtins.super
+1038:8:Call -> Const:NoneType:None
+1038:8:Name -> Func:tests.i18n.utils.copytree
+1039:8:Call -> Const:NoneType:None
+1039:8:Attribute -> BM:tests.i18n.test_extraction.ExcludedLocaleExtractionTests._set_times_for_all_po_files
+1039:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1042:13:Call -> Gen:django.test.utils.captured_output
+1042:13:Name -> Func:django.test.utils.captured_stdout
+1042:32:Call -> Gen:django.test.utils.captured_output
+1042:32:Name -> Func:django.test.utils.captured_stderr
+1046:12:Call -> Const:NoneType:None
+1046:12:Name -> Func:django.core.management.execute_from_command_line
+1049:8:Call -> U
+1049:8:Attribute -> Func:django.core.management.call_command
+1049:8:Name -> Module:django.core.management
+1050:8:Call -> Const:NoneType:None
+1050:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertRecentlyModified
+1050:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1050:36:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1050:36:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1051:8:Call -> Const:NoneType:None
+1051:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertRecentlyModified
+1051:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1051:36:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1051:36:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1052:8:Call -> Const:NoneType:None
+1052:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1052:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1052:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1052:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1055:8:Call -> U
+1055:8:Attribute -> Func:django.core.management.call_command
+1055:8:Name -> Module:django.core.management
+1056:8:Call -> Const:NoneType:None
+1056:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertRecentlyModified
+1056:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1056:36:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1056:36:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1057:8:Call -> Const:NoneType:None
+1057:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1057:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1057:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1057:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1058:8:Call -> Const:NoneType:None
+1058:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1058:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1058:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1058:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1061:8:Call -> U
+1061:8:Attribute -> Func:django.core.management.call_command
+1061:8:Name -> Module:django.core.management
+1064:8:Call -> Const:NoneType:None
+1064:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertRecentlyModified
+1064:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1064:36:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1064:36:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1065:8:Call -> Const:NoneType:None
+1065:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1065:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1065:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1065:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1066:8:Call -> Const:NoneType:None
+1066:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1066:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1066:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1066:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1069:8:Call -> U
+1069:8:Attribute -> Func:django.core.management.call_command
+1069:8:Name -> Module:django.core.management
+1072:8:Call -> Const:NoneType:None
+1072:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertRecentlyModified
+1072:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1072:36:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1072:36:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1073:8:Call -> Const:NoneType:None
+1073:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1073:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1073:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1073:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1074:8:Call -> Const:NoneType:None
+1074:8:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests.assertNotRecentlyModified
+1074:8:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1074:39:Attribute -> Const:str:'locale/%s/LC_MESSAGES/django.po'
+1074:39:Name -> Inst:tests.i18n.test_extraction.ExcludedLocaleExtractionTests
+1077:34:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+1086:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+1086:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+1086:13:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1086:38:Attribute -> Class:django.core.management.base.CommandError
+1086:38:Name -> Module:django.core.management
+1086:63:Name -> Const:str:"Unable to find a locale path to store t
+1087:12:Call -> U
+1087:12:Attribute -> Func:django.core.management.call_command
+1087:12:Name -> Module:django.core.management
+1087:60:Name -> Const:str:'de'
+1089:8:Call -> Const:NoneType:None
+1089:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+1089:8:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1089:25:Call -> Const:bool:False | Const:bool:True | U
+1089:25:Attribute -> Func:genericpath.exists | U
+1089:25:Attribute -> Module:posixpath | Module:ntpath
+1089:25:Name -> Module:os
+1092:8:Call -> Const:NoneType:None
+1092:8:Attribute -> BM:tests.i18n.test_extraction.CustomLayoutExtractionTests._test_project_locale_paths
+1092:8:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1092:40:Call -> U
+1092:40:Attribute -> Func:posixpath.join | Func:ntpath.join
+1092:40:Attribute -> Module:posixpath | Module:ntpath
+1092:40:Name -> Module:os
+1092:53:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+1092:53:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1095:8:Call -> Const:NoneType:None
+1095:8:Attribute -> BM:tests.i18n.test_extraction.CustomLayoutExtractionTests._test_project_locale_paths
+1095:8:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1095:40:Call -> Inst:pathlib.Path
+1095:40:Name -> Class:pathlib.Path
+1095:45:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+1095:45:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1103:13:Call -> Inst:django.test.utils.override_settings
+1103:13:Name -> Class:django.test.utils.override_settings
+1103:45:Name -> U
+1104:12:Call -> U
+1104:12:Attribute -> Func:django.core.management.call_command
+1104:12:Name -> Module:django.core.management
+1104:60:Name -> Const:str:'de'
+1105:32:Call -> U
+1105:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+1105:32:Attribute -> Module:posixpath | Module:ntpath
+1105:32:Name -> Module:os
+1106:16:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+1106:16:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1108:28:Call -> U
+1108:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+1108:28:Attribute -> Module:posixpath | Module:ntpath
+1108:28:Name -> Module:os
+1109:16:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+1109:16:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1116:12:Call -> Const:NoneType:None
+1116:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+1116:12:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1116:28:Call -> Const:bool:False | Const:bool:True | U
+1116:28:Attribute -> Func:genericpath.exists | U
+1116:28:Attribute -> Module:posixpath | Module:ntpath
+1116:28:Name -> Module:os
+1116:43:Name -> U
+1117:12:Call -> Const:NoneType:None
+1117:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+1117:12:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1117:28:Call -> Const:bool:False | Const:bool:True | U
+1117:28:Attribute -> Func:genericpath.exists | U
+1117:28:Attribute -> Module:posixpath | Module:ntpath
+1117:28:Name -> Module:os
+1117:43:Name -> U
+1119:17:Call -> ERR
+1119:17:Name -> Func:_io.open
+1119:22:Name -> U
+1120:30:Call -> U
+1120:30:Attribute -> U
+1120:30:Name -> U
+1121:16:Call -> Const:NoneType:None
+1121:16:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+1121:16:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1121:69:Name -> U
+1122:16:Call -> Const:NoneType:None
+1122:16:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+1122:16:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1122:67:Name -> U
+1123:17:Call -> ERR
+1123:17:Name -> Func:_io.open
+1123:22:Name -> U
+1124:30:Call -> U
+1124:30:Attribute -> U
+1124:30:Name -> U
+1125:16:Call -> Const:NoneType:None
+1125:16:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+1125:16:Name -> Inst:tests.i18n.test_extraction.CustomLayoutExtractionTests
+1125:68:Name -> U
+1128:1:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+1128:1:Name -> Func:unittest.case.skipUnless
+1128:12:Name -> U
+1129:32:Name -> U
+1131:19:Call -> ERR
+1131:19:Attribute -> ERR
+1131:19:Name -> Inst:tests.i18n.test_extraction.NoSettingsExtractionTests
+1132:8:Call -> ERR
+1132:8:Attribute -> ERR
+1132:8:Name -> Inst:tests.i18n.test_extraction.NoSettingsExtractionTests
+1132:28:Name -> U
+1133:8:Call -> ERR
+1133:8:Attribute -> ERR
+1133:8:Name -> Inst:tests.i18n.test_extraction.NoSettingsExtractionTests
+1133:28:Name -> U
+1136:33:Name -> Class:tests.i18n.test_extraction.ExtractorTests
+1140:8:Call -> Const:NoneType:None | U
+1140:8:Attribute -> BM:tests.i18n.utils.RunInTmpDirMixin.setUp | BM:unittest.case.TestCase.setUp
+1140:8:Call -> Super
+1140:8:Name -> Class:builtins.super
+1141:18:Call -> Inst:pathlib.Path
+1141:18:Name -> Class:pathlib.Path
+1141:23:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+1141:23:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1142:22:Call -> Inst:pathlib.Path
+1142:22:Name -> Class:pathlib.Path
+1142:27:Attribute -> Const:str:'locale/de/LC_MESSAGES/django.po'
+1142:27:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1143:11:Attribute -> Const:str:'posix' | Const:str:'nt'
+1143:11:Name -> Module:os
+1145:26:Call -> U
+1145:26:Attribute -> U
+1145:26:Call -> U
+1145:26:Attribute -> BM:pathlib.Path.read_text
+1145:26:Name -> Inst:pathlib.Path
+1149:12:Call -> U
+1149:12:Attribute -> BM:pathlib.Path.write_text
+1149:12:Name -> Inst:pathlib.Path
+1149:31:Name -> U
+1151:12:Call -> Inst:pathlib.Path
+1151:12:Attribute -> BM:pathlib.Path.rename
+1151:12:Name -> Inst:pathlib.Path
+1151:31:Name -> Inst:pathlib.Path
+1152:8:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1152:36:Call -> U
+1152:36:Attribute -> BM:pathlib.Path.read_text
+1152:36:Name -> Inst:pathlib.Path
+1156:25:Call -> Tuple:2
+1156:25:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+1156:25:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1157:8:Call -> Const:NoneType:None
+1157:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+1157:8:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1157:25:Name -> U
+1157:38:Attribute -> U
+1157:38:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1161:8:Call -> Inst:pathlib.Path
+1161:8:Attribute -> BM:pathlib.Path.rename
+1161:8:Call -> Inst:pathlib.Path
+1161:8:Name -> Class:pathlib.Path
+1162:25:Call -> Tuple:2
+1162:25:Attribute -> BM:tests.i18n.test_extraction.ExtractorTests._run_makemessages
+1162:25:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1163:8:Call -> Const:NoneType:None
+1163:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+1163:8:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1163:28:Name -> U
+1163:41:Attribute -> U
+1163:41:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1164:8:Call -> Const:NoneType:None
+1164:8:Attribute -> BM:tests.i18n.utils.POFileAssertionMixin.assertMsgId
+1164:8:Name -> Inst:tests.i18n.test_extraction.UnchangedPoExtractionTests
+1166:12:Name -> U

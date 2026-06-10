@@ -1,0 +1,131 @@
+18:7:Name -> Class:builtins.ImportError
+22:18:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+22:18:Attribute -> Func:posixpath.realpath | U
+22:18:Attribute -> Module:posixpath | Module:ntpath
+22:18:Name -> Module:os
+27:15:Call -> U
+27:15:Attribute -> Func:salt.utils.platform.is_darwin
+27:15:Attribute -> Module:salt.utils.platform
+27:15:Attribute -> Module:salt.utils
+27:15:Name -> Module:salt
+26:8:Call -> U
+26:8:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+26:8:Attribute -> Dict:43 | Inst:os._Environ
+26:8:Name -> Module:os
+26:33:Call -> U
+26:33:Attribute -> Func:tempfile.gettempdir
+26:33:Name -> Module:tempfile
+35:7:Call -> U
+35:7:Attribute -> Func:salt.utils.platform.is_windows
+35:7:Attribute -> Module:salt.utils.platform
+35:7:Attribute -> Module:salt.utils
+35:7:Name -> Module:salt
+36:24:Call -> U
+36:24:Attribute -> Func:re.sub
+36:24:Name -> Module:re
+39:12:Call -> U | Const:NoneType:None
+39:12:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+39:12:Attribute -> Dict:43 | Inst:os._Environ
+39:12:Name -> Module:os
+43:28:Call -> Const:str:''
+43:28:Name -> Class:builtins.str
+43:32:Call -> ERR
+43:32:Attribute -> Func:posix.geteuid
+43:32:Name -> Module:os
+44:15:Name -> Class:builtins.AttributeError
+46:10:Call -> U
+46:10:Attribute -> Func:posixpath.join | Func:ntpath.join
+46:10:Attribute -> Module:posixpath | Module:ntpath
+46:10:Name -> Module:os
+46:23:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+46:57:Name -> U | Const:str:'' | Const:str:'0'
+49:14:Name -> U
+50:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+53:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:6:Attribute -> Func:logging.getLogger
+53:6:Name -> Module:logging
+53:24:Name -> Const:str:'tests.integration.files.file.base._modu | Const:str:'__main__'
+57:11:Attribute -> U
+57:11:Name -> Inst:tests.support.runtests.RuntimeVars | Class:tests.integration.files.file.base._modules.runtests_helpers.RUNTIME_VARS
+61:11:Call -> U
+61:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+61:11:Attribute -> Module:posixpath | Module:ntpath
+61:11:Name -> Module:os
+61:24:Attribute -> U
+61:24:Name -> Inst:tests.support.runtests.RuntimeVars | Class:tests.integration.files.file.base._modules.runtests_helpers.RUNTIME_VARS
+61:43:Name -> Tuple:0
+65:11:Call -> U
+65:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+65:11:Attribute -> Module:posixpath | Module:ntpath
+65:11:Name -> Module:os
+65:24:Attribute -> U | Const:bytes:b'.' | Const:str:'.'
+65:24:Name -> Inst:tests.support.runtests.RuntimeVars | Class:tests.integration.files.file.base._modules.runtests_helpers.RUNTIME_VARS
+65:51:Name -> Tuple:0
+72:4:Name -> ERR
+80:4:Name -> ERR
+99:11:Call -> U
+99:11:Attribute -> Func:salt.utils.platform.is_windows
+99:11:Attribute -> Module:salt.utils.platform
+99:11:Attribute -> Module:salt.utils
+99:11:Name -> Module:salt
+100:28:Call -> U
+100:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+100:28:Attribute -> Module:posixpath | Module:ntpath
+100:28:Name -> Module:os
+101:16:Attribute -> ERR
+101:16:Name -> Module:sys
+101:33:Call -> U
+101:33:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+101:33:Attribute -> Module:posixpath | Module:ntpath
+101:33:Name -> Module:os
+101:50:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+101:50:Name -> Module:sys
+104:28:Call -> U
+104:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+104:28:Attribute -> Module:posixpath | Module:ntpath
+104:28:Name -> Module:os
+105:16:Attribute -> ERR
+105:16:Name -> Module:sys
+105:40:Call -> U
+105:40:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+105:40:Attribute -> Module:posixpath | Module:ntpath
+105:40:Name -> Module:os
+105:57:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+105:57:Name -> Module:sys
+107:19:Call -> Const:bool:False | Const:bool:True | U
+107:19:Attribute -> Func:genericpath.exists | U
+107:19:Attribute -> Module:posixpath | Module:ntpath
+107:19:Name -> Module:os
+107:34:Name -> U
+108:23:Call -> U
+108:23:Attribute -> U
+108:23:Name -> U
+109:46:Call -> U
+109:46:Attribute -> BM:builtins.str.format
+110:24:Name -> U
+110:40:Attribute -> U
+110:40:Name -> Module:sys
+112:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+112:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+112:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+114:24:Name -> U
+115:24:Name -> U
+117:23:Call -> Const:bool:False | Const:bool:True | U
+117:23:Attribute -> Func:genericpath.exists | U
+117:23:Attribute -> Module:posixpath | Module:ntpath
+117:23:Name -> Module:os
+117:38:Name -> U
+118:40:Name -> U
+119:15:Call -> Const:bool:False | Const:bool:True | U
+119:15:Attribute -> Func:genericpath.exists | U
+119:15:Attribute -> Module:posixpath | Module:ntpath
+119:15:Name -> Module:os
+119:30:Name -> U
+120:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+120:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+120:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+120:66:Name -> U
+122:11:Name -> Class:builtins.AttributeError
+124:24:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+124:24:Name -> Module:sys
+125:11:Name -> U | Const:NoneType:None | Const:str:'/Users/adamraudonis/Desktop/Projects/pr

@@ -1,0 +1,1554 @@
+28:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:6:Attribute -> Func:logging.getLogger
+28:6:Name -> Module:logging
+28:24:Name -> Const:str:'tests.integration.modules.test_git' | Const:str:'__main__'
+32:10:Call -> Const:NoneType:None | U
+32:10:Attribute -> Func:shutil.which
+32:10:Name -> Module:shutil
+33:11:Name -> Const:NoneType:None | U
+34:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+34:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+34:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+36:10:Call -> Inst:subprocess.CompletedProcess
+36:10:Attribute -> Func:subprocess.run
+36:10:Name -> Module:subprocess
+38:15:Attribute -> Const:int:-1
+38:15:Name -> Module:subprocess
+47:18:Call -> U
+47:18:Attribute -> U
+47:18:Call -> U
+47:18:Attribute -> U
+47:18:Call -> U
+47:18:Attribute -> U
+47:18:Call -> U
+47:18:Attribute -> U
+47:18:Attribute -> Const:NoneType:None | U
+47:18:Name -> Inst:subprocess.CompletedProcess
+48:18:Call -> Inst:salt.utils.versions.LooseVersion
+48:18:Name -> Class:salt.utils.versions.LooseVersion
+48:31:Name -> U
+49:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+49:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+49:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+49:42:Name -> Inst:salt.utils.versions.LooseVersion
+50:11:Name -> Inst:salt.utils.versions.LooseVersion
+58:15:Call -> Const:bool:False | Inst:salt.utils.versions.LooseVersion
+58:15:Name -> Func:tests.integration.modules.test_git._git_version
+58:33:Call -> Inst:salt.utils.versions.LooseVersion
+58:33:Name -> Class:salt.utils.versions.LooseVersion
+59:11:Name -> Class:builtins.AttributeError
+63:1:Attribute -> U
+63:1:Attribute -> U
+63:1:Name -> U
+64:1:Call -> U
+64:1:Attribute -> U
+64:1:Attribute -> U
+64:1:Name -> U
+65:20:Name -> Class:tests.support.case.ModuleCase
+67:8:Call -> U
+67:8:Attribute -> BM:unittest.case.TestCase.setUp
+67:8:Call -> Super
+67:8:Name -> Class:builtins.super
+68:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+68:20:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+68:20:Attribute -> Func:tempfile.mkdtemp
+68:20:Name -> Module:tempfile
+68:41:Attribute -> U
+68:41:Name -> Inst:tests.support.runtests.RuntimeVars
+69:8:Call -> Const:NoneType:None
+69:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+69:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+69:24:Attribute -> Func:shutil.rmtree
+69:24:Name -> Module:shutil
+69:39:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+69:39:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+70:8:Call -> Const:NoneType:None
+70:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+70:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+70:24:Name -> Func:builtins.delattr
+70:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+71:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+72:8:Call -> Const:NoneType:None
+72:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+72:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+72:24:Name -> Func:builtins.delattr
+72:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+73:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+74:8:Call -> Const:NoneType:None
+74:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+74:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+74:24:Name -> Func:builtins.delattr
+74:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+75:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+76:8:Call -> Const:NoneType:None
+76:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+76:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+76:24:Name -> Func:builtins.delattr
+76:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+77:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+78:8:Call -> Const:NoneType:None
+78:8:Attribute -> BM:unittest.case.TestCase.addCleanup
+78:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+78:24:Name -> Func:builtins.delattr
+78:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+79:23:Attribute -> Tuple:2
+79:23:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+80:23:Call -> Inst:pathlib.Path
+80:23:Attribute -> Class:pathlib.Path
+80:23:Name -> Module:pathlib
+80:36:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+80:36:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+80:49:Name -> Const:str:'' | Const:str:'qux'
+81:12:Call -> U
+81:12:Attribute -> U
+81:12:Name -> U
+82:28:Attribute -> Tuple:4
+82:28:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+83:21:Call -> U
+83:21:Attribute -> Func:salt.utils.files.fopen
+83:21:Attribute -> Module:salt.utils.files
+83:21:Attribute -> Module:salt.utils
+83:21:Name -> Module:salt
+83:44:Call -> Const:str:''
+83:44:Name -> Class:builtins.str
+83:48:Name -> U
+83:59:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz' | Const:str:'питон'
+84:20:Call -> U
+84:20:Attribute -> U
+84:20:Name -> U
+84:30:Call -> Const:bytes:b''
+84:30:Attribute -> BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode
+84:59:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz' | Const:str:'питон'
+86:13:Call -> U
+86:13:Attribute -> U
+86:13:Attribute -> U
+86:13:Name -> U
+86:39:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+86:39:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+88:12:Call -> Const:int:0
+88:12:Attribute -> Func:subprocess.check_call
+88:12:Name -> Module:subprocess
+88:61:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+88:61:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+96:27:Call -> Inst:subprocess.Popen
+96:27:Attribute -> Class:subprocess.Popen
+96:27:Name -> Module:subprocess
+97:59:Name -> Const:str:'user.name' | Const:str:'user.email'
+98:27:Attribute -> Const:int:-1
+98:27:Name -> Module:subprocess
+99:27:Attribute -> Const:int:-1
+99:27:Name -> Module:subprocess
+101:19:Call -> Const:int:0
+101:19:Attribute -> BM:subprocess.Popen.wait
+101:19:Name -> Inst:subprocess.Popen
+103:20:Call -> Const:int:0
+103:20:Attribute -> Func:subprocess.check_call
+103:20:Name -> Module:subprocess
+103:72:Name -> Const:str:'user.name' | Const:str:'user.email'
+103:77:Name -> Const:str:'Jenkins' | Const:str:'qa@saltstack.com'
+105:12:Call -> Const:int:0
+105:12:Attribute -> Func:subprocess.check_call
+105:12:Name -> Module:subprocess
+106:12:Call -> Const:int:0
+106:12:Attribute -> Func:subprocess.check_call
+106:12:Name -> Module:subprocess
+110:12:Call -> Const:int:0
+110:12:Attribute -> Func:subprocess.check_call
+110:12:Name -> Module:subprocess
+110:55:Attribute -> Tuple:1
+110:55:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+112:12:Call -> Const:int:0
+112:12:Attribute -> Func:subprocess.check_call
+112:12:Name -> Module:subprocess
+113:53:Attribute -> Tuple:2
+113:53:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+116:17:Call -> U
+116:17:Attribute -> Func:salt.utils.files.fopen
+116:17:Attribute -> Module:salt.utils.files
+116:17:Attribute -> Module:salt.utils
+116:17:Name -> Module:salt
+116:40:Attribute -> Tuple:4
+116:40:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+117:16:Call -> U
+117:16:Attribute -> U
+117:16:Name -> U
+117:26:Call -> U
+117:26:Attribute -> Func:salt.utils.stringutils.to_str
+117:26:Attribute -> Module:salt.utils.stringutils
+117:26:Attribute -> Module:salt.utils
+117:26:Name -> Module:salt
+119:12:Call -> Const:int:0
+119:12:Attribute -> Func:subprocess.check_call
+119:12:Name -> Module:subprocess
+125:41:Attribute -> Tuple:4
+125:41:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+126:20:Attribute -> Tuple:4
+126:20:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+130:12:Call -> Const:int:0
+130:12:Attribute -> Func:subprocess.check_call
+130:12:Name -> Module:subprocess
+138:15:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+138:15:Attribute -> Func:salt.utils.data.decode
+138:15:Attribute -> Module:salt.utils.data
+138:15:Attribute -> Module:salt.utils
+138:15:Name -> Module:salt
+138:38:Call -> U
+138:38:Attribute -> BM:tests.support.case.ModuleCase.run_function
+138:38:Call -> Super
+138:38:Name -> Class:builtins.super
+138:60:Name -> Tuple:0
+138:68:Name -> Dict:0
+140:5:Attribute -> U
+140:5:Attribute -> U
+140:5:Name -> U
+147:22:Call -> Inst:pathlib.Path
+147:22:Attribute -> Class:pathlib.Path
+147:22:Name -> Module:pathlib
+147:35:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+147:35:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+147:48:Name -> Const:str:'quux'
+148:8:Call -> U
+148:8:Attribute -> U
+148:8:Name -> U
+149:17:Call -> Const:str:''
+149:17:Name -> Class:builtins.str
+149:21:Name -> U
+149:35:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz' | Const:str:'питон'
+149:47:Attribute -> Tuple:4
+149:47:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+150:25:Call -> U
+150:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+150:25:Attribute -> Module:posixpath | Module:ntpath
+150:25:Name -> Module:os
+150:38:Name -> Const:str:'quux'
+150:46:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz' | Const:str:'питон'
+150:58:Attribute -> Tuple:4
+150:58:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+151:20:Name -> U
+152:17:Call -> U
+152:17:Attribute -> Func:salt.utils.files.fopen
+152:17:Attribute -> Module:salt.utils.files
+152:17:Attribute -> Module:salt.utils
+152:17:Name -> Module:salt
+152:40:Name -> U
+153:16:Call -> U
+153:16:Attribute -> U
+153:16:Name -> U
+153:26:Call -> Const:bytes:b''
+153:26:Attribute -> BM:builtins.str.encode
+153:68:Name -> U
+154:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+154:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+154:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+154:44:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+154:44:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+154:55:Name -> Const:str:'quux'
+155:14:Call -> Const:str:''
+155:14:Attribute -> BM:builtins.str.join
+155:24:Call -> ERR
+155:24:Name -> Func:builtins.sorted
+155:39:Name -> U
+155:53:Name -> U
+156:11:Call -> U
+156:11:Attribute -> Func:salt.utils.platform.is_windows
+156:11:Attribute -> Module:salt.utils.platform
+156:11:Attribute -> Module:salt.utils
+156:11:Name -> Module:salt
+157:18:Call -> Const:str:''
+157:18:Attribute -> BM:builtins.str.replace
+157:18:Name -> Const:str:''
+158:8:Call -> Const:NoneType:None
+158:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+158:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+158:25:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+158:30:Name -> Const:str:'' | Const:str:''
+160:5:Attribute -> U
+160:5:Attribute -> U
+160:5:Name -> U
+166:20:Call -> U
+166:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+166:20:Attribute -> Module:posixpath | Module:ntpath
+166:20:Name -> Module:os
+166:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+166:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+166:44:Name -> Const:str:'quux'
+167:13:Call -> U
+167:13:Attribute -> Func:salt.utils.files.fopen
+167:13:Attribute -> Module:salt.utils.files
+167:13:Attribute -> Module:salt.utils
+167:13:Name -> Module:salt
+167:36:Name -> U
+168:12:Call -> U
+168:12:Attribute -> U
+168:12:Name -> U
+169:16:Call -> U
+169:16:Attribute -> Func:salt.utils.stringutils.to_str
+169:16:Attribute -> Module:salt.utils.stringutils
+169:16:Attribute -> Module:salt.utils
+169:16:Name -> Module:salt
+170:49:Name -> Const:str:'quux'
+173:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+173:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+173:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+173:44:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+173:44:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+173:55:Name -> Const:str:'quux'
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+174:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+174:25:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+174:38:Name -> Const:str:'quux'
+176:5:Attribute -> U
+176:5:Attribute -> U
+176:5:Name -> U
+181:22:Call -> U
+181:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+181:22:Attribute -> Module:posixpath | Module:ntpath
+181:22:Name -> Module:os
+181:35:Attribute -> U
+181:35:Name -> Inst:tests.support.runtests.RuntimeVars
+183:12:Call -> Const:NoneType:None
+183:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+183:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+184:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+184:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+184:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+185:36:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+185:36:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+185:47:Name -> U
+188:12:Call -> Const:NoneType:None
+188:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+188:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+188:28:Call -> Const:bool:True | Const:bool:False
+188:28:Attribute -> Func:tarfile.is_tarfile
+188:28:Name -> Module:tarfile
+188:47:Name -> U
+189:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+189:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+189:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+189:50:Name -> U
+190:17:Call -> Inst:contextlib.closing
+190:17:Name -> Class:contextlib.closing
+190:25:Call -> U | Inst:tarfile.TarFile
+190:25:Attribute -> BM:tarfile.TarFile.open
+190:25:Name -> Module:tarfile
+190:38:Name -> U
+191:16:Call -> Const:NoneType:None
+191:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+191:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+192:20:Call -> ERR
+192:20:Name -> Func:builtins.sorted
+192:27:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+192:27:Attribute -> Func:salt.utils.data.decode
+192:27:Attribute -> Module:salt.utils.data
+192:27:Attribute -> Module:salt.utils
+192:27:Name -> Module:salt
+192:50:Call -> U
+192:50:Attribute -> U
+192:50:Name -> U
+193:20:Call -> ERR
+193:20:Name -> Func:builtins.sorted
+210:16:Call -> ERR
+210:16:Attribute -> Func:posix.unlink
+210:16:Name -> Module:os
+210:26:Name -> U
+211:19:Name -> Class:builtins.OSError
+214:5:Attribute -> U
+214:5:Attribute -> U
+214:5:Name -> U
+220:22:Call -> U
+220:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+220:22:Attribute -> Module:posixpath | Module:ntpath
+220:22:Name -> Module:os
+220:35:Attribute -> U
+220:35:Name -> Inst:tests.support.runtests.RuntimeVars
+222:12:Call -> Const:NoneType:None
+222:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+222:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+223:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+223:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+223:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+225:21:Call -> U
+225:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+225:21:Attribute -> Module:posixpath | Module:ntpath
+225:21:Name -> Module:os
+225:34:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+225:34:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+225:53:Name -> U
+229:12:Call -> Const:NoneType:None
+229:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+229:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+229:28:Call -> Const:bool:True | Const:bool:False
+229:28:Attribute -> Func:tarfile.is_tarfile
+229:28:Name -> Module:tarfile
+229:47:Name -> U
+230:17:Call -> Inst:contextlib.closing
+230:17:Name -> Class:contextlib.closing
+230:25:Call -> U | Inst:tarfile.TarFile
+230:25:Attribute -> BM:tarfile.TarFile.open
+230:25:Name -> Module:tarfile
+230:38:Name -> U
+231:16:Call -> Const:NoneType:None
+231:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+231:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+232:20:Call -> ERR
+232:20:Name -> Func:builtins.sorted
+232:27:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+232:27:Attribute -> Func:salt.utils.data.decode
+232:27:Attribute -> Module:salt.utils.data
+232:27:Attribute -> Module:salt.utils
+232:27:Name -> Module:salt
+232:50:Call -> U
+232:50:Attribute -> U
+232:50:Name -> U
+233:20:Call -> ERR
+233:20:Name -> Func:builtins.sorted
+237:16:Call -> ERR
+237:16:Attribute -> Func:posix.unlink
+237:16:Name -> Module:os
+237:26:Name -> U
+238:19:Name -> Class:builtins.OSError
+241:5:Attribute -> U
+241:5:Attribute -> U
+241:5:Name -> U
+247:8:Call -> Const:NoneType:None
+247:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+247:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+247:24:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+247:24:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+247:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+247:57:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+247:57:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+247:68:Attribute -> Tuple:2
+247:68:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+248:8:Call -> Const:NoneType:None
+248:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+248:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+249:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+249:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+249:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+250:31:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+250:31:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+250:42:Name -> Const:str:'ihavebeenrenamed'
+250:72:Attribute -> Tuple:2
+250:72:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+253:8:Call -> Const:NoneType:None
+253:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+253:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+254:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+254:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+254:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+254:45:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+254:45:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+254:56:Name -> Const:str:'ihavebeenrenamed'
+257:5:Attribute -> U
+257:5:Attribute -> U
+257:5:Name -> U
+263:8:Call -> Const:NoneType:None
+263:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+263:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+264:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+264:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+264:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+265:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+265:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+265:66:Name -> Const:str:'iamanothernewbranch'
+267:43:Name -> Const:str:'iamanothernewbranch'
+269:8:Call -> Const:NoneType:None
+269:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+269:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+271:15:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+271:15:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+271:15:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+271:50:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+271:50:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+274:5:Attribute -> U
+274:5:Attribute -> U
+274:5:Name -> U
+280:8:Call -> Const:NoneType:None
+280:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+280:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+281:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+281:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+281:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+282:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+282:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+282:68:Name -> Const:str:'iamanothernewbranch'
+284:43:Name -> Const:str:'iamanothernewbranch'
+286:8:Call -> Const:NoneType:None
+286:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+286:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+288:15:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+288:15:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+288:15:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+288:50:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+288:50:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+291:5:Attribute -> U
+291:5:Attribute -> U
+291:5:Name -> U
+296:27:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+296:27:Attribute -> Func:tempfile.mkdtemp
+296:27:Name -> Module:tempfile
+296:48:Attribute -> U
+296:48:Name -> Inst:tests.support.runtests.RuntimeVars
+297:8:Call -> Const:NoneType:None
+297:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+297:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+297:24:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+297:24:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+297:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+297:56:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+297:74:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+297:74:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+299:8:Call -> Const:NoneType:None | Const:NoneType:None
+299:8:Attribute -> Func:shutil.rmtree
+299:8:Name -> Module:shutil
+299:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+301:5:Attribute -> U
+301:5:Attribute -> U
+301:5:Name -> U
+306:27:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+306:27:Attribute -> Func:tempfile.mkdtemp
+306:27:Name -> Module:tempfile
+306:48:Attribute -> U
+306:48:Name -> Inst:tests.support.runtests.RuntimeVars
+307:21:Call -> U
+307:21:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+307:21:Attribute -> Module:posixpath | Module:ntpath
+307:21:Name -> Module:os
+307:38:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+307:38:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+309:8:Call -> Const:NoneType:None
+309:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+309:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+310:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+310:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+310:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+311:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+311:48:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+311:48:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+311:65:Name -> U
+315:8:Call -> Const:NoneType:None | Const:NoneType:None
+315:8:Attribute -> Func:shutil.rmtree
+315:8:Name -> Module:shutil
+315:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+317:5:Attribute -> U
+317:5:Attribute -> U
+317:5:Name -> U
+327:13:Call -> U
+327:13:Attribute -> Func:salt.utils.files.fopen
+327:13:Attribute -> Module:salt.utils.files
+327:13:Attribute -> Module:salt.utils
+327:13:Name -> Module:salt
+327:36:Call -> U
+327:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+327:36:Attribute -> Module:posixpath | Module:ntpath
+327:36:Name -> Module:os
+327:49:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+327:49:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+327:60:Name -> Const:str:'foo'
+328:12:Call -> U
+328:12:Attribute -> U
+328:12:Name -> U
+330:8:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+330:8:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+330:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+330:38:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+330:38:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+330:49:Name -> Const:str:'foo'
+332:38:Name -> Const:str:'foo'
+333:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+333:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+333:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+333:47:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+333:47:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+333:62:Name -> Const:str:'Add a line to foo'
+335:8:Call -> Const:NoneType:None
+335:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+335:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+335:24:Call -> U
+335:24:Name -> Class:builtins.bool
+335:29:Call -> U
+335:29:Attribute -> Func:re.search
+335:29:Name -> Module:re
+335:39:Name -> Const:str:'^\\[master [0-9a-f]+\\] '
+335:57:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+336:8:Call -> Const:NoneType:None
+336:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+336:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+336:24:Call -> U
+336:24:Name -> Class:builtins.bool
+336:29:Name -> Const:str:'Add a line to foo'
+336:43:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+338:13:Call -> U
+338:13:Attribute -> Func:salt.utils.files.fopen
+338:13:Attribute -> Module:salt.utils.files
+338:13:Attribute -> Module:salt.utils
+338:13:Name -> Module:salt
+338:36:Call -> U
+338:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+338:36:Attribute -> Module:posixpath | Module:ntpath
+338:36:Name -> Module:os
+338:49:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+338:49:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+338:60:Name -> Const:str:'foo'
+339:12:Call -> U
+339:12:Attribute -> U
+339:12:Name -> U
+341:44:Name -> Const:str:'foo'
+342:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+342:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+342:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+343:27:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+343:27:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+343:42:Name -> Const:str:'Add another line to foo'
+343:67:Name -> Const:str:'foo'
+345:8:Call -> Const:NoneType:None
+345:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+345:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+345:24:Call -> U
+345:24:Name -> Class:builtins.bool
+345:29:Call -> U
+345:29:Attribute -> Func:re.search
+345:29:Name -> Module:re
+345:39:Name -> Const:str:'^\\[master [0-9a-f]+\\] '
+345:57:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+346:8:Call -> Const:NoneType:None
+346:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+346:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+346:24:Call -> U
+346:24:Name -> Class:builtins.bool
+346:29:Name -> Const:str:'Add another line to foo'
+346:43:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+348:5:Attribute -> U
+348:5:Attribute -> U
+348:5:Name -> U
+363:23:Name -> Tuple:2
+364:21:Call -> U
+364:21:Attribute -> Func:salt.utils.files.fopen
+364:21:Attribute -> Module:salt.utils.files
+364:21:Attribute -> Module:salt.utils
+364:21:Name -> Module:salt
+364:44:Attribute -> Const:str:'/dev/null'
+364:44:Name -> Module:os
+366:24:Call -> Const:int:0
+366:24:Attribute -> Func:subprocess.check_call
+366:24:Name -> Module:subprocess
+366:46:Name -> List:4 | List:5
+366:58:Name -> U
+367:27:Attribute -> Class:subprocess.CalledProcessError
+367:27:Name -> Module:subprocess
+372:8:Call -> Const:NoneType:None
+372:8:Name -> Func:tests.integration.modules.test_git.GitModuleTest.test_config._clear_config
+374:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+374:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+374:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+375:12:Call -> Const:NoneType:None
+375:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+375:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+377:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+377:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+377:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+380:26:Name -> Dict:2
+381:29:Name -> Dict:2
+382:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+382:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+385:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+385:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+385:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+386:12:Call -> Const:NoneType:None
+386:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+386:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+388:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+388:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+388:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+391:26:Name -> Dict:2
+394:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+394:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+394:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+395:12:Call -> Const:NoneType:None
+395:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+395:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+396:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+396:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+396:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+399:26:Name -> Dict:2
+400:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+400:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+402:16:Name -> Dict:2
+404:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+404:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+404:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+405:12:Call -> Const:NoneType:None
+405:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+405:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+406:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+406:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+406:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+409:26:Name -> Dict:2
+412:16:Name -> Dict:2
+414:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+414:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+414:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+415:12:Call -> Const:NoneType:None
+415:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+415:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+416:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+416:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+416:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+419:29:Name -> Dict:2
+420:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+420:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+422:16:Name -> Dict:2
+424:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+424:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+424:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+425:12:Call -> Const:NoneType:None
+425:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+425:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+426:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+426:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+426:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+429:29:Name -> Dict:2
+432:16:Name -> Dict:2
+434:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+434:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+434:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+435:12:Call -> Const:NoneType:None
+435:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+435:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+436:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+436:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+436:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+436:72:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+436:72:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+437:16:Name -> Dict:2
+439:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+439:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+439:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+440:12:Call -> Const:NoneType:None
+440:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+440:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+441:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+441:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+441:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+441:71:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+441:71:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+442:16:Name -> Dict:2
+444:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+444:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+444:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+445:12:Call -> Const:NoneType:None
+445:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+445:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+446:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+446:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+446:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+447:57:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+447:57:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+449:16:Name -> Dict:2
+451:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+451:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+451:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+452:12:Call -> Const:NoneType:None
+452:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+452:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+453:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+453:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+453:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+454:16:Name -> Dict:2
+456:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+456:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+456:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+457:12:Call -> Const:NoneType:None
+457:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+457:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+458:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+458:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+458:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+459:16:Name -> Dict:2
+461:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+461:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+461:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+462:12:Call -> Const:NoneType:None
+462:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+462:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+463:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+463:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+463:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+466:16:Name -> Dict:2
+468:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+468:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+468:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+469:12:Call -> Const:NoneType:None
+469:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+469:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+470:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+470:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+470:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+471:73:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+471:73:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+473:16:Name -> Dict:2
+475:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+475:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+475:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+476:12:Call -> Const:NoneType:None
+476:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+476:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+477:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+477:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+477:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+480:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+480:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+483:16:Name -> Dict:2
+485:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+485:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+485:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+486:12:Call -> Const:NoneType:None
+486:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+486:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+487:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+487:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+487:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+491:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+491:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+493:31:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz'
+493:42:Name -> Dict:2
+493:75:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz'
+495:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+495:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+495:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+496:12:Call -> Const:NoneType:None
+496:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+496:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+497:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+497:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+497:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+501:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+501:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+504:31:Name -> Const:str:'abc' | Const:str:'def' | Const:str:'ghi'
+504:42:Name -> Dict:2
+504:76:Name -> Const:str:'abc' | Const:str:'def' | Const:str:'ghi'
+510:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+510:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+510:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+511:12:Call -> Const:NoneType:None
+511:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+511:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+512:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+512:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+512:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+515:24:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+515:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+518:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+518:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+518:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+519:12:Call -> Const:NoneType:None
+519:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+519:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+520:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+520:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+520:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+521:59:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+521:59:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+524:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+524:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+524:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+525:12:Call -> Const:NoneType:None
+525:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+525:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+526:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+526:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+526:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+530:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+530:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+530:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+531:12:Call -> Const:NoneType:None
+531:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+531:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+532:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+532:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+532:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+537:12:Call -> Const:NoneType:None
+537:12:Name -> Func:tests.integration.modules.test_git.GitModuleTest.test_config._clear_config
+539:5:Attribute -> U
+539:5:Attribute -> U
+539:5:Name -> U
+544:8:Call -> Const:NoneType:None
+544:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+544:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+544:25:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+544:25:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+544:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+544:66:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+544:66:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+546:5:Attribute -> U
+546:5:Attribute -> U
+546:5:Name -> U
+551:8:Call -> Const:NoneType:None
+551:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+551:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+551:25:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+551:25:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+551:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+551:60:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+551:60:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+551:73:Attribute -> Tuple:1
+551:73:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+556:5:Attribute -> U
+556:5:Attribute -> U
+556:5:Name -> U
+561:19:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+561:19:Attribute -> Func:tempfile.mkdtemp
+561:19:Name -> Module:tempfile
+561:40:Attribute -> U
+561:40:Name -> Inst:tests.support.runtests.RuntimeVars
+570:11:Call -> U
+570:11:Attribute -> Func:salt.utils.platform.is_windows
+570:11:Attribute -> Module:salt.utils.platform
+570:11:Attribute -> Module:salt.utils
+570:11:Name -> Module:salt
+571:23:Call -> Const:bytes:b'' | Const:str:'' | U
+571:23:Attribute -> BM:builtins.bytes.replace | BM:builtins.str.replace | U | BM:builtins.bytes.replace | BM:builtins.str.replace
+571:23:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+574:22:Call -> U
+574:22:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+574:22:Attribute -> Module:posixpath | Module:ntpath
+574:22:Name -> Module:os
+574:39:Name -> Const:bytes:b'' | Const:str:'' | U
+577:22:Call -> U
+577:22:Attribute -> U
+577:22:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+577:22:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+577:22:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+577:53:Name -> Const:bytes:b'' | Const:str:'' | U
+579:12:Call -> Const:NoneType:None
+579:12:Attribute -> BM:unittest.case.TestCase.assertIn
+579:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+579:26:Call -> Const:str:''
+579:26:Attribute -> BM:builtins.str.lower
+579:73:Name -> U
+580:12:Call -> Const:NoneType:None
+580:12:Attribute -> BM:unittest.case.TestCase.assertIn
+580:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+580:26:Name -> U
+580:35:Name -> U
+583:12:Call -> Const:NoneType:None
+583:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+583:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+584:16:Call -> U
+584:16:Attribute -> U
+584:16:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+584:16:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+584:16:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+584:47:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+585:16:Call -> Const:str:''
+585:16:Attribute -> BM:builtins.str.lower | BM:builtins.str.lower | BM:builtins.str.lower | BM:builtins.str.lower | BM:builtins.str.lower
+585:55:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+588:8:Call -> Const:NoneType:None | Const:NoneType:None
+588:8:Attribute -> Func:shutil.rmtree
+588:8:Name -> Module:shutil
+588:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Const:bytes:b'' | Const:str:''
+590:5:Attribute -> U
+590:5:Attribute -> U
+590:5:Name -> U
+595:8:Call -> Const:NoneType:None
+595:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+595:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+596:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+596:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+596:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+596:52:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+596:52:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+596:65:Call -> ERR
+596:65:Name -> Func:builtins.sorted
+596:72:Attribute -> Tuple:2
+596:72:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+599:5:Attribute -> U
+599:5:Attribute -> U
+599:5:Name -> U
+604:8:Call -> Const:NoneType:None
+604:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+604:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+605:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+605:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+605:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+605:48:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+605:48:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+605:61:Call -> ERR
+605:61:Name -> Func:builtins.sorted
+605:68:Attribute -> Tuple:1
+605:68:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+611:5:Attribute -> U
+611:5:Attribute -> U
+611:5:Name -> U
+619:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+619:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+619:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+619:46:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+619:46:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+619:62:Attribute -> Tuple:2
+619:62:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+621:8:Call -> Const:NoneType:None
+621:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+621:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+621:42:Call -> U
+621:42:Attribute -> U
+621:42:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+623:5:Attribute -> U
+623:5:Attribute -> U
+623:5:Name -> U
+631:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+631:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+631:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+631:54:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+631:54:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+633:8:Call -> Const:NoneType:None
+633:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+633:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+633:24:Call -> ERR
+633:24:Name -> Func:builtins.len
+633:28:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+635:21:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+635:21:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+635:21:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+636:29:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+636:29:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+636:45:Attribute -> Tuple:2
+636:45:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+639:8:Call -> Const:NoneType:None
+639:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+639:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+639:24:Call -> ERR
+639:24:Name -> Func:builtins.len
+639:28:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+643:8:Call -> Const:NoneType:None
+643:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+643:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+644:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+644:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+644:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+645:35:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+645:35:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+645:52:Call -> Const:str:''
+645:52:Attribute -> BM:builtins.str.join
+645:62:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+645:72:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+647:12:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+651:14:Call -> U
+651:14:Attribute -> U
+651:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+651:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+651:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+652:31:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+652:31:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+652:42:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+652:52:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+654:8:Call -> Const:NoneType:None
+654:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+654:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+654:24:Call -> ERR
+654:24:Name -> Func:builtins.len
+654:29:Name -> U
+654:40:Name -> U
+654:47:Call -> U
+654:47:Attribute -> U
+654:47:Name -> U
+660:5:Attribute -> U
+660:5:Attribute -> U
+660:5:Name -> U
+666:8:Call -> Const:NoneType:None
+666:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+666:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+668:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+668:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+668:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+668:47:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+668:47:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+668:63:Attribute -> Tuple:2
+668:63:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+671:20:Call -> U
+671:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+671:20:Attribute -> Module:posixpath | Module:ntpath
+671:20:Name -> Module:os
+671:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+671:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+671:44:Attribute -> Tuple:4
+671:44:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+672:13:Call -> U
+672:13:Attribute -> Func:salt.utils.files.fopen
+672:13:Attribute -> Module:salt.utils.files
+672:13:Attribute -> Module:salt.utils
+672:13:Name -> Module:salt
+672:36:Name -> U
+673:12:Call -> U
+673:12:Attribute -> U
+673:12:Name -> U
+675:8:Call -> Const:NoneType:None
+675:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+675:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+677:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+677:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+677:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+679:17:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+679:17:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+679:48:Attribute -> Tuple:4
+679:48:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+680:25:Attribute -> Tuple:4
+680:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+684:8:Call -> Const:NoneType:None
+684:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+684:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+686:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+686:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+686:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+686:47:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+686:47:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+686:63:Attribute -> Tuple:2
+686:63:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+691:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+691:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+691:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+691:47:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+691:47:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+692:8:Call -> Const:NoneType:None
+692:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+692:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+692:34:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+693:8:Call -> Const:NoneType:None
+693:8:Attribute -> BM:unittest.case.TestCase.assertNotIn
+693:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+693:39:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+699:5:Attribute -> U
+699:5:Attribute -> U
+699:5:Name -> U
+712:8:Call -> Const:NoneType:None
+712:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+712:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+713:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+713:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+713:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+714:35:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+714:35:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+714:46:Name -> Dict:2
+716:12:Name -> Dict:2
+718:8:Call -> Const:NoneType:None
+718:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+718:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+719:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+719:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+719:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+721:17:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+721:17:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+721:28:Name -> Dict:2
+723:25:Name -> Dict:2
+725:12:Name -> Dict:2
+727:8:Call -> Const:NoneType:None
+727:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+727:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+727:25:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+727:25:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+727:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+727:59:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+727:59:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+727:72:Name -> Dict:2
+729:5:Attribute -> U
+729:5:Attribute -> U
+729:5:Name -> U
+737:8:Call -> Const:NoneType:None
+737:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+737:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+739:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+739:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+739:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+739:54:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+739:54:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+739:70:Attribute -> Tuple:2
+739:70:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+742:8:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+742:8:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+742:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+742:40:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+742:40:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+744:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+744:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+744:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+744:54:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+744:54:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+746:8:Call -> Const:NoneType:None
+746:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+746:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+746:24:Call -> ERR
+746:24:Name -> Func:builtins.len
+746:28:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+748:21:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+748:21:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+748:21:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+748:56:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+748:56:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+750:8:Call -> Const:NoneType:None
+750:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+750:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+750:24:Call -> ERR
+750:24:Name -> Func:builtins.len
+750:28:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+752:8:Call -> Const:NoneType:None
+752:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+752:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+752:25:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+752:35:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+754:5:Attribute -> U
+754:5:Attribute -> U
+754:5:Name -> U
+760:8:Call -> Const:NoneType:None
+760:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+760:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+761:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+761:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+761:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+762:34:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+762:34:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+769:5:Attribute -> U
+769:5:Attribute -> U
+769:5:Name -> U
+774:22:Attribute -> Tuple:4
+774:22:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+775:21:Attribute -> Tuple:2
+775:21:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+777:8:Call -> Const:NoneType:None
+777:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+777:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+778:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+778:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+778:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+778:41:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+778:41:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+778:52:Name -> Const:str:'foo'
+779:21:Name -> Const:str:'foo'
+782:19:Call -> Const:str:''
+782:19:Attribute -> BM:builtins.str.join
+783:12:Call -> ERR
+783:12:Name -> Func:builtins.sorted
+783:28:Call -> U
+783:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+783:28:Attribute -> Module:posixpath | Module:ntpath
+783:28:Name -> Module:os
+783:41:Name -> Const:str:'qux'
+783:53:Name -> Const:str:'foo' | Const:str:'bar' | Const:str:'baz' | Const:str:'питон'
+783:71:Attribute -> Tuple:4
+783:71:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+785:11:Call -> U
+785:11:Attribute -> Func:salt.utils.platform.is_windows
+785:11:Attribute -> Module:salt.utils.platform
+785:11:Attribute -> Module:salt.utils
+785:11:Name -> Module:salt
+786:23:Call -> Const:str:''
+786:23:Attribute -> BM:builtins.str.replace
+786:23:Name -> Const:str:''
+787:8:Call -> Const:NoneType:None
+787:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+787:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+788:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+788:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+788:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+788:41:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+788:41:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+788:52:Name -> Const:str:'qux'
+788:77:Name -> Const:str:'' | Const:str:''
+791:5:Attribute -> U
+791:5:Attribute -> U
+791:5:Name -> U
+798:20:Call -> U
+798:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+798:20:Attribute -> Module:posixpath | Module:ntpath
+798:20:Name -> Module:os
+798:33:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+798:33:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+798:44:Attribute -> Tuple:4
+798:44:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+799:13:Call -> U
+799:13:Attribute -> Func:salt.utils.files.fopen
+799:13:Attribute -> Module:salt.utils.files
+799:13:Attribute -> Module:salt.utils
+799:13:Name -> Module:salt
+799:36:Name -> U
+800:12:Call -> U
+800:12:Attribute -> U
+800:12:Name -> U
+801:8:Call -> Const:NoneType:None
+801:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+801:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+801:39:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+801:39:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+801:39:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+801:71:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+801:71:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+803:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+803:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+803:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+803:46:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+803:46:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+804:8:Call -> Const:NoneType:None
+804:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+804:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+804:39:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+805:8:Call -> Const:NoneType:None
+805:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+805:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+805:24:Call -> ERR
+805:24:Name -> Func:builtins.len
+805:28:Call -> U
+805:28:Attribute -> U
+805:28:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+807:8:Call -> Const:NoneType:None
+807:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+807:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+809:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+809:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+809:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+810:30:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+810:30:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+814:8:Call -> Const:NoneType:None
+814:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+814:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+816:19:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+816:19:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+816:19:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+817:30:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+817:30:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+821:5:Attribute -> U
+821:5:Attribute -> U
+821:5:Name -> U
+832:24:Name -> Dict:4
+833:17:Call -> U
+833:17:Attribute -> Func:salt.utils.files.fopen
+833:17:Attribute -> Module:salt.utils.files
+833:17:Attribute -> Module:salt.utils
+833:17:Name -> Module:salt
+833:40:Call -> U
+833:40:Attribute -> Func:posixpath.join | Func:ntpath.join
+833:40:Attribute -> Module:posixpath | Module:ntpath
+833:40:Name -> Module:os
+833:53:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+833:53:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+833:64:Name -> Const:str:'foo'
+834:16:Call -> U
+834:16:Attribute -> U
+834:16:Name -> U
+835:24:Name -> Dict:4
+836:17:Call -> U
+836:17:Attribute -> Func:salt.utils.files.fopen
+836:17:Attribute -> Module:salt.utils.files
+836:17:Attribute -> Module:salt.utils
+836:17:Name -> Module:salt
+836:40:Call -> U
+836:40:Attribute -> Func:posixpath.join | Func:ntpath.join
+836:40:Attribute -> Module:posixpath | Module:ntpath
+836:40:Name -> Module:os
+836:53:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+836:53:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+836:64:Name -> Const:str:'thisisdefinitelyanewfile'
+837:16:Call -> U
+837:16:Attribute -> U
+837:16:Name -> U
+838:20:Call -> U
+838:20:Attribute -> Func:salt.utils.stringutils.to_str
+838:20:Attribute -> Module:salt.utils.stringutils
+838:20:Attribute -> Module:salt.utils
+838:20:Name -> Module:salt
+839:52:Name -> Const:str:'thisisdefinitelyanewfile'
+843:12:Call -> Const:NoneType:None
+843:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+843:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+844:31:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+844:31:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+844:31:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+844:61:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+844:61:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+844:72:Name -> Const:str:'thisisdefinitelyanewfile'
+846:24:Name -> Dict:4
+847:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+847:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+847:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+847:41:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+847:41:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+847:52:Name -> Const:str:'bar'
+848:24:Name -> Dict:4
+849:17:Call -> U
+849:17:Attribute -> Func:salt.utils.files.fopen
+849:17:Attribute -> Module:salt.utils.files
+849:17:Attribute -> Module:salt.utils
+849:17:Name -> Module:salt
+849:40:Call -> U
+849:40:Attribute -> Func:posixpath.join | Func:ntpath.join
+849:40:Attribute -> Module:posixpath | Module:ntpath
+849:40:Name -> Module:os
+849:53:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+849:53:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+849:64:Name -> Const:str:'thisisalsoanewfile'
+850:16:Call -> U
+850:16:Attribute -> U
+850:16:Name -> U
+851:20:Call -> U
+851:20:Attribute -> Func:salt.utils.stringutils.to_str
+851:20:Attribute -> Module:salt.utils.stringutils
+851:20:Attribute -> Module:salt.utils
+851:20:Name -> Module:salt
+852:52:Name -> Const:str:'thisisalsoanewfile'
+855:8:Call -> Const:NoneType:None
+855:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+855:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+855:25:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+855:25:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+855:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+855:58:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+855:58:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+855:71:Name -> Dict:4
+859:5:Attribute -> U
+859:5:Attribute -> U
+859:5:Name -> U
+864:8:Call -> Const:NoneType:None
+864:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+864:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+865:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+865:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+865:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+865:51:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+865:51:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+869:5:Call -> U
+869:5:Attribute -> U
+869:5:Attribute -> U
+869:5:Name -> U
+870:12:Call -> U | Const:bool:False
+870:12:Name -> Func:tests.integration.modules.test_git._worktrees_supported
+873:5:Attribute -> U
+873:5:Attribute -> U
+873:5:Name -> U
+883:22:Call -> Const:bool:False | Inst:salt.utils.versions.LooseVersion
+883:22:Name -> Func:tests.integration.modules.test_git._git_version
+884:11:Name -> Const:bool:False | Inst:salt.utils.versions.LooseVersion
+884:26:Call -> Inst:salt.utils.versions.LooseVersion
+884:26:Name -> Class:salt.utils.versions.LooseVersion
+889:24:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+889:24:Attribute -> Func:tempfile.mkdtemp
+889:24:Name -> Module:tempfile
+889:45:Attribute -> U
+889:45:Name -> Inst:tests.support.runtests.RuntimeVars
+890:28:Call -> U
+890:28:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+890:28:Attribute -> Module:posixpath | Module:ntpath
+890:28:Name -> Module:os
+890:45:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+891:25:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+891:25:Attribute -> Func:tempfile.mkdtemp
+891:25:Name -> Module:tempfile
+891:46:Attribute -> U
+891:46:Name -> Inst:tests.support.runtests.RuntimeVars
+892:29:Call -> U
+892:29:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+892:29:Attribute -> Module:posixpath | Module:ntpath
+892:29:Name -> Module:os
+892:46:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+895:11:Call -> U
+895:11:Attribute -> Func:salt.utils.platform.is_windows
+895:11:Attribute -> Module:salt.utils.platform
+895:11:Attribute -> Module:salt.utils
+895:11:Name -> Module:salt
+896:28:Call -> Const:bytes:b'' | Const:str:'' | U
+896:28:Attribute -> BM:builtins.bytes.replace | BM:builtins.str.replace | U | BM:builtins.bytes.replace | BM:builtins.str.replace
+896:28:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+897:29:Call -> Const:bytes:b'' | Const:str:'' | U
+897:29:Attribute -> BM:builtins.bytes.replace | BM:builtins.str.replace | U | BM:builtins.bytes.replace | BM:builtins.str.replace
+897:29:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+900:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+900:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+900:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+902:13:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+902:13:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+902:24:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Const:bytes:b'' | Const:str:''
+904:8:Call -> Const:NoneType:None
+904:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+904:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+904:24:Name -> Const:str:'Preparing ' | Const:str:'Enter '
+904:47:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+905:8:Call -> Const:NoneType:None
+905:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+905:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+905:24:Name -> U
+905:45:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+906:14:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+906:14:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+906:14:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+906:53:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+906:53:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+906:64:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Const:bytes:b'' | Const:str:''
+907:8:Call -> Const:NoneType:None
+907:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+907:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+907:24:Name -> Const:str:'Preparing ' | Const:str:'Enter '
+907:47:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+908:8:Call -> Const:NoneType:None
+908:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+908:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+908:24:Name -> U
+908:46:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+910:8:Call -> Const:NoneType:None
+910:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+910:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+910:24:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+910:24:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+910:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+910:62:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Const:bytes:b'' | Const:str:''
+912:8:Call -> Const:NoneType:None
+912:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+912:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+912:25:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+912:25:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+912:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+912:63:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+912:63:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+914:20:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+914:20:Attribute -> Func:tempfile.mkdtemp
+914:20:Name -> Module:tempfile
+914:41:Attribute -> U
+914:41:Name -> Inst:tests.support.runtests.RuntimeVars
+915:8:Call -> Const:NoneType:None
+915:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+915:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+915:25:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+915:25:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+915:25:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+915:63:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+916:8:Call -> Const:NoneType:None | Const:NoneType:None
+916:8:Attribute -> Func:shutil.rmtree
+916:8:Name -> Module:shutil
+916:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+918:8:Call -> Const:NoneType:None
+918:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+918:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+918:24:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+918:24:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+918:24:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+918:62:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/' | Const:bytes:b'' | Const:str:''
+921:12:Call -> U
+921:12:Attribute -> BM:builtins.str.format
+922:16:Name -> U
+927:17:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+927:17:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+927:17:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+927:58:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+927:58:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+928:8:Call -> Const:NoneType:None
+928:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+928:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+928:25:Name -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+928:33:Name -> U
+930:8:Call -> Const:NoneType:None
+930:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+930:8:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+931:12:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+931:12:Attribute -> BM:tests.integration.modules.test_git.GitModuleTest.run_function
+931:12:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+931:53:Attribute -> Const:bytes:b'.' | Const:str:'.' | U
+931:53:Name -> Inst:tests.integration.modules.test_git.GitModuleTest
+931:66:Name -> U

@@ -1,0 +1,521 @@
+16:35:Name -> Class:django.test.testcases.TestCase
+17:5:Name -> Class:builtins.classmethod
+19:8:Name -> Class:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+19:19:Call -> U
+19:19:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+19:19:Attribute -> Inst:django.contrib.auth.models.UserManager
+19:19:Name -> Class:django.contrib.auth.models.User
+22:8:Name -> Class:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+22:20:Call -> U
+22:20:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+22:20:Attribute -> Inst:django.contrib.auth.models.UserManager
+22:20:Name -> Class:django.contrib.auth.models.User
+27:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+27:26:Call -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+27:26:Name -> Class:django.contrib.auth.middleware.AuthenticationMiddleware
+27:63:Call -> Inst:django.http.response.HttpResponse
+27:63:Name -> Class:django.http.response.HttpResponse
+28:8:Call -> Const:NoneType:None
+28:8:Attribute -> BM:django.test.client.ClientMixin.force_login
+28:8:Attribute -> Inst:django.test.client.Client
+28:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+28:32:Attribute -> U
+28:32:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+29:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+29:23:Call -> Inst:django.http.request.HttpRequest
+29:23:Name -> Class:django.http.request.HttpRequest
+30:8:Attribute -> Inst:django.http.request.HttpRequest
+30:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+30:31:Attribute -> U
+30:31:Attribute -> Inst:django.test.client.Client
+30:31:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+33:8:Attribute -> Inst:django.http.request.HttpRequest
+33:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+33:31:Attribute -> U
+33:31:Attribute -> Inst:django.test.client.Client
+33:31:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+34:8:Call -> ERR
+34:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+34:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+34:24:Attribute -> Inst:django.http.request.HttpRequest
+34:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+35:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+35:29:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+35:29:Attribute -> Inst:django.http.request.HttpRequest
+35:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+36:8:Call -> Const:NoneType:None
+36:8:Attribute -> BM:unittest.case.TestCase.assertFalse
+36:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+36:25:Attribute -> Const:bool:True | U
+36:25:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+36:25:Attribute -> Inst:django.http.request.HttpRequest
+36:25:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+40:8:Call -> U
+40:8:Attribute -> U
+40:8:Attribute -> U
+40:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+41:8:Call -> U
+41:8:Attribute -> U
+41:8:Attribute -> U
+41:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+42:8:Call -> ERR
+42:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+42:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+42:24:Attribute -> Inst:django.http.request.HttpRequest
+42:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+43:8:Call -> Const:NoneType:None
+43:8:Attribute -> BM:unittest.case.TestCase.assertIsNotNone
+43:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+43:29:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+43:29:Attribute -> Inst:django.http.request.HttpRequest
+43:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+44:8:Call -> Const:NoneType:None
+44:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+44:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+44:24:Attribute -> Const:bool:True | U
+44:24:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+44:24:Attribute -> Inst:django.http.request.HttpRequest
+44:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+46:8:Call -> Const:NoneType:None
+46:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+46:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+46:26:Attribute -> U
+46:26:Attribute -> U
+46:26:Attribute -> Inst:django.http.request.HttpRequest
+46:26:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+55:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+55:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+55:13:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+55:38:Name -> Class:django.core.exceptions.ImproperlyConfigured
+55:60:Name -> Const:str:"The Django authentication middleware re
+56:12:Call -> ERR
+56:12:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+56:12:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+56:28:Call -> Inst:django.http.request.HttpRequest
+56:28:Name -> Class:django.http.request.HttpRequest
+59:8:Call -> ERR
+59:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+59:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+59:24:Attribute -> Inst:django.http.request.HttpRequest
+59:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+60:22:Call -> U
+60:22:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+60:22:Attribute -> Inst:django.http.request.HttpRequest
+60:22:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+61:8:Call -> Const:NoneType:None
+61:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+61:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+61:25:Name -> U
+61:32:Attribute -> U
+61:32:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+62:29:Call -> U
+62:29:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+62:29:Attribute -> Inst:django.http.request.HttpRequest
+62:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+63:8:Call -> Const:NoneType:None
+63:8:Attribute -> BM:unittest.case.TestCase.assertIs
+63:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+63:22:Name -> U
+63:29:Name -> U
+66:8:Call -> ERR
+66:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+66:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+66:24:Attribute -> Inst:django.http.request.HttpRequest
+66:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+67:22:Call -> U
+67:22:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+67:22:Attribute -> Inst:django.http.request.HttpRequest
+67:22:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+68:8:Call -> Const:NoneType:None
+68:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+68:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+68:25:Name -> U
+68:32:Attribute -> U
+68:32:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+69:14:Call -> Const:NoneType:None
+69:14:Name -> Func:django.contrib.auth.alogin
+69:21:Attribute -> Inst:django.http.request.HttpRequest
+69:21:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+69:35:Attribute -> U
+69:35:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+70:29:Call -> U
+70:29:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+70:29:Attribute -> Inst:django.http.request.HttpRequest
+70:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+71:8:Call -> Const:NoneType:None
+71:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+71:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+71:25:Name -> U
+71:39:Attribute -> U
+71:39:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+74:8:Call -> ERR
+74:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+74:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+74:24:Attribute -> Inst:django.http.request.HttpRequest
+74:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+75:22:Call -> U
+75:22:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+75:22:Attribute -> Inst:django.http.request.HttpRequest
+75:22:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+76:8:Call -> Const:NoneType:None
+76:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+76:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+76:25:Name -> U
+76:32:Attribute -> U
+76:32:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+77:14:Call -> U
+77:14:Call -> U
+77:14:Name -> U
+77:28:Name -> Func:django.contrib.auth.login
+77:35:Attribute -> Inst:django.http.request.HttpRequest
+77:35:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+77:49:Attribute -> U
+77:49:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+78:29:Call -> U
+78:29:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+78:29:Attribute -> Inst:django.http.request.HttpRequest
+78:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+79:8:Call -> Const:NoneType:None
+79:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+79:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+79:25:Name -> U
+79:39:Attribute -> U
+79:39:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+82:8:Call -> ERR
+82:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+82:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+82:24:Attribute -> Inst:django.http.request.HttpRequest
+82:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+83:22:Call -> U
+83:22:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+83:22:Attribute -> Inst:django.http.request.HttpRequest
+83:22:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+84:8:Call -> Const:NoneType:None
+84:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+84:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+84:25:Name -> U
+84:32:Attribute -> U
+84:32:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+85:14:Call -> Const:NoneType:None
+85:14:Name -> Func:django.contrib.auth.alogout
+85:22:Attribute -> Inst:django.http.request.HttpRequest
+85:22:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+86:29:Call -> U
+86:29:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+86:29:Attribute -> Inst:django.http.request.HttpRequest
+86:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+87:8:Call -> Const:NoneType:None
+87:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+87:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+87:24:Attribute -> U
+87:24:Name -> U
+90:8:Call -> ERR
+90:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+90:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+90:24:Attribute -> Inst:django.http.request.HttpRequest
+90:24:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+91:22:Call -> U
+91:22:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+91:22:Attribute -> Inst:django.http.request.HttpRequest
+91:22:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+92:8:Call -> Const:NoneType:None
+92:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+92:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+92:25:Name -> U
+92:32:Attribute -> U
+92:32:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+93:14:Call -> U
+93:14:Call -> U
+93:14:Name -> U
+93:28:Name -> Func:django.contrib.auth.logout
+93:36:Attribute -> Inst:django.http.request.HttpRequest
+93:36:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+94:29:Call -> U
+94:29:Attribute -> Func:tests.async.test_async_auth.AsyncAuthTest.test_change_password.auser
+94:29:Attribute -> Inst:django.http.request.HttpRequest
+94:29:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+95:8:Call -> Const:NoneType:None
+95:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+95:8:Name -> Inst:tests.auth_tests.test_middleware.TestAuthenticationMiddleware
+95:24:Attribute -> U
+95:24:Name -> U
+98:46:Name -> Class:django.test.testcases.TestCase
+99:5:Name -> Class:builtins.classmethod
+101:8:Name -> Class:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+101:19:Call -> U
+101:19:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+101:19:Attribute -> Inst:django.contrib.auth.models.UserManager
+101:19:Name -> Class:django.contrib.auth.models.User
+104:8:Name -> Class:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+104:20:Call -> U
+104:20:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+104:20:Attribute -> Inst:django.contrib.auth.models.UserManager
+104:20:Name -> Class:django.contrib.auth.models.User
+109:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+109:26:Call -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+109:26:Name -> Class:django.contrib.auth.middleware.AuthenticationMiddleware
+109:63:Call -> Inst:django.http.response.HttpResponse
+109:63:Name -> Class:django.http.response.HttpResponse
+110:8:Call -> Const:NoneType:None
+110:8:Attribute -> BM:django.test.client.ClientMixin.force_login
+110:8:Attribute -> Inst:django.test.client.Client
+110:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+110:32:Attribute -> U
+110:32:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+111:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+111:23:Call -> Inst:django.http.request.HttpRequest
+111:23:Name -> Class:django.http.request.HttpRequest
+112:8:Attribute -> Inst:django.http.request.HttpRequest
+112:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+112:31:Attribute -> U
+112:31:Attribute -> Inst:django.test.client.Client
+112:31:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+114:8:Call -> ERR
+114:8:Attribute -> Inst:django.contrib.auth.middleware.AuthenticationMiddleware
+114:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+114:24:Attribute -> Inst:django.http.request.HttpRequest
+114:24:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+116:8:Attribute -> Const:bool:False | U
+116:8:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+116:8:Attribute -> Inst:django.http.request.HttpRequest
+116:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+119:14:Call -> Const:NoneType:None
+119:14:Name -> Func:django.contrib.auth.alogin
+119:21:Attribute -> Inst:django.http.request.HttpRequest
+119:21:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+119:35:Attribute -> U
+119:35:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+120:8:Call -> Const:NoneType:None
+120:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+120:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+120:25:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+120:25:Attribute -> Inst:django.http.request.HttpRequest
+120:25:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+120:44:Attribute -> U
+120:44:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+123:14:Call -> Const:NoneType:None
+123:14:Name -> Func:django.contrib.auth.alogout
+123:22:Attribute -> Inst:django.http.request.HttpRequest
+123:22:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+124:8:Call -> Const:NoneType:None
+124:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+124:8:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+124:25:Attribute -> Inst:django.contrib.auth.models.AnonymousUser | U
+124:25:Attribute -> Inst:django.http.request.HttpRequest
+124:25:Name -> Inst:tests.auth_tests.test_middleware.TestAsyncLoginLogoutAfterSyncMiddleware
+124:44:Call -> Inst:django.contrib.auth.models.AnonymousUser
+124:44:Name -> Class:django.contrib.auth.models.AnonymousUser
+127:1:Call -> Inst:django.test.utils.override_settings
+127:1:Name -> Class:django.test.utils.override_settings
+128:1:Call -> Inst:django.test.utils.modify_settings
+128:1:Name -> Class:django.test.utils.modify_settings
+131:34:Name -> Class:django.test.testcases.TestCase
+132:5:Name -> Class:builtins.classmethod
+134:8:Name -> Class:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+134:19:Call -> U
+134:19:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+134:19:Attribute -> Inst:django.contrib.auth.models.UserManager
+134:19:Name -> Class:django.contrib.auth.models.User
+139:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+139:26:Call -> Inst:django.contrib.auth.middleware.LoginRequiredMiddleware
+139:26:Name -> Class:django.contrib.auth.middleware.LoginRequiredMiddleware
+139:62:Call -> Inst:django.http.response.HttpResponse
+139:62:Name -> Class:django.http.response.HttpResponse
+140:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+140:23:Call -> Inst:django.http.request.HttpRequest
+140:23:Name -> Class:django.http.request.HttpRequest
+144:20:Name -> List:2
+145:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+145:23:Attribute -> BM:django.test.client.Client.get
+145:23:Attribute -> Inst:django.test.client.Client
+145:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+145:43:Name -> Const:str:'public_view' | Const:str:'public_function_view'
+146:12:Call -> Const:NoneType:None
+146:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+146:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+146:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+146:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+150:20:Name -> List:2
+151:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+151:23:Attribute -> BM:django.test.client.Client.get
+151:23:Attribute -> Inst:django.test.client.Client
+151:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+151:43:Name -> Const:str:'protected_view' | Const:str:'protected_function_view'
+152:12:Call -> Const:NoneType:None
+152:12:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+152:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+153:16:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+154:16:Attribute -> U
+154:16:Name -> Inst:django.conf.LazySettings
+154:47:Name -> Const:str:'protected_view' | Const:str:'protected_function_view'
+160:20:Name -> List:2
+161:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+161:23:Attribute -> BM:django.test.client.Client.get
+161:23:Attribute -> Inst:django.test.client.Client
+161:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+161:43:Name -> Const:str:'login_required_cbv_view' | Const:str:'login_required_decorator_view'
+162:12:Call -> Const:NoneType:None
+162:12:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+162:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+163:16:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+164:45:Name -> Const:str:'login_required_cbv_view' | Const:str:'login_required_decorator_view'
+169:20:Call -> U | Const:str:'' | Const:str:''
+169:20:Name -> Func:django.urls.base.reverse
+170:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+170:19:Attribute -> BM:django.test.client.Client.get
+170:19:Attribute -> Inst:django.test.client.Client
+170:19:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+170:35:Name -> U | Const:str:'' | Const:str:''
+171:8:Call -> Const:NoneType:None
+171:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+171:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+172:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+173:12:Call -> U | Const:str:'' | Const:str:''
+173:12:Name -> Func:django.urls.base.reverse
+173:46:Name -> U | Const:str:'' | Const:str:''
+178:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+178:19:Attribute -> BM:django.test.client.Client.get
+178:19:Attribute -> Inst:django.test.client.Client
+178:19:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+179:8:Call -> Const:NoneType:None
+179:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+179:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+179:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+179:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+190:8:Call -> Const:bool:True | Const:bool:False
+190:8:Attribute -> BM:django.test.client.ClientMixin.login
+190:8:Attribute -> Inst:django.test.client.Client
+190:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+191:20:Name -> List:6
+192:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+192:23:Attribute -> BM:django.test.client.Client.get
+192:23:Attribute -> Inst:django.test.client.Client
+192:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+192:43:Name -> Const:str:'public_view' | Const:str:'public_function_view' | Const:str:'protected_view' | Const:str:'protected_function_view' | Const:str:'login_required_cbv_view' | Const:str:'login_required_decorator_view'
+193:12:Call -> Const:NoneType:None
+193:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+193:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+193:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+193:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+197:19:Call -> Inst:django.http.response.HttpResponse
+197:19:Name -> Class:django.http.response.HttpResponse
+199:8:Name -> Func:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware.test_get_login_url_from_view_func.view_func
+200:20:Call -> Const:str:''
+200:20:Attribute -> BM:django.contrib.auth.middleware.LoginRequiredMiddleware.get_login_url
+200:20:Attribute -> Inst:django.contrib.auth.middleware.LoginRequiredMiddleware
+200:20:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+200:50:Name -> Func:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware.test_get_login_url_from_view_func.view_func
+201:8:Call -> Const:NoneType:None
+201:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+201:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+201:25:Name -> Const:str:''
+203:5:Call -> Inst:django.test.utils.override_settings
+203:5:Name -> Class:django.test.utils.override_settings
+205:20:Call -> Const:str:''
+205:20:Attribute -> BM:django.contrib.auth.middleware.LoginRequiredMiddleware.get_login_url
+205:20:Attribute -> Inst:django.contrib.auth.middleware.LoginRequiredMiddleware
+205:20:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+206:8:Call -> Const:NoneType:None
+206:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+206:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+206:25:Name -> Const:str:''
+208:5:Call -> Inst:django.test.utils.override_settings
+208:5:Name -> Class:django.test.utils.override_settings
+210:13:Call -> Inst:unittest.case._AssertRaisesContext
+210:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+210:13:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+210:31:Name -> Class:django.core.exceptions.ImproperlyConfigured
+211:12:Call -> Const:str:''
+211:12:Attribute -> BM:django.contrib.auth.middleware.LoginRequiredMiddleware.get_login_url
+211:12:Attribute -> Inst:django.contrib.auth.middleware.LoginRequiredMiddleware
+211:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+212:8:Call -> Const:NoneType:None
+212:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+212:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+213:12:Call -> Const:str:''
+213:12:Name -> Class:builtins.str
+213:16:Attribute -> U
+213:16:Name -> Inst:unittest.case._AssertRaisesContext
+221:19:Call -> Inst:django.http.response.HttpResponse
+221:19:Name -> Class:django.http.response.HttpResponse
+223:8:Name -> Func:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware.test_get_redirect_field_name_from_view_func.view_func
+224:30:Call -> Const:str:'next_page'
+224:30:Attribute -> BM:django.contrib.auth.middleware.LoginRequiredMiddleware.get_redirect_field_name
+224:30:Attribute -> Inst:django.contrib.auth.middleware.LoginRequiredMiddleware
+224:30:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+224:70:Name -> Func:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware.test_get_redirect_field_name_from_view_func.view_func
+225:8:Call -> Const:NoneType:None
+225:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+225:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+225:25:Name -> Const:str:'next_page'
+227:5:Call -> Inst:django.test.utils.override_settings
+227:5:Name -> Class:django.test.utils.override_settings
+237:20:Name -> List:2
+238:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+238:23:Attribute -> BM:django.test.client.Client.get
+238:23:Attribute -> Inst:django.test.client.Client
+238:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+238:43:Name -> Const:str:'login_required_cbv_view' | Const:str:'login_required_decorator_view'
+239:12:Call -> Const:NoneType:None
+239:12:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+239:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+240:16:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+241:45:Name -> Const:str:'login_required_cbv_view' | Const:str:'login_required_decorator_view'
+245:20:Name -> List:2
+246:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+246:23:Attribute -> BM:django.test.client.Client.get
+246:23:Attribute -> Inst:django.test.client.Client
+246:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+246:43:Name -> Const:str:'protected_view' | Const:str:'protected_function_view'
+247:12:Call -> Const:NoneType:None
+247:12:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRedirects
+247:12:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+248:16:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+249:49:Name -> Const:str:'protected_view' | Const:str:'protected_function_view'
+254:30:Call -> U
+254:30:Attribute -> BM:django.contrib.auth.middleware.LoginRequiredMiddleware.get_redirect_field_name
+254:30:Attribute -> Inst:django.contrib.auth.middleware.LoginRequiredMiddleware
+254:30:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+255:8:Call -> Const:NoneType:None
+255:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+255:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+255:25:Name -> U
+255:46:Name -> Const:str:'next'
+261:8:Call -> Const:NoneType:None
+261:8:Attribute -> BM:django.test.client.ClientMixin.force_login
+261:8:Attribute -> Inst:django.test.client.Client
+261:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+261:32:Attribute -> U
+261:32:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+262:13:Call -> Inst:django.test.testcases._AssertNumQueriesContext
+262:13:Attribute -> BM:django.test.testcases.TransactionTestCase.assertNumQueries
+262:13:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+263:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+263:23:Attribute -> BM:django.test.client.Client.get
+263:23:Attribute -> Inst:django.test.client.Client
+263:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+264:8:Call -> Const:NoneType:None
+264:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+264:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+264:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+264:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+270:8:Call -> Const:NoneType:None
+270:8:Attribute -> BM:django.test.client.ClientMixin.force_login
+270:8:Attribute -> Inst:django.test.client.Client
+270:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+270:32:Attribute -> U
+270:32:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+271:13:Call -> Inst:django.test.testcases._AssertNumQueriesContext
+271:13:Attribute -> BM:django.test.testcases.TransactionTestCase.assertNumQueries
+271:13:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+272:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+272:23:Attribute -> BM:django.test.client.Client.get
+272:23:Attribute -> Inst:django.test.client.Client
+272:23:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+273:8:Call -> Const:NoneType:None
+273:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+273:8:Name -> Inst:tests.auth_tests.test_middleware.TestLoginRequiredMiddleware
+273:25:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+273:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U

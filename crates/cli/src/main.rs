@@ -15,6 +15,7 @@ fn main() -> ExitCode {
     let mut jobs: Option<usize> = None;
     let mut dump_fileitems = false;
     let mut dump_ast = false;
+    let mut dump_infer: Option<String> = None;
     let mut i = 0;
     while i < args.len() {
         let a = &args[i];
@@ -26,6 +27,9 @@ fn main() -> ExitCode {
             "-E" | "--errors-only" => errors_only = true,
             "--dump-fileitems" => dump_fileitems = true,
             "--dump-ast" => dump_ast = true,
+            "--dump-infer" => {
+                dump_infer = take_value(&mut i);
+            }
             _ if a.starts_with("--disable=") => {
                 // _csv_transformer: comma-split, whitespace-stripped items
                 disables.extend(
@@ -125,6 +129,11 @@ fn main() -> ExitCode {
             }
         }
         return ExitCode::SUCCESS;
+    }
+
+    if let Some(items) = dump_infer {
+        let code = pyinfer::dump::run_dump_infer(&items);
+        return ExitCode::from(code as u8);
     }
 
     if dump_fileitems {

@@ -1,0 +1,140 @@
+12:16:Call -> Const:str:'CLOUD-TEST-'
+12:16:Attribute -> Func:tests.integration.cloud.helpers.random_name
+12:16:Attribute -> Module:tests.integration.cloud.helpers
+12:16:Attribute -> Module:tests.integration.cloud
+12:16:Attribute -> Module:tests.integration
+12:16:Name -> Module:tests
+14:14:Name -> Const:str:'virtualbox'
+15:15:Name -> Const:str:'virtualbox'
+16:22:Name -> Const:str:'virtualbox'
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'tests.integration.cloud.helpers.virtual | Const:str:'__main__'
+25:1:Call -> U
+25:1:Attribute -> U
+25:1:Attribute -> U
+25:1:Name -> U
+26:4:Attribute -> Const:bool:False | Const:bool:True
+26:4:Attribute -> Module:salt.utils.virtualbox
+26:4:Attribute -> Module:salt.utils
+26:4:Name -> Module:salt
+28:25:Name -> Class:tests.support.unit.TestCase
+30:8:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxTestCase
+30:20:Call -> U
+30:20:Attribute -> Func:salt.utils.virtualbox.vb_get_box
+30:20:Attribute -> Module:salt.utils.virtualbox
+30:20:Attribute -> Module:salt.utils
+30:20:Name -> Module:salt
+34:12:Call -> U
+34:12:Attribute -> U
+34:12:Attribute -> U
+34:12:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxTestCase
+34:34:Name -> U
+35:15:Name -> Class:builtins.Exception
+36:15:Name -> Const:NoneType:None | U
+37:16:Call -> U
+37:16:Attribute -> BM:unittest.case.TestCase.fail
+37:16:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxTestCase
+37:26:Name -> U
+39:16:Call -> U
+39:16:Attribute -> BM:unittest.case.TestCase.fail
+39:16:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxTestCase
+39:26:Attribute -> ERR
+39:26:Name -> ExcInst:builtins.Exception
+42:8:Call -> Inst:unittest.case._AssertRaisesContext
+42:8:Attribute -> BM:unittest.case.TestCase.assertRaisesRegex
+42:8:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxTestCase
+43:12:Name -> Class:builtins.Exception
+45:12:Attribute -> U
+45:12:Attribute -> U
+45:12:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxTestCase
+46:12:Name -> U
+50:1:Call -> U
+50:1:Attribute -> U
+50:1:Attribute -> U
+50:1:Name -> U
+51:4:Attribute -> Const:bool:False | Const:bool:True
+51:4:Attribute -> Module:salt.utils.virtualbox
+51:4:Attribute -> Module:salt.utils
+51:4:Name -> Module:salt
+54:30:Name -> Class:tests.support.case.ShellCase
+62:32:Name -> U
+63:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+63:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+63:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+63:48:Name -> Const:str:'--out=json Uninferable'
+64:17:Call -> Const:bool:False | Const:bytes:b'string' | U
+64:17:Attribute -> BM:tests.support.case.ShellCase.run_script
+64:17:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxCloudTestCase
+65:26:Name -> Const:str:'--out=json Uninferable'
+65:35:Name -> Const:bool:False | U
+65:57:Name -> Const:NoneType:None | U
+65:77:Name -> Const:NoneType:None | U
+69:11:Call -> ERR
+69:11:Name -> Func:builtins.isinstance
+69:22:Name -> Const:bool:False | Const:bytes:b'string' | U
+69:30:Name -> Class:builtins.tuple
+69:41:Call -> ERR
+69:41:Name -> Func:builtins.len
+69:45:Name -> Const:bool:False | Const:bytes:b'string' | U
+70:21:Name -> Const:bool:False | Const:bytes:b'string' | U
+74:20:Name -> Const:bool:False | Const:bytes:b'string' | U
+75:15:Call -> ERR
+75:15:Name -> Func:builtins.len
+75:19:Name -> U
+75:34:Name -> U
+75:49:Name -> List:3
+76:16:Call -> U
+76:16:Attribute -> U
+76:16:Name -> Const:bool:False | Const:bytes:b'string' | U
+79:11:Call -> ERR
+79:11:Name -> Func:builtins.len
+79:15:Name -> Const:bool:False | Const:bytes:b'string' | U
+80:19:Call -> Dict:0
+80:19:Name -> Class:builtins.dict
+82:19:Call -> U
+82:19:Attribute -> Func:salt.utils.json.loads
+82:19:Attribute -> Module:salt.utils.json
+82:19:Attribute -> Module:salt.utils
+82:19:Name -> Module:salt
+82:41:Call -> Const:str:''
+82:41:Attribute -> BM:builtins.str.join
+82:49:Name -> Const:bool:False | Const:bytes:b'string' | U
+99:11:Name -> Const:NoneType:None | U
+100:23:Name -> U
+100:30:Name -> U
+100:57:Call -> U
+100:57:Attribute -> U
+100:57:Name -> U
+102:17:Call -> Dict:0 | U
+102:17:Attribute -> BM:tests.integration.cloud.helpers.virtualbox.VirtualboxCloudTestCase.run_cloud
+102:17:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxCloudTestCase
+103:12:Call -> U
+103:12:Attribute -> BM:builtins.str.format
+103:33:Name -> U
+103:43:Name -> Const:str:'virtualbox-config'
+103:56:Call -> Const:str:''
+103:56:Attribute -> BM:builtins.str.join
+103:65:Name -> List:0 | U
+103:75:Name -> Dict:0
+105:15:Call -> U
+105:15:Attribute -> U
+105:15:Call -> U
+105:15:Attribute -> BM:builtins.dict.get | U
+105:15:Name -> Dict:0 | U
+105:26:Name -> Const:str:'virtualbox-config'
+105:47:Name -> Const:str:'virtualbox'
+119:17:Call -> Dict:0 | U
+119:17:Attribute -> BM:tests.integration.cloud.helpers.virtualbox.VirtualboxCloudTestCase.run_cloud
+119:17:Name -> Inst:tests.integration.cloud.helpers.virtualbox.VirtualboxCloudTestCase
+119:38:Name -> U
+119:47:Name -> U
+119:79:Name -> Dict:0
+120:15:Call -> U
+120:15:Attribute -> U
+120:15:Call -> U
+120:15:Attribute -> BM:builtins.dict.get | U
+120:15:Name -> Dict:0 | U
+120:26:Name -> Const:str:'virtualbox-config'
+120:47:Name -> Const:str:'virtualbox'

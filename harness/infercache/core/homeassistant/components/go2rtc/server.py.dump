@@ -1,0 +1,447 @@
+18:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:10:Attribute -> Func:logging.getLogger
+18:10:Name -> Module:logging
+18:28:Name -> Const:str:'homeassistant.components.go2rtc.server' | Const:str:'__main__'
+85:5:Name -> Tuple:11
+90:5:Name -> Tuple:7
+97:11:Attribute -> Const:int:10
+97:11:Name -> Module:logging
+98:11:Attribute -> Const:int:10
+98:11:Name -> Module:logging
+99:11:Attribute -> Const:int:10
+99:11:Name -> Module:logging
+100:11:Attribute -> Const:int:30
+100:11:Name -> Module:logging
+101:11:Attribute -> Const:int:30
+101:11:Name -> Module:logging
+102:11:Attribute -> Const:int:40
+102:11:Name -> Module:logging
+103:11:Attribute -> Const:int:40
+103:11:Name -> Module:logging
+107:29:Name -> Class:homeassistant.exceptions.HomeAssistantError
+113:26:Name -> Class:homeassistant.exceptions.HomeAssistantError
+117:33:Name -> Class:builtins.tuple
+117:39:Name -> Class:builtins.str
+117:53:Name -> Class:builtins.str
+119:11:Name -> U
+121:22:Call -> Const:str:''
+121:22:Attribute -> BM:builtins.str.join
+121:35:Name -> U
+121:55:Name -> U
+122:15:Name -> Const:str:''
+126:15:Name -> Class:builtins.bool
+126:31:Name -> Class:builtins.str
+126:46:Name -> Class:builtins.str
+126:64:Name -> Class:builtins.str
+127:5:Name -> Class:builtins.str
+129:17:Name -> Class:builtins.tuple
+129:23:Name -> Class:builtins.str
+129:35:Name -> Tuple:11
+130:15:Name -> Class:builtins.tuple
+130:21:Name -> Class:builtins.str
+130:33:Name -> Tuple:7
+132:7:Name -> U
+133:22:Name -> Tuple:12
+134:20:Name -> Tuple:10
+136:28:Name -> Const:int:11984
+144:9:Call -> Inst:tempfile._TemporaryFileWrapper
+144:9:Name -> Func:tempfile.NamedTemporaryFile
+145:46:Name -> U
+147:8:Call -> U
+147:8:Attribute -> U
+147:8:Name -> Inst:tempfile._TemporaryFileWrapper
+148:12:Call -> U
+148:12:Attribute -> U
+148:12:Call -> U
+148:12:Attribute -> BM:builtins.str.format
+148:12:Name -> Const:str:'# This file is managed by Home Assistan
+149:30:Name -> Const:str:':11984' | Const:str:''
+150:28:Call -> Const:str:''
+150:28:Name -> Func:homeassistant.components.go2rtc.util.get_go2rtc_unix_socket_path
+150:56:Name -> U
+151:28:Call -> Const:str:'[]' | Const:str:'[]'
+151:28:Name -> Func:homeassistant.components.go2rtc.server._format_list_for_yaml
+151:50:Name -> Tuple:11 | Tuple:12
+152:32:Call -> Const:str:'[]' | Const:str:'[]'
+152:32:Name -> Func:homeassistant.components.go2rtc.server._format_list_for_yaml
+152:54:Name -> Tuple:7 | Tuple:10
+153:25:Name -> U
+154:25:Name -> U
+157:15:Attribute -> U
+157:15:Name -> Inst:tempfile._TemporaryFileWrapper
+165:14:Name -> U
+166:16:Name -> Class:builtins.str
+167:17:Name -> U
+169:19:Name -> Class:builtins.bool
+170:18:Name -> Class:builtins.str
+171:18:Name -> Class:builtins.str
+172:21:Name -> Class:builtins.str
+175:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+175:21:Name -> U
+176:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+176:23:Name -> U
+177:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+177:24:Name -> U
+178:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+178:26:Name -> Const:bool:False | U
+179:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+179:25:Name -> U
+180:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+180:25:Name -> U
+181:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+181:28:Name -> U
+182:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+182:26:Name -> Class:collections.deque
+182:32:Name -> Class:builtins.str
+182:39:Call -> Inst:collections.deque
+182:39:Name -> Class:collections.deque
+182:52:Name -> Const:int:512
+183:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+183:23:Attribute -> ERR
+183:23:Attribute -> Module:subprocess
+183:23:Name -> Module:asyncio
+184:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+184:33:Call -> Inst:asyncio.locks.Event
+184:33:Attribute -> Class:asyncio.locks.Event
+184:33:Name -> Module:asyncio
+185:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+185:29:Attribute -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+185:29:Name -> Module:asyncio
+186:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+186:30:Name -> Class:builtins.list
+186:35:Attribute -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+186:35:Name -> Module:asyncio
+190:14:Call -> Const:NoneType:None
+190:14:Attribute -> BM:homeassistant.components.go2rtc.server.Server._start
+190:14:Name -> Inst:homeassistant.components.go2rtc.server.Server
+191:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+191:30:Call -> U
+191:30:Attribute -> Func:asyncio.tasks.create_task
+191:30:Name -> Module:asyncio
+192:12:Call -> Const:NoneType:None
+192:12:Attribute -> BM:homeassistant.components.go2rtc.server.Server._watchdog
+192:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+197:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+197:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+197:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+198:28:Call -> U
+198:28:Attribute -> U
+198:28:Attribute -> U
+198:28:Name -> Inst:homeassistant.components.go2rtc.server.Server
+199:12:Name -> Func:homeassistant.components.go2rtc.server._create_temp_file
+200:12:Attribute -> Const:bool:False | U
+200:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+201:12:Attribute -> U
+201:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+202:12:Attribute -> U
+202:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+203:12:Attribute -> U
+203:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+206:8:Call -> Const:NoneType:None
+206:8:Attribute -> BM:asyncio.locks.Event.clear
+206:8:Attribute -> Inst:asyncio.locks.Event
+206:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+208:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+208:30:Call -> Inst:asyncio.subprocess.Process
+208:30:Attribute -> Func:asyncio.subprocess.create_subprocess_exec
+208:30:Name -> Module:asyncio
+209:12:Attribute -> U
+209:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+211:12:Name -> U
+212:19:Attribute -> Const:int:-1
+212:19:Attribute -> Module:subprocess
+212:19:Name -> Module:asyncio
+213:19:Attribute -> Const:int:-2
+213:19:Attribute -> Module:subprocess
+213:19:Name -> Module:asyncio
+217:8:Call -> U
+217:8:Attribute -> U
+217:8:Attribute -> U
+217:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+218:12:Call -> Const:NoneType:None
+218:12:Attribute -> BM:homeassistant.components.go2rtc.server.Server._log_output
+218:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+218:29:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+218:29:Name -> Inst:homeassistant.components.go2rtc.server.Server
+222:23:Call -> Inst:asyncio.timeouts.Timeout
+222:23:Attribute -> Func:asyncio.timeouts.timeout
+222:23:Name -> Module:asyncio
+222:39:Name -> Const:int:30
+223:22:Call -> Const:bool:True | Const:bool:True
+223:22:Attribute -> BM:asyncio.locks.Event.wait
+223:22:Attribute -> Inst:asyncio.locks.Event
+223:22:Name -> Inst:homeassistant.components.go2rtc.server.Server
+224:15:Name -> Class:builtins.TimeoutError
+226:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+226:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+226:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+226:30:Name -> Const:str:"Go2rtc server didn't start correctly"
+227:12:Call -> Const:NoneType:None
+227:12:Attribute -> BM:homeassistant.components.go2rtc.server.Server._log_server_output
+227:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+227:36:Attribute -> Const:int:30
+227:36:Name -> Module:logging
+228:18:Call -> Const:NoneType:None
+228:18:Attribute -> BM:homeassistant.components.go2rtc.server.Server._stop
+228:18:Name -> Inst:homeassistant.components.go2rtc.server.Server
+229:18:Name -> Class:homeassistant.components.go2rtc.server.Go2RTCServerStartError
+229:46:Name -> ExcInst:builtins.TimeoutError
+232:17:Call -> U
+232:17:Name -> U
+232:34:Attribute -> U
+232:34:Name -> Inst:homeassistant.components.go2rtc.server.Server
+232:49:Name -> Const:str:'http://localhost:11984/'
+233:14:Call -> U
+233:14:Attribute -> U
+233:14:Name -> U
+235:41:Attribute -> ERR
+235:41:Attribute -> Module:subprocess
+235:41:Name -> Module:asyncio
+237:15:Attribute -> U
+237:15:Name -> U
+239:26:Attribute -> U
+239:26:Name -> U
+240:18:Call -> U
+240:18:Attribute -> U
+240:18:Call -> U
+240:18:Attribute -> U
+240:18:Name -> U
+241:12:Call -> U
+241:12:Attribute -> BM:collections.deque.append
+241:12:Attribute -> Inst:collections.deque
+241:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+241:36:Name -> U
+242:23:Attribute -> Const:int:30
+242:23:Name -> Module:logging
+243:15:Call -> ERR
+243:15:Name -> Func:builtins.len
+243:32:Call -> U
+243:32:Attribute -> U
+243:32:Name -> U
+244:27:Call -> ERR
+244:27:Attribute -> BM:builtins.dict.get
+244:27:Name -> Dict:7
+244:46:Name -> U
+244:60:Name -> Const:int:30
+245:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+245:12:Attribute -> BM:logging.Logger.log | U | BM:logging.Logger.log
+245:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+245:24:Name -> Const:int:30 | U
+245:34:Name -> U
+246:19:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+246:19:Attribute -> BM:asyncio.locks.Event.is_set
+246:19:Attribute -> Inst:asyncio.locks.Event
+246:19:Name -> Inst:homeassistant.components.go2rtc.server.Server
+246:55:Name -> Const:str:'INF [api] listen addr='
+246:83:Name -> U
+247:16:Call -> Const:NoneType:None
+247:16:Attribute -> BM:asyncio.locks.Event.set
+247:16:Attribute -> Inst:asyncio.locks.Event
+247:16:Name -> Inst:homeassistant.components.go2rtc.server.Server
+249:43:Name -> Class:builtins.int
+251:20:Call -> Inst:builtins.list
+251:20:Name -> Class:builtins.list
+251:25:Attribute -> Inst:collections.deque
+251:25:Name -> Inst:homeassistant.components.go2rtc.server.Server
+252:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+252:12:Attribute -> BM:logging.Logger.log | U | BM:logging.Logger.log
+252:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+252:24:Name -> U
+252:34:Name -> U
+253:8:Call -> U
+253:8:Attribute -> BM:collections.deque.clear
+253:8:Attribute -> Inst:collections.deque
+253:8:Name -> Inst:homeassistant.components.go2rtc.server.Server
+263:39:Call -> U
+263:39:Attribute -> Func:asyncio.tasks.create_task
+263:39:Name -> Module:asyncio
+263:59:Call -> Const:NoneType:None
+263:59:Attribute -> BM:homeassistant.components.go2rtc.server.Server._monitor_process
+263:59:Name -> Inst:homeassistant.components.go2rtc.server.Server
+264:16:Call -> ERR
+264:16:Attribute -> BM:builtins.list.append
+264:16:Attribute -> List:0
+264:16:Name -> Inst:homeassistant.components.go2rtc.server.Server
+264:44:Name -> U
+265:16:Call -> U
+265:16:Attribute -> U
+265:16:Name -> U
+265:55:Attribute -> BM:builtins.list.remove
+265:55:Attribute -> List:0
+265:55:Name -> Inst:homeassistant.components.go2rtc.server.Server
+266:35:Call -> U
+266:35:Attribute -> Func:asyncio.tasks.create_task
+266:35:Name -> Module:asyncio
+266:55:Call -> Const:NoneType:None
+266:55:Attribute -> BM:homeassistant.components.go2rtc.server.Server._monitor_api
+266:55:Name -> Inst:homeassistant.components.go2rtc.server.Server
+267:16:Call -> ERR
+267:16:Attribute -> BM:builtins.list.append
+267:16:Attribute -> List:0
+267:16:Name -> Inst:homeassistant.components.go2rtc.server.Server
+267:44:Name -> U
+268:16:Call -> U
+268:16:Attribute -> U
+268:16:Name -> U
+268:51:Attribute -> BM:builtins.list.remove
+268:51:Attribute -> List:0
+268:51:Name -> Inst:homeassistant.components.go2rtc.server.Server
+270:26:Call -> U | Inst:asyncio.tasks._GatheringFuture
+270:26:Attribute -> Func:asyncio.tasks.gather
+270:26:Name -> Module:asyncio
+270:41:Name -> U
+270:63:Name -> U
+271:23:Name -> Class:homeassistant.components.go2rtc.server.Go2RTCWatchdogError
+272:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+272:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+272:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+273:32:Attribute -> List:0
+273:32:Name -> Inst:homeassistant.components.go2rtc.server.Server
+274:27:Call -> U
+274:27:Attribute -> U
+274:27:Name -> U
+275:35:Call -> U
+275:35:Attribute -> U
+275:35:Name -> U
+276:32:Call -> U
+276:32:Attribute -> U
+276:32:Name -> U
+278:24:Call -> U
+278:24:Attribute -> U
+278:24:Name -> U
+279:26:Call -> Const:NoneType:None | U
+279:26:Attribute -> Func:asyncio.tasks.sleep
+279:26:Name -> Module:asyncio
+279:40:Name -> Const:int:1
+281:30:Call -> Const:NoneType:None
+281:30:Attribute -> BM:homeassistant.components.go2rtc.server.Server._stop
+281:30:Name -> Inst:homeassistant.components.go2rtc.server.Server
+282:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+282:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+282:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+283:24:Call -> Const:NoneType:None
+283:24:Attribute -> BM:homeassistant.components.go2rtc.server.Server._log_server_output
+283:24:Name -> Inst:homeassistant.components.go2rtc.server.Server
+283:48:Attribute -> Const:int:30
+283:48:Name -> Module:logging
+284:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+284:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+284:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+285:29:Call -> Inst:contextlib.suppress
+285:29:Name -> Class:contextlib.suppress
+285:38:Name -> Class:homeassistant.components.go2rtc.server.Go2RTCServerStartError
+286:34:Call -> Const:NoneType:None
+286:34:Attribute -> BM:homeassistant.components.go2rtc.server.Server._start
+286:34:Name -> Inst:homeassistant.components.go2rtc.server.Server
+287:27:Name -> Class:builtins.Exception
+288:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+288:24:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+288:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+291:19:Name -> Class:builtins.Exception
+292:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+292:16:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+292:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+296:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+296:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+296:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+297:11:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+297:11:Name -> Inst:homeassistant.components.go2rtc.server.Server
+298:18:Call -> U
+298:18:Attribute -> U
+298:18:Attribute -> U
+298:18:Name -> Inst:homeassistant.components.go2rtc.server.Server
+299:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+299:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+299:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+300:14:Call -> ExcInst:homeassistant.components.go2rtc.server.Go2RTCWatchdogError
+300:14:Name -> Class:homeassistant.components.go2rtc.server.Go2RTCWatchdogError
+304:17:Call -> U
+304:17:Name -> U
+304:34:Attribute -> U
+304:34:Name -> Inst:homeassistant.components.go2rtc.server.Server
+304:49:Name -> Const:str:'http://localhost:11984/'
+306:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+306:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+306:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+309:22:Call -> U
+309:22:Attribute -> U
+309:22:Name -> U
+310:22:Call -> Const:NoneType:None | U
+310:22:Attribute -> Func:asyncio.tasks.sleep
+310:22:Name -> Module:asyncio
+311:15:Name -> Class:builtins.Exception
+312:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+312:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+312:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+313:18:Call -> ExcInst:homeassistant.components.go2rtc.server.Go2RTCWatchdogError
+313:18:Name -> Class:homeassistant.components.go2rtc.server.Go2RTCWatchdogError
+313:56:Name -> ExcInst:builtins.Exception
+317:15:Name -> Class:builtins.list
+317:20:Attribute -> Class:asyncio.tasks.Task | Class:_asyncio.Task
+317:20:Name -> Module:asyncio
+318:28:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+318:28:Name -> Inst:homeassistant.components.go2rtc.server.Server
+319:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+320:12:Call -> ERR
+320:12:Attribute -> BM:builtins.list.append
+320:12:Name -> List:0
+320:25:Name -> Const:NoneType:None | U | Const:NoneType:None
+321:12:Call -> U
+321:12:Attribute -> U
+321:12:Name -> Const:NoneType:None | U | Const:NoneType:None
+322:20:Attribute -> List:0
+322:20:Name -> Inst:homeassistant.components.go2rtc.server.Server
+323:12:Call -> ERR
+323:12:Attribute -> BM:builtins.list.append
+323:12:Name -> List:0
+323:25:Name -> U
+324:12:Call -> U
+324:12:Attribute -> U
+324:12:Name -> U
+325:14:Call -> U | Inst:asyncio.tasks._GatheringFuture
+325:14:Attribute -> Func:asyncio.tasks.gather
+325:14:Name -> Module:asyncio
+325:30:Name -> List:0
+329:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+329:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+329:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+330:14:Call -> Const:NoneType:None
+330:14:Attribute -> BM:homeassistant.components.go2rtc.server.Server._stop_watchdog
+330:14:Name -> Inst:homeassistant.components.go2rtc.server.Server
+331:14:Call -> Const:NoneType:None
+331:14:Attribute -> BM:homeassistant.components.go2rtc.server.Server._stop
+331:14:Name -> Inst:homeassistant.components.go2rtc.server.Server
+335:11:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+335:11:Name -> Inst:homeassistant.components.go2rtc.server.Server
+336:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+336:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+336:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+337:22:Attribute -> U | Const:NoneType:None
+337:22:Name -> Inst:homeassistant.components.go2rtc.server.Server
+338:12:Name -> Inst:homeassistant.components.go2rtc.server.Server
+339:17:Call -> Inst:contextlib.suppress
+339:17:Name -> Class:contextlib.suppress
+339:26:Name -> Class:builtins.ProcessLookupError
+340:16:Call -> U
+340:16:Attribute -> U
+340:16:Name -> U | Const:NoneType:None
+342:22:Call -> U
+342:22:Attribute -> Func:asyncio.tasks.wait_for
+342:22:Name -> Module:asyncio
+342:39:Call -> U
+342:39:Attribute -> U
+342:39:Name -> U | Const:NoneType:None
+342:63:Name -> Const:int:5
+343:19:Name -> Class:builtins.TimeoutError
+344:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+344:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+344:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+345:21:Call -> Inst:contextlib.suppress
+345:21:Name -> Class:contextlib.suppress
+345:30:Name -> Class:builtins.ProcessLookupError
+346:20:Call -> U
+346:20:Attribute -> U
+346:20:Name -> U | Const:NoneType:None
+348:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+348:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+348:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

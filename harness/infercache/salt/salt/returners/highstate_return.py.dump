@@ -1,0 +1,630 @@
+96:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+96:6:Attribute -> Func:logging.getLogger
+96:6:Name -> Module:logging
+96:24:Name -> Const:str:'salt.returners.highstate_return' | Const:str:'__main__'
+105:11:Name -> Const:str:'highstate'
+132:15:Call -> Inst:builtins.dict
+132:15:Attribute -> Func:salt.returners.get_returner_options
+132:15:Attribute -> Module:salt.returners
+132:15:Name -> Module:salt
+133:8:Name -> Const:str:'highstate'
+133:25:Name -> U
+133:30:Name -> Dict:17
+133:46:Name -> ERR
+133:65:Name -> ERR
+136:11:Name -> Inst:builtins.dict
+163:11:Call -> ERR
+163:11:Attribute -> BM:builtins.dict.get
+163:11:Name -> Dict:11
+163:29:Name -> U
+163:44:Call -> Const:str:''
+163:44:Attribute -> BM:builtins.str.join
+164:9:Call -> ERR
+164:9:Attribute -> BM:builtins.dict.get
+164:9:Name -> Dict:11
+164:21:Name -> U
+164:43:Name -> U
+172:4:Call -> ERR
+172:4:Name -> Func:builtins.print
+173:8:Call -> U
+173:8:Attribute -> BM:builtins.str.format
+173:36:Call -> U
+173:36:Name -> Func:salt.returners.highstate_return._lookup_style
+173:70:Call -> Const:str:''
+173:70:Name -> Class:builtins.str
+173:74:Name -> Const:int:0 | U
+174:13:Name -> U
+179:24:Call -> Const:str:''
+179:24:Name -> Class:builtins.str
+179:28:Name -> Const:int:0 | U
+180:26:Call -> Const:str:''
+180:26:Name -> Class:builtins.str
+180:30:Name -> Const:int:0 | U
+182:19:Name -> U
+183:39:Name -> Const:bool:True
+184:34:Name -> Const:bool:True
+186:11:Call -> ERR
+186:11:Name -> Func:builtins.isinstance
+186:22:Name -> U
+186:31:Name -> Class:builtins.dict
+187:30:Name -> U
+188:34:Name -> U
+189:20:Name -> U
+191:34:Name -> Const:str:'' | U
+192:15:Call -> ERR
+192:15:Name -> Func:builtins.len
+192:19:Name -> U
+193:30:Call -> ERR
+193:30:Name -> Func:builtins.next
+193:35:Call -> ERR
+193:35:Name -> Func:builtins.iter
+193:40:Call -> U
+193:40:Attribute -> U
+193:40:Name -> U
+194:16:Call -> ERR
+194:16:Name -> Func:builtins.print
+195:20:Call -> U
+195:20:Attribute -> BM:builtins.str.format
+195:45:Call -> U
+195:45:Name -> Func:salt.returners.highstate_return._lookup_style
+195:66:Name -> Const:str:'row'
+196:25:Name -> U
+198:16:Call -> ERR
+198:16:Name -> Func:builtins.print
+199:20:Call -> U
+199:20:Attribute -> BM:builtins.str.format
+200:24:Call -> U
+200:24:Name -> Func:salt.returners.highstate_return._lookup_style
+201:35:Name -> Const:str:'cell'
+201:47:Name -> Const:str:'first_first'
+201:68:Name -> U | Const:str:''
+203:24:Name -> U
+205:25:Name -> U
+207:19:Call -> ERR
+207:19:Name -> Func:builtins.isinstance
+207:30:Name -> U
+207:37:Name -> Class:builtins.list
+208:20:Call -> ERR
+208:20:Name -> Func:builtins.print
+209:24:Call -> U
+209:24:Attribute -> BM:builtins.str.format
+210:28:Call -> U
+210:28:Name -> Func:salt.returners.highstate_return._lookup_style
+213:36:Name -> Const:str:'cell'
+214:36:Name -> Const:str:'first'
+216:36:Name -> U | Const:str:''
+220:29:Name -> U
+222:20:Call -> Const:NoneType:None
+222:20:Name -> Func:salt.returners.highstate_return._generate_html_table
+222:41:Name -> U
+222:48:Name -> U
+222:53:Name -> Const:int:0 | U
+222:64:Name -> U | Const:str:''
+223:20:Call -> ERR
+223:20:Name -> Func:builtins.print
+223:40:Name -> U
+225:20:Call -> ERR
+225:20:Name -> Func:builtins.print
+226:24:Call -> U
+226:24:Attribute -> BM:builtins.str.format
+227:28:Call -> U
+227:28:Name -> Func:salt.returners.highstate_return._lookup_style
+229:33:Name -> Const:str:'cell'
+229:45:Name -> Const:str:'first'
+229:68:Name -> U | Const:str:''
+231:28:Call -> Const:str:''
+231:28:Attribute -> Func:html.escape
+231:28:Name -> Module:html
+231:40:Call -> Const:str:''
+231:40:Name -> Class:builtins.str
+231:44:Name -> U
+233:29:Name -> U
+235:16:Call -> ERR
+235:16:Name -> Func:builtins.print
+235:36:Name -> U
+236:13:Call -> ERR
+236:13:Name -> Func:builtins.isinstance
+236:24:Name -> U
+236:33:Name -> Class:builtins.list
+237:12:Call -> ERR
+237:12:Name -> Func:builtins.print
+237:18:Call -> U
+237:18:Attribute -> BM:builtins.str.format
+237:43:Call -> U
+237:43:Name -> Func:salt.returners.highstate_return._lookup_style
+237:64:Name -> Const:str:'row'
+237:83:Name -> U
+238:12:Call -> ERR
+238:12:Name -> Func:builtins.print
+239:16:Call -> U
+239:16:Attribute -> BM:builtins.str.format
+240:20:Call -> U
+240:20:Name -> Func:salt.returners.highstate_return._lookup_style
+241:31:Name -> Const:str:'cell'
+241:43:Name -> Const:str:'first_first'
+241:69:Name -> Const:str:'' | U
+244:21:Name -> U
+246:12:Call -> Const:NoneType:None
+246:12:Name -> Func:salt.returners.highstate_return._generate_html_table
+246:33:Name -> U
+246:42:Name -> U
+246:47:Name -> Const:int:0 | U
+246:58:Name -> Const:str:'' | U
+247:12:Call -> ERR
+247:12:Name -> Func:builtins.print
+247:32:Name -> U
+248:12:Call -> ERR
+248:12:Name -> Func:builtins.print
+248:32:Name -> U
+250:12:Call -> ERR
+250:12:Name -> Func:builtins.print
+250:18:Call -> U
+250:18:Attribute -> BM:builtins.str.format
+250:43:Call -> U
+250:43:Name -> Func:salt.returners.highstate_return._lookup_style
+250:64:Name -> Const:str:'row'
+250:83:Name -> U
+251:12:Call -> ERR
+251:12:Name -> Func:builtins.print
+252:16:Call -> U
+252:16:Attribute -> BM:builtins.str.format
+253:20:Call -> U
+253:20:Name -> Func:salt.returners.highstate_return._lookup_style
+254:31:Name -> Const:str:'cell'
+254:43:Name -> Const:str:'first_first'
+254:65:Name -> Const:str:'' | U
+256:20:Call -> Const:str:''
+256:20:Attribute -> Func:html.escape
+256:20:Name -> Module:html
+256:32:Call -> Const:str:''
+256:32:Name -> Class:builtins.str
+256:36:Name -> U
+258:21:Name -> U
+260:12:Call -> ERR
+260:12:Name -> Func:builtins.print
+260:32:Name -> U
+262:4:Call -> ERR
+262:4:Name -> Func:builtins.print
+262:27:Name -> U
+269:4:Call -> ERR
+269:4:Name -> Func:builtins.print
+269:25:Name -> U
+270:4:Call -> ERR
+270:4:Name -> Func:builtins.print
+270:25:Name -> U
+271:4:Call -> Const:NoneType:None
+271:4:Name -> Func:salt.returners.highstate_return._generate_html_table
+271:25:Name -> U
+271:31:Name -> U
+272:4:Call -> ERR
+272:4:Name -> Func:builtins.print
+272:26:Name -> U
+273:4:Call -> ERR
+273:4:Name -> Func:builtins.print
+273:26:Name -> U
+280:7:Call -> ERR
+280:7:Name -> Func:builtins.isinstance
+280:18:Name -> U
+280:24:Name -> Class:builtins.dict
+281:22:Call -> ERR
+281:22:Name -> Func:builtins.sorted
+281:29:Call -> U
+281:29:Attribute -> U
+281:29:Name -> U
+281:57:Name -> U
+283:27:Name -> U
+284:15:Call -> ERR
+284:15:Name -> Func:builtins.isinstance
+284:26:Name -> U
+284:33:Name -> Class:builtins.dict
+285:16:Call -> ERR
+285:16:Attribute -> BM:builtins.list.append
+285:16:Name -> List:0
+285:31:Name -> U
+285:37:Call -> List:0 | U
+285:37:Name -> Func:salt.returners.highstate_return._dict_to_name_value
+285:57:Name -> U
+287:16:Call -> ERR
+287:16:Attribute -> BM:builtins.list.append
+287:16:Name -> List:0
+287:31:Name -> U
+287:37:Name -> U
+289:17:Name -> U
+290:11:Name -> List:0 | U
+298:23:Name -> U
+299:42:Call -> U
+299:42:Attribute -> U
+299:42:Name -> U
+300:26:Call -> Const:str:''
+300:26:Attribute -> BM:builtins.str.join
+300:36:Name -> U
+300:44:Name -> U
+301:17:Call -> U
+301:17:Attribute -> U
+301:17:Name -> U
+303:25:Name -> Const:str:''
+304:21:Name -> U
+305:23:Name -> U
+306:25:Call -> U
+306:25:Attribute -> U
+306:25:Name -> U
+307:24:Call -> U
+307:24:Attribute -> U
+307:24:Name -> U
+310:15:Name -> U
+313:22:Call -> U
+313:22:Attribute -> U
+313:22:Name -> U
+314:15:Name -> U
+314:27:Call -> ERR
+314:27:Name -> Func:builtins.isinstance
+314:38:Name -> U
+314:47:Name -> Class:builtins.dict
+315:16:Call -> ERR
+315:16:Attribute -> BM:builtins.list.append
+315:16:Name -> List:5
+315:42:Call -> List:0 | U
+315:42:Name -> Func:salt.returners.highstate_return._dict_to_name_value
+315:62:Name -> U
+320:18:Call -> U
+320:18:Attribute -> U
+320:18:Name -> U
+321:11:Name -> U
+322:12:Call -> ERR
+322:12:Attribute -> BM:builtins.list.append
+322:12:Name -> List:5
+322:38:Name -> U
+324:8:Call -> ERR
+324:8:Attribute -> BM:builtins.list.append
+324:8:Name -> List:0
+324:23:Name -> U
+324:32:Name -> List:5
+324:53:Name -> Const:str:'failed' | Const:str:'changed' | Const:str:'unchanged'
+325:11:Name -> List:0
+333:14:Call -> U
+333:14:Attribute -> U
+333:14:Name -> U
+335:18:Call -> ERR
+335:18:Name -> Func:builtins.sorted
+335:25:Call -> U
+335:25:Attribute -> U
+335:25:Name -> U
+335:56:Call -> U
+335:56:Attribute -> U
+335:56:Name -> U
+343:19:Name -> U
+344:15:Call -> U
+344:15:Attribute -> U
+344:15:Name -> U
+349:24:Call -> Inst:builtins.float
+349:24:Name -> Class:builtins.float
+349:30:Call -> U
+349:30:Attribute -> U
+349:30:Name -> U
+350:15:Name -> Class:builtins.ValueError
+353:11:Call -> U
+353:11:Attribute -> U
+353:11:Name -> U
+356:16:Name -> Const:int:0 | Const:int:1
+356:24:Name -> Const:int:0 | Const:int:1
+356:33:Name -> Const:int:0 | Const:int:1
+358:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+358:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+358:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+358:37:Name -> Const:int:0 | Const:int:1
+359:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+359:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+359:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+359:38:Name -> Const:int:0 | Const:int:1
+360:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+360:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+360:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+360:41:Name -> Const:int:0 | Const:int:-1 | Const:int:-1 | Const:int:-2 | Const:int:1 | Const:int:0 | Const:int:0 | Const:int:-1
+361:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+361:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+361:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+361:39:Name -> Const:int:0 | Const:int:1
+365:8:Call -> U
+365:8:Attribute -> U
+365:8:Name -> U
+366:12:Call -> U
+366:12:Attribute -> U
+366:12:Name -> U
+366:50:Name -> Const:int:0 | Const:int:1
+367:12:Call -> U
+367:12:Attribute -> U
+367:12:Name -> U
+367:51:Name -> Const:int:0 | Const:int:1
+373:30:Name -> Const:int:0 | Const:int:1
+374:31:Name -> Const:int:0 | Const:int:1
+375:34:Name -> Const:int:0 | Const:int:-1 | Const:int:-1 | Const:int:-2 | Const:int:1 | Const:int:0 | Const:int:0 | Const:int:-1
+376:32:Name -> Const:int:0 | Const:int:1
+377:33:Name -> Const:float:0.0 | U
+382:33:Call -> U
+382:33:Attribute -> U
+382:33:Name -> U
+383:34:Call -> U
+383:34:Attribute -> U
+383:34:Name -> U
+384:28:Call -> U
+384:28:Attribute -> U
+384:28:Name -> U
+385:32:Call -> U
+385:32:Attribute -> U
+385:32:Name -> U
+386:32:Call -> U
+386:32:Attribute -> U
+386:32:Name -> U
+389:23:Call -> List:0
+389:23:Name -> Func:salt.returners.highstate_return._generate_states_report
+389:47:Name -> U
+392:11:Name -> Const:int:0 | Const:int:1
+393:23:Call -> U
+393:23:Attribute -> U
+393:23:Name -> U
+395:23:Call -> U
+395:23:Attribute -> U
+395:23:Name -> U
+397:11:Name -> U
+398:26:Call -> ERR
+398:26:Name -> ERR
+398:35:Name -> U
+399:12:Call -> ERR
+399:12:Attribute -> BM:builtins.list.insert
+399:12:Name -> List:3
+399:41:Name -> U
+399:51:Call -> List:0 | U
+399:51:Name -> Func:salt.returners.highstate_return._dict_to_name_value
+399:71:Name -> U
+404:11:Name -> List:3 | List:0
+404:19:Name -> Const:int:0 | Const:int:1
+412:13:Name -> U
+412:26:Call -> U
+412:26:Attribute -> U
+412:26:Name -> U
+412:57:Call -> U
+412:57:Attribute -> U
+412:57:Name -> U
+413:13:Call -> Inst:builtins.range
+413:13:Name -> Class:builtins.range
+413:22:Call -> ERR
+413:22:Name -> Func:builtins.len
+413:26:Name -> U
+414:8:Name -> U
+414:14:Name -> U
+414:19:Call -> Const:str:''
+414:19:Name -> Class:builtins.str
+414:23:Call -> ERR
+414:23:Attribute -> ERR
+414:23:Name -> ERR
+414:38:Name -> U
+414:44:Name -> U
+415:11:Call -> Const:str:''
+415:11:Attribute -> BM:builtins.str.join
+415:19:Name -> U
+422:20:Call -> U
+422:20:Attribute -> U
+422:20:Name -> U
+424:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+424:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+424:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+424:45:Name -> U
+426:7:Name -> U
+427:22:Call -> U
+427:22:Attribute -> Func:salt.utils.json.dumps
+427:22:Attribute -> Module:salt.utils.json
+427:22:Attribute -> Module:salt.utils
+427:22:Name -> Module:salt
+427:44:Name -> U
+428:9:Name -> U
+429:22:Call -> Inst:_io.StringIO
+429:22:Attribute -> Class:_io.StringIO
+429:22:Name -> Module:io
+430:8:Call -> U
+430:8:Attribute -> Func:salt.utils.yamldumper.safe_dump
+430:8:Attribute -> Module:salt.utils.yaml
+430:8:Attribute -> Module:salt.utils
+430:8:Name -> Module:salt
+430:34:Name -> U
+430:42:Name -> Inst:_io.StringIO
+431:8:Call -> ERR
+431:8:Attribute -> BM:_io.StringIO.seek
+431:8:Name -> Inst:_io.StringIO
+432:22:Call -> ERR
+432:22:Attribute -> BM:_io.StringIO.read
+432:22:Name -> Inst:_io.StringIO
+434:22:Call -> Inst:_io.StringIO
+434:22:Attribute -> Class:_io.StringIO
+434:22:Name -> Module:io
+435:8:Call -> Const:NoneType:None
+435:8:Name -> Func:salt.returners.highstate_return._generate_html
+435:23:Name -> U
+435:31:Name -> Inst:_io.StringIO
+436:8:Call -> ERR
+436:8:Attribute -> BM:_io.StringIO.seek
+436:8:Name -> Inst:_io.StringIO
+437:22:Call -> ERR
+437:22:Attribute -> BM:_io.StringIO.read
+437:22:Name -> Inst:_io.StringIO
+439:22:Call -> U
+439:22:Attribute -> U
+439:22:Name -> U
+441:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+441:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+441:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+441:47:Name -> U
+443:7:Name -> U
+444:22:Call -> Const:str:''
+444:22:Name -> Func:salt.returners.highstate_return._sprinkle
+444:32:Call -> U
+444:32:Attribute -> U
+444:32:Name -> U
+445:13:Call -> U
+445:13:Attribute -> Func:salt.utils.files.fopen
+445:13:Attribute -> Module:salt.utils.files
+445:13:Attribute -> Module:salt.utils
+445:13:Name -> Module:salt
+445:36:Name -> Const:str:''
+446:12:Call -> U
+446:12:Attribute -> U
+446:12:Name -> U
+446:22:Call -> U
+446:22:Attribute -> Func:salt.utils.stringutils.to_str
+446:22:Attribute -> Module:salt.utils.stringutils
+446:22:Attribute -> Module:salt.utils
+446:22:Name -> Module:salt
+446:52:Name -> U
+448:14:Call -> Inst:email.mime.text.MIMEText
+448:14:Name -> Class:email.mime.text.MIMEText
+448:23:Name -> U
+448:36:Name -> U
+450:17:Call -> U
+450:17:Attribute -> U
+450:17:Name -> U
+451:21:Call -> U
+451:21:Attribute -> U
+451:21:Name -> U
+453:15:Call -> U
+453:15:Attribute -> U
+453:15:Name -> U
+454:15:Call -> Inst:builtins.int
+454:15:Name -> Class:builtins.int
+454:19:Call -> U
+454:19:Attribute -> U
+454:19:Name -> U
+455:14:Call -> U
+455:14:Attribute -> U
+455:14:Name -> U
+456:19:Call -> U
+456:19:Attribute -> U
+456:19:Name -> U
+457:19:Call -> U
+457:19:Attribute -> U
+457:19:Name -> U
+459:11:Name -> U
+460:22:Call -> U
+460:22:Attribute -> U
+460:22:Name -> U
+462:22:Call -> U
+462:22:Attribute -> U
+462:22:Name -> U
+464:18:Call -> Const:str:''
+464:18:Name -> Func:salt.returners.highstate_return._sprinkle
+464:28:Name -> U
+466:8:Name -> Inst:email.mime.text.MIMEText
+466:25:Name -> Const:str:''
+467:8:Name -> Inst:email.mime.text.MIMEText
+467:22:Name -> U
+468:8:Name -> Inst:email.mime.text.MIMEText
+468:20:Name -> U
+470:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+470:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+470:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+470:45:Name -> Inst:builtins.int
+471:15:Call -> Inst:smtplib.SMTP
+471:15:Attribute -> Class:smtplib.SMTP
+471:15:Name -> Module:smtplib
+471:33:Name -> U
+471:44:Name -> Inst:builtins.int
+473:11:Name -> U
+474:12:Call -> Tuple:2
+474:12:Attribute -> BM:smtplib.SMTP.starttls
+474:12:Name -> Inst:smtplib.SMTP
+475:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+475:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+475:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+477:11:Name -> U
+477:24:Name -> U
+478:12:Call -> Tuple:2
+478:12:Attribute -> BM:smtplib.SMTP.login
+478:12:Name -> Inst:smtplib.SMTP
+478:23:Name -> U
+478:33:Name -> U
+479:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+479:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+479:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+481:8:Call -> Dict:0
+481:8:Attribute -> BM:smtplib.SMTP.sendmail
+481:8:Name -> Inst:smtplib.SMTP
+482:12:Name -> U
+482:21:Call -> U
+482:21:Attribute -> U
+482:21:Name -> U
+482:40:Call -> U
+482:40:Attribute -> U
+482:40:Name -> U
+482:64:Call -> U
+482:64:Attribute -> BM:email.message.Message.as_string
+482:64:Name -> Inst:email.mime.text.MIMEText
+484:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+484:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+484:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+486:8:Call -> Tuple:2
+486:8:Attribute -> BM:smtplib.SMTP.quit
+486:8:Name -> Inst:smtplib.SMTP
+494:12:Call -> Inst:builtins.dict
+494:12:Name -> Func:salt.returners.highstate_return._get_options
+494:25:Name -> U
+496:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+496:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+496:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+496:36:Name -> Inst:builtins.dict
+498:21:Call -> Tuple:2
+498:21:Name -> Func:salt.returners.highstate_return._generate_report
+498:38:Name -> U
+498:43:Name -> Inst:builtins.dict
+499:7:Name -> List:3 | List:0
+500:8:Call -> Const:NoneType:None
+500:8:Name -> Func:salt.returners.highstate_return._produce_output
+500:24:Name -> List:3
+500:32:Name -> Const:int:0 | Const:int:1
+500:40:Name -> Inst:builtins.dict
+513:9:Call -> U
+513:9:Attribute -> Func:salt.utils.files.fopen
+513:9:Attribute -> Module:salt.utils.files
+513:9:Attribute -> Module:salt.utils
+513:9:Name -> Module:salt
+514:20:Call -> U
+514:20:Attribute -> Func:salt.utils.stringutils.to_unicode
+514:20:Attribute -> Module:salt.utils.stringutils
+514:20:Attribute -> Module:salt.utils
+514:20:Name -> Module:salt
+514:54:Call -> U
+514:54:Attribute -> U
+514:54:Name -> U
+515:11:Call -> U
+515:11:Attribute -> Func:salt.utils.yamlloader.safe_load
+515:11:Attribute -> Module:salt.utils.yaml
+515:11:Attribute -> Module:salt.utils
+515:11:Name -> Module:salt
+515:37:Name -> U
+517:18:Call -> Inst:_io.StringIO
+517:18:Attribute -> Class:_io.StringIO
+517:18:Name -> Module:io
+518:4:Call -> Const:NoneType:None
+518:4:Name -> Func:salt.returners.highstate_return._generate_html
+518:19:Name -> U
+518:25:Name -> Inst:_io.StringIO
+519:4:Call -> ERR
+519:4:Attribute -> BM:_io.StringIO.seek
+519:4:Name -> Inst:_io.StringIO
+520:13:Call -> ERR
+520:13:Attribute -> BM:_io.StringIO.read
+520:13:Name -> Inst:_io.StringIO
+522:9:Call -> U
+522:9:Attribute -> Func:salt.utils.files.fopen
+522:9:Attribute -> Module:salt.utils.files
+522:9:Attribute -> Module:salt.utils
+522:9:Name -> Module:salt
+523:8:Call -> U
+523:8:Attribute -> U
+523:8:Name -> U
+523:21:Call -> U
+523:21:Attribute -> Func:salt.utils.stringutils.to_str
+523:21:Attribute -> Module:salt.utils.stringutils
+523:21:Attribute -> Module:salt.utils
+523:21:Name -> Module:salt
+523:51:Name -> U
+526:3:Name -> Const:str:'salt.returners.highstate_return' | Const:str:'__main__'
+527:4:Call -> Const:NoneType:None
+527:4:Name -> Func:salt.returners.highstate_return.__test_html

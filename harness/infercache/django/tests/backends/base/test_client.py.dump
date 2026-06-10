@@ -1,0 +1,34 @@
+8:32:Name -> Class:django.test.testcases.SimpleTestCase
+10:8:Name -> Inst:tests.backends.base.test_client.SimpleDatabaseClientTests
+10:22:Call -> Inst:django.db.backends.base.client.BaseDatabaseClient
+10:22:Name -> Class:django.db.backends.base.client.BaseDatabaseClient
+10:52:Name -> Inst:django.utils.connection.ConnectionProxy
+17:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+17:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+17:13:Name -> Inst:tests.backends.base.test_client.SimpleDatabaseClientTests
+17:38:Name -> Class:builtins.NotImplementedError
+17:59:Name -> Const:str:'subclasses of BaseDatabaseClient must p
+18:12:Call -> U
+18:12:Attribute -> BM:django.db.backends.base.client.BaseDatabaseClient.settings_to_cmd_args_env
+18:12:Attribute -> Inst:django.db.backends.base.client.BaseDatabaseClient
+18:12:Name -> Inst:tests.backends.base.test_client.SimpleDatabaseClientTests
+22:17:Call -> Gen:unittest.case.TestCase.subTest
+22:17:Attribute -> BM:unittest.case.TestCase.subTest
+22:17:Name -> Inst:tests.backends.base.test_client.SimpleDatabaseClientTests
+22:34:Name -> Const:NoneType:None | Dict:0
+23:21:Call -> Inst:unittest.mock._patch
+23:21:Attribute -> Func:unittest.mock.patch
+23:21:Name -> Module:unittest.mock
+24:25:Call -> Inst:unittest.mock._patch
+24:25:Attribute -> Func:unittest.mock._patch_object
+24:25:Attribute -> Func:unittest.mock.patch
+24:25:Name -> Module:unittest.mock
+25:24:Name -> Class:django.db.backends.base.client.BaseDatabaseClient
+27:42:Name -> Const:NoneType:None | Dict:0
+29:24:Call -> Const:NoneType:None
+29:24:Attribute -> BM:django.db.backends.base.client.BaseDatabaseClient.runshell
+29:24:Attribute -> Inst:django.db.backends.base.client.BaseDatabaseClient
+29:24:Name -> Inst:tests.backends.base.test_client.SimpleDatabaseClientTests
+30:20:Call -> U
+30:20:Attribute -> U | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with
+30:20:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock

@@ -1,0 +1,110 @@
+18:7:Name -> Class:builtins.ImportError
+21:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+21:6:Attribute -> Func:logging.getLogger
+21:6:Name -> Module:logging
+21:24:Name -> Const:str:'salt.modules.pw_group' | Const:str:'__main__'
+31:7:Name -> ERR
+32:15:Name -> Const:str:'group'
+57:13:Call -> Dict:0
+57:13:Attribute -> Func:salt.utils.args.clean_kwargs
+57:13:Attribute -> Module:salt.utils.args
+57:13:Attribute -> Module:salt.utils
+57:13:Name -> Module:salt
+57:44:Name -> Dict:0
+58:7:Call -> U | Const:bool:False
+58:7:Attribute -> Func:salt.utils.data.is_true
+58:7:Attribute -> Module:salt.utils.data
+58:7:Attribute -> Module:salt.utils
+58:7:Name -> Module:salt
+58:31:Call -> ERR
+58:31:Attribute -> BM:builtins.dict.pop
+58:31:Name -> Dict:0
+59:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+59:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+59:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+60:23:Name -> Dict:0
+61:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+61:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+61:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+62:7:Name -> Dict:0
+63:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+63:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+63:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+66:7:Name -> Const:NoneType:None | U
+67:21:Name -> U
+68:13:Name -> Const:str:'pw groupadd ' | Const:str:'pw groupadd -g Uninferable '
+68:22:Name -> U
+69:10:Call -> ERR
+69:10:Name -> ERR
+69:34:Name -> Const:str:'pw groupadd  -n Uninferable' | Const:str:'pw groupadd -g Uninferable  -n Uninfera
+71:15:Name -> U
+84:10:Call -> ERR
+84:10:Name -> ERR
+84:49:Name -> U
+86:15:Name -> U
+100:17:Call -> ERR
+100:17:Attribute -> Func:grp.getgrnam
+100:17:Name -> Module:grp
+100:30:Name -> U
+101:11:Name -> Class:builtins.KeyError
+105:20:Attribute -> U
+105:20:Name -> U
+106:22:Attribute -> U
+106:22:Name -> U
+107:19:Attribute -> U
+107:19:Name -> U
+108:23:Attribute -> U
+108:23:Name -> U
+122:25:Name -> ERR
+122:45:Name -> Const:bool:False | U
+123:15:Name -> ERR
+126:18:Call -> ERR
+126:18:Attribute -> Func:grp.getgrall
+126:18:Name -> Module:grp
+127:8:Call -> ERR
+127:8:Attribute -> BM:builtins.list.append
+127:8:Name -> List:0
+127:19:Call -> Dict:0 | Dict:4
+127:19:Name -> Func:salt.modules.pw_group.info
+127:24:Attribute -> U
+127:24:Name -> U
+128:4:Name -> ERR
+128:34:Name -> List:0
+129:11:Name -> List:0
+142:14:Call -> ERR
+142:14:Name -> ERR
+142:44:Name -> U
+143:7:Name -> U
+143:14:Name -> U
+145:25:Name -> U
+145:35:Name -> U
+146:4:Call -> ERR
+146:4:Name -> ERR
+146:24:Name -> Const:str:'pw groupmod Uninferable -g Uninferable'
+147:15:Call -> ERR
+147:15:Name -> ERR
+147:45:Name -> U
+148:7:Name -> U
+148:19:Name -> U
+149:15:Name -> U
+149:27:Name -> U
+167:14:Call -> ERR
+167:14:Name -> ERR
+168:23:Name -> U
+168:33:Name -> U
+171:15:Name -> U
+187:15:Call -> ERR
+187:15:Name -> ERR
+187:38:Name -> U
+189:7:Name -> U
+189:23:Name -> U
+193:14:Call -> ERR
+193:14:Name -> ERR
+194:23:Name -> U
+194:33:Name -> U
+197:15:Name -> U
+216:14:Call -> ERR
+216:14:Name -> ERR
+217:23:Name -> U
+217:33:Name -> U
+220:15:Name -> U

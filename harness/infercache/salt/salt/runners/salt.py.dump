@@ -1,0 +1,91 @@
+41:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+41:6:Attribute -> Func:logging.getLogger
+41:6:Name -> Module:logging
+41:24:Name -> Const:str:'salt.runners.salt' | Const:str:'__main__'
+79:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+79:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+79:64:Name -> U
+81:13:Call -> Dict:0
+81:13:Attribute -> Func:salt.utils.args.clean_kwargs
+81:13:Attribute -> Module:salt.utils.args
+81:13:Attribute -> Module:salt.utils
+81:13:Name -> Module:salt
+81:44:Name -> Dict:0
+82:18:Call -> ERR
+82:18:Attribute -> BM:builtins.dict.pop
+82:18:Name -> Dict:0
+84:11:Call -> U
+84:11:Attribute -> Func:copy.deepcopy
+84:11:Name -> Module:copy
+84:25:Name -> ERR
+85:4:Name -> U
+85:21:Call -> U
+85:21:Attribute -> Func:salt.loader.grains
+85:21:Attribute -> Module:salt.loader
+85:21:Name -> Module:salt
+85:40:Name -> U
+87:7:Name -> U
+88:8:Name -> U
+88:25:Call -> Dict:0 | U
+88:25:Attribute -> BM:salt.pillar.PillarCache.compile_pillar | U
+88:25:Call -> Inst:salt.pillar.PillarCache | U
+88:25:Attribute -> Func:salt.pillar.get_pillar
+88:25:Attribute -> Module:salt.pillar
+88:25:Name -> Module:salt
+89:12:Name -> U
+90:12:Name -> U
+91:12:Name -> U
+92:20:Name -> U
+93:22:Call -> U
+93:22:Attribute -> U
+93:22:Name -> U
+96:8:Name -> U
+98:16:Call -> Inst:salt.loader.lazy.LazyLoader
+98:16:Attribute -> Func:salt.loader.minion_mods
+98:16:Attribute -> Module:salt.loader
+98:16:Name -> Module:salt
+99:8:Name -> U
+99:20:Call -> Inst:salt.loader.lazy.LazyLoader
+99:20:Attribute -> Func:salt.loader.utils
+99:20:Attribute -> Module:salt.loader
+99:20:Name -> Module:salt
+99:38:Name -> U
+99:53:Name -> ERR
+104:11:Name -> U
+104:18:Name -> Inst:salt.loader.lazy.LazyLoader
+103:8:Call -> U
+103:8:Name -> Inst:salt.loader.lazy.LazyLoader
+103:18:Name -> U
+103:24:Name -> Tuple:0
+103:32:Name -> Dict:0
+105:17:Name -> U
+151:9:Call -> Inst:salt.client.LocalClient
+151:9:Attribute -> Func:salt.client.get_local_client
+151:9:Attribute -> Module:salt.client
+151:9:Name -> Module:salt
+151:38:Name -> ERR
+153:19:Call -> U
+153:19:Attribute -> U
+153:19:Name -> Inst:salt.client.LocalClient
+154:16:Name -> U
+155:16:Name -> U
+156:20:Name -> Tuple:0 | U
+157:24:Name -> Const:NoneType:None | U
+157:35:Name -> ERR
+158:25:Name -> Const:str:'glob' | U
+159:20:Name -> Const:str:'' | U
+160:20:Name -> Const:str:'' | U
+161:22:Name -> Const:NoneType:None | U
+162:18:Name -> Dict:0
+164:15:Name -> Class:salt.exceptions.SaltClientError
+165:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+165:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+165:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+165:61:Name -> U
+165:66:Name -> U
+165:71:Name -> Const:str:'glob' | U
+166:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+166:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+166:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+166:22:Name -> ExcInst:salt.exceptions.SaltClientError

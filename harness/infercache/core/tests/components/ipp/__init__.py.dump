@@ -1,0 +1,38 @@
+20:16:Name -> Const:str:'192.168.1.31'
+22:16:Name -> Const:int:631
+26:4:Name -> Const:str:'host'
+26:15:Name -> Const:str:'192.168.1.31'
+27:4:Name -> Const:str:'port'
+27:15:Name -> Const:int:631
+28:4:Name -> Const:str:'ssl'
+29:4:Name -> Const:str:'verify_ssl'
+30:4:Name -> Const:str:'base_path'
+30:20:Name -> Const:str:'/ipp/print'
+33:33:Call -> Inst:homeassistant.helpers.service_info.zeroconf.ZeroconfServiceInfo
+33:33:Name -> Class:homeassistant.helpers.service_info.zeroconf.ZeroconfServiceInfo
+34:9:Name -> Const:str:'_ipp._tcp.local.'
+35:12:Name -> Const:str:'EPSON XP-6000 Series'
+35:28:Name -> Const:str:'_ipp._tcp.local.'
+36:15:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address
+36:15:Name -> Func:ipaddress.ip_address
+36:26:Name -> Const:str:'192.168.1.31'
+37:18:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address
+37:18:Name -> Func:ipaddress.ip_address
+37:29:Name -> Const:str:'192.168.1.31'
+38:13:Name -> Const:str:'EPSON123456.local.'
+39:9:Name -> Const:int:631
+40:22:Name -> Const:str:'ipp/print'
+43:34:Call -> Inst:homeassistant.helpers.service_info.zeroconf.ZeroconfServiceInfo
+43:34:Name -> Class:homeassistant.helpers.service_info.zeroconf.ZeroconfServiceInfo
+44:9:Name -> Const:str:'_ipps._tcp.local.'
+45:12:Name -> Const:str:'EPSON XP-6000 Series'
+45:28:Name -> Const:str:'_ipps._tcp.local.'
+46:15:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address
+46:15:Name -> Func:ipaddress.ip_address
+46:26:Name -> Const:str:'192.168.1.31'
+47:18:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address
+47:18:Name -> Func:ipaddress.ip_address
+47:29:Name -> Const:str:'192.168.1.31'
+48:13:Name -> Const:str:'EPSON123456.local.'
+49:9:Name -> Const:int:631
+50:22:Name -> Const:str:'ipp/print'

@@ -1,0 +1,371 @@
+34:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+34:10:Attribute -> Func:logging.getLogger
+34:10:Name -> Module:logging
+34:28:Name -> Const:str:'homeassistant.components.tado.water_hea | Const:str:'__main__'
+40:19:Name -> Const:str:'auto'
+40:30:Name -> Const:str:'heat'
+40:41:Name -> Const:str:'off'
+43:4:Name -> Const:str:'MANUAL'
+43:26:Name -> Const:str:'heat'
+44:4:Name -> Const:str:'TIMER'
+44:25:Name -> Const:str:'heat'
+45:4:Name -> Const:str:'NEXT_TIME_BLOCK'
+45:29:Name -> Const:str:'heat'
+46:4:Name -> U
+46:21:Name -> Const:str:'heat'
+47:4:Name -> Const:str:'SMART_SCHEDULE'
+47:31:Name -> Const:str:'auto'
+48:4:Name -> Const:str:'OFF'
+48:20:Name -> Const:str:'off'
+54:27:Name -> Class:builtins.dict
+55:4:Call -> U
+55:4:Attribute -> U
+55:4:Name -> U
+55:17:Name -> Const:str:'time_period'
+55:56:Call -> U
+55:56:Attribute -> U
+55:56:Name -> U
+56:8:Attribute -> U
+56:8:Name -> Module:homeassistant.helpers.config_validation
+56:24:Attribute -> Func:homeassistant.helpers.config_validation.positive_timedelta
+56:24:Name -> Module:homeassistant.helpers.config_validation
+56:58:Call -> U
+56:58:Attribute -> U
+56:58:Name -> U
+58:4:Call -> U
+58:4:Attribute -> U
+58:4:Name -> U
+58:17:Name -> Const:str:'temperature'
+58:36:Call -> U
+58:36:Attribute -> U
+58:36:Name -> U
+58:47:Name -> Class:builtins.float
+63:10:Name -> U
+64:11:Name -> U
+65:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+69:18:Attribute -> U
+69:18:Name -> U
+70:21:Call -> List:0
+70:21:Name -> Func:homeassistant.components.tado.water_heater._generate_entities
+70:40:Name -> U
+72:15:Call -> U
+72:15:Attribute -> Func:homeassistant.helpers.entity_platform.async_get_current_platform
+72:15:Name -> Module:homeassistant.helpers.entity_platform
+74:4:Call -> U
+74:4:Attribute -> U
+74:4:Name -> U
+75:8:Name -> Const:str:'set_water_heater_timer'
+76:8:Name -> Dict:2
+80:4:Call -> U
+80:4:Name -> U
+80:23:Name -> U
+82:4:Call -> Const:NoneType:None
+82:4:Name -> Func:homeassistant.components.tado.repairs.manage_water_heater_fallback_issue
+83:13:Name -> U
+84:28:Attribute -> U
+84:28:Name -> U
+84:49:Name -> U
+85:37:Attribute -> U
+85:37:Name -> U
+89:42:Name -> Class:homeassistant.components.tado.coordinator.TadoDataUpdateCoordinator
+89:72:Name -> Class:builtins.list
+93:16:Attribute -> U
+93:16:Name -> U
+94:11:Name -> U
+94:27:Name -> Const:str:'HOT_WATER'
+95:27:Call -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+95:27:Name -> Func:homeassistant.components.tado.water_heater.create_water_heater_entity
+96:16:Name -> U
+96:29:Name -> U
+96:43:Name -> U
+96:55:Call -> Const:str:''
+96:55:Name -> Class:builtins.str
+96:59:Name -> U
+98:12:Call -> ERR
+98:12:Attribute -> BM:builtins.list.append
+98:12:Name -> List:0
+98:28:Name -> U
+100:11:Name -> List:0
+104:17:Name -> Class:homeassistant.components.tado.coordinator.TadoDataUpdateCoordinator
+104:50:Name -> Class:builtins.str
+104:64:Name -> Class:builtins.int
+104:75:Name -> Class:builtins.str
+107:25:Call -> U
+107:25:Attribute -> U
+107:25:Name -> U
+107:54:Name -> U
+109:35:Name -> U
+111:7:Name -> U
+111:58:Name -> U
+112:23:Name -> U
+113:19:Call -> Inst:builtins.float
+113:19:Name -> Class:builtins.float
+113:25:Name -> U
+114:19:Call -> Inst:builtins.float
+114:19:Name -> Class:builtins.float
+114:25:Name -> U
+119:11:Call -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+119:11:Name -> Class:homeassistant.components.tado.water_heater.TadoWaterHeater
+120:8:Name -> U
+121:8:Name -> U
+122:8:Name -> U
+123:8:Name -> U
+124:8:Name -> Inst:builtins.float | Const:NoneType:None
+125:8:Name -> Inst:builtins.float | Const:NoneType:None
+129:22:Name -> Class:homeassistant.components.tado.entity.TadoZoneEntity
+129:38:Name -> Class:homeassistant.components.water_heater.WaterHeaterEntity
+133:27:Name -> List:3
+134:29:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+134:29:Name -> Class:homeassistant.const.UnitOfTemperature
+138:21:Name -> Class:homeassistant.components.tado.coordinator.TadoDataUpdateCoordinator
+139:19:Name -> Class:builtins.str
+140:17:Name -> Class:builtins.int
+141:38:Name -> Class:builtins.bool
+146:8:Call -> Const:NoneType:None
+146:8:Attribute -> BM:homeassistant.components.tado.entity.TadoZoneEntity.__init__ | BM:builtins.object.__init__
+146:8:Call -> Super
+146:8:Name -> Class:builtins.super
+146:25:Name -> U
+146:36:Attribute -> U
+146:36:Name -> U
+146:57:Name -> U
+146:66:Name -> U
+148:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+148:23:Name -> U
+149:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+149:34:Name -> U
+149:44:Attribute -> U
+149:44:Name -> U
+151:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+153:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+153:45:Name -> U
+154:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+154:32:Name -> U
+155:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+155:32:Name -> U
+157:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+157:27:Name -> Class:builtins.float
+159:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+159:40:Attribute -> Inst:homeassistant.components.water_heater.WaterHeaterEntityFeature.OPERATION_MODE
+159:40:Name -> Class:homeassistant.components.water_heater.WaterHeaterEntityFeature
+160:11:Attribute -> U
+160:11:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+161:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+161:45:Attribute -> Inst:homeassistant.components.water_heater.WaterHeaterEntityFeature.TARGET_TEMPERATURE
+161:45:Name -> Class:homeassistant.components.water_heater.WaterHeaterEntityFeature
+163:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+163:39:Name -> Const:str:'SMART_SCHEDULE'
+164:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+164:29:Name -> Const:str:'SMART_SCHEDULE'
+165:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+165:30:Name -> Class:typing.Any
+167:8:Call -> Const:NoneType:None
+167:8:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._async_update_data
+167:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+169:5:Name -> U
+172:8:Call -> Const:NoneType:None
+172:8:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._async_update_data
+172:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+173:8:Call -> ERR
+173:8:Attribute -> ERR
+173:8:Call -> Super
+173:8:Name -> Class:builtins.super
+175:5:Name -> Class:builtins.property
+176:35:Name -> Class:builtins.str
+178:15:Call -> ERR
+178:15:Attribute -> BM:builtins.dict.get
+178:15:Name -> Dict:6
+178:41:Attribute -> Const:str:'SMART_SCHEDULE' | U
+178:41:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+180:5:Name -> Class:builtins.property
+181:36:Name -> Class:builtins.float
+183:15:Attribute -> U
+183:15:Attribute -> Const:NoneType:None | U
+183:15:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+185:5:Name -> Class:builtins.property
+186:33:Name -> Class:builtins.bool
+188:15:Attribute -> U
+188:15:Attribute -> Const:NoneType:None | U
+188:15:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+190:5:Name -> Class:builtins.property
+191:26:Name -> Class:builtins.float
+193:15:Attribute -> U
+193:15:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+195:5:Name -> Class:builtins.property
+196:26:Name -> Class:builtins.float
+198:15:Attribute -> U
+198:15:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+200:61:Name -> Class:builtins.str
+204:11:Name -> U
+204:29:Name -> Const:str:'off'
+205:19:Name -> Const:str:'OFF'
+206:13:Name -> U
+206:31:Name -> Const:str:'auto'
+207:19:Name -> Const:str:'SMART_SCHEDULE'
+208:13:Name -> U
+208:31:Name -> Const:str:'heat'
+209:19:Name -> Const:str:'HEAT'
+211:14:Call -> Const:NoneType:None | Const:NoneType:None
+211:14:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._control_heater
+211:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+211:45:Name -> Const:NoneType:None | Const:str:'OFF' | Const:str:'SMART_SCHEDULE' | Const:str:'HEAT'
+212:14:Call -> ERR
+212:14:Attribute -> ERR
+212:14:Attribute -> ERR
+212:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+214:43:Name -> Class:builtins.int
+214:61:Name -> Class:builtins.float
+216:15:Attribute -> U
+216:15:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+216:54:Name -> Const:NoneType:None | U
+219:14:Call -> Const:NoneType:None | Const:NoneType:None
+219:14:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._control_heater
+219:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+220:22:Name -> Const:str:'HEAT'
+220:51:Name -> Const:NoneType:None | U | Const:NoneType:None
+220:73:Name -> U
+222:14:Call -> ERR
+222:14:Attribute -> ERR
+222:14:Attribute -> ERR
+222:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+224:52:Name -> Class:typing.Any
+226:22:Call -> ERR
+226:22:Attribute -> BM:builtins.dict.get
+226:22:Name -> Dict:0
+226:33:Name -> Const:str:'temperature'
+227:15:Attribute -> U
+227:15:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+227:53:Name -> U
+230:11:Attribute -> Const:str:'SMART_SCHEDULE' | U
+230:11:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+231:12:Name -> Const:str:'OFF'
+232:12:Name -> Const:str:'AUTO'
+233:12:Name -> Const:str:'SMART_SCHEDULE'
+235:18:Call -> Const:NoneType:None | Const:NoneType:None
+235:18:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._control_heater
+235:18:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+235:51:Name -> U
+238:14:Call -> Const:NoneType:None | Const:NoneType:None
+238:14:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._control_heater
+238:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+238:47:Name -> U
+238:70:Name -> Const:str:'HEAT'
+239:14:Call -> ERR
+239:14:Attribute -> ERR
+239:14:Attribute -> ERR
+239:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+241:5:Name -> U
+244:8:Call -> Const:NoneType:None
+244:8:Attribute -> BM:homeassistant.components.tado.water_heater.TadoWaterHeater._async_update_data
+244:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+245:8:Call -> Const:NoneType:None
+245:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+245:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+247:5:Name -> U
+250:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+250:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+250:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+250:68:Attribute -> U
+250:68:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+251:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+251:31:Attribute -> ERR
+251:31:Attribute -> ERR
+251:31:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+251:61:Attribute -> U
+251:61:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+252:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+252:39:Attribute -> U
+252:39:Attribute -> Const:NoneType:None | U
+252:39:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+256:19:Name -> Class:builtins.str
+257:21:Name -> Class:builtins.float
+258:18:Name -> Class:builtins.int
+261:11:Name -> Const:NoneType:None | U
+262:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+262:43:Name -> U
+264:11:Name -> Const:NoneType:None | U
+265:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+265:32:Name -> U
+268:11:Attribute -> Const:NoneType:None | U
+268:11:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+269:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+269:32:Attribute -> U
+269:32:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+271:11:Attribute -> Const:str:'SMART_SCHEDULE' | U
+271:11:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+271:43:Name -> Const:str:'SMART_SCHEDULE'
+272:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+272:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+272:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+274:16:Attribute -> U
+274:16:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+275:16:Attribute -> U
+275:16:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+277:18:Call -> ERR
+277:18:Attribute -> ERR
+277:18:Attribute -> ERR
+277:18:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+277:54:Attribute -> U
+277:54:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+278:18:Call -> ERR
+278:18:Attribute -> ERR
+278:18:Attribute -> ERR
+278:18:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+281:11:Attribute -> Const:str:'SMART_SCHEDULE' | U
+281:11:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+281:43:Name -> Const:str:'OFF'
+282:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+282:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+282:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+283:53:Attribute -> U
+283:53:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+283:69:Attribute -> U
+283:69:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+285:18:Call -> ERR
+285:18:Attribute -> ERR
+285:18:Attribute -> ERR
+285:18:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+286:16:Attribute -> U
+286:16:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+286:30:Name -> Const:str:'MANUAL'
+286:52:Name -> Const:str:'HOT_WATER'
+290:23:Call -> Const:str:'TIMER' | Const:NoneType:None | U
+290:23:Name -> Func:homeassistant.components.tado.helper.decide_overlay_mode
+291:24:Attribute -> ERR
+291:24:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+292:21:Name -> Const:NoneType:None | U
+293:20:Attribute -> U
+293:20:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+295:19:Call -> Const:NoneType:None | U | Inst:builtins.int | Const:int:3600
+295:19:Name -> Func:homeassistant.components.tado.helper.decide_duration
+296:24:Attribute -> ERR
+296:24:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+297:21:Name -> Const:NoneType:None | U
+298:20:Attribute -> U
+298:20:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+299:25:Name -> Const:str:'TIMER' | Const:NoneType:None | U
+301:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+301:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+301:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+303:12:Attribute -> Const:str:'SMART_SCHEDULE' | U
+303:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+304:12:Attribute -> U
+304:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+305:12:Attribute -> U
+305:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+306:12:Attribute -> Const:NoneType:None | U
+306:12:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+308:14:Call -> ERR
+308:14:Attribute -> ERR
+308:14:Attribute -> ERR
+308:14:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+309:20:Attribute -> U
+309:20:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+310:25:Name -> Const:str:'TIMER' | Const:NoneType:None | U
+311:24:Attribute -> Const:NoneType:None | U
+311:24:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+312:21:Name -> Const:NoneType:None | U | Inst:builtins.int | Const:int:3600
+313:24:Name -> Const:str:'HOT_WATER'
+315:8:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater
+315:29:Attribute -> Const:str:'SMART_SCHEDULE' | U
+315:29:Name -> Inst:homeassistant.components.tado.water_heater.TadoWaterHeater

@@ -1,0 +1,2375 @@
+50:7:Name -> Class:builtins.ImportError
+54:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:6:Attribute -> Func:logging.getLogger
+54:6:Name -> Module:logging
+54:24:Name -> Const:str:'salt.daemons.masterapi' | Const:str:'__main__'
+74:36:Name -> Tuple:11
+75:17:Name -> Tuple:11 | U
+76:11:Call -> U
+76:11:Attribute -> Func:fnmatch.fnmatch
+76:11:Name -> Module:fnmatch
+76:27:Name -> U
+76:32:Name -> Const:str:'salt/job/*/publish' | Const:str:'salt/job/*/new' | Const:str:'salt/job/*/return' | Const:str:'salt/key' | Const:str:'salt/cloud/*' | Const:str:'salt/run/*' | Const:str:'salt/cluster/*' | Const:str:'salt/wheel/*/new' | Const:str:'salt/wheel/*/return' | Const:str:'salt/run/*' | Const:str:'salt/cloud/*'
+86:22:Name -> U
+86:33:Call -> U
+86:33:Attribute -> U
+86:33:Name -> U
+87:20:Name -> U
+89:25:Call -> Inst:salt.utils.gitfs.GitPillar
+89:25:Attribute -> Class:salt.utils.gitfs.GitPillar
+89:25:Attribute -> Module:salt.utils.gitfs
+89:25:Attribute -> Module:salt.utils
+89:25:Name -> Module:salt
+90:20:Name -> U
+91:20:Name -> U
+92:41:Attribute -> Tuple:10
+92:41:Name -> Module:salt.pillar.git_pillar
+93:36:Attribute -> Tuple:3
+93:36:Name -> Module:salt.pillar.git_pillar
+94:32:Attribute -> Tuple:1
+94:32:Name -> Module:salt.pillar.git_pillar
+96:16:Call -> ERR
+96:16:Attribute -> BM:builtins.list.append
+96:16:Name -> List:0
+96:27:Name -> Inst:salt.utils.gitfs.GitPillar
+97:19:Attribute -> Class:salt.exceptions.FileserverConfigError
+97:19:Attribute -> Module:salt.exceptions
+97:19:Name -> Module:salt
+98:19:Call -> U
+98:19:Attribute -> U
+98:19:Name -> U
+101:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+101:20:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+101:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+102:11:Name -> List:0
+111:11:Name -> Const:str:'git' | Const:str:'hg' | Const:str:'svn'
+111:22:Name -> U
+112:24:Call -> U
+112:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+112:24:Attribute -> Module:posixpath | Module:ntpath
+112:24:Name -> Module:os
+112:37:Name -> U
+112:58:Name -> Const:str:'git' | Const:str:'hg' | Const:str:'svn'
+113:15:Call -> Const:bool:False | U
+113:15:Attribute -> Func:genericpath.isfile | U
+113:15:Attribute -> Module:posixpath | Module:ntpath
+113:15:Name -> Module:os
+113:30:Name -> U
+114:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+114:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+114:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+114:53:Name -> Const:str:'git' | Const:str:'hg' | Const:str:'svn'
+116:20:Call -> ERR
+116:20:Attribute -> Func:posix.remove
+116:20:Name -> Module:os
+116:30:Name -> U
+117:23:Name -> Class:builtins.OSError
+118:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+118:20:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+118:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+119:65:Name -> U
+119:76:Name -> ExcInst:builtins.OSError
+122:29:Call -> U
+122:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+122:29:Attribute -> Module:posixpath | Module:ntpath
+122:29:Name -> Module:os
+123:16:Name -> U
+123:51:Name -> Const:str:'git' | Const:str:'hg' | Const:str:'svn'
+126:36:Call -> ERR
+126:36:Attribute -> Func:posix.listdir
+126:36:Name -> Module:os
+126:47:Name -> U
+127:19:Name -> Class:builtins.OSError
+129:36:Call -> List:0
+129:36:Attribute -> Func:fnmatch.filter
+129:36:Name -> Module:fnmatch
+129:51:Name -> U
+130:29:Call -> U
+130:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+130:29:Attribute -> Module:posixpath | Module:ntpath
+130:29:Name -> Module:os
+130:42:Name -> U
+130:58:Name -> U
+132:20:Call -> ERR
+132:20:Attribute -> Func:posix.remove
+132:20:Name -> Module:os
+132:30:Name -> U
+133:23:Name -> Class:builtins.OSError
+134:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+134:20:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+134:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+135:66:Name -> U
+135:78:Name -> ExcInst:builtins.OSError
+143:15:Call -> Inst:salt.auth.LoadAuth
+143:15:Attribute -> Class:salt.auth.LoadAuth
+143:15:Attribute -> Module:salt.auth
+143:15:Name -> Module:salt
+143:34:Name -> U
+144:4:Call -> Const:NoneType:None
+144:4:Attribute -> BM:salt.auth.LoadAuth.clean_expired_tokens
+144:4:Name -> Inst:salt.auth.LoadAuth
+149:21:Call -> U
+149:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+149:21:Attribute -> Module:posixpath | Module:ntpath
+149:21:Name -> Module:os
+149:34:Name -> U
+150:15:Call -> Const:bool:False | Const:bool:True | U
+150:15:Attribute -> Func:genericpath.exists | U
+150:15:Attribute -> Module:posixpath | Module:ntpath
+150:15:Name -> Module:os
+150:30:Name -> U
+153:48:Call -> Gen:salt.utils.path.os_walk
+153:48:Attribute -> Func:salt.utils.path.os_walk
+153:48:Attribute -> Module:salt.utils.path
+153:48:Attribute -> Module:salt.utils
+153:48:Name -> Module:salt
+153:72:Name -> U
+154:33:Name -> U
+155:37:Call -> U
+155:37:Attribute -> Func:posixpath.join | Func:ntpath.join
+155:37:Attribute -> Module:posixpath | Module:ntpath
+155:37:Name -> Module:os
+155:50:Name -> U
+155:59:Name -> U
+156:27:Call -> Const:bool:False | U
+156:27:Attribute -> Func:genericpath.isfile | U
+156:27:Attribute -> Module:posixpath | Module:ntpath
+156:27:Name -> Module:os
+156:42:Name -> U
+158:23:Call -> ERR
+158:23:Attribute -> Func:time.time
+158:23:Name -> Module:time
+158:37:Call -> U
+158:37:Attribute -> Func:genericpath.getmtime
+158:37:Attribute -> Module:posixpath | Module:ntpath
+158:37:Name -> Module:os
+158:54:Name -> U
+159:24:Call -> U
+159:24:Attribute -> Func:salt.utils.job.get_keep_jobs_seconds
+159:24:Attribute -> Module:salt.utils.job
+159:24:Attribute -> Module:salt.utils
+159:24:Name -> Module:salt
+159:61:Name -> U
+161:24:Call -> ERR
+161:24:Attribute -> Func:posix.remove
+161:24:Name -> Module:os
+161:34:Name -> U
+162:11:Name -> Class:builtins.OSError
+163:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+163:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+163:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+171:14:Call -> Inst:salt.minion.MasterMinion
+171:14:Attribute -> Class:salt.minion.MasterMinion
+171:14:Attribute -> Module:salt.minion
+171:14:Name -> Module:salt
+172:8:Name -> U
+177:11:Call -> U
+177:11:Attribute -> BM:builtins.str.format
+177:38:Name -> U
+178:7:Name -> U
+178:15:Attribute -> Inst:salt.loader.lazy.LazyLoader
+178:15:Name -> Inst:salt.minion.MasterMinion
+179:8:Call -> U
+179:8:Attribute -> Inst:salt.loader.lazy.LazyLoader
+179:8:Name -> Inst:salt.minion.MasterMinion
+179:26:Name -> U
+183:7:Name -> Const:bool:True | Const:bool:False
+186:18:Attribute -> ERR
+186:18:Call -> ERR
+186:18:Attribute -> Func:pwd.getpwnam
+186:18:Name -> Module:pwd
+186:31:Name -> U
+187:15:Name -> Class:builtins.KeyError
+189:15:Name -> U
+191:7:Call -> U
+191:7:Attribute -> Func:salt.utils.platform.is_windows
+191:7:Attribute -> Module:salt.utils.platform
+191:7:Attribute -> Module:salt.utils
+191:7:Name -> Module:salt
+194:18:Call -> U
+194:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+194:18:Attribute -> Module:posixpath | Module:ntpath
+194:18:Name -> Module:os
+195:12:Name -> U
+195:30:Call -> U
+195:30:Attribute -> BM:builtins.str.format
+195:47:Call -> U
+195:47:Attribute -> U
+195:47:Name -> U
+198:18:Call -> U
+198:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+198:18:Attribute -> Module:posixpath | Module:ntpath
+198:18:Name -> Module:os
+198:31:Name -> U
+198:53:Name -> U
+200:7:Call -> Const:bool:False | Const:bool:True | U
+200:7:Attribute -> Func:genericpath.exists | U
+200:7:Attribute -> Module:posixpath | Module:ntpath
+200:7:Name -> Module:os
+200:22:Name -> U
+201:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+201:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+201:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+201:48:Name -> U
+202:11:Call -> U
+202:11:Attribute -> Func:salt.utils.platform.is_windows
+202:11:Attribute -> Module:salt.utils.platform
+202:11:Attribute -> Module:salt.utils
+202:11:Name -> Module:salt
+202:52:Call -> ERR
+202:52:Attribute -> Func:posix.access
+202:52:Name -> Module:os
+202:62:Name -> U
+202:71:Attribute -> Const:int:2
+202:71:Name -> Module:os
+204:12:Call -> ERR
+204:12:Attribute -> Func:posix.chmod
+204:12:Name -> Module:os
+204:21:Name -> U
+204:30:Attribute -> Const:int:256 | Const:int:256
+204:30:Name -> Module:stat
+204:45:Attribute -> Const:int:128 | Const:int:128
+204:45:Name -> Module:stat
+205:8:Call -> ERR
+205:8:Attribute -> Func:posix.unlink
+205:8:Name -> Module:os
+205:18:Name -> U
+207:10:Call -> U
+207:10:Attribute -> BM:salt.crypt.Crypticle.generate_key_string
+207:10:Attribute -> Class:salt.crypt.Crypticle
+207:10:Attribute -> Module:salt.crypt
+207:10:Name -> Module:salt
+208:9:Call -> Gen:salt.utils.files.set_umask
+208:9:Attribute -> Func:salt.utils.files.set_umask
+208:9:Attribute -> Module:salt.utils.files
+208:9:Attribute -> Module:salt.utils
+208:9:Name -> Module:salt
+209:13:Call -> U
+209:13:Attribute -> Func:salt.utils.files.fopen
+209:13:Attribute -> Module:salt.utils.files
+209:13:Attribute -> Module:salt.utils
+209:13:Name -> Module:salt
+209:36:Name -> U
+210:12:Call -> U
+210:12:Attribute -> U
+210:12:Name -> U
+210:22:Call -> U
+210:22:Attribute -> Func:salt.utils.stringutils.to_str
+210:22:Attribute -> Module:salt.utils.stringutils
+210:22:Attribute -> Module:salt.utils
+210:22:Name -> Module:salt
+210:52:Name -> U
+214:4:Call -> ERR
+214:4:Attribute -> Func:posix.chmod
+214:4:Name -> Module:os
+214:13:Name -> U
+215:7:Name -> Const:bool:True | Const:bool:False
+215:19:Name -> Const:NoneType:None | U
+217:12:Call -> ERR
+217:12:Attribute -> Func:posix.chown
+217:12:Name -> Module:os
+217:21:Name -> U
+217:30:Name -> Const:NoneType:None | U
+218:15:Name -> Class:builtins.OSError
+222:11:Name -> U
+233:20:Name -> U
+234:16:Call -> Inst:builtins.set
+234:16:Name -> Class:builtins.set
+234:20:Call -> U
+234:20:Attribute -> U
+234:20:Name -> U
+235:7:Call -> U
+235:7:Attribute -> U
+235:7:Name -> U
+236:8:Call -> ERR
+236:8:Attribute -> BM:builtins.set.add
+236:8:Name -> Inst:builtins.set
+236:22:Name -> U
+237:4:Call -> ERR
+237:4:Attribute -> BM:builtins.set.add
+237:4:Name -> Inst:builtins.set
+237:18:Call -> U
+237:18:Attribute -> Func:salt.utils.user.get_user
+237:18:Attribute -> Module:salt.utils.user
+237:18:Attribute -> Module:salt.utils
+237:18:Name -> Module:salt
+238:16:Name -> Inst:builtins.set
+239:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+239:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+239:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+239:65:Name -> U
+241:18:Call -> U
+241:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+241:18:Attribute -> Module:posixpath | Module:ntpath
+241:18:Name -> Module:os
+241:31:Name -> U
+241:53:Name -> U
+242:11:Call -> Const:bool:False | Const:bool:True | U
+242:11:Attribute -> Func:genericpath.exists | U
+242:11:Attribute -> Module:posixpath | Module:ntpath
+242:11:Name -> Module:os
+242:26:Name -> U
+243:17:Call -> U
+243:17:Attribute -> Func:salt.utils.files.fopen
+243:17:Attribute -> Module:salt.utils.files
+243:17:Attribute -> Module:salt.utils
+243:17:Name -> Module:salt
+243:40:Name -> U
+244:22:Call -> U
+244:22:Attribute -> Func:salt.utils.stringutils.to_unicode
+244:22:Attribute -> Module:salt.utils.stringutils
+244:22:Attribute -> Module:salt.utils
+244:22:Name -> Module:salt
+244:56:Call -> U
+244:56:Attribute -> U
+244:56:Name -> U
+246:18:Call -> Const:NoneType:None | U
+246:18:Name -> Func:salt.daemons.masterapi.mk_key
+246:25:Name -> U
+246:31:Name -> U
+247:11:Name -> U | Const:NoneType:None
+248:12:Name -> Dict:0
+248:17:Name -> U
+248:25:Name -> U
+251:7:Name -> U
+251:37:Name -> Const:bool:True | Const:bool:False
+252:8:Call -> U
+252:8:Attribute -> U
+252:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+253:20:Call -> ERR
+253:20:Attribute -> Func:pwd.getpwall
+253:20:Name -> Module:pwd
+254:19:Attribute -> U
+254:19:Name -> U
+255:15:Name -> U
+255:27:Name -> Dict:0
+255:36:Call -> U | Const:bool:True
+255:36:Attribute -> Func:salt.utils.stringutils.check_whitelist_blacklist
+255:36:Attribute -> Module:salt.utils.stringutils
+255:36:Attribute -> Module:salt.utils
+255:36:Name -> Module:salt
+256:16:Name -> U
+256:32:Name -> Inst:builtins.set
+258:19:Call -> Const:bool:False | Const:bool:True | U
+258:19:Attribute -> Func:genericpath.exists | U
+258:19:Attribute -> Module:posixpath | Module:ntpath
+258:19:Name -> Module:os
+258:34:Name -> U
+259:25:Call -> U
+259:25:Attribute -> Func:salt.utils.files.fopen
+259:25:Attribute -> Module:salt.utils.files
+259:25:Attribute -> Module:salt.utils
+259:25:Name -> Module:salt
+259:48:Name -> U
+260:24:Name -> Dict:0
+260:29:Name -> U
+260:37:Call -> U
+260:37:Attribute -> Func:salt.utils.stringutils.to_unicode
+260:37:Attribute -> Module:salt.utils.stringutils
+260:37:Attribute -> Module:salt.utils
+260:37:Name -> Module:salt
+260:71:Call -> U
+260:71:Attribute -> U
+260:71:Name -> U
+262:20:Name -> Dict:0
+262:25:Name -> U
+262:33:Call -> Const:NoneType:None | U
+262:33:Name -> Func:salt.daemons.masterapi.mk_key
+262:40:Name -> U
+262:46:Name -> U
+263:8:Call -> U
+263:8:Attribute -> U
+263:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+265:11:Name -> Dict:0
+274:15:Attribute -> U
+274:15:Name -> U
+275:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+275:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+275:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+279:18:Call -> ExcInst:salt.exceptions.SaltMasterError
+279:18:Attribute -> Class:salt.exceptions.SaltMasterError
+279:18:Attribute -> Module:salt.exceptions
+279:18:Name -> Module:salt
+280:8:Call -> U
+280:8:Attribute -> U
+280:8:Name -> U
+281:11:Name -> Class:builtins.Exception
+282:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+282:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+282:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+284:12:Name -> ExcInst:builtins.Exception
+285:33:Attribute -> Const:int:10
+285:33:Name -> Module:logging
+295:8:Name -> Inst:salt.daemons.masterapi.AutoKey
+296:8:Name -> Inst:salt.daemons.masterapi.AutoKey
+296:20:Name -> U
+302:11:Call -> U
+302:11:Attribute -> Func:salt.utils.platform.is_windows
+302:11:Attribute -> Module:salt.utils.platform
+302:11:Attribute -> Module:salt.utils
+302:11:Name -> Module:salt
+306:17:Call -> List:0 | U
+306:17:Attribute -> Func:salt.utils.user.get_gid_list
+306:17:Attribute -> Module:salt.utils.user
+306:17:Attribute -> Module:salt.utils
+306:17:Name -> Module:salt
+306:46:Attribute -> U
+306:46:Name -> Inst:salt.daemons.masterapi.AutoKey
+307:16:Call -> ERR
+307:16:Attribute -> Func:posix.stat
+307:16:Name -> Module:os
+307:24:Name -> U
+309:11:Attribute -> Const:int:2 | Const:int:2
+309:11:Name -> Module:stat
+309:26:Attribute -> U
+309:26:Name -> U
+313:11:Attribute -> Const:int:16 | Const:int:16
+313:11:Name -> Module:stat
+313:26:Attribute -> U
+313:26:Name -> U
+315:19:Call -> U
+315:19:Attribute -> U
+315:19:Attribute -> U
+315:19:Name -> Inst:salt.daemons.masterapi.AutoKey
+317:17:Call -> ERR
+317:17:Attribute -> Func:posix.getuid
+317:17:Name -> Module:os
+317:38:Attribute -> U
+317:38:Name -> U
+317:58:Name -> List:0 | U
+328:15:Name -> U
+328:35:Call -> Const:bool:False | Const:bool:True | U
+328:35:Attribute -> Func:genericpath.exists | U
+328:35:Attribute -> Module:posixpath | Module:ntpath
+328:35:Name -> Module:os
+328:50:Name -> U
+331:15:Call -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+331:15:Attribute -> BM:salt.daemons.masterapi.AutoKey.check_permissions
+331:15:Name -> Inst:salt.daemons.masterapi.AutoKey
+331:38:Name -> U
+332:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+332:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+332:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:70:Name -> U
+335:16:Call -> U
+335:16:Attribute -> Func:genericpath.getmtime
+335:16:Attribute -> Module:posixpath | Module:ntpath
+335:16:Name -> Module:os
+335:33:Name -> U
+336:11:Call -> ERR
+336:11:Attribute -> ERR
+336:11:Call -> ERR
+336:11:Attribute -> BM:builtins.dict.get
+336:11:Attribute -> Dict:0
+336:11:Name -> Inst:salt.daemons.masterapi.AutoKey
+336:34:Name -> U
+336:68:Name -> U
+337:12:Call -> ERR
+337:12:Attribute -> BM:builtins.dict.setdefault
+337:12:Attribute -> Dict:0
+337:12:Name -> Inst:salt.daemons.masterapi.AutoKey
+337:42:Name -> U
+337:71:Name -> U
+338:17:Call -> U
+338:17:Attribute -> Func:salt.utils.files.fopen
+338:17:Attribute -> Module:salt.utils.files
+338:17:Attribute -> Module:salt.utils
+338:17:Name -> Module:salt
+338:40:Name -> U
+339:16:Attribute -> Dict:0
+339:16:Name -> Inst:salt.daemons.masterapi.AutoKey
+339:35:Name -> U
+340:20:Name -> U
+341:34:Call -> U
+341:34:Attribute -> U
+341:34:Name -> U
+341:59:Name -> U
+342:27:Call -> U
+342:27:Attribute -> U
+342:27:Call -> U
+342:27:Attribute -> U
+342:27:Name -> U
+344:15:Call -> ERR
+344:15:Name -> Func:builtins.any
+345:12:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+345:12:Attribute -> Func:salt.utils.stringutils.expr_match
+345:12:Attribute -> Module:salt.utils.stringutils
+345:12:Attribute -> Module:salt.utils
+345:12:Name -> Module:salt
+345:46:Name -> U
+345:53:Name -> U
+346:24:Call -> U
+346:24:Attribute -> U
+346:24:Attribute -> Dict:0
+346:24:Name -> Inst:salt.daemons.masterapi.AutoKey
+346:43:Name -> U
+353:11:Attribute -> U
+353:11:Name -> Inst:salt.daemons.masterapi.AutoKey
+354:22:Attribute -> U
+354:22:Name -> Inst:salt.daemons.masterapi.AutoKey
+356:22:Attribute -> U
+356:22:Name -> Inst:salt.daemons.masterapi.AutoKey
+357:23:Call -> U
+357:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+357:23:Attribute -> Module:posixpath | Module:ntpath
+357:23:Name -> Module:os
+357:36:Name -> U
+360:25:Call -> U
+360:25:Attribute -> U
+360:25:Attribute -> U
+360:25:Name -> Inst:salt.daemons.masterapi.AutoKey
+361:11:Name -> U
+362:23:Call -> ERR
+362:23:Attribute -> Func:time.time
+362:23:Name -> Module:time
+362:43:Call -> Inst:builtins.int
+362:43:Name -> Class:builtins.int
+362:47:Name -> U
+363:41:Call -> Gen:salt.utils.path.os_walk
+363:41:Attribute -> Func:salt.utils.path.os_walk
+363:41:Attribute -> Module:salt.utils.path
+363:41:Attribute -> Module:salt.utils
+363:41:Name -> Module:salt
+363:65:Name -> U
+364:25:Name -> U
+365:32:Call -> U
+365:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+365:32:Attribute -> Module:posixpath | Module:ntpath
+365:32:Name -> Module:os
+365:45:Name -> U
+365:59:Name -> U
+366:28:Call -> U
+366:28:Attribute -> Func:genericpath.getmtime
+366:28:Attribute -> Module:posixpath | Module:ntpath
+366:28:Name -> Module:os
+366:45:Name -> U
+367:23:Name -> U
+367:31:Name -> U
+368:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+368:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+368:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+368:65:Name -> U
+369:24:Call -> ERR
+369:24:Attribute -> Func:posix.remove
+369:24:Name -> Module:os
+369:34:Name -> U
+371:20:Call -> U
+371:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+371:20:Attribute -> Module:posixpath | Module:ntpath
+371:20:Name -> Module:os
+371:33:Name -> U
+371:47:Name -> U
+372:15:Call -> Const:bool:False | Const:bool:True | U
+372:15:Attribute -> Func:genericpath.exists | U
+372:15:Attribute -> Module:posixpath | Module:ntpath
+372:15:Name -> Module:os
+372:30:Name -> U
+374:8:Call -> ERR
+374:8:Attribute -> Func:posix.remove
+374:8:Name -> Module:os
+374:18:Name -> U
+381:15:Name -> U
+381:63:Attribute -> U
+381:63:Name -> Inst:salt.daemons.masterapi.AutoKey
+384:30:Attribute -> U
+384:30:Name -> Inst:salt.daemons.masterapi.AutoKey
+385:37:Call -> Gen:os.walk
+385:37:Attribute -> Func:os.walk
+385:37:Name -> Module:os
+385:45:Name -> U
+386:25:Name -> U
+387:19:Name -> U
+387:28:Name -> U
+388:33:Call -> U
+388:33:Attribute -> Func:posixpath.join | Func:ntpath.join
+388:33:Attribute -> Module:posixpath | Module:ntpath
+388:33:Name -> Module:os
+388:46:Name -> U
+388:67:Name -> U
+390:27:Call -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+390:27:Attribute -> BM:salt.daemons.masterapi.AutoKey.check_permissions
+390:27:Name -> Inst:salt.daemons.masterapi.AutoKey
+390:50:Name -> U
+391:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+391:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+391:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+392:74:Name -> U
+396:25:Call -> U
+396:25:Attribute -> Func:salt.utils.files.fopen
+396:25:Attribute -> Module:salt.utils.files
+396:25:Attribute -> Module:salt.utils
+396:25:Name -> Module:salt
+396:48:Name -> U
+397:36:Name -> U
+398:35:Call -> U
+398:35:Attribute -> U
+398:35:Call -> U
+398:35:Attribute -> Func:salt.utils.stringutils.to_unicode
+398:35:Attribute -> Module:salt.utils.stringutils
+398:35:Attribute -> Module:salt.utils
+398:35:Name -> Module:salt
+398:69:Name -> U
+399:31:Call -> U
+399:31:Attribute -> U
+399:31:Name -> U
+401:31:Call -> Const:str:''
+401:31:Name -> Class:builtins.str
+401:35:Name -> U
+401:51:Name -> U
+401:62:Name -> U
+409:15:Call -> Const:bool:False | Const:bool:False | U
+409:15:Attribute -> BM:salt.daemons.masterapi.AutoKey.check_signing_file
+409:15:Name -> Inst:salt.daemons.masterapi.AutoKey
+409:39:Name -> U
+409:46:Call -> U
+409:46:Attribute -> U
+409:46:Attribute -> U
+409:46:Name -> Inst:salt.daemons.masterapi.AutoKey
+415:11:Attribute -> U
+415:11:Name -> Inst:salt.daemons.masterapi.AutoKey
+417:11:Call -> Const:bool:False | Const:bool:False | U
+417:11:Attribute -> BM:salt.daemons.masterapi.AutoKey.check_signing_file
+417:11:Name -> Inst:salt.daemons.masterapi.AutoKey
+417:35:Name -> U
+417:42:Call -> U
+417:42:Attribute -> U
+417:42:Attribute -> U
+417:42:Name -> Inst:salt.daemons.masterapi.AutoKey
+419:11:Call -> Const:bool:False | Const:bool:True
+419:11:Attribute -> BM:salt.daemons.masterapi.AutoKey.check_autosign_dir
+419:11:Name -> Inst:salt.daemons.masterapi.AutoKey
+419:35:Name -> U
+421:11:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+421:11:Attribute -> BM:salt.daemons.masterapi.AutoKey.check_autosign_grains
+421:11:Name -> Inst:salt.daemons.masterapi.AutoKey
+421:38:Name -> Const:NoneType:None | U
+433:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+433:20:Name -> U
+434:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+434:21:Call -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent
+434:21:Attribute -> Func:salt.utils.event.get_event
+434:21:Attribute -> Module:salt.utils.event
+434:21:Attribute -> Module:salt.utils
+434:21:Name -> Module:salt
+436:12:Attribute -> U
+436:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+437:17:Attribute -> U
+437:17:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+440:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+440:25:Call -> Inst:salt.utils.minions.CkMinions
+440:25:Attribute -> Class:salt.utils.minions.CkMinions
+440:25:Attribute -> Module:salt.utils.minions
+440:25:Attribute -> Module:salt.utils
+440:25:Name -> Module:salt
+440:54:Name -> U
+442:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+442:20:Call -> Dict:0 | Inst:salt.loader.lazy.FilterDictWrapper
+442:20:Attribute -> Func:salt.loader.tops
+442:20:Attribute -> Module:salt.loader
+442:20:Name -> Module:salt
+442:37:Attribute -> U
+442:37:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+444:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+444:21:Call -> Inst:salt.client.LocalClient
+444:21:Attribute -> Func:salt.client.get_local_client
+444:21:Attribute -> Module:salt.client
+444:21:Name -> Module:salt
+444:56:Attribute -> U
+444:56:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+446:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+446:23:Call -> Inst:salt.minion.MasterMinion
+446:23:Attribute -> Class:salt.minion.MasterMinion
+446:23:Attribute -> Module:salt.minion
+446:23:Name -> Module:salt
+446:48:Attribute -> U
+446:48:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+447:8:Call -> Const:NoneType:None
+447:8:Attribute -> BM:salt.daemons.masterapi.RemoteFuncs.__setup_fileserver
+447:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+448:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+448:21:Call -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+448:21:Attribute -> Func:salt.cache.factory
+448:21:Attribute -> Module:salt.cache
+448:21:Name -> Module:salt
+448:40:Name -> U
+454:14:Call -> Inst:salt.fileserver.Fileserver
+454:14:Attribute -> Class:salt.fileserver.Fileserver
+454:14:Attribute -> Module:salt.fileserver
+454:14:Name -> Module:salt
+454:41:Attribute -> U
+454:41:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+455:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+455:27:Attribute -> BM:salt.fileserver.Fileserver.serve_file
+455:27:Name -> Inst:salt.fileserver.Fileserver
+456:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+456:26:Attribute -> BM:salt.fileserver.Fileserver._find_file
+456:26:Name -> Inst:salt.fileserver.Fileserver
+457:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+457:26:Attribute -> BM:salt.fileserver.Fileserver.file_hash
+457:26:Name -> Inst:salt.fileserver.Fileserver
+458:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+458:26:Attribute -> BM:salt.fileserver.Fileserver.file_list
+458:26:Name -> Inst:salt.fileserver.Fileserver
+459:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+459:36:Attribute -> BM:salt.fileserver.Fileserver.file_list_emptydirs
+459:36:Name -> Inst:salt.fileserver.Fileserver
+460:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+460:25:Attribute -> BM:salt.fileserver.Fileserver.dir_list
+460:25:Name -> Inst:salt.fileserver.Fileserver
+461:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+461:29:Attribute -> BM:salt.fileserver.Fileserver.symlink_list
+461:29:Name -> Inst:salt.fileserver.Fileserver
+462:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+462:26:Attribute -> BM:salt.fileserver.Fileserver.envs
+462:26:Name -> Inst:salt.fileserver.Fileserver
+469:25:Attribute -> U
+469:25:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+471:15:Call -> ERR
+471:15:Name -> Func:builtins.isinstance
+471:26:Attribute -> U
+471:26:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+471:45:Name -> Class:builtins.dict
+473:11:Call -> ERR
+473:11:Name -> Func:builtins.any
+473:15:Name -> Const:str:'fun' | Const:str:'arg' | Const:str:'tgt' | Const:str:'ret' | Const:str:'id'
+473:26:Name -> U
+476:11:Call -> U
+476:11:Attribute -> Func:re.match
+476:11:Name -> Module:re
+476:33:Name -> U
+480:21:Attribute -> U
+480:21:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+481:15:Call -> U
+481:15:Attribute -> Func:re.match
+481:15:Name -> Module:re
+481:24:Name -> U
+481:31:Name -> U
+483:19:Call -> ERR
+483:19:Name -> Func:builtins.isinstance
+483:30:Attribute -> U
+483:30:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+483:48:Name -> U
+483:56:Name -> Class:builtins.list
+484:20:Call -> ERR
+484:20:Attribute -> BM:builtins.list.extend
+484:20:Name -> List:0
+484:33:Attribute -> U
+484:33:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+484:51:Name -> U
+485:18:Name -> U
+487:12:Name -> U
+487:26:Call -> U
+487:26:Attribute -> U
+487:26:Name -> U
+489:23:Name -> U
+490:16:Call -> ERR
+490:16:Attribute -> BM:builtins.list.append
+490:16:Name -> List:0
+490:28:Call -> U
+490:28:Attribute -> U
+490:28:Name -> U
+491:12:Name -> U
+491:26:Name -> List:0
+492:15:Call -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+492:15:Attribute -> BM:salt.utils.minions.CkMinions.auth_check
+492:15:Attribute -> Inst:salt.utils.minions.CkMinions
+492:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+493:12:Name -> List:0
+494:12:Name -> U
+495:12:Name -> U
+496:12:Name -> U
+497:12:Call -> U
+497:12:Attribute -> U
+497:12:Name -> U
+507:15:Call -> Set:0 | Dict:0 | List:0
+507:15:Attribute -> BM:salt.fileserver.Fileserver.envs
+507:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+508:23:Name -> Set:0 | Dict:0 | List:0
+509:15:Name -> U
+509:30:Name -> Dict:0
+510:16:Name -> Dict:0
+510:27:Name -> U
+511:8:Name -> Dict:0
+511:30:Name -> Dict:0
+512:8:Name -> Dict:0
+512:45:Attribute -> U
+512:45:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+513:8:Name -> Dict:0
+513:29:Attribute -> U
+513:29:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+514:8:Name -> Dict:0
+514:31:Attribute -> U
+514:31:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+515:11:Call -> U
+515:11:Attribute -> U
+515:11:Name -> U
+516:19:Name -> Dict:0
+517:8:Name -> Dict:0
+517:28:Attribute -> U
+517:28:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+518:8:Name -> Dict:0
+518:28:Attribute -> U
+518:28:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+519:8:Name -> Dict:0
+519:29:Attribute -> U
+519:29:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+520:8:Name -> Dict:0
+520:37:Attribute -> U
+520:37:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+521:8:Name -> Dict:0
+521:30:Attribute -> U
+521:30:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+522:8:Name -> Dict:0
+522:36:Attribute -> U
+522:36:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+523:8:Name -> Dict:0
+523:32:Attribute -> U
+523:32:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+524:8:Name -> Dict:0
+524:35:Attribute -> U
+524:35:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+525:8:Name -> Dict:0
+525:29:Attribute -> U
+525:29:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+526:8:Name -> Dict:0
+526:33:Attribute -> U
+526:33:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+527:8:Name -> Dict:0
+527:39:Attribute -> U
+527:39:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+528:8:Name -> Dict:0
+528:37:Attribute -> U
+528:37:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+529:15:Name -> Dict:0
+535:15:Name -> Const:bool:False | U
+536:27:Name -> U
+537:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+537:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+537:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+539:19:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+539:19:Attribute -> Func:salt.utils.verify.valid_id
+539:19:Attribute -> Module:salt.utils.verify
+539:19:Attribute -> Module:salt.utils
+539:19:Name -> Module:salt
+539:46:Attribute -> U
+539:46:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+539:57:Name -> U
+547:21:Name -> U
+548:19:Name -> U
+549:27:Name -> U
+550:25:Name -> U
+551:19:Attribute -> Dict:0 | Inst:salt.loader.lazy.FilterDictWrapper
+551:19:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+552:15:Name -> U
+552:26:Call -> U
+552:26:Attribute -> U
+552:26:Attribute -> U
+552:26:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+555:22:Call -> Dict:0 | U
+555:22:Attribute -> Func:salt.utils.dictupdate.merge
+555:22:Attribute -> Module:salt.utils.dictupdate
+555:22:Attribute -> Module:salt.utils
+555:22:Name -> Module:salt
+556:20:Name -> Dict:0
+556:25:Call -> U
+556:25:Attribute -> Dict:0 | Inst:salt.loader.lazy.FilterDictWrapper
+556:25:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+556:35:Name -> U
+556:45:Name -> Dict:0 | U
+556:58:Name -> Dict:0 | U
+558:19:Name -> Class:builtins.Exception
+560:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+560:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+560:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+562:20:Name -> U
+563:20:Name -> ExcInst:builtins.Exception
+564:20:Name -> U
+566:15:Name -> Dict:0 | Dict:0 | U
+572:15:Name -> Const:bool:False | U
+573:15:Call -> ERR
+573:15:Name -> Func:builtins.any
+573:19:Name -> Const:str:'id' | Const:str:'tgt' | Const:str:'fun'
+573:30:Name -> U
+576:11:Call -> ERR
+576:11:Name -> Func:builtins.isinstance
+576:22:Name -> U
+576:35:Name -> Class:builtins.str
+577:24:Call -> Inst:builtins.list
+577:24:Name -> Class:builtins.list
+577:29:Call -> Inst:builtins.set
+577:29:Name -> Class:builtins.set
+577:33:Call -> U
+577:33:Attribute -> U
+577:33:Name -> U
+578:24:Call -> ERR
+578:24:Name -> Func:builtins.len
+578:28:Name -> Inst:builtins.list
+579:13:Call -> ERR
+579:13:Name -> Func:builtins.isinstance
+579:24:Name -> U
+579:37:Name -> Class:builtins.list
+580:24:Name -> U
+587:25:Attribute -> U
+587:25:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+589:19:Call -> ERR
+589:19:Name -> Func:builtins.isinstance
+589:30:Attribute -> U
+589:30:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+589:53:Name -> Class:builtins.dict
+591:20:Call -> Set:0
+591:20:Name -> Class:builtins.set
+592:25:Attribute -> U
+592:25:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+593:19:Call -> U
+593:19:Attribute -> Func:re.match
+593:19:Name -> Module:re
+593:28:Name -> U
+593:35:Name -> U
+594:23:Call -> ERR
+594:23:Name -> Func:builtins.isinstance
+594:34:Attribute -> U
+594:34:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+594:56:Name -> U
+594:64:Name -> Class:builtins.list
+595:24:Call -> ERR
+595:24:Attribute -> BM:builtins.set.update
+595:24:Name -> Set:0
+595:37:Attribute -> U
+595:37:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+595:59:Name -> U
+596:23:Name -> Inst:builtins.list | U
+597:19:Call -> ERR
+597:19:Name -> Func:builtins.any
+597:23:Call -> U
+597:23:Attribute -> Func:re.match
+597:23:Name -> Module:re
+597:32:Name -> U
+597:38:Name -> U
+597:55:Name -> Set:0
+598:20:Call -> ERR
+598:20:Attribute -> BM:builtins.list.append
+598:20:Name -> List:0
+598:45:Name -> U
+599:19:Name -> List:0
+602:32:Name -> Inst:builtins.list | U
+605:15:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+605:15:Attribute -> Func:salt.utils.verify.valid_id
+605:15:Attribute -> Module:salt.utils.verify
+605:15:Attribute -> Module:salt.utils
+605:15:Name -> Module:salt
+605:42:Attribute -> U
+605:42:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+605:53:Name -> U
+606:19:Name -> Dict:0
+608:20:Call -> U
+608:20:Attribute -> U
+608:20:Name -> U
+611:11:Name -> U
+611:55:Name -> U
+612:25:Name -> U
+614:25:Call -> U
+614:25:Attribute -> U
+614:25:Name -> U
+615:11:Call -> U
+615:11:Attribute -> U
+615:11:Name -> U
+617:11:Call -> U | Const:str:''
+617:11:Attribute -> U | BM:builtins.str.lower
+617:11:Name -> U | Const:str:'pillar_exact'
+619:18:Call -> Inst:salt.utils.minions.CkMinions
+619:18:Attribute -> Class:salt.utils.minions.CkMinions
+619:18:Attribute -> Module:salt.utils.minions
+619:18:Attribute -> Module:salt.utils
+619:18:Name -> Module:salt
+619:47:Attribute -> U
+619:47:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+620:15:Call -> U | Dict:2
+620:15:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+620:15:Name -> Inst:salt.utils.minions.CkMinions
+620:37:Name -> U
+620:50:Name -> U | Const:str:'pillar_exact' | Const:str:'compound_pillar_exact'
+621:18:Name -> U | Dict:2
+623:22:Name -> U
+624:24:Call -> U
+624:24:Attribute -> BM:salt.cache.MemCache.fetch | U
+624:24:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+624:24:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+624:49:Name -> U
+625:19:Call -> ERR
+625:19:Name -> Func:builtins.isinstance
+625:30:Name -> U
+625:41:Name -> Class:builtins.dict
+627:28:Name -> List:0 | Inst:builtins.list | U
+628:19:Name -> U
+628:35:Name -> U
+630:29:Name -> U
+630:39:Name -> U
+631:30:Name -> U
+631:40:Name -> U
+633:20:Call -> ERR
+633:20:Name -> Func:builtins.isinstance
+633:31:Name -> U
+633:43:Name -> Class:builtins.dict
+634:24:Attribute -> Const:str:'__saltmine_acl__'
+634:24:Attribute -> Module:salt.utils.mine
+634:24:Attribute -> Module:salt.utils
+634:24:Name -> Module:salt
+634:60:Name -> U
+636:34:Name -> U
+636:45:Attribute -> Const:str:'__data__'
+636:45:Attribute -> Module:salt.utils.mine
+636:45:Attribute -> Module:salt.utils
+636:45:Name -> Module:salt
+638:23:Name -> U
+638:39:Call -> ERR
+638:39:Attribute -> BM:builtins.dict.get
+638:39:Name -> Dict:0
+638:59:Name -> U
+639:42:Name -> U
+642:41:Call -> U
+642:41:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+642:41:Name -> Inst:salt.utils.minions.CkMinions
+643:32:Name -> U
+644:32:Call -> U
+644:32:Attribute -> U
+644:32:Name -> U
+647:35:Name -> U
+649:28:Call -> Dict:0
+649:28:Attribute -> Func:salt.utils.dictupdate.set_dict_key_value
+649:28:Attribute -> Module:salt.utils.dictupdate
+649:28:Attribute -> Module:salt.utils
+649:28:Name -> Module:salt
+650:32:Name -> Dict:0
+651:35:Name -> U
+651:44:Name -> U
+652:32:Name -> U
+654:19:Call -> U
+654:19:Attribute -> Func:salt.utils.mine.minion_side_acl_denied
+654:19:Attribute -> Module:salt.utils.mine
+654:19:Attribute -> Module:salt.utils
+654:19:Name -> Module:salt
+655:20:Name -> Dict:0
+655:37:Name -> U
+655:45:Name -> U
+655:55:Name -> U
+658:19:Name -> U | Const:bool:True
+659:20:Call -> ERR
+659:20:Attribute -> BM:builtins.dict.setdefault
+659:20:Name -> Dict:0
+659:35:Name -> U
+659:49:Name -> U
+659:59:Name -> U
+662:20:Name -> Dict:0
+662:24:Name -> U
+662:34:Name -> U
+663:15:Name -> Dict:0
+669:15:Name -> Const:bool:False | U
+670:27:Name -> U
+670:49:Name -> U
+672:11:Call -> U
+672:11:Attribute -> U
+672:11:Attribute -> U
+672:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+672:56:Call -> U
+672:56:Attribute -> U
+672:56:Attribute -> U
+672:56:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+675:19:Name -> U
+677:23:Name -> U
+678:19:Call -> U
+678:19:Attribute -> U
+678:19:Name -> U
+679:23:Call -> U
+679:23:Attribute -> BM:salt.cache.MemCache.fetch | U
+679:23:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+679:23:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+679:40:Name -> Const:str:'mine'
+679:47:Name -> U
+680:19:Call -> ERR
+680:19:Name -> Func:builtins.isinstance
+680:30:Name -> U
+680:36:Name -> Class:builtins.dict
+681:20:Call -> U
+681:20:Attribute -> U
+681:20:Name -> U
+681:32:Name -> U
+682:12:Call -> U | Const:NoneType:None
+682:12:Attribute -> U | BM:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache.store
+682:12:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+682:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+682:29:Name -> Const:str:'mine'
+682:36:Name -> U
+682:42:Name -> U
+689:23:Name -> U
+689:44:Name -> U
+691:11:Call -> U
+691:11:Attribute -> U
+691:11:Attribute -> U
+691:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+691:56:Call -> U
+691:56:Attribute -> U
+691:56:Attribute -> U
+691:56:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+695:19:Name -> U
+697:23:Call -> U
+697:23:Attribute -> BM:salt.cache.MemCache.fetch | U
+697:23:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+697:23:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+697:40:Name -> Const:str:'mine'
+697:47:Name -> U
+698:23:Call -> ERR
+698:23:Name -> Func:builtins.isinstance
+698:34:Name -> U
+698:40:Name -> Class:builtins.dict
+700:19:Name -> U
+700:34:Name -> U
+701:24:Name -> U
+701:29:Name -> U
+702:20:Call -> U | Const:NoneType:None
+702:20:Attribute -> U | BM:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache.store
+702:20:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+702:20:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+702:37:Name -> Const:str:'mine'
+702:44:Name -> U
+702:50:Name -> U
+703:19:Name -> Class:builtins.OSError
+711:15:Name -> Const:bool:False | U
+711:43:Name -> U
+713:11:Call -> U
+713:11:Attribute -> U
+713:11:Attribute -> U
+713:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+713:56:Call -> U
+713:56:Attribute -> U
+713:56:Attribute -> U
+713:56:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+716:19:Call -> U
+716:19:Attribute -> U
+716:19:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+716:19:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+716:44:Name -> U
+724:11:Call -> ERR
+724:11:Name -> Func:builtins.any
+724:15:Name -> Const:str:'id' | Const:str:'path' | Const:str:'loc'
+724:26:Name -> U
+726:15:Attribute -> U
+726:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+726:41:Call -> U | Const:bool:True | Const:bool:False
+726:41:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+726:41:Attribute -> Module:posixpath | Module:ntpath
+726:41:Name -> Module:os
+726:55:Name -> U
+728:11:Call -> U | Const:bool:True | Const:bool:False
+728:11:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+728:11:Attribute -> Module:posixpath | Module:ntpath
+728:11:Name -> Module:os
+728:25:Name -> U
+728:51:Name -> U
+731:15:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+731:15:Attribute -> Func:salt.utils.verify.valid_id
+731:15:Attribute -> Module:salt.utils.verify
+731:15:Attribute -> Module:salt.utils
+731:15:Name -> Module:salt
+731:42:Attribute -> U
+731:42:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+731:53:Name -> U
+733:43:Attribute -> U
+733:43:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+735:20:Name -> U
+735:29:Name -> U
+736:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+736:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+736:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+739:11:Call -> U
+739:11:Attribute -> U
+739:11:Name -> U
+739:33:Name -> U
+740:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+740:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+740:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+740:64:Name -> U
+743:11:Call -> ERR
+743:11:Name -> Func:builtins.len
+743:15:Name -> U
+743:31:Call -> U
+743:31:Attribute -> U
+743:31:Name -> U
+743:52:Name -> U
+744:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+744:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+744:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+744:64:Name -> U
+747:19:Name -> U
+748:18:Name -> U
+750:23:Call -> U
+750:23:Attribute -> U
+750:23:Name -> U
+751:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+751:23:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+751:23:Attribute -> Module:posixpath | Module:ntpath
+751:23:Name -> Module:os
+751:40:Name -> U
+752:16:Call -> U
+752:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+752:16:Attribute -> Module:posixpath | Module:ntpath
+752:16:Name -> Module:os
+753:12:Attribute -> U
+753:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+753:46:Name -> U
+753:67:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+755:15:Call -> U
+755:15:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+755:15:Attribute -> Module:posixpath | Module:ntpath
+755:15:Name -> Module:os
+755:31:Name -> U
+756:15:Call -> Const:bool:False | U
+756:15:Attribute -> Func:genericpath.isdir | U
+756:15:Attribute -> Module:posixpath | Module:ntpath
+756:15:Name -> Module:os
+756:29:Name -> U
+758:16:Call -> Const:NoneType:None
+758:16:Attribute -> Func:os.makedirs
+758:16:Name -> Module:os
+758:28:Name -> U
+759:19:Name -> Class:builtins.OSError
+761:11:Call -> Const:bool:False | U
+761:11:Attribute -> Func:genericpath.isfile | U
+761:11:Attribute -> Module:posixpath | Module:ntpath
+761:11:Name -> Module:os
+761:26:Name -> U
+761:37:Name -> U
+765:13:Call -> U
+765:13:Attribute -> Func:salt.utils.files.fopen
+765:13:Attribute -> Module:salt.utils.files
+765:13:Attribute -> Module:salt.utils
+765:13:Name -> Module:salt
+765:36:Name -> U
+765:43:Name -> Const:str:'ab' | Const:str:'wb'
+766:15:Name -> U
+767:16:Call -> U
+767:16:Attribute -> U
+767:16:Name -> U
+767:25:Name -> U
+768:12:Call -> U
+768:12:Attribute -> U
+768:12:Name -> U
+768:22:Call -> U
+768:22:Attribute -> Func:salt.utils.stringutils.to_str
+768:22:Attribute -> Module:salt.utils.stringutils
+768:22:Attribute -> Module:salt.utils
+768:22:Name -> Module:salt
+768:52:Name -> U
+775:11:Call -> ERR
+775:11:Name -> Func:builtins.any
+775:15:Name -> Const:str:'id' | Const:str:'grains'
+775:26:Name -> U
+777:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+777:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+777:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+777:50:Call -> U
+777:50:Attribute -> U
+777:50:Name -> U
+778:17:Call -> Inst:salt.pillar.PillarCache | U
+778:17:Attribute -> Func:salt.pillar.get_pillar
+778:17:Attribute -> Module:salt.pillar
+778:17:Name -> Module:salt
+779:12:Attribute -> U
+779:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+780:12:Name -> U
+781:12:Name -> U
+782:12:Call -> U
+782:12:Attribute -> U
+782:12:Name -> U
+782:32:Call -> U
+782:32:Attribute -> U
+782:32:Name -> U
+783:12:Call -> U
+783:12:Attribute -> U
+783:12:Name -> U
+784:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+784:12:Attribute -> Inst:salt.minion.MasterMinion
+784:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+785:28:Call -> U
+785:28:Attribute -> U
+785:28:Name -> U
+787:15:Call -> Dict:0 | U
+787:15:Attribute -> BM:salt.pillar.PillarCache.compile_pillar | U
+787:15:Name -> Inst:salt.pillar.PillarCache | U
+788:11:Call -> U
+788:11:Attribute -> U
+788:11:Attribute -> U
+788:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+789:12:Call -> U | Const:NoneType:None
+789:12:Attribute -> U | BM:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache.store
+789:12:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache | Inst:tests.pytests.unit.daemons.masterapi.test_remote_funcs.FakeCache
+789:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+789:39:Name -> U
+789:51:Name -> U
+790:15:Call -> U
+790:15:Attribute -> U
+790:15:Attribute -> U
+790:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+791:16:Call -> Const:bool:False | Const:bool:True
+791:16:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+791:16:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+791:16:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+793:20:Call -> Const:str:''
+793:20:Attribute -> Func:salt.utils.event.tagify
+793:20:Attribute -> Module:salt.utils.event
+793:20:Attribute -> Module:salt.utils
+793:20:Name -> Module:salt
+793:44:Name -> U
+795:15:Name -> Dict:0 | U
+802:23:Name -> U
+804:27:Name -> U
+804:50:Name -> U
+804:72:Name -> U
+806:23:Name -> U
+807:25:Name -> U
+808:29:Name -> U
+809:33:Name -> U
+811:33:Name -> U
+815:19:Call -> U
+815:19:Attribute -> U
+815:19:Name -> U
+816:20:Call -> Const:bool:False | Const:bool:True
+816:20:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+816:20:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+816:20:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+817:24:Name -> U
+818:24:Call -> Const:str:''
+818:24:Attribute -> Func:salt.utils.event.tagify
+818:24:Attribute -> Module:salt.utils.event
+818:24:Attribute -> Module:salt.utils
+818:24:Name -> Module:salt
+818:48:Name -> U
+818:67:Name -> U
+821:23:Call -> Const:bool:False | Const:bool:True
+821:23:Name -> Func:salt.daemons.masterapi.valid_minion_tag
+821:40:Name -> U
+822:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+822:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+822:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+822:70:Name -> U
+824:16:Call -> Const:bool:False | Const:bool:True
+824:16:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+824:16:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+824:16:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+824:38:Name -> U
+824:50:Name -> U
+826:18:Name -> U
+827:12:Call -> Const:bool:False | Const:bool:True
+827:12:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+827:12:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+827:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+827:34:Name -> U
+827:40:Name -> U
+835:18:Call -> Const:str:'' | U
+835:18:Attribute -> Func:salt.utils.jid.jid_to_time
+835:18:Attribute -> Module:salt.utils.jid
+835:18:Attribute -> Module:salt.utils
+835:18:Name -> Module:salt
+835:45:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+835:45:Attribute -> Func:salt.utils.jid.gen_jid
+835:45:Attribute -> Module:salt.utils.jid
+835:45:Attribute -> Module:salt.utils
+835:45:Name -> Module:salt
+835:68:Attribute -> U
+835:68:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+837:11:Call -> ERR
+837:11:Name -> Func:builtins.any
+837:15:Name -> Const:str:'return' | Const:str:'jid' | Const:str:'id'
+837:26:Name -> U
+840:11:Name -> U
+842:24:Call -> U
+842:24:Attribute -> BM:builtins.str.format
+842:45:Attribute -> U
+842:45:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+843:12:Name -> U
+843:26:Call -> U
+843:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+843:26:Attribute -> Inst:salt.minion.MasterMinion
+843:26:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+843:49:Name -> U
+844:24:Call -> U
+844:24:Attribute -> U
+844:24:Name -> U
+848:28:Call -> U
+848:28:Attribute -> BM:builtins.str.format
+848:50:Attribute -> U
+848:50:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+849:12:Call -> U
+849:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+849:12:Attribute -> Inst:salt.minion.MasterMinion
+849:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+849:35:Name -> U
+849:50:Name -> U
+849:63:Name -> U
+850:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+850:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+850:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+850:50:Name -> U
+850:62:Name -> U
+851:8:Call -> Const:bool:False | Const:bool:True
+851:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+851:8:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+851:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+851:30:Name -> U
+851:36:Name -> U
+852:8:Call -> Const:bool:False | Const:bool:True
+852:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+852:8:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+852:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+853:12:Name -> U
+853:18:Call -> Const:str:''
+853:18:Attribute -> Func:salt.utils.event.tagify
+853:18:Attribute -> Module:salt.utils.event
+853:18:Attribute -> Module:salt.utils
+853:18:Name -> Module:salt
+853:43:Name -> U
+853:63:Name -> U
+855:8:Call -> Const:NoneType:None | Const:NoneType:None
+855:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_ret_load | BM:salt.utils.event.SaltEvent.fire_ret_load
+855:8:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+855:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+855:33:Name -> U
+856:15:Attribute -> U
+856:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+856:41:Call -> U
+856:41:Attribute -> U
+856:41:Attribute -> U
+856:41:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+859:15:Call -> U
+859:15:Attribute -> BM:builtins.str.format
+859:42:Attribute -> U
+859:42:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+860:11:Call -> U
+860:11:Attribute -> U
+860:11:Attribute -> U
+860:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+860:56:Name -> U
+860:64:Attribute -> Inst:salt.loader.lazy.LazyLoader
+860:64:Attribute -> Inst:salt.minion.MasterMinion
+860:64:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+861:12:Call -> U
+861:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+861:12:Attribute -> Inst:salt.minion.MasterMinion
+861:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+861:35:Name -> U
+861:41:Name -> U
+861:54:Name -> Const:str:'' | U
+863:15:Call -> U
+863:15:Attribute -> BM:builtins.str.format
+863:36:Attribute -> U
+863:36:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+864:8:Call -> U
+864:8:Attribute -> Inst:salt.loader.lazy.LazyLoader
+864:8:Attribute -> Inst:salt.minion.MasterMinion
+864:8:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+864:31:Name -> U
+864:37:Name -> U
+872:11:Call -> ERR
+872:11:Name -> Func:builtins.any
+872:15:Name -> Const:str:'return' | Const:str:'jid' | Const:str:'id'
+872:26:Name -> U
+875:21:Name -> U
+876:19:Call -> U
+876:19:Attribute -> BM:builtins.str.format
+876:41:Attribute -> U
+876:41:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+877:12:Call -> U
+877:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+877:12:Attribute -> Inst:salt.minion.MasterMinion
+877:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+877:35:Name -> U
+877:41:Name -> U
+877:54:Name -> U
+880:25:Call -> U
+880:25:Attribute -> U
+880:25:Name -> U
+881:26:Name -> U
+881:45:Name -> U
+881:60:Name -> U
+882:24:Name -> U
+883:16:Name -> Dict:3
+883:29:Name -> U
+884:12:Call -> Const:bool:False | Const:NoneType:None
+884:12:Attribute -> BM:salt.daemons.masterapi.RemoteFuncs._return
+884:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+884:25:Name -> Dict:3
+890:29:Attribute -> U
+890:29:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+892:15:Call -> ERR
+892:15:Name -> Func:builtins.isinstance
+892:26:Attribute -> U
+892:26:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+892:49:Name -> Class:builtins.dict
+894:11:Call -> ERR
+894:11:Name -> Func:builtins.any
+894:15:Name -> Const:str:'fun' | Const:str:'arg' | Const:str:'id'
+894:26:Name -> U
+896:16:Call -> Set:0
+896:16:Name -> Class:builtins.set
+897:21:Attribute -> U
+897:21:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+898:15:Call -> U
+898:15:Attribute -> Func:re.match
+898:15:Name -> Module:re
+898:24:Name -> U
+898:31:Name -> U
+900:19:Call -> ERR
+900:19:Name -> Func:builtins.isinstance
+900:30:Attribute -> U
+900:30:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+900:52:Name -> U
+900:60:Name -> Class:builtins.list
+901:20:Call -> ERR
+901:20:Attribute -> BM:builtins.set.update
+901:20:Name -> Set:0
+901:33:Attribute -> U
+901:33:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+901:55:Name -> U
+903:20:Name -> Set:0
+904:15:Call -> U
+904:15:Attribute -> Func:re.match
+904:15:Name -> Module:re
+904:24:Name -> U
+904:30:Name -> U
+906:15:Name -> Const:bool:False | Const:bool:True
+909:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+909:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+909:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+909:66:Name -> U
+913:8:Call -> ERR
+913:8:Attribute -> BM:builtins.dict.update
+913:8:Name -> Dict:0
+913:20:Attribute -> U
+913:20:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+914:8:Call -> ERR
+914:8:Attribute -> BM:builtins.dict.update
+914:8:Name -> Dict:0
+916:23:Name -> U
+917:23:Call -> List:1 | List:0 | Tuple:2
+917:23:Attribute -> Func:salt.utils.args.parse_input
+917:23:Attribute -> Module:salt.utils.args
+917:23:Attribute -> Module:salt.utils
+917:23:Name -> Module:salt
+918:20:Name -> U
+918:42:Call -> U
+918:42:Attribute -> U
+918:42:Name -> U
+920:22:Name -> U
+922:29:Attribute -> U
+922:29:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+925:17:Call -> Inst:salt.runner.Runner
+925:17:Attribute -> Class:salt.runner.Runner
+925:17:Attribute -> Module:salt.runner
+925:17:Name -> Module:salt
+925:36:Name -> Dict:0
+926:15:Call -> Dict:0 | Const:NoneType:None | U | Const:str:'{Uninferable}'
+926:15:Attribute -> BM:salt.runner.Runner.run
+926:15:Name -> Inst:salt.runner.Runner
+933:15:Name -> Const:bool:False | U
+933:31:Call -> ERR
+933:31:Name -> Func:builtins.any
+933:35:Name -> Const:str:'jid' | Const:str:'id'
+933:46:Name -> U
+936:25:Call -> U
+936:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+936:25:Attribute -> Module:posixpath | Module:ntpath
+936:25:Name -> Module:os
+936:38:Attribute -> U
+936:38:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+937:19:Call -> Const:bool:False | U
+937:19:Attribute -> Func:genericpath.isdir | U
+937:19:Attribute -> Module:posixpath | Module:ntpath
+937:19:Name -> Module:os
+937:33:Name -> U
+938:16:Call -> Const:NoneType:None
+938:16:Attribute -> Func:os.makedirs
+938:16:Name -> Module:os
+938:28:Name -> U
+939:21:Call -> U
+939:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+939:21:Attribute -> Module:posixpath | Module:ntpath
+939:21:Name -> Module:os
+939:34:Name -> U
+939:46:Name -> U
+940:17:Call -> U
+940:17:Attribute -> Func:salt.utils.files.fopen
+940:17:Attribute -> Module:salt.utils.files
+940:17:Attribute -> Module:salt.utils
+940:17:Name -> Module:salt
+940:40:Name -> U
+941:23:Name -> U
+941:37:Call -> U
+941:37:Attribute -> Func:salt.utils.stringutils.to_unicode
+941:37:Attribute -> Module:salt.utils.stringutils
+941:37:Attribute -> Module:salt.utils
+941:37:Name -> Module:salt
+941:71:Call -> U
+941:71:Attribute -> U
+941:71:Name -> U
+944:19:Call -> Dict:0
+944:19:Attribute -> BM:salt.client.LocalClient.get_cache_returns
+944:19:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+944:19:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+944:48:Name -> U
+964:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+964:15:Attribute -> BM:salt.daemons.masterapi.RemoteFuncs.__verify_minion_publish
+964:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+964:44:Name -> U
+968:19:Name -> U
+969:19:Call -> List:1 | List:0 | Tuple:2
+969:19:Attribute -> Func:salt.utils.args.parse_input
+969:19:Attribute -> Module:salt.utils.args
+969:19:Attribute -> Module:salt.utils
+969:19:Name -> Module:salt
+970:16:Name -> U
+970:38:Call -> U
+970:38:Attribute -> U
+970:38:Name -> U
+972:24:Call -> U
+972:24:Attribute -> U
+972:24:Name -> U
+973:19:Name -> U
+974:19:Name -> U
+975:18:Name -> U
+977:25:Name -> U
+978:15:Call -> U
+978:15:Attribute -> U
+978:15:Name -> U
+979:19:Name -> U
+979:34:Attribute -> U
+979:34:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+980:20:Name -> Dict:6
+980:38:Attribute -> U
+980:38:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+980:62:Name -> U
+981:20:Name -> Dict:6
+985:16:Name -> Dict:6
+985:39:Name -> U
+987:8:Name -> Dict:0
+987:21:Call -> U | Const:int:0
+987:21:Attribute -> BM:salt.client.LocalClient.cmd_async
+987:21:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+987:21:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+987:44:Name -> Dict:6
+988:15:Call -> U | Dict:2
+988:15:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+988:15:Attribute -> Inst:salt.utils.minions.CkMinions
+988:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+988:44:Name -> U
+988:57:Name -> Dict:6
+989:8:Name -> Dict:0
+989:25:Name -> U | Dict:2
+990:21:Call -> U
+990:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+990:21:Attribute -> Module:posixpath | Module:ntpath
+990:21:Name -> Module:os
+990:34:Attribute -> U
+990:34:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+991:15:Call -> Const:bool:False | U
+991:15:Attribute -> Func:genericpath.isdir | U
+991:15:Attribute -> Module:posixpath | Module:ntpath
+991:15:Name -> Module:os
+991:29:Name -> U
+992:12:Call -> Const:NoneType:None
+992:12:Attribute -> Func:os.makedirs
+992:12:Name -> Module:os
+992:24:Name -> U
+993:17:Call -> U
+993:17:Attribute -> Func:posixpath.join | Func:ntpath.join
+993:17:Attribute -> Module:posixpath | Module:ntpath
+993:17:Name -> Module:os
+993:30:Name -> U
+993:42:Call -> Const:str:''
+993:42:Name -> Class:builtins.str
+993:46:Name -> Dict:0
+994:13:Call -> U
+994:13:Attribute -> Func:salt.utils.files.fopen
+994:13:Attribute -> Module:salt.utils.files
+994:13:Attribute -> Module:salt.utils
+994:13:Name -> Module:salt
+994:36:Name -> U
+995:12:Call -> U
+995:12:Attribute -> U
+995:12:Name -> U
+995:22:Call -> U
+995:22:Attribute -> Func:salt.utils.stringutils.to_str
+995:22:Attribute -> Module:salt.utils.stringutils
+995:22:Attribute -> Module:salt.utils
+995:22:Name -> Module:salt
+995:52:Name -> U
+996:15:Name -> Dict:0
+1016:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+1016:15:Attribute -> BM:salt.daemons.masterapi.RemoteFuncs.__verify_minion_publish
+1016:15:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1016:44:Name -> U
+1020:19:Name -> U
+1021:19:Call -> List:1 | List:0 | Tuple:2
+1021:19:Attribute -> Func:salt.utils.args.parse_input
+1021:19:Attribute -> Module:salt.utils.args
+1021:19:Attribute -> Module:salt.utils
+1021:19:Name -> Module:salt
+1022:16:Name -> U
+1022:38:Call -> U
+1022:38:Attribute -> U
+1022:38:Name -> U
+1024:24:Call -> U
+1024:24:Attribute -> U
+1024:24:Name -> U
+1025:19:Name -> U
+1026:19:Name -> U
+1027:18:Name -> U
+1029:20:Name -> U
+1031:16:Name -> Dict:6
+1031:38:Call -> Inst:builtins.int
+1031:38:Name -> Class:builtins.int
+1031:42:Name -> U
+1032:19:Name -> Class:builtins.ValueError
+1033:22:Call -> U
+1033:22:Attribute -> BM:builtins.str.format
+1033:65:Name -> U
+1034:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1034:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1034:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1034:28:Name -> U
+1036:24:Name -> U
+1038:16:Name -> Dict:6
+1038:38:Call -> Inst:builtins.int
+1038:38:Name -> Class:builtins.int
+1038:42:Name -> U
+1039:19:Name -> Class:builtins.ValueError
+1040:22:Call -> U
+1040:22:Attribute -> BM:builtins.str.format
+1040:65:Name -> U
+1041:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1041:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1041:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1041:28:Name -> U
+1043:25:Name -> U
+1044:15:Call -> U
+1044:15:Attribute -> U
+1044:15:Name -> U
+1045:19:Name -> U
+1045:34:Attribute -> U
+1045:34:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1046:20:Name -> Dict:6
+1046:38:Attribute -> U
+1046:38:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1046:62:Name -> U
+1047:20:Name -> Dict:6
+1051:16:Name -> Dict:6
+1051:39:Name -> U
+1052:8:Name -> Dict:6
+1054:22:Call -> Gen:salt.client.LocalClient.cmd_iter
+1054:22:Attribute -> BM:salt.client.LocalClient.cmd_iter
+1054:22:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+1054:22:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1054:44:Name -> Dict:6
+1055:15:Call -> U
+1055:15:Attribute -> U
+1055:15:Name -> U
+1056:23:Name -> U
+1057:28:Name -> U
+1058:20:Name -> Dict:0
+1058:37:Name -> U
+1059:16:Name -> U
+1059:30:Call -> U
+1059:30:Attribute -> U
+1059:30:Name -> U
+1060:16:Name -> Dict:0
+1060:20:Name -> U
+1060:36:Name -> U
+1062:16:Name -> Dict:0
+1062:20:Name -> U
+1062:36:Name -> U
+1063:28:Name -> U
+1064:20:Name -> Dict:0
+1064:37:Name -> U
+1065:24:Call -> DictItems
+1065:24:Attribute -> BM:builtins.dict.items
+1065:24:Call -> Dict:0
+1065:24:Attribute -> BM:salt.client.LocalClient.get_cache_returns
+1065:24:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+1065:24:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1065:53:Name -> Dict:0
+1066:15:Name -> U
+1066:26:Name -> Dict:0
+1067:16:Name -> Dict:0
+1067:20:Name -> U
+1067:27:Name -> U
+1068:11:Call -> U
+1068:11:Attribute -> U
+1068:11:Name -> U
+1069:12:Call -> ERR
+1069:12:Attribute -> BM:builtins.dict.pop
+1069:12:Name -> Dict:0
+1070:15:Name -> Dict:0
+1076:23:Name -> U
+1078:13:Call -> Inst:salt.key.Key
+1078:13:Attribute -> Class:salt.key.Key
+1078:13:Attribute -> Module:salt.key
+1078:13:Name -> Module:salt
+1078:26:Attribute -> U
+1078:26:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1079:12:Call -> Dict:0 | Dict:0
+1079:12:Attribute -> BM:salt.key.Key.delete_key
+1079:12:Name -> Inst:salt.key.Key
+1080:16:Name -> U
+1080:45:Call -> U
+1080:45:Attribute -> U
+1080:45:Name -> U
+1085:11:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1085:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1086:12:Call -> Const:NoneType:None | Const:NoneType:None
+1086:12:Attribute -> BM:salt.utils.event.SaltEvent.destroy | BM:salt.utils.event.SaltEvent.destroy
+1086:12:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1086:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1087:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1088:11:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+1088:11:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1089:12:Call -> Const:NoneType:None
+1089:12:Attribute -> BM:salt.client.LocalClient.destroy
+1089:12:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+1089:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1090:12:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+1103:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1103:20:Name -> U
+1104:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1104:19:Name -> U
+1106:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1106:21:Call -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent
+1106:21:Attribute -> Func:salt.utils.event.get_event
+1106:21:Attribute -> Module:salt.utils.event
+1106:21:Attribute -> Module:salt.utils
+1106:21:Name -> Module:salt
+1108:12:Attribute -> U
+1108:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1109:17:Attribute -> U
+1109:17:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1113:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1113:21:Call -> Inst:salt.client.LocalClient
+1113:21:Attribute -> Func:salt.client.get_local_client
+1113:21:Attribute -> Module:salt.client
+1113:21:Name -> Module:salt
+1113:56:Attribute -> U
+1113:56:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1115:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1115:25:Call -> Inst:salt.utils.minions.CkMinions
+1115:25:Attribute -> Class:salt.utils.minions.CkMinions
+1115:25:Attribute -> Module:salt.utils.minions
+1115:25:Attribute -> Module:salt.utils
+1115:25:Name -> Module:salt
+1115:54:Name -> U
+1117:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1117:24:Call -> Inst:salt.auth.LoadAuth
+1117:24:Attribute -> Class:salt.auth.LoadAuth
+1117:24:Attribute -> Module:salt.auth
+1117:24:Name -> Module:salt
+1117:43:Name -> U
+1119:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1119:23:Call -> Inst:salt.minion.MasterMinion
+1119:23:Attribute -> Class:salt.minion.MasterMinion
+1119:23:Attribute -> Module:salt.minion
+1119:23:Name -> Module:salt
+1119:48:Attribute -> U
+1119:48:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1121:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1121:22:Call -> Inst:salt.wheel.WheelClient
+1121:22:Attribute -> Class:salt.wheel.WheelClient
+1121:22:Attribute -> Module:salt.wheel
+1121:22:Name -> Module:salt
+1121:39:Name -> U
+1128:35:Call -> Tuple:3
+1128:35:Attribute -> BM:salt.daemons.masterapi.LocalFuncs._prep_auth_info
+1128:35:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1128:56:Name -> U
+1131:21:Call -> Dict:3
+1131:21:Attribute -> BM:salt.auth.LoadAuth.check_authentication
+1131:21:Attribute -> Inst:salt.auth.LoadAuth
+1131:21:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1131:56:Name -> U
+1131:62:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1132:16:Call -> ERR
+1132:16:Attribute -> BM:builtins.dict.get
+1132:16:Name -> Dict:3
+1134:11:Name -> U
+1136:29:Name -> U
+1139:23:Call -> Const:bool:False | Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+1139:23:Attribute -> BM:salt.utils.minions.CkMinions.runner_check
+1139:23:Attribute -> Inst:salt.utils.minions.CkMinions
+1139:23:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1140:12:Call -> ERR
+1140:12:Attribute -> BM:builtins.dict.get
+1140:12:Name -> Dict:3
+1140:45:Name -> U
+1140:58:Name -> U
+1142:19:Call -> ERR
+1142:19:Attribute -> BM:builtins.dict.get
+1142:19:Name -> Dict:3
+1143:15:Name -> Const:bool:False | Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+1146:28:Name -> Const:str:'TokenAuthenticationError' | Const:str:'EauthAuthenticationError' | Const:str:'UserAuthenticationError'
+1148:24:Call -> U
+1148:24:Attribute -> BM:builtins.str.format
+1149:46:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1149:57:Name -> U
+1153:13:Call -> ERR
+1153:13:Name -> Func:builtins.isinstance
+1153:24:Name -> Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True
+1153:38:Name -> Class:builtins.dict
+1153:59:Name -> Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True
+1155:19:Name -> Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True
+1159:18:Call -> U
+1159:18:Attribute -> U
+1159:18:Name -> U
+1160:28:Call -> Inst:salt.runner.RunnerClient
+1160:28:Attribute -> Class:salt.runner.RunnerClient
+1160:28:Attribute -> Module:salt.runner
+1160:28:Name -> Module:salt
+1160:53:Attribute -> U
+1160:53:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1161:19:Call -> U | Dict:2
+1161:19:Attribute -> BM:salt.client.mixins.AsyncClientMixin.asynchronous
+1161:19:Name -> Inst:salt.runner.RunnerClient
+1161:46:Name -> U
+1161:51:Call -> U
+1161:51:Attribute -> U
+1161:51:Name -> U
+1161:74:Name -> U
+1162:15:Name -> Class:builtins.Exception
+1163:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1163:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+1163:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1166:28:Attribute -> Const:str:'Exception'
+1166:28:Attribute -> Class:builtins.Exception
+1166:28:Name -> ExcInst:builtins.Exception
+1167:28:Attribute -> Tuple:0
+1167:28:Name -> ExcInst:builtins.Exception
+1168:31:Call -> Const:str:''
+1168:31:Name -> Class:builtins.str
+1168:35:Name -> ExcInst:builtins.Exception
+1177:35:Call -> Tuple:3
+1177:35:Attribute -> BM:salt.daemons.masterapi.LocalFuncs._prep_auth_info
+1177:35:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1177:56:Name -> U
+1180:21:Call -> Dict:3
+1180:21:Attribute -> BM:salt.auth.LoadAuth.check_authentication
+1180:21:Attribute -> Inst:salt.auth.LoadAuth
+1180:21:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1181:12:Name -> U
+1181:18:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1181:33:Name -> Const:NoneType:None | U
+1183:16:Call -> ERR
+1183:16:Attribute -> BM:builtins.dict.get
+1183:16:Name -> Dict:3
+1185:11:Name -> U
+1187:29:Name -> U
+1190:19:Call -> ERR
+1190:19:Attribute -> BM:builtins.dict.get
+1190:19:Name -> Dict:3
+1191:11:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1192:26:Call -> Const:bool:False | Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+1192:26:Attribute -> BM:salt.utils.minions.CkMinions.wheel_check
+1192:26:Attribute -> Inst:salt.utils.minions.CkMinions
+1192:26:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1193:16:Call -> ERR
+1193:16:Attribute -> BM:builtins.dict.get
+1193:16:Name -> Dict:3
+1193:49:Name -> U
+1193:62:Name -> U
+1195:19:Name -> Const:bool:False | Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+1198:32:Name -> Const:str:'TokenAuthenticationError' | Const:str:'EauthAuthenticationError' | Const:str:'UserAuthenticationError'
+1200:28:Call -> U
+1200:28:Attribute -> BM:builtins.str.format
+1201:46:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1201:57:Name -> U
+1205:17:Call -> ERR
+1205:17:Name -> Func:builtins.isinstance
+1205:28:Name -> Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True
+1205:41:Name -> Class:builtins.dict
+1205:62:Name -> Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True
+1207:23:Name -> Dict:1 | Const:bool:True | Const:bool:True | Const:bool:True
+1210:14:Call -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+1210:14:Attribute -> Func:salt.utils.jid.gen_jid
+1210:14:Attribute -> Module:salt.utils.jid
+1210:14:Attribute -> Module:salt.utils
+1210:14:Name -> Module:salt
+1210:37:Attribute -> U
+1210:37:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1211:14:Call -> U
+1211:14:Attribute -> U
+1211:14:Name -> U
+1212:14:Call -> Const:str:''
+1212:14:Attribute -> Func:salt.utils.event.tagify
+1212:14:Attribute -> Module:salt.utils.event
+1212:14:Attribute -> Module:salt.utils
+1212:14:Name -> Module:salt
+1212:38:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+1214:28:Name -> U
+1215:19:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+1216:19:Name -> Const:str:''
+1217:20:Name -> U
+1220:12:Call -> Const:bool:False | Const:bool:True
+1220:12:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+1220:12:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1220:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1220:34:Name -> Dict:4
+1220:40:Call -> Const:str:''
+1220:40:Attribute -> Func:salt.utils.event.tagify
+1220:40:Attribute -> Module:salt.utils.event
+1220:40:Attribute -> Module:salt.utils
+1220:40:Name -> Module:salt
+1220:65:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+1221:18:Call -> Dict:3 | U
+1221:18:Attribute -> BM:salt.wheel.WheelClient.call_func
+1221:18:Attribute -> Inst:salt.wheel.WheelClient
+1221:18:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1221:40:Name -> U
+1221:47:Name -> U
+1222:12:Name -> Dict:4
+1222:29:Name -> Dict:3 | U
+1223:12:Name -> Dict:4
+1224:12:Call -> Const:bool:False | Const:bool:True
+1224:12:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+1224:12:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1224:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1224:34:Name -> Dict:4
+1224:40:Call -> Const:str:''
+1224:40:Attribute -> Func:salt.utils.event.tagify
+1224:40:Attribute -> Module:salt.utils.event
+1224:40:Attribute -> Module:salt.utils
+1224:40:Name -> Module:salt
+1224:65:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+1225:27:Name -> Const:str:''
+1225:40:Name -> Dict:4
+1226:15:Name -> Class:builtins.Exception
+1227:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1227:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+1227:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1227:71:Name -> U
+1228:12:Name -> Dict:4
+1228:29:Call -> U
+1228:29:Attribute -> BM:builtins.str.format
+1229:16:Name -> U
+1230:16:Attribute -> Const:str:'Exception'
+1230:16:Attribute -> Class:builtins.Exception
+1230:16:Name -> ExcInst:builtins.Exception
+1231:16:Name -> ExcInst:builtins.Exception
+1233:12:Name -> Dict:4
+1234:12:Call -> Const:bool:False | Const:bool:True
+1234:12:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+1234:12:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1234:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1234:34:Name -> Dict:4
+1234:40:Call -> Const:str:''
+1234:40:Attribute -> Func:salt.utils.event.tagify
+1234:40:Attribute -> Module:salt.utils.event
+1234:40:Attribute -> Module:salt.utils
+1234:40:Name -> Module:salt
+1234:65:Name -> U | Const:str:'{Uninferable}' | Const:str:'{Uninferable}_{Uninferable}'
+1235:27:Name -> Const:str:''
+1235:40:Name -> Dict:4
+1242:16:Call -> Dict:0 | U | Dict:0 | Dict:4
+1242:16:Attribute -> BM:salt.auth.LoadAuth.mk_token
+1242:16:Attribute -> Inst:salt.auth.LoadAuth
+1242:16:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1242:39:Name -> U
+1243:15:Name -> Dict:0 | U | Dict:0 | Dict:4
+1244:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1244:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1244:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1246:15:Name -> Dict:0 | U | Dict:0 | Dict:4
+1252:26:Name -> U
+1254:15:Call -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+1254:15:Attribute -> BM:salt.auth.LoadAuth.get_tok
+1254:15:Attribute -> Inst:salt.auth.LoadAuth
+1254:15:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1254:37:Name -> U
+1261:16:Call -> U
+1261:16:Attribute -> U
+1261:16:Name -> U
+1263:24:Call -> Inst:salt.acl.PublisherACL
+1263:24:Attribute -> Class:salt.acl.PublisherACL
+1263:24:Attribute -> Module:salt.acl
+1263:24:Name -> Module:salt
+1263:46:Attribute -> U
+1263:46:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1265:11:Call -> U | Const:bool:False
+1265:11:Attribute -> BM:salt.acl.PublisherACL.user_is_blacklisted
+1265:11:Name -> Inst:salt.acl.PublisherACL
+1266:12:Name -> U
+1267:13:Call -> Const:bool:True | Const:bool:False
+1267:13:Attribute -> BM:salt.acl.PublisherACL.cmd_is_blacklisted
+1267:13:Name -> Inst:salt.acl.PublisherACL
+1267:46:Name -> U
+1268:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1268:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1268:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1271:16:Name -> U
+1272:16:Name -> U
+1282:20:Call -> U
+1282:20:Attribute -> U
+1282:20:Call -> U
+1282:20:Attribute -> U
+1282:20:Name -> U
+1282:60:Name -> Const:str:':'
+1283:15:Call -> U | Dict:2
+1283:15:Attribute -> BM:salt.utils.minions.CkMinions.check_minions
+1283:15:Attribute -> Inst:salt.utils.minions.CkMinions
+1283:15:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1284:12:Name -> U
+1284:25:Call -> U
+1284:25:Attribute -> U
+1284:25:Name -> U
+1284:55:Name -> U
+1286:18:Name -> U | Dict:2
+1289:35:Call -> Tuple:3
+1289:35:Attribute -> BM:salt.daemons.masterapi.LocalFuncs._prep_auth_info
+1289:35:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1289:56:Name -> U
+1290:11:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1291:25:Call -> Dict:3
+1291:25:Attribute -> BM:salt.auth.LoadAuth.check_authentication
+1291:25:Attribute -> Inst:salt.auth.LoadAuth
+1291:25:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1291:60:Name -> U
+1291:66:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1291:81:Name -> Const:NoneType:None | U
+1293:25:Call -> Dict:3
+1293:25:Attribute -> BM:salt.auth.LoadAuth.check_authentication
+1293:25:Attribute -> Inst:salt.auth.LoadAuth
+1293:25:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1293:60:Name -> U
+1293:67:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1296:20:Call -> ERR
+1296:20:Attribute -> BM:builtins.dict.get
+1296:20:Name -> Dict:3
+1297:16:Call -> ERR
+1297:16:Attribute -> BM:builtins.dict.get
+1297:16:Name -> Dict:3
+1298:53:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1300:11:Name -> U
+1302:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1302:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1302:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1302:24:Name -> Const:str:'Authentication failure of type "token"  | Const:str:'Authentication failure of type "eauth"  | Const:str:'Authentication failure of type "user" o
+1311:11:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1311:35:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1311:59:Name -> U
+1313:25:Call -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+1313:25:Attribute -> BM:salt.utils.minions.CkMinions.auth_check
+1313:25:Attribute -> Inst:salt.utils.minions.CkMinions
+1313:25:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1314:16:Name -> U
+1315:16:Name -> U
+1316:16:Name -> U
+1317:16:Name -> U
+1318:16:Call -> U
+1318:16:Attribute -> U
+1318:16:Name -> U
+1319:24:Name -> U
+1324:19:Name -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+1326:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1326:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1326:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1326:28:Name -> Const:str:'Authentication failure of type "token"  | Const:str:'Authentication failure of type "eauth"  | Const:str:'Authentication failure of type "user" o
+1335:15:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1336:27:Call -> ERR
+1336:27:Attribute -> BM:builtins.dict.get
+1336:27:Name -> Dict:3
+1337:16:Name -> U
+1337:31:Name -> U
+1338:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1338:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1338:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1338:58:Name -> U
+1339:17:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1341:16:Name -> U
+1341:31:Call -> Const:str:'' | Const:str:'' | U | Const:str:''
+1341:31:Attribute -> BM:salt.auth.LoadAuth.load_name
+1341:31:Attribute -> Inst:salt.auth.LoadAuth
+1341:31:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1341:55:Name -> U
+1345:15:Call -> U
+1345:15:Attribute -> U
+1345:15:Attribute -> U
+1345:15:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1347:19:Name -> U
+1348:73:Name -> U
+1350:15:Name -> U
+1351:19:Call -> U
+1351:19:Attribute -> BM:builtins.str.format
+1351:40:Attribute -> U
+1351:40:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1352:12:Name -> U
+1352:26:Call -> U
+1352:26:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1352:26:Attribute -> Inst:salt.minion.MasterMinion
+1352:26:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1352:49:Name -> U
+1353:24:Call -> U
+1353:24:Attribute -> U
+1353:24:Name -> U
+1355:8:Call -> Const:bool:False | Const:bool:True
+1355:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+1355:8:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1355:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1355:42:Name -> U
+1355:52:Name -> U
+1358:19:Name -> U
+1359:24:Name -> U
+1360:19:Name -> U
+1361:20:Name -> U
+1362:19:Name -> U
+1363:19:Call -> List:1 | List:0 | Tuple:2
+1363:19:Attribute -> Func:salt.utils.args.parse_input
+1363:19:Attribute -> Module:salt.utils.args
+1363:19:Attribute -> Module:salt.utils
+1363:19:Name -> Module:salt
+1364:16:Name -> U
+1364:38:Call -> U
+1364:38:Attribute -> U
+1364:38:Name -> U
+1366:23:Name -> U
+1370:8:Call -> Const:bool:False | Const:bool:True
+1370:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+1370:8:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1370:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1370:30:Name -> Dict:7
+1371:8:Call -> Const:bool:False | Const:bool:True
+1371:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event | BM:salt.utils.event.SaltEvent.fire_event
+1371:8:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1371:8:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1372:12:Name -> Dict:7
+1372:26:Call -> Const:str:''
+1372:26:Attribute -> Func:salt.utils.event.tagify
+1372:26:Attribute -> Module:salt.utils.event
+1372:26:Attribute -> Module:salt.utils
+1372:26:Name -> Module:salt
+1372:51:Name -> U
+1376:11:Attribute -> U
+1376:11:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1378:23:Call -> U
+1378:23:Attribute -> BM:builtins.str.format
+1378:45:Attribute -> U
+1378:45:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1379:16:Call -> U
+1379:16:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1379:16:Attribute -> Inst:salt.minion.MasterMinion
+1379:16:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1379:39:Name -> U
+1379:45:Name -> U
+1379:58:Name -> U
+1380:19:Name -> Class:builtins.KeyError
+1381:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1381:16:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1381:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1384:20:Attribute -> U
+1384:20:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1386:19:Name -> Class:builtins.Exception
+1387:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1387:16:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1387:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1393:19:Call -> U
+1393:19:Attribute -> BM:builtins.str.format
+1393:41:Attribute -> U
+1393:41:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1394:12:Call -> U
+1394:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+1394:12:Attribute -> Inst:salt.minion.MasterMinion
+1394:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1394:35:Name -> U
+1394:41:Name -> U
+1394:54:Name -> U
+1395:15:Name -> Class:builtins.KeyError
+1396:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1396:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1396:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1399:16:Attribute -> U
+1399:16:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1401:15:Name -> Class:builtins.Exception
+1402:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1402:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1402:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1412:19:Name -> U
+1413:19:Call -> List:1 | List:0 | Tuple:2
+1413:19:Attribute -> Func:salt.utils.args.parse_input
+1413:19:Attribute -> Module:salt.utils.args
+1413:19:Attribute -> Module:salt.utils
+1413:19:Name -> Module:salt
+1414:16:Name -> U
+1414:38:Call -> U
+1414:38:Attribute -> U
+1414:38:Name -> U
+1416:19:Name -> U
+1417:19:Name -> U
+1418:19:Name -> U
+1421:19:Name -> U
+1422:12:Name -> Dict:5
+1422:29:Name -> U
+1423:25:Name -> U
+1424:12:Name -> Dict:5
+1424:35:Name -> U
+1425:19:Name -> U
+1426:12:Name -> Dict:5
+1426:29:Name -> U
+1428:23:Name -> U
+1429:31:Name -> U
+1430:16:Name -> Dict:5
+1430:41:Call -> U
+1430:41:Attribute -> U
+1430:41:Name -> U
+1432:29:Name -> U
+1433:16:Name -> Dict:5
+1433:39:Call -> U
+1433:39:Attribute -> U
+1433:39:Name -> U
+1435:31:Name -> U
+1436:16:Name -> Dict:5
+1436:41:Call -> U
+1436:41:Attribute -> U
+1436:41:Name -> U
+1438:21:Name -> U
+1439:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1439:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1439:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1441:16:Name -> U
+1442:16:Name -> U
+1443:16:Name -> U
+1445:12:Name -> Dict:5
+1445:31:Name -> U
+1447:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1447:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1447:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1447:57:Name -> U
+1447:70:Name -> U
+1448:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1448:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1448:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1448:50:Name -> Dict:5
+1450:31:Name -> U
+1450:55:Name -> U
+1450:72:Name -> Dict:5
+1454:22:Name -> U
+1457:24:Name -> U
+1463:18:Attribute -> U
+1463:18:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1465:15:Name -> Const:str:'token' | Const:str:'eauth' | Const:str:'user'
+1465:26:Name -> Const:str:'TokenAuthenticationError' | Const:str:'EauthAuthenticationError' | Const:str:'UserAuthenticationError'
+1465:36:Name -> Const:NoneType:None | U
+1468:11:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1468:11:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1469:12:Call -> Const:NoneType:None | Const:NoneType:None
+1469:12:Attribute -> BM:salt.utils.event.SaltEvent.destroy | BM:salt.utils.event.SaltEvent.destroy
+1469:12:Attribute -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent | Const:NoneType:None
+1469:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1470:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1471:11:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+1471:11:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1472:12:Call -> Const:NoneType:None
+1472:12:Attribute -> BM:salt.client.LocalClient.destroy
+1472:12:Attribute -> Inst:salt.client.LocalClient | Const:NoneType:None
+1472:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs
+1473:12:Name -> Inst:salt.daemons.masterapi.LocalFuncs

@@ -1,0 +1,32 @@
+6:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+6:6:Attribute -> Func:logging.getLogger
+6:6:Name -> Module:logging
+6:24:Name -> Const:str:'tests.unit.utils.test_dicttrim' | Const:str:'__main__'
+9:23:Name -> Class:tests.support.unit.TestCase
+11:8:Name -> Inst:tests.unit.utils.test_dicttrim.DictTrimTestCase
+12:8:Name -> Inst:tests.unit.utils.test_dicttrim.DictTrimTestCase
+15:14:Call -> U
+15:14:Attribute -> Func:salt.utils.dicttrim.trim_dict
+15:14:Name -> Module:salt.utils.dicttrim
+15:36:Attribute -> U
+15:36:Name -> Inst:tests.unit.utils.test_dicttrim.DictTrimTestCase
+16:8:Call -> Const:NoneType:None
+16:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+16:8:Name -> Inst:tests.unit.utils.test_dicttrim.DictTrimTestCase
+16:25:Name -> U
+16:30:Attribute -> Dict:2
+16:30:Name -> Inst:tests.unit.utils.test_dicttrim.DictTrimTestCase
+19:32:Name -> Class:tests.support.unit.TestCase
+21:8:Name -> Inst:tests.unit.utils.test_dicttrim.RecursiveDictTrimTestCase
+22:8:Name -> Inst:tests.unit.utils.test_dicttrim.RecursiveDictTrimTestCase
+25:14:Call -> U
+25:14:Attribute -> Func:salt.utils.dicttrim.trim_dict
+25:14:Name -> Module:salt.utils.dicttrim
+25:36:Attribute -> U
+25:36:Name -> Inst:tests.unit.utils.test_dicttrim.RecursiveDictTrimTestCase
+26:8:Call -> Const:NoneType:None
+26:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+26:8:Name -> Inst:tests.unit.utils.test_dicttrim.RecursiveDictTrimTestCase
+26:25:Name -> U
+26:30:Attribute -> Dict:1
+26:30:Name -> Inst:tests.unit.utils.test_dicttrim.RecursiveDictTrimTestCase

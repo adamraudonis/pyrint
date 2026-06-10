@@ -1,0 +1,208 @@
+30:7:Name -> Class:builtins.ImportError
+36:7:Name -> Class:builtins.ImportError
+58:9:Call -> U | Const:str:'default'
+58:9:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+58:9:Attribute -> Dict:43 | Inst:os._Environ
+58:9:Name -> Module:os
+59:13:Call -> U | Const:str:'default'
+59:13:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+59:13:Attribute -> Dict:43 | Inst:os._Environ
+59:13:Name -> Module:os
+79:19:Call -> Const:str:''
+79:19:Name -> Class:builtins.str
+79:23:Attribute -> Inst:pathlib.Path
+79:23:Call -> Inst:pathlib.Path
+79:23:Name -> Class:pathlib.Path
+79:28:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+79:61:Name -> Const:str:'gemini_batch_requests.jsonl'
+80:14:Call -> U
+80:14:Name -> Class:builtins.bool
+80:19:Call -> U | Const:str:''
+80:19:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+80:19:Attribute -> Dict:43 | Inst:os._Environ
+80:19:Name -> Module:os
+81:37:Name -> U
+81:54:Call -> Const:str:''
+81:54:Name -> Class:builtins.str
+81:58:Attribute -> Inst:pathlib.Path
+81:58:Call -> Inst:pathlib.Path
+81:58:Name -> Class:pathlib.Path
+81:63:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+82:30:Call -> Const:str:''
+82:30:Name -> Class:builtins.str
+82:34:Attribute -> Inst:pathlib.Path
+82:34:Call -> Inst:pathlib.Path
+82:34:Name -> Class:pathlib.Path
+82:39:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+82:72:Name -> Const:str:'gemini_batch_embeddings_requests.jsonl'
+103:5:Call -> U
+103:5:Name -> U
+104:11:Name -> Const:str:'gen_ai_gemini_batch_api'
+107:15:Call -> Inst:_pydatetime.datetime
+107:15:Name -> Class:_pydatetime.datetime
+113:5:Name -> U
+115:15:Call -> U
+115:15:Name -> U
+115:26:Name -> Const:str:'api_key'
+117:30:Call -> U
+117:30:Name -> Func:providers.google.tests.system.google.cloud.gen_ai.example_gen_ai_gemini_batch_api.get_gemini_api_key
+120:18:Call -> U
+120:18:Name -> U
+122:19:Name -> U | Const:str:'default'
+123:17:Name -> Const:str:'us-central1'
+124:18:Name -> Const:str:''
+125:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+129:29:Call -> U
+129:29:Name -> U
+131:19:Name -> U | Const:str:'default'
+132:17:Name -> Const:str:'us-central1'
+133:18:Name -> Const:str:''
+134:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+138:15:Call -> U
+138:15:Name -> U
+140:19:Name -> U | Const:str:'default'
+141:17:Name -> Const:str:'us-central1'
+142:18:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='up
+143:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+148:17:Call -> U
+148:17:Name -> U
+150:19:Name -> U | Const:str:'default'
+151:17:Name -> Const:str:'us-central1'
+152:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+157:18:Call -> U
+157:18:Name -> U
+159:19:Name -> U | Const:str:'default'
+160:17:Name -> Const:str:'us-central1'
+161:18:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='up
+162:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+163:21:Attribute -> U
+163:21:Name -> U
+167:29:Call -> U
+167:29:Name -> U
+169:19:Name -> U | Const:str:'default'
+170:17:Name -> Const:str:'us-central1'
+171:18:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='up
+172:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+173:21:Attribute -> U
+173:21:Name -> U
+177:46:Call -> U
+177:46:Name -> U
+179:19:Name -> U | Const:str:'default'
+180:17:Name -> Const:str:'us-central1'
+182:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+186:21:Name -> List:2
+193:57:Call -> U
+193:57:Name -> U
+195:19:Name -> U | Const:str:'default'
+196:17:Name -> Const:str:'us-central1'
+198:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+202:21:Name -> List:2
+209:34:Call -> U
+209:34:Name -> U
+211:19:Name -> U | Const:str:'default'
+212:17:Name -> Const:str:'us-central1'
+214:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+218:21:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='up
+221:23:Name -> Const:str:'gcs/data' | Const:str:''
+226:51:Call -> U
+226:51:Name -> U
+228:19:Name -> U | Const:str:'default'
+229:17:Name -> Const:str:'us-central1'
+232:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+236:21:Name -> Dict:1
+241:39:Call -> U
+241:39:Name -> U
+243:19:Name -> U | Const:str:'default'
+244:17:Name -> Const:str:'us-central1'
+247:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+251:21:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='up
+256:50:Call -> U
+256:50:Name -> U
+258:19:Name -> U | Const:str:'default'
+259:17:Name -> Const:str:'us-central1'
+263:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+267:21:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='up
+268:23:Name -> Const:str:'gcs/data' | Const:str:''
+273:20:Call -> U
+273:20:Name -> U
+275:19:Name -> U | Const:str:'default'
+276:17:Name -> Const:str:'us-central1'
+277:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+278:17:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='cr
+283:22:Call -> U
+283:22:Name -> U
+285:19:Name -> U | Const:str:'default'
+286:17:Name -> Const:str:'us-central1'
+287:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+292:23:Call -> U
+292:23:Name -> U
+294:19:Name -> U | Const:str:'default'
+295:17:Name -> Const:str:'us-central1'
+296:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+297:17:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='cr
+302:25:Call -> U
+302:25:Name -> U
+304:19:Name -> U | Const:str:'default'
+305:17:Name -> Const:str:'us-central1'
+306:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+307:17:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='cr
+308:21:Attribute -> U
+308:21:Name -> U
+312:25:Call -> U
+312:25:Name -> U
+314:19:Name -> U | Const:str:'default'
+315:17:Name -> Const:str:'us-central1'
+316:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+317:17:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='cr
+318:21:Attribute -> U
+318:21:Name -> U
+321:36:Call -> U
+321:36:Name -> U
+323:19:Name -> U | Const:str:'default'
+324:17:Name -> Const:str:'us-central1'
+325:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+326:17:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='cr
+327:21:Attribute -> U
+327:21:Name -> U
+330:36:Call -> U
+330:36:Name -> U
+332:19:Name -> U | Const:str:'default'
+333:17:Name -> Const:str:'us-central1'
+334:23:Name -> Const:str:"{{ task_instance.xcom_pull('get_gemini_
+335:17:Name -> Const:str:"{{ task_instance.xcom_pull(task_ids='cr
+336:21:Attribute -> U
+336:21:Name -> U
+338:25:Call -> U
+338:25:Name -> U
+342:21:Attribute -> U
+342:21:Name -> U
+346:8:Name -> U
+347:12:Name -> U
+347:25:Name -> U
+348:11:Name -> U
+349:11:Name -> U
+351:12:Name -> U
+352:12:Name -> U
+353:12:Name -> U
+354:12:Name -> U
+355:12:Name -> U
+356:12:Name -> U
+358:11:Name -> U
+359:11:Name -> U
+360:11:Name -> U
+361:11:Name -> U
+362:11:Name -> U
+363:11:Name -> U
+364:11:Name -> U
+365:12:Name -> U
+365:25:Name -> U
+365:49:Name -> U
+372:4:Call -> Inst:builtins.list
+372:4:Name -> Class:builtins.list
+372:9:Attribute -> U
+372:9:Name -> U
+372:23:Call -> U
+372:23:Name -> U
+377:11:Call -> U
+377:11:Name -> U
+377:24:Name -> U

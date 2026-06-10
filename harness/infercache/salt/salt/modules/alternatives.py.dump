@@ -1,0 +1,169 @@
+19:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+19:6:Attribute -> Func:logging.getLogger
+19:6:Name -> Module:logging
+19:24:Name -> Const:str:'salt.modules.alternatives' | Const:str:'__main__'
+29:7:Call -> Const:bool:False | U
+29:7:Attribute -> Func:genericpath.isdir | U
+29:7:Attribute -> Module:posixpath | Module:ntpath
+29:7:Name -> Module:os
+38:7:Name -> ERR
+53:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+53:11:Name -> Func:salt.modules.alternatives._get_cmd
+53:36:Name -> U
+54:10:Call -> ERR
+54:10:Name -> ERR
+54:34:Name -> List:3
+55:7:Name -> U
+55:30:Name -> U
+56:15:Name -> U
+57:11:Name -> U
+62:13:Call -> U
+62:13:Attribute -> Func:salt.utils.files.fopen
+62:13:Attribute -> Module:salt.utils.files
+62:13:Attribute -> Module:salt.utils
+62:13:Name -> Module:salt
+62:36:Call -> U
+62:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+62:36:Attribute -> Module:posixpath | Module:ntpath
+62:36:Name -> Module:os
+62:49:Name -> U
+62:55:Name -> U
+63:23:Call -> U
+63:23:Attribute -> Func:salt.utils.stringutils.to_unicode
+63:23:Attribute -> Module:salt.utils.stringutils
+63:23:Attribute -> Module:salt.utils
+63:23:Name -> Module:salt
+63:57:Call -> U
+63:57:Attribute -> U
+63:57:Name -> U
+64:19:Call -> U
+64:19:Attribute -> U
+64:19:Call -> U
+64:19:Attribute -> U
+64:19:Name -> U
+65:11:Name -> Class:builtins.OSError
+66:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+66:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+66:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+66:53:Name -> U
+67:12:Name -> Class:builtins.OSError
+67:21:Name -> Class:builtins.IndexError
+68:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+68:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+68:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+70:12:Name -> U
+71:12:Name -> ExcInst:builtins.OSError | ExcInst:builtins.IndexError
+78:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+78:11:Name -> Func:salt.modules.alternatives._get_cmd
+78:34:Name -> U
+79:10:Call -> ERR
+79:10:Name -> ERR
+79:34:Name -> List:3
+80:7:Name -> U
+80:30:Name -> U
+83:18:Call -> U
+83:18:Attribute -> U
+83:18:Name -> U
+84:16:Call -> U
+84:16:Attribute -> U
+84:16:Name -> U
+85:11:Call -> U
+85:11:Attribute -> U
+85:11:Name -> U
+86:19:Call -> U
+86:19:Attribute -> U
+86:19:Call -> U
+86:19:Attribute -> U
+86:19:Name -> U
+104:7:Name -> ERR
+105:15:Call -> U | Const:bool:False
+105:15:Name -> Func:salt.modules.alternatives._read_alternative_link_directly
+105:47:Name -> U
+106:9:Name -> ERR
+107:15:Call -> U | Const:bool:False
+107:15:Name -> Func:salt.modules.alternatives._read_alternative_link_directly
+107:47:Name -> U
+110:15:Call -> Const:bool:False | U | Const:bool:False
+110:15:Name -> Func:salt.modules.alternatives._read_alternative_link_with_command
+110:51:Name -> U
+125:15:Call -> U
+125:15:Name -> Func:salt.modules.alternatives._read_link
+125:26:Name -> U
+126:11:Name -> Class:builtins.OSError
+127:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+127:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+127:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+127:52:Name -> U
+143:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+143:11:Name -> Func:salt.modules.alternatives._get_cmd
+143:36:Name -> U
+144:10:Call -> ERR
+144:10:Name -> ERR
+144:34:Name -> List:3
+146:7:Name -> U
+146:30:Name -> U
+149:11:Call -> ERR
+149:11:Name -> Func:builtins.any
+149:15:Call -> U
+149:15:Attribute -> U
+149:15:Name -> U
+149:31:Name -> U
+149:49:Call -> U
+149:49:Attribute -> U
+149:49:Name -> U
+164:15:Call -> U
+164:15:Name -> Func:salt.modules.alternatives._read_link
+164:26:Name -> U
+164:35:Name -> U
+165:11:Name -> Class:builtins.OSError
+179:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+179:11:Name -> Func:salt.modules.alternatives._get_cmd
+179:36:Name -> U
+179:42:Name -> U
+179:48:Name -> U
+179:54:Call -> Const:str:''
+179:54:Name -> Class:builtins.str
+179:58:Name -> U
+180:10:Call -> ERR
+180:10:Name -> ERR
+180:34:Name -> List:6
+181:7:Name -> U
+181:30:Name -> U
+182:15:Name -> U
+183:11:Name -> U
+196:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+196:11:Name -> Func:salt.modules.alternatives._get_cmd
+196:35:Name -> U
+196:41:Name -> U
+197:10:Call -> ERR
+197:10:Name -> ERR
+197:34:Name -> List:4
+198:7:Name -> U
+199:15:Name -> U
+200:11:Name -> U
+214:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+214:11:Name -> Func:salt.modules.alternatives._get_cmd
+214:33:Name -> U
+215:10:Call -> ERR
+215:10:Name -> ERR
+215:34:Name -> List:3
+216:7:Name -> U
+217:15:Name -> U
+218:11:Name -> U
+231:11:Call -> Const:str:'alternatives' | Const:str:'update-alternatives'
+231:11:Name -> Func:salt.modules.alternatives._get_cmd
+231:32:Name -> U
+231:38:Name -> U
+232:10:Call -> ERR
+232:10:Name -> ERR
+232:34:Name -> List:4
+233:7:Name -> U
+234:15:Name -> U
+235:11:Name -> U
+244:41:Name -> U
+245:11:Call -> U
+245:11:Attribute -> Func:salt.utils.path.readlink
+245:11:Attribute -> Module:salt.utils.path
+245:11:Attribute -> Module:salt.utils
+245:11:Name -> Module:salt
+245:36:Name -> Const:str:'/etc/alternatives/Uninferable'

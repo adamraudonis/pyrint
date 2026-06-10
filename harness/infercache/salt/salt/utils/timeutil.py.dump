@@ -1,0 +1,166 @@
+14:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+14:6:Attribute -> Func:logging.getLogger
+14:6:Name -> Module:logging
+14:24:Name -> Const:str:'salt.utils.timeutil' | Const:str:'__main__'
+30:7:Attribute -> U
+30:7:Name -> Module:sys
+31:15:Call -> Inst:_pydatetime.datetime | U
+31:15:Attribute -> BM:_pydatetime.datetime.replace | U
+31:15:Call -> Inst:_pydatetime.datetime | U
+31:15:Attribute -> BM:_pydatetime.datetime.now
+31:15:Name -> Class:_pydatetime.datetime
+31:28:Attribute -> Inst:_pydatetime.timezone
+31:28:Name -> Class:_pydatetime.timezone
+33:15:Call -> Inst:_pydatetime.datetime | U
+33:15:Attribute -> BM:_pydatetime.datetime.utcnow
+33:15:Name -> Class:_pydatetime.datetime
+49:7:Attribute -> U
+49:7:Name -> Module:sys
+50:15:Call -> Inst:_pydatetime.datetime | U
+50:15:Attribute -> BM:_pydatetime.datetime.replace | U
+50:15:Call -> Inst:_pydatetime.datetime | U
+50:15:Attribute -> BM:_pydatetime.datetime.fromtimestamp
+50:15:Name -> Class:_pydatetime.datetime
+50:38:Name -> U
+50:52:Attribute -> Inst:_pydatetime.timezone
+50:52:Name -> Class:_pydatetime.timezone
+52:15:Call -> Inst:_pydatetime.datetime | U
+52:15:Attribute -> BM:_pydatetime.datetime.utcfromtimestamp
+52:15:Name -> Class:_pydatetime.datetime
+52:41:Name -> U
+60:7:Name -> Const:NoneType:None | U
+61:11:Call -> ERR
+61:11:Name -> Func:builtins.isinstance
+61:22:Name -> U
+61:31:Name -> Class:builtins.int
+63:22:Name -> U
+65:22:Call -> U
+65:22:Attribute -> U
+65:22:Name -> U
+66:22:Call -> U
+66:22:Attribute -> U
+66:22:Name -> U
+68:33:Call -> U
+68:33:Attribute -> U
+68:33:Name -> U
+69:19:Name -> Class:builtins.ValueError
+71:26:Name -> U
+72:19:Name -> U
+74:29:Call -> Inst:builtins.int
+74:29:Name -> Class:builtins.int
+74:33:Name -> U | Const:int:0
+74:41:Call -> Inst:builtins.int
+74:41:Name -> Class:builtins.int
+74:45:Name -> U | Const:int:0
+75:13:Call -> Inst:_pydatetime.timedelta
+75:13:Name -> Class:_pydatetime.timedelta
+75:29:Name -> Const:int:0 | U | Const:int:0 | Inst:builtins.int
+75:44:Name -> U | Const:int:0 | Inst:builtins.int
+76:19:Call -> Inst:_pydatetime.datetime | U
+76:19:Name -> Func:salt.utils.timeutil.utcnow
+77:18:Name -> Inst:_pydatetime.datetime | U
+77:29:Name -> Inst:_pydatetime.timedelta
+78:15:Call -> ERR
+78:15:Attribute -> Func:time.mktime
+78:15:Name -> Module:time
+78:27:Call -> U
+78:27:Attribute -> U
+78:27:Name -> U
+79:9:Name -> Const:NoneType:None | U
+80:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+80:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+80:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+80:50:Name -> U
+81:11:Call -> ERR
+81:11:Name -> Func:builtins.isinstance
+81:22:Name -> U
+81:32:Name -> Class:builtins.int
+81:37:Name -> Class:builtins.float
+83:19:Name -> U
+92:23:Name -> Tuple:5
+94:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+94:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+94:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+94:52:Name -> Const:str:'%H%M' | Const:str:'%Hh%M' | Const:str:'%I%p' | Const:str:'%I:%M%p' | Const:str:'%I:%M %p'
+95:25:Call -> Inst:_pydatetime.datetime
+95:25:Attribute -> BM:_pydatetime.datetime.strptime
+95:25:Name -> Class:_pydatetime.datetime
+95:43:Name -> U
+95:52:Name -> Const:str:'%H%M' | Const:str:'%Hh%M' | Const:str:'%I%p' | Const:str:'%I:%M%p' | Const:str:'%I:%M %p'
+96:27:Call -> ERR
+96:27:Attribute -> Func:time.mktime
+96:27:Name -> Module:time
+96:39:Call -> Inst:time.struct_time
+96:39:Attribute -> BM:_pydatetime.datetime.timetuple
+96:39:Name -> Inst:_pydatetime.datetime
+97:23:Name -> Class:builtins.ValueError
+98:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+98:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+98:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+98:70:Name -> Const:str:'%H%M' | Const:str:'%Hh%M' | Const:str:'%I%p' | Const:str:'%I:%M%p' | Const:str:'%I:%M %p'
+100:18:Call -> U
+100:18:Attribute -> BM:builtins.str.format
+101:20:Name -> U
+101:34:Call -> Const:str:''
+101:34:Attribute -> BM:builtins.str.join
+101:44:Name -> Tuple:5
+103:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+103:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+103:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+103:22:Name -> U
+104:18:Call -> ExcInst:builtins.ValueError
+104:18:Name -> Class:builtins.ValueError
+104:29:Name -> U
+112:9:Call -> U
+112:9:Name -> Func:salt.utils.timeutil.get_timestamp_at
+112:34:Name -> Const:NoneType:None | U
+112:51:Name -> Const:NoneType:None | U
+113:11:Call -> ERR
+113:11:Attribute -> Func:time.strftime
+113:11:Name -> Module:time
+113:25:Name -> Const:str:'%Y-%m-%dT%H:%M:%S' | U
+113:34:Call -> ERR
+113:34:Attribute -> Func:time.localtime
+113:34:Name -> Module:time
+113:49:Name -> U
+124:7:Name -> U
+125:15:Name -> U
+126:7:Call -> ERR
+126:7:Name -> Func:builtins.isinstance
+126:18:Name -> U
+126:24:Name -> Class:builtins.int
+126:29:Name -> Class:builtins.float
+127:15:Call -> Inst:builtins.float
+127:15:Name -> Class:builtins.float
+127:21:Name -> U
+129:15:Call -> Inst:builtins.float
+129:15:Name -> Class:builtins.float
+129:21:Name -> U
+130:11:Name -> Class:builtins.ValueError
+132:11:Call -> ERR
+132:11:Name -> Func:builtins.isinstance
+132:22:Name -> U
+132:27:Name -> Class:builtins.str
+133:14:Call -> ExcInst:builtins.ValueError
+133:14:Name -> Class:builtins.ValueError
+134:11:Call -> U
+134:11:Attribute -> Func:re.match
+134:11:Name -> Module:re
+134:46:Name -> U
+135:14:Call -> ExcInst:builtins.ValueError
+135:14:Name -> Class:builtins.ValueError
+135:56:Name -> U
+136:16:Call -> Inst:builtins.float
+136:16:Name -> Class:builtins.float
+136:22:Name -> U
+136:33:Name -> U
+137:7:Name -> U
+138:15:Name -> Inst:builtins.float
+140:7:Name -> U
+141:15:Name -> U
+143:7:Name -> U
+144:15:Name -> U
+146:7:Name -> U
+147:15:Name -> U
+148:10:Call -> ExcInst:builtins.RuntimeError
+148:10:Name -> Class:builtins.RuntimeError

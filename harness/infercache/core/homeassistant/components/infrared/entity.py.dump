@@ -1,0 +1,134 @@
+20:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:10:Attribute -> Func:logging.getLogger
+20:10:Name -> Module:logging
+20:28:Name -> Const:str:'homeassistant.components.infrared.entit | Const:str:'__main__'
+23:26:Name -> Class:enum.StrEnum
+30:1:Call -> Func:dataclasses.dataclass.wrap | U
+30:1:Name -> Func:dataclasses.dataclass
+34:13:Name -> Class:builtins.list
+34:18:Name -> Class:builtins.int
+35:16:Name -> Class:builtins.int
+38:39:Name -> Class:homeassistant.helpers.entity.EntityDescription
+42:28:Name -> Class:homeassistant.helpers.restore_state.RestoreEntity
+45:24:Name -> Class:homeassistant.components.infrared.entity.InfraredEmitterEntityDescription
+46:24:Name -> Class:homeassistant.components.infrared.entity.InfraredDeviceClass
+46:46:Attribute -> Inst:homeassistant.components.infrared.entity.InfraredDeviceClass.EMITTER
+46:46:Name -> Class:homeassistant.components.infrared.entity.InfraredDeviceClass
+50:25:Name -> Class:builtins.str
+52:5:Name -> Class:builtins.property
+53:5:Name -> Func:typing.final
+54:23:Name -> Class:builtins.str
+56:15:Attribute -> U
+56:15:Name -> Inst:homeassistant.components.infrared.entity.InfraredEmitterEntity
+58:5:Name -> Func:typing.final
+59:57:Name -> U
+64:14:Call -> ERR
+64:14:Attribute -> BM:homeassistant.components.infrared.entity.InfraredEmitterEntity.async_send_command
+64:14:Name -> Inst:homeassistant.components.infrared.entity.InfraredEmitterEntity
+64:38:Name -> U
+65:8:Name -> Inst:homeassistant.components.infrared.entity.InfraredEmitterEntity
+65:35:Call -> U
+65:35:Attribute -> U
+65:35:Call -> U
+65:35:Attribute -> U
+65:35:Name -> U
+66:8:Call -> Const:NoneType:None
+66:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+66:8:Name -> Inst:homeassistant.components.infrared.entity.InfraredEmitterEntity
+68:5:Name -> Func:typing.final
+71:14:Call -> Const:NoneType:None | Const:NoneType:None
+71:14:Attribute -> BM:homeassistant.helpers.restore_state.RestoreEntity.async_internal_added_to_hass | BM:homeassistant.helpers.entity.Entity.async_internal_added_to_hass
+71:14:Call -> Super
+71:14:Name -> Class:builtins.super
+72:22:Call -> Const:NoneType:None | U
+72:22:Attribute -> BM:homeassistant.helpers.restore_state.RestoreEntity.async_get_last_state
+72:22:Name -> Inst:homeassistant.components.infrared.entity.InfraredEmitterEntity
+73:11:Name -> U
+73:33:Attribute -> U
+73:33:Name -> U
+73:53:Name -> Const:str:'unavailable'
+74:12:Name -> Inst:homeassistant.components.infrared.entity.InfraredEmitterEntity
+74:39:Attribute -> U
+74:39:Name -> U
+76:5:Name -> Func:abc.abstractmethod
+77:48:Name -> U
+88:40:Name -> Class:homeassistant.helpers.entity.EntityDescription
+92:29:Name -> Class:homeassistant.helpers.restore_state.RestoreEntity
+95:24:Name -> Class:homeassistant.components.infrared.entity.InfraredReceiverEntityDescription
+96:24:Name -> Class:homeassistant.components.infrared.entity.InfraredDeviceClass
+96:46:Attribute -> Inst:homeassistant.components.infrared.entity.InfraredDeviceClass.RECEIVER
+96:46:Name -> Class:homeassistant.components.infrared.entity.InfraredDeviceClass
+100:28:Name -> Class:builtins.str
+102:5:Name -> U
+103:36:Name -> Class:builtins.set
+103:40:Name -> Class:_collections_abc.Callable
+103:50:Name -> Class:homeassistant.components.infrared.entity.InfraredReceivedSignal
+105:15:Call -> Set:0
+105:15:Name -> Class:builtins.set
+107:5:Name -> Class:builtins.property
+108:5:Name -> Func:typing.final
+109:23:Name -> Class:builtins.str
+111:15:Attribute -> U
+111:15:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+113:5:Name -> Func:typing.final
+116:14:Call -> Const:NoneType:None | Const:NoneType:None
+116:14:Attribute -> BM:homeassistant.helpers.restore_state.RestoreEntity.async_internal_added_to_hass | BM:homeassistant.helpers.entity.Entity.async_internal_added_to_hass
+116:14:Call -> Super
+116:14:Name -> Class:builtins.super
+117:22:Call -> Const:NoneType:None | U
+117:22:Attribute -> BM:homeassistant.helpers.restore_state.RestoreEntity.async_get_last_state
+117:22:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+118:11:Name -> U
+118:33:Attribute -> U
+118:33:Name -> U
+119:12:Name -> Const:str:'unavailable'
+120:12:Name -> Const:str:'unknown'
+123:12:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+123:42:Attribute -> U
+123:42:Name -> U
+125:5:Name -> Func:typing.final
+126:46:Name -> Class:homeassistant.components.infrared.entity.InfraredReceivedSignal
+132:8:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+132:38:Call -> U
+132:38:Attribute -> U
+132:38:Call -> U
+132:38:Attribute -> U
+132:38:Name -> U
+135:8:Call -> Const:NoneType:None
+135:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+135:8:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+136:31:Call -> Inst:builtins.tuple
+136:31:Name -> Class:builtins.tuple
+136:37:Attribute -> BM:homeassistant.components.infrared.entity.InfraredReceiverEntity.__signal_callbacks
+136:37:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+138:16:Call -> U
+138:16:Name -> U
+138:32:Name -> U
+139:19:Name -> Class:builtins.Exception
+140:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+140:16:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+140:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+140:69:Attribute -> Const:str:'input_boolean.b1' | Const:str:'input_boolean.b1' | Const:str:'input_boolean.b1' | Const:str:'input_boolean.b1' | Const:str:'input_boolean.b1' | Const:str:'input_boolean.b1' | Const:str:'input_boolean.b1' | Const:str:'input_boolean.b0' | Const:str:'test.invalid__entity_id' | Const:str:'input_boolean.good' | U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world'
+140:69:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+142:5:Name -> U
+145:25:Name -> Class:_collections_abc.Callable
+145:35:Name -> Class:homeassistant.components.infrared.entity.InfraredReceivedSignal
+146:9:Name -> U
+151:20:Attribute -> BM:homeassistant.components.infrared.entity.InfraredReceiverEntity.__signal_callbacks
+151:20:Name -> Inst:homeassistant.components.infrared.entity.InfraredReceiverEntity
+152:8:Call -> ERR
+152:8:Attribute -> ERR
+152:8:Name -> BM:homeassistant.components.infrared.entity.InfraredReceiverEntity.__signal_callbacks
+152:22:Name -> U
+154:9:Name -> U
+156:12:Call -> ERR
+156:12:Attribute -> ERR
+156:12:Name -> BM:homeassistant.components.infrared.entity.InfraredReceiverEntity.__signal_callbacks
+156:30:Name -> U
+158:15:Name -> Func:homeassistant.components.infrared.entity.InfraredReceiverEntity.async_subscribe_received_signal.remove_callback
+161:1:Call -> Func:homeassistant.helpers.deprecation.deprecated_class.deprecated_decorator
+161:1:Name -> Func:homeassistant.helpers.deprecation.deprecated_class
+165:32:Name -> Class:homeassistant.components.infrared.entity.InfraredEmitterEntityDescription
+169:1:Call -> Func:homeassistant.helpers.deprecation.deprecated_class.deprecated_decorator
+169:1:Name -> Func:homeassistant.helpers.deprecation.deprecated_class
+173:21:Name -> Class:homeassistant.components.infrared.entity.InfraredEmitterEntity

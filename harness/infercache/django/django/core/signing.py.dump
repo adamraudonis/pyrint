@@ -1,0 +1,328 @@
+51:14:Call -> Inst:django.utils.functional.SimpleLazyObject
+51:14:Name -> Func:django.utils.regex_helper._lazy_re_compile
+55:19:Name -> Class:builtins.Exception
+61:23:Name -> Class:django.core.signing.BadSignature
+68:7:Name -> U
+70:18:Name -> U
+71:8:Call -> ERR
+71:8:Name -> Func:builtins.abs
+71:12:Name -> U
+73:10:Name -> U
+74:23:Call -> ERR
+74:23:Name -> Func:builtins.divmod
+74:30:Name -> U
+75:18:Name -> Const:str:'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabc
+75:34:Name -> U
+75:47:Name -> Const:str:''
+76:11:Name -> Const:str:'-' | Const:str:''
+76:18:Name -> Const:str:'' | U
+80:7:Name -> U
+83:7:Name -> U
+84:12:Name -> U
+87:17:Name -> U
+88:18:Name -> Const:int:0
+88:33:Call -> Const:int:0
+88:33:Attribute -> BM:builtins.str.index
+88:33:Name -> Const:str:'0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabc
+88:55:Name -> U
+89:11:Name -> Const:int:1 | Const:int:-1
+89:18:Name -> Const:int:0 | Const:int:0
+93:11:Call -> U
+93:11:Attribute -> U
+93:11:Call -> U
+93:11:Attribute -> Func:base64.urlsafe_b64encode
+93:11:Name -> Module:base64
+93:36:Name -> U
+97:19:Call -> ERR
+97:19:Name -> Func:builtins.len
+97:23:Name -> U
+98:11:Call -> U
+98:11:Attribute -> Func:base64.urlsafe_b64decode
+98:11:Name -> Module:base64
+98:36:Name -> U
+98:40:Name -> U
+103:7:Name -> Const:NoneType:None | U
+104:8:Call -> Const:NoneType:None
+104:8:Attribute -> Func:warnings.warn | Func:_warnings.warn
+104:8:Name -> Module:warnings
+108:21:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+109:31:Call -> Tuple:0 | Tuple:1
+109:31:Name -> Func:django.utils.deprecation.django_file_prefixes
+112:11:Call -> U
+112:11:Attribute -> U
+112:11:Call -> U
+112:11:Name -> Func:django.core.signing.b64_encode
+113:8:Call -> U
+113:8:Attribute -> BM:hmac.HMAC.digest
+113:8:Call -> Inst:hmac.HMAC
+113:8:Name -> Func:django.utils.crypto.salted_hmac
+113:20:Name -> U
+113:26:Name -> U
+113:33:Name -> U
+113:48:Name -> Const:NoneType:None | U | Const:str:'sha1'
+119:36:Call -> U | Inst:builtins.bytes | Const:bytes:b''
+119:36:Name -> Func:django.utils.encoding.force_bytes
+119:48:Name -> U
+124:37:Call -> ERR
+124:37:Name -> Func:builtins.len
+124:41:Name -> Const:str:'' | U
+124:49:Name -> Const:str:'' | U
+124:55:Name -> U
+129:11:Name -> U
+129:25:Name -> Const:str:'' | U
+136:15:Call -> U
+136:15:Attribute -> U
+136:15:Call -> U
+136:15:Name -> Func:django.core.signing.get_cookie_signer
+136:38:Call -> U | Const:str:'django.http.cookies.v2:{Uninferable}:Un
+136:38:Name -> Func:django.core.signing._cookie_signer_salt
+136:58:Name -> U
+136:71:Name -> Const:str:'' | U
+137:12:Name -> U
+137:34:Name -> Const:NoneType:None | U
+139:11:Name -> Class:django.core.signing.BadSignature
+140:11:Attribute -> Const:bool:True
+140:11:Name -> Inst:django.conf.LazySettings
+140:63:Call -> Const:bool:False
+140:63:Name -> Func:builtins.isinstance
+141:12:Name -> ExcInst:django.core.signing.BadSignature
+141:17:Name -> Class:django.core.signing.SignatureExpired
+143:19:Call -> U
+143:19:Attribute -> U
+143:19:Call -> U
+143:19:Name -> Func:django.core.signing.get_cookie_signer
+144:21:Call -> U
+144:21:Name -> Func:django.core.signing._cookie_signer_legacy_salt
+144:48:Name -> U
+144:61:Name -> Const:str:'' | U
+145:21:Name -> U
+145:43:Name -> Const:NoneType:None | U
+150:13:Call -> U
+150:13:Name -> Func:django.utils.module_loading.import_string
+150:27:Attribute -> U
+150:27:Name -> Inst:django.conf.LazySettings
+151:11:Call -> U
+151:11:Name -> U
+152:12:Call -> U
+152:12:Name -> Func:django.core.signing._cookie_signer_key
+152:31:Attribute -> U
+152:31:Name -> Inst:django.conf.LazySettings
+153:22:Call -> Inst:builtins.map
+153:22:Name -> Class:builtins.map
+153:26:Name -> Func:django.core.signing._cookie_signer_key
+153:46:Attribute -> U
+153:46:Name -> Inst:django.conf.LazySettings
+154:13:Name -> Const:str:'django.core.signing.get_cookie_signer' | U
+165:15:Call -> U
+165:15:Attribute -> U
+165:15:Call -> U
+165:15:Attribute -> Func:json.dumps
+165:15:Name -> Module:json
+165:26:Name -> U
+168:15:Call -> U
+168:15:Attribute -> Func:json.loads
+168:15:Name -> Module:json
+168:26:Call -> U
+168:26:Attribute -> U
+168:26:Name -> U
+172:58:Name -> Class:django.core.signing.JSONSerializer
+190:11:Call -> U
+190:11:Attribute -> BM:django.core.signing.Signer.sign_object
+190:11:Call -> Inst:django.core.signing.TimestampSigner
+190:11:Name -> Class:django.core.signing.TimestampSigner
+190:31:Name -> Const:NoneType:None | U
+190:41:Name -> Const:str:'django.core.signing' | U
+191:8:Name -> U
+191:24:Name -> Class:django.core.signing.JSONSerializer | U
+191:45:Name -> Const:bool:False | U
+199:15:Name -> Class:django.core.signing.JSONSerializer
+208:11:Call -> U
+208:11:Attribute -> BM:django.core.signing.Signer.unsign_object
+208:11:Call -> Inst:django.core.signing.TimestampSigner
+208:11:Name -> Class:django.core.signing.TimestampSigner
+209:12:Name -> Const:NoneType:None | U
+209:22:Name -> Const:str:'django.core.signing' | U
+209:42:Name -> Const:NoneType:None | U
+211:8:Name -> U
+212:19:Name -> Class:django.core.signing.JSONSerializer | U
+213:16:Name -> Const:NoneType:None | U
+221:8:Name -> Inst:django.core.signing.Signer
+221:19:Name -> Const:NoneType:None | U
+221:26:Attribute -> U
+221:26:Name -> Inst:django.conf.LazySettings
+222:8:Name -> Inst:django.core.signing.Signer
+224:15:Name -> Const:NoneType:None | U
+223:12:Name -> U
+225:17:Attribute -> U
+225:17:Name -> Inst:django.conf.LazySettings
+227:8:Name -> Inst:django.core.signing.Signer
+227:19:Name -> Const:str:':' | U
+228:8:Name -> Inst:django.core.signing.Signer
+228:20:Name -> Const:NoneType:None | U
+229:12:Attribute -> Const:str:'django.core.signing'
+229:12:Attribute -> Class:django.core.signing.Signer
+229:12:Name -> Inst:django.core.signing.Signer
+230:12:Attribute -> Const:str:'Signer'
+230:12:Attribute -> Class:django.core.signing.Signer
+230:12:Name -> Inst:django.core.signing.Signer
+232:8:Name -> Inst:django.core.signing.Signer
+232:25:Name -> Const:NoneType:None | U
+233:11:Call -> U
+233:11:Attribute -> U
+233:11:Name -> Inst:django.utils.functional.SimpleLazyObject
+233:29:Attribute -> Const:str:':' | U
+233:29:Name -> Inst:django.core.signing.Signer
+234:18:Call -> ExcInst:builtins.ValueError
+234:18:Name -> Class:builtins.ValueError
+236:36:Name -> Const:str:':' | U
+240:14:Name -> Const:NoneType:None | U
+240:21:Attribute -> U
+240:21:Name -> Inst:django.core.signing.Signer
+241:15:Call -> U
+241:15:Name -> Func:django.core.signing.base64_hmac
+241:27:Attribute -> Const:str:'builtins.str' | U
+241:27:Name -> Inst:django.core.signing.Signer
+241:49:Name -> U
+241:56:Name -> U
+241:71:Attribute -> Const:str:'sha256' | U
+241:71:Name -> Inst:django.core.signing.Signer
+244:27:Name -> U
+244:34:Attribute -> Const:str:':' | U
+244:34:Name -> Inst:django.core.signing.Signer
+244:44:Call -> U
+244:44:Attribute -> BM:django.core.signing.Signer.signature
+244:44:Name -> Inst:django.core.signing.Signer
+244:59:Name -> U
+247:11:Attribute -> Const:str:':' | U
+247:11:Name -> Inst:django.core.signing.Signer
+247:27:Name -> U
+248:18:Call -> ExcInst:django.core.signing.BadSignature
+248:18:Name -> Class:django.core.signing.BadSignature
+248:58:Attribute -> Const:str:':' | U
+248:58:Name -> Inst:django.core.signing.Signer
+249:21:Call -> U
+249:21:Attribute -> U
+249:21:Name -> U
+249:41:Attribute -> Const:str:':' | U
+249:41:Name -> Inst:django.core.signing.Signer
+250:20:Attribute -> U
+250:20:Name -> Inst:django.core.signing.Signer
+250:31:Attribute -> U
+250:31:Name -> Inst:django.core.signing.Signer
+251:15:Call -> U
+251:15:Name -> Func:django.utils.crypto.constant_time_compare
+251:37:Name -> U
+251:42:Call -> U
+251:42:Attribute -> BM:django.core.signing.Signer.signature
+251:42:Name -> Inst:django.core.signing.Signer
+251:57:Name -> U
+251:64:Name -> U
+252:23:Name -> U
+253:14:Call -> ExcInst:django.core.signing.BadSignature
+253:14:Name -> Class:django.core.signing.BadSignature
+253:61:Name -> U
+255:42:Name -> Class:django.core.signing.JSONSerializer
+265:15:Call -> U
+265:15:Attribute -> BM:django.core.signing.JSONSerializer.dumps | U
+265:15:Call -> Inst:django.core.signing.JSONSerializer | U
+265:15:Name -> Class:django.core.signing.JSONSerializer | U
+265:34:Name -> U
+269:11:Name -> Const:bool:False | U
+271:25:Call -> ERR
+271:25:Attribute -> Func:zlib.compress
+271:25:Name -> Module:zlib
+271:39:Name -> U
+272:15:Call -> ERR
+272:15:Name -> Func:builtins.len
+272:19:Name -> U
+272:34:Call -> ERR
+272:34:Name -> Func:builtins.len
+272:38:Name -> U
+273:23:Name -> U
+275:18:Call -> U
+275:18:Attribute -> U
+275:18:Call -> U
+275:18:Name -> Func:django.core.signing.b64_encode
+275:29:Name -> U
+276:11:Name -> Const:bool:False | Const:bool:True
+277:28:Name -> U
+278:15:Call -> U
+278:15:Attribute -> BM:django.core.signing.Signer.sign
+278:15:Name -> Inst:django.core.signing.Signer
+278:25:Name -> U
+280:51:Name -> Class:django.core.signing.JSONSerializer
+283:18:Call -> U
+283:18:Attribute -> U
+283:18:Call -> U
+283:18:Attribute -> BM:django.core.signing.Signer.unsign
+283:18:Name -> Inst:django.core.signing.Signer
+283:30:Name -> U
+283:44:Name -> Dict:0
+284:21:Name -> U
+285:11:Name -> U
+287:22:Name -> U
+288:15:Call -> U
+288:15:Name -> Func:django.core.signing.b64_decode
+288:26:Name -> U
+289:11:Name -> U
+290:19:Call -> ERR
+290:19:Attribute -> Func:zlib.decompress
+290:19:Name -> Module:zlib
+290:35:Name -> U
+291:15:Call -> U
+291:15:Attribute -> BM:django.core.signing.JSONSerializer.loads | U
+291:15:Call -> Inst:django.core.signing.JSONSerializer | U
+291:15:Name -> Class:django.core.signing.JSONSerializer | U
+291:34:Name -> U
+294:22:Name -> Class:django.core.signing.Signer
+296:15:Call -> Const:str:'0' | Const:str:'-' | U
+296:15:Name -> Func:django.core.signing.b62_encode
+296:26:Call -> Inst:builtins.int
+296:26:Name -> Class:builtins.int
+296:30:Call -> U
+296:30:Attribute -> Func:time.time | Lambda:django.test.utils:869 | U
+296:30:Name -> Module:time
+299:28:Name -> U
+299:35:Attribute -> Const:str:':' | U
+299:35:Name -> Inst:django.core.signing.TimestampSigner
+299:45:Call -> Const:str:'0' | Const:str:'-' | U
+299:45:Attribute -> BM:django.core.signing.TimestampSigner.timestamp
+299:45:Name -> Inst:django.core.signing.TimestampSigner
+300:15:Call -> U
+300:15:Attribute -> BM:django.core.signing.Signer.sign
+300:15:Call -> Super
+300:15:Name -> Class:builtins.super
+300:28:Name -> U
+307:17:Call -> U
+307:17:Attribute -> BM:django.core.signing.Signer.unsign
+307:17:Call -> Super
+307:17:Name -> Class:builtins.super
+307:32:Name -> U
+308:27:Call -> U
+308:27:Attribute -> U
+308:27:Name -> U
+308:41:Attribute -> Const:str:':' | U
+308:41:Name -> Inst:django.core.signing.TimestampSigner
+309:20:Call -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0
+309:20:Name -> Func:django.core.signing.b62_decode
+309:31:Name -> U
+310:11:Name -> Const:NoneType:None | U
+311:15:Call -> ERR
+311:15:Name -> Func:builtins.isinstance
+311:26:Name -> U
+311:35:Attribute -> Class:_pydatetime.timedelta
+311:35:Name -> Module:datetime
+312:26:Call -> U
+312:26:Attribute -> U
+312:26:Name -> U
+314:18:Call -> U
+314:18:Attribute -> Func:time.time | Lambda:django.test.utils:869 | U
+314:18:Name -> Module:time
+314:32:Name -> Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0 | Const:int:0
+315:15:Name -> U
+315:21:Name -> U
+316:22:Call -> ExcInst:django.core.signing.SignatureExpired
+316:22:Name -> Class:django.core.signing.SignatureExpired
+316:74:Name -> U
+316:79:Name -> U
+317:15:Name -> U

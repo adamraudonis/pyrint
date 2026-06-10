@@ -1,0 +1,232 @@
+27:38:Name -> U
+33:9:Call -> U
+33:9:Attribute -> U
+33:9:Name -> U
+33:23:Name -> Class:homeassistant.exceptions.HomeAssistantError
+34:8:Call -> Inst:homeassistant.components.stream.Stream
+34:8:Name -> Func:homeassistant.components.stream.create_stream
+34:22:Name -> U
+34:49:Call -> Inst:homeassistant.components.camera.prefs.DynamicStreamSettings
+34:49:Name -> Func:tests.components.stream.common.dynamic_stream_settings
+36:9:Call -> U
+36:9:Attribute -> U
+36:9:Name -> U
+36:23:Name -> Class:homeassistant.exceptions.HomeAssistantError
+37:14:Call -> Const:NoneType:None
+37:14:Name -> Func:homeassistant.components.stream.async_check_stream_client_error
+37:46:Name -> U
+41:10:Name -> U
+41:33:Attribute -> U
+41:33:Name -> U
+45:10:Call -> Const:bool:True | U
+45:10:Name -> Func:homeassistant.setup.async_setup_component
+45:32:Name -> U
+45:38:Name -> Const:str:'stream'
+60:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+60:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+60:4:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+60:4:Attribute -> Func:logging.getLogger
+60:4:Name -> Module:logging
+60:22:Name -> Const:str:'homeassistant.components.stream' | Const:str:'__main__'
+60:44:Attribute -> Const:int:20
+60:44:Name -> Module:logging
+61:4:Call -> U
+61:4:Attribute -> U
+61:4:Attribute -> U
+61:4:Name -> U
+61:24:Name -> Const:str:'logging_changed'
+62:10:Call -> U
+62:10:Attribute -> U
+62:10:Name -> U
+65:21:Name -> Tuple:8
+66:8:Call -> U
+66:8:Attribute -> U
+66:8:Attribute -> U
+66:8:Name -> U
+66:23:Attribute -> U
+66:23:Attribute -> U
+66:23:Name -> U
+66:41:Name -> Const:str:'mp4' | Const:str:'h264' | Const:str:'hevc' | Const:str:'rtsp' | Const:str:'tcp' | Const:str:'tls' | Const:str:'mpegts' | Const:str:'NULL'
+68:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+68:4:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+68:4:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+68:4:Attribute -> Func:logging.getLogger
+68:4:Name -> Module:logging
+68:22:Name -> Const:str:'homeassistant.components.stream' | Const:str:'__main__'
+68:44:Attribute -> Const:int:10
+68:44:Name -> Module:logging
+69:4:Call -> U
+69:4:Attribute -> U
+69:4:Attribute -> U
+69:4:Name -> U
+69:24:Name -> Const:str:'logging_changed'
+70:10:Call -> U
+70:10:Attribute -> U
+70:10:Name -> U
+73:21:Name -> Tuple:8
+74:8:Call -> U
+74:8:Attribute -> U
+74:8:Attribute -> U
+74:8:Name -> U
+74:23:Attribute -> U
+74:23:Attribute -> U
+74:23:Name -> U
+74:41:Name -> Const:str:'mp4' | Const:str:'h264' | Const:str:'hevc' | Const:str:'rtsp' | Const:str:'tcp' | Const:str:'tls' | Const:str:'mpegts' | Const:str:'NULL'
+77:4:Call -> U
+77:4:Attribute -> U
+77:4:Attribute -> U
+77:4:Name -> U
+77:19:Attribute -> U
+77:19:Attribute -> U
+77:19:Name -> U
+78:4:Call -> U
+78:4:Attribute -> U
+78:4:Attribute -> U
+78:4:Name -> U
+78:19:Attribute -> U
+78:19:Attribute -> U
+78:19:Name -> U
+80:28:Attribute -> U
+80:28:Name -> U
+81:36:Attribute -> U
+81:36:Name -> U
+84:46:Name -> U
+86:10:Call -> Const:bool:True | U
+86:10:Name -> Func:homeassistant.setup.async_setup_component
+86:32:Name -> U
+86:38:Name -> Const:str:'stream'
+88:21:Call -> Inst:unittest.mock.MagicMock
+88:21:Name -> Class:unittest.mock.MagicMock
+91:9:Call -> Inst:unittest.mock._patch
+91:9:Name -> Func:unittest.mock.patch
+91:39:Name -> Inst:unittest.mock.MagicMock
+92:14:Call -> Const:NoneType:None
+92:14:Name -> Func:homeassistant.components.stream.async_check_stream_client_error
+92:46:Name -> U
+92:52:Name -> Const:str:'rtsp://foobar'
+95:22:Name -> Const:str:'prefer_tcp'
+98:4:Call -> U
+98:4:Attribute -> U | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with
+98:4:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+98:38:Name -> Const:str:'rtsp://foobar'
+98:54:Name -> Dict:2
+98:71:Name -> Const:int:30
+99:4:Call -> Const:NoneType:None | U
+99:4:Attribute -> BM:unittest.mock.NonCallableMock.assert_called_once | U
+99:4:Attribute -> Inst:unittest.mock.AsyncMock | U
+99:4:Name -> Inst:unittest.mock.MagicMock
+101:4:Call -> Const:NoneType:None
+101:4:Attribute -> BM:unittest.mock.MagicMock.reset_mock
+101:4:Name -> Inst:unittest.mock.MagicMock
+103:8:Call -> Inst:unittest.mock._patch
+103:8:Name -> Func:unittest.mock.patch
+103:38:Name -> Inst:unittest.mock.MagicMock
+104:8:Call -> U
+104:8:Attribute -> U
+104:8:Name -> U
+104:22:Name -> Class:homeassistant.exceptions.HomeAssistantError
+106:14:Call -> Const:NoneType:None
+106:14:Name -> Func:homeassistant.components.stream.async_check_stream_client_error
+106:46:Name -> U
+106:52:Name -> Const:str:'rtsp://foobar'
+109:1:Call -> U
+109:1:Attribute -> U
+109:1:Attribute -> U
+109:1:Name -> U
+112:8:Call -> U
+112:8:Attribute -> U
+112:8:Name -> U
+113:12:Call -> U
+113:12:Attribute -> U
+113:12:Name -> U
+114:12:Attribute -> Inst:homeassistant.components.stream.const.StreamClientError.BadRequest
+114:12:Name -> Class:homeassistant.components.stream.const.StreamClientError
+117:8:Call -> U
+117:8:Attribute -> U
+117:8:Name -> U
+118:12:Call -> U
+118:12:Attribute -> U
+118:12:Name -> U
+119:12:Attribute -> Inst:homeassistant.components.stream.const.StreamClientError.Unauthorized
+119:12:Name -> Class:homeassistant.components.stream.const.StreamClientError
+122:8:Call -> U
+122:8:Attribute -> U
+122:8:Name -> U
+123:12:Call -> U
+123:12:Attribute -> U
+123:12:Name -> U
+123:44:Attribute -> Inst:homeassistant.components.stream.const.StreamClientError.Forbidden
+123:44:Name -> Class:homeassistant.components.stream.const.StreamClientError
+125:8:Call -> U
+125:8:Attribute -> U
+125:8:Name -> U
+126:12:Call -> U
+126:12:Attribute -> U
+126:12:Name -> U
+126:43:Attribute -> Inst:homeassistant.components.stream.const.StreamClientError.NotFound
+126:43:Name -> Class:homeassistant.components.stream.const.StreamClientError
+128:8:Call -> U
+128:8:Attribute -> U
+128:8:Name -> U
+129:12:Call -> U
+129:12:Attribute -> U
+129:12:Name -> U
+129:46:Attribute -> Inst:homeassistant.components.stream.const.StreamClientError.Other
+129:46:Name -> Class:homeassistant.components.stream.const.StreamClientError
+134:10:Name -> U
+134:32:Attribute -> U
+134:32:Name -> U
+134:65:Name -> Class:homeassistant.components.stream.const.StreamClientError
+137:10:Call -> Const:bool:True | U
+137:10:Name -> Func:homeassistant.setup.async_setup_component
+137:32:Name -> U
+137:38:Name -> Const:str:'stream'
+140:8:Call -> Inst:unittest.mock._patch
+140:8:Name -> Func:unittest.mock.patch
+140:37:Name -> U
+141:8:Call -> U
+141:8:Attribute -> U
+141:8:Name -> U
+141:22:Name -> Class:homeassistant.components.stream.exceptions.StreamOpenClientError
+143:14:Call -> Const:NoneType:None
+143:14:Name -> Func:homeassistant.components.stream.async_check_stream_client_error
+143:46:Name -> U
+144:11:Attribute -> U
+144:11:Attribute -> U
+144:11:Name -> U
+144:34:Name -> U
+147:1:Call -> U
+147:1:Attribute -> U
+147:1:Attribute -> U
+147:1:Name -> U
+173:10:Name -> U
+174:13:Name -> Class:builtins.dict
+174:18:Name -> Class:builtins.str
+174:23:Name -> Class:typing.Any
+175:27:Name -> Class:builtins.dict
+175:32:Name -> Class:builtins.str
+175:37:Name -> Class:typing.Any
+178:10:Call -> Const:bool:True | U
+178:10:Name -> Func:homeassistant.setup.async_setup_component
+178:32:Name -> U
+178:38:Name -> Const:str:'stream'
+180:21:Call -> Inst:unittest.mock.MagicMock
+180:21:Name -> Class:unittest.mock.MagicMock
+183:9:Call -> Inst:unittest.mock._patch
+183:9:Name -> Func:unittest.mock.patch
+183:39:Name -> Inst:unittest.mock.MagicMock
+184:14:Call -> Const:NoneType:None
+184:14:Name -> Func:homeassistant.components.stream.async_check_stream_client_error
+184:46:Name -> U
+184:52:Name -> Const:str:'rtsp://foobar'
+184:60:Name -> U
+186:4:Call -> U
+186:4:Attribute -> U | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with | BM:unittest.mock.NonCallableMock.assert_called_once_with
+186:4:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+187:8:Name -> Const:str:'rtsp://foobar'
+187:24:Name -> U
+187:55:Name -> Const:int:30
+189:4:Call -> Const:NoneType:None | U
+189:4:Attribute -> BM:unittest.mock.NonCallableMock.assert_called_once | U
+189:4:Attribute -> Inst:unittest.mock.AsyncMock | U
+189:4:Name -> Inst:unittest.mock.MagicMock

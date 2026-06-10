@@ -1,0 +1,75 @@
+11:10:Name -> Class:enum.StrEnum
+56:16:Name -> Class:django.utils.functional.SimpleLazyObject
+78:8:Call -> Const:NoneType:None | Const:NoneType:None
+78:8:Attribute -> BM:django.utils.functional.SimpleLazyObject.__init__ | BM:django.utils.functional.LazyObject.__init__ | BM:builtins.object.__init__
+78:8:Call -> Super
+78:8:Name -> Class:builtins.super
+78:25:Name -> Func:django.utils.csp.generate_nonce
+81:15:Attribute -> U | Inst:builtins.object
+81:15:Name -> Inst:django.utils.csp.LazyNonce
+81:36:Name -> Inst:builtins.object
+85:12:Call -> U
+85:12:Attribute -> U
+85:12:Name -> U
+85:24:Name -> Const:str:'csp_nonce'
+86:7:Name -> Const:NoneType:None | U
+87:15:Call -> U
+87:15:Attribute -> U
+87:15:Name -> U
+87:54:Name -> U
+87:44:Name -> U
+88:7:Name -> U
+90:11:Call -> U | Func:django.utils.safestring._safety_decorator.wrapper | Inst:django.utils.safestring.SafeString
+90:11:Name -> Func:django.utils.html.format_html
+90:37:Name -> U
+94:11:Call -> U
+94:11:Attribute -> Func:secrets.token_urlsafe
+94:11:Name -> Module:secrets
+100:29:Call -> U
+100:29:Attribute -> U
+100:29:Name -> U
+101:11:Name -> U
+104:11:Name -> U
+107:15:Call -> ERR
+107:15:Name -> Func:builtins.isinstance
+107:26:Name -> U
+107:34:Name -> Class:builtins.set
+110:25:Call -> ERR
+110:25:Name -> Func:builtins.sorted
+110:32:Name -> U
+111:21:Call -> ERR
+111:21:Name -> Func:builtins.isinstance
+111:32:Name -> U
+111:40:Name -> Class:builtins.list
+111:47:Name -> Class:builtins.tuple
+112:26:Name -> U
+116:32:Attribute -> Inst:django.utils.csp.CSP.NONCE
+116:32:Name -> Class:django.utils.csp.CSP
+116:45:Name -> U | List:1
+116:57:Name -> Const:NoneType:None | U
+117:48:Name -> U
+117:53:Attribute -> Inst:django.utils.csp.CSP.NONCE
+117:53:Name -> Class:django.utils.csp.CSP
+117:36:Name -> Const:NoneType:None | U
+117:68:Name -> U
+117:79:Name -> U | List:1
+118:17:Name -> U
+119:26:Name -> U
+119:37:Name -> U | List:1
+119:47:Name -> U
+119:52:Attribute -> Inst:django.utils.csp.CSP.NONCE
+119:52:Name -> Class:django.utils.csp.CSP
+121:19:Name -> U | List:1
+124:29:Call -> Const:str:''
+124:29:Attribute -> BM:builtins.str.join
+124:38:Name -> U | List:1
+126:8:Call -> ERR
+126:8:Attribute -> BM:builtins.list.append
+126:8:Name -> List:0
+126:22:Call -> Const:str:''
+126:22:Attribute -> BM:builtins.str.rstrip | BM:builtins.str.rstrip
+126:25:Name -> U
+126:37:Name -> Const:str:'' | Const:str:''
+128:11:Call -> Const:str:''
+128:11:Attribute -> BM:builtins.str.join
+128:21:Name -> List:0

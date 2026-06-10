@@ -1,0 +1,268 @@
+27:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:6:Attribute -> Func:logging.getLogger
+27:6:Name -> Module:logging
+27:24:Name -> Const:str:'salt.output' | Const:str:'__main__'
+35:11:Call -> Const:str:'**********' | U
+35:11:Attribute -> Func:salt.utils.secret.mask_output
+35:11:Attribute -> Module:salt.utils.secret
+35:11:Attribute -> Module:salt.utils
+35:11:Name -> Module:salt
+35:41:Name -> U
+37:19:Call -> U
+37:19:Call -> U
+37:19:Name -> Func:salt.output.get_printout
+37:32:Name -> U
+37:37:Name -> U
+37:43:Name -> Const:str:'**********' | U
+37:51:Name -> Dict:0
+38:11:Name -> U
+39:19:Call -> U
+39:19:Attribute -> U
+39:19:Name -> U
+40:12:Name -> Class:builtins.KeyError
+40:22:Name -> Class:builtins.AttributeError
+40:38:Name -> Class:builtins.TypeError
+41:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+41:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+41:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+41:18:Call -> Const:str:''
+41:18:Attribute -> Func:traceback.format_exc
+41:18:Name -> Module:traceback
+43:23:Call -> U
+43:23:Call -> U
+43:23:Name -> Func:salt.output.get_printout
+43:46:Name -> U
+43:52:Name -> Const:str:'**********' | U
+43:60:Name -> Dict:0
+44:15:Name -> U
+45:23:Call -> U
+45:23:Attribute -> U
+45:23:Name -> U
+46:16:Name -> Class:builtins.KeyError
+46:26:Name -> Class:builtins.AttributeError
+46:42:Name -> Class:builtins.TypeError
+47:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+47:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+47:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+48:23:Call -> U
+48:23:Call -> U
+48:23:Name -> Func:salt.output.get_printout
+48:43:Name -> U
+48:49:Name -> Const:str:'**********' | U
+48:57:Name -> Dict:0
+49:15:Name -> U
+50:23:Call -> U
+50:23:Attribute -> U
+50:23:Name -> U
+57:11:Call -> ERR
+57:11:Call -> Dict:0 | Inst:builtins.dict
+57:11:Attribute -> Func:salt.loader.raw_mod
+57:11:Attribute -> Module:salt.loader
+57:11:Name -> Module:salt
+57:31:Name -> U
+57:37:Name -> U
+58:11:Name -> U
+59:6:Name -> U
+68:29:Call -> Inst:salt.loader.lazy.FilterDictWrapper
+68:29:Attribute -> Func:salt.loader.outputters
+68:29:Attribute -> Module:salt.loader
+68:29:Name -> Module:salt
+68:52:Name -> U
+68:58:Name -> U
+69:11:Name -> Class:builtins.KeyError
+70:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+70:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+70:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+72:4:Call -> U
+72:4:Name -> U
+72:23:Name -> U
+72:33:Name -> U
+77:8:Call -> U
+77:8:Attribute -> U
+77:8:Name -> U
+78:11:Name -> Class:builtins.Exception
+87:7:Name -> Const:NoneType:None | U
+89:19:Call -> U
+89:19:Name -> Func:salt.output.try_printout
+89:32:Name -> U
+89:38:Name -> Const:NoneType:None | U
+89:43:Name -> Const:NoneType:None | U | Dict:0
+89:51:Name -> Dict:0
+91:22:Call -> U
+91:22:Attribute -> U | BM:builtins.dict.get
+91:22:Name -> Const:NoneType:None | U | Dict:0
+92:4:Call -> U
+92:4:Attribute -> U
+92:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+92:27:Name -> U
+95:11:Name -> U
+96:19:Call -> U
+96:19:Name -> Func:builtins.hasattr
+96:27:Name -> U
+98:22:Call -> U
+98:22:Attribute -> Func:salt.utils.files.fopen
+98:22:Attribute -> Module:salt.utils.files
+98:22:Attribute -> Module:salt.utils
+98:22:Name -> Module:salt
+98:45:Name -> U
+103:22:Name -> U
+107:24:Name -> U
+108:19:Call -> ERR
+108:19:Name -> Func:builtins.isinstance
+108:30:Name -> U
+108:37:Name -> Class:builtins.str
+110:32:Call -> U
+110:32:Attribute -> U
+110:32:Name -> U
+111:28:Name -> Class:builtins.UnicodeDecodeError
+111:48:Name -> Class:builtins.UnicodeEncodeError
+115:19:Name -> U
+116:20:Call -> U
+116:20:Attribute -> U
+116:20:Name -> U
+116:30:Call -> U
+116:30:Attribute -> Func:salt.utils.stringutils.to_str
+116:30:Attribute -> Module:salt.utils.stringutils
+116:30:Attribute -> Module:salt.utils
+116:30:Name -> Module:salt
+116:60:Name -> U
+117:20:Call -> U
+117:20:Attribute -> U
+117:20:Name -> U
+119:19:Name -> Const:bool:True | Const:bool:False
+120:20:Call -> U
+120:20:Attribute -> U
+120:20:Name -> U
+122:11:Name -> U
+123:12:Call -> Const:NoneType:None
+123:12:Attribute -> Func:salt.utils.stringutils.print_cli
+123:12:Attribute -> Module:salt.utils.stringutils
+123:12:Attribute -> Module:salt.utils
+123:12:Name -> Module:salt
+123:45:Name -> U
+124:11:Name -> Class:builtins.OSError
+126:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+126:11:Name -> ExcInst:builtins.OSError
+126:24:Attribute -> Const:int:32
+126:24:Name -> Module:errno
+134:7:Name -> Const:NoneType:None | U
+137:19:Name -> Const:NoneType:None | U | Dict:0
+137:28:Name -> Const:NoneType:None | U | Dict:0
+140:14:Name -> Const:NoneType:None | U | Dict:0
+143:11:Name -> U
+143:19:Call -> U
+143:19:Attribute -> U | BM:builtins.dict.get
+143:19:Name -> Const:NoneType:None | U | Dict:0
+144:11:Call -> U
+144:11:Attribute -> U | BM:builtins.dict.get
+144:11:Name -> Const:NoneType:None | U | Dict:0
+145:18:Name -> Const:NoneType:None | U | Dict:0
+146:13:Call -> U
+146:13:Attribute -> U
+146:13:Call -> U
+146:13:Attribute -> U | BM:builtins.dict.get
+146:13:Name -> Const:NoneType:None | U | Dict:0
+153:7:Name -> U | Const:str:'highstate'
+155:9:Name -> U | Const:str:'highstate'
+155:24:Name -> U | Const:str:'highstate'
+157:7:Call -> U
+157:7:Attribute -> U | BM:builtins.dict.get
+157:7:Name -> Const:NoneType:None | U | Dict:0
+160:4:Call -> U
+160:4:Attribute -> U | BM:builtins.dict.update
+160:4:Name -> Const:NoneType:None | U | Dict:0
+160:16:Name -> Dict:0
+161:22:Name -> Const:NoneType:None | U | Dict:0
+168:25:Call -> U
+168:25:Attribute -> BM:_io.TextIOWrapper.fileno | BM:_io.StringIO.fileno | U
+168:25:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+168:25:Name -> Module:sys
+169:20:Name -> Class:builtins.AttributeError
+169:36:Attribute -> U
+169:36:Name -> Module:io
+171:23:Call -> ERR
+171:23:Attribute -> Func:posix.isatty
+171:23:Name -> Module:os
+171:33:Name -> U | Const:int:-1
+173:11:Call -> U
+173:11:Attribute -> U | BM:builtins.dict.get
+173:11:Name -> Const:NoneType:None | U | Dict:0
+174:12:Name -> Const:NoneType:None | U | Dict:0
+176:12:Call -> U
+176:12:Attribute -> U | BM:builtins.dict.get
+176:12:Name -> Const:NoneType:None | U | Dict:0
+176:43:Call -> U
+176:43:Name -> Func:salt.output.get_printout.is_pipe
+176:56:Call -> U
+176:56:Attribute -> Func:salt.utils.platform.is_windows
+176:56:Attribute -> Module:salt.utils.platform
+176:56:Attribute -> Module:salt.utils
+176:56:Name -> Module:salt
+178:12:Name -> Const:NoneType:None | U | Dict:0
+180:12:Name -> Const:NoneType:None | U | Dict:0
+182:11:Call -> U
+182:11:Attribute -> U | BM:builtins.dict.get
+182:11:Name -> Const:NoneType:None | U | Dict:0
+183:12:Name -> Const:NoneType:None | U | Dict:0
+184:13:Call -> U
+184:13:Attribute -> U | BM:builtins.dict.get
+184:13:Name -> Const:NoneType:None | U | Dict:0
+184:44:Call -> U
+184:44:Attribute -> Func:salt.utils.platform.is_windows
+184:44:Attribute -> Module:salt.utils.platform
+184:44:Attribute -> Module:salt.utils
+184:44:Name -> Module:salt
+185:12:Name -> Const:NoneType:None | U | Dict:0
+189:17:Call -> Inst:salt.loader.lazy.FilterDictWrapper
+189:17:Attribute -> Func:salt.loader.outputters
+189:17:Attribute -> Module:salt.loader
+189:17:Name -> Module:salt
+189:40:Name -> Const:NoneType:None | U | Dict:0
+190:7:Name -> U | Const:str:'highstate' | Const:str:'txt' | Const:str:'nested' | Const:str:'progress'
+190:18:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+193:11:Name -> U | Const:str:'highstate' | Const:str:'txt' | Const:str:'nested' | Const:str:'progress'
+194:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+194:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+194:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+196:16:Name -> U | Const:str:'highstate' | Const:str:'txt' | Const:str:'nested' | Const:str:'progress'
+198:15:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+199:11:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+199:22:Name -> U | Const:str:'highstate' | Const:str:'txt' | Const:str:'nested' | Const:str:'progress'
+206:11:Call -> U
+206:11:Name -> Func:salt.output.try_printout
+206:24:Name -> U
+206:30:Name -> U
+206:35:Name -> Const:NoneType:None | U
+206:43:Name -> Dict:0
+213:17:Call -> U
+213:17:Name -> Func:salt.output.try_printout
+213:30:Name -> U
+213:36:Name -> U
+213:41:Name -> Const:NoneType:None | U
+213:49:Name -> Dict:0
+214:18:Call -> U
+214:18:Attribute -> Func:re.compile
+214:18:Name -> Module:re
+215:11:Call -> U
+215:11:Attribute -> U
+215:11:Name -> U
+215:31:Name -> U
+222:26:Call -> U
+222:26:Name -> Func:salt.output.string_format
+222:40:Name -> U
+222:46:Name -> U
+222:51:Name -> Const:NoneType:None | U
+222:59:Name -> Dict:0
+223:11:Call -> U
+223:11:Attribute -> U
+223:11:Call -> U
+223:11:Attribute -> U
+223:11:Name -> U
+231:7:Call -> ERR
+231:7:Name -> Func:builtins.isinstance
+231:18:Name -> U
+231:23:Name -> Class:builtins.str
+232:15:Call -> U
+232:15:Attribute -> U
+232:15:Name -> U
+234:15:Name -> U

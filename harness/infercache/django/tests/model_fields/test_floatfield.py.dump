@@ -1,0 +1,84 @@
+7:21:Name -> Class:django.test.testcases.TestCase
+9:19:Call -> Inst:tests.model_fields.models.FloatModel
+9:19:Name -> Class:tests.model_fields.models.FloatModel
+11:8:Name -> Inst:tests.model_fields.models.FloatModel
+11:24:Name -> Inst:tests.model_fields.models.FloatModel
+12:13:Call -> Func:contextlib.ContextDecorator.__call__.inner | Inst:django.db.transaction.Atomic
+12:13:Attribute -> Func:django.db.transaction.atomic
+12:13:Name -> Module:django.db.transaction
+13:17:Call -> Inst:unittest.case._AssertRaisesContext
+13:17:Attribute -> BM:unittest.case.TestCase.assertRaises
+13:17:Name -> Inst:tests.model_fields.test_floatfield.TestFloatField
+13:35:Name -> Class:builtins.TypeError
+14:16:Call -> Const:NoneType:None
+14:16:Attribute -> BM:django.db.models.base.Model.save
+14:16:Name -> Inst:tests.model_fields.models.FloatModel
+16:8:Name -> Inst:tests.model_fields.models.FloatModel
+17:8:Call -> Const:NoneType:None
+17:8:Attribute -> BM:django.db.models.base.Model.save
+17:8:Name -> Inst:tests.model_fields.models.FloatModel
+18:8:Call -> Const:NoneType:None
+18:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+18:8:Name -> Inst:tests.model_fields.test_floatfield.TestFloatField
+18:24:Attribute -> ERR
+18:24:Name -> Inst:tests.model_fields.models.FloatModel
+20:8:Name -> Inst:tests.model_fields.models.FloatModel
+20:24:Name -> Inst:tests.model_fields.models.FloatModel
+24:12:Name -> Inst:tests.model_fields.models.FloatModel
+25:13:Call -> Func:contextlib.ContextDecorator.__call__.inner | Inst:django.db.transaction.Atomic
+25:13:Attribute -> Func:django.db.transaction.atomic
+25:13:Name -> Module:django.db.transaction
+26:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+26:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+26:17:Name -> Inst:tests.model_fields.test_floatfield.TestFloatField
+26:42:Name -> Class:builtins.TypeError
+26:53:Name -> U
+27:16:Call -> Const:NoneType:None
+27:16:Attribute -> BM:django.db.models.base.Model.save
+27:16:Name -> Inst:tests.model_fields.models.FloatModel
+29:14:Call -> ERR
+29:14:Attribute -> ERR
+29:14:Attribute -> ERR
+29:14:Name -> Class:tests.model_fields.models.FloatModel
+29:40:Attribute -> ERR
+29:40:Name -> Inst:tests.model_fields.models.FloatModel
+30:8:Name -> U
+30:19:Name -> U
+31:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+31:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+31:13:Name -> Inst:tests.model_fields.test_floatfield.TestFloatField
+31:38:Name -> Class:builtins.TypeError
+31:49:Name -> U
+32:12:Call -> U
+32:12:Attribute -> U
+32:12:Name -> U
+36:13:Name -> Class:builtins.TypeError
+37:13:Name -> Class:builtins.TypeError
+38:13:Name -> Class:builtins.TypeError
+39:13:Name -> Class:builtins.TypeError
+39:24:Call -> Set:0
+39:24:Name -> Class:builtins.set
+40:13:Name -> Class:builtins.TypeError
+40:24:Call -> Inst:builtins.object
+40:24:Name -> Class:builtins.object
+41:13:Name -> Class:builtins.TypeError
+41:24:Call -> Inst:builtins.complex
+41:24:Name -> Class:builtins.complex
+42:13:Name -> Class:builtins.ValueError
+43:13:Name -> Class:builtins.ValueError
+45:32:Name -> List:8
+46:17:Call -> Gen:unittest.case.TestCase.subTest
+46:17:Attribute -> BM:unittest.case.TestCase.subTest
+46:17:Name -> Inst:tests.model_fields.test_floatfield.TestFloatField
+46:30:Name -> Tuple:0 | List:0 | Dict:0 | Set:0 | Inst:builtins.object | Inst:builtins.complex | Const:str:'non-numeric string' | Const:bytes:b'non-numeric byte-string'
+47:70:Name -> Tuple:0 | List:0 | Dict:0 | Set:0 | Inst:builtins.object | Inst:builtins.complex | Const:str:'non-numeric string' | Const:bytes:b'non-numeric byte-string'
+48:21:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+48:21:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+48:21:Name -> Inst:tests.model_fields.test_floatfield.TestFloatField
+48:46:Name -> Class:builtins.TypeError | Class:builtins.ValueError
+48:57:Name -> Const:str:"Field 'size' expected a number but got 
+49:20:Call -> ERR
+49:20:Attribute -> ERR
+49:20:Attribute -> ERR
+49:20:Name -> Class:tests.model_fields.models.FloatModel
+49:51:Name -> Tuple:0 | List:0 | Dict:0 | Set:0 | Inst:builtins.object | Inst:builtins.complex | Const:str:'non-numeric string' | Const:bytes:b'non-numeric byte-string'

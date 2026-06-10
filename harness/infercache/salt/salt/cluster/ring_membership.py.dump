@@ -1,0 +1,174 @@
+53:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:6:Attribute -> Func:logging.getLogger
+53:6:Name -> Module:logging
+53:24:Name -> Const:str:'salt.cluster.ring_membership' | Const:str:'__main__'
+66:8:Call -> Inst:threading._RLock | Inst:_thread.RLock
+66:8:Attribute -> Func:threading.RLock
+66:8:Name -> Module:threading
+74:18:Name -> Const:str:'cluster'
+84:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+85:15:Call -> ERR
+85:15:Attribute -> BM:builtins.dict.get
+85:15:Name -> Dict:0
+85:26:Name -> Const:str:'cluster' | U
+86:11:Name -> U
+87:19:Call -> Inst:salt.cluster.ring.HashRing
+87:19:Name -> Class:salt.cluster.ring.HashRing
+88:12:Name -> Dict:0
+88:19:Name -> Const:str:'cluster' | U
+88:27:Name -> Inst:salt.cluster.ring.HashRing
+89:15:Name -> U | Inst:salt.cluster.ring.HashRing
+92:25:Name -> Const:str:'cluster'
+105:14:Call -> U
+105:14:Attribute -> U
+105:14:Name -> U
+106:7:Name -> U
+110:11:Call -> U | Const:bool:True
+110:11:Attribute -> U | BM:salt.cluster.ring.HashRing.owns
+110:11:Call -> U | Inst:salt.cluster.ring.HashRing
+110:11:Name -> Func:salt.cluster.ring_membership.get_ring
+110:20:Name -> Const:str:'cluster' | U
+110:31:Name -> U
+110:36:Name -> U
+136:14:Call -> ERR
+136:14:Attribute -> BM:builtins.dict.get
+136:14:Name -> Dict:0
+136:27:Name -> U
+137:7:Name -> U
+139:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+140:15:Call -> ERR
+140:15:Attribute -> BM:builtins.dict.get
+140:15:Name -> Dict:0
+140:26:Name -> U
+141:7:Name -> U
+141:27:Call -> U
+141:27:Attribute -> U
+141:27:Name -> U
+146:8:Call -> Const:NoneType:None
+146:8:Name -> Func:salt.cluster.ring_membership._record_drop
+146:21:Name -> U
+146:32:Name -> U
+148:14:Call -> U
+148:14:Attribute -> U
+148:14:Name -> U
+149:7:Name -> U
+151:7:Call -> U
+151:7:Attribute -> U
+151:7:Name -> U
+151:17:Name -> U
+151:22:Name -> U
+156:4:Call -> Const:NoneType:None
+156:4:Name -> Func:salt.cluster.ring_membership._record_drop
+156:17:Name -> U
+156:28:Name -> U
+189:11:Name -> U
+189:22:Name -> U
+189:31:Name -> U
+190:10:Call -> ERR
+190:10:Attribute -> Func:time.monotonic
+190:10:Name -> Module:time
+193:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+194:8:Name -> Dict:0
+194:20:Name -> Tuple:3
+194:27:Call -> ERR
+194:27:Attribute -> BM:builtins.dict.get
+194:27:Name -> Dict:0
+194:43:Name -> Tuple:3
+195:16:Name -> Dict:0
+195:28:Name -> Tuple:3
+196:11:Name -> U
+197:19:Call -> ERR
+197:19:Attribute -> BM:builtins.dict.get
+197:19:Name -> Dict:0
+197:38:Name -> Tuple:3
+198:15:Name -> U
+198:21:Name -> U
+198:29:Name -> Const:float:60.0
+199:16:Name -> Dict:0
+199:31:Name -> Tuple:3
+199:38:Name -> U
+201:7:Name -> Const:bool:False | Const:bool:True
+202:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+202:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+202:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+206:12:Name -> U
+207:12:Name -> U
+208:12:Name -> Const:int:0 | U
+209:12:Name -> U
+244:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+245:19:Call -> Dict:0
+245:19:Name -> Class:builtins.dict
+245:24:Name -> Dict:0
+247:47:Call -> DictItems
+247:47:Attribute -> BM:builtins.dict.items
+247:47:Name -> Dict:0
+248:17:Call -> ERR
+248:17:Attribute -> BM:builtins.dict.setdefault
+248:17:Name -> Dict:0
+249:12:Name -> U
+250:24:Name -> U
+252:8:Name -> U
+252:15:Name -> U
+252:25:Name -> U
+253:11:Name -> Dict:0
+274:7:Name -> Const:NoneType:None | U
+276:15:Name -> Const:str:'cluster'
+277:22:Name -> U
+279:15:Name -> U
+280:22:Name -> U
+281:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+282:15:Call -> ERR
+282:15:Attribute -> BM:builtins.dict.get
+282:15:Name -> Dict:0
+282:26:Name -> Const:str:'cluster' | U
+283:11:Name -> U
+284:19:Call -> Inst:salt.cluster.ring.HashRing
+284:19:Name -> Class:salt.cluster.ring.HashRing
+284:37:Name -> Const:int:1 | U
+285:12:Name -> Dict:0
+285:19:Name -> Const:str:'cluster' | U
+285:27:Name -> Inst:salt.cluster.ring.HashRing
+286:13:Name -> Const:int:1 | U
+286:25:Attribute -> U
+286:25:Name -> U
+289:19:Call -> Inst:salt.cluster.ring.HashRing
+289:19:Name -> Class:salt.cluster.ring.HashRing
+289:37:Name -> Const:int:1 | U
+290:12:Name -> Dict:0
+290:19:Name -> Const:str:'cluster' | U
+290:27:Name -> Inst:salt.cluster.ring.HashRing
+291:8:Call -> U | Const:NoneType:None
+291:8:Attribute -> U | BM:salt.cluster.ring.HashRing.rebuild
+291:8:Name -> U | Inst:salt.cluster.ring.HashRing
+291:21:Name -> U
+302:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+303:11:Name -> U
+304:12:Call -> ERR
+304:12:Attribute -> BM:builtins.dict.pop
+304:12:Name -> Dict:0
+304:25:Name -> U
+306:12:Name -> Dict:0
+306:21:Name -> U
+306:34:Name -> U
+314:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+315:15:Call -> Dict:0
+315:15:Name -> Class:builtins.dict
+315:20:Name -> Dict:0
+324:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+325:8:Call -> ERR
+325:8:Attribute -> BM:builtins.dict.pop
+325:8:Name -> Dict:0
+325:19:Name -> U
+337:9:Name -> Inst:threading._RLock | Inst:_thread.RLock
+338:8:Call -> ERR
+338:8:Attribute -> BM:builtins.dict.clear
+338:8:Name -> Dict:0
+339:8:Call -> ERR
+339:8:Attribute -> BM:builtins.dict.clear
+339:8:Name -> Dict:0
+340:8:Call -> ERR
+340:8:Attribute -> BM:builtins.dict.clear
+340:8:Name -> Dict:0
+341:8:Call -> ERR
+341:8:Attribute -> BM:builtins.dict.clear
+341:8:Name -> Dict:0

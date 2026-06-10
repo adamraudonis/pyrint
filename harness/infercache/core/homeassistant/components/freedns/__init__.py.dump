@@ -1,0 +1,122 @@
+17:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:10:Attribute -> Func:logging.getLogger
+17:10:Name -> Module:logging
+17:28:Name -> Const:str:'homeassistant.components.freedns' | Const:str:'__main__'
+21:19:Call -> Inst:_pydatetime.timedelta
+21:19:Name -> Class:_pydatetime.timedelta
+26:16:Call -> U
+26:16:Attribute -> U
+26:16:Name -> U
+28:8:Name -> Const:str:'freedns'
+28:16:Call -> U
+28:16:Attribute -> U
+28:16:Name -> U
+30:16:Call -> U
+30:16:Attribute -> U
+30:16:Name -> U
+30:30:Name -> Const:str:'url'
+30:40:Name -> Const:str:'freedns'
+30:49:Attribute -> Func:homeassistant.helpers.config_validation.string
+30:49:Name -> Module:homeassistant.helpers.config_validation
+31:16:Call -> U
+31:16:Attribute -> U
+31:16:Name -> U
+31:30:Name -> Const:str:'access_token'
+31:49:Name -> Const:str:'freedns'
+31:58:Attribute -> Func:homeassistant.helpers.config_validation.string
+31:58:Name -> Module:homeassistant.helpers.config_validation
+32:16:Call -> U
+32:16:Attribute -> U
+32:16:Name -> U
+32:29:Name -> Const:str:'scan_interval'
+32:57:Name -> Inst:_pydatetime.timedelta
+32:76:Call -> U
+32:76:Attribute -> U
+32:76:Name -> U
+33:20:Attribute -> U
+33:20:Name -> Module:homeassistant.helpers.config_validation
+33:36:Attribute -> Func:homeassistant.helpers.config_validation.positive_timedelta
+33:36:Name -> Module:homeassistant.helpers.config_validation
+38:10:Attribute -> U
+38:10:Name -> U
+42:28:Name -> U
+42:51:Name -> Class:builtins.dict
+42:66:Name -> Class:builtins.bool
+44:11:Name -> U
+44:18:Name -> Const:str:'freedns'
+45:10:Call -> U
+45:10:Attribute -> U
+45:10:Name -> U
+45:19:Name -> Const:str:'url'
+46:17:Call -> U
+46:17:Attribute -> U
+46:17:Name -> U
+46:26:Name -> Const:str:'access_token'
+47:22:Name -> U
+47:27:Name -> Const:str:'scan_interval'
+49:14:Call -> U
+49:14:Name -> Func:homeassistant.helpers.aiohttp_client.async_get_clientsession
+49:38:Name -> U
+51:19:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+51:19:Name -> Func:homeassistant.components.freedns._update_freedns
+51:35:Name -> U
+51:41:Name -> U
+51:50:Name -> U
+51:55:Name -> U
+53:7:Name -> U
+56:42:Name -> Class:_pydatetime.datetime
+58:14:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+58:14:Name -> Func:homeassistant.components.freedns._update_freedns
+58:30:Name -> U
+58:36:Name -> U
+58:45:Name -> U
+58:50:Name -> U
+60:4:Call -> BM:homeassistant.helpers.event._TrackTimeInterval.async_cancel
+60:4:Name -> Func:homeassistant.helpers.event.async_track_time_interval
+61:8:Name -> U
+61:14:Name -> Func:homeassistant.components.freedns.async_setup.update_domain_callback
+61:38:Name -> U
+71:7:Name -> U
+72:14:Name -> Const:str:'https://freedns.afraid.org/dynamic/upda
+74:7:Name -> U
+76:8:Name -> Dict:0
+76:15:Name -> U
+79:19:Call -> Inst:asyncio.timeouts.Timeout
+79:19:Attribute -> Func:asyncio.timeouts.timeout
+79:19:Name -> Module:asyncio
+79:35:Name -> Const:int:10
+80:25:Call -> U
+80:25:Attribute -> U
+80:25:Name -> U
+80:37:Name -> U | Const:str:'https://freedns.afraid.org/dynamic/upda
+80:49:Name -> Const:NoneType:None | Dict:0
+81:25:Call -> U
+81:25:Attribute -> U
+81:25:Name -> U
+83:36:Name -> U
+85:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+85:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+85:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+88:30:Name -> U
+89:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+89:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+89:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+89:69:Name -> U
+92:39:Name -> U
+93:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+93:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+93:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+95:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+95:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+95:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+95:63:Name -> U
+97:11:Attribute -> U
+97:11:Name -> U
+98:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+98:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+98:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+100:11:Name -> Class:builtins.TimeoutError
+101:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+101:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+101:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+101:58:Name -> U | Const:str:'https://freedns.afraid.org/dynamic/upda

@@ -1,0 +1,140 @@
+31:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+31:9:Attribute -> Func:logging.getLogger
+31:9:Name -> Module:logging
+31:27:Name -> Const:str:'src.sentry.snuba.utils' | Const:str:'__main__'
+36:16:Name -> U
+37:14:Name -> U
+38:23:Name -> U
+39:15:Name -> U
+40:4:Attribute -> U
+40:4:Attribute -> U
+40:4:Name -> U
+40:46:Name -> U
+42:15:Name -> U
+43:4:Attribute -> U
+43:4:Attribute -> U
+43:4:Name -> U
+43:39:Name -> U
+44:4:Attribute -> U
+44:4:Attribute -> U
+44:4:Name -> U
+44:49:Name -> U
+45:19:Name -> U
+46:16:Name -> U
+47:21:Name -> U
+48:24:Name -> U
+49:4:Attribute -> U
+49:4:Attribute -> U
+49:4:Name -> U
+49:52:Name -> U
+50:4:Attribute -> U
+50:4:Attribute -> U
+50:4:Name -> U
+50:42:Name -> U
+51:4:Attribute -> U
+51:4:Attribute -> U
+51:4:Name -> U
+51:40:Name -> U
+52:20:Name -> U
+53:20:Name -> U
+54:4:Attribute -> U
+54:4:Attribute -> U
+54:4:Name -> U
+54:47:Name -> U
+55:4:Attribute -> U
+55:4:Attribute -> U
+55:4:Name -> U
+55:52:Name -> U
+56:20:Name -> U
+60:4:Attribute -> U
+60:4:Attribute -> U
+60:4:Name -> U
+61:4:Attribute -> U
+61:4:Attribute -> U
+61:4:Name -> U
+64:24:Call -> ERR
+64:24:Name -> Func:builtins.sorted
+65:4:Name -> U
+66:15:Call -> DictKeys
+66:15:Attribute -> BM:builtins.dict.keys
+66:15:Name -> Dict:20
+67:7:Name -> U
+67:18:Name -> Set:1
+67:40:Name -> U
+67:51:Name -> Set:2
+70:4:Name -> U
+71:4:Name -> U
+72:4:Name -> U
+73:4:Name -> U
+74:4:Name -> U
+75:4:Name -> U
+76:4:Name -> U
+77:4:Name -> U
+78:4:Name -> U
+81:4:Name -> U
+81:11:Name -> Const:str:'discover' | Const:str:'errors' | Const:str:'metricsEnhanced' | Const:str:'metrics' | U | Const:str:'ourlogs' | Const:str:'preprodSize' | Const:str:'profiles' | Const:str:'issuePlatform' | Const:str:'profileFunctions' | Const:str:'spansIndexed' | Const:str:'spansMetrics' | Const:str:'transactions'
+81:33:Call -> DictItems
+81:33:Attribute -> BM:builtins.dict.items
+81:33:Name -> Dict:20
+81:60:Name -> Const:str:'discover' | Const:str:'errors' | Const:str:'metricsEnhanced' | Const:str:'metrics' | U | Const:str:'ourlogs' | Const:str:'preprodSize' | Const:str:'profiles' | Const:str:'issuePlatform' | Const:str:'profileFunctions' | Const:str:'spansIndexed' | Const:str:'spansMetrics' | Const:str:'transactions'
+81:71:Name -> Set:1
+139:31:Name -> Class:builtins.str
+139:46:Name -> Class:typing.Any
+140:7:Name -> U
+140:24:Name -> Set:1
+141:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+141:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+141:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+141:54:Name -> U
+142:7:Name -> U
+144:11:Call -> ERR
+144:11:Attribute -> BM:builtins.dict.get
+144:11:Name -> Dict:20
+144:31:Name -> U
+147:1:Name -> Func:dataclasses.dataclass
+149:18:Name -> Class:builtins.str
+150:17:Name -> Class:builtins.str
+151:11:Name -> Class:builtins.str
+155:18:Name -> U
+155:57:Name -> U
+156:5:Name -> Class:src.sentry.snuba.utils.QueryStrings
+164:7:Name -> U
+164:24:Attribute -> U
+164:24:Name -> U
+165:11:Attribute -> U
+165:11:Name -> U
+167:23:Attribute -> U
+167:23:Name -> U
+169:11:Call -> Inst:src.sentry.snuba.utils.QueryStrings
+169:11:Name -> Class:src.sentry.snuba.utils.QueryStrings
+170:14:Attribute -> U
+170:14:Name -> U
+171:20:Name -> Const:str:'' | Const:str:' and ' | U
+172:24:Attribute -> U
+172:24:Name -> U
+172:43:Name -> Const:str:'' | Const:str:' and ' | U
+176:56:Name -> Class:_collections_abc.Sequence
+176:65:Name -> Class:builtins.str
+176:78:Name -> Class:builtins.str
+176:86:Name -> Class:builtins.int
+181:17:Name -> List:20
+182:11:Name -> Const:str:'location' | Const:str:'error.type' | Const:str:'error.value' | Const:str:'error.mechanism' | Const:str:'error.handled' | Const:str:'error.unhandled' | Const:str:'error.received' | Const:str:'error.main_thread' | Const:str:'level' | Const:str:'stack.abs_path' | Const:str:'stack.colno' | Const:str:'stack.filename' | Const:str:'stack.function' | Const:str:'stack.in_app' | Const:str:'stack.lineno' | Const:str:'stack.module' | Const:str:'stack.package' | Const:str:'stack.resource' | Const:str:'stack.stack_level' | Const:str:'symbolicated_in_app'
+182:20:Name -> U
+183:19:Attribute -> U
+183:19:Name -> U
+185:17:Name -> List:27
+186:11:Name -> Const:str:'transaction.duration' | Const:str:'transaction.op' | Const:str:'transaction.status' | Const:str:'measurements.lcp' | Const:str:'measurements.cls' | Const:str:'measurements.fcp' | Const:str:'measurements.fid' | Const:str:'measurements.inp' | Const:str:'measurements.ttfb.requesttime' | Const:str:'measurements.app_start_cold' | Const:str:'measurements.app_start_warm' | Const:str:'measurements.frames_total' | Const:str:'measurements.frames_slow' | Const:str:'measurements.frames_frozen' | Const:str:'measurements.frames_slow_rate' | Const:str:'measurements.frames_frozen_rate' | Const:str:'measurements.stall_count' | Const:str:'measurements.stall_total_time' | Const:str:'measurements.stall_longest_time' | Const:str:'measurements.stall_percentage' | Const:str:'measurements.time_to_full_display' | Const:str:'measurements.time_to_initial_display' | Const:str:'spans.browser' | Const:str:'spans.http' | Const:str:'spans.db' | Const:str:'spans.resource' | Const:str:'spans.ui'
+186:20:Name -> U
+187:19:Attribute -> U
+187:19:Name -> U
+189:18:Name -> U
+190:21:Name -> List:20
+191:15:Name -> Const:str:'location' | Const:str:'error.type' | Const:str:'error.value' | Const:str:'error.mechanism' | Const:str:'error.handled' | Const:str:'error.unhandled' | Const:str:'error.received' | Const:str:'error.main_thread' | Const:str:'level' | Const:str:'stack.abs_path' | Const:str:'stack.colno' | Const:str:'stack.filename' | Const:str:'stack.function' | Const:str:'stack.in_app' | Const:str:'stack.lineno' | Const:str:'stack.module' | Const:str:'stack.package' | Const:str:'stack.resource' | Const:str:'stack.stack_level' | Const:str:'symbolicated_in_app'
+191:24:Name -> U
+192:23:Attribute -> U
+192:23:Name -> U
+194:21:Name -> List:27
+195:15:Name -> Const:str:'transaction.duration' | Const:str:'transaction.op' | Const:str:'transaction.status' | Const:str:'measurements.lcp' | Const:str:'measurements.cls' | Const:str:'measurements.fcp' | Const:str:'measurements.fid' | Const:str:'measurements.inp' | Const:str:'measurements.ttfb.requesttime' | Const:str:'measurements.app_start_cold' | Const:str:'measurements.app_start_warm' | Const:str:'measurements.frames_total' | Const:str:'measurements.frames_slow' | Const:str:'measurements.frames_frozen' | Const:str:'measurements.frames_slow_rate' | Const:str:'measurements.frames_frozen_rate' | Const:str:'measurements.stall_count' | Const:str:'measurements.stall_total_time' | Const:str:'measurements.stall_longest_time' | Const:str:'measurements.stall_percentage' | Const:str:'measurements.time_to_full_display' | Const:str:'measurements.time_to_initial_display' | Const:str:'spans.browser' | Const:str:'spans.http' | Const:str:'spans.db' | Const:str:'spans.resource' | Const:str:'spans.ui'
+195:24:Name -> U
+196:23:Attribute -> U
+196:23:Name -> U

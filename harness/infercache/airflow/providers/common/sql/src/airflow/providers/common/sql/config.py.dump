@@ -1,0 +1,90 @@
+24:1:Call -> Func:dataclasses.dataclass.wrap | U
+24:1:Name -> Func:dataclasses.dataclass
+28:13:Name -> Class:builtins.str
+29:17:Name -> Class:builtins.dict
+29:22:Name -> Class:builtins.str
+29:27:Name -> Class:typing.Any
+29:34:Call -> Dict:0
+29:34:Name -> Func:dataclasses.field
+29:56:Name -> Class:builtins.dict
+30:18:Name -> Class:builtins.dict
+30:23:Name -> Class:builtins.str
+30:28:Name -> Class:typing.Any
+30:35:Call -> Dict:0
+30:35:Name -> Func:dataclasses.field
+30:57:Name -> Class:builtins.dict
+33:17:Name -> Class:builtins.str
+33:22:Name -> Const:NoneType:None | Class:enum.Enum
+43:17:Name -> Class:builtins.frozenset
+43:27:Name -> Class:builtins.str
+43:34:Call -> Frozen
+43:34:Name -> Class:builtins.frozenset
+43:45:Attribute -> Const:str:'iceberg'
+43:45:Attribute -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.FormatType.ICEBERG
+43:45:Name -> Class:providers.common.sql.src.airflow.providers.common.sql.config.FormatType
+46:18:Name -> Class:builtins.str
+46:23:Name -> Const:NoneType:None | Class:enum.Enum
+53:1:Name -> Func:dataclasses.dataclass
+77:13:Name -> Class:builtins.str
+78:16:Name -> Class:builtins.str
+79:9:Name -> Class:builtins.str
+80:12:Name -> Class:builtins.str
+81:13:Name -> Class:builtins.str
+82:18:Name -> Class:providers.common.sql.src.airflow.providers.common.sql.config.StorageType
+83:13:Name -> Class:builtins.dict
+83:18:Name -> Class:builtins.str
+83:23:Name -> Class:typing.Any
+83:30:Call -> Dict:0
+83:30:Name -> Func:dataclasses.field
+83:52:Name -> Class:builtins.dict
+85:5:Name -> Class:builtins.property
+86:35:Name -> Class:builtins.bool
+88:15:Call -> U
+88:15:Name -> Class:builtins.bool
+88:20:Attribute -> Const:str:'' | Inst:builtins.str
+88:20:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+88:36:Call -> Const:str:''
+88:36:Attribute -> BM:builtins.str.lower | BM:builtins.str.lower
+88:36:Attribute -> Const:str:'' | Inst:builtins.str
+88:36:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+88:59:Name -> Frozen
+91:11:Attribute -> U
+91:11:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+92:15:Attribute -> Const:NoneType:None | U
+92:15:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+93:22:Call -> ExcInst:builtins.ValueError
+93:22:Name -> Class:builtins.ValueError
+93:87:Name -> Frozen
+96:11:Attribute -> Const:NoneType:None | U
+96:11:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+97:12:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+97:32:Attribute -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.StorageType.S3 | Inst:providers.common.sql.src.airflow.providers.common.sql.config.StorageType.LOCAL
+97:32:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+99:11:Attribute -> Const:NoneType:None | U
+99:11:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+99:50:Attribute -> Inst:builtins.str
+99:50:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+99:73:Call -> Const:str:''
+99:73:Attribute -> BM:builtins.str.strip
+99:73:Attribute -> Inst:builtins.str
+99:73:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+100:18:Call -> ExcInst:builtins.ValueError
+100:18:Name -> Class:builtins.ValueError
+102:5:Name -> Class:builtins.property
+103:39:Name -> Class:providers.common.sql.src.airflow.providers.common.sql.config.StorageType
+105:11:Call -> ERR
+105:11:Attribute -> BM:builtins.str.startswith | BM:builtins.str.startswith
+105:11:Attribute -> Const:str:'' | Inst:builtins.str
+105:11:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+106:19:Attribute -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.StorageType.S3
+106:19:Name -> Class:providers.common.sql.src.airflow.providers.common.sql.config.StorageType
+107:11:Call -> ERR
+107:11:Attribute -> BM:builtins.str.startswith | BM:builtins.str.startswith
+107:11:Attribute -> Const:str:'' | Inst:builtins.str
+107:11:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig
+108:19:Attribute -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.StorageType.LOCAL
+108:19:Name -> Class:providers.common.sql.src.airflow.providers.common.sql.config.StorageType
+109:14:Call -> ExcInst:builtins.ValueError
+109:14:Name -> Class:builtins.ValueError
+109:62:Attribute -> Const:str:'' | Inst:builtins.str
+109:62:Name -> Inst:providers.common.sql.src.airflow.providers.common.sql.config.DataSourceConfig

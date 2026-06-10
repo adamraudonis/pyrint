@@ -1,0 +1,559 @@
+50:23:Call -> U
+50:23:Attribute -> Func:re.compile
+50:23:Name -> Module:re
+51:27:Call -> Frozen
+51:27:Name -> Class:builtins.frozenset
+54:38:Name -> Class:builtins.str
+54:55:Name -> Class:builtins.str
+54:70:Name -> Class:builtins.dict
+54:88:Name -> Class:builtins.bool
+54:97:Name -> Class:builtins.str
+56:16:Call -> Inst:builtins.dict
+56:16:Attribute -> BM:builtins.dict.copy | BM:os._Environ.copy
+56:16:Attribute -> Dict:43 | Inst:os._Environ
+56:16:Name -> Module:os
+57:4:Call -> ERR
+57:4:Attribute -> BM:builtins.dict.update
+57:4:Name -> Inst:builtins.dict
+57:21:Name -> U
+59:39:Name -> U
+59:49:Name -> U
+60:11:Name -> U
+61:32:Name -> U
+61:51:Name -> Const:str:'airflowctl dagrun get Uninferable "Unin
+63:11:Call -> Inst:subprocess.Popen
+63:11:Name -> Class:subprocess.Popen
+63:17:Call -> Const:bytes:b''
+63:17:Attribute -> BM:builtins.str.encode | BM:builtins.str.encode
+63:17:Name -> Const:str:'airflowctl dagrun get Uninferable "Unin | Const:str:'airflowctl Uninferable && airflowctl da
+63:42:Name -> Const:int:-1
+63:55:Name -> Const:int:-2
+63:79:Name -> Inst:builtins.dict
+65:17:Call -> Tuple:2
+65:17:Attribute -> BM:subprocess.Popen.communicate
+65:17:Name -> Inst:subprocess.Popen
+66:11:Attribute -> Class:subprocess.TimeoutExpired
+66:11:Name -> Module:subprocess
+67:8:Call -> U
+67:8:Attribute -> BM:subprocess.Popen.kill
+67:8:Name -> Inst:subprocess.Popen
+69:14:Call -> Const:str:''
+69:14:Attribute -> BM:builtins.bytes.decode
+69:14:Name -> Const:bytes:b'string'
+70:7:Name -> U
+70:23:Name -> Const:str:''
+71:18:Call -> ERR
+71:18:Attribute -> ERR
+71:18:Call -> ERR
+71:18:Attribute -> BM:builtins.str.split
+71:18:Name -> Const:str:''
+71:35:Name -> U
+72:17:Call -> Const:int:0 | U
+72:17:Attribute -> BM:builtins.str.find | U
+72:17:Name -> Const:str:'' | U
+72:36:Call -> U
+72:36:Attribute -> BM:builtins.str.rfind | U
+72:36:Name -> Const:str:'' | U
+73:7:Name -> Const:int:0 | U
+73:22:Name -> U
+76:15:Call -> U
+76:15:Attribute -> U
+76:15:Call -> U
+76:15:Attribute -> Func:json.loads
+76:15:Name -> Module:json
+76:26:Name -> Const:str:'' | U
+76:34:Name -> Const:int:0 | U
+76:42:Name -> U
+77:11:Attribute -> Class:json.decoder.JSONDecodeError
+77:11:Name -> Module:json
+82:12:Name -> Class:builtins.str
+83:16:Name -> Class:builtins.str
+84:14:Name -> Class:builtins.dict
+85:16:Name -> Class:builtins.bool
+86:13:Name -> Class:builtins.int
+89:15:Call -> ERR
+89:15:Attribute -> Func:time.monotonic
+89:15:Name -> Module:time
+89:34:Name -> Const:int:60 | U
+90:16:Name -> Class:builtins.str
+91:10:Call -> ERR
+91:10:Attribute -> Func:time.monotonic
+91:10:Name -> Module:time
+91:29:Name -> U
+92:21:Call -> Const:NoneType:None | Const:NoneType:None | U
+92:21:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest._airflowctl_dag_run_state
+92:47:Name -> U
+92:55:Name -> U
+92:67:Name -> U
+92:77:Name -> U
+93:11:Name -> Const:NoneType:None | Const:NoneType:None | U
+93:25:Name -> Frozen
+95:8:Call -> ERR
+95:8:Attribute -> Func:time.sleep
+95:8:Name -> Module:time
+96:10:Call -> ExcInst:builtins.TimeoutError
+96:10:Name -> Class:builtins.TimeoutError
+97:19:Name -> U
+97:28:Name -> U
+97:73:Name -> Const:int:60 | U
+98:29:Name -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+102:1:Call -> U
+102:1:Attribute -> U
+102:1:Name -> U
+107:19:Call -> U
+107:19:Attribute -> U
+107:19:Name -> U
+107:33:Name -> Const:str:'http://localhost:8080/auth/token'
+107:43:Name -> Dict:2
+108:8:Call -> U
+108:8:Attribute -> U
+108:8:Name -> U
+109:16:Call -> U
+109:16:Attribute -> U
+109:16:Call -> U
+109:16:Attribute -> U
+109:16:Name -> U
+110:15:Name -> U
+111:18:Call -> ExcInst:builtins.ValueError
+111:18:Name -> Class:builtins.ValueError
+112:15:Name -> U
+113:11:Attribute -> U
+113:11:Attribute -> U
+113:11:Name -> U
+114:8:Call -> U
+114:8:Attribute -> U
+114:8:Name -> U
+114:47:Name -> U
+117:1:Attribute -> U
+117:1:Name -> U
+121:30:Name -> Class:builtins.str
+121:45:Name -> Class:builtins.dict
+121:63:Name -> Class:builtins.bool
+121:80:Name -> Class:builtins.str
+122:20:Call -> Inst:builtins.dict
+122:20:Attribute -> BM:builtins.dict.copy | BM:os._Environ.copy
+122:20:Attribute -> Dict:43 | Inst:os._Environ
+122:20:Name -> Module:os
+123:8:Call -> ERR
+123:8:Attribute -> BM:builtins.dict.update
+123:8:Name -> Inst:builtins.dict
+123:25:Name -> U
+125:44:Name -> U
+128:15:Name -> Const:bool:False | U
+128:30:Name -> U
+128:41:Name -> U
+129:36:Name -> U
+129:55:Name -> Const:str:'airflowctl Uninferable'
+131:22:Name -> Const:str:'airflowctl Uninferable'
+135:21:Call -> U
+135:21:Attribute -> U
+135:21:Name -> U
+135:48:Name -> U
+136:11:Name -> U
+137:12:Call -> Const:NoneType:None
+137:12:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest._wait_for_dag_run_terminal_state
+137:45:Call -> U
+137:45:Attribute -> U
+137:45:Name -> U
+137:66:Call -> U
+137:66:Attribute -> U
+137:66:Name -> U
+137:87:Name -> U
+137:97:Name -> Const:bool:False | U
+139:8:Call -> U
+139:8:Attribute -> U
+139:8:Name -> U
+139:50:Name -> U
+142:15:Call -> Inst:subprocess.Popen
+142:15:Name -> Class:subprocess.Popen
+142:21:Call -> Const:bytes:b''
+142:21:Attribute -> BM:builtins.str.encode | BM:builtins.str.encode
+142:21:Name -> Const:str:'airflowctl Uninferable && airflowctl Un | Const:str:'airflowctl Uninferable'
+142:46:Name -> Const:int:-1
+142:59:Name -> Const:int:-2
+142:73:Name -> Const:int:-1
+142:95:Name -> Inst:builtins.dict
+143:38:Call -> Tuple:2
+143:38:Attribute -> BM:subprocess.Popen.communicate
+143:38:Name -> Inst:subprocess.Popen
+146:19:Name -> Const:bytes:b'string'
+147:47:Name -> Const:str:'airflowctl Uninferable'
+147:72:Call -> Const:str:''
+147:72:Attribute -> BM:builtins.bytes.decode
+147:72:Name -> Const:bytes:b'string'
+151:24:Call -> Const:str:''
+151:24:Attribute -> BM:builtins.bytes.decode
+151:24:Name -> Const:bytes:b'string'
+154:15:Name -> Const:bool:False | U
+154:30:Name -> U
+154:41:Name -> U
+155:19:Name -> U
+155:35:Name -> Const:str:''
+156:73:Name -> Const:str:'airflowctl Uninferable'
+156:111:Name -> Const:str:''
+158:28:Call -> ERR
+158:28:Attribute -> ERR
+158:28:Call -> ERR
+158:28:Attribute -> BM:builtins.str.split
+158:28:Name -> Const:str:''
+158:51:Name -> U
+160:28:Call -> Const:str:''
+160:28:Attribute -> BM:builtins.str.strip
+160:28:Name -> Const:str:''
+163:15:Attribute -> Const:int:0
+163:15:Name -> Inst:subprocess.Popen
+164:28:Name -> Const:str:'airflowctl Uninferable'
+164:68:Attribute -> Const:int:0
+164:68:Name -> Inst:subprocess.Popen
+164:96:Name -> Const:str:'' | U | Const:str:''
+176:24:Call -> ERR
+176:24:Name -> Func:builtins.next
+176:30:Name -> Const:str:'Server error' | Const:str:'command error' | Const:str:'unrecognized arguments' | Const:str:'invalid choice' | Const:str:'Traceback (most recent call last):'
+176:49:Name -> List:5
+176:67:Name -> Const:str:'Server error' | Const:str:'command error' | Const:str:'unrecognized arguments' | Const:str:'invalid choice' | Const:str:'Traceback (most recent call last):'
+176:76:Name -> Const:str:'' | U | Const:str:''
+177:19:Name -> U
+178:65:Name -> Const:str:'airflowctl Uninferable'
+179:38:Name -> U
+180:24:Name -> Const:str:'' | U | Const:str:''
+183:8:Call -> U
+183:8:Attribute -> U
+183:8:Name -> U
+183:88:Name -> Const:str:'airflowctl Uninferable'
+184:8:Call -> U
+184:8:Attribute -> U
+184:8:Name -> U
+184:40:Name -> Const:str:'' | U | Const:str:''
+185:8:Call -> U
+185:8:Attribute -> BM:subprocess.Popen.kill
+185:8:Name -> Inst:subprocess.Popen
+187:15:Name -> Const:str:'' | U | Const:str:''
+189:11:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest.run_command._run_command
+193:19:Name -> U
+199:26:Call -> U | Const:str:'0.1.0'
+199:26:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+199:26:Attribute -> Dict:43 | Inst:os._Environ
+199:26:Name -> Module:os
+200:4:Call -> U
+200:4:Attribute -> U
+200:4:Name -> U
+200:60:Name -> U | Const:str:'0.1.0'
+202:23:Name -> U
+203:4:Call -> U
+203:4:Attribute -> U
+203:4:Name -> U
+203:44:Name -> U
+206:4:Call -> U
+206:4:Attribute -> U
+206:4:Name -> U
+207:4:Call -> U
+207:4:Attribute -> U
+207:4:Name -> U
+207:43:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+207:43:Name -> Module:sys
+210:39:Call -> Const:str:''
+210:39:Name -> Class:builtins.str
+210:43:Name -> U
+211:8:Call -> U
+211:8:Attribute -> U
+211:8:Name -> U
+211:48:Call -> Const:str:''
+211:48:Attribute -> BM:builtins.str.join
+211:57:Name -> List:4
+212:8:Call -> Const:int:0
+212:8:Attribute -> Func:subprocess.check_call
+212:8:Name -> Module:subprocess
+212:30:Name -> List:4
+213:8:Call -> U
+213:8:Attribute -> U
+213:8:Name -> U
+214:12:Attribute -> Class:subprocess.CalledProcessError
+214:12:Name -> Module:subprocess
+214:43:Name -> Class:builtins.FileNotFoundError
+215:8:Call -> U
+215:8:Attribute -> U
+215:8:Name -> U
+215:57:Name -> ExcInst:subprocess.CalledProcessError | ExcInst:builtins.FileNotFoundError
+218:4:Call -> U
+218:4:Attribute -> U
+218:4:Name -> U
+220:17:Call -> Inst:subprocess.CompletedProcess
+220:17:Attribute -> Func:subprocess.run
+220:17:Name -> Module:subprocess
+222:16:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+222:16:Name -> Module:sys
+230:8:Call -> U
+230:8:Attribute -> U
+230:8:Name -> U
+230:32:Call -> U
+230:32:Attribute -> U
+230:32:Attribute -> Const:NoneType:None | U
+230:32:Name -> Inst:subprocess.CompletedProcess
+231:11:Attribute -> Class:subprocess.CalledProcessError
+231:11:Name -> Module:subprocess
+232:8:Call -> U
+232:8:Attribute -> U
+232:8:Name -> U
+233:8:Call -> U
+233:8:Attribute -> U
+233:8:Name -> U
+233:43:Attribute -> U
+233:43:Name -> ExcInst:subprocess.CalledProcessError
+234:8:Call -> U
+234:8:Attribute -> U
+234:8:Name -> U
+234:38:Attribute -> Const:NoneType:None | U | BM:subprocess.CalledProcessError.stdout
+234:38:Name -> ExcInst:subprocess.CalledProcessError
+235:8:Call -> U
+235:8:Attribute -> U
+235:8:Name -> U
+235:38:Attribute -> Const:NoneType:None | U
+235:38:Name -> ExcInst:subprocess.CalledProcessError
+238:4:Call -> Const:NoneType:None
+238:4:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest.docker_compose_up
+238:22:Attribute -> U
+238:22:Attribute -> U
+238:22:Name -> U
+243:4:Call -> U
+243:4:Attribute -> U
+243:4:Name -> U
+244:4:Call -> U
+244:4:Attribute -> U
+244:4:Name -> U
+244:37:Name -> U
+245:4:Call -> U
+245:4:Attribute -> U
+245:4:Name -> U
+245:45:Name -> U
+246:4:Call -> U
+246:4:Attribute -> U
+246:4:Name -> U
+248:21:Call -> U
+248:21:Attribute -> U
+248:21:Attribute -> U
+248:21:Name -> U
+249:25:Name -> U
+250:12:Call -> U
+250:12:Attribute -> U
+250:12:Name -> U
+250:31:Attribute -> U
+250:31:Name -> U
+250:49:Attribute -> U
+250:49:Name -> U
+251:11:Name -> Class:builtins.Exception
+252:8:Call -> U
+252:8:Attribute -> U
+252:8:Name -> U
+252:59:Name -> ExcInst:builtins.Exception
+254:4:Call -> U
+254:4:Attribute -> U
+254:4:Name -> U
+256:15:Call -> U
+256:15:Attribute -> U
+256:15:Attribute -> U
+256:15:Name -> U
+257:8:Call -> U
+257:8:Attribute -> U
+257:8:Name -> U
+257:22:Name -> U
+258:11:Name -> Class:builtins.Exception
+259:8:Call -> U
+259:8:Attribute -> U
+259:8:Name -> U
+259:47:Name -> ExcInst:builtins.Exception
+269:4:Call -> U
+269:4:Attribute -> U
+269:4:Name -> U
+270:4:Call -> U
+270:4:Attribute -> U
+270:4:Name -> U
+270:46:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+270:46:Name -> Module:sys
+271:4:Call -> U
+271:4:Attribute -> U
+271:4:Name -> U
+271:43:Attribute -> Const:str:'3.12.12 (main, Feb 12 2026, 00:42:34) [
+271:43:Name -> Module:sys
+272:4:Call -> U
+272:4:Attribute -> U
+272:4:Name -> U
+272:46:Call -> ERR
+272:46:Attribute -> Func:posix.getcwd
+272:46:Name -> Module:os
+273:4:Call -> U
+273:4:Attribute -> U
+273:4:Name -> U
+273:40:Call -> U | Const:str:'Not set'
+273:40:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+273:40:Attribute -> Dict:43 | Inst:os._Environ
+273:40:Name -> Module:os
+274:4:Call -> U
+274:4:Attribute -> U
+274:4:Name -> U
+274:39:Call -> U | Const:str:'Not set'
+274:39:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+274:39:Attribute -> Dict:43 | Inst:os._Environ
+274:39:Name -> Module:os
+276:4:Call -> U
+276:4:Attribute -> U
+276:4:Name -> U
+276:53:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+276:53:Attribute -> BM:pathlib.Path.exists
+276:53:Call -> Inst:pathlib.Path
+276:53:Name -> Class:pathlib.Path
+276:58:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+276:58:Name -> Module:sys
+277:7:Call -> U | Const:bool:False | Const:bool:False
+277:7:Attribute -> BM:pathlib.Path.is_symlink
+277:7:Call -> Inst:pathlib.Path
+277:7:Name -> Class:pathlib.Path
+277:12:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+277:12:Name -> Module:sys
+278:8:Call -> U
+278:8:Attribute -> U
+278:8:Name -> U
+278:64:Call -> Inst:pathlib.Path
+278:64:Attribute -> BM:pathlib.Path.readlink
+278:64:Call -> Inst:pathlib.Path
+278:64:Name -> Class:pathlib.Path
+278:69:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+278:69:Name -> Module:sys
+281:20:Call -> Const:str:'' | Const:bytes:b''
+281:20:Attribute -> BM:builtins.str.strip | BM:builtins.bytes.strip
+281:20:Call -> Const:str:'' | Const:bytes:b''
+281:20:Attribute -> Func:subprocess.check_output
+281:20:Name -> Module:subprocess
+282:8:Call -> U
+282:8:Attribute -> U
+282:8:Name -> U
+282:42:Name -> Const:str:'' | Const:bytes:b''
+283:8:Call -> U
+283:8:Attribute -> U
+283:8:Name -> U
+283:39:Name -> Const:str:'' | Const:bytes:b''
+283:52:Attribute -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+283:52:Name -> Module:sys
+285:8:Call -> U
+285:8:Attribute -> U
+285:8:Name -> U
+285:49:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+285:49:Attribute -> BM:pathlib.Path.exists
+285:49:Call -> Inst:pathlib.Path
+285:49:Name -> Class:pathlib.Path
+285:54:Name -> Const:str:'' | Const:bytes:b''
+286:11:Call -> U | Const:bool:False | Const:bool:False
+286:11:Attribute -> BM:pathlib.Path.is_symlink
+286:11:Call -> Inst:pathlib.Path
+286:11:Name -> Class:pathlib.Path
+286:16:Name -> Const:str:'' | Const:bytes:b''
+287:12:Call -> U
+287:12:Attribute -> U
+287:12:Name -> U
+287:60:Call -> Inst:pathlib.Path
+287:60:Attribute -> BM:pathlib.Path.readlink
+287:60:Call -> Inst:pathlib.Path
+287:60:Name -> Class:pathlib.Path
+287:65:Name -> Const:str:'' | Const:bytes:b''
+288:11:Name -> Class:builtins.Exception
+289:8:Call -> U
+289:8:Attribute -> U
+289:8:Name -> U
+289:47:Name -> ExcInst:builtins.Exception
+295:8:Call -> U
+295:8:Attribute -> U
+295:8:Name -> U
+295:63:Attribute -> U
+295:63:Name -> U
+296:11:Name -> Class:builtins.ImportError
+297:8:Call -> U
+297:8:Attribute -> U
+297:8:Name -> U
+299:4:Call -> U
+299:4:Attribute -> U
+299:4:Name -> U
+306:14:Call -> U
+306:14:Attribute -> U
+306:14:Name -> U
+307:4:Call -> U
+307:4:Attribute -> U
+307:4:Name -> U
+307:46:Name -> U
+310:30:Name -> U
+311:4:Call -> U
+311:4:Name -> Func:shutil.copyfile
+311:13:Name -> U
+311:39:Name -> U
+313:19:Name -> U
+314:4:Call -> U
+314:4:Attribute -> U
+314:4:Name -> U
+315:23:Call -> ERR
+315:23:Attribute -> Func:posix.getuid
+315:23:Name -> Module:os
+321:4:Attribute -> Dict:43 | Inst:os._Environ
+321:4:Name -> Module:os
+321:39:Name -> U
+322:4:Attribute -> Dict:43 | Inst:os._Environ
+322:4:Name -> Module:os
+322:40:Call -> U | Const:str:'1.0.0'
+322:40:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+322:40:Attribute -> Dict:43 | Inst:os._Environ
+322:40:Name -> Module:os
+323:4:Attribute -> Dict:43 | Inst:os._Environ
+323:4:Name -> Module:os
+323:34:Call -> Const:str:''
+323:34:Name -> Class:builtins.str
+323:38:Name -> U
+328:4:Attribute -> Dict:43 | Inst:os._Environ
+328:4:Name -> Module:os
+328:31:Call -> U
+328:31:Name -> U
+331:4:Name -> Class:airflow-ctl-tests.tests.airflowctl_tests.conftest._CtlTestState
+331:34:Call -> U
+331:34:Name -> U
+332:23:Call -> Const:str:''
+332:23:Name -> Class:builtins.str
+332:27:Name -> U
+337:8:Call -> U
+337:8:Attribute -> U
+337:8:Name -> U
+337:69:Name -> U
+338:8:Call -> ERR
+338:8:Attribute -> ERR
+338:8:Attribute -> ERR
+338:8:Attribute -> Const:NoneType:None
+338:8:Name -> Class:airflow-ctl-tests.tests.airflowctl_tests.conftest._CtlTestState
+339:8:Call -> U
+339:8:Attribute -> U
+339:8:Name -> U
+340:11:Name -> Class:builtins.Exception
+341:8:Call -> Const:NoneType:None
+341:8:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest.print_diagnostics
+342:12:Attribute -> ERR
+342:12:Attribute -> Const:NoneType:None
+342:12:Name -> Class:airflow-ctl-tests.tests.airflowctl_tests.conftest._CtlTestState
+343:12:Call -> ERR
+343:12:Attribute -> ERR
+343:12:Attribute -> ERR
+343:12:Attribute -> Const:NoneType:None
+343:12:Name -> Class:airflow-ctl-tests.tests.airflowctl_tests.conftest._CtlTestState
+344:12:Call -> U
+344:12:Attribute -> U
+344:12:Name -> U
+346:8:Call -> Const:NoneType:None
+346:8:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest.debug_environment
+347:8:Call -> Const:NoneType:None
+347:8:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest.docker_compose_down
+353:7:Attribute -> Const:NoneType:None
+353:7:Name -> Class:airflow-ctl-tests.tests.airflowctl_tests.conftest._CtlTestState
+354:8:Call -> U
+354:8:Attribute -> U
+354:8:Attribute -> U
+354:8:Attribute -> U
+354:8:Name -> Class:airflow-ctl-tests.tests.airflowctl_tests.conftest._CtlTestState
+359:11:Call -> U | Const:NoneType:None
+359:11:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+359:11:Attribute -> Dict:43 | Inst:os._Environ
+359:11:Name -> Module:os
+360:8:Call -> Const:NoneType:None
+360:8:Name -> Func:airflow-ctl-tests.tests.airflowctl_tests.conftest.docker_compose_down

@@ -1,0 +1,32 @@
+12:25:Name -> Class:src.sentry.status_checks.base.StatusCheck
+13:36:Name -> U
+14:8:Name -> Inst:src.sentry.status_checks.warnings.WarningStatusCheck
+14:29:Name -> U
+16:23:Name -> Class:builtins.list
+16:28:Name -> Class:src.sentry.status_checks.base.Problem
+19:18:Call -> Const:str:'status/warnings/' | U
+19:18:Name -> Func:urllib.parse.urljoin
+19:26:Call -> U
+19:26:Name -> U
+20:15:Name -> U
+23:11:Attribute -> U
+23:11:Name -> Inst:src.sentry.status_checks.warnings.WarningStatusCheck
+25:16:Call -> Inst:src.sentry.status_checks.base.Problem
+25:16:Name -> Class:src.sentry.status_checks.base.Problem
+26:20:Call -> U
+26:20:Attribute -> BM:builtins.str.format
+27:33:Call -> ERR
+27:33:Name -> Func:builtins.len
+27:37:Attribute -> U
+27:37:Name -> Inst:src.sentry.status_checks.warnings.WarningStatusCheck
+28:24:Call -> ERR
+28:24:Name -> Func:builtins.len
+28:28:Attribute -> U
+28:28:Name -> Inst:src.sentry.status_checks.warnings.WarningStatusCheck
+29:36:Call -> ERR
+29:36:Name -> Func:builtins.len
+29:40:Attribute -> U
+29:40:Name -> Inst:src.sentry.status_checks.warnings.WarningStatusCheck
+31:29:Attribute -> Const:str:'warning'
+31:29:Name -> Class:src.sentry.status_checks.base.Problem
+35:24:Name -> Const:NoneType:None | Const:str:'status/warnings/' | U | Const:NoneType:None

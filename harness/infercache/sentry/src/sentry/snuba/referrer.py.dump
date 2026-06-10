@@ -1,0 +1,38 @@
+8:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+8:9:Attribute -> Func:logging.getLogger
+8:9:Name -> Module:logging
+8:27:Name -> Const:str:'src.sentry.snuba.referrer' | Const:str:'__main__'
+11:1:Name -> Func:enum.unique
+12:15:Name -> Class:enum.StrEnum
+964:10:Attribute -> U
+964:10:Name -> U
+964:41:Name -> Class:src.sentry.snuba.referrer.Referrer
+970:32:Name -> Class:builtins.str
+970:47:Name -> Class:builtins.bool
+971:11:Name -> U
+974:7:Name -> U
+974:19:Name -> U
+977:18:Name -> List:2
+978:11:Call -> U
+978:11:Attribute -> U
+978:11:Name -> U
+978:37:Name -> Const:str:'primary' | Const:str:'secondary'
+978:50:Name -> U
+984:32:Name -> Class:builtins.str
+984:47:Name -> Class:builtins.bool
+985:7:Call -> Const:bool:True | Const:bool:True | Const:bool:True | Const:bool:False
+985:7:Name -> Func:src.sentry.snuba.referrer.is_valid_referrer
+985:25:Name -> U
+988:32:Name -> U
+991:14:Call -> ExcInst:builtins.Exception
+991:14:Name -> Class:builtins.Exception
+991:24:Name -> Const:str:'referrer Uninferable is not part of Ref
+992:11:Name -> Class:builtins.Exception
+993:8:Call -> U
+993:8:Attribute -> U
+993:8:Name -> U
+993:69:Name -> U
+994:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+994:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+994:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+994:23:Name -> Const:str:'referrer Uninferable is not part of Ref

@@ -1,0 +1,493 @@
+86:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+86:6:Attribute -> Func:logging.getLogger
+86:6:Name -> Module:logging
+86:24:Name -> Const:str:'salt.resources.ssh' | Const:str:'__main__'
+100:11:Call -> Const:NoneType:None | Const:str:'ssh' | U
+100:11:Attribute -> Func:salt.utils.path.which
+100:11:Attribute -> Module:salt.utils.path
+100:11:Attribute -> Module:salt.utils
+100:11:Name -> Module:salt
+112:11:Name -> ERR
+117:11:Call -> ERR
+117:11:Attribute -> ERR
+117:11:Name -> ERR
+117:23:Name -> Const:str:'ssh_resource'
+118:8:Name -> U
+131:13:Call -> Inst:builtins.dict
+131:13:Name -> Class:builtins.dict
+131:18:Name -> ERR
+133:11:Name -> Const:str:'ignore_host_keys' | Const:str:'no_host_keys' | Const:str:'known_hosts_file'
+133:18:Name -> U
+134:12:Name -> Inst:builtins.dict
+134:19:Name -> Const:str:'ignore_host_keys' | Const:str:'no_host_keys' | Const:str:'known_hosts_file'
+134:26:Name -> U
+134:30:Name -> Const:str:'ignore_host_keys' | Const:str:'no_host_keys' | Const:str:'known_hosts_file'
+137:29:Name -> Inst:builtins.dict
+138:17:Call -> ERR
+138:17:Attribute -> ERR
+138:17:Call -> ERR
+138:17:Attribute -> ERR
+138:17:Name -> ERR
+138:33:Name -> Const:str:'ssh_resource'
+141:8:Name -> Inst:builtins.dict
+142:22:Name -> U
+142:12:Name -> U
+142:46:Call -> Tuple:0 | Tuple:0 | Tuple:2
+142:46:Attribute -> Func:salt.client.ssh.ssh_version
+142:46:Attribute -> Module:salt.client.ssh
+142:46:Attribute -> Module:salt.client
+142:46:Name -> Module:salt
+144:11:Name -> Inst:builtins.dict
+156:10:Call -> U
+156:10:Name -> Func:salt.resources.ssh._host_cfg
+156:20:Name -> U
+157:7:Name -> Const:NoneType:None | U
+158:14:Call -> Inst:builtins.dict
+158:14:Name -> Class:builtins.dict
+158:19:Name -> U
+159:8:Call -> ERR
+159:8:Attribute -> BM:builtins.dict.update
+159:8:Name -> Inst:builtins.dict
+159:19:Name -> U
+161:11:Call -> Inst:salt.client.ssh.shell.Shell
+161:11:Attribute -> Class:salt.client.ssh.shell.Shell
+161:11:Attribute -> Module:salt.client.ssh.shell
+161:11:Attribute -> Module:salt.client.ssh
+161:11:Attribute -> Module:salt.client
+161:11:Name -> Module:salt
+162:8:Call -> Inst:builtins.dict
+162:8:Name -> Func:salt.resources.ssh._shell_opts
+162:20:Name -> U | Inst:builtins.dict
+163:13:Name -> U | Inst:builtins.dict
+164:13:Call -> U
+164:13:Attribute -> U | BM:builtins.dict.get
+164:13:Name -> U | Inst:builtins.dict
+165:13:Call -> U
+165:13:Attribute -> U | BM:builtins.dict.get
+165:13:Name -> U | Inst:builtins.dict
+166:15:Call -> U
+166:15:Attribute -> U | BM:builtins.dict.get
+166:15:Name -> U | Inst:builtins.dict
+167:13:Call -> U
+167:13:Attribute -> U | BM:builtins.dict.get
+167:13:Name -> U | Inst:builtins.dict
+168:20:Call -> U
+168:20:Attribute -> U | BM:builtins.dict.get
+168:20:Name -> U | Inst:builtins.dict
+169:16:Call -> U
+169:16:Attribute -> U | BM:builtins.dict.get
+169:16:Name -> U | Inst:builtins.dict
+170:13:Call -> U
+170:13:Attribute -> U | BM:builtins.dict.get
+170:13:Name -> U | Inst:builtins.dict
+171:12:Call -> U
+171:12:Attribute -> U | BM:builtins.dict.get
+171:12:Name -> U | Inst:builtins.dict
+172:24:Call -> U
+172:24:Attribute -> U | BM:builtins.dict.get
+172:24:Name -> U | Inst:builtins.dict
+173:20:Call -> U
+173:20:Attribute -> U | BM:builtins.dict.get
+173:20:Name -> U | Inst:builtins.dict
+174:18:Call -> U
+174:18:Attribute -> U | BM:builtins.dict.get
+174:18:Name -> U | Inst:builtins.dict
+175:27:Call -> U
+175:27:Attribute -> U | BM:builtins.dict.get
+175:27:Name -> U | Inst:builtins.dict
+176:28:Call -> U
+176:28:Attribute -> U | BM:builtins.dict.get
+176:28:Name -> U | Inst:builtins.dict
+189:21:Name -> U
+190:15:Name -> U
+191:16:Attribute -> Const:str:'00000000000000000000000000000000'
+191:16:Call -> Inst:uuid.UUID
+191:16:Attribute -> Func:uuid.uuid3
+191:16:Name -> Module:uuid
+191:27:Attribute -> Inst:uuid.UUID
+191:27:Name -> Module:uuid
+191:47:Call -> Const:NoneType:None | U
+191:47:Attribute -> Func:salt.utils.network.get_fqhostname
+191:47:Attribute -> Module:salt.utils.network
+191:47:Attribute -> Module:salt.utils
+191:47:Name -> Module:salt
+194:11:Call -> U
+194:11:Attribute -> BM:builtins.str.format
+194:37:Call -> U
+194:37:Attribute -> U
+194:37:Name -> U
+194:62:Name -> Const:str:'000000'
+207:15:Call -> ERR
+207:15:Attribute -> ERR
+207:15:Name -> ERR
+209:15:Call -> U
+209:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+209:15:Attribute -> Module:posixpath | Module:ntpath
+209:15:Name -> Module:os
+209:28:Name -> U
+209:57:Name -> Const:str:'x86_64' | Const:str:'arm64'
+210:11:Call -> Const:bool:False | Const:bool:True | U
+210:11:Attribute -> Func:genericpath.exists | U
+210:11:Attribute -> Module:posixpath | Module:ntpath
+210:11:Name -> Module:os
+210:26:Name -> U
+211:19:Name -> U
+225:18:Call -> ERR
+225:18:Attribute -> ERR
+225:18:Call -> ERR
+225:18:Attribute -> ERR
+225:18:Name -> ERR
+226:8:Name -> Const:str:'ssh_resource'
+230:7:Name -> U
+231:13:Call -> Inst:builtins.dict
+231:13:Name -> Class:builtins.dict
+231:18:Name -> U
+232:8:Call -> ERR
+232:8:Attribute -> BM:builtins.dict.setdefault
+232:8:Name -> Inst:builtins.dict
+233:24:Call -> ERR
+233:24:Attribute -> ERR
+233:24:Name -> ERR
+235:15:Call -> Inst:salt.fileclient.FSClient
+235:15:Attribute -> Class:salt.fileclient.FSClient
+235:15:Attribute -> Module:salt.fileclient
+235:15:Name -> Module:salt
+235:40:Name -> Inst:builtins.dict
+236:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+236:4:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+236:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+240:11:Call -> U
+240:11:Attribute -> Func:salt.fileclient.get_file_client
+240:11:Attribute -> Module:salt.fileclient
+240:11:Name -> Module:salt
+241:8:Name -> ERR
+254:10:Call -> U
+254:10:Name -> Func:salt.resources.ssh._host_cfg
+254:20:Name -> U
+255:10:Call -> ERR
+255:10:Attribute -> ERR
+255:10:Name -> ERR
+255:26:Name -> Const:str:'ssh_resource'
+257:18:Call -> Inst:builtins.dict
+257:18:Name -> Class:builtins.dict
+257:23:Name -> ERR
+258:4:Name -> Inst:builtins.dict
+258:34:Call -> U
+258:34:Attribute -> U
+258:34:Name -> U
+259:24:Call -> ERR
+259:24:Attribute -> BM:builtins.dict.get
+259:24:Name -> Inst:builtins.dict
+261:4:Name -> Inst:builtins.dict
+261:38:Call -> U
+261:38:Attribute -> U
+261:38:Name -> U
+262:28:Call -> ERR
+262:28:Attribute -> BM:builtins.dict.get
+262:28:Name -> Inst:builtins.dict
+264:29:Name -> U
+265:8:Name -> Inst:builtins.dict
+265:42:Name -> U
+266:4:Name -> Inst:builtins.dict
+267:8:Call -> U
+267:8:Attribute -> U
+267:8:Name -> U
+267:35:Call -> Tuple:0 | Tuple:0 | Tuple:2
+267:35:Attribute -> Func:salt.client.ssh.ssh_version
+267:35:Attribute -> Module:salt.client.ssh
+267:35:Attribute -> Module:salt.client
+267:35:Name -> Module:salt
+270:4:Name -> Inst:builtins.dict
+271:11:Call -> Inst:salt.client.ssh.Single
+271:11:Attribute -> Class:salt.client.ssh.Single
+271:11:Attribute -> Module:salt.client.ssh
+271:11:Attribute -> Module:salt.client
+271:11:Name -> Module:salt
+272:8:Name -> Inst:builtins.dict
+273:8:Name -> U
+274:8:Name -> U
+275:13:Call -> U
+275:13:Name -> Func:salt.resources.ssh._relenv_path
+276:17:Call -> Inst:salt.fileclient.FSClient | U
+276:17:Name -> Func:salt.resources.ssh._file_client
+277:13:Name -> U
+278:13:Call -> U
+278:13:Attribute -> U
+278:13:Name -> U
+279:13:Call -> U
+279:13:Attribute -> U
+279:13:Name -> U
+280:15:Call -> U
+280:15:Attribute -> U
+280:15:Name -> U
+281:13:Call -> U
+281:13:Attribute -> U
+281:13:Name -> U
+282:20:Call -> U
+282:20:Attribute -> U
+282:20:Name -> U
+283:16:Call -> U
+283:16:Attribute -> U
+283:16:Name -> U
+284:13:Call -> U
+284:13:Attribute -> U
+284:13:Name -> U
+285:12:Call -> U
+285:12:Attribute -> U
+285:12:Name -> U
+286:24:Call -> U
+286:24:Attribute -> U
+286:24:Name -> U
+287:20:Call -> U
+287:20:Attribute -> U
+287:20:Name -> U
+288:18:Call -> U
+288:18:Attribute -> U
+288:18:Name -> U
+289:27:Call -> U
+289:27:Attribute -> U
+289:27:Name -> U
+290:28:Call -> U
+290:28:Attribute -> U
+290:28:Name -> U
+291:17:Call -> U
+291:17:Name -> Func:salt.resources.ssh._thin_dir
+291:27:Name -> U
+313:19:Call -> U
+313:19:Attribute -> BM:builtins.dict.get | U | BM:builtins.dict.get
+313:19:Call -> Dict:0 | U | Dict:0
+313:19:Attribute -> Func:salt.utils.resources.pillar_resources_tree
+313:19:Attribute -> Module:salt.utils.resources
+313:19:Attribute -> Module:salt.utils
+313:19:Name -> Module:salt
+313:62:Name -> U
+314:12:Call -> U
+314:12:Attribute -> U
+314:12:Name -> U
+315:4:Name -> ERR
+315:16:Name -> Const:str:'ssh_resource'
+317:17:Name -> U
+318:24:Call -> Tuple:0 | Tuple:0 | Tuple:2
+318:24:Attribute -> Func:salt.client.ssh.ssh_version
+318:24:Attribute -> Module:salt.client.ssh
+318:24:Attribute -> Module:salt.client
+318:24:Name -> Module:salt
+327:19:Call -> U
+327:19:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+327:19:Attribute -> Module:posixpath | Module:ntpath
+327:19:Name -> Module:os
+327:35:Call -> U
+327:35:Attribute -> U
+327:35:Name -> U
+328:22:Call -> U
+328:22:Attribute -> Func:posixpath.join | Func:ntpath.join
+328:22:Attribute -> Module:posixpath | Module:ntpath
+328:22:Name -> Module:os
+328:35:Name -> U
+329:11:Call -> Const:bool:False | U
+329:11:Attribute -> Func:genericpath.isfile | U
+329:11:Attribute -> Module:posixpath | Module:ntpath
+329:11:Name -> Module:os
+329:26:Name -> U
+330:26:Call -> Inst:salt.utils.optsdict.OptsDict
+330:26:Attribute -> Func:salt.config.master_config
+330:26:Attribute -> Module:salt.config
+330:26:Name -> Module:salt
+330:52:Name -> U
+332:12:Call -> U
+332:12:Attribute -> BM:salt.utils.optsdict.OptsDict.setdefault
+332:12:Name -> Inst:salt.utils.optsdict.OptsDict
+332:47:Call -> U
+332:47:Attribute -> U
+332:47:Name -> U
+333:12:Name -> ERR
+333:24:Name -> Const:str:'ssh_resource'
+335:16:Name -> Inst:salt.utils.optsdict.OptsDict
+336:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+336:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+336:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+336:71:Name -> U
+339:26:Call -> U
+339:26:Attribute -> Func:salt.fileclient.get_file_client
+339:26:Attribute -> Module:salt.fileclient
+339:26:Name -> Module:salt
+339:58:Name -> U
+340:26:Call -> U
+340:26:Attribute -> U
+340:26:Name -> U
+341:15:Call -> ERR
+341:15:Name -> Func:builtins.isinstance
+341:26:Name -> U
+341:39:Name -> Class:builtins.dict
+341:49:Name -> U
+342:16:Call -> U
+342:16:Attribute -> U
+342:16:Name -> U
+343:16:Call -> U
+343:16:Attribute -> U
+343:16:Name -> U
+343:51:Call -> U
+343:51:Attribute -> U
+343:51:Name -> U
+344:16:Name -> ERR
+344:28:Name -> Const:str:'ssh_resource'
+346:20:Name -> U
+347:12:Call -> U
+347:12:Attribute -> U
+347:12:Name -> U
+348:11:Name -> Class:builtins.Exception
+349:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+349:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+349:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+349:73:Name -> ExcInst:builtins.Exception
+351:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+351:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+351:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+351:58:Call -> Inst:builtins.list
+351:58:Name -> Class:builtins.list
+351:63:Name -> U
+360:11:Call -> ERR
+360:11:Attribute -> ERR
+360:11:Call -> ERR
+360:11:Attribute -> ERR
+360:11:Name -> ERR
+360:27:Name -> Const:str:'ssh_resource'
+378:8:Call -> U
+378:8:Attribute -> U
+378:8:Call -> U
+378:8:Attribute -> BM:builtins.dict.get | U | BM:builtins.dict.get
+378:8:Call -> Dict:0 | U | Dict:0
+378:8:Attribute -> Func:salt.utils.resources.pillar_resources_tree
+378:8:Attribute -> Module:salt.utils.resources
+378:8:Attribute -> Module:salt.utils
+378:8:Name -> Module:salt
+378:51:Name -> U
+380:19:Call -> Inst:builtins.list
+380:19:Name -> Class:builtins.list
+380:24:Name -> U
+381:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+381:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+381:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+381:55:Name -> Inst:builtins.list
+382:11:Name -> Inst:builtins.list
+398:18:Call -> U
+398:18:Name -> Func:salt.resources.ssh._resource_id
+400:10:Call -> ERR
+400:10:Attribute -> ERR
+400:10:Name -> ERR
+400:26:Name -> Const:str:'ssh_resource'
+401:13:Call -> U
+401:13:Attribute -> U
+401:13:Call -> U
+401:13:Attribute -> U
+401:13:Name -> U
+401:39:Name -> U
+402:7:Name -> U
+403:15:Name -> U
+405:10:Call -> U
+405:10:Name -> Func:salt.resources.ssh._host_cfg
+405:20:Name -> U
+406:13:Call -> Inst:salt.client.ssh.Single
+406:13:Name -> Func:salt.resources.ssh._make_single
+406:26:Name -> U
+407:30:Call -> Tuple:3 | Tuple:3 | Tuple:3 | U | Tuple:3 | Tuple:3
+407:30:Attribute -> BM:salt.client.ssh.Single.cmd_block
+407:30:Name -> Inst:salt.client.ssh.Single
+409:7:Name -> U
+409:23:Call -> U
+409:23:Attribute -> BM:builtins.str.startswith | U | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith | BM:builtins.str.startswith
+409:23:Name -> Const:str:'ERROR: Failed to transfer minion config | U | Const:str:'ERROR: Undefined SHIM state' | Const:str:'ERROR: sudo expected a password, NOPASS | Const:str:'ERROR: Python version error. Recommenda | Const:str:'ERROR: The salt thin transfer was corru | Const:str:'ERROR: No scp binary. openssh-clients p
+410:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+410:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+410:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+412:12:Name -> U
+413:12:Name -> U
+414:12:Name -> U
+414:22:Name -> Const:str:'ERROR: Failed to transfer minion config | U | Const:str:'ERROR: Undefined SHIM state' | Const:str:'ERROR: sudo expected a password, NOPASS | Const:str:'ERROR: Python version error. Recommenda | Const:str:'ERROR: The salt thin transfer was corru | Const:str:'ERROR: No scp binary. openssh-clients p
+418:27:Name -> U
+419:20:Call -> U
+419:20:Attribute -> U
+419:20:Name -> U
+423:17:Call -> U
+423:17:Attribute -> Func:salt.utils.json.loads
+423:17:Attribute -> Module:salt.utils.json
+423:17:Attribute -> Module:salt.utils
+423:17:Name -> Module:salt
+423:39:Name -> Const:str:'ERROR: Failed to transfer minion config | U | Const:str:'ERROR: Undefined SHIM state' | Const:str:'ERROR: sudo expected a password, NOPASS | Const:str:'ERROR: Python version error. Recommenda | Const:str:'ERROR: The salt thin transfer was corru | Const:str:'ERROR: No scp binary. openssh-clients p
+425:15:Call -> U
+425:15:Attribute -> U
+425:15:Call -> U
+425:15:Attribute -> U
+425:15:Name -> U
+425:53:Name -> U
+426:11:Name -> Class:builtins.Exception
+427:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+427:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+427:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+428:70:Name -> U
+428:83:Name -> ExcInst:builtins.Exception
+432:27:Name -> U
+433:20:Call -> U
+433:20:Attribute -> U
+433:20:Name -> U
+436:4:Name -> U
+437:4:Name -> U
+437:26:Name -> U
+439:4:Call -> U
+439:4:Attribute -> U
+439:4:Name -> U
+439:33:Name -> U
+439:48:Name -> U
+440:11:Name -> U
+449:18:Call -> U
+449:18:Name -> Func:salt.resources.ssh._resource_id
+450:10:Call -> ERR
+450:10:Attribute -> ERR
+450:10:Name -> ERR
+450:26:Name -> Const:str:'ssh_resource'
+451:4:Call -> U
+451:4:Attribute -> U
+451:4:Call -> U
+451:4:Attribute -> U
+451:4:Name -> U
+451:30:Name -> U
+452:11:Call -> U | Dict:3 | Dict:3
+452:11:Name -> Func:salt.resources.ssh.grains
+462:18:Call -> U
+462:18:Name -> Func:salt.resources.ssh._resource_id
+464:16:Call -> Inst:salt.client.ssh.shell.Shell
+464:16:Name -> Func:salt.resources.ssh._make_shell
+464:28:Name -> U
+465:35:Call -> Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3
+465:35:Attribute -> BM:salt.client.ssh.shell.Shell.exec_cmd
+465:35:Name -> Inst:salt.client.ssh.shell.Shell
+466:15:Name -> Const:int:245 | Const:int:254 | Const:int:254 | Const:int:254 | Const:int:254 | Const:int:254 | Const:NoneType:None | U | Const:NoneType:None
+466:42:Name -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | U
+467:11:Name -> Class:builtins.Exception
+468:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+468:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+468:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+468:61:Name -> U
+468:74:Name -> ExcInst:builtins.Exception
+481:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+481:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+481:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+482:4:Call -> ERR
+482:4:Attribute -> ERR
+482:4:Name -> ERR
+482:20:Name -> Const:str:'ssh_resource'
+517:18:Call -> U
+517:18:Name -> Func:salt.resources.ssh._resource_id
+518:39:Name -> Const:NoneType:None | U
+518:27:Name -> U
+519:12:Call -> Inst:salt.client.ssh.shell.Shell
+519:12:Name -> Func:salt.resources.ssh._make_shell
+519:24:Name -> U
+519:37:Name -> Dict:1 | Const:NoneType:None
+520:30:Call -> Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3
+520:30:Attribute -> BM:salt.client.ssh.shell.Shell.exec_cmd
+520:30:Name -> Inst:salt.client.ssh.shell.Shell
+520:45:Name -> U
+521:22:Name -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | U
+521:40:Name -> Const:str:'No command or passphrase' | Const:str:'Private key file need passphrase' | Const:str:'Permission denied, no authentication in | Const:str:'Password authentication failed' | Const:str:'' | Const:str:'Sudo password is required but not provi | U
+521:59:Name -> Const:int:245 | Const:int:254 | Const:int:254 | Const:int:254 | Const:int:254 | Const:int:254 | Const:NoneType:None | U | Const:NoneType:None

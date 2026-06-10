@@ -1,0 +1,63 @@
+6:4:Attribute -> U
+6:4:Attribute -> U
+6:4:Name -> U
+10:1:Attribute -> U
+10:1:Name -> U
+19:4:Call -> U
+19:4:Attribute -> U
+19:4:Name -> U
+23:21:Name -> List:3
+24:39:Name -> Const:str:'salt-api' | Const:str:'salt-minion' | Const:str:'salt-master'
+25:14:Call -> U
+25:14:Attribute -> U
+25:14:Name -> U
+25:54:Name -> Const:str:'systemctl enable salt-api' | Const:str:'systemctl enable salt-minion' | Const:str:'systemctl enable salt-master'
+26:15:Attribute -> U
+26:15:Name -> U
+28:40:Name -> Const:str:'salt-api' | Const:str:'salt-minion' | Const:str:'salt-master'
+29:14:Call -> U
+29:14:Attribute -> U
+29:14:Name -> U
+29:54:Name -> Const:str:'systemctl restart salt-api' | Const:str:'systemctl restart salt-minion' | Const:str:'systemctl restart salt-master'
+30:15:Attribute -> U
+30:15:Name -> U
+33:1:Call -> U
+33:1:Attribute -> U
+33:1:Attribute -> U
+33:1:Name -> U
+38:7:Attribute -> U
+38:7:Name -> U
+39:8:Call -> U
+39:8:Attribute -> U
+39:8:Name -> U
+43:4:Name -> U
+45:22:Call -> Inst:pathlib.Path
+45:22:Attribute -> Class:pathlib.Path
+45:22:Name -> Module:pathlib
+46:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+46:11:Attribute -> BM:pathlib.Path.exists
+46:11:Name -> Inst:pathlib.Path
+47:11:Call -> U | Const:bool:False | Const:bool:False
+47:11:Attribute -> BM:pathlib.Path.is_file
+47:11:Name -> Inst:pathlib.Path
+50:10:Call -> U
+50:10:Attribute -> U
+50:10:Name -> U
+50:50:Name -> Const:str:'/usr/sbin/ufw app list'
+51:39:Attribute -> U
+51:39:Name -> U
+52:21:Attribute -> U
+52:21:Name -> U
+54:10:Call -> U
+54:10:Attribute -> U
+54:10:Name -> U
+54:50:Name -> Const:str:'/usr/sbin/ufw app update Salt'
+55:11:Attribute -> U
+55:11:Name -> U
+64:10:Call -> U
+64:10:Attribute -> U
+64:10:Name -> U
+64:50:Name -> Const:str:'/usr/sbin/ufw app info Salt'
+65:11:Name -> Const:str:'Profile: Salt\nTitle: salt\nDescription
+65:28:Attribute -> U
+65:28:Name -> U

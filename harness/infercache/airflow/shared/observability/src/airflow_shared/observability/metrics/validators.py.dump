@@ -1,0 +1,231 @@
+34:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+34:6:Attribute -> Func:logging.getLogger
+34:6:Name -> Module:logging
+34:24:Name -> Const:str:'shared.observability.src.airflow_shared | Const:str:'__main__'
+37:39:Name -> Class:builtins.Warning
+47:21:Call -> Frozen
+47:21:Name -> Class:builtins.frozenset
+47:31:Attribute -> Const:str:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLM
+47:31:Name -> Module:string
+47:54:Attribute -> Const:str:'0123456789'
+47:54:Name -> Module:string
+55:34:Name -> Class:builtins.set
+55:38:Name -> Class:builtins.str
+83:26:Name -> Class:builtins.set
+83:30:Name -> Class:re.Pattern
+83:38:Name -> Class:builtins.str
+83:47:Call -> U
+83:47:Attribute -> Func:re.compile
+83:47:Name -> Module:re
+83:58:Name -> U
+83:76:Name -> Set:26
+90:24:Name -> Class:builtins.str
+91:24:Name -> Class:builtins.str
+92:5:Name -> ERR
+94:17:Name -> Class:shared.observability.src.airflow_shared.observability.metrics.validators.PatternAllowListValidator
+95:17:Name -> Class:shared.observability.src.airflow_shared.observability.metrics.validators.PatternBlockListValidator
+98:17:Name -> Const:NoneType:None | U
+99:17:Name -> Const:NoneType:None | U
+102:7:Name -> Const:NoneType:None | U
+104:11:Name -> Const:NoneType:None | U
+105:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+105:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+105:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+108:9:Name -> Const:NoneType:None | U
+111:20:Name -> Const:str:'allow'
+113:11:Call -> Inst:shared.observability.src.airflow_shared.observability.metrics.validators.PatternAllowListValidator | Inst:shared.observability.src.airflow_shared.observability.metrics.validators.PatternBlockListValidator
+113:11:Name -> Dict:2
+113:22:Name -> Const:str:'allow' | Const:str:'block' | Const:str:'allow'
+113:33:Name -> Dict:2
+113:46:Name -> Const:str:'allow' | Const:str:'block' | Const:str:'allow'
+116:22:Name -> Class:_collections_abc.Callable
+116:35:Name -> Class:_collections_abc.Callable
+119:5:Call -> Partial:PartialFunction
+119:5:Name -> Func:functools.wraps
+119:11:Name -> U
+120:28:Name -> Class:builtins.str
+120:67:Name -> Class:_collections_abc.Callable
+122:15:Name -> Const:NoneType:None | U
+123:41:Call -> U | Partial:PartialFunction | Func:shared.observability.src.airflow_shared.observability.metrics.validators.stat_name_default_handler
+123:41:Name -> Func:shared.observability.src.airflow_shared.observability.metrics.validators.get_current_handler_stat_name_func
+124:20:Attribute -> U
+124:20:Name -> U
+124:44:Attribute -> U
+124:44:Name -> U
+126:23:Call -> U
+126:23:Name -> U | Partial:PartialFunction | Func:shared.observability.src.airflow_shared.observability.metrics.validators.stat_name_default_handler
+126:46:Name -> U
+127:19:Call -> U
+127:19:Name -> U
+127:22:Name -> U
+127:28:Name -> Const:NoneType:None | U
+127:35:Name -> Tuple:0
+127:43:Name -> Dict:0
+128:15:Name -> Class:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+129:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+129:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+129:52:Name -> Const:NoneType:None | U
+132:11:Call -> Func:shared.observability.src.airflow_shared.observability.metrics.validators.validate_stat.wrapper
+132:11:Name -> Func:typing.cast
+132:28:Name -> Func:shared.observability.src.airflow_shared.observability.metrics.validators.validate_stat.wrapper
+138:22:Name -> Const:int:255
+136:17:Name -> Class:builtins.str
+137:15:Name -> Class:builtins.str
+138:16:Name -> Class:builtins.int
+139:5:Name -> Class:builtins.str
+152:24:Name -> Class:builtins.str
+152:33:Name -> U
+152:47:Name -> U
+153:27:Name -> Class:builtins.bool
+154:23:Name -> Class:builtins.str
+160:12:Call -> ERR
+160:12:Name -> Func:builtins.isinstance
+160:23:Name -> U
+160:34:Name -> Class:builtins.str
+160:43:Call -> ERR
+160:43:Name -> Func:builtins.isinstance
+160:54:Name -> U
+160:67:Name -> Class:builtins.str
+161:14:Call -> ExcInst:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+161:14:Name -> Class:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+163:7:Call -> Const:int:23
+163:7:Name -> Func:builtins.len
+163:11:Name -> Const:str:'Uninferable.Uninferable'
+163:33:Name -> Const:int:255
+166:25:Name -> U
+167:15:Call -> U
+167:15:Attribute -> Func:re.match
+167:15:Name -> Module:re
+167:24:Name -> U
+167:35:Name -> U
+170:36:Attribute -> U
+170:36:Name -> U
+173:18:Call -> ExcInst:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+173:18:Name -> Class:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+174:38:Name -> Const:str:'Uninferable.Uninferable'
+182:4:Call -> Const:str:'Uninferable.Uninferable'
+182:4:Name -> Func:shared.observability.src.airflow_shared.observability.metrics.validators.stat_name_default_handler
+182:30:Name -> Const:str:'Uninferable.Uninferable'
+182:68:Name -> Const:bool:False | Const:bool:True
+182:95:Name -> Const:int:255 | U
+186:7:Name -> Const:bool:False | Const:bool:True
+187:8:Call -> Const:NoneType:None
+187:8:Attribute -> Func:warnings.warn | Func:_warnings.warn
+187:8:Name -> Module:warnings
+188:25:Name -> U
+188:55:Name -> Const:str:'' | U
+189:36:Name -> Const:str:'Uninferable.Uninferable'
+189:56:Name -> Const:int:255
+192:12:Name -> Class:shared.observability.src.airflow_shared.observability.metrics.validators.MetricNameLengthExemptionWarning
+196:11:Name -> Const:str:'Uninferable.Uninferable'
+200:74:Name -> Frozen
+200:15:Name -> Class:builtins.str
+200:32:Name -> Class:builtins.int
+200:58:Name -> Class:_collections_abc.Iterable
+200:67:Name -> Class:builtins.str
+201:5:Name -> Class:builtins.str
+207:11:Call -> ERR
+207:11:Name -> Func:builtins.isinstance
+207:22:Name -> U
+207:33:Name -> Class:builtins.str
+208:14:Call -> ExcInst:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+208:14:Name -> Class:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+209:7:Call -> ERR
+209:7:Name -> Func:builtins.len
+209:11:Name -> U
+209:24:Name -> Const:int:250 | U
+210:14:Call -> ExcInst:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+210:14:Name -> Class:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+211:30:Name -> U
+211:63:Name -> Const:int:250 | U
+213:7:Call -> ERR
+213:7:Name -> Func:builtins.any
+213:11:Name -> U
+213:20:Name -> Frozen | U
+213:43:Name -> U
+214:14:Call -> ExcInst:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+214:14:Name -> Class:shared.observability.src.airflow_shared.observability.exceptions.InvalidStatsNameException
+215:30:Name -> U
+218:11:Name -> U
+222:23:Name -> Class:_collections_abc.Callable
+222:33:Name -> Class:builtins.str
+222:39:Name -> Class:builtins.str
+223:29:Name -> Class:builtins.bool
+224:5:Name -> Class:_collections_abc.Callable
+224:15:Name -> Class:builtins.str
+224:21:Name -> Class:builtins.str
+226:7:Name -> Const:NoneType:None | U
+227:11:Name -> Const:bool:False | U
+228:32:Call -> Partial:PartialFunction
+228:32:Name -> Class:functools.partial | Class:_functools.functools.partial | U
+229:16:Name -> Func:shared.observability.src.airflow_shared.observability.metrics.validators.stat_name_default_handler
+229:59:Name -> Frozen
+232:32:Name -> Func:shared.observability.src.airflow_shared.observability.metrics.validators.stat_name_default_handler
+233:11:Name -> Const:NoneType:None | U | Partial:PartialFunction | Func:shared.observability.src.airflow_shared.observability.metrics.validators.stat_name_default_handler
+243:38:Name -> Class:builtins.str
+244:8:Name -> Inst:shared.observability.src.airflow_shared.observability.metrics.validators.ListValidator
+244:28:Name -> Class:builtins.tuple
+244:34:Name -> Class:builtins.str
+245:80:Name -> Const:NoneType:None | U
+245:12:Call -> Inst:builtins.tuple
+245:12:Name -> Class:builtins.tuple
+245:18:Call -> U
+245:18:Attribute -> U
+245:18:Call -> U
+245:18:Attribute -> U
+245:18:Name -> U
+245:51:Call -> U
+245:51:Attribute -> U
+245:51:Name -> U
+248:5:Name -> Class:builtins.classmethod
+249:40:Name -> Class:_collections_abc.Callable
+249:50:Name -> Class:builtins.str
+249:56:Name -> Class:builtins.str
+249:65:Name -> Class:builtins.bool
+250:15:Call -> U
+250:15:Name -> Func:builtins.hasattr
+250:23:Name -> U
+250:45:Call -> U
+250:45:Name -> Func:builtins.callable
+250:54:Attribute -> U
+250:54:Name -> U
+250:72:Name -> Const:NotImplementedType:NotImplemented
+252:5:Attribute -> Func:abc.abstractmethod
+252:5:Name -> Module:abc
+253:25:Name -> Class:builtins.str
+253:33:Name -> Class:builtins.bool
+255:14:Name -> Class:builtins.NotImplementedError
+257:39:Name -> Class:builtins.str
+257:47:Name -> Class:builtins.bool
+258:21:Attribute -> Inst:builtins.tuple | Const:NoneType:None
+258:21:Name -> Inst:shared.observability.src.airflow_shared.observability.metrics.validators.ListValidator
+259:15:Call -> U
+259:15:Attribute -> Func:re.findall
+259:15:Name -> Module:re
+259:26:Name -> U
+259:33:Call -> U
+259:33:Attribute -> U
+259:33:Call -> U
+259:33:Attribute -> U
+259:33:Name -> U
+264:32:Name -> Class:shared.observability.src.airflow_shared.observability.metrics.validators.ListValidator
+267:25:Name -> Class:builtins.str
+267:33:Name -> Class:builtins.bool
+268:11:Attribute -> Inst:builtins.tuple | Const:NoneType:None
+268:11:Name -> Inst:shared.observability.src.airflow_shared.observability.metrics.validators.PatternAllowListValidator
+269:19:Call -> Const:bool:True | Const:bool:False
+269:19:Attribute -> BM:shared.observability.src.airflow_shared.observability.metrics.validators.ListValidator._has_pattern_match
+269:19:Call -> Super
+269:19:Name -> Class:builtins.super
+269:46:Name -> U
+273:32:Name -> Class:shared.observability.src.airflow_shared.observability.metrics.validators.ListValidator
+276:25:Name -> Class:builtins.str
+276:33:Name -> Class:builtins.bool
+277:11:Attribute -> Inst:builtins.tuple | Const:NoneType:None
+277:11:Name -> Inst:shared.observability.src.airflow_shared.observability.metrics.validators.PatternBlockListValidator
+278:23:Call -> Const:bool:True | Const:bool:False
+278:23:Attribute -> BM:shared.observability.src.airflow_shared.observability.metrics.validators.ListValidator._has_pattern_match
+278:23:Call -> Super
+278:23:Name -> Class:builtins.super
+278:50:Name -> U

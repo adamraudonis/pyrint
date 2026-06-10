@@ -1,0 +1,533 @@
+54:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:6:Attribute -> Func:logging.getLogger
+54:6:Name -> Module:logging
+54:24:Name -> Const:str:'salt.cache.mmap_key' | Const:str:'__main__'
+64:16:Name -> Const:int:1
+65:15:Name -> Const:int:2
+66:16:Name -> Const:int:3
+68:18:Name -> Const:int:1 | Const:int:2 | Const:int:3
+68:21:Name -> Const:str:'accepted' | Const:str:'pending' | Const:str:'rejected'
+68:35:Call -> DictItems
+68:35:Attribute -> BM:builtins.dict.items
+68:35:Name -> Dict:3
+82:9:Name -> Class:builtins.dict
+89:20:Name -> U
+90:19:Name -> U
+91:9:Call -> ERR
+91:9:Attribute -> BM:builtins.dict.get
+91:9:Name -> Dict:0
+92:19:Name -> Dict:0
+94:19:Name -> Dict:0
+95:11:Call -> U
+95:11:Attribute -> U
+95:11:Name -> U
+95:30:Call -> ERR
+95:30:Attribute -> BM:builtins.dict.get
+95:30:Name -> Dict:0
+96:24:Name -> U
+96:42:Name -> U
+103:24:Call -> U
+103:24:Attribute -> U
+103:24:Name -> U
+103:47:Call -> ERR
+103:47:Attribute -> BM:builtins.dict.get
+103:47:Name -> Dict:0
+110:11:Name -> U
+110:21:Name -> U
+111:7:Name -> Tuple:2
+111:18:Name -> Dict:0
+112:11:Name -> U
+112:23:Name -> Dict:3
+113:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+113:18:Name -> Class:salt.exceptions.SaltCacheError
+113:64:Name -> U
+114:8:Call -> Const:NoneType:None
+114:8:Attribute -> Func:os.makedirs
+114:8:Name -> Module:os
+114:20:Name -> U
+115:21:Call -> U
+115:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+115:21:Attribute -> Module:posixpath | Module:ntpath
+115:21:Name -> Module:os
+115:34:Name -> U
+115:44:Name -> Dict:3
+115:61:Name -> U
+116:15:Call -> ERR
+116:15:Attribute -> BM:builtins.dict.get
+116:15:Name -> Dict:0
+116:45:Name -> Const:int:1000000
+117:20:Call -> ERR
+117:20:Attribute -> BM:builtins.dict.get
+117:20:Name -> Dict:0
+117:55:Name -> Const:int:96
+118:18:Call -> ERR
+118:18:Attribute -> BM:builtins.dict.get
+118:18:Name -> Dict:0
+118:51:Name -> Const:int:64
+125:28:Call -> ERR
+125:28:Attribute -> BM:builtins.dict.get
+125:28:Name -> Dict:0
+127:12:Call -> ERR
+127:12:Attribute -> BM:builtins.dict.get
+127:12:Name -> Dict:0
+129:16:Attribute -> Const:int:1073741824
+129:16:Attribute -> Module:salt.utils.mmap_cache
+129:16:Attribute -> Module:salt.utils
+129:16:Name -> Module:salt
+132:8:Name -> Dict:0
+132:16:Name -> Tuple:2
+132:23:Call -> Inst:salt.utils.mmap_cache.MmapCache
+132:23:Attribute -> Class:salt.utils.mmap_cache.MmapCache
+132:23:Attribute -> Module:salt.utils.mmap_cache
+132:23:Attribute -> Module:salt.utils
+132:23:Name -> Module:salt
+133:17:Name -> U
+134:17:Name -> U
+135:22:Name -> U
+136:21:Name -> U
+137:30:Name -> U
+139:11:Name -> Dict:0
+139:19:Name -> Tuple:2
+149:17:Call -> ERR
+149:17:Attribute -> BM:builtins.dict.get
+149:17:Name -> Dict:3
+149:36:Name -> U
+150:7:Name -> U
+151:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+151:14:Name -> Class:salt.exceptions.SaltCacheError
+151:60:Name -> U
+152:11:Call -> Inst:builtins.bytes
+152:11:Name -> Class:builtins.bytes
+152:18:Name -> U
+152:33:Call -> U | Inst:builtins.bytes
+152:33:Attribute -> Func:salt.utils.stringutils.to_bytes
+152:33:Attribute -> Module:salt.utils.stringutils
+152:33:Attribute -> Module:salt.utils
+152:33:Name -> Module:salt
+152:65:Name -> U
+161:11:Name -> U
+161:18:Call -> ERR
+161:18:Name -> Func:builtins.len
+161:22:Name -> U
+163:27:Call -> ERR
+163:27:Name -> Func:builtins.isinstance
+163:38:Name -> U
+163:46:Name -> Class:builtins.int
+163:17:Name -> U
+163:56:Call -> ERR
+163:56:Name -> Func:builtins.ord
+163:60:Name -> U
+164:12:Call -> U
+164:12:Attribute -> U
+164:12:Name -> U
+164:31:Name -> U
+165:7:Name -> U
+167:10:Call -> U
+167:10:Attribute -> U
+167:10:Name -> U
+168:21:Name -> U
+168:35:Name -> U
+178:7:Name -> U
+178:47:Call -> Const:bool:False | Const:bool:True | Const:bool:False
+178:47:Name -> Func:salt.utils.verify.valid_id
+178:56:Name -> Dict:0
+178:66:Name -> U
+179:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+179:14:Name -> Class:salt.exceptions.SaltCacheError
+179:42:Name -> U
+190:4:Call -> Const:NoneType:None
+190:4:Name -> Func:salt.cache.mmap_key._check_id
+190:14:Name -> U
+190:20:Name -> U
+191:12:Call -> U
+191:12:Name -> Func:salt.cache.mmap_key._get_cache
+191:23:Name -> U
+191:29:Name -> U
+193:7:Name -> U
+194:15:Call -> ERR
+194:15:Name -> Func:builtins.isinstance
+194:26:Name -> U
+194:32:Name -> Class:builtins.dict
+194:56:Name -> U
+194:77:Name -> U
+195:18:Call -> ExcInst:salt.exceptions.SaltCacheError
+195:18:Name -> Class:salt.exceptions.SaltCacheError
+196:73:Call -> U
+196:73:Name -> Class:builtins.type
+196:78:Name -> U
+198:14:Call -> U
+198:14:Name -> Func:salt.cache.mmap_key._encode_key_entry
+198:32:Name -> U
+198:47:Name -> U
+200:9:Name -> U
+202:11:Call -> ERR
+202:11:Name -> Func:builtins.isinstance
+202:22:Name -> U
+202:28:Name -> Class:builtins.list
+203:18:Call -> U | Const:str:'' | Inst:builtins.bytes | Const:bytes:b''
+203:18:Attribute -> Func:salt.utils.stringutils.to_bytes
+203:18:Attribute -> Module:salt.utils.stringutils
+203:18:Attribute -> Module:salt.utils
+203:18:Name -> Module:salt
+203:61:Name -> U
+203:50:Name -> U
+205:18:Call -> U | Inst:builtins.bytes
+205:18:Attribute -> Func:salt.utils.stringutils.to_bytes
+205:18:Attribute -> Module:salt.utils.stringutils
+205:18:Attribute -> Module:salt.utils
+205:18:Name -> Module:salt
+205:50:Name -> U
+207:9:Name -> U
+208:14:Call -> U | Inst:builtins.bytes
+208:14:Attribute -> Func:salt.utils.stringutils.to_bytes
+208:14:Attribute -> Module:salt.utils.stringutils
+208:14:Attribute -> Module:salt.utils
+208:14:Name -> Module:salt
+208:46:Name -> U
+211:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+211:14:Name -> Class:salt.exceptions.SaltCacheError
+211:60:Name -> U
+213:11:Call -> U
+213:11:Attribute -> U
+213:11:Name -> U
+213:21:Name -> U
+213:26:Name -> U | Const:str:'' | Inst:builtins.bytes | Const:bytes:b''
+214:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+214:14:Name -> Class:salt.exceptions.SaltCacheError
+214:63:Name -> U
+214:76:Name -> U
+225:4:Call -> Const:NoneType:None
+225:4:Name -> Func:salt.cache.mmap_key._check_id
+225:14:Name -> U
+225:20:Name -> U
+226:12:Call -> U
+226:12:Name -> Func:salt.cache.mmap_key._get_cache
+226:23:Name -> U
+226:29:Name -> U
+227:10:Call -> U
+227:10:Attribute -> U
+227:10:Name -> U
+227:20:Name -> U
+229:7:Name -> U
+229:22:Name -> U
+230:21:Name -> U
+232:7:Call -> ERR
+232:7:Name -> Func:builtins.isinstance
+232:18:Name -> U
+232:23:Name -> Class:builtins.str
+233:14:Call -> U
+233:14:Attribute -> U
+233:14:Name -> U
+235:7:Name -> U
+236:16:Call -> Const:NoneType:None | Const:NoneType:None | Dict:2
+236:16:Name -> Func:salt.cache.mmap_key._decode_key_entry
+236:34:Name -> U
+237:15:Name -> Const:NoneType:None | Const:NoneType:None | Dict:2
+239:9:Name -> U
+240:16:Call -> U
+240:16:Attribute -> U
+240:16:Call -> U
+240:16:Attribute -> U
+240:16:Name -> U
+242:9:Name -> U
+243:15:Call -> U
+243:15:Attribute -> U
+243:15:Call -> U
+243:15:Attribute -> U
+243:15:Name -> U
+253:4:Call -> Const:NoneType:None
+253:4:Name -> Func:salt.cache.mmap_key._check_id
+253:14:Name -> U
+253:20:Name -> U
+254:12:Call -> U
+254:12:Name -> Func:salt.cache.mmap_key._get_cache
+254:23:Name -> U
+254:29:Name -> U
+255:12:Call -> U
+255:12:Attribute -> U
+255:12:Name -> U
+255:28:Name -> U
+256:25:Name -> U
+256:11:Call -> Inst:builtins.int
+256:11:Name -> Class:builtins.int
+256:15:Name -> U
+263:7:Name -> Const:NoneType:None | U
+264:19:Call -> ERR
+264:19:Attribute -> BM:builtins.dict.get
+264:19:Name -> Dict:0
+266:7:Name -> Const:NoneType:None | U
+267:8:Call -> Const:NoneType:None
+267:8:Name -> Func:salt.cache.mmap_key._check_id
+267:18:Name -> U
+267:24:Name -> U
+269:12:Call -> U
+269:12:Name -> Func:salt.cache.mmap_key._get_cache
+269:23:Name -> U
+269:29:Name -> Const:NoneType:None | U
+271:7:Name -> Const:NoneType:None | U
+273:21:Name -> Const:NoneType:None | U
+273:31:Name -> U
+274:12:Call -> ERR
+274:12:Attribute -> BM:builtins.dict.pop
+274:12:Name -> Dict:0
+274:24:Name -> Tuple:2
+275:11:Name -> U
+276:12:Call -> U
+276:12:Attribute -> U
+276:12:Name -> U
+277:21:Call -> ERR
+277:21:Attribute -> BM:builtins.dict.get
+277:21:Name -> Dict:3
+277:42:Name -> U
+278:11:Name -> U
+279:19:Call -> U
+279:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+279:19:Attribute -> Module:posixpath | Module:ntpath
+279:19:Name -> Module:os
+279:32:Name -> Const:NoneType:None | U
+279:42:Name -> U
+282:31:Name -> U
+282:38:Name -> Const:str:'' | Const:str:'.heap' | Const:str:'.lock' | Const:str:'.roster'
+285:25:Name -> U
+285:37:Name -> Const:int:1
+286:23:Call -> Const:bool:False | Const:bool:True | U
+286:23:Attribute -> Func:genericpath.exists | U
+286:23:Attribute -> Module:posixpath | Module:ntpath
+286:23:Name -> Module:os
+286:38:Name -> Const:str:'Uninferable.heap.1'
+288:16:Call -> U
+288:16:Attribute -> U
+288:16:Name -> U
+288:39:Name -> Const:str:'Uninferable.heap.1'
+290:21:Name -> U
+292:23:Call -> Const:bool:False | Const:bool:True | U
+292:23:Attribute -> Func:genericpath.exists | U
+292:23:Attribute -> Module:posixpath | Module:ntpath
+292:23:Name -> Module:os
+292:38:Name -> U
+293:24:Call -> ERR
+293:24:Attribute -> Func:posix.remove
+293:24:Name -> Module:os
+293:34:Name -> U
+294:23:Name -> Class:builtins.OSError
+295:26:Call -> ExcInst:salt.exceptions.SaltCacheError
+295:26:Name -> Class:salt.exceptions.SaltCacheError
+295:69:Name -> U
+295:76:Name -> ExcInst:builtins.OSError
+298:11:Call -> U
+298:11:Attribute -> U
+298:11:Name -> U
+298:24:Name -> Const:NoneType:None | U
+305:12:Call -> U
+305:12:Name -> Func:salt.cache.mmap_key._get_cache
+305:23:Name -> U
+305:29:Name -> U
+306:11:Call -> U
+306:11:Attribute -> U
+306:11:Name -> U
+331:7:Name -> U
+332:14:Call -> ExcInst:salt.exceptions.SaltCacheError
+332:14:Name -> Class:salt.exceptions.SaltCacheError
+332:72:Name -> U
+334:12:Call -> U
+334:12:Name -> Func:salt.cache.mmap_key._get_cache
+334:23:Name -> U
+334:29:Name -> U
+336:18:Call -> U
+336:18:Attribute -> U
+336:18:Name -> U
+337:11:Call -> ERR
+337:11:Name -> Func:builtins.isinstance
+337:22:Name -> U
+337:27:Name -> Class:builtins.str
+338:18:Call -> U
+338:18:Attribute -> U
+338:18:Name -> U
+339:15:Call -> ERR
+339:15:Name -> Func:builtins.isinstance
+339:26:Name -> U
+339:32:Name -> Class:builtins.bytes
+339:39:Name -> Class:builtins.bytearray
+339:58:Name -> U
+341:11:Name -> U
+342:20:Call -> Const:NoneType:None | Const:NoneType:None | Dict:2
+342:20:Name -> Func:salt.cache.mmap_key._decode_key_entry
+342:38:Call -> Inst:builtins.bytes
+342:38:Name -> Class:builtins.bytes
+342:44:Name -> U
+343:15:Name -> Const:NoneType:None | Const:NoneType:None | Dict:2
+344:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+344:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+344:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+344:81:Name -> U
+346:12:Name -> Dict:0
+346:16:Name -> U
+346:30:Name -> Const:bool:False | U
+346:21:Name -> Const:NoneType:None | Const:NoneType:None | Dict:2
+346:58:Name -> Const:NoneType:None | Const:NoneType:None | Dict:2
+348:12:Name -> Dict:0
+348:16:Name -> U
+348:22:Call -> Const:str:''
+348:22:Attribute -> BM:builtins.str.rstrip
+348:22:Call -> Const:str:''
+348:22:Attribute -> BM:builtins.bytes.decode
+348:22:Call -> Inst:builtins.bytes
+348:22:Name -> Class:builtins.bytes
+348:28:Name -> U
+349:11:Name -> Dict:0
+356:7:Name -> U
+357:8:Call -> Const:NoneType:None
+357:8:Name -> Func:salt.cache.mmap_key._check_id
+357:18:Name -> U
+357:24:Name -> U
+358:7:Name -> U
+360:21:Call -> ERR
+360:21:Attribute -> BM:builtins.dict.get
+360:21:Name -> Dict:3
+360:42:Name -> U
+361:15:Name -> U
+363:15:Call -> Const:bool:False | Const:bool:True | U
+363:15:Attribute -> Func:genericpath.exists | U
+363:15:Attribute -> Module:posixpath | Module:ntpath
+363:15:Name -> Module:os
+363:30:Call -> U
+363:30:Attribute -> Func:posixpath.join | Func:ntpath.join
+363:30:Attribute -> Module:posixpath | Module:ntpath
+363:30:Name -> Module:os
+363:43:Name -> U
+363:53:Name -> U
+365:12:Call -> U
+365:12:Name -> Func:salt.cache.mmap_key._get_cache
+365:23:Name -> U
+365:29:Name -> U
+366:11:Call -> U
+366:11:Attribute -> U
+366:11:Name -> U
+366:26:Name -> U
+377:7:Call -> U
+377:7:Attribute -> U
+377:7:Name -> U
+378:18:Name -> U
+380:18:Call -> U
+380:18:Attribute -> U
+380:18:Name -> U
+382:15:Name -> U
+392:27:Call -> DictItems
+392:27:Attribute -> BM:builtins.dict.items
+392:27:Name -> Dict:3
+393:19:Call -> U
+393:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+393:19:Attribute -> Module:posixpath | Module:ntpath
+393:19:Name -> Module:os
+393:32:Name -> U
+393:41:Name -> Const:str:'minions' | Const:str:'minions_pre' | Const:str:'minions_rejected'
+394:15:Call -> Const:bool:False | U
+394:15:Attribute -> Func:genericpath.isdir | U
+394:15:Attribute -> Module:posixpath | Module:ntpath
+394:15:Name -> Module:os
+394:29:Name -> U
+397:17:Call -> ERR
+397:17:Attribute -> Func:posix.scandir
+397:17:Name -> Module:os
+397:28:Name -> U
+398:29:Name -> U
+399:27:Call -> U
+399:27:Attribute -> U
+399:27:Name -> U
+399:46:Call -> U
+399:46:Attribute -> U
+399:46:Name -> U
+401:23:Call -> U
+401:23:Attribute -> U
+401:23:Attribute -> U
+401:23:Name -> U
+404:29:Call -> U
+404:29:Attribute -> Func:salt.utils.files.fopen
+404:29:Attribute -> Module:salt.utils.files
+404:29:Attribute -> Module:salt.utils
+404:29:Name -> Module:salt
+404:52:Attribute -> U
+404:52:Name -> U
+405:34:Call -> U
+405:34:Attribute -> U
+405:34:Name -> U
+406:24:Call -> Const:NoneType:None
+406:24:Name -> Func:salt.cache.mmap_key.store
+407:36:Attribute -> U
+407:36:Name -> U
+407:58:Name -> Const:str:'accepted' | Const:str:'pending' | Const:str:'rejected'
+407:72:Name -> U
+407:78:Name -> U
+409:24:Name -> Dict:4
+409:31:Name -> Const:str:'accepted' | Const:str:'pending' | Const:str:'rejected'
+410:28:Name -> Class:builtins.OSError
+410:37:Name -> Class:salt.exceptions.SaltCacheError
+411:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+411:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+411:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+412:65:Attribute -> U
+412:65:Name -> U
+412:77:Name -> ExcInst:builtins.OSError | ExcInst:salt.exceptions.SaltCacheError
+414:15:Name -> Class:builtins.OSError
+415:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+415:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+415:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+415:62:Name -> U
+415:72:Name -> ExcInst:builtins.OSError
+417:18:Call -> U
+417:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+417:18:Attribute -> Module:posixpath | Module:ntpath
+417:18:Name -> Module:os
+417:31:Name -> U
+418:7:Call -> Const:bool:False | U
+418:7:Attribute -> Func:genericpath.isdir | U
+418:7:Attribute -> Module:posixpath | Module:ntpath
+418:7:Name -> Module:os
+418:21:Name -> U
+420:17:Call -> ERR
+420:17:Attribute -> Func:posix.scandir
+420:17:Name -> Module:os
+420:28:Name -> U
+421:29:Name -> U
+422:27:Call -> U
+422:27:Attribute -> U
+422:27:Name -> U
+422:46:Call -> U
+422:46:Attribute -> U
+422:46:Name -> U
+425:29:Call -> U
+425:29:Attribute -> Func:salt.utils.files.fopen
+425:29:Attribute -> Module:salt.utils.files
+425:29:Attribute -> Module:salt.utils
+425:29:Name -> Module:salt
+425:52:Attribute -> U
+425:52:Name -> U
+426:34:Call -> U
+426:34:Attribute -> U
+426:34:Name -> U
+427:24:Call -> Const:NoneType:None
+427:24:Name -> Func:salt.cache.mmap_key.store
+427:45:Attribute -> U
+427:45:Name -> U
+427:58:Name -> U
+427:64:Name -> U
+428:24:Name -> Dict:4
+429:28:Name -> Class:builtins.OSError
+429:37:Name -> Class:salt.exceptions.SaltCacheError
+430:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+430:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+430:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+431:72:Attribute -> U
+431:72:Name -> U
+431:84:Name -> ExcInst:builtins.OSError | ExcInst:salt.exceptions.SaltCacheError
+433:15:Name -> Class:builtins.OSError
+434:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+434:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+434:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+434:69:Name -> U
+434:82:Name -> ExcInst:builtins.OSError
+436:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+436:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+436:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+436:46:Name -> Dict:4
+437:11:Name -> Dict:4

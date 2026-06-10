@@ -1,0 +1,159 @@
+18:7:Name -> ERR
+19:15:Name -> Const:str:'sysctl'
+56:10:Call -> ERR
+56:10:Name -> ERR
+56:30:Name -> Const:str:'sysctl -a'
+58:16:Call -> U
+58:16:Attribute -> U
+58:16:Name -> U
+69:11:Call -> ERR
+69:11:Name -> Func:builtins.any
+69:16:Call -> U
+69:16:Attribute -> U
+69:16:Name -> U
+69:35:Name -> Const:str:'audit' | Const:str:'debug' | Const:str:'hw' | Const:str:'hw' | Const:str:'kern' | Const:str:'machdep' | Const:str:'net' | Const:str:'net' | Const:str:'security' | Const:str:'user' | Const:str:'vfs' | Const:str:'vm'
+69:56:Name -> Tuple:12
+70:20:Call -> U
+70:20:Attribute -> U
+70:20:Name -> U
+70:47:Name -> U
+71:15:Call -> ERR
+71:15:Name -> Func:builtins.len
+71:19:Name -> U
+72:16:Name -> Dict:0
+72:20:Name -> List:1 | U
+72:32:Name -> List:1 | U
+74:16:Name -> Dict:0
+74:20:Name -> List:1 | U
+75:13:Name -> List:1
+76:12:Name -> Dict:0
+76:16:Name -> List:1
+76:32:Name -> U
+79:11:Name -> Dict:0
+95:23:Name -> U
+96:10:Call -> ERR
+96:10:Name -> ERR
+96:30:Name -> Const:str:'sysctl -n Uninferable'
+97:11:Name -> U
+117:23:Name -> U
+117:31:Name -> U
+118:11:Call -> ERR
+118:11:Name -> ERR
+118:35:Name -> Const:str:'sysctl -w Uninferable="Uninferable"'
+120:7:Name -> U
+121:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+121:14:Name -> Class:salt.exceptions.CommandExecutionError
+121:36:Call -> U
+121:36:Attribute -> BM:builtins.str.format
+121:63:Name -> U
+122:26:Call -> U
+122:26:Attribute -> U
+122:26:Name -> U
+123:4:Name -> Dict:0
+123:8:Name -> U
+123:20:Call -> U
+123:20:Attribute -> U
+123:20:Name -> U
+124:11:Name -> Dict:0
+154:12:Call -> Const:str:''
+154:12:Name -> Class:builtins.str
+154:16:Name -> U
+157:11:Call -> Const:bool:False | U
+157:11:Attribute -> Func:genericpath.isfile | U
+157:11:Attribute -> Module:posixpath | Module:ntpath
+157:11:Name -> Module:os
+157:26:Name -> Const:str:'/etc/sysctl.conf' | U
+159:17:Call -> U
+159:17:Attribute -> Func:salt.utils.files.fopen
+159:17:Attribute -> Module:salt.utils.files
+159:17:Attribute -> Module:salt.utils
+159:17:Name -> Module:salt
+159:40:Name -> Const:str:'/etc/sysctl.conf' | U
+160:16:Call -> U
+160:16:Attribute -> U
+160:16:Name -> U
+161:15:Name -> Class:builtins.OSError
+163:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+163:18:Name -> Class:salt.exceptions.CommandExecutionError
+163:40:Call -> U
+163:40:Attribute -> BM:builtins.str.format
+163:40:Name -> Const:str:'Could not write to file: {0}'
+163:51:Name -> Const:str:'/etc/sysctl.conf' | U
+165:9:Call -> U
+165:9:Attribute -> Func:salt.utils.files.fopen
+165:9:Attribute -> Module:salt.utils.files
+165:9:Attribute -> Module:salt.utils
+165:9:Name -> Module:salt
+165:32:Name -> Const:str:'/etc/sysctl.conf' | U
+166:20:Name -> U
+167:19:Call -> U
+167:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+167:19:Attribute -> Module:salt.utils.stringutils
+167:19:Attribute -> Module:salt.utils
+167:19:Name -> Module:salt
+167:53:Name -> U
+168:19:Call -> U
+168:19:Attribute -> U
+168:19:Name -> U
+168:38:Name -> U
+169:16:Call -> ERR
+169:16:Attribute -> BM:builtins.list.append
+169:16:Name -> List:0
+169:30:Name -> U
+172:28:Call -> U
+172:28:Attribute -> U
+172:28:Name -> U
+173:19:Call -> U
+173:19:Attribute -> U
+173:19:Name -> U
+174:38:Call -> U
+174:38:Attribute -> U
+174:38:Name -> U
+175:21:Call -> U
+175:21:Attribute -> U
+175:21:Name -> U
+176:38:Call -> U
+176:38:Attribute -> U
+176:38:Name -> U
+178:29:Call -> U
+178:29:Attribute -> U
+178:29:Name -> U
+179:27:Name -> U
+179:32:Call -> ERR
+179:32:Name -> Func:builtins.len
+179:36:Name -> U
+180:19:Name -> U
+180:29:Name -> Const:str:''
+182:16:Call -> ERR
+182:16:Attribute -> BM:builtins.list.append
+182:16:Name -> List:0
+182:33:Name -> U
+182:40:Name -> Const:str:''
+184:11:Name -> Const:bool:False | Const:bool:True
+185:8:Call -> ERR
+185:8:Attribute -> BM:builtins.list.append
+185:8:Name -> List:0
+185:25:Name -> U
+185:32:Name -> Const:str:''
+186:14:Call -> U
+186:14:Attribute -> Func:salt.utils.stringutils.to_str
+186:14:Attribute -> Module:salt.utils.stringutils
+186:14:Attribute -> Module:salt.utils
+186:14:Name -> Module:salt
+186:44:Name -> U
+186:58:Name -> List:0
+187:9:Call -> U
+187:9:Attribute -> Func:salt.utils.files.fopen
+187:9:Attribute -> Module:salt.utils.files
+187:9:Attribute -> Module:salt.utils
+187:9:Name -> Module:salt
+187:32:Name -> Const:str:'/etc/sysctl.conf' | U
+188:8:Call -> U
+188:8:Attribute -> U
+188:8:Name -> U
+188:25:Name -> U
+190:7:Name -> Const:bool:False | U
+191:8:Call -> Dict:0
+191:8:Name -> Func:salt.modules.mac_sysctl.assign
+191:15:Name -> U
+191:21:Name -> Const:str:''

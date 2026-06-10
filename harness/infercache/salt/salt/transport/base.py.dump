@@ -1,0 +1,585 @@
+11:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+11:6:Attribute -> Func:logging.getLogger
+11:6:Name -> Module:logging
+11:24:Name -> Const:str:'salt.transport.base' | Const:str:'__main__'
+25:22:Name -> U
+26:16:Name -> U
+27:24:Call -> U
+27:24:Attribute -> U
+27:24:Call -> U
+27:24:Attribute -> U
+27:24:Name -> U
+28:16:Name -> U
+30:7:Name -> Const:str:'zeromq' | U
+33:15:Call -> Inst:salt.transport.zeromq.RequestServer
+33:15:Attribute -> Class:salt.transport.zeromq.RequestServer
+33:15:Attribute -> Module:salt.transport.zeromq
+33:15:Attribute -> Module:salt.transport
+33:15:Name -> Module:salt
+33:51:Name -> U
+34:9:Name -> Const:str:'zeromq' | U
+37:15:Call -> Inst:salt.transport.tcp.RequestServer
+37:15:Attribute -> Class:salt.transport.tcp.RequestServer
+37:15:Attribute -> Module:salt.transport.tcp
+37:15:Attribute -> Module:salt.transport
+37:15:Name -> Module:salt
+37:48:Name -> U
+38:9:Name -> Const:str:'zeromq' | U
+41:15:Call -> Inst:salt.transport.ws.RequestServer
+41:15:Attribute -> Class:salt.transport.ws.RequestServer
+41:15:Attribute -> Module:salt.transport.ws
+41:15:Attribute -> Module:salt.transport
+41:15:Name -> Module:salt
+41:47:Name -> U
+42:9:Name -> Const:str:'zeromq' | U
+45:20:Call -> ERR
+45:20:Attribute -> ERR
+45:20:Attribute -> Module:salt.transport.local
+45:20:Attribute -> Module:salt.transport
+45:20:Name -> Module:salt
+45:60:Name -> U
+47:14:Call -> ExcInst:builtins.Exception
+47:14:Name -> Class:builtins.Exception
+52:22:Name -> U
+53:16:Name -> U
+54:24:Call -> U
+54:24:Attribute -> U
+54:24:Call -> U
+54:24:Attribute -> U
+54:24:Name -> U
+55:16:Name -> U
+57:7:Name -> Const:str:'zeromq' | U
+60:15:Call -> Inst:salt.transport.zeromq.RequestClient
+60:15:Attribute -> Class:salt.transport.zeromq.RequestClient
+60:15:Attribute -> Module:salt.transport.zeromq
+60:15:Attribute -> Module:salt.transport
+60:15:Name -> Module:salt
+60:51:Name -> U
+60:65:Name -> U
+61:9:Name -> Const:str:'zeromq' | U
+64:19:Call -> Inst:salt.transport.tcp.Resolver
+64:19:Attribute -> Class:salt.transport.tcp.Resolver
+64:19:Attribute -> Module:salt.transport.tcp
+64:19:Attribute -> Module:salt.transport
+64:19:Name -> Module:salt
+65:15:Call -> Inst:salt.transport.tcp.RequestClient
+65:15:Attribute -> Class:salt.transport.tcp.RequestClient
+65:15:Attribute -> Module:salt.transport.tcp
+65:15:Attribute -> Module:salt.transport
+65:15:Name -> Module:salt
+66:12:Name -> U
+66:27:Name -> Inst:salt.transport.tcp.Resolver
+66:45:Name -> U
+68:9:Name -> Const:str:'zeromq' | U
+71:15:Call -> Inst:salt.transport.ws.RequestClient
+71:15:Attribute -> Class:salt.transport.ws.RequestClient
+71:15:Attribute -> Module:salt.transport.ws
+71:15:Attribute -> Module:salt.transport
+71:15:Name -> Module:salt
+71:47:Name -> U
+71:61:Name -> U
+73:14:Call -> ExcInst:builtins.Exception
+73:14:Name -> Class:builtins.Exception
+80:22:Name -> Dict:0
+81:16:Call -> ERR
+81:16:Attribute -> BM:builtins.dict.pop
+81:16:Name -> Dict:0
+82:24:Name -> U
+83:16:Name -> U
+84:24:Call -> U
+84:24:Attribute -> U
+84:24:Call -> U
+84:24:Attribute -> U
+84:24:Name -> U
+85:16:Name -> U
+87:25:Name -> Dict:0
+87:54:Name -> Dict:0
+88:8:Name -> Dict:0
+88:29:Name -> U
+89:25:Name -> Dict:0
+89:54:Name -> Dict:0
+90:8:Name -> Dict:0
+90:29:Call -> U
+90:29:Attribute -> U
+90:29:Name -> U
+92:26:Name -> Dict:0
+92:56:Name -> Dict:0
+93:11:Call -> U
+93:11:Attribute -> U
+93:11:Name -> U
+94:12:Name -> Dict:0
+95:12:Name -> Dict:0
+95:34:Call -> U
+95:34:Attribute -> U
+95:34:Name -> U
+97:12:Name -> Dict:0
+97:34:Call -> U
+97:34:Attribute -> Func:posixpath.join | Func:ntpath.join
+97:34:Attribute -> Module:posixpath | Module:ntpath
+97:34:Name -> Module:os
+97:47:Name -> U
+99:20:Name -> Dict:0
+99:31:Call -> U
+99:31:Attribute -> U
+99:31:Name -> U
+100:8:Name -> Dict:0
+100:24:Name -> U
+103:7:Name -> Const:str:'zeromq' | U
+106:19:Attribute -> Class:salt.transport.zeromq.PublishServer
+106:19:Attribute -> Module:salt.transport.zeromq
+106:19:Attribute -> Module:salt.transport
+106:19:Name -> Module:salt
+107:9:Name -> Const:str:'zeromq' | U
+110:19:Attribute -> Class:salt.transport.tcp.PublishServer
+110:19:Attribute -> Module:salt.transport.tcp
+110:19:Attribute -> Module:salt.transport
+110:19:Name -> Module:salt
+111:9:Name -> Const:str:'zeromq' | U
+114:19:Attribute -> Class:salt.transport.ws.PublishServer
+114:19:Attribute -> Module:salt.transport.ws
+114:19:Attribute -> Module:salt.transport
+114:19:Name -> Module:salt
+115:9:Name -> Const:str:'zeromq' | U
+118:19:Attribute -> ERR
+118:19:Attribute -> Module:salt.transport.local
+118:19:Attribute -> Module:salt.transport
+118:19:Name -> Module:salt
+120:14:Call -> ExcInst:builtins.Exception
+120:14:Name -> Class:builtins.Exception
+120:53:Name -> Const:str:'zeromq' | U
+122:11:Call -> Const:bool:False | Const:bool:True | Const:bool:True | U
+122:11:Attribute -> BM:salt.transport.zeromq.PublishServer.support_ssl | BM:salt.transport.tcp.PublishServer.support_ssl | BM:salt.transport.ws.PublishServer.support_ssl | U
+122:11:Name -> Class:salt.transport.zeromq.PublishServer | Class:salt.transport.tcp.PublishServer | Class:salt.transport.ws.PublishServer | U
+123:20:Name -> Dict:0
+124:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+124:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+124:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+124:66:Name -> Const:str:'zeromq' | U
+125:12:Call -> ERR
+125:12:Attribute -> BM:builtins.dict.pop
+125:12:Name -> Dict:0
+126:11:Call -> Inst:salt.transport.zeromq.PublishServer | Inst:salt.transport.tcp.PublishServer | Inst:salt.transport.ws.PublishServer | U
+126:11:Name -> Class:salt.transport.zeromq.PublishServer | Class:salt.transport.tcp.PublishServer | Class:salt.transport.ws.PublishServer | U
+126:20:Name -> U
+126:28:Name -> Dict:0
+135:7:Name -> Const:NoneType:None | U
+136:16:Name -> U
+137:24:Name -> U
+138:16:Name -> U
+139:24:Call -> U
+139:24:Attribute -> U
+139:24:Call -> U
+139:24:Attribute -> U
+139:24:Name -> U
+140:16:Name -> U
+143:16:Name -> Dict:0
+144:19:Name -> Dict:0
+145:9:Call -> U
+145:9:Attribute -> U
+145:9:Name -> U
+146:19:Name -> U
+149:7:Name -> Const:str:'zeromq' | U
+152:11:Name -> Const:NoneType:None | U
+153:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+153:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+153:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+154:15:Call -> Inst:salt.transport.zeromq.PublishClient
+154:15:Attribute -> Class:salt.transport.zeromq.PublishClient
+154:15:Attribute -> Module:salt.transport.zeromq
+154:15:Attribute -> Module:salt.transport
+154:15:Name -> Module:salt
+155:12:Name -> U
+155:18:Name -> U
+155:32:Name -> Const:NoneType:None | U
+155:43:Name -> Const:NoneType:None | U
+155:54:Name -> Const:NoneType:None | U
+157:9:Name -> Const:str:'zeromq' | U
+160:15:Call -> Inst:salt.transport.tcp.PublishClient
+160:15:Attribute -> Class:salt.transport.tcp.PublishClient
+160:15:Attribute -> Module:salt.transport.tcp
+160:15:Attribute -> Module:salt.transport
+160:15:Name -> Module:salt
+161:12:Name -> U
+162:12:Name -> U
+163:17:Name -> Const:NoneType:None | U
+164:17:Name -> Const:NoneType:None | U
+165:17:Name -> Const:NoneType:None | U
+166:16:Name -> Const:NoneType:None | U
+168:9:Name -> Const:str:'zeromq' | U
+171:15:Call -> Inst:salt.transport.ws.PublishClient
+171:15:Attribute -> Class:salt.transport.ws.PublishClient
+171:15:Attribute -> Module:salt.transport.ws
+171:15:Attribute -> Module:salt.transport
+171:15:Name -> Module:salt
+172:12:Name -> U
+173:12:Name -> U
+174:17:Name -> Const:NoneType:None | U
+175:17:Name -> Const:NoneType:None | U
+176:17:Name -> Const:NoneType:None | U
+177:16:Name -> Const:NoneType:None | U
+180:10:Call -> ExcInst:builtins.Exception
+180:10:Name -> Class:builtins.Exception
+180:49:Name -> Const:str:'zeromq' | U
+187:13:Call -> U
+187:13:Name -> Func:builtins.getattr
+187:21:Name -> Module:hashlib
+187:30:Name -> U
+188:11:Call -> U
+188:11:Attribute -> U
+188:11:Call -> U
+188:11:Name -> U
+188:18:Call -> U | Inst:builtins.bytes
+188:18:Attribute -> Func:salt.utils.stringutils.to_bytes
+188:18:Attribute -> Module:salt.utils.stringutils
+188:18:Attribute -> Module:salt.utils
+188:18:Name -> Module:salt
+188:50:Name -> U
+200:20:Call -> U
+200:20:Attribute -> U
+200:20:Name -> U
+206:7:Name -> U
+207:11:Name -> U
+208:12:Call -> ERR
+208:12:Attribute -> BM:builtins.dict.update
+208:12:Name -> Dict:2
+209:21:Call -> Const:str:'::1' | Const:str:'127.0.0.1'
+209:21:Name -> Func:salt.transport.base._ipc_loopback
+209:35:Name -> U
+210:21:Call -> Inst:builtins.int
+210:21:Name -> Class:builtins.int
+210:25:Name -> U
+213:12:Call -> ERR
+213:12:Attribute -> BM:builtins.dict.update
+213:12:Name -> Dict:2
+214:21:Call -> Const:str:'::1' | Const:str:'127.0.0.1'
+214:21:Name -> Func:salt.transport.base._ipc_loopback
+214:35:Name -> U
+215:21:Call -> Inst:builtins.int
+215:21:Name -> Class:builtins.int
+215:25:Name -> U
+218:11:Name -> U
+219:12:Call -> ERR
+219:12:Attribute -> BM:builtins.dict.update
+219:12:Name -> Dict:2
+220:21:Call -> U
+220:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+220:21:Attribute -> Module:posixpath | Module:ntpath
+220:21:Name -> Module:os
+220:34:Name -> U
+223:22:Call -> U
+223:22:Name -> Func:salt.transport.base._minion_hash
+224:26:Name -> U
+225:26:Call -> U
+225:26:Attribute -> U
+225:26:Name -> U
+225:46:Name -> U
+227:12:Call -> ERR
+227:12:Attribute -> BM:builtins.dict.update
+227:12:Name -> Dict:2
+228:21:Call -> U
+228:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+228:21:Attribute -> Module:posixpath | Module:ntpath
+228:21:Name -> Module:os
+228:34:Name -> U
+228:68:Name -> U
+230:11:Call -> Inst:salt.transport.zeromq.PublishClient | Inst:salt.transport.tcp.PublishClient | Inst:salt.transport.ws.PublishClient
+230:11:Name -> Func:salt.transport.base.publish_client
+230:26:Name -> U
+230:32:Name -> U
+230:43:Name -> Dict:2
+244:7:Name -> U
+245:11:Name -> U
+246:12:Call -> ERR
+246:12:Attribute -> BM:builtins.dict.update
+246:12:Name -> Dict:2
+247:25:Call -> Const:str:'::1' | Const:str:'127.0.0.1'
+247:25:Name -> Func:salt.transport.base._ipc_loopback
+247:39:Name -> U
+248:25:Call -> Inst:builtins.int
+248:25:Name -> Class:builtins.int
+248:29:Name -> U
+249:26:Call -> Const:str:'::1' | Const:str:'127.0.0.1'
+249:26:Name -> Func:salt.transport.base._ipc_loopback
+249:40:Name -> U
+250:26:Call -> Inst:builtins.int
+250:26:Name -> Class:builtins.int
+250:30:Name -> U
+253:12:Call -> ERR
+253:12:Attribute -> BM:builtins.dict.update
+253:12:Name -> Dict:2
+254:25:Call -> Const:str:'::1' | Const:str:'127.0.0.1'
+254:25:Name -> Func:salt.transport.base._ipc_loopback
+254:39:Name -> U
+255:25:Call -> Inst:builtins.int
+255:25:Name -> Class:builtins.int
+255:29:Name -> U
+256:26:Call -> Const:str:'::1' | Const:str:'127.0.0.1'
+256:26:Name -> Func:salt.transport.base._ipc_loopback
+256:40:Name -> U
+257:26:Call -> Inst:builtins.int
+257:26:Name -> Class:builtins.int
+257:30:Name -> U
+260:11:Name -> U
+261:12:Call -> ERR
+261:12:Attribute -> BM:builtins.dict.update
+261:12:Name -> Dict:2
+262:25:Call -> U
+262:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+262:25:Attribute -> Module:posixpath | Module:ntpath
+262:25:Name -> Module:os
+262:38:Name -> U
+263:26:Call -> U
+263:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+263:26:Attribute -> Module:posixpath | Module:ntpath
+263:26:Name -> Module:os
+263:39:Name -> U
+267:22:Call -> U
+267:22:Name -> Func:salt.transport.base._minion_hash
+268:26:Name -> U
+269:26:Call -> U
+269:26:Attribute -> U
+269:26:Name -> U
+269:46:Name -> U
+271:23:Call -> U
+271:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+271:23:Attribute -> Module:posixpath | Module:ntpath
+271:23:Name -> Module:os
+271:36:Name -> U
+271:70:Name -> U
+272:12:Call -> ERR
+272:12:Attribute -> BM:builtins.dict.update
+272:12:Name -> Dict:2
+273:25:Name -> U
+274:26:Call -> U
+274:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+274:26:Attribute -> Module:posixpath | Module:ntpath
+274:26:Name -> Module:os
+275:20:Name -> U
+275:54:Name -> U
+278:11:Call -> Inst:salt.transport.zeromq.PublishServer | Inst:salt.transport.tcp.PublishServer | Inst:salt.transport.ws.PublishServer | U
+278:11:Name -> Func:salt.transport.base.publish_server
+278:26:Name -> U
+278:34:Name -> Dict:2
+281:23:Name -> Class:builtins.Warning
+289:8:Name -> Inst:salt.transport.base.Transport
+289:22:Call -> Const:str:''
+289:22:Attribute -> BM:builtins.str.join
+289:32:Call -> List:0
+289:32:Attribute -> Func:traceback.format_stack
+289:32:Name -> Module:traceback
+290:15:Call -> Const:bool:True
+290:15:Name -> Func:builtins.hasattr
+290:23:Name -> Inst:salt.transport.base.Transport
+291:12:Name -> Inst:salt.transport.base.Transport
+292:15:Call -> Const:bool:True
+292:15:Name -> Func:builtins.hasattr
+292:23:Name -> Inst:salt.transport.base.Transport
+293:12:Name -> Inst:salt.transport.base.Transport
+296:8:Name -> Inst:salt.transport.base.Transport
+309:11:Call -> Const:bool:False
+309:11:Name -> Func:builtins.getattr
+309:19:Name -> Inst:salt.transport.base.Transport
+309:52:Call -> Const:bool:False
+309:52:Name -> Func:builtins.getattr
+309:60:Name -> Inst:salt.transport.base.Transport
+310:12:Call -> Const:NoneType:None
+310:12:Attribute -> Func:warnings.warn | Func:_warnings.warn
+310:12:Name -> Module:warnings
+311:39:Name -> Inst:salt.transport.base.Transport
+311:50:Attribute -> Const:str:''
+311:50:Name -> Inst:salt.transport.base.Transport
+312:16:Name -> Class:salt.transport.base.TransportWarning
+313:23:Name -> Inst:salt.transport.base.Transport
+319:20:Name -> Class:salt.transport.base.Transport
+326:8:Call -> Const:NoneType:None
+326:8:Attribute -> BM:salt.transport.base.Transport.__init__ | BM:builtins.object.__init__
+326:8:Call -> Super
+326:8:Name -> Class:builtins.super
+332:14:Name -> Class:builtins.NotImplementedError
+338:14:Name -> Class:builtins.NotImplementedError
+344:14:Name -> Class:builtins.NotImplementedError
+360:14:Name -> Class:builtins.NotImplementedError
+363:30:Name -> Class:salt.transport.base.RequestServer
+365:14:Name -> Class:builtins.NotImplementedError
+373:14:Name -> Class:builtins.NotImplementedError
+382:14:Name -> Class:builtins.NotImplementedError
+385:20:Name -> Class:abc.ABC
+391:5:Name -> Func:abc.abstractmethod
+399:14:Name -> Class:builtins.NotImplementedError
+402:30:Name -> Class:salt.transport.base.PublishServer
+407:5:Name -> Func:abc.abstractmethod
+421:14:Name -> Class:builtins.NotImplementedError
+423:5:Name -> Class:builtins.classmethod
+424:5:Name -> Func:abc.abstractmethod
+427:14:Name -> Class:builtins.NotImplementedError
+429:5:Name -> Func:abc.abstractmethod
+432:14:Name -> Class:builtins.NotImplementedError
+434:5:Name -> Func:abc.abstractmethod
+457:14:Name -> Class:builtins.NotImplementedError
+459:5:Name -> Func:abc.abstractmethod
+461:14:Name -> Class:builtins.NotImplementedError
+463:5:Name -> Func:abc.abstractmethod
+471:14:Name -> Class:builtins.NotImplementedError
+473:5:Name -> Func:abc.abstractmethod
+475:14:Name -> Class:builtins.NotImplementedError
+477:5:Name -> Func:abc.abstractmethod
+479:14:Name -> Class:builtins.NotImplementedError
+481:5:Name -> Func:abc.abstractmethod
+483:14:Name -> Class:builtins.NotImplementedError
+486:20:Name -> Class:salt.transport.base.Transport
+492:8:Call -> Const:NoneType:None
+492:8:Attribute -> BM:salt.transport.base.Transport.__init__ | BM:builtins.object.__init__
+492:8:Call -> Super
+492:8:Name -> Class:builtins.super
+498:14:Name -> Class:builtins.NotImplementedError
+506:14:Name -> Class:builtins.NotImplementedError
+517:14:Name -> Class:builtins.NotImplementedError
+523:14:Name -> Class:builtins.NotImplementedError
+526:15:Name -> Inst:salt.transport.base.PublishClient
+538:7:Name -> Const:bool:False | U
+539:26:Attribute -> Const:int:17
+539:26:Name -> Module:ssl
+540:18:Attribute -> Inst:ssl.Purpose.CLIENT_AUTH
+540:18:Attribute -> Class:ssl.Purpose
+540:18:Name -> Module:ssl
+541:9:Name -> Const:bool:False | U
+542:26:Attribute -> Const:int:16
+542:26:Name -> Module:ssl
+543:18:Attribute -> Inst:ssl.Purpose.SERVER_AUTH
+543:18:Attribute -> Class:ssl.Purpose
+543:18:Name -> Module:ssl
+545:14:Call -> ExcInst:builtins.ValueError
+545:14:Name -> Class:builtins.ValueError
+548:14:Call -> Inst:ssl.SSLContext | U
+548:14:Attribute -> Func:ssl.create_default_context | U
+548:14:Name -> Module:ssl
+548:41:Name -> Inst:ssl.Purpose.CLIENT_AUTH | U
+552:18:Call -> U
+552:18:Attribute -> U
+552:18:Name -> U
+553:7:Name -> U
+553:23:Name -> U
+553:38:Name -> Const:int:17 | Const:int:16
+555:18:Call -> Inst:ssl.SSLContext | U
+555:18:Attribute -> Class:ssl.SSLContext | U
+555:18:Name -> Module:ssl
+555:33:Name -> U
+557:11:Name -> Const:bool:False | U
+558:12:Name -> Inst:ssl.SSLContext | U
+559:12:Name -> Inst:ssl.SSLContext | U
+559:34:Attribute -> Const:int:2
+559:34:Name -> Module:ssl
+560:13:Name -> Const:bool:False | U
+561:12:Name -> Inst:ssl.SSLContext | U
+562:12:Name -> Inst:ssl.SSLContext | U
+562:34:Attribute -> Const:int:2
+562:34:Name -> Module:ssl
+563:21:Name -> U
+564:19:Name -> U
+565:18:Call -> U
+565:18:Attribute -> U
+565:18:Name -> U
+566:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+566:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+566:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+566:69:Name -> U
+566:79:Name -> U
+567:8:Call -> U
+567:8:Attribute -> BM:_ssl._SSLContext.load_cert_chain | U
+567:8:Name -> Inst:ssl.SSLContext | U
+567:32:Name -> U
+567:42:Name -> U
+569:21:Name -> U
+570:8:Call -> U
+570:8:Attribute -> BM:_ssl._SSLContext.load_verify_locations | U
+570:8:Name -> Inst:ssl.SSLContext | U
+570:38:Name -> U
+572:22:Name -> U
+573:20:Name -> U
+575:11:Call -> ERR
+575:11:Name -> Func:builtins.isinstance
+575:22:Name -> U
+575:33:Name -> Class:builtins.str
+576:15:Call -> U
+576:15:Attribute -> U
+576:15:Name -> U
+579:16:Name -> Inst:ssl.SSLContext | U
+580:12:Name -> Inst:ssl.SSLContext | U
+580:34:Call -> U
+580:34:Name -> Func:builtins.getattr
+580:42:Attribute -> Class:ssl.VerifyMode
+580:42:Name -> Module:ssl
+580:58:Name -> U
+583:15:Name -> U
+583:28:Attribute -> Const:int:0
+583:28:Name -> Module:ssl
+584:16:Name -> Inst:ssl.SSLContext | U
+585:12:Name -> Inst:ssl.SSLContext | U
+585:34:Name -> U
+586:9:Name -> Const:bool:False | U
+589:8:Name -> Inst:ssl.SSLContext | U
+589:30:Attribute -> Const:int:2
+589:30:Name -> Module:ssl
+590:29:Name -> U
+591:17:Name -> U
+592:15:Call -> ERR
+592:15:Name -> Func:builtins.isinstance
+592:26:Name -> U
+592:29:Name -> Class:builtins.dict
+593:27:Name -> U
+594:23:Call -> U
+594:23:Attribute -> U
+594:23:Name -> U
+595:24:Call -> U
+595:24:Attribute -> BM:_ssl._SSLContext.load_verify_locations | U
+595:24:Name -> Inst:ssl.SSLContext | U
+595:61:Name -> U
+595:63:Name -> U
+596:25:Call -> U
+596:25:Attribute -> U
+596:25:Name -> U
+597:24:Call -> U
+597:24:Attribute -> BM:_ssl._SSLContext.load_verify_locations | U
+597:24:Name -> Inst:ssl.SSLContext | U
+597:61:Name -> U
+597:63:Name -> U
+598:25:Call -> U
+598:25:Attribute -> U
+598:25:Name -> U
+599:24:Call -> U
+599:24:Attribute -> BM:_ssl._SSLContext.load_verify_locations | U
+599:24:Name -> Inst:ssl.SSLContext | U
+599:61:Name -> U
+599:63:Name -> U
+601:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+601:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+601:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+601:71:Name -> U
+603:25:Name -> U
+604:16:Call -> U
+604:16:Attribute -> BM:_ssl._SSLContext.load_verify_locations | U
+604:16:Name -> Inst:ssl.SSLContext | U
+604:53:Name -> U
+605:25:Name -> U
+606:20:Name -> U
+607:12:Name -> Inst:ssl.SSLContext | U
+607:36:Call -> U
+607:36:Name -> Func:builtins.getattr
+607:44:Attribute -> Class:ssl.VerifyFlags
+607:44:Name -> Module:ssl
+607:61:Call -> U
+607:61:Attribute -> U
+607:61:Name -> U
+608:20:Name -> U
+609:8:Call -> U
+609:8:Attribute -> BM:_ssl._SSLContext.set_ciphers | U
+609:8:Name -> Inst:ssl.SSLContext | U
+609:28:Name -> U
+610:11:Name -> Inst:ssl.SSLContext | U
+615:15:Call -> Inst:builtins.dict
+615:15:Name -> Class:builtins.dict
+615:21:Name -> U
+615:35:Name -> U
+616:12:Name -> Class:builtins.ValueError
+616:24:Name -> Class:builtins.KeyError
+618:11:Name -> U

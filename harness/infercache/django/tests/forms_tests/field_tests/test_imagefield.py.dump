@@ -1,0 +1,196 @@
+13:7:Name -> Class:builtins.ImportError
+18:11:Call -> U
+18:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+18:11:Attribute -> Module:posixpath | Module:ntpath
+18:11:Name -> Module:os
+19:8:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+19:8:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+19:8:Attribute -> Module:posixpath | Module:ntpath
+19:8:Name -> Module:os
+19:24:Call -> U
+19:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+19:24:Attribute -> Module:posixpath | Module:ntpath
+19:24:Name -> Module:os
+19:37:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+19:70:Name -> U
+23:1:Call -> U | Func:unittest.case.skip.decorator.skip_wrapper | Func:unittest.case.skip.decorator | Func:unittest.case._id
+23:1:Attribute -> Func:unittest.case.skipUnless
+23:1:Name -> Module:unittest
+23:21:Name -> U | Const:NoneType:None
+24:21:Name -> Class:tests.forms_tests.field_tests.FormFieldAssertionsMixin
+24:47:Name -> Class:django.test.testcases.SimpleTestCase
+26:12:Call -> Inst:django.forms.fields.ImageField
+26:12:Name -> Class:django.forms.fields.ImageField
+28:19:Call -> U
+28:19:Name -> Func:tests.forms_tests.field_tests.test_imagefield.get_img_path
+29:13:Call -> ERR
+29:13:Name -> Func:_io.open
+29:18:Name -> U
+30:23:Call -> U
+30:23:Attribute -> U
+30:23:Name -> U
+32:19:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+32:19:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+32:49:Name -> U
+33:8:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+35:24:Call -> Const:bool:False | Const:NoneType:None | U
+35:24:Attribute -> BM:django.forms.fields.FileField.clean
+35:24:Name -> Inst:django.forms.fields.ImageField
+35:32:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+37:8:Call -> Const:NoneType:None
+37:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+37:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+37:32:Attribute -> U
+37:32:Attribute -> U
+37:32:Name -> Const:bool:False | Const:NoneType:None | U
+38:8:Call -> Const:NoneType:None
+38:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+38:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+38:38:Attribute -> U
+38:38:Name -> Const:bool:False | Const:NoneType:None | U
+48:12:Call -> U
+48:12:Attribute -> U
+48:12:Name -> U | Const:NoneType:None
+48:32:Attribute -> U
+48:32:Name -> U
+49:16:Call -> Inst:django.forms.fields.ImageField
+49:16:Name -> Class:django.forms.fields.ImageField
+50:23:Call -> U
+50:23:Name -> Func:tests.forms_tests.field_tests.test_imagefield.get_img_path
+51:17:Call -> ERR
+51:17:Name -> Func:_io.open
+51:22:Name -> U
+52:27:Call -> U
+52:27:Attribute -> U
+52:27:Name -> U
+54:23:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+54:23:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+54:53:Name -> U
+55:12:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+57:28:Call -> Const:bool:False | Const:NoneType:None | U
+57:28:Attribute -> BM:django.forms.fields.FileField.clean
+57:28:Name -> Inst:django.forms.fields.ImageField
+57:36:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+59:12:Call -> Const:NoneType:None
+59:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+59:12:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+59:36:Attribute -> U
+59:36:Attribute -> U
+59:36:Name -> Const:bool:False | Const:NoneType:None | U
+60:12:Call -> Const:NoneType:None
+60:12:Attribute -> BM:unittest.case.TestCase.assertIsNone
+60:12:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+60:30:Attribute -> U
+60:30:Name -> Const:bool:False | Const:NoneType:None | U
+62:12:Call -> U
+62:12:Attribute -> U
+62:12:Name -> U | Const:NoneType:None
+62:32:Attribute -> U
+62:32:Name -> U
+65:12:Call -> Inst:django.forms.fields.ImageField
+65:12:Name -> Class:django.forms.fields.ImageField
+66:19:Call -> U
+66:19:Name -> Func:tests.forms_tests.field_tests.test_imagefield.get_img_path
+67:13:Call -> ERR
+67:13:Name -> Func:_io.open
+67:18:Name -> U
+68:23:Call -> U
+68:23:Attribute -> U
+68:23:Name -> U
+69:19:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+69:19:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+69:49:Name -> U
+70:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+70:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+70:13:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+71:12:Name -> Class:django.core.exceptions.ValidationError
+73:12:Call -> Const:bool:False | Const:NoneType:None | U
+73:12:Attribute -> BM:django.forms.fields.FileField.clean
+73:12:Name -> Inst:django.forms.fields.ImageField
+73:20:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+76:12:Call -> Inst:django.forms.fields.ImageField
+76:12:Name -> Class:django.forms.fields.ImageField
+77:19:Call -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+77:19:Name -> Class:django.core.files.uploadedfile.SimpleUploadedFile
+82:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+82:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+82:13:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+82:38:Name -> Class:django.core.exceptions.ValidationError
+82:55:Name -> Const:str:'Upload a valid image. The file you uplo
+83:12:Call -> Const:bool:False | Const:NoneType:None | U
+83:12:Attribute -> BM:django.forms.fields.FileField.clean
+83:12:Name -> Inst:django.forms.fields.ImageField
+83:20:Name -> Inst:django.core.files.uploadedfile.SimpleUploadedFile
+84:13:Call -> Inst:django.core.files.uploadedfile.TemporaryUploadedFile
+84:13:Name -> Class:django.core.files.uploadedfile.TemporaryUploadedFile
+87:17:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+87:17:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+87:17:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+87:42:Name -> Class:django.core.exceptions.ValidationError
+87:59:Name -> Const:str:'Upload a valid image. The file you uplo
+88:16:Call -> Const:bool:False | Const:NoneType:None | U
+88:16:Attribute -> BM:django.forms.fields.FileField.clean
+88:16:Name -> Inst:django.forms.fields.ImageField
+88:24:Name -> Inst:django.core.files.uploadedfile.TemporaryUploadedFile
+91:12:Call -> Inst:django.forms.fields.ImageField
+91:12:Name -> Class:django.forms.fields.ImageField
+93:8:Call -> Const:NoneType:None
+93:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+93:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+93:25:Call -> Dict:0
+93:25:Attribute -> BM:django.forms.fields.ImageField.widget_attrs
+93:25:Name -> Inst:django.forms.fields.ImageField
+93:40:Call -> Inst:django.forms.widgets.Widget
+93:40:Name -> Class:django.forms.widgets.Widget
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+94:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+94:25:Call -> Dict:0
+94:25:Attribute -> BM:django.forms.fields.ImageField.widget_attrs
+94:25:Name -> Inst:django.forms.fields.ImageField
+94:40:Call -> Inst:django.forms.widgets.FileInput
+94:40:Name -> Class:django.forms.widgets.FileInput
+95:8:Call -> Const:NoneType:None
+95:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+95:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+95:25:Call -> Dict:0
+95:25:Attribute -> BM:django.forms.fields.ImageField.widget_attrs
+95:25:Name -> Inst:django.forms.fields.ImageField
+95:40:Call -> Inst:django.forms.widgets.ClearableFileInput
+95:40:Name -> Class:django.forms.widgets.ClearableFileInput
+96:8:Call -> Const:NoneType:None
+96:8:Attribute -> BM:tests.forms_tests.field_tests.FormFieldAssertionsMixin.assertWidgetRendersTo
+96:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+97:12:Name -> Inst:django.forms.fields.ImageField
+101:12:Call -> Inst:django.forms.fields.ImageField
+101:12:Name -> Class:django.forms.fields.ImageField
+101:30:Call -> Inst:django.forms.widgets.FileInput
+101:30:Name -> Class:django.forms.widgets.FileInput
+102:8:Call -> Const:NoneType:None
+102:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+102:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+102:25:Call -> Dict:0
+102:25:Attribute -> BM:django.forms.fields.ImageField.widget_attrs
+102:25:Name -> Inst:django.forms.fields.ImageField
+102:40:Attribute -> U
+102:40:Name -> Inst:django.forms.fields.ImageField
+103:8:Call -> Const:NoneType:None
+103:8:Attribute -> BM:tests.forms_tests.field_tests.FormFieldAssertionsMixin.assertWidgetRendersTo
+103:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+104:12:Name -> Inst:django.forms.fields.ImageField
+108:12:Call -> Inst:django.forms.fields.ImageField
+108:12:Name -> Class:django.forms.fields.ImageField
+108:30:Call -> Inst:django.forms.widgets.FileInput
+108:30:Name -> Class:django.forms.widgets.FileInput
+109:8:Call -> Const:NoneType:None
+109:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+109:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+109:25:Call -> Dict:0
+109:25:Attribute -> BM:django.forms.fields.ImageField.widget_attrs
+109:25:Name -> Inst:django.forms.fields.ImageField
+109:40:Attribute -> U
+109:40:Name -> Inst:django.forms.fields.ImageField
+110:8:Call -> Const:NoneType:None
+110:8:Attribute -> BM:tests.forms_tests.field_tests.FormFieldAssertionsMixin.assertWidgetRendersTo
+110:8:Name -> Inst:tests.forms_tests.field_tests.test_imagefield.ImageFieldTest
+111:12:Name -> Inst:django.forms.fields.ImageField

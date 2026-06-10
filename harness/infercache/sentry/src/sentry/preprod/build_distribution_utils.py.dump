@@ -1,0 +1,400 @@
+18:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:9:Attribute -> Func:logging.getLogger
+18:9:Name -> Module:logging
+18:27:Name -> Const:str:'src.sentry.preprod.build_distribution_u | Const:str:'__main__'
+21:1:Call -> Func:dataclasses.dataclass.wrap | U
+21:1:Name -> Func:dataclasses.dataclass
+30:20:Name -> Class:builtins.bool
+31:17:Name -> Class:builtins.str
+32:28:Name -> Class:_pydatetime.datetime
+33:20:Name -> Class:builtins.int
+34:19:Name -> Class:builtins.str
+35:20:Name -> Class:builtins.list
+35:25:Name -> Class:builtins.str
+36:29:Name -> Class:builtins.bool
+37:18:Name -> Class:builtins.str
+38:22:Name -> Class:builtins.str
+41:40:Name -> U
+41:60:Name -> Class:src.sentry.preprod.build_distribution_utils.ArtifactInstallInfo
+47:13:Attribute -> U
+47:13:Name -> U
+48:18:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+48:18:Name -> Func:src.sentry.preprod.build_distribution_utils.is_installable_artifact
+48:42:Name -> U
+49:17:Name -> Class:builtins.str
+50:28:Name -> Class:_pydatetime.datetime
+52:7:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+53:46:Call -> Tuple:2
+53:46:Name -> Func:src.sentry.preprod.build_distribution_utils.get_download_url_for_artifact
+53:76:Name -> U
+55:66:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+55:21:Call -> Inst:builtins.int
+55:21:Name -> Func:src.sentry.preprod.build_distribution_utils.get_download_count_for_artifact
+55:53:Name -> U
+56:20:Call -> U
+56:20:Attribute -> U
+56:20:Name -> U
+57:21:Call -> U
+57:21:Attribute -> U
+57:21:Name -> U
+59:29:Name -> Class:builtins.bool
+60:18:Name -> Class:builtins.str
+61:22:Name -> Class:builtins.str
+63:7:Attribute -> U
+63:7:Name -> U
+63:33:Attribute -> U
+63:33:Attribute -> U
+63:33:Name -> U
+64:34:Call -> U
+64:34:Attribute -> U
+64:34:Name -> U
+65:23:Call -> U
+65:23:Attribute -> U
+65:23:Name -> U
+66:27:Call -> U
+66:27:Attribute -> U
+66:27:Name -> U
+68:11:Call -> Inst:src.sentry.preprod.build_distribution_utils.ArtifactInstallInfo
+68:11:Name -> Class:src.sentry.preprod.build_distribution_utils.ArtifactInstallInfo
+69:23:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+70:20:Name -> Const:NoneType:None | U
+71:31:Name -> Const:NoneType:None | U
+72:23:Name -> Inst:builtins.int | Const:int:0
+73:22:Name -> U
+74:23:Name -> U
+75:32:Name -> Const:NoneType:None | U
+76:21:Name -> Const:NoneType:None | U
+77:25:Name -> Const:NoneType:None | U
+81:38:Name -> U
+81:58:Name -> Class:builtins.bool
+82:22:Call -> U
+82:22:Attribute -> U
+82:22:Name -> U
+83:51:Name -> U
+83:19:Attribute -> U
+83:19:Name -> U
+84:7:Attribute -> U
+84:7:Name -> U
+84:51:Name -> U | Const:NoneType:None
+86:7:Attribute -> U
+86:7:Name -> U
+86:33:Attribute -> U
+86:33:Attribute -> U
+86:33:Name -> U
+87:17:Attribute -> U
+87:17:Name -> U
+88:11:Call -> U
+88:11:Attribute -> U
+88:11:Name -> U
+90:11:Call -> U
+90:11:Attribute -> U
+90:11:Name -> U
+95:46:Name -> U
+95:66:Name -> Class:builtins.int
+96:21:Call -> U
+96:21:Name -> Func:builtins.getattr
+96:29:Name -> U
+97:7:Name -> U
+99:12:Call -> U
+99:12:Attribute -> U
+99:12:Call -> U
+99:12:Attribute -> U
+99:12:Attribute -> U
+99:12:Name -> U
+99:71:Name -> U
+100:32:Call -> U
+100:32:Name -> U
+104:11:Call -> Inst:builtins.int
+104:11:Name -> Class:builtins.int
+104:15:Name -> U
+107:44:Name -> U
+107:64:Name -> Class:builtins.tuple
+107:70:Name -> Class:builtins.str
+107:75:Name -> Class:_pydatetime.datetime
+117:18:Call -> U
+117:18:Name -> Func:src.sentry.preprod.build_distribution_utils.create_installable_preprod_artifact
+117:54:Name -> U
+122:10:Attribute -> U
+122:10:Name -> U
+123:13:Attribute -> U
+123:13:Attribute -> U
+123:13:Name -> U
+125:13:Attribute -> U
+125:13:Attribute -> U
+125:13:Name -> U
+127:13:Attribute -> U
+127:13:Attribute -> U
+127:13:Name -> U
+132:19:Call -> U
+132:19:Name -> U
+133:27:Attribute -> U
+133:27:Attribute -> U
+133:27:Attribute -> U
+133:27:Name -> U
+133:64:Attribute -> U
+133:64:Attribute -> U
+133:64:Name -> U
+133:121:Attribute -> U
+133:121:Name -> U
+133:144:Name -> Const:str:'' | Const:str:'?response_format=plist' | Const:str:'?response_format=apk' | Const:str:'?response_format=apk' | Const:str:''
+137:11:Attribute -> U
+137:11:Name -> U
+138:11:Name -> U
+138:25:Attribute -> U
+138:25:Name -> U
+142:22:Name -> U
+142:57:Name -> Class:builtins.int
+143:5:Name -> U
+155:15:Call -> U
+155:15:Attribute -> Func:secrets.token_urlsafe
+155:15:Name -> Module:secrets
+158:22:Call -> U
+158:22:Attribute -> U
+158:22:Name -> U
+158:39:Call -> Inst:_pydatetime.timedelta
+158:39:Name -> Class:_pydatetime.timedelta
+158:55:Name -> Const:int:12 | U
+161:27:Call -> U
+161:27:Attribute -> U
+161:27:Attribute -> U
+161:27:Name -> U
+162:25:Name -> U
+163:17:Name -> U
+164:24:Name -> U
+168:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+168:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+168:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+171:39:Attribute -> U
+171:39:Name -> U
+172:35:Attribute -> U
+172:35:Name -> U
+173:26:Attribute -> U
+173:26:Attribute -> U
+173:26:Name -> U
+174:31:Attribute -> U
+174:31:Attribute -> U
+174:31:Attribute -> U
+174:31:Name -> U
+175:31:Call -> U
+175:31:Attribute -> U
+175:31:Name -> U
+179:11:Name -> U
+182:48:Name -> Class:builtins.str
+182:56:Name -> Class:builtins.dict
+182:61:Name -> Class:builtins.str
+182:66:Name -> Class:typing.Any
+184:7:Name -> U
+185:33:Attribute -> U
+185:33:Attribute -> U
+185:33:Name -> U
+186:9:Name -> U
+189:16:Attribute -> U
+189:16:Attribute -> U
+189:16:Name -> U
+190:16:Attribute -> U
+190:16:Attribute -> U
+190:16:Name -> U
+196:35:Name -> Class:_collections_abc.Sequence
+196:44:Name -> Class:builtins.str
+196:53:Name -> U
+198:11:Name -> U
+200:8:Call -> U
+200:8:Name -> U
+201:17:Name -> U
+202:13:Call -> U
+202:13:Name -> U
+202:49:Name -> U
+203:11:Name -> U
+207:13:Name -> U
+208:12:Name -> Class:builtins.str
+209:14:Name -> Class:builtins.str
+210:19:Name -> Class:builtins.str
+211:18:Name -> Class:builtins.int
+212:28:Name -> Class:builtins.str
+213:25:Name -> Class:builtins.str
+214:22:Name -> Class:builtins.str
+215:5:Name -> U
+217:19:Name -> Class:builtins.dict
+217:24:Name -> Class:builtins.str
+217:29:Name -> Class:typing.Any
+218:19:Name -> U
+219:18:Name -> U
+220:17:Attribute -> U
+220:17:Attribute -> U
+220:17:Name -> U
+221:42:Name -> U
+223:4:Call -> ERR
+223:4:Attribute -> BM:builtins.dict.update
+223:4:Name -> Dict:4
+223:25:Call -> Dict:1 | Dict:1 | Dict:0
+223:25:Name -> Func:src.sentry.preprod.build_distribution_utils.get_platform_artifact_type_filter
+223:59:Name -> U
+225:7:Name -> Const:NoneType:None | U
+226:8:Name -> Dict:4
+226:50:Name -> U
+228:7:Name -> Const:NoneType:None | U
+229:8:Name -> Dict:4
+229:57:Name -> U
+231:7:Name -> Const:NoneType:None | U
+232:8:Name -> Dict:4
+232:53:Name -> U
+234:7:Name -> Const:NoneType:None | U
+235:8:Name -> Dict:4
+235:52:Name -> U
+239:12:Call -> U
+239:12:Attribute -> U
+239:12:Call -> U
+239:12:Attribute -> U
+239:12:Call -> U
+239:12:Attribute -> U
+239:12:Attribute -> U
+239:12:Name -> U
+245:22:Name -> Dict:4
+248:11:Attribute -> U
+248:11:Name -> U
+253:13:Name -> U
+254:12:Name -> Class:builtins.str
+255:14:Name -> Class:builtins.str
+256:30:Name -> Class:builtins.str
+257:22:Name -> Class:builtins.str
+258:20:Name -> Class:_collections_abc.Sequence
+258:29:Name -> Class:builtins.str
+259:5:Name -> U
+261:19:Name -> Class:builtins.dict
+261:24:Name -> Class:builtins.str
+261:29:Name -> Class:typing.Any
+262:19:Name -> U
+263:18:Name -> U
+264:17:Attribute -> U
+264:17:Attribute -> U
+264:17:Name -> U
+268:4:Call -> ERR
+268:4:Attribute -> BM:builtins.dict.update
+268:4:Name -> Dict:5
+268:25:Call -> Dict:1 | Dict:1 | Dict:0
+268:25:Name -> Func:src.sentry.preprod.build_distribution_utils.get_platform_artifact_type_filter
+268:59:Name -> U
+270:7:Name -> U
+271:8:Name -> Dict:5
+273:7:Name -> Const:NoneType:None | U
+274:8:Name -> Dict:5
+274:53:Name -> U
+276:7:Name -> Const:NoneType:None | U
+277:8:Name -> Dict:5
+277:52:Name -> U
+279:65:Name -> Const:NoneType:None | U
+279:23:Call -> Const:NoneType:None | U
+279:23:Name -> Func:src.sentry.preprod.build_distribution_utils.build_install_groups_q
+279:46:Name -> U
+282:24:Call -> U
+282:24:Attribute -> U
+282:24:Attribute -> U
+282:24:Name -> U
+282:57:Name -> Dict:5
+283:7:Name -> Const:NoneType:None | U | Const:NoneType:None
+284:28:Call -> U
+284:28:Attribute -> U
+284:28:Name -> U
+284:53:Name -> U
+286:19:Call -> U
+286:19:Attribute -> U
+286:19:Call -> U
+286:19:Attribute -> U
+286:19:Name -> U
+291:21:Name -> Class:builtins.str
+292:19:Name -> U
+293:11:Name -> U
+295:33:Call -> U
+295:33:Name -> U
+295:47:Name -> U
+296:19:Name -> Const:NoneType:None
+296:46:Name -> U
+296:63:Call -> U
+296:63:Name -> U
+296:77:Name -> Const:NoneType:None
+297:38:Name -> U
+298:19:Name -> Class:builtins.Exception
+301:11:Name -> Const:NoneType:None | U
+305:4:Name -> Dict:5
+305:54:Name -> Const:NoneType:None | U
+307:8:Call -> U
+307:8:Attribute -> U
+307:8:Call -> U
+307:8:Attribute -> U
+307:8:Call -> U
+307:8:Attribute -> U
+307:8:Attribute -> U
+307:8:Name -> U
+313:18:Name -> Dict:5
+316:7:Name -> Const:NoneType:None | U | Const:NoneType:None
+317:33:Call -> U
+317:33:Attribute -> U
+317:33:Name -> U
+317:63:Name -> U
+319:11:Call -> U
+319:11:Attribute -> U
+319:11:Name -> U
+323:13:Name -> U
+324:12:Name -> Class:builtins.str
+325:14:Name -> Class:builtins.str
+326:19:Name -> Class:builtins.str
+327:18:Name -> Class:builtins.int
+328:28:Name -> Class:builtins.str
+329:25:Name -> Class:builtins.str
+330:22:Name -> Class:builtins.str
+331:20:Name -> Class:_collections_abc.Sequence
+331:29:Name -> Class:builtins.str
+332:5:Name -> Class:builtins.tuple
+332:11:Name -> U
+332:35:Name -> U
+343:36:Name -> Const:NoneType:None | U
+344:33:Name -> Const:NoneType:None | U
+345:31:Name -> Const:NoneType:None | U
+347:7:Name -> Const:NoneType:None | U
+348:27:Call -> U | Const:NoneType:None
+348:27:Name -> Func:src.sentry.preprod.build_distribution_utils.find_current_artifact
+349:20:Name -> U
+350:19:Name -> U
+351:21:Name -> U
+352:26:Name -> U
+353:25:Name -> Const:NoneType:None | U
+354:35:Name -> Const:NoneType:None | U
+355:32:Name -> Const:NoneType:None | U
+356:29:Name -> Const:NoneType:None | U
+359:11:Name -> U | Const:NoneType:None
+360:19:Name -> Const:NoneType:None | U
+360:53:Attribute -> U
+360:53:Name -> U
+361:48:Attribute -> U
+361:48:Attribute -> U
+361:48:Name -> U
+363:19:Name -> Const:NoneType:None | U
+363:50:Attribute -> U
+363:50:Name -> U
+364:45:Call -> U
+364:45:Attribute -> U
+364:45:Attribute -> U
+364:45:Name -> U
+366:19:Name -> Const:NoneType:None | U
+366:48:Attribute -> U
+366:48:Name -> U
+367:33:Call -> U
+367:33:Attribute -> U
+367:33:Attribute -> U
+367:33:Name -> U
+368:19:Name -> U
+368:38:Call -> ERR
+368:38:Name -> Func:builtins.isinstance
+368:49:Name -> U
+368:65:Name -> Class:builtins.list
+369:47:Name -> U
+371:22:Call -> Const:NoneType:None | U
+371:22:Name -> Func:src.sentry.preprod.build_distribution_utils.find_latest_installable_artifact
+372:16:Name -> U
+373:15:Name -> U
+374:17:Name -> U
+375:33:Name -> Const:NoneType:None | U
+376:25:Name -> Const:NoneType:None | U
+377:23:Name -> Const:NoneType:None | U
+380:11:Name -> Const:NoneType:None | U | Const:NoneType:None
+380:29:Name -> Const:NoneType:None | U

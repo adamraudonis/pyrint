@@ -1,0 +1,37 @@
+15:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:6:Attribute -> Func:logging.getLogger
+15:6:Name -> Module:logging
+15:24:Name -> Const:str:'salt.transport.client' | Const:str:'__main__'
+24:5:Name -> Class:builtins.staticmethod
+28:8:Call -> Const:NoneType:None
+28:8:Name -> Func:salt.utils.versions.warn_until
+32:15:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+32:15:Attribute -> Func:salt.channel.client.ReqChannel.factory
+32:15:Attribute -> Class:salt.channel.client.ReqChannel
+32:15:Attribute -> Module:salt.channel.client
+32:15:Attribute -> Module:salt.channel
+32:15:Name -> Module:salt
+32:54:Name -> U
+32:62:Name -> Dict:0
+42:5:Name -> Class:builtins.classmethod
+46:8:Call -> Const:NoneType:None
+46:8:Name -> Func:salt.utils.versions.warn_until
+50:15:Call -> Inst:salt.channel.client.AsyncReqChannel
+50:15:Attribute -> BM:salt.channel.client.AsyncReqChannel.factory
+50:15:Attribute -> Class:salt.channel.client.AsyncReqChannel
+50:15:Attribute -> Module:salt.channel.client
+50:15:Attribute -> Module:salt.channel
+50:15:Name -> Module:salt
+50:59:Name -> U
+50:67:Name -> Dict:0
+58:5:Name -> Class:builtins.classmethod
+62:8:Call -> Const:NoneType:None
+62:8:Name -> Func:salt.utils.versions.warn_until
+66:15:Call -> Inst:salt.channel.client.AsyncPubChannel
+66:15:Attribute -> BM:salt.channel.client.AsyncPubChannel.factory
+66:15:Attribute -> Class:salt.channel.client.AsyncPubChannel
+66:15:Attribute -> Module:salt.channel.client
+66:15:Attribute -> Module:salt.channel
+66:15:Name -> Module:salt
+66:59:Name -> U
+66:67:Name -> Dict:0

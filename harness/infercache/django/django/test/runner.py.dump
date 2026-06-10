@@ -1,0 +1,1699 @@
+35:7:Name -> Class:builtins.ImportError
+40:7:Name -> Class:builtins.ImportError
+44:21:Attribute -> Class:logging.Formatter
+44:21:Name -> Module:logging
+46:21:Call -> U
+46:21:Name -> Func:builtins.getattr
+46:29:Name -> U
+46:56:Name -> Inst:django.db.utils.ConnectionHandler
+47:25:Attribute -> U
+47:25:Attribute -> U
+47:25:Name -> Inst:django.db.utils.ConnectionHandler
+47:37:Name -> U
+51:23:Attribute -> U
+51:23:Name -> U
+52:19:Call -> ERR
+52:19:Name -> Func:builtins.isinstance
+52:30:Name -> U
+52:36:Name -> Class:builtins.tuple
+52:47:Call -> ERR
+52:47:Name -> Func:builtins.len
+52:51:Name -> U
+52:73:Name -> U
+53:20:Name -> U
+53:35:Name -> U
+53:61:Call -> U
+53:61:Name -> U
+53:72:Name -> Const:NoneType:None | U
+53:79:Name -> U
+54:21:Call -> ERR
+54:21:Name -> Func:builtins.isinstance
+54:32:Attribute -> U
+54:32:Name -> U
+54:45:Name -> Class:builtins.dict
+54:63:Call -> U
+54:63:Attribute -> U
+54:63:Attribute -> U
+54:63:Name -> U
+55:20:Attribute -> U
+55:20:Name -> U
+55:57:Call -> U
+55:57:Name -> U
+55:68:Name -> Const:NoneType:None | U
+57:28:Call -> U
+57:28:Name -> Func:builtins.getattr
+57:36:Name -> U
+58:19:Name -> U
+58:32:Name -> Const:NoneType:None | U
+59:20:Name -> U
+59:33:Name -> Const:NoneType:None | U
+61:20:Name -> U
+61:33:Call -> U
+61:33:Name -> U
+61:44:Name -> U
+63:15:Call -> U
+63:15:Attribute -> BM:logging.Formatter.format
+63:15:Call -> Super
+63:15:Name -> Class:builtins.super
+63:30:Name -> U
+66:29:Attribute -> Class:unittest.runner.TextTestResult
+66:29:Name -> Module:unittest
+68:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+68:22:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+68:22:Attribute -> Func:logging.getLogger
+68:22:Name -> Module:logging
+69:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+69:8:Attribute -> BM:logging.Logger.setLevel | U | BM:logging.Logger.setLevel
+69:8:Attribute -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+69:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+69:29:Attribute -> Const:int:10
+69:29:Name -> Module:logging
+70:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+71:8:Call -> Const:NoneType:None | Const:NoneType:None
+71:8:Attribute -> BM:unittest.runner.TextTestResult.__init__ | BM:unittest.result.TestResult.__init__ | BM:builtins.object.__init__
+71:8:Call -> Super
+71:8:Name -> Class:builtins.super
+71:25:Name -> U
+71:33:Name -> U
+71:47:Name -> U
+74:11:Attribute -> Const:NoneType:None | Inst:logging.StreamHandler
+74:11:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+78:12:Call -> U
+78:12:Attribute -> U | BM:_io.TextIOWrapper.seek | BM:_io.StringIO.seek
+78:12:Attribute -> Const:NoneType:None | U | Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO
+78:12:Attribute -> Inst:logging.StreamHandler
+78:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+79:18:Call -> U
+79:18:Attribute -> U | BM:_io.TextIOWrapper.read | BM:_io.StringIO.read
+79:18:Attribute -> Const:NoneType:None | U | Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO
+79:18:Attribute -> Inst:logging.StreamHandler
+79:18:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+80:15:Name -> Const:str:'' | U
+83:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+83:23:Call -> Inst:logging.StreamHandler
+83:23:Attribute -> Class:logging.StreamHandler
+83:23:Name -> Module:logging
+83:45:Call -> Inst:_io.StringIO
+83:45:Attribute -> Class:_io.StringIO
+83:45:Name -> Module:io
+84:8:Call -> Const:NoneType:None
+84:8:Attribute -> BM:logging.Handler.setFormatter
+84:8:Attribute -> Const:NoneType:None | Inst:logging.StreamHandler
+84:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+84:34:Call -> Inst:django.test.runner.QueryFormatter
+84:34:Name -> Class:django.test.runner.QueryFormatter
+85:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+85:8:Attribute -> BM:logging.Logger.addHandler | U | BM:logging.Logger.addHandler
+85:8:Attribute -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+85:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+85:31:Attribute -> Const:NoneType:None | Inst:logging.StreamHandler
+85:31:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+86:8:Call -> Const:NoneType:None | Const:NoneType:None
+86:8:Attribute -> BM:unittest.runner.TextTestResult.startTest | BM:unittest.result.TestResult.startTest
+86:8:Call -> Super
+86:8:Name -> Class:builtins.super
+86:26:Name -> U
+89:8:Call -> Const:NoneType:None
+89:8:Attribute -> BM:unittest.result.TestResult.stopTest
+89:8:Call -> Super
+89:8:Name -> Class:builtins.super
+89:25:Name -> U
+90:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+90:8:Attribute -> BM:logging.Logger.removeHandler | U | BM:logging.Logger.removeHandler
+90:8:Attribute -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+90:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+90:34:Attribute -> Const:NoneType:None | Inst:logging.StreamHandler
+90:34:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+91:11:Attribute -> U
+91:11:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+92:12:Call -> U
+92:12:Attribute -> U
+92:12:Attribute -> U
+92:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+92:30:Call -> Const:str:'' | U
+92:30:Attribute -> BM:django.test.runner.DebugSQLTextTestResult._read_logger_stream
+92:30:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+93:12:Call -> U
+93:12:Attribute -> U
+93:12:Attribute -> U
+93:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+93:32:Attribute -> Const:str:'---------------------------------------
+93:32:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+96:8:Call -> Const:NoneType:None | Const:NoneType:None
+96:8:Attribute -> BM:unittest.runner.TextTestResult.addError | BM:unittest.result.TestResult.addError
+96:8:Call -> Super
+96:8:Name -> Class:builtins.super
+96:25:Name -> U
+96:31:Name -> U
+97:8:Attribute -> List:0
+97:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+97:26:Attribute -> List:0
+97:26:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+97:45:Call -> Const:str:'' | U
+97:45:Attribute -> BM:django.test.runner.DebugSQLTextTestResult._read_logger_stream
+97:45:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+100:8:Call -> Const:NoneType:None | Const:NoneType:None
+100:8:Attribute -> BM:unittest.runner.TextTestResult.addFailure | BM:unittest.result.TestResult.addFailure
+100:8:Call -> Super
+100:8:Name -> Class:builtins.super
+100:27:Name -> U
+100:33:Name -> U
+101:8:Attribute -> List:0
+101:8:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+101:28:Attribute -> List:0
+101:28:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+101:49:Call -> Const:str:'' | U
+101:49:Attribute -> BM:django.test.runner.DebugSQLTextTestResult._read_logger_stream
+101:49:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+104:8:Call -> Const:NoneType:None | Const:NoneType:None
+104:8:Attribute -> BM:unittest.runner.TextTestResult.addSubTest | BM:unittest.result.TestResult.addSubTest
+104:8:Call -> Super
+104:8:Name -> Class:builtins.super
+104:27:Name -> U
+104:33:Name -> U
+104:42:Name -> U
+105:11:Name -> U
+108:19:Call -> ERR
+108:19:Name -> Func:builtins.issubclass
+108:30:Name -> U
+108:38:Attribute -> U
+108:38:Name -> U
+107:16:Attribute -> List:0
+107:16:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+109:21:Attribute -> List:0
+109:21:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+111:12:Name -> List:0 | List:0
+111:25:Name -> List:0 | List:0
+111:39:Call -> Const:str:'' | U
+111:39:Attribute -> BM:django.test.runner.DebugSQLTextTestResult._read_logger_stream
+111:39:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+114:36:Name -> U
+115:12:Call -> U
+115:12:Attribute -> U
+115:12:Attribute -> U
+115:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+115:32:Attribute -> Const:str:'=======================================
+115:32:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+116:12:Call -> U
+116:12:Attribute -> U
+116:12:Attribute -> U
+116:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+116:44:Name -> U
+116:53:Call -> Const:str:'' | Const:str:''
+116:53:Attribute -> BM:unittest.runner.TextTestResult.getDescription
+116:53:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+116:73:Name -> U
+117:12:Call -> U
+117:12:Attribute -> U
+117:12:Attribute -> U
+117:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+117:32:Attribute -> Const:str:'---------------------------------------
+117:32:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+118:12:Call -> U
+118:12:Attribute -> U
+118:12:Attribute -> U
+118:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+118:32:Name -> U
+119:12:Call -> U
+119:12:Attribute -> U
+119:12:Attribute -> U
+119:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+119:32:Attribute -> Const:str:'---------------------------------------
+119:32:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+120:12:Call -> U
+120:12:Attribute -> U
+120:12:Attribute -> U
+120:12:Name -> Inst:django.test.runner.DebugSQLTextTestResult
+120:32:Name -> U
+123:21:Attribute -> Class:unittest.runner.TextTestResult
+123:21:Name -> Module:unittest
+130:8:Call -> Const:NoneType:None | Const:NoneType:None
+130:8:Attribute -> BM:unittest.runner.TextTestResult.addError | BM:unittest.result.TestResult.addError
+130:8:Call -> Super
+130:8:Name -> Class:builtins.super
+130:25:Name -> U
+130:31:Name -> U
+131:8:Call -> Const:NoneType:None
+131:8:Attribute -> BM:django.test.runner.PDBDebugResult.debug
+131:8:Name -> Inst:django.test.runner.PDBDebugResult
+131:19:Name -> U
+134:8:Call -> Const:NoneType:None | Const:NoneType:None
+134:8:Attribute -> BM:unittest.runner.TextTestResult.addFailure | BM:unittest.result.TestResult.addFailure
+134:8:Call -> Super
+134:8:Name -> Class:builtins.super
+134:27:Name -> U
+134:33:Name -> U
+135:8:Call -> Const:NoneType:None
+135:8:Attribute -> BM:django.test.runner.PDBDebugResult.debug
+135:8:Name -> Inst:django.test.runner.PDBDebugResult
+135:19:Name -> U
+138:11:Name -> U
+139:12:Call -> Const:NoneType:None
+139:12:Attribute -> BM:django.test.runner.PDBDebugResult.debug
+139:12:Name -> Inst:django.test.runner.PDBDebugResult
+139:23:Name -> U
+140:8:Call -> Const:NoneType:None | Const:NoneType:None
+140:8:Attribute -> BM:unittest.runner.TextTestResult.addSubTest | BM:unittest.result.TestResult.addSubTest
+140:8:Call -> Super
+140:8:Name -> Class:builtins.super
+140:27:Name -> U
+140:33:Name -> U
+140:42:Name -> U
+143:8:Call -> Const:NoneType:None
+143:8:Attribute -> BM:unittest.result.TestResult._restoreStdout
+143:8:Name -> Inst:django.test.runner.PDBDebugResult
+144:8:Name -> Inst:django.test.runner.PDBDebugResult
+145:41:Name -> U
+146:8:Call -> ERR
+146:8:Name -> Func:builtins.print
+146:36:Name -> U
+147:11:Name -> U
+148:12:Call -> U | Const:NoneType:None
+148:12:Attribute -> U | Func:pdb.post_mortem
+148:12:Name -> U | Module:pdb
+148:28:Name -> U
+150:12:Call -> U | Const:NoneType:None
+150:12:Attribute -> U | Func:pdb.post_mortem
+150:12:Name -> U | Module:pdb
+150:28:Name -> U
+164:23:Attribute -> Class:unittest.result.TestResult
+164:23:Name -> Module:unittest
+172:8:Call -> Const:NoneType:None
+172:8:Attribute -> BM:unittest.result.TestResult.__init__ | BM:builtins.object.__init__
+172:8:Call -> Super
+172:8:Name -> Class:builtins.super
+172:26:Name -> Tuple:0
+172:34:Name -> Dict:0
+175:21:Call -> Inst:django.test.runner.DummyList
+175:21:Name -> Class:django.test.runner.DummyList
+176:8:Name -> Inst:django.test.runner.RemoteTestResult
+176:24:Name -> Inst:django.test.runner.DummyList
+177:8:Name -> Inst:django.test.runner.RemoteTestResult
+177:22:Name -> Inst:django.test.runner.DummyList
+178:8:Name -> Inst:django.test.runner.RemoteTestResult
+178:23:Name -> Inst:django.test.runner.DummyList
+179:8:Name -> Inst:django.test.runner.RemoteTestResult
+179:32:Name -> Inst:django.test.runner.DummyList
+180:8:Name -> Inst:django.test.runner.RemoteTestResult
+180:35:Name -> Inst:django.test.runner.DummyList
+182:11:Name -> U | Const:NoneType:None
+183:12:Call -> U
+183:12:Attribute -> U
+183:12:Attribute -> U
+183:12:Name -> U
+184:8:Name -> Inst:django.test.runner.RemoteTestResult
+190:16:Call -> Dict:6
+190:16:Attribute -> BM:builtins.dict.copy
+190:16:Attribute -> Dict:6
+190:16:Name -> Inst:django.test.runner.RemoteTestResult
+191:8:Call -> ERR
+191:8:Attribute -> BM:builtins.dict.pop
+191:8:Name -> Dict:6
+192:8:Call -> ERR
+192:8:Attribute -> BM:builtins.dict.pop
+192:8:Name -> Dict:6
+193:8:Call -> ERR
+193:8:Attribute -> BM:builtins.dict.pop
+193:8:Name -> Dict:6
+194:8:Call -> ERR
+194:8:Attribute -> BM:builtins.dict.pop
+194:8:Name -> Dict:6
+195:15:Name -> Dict:6
+197:5:Name -> Class:builtins.property
+199:15:Attribute -> Const:int:0 | U
+199:15:Name -> Inst:django.test.runner.RemoteTestResult
+207:8:Call -> U
+207:8:Attribute -> Func:_pickle.loads | Func:pickle._loads
+207:8:Name -> Module:pickle
+207:21:Call -> U
+207:21:Attribute -> Func:_pickle.dumps | Func:pickle._dumps
+207:21:Name -> Module:pickle
+207:34:Name -> U
+210:8:Call -> ERR
+210:8:Name -> Func:builtins.print
+210:14:Call -> U
+210:14:Attribute -> BM:builtins.str.format
+223:11:Name -> U
+223:17:Name -> U
+223:26:Name -> U
+233:12:Call -> Const:NoneType:None
+233:12:Attribute -> BM:django.test.runner.RemoteTestResult._confirm_picklable
+233:12:Name -> Inst:django.test.runner.RemoteTestResult
+233:36:Name -> U
+234:15:Name -> Class:builtins.Exception
+235:31:Call -> ERR
+235:31:Name -> Func:builtins.repr
+235:36:Name -> U
+236:31:Call -> Const:str:''
+236:31:Attribute -> Func:textwrap.fill
+236:31:Name -> Module:textwrap
+237:16:Name -> U
+239:29:Call -> ERR
+239:29:Name -> Func:builtins.repr
+239:34:Name -> ExcInst:builtins.Exception
+240:29:Call -> Const:str:''
+240:29:Attribute -> Func:textwrap.fill
+240:29:Name -> Module:textwrap
+241:16:Name -> U
+243:15:Name -> U | Const:NoneType:None
+244:16:Call -> ERR
+244:16:Name -> Func:builtins.print
+244:22:Call -> U
+244:22:Attribute -> BM:builtins.str.format
+256:11:Name -> U
+256:17:Name -> Const:str:''
+258:16:Call -> ERR
+258:16:Name -> Func:builtins.print
+258:22:Call -> U
+258:22:Attribute -> BM:builtins.str.format
+273:11:Name -> U
+273:17:Name -> Const:str:''
+273:35:Name -> Const:str:''
+278:12:Call -> Const:NoneType:None
+278:12:Attribute -> BM:django.test.runner.RemoteTestResult._confirm_picklable
+278:12:Name -> Inst:django.test.runner.RemoteTestResult
+278:36:Name -> U
+279:15:Name -> Class:builtins.Exception
+280:12:Call -> Const:NoneType:None
+280:12:Attribute -> BM:django.test.runner.RemoteTestResult._print_unpicklable_subtest
+280:12:Name -> Inst:django.test.runner.RemoteTestResult
+280:44:Name -> U
+280:50:Name -> U
+280:59:Name -> ExcInst:builtins.Exception
+284:8:Call -> ERR
+284:8:Attribute -> BM:unittest.result.TestResult.startTestRun
+284:8:Call -> Super
+284:8:Name -> Class:builtins.super
+285:8:Call -> ERR
+285:8:Attribute -> BM:builtins.list.append
+285:8:Attribute -> List:0
+285:8:Name -> Inst:django.test.runner.RemoteTestResult
+288:8:Call -> ERR
+288:8:Attribute -> BM:unittest.result.TestResult.stopTestRun
+288:8:Call -> Super
+288:8:Name -> Class:builtins.super
+289:8:Call -> ERR
+289:8:Attribute -> BM:builtins.list.append
+289:8:Attribute -> List:0
+289:8:Name -> Inst:django.test.runner.RemoteTestResult
+292:8:Call -> Const:NoneType:None
+292:8:Attribute -> BM:unittest.result.TestResult.startTest
+292:8:Call -> Super
+292:8:Name -> Class:builtins.super
+292:26:Name -> U
+293:8:Call -> ERR
+293:8:Attribute -> BM:builtins.list.append
+293:8:Attribute -> List:0
+293:8:Name -> Inst:django.test.runner.RemoteTestResult
+293:41:Attribute -> Const:int:-1 | U
+293:41:Name -> Inst:django.test.runner.RemoteTestResult
+296:8:Call -> Const:NoneType:None
+296:8:Attribute -> BM:unittest.result.TestResult.stopTest
+296:8:Call -> Super
+296:8:Name -> Class:builtins.super
+296:25:Name -> U
+297:8:Call -> ERR
+297:8:Attribute -> BM:builtins.list.append
+297:8:Attribute -> List:0
+297:8:Name -> Inst:django.test.runner.RemoteTestResult
+297:40:Attribute -> Const:int:-1 | U
+297:40:Name -> Inst:django.test.runner.RemoteTestResult
+300:8:Call -> Const:NoneType:None
+300:8:Attribute -> BM:unittest.result.TestResult.addDuration
+300:8:Call -> Super
+300:8:Name -> Class:builtins.super
+300:28:Name -> U
+300:34:Name -> U
+301:8:Call -> ERR
+301:8:Attribute -> BM:builtins.list.append
+301:8:Attribute -> List:0
+301:8:Name -> Inst:django.test.runner.RemoteTestResult
+301:43:Attribute -> Const:int:-1 | U
+301:43:Name -> Inst:django.test.runner.RemoteTestResult
+301:60:Name -> U
+304:8:Call -> Const:NoneType:None
+304:8:Attribute -> BM:django.test.runner.RemoteTestResult.check_picklable
+304:8:Name -> Inst:django.test.runner.RemoteTestResult
+304:29:Name -> U
+304:35:Name -> U
+306:43:Attribute -> Const:int:-1 | U
+306:43:Name -> Inst:django.test.runner.RemoteTestResult
+307:11:Name -> U
+307:48:Call -> ERR
+307:48:Name -> Func:builtins.isinstance
+308:12:Name -> U
+308:18:Attribute -> Class:unittest.suite._ErrorHolder
+308:18:Attribute -> Module:unittest.suite
+308:18:Name -> Module:unittest
+310:12:Call -> ERR
+310:12:Attribute -> BM:builtins.list.append
+310:12:Attribute -> List:0
+310:12:Name -> Inst:django.test.runner.RemoteTestResult
+310:44:Attribute -> Const:int:-1 | U
+310:44:Name -> Inst:django.test.runner.RemoteTestResult
+310:61:Call -> U
+310:61:Attribute -> U
+310:61:Name -> U
+310:72:Name -> U
+312:12:Call -> ERR
+312:12:Attribute -> BM:builtins.list.append
+312:12:Attribute -> List:0
+312:12:Name -> Inst:django.test.runner.RemoteTestResult
+312:44:Attribute -> Const:int:-1 | U
+312:44:Name -> Inst:django.test.runner.RemoteTestResult
+312:61:Name -> U
+314:8:Call -> Const:NoneType:None
+314:8:Attribute -> BM:unittest.result.TestResult.addError
+314:8:Call -> Super
+314:8:Name -> Class:builtins.super
+314:25:Name -> U
+314:31:Name -> U
+317:8:Call -> Const:NoneType:None
+317:8:Attribute -> BM:django.test.runner.RemoteTestResult.check_picklable
+317:8:Name -> Inst:django.test.runner.RemoteTestResult
+317:29:Name -> U
+317:35:Name -> U
+318:8:Call -> ERR
+318:8:Attribute -> BM:builtins.list.append
+318:8:Attribute -> List:0
+318:8:Name -> Inst:django.test.runner.RemoteTestResult
+318:42:Attribute -> Const:int:-1 | U
+318:42:Name -> Inst:django.test.runner.RemoteTestResult
+318:59:Name -> U
+319:8:Call -> Const:NoneType:None
+319:8:Attribute -> BM:unittest.result.TestResult.addFailure
+319:8:Call -> Super
+319:8:Name -> Class:builtins.super
+319:27:Name -> U
+319:33:Name -> U
+324:11:Name -> U
+327:12:Call -> Const:NoneType:None
+327:12:Attribute -> BM:django.test.runner.RemoteTestResult.check_picklable
+327:12:Name -> Inst:django.test.runner.RemoteTestResult
+327:33:Name -> U
+327:39:Name -> U
+328:12:Call -> Const:NoneType:None
+328:12:Attribute -> BM:django.test.runner.RemoteTestResult.check_subtest_picklable
+328:12:Name -> Inst:django.test.runner.RemoteTestResult
+328:41:Name -> U
+328:47:Name -> U
+329:12:Call -> ERR
+329:12:Attribute -> BM:builtins.list.append
+329:12:Attribute -> List:0
+329:12:Name -> Inst:django.test.runner.RemoteTestResult
+329:46:Attribute -> Const:int:-1 | U
+329:46:Name -> Inst:django.test.runner.RemoteTestResult
+329:63:Name -> U
+329:72:Name -> U
+330:8:Call -> Const:NoneType:None
+330:8:Attribute -> BM:unittest.result.TestResult.addSubTest
+330:8:Call -> Super
+330:8:Name -> Class:builtins.super
+330:27:Name -> U
+330:33:Name -> U
+330:42:Name -> U
+333:8:Call -> ERR
+333:8:Attribute -> BM:builtins.list.append
+333:8:Attribute -> List:0
+333:8:Name -> Inst:django.test.runner.RemoteTestResult
+333:42:Attribute -> Const:int:-1 | U
+333:42:Name -> Inst:django.test.runner.RemoteTestResult
+334:8:Call -> U
+334:8:Attribute -> BM:unittest.result.TestResult.addSuccess
+334:8:Call -> Super
+334:8:Name -> Class:builtins.super
+334:27:Name -> U
+337:8:Call -> ERR
+337:8:Attribute -> BM:builtins.list.append
+337:8:Attribute -> List:0
+337:8:Name -> Inst:django.test.runner.RemoteTestResult
+337:39:Attribute -> Const:int:-1 | U
+337:39:Name -> Inst:django.test.runner.RemoteTestResult
+337:56:Name -> U
+338:8:Call -> Const:NoneType:None
+338:8:Attribute -> BM:unittest.result.TestResult.addSkip
+338:8:Call -> Super
+338:8:Name -> Class:builtins.super
+338:24:Name -> U
+338:30:Name -> U
+345:11:Name -> U | Const:NoneType:None
+346:18:Name -> U
+346:26:Name -> U
+347:8:Call -> Const:NoneType:None
+347:8:Attribute -> BM:django.test.runner.RemoteTestResult.check_picklable
+347:8:Name -> Inst:django.test.runner.RemoteTestResult
+347:29:Name -> U
+347:35:Name -> U | Tuple:3
+348:8:Call -> ERR
+348:8:Attribute -> BM:builtins.list.append
+348:8:Attribute -> List:0
+348:8:Name -> Inst:django.test.runner.RemoteTestResult
+348:50:Attribute -> Const:int:-1 | U
+348:50:Name -> Inst:django.test.runner.RemoteTestResult
+348:67:Name -> U | Tuple:3
+349:8:Call -> Const:NoneType:None
+349:8:Attribute -> BM:unittest.result.TestResult.addExpectedFailure
+349:8:Call -> Super
+349:8:Name -> Class:builtins.super
+349:35:Name -> U
+349:41:Name -> U | Tuple:3
+352:8:Call -> ERR
+352:8:Attribute -> BM:builtins.list.append
+352:8:Attribute -> List:0
+352:8:Name -> Inst:django.test.runner.RemoteTestResult
+352:52:Attribute -> Const:int:-1 | U
+352:52:Name -> Inst:django.test.runner.RemoteTestResult
+353:8:Call -> Const:NoneType:None
+353:8:Attribute -> BM:unittest.result.TestResult.addUnexpectedSuccess
+353:8:Call -> Super
+353:8:Name -> Class:builtins.super
+353:37:Name -> U
+358:15:Call -> ERR
+358:15:Name -> Func:builtins.all
+358:19:Name -> U
+358:31:Name -> Set:4
+358:54:Attribute -> List:0
+358:54:Name -> Inst:django.test.runner.RemoteTestResult
+374:18:Name -> Class:django.test.runner.RemoteTestResult
+377:8:Name -> Inst:django.test.runner.RemoteTestRunner
+377:24:Name -> Const:bool:False | U
+378:8:Name -> Inst:django.test.runner.RemoteTestRunner
+378:22:Name -> Const:bool:False | U
+379:11:Name -> Const:NoneType:None | U
+380:12:Name -> Inst:django.test.runner.RemoteTestRunner
+380:31:Name -> U
+383:17:Call -> U
+383:17:Attribute -> U
+383:17:Name -> Inst:django.test.runner.RemoteTestRunner
+384:8:Call -> Const:NoneType:None
+384:8:Attribute -> Func:unittest.signals.registerResult
+384:8:Name -> Module:unittest
+384:32:Name -> U
+385:8:Name -> U
+385:26:Attribute -> Const:bool:False | U
+385:26:Name -> Inst:django.test.runner.RemoteTestRunner
+386:8:Name -> U
+386:24:Attribute -> Const:bool:False | U
+386:24:Name -> Inst:django.test.runner.RemoteTestRunner
+387:8:Call -> U
+387:8:Name -> U
+387:13:Name -> U
+388:15:Name -> U
+398:7:Call -> Const:NoneType:None | U
+398:7:Attribute -> BM:multiprocessing.context.DefaultContext.get_start_method | U
+398:7:Name -> Module:multiprocessing
+401:15:Call -> Inst:builtins.int
+401:15:Name -> Class:builtins.int
+401:19:Attribute -> Dict:43 | Inst:os._Environ
+401:19:Name -> Module:os
+402:11:Name -> Class:builtins.KeyError
+403:15:Call -> U
+403:15:Attribute -> BM:multiprocessing.context.BaseContext.cpu_count
+403:15:Name -> Module:multiprocessing
+408:7:Name -> U
+409:15:Name -> U
+411:15:Call -> Inst:builtins.int
+411:15:Name -> Class:builtins.int
+411:19:Name -> U
+412:11:Name -> Class:builtins.ValueError
+413:14:Call -> ExcInst:argparse.ArgumentTypeError
+413:14:Attribute -> Class:argparse.ArgumentTypeError
+413:14:Name -> Module:argparse
+414:15:Name -> U
+439:9:Call -> U
+439:9:Attribute -> U
+439:9:Name -> U
+440:8:Name -> U
+441:21:Attribute -> U
+441:21:Name -> U
+443:29:Call -> Const:NoneType:None | U
+443:29:Attribute -> BM:multiprocessing.context.DefaultContext.get_start_method | BM:multiprocessing.context.BaseContext.get_start_method
+443:29:Name -> Module:multiprocessing
+448:7:Name -> U
+449:11:Name -> Const:NoneType:None | U
+449:29:Call -> Const:bool:False
+449:29:Name -> Func:builtins.callable
+449:38:Name -> Const:NoneType:None | U
+450:15:Name -> Const:NoneType:None | U
+452:12:Call -> U
+452:12:Name -> Const:NoneType:None | U
+452:27:Name -> Const:NoneType:None | U | Tuple:0
+453:8:Call -> Const:NoneType:None
+453:8:Attribute -> Func:django.setup
+453:8:Name -> Module:django
+454:8:Call -> Const:NoneType:None
+454:8:Name -> Func:django.test.utils.setup_test_environment
+454:37:Name -> Const:NoneType:None | U
+456:33:Name -> Const:NoneType:None | U
+456:17:Name -> U
+456:63:Name -> Inst:django.db.utils.ConnectionHandler
+457:17:Name -> U | Inst:django.db.utils.ConnectionHandler
+458:21:Name -> Inst:django.db.utils.ConnectionHandler
+458:33:Name -> U
+459:11:Name -> U
+461:12:Call -> U
+461:12:Attribute -> U
+461:12:Attribute -> U
+461:12:Name -> U
+461:44:Name -> Const:NoneType:None | U
+461:61:Name -> U
+462:24:Call -> U
+462:24:Attribute -> U
+462:24:Name -> Const:NoneType:None | U
+462:48:Name -> U
+463:16:Name -> U
+463:55:Name -> U
+464:8:Call -> U
+464:8:Attribute -> U
+464:8:Attribute -> U
+464:8:Name -> U
+464:52:Name -> Const:int:0 | U
+466:12:Name -> U
+467:16:Call -> U | Const:NoneType:None
+467:16:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+467:16:Attribute -> Dict:43 | Inst:os._Environ
+467:16:Name -> Module:os
+469:12:Call -> U
+469:12:Attribute -> U
+469:12:Attribute -> U
+469:12:Name -> U
+471:7:Name -> U
+472:8:Call -> U
+472:8:Name -> Func:django.core.management.call_command
+473:28:Call -> Inst:_io.StringIO
+473:28:Attribute -> Class:_io.StringIO
+473:28:Name -> Module:io
+473:50:Call -> Inst:_io.StringIO
+473:50:Attribute -> Class:_io.StringIO
+473:50:Name -> Module:io
+473:75:Name -> Const:NoneType:None | U
+479:8:Call -> U
+479:8:Name -> U
+479:20:Name -> U
+479:30:Name -> Tuple:0
+479:38:Name -> Dict:0
+480:11:Name -> Class:builtins.Exception
+481:13:Call -> U
+481:13:Attribute -> U
+481:13:Name -> U
+483:12:Name -> U
+494:63:Name -> U
+495:13:Call -> U
+495:13:Name -> U
+495:35:Name -> U
+495:52:Name -> U
+496:13:Call -> U
+496:13:Attribute -> U
+496:13:Name -> U
+496:24:Name -> U
+497:11:Name -> U
+497:27:Attribute -> U
+497:27:Name -> U
+505:24:Attribute -> Class:unittest.suite.TestSuite
+505:24:Name -> Module:unittest
+522:18:Name -> Func:django.test.runner._init_worker
+523:20:Name -> Func:django.test.runner._process_setup_stub
+525:19:Name -> Func:django.test.runner._run_subsuite
+526:19:Name -> Class:django.test.runner.RemoteTestRunner
+531:8:Name -> Inst:django.test.runner.ParallelTestSuite
+531:25:Name -> U
+532:8:Name -> Inst:django.test.runner.ParallelTestSuite
+532:25:Name -> U
+533:8:Name -> Inst:django.test.runner.ParallelTestSuite
+533:24:Name -> Const:bool:False | U
+534:8:Name -> Inst:django.test.runner.ParallelTestSuite
+534:26:Name -> Const:bool:False | U
+535:8:Name -> Inst:django.test.runner.ParallelTestSuite
+535:22:Name -> Const:bool:False | U
+536:8:Name -> Inst:django.test.runner.ParallelTestSuite
+537:8:Name -> Inst:django.test.runner.ParallelTestSuite
+538:8:Name -> Inst:django.test.runner.ParallelTestSuite
+539:8:Call -> Const:NoneType:None
+539:8:Attribute -> BM:unittest.suite.BaseTestSuite.__init__ | BM:builtins.object.__init__
+539:8:Call -> Super
+539:8:Name -> Class:builtins.super
+556:8:Call -> Const:NoneType:None
+556:8:Attribute -> BM:django.test.runner.ParallelTestSuite.initialize_suite
+556:8:Name -> Inst:django.test.runner.ParallelTestSuite
+557:18:Call -> U | Inst:multiprocessing.sharedctypes.Synchronized | Inst:multiprocessing.sharedctypes.SynchronizedString | Inst:multiprocessing.sharedctypes.SynchronizedArray
+557:18:Attribute -> BM:multiprocessing.context.BaseContext.Value
+557:18:Name -> Module:multiprocessing
+557:40:Attribute -> Class:ctypes.c_int
+557:40:Name -> Module:ctypes
+559:13:Attribute -> Class:django.test.runner.RemoteTestRunner
+559:13:Name -> Inst:django.test.runner.ParallelTestSuite
+559:32:Name -> U
+559:39:Name -> U
+559:49:Attribute -> Const:bool:False | U
+559:49:Name -> Inst:django.test.runner.ParallelTestSuite
+559:64:Attribute -> Const:bool:False | U
+559:64:Name -> Inst:django.test.runner.ParallelTestSuite
+560:35:Call -> Inst:builtins.enumerate
+560:35:Name -> Class:builtins.enumerate
+560:45:Attribute -> U
+560:45:Name -> Inst:django.test.runner.ParallelTestSuite
+563:8:Name -> U
+565:13:Call -> Inst:multiprocessing.pool.Pool
+565:13:Attribute -> BM:multiprocessing.context.BaseContext.Pool
+565:13:Name -> Module:multiprocessing
+566:22:Attribute -> U
+566:22:Name -> Inst:django.test.runner.ParallelTestSuite
+567:24:Call -> Partial:PartialFunction
+567:24:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+567:24:Name -> Module:functools
+567:42:Name -> Func:django.test.runner._safe_init_worker
+567:61:Attribute -> Func:django.test.runner._init_worker
+567:61:Attribute -> BM:django.test.runner._init_worker
+567:61:Name -> Inst:django.test.runner.ParallelTestSuite
+569:16:Name -> U | Inst:multiprocessing.sharedctypes.Synchronized | Inst:multiprocessing.sharedctypes.SynchronizedString | Inst:multiprocessing.sharedctypes.SynchronizedArray
+570:16:Attribute -> Const:NoneType:None | U
+570:16:Name -> Inst:django.test.runner.ParallelTestSuite
+571:16:Attribute -> Const:NoneType:None | U
+571:16:Name -> Inst:django.test.runner.ParallelTestSuite
+572:16:Attribute -> Func:django.test.runner._process_setup_stub
+572:16:Attribute -> BM:django.test.runner._process_setup_stub
+572:16:Name -> Inst:django.test.runner.ParallelTestSuite
+573:16:Attribute -> Tuple:0
+573:16:Name -> Inst:django.test.runner.ParallelTestSuite
+574:16:Attribute -> Const:bool:False | U
+574:16:Name -> Inst:django.test.runner.ParallelTestSuite
+575:16:Attribute -> Const:NoneType:None | Inst:builtins.set
+575:16:Name -> Inst:django.test.runner.ParallelTestSuite
+578:27:Call -> Inst:multiprocessing.pool.IMapUnorderedIterator | U
+578:27:Attribute -> BM:multiprocessing.pool.Pool.imap_unordered
+578:27:Name -> Inst:multiprocessing.pool.Pool
+578:47:Attribute -> Func:django.test.runner._run_subsuite
+578:47:Attribute -> BM:django.test.runner._run_subsuite
+578:47:Name -> Inst:django.test.runner.ParallelTestSuite
+578:75:Name -> U
+581:19:Attribute -> U
+581:19:Name -> U
+582:20:Call -> Const:NoneType:None
+582:20:Attribute -> BM:multiprocessing.pool.Pool.terminate
+582:20:Name -> Inst:multiprocessing.pool.Pool
+586:45:Call -> U
+586:45:Attribute -> BM:multiprocessing.pool.IMapIterator.next | U
+586:45:Name -> Inst:multiprocessing.pool.IMapUnorderedIterator | U
+587:23:Attribute -> Class:multiprocessing.context.TimeoutError
+587:23:Name -> Module:multiprocessing
+588:23:Attribute -> U
+588:23:Name -> U | Inst:multiprocessing.sharedctypes.Synchronized | Inst:multiprocessing.sharedctypes.SynchronizedString | Inst:multiprocessing.sharedctypes.SynchronizedArray
+589:24:Call -> ERR
+589:24:Attribute -> BM:builtins.Exception.add_note
+589:24:Name -> ExcInst:multiprocessing.context.TimeoutError
+592:23:Name -> Class:builtins.StopIteration
+593:20:Call -> Const:NoneType:None
+593:20:Attribute -> BM:multiprocessing.pool.Pool.close
+593:20:Name -> Inst:multiprocessing.pool.Pool
+596:24:Call -> Inst:builtins.list
+596:24:Name -> Class:builtins.list
+596:29:Attribute -> U
+596:29:Name -> Inst:django.test.runner.ParallelTestSuite
+596:44:Name -> U
+597:29:Name -> U
+598:20:Call -> Const:NoneType:None
+598:20:Attribute -> BM:django.test.runner.ParallelTestSuite.handle_event
+598:20:Name -> Inst:django.test.runner.ParallelTestSuite
+598:38:Name -> U
+598:46:Name -> Inst:builtins.list
+598:53:Name -> U
+600:12:Call -> Const:NoneType:None
+600:12:Attribute -> BM:multiprocessing.pool.Pool.join
+600:12:Name -> Inst:multiprocessing.pool.Pool
+602:15:Name -> U
+605:21:Name -> U
+606:18:Call -> U
+606:18:Name -> Func:builtins.getattr
+606:26:Name -> U
+606:34:Name -> U
+607:11:Name -> U
+609:21:Name -> U
+610:43:Name -> U
+612:12:Name -> U
+613:16:Name -> U
+614:16:Call -> ERR
+614:16:Name -> Func:builtins.len
+614:20:Name -> U
+616:22:Name -> U
+617:19:Call -> Inst:unittest.suite._ErrorHolder
+617:19:Attribute -> Class:unittest.suite._ErrorHolder
+617:19:Attribute -> Module:unittest.suite
+617:19:Name -> Module:unittest
+617:47:Name -> U
+618:19:Name -> U
+620:19:Name -> U
+620:25:Name -> U
+621:19:Name -> U
+622:8:Call -> U
+622:8:Name -> U
+622:16:Name -> Inst:unittest.suite._ErrorHolder | U
+622:23:Name -> U
+625:15:Call -> ERR
+625:15:Name -> Func:builtins.iter
+625:20:Attribute -> U
+625:20:Name -> Inst:django.test.runner.ParallelTestSuite
+628:11:Call -> Const:NoneType:None | U
+628:11:Attribute -> BM:multiprocessing.context.DefaultContext.get_start_method | U
+628:11:Name -> Module:multiprocessing
+629:12:Name -> Inst:django.test.runner.ParallelTestSuite
+630:16:Name -> U
+630:23:Attribute -> U
+630:23:Name -> Inst:django.db.utils.ConnectionHandler
+630:35:Name -> U
+630:69:Name -> Inst:django.db.utils.ConnectionHandler
+632:12:Name -> Inst:django.test.runner.ParallelTestSuite
+633:16:Name -> U
+633:23:Attribute -> U
+633:23:Name -> Inst:django.db.utils.ConnectionHandler
+633:35:Name -> U
+634:29:Name -> Inst:django.db.utils.ConnectionHandler
+635:19:Name -> U
+635:28:Attribute -> Inst:builtins.set | Set:0
+635:28:Name -> Inst:django.test.runner.ParallelTestSuite
+652:5:Name -> Class:builtins.classmethod
+654:12:Call -> U
+654:12:Attribute -> Func:hashlib.__hash_new | Func:hashlib.__py_new
+654:12:Name -> Module:hashlib
+654:24:Attribute -> Const:str:'md5'
+654:24:Name -> Class:django.test.runner.Shuffler
+655:8:Call -> U
+655:8:Attribute -> U
+655:8:Name -> U
+655:17:Call -> U
+655:17:Attribute -> U
+655:17:Name -> U
+656:15:Call -> U
+656:15:Attribute -> U
+656:15:Name -> U
+659:11:Name -> Const:NoneType:None | U
+661:19:Call -> U
+661:19:Attribute -> BM:random.Random.randint
+661:19:Name -> Module:random
+665:8:Name -> Inst:django.test.runner.Shuffler
+665:20:Name -> Const:NoneType:None | U
+666:8:Name -> Inst:django.test.runner.Shuffler
+666:27:Name -> Const:str:'generated' | Const:str:'given'
+668:5:Name -> Class:builtins.property
+670:18:Attribute -> Const:NoneType:None | U
+670:18:Name -> Inst:django.test.runner.Shuffler
+670:33:Attribute -> Const:str:'generated' | Const:str:'given' | Const:str:'test'
+670:33:Name -> Inst:django.test.runner.Shuffler
+673:15:Call -> U
+673:15:Attribute -> BM:builtins.str.format
+673:29:Attribute -> Const:NoneType:None | U
+673:29:Name -> Inst:django.test.runner.Shuffler
+673:40:Call -> U
+673:40:Name -> U
+673:44:Name -> U
+674:15:Call -> U
+674:15:Attribute -> BM:django.test.runner.Shuffler._hash_text
+674:15:Name -> Inst:django.test.runner.Shuffler
+674:31:Name -> U
+686:20:Name -> U
+687:21:Call -> U
+687:21:Attribute -> BM:django.test.runner.Shuffler._hash_item
+687:21:Name -> Inst:django.test.runner.Shuffler
+687:37:Name -> U
+687:43:Name -> U
+688:15:Name -> U
+688:25:Name -> Dict:0
+689:22:Call -> U
+689:22:Attribute -> BM:builtins.str.format
+690:20:Name -> U
+691:20:Name -> U
+692:20:Name -> Dict:0
+692:27:Name -> U
+694:22:Call -> ExcInst:builtins.RuntimeError
+694:22:Name -> Class:builtins.RuntimeError
+694:35:Name -> U
+695:12:Name -> Dict:0
+695:19:Name -> U
+695:29:Name -> U
+696:16:Name -> Dict:0
+696:23:Name -> U
+696:45:Call -> ERR
+696:45:Name -> Func:builtins.sorted
+696:52:Name -> Dict:0
+702:17:Attribute -> Class:unittest.suite.TestSuite
+702:17:Name -> Module:unittest
+703:26:Name -> Class:django.test.runner.ParallelTestSuite
+704:18:Attribute -> Class:unittest.runner.TextTestRunner
+704:18:Name -> Module:unittest
+705:18:Attribute -> Inst:unittest.loader.TestLoader
+705:18:Name -> Module:unittest
+706:18:Name -> Class:django.test.testcases.TestCase
+706:28:Name -> Class:django.test.testcases.SimpleTestCase
+732:8:Name -> Inst:django.test.runner.DiscoverRunner
+732:23:Name -> Const:NoneType:None | U
+733:8:Name -> Inst:django.test.runner.DiscoverRunner
+733:25:Name -> Const:NoneType:None | U
+734:8:Name -> Inst:django.test.runner.DiscoverRunner
+734:25:Name -> Const:int:1 | U
+735:8:Name -> Inst:django.test.runner.DiscoverRunner
+735:27:Name -> Const:bool:True | U
+736:8:Name -> Inst:django.test.runner.DiscoverRunner
+736:24:Name -> Const:bool:False | U
+737:8:Name -> Inst:django.test.runner.DiscoverRunner
+737:22:Name -> Const:bool:False | U
+738:8:Name -> Inst:django.test.runner.DiscoverRunner
+738:23:Name -> Const:bool:False | U
+739:8:Name -> Inst:django.test.runner.DiscoverRunner
+739:26:Name -> Const:bool:False | U
+740:8:Name -> Inst:django.test.runner.DiscoverRunner
+740:25:Name -> Const:bool:False | U
+741:8:Name -> Inst:django.test.runner.DiscoverRunner
+741:24:Name -> Const:int:0 | U
+742:8:Name -> Inst:django.test.runner.DiscoverRunner
+742:20:Call -> Set:0
+742:20:Name -> Class:builtins.set
+742:24:Name -> Const:NoneType:None | U
+743:8:Name -> Inst:django.test.runner.DiscoverRunner
+743:28:Call -> Set:0
+743:28:Name -> Class:builtins.set
+743:32:Name -> Const:NoneType:None | U
+744:15:Call -> ERR
+744:15:Attribute -> Func:faulthandler.is_enabled
+744:15:Name -> Module:faulthandler
+744:45:Name -> Const:bool:True | U
+746:16:Call -> ERR
+746:16:Attribute -> Func:faulthandler.enable
+746:16:Name -> Module:faulthandler
+746:41:Call -> U
+746:41:Attribute -> BM:_io.TextIOWrapper.fileno | BM:_io.StringIO.fileno | U
+746:41:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+746:41:Name -> Module:sys
+747:20:Name -> Class:builtins.AttributeError
+747:36:Attribute -> U
+747:36:Name -> Module:io
+748:16:Call -> ERR
+748:16:Attribute -> Func:faulthandler.enable
+748:16:Name -> Module:faulthandler
+748:41:Call -> ERR
+748:41:Attribute -> BM:_io.TextIOWrapper.fileno
+748:41:Attribute -> Inst:_io.TextIOWrapper
+748:41:Name -> Module:sys
+749:8:Name -> Inst:django.test.runner.DiscoverRunner
+749:19:Name -> Const:bool:False | U
+750:11:Attribute -> Const:bool:False | U
+750:11:Name -> Inst:django.test.runner.DiscoverRunner
+750:24:Attribute -> Const:int:0 | U
+750:24:Name -> Inst:django.test.runner.DiscoverRunner
+751:18:Call -> ExcInst:builtins.ValueError
+751:18:Name -> Class:builtins.ValueError
+754:8:Name -> Inst:django.test.runner.DiscoverRunner
+754:22:Name -> Const:bool:False | U
+755:8:Name -> Inst:django.test.runner.DiscoverRunner
+756:8:Name -> Inst:django.test.runner.DiscoverRunner
+756:43:Name -> Const:bool:False | U
+756:27:Call -> Inst:django.test.utils.TimeKeeper
+756:27:Name -> Class:django.test.utils.TimeKeeper
+756:55:Call -> Inst:django.test.utils.NullTimeKeeper
+756:55:Name -> Class:django.test.utils.NullTimeKeeper
+757:11:Name -> Const:NoneType:None | U
+760:12:Name -> Inst:django.test.runner.DiscoverRunner
+761:34:Name -> U
+761:16:Name -> U
+761:56:Name -> U
+762:31:Name -> U
+764:8:Name -> Inst:django.test.runner.DiscoverRunner
+764:23:Name -> Const:bool:False | U
+765:8:Name -> Inst:django.test.runner.DiscoverRunner
+766:8:Name -> Inst:django.test.runner.DiscoverRunner
+766:22:Name -> Const:NoneType:None | U
+767:8:Name -> Inst:django.test.runner.DiscoverRunner
+767:25:Name -> Const:NoneType:None | U
+769:5:Name -> Class:builtins.classmethod
+771:8:Call -> U
+771:8:Attribute -> U
+771:8:Name -> U
+776:8:Call -> U
+776:8:Attribute -> U
+776:8:Name -> U
+782:8:Call -> U
+782:8:Attribute -> U
+782:8:Name -> U
+788:8:Call -> U
+788:8:Attribute -> U
+788:8:Name -> U
+791:8:Call -> U
+791:8:Attribute -> U
+791:8:Name -> U
+795:17:Name -> Class:builtins.int
+799:8:Call -> U
+799:8:Attribute -> U
+799:8:Name -> U
+805:8:Call -> U
+805:8:Attribute -> U
+805:8:Name -> U
+810:8:Call -> U
+810:8:Attribute -> U
+810:8:Name -> U
+816:8:Call -> U
+816:8:Attribute -> U
+816:8:Name -> U
+821:17:Name -> Func:django.test.runner.parallel_type
+828:8:Call -> U
+828:8:Attribute -> U
+828:8:Name -> U
+834:8:Call -> U
+834:8:Attribute -> U
+834:8:Name -> U
+840:8:Call -> U
+840:8:Attribute -> U
+840:8:Name -> U
+845:8:Call -> U
+845:8:Attribute -> U
+845:8:Name -> U
+851:8:Call -> U
+851:8:Attribute -> U
+851:8:Name -> U
+857:8:Call -> U
+857:8:Attribute -> U
+857:8:Name -> U
+862:8:Call -> U
+862:8:Attribute -> U
+862:8:Name -> U
+872:8:Call -> U
+872:8:Attribute -> U
+872:8:Name -> U
+875:17:Name -> Class:builtins.int
+881:5:Name -> Class:builtins.property
+883:11:Attribute -> Const:NoneType:None | Inst:django.test.runner.Shuffler
+883:11:Name -> Inst:django.test.runner.DiscoverRunner
+885:15:Attribute -> Const:NoneType:None | U
+885:15:Attribute -> Const:NoneType:None | Inst:django.test.runner.Shuffler
+885:15:Name -> Inst:django.test.runner.DiscoverRunner
+896:11:Name -> Const:NoneType:None | U
+897:20:Attribute -> Const:int:20
+897:20:Name -> Module:logging
+898:11:Attribute -> Const:NoneType:None | U
+898:11:Name -> Inst:django.test.runner.DiscoverRunner
+899:15:Attribute -> Const:int:1 | U
+899:15:Name -> Inst:django.test.runner.DiscoverRunner
+899:39:Attribute -> Const:int:1 | U
+899:39:Name -> Inst:django.test.runner.DiscoverRunner
+899:63:Name -> Const:NoneType:None | U | Const:int:20
+899:71:Attribute -> Const:int:20
+899:71:Name -> Module:logging
+901:12:Call -> ERR
+901:12:Name -> Func:builtins.print
+901:18:Name -> U
+903:12:Call -> U
+903:12:Attribute -> U
+903:12:Attribute -> U
+903:12:Name -> Inst:django.test.runner.DiscoverRunner
+903:28:Name -> Const:NoneType:None | U | Const:int:20
+903:35:Name -> U
+906:8:Call -> Const:NoneType:None
+906:8:Name -> Func:django.test.utils.setup_test_environment
+906:37:Attribute -> Const:bool:False | U
+906:37:Name -> Inst:django.test.runner.DiscoverRunner
+907:8:Call -> Const:NoneType:None
+907:8:Attribute -> Func:unittest.signals.installHandler
+907:8:Name -> Module:unittest
+910:11:Attribute -> Const:bool:False | U
+910:11:Name -> Inst:django.test.runner.DiscoverRunner
+912:19:Call -> Inst:django.test.runner.Shuffler
+912:19:Name -> Class:django.test.runner.Shuffler
+912:33:Attribute -> Const:bool:False | U
+912:33:Name -> Inst:django.test.runner.DiscoverRunner
+913:8:Call -> Const:NoneType:None
+913:8:Attribute -> BM:django.test.runner.DiscoverRunner.log
+913:8:Name -> Inst:django.test.runner.DiscoverRunner
+913:40:Attribute -> Const:str:'None (generated)' | Const:str:'None (given)' | Const:str:'None (test)' | Const:str:'Uninferable (generated)' | Const:str:'Uninferable (given)' | Const:str:'Uninferable (test)'
+913:40:Name -> Inst:django.test.runner.Shuffler
+914:8:Name -> Inst:django.test.runner.DiscoverRunner
+914:25:Name -> Inst:django.test.runner.Shuffler
+916:5:Name -> Func:contextlib.contextmanager
+918:38:Attribute -> Const:NoneType:None | U
+918:38:Attribute -> Inst:unittest.loader.TestLoader
+918:38:Name -> Inst:django.test.runner.DiscoverRunner
+919:8:Attribute -> Inst:unittest.loader.TestLoader
+919:8:Name -> Inst:django.test.runner.DiscoverRunner
+919:44:Attribute -> Const:NoneType:None | U
+919:44:Name -> Inst:django.test.runner.DiscoverRunner
+924:12:Attribute -> Inst:unittest.loader.TestLoader
+924:12:Name -> Inst:django.test.runner.DiscoverRunner
+924:48:Name -> Const:NoneType:None | U
+927:24:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+927:24:Attribute -> Func:posixpath.abspath | U
+927:24:Attribute -> Module:posixpath | Module:ntpath
+927:24:Name -> Module:os
+927:40:Name -> U
+931:15:Call -> Const:bool:False | Const:bool:True | U
+931:15:Attribute -> Func:genericpath.exists | U
+931:15:Attribute -> Module:posixpath | Module:ntpath
+931:15:Name -> Module:os
+931:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+932:17:Call -> Gen:django.test.runner.DiscoverRunner.load_with_patterns
+932:17:Attribute -> BM:django.test.runner.DiscoverRunner.load_with_patterns
+932:17:Name -> Inst:django.test.runner.DiscoverRunner
+933:24:Call -> Const:NoneType:None | U
+933:24:Attribute -> BM:unittest.loader.TestLoader.loadTestsFromName
+933:24:Attribute -> Inst:unittest.loader.TestLoader
+933:24:Name -> Inst:django.test.runner.DiscoverRunner
+933:59:Name -> U
+934:15:Call -> U
+934:15:Attribute -> U
+934:15:Name -> Const:NoneType:None | Const:NoneType:None | U
+935:23:Name -> Const:NoneType:None | Const:NoneType:None | U
+937:36:Call -> Tuple:2 | Tuple:2
+937:36:Name -> Func:django.test.runner.try_importing
+937:50:Name -> U
+938:11:Name -> Const:bool:False | Const:bool:True
+939:19:Name -> Const:bool:False | U
+940:23:Name -> Const:NoneType:None | Const:NoneType:None | U
+941:17:Call -> Const:bool:False | U
+941:17:Attribute -> Func:genericpath.isdir | U
+941:17:Attribute -> Module:posixpath | Module:ntpath
+941:17:Name -> Module:os
+941:31:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+942:15:Call -> Const:bool:False | Const:bool:True | U
+942:15:Attribute -> Func:genericpath.exists | U
+942:15:Attribute -> Module:posixpath | Module:ntpath
+942:15:Name -> Module:os
+942:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+943:23:Name -> Const:NoneType:None | Const:NoneType:None | U
+944:22:Call -> ExcInst:builtins.RuntimeError
+944:22:Name -> Class:builtins.RuntimeError
+945:67:Name -> U
+949:19:Name -> Const:NoneType:None | Const:NoneType:None | U
+951:17:Call -> U
+951:17:Attribute -> U
+951:17:Name -> U
+952:11:Call -> Const:bool:False | U
+952:11:Attribute -> Func:genericpath.isdir | U
+952:11:Attribute -> Module:posixpath | Module:ntpath
+952:11:Name -> Module:os
+952:25:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+952:48:Attribute -> Const:NoneType:None | U
+952:48:Name -> Inst:django.test.runner.DiscoverRunner
+953:12:Name -> U
+953:38:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+953:38:Name -> Func:django.test.runner.find_top_level
+953:53:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+955:13:Call -> Gen:django.test.runner.DiscoverRunner.load_with_patterns
+955:13:Attribute -> BM:django.test.runner.DiscoverRunner.load_with_patterns
+955:13:Name -> Inst:django.test.runner.DiscoverRunner
+956:20:Call -> U
+956:20:Attribute -> BM:unittest.loader.TestLoader.discover
+956:20:Attribute -> Inst:unittest.loader.TestLoader
+956:20:Name -> Inst:django.test.runner.DiscoverRunner
+956:56:Name -> U
+956:65:Name -> U
+960:8:Attribute -> Inst:unittest.loader.TestLoader
+960:8:Name -> Inst:django.test.runner.DiscoverRunner
+961:15:Name -> Const:NoneType:None | Const:NoneType:None | U
+964:22:Name -> Const:NoneType:None | U
+967:11:Attribute -> Const:NoneType:None | U
+967:11:Name -> Inst:django.test.runner.DiscoverRunner
+968:12:Name -> Dict:0
+968:41:Attribute -> U
+968:41:Name -> Inst:django.test.runner.DiscoverRunner
+969:11:Attribute -> Const:NoneType:None | U
+969:11:Name -> Inst:django.test.runner.DiscoverRunner
+970:12:Name -> Dict:0
+970:47:Attribute -> U
+970:47:Name -> Inst:django.test.runner.DiscoverRunner
+971:8:Call -> Const:NoneType:None
+971:8:Attribute -> BM:django.test.runner.DiscoverRunner.setup_shuffler
+971:8:Name -> Inst:django.test.runner.DiscoverRunner
+974:21:Name -> List:1 | U
+975:20:Call -> Const:NoneType:None | Const:NoneType:None | U
+975:20:Attribute -> BM:django.test.runner.DiscoverRunner.load_tests_for_label
+975:20:Name -> Inst:django.test.runner.DiscoverRunner
+975:46:Name -> Const:str:'.'
+975:53:Name -> Dict:0
+976:12:Call -> ERR
+976:12:Attribute -> BM:builtins.list.extend
+976:12:Name -> List:0
+976:29:Call -> Gen:django.test.utils.iter_test_cases
+976:29:Name -> Func:django.test.utils.iter_test_cases
+976:45:Name -> Const:NoneType:None | Const:NoneType:None | U
+978:11:Attribute -> Set:0
+978:11:Name -> Inst:django.test.runner.DiscoverRunner
+978:24:Attribute -> Set:0
+978:24:Name -> Inst:django.test.runner.DiscoverRunner
+979:15:Attribute -> Set:0
+979:15:Name -> Inst:django.test.runner.DiscoverRunner
+980:16:Call -> Const:NoneType:None
+980:16:Attribute -> BM:django.test.runner.DiscoverRunner.log
+980:16:Name -> Inst:django.test.runner.DiscoverRunner
+981:51:Call -> Const:str:''
+981:51:Attribute -> BM:builtins.str.join
+981:61:Call -> ERR
+981:61:Name -> Func:builtins.sorted
+981:68:Attribute -> U
+981:68:Name -> Inst:django.test.runner.DiscoverRunner
+982:26:Attribute -> Const:int:10
+982:26:Name -> Module:logging
+984:15:Attribute -> Set:0
+984:15:Name -> Inst:django.test.runner.DiscoverRunner
+985:16:Call -> Const:NoneType:None
+985:16:Attribute -> BM:django.test.runner.DiscoverRunner.log
+985:16:Name -> Inst:django.test.runner.DiscoverRunner
+986:51:Call -> Const:str:''
+986:51:Attribute -> BM:builtins.str.join
+986:61:Call -> ERR
+986:61:Name -> Func:builtins.sorted
+986:68:Attribute -> U
+986:68:Name -> Inst:django.test.runner.DiscoverRunner
+987:26:Attribute -> Const:int:10
+987:26:Name -> Module:logging
+989:24:Call -> U
+989:24:Name -> Func:django.test.runner.filter_tests_by_tags
+989:45:Name -> List:0
+989:56:Attribute -> Set:0
+989:56:Name -> Inst:django.test.runner.DiscoverRunner
+989:67:Attribute -> Set:0
+989:67:Name -> Inst:django.test.runner.DiscoverRunner
+994:22:Attribute -> Class:unittest.loader._FailedTest
+994:22:Attribute -> Module:unittest.loader
+994:22:Name -> Module:unittest
+994:52:Attribute -> Tuple:2
+994:52:Name -> Inst:django.test.runner.DiscoverRunner
+995:20:Call -> Inst:builtins.list
+995:20:Name -> Class:builtins.list
+996:12:Call -> Gen:django.test.runner.reorder_tests
+996:12:Name -> Func:django.test.runner.reorder_tests
+997:16:Name -> List:0 | U
+998:16:Name -> Tuple:3
+999:25:Attribute -> Const:NoneType:None | Inst:django.test.runner.Shuffler
+999:25:Name -> Inst:django.test.runner.DiscoverRunner
+1000:24:Attribute -> Const:bool:False | U
+1000:24:Name -> Inst:django.test.runner.DiscoverRunner
+1003:8:Call -> Const:NoneType:None
+1003:8:Attribute -> BM:django.test.runner.DiscoverRunner.log
+1003:8:Name -> Inst:django.test.runner.DiscoverRunner
+1003:39:Call -> ERR
+1003:39:Name -> Func:builtins.len
+1003:43:Name -> Inst:builtins.list
+1004:16:Call -> Inst:unittest.suite.TestSuite
+1004:16:Attribute -> Class:unittest.suite.TestSuite
+1004:16:Name -> Inst:django.test.runner.DiscoverRunner
+1004:32:Name -> Inst:builtins.list
+1006:11:Attribute -> Const:int:0 | U
+1006:11:Name -> Inst:django.test.runner.DiscoverRunner
+1007:24:Call -> U
+1007:24:Name -> Func:django.test.runner.partition_suite_by_case
+1007:48:Name -> Inst:unittest.suite.TestSuite
+1010:24:Call -> ERR
+1010:24:Name -> Func:builtins.min
+1010:28:Attribute -> Const:int:0 | U
+1010:28:Name -> Inst:django.test.runner.DiscoverRunner
+1010:43:Call -> ERR
+1010:43:Name -> Func:builtins.len
+1010:47:Name -> U
+1013:12:Name -> Inst:django.test.runner.DiscoverRunner
+1013:28:Name -> U
+1014:15:Name -> U
+1015:24:Call -> Inst:django.test.runner.ParallelTestSuite
+1015:24:Attribute -> Class:django.test.runner.ParallelTestSuite
+1015:24:Name -> Inst:django.test.runner.DiscoverRunner
+1016:20:Name -> U
+1017:20:Name -> U
+1018:20:Attribute -> Const:bool:False | U
+1018:20:Name -> Inst:django.test.runner.DiscoverRunner
+1019:20:Attribute -> Const:bool:False | U
+1019:20:Name -> Inst:django.test.runner.DiscoverRunner
+1020:20:Attribute -> Const:bool:False | U
+1020:20:Name -> Inst:django.test.runner.DiscoverRunner
+1022:15:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1025:15:Call -> List:0
+1025:15:Name -> Func:django.test.utils.setup_databases
+1026:12:Attribute -> Const:int:1 | U
+1026:12:Name -> Inst:django.test.runner.DiscoverRunner
+1027:12:Attribute -> Const:bool:True | U
+1027:12:Name -> Inst:django.test.runner.DiscoverRunner
+1028:24:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+1028:24:Name -> Inst:django.test.runner.DiscoverRunner
+1029:19:Attribute -> Const:bool:False | U
+1029:19:Name -> Inst:django.test.runner.DiscoverRunner
+1030:22:Attribute -> Const:bool:False | U
+1030:22:Name -> Inst:django.test.runner.DiscoverRunner
+1031:21:Attribute -> Const:int:0 | U
+1031:21:Name -> Inst:django.test.runner.DiscoverRunner
+1032:14:Name -> Dict:0
+1036:11:Attribute -> Const:bool:False | U
+1036:11:Name -> Inst:django.test.runner.DiscoverRunner
+1037:19:Name -> Class:django.test.runner.DebugSQLTextTestResult
+1038:13:Attribute -> Const:bool:False | U
+1038:13:Name -> Inst:django.test.runner.DiscoverRunner
+1039:19:Name -> Class:django.test.runner.PDBDebugResult
+1043:24:Attribute -> Const:bool:False | U
+1043:24:Name -> Inst:django.test.runner.DiscoverRunner
+1044:27:Call -> Class:django.test.runner.DebugSQLTextTestResult | Class:django.test.runner.PDBDebugResult
+1044:27:Attribute -> BM:django.test.runner.DiscoverRunner.get_resultclass
+1044:27:Name -> Inst:django.test.runner.DiscoverRunner
+1045:25:Attribute -> Const:int:1 | U
+1045:25:Name -> Inst:django.test.runner.DiscoverRunner
+1046:22:Attribute -> Const:bool:False | U
+1046:22:Name -> Inst:django.test.runner.DiscoverRunner
+1047:25:Attribute -> Const:NoneType:None | U
+1047:25:Name -> Inst:django.test.runner.DiscoverRunner
+1049:15:Name -> Dict:5
+1054:8:Call -> U
+1054:8:Name -> Func:django.core.management.call_command
+1054:40:Attribute -> Const:int:1 | U
+1054:40:Name -> Inst:django.test.runner.DiscoverRunner
+1054:66:Name -> U
+1057:17:Call -> Dict:5
+1057:17:Attribute -> BM:django.test.runner.DiscoverRunner.get_test_runner_kwargs
+1057:17:Name -> Inst:django.test.runner.DiscoverRunner
+1058:17:Call -> Inst:unittest.runner.TextTestRunner
+1058:17:Attribute -> Class:unittest.runner.TextTestRunner
+1058:17:Name -> Inst:django.test.runner.DiscoverRunner
+1058:36:Name -> Dict:5
+1060:19:Call -> U
+1060:19:Attribute -> BM:unittest.runner.TextTestRunner.run
+1060:19:Name -> Inst:unittest.runner.TextTestRunner
+1060:30:Name -> U
+1062:15:Attribute -> Const:NoneType:None | Inst:django.test.runner.Shuffler
+1062:15:Name -> Inst:django.test.runner.DiscoverRunner
+1063:31:Attribute -> Const:str:'None (generated)' | Const:str:'None (given)' | Const:str:'None (test)' | Const:str:'Uninferable (generated)' | Const:str:'Uninferable (given)' | Const:str:'Uninferable (test)'
+1063:31:Attribute -> Inst:django.test.runner.Shuffler
+1063:31:Name -> Inst:django.test.runner.DiscoverRunner
+1064:16:Call -> Const:NoneType:None
+1064:16:Attribute -> BM:django.test.runner.DiscoverRunner.log
+1064:16:Name -> Inst:django.test.runner.DiscoverRunner
+1064:47:Name -> Const:str:'None (generated)' | Const:str:'None (given)' | Const:str:'None (test)' | Const:str:'Uninferable (generated)' | Const:str:'Uninferable (given)' | Const:str:'Uninferable (test)'
+1068:8:Call -> Const:NoneType:None
+1068:8:Name -> Func:django.test.utils.teardown_databases
+1069:12:Name -> U
+1070:22:Attribute -> Const:int:1 | U
+1070:22:Name -> Inst:django.test.runner.DiscoverRunner
+1071:21:Attribute -> Const:int:0 | U
+1071:21:Name -> Inst:django.test.runner.DiscoverRunner
+1072:19:Attribute -> Const:bool:False | U
+1072:19:Name -> Inst:django.test.runner.DiscoverRunner
+1076:8:Call -> Func:unittest.signals.removeHandler.inner
+1076:8:Attribute -> Func:unittest.signals.removeHandler
+1076:8:Name -> Module:unittest
+1077:8:Call -> Const:NoneType:None
+1077:8:Name -> Func:django.test.utils.teardown_test_environment
+1081:12:Call -> ERR
+1081:12:Name -> Func:builtins.len
+1081:16:Attribute -> U
+1081:16:Name -> U
+1081:35:Call -> ERR
+1081:35:Name -> Func:builtins.len
+1081:39:Attribute -> U
+1081:39:Name -> U
+1081:56:Call -> ERR
+1081:56:Name -> Func:builtins.len
+1081:60:Attribute -> U
+1081:60:Name -> U
+1086:20:Call -> Gen:django.test.utils.iter_test_cases
+1086:20:Name -> Func:django.test.utils.iter_test_cases
+1086:36:Name -> U
+1087:29:Call -> U
+1087:29:Name -> Func:builtins.getattr
+1087:37:Name -> U
+1088:15:Name -> U
+1089:33:Name -> Inst:django.db.utils.ConnectionHandler
+1090:15:Name -> U | Inst:django.db.utils.ConnectionHandler
+1091:38:Call -> U
+1091:38:Name -> Func:builtins.getattr
+1091:46:Name -> U
+1092:16:Call -> ERR
+1092:16:Attribute -> BM:builtins.dict.update
+1092:16:Name -> Dict:0
+1093:21:Name -> U
+1093:28:Name -> U
+1093:51:Call -> ERR
+1093:51:Attribute -> BM:builtins.dict.get
+1093:51:Name -> Dict:0
+1093:65:Name -> U
+1094:33:Name -> U | Inst:django.db.utils.ConnectionHandler
+1096:15:Name -> Dict:0
+1099:20:Call -> Dict:0
+1099:20:Attribute -> BM:django.test.runner.DiscoverRunner._get_databases
+1099:20:Name -> Inst:django.test.runner.DiscoverRunner
+1099:40:Name -> U
+1100:28:Name -> U
+1100:47:Name -> Inst:django.db.utils.ConnectionHandler
+1100:62:Name -> U
+1100:75:Name -> Dict:0
+1101:11:Name -> U
+1102:12:Call -> Const:NoneType:None
+1102:12:Attribute -> BM:django.test.runner.DiscoverRunner.log
+1102:12:Name -> Inst:django.test.runner.DiscoverRunner
+1104:18:Call -> Const:str:''
+1104:18:Attribute -> BM:builtins.str.join
+1104:28:Call -> ERR
+1104:28:Name -> Func:builtins.sorted
+1104:35:Name -> U
+1105:22:Attribute -> Const:int:10
+1105:22:Name -> Module:logging
+1107:15:Name -> Dict:0
+1118:8:Call -> Const:NoneType:None
+1118:8:Attribute -> BM:django.test.runner.DiscoverRunner.setup_test_environment
+1118:8:Name -> Inst:django.test.runner.DiscoverRunner
+1119:16:Call -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1119:16:Attribute -> BM:django.test.runner.DiscoverRunner.build_suite
+1119:16:Name -> Inst:django.test.runner.DiscoverRunner
+1119:33:Name -> U
+1120:20:Call -> Dict:0
+1120:20:Attribute -> BM:django.test.runner.DiscoverRunner.get_databases
+1120:20:Name -> Inst:django.test.runner.DiscoverRunner
+1120:39:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1121:8:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1121:35:Call -> Inst:builtins.set
+1121:35:Name -> Class:builtins.set
+1122:12:Name -> U
+1122:42:Call -> DictItems
+1122:42:Attribute -> BM:builtins.dict.items
+1122:42:Name -> Dict:0
+1122:63:Name -> U
+1124:8:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1124:29:Call -> Set:0
+1124:29:Name -> Class:builtins.set
+1124:33:Name -> Dict:0
+1125:13:Call -> Gen:django.test.utils.TimeKeeper.timed | Gen:django.test.utils.NullTimeKeeper.timed
+1125:13:Attribute -> BM:django.test.utils.TimeKeeper.timed | BM:django.test.utils.NullTimeKeeper.timed
+1125:13:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+1125:13:Name -> Inst:django.test.runner.DiscoverRunner
+1126:25:Call -> List:0
+1126:25:Attribute -> BM:django.test.runner.DiscoverRunner.setup_databases
+1126:25:Name -> Inst:django.test.runner.DiscoverRunner
+1127:24:Name -> Dict:0
+1128:35:Attribute -> Inst:builtins.set | Set:0
+1128:35:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1132:12:Call -> Const:NoneType:None
+1132:12:Attribute -> BM:django.test.runner.DiscoverRunner.run_checks
+1132:12:Name -> Inst:django.test.runner.DiscoverRunner
+1132:28:Name -> Dict:0
+1133:21:Call -> U
+1133:21:Attribute -> BM:django.test.runner.DiscoverRunner.run_suite
+1133:21:Name -> Inst:django.test.runner.DiscoverRunner
+1133:36:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1134:15:Name -> Class:builtins.Exception
+1139:21:Call -> Gen:django.test.utils.TimeKeeper.timed | Gen:django.test.utils.NullTimeKeeper.timed
+1139:21:Attribute -> BM:django.test.utils.TimeKeeper.timed | BM:django.test.utils.NullTimeKeeper.timed
+1139:21:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+1139:21:Name -> Inst:django.test.runner.DiscoverRunner
+1140:20:Call -> Const:NoneType:None
+1140:20:Attribute -> BM:django.test.runner.DiscoverRunner.teardown_databases
+1140:20:Name -> Inst:django.test.runner.DiscoverRunner
+1140:44:Name -> List:0
+1141:16:Call -> Const:NoneType:None
+1141:16:Attribute -> BM:django.test.runner.DiscoverRunner.teardown_test_environment
+1141:16:Name -> Inst:django.test.runner.DiscoverRunner
+1142:19:Name -> Class:builtins.Exception
+1145:23:Name -> Const:bool:False | Const:bool:True
+1147:8:Call -> Const:NoneType:None | U
+1147:8:Attribute -> BM:django.test.utils.TimeKeeper.print_results | BM:django.test.utils.NullTimeKeeper.print_results
+1147:8:Attribute -> Inst:django.test.utils.TimeKeeper | Inst:django.test.utils.NullTimeKeeper
+1147:8:Name -> Inst:django.test.runner.DiscoverRunner
+1148:15:Call -> U
+1148:15:Attribute -> BM:django.test.runner.DiscoverRunner.suite_result
+1148:15:Name -> Inst:django.test.runner.DiscoverRunner
+1148:33:Name -> Inst:unittest.suite.TestSuite | Inst:django.test.runner.ParallelTestSuite
+1148:40:Name -> U
+1158:14:Call -> U | Const:NoneType:None
+1158:14:Name -> Func:importlib.import_module | U
+1158:28:Name -> U
+1159:12:Name -> Class:builtins.ImportError
+1159:25:Name -> Class:builtins.TypeError
+1162:18:Call -> U
+1162:18:Name -> Func:builtins.hasattr
+1162:26:Name -> U | Const:NoneType:None
+1178:18:Call -> U
+1178:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+1178:18:Attribute -> Module:posixpath | Module:ntpath
+1178:18:Name -> Module:os
+1178:31:Name -> U
+1179:15:Call -> Const:bool:False | Const:bool:True | U
+1179:15:Attribute -> Func:genericpath.exists | U
+1179:15:Attribute -> Module:posixpath | Module:ntpath
+1179:15:Name -> Module:os
+1179:30:Name -> U
+1181:19:Call -> U
+1181:19:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+1181:19:Attribute -> Module:posixpath | Module:ntpath
+1181:19:Name -> Module:os
+1181:35:Name -> U
+1182:11:Name -> U
+1182:23:Name -> U
+1185:20:Name -> U
+1186:11:Name -> U
+1190:14:Attribute -> U
+1190:14:Name -> U
+1190:31:Attribute -> U
+1190:31:Name -> U
+1201:26:Call -> Inst:itertools.groupby
+1201:26:Attribute -> Class:itertools.groupby
+1201:26:Name -> Module:itertools
+1201:44:Name -> U
+1201:51:Name -> Class:builtins.type
+1202:22:Call -> Inst:builtins.list
+1202:22:Name -> Class:builtins.list
+1202:27:Name -> U
+1203:20:Call -> U
+1203:20:Name -> Class:builtins.type
+1203:25:Name -> Inst:builtins.list
+1204:22:Call -> U
+1204:22:Attribute -> U
+1204:22:Name -> U
+1204:39:Name -> Inst:builtins.list
+1204:69:Call -> U
+1204:69:Attribute -> U
+1204:69:Name -> U
+1205:8:Name -> Dict:0
+1205:22:Name -> U
+1205:35:Name -> U
+1207:14:Call -> U
+1207:14:Attribute -> U
+1207:14:Name -> U
+1207:31:Name -> Dict:0
+1207:50:Name -> Func:django.test.runner._class_shuffle_key
+1209:11:Call -> Inst:itertools.chain
+1209:11:Attribute -> Class:itertools.chain
+1209:11:Name -> Module:itertools
+1209:29:Name -> Dict:0
+1209:43:Name -> U
+1209:59:Name -> U
+1219:7:Name -> Const:NoneType:None | U
+1220:11:Name -> Const:bool:False | U
+1221:19:Call -> Inst:builtins.reversed
+1221:19:Name -> Class:builtins.reversed
+1221:28:Name -> U
+1223:15:Call -> ERR
+1223:15:Name -> Func:builtins.iter
+1223:20:Name -> U
+1225:12:Call -> Inst:itertools.chain
+1225:12:Name -> Func:django.test.runner.shuffle_tests
+1225:26:Name -> U
+1225:33:Name -> Const:NoneType:None | U
+1226:11:Name -> Const:bool:False | U
+1227:15:Name -> Inst:itertools.chain
+1229:11:Call -> Inst:builtins.reversed
+1229:11:Name -> Class:builtins.reversed
+1229:20:Call -> Inst:builtins.list
+1229:20:Name -> Class:builtins.list
+1229:25:Name -> Inst:itertools.chain
+1254:12:Call -> Inst:collections.defaultdict
+1254:12:Name -> Class:collections.defaultdict
+1254:24:Name -> Class:django.utils.datastructures.OrderedSet
+1254:45:Call -> Inst:builtins.range
+1254:45:Name -> Class:builtins.range
+1254:51:Call -> ERR
+1254:51:Name -> Func:builtins.len
+1254:55:Name -> U
+1255:28:Name -> U
+1257:16:Name -> U
+1258:36:Call -> Inst:builtins.zip
+1258:36:Name -> Class:builtins.zip
+1258:40:Name -> U
+1258:52:Name -> U
+1259:15:Call -> ERR
+1259:15:Name -> Func:builtins.isinstance
+1259:26:Name -> U
+1259:32:Name -> U
+1262:23:Name -> U
+1263:8:Call -> U
+1263:8:Attribute -> U
+1263:8:Name -> U
+1263:17:Call -> U
+1263:17:Name -> Class:builtins.type
+1263:22:Name -> U
+1263:33:Name -> U
+1265:20:Name -> U
+1267:16:Call -> Inst:builtins.list
+1267:16:Name -> Class:builtins.list
+1267:21:Call -> ERR
+1267:21:Attribute -> Inst:builtins.builtin_function_or_method
+1267:21:Attribute -> Class:itertools.chain
+1267:21:Name -> Module:itertools
+1267:51:Call -> U
+1267:51:Attribute -> U
+1267:51:Name -> U
+1268:19:Call -> Inst:builtins.reversed | U | Inst:itertools.chain
+1268:19:Name -> Func:django.test.runner.reorder_test_bin
+1268:36:Name -> Inst:builtins.list
+1268:52:Name -> Const:NoneType:None | U
+1268:70:Name -> Const:bool:False | U
+1273:18:Call -> U
+1273:18:Name -> Class:builtins.type
+1273:23:Name -> U
+1274:16:Call -> Gen:django.test.utils.iter_test_cases
+1274:16:Name -> Func:django.test.utils.iter_test_cases
+1274:32:Name -> U
+1275:12:Call -> U
+1275:12:Name -> U
+1275:24:Name -> U
+1275:47:Call -> Inst:itertools.groupby
+1275:47:Attribute -> Class:itertools.groupby
+1275:47:Name -> Module:itertools
+1275:65:Name -> Gen:django.test.utils.iter_test_cases
+1275:76:Name -> Class:builtins.type
+1279:7:Call -> ERR
+1279:7:Name -> Func:builtins.isinstance
+1279:18:Name -> U
+1279:24:Attribute -> Class:unittest.loader._FailedTest
+1279:24:Attribute -> Module:unittest.loader
+1279:24:Name -> Module:unittest
+1283:16:Call -> Inst:builtins.set
+1283:16:Name -> Class:builtins.set
+1283:20:Call -> U
+1283:20:Name -> Func:builtins.getattr
+1283:28:Name -> U
+1284:19:Call -> U
+1284:19:Name -> Func:builtins.getattr
+1284:27:Name -> U
+1284:52:Call -> Const:str:''
+1284:52:Name -> Class:builtins.str
+1284:56:Name -> U
+1285:7:Call -> U
+1285:7:Name -> Func:builtins.hasattr
+1285:15:Name -> U
+1285:21:Name -> U
+1286:18:Call -> U
+1286:18:Name -> Func:builtins.getattr
+1286:26:Name -> U
+1286:32:Name -> U
+1287:23:Call -> Inst:builtins.list
+1287:23:Name -> Class:builtins.list
+1287:28:Call -> U
+1287:28:Name -> Func:builtins.getattr
+1287:36:Name -> U
+1288:20:Call -> ERR
+1288:20:Attribute -> BM:builtins.set.union
+1288:20:Name -> Inst:builtins.set
+1288:36:Name -> Inst:builtins.list
+1289:7:Name -> U
+1289:16:Call -> U
+1289:16:Attribute -> BM:builtins.set.isdisjoint | U
+1289:16:Name -> Inst:builtins.set | U
+1289:37:Name -> U
+1291:11:Call -> U
+1291:11:Attribute -> BM:builtins.set.isdisjoint | U
+1291:11:Name -> Inst:builtins.set | U
+1291:32:Name -> U
+1296:12:Name -> U
+1296:29:Name -> U
+1296:38:Call -> Const:bool:True | Const:bool:False | U
+1296:38:Name -> Func:django.test.runner.test_match_tags
+1296:54:Name -> U
+1296:60:Name -> U
+1296:66:Name -> U

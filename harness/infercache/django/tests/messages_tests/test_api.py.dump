@@ -1,0 +1,107 @@
+7:15:Name -> Class:django.test.testcases.SimpleTestCase
+8:9:Call -> Inst:django.test.client.RequestFactory
+8:9:Name -> Class:django.test.client.RequestFactory
+11:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+11:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+11:23:Attribute -> BM:django.test.client.RequestFactory.request
+11:23:Attribute -> Inst:django.test.client.RequestFactory
+11:23:Name -> Inst:tests.messages_tests.test_api.ApiTests
+12:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+12:23:Call -> Inst:tests.messages_tests.utils.DummyStorage
+12:23:Name -> Class:tests.messages_tests.utils.DummyStorage
+16:8:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+16:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+16:33:Attribute -> Inst:tests.messages_tests.utils.DummyStorage
+16:33:Name -> Inst:tests.messages_tests.test_api.ApiTests
+17:8:Call -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+17:8:Attribute -> Func:django.contrib.messages.api.add_message
+17:8:Name -> Module:django.contrib.messages
+17:29:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+17:29:Name -> Inst:tests.messages_tests.test_api.ApiTests
+17:43:Attribute -> Const:int:10
+17:43:Name -> Module:django.contrib.messages
+17:59:Name -> Const:str:'some message'
+18:20:Attribute -> List:0
+18:20:Attribute -> Inst:tests.messages_tests.utils.DummyStorage
+18:20:Name -> Inst:tests.messages_tests.test_api.ApiTests
+19:8:Call -> Const:NoneType:None
+19:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+19:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+19:25:Name -> Const:str:'some message'
+19:30:Attribute -> U
+19:30:Name -> U
+23:8:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+23:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+23:33:Attribute -> Inst:tests.messages_tests.utils.DummyStorage
+23:33:Name -> Inst:tests.messages_tests.test_api.ApiTests
+24:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+24:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+24:13:Name -> Inst:tests.messages_tests.test_api.ApiTests
+24:38:Name -> Class:builtins.TypeError
+24:49:Name -> Const:str:"add_message() argument must be an HttpR
+25:12:Call -> U
+25:12:Attribute -> Func:django.contrib.messages.api.add_message
+25:12:Name -> Module:django.contrib.messages
+25:39:Attribute -> Const:int:10
+25:39:Name -> Module:django.contrib.messages
+26:8:Call -> Const:NoneType:None
+26:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+26:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+26:25:Attribute -> List:0
+26:25:Attribute -> Inst:tests.messages_tests.utils.DummyStorage
+26:25:Name -> Inst:tests.messages_tests.test_api.ApiTests
+33:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+33:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+33:13:Name -> Inst:tests.messages_tests.test_api.ApiTests
+33:38:Attribute -> Class:django.contrib.messages.api.MessageFailure
+33:38:Name -> Module:django.contrib.messages
+33:63:Name -> Const:str:'You cannot add messages without install
+34:12:Call -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+34:12:Attribute -> Func:django.contrib.messages.api.add_message
+34:12:Name -> Module:django.contrib.messages
+34:33:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+34:33:Name -> Inst:tests.messages_tests.test_api.ApiTests
+34:47:Attribute -> Const:int:10
+34:47:Name -> Module:django.contrib.messages
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+35:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+35:25:Attribute -> List:0
+35:25:Attribute -> Inst:tests.messages_tests.utils.DummyStorage
+35:25:Name -> Inst:tests.messages_tests.test_api.ApiTests
+38:8:Call -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+38:8:Attribute -> Func:django.contrib.messages.api.add_message
+38:8:Name -> Module:django.contrib.messages
+39:12:Attribute -> Inst:django.core.handlers.wsgi.WSGIRequest
+39:12:Name -> Inst:tests.messages_tests.test_api.ApiTests
+39:26:Attribute -> Const:int:10
+39:26:Name -> Module:django.contrib.messages
+41:8:Call -> Const:NoneType:None
+41:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+41:8:Name -> Inst:tests.messages_tests.test_api.ApiTests
+41:25:Attribute -> List:0
+41:25:Attribute -> Inst:tests.messages_tests.utils.DummyStorage
+41:25:Name -> Inst:tests.messages_tests.test_api.ApiTests
+46:8:Name -> Inst:tests.messages_tests.test_api.CustomRequest
+46:24:Name -> U
+50:19:Call -> ERR
+50:19:Attribute -> BM:builtins.object.__getattribute__
+50:19:Call -> Super
+50:19:Name -> Class:builtins.super
+50:44:Name -> U
+51:15:Name -> Class:builtins.AttributeError
+52:19:Call -> U
+52:19:Name -> Func:builtins.getattr
+52:27:Attribute -> U
+52:27:Name -> Inst:tests.messages_tests.test_api.CustomRequest
+52:42:Name -> U
+55:28:Name -> Class:tests.messages_tests.test_api.ApiTests
+62:8:Call -> Const:NoneType:None | U
+62:8:Attribute -> BM:tests.messages_tests.test_api.ApiTests.setUp | BM:unittest.case.TestCase.setUp
+62:8:Call -> Super
+62:8:Name -> Class:builtins.super
+63:8:Name -> Inst:tests.messages_tests.test_api.CustomRequestApiTests
+63:23:Call -> Inst:tests.messages_tests.test_api.CustomRequest
+63:23:Name -> Class:tests.messages_tests.test_api.CustomRequest
+63:37:Attribute -> Inst:tests.messages_tests.test_api.CustomRequest | Inst:django.core.handlers.wsgi.WSGIRequest
+63:37:Name -> Inst:tests.messages_tests.test_api.CustomRequestApiTests

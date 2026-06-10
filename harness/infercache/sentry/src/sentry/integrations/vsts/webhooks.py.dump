@@ -1,0 +1,278 @@
+32:3:Name -> Const:bool:False
+36:8:Call -> Inst:builtins.object
+36:8:Name -> Class:builtins.object
+37:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+37:9:Attribute -> Func:logging.getLogger
+37:9:Name -> Module:logging
+40:31:Name -> Class:_collections_abc.Mapping
+40:39:Name -> Class:builtins.str
+40:44:Name -> Class:typing.Any
+40:53:Name -> Class:builtins.str
+41:18:Name -> U
+42:11:Call -> Const:str:''
+42:11:Name -> Class:builtins.str
+42:15:Name -> U
+45:1:Name -> U
+46:22:Name -> U
+47:12:Attribute -> U
+47:12:Name -> U
+49:16:Attribute -> U
+49:16:Name -> U
+52:18:Call -> U
+52:18:Name -> U
+55:16:Attribute -> U
+55:16:Name -> U
+55:38:Call -> U
+55:38:Name -> U
+56:16:Attribute -> U
+56:16:Name -> U
+56:40:Call -> U
+56:40:Name -> U
+57:16:Attribute -> U
+57:16:Name -> U
+57:48:Call -> U
+57:48:Name -> U
+65:28:Name -> U
+65:44:Name -> Class:typing.Any
+65:59:Name -> Class:typing.Any
+65:67:Name -> U
+67:19:Attribute -> U
+67:19:Name -> U
+68:25:Name -> U
+69:26:Call -> Const:str:''
+69:26:Name -> Func:src.sentry.integrations.vsts.webhooks.get_vsts_external_id
+69:52:Attribute -> U
+69:52:Name -> U
+70:15:Name -> Class:builtins.Exception
+71:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+71:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+71:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+71:72:Call -> Const:str:''
+71:72:Name -> Class:builtins.str
+71:76:Name -> ExcInst:builtins.Exception
+72:19:Call -> ERR
+72:19:Attribute -> ERR
+72:19:Name -> Inst:src.sentry.integrations.vsts.webhooks.WorkItemWebhook
+72:39:Attribute -> U
+72:39:Name -> U
+75:11:Name -> U
+76:26:Call -> U
+76:26:Attribute -> U
+76:26:Name -> U
+77:25:Attribute -> U
+77:25:Attribute -> U
+77:25:Name -> U
+78:28:Name -> Const:str:''
+79:23:Attribute -> U
+79:23:Name -> U
+81:15:Name -> U
+82:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+82:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+82:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+84:42:Name -> Const:str:''
+84:69:Name -> U
+86:23:Call -> ERR
+86:23:Attribute -> ERR
+86:23:Name -> Inst:src.sentry.integrations.vsts.webhooks.WorkItemWebhook
+87:70:Attribute -> U
+87:70:Name -> U
+90:19:Call -> U | Const:bool:False
+90:19:Name -> Func:src.sentry.integrations.vsts.webhooks.check_webhook_secret
+90:40:Name -> U
+90:49:Name -> U
+90:62:Name -> U
+91:23:Call -> ERR
+91:23:Attribute -> ERR
+91:23:Name -> Inst:src.sentry.integrations.vsts.webhooks.WorkItemWebhook
+91:43:Attribute -> U
+91:43:Name -> U
+93:17:Call -> U
+93:17:Attribute -> U
+93:17:Call -> U
+93:17:Name -> U
+94:33:Attribute -> U
+94:33:Name -> U
+95:23:Attribute -> U
+95:23:Name -> U
+96:29:Attribute -> U
+96:29:Attribute -> U
+96:29:Name -> U
+98:16:Call -> Const:NoneType:None | Const:NoneType:None
+98:16:Name -> Func:src.sentry.integrations.vsts.webhooks.handle_updated_workitem
+98:40:Name -> U
+98:46:Name -> U
+100:15:Call -> ERR
+100:15:Attribute -> ERR
+100:15:Name -> Inst:src.sentry.integrations.vsts.webhooks.WorkItemWebhook
+103:34:Name -> U
+103:56:Name -> U
+103:84:Name -> Class:builtins.str
+103:92:Name -> Class:builtins.bool
+104:25:Call -> U
+104:25:Attribute -> U
+104:25:Call -> U
+104:25:Attribute -> U
+104:25:Attribute -> U
+104:25:Name -> U
+105:29:Call -> U
+105:29:Attribute -> U
+105:29:Attribute -> U
+105:29:Name -> U
+107:7:Name -> U
+107:30:Name -> U
+108:18:Name -> Class:builtins.bool
+108:25:Call -> U
+108:25:Name -> U
+108:47:Name -> U
+108:67:Name -> U
+109:45:Name -> U
+114:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+114:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+114:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+114:16:Name -> Const:str:'vsts.valid-webhook-secret' | Const:str:'vsts.invalid-webhook-secret' | Const:str:'vsts.missing-webhook-secret'
+114:42:Name -> U
+114:72:Attribute -> U
+114:72:Name -> U
+115:11:Name -> U | Const:bool:False
+119:17:Name -> U
+120:24:Name -> Class:builtins.str
+121:17:Name -> Class:_collections_abc.Mapping
+121:25:Name -> Class:builtins.str
+121:30:Name -> Class:builtins.str
+123:11:Name -> U
+126:11:Name -> Class:builtins.str
+129:16:Call -> U
+129:16:Attribute -> U
+129:16:Name -> U
+130:7:Name -> U
+131:16:Call -> U
+131:16:Name -> U
+131:28:Name -> U
+132:15:Name -> U
+133:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+133:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+133:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+137:38:Attribute -> U
+137:38:Name -> U
+138:42:Name -> U
+139:42:Name -> U
+145:4:Call -> U
+145:4:Name -> U
+146:20:Name -> U
+147:14:Name -> Const:NoneType:None | U
+148:27:Name -> U
+149:15:Name -> Const:bool:False | Const:bool:True
+156:17:Name -> U
+157:24:Name -> Class:builtins.str
+158:19:Name -> Class:_collections_abc.Mapping
+158:27:Name -> Class:builtins.str
+158:32:Name -> Class:builtins.str
+159:13:Name -> Class:builtins.str
+161:9:Call -> U
+161:9:Attribute -> U
+161:9:Call -> U
+161:9:Name -> U
+162:20:Attribute -> U
+162:20:Name -> U
+162:81:Name -> U
+164:11:Name -> U
+167:27:Call -> U
+167:27:Attribute -> U
+167:27:Name -> U
+168:27:Attribute -> U
+168:27:Name -> U
+172:36:Attribute -> U
+172:36:Name -> U
+172:52:Name -> U
+173:30:Attribute -> U
+173:30:Name -> U
+174:29:Name -> U
+176:31:Name -> U
+177:17:Call -> U
+177:17:Name -> U
+177:40:Attribute -> U
+177:40:Name -> U
+178:31:Call -> U
+178:31:Attribute -> U
+178:31:Name -> U
+179:36:Attribute -> U
+179:36:Name -> U
+181:19:Call -> ERR
+181:19:Name -> Func:builtins.isinstance
+181:30:Name -> U
+181:44:Name -> U
+182:20:Call -> U
+182:20:Attribute -> U
+182:20:Name -> U
+183:24:Name -> U
+185:41:Name -> U
+187:41:Call -> U
+187:41:Attribute -> U
+187:41:Name -> U
+188:39:Name -> U
+192:20:Call -> U
+192:20:Attribute -> U
+192:20:Name -> U
+193:24:Attribute -> U
+193:24:Name -> U
+194:30:Name -> Dict:3
+198:34:Name -> Class:_collections_abc.Mapping
+198:42:Name -> Class:builtins.str
+198:47:Name -> Class:typing.Any
+198:66:Name -> U
+199:13:Name -> Class:builtins.str
+201:29:Name -> U
+202:11:Name -> Class:builtins.KeyError
+203:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+203:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+203:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+205:28:Call -> Const:str:''
+205:28:Name -> Class:builtins.str
+205:32:Name -> ExcInst:builtins.KeyError
+205:54:Attribute -> U
+205:54:Name -> U
+210:18:Name -> U
+211:11:Name -> Class:builtins.KeyError
+212:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+212:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+212:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+214:28:Call -> Const:str:''
+214:28:Name -> Class:builtins.str
+214:32:Name -> ExcInst:builtins.KeyError
+214:54:Attribute -> U
+214:54:Name -> U
+218:22:Call -> U
+218:22:Attribute -> U
+218:22:Name -> U
+219:24:Call -> U
+219:24:Attribute -> U
+219:24:Name -> U
+220:11:Name -> Class:builtins.KeyError
+221:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+221:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+221:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+224:25:Call -> Const:str:''
+224:25:Name -> Class:builtins.str
+224:29:Name -> ExcInst:builtins.KeyError
+225:30:Name -> U
+226:34:Attribute -> U
+226:34:Name -> U
+227:36:Name -> Const:NoneType:None | U
+231:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+231:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+231:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+234:26:Name -> U
+235:30:Attribute -> U
+235:30:Name -> U
+236:32:Name -> Const:NoneType:None | U
+240:4:Call -> Const:NoneType:None | Const:NoneType:None
+240:4:Name -> Func:src.sentry.integrations.vsts.webhooks.handle_assign_to
+240:21:Name -> U
+240:34:Name -> U
+240:54:Name -> U
+241:4:Call -> Const:NoneType:None
+241:4:Name -> Func:src.sentry.integrations.vsts.webhooks.handle_status_change
+241:25:Name -> U
+241:38:Name -> U
+241:58:Name -> U
+241:73:Name -> Const:NoneType:None | U

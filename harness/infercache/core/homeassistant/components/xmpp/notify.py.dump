@@ -1,0 +1,607 @@
+42:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+42:10:Attribute -> Func:logging.getLogger
+42:10:Name -> Module:logging
+42:28:Name -> Const:str:'homeassistant.components.xmpp.notify' | Const:str:'__main__'
+58:18:Call -> U
+58:18:Attribute -> U
+58:18:Name -> U
+60:8:Call -> U
+60:8:Attribute -> U
+60:8:Name -> U
+60:21:Name -> Const:str:'sender'
+60:35:Attribute -> Func:homeassistant.helpers.config_validation.string
+60:35:Name -> Module:homeassistant.helpers.config_validation
+61:8:Call -> U
+61:8:Attribute -> U
+61:8:Name -> U
+61:21:Name -> Const:str:'password'
+61:37:Attribute -> Func:homeassistant.helpers.config_validation.string
+61:37:Name -> Module:homeassistant.helpers.config_validation
+62:8:Call -> U
+62:8:Attribute -> U
+62:8:Name -> U
+62:21:Name -> Const:str:'recipient'
+62:38:Call -> U
+62:38:Attribute -> U
+62:38:Name -> U
+62:46:Attribute -> Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list
+62:46:Name -> Module:homeassistant.helpers.config_validation
+62:63:Attribute -> Func:homeassistant.helpers.config_validation.string
+62:63:Name -> Module:homeassistant.helpers.config_validation
+63:8:Call -> U
+63:8:Attribute -> U
+63:8:Name -> U
+63:21:Name -> Const:str:'resource'
+63:44:Name -> Const:str:'home-assistant'
+63:63:Attribute -> Func:homeassistant.helpers.config_validation.string
+63:63:Name -> Module:homeassistant.helpers.config_validation
+64:8:Call -> U
+64:8:Attribute -> U
+64:8:Name -> U
+64:21:Name -> Const:str:'room'
+64:45:Attribute -> Func:homeassistant.helpers.config_validation.string
+64:45:Name -> Module:homeassistant.helpers.config_validation
+65:8:Call -> U
+65:8:Attribute -> U
+65:8:Name -> U
+65:21:Name -> Const:str:'tls'
+65:46:Attribute -> Func:homeassistant.helpers.config_validation.boolean
+65:46:Name -> Module:homeassistant.helpers.config_validation
+66:8:Call -> U
+66:8:Attribute -> U
+66:8:Name -> U
+66:21:Name -> Const:str:'verify'
+66:49:Attribute -> Func:homeassistant.helpers.config_validation.boolean
+66:49:Name -> Module:homeassistant.helpers.config_validation
+72:10:Name -> U
+73:12:Name -> Class:builtins.dict
+74:20:Name -> Class:builtins.dict
+75:5:Name -> ERR
+77:11:Call -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+77:11:Name -> Class:homeassistant.components.xmpp.notify.XmppNotificationService
+78:8:Call -> U
+78:8:Attribute -> U
+78:8:Name -> U
+78:19:Name -> Const:str:'sender'
+79:8:Call -> U
+79:8:Attribute -> U
+79:8:Name -> U
+79:19:Name -> Const:str:'resource'
+80:8:Call -> U
+80:8:Attribute -> U
+80:8:Name -> U
+80:19:Name -> Const:str:'password'
+81:8:Call -> U
+81:8:Attribute -> U
+81:8:Name -> U
+81:19:Name -> Const:str:'recipient'
+82:8:Call -> U
+82:8:Attribute -> U
+82:8:Name -> U
+82:19:Name -> Const:str:'tls'
+83:8:Call -> U
+83:8:Attribute -> U
+83:8:Name -> U
+83:19:Name -> Const:str:'verify'
+84:8:Call -> U
+84:8:Attribute -> U
+84:8:Name -> U
+84:19:Name -> Const:str:'room'
+85:8:Name -> U
+89:30:Name -> Class:homeassistant.components.notify.legacy.BaseNotificationService
+94:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+94:21:Name -> U
+95:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+95:23:Name -> U
+96:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+96:25:Name -> U
+97:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+97:25:Name -> U
+98:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+98:27:Name -> U
+99:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+99:20:Name -> U
+100:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+100:23:Name -> U
+101:8:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+101:21:Name -> U
+103:48:Name -> Class:builtins.str
+103:68:Name -> Class:typing.Any
+105:16:Call -> ERR
+105:16:Attribute -> BM:builtins.dict.get
+105:16:Name -> Dict:0
+105:27:Name -> Const:str:'title'
+105:39:Name -> Const:str:'Home Assistant'
+106:40:Name -> U
+106:18:Name -> U
+106:27:Name -> Const:str:'' | U
+106:51:Name -> Const:str:'' | U
+107:18:Call -> ERR
+107:18:Attribute -> BM:builtins.dict.get
+107:18:Name -> Dict:0
+107:29:Name -> Const:str:'target'
+107:42:Attribute -> U
+107:42:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+108:15:Call -> ERR
+108:15:Attribute -> BM:builtins.dict.get
+108:15:Name -> Dict:0
+108:26:Name -> Const:str:'data'
+109:62:Name -> U
+109:18:Call -> U
+109:18:Attribute -> U
+109:18:Name -> U
+109:27:Name -> Const:str:'timeout'
+109:41:Name -> Const:int:10
+111:14:Call -> Const:NoneType:None
+111:14:Name -> Func:homeassistant.components.xmpp.notify.async_send_message
+112:15:Attribute -> U
+112:15:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+112:30:Attribute -> U
+112:30:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+113:12:Attribute -> U
+113:12:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+114:12:Name -> U
+115:12:Attribute -> U
+115:12:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+116:12:Attribute -> U
+116:12:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+117:12:Attribute -> U
+117:12:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+118:12:Attribute -> U
+118:12:Name -> Inst:homeassistant.components.xmpp.notify.XmppNotificationService
+119:12:Name -> Const:str:'Uninferable: ' | Const:str:'Uninferable: Uninferable' | Const:str:'' | U
+120:12:Name -> U | Const:NoneType:None
+121:12:Name -> U
+139:30:Attribute -> U
+139:30:Name -> U
+144:12:Call -> Const:NoneType:None
+144:12:Attribute -> BM:builtins.object.__init__
+144:12:Call -> Super
+144:12:Name -> Class:builtins.super
+144:29:Name -> U
+144:37:Name -> U
+146:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+146:24:Attribute -> U
+146:24:Name -> U
+148:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+148:35:Name -> U
+149:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+149:37:Name -> U
+150:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+150:40:Name -> U
+151:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+151:63:Name -> U
+152:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+153:12:Call -> ERR
+153:12:Attribute -> ERR
+153:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+153:54:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.disconnect_on_login_fail
+153:54:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+154:12:Call -> ERR
+154:12:Attribute -> ERR
+154:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+154:52:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.start
+154:52:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+156:15:Name -> U
+157:16:Call -> ERR
+157:16:Attribute -> ERR
+157:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+158:19:Name -> U
+159:16:Call -> ERR
+159:16:Attribute -> ERR
+159:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+160:40:Attribute -> Func:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.discard_ssl_invalid_cert
+160:40:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+162:15:Name -> Const:NoneType:None | U
+164:16:Call -> ERR
+164:16:Attribute -> ERR
+164:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+165:16:Call -> ERR
+165:16:Attribute -> ERR
+165:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+166:16:Call -> ERR
+166:16:Attribute -> ERR
+166:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+167:16:Call -> ERR
+167:16:Attribute -> ERR
+167:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+168:16:Call -> ERR
+168:16:Attribute -> ERR
+168:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+170:12:Call -> ERR
+170:12:Attribute -> ERR
+170:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+174:15:Name -> U
+175:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+175:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+175:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+175:49:Name -> U
+176:22:Call -> ERR
+176:22:Attribute -> ERR
+176:22:Attribute -> ERR
+176:22:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+176:60:Name -> U
+176:66:Name -> U
+178:15:Name -> Const:NoneType:None | U
+179:22:Call -> Const:NoneType:None
+179:22:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.send_file
+179:22:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+179:45:Name -> Const:NoneType:None | U
+180:15:Name -> U
+181:16:Call -> Const:NoneType:None
+181:16:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.send_text_message
+181:16:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+183:12:Call -> ERR
+183:12:Attribute -> ERR
+183:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+193:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+193:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+193:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+193:52:Name -> Const:NoneType:None | U
+194:28:Call -> U | Const:NoneType:None
+194:28:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.upload_file
+194:28:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+194:53:Name -> Const:NoneType:None | U
+196:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+196:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+196:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+197:33:Name -> U
+198:23:Name -> U
+199:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+199:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+199:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+199:60:Name -> U
+200:34:Call -> ERR
+200:34:Attribute -> ERR
+200:34:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+200:51:Name -> U
+202:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+202:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+202:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+202:60:Name -> U
+203:34:Call -> ERR
+203:34:Attribute -> ERR
+203:34:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+203:51:Name -> U
+204:20:Name -> U
+204:38:Name -> U
+205:20:Name -> U
+205:44:Name -> U
+207:24:Call -> U
+207:24:Attribute -> U
+207:24:Name -> U
+208:28:Name -> U
+208:37:Name -> U
+208:48:Name -> U
+209:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+209:24:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+209:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+209:73:Name -> U
+210:23:Name -> U
+212:20:Name -> U
+212:29:Name -> U
+212:40:Name -> U
+213:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+213:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+213:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+213:73:Name -> U
+214:19:Name -> U
+215:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+215:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+215:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+215:53:Name -> U
+216:19:Name -> U
+217:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+217:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+217:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+217:83:Name -> U
+218:19:Name -> U
+219:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+219:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+219:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+219:81:Name -> U
+220:19:Name -> U
+221:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+221:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+221:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+221:75:Name -> U
+222:19:Attribute -> U
+222:19:Attribute -> U
+222:19:Name -> U
+223:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+223:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+223:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+223:68:Name -> U
+224:19:Attribute -> U
+224:19:Attribute -> U
+224:19:Name -> U
+225:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+225:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+225:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+225:61:Name -> U
+227:16:Name -> Class:builtins.FileNotFoundError
+228:16:Name -> Class:builtins.PermissionError
+229:16:Name -> Class:builtins.IsADirectoryError
+230:16:Name -> Class:builtins.TimeoutError
+232:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+232:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+232:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+232:55:Name -> ExcInst:builtins.FileNotFoundError | ExcInst:builtins.PermissionError | ExcInst:builtins.IsADirectoryError | ExcInst:builtins.TimeoutError
+233:19:Name -> Class:builtins.TimeoutError
+234:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+234:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+234:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+234:72:Name -> ExcInst:builtins.TimeoutError
+242:15:Call -> U
+242:15:Attribute -> U
+242:15:Name -> Const:NoneType:None | U
+242:24:Name -> Const:str:'url_template'
+243:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+243:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+243:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+243:54:Name -> Const:NoneType:None | U
+243:59:Name -> Const:str:'url_template'
+244:24:Call -> U
+244:24:Attribute -> U
+244:24:Name -> U
+244:49:Name -> Const:NoneType:None | U
+244:54:Name -> Const:str:'url_template'
+244:74:Name -> U
+245:26:Call -> U
+245:26:Attribute -> U
+245:26:Name -> U
+245:57:Name -> U
+246:28:Call -> Const:NoneType:None | U
+246:28:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.upload_file_from_url
+246:28:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+246:54:Name -> U
+246:71:Name -> Const:NoneType:None | U
+247:17:Call -> U
+247:17:Attribute -> U
+247:17:Name -> Const:NoneType:None | U
+247:26:Name -> Const:str:'url'
+248:28:Call -> Const:NoneType:None | U
+248:28:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.upload_file_from_url
+248:28:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+248:54:Name -> Const:NoneType:None | U
+248:59:Name -> Const:str:'url'
+248:78:Name -> Const:NoneType:None | U
+249:17:Call -> U
+249:17:Attribute -> U
+249:17:Name -> Const:NoneType:None | U
+249:26:Name -> Const:str:'path_template'
+250:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+250:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+250:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+250:55:Name -> Const:NoneType:None | U
+250:60:Name -> Const:str:'path_template'
+251:24:Call -> U
+251:24:Attribute -> U
+251:24:Name -> U
+251:49:Name -> Const:NoneType:None | U
+251:54:Name -> Const:str:'path_template'
+251:75:Name -> U
+252:27:Call -> U
+252:27:Attribute -> U
+252:27:Name -> U
+252:58:Name -> U
+253:28:Call -> U
+253:28:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.upload_file_from_path
+253:28:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+253:55:Name -> U
+253:73:Name -> Const:NoneType:None | U
+254:17:Call -> U
+254:17:Attribute -> U
+254:17:Name -> Const:NoneType:None | U
+254:26:Name -> Const:str:'path'
+255:28:Call -> U
+255:28:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.upload_file_from_path
+255:28:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+255:55:Name -> Const:NoneType:None | U
+255:60:Name -> Const:str:'path'
+255:80:Name -> Const:NoneType:None | U
+259:15:Name -> U | Const:NoneType:None
+260:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+260:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+260:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+261:22:Call -> U
+261:22:Name -> U
+263:19:Name -> U | Const:NoneType:None
+270:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+270:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+270:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+270:50:Name -> U
+274:23:Call -> U
+274:23:Attribute -> U
+274:23:Name -> U
+275:20:Name -> U
+275:32:Call -> U
+275:32:Attribute -> U
+275:32:Name -> Const:NoneType:None | U
+275:41:Name -> Const:str:'verify'
+275:69:Name -> Const:NoneType:None | U
+278:27:Call -> U
+278:27:Attribute -> U
+278:27:Name -> U
+278:55:Name -> Func:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.upload_file_from_url.get_url
+278:64:Name -> U
+280:15:Attribute -> U
+280:15:Name -> U
+280:37:Attribute -> Inst:http.HTTPStatus.BAD_REQUEST
+280:37:Name -> Class:http.HTTPStatus
+281:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+281:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+281:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+281:61:Name -> U
+284:23:Call -> ERR
+284:23:Name -> Func:builtins.len
+284:27:Attribute -> U
+284:27:Name -> U
+290:15:Call -> U
+290:15:Attribute -> U
+290:15:Name -> Const:NoneType:None | U
+290:24:Name -> Const:str:'path'
+292:27:Call -> U | Const:str:'' | Const:str:'.txt'
+292:27:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.get_random_filename
+292:27:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+292:52:Call -> U
+292:52:Attribute -> U
+292:52:Name -> Const:NoneType:None | U
+292:61:Name -> Const:str:'path'
+295:20:Call -> Const:NoneType:None | U
+295:20:Attribute -> Func:mimetypes.guess_extension
+295:20:Name -> Module:mimetypes
+295:46:Attribute -> U
+295:46:Name -> U
+298:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+298:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+298:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+298:50:Name -> Const:str:'.unknown' | U
+299:27:Call -> Const:str:'.unknown' | U
+299:27:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.get_random_filename
+299:27:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+299:68:Name -> Const:str:'.unknown' | U
+301:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+301:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+301:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+301:57:Name -> U | Const:str:'' | Const:str:'.txt' | Const:str:'.unknown'
+303:25:Call -> ERR
+303:25:Attribute -> ERR
+303:25:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+304:16:Name -> U | Const:str:'' | Const:str:'.txt' | Const:str:'.unknown'
+305:21:Name -> U
+306:27:Attribute -> U
+306:27:Name -> U
+307:29:Attribute -> U
+307:29:Name -> U
+308:24:Name -> Const:NoneType:None | U
+311:42:Name -> Class:builtins.str
+311:50:Name -> Class:builtins.bytes
+313:17:Call -> ERR
+313:17:Name -> Func:_io.open
+313:22:Name -> U
+314:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+314:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+314:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+314:49:Name -> U
+315:23:Call -> U
+315:23:Attribute -> U
+315:23:Name -> U
+317:52:Name -> Class:builtins.str
+319:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+319:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+319:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+319:58:Name -> U
+321:19:Call -> U
+321:19:Attribute -> U
+321:19:Attribute -> U
+321:19:Name -> U
+321:47:Name -> U
+322:22:Call -> ExcInst:builtins.PermissionError
+322:22:Name -> Class:builtins.PermissionError
+324:31:Call -> U
+324:31:Attribute -> U
+324:31:Name -> U
+324:59:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot._read_upload_file
+324:59:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+324:83:Name -> U
+325:23:Call -> ERR
+325:23:Name -> Func:builtins.len
+325:27:Name -> U
+326:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+326:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+326:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+326:50:Name -> U
+328:32:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | U
+328:32:Attribute -> Func:mimetypes.guess_type
+328:32:Name -> Module:mimetypes
+328:53:Name -> U
+329:31:Name -> Const:str:'application/octet-stream'
+330:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+330:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+330:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+330:48:Name -> Const:NoneType:None | U | Const:str:'text/plain' | Const:NoneType:None | Const:NoneType:None | Const:str:'application/octet-stream'
+333:23:Call -> U | Const:str:'' | Const:str:'.txt'
+333:23:Attribute -> BM:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot.get_random_filename
+333:23:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+333:48:Call -> U
+333:48:Attribute -> U
+333:48:Name -> Const:NoneType:None | U
+333:57:Name -> Const:str:'path'
+334:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+334:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+334:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+334:68:Name -> U | Const:str:'' | Const:str:'.txt'
+336:25:Call -> ERR
+336:25:Attribute -> ERR
+336:25:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+337:16:Name -> U | Const:str:'' | Const:str:'.txt'
+338:21:Name -> U
+339:27:Name -> U
+340:29:Name -> Const:NoneType:None | U | Const:str:'text/plain' | Const:NoneType:None | Const:NoneType:None | Const:str:'application/octet-stream'
+341:24:Name -> Const:NoneType:None | U
+347:19:Name -> U
+348:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+348:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+348:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+348:64:Name -> U
+349:20:Call -> ERR
+349:20:Attribute -> ERR
+349:20:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+349:42:Name -> U
+349:54:Name -> U
+351:37:Name -> U
+352:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+352:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+352:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+352:63:Name -> U
+353:24:Call -> ERR
+353:24:Attribute -> ERR
+353:24:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+353:46:Name -> U
+353:63:Name -> U
+354:20:Name -> U
+354:29:Name -> U
+354:40:Name -> U
+355:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+355:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+355:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+355:64:Name -> U
+356:19:Name -> U
+357:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+357:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+357:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+357:53:Name -> U
+361:15:Name -> Const:NoneType:None | U
+362:23:Call -> Inst:pathlib.Path
+362:23:Attribute -> Class:pathlib.Path
+362:23:Name -> Module:pathlib
+362:36:Name -> U
+363:19:Attribute -> U | Const:str:''
+363:19:Name -> Inst:pathlib.Path
+364:32:Call -> Const:str:''
+364:32:Attribute -> BM:builtins.str.join
+364:40:Attribute -> List:0 | U
+364:40:Name -> Inst:pathlib.Path
+368:16:Call -> Const:str:''
+368:16:Attribute -> BM:builtins.str.join
+368:24:Call -> U
+368:24:Attribute -> BM:random.Random.choice
+368:24:Name -> Module:random
+368:38:Attribute -> Const:str:'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLM
+368:38:Name -> Module:string
+368:69:Call -> Inst:builtins.range
+368:69:Name -> Class:builtins.range
+369:18:Name -> Const:NoneType:None | U | Const:str:'' | Const:str:'.txt'
+374:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+374:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+374:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+375:12:Call -> ERR
+375:12:Attribute -> ERR
+375:12:Name -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+377:9:Name -> Class:builtins.staticmethod
+380:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+380:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+380:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+382:4:Call -> Inst:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot
+382:4:Name -> Class:homeassistant.components.xmpp.notify.async_send_message.SendNotificationBot

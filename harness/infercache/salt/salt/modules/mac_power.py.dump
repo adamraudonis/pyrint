@@ -1,0 +1,350 @@
+18:11:Call -> U
+18:11:Attribute -> Func:salt.utils.platform.is_darwin
+18:11:Attribute -> Module:salt.utils.platform
+18:11:Attribute -> Module:salt.utils
+18:11:Name -> Module:salt
+25:11:Name -> Const:str:'power'
+39:7:Call -> ERR
+39:7:Name -> Func:builtins.isinstance
+39:18:Name -> U
+39:27:Name -> Class:builtins.str
+40:11:Call -> U
+40:11:Attribute -> U
+40:11:Name -> U
+44:16:Call -> U
+44:16:Attribute -> BM:builtins.str.format
+46:36:Name -> U
+48:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+48:18:Name -> Class:salt.exceptions.SaltInvocationError
+48:38:Name -> U
+49:9:Call -> ERR
+49:9:Name -> Func:builtins.isinstance
+49:20:Name -> U
+49:29:Name -> Class:builtins.bool
+50:11:Name -> U
+52:16:Call -> U
+52:16:Attribute -> BM:builtins.str.format
+55:36:Name -> U
+57:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+57:18:Name -> Class:salt.exceptions.SaltInvocationError
+57:38:Name -> U
+60:9:Call -> ERR
+60:9:Name -> Func:builtins.isinstance
+60:20:Name -> U
+60:29:Name -> Class:builtins.int
+61:11:Name -> U
+61:22:Call -> Inst:builtins.range
+61:22:Name -> Class:builtins.range
+62:19:Name -> U
+65:16:Call -> U
+65:16:Attribute -> BM:builtins.str.format
+67:36:Name -> U
+69:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+69:18:Name -> Class:salt.exceptions.SaltInvocationError
+69:38:Name -> U
+71:68:Name -> U
+72:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+72:14:Name -> Class:salt.exceptions.SaltInvocationError
+72:34:Name -> Const:str:'Unknown Variable Type Passed for Minute
+92:20:Call -> U
+92:20:Name -> Func:salt.modules.mac_power.get_computer_sleep
+93:19:Call -> U
+93:19:Name -> Func:salt.modules.mac_power.get_display_sleep
+94:21:Call -> U
+94:21:Name -> Func:salt.modules.mac_power.get_harddisk_sleep
+117:12:Call -> Const:str:'Never' | Const:str:'Never' | U
+117:12:Name -> Func:salt.modules.mac_power._validate_sleep
+117:28:Name -> U
+118:35:Name -> Const:str:'Never' | Const:str:'Never' | U
+119:4:Call -> Const:bool:True
+119:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+119:4:Attribute -> Module:salt.utils.mac_utils
+119:4:Attribute -> Module:salt.utils
+119:4:Name -> Module:salt
+119:48:Name -> Const:str:'systemsetup -setsleep Never' | Const:str:'systemsetup -setsleep Never' | Const:str:'systemsetup -setsleep Uninferable'
+122:18:Name -> Func:salt.modules.mac_power.get_computer_sleep
+122:38:Name -> Func:salt.modules.mac_power.get_display_sleep
+122:57:Name -> Func:salt.modules.mac_power.get_harddisk_sleep
+123:8:Call -> ERR
+123:8:Attribute -> BM:builtins.list.append
+123:8:Name -> List:0
+124:12:Call -> Const:bool:True | Const:bool:False
+124:12:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+124:12:Attribute -> Module:salt.utils.mac_utils
+124:12:Attribute -> Module:salt.utils
+124:12:Name -> Module:salt
+125:16:Name -> Const:str:'Never' | Const:str:'Never' | U
+126:16:Name -> Func:salt.modules.mac_power.get_computer_sleep | Func:salt.modules.mac_power.get_display_sleep | Func:salt.modules.mac_power.get_harddisk_sleep
+129:11:Call -> ERR
+129:11:Name -> Func:builtins.all
+129:15:Name -> List:0
+145:10:Call -> U
+145:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+145:10:Attribute -> Module:salt.utils.mac_utils
+145:10:Attribute -> Module:salt.utils
+145:10:Name -> Module:salt
+146:11:Call -> U
+146:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+146:11:Attribute -> Module:salt.utils.mac_utils
+146:11:Attribute -> Module:salt.utils
+146:11:Name -> Module:salt
+146:45:Name -> U
+167:12:Call -> Const:str:'Never' | Const:str:'Never' | U
+167:12:Name -> Func:salt.modules.mac_power._validate_sleep
+167:28:Name -> U
+168:43:Name -> Const:str:'Never' | Const:str:'Never' | U
+169:4:Call -> Const:bool:True
+169:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+169:4:Attribute -> Module:salt.utils.mac_utils
+169:4:Attribute -> Module:salt.utils
+169:4:Name -> Module:salt
+169:48:Name -> Const:str:'systemsetup -setcomputersleep Never' | Const:str:'systemsetup -setcomputersleep Never' | Const:str:'systemsetup -setcomputersleep Uninferab
+171:11:Call -> Const:bool:True | Const:bool:False
+171:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+171:11:Attribute -> Module:salt.utils.mac_utils
+171:11:Attribute -> Module:salt.utils
+171:11:Name -> Module:salt
+172:8:Call -> Const:str:''
+172:8:Name -> Class:builtins.str
+172:12:Name -> Const:str:'Never' | Const:str:'Never' | U
+173:8:Name -> Func:salt.modules.mac_power.get_computer_sleep
+190:10:Call -> U
+190:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+190:10:Attribute -> Module:salt.utils.mac_utils
+190:10:Attribute -> Module:salt.utils
+190:10:Name -> Module:salt
+191:11:Call -> U
+191:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+191:11:Attribute -> Module:salt.utils.mac_utils
+191:11:Attribute -> Module:salt.utils
+191:11:Name -> Module:salt
+191:45:Name -> U
+212:12:Call -> Const:str:'Never' | Const:str:'Never' | U
+212:12:Name -> Func:salt.modules.mac_power._validate_sleep
+212:28:Name -> U
+213:42:Name -> Const:str:'Never' | Const:str:'Never' | U
+214:4:Call -> Const:bool:True
+214:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+214:4:Attribute -> Module:salt.utils.mac_utils
+214:4:Attribute -> Module:salt.utils
+214:4:Name -> Module:salt
+214:48:Name -> Const:str:'systemsetup -setdisplaysleep Never' | Const:str:'systemsetup -setdisplaysleep Never' | Const:str:'systemsetup -setdisplaysleep Uninferabl
+216:11:Call -> Const:bool:True | Const:bool:False
+216:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+216:11:Attribute -> Module:salt.utils.mac_utils
+216:11:Attribute -> Module:salt.utils
+216:11:Name -> Module:salt
+217:8:Call -> Const:str:''
+217:8:Name -> Class:builtins.str
+217:12:Name -> Const:str:'Never' | Const:str:'Never' | U
+218:8:Name -> Func:salt.modules.mac_power.get_display_sleep
+235:10:Call -> U
+235:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+235:10:Attribute -> Module:salt.utils.mac_utils
+235:10:Attribute -> Module:salt.utils
+235:10:Name -> Module:salt
+236:11:Call -> U
+236:11:Attribute -> Func:salt.utils.mac_utils.parse_return
+236:11:Attribute -> Module:salt.utils.mac_utils
+236:11:Attribute -> Module:salt.utils
+236:11:Name -> Module:salt
+236:45:Name -> U
+257:12:Call -> Const:str:'Never' | Const:str:'Never' | U
+257:12:Name -> Func:salt.modules.mac_power._validate_sleep
+257:28:Name -> U
+258:43:Name -> Const:str:'Never' | Const:str:'Never' | U
+259:4:Call -> Const:bool:True
+259:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+259:4:Attribute -> Module:salt.utils.mac_utils
+259:4:Attribute -> Module:salt.utils
+259:4:Name -> Module:salt
+259:48:Name -> Const:str:'systemsetup -setharddisksleep Never' | Const:str:'systemsetup -setharddisksleep Never' | Const:str:'systemsetup -setharddisksleep Uninferab
+261:11:Call -> Const:bool:True | Const:bool:False
+261:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+261:11:Attribute -> Module:salt.utils.mac_utils
+261:11:Attribute -> Module:salt.utils
+261:11:Name -> Module:salt
+262:8:Call -> Const:str:''
+262:8:Name -> Class:builtins.str
+262:12:Name -> Const:str:'Never' | Const:str:'Never' | U
+263:8:Name -> Func:salt.modules.mac_power.get_harddisk_sleep
+280:10:Call -> U
+280:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+280:10:Attribute -> Module:salt.utils.mac_utils
+280:10:Attribute -> Module:salt.utils
+280:10:Name -> Module:salt
+282:8:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+282:8:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+282:8:Attribute -> Module:salt.utils.mac_utils
+282:8:Attribute -> Module:salt.utils
+282:8:Name -> Module:salt
+282:46:Call -> U
+282:46:Attribute -> Func:salt.utils.mac_utils.parse_return
+282:46:Attribute -> Module:salt.utils.mac_utils
+282:46:Attribute -> Module:salt.utils
+282:46:Name -> Module:salt
+282:80:Name -> U
+305:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+305:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+305:12:Attribute -> Module:salt.utils.mac_utils
+305:12:Attribute -> Module:salt.utils
+305:12:Name -> Module:salt
+305:50:Name -> U
+306:41:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+307:4:Call -> Const:bool:True
+307:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+307:4:Attribute -> Module:salt.utils.mac_utils
+307:4:Attribute -> Module:salt.utils
+307:4:Name -> Module:salt
+307:48:Name -> Const:str:'systemsetup -setwakeonmodem on' | Const:str:'systemsetup -setwakeonmodem off' | Const:str:'systemsetup -setwakeonmodem on' | Const:str:'systemsetup -setwakeonmodem off'
+309:11:Call -> Const:bool:True | Const:bool:False
+309:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+309:11:Attribute -> Module:salt.utils.mac_utils
+309:11:Attribute -> Module:salt.utils
+309:11:Name -> Module:salt
+310:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+311:8:Name -> Func:salt.modules.mac_power.get_wake_on_modem
+329:10:Call -> U
+329:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+329:10:Attribute -> Module:salt.utils.mac_utils
+329:10:Attribute -> Module:salt.utils
+329:10:Name -> Module:salt
+333:8:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+333:8:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+333:8:Attribute -> Module:salt.utils.mac_utils
+333:8:Attribute -> Module:salt.utils
+333:8:Name -> Module:salt
+333:46:Call -> U
+333:46:Attribute -> Func:salt.utils.mac_utils.parse_return
+333:46:Attribute -> Module:salt.utils.mac_utils
+333:46:Attribute -> Module:salt.utils
+333:46:Name -> Module:salt
+333:80:Name -> U
+356:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+356:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+356:12:Attribute -> Module:salt.utils.mac_utils
+356:12:Attribute -> Module:salt.utils
+356:12:Name -> Module:salt
+356:50:Name -> U
+357:49:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+358:4:Call -> Const:bool:True
+358:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+358:4:Attribute -> Module:salt.utils.mac_utils
+358:4:Attribute -> Module:salt.utils
+358:4:Name -> Module:salt
+358:48:Name -> Const:str:'systemsetup -setwakeonnetworkaccess on' | Const:str:'systemsetup -setwakeonnetworkaccess off | Const:str:'systemsetup -setwakeonnetworkaccess on' | Const:str:'systemsetup -setwakeonnetworkaccess off
+360:11:Call -> Const:bool:True | Const:bool:False
+360:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+360:11:Attribute -> Module:salt.utils.mac_utils
+360:11:Attribute -> Module:salt.utils
+360:11:Name -> Module:salt
+361:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+362:8:Name -> Func:salt.modules.mac_power.get_wake_on_network
+380:10:Call -> U
+380:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+380:10:Attribute -> Module:salt.utils.mac_utils
+380:10:Attribute -> Module:salt.utils
+380:10:Name -> Module:salt
+384:8:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+384:8:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+384:8:Attribute -> Module:salt.utils.mac_utils
+384:8:Attribute -> Module:salt.utils
+384:8:Name -> Module:salt
+384:46:Call -> U
+384:46:Attribute -> Func:salt.utils.mac_utils.parse_return
+384:46:Attribute -> Module:salt.utils.mac_utils
+384:46:Attribute -> Module:salt.utils
+384:46:Name -> Module:salt
+384:80:Name -> U
+407:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+407:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+407:12:Attribute -> Module:salt.utils.mac_utils
+407:12:Attribute -> Module:salt.utils
+407:12:Name -> Module:salt
+407:50:Name -> U
+408:49:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+409:4:Call -> Const:bool:True
+409:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+409:4:Attribute -> Module:salt.utils.mac_utils
+409:4:Attribute -> Module:salt.utils
+409:4:Name -> Module:salt
+409:48:Name -> Const:str:'systemsetup -setrestartpowerfailure on' | Const:str:'systemsetup -setrestartpowerfailure off | Const:str:'systemsetup -setrestartpowerfailure on' | Const:str:'systemsetup -setrestartpowerfailure off
+411:11:Call -> Const:bool:True | Const:bool:False
+411:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+411:11:Attribute -> Module:salt.utils.mac_utils
+411:11:Attribute -> Module:salt.utils
+411:11:Name -> Module:salt
+412:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+413:8:Name -> Func:salt.modules.mac_power.get_restart_power_failure
+431:10:Call -> U
+431:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+431:10:Attribute -> Module:salt.utils.mac_utils
+431:10:Attribute -> Module:salt.utils
+431:10:Name -> Module:salt
+433:8:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+433:8:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+433:8:Attribute -> Module:salt.utils.mac_utils
+433:8:Attribute -> Module:salt.utils
+433:8:Name -> Module:salt
+433:46:Call -> U
+433:46:Attribute -> Func:salt.utils.mac_utils.parse_return
+433:46:Attribute -> Module:salt.utils.mac_utils
+433:46:Attribute -> Module:salt.utils
+433:46:Name -> Module:salt
+433:80:Name -> U
+458:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+458:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+458:12:Attribute -> Module:salt.utils.mac_utils
+458:12:Attribute -> Module:salt.utils
+458:12:Name -> Module:salt
+458:50:Name -> U
+459:43:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+460:4:Call -> Const:bool:True
+460:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+460:4:Attribute -> Module:salt.utils.mac_utils
+460:4:Attribute -> Module:salt.utils
+460:4:Name -> Module:salt
+460:48:Name -> Const:str:'systemsetup -setrestartfreeze on' | Const:str:'systemsetup -setrestartfreeze off' | Const:str:'systemsetup -setrestartfreeze on' | Const:str:'systemsetup -setrestartfreeze off'
+462:11:Call -> Const:bool:True | Const:bool:False
+462:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+462:11:Attribute -> Module:salt.utils.mac_utils
+462:11:Attribute -> Module:salt.utils
+462:11:Name -> Module:salt
+462:48:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+462:55:Name -> Func:salt.modules.mac_power.get_restart_freeze
+481:10:Call -> U
+481:10:Attribute -> Func:salt.utils.mac_utils.execute_return_result
+481:10:Attribute -> Module:salt.utils.mac_utils
+481:10:Attribute -> Module:salt.utils
+481:10:Name -> Module:salt
+485:8:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+485:8:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+485:8:Attribute -> Module:salt.utils.mac_utils
+485:8:Attribute -> Module:salt.utils
+485:8:Name -> Module:salt
+485:46:Call -> U
+485:46:Attribute -> Func:salt.utils.mac_utils.parse_return
+485:46:Attribute -> Module:salt.utils.mac_utils
+485:46:Attribute -> Module:salt.utils
+485:46:Name -> Module:salt
+485:80:Name -> U
+507:12:Call -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+507:12:Attribute -> Func:salt.utils.mac_utils.validate_enabled
+507:12:Attribute -> Module:salt.utils.mac_utils
+507:12:Attribute -> Module:salt.utils
+507:12:Name -> Module:salt
+507:50:Name -> U
+508:61:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+509:4:Call -> Const:bool:True
+509:4:Attribute -> Func:salt.utils.mac_utils.execute_return_success
+509:4:Attribute -> Module:salt.utils.mac_utils
+509:4:Attribute -> Module:salt.utils
+509:4:Name -> Module:salt
+509:48:Name -> Const:str:'systemsetup -setallowpowerbuttontosleep | Const:str:'systemsetup -setallowpowerbuttontosleep | Const:str:'systemsetup -setallowpowerbuttontosleep | Const:str:'systemsetup -setallowpowerbuttontosleep
+511:11:Call -> Const:bool:True | Const:bool:False
+511:11:Attribute -> Func:salt.utils.mac_utils.confirm_updated
+511:11:Attribute -> Module:salt.utils.mac_utils
+511:11:Attribute -> Module:salt.utils
+511:11:Name -> Module:salt
+512:8:Name -> Const:str:'on' | Const:str:'off' | Const:str:'on' | Const:str:'off'
+513:8:Name -> Func:salt.modules.mac_power.get_sleep_on_power_button

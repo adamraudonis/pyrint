@@ -1,0 +1,319 @@
+34:23:Name -> Class:builtins.Exception
+40:32:Name -> Class:django.utils.archive.ArchiveException
+51:9:Call -> Inst:django.utils.archive.Archive
+51:9:Name -> Class:django.utils.archive.Archive
+51:17:Name -> U
+52:8:Call -> Const:NoneType:None
+52:8:Attribute -> BM:django.utils.archive.Archive.extract
+52:8:Name -> Inst:django.utils.archive.Archive
+52:24:Name -> U
+61:8:Name -> Inst:django.utils.archive.Archive
+61:24:Call -> U
+61:24:Call -> U
+61:24:Attribute -> Func:django.utils.archive.Archive._archive_cls
+61:24:Name -> Inst:django.utils.archive.Archive
+61:42:Name -> U
+61:48:Name -> U
+63:5:Name -> Class:builtins.staticmethod
+66:11:Call -> ERR
+66:11:Name -> Func:builtins.isinstance
+66:22:Name -> U
+66:28:Name -> Class:builtins.str
+67:23:Name -> U
+70:27:Attribute -> U
+70:27:Name -> U
+71:19:Name -> Class:builtins.AttributeError
+72:22:Call -> ExcInst:django.utils.archive.UnrecognizedArchiveFormat
+72:22:Name -> Class:django.utils.archive.UnrecognizedArchiveFormat
+75:25:Call -> Tuple:2 | Tuple:2
+75:25:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+75:25:Attribute -> Module:posixpath | Module:ntpath
+75:25:Name -> Module:os
+75:42:Call -> U
+75:42:Attribute -> U
+75:42:Name -> U
+76:14:Call -> ERR
+76:14:Attribute -> BM:builtins.dict.get
+76:14:Name -> Dict:12
+76:32:Name -> U
+77:15:Name -> U
+78:24:Call -> Tuple:2 | Tuple:2
+78:24:Attribute -> Func:posixpath.splitext | Func:ntpath.splitext
+78:24:Attribute -> Module:posixpath | Module:ntpath
+78:24:Name -> Module:os
+78:41:Name -> U
+79:18:Call -> ERR
+79:18:Attribute -> BM:builtins.dict.get
+79:18:Name -> Dict:12
+79:36:Name -> U
+80:15:Name -> U
+81:18:Call -> ExcInst:django.utils.archive.UnrecognizedArchiveFormat
+81:18:Name -> Class:django.utils.archive.UnrecognizedArchiveFormat
+82:61:Name -> U
+84:15:Name -> U
+87:15:Name -> Inst:django.utils.archive.Archive
+90:8:Call -> Const:NoneType:None
+90:8:Attribute -> BM:django.utils.archive.Archive.close
+90:8:Name -> Inst:django.utils.archive.Archive
+93:8:Call -> U
+93:8:Attribute -> U
+93:8:Attribute -> U
+93:8:Name -> Inst:django.utils.archive.Archive
+93:30:Name -> U
+96:8:Call -> U
+96:8:Attribute -> U
+96:8:Attribute -> U
+96:8:Name -> Inst:django.utils.archive.Archive
+99:8:Call -> U
+99:8:Attribute -> U
+99:8:Attribute -> U
+99:8:Name -> Inst:django.utils.archive.Archive
+107:5:Name -> Class:builtins.staticmethod
+114:11:Name -> U
+114:18:Attribute -> Const:int:4 | Const:int:4
+114:18:Name -> Module:stat
+115:12:Call -> ERR
+115:12:Attribute -> Func:posix.chmod
+115:12:Name -> Module:os
+115:21:Name -> U
+115:31:Name -> U
+118:15:Call -> Const:str:''
+118:15:Name -> Class:builtins.str
+118:19:Name -> U
+119:15:Call -> Const:str:''
+119:15:Attribute -> BM:builtins.str.lstrip
+119:15:Call -> Const:str:''
+119:15:Attribute -> BM:builtins.str.lstrip
+119:15:Name -> Const:str:''
+120:18:Name -> Const:str:''
+121:21:Name -> Const:str:''
+121:30:Call -> Const:int:0
+121:30:Attribute -> BM:builtins.str.find
+121:30:Name -> Const:str:''
+121:47:Call -> Const:int:0
+121:47:Attribute -> BM:builtins.str.find
+121:47:Name -> Const:str:''
+121:79:Name -> Const:str:''
+123:19:Call -> ERR
+123:19:Attribute -> BM:builtins.str.split
+123:19:Name -> Const:str:''
+124:21:Name -> Const:str:''
+125:19:Call -> ERR
+125:19:Attribute -> BM:builtins.str.split
+125:19:Name -> Const:str:''
+127:19:Name -> Const:str:''
+135:20:Name -> U
+136:27:Call -> U | Tuple:2
+136:27:Attribute -> BM:django.utils.archive.BaseArchive.split_leading_dir
+136:27:Name -> Inst:django.utils.archive.BaseArchive
+136:50:Name -> U
+137:19:Name -> U
+139:17:Name -> Const:NoneType:None
+140:32:Name -> U
+141:17:Name -> U
+141:27:Name -> U
+146:22:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+146:22:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+146:22:Attribute -> Module:posixpath | Module:ntpath
+146:22:Name -> Module:os
+146:38:Name -> U
+147:19:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+147:19:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+147:19:Attribute -> Module:posixpath | Module:ntpath
+147:19:Name -> Module:os
+147:35:Call -> U
+147:35:Attribute -> Func:posixpath.join | Func:ntpath.join
+147:35:Attribute -> Module:posixpath | Module:ntpath
+147:35:Name -> Module:os
+147:48:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+147:61:Name -> U
+149:15:Call -> Const:bytes:b'/' | U | Const:str:'/' | Const:bytes:b'' | Const:str:''
+149:15:Attribute -> Func:posixpath.commonpath | Func:ntpath.commonpath
+149:15:Attribute -> Module:posixpath | Module:ntpath
+149:15:Name -> Module:os
+149:35:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+149:48:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+149:62:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+150:22:Call -> ExcInst:django.core.exceptions.SuspiciousOperation
+150:22:Name -> Class:django.core.exceptions.SuspiciousOperation
+150:82:Name -> U
+151:15:Name -> Class:builtins.ValueError
+153:18:Call -> ExcInst:django.core.exceptions.SuspiciousOperation
+153:18:Name -> Class:django.core.exceptions.SuspiciousOperation
+153:78:Name -> U
+154:15:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+157:14:Call -> ExcInst:builtins.NotImplementedError
+157:14:Name -> Class:builtins.NotImplementedError
+162:14:Call -> ExcInst:builtins.NotImplementedError
+162:14:Name -> Class:builtins.NotImplementedError
+167:17:Name -> Class:django.utils.archive.BaseArchive
+169:8:Name -> Inst:django.utils.archive.TarArchive
+169:24:Call -> U | Inst:tarfile.TarFile
+169:24:Attribute -> BM:tarfile.TarFile.open
+169:24:Name -> Module:tarfile
+169:37:Name -> U
+172:8:Call -> U | Const:NoneType:None
+172:8:Attribute -> U | BM:tarfile.TarFile.list
+172:8:Attribute -> U | Inst:tarfile.TarFile
+172:8:Name -> Inst:django.utils.archive.TarArchive
+172:28:Name -> Tuple:0
+172:36:Name -> Dict:0
+175:18:Call -> U | List:0
+175:18:Attribute -> U | BM:tarfile.TarFile.getmembers
+175:18:Attribute -> U | Inst:tarfile.TarFile
+175:18:Name -> Inst:django.utils.archive.TarArchive
+176:18:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+176:18:Attribute -> BM:django.utils.archive.BaseArchive.has_leading_dir
+176:18:Name -> Inst:django.utils.archive.TarArchive
+176:39:Attribute -> U
+176:39:Name -> U
+176:55:Name -> U | List:0
+177:22:Name -> U | List:0
+178:19:Attribute -> U
+178:19:Name -> U
+179:15:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+180:23:Call -> U | Tuple:2
+180:23:Attribute -> BM:django.utils.archive.BaseArchive.split_leading_dir
+180:23:Name -> Inst:django.utils.archive.TarArchive
+180:46:Name -> U
+181:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+181:23:Attribute -> BM:django.utils.archive.BaseArchive.target_filename
+181:23:Name -> Inst:django.utils.archive.TarArchive
+181:44:Name -> U
+181:53:Name -> U
+182:15:Call -> U
+182:15:Attribute -> U
+182:15:Name -> U
+183:19:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+184:20:Call -> Const:NoneType:None | Const:NoneType:None | U
+184:20:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+184:20:Name -> Module:os
+184:32:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+187:32:Call -> U | Inst:tarfile.ExFileObject | Const:NoneType:None
+187:32:Attribute -> U | BM:tarfile.TarFile.extractfile
+187:32:Attribute -> U | Inst:tarfile.TarFile
+187:32:Name -> Inst:django.utils.archive.TarArchive
+187:58:Name -> U
+188:24:Name -> Class:builtins.KeyError
+188:34:Name -> Class:builtins.AttributeError
+191:20:Call -> ERR
+191:20:Name -> Func:builtins.print
+193:27:Name -> U
+193:33:Attribute -> U
+193:33:Name -> U
+193:46:Name -> ExcInst:builtins.KeyError | ExcInst:builtins.AttributeError
+196:30:Call -> U
+196:30:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+196:30:Attribute -> Module:posixpath | Module:ntpath
+196:30:Name -> Module:os
+196:46:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+197:23:Name -> U
+198:24:Call -> Const:NoneType:None | Const:NoneType:None | U
+198:24:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+198:24:Name -> Module:os
+198:36:Name -> U
+199:25:Call -> ERR
+199:25:Name -> Func:_io.open
+199:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+200:24:Call -> Const:NoneType:None
+200:24:Attribute -> Func:shutil.copyfileobj
+200:24:Name -> Module:shutil
+200:43:Name -> U | Inst:tarfile.ExFileObject | Const:NoneType:None
+200:54:Name -> U
+201:24:Call -> Const:NoneType:None
+201:24:Attribute -> Func:django.utils.archive.BaseArchive._copy_permissions
+201:24:Name -> Inst:django.utils.archive.TarArchive
+201:47:Attribute -> U
+201:47:Name -> U
+201:60:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+203:23:Name -> U | Inst:tarfile.ExFileObject | Const:NoneType:None
+204:24:Call -> U
+204:24:Attribute -> U | BM:_io.BufferedReader.close
+204:24:Name -> U | Inst:tarfile.ExFileObject
+207:8:Call -> U | Const:NoneType:None
+207:8:Attribute -> U | BM:tarfile.TarFile.close
+207:8:Attribute -> U | Inst:tarfile.TarFile
+207:8:Name -> Inst:django.utils.archive.TarArchive
+210:17:Name -> Class:django.utils.archive.BaseArchive
+212:8:Name -> Inst:django.utils.archive.ZipArchive
+212:24:Call -> Inst:zipfile.ZipFile
+212:24:Attribute -> Class:zipfile.ZipFile
+212:24:Name -> Module:zipfile
+212:40:Name -> U
+215:8:Call -> Const:NoneType:None
+215:8:Attribute -> BM:zipfile.ZipFile.printdir
+215:8:Attribute -> Inst:zipfile.ZipFile
+215:8:Name -> Inst:django.utils.archive.ZipArchive
+215:32:Name -> Tuple:0
+215:40:Name -> Dict:0
+218:19:Call -> U
+218:19:Attribute -> BM:zipfile.ZipFile.namelist
+218:19:Attribute -> Inst:zipfile.ZipFile
+218:19:Name -> Inst:django.utils.archive.ZipArchive
+219:18:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+219:18:Attribute -> BM:django.utils.archive.BaseArchive.has_leading_dir
+219:18:Name -> Inst:django.utils.archive.ZipArchive
+219:39:Name -> U
+220:20:Name -> U
+221:19:Call -> U
+221:19:Attribute -> BM:zipfile.ZipFile.read
+221:19:Attribute -> Inst:zipfile.ZipFile
+221:19:Name -> Inst:django.utils.archive.ZipArchive
+221:38:Name -> U
+222:19:Call -> U
+222:19:Attribute -> BM:zipfile.ZipFile.getinfo
+222:19:Attribute -> Inst:zipfile.ZipFile
+222:19:Name -> Inst:django.utils.archive.ZipArchive
+222:41:Name -> U
+223:15:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+224:23:Call -> U | Tuple:2
+224:23:Attribute -> BM:django.utils.archive.BaseArchive.split_leading_dir
+224:23:Name -> Inst:django.utils.archive.ZipArchive
+224:46:Name -> U
+225:19:Name -> U
+227:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+227:23:Attribute -> BM:django.utils.archive.BaseArchive.target_filename
+227:23:Name -> Inst:django.utils.archive.ZipArchive
+227:44:Name -> U
+227:53:Name -> U
+228:15:Call -> U
+228:15:Attribute -> U
+228:15:Name -> U
+230:16:Call -> Const:NoneType:None | Const:NoneType:None | U
+230:16:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+230:16:Name -> Module:os
+230:28:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+232:26:Call -> U
+232:26:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+232:26:Attribute -> Module:posixpath | Module:ntpath
+232:26:Name -> Module:os
+232:42:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+233:19:Name -> U
+234:20:Call -> Const:NoneType:None | Const:NoneType:None | U
+234:20:Attribute -> Func:os.makedirs | Func:tests.file_storage.tests.FileStorageTests.test_makedirs_race_handling.fake_makedirs | U
+234:20:Name -> Module:os
+234:32:Name -> U
+235:21:Call -> ERR
+235:21:Name -> Func:_io.open
+235:26:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+236:20:Call -> U
+236:20:Attribute -> U
+236:20:Name -> U
+236:34:Name -> U
+238:23:Attribute -> U
+238:23:Name -> U
+239:16:Call -> Const:NoneType:None
+239:16:Attribute -> Func:django.utils.archive.BaseArchive._copy_permissions
+239:16:Name -> Inst:django.utils.archive.ZipArchive
+239:39:Name -> U
+239:45:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+242:8:Call -> Const:NoneType:None
+242:8:Attribute -> BM:zipfile.ZipFile.close
+242:8:Attribute -> Inst:zipfile.ZipFile
+242:8:Name -> Inst:django.utils.archive.ZipArchive
+245:16:Call -> Dict:12
+245:16:Attribute -> Inst:builtins.builtin_function_or_method
+245:16:Name -> Class:builtins.dict
+260:4:Name -> Class:django.utils.archive.TarArchive
+262:0:Name -> Dict:12
+262:24:Name -> Class:django.utils.archive.ZipArchive

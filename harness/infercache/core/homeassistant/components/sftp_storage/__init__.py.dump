@@ -1,0 +1,204 @@
+24:23:Name -> U
+24:35:Name -> ERR
+27:1:Call -> Func:dataclasses.dataclass.wrap | U
+27:1:Name -> Func:dataclasses.dataclass
+31:10:Name -> Class:builtins.str
+32:10:Name -> Class:builtins.int
+33:14:Name -> Class:builtins.str
+34:14:Name -> Class:builtins.str
+34:27:Call -> U
+34:27:Name -> Func:dataclasses.field
+35:22:Name -> Class:builtins.str
+36:21:Name -> Class:builtins.str
+39:34:Name -> U
+39:56:Name -> U
+39:76:Name -> Class:builtins.bool
+42:10:Call -> Inst:homeassistant.components.sftp_storage.SFTPConfigEntryData
+42:10:Name -> Class:homeassistant.components.sftp_storage.SFTPConfigEntryData
+43:13:Attribute -> U
+43:13:Name -> U
+43:24:Name -> Const:str:'host'
+44:13:Attribute -> U
+44:13:Name -> U
+44:24:Name -> Const:str:'port'
+45:17:Attribute -> U
+45:17:Name -> U
+45:28:Name -> Const:str:'username'
+46:17:Call -> U
+46:17:Attribute -> U
+46:17:Attribute -> U
+46:17:Name -> U
+46:32:Name -> Const:str:'password'
+47:25:Call -> U
+47:25:Attribute -> U
+47:25:Attribute -> U
+47:25:Name -> U
+47:40:Name -> Const:str:'private_key_file'
+48:24:Attribute -> U
+48:24:Name -> U
+48:35:Name -> Const:str:'backup_location'
+50:4:Name -> U
+50:25:Name -> Inst:homeassistant.components.sftp_storage.SFTPConfigEntryData
+56:17:Call -> Inst:homeassistant.components.sftp_storage.client.BackupAgentClient
+56:17:Name -> Class:homeassistant.components.sftp_storage.client.BackupAgentClient
+56:35:Name -> U
+56:42:Name -> U
+57:14:Call -> Inst:homeassistant.components.sftp_storage.client.BackupAgentClient
+57:14:Attribute -> BM:homeassistant.components.sftp_storage.client.BackupAgentClient.open
+57:14:Name -> Inst:homeassistant.components.sftp_storage.client.BackupAgentClient
+58:11:Name -> Class:homeassistant.components.backup.models.BackupAgentError
+59:14:Name -> Class:homeassistant.exceptions.ConfigEntryError
+59:36:Name -> ExcInst:homeassistant.components.backup.models.BackupAgentError
+63:24:Call -> U
+63:24:Attribute -> U
+63:24:Attribute -> U
+63:24:Name -> U
+63:38:Name -> Inst:homeassistant.util.hass_dict.HassKey
+64:12:Call -> U
+64:12:Name -> U
+66:4:Call -> U
+66:4:Attribute -> U
+66:4:Name -> U
+66:26:Call -> U
+66:26:Attribute -> U
+66:26:Name -> U
+66:54:Name -> Func:homeassistant.components.sftp_storage.async_setup_entry._async_notify_backup_listeners
+71:35:Name -> U
+71:57:Name -> U
+74:28:Name -> U
+75:15:Call -> Inst:pathlib.Path
+75:15:Name -> Class:pathlib.Path
+75:20:Attribute -> U
+75:20:Name -> U
+75:31:Name -> Const:str:'private_key_file'
+77:11:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+77:11:Attribute -> BM:pathlib.Path.exists
+77:11:Name -> Inst:pathlib.Path
+78:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+78:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+78:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+80:16:Name -> Inst:pathlib.Path
+81:16:Name -> Const:str:'sftp_storage'
+82:16:Attribute -> U
+82:16:Name -> U
+82:27:Name -> Const:str:'username'
+83:16:Attribute -> U
+83:16:Name -> U
+83:27:Name -> Const:str:'host'
+86:16:Call -> Const:NoneType:None
+86:16:Attribute -> BM:pathlib.Path.unlink
+86:16:Name -> Inst:pathlib.Path
+87:19:Name -> Class:builtins.OSError
+88:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+88:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+88:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+91:20:Attribute -> Const:str:'' | U
+91:20:Name -> Inst:pathlib.Path
+92:20:Name -> Const:str:'sftp_storage'
+93:20:Attribute -> U
+93:20:Name -> U
+93:31:Name -> Const:str:'username'
+94:20:Attribute -> U
+94:20:Name -> U
+94:31:Name -> Const:str:'host'
+95:20:Call -> Const:str:''
+95:20:Name -> Class:builtins.str
+95:24:Name -> ExcInst:builtins.OSError
+99:12:Call -> Const:NoneType:None
+99:12:Attribute -> BM:pathlib.Path.rmdir
+99:12:Attribute -> Inst:pathlib.Path
+99:12:Name -> Inst:pathlib.Path
+100:15:Name -> Class:builtins.OSError
+101:15:Attribute -> Const:int:48 | Const:int:30
+101:15:Name -> ExcInst:builtins.OSError
+101:26:Attribute -> Const:int:66
+101:26:Name -> Module:errno
+102:19:Call -> Const:bool:False | U | Const:bool:False
+102:19:Attribute -> BM:logging.Logger.isEnabledFor | U | BM:logging.Logger.isEnabledFor
+102:19:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+102:39:Attribute -> Const:int:10
+102:39:Name -> Module:logging
+107:25:Call -> Inst:contextlib.suppress
+107:25:Attribute -> Class:contextlib.suppress
+107:25:Name -> Module:contextlib
+107:45:Name -> Class:builtins.OSError
+108:42:Attribute -> U
+108:42:Name -> U
+108:58:Call -> Gen:pathlib.Path.iterdir
+108:58:Attribute -> BM:pathlib.Path.iterdir
+108:58:Attribute -> Inst:pathlib.Path
+108:58:Name -> Inst:pathlib.Path
+110:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+110:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+110:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+112:24:Name -> Const:str:'sftp_storage'
+113:24:Call -> Const:str:''
+113:24:Name -> Class:builtins.str
+113:28:Attribute -> Inst:pathlib.Path
+113:28:Name -> Inst:pathlib.Path
+115:27:Name -> List:0 | U
+114:36:Call -> Const:str:''
+114:36:Attribute -> BM:builtins.str.join
+114:46:Name -> U
+119:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+119:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+119:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+122:20:Call -> Const:str:''
+122:20:Name -> Class:builtins.str
+122:24:Attribute -> Inst:pathlib.Path
+122:24:Name -> Inst:pathlib.Path
+123:20:Name -> Const:str:'sftp_storage'
+124:20:Call -> Const:str:''
+124:20:Name -> Class:builtins.str
+124:24:Name -> ExcInst:builtins.OSError
+125:20:Attribute -> U
+125:20:Name -> U
+125:31:Name -> Const:str:'username'
+126:20:Attribute -> U
+126:20:Name -> U
+126:31:Name -> Const:str:'host'
+129:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+129:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+131:16:Name -> Const:str:'sftp_storage'
+132:16:Attribute -> U
+132:16:Name -> U
+132:27:Name -> Const:str:'username'
+133:16:Attribute -> U
+133:16:Name -> U
+133:27:Name -> Const:str:'host'
+136:7:Call -> U
+136:7:Name -> Class:builtins.bool
+136:12:Call -> U
+136:12:Attribute -> U
+136:12:Attribute -> U
+136:12:Name -> U
+136:27:Name -> Const:str:'private_key_file'
+137:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+137:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+137:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+139:12:Name -> Const:str:'sftp_storage'
+140:12:Attribute -> U
+140:12:Name -> U
+140:23:Name -> Const:str:'username'
+141:12:Attribute -> U
+141:12:Name -> U
+141:23:Name -> Const:str:'host'
+143:14:Call -> U
+143:14:Attribute -> U
+143:14:Name -> U
+143:42:Name -> Func:homeassistant.components.sftp_storage.async_remove_entry.remove_files
+143:56:Name -> U
+146:35:Name -> U
+146:57:Name -> U
+146:77:Name -> Class:builtins.bool
+148:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+148:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+148:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+150:8:Name -> Const:str:'sftp_storage'
+151:8:Attribute -> U
+151:8:Name -> U
+151:19:Name -> Const:str:'username'
+152:8:Attribute -> U
+152:8:Name -> U
+152:19:Name -> Const:str:'host'

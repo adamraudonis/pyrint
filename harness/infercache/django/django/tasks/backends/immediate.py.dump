@@ -1,0 +1,168 @@
+12:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:9:Attribute -> Func:logging.getLogger
+12:9:Name -> Module:logging
+12:27:Name -> Const:str:'django.tasks.backends.immediate' | Const:str:'__main__'
+15:23:Name -> Class:django.tasks.backends.base.BaseTaskBackend
+20:8:Call -> Const:NoneType:None
+20:8:Attribute -> BM:django.tasks.backends.base.BaseTaskBackend.__init__ | BM:builtins.object.__init__
+20:8:Call -> Super
+20:8:Name -> Class:builtins.super
+20:25:Name -> U
+20:32:Name -> U
+21:8:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+21:25:Call -> Const:str:''
+21:25:Name -> Func:django.utils.crypto.get_random_string
+28:8:Call -> ERR
+28:8:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+28:8:Name -> Class:builtins.object
+28:27:Name -> U
+28:55:Call -> Inst:_pydatetime.datetime | U
+28:55:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+28:55:Name -> Module:django.utils.timezone
+29:8:Call -> List:0 | List:0
+29:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+29:8:Name -> Inst:django.dispatch.dispatcher.Signal
+29:27:Call -> Class:django.tasks.backends.immediate.ImmediateBackend
+29:27:Name -> Class:builtins.type
+29:32:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+29:51:Name -> U
+31:15:Attribute -> U
+31:15:Name -> U
+32:26:Call -> Inst:_pydatetime.datetime | U
+32:26:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+32:26:Name -> Module:django.utils.timezone
+33:8:Call -> ERR
+33:8:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+33:8:Name -> Class:builtins.object
+33:27:Name -> U
+33:50:Attribute -> Inst:django.tasks.base.TaskResultStatus.RUNNING
+33:50:Name -> Class:django.tasks.base.TaskResultStatus
+34:8:Call -> ERR
+34:8:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+34:8:Name -> Class:builtins.object
+34:27:Name -> U
+34:54:Name -> Inst:_pydatetime.datetime | U
+35:8:Call -> ERR
+35:8:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+35:8:Name -> Class:builtins.object
+35:27:Name -> U
+35:61:Name -> Inst:_pydatetime.datetime | U
+36:8:Call -> U
+36:8:Attribute -> U
+36:8:Attribute -> U
+36:8:Name -> U
+36:38:Attribute -> Const:str:''
+36:38:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+37:8:Call -> List:0 | List:0
+37:8:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+37:8:Name -> Inst:django.dispatch.dispatcher.Signal
+37:33:Call -> Class:django.tasks.backends.immediate.ImmediateBackend
+37:33:Name -> Class:builtins.type
+37:38:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+37:57:Name -> U
+40:15:Attribute -> U
+40:15:Name -> U
+41:35:Call -> U
+41:35:Attribute -> U
+41:35:Name -> U
+42:20:Call -> Inst:django.tasks.base.TaskContext
+42:20:Name -> Class:django.tasks.base.TaskContext
+42:44:Name -> U
+43:21:Attribute -> U
+43:21:Name -> U
+44:22:Attribute -> U
+44:22:Name -> U
+47:35:Call -> U
+47:35:Attribute -> U
+47:35:Name -> U
+47:46:Attribute -> U
+47:46:Name -> U
+47:66:Attribute -> U
+47:66:Name -> U
+49:12:Call -> ERR
+49:12:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+49:12:Name -> Class:builtins.object
+50:16:Name -> U
+52:16:Call -> U
+52:16:Name -> Func:django.utils.json.normalize_json
+52:31:Name -> U
+54:15:Name -> Class:builtins.KeyboardInterrupt
+57:15:Name -> Class:builtins.BaseException
+58:12:Call -> ERR
+58:12:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+58:12:Name -> Class:builtins.object
+58:31:Name -> U
+58:59:Call -> Inst:_pydatetime.datetime | U
+58:59:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+58:59:Name -> Module:django.utils.timezone
+59:29:Call -> Class:builtins.BaseException
+59:29:Name -> Class:builtins.type
+59:34:Name -> ExcInst:builtins.BaseException
+60:12:Call -> U
+60:12:Attribute -> U
+60:12:Attribute -> U
+60:12:Name -> U
+61:16:Call -> Inst:django.tasks.base.TaskError
+61:16:Name -> Class:django.tasks.base.TaskError
+63:27:Attribute -> Const:str:'builtins'
+63:27:Name -> Class:builtins.BaseException
+63:55:Attribute -> Const:str:'builtins.BaseException'
+63:55:Name -> Class:builtins.BaseException
+65:30:Call -> Const:str:''
+65:30:Attribute -> BM:builtins.str.join
+65:38:Call -> Inst:builtins.list
+65:38:Name -> Func:traceback.format_exception
+65:55:Name -> ExcInst:builtins.BaseException
+68:12:Call -> ERR
+68:12:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+68:12:Name -> Class:builtins.object
+68:31:Name -> U
+68:54:Attribute -> Inst:django.tasks.base.TaskResultStatus.FAILED
+68:54:Name -> Class:django.tasks.base.TaskResultStatus
+69:12:Call -> List:0 | List:0
+69:12:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+69:12:Name -> Inst:django.dispatch.dispatcher.Signal
+69:31:Call -> Class:django.tasks.backends.immediate.ImmediateBackend
+69:31:Name -> Class:builtins.type
+69:36:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+69:55:Name -> U
+71:12:Call -> ERR
+71:12:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+71:12:Name -> Class:builtins.object
+71:31:Name -> U
+71:59:Call -> Inst:_pydatetime.datetime | U
+71:59:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+71:59:Name -> Module:django.utils.timezone
+72:12:Call -> ERR
+72:12:Attribute -> UM:builtins.object.__setattr__ | BM:builtins.object.__setattr__
+72:12:Name -> Class:builtins.object
+72:31:Name -> U
+72:54:Attribute -> Inst:django.tasks.base.TaskResultStatus.SUCCESSFUL
+72:54:Name -> Class:django.tasks.base.TaskResultStatus
+73:12:Call -> List:0 | List:0
+73:12:Attribute -> BM:django.dispatch.dispatcher.Signal.send
+73:12:Name -> Inst:django.dispatch.dispatcher.Signal
+73:31:Call -> Class:django.tasks.backends.immediate.ImmediateBackend
+73:31:Name -> Class:builtins.type
+73:36:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+73:55:Name -> U
+76:8:Call -> Const:NoneType:None
+76:8:Attribute -> BM:django.tasks.backends.base.BaseTaskBackend.validate_task
+76:8:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+76:27:Name -> U
+78:22:Call -> Inst:django.tasks.base.TaskResult
+78:22:Name -> Class:django.tasks.base.TaskResult
+79:17:Name -> U
+80:15:Call -> Const:str:''
+80:15:Name -> Func:django.utils.crypto.get_random_string
+81:19:Attribute -> Inst:django.tasks.base.TaskResultStatus.READY
+81:19:Name -> Class:django.tasks.base.TaskResultStatus
+86:17:Name -> U
+87:19:Name -> U
+88:20:Attribute -> U
+88:20:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+93:8:Call -> Const:NoneType:None
+93:8:Attribute -> BM:django.tasks.backends.immediate.ImmediateBackend._execute_task
+93:8:Name -> Inst:django.tasks.backends.immediate.ImmediateBackend
+93:27:Name -> Inst:django.tasks.base.TaskResult
+95:15:Name -> Inst:django.tasks.base.TaskResult

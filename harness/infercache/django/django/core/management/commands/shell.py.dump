@@ -1,0 +1,288 @@
+15:14:Name -> Class:django.core.management.base.BaseCommand
+26:8:Call -> U
+26:8:Attribute -> U
+26:8:Name -> U
+34:8:Call -> U
+34:8:Attribute -> U
+34:8:Name -> U
+39:8:Call -> U
+39:8:Attribute -> U
+39:8:Name -> U
+42:20:Attribute -> List:3
+42:20:Name -> Inst:django.core.management.commands.shell.Command
+48:8:Call -> U
+48:8:Attribute -> U
+48:8:Name -> U
+60:8:Call -> U
+60:8:Name -> U
+60:39:Call -> Dict:0 | Dict:0 | Dict:0 | U
+60:39:Attribute -> BM:django.core.management.commands.shell.Command.get_namespace
+60:39:Name -> Inst:django.core.management.commands.shell.Command
+60:60:Name -> U
+65:8:Call -> U
+65:8:Attribute -> U
+65:8:Name -> U
+65:22:Call -> Dict:0 | Dict:0 | Dict:0 | U
+65:22:Attribute -> BM:django.core.management.commands.shell.Command.get_namespace
+65:22:Name -> Inst:django.core.management.commands.shell.Command
+65:43:Name -> U
+71:27:Call -> Dict:0 | Dict:0 | Dict:0 | U
+71:27:Attribute -> BM:django.core.management.commands.shell.Command.get_namespace
+71:27:Name -> Inst:django.core.management.commands.shell.Command
+71:48:Name -> U
+75:15:Name -> U
+76:28:Call -> Inst:django.utils.datastructures.OrderedSet
+76:28:Name -> Class:django.utils.datastructures.OrderedSet
+77:17:Call -> U | Const:NoneType:None
+77:17:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+77:17:Attribute -> Dict:43 | Inst:os._Environ
+77:17:Name -> Module:os
+77:50:Call -> U
+77:50:Attribute -> Func:posixpath.expanduser | U
+77:50:Attribute -> Module:posixpath | Module:ntpath
+77:50:Name -> Module:os
+79:23:Name -> U
+81:23:Call -> Const:bool:False | U
+81:23:Attribute -> Func:genericpath.isfile | U
+81:23:Attribute -> Module:posixpath | Module:ntpath
+81:23:Name -> Module:os
+81:38:Name -> U
+83:21:Call -> ERR
+83:21:Name -> Func:_io.open
+83:26:Name -> U
+84:36:Call -> U
+84:36:Attribute -> U
+84:36:Name -> U
+88:20:Call -> ERR
+88:20:Name -> Func:builtins.exec
+88:25:Call -> ERR
+88:25:Name -> Func:builtins.compile
+88:33:Name -> U
+88:48:Name -> U
+88:67:Name -> Dict:0 | Dict:0 | Dict:0 | U
+89:23:Name -> Class:builtins.Exception
+90:20:Call -> Const:NoneType:None
+90:20:Attribute -> Func:traceback.print_exc
+90:20:Name -> Module:traceback
+96:19:Attribute -> Inst:builtins.function
+96:19:Name -> Module:sys
+97:15:Name -> Class:builtins.AttributeError
+103:16:Call -> ERR
+103:16:Name -> Inst:builtins.function
+104:19:Name -> Class:builtins.Exception
+108:16:Call -> ERR
+108:16:Name -> Func:builtins.print
+109:16:Call -> Const:NoneType:None
+109:16:Attribute -> Func:traceback.print_exc
+109:16:Name -> Module:traceback
+117:12:Call -> ERR
+117:12:Attribute -> Func:readline.set_completer
+117:12:Name -> Module:readline
+117:35:Attribute -> BM:rlcompleter.Completer.complete
+117:35:Call -> Inst:rlcompleter.Completer
+117:35:Attribute -> Class:rlcompleter.Completer
+117:35:Name -> Module:rlcompleter
+117:57:Name -> Dict:0 | Dict:0 | Dict:0 | U
+118:15:Name -> Class:builtins.ImportError
+122:8:Call -> Const:NoneType:None
+122:8:Attribute -> Func:code.interact
+122:8:Name -> Module:code
+122:28:Name -> Dict:0 | Dict:0 | Dict:0 | U
+157:29:Name -> List:6
+158:15:Attribute -> U
+158:15:Name -> U
+158:34:Attribute -> U
+158:34:Name -> U
+159:25:Call -> Inst:builtins.reversed
+159:25:Name -> Class:builtins.reversed
+159:34:Call -> List:0
+159:34:Attribute -> BM:django.apps.registry.Apps.get_models
+159:34:Name -> Inst:django.apps.registry.Apps
+160:15:Attribute -> U
+160:15:Name -> U
+162:15:Name -> U
+165:11:Name -> Dict:0
+165:23:Call -> ERR
+165:23:Attribute -> BM:builtins.dict.get
+165:23:Name -> Dict:0
+168:44:Name -> Dict:0
+168:20:Name -> U
+171:12:Call -> Const:NoneType:None
+171:12:Attribute -> BM:django.apps.registry.Apps.check_models_ready
+171:12:Name -> Inst:django.apps.registry.Apps
+172:15:Name -> Class:django.core.exceptions.AppRegistryNotReady
+173:15:Name -> Const:int:0
+174:35:Call -> U | Const:NoneType:None
+174:35:Attribute -> Func:os.getenv
+174:35:Name -> Module:os
+175:16:Call -> Const:NoneType:None
+175:16:Attribute -> BM:django.core.management.base.OutputWrapper.write
+175:16:Attribute -> Inst:django.core.management.base.OutputWrapper
+175:16:Name -> Inst:django.core.management.commands.shell.Command
+177:57:Name -> U | Const:NoneType:None
+179:20:Attribute -> ERR
+179:20:Attribute -> Inst:django.core.management.color.Style
+179:20:Name -> Inst:django.core.management.commands.shell.Command
+184:23:Call -> U
+184:23:Attribute -> BM:django.core.management.commands.shell.Command.get_auto_imports
+184:23:Name -> Inst:django.core.management.commands.shell.Command
+185:11:Name -> U
+188:23:Call -> Inst:collections.defaultdict
+188:23:Name -> Class:collections.defaultdict
+188:35:Name -> Class:builtins.list
+190:20:Name -> U
+192:57:Name -> U
+192:22:Call -> U
+192:22:Name -> Func:django.utils.module_loading.import_string
+192:41:Name -> U
+192:67:Call -> U | Const:NoneType:None
+192:67:Name -> Func:importlib.import_module | U
+192:81:Name -> U
+193:19:Name -> Class:builtins.ImportError
+194:16:Call -> ERR
+194:16:Attribute -> BM:builtins.list.append
+194:16:Name -> List:0
+194:37:Name -> U
+197:22:Name -> U
+198:31:Call -> U
+198:31:Attribute -> U
+198:31:Name -> U
+201:23:Name -> U
+202:16:Name -> U
+202:22:Name -> U | Const:NoneType:None
+202:34:Name -> Inst:collections.defaultdict
+202:47:Name -> U | Const:NoneType:None
+203:16:Call -> U
+203:16:Attribute -> U
+203:16:Name -> Inst:collections.defaultdict
+203:29:Name -> U | Const:NoneType:None
+203:45:Name -> U
+203:51:Name -> U | Const:NoneType:None
+206:12:Name -> U
+206:18:Name -> U
+206:35:Call -> ERR
+206:35:Attribute -> BM:builtins.dict.values
+206:35:Name -> Inst:collections.defaultdict
+206:74:Name -> U
+209:11:Name -> Const:int:0
+210:19:Name -> U
+212:17:Call -> Const:int:0
+212:17:Name -> Func:builtins.len
+212:21:Name -> List:0
+213:11:Name -> Const:int:0
+214:18:Call -> Const:str:''
+214:18:Attribute -> BM:builtins.str.join
+214:33:Name -> U
+214:46:Name -> List:0
+215:35:Name -> U
+216:12:Call -> Const:NoneType:None
+216:12:Attribute -> BM:django.core.management.base.OutputWrapper.write
+216:12:Attribute -> Inst:django.core.management.base.OutputWrapper
+216:12:Name -> Inst:django.core.management.commands.shell.Command
+217:19:Name -> U
+217:28:Name -> Const:str:'objects' | Const:str:'object'
+217:78:Name -> Const:str:''
+218:16:Attribute -> ERR
+218:16:Attribute -> Inst:django.core.management.color.Style
+218:16:Name -> Inst:django.core.management.commands.shell.Command
+222:17:Call -> ERR
+222:17:Name -> Func:builtins.len
+222:21:Name -> U
+223:35:Name -> U
+224:17:Name -> U
+224:26:Name -> Const:str:'objects' | Const:str:'object'
+226:11:Name -> Const:int:0
+227:15:Name -> U
+229:12:Call -> Const:NoneType:None
+229:12:Attribute -> BM:django.core.management.base.OutputWrapper.write
+229:12:Attribute -> Inst:django.core.management.base.OutputWrapper
+229:12:Name -> Inst:django.core.management.commands.shell.Command
+229:33:Name -> Const:str:'' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:' (use -v 2 for details)' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical
+229:41:Attribute -> ERR
+229:41:Attribute -> Inst:django.core.management.color.Style
+229:41:Name -> Inst:django.core.management.commands.shell.Command
+230:19:Name -> U
+232:20:Call -> ERR
+232:20:Attribute -> BM:builtins.dict.pop
+232:20:Name -> Inst:collections.defaultdict
+233:24:Call -> Const:str:''
+233:24:Attribute -> BM:builtins.str.join
+234:25:Name -> U
+234:45:Name -> U
+236:26:Name -> U
+236:42:Name -> Const:str:''
+237:48:Call -> ERR
+237:48:Attribute -> BM:builtins.dict.items
+237:48:Name -> Inst:collections.defaultdict
+238:31:Call -> Const:str:''
+238:31:Attribute -> BM:builtins.str.join
+238:41:Name -> ERR
+238:55:Name -> ERR
+244:15:Name -> Class:builtins.ImportError
+247:28:Call -> U
+247:28:Attribute -> Func:isort.api.sort_code_string
+247:28:Name -> Module:isort
+247:39:Name -> Const:str:''
+249:11:Name -> Const:str:'' | U
+250:21:Name -> Const:str:'' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:' (use -v 2 for details)' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical
+250:31:Name -> U
+252:21:Name -> Const:str:'' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:' (use -v 2 for details)' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical
+254:8:Call -> Const:NoneType:None
+254:8:Attribute -> BM:django.core.management.base.OutputWrapper.write
+254:8:Attribute -> Inst:django.core.management.base.OutputWrapper
+254:8:Name -> Inst:django.core.management.commands.shell.Command
+254:26:Name -> Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:' (use -v 2 for details)' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:':\n\nUninferable' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:' (use -v 2 for details):\n\nUninferable | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:'.' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical | Const:str:' (use -v 2 for details).' | Const:str:'Uninferable objects imported automatica | Const:str:'Uninferable object imported automatical
+254:31:Attribute -> ERR
+254:31:Attribute -> Inst:django.core.management.color.Style
+254:31:Name -> Inst:django.core.management.commands.shell.Command
+256:15:Name -> U
+260:11:Name -> Dict:0
+261:12:Call -> ERR
+261:12:Name -> Func:builtins.exec
+261:17:Name -> Dict:0
+261:40:Call -> ERR
+261:40:Name -> Func:builtins.globals
+261:53:Call -> Dict:0 | Dict:0 | Dict:0 | U
+261:53:Attribute -> BM:django.core.management.commands.shell.Command.get_namespace
+261:53:Name -> Inst:django.core.management.commands.shell.Command
+261:74:Name -> Dict:0
+267:12:Attribute -> Const:str:'darwin'
+267:12:Name -> Module:sys
+268:20:Call -> U
+268:20:Attribute -> BM:_io.TextIOWrapper.isatty | U
+268:20:Attribute -> Inst:_io.TextIOWrapper | U
+268:20:Name -> Module:sys
+269:16:Call -> ERR
+269:16:Attribute -> Func:select.select
+269:16:Name -> Module:select
+269:31:Attribute -> Inst:_io.TextIOWrapper | U
+269:31:Name -> Module:sys
+271:12:Call -> ERR
+271:12:Name -> Func:builtins.exec
+271:17:Call -> U
+271:17:Attribute -> BM:_io.TextIOWrapper.read | U
+271:17:Attribute -> Inst:_io.TextIOWrapper | U
+271:17:Name -> Module:sys
+271:38:Call -> ERR
+271:38:Name -> Func:builtins.globals
+271:51:Call -> Dict:0 | Dict:0 | Dict:0 | U
+271:51:Attribute -> BM:django.core.management.commands.shell.Command.get_namespace
+271:51:Name -> Inst:django.core.management.commands.shell.Command
+271:72:Name -> Dict:0
+275:38:Name -> Dict:0
+275:13:Name -> Dict:0
+275:64:Attribute -> List:3
+275:64:Name -> Inst:django.core.management.commands.shell.Command
+278:21:Name -> List:1 | List:3
+280:23:Call -> U
+280:23:Call -> U
+280:23:Name -> Func:builtins.getattr
+280:31:Name -> Inst:django.core.management.commands.shell.Command
+280:37:Name -> U | Const:str:'ipython' | Const:str:'bpython' | Const:str:'python'
+280:44:Name -> Dict:0
+281:19:Name -> Class:builtins.ImportError
+283:14:Call -> ExcInst:django.core.management.base.CommandError
+283:14:Name -> Class:django.core.management.base.CommandError
+283:27:Call -> U
+283:27:Attribute -> BM:builtins.str.format
+283:66:Name -> U | Const:str:'ipython' | Const:str:'bpython' | Const:str:'python'

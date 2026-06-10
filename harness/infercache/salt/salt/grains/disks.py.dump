@@ -1,0 +1,235 @@
+17:15:Attribute -> Func:salt.modules.cmdmod._run_quiet
+17:15:Attribute -> Module:salt.modules.cmdmod
+17:15:Attribute -> Module:salt.modules
+17:15:Name -> Module:salt
+18:19:Attribute -> Func:salt.modules.cmdmod._run_all_quiet
+18:19:Attribute -> Module:salt.modules.cmdmod
+18:19:Attribute -> Module:salt.modules
+18:19:Name -> Module:salt
+19:22:Attribute -> Func:salt.modules.cmdmod.powershell
+19:22:Attribute -> Module:salt.modules.cmdmod
+19:22:Attribute -> Module:salt.modules
+19:22:Name -> Module:salt
+22:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:6:Attribute -> Func:logging.getLogger
+22:6:Name -> Module:logging
+22:24:Name -> Const:str:'salt.grains.disks' | Const:str:'__main__'
+29:7:Call -> U
+29:7:Attribute -> Func:salt.utils.platform.is_freebsd
+29:7:Attribute -> Module:salt.utils.platform
+29:7:Attribute -> Module:salt.utils
+29:7:Name -> Module:salt
+30:15:Call -> Dict:2
+30:15:Name -> Func:salt.grains.disks._freebsd_geom
+31:9:Call -> U
+31:9:Attribute -> Func:salt.utils.platform.is_linux
+31:9:Attribute -> Module:salt.utils.platform
+31:9:Attribute -> Module:salt.utils
+31:9:Name -> Module:salt
+32:15:Call -> Dict:2
+32:15:Name -> Func:salt.grains.disks._linux_disks
+33:9:Call -> U
+33:9:Attribute -> Func:salt.utils.platform.is_windows
+33:9:Attribute -> Module:salt.utils.platform
+33:9:Attribute -> Module:salt.utils
+33:9:Name -> Module:salt
+34:15:Call -> Dict:2
+34:15:Name -> Func:salt.grains.disks._windows_disks
+36:8:Call -> U
+36:8:Attribute -> U
+36:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+53:8:Name -> Const:str:'descr'
+54:8:Name -> Const:str:'ident'
+55:8:Name -> Const:str:'rotationrate'
+56:8:Name -> Const:str:'lunid'
+60:8:Name -> Const:str:'Mediasize'
+61:8:Name -> Const:str:'Sectorsize'
+62:8:Name -> Const:str:'Stripesize'
+63:8:Name -> Const:str:'Stripeoffset'
+64:8:Name -> Const:str:'rotationrate'
+69:7:Name -> U
+71:19:Call -> Inst:builtins.int
+71:19:Name -> Class:builtins.int
+71:23:Name -> U
+72:15:Name -> Class:builtins.ValueError
+74:9:Name -> U
+74:21:Name -> Class:builtins.tuple
+74:31:Name -> U
+75:17:Call -> U
+75:17:Attribute -> Func:re.search
+75:17:Name -> Module:re
+75:27:Name -> U
+75:40:Name -> U
+76:11:Name -> U
+78:23:Call -> Inst:builtins.int
+78:23:Name -> Class:builtins.int
+78:27:Call -> U
+78:27:Attribute -> U
+78:27:Name -> U
+79:19:Name -> Class:builtins.ValueError
+83:15:Name -> U
+87:4:Attribute -> Dict:0
+87:4:Name -> Class:salt.grains.disks._geomconsts
+87:25:Name -> U
+87:41:Attribute -> Dict:0
+87:41:Name -> Class:salt.grains.disks._geomconsts
+87:69:Call -> U
+87:69:Attribute -> U
+87:69:Name -> U
+92:11:Call -> Const:NoneType:None | Const:str:'geom' | U
+92:11:Attribute -> Func:salt.utils.path.which
+92:11:Attribute -> Module:salt.utils.path
+92:11:Attribute -> Module:salt.utils
+92:11:Name -> Module:salt
+95:14:Call -> U
+95:14:Name -> Dict:3
+95:37:Name -> Const:NoneType:None | Const:str:'geom' | U
+96:14:Call -> U
+96:14:Attribute -> U
+96:14:Name -> U
+100:20:Call -> U
+100:20:Attribute -> U
+100:20:Name -> U
+101:26:Name -> U
+102:25:Call -> U
+102:25:Attribute -> Func:re.search
+102:25:Name -> Module:re
+102:39:Name -> U
+102:56:Name -> U
+103:19:Name -> U
+104:28:Call -> Inst:builtins.int | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+104:28:Name -> Func:salt.grains.disks._datavalue
+105:24:Call -> ERR
+105:24:Attribute -> BM:builtins.dict.get
+105:24:Attribute -> Dict:5
+105:24:Name -> Class:salt.grains.disks._geomconsts
+105:51:Name -> U
+105:60:Call -> U
+105:60:Attribute -> U
+105:60:Name -> U
+107:20:Name -> Dict:0
+107:24:Name -> U
+107:34:Name -> Inst:builtins.int | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+108:23:Name -> U
+108:33:Attribute -> Dict:4
+108:33:Name -> Class:salt.grains.disks._geomconsts
+109:24:Name -> Dict:0
+109:28:Attribute -> Dict:4
+109:28:Name -> Class:salt.grains.disks._geomconsts
+109:49:Name -> U
+109:60:Name -> Inst:builtins.int | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | U
+111:15:Call -> ERR
+111:15:Attribute -> BM:builtins.dict.pop
+111:15:Name -> Dict:0
+111:23:Attribute -> Const:str:'Geom name'
+111:23:Name -> Class:salt.grains.disks._geomconsts
+112:11:Call -> U
+112:11:Attribute -> U
+112:11:Name -> U
+115:8:Name -> Dict:2
+115:21:Name -> U
+115:29:Name -> Dict:0
+116:11:Call -> ERR
+116:11:Attribute -> BM:builtins.dict.get
+116:11:Name -> Dict:0
+116:19:Attribute -> Const:str:'rotationrate'
+116:19:Name -> Class:salt.grains.disks._geomconsts
+117:12:Call -> U
+117:12:Attribute -> U
+117:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+117:60:Name -> U
+118:12:Call -> ERR
+118:12:Attribute -> BM:builtins.list.append
+118:12:Name -> Dict:2
+118:31:Name -> U
+120:18:Name -> U
+121:8:Call -> Const:NoneType:None
+121:8:Name -> Func:salt.grains.disks._freebsd_geom.parse_geom_attribs
+121:27:Name -> U
+123:11:Name -> Dict:2
+132:17:Call -> Inst:builtins.list
+132:17:Attribute -> Func:glob.glob
+132:17:Name -> Module:glob
+133:18:Call -> U
+133:18:Attribute -> U
+133:18:Call -> U
+133:18:Attribute -> Func:salt.utils.path.readlink
+133:18:Attribute -> Module:salt.utils.path
+133:18:Attribute -> Module:salt.utils
+133:18:Name -> Module:salt
+133:43:Name -> U
+135:19:Name -> U
+136:21:Call -> U
+136:21:Attribute -> Func:salt.utils.files.fopen
+136:21:Attribute -> Module:salt.utils.files
+136:21:Attribute -> Module:salt.utils
+136:21:Name -> Module:salt
+136:44:Name -> U
+137:29:Call -> U
+137:29:Attribute -> U
+137:29:Name -> U
+138:27:Call -> U
+138:27:Attribute -> U
+138:27:Name -> U
+139:23:Name -> U
+140:24:Call -> ERR
+140:24:Attribute -> BM:builtins.list.append
+140:24:Name -> Dict:2
+140:43:Name -> U
+141:24:Call -> U
+141:24:Attribute -> U
+141:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+141:72:Name -> U
+142:25:Name -> U
+143:24:Call -> ERR
+143:24:Attribute -> BM:builtins.list.append
+143:24:Name -> Dict:2
+143:44:Name -> U
+144:24:Call -> U
+144:24:Attribute -> U
+144:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+144:72:Name -> U
+146:24:Call -> U
+146:24:Attribute -> U
+146:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+149:28:Name -> U
+151:15:Name -> Class:builtins.OSError
+153:11:Name -> Dict:2
+161:17:Call -> U | Dict:0
+161:17:Name -> Dict:3
+161:44:Name -> Const:str:'Get-PhysicalDisk | Select DeviceID, Med
+163:11:Name -> U | Dict:0
+164:8:Call -> U
+164:8:Attribute -> U
+164:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+165:15:Name -> Dict:2
+168:7:Call -> ERR
+168:7:Name -> Func:builtins.isinstance
+168:18:Name -> U | Dict:0
+168:30:Name -> Class:builtins.dict
+169:22:Name -> U | Dict:0
+171:17:Name -> U | Dict:0 | List:1
+172:21:Call -> U
+172:21:Attribute -> U | BM:builtins.dict.get
+172:21:Name -> U | Dict:0
+174:11:Name -> U
+174:33:Call -> U
+174:33:Attribute -> U
+174:33:Name -> U
+180:12:Call -> U
+180:12:Attribute -> U
+180:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+180:45:Name -> U
+182:38:Name -> U | Dict:0
+183:8:Call -> ERR
+183:8:Attribute -> BM:builtins.list.append
+183:8:Name -> Dict:2
+183:28:Name -> Const:str:'\\\\.\\PhysicalDriveUninferable'
+184:11:Call -> U
+184:11:Attribute -> U
+184:11:Name -> U
+185:12:Call -> ERR
+185:12:Attribute -> BM:builtins.list.append
+185:12:Name -> Dict:2
+185:31:Name -> Const:str:'\\\\.\\PhysicalDriveUninferable'
+187:11:Name -> Dict:2

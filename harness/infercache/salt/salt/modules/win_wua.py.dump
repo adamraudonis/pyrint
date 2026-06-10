@@ -1,0 +1,465 @@
+70:7:Name -> Class:builtins.ImportError
+73:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+73:6:Attribute -> Func:logging.getLogger
+73:6:Name -> Module:logging
+73:24:Name -> Const:str:'salt.modules.win_wua' | Const:str:'__main__'
+84:11:Call -> U
+84:11:Attribute -> Func:salt.utils.platform.is_windows
+84:11:Attribute -> Module:salt.utils.platform
+84:11:Attribute -> Module:salt.utils
+84:11:Name -> Module:salt
+87:11:Name -> Const:bool:True | Const:bool:False
+90:11:Attribute -> Const:bool:True | Const:bool:False
+90:11:Attribute -> Module:salt.utils.win_update
+90:11:Attribute -> Module:salt.utils
+90:11:Name -> Module:salt
+93:7:Call -> Dict:0
+93:7:Attribute -> Func:salt.utils.win_service.info
+93:7:Attribute -> Module:salt.utils.win_service
+93:7:Attribute -> Module:salt.utils
+93:7:Name -> Module:salt
+99:7:Call -> Dict:0
+99:7:Attribute -> Func:salt.utils.win_service.info
+99:7:Attribute -> Module:salt.utils.win_service
+99:7:Attribute -> Module:salt.utils
+99:7:Name -> Module:salt
+105:7:Call -> Dict:0
+105:7:Attribute -> Func:salt.utils.win_service.info
+105:7:Attribute -> Module:salt.utils.win_service
+105:7:Attribute -> Module:salt.utils
+105:7:Name -> Module:salt
+112:7:Call -> Dict:0
+112:7:Attribute -> Func:salt.utils.win_service.info
+112:7:Attribute -> Module:salt.utils.win_service
+112:7:Attribute -> Module:salt.utils
+112:7:Name -> Module:salt
+118:7:Call -> Dict:0
+118:7:Attribute -> Func:salt.utils.win_service.info
+118:7:Attribute -> Module:salt.utils.win_service
+118:7:Attribute -> Module:salt.utils
+118:7:Name -> Module:salt
+287:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+287:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+287:10:Attribute -> Module:salt.utils.win_update
+287:10:Attribute -> Module:salt.utils
+287:10:Name -> Module:salt
+287:58:Name -> Const:bool:True | U
+290:14:Call -> Inst:salt.utils.win_update.Updates
+290:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.available
+290:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+291:20:Name -> Const:bool:True | U
+292:23:Name -> Const:bool:True | U
+293:23:Name -> Const:bool:False | U
+294:20:Name -> Const:bool:False | U
+295:17:Name -> Const:bool:True | U
+296:16:Name -> Const:bool:True | U
+297:19:Name -> Const:NoneType:None | U
+298:19:Name -> Const:NoneType:None | U
+302:32:Name -> Const:bool:False | U
+302:11:Call -> Const:str:'Nothing to return' | Dict:6
+302:11:Attribute -> BM:salt.utils.win_update.Updates.summary
+302:11:Name -> Inst:salt.utils.win_update.Updates
+302:45:Call -> Const:str:'Nothing to return' | Dict:0
+302:45:Attribute -> BM:salt.utils.win_update.Updates.list
+302:45:Name -> Inst:salt.utils.win_update.Updates
+394:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+394:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+394:10:Attribute -> Module:salt.utils.win_update
+394:10:Attribute -> Module:salt.utils
+394:10:Name -> Module:salt
+394:58:Name -> Const:bool:True | U
+397:14:Call -> Inst:salt.utils.win_update.Updates
+397:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.search
+397:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+397:25:Name -> U
+402:7:Name -> Const:bool:False | U
+402:19:Name -> Const:bool:False | U
+403:8:Name -> Dict:0
+403:26:Call -> Dict:2 | Dict:2 | Dict:1
+403:26:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.download
+403:26:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+403:39:Name -> Inst:salt.utils.win_update.Updates
+406:7:Name -> Const:bool:False | U
+407:8:Name -> Dict:0
+407:25:Call -> Dict:2 | Dict:2 | Dict:1
+407:25:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.install
+407:25:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+407:37:Name -> Inst:salt.utils.win_update.Updates
+409:18:Name -> Dict:0
+409:11:Name -> U
+409:27:Call -> Const:str:'Nothing to return' | Dict:0
+409:27:Attribute -> BM:salt.utils.win_update.Updates.list
+409:27:Name -> Inst:salt.utils.win_update.Updates
+569:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+569:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+569:10:Attribute -> Module:salt.utils.win_update
+569:10:Attribute -> Module:salt.utils
+569:10:Name -> Module:salt
+569:58:Name -> Const:bool:True | U
+572:14:Call -> Inst:salt.utils.win_update.Updates
+572:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.available
+572:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+573:23:Name -> Const:bool:True | U
+574:17:Name -> Const:bool:True | U
+575:16:Name -> Const:bool:False | U
+576:19:Name -> Const:NoneType:None | U
+577:19:Name -> Const:NoneType:None | U
+583:7:Name -> Const:bool:False | U
+583:19:Name -> Const:bool:False | U
+584:8:Name -> Dict:0
+584:26:Call -> Dict:2 | Dict:2 | Dict:1
+584:26:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.download
+584:26:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+584:39:Name -> Inst:salt.utils.win_update.Updates
+587:7:Name -> Const:bool:False | U
+588:8:Name -> Dict:0
+588:25:Call -> Dict:2 | Dict:2 | Dict:1
+588:25:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.install
+588:25:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+588:37:Name -> Inst:salt.utils.win_update.Updates
+590:11:Name -> Dict:0
+591:36:Name -> Const:bool:False | U
+591:15:Call -> Const:str:'Nothing to return' | Dict:6
+591:15:Attribute -> BM:salt.utils.win_update.Updates.summary
+591:15:Name -> Inst:salt.utils.win_update.Updates
+591:49:Call -> Const:str:'Nothing to return' | Dict:0
+591:49:Attribute -> BM:salt.utils.win_update.Updates.list
+591:49:Name -> Inst:salt.utils.win_update.Updates
+593:11:Name -> Dict:0
+651:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+651:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+651:10:Attribute -> Module:salt.utils.win_update
+651:10:Attribute -> Module:salt.utils
+651:10:Name -> Module:salt
+652:14:Call -> Inst:salt.utils.win_update.Updates
+652:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.installed
+652:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+653:14:Call -> Const:str:'Nothing to return' | Dict:0
+653:14:Attribute -> BM:salt.utils.win_update.Updates.list
+653:14:Name -> Inst:salt.utils.win_update.Updates
+655:7:Name -> Const:bool:False | U
+656:19:Call -> Set:0
+656:19:Name -> Class:builtins.set
+657:20:Name -> Const:str:'Nothing to return' | Dict:0
+658:12:Call -> ERR
+658:12:Attribute -> BM:builtins.set.update
+658:12:Name -> Set:0
+658:28:Name -> Const:str:'Nothing to return' | Dict:0
+658:36:Name -> U
+659:15:Call -> ERR
+659:15:Name -> Func:builtins.sorted
+659:22:Name -> Set:0
+661:32:Name -> Const:bool:False | U
+661:11:Call -> Const:str:'Nothing to return' | Dict:6
+661:11:Attribute -> BM:salt.utils.win_update.Updates.summary
+661:11:Name -> Inst:salt.utils.win_update.Updates
+661:45:Name -> Const:str:'Nothing to return' | Dict:0
+695:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+695:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+695:10:Attribute -> Module:salt.utils.win_update
+695:10:Attribute -> Module:salt.utils
+695:10:Name -> Module:salt
+698:14:Call -> Inst:salt.utils.win_update.Updates
+698:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.search
+698:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+698:25:Name -> U
+700:7:Call -> U
+700:7:Attribute -> BM:salt.utils.win_update.Updates.count
+700:7:Name -> Inst:salt.utils.win_update.Updates
+701:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+701:14:Name -> Class:salt.exceptions.CommandExecutionError
+704:7:Call -> ERR
+704:7:Name -> Func:builtins.isinstance
+704:18:Name -> U
+704:25:Name -> Class:builtins.str
+705:17:Name -> U
+707:7:Call -> ERR
+707:7:Name -> Func:builtins.isinstance
+707:18:Name -> U | List:1
+707:25:Name -> Class:builtins.int
+708:17:Call -> Const:str:''
+708:17:Name -> Class:builtins.str
+708:21:Name -> U | List:1
+710:7:Call -> U
+710:7:Attribute -> BM:salt.utils.win_update.Updates.count
+710:7:Name -> Inst:salt.utils.win_update.Updates
+710:25:Call -> ERR
+710:25:Name -> Func:builtins.len
+710:29:Name -> U | List:1 | List:1
+711:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+711:14:Name -> Class:salt.exceptions.CommandExecutionError
+715:11:Call -> Dict:2 | Dict:2 | Dict:1
+715:11:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.download
+715:11:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+715:24:Name -> Inst:salt.utils.win_update.Updates
+749:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+749:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+749:10:Attribute -> Module:salt.utils.win_update
+749:10:Attribute -> Module:salt.utils
+749:10:Name -> Module:salt
+752:14:Call -> Inst:salt.utils.win_update.Updates
+752:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.search
+752:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+752:25:Name -> U
+754:7:Call -> U
+754:7:Attribute -> BM:salt.utils.win_update.Updates.count
+754:7:Name -> Inst:salt.utils.win_update.Updates
+755:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+755:14:Name -> Class:salt.exceptions.CommandExecutionError
+758:7:Call -> ERR
+758:7:Name -> Func:builtins.isinstance
+758:18:Name -> U
+758:25:Name -> Class:builtins.str
+759:17:Name -> U
+761:7:Call -> ERR
+761:7:Name -> Func:builtins.isinstance
+761:18:Name -> U | List:1
+761:25:Name -> Class:builtins.int
+762:17:Call -> Const:str:''
+762:17:Name -> Class:builtins.str
+762:21:Name -> U | List:1
+764:7:Call -> U
+764:7:Attribute -> BM:salt.utils.win_update.Updates.count
+764:7:Name -> Inst:salt.utils.win_update.Updates
+764:25:Call -> ERR
+764:25:Name -> Func:builtins.len
+764:29:Name -> U | List:1 | List:1
+765:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+765:14:Name -> Class:salt.exceptions.CommandExecutionError
+769:11:Call -> Dict:2 | Dict:2 | Dict:1
+769:11:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.install
+769:11:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+769:23:Name -> Inst:salt.utils.win_update.Updates
+800:10:Call -> Inst:salt.utils.win_update.WindowsUpdateAgent
+800:10:Attribute -> Class:salt.utils.win_update.WindowsUpdateAgent
+800:10:Attribute -> Module:salt.utils.win_update
+800:10:Attribute -> Module:salt.utils
+800:10:Name -> Module:salt
+803:14:Call -> Inst:salt.utils.win_update.Updates
+803:14:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.search
+803:14:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+803:25:Name -> U
+805:7:Call -> U
+805:7:Attribute -> BM:salt.utils.win_update.Updates.count
+805:7:Name -> Inst:salt.utils.win_update.Updates
+806:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+806:14:Name -> Class:salt.exceptions.CommandExecutionError
+808:11:Call -> Dict:2 | Dict:2 | Dict:1
+808:11:Attribute -> BM:salt.utils.win_update.WindowsUpdateAgent.uninstall
+808:11:Name -> Inst:salt.utils.win_update.WindowsUpdateAgent
+808:25:Name -> Inst:salt.utils.win_update.Updates
+931:9:Call -> Inst:salt.utils.winapi.Com
+931:9:Attribute -> Class:salt.utils.winapi.Com
+931:9:Attribute -> Module:salt.utils.winapi
+931:9:Attribute -> Module:salt.utils
+931:9:Name -> Module:salt
+934:17:Call -> U
+934:17:Attribute -> U
+934:17:Attribute -> U
+934:17:Name -> U
+937:26:Attribute -> U
+937:26:Name -> U
+940:7:Name -> Const:NoneType:None | U
+941:8:Name -> U
+941:44:Call -> Inst:builtins.int
+941:44:Name -> Class:builtins.int
+941:48:Name -> U
+942:17:Call -> U
+942:17:Attribute -> U
+942:17:Name -> U
+943:11:Name -> U
+944:12:Name -> Dict:1
+944:27:Name -> U
+946:12:Name -> Dict:1
+947:12:Name -> Dict:1
+949:7:Name -> Const:NoneType:None | U
+950:8:Name -> U
+950:52:Name -> U
+951:17:Call -> U
+951:17:Attribute -> U
+951:17:Name -> U
+952:11:Name -> U
+953:12:Name -> Dict:1
+953:33:Name -> U
+955:12:Name -> Dict:1
+956:12:Name -> Dict:1
+958:7:Name -> Const:NoneType:None | U
+959:8:Name -> U
+959:49:Name -> U
+960:17:Call -> U
+960:17:Attribute -> U
+960:17:Name -> U
+961:11:Name -> U
+962:12:Name -> Dict:1
+962:30:Name -> U
+964:12:Name -> Dict:1
+965:12:Name -> Dict:1
+967:7:Name -> Const:NoneType:None | U
+968:8:Name -> U
+968:52:Name -> U
+969:17:Call -> U
+969:17:Attribute -> U
+969:17:Name -> U
+970:11:Name -> U
+971:12:Name -> Dict:1
+971:30:Name -> U
+973:12:Name -> Dict:1
+974:12:Name -> Dict:1
+976:7:Name -> Const:NoneType:None | U
+988:11:Name -> U
+988:22:Name -> Dict:8
+989:12:Name -> Dict:1
+994:12:Name -> Dict:1
+997:12:Name -> U
+997:55:Name -> Dict:8
+997:60:Name -> U
+998:21:Call -> U
+998:21:Attribute -> U
+998:21:Name -> U
+999:15:Name -> U
+1000:16:Name -> Dict:1
+1000:29:Name -> U
+1002:16:Name -> Dict:1
+1003:16:Name -> Dict:1
+1005:7:Name -> Const:NoneType:None | U
+1008:15:Call -> ERR
+1008:15:Name -> Func:builtins.isinstance
+1008:26:Name -> U
+1008:32:Name -> Class:builtins.str
+1009:12:Name -> Dict:1
+1010:16:Call -> U
+1010:16:Attribute -> BM:builtins.str.format
+1011:61:Name -> U
+1013:12:Name -> Dict:1
+1015:24:Name -> U
+1016:12:Name -> Dict:1
+1017:16:Call -> U
+1017:16:Attribute -> BM:builtins.str.format
+1018:50:Name -> U
+1020:12:Name -> Dict:1
+1023:16:Call -> U
+1023:16:Attribute -> U
+1023:16:Name -> U
+1025:12:Name -> U
+1025:53:Name -> U
+1026:21:Call -> U
+1026:21:Attribute -> U
+1026:21:Name -> U
+1027:15:Name -> U
+1028:16:Name -> Dict:1
+1028:30:Name -> U
+1030:16:Name -> Dict:1
+1031:16:Name -> Dict:1
+1033:7:Name -> Const:NoneType:None | U
+1036:13:Call -> Inst:salt.utils.winapi.Com
+1036:13:Attribute -> Class:salt.utils.winapi.Com
+1036:13:Attribute -> Module:salt.utils.winapi
+1036:13:Attribute -> Module:salt.utils
+1036:13:Name -> Module:salt
+1037:21:Call -> U
+1037:21:Attribute -> U
+1037:21:Attribute -> U
+1037:21:Name -> U
+1040:12:Name -> U
+1042:15:Name -> U
+1045:20:Call -> U
+1045:20:Attribute -> U
+1045:20:Name -> U
+1046:20:Name -> Dict:1
+1046:38:Name -> U
+1047:23:Name -> Class:builtins.Exception
+1054:24:Attribute -> Tuple:0
+1054:24:Name -> ExcInst:builtins.Exception
+1057:20:Name -> Dict:1
+1057:66:Name -> U
+1058:20:Name -> Dict:1
+1063:19:Call -> Const:bool:True | Const:bool:False
+1063:19:Name -> Func:salt.modules.win_wua._get_msupdate_status
+1066:24:Call -> U
+1066:24:Attribute -> U
+1066:24:Name -> U
+1067:24:Name -> Dict:1
+1067:42:Name -> U
+1068:27:Name -> Class:builtins.Exception
+1075:28:Attribute -> Tuple:0
+1075:28:Name -> ExcInst:builtins.Exception
+1081:24:Name -> Dict:1
+1081:70:Name -> U
+1082:24:Name -> Dict:1
+1084:20:Name -> Dict:1
+1084:38:Name -> U
+1086:4:Name -> Dict:1
+1086:20:Call -> Const:bool:False | U | Const:bool:False
+1086:20:Name -> Func:salt.modules.win_wua.get_needs_reboot
+1088:11:Name -> Dict:1
+1165:9:Call -> Inst:salt.utils.winapi.Com
+1165:9:Attribute -> Class:salt.utils.winapi.Com
+1165:9:Attribute -> Module:salt.utils.winapi
+1165:9:Attribute -> Module:salt.utils
+1165:9:Name -> Module:salt
+1167:17:Call -> U
+1167:17:Attribute -> U
+1167:17:Attribute -> U
+1167:17:Name -> U
+1170:26:Attribute -> U
+1170:26:Name -> U
+1173:8:Name -> Dict:0
+1173:34:Attribute -> U
+1173:34:Name -> U
+1174:8:Name -> Dict:0
+1174:39:Attribute -> U
+1174:39:Name -> U
+1175:8:Name -> Dict:0
+1175:34:Call -> Const:bool:True | Const:bool:False
+1175:34:Name -> Func:salt.modules.win_wua._get_msupdate_status
+1176:8:Name -> Dict:0
+1176:30:Call -> Const:bool:False | U | Const:bool:False
+1176:30:Name -> Func:salt.modules.win_wua.get_needs_reboot
+1177:8:Name -> Dict:0
+1177:37:Attribute -> U
+1177:37:Name -> U
+1178:8:Name -> Dict:0
+1178:36:Attribute -> U
+1178:36:Name -> U
+1179:8:Name -> Dict:0
+1179:27:Attribute -> U
+1179:27:Name -> U
+1180:8:Name -> Dict:0
+1180:37:Attribute -> U
+1180:37:Name -> U
+1181:8:Name -> Dict:0
+1181:31:Name -> List:8
+1181:35:Attribute -> U
+1181:35:Name -> U
+1184:11:Attribute -> U
+1184:11:Name -> U
+1185:12:Name -> Dict:0
+1185:36:Call -> U
+1185:36:Attribute -> BM:builtins.str.format
+1186:16:Attribute -> U
+1186:16:Name -> U
+1189:12:Name -> Dict:0
+1189:36:Call -> U
+1189:36:Attribute -> BM:builtins.str.format
+1190:16:Attribute -> U
+1190:16:Name -> U
+1193:11:Name -> Dict:0
+1204:9:Call -> Inst:salt.utils.winapi.Com
+1204:9:Attribute -> Class:salt.utils.winapi.Com
+1204:9:Attribute -> Module:salt.utils.winapi
+1204:9:Attribute -> Module:salt.utils
+1204:9:Name -> Module:salt
+1206:17:Call -> U
+1206:17:Attribute -> U
+1206:17:Attribute -> U
+1206:17:Name -> U
+1209:23:Attribute -> U
+1209:23:Name -> U
+1213:23:Name -> U
+1214:15:Attribute -> U
+1214:15:Name -> U
+1234:11:Call -> Const:bool:False | U | Const:bool:False
+1234:11:Attribute -> Func:salt.utils.win_update.needs_reboot
+1234:11:Attribute -> Module:salt.utils.win_update
+1234:11:Attribute -> Module:salt.utils
+1234:11:Name -> Module:salt

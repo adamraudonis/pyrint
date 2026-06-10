@@ -1,0 +1,326 @@
+35:3:Name -> Const:bool:False
+41:1:Attribute -> U
+41:1:Name -> U
+42:20:Name -> U
+43:17:Name -> Class:builtins.str
+44:21:Attribute -> Class:pathlib.Path
+44:21:Name -> Module:pathlib
+44:36:Call -> U
+44:36:Attribute -> U
+44:36:Name -> U
+44:58:Attribute -> Class:pathlib.Path
+44:58:Name -> Module:pathlib
+45:23:Name -> Class:builtins.bool
+49:27:Attribute -> Class:os.PathLike
+49:27:Name -> Module:os
+49:41:Name -> Class:builtins.str
+49:50:Name -> U
+51:15:Call -> Inst:pathlib.Path
+51:15:Attribute -> Class:pathlib.Path
+51:15:Name -> Module:pathlib
+51:28:Name -> U
+52:11:Call -> U
+52:11:Attribute -> BM:pathlib.PurePath.is_absolute
+52:11:Name -> Inst:pathlib.Path
+53:24:Name -> Inst:pathlib.Path
+54:25:Call -> U
+54:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+54:25:Attribute -> Module:posixpath | Module:ntpath
+54:25:Name -> Module:os
+54:38:Attribute -> U
+54:38:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+54:56:Call -> Inst:pathlib.Path
+54:56:Attribute -> BM:pathlib.PurePath.relative_to
+54:56:Name -> Inst:pathlib.Path
+54:73:Attribute -> U
+54:73:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+56:24:Call -> U
+56:24:Attribute -> U
+56:24:Attribute -> U
+56:24:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+56:54:Name -> Inst:pathlib.Path
+57:25:Call -> U
+57:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+57:25:Attribute -> Module:posixpath | Module:ntpath
+57:25:Name -> Module:os
+57:38:Attribute -> U
+57:38:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+57:56:Name -> Inst:pathlib.Path
+59:11:Call -> U | Const:bool:False | Const:bool:False
+59:11:Attribute -> BM:pathlib.Path.is_file | U
+59:11:Name -> Inst:pathlib.Path | U
+61:18:Call -> U
+61:18:Attribute -> BM:pathlib.Path.read_text | U
+61:18:Name -> Inst:pathlib.Path | U
+62:27:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+62:27:Attribute -> BM:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO.write
+62:27:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+62:38:Name -> U
+62:43:Name -> U
+63:15:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+63:32:Attribute -> U
+63:32:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+64:16:Call -> Const:NoneType:None | Const:NoneType:None
+64:16:Attribute -> Func:shutil.rmtree
+64:16:Name -> Module:shutil
+64:30:Call -> U
+64:30:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+64:30:Attribute -> Module:posixpath | Module:ntpath
+64:30:Name -> Module:os
+64:46:Name -> Inst:pathlib.Path | U
+65:17:Name -> Const:bool:False | Const:bool:False | Const:bool:True
+66:16:Call -> U
+66:16:Attribute -> BM:pathlib.Path.write_text | U
+66:16:Name -> Inst:pathlib.Path | U
+68:5:Name -> Class:functools.cached_property
+71:15:Call -> U
+71:15:Name -> U
+72:24:Call -> U
+72:24:Attribute -> U
+72:24:Name -> U
+76:49:Name -> Class:builtins.str
+76:57:Name -> Class:builtins.bool
+83:15:Call -> U
+83:15:Attribute -> U
+83:15:Attribute -> U
+83:15:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+83:39:Name -> U
+85:43:Name -> Class:builtins.str
+85:62:Name -> Class:builtins.bool
+85:79:Name -> Class:builtins.str
+95:19:Call -> U
+95:19:Attribute -> U
+95:19:Attribute -> U
+95:19:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+95:38:Name -> U
+96:15:Name -> Class:builtins.Exception
+97:46:Name -> U
+97:80:Name -> ExcInst:builtins.Exception
+98:12:Call -> ERR
+98:12:Attribute -> ERR
+98:12:Attribute -> ERR
+98:12:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+98:31:Name -> Const:str:'Could not read logs from Uninferable wi
+100:15:Name -> Const:bool:False | U
+101:23:Name -> Const:str:'Could not read logs from Uninferable wi
+106:13:Name -> Class:builtins.str
+107:29:Name -> Class:builtins.str
+108:16:Name -> Class:builtins.bool
+109:19:Name -> Class:builtins.int
+110:9:Name -> Class:builtins.bool
+122:15:Name -> Const:bool:True | U
+122:26:Call -> U
+122:26:Attribute -> BM:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO.s3_log_exists
+122:26:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+122:45:Name -> U
+123:26:Call -> U | Const:str:'Could not read logs from Uninferable wi | Const:str:''
+123:26:Attribute -> BM:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO.s3_read
+123:26:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+123:39:Name -> U
+124:19:Name -> U | Const:str:'Could not read logs from Uninferable wi | Const:str:''
+125:32:Call -> U
+125:32:Attribute -> U | BM:builtins.str.endswith
+125:32:Name -> U | Const:str:'Could not read logs from Uninferable wi
+126:29:Name -> U | Const:str:'Could not read logs from Uninferable wi
+126:38:Name -> Const:str:'' | Const:str:'\n'
+126:43:Name -> U
+127:15:Name -> Class:builtins.Exception
+128:12:Call -> ERR
+128:12:Attribute -> ERR
+128:12:Attribute -> ERR
+128:12:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+134:23:Call -> Inst:builtins.range
+134:23:Name -> Class:builtins.range
+134:33:Name -> Const:int:1 | U
+136:16:Call -> U
+136:16:Attribute -> U
+136:16:Attribute -> U
+136:16:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+137:20:Name -> U | Const:str:'UninferableUninferable' | Const:str:'Uninferable\nUninferable' | Const:str:'Could not read logs from Uninferable wi | Const:str:'Could not read logs from Uninferable wi
+138:24:Name -> U
+140:28:Call -> U
+140:28:Attribute -> U
+140:28:Name -> U
+143:19:Name -> Class:builtins.Exception
+144:19:Name -> U
+144:29:Name -> Const:int:1 | U
+145:20:Call -> ERR
+145:20:Attribute -> ERR
+145:20:Attribute -> ERR
+145:20:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+147:24:Name -> U
+150:20:Call -> ERR
+150:20:Attribute -> ERR
+150:20:Attribute -> ERR
+150:20:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+150:69:Name -> U
+154:34:Name -> Class:builtins.str
+154:43:Name -> U
+154:57:Name -> Class:builtins.tuple
+154:63:Name -> U
+154:78:Name -> U
+155:14:Name -> Class:builtins.list
+155:19:Name -> Class:builtins.str
+157:25:Call -> U
+157:25:Attribute -> U
+157:25:Attribute -> U
+157:25:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+157:54:Call -> U
+157:54:Attribute -> Func:posixpath.join | Func:ntpath.join
+157:54:Attribute -> Module:posixpath | Module:ntpath
+157:54:Name -> Module:os
+157:67:Attribute -> U
+157:67:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+157:85:Name -> U
+158:15:Call -> U
+158:15:Attribute -> U
+158:15:Attribute -> U
+158:15:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+158:47:Name -> U
+158:62:Name -> U
+159:11:Name -> U
+160:19:Call -> ERR
+160:19:Name -> Func:builtins.sorted
+160:34:Name -> U
+160:43:Name -> U
+160:60:Name -> U
+161:15:Name -> U
+162:27:Name -> U
+164:16:Call -> ERR
+164:16:Attribute -> BM:builtins.list.append
+164:16:Name -> List:0
+165:16:Call -> ERR
+165:16:Attribute -> BM:builtins.list.extend
+165:16:Name -> List:0
+165:39:Name -> U
+165:56:Name -> U
+166:23:Name -> U
+167:16:Call -> ERR
+167:16:Attribute -> BM:builtins.list.append
+167:16:Name -> List:0
+167:28:Call -> U | Const:str:'Could not read logs from Uninferable wi | Const:str:''
+167:28:Attribute -> BM:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO.s3_read
+167:28:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+167:41:Name -> U
+168:19:Name -> List:0 | U
+168:29:Name -> List:0
+169:15:Name -> List:0 | U
+172:20:Name -> U
+172:37:Name -> U
+181:25:Name -> Class:builtins.str
+182:23:Name -> Class:builtins.str
+183:19:Name -> Class:builtins.int
+184:22:Name -> Class:builtins.int
+185:15:Name -> Class:builtins.bool
+189:8:Call -> Const:NoneType:None
+189:8:Attribute -> BM:builtins.object.__init__
+189:8:Call -> Super
+189:8:Name -> Class:builtins.super
+190:28:Name -> U
+190:55:Name -> Const:int:0 | U
+190:79:Name -> Const:int:0 | U
+190:99:Name -> Const:bool:False | U
+192:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+192:22:Attribute -> Class:logging.FileHandler
+192:22:Name -> Module:logging
+193:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+193:27:Name -> U
+194:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+195:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+196:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+197:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+198:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+198:18:Call -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+198:18:Name -> Class:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+199:24:Name -> U
+200:28:Name -> U
+201:30:Call -> ERR
+201:30:Attribute -> BM:builtins.dict.get
+201:30:Name -> Dict:0
+202:37:Call -> U
+202:37:Attribute -> U
+202:37:Name -> U
+206:30:Name -> U
+206:59:Name -> Class:builtins.str
+207:8:Call -> ERR
+207:8:Attribute -> ERR
+207:8:Call -> Super
+207:8:Name -> Class:builtins.super
+207:28:Name -> U
+207:43:Name -> Const:NoneType:None | U
+210:11:Name -> Const:bool:False
+211:19:Attribute -> Const:NoneType:None
+211:19:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+213:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+213:18:Name -> U
+215:20:Attribute -> ERR
+215:20:Attribute -> Const:NoneType:None
+215:20:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+216:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+216:33:Call -> Const:str:''
+216:33:Attribute -> BM:pathlib.PurePath.as_posix
+216:33:Call -> Inst:pathlib.Path
+216:33:Attribute -> BM:pathlib.PurePath.relative_to
+216:33:Call -> Inst:pathlib.Path
+216:33:Attribute -> Class:pathlib.Path
+216:33:Name -> Module:pathlib
+216:46:Name -> U
+216:69:Attribute -> ERR
+216:69:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+217:33:Call -> U
+217:33:Name -> Func:builtins.getattr
+217:41:Name -> U
+218:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+218:31:Name -> U
+218:61:Call -> U
+218:61:Name -> Func:builtins.getattr
+218:69:Name -> U
+221:11:Attribute -> Const:bool:True | U
+221:11:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+222:17:Call -> ERR
+222:17:Name -> Func:_io.open
+222:22:Attribute -> ERR
+222:22:Attribute -> Const:NoneType:None
+222:22:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+231:11:Attribute -> Const:bool:False | Const:bool:True
+231:11:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+234:8:Call -> ERR
+234:8:Attribute -> ERR
+234:8:Call -> Super
+234:8:Name -> Class:builtins.super
+236:15:Attribute -> Const:bool:True | U
+236:15:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+239:11:Call -> Const:bool:True
+239:11:Name -> Func:builtins.hasattr
+239:19:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+240:12:Call -> Const:NoneType:None
+240:12:Attribute -> BM:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO.upload
+240:12:Attribute -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+240:12:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+240:27:Attribute -> Const:str:'' | Const:str:''
+240:27:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+240:51:Attribute -> U
+240:51:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+243:8:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+245:66:Name -> Class:builtins.tuple
+245:72:Name -> U
+245:87:Name -> U
+249:30:Call -> ERR
+249:30:Attribute -> ERR
+249:30:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+249:52:Name -> U
+249:56:Name -> U
+251:25:Call -> Tuple:2 | Tuple:2
+251:25:Attribute -> BM:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO.read
+251:25:Attribute -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3RemoteLogIO
+251:25:Name -> Inst:providers.amazon.src.airflow.providers.amazon.aws.log.s3_task_handler.S3TaskHandler
+251:38:Name -> U
+251:59:Name -> U
+253:11:Name -> List:0 | Const:NoneType:None
+255:19:Name -> U
+256:16:Call -> U
+256:16:Attribute -> BM:builtins.list.append | U
+256:16:Name -> List:0 | U
+256:62:Name -> U
+258:15:Name -> List:0 | U
+258:25:Name -> List:0 | Const:NoneType:None | List:0

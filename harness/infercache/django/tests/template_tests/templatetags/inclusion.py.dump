@@ -1,0 +1,182 @@
+3:9:Call -> Inst:django.template.engine.Engine
+3:9:Name -> Class:django.template.engine.Engine
+4:11:Call -> Inst:django.template.library.Library
+4:11:Name -> Class:django.template.library.Library
+7:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+7:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+7:1:Name -> Inst:django.template.library.Library
+13:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_no_params
+16:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+16:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+16:1:Name -> Inst:django.template.library.Library
+16:24:Call -> U | Inst:django.template.base.Template
+16:24:Attribute -> BM:django.template.engine.Engine.get_template
+16:24:Name -> Inst:django.template.engine.Engine
+22:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_no_params_from_template
+27:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+27:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+27:1:Name -> Inst:django.template.library.Library
+30:68:Name -> U
+33:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_one_param
+36:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+36:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+36:1:Name -> Inst:django.template.library.Library
+36:24:Call -> U | Inst:django.template.base.Template
+36:24:Attribute -> BM:django.template.engine.Engine.get_template
+36:24:Name -> Inst:django.template.engine.Engine
+39:82:Name -> U
+42:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_one_param_from_template
+47:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+47:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+47:1:Name -> Inst:django.template.library.Library
+50:78:Name -> U
+53:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_explicit_no_context
+58:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+58:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+58:1:Name -> Inst:django.template.library.Library
+58:24:Call -> U | Inst:django.template.base.Template
+58:24:Attribute -> BM:django.template.engine.Engine.get_template
+58:24:Name -> Inst:django.template.engine.Engine
+63:10:Name -> U
+67:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_explicit_no_context_from_template
+72:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+72:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+72:1:Name -> Inst:django.template.library.Library
+79:10:Name -> U
+83:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_no_params_with_context
+88:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+88:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+88:1:Name -> Inst:django.template.library.Library
+88:24:Call -> U | Inst:django.template.base.Template
+88:24:Attribute -> BM:django.template.engine.Engine.get_template
+88:24:Name -> Inst:django.template.engine.Engine
+96:10:Name -> U
+100:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_no_params_with_context_from_template
+105:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+105:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+105:1:Name -> Inst:django.template.library.Library
+112:11:Name -> U
+112:29:Name -> U
+116:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_params_and_context
+119:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+119:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+119:1:Name -> Inst:django.template.library.Library
+119:24:Call -> U | Inst:django.template.base.Template
+119:24:Attribute -> BM:django.template.engine.Engine.get_template
+119:24:Name -> Inst:django.template.engine.Engine
+125:41:Name -> U
+125:59:Name -> U
+130:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_params_and_context_from_template
+135:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+135:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+135:1:Name -> Inst:django.template.library.Library
+138:74:Name -> U
+138:79:Name -> U
+141:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_two_params
+144:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+144:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+144:1:Name -> Inst:django.template.library.Library
+144:24:Call -> U | Inst:django.template.base.Template
+144:24:Attribute -> BM:django.template.engine.Engine.get_template
+144:24:Name -> Inst:django.template.engine.Engine
+149:11:Name -> U
+149:16:Name -> U
+153:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_two_params_from_template
+158:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+158:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+158:1:Name -> Inst:django.template.library.Library
+161:75:Name -> U
+161:80:Name -> Const:str:'hi' | U
+164:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_one_default
+167:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+167:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+167:1:Name -> Inst:django.template.library.Library
+170:76:Name -> Const:int:42 | U
+174:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+174:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+174:1:Name -> Inst:django.template.library.Library
+174:24:Call -> U | Inst:django.template.base.Template
+174:24:Attribute -> BM:django.template.engine.Engine.get_template
+174:24:Name -> Inst:django.template.engine.Engine
+179:11:Name -> U
+179:16:Name -> Const:str:'hi' | U
+183:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_one_default_from_template
+188:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+188:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+188:1:Name -> Inst:django.template.library.Library
+194:15:Call -> Const:str:''
+194:15:Attribute -> BM:builtins.str.join
+194:25:Call -> Const:str:''
+194:25:Name -> Class:builtins.str
+194:29:Name -> U | Const:str:'hi'
+194:46:Name -> U
+194:51:Name -> Const:str:'hi' | U
+194:57:Name -> Tuple:0
+199:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_unlimited_args
+202:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+202:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+202:1:Name -> Inst:django.template.library.Library
+202:24:Call -> U | Inst:django.template.base.Template
+202:24:Attribute -> BM:django.template.engine.Engine.get_template
+202:24:Name -> Inst:django.template.engine.Engine
+208:15:Call -> Const:str:''
+208:15:Attribute -> BM:builtins.str.join
+208:25:Call -> Const:str:''
+208:25:Name -> Class:builtins.str
+208:29:Name -> U | Const:str:'hi'
+208:46:Name -> U
+208:51:Name -> Const:str:'hi' | U
+208:57:Name -> Tuple:0
+213:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_unlimited_args_from_template
+218:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+218:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+218:1:Name -> Inst:django.template.library.Library
+223:11:Call -> Const:str:''
+223:11:Attribute -> BM:builtins.str.join
+223:21:Call -> Const:str:''
+223:21:Name -> Class:builtins.str
+223:25:Name -> U
+223:41:Name -> Tuple:0
+227:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_only_unlimited_args
+232:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+232:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+232:1:Name -> Inst:django.template.library.Library
+232:24:Call -> U | Inst:django.template.base.Template
+232:24:Attribute -> BM:django.template.engine.Engine.get_template
+232:24:Name -> Inst:django.template.engine.Engine
+237:11:Call -> Const:str:''
+237:11:Attribute -> BM:builtins.str.join
+237:21:Call -> Const:str:''
+237:21:Name -> Class:builtins.str
+237:25:Name -> U
+237:41:Name -> Tuple:0
+241:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_only_unlimited_args_from_template
+246:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+246:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+246:1:Name -> Inst:django.template.library.Library
+252:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_tag_use_l10n
+255:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+255:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+255:1:Name -> Inst:django.template.library.Library
+261:12:Call -> Const:str:''
+261:12:Attribute -> BM:builtins.str.join
+261:22:Call -> Const:str:''
+261:22:Name -> Class:builtins.str
+261:26:Name -> U | Const:str:'hi'
+261:43:Name -> U
+261:48:Name -> Const:str:'hi' | U
+261:54:Name -> Tuple:0
+262:12:Call -> Const:str:''
+262:12:Attribute -> BM:builtins.str.join
+262:33:Name -> U
+262:36:Name -> U
+262:53:Call -> DictItems
+262:53:Attribute -> BM:builtins.dict.items
+262:53:Name -> Dict:0
+267:0:Name -> Func:tests.template_tests.templatetags.inclusion.inclusion_unlimited_args_kwargs
+272:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+272:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+272:1:Name -> Inst:django.template.library.Library
+277:1:Call -> Func:django.template.library.Library.inclusion_tag.dec
+277:1:Attribute -> BM:django.template.library.Library.inclusion_tag
+277:1:Name -> Inst:django.template.library.Library

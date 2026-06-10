@@ -1,0 +1,110 @@
+22:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+22:10:Attribute -> Func:logging.getLogger
+22:10:Name -> Module:logging
+22:28:Name -> Const:str:'homeassistant.components.eliqonline.sen | Const:str:'__main__'
+28:16:Call -> Inst:_pydatetime.timedelta
+28:16:Name -> Class:_pydatetime.timedelta
+30:18:Call -> U
+30:18:Attribute -> U
+30:18:Name -> U
+32:8:Call -> U
+32:8:Attribute -> U
+32:8:Name -> U
+32:21:Name -> Const:str:'access_token'
+32:41:Attribute -> Func:homeassistant.helpers.config_validation.string
+32:41:Name -> Module:homeassistant.helpers.config_validation
+33:8:Call -> U
+33:8:Attribute -> U
+33:8:Name -> U
+33:21:Name -> Const:str:'channel_id'
+33:39:Attribute -> U
+33:39:Name -> Module:homeassistant.helpers.config_validation
+34:8:Call -> U
+34:8:Attribute -> U
+34:8:Name -> U
+34:21:Name -> Const:str:'name'
+34:40:Name -> Const:str:'ELIQ Online'
+34:55:Attribute -> Func:homeassistant.helpers.config_validation.string
+34:55:Name -> Module:homeassistant.helpers.config_validation
+40:10:Name -> U
+41:12:Name -> Class:builtins.dict
+42:24:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+43:20:Name -> Class:builtins.dict
+46:19:Call -> U
+46:19:Attribute -> U
+46:19:Name -> U
+46:30:Name -> Const:str:'access_token'
+47:11:Call -> U
+47:11:Attribute -> U
+47:11:Name -> U
+47:22:Name -> Const:str:'name'
+47:33:Name -> Const:str:'ELIQ Online'
+48:17:Call -> U
+48:17:Attribute -> U
+48:17:Name -> U
+48:28:Name -> Const:str:'channel_id'
+49:14:Call -> U
+49:14:Name -> Func:homeassistant.helpers.aiohttp_client.async_get_clientsession
+49:38:Name -> U
+51:10:Call -> U
+51:10:Attribute -> U
+51:10:Name -> U
+51:33:Name -> U
+51:55:Name -> U
+54:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+54:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+54:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+55:14:Call -> U
+55:14:Attribute -> U
+55:14:Name -> U
+55:41:Name -> U
+56:11:Name -> Class:builtins.OSError
+57:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+57:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+57:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+57:66:Name -> ExcInst:builtins.OSError
+60:4:Call -> U
+60:4:Name -> U
+60:24:Call -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+60:24:Name -> Class:homeassistant.components.eliqonline.sensor.EliqSensor
+60:35:Name -> U
+60:40:Name -> U
+60:52:Name -> U
+63:17:Name -> Class:homeassistant.components.sensor.SensorEntity
+66:25:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.POWER
+66:25:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+67:39:Attribute -> Inst:homeassistant.const.UnitOfPower.WATT
+67:39:Name -> Class:homeassistant.const.UnitOfPower
+68:24:Attribute -> Inst:homeassistant.components.sensor.const.SensorStateClass.MEASUREMENT
+68:24:Name -> Class:homeassistant.components.sensor.const.SensorStateClass
+72:8:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+72:26:Name -> U
+73:8:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+73:20:Name -> U
+74:8:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+74:27:Name -> U
+79:29:Call -> U
+79:29:Attribute -> U
+79:29:Attribute -> U
+79:29:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+79:62:Attribute -> U
+79:62:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+80:12:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+80:38:Call -> Inst:builtins.int
+80:38:Name -> Class:builtins.int
+80:42:Name -> U
+81:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+81:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+81:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+81:60:Attribute -> BM:homeassistant.components.sensor.SensorEntity.native_value
+81:60:Name -> Inst:homeassistant.components.eliqonline.sensor.EliqSensor
+82:15:Name -> Class:builtins.KeyError
+83:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+83:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+83:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+84:16:Name -> Class:builtins.OSError
+84:25:Name -> Class:builtins.TimeoutError
+85:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+85:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+85:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+85:76:Name -> ExcInst:builtins.OSError | ExcInst:builtins.TimeoutError

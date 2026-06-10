@@ -1,0 +1,113 @@
+11:11:Call -> U
+11:11:Attribute -> U
+11:11:Attribute -> U
+11:11:Name -> U
+12:11:Call -> Inst:django.http.response.HttpResponse
+12:11:Name -> Class:django.http.response.HttpResponse
+12:38:Name -> U
+16:11:Call -> U
+16:11:Attribute -> U
+16:11:Attribute -> U
+16:11:Name -> U
+17:4:Call -> ERR
+17:4:Attribute -> Func:time.sleep
+17:4:Name -> Module:time
+18:11:Call -> Inst:django.http.response.HttpResponse
+18:11:Name -> Class:django.http.response.HttpResponse
+18:33:Name -> U
+22:11:Call -> Inst:django.http.response.HttpResponse
+22:11:Name -> Class:django.http.response.HttpResponse
+23:20:Call -> U
+23:20:Attribute -> U
+23:20:Attribute -> U
+23:20:Name -> U
+24:21:Call -> U
+24:21:Attribute -> U
+24:21:Attribute -> U
+24:21:Name -> U
+29:15:Call -> Inst:django.http.response.HttpResponse
+29:15:Name -> Class:django.http.response.HttpResponse
+30:4:Call -> Const:NoneType:None
+30:4:Attribute -> BM:django.http.response.HttpResponseBase.set_cookie
+30:4:Name -> Inst:django.http.response.HttpResponse
+31:11:Name -> Inst:django.http.response.HttpResponse
+35:9:Attribute -> Inst:threading.lock
+35:9:Name -> Func:tests.asgi.urls.sync_waiter
+36:8:Call -> ERR
+36:8:Attribute -> BM:builtins.set.add
+36:8:Attribute -> Set:0
+36:8:Name -> Func:tests.asgi.urls.sync_waiter
+36:39:Call -> U | Inst:threading._DummyThread
+36:39:Attribute -> Func:threading.current_thread
+36:39:Name -> Module:threading
+37:4:Call -> Const:int:0 | U
+37:4:Attribute -> BM:threading.Barrier.wait
+37:4:Attribute -> Inst:threading.Barrier
+37:4:Name -> Func:tests.asgi.urls.sync_waiter
+38:11:Call -> Inst:django.http.response.HttpResponse
+38:11:Name -> Func:tests.asgi.urls.hello
+38:17:Name -> U
+41:1:Name -> Func:django.views.decorators.csrf.csrf_exempt
+43:7:Call -> U
+43:7:Attribute -> U
+43:7:Attribute -> U
+43:7:Name -> U
+44:15:Call -> Inst:django.http.response.HttpResponse
+44:15:Name -> Class:django.http.response.HttpResponse
+44:28:Attribute -> U
+44:28:Name -> U
+46:15:Call -> Inst:django.http.response.HttpResponse
+46:15:Name -> Class:django.http.response.HttpResponse
+49:0:Name -> Func:tests.asgi.urls.sync_waiter
+49:29:Call -> Set:0
+49:29:Name -> Class:builtins.set
+50:0:Name -> Func:tests.asgi.urls.sync_waiter
+50:19:Call -> Inst:threading.lock
+50:19:Attribute -> Func:threading.Lock
+50:19:Name -> Module:threading
+51:0:Name -> Func:tests.asgi.urls.sync_waiter
+51:22:Call -> Inst:threading.Barrier
+51:22:Attribute -> Class:threading.Barrier
+51:22:Name -> Module:threading
+56:10:Call -> Const:NoneType:None | U
+56:10:Attribute -> Func:asyncio.tasks.sleep
+56:10:Name -> Module:asyncio
+56:24:Name -> U
+61:17:Call -> Inst:builtins.float
+61:17:Name -> Class:builtins.float
+61:23:Attribute -> U
+61:23:Name -> U
+62:11:Call -> Inst:django.http.response.StreamingHttpResponse
+62:11:Name -> Class:django.http.response.StreamingHttpResponse
+62:33:Call -> AGen:tests.asgi.urls.streaming_inner
+62:33:Name -> Func:tests.asgi.urls.streaming_inner
+62:49:Name -> Inst:builtins.float
+65:16:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+69:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+69:4:Name -> Partial:PartialFunction
+69:13:Name -> Func:tests.asgi.urls.hello
+70:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+70:4:Name -> Partial:PartialFunction
+70:20:Name -> Func:tests.asgi.urls.hello_cookie
+71:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+71:4:Name -> Partial:PartialFunction
+71:28:Call -> Inst:django.http.response.FileResponse
+71:28:Name -> Class:django.http.response.FileResponse
+71:41:Call -> ERR
+71:41:Name -> Func:_io.open
+71:46:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+72:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+72:4:Name -> Partial:PartialFunction
+72:18:Name -> Func:tests.asgi.urls.hello_meta
+73:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+73:4:Name -> Partial:PartialFunction
+73:18:Name -> Func:tests.asgi.urls.post_echo
+74:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+74:4:Name -> Partial:PartialFunction
+74:18:Name -> Func:tests.asgi.urls.sync_waiter
+75:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+75:4:Name -> Partial:PartialFunction
+75:27:Name -> Func:tests.asgi.urls.hello_with_delay
+76:4:Call -> Inst:django.urls.resolvers.URLResolver | Inst:django.urls.resolvers.URLPattern
+76:4:Name -> Partial:PartialFunction
+76:23:Name -> Func:tests.asgi.urls.streaming_view

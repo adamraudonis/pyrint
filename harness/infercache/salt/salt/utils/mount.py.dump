@@ -1,0 +1,58 @@
+13:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:6:Attribute -> Func:logging.getLogger
+13:6:Name -> Module:logging
+13:24:Name -> Const:str:'salt.utils.mount' | Const:str:'__main__'
+21:13:Call -> U
+21:13:Attribute -> Func:salt.utils.files.fopen
+21:13:Attribute -> Module:salt.utils.files
+21:13:Attribute -> Module:salt.utils
+21:13:Name -> Module:salt
+21:36:Name -> U
+22:19:Call -> U
+22:19:Attribute -> Func:salt.utils.yamlloader.safe_load
+22:19:Attribute -> Module:salt.utils.yaml
+22:19:Attribute -> Module:salt.utils
+22:19:Name -> Module:salt
+22:45:Name -> U
+23:11:Name -> Class:builtins.OSError
+31:11:Call -> U
+31:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+31:11:Attribute -> Module:posixpath | Module:ntpath
+31:11:Name -> Module:os
+31:24:Name -> U
+38:17:Call -> U
+38:17:Name -> Func:salt.utils.mount.get_cache
+38:27:Name -> U
+39:11:Call -> U | Dict:0
+39:11:Name -> Func:salt.utils.mount._read_file
+39:22:Name -> U
+46:17:Call -> U
+46:17:Name -> Func:salt.utils.mount.get_cache
+46:27:Name -> U
+49:17:Call -> U | Inst:builtins.bytes
+49:17:Attribute -> Func:salt.utils.stringutils.to_bytes
+49:17:Attribute -> Module:salt.utils.stringutils
+49:17:Attribute -> Module:salt.utils
+49:17:Name -> Module:salt
+49:49:Call -> U
+49:49:Attribute -> Func:salt.utils.yamldumper.safe_dump
+49:49:Attribute -> Module:salt.utils.yaml
+49:49:Attribute -> Module:salt.utils
+49:49:Name -> Module:salt
+49:75:Name -> U
+50:13:Call -> U
+50:13:Attribute -> Func:salt.utils.files.fopen
+50:13:Attribute -> Module:salt.utils.files
+50:13:Attribute -> Module:salt.utils
+50:13:Name -> Module:salt
+50:36:Name -> U
+51:12:Call -> U
+51:12:Attribute -> U
+51:12:Name -> U
+51:22:Name -> U | Inst:builtins.bytes
+53:11:Name -> Class:builtins.OSError
+54:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+54:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+54:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:65:Attribute -> Const:int:10
+54:65:Name -> Module:logging

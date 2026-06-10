@@ -1,0 +1,176 @@
+15:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:6:Attribute -> Func:logging.getLogger
+15:6:Name -> Module:logging
+15:24:Name -> Const:str:'salt.modules.kernelpkg_linux_yum' | Const:str:'__main__'
+21:7:Call -> Inst:builtins.function
+21:7:Attribute -> Func:salt.utils.functools.namespaced_function
+21:7:Attribute -> Module:salt.utils.functools
+21:7:Attribute -> Module:salt.utils
+21:7:Name -> Module:salt
+21:48:Attribute -> Func:salt.modules.yumpkg._yum
+21:48:Attribute -> Module:salt.modules.yumpkg
+21:48:Attribute -> Module:salt.modules
+21:48:Name -> Module:salt
+21:74:Call -> ERR
+21:74:Name -> Func:builtins.globals
+29:7:Call -> ERR
+29:7:Attribute -> ERR
+29:7:Name -> ERR
+30:15:Name -> Const:str:'kernelpkg'
+31:9:Call -> ERR
+31:9:Attribute -> ERR
+31:9:Call -> ERR
+31:9:Attribute -> ERR
+31:9:Name -> ERR
+37:15:Name -> Const:str:'kernelpkg'
+52:31:Name -> ERR
+53:15:Call -> ERR
+53:15:Name -> ERR
+53:46:Name -> ERR
+55:11:Name -> ERR
+68:13:Call -> ERR
+68:13:Name -> ERR
+68:37:Call -> Const:str:'kernel'
+68:37:Name -> Func:salt.modules.kernelpkg_linux_yum._package_name
+69:7:Name -> U
+72:11:Call -> ERR
+72:11:Name -> Func:builtins.sorted
+72:18:Name -> U
+72:30:Call -> Class:functools.cmp_to_key.K
+72:30:Attribute -> Func:functools.cmp_to_key | Func:_functools.cmp_to_key
+72:30:Name -> Module:functools
+72:51:Name -> Func:salt.modules.kernelpkg_linux_yum._cmp_version
+85:13:Call -> ERR
+85:13:Name -> ERR
+85:44:Call -> Const:str:'kernel'
+85:44:Name -> Func:salt.modules.kernelpkg_linux_yum._package_name
+86:7:Name -> U
+87:17:Call -> U | Const:NoneType:None
+87:17:Name -> Func:salt.modules.kernelpkg_linux_yum.latest_installed
+88:11:Name -> U | Const:NoneType:None
+108:11:Call -> List:0 | U
+108:11:Name -> Func:salt.modules.kernelpkg_linux_yum.list_installed
+109:7:Name -> List:0 | U
+110:15:Name -> U
+126:11:Call -> Inst:salt.utils.versions.LooseVersion
+126:11:Name -> Class:salt.utils.versions.LooseVersion
+126:24:Call -> U
+126:24:Name -> Func:salt.modules.kernelpkg_linux_yum.active
+126:36:Call -> Inst:salt.utils.versions.LooseVersion
+126:36:Name -> Class:salt.utils.versions.LooseVersion
+126:49:Call -> U | Const:NoneType:None
+126:49:Name -> Func:salt.modules.kernelpkg_linux_yum.latest_installed
+154:13:Call -> ERR
+154:13:Name -> ERR
+154:42:Call -> Const:str:'kernel'
+154:42:Name -> Func:salt.modules.kernelpkg_linux_yum._package_name
+155:20:Call -> U
+155:20:Name -> Func:salt.modules.kernelpkg_linux_yum.needs_reboot
+158:20:Name -> U
+159:18:Call -> U
+159:18:Name -> Func:salt.modules.kernelpkg_linux_yum.active
+160:28:Call -> U | Const:NoneType:None
+160:28:Name -> Func:salt.modules.kernelpkg_linux_yum.latest_installed
+161:28:Name -> Const:bool:False | U
+162:27:Name -> U
+165:7:Name -> Const:bool:False | U
+165:18:Name -> U
+166:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+166:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+166:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+167:8:Call -> ERR
+167:8:Name -> ERR
+167:42:Name -> Const:NoneType:None | U
+169:11:Name -> Dict:5
+183:11:Call -> Inst:salt.utils.versions.LooseVersion
+183:11:Name -> Class:salt.utils.versions.LooseVersion
+183:24:Call -> U | Const:NoneType:None
+183:24:Name -> Func:salt.modules.kernelpkg_linux_yum.latest_available
+183:46:Call -> Inst:salt.utils.versions.LooseVersion
+183:46:Name -> Class:salt.utils.versions.LooseVersion
+183:59:Call -> U | Const:NoneType:None
+183:59:Name -> Func:salt.modules.kernelpkg_linux_yum.latest_installed
+201:7:Name -> U
+201:22:Call -> List:0 | U
+201:22:Name -> Func:salt.modules.kernelpkg_linux_yum.list_installed
+202:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+202:14:Name -> Class:salt.exceptions.CommandExecutionError
+202:55:Name -> U
+204:7:Name -> U
+204:18:Call -> U
+204:18:Name -> Func:salt.modules.kernelpkg_linux_yum.active
+205:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+205:14:Name -> Class:salt.exceptions.CommandExecutionError
+207:16:Call -> Const:str:'kernel'
+207:16:Name -> Func:salt.modules.kernelpkg_linux_yum._package_name
+207:34:Name -> U
+208:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+208:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+208:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+208:43:Name -> Const:str:'kernel-Uninferable'
+209:10:Call -> ERR
+209:10:Name -> ERR
+213:7:Call -> Const:bool:False | Const:bool:False | U | Const:bool:False
+213:7:Attribute -> Func:salt.utils.systemd.has_scope
+213:7:Attribute -> Module:salt.utils.systemd
+213:7:Attribute -> Module:salt.utils
+213:7:Name -> Module:salt
+213:36:Name -> ERR
+213:53:Call -> ERR
+213:53:Name -> ERR
+216:8:Call -> ERR
+216:8:Attribute -> BM:builtins.list.extend
+216:8:Name -> List:0
+217:4:Call -> ERR
+217:4:Attribute -> BM:builtins.list.extend
+217:4:Name -> List:0
+217:16:Call -> ERR
+217:16:Name -> Inst:builtins.function
+217:40:Name -> Const:str:'kernel-Uninferable'
+220:10:Call -> ERR
+220:10:Name -> ERR
+220:34:Name -> List:0
+223:4:Call -> ERR
+223:4:Attribute -> ERR
+223:4:Name -> ERR
+224:10:Call -> ERR
+224:10:Name -> ERR
+225:10:Call -> Dict:0
+225:10:Attribute -> Func:salt.utils.data.compare_dicts
+225:10:Attribute -> Module:salt.utils.data
+225:10:Attribute -> Module:salt.utils
+225:10:Name -> Module:salt
+225:40:Name -> U
+225:45:Name -> U
+228:7:Name -> U
+229:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+229:14:Name -> Class:salt.exceptions.CommandExecutionError
+231:29:Name -> U
+231:56:Name -> Dict:0
+234:24:Name -> Const:str:'kernel-Uninferable'
+255:18:Call -> List:0 | U
+255:18:Name -> Func:salt.modules.kernelpkg_linux_yum.list_installed
+258:11:Name -> U
+258:21:Call -> U
+258:21:Name -> Func:salt.modules.kernelpkg_linux_yum.active
+262:11:Name -> Const:bool:True | U
+262:27:Name -> U
+262:37:Call -> U | Const:NoneType:None
+262:37:Name -> Func:salt.modules.kernelpkg_linux_yum.latest_installed
+266:8:Call -> ERR
+266:8:Attribute -> BM:builtins.list.extend
+266:8:Name -> List:0
+266:23:Call -> Dict:1
+266:23:Name -> Func:salt.modules.kernelpkg_linux_yum.remove
+266:30:Name -> U
+268:23:Name -> List:0
+282:12:Call -> Inst:salt.utils.versions.LooseVersion
+282:12:Name -> Class:salt.utils.versions.LooseVersion
+282:25:Name -> U
+283:12:Call -> Inst:salt.utils.versions.LooseVersion
+283:12:Name -> Class:salt.utils.versions.LooseVersion
+283:25:Name -> U
+285:7:Name -> Inst:salt.utils.versions.LooseVersion
+285:15:Name -> Inst:salt.utils.versions.LooseVersion
+287:7:Name -> Inst:salt.utils.versions.LooseVersion
+287:15:Name -> Inst:salt.utils.versions.LooseVersion

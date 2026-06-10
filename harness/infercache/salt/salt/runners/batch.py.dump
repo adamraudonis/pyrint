@@ -1,0 +1,181 @@
+30:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+30:6:Attribute -> Func:logging.getLogger
+30:6:Name -> Module:logging
+30:24:Name -> Const:str:'salt.runners.batch' | Const:str:'__main__'
+55:12:Call -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+55:12:Attribute -> Func:salt.utils.batch_state.read_batch_state
+55:12:Attribute -> Module:salt.utils.batch_state
+55:12:Attribute -> Module:salt.utils
+55:12:Name -> Module:salt
+55:52:Name -> U
+55:57:Name -> ERR
+56:7:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+58:11:Call -> Dict:17
+58:11:Name -> Func:salt.runners.batch._summary
+58:20:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+79:11:Call -> Set:0 | Set:0 | Inst:builtins.set | Set:0
+79:11:Attribute -> Func:salt.utils.batch_state.read_active_index
+79:11:Attribute -> Module:salt.utils.batch_state
+79:11:Attribute -> Module:salt.utils
+79:11:Name -> Module:salt
+79:52:Name -> ERR
+81:15:Call -> ERR
+81:15:Name -> Func:builtins.sorted
+81:22:Name -> Set:0 | Set:0 | Inst:builtins.set | Set:0
+82:16:Call -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+82:16:Attribute -> Func:salt.utils.batch_state.read_batch_state
+82:16:Attribute -> Module:salt.utils.batch_state
+82:16:Attribute -> Module:salt.utils
+82:16:Name -> Module:salt
+82:56:Name -> U
+82:61:Name -> ERR
+83:11:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+85:8:Call -> ERR
+85:8:Attribute -> BM:builtins.list.append
+85:8:Name -> List:0
+85:22:Call -> Dict:17
+85:22:Name -> Func:salt.runners.batch._summary
+85:31:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+86:11:Name -> List:0
+116:12:Call -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+116:12:Attribute -> Func:salt.utils.batch_state.read_batch_state
+116:12:Attribute -> Module:salt.utils.batch_state
+116:12:Attribute -> Module:salt.utils
+116:12:Name -> Module:salt
+116:52:Name -> U
+116:57:Name -> ERR
+117:7:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+118:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+118:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+118:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+118:67:Name -> U
+120:7:Call -> U
+120:7:Attribute -> U | BM:builtins.dict.get
+120:7:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+121:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+121:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+121:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+121:59:Name -> U
+126:7:Name -> Const:bool:False | U
+126:16:Call -> U
+126:16:Attribute -> U | BM:builtins.dict.get
+126:16:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+127:8:Call -> Const:NoneType:None
+127:8:Name -> Func:salt.runners.batch._kill_active_minions
+127:29:Name -> Const:NoneType:None | Const:NoneType:None | U | Dict:0 | List:0
+133:9:Call -> Inst:salt.utils.event.MasterEvent
+133:9:Attribute -> Func:salt.utils.event.get_master_event
+133:9:Attribute -> Module:salt.utils.event
+133:9:Attribute -> Module:salt.utils
+133:9:Name -> Module:salt
+134:8:Name -> ERR
+134:18:Name -> ERR
+136:8:Call -> Const:bool:False | Const:bool:True
+136:8:Attribute -> BM:salt.utils.event.SaltEvent.fire_event
+136:8:Name -> Inst:salt.utils.event.MasterEvent
+137:20:Name -> U
+137:35:Name -> Const:str:'stop'
+138:26:Name -> U
+158:15:Call -> U
+158:15:Attribute -> U
+158:15:Name -> U
+159:15:Call -> U
+159:15:Attribute -> U
+159:15:Name -> U
+160:15:Call -> U
+160:15:Attribute -> U
+160:15:Name -> U
+161:20:Call -> U
+161:20:Attribute -> U
+161:20:Name -> U
+162:17:Call -> ERR
+162:17:Name -> Func:builtins.len
+162:21:Call -> U
+162:21:Attribute -> U
+162:21:Name -> U
+163:21:Call -> ERR
+163:21:Name -> Func:builtins.len
+163:25:Call -> U
+163:25:Attribute -> U
+163:25:Name -> U
+164:18:Call -> ERR
+164:18:Name -> Func:builtins.len
+164:22:Call -> U
+164:22:Attribute -> U
+164:22:Name -> U
+165:19:Call -> ERR
+165:19:Name -> Func:builtins.len
+165:23:Call -> U
+165:23:Attribute -> U
+165:23:Name -> U
+166:18:Call -> ERR
+166:18:Name -> Func:builtins.len
+166:22:Call -> U
+166:22:Attribute -> U
+166:22:Name -> U
+167:22:Call -> U
+167:22:Attribute -> U
+167:22:Name -> U
+168:18:Call -> U
+168:18:Name -> Class:builtins.bool
+168:23:Call -> U
+168:23:Attribute -> U
+168:23:Name -> U
+169:25:Call -> U
+169:25:Attribute -> U
+169:25:Name -> U
+170:18:Call -> U
+170:18:Attribute -> U
+170:18:Name -> U
+171:16:Call -> U
+171:16:Attribute -> U
+171:16:Name -> U
+172:19:Call -> U
+172:19:Attribute -> U
+172:19:Name -> U
+173:25:Call -> U
+173:25:Attribute -> U
+173:25:Name -> U
+175:52:Call -> U
+175:52:Attribute -> U
+175:52:Name -> U
+175:12:Call -> ERR
+175:12:Attribute -> Func:time.time
+175:12:Name -> Module:time
+175:26:Name -> U
+188:17:Call -> ERR
+188:17:Name -> Func:builtins.sorted
+188:24:Call -> U
+188:24:Attribute -> U
+188:24:Call -> U
+188:24:Attribute -> U
+188:24:Name -> U
+189:11:Name -> U
+191:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+191:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+191:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+193:8:Call -> ERR
+193:8:Name -> Func:builtins.len
+193:12:Name -> U
+194:8:Call -> U
+194:8:Attribute -> U
+194:8:Name -> U
+196:9:Call -> Inst:salt.client.LocalClient
+196:9:Attribute -> Func:salt.client.get_local_client
+196:9:Attribute -> Module:salt.client
+196:9:Name -> Module:salt
+196:38:Name -> ERR
+198:12:Call -> U | Const:int:0
+198:12:Attribute -> BM:salt.client.LocalClient.cmd_async
+198:12:Name -> Inst:salt.client.LocalClient
+199:16:Call -> Inst:builtins.list
+199:16:Name -> Class:builtins.list
+199:21:Name -> U
+201:21:Name -> U
+204:15:Name -> Class:builtins.Exception
+205:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+205:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+205:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+207:16:Call -> U
+207:16:Attribute -> U
+207:16:Name -> U

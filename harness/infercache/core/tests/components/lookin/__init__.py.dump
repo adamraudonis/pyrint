@@ -1,0 +1,41 @@
+16:22:Name -> Const:str:'Living Room'
+18:20:Name -> Const:str:'98F33163'
+20:16:Call -> Inst:homeassistant.helpers.service_info.zeroconf.ZeroconfServiceInfo
+20:16:Name -> Class:homeassistant.helpers.service_info.zeroconf.ZeroconfServiceInfo
+21:15:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address
+21:15:Name -> Func:ipaddress.ip_address
+21:26:Name -> Const:str:'127.0.0.1'
+22:18:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address
+22:18:Name -> Func:ipaddress.ip_address
+22:29:Name -> Const:str:'127.0.0.1'
+23:16:Call -> Const:str:''
+23:16:Attribute -> BM:builtins.str.lower
+23:16:Name -> Const:str:'LOOKin_98F33163'
+25:9:Name -> Const:str:'_lookin._tcp.'
+26:9:Name -> Const:str:'LOOKin_98F33163'
+31:25:Name -> U
+32:11:Call -> Inst:unittest.mock.MagicMock
+32:11:Name -> Class:unittest.mock.MagicMock
+32:31:Name -> U
+35:24:Name -> U
+36:11:Call -> Inst:unittest.mock.MagicMock
+36:11:Name -> Class:unittest.mock.MagicMock
+36:31:Name -> U
+39:24:Name -> U
+40:13:Call -> Inst:unittest.mock.MagicMock
+40:13:Name -> Class:unittest.mock.MagicMock
+40:33:Name -> U
+41:4:Name -> Inst:unittest.mock.MagicMock
+41:18:Name -> Const:str:'Living Room'
+42:4:Name -> Inst:unittest.mock.MagicMock
+42:16:Name -> Const:str:'98F33163'
+43:11:Name -> Inst:unittest.mock.MagicMock
+48:11:Name -> Const:NoneType:None | U
+49:18:Name -> U
+50:15:Name -> Const:NoneType:None | U
+50:25:Call -> Inst:unittest.mock.MagicMock
+50:25:Name -> Func:tests.components.lookin._mocked_device
+52:11:Call -> Inst:unittest.mock._patch
+52:11:Name -> Func:unittest.mock.patch
+52:20:Name -> Const:str:'homeassistant.components.lookin.config_
+52:74:Name -> Func:tests.components.lookin._patch_get_info._get_info

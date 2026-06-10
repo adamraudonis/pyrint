@@ -1,0 +1,193 @@
+17:7:Name -> Class:builtins.ImportError
+20:11:Name -> Class:builtins.ImportError
+23:15:Name -> Class:builtins.ImportError
+25:3:Name -> Const:NoneType:None | U
+29:15:Call -> U
+29:15:Attribute -> Func:secrets.token_bytes
+29:15:Name -> Module:secrets
+29:35:Name -> U
+40:16:Call -> Const:bool:True
+40:16:Name -> Func:builtins.hasattr
+40:24:Name -> Module:crypt
+41:8:Name -> Class:builtins.ImportError
+41:21:Name -> Class:builtins.PermissionError
+48:7:Name -> Class:builtins.ImportError
+51:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+51:6:Attribute -> Func:logging.getLogger
+51:6:Name -> Module:logging
+51:24:Name -> Const:str:'salt.utils.pycrypto' | Const:str:'__main__'
+68:12:Name -> Const:NoneType:None | U
+69:7:Name -> Const:bool:False | U
+72:16:Attribute -> Const:str:'0123456789abcdefghijklmnopqrstuvwxyzABC
+72:16:Name -> Module:string
+73:11:Name -> Const:str:'' | U | Const:str:'0123456789abcdefghijklmnopqrstuvwxyzABC
+74:11:Name -> Const:bool:True | U
+75:21:Attribute -> Const:str:'abcdefghijklmnopqrstuvwxyz'
+75:21:Name -> Module:string
+76:11:Name -> Const:bool:True | U
+77:21:Attribute -> Const:str:'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+77:21:Name -> Module:string
+78:11:Name -> Const:bool:True | U
+79:21:Attribute -> Const:str:'0123456789'
+79:21:Name -> Module:string
+80:11:Name -> Const:bool:True | U
+81:21:Attribute -> Const:str:'!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~'
+81:21:Name -> Module:string
+82:11:Name -> Const:bool:False | U
+83:21:Attribute -> Const:str:' \t\n\r\x0b\x0c'
+83:21:Name -> Module:string
+85:17:Call -> Const:int:20
+85:17:Name -> Class:builtins.int
+85:21:Name -> Const:int:20 | U
+87:14:Call -> Const:int:0
+87:14:Name -> Func:builtins.len
+87:18:Name -> Const:str:''
+87:24:Name -> Const:int:20
+88:15:Name -> Const:bool:True
+88:30:Name -> Const:bool:True | U
+90:19:Call -> U
+90:19:Attribute -> Func:salt.utils.platform.is_windows
+90:19:Attribute -> Module:salt.utils.platform
+90:19:Attribute -> Module:salt.utils
+90:19:Name -> Module:salt
+94:31:Call -> U
+94:31:Attribute -> Func:salt.utils.stringutils.to_str
+94:31:Attribute -> Module:salt.utils.stringutils
+94:31:Attribute -> Module:salt.utils
+94:31:Name -> Module:salt
+95:28:Call -> U
+95:28:Name -> Const:NoneType:None | U | Func:salt.utils.pycrypto.get_random_bytes
+95:58:Name -> Const:NoneType:None | Const:str:'UTF-8'
+98:27:Name -> Class:builtins.UnicodeDecodeError
+100:22:Call -> U
+100:22:Attribute -> Func:re.sub
+100:22:Name -> Module:re
+101:20:Call -> U
+101:20:Attribute -> Func:salt.utils.stringutils.to_str
+101:20:Attribute -> Module:salt.utils.stringutils
+101:20:Attribute -> Module:salt.utils
+101:20:Name -> Module:salt
+102:30:Call -> U
+102:30:Attribute -> Func:re.escape
+102:30:Name -> Module:re
+102:40:Name -> Const:str:'' | U | Const:str:'0123456789abcdefghijklmnopqrstuvwxyzABC | Const:str:'abcdefghijklmnopqrstuvwxyz' | Const:str:'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | Const:str:'0123456789' | Const:str:'!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~' | Const:str:' \t\n\r\x0b\x0c'
+102:60:Name -> Const:NoneType:None | Const:str:'UTF-8'
+105:20:Name -> U
+108:22:Call -> U
+108:22:Attribute -> BM:random.Random.choice
+108:22:Call -> Inst:random.SystemRandom
+108:22:Attribute -> Class:random.SystemRandom
+108:22:Name -> Module:random
+108:51:Name -> Const:str:'' | U | Const:str:'0123456789abcdefghijklmnopqrstuvwxyzABC | Const:str:'abcdefghijklmnopqrstuvwxyz' | Const:str:'ABCDEFGHIJKLMNOPQRSTUVWXYZ' | Const:str:'0123456789' | Const:str:'!"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~' | Const:str:' \t\n\r\x0b\x0c'
+109:15:Name -> Const:str:'' | U
+110:11:Name -> Class:builtins.Exception
+111:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+111:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+111:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+112:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+112:14:Name -> Class:salt.exceptions.CommandExecutionError
+112:36:Call -> Const:str:''
+112:36:Name -> Class:builtins.str
+112:40:Name -> ExcInst:builtins.Exception
+115:3:Name -> Const:bool:True | Const:bool:False
+116:15:Call -> U
+116:15:Attribute -> U
+116:15:Attribute -> U
+116:15:Name -> U
+116:31:Name -> U
+116:42:Attribute -> List:0
+116:42:Name -> Module:crypt
+129:10:Call -> U
+129:10:Attribute -> U
+129:10:Attribute -> U
+129:10:Name -> U
+129:47:Name -> List:5
+131:24:Name -> Const:NoneType:None | U
+131:44:Name -> List:5
+131:52:Call -> ERR
+131:52:Attribute -> BM:builtins.list.index
+131:52:Name -> List:5
+131:72:Name -> Const:NoneType:None | U
+132:7:Name -> Const:NoneType:None | U
+132:29:Name -> Const:NoneType:None | U
+135:32:Call -> U
+135:32:Attribute -> U
+135:32:Name -> Const:NoneType:None | U
+136:17:Call -> Inst:builtins.int
+136:17:Name -> Class:builtins.int
+136:21:Call -> U
+136:21:Attribute -> U
+136:21:Name -> U
+137:8:Call -> ERR
+137:8:Attribute -> BM:builtins.dict.update
+137:8:Name -> Dict:2
+137:31:Name -> U
+137:53:Name -> Inst:builtins.int
+140:8:Call -> ERR
+140:8:Attribute -> BM:builtins.dict.update
+140:8:Name -> Dict:2
+140:31:Name -> Const:NoneType:None | U
+141:11:Call -> U
+141:11:Attribute -> U
+141:11:Name -> U
+141:22:Name -> Dict:2
+148:7:Name -> Const:NoneType:None | U
+151:21:Name -> U | Dict:0
+151:29:Name -> Const:NoneType:None | U
+153:11:Name -> Const:NoneType:None | U
+155:29:Attribute -> U
+155:29:Name -> U | Dict:0
+155:37:Name -> Const:NoneType:None | U
+155:56:Name -> U
+158:14:Call -> U
+158:14:Attribute -> Func:crypt.crypt
+158:14:Name -> Module:crypt
+158:26:Name -> Const:NoneType:None | U
+158:36:Name -> Const:NoneType:None | U | Const:str:'$Uninferable$Uninferable'
+159:11:Name -> Class:builtins.OSError
+161:11:Name -> U | Const:NoneType:None
+168:7:Name -> Const:NoneType:None | U
+169:19:Call -> Const:str:'' | U
+169:19:Name -> Func:salt.utils.pycrypto.secure_password
+171:7:Name -> Const:NoneType:None | U
+173:53:Name -> Const:bool:True | Const:bool:False
+173:20:Call -> ERR
+173:20:Attribute -> ERR
+173:20:Attribute -> ERR
+173:20:Attribute -> List:0
+173:20:Name -> Module:crypt
+173:68:Name -> List:5
+175:7:Name -> Const:NoneType:None | U
+175:32:Name -> Const:NoneType:None | U
+175:47:Call -> ERR
+175:47:Name -> Func:builtins.len
+175:51:Name -> Const:NoneType:None | U
+176:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+176:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+176:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+178:7:Name -> Const:bool:True | Const:bool:False
+178:21:Name -> Const:NoneType:None | U
+178:34:Name -> U | Dict:0
+179:15:Call -> U | Const:NoneType:None
+179:15:Name -> Func:salt.utils.pycrypto._gen_hash_crypt
+180:23:Name -> Const:NoneType:None | U
+180:44:Name -> Const:NoneType:None | U | Const:str:''
+180:64:Name -> Const:NoneType:None | U
+182:9:Name -> Const:bool:True | Const:bool:False
+182:25:Name -> Const:NoneType:None | U
+182:38:Name -> List:5
+183:15:Call -> U
+183:15:Name -> Func:salt.utils.pycrypto._gen_hash_passlib
+184:23:Name -> Const:NoneType:None | U
+184:44:Name -> Const:NoneType:None | U | Const:str:''
+184:64:Name -> Const:NoneType:None | U
+187:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+187:14:Name -> Class:salt.exceptions.SaltInvocationError
+188:12:Call -> U
+188:12:Attribute -> BM:builtins.str.format
+191:16:Name -> Const:NoneType:None | U
+191:27:Call -> Inst:builtins.list
+191:27:Name -> Class:builtins.list
+191:32:Name -> U | Dict:0
+191:42:Name -> Const:bool:True | Const:bool:False
+191:55:Name -> List:5

@@ -1,0 +1,179 @@
+8:7:Call -> U
+8:7:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+8:7:Attribute -> Module:posixpath | Module:ntpath
+8:7:Name -> Module:os
+8:23:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+8:23:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+8:23:Attribute -> Module:posixpath | Module:ntpath
+8:23:Name -> Module:os
+8:39:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+12:7:Call -> ERR
+12:7:Name -> Func:builtins.isinstance
+12:18:Name -> U
+12:21:Name -> Class:builtins.str
+13:15:Call -> U
+13:15:Attribute -> U
+13:15:Call -> U
+13:15:Attribute -> U
+13:15:Name -> U
+13:30:Name -> U
+14:9:Call -> ERR
+14:9:Name -> Func:builtins.isinstance
+14:20:Name -> U
+14:23:Name -> Class:builtins.tuple
+15:15:Call -> Inst:builtins.tuple
+15:15:Name -> Class:builtins.tuple
+15:21:Call -> U | Inst:builtins.tuple | Inst:builtins.list
+15:21:Name -> Func:tests.forms_tests.field_tests.test_filepathfield.fix_os_paths
+15:34:Call -> Inst:builtins.list
+15:34:Name -> Class:builtins.list
+15:39:Name -> U
+16:9:Call -> ERR
+16:9:Name -> Func:builtins.isinstance
+16:20:Name -> U
+16:23:Name -> Class:builtins.list
+17:16:Call -> U | Inst:builtins.tuple
+17:16:Name -> Func:tests.forms_tests.field_tests.test_filepathfield.fix_os_paths
+17:29:Name -> U
+17:41:Name -> U
+19:15:Name -> U
+22:24:Name -> Class:django.test.testcases.SimpleTestCase
+36:11:Call -> U
+36:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+36:11:Attribute -> Module:posixpath | Module:ntpath
+36:11:Name -> Module:os
+36:24:Name -> U
+39:8:Call -> Const:NoneType:None
+39:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+39:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+39:25:Call -> U | Inst:builtins.tuple
+39:25:Name -> Func:tests.forms_tests.field_tests.test_filepathfield.fix_os_paths
+39:38:Attribute -> U
+39:38:Name -> U
+39:54:Name -> U
+42:8:Call -> Const:NoneType:None
+42:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+42:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+42:25:Call -> U
+42:25:Name -> Func:tests.forms_tests.field_tests.test_filepathfield.fix_os_paths
+42:38:Attribute -> U
+42:38:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+45:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+45:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+45:13:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+45:38:Name -> Class:builtins.FileNotFoundError
+46:12:Call -> Inst:django.forms.fields.FilePathField
+46:12:Name -> Class:django.forms.fields.FilePathField
+49:12:Call -> Inst:django.forms.fields.FilePathField
+49:12:Name -> Class:django.forms.fields.FilePathField
+49:31:Attribute -> U
+49:31:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+52:12:Attribute -> List:11
+52:12:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+53:8:Call -> Const:NoneType:None
+53:8:Attribute -> BM:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest.assertChoices
+53:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+53:27:Name -> Inst:django.forms.fields.FilePathField
+53:30:Name -> List:5
+56:12:Call -> Inst:django.forms.fields.FilePathField
+56:12:Name -> Class:django.forms.fields.FilePathField
+56:31:Attribute -> U
+56:31:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+58:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+58:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+58:13:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+58:38:Name -> Class:django.core.exceptions.ValidationError
+58:55:Name -> Const:str:"'Select a valid choice. a.py is not one
+59:12:Call -> Const:str:'' | Const:str:''
+59:12:Attribute -> BM:django.forms.fields.Field.clean
+59:12:Name -> Inst:django.forms.fields.FilePathField
+60:8:Call -> Const:NoneType:None
+60:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+60:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+61:12:Call -> U | Inst:builtins.tuple | Const:str:'' | Const:str:''
+61:12:Name -> Func:tests.forms_tests.field_tests.test_filepathfield.fix_os_paths
+61:25:Call -> Const:str:'' | Const:str:''
+61:25:Attribute -> BM:django.forms.fields.Field.clean
+61:25:Name -> Inst:django.forms.fields.FilePathField
+61:33:Attribute -> U
+61:33:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+65:12:Call -> Inst:django.forms.fields.FilePathField
+65:12:Name -> Class:django.forms.fields.FilePathField
+65:31:Attribute -> U
+65:31:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+66:8:Call -> Const:NoneType:None
+66:8:Attribute -> BM:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest.assertChoices
+66:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+66:27:Name -> Inst:django.forms.fields.FilePathField
+66:30:Attribute -> List:11
+66:30:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+69:12:Call -> Inst:django.forms.fields.FilePathField
+69:12:Name -> Class:django.forms.fields.FilePathField
+69:31:Attribute -> U
+69:31:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+83:8:Call -> Const:NoneType:None
+83:8:Attribute -> BM:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest.assertChoices
+83:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+83:27:Name -> Inst:django.forms.fields.FilePathField
+83:30:Name -> List:11
+86:12:Call -> Inst:django.forms.fields.FilePathField
+86:12:Name -> Class:django.forms.fields.FilePathField
+86:31:Attribute -> U
+86:31:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+87:8:Call -> Const:NoneType:None
+87:8:Attribute -> BM:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest.assertChoices
+87:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+88:12:Name -> Inst:django.forms.fields.FilePathField
+97:12:Call -> Inst:django.forms.fields.FilePathField
+97:12:Name -> Class:django.forms.fields.FilePathField
+98:17:Attribute -> U
+98:17:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+100:8:Call -> Const:NoneType:None
+100:8:Attribute -> BM:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest.assertChoices
+100:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+100:27:Name -> Inst:django.forms.fields.FilePathField
+103:13:Call -> Inst:tempfile.TemporaryDirectory
+103:13:Attribute -> Class:tempfile.TemporaryDirectory
+103:13:Name -> Module:tempfile
+104:16:Call -> Inst:django.forms.fields.FilePathField
+104:16:Name -> Class:django.forms.fields.FilePathField
+104:35:Name -> U
+105:12:Call -> Const:NoneType:None
+105:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+105:12:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+105:29:Attribute -> List:0 | List:1 | Tuple:0 | U
+105:29:Name -> Inst:django.forms.fields.FilePathField
+106:23:Call -> U
+106:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+106:23:Attribute -> Module:posixpath | Module:ntpath
+106:23:Name -> Module:os
+106:36:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+107:12:Call -> ERR
+107:12:Attribute -> ERR
+107:12:Call -> ERR
+107:12:Name -> Func:_io.open
+107:17:Name -> U
+108:12:Call -> Const:NoneType:None
+108:12:Attribute -> BM:django.forms.fields.FilePathField.set_choices
+108:12:Name -> Inst:django.forms.fields.FilePathField
+109:12:Call -> Const:NoneType:None
+109:12:Attribute -> BM:unittest.case.TestCase.assertIn
+109:12:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+109:27:Name -> U
+109:54:Attribute -> List:0 | List:1 | Tuple:0 | U
+109:54:Name -> Inst:django.forms.fields.FilePathField
+110:12:Call -> Const:NoneType:None
+110:12:Attribute -> BM:unittest.case.TestCase.assertIn
+110:12:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+110:27:Name -> U
+110:54:Attribute -> U
+110:54:Attribute -> U
+110:54:Name -> Inst:django.forms.fields.FilePathField
+113:12:Call -> Inst:django.forms.fields.FilePathField
+113:12:Name -> Class:django.forms.fields.FilePathField
+114:17:Attribute -> U
+114:17:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+116:8:Call -> Const:NoneType:None
+116:8:Attribute -> BM:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest.assertChoices
+116:8:Name -> Inst:tests.forms_tests.field_tests.test_filepathfield.FilePathFieldTest
+117:12:Name -> Inst:django.forms.fields.FilePathField

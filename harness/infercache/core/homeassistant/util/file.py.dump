@@ -1,0 +1,97 @@
+11:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+11:10:Attribute -> Func:logging.getLogger
+11:10:Name -> Module:logging
+11:28:Name -> Const:str:'homeassistant.util.file' | Const:str:'__main__'
+14:17:Name -> Class:homeassistant.exceptions.HomeAssistantError
+19:14:Name -> Class:builtins.str
+19:30:Name -> Class:builtins.bytes
+19:38:Name -> Class:builtins.str
+19:52:Name -> Class:builtins.bool
+19:72:Name -> Class:builtins.str
+33:37:Name -> Const:str:'w' | U
+35:13:Call -> U
+35:13:Attribute -> U
+35:13:Call -> U
+35:13:Name -> U
+36:12:Name -> U
+36:27:Name -> Const:str:'w' | U
+36:58:Name -> Const:str:'utf-8' | Const:NoneType:None
+38:19:Name -> Const:bool:False | U
+39:16:Call -> ERR
+39:16:Attribute -> Func:posix.fchmod
+39:16:Name -> Module:os
+39:26:Call -> U
+39:26:Attribute -> U
+39:26:Name -> U
+40:12:Call -> U
+40:12:Attribute -> U
+40:12:Name -> U
+40:24:Name -> U
+41:11:Name -> Class:builtins.OSError
+42:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+42:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+42:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+42:52:Name -> U
+43:14:Call -> ExcInst:homeassistant.util.file.WriteError
+43:14:Name -> Class:homeassistant.util.file.WriteError
+43:25:Name -> ExcInst:builtins.OSError
+43:37:Name -> ExcInst:builtins.OSError
+47:14:Name -> Class:builtins.str
+47:30:Name -> Class:builtins.bytes
+47:38:Name -> Class:builtins.str
+47:52:Name -> Class:builtins.bool
+47:72:Name -> Class:builtins.str
+54:37:Name -> Const:str:'w' | U
+57:13:Call -> Inst:tempfile._TemporaryFileWrapper
+57:13:Attribute -> Func:tempfile.NamedTemporaryFile
+57:13:Name -> Module:tempfile
+58:17:Name -> Const:str:'w' | U
+58:32:Name -> Const:str:'utf-8' | Const:NoneType:None
+58:46:Call -> U
+58:46:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+58:46:Attribute -> Module:posixpath | Module:ntpath
+58:46:Name -> Module:os
+58:62:Name -> U
+60:12:Call -> U
+60:12:Attribute -> U
+60:12:Name -> Inst:tempfile._TemporaryFileWrapper
+60:24:Name -> U
+61:27:Attribute -> U
+61:27:Name -> Inst:tempfile._TemporaryFileWrapper
+62:19:Name -> Const:bool:False | U
+63:16:Call -> ERR
+63:16:Attribute -> Func:posix.fchmod
+63:16:Name -> Module:os
+63:26:Call -> U
+63:26:Attribute -> U
+63:26:Name -> Inst:tempfile._TemporaryFileWrapper
+64:8:Call -> ERR
+64:8:Attribute -> Func:posix.replace
+64:8:Name -> Module:os
+64:19:Name -> Const:str:'' | U
+64:33:Name -> U
+65:11:Name -> Class:builtins.OSError
+66:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+66:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+66:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+66:52:Name -> U
+67:14:Call -> ExcInst:homeassistant.util.file.WriteError
+67:14:Name -> Class:homeassistant.util.file.WriteError
+67:25:Name -> ExcInst:builtins.OSError
+67:37:Name -> ExcInst:builtins.OSError
+69:11:Call -> Const:bool:False | Const:bool:True | U
+69:11:Attribute -> Func:genericpath.exists | U
+69:11:Attribute -> Module:posixpath | Module:ntpath
+69:11:Name -> Module:os
+69:26:Name -> Const:str:'' | U
+71:16:Call -> ERR
+71:16:Attribute -> Func:posix.remove
+71:16:Name -> Module:os
+71:26:Name -> Const:str:'' | U
+72:19:Name -> Class:builtins.OSError
+75:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+75:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+75:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+77:20:Name -> Const:str:'' | U
+78:20:Name -> U
+79:20:Name -> ExcInst:builtins.OSError

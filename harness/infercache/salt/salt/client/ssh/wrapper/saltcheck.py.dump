@@ -1,0 +1,307 @@
+17:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:6:Attribute -> Func:logging.getLogger
+17:6:Name -> Module:logging
+17:24:Name -> Const:str:'salt.client.ssh.wrapper.saltcheck' | Const:str:'__main__'
+26:12:Name -> ERR
+27:18:Call -> U
+27:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+27:18:Attribute -> Module:posixpath | Module:ntpath
+27:18:Name -> Module:os
+27:31:Name -> U
+27:47:Name -> Const:str:'base' | U
+30:13:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+30:13:Attribute -> Func:tempfile.mkdtemp
+30:13:Name -> Module:tempfile
+31:16:Call -> Tuple:2 | U
+31:16:Attribute -> Func:salt.utils.files.mkstemp
+31:16:Attribute -> Module:salt.utils.files
+31:16:Attribute -> Module:salt.utils
+31:16:Name -> Module:salt
+32:9:Call -> U
+32:9:Attribute -> Func:salt.fileclient.get_file_client
+32:9:Attribute -> Module:salt.fileclient
+32:9:Name -> Module:salt
+32:41:Name -> ERR
+35:20:Call -> U
+35:20:Attribute -> Func:salt.utils.json.dumps
+35:20:Attribute -> Module:salt.utils.json
+35:20:Attribute -> Module:salt.utils
+35:20:Name -> Module:salt
+35:42:Call -> ERR
+35:42:Name -> ERR
+36:25:Call -> U
+36:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+36:25:Attribute -> Module:posixpath | Module:ntpath
+36:25:Name -> Module:os
+36:38:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+37:13:Call -> U
+37:13:Attribute -> Func:salt.utils.files.fopen
+37:13:Attribute -> Module:salt.utils.files
+37:13:Attribute -> Module:salt.utils
+37:13:Name -> Module:salt
+37:36:Name -> U
+38:12:Call -> U
+38:12:Attribute -> U
+38:12:Name -> U
+38:21:Name -> U
+42:19:Call -> Inst:builtins.list
+42:19:Attribute -> Func:salt.utils.args.split_input
+42:19:Attribute -> Module:salt.utils.args
+42:19:Attribute -> Module:salt.utils
+42:19:Name -> Module:salt
+42:47:Name -> U
+43:26:Name -> Inst:builtins.list
+45:29:Call -> U
+45:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+45:29:Attribute -> Module:posixpath | Module:ntpath
+45:29:Name -> Module:os
+45:42:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+45:50:Name -> U
+46:31:Call -> U
+46:31:Attribute -> Func:salt.utils.json.dumps
+46:31:Attribute -> Module:salt.utils.json
+46:31:Attribute -> Module:salt.utils
+46:31:Name -> Module:salt
+47:16:Call -> ERR
+47:16:Name -> ERR
+47:47:Name -> U
+49:17:Call -> U
+49:17:Attribute -> Func:salt.utils.files.fopen
+49:17:Attribute -> Module:salt.utils.files
+49:17:Attribute -> Module:salt.utils
+49:17:Name -> Module:salt
+49:40:Name -> U
+50:16:Call -> U
+50:16:Attribute -> U
+50:16:Name -> U
+50:25:Name -> U
+52:25:Call -> U
+52:25:Attribute -> U
+52:25:Name -> U
+52:49:Attribute -> Const:str:'/'
+52:49:Name -> Module:os
+53:15:Name -> U
+53:29:Name -> List:0
+54:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+54:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+54:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:57:Name -> U
+56:33:Call -> U
+56:33:Attribute -> Func:posixpath.join | Func:ntpath.join
+56:33:Attribute -> Module:posixpath | Module:ntpath
+56:33:Name -> Module:os
+56:46:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+56:54:Name -> U
+57:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+57:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+57:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+57:46:Name -> U
+57:58:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+58:33:Call -> Const:str:'salt://Instance of builtins.NoneType' | Const:str:'salt://Uninferable' | Const:str:'salt://Instance of builtins.list' | Const:str:'salt://Dict.dict(items=[])' | Const:str:'salt://List.list(ctx=<Context.Load: 1>,
+58:33:Attribute -> Func:salt.utils.url.create
+58:33:Attribute -> Module:salt.utils.url
+58:33:Attribute -> Module:salt.utils
+58:33:Name -> Module:salt
+58:55:Name -> U
+58:67:Name -> Const:str:'base' | U
+60:30:Call -> U
+60:30:Attribute -> U
+60:30:Name -> U
+60:52:Name -> Const:str:'salt://Instance of builtins.NoneType' | Const:str:'salt://Uninferable' | Const:str:'salt://Instance of builtins.list' | Const:str:'salt://Dict.dict(items=[])' | Const:str:'salt://List.list(ctx=<Context.Load: 1>,
+60:68:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+60:76:Name -> Const:str:'base' | U
+61:19:Name -> U
+63:24:Call -> U
+63:24:Attribute -> U
+63:24:Name -> U
+63:36:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+63:44:Name -> U
+63:68:Name -> U
+65:41:Call -> U
+65:41:Attribute -> Func:salt.utils.json.dumps
+65:41:Attribute -> Module:salt.utils.json
+65:41:Attribute -> Module:salt.utils
+65:41:Name -> Module:salt
+65:63:Name -> U
+66:25:Call -> U
+66:25:Attribute -> Func:salt.utils.files.fopen
+66:25:Attribute -> Module:salt.utils.files
+66:25:Attribute -> Module:salt.utils
+66:25:Name -> Module:salt
+66:48:Name -> U
+67:24:Call -> U
+67:24:Attribute -> U
+67:24:Name -> U
+67:33:Name -> U
+68:20:Call -> ERR
+68:20:Attribute -> BM:builtins.list.append
+68:20:Name -> List:0
+68:45:Name -> U
+71:33:Call -> U
+71:33:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+71:33:Attribute -> Module:posixpath | Module:ntpath
+71:33:Name -> Module:os
+71:49:Name -> U
+72:37:Call -> U
+72:37:Attribute -> Func:posixpath.join | Func:ntpath.join
+72:37:Attribute -> Module:posixpath | Module:ntpath
+72:37:Name -> Module:os
+72:50:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+72:58:Name -> U
+73:23:Name -> U
+73:37:Name -> List:0
+74:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+74:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+74:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+74:65:Name -> U
+76:41:Call -> Const:str:'salt://Instance of builtins.NoneType' | Const:str:'salt://Uninferable' | Const:str:'salt://Instance of builtins.list' | Const:str:'salt://Dict.dict(items=[])' | Const:str:'salt://List.list(ctx=<Context.Load: 1>,
+76:41:Attribute -> Func:salt.utils.url.create
+76:41:Attribute -> Module:salt.utils.url
+76:41:Attribute -> Module:salt.utils
+76:41:Name -> Module:salt
+76:63:Name -> U
+76:75:Name -> Const:str:'base' | U
+77:38:Call -> U
+77:38:Attribute -> U
+77:38:Name -> U
+78:28:Name -> Const:str:'salt://Instance of builtins.NoneType' | Const:str:'salt://Uninferable' | Const:str:'salt://Instance of builtins.list' | Const:str:'salt://Dict.dict(items=[])' | Const:str:'salt://List.list(ctx=<Context.Load: 1>,
+78:44:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+78:52:Name -> Const:str:'base' | U
+80:27:Name -> U
+82:32:Call -> U
+82:32:Attribute -> U
+82:32:Name -> U
+82:44:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+82:52:Name -> U
+82:76:Name -> U
+84:49:Call -> U
+84:49:Attribute -> Func:salt.utils.json.dumps
+84:49:Attribute -> Module:salt.utils.json
+84:49:Attribute -> Module:salt.utils
+84:49:Name -> Module:salt
+84:71:Name -> U
+85:33:Call -> U
+85:33:Attribute -> Func:salt.utils.files.fopen
+85:33:Attribute -> Module:salt.utils.files
+85:33:Attribute -> Module:salt.utils
+85:33:Name -> Module:salt
+85:56:Name -> U
+86:32:Call -> U
+86:32:Attribute -> U
+86:32:Name -> U
+86:41:Name -> U
+87:28:Call -> ERR
+87:28:Attribute -> BM:builtins.list.append
+87:28:Name -> List:0
+87:53:Name -> U
+92:14:Call -> ERR
+92:14:Attribute -> Func:posix.getcwd
+92:14:Name -> Module:os
+93:11:Name -> Class:builtins.OSError
+95:4:Call -> ERR
+95:4:Attribute -> Func:posix.chdir
+95:4:Name -> Module:os
+95:13:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+96:9:Call -> Inst:contextlib.closing
+96:9:Name -> Class:contextlib.closing
+96:17:Call -> U | Inst:tarfile.TarFile
+96:17:Attribute -> BM:tarfile.TarFile.open
+96:17:Name -> Module:tarfile
+96:30:Name -> Tuple:2 | U
+97:33:Call -> Gen:salt.utils.path.os_walk
+97:33:Attribute -> Func:salt.utils.path.os_walk
+97:33:Attribute -> Module:salt.utils.path
+97:33:Attribute -> Module:salt.utils
+97:33:Name -> Module:salt
+97:57:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+98:24:Name -> U
+99:23:Call -> U
+99:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+99:23:Attribute -> Module:posixpath | Module:ntpath
+99:23:Name -> Module:os
+99:36:Name -> U
+99:42:Name -> U
+100:16:Call -> U
+100:16:Attribute -> U
+100:16:Name -> U
+100:24:Call -> U
+100:24:Attribute -> U
+100:24:Name -> U
+100:29:Call -> ERR
+100:29:Name -> Func:builtins.len
+100:33:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+100:51:Attribute -> Const:str:'/'
+100:51:Name -> Module:os
+101:7:Name -> U | Const:NoneType:None
+102:8:Call -> ERR
+102:8:Attribute -> Func:posix.chdir
+102:8:Name -> Module:os
+102:17:Name -> U
+103:4:Call -> Const:NoneType:None | Const:NoneType:None
+103:4:Attribute -> Func:shutil.rmtree
+103:4:Name -> Module:shutil
+103:18:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+106:13:Call -> Inst:salt.client.ssh.Single
+106:13:Attribute -> Class:salt.client.ssh.Single
+106:13:Attribute -> Module:salt.client.ssh
+106:13:Attribute -> Module:salt.client
+106:13:Name -> Module:salt
+106:36:Name -> ERR
+106:52:Attribute -> ERR
+106:52:Name -> ERR
+107:15:Name -> ERR
+108:10:Call -> U | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3 | Tuple:3
+108:10:Attribute -> U | BM:salt.client.ssh.shell.Shell.send
+108:10:Attribute -> U | Inst:salt.client.ssh.shell.Shell
+108:10:Name -> Inst:salt.client.ssh.Single
+108:28:Name -> Tuple:2 | U
+108:39:Name -> U
+112:8:Call -> ERR
+112:8:Attribute -> Func:posix.remove
+112:8:Name -> Module:os
+112:18:Name -> Tuple:2 | U
+113:11:Name -> Class:builtins.OSError
+116:15:Call -> U
+116:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+116:15:Attribute -> Module:posixpath | Module:ntpath
+116:15:Name -> Module:os
+116:28:Name -> U
+116:38:Call -> U
+116:38:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+116:38:Attribute -> Module:posixpath | Module:ntpath
+116:38:Name -> Module:os
+116:55:Name -> Tuple:2 | U
+119:10:Call -> ERR
+119:10:Name -> ERR
+119:33:Name -> U
+120:10:Call -> ERR
+120:10:Name -> ERR
+120:40:Name -> U
+120:55:Name -> U
+121:10:Call -> ERR
+121:10:Name -> ERR
+121:34:Name -> U
+123:11:Name -> U
+131:10:Call -> U
+131:10:Name -> Func:salt.client.ssh.wrapper.saltcheck.update_master_cache
+131:30:Name -> U
+131:38:Name -> Const:str:'base' | U
+132:10:Call -> ERR
+132:10:Name -> ERR
+133:8:Name -> U
+133:24:Name -> Const:str:'base' | U
+133:43:Name -> Const:bool:False | U
+135:11:Name -> U
+142:17:Call -> ERR
+142:17:Attribute -> ERR
+142:17:Call -> ERR
+142:17:Name -> ERR
+142:50:Name -> Const:str:'base' | U
+143:19:Call -> Const:str:''
+143:19:Attribute -> BM:builtins.str.join
+143:28:Name -> U
+144:10:Call -> U
+144:10:Name -> Func:salt.client.ssh.wrapper.saltcheck.run_state_tests
+144:26:Name -> Const:str:''
+144:40:Name -> Const:str:'base' | U
+145:11:Name -> U

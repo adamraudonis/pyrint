@@ -1,0 +1,671 @@
+23:4:Name -> U
+23:22:Call -> Inst:_pydatetime.datetime | U
+23:22:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+23:22:Name -> Module:django.utils.timezone
+24:4:Call -> U
+24:4:Attribute -> U
+24:4:Name -> U
+27:24:Attribute -> Class:django.db.models.manager.Manager
+27:24:Name -> Module:django.db.models
+31:15:Call -> ERR
+31:15:Attribute -> ERR
+31:15:Name -> Inst:django.contrib.auth.models.PermissionManager
+32:21:Name -> U
+33:25:Call -> ERR
+33:25:Attribute -> ERR
+33:25:Call -> ERR
+33:25:Attribute -> ERR
+33:25:Attribute -> Inst:django.contrib.contenttypes.models.ContentTypeManager
+33:25:Name -> Class:django.contrib.contenttypes.models.ContentType
+33:56:Attribute -> ERR
+33:56:Name -> Inst:django.contrib.auth.models.PermissionManager
+34:16:Name -> U
+34:27:Name -> U
+39:17:Attribute -> Class:django.db.models.base.Model
+39:17:Name -> Module:django.db.models
+63:11:Call -> Inst:django.db.models.fields.CharField
+63:11:Attribute -> Class:django.db.models.fields.CharField
+63:11:Name -> Module:django.db.models
+63:28:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+63:28:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+64:19:Call -> Inst:django.db.models.fields.related.ForeignKey
+64:19:Attribute -> Class:django.db.models.fields.related.ForeignKey
+64:19:Name -> Module:django.db.models
+65:8:Name -> Class:django.contrib.contenttypes.models.ContentType
+66:8:Attribute -> Func:django.db.models.deletion.CASCADE
+66:8:Name -> Module:django.db.models
+67:21:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+67:21:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+69:15:Call -> Inst:django.db.models.fields.CharField
+69:15:Attribute -> Class:django.db.models.fields.CharField
+69:15:Name -> Module:django.db.models
+69:32:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+69:32:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+71:14:Call -> Inst:django.contrib.auth.models.PermissionManager
+71:14:Name -> Class:django.contrib.auth.models.PermissionManager
+74:23:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+74:23:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+75:30:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+75:30:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+80:28:Attribute -> Inst:django.db.models.fields.related.ForeignKey
+80:28:Name -> Inst:django.contrib.auth.models.Permission
+80:47:Attribute -> Inst:django.db.models.fields.CharField
+80:47:Name -> Inst:django.contrib.auth.models.Permission
+82:5:Name -> Class:builtins.property
+85:18:Attribute -> ERR
+85:18:Attribute -> Inst:django.db.models.fields.related.ForeignKey
+85:18:Name -> Inst:django.contrib.auth.models.Permission
+85:48:Attribute -> Inst:django.db.models.fields.CharField
+85:48:Name -> Inst:django.contrib.auth.models.Permission
+88:16:Attribute -> Inst:django.db.models.fields.CharField
+88:16:Name -> Inst:django.contrib.auth.models.Permission
+88:32:Call -> ERR
+88:32:Attribute -> ERR
+88:32:Attribute -> Inst:django.db.models.fields.related.ForeignKey
+88:32:Name -> Inst:django.contrib.auth.models.Permission
+90:4:Name -> Func:django.contrib.auth.models.Permission.natural_key
+93:19:Attribute -> Class:django.db.models.manager.Manager
+93:19:Name -> Module:django.db.models
+101:15:Call -> ERR
+101:15:Attribute -> ERR
+101:15:Name -> Inst:django.contrib.auth.models.GroupManager
+101:29:Name -> U
+104:21:Call -> ERR
+104:21:Attribute -> ERR
+104:21:Name -> Inst:django.contrib.auth.models.GroupManager
+104:36:Name -> U
+107:12:Attribute -> Class:django.db.models.base.Model
+107:12:Name -> Module:django.db.models
+125:11:Call -> Inst:django.db.models.fields.CharField
+125:11:Attribute -> Class:django.db.models.fields.CharField
+125:11:Name -> Module:django.db.models
+125:28:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+125:28:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+126:18:Call -> Inst:django.db.models.fields.related.ManyToManyField
+126:18:Attribute -> Class:django.db.models.fields.related.ManyToManyField
+126:18:Name -> Module:django.db.models
+127:8:Name -> Class:django.contrib.auth.models.Permission
+128:21:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+128:21:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+132:14:Call -> Inst:django.contrib.auth.models.GroupManager
+132:14:Name -> Class:django.contrib.auth.models.GroupManager
+135:23:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+135:23:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+136:30:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+136:30:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+139:15:Attribute -> Inst:django.db.models.fields.CharField
+139:15:Name -> Inst:django.contrib.auth.models.Group
+142:16:Attribute -> Inst:django.db.models.fields.CharField
+142:16:Name -> Inst:django.contrib.auth.models.Group
+145:18:Name -> Class:django.contrib.auth.base_user.BaseUserManager
+149:15:Name -> U
+150:18:Call -> ExcInst:builtins.ValueError
+150:18:Name -> Class:builtins.ValueError
+151:16:Call -> U
+151:16:Attribute -> BM:django.contrib.auth.base_user.BaseUserManager.normalize_email
+151:16:Name -> Inst:django.contrib.auth.models.UserManager
+151:37:Name -> U
+155:26:Call -> U
+155:26:Attribute -> BM:django.apps.registry.Apps.get_model
+155:26:Name -> Inst:django.apps.registry.Apps
+156:12:Attribute -> U
+156:12:Attribute -> U
+156:12:Attribute -> U
+156:12:Name -> Inst:django.contrib.auth.models.UserManager
+156:40:Attribute -> U
+156:40:Attribute -> U
+156:40:Attribute -> U
+156:40:Name -> Inst:django.contrib.auth.models.UserManager
+158:19:Call -> U
+158:19:Attribute -> U
+158:19:Name -> U
+158:54:Name -> U
+159:15:Call -> U
+159:15:Attribute -> U
+159:15:Name -> Inst:django.contrib.auth.models.UserManager
+159:35:Name -> U
+159:51:Name -> U
+159:60:Name -> Dict:0
+160:8:Name -> U
+160:24:Call -> Const:str:'!' | Const:bytes:b'' | U
+160:24:Name -> Func:django.contrib.auth.hashers.make_password
+160:38:Name -> U
+161:15:Name -> U
+167:15:Call -> U
+167:15:Attribute -> BM:django.contrib.auth.models.UserManager._create_user_object
+167:15:Name -> Inst:django.contrib.auth.models.UserManager
+167:40:Name -> U
+167:50:Name -> U
+167:57:Name -> U
+167:69:Name -> Dict:0
+168:8:Call -> U
+168:8:Attribute -> U
+168:8:Name -> U
+168:24:Attribute -> ERR
+168:24:Name -> Inst:django.contrib.auth.models.UserManager
+169:15:Name -> U
+173:15:Call -> U
+173:15:Attribute -> BM:django.contrib.auth.models.UserManager._create_user_object
+173:15:Name -> Inst:django.contrib.auth.models.UserManager
+173:40:Name -> U
+173:50:Name -> U
+173:57:Name -> U
+173:69:Name -> Dict:0
+174:14:Call -> U
+174:14:Attribute -> U
+174:14:Name -> U
+174:31:Attribute -> ERR
+174:31:Name -> Inst:django.contrib.auth.models.UserManager
+175:15:Name -> U
+178:8:Call -> ERR
+178:8:Attribute -> BM:builtins.dict.setdefault
+178:8:Name -> Dict:0
+179:8:Call -> ERR
+179:8:Attribute -> BM:builtins.dict.setdefault
+179:8:Name -> Dict:0
+180:15:Call -> U
+180:15:Attribute -> BM:django.contrib.auth.models.UserManager._create_user
+180:15:Name -> Inst:django.contrib.auth.models.UserManager
+180:33:Name -> U
+180:43:Name -> Const:NoneType:None | U
+180:50:Name -> Const:NoneType:None | U
+180:62:Name -> Dict:0
+182:4:Name -> Func:django.contrib.auth.models.UserManager.create_user
+185:8:Call -> ERR
+185:8:Attribute -> BM:builtins.dict.setdefault
+185:8:Name -> Dict:0
+186:8:Call -> ERR
+186:8:Attribute -> BM:builtins.dict.setdefault
+186:8:Name -> Dict:0
+187:21:Call -> U
+187:21:Attribute -> BM:django.contrib.auth.models.UserManager._acreate_user
+187:21:Name -> Inst:django.contrib.auth.models.UserManager
+187:40:Name -> U
+187:50:Name -> Const:NoneType:None | U
+187:57:Name -> Const:NoneType:None | U
+187:69:Name -> Dict:0
+189:4:Name -> Func:django.contrib.auth.models.UserManager.acreate_user
+192:8:Call -> ERR
+192:8:Attribute -> BM:builtins.dict.setdefault
+192:8:Name -> Dict:0
+193:8:Call -> ERR
+193:8:Attribute -> BM:builtins.dict.setdefault
+193:8:Name -> Dict:0
+195:11:Call -> ERR
+195:11:Attribute -> BM:builtins.dict.get
+195:11:Name -> Dict:0
+196:18:Call -> ExcInst:builtins.ValueError
+196:18:Name -> Class:builtins.ValueError
+197:11:Call -> ERR
+197:11:Attribute -> BM:builtins.dict.get
+197:11:Name -> Dict:0
+198:18:Call -> ExcInst:builtins.ValueError
+198:18:Name -> Class:builtins.ValueError
+200:15:Call -> U
+200:15:Attribute -> BM:django.contrib.auth.models.UserManager._create_user
+200:15:Name -> Inst:django.contrib.auth.models.UserManager
+200:33:Name -> U
+200:43:Name -> Const:NoneType:None | U
+200:50:Name -> Const:NoneType:None | U
+200:62:Name -> Dict:0
+202:4:Name -> Func:django.contrib.auth.models.UserManager.create_superuser
+207:8:Call -> ERR
+207:8:Attribute -> BM:builtins.dict.setdefault
+207:8:Name -> Dict:0
+208:8:Call -> ERR
+208:8:Attribute -> BM:builtins.dict.setdefault
+208:8:Name -> Dict:0
+210:11:Call -> ERR
+210:11:Attribute -> BM:builtins.dict.get
+210:11:Name -> Dict:0
+211:18:Call -> ExcInst:builtins.ValueError
+211:18:Name -> Class:builtins.ValueError
+212:11:Call -> ERR
+212:11:Attribute -> BM:builtins.dict.get
+212:11:Name -> Dict:0
+213:18:Call -> ExcInst:builtins.ValueError
+213:18:Name -> Class:builtins.ValueError
+215:21:Call -> U
+215:21:Attribute -> BM:django.contrib.auth.models.UserManager._acreate_user
+215:21:Name -> Inst:django.contrib.auth.models.UserManager
+215:40:Name -> U
+215:50:Name -> Const:NoneType:None | U
+215:57:Name -> Const:NoneType:None | U
+215:69:Name -> Dict:0
+217:4:Name -> Func:django.contrib.auth.models.UserManager.acreate_superuser
+222:11:Name -> Const:NoneType:None | U
+223:23:Call -> List:0
+223:23:Attribute -> Func:django.contrib.auth.get_backends
+223:23:Name -> Module:django.contrib.auth
+224:15:Call -> Const:int:0
+224:15:Name -> Func:builtins.len
+224:19:Name -> List:0
+225:26:Name -> List:0
+227:22:Call -> ExcInst:builtins.ValueError
+227:22:Name -> Class:builtins.ValueError
+231:17:Call -> ERR
+231:17:Name -> Func:builtins.isinstance
+231:28:Name -> U
+231:37:Name -> Class:builtins.str
+232:18:Call -> ExcInst:builtins.TypeError
+232:18:Name -> Class:builtins.TypeError
+233:74:Name -> U
+236:22:Call -> U
+236:22:Attribute -> Func:django.contrib.auth.load_backend
+236:22:Name -> Module:django.contrib.auth
+236:40:Name -> U
+237:11:Call -> Const:bool:False
+237:11:Name -> Func:builtins.hasattr
+237:19:Name -> Const:NoneType:None | U
+238:19:Call -> U
+238:19:Attribute -> U
+238:19:Name -> Const:NoneType:None | U
+239:16:Name -> U
+240:26:Name -> Const:bool:True | U
+241:35:Name -> Const:bool:True | U
+242:20:Name -> Const:NoneType:None | U
+244:15:Call -> ERR
+244:15:Attribute -> ERR
+244:15:Name -> Inst:django.contrib.auth.models.UserManager
+249:18:Call -> Set:0
+249:18:Name -> Class:builtins.set
+250:34:Name -> U
+251:19:Call -> List:0
+251:19:Attribute -> Func:django.contrib.auth.get_backends
+251:19:Name -> Module:django.contrib.auth
+252:11:Call -> U
+252:11:Name -> Func:builtins.hasattr
+252:19:Name -> U
+252:28:Name -> U
+253:12:Call -> ERR
+253:12:Attribute -> BM:builtins.set.update
+253:12:Name -> Set:0
+253:31:Call -> U
+253:31:Call -> U
+253:31:Name -> Func:builtins.getattr
+253:39:Name -> U
+253:48:Name -> U
+253:54:Name -> U
+253:60:Name -> U
+254:11:Name -> Set:0
+258:18:Call -> Set:0
+258:18:Name -> Class:builtins.set
+259:35:Name -> U
+260:19:Call -> List:0
+260:19:Attribute -> Func:django.contrib.auth.get_backends
+260:19:Name -> Module:django.contrib.auth
+261:11:Call -> U
+261:11:Name -> Func:builtins.hasattr
+261:19:Name -> U
+261:28:Name -> U
+262:12:Call -> ERR
+262:12:Attribute -> BM:builtins.set.update
+262:12:Name -> Set:0
+262:37:Call -> U
+262:37:Call -> U
+262:37:Name -> Func:builtins.getattr
+262:45:Name -> U
+262:54:Name -> U
+262:60:Name -> U
+262:66:Name -> U
+263:11:Name -> Set:0
+270:19:Call -> List:0
+270:19:Attribute -> Func:django.contrib.auth.get_backends
+270:19:Name -> Module:django.contrib.auth
+271:15:Call -> U
+271:15:Name -> Func:builtins.hasattr
+271:23:Name -> U
+274:15:Call -> U
+274:15:Attribute -> U
+274:15:Name -> U
+274:32:Name -> U
+274:38:Name -> U
+274:44:Name -> U
+276:15:Name -> Class:django.core.exceptions.PermissionDenied
+283:19:Call -> List:0
+283:19:Attribute -> Func:django.contrib.auth.get_backends
+283:19:Name -> Module:django.contrib.auth
+284:15:Call -> U
+284:15:Name -> Func:builtins.hasattr
+284:23:Name -> U
+287:21:Call -> U
+287:21:Attribute -> U
+287:21:Name -> U
+287:39:Name -> U
+287:45:Name -> U
+287:51:Name -> U
+289:15:Name -> Class:django.core.exceptions.PermissionDenied
+298:19:Call -> List:0
+298:19:Attribute -> Func:django.contrib.auth.get_backends
+298:19:Name -> Module:django.contrib.auth
+299:15:Call -> U
+299:15:Name -> Func:builtins.hasattr
+299:23:Name -> U
+302:15:Call -> U
+302:15:Attribute -> U
+302:15:Name -> U
+302:40:Name -> U
+302:46:Name -> U
+304:15:Name -> Class:django.core.exceptions.PermissionDenied
+311:19:Call -> List:0
+311:19:Attribute -> Func:django.contrib.auth.get_backends
+311:19:Name -> Module:django.contrib.auth
+312:15:Call -> U
+312:15:Name -> Func:builtins.hasattr
+312:23:Name -> U
+315:21:Call -> U
+315:21:Attribute -> U
+315:21:Name -> U
+315:47:Name -> U
+315:53:Name -> U
+317:15:Name -> Class:django.core.exceptions.PermissionDenied
+322:23:Attribute -> Class:django.db.models.base.Model
+322:23:Name -> Module:django.db.models
+328:19:Call -> Inst:django.db.models.fields.BooleanField
+328:19:Attribute -> Class:django.db.models.fields.BooleanField
+328:19:Name -> Module:django.db.models
+329:8:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+329:8:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+331:18:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+331:18:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+336:13:Call -> Inst:django.db.models.fields.related.ManyToManyField
+336:13:Attribute -> Class:django.db.models.fields.related.ManyToManyField
+336:13:Name -> Module:django.db.models
+337:8:Name -> Class:django.contrib.auth.models.Group
+338:21:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+338:21:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+340:18:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+340:18:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+347:23:Call -> Inst:django.db.models.fields.related.ManyToManyField
+347:23:Attribute -> Class:django.db.models.fields.related.ManyToManyField
+347:23:Name -> Module:django.db.models
+348:8:Name -> Class:django.contrib.auth.models.Permission
+349:21:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+349:21:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+351:18:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+351:18:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+365:15:Call -> Set:0
+365:15:Name -> Func:django.contrib.auth.models._user_get_permissions
+365:37:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+365:43:Name -> Const:NoneType:None | U
+369:21:Call -> Set:0
+369:21:Name -> Func:django.contrib.auth.models._auser_get_permissions
+369:44:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+369:50:Name -> Const:NoneType:None | U
+377:15:Call -> Set:0
+377:15:Name -> Func:django.contrib.auth.models._user_get_permissions
+377:37:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+377:43:Name -> Const:NoneType:None | U
+381:21:Call -> Set:0
+381:21:Name -> Func:django.contrib.auth.models._auser_get_permissions
+381:44:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+381:50:Name -> Const:NoneType:None | U
+384:15:Call -> Set:0
+384:15:Name -> Func:django.contrib.auth.models._user_get_permissions
+384:37:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+384:43:Name -> Const:NoneType:None | U
+387:21:Call -> Set:0
+387:21:Name -> Func:django.contrib.auth.models._auser_get_permissions
+387:44:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+387:50:Name -> Const:NoneType:None | U
+398:11:Attribute -> ERR
+398:11:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+398:30:Attribute -> Inst:django.db.models.fields.BooleanField
+398:30:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+402:15:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+402:15:Name -> Func:django.contrib.auth.models._user_has_perm
+402:30:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+402:36:Name -> U
+402:42:Name -> Const:NoneType:None | U
+407:11:Attribute -> ERR
+407:11:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+407:30:Attribute -> Inst:django.db.models.fields.BooleanField
+407:30:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+411:21:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+411:21:Name -> Func:django.contrib.auth.models._auser_has_perm
+411:37:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+411:43:Name -> U
+411:49:Name -> Const:NoneType:None | U
+418:15:Call -> ERR
+418:15:Name -> Func:builtins.isinstance
+418:26:Name -> U
+418:37:Name -> Class:_collections_abc.Iterable
+418:50:Call -> ERR
+418:50:Name -> Func:builtins.isinstance
+418:61:Name -> U
+418:72:Name -> Class:builtins.str
+419:18:Call -> ExcInst:builtins.ValueError
+419:18:Name -> Class:builtins.ValueError
+420:15:Call -> ERR
+420:15:Name -> Func:builtins.all
+420:19:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+420:19:Attribute -> BM:django.contrib.auth.models.PermissionsMixin.has_perm
+420:19:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+420:33:Name -> U
+420:39:Name -> Const:NoneType:None | U
+420:56:Name -> U
+424:15:Call -> ERR
+424:15:Name -> Func:builtins.isinstance
+424:26:Name -> U
+424:37:Name -> Class:_collections_abc.Iterable
+424:50:Call -> ERR
+424:50:Name -> Func:builtins.isinstance
+424:61:Name -> U
+424:72:Name -> Class:builtins.str
+425:18:Call -> ExcInst:builtins.ValueError
+425:18:Name -> Class:builtins.ValueError
+426:20:Name -> U
+427:25:Call -> Const:bool:True | U
+427:25:Attribute -> BM:django.contrib.auth.models.PermissionsMixin.ahas_perm
+427:25:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+427:40:Name -> U
+427:46:Name -> Const:NoneType:None | U
+437:11:Attribute -> ERR
+437:11:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+437:30:Attribute -> Inst:django.db.models.fields.BooleanField
+437:30:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+440:15:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+440:15:Name -> Func:django.contrib.auth.models._user_has_module_perms
+440:38:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+440:44:Name -> U
+445:11:Attribute -> ERR
+445:11:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+445:30:Attribute -> Inst:django.db.models.fields.BooleanField
+445:30:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+448:21:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+448:21:Name -> Func:django.contrib.auth.models._auser_has_module_perms
+448:45:Name -> Inst:django.contrib.auth.models.PermissionsMixin
+448:51:Name -> U
+451:19:Name -> Class:django.contrib.auth.base_user.AbstractBaseUser
+451:37:Name -> Class:django.contrib.auth.models.PermissionsMixin
+459:25:Call -> Inst:django.contrib.auth.validators.UnicodeUsernameValidator
+459:25:Name -> Class:django.contrib.auth.validators.UnicodeUsernameValidator
+461:15:Call -> Inst:django.db.models.fields.CharField
+461:15:Attribute -> Class:django.db.models.fields.CharField
+461:15:Name -> Module:django.db.models
+462:8:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+462:8:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+465:18:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+465:18:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+468:20:Name -> Inst:django.contrib.auth.validators.UnicodeUsernameValidator
+470:22:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+470:22:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+473:17:Call -> Inst:django.db.models.fields.CharField
+473:17:Attribute -> Class:django.db.models.fields.CharField
+473:17:Name -> Module:django.db.models
+473:34:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+473:34:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+474:16:Call -> Inst:django.db.models.fields.CharField
+474:16:Attribute -> Class:django.db.models.fields.CharField
+474:16:Name -> Module:django.db.models
+474:33:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+474:33:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+475:12:Call -> Inst:django.db.models.fields.EmailField
+475:12:Attribute -> Class:django.db.models.fields.EmailField
+475:12:Name -> Module:django.db.models
+475:30:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+475:30:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+476:15:Call -> Inst:django.db.models.fields.BooleanField
+476:15:Attribute -> Class:django.db.models.fields.BooleanField
+476:15:Name -> Module:django.db.models
+477:8:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+477:8:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+479:18:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+479:18:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+481:16:Call -> Inst:django.db.models.fields.BooleanField
+481:16:Attribute -> Class:django.db.models.fields.BooleanField
+481:16:Name -> Module:django.db.models
+482:8:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+482:8:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+484:18:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+484:18:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+489:18:Call -> Inst:django.db.models.fields.DateTimeField
+489:18:Attribute -> Class:django.db.models.fields.DateTimeField
+489:18:Name -> Module:django.db.models
+489:39:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+489:39:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+489:65:Attribute -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U | Lambda:tests.sessions_tests.tests:445
+489:65:Name -> Module:django.utils.timezone
+491:14:Call -> Inst:django.contrib.auth.models.UserManager
+491:14:Name -> Class:django.contrib.auth.models.UserManager
+498:23:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+498:23:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+499:30:Call -> U | Inst:django.utils.functional.lazy.__proxy__
+499:30:Name -> Func:django.utils.functional.lazy.__wrapper__ | Func:django.utils.functional.lazy.__wrapper__
+503:8:Call -> Const:NoneType:None | U
+503:8:Attribute -> BM:django.contrib.auth.base_user.AbstractBaseUser.clean | BM:django.db.models.base.Model.clean
+503:8:Call -> Super
+503:8:Name -> Class:builtins.super
+504:8:Name -> Inst:django.contrib.auth.models.AbstractUser
+504:21:Call -> U
+504:21:Attribute -> BM:django.contrib.auth.base_user.BaseUserManager.normalize_email
+504:21:Attribute -> Inst:django.contrib.auth.models.UserManager
+504:21:Attribute -> Class:django.contrib.auth.models.AbstractUser
+504:21:Name -> Inst:django.contrib.auth.models.AbstractUser
+504:60:Attribute -> U
+504:60:Name -> Inst:django.contrib.auth.models.AbstractUser
+510:31:Attribute -> Inst:django.db.models.fields.CharField
+510:31:Name -> Inst:django.contrib.auth.models.AbstractUser
+510:48:Attribute -> Inst:django.db.models.fields.CharField
+510:48:Name -> Inst:django.contrib.auth.models.AbstractUser
+511:15:Call -> U
+511:15:Attribute -> U
+511:15:Name -> U
+515:15:Attribute -> Inst:django.db.models.fields.CharField
+515:15:Name -> Inst:django.contrib.auth.models.AbstractUser
+519:8:Call -> Const:int:0 | U
+519:8:Name -> Func:django.core.mail.send_mail
+519:18:Name -> U
+519:27:Name -> U
+519:36:Name -> Const:NoneType:None | U
+519:49:Attribute -> U
+519:49:Name -> Inst:django.contrib.auth.models.AbstractUser
+519:64:Name -> Dict:0
+522:11:Name -> Class:django.contrib.auth.models.AbstractUser
+530:15:Attribute -> Class:django.contrib.auth.models.AbstractUser.Meta
+530:15:Name -> Class:django.contrib.auth.models.AbstractUser
+541:14:Call -> Inst:django.db.models.manager.EmptyManager
+541:14:Name -> Class:django.db.models.manager.EmptyManager
+541:27:Name -> Class:django.contrib.auth.models.Group
+542:24:Call -> Inst:django.db.models.manager.EmptyManager
+542:24:Name -> Class:django.db.models.manager.EmptyManager
+542:37:Name -> Class:django.contrib.auth.models.Permission
+548:15:Call -> ERR
+548:15:Name -> Func:builtins.isinstance
+548:26:Name -> U
+548:33:Attribute -> Class:django.contrib.auth.models.AnonymousUser
+548:33:Name -> Inst:django.contrib.auth.models.AnonymousUser
+554:14:Call -> ExcInst:builtins.TypeError
+554:14:Name -> Class:builtins.TypeError
+560:14:Call -> ExcInst:builtins.NotImplementedError
+560:14:Name -> Class:builtins.NotImplementedError
+565:14:Call -> ExcInst:builtins.NotImplementedError
+565:14:Name -> Class:builtins.NotImplementedError
+570:14:Call -> ExcInst:builtins.NotImplementedError
+570:14:Name -> Class:builtins.NotImplementedError
+575:14:Call -> ExcInst:builtins.NotImplementedError
+575:14:Name -> Class:builtins.NotImplementedError
+579:5:Name -> Class:builtins.property
+581:15:Attribute -> Inst:django.db.models.manager.EmptyManager
+581:15:Name -> Inst:django.contrib.auth.models.AnonymousUser
+583:5:Name -> Class:builtins.property
+585:15:Attribute -> Inst:django.db.models.manager.EmptyManager
+585:15:Name -> Inst:django.contrib.auth.models.AnonymousUser
+588:15:Call -> Set:0
+588:15:Name -> Func:django.contrib.auth.models._user_get_permissions
+588:37:Name -> Inst:django.contrib.auth.models.AnonymousUser
+588:43:Name -> Const:NoneType:None | U
+591:21:Call -> Set:0
+591:21:Name -> Func:django.contrib.auth.models._auser_get_permissions
+591:44:Name -> Inst:django.contrib.auth.models.AnonymousUser
+591:50:Name -> Const:NoneType:None | U
+594:15:Call -> Set:0
+594:15:Name -> Class:builtins.set
+597:15:Call -> Set:0
+597:15:Attribute -> BM:django.contrib.auth.models.AnonymousUser.get_group_permissions
+597:15:Name -> Inst:django.contrib.auth.models.AnonymousUser
+597:42:Name -> Const:NoneType:None | U
+600:15:Call -> Set:0
+600:15:Name -> Func:django.contrib.auth.models._user_get_permissions
+600:37:Name -> Inst:django.contrib.auth.models.AnonymousUser
+600:43:Name -> Const:NoneType:None | U
+603:21:Call -> Set:0
+603:21:Name -> Func:django.contrib.auth.models._auser_get_permissions
+603:44:Name -> Inst:django.contrib.auth.models.AnonymousUser
+603:50:Name -> Const:NoneType:None | U
+606:15:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+606:15:Name -> Func:django.contrib.auth.models._user_has_perm
+606:30:Name -> Inst:django.contrib.auth.models.AnonymousUser
+606:36:Name -> U
+606:46:Name -> Const:NoneType:None | U
+609:21:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+609:21:Name -> Func:django.contrib.auth.models._auser_has_perm
+609:37:Name -> Inst:django.contrib.auth.models.AnonymousUser
+609:43:Name -> U
+609:53:Name -> Const:NoneType:None | U
+612:15:Call -> ERR
+612:15:Name -> Func:builtins.isinstance
+612:26:Name -> U
+612:37:Name -> Class:_collections_abc.Iterable
+612:50:Call -> ERR
+612:50:Name -> Func:builtins.isinstance
+612:61:Name -> U
+612:72:Name -> Class:builtins.str
+613:18:Call -> ExcInst:builtins.ValueError
+613:18:Name -> Class:builtins.ValueError
+614:15:Call -> ERR
+614:15:Name -> Func:builtins.all
+614:19:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+614:19:Attribute -> BM:django.contrib.auth.models.AnonymousUser.has_perm
+614:19:Name -> Inst:django.contrib.auth.models.AnonymousUser
+614:33:Name -> U
+614:39:Name -> Const:NoneType:None | U
+614:56:Name -> U
+617:15:Call -> ERR
+617:15:Name -> Func:builtins.isinstance
+617:26:Name -> U
+617:37:Name -> Class:_collections_abc.Iterable
+617:50:Call -> ERR
+617:50:Name -> Func:builtins.isinstance
+617:61:Name -> U
+617:72:Name -> Class:builtins.str
+618:18:Call -> ExcInst:builtins.ValueError
+618:18:Name -> Class:builtins.ValueError
+619:20:Name -> U
+620:25:Call -> U
+620:25:Attribute -> BM:django.contrib.auth.models.AnonymousUser.ahas_perm
+620:25:Name -> Inst:django.contrib.auth.models.AnonymousUser
+620:40:Name -> U
+620:46:Name -> Const:NoneType:None | U
+625:15:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+625:15:Name -> Func:django.contrib.auth.models._user_has_module_perms
+625:38:Name -> Inst:django.contrib.auth.models.AnonymousUser
+625:44:Name -> U
+628:21:Call -> Const:bool:True | Const:bool:False | Const:bool:False
+628:21:Name -> Func:django.contrib.auth.models._auser_has_module_perms
+628:45:Name -> Inst:django.contrib.auth.models.AnonymousUser
+628:51:Name -> U
+630:5:Name -> Class:builtins.property
+634:5:Name -> Class:builtins.property
+639:15:Attribute -> Const:str:''
+639:15:Name -> Inst:django.contrib.auth.models.AnonymousUser

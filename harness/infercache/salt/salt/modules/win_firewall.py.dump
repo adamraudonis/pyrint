@@ -1,0 +1,178 @@
+19:11:Call -> U
+19:11:Attribute -> Func:salt.utils.platform.is_windows
+19:11:Attribute -> Module:salt.utils.platform
+19:11:Attribute -> Module:salt.utils
+19:11:Name -> Module:salt
+22:11:Name -> Const:str:'firewall'
+45:10:Call -> ERR
+45:10:Name -> ERR
+45:34:Name -> List:4
+46:7:Name -> U
+47:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+47:14:Name -> Class:salt.exceptions.CommandExecutionError
+47:36:Name -> U
+52:16:Call -> U
+52:16:Attribute -> U
+52:16:Name -> U
+53:15:Name -> Const:NoneType:None
+54:18:Call -> U
+54:18:Attribute -> Func:re.search
+54:18:Name -> Module:re
+54:54:Name -> U
+55:15:Name -> U
+56:23:Call -> U
+56:23:Attribute -> U
+56:23:Name -> U
+57:13:Call -> U
+57:13:Attribute -> U
+57:13:Name -> U
+58:12:Name -> Dict:0
+58:21:Name -> U
+58:29:Call -> U
+58:29:Attribute -> U
+58:29:Name -> U
+61:11:Name -> Dict:0
+92:42:Name -> Const:str:'allprofiles' | U
+93:10:Call -> ERR
+93:10:Name -> ERR
+93:34:Name -> List:6
+94:7:Name -> U
+95:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+95:14:Name -> Class:salt.exceptions.CommandExecutionError
+95:36:Name -> U
+129:42:Name -> Const:str:'allprofiles' | U
+130:10:Call -> ERR
+130:10:Name -> ERR
+130:34:Name -> List:6
+131:7:Name -> U
+132:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+132:14:Name -> Class:salt.exceptions.CommandExecutionError
+132:36:Name -> U
+161:71:Name -> Const:str:'all' | U
+162:10:Call -> ERR
+162:10:Name -> ERR
+162:34:Name -> List:6
+163:7:Name -> U
+164:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+164:14:Name -> Class:salt.exceptions.CommandExecutionError
+164:36:Name -> U
+166:12:Name -> Const:str:'all' | U
+166:18:Name -> U
+244:16:Name -> U
+245:20:Name -> Const:str:'tcp' | U
+246:15:Name -> Const:str:'in' | U
+247:18:Name -> Const:str:'allow' | U
+248:20:Name -> Const:str:'any' | U
+251:7:Name -> Const:str:'tcp' | U
+251:44:Name -> Const:str:'tcp' | U
+251:73:Name -> Const:str:'tcp' | U
+252:8:Call -> ERR
+252:8:Attribute -> BM:builtins.list.append
+252:8:Name -> List:10
+252:32:Name -> U
+254:10:Call -> ERR
+254:10:Name -> ERR
+254:34:Name -> List:10
+255:7:Name -> U
+256:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+256:14:Name -> Class:salt.exceptions.CommandExecutionError
+256:36:Name -> U
+312:7:Name -> Const:NoneType:None | U
+313:8:Call -> ERR
+313:8:Attribute -> BM:builtins.list.append
+313:8:Name -> List:5
+313:27:Name -> U
+314:7:Name -> Const:NoneType:None | U
+315:8:Call -> ERR
+315:8:Attribute -> BM:builtins.list.append
+315:8:Name -> List:5
+315:31:Name -> U
+316:7:Name -> Const:NoneType:None | U
+317:8:Call -> ERR
+317:8:Attribute -> BM:builtins.list.append
+317:8:Name -> List:5
+317:26:Name -> U
+318:7:Name -> Const:NoneType:None | U
+319:8:Call -> ERR
+319:8:Attribute -> BM:builtins.list.append
+319:8:Name -> List:5
+319:31:Name -> U
+321:7:Name -> Const:NoneType:None | U
+321:44:Name -> Const:NoneType:None | U
+321:73:Name -> Const:NoneType:None | U
+322:11:Name -> Const:NoneType:None | U
+323:19:Name -> Const:NoneType:None | U
+324:16:Call -> ERR
+324:16:Attribute -> BM:builtins.list.append
+324:16:Name -> List:5
+325:12:Call -> ERR
+325:12:Attribute -> BM:builtins.list.append
+325:12:Name -> List:5
+325:36:Name -> U
+327:10:Call -> ERR
+327:10:Name -> ERR
+327:34:Name -> List:5
+328:7:Name -> U
+329:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+329:14:Name -> Class:salt.exceptions.CommandExecutionError
+329:36:Name -> U
+354:8:Call -> Dict:1
+354:8:Name -> Func:salt.modules.win_firewall.get_rule
+354:17:Name -> U
+356:11:Name -> Class:salt.exceptions.CommandExecutionError
+418:11:Call -> U
+418:11:Attribute -> Func:salt.utils.win_lgpo_netsh.get_settings
+418:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+418:11:Attribute -> Module:salt.utils
+418:11:Name -> Module:salt
+419:16:Name -> U
+419:33:Name -> U
+419:48:Name -> Const:str:'local' | U
+464:11:Call -> Dict:11
+464:11:Attribute -> Func:salt.utils.win_lgpo_netsh.get_all_settings
+464:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+464:11:Attribute -> Module:salt.utils
+464:11:Name -> Module:salt
+464:62:Name -> U
+464:76:Name -> Const:str:'local' | U
+500:11:Call -> Dict:3
+500:11:Attribute -> Func:salt.utils.win_lgpo_netsh.get_all_profiles
+500:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+500:11:Attribute -> Module:salt.utils
+500:11:Name -> Module:salt
+500:60:Name -> Const:str:'local' | U
+573:11:Call -> Const:bool:True
+573:11:Attribute -> Func:salt.utils.win_lgpo_netsh.set_firewall_settings
+573:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+573:11:Attribute -> Module:salt.utils
+573:11:Name -> Module:salt
+574:16:Name -> U
+574:33:Name -> Const:NoneType:None | U
+574:51:Name -> Const:NoneType:None | U
+574:67:Name -> Const:str:'local' | U
+666:11:Call -> Const:bool:True
+666:11:Attribute -> Func:salt.utils.win_lgpo_netsh.set_logging_settings
+666:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+666:11:Attribute -> Module:salt.utils
+666:11:Name -> Module:salt
+667:16:Name -> U
+667:33:Name -> U
+667:48:Name -> U
+667:61:Name -> Const:str:'local' | U
+732:11:Call -> Const:bool:True
+732:11:Attribute -> Func:salt.utils.win_lgpo_netsh.set_settings
+732:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+732:11:Attribute -> Module:salt.utils
+732:11:Name -> Module:salt
+733:16:Name -> U
+733:33:Name -> U
+733:48:Name -> U
+733:61:Name -> Const:str:'local' | U
+790:11:Call -> Const:bool:True
+790:11:Attribute -> Func:salt.utils.win_lgpo_netsh.set_state
+790:11:Attribute -> Module:salt.utils.win_lgpo_netsh
+790:11:Attribute -> Module:salt.utils
+790:11:Name -> Module:salt
+791:16:Name -> U
+791:31:Name -> U
+791:44:Name -> Const:str:'local' | U

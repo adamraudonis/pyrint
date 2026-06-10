@@ -1,0 +1,464 @@
+30:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+30:6:Attribute -> Func:logging.getLogger
+30:6:Name -> Module:logging
+30:24:Name -> Const:str:'salt.cluster.consensus.peer' | Const:str:'__main__'
+80:13:Call -> U
+80:13:Name -> Func:builtins.getattr
+80:21:Call -> U
+80:21:Name -> Class:builtins.type
+80:26:Name -> U
+81:11:Call -> U
+81:11:Attribute -> U
+81:11:Name -> U
+82:14:Call -> U
+82:14:Attribute -> U
+82:14:Name -> U
+82:29:Name -> U
+85:13:Call -> U
+85:13:Name -> Func:builtins.getattr
+85:21:Name -> U
+86:7:Name -> U
+93:17:Call -> Inst:salt.transport.tcp._TCPPubServerPublisher
+93:17:Name -> Class:salt.transport.tcp._TCPPubServerPublisher
+94:12:Attribute -> U
+94:12:Name -> U
+94:30:Attribute -> U
+94:30:Name -> U
+94:48:Call -> U
+94:48:Name -> Func:builtins.getattr
+94:56:Name -> U
+96:14:Call -> Const:NoneType:None | U | Const:NoneType:None
+96:14:Attribute -> BM:salt.transport.tcp._TCPPubServerPublisher.connect
+96:14:Name -> Inst:salt.transport.tcp._TCPPubServerPublisher
+100:8:Name -> U
+100:41:Name -> Inst:salt.transport.tcp._TCPPubServerPublisher
+101:10:Call -> U | Const:NoneType:None
+101:10:Attribute -> U | BM:salt.transport.tcp._TCPPubServerPublisher.send
+101:10:Name -> U | Inst:salt.transport.tcp._TCPPubServerPublisher
+101:22:Name -> U
+104:15:Name -> Class:salt.cluster.consensus.raft.node.Peer
+128:8:Call -> Const:NoneType:None
+128:8:Attribute -> BM:salt.cluster.consensus.raft.node.Peer.__init__ | BM:builtins.object.__init__
+128:8:Call -> Super
+128:8:Name -> Class:builtins.super
+128:39:Name -> U
+128:55:Name -> Const:bool:True | U
+129:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+129:23:Name -> U
+130:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+130:25:Name -> U
+131:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+131:30:Name -> Const:str:'cluster' | U
+133:5:Name -> Class:builtins.property
+135:15:Attribute -> U
+135:15:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+137:5:Name -> Class:builtins.property
+139:15:Attribute -> U
+139:15:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+146:17:Name -> Const:NoneType:None | U
+146:27:Call -> Const:str:''
+146:27:Name -> Class:builtins.str
+146:31:Call -> Inst:uuid.UUID
+146:31:Attribute -> Func:uuid.uuid4
+146:31:Name -> Module:uuid
+147:14:Call -> Const:bytes:b''
+147:14:Attribute -> Func:salt.cluster.consensus.rpc.pack
+147:14:Name -> Module:salt.cluster.consensus.rpc
+148:12:Name -> U
+149:12:Attribute -> U
+149:12:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+150:12:Name -> Const:str:'' | U
+151:12:Name -> U
+152:26:Attribute -> Const:str:'cluster' | U
+152:26:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+155:18:Call -> Const:NoneType:None
+155:18:Name -> Func:salt.cluster.consensus.peer._publish
+155:27:Attribute -> U
+155:27:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+155:41:Name -> Const:bytes:b''
+156:15:Name -> Class:builtins.Exception
+157:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+157:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+157:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+157:63:Name -> U
+157:68:Attribute -> U
+157:68:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+162:19:Call -> U
+162:19:Attribute -> Func:asyncio.events.get_running_loop | Func:_asyncio.get_running_loop
+162:19:Name -> Module:asyncio
+163:12:Call -> U
+163:12:Attribute -> U
+163:12:Name -> U
+163:29:Call -> Const:NoneType:None
+163:29:Attribute -> BM:salt.cluster.consensus.peer.SaltPeer._send
+163:29:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+163:40:Name -> U
+163:45:Name -> U
+163:54:Name -> Const:NoneType:None | U
+164:15:Name -> Class:builtins.RuntimeError
+166:12:Call -> U
+166:12:Attribute -> Func:asyncio.runners.run
+166:12:Name -> Module:asyncio
+166:24:Call -> Const:NoneType:None
+166:24:Attribute -> BM:salt.cluster.consensus.peer.SaltPeer._send
+166:24:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+166:35:Name -> U
+166:40:Name -> U
+166:49:Name -> Const:NoneType:None | U
+173:8:Call -> Const:NoneType:None
+173:8:Attribute -> BM:salt.cluster.consensus.peer.SaltPeer._fire
+173:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+174:12:Attribute -> Const:str:'cluster/raft/request-vote'
+174:12:Name -> Module:salt.cluster.consensus.rpc
+176:33:Attribute -> U
+176:33:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+177:32:Name -> U
+178:24:Name -> U
+179:33:Name -> U
+180:34:Name -> U
+185:8:Call -> Const:NoneType:None
+185:8:Attribute -> BM:salt.cluster.consensus.peer.SaltPeer._fire
+185:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+186:12:Attribute -> Const:str:'cluster/raft/pre-request-vote'
+186:12:Name -> Module:salt.cluster.consensus.rpc
+188:33:Attribute -> U
+188:33:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+189:32:Name -> U
+190:24:Name -> U
+191:33:Name -> U
+192:34:Name -> U
+207:8:Call -> Const:NoneType:None
+207:8:Attribute -> BM:salt.cluster.consensus.peer.SaltPeer._fire
+207:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+208:12:Attribute -> Const:str:'cluster/raft/append-entries'
+208:12:Name -> Module:salt.cluster.consensus.rpc
+210:33:Attribute -> U
+210:33:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+211:29:Name -> U
+212:24:Name -> U
+213:33:Name -> U
+214:34:Name -> U
+215:33:Name -> U
+219:27:Call -> ERR
+219:27:Name -> Func:builtins.isinstance
+219:38:Name -> U
+219:41:Name -> Class:builtins.dict
+218:24:Name -> U
+220:44:Call -> U
+220:44:Name -> Func:builtins.hasattr
+220:52:Name -> U
+220:29:Call -> U
+220:29:Attribute -> U
+220:29:Name -> U
+220:71:Call -> Inst:builtins.list
+220:71:Name -> Class:builtins.list
+220:76:Name -> U
+222:29:Name -> Tuple:0
+224:41:Call -> ERR
+224:41:Attribute -> BM:builtins.dict.get
+224:41:Name -> Dict:0
+239:11:Call -> ERR
+239:11:Name -> Func:builtins.isinstance
+239:22:Name -> U
+239:29:Name -> Class:builtins.bytes
+239:36:Name -> Class:builtins.bytearray
+239:47:Name -> Class:builtins.memoryview
+240:19:Call -> Inst:builtins.list
+240:19:Name -> Class:builtins.list
+240:24:Call -> Inst:builtins.bytes
+240:24:Name -> Class:builtins.bytes
+240:30:Name -> U
+241:8:Call -> Const:NoneType:None
+241:8:Attribute -> BM:salt.cluster.consensus.peer.SaltPeer._fire
+241:8:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+242:12:Attribute -> Const:str:'cluster/raft/install-snapshot'
+242:12:Name -> Module:salt.cluster.consensus.rpc
+244:33:Attribute -> U
+244:33:Name -> Inst:salt.cluster.consensus.peer.SaltPeer
+245:29:Name -> U
+246:24:Name -> U
+247:39:Name -> U
+248:38:Name -> U
+249:24:Name -> U | Inst:builtins.list
+281:11:Call -> ERR
+281:11:Name -> Func:builtins.isinstance
+281:22:Name -> U
+281:28:Name -> Class:builtins.dict
+282:12:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+282:26:Call -> Inst:builtins.dict
+282:26:Name -> Class:builtins.dict
+282:31:Name -> U
+284:12:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+284:38:Name -> U
+285:8:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+285:25:Name -> U
+287:8:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+287:24:Name -> U
+289:5:Name -> Class:builtins.property
+296:15:Call -> ERR
+296:15:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+296:15:Attribute -> Inst:builtins.dict | Dict:1
+296:15:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+298:5:Attribute -> Func:salt.cluster.consensus.peer.RaftDispatcher._node.setter
+298:5:Name -> Prop:salt.cluster.consensus.peer.RaftDispatcher._node
+306:11:Name -> U
+307:12:Call -> ERR
+307:12:Attribute -> BM:builtins.dict.pop | BM:builtins.dict.pop
+307:12:Attribute -> Inst:builtins.dict | Dict:1
+307:12:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+309:12:Attribute -> Inst:builtins.dict | Dict:1
+309:12:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+309:37:Name -> U
+318:8:Attribute -> Inst:builtins.dict | Dict:1
+318:8:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+318:20:Name -> U
+318:37:Name -> U
+322:8:Call -> ERR
+322:8:Attribute -> BM:builtins.dict.pop | BM:builtins.dict.pop
+322:8:Attribute -> Inst:builtins.dict | Dict:1
+322:8:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+322:24:Name -> U
+325:17:Call -> U
+325:17:Attribute -> U
+325:17:Attribute -> U
+325:17:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+325:35:Name -> U
+326:11:Name -> U
+327:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+327:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+327:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+327:79:Name -> U
+327:84:Name -> U
+329:14:Call -> Const:bytes:b''
+329:14:Attribute -> Func:salt.cluster.consensus.rpc.pack
+329:14:Name -> Module:salt.cluster.consensus.rpc
+330:12:Name -> U
+331:12:Attribute -> U
+331:12:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+332:12:Call -> Const:str:''
+332:12:Name -> Class:builtins.str
+332:16:Call -> Inst:uuid.UUID
+332:16:Attribute -> Func:uuid.uuid4
+332:16:Name -> Module:uuid
+333:12:Name -> U
+334:26:Name -> Const:str:'cluster' | U
+337:18:Call -> Const:NoneType:None
+337:18:Name -> Func:salt.cluster.consensus.peer._publish
+337:27:Name -> U
+337:35:Name -> Const:bytes:b''
+338:15:Name -> Class:builtins.Exception
+339:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+339:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+339:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+339:75:Name -> U
+339:80:Name -> U
+343:15:Call -> ERR
+343:15:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get
+343:15:Attribute -> Inst:builtins.dict | Dict:1
+343:15:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+343:31:Name -> Const:str:'cluster' | U
+344:11:Name -> U
+345:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+345:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+345:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+347:16:Name -> Const:str:'cluster' | U
+348:16:Name -> U
+353:15:Name -> U
+353:22:Attribute -> Const:str:'cluster/raft/request-vote'
+353:22:Name -> Module:salt.cluster.consensus.rpc
+354:36:Call -> U
+354:36:Attribute -> U
+354:36:Name -> U
+355:20:Name -> U
+356:20:Name -> U
+357:34:Call -> U
+357:34:Attribute -> U
+357:34:Name -> U
+358:35:Call -> U
+358:35:Attribute -> U
+358:35:Name -> U
+360:22:Call -> Const:NoneType:None
+360:22:Attribute -> BM:salt.cluster.consensus.peer.RaftDispatcher._reply
+360:22:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+361:20:Name -> U
+362:20:Attribute -> Const:str:'cluster/raft/request-vote-reply'
+362:20:Name -> Module:salt.cluster.consensus.rpc
+363:32:Name -> U
+363:49:Name -> U
+363:67:Attribute -> U
+363:67:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+364:34:Name -> Const:str:'cluster' | U
+367:17:Name -> U
+367:24:Attribute -> Const:str:'cluster/raft/pre-request-vote'
+367:24:Name -> Module:salt.cluster.consensus.rpc
+368:36:Call -> U
+368:36:Attribute -> U
+368:36:Name -> U
+369:20:Name -> U
+370:20:Name -> U
+371:34:Call -> U
+371:34:Attribute -> U
+371:34:Name -> U
+372:35:Call -> U
+372:35:Attribute -> U
+372:35:Name -> U
+374:22:Call -> Const:NoneType:None
+374:22:Attribute -> BM:salt.cluster.consensus.peer.RaftDispatcher._reply
+374:22:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+375:20:Name -> U
+376:20:Attribute -> Const:str:'cluster/raft/pre-request-vote-reply'
+376:20:Name -> Module:salt.cluster.consensus.rpc
+377:32:Name -> U
+377:49:Name -> U
+377:67:Attribute -> U
+377:67:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+378:34:Name -> Const:str:'cluster' | U
+381:17:Name -> U
+381:24:Attribute -> Const:str:'cluster/raft/request-vote-reply'
+381:24:Name -> Module:salt.cluster.consensus.rpc
+382:16:Call -> U
+382:16:Attribute -> U
+382:16:Name -> U
+382:40:Name -> U
+382:45:Name -> U
+382:65:Name -> U
+384:17:Name -> U
+384:24:Attribute -> Const:str:'cluster/raft/pre-request-vote-reply'
+384:24:Name -> Module:salt.cluster.consensus.rpc
+385:16:Call -> U
+385:16:Attribute -> U
+385:16:Name -> U
+385:44:Name -> U
+385:49:Name -> U
+385:69:Name -> U
+387:17:Name -> U
+387:24:Attribute -> Const:str:'cluster/raft/append-entries'
+387:24:Name -> Module:salt.cluster.consensus.rpc
+388:26:Call -> U
+388:26:Attribute -> U
+388:26:Name -> U
+389:61:Call -> U
+389:61:Attribute -> U
+389:61:Name -> U
+390:20:Name -> U
+391:20:Name -> U
+392:20:Call -> U
+392:20:Attribute -> U
+392:20:Name -> U
+393:20:Call -> U
+393:20:Attribute -> U
+393:20:Name -> U
+394:20:Call -> U
+394:20:Attribute -> U
+394:20:Name -> U
+395:21:Name -> U
+396:42:Call -> U
+396:42:Attribute -> U
+396:42:Name -> U
+400:23:Call -> U
+400:23:Attribute -> U
+400:23:Name -> U
+399:20:Call -> U
+399:20:Attribute -> U
+399:20:Name -> U
+399:56:Call -> ERR
+399:56:Name -> Func:builtins.len
+399:60:Name -> U
+401:25:Call -> ERR
+401:25:Name -> Func:builtins.len
+401:29:Name -> U
+403:22:Call -> Const:NoneType:None
+403:22:Attribute -> BM:salt.cluster.consensus.peer.RaftDispatcher._reply
+403:22:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+404:20:Name -> U
+405:20:Attribute -> Const:str:'cluster/raft/append-entries-reply'
+405:20:Name -> Module:salt.cluster.consensus.rpc
+407:32:Name -> U
+408:41:Call -> U
+408:41:Attribute -> U
+408:41:Name -> U
+409:42:Call -> U
+409:42:Attribute -> U
+409:42:Name -> U
+410:42:Name -> U
+411:35:Attribute -> U
+411:35:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+412:36:Name -> U
+413:35:Name -> U
+414:42:Name -> U
+415:41:Name -> U
+417:34:Name -> Const:str:'cluster' | U
+420:17:Name -> U
+420:24:Attribute -> Const:str:'cluster/raft/append-entries-reply'
+420:24:Name -> Module:salt.cluster.consensus.rpc
+421:16:Call -> U
+421:16:Attribute -> U
+421:16:Name -> U
+422:20:Name -> U
+423:20:Call -> U
+423:20:Attribute -> U
+423:20:Name -> U
+424:20:Call -> U
+424:20:Attribute -> U
+424:20:Name -> U
+425:20:Call -> U
+425:20:Attribute -> U
+425:20:Name -> U
+426:20:Name -> U
+427:20:Name -> U
+428:20:Name -> U
+429:20:Call -> U
+429:20:Attribute -> U
+429:20:Name -> U
+430:20:Call -> U
+430:20:Attribute -> U
+430:20:Name -> U
+433:17:Name -> U
+433:24:Attribute -> Const:str:'cluster/raft/install-snapshot'
+433:24:Name -> Module:salt.cluster.consensus.rpc
+434:27:Call -> U
+434:27:Attribute -> U
+434:27:Name -> U
+435:19:Call -> ERR
+435:19:Name -> Func:builtins.isinstance
+435:30:Name -> U
+435:40:Name -> Class:builtins.list
+436:31:Call -> Inst:builtins.bytes
+436:31:Name -> Class:builtins.bytes
+436:37:Name -> U
+437:31:Call -> U
+437:31:Attribute -> U
+437:31:Name -> U
+438:20:Name -> U
+439:20:Name -> U
+440:20:Name -> U
+441:20:Name -> U
+442:20:Name -> U | Inst:builtins.bytes
+444:22:Call -> Const:NoneType:None
+444:22:Attribute -> BM:salt.cluster.consensus.peer.RaftDispatcher._reply
+444:22:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+445:20:Name -> U
+446:20:Attribute -> Const:str:'cluster/raft/install-snapshot-reply'
+446:20:Name -> Module:salt.cluster.consensus.rpc
+447:33:Name -> U
+447:54:Attribute -> U
+447:54:Name -> Inst:salt.cluster.consensus.peer.RaftDispatcher
+448:34:Name -> Const:str:'cluster' | U
+451:17:Name -> U
+451:24:Attribute -> Const:str:'cluster/raft/install-snapshot-reply'
+451:24:Name -> Module:salt.cluster.consensus.rpc
+452:16:Call -> U
+452:16:Attribute -> U
+452:16:Name -> U
+452:44:Name -> U
+452:64:Name -> U
+455:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+455:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+455:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+455:64:Name -> U
+457:15:Name -> Class:builtins.Exception
+458:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+458:12:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+458:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+458:71:Name -> U
+458:76:Name -> U

@@ -1,0 +1,126 @@
+17:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+17:9:Attribute -> Func:logging.getLogger
+17:9:Name -> Module:logging
+17:27:Name -> Const:str:'src.sentry.tasks.email' | Const:str:'__main__'
+20:32:Name -> U
+20:46:Name -> Class:builtins.str
+20:54:Name -> U
+21:16:Call -> U
+21:16:Attribute -> U
+21:16:Name -> U
+21:55:Name -> U
+23:18:Call -> U
+23:18:Attribute -> U
+23:18:Name -> U
+23:40:Name -> U
+23:59:Attribute -> U
+23:59:Name -> U
+24:15:Call -> ERR
+24:15:Name -> Func:builtins.any
+24:19:Call -> U
+24:19:Attribute -> U
+24:19:Name -> U
+24:43:Name -> U
+24:55:Call -> U
+24:55:Attribute -> U
+24:55:Attribute -> U
+24:55:Attribute -> U
+24:55:Name -> U
+25:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+25:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+25:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+25:71:Name -> U
+25:77:Name -> U
+28:15:Name -> U
+32:36:Name -> Class:builtins.str
+32:51:Name -> Class:builtins.int
+32:65:Name -> Class:builtins.str
+37:16:Call -> U
+37:16:Attribute -> U
+37:16:Call -> U
+37:16:Attribute -> U
+37:16:Attribute -> U
+37:16:Name -> U
+37:63:Name -> U
+38:11:Attribute -> U
+38:11:Name -> U
+39:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+39:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+39:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+39:51:Name -> U
+42:11:Call -> U | Const:NoneType:None
+42:11:Name -> Func:src.sentry.tasks.email._get_user_from_email
+42:32:Name -> U
+42:39:Name -> U
+43:7:Name -> U | Const:NoneType:None
+44:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+44:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+44:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+44:65:Name -> U
+47:11:Call -> U
+47:11:Name -> U
+47:32:Name -> U
+48:7:Call -> U
+48:7:Attribute -> U
+48:7:Name -> U
+49:8:Call -> U
+49:8:Attribute -> U
+49:8:Name -> U
+49:18:Name -> U
+49:25:Name -> U | Const:NoneType:None
+52:26:Name -> Class:builtins.Exception
+57:29:Name -> Class:builtins.int
+57:39:Name -> Class:builtins.str
+57:45:Name -> Class:builtins.bytes
+58:8:Name -> ExcInst:src.sentry.tasks.email.TemporaryEmailError
+58:25:Name -> U
+59:8:Name -> ExcInst:src.sentry.tasks.email.TemporaryEmailError
+59:26:Name -> U
+60:8:Name -> ExcInst:src.sentry.tasks.email.TemporaryEmailError
+60:21:Name -> U
+60:27:Name -> U
+63:25:Name -> Class:builtins.dict
+63:30:Name -> Class:builtins.str
+63:35:Name -> Class:typing.Any
+65:8:Call -> U
+65:8:Name -> U
+65:23:Call -> U
+65:23:Name -> U
+65:41:Name -> U
+66:11:Name -> Class:smtplib.SMTPDataError
+68:18:Attribute -> U
+68:18:Name -> ExcInst:smtplib.SMTPDataError
+69:18:Call -> ExcInst:src.sentry.tasks.email.TemporaryEmailError
+69:18:Name -> Class:src.sentry.tasks.email.TemporaryEmailError
+69:38:Attribute -> U
+69:38:Name -> ExcInst:smtplib.SMTPDataError
+69:51:Attribute -> U
+69:51:Name -> ExcInst:smtplib.SMTPDataError
+73:1:Call -> U
+73:1:Name -> U
+75:14:Name -> U
+77:10:Call -> U
+77:10:Name -> U
+77:43:Name -> Class:src.sentry.tasks.email.TemporaryEmailError
+78:14:Attribute -> U
+78:14:Name -> U
+80:24:Name -> Class:builtins.dict
+80:29:Name -> Class:builtins.str
+80:34:Name -> Class:typing.Any
+81:4:Call -> Const:NoneType:None
+81:4:Name -> Func:src.sentry.tasks.email._send_email
+81:16:Name -> U
+84:1:Call -> U
+84:1:Name -> U
+86:14:Name -> U
+88:10:Call -> U
+88:10:Name -> U
+88:43:Name -> Class:src.sentry.tasks.email.TemporaryEmailError
+89:14:Attribute -> U
+89:14:Name -> U
+91:32:Name -> Class:builtins.dict
+91:37:Name -> Class:builtins.str
+91:42:Name -> Class:typing.Any
+92:4:Call -> Const:NoneType:None
+92:4:Name -> Func:src.sentry.tasks.email._send_email
+92:16:Name -> U

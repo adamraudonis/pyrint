@@ -1,0 +1,374 @@
+11:11:Call -> U
+11:11:Attribute -> U
+11:11:Name -> U
+14:1:Attribute -> U
+14:1:Attribute -> U
+14:1:Name -> U
+16:9:Call -> U
+16:9:Name -> U
+16:27:Call -> U
+16:27:Name -> U
+16:41:Call -> U
+16:41:Name -> U
+16:59:Call -> U
+16:59:Name -> U
+16:73:Call -> U
+16:73:Name -> U
+17:21:Call -> U
+17:21:Name -> U
+19:13:Call -> U
+19:13:Name -> U
+19:48:Call -> U
+19:48:Name -> U
+19:74:Call -> U
+19:74:Name -> U
+20:45:Call -> U
+20:45:Name -> U
+22:17:Call -> U
+22:17:Name -> U
+24:20:Call -> Tuple:2
+24:20:Attribute -> Func:salt.crypt.gen_keys
+24:20:Attribute -> Module:salt.crypt
+24:20:Name -> Module:salt
+25:33:Attribute -> Const:str:'/'
+25:33:Name -> Module:os
+27:16:Call -> U
+27:16:Attribute -> U
+27:16:Name -> U
+28:16:Call -> U
+28:16:Attribute -> U
+28:16:Name -> U
+30:17:Call -> U
+30:17:Name -> U
+32:20:Call -> Tuple:2
+32:20:Attribute -> Func:salt.crypt.gen_keys
+32:20:Attribute -> Module:salt.crypt
+32:20:Name -> Module:salt
+33:33:Attribute -> Const:str:'/'
+33:33:Name -> Module:os
+35:16:Call -> U
+35:16:Attribute -> U
+35:16:Name -> U
+36:30:Attribute -> Const:str:'/'
+36:30:Name -> Module:os
+38:16:Call -> U
+38:16:Attribute -> U
+38:16:Name -> U
+38:59:Attribute -> Const:str:'/'
+38:59:Name -> Module:os
+42:10:Call -> U
+42:10:Attribute -> U
+42:10:Attribute -> U
+42:10:Name -> U
+42:39:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+42:39:Attribute -> Func:salt.utils.stringutils.to_bytes
+42:39:Attribute -> Module:salt.utils.stringutils
+42:39:Attribute -> Module:salt.utils
+42:39:Name -> Module:salt
+42:71:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+43:9:Call -> U
+43:9:Name -> U
+43:54:Name -> U
+44:15:Name -> Const:bytes:b'\x07\xf3\xb1\xe7\xdb\x06\xf4_\xe2\xdc\
+44:22:Call -> U
+44:22:Attribute -> Func:salt.crypt.sign_message
+44:22:Attribute -> Module:salt.crypt
+44:22:Name -> Module:salt
+44:69:Name -> Const:bytes:b"It's me, Mario"
+48:10:Call -> U
+48:10:Attribute -> U
+48:10:Attribute -> U
+48:10:Name -> U
+48:39:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+48:39:Attribute -> Func:salt.utils.stringutils.to_bytes
+48:39:Attribute -> Module:salt.utils.stringutils
+48:39:Attribute -> Module:salt.utils
+48:39:Name -> Module:salt
+48:71:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+49:9:Call -> U
+49:9:Name -> U
+49:54:Name -> U
+50:15:Name -> Const:bytes:b'\x07\xf3\xb1\xe7\xdb\x06\xf4_\xe2\xdc\
+50:22:Call -> U
+50:22:Attribute -> Func:salt.crypt.sign_message
+50:22:Attribute -> Module:salt.crypt
+50:22:Name -> Module:salt
+51:35:Name -> Const:bytes:b"It's me, Mario"
+56:9:Call -> U
+56:9:Name -> U
+58:8:Call -> Inst:tests.support.mock.MockOpen
+58:8:Name -> Class:tests.support.mock.MockOpen
+58:28:Call -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk | Inst:builtins.bytes | Const:bytes:b''
+58:28:Attribute -> Func:salt.utils.stringutils.to_bytes
+58:28:Attribute -> Module:salt.utils.stringutils
+58:28:Attribute -> Module:salt.utils
+58:28:Name -> Module:salt
+58:60:Name -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk
+60:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+60:15:Attribute -> Func:salt.crypt.verify_signature
+60:15:Attribute -> Module:salt.crypt
+60:15:Name -> Module:salt
+60:66:Name -> Const:bytes:b"It's me, Mario"
+60:71:Name -> Const:bytes:b'\x07\xf3\xb1\xe7\xdb\x06\xf4_\xe2\xdc\
+64:15:Call -> U
+64:15:Attribute -> U
+64:15:Attribute -> U
+64:15:Name -> U
+65:8:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+65:8:Attribute -> Func:salt.utils.stringutils.to_bytes
+65:8:Attribute -> Module:salt.utils.stringutils
+65:8:Attribute -> Module:salt.utils
+65:8:Name -> Module:salt
+65:40:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+67:14:Call -> U
+67:14:Attribute -> U
+67:14:Attribute -> U
+67:14:Name -> U
+68:8:Call -> U
+68:8:Attribute -> U
+68:8:Attribute -> U
+68:8:Name -> U
+68:34:Call -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk | Inst:builtins.bytes | Const:bytes:b''
+68:34:Attribute -> Func:salt.utils.stringutils.to_bytes
+68:34:Attribute -> Module:salt.utils.stringutils
+68:34:Attribute -> Module:salt.utils
+68:34:Name -> Module:salt
+68:66:Name -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk
+70:16:Call -> ERR
+70:16:Attribute -> ERR
+70:16:Attribute -> Module:salt.crypt
+70:16:Name -> Module:salt
+70:43:Name -> U
+71:16:Call -> ERR
+71:16:Attribute -> ERR
+71:16:Attribute -> Module:salt.crypt
+71:16:Name -> Module:salt
+71:42:Name -> U
+71:51:Name -> U
+72:22:Name -> U
+76:14:Call -> U
+76:14:Attribute -> Func:salt.utils.stringutils.to_unicode
+76:14:Attribute -> Module:salt.utils.stringutils
+76:14:Attribute -> Module:salt.utils
+76:14:Name -> Module:salt
+77:9:Call -> U
+77:9:Name -> U
+79:8:Call -> Inst:tests.support.mock.MockOpen
+79:8:Name -> Class:tests.support.mock.MockOpen
+79:28:Call -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk | Inst:builtins.bytes | Const:bytes:b''
+79:28:Attribute -> Func:salt.utils.stringutils.to_bytes
+79:28:Attribute -> Module:salt.utils.stringutils
+79:28:Attribute -> Module:salt.utils
+79:28:Name -> Module:salt
+79:60:Name -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk
+81:8:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+81:8:Attribute -> Func:salt.crypt.verify_signature
+81:8:Attribute -> Module:salt.crypt
+81:8:Name -> Module:salt
+81:59:Name -> U
+81:68:Name -> Const:bytes:b'w\xac\xfe18o\xeb\xfb\x14+\x9e\xd1\xb7\
+88:10:Call -> U
+88:10:Attribute -> Func:salt.crypt.get_rsa_pub_key
+88:10:Attribute -> Module:salt.crypt
+88:10:Name -> Module:salt
+88:37:Name -> U
+89:11:Call -> U
+89:11:Attribute -> U
+89:11:Name -> U
+92:1:Attribute -> U
+92:1:Attribute -> U
+92:1:Name -> U
+94:9:Call -> U
+94:9:Name -> U
+94:27:Call -> U
+94:27:Name -> U
+94:41:Call -> U
+94:41:Name -> U
+94:59:Call -> U
+94:59:Name -> U
+94:73:Call -> U
+94:73:Name -> U
+95:21:Call -> U
+95:21:Name -> U
+97:13:Call -> U
+97:13:Name -> U
+97:48:Call -> U
+97:48:Name -> U
+97:74:Call -> U
+97:74:Name -> U
+98:45:Call -> U
+98:45:Name -> U
+100:17:Call -> U
+100:17:Name -> U
+102:20:Call -> Tuple:2
+102:20:Attribute -> Func:salt.crypt.gen_keys
+102:20:Attribute -> Module:salt.crypt
+102:20:Name -> Module:salt
+103:33:Attribute -> Const:str:'/'
+103:33:Name -> Module:os
+105:16:Call -> U
+105:16:Attribute -> U
+105:16:Name -> U
+106:16:Call -> U
+106:16:Attribute -> U
+106:16:Name -> U
+108:17:Call -> U
+108:17:Name -> U
+110:20:Call -> Tuple:2
+110:20:Attribute -> Func:salt.crypt.gen_keys
+110:20:Attribute -> Module:salt.crypt
+110:20:Name -> Module:salt
+111:33:Attribute -> Const:str:'/'
+111:33:Name -> Module:os
+113:16:Call -> U
+113:16:Attribute -> U
+113:16:Name -> U
+114:30:Attribute -> Const:str:'/'
+114:30:Name -> Module:os
+116:16:Call -> U
+116:16:Attribute -> U
+116:16:Name -> U
+116:59:Attribute -> Const:str:'/'
+116:59:Name -> Module:os
+120:10:Call -> U
+120:10:Attribute -> U
+120:10:Attribute -> U
+120:10:Name -> U
+120:39:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+120:39:Attribute -> Func:salt.utils.stringutils.to_bytes
+120:39:Attribute -> Module:salt.utils.stringutils
+120:39:Attribute -> Module:salt.utils
+120:39:Name -> Module:salt
+120:71:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+121:9:Call -> U
+121:9:Name -> U
+121:54:Name -> U
+122:15:Name -> Const:bytes:b'\x07\xf3\xb1\xe7\xdb\x06\xf4_\xe2\xdc\
+122:22:Call -> U
+122:22:Attribute -> Func:salt.crypt.sign_message
+122:22:Attribute -> Module:salt.crypt
+122:22:Name -> Module:salt
+123:35:Name -> Const:bytes:b"It's me, Mario"
+128:9:Call -> U
+128:9:Name -> U
+130:8:Call -> Inst:tests.support.mock.MockOpen
+130:8:Name -> Class:tests.support.mock.MockOpen
+130:28:Call -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk | Inst:builtins.bytes | Const:bytes:b''
+130:28:Attribute -> Func:salt.utils.stringutils.to_bytes
+130:28:Attribute -> Module:salt.utils.stringutils
+130:28:Attribute -> Module:salt.utils
+130:28:Name -> Module:salt
+130:60:Name -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk
+132:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+132:15:Attribute -> Func:salt.crypt.verify_signature
+132:15:Attribute -> Module:salt.crypt
+132:15:Name -> Module:salt
+132:66:Name -> Const:bytes:b"It's me, Mario"
+132:71:Name -> Const:bytes:b'\x07\xf3\xb1\xe7\xdb\x06\xf4_\xe2\xdc\
+136:15:Call -> U
+136:15:Attribute -> U
+136:15:Attribute -> U
+136:15:Name -> U
+137:8:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+137:8:Attribute -> Func:salt.utils.stringutils.to_bytes
+137:8:Attribute -> Module:salt.utils.stringutils
+137:8:Attribute -> Module:salt.utils
+137:8:Name -> Module:salt
+137:40:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+139:14:Call -> U
+139:14:Attribute -> U
+139:14:Attribute -> U
+139:14:Name -> U
+140:8:Call -> U
+140:8:Attribute -> U
+140:8:Attribute -> U
+140:8:Name -> U
+140:34:Call -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk | Inst:builtins.bytes | Const:bytes:b''
+140:34:Attribute -> Func:salt.utils.stringutils.to_bytes
+140:34:Attribute -> Module:salt.utils.stringutils
+140:34:Attribute -> Module:salt.utils
+140:34:Name -> Module:salt
+140:66:Name -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk
+142:16:Call -> ERR
+142:16:Attribute -> ERR
+142:16:Attribute -> Module:salt.crypt
+142:16:Name -> Module:salt
+142:43:Name -> U
+143:16:Call -> ERR
+143:16:Attribute -> ERR
+143:16:Attribute -> Module:salt.crypt
+143:16:Name -> Module:salt
+143:42:Name -> U
+143:51:Name -> U
+144:22:Name -> U
+148:14:Call -> Const:str:'meh' | Inst:builtins.bytes | Const:bytes:b''
+148:14:Attribute -> Func:salt.utils.stringutils.to_bytes
+148:14:Attribute -> Module:salt.utils.stringutils
+148:14:Attribute -> Module:salt.utils
+148:14:Name -> Module:salt
+149:9:Call -> U
+149:9:Name -> U
+151:8:Call -> Inst:tests.support.mock.MockOpen
+151:8:Name -> Class:tests.support.mock.MockOpen
+151:28:Call -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk | Inst:builtins.bytes | Const:bytes:b''
+151:28:Attribute -> Func:salt.utils.stringutils.to_bytes
+151:28:Attribute -> Module:salt.utils.stringutils
+151:28:Attribute -> Module:salt.utils
+151:28:Name -> Module:salt
+151:60:Name -> Const:str:'-----BEGIN PUBLIC KEY-----\nMIIBIjANBgk
+153:8:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+153:8:Attribute -> Func:salt.crypt.verify_signature
+153:8:Attribute -> Module:salt.crypt
+153:8:Name -> Module:salt
+153:59:Name -> Const:str:'meh' | Inst:builtins.bytes | Const:bytes:b''
+153:68:Name -> Const:bytes:b'w\xac\xfe18o\xeb\xfb\x14+\x9e\xd1\xb7\
+157:14:Call -> U
+157:14:Attribute -> Func:salt.utils.stringutils.to_unicode
+157:14:Attribute -> Module:salt.utils.stringutils
+157:14:Attribute -> Module:salt.utils
+157:14:Name -> Module:salt
+158:10:Call -> U
+158:10:Attribute -> U
+158:10:Attribute -> U
+158:10:Name -> U
+158:39:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+158:39:Attribute -> Func:salt.utils.stringutils.to_bytes
+158:39:Attribute -> Module:salt.utils.stringutils
+158:39:Attribute -> Module:salt.utils
+158:39:Name -> Module:salt
+158:71:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+159:9:Call -> U
+159:9:Name -> U
+159:54:Name -> U
+160:20:Call -> U
+160:20:Attribute -> Func:salt.crypt.sign_message
+160:20:Attribute -> Module:salt.crypt
+160:20:Name -> Module:salt
+161:35:Name -> U
+163:11:Name -> Const:bytes:b'w\xac\xfe18o\xeb\xfb\x14+\x9e\xd1\xb7\
+163:24:Name -> U
+167:14:Call -> Const:str:'meh' | Inst:builtins.bytes | Const:bytes:b''
+167:14:Attribute -> Func:salt.utils.stringutils.to_bytes
+167:14:Attribute -> Module:salt.utils.stringutils
+167:14:Attribute -> Module:salt.utils
+167:14:Name -> Module:salt
+168:10:Call -> U
+168:10:Attribute -> U
+168:10:Attribute -> U
+168:10:Name -> U
+168:39:Call -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA | Inst:builtins.bytes | Const:bytes:b''
+168:39:Attribute -> Func:salt.utils.stringutils.to_bytes
+168:39:Attribute -> Module:salt.utils.stringutils
+168:39:Attribute -> Module:salt.utils
+168:39:Name -> Module:salt
+168:71:Name -> Const:str:'-----BEGIN RSA PRIVATE KEY-----\nMIIEpA
+169:9:Call -> U
+169:9:Name -> U
+169:54:Name -> U
+170:20:Call -> U
+170:20:Attribute -> Func:salt.crypt.sign_message
+170:20:Attribute -> Module:salt.crypt
+170:20:Name -> Module:salt
+171:35:Name -> Const:str:'meh' | Inst:builtins.bytes | Const:bytes:b''
+173:11:Name -> Const:bytes:b'w\xac\xfe18o\xeb\xfb\x14+\x9e\xd1\xb7\
+173:24:Name -> U

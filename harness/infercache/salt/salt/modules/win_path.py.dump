@@ -1,0 +1,302 @@
+19:7:Name -> Class:builtins.ImportError
+23:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+23:6:Attribute -> Func:logging.getLogger
+23:6:Name -> Module:logging
+23:24:Name -> Const:str:'salt.modules.win_path' | Const:str:'__main__'
+29:10:Call -> Const:str:''
+29:10:Name -> Class:builtins.str
+29:14:Attribute -> Const:str:':'
+29:14:Name -> Module:os
+36:7:Call -> U
+36:7:Attribute -> Func:salt.utils.platform.is_windows
+36:7:Attribute -> Module:salt.utils.platform
+36:7:Attribute -> Module:salt.utils
+36:7:Name -> Module:salt
+36:44:Name -> Const:bool:True | Const:bool:False
+45:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+45:11:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath | U | Func:ntpath.normpath
+45:11:Attribute -> Module:posixpath | Module:ntpath
+45:11:Name -> Module:os
+45:28:Call -> U
+45:28:Attribute -> Func:salt.utils.stringutils.to_unicode
+45:28:Attribute -> Module:salt.utils.stringutils
+45:28:Attribute -> Module:salt.utils
+45:28:Name -> Module:salt
+45:62:Name -> U
+66:11:Call -> U
+66:11:Attribute -> Func:salt.utils.win_functions.broadcast_setting_change
+66:11:Attribute -> Module:salt.utils.win_functions
+66:11:Attribute -> Module:salt.utils
+66:11:Name -> Module:salt
+79:10:Call -> U
+79:10:Attribute -> U
+79:10:Call -> U
+79:10:Attribute -> Func:salt.utils.stringutils.to_unicode
+79:10:Attribute -> Module:salt.utils.stringutils
+79:10:Attribute -> Module:salt.utils
+79:10:Name -> Module:salt
+80:8:Call -> ERR
+80:8:Name -> ERR
+89:22:Name -> U
+89:10:Name -> U
+89:41:Name -> U
+91:11:Call -> Inst:builtins.list
+91:11:Name -> Class:builtins.list
+91:16:Call -> Inst:builtins.map
+91:16:Name -> Class:builtins.map
+91:20:Name -> Func:salt.modules.win_path._normalize_dir
+91:36:Name -> U
+115:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+115:11:Name -> Func:salt.modules.win_path._normalize_dir
+115:26:Name -> U
+116:14:Call -> Inst:builtins.list
+116:14:Name -> Func:salt.modules.win_path.get_path
+118:11:Call -> Const:bytes:b'' | Const:str:'' | U
+118:11:Attribute -> BM:builtins.bytes.lower | BM:builtins.str.lower | U | BM:builtins.bytes.lower | BM:builtins.str.lower
+118:11:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+118:28:Call -> U
+118:28:Attribute -> U
+118:28:Name -> U
+118:47:Name -> Inst:builtins.list
+122:4:Attribute -> Dict:43 | Inst:os._Environ
+122:4:Name -> Module:os
+122:25:Call -> Const:str:''
+122:25:Attribute -> BM:builtins.str.join
+122:25:Name -> Const:str:''
+122:38:Name -> U
+158:13:Call -> Dict:0
+158:13:Attribute -> Func:salt.utils.args.clean_kwargs
+158:13:Attribute -> Module:salt.utils.args
+158:13:Attribute -> Module:salt.utils
+158:13:Name -> Module:salt
+158:44:Name -> Dict:0
+159:14:Call -> ERR
+159:14:Attribute -> BM:builtins.dict.pop
+159:14:Name -> Dict:0
+160:7:Name -> Dict:0
+161:8:Call -> Const:str:'The following keyword arguments are not
+161:8:Attribute -> Func:salt.utils.args.invalid_kwargs
+161:8:Attribute -> Module:salt.utils.args
+161:8:Attribute -> Module:salt.utils
+161:8:Name -> Module:salt
+161:39:Name -> U
+163:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+163:11:Name -> Func:salt.modules.win_path._normalize_dir
+163:26:Name -> U
+166:7:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+168:15:Call -> U
+168:15:Attribute -> Func:salt.utils.stringutils.to_str
+168:15:Attribute -> Module:salt.utils.stringutils
+168:15:Attribute -> Module:salt.utils
+168:15:Name -> Module:salt
+168:45:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+169:18:Call -> Inst:builtins.list
+169:18:Name -> Func:salt.modules.win_path.get_path
+174:8:Call -> U
+174:8:Attribute -> Func:salt.utils.stringutils.to_str
+174:8:Attribute -> Module:salt.utils.stringutils
+174:8:Attribute -> Module:salt.utils
+174:8:Name -> Module:salt
+174:38:Name -> U
+174:50:Call -> ERR
+174:50:Attribute -> ERR
+174:50:Attribute -> Dict:43 | Inst:os._Environ
+174:50:Name -> Module:os
+174:75:Name -> Const:str:''
+177:7:Name -> Const:NoneType:None | U
+179:20:Call -> Inst:builtins.int
+179:20:Name -> Class:builtins.int
+179:24:Name -> U
+180:16:Name -> Class:builtins.TypeError
+180:27:Name -> Class:builtins.ValueError
+189:19:Call -> U
+189:19:Attribute -> U
+189:19:Name -> U
+189:38:Name -> U
+192:24:Call -> U
+192:24:Attribute -> U
+192:24:Name -> U
+192:38:Call -> U
+192:38:Attribute -> U
+192:38:Name -> U
+193:15:Name -> Class:builtins.ValueError
+196:19:Call -> ERR
+196:19:Name -> Func:builtins.len
+196:23:Name -> U
+205:14:Name -> U
+206:11:Name -> U
+207:15:Name -> U
+207:24:Name -> U
+207:36:Name -> U
+211:17:Name -> U
+211:27:Name -> U
+214:17:Name -> U
+230:11:Name -> U | Const:str:'END' | Const:int:0
+231:15:Name -> U | Const:NoneType:None
+232:19:Name -> U
+232:32:Name -> U
+238:20:Call -> U
+238:20:Attribute -> U
+238:20:Name -> U
+238:29:Name -> U
+239:20:Call -> U
+239:20:Attribute -> U
+239:20:Name -> U
+239:32:Name -> U
+243:16:Call -> U
+243:16:Attribute -> U
+243:16:Name -> U
+243:28:Name -> U
+245:13:Name -> U | Const:int:0
+249:15:Name -> U | Const:NoneType:None
+255:16:Call -> U
+255:16:Attribute -> U
+255:16:Name -> U
+255:28:Name -> U
+258:15:Name -> U | Const:NoneType:None
+259:20:Name -> U | Const:int:0
+259:34:Name -> U
+259:48:Name -> U
+259:59:Name -> U | Const:int:0
+260:20:Name -> U | Const:int:0
+260:35:Name -> U
+260:48:Name -> U | Const:int:0
+265:20:Call -> U
+265:20:Attribute -> U
+265:20:Name -> U
+265:29:Name -> U
+266:20:Call -> U
+266:20:Attribute -> U
+266:20:Name -> U
+266:32:Name -> U | Const:str:'END' | Const:int:0
+266:37:Name -> U
+274:16:Call -> U
+274:16:Attribute -> U
+274:16:Name -> U
+274:28:Name -> U | Const:str:'END' | Const:int:0
+274:33:Name -> U
+277:7:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+277:7:Name -> Func:salt.modules.win_path.add._check_path
+277:19:Name -> U
+277:31:Name -> U
+277:41:Name -> Const:NoneType:None | U | Inst:builtins.int | Const:NoneType:None
+278:8:Call -> Const:NoneType:None
+278:8:Name -> Func:salt.modules.win_path._update_local_path
+278:27:Name -> U
+280:11:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:True
+280:11:Name -> Func:salt.modules.win_path.add._check_path
+280:23:Name -> Inst:builtins.list
+280:36:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+280:42:Name -> Const:NoneType:None | U | Inst:builtins.int | Const:NoneType:None
+285:13:Call -> ERR
+285:13:Name -> ERR
+286:8:Name -> Const:str:'HKEY_LOCAL_MACHINE'
+286:14:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Control\\Ses
+286:19:Name -> Const:str:'PATH'
+286:26:Call -> Const:str:''
+286:26:Attribute -> BM:builtins.str.join
+286:35:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+286:35:Attribute -> Func:salt.utils.data.decode
+286:35:Attribute -> Module:salt.utils.data
+286:35:Attribute -> Module:salt.utils
+286:35:Name -> Module:salt
+286:58:Name -> Inst:builtins.list
+286:73:Name -> Const:str:'REG_EXPAND_SZ'
+289:7:Name -> U
+289:18:Name -> U
+291:15:Call -> U
+291:15:Name -> Func:salt.modules.win_path.rehash
+293:15:Name -> U
+321:13:Call -> Dict:0
+321:13:Attribute -> Func:salt.utils.args.clean_kwargs
+321:13:Attribute -> Module:salt.utils.args
+321:13:Attribute -> Module:salt.utils
+321:13:Name -> Module:salt
+321:44:Name -> Dict:0
+322:14:Call -> ERR
+322:14:Attribute -> BM:builtins.dict.pop
+322:14:Name -> Dict:0
+323:7:Name -> Dict:0
+324:8:Call -> Const:str:'The following keyword arguments are not
+324:8:Attribute -> Func:salt.utils.args.invalid_kwargs
+324:8:Attribute -> Module:salt.utils.args
+324:8:Attribute -> Module:salt.utils
+324:8:Name -> Module:salt
+324:39:Name -> U
+326:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+326:11:Name -> Func:salt.modules.win_path._normalize_dir
+326:26:Name -> U
+327:15:Call -> U
+327:15:Attribute -> Func:salt.utils.stringutils.to_str
+327:15:Attribute -> Module:salt.utils.stringutils
+327:15:Attribute -> Module:salt.utils
+327:15:Name -> Module:salt
+327:45:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+328:18:Call -> Inst:builtins.list
+328:18:Name -> Func:salt.modules.win_path.get_path
+333:8:Call -> U
+333:8:Attribute -> Func:salt.utils.stringutils.to_str
+333:8:Attribute -> Module:salt.utils.stringutils
+333:8:Attribute -> Module:salt.utils
+333:8:Name -> Module:salt
+333:38:Name -> U
+333:50:Call -> ERR
+333:50:Attribute -> ERR
+333:50:Attribute -> Dict:43 | Inst:os._Environ
+333:50:Name -> Module:os
+333:75:Name -> Const:str:''
+342:19:Call -> U
+342:19:Attribute -> U
+342:19:Name -> U
+342:38:Name -> U
+343:18:Call -> U
+343:18:Attribute -> U
+343:18:Name -> U
+345:30:Call -> Inst:builtins.enumerate
+345:30:Name -> Class:builtins.enumerate
+345:40:Name -> U
+346:15:Name -> U
+346:26:Name -> U
+347:16:Call -> ERR
+347:16:Attribute -> BM:builtins.list.append
+347:16:Name -> List:0
+347:32:Name -> U
+347:37:Name -> U
+349:11:Call -> Const:int:0
+349:11:Name -> Func:builtins.len
+349:15:Name -> List:0
+349:28:Call -> ERR
+349:28:Name -> Func:builtins.len
+349:32:Name -> U
+350:12:Name -> U
+350:22:Name -> List:0
+355:7:Call -> Const:bool:True | Const:bool:False
+355:7:Name -> Func:salt.modules.win_path.remove._check_path
+355:19:Name -> U
+355:31:Name -> U
+356:8:Call -> Const:NoneType:None
+356:8:Name -> Func:salt.modules.win_path._update_local_path
+356:27:Name -> U
+358:11:Call -> Const:bool:True | Const:bool:False
+358:11:Name -> Func:salt.modules.win_path.remove._check_path
+358:23:Name -> Inst:builtins.list
+358:36:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+362:13:Call -> ERR
+362:13:Name -> ERR
+363:8:Name -> Const:str:'HKEY_LOCAL_MACHINE'
+363:14:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Control\\Ses
+363:19:Name -> Const:str:'PATH'
+363:26:Call -> Const:str:''
+363:26:Attribute -> BM:builtins.str.join
+363:35:Call -> Inst:builtins.NoneType | U | Inst:builtins.list | Dict:0 | List:0
+363:35:Attribute -> Func:salt.utils.data.decode
+363:35:Attribute -> Module:salt.utils.data
+363:35:Attribute -> Module:salt.utils
+363:35:Name -> Module:salt
+363:58:Name -> Inst:builtins.list
+363:73:Name -> Const:str:'REG_EXPAND_SZ'
+366:7:Name -> U
+366:18:Name -> U
+368:15:Call -> U
+368:15:Name -> Func:salt.modules.win_path.rehash
+370:15:Name -> U

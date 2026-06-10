@@ -1,0 +1,193 @@
+7:11:Call -> Inst:django.template.library.Library
+7:11:Name -> Class:django.template.library.Library
+12:21:Name -> Class:_pydatetime.datetime
+19:1:Attribute -> BM:django.template.library.Library.filter
+19:1:Name -> Inst:django.template.library.Library
+26:11:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Inst:django.templatetags.tz.datetimeobject
+26:11:Name -> Func:django.templatetags.tz.do_timezone
+26:23:Name -> U
+26:30:Call -> U
+26:30:Attribute -> Func:django.utils.timezone.get_current_timezone
+26:30:Name -> Module:django.utils.timezone
+29:1:Attribute -> BM:django.template.library.Library.filter
+29:1:Name -> Inst:django.template.library.Library
+34:11:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Inst:django.templatetags.tz.datetimeobject
+34:11:Name -> Func:django.templatetags.tz.do_timezone
+34:23:Name -> U
+34:30:Name -> Inst:_pydatetime.timezone
+37:1:Call -> Func:django.template.library.Library.filter.dec | U | Func:django.template.library.Library.filter.dec | Const:NoneType:None
+37:1:Attribute -> BM:django.template.library.Library.filter
+37:1:Name -> Inst:django.template.library.Library
+46:11:Call -> ERR
+46:11:Name -> Func:builtins.isinstance
+46:22:Name -> U
+46:29:Name -> Class:_pydatetime.datetime
+51:11:Call -> U
+51:11:Attribute -> Func:django.utils.timezone.is_naive
+51:11:Name -> Module:django.utils.timezone
+51:29:Name -> U
+52:31:Call -> U | Inst:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Inst:zoneinfo._zoneinfo.ZoneInfo
+52:31:Attribute -> Func:django.utils.timezone.get_default_timezone
+52:31:Name -> Module:django.utils.timezone
+53:20:Call -> U
+53:20:Attribute -> Func:django.utils.timezone.make_aware
+53:20:Name -> Module:django.utils.timezone
+53:40:Name -> U
+53:47:Name -> U | Inst:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Inst:zoneinfo._zoneinfo.ZoneInfo
+55:11:Name -> Class:builtins.Exception
+59:7:Call -> ERR
+59:7:Name -> Func:builtins.isinstance
+59:18:Name -> U
+59:23:Name -> Class:_pydatetime.tzinfo
+60:13:Name -> U
+61:9:Call -> ERR
+61:9:Name -> Func:builtins.isinstance
+61:20:Name -> U
+61:25:Name -> Class:builtins.str
+63:17:Call -> U | Inst:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Inst:zoneinfo._zoneinfo.ZoneInfo
+63:17:Attribute -> U | Class:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Class:zoneinfo._zoneinfo.ZoneInfo
+63:17:Name -> Module:zoneinfo
+63:35:Name -> U
+64:15:Attribute -> Class:zoneinfo._common.ZoneInfoNotFoundError
+64:15:Name -> Module:zoneinfo
+69:13:Call -> U | Inst:_pydatetime.datetime
+69:13:Attribute -> Func:django.utils.timezone.localtime
+69:13:Name -> Module:django.utils.timezone
+69:32:Name -> U
+69:39:Name -> U | Inst:_zoneinfo.zoneinfo._zoneinfo.ZoneInfo | Inst:zoneinfo._zoneinfo.ZoneInfo
+73:13:Call -> Inst:django.templatetags.tz.datetimeobject
+73:13:Name -> Class:django.templatetags.tz.datetimeobject
+74:8:Attribute -> U
+74:8:Name -> U | Inst:_pydatetime.datetime
+75:8:Attribute -> U
+75:8:Name -> U | Inst:_pydatetime.datetime
+76:8:Attribute -> U
+76:8:Name -> U | Inst:_pydatetime.datetime
+77:8:Attribute -> U
+77:8:Name -> U | Inst:_pydatetime.datetime
+78:8:Attribute -> U
+78:8:Name -> U | Inst:_pydatetime.datetime
+79:8:Attribute -> U
+79:8:Name -> U | Inst:_pydatetime.datetime
+80:8:Attribute -> U
+80:8:Name -> U | Inst:_pydatetime.datetime
+81:8:Attribute -> U | Const:NoneType:None
+81:8:Name -> U | Inst:_pydatetime.datetime
+83:4:Name -> Inst:django.templatetags.tz.datetimeobject
+84:11:Name -> Inst:django.templatetags.tz.datetimeobject
+90:20:Name -> Class:django.template.base.Node
+96:8:Name -> Inst:django.templatetags.tz.LocalTimeNode
+96:24:Name -> U
+97:8:Name -> Inst:django.templatetags.tz.LocalTimeNode
+97:22:Name -> U
+100:22:Attribute -> U
+100:22:Name -> U
+101:8:Name -> U
+101:25:Attribute -> U
+101:25:Name -> Inst:django.templatetags.tz.LocalTimeNode
+102:17:Call -> U
+102:17:Attribute -> U
+102:17:Attribute -> U
+102:17:Name -> Inst:django.templatetags.tz.LocalTimeNode
+102:38:Name -> U
+103:8:Name -> U
+103:25:Name -> U
+104:15:Name -> U
+107:19:Name -> Class:django.template.base.Node
+113:8:Name -> Inst:django.templatetags.tz.TimezoneNode
+113:24:Name -> U
+114:8:Name -> Inst:django.templatetags.tz.TimezoneNode
+114:18:Name -> U
+117:13:Call -> Inst:django.utils.timezone.override
+117:13:Attribute -> Class:django.utils.timezone.override
+117:13:Name -> Module:django.utils.timezone
+117:31:Call -> U
+117:31:Attribute -> U
+117:31:Attribute -> U
+117:31:Name -> Inst:django.templatetags.tz.TimezoneNode
+117:47:Name -> U
+118:21:Call -> U
+118:21:Attribute -> U
+118:21:Attribute -> U
+118:21:Name -> Inst:django.templatetags.tz.TimezoneNode
+118:42:Name -> U
+119:15:Name -> U
+122:29:Name -> Class:django.template.base.Node
+128:8:Name -> Inst:django.templatetags.tz.GetCurrentTimezoneNode
+128:24:Name -> U
+131:8:Name -> U
+131:16:Attribute -> U
+131:16:Name -> Inst:django.templatetags.tz.GetCurrentTimezoneNode
+131:33:Call -> U
+131:33:Attribute -> Func:django.utils.timezone.get_current_timezone_name
+131:33:Name -> Module:django.utils.timezone
+135:1:Call -> BM:django.template.library.Library.tag_function | Const:NoneType:None | U | Func:django.template.library.Library.tag.dec | Const:NoneType:None
+135:1:Attribute -> BM:django.template.library.Library.tag
+135:1:Name -> Inst:django.template.library.Library
+145:11:Call -> U
+145:11:Attribute -> U
+145:11:Name -> U
+146:7:Call -> ERR
+146:7:Name -> Func:builtins.len
+146:11:Name -> U
+148:9:Call -> ERR
+148:9:Name -> Func:builtins.len
+148:13:Name -> U
+148:26:Name -> U
+149:14:Call -> ExcInst:django.template.exceptions.TemplateSyntaxError
+149:14:Name -> Class:django.template.exceptions.TemplateSyntaxError
+149:74:Name -> U
+151:17:Name -> U
+152:15:Call -> U
+152:15:Attribute -> U
+152:15:Name -> U
+153:4:Call -> U
+153:4:Attribute -> U
+153:4:Name -> U
+154:11:Call -> Inst:django.templatetags.tz.LocalTimeNode
+154:11:Name -> Class:django.templatetags.tz.LocalTimeNode
+154:25:Name -> U
+154:35:Name -> Const:bool:True | U
+157:1:Call -> BM:django.template.library.Library.tag_function | Const:NoneType:None | U | Func:django.template.library.Library.tag.dec | Const:NoneType:None
+157:1:Attribute -> BM:django.template.library.Library.tag
+157:1:Name -> Inst:django.template.library.Library
+172:11:Call -> U
+172:11:Attribute -> U
+172:11:Name -> U
+173:7:Call -> ERR
+173:7:Name -> Func:builtins.len
+173:11:Name -> U
+174:14:Call -> ExcInst:django.template.exceptions.TemplateSyntaxError
+174:14:Name -> Class:django.template.exceptions.TemplateSyntaxError
+174:73:Name -> U
+175:9:Call -> U
+175:9:Attribute -> U
+175:9:Name -> U
+175:31:Name -> U
+176:15:Call -> U
+176:15:Attribute -> U
+176:15:Name -> U
+177:4:Call -> U
+177:4:Attribute -> U
+177:4:Name -> U
+178:11:Call -> Inst:django.templatetags.tz.TimezoneNode
+178:11:Name -> Class:django.templatetags.tz.TimezoneNode
+178:24:Name -> U
+178:34:Name -> U
+181:1:Call -> BM:django.template.library.Library.tag_function | Const:NoneType:None | U | Func:django.template.library.Library.tag.dec | Const:NoneType:None
+181:1:Attribute -> BM:django.template.library.Library.tag
+181:1:Name -> Inst:django.template.library.Library
+195:11:Call -> U
+195:11:Attribute -> U
+195:11:Attribute -> U
+195:11:Name -> U
+196:7:Call -> ERR
+196:7:Name -> Func:builtins.len
+196:11:Name -> U
+196:25:Name -> U
+197:14:Call -> ExcInst:django.template.exceptions.TemplateSyntaxError
+197:14:Name -> Class:django.template.exceptions.TemplateSyntaxError
+198:71:Name -> U
+200:11:Call -> Inst:django.templatetags.tz.GetCurrentTimezoneNode
+200:11:Name -> Class:django.templatetags.tz.GetCurrentTimezoneNode
+200:34:Name -> U

@@ -1,0 +1,1671 @@
+41:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+41:6:Attribute -> Func:logging.getLogger
+41:6:Name -> Module:logging
+41:24:Name -> Const:str:'salt.modules.iptables' | Const:str:'__main__'
+48:11:Call -> Const:NoneType:None | Const:str:'iptables' | U
+48:11:Attribute -> Func:salt.utils.path.which
+48:11:Attribute -> Module:salt.utils.path
+48:11:Attribute -> Module:salt.utils
+48:11:Name -> Module:salt
+61:7:Name -> Const:str:'ipv4' | U
+62:15:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+62:15:Attribute -> Func:salt.utils.path.which
+62:15:Attribute -> Module:salt.utils.path
+62:15:Attribute -> Module:salt.utils
+62:15:Name -> Module:salt
+64:15:Call -> Const:NoneType:None | Const:str:'iptables' | U
+64:15:Attribute -> Func:salt.utils.path.which
+64:15:Attribute -> Module:salt.utils.path
+64:15:Attribute -> Module:salt.utils
+64:15:Name -> Module:salt
+76:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+76:13:Name -> Func:salt.modules.iptables._iptables_cmd
+76:27:Name -> Const:str:'ipv4' | U
+77:7:Name -> U
+77:17:Call -> ERR
+77:17:Name -> ERR
+77:44:Name -> Const:str:'None --help' | Const:str:'ip6tables --help' | Const:str:'Uninferable --help'
+86:7:Name -> ERR
+87:11:Name -> Const:str:'ipv4' | U
+91:9:Name -> ERR
+92:11:Name -> Const:str:'ipv4' | U
+96:9:Name -> ERR
+98:11:Name -> Const:str:'ipv4' | U
+102:9:Name -> ERR
+103:11:Name -> Const:str:'ipv4' | U
+107:9:Name -> ERR
+110:9:Name -> ERR
+111:11:Name -> Const:str:'ipv4' | U
+115:9:Name -> ERR
+116:11:Name -> Const:str:'ipv4' | U
+120:9:Name -> ERR
+121:11:Name -> Const:str:'ipv4' | U
+126:14:Call -> ExcInst:salt.exceptions.SaltException
+126:14:Name -> Class:salt.exceptions.SaltException
+128:14:Call -> U
+128:14:Attribute -> BM:builtins.str.format
+128:41:Name -> ERR
+144:13:Call -> ERR
+144:13:Name -> ERR
+145:11:Name -> U
+161:38:Name -> ERR
+162:8:Name -> ERR
+163:23:Name -> Const:NoneType:None | U
+163:34:Call -> U
+163:34:Name -> Func:salt.modules.iptables._conf_save_filters
+165:16:Call -> ERR
+165:16:Attribute -> ERR
+165:16:Name -> ERR
+165:60:Call -> U
+165:60:Attribute -> Func:re.compile
+165:60:Name -> Module:re
+165:71:Name -> U
+166:19:Attribute -> Class:re._constants.error
+166:19:Name -> Module:re
+167:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+167:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+167:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+167:61:Name -> U
+167:70:Name -> ExcInst:re._constants.error
+170:7:Name -> ERR
+173:12:Name -> U
+174:24:Call -> U
+174:24:Attribute -> U
+174:24:Name -> U
+175:19:Call -> ERR
+175:19:Name -> Func:builtins.any
+175:23:Call -> ERR
+175:23:Attribute -> ERR
+175:23:Name -> ERR
+175:34:Name -> U
+175:51:Name -> ERR
+177:15:Call -> Const:str:''
+177:15:Attribute -> BM:builtins.str.join
+177:23:Name -> U
+179:11:Name -> U
+195:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+195:13:Name -> Func:salt.modules.iptables._iptables_cmd
+195:27:Name -> Const:str:'ipv4' | U
+196:10:Call -> ERR
+196:10:Attribute -> ERR
+196:10:Call -> ERR
+196:10:Name -> ERR
+196:37:Name -> Const:str:'None --version' | Const:str:'ip6tables --version' | Const:str:'Uninferable --version'
+197:11:Name -> U
+266:19:Name -> Dict:0
+267:8:Name -> Dict:0
+267:25:Call -> ERR
+267:25:Attribute -> BM:builtins.dict.pop
+267:25:Name -> Dict:0
+270:4:Call -> ERR
+270:4:Attribute -> BM:builtins.dict.pop
+270:4:Name -> Dict:0
+271:4:Call -> ERR
+271:4:Attribute -> BM:builtins.dict.pop
+271:4:Name -> Dict:0
+273:18:Call -> Inst:builtins.list
+273:18:Name -> Class:builtins.list
+273:23:Name -> U
+274:11:Name -> U
+274:21:Name -> Dict:0
+275:16:Name -> Dict:0
+275:23:Name -> U
+279:19:Call -> U
+279:19:Attribute -> Func:re.compile
+279:19:Name -> Module:re
+288:16:Call -> Const:str:''
+288:16:Name -> Class:builtins.str
+288:20:Name -> Dict:0
+288:27:Name -> U
+289:11:Call -> ERR
+289:11:Attribute -> BM:builtins.str.startswith
+289:11:Name -> Const:str:''
+289:36:Call -> ERR
+289:36:Attribute -> BM:builtins.str.startswith
+289:36:Name -> Const:str:''
+290:12:Name -> Dict:0
+290:19:Name -> U
+290:26:Call -> U
+290:26:Attribute -> Func:re.sub
+290:26:Name -> Module:re
+290:33:Name -> U
+290:51:Name -> Const:str:''
+294:15:Name -> Dict:0
+295:8:Call -> ERR
+295:8:Attribute -> BM:builtins.list.append
+295:8:Name -> List:0
+295:20:Call -> U
+295:20:Attribute -> BM:builtins.str.format
+295:37:Call -> Const:str:'! ' | Const:str:''
+295:37:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+295:63:Name -> Dict:0
+296:12:Name -> Dict:0
+298:15:Name -> Dict:0
+299:8:Call -> ERR
+299:8:Attribute -> BM:builtins.list.append
+299:8:Name -> List:0
+299:20:Call -> U
+299:20:Attribute -> BM:builtins.str.format
+299:37:Call -> Const:str:'! ' | Const:str:''
+299:37:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+299:63:Name -> Dict:0
+300:12:Name -> Dict:0
+302:18:Name -> Dict:0
+302:29:Call -> ERR
+302:29:Attribute -> BM:builtins.dict.get
+302:29:Name -> Dict:0
+303:8:Name -> Dict:0
+303:29:Name -> Dict:0
+304:12:Name -> Dict:0
+306:21:Name -> Dict:0
+307:15:Name -> Const:bool:False
+308:12:Call -> ERR
+308:12:Attribute -> BM:builtins.list.append
+308:12:Name -> List:0
+309:16:Call -> U
+309:16:Attribute -> BM:builtins.str.format
+309:33:Call -> Const:str:'! ' | Const:str:''
+309:33:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+309:65:Name -> Dict:0
+312:12:Name -> Dict:0
+314:18:Name -> Dict:0
+315:22:Name -> Dict:0
+316:15:Call -> ERR
+316:15:Name -> Func:builtins.isinstance
+316:26:Name -> U
+316:39:Name -> Class:builtins.list
+317:26:Call -> U
+317:26:Attribute -> U
+317:26:Name -> U
+318:21:Name -> U
+319:12:Call -> ERR
+319:12:Attribute -> BM:builtins.list.append
+319:12:Name -> List:0
+319:30:Name -> U
+320:26:Name -> Dict:0
+320:37:Call -> U
+320:37:Attribute -> U
+320:37:Name -> U
+321:16:Call -> ERR
+321:16:Attribute -> BM:builtins.list.append
+321:16:Name -> List:0
+321:28:Call -> U
+321:28:Attribute -> BM:builtins.str.format
+321:47:Name -> Dict:0
+322:20:Name -> Dict:0
+323:22:Name -> Dict:0
+323:33:Call -> ERR
+323:33:Attribute -> BM:builtins.dict.get
+323:33:Name -> Dict:0
+324:12:Call -> ERR
+324:12:Attribute -> BM:builtins.list.append
+324:12:Name -> List:0
+325:16:Call -> U
+325:16:Attribute -> BM:builtins.str.format
+325:38:Call -> Const:str:'! ' | Const:str:''
+325:38:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+325:67:Name -> Dict:0
+327:16:Name -> Dict:0
+328:12:Name -> Dict:0
+330:22:Name -> Dict:0
+331:11:Call -> ERR
+331:11:Name -> Func:builtins.isinstance
+331:22:Name -> Dict:0
+331:43:Name -> Class:builtins.str
+332:12:Name -> Dict:0
+332:35:Name -> Dict:0
+333:25:Name -> Dict:0
+335:15:Call -> U
+335:15:Attribute -> U
+335:15:Name -> U
+335:44:Call -> U
+335:44:Attribute -> U
+335:44:Name -> U
+337:28:Call -> U
+337:28:Attribute -> Func:re.sub
+337:28:Name -> Module:re
+337:35:Name -> U
+337:53:Name -> U
+338:12:Call -> ERR
+338:12:Attribute -> BM:builtins.list.append
+338:12:Name -> List:0
+338:34:Name -> Const:str:'' | Const:str:'! '
+338:66:Name -> U
+339:12:Name -> Dict:0
+341:22:Name -> Dict:0
+342:29:Name -> List:0
+343:12:Call -> ERR
+343:12:Attribute -> BM:builtins.list.append
+343:12:Name -> List:0
+345:8:Call -> ERR
+345:8:Attribute -> BM:builtins.list.append
+345:8:Name -> List:0
+346:12:Call -> U
+346:12:Attribute -> BM:builtins.str.format
+346:34:Call -> Const:str:'! ' | Const:str:''
+346:34:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+346:67:Name -> Dict:0
+349:12:Name -> Dict:0
+351:18:Name -> Dict:0
+352:8:Call -> ERR
+352:8:Attribute -> BM:builtins.list.append
+352:8:Name -> List:0
+352:20:Call -> U
+352:20:Attribute -> BM:builtins.str.format
+352:42:Call -> Const:str:'! ' | Const:str:''
+352:42:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+352:71:Name -> Dict:0
+353:12:Name -> Dict:0
+355:18:Name -> Dict:0
+356:8:Call -> ERR
+356:8:Attribute -> BM:builtins.list.append
+356:8:Name -> List:0
+356:20:Call -> U
+356:20:Attribute -> BM:builtins.str.format
+356:42:Call -> Const:str:'! ' | Const:str:''
+356:42:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+356:71:Name -> Dict:0
+357:12:Name -> Dict:0
+360:11:Name -> Const:str:'dports' | Const:str:'sports'
+360:28:Name -> Dict:0
+361:37:Name -> List:0
+362:16:Call -> ERR
+362:16:Attribute -> BM:builtins.list.append
+362:16:Name -> List:0
+363:23:Name -> Const:bool:False | Const:bool:True
+366:23:Name -> Dict:0
+366:30:Name -> Const:str:'dports' | Const:str:'sports'
+367:15:Call -> ERR
+367:15:Name -> Func:builtins.isinstance
+367:26:Name -> U
+367:36:Name -> Class:builtins.list
+368:19:Call -> ERR
+368:19:Name -> Func:builtins.any
+369:20:Name -> U
+370:29:Name -> U
+371:23:Call -> ERR
+371:23:Attribute -> BM:builtins.str.startswith
+371:23:Call -> Const:str:''
+371:23:Name -> Class:builtins.str
+371:27:Name -> U
+371:49:Call -> ERR
+371:49:Attribute -> BM:builtins.str.startswith
+371:49:Call -> Const:str:''
+371:49:Name -> Class:builtins.str
+371:53:Name -> U
+374:24:Call -> U
+374:24:Attribute -> Func:re.sub
+374:24:Name -> Module:re
+374:31:Name -> U
+374:49:Call -> Const:str:''
+374:49:Name -> Class:builtins.str
+374:53:Name -> U
+374:72:Name -> U
+376:20:Call -> ERR
+376:20:Attribute -> BM:builtins.list.append
+376:20:Name -> List:0
+377:25:Call -> Const:str:''
+377:25:Attribute -> BM:builtins.str.join
+377:34:Call -> Const:str:''
+377:34:Name -> Class:builtins.str
+377:38:Name -> U
+377:50:Name -> U
+379:19:Call -> ERR
+379:19:Attribute -> BM:builtins.str.startswith
+379:19:Call -> Const:str:''
+379:19:Name -> Class:builtins.str
+379:23:Name -> U
+379:52:Call -> ERR
+379:52:Attribute -> BM:builtins.str.startswith
+379:52:Call -> Const:str:''
+379:52:Name -> Class:builtins.str
+379:56:Name -> U
+380:29:Call -> U
+380:29:Attribute -> Func:re.sub
+380:29:Name -> Module:re
+380:36:Name -> U
+380:54:Name -> U
+381:20:Call -> ERR
+381:20:Attribute -> BM:builtins.list.append
+381:20:Name -> List:0
+383:29:Name -> U
+385:12:Call -> ERR
+385:12:Attribute -> BM:builtins.list.append
+385:12:Name -> List:0
+385:29:Name -> Const:str:'dports' | Const:str:'sports'
+385:45:Name -> Const:str:'' | U
+386:16:Name -> Dict:0
+386:23:Name -> Const:str:'dports' | Const:str:'sports'
+388:20:Name -> Dict:0
+389:31:Name -> List:0
+390:12:Call -> ERR
+390:12:Attribute -> BM:builtins.list.append
+390:12:Name -> List:0
+392:8:Call -> ERR
+392:8:Attribute -> BM:builtins.list.append
+392:8:Name -> List:0
+392:20:Call -> U
+392:20:Attribute -> BM:builtins.str.format
+392:44:Name -> Dict:0
+393:12:Name -> Dict:0
+397:16:Name -> Dict:0
+397:27:Name -> Dict:0
+398:8:Call -> ERR
+398:8:Attribute -> BM:builtins.list.append
+398:8:Name -> List:0
+398:20:Call -> U
+398:20:Attribute -> BM:builtins.str.format
+398:46:Call -> Const:str:'! ' | Const:str:''
+398:46:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+398:73:Name -> Dict:0
+399:12:Name -> Dict:0
+525:31:Name -> Tuple:112
+526:11:Name -> Const:str:'j' | Const:str:'jump' | Const:str:'add-set' | Const:str:'and-mark' | Const:str:'and-tos' | Const:str:'checksum-fill' | Const:str:'clamp-mss-to-pmtu' | Const:str:'clustermac' | Const:str:'ctevents' | Const:str:'ctmask' | Const:str:'del-set' | Const:str:'ecn-tcp-remove' | Const:str:'exist' | Const:str:'expevents' | Const:str:'gateway' | Const:str:'hash-init' | Const:str:'hashmode' | Const:str:'helper' | Const:str:'label' | Const:str:'local-node' | Const:str:'log-ip-options' | Const:str:'log-level' | Const:str:'log-prefix' | Const:str:'log-tcp-options' | Const:str:'log-tcp-sequence' | Const:str:'log-uid' | Const:str:'mask' | Const:str:'new' | Const:str:'nfmask' | Const:str:'nflog-group' | Const:str:'nflog-prefix' | Const:str:'nflog-range' | Const:str:'nflog-threshold' | Const:str:'nodst' | U
+526:34:Name -> Dict:0
+527:20:Name -> Dict:0
+527:27:Name -> Const:str:'j' | Const:str:'jump' | Const:str:'add-set' | Const:str:'and-mark' | Const:str:'and-tos' | Const:str:'checksum-fill' | Const:str:'clamp-mss-to-pmtu' | Const:str:'clustermac' | Const:str:'ctevents' | Const:str:'ctmask' | Const:str:'del-set' | Const:str:'ecn-tcp-remove' | Const:str:'exist' | Const:str:'expevents' | Const:str:'gateway' | Const:str:'hash-init' | Const:str:'hashmode' | Const:str:'helper' | Const:str:'label' | Const:str:'local-node' | Const:str:'log-ip-options' | Const:str:'log-level' | Const:str:'log-prefix' | Const:str:'log-tcp-options' | Const:str:'log-tcp-sequence' | Const:str:'log-uid' | Const:str:'mask' | Const:str:'new' | Const:str:'nfmask' | Const:str:'nflog-group' | Const:str:'nflog-prefix' | Const:str:'nflog-range' | Const:str:'nflog-threshold' | Const:str:'nodst' | Const:str:'notrack' | Const:str:'on-ip' | Const:str:'on-port' | Const:str:'or-mark' | Const:str:'or-tos' | Const:str:'persistent' | Const:str:'queue-balance' | Const:str:'queue-bypass' | Const:str:'queue-num' | Const:str:'random' | Const:str:'rateest-ewmalog' | U
+528:15:Name -> U
+529:16:Call -> ERR
+529:16:Attribute -> BM:builtins.list.append
+529:16:Name -> List:0
+529:39:Name -> Const:str:'j' | Const:str:'jump' | Const:str:'add-set' | Const:str:'and-mark' | Const:str:'and-tos' | Const:str:'checksum-fill' | Const:str:'clamp-mss-to-pmtu' | Const:str:'clustermac' | Const:str:'ctevents' | Const:str:'ctmask' | Const:str:'del-set' | Const:str:'ecn-tcp-remove' | Const:str:'exist' | Const:str:'expevents' | Const:str:'gateway' | Const:str:'hash-init' | Const:str:'hashmode' | Const:str:'helper' | Const:str:'label' | Const:str:'local-node' | Const:str:'log-ip-options' | Const:str:'log-level' | Const:str:'log-prefix' | Const:str:'log-tcp-options' | Const:str:'log-tcp-sequence' | Const:str:'log-uid' | Const:str:'mask' | Const:str:'new' | Const:str:'nfmask' | Const:str:'nflog-group' | Const:str:'nflog-prefix' | Const:str:'nflog-range' | Const:str:'nflog-threshold' | Const:str:'nodst' | Const:str:'notrack' | Const:str:'on-ip' | Const:str:'on-port' | Const:str:'or-mark' | Const:str:'or-tos' | Const:str:'persistent' | Const:str:'queue-balance' | Const:str:'queue-bypass' | Const:str:'queue-num' | Const:str:'random' | Const:str:'rateest-ewmalog' | Const:str:'rateest-interval' | Const:str:'rateest-name' | Const:str:'reject-with' | Const:str:'restore' | U
+530:17:Call -> ERR
+530:17:Name -> Func:builtins.any
+530:21:Name -> U
+530:32:Call -> Const:str:''
+530:32:Name -> Class:builtins.str
+530:36:Name -> U
+530:58:Attribute -> Const:str:' \t\n\r\x0b\x0c'
+530:58:Name -> Module:string
+531:16:Call -> ERR
+531:16:Attribute -> BM:builtins.list.append
+531:16:Name -> List:0
+531:39:Name -> Const:str:'j' | Const:str:'jump' | Const:str:'add-set' | Const:str:'and-mark' | Const:str:'and-tos' | Const:str:'checksum-fill' | Const:str:'clamp-mss-to-pmtu' | Const:str:'clustermac' | Const:str:'ctevents' | Const:str:'ctmask' | Const:str:'del-set' | Const:str:'ecn-tcp-remove' | Const:str:'exist' | Const:str:'expevents' | Const:str:'gateway' | Const:str:'hash-init' | Const:str:'hashmode' | Const:str:'helper' | Const:str:'label' | Const:str:'local-node' | Const:str:'log-ip-options' | Const:str:'log-level' | Const:str:'log-prefix' | Const:str:'log-tcp-options' | Const:str:'log-tcp-sequence' | Const:str:'log-uid' | Const:str:'mask' | Const:str:'new' | Const:str:'nfmask' | Const:str:'nflog-group' | Const:str:'nflog-prefix' | Const:str:'nflog-range' | Const:str:'nflog-threshold' | Const:str:'nodst' | Const:str:'notrack' | Const:str:'on-ip' | Const:str:'on-port' | Const:str:'or-mark' | Const:str:'or-tos' | Const:str:'persistent' | Const:str:'queue-balance' | Const:str:'queue-bypass' | Const:str:'queue-num' | Const:str:'random' | Const:str:'rateest-ewmalog' | Const:str:'rateest-interval' | Const:str:'rateest-name' | Const:str:'reject-with' | Const:str:'restore' | Const:str:'restore-mark' | U
+531:62:Name -> U
+533:16:Call -> ERR
+533:16:Attribute -> BM:builtins.list.append
+533:16:Name -> List:0
+533:39:Name -> Const:str:'j' | Const:str:'jump' | Const:str:'add-set' | Const:str:'and-mark' | Const:str:'and-tos' | Const:str:'checksum-fill' | Const:str:'clamp-mss-to-pmtu' | Const:str:'clustermac' | Const:str:'ctevents' | Const:str:'ctmask' | Const:str:'del-set' | Const:str:'ecn-tcp-remove' | Const:str:'exist' | Const:str:'expevents' | Const:str:'gateway' | Const:str:'hash-init' | Const:str:'hashmode' | Const:str:'helper' | Const:str:'label' | Const:str:'local-node' | Const:str:'log-ip-options' | Const:str:'log-level' | Const:str:'log-prefix' | Const:str:'log-tcp-options' | Const:str:'log-tcp-sequence' | Const:str:'log-uid' | Const:str:'mask' | Const:str:'new' | Const:str:'nfmask' | Const:str:'nflog-group' | Const:str:'nflog-prefix' | Const:str:'nflog-range' | Const:str:'nflog-threshold' | Const:str:'nodst' | Const:str:'notrack' | Const:str:'on-ip' | Const:str:'on-port' | Const:str:'or-mark' | Const:str:'or-tos' | Const:str:'persistent' | Const:str:'queue-balance' | Const:str:'queue-bypass' | Const:str:'queue-num' | Const:str:'random' | Const:str:'rateest-ewmalog' | Const:str:'rateest-interval' | Const:str:'rateest-name' | Const:str:'reject-with' | Const:str:'restore' | Const:str:'restore-mark' | Const:str:'save-mark' | U
+533:61:Name -> U
+534:16:Name -> Dict:0
+534:23:Name -> Const:str:'j' | Const:str:'jump' | Const:str:'add-set' | Const:str:'and-mark' | Const:str:'and-tos' | Const:str:'checksum-fill' | Const:str:'clamp-mss-to-pmtu' | Const:str:'clustermac' | Const:str:'ctevents' | Const:str:'ctmask' | Const:str:'del-set' | Const:str:'ecn-tcp-remove' | Const:str:'exist' | Const:str:'expevents' | Const:str:'gateway' | Const:str:'hash-init' | Const:str:'hashmode' | Const:str:'helper' | Const:str:'label' | Const:str:'local-node' | Const:str:'log-ip-options' | Const:str:'log-level' | Const:str:'log-prefix' | Const:str:'log-tcp-options' | Const:str:'log-tcp-sequence' | Const:str:'log-uid' | Const:str:'mask' | Const:str:'new' | Const:str:'nfmask' | Const:str:'nflog-group' | Const:str:'nflog-prefix' | Const:str:'nflog-range' | Const:str:'nflog-threshold' | Const:str:'nodst' | Const:str:'notrack' | Const:str:'on-ip' | Const:str:'on-port' | Const:str:'or-mark' | Const:str:'or-tos' | Const:str:'persistent' | Const:str:'queue-balance' | Const:str:'queue-bypass' | Const:str:'queue-num' | Const:str:'random' | Const:str:'rateest-ewmalog' | Const:str:'rateest-interval' | Const:str:'rateest-name' | Const:str:'reject-with' | Const:str:'restore' | Const:str:'restore-mark' | Const:str:'save-mark' | U
+536:15:Name -> Dict:0
+537:19:Call -> Const:str:'! ' | Const:str:''
+537:19:Name -> Func:salt.modules.iptables.build_rule.maybe_add_negation
+537:38:Name -> U
+540:16:Name -> Dict:0
+540:23:Name -> U
+541:22:Call -> ERR
+541:22:Name -> Func:builtins.len
+541:26:Name -> U
+542:22:Name -> U
+542:51:Name -> U
+543:8:Call -> ERR
+543:8:Attribute -> BM:builtins.list.append
+543:8:Name -> List:0
+543:23:Name -> Const:str:'! ' | Const:str:''
+543:33:Name -> Const:str:'-' | Const:str:'--'
+543:39:Name -> U
+543:44:Name -> Const:str:'' | Const:str:' Uninferable'
+545:12:Name -> List:0
+547:7:Name -> Const:NoneType:None | U
+548:15:Name -> Const:str:'filter' | U
+550:15:Name -> Const:NoneType:None | U
+552:15:Name -> Const:NoneType:None | U
+555:11:Name -> Const:NoneType:None | U
+560:27:Call -> Const:bool:True | Const:bool:False
+560:27:Name -> Func:salt.modules.iptables._has_option
+560:49:Name -> Const:str:'ipv4' | U
+562:15:Call -> U
+562:15:Attribute -> BM:builtins.str.format
+563:12:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+563:12:Name -> Func:salt.modules.iptables._iptables_cmd
+563:26:Name -> Const:str:'ipv4' | U
+564:12:Name -> Const:str:'--wait' | Const:str:''
+565:12:Name -> Const:str:'filter' | U
+566:12:Name -> Const:str:'-' | Const:str:'--' | Const:str:'-' | Const:str:'--'
+567:12:Name -> Const:NoneType:None | U
+568:12:Name -> Const:NoneType:None | U
+569:12:Name -> Const:str:'' | U
+570:12:Call -> Const:str:''
+570:12:Attribute -> BM:builtins.str.join
+570:21:Name -> List:0
+573:11:Call -> Const:str:''
+573:11:Attribute -> BM:builtins.str.join
+573:20:Name -> List:0
+589:11:Call -> Dict:0
+589:11:Name -> Func:salt.modules.iptables._parse_conf
+589:33:Name -> Const:NoneType:None | U
+589:51:Name -> Const:str:'ipv4' | U
+606:11:Call -> Dict:0
+606:11:Name -> Func:salt.modules.iptables._parse_conf
+606:43:Name -> Const:str:'ipv4' | U
+627:11:Name -> Const:NoneType:None | U
+630:12:Call -> Dict:0
+630:12:Name -> Func:salt.modules.iptables._parse_conf
+630:24:Name -> Const:NoneType:None | U
+630:42:Name -> Const:str:'ipv4' | U
+632:15:Name -> Dict:0
+632:21:Name -> Const:str:'filter' | U
+632:28:Name -> Const:NoneType:None | U
+633:11:Name -> Class:builtins.KeyError
+650:11:Name -> Const:NoneType:None | U
+653:12:Call -> Dict:0
+653:12:Name -> Func:salt.modules.iptables._parse_conf
+653:44:Name -> Const:str:'ipv4' | U
+655:15:Name -> Dict:0
+655:21:Name -> Const:str:'filter' | U
+655:28:Name -> Const:NoneType:None | U
+656:11:Name -> Class:builtins.KeyError
+673:11:Name -> Const:NoneType:None | U
+675:11:Name -> Const:NoneType:None | U
+678:23:Call -> Const:bool:True | Const:bool:False
+678:23:Name -> Func:salt.modules.iptables._has_option
+678:45:Name -> Const:str:'ipv4' | U
+679:10:Call -> U
+679:10:Attribute -> BM:builtins.str.format
+680:8:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+680:8:Name -> Func:salt.modules.iptables._iptables_cmd
+680:22:Name -> Const:str:'ipv4' | U
+680:31:Name -> Const:str:'--wait' | Const:str:''
+680:37:Name -> Const:str:'filter' | U
+680:44:Name -> Const:NoneType:None | U
+680:51:Name -> Const:NoneType:None | U
+682:10:Call -> ERR
+682:10:Name -> ERR
+682:37:Name -> U
+683:11:Name -> U
+699:7:Call -> Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+699:7:Name -> Func:salt.modules.iptables._conf
+699:23:Name -> Const:NoneType:None | U
+700:19:Call -> Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+700:19:Name -> Func:salt.modules.iptables._conf
+700:25:Name -> Const:str:'ipv4' | U
+702:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+702:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+702:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+702:36:Name -> Const:NoneType:None | U | Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+704:17:Call -> U
+704:17:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+704:17:Attribute -> Module:posixpath | Module:ntpath
+704:17:Name -> Module:os
+704:33:Name -> Const:NoneType:None | U | Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+705:11:Call -> Const:bool:False | U
+705:11:Attribute -> Func:genericpath.isdir | U
+705:11:Attribute -> Module:posixpath | Module:ntpath
+705:11:Name -> Module:os
+705:25:Name -> U
+706:8:Call -> Const:NoneType:None
+706:8:Attribute -> Func:os.makedirs
+706:8:Name -> Module:os
+706:20:Name -> U
+707:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+707:13:Name -> Func:salt.modules.iptables._iptables_cmd
+707:27:Name -> Const:str:'ipv4' | U
+708:10:Call -> ERR
+708:10:Name -> ERR
+708:37:Name -> Const:str:'None-save' | Const:str:'ip6tables-save' | Const:str:'Uninferable-save'
+711:7:Call -> U
+711:7:Name -> Func:salt.modules.iptables._conf_save_filters
+712:14:Call -> Const:str:'' | U
+712:14:Name -> Func:salt.modules.iptables._regex_iptables_save
+712:35:Name -> U
+714:10:Call -> ERR
+714:10:Name -> ERR
+714:33:Name -> Const:NoneType:None | U | Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+714:43:Name -> U | Const:str:''
+715:11:Name -> U
+739:11:Name -> Const:NoneType:None | U
+741:11:Name -> Const:NoneType:None | U
+743:14:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+743:14:Name -> Func:salt.modules.iptables._iptables_cmd
+743:28:Name -> Const:str:'ipv4' | U
+745:7:Call -> Const:bool:True | Const:bool:False
+745:7:Name -> Func:salt.modules.iptables._has_option
+745:30:Name -> Const:str:'ipv4' | U
+746:17:Name -> Const:NoneType:None | Const:str:'ip6tables' | U
+746:30:Name -> Const:str:'filter' | U
+746:41:Name -> Const:NoneType:None | U
+746:49:Name -> Const:NoneType:None | U
+747:8:Call -> ERR
+747:8:Name -> ERR
+747:35:Name -> Const:str:'None -t filter -C None None' | Const:str:'None -t filter -C None Uninferable' | Const:str:'None -t filter -C Uninferable None' | Const:str:'None -t filter -C Uninferable Uninferab | Const:str:'None -t Uninferable -C None None' | Const:str:'None -t Uninferable -C None Uninferable | Const:str:'None -t Uninferable -C Uninferable None | Const:str:'None -t Uninferable -C Uninferable Unin | Const:str:'ip6tables -t filter -C None None' | Const:str:'ip6tables -t filter -C None Uninferable | Const:str:'ip6tables -t filter -C Uninferable None | Const:str:'ip6tables -t filter -C Uninferable Unin | Const:str:'ip6tables -t Uninferable -C None None' | Const:str:'ip6tables -t Uninferable -C None Uninfe | Const:str:'ip6tables -t Uninferable -C Uninferable | Const:str:'ip6tables -t Uninferable -C Uninferable | Const:str:'Uninferable -t filter -C None None' | Const:str:'Uninferable -t filter -C None Uninferab | Const:str:'Uninferable -t filter -C Uninferable No | Const:str:'Uninferable -t filter -C Uninferable Un | Const:str:'Uninferable -t Uninferable -C None None | Const:str:'Uninferable -t Uninferable -C None Unin | Const:str:'Uninferable -t Uninferable -C Uninferab | Const:str:'Uninferable -t Uninferable -C Uninferab
+748:19:Name -> ERR
+750:22:Call -> ERR
+750:22:Name -> Func:builtins.hex
+750:26:Call -> U
+750:26:Attribute -> Func:uuid.getnode
+750:26:Name -> Module:uuid
+753:8:Call -> ERR
+753:8:Name -> ERR
+753:31:Name -> Const:NoneType:None | Const:str:'ip6tables' | U
+753:44:Name -> Const:str:'filter' | U
+753:55:Name -> U
+754:8:Call -> ERR
+754:8:Name -> ERR
+754:31:Name -> Const:NoneType:None | Const:str:'ip6tables' | U
+754:44:Name -> Const:str:'filter' | U
+754:55:Name -> U
+754:69:Name -> Const:NoneType:None | U
+756:14:Call -> ERR
+756:14:Name -> ERR
+756:44:Name -> Const:NoneType:None | Const:str:'ip6tables' | U
+759:8:Call -> ERR
+759:8:Name -> ERR
+759:31:Name -> Const:NoneType:None | Const:str:'ip6tables' | U
+759:44:Name -> Const:str:'filter' | U
+759:55:Name -> U
+760:8:Call -> ERR
+760:8:Name -> ERR
+760:31:Name -> Const:NoneType:None | Const:str:'ip6tables' | U
+760:44:Name -> Const:str:'filter' | U
+760:55:Name -> U
+762:17:Call -> U
+762:17:Attribute -> U
+762:17:Name -> U
+763:15:Call -> U
+763:15:Attribute -> U
+763:15:Name -> U
+763:34:Name -> U
+764:19:Call -> U
+764:19:Attribute -> U
+764:19:Name -> U
+764:29:Name -> U
+764:42:Name -> Const:NoneType:None | U
+764:52:Call -> U
+764:52:Attribute -> U
+764:52:Name -> U
+769:11:Name -> U
+771:11:Name -> U
+790:11:Name -> Const:NoneType:None | U
+793:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+793:13:Name -> Func:salt.modules.iptables._iptables_cmd
+793:27:Name -> Const:str:'ipv4' | U
+793:45:Name -> Const:str:'filter' | U
+794:10:Call -> ERR
+794:10:Attribute -> ERR
+794:10:Call -> ERR
+794:10:Name -> ERR
+794:37:Name -> Const:str:'None-save -t filter' | Const:str:'None-save -t Uninferable' | Const:str:'ip6tables-save -t filter' | Const:str:'ip6tables-save -t Uninferable' | Const:str:'Uninferable-save -t filter' | Const:str:'Uninferable-save -t Uninferable'
+794:51:Name -> Const:NoneType:None | U
+796:7:Name -> U
+801:11:Name -> U | Const:bool:True | Const:bool:False
+820:11:Name -> Const:NoneType:None | U
+823:23:Call -> Const:bool:True | Const:bool:False
+823:23:Name -> Func:salt.modules.iptables._has_option
+823:45:Name -> Const:str:'ipv4' | U
+824:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+824:13:Name -> Func:salt.modules.iptables._iptables_cmd
+824:27:Name -> Const:str:'ipv4' | U
+824:37:Name -> Const:str:'--wait' | Const:str:''
+824:47:Name -> Const:str:'filter' | U
+824:58:Name -> Const:NoneType:None | U
+825:10:Call -> ERR
+825:10:Name -> ERR
+825:37:Name -> Const:str:'None --wait -t filter -N None' | Const:str:'None --wait -t filter -N Uninferable' | Const:str:'None --wait -t Uninferable -N None' | Const:str:'None --wait -t Uninferable -N Uninferab | Const:str:'None  -t filter -N None' | Const:str:'None  -t filter -N Uninferable' | Const:str:'None  -t Uninferable -N None' | Const:str:'None  -t Uninferable -N Uninferable' | Const:str:'ip6tables --wait -t filter -N None' | Const:str:'ip6tables --wait -t filter -N Uninferab | Const:str:'ip6tables --wait -t Uninferable -N None | Const:str:'ip6tables --wait -t Uninferable -N Unin | Const:str:'ip6tables  -t filter -N None' | Const:str:'ip6tables  -t filter -N Uninferable' | Const:str:'ip6tables  -t Uninferable -N None' | Const:str:'ip6tables  -t Uninferable -N Uninferabl | Const:str:'Uninferable --wait -t filter -N None' | Const:str:'Uninferable --wait -t filter -N Uninfer | Const:str:'Uninferable --wait -t Uninferable -N No | Const:str:'Uninferable --wait -t Uninferable -N Un | Const:str:'Uninferable  -t filter -N None' | Const:str:'Uninferable  -t filter -N Uninferable' | Const:str:'Uninferable  -t Uninferable -N None' | Const:str:'Uninferable  -t Uninferable -N Uninfera
+827:11:Name -> U
+829:11:Name -> U | Const:bool:True
+848:11:Name -> Const:NoneType:None | U
+851:23:Call -> Const:bool:True | Const:bool:False
+851:23:Name -> Func:salt.modules.iptables._has_option
+851:45:Name -> Const:str:'ipv4' | U
+852:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+852:13:Name -> Func:salt.modules.iptables._iptables_cmd
+852:27:Name -> Const:str:'ipv4' | U
+852:37:Name -> Const:str:'--wait' | Const:str:''
+852:47:Name -> Const:str:'filter' | U
+852:58:Name -> Const:NoneType:None | U
+853:10:Call -> ERR
+853:10:Name -> ERR
+853:37:Name -> Const:str:'None --wait -t filter -X None' | Const:str:'None --wait -t filter -X Uninferable' | Const:str:'None --wait -t Uninferable -X None' | Const:str:'None --wait -t Uninferable -X Uninferab | Const:str:'None  -t filter -X None' | Const:str:'None  -t filter -X Uninferable' | Const:str:'None  -t Uninferable -X None' | Const:str:'None  -t Uninferable -X Uninferable' | Const:str:'ip6tables --wait -t filter -X None' | Const:str:'ip6tables --wait -t filter -X Uninferab | Const:str:'ip6tables --wait -t Uninferable -X None | Const:str:'ip6tables --wait -t Uninferable -X Unin | Const:str:'ip6tables  -t filter -X None' | Const:str:'ip6tables  -t filter -X Uninferable' | Const:str:'ip6tables  -t Uninferable -X None' | Const:str:'ip6tables  -t Uninferable -X Uninferabl | Const:str:'Uninferable --wait -t filter -X None' | Const:str:'Uninferable --wait -t filter -X Uninfer | Const:str:'Uninferable --wait -t Uninferable -X No | Const:str:'Uninferable --wait -t Uninferable -X Un | Const:str:'Uninferable  -t filter -X None' | Const:str:'Uninferable  -t filter -X Uninferable' | Const:str:'Uninferable  -t Uninferable -X None' | Const:str:'Uninferable  -t Uninferable -X Uninfera
+855:11:Name -> U
+857:11:Name -> U | Const:bool:True
+881:11:Name -> Const:NoneType:None | U
+883:11:Name -> Const:NoneType:None | U
+886:23:Call -> Const:bool:True | Const:bool:False
+886:23:Name -> Func:salt.modules.iptables._has_option
+886:45:Name -> Const:str:'ipv4' | U
+887:18:Call -> Const:str:'Error: Chain needs to be specified' | Const:str:'Error: Rule needs to be specified' | U | Const:bool:True | Const:bool:False | Const:bool:True
+887:18:Name -> Func:salt.modules.iptables.check
+887:24:Name -> Const:str:'filter' | U
+887:31:Name -> Const:NoneType:None | U
+887:38:Name -> Const:NoneType:None | U
+887:44:Name -> Const:str:'ipv4' | U
+888:7:Call -> ERR
+888:7:Name -> Func:builtins.isinstance
+888:18:Name -> Const:str:'Error: Chain needs to be specified' | Const:str:'Error: Rule needs to be specified' | U | Const:bool:True | Const:bool:False | Const:bool:True
+888:31:Name -> Class:builtins.bool
+888:41:Name -> Const:str:'Error: Chain needs to be specified' | Const:str:'Error: Rule needs to be specified' | U | Const:bool:True | Const:bool:False | Const:bool:True
+890:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+890:13:Name -> Func:salt.modules.iptables._iptables_cmd
+890:27:Name -> Const:str:'ipv4' | U
+890:37:Name -> Const:str:'--wait' | Const:str:''
+890:47:Name -> Const:str:'filter' | U
+890:58:Name -> Const:NoneType:None | U
+890:66:Name -> Const:NoneType:None | U
+891:10:Call -> ERR
+891:10:Name -> ERR
+891:37:Name -> Const:str:'None --wait -t filter -A None None' | Const:str:'None --wait -t filter -A None Uninferab | Const:str:'None --wait -t filter -A Uninferable No | Const:str:'None --wait -t filter -A Uninferable Un | Const:str:'None --wait -t Uninferable -A None None | Const:str:'None --wait -t Uninferable -A None Unin | Const:str:'None --wait -t Uninferable -A Uninferab | Const:str:'None --wait -t Uninferable -A Uninferab | Const:str:'None  -t filter -A None None' | Const:str:'None  -t filter -A None Uninferable' | Const:str:'None  -t filter -A Uninferable None' | Const:str:'None  -t filter -A Uninferable Uninfera | Const:str:'None  -t Uninferable -A None None' | Const:str:'None  -t Uninferable -A None Uninferabl | Const:str:'None  -t Uninferable -A Uninferable Non | Const:str:'None  -t Uninferable -A Uninferable Uni | Const:str:'ip6tables --wait -t filter -A None None | Const:str:'ip6tables --wait -t filter -A None Unin | Const:str:'ip6tables --wait -t filter -A Uninferab | Const:str:'ip6tables --wait -t filter -A Uninferab | Const:str:'ip6tables --wait -t Uninferable -A None | Const:str:'ip6tables --wait -t Uninferable -A None | Const:str:'ip6tables --wait -t Uninferable -A Unin | Const:str:'ip6tables --wait -t Uninferable -A Unin | Const:str:'ip6tables  -t filter -A None None' | Const:str:'ip6tables  -t filter -A None Uninferabl | U
+892:15:Name -> U
+921:11:Name -> Const:NoneType:None | U
+923:11:Name -> Const:NoneType:None | U
+925:11:Name -> Const:NoneType:None | U
+928:7:Name -> Const:NoneType:None | U
+929:16:Call -> Dict:0
+929:16:Name -> Func:salt.modules.iptables.get_rules
+929:33:Name -> Const:str:'ipv4' | U
+930:15:Call -> ERR
+930:15:Name -> Func:builtins.len
+930:19:Name -> Dict:0
+930:25:Name -> Const:str:'filter' | U
+930:32:Name -> Const:NoneType:None | U
+931:20:Name -> U
+931:27:Name -> Const:NoneType:None | U
+932:11:Name -> U
+935:23:Call -> Const:bool:True | Const:bool:False
+935:23:Name -> Func:salt.modules.iptables._has_option
+935:45:Name -> Const:str:'ipv4' | U
+936:18:Call -> Const:str:'Error: Chain needs to be specified' | Const:str:'Error: Rule needs to be specified' | U | Const:bool:True | Const:bool:False | Const:bool:True
+936:18:Name -> Func:salt.modules.iptables.check
+936:24:Name -> Const:str:'filter' | U
+936:31:Name -> Const:NoneType:None | U
+936:38:Name -> Const:NoneType:None | U
+936:44:Name -> Const:str:'ipv4' | U
+937:7:Call -> ERR
+937:7:Name -> Func:builtins.isinstance
+937:18:Name -> Const:str:'Error: Chain needs to be specified' | Const:str:'Error: Rule needs to be specified' | U | Const:bool:True | Const:bool:False | Const:bool:True
+937:31:Name -> Class:builtins.bool
+937:41:Name -> Const:str:'Error: Chain needs to be specified' | Const:str:'Error: Rule needs to be specified' | U | Const:bool:True | Const:bool:False | Const:bool:True
+939:10:Call -> U
+939:10:Attribute -> BM:builtins.str.format
+940:8:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+940:8:Name -> Func:salt.modules.iptables._iptables_cmd
+940:22:Name -> Const:str:'ipv4' | U
+940:31:Name -> Const:str:'--wait' | Const:str:''
+940:37:Name -> Const:str:'filter' | U
+940:44:Name -> Const:NoneType:None | U
+940:51:Name -> Const:NoneType:None | U | Const:int:1
+940:61:Name -> Const:NoneType:None | U
+942:10:Call -> ERR
+942:10:Name -> ERR
+942:37:Name -> U
+943:11:Name -> U
+971:7:Name -> Const:NoneType:None | U
+971:20:Name -> Const:NoneType:None | U
+974:7:Name -> Const:NoneType:None | U
+975:15:Name -> U
+977:23:Call -> Const:bool:True | Const:bool:False
+977:23:Name -> Func:salt.modules.iptables._has_option
+977:45:Name -> Const:str:'ipv4' | U
+978:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+978:13:Name -> Func:salt.modules.iptables._iptables_cmd
+978:27:Name -> Const:str:'ipv4' | U
+978:37:Name -> Const:str:'--wait' | Const:str:''
+978:47:Name -> U
+978:58:Name -> Const:NoneType:None | U
+978:66:Name -> Const:NoneType:None | U
+979:10:Call -> ERR
+979:10:Name -> ERR
+979:37:Name -> Const:str:'None --wait -t Uninferable -D None None | Const:str:'None --wait -t Uninferable -D None Unin | Const:str:'None --wait -t Uninferable -D Uninferab | Const:str:'None --wait -t Uninferable -D Uninferab | Const:str:'None  -t Uninferable -D None None' | Const:str:'None  -t Uninferable -D None Uninferabl | Const:str:'None  -t Uninferable -D Uninferable Non | Const:str:'None  -t Uninferable -D Uninferable Uni | Const:str:'ip6tables --wait -t Uninferable -D None | Const:str:'ip6tables --wait -t Uninferable -D None | Const:str:'ip6tables --wait -t Uninferable -D Unin | Const:str:'ip6tables --wait -t Uninferable -D Unin | Const:str:'ip6tables  -t Uninferable -D None None' | Const:str:'ip6tables  -t Uninferable -D None Uninf | Const:str:'ip6tables  -t Uninferable -D Uninferabl | Const:str:'ip6tables  -t Uninferable -D Uninferabl | Const:str:'Uninferable --wait -t Uninferable -D No | Const:str:'Uninferable --wait -t Uninferable -D No | Const:str:'Uninferable --wait -t Uninferable -D Un | Const:str:'Uninferable --wait -t Uninferable -D Un | Const:str:'Uninferable  -t Uninferable -D None Non | Const:str:'Uninferable  -t Uninferable -D None Uni | Const:str:'Uninferable  -t Uninferable -D Uninfera | Const:str:'Uninferable  -t Uninferable -D Uninfera
+980:11:Name -> U
+998:23:Call -> Const:bool:True | Const:bool:False
+998:23:Name -> Func:salt.modules.iptables._has_option
+998:45:Name -> Const:str:'ipv4' | U
+999:13:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+999:13:Name -> Func:salt.modules.iptables._iptables_cmd
+999:27:Name -> Const:str:'ipv4' | U
+999:37:Name -> Const:str:'--wait' | Const:str:''
+999:47:Name -> Const:str:'filter' | U
+999:58:Name -> Const:str:'' | U
+1000:10:Call -> ERR
+1000:10:Name -> ERR
+1000:37:Name -> Const:str:'None --wait -t filter -F ' | Const:str:'None --wait -t filter -F Uninferable' | Const:str:'None --wait -t Uninferable -F ' | Const:str:'None --wait -t Uninferable -F Uninferab | Const:str:'None  -t filter -F ' | Const:str:'None  -t filter -F Uninferable' | Const:str:'None  -t Uninferable -F ' | Const:str:'None  -t Uninferable -F Uninferable' | Const:str:'ip6tables --wait -t filter -F ' | Const:str:'ip6tables --wait -t filter -F Uninferab | Const:str:'ip6tables --wait -t Uninferable -F ' | Const:str:'ip6tables --wait -t Uninferable -F Unin | Const:str:'ip6tables  -t filter -F ' | Const:str:'ip6tables  -t filter -F Uninferable' | Const:str:'ip6tables  -t Uninferable -F ' | Const:str:'ip6tables  -t Uninferable -F Uninferabl | Const:str:'Uninferable --wait -t filter -F ' | Const:str:'Uninferable --wait -t filter -F Uninfer | Const:str:'Uninferable --wait -t Uninferable -F ' | Const:str:'Uninferable --wait -t Uninferable -F Un | Const:str:'Uninferable  -t filter -F ' | Const:str:'Uninferable  -t filter -F Uninferable' | Const:str:'Uninferable  -t Uninferable -F ' | Const:str:'Uninferable  -t Uninferable -F Uninfera
+1001:11:Name -> U
+1009:7:Call -> Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+1009:7:Name -> Func:salt.modules.iptables._conf
+1009:23:Name -> Const:NoneType:None | U
+1009:41:Name -> Const:bool:False | U
+1010:20:Call -> Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+1010:20:Name -> Func:salt.modules.iptables._conf
+1010:26:Name -> Const:str:'ipv4' | U
+1013:7:Name -> Const:NoneType:None | U | Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+1014:13:Call -> U
+1014:13:Attribute -> Func:salt.utils.files.fopen
+1014:13:Attribute -> Module:salt.utils.files
+1014:13:Attribute -> Module:salt.utils
+1014:13:Name -> Module:salt
+1014:36:Name -> U | Const:str:'/etc/sysconfig/ip6tables' | Const:str:'/etc/sysconfig/iptables' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/rules.v6' | Const:str:'/etc/iptables/rules.v4' | Const:str:'/var/lib/ip6tables/rules-save' | Const:str:'/var/lib/iptables/rules-save' | Const:str:'/etc/sysconfig/scripts/SuSEfirewall2-cu | Const:str:'/etc/iptables/iptables.rules' | Const:str:'/etc/iptables/ip6tables.rules' | Const:str:'/etc/iptables/rules6-save' | Const:str:'/etc/iptables/rules-save' | Const:str:'/etc/natinst/share/ip6tables.conf' | Const:str:'/etc/natinst/share/iptables.conf'
+1015:20:Call -> U
+1015:20:Attribute -> U
+1015:20:Name -> U
+1016:9:Name -> Const:bool:False | U
+1017:17:Call -> Const:NoneType:None | Const:str:'ip6tables' | U
+1017:17:Name -> Func:salt.modules.iptables._iptables_cmd
+1017:31:Name -> Const:str:'ipv4' | U
+1018:16:Call -> ERR
+1018:16:Name -> ERR
+1018:43:Name -> Const:str:'None-save' | Const:str:'ip6tables-save' | Const:str:'Uninferable-save'
+1020:14:Call -> ExcInst:salt.exceptions.SaltException
+1020:14:Name -> Class:salt.exceptions.SaltException
+1024:13:Call -> Inst:argparse.ArgumentParser
+1024:13:Name -> Func:salt.modules.iptables._parser
+1025:16:Call -> U
+1025:16:Attribute -> BM:builtins.str.splitlines | U
+1025:16:Name -> Const:str:'' | U
+1026:15:Call -> U
+1026:15:Attribute -> Func:salt.utils.stringutils.to_unicode
+1026:15:Attribute -> Module:salt.utils.stringutils
+1026:15:Attribute -> Module:salt.utils
+1026:15:Name -> Module:salt
+1026:49:Name -> U
+1027:11:Call -> U
+1027:11:Attribute -> U
+1027:11:Name -> U
+1028:20:Call -> U
+1028:20:Attribute -> U
+1028:20:Name -> U
+1029:12:Name -> Dict:0
+1029:16:Name -> U
+1030:13:Call -> U
+1030:13:Attribute -> U
+1030:13:Name -> U
+1031:20:Call -> U
+1031:20:Attribute -> U
+1031:20:Name -> U
+1032:20:Call -> U
+1032:20:Attribute -> U
+1032:20:Name -> U
+1033:12:Name -> Dict:0
+1033:16:Name -> Const:str:''
+1033:23:Name -> U
+1034:12:Name -> Dict:0
+1034:16:Name -> Const:str:''
+1034:23:Name -> U
+1034:42:Name -> U
+1035:23:Call -> U
+1035:23:Attribute -> U
+1035:23:Call -> U
+1035:23:Attribute -> U
+1035:23:Name -> U
+1036:31:Call -> U
+1036:31:Attribute -> U
+1036:31:Name -> U
+1037:12:Name -> Dict:0
+1037:16:Name -> Const:str:''
+1037:23:Name -> U
+1037:48:Name -> U
+1038:12:Name -> Dict:0
+1038:16:Name -> Const:str:''
+1038:23:Name -> U
+1038:46:Name -> U
+1039:12:Name -> Dict:0
+1039:16:Name -> Const:str:''
+1039:23:Name -> U
+1040:12:Name -> Dict:0
+1040:16:Name -> Const:str:''
+1040:23:Name -> U
+1041:13:Call -> U
+1041:13:Attribute -> U
+1041:13:Name -> U
+1042:19:Call -> List:0 | Inst:builtins.list | U
+1042:19:Attribute -> Func:salt.utils.args.shlex_split
+1042:19:Attribute -> Module:salt.utils.args
+1042:19:Attribute -> Module:salt.utils
+1042:19:Name -> Module:salt
+1042:47:Name -> U
+1044:18:Name -> Const:int:0
+1044:30:Call -> ERR
+1044:30:Name -> Func:builtins.len
+1044:34:Name -> List:0 | Inst:builtins.list | U
+1045:23:Name -> List:0 | Inst:builtins.list | U
+1045:28:Name -> Const:int:0
+1045:46:Call -> ERR
+1045:46:Attribute -> ERR
+1045:46:Name -> List:0 | Inst:builtins.list | U
+1045:51:Name -> Const:int:0
+1046:19:Name -> U
+1047:20:Name -> List:0 | Inst:builtins.list | U
+1047:25:Name -> Const:int:0
+1047:33:Name -> List:0 | Inst:builtins.list | U
+1047:38:Name -> Const:int:0
+1047:51:Name -> List:0 | Inst:builtins.list | U
+1047:56:Name -> Const:int:0
+1047:68:Name -> List:0 | Inst:builtins.list | U
+1047:73:Name -> Const:int:0
+1048:19:Call -> ERR
+1048:19:Attribute -> ERR
+1048:19:Name -> List:0 | Inst:builtins.list | U
+1048:24:Name -> Const:int:0
+1050:23:Call -> ERR
+1050:23:Attribute -> ERR
+1050:23:Name -> List:0 | Inst:builtins.list | U
+1050:28:Name -> Const:int:1
+1050:55:Name -> List:0 | Inst:builtins.list | U
+1050:60:Name -> Const:int:1
+1050:82:Name -> U
+1051:24:Call -> U
+1051:24:Attribute -> BM:builtins.list.insert | BM:builtins.list.insert | U
+1051:24:Name -> List:0 | Inst:builtins.list | U
+1051:36:Name -> Const:int:0 | Const:int:1
+1054:28:Name -> Const:int:0 | Const:int:1
+1054:40:Call -> ERR
+1054:40:Name -> Func:builtins.len
+1054:44:Name -> List:0 | Inst:builtins.list | U
+1055:32:Name -> List:0 | Inst:builtins.list | U
+1055:37:Name -> Const:int:0 | Const:int:1
+1056:36:Call -> ERR
+1056:36:Attribute -> ERR
+1056:36:Name -> List:0 | Inst:builtins.list | U
+1056:41:Name -> Const:int:0 | Const:int:1
+1058:28:Name -> List:0 | Inst:builtins.list | U
+1058:33:Name -> Const:int:0 | Const:int:1
+1058:47:Call -> U
+1058:47:Attribute -> BM:builtins.list.pop | BM:builtins.list.pop | U
+1058:47:Name -> List:0 | Inst:builtins.list | U
+1058:56:Name -> Const:int:0 | Const:int:1
+1060:15:Call -> ERR
+1060:15:Attribute -> ERR
+1060:15:Name -> List:0 | Inst:builtins.list | U
+1061:16:Call -> U
+1061:16:Attribute -> BM:builtins.list.append | BM:builtins.list.append | U
+1061:16:Name -> List:0 | Inst:builtins.list | U
+1063:22:Call -> Tuple:2
+1063:22:Attribute -> BM:argparse.ArgumentParser.parse_known_args
+1063:22:Name -> Inst:argparse.ArgumentParser
+1063:46:Name -> List:0 | Inst:builtins.list | U
+1064:26:Call -> ERR
+1064:26:Name -> Func:builtins.vars
+1064:31:Name -> U | Inst:argparse.Namespace
+1066:20:Name -> U
+1067:23:Name -> U
+1068:19:Name -> U
+1068:31:Name -> U
+1068:40:Name -> U
+1069:20:Name -> Dict:0
+1069:29:Name -> U
+1069:36:Name -> U
+1069:48:Name -> U
+1070:15:Name -> U
+1071:26:Call -> U
+1071:26:Attribute -> U
+1071:26:Name -> U
+1072:16:Name -> Dict:0
+1072:20:Name -> Const:str:''
+1072:27:Name -> U
+1072:54:Name -> U
+1072:65:Name -> Dict:0
+1073:12:Call -> ERR
+1073:12:Attribute -> ERR
+1073:12:Name -> Dict:0
+1073:16:Name -> Const:str:''
+1073:23:Name -> U
+1073:49:Name -> Dict:0
+1074:11:Name -> Dict:0
+1083:13:Call -> Inst:argparse.ArgumentParser
+1083:13:Attribute -> Class:argparse.ArgumentParser
+1083:13:Name -> Module:argparse
+1084:14:Attribute -> BM:argparse._ActionsContainer.add_argument
+1084:14:Name -> Inst:argparse.ArgumentParser
+1087:4:Call -> U
+1087:4:Name -> BM:argparse._ActionsContainer.add_argument
+1088:4:Call -> U
+1088:4:Name -> BM:argparse._ActionsContainer.add_argument
+1089:4:Call -> U
+1089:4:Name -> BM:argparse._ActionsContainer.add_argument
+1090:4:Call -> U
+1090:4:Name -> BM:argparse._ActionsContainer.add_argument
+1091:4:Call -> U
+1091:4:Name -> BM:argparse._ActionsContainer.add_argument
+1092:4:Call -> U
+1092:4:Name -> BM:argparse._ActionsContainer.add_argument
+1093:4:Call -> U
+1093:4:Name -> BM:argparse._ActionsContainer.add_argument
+1094:4:Call -> U
+1094:4:Name -> BM:argparse._ActionsContainer.add_argument
+1095:4:Call -> U
+1095:4:Name -> BM:argparse._ActionsContainer.add_argument
+1096:4:Call -> U
+1096:4:Name -> BM:argparse._ActionsContainer.add_argument
+1097:4:Call -> U
+1097:4:Name -> BM:argparse._ActionsContainer.add_argument
+1100:4:Call -> U
+1100:4:Name -> BM:argparse._ActionsContainer.add_argument
+1101:4:Call -> U
+1101:4:Name -> BM:argparse._ActionsContainer.add_argument
+1102:4:Call -> U
+1102:4:Name -> BM:argparse._ActionsContainer.add_argument
+1103:4:Call -> U
+1103:4:Name -> BM:argparse._ActionsContainer.add_argument
+1104:4:Call -> U
+1104:4:Name -> BM:argparse._ActionsContainer.add_argument
+1105:4:Call -> U
+1105:4:Name -> BM:argparse._ActionsContainer.add_argument
+1106:4:Call -> U
+1106:4:Name -> BM:argparse._ActionsContainer.add_argument
+1107:4:Call -> U
+1107:4:Name -> BM:argparse._ActionsContainer.add_argument
+1108:4:Call -> U
+1108:4:Name -> BM:argparse._ActionsContainer.add_argument
+1111:4:Call -> U
+1111:4:Name -> BM:argparse._ActionsContainer.add_argument
+1113:4:Call -> U
+1113:4:Name -> BM:argparse._ActionsContainer.add_argument
+1114:4:Call -> U
+1114:4:Name -> BM:argparse._ActionsContainer.add_argument
+1115:4:Call -> U
+1115:4:Name -> BM:argparse._ActionsContainer.add_argument
+1116:4:Call -> U
+1116:4:Name -> BM:argparse._ActionsContainer.add_argument
+1118:4:Call -> U
+1118:4:Name -> BM:argparse._ActionsContainer.add_argument
+1119:4:Call -> U
+1119:4:Name -> BM:argparse._ActionsContainer.add_argument
+1120:4:Call -> U
+1120:4:Name -> BM:argparse._ActionsContainer.add_argument
+1122:4:Call -> U
+1122:4:Name -> BM:argparse._ActionsContainer.add_argument
+1124:4:Call -> U
+1124:4:Name -> BM:argparse._ActionsContainer.add_argument
+1126:4:Call -> U
+1126:4:Name -> BM:argparse._ActionsContainer.add_argument
+1127:4:Call -> U
+1127:4:Name -> BM:argparse._ActionsContainer.add_argument
+1128:4:Call -> U
+1128:4:Name -> BM:argparse._ActionsContainer.add_argument
+1129:4:Call -> U
+1129:4:Name -> BM:argparse._ActionsContainer.add_argument
+1130:4:Call -> U
+1130:4:Name -> BM:argparse._ActionsContainer.add_argument
+1131:4:Call -> U
+1131:4:Name -> BM:argparse._ActionsContainer.add_argument
+1132:4:Call -> U
+1132:4:Name -> BM:argparse._ActionsContainer.add_argument
+1134:4:Call -> U
+1134:4:Name -> BM:argparse._ActionsContainer.add_argument
+1136:4:Call -> U
+1136:4:Name -> BM:argparse._ActionsContainer.add_argument
+1137:4:Call -> U
+1137:4:Name -> BM:argparse._ActionsContainer.add_argument
+1138:4:Call -> U
+1138:4:Name -> BM:argparse._ActionsContainer.add_argument
+1140:4:Call -> U
+1140:4:Name -> BM:argparse._ActionsContainer.add_argument
+1142:4:Call -> U
+1142:4:Name -> BM:argparse._ActionsContainer.add_argument
+1143:4:Call -> U
+1143:4:Name -> BM:argparse._ActionsContainer.add_argument
+1144:4:Call -> U
+1144:4:Name -> BM:argparse._ActionsContainer.add_argument
+1145:4:Call -> U
+1145:4:Name -> BM:argparse._ActionsContainer.add_argument
+1146:4:Call -> U
+1146:4:Name -> BM:argparse._ActionsContainer.add_argument
+1148:4:Call -> U
+1148:4:Name -> BM:argparse._ActionsContainer.add_argument
+1150:4:Call -> U
+1150:4:Name -> BM:argparse._ActionsContainer.add_argument
+1151:4:Call -> U
+1151:4:Name -> BM:argparse._ActionsContainer.add_argument
+1152:4:Call -> U
+1152:4:Name -> BM:argparse._ActionsContainer.add_argument
+1153:4:Call -> U
+1153:4:Name -> BM:argparse._ActionsContainer.add_argument
+1154:4:Call -> U
+1154:4:Name -> BM:argparse._ActionsContainer.add_argument
+1155:4:Call -> U
+1155:4:Name -> BM:argparse._ActionsContainer.add_argument
+1156:4:Call -> U
+1156:4:Name -> BM:argparse._ActionsContainer.add_argument
+1157:4:Call -> U
+1157:4:Name -> BM:argparse._ActionsContainer.add_argument
+1158:4:Call -> U
+1158:4:Name -> BM:argparse._ActionsContainer.add_argument
+1159:4:Call -> U
+1159:4:Name -> BM:argparse._ActionsContainer.add_argument
+1160:4:Call -> U
+1160:4:Name -> BM:argparse._ActionsContainer.add_argument
+1161:4:Call -> U
+1161:4:Name -> BM:argparse._ActionsContainer.add_argument
+1162:4:Call -> U
+1162:4:Name -> BM:argparse._ActionsContainer.add_argument
+1164:4:Call -> U
+1164:4:Name -> BM:argparse._ActionsContainer.add_argument
+1166:4:Call -> U
+1166:4:Name -> BM:argparse._ActionsContainer.add_argument
+1167:4:Call -> U
+1167:4:Name -> BM:argparse._ActionsContainer.add_argument
+1168:4:Call -> U
+1168:4:Name -> BM:argparse._ActionsContainer.add_argument
+1169:4:Call -> U
+1169:4:Name -> BM:argparse._ActionsContainer.add_argument
+1171:4:Call -> U
+1171:4:Name -> BM:argparse._ActionsContainer.add_argument
+1172:4:Call -> U
+1172:4:Name -> BM:argparse._ActionsContainer.add_argument
+1174:4:Call -> U
+1174:4:Name -> BM:argparse._ActionsContainer.add_argument
+1175:4:Call -> U
+1175:4:Name -> BM:argparse._ActionsContainer.add_argument
+1177:4:Call -> U
+1177:4:Name -> BM:argparse._ActionsContainer.add_argument
+1178:4:Call -> U
+1178:4:Name -> BM:argparse._ActionsContainer.add_argument
+1180:4:Call -> U
+1180:4:Name -> BM:argparse._ActionsContainer.add_argument
+1181:4:Call -> U
+1181:4:Name -> BM:argparse._ActionsContainer.add_argument
+1182:4:Call -> U
+1182:4:Name -> BM:argparse._ActionsContainer.add_argument
+1184:4:Call -> U
+1184:4:Name -> BM:argparse._ActionsContainer.add_argument
+1186:4:Call -> U
+1186:4:Name -> BM:argparse._ActionsContainer.add_argument
+1187:4:Call -> U
+1187:4:Name -> BM:argparse._ActionsContainer.add_argument
+1188:4:Call -> U
+1188:4:Name -> BM:argparse._ActionsContainer.add_argument
+1189:4:Call -> U
+1189:4:Name -> BM:argparse._ActionsContainer.add_argument
+1190:4:Call -> U
+1190:4:Name -> BM:argparse._ActionsContainer.add_argument
+1191:4:Call -> U
+1191:4:Name -> BM:argparse._ActionsContainer.add_argument
+1193:4:Call -> U
+1193:4:Name -> BM:argparse._ActionsContainer.add_argument
+1194:4:Call -> U
+1194:4:Name -> BM:argparse._ActionsContainer.add_argument
+1195:4:Call -> U
+1195:4:Name -> BM:argparse._ActionsContainer.add_argument
+1196:4:Call -> U
+1196:4:Name -> BM:argparse._ActionsContainer.add_argument
+1197:4:Call -> U
+1197:4:Name -> BM:argparse._ActionsContainer.add_argument
+1198:4:Call -> U
+1198:4:Name -> BM:argparse._ActionsContainer.add_argument
+1199:4:Call -> U
+1199:4:Name -> BM:argparse._ActionsContainer.add_argument
+1200:4:Call -> U
+1200:4:Name -> BM:argparse._ActionsContainer.add_argument
+1201:4:Call -> U
+1201:4:Name -> BM:argparse._ActionsContainer.add_argument
+1202:4:Call -> U
+1202:4:Name -> BM:argparse._ActionsContainer.add_argument
+1205:4:Call -> U
+1205:4:Name -> BM:argparse._ActionsContainer.add_argument
+1211:4:Call -> U
+1211:4:Name -> BM:argparse._ActionsContainer.add_argument
+1212:4:Call -> U
+1212:4:Name -> BM:argparse._ActionsContainer.add_argument
+1214:4:Call -> U
+1214:4:Name -> BM:argparse._ActionsContainer.add_argument
+1216:4:Call -> U
+1216:4:Name -> BM:argparse._ActionsContainer.add_argument
+1217:4:Call -> U
+1217:4:Name -> BM:argparse._ActionsContainer.add_argument
+1218:4:Call -> U
+1218:4:Name -> BM:argparse._ActionsContainer.add_argument
+1220:4:Call -> U
+1220:4:Name -> BM:argparse._ActionsContainer.add_argument
+1222:4:Call -> U
+1222:4:Name -> BM:argparse._ActionsContainer.add_argument
+1224:4:Call -> U
+1224:4:Name -> BM:argparse._ActionsContainer.add_argument
+1225:4:Call -> U
+1225:4:Name -> BM:argparse._ActionsContainer.add_argument
+1227:4:Call -> U
+1227:4:Name -> BM:argparse._ActionsContainer.add_argument
+1228:4:Call -> U
+1228:4:Name -> BM:argparse._ActionsContainer.add_argument
+1230:4:Call -> U
+1230:4:Name -> BM:argparse._ActionsContainer.add_argument
+1231:4:Call -> U
+1231:4:Name -> BM:argparse._ActionsContainer.add_argument
+1232:4:Call -> U
+1232:4:Name -> BM:argparse._ActionsContainer.add_argument
+1233:4:Call -> U
+1233:4:Name -> BM:argparse._ActionsContainer.add_argument
+1234:4:Call -> U
+1234:4:Name -> BM:argparse._ActionsContainer.add_argument
+1235:4:Call -> U
+1235:4:Name -> BM:argparse._ActionsContainer.add_argument
+1236:4:Call -> U
+1236:4:Name -> BM:argparse._ActionsContainer.add_argument
+1238:4:Call -> U
+1238:4:Name -> BM:argparse._ActionsContainer.add_argument
+1240:4:Call -> U
+1240:4:Name -> BM:argparse._ActionsContainer.add_argument
+1241:4:Call -> U
+1241:4:Name -> BM:argparse._ActionsContainer.add_argument
+1243:4:Call -> U
+1243:4:Name -> BM:argparse._ActionsContainer.add_argument
+1245:4:Call -> U
+1245:4:Name -> BM:argparse._ActionsContainer.add_argument
+1247:4:Call -> U
+1247:4:Name -> BM:argparse._ActionsContainer.add_argument
+1248:4:Call -> U
+1248:4:Name -> BM:argparse._ActionsContainer.add_argument
+1251:4:Call -> U
+1251:4:Name -> BM:argparse._ActionsContainer.add_argument
+1253:4:Call -> U
+1253:4:Name -> BM:argparse._ActionsContainer.add_argument
+1255:4:Call -> U
+1255:4:Name -> BM:argparse._ActionsContainer.add_argument
+1256:4:Call -> U
+1256:4:Name -> BM:argparse._ActionsContainer.add_argument
+1257:4:Call -> U
+1257:4:Name -> BM:argparse._ActionsContainer.add_argument
+1259:4:Call -> U
+1259:4:Name -> BM:argparse._ActionsContainer.add_argument
+1260:4:Call -> U
+1260:4:Name -> BM:argparse._ActionsContainer.add_argument
+1261:4:Call -> U
+1261:4:Name -> BM:argparse._ActionsContainer.add_argument
+1263:4:Call -> U
+1263:4:Name -> BM:argparse._ActionsContainer.add_argument
+1264:4:Call -> U
+1264:4:Name -> BM:argparse._ActionsContainer.add_argument
+1265:4:Call -> U
+1265:4:Name -> BM:argparse._ActionsContainer.add_argument
+1266:4:Call -> U
+1266:4:Name -> BM:argparse._ActionsContainer.add_argument
+1267:4:Call -> U
+1267:4:Name -> BM:argparse._ActionsContainer.add_argument
+1269:4:Call -> U
+1269:4:Name -> BM:argparse._ActionsContainer.add_argument
+1271:4:Call -> U
+1271:4:Name -> BM:argparse._ActionsContainer.add_argument
+1272:4:Call -> U
+1272:4:Name -> BM:argparse._ActionsContainer.add_argument
+1273:4:Call -> U
+1273:4:Name -> BM:argparse._ActionsContainer.add_argument
+1274:4:Call -> U
+1274:4:Name -> BM:argparse._ActionsContainer.add_argument
+1275:4:Call -> U
+1275:4:Name -> BM:argparse._ActionsContainer.add_argument
+1276:4:Call -> U
+1276:4:Name -> BM:argparse._ActionsContainer.add_argument
+1277:4:Call -> U
+1277:4:Name -> BM:argparse._ActionsContainer.add_argument
+1278:4:Call -> U
+1278:4:Name -> BM:argparse._ActionsContainer.add_argument
+1279:4:Call -> U
+1279:4:Name -> BM:argparse._ActionsContainer.add_argument
+1280:4:Call -> U
+1280:4:Name -> BM:argparse._ActionsContainer.add_argument
+1282:4:Call -> U
+1282:4:Name -> BM:argparse._ActionsContainer.add_argument
+1284:4:Call -> U
+1284:4:Name -> BM:argparse._ActionsContainer.add_argument
+1285:4:Call -> U
+1285:4:Name -> BM:argparse._ActionsContainer.add_argument
+1286:4:Call -> U
+1286:4:Name -> BM:argparse._ActionsContainer.add_argument
+1287:4:Call -> U
+1287:4:Name -> BM:argparse._ActionsContainer.add_argument
+1288:4:Call -> U
+1288:4:Name -> BM:argparse._ActionsContainer.add_argument
+1289:4:Call -> U
+1289:4:Name -> BM:argparse._ActionsContainer.add_argument
+1290:4:Call -> U
+1290:4:Name -> BM:argparse._ActionsContainer.add_argument
+1291:4:Call -> U
+1291:4:Name -> BM:argparse._ActionsContainer.add_argument
+1292:4:Call -> U
+1292:4:Name -> BM:argparse._ActionsContainer.add_argument
+1293:4:Call -> U
+1293:4:Name -> BM:argparse._ActionsContainer.add_argument
+1294:4:Call -> U
+1294:4:Name -> BM:argparse._ActionsContainer.add_argument
+1295:4:Call -> U
+1295:4:Name -> BM:argparse._ActionsContainer.add_argument
+1296:4:Call -> U
+1296:4:Name -> BM:argparse._ActionsContainer.add_argument
+1297:4:Call -> U
+1297:4:Name -> BM:argparse._ActionsContainer.add_argument
+1298:4:Call -> U
+1298:4:Name -> BM:argparse._ActionsContainer.add_argument
+1299:4:Call -> U
+1299:4:Name -> BM:argparse._ActionsContainer.add_argument
+1301:4:Call -> U
+1301:4:Name -> BM:argparse._ActionsContainer.add_argument
+1303:4:Call -> U
+1303:4:Name -> BM:argparse._ActionsContainer.add_argument
+1304:4:Call -> U
+1304:4:Name -> BM:argparse._ActionsContainer.add_argument
+1305:4:Call -> U
+1305:4:Name -> BM:argparse._ActionsContainer.add_argument
+1306:4:Call -> U
+1306:4:Name -> BM:argparse._ActionsContainer.add_argument
+1307:4:Call -> U
+1307:4:Name -> BM:argparse._ActionsContainer.add_argument
+1308:4:Call -> U
+1308:4:Name -> BM:argparse._ActionsContainer.add_argument
+1309:4:Call -> U
+1309:4:Name -> BM:argparse._ActionsContainer.add_argument
+1310:4:Call -> U
+1310:4:Name -> BM:argparse._ActionsContainer.add_argument
+1311:4:Call -> U
+1311:4:Name -> BM:argparse._ActionsContainer.add_argument
+1312:4:Call -> U
+1312:4:Name -> BM:argparse._ActionsContainer.add_argument
+1313:4:Call -> U
+1313:4:Name -> BM:argparse._ActionsContainer.add_argument
+1314:4:Call -> U
+1314:4:Name -> BM:argparse._ActionsContainer.add_argument
+1316:4:Call -> U
+1316:4:Name -> BM:argparse._ActionsContainer.add_argument
+1317:4:Call -> U
+1317:4:Name -> BM:argparse._ActionsContainer.add_argument
+1318:4:Call -> U
+1318:4:Name -> BM:argparse._ActionsContainer.add_argument
+1319:4:Call -> U
+1319:4:Name -> BM:argparse._ActionsContainer.add_argument
+1321:4:Call -> U
+1321:4:Name -> BM:argparse._ActionsContainer.add_argument
+1322:4:Call -> U
+1322:4:Name -> BM:argparse._ActionsContainer.add_argument
+1323:4:Call -> U
+1323:4:Name -> BM:argparse._ActionsContainer.add_argument
+1324:4:Call -> U
+1324:4:Name -> BM:argparse._ActionsContainer.add_argument
+1325:4:Call -> U
+1325:4:Name -> BM:argparse._ActionsContainer.add_argument
+1326:4:Call -> U
+1326:4:Name -> BM:argparse._ActionsContainer.add_argument
+1328:4:Call -> U
+1328:4:Name -> BM:argparse._ActionsContainer.add_argument
+1330:4:Call -> U
+1330:4:Name -> BM:argparse._ActionsContainer.add_argument
+1331:4:Call -> U
+1331:4:Name -> BM:argparse._ActionsContainer.add_argument
+1332:4:Call -> U
+1332:4:Name -> BM:argparse._ActionsContainer.add_argument
+1333:4:Call -> U
+1333:4:Name -> BM:argparse._ActionsContainer.add_argument
+1334:4:Call -> U
+1334:4:Name -> BM:argparse._ActionsContainer.add_argument
+1335:4:Call -> U
+1335:4:Name -> BM:argparse._ActionsContainer.add_argument
+1336:4:Call -> U
+1336:4:Name -> BM:argparse._ActionsContainer.add_argument
+1337:4:Call -> U
+1337:4:Name -> BM:argparse._ActionsContainer.add_argument
+1338:4:Call -> U
+1338:4:Name -> BM:argparse._ActionsContainer.add_argument
+1339:4:Call -> U
+1339:4:Name -> BM:argparse._ActionsContainer.add_argument
+1341:4:Call -> U
+1341:4:Name -> BM:argparse._ActionsContainer.add_argument
+1342:4:Call -> U
+1342:4:Name -> BM:argparse._ActionsContainer.add_argument
+1344:4:Call -> U
+1344:4:Name -> BM:argparse._ActionsContainer.add_argument
+1346:4:Call -> U
+1346:4:Name -> BM:argparse._ActionsContainer.add_argument
+1347:4:Call -> U
+1347:4:Name -> BM:argparse._ActionsContainer.add_argument
+1348:4:Call -> U
+1348:4:Name -> BM:argparse._ActionsContainer.add_argument
+1350:4:Call -> U
+1350:4:Name -> BM:argparse._ActionsContainer.add_argument
+1351:4:Call -> U
+1351:4:Name -> BM:argparse._ActionsContainer.add_argument
+1352:4:Call -> U
+1352:4:Name -> BM:argparse._ActionsContainer.add_argument
+1353:4:Call -> U
+1353:4:Name -> BM:argparse._ActionsContainer.add_argument
+1354:4:Call -> U
+1354:4:Name -> BM:argparse._ActionsContainer.add_argument
+1356:4:Call -> U
+1356:4:Name -> BM:argparse._ActionsContainer.add_argument
+1357:4:Call -> U
+1357:4:Name -> BM:argparse._ActionsContainer.add_argument
+1358:4:Call -> U
+1358:4:Name -> BM:argparse._ActionsContainer.add_argument
+1360:4:Call -> U
+1360:4:Name -> BM:argparse._ActionsContainer.add_argument
+1362:4:Call -> U
+1362:4:Name -> BM:argparse._ActionsContainer.add_argument
+1363:4:Call -> U
+1363:4:Name -> BM:argparse._ActionsContainer.add_argument
+1364:4:Call -> U
+1364:4:Name -> BM:argparse._ActionsContainer.add_argument
+1365:4:Call -> U
+1365:4:Name -> BM:argparse._ActionsContainer.add_argument
+1366:4:Call -> U
+1366:4:Name -> BM:argparse._ActionsContainer.add_argument
+1367:4:Call -> U
+1367:4:Name -> BM:argparse._ActionsContainer.add_argument
+1368:4:Call -> U
+1368:4:Name -> BM:argparse._ActionsContainer.add_argument
+1369:4:Call -> U
+1369:4:Name -> BM:argparse._ActionsContainer.add_argument
+1370:4:Call -> U
+1370:4:Name -> BM:argparse._ActionsContainer.add_argument
+1371:4:Call -> U
+1371:4:Name -> BM:argparse._ActionsContainer.add_argument
+1373:4:Call -> U
+1373:4:Name -> BM:argparse._ActionsContainer.add_argument
+1375:4:Call -> U
+1375:4:Name -> BM:argparse._ActionsContainer.add_argument
+1376:4:Call -> U
+1376:4:Name -> BM:argparse._ActionsContainer.add_argument
+1377:4:Call -> U
+1377:4:Name -> BM:argparse._ActionsContainer.add_argument
+1379:4:Call -> U
+1379:4:Name -> BM:argparse._ActionsContainer.add_argument
+1383:4:Call -> U
+1383:4:Name -> BM:argparse._ActionsContainer.add_argument
+1385:4:Call -> U
+1385:4:Name -> BM:argparse._ActionsContainer.add_argument
+1387:4:Call -> U
+1387:4:Name -> BM:argparse._ActionsContainer.add_argument
+1388:4:Call -> U
+1388:4:Name -> BM:argparse._ActionsContainer.add_argument
+1390:4:Call -> U
+1390:4:Name -> BM:argparse._ActionsContainer.add_argument
+1391:4:Call -> U
+1391:4:Name -> BM:argparse._ActionsContainer.add_argument
+1395:4:Call -> U
+1395:4:Name -> BM:argparse._ActionsContainer.add_argument
+1396:4:Call -> U
+1396:4:Name -> BM:argparse._ActionsContainer.add_argument
+1398:4:Call -> U
+1398:4:Name -> BM:argparse._ActionsContainer.add_argument
+1399:4:Call -> U
+1399:4:Name -> BM:argparse._ActionsContainer.add_argument
+1400:4:Call -> U
+1400:4:Name -> BM:argparse._ActionsContainer.add_argument
+1401:4:Call -> U
+1401:4:Name -> BM:argparse._ActionsContainer.add_argument
+1402:4:Call -> U
+1402:4:Name -> BM:argparse._ActionsContainer.add_argument
+1403:4:Call -> U
+1403:4:Name -> BM:argparse._ActionsContainer.add_argument
+1404:4:Call -> U
+1404:4:Name -> BM:argparse._ActionsContainer.add_argument
+1405:4:Call -> U
+1405:4:Name -> BM:argparse._ActionsContainer.add_argument
+1406:4:Call -> U
+1406:4:Name -> BM:argparse._ActionsContainer.add_argument
+1407:4:Call -> U
+1407:4:Name -> BM:argparse._ActionsContainer.add_argument
+1408:4:Call -> U
+1408:4:Name -> BM:argparse._ActionsContainer.add_argument
+1409:4:Call -> U
+1409:4:Name -> BM:argparse._ActionsContainer.add_argument
+1410:4:Call -> U
+1410:4:Name -> BM:argparse._ActionsContainer.add_argument
+1411:4:Call -> U
+1411:4:Name -> BM:argparse._ActionsContainer.add_argument
+1412:4:Call -> U
+1412:4:Name -> BM:argparse._ActionsContainer.add_argument
+1413:4:Call -> U
+1413:4:Name -> BM:argparse._ActionsContainer.add_argument
+1415:4:Call -> U
+1415:4:Name -> BM:argparse._ActionsContainer.add_argument
+1416:4:Call -> U
+1416:4:Name -> BM:argparse._ActionsContainer.add_argument
+1417:4:Call -> U
+1417:4:Name -> BM:argparse._ActionsContainer.add_argument
+1418:4:Call -> U
+1418:4:Name -> BM:argparse._ActionsContainer.add_argument
+1419:4:Call -> U
+1419:4:Name -> BM:argparse._ActionsContainer.add_argument
+1420:4:Call -> U
+1420:4:Name -> BM:argparse._ActionsContainer.add_argument
+1421:4:Call -> U
+1421:4:Name -> BM:argparse._ActionsContainer.add_argument
+1422:4:Call -> U
+1422:4:Name -> BM:argparse._ActionsContainer.add_argument
+1423:4:Call -> U
+1423:4:Name -> BM:argparse._ActionsContainer.add_argument
+1424:4:Call -> U
+1424:4:Name -> BM:argparse._ActionsContainer.add_argument
+1426:4:Call -> U
+1426:4:Name -> BM:argparse._ActionsContainer.add_argument
+1427:4:Call -> U
+1427:4:Name -> BM:argparse._ActionsContainer.add_argument
+1429:4:Call -> U
+1429:4:Name -> BM:argparse._ActionsContainer.add_argument
+1430:4:Call -> U
+1430:4:Name -> BM:argparse._ActionsContainer.add_argument
+1431:4:Call -> U
+1431:4:Name -> BM:argparse._ActionsContainer.add_argument
+1433:4:Call -> U
+1433:4:Name -> BM:argparse._ActionsContainer.add_argument
+1434:4:Call -> U
+1434:4:Name -> BM:argparse._ActionsContainer.add_argument
+1435:4:Call -> U
+1435:4:Name -> BM:argparse._ActionsContainer.add_argument
+1436:4:Call -> U
+1436:4:Name -> BM:argparse._ActionsContainer.add_argument
+1438:4:Call -> U
+1438:4:Name -> BM:argparse._ActionsContainer.add_argument
+1439:4:Call -> U
+1439:4:Name -> BM:argparse._ActionsContainer.add_argument
+1440:4:Call -> U
+1440:4:Name -> BM:argparse._ActionsContainer.add_argument
+1441:4:Call -> U
+1441:4:Name -> BM:argparse._ActionsContainer.add_argument
+1443:4:Call -> U
+1443:4:Name -> BM:argparse._ActionsContainer.add_argument
+1444:4:Call -> U
+1444:4:Name -> BM:argparse._ActionsContainer.add_argument
+1445:4:Call -> U
+1445:4:Name -> BM:argparse._ActionsContainer.add_argument
+1447:4:Call -> U
+1447:4:Name -> BM:argparse._ActionsContainer.add_argument
+1448:4:Call -> U
+1448:4:Name -> BM:argparse._ActionsContainer.add_argument
+1449:4:Call -> U
+1449:4:Name -> BM:argparse._ActionsContainer.add_argument
+1450:4:Call -> U
+1450:4:Name -> BM:argparse._ActionsContainer.add_argument
+1454:4:Call -> U
+1454:4:Name -> BM:argparse._ActionsContainer.add_argument
+1456:4:Call -> U
+1456:4:Name -> BM:argparse._ActionsContainer.add_argument
+1458:4:Call -> U
+1458:4:Name -> BM:argparse._ActionsContainer.add_argument
+1460:4:Call -> U
+1460:4:Name -> BM:argparse._ActionsContainer.add_argument
+1461:4:Call -> U
+1461:4:Name -> BM:argparse._ActionsContainer.add_argument
+1462:4:Call -> U
+1462:4:Name -> BM:argparse._ActionsContainer.add_argument
+1463:4:Call -> U
+1463:4:Name -> BM:argparse._ActionsContainer.add_argument
+1464:4:Call -> U
+1464:4:Name -> BM:argparse._ActionsContainer.add_argument
+1465:4:Call -> U
+1465:4:Name -> BM:argparse._ActionsContainer.add_argument
+1467:4:Call -> U
+1467:4:Name -> BM:argparse._ActionsContainer.add_argument
+1468:4:Call -> U
+1468:4:Name -> BM:argparse._ActionsContainer.add_argument
+1469:4:Call -> U
+1469:4:Name -> BM:argparse._ActionsContainer.add_argument
+1470:4:Call -> U
+1470:4:Name -> BM:argparse._ActionsContainer.add_argument
+1471:4:Call -> U
+1471:4:Name -> BM:argparse._ActionsContainer.add_argument
+1472:4:Call -> U
+1472:4:Name -> BM:argparse._ActionsContainer.add_argument
+1473:4:Call -> U
+1473:4:Name -> BM:argparse._ActionsContainer.add_argument
+1474:4:Call -> U
+1474:4:Name -> BM:argparse._ActionsContainer.add_argument
+1475:4:Call -> U
+1475:4:Name -> BM:argparse._ActionsContainer.add_argument
+1477:4:Call -> U
+1477:4:Name -> BM:argparse._ActionsContainer.add_argument
+1478:4:Call -> U
+1478:4:Name -> BM:argparse._ActionsContainer.add_argument
+1480:4:Call -> U
+1480:4:Name -> BM:argparse._ActionsContainer.add_argument
+1481:4:Call -> U
+1481:4:Name -> BM:argparse._ActionsContainer.add_argument
+1482:4:Call -> U
+1482:4:Name -> BM:argparse._ActionsContainer.add_argument
+1483:4:Call -> U
+1483:4:Name -> BM:argparse._ActionsContainer.add_argument
+1484:4:Call -> U
+1484:4:Name -> BM:argparse._ActionsContainer.add_argument
+1486:4:Call -> U
+1486:4:Name -> BM:argparse._ActionsContainer.add_argument
+1487:4:Call -> U
+1487:4:Name -> BM:argparse._ActionsContainer.add_argument
+1488:4:Call -> U
+1488:4:Name -> BM:argparse._ActionsContainer.add_argument
+1490:4:Call -> U
+1490:4:Name -> BM:argparse._ActionsContainer.add_argument
+1491:4:Call -> U
+1491:4:Name -> BM:argparse._ActionsContainer.add_argument
+1493:4:Call -> U
+1493:4:Name -> BM:argparse._ActionsContainer.add_argument
+1494:4:Call -> U
+1494:4:Name -> BM:argparse._ActionsContainer.add_argument
+1496:4:Call -> U
+1496:4:Name -> BM:argparse._ActionsContainer.add_argument
+1498:4:Call -> U
+1498:4:Name -> BM:argparse._ActionsContainer.add_argument
+1499:4:Call -> U
+1499:4:Name -> BM:argparse._ActionsContainer.add_argument
+1500:4:Call -> U
+1500:4:Name -> BM:argparse._ActionsContainer.add_argument
+1502:4:Call -> U
+1502:4:Name -> BM:argparse._ActionsContainer.add_argument
+1503:4:Call -> U
+1503:4:Name -> BM:argparse._ActionsContainer.add_argument
+1504:4:Call -> U
+1504:4:Name -> BM:argparse._ActionsContainer.add_argument
+1505:4:Call -> U
+1505:4:Name -> BM:argparse._ActionsContainer.add_argument
+1506:4:Call -> U
+1506:4:Name -> BM:argparse._ActionsContainer.add_argument
+1507:4:Call -> U
+1507:4:Name -> BM:argparse._ActionsContainer.add_argument
+1508:4:Call -> U
+1508:4:Name -> BM:argparse._ActionsContainer.add_argument
+1509:4:Call -> U
+1509:4:Name -> BM:argparse._ActionsContainer.add_argument
+1510:4:Call -> U
+1510:4:Name -> BM:argparse._ActionsContainer.add_argument
+1511:4:Call -> U
+1511:4:Name -> BM:argparse._ActionsContainer.add_argument
+1513:4:Call -> U
+1513:4:Name -> BM:argparse._ActionsContainer.add_argument
+1514:4:Call -> U
+1514:4:Name -> BM:argparse._ActionsContainer.add_argument
+1515:4:Call -> U
+1515:4:Name -> BM:argparse._ActionsContainer.add_argument
+1517:4:Call -> U
+1517:4:Name -> BM:argparse._ActionsContainer.add_argument
+1518:4:Call -> U
+1518:4:Name -> BM:argparse._ActionsContainer.add_argument
+1519:4:Call -> U
+1519:4:Name -> BM:argparse._ActionsContainer.add_argument
+1520:4:Call -> U
+1520:4:Name -> BM:argparse._ActionsContainer.add_argument
+1521:4:Call -> U
+1521:4:Name -> BM:argparse._ActionsContainer.add_argument
+1522:4:Call -> U
+1522:4:Name -> BM:argparse._ActionsContainer.add_argument
+1524:4:Call -> U
+1524:4:Name -> BM:argparse._ActionsContainer.add_argument
+1526:4:Call -> U
+1526:4:Name -> BM:argparse._ActionsContainer.add_argument
+1527:4:Call -> U
+1527:4:Name -> BM:argparse._ActionsContainer.add_argument
+1528:4:Call -> U
+1528:4:Name -> BM:argparse._ActionsContainer.add_argument
+1529:4:Call -> U
+1529:4:Name -> BM:argparse._ActionsContainer.add_argument
+1531:4:Call -> U
+1531:4:Name -> BM:argparse._ActionsContainer.add_argument
+1532:4:Call -> U
+1532:4:Name -> BM:argparse._ActionsContainer.add_argument
+1533:4:Call -> U
+1533:4:Name -> BM:argparse._ActionsContainer.add_argument
+1534:4:Call -> U
+1534:4:Name -> BM:argparse._ActionsContainer.add_argument
+1536:4:Call -> U
+1536:4:Name -> BM:argparse._ActionsContainer.add_argument
+1538:4:Call -> U
+1538:4:Name -> BM:argparse._ActionsContainer.add_argument
+1540:4:Call -> U
+1540:4:Name -> BM:argparse._ActionsContainer.add_argument
+1542:4:Call -> U
+1542:4:Name -> BM:argparse._ActionsContainer.add_argument
+1544:4:Call -> U
+1544:4:Name -> BM:argparse._ActionsContainer.add_argument
+1545:4:Call -> U
+1545:4:Name -> BM:argparse._ActionsContainer.add_argument
+1546:4:Call -> U
+1546:4:Name -> BM:argparse._ActionsContainer.add_argument
+1548:4:Call -> U
+1548:4:Name -> BM:argparse._ActionsContainer.add_argument
+1550:4:Call -> U
+1550:4:Name -> BM:argparse._ActionsContainer.add_argument
+1551:4:Call -> U
+1551:4:Name -> BM:argparse._ActionsContainer.add_argument
+1553:4:Call -> U
+1553:4:Name -> BM:argparse._ActionsContainer.add_argument
+1555:4:Call -> U
+1555:4:Name -> BM:argparse._ActionsContainer.add_argument
+1557:4:Call -> U
+1557:4:Name -> BM:argparse._ActionsContainer.add_argument
+1558:4:Call -> U
+1558:4:Name -> BM:argparse._ActionsContainer.add_argument
+1559:4:Call -> U
+1559:4:Name -> BM:argparse._ActionsContainer.add_argument
+1560:4:Call -> U
+1560:4:Name -> BM:argparse._ActionsContainer.add_argument
+1562:4:Call -> U
+1562:4:Name -> BM:argparse._ActionsContainer.add_argument
+1563:4:Call -> U
+1563:4:Name -> BM:argparse._ActionsContainer.add_argument
+1564:4:Call -> U
+1564:4:Name -> BM:argparse._ActionsContainer.add_argument
+1566:4:Call -> U
+1566:4:Name -> BM:argparse._ActionsContainer.add_argument
+1567:4:Call -> U
+1567:4:Name -> BM:argparse._ActionsContainer.add_argument
+1568:4:Call -> U
+1568:4:Name -> BM:argparse._ActionsContainer.add_argument
+1570:4:Call -> U
+1570:4:Name -> BM:argparse._ActionsContainer.add_argument
+1571:4:Call -> U
+1571:4:Name -> BM:argparse._ActionsContainer.add_argument
+1572:4:Call -> U
+1572:4:Name -> BM:argparse._ActionsContainer.add_argument
+1573:4:Call -> U
+1573:4:Name -> BM:argparse._ActionsContainer.add_argument
+1577:4:Call -> U
+1577:4:Name -> BM:argparse._ActionsContainer.add_argument
+1578:4:Call -> U
+1578:4:Name -> BM:argparse._ActionsContainer.add_argument
+1580:4:Call -> U
+1580:4:Name -> BM:argparse._ActionsContainer.add_argument
+1581:4:Call -> U
+1581:4:Name -> BM:argparse._ActionsContainer.add_argument
+1583:4:Call -> U
+1583:4:Name -> BM:argparse._ActionsContainer.add_argument
+1585:4:Call -> U
+1585:4:Name -> BM:argparse._ActionsContainer.add_argument
+1586:4:Call -> U
+1586:4:Name -> BM:argparse._ActionsContainer.add_argument
+1587:4:Call -> U
+1587:4:Name -> BM:argparse._ActionsContainer.add_argument
+1589:4:Call -> U
+1589:4:Name -> BM:argparse._ActionsContainer.add_argument
+1590:4:Call -> U
+1590:4:Name -> BM:argparse._ActionsContainer.add_argument
+1591:4:Call -> U
+1591:4:Name -> BM:argparse._ActionsContainer.add_argument
+1593:4:Call -> U
+1593:4:Name -> BM:argparse._ActionsContainer.add_argument
+1594:4:Call -> U
+1594:4:Name -> BM:argparse._ActionsContainer.add_argument
+1596:11:Name -> Inst:argparse.ArgumentParser

@@ -1,0 +1,461 @@
+29:8:Name -> Inst:django.core.files.storage.memory.TimingMixin
+29:28:Call -> Inst:_pydatetime.datetime | U
+29:28:Name -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+30:8:Name -> Inst:django.core.files.storage.memory.TimingMixin
+30:29:Attribute -> Inst:_pydatetime.datetime | U
+30:29:Name -> Inst:django.core.files.storage.memory.TimingMixin
+31:8:Name -> Inst:django.core.files.storage.memory.TimingMixin
+31:29:Attribute -> Inst:_pydatetime.datetime | U
+31:29:Name -> Inst:django.core.files.storage.memory.TimingMixin
+34:8:Name -> Inst:django.core.files.storage.memory.TimingMixin
+34:29:Call -> Inst:_pydatetime.datetime | U
+34:29:Name -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+37:8:Name -> Inst:django.core.files.storage.memory.TimingMixin
+37:29:Call -> Inst:_pydatetime.datetime | U
+37:29:Name -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+40:23:Name -> Class:django.core.files.base.ContentFile
+40:36:Name -> Class:django.core.files.storage.memory.TimingMixin
+49:8:Call -> Const:NoneType:None | Const:NoneType:None
+49:8:Attribute -> BM:django.core.files.base.ContentFile.__init__ | BM:django.core.files.base.File.__init__ | BM:builtins.object.__init__
+49:8:Call -> Super
+49:8:Name -> Class:builtins.super
+49:25:Name -> Const:str:'' | U
+49:34:Name -> Const:NoneType:None | U
+50:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+50:29:Call -> U
+50:29:Name -> Class:builtins.type
+50:34:Name -> Const:str:'' | U
+51:8:Call -> Const:NoneType:None
+51:8:Attribute -> BM:django.core.files.storage.memory.TimingMixin._initialize_times
+51:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+54:8:Call -> Const:NoneType:None
+54:8:Attribute -> BM:django.core.files.storage.memory.InMemoryFileNode._convert_stream_content
+54:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+54:37:Name -> U
+55:8:Call -> Const:NoneType:None
+55:8:Attribute -> BM:django.core.files.storage.memory.TimingMixin._update_accessed_time
+55:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+56:15:Call -> Inst:django.core.files.base.ContentFile | Inst:django.core.files.base.File
+56:15:Attribute -> BM:django.core.files.base.ContentFile.open | BM:django.core.files.base.File.open
+56:15:Call -> Super
+56:15:Name -> Class:builtins.super
+56:28:Name -> U
+59:8:Call -> U
+59:8:Attribute -> BM:django.core.files.base.ContentFile.write | U
+59:8:Call -> Super
+59:8:Name -> Class:builtins.super
+59:22:Name -> U
+60:8:Call -> Const:NoneType:None
+60:8:Attribute -> BM:django.core.files.storage.memory.TimingMixin._update_modified_time
+60:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+64:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+64:36:Attribute -> U | Class:builtins.bytes | Class:builtins.str
+64:36:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+64:58:Name -> Class:builtins.bytes
+64:20:Call -> Inst:_io.BytesIO
+64:20:Attribute -> Class:_io.BytesIO
+64:20:Name -> Module:io
+64:69:Call -> Inst:_io.StringIO
+64:69:Attribute -> Class:_io.StringIO
+64:69:Name -> Module:io
+68:43:Name -> U
+68:27:Name -> Class:builtins.bytes
+68:53:Name -> Class:builtins.str
+70:11:Attribute -> U | Class:builtins.bytes | Class:builtins.str
+70:11:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+70:33:Name -> Class:builtins.bytes | Class:builtins.str
+73:18:Call -> U
+73:18:Attribute -> BM:_io.BytesIO.getvalue | BM:_io.StringIO.getvalue | U
+73:18:Attribute -> Inst:_io.BytesIO | Inst:_io.StringIO | U
+73:18:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+74:38:Call -> ERR
+74:38:Name -> Func:builtins.isinstance
+74:49:Name -> U
+74:58:Name -> Class:builtins.str
+74:18:Call -> U
+74:18:Attribute -> U
+74:18:Name -> U
+74:68:Call -> U
+74:68:Attribute -> U
+74:68:Name -> U
+75:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+75:29:Name -> Class:builtins.bytes | Class:builtins.str
+76:8:Call -> Const:NoneType:None
+76:8:Attribute -> BM:django.core.files.storage.memory.InMemoryFileNode._initialize_stream
+76:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+78:8:Call -> U
+78:8:Attribute -> BM:_io.BytesIO.write | BM:_io.StringIO.write | U
+78:8:Attribute -> Inst:_io.BytesIO | Inst:_io.StringIO | U
+78:8:Name -> Inst:django.core.files.storage.memory.InMemoryFileNode
+78:24:Name -> U
+81:22:Name -> Class:django.core.files.storage.memory.TimingMixin
+90:8:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+91:8:Call -> Const:NoneType:None
+91:8:Attribute -> BM:django.core.files.storage.memory.TimingMixin._initialize_times
+91:8:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+103:24:Call -> Inst:builtins.list
+103:24:Name -> Class:builtins.list
+103:29:Attribute -> U
+103:29:Call -> Inst:pathlib.Path
+103:29:Attribute -> Class:pathlib.Path
+103:29:Name -> Module:pathlib
+103:42:Name -> U
+104:23:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+106:14:Name -> Inst:builtins.list
+107:27:Call -> ERR
+107:27:Attribute -> BM:builtins.list.pop
+107:27:Name -> Inst:builtins.list
+110:15:Call -> Const:bool:False
+110:15:Name -> Func:builtins.isinstance
+110:26:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+110:40:Name -> Class:django.core.files.storage.memory.InMemoryFileNode
+111:32:Call -> Tuple:2 | Tuple:2
+111:32:Attribute -> Func:posixpath.split | Func:ntpath.split
+111:32:Attribute -> Module:posixpath | Module:ntpath
+111:32:Name -> Module:os
+111:46:Name -> U
+112:31:Call -> Const:str:''
+112:31:Attribute -> BM:builtins.str.join
+113:20:Name -> Tuple:2 | Tuple:2
+113:36:Call -> ERR
+113:36:Attribute -> BM:builtins.tuple.index | BM:builtins.tuple.index
+113:36:Name -> Tuple:2 | Tuple:2
+113:56:Name -> U
+115:22:Call -> ExcInst:builtins.NotADirectoryError
+115:22:Name -> Class:builtins.NotADirectoryError
+116:20:Attribute -> Const:int:20
+116:20:Name -> Module:errno
+116:35:Call -> ERR
+116:35:Attribute -> Func:posix.strerror
+116:35:Name -> Module:os
+116:47:Attribute -> Const:int:20
+116:47:Name -> Module:errno
+116:63:Name -> Const:str:''
+118:27:Call -> U
+118:27:Attribute -> BM:django.core.files.storage.memory.InMemoryDirNode._resolve_child
+118:27:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+119:16:Name -> U
+120:16:Name -> Const:bool:False | U
+121:28:Call -> ERR
+121:28:Name -> Func:builtins.len
+121:32:Name -> Inst:builtins.list | Tuple:2 | Tuple:2
+121:16:Name -> Const:NoneType:None | U
+121:57:Name -> Class:django.core.files.storage.memory.InMemoryDirNode
+123:15:Name -> U
+126:11:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+126:36:Name -> Const:bool:True | U
+127:18:Call -> ExcInst:builtins.FileNotFoundError
+127:18:Name -> Class:builtins.FileNotFoundError
+127:36:Attribute -> Const:int:2
+127:36:Name -> Module:errno
+127:50:Call -> ERR
+127:50:Attribute -> Func:posix.strerror
+127:50:Name -> Module:os
+127:62:Attribute -> Const:int:2
+127:62:Name -> Module:errno
+127:77:Name -> U
+130:11:Name -> Const:NoneType:None | U
+130:28:Call -> ERR
+130:28:Name -> Func:builtins.isinstance
+130:39:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+130:53:Name -> Const:NoneType:None | U
+133:19:Name -> Const:NoneType:None | U
+133:31:Name -> Class:django.core.files.storage.memory.InMemoryDirNode
+132:17:Name -> Class:builtins.NotADirectoryError
+132:37:Attribute -> Const:int:20
+132:37:Name -> Module:errno
+134:22:Name -> Class:builtins.IsADirectoryError
+134:41:Attribute -> Const:int:21
+134:41:Name -> Module:errno
+136:18:Call -> ExcInst:builtins.NotADirectoryError | ExcInst:builtins.IsADirectoryError
+136:18:Name -> Class:builtins.NotADirectoryError | Class:builtins.IsADirectoryError
+136:28:Name -> Const:int:20 | Const:int:21
+136:40:Call -> ERR
+136:40:Attribute -> Func:posix.strerror
+136:40:Name -> Module:os
+136:52:Name -> Const:int:20 | Const:int:21
+136:65:Name -> U
+138:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+141:11:Name -> U
+142:12:Call -> Const:NoneType:None
+142:12:Attribute -> BM:django.core.files.storage.memory.TimingMixin._update_accessed_time
+142:12:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+143:12:Call -> Const:NoneType:None
+143:12:Attribute -> BM:django.core.files.storage.memory.TimingMixin._update_modified_time
+143:12:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+144:15:Name -> U
+144:28:Name -> Class:django.core.files.storage.memory.InMemoryFileNode
+145:24:Call -> U
+145:24:Name -> U
+145:39:Name -> U
+147:24:Call -> U
+147:24:Name -> U
+148:19:Call -> ERR
+148:19:Attribute -> BM:builtins.dict.setdefault
+148:19:Attribute -> Dict:0
+148:19:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+148:45:Name -> U
+148:59:Name -> U
+149:15:Call -> ERR
+149:15:Attribute -> BM:builtins.dict.get
+149:15:Attribute -> Dict:0
+149:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+149:34:Name -> U
+153:27:Call -> DictItems
+153:27:Attribute -> BM:builtins.dict.items
+153:27:Attribute -> Dict:0
+153:27:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+154:15:Call -> ERR
+154:15:Name -> Func:builtins.isinstance
+154:26:Name -> U
+154:33:Name -> Class:django.core.files.storage.memory.InMemoryDirNode
+155:16:Call -> ERR
+155:16:Attribute -> BM:builtins.list.append
+155:16:Name -> List:0
+155:35:Name -> U
+157:16:Call -> ERR
+157:16:Attribute -> BM:builtins.list.append
+157:16:Name -> List:0
+157:29:Name -> U
+158:15:Name -> List:0
+158:28:Name -> List:0
+161:11:Name -> U
+161:19:Attribute -> Dict:0
+161:19:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+162:12:Call -> Const:NoneType:None
+162:12:Attribute -> BM:django.core.files.storage.memory.TimingMixin._update_accessed_time
+162:12:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+163:12:Call -> Const:NoneType:None
+163:12:Attribute -> BM:django.core.files.storage.memory.TimingMixin._update_modified_time
+163:12:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+164:16:Attribute -> Dict:0
+164:16:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode
+164:31:Name -> U
+167:1:Call -> Func:django.utils.deconstruct.deconstructible.decorator | U
+167:1:Name -> Func:django.utils.deconstruct.deconstructible
+168:22:Name -> Class:django.core.files.storage.base.Storage
+168:31:Name -> Class:django.core.files.storage.mixins.StorageSettingsMixin
+178:8:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+178:25:Name -> Const:NoneType:None | U
+179:8:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+179:25:Name -> Const:NoneType:None | U
+180:8:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+180:38:Name -> Const:NoneType:None | U
+181:8:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+181:43:Name -> Const:NoneType:None | U
+182:8:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+182:21:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode
+182:21:Name -> Class:django.core.files.storage.memory.InMemoryDirNode
+183:8:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+183:8:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+183:8:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+184:12:Attribute -> U
+184:12:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+184:65:Name -> Class:django.core.files.storage.memory.InMemoryDirNode
+186:8:Call -> Const:NoneType:None
+186:8:Attribute -> BM:django.dispatch.dispatcher.Signal.connect
+186:8:Name -> Inst:django.dispatch.dispatcher.Signal
+186:32:Attribute -> BM:django.core.files.storage.mixins.StorageSettingsMixin._clear_cached_properties
+186:32:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+188:5:Name -> Class:django.utils.functional.cached_property
+190:15:Call -> U
+190:15:Attribute -> BM:django.core.files.storage.mixins.StorageSettingsMixin._value_or_setting
+190:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+190:38:Attribute -> Const:NoneType:None | U
+190:38:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+190:54:Attribute -> U
+190:54:Name -> Inst:django.conf.LazySettings
+192:5:Name -> Class:django.utils.functional.cached_property
+194:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+194:15:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+194:15:Attribute -> Module:posixpath | Module:ntpath
+194:15:Name -> Module:os
+194:31:Attribute -> U
+194:31:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+196:5:Name -> Class:django.utils.functional.cached_property
+198:11:Attribute -> Const:NoneType:None | U
+198:11:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+198:46:Call -> U
+198:46:Attribute -> U
+198:46:Attribute -> Const:NoneType:None | U
+198:46:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+199:12:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+200:15:Call -> U
+200:15:Attribute -> BM:django.core.files.storage.mixins.StorageSettingsMixin._value_or_setting
+200:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+200:38:Attribute -> Const:NoneType:None | U
+200:38:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+200:54:Attribute -> U
+200:54:Name -> Inst:django.conf.LazySettings
+202:5:Name -> Class:django.utils.functional.cached_property
+204:15:Call -> U
+204:15:Attribute -> BM:django.core.files.storage.mixins.StorageSettingsMixin._value_or_setting
+204:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+205:12:Attribute -> Const:NoneType:None | U
+205:12:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+205:41:Attribute -> U
+205:41:Name -> Inst:django.conf.LazySettings
+208:5:Name -> Class:django.utils.functional.cached_property
+210:15:Call -> U
+210:15:Attribute -> BM:django.core.files.storage.mixins.StorageSettingsMixin._value_or_setting
+210:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+211:12:Attribute -> Const:NoneType:None | U
+211:12:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+211:46:Attribute -> U
+211:46:Name -> Inst:django.conf.LazySettings
+215:20:Call -> Const:bytes:b'.' | Const:str:'.' | U
+215:20:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage.path
+215:20:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+215:30:Name -> U
+216:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+216:15:Attribute -> Func:posixpath.relpath | Func:ntpath.relpath
+216:15:Attribute -> Module:posixpath | Module:ntpath
+216:15:Name -> Module:os
+216:31:Name -> Const:bytes:b'.' | Const:str:'.' | U
+216:42:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+216:42:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+220:28:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+220:28:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._relative_path
+220:28:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+220:48:Name -> U
+221:19:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+221:19:Attribute -> BM:django.core.files.storage.memory.InMemoryDirNode.resolve
+221:19:Attribute -> Inst:django.core.files.storage.memory.InMemoryDirNode
+221:19:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+222:16:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+223:34:Name -> Const:bool:False | U
+224:25:Name -> Const:NoneType:None | U
+225:29:Name -> Const:bool:True | U
+227:15:Name -> Class:builtins.NotADirectoryError
+228:28:Call -> Const:bytes:b'.' | Const:str:'.' | U
+228:28:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage.path
+228:28:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+228:38:Attribute -> U
+228:38:Name -> ExcInst:builtins.NotADirectoryError
+229:18:Call -> ExcInst:builtins.FileExistsError
+229:18:Name -> Class:builtins.FileExistsError
+229:37:Name -> Const:bytes:b'.' | Const:str:'.' | U
+232:35:Name -> Const:str:'rb' | U
+233:20:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+233:20:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+233:20:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+234:12:Name -> U
+234:36:Name -> U
+234:64:Name -> Class:django.core.files.storage.memory.InMemoryFileNode
+236:15:Call -> U
+236:15:Attribute -> U
+236:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+236:30:Name -> Const:str:'rb' | U
+239:20:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+239:20:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+239:20:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+240:12:Name -> U
+240:51:Name -> Class:django.core.files.storage.memory.InMemoryFileNode
+243:21:Call -> U
+243:21:Attribute -> U
+243:21:Name -> U
+244:15:Name -> Const:NoneType:None
+245:31:Call -> ERR
+245:31:Name -> Func:builtins.isinstance
+245:42:Name -> U
+245:49:Name -> Class:builtins.bytes
+246:21:Call -> U
+246:21:Attribute -> U
+246:21:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+246:36:Name -> Const:str:'wb' | Const:str:'wt'
+247:12:Call -> U
+247:12:Attribute -> U
+247:12:Name -> Const:NoneType:None | U
+247:21:Name -> U
+249:11:Call -> U
+249:11:Name -> Func:builtins.hasattr
+249:19:Name -> U
+250:12:Call -> Const:NoneType:None | U
+250:12:Attribute -> Func:posix.remove | Func:tests.file_storage.tests.FileStorageTests.test_remove_race_handling.fake_remove | U
+250:12:Name -> Module:os
+250:22:Call -> U
+250:22:Attribute -> U
+250:22:Name -> U
+252:8:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+252:34:Call -> Inst:_pydatetime.datetime | U
+252:34:Name -> Func:django.utils.timezone.now | Lambda:tests.sessions_tests.tests:428 | U
+253:15:Call -> Const:bytes:b'' | Const:str:'' | U
+253:15:Attribute -> BM:builtins.bytes.replace | BM:builtins.str.replace | U | BM:builtins.bytes.replace | BM:builtins.str.replace
+253:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+253:15:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._relative_path
+253:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+253:35:Name -> U
+256:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+256:15:Name -> Func:django.utils._os.safe_join
+256:25:Attribute -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+256:25:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+256:40:Name -> U
+259:25:Call -> Tuple:2 | Tuple:2
+259:25:Attribute -> Func:posixpath.split | Func:ntpath.split
+259:25:Attribute -> Module:posixpath | Module:ntpath
+259:25:Name -> Module:os
+259:39:Name -> U
+260:19:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+260:19:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+260:19:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+260:33:Name -> U
+261:11:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+263:8:Call -> Const:NoneType:None | U
+263:8:Attribute -> BM:django.core.files.storage.memory.InMemoryDirNode.remove_child | U
+263:8:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+263:30:Name -> U
+266:15:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+266:15:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+266:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+266:29:Name -> U
+269:15:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+269:15:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+269:15:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+269:29:Name -> U
+269:44:Name -> Class:django.core.files.storage.memory.InMemoryDirNode
+270:15:Call -> Tuple:2 | U
+270:15:Attribute -> BM:django.core.files.storage.memory.InMemoryDirNode.listdir | U
+270:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+273:15:Call -> ERR
+273:15:Name -> Func:builtins.len
+273:19:Call -> U
+273:19:Attribute -> U
+273:19:Attribute -> U
+273:19:Call -> U
+273:19:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._open
+273:19:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+273:30:Name -> U
+276:11:Attribute -> U
+276:11:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+277:18:Call -> ExcInst:builtins.ValueError
+277:18:Name -> Class:builtins.ValueError
+278:14:Call -> U | Const:str:'' | Const:str:'' | Const:str:''
+278:14:Name -> Func:django.utils.encoding.filepath_to_uri
+278:30:Name -> U
+279:11:Name -> U | Const:str:'' | Const:str:'' | Const:str:''
+280:18:Call -> U | Const:str:''
+280:18:Attribute -> U | BM:builtins.str.lstrip | BM:builtins.str.lstrip | BM:builtins.str.lstrip
+280:18:Name -> U | Const:str:'' | Const:str:'' | Const:str:''
+281:15:Call -> U | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+281:15:Name -> Func:urllib.parse.urljoin
+281:23:Attribute -> U
+281:23:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+281:38:Name -> U | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+284:20:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+284:20:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+284:20:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+284:34:Name -> U
+285:15:Attribute -> Inst:_pydatetime.datetime | U
+285:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+288:20:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+288:20:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+288:20:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+288:34:Name -> U
+289:15:Attribute -> Inst:_pydatetime.datetime | U
+289:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+292:20:Call -> Inst:django.core.files.storage.memory.InMemoryDirNode | U
+292:20:Attribute -> BM:django.core.files.storage.memory.InMemoryStorage._resolve
+292:20:Name -> Inst:django.core.files.storage.memory.InMemoryStorage
+292:34:Name -> U
+293:15:Attribute -> Inst:_pydatetime.datetime | U
+293:15:Name -> Inst:django.core.files.storage.memory.InMemoryDirNode | U

@@ -1,0 +1,464 @@
+28:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+28:6:Attribute -> Func:logging.getLogger
+28:6:Name -> Module:logging
+28:24:Name -> Const:str:'salt.cloud.clouds.saltify' | Const:str:'__main__'
+35:7:Name -> Class:builtins.ImportError
+53:7:Name -> Class:builtins.ImportError
+66:15:Call -> ERR
+66:15:Attribute -> ERR
+66:15:Name -> ERR
+67:11:Name -> Class:builtins.AttributeError
+68:15:Name -> ERR
+98:10:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+98:10:Name -> Func:salt.cloud.clouds.saltify.get_configured_provider
+99:25:Name -> U
+99:48:Name -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+128:12:Call -> U
+128:12:Name -> Func:salt.cloud.clouds.saltify._list_nodes_full
+128:29:Name -> Const:NoneType:None | U
+129:11:Call -> Dict:0
+129:11:Name -> Func:salt.cloud.clouds.saltify._build_required_items
+129:33:Name -> U
+134:24:Call -> U
+134:24:Attribute -> U
+134:24:Name -> U
+135:11:Name -> U
+138:18:Name -> U
+138:35:Name -> U
+139:24:Name -> U
+140:22:Call -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address | Inst:salt.ext.ipaddress.IPv4Address | Inst:salt.ext.ipaddress.IPv6Address
+140:22:Attribute -> Func:ipaddress.ip_address | Func:salt.ext.ipaddress.ip_address
+140:22:Name -> Module:ipaddress | Module:salt.ext.ipaddress
+140:43:Name -> U
+141:23:Attribute -> U
+141:23:Name -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address | U
+142:23:Attribute -> U
+142:23:Name -> Inst:ipaddress.IPv4Address | Inst:ipaddress.IPv6Address | U
+143:24:Call -> ERR
+143:24:Attribute -> BM:builtins.list.append
+143:24:Name -> List:0
+143:43:Name -> U
+145:24:Call -> ERR
+145:24:Attribute -> BM:builtins.list.append
+145:24:Name -> List:0
+145:42:Name -> U
+147:12:Name -> Dict:0
+147:16:Name -> U
+148:22:Name -> U
+149:25:Name -> U
+150:31:Name -> List:0
+151:30:Name -> List:0
+156:11:Name -> Dict:0
+174:10:Call -> U
+174:10:Name -> Func:salt.cloud.clouds.saltify._list_nodes_full
+174:27:Name -> Const:NoneType:None | U
+179:9:Call -> U
+179:9:Attribute -> U
+179:9:Name -> U
+182:16:Name -> U
+183:16:Name -> U
+184:16:Name -> U
+185:16:Name -> U
+186:16:Name -> U
+188:15:Name -> Class:builtins.KeyError
+190:15:Name -> Class:builtins.TypeError
+191:16:Name -> U
+191:20:Name -> U
+193:11:Call -> Dict:0
+193:11:Name -> Func:salt.cloud.clouds.saltify._build_required_items
+193:33:Name -> U
+195:16:Name -> U
+196:8:Call -> U
+196:8:Attribute -> U
+196:8:Name -> U
+196:12:Name -> U
+196:25:Name -> Dict:0
+196:30:Name -> U
+198:11:Name -> U
+205:9:Call -> Inst:salt.client.LocalClient
+205:9:Attribute -> Class:salt.client.LocalClient
+205:9:Attribute -> Module:salt.client
+205:9:Name -> Module:salt
+206:15:Call -> U
+206:15:Attribute -> U
+206:15:Name -> Inst:salt.client.LocalClient
+216:11:Call -> Dict:0
+216:11:Attribute -> Func:salt.utils.cloud.list_nodes_select
+216:11:Attribute -> Module:salt.utils.cloud
+216:11:Attribute -> Module:salt.utils
+216:11:Name -> Module:salt
+217:8:Call -> U
+217:8:Name -> Func:salt.cloud.clouds.saltify.list_nodes_full
+218:8:Name -> ERR
+219:8:Name -> Const:NoneType:None | U
+227:9:Call -> Inst:salt.client.LocalClient
+227:9:Attribute -> Class:salt.client.LocalClient
+227:9:Attribute -> Module:salt.client
+227:9:Name -> Module:salt
+228:14:Call -> U
+228:14:Attribute -> U
+228:14:Name -> Inst:salt.client.LocalClient
+228:24:Name -> U
+229:8:Call -> U
+229:8:Attribute -> U
+229:8:Name -> U
+229:19:Call -> Dict:0
+229:19:Name -> Func:salt.cloud.clouds.saltify._build_required_items
+229:41:Name -> U
+230:15:Name -> U
+268:20:Call -> Const:bool:False | U
+268:20:Attribute -> Func:salt.config.get_cloud_config_value
+268:20:Name -> Module:salt.config
+269:18:Name -> U
+269:23:Name -> ERR
+273:11:Call -> Const:str:'' | U
+273:11:Attribute -> Func:salt.config.get_cloud_config_value
+273:11:Name -> Module:salt.config
+273:53:Name -> U
+273:58:Name -> ERR
+274:8:Name -> U
+274:26:Name -> U
+276:7:Name -> Const:bool:False | U
+277:18:Call -> Const:str:'' | U
+277:18:Attribute -> Func:salt.config.get_cloud_config_value
+277:18:Name -> Module:salt.config
+278:31:Name -> U
+278:36:Name -> ERR
+280:19:Call -> Const:str:'' | U
+280:19:Attribute -> Func:salt.config.get_cloud_config_value
+280:19:Name -> Module:salt.config
+281:31:Name -> U
+281:36:Name -> ERR
+283:11:Name -> Const:str:'' | U
+283:23:Name -> Const:str:'' | U
+285:23:Call -> Const:str:'' | U
+285:23:Attribute -> Func:salt.config.get_cloud_config_value
+285:23:Name -> Module:salt.config
+286:28:Name -> U
+286:33:Name -> ERR
+288:17:Call -> Inst:salt.client.LocalClient
+288:17:Attribute -> Class:salt.client.LocalClient
+288:17:Attribute -> Module:salt.client
+288:17:Name -> Module:salt
+289:19:Name -> Const:str:'' | U
+290:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+290:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+290:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+290:50:Name -> U
+291:35:Call -> U
+291:35:Attribute -> Func:salt.utils.platform.is_windows
+291:35:Attribute -> Module:salt.utils.platform
+291:35:Attribute -> Module:salt.utils
+291:35:Name -> Module:salt
+292:35:Name -> Const:str:'n' | Const:str:'c'
+292:45:Name -> U
+293:32:Call -> U
+293:32:Attribute -> U
+293:32:Name -> Inst:salt.client.LocalClient
+293:42:Name -> Const:str:'' | U
+293:68:Name -> Const:str:'ping -n 1 Uninferable' | Const:str:'ping -c 1 Uninferable'
+294:19:Name -> Const:bool:False | U
+295:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+295:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+295:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+297:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+297:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+297:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+298:67:Name -> Const:str:'' | U
+298:76:Name -> Const:str:'' | U
+301:23:Call -> ERR
+301:23:Name -> Func:builtins.isinstance
+301:34:Name -> Const:str:'' | U
+301:43:Name -> Class:builtins.str
+302:35:Name -> Const:str:'' | U
+303:26:Call -> U
+303:26:Attribute -> U
+303:26:Name -> Inst:salt.client.LocalClient
+303:36:Name -> Const:str:'' | U
+303:61:Name -> Const:str:'' | U | List:1
+304:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+304:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+304:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+304:62:Name -> U
+305:23:Name -> U
+305:31:Name -> U
+305:35:Name -> Const:str:'' | U
+306:37:Call -> Const:int:30 | U
+306:37:Attribute -> Func:salt.config.get_cloud_config_value
+306:37:Name -> Module:salt.config
+307:45:Name -> U
+307:50:Name -> ERR
+309:27:Name -> Const:int:30 | U
+310:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+310:28:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+310:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+310:69:Name -> Const:int:30 | U
+311:28:Call -> ERR
+311:28:Attribute -> Func:time.sleep
+311:28:Name -> Module:time
+311:39:Name -> Const:int:30 | U
+312:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+312:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+312:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+312:53:Name -> U
+313:14:Call -> ERR
+313:14:Name -> ERR
+313:43:Name -> U
+313:48:Name -> ERR
+315:14:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False
+315:14:Name -> Func:salt.cloud.clouds.saltify._verify
+315:22:Name -> U
+317:11:Name -> U | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False
+324:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+324:11:Attribute -> Func:salt.config.is_provider_configured
+324:11:Name -> Module:salt.config
+325:8:Name -> ERR
+325:18:Call -> U
+325:18:Name -> Func:salt.cloud.clouds.saltify._get_active_provider_name
+333:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+333:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+333:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+333:45:Name -> U
+335:20:Call -> Const:NoneType:None | U
+335:20:Attribute -> Func:salt.config.get_cloud_config_value
+335:20:Name -> Module:salt.config
+335:67:Name -> U
+335:72:Name -> ERR
+337:7:Name -> Const:NoneType:None | U
+339:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+339:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+339:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+339:66:Name -> U
+341:15:Name -> Const:bool:True | Const:bool:False
+342:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+342:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+342:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+347:20:Name -> U
+348:24:Call -> Const:str:'Administrator' | U
+348:24:Attribute -> Func:salt.config.get_cloud_config_value
+348:24:Name -> Module:salt.config
+349:32:Name -> U
+349:37:Name -> ERR
+351:24:Call -> Const:str:'' | U
+351:24:Attribute -> Func:salt.config.get_cloud_config_value
+351:24:Name -> Module:salt.config
+352:32:Name -> U
+352:37:Name -> ERR
+358:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+358:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+358:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+358:53:Name -> U
+359:15:Call -> ERR
+359:15:Name -> ERR
+359:43:Name -> Dict:3
+361:15:Name -> U
+362:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+362:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+362:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+362:39:Name -> U
+366:20:Call -> Const:bool:False | U
+366:20:Attribute -> Func:salt.config.get_cloud_config_value
+366:20:Name -> Module:salt.config
+367:25:Name -> U
+367:30:Name -> ERR
+370:11:Name -> Const:bool:False | U
+371:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+371:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+371:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+371:57:Name -> U
+372:19:Name -> Const:bool:True | Const:bool:False
+373:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+373:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+373:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+376:12:Name -> Dict:3
+376:29:Call -> Const:int:5986 | U
+376:29:Attribute -> Func:salt.config.get_cloud_config_value
+376:29:Name -> Module:salt.config
+377:30:Name -> U
+377:35:Name -> ERR
+379:12:Name -> Dict:3
+382:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+382:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+382:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+382:59:Name -> U
+383:23:Call -> ERR
+383:23:Name -> ERR
+383:59:Name -> Dict:3
+385:16:Name -> U
+386:16:Name -> U
+387:16:Name -> U
+388:16:Name -> U
+389:16:Name -> U
+390:16:Name -> U
+391:16:Name -> U
+392:16:Name -> U
+394:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+394:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+394:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+394:43:Name -> U
+401:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+401:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+401:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+401:62:Name -> U
+405:20:Name -> U
+406:20:Call -> Const:int:22 | U
+406:20:Attribute -> Func:salt.config.get_cloud_config_value
+406:20:Name -> Module:salt.config
+407:28:Name -> U
+407:33:Name -> ERR
+409:24:Call -> Const:str:'root' | U
+409:24:Attribute -> Func:salt.config.get_cloud_config_value
+409:24:Name -> Module:salt.config
+410:32:Name -> U
+410:37:Name -> ERR
+412:24:Call -> Const:NoneType:None | U
+412:24:Attribute -> Func:salt.config.get_cloud_config_value
+412:24:Name -> Module:salt.config
+413:28:Name -> U
+413:33:Name -> ERR
+415:28:Call -> U
+415:28:Attribute -> Func:salt.config.get_cloud_config_value
+415:28:Name -> Module:salt.config
+417:16:Name -> U
+418:16:Name -> ERR
+420:24:Call -> U
+420:24:Attribute -> Func:salt.config.get_cloud_config_value
+420:24:Name -> Module:salt.config
+421:35:Name -> U
+421:40:Name -> ERR
+424:23:Call -> U
+424:23:Attribute -> U
+424:23:Name -> U
+428:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+428:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+428:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+428:49:Name -> U
+430:19:Call -> ERR
+430:19:Name -> ERR
+430:56:Name -> Dict:7
+431:15:Name -> Class:salt.exceptions.SaltCloudException
+432:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+432:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+432:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+432:39:Name -> ExcInst:salt.exceptions.SaltCloudException
+457:7:Name -> Const:NoneType:None | U
+458:14:Call -> ExcInst:salt.exceptions.SaltCloudSystemExit
+458:14:Name -> Class:salt.exceptions.SaltCloudSystemExit
+462:11:Name -> ERR
+464:4:Call -> ERR
+464:4:Name -> ERR
+467:22:Name -> U
+468:22:Name -> U
+469:17:Name -> U
+470:18:Name -> U
+473:10:Call -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+473:10:Name -> Func:salt.cloud.clouds.saltify.get_configured_provider
+474:9:Call -> Inst:salt.client.LocalClient
+474:9:Attribute -> Class:salt.client.LocalClient
+474:9:Attribute -> Module:salt.client
+474:9:Name -> Module:salt
+475:18:Call -> U
+475:18:Attribute -> U
+475:18:Name -> Inst:salt.client.LocalClient
+475:28:Name -> U
+477:12:Call -> U
+477:12:Attribute -> U
+477:12:Name -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+477:23:Name -> U
+477:31:Name -> U
+478:16:Name -> Class:builtins.IndexError
+478:28:Name -> Class:builtins.TypeError
+480:11:Call -> Const:bool:True | U
+480:11:Attribute -> Func:salt.config.get_cloud_config_value
+480:11:Name -> Module:salt.config
+481:40:Name -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+481:45:Name -> U
+483:18:Call -> U
+483:18:Attribute -> U
+483:18:Name -> Inst:salt.client.LocalClient
+484:16:Name -> U
+488:15:Name -> U
+488:23:Name -> U
+488:27:Name -> U
+489:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+489:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+489:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+489:63:Name -> U
+490:18:Call -> U
+490:18:Attribute -> U
+490:18:Name -> Inst:salt.client.LocalClient
+490:28:Name -> U
+491:15:Name -> U
+491:23:Name -> U
+491:27:Name -> U
+492:26:Name -> U
+492:30:Name -> U
+493:22:Call -> U
+493:22:Attribute -> U
+493:22:Name -> Inst:salt.client.LocalClient
+493:32:Name -> U
+493:54:Name -> U
+494:19:Name -> U
+494:27:Name -> U
+494:31:Name -> U
+495:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+495:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+495:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+495:72:Name -> U
+495:78:Name -> U
+496:18:Call -> U
+496:18:Attribute -> U
+496:18:Name -> Inst:salt.client.LocalClient
+496:28:Name -> U
+497:15:Name -> U
+497:23:Name -> U
+497:27:Name -> U
+498:26:Name -> U
+498:30:Name -> U
+499:22:Call -> U
+499:22:Attribute -> U
+499:22:Name -> Inst:salt.client.LocalClient
+499:32:Name -> U
+499:54:Name -> U
+500:19:Name -> U
+500:27:Name -> U
+500:31:Name -> U
+501:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+501:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+501:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+501:66:Name -> U
+501:72:Name -> U
+503:11:Call -> Const:bool:False | U
+503:11:Attribute -> Func:salt.config.get_cloud_config_value
+503:11:Name -> Module:salt.config
+504:35:Name -> Const:bool:False | Const:bool:False | Const:bool:False | U | Const:bool:False
+504:40:Name -> U
+506:18:Call -> U
+506:18:Attribute -> U
+506:18:Name -> Inst:salt.client.LocalClient
+506:28:Name -> U
+507:15:Name -> U
+507:23:Name -> U
+507:27:Name -> U
+508:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+508:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+508:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+508:69:Name -> U
+510:4:Call -> ERR
+510:4:Name -> ERR
+513:22:Name -> U
+514:22:Name -> U
+515:17:Name -> U
+516:18:Name -> U
+519:28:Name -> U
+538:7:Name -> Const:NoneType:None | U
+539:14:Call -> ExcInst:salt.exceptions.SaltCloudException
+539:14:Name -> Class:salt.exceptions.SaltCloudException
+543:9:Call -> Inst:salt.client.LocalClient
+543:9:Attribute -> Class:salt.client.LocalClient
+543:9:Attribute -> Module:salt.client
+543:9:Name -> Module:salt
+544:15:Call -> U
+544:15:Attribute -> U
+544:15:Name -> Inst:salt.client.LocalClient
+544:25:Name -> U

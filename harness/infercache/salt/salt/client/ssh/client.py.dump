@@ -1,0 +1,275 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'salt.client.ssh.client' | Const:str:'__main__'
+24:15:Call -> U
+24:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+24:15:Attribute -> Module:posixpath | Module:ntpath
+24:15:Name -> Module:os
+24:28:Attribute -> U
+24:28:Attribute -> Module:salt.syspaths
+24:28:Name -> Module:salt
+28:11:Name -> Const:NoneType:None | U
+29:12:Name -> Inst:salt.client.ssh.client.SSHClient
+29:24:Name -> U
+31:15:Call -> Const:bool:False | U
+31:15:Attribute -> Func:genericpath.isdir | U
+31:15:Attribute -> Module:posixpath | Module:ntpath
+31:15:Name -> Module:os
+31:29:Name -> U
+32:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+32:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+32:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+35:20:Attribute -> Const:str:'SSHClient'
+35:20:Attribute -> Class:salt.client.ssh.client.SSHClient
+35:20:Name -> Inst:salt.client.ssh.client.SSHClient
+36:20:Name -> U
+38:12:Name -> Inst:salt.client.ssh.client.SSHClient
+38:24:Call -> Inst:salt.utils.optsdict.OptsDict
+38:24:Attribute -> Func:salt.config.client_config
+38:24:Attribute -> Module:salt.config
+38:24:Name -> Module:salt
+38:50:Name -> U
+41:8:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+41:8:Name -> Inst:salt.client.ssh.client.SSHClient
+41:47:Name -> Const:bool:False | U
+44:31:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+44:31:Name -> Inst:salt.client.ssh.client.SSHClient
+45:12:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+45:12:Name -> Inst:salt.client.ssh.client.SSHClient
+45:38:Call -> U
+45:38:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+45:38:Attribute -> Module:posixpath | Module:ntpath
+45:38:Name -> Module:os
+45:54:Name -> U
+49:21:Name -> Class:builtins.str
+50:25:Name -> Class:builtins.str
+51:27:Name -> Class:builtins.str
+52:25:Name -> Class:builtins.int
+53:25:Name -> Class:builtins.bool
+54:30:Name -> Class:builtins.str
+55:25:Name -> Class:builtins.str
+56:32:Name -> Class:builtins.str
+57:36:Name -> Class:builtins.bool
+58:41:Name -> Class:builtins.str
+59:30:Name -> Class:builtins.bool
+60:39:Name -> Class:builtins.int
+61:40:Name -> Class:builtins.int
+62:28:Name -> Class:builtins.list
+63:30:Name -> Class:builtins.int
+64:28:Name -> Class:builtins.bool
+65:31:Name -> Class:builtins.bool
+66:34:Name -> Class:builtins.bool
+67:31:Name -> Class:builtins.str
+68:33:Name -> Class:builtins.int
+69:28:Name -> Class:builtins.int
+70:29:Name -> Class:builtins.str
+71:29:Name -> Class:builtins.str
+72:26:Name -> Class:builtins.bool
+73:30:Name -> Class:builtins.bool
+74:23:Name -> Class:builtins.str
+75:28:Name -> Class:builtins.str
+76:24:Name -> Class:builtins.list
+77:33:Name -> Class:builtins.bool
+78:26:Name -> Class:builtins.bool
+79:31:Name -> Class:builtins.str
+80:31:Name -> Class:builtins.str
+81:32:Name -> Class:builtins.str
+82:24:Name -> Class:builtins.bool
+83:23:Name -> Class:builtins.bool
+84:25:Name -> Class:builtins.bool
+85:30:Name -> Class:builtins.bool
+86:27:Name -> Class:builtins.bool
+87:35:Name -> Class:builtins.bool
+88:29:Name -> Class:builtins.bool
+89:25:Name -> Class:builtins.str
+92:26:Name -> List:41
+93:15:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | U
+93:27:Name -> U
+96:22:Call -> Inst:builtins.str | Inst:builtins.int | Inst:builtins.bool | Inst:builtins.list
+96:22:Name -> Class:builtins.str | Class:builtins.int | Class:builtins.bool | Class:builtins.list
+96:27:Name -> U
+96:34:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+97:19:Name -> Class:builtins.ValueError
+98:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+98:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+98:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+98:55:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+100:15:Name -> Class:builtins.str | Class:builtins.int | Class:builtins.bool | Class:builtins.list
+100:23:Name -> Class:builtins.bool
+100:31:Name -> Class:builtins.str | Class:builtins.int | Class:builtins.bool | Class:builtins.list
+100:39:Name -> Class:builtins.int
+101:16:Name -> Dict:0
+101:28:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+101:36:Name -> Inst:builtins.str | Inst:builtins.int | Inst:builtins.bool | Inst:builtins.list
+102:17:Name -> Class:builtins.str | Class:builtins.int | Class:builtins.bool | Class:builtins.list
+102:25:Name -> Class:builtins.str
+103:19:Call -> Const:int:0
+103:19:Attribute -> BM:builtins.str.find
+103:19:Name -> Inst:builtins.str | Inst:builtins.int | Inst:builtins.bool | Inst:builtins.list
+104:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+104:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+104:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+104:68:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+106:16:Name -> Dict:0
+106:28:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+106:36:Name -> Inst:builtins.str | Inst:builtins.int | Inst:builtins.bool | Inst:builtins.list
+107:17:Name -> Class:builtins.str | Class:builtins.int | Class:builtins.bool | Class:builtins.list
+107:25:Name -> Class:builtins.list
+109:28:Name -> Inst:builtins.str | Inst:builtins.int | Inst:builtins.bool | Inst:builtins.list
+111:23:Call -> U
+111:23:Attribute -> U
+111:23:Name -> U
+112:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+112:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+112:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+112:72:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+114:20:Call -> ERR
+114:20:Attribute -> BM:builtins.list.append
+114:20:Name -> List:0
+114:36:Name -> U
+115:16:Name -> Dict:0
+115:28:Name -> Const:str:'host' | Const:str:'ssh_user' | Const:str:'ssh_passwd' | Const:str:'ssh_port' | Const:str:'ssh_sudo' | Const:str:'ssh_sudo_user' | Const:str:'ssh_priv' | Const:str:'ssh_priv_passwd' | Const:str:'ssh_identities_only' | Const:str:'ssh_remote_port_forwards' | Const:str:'ssh_keepalive' | Const:str:'ssh_keepalive_interval' | Const:str:'ssh_keepalive_count_max' | Const:str:'ssh_options' | Const:str:'ssh_max_procs' | Const:str:'ssh_askpass' | Const:str:'ssh_key_deploy' | Const:str:'ssh_update_roster' | Const:str:'ssh_scan_ports' | Const:str:'ssh_scan_timeout' | Const:str:'ssh_timeout' | Const:str:'ssh_log_file' | Const:str:'ssh_pre_hook' | Const:str:'raw_shell' | Const:str:'refresh_cache' | Const:str:'roster' | Const:str:'roster_file' | Const:str:'rosters' | Const:str:'ignore_host_keys' | Const:str:'raw_shell' | Const:str:'extra_filerefs' | Const:str:'min_extra_mods' | Const:str:'thin_extra_mods' | Const:str:'verbose' | Const:str:'static' | Const:str:'ssh_wipe' | Const:str:'rand_thin_dir' | Const:str:'regen_thin' | Const:str:'ssh_run_pre_flight' | Const:str:'no_host_keys' | Const:str:'saltfile'
+115:36:Name -> List:0
+116:15:Name -> Dict:0
+124:17:Call -> Dict:0
+124:17:Attribute -> BM:salt.client.ssh.client.SSHClient.sanitize_kwargs
+124:17:Name -> Inst:salt.client.ssh.client.SSHClient
+124:38:Name -> Dict:0
+125:15:Call -> U | Inst:salt.utils.optsdict.OptsDict
+125:15:Attribute -> Func:copy.deepcopy
+125:15:Name -> Module:copy
+125:29:Attribute -> U | Inst:salt.utils.optsdict.OptsDict
+125:29:Name -> Inst:salt.client.ssh.client.SSHClient
+126:8:Call -> U | Const:NoneType:None
+126:8:Attribute -> U | BM:salt.utils.optsdict.OptsDict.update
+126:8:Name -> U | Inst:salt.utils.optsdict.OptsDict
+126:20:Name -> Dict:0
+127:11:Name -> Const:NoneType:None | U
+128:12:Name -> U | Inst:salt.utils.optsdict.OptsDict
+128:30:Name -> U
+129:14:Call -> List:1 | List:0
+129:14:Attribute -> Func:salt.utils.args.condition_input
+129:14:Attribute -> Module:salt.utils.args
+129:14:Attribute -> Module:salt.utils
+129:14:Name -> Module:salt
+129:46:Name -> Tuple:0 | U
+129:51:Name -> Const:NoneType:None | U
+130:8:Name -> U | Inst:salt.utils.optsdict.OptsDict
+130:24:Name -> U
+130:31:Name -> List:1 | List:0
+131:8:Name -> U | Inst:salt.utils.optsdict.OptsDict
+131:41:Name -> Const:str:'glob' | U
+132:8:Name -> U | Inst:salt.utils.optsdict.OptsDict
+132:22:Name -> U
+133:8:Name -> U | Inst:salt.utils.optsdict.OptsDict
+133:22:Name -> List:1 | List:0
+134:15:Call -> Inst:salt.client.ssh.SSH
+134:15:Attribute -> Class:salt.client.ssh.SSH
+134:15:Attribute -> Module:salt.client.ssh
+134:15:Attribute -> Module:salt.client
+134:15:Name -> Module:salt
+134:35:Name -> U | Inst:salt.utils.optsdict.OptsDict
+153:14:Call -> Inst:salt.client.ssh.SSH
+153:14:Attribute -> BM:salt.client.ssh.client.SSHClient._prep_ssh
+153:14:Name -> Inst:salt.client.ssh.client.SSHClient
+153:29:Name -> U
+153:34:Name -> U
+153:39:Name -> Tuple:0 | U
+153:44:Name -> Const:NoneType:None | U
+153:53:Name -> Const:str:'glob' | U
+153:63:Name -> Const:NoneType:None | U
+153:72:Name -> Dict:0
+154:19:Call -> Gen:salt.client.ssh.SSH.run_iter
+154:19:Attribute -> BM:salt.client.ssh.SSH.run_iter
+154:19:Name -> Inst:salt.client.ssh.SSH
+154:36:Call -> ERR
+154:36:Attribute -> BM:builtins.dict.get
+154:36:Name -> Dict:0
+165:14:Call -> Inst:salt.client.ssh.SSH
+165:14:Attribute -> BM:salt.client.ssh.client.SSHClient._prep_ssh
+165:14:Name -> Inst:salt.client.ssh.client.SSHClient
+165:29:Name -> U
+165:34:Name -> U
+165:39:Name -> Tuple:0 | U
+165:44:Name -> Const:NoneType:None | U
+165:53:Name -> Const:str:'glob' | U
+165:63:Name -> Const:NoneType:None | U
+165:72:Name -> Dict:0
+167:19:Call -> Gen:salt.client.ssh.SSH.run_iter
+167:19:Attribute -> BM:salt.client.ssh.SSH.run_iter
+167:19:Name -> Inst:salt.client.ssh.SSH
+167:36:Call -> ERR
+167:36:Attribute -> BM:builtins.dict.get
+167:36:Name -> Dict:0
+168:12:Call -> ERR
+168:12:Attribute -> BM:builtins.dict.update
+168:12:Name -> Dict:0
+168:25:Name -> U
+169:15:Name -> Dict:0
+191:17:Call -> U
+191:17:Attribute -> Func:copy.deepcopy
+191:17:Name -> Module:copy
+191:31:Name -> U
+194:15:Name -> Const:str:'tgt' | Const:str:'fun' | Const:str:'arg' | Const:str:'timeout' | Const:str:'tgt_type' | Const:str:'kwarg'
+194:25:Name -> U
+195:20:Name -> U
+195:27:Name -> Const:str:'tgt' | Const:str:'fun' | Const:str:'arg' | Const:str:'timeout' | Const:str:'tgt_type' | Const:str:'kwarg'
+197:15:Call -> Dict:0
+197:15:Attribute -> BM:salt.client.ssh.client.SSHClient.cmd
+197:15:Name -> Inst:salt.client.ssh.client.SSHClient
+198:12:Name -> U
+199:12:Name -> U
+200:12:Call -> U
+200:12:Attribute -> U
+200:12:Name -> U
+201:12:Call -> U
+201:12:Attribute -> U
+201:12:Name -> U
+202:12:Call -> U
+202:12:Attribute -> U
+202:12:Name -> U
+203:12:Call -> U
+203:12:Attribute -> U
+203:12:Name -> U
+204:14:Name -> U
+225:14:Name -> Class:salt.exceptions.SaltClientError
+256:21:Call -> Dict:0
+256:21:Attribute -> BM:salt.client.ssh.client.SSHClient.cmd
+256:21:Name -> Inst:salt.client.ssh.client.SSHClient
+256:30:Name -> U
+256:66:Name -> Const:str:'glob' | U
+256:78:Name -> Dict:0
+257:18:Call -> List:0
+257:18:Name -> Class:builtins.list
+257:23:Name -> Dict:0
+258:8:Call -> Const:NoneType:None
+258:8:Attribute -> BM:random.Random.shuffle
+258:8:Name -> Module:random
+258:23:Name -> List:0
+260:22:Name -> List:0
+261:15:Name -> U
+261:22:Name -> Dict:0
+261:33:Name -> U
+262:16:Call -> ERR
+262:16:Attribute -> BM:builtins.list.append
+262:16:Name -> List:0
+262:29:Name -> U
+263:15:Call -> Const:int:0
+263:15:Name -> Func:builtins.len
+263:19:Name -> List:0
+263:29:Name -> Const:int:3 | U
+265:15:Call -> Gen:salt.client.ssh.client.SSHClient.cmd_iter
+265:15:Attribute -> BM:salt.client.ssh.client.SSHClient.cmd_iter
+265:15:Name -> Inst:salt.client.ssh.client.SSHClient
+266:12:Name -> List:0
+266:19:Name -> U
+266:24:Name -> Tuple:0 | U
+266:29:Name -> Const:NoneType:None | U
+266:59:Name -> Const:str:'' | U
+266:70:Name -> Const:NoneType:None | U
+266:79:Name -> Dict:0
+278:15:Name -> Inst:salt.client.ssh.client.SSHClient
+284:8:Call -> ERR
+284:8:Attribute -> BM:salt.client.ssh.client.SSHClient.destroy
+284:8:Name -> Inst:salt.client.ssh.client.SSHClient

@@ -1,0 +1,206 @@
+17:7:Name -> Const:str:'base' | U
+17:22:Name -> ERR
+18:15:Name -> List:0
+19:16:Name -> ERR
+19:39:Name -> Const:str:'base' | U
+20:15:Call -> U
+20:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+20:15:Attribute -> Module:posixpath | Module:ntpath
+20:15:Name -> Module:os
+20:28:Name -> ERR
+20:34:Name -> U
+21:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+21:15:Attribute -> Func:salt.utils.verify.clean_path
+21:15:Attribute -> Module:salt.utils.verify
+21:15:Attribute -> Module:salt.utils
+21:15:Name -> Module:salt
+21:44:Name -> ERR
+21:50:Name -> U
+23:11:Call -> Const:bool:False | U
+23:11:Attribute -> Func:genericpath.isfile | U
+23:11:Attribute -> Module:posixpath | Module:ntpath
+23:11:Name -> Module:os
+23:26:Name -> U
+25:17:Call -> U
+25:17:Attribute -> Func:salt.utils.files.fopen
+25:17:Attribute -> Module:salt.utils.files
+25:17:Attribute -> Module:salt.utils
+25:17:Name -> Module:salt
+25:40:Name -> U
+26:19:Call -> Const:bool:False | Const:bool:True | Const:bool:False | U
+26:19:Attribute -> Func:salt.utils.files.is_text
+26:19:Attribute -> Module:salt.utils.files
+26:19:Attribute -> Module:salt.utils
+26:19:Name -> Module:salt
+26:44:Name -> U
+27:20:Call -> ERR
+27:20:Attribute -> BM:builtins.list.append
+27:20:Name -> List:0
+27:32:Name -> U
+29:20:Call -> ERR
+29:20:Attribute -> BM:builtins.list.append
+29:20:Name -> List:0
+29:32:Name -> U
+30:11:Name -> List:0
+38:7:Name -> Const:str:'base' | U
+38:22:Name -> ERR
+39:15:Name -> Dict:0
+40:18:Name -> ERR
+40:41:Name -> Const:str:'base' | U
+41:8:Name -> Dict:0
+41:12:Name -> ERR
+42:33:Call -> Gen:salt.utils.path.os_walk
+42:33:Attribute -> Func:salt.utils.path.os_walk
+42:33:Attribute -> Module:salt.utils.path
+42:33:Attribute -> Module:salt.utils
+42:33:Name -> Module:salt
+42:57:Name -> ERR
+43:18:Name -> Dict:0
+43:22:Name -> ERR
+44:15:Name -> U
+44:23:Name -> ERR
+46:24:Name -> U
+49:26:Call -> U
+49:26:Attribute -> Func:genericpath.samefile
+49:26:Attribute -> Module:posixpath | Module:ntpath
+49:26:Name -> Module:os
+49:43:Name -> U
+49:50:Name -> ERR
+50:27:Call -> U
+50:27:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+50:27:Attribute -> Module:posixpath | Module:ntpath
+50:27:Name -> Module:os
+50:44:Name -> U
+51:23:Name -> U
+52:24:Call -> ERR
+52:24:Attribute -> BM:builtins.list.insert
+52:24:Name -> List:0
+52:40:Name -> U
+53:28:Call -> U
+53:28:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+53:28:Attribute -> Module:posixpath | Module:ntpath
+53:28:Name -> Module:os
+53:44:Name -> U
+54:29:Name -> List:0
+55:26:Name -> U
+55:30:Name -> U
+56:24:Name -> U
+57:16:Name -> U
+57:20:Name -> U
+58:23:Name -> U
+59:16:Name -> U
+59:20:Name -> U
+60:11:Name -> Dict:0
+68:19:Name -> ERR
+69:8:Name -> Dict:0
+69:12:Name -> ERR
+70:8:Call -> ERR
+70:8:Attribute -> ERR
+70:8:Name -> Dict:0
+70:12:Name -> ERR
+70:28:Call -> Dict:0
+70:28:Name -> Func:salt.wheel.file_roots.list_env
+70:37:Name -> ERR
+71:11:Name -> Dict:0
+80:12:Call -> List:0
+80:12:Name -> Func:salt.wheel.file_roots.find
+80:17:Name -> U
+80:23:Name -> Const:str:'base' | U
+81:15:Name -> List:0
+82:15:Call -> ERR
+82:15:Name -> Func:builtins.next
+82:20:Call -> ERR
+82:20:Name -> Func:builtins.iter
+82:25:Call -> U
+82:25:Attribute -> U
+82:25:Name -> U
+83:15:Name -> U
+83:19:Name -> U
+84:11:Name -> U
+85:17:Call -> U
+85:17:Attribute -> Func:salt.utils.files.fopen
+85:17:Attribute -> Module:salt.utils.files
+85:17:Attribute -> Module:salt.utils
+85:17:Name -> Module:salt
+85:40:Name -> U
+86:16:Call -> ERR
+86:16:Attribute -> BM:builtins.list.append
+86:16:Name -> List:0
+86:28:Name -> U
+86:34:Call -> U
+86:34:Attribute -> Func:salt.utils.stringutils.to_unicode
+86:34:Attribute -> Module:salt.utils.stringutils
+86:34:Attribute -> Module:salt.utils
+86:34:Name -> Module:salt
+86:68:Call -> U
+86:68:Attribute -> U
+86:68:Name -> U
+87:11:Name -> List:0
+95:7:Name -> Const:str:'base' | U
+95:22:Name -> ERR
+96:36:Name -> Const:str:'base' | U
+97:7:Call -> ERR
+97:7:Name -> Func:builtins.len
+97:11:Name -> ERR
+97:34:Name -> Const:str:'base' | U
+97:47:Name -> Const:int:0 | U
+98:15:Call -> U
+98:15:Attribute -> BM:builtins.str.format
+99:12:Name -> Const:int:0 | U
+99:19:Name -> Const:str:'base' | U
+101:7:Call -> U | Const:bool:True | Const:bool:False
+101:7:Attribute -> Func:posixpath.isabs | Func:ntpath.isabs
+101:7:Attribute -> Module:posixpath | Module:ntpath
+101:7:Name -> Module:os
+101:21:Name -> U
+102:15:Call -> U
+102:15:Attribute -> BM:builtins.str.format
+103:12:Name -> U
+103:18:Name -> Const:str:'base' | U
+105:11:Name -> ERR
+105:34:Name -> Const:str:'base' | U
+105:43:Name -> Const:int:0 | U
+106:11:Call -> U
+106:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+106:11:Attribute -> Module:posixpath | Module:ntpath
+106:11:Name -> Module:os
+106:24:Name -> U
+106:30:Name -> U
+107:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+107:11:Attribute -> Func:salt.utils.verify.clean_path
+107:11:Attribute -> Module:salt.utils.verify
+107:11:Attribute -> Module:salt.utils
+107:11:Name -> Module:salt
+107:40:Name -> U
+107:46:Name -> U
+108:32:Name -> U
+109:15:Call -> U
+109:15:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+109:15:Attribute -> Module:posixpath | Module:ntpath
+109:15:Name -> Module:os
+109:31:Name -> U
+110:11:Call -> Const:bool:False | U
+110:11:Attribute -> Func:genericpath.isdir | U
+110:11:Attribute -> Module:posixpath | Module:ntpath
+110:11:Name -> Module:os
+110:25:Name -> U
+111:8:Call -> Const:NoneType:None
+111:8:Attribute -> Func:os.makedirs
+111:8:Name -> Module:os
+111:20:Name -> U
+112:9:Call -> U
+112:9:Attribute -> Func:salt.utils.files.fopen
+112:9:Attribute -> Module:salt.utils.files
+112:9:Attribute -> Module:salt.utils
+112:9:Name -> Module:salt
+112:32:Name -> U
+113:8:Call -> U
+113:8:Attribute -> U
+113:8:Name -> U
+113:18:Call -> U
+113:18:Attribute -> Func:salt.utils.stringutils.to_str
+113:18:Attribute -> Module:salt.utils.stringutils
+113:18:Attribute -> Module:salt.utils
+113:18:Name -> Module:salt
+113:48:Name -> U
+114:33:Name -> U

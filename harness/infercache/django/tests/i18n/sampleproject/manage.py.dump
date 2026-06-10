@@ -1,0 +1,21 @@
+5:0:Call -> U
+5:0:Attribute -> BM:builtins.list.append | BM:builtins.list.append | U
+5:0:Attribute -> List:6 | List:6 | U
+5:0:Name -> Module:sys
+5:16:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+5:16:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+5:16:Attribute -> Module:posixpath | Module:ntpath
+5:16:Name -> Module:os
+5:32:Call -> U
+5:32:Attribute -> Func:posixpath.join | Func:ntpath.join
+5:32:Attribute -> Module:posixpath | Module:ntpath
+5:32:Name -> Module:os
+7:3:Name -> Const:str:'tests.i18n.sampleproject.manage' | Const:str:'__main__'
+8:4:Call -> U
+8:4:Attribute -> BM:builtins.dict.setdefault | BM:os._Environ.setdefault
+8:4:Attribute -> Dict:43 | Inst:os._Environ
+8:4:Name -> Module:os
+12:4:Call -> Const:NoneType:None
+12:4:Name -> Func:django.core.management.execute_from_command_line
+12:30:Attribute -> U
+12:30:Name -> Module:sys

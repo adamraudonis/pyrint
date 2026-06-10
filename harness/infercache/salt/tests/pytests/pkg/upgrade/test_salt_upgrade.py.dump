@@ -1,0 +1,390 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'tests.pytests.pkg.upgrade.test_salt_upg | Const:str:'__main__'
+15:1:Attribute -> U
+15:1:Name -> U
+26:21:Name -> List:3
+27:39:Name -> Const:str:'salt-api' | Const:str:'salt-minion' | Const:str:'salt-master'
+28:14:Call -> U
+28:14:Attribute -> U
+28:14:Name -> U
+28:54:Name -> Const:str:'systemctl enable salt-api' | Const:str:'systemctl enable salt-minion' | Const:str:'systemctl enable salt-master'
+29:15:Attribute -> U
+29:15:Name -> U
+31:40:Name -> Const:str:'salt-api' | Const:str:'salt-minion' | Const:str:'salt-master'
+32:14:Call -> U
+32:14:Attribute -> U
+32:14:Name -> U
+32:54:Name -> Const:str:'systemctl restart salt-api' | Const:str:'systemctl restart salt-minion' | Const:str:'systemctl restart salt-master'
+33:15:Attribute -> U
+33:15:Name -> U
+45:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+45:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+45:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+48:10:Call -> U
+48:10:Attribute -> U
+48:10:Name -> U
+49:11:Attribute -> U
+49:11:Name -> U
+50:20:Call -> U
+50:20:Attribute -> U
+50:20:Attribute -> U
+50:20:Name -> U
+50:44:Attribute -> U
+50:44:Name -> U
+51:11:Name -> U
+51:28:Call -> U
+51:28:Attribute -> U
+51:28:Attribute -> U
+51:28:Name -> U
+51:52:Attribute -> U
+51:52:Name -> U
+55:7:Attribute -> Const:str:'darwin'
+55:7:Name -> Module:sys
+57:10:Call -> U
+57:10:Attribute -> U
+57:10:Attribute -> U
+57:10:Name -> U
+57:32:Name -> Const:str:'salt' | Const:str:'salt-call.exe'
+58:11:Attribute -> U
+58:11:Name -> U
+59:11:Call -> U
+59:11:Attribute -> U
+59:11:Attribute -> U
+59:11:Name -> U
+60:8:Call -> U
+60:8:Attribute -> U
+60:8:Call -> U
+60:8:Attribute -> U
+60:8:Attribute -> U
+60:8:Name -> U
+61:9:Call -> U
+61:9:Attribute -> U
+61:9:Attribute -> U
+61:9:Name -> U
+61:33:Attribute -> U
+61:33:Name -> U
+64:7:Call -> U
+64:7:Attribute -> U
+64:7:Name -> U
+71:22:Call -> List:0
+71:22:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_running_named_salt_pid
+71:50:Name -> Const:str:'salt-minion.exe' | Const:str:'salt-minion'
+72:22:Call -> List:0
+72:22:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_running_named_salt_pid
+72:50:Name -> Const:str:'cli_salt_master.py' | Const:str:'salt-master'
+73:11:Call -> U
+73:11:Attribute -> U
+73:11:Name -> U
+74:15:Name -> List:0
+75:15:Name -> List:0
+77:7:Call -> U
+77:7:Attribute -> U
+77:7:Name -> U
+79:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+79:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+79:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+81:8:Call -> U
+81:8:Attribute -> U
+81:8:Name -> U
+84:7:Attribute -> Const:str:'darwin'
+84:7:Name -> Module:sys
+84:35:Name -> U
+85:13:Call -> U
+85:13:Attribute -> U
+85:13:Name -> U
+86:12:Call -> U
+86:12:Attribute -> U
+86:12:Name -> U
+88:8:Call -> U
+88:8:Attribute -> U
+88:8:Name -> U
+90:7:Call -> U
+90:7:Attribute -> U
+90:7:Name -> U
+92:8:Call -> ERR
+92:8:Attribute -> Func:time.sleep
+92:8:Name -> Module:time
+94:12:Call -> ERR
+94:12:Attribute -> Func:time.monotonic
+94:12:Name -> Module:time
+96:14:Call -> U
+96:14:Attribute -> U
+96:14:Name -> U
+97:11:Attribute -> U
+97:11:Name -> U
+99:11:Call -> ERR
+99:11:Attribute -> Func:time.monotonic
+99:11:Name -> Module:time
+99:30:Name -> U
+102:10:Call -> U
+102:10:Attribute -> U
+102:10:Name -> U
+103:11:Attribute -> U
+103:11:Name -> U
+105:11:Call -> U
+105:11:Name -> Func:tests.support.pkg.pep440_public_equal
+106:8:Call -> Const:str:''
+106:8:Name -> Class:builtins.str
+106:12:Attribute -> U
+106:12:Name -> U
+106:23:Attribute -> U
+106:23:Name -> U
+107:30:Attribute -> U
+107:30:Name -> U
+107:55:Attribute -> U
+107:55:Name -> U
+109:10:Call -> U
+109:10:Attribute -> U
+109:10:Attribute -> U
+109:10:Name -> U
+109:32:Name -> Const:str:'salt' | Const:str:'salt-call.exe'
+110:11:Attribute -> U
+110:11:Name -> U
+111:11:Call -> U
+111:11:Name -> Func:tests.support.pkg.pep440_public_equal
+112:8:Call -> U
+112:8:Attribute -> U
+112:8:Call -> U
+112:8:Attribute -> U
+112:8:Attribute -> U
+112:8:Name -> U
+112:39:Attribute -> U
+112:39:Name -> U
+113:37:Attribute -> U
+113:37:Name -> U
+117:22:Call -> List:0
+117:22:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_running_named_salt_pid
+117:50:Name -> Const:str:'salt-minion.exe' | Const:str:'salt-minion'
+118:22:Call -> List:0
+118:22:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_running_named_salt_pid
+118:50:Name -> Const:str:'cli_salt_master.py' | Const:str:'salt-master'
+120:7:Attribute -> Const:str:'darwin'
+120:7:Name -> Module:sys
+120:39:Name -> List:0
+122:12:Call -> U
+122:12:Attribute -> U
+122:12:Attribute -> U
+122:12:Name -> U
+122:58:Name -> Const:str:'salt-minion' | Const:str:'salt-master'
+123:8:Call -> ERR
+123:8:Attribute -> Func:time.sleep
+123:8:Name -> Module:time
+124:26:Call -> List:0
+124:26:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_running_named_salt_pid
+124:54:Name -> Const:str:'salt-minion.exe' | Const:str:'salt-minion'
+125:26:Call -> List:0
+125:26:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_running_named_salt_pid
+125:54:Name -> Const:str:'cli_salt_master.py' | Const:str:'salt-master'
+127:7:Attribute -> Const:str:'darwin'
+127:7:Name -> Module:sys
+127:35:Attribute -> U
+127:35:Name -> U
+128:15:Name -> List:0
+129:15:Name -> List:0
+130:11:Name -> U
+130:27:Call -> U
+130:27:Attribute -> U
+130:27:Attribute -> U
+130:27:Name -> U
+130:51:Attribute -> U
+130:51:Name -> U
+131:19:Name -> List:0
+131:38:Name -> List:0
+132:19:Name -> List:0
+132:38:Name -> List:0
+134:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+134:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+134:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+136:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+136:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+136:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+141:11:Call -> U
+141:11:Attribute -> U
+141:11:Name -> U
+145:21:Call -> Const:str:'' | Const:bytes:b''
+145:21:Attribute -> Func:subprocess.check_output
+145:21:Name -> Module:subprocess
+146:24:Call -> ERR
+146:24:Attribute -> BM:builtins.str.splitlines | BM:builtins.bytes.splitlines
+146:24:Name -> Const:str:'' | Const:bytes:b''
+147:24:Call -> U
+147:24:Attribute -> U
+147:24:Call -> U
+147:24:Attribute -> U
+147:24:Name -> U
+148:19:Call -> ERR
+148:19:Name -> Func:builtins.len
+148:23:Name -> U
+149:39:Name -> U
+150:23:Name -> U
+150:39:Name -> U
+152:28:Call -> ERR
+152:28:Attribute -> BM:builtins.list.append
+152:28:Name -> List:0
+152:40:Call -> Inst:builtins.int
+152:40:Name -> Class:builtins.int
+152:44:Name -> U
+153:31:Name -> Class:builtins.ValueError
+155:15:Attribute -> Class:subprocess.CalledProcessError
+155:15:Name -> Module:subprocess
+158:20:Call -> U
+158:20:Attribute -> U
+158:20:Name -> U
+160:23:Call -> U
+160:23:Attribute -> U
+160:23:Name -> U
+161:29:Name -> U
+161:49:Name -> U
+161:57:Name -> U
+161:73:Name -> U
+162:32:Call -> Const:str:''
+162:32:Attribute -> BM:builtins.str.join
+162:41:Call -> Const:str:''
+162:41:Name -> Class:builtins.str
+162:45:Name -> U
+162:69:Call -> U
+162:69:Attribute -> U
+162:69:Name -> U
+163:23:Name -> U
+163:39:Name -> Const:str:''
+164:24:Call -> ERR
+164:24:Attribute -> BM:builtins.list.append
+164:24:Name -> List:0
+164:36:Attribute -> U
+164:36:Name -> U
+165:20:Attribute -> U
+165:20:Name -> U
+165:42:Attribute -> U
+165:42:Name -> U
+165:64:Attribute -> U
+165:64:Name -> U
+168:11:Name -> List:0
+176:11:Call -> U
+176:11:Attribute -> U
+176:11:Name -> U
+192:13:Call -> Inst:subprocess.CompletedProcess
+192:13:Attribute -> Func:subprocess.run
+192:13:Name -> Module:subprocess
+192:28:Name -> List:3
+193:7:Attribute -> U
+193:7:Name -> Inst:subprocess.CompletedProcess
+194:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+194:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+194:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+194:62:Attribute -> Const:NoneType:None | U
+194:62:Name -> Inst:subprocess.CompletedProcess
+198:16:Call -> U
+198:16:Attribute -> U
+198:16:Call -> U
+198:16:Attribute -> U
+198:16:Attribute -> Const:NoneType:None | U
+198:16:Name -> Inst:subprocess.CompletedProcess
+199:15:Call -> U
+199:15:Attribute -> U
+199:15:Name -> U
+200:11:Name -> U
+200:27:Name -> U
+201:28:Call -> U
+201:28:Attribute -> U
+201:28:Name -> U
+202:12:Call -> ERR
+202:12:Attribute -> BM:builtins.list.append
+202:12:Name -> List:0
+202:29:Call -> U
+202:29:Attribute -> U
+202:29:Name -> U
+202:43:Call -> U
+202:43:Attribute -> U
+202:43:Name -> U
+204:11:Name -> List:0
+213:11:Attribute -> U
+213:11:Name -> U
+214:8:Call -> U
+214:8:Attribute -> U
+214:8:Name -> U
+216:26:Call -> U
+216:26:Attribute -> U
+216:26:Name -> U
+225:13:Name -> Const:str:'PyGithub'
+226:14:Call -> U
+226:14:Attribute -> U
+226:14:Name -> U
+226:58:Name -> Const:str:'PyGithub==1.56.0'
+229:12:Attribute -> U
+229:12:Name -> U
+230:29:Name -> Const:str:'PyGithub==1.56.0'
+230:58:Attribute -> U
+230:58:Name -> U
+231:18:Call -> U
+231:18:Attribute -> U
+231:18:Name -> U
+231:59:Name -> Const:str:'PyGithub'
+232:15:Attribute -> U
+232:15:Name -> U
+232:60:Attribute -> U
+232:60:Name -> U
+233:15:Call -> Const:str:''
+233:15:Attribute -> BM:builtins.str.lower
+233:15:Name -> Const:str:'PyGithub'
+234:12:Call -> U
+234:12:Attribute -> U
+234:12:Name -> U
+234:32:Attribute -> U
+234:32:Name -> U
+235:14:Name -> Const:str:'PyGithub'
+235:63:Attribute -> U
+235:63:Name -> U
+240:8:Call -> Const:NoneType:None
+240:8:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade.salt_test_upgrade
+240:26:Name -> U
+240:41:Name -> U
+240:55:Name -> U
+240:68:Name -> U
+243:7:Call -> U
+243:7:Attribute -> U
+243:7:Name -> U
+244:29:Call -> List:0 | List:0 | List:0
+244:29:Name -> Func:tests.pytests.pkg.upgrade.test_salt_upgrade._get_installed_salt_packages
+245:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+245:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+245:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+245:62:Name -> List:0 | List:0 | List:0
+246:15:Call -> ERR
+246:15:Name -> Func:builtins.len
+246:19:Name -> List:0 | List:0 | List:0
+247:60:Call -> ERR
+247:60:Name -> Func:builtins.len
+247:64:Name -> List:0 | List:0 | List:0
+248:15:Name -> List:0 | List:0 | List:0
+250:40:Name -> List:0 | List:0 | List:0
+251:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+251:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+251:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+252:54:Name -> U
+252:68:Name -> U
+255:21:Call -> U
+255:21:Attribute -> U
+255:21:Name -> U
+256:7:Name -> U
+256:25:Name -> U
+259:18:Call -> U
+259:18:Attribute -> U
+259:18:Name -> U
+259:59:Name -> Const:str:'PyGithub'
+261:12:Attribute -> U
+261:12:Name -> U
+262:45:Attribute -> U
+262:45:Name -> U
+263:15:Call -> Const:str:''
+263:15:Attribute -> BM:builtins.str.lower
+263:15:Name -> Const:str:'PyGithub'
+264:12:Call -> U
+264:12:Attribute -> U
+264:12:Name -> U
+264:32:Attribute -> U
+264:32:Name -> U
+265:14:Name -> Const:str:'PyGithub'
+265:62:Attribute -> U
+265:62:Name -> U

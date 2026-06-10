@@ -1,0 +1,36 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'salt.roster.flat' | Const:str:'__main__'
+20:15:Call -> Const:NoneType:None | U
+20:15:Name -> Func:salt.roster.get_roster_file
+20:31:Name -> ERR
+22:11:Call -> Inst:salt.loader.lazy.FilterDictWrapper
+22:11:Attribute -> Func:salt.loader.render
+22:11:Attribute -> Module:salt.loader
+22:11:Name -> Module:salt
+22:30:Name -> ERR
+23:10:Call -> Dict:0 | U | Inst:_io.StringIO
+23:10:Name -> Func:salt.template.compile_template
+24:8:Name -> Const:NoneType:None | U
+25:8:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+26:8:Name -> ERR
+27:8:Name -> ERR
+28:8:Name -> ERR
+30:10:Name -> Dict:0
+33:18:Name -> Dict:0 | U | Inst:_io.StringIO
+34:8:Name -> Dict:0
+34:24:Call -> Const:str:''
+34:24:Name -> Class:builtins.str
+34:28:Name -> U
+34:39:Call -> Const:NoneType:None | U
+34:39:Attribute -> Func:salt.config.apply_sdb
+34:39:Attribute -> Module:salt.config
+34:39:Name -> Module:salt
+34:61:Name -> Dict:0 | U | Inst:_io.StringIO
+34:65:Name -> U
+35:11:Call -> ERR
+35:11:Name -> ERR
+35:47:Name -> Dict:0
+35:64:Name -> U
+35:69:Name -> Const:str:'glob' | U

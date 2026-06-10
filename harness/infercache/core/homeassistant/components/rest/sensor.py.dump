@@ -1,0 +1,209 @@
+47:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+47:10:Attribute -> Func:logging.getLogger
+47:10:Name -> Module:logging
+47:28:Name -> Const:str:'homeassistant.components.rest.sensor' | Const:str:'__main__'
+49:18:Call -> U
+49:18:Attribute -> U
+49:18:Name -> U
+50:4:Call -> U
+50:4:Attribute -> U
+50:4:Name -> U
+50:37:Name -> Dict:14
+50:56:Name -> U
+51:4:Call -> Func:homeassistant.helpers.config_validation.has_at_least_one_key.validate
+51:4:Attribute -> Func:homeassistant.helpers.config_validation.has_at_least_one_key
+51:4:Name -> Module:homeassistant.helpers.config_validation
+51:28:Name -> Const:str:'resource'
+51:43:Name -> Const:str:'resource_template'
+55:4:Name -> Const:str:'availability'
+56:4:Name -> Const:str:'device_class'
+57:4:Name -> Const:str:'icon'
+58:4:Name -> Const:str:'picture'
+59:4:Name -> Const:str:'unique_id'
+60:4:Name -> Const:str:'state_class'
+61:4:Name -> Const:str:'unit_of_measurement'
+66:10:Name -> U
+67:12:Name -> Class:builtins.dict
+68:24:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+69:20:Name -> Class:builtins.dict
+74:7:Name -> Const:NoneType:None | U
+75:40:Call -> Tuple:3
+75:40:Name -> Func:homeassistant.components.rest.async_get_config_and_coordinator
+76:12:Name -> U
+76:18:Name -> Const:str:'sensor'
+76:33:Name -> U
+79:15:Name -> U
+81:15:Call -> Inst:homeassistant.components.rest.data.RestData
+81:15:Name -> Func:homeassistant.components.rest.create_rest_data_from_config
+81:44:Name -> U
+81:50:Name -> U
+82:14:Call -> Const:NoneType:None
+82:14:Attribute -> BM:homeassistant.components.rest.data.RestData.async_update
+82:14:Name -> Inst:homeassistant.components.rest.data.RestData
+84:7:Attribute -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+84:7:Name -> U | Inst:homeassistant.components.rest.data.RestData
+85:11:Attribute -> U | Const:NoneType:None | ExcInst:builtins.TimeoutError
+85:11:Name -> U | Inst:homeassistant.components.rest.data.RestData
+86:15:Call -> ERR
+86:15:Name -> Func:builtins.isinstance
+86:26:Attribute -> U | ExcInst:builtins.TimeoutError
+86:26:Name -> U | Inst:homeassistant.components.rest.data.RestData
+86:47:Attribute -> U
+86:47:Name -> Module:ssl
+87:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+87:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+87:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+89:20:Attribute -> U
+89:20:Name -> U | Inst:homeassistant.components.rest.data.RestData
+90:20:Attribute -> U | ExcInst:builtins.TimeoutError
+90:20:Name -> U | Inst:homeassistant.components.rest.data.RestData
+93:18:Name -> Class:homeassistant.exceptions.PlatformNotReady
+93:40:Attribute -> U | ExcInst:builtins.TimeoutError
+93:40:Name -> U | Inst:homeassistant.components.rest.data.RestData
+94:14:Name -> Class:homeassistant.exceptions.PlatformNotReady
+96:11:Call -> U
+96:11:Attribute -> U
+96:11:Name -> U
+96:20:Name -> Const:str:'name'
+96:34:Call -> U
+96:34:Name -> U
+96:43:Name -> Const:str:'REST Sensor'
+96:64:Name -> U
+98:29:Name -> Const:str:'name'
+98:40:Name -> U
+100:15:Name -> Tuple:7
+101:11:Name -> Const:str:'availability' | Const:str:'device_class' | Const:str:'icon' | Const:str:'picture' | Const:str:'unique_id' | Const:str:'state_class' | Const:str:'unit_of_measurement'
+101:22:Name -> U
+103:8:Name -> Dict:1
+103:30:Name -> Const:str:'availability' | Const:str:'device_class' | Const:str:'icon' | Const:str:'picture' | Const:str:'unique_id' | Const:str:'state_class' | Const:str:'unit_of_measurement'
+103:37:Name -> U
+103:42:Name -> Const:str:'availability' | Const:str:'device_class' | Const:str:'icon' | Const:str:'picture' | Const:str:'unique_id' | Const:str:'state_class' | Const:str:'unit_of_measurement'
+105:4:Call -> U
+105:4:Name -> U
+107:12:Call -> Inst:homeassistant.components.rest.sensor.RestSensor
+107:12:Name -> Class:homeassistant.components.rest.sensor.RestSensor
+108:16:Name -> U
+109:16:Name -> U | Const:NoneType:None
+110:16:Name -> U | Inst:homeassistant.components.rest.data.RestData
+111:16:Name -> U
+112:16:Name -> Dict:1
+118:17:Name -> Class:homeassistant.helpers.trigger_template_entity.ManualTriggerSensorEntity
+118:44:Name -> Class:homeassistant.components.rest.entity.RestEntity
+123:14:Name -> U
+124:21:Name -> U
+125:14:Name -> Class:homeassistant.components.rest.data.RestData
+126:16:Name -> Class:builtins.dict
+127:31:Name -> Class:builtins.dict
+130:8:Call -> Const:NoneType:None
+130:8:Attribute -> UM:homeassistant.helpers.trigger_template_entity.ManualTriggerSensorEntity.__init__
+130:8:Name -> Class:homeassistant.helpers.trigger_template_entity.ManualTriggerSensorEntity
+130:43:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+130:49:Name -> U
+130:55:Name -> U
+131:8:Call -> Const:NoneType:None
+131:8:Attribute -> UM:homeassistant.components.rest.entity.RestEntity.__init__
+131:8:Name -> Class:homeassistant.components.rest.entity.RestEntity
+132:12:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+133:12:Name -> U
+134:12:Name -> U
+135:12:Call -> U
+135:12:Attribute -> U
+135:12:Name -> U
+135:23:Name -> Const:str:'resource_template'
+136:12:Name -> U
+136:19:Name -> Const:str:'force_update'
+138:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+138:30:Name -> Class:homeassistant.helpers.trigger_template_entity.ValueTemplate
+138:53:Call -> U
+138:53:Attribute -> U
+138:53:Name -> U
+138:64:Name -> Const:str:'value_template'
+139:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+139:27:Call -> U
+139:27:Attribute -> U
+139:27:Name -> U
+139:38:Name -> Const:str:'json_attributes'
+140:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+140:32:Call -> U
+140:32:Attribute -> U
+140:32:Name -> U
+140:43:Name -> Const:str:'json_attributes_path'
+141:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+143:5:Name -> Class:builtins.property
+144:27:Name -> Class:builtins.bool
+146:21:Call -> Const:bool:False | U
+146:21:Attribute -> Func:homeassistant.components.rest.entity.RestEntity.available.fget
+146:21:Attribute -> Prop:homeassistant.components.rest.entity.RestEntity.available
+146:21:Name -> Class:homeassistant.components.rest.entity.RestEntity
+146:47:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+147:21:Call -> Const:bool:True | Const:bool:True | U | Const:bool:True
+147:21:Attribute -> Func:homeassistant.helpers.trigger_template_entity.TriggerBaseEntity.available.fget
+147:21:Attribute -> Prop:homeassistant.helpers.trigger_template_entity.TriggerBaseEntity.available
+147:21:Name -> Class:homeassistant.helpers.trigger_template_entity.ManualTriggerSensorEntity
+147:62:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+148:15:Call -> Const:bool:False
+148:15:Name -> Class:builtins.bool
+148:20:Name -> Const:bool:False | U
+148:35:Name -> Const:bool:True | Const:bool:True | U | Const:bool:True
+150:5:Name -> Class:builtins.property
+151:40:Name -> Class:builtins.dict
+151:45:Name -> Class:builtins.str
+151:50:Name -> Class:typing.Any
+153:15:Call -> Dict:0
+153:15:Name -> Class:builtins.dict
+153:20:Attribute -> Dict:0 | Dict:0 | U | Dict:0
+153:20:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+158:20:Call -> U
+158:20:Attribute -> U
+158:20:Attribute -> U
+158:20:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+159:15:Name -> U
+160:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+160:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+160:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+161:81:Name -> U
+163:20:Attribute -> U
+163:20:Attribute -> U
+163:20:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+165:20:Call -> U
+165:20:Attribute -> BM:homeassistant.helpers.trigger_template_entity.ManualTriggerEntity._template_variables_with_value
+165:20:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+165:56:Name -> U
+166:15:Call -> Const:bool:True | Const:bool:True | U | Const:bool:True
+166:15:Attribute -> BM:homeassistant.helpers.trigger_template_entity.TriggerBaseEntity._render_availability_template
+166:15:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+166:50:Name -> U
+167:12:Call -> Const:NoneType:None
+167:12:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+167:12:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+170:11:Attribute -> U
+170:11:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+171:12:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+171:48:Call -> Dict:0 | U | Dict:0
+171:48:Name -> Func:homeassistant.components.rest.util.parse_json_attributes
+172:16:Name -> U
+172:23:Attribute -> U
+172:23:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+172:41:Attribute -> U
+172:41:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+175:11:Name -> U
+175:33:Attribute -> U
+175:33:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+176:20:Call -> U
+176:20:Attribute -> U
+176:20:Attribute -> U
+176:20:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+177:16:Attribute -> Const:str:'test.entity' | Const:str:'test.entity' | Const:str:'test.entity' | Const:str:'test.entity' | Const:str:'test.entity' | U | Const:str:'test.test' | Const:str:'test.entity' | Const:str:'select.test' | Const:str:'test.overwrite_hidden_true' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'comp_test.test_entity' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'test.test' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'comp_test.test_entity' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world' | Const:str:'hello.world'
+177:16:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+177:32:Name -> U
+180:8:Call -> Const:NoneType:None
+180:8:Attribute -> BM:homeassistant.helpers.trigger_template_entity.ManualTriggerSensorEntity._set_native_value_with_possible_timestamp
+180:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+180:55:Name -> U
+181:8:Call -> Const:NoneType:None
+181:8:Attribute -> BM:homeassistant.helpers.trigger_template_entity.ManualTriggerEntity._process_manual_data
+181:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor
+181:34:Name -> U
+182:8:Call -> Const:NoneType:None
+182:8:Attribute -> BM:homeassistant.helpers.entity.Entity.async_write_ha_state
+182:8:Name -> Inst:homeassistant.components.rest.sensor.RestSensor

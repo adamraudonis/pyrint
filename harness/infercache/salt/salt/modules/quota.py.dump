@@ -1,0 +1,225 @@
+11:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+11:6:Attribute -> Func:logging.getLogger
+11:6:Name -> Module:logging
+11:24:Name -> Const:str:'salt.modules.quota' | Const:str:'__main__'
+22:11:Call -> U
+22:11:Attribute -> Func:salt.utils.platform.is_windows
+22:11:Attribute -> Module:salt.utils.platform
+22:11:Attribute -> Module:salt.utils
+22:11:Name -> Module:salt
+22:48:Call -> Const:NoneType:None | Const:str:'setquota' | U
+22:48:Attribute -> Func:salt.utils.path.which
+22:48:Attribute -> Module:salt.utils.path
+22:48:Attribute -> Module:salt.utils
+22:48:Name -> Module:salt
+41:11:Name -> U
+42:4:Name -> Dict:1
+42:8:Name -> U
+42:32:Call -> Dict:1
+42:32:Name -> Func:salt.modules.quota._parse_quota
+42:45:Name -> U
+43:4:Name -> Dict:1
+43:8:Name -> U
+43:33:Call -> Dict:1
+43:33:Name -> Func:salt.modules.quota._parse_quota
+43:46:Name -> U
+44:11:Name -> Dict:1
+51:26:Name -> U
+51:33:Name -> U
+52:10:Call -> ERR
+52:10:Attribute -> ERR
+52:10:Call -> ERR
+52:10:Name -> ERR
+52:30:Name -> Const:str:'repquota -vp Uninferable Uninferable'
+55:15:Name -> U
+57:17:Name -> U
+59:11:Name -> Const:str:'Users' | Const:str:'Groups'
+61:16:Name -> U
+62:15:Name -> U
+64:16:Call -> U
+64:16:Attribute -> U
+64:16:Name -> U
+65:11:Name -> Const:str:'header'
+66:37:Name -> U
+67:33:Call -> U
+67:33:Attribute -> U
+67:33:Name -> U
+68:26:Call -> U
+68:26:Attribute -> U
+68:26:Name -> U
+69:26:Call -> U
+69:26:Attribute -> U
+69:26:Name -> U
+70:16:Name -> Dict:1
+70:42:Name -> U
+71:16:Name -> Dict:1
+71:42:Name -> U
+72:17:Call -> U
+72:17:Attribute -> U
+72:17:Name -> U
+74:13:Name -> Const:str:'header'
+75:15:Call -> ERR
+75:15:Name -> Func:builtins.len
+75:19:Name -> U
+77:19:Name -> U
+77:31:Name -> Dict:1
+77:35:Name -> Const:str:'Users' | Const:str:'Groups'
+78:16:Name -> Dict:1
+78:20:Name -> Const:str:'Users' | Const:str:'Groups'
+78:31:Name -> U
+79:12:Name -> Dict:1
+79:16:Name -> Const:str:'Users' | Const:str:'Groups'
+79:27:Name -> U
+79:53:Name -> U
+80:12:Name -> Dict:1
+80:16:Name -> Const:str:'Users' | Const:str:'Groups'
+80:27:Name -> U
+80:59:Name -> U
+81:12:Name -> Dict:1
+81:16:Name -> Const:str:'Users' | Const:str:'Groups'
+81:27:Name -> U
+81:59:Name -> U
+82:12:Name -> Dict:1
+82:16:Name -> Const:str:'Users' | Const:str:'Groups'
+82:27:Name -> U
+82:54:Name -> U
+83:12:Name -> Dict:1
+83:16:Name -> Const:str:'Users' | Const:str:'Groups'
+83:27:Name -> U
+83:52:Name -> U
+84:12:Name -> Dict:1
+84:16:Name -> Const:str:'Users' | Const:str:'Groups'
+84:27:Name -> U
+84:58:Name -> U
+85:12:Name -> Dict:1
+85:16:Name -> Const:str:'Users' | Const:str:'Groups'
+85:27:Name -> U
+85:58:Name -> U
+86:12:Name -> Dict:1
+86:16:Name -> Const:str:'Users' | Const:str:'Groups'
+86:27:Name -> U
+86:53:Name -> U
+87:11:Name -> Dict:1
+110:17:Name -> Dict:0
+111:15:Call -> U
+111:15:Attribute -> BM:builtins.str.format
+111:32:Name -> Dict:0
+112:17:Call -> Dict:1
+112:17:Name -> Func:salt.modules.quota._parse_quota
+112:30:Name -> U
+113:11:Name -> Dict:0
+113:29:Name -> Dict:1
+114:22:Name -> Dict:1
+114:38:Name -> Dict:0
+116:22:Name -> Dict:4
+117:14:Call -> U
+117:14:Attribute -> BM:builtins.str.format
+117:32:Name -> Dict:0
+119:18:Name -> Dict:0
+120:21:Name -> Dict:0
+121:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+121:18:Name -> Class:salt.exceptions.SaltInvocationError
+122:15:Call -> U
+122:15:Attribute -> BM:builtins.str.format
+122:32:Name -> Dict:0
+123:17:Call -> Dict:1
+123:17:Name -> Func:salt.modules.quota._parse_quota
+123:30:Name -> U
+124:11:Name -> Dict:0
+124:30:Name -> Dict:1
+125:22:Name -> Dict:1
+125:39:Name -> Dict:0
+127:22:Name -> Dict:4
+128:14:Call -> U
+128:14:Attribute -> BM:builtins.str.format
+128:33:Name -> Dict:0
+130:11:Name -> Const:NoneType:None | U | Dict:4
+131:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+131:14:Name -> Class:salt.exceptions.CommandExecutionError
+139:11:Name -> Const:str:'block-soft-limit' | Const:str:'block-hard-limit' | Const:str:'file-soft-limit' | Const:str:'file-hard-limit'
+139:20:Name -> Dict:0
+140:12:Name -> Const:NoneType:None | U | Dict:4
+140:20:Name -> Const:str:'block-soft-limit' | Const:str:'block-hard-limit' | Const:str:'file-soft-limit' | Const:str:'file-hard-limit'
+140:29:Name -> Dict:0
+140:36:Name -> Const:str:'block-soft-limit' | Const:str:'block-hard-limit' | Const:str:'file-soft-limit' | Const:str:'file-hard-limit'
+142:11:Call -> U
+142:11:Attribute -> BM:builtins.str.format
+143:8:Name -> Const:NoneType:None | U | Dict:4
+144:8:Name -> Const:NoneType:None | U | Dict:4
+145:8:Name -> Const:NoneType:None | U | Dict:4
+146:8:Name -> Const:NoneType:None | U | Dict:4
+147:8:Name -> U
+150:13:Call -> ERR
+150:13:Name -> ERR
+150:37:Name -> U
+151:7:Name -> U
+152:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+152:14:Name -> Class:salt.exceptions.CommandExecutionError
+153:12:Call -> U
+153:12:Attribute -> BM:builtins.str.format
+153:70:Name -> U
+155:12:Name -> Const:NoneType:None | U
+155:17:Name -> Const:NoneType:None | U | Dict:4
+169:4:Call -> ERR
+169:4:Name -> ERR
+183:10:Call -> ERR
+183:10:Attribute -> ERR
+183:10:Call -> ERR
+183:10:Name -> ERR
+184:16:Name -> U
+185:15:Name -> U
+187:16:Call -> U
+187:16:Attribute -> U
+187:16:Name -> U
+188:8:Name -> Dict:0
+188:12:Name -> U
+188:24:Name -> U
+190:11:Name -> Dict:0
+203:21:Name -> U
+204:4:Call -> ERR
+204:4:Name -> ERR
+204:24:Name -> Const:str:'quotaon Uninferable'
+218:22:Name -> U
+219:4:Call -> ERR
+219:4:Name -> ERR
+219:24:Name -> Const:str:'quotaoff Uninferable'
+234:24:Name -> U
+235:10:Call -> ERR
+235:10:Name -> ERR
+235:30:Name -> Const:str:'quotaon -p Uninferable'
+236:16:Call -> U
+236:16:Attribute -> U
+236:16:Name -> U
+237:16:Call -> U
+237:16:Attribute -> U
+237:16:Call -> U
+237:16:Attribute -> U
+237:16:Name -> U
+238:11:Name -> U
+238:27:Name -> Dict:0
+239:15:Call -> U
+239:15:Attribute -> U
+239:15:Name -> U
+240:19:Call -> U
+240:19:Attribute -> U
+240:19:Name -> U
+241:20:Name -> Dict:0
+241:24:Name -> U
+243:21:Call -> U
+243:21:Attribute -> U
+243:21:Name -> U
+244:20:Name -> Dict:0
+244:24:Name -> U
+245:27:Name -> Dict:0
+247:12:Name -> Dict:0
+247:16:Name -> U
+248:26:Call -> U
+248:26:Attribute -> U
+248:26:Call -> U
+248:26:Attribute -> U
+248:26:Name -> U
+250:8:Name -> Dict:0
+250:12:Name -> U
+250:22:Name -> U
+250:34:Name -> U
+251:11:Name -> Dict:0

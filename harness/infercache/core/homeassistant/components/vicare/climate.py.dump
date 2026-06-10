@@ -1,0 +1,428 @@
+38:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+38:10:Attribute -> Func:logging.getLogger
+38:10:Name -> Module:logging
+38:28:Name -> Const:str:'homeassistant.components.vicare.climate | Const:str:'__main__'
+59:27:Name -> Class:builtins.dict
+59:32:Name -> Class:builtins.str
+59:37:Name -> Class:homeassistant.components.climate.const.HVACMode
+60:4:Name -> Const:str:'forcedReduced'
+60:31:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.OFF
+60:31:Name -> Class:homeassistant.components.climate.const.HVACMode
+61:4:Name -> Const:str:'standby'
+61:21:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.OFF
+61:21:Name -> Class:homeassistant.components.climate.const.HVACMode
+62:4:Name -> Const:str:'dhw'
+62:21:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.OFF
+62:21:Name -> Class:homeassistant.components.climate.const.HVACMode
+63:4:Name -> Const:str:'dhwAndHeatingCooling'
+63:38:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.AUTO
+63:38:Name -> Class:homeassistant.components.climate.const.HVACMode
+64:4:Name -> Const:str:'dhwAndHeating'
+64:31:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.AUTO
+64:31:Name -> Class:homeassistant.components.climate.const.HVACMode
+65:4:Name -> Const:str:'heatingCooling'
+65:32:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.AUTO
+65:32:Name -> Class:homeassistant.components.climate.const.HVACMode
+66:4:Name -> Const:str:'heating'
+66:25:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.AUTO
+66:25:Name -> Class:homeassistant.components.climate.const.HVACMode
+67:4:Name -> Const:str:'forcedNormal'
+67:30:Attribute -> Inst:homeassistant.components.climate.const.HVACMode.HEAT
+67:30:Name -> Class:homeassistant.components.climate.const.HVACMode
+71:4:Attribute -> Inst:homeassistant.components.vicare.types.HeatingProgram.COMFORT
+71:4:Name -> Class:homeassistant.components.vicare.types.HeatingProgram
+72:4:Attribute -> Inst:homeassistant.components.vicare.types.HeatingProgram.COMFORT_HEATING
+72:4:Name -> Class:homeassistant.components.vicare.types.HeatingProgram
+73:4:Attribute -> Inst:homeassistant.components.vicare.types.HeatingProgram.ECO
+73:4:Name -> Class:homeassistant.components.vicare.types.HeatingProgram
+78:17:Name -> Class:builtins.list
+78:22:Name -> Class:homeassistant.components.vicare.types.ViCareDevice
+79:5:Name -> Class:builtins.list
+79:10:Name -> ERR
+82:8:Call -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+82:8:Name -> Class:homeassistant.components.vicare.climate.ViCareClimate
+83:12:Call -> U | Const:NoneType:None
+83:12:Name -> Func:homeassistant.components.vicare.utils.get_device_serial
+83:30:Attribute -> U
+83:30:Name -> U
+84:12:Attribute -> U
+84:12:Name -> U
+85:12:Attribute -> U
+85:12:Name -> U
+86:12:Name -> U
+88:22:Name -> U
+89:23:Call -> U | List:0
+89:23:Name -> Func:homeassistant.components.vicare.utils.get_circuits
+89:36:Attribute -> U
+89:36:Name -> U
+94:10:Name -> U
+95:18:Name -> U
+96:24:Name -> Class:homeassistant.helpers.entity_platform.AddConfigEntryEntitiesCallback
+100:15:Call -> U
+100:15:Attribute -> Func:homeassistant.helpers.entity_platform.async_get_current_platform
+100:15:Name -> Module:homeassistant.helpers.entity_platform
+101:4:Call -> U
+101:4:Attribute -> U
+101:4:Name -> U
+102:8:Name -> Const:str:'set_vicare_mode'
+103:9:Call -> U
+103:9:Attribute -> U
+103:9:Name -> U
+103:22:Name -> Const:str:'vicare_mode'
+103:58:Attribute -> Func:homeassistant.helpers.config_validation.string
+103:58:Name -> Module:homeassistant.helpers.config_validation
+107:4:Call -> U
+107:4:Name -> U
+108:14:Call -> U
+108:14:Attribute -> U
+108:14:Name -> U
+109:12:Name -> Func:homeassistant.components.vicare.climate._build_entities
+110:12:Attribute -> U
+110:12:Attribute -> U
+110:12:Name -> U
+115:20:Name -> Class:homeassistant.components.vicare.entity.ViCareEntity
+115:34:Name -> Class:homeassistant.components.climate.ClimateEntity
+118:22:Name -> Const:float:0.1
+120:8:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.TARGET_TEMPERATURE
+120:8:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+121:10:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.PRESET_MODE
+121:10:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+122:10:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.TURN_OFF
+122:10:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+123:10:Attribute -> Inst:homeassistant.components.climate.const.ClimateEntityFeature.TURN_ON
+123:10:Name -> Class:homeassistant.components.climate.const.ClimateEntityFeature
+125:29:Attribute -> Inst:homeassistant.const.UnitOfTemperature.CELSIUS
+125:29:Name -> Class:homeassistant.const.UnitOfTemperature
+126:21:Name -> Const:int:3
+127:21:Name -> Const:int:60
+128:36:Name -> Const:int:1
+130:21:Name -> Class:homeassistant.components.climate.const.HVACAction
+131:19:Name -> Class:builtins.str
+132:22:Name -> Class:builtins.str
+136:23:Name -> Class:builtins.str
+137:23:Name -> U
+138:16:Name -> U
+139:17:Name -> U
+142:8:Call -> Const:NoneType:None
+142:8:Attribute -> BM:homeassistant.components.vicare.entity.ViCareEntity.__init__ | BM:builtins.object.__init__
+142:8:Call -> Super
+142:8:Name -> Class:builtins.super
+143:12:Attribute -> Const:str:'from_attr'
+143:12:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+143:40:Name -> U
+143:55:Name -> U
+143:70:Name -> U
+143:78:Name -> U
+145:8:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+145:23:Name -> U
+146:8:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+146:26:Name -> Class:builtins.dict
+146:31:Name -> Class:builtins.str
+146:36:Name -> Class:typing.Any
+147:8:Attribute -> Dict:0
+147:8:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+147:46:Call -> U
+147:46:Attribute -> U
+147:46:Attribute -> U
+147:46:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+148:8:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+149:12:Name -> Const:NoneType:None | U
+150:35:Attribute -> Dict:0
+150:35:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+151:26:Call -> Const:NoneType:None | U
+151:26:Attribute -> Func:homeassistant.components.vicare.types.HeatingProgram.to_ha_preset
+151:26:Name -> Class:homeassistant.components.vicare.types.HeatingProgram
+151:54:Name -> U
+156:13:Call -> Gen:homeassistant.components.vicare.entity.ViCareEntity.vicare_api_handler
+156:13:Attribute -> BM:homeassistant.components.vicare.entity.ViCareEntity.vicare_api_handler
+156:13:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+158:17:Call -> Inst:contextlib.suppress
+158:17:Name -> Class:contextlib.suppress
+158:26:Name -> U
+159:16:Attribute -> Dict:0
+159:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+160:20:Call -> U
+160:20:Attribute -> U
+160:20:Attribute -> U
+160:20:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+164:17:Call -> Inst:contextlib.suppress
+164:17:Name -> Class:contextlib.suppress
+164:26:Name -> U
+165:38:Call -> U
+165:38:Attribute -> U
+165:38:Attribute -> U
+165:38:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+167:15:Name -> Const:NoneType:None | U
+168:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+168:49:Name -> U
+169:17:Name -> Const:NoneType:None | U
+170:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+170:49:Name -> U
+172:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+174:17:Call -> Inst:contextlib.suppress
+174:17:Name -> Class:contextlib.suppress
+174:26:Name -> U
+175:16:Attribute -> Dict:0
+175:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+175:60:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+176:20:Call -> U
+176:20:Attribute -> U
+176:20:Attribute -> U
+176:20:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+179:17:Call -> Inst:contextlib.suppress
+179:17:Name -> Class:contextlib.suppress
+179:26:Name -> U
+180:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+180:48:Call -> U
+180:48:Attribute -> U
+180:48:Attribute -> U
+180:48:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+182:17:Call -> Inst:contextlib.suppress
+182:17:Name -> Class:contextlib.suppress
+182:26:Name -> U
+183:16:Attribute -> Dict:0
+183:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+183:57:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+184:20:Call -> U
+184:20:Attribute -> U
+184:20:Attribute -> U
+184:20:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+187:17:Call -> Inst:contextlib.suppress
+187:17:Name -> Class:contextlib.suppress
+187:26:Name -> U
+188:16:Attribute -> Dict:0
+188:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+189:20:Call -> U
+189:20:Attribute -> U
+189:20:Attribute -> U
+189:20:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+192:17:Call -> Inst:contextlib.suppress
+192:17:Name -> Class:contextlib.suppress
+192:26:Name -> U
+193:16:Attribute -> Dict:0
+193:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+194:20:Call -> U
+194:20:Attribute -> U
+194:20:Attribute -> U
+194:20:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+197:17:Call -> Inst:contextlib.suppress
+197:17:Name -> Class:contextlib.suppress
+197:26:Name -> U
+198:16:Attribute -> Dict:0
+198:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+198:51:Call -> U
+198:51:Attribute -> U
+198:51:Attribute -> U
+198:51:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+209:17:Call -> Inst:contextlib.suppress
+209:17:Name -> Class:contextlib.suppress
+209:26:Name -> U
+210:30:Call -> U | List:0
+210:30:Name -> Func:homeassistant.components.vicare.utils.get_burners
+210:42:Attribute -> U
+210:42:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+211:23:Call -> U
+211:23:Attribute -> U
+211:23:Name -> U
+214:17:Call -> Inst:contextlib.suppress
+214:17:Name -> Class:contextlib.suppress
+214:26:Name -> U
+215:34:Call -> U | List:0
+215:34:Name -> Func:homeassistant.components.vicare.utils.get_compressors
+215:50:Attribute -> U
+215:50:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+216:27:Call -> U
+216:27:Attribute -> U
+216:27:Name -> U
+219:25:Call -> Inst:contextlib.suppress
+219:25:Name -> Class:contextlib.suppress
+219:34:Name -> U
+220:32:Call -> U
+220:32:Attribute -> U
+220:32:Name -> U
+221:23:Name -> Const:NoneType:None | U
+223:25:Name -> Const:NoneType:None | U
+223:47:Name -> Const:NoneType:None | U
+229:15:Name -> Const:bool:False | Const:bool:True
+230:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+230:39:Attribute -> Inst:homeassistant.components.climate.const.HVACAction.COOLING
+230:39:Name -> Class:homeassistant.components.climate.const.HVACAction
+231:17:Name -> Const:bool:False | Const:bool:True | Const:bool:True
+232:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+232:39:Attribute -> Inst:homeassistant.components.climate.const.HVACAction.HEATING
+232:39:Name -> Class:homeassistant.components.climate.const.HVACAction
+234:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+234:39:Attribute -> Inst:homeassistant.components.climate.const.HVACAction.IDLE
+234:39:Name -> Class:homeassistant.components.climate.const.HVACAction
+236:5:Name -> Class:builtins.property
+237:27:Name -> Class:homeassistant.components.climate.const.HVACMode
+239:11:Attribute -> U
+239:11:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+241:15:Call -> ERR
+241:15:Attribute -> BM:builtins.dict.get
+241:15:Name -> Dict:8
+241:45:Attribute -> U
+241:45:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+243:39:Name -> Class:homeassistant.components.climate.const.HVACMode
+245:33:Attribute -> Dict:0
+245:33:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+246:18:Call -> ExcInst:builtins.ValueError
+246:18:Name -> Class:builtins.ValueError
+248:22:Call -> Const:NoneType:None | Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal' | Const:NoneType:None
+248:22:Attribute -> BM:homeassistant.components.vicare.climate.ViCareClimate.vicare_mode_from_hvac_mode
+248:22:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+248:54:Name -> U
+249:11:Name -> Const:NoneType:None | Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal' | Const:NoneType:None
+250:18:Call -> ExcInst:builtins.ValueError
+250:18:Name -> Class:builtins.ValueError
+250:62:Name -> U
+252:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+252:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+252:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+252:54:Name -> U
+252:65:Name -> Const:NoneType:None | Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal' | Const:NoneType:None
+253:8:Call -> U
+253:8:Attribute -> U
+253:8:Attribute -> U
+253:8:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+253:26:Name -> Const:NoneType:None | Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal' | Const:NoneType:None
+255:55:Name -> Class:builtins.str
+257:33:Attribute -> Dict:0
+257:33:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+260:26:Attribute -> Dict:0
+260:26:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+261:26:Call -> DictItems
+261:26:Attribute -> BM:builtins.dict.items
+261:26:Name -> Dict:8
+262:15:Name -> Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal'
+262:22:Name -> U
+262:42:Name -> Inst:homeassistant.components.climate.const.HVACMode.OFF | Inst:homeassistant.components.climate.const.HVACMode.AUTO | Inst:homeassistant.components.climate.const.HVACMode.HEAT
+262:51:Name -> U
+263:23:Name -> Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal'
+266:5:Name -> Class:builtins.property
+267:28:Name -> Class:builtins.list
+267:33:Name -> Class:homeassistant.components.climate.const.HVACMode
+269:33:Attribute -> Dict:0
+269:33:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+272:26:Attribute -> Dict:0
+272:26:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+274:26:Call -> DictItems
+274:26:Attribute -> BM:builtins.dict.items
+274:26:Name -> Dict:8
+275:15:Name -> Inst:homeassistant.components.climate.const.HVACMode.OFF | Inst:homeassistant.components.climate.const.HVACMode.AUTO | Inst:homeassistant.components.climate.const.HVACMode.HEAT
+275:24:Name -> List:0
+277:15:Name -> Const:str:'forcedReduced' | Const:str:'standby' | Const:str:'dhw' | Const:str:'dhwAndHeatingCooling' | Const:str:'dhwAndHeating' | Const:str:'heatingCooling' | Const:str:'heating' | Const:str:'forcedNormal'
+277:22:Name -> U
+278:16:Call -> ERR
+278:16:Attribute -> BM:builtins.list.append
+278:16:Name -> List:0
+278:34:Name -> Inst:homeassistant.components.climate.const.HVACMode.OFF | Inst:homeassistant.components.climate.const.HVACMode.AUTO | Inst:homeassistant.components.climate.const.HVACMode.HEAT
+279:15:Name -> List:0
+281:5:Name -> Class:builtins.property
+282:29:Name -> Class:homeassistant.components.climate.const.HVACAction
+284:15:Attribute -> Inst:homeassistant.components.climate.const.HVACAction.COOLING | Inst:homeassistant.components.climate.const.HVACAction.HEATING | Inst:homeassistant.components.climate.const.HVACAction.IDLE
+284:15:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+284:39:Attribute -> Inst:homeassistant.components.climate.const.HVACAction.IDLE
+284:39:Name -> Class:homeassistant.components.climate.const.HVACAction
+286:40:Name -> Class:typing.Any
+288:20:Call -> ERR
+288:20:Attribute -> BM:builtins.dict.get
+288:20:Name -> Dict:0
+288:31:Name -> Const:str:'temperature'
+289:12:Call -> U
+289:12:Attribute -> U
+289:12:Attribute -> U
+289:12:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+289:44:Attribute -> U
+289:44:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+289:67:Name -> U
+290:12:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+290:44:Name -> U
+292:5:Name -> Class:builtins.property
+293:29:Name -> Class:builtins.str
+295:11:Attribute -> U
+295:11:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+297:15:Call -> Const:NoneType:None | U
+297:15:Attribute -> Func:homeassistant.components.vicare.types.HeatingProgram.to_ha_preset
+297:15:Name -> Class:homeassistant.components.vicare.types.HeatingProgram
+297:43:Attribute -> U
+297:43:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+299:43:Name -> Class:builtins.str
+301:25:Call -> U | Const:NoneType:None
+301:25:Attribute -> Func:homeassistant.components.vicare.types.HeatingProgram.from_ha_preset
+301:25:Name -> Class:homeassistant.components.vicare.types.HeatingProgram
+302:12:Name -> U
+302:25:Attribute -> Dict:0
+302:25:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+304:11:Name -> U | Const:NoneType:None
+305:18:Call -> ExcInst:homeassistant.exceptions.ServiceValidationError
+305:18:Name -> Class:homeassistant.exceptions.ServiceValidationError
+306:35:Name -> Const:str:'vicare'
+309:30:Name -> U
+313:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+313:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+313:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+313:43:Attribute -> U
+313:43:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+315:12:Attribute -> U
+315:12:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+316:16:Attribute -> U
+316:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+316:41:Name -> List:3
+318:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+318:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+318:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+318:45:Attribute -> U
+318:45:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+320:16:Call -> U
+320:16:Attribute -> U
+320:16:Attribute -> U
+320:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+320:44:Attribute -> U
+320:44:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+321:19:Name -> U
+322:22:Call -> ExcInst:homeassistant.exceptions.ServiceValidationError
+322:22:Name -> Class:homeassistant.exceptions.ServiceValidationError
+323:39:Name -> Const:str:'vicare'
+326:35:Attribute -> U
+326:35:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+328:23:Name -> U
+330:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+330:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+330:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+330:51:Name -> U
+330:64:Name -> U | Const:NoneType:None
+331:11:Name -> U | Const:NoneType:None
+331:29:Name -> List:3
+332:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+332:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+332:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+332:43:Name -> U | Const:NoneType:None
+334:16:Call -> U
+334:16:Attribute -> U
+334:16:Attribute -> U
+334:16:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+334:42:Name -> U | Const:NoneType:None
+335:19:Name -> U
+336:22:Call -> ExcInst:homeassistant.exceptions.ServiceValidationError
+336:22:Name -> Class:homeassistant.exceptions.ServiceValidationError
+337:39:Name -> Const:str:'vicare'
+340:35:Name -> U | Const:NoneType:None
+342:23:Name -> U
+344:5:Name -> Class:builtins.property
+345:40:Name -> Class:builtins.dict
+345:45:Name -> Class:builtins.str
+345:50:Name -> Class:typing.Any
+347:15:Attribute -> Dict:0
+347:15:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+351:11:Name -> U
+351:30:Attribute -> Dict:0
+351:30:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+352:18:Call -> ExcInst:builtins.ValueError
+352:18:Name -> Class:builtins.ValueError
+352:64:Name -> U
+354:8:Call -> U
+354:8:Attribute -> U
+354:8:Attribute -> U
+354:8:Name -> Inst:homeassistant.components.vicare.climate.ViCareClimate
+354:26:Name -> U

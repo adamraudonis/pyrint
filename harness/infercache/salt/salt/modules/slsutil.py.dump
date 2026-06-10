@@ -1,0 +1,339 @@
+20:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:6:Attribute -> Func:logging.getLogger
+20:6:Name -> Module:logging
+20:24:Name -> Const:str:'salt.modules.slsutil' | Const:str:'__main__'
+37:11:Call -> U
+37:11:Attribute -> Func:salt.utils.dictupdate.update
+37:11:Attribute -> Module:salt.utils.dictupdate
+37:11:Attribute -> Module:salt.utils
+37:11:Name -> Module:salt
+37:40:Name -> U
+37:46:Name -> U
+37:51:Name -> Const:bool:True | U
+37:69:Name -> Const:bool:False | U
+58:11:Call -> Dict:0 | U
+58:11:Attribute -> Func:salt.utils.dictupdate.merge
+58:11:Attribute -> Module:salt.utils.dictupdate
+58:11:Attribute -> Module:salt.utils
+58:11:Name -> Module:salt
+58:39:Name -> U
+58:46:Name -> U
+58:53:Name -> Const:str:'smart' | U
+58:63:Name -> Const:str:'yaml' | U
+58:73:Name -> Const:bool:False | U
+89:15:Name -> U
+90:14:Call -> Dict:0 | U | Inst:salt.utils.aggregation.Map
+90:14:Attribute -> Func:salt.utils.dictupdate.merge
+90:14:Attribute -> Module:salt.utils.dictupdate
+90:14:Attribute -> Module:salt.utils
+90:14:Name -> Module:salt
+90:42:Name -> Dict:0
+90:47:Name -> U
+90:52:Name -> Const:str:'smart' | U
+90:62:Name -> Const:str:'yaml' | U
+90:72:Name -> Const:bool:False | U
+92:11:Name -> Dict:0 | Dict:0 | U | Inst:salt.utils.aggregation.Map
+166:11:Name -> Const:NoneType:None | U
+166:24:Name -> Const:NoneType:None | U
+167:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+167:14:Attribute -> Class:salt.exceptions.SaltInvocationError
+167:14:Attribute -> Module:salt.exceptions
+167:14:Name -> Module:salt
+169:7:Name -> Const:NoneType:None | U
+169:16:Name -> Const:NoneType:None | U
+170:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+170:14:Attribute -> Class:salt.exceptions.SaltInvocationError
+170:14:Attribute -> Module:salt.exceptions
+170:14:Name -> Module:salt
+172:16:Call -> Inst:salt.loader.lazy.FilterDictWrapper
+172:16:Attribute -> Func:salt.loader.render
+172:16:Attribute -> Module:salt.loader
+172:16:Name -> Module:salt
+172:35:Name -> ERR
+172:45:Name -> ERR
+174:7:Name -> Const:NoneType:None | U
+175:25:Call -> ERR
+175:25:Name -> ERR
+176:12:Name -> U
+176:26:Call -> ERR
+176:26:Attribute -> BM:builtins.dict.get
+176:26:Name -> Dict:0
+178:7:Name -> Const:NoneType:None | U
+180:8:Name -> Dict:0
+180:31:Name -> U
+182:10:Call -> Dict:0 | U | Inst:_io.StringIO
+182:10:Attribute -> Func:salt.template.compile_template
+182:10:Attribute -> Module:salt.template
+182:10:Name -> Module:salt
+183:8:Name -> U | Const:str:':string:'
+184:8:Name -> Inst:salt.loader.lazy.FilterDictWrapper
+185:8:Name -> Const:str:'jinja|yaml' | U
+186:8:Name -> ERR
+187:8:Name -> ERR
+188:10:Name -> Dict:0
+190:25:Call -> ERR
+190:25:Name -> ERR
+190:59:Name -> Dict:0 | U | Inst:_io.StringIO
+190:11:Call -> U
+190:11:Attribute -> U | BM:_io.StringIO.read
+190:11:Name -> Dict:0 | U | Inst:_io.StringIO
+190:69:Name -> Dict:0 | U | Inst:_io.StringIO
+194:18:Call -> Inst:salt.loader.lazy.LazyLoader
+194:18:Attribute -> Func:salt.loader.serializers
+194:18:Attribute -> Module:salt.loader
+194:18:Name -> Module:salt
+194:42:Name -> ERR
+195:10:Call -> U
+195:10:Name -> Func:builtins.getattr
+195:18:Name -> Inst:salt.loader.lazy.LazyLoader
+195:31:Name -> U
+196:9:Call -> U
+196:9:Name -> Func:builtins.getattr
+196:17:Name -> U
+196:22:Name -> U
+198:11:Name -> U
+199:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+199:14:Attribute -> Class:salt.exceptions.CommandExecutionError
+199:14:Attribute -> Module:salt.exceptions
+199:14:Name -> Module:salt
+200:27:Name -> U
+203:11:Name -> U
+204:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+204:14:Attribute -> Class:salt.exceptions.CommandExecutionError
+204:14:Attribute -> Module:salt.exceptions
+204:14:Name -> Module:salt
+205:27:Name -> U
+205:60:Name -> U
+208:11:Name -> U
+229:13:Call -> Dict:0
+229:13:Attribute -> Func:salt.utils.args.clean_kwargs
+229:13:Attribute -> Module:salt.utils.args
+229:13:Attribute -> Module:salt.utils
+229:13:Name -> Module:salt
+229:44:Name -> Dict:0
+230:11:Call -> U
+230:11:Call -> U
+230:11:Name -> Func:salt.modules.slsutil._get_serialize_fn
+230:29:Name -> U
+230:54:Name -> U
+230:61:Name -> Dict:0
+253:13:Call -> Dict:0
+253:13:Attribute -> Func:salt.utils.args.clean_kwargs
+253:13:Attribute -> Module:salt.utils.args
+253:13:Attribute -> Module:salt.utils
+253:13:Name -> Module:salt
+253:44:Name -> Dict:0
+254:11:Call -> U
+254:11:Call -> U
+254:11:Name -> Func:salt.modules.slsutil._get_serialize_fn
+254:29:Name -> U
+254:56:Name -> U
+254:76:Name -> Dict:0
+347:7:Name -> Const:NoneType:None | U
+350:7:Name -> Const:NoneType:None | U
+358:12:Call -> Const:str:'' | U
+358:12:Attribute -> BM:builtins.str.rstrip | U
+358:12:Name -> Const:str:'#' | U
+359:12:Call -> Const:str:'' | U
+359:12:Attribute -> BM:builtins.str.strip | U
+359:12:Name -> Const:str:'#' | U
+360:14:Name -> Const:str:'' | U
+361:20:Name -> Const:str:'' | U
+362:16:Name -> Const:int:72 | U
+362:24:Call -> ERR
+362:24:Name -> Func:builtins.len
+362:28:Name -> Const:str:' ' | U
+362:39:Call -> ERR
+362:39:Name -> Func:builtins.len
+362:43:Name -> Const:str:' ' | U
+365:7:Name -> U
+366:14:Call -> ExcInst:salt.exceptions.ArgumentValueError
+366:14:Attribute -> Class:salt.exceptions.ArgumentValueError
+366:14:Attribute -> Module:salt.exceptions
+366:14:Name -> Module:salt
+370:8:Name -> Const:str:'#' | U
+370:22:Name -> Const:str:'#' | U
+370:40:Name -> Const:int:72 | U
+370:48:Call -> ERR
+370:48:Name -> Func:builtins.len
+370:52:Name -> Const:str:'' | U
+370:61:Call -> ERR
+370:61:Name -> Func:builtins.len
+370:65:Name -> Const:str:'' | U
+370:75:Name -> Const:str:'' | U
+372:18:Name -> Const:str:'#' | U
+372:39:Name -> Const:int:72 | U
+372:47:Call -> ERR
+372:47:Name -> Func:builtins.len
+372:51:Name -> Const:str:'#' | U
+372:71:Name -> Const:str:'#' | U
+375:14:Call -> Inst:textwrap.TextWrapper
+375:14:Attribute -> Class:textwrap.TextWrapper
+375:14:Name -> Module:textwrap
+375:41:Name -> U
+376:12:Call -> List:0
+376:12:Name -> Class:builtins.list
+377:7:Name -> Const:NoneType:None | U
+378:8:Call -> ERR
+378:8:Attribute -> BM:builtins.list.append
+378:8:Name -> List:0
+378:21:Name -> U
+379:4:Call -> ERR
+379:4:Attribute -> BM:builtins.list.append
+379:4:Name -> List:0
+379:17:Name -> U
+380:4:Call -> ERR
+380:4:Attribute -> BM:builtins.list.append
+380:4:Name -> List:0
+380:17:Name -> U
+381:16:Call -> List:0
+381:16:Attribute -> BM:textwrap.TextWrapper.wrap
+381:16:Name -> Inst:textwrap.TextWrapper
+381:29:Name -> Const:NoneType:None | U | Const:str:'THIS FILE IS MANAGED BY SALT - DO NOT E
+382:8:Call -> ERR
+382:8:Attribute -> BM:builtins.list.append
+382:8:Name -> List:0
+382:21:Name -> Const:str:' ' | U
+382:31:Call -> U
+382:31:Attribute -> U
+382:31:Name -> U
+382:43:Name -> U
+382:56:Name -> Const:str:' ' | U
+383:4:Call -> ERR
+383:4:Attribute -> BM:builtins.list.append
+383:4:Name -> List:0
+383:17:Name -> U
+384:16:Call -> List:0
+384:16:Attribute -> BM:textwrap.TextWrapper.wrap
+384:16:Name -> Inst:textwrap.TextWrapper
+384:29:Name -> Const:NoneType:None | U | Const:str:'The contents of this file are managed b
+385:8:Call -> ERR
+385:8:Attribute -> BM:builtins.list.append
+385:8:Name -> List:0
+385:21:Name -> Const:str:' ' | U
+385:31:Name -> U
+385:45:Name -> U
+385:57:Call -> ERR
+385:57:Name -> Func:builtins.len
+385:61:Name -> U
+385:70:Name -> Const:str:' ' | U
+386:4:Call -> ERR
+386:4:Attribute -> BM:builtins.list.append
+386:4:Name -> List:0
+386:17:Name -> U
+387:7:Name -> Const:NoneType:None | U
+388:8:Call -> ERR
+388:8:Attribute -> BM:builtins.list.append
+388:8:Name -> List:0
+388:21:Name -> U
+391:13:Call -> Const:str:''
+391:13:Attribute -> BM:builtins.str.join | BM:builtins.str.join
+391:13:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+391:13:Name -> Module:os
+391:29:Name -> List:0
+394:7:Name -> Const:bool:False | U
+395:15:Name -> Const:str:''
+395:24:Attribute -> Const:str:'\n' | Const:str:'\r\n'
+395:24:Name -> Module:os
+397:11:Name -> Const:str:''
+432:7:Name -> U
+433:15:Name -> Const:str:'true' | U
+435:11:Name -> Const:str:'false' | U
+459:13:Name -> ERR
+462:15:Name -> U
+463:11:Name -> U
+463:22:Name -> U
+464:12:Name -> U
+464:19:Name -> U
+465:17:Name -> U
+465:24:Name -> U
+468:7:Name -> Const:bool:False | U
+468:16:Name -> U
+468:32:Name -> U
+469:15:Name -> Const:NoneType:None | U
+472:15:Name -> Const:NoneType:None | U
+475:8:Name -> U
+475:15:Name -> U
+475:27:Call -> U
+475:27:Name -> U
+475:37:Name -> Const:NoneType:None | U | List:0
+475:48:Name -> Const:NoneType:None | U | Dict:0
+494:4:Call -> Const:NoneType:None
+494:4:Name -> Func:salt.modules.slsutil._set_context
+495:9:Name -> Const:str:'slsutil'
+495:23:Name -> Const:str:'base' | U
+495:46:Name -> ERR
+495:75:Name -> Const:str:'base' | U
+497:11:Name -> U
+497:19:Name -> ERR
+497:31:Name -> Const:str:'slsutil'
+497:45:Name -> Const:str:'base' | U
+516:4:Call -> Const:NoneType:None
+516:4:Name -> Func:salt.modules.slsutil._set_context
+517:9:Name -> Const:str:'slsutil'
+517:23:Name -> Const:str:'base' | U
+517:45:Name -> ERR
+517:79:Name -> Const:str:'base' | U
+519:11:Name -> U
+519:19:Name -> ERR
+519:31:Name -> Const:str:'slsutil'
+519:45:Name -> Const:str:'base' | U
+539:11:Call -> U
+539:11:Name -> Func:salt.modules.slsutil.file_exists
+539:23:Name -> U
+539:29:Name -> Const:str:'base' | U
+539:41:Call -> U
+539:41:Name -> Func:salt.modules.slsutil.dir_exists
+539:52:Name -> U
+539:58:Name -> Const:str:'base' | U
+571:7:Name -> U
+572:20:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+572:20:Attribute -> Func:posix._path_normpath | Func:posixpath.normpath
+572:20:Name -> Module:posixpath
+572:39:Name -> U
+575:7:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+575:25:Call -> U
+575:25:Name -> Func:salt.modules.slsutil.path_exists
+575:37:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+575:48:Name -> Const:str:'base' | U
+576:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+576:14:Attribute -> Class:salt.exceptions.SaltInvocationError
+576:14:Attribute -> Module:salt.exceptions
+576:14:Name -> Module:salt
+577:58:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+581:7:Call -> ERR
+581:7:Name -> Func:builtins.isinstance
+581:18:Name -> U
+581:29:Name -> Class:builtins.str
+582:21:Name -> U
+583:11:Call -> ERR
+583:11:Name -> Func:builtins.isinstance
+583:22:Name -> U | List:1
+583:33:Name -> Class:builtins.list
+584:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+584:14:Attribute -> Class:salt.exceptions.SaltInvocationError
+584:14:Attribute -> Module:salt.exceptions
+584:14:Name -> Module:salt
+591:24:Name -> U | List:1
+592:23:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+592:23:Attribute -> Func:salt.utils.path.join
+592:23:Attribute -> Module:salt.utils.path
+592:23:Attribute -> Module:salt.utils
+592:23:Name -> Module:salt
+593:16:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+593:33:Name -> U
+595:15:Call -> U
+595:15:Name -> Func:salt.modules.slsutil.path_exists
+595:27:Name -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+595:37:Name -> Const:str:'base' | U
+596:23:Name -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+599:15:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'
+600:18:Call -> ExcInst:salt.exceptions.CommandExecutionError
+600:18:Attribute -> Class:salt.exceptions.CommandExecutionError
+600:18:Attribute -> Module:salt.exceptions
+600:18:Name -> Module:salt
+605:20:Call -> U
+605:20:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+605:20:Attribute -> Module:posixpath | Module:ntpath
+605:20:Name -> Module:os
+605:36:Name -> U | Const:bytes:b'.' | Const:str:'.' | Const:bytes:b'/' | Const:str:'/'

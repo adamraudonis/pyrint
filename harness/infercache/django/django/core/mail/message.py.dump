@@ -1,0 +1,865 @@
+39:15:Call -> Inst:email.charset.Charset
+39:15:Attribute -> Class:email.charset.Charset
+39:15:Name -> Module:email.charset
+40:0:Name -> Inst:email.charset.Charset
+41:18:Call -> Inst:email.charset.Charset
+41:18:Attribute -> Class:email.charset.Charset
+41:18:Name -> Module:email.charset
+42:0:Name -> Inst:email.charset.Charset
+42:32:Attribute -> Const:int:1
+42:32:Name -> Module:email.charset
+56:17:Name -> Class:builtins.ValueError
+78:4:Call -> Const:NoneType:None
+78:4:Attribute -> Func:warnings.warn | Func:_warnings.warn
+78:4:Name -> Module:warnings
+82:8:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+85:15:Name -> U
+85:27:Attribute -> U
+85:27:Name -> Inst:django.conf.LazySettings
+86:10:Call -> Const:str:''
+86:10:Name -> Class:builtins.str
+86:14:Name -> U
+87:15:Name -> Const:str:''
+87:30:Name -> Const:str:''
+88:14:Call -> ExcInst:builtins.ValueError
+88:14:Name -> Class:builtins.ValueError
+89:77:Name -> Const:str:''
+89:82:Name -> U
+92:8:Call -> Const:bytes:b''
+92:8:Attribute -> BM:builtins.str.encode
+92:8:Name -> Const:str:''
+93:11:Name -> Class:builtins.UnicodeEncodeError
+94:11:Call -> U
+94:11:Attribute -> U
+94:11:Name -> U
+94:27:Name -> Set:11
+95:18:Call -> Const:str:''
+95:18:Attribute -> BM:builtins.str.join
+96:16:Call -> U
+96:16:Name -> Func:django.core.mail.message.sanitize_address
+96:33:Name -> U
+96:39:Name -> U
+96:61:Call -> List:0 | List:1 | List:1 | U
+96:61:Name -> Func:email.utils.getaddresses
+96:75:Name -> Const:str:''
+99:18:Call -> Const:str:'' | U
+99:18:Attribute -> BM:email.header.Header.encode
+99:18:Call -> Inst:email.header.Header
+99:18:Name -> Class:email.header.Header
+99:25:Name -> Const:str:''
+99:30:Name -> U
+101:11:Call -> U
+101:11:Attribute -> U
+101:11:Name -> U
+102:18:Call -> Const:str:'' | U
+102:18:Attribute -> BM:email.header.Header.encode
+102:18:Call -> Inst:email.header.Header
+102:18:Name -> Class:email.header.Header
+102:25:Name -> Const:str:''
+103:11:Name -> U
+103:17:Name -> Const:str:'' | Const:str:'' | U
+111:4:Call -> Const:NoneType:None
+111:4:Attribute -> Func:warnings.warn | Func:_warnings.warn
+111:4:Name -> Module:warnings
+117:8:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+121:11:Call -> ERR
+121:11:Name -> Func:builtins.isinstance
+121:22:Name -> U
+121:28:Name -> Class:builtins.tuple
+122:15:Call -> U | Const:str:'' | Const:str:''
+122:15:Name -> Func:django.utils.encoding.force_str
+122:25:Name -> U
+124:26:Call -> Tuple:2
+124:26:Attribute -> Func:email._header_value_parser.get_mailbox
+124:26:Name -> Module:email._header_value_parser
+124:45:Name -> U | Const:str:'' | Const:str:''
+125:16:Name -> Class:email.errors.HeaderParseError
+125:34:Name -> Class:builtins.ValueError
+125:46:Name -> Class:builtins.IndexError
+126:18:Call -> ExcInst:builtins.ValueError
+126:18:Name -> Class:builtins.ValueError
+126:54:Name -> U | Const:str:'' | Const:str:''
+128:15:Name -> U | Const:str:''
+130:22:Call -> ExcInst:builtins.ValueError
+130:22:Name -> Class:builtins.ValueError
+131:76:Name -> Inst:email._header_value_parser.Mailbox
+131:83:Name -> U | Const:str:'' | Const:str:''
+133:17:Attribute -> U
+133:17:Name -> Inst:email._header_value_parser.Mailbox
+134:24:Attribute -> U
+134:24:Name -> Inst:email._header_value_parser.Mailbox
+135:21:Attribute -> U
+135:21:Name -> Inst:email._header_value_parser.Mailbox
+137:22:Name -> U
+138:22:Name -> U
+139:18:Call -> ExcInst:builtins.ValueError
+139:18:Name -> Class:builtins.ValueError
+139:49:Name -> Const:NoneType:None | U
+140:28:Call -> U
+140:28:Attribute -> U
+140:28:Name -> U
+142:20:Name -> U
+142:25:Name -> U
+142:37:Name -> U
+143:15:Name -> U
+143:40:Name -> U
+144:14:Call -> ExcInst:builtins.ValueError
+144:14:Name -> Class:builtins.ValueError
+148:8:Call -> U
+148:8:Attribute -> U
+148:8:Name -> U
+149:13:Call -> Const:str:'' | U
+149:13:Attribute -> BM:email.header.Header.encode
+149:13:Call -> Inst:email.header.Header
+149:13:Name -> Class:email.header.Header
+149:20:Name -> U
+150:11:Name -> Class:builtins.UnicodeEncodeError
+151:13:Call -> Const:str:'' | U
+151:13:Attribute -> BM:email.header.Header.encode
+151:13:Call -> Inst:email.header.Header
+151:13:Name -> Class:email.header.Header
+151:20:Name -> U
+151:24:Name -> U
+153:8:Call -> U
+153:8:Attribute -> U
+153:8:Name -> U
+154:11:Name -> Class:builtins.UnicodeEncodeError
+155:20:Call -> Const:str:'' | U
+155:20:Attribute -> BM:email.header.Header.encode
+155:20:Call -> Inst:email.header.Header
+155:20:Name -> Class:email.header.Header
+155:27:Name -> U
+155:38:Name -> U
+156:13:Call -> U
+156:13:Name -> Func:django.utils.encoding.punycode
+156:22:Name -> U
+158:21:Call -> Inst:email.headerregistry.Address
+158:21:Name -> Class:email.headerregistry.Address
+158:38:Name -> U | Const:str:''
+158:56:Name -> U
+159:11:Call -> U
+159:11:Name -> Func:email.utils.formataddr
+159:23:Name -> U | Const:str:''
+159:27:Attribute -> U
+159:27:Name -> Inst:email.headerregistry.Address
+172:13:Call -> Inst:_io.StringIO
+172:13:Name -> Class:_io.StringIO
+173:12:Call -> Inst:email.generator.Generator
+173:12:Attribute -> Class:email.generator.Generator
+173:12:Name -> Module:email.generator
+173:32:Name -> Inst:_io.StringIO
+174:8:Call -> Const:NoneType:None
+174:8:Attribute -> BM:email.generator.Generator.flatten
+174:8:Name -> Inst:email.generator.Generator
+174:18:Name -> Inst:django.core.mail.message.MIMEMixin
+174:33:Name -> Const:bool:False | U
+174:51:Name -> Const:str:'\n' | U
+175:15:Call -> ERR
+175:15:Attribute -> BM:_io.StringIO.getvalue
+175:15:Name -> Inst:_io.StringIO
+185:13:Call -> Inst:_io.BytesIO
+185:13:Name -> Class:_io.BytesIO
+186:12:Call -> Inst:email.generator.BytesGenerator
+186:12:Attribute -> Class:email.generator.BytesGenerator
+186:12:Name -> Module:email.generator
+186:37:Name -> Inst:_io.BytesIO
+187:8:Call -> Const:NoneType:None
+187:8:Attribute -> BM:email.generator.Generator.flatten
+187:8:Name -> Inst:email.generator.BytesGenerator
+187:18:Name -> Inst:django.core.mail.message.MIMEMixin
+187:33:Name -> Const:bool:False | U
+187:51:Name -> Const:str:'\n' | U
+188:15:Call -> ERR
+188:15:Attribute -> BM:_io.BytesIO.getvalue
+188:15:Name -> Inst:_io.BytesIO
+192:22:Name -> Class:django.core.mail.message.MIMEMixin
+192:33:Name -> Class:email.mime.message.MIMEMessage
+196:20:Call -> Tuple:2
+196:20:Name -> Func:django.core.mail.message.forbid_multi_line_headers
+196:46:Name -> U
+196:52:Name -> U
+197:8:Call -> Const:NoneType:None
+197:8:Attribute -> UM:email.message.Message.__setitem__
+197:8:Name -> Class:email.mime.message.MIMEMessage
+197:32:Name -> Inst:django.core.mail.message.SafeMIMEMessage
+197:38:Name -> U
+197:44:Name -> Const:str:'' | Const:str:'' | U
+201:19:Name -> Class:django.core.mail.message.MIMEMixin
+201:30:Name -> Class:email.mime.text.MIMEText
+203:8:Name -> Inst:django.core.mail.message.SafeMIMEText
+203:24:Name -> Const:NoneType:None | U
+204:8:Call -> Const:NoneType:None
+204:8:Attribute -> UM:email.mime.text.MIMEText.__init__
+204:8:Name -> Class:email.mime.text.MIMEText
+204:26:Name -> Inst:django.core.mail.message.SafeMIMEText
+204:32:Name -> U
+204:48:Name -> Const:str:'plain' | U
+204:67:Name -> Const:NoneType:None | U
+207:20:Call -> Tuple:2
+207:20:Name -> Func:django.core.mail.message.forbid_multi_line_headers
+207:46:Name -> U
+207:52:Name -> U
+207:57:Attribute -> Const:NoneType:None | U
+207:57:Name -> Inst:django.core.mail.message.SafeMIMEText
+208:8:Call -> Const:NoneType:None
+208:8:Attribute -> UM:email.message.Message.__setitem__
+208:8:Name -> Class:email.mime.text.MIMEText
+208:29:Name -> Inst:django.core.mail.message.SafeMIMEText
+208:35:Name -> U
+208:41:Name -> Const:str:'' | Const:str:'' | U
+211:11:Name -> Const:NoneType:None | U
+211:38:Call -> ERR
+211:38:Name -> Func:builtins.isinstance
+211:49:Name -> Const:NoneType:None | U
+211:58:Attribute -> Class:email.charset.Charset
+211:58:Name -> Module:email.charset
+212:29:Call -> ERR
+212:29:Name -> Func:builtins.any
+213:16:Call -> ERR
+213:16:Name -> Func:builtins.len
+213:20:Call -> U
+213:20:Attribute -> U
+213:20:Name -> U
+214:18:Name -> Const:int:998
+215:28:Call -> U
+215:28:Attribute -> U
+215:28:Name -> U
+219:41:Name -> U
+219:22:Name -> Inst:email.charset.Charset
+219:61:Name -> Inst:email.charset.Charset
+220:8:Call -> Const:NoneType:None
+220:8:Attribute -> UM:email.message.Message.set_payload
+220:8:Name -> Class:email.mime.text.MIMEText
+220:29:Name -> Inst:django.core.mail.message.SafeMIMEText
+220:35:Name -> U
+220:52:Name -> Const:NoneType:None | U | Inst:email.charset.Charset
+224:24:Name -> Class:django.core.mail.message.MIMEMixin
+224:35:Name -> Class:email.mime.multipart.MIMEMultipart
+228:8:Name -> Inst:django.core.mail.message.SafeMIMEMultipart
+228:24:Name -> Const:NoneType:None | U
+229:8:Call -> Const:NoneType:None
+229:8:Attribute -> UM:email.mime.multipart.MIMEMultipart.__init__
+229:8:Name -> Class:email.mime.multipart.MIMEMultipart
+229:31:Name -> Inst:django.core.mail.message.SafeMIMEMultipart
+229:37:Name -> Const:str:'mixed' | U
+229:47:Name -> Const:NoneType:None | U
+229:57:Name -> Const:NoneType:None | U
+229:70:Name -> Dict:0
+232:20:Call -> Tuple:2
+232:20:Name -> Func:django.core.mail.message.forbid_multi_line_headers
+232:46:Name -> U
+232:52:Name -> U
+232:57:Attribute -> Const:NoneType:None | U
+232:57:Name -> Inst:django.core.mail.message.SafeMIMEMultipart
+233:8:Call -> Const:NoneType:None
+233:8:Attribute -> UM:email.message.Message.__setitem__
+233:8:Name -> Class:email.mime.multipart.MIMEMultipart
+233:34:Name -> Inst:django.core.mail.message.SafeMIMEMultipart
+233:40:Name -> U
+233:46:Name -> Const:str:'' | Const:str:'' | U
+236:19:Call -> Class:__astroid_synthetic.EmailAlternative
+236:19:Name -> Func:collections.namedtuple
+237:18:Call -> Class:__astroid_synthetic.EmailAttachment
+237:18:Name -> Func:collections.namedtuple
+249:5:Call -> Func:django.utils.deprecation.deprecate_posargs.decorator
+249:5:Name -> Func:django.utils.deprecation.deprecate_posargs
+250:8:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+278:11:Name -> Const:NoneType:None | U
+279:15:Call -> ERR
+279:15:Name -> Func:builtins.isinstance
+279:26:Name -> U
+279:30:Name -> Class:builtins.str
+280:22:Call -> ExcInst:builtins.TypeError
+280:22:Name -> Class:builtins.TypeError
+281:12:Name -> Inst:django.core.mail.message.EmailMessage
+281:22:Call -> Inst:builtins.list
+281:22:Name -> Class:builtins.list
+281:27:Name -> U
+283:12:Name -> Inst:django.core.mail.message.EmailMessage
+284:11:Name -> Const:NoneType:None | U
+285:15:Call -> ERR
+285:15:Name -> Func:builtins.isinstance
+285:26:Name -> U
+285:30:Name -> Class:builtins.str
+286:22:Call -> ExcInst:builtins.TypeError
+286:22:Name -> Class:builtins.TypeError
+287:12:Name -> Inst:django.core.mail.message.EmailMessage
+287:22:Call -> Inst:builtins.list
+287:22:Name -> Class:builtins.list
+287:27:Name -> U
+289:12:Name -> Inst:django.core.mail.message.EmailMessage
+290:11:Name -> Const:NoneType:None | U
+291:15:Call -> ERR
+291:15:Name -> Func:builtins.isinstance
+291:26:Name -> U
+291:31:Name -> Class:builtins.str
+292:22:Call -> ExcInst:builtins.TypeError
+292:22:Name -> Class:builtins.TypeError
+293:12:Name -> Inst:django.core.mail.message.EmailMessage
+293:23:Call -> Inst:builtins.list
+293:23:Name -> Class:builtins.list
+293:28:Name -> U
+295:12:Name -> Inst:django.core.mail.message.EmailMessage
+296:11:Name -> Const:NoneType:None | U
+297:15:Call -> ERR
+297:15:Name -> Func:builtins.isinstance
+297:26:Name -> U
+297:36:Name -> Class:builtins.str
+298:22:Call -> ExcInst:builtins.TypeError
+298:22:Name -> Class:builtins.TypeError
+299:12:Name -> Inst:django.core.mail.message.EmailMessage
+299:28:Call -> Inst:builtins.list
+299:28:Name -> Class:builtins.list
+299:33:Name -> U
+301:12:Name -> Inst:django.core.mail.message.EmailMessage
+302:8:Name -> Inst:django.core.mail.message.EmailMessage
+302:26:Name -> Const:NoneType:None | U
+302:40:Attribute -> U
+302:40:Name -> Inst:django.conf.LazySettings
+303:8:Name -> Inst:django.core.mail.message.EmailMessage
+303:23:Name -> Const:str:'' | U
+304:8:Name -> Inst:django.core.mail.message.EmailMessage
+304:20:Name -> Const:str:'' | U
+305:8:Name -> Inst:django.core.mail.message.EmailMessage
+306:11:Name -> Const:NoneType:None | U
+307:30:Name -> U
+308:19:Call -> ERR
+308:19:Name -> Func:builtins.isinstance
+308:30:Name -> U
+308:42:Attribute -> Class:email.message.MIMEPart
+308:42:Attribute -> Module:email.message
+308:42:Name -> Module:email
+309:20:Call -> Const:NoneType:None
+309:20:Attribute -> BM:django.core.mail.message.EmailMessage.attach
+309:20:Name -> Inst:django.core.mail.message.EmailMessage
+309:32:Name -> U
+310:21:Call -> ERR
+310:21:Name -> Func:builtins.isinstance
+310:32:Name -> U
+310:44:Name -> Class:email.mime.base.MIMEBase
+312:20:Call -> Const:NoneType:None
+312:20:Attribute -> BM:django.core.mail.message.EmailMessage.attach
+312:20:Name -> Inst:django.core.mail.message.EmailMessage
+312:32:Name -> U
+314:20:Call -> Const:NoneType:None
+314:20:Attribute -> BM:django.core.mail.message.EmailMessage.attach
+314:20:Name -> Inst:django.core.mail.message.EmailMessage
+314:33:Name -> U
+315:8:Name -> Inst:django.core.mail.message.EmailMessage
+315:29:Name -> Const:NoneType:None | U
+317:11:Name -> Const:NoneType:None | U
+318:12:Call -> Const:NoneType:None
+318:12:Name -> Func:django.utils.deprecation.warn_about_external_use
+319:16:Name -> Const:str:"The 'connection' argument is deprecated
+319:40:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+321:8:Name -> Inst:django.core.mail.message.EmailMessage
+321:27:Name -> Const:NoneType:None | U
+324:5:Name -> Class:builtins.property
+327:8:Call -> Const:NoneType:None
+327:8:Name -> Func:django.utils.deprecation.warn_about_external_use
+327:32:Name -> Const:str:'The EmailMessage.connection attribute i
+327:37:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+328:15:Attribute -> Const:NoneType:None | U
+328:15:Name -> Inst:django.core.mail.message.EmailMessage
+330:5:Attribute -> Func:django.core.mail.message.EmailMessage.connection.setter
+330:5:Name -> Prop:django.core.mail.message.EmailMessage.connection
+336:8:Call -> Const:NoneType:None
+336:8:Name -> Func:django.utils.deprecation.warn_about_external_use
+336:32:Name -> Const:str:'The EmailMessage.connection attribute i
+336:37:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+337:8:Name -> Inst:django.core.mail.message.EmailMessage
+337:27:Name -> U
+339:32:Attribute -> Inst:email.policy.EmailPolicy
+339:32:Attribute -> Module:email.policy
+339:32:Name -> Module:email
+340:14:Call -> Inst:email.message.EmailMessage
+340:14:Attribute -> Class:email.message.EmailMessage
+340:14:Attribute -> Module:email.message
+340:14:Name -> Module:email
+340:48:Name -> Inst:email.policy.EmailPolicy | U
+341:8:Call -> Const:NoneType:None
+341:8:Attribute -> BM:django.core.mail.message.EmailMessage._add_bodies
+341:8:Name -> Inst:django.core.mail.message.EmailMessage
+341:25:Name -> Inst:email.message.EmailMessage
+342:8:Call -> Const:NoneType:None
+342:8:Attribute -> BM:django.core.mail.message.EmailMessage._add_attachments
+342:8:Name -> Inst:django.core.mail.message.EmailMessage
+342:30:Name -> Inst:email.message.EmailMessage
+344:8:Name -> Inst:email.message.EmailMessage
+344:25:Call -> Const:str:''
+344:25:Name -> Class:builtins.str
+344:29:Attribute -> Const:str:'' | U | Const:str:'new subject' | Const:str:'other subject'
+344:29:Name -> Inst:django.core.mail.message.EmailMessage
+345:8:Name -> Inst:email.message.EmailMessage
+345:22:Call -> Const:str:''
+345:22:Name -> Class:builtins.str
+345:26:Call -> U
+345:26:Attribute -> BM:builtins.dict.get | U | BM:builtins.dict.get
+345:26:Attribute -> Dict:0 | U | Dict:1
+345:26:Name -> Inst:django.core.mail.message.EmailMessage
+345:57:Attribute -> U | Const:str:'new-from@example.com'
+345:57:Name -> Inst:django.core.mail.message.EmailMessage
+346:8:Call -> Const:NoneType:None
+346:8:Attribute -> BM:django.core.mail.message.EmailMessage._set_list_header_if_not_empty
+346:8:Name -> Inst:django.core.mail.message.EmailMessage
+346:43:Name -> Inst:email.message.EmailMessage
+346:54:Attribute -> Inst:builtins.list | List:0 | List:1
+346:54:Name -> Inst:django.core.mail.message.EmailMessage
+347:8:Call -> Const:NoneType:None
+347:8:Attribute -> BM:django.core.mail.message.EmailMessage._set_list_header_if_not_empty
+347:8:Name -> Inst:django.core.mail.message.EmailMessage
+347:43:Name -> Inst:email.message.EmailMessage
+347:54:Attribute -> Inst:builtins.list | List:0 | List:1
+347:54:Name -> Inst:django.core.mail.message.EmailMessage
+348:8:Call -> Const:NoneType:None
+348:8:Attribute -> BM:django.core.mail.message.EmailMessage._set_list_header_if_not_empty
+348:8:Name -> Inst:django.core.mail.message.EmailMessage
+348:43:Name -> Inst:email.message.EmailMessage
+348:60:Attribute -> Inst:builtins.list | List:0 | List:1
+348:60:Name -> Inst:django.core.mail.message.EmailMessage
+352:24:Call -> U
+352:24:Attribute -> U
+352:24:Name -> U
+352:47:Attribute -> Dict:0 | U | Dict:1
+352:47:Name -> Inst:django.core.mail.message.EmailMessage
+353:25:Name -> U
+354:15:Attribute -> U
+354:15:Name -> Inst:django.conf.LazySettings
+355:21:Call -> U
+355:21:Name -> Func:django.utils.timezone.get_current_timezone
+357:21:Attribute -> Inst:_pydatetime.timezone
+357:21:Name -> Class:_pydatetime.timezone
+358:12:Name -> Inst:email.message.EmailMessage
+358:26:Call -> Inst:_pydatetime.datetime | U
+358:26:Attribute -> BM:_pydatetime.datetime.now
+358:26:Name -> Class:_pydatetime.datetime
+358:39:Name -> U | Inst:_pydatetime.timezone
+359:31:Name -> U
+361:12:Name -> Inst:email.message.EmailMessage
+361:32:Call -> U
+361:32:Name -> Func:email.utils.make_msgid
+361:50:Name -> Inst:django.core.mail.utils.CachedDnsName
+362:27:Call -> DictItems | U | DictItems
+362:27:Attribute -> BM:builtins.dict.items | U | BM:builtins.dict.items
+362:27:Attribute -> Dict:0 | U | Dict:1
+362:27:Name -> Inst:django.core.mail.message.EmailMessage
+364:15:Call -> Const:str:''
+364:15:Attribute -> BM:builtins.str.lower
+364:15:Name -> Const:str:'X-Header'
+365:16:Name -> Inst:email.message.EmailMessage
+365:20:Name -> Const:str:'X-Header'
+365:28:Call -> Const:str:'new header' | Const:str:'' | Const:str:''
+365:28:Name -> Func:django.utils.encoding.force_str
+365:38:Name -> Const:str:'new header'
+366:8:Call -> Const:NoneType:None
+366:8:Attribute -> BM:django.core.mail.message.EmailMessage._idna_encode_address_header_domains
+366:8:Name -> Inst:django.core.mail.message.EmailMessage
+366:49:Name -> Inst:email.message.EmailMessage
+367:15:Name -> Inst:email.message.EmailMessage
+374:16:Name -> U
+374:36:Attribute -> Inst:builtins.list | List:0 | List:1
+374:36:Name -> Inst:django.core.mail.message.EmailMessage
+374:46:Attribute -> Inst:builtins.list | List:0 | List:1
+374:46:Name -> Inst:django.core.mail.message.EmailMessage
+374:56:Attribute -> Inst:builtins.list | List:0 | List:1
+374:56:Name -> Inst:django.core.mail.message.EmailMessage
+374:69:Name -> U
+378:15:Call -> U
+378:15:Attribute -> BM:django.core.mail.message.EmailMessage.recipients
+378:15:Name -> Inst:django.core.mail.message.EmailMessage
+390:11:Name -> Const:bool:False | U
+391:12:Call -> Const:NoneType:None
+391:12:Name -> Func:django.utils.deprecation.warn_about_external_use
+391:36:Name -> Const:str:"The 'fail_silently' argument is depreca
+391:63:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+392:11:Call -> Const:bool:False
+392:11:Name -> Func:builtins.hasattr
+392:19:Name -> Inst:django.core.mail.message.EmailMessage
+393:18:Call -> ExcInst:builtins.AttributeError
+393:18:Name -> Class:builtins.AttributeError
+398:11:Name -> Const:NoneType:None | U
+399:12:Call -> Const:NoneType:None
+399:12:Name -> Func:django.core.mail.deprecation.report_using_incompatibility
+399:41:Attribute -> Const:NoneType:None | U
+399:41:Name -> Inst:django.core.mail.message.EmailMessage
+399:59:Name -> Const:bool:False | U
+400:25:Attribute -> Inst:django.core.mail.handler.MailersHandler
+400:25:Name -> Module:django.core.mail
+400:38:Name -> U
+401:13:Attribute -> Const:NoneType:None | U
+401:13:Name -> Inst:django.core.mail.message.EmailMessage
+402:25:Attribute -> U
+402:25:Name -> Inst:django.core.mail.message.EmailMessage
+403:15:Name -> Const:bool:False | U
+404:22:Call -> ExcInst:builtins.TypeError
+404:22:Name -> Class:builtins.TypeError
+409:25:Call -> U
+409:25:Attribute -> Func:django.core.mail.get_connection
+409:25:Name -> Module:django.core.mail
+409:59:Name -> Const:bool:False | U
+411:15:Call -> U
+411:15:Attribute -> U
+411:15:Name -> U
+411:41:Name -> Inst:django.core.mail.message.EmailMessage
+425:11:Call -> ERR
+425:11:Name -> Func:builtins.isinstance
+425:22:Name -> Const:NoneType:None | U
+425:32:Attribute -> Class:email.message.MIMEPart
+425:32:Attribute -> Module:email.message
+425:32:Name -> Module:email
+426:15:Name -> Const:NoneType:None | U
+426:38:Name -> Const:NoneType:None | U
+427:22:Call -> ExcInst:builtins.ValueError
+427:22:Name -> Class:builtins.ValueError
+431:12:Call -> ERR
+431:12:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+431:12:Attribute -> List:0 | List:2 | List:3
+431:12:Name -> Inst:django.core.mail.message.EmailMessage
+431:36:Name -> Const:NoneType:None | U
+432:13:Call -> ERR
+432:13:Name -> Func:builtins.isinstance
+432:24:Name -> Const:NoneType:None | U
+432:34:Name -> Class:email.mime.base.MIMEBase
+433:12:Call -> Const:NoneType:None
+433:12:Attribute -> Func:warnings.warn | Func:_warnings.warn
+433:12:Name -> Module:warnings
+436:16:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+438:15:Name -> Const:NoneType:None | U
+438:38:Name -> Const:NoneType:None | U
+439:22:Call -> ExcInst:builtins.ValueError
+439:22:Name -> Class:builtins.ValueError
+443:12:Call -> ERR
+443:12:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+443:12:Attribute -> List:0 | List:2 | List:3
+443:12:Name -> Inst:django.core.mail.message.EmailMessage
+443:36:Name -> Const:NoneType:None | U
+444:13:Name -> Const:NoneType:None | U
+445:18:Call -> ExcInst:builtins.ValueError
+445:18:Name -> Class:builtins.ValueError
+448:16:Name -> Const:NoneType:None | U
+449:19:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | U
+449:19:Attribute -> Func:mimetypes.guess_type
+449:19:Name -> Module:mimetypes
+449:40:Name -> Const:NoneType:None | U
+450:19:Name -> Const:str:'application/octet-stream'
+452:32:Call -> U
+452:32:Attribute -> BM:builtins.str.split | U | BM:builtins.str.split
+452:32:Name -> Const:str:'application/octet-stream' | U | Const:str:'text/plain'
+454:15:Name -> U
+455:19:Call -> ERR
+455:19:Name -> Func:builtins.isinstance
+455:30:Name -> U
+455:39:Name -> Class:builtins.bytes
+457:34:Call -> U
+457:34:Attribute -> U
+457:34:Name -> U
+458:27:Name -> Class:builtins.UnicodeDecodeError
+461:35:Name -> Const:str:'application/octet-stream'
+463:12:Call -> ERR
+463:12:Attribute -> BM:builtins.list.append | BM:builtins.list.append | BM:builtins.list.append
+463:12:Attribute -> List:0 | List:2 | List:3
+463:12:Name -> Inst:django.core.mail.message.EmailMessage
+463:36:Call -> Inst:__astroid_synthetic.EmailAttachment
+463:36:Name -> Class:__astroid_synthetic.EmailAttachment
+463:52:Name -> Const:NoneType:None | U
+463:62:Name -> U
+463:71:Name -> Const:str:'application/octet-stream' | U | Const:str:'text/plain'
+476:15:Call -> Inst:pathlib.Path
+476:15:Name -> Class:pathlib.Path
+476:20:Name -> U
+477:13:Call -> U
+477:13:Attribute -> BM:pathlib.Path.open
+477:13:Name -> Inst:pathlib.Path
+478:22:Call -> U
+478:22:Attribute -> U
+478:22:Name -> U
+479:12:Call -> Const:NoneType:None
+479:12:Attribute -> BM:django.core.mail.message.EmailMessage.attach
+479:12:Name -> Inst:django.core.mail.message.EmailMessage
+479:24:Attribute -> Const:str:'' | U
+479:24:Name -> Inst:pathlib.Path
+479:35:Name -> U
+479:44:Name -> Const:NoneType:None | U
+482:11:Attribute -> Const:str:'' | U | Const:str:'new body\n'
+482:11:Name -> Inst:django.core.mail.message.EmailMessage
+482:28:Attribute -> List:0 | List:2 | List:3
+482:28:Name -> Inst:django.core.mail.message.EmailMessage
+483:23:Attribute -> Const:str:'iso-8859-1' | Const:str:'iso-8859-1'
+483:23:Name -> Inst:django.core.mail.message.EmailMessage
+483:40:Attribute -> U
+483:40:Name -> Inst:django.conf.LazySettings
+484:19:Call -> Const:str:'' | U | Const:str:'new body\n' | Const:str:'' | Const:str:''
+484:19:Name -> Func:django.utils.encoding.force_str
+485:16:Attribute -> Const:str:'' | U | Const:str:'new body\n'
+485:16:Name -> Inst:django.core.mail.message.EmailMessage
+485:42:Name -> U
+487:12:Call -> U
+487:12:Attribute -> U
+487:12:Name -> U
+487:28:Name -> Const:str:'' | U | Const:str:'new body\n' | Const:str:'' | Const:str:''
+487:42:Attribute -> Const:str:'plain'
+487:42:Name -> Inst:django.core.mail.message.EmailMessage
+487:72:Name -> U
+490:11:Attribute -> List:0 | List:2 | List:3
+490:11:Name -> Inst:django.core.mail.message.EmailMessage
+491:15:Call -> Const:bool:True
+491:15:Name -> Func:builtins.hasattr
+491:23:Name -> Inst:django.core.mail.message.EmailMessage
+493:22:Call -> ExcInst:builtins.AttributeError
+493:22:Name -> Class:builtins.AttributeError
+497:12:Call -> U
+497:12:Attribute -> U
+497:12:Name -> U
+498:30:Attribute -> List:2 | List:3
+498:30:Name -> Inst:django.core.mail.message.EmailMessage
+499:19:Call -> ERR
+499:19:Name -> Func:builtins.isinstance
+499:30:Name -> Tuple:3 | Tuple:3 | Tuple:3 | Inst:__astroid_synthetic.EmailAttachment | Inst:email.message.MIMEPart
+499:42:Attribute -> Class:email.message.MIMEPart
+499:42:Attribute -> Module:email.message
+499:42:Name -> Module:email
+500:20:Call -> U
+500:20:Attribute -> U
+500:20:Name -> U
+500:31:Name -> Tuple:3 | Tuple:3 | Tuple:3 | Inst:__astroid_synthetic.EmailAttachment | Inst:email.message.MIMEPart
+501:21:Call -> ERR
+501:21:Name -> Func:builtins.isinstance
+501:32:Name -> Tuple:3 | Tuple:3 | Tuple:3 | Inst:__astroid_synthetic.EmailAttachment | Inst:email.message.MIMEPart
+501:44:Name -> Class:email.mime.base.MIMEBase
+503:20:Call -> U
+503:20:Attribute -> U
+503:20:Name -> U
+503:31:Name -> Tuple:3 | Tuple:3 | Tuple:3 | Inst:__astroid_synthetic.EmailAttachment | Inst:email.message.MIMEPart
+505:20:Call -> Const:NoneType:None
+505:20:Attribute -> BM:django.core.mail.message.EmailMessage._add_attachment
+505:20:Name -> Inst:django.core.mail.message.EmailMessage
+505:41:Name -> U
+505:47:Name -> Tuple:3 | Tuple:3 | Tuple:3 | Inst:__astroid_synthetic.EmailAttachment | Inst:email.message.MIMEPart
+508:19:Attribute -> Const:str:'iso-8859-1' | Const:str:'iso-8859-1'
+508:19:Name -> Inst:django.core.mail.message.EmailMessage
+508:36:Attribute -> U
+508:36:Name -> Inst:django.conf.LazySettings
+509:28:Call -> U
+509:28:Attribute -> U
+509:28:Name -> U
+511:11:Name -> U
+511:34:Call -> ERR
+511:34:Name -> Func:builtins.isinstance
+511:45:Name -> U
+511:54:Name -> Class:builtins.bytes
+515:26:Call -> U
+515:26:Attribute -> U
+515:26:Name -> U
+516:19:Name -> Class:builtins.UnicodeDecodeError
+517:27:Name -> Const:str:'application/octet-stream'
+518:36:Call -> ERR
+518:36:Attribute -> BM:builtins.str.split
+518:36:Name -> Const:str:'application/octet-stream'
+521:11:Name -> U
+523:12:Call -> U
+523:12:Attribute -> U
+523:12:Name -> U
+524:16:Name -> U
+524:33:Name -> U
+524:51:Name -> U
+524:69:Name -> U
+526:13:Name -> U
+529:15:Call -> ERR
+529:15:Name -> Func:builtins.isinstance
+529:26:Name -> U
+529:35:Name -> Class:django.core.mail.message.EmailMessage
+531:26:Call -> U
+531:26:Attribute -> U
+531:26:Name -> U
+531:49:Attribute -> U
+531:49:Name -> U
+532:21:Call -> ERR
+532:21:Name -> Func:builtins.isinstance
+533:16:Name -> U
+533:26:Attribute -> Class:email.message.EmailMessage
+533:26:Attribute -> Module:email.message
+533:26:Name -> Module:email
+533:54:Attribute -> Class:email.message.Message
+533:54:Attribute -> Module:email.message
+533:54:Name -> Module:email
+535:26:Call -> U
+535:26:Attribute -> Func:email.message_from_bytes
+535:26:Name -> Module:email
+536:20:Call -> U | Inst:builtins.bytes | Const:bytes:b''
+536:20:Name -> Func:django.utils.encoding.force_bytes
+536:32:Name -> U
+536:49:Attribute -> U
+536:49:Name -> U
+538:12:Call -> U
+538:12:Attribute -> U
+538:12:Name -> U
+538:31:Name -> U
+538:48:Name -> U
+538:66:Name -> U
+542:19:Call -> ERR
+542:19:Name -> Func:builtins.isinstance
+542:30:Name -> U
+542:40:Name -> Class:builtins.bytes
+542:47:Name -> Class:builtins.bytearray
+542:58:Name -> Class:builtins.memoryview
+543:26:Call -> U | Inst:builtins.bytes | Const:bytes:b''
+543:26:Name -> Func:django.utils.encoding.force_bytes
+543:38:Name -> U
+544:12:Call -> U
+544:12:Attribute -> U
+544:12:Name -> U
+545:16:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+546:25:Name -> U
+547:24:Name -> U
+548:25:Name -> U
+557:12:Name -> U
+557:16:Name -> U
+557:26:Attribute -> Dict:0 | U | Dict:1
+557:26:Name -> Inst:django.core.mail.message.EmailMessage
+557:45:Name -> U
+558:15:Name -> Class:builtins.KeyError
+559:15:Name -> U
+560:16:Name -> U
+560:20:Name -> U
+560:30:Call -> Const:str:''
+560:30:Attribute -> BM:builtins.str.join
+560:40:Call -> Const:str:''
+560:40:Name -> Class:builtins.str
+560:44:Name -> U
+560:56:Name -> U
+573:15:Call -> U
+573:15:Name -> Func:builtins.getattr
+573:23:Attribute -> U
+573:23:Name -> U
+577:32:Call -> U
+577:32:Attribute -> U
+577:32:Name -> U
+578:19:Call -> ERR
+578:19:Name -> Func:builtins.isinstance
+578:30:Name -> U
+578:37:Name -> Class:email.headerregistry.AddressHeader
+578:56:Call -> ERR
+578:56:Name -> Func:builtins.any
+579:24:Call -> U
+579:24:Attribute -> U
+579:24:Attribute -> U
+579:24:Name -> U
+579:58:Attribute -> U
+579:58:Name -> U
+581:20:Call -> U
+581:20:Attribute -> U
+581:20:Name -> U
+582:24:Name -> U
+584:28:Call -> Inst:email.headerregistry.Address
+584:28:Name -> Class:email.headerregistry.Address
+585:45:Attribute -> U
+585:45:Name -> U
+586:41:Attribute -> U
+586:41:Name -> U
+587:39:Call -> U
+587:39:Name -> Func:django.utils.encoding.punycode
+587:48:Attribute -> U
+587:48:Name -> U
+589:40:Attribute -> U
+589:40:Name -> U
+594:29:Name -> Class:django.core.mail.message.EmailMessage
+601:5:Call -> Func:django.utils.deprecation.deprecate_posargs.decorator
+601:5:Name -> Func:django.utils.deprecation.deprecate_posargs
+602:8:Name -> Class:django.utils.deprecation.RemovedInDjango70Warning
+632:8:Call -> Const:NoneType:None
+632:8:Attribute -> BM:django.core.mail.message.EmailMessage.__init__ | BM:builtins.object.__init__
+632:8:Call -> Super
+632:8:Name -> Class:builtins.super
+633:12:Name -> Const:str:'' | U
+634:12:Name -> Const:str:'' | U
+635:12:Name -> Const:NoneType:None | U
+636:12:Name -> Const:NoneType:None | U
+637:16:Name -> Const:NoneType:None | U
+638:23:Name -> Const:NoneType:None | U
+639:24:Name -> Const:NoneType:None | U
+640:20:Name -> Const:NoneType:None | U
+641:15:Name -> Const:NoneType:None | U
+642:21:Name -> Const:NoneType:None | U
+644:8:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+645:12:Call -> Inst:__astroid_synthetic.EmailAlternative
+645:12:Name -> Class:__astroid_synthetic.EmailAlternative
+645:30:Name -> U
+645:63:Name -> Const:NoneType:None | U
+650:11:Name -> U
+650:30:Name -> U
+651:18:Call -> ExcInst:builtins.ValueError
+651:18:Name -> Class:builtins.ValueError
+652:8:Call -> U
+652:8:Attribute -> U
+652:8:Attribute -> U
+652:8:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+652:33:Call -> Inst:__astroid_synthetic.EmailAlternative
+652:33:Name -> Class:__astroid_synthetic.EmailAlternative
+652:50:Name -> U
+652:59:Name -> U
+655:11:Attribute -> Const:str:'I am content.' | Const:str:'I am content.' | Const:str:'' | U | Const:str:'new body\n'
+655:11:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+655:28:Attribute -> U
+655:28:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+656:12:Call -> Const:NoneType:None
+656:12:Attribute -> BM:django.core.mail.message.EmailMessage._add_bodies
+656:12:Call -> Super
+656:12:Name -> Class:builtins.super
+656:32:Name -> U
+657:11:Attribute -> U
+657:11:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+658:15:Call -> Const:bool:True
+658:15:Name -> Func:builtins.hasattr
+658:23:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+660:22:Call -> ExcInst:builtins.AttributeError
+660:22:Name -> Class:builtins.AttributeError
+664:12:Call -> U
+664:12:Attribute -> U
+664:12:Name -> U
+665:23:Attribute -> Const:str:'iso-8859-1' | Const:str:'iso-8859-1' | Const:str:'iso-8859-1' | Const:str:'iso-8859-1'
+665:23:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+665:40:Attribute -> U
+665:40:Name -> Inst:django.conf.LazySettings
+666:31:Attribute -> U
+666:31:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+667:36:Call -> U
+667:36:Attribute -> U
+667:36:Attribute -> U
+667:36:Name -> U
+668:26:Attribute -> U
+668:26:Name -> U
+669:19:Name -> U
+670:23:Call -> ERR
+670:23:Name -> Func:builtins.isinstance
+670:34:Name -> U
+670:43:Name -> Class:builtins.bytes
+671:34:Call -> U
+671:34:Attribute -> U
+671:34:Name -> U
+672:20:Call -> U
+672:20:Attribute -> U
+672:20:Name -> U
+672:40:Name -> U
+672:57:Name -> U
+672:74:Name -> U
+674:30:Call -> U | Inst:builtins.bytes | Const:bytes:b''
+674:30:Name -> Func:django.utils.encoding.force_bytes
+674:42:Name -> U
+674:60:Name -> U
+675:20:Call -> U
+675:20:Attribute -> U
+675:20:Name -> U
+675:40:Name -> U | Inst:builtins.bytes | Const:bytes:b''
+675:58:Name -> U
+675:76:Name -> U
+676:15:Name -> U
+683:11:Name -> U
+683:23:Attribute -> Const:str:'I am content.' | Const:str:'I am content.' | Const:str:'' | U | Const:str:'new body\n'
+683:23:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+686:33:Attribute -> U
+686:33:Name -> Inst:django.core.mail.message.EmailMultiAlternatives
+687:15:Call -> U
+687:15:Attribute -> U
+687:15:Name -> U
+687:48:Name -> U
+687:60:Name -> U

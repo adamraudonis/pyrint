@@ -1,0 +1,84 @@
+11:9:Call -> Inst:argparse.ArgumentParser
+11:9:Attribute -> Class:argparse.ArgumentParser
+11:9:Name -> Module:argparse
+12:0:Call -> U
+12:0:Attribute -> BM:argparse._ActionsContainer.add_argument
+12:0:Name -> Inst:argparse.ArgumentParser
+16:7:Call -> U | Inst:argparse.Namespace
+16:7:Attribute -> BM:argparse.ArgumentParser.parse_args
+16:7:Name -> Inst:argparse.ArgumentParser
+18:6:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+18:6:Name -> Func:os.path.abspath
+18:14:Call -> U
+18:14:Name -> Func:os.path.join
+18:19:Call -> U
+18:19:Name -> Func:os.path.dirname
+18:27:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+20:0:Call -> U
+20:0:Attribute -> BM:builtins.list.append | BM:builtins.list.append | U
+20:0:Attribute -> List:6 | List:6 | U
+20:0:Name -> Module:sys
+20:16:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+24:15:Attribute -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | Const:str:'Uninferable.None' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.None' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Uninferable.0' | U
+24:15:Attribute -> Inst:salt.version.SaltStackVersion | U
+24:15:Attribute -> Module:salt.version
+24:15:Name -> Module:salt
+26:11:Call -> U
+26:11:Name -> Func:os.path.join
+26:16:Attribute -> Dict:43 | Inst:os._Environ
+26:16:Name -> Module:os
+27:0:Call -> U
+27:0:Name -> Func:shutil.copy
+27:5:Call -> U
+27:5:Name -> Func:os.path.join
+27:10:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+27:37:Call -> U
+27:37:Name -> Func:os.path.join
+27:42:Name -> U
+28:9:Call -> ERR
+28:9:Attribute -> Func:posix.listdir
+28:9:Name -> Module:os
+28:20:Call -> U
+28:20:Name -> Func:os.path.join
+28:25:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+29:7:Name -> U
+31:4:Call -> U
+31:4:Name -> Func:shutil.copy
+31:9:Call -> U
+31:9:Name -> Func:os.path.join
+31:14:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+31:30:Name -> U
+31:34:Call -> U
+31:34:Name -> Func:os.path.join
+31:39:Name -> U
+35:18:Attribute -> U
+35:18:Name -> U
+37:11:Name -> U
+40:5:Call -> U | Inst:tarfile.TarFile
+40:5:Attribute -> BM:tarfile.TarFile.open
+40:5:Name -> Module:tarfile
+41:4:Call -> U
+41:4:Name -> Func:os.path.join
+41:9:Name -> U
+41:46:Name -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | Const:str:'Uninferable.None' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.None' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Uninferable.0' | U
+43:4:Call -> U
+43:4:Attribute -> U
+43:4:Name -> U
+43:11:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+43:36:Name -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | Const:str:'Uninferable.None' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.None' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Uninferable.0' | U
+43:57:Name -> Func:pkg.rpm.build.srcfilter
+49:33:Name -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | Const:str:'Uninferable.None' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.None' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Uninferable.0' | U
+50:28:Attribute -> U
+50:28:Name -> U | Inst:argparse.Namespace
+53:0:Call -> ERR
+53:0:Name -> Func:builtins.print
+53:24:Call -> Const:str:''
+53:24:Attribute -> BM:builtins.str.join
+53:42:Name -> Const:str:'rpmbuild' | Const:str:'-bb' | Const:str:'--define=salt_version Uninferable' | Const:str:'--define=salt_version Instance of built | Const:str:'--define=salt_version Uninferable.Uninf | Const:str:'--define=salt_version Uninferable.Insta | Const:str:'--define=salt_version Instance of built | Const:str:'--define=salt_version Instance of built | Const:str:'--define=salt_version Uninferable.None' | Const:str:'--define=salt_version Uninferable.Uninf | Const:str:'--define=salt_version Uninferable.None' | Const:str:'--define=salt_version Uninferable.Insta | Const:str:'--define=salt_version Uninferable.0' | U | Const:str:'salt.spec'
+53:53:Name -> List:5
+54:0:Call -> Const:int:0
+54:0:Name -> Func:subprocess.check_call
+54:11:Name -> List:5
+54:20:Call -> U
+54:20:Name -> Func:os.path.join
+54:25:Name -> U

@@ -1,0 +1,155 @@
+19:11:Call -> Inst:_pydatetime.datetime | U
+19:11:Attribute -> BM:_pydatetime.datetime.now
+19:11:Attribute -> Class:_pydatetime.datetime
+19:11:Name -> Module:datetime
+19:36:Attribute -> Inst:_pydatetime.timezone
+19:36:Attribute -> Class:_pydatetime.timezone
+19:36:Name -> Module:datetime
+28:13:Call -> Inst:_pydatetime.datetime | U
+28:13:Name -> Func:salt.utils.jid._utc_now
+29:11:Call -> U
+29:11:Attribute -> U
+29:11:Name -> U
+30:18:Name -> Inst:_pydatetime.datetime | U
+31:7:Name -> Inst:_pydatetime.datetime | U
+31:29:Name -> Inst:_pydatetime.datetime | U
+31:50:Name -> Inst:_pydatetime.datetime | U
+32:17:Name -> Const:NoneType:None | U
+32:37:Call -> Inst:_pydatetime.timedelta
+32:37:Attribute -> Class:_pydatetime.timedelta
+32:37:Name -> Module:datetime
+33:24:Name -> Inst:_pydatetime.datetime | U
+34:14:Name -> Inst:_pydatetime.datetime | U
+34:38:Call -> ERR
+34:38:Attribute -> Func:posix.getpid
+34:38:Name -> Module:os
+41:11:Call -> ERR
+41:11:Name -> Func:builtins.isinstance
+41:22:Name -> U
+41:27:Name -> Class:builtins.str
+43:7:Call -> ERR
+43:7:Name -> Func:builtins.len
+43:11:Name -> U
+43:27:Call -> ERR
+43:27:Name -> Func:builtins.len
+43:31:Name -> U
+43:45:Name -> U
+46:8:Call -> Inst:builtins.int
+46:8:Name -> Class:builtins.int
+46:12:Name -> U
+48:11:Name -> Class:builtins.ValueError
+56:10:Call -> Const:str:''
+56:10:Name -> Class:builtins.str
+56:14:Name -> U
+57:7:Call -> Const:int:0
+57:7:Name -> Func:builtins.len
+57:11:Name -> Const:str:''
+57:27:Call -> Const:int:0
+57:27:Name -> Func:builtins.len
+57:31:Name -> Const:str:''
+57:45:Name -> Const:str:''
+59:11:Name -> Const:str:''
+60:12:Name -> Const:str:''
+61:10:Name -> Const:str:''
+62:11:Name -> Const:str:''
+63:13:Name -> Const:str:''
+64:13:Name -> Const:str:''
+65:12:Name -> Const:str:''
+67:10:Call -> U
+67:10:Attribute -> BM:builtins.str.format
+68:8:Name -> Const:str:''
+68:14:Name -> Inst:calendar._localized_month
+68:21:Call -> Const:int:0
+68:21:Name -> Class:builtins.int
+68:25:Name -> Const:str:''
+68:34:Name -> Const:str:''
+68:39:Name -> Const:str:''
+68:45:Name -> Const:str:''
+68:53:Name -> Const:str:''
+68:61:Name -> Const:str:''
+70:11:Name -> U
+78:20:Call -> U
+78:20:Attribute -> U
+78:20:Name -> U
+79:21:Call -> Inst:builtins.list
+79:21:Name -> Class:builtins.list
+79:26:Call -> U
+79:26:Attribute -> U
+79:26:Name -> U
+81:18:Call -> U
+81:18:Attribute -> U
+81:18:Name -> U
+82:23:Call -> U
+82:23:Attribute -> U
+82:23:Name -> U
+83:16:Call -> U
+83:16:Attribute -> U
+83:16:Name -> U
+86:21:Name -> U
+87:8:Name -> Dict:5
+87:26:Call -> U
+87:26:Attribute -> U
+87:26:Name -> U
+89:23:Name -> U
+90:29:Name -> U
+91:16:Name -> Dict:5
+91:34:Call -> U
+91:34:Attribute -> U
+91:34:Name -> U
+92:11:Name -> Dict:5
+99:10:Call -> Dict:5
+99:10:Name -> Func:salt.utils.jid.format_job_instance
+99:30:Name -> U
+100:4:Call -> ERR
+100:4:Attribute -> BM:builtins.dict.update
+100:4:Name -> Dict:5
+100:29:Call -> Const:str:'' | U
+100:29:Name -> Func:salt.utils.jid.jid_to_time
+100:41:Name -> U
+101:11:Name -> Dict:5
+108:10:Call -> Dict:5
+108:10:Name -> Func:salt.utils.jid.format_job_instance
+108:30:Name -> U
+109:4:Call -> ERR
+109:4:Attribute -> BM:builtins.dict.update
+109:4:Name -> Dict:5
+109:23:Name -> U
+109:41:Call -> Const:str:'' | U
+109:41:Name -> Func:salt.utils.jid.jid_to_time
+109:53:Name -> U
+110:11:Name -> Dict:5
+117:11:Call -> ERR
+117:11:Name -> Func:builtins.isinstance
+117:22:Name -> U
+117:27:Name -> Class:builtins.str
+118:14:Call -> Const:str:''
+118:14:Name -> Class:builtins.str
+118:18:Name -> U
+119:12:Call -> Const:str:''
+119:12:Attribute -> BM:hashlib.sha256.hexdigest
+119:12:Call -> Inst:hashlib.sha256
+119:12:Call -> Class:hashlib.sha256
+119:12:Name -> Func:builtins.getattr
+119:20:Name -> Module:hashlib
+119:29:Name -> Const:str:'sha256' | U
+120:8:Call -> U | Const:str:'' | Inst:builtins.bytes | Const:bytes:b''
+120:8:Attribute -> Func:salt.utils.stringutils.to_bytes
+120:8:Attribute -> Module:salt.utils.stringutils
+120:8:Attribute -> Module:salt.utils
+120:8:Name -> Module:salt
+120:40:Name -> U | Const:str:''
+124:7:Name -> Const:NoneType:None | U
+125:8:Call -> ERR
+125:8:Attribute -> BM:builtins.list.append
+125:8:Name -> List:0
+125:21:Name -> U
+126:4:Call -> ERR
+126:4:Attribute -> BM:builtins.list.extend
+126:4:Name -> List:0
+126:18:Name -> Const:str:''
+126:29:Name -> Const:str:''
+127:11:Call -> U
+127:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+127:11:Attribute -> Module:posixpath | Module:ntpath
+127:11:Name -> Module:os
+127:25:Name -> List:0

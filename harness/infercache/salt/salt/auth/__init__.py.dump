@@ -1,0 +1,978 @@
+35:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+35:6:Attribute -> Func:logging.getLogger
+35:6:Name -> Module:logging
+35:24:Name -> Const:str:'salt.auth' | Const:str:'__main__'
+37:25:Call -> Frozen
+37:25:Name -> Class:builtins.frozenset
+60:8:Name -> Inst:salt.auth.LoadAuth
+60:20:Name -> U
+61:8:Name -> Inst:salt.auth.LoadAuth
+62:8:Name -> Inst:salt.auth.LoadAuth
+62:20:Call -> Inst:salt.loader.lazy.LazyLoader
+62:20:Attribute -> Func:salt.loader.auth
+62:20:Attribute -> Module:salt.loader
+62:20:Name -> Module:salt
+62:37:Name -> U
+63:8:Name -> Inst:salt.auth.LoadAuth
+63:22:Call -> Inst:salt.loader.lazy.LazyLoader
+63:22:Attribute -> Func:salt.loader.eauth_tokens
+63:22:Attribute -> Module:salt.loader
+63:22:Name -> Module:salt
+63:47:Name -> U
+64:8:Name -> Inst:salt.auth.LoadAuth
+64:26:Name -> Const:NoneType:None | U
+65:28:Name -> U
+65:63:Name -> U
+66:8:Name -> Inst:salt.auth.LoadAuth
+66:21:Call -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+66:21:Attribute -> Func:salt.cache.factory
+66:21:Attribute -> Module:salt.cache
+66:21:Name -> Module:salt
+67:12:Name -> U
+67:25:Name -> U
+67:71:Name -> U
+70:5:Name -> Class:functools.cached_property | Func:salt.utils.decorators.cached_property
+72:15:Attribute -> Const:NoneType:None | U
+72:15:Name -> Inst:salt.auth.LoadAuth
+72:34:Call -> Inst:salt.utils.minions.CkMinions
+72:34:Attribute -> Class:salt.utils.minions.CkMinions
+72:34:Attribute -> Module:salt.utils.minions
+72:34:Attribute -> Module:salt.utils
+72:34:Name -> Module:salt
+72:63:Attribute -> U
+72:63:Name -> Inst:salt.auth.LoadAuth
+79:26:Name -> U
+81:15:Call -> U
+81:15:Attribute -> BM:builtins.str.format
+81:32:Name -> U
+82:11:Name -> U
+82:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+82:23:Name -> Inst:salt.auth.LoadAuth
+85:24:Call -> Dict:1
+85:24:Attribute -> Func:salt.utils.args.arg_lookup
+85:24:Attribute -> Module:salt.utils.args
+85:24:Attribute -> Module:salt.utils
+85:24:Name -> Module:salt
+85:51:Attribute -> Inst:salt.loader.lazy.LazyLoader
+85:51:Name -> Inst:salt.auth.LoadAuth
+85:61:Name -> U
+86:19:Name -> U
+86:24:Name -> U
+87:15:Name -> Class:builtins.IndexError
+97:26:Name -> U
+99:15:Call -> U
+99:15:Attribute -> BM:builtins.str.format
+99:32:Name -> U
+100:11:Name -> U
+100:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+100:23:Name -> Inst:salt.auth.LoadAuth
+105:17:Name -> U
+105:22:Name -> U
+105:48:Call -> U
+105:48:Attribute -> U
+105:48:Name -> U
+105:64:Name -> U
+105:71:Name -> List:4
+107:16:Call -> U
+107:16:Attribute -> Func:salt.utils.args.format_call
+107:16:Attribute -> Module:salt.utils.args
+107:16:Attribute -> Module:salt.utils
+107:16:Name -> Module:salt
+108:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+108:12:Name -> Inst:salt.auth.LoadAuth
+108:22:Name -> U
+108:29:Name -> U
+108:55:Name -> Frozen
+111:27:Name -> U
+112:23:Call -> U
+112:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+112:23:Name -> Inst:salt.auth.LoadAuth
+112:33:Name -> U
+112:40:Name -> U
+112:57:Name -> U
+114:23:Call -> U
+114:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+114:23:Name -> Inst:salt.auth.LoadAuth
+114:33:Name -> U
+114:40:Name -> U
+115:15:Name -> Class:builtins.Exception
+116:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+116:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+116:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+116:56:Name -> ExcInst:builtins.Exception
+123:16:Call -> ERR
+123:16:Attribute -> Func:time.time
+123:16:Name -> Module:time
+124:14:Call -> Const:bool:False | Const:bool:False | U | Const:bool:False
+124:14:Attribute -> BM:salt.auth.LoadAuth.__auth_call
+124:14:Name -> Inst:salt.auth.LoadAuth
+124:31:Name -> U
+125:11:Name -> Const:bool:False | Const:bool:False | U | Const:bool:False
+126:19:Name -> U
+127:17:Call -> ERR
+127:17:Attribute -> Func:time.time
+127:17:Name -> Module:time
+127:31:Name -> U
+128:11:Name -> U
+128:20:Attribute -> Const:float:1.0 | U
+128:20:Name -> Inst:salt.auth.LoadAuth
+129:12:Name -> Inst:salt.auth.LoadAuth
+129:28:Name -> U
+130:20:Attribute -> Const:float:1.0 | U
+130:20:Name -> Inst:salt.auth.LoadAuth
+131:17:Call -> U
+131:17:Attribute -> BM:random.Random.uniform
+131:17:Call -> Inst:random.SystemRandom
+131:17:Attribute -> Class:random.SystemRandom
+131:17:Name -> Module:random
+132:12:Attribute -> Const:float:1.0 | U
+132:12:Name -> Inst:salt.auth.LoadAuth
+132:28:Name -> Const:float:0.25 | U
+132:39:Attribute -> Const:float:1.0 | U
+132:39:Name -> Inst:salt.auth.LoadAuth
+132:55:Name -> Const:float:0.25 | U
+134:14:Name -> U
+134:22:Name -> U
+134:31:Call -> ERR
+134:31:Attribute -> Func:time.time
+134:31:Name -> Module:time
+135:12:Call -> ERR
+135:12:Attribute -> Func:time.sleep
+135:12:Name -> Module:time
+144:26:Name -> U
+146:14:Attribute -> U
+146:14:Name -> Inst:salt.auth.LoadAuth
+147:15:Name -> U
+148:18:Name -> U
+149:18:Name -> U
+150:11:Name -> Const:str:'Uninferable.acl'
+150:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+150:23:Name -> Inst:salt.auth.LoadAuth
+152:16:Call -> U
+152:16:Attribute -> Func:salt.utils.args.format_call
+152:16:Attribute -> Module:salt.utils.args
+152:16:Attribute -> Module:salt.utils
+152:16:Name -> Module:salt
+153:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+153:12:Name -> Inst:salt.auth.LoadAuth
+153:22:Name -> Const:str:'Uninferable.acl'
+153:29:Name -> U
+153:54:Name -> Frozen
+156:19:Call -> U
+156:19:Attribute -> Inst:salt.loader.lazy.LazyLoader
+156:19:Name -> Inst:salt.auth.LoadAuth
+156:29:Name -> Const:str:'Uninferable.acl'
+156:36:Name -> U
+156:53:Name -> U
+157:15:Name -> Class:builtins.Exception
+158:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+158:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+158:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+158:56:Name -> ExcInst:builtins.Exception
+166:26:Name -> U
+167:19:Name -> U
+168:15:Call -> U
+168:15:Attribute -> BM:builtins.str.format
+168:39:Name -> U
+169:11:Name -> U
+169:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+169:23:Name -> Inst:salt.auth.LoadAuth
+170:19:Name -> U
+172:19:Call -> U
+172:19:Attribute -> Inst:salt.loader.lazy.LazyLoader
+172:19:Name -> Inst:salt.auth.LoadAuth
+172:29:Name -> U
+172:35:Name -> U
+172:46:Attribute -> U
+172:46:Name -> Inst:salt.auth.LoadAuth
+173:15:Name -> Class:builtins.Exception
+174:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+174:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+174:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+174:56:Name -> ExcInst:builtins.Exception
+175:19:Name -> U
+182:26:Name -> U
+184:15:Call -> U
+184:15:Attribute -> BM:builtins.str.format
+184:34:Name -> U
+185:11:Name -> U
+185:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+185:23:Name -> Inst:salt.auth.LoadAuth
+187:16:Call -> U
+187:16:Attribute -> Func:salt.utils.args.format_call
+187:16:Attribute -> Module:salt.utils.args
+187:16:Attribute -> Module:salt.utils
+187:16:Name -> Module:salt
+188:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+188:12:Name -> Inst:salt.auth.LoadAuth
+188:22:Name -> U
+188:29:Name -> U
+188:54:Name -> Frozen
+191:19:Call -> U
+191:19:Attribute -> Inst:salt.loader.lazy.LazyLoader
+191:19:Name -> Inst:salt.auth.LoadAuth
+191:29:Name -> U
+191:36:Name -> U
+191:53:Name -> U
+192:15:Name -> Class:builtins.IndexError
+194:15:Name -> Class:builtins.Exception
+201:26:Call -> U
+201:26:Attribute -> U
+201:26:Attribute -> U
+201:26:Name -> Inst:salt.auth.LoadAuth
+203:11:Name -> U
+206:11:Call -> ERR
+206:11:Name -> Func:builtins.isinstance
+206:22:Name -> U
+206:39:Name -> Class:_collections_abc.Mapping
+207:31:Call -> U
+207:31:Attribute -> U
+207:31:Name -> U
+207:51:Name -> U
+208:15:Call -> ERR
+208:15:Name -> Func:builtins.isinstance
+208:26:Name -> U
+208:44:Name -> Class:_collections_abc.Iterable
+209:19:Call -> U
+209:19:Attribute -> U
+209:19:Name -> U
+209:43:Name -> U
+218:15:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+218:15:Attribute -> BM:salt.auth.LoadAuth.authenticate_eauth
+218:15:Name -> Inst:salt.auth.LoadAuth
+218:39:Name -> U
+221:11:Call -> Const:bool:True | Const:bool:True | Const:bool:False
+221:11:Attribute -> BM:salt.auth.LoadAuth._allow_custom_expire
+221:11:Name -> Inst:salt.auth.LoadAuth
+221:37:Name -> U
+222:27:Call -> U
+222:27:Attribute -> U
+222:27:Name -> U
+222:52:Attribute -> U
+222:52:Name -> Inst:salt.auth.LoadAuth
+224:16:Call -> U
+224:16:Attribute -> U
+224:16:Name -> U
+225:27:Attribute -> U
+225:27:Name -> Inst:salt.auth.LoadAuth
+228:21:Call -> ERR
+228:21:Attribute -> Func:time.time
+228:21:Name -> Module:time
+229:22:Call -> ERR
+229:22:Attribute -> Func:time.time
+229:22:Name -> Module:time
+229:36:Name -> U
+230:20:Call -> Const:str:'' | Const:str:'' | U | Const:str:''
+230:20:Attribute -> BM:salt.auth.LoadAuth.load_name
+230:20:Name -> Inst:salt.auth.LoadAuth
+230:35:Name -> U
+231:21:Name -> U
+234:11:Attribute -> U
+234:11:Name -> Inst:salt.auth.LoadAuth
+235:22:Call -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+235:22:Attribute -> BM:salt.auth.LoadAuth.__get_acl
+235:22:Name -> Inst:salt.auth.LoadAuth
+235:37:Name -> U
+236:12:Name -> Dict:4
+236:33:Name -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+238:17:Call -> Const:bool:False | Const:bool:False | U | Const:bool:False | Const:NoneType:None
+238:17:Attribute -> BM:salt.auth.LoadAuth.get_groups
+238:17:Name -> Inst:salt.auth.LoadAuth
+238:33:Name -> U
+239:11:Name -> Const:bool:False | Const:bool:False | U | Const:bool:False | Const:NoneType:None
+240:12:Name -> Dict:4
+240:30:Name -> U
+242:11:Attribute -> U
+242:11:Name -> Inst:salt.auth.LoadAuth
+243:12:Call -> Const:NoneType:None
+243:12:Attribute -> Func:salt.utils.versions.warn_until
+243:12:Attribute -> Module:salt.utils.versions
+243:12:Attribute -> Module:salt.utils
+243:12:Name -> Module:salt
+248:19:Call -> U
+248:19:Attribute -> Inst:salt.loader.lazy.LazyLoader
+248:19:Name -> Inst:salt.auth.LoadAuth
+248:31:Call -> U
+248:31:Attribute -> BM:builtins.str.format
+248:52:Attribute -> U
+248:52:Name -> Inst:salt.auth.LoadAuth
+249:16:Attribute -> U
+249:16:Name -> Inst:salt.auth.LoadAuth
+249:27:Name -> Dict:4
+252:24:Call -> U
+252:24:Name -> Func:builtins.getattr
+252:32:Name -> Module:hashlib
+252:41:Call -> U
+252:41:Attribute -> U
+252:41:Attribute -> U
+252:41:Name -> Inst:salt.auth.LoadAuth
+253:24:Call -> Const:str:''
+253:24:Name -> Class:builtins.str
+253:28:Call -> U
+253:28:Attribute -> U
+253:28:Call -> U
+253:28:Name -> U
+253:38:Call -> ERR
+253:38:Attribute -> Func:posix.urandom
+253:38:Name -> Module:os
+254:12:Name -> Dict:4
+254:29:Name -> Const:str:''
+256:16:Call -> U
+256:16:Attribute -> U
+256:16:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+256:16:Name -> Inst:salt.auth.LoadAuth
+256:43:Name -> Const:str:''
+256:54:Name -> Dict:4
+256:69:Name -> Dict:4
+257:19:Attribute -> Class:salt.exceptions.SaltCacheError
+257:19:Attribute -> Module:salt.exceptions
+257:19:Name -> Module:salt
+258:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+258:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+258:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+260:20:Attribute -> U
+260:20:Name -> Inst:salt.auth.LoadAuth
+261:20:Name -> ExcInst:salt.exceptions.SaltCacheError
+265:19:Name -> Dict:4
+272:11:Attribute -> U
+272:11:Name -> Inst:salt.auth.LoadAuth
+273:12:Call -> Const:NoneType:None
+273:12:Attribute -> Func:salt.utils.versions.warn_until
+273:12:Attribute -> Module:salt.utils.versions
+273:12:Attribute -> Module:salt.utils
+273:12:Name -> Module:salt
+281:24:Call -> U
+281:24:Attribute -> Inst:salt.loader.lazy.LazyLoader
+281:24:Name -> Inst:salt.auth.LoadAuth
+281:36:Call -> U
+281:36:Attribute -> BM:builtins.str.format
+281:58:Attribute -> U
+281:58:Name -> Inst:salt.auth.LoadAuth
+282:20:Attribute -> U
+282:20:Name -> Inst:salt.auth.LoadAuth
+282:31:Name -> U
+284:19:Attribute -> Class:salt.exceptions.SaltDeserializationError
+284:19:Attribute -> Module:salt.exceptions
+284:19:Name -> Module:salt
+295:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+295:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+295:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+297:20:Name -> U
+298:20:Name -> ExcInst:salt.exceptions.SaltDeserializationError
+300:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+300:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+300:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+302:19:Name -> Class:builtins.OSError
+312:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+312:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+312:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+316:20:Name -> U
+317:20:Name -> ExcInst:builtins.OSError
+319:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+319:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+319:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+322:23:Name -> U
+326:15:Call -> U
+326:15:Attribute -> BM:builtins.dict.get | U
+326:15:Name -> Dict:0 | U
+326:40:Call -> ERR
+326:40:Attribute -> Func:time.time
+326:40:Name -> Module:time
+333:15:Name -> Const:bool:True | Const:bool:False | Const:bool:True
+334:16:Call -> U | Dict:0
+334:16:Attribute -> BM:salt.auth.LoadAuth.rm_token
+334:16:Name -> Inst:salt.auth.LoadAuth
+334:30:Name -> U
+337:19:Name -> Dict:0 | U
+340:24:Call -> U
+340:24:Attribute -> BM:salt.cache.MemCache.fetch | U
+340:24:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+340:24:Name -> Inst:salt.auth.LoadAuth
+340:51:Name -> U
+342:19:Call -> U
+342:19:Attribute -> U
+342:19:Name -> U
+342:44:Call -> ERR
+342:44:Attribute -> Func:time.time
+342:44:Name -> Module:time
+343:26:Attribute -> Class:salt.exceptions.TokenExpiredError
+343:26:Attribute -> Module:salt.exceptions
+343:26:Name -> Module:salt
+345:23:Name -> U
+347:16:Attribute -> Class:salt.exceptions.SaltDeserializationError
+347:16:Attribute -> Module:salt.exceptions
+347:16:Name -> Module:salt
+348:16:Attribute -> Class:salt.exceptions.TokenExpiredError
+348:16:Attribute -> Module:salt.exceptions
+348:16:Name -> Module:salt
+359:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+359:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+359:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+361:20:Name -> U
+362:20:Name -> ExcInst:salt.exceptions.SaltDeserializationError | ExcInst:salt.exceptions.TokenExpiredError
+364:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+364:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+364:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+365:16:Call -> U | Dict:0
+365:16:Attribute -> BM:salt.auth.LoadAuth.rm_token
+365:16:Name -> Inst:salt.auth.LoadAuth
+365:30:Name -> U
+366:19:Name -> Class:builtins.OSError
+373:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+373:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+373:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+377:20:Name -> U
+378:20:Name -> ExcInst:builtins.OSError
+380:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+380:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+380:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+382:19:Attribute -> Class:salt.exceptions.SaltCacheError
+382:19:Attribute -> Module:salt.exceptions
+382:19:Name -> Module:salt
+383:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+383:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+383:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+385:20:Name -> U
+386:20:Attribute -> U
+386:20:Name -> Inst:salt.auth.LoadAuth
+387:20:Name -> ExcInst:salt.exceptions.SaltCacheError
+395:11:Attribute -> U
+395:11:Name -> Inst:salt.auth.LoadAuth
+396:12:Call -> Const:NoneType:None
+396:12:Attribute -> Func:salt.utils.versions.warn_until
+396:12:Attribute -> Module:salt.utils.versions
+396:12:Attribute -> Module:salt.utils
+396:12:Name -> Module:salt
+402:19:Call -> U
+402:19:Attribute -> Inst:salt.loader.lazy.LazyLoader
+402:19:Name -> Inst:salt.auth.LoadAuth
+402:31:Call -> U
+402:31:Attribute -> BM:builtins.str.format
+402:55:Attribute -> U
+402:55:Name -> Inst:salt.auth.LoadAuth
+403:16:Attribute -> U
+403:16:Name -> Inst:salt.auth.LoadAuth
+407:23:Call -> U
+407:23:Attribute -> BM:salt.cache.Cache.list | U
+407:23:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+407:23:Name -> Inst:salt.auth.LoadAuth
+408:19:Attribute -> Class:salt.exceptions.SaltCacheError
+408:19:Attribute -> Module:salt.exceptions
+408:19:Name -> Module:salt
+409:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+409:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+409:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+411:20:Attribute -> U
+411:20:Name -> Inst:salt.auth.LoadAuth
+412:20:Name -> ExcInst:salt.exceptions.SaltCacheError
+420:11:Attribute -> U
+420:11:Name -> Inst:salt.auth.LoadAuth
+421:12:Call -> Const:NoneType:None
+421:12:Attribute -> Func:salt.utils.versions.warn_until
+421:12:Attribute -> Module:salt.utils.versions
+421:12:Attribute -> Module:salt.utils
+421:12:Name -> Module:salt
+427:12:Call -> U
+427:12:Attribute -> Inst:salt.loader.lazy.LazyLoader
+427:12:Name -> Inst:salt.auth.LoadAuth
+427:24:Call -> U
+427:24:Attribute -> BM:builtins.str.format
+427:45:Attribute -> U
+427:45:Name -> Inst:salt.auth.LoadAuth
+427:73:Attribute -> U
+427:73:Name -> Inst:salt.auth.LoadAuth
+427:84:Name -> U
+430:23:Call -> U
+430:23:Attribute -> U
+430:23:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+430:23:Name -> Inst:salt.auth.LoadAuth
+430:50:Name -> U
+431:19:Attribute -> Class:salt.exceptions.SaltCacheError
+431:19:Attribute -> Module:salt.exceptions
+431:19:Name -> Module:salt
+432:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+432:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+432:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+434:20:Name -> U
+435:20:Attribute -> U
+435:20:Name -> Inst:salt.auth.LoadAuth
+436:20:Name -> ExcInst:salt.exceptions.SaltCacheError
+444:11:Attribute -> U
+444:11:Name -> Inst:salt.auth.LoadAuth
+445:12:Call -> Const:NoneType:None
+445:12:Attribute -> Func:salt.utils.versions.warn_until
+445:12:Attribute -> Module:salt.utils.versions
+445:12:Attribute -> Module:salt.utils
+445:12:Name -> Module:salt
+450:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+450:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+450:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+451:16:Call -> U
+451:16:Attribute -> BM:builtins.str.format
+452:20:Attribute -> U
+452:20:Name -> Inst:salt.auth.LoadAuth
+455:25:Call -> U
+455:25:Attribute -> BM:salt.auth.LoadAuth.list_tokens
+455:25:Name -> Inst:salt.auth.LoadAuth
+456:29:Call -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+456:29:Attribute -> BM:salt.auth.LoadAuth.get_tok
+456:29:Name -> Inst:salt.auth.LoadAuth
+456:42:Name -> U
+458:36:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+459:23:Call -> U
+459:23:Attribute -> BM:builtins.dict.get | BM:builtins.dict.get | BM:builtins.dict.get | BM:builtins.dict.get | U
+459:23:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+459:53:Call -> ERR
+459:53:Attribute -> Func:time.time
+459:53:Name -> Module:time
+461:20:Call -> U | Dict:0
+461:20:Attribute -> BM:salt.auth.LoadAuth.rm_token
+461:20:Name -> Inst:salt.auth.LoadAuth
+461:34:Name -> U
+463:12:Call -> Const:NoneType:None | Const:NoneType:None
+463:12:Attribute -> BM:salt.cache.Cache.clean_expired | BM:salt.cache.Cache.clean_expired
+463:12:Attribute -> Inst:salt.cache.MemCache | Inst:salt.cache.Cache
+463:12:Name -> Inst:salt.auth.LoadAuth
+470:16:Call -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+470:16:Attribute -> BM:salt.auth.LoadAuth.get_tok
+470:16:Name -> Inst:salt.auth.LoadAuth
+470:29:Name -> U
+473:15:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+473:24:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+473:46:Attribute -> U
+473:46:Name -> Inst:salt.auth.LoadAuth
+474:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+474:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+474:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+477:15:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+484:26:Name -> U
+485:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+485:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+485:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+487:11:Name -> U
+487:32:Attribute -> U
+487:32:Name -> Inst:salt.auth.LoadAuth
+488:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+488:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+488:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+488:64:Name -> U
+489:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+489:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+489:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+494:15:Call -> U | Const:bool:False
+494:15:Attribute -> BM:salt.auth.LoadAuth.time_auth
+494:15:Name -> Inst:salt.auth.LoadAuth
+494:30:Name -> U
+495:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+495:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+495:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+509:19:Call -> U
+509:19:Attribute -> U
+509:19:Name -> U
+510:11:Name -> U
+511:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+511:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+511:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+511:24:Name -> Const:str:'Authentication failure of type "user" o
+514:21:Name -> U
+515:24:Call -> Inst:salt.auth.AuthUser
+515:24:Name -> Class:salt.auth.AuthUser
+515:33:Name -> U
+516:15:Call -> U
+516:15:Attribute -> BM:salt.auth.AuthUser.is_sudo
+516:15:Name -> Inst:salt.auth.AuthUser
+517:33:Name -> U
+518:23:Name -> U
+518:35:Name -> U
+518:39:Name -> U
+519:31:Call -> U
+519:31:Attribute -> BM:salt.auth.AuthUser.sudo_name
+519:31:Name -> Inst:salt.auth.AuthUser
+522:16:Name -> U
+522:32:Call -> U
+522:32:Attribute -> U
+522:32:Attribute -> U
+522:32:Name -> Inst:salt.auth.LoadAuth
+522:65:Name -> U
+524:33:Name -> U
+525:23:Name -> U
+525:35:Name -> U
+525:39:Name -> U
+527:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+527:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+527:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+529:20:Call -> U
+529:20:Attribute -> U
+529:20:Attribute -> U
+529:20:Name -> Inst:salt.auth.LoadAuth
+530:20:Name -> U
+532:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+532:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+532:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+532:28:Name -> Const:str:'Authentication failure of type "user" o
+535:17:Call -> U
+535:17:Attribute -> BM:salt.auth.AuthUser.is_running_user
+535:17:Name -> Inst:salt.auth.AuthUser
+536:19:Name -> U
+536:31:Call -> U
+536:31:Attribute -> U
+536:31:Name -> U
+536:39:Name -> U
+537:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+537:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+537:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+537:32:Name -> Const:str:'Authentication failure of type "user" o
+539:17:Name -> U
+539:29:Call -> U
+539:29:Attribute -> U
+539:29:Name -> U
+541:17:Name -> U
+541:29:Call -> U
+541:29:Attribute -> U
+541:29:Name -> U
+545:19:Name -> U
+545:35:Name -> U
+547:23:Name -> U
+547:35:Name -> U
+547:39:Name -> U
+548:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+548:24:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+548:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+548:36:Name -> Const:str:'Authentication failure of type "user" o
+550:27:Name -> U
+552:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+552:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+552:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+552:32:Name -> Const:str:'Authentication failure of type "user" o
+555:29:Name -> U
+556:19:Name -> U
+556:31:Name -> U
+556:35:Name -> U
+559:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+559:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+559:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+559:24:Name -> Const:str:'Authentication failure of type "user" o
+573:11:Name -> Const:NoneType:None | U
+573:21:Attribute -> U
+573:21:Name -> Inst:salt.auth.LoadAuth
+573:71:Name -> Const:NoneType:None | U
+574:19:Name -> Const:NoneType:None | U
+576:20:Call -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+576:20:Attribute -> BM:salt.auth.LoadAuth.__get_acl
+576:20:Name -> Inst:salt.auth.LoadAuth
+576:35:Name -> U
+577:11:Name -> Const:NoneType:None | Const:NoneType:None | U | Const:NoneType:None
+578:19:Name -> U
+580:34:Name -> Const:NoneType:None | U
+580:16:Name -> U
+580:45:Name -> U
+581:11:Name -> U
+581:24:Attribute -> U
+581:24:Name -> Inst:salt.auth.LoadAuth
+583:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+583:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+583:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+583:62:Name -> U
+584:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+584:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+584:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+587:11:Name -> Const:NoneType:None | U
+588:19:Name -> U
+589:21:Call -> U
+589:21:Attribute -> U
+589:21:Name -> U
+591:19:Call -> Const:str:'' | Const:str:'' | U | Const:str:''
+591:19:Attribute -> BM:salt.auth.LoadAuth.load_name
+591:19:Name -> Inst:salt.auth.LoadAuth
+591:34:Name -> U
+592:21:Call -> Const:bool:False | Const:bool:False | U | Const:bool:False | Const:NoneType:None
+592:21:Attribute -> BM:salt.auth.LoadAuth.get_groups
+592:21:Name -> Inst:salt.auth.LoadAuth
+592:37:Name -> U
+593:23:Attribute -> U
+593:23:Name -> Inst:salt.auth.LoadAuth
+593:50:Name -> U
+594:15:Name -> U
+595:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+595:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+595:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+595:59:Name -> U
+597:15:Name -> U | Const:bool:False | Const:bool:False | Const:bool:False | Const:NoneType:None
+602:20:Call -> Const:NoneType:None | List:0 | U
+602:20:Attribute -> BM:salt.utils.minions.CkMinions.fill_auth_list | U
+602:20:Attribute -> Inst:salt.utils.minions.CkMinions | U
+602:20:Name -> Inst:salt.auth.LoadAuth
+602:50:Name -> U
+602:64:Name -> U | Const:str:'' | Const:str:'' | Const:str:''
+602:70:Name -> U | Const:bool:False | Const:bool:False | Const:bool:False | Const:NoneType:None | List:0
+604:20:Call -> Const:NoneType:None | List:0 | U
+604:20:Attribute -> BM:salt.auth.LoadAuth.__process_acl
+604:20:Name -> Inst:salt.auth.LoadAuth
+604:39:Name -> U
+604:45:Name -> Const:NoneType:None | List:0 | U
+606:8:Call -> U
+606:8:Attribute -> U
+606:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+606:44:Name -> Const:NoneType:None | List:0 | U
+608:15:Name -> Const:NoneType:None | List:0 | U
+626:19:Call -> U
+626:19:Attribute -> U
+626:19:Name -> U
+627:28:Name -> List:0
+627:51:Name -> U
+630:11:Name -> U
+631:20:Call -> Const:bool:False | Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+631:20:Attribute -> BM:salt.auth.LoadAuth.authenticate_token
+631:20:Name -> Inst:salt.auth.LoadAuth
+631:44:Name -> U
+632:19:Name -> Const:bool:False | Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+633:16:Name -> Dict:3
+637:23:Name -> Dict:3
+640:23:Name -> Const:bool:False | Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+641:12:Name -> Dict:3
+641:30:Name -> U
+642:24:Call -> U
+642:24:Attribute -> BM:salt.auth.LoadAuth.get_auth_list
+642:24:Name -> Inst:salt.auth.LoadAuth
+642:43:Name -> U
+642:55:Name -> Const:bool:False | Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+643:13:Name -> U
+644:19:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+644:19:Attribute -> BM:salt.auth.LoadAuth.authenticate_eauth
+644:19:Name -> Inst:salt.auth.LoadAuth
+644:43:Name -> U
+645:16:Name -> Dict:3
+647:31:Call -> U
+647:31:Attribute -> BM:builtins.str.format
+648:24:Name -> U
+651:23:Name -> Dict:3
+653:24:Call -> U
+653:24:Attribute -> BM:salt.auth.LoadAuth.get_auth_list
+653:24:Name -> Inst:salt.auth.LoadAuth
+653:43:Name -> U
+654:13:Name -> U
+655:23:Call -> Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True
+655:23:Attribute -> BM:salt.auth.LoadAuth.authenticate_key
+655:23:Name -> Inst:salt.auth.LoadAuth
+655:45:Name -> U
+655:51:Name -> Const:NoneType:None | U
+657:19:Name -> Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True
+658:19:Name -> Const:bool:False | U
+659:29:Name -> Const:str:'Authentication failure of type "user" o
+659:44:Name -> U
+660:16:Name -> Dict:3
+660:78:Name -> Const:str:'Authentication failure of type "user" o | Const:str:'Authentication failure of type "user" o
+661:23:Name -> Dict:3
+664:15:Name -> Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True
+665:19:Call -> U
+665:19:Attribute -> BM:salt.auth.AuthUser.is_sudo
+665:19:Call -> Inst:salt.auth.AuthUser
+665:19:Name -> Class:salt.auth.AuthUser
+665:28:Name -> U
+666:27:Attribute -> U
+666:27:Name -> Inst:salt.auth.LoadAuth
+666:56:Attribute -> U
+666:56:Name -> Inst:salt.auth.LoadAuth
+669:15:Name -> Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True
+673:28:Call -> List:0
+673:28:Attribute -> Func:salt.utils.master.get_values_of_matching_keys
+673:28:Attribute -> Module:salt.utils.master
+673:28:Attribute -> Module:salt.utils
+673:28:Name -> Module:salt
+674:20:Attribute -> U
+674:20:Name -> Inst:salt.auth.LoadAuth
+674:48:Name -> Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:True
+676:23:Name -> List:0
+677:20:Name -> Dict:3
+677:82:Name -> Const:str:'Authentication failure of type "user" o | Const:str:'Authentication failure of type "user" o
+678:27:Name -> Dict:3
+680:12:Name -> Dict:3
+684:19:Name -> Dict:3
+687:8:Name -> Dict:3
+687:27:Name -> List:0 | U | List:0
+688:15:Name -> Dict:3
+698:8:Name -> Inst:salt.auth.Resolver
+698:20:Name -> U
+699:8:Name -> Inst:salt.auth.Resolver
+699:20:Call -> Inst:salt.loader.lazy.LazyLoader
+699:20:Attribute -> Func:salt.loader.auth
+699:20:Attribute -> Module:salt.loader
+699:20:Name -> Module:salt
+699:37:Name -> U
+702:21:Call -> U
+702:21:Attribute -> BM:builtins.str.format
+703:12:Call -> U
+703:12:Attribute -> Func:salt.utils.network.ip_bracket
+703:12:Attribute -> Module:salt.utils.network
+703:12:Attribute -> Module:salt.utils
+703:12:Name -> Module:salt
+703:42:Attribute -> U
+703:42:Name -> Inst:salt.auth.Resolver
+704:12:Call -> Const:str:''
+704:12:Name -> Class:builtins.str
+704:16:Attribute -> U
+704:16:Name -> Inst:salt.auth.Resolver
+706:13:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+706:13:Attribute -> Func:salt.channel.client.ReqChannel.factory
+706:13:Attribute -> Class:salt.channel.client.ReqChannel
+706:13:Attribute -> Module:salt.channel.client
+706:13:Attribute -> Module:salt.channel
+706:13:Name -> Module:salt
+707:12:Attribute -> U
+707:12:Name -> Inst:salt.auth.Resolver
+707:49:Name -> U
+709:19:Call -> U
+709:19:Attribute -> U
+709:19:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+709:32:Name -> U
+717:15:Name -> U
+718:12:Call -> ERR
+718:12:Name -> Func:builtins.print
+719:19:Name -> Dict:0
+720:18:Name -> U
+721:11:Name -> Const:str:'Uninferable.auth'
+721:23:Attribute -> Inst:salt.loader.lazy.LazyLoader
+721:23:Name -> Inst:salt.auth.Resolver
+722:12:Call -> ERR
+722:12:Name -> Func:builtins.print
+723:16:Call -> U
+723:16:Attribute -> BM:builtins.str.format
+724:20:Name -> U
+727:12:Call -> ERR
+727:12:Name -> Func:builtins.print
+728:16:Call -> Const:str:'Available eauth types: '
+728:16:Attribute -> BM:builtins.str.format
+729:20:Call -> Const:str:''
+729:20:Attribute -> BM:builtins.str.join
+729:30:Call -> ERR
+729:30:Name -> Func:builtins.sorted
+729:37:Name -> U
+729:53:Attribute -> Inst:salt.loader.lazy.LazyLoader
+729:53:Name -> Inst:salt.auth.Resolver
+729:66:Call -> U
+729:66:Attribute -> U
+729:66:Name -> U
+732:19:Name -> Dict:0
+734:15:Call -> Dict:1
+734:15:Attribute -> Func:salt.utils.args.arg_lookup
+734:15:Attribute -> Module:salt.utils.args
+734:15:Attribute -> Module:salt.utils
+734:15:Name -> Module:salt
+734:42:Attribute -> Inst:salt.loader.lazy.LazyLoader
+734:42:Name -> Inst:salt.auth.Resolver
+734:52:Name -> Const:str:'Uninferable.auth'
+735:19:Name -> Dict:1
+736:15:Name -> U
+736:22:Attribute -> U
+736:22:Name -> Inst:salt.auth.Resolver
+737:16:Name -> Dict:0
+737:20:Name -> U
+737:27:Attribute -> U
+737:27:Name -> Inst:salt.auth.Resolver
+737:37:Name -> U
+738:17:Call -> U
+738:17:Attribute -> U
+738:17:Name -> U
+739:16:Name -> Dict:0
+739:20:Name -> U
+739:27:Call -> U | Const:str:'' | Const:str:'' | Const:NoneType:None
+739:27:Attribute -> Func:getpass.fallback_getpass | Func:getpass.win_getpass | Func:getpass.unix_getpass
+739:27:Name -> Module:getpass
+739:46:Name -> U
+741:16:Name -> Dict:0
+741:20:Name -> U
+741:27:Call -> ERR
+741:27:Name -> Func:builtins.input
+741:36:Name -> U
+742:30:Call -> List:0
+742:30:Name -> Class:builtins.list
+742:35:Call -> DictItems
+742:35:Attribute -> BM:builtins.dict.items
+742:35:Name -> Dict:1
+743:15:Name -> U
+743:24:Attribute -> U
+743:24:Name -> Inst:salt.auth.Resolver
+744:16:Name -> Dict:0
+744:31:Attribute -> U
+744:31:Name -> Inst:salt.auth.Resolver
+744:41:Name -> U
+746:16:Name -> Dict:0
+746:20:Name -> U
+746:29:Call -> ERR
+746:29:Name -> Func:builtins.input
+746:38:Name -> U
+746:47:Name -> U
+749:25:Name -> Dict:0
+749:37:Name -> Dict:0
+750:12:Name -> Dict:0
+750:30:Call -> U
+750:30:Attribute -> Func:salt.utils.user.get_user
+750:30:Attribute -> Module:salt.utils.user
+750:30:Attribute -> Module:salt.utils
+750:30:Name -> Module:salt
+752:15:Name -> Dict:0
+759:8:Name -> U
+760:8:Name -> U
+760:24:Name -> U
+761:16:Call -> U
+761:16:Attribute -> BM:salt.auth.Resolver._send_token_request
+761:16:Name -> Inst:salt.auth.Resolver
+761:41:Name -> U
+762:26:Name -> U
+763:19:Name -> U
+765:17:Call -> Gen:salt.utils.files.set_umask
+765:17:Attribute -> Func:salt.utils.files.set_umask
+765:17:Attribute -> Module:salt.utils.files
+765:17:Attribute -> Module:salt.utils
+765:17:Name -> Module:salt
+766:21:Call -> U
+766:21:Attribute -> Func:salt.utils.files.fopen
+766:21:Attribute -> Module:salt.utils.files
+766:21:Attribute -> Module:salt.utils
+766:21:Name -> Module:salt
+766:44:Attribute -> U
+766:44:Name -> Inst:salt.auth.Resolver
+767:20:Call -> U
+767:20:Attribute -> U
+767:20:Name -> U
+767:30:Name -> U
+768:15:Name -> Class:builtins.OSError
+770:15:Name -> U
+776:8:Name -> U
+777:16:Call -> U
+777:16:Attribute -> BM:salt.auth.Resolver._send_token_request
+777:16:Name -> Inst:salt.auth.Resolver
+777:41:Name -> U
+778:15:Name -> U
+785:8:Name -> Dict:0
+785:24:Name -> U
+786:8:Name -> Dict:0
+787:16:Call -> U
+787:16:Attribute -> BM:salt.auth.Resolver._send_token_request
+787:16:Name -> Inst:salt.auth.Resolver
+787:41:Name -> Dict:0
+788:15:Name -> U
+795:8:Name -> Dict:0
+795:24:Name -> U
+796:8:Name -> Dict:0
+797:8:Call -> U
+797:8:Attribute -> BM:salt.auth.Resolver._send_token_request
+797:8:Name -> Inst:salt.auth.Resolver
+797:33:Name -> Dict:0
+811:8:Name -> Inst:salt.auth.AuthUser
+811:20:Name -> U
+820:15:Call -> U
+820:15:Attribute -> U
+820:15:Attribute -> U
+820:15:Name -> Inst:salt.auth.AuthUser
+830:15:Attribute -> U
+830:15:Name -> Inst:salt.auth.AuthUser
+830:28:Call -> U
+830:28:Attribute -> Func:salt.utils.user.get_user
+830:28:Attribute -> Module:salt.utils.user
+830:28:Attribute -> Module:salt.utils
+830:28:Name -> Module:salt
+837:15:Call -> U
+837:15:Attribute -> U
+837:15:Attribute -> U
+837:15:Name -> Inst:salt.auth.AuthUser

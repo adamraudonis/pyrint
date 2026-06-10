@@ -1,0 +1,178 @@
+54:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+54:6:Attribute -> Func:logging.getLogger
+54:6:Name -> Module:logging
+54:24:Name -> Const:str:'salt.modules.win_appx' | Const:str:'__main__'
+57:24:Name -> Const:str:'SOFTWARE\\Microsoft\\Windows\\CurrentVe
+67:11:Call -> U
+67:11:Attribute -> Func:salt.utils.platform.is_windows
+67:11:Attribute -> Module:salt.utils.platform
+67:11:Attribute -> Module:salt.utils
+67:11:Name -> Module:salt
+70:16:Call -> ERR
+70:16:Name -> ERR
+71:11:Name -> U
+74:11:Name -> Const:str:'appx'
+79:7:Name -> U
+80:11:Call -> ERR
+80:11:Name -> Func:builtins.isinstance
+80:22:Name -> U
+80:27:Name -> Class:builtins.list
+81:23:Name -> U
+82:16:Call -> ERR
+82:16:Attribute -> BM:builtins.list.append
+82:16:Name -> List:0
+82:30:Name -> U
+82:34:Name -> Const:str:'Name' | U
+84:12:Call -> ERR
+84:12:Attribute -> BM:builtins.list.append
+84:12:Name -> List:0
+84:26:Name -> U
+84:30:Name -> Const:str:'Name' | U
+87:11:Name -> List:0 | Const:NoneType:None
+161:7:Name -> Const:bool:True | U
+166:7:Name -> Const:NoneType:None | U
+167:8:Call -> ERR
+167:8:Attribute -> BM:builtins.list.append
+167:8:Name -> List:0
+167:22:Name -> Const:str:'Get-AppxPackage -AllUsers -PackageTypeF | Const:str:'Get-AppxPackage -AllUsers'
+167:38:Name -> U
+169:8:Call -> ERR
+169:8:Attribute -> BM:builtins.list.append
+169:8:Name -> List:0
+169:22:Name -> Const:str:'Get-AppxPackage -AllUsers -PackageTypeF | Const:str:'Get-AppxPackage -AllUsers'
+170:11:Name -> Const:bool:False | U
+171:8:Call -> ERR
+171:8:Attribute -> BM:builtins.list.append
+171:8:Name -> List:0
+172:11:Name -> Const:bool:False | U
+173:8:Call -> ERR
+173:8:Attribute -> BM:builtins.list.append
+173:8:Name -> List:0
+174:4:Call -> ERR
+174:4:Attribute -> BM:builtins.list.append
+174:4:Name -> List:0
+175:11:Name -> Const:str:'Name' | U
+176:8:Call -> ERR
+176:8:Attribute -> BM:builtins.list.append
+176:8:Name -> List:0
+177:8:Call -> ERR
+177:8:Attribute -> BM:builtins.list.append
+177:8:Name -> List:0
+180:15:Call -> Dict:0 | Dict:2 | U
+180:15:Attribute -> Func:salt.utils.win_pwsh.run_dict
+180:15:Attribute -> Module:salt.utils.win_pwsh
+180:15:Attribute -> Module:salt.utils
+180:15:Name -> Module:salt
+180:44:Call -> Const:str:''
+180:44:Attribute -> BM:builtins.str.join
+180:55:Name -> List:0
+182:8:Call -> ERR
+182:8:Attribute -> BM:builtins.list.append
+182:8:Name -> List:0
+182:34:Name -> Const:str:'Name' | U
+183:15:Call -> List:0 | Const:NoneType:None
+183:15:Name -> Func:salt.modules.win_appx._pkg_list
+183:25:Call -> Dict:0 | Dict:2 | U
+183:25:Attribute -> Func:salt.utils.win_pwsh.run_dict
+183:25:Attribute -> Module:salt.utils.win_pwsh
+183:25:Attribute -> Module:salt.utils
+183:25:Name -> Module:salt
+183:54:Call -> Const:str:''
+183:54:Attribute -> BM:builtins.str.join
+183:65:Name -> List:0
+183:72:Name -> Const:str:'Name' | U
+245:15:Call -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+245:15:Name -> Func:salt.modules.win_appx.list_
+246:14:Name -> Const:NoneType:None | U
+248:22:Name -> Const:bool:False | U
+249:19:Name -> Const:bool:False | U
+254:22:Name -> U
+257:15:Name -> U
+259:21:Call -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+259:21:Name -> Func:salt.modules.win_appx.list_
+260:25:Name -> U
+262:30:Name -> Const:bool:False | U
+263:27:Name -> Const:bool:False | U
+266:15:Call -> ERR
+266:15:Name -> Func:builtins.isinstance
+266:26:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+266:34:Name -> Class:builtins.list
+269:28:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+270:20:Call -> Const:NoneType:None
+270:20:Name -> Func:salt.modules.win_appx.remove.remove_package
+270:35:Name -> U
+272:19:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+272:30:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+273:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+273:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+273:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+273:50:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+274:34:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+275:11:Name -> Const:bool:False | U
+276:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+276:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+276:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+276:52:Name -> U
+278:70:Name -> U
+281:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+281:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+281:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+281:46:Name -> U
+282:66:Name -> U
+284:12:Call -> Dict:0 | Dict:2 | U
+284:12:Attribute -> Func:salt.utils.win_pwsh.run_dict
+284:12:Attribute -> Module:salt.utils.win_pwsh
+284:12:Attribute -> Module:salt.utils
+284:12:Name -> Module:salt
+284:41:Name -> Const:str:'Remove-AppxProvisionedPackage -Online - | Const:str:'Remove-AppxPackage -AllUsers -Package U
+285:15:Name -> Class:salt.exceptions.CommandExecutionError
+291:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+291:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+291:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+291:65:Name -> U
+292:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+292:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+292:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+292:22:Name -> ExcInst:salt.exceptions.CommandExecutionError
+294:7:Call -> ERR
+294:7:Name -> Func:builtins.isinstance
+294:18:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+294:28:Name -> Class:builtins.list
+295:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+295:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+295:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+295:42:Call -> ERR
+295:42:Name -> Func:builtins.len
+295:46:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+296:19:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+297:12:Call -> Const:NoneType:None
+297:12:Name -> Func:salt.modules.win_appx.remove.remove_package
+297:35:Name -> U
+298:9:Name -> Dict:0 | Dict:2 | U | List:0 | Const:NoneType:None
+299:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+299:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+299:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+300:8:Call -> Const:NoneType:None
+300:8:Name -> Func:salt.modules.win_appx.remove.remove_package
+300:31:Name -> Dict:2 | U
+302:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+302:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+302:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+302:43:Name -> Const:NoneType:None | U
+337:10:Call -> Tuple:2 | Tuple:2 | List:0
+337:10:Attribute -> Func:salt.utils.win_reg.list_keys
+337:10:Attribute -> Module:salt.utils.win_reg
+337:10:Attribute -> Module:salt.utils
+337:10:Name -> Module:salt
+337:59:Name -> Const:str:'SOFTWARE\\Microsoft\\Windows\\CurrentVe
+338:7:Name -> Const:NoneType:None | U
+339:15:Name -> Tuple:2 | Tuple:2 | List:0
+340:11:Call -> List:0
+340:11:Attribute -> Func:fnmatch.filter
+340:11:Name -> Module:fnmatch
+340:26:Name -> Tuple:2 | Tuple:2 | List:0
+340:31:Name -> Const:NoneType:None | U
+378:10:Call -> ERR
+378:10:Name -> ERR
+378:51:Name -> U
+379:11:Name -> U

@@ -1,0 +1,439 @@
+27:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:6:Attribute -> Func:logging.getLogger
+27:6:Name -> Module:logging
+27:24:Name -> Const:str:'tests.unit.utils.test_dns' | Const:str:'__main__'
+30:21:Name -> Class:tests.support.unit.TestCase
+37:12:Call -> Const:NoneType:None
+37:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+37:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+37:29:Call -> Const:int:1
+37:29:Name -> Func:salt.utils.dns._to_port
+37:38:Name -> Const:int:1 | Const:int:42 | Const:str:'123' | Const:int:65535
+37:46:Call -> Const:int:1
+37:46:Name -> Class:builtins.int
+37:50:Name -> Const:int:1 | Const:int:42 | Const:str:'123' | Const:int:65535
+40:12:Call -> Inst:unittest.case._AssertRaisesContext
+40:12:Attribute -> BM:unittest.case.TestCase.assertRaises
+40:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+40:30:Name -> Class:builtins.ValueError
+40:42:Name -> Func:salt.utils.dns._to_port
+40:52:Name -> Const:int:0 | Const:int:65536 | Const:int:100000 | Const:str:'not-a-port'
+64:30:Call -> Inst:builtins.zip
+64:30:Name -> Class:builtins.zip
+64:34:Name -> Tuple:5
+64:44:Name -> Tuple:5
+65:12:Call -> Const:NoneType:None
+65:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+65:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+65:29:Call -> List:1
+65:29:Name -> Func:salt.utils.dns._tree
+65:35:Name -> U
+65:44:Name -> U
+85:8:Call -> Const:NoneType:None
+85:8:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+85:8:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+86:12:Call -> List:0
+86:12:Name -> Func:salt.utils.dns._weighted_order
+86:28:Call -> List:8
+86:28:Name -> Class:builtins.list
+86:33:Name -> List:3
+87:12:Call -> List:0
+87:12:Name -> Func:salt.utils.dns._weighted_order
+87:28:Call -> List:8
+87:28:Name -> Class:builtins.list
+87:33:Name -> List:3
+88:12:Call -> List:0
+88:12:Name -> Func:salt.utils.dns._weighted_order
+88:28:Call -> List:8
+88:28:Name -> Class:builtins.list
+88:33:Name -> List:3
+91:22:Name -> List:3
+92:21:Call -> List:0
+92:21:Name -> Func:salt.utils.dns._weighted_order
+92:37:Call -> List:0
+92:37:Name -> Class:builtins.list
+92:42:Name -> List:0 | List:1 | List:8
+93:12:Call -> Const:NoneType:None
+93:12:Attribute -> BM:unittest.case.TestCase.assertTrue
+93:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+93:28:Call -> ERR
+93:28:Name -> Func:builtins.all
+93:32:Name -> Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:2 | Dict:2
+93:47:Name -> List:0
+93:65:Name -> List:0 | List:1 | List:8
+102:12:Call -> Inst:collections.OrderedDict
+102:12:Name -> Class:collections.OrderedDict
+102:37:Attribute -> Class:ipaddress.IPv4Address | Class:salt.ext.ipaddress.IPv4Address
+102:37:Name -> Module:ipaddress | Module:salt.ext.ipaddress
+103:12:Call -> Inst:collections.OrderedDict
+103:12:Name -> Class:collections.OrderedDict
+105:35:Name -> Class:builtins.int
+106:29:Name -> Class:builtins.str
+109:12:Call -> Inst:collections.OrderedDict
+109:12:Name -> Class:collections.OrderedDict
+111:29:Name -> Class:builtins.int
+112:31:Name -> Class:builtins.int
+113:29:Name -> Func:salt.utils.dns._to_port
+114:29:Name -> Class:builtins.str
+120:12:Call -> Inst:ipaddress.IPv4Address | Inst:salt.ext.ipaddress.IPv4Address
+120:12:Attribute -> Class:ipaddress.IPv4Address | Class:salt.ext.ipaddress.IPv4Address
+120:12:Name -> Module:ipaddress | Module:salt.ext.ipaddress
+120:34:Name -> List:3
+125:35:Call -> Inst:builtins.zip
+125:35:Name -> Class:builtins.zip
+125:39:Name -> List:3
+125:46:Name -> List:3
+125:55:Name -> List:3
+126:12:Call -> Const:NoneType:None
+126:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+126:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+126:29:Call -> U
+126:29:Name -> Func:salt.utils.dns._data2rec
+126:39:Name -> U
+126:48:Name -> U
+126:56:Name -> U
+134:30:Call -> Inst:builtins.zip
+134:30:Name -> Class:builtins.zip
+134:34:Name -> List:3
+134:41:Name -> List:3
+135:12:Call -> Inst:unittest.case._AssertRaisesContext
+135:12:Attribute -> BM:unittest.case.TestCase.assertRaises
+135:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+135:30:Name -> Class:builtins.ValueError
+135:42:Name -> Func:salt.utils.dns._data2rec
+135:53:Name -> U
+135:62:Name -> U
+149:18:Call -> Inst:collections.OrderedDict
+149:18:Name -> Class:collections.OrderedDict
+151:25:Name -> Class:builtins.int
+152:25:Name -> Class:builtins.str
+157:12:Call -> Inst:collections.OrderedDict
+157:12:Name -> Class:collections.OrderedDict
+158:12:Call -> Inst:collections.OrderedDict
+158:12:Name -> Class:collections.OrderedDict
+170:26:Call -> Inst:builtins.zip
+170:26:Name -> Class:builtins.zip
+170:30:Name -> List:2
+170:37:Name -> List:2
+171:20:Call -> Inst:collections.OrderedDict
+171:20:Name -> Func:salt.utils.dns._data2rec_group
+171:36:Name -> Inst:collections.OrderedDict
+171:45:Name -> U
+172:12:Call -> Const:NoneType:None
+172:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+172:12:Name -> Inst:tests.unit.utils.test_dns.DNShelpersCase
+172:29:Name -> Inst:collections.OrderedDict
+172:36:Name -> U
+175:21:Name -> Class:tests.support.unit.TestCase
+234:11:Call -> ERR
+234:11:Name -> Func:builtins.isinstance
+234:22:Name -> U
+234:34:Name -> Class:builtins.list
+234:40:Name -> Class:builtins.tuple
+236:24:Name -> U
+237:23:Call -> Dict:4
+237:23:Attribute -> BM:builtins.dict.copy
+237:23:Attribute -> Dict:4
+237:23:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+238:16:Call -> ERR
+238:16:Attribute -> BM:builtins.dict.update
+238:16:Name -> Dict:4
+238:28:Name -> U
+239:16:Call -> ERR
+239:16:Attribute -> BM:builtins.list.append
+239:16:Name -> List:0
+239:32:Name -> Dict:4
+241:23:Call -> U
+241:23:Name -> U
+241:45:Name -> List:0
+243:23:Call -> Dict:4
+243:23:Attribute -> BM:builtins.dict.copy
+243:23:Attribute -> Dict:4
+243:23:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+244:12:Call -> ERR
+244:12:Attribute -> BM:builtins.dict.update
+244:12:Name -> Dict:4
+244:28:Name -> U
+245:23:Call -> U
+245:23:Name -> U
+245:46:Name -> Dict:4
+246:15:Call -> U
+246:15:Attribute -> U
+246:15:Name -> U
+247:12:Attribute -> Dict:1
+247:12:Attribute -> Module:salt.utils.dns
+247:12:Attribute -> Module:salt.utils
+247:12:Name -> Module:salt
+247:53:Name -> U
+262:22:Name -> U
+263:17:Call -> U
+263:17:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+263:17:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+263:36:Name -> U
+264:16:Call -> Const:NoneType:None
+264:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+264:16:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+264:33:Call -> U
+264:33:Name -> U
+267:11:Name -> Const:NoneType:None | U
+269:13:Call -> U
+269:13:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+269:13:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+269:32:Name -> Const:NoneType:None | U | Dict:0
+270:12:Call -> Const:NoneType:None
+270:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+270:12:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+270:29:Call -> U
+270:29:Name -> U
+273:13:Call -> U
+273:13:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+273:13:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+273:32:Name -> U
+274:12:Call -> Inst:unittest.case._AssertRaisesContext
+274:12:Attribute -> BM:unittest.case.TestCase.assertRaises
+274:12:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+274:30:Name -> Class:builtins.ValueError
+274:42:Name -> U
+277:28:Call -> U
+277:28:Attribute -> U
+277:28:Name -> U
+278:17:Call -> U
+278:17:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+278:17:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+278:37:Call -> Dict:1
+278:37:Name -> Class:builtins.dict
+278:54:Name -> U
+278:74:Name -> U
+279:32:Attribute -> Dict:7
+279:32:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+279:45:Name -> U
+280:23:Name -> U
+285:33:Call -> U
+285:33:Name -> U
+285:43:Name -> Const:str:'mocksrvr.example.com' | Const:str:'example.com'
+285:48:Name -> U
+286:23:Name -> U
+290:28:Name -> U
+290:38:Call -> U
+290:38:Attribute -> U
+290:38:Call -> U
+290:38:Attribute -> U
+290:38:Name -> U
+291:39:Name -> U
+294:20:Call -> Const:NoneType:None
+294:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+294:20:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+295:24:Name -> U
+296:24:Name -> U
+300:15:Name -> Const:NoneType:None | U
+304:28:Call -> U
+304:28:Attribute -> U
+304:28:Name -> U
+305:17:Call -> U
+305:17:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+305:17:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+305:37:Call -> Dict:1
+305:37:Name -> Class:builtins.dict
+305:54:Name -> U
+305:74:Name -> U
+306:25:Attribute -> Dict:7
+306:25:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+306:38:Name -> U
+307:20:Call -> Const:NoneType:None
+307:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+307:20:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+308:24:Call -> U
+308:24:Name -> U
+308:58:Name -> U
+310:40:Name -> U
+313:28:Call -> U
+313:28:Attribute -> U
+313:28:Name -> Const:NoneType:None | U
+314:17:Call -> U
+314:17:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+314:17:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+314:37:Call -> Dict:1
+314:37:Name -> Class:builtins.dict
+314:54:Name -> U
+314:74:Name -> U
+315:32:Attribute -> Dict:7
+315:32:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+315:45:Name -> U
+316:20:Call -> Const:NoneType:None
+316:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+316:20:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+317:24:Call -> U
+317:24:Name -> U
+317:58:Name -> U
+318:24:Name -> U
+319:54:Name -> U
+322:5:Call -> U
+322:5:Attribute -> U
+322:5:Attribute -> U
+322:5:Name -> U
+323:12:Attribute -> U
+323:12:Attribute -> Module:salt.utils.dns
+323:12:Attribute -> Module:salt.utils
+323:12:Name -> Module:salt
+325:5:Attribute -> U
+325:5:Attribute -> U
+325:5:Name -> U
+355:28:Call -> DictItems
+355:28:Attribute -> BM:builtins.dict.items
+355:28:Name -> Dict:5
+356:17:Call -> U
+356:17:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._mock_cmd_ret
+356:17:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+356:37:Call -> Dict:1
+356:37:Name -> Class:builtins.dict
+356:54:Name -> Const:str:'Name:\tmocksrvr.example.com\nAddress: 1 | Const:str:'Name:\tmocksrvr.example.com\nAddress: 1 | Const:str:'mocksrvr.example.com\thas AAAA address  | Const:str:'mocksrvr.example.com\tcanonical name =  | Const:str:'mocksrvr.example.com\tcanonical name =  | Const:str:'example.com\tmail exchanger = 10 mx1.ex | Const:str:'example.com\tmail exchanger = 10 mx1.ex | Const:str:'example.com\ttext = "v=spf1 a include:_
+356:74:Name -> List:2 | List:2 | List:1 | List:2 | List:1
+357:32:Attribute -> Dict:7
+357:32:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+357:45:Name -> Const:str:'A' | Const:str:'AAAA' | Const:str:'CNAME' | Const:str:'MX' | Const:str:'TXT'
+358:23:Name -> Const:str:'A' | Const:str:'AAAA' | Const:str:'CNAME' | Const:str:'MX' | Const:str:'TXT'
+362:20:Call -> Const:NoneType:None
+362:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+362:20:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+363:24:Call -> Const:bool:False | U
+363:24:Name -> Func:salt.utils.dns.lookup
+363:31:Name -> Const:str:'mocksrvr.example.com' | Const:str:'example.com'
+363:36:Name -> Const:str:'A' | Const:str:'AAAA' | Const:str:'CNAME' | Const:str:'MX' | Const:str:'TXT'
+364:24:Name -> List:1 | List:3 | List:1 | List:3 | List:1 | List:1 | List:3 | List:1
+367:5:Call -> U
+367:5:Attribute -> U
+367:5:Attribute -> U
+367:5:Name -> U
+367:28:Attribute -> U
+367:28:Attribute -> Module:salt.utils.dns
+367:28:Attribute -> Module:salt.utils
+367:28:Name -> Module:salt
+369:21:Attribute -> Const:str:'+search +fail +noall +answer +nocl +not
+369:21:Attribute -> Module:salt.utils.dns
+369:21:Attribute -> Module:salt.utils
+369:21:Name -> Module:salt
+370:14:Call -> U
+370:14:Attribute -> Func:salt.modules.cmdmod.retcode
+370:14:Attribute -> Module:salt.modules.cmdmod
+370:14:Attribute -> Module:salt.modules
+370:14:Name -> Module:salt
+371:12:Name -> Const:str:'dig +search +fail +noall +answer +nocl 
+373:8:Call -> Const:NoneType:None
+373:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+373:8:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+373:25:Name -> U
+438:8:Call -> Const:NoneType:None
+438:8:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._test_cmd_lookup
+438:8:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+439:12:Name -> Func:salt.utils.dns._lookup_dig
+440:18:Name -> List:1
+441:18:Name -> Dict:7
+442:23:Name -> Dict:2
+443:19:Name -> Dict:1
+448:19:Call -> U
+448:19:Attribute -> Func:textwrap.dedent
+448:19:Name -> Module:textwrap
+471:22:Call -> U
+471:22:Attribute -> U
+471:22:Name -> U
+538:21:Name -> Dict:7
+538:29:Name -> Dict:1
+539:32:Call -> DictItems | DictItems
+539:32:Attribute -> BM:builtins.dict.items | BM:builtins.dict.items
+539:32:Name -> Dict:7 | Dict:1
+540:33:Call -> Inst:builtins.enumerate
+540:33:Name -> Class:builtins.enumerate
+540:43:Name -> List:2 | List:2 | List:1 | List:1 | List:2 | List:1 | List:1 | List:2
+541:20:Name -> Dict:7 | Dict:1
+541:26:Name -> Const:str:'A' | Const:str:'AAAA' | Const:str:'CAA' | Const:str:'CNAME' | Const:str:'MX' | Const:str:'SSHFP' | Const:str:'TXT' | Const:str:'A'
+541:33:Name -> U
+541:40:Call -> U
+541:40:Attribute -> U
+541:40:Name -> U
+541:56:Name -> U
+543:8:Call -> Const:NoneType:None
+543:8:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._test_cmd_lookup
+543:8:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+544:12:Name -> Func:salt.utils.dns._lookup_drill
+545:23:Name -> Dict:1
+546:18:Name -> List:1
+547:18:Name -> Dict:7
+548:19:Name -> Dict:1
+553:8:Call -> Inst:unittest.case._AssertRaisesContext
+553:8:Attribute -> BM:unittest.case.TestCase.assertRaises
+553:8:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+553:26:Name -> Class:builtins.ValueError
+553:38:Name -> Func:salt.utils.dns._lookup_gai
+556:13:Call -> U
+556:13:Attribute -> U
+556:13:Name -> U
+557:12:Name -> Module:socket
+557:35:Call -> U
+557:35:Name -> U
+557:57:Attribute -> U
+557:57:Name -> Module:socket
+560:16:Call -> Const:NoneType:None
+560:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+560:16:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+560:40:Call -> U | Const:bool:False
+560:40:Name -> Func:salt.utils.dns._lookup_gai
+560:61:Name -> Const:str:'A' | Const:str:'AAAA'
+582:28:Call -> DictItems
+582:28:Attribute -> BM:builtins.dict.items
+582:28:Name -> Dict:2
+583:17:Call -> U
+583:17:Attribute -> U
+583:17:Name -> U
+583:30:Name -> Module:socket
+583:53:Call -> U
+583:53:Name -> U
+583:75:Name -> List:2 | List:2
+584:32:Attribute -> Dict:7
+584:32:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+584:45:Name -> Const:str:'A' | Const:str:'AAAA'
+585:20:Call -> Const:NoneType:None
+585:20:Attribute -> BM:unittest.case.TestCase.assertEqual
+585:20:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+586:24:Call -> U | Const:bool:False
+586:24:Name -> Func:salt.utils.dns._lookup_gai
+586:45:Name -> Const:str:'A' | Const:str:'AAAA'
+587:24:Name -> List:1 | List:3 | List:1 | List:3
+588:45:Name -> Const:str:'A' | Const:str:'AAAA'
+646:8:Call -> Const:NoneType:None
+646:8:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._test_cmd_lookup
+646:8:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+647:12:Name -> Func:salt.utils.dns._lookup_host
+647:37:Name -> Dict:2
+647:55:Name -> List:1
+647:69:Name -> Dict:7
+647:83:Name -> Dict:1
+652:19:Call -> U
+652:19:Attribute -> Func:textwrap.dedent
+652:19:Name -> Module:textwrap
+666:14:Call -> U
+666:14:Attribute -> U
+666:14:Name -> U
+676:27:Call -> U
+676:27:Attribute -> U
+676:27:Name -> U
+720:28:Call -> DictItems
+720:28:Attribute -> BM:builtins.dict.items
+720:28:Name -> Dict:7
+721:29:Call -> Inst:builtins.enumerate
+721:29:Name -> Class:builtins.enumerate
+721:39:Name -> List:2 | List:2 | List:1 | List:1 | List:2 | List:1 | List:1
+722:16:Name -> Dict:7
+722:23:Name -> Const:str:'A' | Const:str:'AAAA' | Const:str:'CAA' | Const:str:'CNAME' | Const:str:'MX' | Const:str:'SSHFP' | Const:str:'TXT'
+722:30:Name -> U
+722:37:Call -> U
+722:37:Attribute -> U
+722:37:Name -> U
+722:53:Name -> U
+724:8:Call -> Const:NoneType:None
+724:8:Attribute -> BM:tests.unit.utils.test_dns.DNSlookupsCase._test_cmd_lookup
+724:8:Name -> Inst:tests.unit.utils.test_dns.DNSlookupsCase
+725:12:Name -> Func:salt.utils.dns._lookup_nslookup
+726:23:Name -> Dict:1
+727:18:Name -> List:1
+728:18:Name -> Dict:7
+729:18:Name -> Dict:1

@@ -1,0 +1,260 @@
+17:1:Call -> Inst:django.test.utils.override_settings
+17:1:Name -> Class:django.test.utils.override_settings
+18:20:Name -> Class:django.test.testcases.TestCase
+25:22:Call -> Inst:django.test.client.RequestFactory
+25:22:Name -> Class:django.test.client.RequestFactory
+27:5:Name -> Class:builtins.classmethod
+29:17:Call -> ERR
+29:17:Attribute -> ERR
+29:17:Attribute -> ERR
+29:17:Name -> Class:tests.view_tests.models.Author
+30:8:Call -> ERR
+30:8:Attribute -> ERR
+30:8:Attribute -> ERR
+30:8:Name -> Class:tests.view_tests.models.Article
+33:19:Name -> U
+34:25:Call -> Inst:_pydatetime.datetime
+34:25:Attribute -> Class:_pydatetime.datetime
+34:25:Name -> Module:datetime
+36:8:Call -> ERR
+36:8:Attribute -> ERR
+36:8:Attribute -> ERR
+36:8:Name -> Class:tests.view_tests.models.Article
+39:19:Name -> U
+40:25:Call -> Inst:_pydatetime.datetime
+40:25:Attribute -> Class:_pydatetime.datetime
+40:25:Name -> Module:datetime
+42:8:Call -> ERR
+42:8:Attribute -> ERR
+42:8:Attribute -> ERR
+42:8:Name -> Class:tests.view_tests.models.Article
+45:19:Name -> U
+46:25:Call -> Inst:_pydatetime.datetime
+46:25:Attribute -> Class:_pydatetime.datetime
+46:25:Name -> Module:datetime
+48:8:Name -> Class:tests.view_tests.tests.test_defaults.DefaultsTests
+48:25:Call -> ERR
+48:25:Attribute -> ERR
+48:25:Attribute -> ERR
+48:25:Name -> Class:tests.view_tests.models.UrlArticle
+51:19:Name -> U
+52:25:Call -> Inst:_pydatetime.datetime
+52:25:Attribute -> Class:_pydatetime.datetime
+52:25:Name -> Module:datetime
+57:19:Attribute -> List:2
+57:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+58:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+58:23:Attribute -> BM:django.test.client.Client.get
+58:23:Attribute -> Inst:django.test.client.Client
+58:23:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+58:39:Name -> Const:str:'/nonexistent_url/' | Const:str:'/other_nonexistent_url/'
+59:12:Call -> Const:NoneType:None
+59:12:Attribute -> BM:unittest.case.TestCase.assertEqual
+59:12:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+59:29:Attribute -> Const:int:301 | Const:int:400 | Const:int:301 | Const:int:400 | U
+59:29:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+60:8:Call -> Const:NoneType:None
+60:8:Attribute -> BM:unittest.case.TestCase.assertIn
+60:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+60:45:Attribute -> U
+60:45:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+61:8:Call -> Const:NoneType:None
+61:8:Attribute -> BM:unittest.case.TestCase.assertIn
+61:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+63:12:Attribute -> U
+63:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+66:5:Call -> Inst:django.test.utils.override_settings
+66:5:Name -> Class:django.test.utils.override_settings
+88:19:Attribute -> List:2
+88:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+89:23:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+89:23:Attribute -> BM:django.test.client.Client.get
+89:23:Attribute -> Inst:django.test.client.Client
+89:23:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+89:39:Name -> Const:str:'/nonexistent_url/' | Const:str:'/other_nonexistent_url/'
+90:12:Call -> Const:NoneType:None
+90:12:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+90:12:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+90:32:Attribute -> U
+90:32:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+91:12:Call -> Const:NoneType:None
+91:12:Attribute -> BM:unittest.case.TestCase.assertNotEqual
+91:12:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+91:32:Attribute -> U
+91:32:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+95:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+95:19:Attribute -> BM:django.test.client.Client.get
+95:19:Attribute -> Inst:django.test.client.Client
+95:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+96:8:Call -> Const:NoneType:None
+96:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+96:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+96:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+99:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+99:18:Attribute -> BM:django.test.client.RequestFactory.get
+99:18:Attribute -> Inst:django.test.client.RequestFactory
+99:18:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+100:19:Call -> Inst:django.http.response.HttpResponseBadRequest
+100:19:Name -> Func:django.views.defaults.bad_request
+100:31:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+100:40:Call -> ExcInst:builtins.Exception
+100:40:Name -> Class:builtins.Exception
+101:8:Call -> Const:NoneType:None
+101:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+101:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+101:28:Name -> Inst:django.http.response.HttpResponseBadRequest
+103:5:Call -> Inst:django.test.utils.override_settings
+103:5:Name -> Class:django.test.utils.override_settings
+123:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+123:19:Attribute -> BM:django.test.client.Client.get
+123:19:Attribute -> Inst:django.test.client.Client
+123:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+124:8:Call -> Const:NoneType:None
+124:8:Attribute -> BM:unittest.case.TestCase.assertIs
+124:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+124:22:Attribute -> U
+124:22:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+124:45:Attribute -> U
+124:45:Attribute -> U
+124:45:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+126:5:Call -> Inst:django.test.utils.override_settings
+126:5:Name -> Class:django.test.utils.override_settings
+152:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+152:19:Attribute -> BM:django.test.client.Client.get
+152:19:Attribute -> Inst:django.test.client.Client
+152:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+153:8:Call -> Const:NoneType:None
+153:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+153:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+153:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+154:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+154:19:Attribute -> BM:django.test.client.Client.get
+154:19:Attribute -> Inst:django.test.client.Client
+154:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+155:8:Call -> Const:NoneType:None
+155:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+155:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+155:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+156:8:Call -> Const:NoneType:None
+156:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+156:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+156:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+157:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+157:19:Attribute -> BM:django.test.client.Client.get
+157:19:Attribute -> Inst:django.test.client.Client
+157:19:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+158:8:Call -> Const:NoneType:None
+158:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertContains
+158:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+159:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+164:8:Call -> Const:NoneType:None
+164:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+164:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+165:12:Call -> Const:bool:True
+165:12:Name -> Func:builtins.getattr
+165:20:Attribute -> UM:tests.view_tests.models.UrlArticle.get_absolute_url
+165:20:Name -> Class:tests.view_tests.models.UrlArticle
+168:18:Call -> ERR
+168:18:Attribute -> ERR
+168:18:Attribute -> ERR
+168:18:Name -> Class:tests.view_tests.models.UrlArticle
+168:44:Attribute -> U
+168:44:Attribute -> U
+168:44:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+169:8:Call -> Const:NoneType:None
+169:8:Attribute -> BM:unittest.case.TestCase.assertTrue
+169:8:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+170:12:Call -> U
+170:12:Name -> Func:builtins.getattr
+170:20:Attribute -> U
+170:20:Name -> U
+179:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+179:18:Attribute -> BM:django.test.client.RequestFactory.get
+179:18:Attribute -> Inst:django.test.client.RequestFactory
+179:18:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+181:13:Call -> Inst:unittest.case._AssertRaisesContext
+181:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+181:13:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+181:31:Name -> Class:django.template.exceptions.TemplateDoesNotExist
+182:12:Call -> Inst:django.http.response.HttpResponseBadRequest
+182:12:Name -> Func:django.views.defaults.bad_request
+182:24:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+182:33:Call -> ExcInst:builtins.Exception
+182:33:Name -> Class:builtins.Exception
+184:13:Call -> Inst:unittest.case._AssertRaisesContext
+184:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+184:13:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+184:31:Name -> Class:django.template.exceptions.TemplateDoesNotExist
+185:12:Call -> Inst:django.http.response.HttpResponseForbidden
+185:12:Name -> Func:django.views.defaults.permission_denied
+185:30:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+185:39:Call -> ExcInst:builtins.Exception
+185:39:Name -> Class:builtins.Exception
+187:13:Call -> Inst:unittest.case._AssertRaisesContext
+187:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+187:13:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+187:31:Name -> Class:django.template.exceptions.TemplateDoesNotExist
+188:12:Call -> Inst:django.http.response.HttpResponseNotFound
+188:12:Name -> Func:django.views.defaults.page_not_found
+188:27:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+188:36:Call -> ExcInst:django.http.response.Http404
+188:36:Name -> Class:django.http.response.Http404
+190:13:Call -> Inst:unittest.case._AssertRaisesContext
+190:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+190:13:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+190:31:Name -> Class:django.template.exceptions.TemplateDoesNotExist
+191:12:Call -> Inst:django.http.response.HttpResponseServerError
+191:12:Name -> Func:django.views.defaults.server_error
+191:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+194:18:Call -> Inst:django.core.handlers.wsgi.WSGIRequest
+194:18:Attribute -> BM:django.test.client.RequestFactory.get
+194:18:Attribute -> Inst:django.test.client.RequestFactory
+194:18:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+196:13:Call -> Inst:django.http.response.HttpResponseBadRequest
+196:13:Name -> Func:django.views.defaults.bad_request
+196:25:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+196:34:Call -> ExcInst:builtins.Exception
+196:34:Name -> Class:builtins.Exception
+197:13:Call -> Inst:django.http.response.HttpResponseForbidden
+197:13:Name -> Func:django.views.defaults.permission_denied
+197:31:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+197:40:Call -> ExcInst:builtins.Exception
+197:40:Name -> Class:builtins.Exception
+198:13:Call -> Inst:django.http.response.HttpResponseNotFound
+198:13:Name -> Func:django.views.defaults.page_not_found
+198:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+198:37:Call -> ExcInst:django.http.response.Http404
+198:37:Name -> Class:django.http.response.Http404
+199:13:Call -> Inst:django.http.response.HttpResponseServerError
+199:13:Name -> Func:django.views.defaults.server_error
+199:26:Name -> Inst:django.core.handlers.wsgi.WSGIRequest
+201:17:Call -> Gen:unittest.case.TestCase.subTest
+201:17:Attribute -> BM:unittest.case.TestCase.subTest
+201:17:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+201:36:Name -> Const:bytes:b'Bad Request (400)' | Const:bytes:b'403 Forbidden' | Const:bytes:b'Not Found' | Const:bytes:b'Server Error (500)'
+202:16:Call -> Const:NoneType:None
+202:16:Attribute -> BM:unittest.case.TestCase.assertIn
+202:16:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+202:50:Attribute -> Const:bytes:b'' | U | Const:bytes:b'test' | Const:bytes:b'test' | Const:int:12345 | List:3 | List:3 | List:4 | Const:str:'Updated content'
+202:50:Name -> Inst:django.http.response.HttpResponseBadRequest | Inst:django.http.response.HttpResponseForbidden | U
+203:16:Call -> Const:NoneType:None
+203:16:Attribute -> BM:unittest.case.TestCase.assertIn
+203:16:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+203:51:Attribute -> Const:bytes:b'' | U | Const:bytes:b'test' | Const:bytes:b'test' | Const:int:12345 | List:3 | List:3 | List:4 | Const:str:'Updated content'
+203:51:Name -> Inst:django.http.response.HttpResponseBadRequest | Inst:django.http.response.HttpResponseForbidden | Inst:django.http.response.HttpResponseNotFound | Inst:django.http.response.HttpResponseServerError
+204:16:Call -> Const:NoneType:None
+204:16:Attribute -> BM:unittest.case.TestCase.assertIn
+204:16:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+204:41:Attribute -> Const:bytes:b'' | U | Const:bytes:b'test' | Const:bytes:b'test' | Const:int:12345 | List:3 | List:3 | List:4 | Const:str:'Updated content'
+204:41:Name -> Inst:django.http.response.HttpResponseBadRequest | Inst:django.http.response.HttpResponseForbidden | Inst:django.http.response.HttpResponseNotFound | Inst:django.http.response.HttpResponseServerError
+205:16:Call -> Const:NoneType:None
+205:16:Attribute -> BM:unittest.case.TestCase.assertIn
+205:16:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+205:53:Name -> Const:bytes:b'Bad Request (400)' | Const:bytes:b'403 Forbidden' | Const:bytes:b'Not Found' | Const:bytes:b'Server Error (500)'
+205:60:Attribute -> Const:bytes:b'' | U | Const:bytes:b'test' | Const:bytes:b'test' | Const:int:12345 | List:3 | List:3 | List:4 | Const:str:'Updated content'
+205:60:Name -> Inst:django.http.response.HttpResponseBadRequest | Inst:django.http.response.HttpResponseForbidden | Inst:django.http.response.HttpResponseNotFound | Inst:django.http.response.HttpResponseServerError
+206:16:Call -> Const:NoneType:None
+206:16:Attribute -> BM:unittest.case.TestCase.assertIn
+206:16:Name -> Inst:tests.view_tests.tests.test_defaults.DefaultsTests
+206:41:Attribute -> Const:bytes:b'' | U | Const:bytes:b'test' | Const:bytes:b'test' | Const:int:12345 | List:3 | List:3 | List:4 | Const:str:'Updated content'
+206:41:Name -> Inst:django.http.response.HttpResponseBadRequest | Inst:django.http.response.HttpResponseForbidden | Inst:django.http.response.HttpResponseNotFound | Inst:django.http.response.HttpResponseServerError

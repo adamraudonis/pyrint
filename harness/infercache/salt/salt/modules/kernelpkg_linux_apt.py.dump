@@ -1,0 +1,168 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'salt.modules.kernelpkg_linux_apt' | Const:str:'__main__'
+22:7:Call -> ERR
+22:7:Attribute -> ERR
+22:7:Name -> ERR
+23:15:Name -> Const:str:'kernelpkg'
+24:9:Call -> ERR
+24:9:Attribute -> ERR
+24:9:Name -> ERR
+25:15:Name -> Const:str:'kernelpkg'
+40:31:Name -> ERR
+41:15:Call -> ERR
+41:15:Name -> ERR
+41:46:Name -> ERR
+43:11:Name -> ERR
+56:13:Call -> U
+56:13:Attribute -> Func:re.compile
+56:13:Name -> Module:re
+56:29:Call -> Const:str:'linux-image'
+56:29:Name -> Func:salt.modules.kernelpkg_linux_apt._package_prefix
+56:57:Call -> U
+56:57:Name -> Func:salt.modules.kernelpkg_linux_apt._kernel_type
+57:11:Call -> ERR
+57:11:Name -> ERR
+58:7:Name -> U
+61:13:Call -> Inst:builtins.list
+61:13:Name -> Class:builtins.list
+61:18:Call -> Inst:builtins.filter
+61:18:Name -> Class:builtins.filter
+61:25:Attribute -> U
+61:25:Name -> U
+61:39:Name -> U | List:0
+62:7:Name -> Inst:builtins.list
+65:17:Call -> Const:int:11
+65:17:Name -> Func:builtins.len
+65:21:Call -> Const:str:'linux-image'
+65:21:Name -> Func:salt.modules.kernelpkg_linux_apt._package_prefix
+67:11:Call -> ERR
+67:11:Name -> Func:builtins.sorted
+68:9:Name -> U
+68:13:Name -> Const:int:12
+68:37:Name -> Inst:builtins.list
+68:50:Call -> Class:functools.cmp_to_key.K
+68:50:Attribute -> Func:functools.cmp_to_key | Func:_functools.cmp_to_key
+68:50:Name -> Module:functools
+68:71:Name -> Func:salt.modules.kernelpkg_linux_apt._cmp_version
+82:13:Call -> ERR
+82:13:Name -> ERR
+82:47:Call -> Const:str:'linux-image'
+82:47:Name -> Func:salt.modules.kernelpkg_linux_apt._package_prefix
+82:67:Call -> U
+82:67:Name -> Func:salt.modules.kernelpkg_linux_apt._kernel_type
+83:7:Name -> U
+84:15:Call -> U | Const:NoneType:None
+84:15:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_installed
+86:14:Call -> U
+86:14:Attribute -> Func:re.match
+86:14:Name -> Module:re
+86:51:Name -> U
+87:14:Call -> U
+87:14:Attribute -> U
+87:14:Name -> U
+87:33:Call -> U
+87:33:Attribute -> U
+87:33:Name -> U
+87:52:Call -> U
+87:52:Name -> Func:salt.modules.kernelpkg_linux_apt._kernel_type
+107:11:Call -> List:0 | U
+107:11:Name -> Func:salt.modules.kernelpkg_linux_apt.list_installed
+108:7:Name -> List:0 | U
+109:15:Name -> U
+125:11:Call -> Inst:salt.utils.versions.LooseVersion
+125:11:Name -> Class:salt.utils.versions.LooseVersion
+125:24:Call -> U
+125:24:Name -> Func:salt.modules.kernelpkg_linux_apt.active
+125:36:Call -> Inst:salt.utils.versions.LooseVersion
+125:36:Name -> Class:salt.utils.versions.LooseVersion
+125:49:Call -> U | Const:NoneType:None
+125:49:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_installed
+153:13:Call -> ERR
+153:13:Name -> ERR
+153:45:Call -> Const:str:'linux-image'
+153:45:Name -> Func:salt.modules.kernelpkg_linux_apt._package_prefix
+153:65:Call -> U | Const:NoneType:None | Const:str:'Uninferable-Uninferable-Uninferable'
+153:65:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_available
+154:20:Call -> U
+154:20:Name -> Func:salt.modules.kernelpkg_linux_apt.needs_reboot
+157:20:Name -> U
+158:18:Call -> U
+158:18:Name -> Func:salt.modules.kernelpkg_linux_apt.active
+159:28:Call -> U | Const:NoneType:None
+159:28:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_installed
+160:28:Name -> Const:bool:False | U
+161:27:Name -> U
+164:7:Name -> Const:bool:False | U
+164:18:Name -> U
+165:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+165:8:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+165:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+166:8:Call -> ERR
+166:8:Name -> ERR
+166:42:Name -> Const:NoneType:None | U
+168:11:Name -> Dict:5
+182:11:Call -> Inst:salt.utils.versions.LooseVersion
+182:11:Name -> Class:salt.utils.versions.LooseVersion
+182:24:Call -> U | Const:NoneType:None | Const:str:'Uninferable-Uninferable-Uninferable'
+182:24:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_available
+182:46:Call -> Inst:salt.utils.versions.LooseVersion
+182:46:Name -> Class:salt.utils.versions.LooseVersion
+182:59:Call -> U | Const:NoneType:None
+182:59:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_installed
+200:7:Name -> U
+200:22:Call -> List:0 | U
+200:22:Name -> Func:salt.modules.kernelpkg_linux_apt.list_installed
+201:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+201:14:Name -> Class:salt.exceptions.CommandExecutionError
+201:55:Name -> U
+203:7:Name -> U
+203:18:Call -> U
+203:18:Name -> Func:salt.modules.kernelpkg_linux_apt.active
+204:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+204:14:Name -> Class:salt.exceptions.CommandExecutionError
+206:16:Call -> Const:str:'linux-image'
+206:16:Name -> Func:salt.modules.kernelpkg_linux_apt._package_prefix
+206:36:Name -> U
+207:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+207:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+207:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+207:43:Name -> Const:str:'linux-image-Uninferable'
+209:4:Call -> ERR
+209:4:Name -> ERR
+209:26:Name -> Const:str:'linux-image-Uninferable'
+211:24:Name -> Const:str:'linux-image-Uninferable'
+232:18:Call -> List:0 | U
+232:18:Name -> Func:salt.modules.kernelpkg_linux_apt.list_installed
+235:11:Name -> U
+235:21:Call -> U
+235:21:Name -> Func:salt.modules.kernelpkg_linux_apt.active
+239:11:Name -> Const:bool:True | U
+239:27:Name -> U
+239:37:Call -> U | Const:NoneType:None
+239:37:Name -> Func:salt.modules.kernelpkg_linux_apt.latest_installed
+243:8:Call -> ERR
+243:8:Attribute -> BM:builtins.list.extend
+243:8:Name -> List:0
+243:23:Call -> Dict:1
+243:23:Name -> Func:salt.modules.kernelpkg_linux_apt.remove
+243:30:Name -> U
+245:23:Name -> List:0
+259:11:Call -> U
+259:11:Attribute -> U
+259:11:Call -> U
+259:11:Attribute -> Func:re.match
+259:11:Name -> Module:re
+259:39:Call -> U
+259:39:Name -> Func:salt.modules.kernelpkg_linux_apt.active
+266:12:Call -> Inst:salt.utils.versions.LooseVersion
+266:12:Name -> Class:salt.utils.versions.LooseVersion
+266:25:Name -> U
+267:12:Call -> Inst:salt.utils.versions.LooseVersion
+267:12:Name -> Class:salt.utils.versions.LooseVersion
+267:25:Name -> U
+269:7:Name -> Inst:salt.utils.versions.LooseVersion
+269:15:Name -> Inst:salt.utils.versions.LooseVersion
+271:7:Name -> Inst:salt.utils.versions.LooseVersion
+271:15:Name -> Inst:salt.utils.versions.LooseVersion

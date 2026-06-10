@@ -1,0 +1,229 @@
+18:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:6:Attribute -> Func:logging.getLogger
+18:6:Name -> Module:logging
+18:24:Name -> Const:str:'/Users/adamraudonis/Desktop/Projects/pr
+27:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+27:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+27:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+32:10:Name -> ERR
+33:16:Call -> U
+33:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+33:16:Attribute -> Module:posixpath | Module:ntpath
+33:16:Name -> Module:os
+33:29:Name -> U
+33:62:Name -> U
+34:9:Call -> U
+34:9:Attribute -> Func:salt.utils.files.fopen
+34:9:Attribute -> Module:salt.utils.files
+34:9:Attribute -> Module:salt.utils
+34:9:Name -> Module:salt
+34:32:Name -> U
+35:8:Call -> U
+35:8:Attribute -> U
+35:8:Name -> U
+35:18:Call -> U
+35:18:Attribute -> Func:salt.utils.msgpack.packb
+35:18:Attribute -> Module:salt.utils.msgpack
+35:18:Attribute -> Module:salt.utils
+35:18:Name -> Module:salt
+35:43:Name -> U
+36:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+36:4:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+36:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+36:52:Name -> U
+36:63:Call -> U
+36:63:Attribute -> Func:pprint.pformat
+36:63:Name -> Module:pprint
+36:78:Name -> U
+40:10:Name -> ERR
+41:16:Call -> U
+41:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+41:16:Attribute -> Module:posixpath | Module:ntpath
+41:16:Name -> Module:os
+41:29:Name -> U
+41:62:Name -> U
+43:13:Call -> U
+43:13:Attribute -> Func:salt.utils.files.fopen
+43:13:Attribute -> Module:salt.utils.files
+43:13:Attribute -> Module:salt.utils
+43:13:Name -> Module:salt
+43:36:Name -> U
+44:20:Call -> U
+44:20:Attribute -> Func:salt.utils.msgpack.unpackb
+44:20:Attribute -> Module:salt.utils.msgpack
+44:20:Attribute -> Module:salt.utils
+44:20:Name -> Module:salt
+44:47:Call -> U
+44:47:Attribute -> U
+44:47:Name -> U
+45:11:Name -> Class:builtins.FileNotFoundError
+46:16:Call -> Dict:2
+46:16:Name -> Func:salt.proxy.dummy._initial_state
+47:8:Call -> Const:NoneType:None
+47:8:Name -> Func:salt.proxy.dummy._save_state
+47:20:Name -> U
+47:26:Name -> Dict:2
+48:11:Name -> Class:builtins.Exception
+49:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+49:8:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+49:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+49:50:Name -> ExcInst:builtins.Exception
+50:16:Call -> Dict:2
+50:16:Name -> Func:salt.proxy.dummy._initial_state
+51:8:Call -> Const:NoneType:None
+51:8:Name -> Func:salt.proxy.dummy._save_state
+51:20:Name -> U
+51:26:Name -> Dict:2
+52:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+52:4:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+52:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+52:53:Name -> U
+52:64:Call -> U
+52:64:Attribute -> Func:pprint.pformat
+52:64:Name -> Module:pprint
+52:79:Name -> U | Dict:2
+53:11:Name -> U | Dict:2
+56:1:Name -> Func:contextlib.contextmanager
+58:12:Call -> U | Dict:2
+58:12:Name -> Func:salt.proxy.dummy._load_state
+58:24:Name -> U
+59:15:Call -> U | Dict:2
+59:15:Attribute -> Func:copy.deepcopy
+59:15:Name -> Module:copy
+59:29:Name -> U | Dict:2
+61:14:Name -> U | Dict:2
+63:11:Name -> U | Dict:2
+63:20:Name -> U | Dict:2
+64:12:Call -> Const:NoneType:None
+64:12:Name -> Func:salt.proxy.dummy._save_state
+64:24:Name -> U
+64:30:Name -> U | Dict:2
+91:7:Call -> U
+91:7:Attribute -> U
+91:7:Name -> U
+92:14:Call -> ExcInst:salt.exceptions.MinionError
+92:14:Name -> Class:salt.exceptions.MinionError
+93:7:Call -> U
+93:7:Attribute -> U
+93:7:Name -> U
+94:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+94:14:Name -> Class:salt.exceptions.CommandExecutionError
+95:4:Name -> ERR
+95:40:Name -> U
+96:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+96:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+96:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+97:9:Call -> Gen:salt.proxy.dummy._loaded_state
+97:9:Name -> Func:salt.proxy.dummy._loaded_state
+97:23:Name -> U
+98:8:Name -> U
+107:9:Call -> Gen:salt.proxy.dummy._loaded_state
+107:9:Name -> Func:salt.proxy.dummy._loaded_state
+107:23:Name -> ERR
+108:15:Call -> U
+108:15:Attribute -> U
+108:15:Name -> U
+115:9:Call -> Gen:salt.proxy.dummy._loaded_state
+115:9:Name -> Func:salt.proxy.dummy._loaded_state
+115:23:Name -> ERR
+117:8:Name -> U
+122:15:Name -> U
+129:9:Call -> Gen:salt.proxy.dummy._loaded_state
+129:9:Name -> Func:salt.proxy.dummy._loaded_state
+129:23:Name -> ERR
+130:29:Name -> U
+131:12:Call -> U
+131:12:Attribute -> U
+131:12:Name -> U
+132:11:Call -> U
+132:11:Name -> Func:salt.proxy.dummy.grains
+151:9:Call -> Gen:salt.proxy.dummy._loaded_state
+151:9:Name -> Func:salt.proxy.dummy._loaded_state
+151:23:Name -> ERR
+152:8:Name -> U
+152:26:Name -> U
+160:9:Call -> Gen:salt.proxy.dummy._loaded_state
+160:9:Name -> Func:salt.proxy.dummy._loaded_state
+160:23:Name -> ERR
+161:8:Name -> U
+161:26:Name -> U
+176:9:Call -> Gen:salt.proxy.dummy._loaded_state
+176:9:Name -> Func:salt.proxy.dummy._loaded_state
+176:23:Name -> ERR
+177:15:Call -> Inst:builtins.list
+177:15:Name -> Class:builtins.list
+177:20:Name -> U
+184:9:Call -> Gen:salt.proxy.dummy._loaded_state
+184:9:Name -> Func:salt.proxy.dummy._loaded_state
+184:23:Name -> ERR
+185:11:Name -> U
+185:29:Name -> U
+195:9:Call -> Gen:salt.proxy.dummy._loaded_state
+195:9:Name -> Func:salt.proxy.dummy._loaded_state
+195:23:Name -> ERR
+196:15:Name -> U
+203:7:Call -> ERR
+203:7:Attribute -> BM:builtins.dict.get
+203:7:Name -> Dict:0
+204:18:Name -> Dict:0
+207:9:Call -> Gen:salt.proxy.dummy._loaded_state
+207:9:Name -> Func:salt.proxy.dummy._loaded_state
+207:23:Name -> ERR
+208:8:Name -> U
+208:26:Name -> U
+208:34:Name -> U | Const:str:'1.0'
+209:12:Name -> U
+209:18:Name -> U | Const:str:'1.0'
+216:9:Call -> Gen:salt.proxy.dummy._loaded_state
+216:9:Name -> Func:salt.proxy.dummy._loaded_state
+216:23:Name -> ERR
+217:17:Name -> U
+218:28:Call -> Inst:builtins.float
+218:28:Name -> Class:builtins.float
+218:34:Name -> U
+218:52:Name -> U
+219:28:Name -> Inst:builtins.float
+220:12:Name -> U
+220:30:Name -> U
+220:35:Call -> Const:str:''
+220:35:Name -> Class:builtins.str
+220:39:Name -> U
+221:15:Name -> U
+228:9:Call -> Gen:salt.proxy.dummy._loaded_state
+228:9:Name -> Func:salt.proxy.dummy._loaded_state
+228:23:Name -> ERR
+229:15:Name -> U
+236:4:Name -> ERR
+237:9:Call -> Gen:salt.proxy.dummy._loaded_state
+237:9:Name -> Func:salt.proxy.dummy._loaded_state
+237:23:Name -> ERR
+238:8:Call -> U
+238:8:Attribute -> U
+238:8:Name -> U
+238:30:Name -> U
+239:15:Name -> U
+246:9:Call -> Gen:salt.proxy.dummy._loaded_state
+246:9:Name -> Func:salt.proxy.dummy._loaded_state
+246:23:Name -> ERR
+247:11:Name -> U
+247:19:Name -> U
+248:20:Name -> U
+248:26:Name -> U
+248:44:Name -> U
+255:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+255:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+255:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+263:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+263:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+263:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+264:9:Call -> Gen:salt.proxy.dummy._loaded_state
+264:9:Name -> Func:salt.proxy.dummy._loaded_state
+264:23:Name -> ERR
+265:25:Name -> U
+266:12:Call -> ERR
+266:12:Attribute -> Func:posix.unlink
+266:12:Name -> Module:os
+266:22:Name -> U
+274:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+274:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+274:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

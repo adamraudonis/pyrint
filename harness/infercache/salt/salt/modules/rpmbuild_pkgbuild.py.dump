@@ -1,0 +1,798 @@
+37:7:Name -> Class:builtins.ImportError
+40:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+40:6:Attribute -> Func:logging.getLogger
+40:6:Name -> Module:logging
+40:24:Name -> Const:str:'salt.modules.rpmbuild_pkgbuild' | Const:str:'__main__'
+51:22:Name -> List:5
+52:15:Call -> Const:NoneType:None | Const:str:'gpg' | Const:str:'rpm' | Const:str:'rpmbuild' | Const:str:'mock' | Const:str:'createrepo' | U
+52:15:Attribute -> Func:salt.utils.path.which
+52:15:Attribute -> Module:salt.utils.path
+52:15:Attribute -> Module:salt.utils
+52:15:Name -> Module:salt
+52:37:Name -> Const:str:'gpg' | Const:str:'rpm' | Const:str:'rpmbuild' | Const:str:'mock' | Const:str:'createrepo'
+56:7:Name -> Const:bool:False | Const:bool:True
+56:24:Name -> Const:bool:False | Const:bool:True
+57:11:Call -> ERR
+57:11:Attribute -> ERR
+57:11:Name -> ERR
+58:19:Name -> Const:str:'pkgbuild'
+74:11:Call -> U
+74:11:Attribute -> Func:posixpath.expanduser | U
+74:11:Attribute -> Module:posixpath | Module:ntpath
+74:11:Name -> Module:os
+74:36:Name -> Const:str:'root' | U
+75:18:Call -> U
+75:18:Attribute -> Func:posixpath.join | Func:ntpath.join
+75:18:Attribute -> Module:posixpath | Module:ntpath
+75:18:Name -> Module:os
+75:31:Name -> U
+76:11:Call -> Const:bool:False | U
+76:11:Attribute -> Func:genericpath.isdir | U
+76:11:Attribute -> Module:posixpath | Module:ntpath
+76:11:Name -> Module:os
+76:25:Name -> U
+77:8:Call -> ERR
+77:8:Name -> ERR
+77:45:Name -> U
+77:63:Name -> Const:str:'root' | U
+79:14:Call -> U
+79:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+79:14:Attribute -> Module:posixpath | Module:ntpath
+79:14:Name -> Module:os
+79:27:Name -> U
+80:11:Call -> Const:bool:False | U
+80:11:Attribute -> Func:genericpath.isdir | U
+80:11:Attribute -> Module:posixpath | Module:ntpath
+80:11:Name -> Module:os
+80:25:Name -> U
+81:8:Call -> ERR
+81:8:Name -> ERR
+81:45:Name -> U
+81:59:Name -> Const:str:'root' | U
+83:16:Call -> U
+83:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+83:16:Attribute -> Module:posixpath | Module:ntpath
+83:16:Name -> Module:os
+83:29:Name -> U
+84:9:Call -> U
+84:9:Attribute -> Func:salt.utils.files.fopen
+84:9:Attribute -> Module:salt.utils.files
+84:9:Attribute -> Module:salt.utils
+84:9:Name -> Module:salt
+84:32:Name -> U
+85:8:Call -> U
+85:8:Attribute -> U
+85:8:Name -> U
+85:20:Call -> U
+85:20:Attribute -> Func:salt.utils.stringutils.to_str
+85:20:Attribute -> Module:salt.utils.stringutils
+85:20:Attribute -> Module:salt.utils
+85:20:Name -> Module:salt
+85:62:Name -> U
+86:8:Call -> U
+86:8:Attribute -> U
+86:8:Name -> U
+87:8:Call -> U
+87:8:Attribute -> U
+87:8:Name -> U
+88:8:Call -> U
+88:8:Attribute -> U
+88:8:Name -> U
+89:8:Call -> U
+89:8:Attribute -> U
+89:8:Name -> U
+96:14:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+96:14:Attribute -> Func:tempfile.mkdtemp
+96:14:Name -> Module:tempfile
+98:16:Name -> List:5
+99:15:Call -> U
+99:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+99:15:Attribute -> Module:posixpath | Module:ntpath
+99:15:Name -> Module:os
+99:28:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+99:37:Name -> Const:str:'BUILD' | Const:str:'RPMS' | Const:str:'SOURCES' | Const:str:'SPECS' | Const:str:'SRPMS'
+100:8:Call -> ERR
+100:8:Name -> ERR
+100:45:Name -> U
+100:56:Name -> Const:str:'root' | U
+101:11:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+108:15:Call -> U
+108:15:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+108:15:Attribute -> Module:posixpath | Module:ntpath
+108:15:Name -> Module:os
+108:32:Name -> U
+109:11:Call -> U
+109:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+109:11:Attribute -> Module:posixpath | Module:ntpath
+109:11:Name -> Module:os
+109:24:Name -> U
+109:44:Name -> U
+110:11:Call -> ERR
+110:11:Name -> ERR
+110:34:Name -> U
+110:40:Name -> U
+110:54:Name -> Const:str:'base' | U
+117:13:Call -> Inst:urllib.parse.ParseResult
+117:13:Attribute -> Func:urllib.parse.urlparse
+117:13:Attribute -> Module:urllib.parse
+117:13:Name -> Module:urllib
+117:35:Name -> U
+118:12:Call -> U
+118:12:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+118:12:Attribute -> Module:posixpath | Module:ntpath
+118:12:Name -> Module:os
+118:29:Name -> U
+119:11:Call -> U
+119:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+119:11:Attribute -> Module:posixpath | Module:ntpath
+119:11:Name -> Module:os
+119:24:Name -> U
+119:46:Name -> U
+120:7:Attribute -> U
+120:7:Name -> Inst:urllib.parse.ParseResult
+121:15:Call -> ERR
+121:15:Name -> ERR
+121:38:Name -> U
+121:46:Name -> U
+121:60:Name -> Const:str:'base' | U
+123:8:Call -> U
+123:8:Attribute -> Func:shutil.copy
+123:8:Name -> Module:shutil
+123:20:Name -> U
+123:28:Name -> U
+124:4:Call -> ERR
+124:4:Name -> ERR
+124:32:Name -> U
+124:43:Name -> Const:str:'root' | U
+133:15:Call -> U
+133:15:Attribute -> U
+133:15:Name -> U
+134:7:Name -> U
+135:37:Name -> U
+136:9:Name -> U
+137:39:Name -> U
+141:11:Name -> Const:str:'--define "dist .Uninferable"' | Const:str:'--define "dist .elUninferable"' | Const:str:''
+149:7:Name -> U
+150:15:Name -> Const:str:''
+151:11:Call -> ERR
+151:11:Name -> Func:builtins.isinstance
+151:22:Name -> U
+151:28:Name -> Class:builtins.list
+152:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+152:14:Name -> Class:salt.exceptions.SaltInvocationError
+155:18:Name -> U
+156:17:Call -> Inst:urllib.parse.ParseResult
+156:17:Attribute -> Func:urllib.parse.urlparse
+156:17:Attribute -> Module:urllib.parse
+156:17:Name -> Module:urllib
+156:39:Name -> U
+157:18:Call -> U
+157:18:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+157:18:Attribute -> Module:posixpath | Module:ntpath
+157:18:Name -> Module:os
+157:35:Name -> U
+158:15:Call -> U
+158:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+158:15:Attribute -> Module:posixpath | Module:ntpath
+158:15:Name -> Module:os
+158:28:Name -> U
+158:39:Name -> U
+159:11:Attribute -> U
+159:11:Name -> Inst:urllib.parse.ParseResult
+160:12:Call -> ERR
+160:12:Name -> ERR
+160:35:Name -> U
+160:43:Name -> U
+160:57:Name -> Const:str:'base' | U
+162:12:Call -> U
+162:12:Attribute -> Func:shutil.copy
+162:12:Name -> Module:shutil
+162:24:Name -> U
+162:32:Name -> U
+164:25:Name -> U
+166:11:Name -> Const:str:'' | Const:str:' Uninferable'
+174:7:Call -> ERR
+174:7:Name -> ERR
+174:36:Name -> Const:str:'/usr/libexec/gpg-preset-passphrase'
+177:14:Call -> ExcInst:salt.exceptions.CommandExecutionError
+177:14:Name -> Class:salt.exceptions.CommandExecutionError
+177:48:Name -> Const:str:'/usr/libexec/gpg-preset-passphrase'
+233:8:Call -> ERR
+233:8:Attribute -> ERR
+233:8:Name -> ERR
+234:12:Call -> ERR
+234:12:Attribute -> ERR
+234:12:Name -> ERR
+238:7:Name -> U
+240:27:Call -> U
+240:27:Attribute -> BM:builtins.str.format
+241:12:Name -> U
+241:23:Call -> ERR
+241:23:Name -> ERR
+243:28:Call -> U
+243:28:Attribute -> BM:builtins.str.format
+244:12:Name -> U
+244:23:Call -> ERR
+244:23:Name -> ERR
+247:11:Name -> U
+247:39:Name -> U
+248:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+248:18:Name -> Class:salt.exceptions.SaltInvocationError
+253:12:Call -> ERR
+253:12:Name -> ERR
+254:21:Name -> U
+254:37:Name -> U
+254:65:Name -> U
+256:12:Call -> ERR
+256:12:Name -> ERR
+257:21:Name -> U
+257:37:Name -> U
+257:66:Name -> U
+260:15:Name -> Class:salt.exceptions.SaltInvocationError
+261:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+261:18:Name -> Class:salt.exceptions.SaltInvocationError
+262:16:Call -> U
+262:16:Attribute -> BM:builtins.str.format
+263:47:Name -> U
+268:21:Call -> ERR
+268:21:Name -> ERR
+268:52:Name -> U
+268:69:Name -> U
+269:23:Name -> U
+270:15:Name -> U
+270:24:Name -> U
+271:29:Name -> U
+272:30:Name -> U
+273:19:Name -> Const:bool:False | Const:bool:True
+274:43:Name -> U
+275:44:Name -> U
+278:11:Name -> Const:bool:False | Const:bool:True
+280:34:Call -> ERR
+280:34:Name -> ERR
+280:54:Name -> Const:str:'gpg --with-keygrip --list-secret-keys'
+280:65:Name -> U
+280:76:Name -> U
+281:26:Call -> ERR
+281:26:Name -> Func:builtins.iter
+281:31:Call -> U
+281:31:Attribute -> U
+281:31:Name -> U
+283:28:Name -> U
+284:23:Call -> U
+284:23:Attribute -> U
+284:23:Name -> U
+285:43:Call -> ERR
+285:43:Attribute -> ERR
+285:43:Call -> ERR
+285:43:Attribute -> ERR
+285:43:Call -> ERR
+285:43:Name -> Func:builtins.next
+285:48:Name -> U
+286:27:Name -> Const:NoneType:None | U
+286:52:Name -> U
+287:39:Call -> ERR
+287:39:Attribute -> ERR
+287:39:Call -> ERR
+287:39:Name -> Func:builtins.next
+287:44:Name -> U
+288:51:Call -> U
+288:51:Attribute -> U
+288:51:Call -> U
+288:51:Attribute -> U
+288:51:Name -> U
+290:19:Name -> Class:builtins.StopIteration
+291:22:Call -> ExcInst:salt.exceptions.SaltInvocationError
+291:22:Name -> Class:salt.exceptions.SaltInvocationError
+292:20:Call -> U
+292:20:Attribute -> BM:builtins.str.format
+293:35:Name -> Const:NoneType:None | U
+293:58:Name -> Const:NoneType:None | U
+296:11:Name -> Const:NoneType:None | U
+297:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+297:18:Name -> Class:salt.exceptions.SaltInvocationError
+298:16:Call -> U
+298:16:Attribute -> BM:builtins.str.format
+299:20:Name -> U
+299:27:Name -> U
+303:11:Name -> U
+304:21:Call -> ERR
+304:21:Name -> ERR
+305:15:Name -> Const:bool:False | Const:bool:True
+306:16:Call -> Const:bool:True
+306:16:Name -> Func:salt.modules.rpmbuild_pkgbuild._check_repo_gpg_phrase_utils
+308:20:Call -> U
+308:20:Attribute -> BM:builtins.str.format
+309:50:Name -> Const:str:'' | U
+309:58:Name -> Const:NoneType:None | U
+311:24:Call -> ERR
+311:24:Name -> ERR
+311:48:Name -> U
+311:59:Name -> U
+311:70:Name -> U
+312:19:Name -> U
+313:26:Call -> ExcInst:salt.exceptions.SaltInvocationError
+313:26:Name -> Class:salt.exceptions.SaltInvocationError
+314:24:Call -> U
+314:24:Attribute -> BM:builtins.str.format
+315:64:Name -> Const:int:0 | U
+318:11:Name -> Const:NoneType:None | U
+320:16:Call -> U
+320:16:Attribute -> BM:builtins.str.format
+321:20:Name -> U
+326:30:Name -> U
+327:16:Call -> ERR
+327:16:Name -> ERR
+327:40:Name -> Const:str:'rpm --import Uninferable'
+327:51:Name -> U
+328:11:Name -> U
+329:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+329:18:Name -> Class:salt.exceptions.SaltInvocationError
+330:16:Call -> U
+330:16:Attribute -> BM:builtins.str.format
+332:20:Name -> U
+332:38:Name -> Const:int:0 | U
+336:12:Name -> Const:bool:False | Const:bool:True
+336:27:Name -> Const:NoneType:None | U
+336:40:Name -> Const:str:'' | U
+336:57:Name -> Const:str:'' | U
+343:21:Call -> U
+343:21:Attribute -> Func:re.compile
+343:21:Name -> Module:re
+343:56:Attribute -> Const:int:8
+343:56:Name -> Module:re
+347:21:Name -> U
+347:31:Name -> Const:float:0.5
+349:39:Name -> U
+351:17:Name -> U
+351:45:Name -> U
+352:17:Call -> Partial:PartialFunction
+352:17:Attribute -> Class:functools.partial | Class:_functools.functools.partial | U
+352:17:Name -> Module:functools
+352:35:Attribute -> Func:salt.utils.user.chugid_and_umask
+352:35:Attribute -> Module:salt.utils.user
+352:35:Attribute -> Module:salt.utils
+352:35:Name -> Module:salt
+352:69:Name -> U
+355:15:Call -> Inst:salt.utils.vt.Terminal
+355:15:Attribute -> Class:salt.utils.vt.Terminal
+355:15:Attribute -> Module:salt.utils.vt
+355:15:Attribute -> Module:salt.utils
+355:15:Name -> Module:salt
+356:12:Name -> Const:str:'rpm Uninferable --addsign Uninferable'
+358:23:Name -> Partial:PartialFunction
+362:14:Attribute -> U
+362:14:Name -> Inst:salt.utils.vt.Terminal
+363:29:Call -> Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2 | Tuple:2
+363:29:Attribute -> BM:salt.utils.vt.Terminal.recv
+363:29:Name -> Inst:salt.utils.vt.Terminal
+364:15:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:NoneType:None | Const:str:'' | Const:NoneType:None
+364:26:Call -> U
+364:26:Attribute -> U
+364:26:Name -> U
+364:48:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None | Const:str:'' | Const:NoneType:None | Const:str:'' | Const:NoneType:None
+366:16:Call -> Const:NoneType:None | Const:int:0 | Const:NoneType:None | U
+366:16:Attribute -> BM:salt.utils.vt.Terminal.sendline
+366:16:Name -> Inst:salt.utils.vt.Terminal
+366:30:Name -> U
+370:15:Name -> Const:int:0 | Const:int:1
+370:30:Name -> U
+371:22:Call -> ExcInst:salt.exceptions.SaltInvocationError
+371:22:Name -> Class:salt.exceptions.SaltInvocationError
+372:20:Call -> U
+372:20:Attribute -> BM:builtins.str.format
+373:24:Name -> U
+373:34:Call -> Const:int:0
+373:34:Name -> Class:builtins.int
+373:38:Name -> Const:int:0 | Const:int:1
+373:53:Name -> Const:float:0.5
+376:12:Call -> ERR
+376:12:Attribute -> Func:time.sleep
+376:12:Name -> Module:time
+376:23:Name -> Const:float:0.5
+378:26:Attribute -> Const:NoneType:None | U | Const:NoneType:None
+378:26:Name -> Inst:salt.utils.vt.Terminal
+379:11:Name -> Const:NoneType:None | U | Const:NoneType:None
+380:18:Call -> ExcInst:salt.exceptions.SaltInvocationError
+380:18:Name -> Class:salt.exceptions.SaltInvocationError
+381:16:Call -> U
+381:16:Attribute -> BM:builtins.str.format
+382:20:Name -> U
+382:30:Name -> Const:NoneType:None | U | Const:NoneType:None
+385:11:Attribute -> Class:salt.utils.vt.TerminalException
+385:11:Attribute -> Module:salt.utils.vt
+385:11:Attribute -> Module:salt.utils
+385:11:Name -> Module:salt
+386:16:Call -> Const:str:''
+386:16:Attribute -> Func:traceback.format_exc
+386:16:Name -> Module:traceback
+387:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+387:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+387:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+387:18:Name -> Const:str:'Failed to sign file Uninferable'
+387:29:Name -> ExcInst:salt.utils.vt.TerminalException
+387:34:Name -> Const:str:''
+389:8:Call -> Const:NoneType:None
+389:8:Attribute -> BM:salt.utils.vt.Terminal.close
+389:8:Name -> Inst:salt.utils.vt.Terminal
+396:41:Name -> U
+396:65:Name -> U
+397:12:Call -> ERR
+397:12:Name -> ERR
+397:36:Name -> Const:str:'rpmsign --verbose  --key-id=Uninferable
+397:47:Name -> U
+397:58:Name -> U
+397:84:Name -> U
+398:7:Name -> U
+399:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+399:14:Name -> Class:salt.exceptions.SaltInvocationError
+400:12:Call -> U
+400:12:Attribute -> BM:builtins.str.format
+401:69:Name -> Const:str:'rpmsign --verbose  --key-id=Uninferable
+401:74:Name -> U
+455:4:Call -> Const:NoneType:None
+455:4:Name -> Func:salt.modules.rpmbuild_pkgbuild._create_rpmmacros
+455:22:Name -> Const:str:'root' | U
+456:16:Call -> Const:bytes:b'.' | Const:str:'.' | U
+456:16:Name -> Func:salt.modules.rpmbuild_pkgbuild._mk_tree
+456:25:Name -> Const:str:'root' | U
+457:16:Call -> U
+457:16:Name -> Func:salt.modules.rpmbuild_pkgbuild._get_spec
+457:26:Name -> Const:bytes:b'.' | Const:str:'.' | U
+457:37:Name -> U
+457:43:Name -> Const:NoneType:None | U
+457:53:Name -> Const:str:'base' | U
+458:4:Call -> ERR
+458:4:Name -> ERR
+458:32:Name -> U
+458:48:Name -> Const:str:'root' | U
+459:4:Call -> ERR
+459:4:Name -> ERR
+459:32:Name -> Const:bytes:b'.' | Const:str:'.' | U
+459:48:Name -> Const:str:'root' | U
+461:7:Call -> ERR
+461:7:Name -> Func:builtins.isinstance
+461:18:Name -> U
+461:27:Name -> Class:builtins.str
+462:18:Call -> U
+462:18:Attribute -> U
+462:18:Name -> U
+463:15:Name -> U
+464:8:Call -> Const:NoneType:None
+464:8:Name -> Func:salt.modules.rpmbuild_pkgbuild._get_src
+464:17:Name -> Const:bytes:b'.' | Const:str:'.' | U
+464:28:Name -> U
+464:33:Name -> Const:str:'base' | U
+464:42:Name -> Const:str:'root' | U
+467:10:Call -> U
+467:10:Attribute -> BM:builtins.str.format
+468:8:Name -> Const:bytes:b'.' | Const:str:'.' | U
+468:19:Name -> U
+470:12:Call -> ERR
+470:12:Name -> ERR
+470:36:Name -> U
+470:47:Name -> Const:str:'root' | U
+471:7:Name -> U
+472:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+472:14:Name -> Class:salt.exceptions.SaltInvocationError
+473:12:Call -> U
+473:12:Attribute -> BM:builtins.str.format
+475:16:Name -> U
+475:26:Name -> U
+475:32:Name -> U
+475:41:Name -> U
+479:12:Call -> U
+479:12:Attribute -> Func:posixpath.join | Func:ntpath.join
+479:12:Attribute -> Module:posixpath | Module:ntpath
+479:12:Name -> Module:os
+479:25:Name -> Const:bytes:b'.' | Const:str:'.' | U
+481:11:Call -> Const:bool:False | U
+481:11:Attribute -> Func:genericpath.isdir | U
+481:11:Attribute -> Module:posixpath | Module:ntpath
+481:11:Name -> Module:os
+481:25:Name -> U
+482:8:Call -> ERR
+482:8:Name -> ERR
+482:45:Name -> U
+482:60:Name -> Const:str:'root' | U
+483:15:Call -> ERR
+483:15:Attribute -> Func:posix.listdir
+483:15:Name -> Module:os
+483:26:Name -> U
+484:15:Call -> U
+484:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+484:15:Attribute -> Module:posixpath | Module:ntpath
+484:15:Name -> Module:os
+484:28:Name -> U
+484:35:Name -> U
+485:14:Call -> U
+485:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+485:14:Attribute -> Module:posixpath | Module:ntpath
+485:14:Name -> Module:os
+485:27:Name -> U
+485:37:Name -> U
+486:8:Call -> U
+486:8:Attribute -> Func:shutil.copy
+486:8:Name -> Module:shutil
+486:20:Name -> U
+486:26:Name -> U
+487:8:Call -> ERR
+487:8:Attribute -> BM:builtins.list.append
+487:8:Name -> List:0
+487:19:Name -> U
+488:11:Name -> List:0
+520:8:Call -> ERR
+520:8:Name -> ERR
+520:36:Name -> U
+520:51:Name -> U
+521:11:Name -> Class:builtins.OSError
+522:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+522:11:Name -> ExcInst:builtins.OSError
+522:24:Attribute -> Const:int:17
+522:24:Name -> Module:errno
+524:15:Call -> U
+524:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+524:15:Attribute -> Module:posixpath | Module:ntpath
+524:15:Name -> Module:os
+524:28:Name -> U
+525:21:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+525:21:Attribute -> Func:tempfile.mkdtemp
+525:21:Name -> Module:tempfile
+527:16:Call -> List:0
+527:16:Name -> Func:salt.modules.rpmbuild_pkgbuild.make_src_pkg
+528:12:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+528:28:Name -> U
+528:34:Name -> U
+528:43:Name -> U
+528:48:Name -> U
+528:58:Name -> Const:str:'base' | U
+528:67:Name -> U
+530:11:Name -> Class:builtins.Exception
+531:8:Call -> Const:NoneType:None | Const:NoneType:None
+531:8:Attribute -> Func:shutil.rmtree
+531:8:Name -> Module:shutil
+531:22:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+532:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+532:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+532:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+533:15:Name -> Dict:0
+535:14:Call -> Const:str:'--define "dist .Uninferable"' | Const:str:'--define "dist .elUninferable"' | Const:str:''
+535:14:Name -> Func:salt.modules.rpmbuild_pkgbuild._get_distset
+535:27:Name -> U
+538:15:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+538:15:Attribute -> Func:tempfile.mkdtemp
+538:15:Name -> Module:tempfile
+539:16:Call -> Const:str:'' | U
+539:16:Name -> Func:salt.modules.rpmbuild_pkgbuild._get_deps
+539:26:Name -> U
+539:32:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+539:42:Name -> Const:str:'base' | U
+542:16:Name -> List:0
+543:16:Call -> U
+543:16:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+543:16:Attribute -> Module:posixpath | Module:ntpath
+543:16:Name -> Module:os
+543:32:Name -> U
+544:22:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+544:22:Attribute -> Func:tempfile.mkdtemp
+544:22:Name -> Module:tempfile
+546:12:Call -> ERR
+546:12:Name -> ERR
+546:40:Name -> U
+546:52:Name -> U
+547:12:Call -> ERR
+547:12:Name -> ERR
+547:40:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+547:58:Name -> U
+548:33:Name -> U
+548:51:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+549:21:Call -> ERR
+549:21:Name -> ERR
+549:45:Name -> Const:str:"mock --root=Uninferable --resultdir=b'. | Const:str:'mock --root=Uninferable --resultdir=. - | Const:str:'mock --root=Uninferable --resultdir=Uni | Const:str:"mock --root=Uninferable --resultdir=b'/ | Const:str:'mock --root=Uninferable --resultdir=/ -
+549:56:Name -> U
+550:15:Name -> Const:str:'' | U
+550:33:Call -> U
+550:33:Attribute -> BM:builtins.str.isspace | U
+550:33:Name -> Const:str:'' | U
+551:22:Call -> U
+551:22:Attribute -> BM:builtins.str.format
+552:20:Name -> U
+552:25:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+552:38:Name -> Const:str:'' | U
+552:49:Name -> Const:str:''
+554:25:Call -> ERR
+554:25:Name -> ERR
+554:49:Name -> U
+554:60:Name -> U
+557:18:Call -> U
+557:18:Attribute -> BM:builtins.str.format
+558:16:Name -> U
+558:21:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+558:34:Name -> Const:str:'--define "dist .Uninferable"' | Const:str:'--define "dist .elUninferable"' | Const:str:''
+558:43:Name -> Const:str:'' | Const:str:' --no-clean'
+558:52:Name -> U
+560:21:Call -> ERR
+560:21:Name -> ERR
+560:45:Name -> U
+560:56:Name -> U
+565:19:Name -> Const:str:'/var/log/salt/pkgbuild' | U
+566:16:Name -> U
+568:23:Call -> ERR
+568:23:Name -> ERR
+568:50:Name -> List:5
+569:28:Call -> ERR
+569:28:Attribute -> Func:posix.listdir
+569:28:Name -> Module:os
+569:39:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+570:23:Call -> U
+570:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+570:23:Attribute -> Module:posixpath | Module:ntpath
+570:23:Name -> Module:os
+570:36:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+570:49:Name -> U
+571:19:Call -> U
+571:19:Attribute -> U
+571:19:Name -> U
+572:28:Call -> U
+572:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+572:28:Attribute -> Module:posixpath | Module:ntpath
+572:28:Name -> Module:os
+572:41:Name -> U
+572:51:Name -> U
+574:24:Call -> ERR
+574:24:Name -> ERR
+575:33:Name -> U
+575:48:Name -> U
+577:27:Name -> Class:builtins.OSError
+578:27:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+578:27:Name -> ExcInst:builtins.OSError
+578:40:Attribute -> Const:int:17
+578:40:Name -> Module:errno
+580:20:Call -> U
+580:20:Attribute -> Func:shutil.copy
+580:20:Name -> Module:shutil
+580:32:Name -> U
+580:38:Name -> U
+581:20:Call -> ERR
+581:20:Attribute -> ERR
+581:20:Call -> ERR
+581:20:Attribute -> BM:builtins.dict.setdefault
+581:20:Name -> Dict:0
+581:65:Name -> U
+582:21:Call -> U
+582:21:Attribute -> U
+582:21:Name -> U
+583:28:Call -> U
+583:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+583:28:Attribute -> Module:posixpath | Module:ntpath
+583:28:Name -> Module:os
+583:41:Name -> U
+583:51:Name -> U
+584:20:Call -> U
+584:20:Attribute -> Func:shutil.copy
+584:20:Name -> Module:shutil
+584:32:Name -> U
+584:38:Name -> U
+585:20:Call -> ERR
+585:20:Attribute -> ERR
+585:20:Call -> ERR
+585:20:Attribute -> BM:builtins.dict.setdefault
+585:20:Name -> Dict:0
+585:58:Name -> U
+587:31:Call -> U
+587:31:Attribute -> Func:posixpath.join | Func:ntpath.join
+587:31:Attribute -> Module:posixpath | Module:ntpath
+587:31:Name -> Module:os
+587:44:Name -> U
+587:54:Name -> U
+589:24:Call -> ERR
+589:24:Name -> ERR
+590:33:Name -> U
+590:48:Name -> U
+592:27:Name -> Class:builtins.OSError
+593:27:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+593:27:Name -> ExcInst:builtins.OSError
+593:40:Attribute -> Const:int:17
+593:40:Name -> Module:errno
+595:20:Call -> U
+595:20:Attribute -> Func:shutil.copy
+595:20:Name -> Module:shutil
+595:32:Name -> U
+595:38:Name -> U
+596:20:Call -> ERR
+596:20:Attribute -> ERR
+596:20:Call -> ERR
+596:20:Attribute -> BM:builtins.dict.setdefault
+596:20:Name -> Dict:0
+596:59:Name -> U
+597:15:Name -> Class:builtins.Exception
+598:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+598:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+598:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+598:52:Name -> U
+598:58:Name -> ExcInst:builtins.Exception
+600:12:Call -> Const:NoneType:None | Const:NoneType:None
+600:12:Attribute -> Func:shutil.rmtree
+600:12:Name -> Module:shutil
+600:26:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+601:7:Name -> Const:int:0
+602:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+602:14:Name -> Class:salt.exceptions.SaltInvocationError
+603:12:Call -> U
+603:12:Attribute -> BM:builtins.str.format
+605:16:Name -> U
+605:26:Name -> U
+605:32:Name -> U
+605:41:Name -> Const:int:0
+608:4:Call -> Const:NoneType:None | Const:NoneType:None
+608:4:Attribute -> Func:shutil.rmtree
+608:4:Name -> Module:shutil
+608:18:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+609:4:Call -> Const:NoneType:None | Const:NoneType:None
+609:4:Attribute -> Func:shutil.rmtree
+609:4:Name -> Module:shutil
+609:18:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+610:11:Name -> Dict:0
+729:11:Call -> U
+729:11:Attribute -> Func:posixpath.expanduser | U
+729:11:Attribute -> Module:posixpath | Module:ntpath
+729:11:Name -> Module:os
+729:36:Name -> Const:str:'root' | U
+730:16:Call -> U
+730:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+730:16:Attribute -> Module:posixpath | Module:ntpath
+730:16:Name -> Module:os
+730:29:Name -> U
+731:11:Call -> Const:bool:False | Const:bool:True | U
+731:11:Attribute -> Func:genericpath.exists | U
+731:11:Attribute -> Module:posixpath | Module:ntpath
+731:11:Name -> Module:os
+731:26:Name -> U
+732:8:Call -> Const:NoneType:None
+732:8:Name -> Func:salt.modules.rpmbuild_pkgbuild._create_rpmmacros
+732:26:Name -> Const:str:'root' | U
+734:7:Name -> Const:str:'/etc/salt/gpgkeys' | U
+734:21:Name -> Const:NoneType:None | U
+736:8:Name -> Dict:0
+736:27:Name -> Const:str:'/etc/salt/gpgkeys' | U
+738:58:Call -> Tuple:4
+738:58:Name -> Func:salt.modules.rpmbuild_pkgbuild._get_gpg_key_resources
+739:8:Name -> Const:NoneType:None | U
+739:15:Name -> Const:NoneType:None | U | Dict:0
+739:20:Name -> Const:bool:False | U
+739:36:Name -> Const:str:'/etc/salt/gpgkeys' | U
+739:47:Name -> Const:str:'root' | U
+743:20:Call -> ERR
+743:20:Attribute -> Func:posix.listdir
+743:20:Name -> Module:os
+743:31:Name -> U
+744:11:Call -> U
+744:11:Attribute -> U
+744:11:Name -> U
+745:23:Call -> U
+745:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+745:23:Attribute -> Module:posixpath | Module:ntpath
+745:23:Name -> Module:os
+745:36:Name -> U
+745:45:Name -> U
+746:15:Name -> Const:bool:False | Const:bool:True
+747:16:Call -> Const:NoneType:None
+747:16:Name -> Func:salt.modules.rpmbuild_pkgbuild._sign_files_with_gpg_agent
+748:20:Name -> Const:str:'root' | U
+748:27:Name -> Const:NoneType:None | U
+748:40:Name -> U
+748:50:Name -> U
+748:59:Name -> Const:NoneType:None | U | Dict:0
+748:64:Name -> Const:float:15.0 | U
+751:16:Call -> Const:NoneType:None
+751:16:Name -> Func:salt.modules.rpmbuild_pkgbuild._sign_file
+751:27:Name -> Const:str:'root' | U
+751:34:Name -> Const:str:'' | U
+751:51:Name -> Const:str:'' | U
+751:59:Name -> U
+751:69:Name -> Const:float:15.0 | U
+753:33:Name -> U
+754:12:Call -> ERR
+754:12:Name -> ERR
+754:36:Name -> Const:str:'createrepo --update Uninferable'
+754:47:Name -> Const:str:'root' | U
+755:11:Name -> U

@@ -1,0 +1,133 @@
+10:1:Call -> Inst:django.test.utils.override_settings
+10:1:Name -> Class:django.test.utils.override_settings
+11:31:Name -> Class:tests.sitemaps_tests.base.SitemapTestsBase
+13:25:Call -> Inst:_pydatetime.datetime | U
+13:25:Attribute -> BM:_pydatetime.datetime.now
+13:25:Name -> Class:_pydatetime.datetime
+14:19:Call -> ERR
+14:19:Attribute -> ERR
+14:19:Attribute -> ERR
+14:19:Name -> Class:tests.sitemaps_tests.models.TestModel
+15:26:Call -> Inst:django.contrib.sitemaps.GenericSitemap
+15:26:Name -> Class:django.contrib.sitemaps.GenericSitemap
+17:28:Name -> U
+18:30:Name -> Inst:_pydatetime.datetime | U
+25:27:Name -> Inst:_pydatetime.datetime | U
+30:41:Name -> Tuple:4
+31:17:Call -> Gen:unittest.case.TestCase.subTest
+31:17:Attribute -> BM:unittest.case.TestCase.subTest
+31:17:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+31:40:Name -> Const:str:'date_field' | Const:str:'priority' | Const:str:'changefreq' | Const:str:'protocol'
+32:16:Call -> Const:NoneType:None
+32:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+32:16:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+32:33:Call -> U
+32:33:Name -> Func:builtins.getattr
+32:41:Name -> Inst:django.contrib.sitemaps.GenericSitemap
+32:58:Name -> Const:str:'date_field' | Const:str:'priority' | Const:str:'changefreq' | Const:str:'protocol'
+32:70:Name -> Inst:_pydatetime.datetime | U | Const:float:0.6 | Const:str:'monthly' | Const:str:'https'
+33:8:Call -> Const:NoneType:None
+33:8:Attribute -> BM:unittest.case.TestCase.assertCountEqual
+33:8:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+33:30:Attribute -> U
+33:30:Name -> Inst:django.contrib.sitemaps.GenericSitemap
+33:56:Name -> U
+37:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+37:19:Attribute -> BM:django.test.client.Client.get
+37:19:Attribute -> Inst:django.test.client.Client
+37:19:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+39:18:Call -> ERR
+39:18:Attribute -> ERR
+39:18:Attribute -> ERR
+39:18:Name -> Class:tests.sitemaps_tests.models.TestModel
+40:68:Attribute -> U
+40:68:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+40:83:Name -> U
+47:12:Name -> Const:str:'' | U
+48:8:Call -> Const:NoneType:None
+48:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertXMLEqual
+48:8:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+48:28:Attribute -> U
+48:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+48:43:Name -> Const:str:'<?xml version="1.0" encoding="UTF-8"?>\ | U
+51:21:Call -> ERR
+51:21:Attribute -> ERR
+51:21:Attribute -> ERR
+51:21:Name -> Class:tests.sitemaps_tests.models.TestModel
+52:8:Call -> ERR
+52:8:Attribute -> ERR
+52:8:Attribute -> ERR
+52:8:Name -> Class:tests.sitemaps_tests.models.TestModel
+52:41:Call -> Inst:_pydatetime.datetime
+52:41:Name -> Class:_pydatetime.datetime
+53:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+53:19:Attribute -> BM:django.test.client.Client.get
+53:19:Attribute -> Inst:django.test.client.Client
+53:19:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+61:12:Attribute -> U
+61:12:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+62:12:Attribute -> U
+62:12:Name -> U
+64:8:Call -> Const:NoneType:None
+64:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertXMLEqual
+64:8:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+64:28:Attribute -> U
+64:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+64:43:Name -> U
+65:8:Call -> Const:NoneType:None
+65:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+65:8:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+66:12:Attribute -> Inst:django.http.request.HttpHeaders | U
+66:12:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+71:17:Call -> Gen:unittest.case.TestCase.subTest
+71:17:Attribute -> BM:unittest.case.TestCase.subTest
+71:17:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+71:39:Name -> Const:str:'http' | Const:str:'https'
+72:26:Call -> Inst:django.contrib.sitemaps.GenericSitemap
+72:26:Name -> Class:django.contrib.sitemaps.GenericSitemap
+72:70:Name -> Const:str:'http' | Const:str:'https'
+73:16:Call -> Const:NoneType:None
+73:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+73:16:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+73:33:Call -> U
+73:33:Attribute -> BM:django.contrib.sitemaps.Sitemap.get_protocol
+73:33:Name -> Inst:django.contrib.sitemaps.GenericSitemap
+73:57:Name -> Const:str:'http' | Const:str:'https'
+76:18:Call -> Inst:django.contrib.sitemaps.GenericSitemap
+76:18:Name -> Class:django.contrib.sitemaps.GenericSitemap
+78:17:Call -> Gen:unittest.case.TestCase.subTest
+78:17:Attribute -> BM:unittest.case.TestCase.subTest
+78:17:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+78:39:Name -> Const:str:'http' | Const:str:'https'
+79:16:Call -> Const:NoneType:None
+79:16:Attribute -> BM:unittest.case.TestCase.assertEqual
+79:16:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+79:33:Call -> U
+79:33:Attribute -> BM:django.contrib.sitemaps.Sitemap.get_protocol
+79:33:Name -> Inst:django.contrib.sitemaps.GenericSitemap
+79:54:Name -> Const:str:'http' | Const:str:'https'
+79:65:Name -> Const:str:'http' | Const:str:'https'
+82:18:Call -> Inst:django.contrib.sitemaps.GenericSitemap
+82:18:Name -> Class:django.contrib.sitemaps.GenericSitemap
+83:8:Call -> Const:NoneType:None
+83:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+83:8:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+83:25:Call -> U
+83:25:Attribute -> BM:django.contrib.sitemaps.Sitemap.get_protocol
+83:25:Name -> Inst:django.contrib.sitemaps.GenericSitemap
+86:8:Call -> ERR
+86:8:Attribute -> ERR
+86:8:Attribute -> ERR
+86:8:Name -> Class:tests.sitemaps_tests.models.TestModel
+86:41:Call -> Inst:_pydatetime.datetime
+86:41:Name -> Class:_pydatetime.datetime
+87:19:Call -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+87:19:Attribute -> BM:django.test.client.Client.get
+87:19:Attribute -> Inst:django.test.client.Client
+87:19:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+92:8:Call -> Const:NoneType:None
+92:8:Attribute -> BM:django.test.testcases.SimpleTestCase.assertXMLEqual
+92:8:Name -> Inst:tests.sitemaps_tests.test_generic.GenericViewsSitemapTests
+92:28:Attribute -> U
+92:28:Name -> Inst:django.core.handlers.wsgi.WSGIRequest | U
+92:43:Name -> Const:str:'<?xml version="1.0" encoding="UTF-8"?>\

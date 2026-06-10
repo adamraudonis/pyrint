@@ -1,0 +1,176 @@
+27:3:Name -> U
+35:3:Name -> Const:bool:False
+41:17:Name -> Func:typing.Literal
+45:7:Name -> Class:builtins.ImportError
+50:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+50:10:Attribute -> Func:logging.getLogger
+50:10:Name -> Module:logging
+50:28:Name -> Const:str:'providers.docker.src.airflow.providers. | Const:str:'__main__'
+55:15:Name -> Module:pickle
+60:15:Name -> Class:builtins.ModuleNotFoundError
+61:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+61:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+61:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+63:15:Name -> Module:dill
+68:15:Name -> Class:builtins.ModuleNotFoundError
+69:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+69:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+69:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+74:15:Name -> U
+76:18:Name -> Class:builtins.dict
+76:23:Name -> Class:.Literal
+76:35:Name -> Class:typing.Any
+77:18:Call -> U
+77:18:Attribute -> U
+77:18:Name -> U
+77:42:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._load_pickle
+78:16:Call -> U
+78:16:Attribute -> U
+78:16:Name -> U
+78:40:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._load_dill
+79:23:Call -> U
+79:23:Attribute -> U
+79:23:Name -> U
+79:47:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._load_cloudpickle
+86:11:Name -> U
+87:46:Name -> U
+88:23:Name -> U
+93:9:Call -> ERR
+93:9:Name -> Func:_io.open
+93:14:Name -> U
+94:15:Call -> U
+94:15:Attribute -> Func:base64.b64encode
+94:15:Name -> Module:base64
+94:32:Call -> U
+94:32:Attribute -> U
+94:32:Name -> U
+97:31:Name -> U
+97:50:Name -> U
+123:21:Name -> Class:_collections_abc.Sequence
+123:30:Name -> Class:builtins.str
+123:39:Attribute -> U
+123:39:Name -> U
+128:24:Name -> Class:builtins.bool
+129:20:Name -> Class:.Literal
+132:21:Name -> Const:NoneType:None | U
+133:11:Name -> Const:str:'pickle' | U
+133:29:Name -> U | Dict:3
+135:42:Name -> Const:str:'pickle' | U
+135:74:Call -> Const:str:''
+135:74:Attribute -> BM:builtins.str.join
+135:84:Call -> Inst:builtins.map
+135:84:Name -> Class:builtins.map
+135:88:Name -> Func:builtins.repr
+135:94:Name -> U | Dict:3
+137:18:Call -> U
+137:18:Name -> U
+137:35:Name -> Const:str:'Unsupported serializer pickle. Expected | Const:str:'Unsupported serializer Uninferable. Exp
+140:8:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+140:30:Name -> Const:str:'python3' | U
+141:8:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+141:30:Name -> Const:bool:True | U
+142:8:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+142:25:Name -> Class:.Literal
+142:38:Name -> Const:str:'pickle' | U
+144:8:Call -> Const:NoneType:None
+144:8:Attribute -> BM:builtins.object.__init__
+144:8:Call -> Super
+144:8:Name -> Class:builtins.super
+145:20:Name -> Const:str:'placeholder command'
+145:93:Name -> Dict:0
+151:16:Call -> Const:str:'python3 -c "import base64, os;x = base6 | Const:str:'Uninferable -c "import base64, os;x = b
+151:16:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._generate_decode_command
+151:78:Attribute -> Const:str:'python3' | U
+151:78:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+153:15:Call -> Const:str:'python3 -c "import base64, os;x = base6 | Const:str:'Uninferable -c "import base64, os;x = b
+153:15:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._generate_decode_command
+153:76:Attribute -> Const:str:'python3' | U
+153:76:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+154:15:Attribute -> Const:str:'python3' | U
+154:15:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+157:31:Name -> U
+158:13:Call -> Inst:tempfile.TemporaryDirectory
+158:13:Name -> Class:tempfile.TemporaryDirectory
+159:29:Call -> U
+159:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+159:29:Attribute -> Module:posixpath | Module:ntpath
+159:29:Name -> Module:os
+159:42:Name -> U
+160:30:Call -> U
+160:30:Attribute -> Func:posixpath.join | Func:ntpath.join
+160:30:Attribute -> Module:posixpath | Module:ntpath
+160:30:Name -> Module:os
+160:43:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/'
+162:17:Call -> ERR
+162:17:Name -> Func:_io.open
+162:22:Name -> U
+163:19:Attribute -> ERR
+163:19:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+163:35:Attribute -> ERR
+163:35:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+164:20:Call -> U
+164:20:Attribute -> U
+164:20:Attribute -> U
+164:20:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+164:56:Attribute -> ERR
+164:56:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+164:80:Attribute -> ERR
+164:80:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+164:97:Name -> U
+165:24:Call -> ERR
+165:24:Attribute -> ERR
+165:24:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+166:12:Call -> U
+166:12:Name -> U
+168:31:Attribute -> ERR
+168:31:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+169:33:Attribute -> ERR
+169:33:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+170:40:Attribute -> U
+170:40:Attribute -> U
+170:40:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+171:39:Attribute -> ERR
+171:39:Attribute -> ERR
+171:39:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+172:46:Name -> U
+173:38:Attribute -> Const:bool:True | U
+173:38:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+176:25:Name -> U
+182:12:Attribute -> ERR
+182:12:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+182:50:Call -> U
+182:50:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._b64_encode_file
+182:67:Name -> U
+183:15:Attribute -> ERR
+183:15:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+183:31:Attribute -> ERR
+183:31:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+184:16:Attribute -> ERR
+184:16:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+184:53:Call -> U
+184:53:Name -> Func:providers.docker.src.airflow.providers.docker.decorators.docker._b64_encode_file
+184:70:Name -> U
+186:16:Attribute -> ERR
+186:16:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+188:12:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+188:27:Call -> Const:str:'bash -cx  \'python3 -c "import base64,  | Const:str:'bash -cx  \'python3 -c "import base64,  | Const:str:'bash -cx  \'python3 -c "import base64,  | Const:str:'bash -cx  \'python3 -c "import base64,  | Const:str:'bash -cx  \'Uninferable -c "import base | Const:str:'bash -cx  \'Uninferable -c "import base | Const:str:'bash -cx  \'Uninferable -c "import base | Const:str:'bash -cx  \'Uninferable -c "import base
+188:27:Attribute -> BM:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator.generate_command
+188:27:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+189:19:Call -> ERR
+189:19:Attribute -> ERR
+189:19:Call -> Super
+189:19:Name -> Class:builtins.super
+189:35:Name -> U
+191:5:Name -> Class:builtins.property
+193:15:Name -> U | Dict:3
+193:28:Attribute -> Const:str:'pickle' | U
+193:28:Name -> Inst:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+197:21:Name -> Class:_collections_abc.Callable
+198:22:Name -> Class:builtins.bool
+200:5:Name -> U
+210:11:Call -> U
+210:11:Name -> U
+211:24:Name -> Const:NoneType:None | U
+212:25:Name -> Const:NoneType:None | U
+213:33:Name -> Class:providers.docker.src.airflow.providers.docker.decorators.docker._DockerDecoratedOperator
+214:10:Name -> Dict:0

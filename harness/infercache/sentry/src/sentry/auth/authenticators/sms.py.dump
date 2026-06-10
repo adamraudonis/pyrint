@@ -1,0 +1,154 @@
+17:3:Name -> Const:bool:False
+20:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+20:9:Attribute -> Func:logging.getLogger
+20:9:Name -> Module:logging
+23:27:Name -> Class:builtins.Exception
+24:37:Name -> Class:builtins.str
+24:51:Name -> Class:builtins.int
+24:74:Name -> Class:builtins.str
+25:8:Call -> ERR
+25:8:Attribute -> BM:builtins.Exception.__init__ | BM:builtins.BaseException.__init__ | BM:builtins.object.__init__
+25:8:Call -> Super
+25:8:Name -> Class:builtins.super
+26:8:Name -> ExcInst:src.sentry.auth.authenticators.sms.SMSRateLimitExceeded
+26:28:Name -> U
+27:8:Name -> ExcInst:src.sentry.auth.authenticators.sms.SMSRateLimitExceeded
+27:23:Name -> U
+28:8:Name -> ExcInst:src.sentry.auth.authenticators.sms.SMSRateLimitExceeded
+28:25:Name -> U
+31:19:Name -> Class:src.sentry.auth.authenticators.base.OtpMixin
+36:11:Call -> U
+36:11:Name -> U
+37:18:Call -> U
+37:18:Name -> U
+45:5:Name -> U
+46:29:Name -> Class:builtins.bool
+47:15:Call -> U
+47:15:Name -> U
+49:37:Name -> Class:builtins.dict
+49:42:Name -> Class:builtins.str
+49:47:Name -> Class:typing.Any
+50:17:Call -> Dict:1 | Dict:0
+50:17:Attribute -> BM:src.sentry.auth.authenticators.base.OtpMixin.generate_new_config | BM:src.sentry.auth.authenticators.base.AuthenticatorInterface.generate_new_config
+50:17:Call -> Super
+50:17:Name -> Class:builtins.super
+51:8:Name -> Dict:1 | Dict:0
+52:15:Name -> Dict:1 | Dict:0
+54:26:Name -> U
+55:15:Call -> U
+55:15:Name -> U
+55:20:Attribute -> U | Dict:0 | Dict:1 | Dict:0
+55:20:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+55:62:Attribute -> Const:int:45
+55:62:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+57:5:Name -> Class:builtins.property
+58:30:Name -> Class:builtins.str
+59:15:Attribute -> U | Dict:0 | Dict:1 | Dict:0
+59:15:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+61:5:Attribute -> Func:src.sentry.auth.authenticators.sms.SmsInterface.phone_number.setter
+61:5:Name -> Prop:src.sentry.auth.authenticators.sms.SmsInterface.phone_number
+62:34:Name -> Class:builtins.str
+63:8:Attribute -> U | Dict:0 | Dict:1 | Dict:0
+63:8:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+63:38:Name -> U
+65:32:Name -> U
+65:48:Name -> Class:src.sentry.auth.authenticators.base.ActivationMessageResult
+66:23:Attribute -> U | Dict:0 | Dict:1 | Dict:0
+66:23:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+67:11:Call -> ERR
+67:11:Name -> Func:builtins.len
+67:15:Name -> U
+68:39:Name -> U
+70:19:Call -> U
+70:19:Attribute -> BM:builtins.str.format
+70:34:Call -> ERR
+70:34:Name -> Func:builtins.len
+70:38:Name -> U
+70:64:Name -> U
+72:11:Call -> U
+72:11:Attribute -> BM:src.sentry.auth.authenticators.sms.SmsInterface.send_text
+72:11:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+72:34:Name -> U
+73:19:Call -> Inst:src.sentry.auth.authenticators.base.ActivationMessageResult
+73:19:Name -> Class:src.sentry.auth.authenticators.base.ActivationMessageResult
+74:16:Call -> U
+74:16:Name -> U
+78:57:Name -> U
+78:70:Attribute -> Const:int:45
+78:70:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+80:15:Call -> Inst:src.sentry.auth.authenticators.base.ActivationMessageResult
+80:15:Name -> Class:src.sentry.auth.authenticators.base.ActivationMessageResult
+81:12:Call -> U
+81:12:Name -> U
+88:36:Name -> U
+88:65:Name -> Class:builtins.bool
+88:82:Name -> Class:builtins.bool
+89:23:Call -> U
+89:23:Attribute -> U
+89:23:Call -> U
+89:23:Attribute -> BM:src.sentry.auth.authenticators.sms.SmsInterface.make_otp
+89:23:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+91:11:Name -> Const:bool:False | U
+92:18:Name -> U
+92:32:Name -> Class:builtins.str
+92:38:Call -> U
+92:38:Name -> U
+98:19:Call -> U
+98:19:Name -> U
+100:11:Name -> U
+101:22:Name -> U
+102:12:Name -> Dict:1
+102:24:Attribute -> U
+102:24:Name -> U
+104:11:Name -> U
+104:23:Attribute -> U
+104:23:Attribute -> U
+104:23:Name -> U
+105:22:Attribute -> U
+105:22:Attribute -> U
+105:22:Name -> U
+106:13:Attribute -> Const:NoneType:None | U
+106:13:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+107:22:Attribute -> U
+107:22:Attribute -> U
+107:22:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+111:23:Call -> U
+111:23:Name -> U
+111:44:Attribute -> U | BM:src.sentry.auth.authenticators.sms.SmsInterface.phone_number
+111:44:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+113:11:Call -> U
+113:11:Attribute -> U
+113:11:Name -> U
+114:19:Call -> Const:str:''
+114:19:Attribute -> BM:hashlib.md5.hexdigest
+114:19:Call -> Inst:hashlib.md5
+114:19:Name -> Class:hashlib.md5
+114:23:Call -> U
+114:23:Attribute -> U
+114:23:Name -> U
+118:18:Call -> ExcInst:src.sentry.auth.authenticators.sms.SMSRateLimitExceeded
+118:18:Name -> Class:src.sentry.auth.authenticators.sms.SMSRateLimitExceeded
+118:39:Name -> U
+118:53:Name -> U | Const:NoneType:None
+118:62:Call -> U
+118:62:Attribute -> U
+118:62:Attribute -> U
+118:62:Name -> U
+120:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+120:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+120:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+123:53:Name -> U
+123:22:Attribute -> U
+123:22:Name -> U
+124:27:Name -> U | Const:NoneType:None
+125:61:Attribute -> Const:NoneType:None | U
+125:61:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+125:36:Attribute -> U
+125:36:Attribute -> U
+125:36:Name -> Inst:src.sentry.auth.authenticators.sms.SmsInterface
+126:32:Name -> U
+130:15:Call -> U
+130:15:Name -> U
+130:24:Name -> U | Const:str:'Uninferable\n'
+130:31:Name -> Dict:1
+130:39:Name -> U

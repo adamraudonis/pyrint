@@ -1,0 +1,92 @@
+10:28:Name -> Class:tests.serializers.tests.SerializersTestBase
+10:49:Name -> Class:django.test.testcases.TestCase
+36:5:Name -> Class:builtins.staticmethod
+39:12:Call -> Inst:xml.dom.minidom.Document | U
+39:12:Attribute -> Func:xml.dom.minidom.parseString
+39:12:Name -> Module:xml.dom.minidom
+39:32:Name -> U
+40:15:Name -> Class:builtins.Exception
+45:5:Name -> Class:builtins.staticmethod
+48:14:Call -> Inst:xml.dom.minidom.Document | U
+48:14:Attribute -> Func:xml.dom.minidom.parseString
+48:14:Name -> Module:xml.dom.minidom
+48:34:Name -> U
+49:17:Call -> Inst:xml.dom.minicompat.NodeList | U
+49:17:Attribute -> BM:xml.dom.minidom.Document.getElementsByTagName | U
+49:17:Name -> Inst:xml.dom.minidom.Document | U
+50:21:Name -> Inst:xml.dom.minicompat.NodeList | U
+51:12:Call -> ERR
+51:12:Attribute -> BM:builtins.list.append
+51:12:Name -> List:0
+51:28:Call -> U
+51:28:Attribute -> U
+51:28:Name -> U
+52:15:Name -> List:0
+54:5:Name -> Class:builtins.staticmethod
+57:14:Call -> Inst:xml.dom.minidom.Document | U
+57:14:Attribute -> Func:xml.dom.minidom.parseString
+57:14:Name -> Module:xml.dom.minidom
+57:34:Name -> U
+58:17:Call -> Inst:xml.dom.minicompat.NodeList | U
+58:17:Attribute -> BM:xml.dom.minidom.Document.getElementsByTagName | U
+58:17:Name -> Inst:xml.dom.minidom.Document | U
+59:21:Name -> Inst:xml.dom.minicompat.NodeList | U
+60:15:Call -> U
+60:15:Attribute -> U
+60:15:Name -> U
+60:45:Name -> U
+62:29:Attribute -> U
+62:29:Name -> U
+63:20:Call -> ERR
+63:20:Attribute -> BM:builtins.list.append
+63:20:Name -> List:0
+63:32:Attribute -> U
+63:32:Name -> U
+64:16:Call -> ERR
+64:16:Attribute -> BM:builtins.list.append
+64:16:Name -> List:0
+64:32:Call -> Const:str:''
+64:32:Attribute -> BM:builtins.str.join
+64:40:Name -> List:0
+65:15:Name -> List:0
+72:8:Attribute -> Inst:tests.serializers.models.base.Article
+72:8:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+73:78:Attribute -> U
+73:78:Attribute -> Inst:tests.serializers.models.base.Article
+73:78:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+74:13:Call -> Gen:django.test.testcases.SimpleTestCase._assert_raises_or_warns_cm
+74:13:Attribute -> BM:django.test.testcases.SimpleTestCase.assertRaisesMessage
+74:13:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+74:38:Name -> Class:builtins.ValueError
+74:50:Name -> U
+75:12:Call -> U
+75:12:Attribute -> Func:django.core.serializers.serialize
+75:12:Name -> Module:django.core.serializers
+75:34:Attribute -> Const:str:'xml'
+75:34:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+75:57:Attribute -> Inst:tests.serializers.models.base.Article
+75:57:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+76:8:Attribute -> Inst:tests.serializers.models.base.Article
+76:8:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+77:8:Call -> Const:NoneType:None
+77:8:Attribute -> BM:unittest.case.TestCase.assertIn
+77:8:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+79:12:Call -> U
+79:12:Attribute -> Func:django.core.serializers.serialize
+79:12:Name -> Module:django.core.serializers
+79:34:Attribute -> Const:str:'xml'
+79:34:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+79:57:Attribute -> Inst:tests.serializers.models.base.Article
+79:57:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+93:13:Call -> Inst:unittest.case._AssertRaisesContext
+93:13:Attribute -> BM:unittest.case.TestCase.assertRaises
+93:13:Name -> Inst:tests.serializers.test_xml.XmlSerializerTestCase
+93:31:Name -> Class:django.core.serializers.xml_serializer.DTDForbidden
+94:12:Call -> ERR
+94:12:Name -> Func:builtins.next
+94:17:Call -> U
+94:17:Attribute -> Func:django.core.serializers.deserialize
+94:17:Name -> Module:django.core.serializers
+94:48:Name -> Const:str:'<?xml version="1.0" standalone="no"?><!
+98:4:Name -> Class:tests.serializers.tests.SerializersTransactionTestBase
+98:36:Name -> Class:django.test.testcases.TransactionTestCase

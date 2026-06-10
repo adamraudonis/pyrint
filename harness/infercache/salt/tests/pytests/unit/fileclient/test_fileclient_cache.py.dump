@@ -1,0 +1,943 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'tests.pytests.unit.fileclient.test_file | Const:str:'__main__'
+21:1:Call -> U
+21:1:Attribute -> U
+21:1:Name -> U
+21:23:Call -> Tuple:2
+21:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+23:11:Attribute -> U
+23:11:Name -> U
+31:12:Name -> Const:str:'base' | Const:str:'dev'
+31:16:Call -> U
+31:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+31:16:Attribute -> Module:posixpath | Module:ntpath
+31:16:Name -> Module:os
+31:29:Name -> U
+31:38:Name -> Const:str:'base' | Const:str:'dev'
+31:51:Call -> Tuple:2
+31:51:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+34:1:Attribute -> U
+34:1:Name -> U
+36:11:Call -> U
+36:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+36:11:Attribute -> Module:posixpath | Module:ntpath
+36:11:Name -> Module:os
+36:24:Name -> U
+39:1:Attribute -> U
+39:1:Name -> U
+41:11:Call -> U
+41:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+41:11:Attribute -> Module:posixpath | Module:ntpath
+41:11:Name -> Module:os
+41:24:Name -> U
+44:1:Attribute -> U
+44:1:Name -> U
+47:22:Call -> U
+47:22:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._get_file_roots
+47:38:Name -> U
+49:20:Name -> U
+54:1:Attribute -> U
+54:1:Name -> U
+56:12:Name -> Module:salt.fileclient
+56:37:Name -> U
+59:1:Call -> U
+59:1:Attribute -> U
+59:1:Name -> U
+73:12:Call -> Const:NoneType:None
+73:12:Attribute -> Func:os.makedirs
+73:12:Name -> Module:os
+73:24:Name -> U
+74:15:Name -> Class:builtins.OSError
+75:15:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+75:15:Name -> ExcInst:builtins.OSError
+75:28:Attribute -> Const:int:17
+75:28:Name -> Module:errno
+78:16:Call -> Const:NoneType:None | Const:NoneType:None
+78:16:Attribute -> Func:shutil.rmtree
+78:16:Name -> Module:shutil
+78:30:Name -> U
+79:16:Call -> Const:NoneType:None
+79:16:Attribute -> Func:os.makedirs
+79:16:Name -> Module:os
+79:28:Name -> U
+84:19:Call -> Tuple:2
+84:19:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+85:23:Call -> U
+85:23:Attribute -> Func:posixpath.join | Func:ntpath.join
+85:23:Attribute -> Module:posixpath | Module:ntpath
+85:23:Name -> Module:os
+85:36:Name -> U
+85:45:Name -> Const:str:'base' | Const:str:'dev'
+87:8:Call -> Const:NoneType:None
+87:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._setup._new_dir
+87:17:Name -> U
+89:15:Call -> U
+89:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+89:15:Attribute -> Module:posixpath | Module:ntpath
+89:15:Name -> Module:os
+89:28:Name -> U
+90:13:Call -> U
+90:13:Attribute -> Func:salt.utils.files.fopen
+90:13:Attribute -> Module:salt.utils.files
+90:13:Attribute -> Module:salt.utils
+90:13:Name -> Module:salt
+90:36:Name -> U
+91:12:Call -> U
+91:12:Attribute -> U
+91:12:Name -> U
+91:53:Name -> Const:str:'base' | Const:str:'dev'
+93:25:Call -> U
+93:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+93:25:Attribute -> Module:posixpath | Module:ntpath
+93:25:Name -> Module:os
+93:38:Name -> U
+93:52:Name -> Const:str:'subdir'
+94:8:Call -> Const:NoneType:None
+94:8:Attribute -> Func:os.makedirs
+94:8:Name -> Module:os
+94:20:Name -> U
+95:27:Call -> Tuple:3
+95:27:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._subdir_files
+96:19:Call -> U
+96:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+96:19:Attribute -> Module:posixpath | Module:ntpath
+96:19:Name -> Module:os
+96:32:Name -> U
+96:48:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+97:17:Call -> U
+97:17:Attribute -> Func:salt.utils.files.fopen
+97:17:Attribute -> Module:salt.utils.files
+97:17:Attribute -> Module:salt.utils
+97:17:Name -> Module:salt
+97:40:Name -> U
+98:16:Call -> U
+98:16:Attribute -> U
+98:16:Name -> U
+99:20:Call -> U
+99:20:Attribute -> BM:builtins.str.format
+100:24:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+100:37:Name -> Const:str:'subdir'
+100:45:Name -> Const:str:'base' | Const:str:'dev'
+105:4:Call -> Const:NoneType:None
+105:4:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._setup._new_dir
+105:13:Name -> U
+108:1:Call -> U
+108:1:Attribute -> U
+108:1:Attribute -> U
+108:1:Name -> U
+108:36:Name -> Const:str:'subdir'
+108:47:Name -> Const:str:'subdir'
+108:55:Attribute -> Const:str:'/'
+108:55:Name -> Module:os
+113:19:Call -> U
+113:19:Attribute -> U
+113:19:Name -> U
+114:4:Call -> U
+114:4:Attribute -> U
+114:4:Name -> U
+114:24:Name -> U
+116:9:Call -> U
+116:9:Attribute -> U
+116:9:Name -> U
+116:20:Attribute -> ERR
+116:20:Name -> Module:salt.fileclient
+116:41:Name -> U
+117:17:Call -> U
+117:17:Attribute -> Func:salt.fileclient.get_file_client
+117:17:Name -> Module:salt.fileclient
+117:44:Attribute -> ERR
+117:44:Name -> Module:salt.fileclient
+118:15:Call -> U
+118:15:Attribute -> U
+118:15:Name -> U
+119:22:Name -> U
+120:12:Name -> U
+124:27:Call -> Tuple:3
+124:27:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._subdir_files
+125:24:Call -> U
+125:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+125:24:Attribute -> Module:posixpath | Module:ntpath
+125:24:Name -> Module:os
+126:16:Attribute -> ERR
+126:16:Name -> Module:salt.fileclient
+128:16:Name -> U
+129:16:Name -> U
+130:16:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+132:19:Call -> ERR
+132:19:Attribute -> BM:builtins.str.endswith | BM:builtins.str.endswith | BM:builtins.str.endswith
+132:19:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+133:21:Call -> U
+133:21:Attribute -> Func:salt.utils.files.fopen
+133:21:Attribute -> Module:salt.utils.files
+133:21:Attribute -> Module:salt.utils
+133:21:Name -> Module:salt
+133:44:Name -> U
+134:30:Call -> U
+134:30:Attribute -> U
+134:30:Name -> U
+135:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+135:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+135:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+135:44:Name -> U
+136:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+136:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+136:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+136:42:Name -> U
+137:23:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+137:38:Name -> U
+138:23:Name -> Const:str:'subdir'
+138:33:Name -> U
+139:23:Name -> U
+139:34:Name -> U
+141:27:Call -> Const:bool:False | Const:bool:True | U
+141:27:Attribute -> Func:genericpath.exists | U
+141:27:Attribute -> Module:posixpath | Module:ntpath
+141:27:Name -> Module:os
+141:42:Name -> U
+148:19:Call -> U
+148:19:Attribute -> U
+148:19:Name -> U
+149:4:Call -> U
+149:4:Attribute -> U
+149:4:Name -> U
+149:24:Name -> U
+151:9:Call -> U
+151:9:Attribute -> U
+151:9:Name -> U
+151:20:Attribute -> ERR
+151:20:Name -> Module:salt.fileclient
+151:41:Name -> U
+152:17:Call -> U
+152:17:Attribute -> Func:salt.fileclient.get_file_client
+152:17:Name -> Module:salt.fileclient
+152:44:Attribute -> ERR
+152:44:Name -> Module:salt.fileclient
+153:23:Call -> Tuple:2
+153:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+155:12:Call -> Const:NoneType:None
+155:12:Attribute -> Func:os.makedirs
+155:12:Name -> Module:os
+155:24:Call -> U
+155:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+155:24:Attribute -> Module:posixpath | Module:ntpath
+155:24:Name -> Module:os
+155:37:Name -> U
+155:46:Name -> Const:str:'base' | Const:str:'dev'
+155:55:Name -> Const:str:'subdir'
+156:12:Call -> Const:NoneType:None
+156:12:Attribute -> Func:os.makedirs
+156:12:Name -> Module:os
+156:24:Call -> U
+156:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+156:24:Attribute -> Module:posixpath | Module:ntpath
+156:24:Name -> Module:os
+156:37:Name -> U
+156:46:Name -> Const:str:'base' | Const:str:'dev'
+156:55:Name -> Const:str:'subdir'
+157:12:Call -> Const:NoneType:None
+157:12:Attribute -> Func:os.makedirs
+157:12:Name -> Module:os
+158:16:Call -> U
+158:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+158:16:Attribute -> Module:posixpath | Module:ntpath
+158:16:Name -> Module:os
+159:20:Attribute -> ERR
+159:20:Name -> Module:salt.fileclient
+161:20:Name -> Const:str:'base' | Const:str:'dev'
+162:20:Name -> Const:str:'subdir'
+166:12:Call -> Const:NoneType:None
+166:12:Attribute -> Func:os.makedirs
+166:12:Name -> Module:os
+166:24:Call -> U
+166:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+166:24:Attribute -> Module:posixpath | Module:ntpath
+166:24:Name -> Module:os
+166:37:Name -> U
+166:46:Name -> Const:str:'base' | Const:str:'dev'
+167:19:Call -> U
+167:19:Attribute -> U
+167:19:Name -> U
+168:26:Name -> Const:str:'subdir'
+168:36:Name -> Const:str:'base' | Const:str:'dev'
+170:31:Call -> Tuple:3
+170:31:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._subdir_files
+171:28:Call -> U
+171:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+171:28:Attribute -> Module:posixpath | Module:ntpath
+171:28:Name -> Module:os
+172:20:Attribute -> ERR
+172:20:Name -> Module:salt.fileclient
+174:20:Name -> Const:str:'base' | Const:str:'dev'
+175:20:Name -> Const:str:'subdir'
+176:20:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+178:21:Call -> U
+178:21:Attribute -> Func:salt.utils.files.fopen
+178:21:Attribute -> Module:salt.utils.files
+178:21:Attribute -> Module:salt.utils
+178:21:Name -> Module:salt
+178:44:Name -> U
+179:30:Call -> U
+179:30:Attribute -> U
+179:30:Name -> U
+180:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+180:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+180:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+180:44:Name -> U
+181:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+181:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+181:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+181:42:Name -> U
+182:23:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+182:38:Name -> U
+183:23:Name -> Const:str:'subdir'
+183:33:Name -> U
+184:23:Name -> Const:str:'base' | Const:str:'dev'
+184:34:Name -> U
+185:19:Call -> Const:bool:False | Const:bool:True | U
+185:19:Attribute -> Func:genericpath.exists | U
+185:19:Attribute -> Module:posixpath | Module:ntpath
+185:19:Name -> Module:os
+186:16:Call -> U
+186:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+186:16:Attribute -> Module:posixpath | Module:ntpath
+186:16:Name -> Module:os
+187:20:Attribute -> ERR
+187:20:Name -> Module:salt.fileclient
+189:20:Name -> Const:str:'base' | Const:str:'dev'
+190:20:Name -> Const:str:'subdir'
+194:23:Call -> Const:bool:False | Const:bool:True | U
+194:23:Attribute -> Func:genericpath.exists | U
+194:23:Attribute -> Module:posixpath | Module:ntpath
+194:23:Name -> Module:os
+195:16:Call -> U
+195:16:Attribute -> Func:posixpath.join | Func:ntpath.join
+195:16:Attribute -> Module:posixpath | Module:ntpath
+195:16:Name -> Module:os
+196:20:Attribute -> ERR
+196:20:Name -> Module:salt.fileclient
+196:62:Name -> Const:str:'base' | Const:str:'dev'
+208:19:Call -> U
+208:19:Attribute -> U
+208:19:Name -> U
+209:4:Call -> U
+209:4:Attribute -> U
+209:4:Name -> U
+209:24:Name -> U
+210:19:Call -> U
+210:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+210:19:Attribute -> Module:posixpath | Module:ntpath
+210:19:Name -> Module:os
+210:32:Name -> U
+212:9:Call -> U
+212:9:Attribute -> U
+212:9:Name -> U
+212:20:Attribute -> ERR
+212:20:Name -> Module:salt.fileclient
+212:41:Name -> U
+213:17:Call -> U
+213:17:Attribute -> Func:salt.fileclient.get_file_client
+213:17:Name -> Module:salt.fileclient
+213:44:Attribute -> ERR
+213:44:Name -> Module:salt.fileclient
+214:23:Call -> Tuple:2
+214:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+215:19:Call -> U
+215:19:Attribute -> U
+215:19:Name -> U
+215:46:Name -> Const:str:'subdir'
+215:56:Name -> Const:str:'base' | Const:str:'dev'
+215:74:Name -> U
+216:31:Call -> Tuple:3
+216:31:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._subdir_files
+217:28:Call -> U
+217:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+217:28:Attribute -> Module:posixpath | Module:ntpath
+217:28:Name -> Module:os
+218:20:Name -> U
+218:43:Name -> Const:str:'base' | Const:str:'dev'
+218:52:Name -> Const:str:'subdir'
+218:60:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+227:21:Call -> U
+227:21:Attribute -> Func:salt.utils.files.fopen
+227:21:Attribute -> Module:salt.utils.files
+227:21:Attribute -> Module:salt.utils
+227:21:Name -> Module:salt
+227:44:Name -> U
+228:30:Call -> U
+228:30:Attribute -> U
+228:30:Name -> U
+229:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+229:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+229:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+229:44:Name -> U
+230:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+230:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+230:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+230:42:Name -> U
+231:23:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+231:38:Name -> U
+232:23:Name -> Const:str:'subdir'
+232:33:Name -> U
+233:23:Name -> Const:str:'base' | Const:str:'dev'
+233:34:Name -> U
+241:19:Call -> U
+241:19:Attribute -> U
+241:19:Name -> U
+242:4:Call -> U
+242:4:Attribute -> U
+242:4:Name -> U
+242:24:Name -> U
+245:9:Call -> U
+245:9:Attribute -> U
+245:9:Name -> U
+245:20:Attribute -> ERR
+245:20:Name -> Module:salt.fileclient
+245:41:Name -> U
+246:17:Call -> U
+246:17:Attribute -> Func:salt.fileclient.get_file_client
+246:17:Name -> Module:salt.fileclient
+246:44:Attribute -> ERR
+246:44:Name -> Module:salt.fileclient
+247:23:Call -> Tuple:2
+247:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+248:19:Call -> U
+248:19:Attribute -> U
+248:19:Name -> U
+248:46:Name -> Const:str:'subdir'
+248:56:Name -> Const:str:'base' | Const:str:'dev'
+248:74:Name -> Const:str:'foo'
+249:31:Call -> Tuple:3
+249:31:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._subdir_files
+250:28:Call -> U
+250:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+250:28:Attribute -> Module:posixpath | Module:ntpath
+250:28:Name -> Module:os
+251:20:Attribute -> ERR
+251:20:Name -> Module:salt.fileclient
+252:20:Name -> Const:str:'foo'
+254:20:Name -> Const:str:'base' | Const:str:'dev'
+255:20:Name -> Const:str:'subdir'
+256:20:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+265:21:Call -> U
+265:21:Attribute -> Func:salt.utils.files.fopen
+265:21:Attribute -> Module:salt.utils.files
+265:21:Attribute -> Module:salt.utils
+265:21:Name -> Module:salt
+265:44:Name -> U
+266:30:Call -> U
+266:30:Attribute -> U
+266:30:Name -> U
+267:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+267:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+267:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+267:44:Name -> U
+268:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+268:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+268:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+268:42:Name -> U
+269:23:Name -> Const:str:'foo.txt' | Const:str:'bar.txt' | Const:str:'baz.txt'
+269:38:Name -> U
+270:23:Name -> Const:str:'subdir'
+270:33:Name -> U
+271:23:Name -> Const:str:'base' | Const:str:'dev'
+271:34:Name -> U
+278:19:Call -> U
+278:19:Attribute -> U
+278:19:Name -> U
+279:4:Call -> U
+279:4:Attribute -> U
+279:4:Name -> U
+279:24:Name -> U
+281:9:Call -> U
+281:9:Attribute -> U
+281:9:Name -> U
+281:20:Attribute -> ERR
+281:20:Name -> Module:salt.fileclient
+281:41:Name -> U
+282:17:Call -> U
+282:17:Attribute -> Func:salt.fileclient.get_file_client
+282:17:Name -> Module:salt.fileclient
+282:44:Attribute -> ERR
+282:44:Name -> Module:salt.fileclient
+283:23:Call -> Tuple:2
+283:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+284:19:Call -> U
+284:19:Attribute -> U
+284:19:Name -> U
+284:55:Name -> Const:str:'base' | Const:str:'dev'
+285:24:Call -> U
+285:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+285:24:Attribute -> Module:posixpath | Module:ntpath
+285:24:Name -> Module:os
+286:16:Attribute -> ERR
+286:16:Name -> Module:salt.fileclient
+286:58:Name -> Const:str:'base' | Const:str:'dev'
+295:17:Call -> U
+295:17:Attribute -> Func:salt.utils.files.fopen
+295:17:Attribute -> Module:salt.utils.files
+295:17:Attribute -> Module:salt.utils
+295:17:Name -> Module:salt
+295:40:Name -> U
+296:26:Call -> U
+296:26:Attribute -> U
+296:26:Name -> U
+297:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+297:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+297:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+297:40:Name -> U
+298:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+298:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+298:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+298:38:Name -> U
+299:19:Name -> Const:str:'base' | Const:str:'dev'
+299:30:Name -> U
+306:19:Call -> U
+306:19:Attribute -> U
+306:19:Name -> U
+307:4:Call -> U
+307:4:Attribute -> U
+307:4:Name -> U
+307:24:Name -> U
+309:9:Call -> U
+309:9:Attribute -> U
+309:9:Name -> U
+309:20:Attribute -> ERR
+309:20:Name -> Module:salt.fileclient
+309:41:Name -> U
+310:17:Call -> U
+310:17:Attribute -> Func:salt.fileclient.get_file_client
+310:17:Name -> Module:salt.fileclient
+310:44:Attribute -> ERR
+310:44:Name -> Module:salt.fileclient
+311:45:Name -> Const:str:'subdir'
+312:23:Call -> Tuple:2
+312:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+313:19:Call -> U
+313:19:Attribute -> U
+313:19:Name -> U
+313:38:Name -> List:2
+313:45:Name -> Const:str:'base' | Const:str:'dev'
+314:22:Name -> List:2
+315:21:Name -> Const:str:'salt://foo.txt' | Const:str:'salt://subdir/bar.txt'
+316:28:Call -> U
+316:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+316:28:Attribute -> Module:posixpath | Module:ntpath
+316:28:Name -> Module:os
+317:20:Attribute -> ERR
+317:20:Name -> Module:salt.fileclient
+317:62:Name -> Const:str:'base' | Const:str:'dev'
+317:71:Name -> Const:str:'foo.txt' | Const:str:'subdir/bar.txt'
+319:21:Call -> U
+319:21:Attribute -> Func:salt.utils.files.fopen
+319:21:Attribute -> Module:salt.utils.files
+319:21:Attribute -> Module:salt.utils
+319:21:Name -> Module:salt
+319:44:Name -> U
+320:30:Call -> U
+320:30:Attribute -> U
+320:30:Name -> U
+321:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+321:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+321:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+321:44:Name -> U
+322:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+322:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+322:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+322:42:Name -> U
+323:23:Name -> Const:str:'base' | Const:str:'dev'
+323:34:Name -> U
+330:19:Call -> U
+330:19:Attribute -> U
+330:19:Name -> U
+331:4:Call -> U
+331:4:Attribute -> U
+331:4:Name -> U
+331:24:Name -> U
+333:9:Call -> U
+333:9:Attribute -> U
+333:9:Name -> U
+333:20:Attribute -> ERR
+333:20:Name -> Module:salt.fileclient
+333:41:Name -> U
+334:17:Call -> U
+334:17:Attribute -> Func:salt.fileclient.get_file_client
+334:17:Name -> Module:salt.fileclient
+334:44:Attribute -> ERR
+334:44:Name -> Module:salt.fileclient
+335:45:Name -> Const:str:'subdir'
+336:23:Call -> Tuple:2
+336:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+337:19:Call -> U
+337:19:Attribute -> U
+337:19:Name -> U
+337:38:Call -> Const:str:''
+337:38:Attribute -> BM:builtins.str.join
+337:47:Name -> List:2
+337:55:Name -> Const:str:'base' | Const:str:'dev'
+338:22:Name -> List:2
+339:21:Name -> Const:str:'salt://foo.txt' | Const:str:'salt://subdir/bar.txt'
+340:28:Call -> U
+340:28:Attribute -> Func:posixpath.join | Func:ntpath.join
+340:28:Attribute -> Module:posixpath | Module:ntpath
+340:28:Name -> Module:os
+341:20:Attribute -> ERR
+341:20:Name -> Module:salt.fileclient
+341:62:Name -> Const:str:'base' | Const:str:'dev'
+341:71:Name -> Const:str:'foo.txt' | Const:str:'subdir/bar.txt'
+343:21:Call -> U
+343:21:Attribute -> Func:salt.utils.files.fopen
+343:21:Attribute -> Module:salt.utils.files
+343:21:Attribute -> Module:salt.utils
+343:21:Name -> Module:salt
+343:44:Name -> U
+344:30:Call -> U
+344:30:Attribute -> U
+344:30:Name -> U
+345:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+345:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+345:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+345:44:Name -> U
+346:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+346:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+346:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+346:42:Name -> U
+347:23:Name -> Const:str:'base' | Const:str:'dev'
+347:34:Name -> U
+354:19:Call -> U
+354:19:Attribute -> U
+354:19:Name -> U
+355:4:Call -> U
+355:4:Attribute -> U
+355:4:Name -> U
+355:24:Name -> U
+357:9:Call -> U
+357:9:Attribute -> U
+357:9:Name -> U
+357:20:Attribute -> ERR
+357:20:Name -> Module:salt.fileclient
+357:41:Name -> U
+358:17:Call -> U
+358:17:Attribute -> Func:salt.fileclient.get_file_client
+358:17:Name -> Module:salt.fileclient
+358:44:Attribute -> ERR
+358:44:Name -> Module:salt.fileclient
+359:23:Call -> Tuple:2
+359:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+360:19:Call -> U
+360:19:Attribute -> U
+360:19:Name -> U
+360:47:Name -> Const:str:'base' | Const:str:'dev'
+361:41:Call -> Gen:os.walk
+361:41:Attribute -> Func:os.walk
+361:41:Name -> Module:os
+361:49:Call -> U
+361:49:Attribute -> Func:posixpath.join | Func:ntpath.join
+361:49:Attribute -> Module:posixpath | Module:ntpath
+361:49:Name -> Module:os
+361:62:Name -> U
+361:71:Name -> Const:str:'base' | Const:str:'dev'
+362:26:Name -> U
+363:38:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+363:38:Attribute -> Func:posixpath.relpath | Func:ntpath.relpath
+363:38:Attribute -> Module:posixpath | Module:ntpath
+363:38:Name -> Module:os
+364:24:Call -> U
+364:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+364:24:Attribute -> Module:posixpath | Module:ntpath
+364:24:Name -> Module:os
+364:37:Name -> U
+364:46:Name -> U
+364:51:Name -> U
+366:36:Call -> U
+366:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+366:36:Attribute -> Module:posixpath | Module:ntpath
+366:36:Name -> Module:os
+367:24:Attribute -> ERR
+367:24:Name -> Module:salt.fileclient
+367:66:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'.' | Const:str:'.'
+369:27:Call -> Const:bool:False | Const:bool:True | U
+369:27:Attribute -> Func:genericpath.exists | U
+369:27:Attribute -> Module:posixpath | Module:ntpath
+369:27:Name -> Module:os
+369:42:Name -> U
+370:25:Call -> U
+370:25:Attribute -> Func:salt.utils.files.fopen
+370:25:Attribute -> Module:salt.utils.files
+370:25:Attribute -> Module:salt.utils
+370:25:Name -> Module:salt
+370:48:Name -> U
+371:34:Call -> U
+371:34:Attribute -> U
+371:34:Name -> U
+372:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+372:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+372:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+372:48:Name -> U
+373:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+373:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+373:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+373:46:Name -> U
+374:27:Name -> Const:str:'base' | Const:str:'dev'
+374:38:Name -> U
+384:19:Call -> U
+384:19:Attribute -> U
+384:19:Name -> U
+385:4:Call -> U
+385:4:Attribute -> U
+385:4:Name -> U
+385:24:Name -> U
+386:19:Call -> U
+386:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+386:19:Attribute -> Module:posixpath | Module:ntpath
+386:19:Name -> Module:os
+386:32:Name -> U
+388:9:Call -> U
+388:9:Attribute -> U
+388:9:Name -> U
+388:20:Attribute -> ERR
+388:20:Name -> Module:salt.fileclient
+388:41:Name -> U
+389:17:Call -> U
+389:17:Attribute -> Func:salt.fileclient.get_file_client
+389:17:Name -> Module:salt.fileclient
+389:44:Attribute -> ERR
+389:44:Name -> Module:salt.fileclient
+390:23:Call -> Tuple:2
+390:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+391:19:Call -> U
+391:19:Attribute -> U
+391:19:Name -> U
+391:55:Name -> Const:str:'base' | Const:str:'dev'
+391:73:Name -> U
+392:24:Call -> U
+392:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+392:24:Attribute -> Module:posixpath | Module:ntpath
+392:24:Name -> Module:os
+392:37:Name -> U
+392:60:Name -> Const:str:'base' | Const:str:'dev'
+400:17:Call -> U
+400:17:Attribute -> Func:salt.utils.files.fopen
+400:17:Attribute -> Module:salt.utils.files
+400:17:Attribute -> Module:salt.utils
+400:17:Name -> Module:salt
+400:40:Name -> U
+401:26:Call -> U
+401:26:Attribute -> U
+401:26:Name -> U
+402:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+402:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+402:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+402:40:Name -> U
+403:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+403:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+403:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+403:38:Name -> U
+404:19:Name -> Const:str:'base' | Const:str:'dev'
+404:30:Name -> U
+412:19:Call -> U
+412:19:Attribute -> U
+412:19:Name -> U
+413:4:Call -> U
+413:4:Attribute -> U
+413:4:Name -> U
+413:24:Name -> U
+416:9:Call -> U
+416:9:Attribute -> U
+416:9:Name -> U
+416:20:Attribute -> ERR
+416:20:Name -> Module:salt.fileclient
+416:41:Name -> U
+417:17:Call -> U
+417:17:Attribute -> Func:salt.fileclient.get_file_client
+417:17:Name -> Module:salt.fileclient
+417:44:Attribute -> ERR
+417:44:Name -> Module:salt.fileclient
+418:23:Call -> Tuple:2
+418:23:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache._saltenvs
+419:19:Call -> U
+419:19:Attribute -> U
+419:19:Name -> U
+419:55:Name -> Const:str:'base' | Const:str:'dev'
+419:73:Name -> Const:str:'foo'
+420:24:Call -> U
+420:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+420:24:Attribute -> Module:posixpath | Module:ntpath
+420:24:Name -> Module:os
+421:16:Attribute -> ERR
+421:16:Name -> Module:salt.fileclient
+422:16:Name -> Const:str:'foo'
+424:16:Name -> Const:str:'base' | Const:str:'dev'
+434:17:Call -> U
+434:17:Attribute -> Func:salt.utils.files.fopen
+434:17:Attribute -> Module:salt.utils.files
+434:17:Attribute -> Module:salt.utils
+434:17:Name -> Module:salt
+434:40:Name -> U
+435:26:Call -> U
+435:26:Attribute -> U
+435:26:Name -> U
+436:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+436:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+436:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+436:40:Name -> U
+437:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+437:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+437:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+437:38:Name -> U
+438:19:Name -> Const:str:'base' | Const:str:'dev'
+438:30:Name -> U
+445:19:Call -> U
+445:19:Attribute -> U
+445:19:Name -> U
+446:4:Call -> U
+446:4:Attribute -> U
+446:4:Name -> U
+446:24:Name -> U
+449:15:Name -> U
+452:15:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+452:15:Attribute -> Func:salt.utils.path.join
+452:15:Attribute -> Module:salt.utils.path
+452:15:Attribute -> Module:salt.utils
+452:15:Name -> Module:salt
+453:12:Name -> U
+453:53:Name -> Const:str:'base' | U
+453:62:Name -> Const:str:'foo.com/bar.txt'
+457:15:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+457:15:Attribute -> Func:salt.utils.path.join
+457:15:Attribute -> Module:salt.utils.path
+457:15:Attribute -> Module:salt.utils
+457:15:Name -> Module:salt
+457:36:Name -> U
+457:71:Name -> Const:str:'base' | U
+457:80:Name -> Const:str:'foo.com/bar.txt'
+460:15:Name -> U
+460:22:Name -> U
+460:35:Name -> U
+460:44:Name -> U
+462:9:Call -> U
+462:9:Attribute -> U
+462:9:Name -> U
+462:20:Attribute -> ERR
+462:20:Name -> Module:salt.fileclient
+462:41:Name -> U
+463:17:Call -> U
+463:17:Attribute -> Func:salt.fileclient.get_file_client
+463:17:Name -> Module:salt.fileclient
+463:44:Attribute -> ERR
+463:44:Name -> Module:salt.fileclient
+465:8:Call -> Const:NoneType:None
+465:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._check
+465:15:Call -> U
+465:15:Attribute -> U
+465:15:Name -> U
+465:44:Name -> Const:str:'foo.com/bar.txt'
+465:56:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+465:56:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._external
+467:8:Call -> Const:NoneType:None
+467:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._check
+467:15:Call -> U
+467:15:Attribute -> U
+467:15:Name -> U
+467:44:Name -> Const:str:'foo.com/bar.txt'
+467:63:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+467:63:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._external
+469:8:Call -> Const:NoneType:None
+469:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._check
+469:15:Call -> U
+469:15:Attribute -> U
+469:15:Name -> U
+469:43:Name -> Const:str:'foo.com/bar.txt'
+469:55:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+469:55:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._salt
+471:8:Call -> Const:NoneType:None
+471:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._check
+471:15:Call -> U
+471:15:Attribute -> U
+471:15:Name -> U
+471:43:Name -> Const:str:'foo.com/bar.txt'
+471:62:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+471:62:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._salt
+473:8:Call -> Const:NoneType:None
+473:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._check
+473:15:Call -> U
+473:15:Attribute -> U
+473:15:Name -> U
+473:43:Name -> Const:str:'foo.com/bar.txt'
+473:67:Call -> Const:str:'' | Const:bytes:b'.' | Const:str:'.' | U
+473:67:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._salt
+475:8:Call -> Const:NoneType:None
+475:8:Name -> Func:tests.pytests.unit.fileclient.test_fileclient_cache.test_cache_dest._check
+475:15:Call -> U
+475:15:Attribute -> U
+475:15:Name -> U
+482:19:Call -> U
+482:19:Attribute -> U
+482:19:Name -> U
+483:4:Call -> U
+483:4:Attribute -> U
+483:4:Name -> U
+483:24:Name -> U
+485:9:Call -> U
+485:9:Attribute -> U
+485:9:Name -> U
+485:20:Attribute -> ERR
+485:20:Name -> Module:salt.fileclient
+485:41:Name -> U
+486:17:Call -> U
+486:17:Attribute -> Func:salt.fileclient.get_file_client
+486:17:Name -> Module:salt.fileclient
+486:44:Attribute -> ERR
+486:44:Name -> Module:salt.fileclient
+488:8:Call -> U
+488:8:Attribute -> U
+488:8:Name -> U
+488:26:Name -> Const:str:'salt://foo.txt?saltenv=dev'
+489:15:Call -> U
+489:15:Attribute -> U
+489:15:Name -> U
+489:32:Name -> Const:str:'salt://foo.txt?saltenv=dev'
+496:19:Call -> U
+496:19:Attribute -> U
+496:19:Name -> U
+497:4:Call -> U
+497:4:Attribute -> U
+497:4:Name -> U
+497:24:Name -> U
+499:9:Call -> U
+499:9:Attribute -> U
+499:9:Name -> U
+499:20:Attribute -> ERR
+499:20:Name -> Module:salt.fileclient
+499:41:Name -> U
+500:17:Call -> U
+500:17:Attribute -> Func:salt.fileclient.get_file_client
+500:17:Name -> Module:salt.fileclient
+500:44:Attribute -> ERR
+500:44:Name -> Module:salt.fileclient
+501:21:Call -> U
+501:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+501:21:Attribute -> Module:posixpath | Module:ntpath
+501:21:Name -> Module:os
+502:12:Name -> U
+504:8:Call -> Const:NoneType:None
+504:8:Attribute -> Func:os.makedirs
+504:8:Name -> Module:os
+504:20:Call -> U
+504:20:Attribute -> Func:posixpath.join | Func:ntpath.join
+504:20:Attribute -> Module:posixpath | Module:ntpath
+504:20:Name -> Module:os
+504:33:Name -> U
+505:13:Call -> U
+505:13:Attribute -> Func:salt.utils.files.fopen
+505:13:Attribute -> Module:salt.utils.files
+505:13:Attribute -> Module:salt.utils
+505:13:Name -> Module:salt
+505:36:Name -> U
+506:12:Call -> U
+506:12:Attribute -> U
+506:12:Name -> U
+507:15:Call -> U
+507:15:Attribute -> U
+507:15:Name -> U

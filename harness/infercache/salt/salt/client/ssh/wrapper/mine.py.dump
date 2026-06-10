@@ -1,0 +1,122 @@
+18:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+18:6:Attribute -> Func:logging.getLogger
+18:6:Name -> Module:logging
+18:24:Name -> Const:str:'salt.client.ssh.wrapper.mine' | Const:str:'__main__'
+72:7:Name -> Const:bool:False | U
+78:22:Name -> ERR
+82:27:Name -> U
+83:25:Name -> U
+84:23:Call -> U
+84:23:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+84:23:Attribute -> Module:posixpath | Module:ntpath
+84:23:Name -> Module:os
+84:39:Name -> U
+85:31:Call -> U
+85:31:Attribute -> Func:posixpath.join | Func:ntpath.join
+85:31:Attribute -> Module:posixpath | Module:ntpath
+85:31:Name -> Module:os
+85:44:Name -> U
+88:12:Name -> U
+88:38:Name -> U
+90:20:Call -> Inst:salt.daemons.masterapi.RemoteFuncs
+90:20:Attribute -> Class:salt.daemons.masterapi.RemoteFuncs
+90:20:Attribute -> Module:salt.daemons.masterapi
+90:20:Attribute -> Module:salt.daemons
+90:20:Name -> Module:salt
+90:55:Name -> U
+92:18:Name -> ERR
+93:19:Name -> U
+94:19:Name -> U
+95:24:Name -> Const:str:'glob' | U
+97:14:Call -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | Dict:0
+97:14:Attribute -> BM:salt.daemons.masterapi.RemoteFuncs._mine_get
+97:14:Name -> Inst:salt.daemons.masterapi.RemoteFuncs
+97:34:Name -> Dict:4
+98:8:Call -> ERR
+98:8:Attribute -> BM:builtins.dict.update
+98:8:Name -> Dict:0
+98:20:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | Dict:0
+100:7:Name -> Const:bool:True | U
+102:15:Call -> U
+102:15:Attribute -> Func:copy.deepcopy
+102:15:Name -> Module:copy
+102:29:Name -> ERR
+103:18:Call -> U
+103:18:Attribute -> Func:copy.deepcopy
+103:18:Name -> Module:copy
+103:32:Name -> ERR
+104:8:Call -> U
+104:8:Attribute -> U
+104:8:Name -> U
+104:20:Name -> U
+105:11:Name -> Const:str:'flat' | U
+106:12:Name -> U
+106:29:Name -> Const:str:'flat' | U
+107:8:Name -> U
+107:24:Name -> U
+108:8:Name -> U
+108:41:Name -> Const:str:'glob' | U
+109:8:Name -> U
+109:22:Name -> U
+110:8:Name -> U
+113:14:Call -> Inst:salt.client.ssh.SSH
+113:14:Attribute -> Class:salt.client.ssh.SSH
+113:14:Attribute -> Module:salt.client.ssh
+113:14:Attribute -> Module:salt.client
+113:14:Name -> Module:salt
+113:34:Name -> U
+117:19:Call -> Gen:salt.client.ssh.SSH.run_iter
+117:19:Attribute -> BM:salt.client.ssh.SSH.run_iter
+117:19:Name -> Inst:salt.client.ssh.SSH
+118:12:Call -> ERR
+118:12:Attribute -> BM:builtins.dict.update
+118:12:Name -> Dict:0
+118:25:Name -> U
+120:26:Call -> DictItems
+120:26:Attribute -> BM:builtins.dict.items
+120:26:Name -> Dict:0
+121:19:Call -> ERR
+121:19:Name -> Func:builtins.isinstance
+121:30:Name -> U
+121:36:Name -> Class:builtins.dict
+122:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+122:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+122:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+125:20:Name -> U
+126:20:Name -> U
+127:20:Name -> U
+129:29:Name -> U
+130:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+130:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+130:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+133:20:Name -> U
+134:20:Name -> U
+135:20:Name -> U
+137:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+137:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+137:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+137:44:Call -> U
+137:44:Attribute -> Func:salt.utils.json.dumps
+137:44:Attribute -> Module:salt.utils.json
+137:44:Attribute -> Module:salt.utils
+137:44:Name -> Module:salt
+137:66:Name -> U
+138:33:Name -> U
+139:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+139:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+139:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+142:20:Name -> U
+143:20:Name -> U
+145:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+145:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+145:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+145:44:Call -> U
+145:44:Attribute -> Func:salt.utils.json.dumps
+145:44:Attribute -> Module:salt.utils.json
+145:44:Attribute -> Module:salt.utils
+145:44:Name -> Module:salt
+145:66:Name -> U
+147:16:Name -> Dict:0
+147:21:Name -> U
+147:29:Name -> U
+148:11:Name -> Dict:0

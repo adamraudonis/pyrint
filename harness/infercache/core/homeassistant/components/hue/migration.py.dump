@@ -1,0 +1,312 @@
+23:9:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+23:9:Attribute -> Func:logging.getLogger
+23:9:Name -> Module:logging
+23:27:Name -> Const:str:'homeassistant.components.hue.migration' | Const:str:'__main__'
+26:32:Attribute -> U
+26:32:Name -> U
+26:59:Name -> U
+28:11:Attribute -> U
+28:11:Name -> U
+28:22:Name -> Const:str:'host'
+31:7:Name -> Const:str:'username'
+31:24:Attribute -> U
+31:24:Name -> U
+32:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+32:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+32:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+32:50:Name -> Const:str:'username'
+32:65:Name -> Const:str:'api_key'
+33:15:Call -> Inst:builtins.dict
+33:15:Name -> Class:builtins.dict
+33:20:Attribute -> U
+33:20:Name -> U
+34:8:Name -> Inst:builtins.dict
+34:13:Name -> Const:str:'api_key'
+34:29:Call -> ERR
+34:29:Attribute -> BM:builtins.dict.pop
+34:29:Name -> Inst:builtins.dict
+34:38:Name -> Const:str:'username'
+35:8:Call -> U
+35:8:Attribute -> U
+35:8:Attribute -> U
+35:8:Name -> U
+35:47:Name -> U
+35:59:Name -> Inst:builtins.dict
+37:28:Call -> U
+37:28:Attribute -> U
+37:28:Attribute -> U
+37:28:Name -> U
+37:43:Name -> Const:str:'api_version'
+40:21:Call -> U
+40:21:Attribute -> Func:homeassistant.helpers.aiohttp_client.async_get_clientsession
+40:21:Name -> Module:homeassistant.helpers.aiohttp_client
+40:60:Name -> U
+41:17:Call -> U
+41:17:Name -> U
+41:30:Name -> U
+41:36:Name -> U
+45:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+45:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+45:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+47:12:Name -> U
+48:12:Name -> Const:int:2 | Const:int:1
+49:12:Name -> U
+55:11:Name -> U
+55:37:Name -> Const:int:2 | Const:int:1
+57:18:Call -> Const:NoneType:None
+57:18:Name -> Func:homeassistant.components.hue.migration.handle_v2_migration
+57:38:Name -> U
+57:44:Name -> U
+61:12:Name -> Const:str:'api_version'
+61:36:Attribute -> U
+61:36:Name -> U
+62:15:Name -> U
+62:35:Name -> Const:int:2 | Const:int:1
+64:19:Call -> Inst:builtins.dict
+64:19:Name -> Class:builtins.dict
+64:24:Attribute -> U
+64:24:Name -> U
+65:12:Name -> Inst:builtins.dict
+65:17:Name -> Const:str:'api_version'
+65:37:Name -> Const:int:2 | Const:int:1
+66:12:Call -> U
+66:12:Attribute -> U
+66:12:Attribute -> U
+66:12:Name -> U
+66:51:Name -> U
+66:63:Name -> Inst:builtins.dict
+69:36:Attribute -> U
+69:36:Name -> U
+69:63:Name -> U
+71:11:Attribute -> U
+71:11:Name -> U
+71:22:Name -> Const:str:'host'
+72:14:Attribute -> U
+72:14:Name -> U
+72:25:Name -> Const:str:'api_key'
+73:14:Call -> U
+73:14:Attribute -> U
+73:14:Name -> U
+73:27:Name -> U
+74:14:Call -> U
+74:14:Attribute -> U
+74:14:Name -> U
+74:27:Name -> U
+75:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+75:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+75:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+81:20:Call -> U
+81:20:Attribute -> U
+81:20:Name -> U
+81:54:Name -> U
+81:63:Attribute -> U
+81:63:Name -> U
+82:27:Attribute -> U
+82:27:Name -> U
+83:15:Name -> U
+83:25:Name -> Const:str:'hue'
+85:29:Call -> U
+85:29:Attribute -> U
+85:29:Name -> U
+86:12:Name -> Dict:0
+86:20:Name -> U
+86:38:Attribute -> U
+86:38:Name -> U
+89:15:Call -> U
+89:15:Name -> U
+89:27:Name -> U
+89:33:Name -> U
+91:12:Attribute -> Const:str:'battery'
+91:12:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.BATTERY
+91:12:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+91:45:Attribute -> U
+91:45:Name -> U
+92:12:Attribute -> Const:str:'motion'
+92:12:Attribute -> Inst:homeassistant.components.binary_sensor.BinarySensorDeviceClass.MOTION
+92:12:Name -> Class:homeassistant.components.binary_sensor.BinarySensorDeviceClass
+92:50:Attribute -> U
+92:50:Name -> U
+93:12:Attribute -> Const:str:'illuminance'
+93:12:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.ILLUMINANCE
+93:12:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+93:49:Attribute -> U
+93:49:Name -> U
+94:12:Attribute -> Const:str:'temperature'
+94:12:Attribute -> Inst:homeassistant.components.sensor.const.SensorDeviceClass.TEMPERATURE
+94:12:Name -> Class:homeassistant.components.sensor.const.SensorDeviceClass
+94:49:Attribute -> U
+94:49:Name -> U
+98:23:Attribute -> U
+98:23:Name -> U
+99:21:Call -> U
+99:21:Attribute -> U
+99:21:Attribute -> U
+99:21:Name -> U
+99:57:Attribute -> U
+99:57:Name -> U
+100:19:Name -> U
+100:33:Attribute -> U
+100:33:Name -> U
+105:15:Attribute -> U
+105:15:Attribute -> U
+105:15:Name -> U
+105:57:Attribute -> U
+105:57:Name -> U
+106:30:Call -> ERR
+106:30:Attribute -> BM:builtins.dict.get
+106:30:Name -> Dict:0
+106:42:Call -> U
+106:42:Attribute -> U
+106:42:Attribute -> U
+106:42:Attribute -> U
+106:42:Name -> U
+108:30:Call -> ERR
+108:30:Attribute -> BM:builtins.dict.get
+108:30:Name -> Dict:0
+108:42:Attribute -> U
+108:42:Name -> U
+109:15:Name -> U
+111:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+111:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+111:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+116:20:Attribute -> U
+116:20:Attribute -> U
+116:20:Name -> U
+117:20:Attribute -> U
+117:20:Name -> U
+120:12:Call -> U
+120:12:Attribute -> U
+120:12:Name -> U
+121:16:Name -> U
+121:47:Name -> Const:str:'hue'
+121:55:Attribute -> U
+121:55:Name -> U
+123:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+123:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+123:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+123:51:Attribute -> U
+123:51:Attribute -> U
+123:51:Name -> U
+123:74:Name -> U
+126:23:Call -> U
+126:23:Attribute -> U
+126:23:Name -> U
+126:51:Name -> U
+126:60:Name -> U
+127:19:Call -> U
+127:19:Attribute -> U
+127:19:Attribute -> U
+127:19:Name -> U
+130:36:Call -> ERR
+130:36:Name -> Func:builtins.next
+130:41:Call -> ERR
+130:41:Name -> Func:builtins.iter
+130:46:Attribute -> U
+130:46:Name -> U
+133:40:Call -> ERR
+133:40:Attribute -> BM:builtins.dict.get
+133:40:Name -> Dict:4
+134:24:Attribute -> U
+134:24:Name -> U
+136:36:Call -> ERR
+136:36:Name -> Func:builtins.next
+138:28:Attribute -> U
+138:28:Name -> U
+139:42:Call -> U
+139:42:Attribute -> U
+139:42:Attribute -> U
+139:42:Name -> U
+139:66:Attribute -> U
+139:66:Name -> U
+140:31:Attribute -> U
+140:31:Name -> U
+140:46:Name -> U
+145:19:Name -> U
+147:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+147:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+147:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+152:24:Attribute -> U
+152:24:Name -> U
+157:20:Call -> U
+157:20:Attribute -> U
+157:20:Name -> U
+158:24:Attribute -> U
+158:24:Name -> U
+158:53:Name -> U
+160:23:Name -> Class:builtins.ValueError
+165:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+165:20:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+165:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+167:24:Attribute -> U
+167:24:Name -> U
+170:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+170:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+170:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+172:24:Attribute -> U
+172:24:Name -> U
+173:24:Attribute -> U
+173:24:Name -> U
+174:24:Name -> U
+178:19:Call -> U
+178:19:Attribute -> U
+178:19:Name -> U
+178:53:Name -> U
+178:62:Attribute -> U
+178:62:Name -> U
+179:15:Attribute -> U
+179:15:Name -> U
+181:22:Attribute -> U
+181:22:Name -> U
+183:28:Call -> U
+183:28:Attribute -> U
+183:28:Attribute -> U
+183:28:Name -> U
+183:43:Attribute -> U
+183:43:Name -> U
+186:35:Attribute -> U
+186:35:Name -> U
+187:28:Call -> U
+187:28:Attribute -> U
+187:28:Attribute -> U
+187:28:Attribute -> U
+187:28:Name -> U
+188:20:Name -> Const:str:'/groups/Uninferable'
+189:21:Call -> U
+189:21:Attribute -> U
+189:21:Attribute -> U
+189:21:Attribute -> U
+189:21:Name -> U
+189:50:Name -> Const:str:'/groups/Uninferable'
+190:15:Name -> U
+190:36:Attribute -> U
+190:36:Name -> U
+192:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+192:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+192:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+194:20:Attribute -> U
+194:20:Name -> U
+197:28:Attribute -> U
+197:28:Name -> U
+198:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+198:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+198:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+200:16:Attribute -> U
+200:16:Name -> U
+201:16:Attribute -> U
+201:16:Name -> U
+202:16:Name -> U
+205:16:Call -> U
+205:16:Attribute -> U
+205:16:Name -> U
+205:44:Attribute -> U
+205:44:Name -> U
+205:73:Name -> U
+206:19:Name -> Class:builtins.ValueError
+211:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+211:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+211:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+213:20:Attribute -> U
+213:20:Name -> U
+215:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+215:4:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+215:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger

@@ -1,0 +1,189 @@
+12:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+12:6:Attribute -> Func:logging.getLogger
+12:6:Name -> Module:logging
+12:24:Name -> Const:str:'tests.pytests.unit.modules.file.test_fi | Const:str:'__main__'
+15:1:Attribute -> U
+15:1:Name -> U
+18:8:Name -> Module:salt.modules.file
+25:1:Attribute -> U
+25:1:Name -> U
+27:15:Call -> Const:str:''
+27:15:Name -> Class:builtins.str
+27:19:Name -> U
+29:9:Call -> U
+29:9:Attribute -> Func:salt.utils.files.fopen
+29:9:Attribute -> Module:salt.utils.files
+29:9:Attribute -> Module:salt.utils
+29:9:Name -> Module:salt
+29:32:Name -> Const:str:''
+30:8:Call -> U
+30:8:Attribute -> U
+30:8:Name -> U
+31:4:Call -> ERR
+31:4:Attribute -> Func:posix.chmod
+31:4:Name -> Module:os
+31:13:Name -> Const:str:''
+33:10:Name -> Const:str:''
+35:4:Call -> ERR
+35:4:Attribute -> Func:posix.remove
+35:4:Name -> Module:os
+35:14:Name -> Const:str:''
+38:1:Attribute -> U
+38:1:Name -> U
+40:15:Call -> Const:str:''
+40:15:Name -> Class:builtins.str
+40:19:Name -> U
+41:4:Call -> ERR
+41:4:Attribute -> Func:posix.symlink
+41:4:Name -> Module:os
+41:15:Name -> U
+41:22:Name -> Const:str:''
+43:10:Name -> Const:str:''
+45:4:Call -> ERR
+45:4:Attribute -> Func:posix.remove
+45:4:Name -> Module:os
+45:14:Name -> Const:str:''
+49:7:Call -> U
+49:7:Attribute -> Func:salt.utils.platform.is_linux
+49:7:Attribute -> Module:salt.utils.platform
+49:7:Attribute -> Module:salt.utils
+49:7:Name -> Module:salt
+54:1:Call -> U
+54:1:Attribute -> U
+54:1:Attribute -> U
+54:1:Name -> U
+56:11:Call -> U
+56:11:Attribute -> Func:getpass.getuser
+56:11:Name -> Module:getpass
+57:13:Call -> Const:str:'0777' | Const:str:'0755'
+57:13:Name -> Func:tests.pytests.unit.modules.file.test_file_check.get_link_perms
+60:10:Call -> Tuple:2 | Dict:0 | Tuple:2
+60:10:Attribute -> Func:salt.modules.file.check_file_meta
+60:10:Name -> Module:salt.modules.file
+61:8:Name -> U
+61:16:Name -> U
+61:35:Name -> U
+61:47:Name -> Const:str:'0777' | Const:str:'0755'
+63:11:Name -> Tuple:2 | Dict:0 | Tuple:2
+65:10:Call -> Tuple:2 | Dict:0 | Tuple:2
+65:10:Attribute -> Func:salt.modules.file.check_file_meta
+65:10:Name -> Module:salt.modules.file
+66:8:Name -> U
+66:16:Name -> U
+66:35:Name -> U
+68:11:Name -> Tuple:2 | Dict:0 | Tuple:2
+71:10:Call -> Tuple:2 | Dict:0 | Tuple:2
+71:10:Attribute -> Func:salt.modules.file.check_file_meta
+71:10:Name -> Module:salt.modules.file
+72:8:Name -> U
+72:16:Name -> U
+72:35:Name -> U
+74:11:Name -> Tuple:2 | Dict:0 | Tuple:2
+77:1:Call -> U
+77:1:Attribute -> U
+77:1:Attribute -> U
+77:1:Name -> U
+79:11:Call -> U
+79:11:Attribute -> Func:getpass.getuser
+79:11:Name -> Module:getpass
+80:13:Call -> Const:str:'0777' | Const:str:'0755'
+80:13:Name -> Func:tests.pytests.unit.modules.file.test_file_check.get_link_perms
+84:19:Name -> U
+87:20:Call -> Tuple:2 | Tuple:2 | Tuple:2
+87:20:Attribute -> Func:salt.modules.file.check_managed
+87:20:Name -> Module:salt.modules.file
+88:8:Name -> U
+88:16:Name -> U
+88:35:Name -> U
+88:47:Name -> Const:str:'0777' | Const:str:'0755'
+90:11:Name -> Const:bool:False | Const:NoneType:None | Const:bool:True
+91:11:Name -> Const:str:'Local file source  does not exist' | Const:str:'Local file source Uninferable does not  | Const:str:'Local file source  does not exist' | Const:str:'Local file source Uninferable does not  | U
+91:35:Name -> U
+93:20:Call -> Tuple:2 | Tuple:2 | Tuple:2
+93:20:Attribute -> Func:salt.modules.file.check_managed
+93:20:Name -> Module:salt.modules.file
+94:8:Name -> U
+94:16:Name -> U
+94:35:Name -> U
+96:11:Name -> Const:bool:False | Const:NoneType:None | Const:bool:True
+97:11:Name -> Const:str:'Local file source  does not exist' | Const:str:'Local file source Uninferable does not  | Const:str:'Local file source  does not exist' | Const:str:'Local file source Uninferable does not  | Const:str:"Source file Uninferable not found in sa | U
+100:20:Call -> Tuple:2 | Tuple:2 | Tuple:2
+100:20:Attribute -> Func:salt.modules.file.check_managed
+100:20:Name -> Module:salt.modules.file
+101:8:Name -> U
+102:8:Name -> U
+105:8:Name -> U
+115:11:Name -> Const:bool:False | Const:NoneType:None | Const:bool:True
+116:11:Name -> Const:str:'Local file source  does not exist' | Const:str:'Local file source Uninferable does not  | Const:str:'Local file source  does not exist' | Const:str:'Local file source Uninferable does not  | Const:str:"Source file Uninferable not found in sa | U
+116:35:Name -> U
+119:1:Call -> U
+119:1:Attribute -> U
+119:1:Attribute -> U
+119:1:Name -> U
+121:11:Call -> U
+121:11:Attribute -> Func:getpass.getuser
+121:11:Name -> Module:getpass
+122:13:Call -> Const:str:'0777' | Const:str:'0755'
+122:13:Name -> Func:tests.pytests.unit.modules.file.test_file_check.get_link_perms
+125:10:Call -> Tuple:2 | Tuple:2 | Dict:0 | Tuple:2
+125:10:Attribute -> Func:salt.modules.file.check_managed_changes
+125:10:Name -> Module:salt.modules.file
+126:8:Name -> U
+126:16:Name -> U
+126:35:Name -> U
+126:47:Name -> Const:str:'0777' | Const:str:'0755'
+128:11:Name -> Tuple:2 | Tuple:2 | Dict:0 | Tuple:2
+130:10:Call -> Tuple:2 | Tuple:2 | Dict:0 | Tuple:2
+130:10:Attribute -> Func:salt.modules.file.check_managed_changes
+130:10:Name -> Module:salt.modules.file
+131:8:Name -> U
+131:16:Name -> U
+131:35:Name -> U
+133:11:Name -> Tuple:2 | Tuple:2 | Dict:0 | Tuple:2
+136:10:Call -> Tuple:2 | Tuple:2 | Dict:0 | Tuple:2
+136:10:Attribute -> Func:salt.modules.file.check_managed_changes
+136:10:Name -> Module:salt.modules.file
+137:8:Name -> U
+138:8:Name -> U
+141:8:Name -> U
+151:11:Name -> Tuple:2 | Tuple:2 | Dict:0 | Tuple:2
+154:1:Call -> U
+154:1:Attribute -> U
+154:1:Attribute -> U
+154:1:Name -> U
+155:1:Call -> U
+155:1:Attribute -> U
+155:1:Attribute -> U
+155:1:Name -> U
+182:9:Call -> U
+182:9:Name -> U
+182:33:Call -> U
+182:33:Name -> U
+192:22:Call -> U
+192:22:Name -> U
+194:12:Call -> U
+194:12:Name -> U
+194:30:Name -> Dict:5
+200:24:Call -> U
+200:24:Attribute -> U
+200:24:Name -> U
+201:16:Call -> ERR
+201:16:Attribute -> BM:builtins.dict.update
+201:16:Name -> Dict:5
+201:33:Name -> U
+201:36:Name -> U
+203:22:Call -> U
+203:22:Name -> U
+205:12:Call -> U
+205:12:Name -> U
+205:29:Name -> Func:tests.pytests.unit.modules.file.test_file_check.test_check_perms_user_group_name_and_id.fake_chown
+208:13:Name -> U
+208:26:Name -> U
+209:28:Call -> Tuple:2
+209:28:Attribute -> Func:salt.modules.file.check_perms
+209:28:Name -> Module:salt.modules.file
+210:21:Name -> Const:str:'/path/to/fnord'
+212:21:Name -> U
+213:22:Name -> U
+217:19:Name -> U | Dict:4
+217:37:Name -> U

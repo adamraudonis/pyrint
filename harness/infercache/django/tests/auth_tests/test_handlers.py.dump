@@ -1,0 +1,115 @@
+13:29:Name -> Class:django.test.testcases.TransactionTestCase
+29:8:Call -> U
+29:8:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+29:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+29:8:Name -> Class:django.contrib.auth.models.User
+32:8:Call -> Const:NoneType:None
+32:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+32:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+32:26:Call -> U
+32:26:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+35:8:Call -> Const:NoneType:None
+35:8:Attribute -> BM:unittest.case.TestCase.assertIs
+35:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+35:22:Call -> U
+35:22:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+38:8:Call -> Const:NoneType:None
+38:8:Attribute -> BM:unittest.case.TestCase.assertIs
+38:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+38:22:Call -> U
+38:22:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+41:8:Call -> ERR
+41:8:Attribute -> ERR
+41:8:Call -> ERR
+41:8:Attribute -> ERR
+41:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+41:8:Name -> Class:django.contrib.auth.models.User
+42:8:Call -> Const:NoneType:None
+42:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+42:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+42:26:Call -> U
+42:26:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+44:5:Call -> Inst:django.test.utils.override_settings
+44:5:Name -> Class:django.test.utils.override_settings
+51:8:Call -> U
+51:8:Attribute -> U
+51:8:Attribute -> U
+51:8:Name -> Class:tests.auth_tests.models.custom_user.CustomUser
+56:8:Call -> Const:NoneType:None
+56:8:Attribute -> BM:unittest.case.TestCase.assertIsNone
+56:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+56:26:Call -> U
+56:26:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+59:8:Call -> Const:NoneType:None
+59:8:Attribute -> BM:unittest.case.TestCase.assertIs
+59:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+59:22:Call -> U
+59:22:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+62:8:Call -> Const:NoneType:None
+62:8:Attribute -> BM:unittest.case.TestCase.assertIs
+62:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+62:22:Call -> U
+62:22:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+69:16:Call -> U
+69:16:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+69:16:Attribute -> Inst:django.contrib.auth.models.UserManager
+69:16:Name -> Class:django.contrib.auth.models.User
+70:8:Call -> U
+70:8:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+70:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+70:8:Name -> Class:django.contrib.auth.models.User
+71:16:Call -> ERR
+71:16:Attribute -> ERR
+71:16:Attribute -> Inst:django.contrib.auth.models.GroupManager
+71:16:Name -> Class:django.contrib.auth.models.Group
+72:8:Call -> U
+72:8:Attribute -> U
+72:8:Attribute -> U
+72:8:Name -> U
+72:25:Name -> U
+75:8:Call -> Const:NoneType:None
+75:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+75:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+75:25:Call -> List:0 | List:0 | U
+75:25:Name -> Func:django.contrib.auth.handlers.modwsgi.groups_for_user
+77:8:Call -> Const:NoneType:None
+77:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+77:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+77:25:Call -> List:0 | List:0 | U
+77:25:Name -> Func:django.contrib.auth.handlers.modwsgi.groups_for_user
+78:8:Call -> Const:NoneType:None
+78:8:Attribute -> BM:unittest.case.TestCase.assertEqual
+78:8:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+78:25:Call -> List:0 | List:0 | U
+78:25:Name -> Func:django.contrib.auth.handlers.modwsgi.groups_for_user
+84:8:Call -> U
+84:8:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+84:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+84:8:Name -> Class:django.contrib.auth.models.User
+85:8:Call -> U
+85:8:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+85:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+85:8:Name -> Class:django.contrib.auth.models.User
+86:8:Call -> U
+86:8:Attribute -> BM:django.contrib.auth.models.UserManager.create_user
+86:8:Attribute -> Inst:django.contrib.auth.models.UserManager
+86:8:Name -> Class:django.contrib.auth.models.User
+88:17:Call -> Const:str:'default' | U
+88:17:Name -> Func:django.contrib.auth.hashers.get_hasher
+99:16:Call -> Gen:unittest.case.TestCase.subTest
+99:16:Attribute -> BM:unittest.case.TestCase.subTest
+99:16:Name -> Inst:tests.auth_tests.test_handlers.ModWsgiHandlerTestCase
+99:38:Name -> Const:str:'test' | Const:str:'test' | Const:str:'inactive' | Const:str:'inactive' | Const:str:'unusable' | Const:str:'doesnotexist'
+99:57:Name -> Const:str:'test' | Const:str:'wrong' | Const:str:'test' | Const:str:'wrong' | Const:str:'test' | Const:str:'test'
+100:16:Call -> Inst:unittest.mock._patch
+100:16:Attribute -> Func:unittest.mock._patch_object
+100:16:Attribute -> Func:unittest.mock.patch
+100:16:Name -> Module:unittest.mock
+100:34:Name -> Const:str:'default' | U
+102:16:Call -> U
+102:16:Name -> Func:django.contrib.auth.handlers.modwsgi.check_password
+102:35:Name -> Const:str:'test' | Const:str:'test' | Const:str:'inactive' | Const:str:'inactive' | Const:str:'unusable' | Const:str:'doesnotexist'
+102:45:Name -> Const:str:'test' | Const:str:'wrong' | Const:str:'test' | Const:str:'wrong' | Const:str:'test' | Const:str:'test'
+103:16:Call -> U
+103:16:Attribute -> U | BM:unittest.mock.NonCallableMock.assert_called_once | BM:unittest.mock.NonCallableMock.assert_called_once | BM:unittest.mock.NonCallableMock.assert_called_once
+103:16:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock

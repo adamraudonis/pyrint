@@ -1,0 +1,130 @@
+10:4:Attribute -> U
+10:4:Attribute -> U
+10:4:Name -> U
+11:4:Attribute -> U
+11:4:Attribute -> U
+11:4:Name -> U
+12:4:Attribute -> U
+12:4:Attribute -> U
+12:4:Name -> U
+13:4:Attribute -> U
+13:4:Attribute -> U
+13:4:Name -> U
+17:1:Attribute -> U
+17:1:Name -> U
+19:12:Call -> Inst:salt.loader.lazy.LazyLoader
+19:12:Attribute -> Func:salt.loader.utils
+19:12:Attribute -> Module:salt.loader
+19:12:Name -> Module:salt
+19:30:Name -> U
+21:8:Name -> Module:salt.states.win_lgpo
+22:24:Name -> U
+23:24:Name -> U
+24:25:Name -> Inst:salt.loader.lazy.LazyLoader
+26:8:Name -> Module:salt.modules.win_lgpo
+27:37:Name -> U
+28:24:Name -> U
+29:25:Name -> Inst:salt.loader.lazy.LazyLoader
+34:1:Call -> U
+34:1:Attribute -> U
+34:1:Name -> U
+43:18:Call -> U | Inst:salt.minion.SMinion
+43:18:Name -> Func:tests.support.sminion.create_sminion
+45:27:Call -> U
+45:27:Attribute -> U
+45:27:Attribute -> U
+45:27:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+45:27:Name -> U | Inst:salt.minion.SMinion
+48:24:Call -> U
+48:24:Attribute -> U
+48:24:Attribute -> U
+48:24:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+48:24:Name -> U | Inst:salt.minion.SMinion
+52:11:Name -> U
+52:35:Name -> Const:str:'Disabled'
+53:12:Call -> U
+53:12:Attribute -> U
+53:12:Attribute -> U
+53:12:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+53:12:Name -> U | Inst:salt.minion.SMinion
+54:60:Name -> Const:str:'Disabled'
+57:16:Call -> U
+57:16:Attribute -> U
+57:16:Attribute -> U
+57:16:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+57:16:Name -> U | Inst:salt.minion.SMinion
+60:19:Name -> Const:str:'Disabled'
+64:8:Call -> U
+64:8:Attribute -> U
+64:8:Attribute -> U
+64:8:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+64:8:Name -> U | Inst:salt.minion.SMinion
+65:56:Name -> U
+67:8:Call -> U
+67:8:Attribute -> U
+67:8:Attribute -> U
+67:8:Attribute -> U | Inst:salt.loader.lazy.LazyLoader
+67:8:Name -> U | Inst:salt.minion.SMinion
+68:53:Name -> U
+72:1:Call -> U
+72:1:Attribute -> U
+72:1:Name -> U
+78:14:Call -> U | Const:NoneType:None
+78:14:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+78:14:Attribute -> Dict:43 | Inst:os._Environ
+78:14:Name -> Module:os
+80:12:Name -> U | Const:NoneType:None
+81:8:Call -> U
+81:8:Attribute -> BM:builtins.str.format
+82:12:Name -> U | Const:NoneType:None
+85:22:Name -> List:2
+86:11:Call -> Const:bool:False | Const:bool:True | U
+86:11:Attribute -> Func:genericpath.exists | U
+86:11:Attribute -> Module:posixpath | Module:ntpath
+86:11:Name -> Module:os
+86:26:Name -> Const:str:'Uninferable\\security\\audit\\audit.csv | Const:str:'None\\security\\audit\\audit.csv' | U
+87:12:Call -> ERR
+87:12:Attribute -> Func:posix.remove
+87:12:Name -> Module:os
+87:22:Name -> Const:str:'Uninferable\\security\\audit\\audit.csv | Const:str:'None\\security\\audit\\audit.csv' | U
+91:1:Attribute -> U
+91:1:Name -> U
+95:4:Call -> Const:bool:True
+95:4:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+95:4:Name -> Module:salt.modules.win_lgpo
+96:49:Name -> Const:str:'No auditing'
+99:8:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+99:8:Attribute -> Func:salt.modules.win_lgpo.get_policy
+99:8:Name -> Module:salt.modules.win_lgpo
+102:11:Name -> Const:str:'No auditing'
+106:1:Attribute -> U
+106:1:Name -> U
+110:4:Call -> Const:bool:True
+110:4:Attribute -> Func:salt.modules.win_lgpo.set_computer_policy
+110:4:Name -> Module:salt.modules.win_lgpo
+111:49:Name -> Const:str:'Success'
+114:8:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+114:8:Attribute -> Func:salt.modules.win_lgpo.get_policy
+114:8:Name -> Module:salt.modules.win_lgpo
+117:11:Name -> Const:str:'Success'
+125:51:Name -> U
+126:4:Call -> Dict:4
+126:4:Attribute -> Func:salt.states.win_lgpo.set_
+126:4:Name -> Module:salt.states.win_lgpo
+126:53:Name -> Dict:1
+128:4:Call -> U
+128:4:Attribute -> Func:salt.modules.win_lgpo._get_secedit_data
+128:4:Name -> Module:salt.modules.win_lgpo
+129:13:Call -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+129:13:Attribute -> Func:salt.modules.win_lgpo.get_policy
+129:13:Name -> Module:salt.modules.win_lgpo
+132:11:Name -> U | Const:str:'Not Defined' | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:str:'Not Defined' | Dict:1 | Dict:0
+132:21:Name -> U
+136:4:Call -> Const:NoneType:None
+136:4:Name -> Func:tests.pytests.functional.states.win_lgpo.test_audit_settings_state._test_auditing
+140:4:Call -> Const:NoneType:None
+140:4:Name -> Func:tests.pytests.functional.states.win_lgpo.test_audit_settings_state._test_auditing
+144:4:Call -> Const:NoneType:None
+144:4:Name -> Func:tests.pytests.functional.states.win_lgpo.test_audit_settings_state._test_auditing
+148:4:Call -> Const:NoneType:None
+148:4:Name -> Func:tests.pytests.functional.states.win_lgpo.test_audit_settings_state._test_auditing

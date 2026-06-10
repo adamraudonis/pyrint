@@ -1,0 +1,223 @@
+24:13:Call -> U
+24:13:Attribute -> Func:re.compile
+24:13:Name -> Module:re
+31:11:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+31:11:Attribute -> Func:posixpath.realpath | U
+31:11:Attribute -> Module:posixpath | Module:ntpath
+31:11:Name -> Module:os
+31:28:Call -> ERR
+31:28:Name -> ERR
+43:10:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+43:10:Name -> Func:salt.modules.aliases.__get_aliases_filename
+45:11:Call -> Const:bool:False | U
+45:11:Attribute -> Func:genericpath.isfile | U
+45:11:Attribute -> Module:posixpath | Module:ntpath
+45:11:Name -> Module:os
+45:26:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+46:15:Name -> List:0
+47:9:Call -> U
+47:9:Attribute -> Func:salt.utils.files.fopen
+47:9:Attribute -> Module:salt.utils.files
+47:9:Attribute -> Module:salt.utils
+47:9:Name -> Module:salt
+47:32:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+48:20:Name -> U
+49:19:Call -> U
+49:19:Attribute -> Func:salt.utils.stringutils.to_unicode
+49:19:Attribute -> Module:salt.utils.stringutils
+49:19:Attribute -> Module:salt.utils
+49:19:Name -> Module:salt
+49:53:Name -> U
+50:20:Call -> U
+50:20:Attribute -> U
+50:20:Name -> U
+50:37:Name -> U
+51:15:Name -> U
+52:16:Call -> ERR
+52:16:Attribute -> BM:builtins.list.append
+52:16:Name -> List:0
+52:27:Call -> U
+52:27:Attribute -> U
+52:27:Name -> U
+54:16:Call -> ERR
+54:16:Attribute -> BM:builtins.list.append
+54:16:Name -> List:0
+54:40:Call -> U
+54:40:Attribute -> U
+54:40:Name -> U
+55:11:Name -> List:0
+63:10:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+63:10:Name -> Func:salt.modules.aliases.__get_aliases_filename
+64:11:Call -> U
+64:11:Attribute -> Func:posixpath.dirname | Func:ntpath.dirname
+64:11:Attribute -> Module:posixpath | Module:ntpath
+64:11:Name -> Module:os
+64:27:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+66:9:Call -> Inst:tempfile._TemporaryFileWrapper
+66:9:Attribute -> Func:tempfile.NamedTemporaryFile
+66:9:Name -> Module:tempfile
+66:41:Name -> U
+68:15:Call -> ERR
+68:15:Attribute -> ERR
+68:15:Name -> ERR
+69:15:Call -> Const:bool:False | U
+69:15:Attribute -> Func:genericpath.isfile | U
+69:15:Attribute -> Module:posixpath | Module:ntpath
+69:15:Name -> Module:os
+69:30:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+70:25:Call -> ERR
+70:25:Attribute -> Func:posix.stat
+70:25:Name -> Module:os
+70:33:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+71:16:Call -> ERR
+71:16:Attribute -> Func:posix.chmod
+71:16:Name -> Module:os
+71:25:Attribute -> U
+71:25:Name -> Inst:tempfile._TemporaryFileWrapper
+71:35:Call -> U
+71:35:Attribute -> Func:stat.S_IMODE | Func:_stat.S_IMODE
+71:35:Name -> Module:stat
+71:48:Attribute -> U
+71:48:Name -> U
+72:16:Call -> ERR
+72:16:Attribute -> Func:posix.chown
+72:16:Name -> Module:os
+72:25:Attribute -> U
+72:25:Name -> Inst:tempfile._TemporaryFileWrapper
+72:35:Attribute -> U
+72:35:Name -> U
+72:50:Attribute -> U
+72:50:Name -> U
+74:16:Call -> ERR
+74:16:Attribute -> Func:posix.chmod
+74:16:Name -> Module:os
+74:25:Attribute -> U
+74:25:Name -> Inst:tempfile._TemporaryFileWrapper
+75:16:Call -> ERR
+75:16:Attribute -> Func:posix.chown
+75:16:Name -> Module:os
+75:25:Attribute -> U
+75:25:Name -> Inst:tempfile._TemporaryFileWrapper
+77:53:Name -> U
+78:15:Call -> ERR
+78:15:Name -> Func:builtins.isinstance
+78:26:Name -> U
+78:39:Name -> Class:builtins.list
+79:30:Call -> Const:str:''
+79:30:Attribute -> BM:builtins.str.join
+79:40:Name -> U
+80:19:Name -> U
+82:15:Name -> U
+82:30:Name -> U | Const:str:''
+83:32:Name -> U
+83:46:Name -> U | Const:str:''
+83:59:Name -> U | Const:str:''
+85:32:Name -> U | Const:str:''
+86:25:Call -> Const:bytes:b''
+86:25:Attribute -> BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode | BM:builtins.str.encode
+86:25:Name -> Const:str:'Uninferable: UninferableUninferable\n' | Const:str:'Uninferable: Uninferable\n' | Const:str:'Uninferable: Uninferable\n' | Const:str:'Uninferable: \n' | Const:str:'Uninferable\n' | Const:str:'\n'
+86:43:Name -> ERR
+87:12:Call -> U
+87:12:Attribute -> U
+87:12:Name -> Inst:tempfile._TemporaryFileWrapper
+87:22:Name -> Const:bytes:b''
+89:4:Call -> Const:NoneType:None
+89:4:Attribute -> Func:salt.utils.atomicfile.atomic_rename | Func:posix.rename
+89:4:Attribute -> Module:salt.utils.atomicfile
+89:4:Attribute -> Module:salt.utils
+89:4:Name -> Module:salt
+89:40:Attribute -> U
+89:40:Name -> Inst:tempfile._TemporaryFileWrapper
+89:50:Name -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+92:17:Call -> Const:NoneType:None | Const:str:'newaliases' | U
+92:17:Attribute -> Func:salt.utils.path.which
+92:17:Attribute -> Module:salt.utils.path
+92:17:Attribute -> Module:salt.utils
+92:17:Name -> Module:salt
+93:7:Name -> Const:NoneType:None | Const:str:'newaliases' | U
+94:8:Call -> ERR
+94:8:Name -> ERR
+94:28:Name -> Const:str:'newaliases' | U
+111:11:Name -> U
+111:18:Name -> U
+111:51:Call -> List:0
+111:51:Name -> Func:salt.modules.aliases.__parse_aliases
+111:72:Name -> U
+112:11:Name -> U
+125:14:Call -> U
+125:14:Name -> Func:salt.modules.aliases.list_aliases
+126:7:Name -> U
+126:16:Name -> U
+127:15:Name -> U
+127:23:Name -> U
+141:7:Name -> U
+142:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+142:14:Name -> Class:salt.exceptions.SaltInvocationError
+143:14:Call -> U
+143:14:Name -> Func:salt.modules.aliases.list_aliases
+144:7:Name -> U
+144:20:Name -> U
+146:7:Call -> ERR
+146:7:Name -> Func:builtins.isinstance
+146:18:Name -> U
+146:26:Name -> Class:builtins.list
+147:17:Call -> Const:str:''
+147:17:Attribute -> BM:builtins.str.join
+147:27:Name -> U
+148:11:Name -> U | Const:str:''
+148:21:Name -> U
+148:29:Name -> U
+164:7:Name -> U
+165:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+165:14:Name -> Class:salt.exceptions.SaltInvocationError
+167:7:Name -> U
+168:14:Call -> ExcInst:salt.exceptions.SaltInvocationError
+168:14:Name -> Class:salt.exceptions.SaltInvocationError
+170:7:Call -> U | Const:str:''
+170:7:Name -> Func:salt.modules.aliases.get_target
+170:18:Name -> U
+170:28:Name -> U
+173:12:Call -> List:0
+173:12:Name -> Func:salt.modules.aliases.__parse_aliases
+176:49:Name -> List:0
+177:11:Name -> U
+177:25:Name -> U
+178:19:Name -> Const:bool:False
+179:16:Call -> ERR
+179:16:Attribute -> BM:builtins.list.append
+179:16:Name -> List:0
+179:28:Name -> U
+179:35:Name -> U
+179:43:Name -> U
+182:12:Call -> ERR
+182:12:Attribute -> BM:builtins.list.append
+182:12:Name -> List:0
+182:24:Name -> U
+182:36:Name -> U
+182:49:Name -> U
+183:11:Name -> Const:bool:False | Const:bool:True
+184:8:Call -> ERR
+184:8:Attribute -> BM:builtins.list.append
+184:8:Name -> List:0
+184:20:Name -> U
+184:27:Name -> U
+186:4:Call -> Const:bool:True
+186:4:Name -> Func:salt.modules.aliases.__write_aliases_file
+186:25:Name -> List:0
+200:11:Call -> U | Const:str:''
+200:11:Name -> Func:salt.modules.aliases.get_target
+200:22:Name -> U
+203:12:Call -> List:0
+203:12:Name -> Func:salt.modules.aliases.__parse_aliases
+205:49:Name -> List:0
+206:11:Name -> U
+206:25:Name -> U
+207:12:Call -> ERR
+207:12:Attribute -> BM:builtins.list.append
+207:12:Name -> List:0
+207:24:Name -> U
+207:36:Name -> U
+207:49:Name -> U
+209:4:Call -> Const:bool:True
+209:4:Name -> Func:salt.modules.aliases.__write_aliases_file
+209:25:Name -> List:0

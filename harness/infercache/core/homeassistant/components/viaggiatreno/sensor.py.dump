@@ -1,0 +1,201 @@
+27:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+27:10:Attribute -> Func:logging.getLogger
+27:10:Name -> Module:logging
+27:28:Name -> Const:str:'homeassistant.components.viaggiatreno.s | Const:str:'__main__'
+53:16:Call -> Inst:_pydatetime.timedelta
+53:16:Name -> Class:_pydatetime.timedelta
+55:18:Call -> U
+55:18:Attribute -> U
+55:18:Name -> U
+57:8:Call -> U
+57:8:Attribute -> U
+57:8:Name -> U
+57:21:Name -> Const:str:'train_id'
+57:37:Attribute -> Func:homeassistant.helpers.config_validation.string
+57:37:Name -> Module:homeassistant.helpers.config_validation
+58:8:Call -> U
+58:8:Attribute -> U
+58:8:Name -> U
+58:21:Name -> Const:str:'station_id'
+58:39:Attribute -> Func:homeassistant.helpers.config_validation.string
+58:39:Name -> Module:homeassistant.helpers.config_validation
+59:8:Call -> U
+59:8:Attribute -> U
+59:8:Name -> U
+59:21:Name -> Const:str:'train_name'
+59:33:Attribute -> Func:homeassistant.helpers.config_validation.string
+59:33:Name -> Module:homeassistant.helpers.config_validation
+65:10:Name -> U
+66:12:Name -> Class:builtins.dict
+67:24:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+68:20:Name -> Class:builtins.dict
+71:15:Call -> Const:str:''
+71:15:Name -> Class:builtins.str
+71:19:Call -> U
+71:19:Attribute -> U
+71:19:Name -> U
+71:30:Name -> Const:str:'train_id'
+72:17:Call -> Const:str:''
+72:17:Name -> Class:builtins.str
+72:21:Call -> U
+72:21:Attribute -> U
+72:21:Name -> U
+72:32:Name -> Const:str:'station_id'
+73:20:Call -> U
+73:20:Attribute -> U
+73:20:Name -> U
+73:31:Name -> Const:str:'train_name'
+74:15:Call -> Const:str:'Train '
+74:15:Attribute -> BM:builtins.str.format
+74:15:Name -> Const:str:'Train {}'
+74:35:Name -> Const:str:''
+75:9:Call -> U
+75:9:Name -> U
+75:28:Name -> Const:str:''
+75:55:Name -> Const:str:''
+76:4:Call -> U
+76:4:Name -> U
+76:24:Call -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+76:24:Name -> Class:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+76:43:Name -> U
+76:47:Name -> U | Const:str:'Train '
+79:25:Name -> Class:homeassistant.components.sensor.SensorEntity
+85:35:Name -> U
+85:52:Name -> Class:builtins.str
+87:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+87:21:Name -> Union
+87:33:Name -> Const:str:'No information for this train now'
+88:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+88:26:Name -> Class:builtins.dict
+88:31:Name -> Class:builtins.str
+88:36:Name -> Class:typing.Any
+89:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+89:21:Name -> Const:str:'mdi:train'
+90:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+90:21:Name -> U
+91:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+91:21:Name -> U
+92:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+92:28:Name -> U
+93:8:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+93:23:Name -> U
+95:5:Name -> Class:builtins.property
+96:22:Name -> Class:builtins.str
+98:15:Attribute -> U
+98:15:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+100:5:Name -> Class:builtins.property
+101:30:Name -> Union
+103:15:Attribute -> Const:str:'No information for this train now' | Const:str:'Cancelled' | Const:str:'Not departed yet' | Const:str:'Arrived' | U
+103:15:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+105:5:Name -> Class:builtins.property
+106:22:Name -> Class:builtins.str
+108:15:Attribute -> Const:str:'mdi:train' | Const:str:'mdi:cancel'
+108:15:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+110:5:Name -> Class:builtins.property
+111:44:Name -> Class:builtins.str
+113:11:Call -> ERR
+113:11:Name -> Func:builtins.isinstance
+113:22:Attribute -> Const:str:'No information for this train now' | Const:str:'Cancelled' | Const:str:'Not departed yet' | Const:str:'Arrived' | U
+113:22:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+113:42:Name -> Class:builtins.int
+113:47:Name -> Class:builtins.float
+114:19:Attribute -> Inst:homeassistant.const.UnitOfTime.MINUTES
+114:19:Name -> Class:homeassistant.const.UnitOfTime
+117:5:Name -> Class:builtins.property
+118:40:Name -> Class:builtins.dict
+118:45:Name -> Class:builtins.str
+118:50:Name -> Class:typing.Any
+120:15:Attribute -> Dict:0
+120:15:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+124:11:Attribute -> Const:NoneType:None | U
+124:11:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+125:22:Call -> U
+125:22:Name -> Func:homeassistant.helpers.aiohttp_client.async_get_clientsession
+125:46:Attribute -> U | Const:NoneType:None
+125:46:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+126:12:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+126:33:Call -> U
+126:33:Name -> U
+126:46:Name -> U
+128:18:Call -> U
+128:18:Attribute -> U
+128:18:Attribute -> Const:NoneType:None | U
+128:18:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+128:53:Attribute -> U
+128:53:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+129:12:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+129:28:Call -> U
+129:28:Attribute -> U
+129:28:Attribute -> Const:NoneType:None | U
+129:28:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+129:63:Attribute -> U
+129:63:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+130:15:Attribute -> Const:NoneType:None | U
+130:15:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+131:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+131:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+131:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+134:20:Attribute -> U
+134:20:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+137:16:Name -> Class:builtins.TimeoutError
+137:30:Attribute -> U
+137:30:Name -> U
+138:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+138:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+138:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+138:77:Name -> ExcInst:builtins.TimeoutError | U
+140:15:Name -> Class:builtins.ValueError
+141:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+141:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+141:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+143:11:Attribute -> Const:NoneType:None | U
+143:11:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+144:15:Attribute -> U
+144:15:Attribute -> U
+144:15:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+144:38:Attribute -> U
+144:38:Name -> U
+145:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+145:30:Name -> Const:str:'Cancelled'
+146:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+147:17:Attribute -> U
+147:17:Attribute -> U
+147:17:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+147:40:Attribute -> U
+147:40:Name -> U
+148:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+148:30:Name -> Const:str:'Not departed yet'
+149:17:Attribute -> U
+149:17:Attribute -> U
+149:17:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+149:40:Attribute -> U
+149:40:Name -> U
+150:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+150:30:Name -> Const:str:'Arrived'
+151:17:Attribute -> U
+151:17:Attribute -> U
+151:17:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+152:16:Attribute -> U
+152:16:Name -> U
+153:16:Attribute -> U
+153:16:Name -> U
+155:32:Attribute -> U
+155:32:Attribute -> U
+155:32:Attribute -> U
+155:32:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+156:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+156:30:Name -> U
+157:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+157:29:Name -> Const:str:'mdi:train'
+159:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+159:30:Name -> Const:str:'No information for this train now'
+161:24:Name -> List:9
+162:16:Attribute -> Dict:0
+162:16:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+162:33:Name -> Const:str:'categoria' | Const:str:'compOrarioArrivoZeroEffettivo' | Const:str:'compOrarioPartenzaZeroEffettivo' | Const:str:'destinazione' | Const:str:'numeroTreno' | Const:str:'orarioArrivo' | Const:str:'orarioPartenza' | Const:str:'origine' | Const:str:'subTitle'
+162:41:Attribute -> U
+162:41:Attribute -> Const:NoneType:None | U
+162:41:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+162:65:Attribute -> U
+162:65:Name -> Inst:homeassistant.components.viaggiatreno.sensor.ViaggiaTrenoSensor
+162:77:Name -> Const:str:'categoria' | Const:str:'compOrarioArrivoZeroEffettivo' | Const:str:'compOrarioPartenzaZeroEffettivo' | Const:str:'destinazione' | Const:str:'numeroTreno' | Const:str:'orarioArrivo' | Const:str:'orarioPartenza' | Const:str:'origine' | Const:str:'subTitle'

@@ -1,0 +1,225 @@
+10:14:Call -> Inst:builtins.dict
+10:14:Attribute -> BM:builtins.dict.copy | BM:os._Environ.copy
+10:14:Attribute -> Dict:43 | Inst:os._Environ
+10:14:Name -> Module:os
+11:7:Name -> Const:NoneType:None | U
+12:8:Call -> ERR
+12:8:Attribute -> BM:builtins.dict.update
+12:8:Name -> Inst:builtins.dict
+12:23:Name -> U
+13:7:Name -> Const:bool:True | U
+14:8:Call -> ERR
+14:8:Name -> Func:builtins.print
+14:27:Call -> Const:str:''
+14:27:Attribute -> BM:builtins.str.join
+14:36:Name -> U
+16:8:Call -> ERR
+16:8:Name -> Func:builtins.print
+16:27:Call -> Const:str:''
+16:27:Attribute -> BM:builtins.str.join
+16:36:Name -> U
+18:21:Call -> Const:str:'' | Const:bytes:b''
+18:21:Attribute -> Func:subprocess.check_output
+18:21:Name -> Module:subprocess
+19:16:Name -> U
+19:25:Name -> Const:NoneType:None | U
+19:34:Name -> Inst:builtins.dict
+19:50:Attribute -> Const:int:-2
+19:50:Name -> Module:subprocess
+21:15:Attribute -> Class:subprocess.CalledProcessError
+21:15:Name -> Module:subprocess
+22:21:Attribute -> Const:NoneType:None | U
+22:21:Name -> ExcInst:subprocess.CalledProcessError
+23:12:Call -> ERR
+23:12:Name -> Func:builtins.print
+23:33:Name -> Const:NoneType:None | U
+26:12:Call -> ERR
+26:12:Name -> Func:builtins.print
+26:34:Name -> Const:str:'' | Const:bytes:b''
+27:15:Call -> Const:str:'' | U
+27:15:Attribute -> BM:builtins.str.strip | BM:builtins.str.strip | U
+27:15:Call -> Const:str:'' | Const:str:'' | U
+27:15:Attribute -> BM:builtins.str.decode | BM:builtins.bytes.decode | U
+27:15:Name -> Const:str:'' | Const:bytes:b'' | Const:NoneType:None | U
+31:11:Name -> U
+32:8:Call -> ERR
+32:8:Attribute -> Func:sys.exit
+32:8:Name -> Module:sys
+33:11:Call -> Const:bool:False | Const:bool:True | U
+33:11:Attribute -> Func:genericpath.exists | U
+33:11:Attribute -> Module:posixpath | Module:ntpath
+33:11:Name -> Module:os
+33:26:Name -> U
+34:8:Call -> ERR
+34:8:Attribute -> Func:sys.exit
+34:8:Name -> Module:sys
+34:47:Name -> U
+35:11:Call -> Const:bool:False | U
+35:11:Attribute -> Func:genericpath.isdir | U
+35:11:Attribute -> Module:posixpath | Module:ntpath
+35:11:Name -> Module:os
+35:25:Name -> U
+36:8:Call -> ERR
+36:8:Attribute -> Func:sys.exit
+36:8:Name -> Module:sys
+36:28:Name -> U
+41:13:Call -> Const:str:'' | U
+41:13:Name -> Func:scripts.archive_eol_stable_branches.run
+43:12:Name -> U
+46:16:Call -> U
+46:16:Attribute -> U
+46:16:Name -> U
+46:35:Call -> U
+46:35:Attribute -> BM:builtins.str.split | U
+46:35:Name -> Const:str:'' | U
+46:57:Call -> U
+46:57:Attribute -> U
+46:57:Name -> U
+47:12:Name -> U
+47:23:Name -> U
+47:35:Call -> U
+47:35:Name -> U
+47:46:Name -> U
+52:18:Call -> Const:str:'' | U
+52:18:Name -> Func:scripts.archive_eol_stable_branches.run
+52:43:Name -> U
+52:56:Name -> U
+53:18:Call -> Const:str:'' | U
+53:18:Name -> Func:scripts.archive_eol_stable_branches.run
+54:24:Name -> U
+55:12:Name -> U
+58:11:Name -> Const:str:'' | U
+58:24:Name -> Const:str:'' | U
+63:15:Call -> U
+63:15:Attribute -> U
+63:15:Name -> U
+64:21:Name -> U
+65:4:Call -> Const:str:'' | U
+65:4:Name -> Func:scripts.archive_eol_stable_branches.run
+66:46:Name -> Const:str:'"Tagged Uninferable for EOL stable bran
+66:51:Name -> U
+66:61:Name -> U
+67:12:Name -> U
+68:35:Name -> U
+69:16:Name -> Const:bool:True | U
+71:11:Name -> U
+77:8:Call -> Const:str:'' | U
+77:8:Name -> Func:scripts.archive_eol_stable_branches.run
+78:36:Name -> U
+79:16:Name -> U
+80:20:Name -> Const:bool:True | U
+82:11:Attribute -> Class:subprocess.CalledProcessError
+82:11:Name -> Module:subprocess
+83:8:Call -> ERR
+83:8:Name -> Func:builtins.print
+83:38:Name -> U
+85:4:Call -> Const:str:'' | U
+85:4:Name -> Func:scripts.archive_eol_stable_branches.run
+86:46:Call -> U
+86:46:Attribute -> U
+86:46:Name -> U
+87:12:Name -> U
+88:16:Name -> Const:bool:True | U
+93:13:Call -> Inst:argparse.ArgumentParser
+93:13:Attribute -> Class:argparse.ArgumentParser
+93:13:Name -> Module:argparse
+96:4:Call -> U
+96:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+96:4:Name -> Inst:argparse.ArgumentParser
+99:4:Call -> U
+99:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+99:4:Name -> Inst:argparse.ArgumentParser
+104:4:Call -> U
+104:4:Attribute -> BM:argparse._ActionsContainer.add_argument
+104:4:Name -> Inst:argparse.ArgumentParser
+107:11:Call -> U | Inst:argparse.Namespace
+107:11:Attribute -> BM:argparse.ArgumentParser.parse_args
+107:11:Name -> Inst:argparse.ArgumentParser
+109:4:Call -> Const:NoneType:None
+109:4:Name -> Func:scripts.archive_eol_stable_branches.validate_env
+109:17:Attribute -> U
+109:17:Name -> U | Inst:argparse.Namespace
+110:14:Attribute -> U
+110:14:Name -> U | Inst:argparse.Namespace
+111:19:Attribute -> U
+111:19:Name -> U | Inst:argparse.Namespace
+113:7:Attribute -> U
+113:7:Name -> U | Inst:argparse.Namespace
+114:17:Call -> Inst:builtins.set
+114:17:Name -> Class:builtins.set
+114:31:Name -> U
+114:44:Attribute -> U
+114:44:Name -> U | Inst:argparse.Namespace
+116:17:Call -> Set:0
+116:17:Name -> Class:builtins.set
+118:15:Call -> U
+118:15:Name -> Func:scripts.archive_eol_stable_branches.get_remote_branches
+118:35:Name -> U
+118:70:Name -> U
+118:75:Name -> Inst:builtins.set | Set:0
+119:11:Name -> U
+120:8:Call -> ERR
+120:8:Name -> Func:builtins.print
+123:4:Call -> ERR
+123:4:Name -> Func:builtins.print
+124:4:Call -> ERR
+124:4:Name -> Func:builtins.print
+124:10:Call -> Const:str:''
+124:10:Attribute -> BM:builtins.str.join
+124:20:Name -> U
+125:4:Call -> ERR
+125:4:Name -> Func:builtins.print
+127:22:Name -> U
+127:25:Call -> Tuple:2
+127:25:Name -> Func:scripts.archive_eol_stable_branches.get_branch_info
+127:41:Name -> U
+127:55:Name -> U
+127:67:Name -> U
+128:4:Call -> ERR
+128:4:Name -> Func:builtins.print
+129:21:Call -> U
+129:21:Attribute -> U
+129:21:Name -> U
+130:8:Call -> ERR
+130:8:Name -> Func:builtins.print
+130:17:Name -> U
+130:22:Name -> U
+130:27:Name -> U
+133:8:Call -> U
+133:8:Attribute -> U
+133:8:Call -> U
+133:8:Attribute -> U
+133:8:Call -> Const:NoneType:None | U
+133:8:Name -> Func:builtins.input | Func:tests.auth_tests.test_management.mock_inputs.inner.wrapper.mock_input | U
+136:50:Call -> U
+136:50:Attribute -> U
+136:50:Name -> U
+137:12:Call -> ERR
+137:12:Name -> Func:builtins.print
+137:38:Name -> U
+137:45:Name -> U
+137:65:Name -> U
+138:12:Call -> U
+138:12:Name -> Func:scripts.archive_eol_stable_branches.create_tag
+138:23:Name -> U
+138:37:Name -> U
+138:40:Name -> U
+138:53:Name -> U
+138:79:Name -> U
+139:12:Call -> ERR
+139:12:Name -> Func:builtins.print
+139:44:Name -> U
+140:12:Call -> Const:NoneType:None
+140:12:Name -> Func:scripts.archive_eol_stable_branches.delete_remote_and_local_branch
+140:43:Name -> U
+140:57:Name -> U
+140:68:Name -> U
+141:8:Call -> Const:str:'' | U
+141:8:Name -> Func:scripts.archive_eol_stable_branches.run
+143:16:Name -> U
+144:20:Name -> U
+147:4:Call -> ERR
+147:4:Name -> Func:builtins.print
+150:3:Name -> Const:str:'scripts.archive_eol_stable_branches' | Const:str:'__main__'
+151:4:Call -> Const:NoneType:None
+151:4:Name -> Func:scripts.archive_eol_stable_branches.main

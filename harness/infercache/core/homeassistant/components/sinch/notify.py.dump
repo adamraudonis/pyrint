@@ -1,0 +1,128 @@
+33:14:Name -> Const:str:'sender'
+37:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+37:10:Attribute -> Func:logging.getLogger
+37:10:Name -> Module:logging
+37:28:Name -> Const:str:'homeassistant.components.sinch.notify' | Const:str:'__main__'
+39:18:Call -> U
+39:18:Attribute -> U
+39:18:Name -> U
+41:8:Call -> U
+41:8:Attribute -> U
+41:8:Name -> U
+41:21:Name -> Const:str:'api_key'
+41:36:Attribute -> Func:homeassistant.helpers.config_validation.string
+41:36:Name -> Module:homeassistant.helpers.config_validation
+42:8:Call -> U
+42:8:Attribute -> U
+42:8:Name -> U
+42:21:Name -> Const:str:'service_plan_id'
+42:44:Attribute -> Func:homeassistant.helpers.config_validation.string
+42:44:Name -> Module:homeassistant.helpers.config_validation
+43:8:Call -> U
+43:8:Attribute -> U
+43:8:Name -> U
+43:21:Name -> Const:str:'sender'
+43:42:Name -> Const:str:'Home Assistant'
+43:59:Attribute -> Func:homeassistant.helpers.config_validation.string
+43:59:Name -> Module:homeassistant.helpers.config_validation
+44:8:Call -> U
+44:8:Attribute -> U
+44:8:Name -> U
+44:21:Name -> Const:str:'default_recipients'
+44:59:Call -> U
+44:59:Attribute -> U
+44:59:Name -> U
+45:12:Attribute -> Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list | Func:homeassistant.helpers.config_validation.ensure_list
+45:12:Name -> Module:homeassistant.helpers.config_validation
+45:29:Attribute -> Func:homeassistant.helpers.config_validation.string
+45:29:Name -> Module:homeassistant.helpers.config_validation
+52:10:Name -> U
+53:12:Name -> Class:builtins.dict
+54:20:Name -> Class:builtins.dict
+55:5:Name -> ERR
+57:11:Call -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+57:11:Name -> Class:homeassistant.components.sinch.notify.SinchNotificationService
+57:36:Name -> U
+60:31:Name -> Class:homeassistant.components.notify.legacy.BaseNotificationService
+65:8:Name -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+65:34:Name -> U
+65:41:Name -> Const:str:'default_recipients'
+66:8:Name -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+66:22:Name -> U
+66:29:Name -> Const:str:'sender'
+67:8:Name -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+67:22:Call -> U
+67:22:Name -> U
+67:29:Name -> U
+67:36:Name -> Const:str:'service_plan_id'
+67:59:Name -> U
+67:66:Name -> Const:str:'api_key'
+69:36:Name -> Class:builtins.str
+69:56:Name -> Class:typing.Any
+71:18:Call -> ERR
+71:18:Attribute -> BM:builtins.dict.get
+71:18:Name -> Dict:0
+71:29:Name -> Const:str:'target'
+71:42:Attribute -> U
+71:42:Name -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+72:15:Call -> ERR
+72:15:Attribute -> BM:builtins.dict.get
+72:15:Name -> Dict:0
+72:26:Name -> Const:str:'data'
+74:20:Name -> Const:str:'message'
+74:34:Name -> Const:str:'' | U
+74:43:Name -> Const:str:'sender'
+74:56:Attribute -> U
+74:56:Name -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+76:11:Name -> Const:str:'sender'
+76:26:Name -> U
+77:12:Name -> Dict:2
+77:21:Name -> Const:str:'sender'
+77:36:Name -> U
+77:41:Name -> Const:str:'sender'
+79:15:Name -> U
+80:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+80:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+80:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+84:26:Name -> U
+85:24:Name -> U
+85:47:Call -> U
+85:47:Attribute -> U
+85:47:Attribute -> U
+85:47:Name -> Inst:homeassistant.components.sinch.notify.SinchNotificationService
+86:20:Name -> Dict:2
+86:29:Name -> Const:str:'sender'
+86:43:Name -> U
+86:51:Name -> Dict:2
+86:60:Name -> Const:str:'message'
+88:27:Attribute -> U
+88:27:Name -> U
+89:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+89:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+89:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+90:68:Name -> U
+90:76:Name -> U
+93:15:Name -> U
+94:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+94:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+94:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+96:16:Attribute -> U
+96:16:Name -> U
+97:16:Name -> U
+99:15:Name -> U
+100:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+100:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+100:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+100:72:Attribute -> U
+100:72:Name -> U
+101:15:Name -> U
+102:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+102:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+102:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+103:67:Attribute -> U
+103:67:Name -> U
+105:15:Name -> U
+106:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+106:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+106:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+106:68:Name -> U

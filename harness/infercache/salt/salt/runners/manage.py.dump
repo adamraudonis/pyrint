@@ -1,0 +1,573 @@
+28:20:Call -> U
+28:20:Attribute -> Func:re.compile
+28:20:Name -> Module:re
+30:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+30:6:Attribute -> Func:logging.getLogger
+30:6:Name -> Module:logging
+30:24:Name -> Const:str:'salt.runners.manage' | Const:str:'__main__'
+34:9:Call -> Inst:salt.client.LocalClient
+34:9:Attribute -> Func:salt.client.get_local_client
+34:9:Attribute -> Module:salt.client
+34:9:Name -> Module:salt
+34:38:Name -> ERR
+35:19:Call -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U | Dict:2
+35:19:Attribute -> BM:salt.client.LocalClient.run_job
+35:19:Name -> Inst:salt.client.LocalClient
+36:12:Name -> U
+36:34:Name -> U
+36:48:Name -> U
+39:15:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U | Dict:2
+40:19:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+42:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+42:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+42:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+44:12:Call -> Const:str:''
+44:12:Attribute -> BM:builtins.str.join
+44:22:Call -> ERR
+44:22:Name -> Func:builtins.sorted
+44:29:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U | Dict:2
+47:19:Call -> Set:0
+47:19:Name -> Class:builtins.set
+48:22:Call -> Gen:salt.client.LocalClient.get_cli_event_returns
+48:22:Attribute -> BM:salt.client.LocalClient.get_cli_event_returns
+48:22:Name -> Inst:salt.client.LocalClient
+49:12:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U | Dict:2
+50:12:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U | Dict:2
+51:12:Call -> U | Inst:builtins.int
+51:12:Attribute -> BM:salt.client.LocalClient._get_timeout
+51:12:Name -> Inst:salt.client.LocalClient
+51:32:Name -> U
+52:12:Name -> U
+53:12:Name -> U
+54:31:Name -> U
+57:15:Name -> U
+58:30:Call -> U
+58:30:Attribute -> U
+58:30:Name -> U
+59:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+59:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+59:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+59:64:Name -> U
+60:20:Call -> ERR
+60:20:Attribute -> BM:builtins.set.add
+60:20:Name -> Set:0
+60:33:Name -> U
+62:23:Call -> ERR
+62:23:Name -> Func:builtins.sorted
+62:30:Call -> Inst:builtins.set
+62:30:Name -> Class:builtins.set
+62:34:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U | Dict:2
+62:57:Name -> Set:0
+63:19:Call -> ERR
+63:19:Name -> Func:builtins.sorted
+63:26:Name -> Set:0
+65:15:Name -> U
+65:25:Name -> U
+89:11:Name -> Const:NoneType:None | U
+90:18:Name -> ERR
+91:11:Name -> Const:NoneType:None | U
+92:29:Name -> ERR
+94:10:Call -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+94:10:Name -> Func:salt.runners.manage._ping
+94:16:Name -> Const:str:'*' | U
+94:21:Name -> Const:str:'glob' | U
+94:31:Name -> Const:NoneType:None | U
+94:40:Name -> Const:NoneType:None | U
+95:4:Name -> Dict:0
+95:15:Name -> Dict:0
+95:45:Name -> Dict:0 | Dict:0 | Dict:0 | Dict:0 | U
+95:54:Name -> U
+96:11:Name -> Dict:0
+124:13:Call -> Inst:salt.client.LocalClient
+124:13:Attribute -> Func:salt.client.get_local_client
+124:13:Attribute -> Module:salt.client
+124:13:Name -> Module:salt
+124:42:Name -> ERR
+126:8:Call -> U
+126:8:Attribute -> U
+126:8:Name -> Inst:salt.client.LocalClient
+127:11:Name -> Class:salt.exceptions.SaltClientError
+128:8:Call -> ERR
+128:8:Name -> Func:builtins.print
+128:14:Name -> ExcInst:salt.exceptions.SaltClientError
+131:26:Call -> Gen:salt.utils.path.os_walk
+131:26:Attribute -> Func:salt.utils.path.os_walk
+131:26:Attribute -> Module:salt.utils.path
+131:26:Attribute -> Module:salt.utils
+131:26:Name -> Module:salt
+131:50:Name -> ERR
+132:19:Name -> U
+133:19:Call -> U
+133:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+133:19:Attribute -> Module:posixpath | Module:ntpath
+133:19:Name -> Module:os
+133:32:Name -> U
+133:38:Name -> U
+135:16:Call -> ERR
+135:16:Attribute -> Func:posix.remove
+135:16:Name -> Module:os
+135:26:Name -> U
+136:19:Name -> Class:builtins.OSError
+150:11:Name -> Const:str:'The minion and master keys have been de
+173:10:Call -> ERR
+173:10:Attribute -> BM:builtins.dict.get
+173:10:Call -> Dict:0
+173:10:Name -> Func:salt.runners.manage.status
+175:12:Name -> Const:str:'*' | U
+176:17:Name -> Const:str:'glob' | U
+177:16:Name -> Const:NoneType:None | U
+178:27:Name -> Const:NoneType:None | U
+180:18:Name -> U
+181:11:Name -> Const:bool:False | U
+182:20:Call -> Inst:salt.wheel.WheelClient
+182:20:Attribute -> Class:salt.wheel.WheelClient
+182:20:Attribute -> Module:salt.wheel
+182:20:Name -> Module:salt
+182:37:Name -> ERR
+183:12:Call -> Dict:3 | U
+183:12:Attribute -> BM:salt.wheel.WheelClient.call_func
+183:12:Name -> Inst:salt.wheel.WheelClient
+183:48:Name -> U
+184:11:Name -> U
+206:10:Call -> ERR
+206:10:Attribute -> BM:builtins.dict.get
+206:10:Call -> Dict:0
+206:10:Name -> Func:salt.runners.manage.status
+208:12:Name -> Const:str:'*' | U
+209:17:Name -> Const:str:'glob' | U
+210:16:Name -> Const:NoneType:None | U
+211:27:Name -> Const:NoneType:None | U
+213:11:Name -> U
+238:16:Call -> Inst:salt.utils.minions.CkMinions
+238:16:Attribute -> Class:salt.utils.minions.CkMinions
+238:16:Attribute -> Module:salt.utils.minions
+238:16:Attribute -> Module:salt.utils
+238:16:Name -> Module:salt
+238:45:Name -> ERR
+239:14:Call -> Set:0
+239:14:Attribute -> BM:salt.utils.minions.CkMinions.connected_ids
+239:14:Name -> Inst:salt.utils.minions.CkMinions
+239:46:Name -> Const:bool:False | U
+239:62:Name -> Const:NoneType:None | U
+241:33:Name -> Const:bool:False | U
+241:16:Call -> Dict:0
+241:16:Name -> Class:builtins.dict
+241:21:Name -> Set:0
+241:46:Call -> ERR
+241:46:Name -> Func:builtins.sorted
+241:53:Name -> Set:0
+243:11:Name -> Dict:0 | U
+266:16:Call -> Dict:0 | U
+266:16:Name -> Func:salt.runners.manage.list_state
+266:48:Name -> Const:bool:False | U
+268:9:Call -> Inst:salt.key.Key
+268:9:Attribute -> Func:salt.key.get_key
+268:9:Attribute -> Module:salt.key
+268:9:Name -> Module:salt
+268:26:Name -> ERR
+269:15:Call -> U | Dict:0 | List:0
+269:15:Attribute -> BM:salt.key.Key.list_keys
+269:15:Name -> Inst:salt.key.Key
+272:22:Name -> U | Dict:0 | List:0
+272:27:Attribute -> Const:str:'minions'
+272:27:Name -> Inst:salt.key.Key
+273:15:Name -> U
+273:29:Name -> Dict:0 | U
+273:44:Name -> Const:NoneType:None | U
+273:62:Name -> U
+273:72:Name -> Const:NoneType:None | U
+274:16:Call -> ERR
+274:16:Attribute -> BM:builtins.list.append
+274:16:Name -> List:0
+274:37:Name -> U
+276:15:Name -> List:0
+298:11:Call -> Dict:0 | U
+298:11:Name -> Func:salt.runners.manage.list_state
+298:29:Name -> Const:NoneType:None | U
+298:45:Name -> Const:bool:False | U
+321:11:Call -> List:0
+321:11:Name -> Func:salt.runners.manage.list_not_state
+321:33:Name -> Const:NoneType:None | U
+321:49:Name -> Const:bool:False | U
+344:11:Call -> Dict:0 | U
+344:11:Name -> Func:salt.runners.manage.list_state
+344:29:Name -> Const:NoneType:None | U
+344:45:Name -> Const:bool:False | U
+367:11:Call -> List:0
+367:11:Name -> Func:salt.runners.manage.list_not_state
+367:33:Name -> Const:NoneType:None | U
+367:49:Name -> Const:bool:False | U
+390:11:Call -> Dict:0 | U
+390:11:Name -> Func:salt.runners.manage.list_state
+390:29:Name -> Const:NoneType:None | U
+390:45:Name -> Const:bool:False | U
+413:11:Call -> List:0
+413:11:Name -> Func:salt.runners.manage.list_not_state
+413:33:Name -> Const:NoneType:None | U
+413:49:Name -> Const:bool:False | U
+436:11:Call -> Dict:0 | U
+436:11:Name -> Func:salt.runners.manage.list_state
+436:29:Name -> Const:NoneType:None | U
+436:45:Name -> Const:bool:False | U
+459:11:Call -> List:0
+459:11:Name -> Func:salt.runners.manage.list_not_state
+459:33:Name -> Const:NoneType:None | U
+459:49:Name -> Const:bool:False | U
+482:11:Call -> Dict:0 | U
+482:11:Name -> Func:salt.runners.manage.list_state
+482:29:Name -> Const:NoneType:None | U
+482:45:Name -> Const:bool:False | U
+505:11:Call -> List:0
+505:11:Name -> Func:salt.runners.manage.list_not_state
+505:33:Name -> Const:NoneType:None | U
+505:49:Name -> Const:bool:False | U
+524:17:Call -> Inst:salt.client.ssh.client.SSHClient
+524:17:Attribute -> Class:salt.client.ssh.client.SSHClient
+524:17:Attribute -> Module:salt.client.ssh.client
+524:17:Attribute -> Module:salt.client.ssh
+524:17:Attribute -> Module:salt.client
+524:17:Name -> Module:salt
+525:10:Call -> Dict:0
+525:10:Attribute -> BM:salt.client.ssh.client.SSHClient.cmd
+525:10:Name -> Inst:salt.client.ssh.client.SSHClient
+525:25:Name -> U
+525:56:Name -> Const:str:'glob' | U
+528:26:Call -> DictItems
+528:26:Attribute -> BM:builtins.dict.items
+528:26:Name -> Dict:0
+529:15:Call -> U
+529:15:Attribute -> U
+529:15:Name -> U
+529:39:Name -> U
+530:12:Name -> Dict:0
+530:21:Name -> U
+530:31:Name -> U
+532:17:Call -> Inst:salt.key.Key
+532:17:Attribute -> Class:salt.key.Key
+532:17:Attribute -> Module:salt.key
+532:17:Name -> Module:salt
+532:30:Name -> ERR
+533:31:Call -> Dict:0
+533:31:Attribute -> BM:salt.key.Key.finger
+533:31:Name -> Inst:salt.key.Key
+533:47:Name -> U
+534:23:Call -> ERR
+534:23:Attribute -> BM:builtins.dict.get
+534:23:Name -> Dict:0
+535:22:Call -> ERR
+535:22:Attribute -> BM:builtins.dict.get
+535:22:Name -> Dict:0
+536:15:Name -> U
+536:25:Name -> U
+537:20:Name -> Dict:0
+537:24:Name -> U
+539:17:Name -> U
+539:31:Name -> U
+540:16:Name -> Dict:0
+540:25:Name -> U
+540:49:Name -> U
+541:17:Name -> U
+541:25:Name -> U
+541:36:Name -> U
+542:16:Name -> Dict:0
+542:25:Name -> U
+543:20:Call -> U
+543:20:Attribute -> BM:builtins.str.format
+544:24:Name -> U
+544:32:Name -> U
+544:40:Name -> U
+548:16:Call -> Const:int:0
+548:16:Attribute -> Func:subprocess.call
+548:16:Name -> Module:subprocess
+548:53:Name -> U
+550:11:Name -> U
+550:21:Name -> Dict:0
+551:16:Name -> Dict:0
+551:20:Name -> U
+553:7:Name -> Dict:0
+554:8:Call -> ERR
+554:8:Name -> Func:builtins.print
+555:31:Call -> U
+555:31:Attribute -> U
+555:31:Name -> U
+556:12:Call -> ERR
+556:12:Name -> Func:builtins.print
+556:18:Name -> U
+557:12:Call -> ERR
+557:12:Name -> Func:builtins.print
+557:24:Call -> ERR
+557:24:Name -> Func:builtins.len
+557:28:Name -> U
+558:12:Call -> ERR
+558:12:Name -> Func:builtins.print
+558:18:Name -> U
+559:12:Call -> ERR
+559:12:Name -> Func:builtins.print
+561:4:Call -> ERR
+561:4:Attribute -> ERR
+561:4:Name -> ERR
+561:53:Call -> Const:int:0
+561:53:Name -> Func:builtins.len
+561:57:Name -> Dict:0
+562:11:Name -> Dict:0
+562:16:Name -> Dict:0
+576:13:Call -> Inst:salt.client.LocalClient
+576:13:Attribute -> Func:salt.client.get_local_client
+576:13:Attribute -> Module:salt.client
+576:13:Name -> Module:salt
+576:42:Name -> ERR
+578:18:Call -> U
+578:18:Attribute -> U
+578:18:Name -> Inst:salt.client.LocalClient
+579:59:Name -> ERR
+581:11:Name -> Class:salt.exceptions.SaltClientError
+582:8:Call -> ERR
+582:8:Name -> Func:builtins.print
+582:14:Name -> ExcInst:salt.exceptions.SaltClientError
+583:15:Name -> Dict:0
+595:21:Attribute -> Inst:salt.version.SaltStackVersion | U
+595:21:Attribute -> Module:salt.version
+595:21:Name -> Module:salt
+597:18:Name -> U
+598:15:Name -> U
+598:23:Name -> U
+598:34:Name -> U
+598:42:Name -> U
+602:29:Call -> Inst:salt.version.SaltStackVersion
+602:29:Attribute -> BM:salt.version.SaltStackVersion.parse
+602:29:Attribute -> Class:salt.version.SaltStackVersion
+602:29:Attribute -> Module:salt.version
+602:29:Name -> Module:salt
+602:65:Name -> U
+602:73:Name -> U
+603:23:Call -> Const:int:0 | Const:int:-1 | U
+603:23:Attribute -> Func:salt.utils.compat.cmp
+603:23:Attribute -> Module:salt.utils.compat
+603:23:Attribute -> Module:salt.utils
+603:23:Name -> Module:salt
+603:45:Name -> Inst:salt.version.SaltStackVersion
+603:61:Name -> Inst:salt.version.SaltStackVersion | U
+605:11:Name -> Const:int:-2 | Const:int:0 | Const:int:-1 | U
+605:27:Name -> Dict:0
+606:12:Name -> Dict:0
+606:27:Name -> Const:int:-2 | Const:int:0 | Const:int:-1 | U
+607:11:Name -> Const:bool:False | Inst:salt.version.SaltStackVersion
+608:12:Name -> Dict:0
+608:27:Name -> Const:int:-2 | Const:int:0 | Const:int:-1 | U
+608:37:Name -> U
+608:47:Attribute -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | Const:str:'Uninferable.None' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.None' | Const:str:'Uninferable.Instance of builtins.int' | U
+608:47:Name -> Inst:salt.version.SaltStackVersion
+610:12:Name -> Dict:0
+610:27:Name -> Const:int:-2 | Const:int:0 | Const:int:-1 | U
+610:37:Name -> U
+610:47:Name -> Const:bool:False
+613:4:Name -> Dict:0
+613:24:Attribute -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | Const:str:'Uninferable.None' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.None' | Const:str:'Uninferable.Instance of builtins.int' | U
+613:24:Name -> Inst:salt.version.SaltStackVersion | U
+615:15:Name -> Dict:0
+616:11:Name -> U
+617:12:Name -> Dict:0
+617:16:Name -> Dict:5
+617:23:Name -> U
+617:31:Name -> Dict:0
+619:26:Call -> ERR
+619:26:Name -> Func:builtins.sorted
+619:33:Name -> Dict:0
+619:48:Name -> U
+620:16:Call -> ERR
+620:16:Attribute -> BM:builtins.dict.setdefault
+620:16:Name -> Dict:0
+620:31:Name -> Dict:5
+620:38:Name -> U
+620:48:Name -> U
+620:58:Name -> Dict:0
+620:73:Name -> U
+620:78:Name -> U
+621:11:Name -> Dict:0
+706:18:Call -> ERR
+706:18:Attribute -> ERR
+706:18:Name -> ERR
+707:7:Name -> Const:str:'flat' | U
+708:8:Name -> U
+708:32:Name -> Const:str:'flat' | U
+710:7:Name -> Const:NoneType:None | U
+711:8:Name -> U
+711:34:Name -> U
+713:7:Name -> Const:NoneType:None | U
+714:8:Name -> U
+714:36:Name -> U
+716:7:Name -> Const:NoneType:None | U
+717:8:Name -> U
+717:34:Name -> U
+719:16:Call -> U
+719:16:Attribute -> BM:builtins.str.split | U
+719:16:Name -> Const:str:'' | U
+720:8:Name -> U
+720:29:Name -> U
+721:8:Name -> U
+722:18:Call -> U
+722:18:Attribute -> BM:builtins.str.format
+722:34:Call -> Const:str:'' | U
+722:34:Attribute -> BM:builtins.str.rstrip | U
+722:34:Name -> Const:str:'/tmp/.bootstrap' | U
+722:55:Call -> Inst:uuid.UUID
+722:55:Attribute -> Func:uuid.uuid4
+722:55:Name -> Module:uuid
+723:25:Call -> U
+723:25:Attribute -> Func:posixpath.join | Func:ntpath.join
+723:25:Attribute -> Module:posixpath | Module:ntpath
+723:25:Name -> Module:os
+723:38:Name -> U
+725:12:Name -> U
+725:52:Name -> Const:str:'/tmp/.bootstrap' | U
+726:12:Call -> Dict:1 | Dict:0
+726:12:Attribute -> BM:salt.client.ssh.SSH.run
+726:12:Call -> Inst:salt.client.ssh.SSH
+726:12:Attribute -> Class:salt.client.ssh.SSH
+726:12:Attribute -> Module:salt.client.ssh
+726:12:Attribute -> Module:salt.client
+726:12:Name -> Module:salt
+726:32:Name -> U
+727:12:Name -> U
+729:16:Name -> Const:str:'https://github.com/saltstack/salt-boots | U
+730:27:Name -> Const:str:'tornado' | U
+731:28:Name -> U
+733:12:Call -> Dict:1 | Dict:0
+733:12:Attribute -> BM:salt.client.ssh.SSH.run
+733:12:Call -> Inst:salt.client.ssh.SSH
+733:12:Attribute -> Class:salt.client.ssh.SSH
+733:12:Attribute -> Module:salt.client.ssh
+733:12:Attribute -> Module:salt.client
+733:12:Name -> Module:salt
+733:32:Name -> U
+734:12:Name -> U
+736:16:Call -> Const:str:''
+736:16:Attribute -> BM:builtins.str.join
+736:32:Name -> U
+736:48:Name -> Const:str:'' | U
+739:12:Call -> Dict:1 | Dict:0
+739:12:Attribute -> BM:salt.client.ssh.SSH.run
+739:12:Call -> Inst:salt.client.ssh.SSH
+739:12:Attribute -> Class:salt.client.ssh.SSH
+739:12:Attribute -> Module:salt.client.ssh
+739:12:Attribute -> Module:salt.client
+739:12:Name -> Module:salt
+739:32:Name -> U
+740:12:Name -> U
+740:50:Name -> Const:str:'/tmp/.bootstrap' | U
+741:12:Call -> Dict:1 | Dict:0
+741:12:Attribute -> BM:salt.client.ssh.SSH.run
+741:12:Call -> Inst:salt.client.ssh.SSH
+741:12:Attribute -> Class:salt.client.ssh.SSH
+741:12:Attribute -> Module:salt.client.ssh
+741:12:Attribute -> Module:salt.client
+741:12:Name -> Module:salt
+741:32:Name -> U
+742:15:Name -> Class:salt.exceptions.SaltSystemExit
+743:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+743:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+743:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+743:22:Call -> Const:str:''
+743:22:Name -> Class:builtins.str
+743:26:Name -> ExcInst:salt.exceptions.SaltSystemExit
+793:11:Name -> Const:NoneType:None | U
+795:17:Call -> U
+795:17:Attribute -> U
+795:17:Call -> U
+795:17:Attribute -> Func:urllib.request.urlopen
+795:17:Attribute -> Module:urllib.request
+795:17:Name -> Module:urllib
+795:40:Name -> Const:str:'https://repo.saltproject.io/windows/'
+796:19:Call -> U
+796:19:Attribute -> Func:re.compile
+796:19:Name -> Module:re
+799:22:Call -> ERR
+799:22:Name -> Func:builtins.sorted
+801:17:Name -> U
+801:23:Name -> U
+801:28:Name -> U
+801:34:Call -> ERR
+801:34:Attribute -> Func:time.strptime
+801:34:Name -> Module:time
+801:48:Name -> U
+802:45:Call -> U
+802:45:Attribute -> U
+802:45:Name -> U
+802:62:Name -> U
+804:16:Call -> Inst:operator.itemgetter | Inst:_operator.operator.itemgetter | U
+804:16:Attribute -> Class:operator.itemgetter | Class:_operator.operator.itemgetter | U
+804:16:Name -> Module:operator
+807:11:Name -> Const:NoneType:None | U
+808:27:Name -> U
+808:38:Name -> U
+808:53:Name -> U
+808:61:Name -> U
+809:11:Name -> Const:str:'win32' | U
+810:27:Name -> U
+810:38:Name -> U
+810:53:Name -> U
+810:61:Name -> Const:str:'win32' | U
+812:15:Name -> U
+815:18:Name -> U
+816:15:Name -> U
+817:24:Name -> Const:str:'https://repo.saltproject.io/windows/'
+817:35:Name -> U
+848:7:Name -> Const:NoneType:None | U
+849:40:Name -> U
+855:7:Name -> Const:str:'win32' | U
+856:19:Call -> Const:str:'strFileURL = "http://download.microsoft
+856:19:Attribute -> BM:builtins.str.format
+856:19:Name -> Const:str:'strFileURL = "{0}"\nstrHDLocation = "{1
+858:12:Name -> Const:str:'vcredist.exe'
+862:19:Call -> Const:str:'strFileURL = "http://download.microsoft
+862:19:Attribute -> BM:builtins.str.format
+862:19:Name -> Const:str:'strFileURL = "{0}"\nstrHDLocation = "{1
+864:12:Name -> Const:str:'vcredist.exe'
+868:14:Call -> U
+868:14:Attribute -> BM:builtins.str.format
+868:14:Name -> Const:str:'strFileURL = "{0}"\nstrHDLocation = "{1
+868:31:Name -> Const:NoneType:None | U
+868:46:Name -> Const:str:'saltinstall.exe'
+868:59:Name -> Const:str:' /S /minion-name=%COMPUTERNAME%' | Const:str:' /S /minion-name=%COMPUTERNAME% /master
+885:18:Name -> Const:str:'vcredist.exe'
+885:32:Name -> Const:str:'strFileURL = "http://download.microsoft | Const:str:'strFileURL = "http://download.microsoft
+885:44:Name -> Const:str:'saltinstall.exe'
+885:57:Name -> U
+886:19:Call -> U
+886:19:Attribute -> BM:builtins.str.split | BM:builtins.str.split | U
+886:19:Name -> Const:str:'strFileURL = "http://download.microsoft | Const:str:'strFileURL = "http://download.microsoft | U
+889:14:Name -> Const:str:'vcredist.exe' | Const:str:'saltinstall.exe'
+891:14:Name -> U
+893:14:Name -> Const:str:'vcredist.exe' | Const:str:'saltinstall.exe'
+895:14:Call -> Const:str:''
+895:14:Attribute -> BM:builtins.str.join | BM:builtins.str.join
+895:24:Name -> Const:str:'vcredist.exe' | Const:str:'saltinstall.exe'
+895:49:Name -> U
+897:14:Name -> Const:str:'vcredist.exe' | Const:str:'saltinstall.exe'
+899:14:Name -> Const:str:'vcredist.exe' | Const:str:'saltinstall.exe'
+903:17:Call -> Tuple:2
+903:17:Attribute -> Func:tempfile.mkstemp
+903:17:Name -> Module:tempfile
+904:9:Call -> U
+904:9:Attribute -> Func:salt.utils.files.fopen
+904:9:Attribute -> Module:salt.utils.files
+904:9:Attribute -> Module:salt.utils
+904:9:Name -> Module:salt
+904:32:Name -> U
+905:8:Call -> U
+905:8:Attribute -> U
+905:8:Name -> U
+905:25:Name -> Const:str:'cd /d %TEMP%\nnet stop salt-minion\ndel | U
+907:16:Call -> U
+907:16:Attribute -> BM:builtins.str.split | U
+907:16:Name -> Const:str:'' | U
+908:35:Name -> U
+909:11:Name -> Const:NoneType:None | U
+910:27:Name -> U
+911:15:Name -> Const:NoneType:None | U
+912:31:Name -> U
+913:29:Name -> U
+914:8:Call -> Const:int:0
+914:8:Attribute -> Func:subprocess.call
+914:8:Name -> Module:subprocess
+914:24:Name -> U

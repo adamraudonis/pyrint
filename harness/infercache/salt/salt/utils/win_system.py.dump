@@ -1,0 +1,160 @@
+22:7:Name -> Class:builtins.ImportError
+26:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+26:6:Attribute -> Func:logging.getLogger
+26:6:Name -> Module:logging
+26:24:Name -> Const:str:'salt.utils.win_system' | Const:str:'__main__'
+38:11:Call -> U
+38:11:Attribute -> Func:salt.utils.platform.is_windows
+38:11:Attribute -> Module:salt.utils.platform
+38:11:Attribute -> Module:salt.utils
+38:11:Name -> Module:salt
+44:11:Name -> Const:bool:True | Const:bool:False
+50:11:Name -> Const:str:'win_system'
+70:11:Call -> U
+70:11:Attribute -> U
+70:11:Name -> U
+70:38:Attribute -> U
+70:38:Name -> U
+71:19:Name -> U
+71:11:Name -> U
+96:14:Call -> U | Const:bool:False
+96:14:Name -> Func:salt.utils.win_system.get_computer_name
+98:18:Call -> Dict:6
+98:18:Attribute -> Func:salt.utils.win_reg.read_value
+98:18:Attribute -> Module:salt.utils.win_reg
+98:18:Attribute -> Module:salt.utils
+98:18:Name -> Module:salt
+103:11:Name -> Class:builtins.TypeError
+107:7:Name -> Const:NoneType:None
+108:26:Call -> U
+108:26:Attribute -> U
+108:26:Name -> U
+108:45:Call -> U
+108:45:Attribute -> U
+108:45:Name -> U | Const:bool:False
+108:15:Name -> U
+137:19:Name -> Tuple:3
+138:14:Call -> Const:str:''
+138:14:Attribute -> BM:builtins.str.join
+138:25:Name -> Const:str:'SOFTWARE\\Microsoft\\Windows\\CurrentVe
+138:35:Name -> Const:str:'RebootPending' | Const:str:'RebootInProgress' | Const:str:'PackagesPending'
+139:11:Call -> Const:bool:True | Const:bool:False | Const:bool:True
+139:11:Attribute -> Func:salt.utils.win_reg.key_exists
+139:11:Attribute -> Module:salt.utils.win_reg
+139:11:Attribute -> Module:salt.utils
+139:11:Name -> Module:salt
+139:58:Name -> Const:str:''
+172:19:Name -> Tuple:2
+173:14:Call -> Const:str:''
+173:14:Attribute -> BM:builtins.str.join
+173:25:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\Ne
+173:35:Name -> Const:str:'AvoidSpnSet' | Const:str:'JoinDomain'
+174:11:Call -> Const:bool:True | Const:bool:False | Const:bool:True
+174:11:Attribute -> Func:salt.utils.win_reg.key_exists
+174:11:Attribute -> Module:salt.utils.win_reg
+174:11:Attribute -> Module:salt.utils
+174:11:Name -> Module:salt
+174:58:Name -> Const:str:''
+210:17:Name -> Tuple:2
+211:18:Call -> Dict:6
+211:18:Attribute -> Func:salt.utils.win_reg.read_value
+211:18:Attribute -> Module:salt.utils.win_reg
+211:18:Attribute -> Module:salt.utils
+211:18:Name -> Module:salt
+211:65:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Control\\Ses
+211:76:Name -> Const:str:'PendingFileRenameOperations' | Const:str:'PendingFileRenameOperations2'
+212:11:Name -> Dict:6
+213:15:Name -> Dict:6
+213:37:Name -> Dict:6
+248:14:Call -> Dict:6
+248:14:Attribute -> Func:salt.utils.win_reg.read_value
+248:14:Attribute -> Module:salt.utils.win_reg
+248:14:Attribute -> Module:salt.utils
+248:14:Name -> Module:salt
+248:61:Name -> Const:str:'SOFTWARE\\Microsoft\\ServerManager'
+248:72:Name -> Const:str:'CurrentRebootAttempts'
+249:7:Name -> Dict:6
+251:15:Call -> Const:int:0
+251:15:Name -> Class:builtins.int
+251:19:Name -> Dict:6
+253:15:Name -> Class:builtins.ValueError
+280:11:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+280:11:Attribute -> Func:salt.utils.win_reg.value_exists
+280:11:Attribute -> Module:salt.utils.win_reg
+280:11:Attribute -> Module:salt.utils
+280:11:Name -> Module:salt
+314:19:Name -> Tuple:2
+315:14:Call -> Const:str:''
+315:14:Attribute -> BM:builtins.str.join
+315:25:Name -> Const:str:'SOFTWARE\\Microsoft\\Windows\\CurrentVe
+315:35:Name -> Const:str:'RebootRequired' | Const:str:'PostRebootReporting'
+316:11:Call -> Const:bool:True | Const:bool:False | Const:bool:True
+316:11:Attribute -> Func:salt.utils.win_reg.key_exists
+316:11:Attribute -> Module:salt.utils.win_reg
+316:11:Attribute -> Module:salt.utils
+316:11:Name -> Module:salt
+316:58:Name -> Const:str:''
+350:17:Call -> Dict:6
+350:17:Attribute -> Func:salt.utils.win_reg.read_value
+350:17:Attribute -> Module:salt.utils.win_reg
+350:17:Attribute -> Module:salt.utils
+350:17:Name -> Module:salt
+351:25:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\sa
+351:52:Name -> Const:str:'Reboot required'
+353:11:Name -> Dict:6
+384:11:Call -> Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:False
+384:11:Attribute -> Func:salt.utils.win_reg.set_value
+384:11:Attribute -> Module:salt.utils.win_reg
+384:11:Attribute -> Module:salt.utils
+384:11:Name -> Module:salt
+386:12:Name -> Const:str:'SYSTEM\\CurrentControlSet\\Services\\sa
+388:14:Name -> Const:str:'Reboot required'
+414:14:Call -> Dict:6
+414:14:Attribute -> Func:salt.utils.win_reg.read_value
+414:14:Attribute -> Module:salt.utils.win_reg
+414:14:Attribute -> Module:salt.utils
+414:14:Name -> Module:salt
+415:25:Name -> Const:str:'SOFTWARE\\Microsoft\\Updates'
+417:7:Name -> Dict:6
+419:15:Call -> Const:int:0
+419:15:Name -> Class:builtins.int
+419:19:Name -> Dict:6
+421:15:Name -> Class:builtins.ValueError
+446:11:Call -> Const:bool:False | U | Const:bool:False
+446:11:Attribute -> Func:salt.utils.win_update.needs_reboot
+446:11:Attribute -> Module:salt.utils.win_update
+446:11:Attribute -> Module:salt.utils
+446:11:Name -> Module:salt
+467:8:Name -> Func:salt.utils.win_system.get_pending_update
+468:8:Name -> Func:salt.utils.win_system.get_pending_windows_update
+469:8:Name -> Func:salt.utils.win_system.get_pending_update_exe_volatile
+470:8:Name -> Func:salt.utils.win_system.get_pending_file_rename
+471:8:Name -> Func:salt.utils.win_system.get_pending_servermanager
+472:8:Name -> Func:salt.utils.win_system.get_pending_component_servicing
+473:8:Name -> Func:salt.utils.win_system.get_pending_dvd_reboot
+474:8:Name -> Func:salt.utils.win_system.get_reboot_required_witnessed
+475:8:Name -> Func:salt.utils.win_system.get_pending_computer_name
+476:8:Name -> Func:salt.utils.win_system.get_pending_domain_join
+479:17:Name -> Tuple:10
+480:11:Call -> Const:bool:True | Const:bool:False | Const:bool:False | U | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+480:11:Name -> Func:salt.utils.win_system.get_pending_update | Func:salt.utils.win_system.get_pending_windows_update | Func:salt.utils.win_system.get_pending_update_exe_volatile | Func:salt.utils.win_system.get_pending_file_rename | Func:salt.utils.win_system.get_pending_servermanager | Func:salt.utils.win_system.get_pending_component_servicing | Func:salt.utils.win_system.get_pending_dvd_reboot | U
+505:39:Call -> Const:bool:True | Const:bool:False
+505:39:Name -> Func:salt.utils.win_system.get_pending_component_servicing
+506:35:Call -> Const:NoneType:None | U | Const:NoneType:None
+506:35:Name -> Func:salt.utils.win_system.get_pending_computer_name
+507:30:Call -> Const:bool:False | Const:bool:True | Const:bool:True | Const:bool:False
+507:30:Name -> Func:salt.utils.win_system.get_pending_dvd_reboot
+508:31:Call -> Const:bool:True | Const:bool:False
+508:31:Name -> Func:salt.utils.win_system.get_pending_file_rename
+509:31:Call -> Const:bool:True | Const:bool:False
+509:31:Name -> Func:salt.utils.win_system.get_pending_domain_join
+510:33:Call -> Const:bool:True | Const:bool:False
+510:33:Name -> Func:salt.utils.win_system.get_pending_servermanager
+511:26:Call -> Const:bool:True | Const:bool:False
+511:26:Name -> Func:salt.utils.win_system.get_pending_update
+512:34:Call -> Const:bool:False | U | Const:bool:False
+512:34:Name -> Func:salt.utils.win_system.get_pending_windows_update
+513:37:Call -> Const:bool:False
+513:37:Name -> Func:salt.utils.win_system.get_reboot_required_witnessed
+514:31:Call -> Const:bool:True | Const:bool:False
+514:31:Name -> Func:salt.utils.win_system.get_pending_update_exe_volatile

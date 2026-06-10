@@ -1,0 +1,70 @@
+14:15:Name -> U
+14:33:Call -> U
+14:33:Attribute -> U
+14:33:Name -> Const:NoneType:None | U
+17:1:Call -> Inst:django.test.utils.override_settings
+17:1:Name -> Class:django.test.utils.override_settings
+17:37:Call -> Inst:tests.check_framework.test_multi_db.TestRouter
+17:37:Name -> Class:tests.check_framework.test_multi_db.TestRouter
+18:1:Call -> Inst:django.test.utils.isolate_apps
+18:1:Name -> Class:django.test.utils.isolate_apps
+19:24:Name -> Class:django.test.testcases.SimpleTestCase
+21:15:Call -> Inst:unittest.mock._patch
+21:15:Attribute -> Func:unittest.mock._patch_object
+21:15:Attribute -> Func:unittest.mock.patch
+21:15:Name -> Module:unittest.mock
+21:33:Attribute -> U
+21:33:Name -> Inst:django.db.utils.ConnectionHandler
+21:45:Name -> U
+24:20:Attribute -> Class:django.db.models.base.Model
+24:20:Name -> Module:django.db.models
+25:20:Call -> Inst:django.db.models.fields.CharField
+25:20:Attribute -> Class:django.db.models.fields.CharField
+25:20:Name -> Module:django.db.models
+27:16:Call -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks.test_checks_called_on_the_default_database.Model
+27:16:Name -> Class:tests.check_framework.test_multi_db.TestMultiDBChecks.test_checks_called_on_the_default_database.Model
+28:13:Call -> Inst:unittest.mock._patch
+28:13:Attribute -> BM:tests.check_framework.test_multi_db.TestMultiDBChecks._patch_check_field_on
+28:13:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+29:17:Call -> Inst:unittest.mock._patch
+29:17:Attribute -> BM:tests.check_framework.test_multi_db.TestMultiDBChecks._patch_check_field_on
+29:17:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+30:16:Call -> List:0 | U
+30:16:Attribute -> BM:django.db.models.base.Model.check
+30:16:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks.test_checks_called_on_the_default_database.Model
+31:16:Call -> Const:NoneType:None
+31:16:Attribute -> BM:unittest.case.TestCase.assertTrue
+31:16:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+31:32:Attribute -> U
+31:32:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+32:16:Call -> Const:NoneType:None
+32:16:Attribute -> BM:unittest.case.TestCase.assertFalse
+32:16:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+32:33:Attribute -> U
+32:33:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+35:25:Attribute -> Class:django.db.models.base.Model
+35:25:Name -> Module:django.db.models
+36:20:Call -> Inst:django.db.models.fields.CharField
+36:20:Attribute -> Class:django.db.models.fields.CharField
+36:20:Name -> Module:django.db.models
+38:16:Call -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks.test_checks_called_on_the_other_database.OtherModel
+38:16:Name -> Class:tests.check_framework.test_multi_db.TestMultiDBChecks.test_checks_called_on_the_other_database.OtherModel
+39:13:Call -> Inst:unittest.mock._patch
+39:13:Attribute -> BM:tests.check_framework.test_multi_db.TestMultiDBChecks._patch_check_field_on
+39:13:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+40:17:Call -> Inst:unittest.mock._patch
+40:17:Attribute -> BM:tests.check_framework.test_multi_db.TestMultiDBChecks._patch_check_field_on
+40:17:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+41:16:Call -> List:0 | U
+41:16:Attribute -> BM:django.db.models.base.Model.check
+41:16:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks.test_checks_called_on_the_other_database.OtherModel
+42:16:Call -> Const:NoneType:None
+42:16:Attribute -> BM:unittest.case.TestCase.assertTrue
+42:16:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+42:32:Attribute -> U
+42:32:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock
+43:16:Call -> Const:NoneType:None
+43:16:Attribute -> BM:unittest.case.TestCase.assertFalse
+43:16:Name -> Inst:tests.check_framework.test_multi_db.TestMultiDBChecks
+43:33:Attribute -> U
+43:33:Name -> Dict:0 | U | Inst:unittest.mock.AsyncMock | Inst:unittest.mock.NonCallableMagicMock | Inst:unittest.mock.MagicMock

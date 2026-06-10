@@ -1,0 +1,53 @@
+13:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+13:10:Attribute -> Func:logging.getLogger
+13:10:Name -> Module:logging
+13:28:Name -> Const:str:'homeassistant.components.kira.sensor' | Const:str:'__main__'
+17:10:Name -> U
+18:12:Name -> Class:builtins.dict
+19:18:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+20:20:Name -> Class:builtins.dict
+23:7:Name -> Const:NoneType:None | U
+24:15:Call -> U
+24:15:Attribute -> U
+24:15:Name -> U
+24:34:Name -> Const:str:'name'
+25:17:Call -> U
+25:17:Attribute -> U
+25:17:Name -> U
+25:36:Name -> Const:str:'device'
+26:15:Attribute -> U
+26:15:Name -> U
+26:25:Name -> Const:str:'kira'
+26:33:Name -> Const:str:'sensor'
+26:46:Name -> U
+28:8:Call -> U
+28:8:Name -> U
+28:22:Call -> Inst:homeassistant.components.kira.sensor.KiraReceiver
+28:22:Name -> Class:homeassistant.components.kira.sensor.KiraReceiver
+28:35:Name -> U
+28:43:Name -> U
+31:19:Name -> Class:homeassistant.components.sensor.SensorEntity
+40:8:Name -> Inst:homeassistant.components.kira.sensor.KiraReceiver
+40:26:Name -> U
+41:8:Name -> Inst:homeassistant.components.kira.sensor.KiraReceiver
+41:45:Name -> Const:str:'device'
+41:58:Name -> Const:str:'unknown'
+43:8:Call -> U
+43:8:Attribute -> U
+43:8:Name -> U
+43:30:Attribute -> BM:homeassistant.components.kira.sensor.KiraReceiver._update_callback
+43:30:Name -> Inst:homeassistant.components.kira.sensor.KiraReceiver
+46:28:Name -> U
+47:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+47:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+47:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+47:39:Name -> U
+48:8:Name -> Inst:homeassistant.components.kira.sensor.KiraReceiver
+48:34:Name -> U
+49:8:Attribute -> Dict:1
+49:8:Name -> Inst:homeassistant.components.kira.sensor.KiraReceiver
+49:42:Name -> Const:str:'device'
+49:57:Name -> U
+50:8:Call -> Const:NoneType:None
+50:8:Attribute -> BM:homeassistant.helpers.entity.Entity.schedule_update_ha_state
+50:8:Name -> Inst:homeassistant.components.kira.sensor.KiraReceiver

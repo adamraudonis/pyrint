@@ -1,0 +1,110 @@
+48:11:Call -> U
+48:11:Attribute -> BM:builtins.str.format
+48:45:Attribute -> Dict:43 | Inst:os._Environ
+48:45:Name -> Module:os
+55:4:Call -> ERR
+55:4:Attribute -> Func:readline.write_history_file
+55:4:Name -> Module:readline
+55:32:Name -> U
+63:15:Call -> Inst:salt.utils.optsdict.OptsDict
+63:15:Attribute -> Func:salt.config.client_config
+63:15:Attribute -> Module:salt.config
+63:15:Name -> Module:salt
+64:8:Call -> U | Const:str:'/etc/salt/minion'
+64:8:Attribute -> BM:builtins.dict.get | BM:_collections_abc.Mapping.get
+64:8:Attribute -> Dict:43 | Inst:os._Environ
+64:8:Name -> Module:os
+68:23:Name -> Inst:salt.utils.optsdict.OptsDict
+68:39:Name -> Inst:salt.utils.optsdict.OptsDict
+69:8:Name -> Inst:salt.utils.optsdict.OptsDict
+69:29:Call -> U
+69:29:Attribute -> Func:salt.loader.grains
+69:29:Attribute -> Module:salt.loader
+69:29:Name -> Module:salt
+69:48:Name -> Inst:salt.utils.optsdict.OptsDict
+72:28:Name -> Inst:salt.utils.optsdict.OptsDict
+72:44:Name -> Inst:salt.utils.optsdict.OptsDict
+73:8:Name -> Inst:salt.utils.optsdict.OptsDict
+76:19:Name -> Inst:salt.utils.optsdict.OptsDict
+76:35:Name -> Inst:salt.utils.optsdict.OptsDict
+77:8:Name -> Inst:salt.utils.optsdict.OptsDict
+80:15:Call -> Inst:salt.loader.lazy.LazyLoader
+80:15:Attribute -> Func:salt.loader.minion_mods
+80:15:Attribute -> Module:salt.loader
+80:15:Name -> Module:salt
+80:39:Name -> Inst:salt.utils.optsdict.OptsDict
+81:17:Name -> Inst:salt.utils.optsdict.OptsDict
+83:7:Name -> Inst:salt.utils.optsdict.OptsDict
+84:21:Call -> Dict:0 | U
+84:21:Attribute -> BM:salt.pillar.PillarCache.compile_pillar | U
+84:21:Call -> Inst:salt.pillar.PillarCache | U
+84:21:Attribute -> Func:salt.pillar.get_pillar
+84:21:Attribute -> Module:salt.pillar
+84:21:Name -> Module:salt
+85:12:Name -> Inst:salt.utils.optsdict.OptsDict
+86:12:Name -> U
+87:12:Call -> U | Const:NoneType:None
+87:12:Attribute -> BM:salt.utils.optsdict.OptsDict.get
+87:12:Name -> Inst:salt.utils.optsdict.OptsDict
+88:12:Call -> U | Const:NoneType:None
+88:12:Attribute -> BM:salt.utils.optsdict.OptsDict.get
+88:12:Name -> Inst:salt.utils.optsdict.OptsDict
+95:15:Call -> U
+95:15:Attribute -> U
+95:15:Call -> U
+95:15:Attribute -> U
+95:15:Name -> U
+95:31:Name -> U
+96:19:Name -> U
+96:36:Name -> Inst:salt.loader.lazy.LazyLoader
+96:51:Name -> Inst:salt.utils.optsdict.OptsDict
+96:68:Name -> Dict:0 | U | Dict:0
+96:82:Name -> Dict:0
+101:11:Call -> ERR
+101:11:Name -> Func:builtins.locals
+108:16:Call -> U
+108:16:Name -> Func:tests.saltsh.get_salt_vars
+114:11:Name -> U
+115:12:Name -> Module:builtins
+115:25:Name -> U
+116:12:Call -> Const:NoneType:None
+116:12:Attribute -> Func:salt.output.display_output
+116:12:Attribute -> Module:salt.output
+116:12:Name -> Module:salt
+116:39:Name -> U
+116:50:Name -> U
+118:4:Name -> Module:sys
+118:22:Name -> Func:tests.saltsh.main.salt_outputter
+121:4:Call -> ERR
+121:4:Attribute -> Func:readline.set_history_length
+121:4:Name -> Module:readline
+123:7:Call -> Const:bool:False | Const:bool:True | U
+123:7:Attribute -> Func:genericpath.exists | U
+123:7:Attribute -> Module:posixpath | Module:ntpath
+123:7:Name -> Module:os
+123:22:Name -> U
+124:8:Call -> ERR
+124:8:Attribute -> Func:readline.read_history_file
+124:8:Name -> Module:readline
+124:35:Name -> U
+126:4:Call -> ERR
+126:4:Attribute -> Func:atexit.register
+126:4:Name -> Module:atexit
+126:20:Name -> Func:tests.saltsh.savehist
+127:4:Call -> ERR
+127:4:Attribute -> Func:atexit.register
+127:4:Name -> Module:atexit
+127:28:Call -> U
+127:28:Attribute -> BM:_io.TextIOWrapper.write | BM:_io.StringIO.write | U
+127:28:Attribute -> Inst:_io.TextIOWrapper | Const:NoneType:None | Inst:_io.StringIO | U
+127:28:Name -> Module:sys
+129:15:Call -> Inst:code.InteractiveConsole
+129:15:Name -> Class:code.InteractiveConsole
+129:41:Name -> U
+130:4:Call -> Const:NoneType:None
+130:4:Attribute -> BM:code.InteractiveConsole.interact
+130:4:Name -> Inst:code.InteractiveConsole
+130:29:Name -> Const:str:'\nWelcome to the Salt repl which expose
+133:3:Name -> Const:str:'tests.saltsh' | Const:str:'__main__'
+134:4:Call -> Const:NoneType:None
+134:4:Name -> Func:tests.saltsh.main

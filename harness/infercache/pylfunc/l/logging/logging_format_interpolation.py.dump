@@ -1,0 +1,85 @@
+5:7:Name -> Class:builtins.ImportError
+16:0:Call -> Const:NoneType:None
+16:0:Attribute -> Func:logging.debug
+16:0:Name -> Module:logging
+16:22:Call -> Const:str:'4, 5'
+16:22:Attribute -> BM:builtins.str.format
+17:0:Call -> Const:NoneType:None
+17:0:Attribute -> Func:logging.log
+17:0:Name -> Module:logging
+17:20:Attribute -> Const:int:10
+17:20:Name -> Module:logging
+17:43:Call -> Const:str:'msg: Run!'
+17:43:Attribute -> BM:builtins.str.format
+18:0:Call -> Const:NoneType:None
+18:0:Attribute -> Func:logging.debug
+18:0:Name -> Module:logging
+18:22:Call -> Const:str:'4, 5'
+18:22:Attribute -> BM:builtins.str.format
+18:22:Name -> Const:str:'{0}, {1}'
+19:0:Call -> Const:NoneType:None
+19:0:Attribute -> Func:logging.log
+19:0:Name -> Module:logging
+19:20:Attribute -> Const:int:10
+19:20:Name -> Module:logging
+19:43:Call -> Const:str:'4, 5'
+19:43:Attribute -> BM:builtins.str.format
+19:43:Name -> Const:str:'{0}, {1}'
+20:0:Call -> Const:NoneType:None
+20:0:Attribute -> Func:logging.info
+20:0:Name -> Module:logging
+20:21:Call -> Const:str:'Read 123456789 rows'
+20:21:Attribute -> BM:builtins.str.format
+23:0:Call -> Const:NoneType:None
+23:0:Attribute -> Func:logging.debug
+23:0:Name -> Module:logging
+23:22:Call -> ERR
+23:22:Name -> Func:builtins.format
+24:0:Call -> Const:NoneType:None
+24:0:Attribute -> Func:logging.debug
+24:0:Name -> Module:logging
+24:22:Call -> U
+24:22:Attribute -> U | Func:builtins.format
+24:22:Name -> U | Module:builtins
+25:0:Call -> Const:NoneType:None
+25:0:Attribute -> Func:logging.log
+25:0:Name -> Module:logging
+25:20:Attribute -> Const:int:10
+25:20:Name -> Module:logging
+25:43:Call -> Const:str:''
+25:43:Attribute -> BM:builtins.str.upper
+26:0:Call -> ERR
+26:0:Attribute -> ERR
+26:0:Name -> Module:os
+26:14:Call -> Const:str:'4, 5'
+26:14:Attribute -> BM:builtins.str.format
+27:0:Call -> ERR
+27:0:Attribute -> ERR
+27:0:Name -> Module:os
+27:12:Attribute -> ERR
+27:12:Name -> Module:os
+27:27:Call -> Const:str:'msg: Run!'
+27:27:Attribute -> BM:builtins.str.format
+28:0:Call -> Const:NoneType:None
+28:0:Attribute -> Func:logging.info
+28:0:Name -> Module:logging
+28:21:Call -> Const:str:'Read 123,456,789 rows'
+28:21:Attribute -> BM:builtins.str.format
+29:0:Call -> Const:NoneType:None
+29:0:Attribute -> Func:logging.info
+29:0:Name -> Module:logging
+29:21:Call -> U
+29:21:Attribute -> U
+29:21:Name -> U
+32:13:Attribute -> Class:logging.Logger
+32:13:Name -> Module:logging
+35:16:Call -> Inst:pylfunc.l.logging.logging_format_interpolation.Logger
+35:16:Name -> Class:pylfunc.l.logging.logging_format_interpolation.Logger
+36:0:Call -> Const:NoneType:None
+36:0:Attribute -> BM:logging.Logger.info
+36:0:Name -> Inst:pylfunc.l.logging.logging_format_interpolation.Logger
+36:19:Call -> Const:str:'testing info'
+36:19:Attribute -> BM:builtins.str.format
+37:0:Call -> Const:NoneType:None
+37:0:Attribute -> BM:logging.Logger.info
+37:0:Name -> Inst:pylfunc.l.logging.logging_format_interpolation.Logger

@@ -1,0 +1,71 @@
+22:4:Attribute -> U
+22:4:Attribute -> U
+22:4:Name -> U
+23:4:Attribute -> U
+23:4:Attribute -> U
+23:4:Name -> U
+24:4:Attribute -> U
+24:4:Attribute -> U
+24:4:Name -> U
+28:1:Attribute -> U
+28:1:Name -> U
+30:15:Name -> U
+31:4:Call -> U
+31:4:Attribute -> U
+31:4:Name -> U
+33:8:Name -> Module:salt.modules.win_lgpo
+35:27:Attribute -> Func:salt.modules.cmdmod.run
+35:27:Name -> Module:salt.modules.cmdmod
+36:36:Attribute -> Func:salt.modules.file.file_exists | Inst:builtins.function
+36:36:Name -> Module:salt.modules.win_file
+37:33:Attribute -> Func:salt.modules.win_file.makedirs_
+37:33:Name -> Module:salt.modules.win_file
+38:31:Attribute -> Func:salt.modules.win_file.remove
+38:31:Name -> Module:salt.modules.win_file
+39:30:Attribute -> Func:salt.modules.file.write | Inst:builtins.function
+39:30:Name -> Module:salt.modules.win_file
+42:28:Call -> Const:str:''
+42:28:Name -> Class:builtins.str
+42:32:Name -> U
+45:53:Attribute -> Func:salt.utils.win_lgpo_auditpol.get_advaudit_policy_rows
+45:53:Name -> Module:salt.utils.win_lgpo_auditpol
+46:46:Attribute -> Func:salt.utils.win_lgpo_auditpol.get_auditpol_dump
+46:46:Name -> Module:salt.utils.win_lgpo_auditpol
+47:34:Attribute -> Func:salt.utils.win_reg.read_value
+47:34:Name -> Module:salt.utils.win_reg
+50:8:Name -> Module:salt.modules.win_file
+52:34:Attribute -> Func:salt.utils.win_dacl.set_perms
+52:34:Name -> Module:salt.utils.win_dacl
+65:32:Call -> Tuple:4 | Tuple:4 | Tuple:4 | Tuple:4 | Tuple:4 | Tuple:4 | Tuple:4 | Tuple:4
+65:32:Attribute -> Func:salt.modules.win_lgpo._lookup_admin_template
+65:32:Attribute -> Module:salt.modules.win_lgpo
+65:32:Attribute -> Module:salt.modules
+65:32:Name -> Module:salt
+66:20:Name -> U
+66:46:Name -> U
+68:7:Name -> Const:bool:True | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False
+69:15:Call -> Dict:0 | U | Dict:1
+69:15:Attribute -> Func:salt.modules.win_lgpo._get_policy_adm_setting
+69:15:Attribute -> Module:salt.modules.win_lgpo
+69:15:Attribute -> Module:salt.modules
+69:15:Name -> Module:salt
+70:24:Name -> U | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+71:25:Name -> U
+73:37:Name -> U
+74:32:Name -> U
+80:13:Call -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+80:13:Name -> Func:tests.pytests.unit.modules.win_lgpo.test_point_print_nc._get_policy_adm_setting
+87:11:Name -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+87:21:Name -> Dict:1
+91:13:Call -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+91:13:Name -> Func:tests.pytests.unit.modules.win_lgpo.test_point_print_nc._get_policy_adm_setting
+104:11:Name -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+104:21:Name -> Dict:1
+108:13:Call -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+108:13:Name -> Func:tests.pytests.unit.modules.win_lgpo.test_point_print_nc._get_policy_adm_setting
+115:11:Name -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+115:21:Name -> Dict:1
+119:13:Call -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+119:13:Name -> Func:tests.pytests.unit.modules.win_lgpo.test_point_print_nc._get_policy_adm_setting
+132:11:Name -> Dict:0 | U | Dict:1 | Const:str:'Policy Not Found'
+132:21:Name -> Dict:1

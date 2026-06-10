@@ -1,0 +1,135 @@
+10:4:Call -> U
+10:4:Attribute -> U
+10:4:Attribute -> U
+10:4:Name -> U
+14:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+14:6:Attribute -> Func:logging.getLogger
+14:6:Name -> Module:logging
+14:24:Name -> Const:str:'tests.pytests.integration._logging.test | Const:str:'__main__'
+17:1:Attribute -> U
+17:1:Name -> U
+19:12:Name -> Module:salt._logging.impl
+28:12:Name -> Const:int:50
+31:11:Name -> Const:int:30
+37:20:Name -> Const:int:50
+38:17:Name -> Const:int:50
+39:17:Name -> Const:int:40
+40:16:Name -> Const:int:30
+41:19:Name -> Const:int:30
+42:16:Name -> Const:int:20
+43:17:Name -> Const:int:10
+44:18:Name -> Const:int:0
+46:11:Call -> ERR
+46:11:Attribute -> BM:builtins.dict.get
+46:11:Name -> Dict:8
+46:28:Name -> U
+50:10:Call -> U | Const:NoneType:None
+50:10:Attribute -> Func:salt._logging.impl.get_lowest_log_level
+50:10:Name -> Module:salt._logging.impl
+51:11:Name -> U | Const:NoneType:None
+53:4:Call -> Const:NoneType:None
+53:4:Attribute -> Func:salt._logging.impl.set_lowest_log_level
+53:4:Name -> Module:salt._logging.impl
+53:34:Call -> U
+53:34:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+54:10:Call -> U | Const:NoneType:None
+54:10:Attribute -> Func:salt._logging.impl.get_lowest_log_level
+54:10:Name -> Module:salt._logging.impl
+55:11:Name -> U | Const:NoneType:None
+55:18:Call -> U
+55:18:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+57:4:Call -> Const:NoneType:None
+57:4:Attribute -> Func:salt._logging.impl.set_lowest_log_level
+57:4:Name -> Module:salt._logging.impl
+57:34:Call -> U
+57:34:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+58:10:Call -> U | Const:NoneType:None
+58:10:Attribute -> Func:salt._logging.impl.get_lowest_log_level
+58:10:Name -> Module:salt._logging.impl
+59:11:Name -> U | Const:NoneType:None
+59:18:Call -> U
+59:18:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+62:4:Call -> Const:NoneType:None
+62:4:Attribute -> Func:salt._logging.impl.set_lowest_log_level_by_opts
+62:4:Name -> Module:salt._logging.impl
+62:42:Name -> Dict:2
+63:10:Call -> U | Const:NoneType:None
+63:10:Attribute -> Func:salt._logging.impl.get_lowest_log_level
+63:10:Name -> Module:salt._logging.impl
+64:11:Name -> U | Const:NoneType:None
+64:18:Call -> U
+64:18:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+68:10:Call -> Const:int:30 | Const:NoneType:None | U | Const:int:40
+68:10:Attribute -> Func:salt._logging.impl.get_logging_level_from_string
+68:10:Name -> Module:salt._logging.impl
+69:11:Name -> Const:int:30 | Const:NoneType:None | U | Const:int:40
+69:18:Call -> U
+69:18:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+71:10:Call -> Const:int:30 | U | Const:int:40
+71:10:Attribute -> Func:salt._logging.impl.get_logging_level_from_string
+71:10:Name -> Module:salt._logging.impl
+71:49:Call -> U
+71:49:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+72:11:Name -> Const:int:30 | U | Const:int:40
+72:18:Call -> U
+72:18:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+74:10:Call -> Const:int:30 | Const:str:'CRITICAL' | U | Const:int:40
+74:10:Attribute -> Func:salt._logging.impl.get_logging_level_from_string
+74:10:Name -> Module:salt._logging.impl
+75:11:Name -> Const:int:30 | Const:str:'CRITICAL' | U | Const:int:40
+75:18:Call -> U
+75:18:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+77:4:Call -> U
+77:4:Attribute -> U
+77:4:Name -> U
+78:9:Call -> U
+78:9:Attribute -> U
+78:9:Name -> U
+78:25:Attribute -> Const:int:30
+78:25:Name -> Module:logging
+80:14:Call -> Const:int:30 | Const:str:'BADLEVEL' | U | Const:int:40
+80:14:Attribute -> Func:salt._logging.impl.get_logging_level_from_string
+80:14:Name -> Module:salt._logging.impl
+81:15:Name -> Const:int:30 | Const:str:'BADLEVEL' | U | Const:int:40
+81:22:Call -> U
+81:22:Name -> Func:tests.pytests.integration._logging.test_logging.log_nameToLevel
+82:15:Name -> Const:str:"Could not translate the logging level s
+82:22:Attribute -> U
+82:22:Name -> U
+86:4:Call -> U
+86:4:Attribute -> U
+86:4:Name -> U
+87:9:Call -> U
+87:9:Attribute -> U
+87:9:Name -> U
+87:25:Attribute -> Const:int:30
+87:25:Name -> Module:logging
+88:14:Call -> U
+88:14:Attribute -> Func:salt._logging.impl.is_logfile_handler_configured
+88:14:Name -> Module:salt._logging.impl
+89:15:Name -> U
+93:15:Call -> Const:NoneType:None | Const:NoneType:None | Const:NoneType:None
+93:15:Attribute -> Func:salt._logging.impl.setup_logfile_handler
+93:15:Name -> Module:salt._logging.impl
+93:46:Name -> Const:NoneType:None
+94:15:Name -> Const:str:'log_path setting is set to `None`. Noth
+94:22:Attribute -> U
+94:22:Name -> U
+98:10:Call -> U | Const:bool:True | Const:bool:False
+98:10:Attribute -> Func:salt._logging.impl.in_mainprocess
+98:10:Name -> Module:salt._logging.impl
+99:11:Name -> U | Const:bool:True | Const:bool:False
+101:15:Call -> ERR
+101:15:Attribute -> Func:posix.getpid
+101:15:Name -> Module:os
+102:9:Call -> U
+102:9:Name -> U
+103:21:Call -> U
+103:21:Name -> U
+103:44:Name -> Class:builtins.AttributeError
+103:60:Name -> U
+103:70:Name -> U
+105:14:Call -> U | Const:bool:True | Const:bool:False
+105:14:Attribute -> Func:salt._logging.impl.in_mainprocess
+105:14:Name -> Module:salt._logging.impl
+106:15:Name -> U | Const:bool:True | Const:bool:False

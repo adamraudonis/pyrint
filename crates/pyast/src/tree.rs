@@ -48,12 +48,21 @@ impl Interner {
     pub fn get(&self, sym: Sym) -> &str {
         &self.vec[sym.0 as usize]
     }
+    pub fn len(&self) -> usize {
+        self.vec.len()
+    }
+    pub fn is_empty(&self) -> bool {
+        self.vec.is_empty()
+    }
 }
 
 /// Python constant value (astroid Const.value).
 #[derive(Debug, Clone, PartialEq)]
 pub enum ConstValue {
     None,
+    /// only created synthetically by pyinfer (operator protocol results);
+    /// never produced by the parser
+    NotImplemented,
     Ellipsis,
     Bool(bool),
     Int(IntValue),
@@ -745,6 +754,7 @@ impl Tree {
 fn fmt_const(v: &ConstValue) -> String {
     match v {
         ConstValue::None => "NoneType".to_string(),
+        ConstValue::NotImplemented => "NotImplementedType".to_string(),
         ConstValue::Ellipsis => "ellipsis".to_string(),
         ConstValue::Bool(b) => format!("bool:{}", if *b { "True" } else { "False" }),
         ConstValue::Int(IntValue::Small(i)) => {

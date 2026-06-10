@@ -1,0 +1,132 @@
+15:10:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+15:10:Attribute -> Func:logging.getLogger
+15:10:Name -> Module:logging
+15:28:Name -> Const:str:'homeassistant.components.supla.cover' | Const:str:'__main__'
+23:10:Name -> U
+24:12:Name -> Class:builtins.dict
+25:24:Name -> Class:homeassistant.helpers.entity_platform.AddEntitiesCallback
+26:20:Name -> Class:builtins.dict
+29:7:Name -> Const:NoneType:None | U
+32:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+32:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+32:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+32:35:Call -> U
+32:35:Name -> Func:pprint.pformat
+32:43:Name -> Const:NoneType:None | U
+34:14:Name -> Class:builtins.list
+34:19:Name -> Class:homeassistant.components.cover.CoverEntity
+35:18:Call -> U
+35:18:Attribute -> U
+35:18:Name -> Const:NoneType:None | U
+36:22:Name -> U
+37:22:Name -> U
+39:11:Name -> U
+39:26:Name -> Const:str:'CONTROLLINGTHEROLLERSHUTTER'
+40:12:Call -> ERR
+40:12:Attribute -> BM:builtins.list.append
+40:12:Name -> List:0
+41:16:Call -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+41:16:Name -> Class:homeassistant.components.supla.cover.SuplaCoverEntity
+42:20:Name -> U
+43:20:Attribute -> U
+43:20:Name -> U
+43:30:Name -> Const:str:'supla'
+43:38:Name -> Const:str:'supla_servers'
+43:53:Name -> U
+44:20:Attribute -> U
+44:20:Name -> U
+44:30:Name -> Const:str:'supla'
+44:38:Name -> Const:str:'supla_coordinators'
+44:58:Name -> U
+48:13:Name -> U
+48:29:Name -> Const:str:'CONTROLLINGTHEGATE'
+48:41:Name -> Const:str:'CONTROLLINGTHEGARAGEDOOR'
+49:12:Call -> ERR
+49:12:Attribute -> BM:builtins.list.append
+49:12:Name -> List:0
+50:16:Call -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+50:16:Name -> Class:homeassistant.components.supla.cover.SuplaDoorEntity
+51:20:Name -> U
+52:20:Attribute -> U
+52:20:Name -> U
+52:30:Name -> Const:str:'supla'
+52:38:Name -> Const:str:'supla_servers'
+52:53:Name -> U
+53:20:Attribute -> U
+53:20:Name -> U
+53:30:Name -> Const:str:'supla'
+53:38:Name -> Const:str:'supla_coordinators'
+53:58:Name -> U
+57:4:Call -> U
+57:4:Name -> U
+57:23:Name -> List:0
+60:23:Name -> Class:homeassistant.components.supla.entity.SuplaEntity
+60:36:Name -> Class:homeassistant.components.cover.CoverEntity
+63:5:Name -> Class:builtins.property
+64:40:Name -> Class:builtins.int
+66:20:Call -> U
+66:20:Attribute -> U
+66:20:Attribute -> U
+66:20:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+67:25:Name -> U
+70:55:Name -> Class:typing.Any
+72:14:Call -> Const:NoneType:None
+72:14:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+72:14:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+73:43:Call -> ERR
+73:43:Attribute -> BM:builtins.dict.get
+73:43:Name -> Dict:0
+73:54:Name -> Const:str:'position'
+76:5:Name -> Class:builtins.property
+77:27:Name -> Class:builtins.bool
+79:11:Attribute -> U | Const:NoneType:None
+79:11:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+81:15:Attribute -> U | Const:NoneType:None
+81:15:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+83:47:Name -> Class:typing.Any
+85:14:Call -> Const:NoneType:None
+85:14:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+85:14:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+87:48:Name -> Class:typing.Any
+89:14:Call -> Const:NoneType:None
+89:14:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+89:14:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+91:47:Name -> Class:typing.Any
+93:14:Call -> Const:NoneType:None
+93:14:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+93:14:Name -> Inst:homeassistant.components.supla.cover.SuplaCoverEntity
+96:22:Name -> Class:homeassistant.components.supla.entity.SuplaEntity
+96:35:Name -> Class:homeassistant.components.cover.CoverEntity
+99:25:Attribute -> Inst:homeassistant.components.cover.const.CoverDeviceClass.GARAGE
+99:25:Name -> Class:homeassistant.components.cover.const.CoverDeviceClass
+101:5:Name -> Class:builtins.property
+102:27:Name -> Class:builtins.bool
+104:16:Call -> U
+104:16:Attribute -> U
+104:16:Attribute -> U
+104:16:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+105:11:Name -> U
+105:29:Name -> U
+106:19:Call -> U
+106:19:Attribute -> U
+106:19:Name -> U
+109:47:Name -> Class:typing.Any
+111:11:Attribute -> U | Const:NoneType:None
+111:11:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+112:18:Call -> Const:NoneType:None
+112:18:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+112:18:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+114:48:Name -> Class:typing.Any
+116:15:Attribute -> U | Const:NoneType:None
+116:15:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+117:18:Call -> Const:NoneType:None
+117:18:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+117:18:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+119:47:Name -> Class:typing.Any
+121:14:Call -> Const:NoneType:None
+121:14:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+121:14:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity
+123:43:Name -> Class:typing.Any
+125:14:Call -> Const:NoneType:None
+125:14:Attribute -> BM:homeassistant.components.supla.entity.SuplaEntity.async_action
+125:14:Name -> Inst:homeassistant.components.supla.cover.SuplaDoorEntity

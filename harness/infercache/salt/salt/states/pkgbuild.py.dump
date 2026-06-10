@@ -1,0 +1,159 @@
+49:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+49:6:Attribute -> Func:logging.getLogger
+49:6:Name -> Module:logging
+49:24:Name -> Const:str:'salt.states.pkgbuild' | Const:str:'__main__'
+58:18:Call -> Inst:builtins.set
+58:18:Name -> Class:builtins.set
+58:22:Call -> ERR
+58:22:Attribute -> Func:posix.listdir
+58:22:Name -> Module:os
+58:33:Name -> U
+59:11:Name -> Class:builtins.OSError
+60:11:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+60:11:Name -> ExcInst:builtins.OSError
+60:24:Attribute -> Const:int:2
+60:24:Name -> Module:errno
+61:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+61:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+61:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+61:70:Name -> U
+62:13:Attribute -> Const:int:107 | Const:int:9 | Const:int:42
+62:13:Name -> ExcInst:builtins.OSError
+62:26:Attribute -> Const:int:13
+62:26:Name -> Module:errno
+63:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+63:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+63:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+63:69:Name -> U
+64:18:Call -> Set:0
+64:18:Name -> Class:builtins.set
+65:11:Call -> ERR
+65:11:Name -> Func:builtins.sorted
+65:18:Call -> ERR
+65:18:Attribute -> BM:builtins.set.difference
+65:18:Call -> Inst:builtins.set
+65:18:Name -> Class:builtins.set
+65:22:Name -> U
+65:42:Name -> Inst:builtins.set | Set:0
+156:19:Name -> U
+158:11:Name -> Const:NoneType:None | U
+159:8:Name -> Dict:4
+160:8:Name -> Dict:4
+161:15:Name -> Dict:4
+163:7:Call -> ERR
+163:7:Name -> Func:builtins.isinstance
+163:18:Name -> Const:NoneType:None | U
+163:27:Name -> Class:builtins.str
+164:18:Call -> U
+164:18:Attribute -> U
+164:18:Name -> Const:NoneType:None | U
+166:13:Call -> U
+166:13:Name -> Func:salt.states.pkgbuild._get_missing_results
+166:34:Name -> Const:NoneType:None | U
+166:43:Name -> U
+167:11:Name -> Const:bool:False | U
+167:25:Name -> U
+168:8:Name -> Dict:4
+169:15:Name -> Dict:4
+171:7:Name -> ERR
+172:8:Name -> Dict:4
+173:11:Name -> Const:bool:False | U
+174:12:Name -> Dict:4
+176:12:Name -> Dict:4
+177:12:Name -> Dict:4
+177:30:Call -> Const:str:''
+177:30:Attribute -> BM:builtins.str.join
+177:40:Name -> U
+178:15:Name -> Dict:4
+182:7:Name -> Const:NoneType:None | U
+182:31:Call -> ERR
+182:31:Name -> Func:builtins.isinstance
+182:42:Name -> Const:NoneType:None | U
+182:47:Name -> Class:builtins.dict
+183:8:Name -> Dict:4
+184:8:Name -> Dict:4
+185:15:Name -> Dict:4
+188:7:Call -> ERR
+188:7:Attribute -> ERR
+188:7:Name -> ERR
+189:19:Name -> Const:NoneType:None | U
+190:15:Call -> U
+190:15:Attribute -> U
+190:15:Name -> U
+194:4:Name -> Dict:4
+194:21:Call -> ERR
+194:21:Name -> ERR
+194:30:Name -> Const:str:'pkgbuild.build' | Const:str:'rpmbuild.build'
+195:8:Name -> U
+195:15:Name -> U
+195:20:Name -> U
+195:30:Name -> U
+195:36:Name -> U
+195:45:Name -> Const:NoneType:None | U
+195:51:Name -> Const:NoneType:None | U
+195:56:Name -> Const:NoneType:None | U
+195:66:Name -> Const:str:'base' | U
+195:75:Name -> Const:str:'/var/log/salt/pkgbuild' | U
+198:13:Call -> U
+198:13:Name -> Func:salt.states.pkgbuild._get_missing_results
+198:34:Name -> Const:NoneType:None | U
+198:43:Name -> U
+199:7:Name -> U
+200:8:Name -> Dict:4
+201:8:Name -> Dict:4
+201:26:Call -> Const:str:''
+201:26:Attribute -> BM:builtins.str.join
+201:36:Name -> U
+202:8:Name -> Dict:4
+204:8:Name -> Dict:4
+205:11:Name -> Dict:4
+329:19:Name -> U
+331:7:Name -> ERR
+332:8:Name -> Dict:4
+333:8:Name -> Dict:4
+333:53:Name -> U
+334:15:Name -> Dict:4
+338:7:Name -> Const:NoneType:None | U
+338:31:Call -> ERR
+338:31:Name -> Func:builtins.isinstance
+338:42:Name -> Const:NoneType:None | U
+338:47:Name -> Class:builtins.dict
+339:8:Name -> Dict:4
+340:15:Name -> Dict:4
+343:7:Call -> ERR
+343:7:Attribute -> ERR
+343:7:Name -> ERR
+344:20:Call -> ERR
+344:20:Attribute -> Func:posix.listdir
+344:20:Name -> Module:os
+344:31:Name -> U
+345:15:Call -> U
+345:15:Attribute -> U
+345:15:Name -> U
+349:10:Call -> ERR
+349:10:Name -> ERR
+349:19:Name -> Const:str:'pkgbuild.make_repo' | Const:str:'rpmbuild.make_repo'
+349:25:Name -> U
+349:31:Name -> Const:NoneType:None | U
+349:38:Name -> Const:NoneType:None | U
+349:43:Name -> Const:bool:False | U
+349:59:Name -> Const:str:'/etc/salt/gpgkeys' | U
+349:70:Name -> Const:str:'builder' | U
+349:77:Name -> Const:float:15.0 | U
+351:7:Name -> U
+352:8:Name -> Dict:4
+354:8:Name -> Dict:4
+356:7:Name -> U
+356:25:Name -> U
+357:8:Name -> Dict:4
+357:25:Call -> U
+357:25:Attribute -> BM:builtins.str.format
+357:41:Name -> U
+357:56:Name -> U
+358:9:Name -> U
+359:8:Name -> Dict:4
+359:25:Name -> U
+360:9:Name -> U
+361:8:Name -> Dict:4
+361:25:Name -> U
+363:11:Name -> Dict:4

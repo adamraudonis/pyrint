@@ -1,0 +1,3231 @@
+61:7:Name -> Class:builtins.ImportError
+65:6:Call -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+65:6:Attribute -> Func:logging.getLogger
+65:6:Name -> Module:logging
+65:24:Name -> Const:str:'salt.crypt' | Const:str:'__main__'
+73:15:Name -> Const:str:'OAEP'
+73:22:Name -> Const:str:'SHA1'
+74:17:Name -> Const:str:'OAEP'
+74:24:Name -> Const:str:'SHA224'
+76:19:Name -> Const:str:'PKCS1v15'
+76:30:Name -> Const:str:'SHA1'
+77:21:Name -> Const:str:'PKCS1v15'
+77:32:Name -> Const:str:'SHA224'
+81:4:Name -> Const:str:'SHA1'
+82:4:Name -> Const:str:'SHA224'
+85:29:Name -> Const:str:'PKCS1v15'
+86:32:Name -> Const:str:'OAEP'
+88:4:Name -> Const:str:'OAEP-SHA1'
+89:4:Name -> Const:str:'OAEP-SHA224'
+92:4:Name -> Const:str:'PKCS1v15-SHA1'
+93:4:Name -> Const:str:'PKCS1v15-SHA224'
+98:7:Name -> Const:bool:True | Const:bool:False
+101:15:Attribute -> U
+101:15:Attribute -> U
+101:15:Attribute -> U
+101:15:Attribute -> U
+101:15:Attribute -> U
+101:15:Name -> U
+109:11:Call -> Const:str:''
+109:11:Attribute -> BM:builtins.str.join
+109:21:Call -> U
+109:21:Attribute -> U
+109:21:Call -> U
+109:21:Attribute -> U
+109:21:Name -> U
+113:10:Call -> U
+113:10:Attribute -> Func:posixpath.join | Func:ntpath.join
+113:10:Attribute -> Module:posixpath | Module:ntpath
+113:10:Name -> Module:os
+113:23:Name -> U
+115:13:Call -> U
+115:13:Attribute -> Func:salt.utils.files.fopen
+115:13:Attribute -> Module:salt.utils.files
+115:13:Attribute -> Module:salt.utils
+115:13:Name -> Module:salt
+115:36:Name -> U
+116:19:Call -> U
+116:19:Attribute -> U
+116:19:Name -> U
+117:11:Name -> Class:builtins.FileNotFoundError
+125:15:Call -> U
+125:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+125:15:Attribute -> Module:posixpath | Module:ntpath
+125:15:Name -> Module:os
+125:28:Name -> U
+126:10:Call -> U
+126:10:Attribute -> Func:posixpath.join | Func:ntpath.join
+126:10:Attribute -> Module:posixpath | Module:ntpath
+126:10:Name -> Module:os
+126:23:Name -> U
+128:9:Call -> Gen:salt.utils.files.set_umask
+128:9:Attribute -> Func:salt.utils.files.set_umask
+128:9:Attribute -> Module:salt.utils.files
+128:9:Attribute -> Module:salt.utils
+128:9:Name -> Module:salt
+129:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+129:8:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+129:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+130:11:Call -> Const:bool:False | U
+130:11:Attribute -> Func:genericpath.isfile | U
+130:11:Attribute -> Module:posixpath | Module:ntpath
+130:11:Name -> Module:os
+130:26:Name -> U
+131:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+131:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+131:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+134:11:Call -> Const:bool:False | U
+134:11:Attribute -> Func:genericpath.isfile | U
+134:11:Attribute -> Module:posixpath | Module:ntpath
+134:11:Name -> Module:os
+134:26:Name -> U
+134:39:Call -> ERR
+134:39:Attribute -> Func:posix.access
+134:39:Name -> Module:os
+134:49:Name -> U
+134:54:Attribute -> Const:int:2
+134:54:Name -> Module:os
+135:12:Call -> ERR
+135:12:Attribute -> Func:posix.chmod
+135:12:Name -> Module:os
+135:21:Name -> U
+135:26:Attribute -> Const:int:256 | Const:int:256
+135:26:Name -> Module:stat
+135:41:Attribute -> Const:int:128 | Const:int:128
+135:41:Name -> Module:stat
+136:13:Call -> U
+136:13:Attribute -> Func:salt.utils.files.fopen
+136:13:Attribute -> Module:salt.utils.files
+136:13:Attribute -> Module:salt.utils
+136:13:Name -> Module:salt
+136:36:Name -> U
+137:12:Call -> U
+137:12:Attribute -> U
+137:12:Name -> U
+137:22:Name -> Const:str:'' | U
+138:8:Call -> ERR
+138:8:Attribute -> Func:posix.chmod
+138:8:Name -> Module:os
+138:17:Name -> U
+138:27:Attribute -> Const:int:256 | Const:int:256
+138:27:Name -> Module:stat
+139:11:Name -> Const:NoneType:None | U
+139:24:Call -> U
+139:24:Attribute -> Func:salt.utils.platform.is_windows
+139:24:Attribute -> Module:salt.utils.platform
+139:24:Attribute -> Module:salt.utils
+139:24:Name -> Module:salt
+143:22:Attribute -> ERR
+143:22:Call -> ERR
+143:22:Attribute -> Func:pwd.getpwnam
+143:22:Name -> Module:pwd
+143:35:Name -> Const:NoneType:None | U
+144:16:Call -> ERR
+144:16:Attribute -> Func:posix.chown
+144:16:Name -> Module:os
+144:25:Name -> U
+144:35:Name -> U
+145:20:Name -> Class:builtins.KeyError
+145:30:Name -> Class:builtins.ImportError
+145:43:Name -> Class:builtins.OSError
+147:8:Call -> ERR
+147:8:Attribute -> Func:posix.rename
+147:8:Name -> Module:os
+147:18:Name -> U
+147:28:Name -> U
+151:11:Call -> U
+151:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+151:11:Attribute -> Module:posixpath | Module:ntpath
+151:11:Name -> Module:os
+151:24:Name -> U
+151:32:Name -> U
+152:14:Name -> U
+154:11:Call -> ERR
+154:11:Attribute -> Func:posix.access
+154:11:Name -> Module:os
+154:21:Name -> U
+154:29:Attribute -> Const:int:2
+154:29:Name -> Module:os
+155:14:Call -> ExcInst:builtins.OSError
+155:14:Name -> Class:builtins.OSError
+156:12:Call -> U
+156:12:Attribute -> BM:builtins.str.format
+157:16:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+157:16:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+157:16:Attribute -> Module:posixpath | Module:ntpath
+157:16:Name -> Module:os
+157:32:Name -> U
+157:41:Call -> U
+157:41:Attribute -> Func:getpass.getuser
+157:41:Name -> Module:getpass
+160:7:Call -> Const:bool:False | Const:bool:False | Const:bool:True
+160:7:Attribute -> BM:pathlib.Path.exists
+160:7:Call -> Inst:pathlib.Path
+160:7:Attribute -> Class:pathlib.Path
+160:7:Name -> Module:pathlib
+160:20:Name -> Const:str:'Uninferable.pem'
+163:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+163:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+163:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+164:9:Call -> Gen:salt.utils.files.set_umask
+164:9:Attribute -> Func:salt.utils.files.set_umask
+164:9:Attribute -> Module:salt.utils.files
+164:9:Attribute -> Module:salt.utils
+164:9:Name -> Module:salt
+165:13:Call -> U
+165:13:Attribute -> Func:salt.utils.files.fopen
+165:13:Attribute -> Module:salt.utils.files
+165:13:Attribute -> Module:salt.utils
+165:13:Name -> Module:salt
+165:36:Name -> Const:str:'Uninferable.pem'
+166:15:Name -> Const:NoneType:None | U
+167:22:Call -> U
+167:22:Attribute -> U
+167:22:Name -> U
+167:60:Call -> U
+167:60:Attribute -> U
+167:60:Name -> U
+168:26:Attribute -> U
+168:26:Attribute -> U
+168:26:Name -> U
+169:19:Call -> U | Const:bool:False
+169:19:Name -> Func:salt.crypt.fips_enabled
+170:30:Attribute -> U
+170:30:Attribute -> U
+170:30:Name -> U
+172:22:Call -> U
+172:22:Attribute -> U
+172:22:Name -> U
+173:26:Attribute -> U
+173:26:Attribute -> U
+173:26:Name -> U
+174:18:Call -> U
+174:18:Attribute -> U
+174:18:Name -> U
+175:25:Attribute -> U
+175:25:Attribute -> U
+175:25:Name -> U
+176:23:Name -> U
+177:37:Name -> U
+179:12:Call -> U
+179:12:Attribute -> U
+179:12:Name -> U
+179:20:Name -> U
+183:11:Call -> U
+183:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+183:11:Attribute -> Module:posixpath | Module:ntpath
+183:11:Name -> Module:os
+183:24:Name -> U
+183:32:Name -> U
+184:13:Name -> U
+186:11:Call -> ERR
+186:11:Attribute -> Func:posix.access
+186:11:Name -> Module:os
+186:21:Name -> U
+186:29:Attribute -> Const:int:2
+186:29:Name -> Module:os
+187:14:Call -> ExcInst:builtins.OSError
+187:14:Name -> Class:builtins.OSError
+188:12:Call -> U
+188:12:Attribute -> BM:builtins.str.format
+189:16:Call -> Const:bytes:b'.' | Const:str:'.' | U | Const:bytes:b'/' | Const:str:'/'
+189:16:Attribute -> Func:posixpath.abspath | Func:ntpath.abspath | U
+189:16:Attribute -> Module:posixpath | Module:ntpath
+189:16:Name -> Module:os
+189:32:Name -> U
+189:41:Call -> U
+189:41:Attribute -> Func:getpass.getuser
+189:41:Name -> Module:getpass
+192:13:Call -> U
+192:13:Attribute -> U
+192:13:Name -> U
+193:9:Call -> U
+193:9:Attribute -> Func:salt.utils.files.fopen
+193:9:Attribute -> Module:salt.utils.files
+193:9:Attribute -> Module:salt.utils
+193:9:Name -> Module:salt
+193:32:Name -> Const:str:'Uninferable.pub'
+194:14:Call -> U
+194:14:Attribute -> U
+194:14:Name -> U
+195:21:Attribute -> U
+195:21:Attribute -> U
+195:21:Name -> U
+196:19:Attribute -> U
+196:19:Attribute -> U
+196:19:Name -> U
+198:8:Call -> U
+198:8:Attribute -> U
+198:8:Name -> U
+198:16:Name -> U
+211:10:Call -> U
+211:10:Attribute -> U
+211:10:Name -> U
+211:35:Name -> Const:int:65537 | U
+211:38:Name -> U
+213:7:Name -> Const:NoneType:None | U
+214:14:Call -> U
+214:14:Attribute -> U
+214:14:Name -> U
+214:52:Call -> U
+214:52:Attribute -> U
+214:52:Name -> U
+215:18:Attribute -> U
+215:18:Attribute -> U
+215:18:Name -> U
+216:11:Call -> U | Const:bool:False
+216:11:Name -> Func:salt.crypt.fips_enabled
+217:22:Attribute -> U
+217:22:Attribute -> U
+217:22:Name -> U
+219:14:Call -> U
+219:14:Attribute -> U
+219:14:Name -> U
+220:18:Attribute -> U
+220:18:Attribute -> U
+220:18:Name -> U
+221:15:Call -> U
+221:15:Attribute -> U
+221:15:Name -> U
+222:17:Attribute -> U
+222:17:Attribute -> U
+222:17:Name -> U
+223:15:Name -> U
+224:29:Name -> U
+227:13:Call -> U
+227:13:Attribute -> U
+227:13:Name -> U
+228:14:Call -> U
+228:14:Attribute -> U
+228:14:Name -> U
+229:17:Attribute -> U
+229:17:Attribute -> U
+229:17:Name -> U
+230:15:Attribute -> U
+230:15:Attribute -> U
+230:15:Name -> U
+234:8:Call -> U
+234:8:Attribute -> Func:salt.utils.stringutils.to_str
+234:8:Attribute -> Module:salt.utils.stringutils
+234:8:Attribute -> Module:salt.utils
+234:8:Name -> Module:salt
+234:38:Name -> U
+235:8:Call -> U
+235:8:Attribute -> Func:salt.utils.stringutils.to_str
+235:8:Attribute -> Module:salt.utils.stringutils
+235:8:Attribute -> Module:salt.utils
+235:8:Name -> Module:salt
+235:38:Name -> U
+252:11:Call -> U
+252:11:Attribute -> Func:posixpath.join | Func:ntpath.join
+252:11:Attribute -> Module:posixpath | Module:ntpath
+252:11:Name -> Module:os
+252:24:Name -> U
+252:32:Name -> U
+253:14:Name -> U
+254:13:Name -> U
+256:10:Call -> U
+256:10:Attribute -> U
+256:10:Name -> U
+256:35:Name -> Const:int:65537 | U
+256:38:Name -> U
+258:7:Call -> Const:bool:False | U
+258:7:Attribute -> Func:genericpath.isfile | U
+258:7:Attribute -> Module:posixpath | Module:ntpath
+258:7:Name -> Module:os
+258:22:Name -> Const:str:'Uninferable.pem'
+261:15:Name -> Const:str:'Uninferable.pem'
+263:4:Call -> Const:NoneType:None
+263:4:Name -> Func:salt.crypt._write_private
+263:19:Name -> U
+263:27:Name -> U
+263:36:Name -> U
+263:41:Name -> Const:NoneType:None | U
+264:4:Call -> Const:NoneType:None
+264:4:Name -> Func:salt.crypt._write_public
+264:18:Name -> U
+264:26:Name -> U
+264:35:Name -> U
+265:4:Call -> ERR
+265:4:Attribute -> Func:posix.chmod
+265:4:Name -> Module:os
+265:13:Name -> Const:str:'Uninferable.pem'
+266:7:Name -> Const:NoneType:None | U
+270:18:Attribute -> ERR
+270:18:Call -> ERR
+270:18:Attribute -> Func:pwd.getpwnam
+270:18:Name -> Module:pwd
+270:31:Name -> U
+271:12:Call -> ERR
+271:12:Attribute -> Func:posix.chown
+271:12:Name -> Module:os
+271:21:Name -> Const:str:'Uninferable.pem'
+271:27:Name -> U
+272:12:Call -> ERR
+272:12:Attribute -> Func:posix.chown
+272:12:Name -> Module:os
+272:21:Name -> Const:str:'Uninferable.pub'
+272:26:Name -> U
+273:16:Name -> Class:builtins.KeyError
+273:26:Name -> Class:builtins.ImportError
+273:39:Name -> Class:builtins.OSError
+277:11:Name -> Const:str:'Uninferable.pem'
+282:5:Name -> Class:builtins.classmethod
+284:13:Call -> U
+284:13:Attribute -> Func:salt.utils.files.fopen
+284:13:Attribute -> Module:salt.utils.files
+284:13:Attribute -> Module:salt.utils
+284:13:Name -> Module:salt
+284:36:Name -> U
+285:18:Call -> U
+285:18:Attribute -> U
+285:18:Name -> U
+287:19:Call -> Inst:salt.crypt.BaseKey
+287:19:Name -> Class:salt.crypt.BaseKey
+287:23:Name -> U
+287:29:Name -> Tuple:0
+287:37:Name -> Dict:0
+289:5:Name -> Class:builtins.classmethod
+291:20:Call -> U | Inst:builtins.bytes
+291:20:Attribute -> Func:salt.utils.stringutils.to_bytes
+291:20:Attribute -> Module:salt.utils.stringutils
+291:20:Attribute -> Module:salt.utils
+291:20:Name -> Module:salt
+291:52:Name -> U
+293:15:Call -> Inst:salt.crypt.BaseKey
+293:15:Name -> Class:salt.crypt.BaseKey
+293:19:Name -> U | Inst:builtins.bytes
+293:31:Name -> Tuple:0
+293:39:Name -> Dict:0
+295:5:Name -> Class:builtins.classmethod
+297:15:Call -> Inst:salt.crypt.BaseKey
+297:15:Name -> Class:salt.crypt.BaseKey
+297:19:Name -> U
+297:31:Name -> Tuple:0
+297:39:Name -> Dict:0
+299:5:Name -> Class:builtins.staticmethod
+301:11:Name -> U
+301:28:Name -> Tuple:2
+302:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+302:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+302:69:Name -> U
+303:22:Call -> U
+303:22:Attribute -> U
+303:22:Name -> U
+304:11:Name -> U
+304:23:Name -> Tuple:1
+305:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+305:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+305:69:Name -> U
+306:15:Call -> U
+306:15:Name -> Func:builtins.getattr
+306:23:Name -> U
+306:32:Name -> U
+308:5:Name -> Class:builtins.staticmethod
+310:11:Name -> U
+310:28:Name -> Tuple:2
+311:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+311:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+311:72:Name -> U
+312:22:Call -> U
+312:22:Attribute -> U
+312:22:Name -> U
+313:11:Name -> U
+313:23:Name -> Tuple:1
+314:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+314:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+314:69:Name -> U
+315:15:Call -> U
+315:15:Name -> Func:builtins.getattr
+315:23:Name -> U
+315:32:Name -> U
+317:5:Name -> Class:builtins.staticmethod
+319:22:Name -> U
+320:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+320:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+320:72:Name -> U
+321:22:Call -> U
+321:22:Attribute -> U
+321:22:Name -> U
+322:11:Name -> U
+322:24:Name -> Tuple:2
+323:18:Call -> ExcInst:builtins.Exception
+323:18:Name -> Class:builtins.Exception
+324:15:Call -> U
+324:15:Name -> Func:builtins.getattr
+324:23:Name -> U
+324:31:Name -> U
+326:5:Name -> Class:builtins.staticmethod
+332:11:Name -> Const:str:'SHA1'
+332:19:Name -> U
+332:33:Call -> U | Const:bool:False
+332:33:Name -> Func:salt.crypt.fips_enabled
+333:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+333:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+334:29:Name -> U
+338:17:Name -> Class:salt.crypt.BaseKey
+341:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+341:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+341:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+342:11:Name -> Const:NoneType:None | U
+343:23:Call -> U
+343:23:Attribute -> U
+343:23:Name -> U
+347:12:Name -> Inst:salt.crypt.PrivateKey
+347:23:Call -> U
+347:23:Attribute -> U
+347:23:Name -> U
+347:58:Name -> U
+347:78:Name -> U | Const:NoneType:None
+348:15:Name -> Class:builtins.ValueError
+349:18:Call -> ExcInst:salt.exceptions.InvalidKeyError
+349:18:Name -> Class:salt.exceptions.InvalidKeyError
+350:15:Attribute -> U
+350:15:Attribute -> U
+350:15:Name -> U
+351:18:Call -> ExcInst:salt.exceptions.InvalidKeyError
+351:18:Name -> Class:salt.exceptions.InvalidKeyError
+354:14:Call -> U
+354:14:Attribute -> U
+354:14:Attribute -> U
+354:14:Name -> Inst:salt.crypt.PrivateKey
+355:21:Attribute -> U
+355:21:Attribute -> U
+355:21:Name -> U
+356:19:Attribute -> U
+356:19:Attribute -> U
+356:19:Name -> U
+357:33:Call -> U
+357:33:Attribute -> U
+357:33:Name -> U
+359:15:Call -> U
+359:15:Attribute -> BM:salt.utils.rsax931.RSAX931Signer.sign
+359:15:Call -> Inst:salt.utils.rsax931.RSAX931Signer
+359:15:Attribute -> Class:salt.utils.rsax931.RSAX931Signer
+359:15:Attribute -> Module:salt.utils.rsax931
+359:15:Attribute -> Module:salt.utils
+359:15:Name -> Module:salt
+359:48:Name -> U
+359:58:Name -> U
+361:35:Name -> Const:str:'PKCS1v15-SHA1'
+362:19:Call -> U
+362:19:Attribute -> Func:salt.crypt.BaseKey.parse_padding_for_signing
+362:19:Name -> Inst:salt.crypt.PrivateKey
+362:50:Name -> Const:str:'PKCS1v15-SHA1' | U
+363:16:Call -> U
+363:16:Attribute -> Func:salt.crypt.BaseKey.parse_hash
+363:16:Name -> Inst:salt.crypt.PrivateKey
+363:32:Name -> Const:str:'PKCS1v15-SHA1' | U
+364:8:Call -> Const:NoneType:None
+364:8:Attribute -> Func:salt.crypt.BaseKey._enforce_fips
+364:8:Name -> Inst:salt.crypt.PrivateKey
+364:27:Name -> Const:str:'PKCS1v15-SHA1' | U
+366:19:Call -> U
+366:19:Attribute -> U
+366:19:Attribute -> U
+366:19:Name -> Inst:salt.crypt.PrivateKey
+367:16:Call -> U | Inst:builtins.bytes
+367:16:Attribute -> Func:salt.utils.stringutils.to_bytes
+367:16:Attribute -> Module:salt.utils.stringutils
+367:16:Attribute -> Module:salt.utils
+367:16:Name -> Module:salt
+367:48:Name -> U
+367:55:Call -> U
+367:55:Name -> U
+367:67:Call -> U
+367:67:Name -> U
+369:15:Attribute -> U
+369:15:Attribute -> U
+369:15:Name -> U
+370:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+370:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+370:65:Name -> Const:str:'PKCS1v15-SHA1' | U
+372:38:Name -> Const:str:'OAEP-SHA1'
+373:19:Call -> U
+373:19:Attribute -> Func:salt.crypt.BaseKey.parse_padding_for_encryption
+373:19:Name -> Inst:salt.crypt.PrivateKey
+373:53:Name -> Const:str:'OAEP-SHA1' | U
+374:16:Call -> U
+374:16:Attribute -> Func:salt.crypt.BaseKey.parse_hash
+374:16:Name -> Inst:salt.crypt.PrivateKey
+374:32:Name -> Const:str:'OAEP-SHA1' | U
+375:8:Call -> Const:NoneType:None
+375:8:Attribute -> Func:salt.crypt.BaseKey._enforce_fips
+375:8:Name -> Inst:salt.crypt.PrivateKey
+375:27:Name -> Const:str:'OAEP-SHA1' | U
+377:19:Call -> U
+377:19:Attribute -> U
+377:19:Attribute -> U
+377:19:Name -> Inst:salt.crypt.PrivateKey
+378:16:Name -> U
+379:16:Call -> U
+379:16:Name -> U
+380:24:Call -> U
+380:24:Attribute -> U
+380:24:Name -> U
+380:47:Call -> U
+380:47:Name -> U
+381:30:Call -> U
+381:30:Name -> U
+385:15:Attribute -> U
+385:15:Attribute -> U
+385:15:Name -> U
+386:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+386:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+386:65:Name -> Const:str:'OAEP-SHA1' | U
+389:8:Call -> Const:NoneType:None
+389:8:Name -> Func:salt.crypt._write_private
+389:23:Name -> U
+389:31:Name -> U
+389:37:Attribute -> U
+389:37:Name -> Inst:salt.crypt.PrivateKey
+389:47:Name -> Const:NoneType:None | U
+392:8:Call -> Const:NoneType:None
+392:8:Name -> Func:salt.crypt._write_public
+392:22:Name -> U
+392:30:Name -> U
+392:36:Attribute -> U
+392:36:Name -> Inst:salt.crypt.PrivateKey
+398:15:Call -> U
+398:15:Attribute -> U
+398:15:Attribute -> U
+398:15:Name -> Inst:salt.crypt.PrivateKey
+401:16:Name -> Class:salt.crypt.BaseKey
+403:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+403:8:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+403:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+405:12:Name -> Inst:salt.crypt.PublicKey
+405:23:Call -> U
+405:23:Attribute -> U
+405:23:Name -> U
+405:57:Name -> U
+406:15:Name -> Class:builtins.ValueError
+407:18:Call -> ExcInst:salt.exceptions.InvalidKeyError
+407:18:Name -> Class:salt.exceptions.InvalidKeyError
+408:15:Attribute -> U
+408:15:Attribute -> U
+408:15:Name -> U
+409:18:Call -> ExcInst:salt.exceptions.InvalidKeyError
+409:18:Name -> Class:salt.exceptions.InvalidKeyError
+411:38:Name -> Const:str:'OAEP-SHA1'
+412:19:Call -> U
+412:19:Attribute -> Func:salt.crypt.BaseKey.parse_padding_for_encryption
+412:19:Name -> Inst:salt.crypt.PublicKey
+412:53:Name -> Const:str:'OAEP-SHA1' | U
+413:16:Call -> U
+413:16:Attribute -> Func:salt.crypt.BaseKey.parse_hash
+413:16:Name -> Inst:salt.crypt.PublicKey
+413:32:Name -> Const:str:'OAEP-SHA1' | U
+414:8:Call -> Const:NoneType:None
+414:8:Attribute -> Func:salt.crypt.BaseKey._enforce_fips
+414:8:Name -> Inst:salt.crypt.PublicKey
+414:27:Name -> Const:str:'OAEP-SHA1' | U
+415:11:Call -> U
+415:11:Name -> Class:builtins.type
+415:16:Name -> U
+416:20:Name -> U
+418:20:Call -> U | Inst:builtins.bytes
+418:20:Attribute -> Func:salt.utils.stringutils.to_bytes
+418:20:Attribute -> Module:salt.utils.stringutils
+418:20:Attribute -> Module:salt.utils
+418:20:Name -> Module:salt
+418:52:Name -> U
+420:19:Call -> U
+420:19:Attribute -> U
+420:19:Attribute -> U
+420:19:Name -> Inst:salt.crypt.PublicKey
+421:16:Name -> U | Inst:builtins.bytes
+422:16:Call -> U
+422:16:Name -> U
+423:24:Call -> U
+423:24:Attribute -> U
+423:24:Name -> U
+423:47:Call -> U
+423:47:Name -> U
+424:30:Call -> U
+424:30:Name -> U
+428:15:Attribute -> U
+428:15:Attribute -> U
+428:15:Name -> U
+429:18:Call -> ExcInst:salt.exceptions.UnsupportedAlgorithm
+429:18:Name -> Class:salt.exceptions.UnsupportedAlgorithm
+429:65:Name -> Const:str:'OAEP-SHA1' | U
+431:48:Name -> Const:str:'PKCS1v15-SHA1'
+432:19:Call -> U
+432:19:Attribute -> Func:salt.crypt.BaseKey.parse_padding_for_signing
+432:19:Name -> Inst:salt.crypt.PublicKey
+432:50:Name -> Const:str:'PKCS1v15-SHA1' | U
+433:16:Call -> U
+433:16:Attribute -> Func:salt.crypt.BaseKey.parse_hash
+433:16:Name -> Inst:salt.crypt.PublicKey
+433:32:Name -> Const:str:'PKCS1v15-SHA1' | U
+434:11:Name -> Const:str:'SHA1'
+434:19:Name -> Const:str:'PKCS1v15-SHA1' | U
+434:33:Call -> U | Const:bool:False
+434:33:Name -> Func:salt.crypt.fips_enabled
+440:12:Call -> U
+440:12:Attribute -> U
+440:12:Attribute -> U
+440:12:Name -> Inst:salt.crypt.PublicKey
+441:16:Call -> U | Inst:builtins.bytes
+441:16:Attribute -> Func:salt.utils.stringutils.to_bytes
+441:16:Attribute -> Module:salt.utils.stringutils
+441:16:Attribute -> Module:salt.utils
+441:16:Name -> Module:salt
+441:48:Name -> U
+442:16:Call -> U | Inst:builtins.bytes
+442:16:Attribute -> Func:salt.utils.stringutils.to_bytes
+442:16:Attribute -> Module:salt.utils.stringutils
+442:16:Attribute -> Module:salt.utils
+442:16:Name -> Module:salt
+442:48:Name -> U
+443:16:Call -> U
+443:16:Name -> U
+444:16:Call -> U
+444:16:Name -> U
+446:15:Attribute -> U
+446:15:Attribute -> U
+446:15:Name -> U
+448:15:Attribute -> U
+448:15:Attribute -> U
+448:15:Name -> U
+453:14:Call -> U
+453:14:Attribute -> U
+453:14:Attribute -> U
+453:14:Name -> Inst:salt.crypt.PublicKey
+454:21:Attribute -> U
+454:21:Attribute -> U
+454:21:Name -> U
+455:19:Attribute -> U
+455:19:Attribute -> U
+455:19:Name -> U
+457:19:Call -> Inst:salt.utils.rsax931.RSAX931Verifier
+457:19:Attribute -> Class:salt.utils.rsax931.RSAX931Verifier
+457:19:Attribute -> Module:salt.utils.rsax931
+457:19:Attribute -> Module:salt.utils
+457:19:Name -> Module:salt
+457:54:Name -> U
+458:15:Call -> U
+458:15:Attribute -> BM:salt.utils.rsax931.RSAX931Verifier.verify
+458:15:Name -> Inst:salt.utils.rsax931.RSAX931Verifier
+458:31:Name -> U
+461:23:Name -> Class:salt.crypt.PrivateKey
+464:8:Name -> Inst:salt.crypt.PrivateKeyString
+464:19:Call -> U
+464:19:Attribute -> U
+464:19:Name -> U
+465:12:Call -> U
+465:12:Attribute -> U
+465:12:Name -> U
+466:21:Name -> Const:NoneType:None | U
+472:22:Name -> Class:salt.crypt.PublicKey
+476:12:Name -> Inst:salt.crypt.PublicKeyString
+476:23:Call -> U
+476:23:Attribute -> U
+476:23:Name -> U
+476:57:Call -> U
+476:57:Attribute -> U
+476:57:Name -> U
+477:15:Name -> Class:builtins.ValueError
+478:18:Call -> ExcInst:salt.exceptions.InvalidKeyError
+478:18:Name -> Class:salt.exceptions.InvalidKeyError
+483:1:Attribute -> Func:salt.utils.decorators.memoize
+483:1:Attribute -> Module:salt.utils.decorators
+483:1:Attribute -> Module:salt.utils
+483:1:Name -> Module:salt
+489:11:Attribute -> U
+489:11:Call -> Inst:salt.crypt.PrivateKey
+489:11:Attribute -> BM:salt.crypt.BaseKey.from_file
+489:11:Name -> Class:salt.crypt.PrivateKey
+489:32:Name -> U
+489:38:Name -> U
+496:11:Attribute -> U
+496:11:Call -> Inst:salt.crypt.PublicKey
+496:11:Attribute -> BM:salt.crypt.BaseKey.from_file
+496:11:Name -> Class:salt.crypt.PublicKey
+496:31:Name -> U
+499:67:Name -> Const:str:'PKCS1v15-SHA1'
+503:11:Call -> U
+503:11:Attribute -> BM:salt.crypt.PrivateKey.sign
+503:11:Call -> Inst:salt.crypt.PrivateKey
+503:11:Attribute -> BM:salt.crypt.BaseKey.from_file
+503:11:Name -> Class:salt.crypt.PrivateKey
+503:32:Name -> U
+503:46:Name -> Const:NoneType:None | U
+503:63:Name -> U
+503:72:Name -> Const:str:'PKCS1v15-SHA1' | U
+506:64:Name -> Const:str:'PKCS1v15-SHA1'
+511:4:Call -> Const:NoneType:None | U | Const:NoneType:None
+511:4:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+511:4:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+512:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+512:11:Attribute -> BM:salt.crypt.PublicKey.verify
+512:11:Call -> Inst:salt.crypt.PublicKey
+512:11:Attribute -> BM:salt.crypt.BaseKey.from_file
+512:11:Name -> Class:salt.crypt.PublicKey
+512:31:Name -> U
+512:51:Name -> U
+512:60:Name -> U
+512:71:Name -> Const:str:'PKCS1v15-SHA1' | U
+516:10:Call -> U
+516:10:Attribute -> U
+516:10:Name -> U
+516:45:Call -> U
+516:45:Attribute -> U
+516:45:Name -> U
+517:15:Call -> U
+517:15:Attribute -> U
+517:15:Name -> U
+518:8:Name -> U
+519:8:Call -> U
+519:8:Attribute -> U
+519:8:Name -> U
+521:11:Call -> U
+521:11:Attribute -> Func:salt.utils.stringutils.to_unicode
+521:11:Attribute -> Module:salt.utils.stringutils
+521:11:Attribute -> Module:salt.utils
+521:11:Name -> Module:salt
+521:45:Name -> U
+524:17:Name -> Class:builtins.dict
+533:8:Call -> ERR
+533:8:Attribute -> BM:builtins.dict.__init__ | BM:builtins.object.__init__
+533:8:Call -> Super
+533:8:Name -> Class:builtins.super
+534:8:Name -> Inst:salt.crypt.MasterKeys
+534:20:Name -> U
+535:8:Name -> Inst:salt.crypt.MasterKeys
+535:21:Call -> Inst:salt.cache.Cache
+535:21:Attribute -> Class:salt.cache.Cache
+535:21:Attribute -> Module:salt.cache
+535:21:Name -> Module:salt
+535:38:Name -> U
+535:51:Attribute -> U
+535:51:Name -> Inst:salt.crypt.MasterKeys
+546:8:Name -> Inst:salt.crypt.MasterKeys
+546:25:Call -> U
+546:25:Attribute -> U
+546:25:Attribute -> U
+546:25:Name -> Inst:salt.crypt.MasterKeys
+548:8:Name -> Inst:salt.crypt.MasterKeys
+549:8:Name -> Inst:salt.crypt.MasterKeys
+550:8:Name -> Inst:salt.crypt.MasterKeys
+552:11:Attribute -> U
+552:11:Name -> Inst:salt.crypt.MasterKeys
+553:12:Name -> Inst:salt.crypt.MasterKeys
+553:36:Call -> U
+553:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+553:36:Attribute -> Module:posixpath | Module:ntpath
+553:36:Name -> Module:os
+554:16:Attribute -> U
+554:16:Name -> Inst:salt.crypt.MasterKeys
+556:12:Name -> Inst:salt.crypt.MasterKeys
+556:36:Call -> U
+556:36:Attribute -> Func:posixpath.join | Func:ntpath.join
+556:36:Attribute -> Module:posixpath | Module:ntpath
+556:36:Name -> Module:os
+557:16:Attribute -> U
+557:16:Name -> Inst:salt.crypt.MasterKeys
+559:15:Attribute -> U
+559:15:Name -> Inst:salt.crypt.MasterKeys
+559:47:Attribute -> U
+559:47:Name -> Inst:salt.crypt.MasterKeys
+560:16:Name -> Inst:salt.crypt.MasterKeys
+560:43:Call -> U
+560:43:Attribute -> Func:posixpath.join | Func:ntpath.join
+560:43:Attribute -> Module:posixpath | Module:ntpath
+560:43:Name -> Module:os
+561:20:Attribute -> U
+561:20:Name -> Inst:salt.crypt.MasterKeys
+563:23:Attribute -> U
+563:23:Name -> Inst:salt.crypt.MasterKeys
+569:8:Name -> Inst:salt.crypt.MasterKeys
+572:8:Name -> Inst:salt.crypt.MasterKeys
+573:8:Name -> Inst:salt.crypt.MasterKeys
+574:12:Call -> U
+574:12:Attribute -> U
+574:12:Name -> U
+574:54:Name -> U
+577:11:Name -> Const:bool:True | U
+578:12:Call -> Const:NoneType:None
+578:12:Attribute -> BM:salt.crypt.MasterKeys._setup_keys
+578:12:Name -> Inst:salt.crypt.MasterKeys
+580:5:Name -> Class:builtins.property
+584:15:Call -> U
+584:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+584:15:Attribute -> Module:posixpath | Module:ntpath
+584:15:Name -> Module:os
+584:28:Attribute -> U
+584:28:Name -> Inst:salt.crypt.MasterKeys
+586:5:Name -> Class:builtins.property
+589:15:Call -> U
+589:15:Attribute -> Func:posixpath.join | Func:ntpath.join
+589:15:Attribute -> Module:posixpath | Module:ntpath
+589:15:Name -> Module:os
+589:28:Attribute -> U
+589:28:Name -> Inst:salt.crypt.MasterKeys
+597:8:Call -> Const:NoneType:None
+597:8:Attribute -> BM:builtins.object.__init__
+597:8:Name -> Inst:salt.crypt.MasterKeys
+597:22:Name -> U
+600:24:Attribute -> U
+600:24:Name -> Inst:salt.crypt.MasterKeys
+605:19:Call -> U
+605:19:Attribute -> Func:salt.utils.sdb.sdb_get
+605:19:Attribute -> Module:salt.utils.sdb
+605:19:Attribute -> Module:salt.utils
+605:19:Name -> Module:salt
+605:42:Attribute -> U
+605:42:Name -> Inst:salt.crypt.MasterKeys
+605:65:Attribute -> U
+605:65:Name -> Inst:salt.crypt.MasterKeys
+607:11:Call -> U
+607:11:Attribute -> BM:salt.cache.Cache.contains
+607:11:Attribute -> Inst:salt.cache.Cache
+607:11:Name -> Inst:salt.crypt.MasterKeys
+607:49:Attribute -> U
+607:49:Name -> Inst:salt.crypt.MasterKeys
+608:12:Name -> Inst:salt.crypt.MasterKeys
+608:30:Name -> Inst:salt.crypt.MasterKeys
+608:41:Call -> Inst:salt.crypt.PrivateKey
+608:41:Attribute -> BM:salt.crypt.MasterKeys.find_or_create_keys
+608:41:Name -> Inst:salt.crypt.MasterKeys
+609:21:Attribute -> U
+609:21:Name -> Inst:salt.crypt.MasterKeys
+609:48:Name -> U
+612:12:Name -> Inst:salt.crypt.MasterKeys
+612:30:Name -> Inst:salt.crypt.MasterKeys
+612:41:Call -> Inst:salt.crypt.PrivateKey
+612:41:Attribute -> BM:salt.crypt.MasterKeys.find_or_create_keys
+612:41:Name -> Inst:salt.crypt.MasterKeys
+613:42:Name -> U
+617:19:Call -> U
+617:19:Attribute -> BM:salt.cache.Cache.contains
+617:19:Attribute -> Inst:salt.cache.Cache
+617:19:Name -> Inst:salt.crypt.MasterKeys
+617:57:Attribute -> U
+617:57:Name -> Inst:salt.crypt.MasterKeys
+618:23:Call -> U | Dict:0
+618:23:Attribute -> BM:salt.cache.Cache.fetch
+618:23:Attribute -> Inst:salt.cache.Cache
+618:23:Name -> Inst:salt.crypt.MasterKeys
+619:22:Call -> U | Dict:0
+619:22:Attribute -> BM:salt.cache.Cache.fetch
+619:22:Attribute -> Inst:salt.cache.Cache
+619:22:Name -> Inst:salt.crypt.MasterKeys
+620:16:Call -> U
+620:16:Attribute -> U
+620:16:Attribute -> Inst:salt.cache.Cache
+620:16:Name -> Inst:salt.crypt.MasterKeys
+620:51:Attribute -> U
+620:51:Name -> Inst:salt.crypt.MasterKeys
+620:73:Name -> U | Dict:0
+621:16:Call -> U
+621:16:Attribute -> U
+621:16:Attribute -> Inst:salt.cache.Cache
+621:16:Name -> Inst:salt.crypt.MasterKeys
+621:51:Attribute -> U
+621:51:Name -> Inst:salt.crypt.MasterKeys
+621:73:Name -> U | Dict:0
+622:16:Call -> U
+622:16:Attribute -> U
+622:16:Attribute -> Inst:salt.cache.Cache
+622:16:Name -> Inst:salt.crypt.MasterKeys
+623:16:Call -> U
+623:16:Attribute -> U
+623:16:Attribute -> Inst:salt.cache.Cache
+623:16:Name -> Inst:salt.crypt.MasterKeys
+626:19:Attribute -> U
+626:19:Name -> Inst:salt.crypt.MasterKeys
+627:20:Call -> ERR
+627:20:Attribute -> Func:posix.symlink
+627:20:Name -> Module:os
+628:24:Call -> U
+628:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+628:24:Attribute -> Module:posixpath | Module:ntpath
+628:24:Name -> Module:os
+628:37:Attribute -> U
+628:37:Name -> Inst:salt.crypt.MasterKeys
+628:62:Attribute -> U
+628:62:Name -> Inst:salt.crypt.MasterKeys
+629:24:Call -> U
+629:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+629:24:Attribute -> Module:posixpath | Module:ntpath
+629:24:Name -> Module:os
+629:37:Attribute -> U
+629:37:Name -> Inst:salt.crypt.MasterKeys
+631:20:Call -> ERR
+631:20:Attribute -> Func:posix.symlink
+631:20:Name -> Module:os
+632:24:Call -> U
+632:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+632:24:Attribute -> Module:posixpath | Module:ntpath
+632:24:Name -> Module:os
+632:37:Attribute -> U
+632:37:Name -> Inst:salt.crypt.MasterKeys
+632:62:Attribute -> U
+632:62:Name -> Inst:salt.crypt.MasterKeys
+633:24:Call -> U
+633:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+633:24:Attribute -> Module:posixpath | Module:ntpath
+633:24:Name -> Module:os
+633:37:Attribute -> U
+633:37:Name -> Inst:salt.crypt.MasterKeys
+636:11:Attribute -> U
+636:11:Name -> Inst:salt.crypt.MasterKeys
+637:12:Call -> Const:NoneType:None
+637:12:Attribute -> BM:salt.crypt.MasterKeys.check_master_shared_pub
+637:12:Name -> Inst:salt.crypt.MasterKeys
+638:23:Call -> U
+638:23:Attribute -> Func:salt.utils.sdb.sdb_get
+638:23:Attribute -> Module:salt.utils.sdb
+638:23:Attribute -> Module:salt.utils
+638:23:Name -> Module:salt
+638:46:Attribute -> U
+638:46:Name -> Inst:salt.crypt.MasterKeys
+638:77:Attribute -> U
+638:77:Name -> Inst:salt.crypt.MasterKeys
+639:12:Name -> Inst:salt.crypt.MasterKeys
+639:31:Name -> Inst:salt.crypt.MasterKeys
+639:42:Call -> Inst:salt.crypt.PrivateKey
+639:42:Attribute -> BM:salt.crypt.MasterKeys.find_or_create_keys
+639:42:Name -> Inst:salt.crypt.MasterKeys
+641:27:Name -> U
+644:11:Attribute -> U
+644:11:Name -> Inst:salt.crypt.MasterKeys
+646:15:Attribute -> U
+646:15:Name -> Inst:salt.crypt.MasterKeys
+647:19:Attribute -> U
+647:19:Name -> Inst:salt.crypt.MasterKeys
+648:31:Call -> U
+648:31:Attribute -> Func:posixpath.join | Func:ntpath.join
+648:31:Attribute -> Module:posixpath | Module:ntpath
+648:31:Name -> Module:os
+649:24:Attribute -> U
+649:24:Name -> Inst:salt.crypt.MasterKeys
+649:46:Attribute -> U
+649:46:Name -> Inst:salt.crypt.MasterKeys
+652:34:Attribute -> U
+652:34:Name -> Inst:salt.crypt.MasterKeys
+652:79:Attribute -> U
+652:79:Name -> Inst:salt.crypt.MasterKeys
+654:19:Call -> U
+654:19:Attribute -> BM:salt.cache.Cache.contains
+654:19:Attribute -> Inst:salt.cache.Cache
+654:19:Name -> Inst:salt.crypt.MasterKeys
+654:54:Attribute -> U
+654:54:Name -> Inst:salt.crypt.MasterKeys
+655:20:Name -> Inst:salt.crypt.MasterKeys
+655:44:Call -> Const:str:''
+655:44:Name -> Func:salt.crypt.clean_key
+656:24:Call -> U | Dict:0
+656:24:Attribute -> BM:salt.cache.Cache.fetch
+656:24:Attribute -> Inst:salt.cache.Cache
+656:24:Name -> Inst:salt.crypt.MasterKeys
+656:56:Attribute -> U
+656:56:Name -> Inst:salt.crypt.MasterKeys
+658:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+658:20:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+658:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+660:24:Attribute -> U
+660:24:Name -> Inst:salt.crypt.MasterKeys
+661:24:Name -> U | Const:str:'Uninferable:master_keys/Uninferable'
+664:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+664:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+664:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+668:24:Name -> U | Const:str:'Uninferable:master_keys/Uninferable'
+670:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+670:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+670:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+674:20:Call -> ERR
+674:20:Attribute -> Func:sys.exit
+674:20:Name -> Module:sys
+679:27:Call -> U
+679:27:Attribute -> Func:salt.utils.sdb.sdb_get
+679:27:Attribute -> Module:salt.utils.sdb
+679:27:Attribute -> Module:salt.utils
+679:27:Name -> Module:salt
+680:20:Attribute -> U
+680:20:Name -> Inst:salt.crypt.MasterKeys
+680:51:Attribute -> U
+680:51:Name -> Inst:salt.crypt.MasterKeys
+682:16:Name -> Inst:salt.crypt.MasterKeys
+682:32:Call -> Inst:salt.crypt.PrivateKey
+682:32:Attribute -> BM:salt.crypt.MasterKeys.find_or_create_keys
+682:32:Name -> Inst:salt.crypt.MasterKeys
+683:25:Attribute -> U
+683:25:Name -> Inst:salt.crypt.MasterKeys
+683:71:Name -> U
+693:15:Name -> Const:NoneType:None | U
+694:18:Call -> ExcInst:builtins.ValueError
+694:18:Name -> Class:builtins.ValueError
+696:15:Name -> Const:NoneType:None | U
+697:20:Attribute -> Inst:salt.cache.Cache
+697:20:Name -> Inst:salt.crypt.MasterKeys
+699:15:Name -> Const:NoneType:None | U
+701:11:Attribute -> U
+701:11:Name -> Inst:salt.crypt.MasterKeys
+702:19:Call -> U
+702:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+702:19:Attribute -> Module:posixpath | Module:ntpath
+702:19:Name -> Module:os
+702:32:Attribute -> Dict:0
+702:32:Attribute -> Inst:salt.cache.Cache
+702:32:Name -> Inst:salt.crypt.MasterKeys
+702:64:Name -> Const:NoneType:None | U
+704:22:Attribute -> U
+704:22:Name -> Inst:salt.crypt.MasterKeys
+704:67:Attribute -> U
+704:67:Name -> Inst:salt.crypt.MasterKeys
+706:11:Name -> Const:bool:False | U
+706:24:Call -> U
+706:24:Attribute -> U | BM:salt.cache.Cache.contains
+706:24:Name -> Const:NoneType:None | U | Inst:salt.cache.Cache
+706:57:Name -> Const:NoneType:None | U
+707:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+707:12:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+707:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+707:51:Name -> U | Const:str:'Uninferable:master_keys/Uninferable.pub
+708:26:Call -> Tuple:2
+708:26:Name -> Func:salt.crypt.gen_keys
+709:16:Name -> Const:NoneType:None | U
+709:27:Attribute -> U
+709:27:Name -> Inst:salt.crypt.MasterKeys
+710:16:Name -> Const:NoneType:None | U
+713:12:Call -> U
+713:12:Attribute -> U
+713:12:Name -> Const:NoneType:None | U | Inst:salt.cache.Cache
+713:42:Name -> Const:NoneType:None | U
+713:54:Name -> U
+714:12:Call -> U
+714:12:Attribute -> U
+714:12:Name -> Const:NoneType:None | U | Inst:salt.cache.Cache
+714:42:Name -> Const:NoneType:None | U
+714:54:Name -> U
+716:19:Call -> U | Dict:0
+716:19:Attribute -> U | BM:salt.cache.Cache.fetch
+716:19:Name -> Const:NoneType:None | U | Inst:salt.cache.Cache
+716:49:Name -> Const:NoneType:None | U
+719:18:Call -> Inst:salt.crypt.PrivateKey
+719:18:Attribute -> BM:salt.crypt.BaseKey.from_str
+719:18:Name -> Class:salt.crypt.PrivateKey
+719:38:Name -> U | Dict:0
+719:44:Name -> Const:NoneType:None | U
+720:15:Name -> Class:salt.exceptions.InvalidKeyError
+721:45:Name -> U | Const:str:'Uninferable:master_keys/Uninferable.pub
+722:15:Name -> Class:builtins.ValueError
+723:45:Name -> U | Const:str:'Uninferable:master_keys/Uninferable.pub
+724:15:Name -> Class:builtins.TypeError
+725:45:Name -> U | Const:str:'Uninferable:master_keys/Uninferable.pub
+726:15:Attribute -> U
+726:15:Attribute -> U
+726:15:Name -> U
+727:45:Name -> U | Const:str:'Uninferable:master_keys/Uninferable.pub
+729:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+729:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+729:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+729:43:Name -> Const:NoneType:None | U
+729:49:Name -> U | Const:str:'Uninferable:master_keys/Uninferable.pub
+730:19:Name -> Inst:salt.crypt.PrivateKey
+731:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+731:8:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+731:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+731:18:Name -> Const:str:'Unable to read key: Uninferable; key co | Const:str:'Unable to read key: Uninferable:master_ | Const:str:'Unable to read key: Uninferable; file m | Const:str:'Unable to read key: Uninferable:master_ | Const:str:'Unable to read key: Uninferable; passph | Const:str:'Unable to read key: Uninferable:master_ | Const:str:'Unable to read key: Uninferable; key co | Const:str:'Unable to read key: Uninferable:master_
+732:14:Call -> ExcInst:salt.exceptions.MasterExit
+732:14:Name -> Class:salt.exceptions.MasterExit
+732:25:Name -> Const:str:'Unable to read key: Uninferable; key co | Const:str:'Unable to read key: Uninferable:master_ | Const:str:'Unable to read key: Uninferable; file m | Const:str:'Unable to read key: Uninferable:master_ | Const:str:'Unable to read key: Uninferable; passph | Const:str:'Unable to read key: Uninferable:master_ | Const:str:'Unable to read key: Uninferable; key co | Const:str:'Unable to read key: Uninferable:master_
+739:11:Attribute -> U
+739:11:Name -> Inst:salt.crypt.MasterKeys
+742:21:Attribute -> U
+742:21:Name -> Inst:salt.crypt.MasterKeys
+748:15:Call -> U
+748:15:Attribute -> BM:salt.cache.Cache.contains
+748:15:Attribute -> Inst:salt.cache.Cache
+748:15:Name -> Inst:salt.crypt.MasterKeys
+748:50:Name -> Const:str:'cluster.pub' | Const:str:'Uninferable.pub'
+749:21:Call -> U
+749:21:Attribute -> BM:salt.crypt.PrivateKey.public_key
+749:21:Attribute -> Inst:salt.crypt.PrivateKey
+749:21:Name -> Inst:salt.crypt.MasterKeys
+750:24:Call -> U
+750:24:Attribute -> U
+750:24:Name -> U
+751:25:Attribute -> U
+751:25:Attribute -> U
+751:25:Name -> U
+752:23:Attribute -> U
+752:23:Attribute -> U
+752:23:Name -> U
+754:12:Call -> U
+754:12:Attribute -> U
+754:12:Attribute -> Inst:salt.cache.Cache
+754:12:Name -> Inst:salt.crypt.MasterKeys
+754:44:Name -> Const:str:'cluster.pub' | Const:str:'Uninferable.pub'
+754:49:Name -> U
+756:15:Call -> Const:str:''
+756:15:Name -> Func:salt.crypt.clean_key
+756:25:Call -> U | Dict:0
+756:25:Attribute -> BM:salt.cache.Cache.fetch
+756:25:Attribute -> Inst:salt.cache.Cache
+756:25:Name -> Inst:salt.crypt.MasterKeys
+756:57:Name -> Const:str:'cluster.pub' | Const:str:'Uninferable.pub'
+766:11:Attribute -> U
+766:11:Name -> Inst:salt.crypt.MasterKeys
+767:26:Call -> U
+767:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+767:26:Attribute -> Module:posixpath | Module:ntpath
+767:26:Name -> Module:os
+768:16:Attribute -> U
+768:16:Name -> Inst:salt.crypt.MasterKeys
+768:58:Attribute -> U
+768:58:Name -> Inst:salt.crypt.MasterKeys
+771:29:Attribute -> U
+771:29:Name -> Inst:salt.crypt.MasterKeys
+771:80:Attribute -> U
+771:80:Name -> Inst:salt.crypt.MasterKeys
+773:21:Call -> U | Dict:0
+773:21:Attribute -> BM:salt.cache.Cache.fetch
+773:21:Attribute -> Inst:salt.cache.Cache
+773:21:Name -> Inst:salt.crypt.MasterKeys
+773:62:Attribute -> U
+773:62:Name -> Inst:salt.crypt.MasterKeys
+776:21:Call -> U | Dict:0
+776:21:Attribute -> BM:salt.cache.Cache.fetch
+776:21:Attribute -> Inst:salt.cache.Cache
+776:21:Name -> Inst:salt.crypt.MasterKeys
+776:56:Attribute -> U
+776:56:Name -> Inst:salt.crypt.MasterKeys
+777:15:Name -> U | Dict:0
+778:25:Call -> U | Dict:0
+778:25:Attribute -> BM:salt.cache.Cache.fetch
+778:25:Attribute -> Inst:salt.cache.Cache
+778:25:Name -> Inst:salt.crypt.MasterKeys
+780:11:Name -> U | Dict:0
+781:15:Name -> U | Dict:0
+781:30:Name -> U
+781:44:Name -> U | Dict:0
+783:73:Name -> U | Const:str:'Uninferable:master_keys/peers/Uninferab
+785:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+785:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+785:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+785:26:Name -> Const:str:'Shared key does not match, remove it to | Const:str:'Shared key does not match, remove it to
+786:22:Call -> ExcInst:salt.exceptions.MasterExit
+786:22:Name -> Class:salt.exceptions.MasterExit
+786:33:Name -> Const:str:'Shared key does not match, remove it to | Const:str:'Shared key does not match, remove it to
+787:13:Name -> U | Dict:0
+789:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+789:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+789:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+789:47:Name -> U | Const:str:'Uninferable:master_keys/peers/Uninferab
+790:12:Call -> U
+790:12:Attribute -> U
+790:12:Attribute -> Inst:salt.cache.Cache
+790:12:Name -> Inst:salt.crypt.MasterKeys
+790:53:Attribute -> U
+790:53:Name -> Inst:salt.crypt.MasterKeys
+790:75:Name -> U
+798:11:Name -> Const:NoneType:None | U
+799:15:Attribute -> U
+799:15:Name -> Inst:salt.crypt.MasterKeys
+800:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+800:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+800:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+803:20:Call -> Inst:salt.cache.Cache
+803:20:Attribute -> Class:salt.cache.Cache
+803:20:Attribute -> Module:salt.cache
+803:20:Name -> Module:salt
+804:16:Attribute -> U
+804:16:Name -> Inst:salt.crypt.MasterKeys
+805:23:Attribute -> U
+805:23:Name -> Inst:salt.crypt.MasterKeys
+806:24:Attribute -> Inst:pathlib.Path
+806:24:Call -> Inst:pathlib.Path
+806:24:Attribute -> Class:pathlib.Path
+806:24:Name -> Module:pathlib
+806:37:Name -> U
+809:20:Attribute -> Inst:salt.cache.Cache
+809:20:Name -> Inst:salt.crypt.MasterKeys
+811:11:Call -> U
+811:11:Attribute -> BM:salt.cache.Cache.contains | U
+811:11:Name -> Inst:salt.cache.Cache
+811:41:Attribute -> U
+811:41:Name -> Inst:salt.crypt.MasterKeys
+812:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+812:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+812:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+814:16:Name -> Const:NoneType:None | U
+814:29:Attribute -> U
+814:29:Name -> Inst:salt.crypt.MasterKeys
+818:15:Name -> Const:NoneType:None | U
+819:19:Attribute -> Inst:salt.crypt.PrivateKey | U
+819:19:Name -> Inst:salt.crypt.MasterKeys
+821:15:Name -> Const:NoneType:None | U
+822:18:Call -> U
+822:18:Attribute -> U | BM:salt.crypt.PrivateKey.public_key
+822:18:Name -> Const:NoneType:None | U | Inst:salt.crypt.PrivateKey
+824:18:Call -> U
+824:18:Attribute -> U
+824:18:Name -> Const:NoneType:None | U
+825:21:Attribute -> U
+825:21:Attribute -> U
+825:21:Name -> U
+826:19:Attribute -> U
+826:19:Attribute -> U
+826:19:Name -> U
+829:19:Call -> U
+829:19:Attribute -> U | BM:salt.crypt.PrivateKey.sign
+829:19:Name -> Const:NoneType:None | U | Inst:salt.crypt.PrivateKey
+829:29:Name -> U
+830:22:Call -> ERR
+830:22:Attribute -> Func:binascii.b2a_base64
+830:22:Name -> Module:binascii
+830:42:Name -> U
+832:8:Call -> U
+832:8:Attribute -> U
+832:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+832:58:Name -> Const:NoneType:None | U
+832:63:Name -> Const:NoneType:None | U | Inst:salt.crypt.PrivateKey
+834:8:Call -> U
+834:8:Attribute -> U
+834:8:Name -> Inst:salt.cache.Cache
+834:35:Attribute -> U
+834:35:Name -> Inst:salt.crypt.MasterKeys
+834:65:Name -> U
+841:15:Call -> U
+841:15:Attribute -> BM:salt.crypt.PrivateKey.sign | U
+841:15:Attribute -> Inst:salt.crypt.PrivateKey
+841:15:Name -> Inst:salt.crypt.MasterKeys
+841:30:Name -> Tuple:0
+841:38:Name -> Dict:0
+847:15:Call -> U
+847:15:Attribute -> BM:salt.crypt.PrivateKey.decrypt | U
+847:15:Attribute -> Inst:salt.crypt.PrivateKey
+847:15:Name -> Inst:salt.crypt.MasterKeys
+847:33:Name -> Tuple:0
+847:41:Name -> Dict:0
+853:15:Call -> U
+853:15:Attribute -> BM:salt.crypt.PrivateKey.encrypt
+853:15:Attribute -> Inst:salt.crypt.PrivateKey
+853:15:Name -> Inst:salt.crypt.MasterKeys
+853:33:Name -> Tuple:0
+853:41:Name -> Dict:0
+859:14:Call -> U | Dict:0
+859:14:Attribute -> BM:salt.cache.Cache.fetch
+859:14:Attribute -> Inst:salt.cache.Cache
+859:14:Name -> Inst:salt.crypt.MasterKeys
+859:46:Name -> U
+861:15:Name -> U | Dict:0
+864:11:Call -> U
+864:11:Attribute -> U
+864:11:Name -> U
+865:19:Call -> Inst:salt.crypt.PrivateKey
+865:19:Attribute -> BM:salt.crypt.BaseKey.from_str
+865:19:Name -> Class:salt.crypt.PrivateKey
+865:39:Name -> U | Dict:0
+866:13:Call -> U
+866:13:Attribute -> U
+866:13:Name -> U
+867:19:Call -> Inst:salt.crypt.PublicKey
+867:19:Attribute -> BM:salt.crypt.BaseKey.from_str
+867:19:Name -> Class:salt.crypt.PublicKey
+867:38:Name -> U | Dict:0
+869:19:Name -> U | Dict:0
+873:14:Call -> U
+873:14:Attribute -> Func:posixpath.join | Func:ntpath.join
+873:14:Attribute -> Module:posixpath | Module:ntpath
+873:14:Name -> Module:os
+873:27:Name -> U
+875:7:Call -> Const:bool:False | Const:bool:True | U
+875:7:Attribute -> Func:genericpath.exists | U
+875:7:Attribute -> Module:posixpath | Module:ntpath
+875:7:Name -> Module:os
+875:22:Name -> U
+876:18:Call -> Const:str:''
+876:18:Name -> Class:builtins.str
+876:22:Call -> U
+876:22:Attribute -> Func:genericpath.getmtime
+876:22:Attribute -> Module:posixpath | Module:ntpath
+876:22:Name -> Module:os
+876:39:Name -> U
+878:8:Name -> U
+879:8:Name -> U
+880:8:Name -> U
+881:8:Name -> Const:str:'0' | Const:str:''
+892:19:Call -> Inst:weakref.WeakKeyDictionary
+892:19:Attribute -> Class:weakref.WeakKeyDictionary
+892:19:Name -> Module:weakref
+902:18:Name -> Const:NoneType:None | U
+902:29:Call -> U
+902:29:Attribute -> U
+902:29:Attribute -> U
+902:29:Attribute -> U
+902:29:Name -> U
+903:11:Name -> U
+903:26:Attribute -> Inst:weakref.WeakKeyDictionary
+903:26:Name -> Class:salt.crypt.AsyncAuth
+904:12:Attribute -> Inst:weakref.WeakKeyDictionary
+904:12:Name -> Class:salt.crypt.AsyncAuth
+904:35:Name -> U
+904:46:Call -> Inst:weakref.WeakValueDictionary
+904:46:Attribute -> Class:weakref.WeakValueDictionary
+904:46:Name -> Module:weakref
+905:28:Attribute -> Inst:weakref.WeakKeyDictionary
+905:28:Name -> Class:salt.crypt.AsyncAuth
+905:51:Name -> U
+907:14:Call -> Tuple:4
+907:14:Attribute -> BM:salt.crypt.AsyncAuth.__key
+907:14:Name -> Class:salt.crypt.AsyncAuth
+907:24:Name -> U
+908:15:Call -> U
+908:15:Attribute -> U
+908:15:Name -> U
+908:37:Name -> Tuple:4
+909:11:Name -> U
+910:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+910:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+910:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+910:59:Name -> Tuple:4
+914:19:Call -> Inst:salt.crypt.AsyncAuth
+914:19:Attribute -> BM:builtins.object.__new__ | BM:builtins.object.__new__
+914:19:Name -> Class:builtins.object
+914:34:Name -> Class:salt.crypt.AsyncAuth
+915:12:Call -> Const:NoneType:None
+915:12:Attribute -> BM:salt.crypt.AsyncAuth.__singleton_init__
+915:12:Name -> Inst:salt.crypt.AsyncAuth
+915:36:Name -> U
+915:50:Name -> U
+916:12:Name -> U
+916:30:Name -> Tuple:4
+916:37:Name -> Inst:salt.crypt.AsyncAuth
+918:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+918:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+918:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+918:51:Name -> Tuple:4
+919:15:Name -> U | Inst:salt.crypt.AsyncAuth
+921:5:Name -> Class:builtins.classmethod
+923:15:Call -> Tuple:4
+923:15:Name -> Func:salt.crypt._auth_singleton_key
+923:35:Name -> U
+938:8:Name -> Inst:salt.crypt.AsyncAuth
+938:20:Name -> U
+939:8:Name -> Inst:salt.crypt.AsyncAuth
+939:21:Call -> U | Inst:builtins.bytes
+939:21:Attribute -> Func:salt.utils.stringutils.to_bytes
+939:21:Attribute -> Module:salt.utils.stringutils
+939:21:Attribute -> Module:salt.utils
+939:21:Name -> Module:salt
+939:53:Call -> U
+939:53:Attribute -> BM:salt.crypt.Crypticle.generate_key_string
+939:53:Name -> Class:salt.crypt.Crypticle
+940:8:Name -> Inst:salt.crypt.AsyncAuth
+940:21:Call -> Inst:salt.cache.Cache
+940:21:Attribute -> Class:salt.cache.Cache
+940:21:Attribute -> Module:salt.cache
+940:21:Name -> Module:salt
+940:38:Name -> U
+940:51:Name -> U
+941:8:Name -> Inst:salt.crypt.AsyncAuth
+941:24:Call -> U
+941:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+941:24:Attribute -> Module:posixpath | Module:ntpath
+941:24:Name -> Module:os
+941:37:Attribute -> U
+941:37:Name -> Inst:salt.crypt.AsyncAuth
+942:8:Name -> Inst:salt.crypt.AsyncAuth
+942:24:Call -> U
+942:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+942:24:Attribute -> Module:posixpath | Module:ntpath
+942:24:Name -> Module:os
+942:37:Attribute -> U
+942:37:Name -> Inst:salt.crypt.AsyncAuth
+943:8:Name -> Inst:salt.crypt.AsyncAuth
+944:11:Attribute -> U
+944:11:Name -> Inst:salt.crypt.AsyncAuth
+945:12:Name -> Inst:salt.crypt.AsyncAuth
+947:12:Name -> Inst:salt.crypt.AsyncAuth
+948:15:Call -> Const:bool:False | U
+948:15:Attribute -> Func:genericpath.isfile | U
+948:15:Attribute -> Module:posixpath | Module:ntpath
+948:15:Name -> Module:os
+948:30:Attribute -> U
+948:30:Name -> Inst:salt.crypt.AsyncAuth
+949:12:Call -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+949:12:Attribute -> BM:salt.crypt.AsyncAuth.get_keys
+949:12:Name -> Inst:salt.crypt.AsyncAuth
+950:11:Name -> Const:NoneType:None | U
+951:12:Name -> Inst:salt.crypt.AsyncAuth
+951:27:Call -> U
+951:27:Attribute -> Func:salt.utils.asynchronous.aioloop
+951:27:Attribute -> Module:salt.utils.asynchronous
+951:27:Attribute -> Module:salt.utils
+951:27:Name -> Module:salt
+952:16:Call -> U
+952:16:Attribute -> U
+952:16:Attribute -> U
+952:16:Attribute -> U
+952:16:Name -> U
+955:12:Name -> Inst:salt.crypt.AsyncAuth
+955:27:Call -> U
+955:27:Attribute -> Func:salt.utils.asynchronous.aioloop
+955:27:Attribute -> Module:salt.utils.asynchronous
+955:27:Attribute -> Module:salt.utils
+955:27:Name -> Module:salt
+955:59:Name -> U
+956:14:Call -> Tuple:4
+956:14:Attribute -> BM:salt.crypt.AsyncAuth.__key
+956:14:Name -> Inst:salt.crypt.AsyncAuth
+956:25:Attribute -> U
+956:25:Name -> Inst:salt.crypt.AsyncAuth
+958:11:Name -> Tuple:4
+958:18:Attribute -> Dict:0
+958:18:Name -> Class:salt.crypt.AsyncAuth
+959:20:Attribute -> Dict:0
+959:20:Name -> Class:salt.crypt.AsyncAuth
+959:40:Name -> Tuple:4
+960:12:Name -> Inst:salt.crypt.AsyncAuth
+960:26:Name -> U
+961:12:Name -> Inst:salt.crypt.AsyncAuth
+961:30:Call -> Inst:salt.crypt.Crypticle
+961:30:Name -> Class:salt.crypt.Crypticle
+961:40:Attribute -> U
+961:40:Name -> Inst:salt.crypt.AsyncAuth
+961:51:Name -> U
+962:12:Name -> Inst:salt.crypt.AsyncAuth
+962:38:Call -> Inst:salt.crypt.Crypticle
+962:38:Name -> Class:salt.crypt.Crypticle
+962:48:Attribute -> U
+962:48:Name -> Inst:salt.crypt.AsyncAuth
+962:59:Name -> U
+963:12:Name -> Inst:salt.crypt.AsyncAuth
+963:40:Call -> U
+963:40:Attribute -> U
+963:40:Attribute -> U
+963:40:Name -> U
+964:12:Call -> U
+964:12:Attribute -> U
+964:12:Attribute -> U
+964:12:Name -> Inst:salt.crypt.AsyncAuth
+967:14:Attribute -> Class:salt.crypt.AsyncAuth
+967:14:Name -> Inst:salt.crypt.AsyncAuth
+968:17:Call -> U
+968:17:Attribute -> BM:salt.crypt.AsyncAuth.__new__
+968:17:Name -> Class:salt.crypt.AsyncAuth
+968:29:Name -> Class:salt.crypt.AsyncAuth
+968:34:Call -> U
+968:34:Attribute -> Func:copy.deepcopy
+968:34:Name -> Module:copy
+968:48:Attribute -> U
+968:48:Name -> Inst:salt.crypt.AsyncAuth
+968:59:Name -> U
+969:8:Name -> U
+969:13:Call -> ERR
+969:13:Name -> Func:builtins.id
+969:16:Name -> Inst:salt.crypt.AsyncAuth
+969:25:Name -> U
+970:19:Attribute -> Dict:13
+970:19:Name -> Inst:salt.crypt.AsyncAuth
+971:15:Name -> U
+976:12:Call -> ERR
+976:12:Name -> Func:builtins.setattr
+976:20:Name -> U
+976:28:Name -> U
+976:33:Call -> U
+976:33:Attribute -> Func:copy.deepcopy
+976:33:Name -> Module:copy
+976:47:Attribute -> Dict:13
+976:47:Name -> Inst:salt.crypt.AsyncAuth
+976:61:Name -> U
+976:67:Name -> U
+977:15:Name -> U
+979:5:Name -> Class:builtins.property
+981:15:Attribute -> Inst:salt.crypt.Crypticle
+981:15:Name -> Inst:salt.crypt.AsyncAuth
+983:5:Name -> Class:builtins.property
+985:15:Attribute -> U | Const:NoneType:None
+985:15:Name -> Inst:salt.crypt.AsyncAuth
+987:5:Name -> Class:builtins.property
+989:15:Attribute -> Inst:salt.crypt.Crypticle
+989:15:Name -> Inst:salt.crypt.AsyncAuth
+991:5:Name -> Class:builtins.property
+994:12:Call -> Const:bool:True
+994:12:Name -> Func:builtins.hasattr
+994:20:Name -> Inst:salt.crypt.AsyncAuth
+995:16:Call -> U
+995:16:Attribute -> U
+995:16:Attribute -> U
+995:16:Name -> Inst:salt.crypt.AsyncAuth
+996:16:Call -> U
+996:16:Attribute -> U
+996:16:Attribute -> U
+996:16:Name -> Inst:salt.crypt.AsyncAuth
+1000:11:Attribute -> U
+1000:11:Name -> Inst:salt.crypt.AsyncAuth
+1001:16:Name -> Inst:salt.crypt.AsyncAuth
+1002:18:Call -> Tuple:4
+1002:18:Attribute -> BM:salt.crypt.AsyncAuth.__key
+1002:18:Name -> Inst:salt.crypt.AsyncAuth
+1002:29:Attribute -> U
+1002:29:Name -> Inst:salt.crypt.AsyncAuth
+1003:15:Name -> Tuple:4
+1003:22:Attribute -> Dict:0
+1003:22:Name -> Class:salt.crypt.AsyncAuth
+1004:20:Attribute -> Dict:0
+1004:20:Name -> Class:salt.crypt.AsyncAuth
+1004:40:Name -> Tuple:4
+1015:12:Call -> Const:bool:True
+1015:12:Name -> Func:builtins.hasattr
+1015:20:Name -> Inst:salt.crypt.AsyncAuth
+1016:20:Call -> U
+1016:20:Attribute -> U
+1016:20:Attribute -> U
+1016:20:Name -> Inst:salt.crypt.AsyncAuth
+1018:21:Attribute -> U
+1018:21:Name -> Inst:salt.crypt.AsyncAuth
+1020:21:Call -> U
+1020:21:Attribute -> U
+1020:21:Attribute -> U
+1020:21:Name -> U
+1021:12:Name -> Inst:salt.crypt.AsyncAuth
+1021:40:Name -> U
+1022:12:Call -> U
+1022:12:Attribute -> U
+1022:12:Attribute -> U
+1022:12:Name -> Inst:salt.crypt.AsyncAuth
+1022:37:Call -> Const:NoneType:None
+1022:37:Attribute -> BM:salt.crypt.AsyncAuth._authenticate
+1022:37:Name -> Inst:salt.crypt.AsyncAuth
+1024:11:Name -> Const:NoneType:None | U
+1027:27:Call -> U
+1027:27:Attribute -> U
+1027:27:Name -> U
+1028:16:Call -> U
+1028:16:Attribute -> U
+1028:16:Attribute -> U
+1028:16:Name -> Inst:salt.crypt.AsyncAuth
+1028:39:Name -> U
+1028:49:Name -> U
+1030:12:Call -> U
+1030:12:Attribute -> U
+1030:12:Name -> U
+1030:37:Name -> Func:salt.crypt.AsyncAuth.authenticate.handle_future
+1032:15:Name -> U
+1044:31:Attribute -> U
+1044:31:Name -> Inst:salt.crypt.AsyncAuth
+1045:35:Attribute -> U
+1045:35:Name -> Inst:salt.crypt.AsyncAuth
+1046:15:Name -> U
+1047:39:Name -> U
+1050:13:Call -> Inst:salt.channel.client.AsyncReqChannel
+1050:13:Attribute -> BM:salt.channel.client.AsyncReqChannel.factory
+1050:13:Attribute -> Class:salt.channel.client.AsyncReqChannel
+1050:13:Attribute -> Module:salt.channel.client
+1050:13:Attribute -> Module:salt.channel
+1050:13:Name -> Module:salt
+1051:12:Attribute -> U
+1051:12:Name -> Inst:salt.crypt.AsyncAuth
+1051:46:Attribute -> U
+1051:46:Name -> Inst:salt.crypt.AsyncAuth
+1055:25:Call -> U
+1055:25:Attribute -> U
+1055:25:Attribute -> U
+1055:25:Name -> Inst:salt.crypt.AsyncAuth
+1059:22:Call -> Const:NoneType:None | U
+1059:22:Attribute -> Func:asyncio.tasks.sleep
+1059:22:Name -> Module:asyncio
+1062:34:Call -> Dict:3 | Dict:3 | Dict:3 | Dict:3
+1062:34:Attribute -> Func:tests.pytests.unit.test_crypt.test_auth_aes_key_rotation.mock_sign_in | Func:tests.pytests.unit.test_auth_creds_event.test_authenticate_fires_creds_event_synchronously.mock_sign_in
+1062:34:Name -> Inst:salt.crypt.AsyncAuth
+1062:55:Name -> Inst:salt.channel.client.AsyncReqChannel
+1063:23:Name -> Class:salt.exceptions.SaltClientError
+1064:28:Name -> ExcInst:salt.exceptions.SaltClientError
+1066:19:Name -> Const:NoneType:None | U
+1067:23:Call -> U
+1067:23:Attribute -> U
+1067:23:Attribute -> U
+1067:23:Name -> Inst:salt.crypt.AsyncAuth
+1068:32:Call -> ExcInst:salt.exceptions.SaltClientError
+1068:32:Name -> Class:salt.exceptions.SaltClientError
+1070:23:Name -> U
+1070:42:Name -> Const:int:0 | Const:int:1
+1070:54:Name -> U
+1071:32:Call -> ExcInst:salt.exceptions.SaltClientError
+1071:32:Name -> Class:salt.exceptions.SaltClientError
+1072:76:Name -> Const:int:0 | Const:int:1
+1075:23:Call -> U
+1075:23:Attribute -> U
+1075:23:Attribute -> U
+1075:23:Name -> Inst:salt.crypt.AsyncAuth
+1078:27:Call -> U
+1078:27:Attribute -> U
+1078:27:Attribute -> U
+1078:27:Name -> Inst:salt.crypt.AsyncAuth
+1079:36:Call -> ExcInst:salt.exceptions.SaltClientError
+1079:36:Name -> Class:salt.exceptions.SaltClientError
+1086:28:Call -> ERR
+1086:28:Name -> Func:builtins.print
+1090:28:Call -> ERR
+1090:28:Attribute -> Func:sys.exit
+1090:28:Name -> Module:sys
+1091:23:Name -> U
+1092:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1092:24:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1092:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1093:64:Name -> U
+1095:30:Call -> Const:NoneType:None | U
+1095:30:Attribute -> Func:asyncio.tasks.sleep
+1095:30:Name -> Module:asyncio
+1095:44:Name -> U
+1096:23:Name -> U
+1096:46:Name -> U
+1097:48:Name -> U
+1098:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1098:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1098:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1099:62:Name -> U
+1102:21:Name -> Const:NoneType:None | U
+1103:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1103:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1103:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1108:21:Name -> Const:NoneType:None | U
+1109:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1109:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1109:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1115:19:Call -> ERR
+1115:19:Name -> Func:builtins.isinstance
+1115:30:Name -> Const:NoneType:None | U
+1115:37:Name -> Class:builtins.dict
+1115:59:Name -> Const:NoneType:None | U
+1116:19:Call -> U
+1116:19:Attribute -> U
+1116:19:Attribute -> U
+1116:19:Name -> Inst:salt.crypt.AsyncAuth
+1117:28:Call -> ExcInst:salt.exceptions.SaltClientError
+1117:28:Name -> Class:salt.exceptions.SaltClientError
+1119:24:Attribute -> Dict:0
+1119:24:Name -> Class:salt.crypt.AsyncAuth
+1119:44:Call -> Tuple:4
+1119:44:Attribute -> BM:salt.crypt.AsyncAuth.__key
+1119:44:Name -> Inst:salt.crypt.AsyncAuth
+1119:55:Attribute -> U
+1119:55:Name -> Inst:salt.crypt.AsyncAuth
+1120:23:Name -> Class:builtins.KeyError
+1122:23:Name -> Const:NoneType:None | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError
+1123:28:Call -> ExcInst:salt.exceptions.SaltClientError
+1123:28:Name -> Class:salt.exceptions.SaltClientError
+1126:16:Call -> U
+1126:16:Attribute -> U
+1126:16:Attribute -> U
+1126:16:Name -> Inst:salt.crypt.AsyncAuth
+1126:56:Name -> Const:NoneType:None | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError | ExcInst:salt.exceptions.SaltClientError
+1128:22:Call -> Tuple:4
+1128:22:Attribute -> BM:salt.crypt.AsyncAuth.__key
+1128:22:Name -> Inst:salt.crypt.AsyncAuth
+1128:33:Attribute -> U
+1128:33:Name -> Inst:salt.crypt.AsyncAuth
+1130:19:Name -> Tuple:4
+1130:30:Attribute -> Dict:0
+1130:30:Name -> Class:salt.crypt.AsyncAuth
+1132:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1132:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1132:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1132:60:Name -> Inst:salt.crypt.AsyncAuth
+1134:23:Attribute -> U | Const:NoneType:None
+1134:23:Name -> Inst:salt.crypt.AsyncAuth
+1134:45:Name -> Const:NoneType:None | U
+1136:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1136:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1136:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1136:74:Name -> Inst:salt.crypt.AsyncAuth
+1137:23:Attribute -> U | Const:NoneType:None
+1137:23:Name -> Inst:salt.crypt.AsyncAuth
+1137:49:Name -> Const:NoneType:None | U
+1139:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1139:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1139:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1139:78:Name -> Inst:salt.crypt.AsyncAuth
+1140:19:Name -> Const:bool:False | Const:bool:True
+1140:30:Name -> Const:bool:False | Const:bool:True
+1140:45:Name -> Const:bool:False | Const:bool:True
+1141:20:Attribute -> Dict:0
+1141:20:Name -> Class:salt.crypt.AsyncAuth
+1141:40:Name -> Tuple:4
+1141:47:Name -> Const:NoneType:None | U
+1142:20:Name -> Inst:salt.crypt.AsyncAuth
+1142:34:Name -> Const:NoneType:None | U
+1143:20:Name -> Inst:salt.crypt.AsyncAuth
+1143:38:Call -> Inst:salt.crypt.Crypticle
+1143:38:Name -> Class:salt.crypt.Crypticle
+1143:48:Attribute -> U
+1143:48:Name -> Inst:salt.crypt.AsyncAuth
+1143:59:Name -> Const:NoneType:None | U
+1144:20:Name -> Inst:salt.crypt.AsyncAuth
+1144:46:Call -> Inst:salt.crypt.Crypticle
+1144:46:Name -> Class:salt.crypt.Crypticle
+1144:56:Attribute -> U
+1144:56:Name -> Inst:salt.crypt.AsyncAuth
+1144:67:Name -> Const:NoneType:None | U
+1146:16:Call -> U
+1146:16:Attribute -> U
+1146:16:Attribute -> U
+1146:16:Name -> Inst:salt.crypt.AsyncAuth
+1159:19:Call -> U
+1159:19:Attribute -> U
+1159:19:Attribute -> U
+1159:19:Name -> Inst:salt.crypt.AsyncAuth
+1160:25:Call -> Inst:salt.utils.event.MasterEvent | Inst:salt.utils.event.SaltEvent
+1160:25:Attribute -> Func:salt.utils.event.get_event
+1160:25:Attribute -> Module:salt.utils.event
+1160:25:Attribute -> Module:salt.utils
+1160:25:Name -> Module:salt
+1161:24:Call -> U
+1161:24:Attribute -> U
+1161:24:Attribute -> U
+1161:24:Name -> Inst:salt.crypt.AsyncAuth
+1162:29:Attribute -> U
+1162:29:Name -> Inst:salt.crypt.AsyncAuth
+1166:28:Call -> Const:bool:False | Const:bool:True
+1166:28:Attribute -> BM:salt.utils.event.SaltEvent.fire_event
+1166:28:Name -> Inst:salt.utils.event.MasterEvent
+1167:40:Name -> Tuple:4
+1167:54:Name -> Const:NoneType:None | U
+1168:32:Call -> Const:str:''
+1168:32:Attribute -> Func:salt.utils.event.tagify
+1168:32:Attribute -> Module:salt.utils.event
+1168:32:Attribute -> Module:salt.utils
+1168:32:Name -> Module:salt
+1170:31:Name -> Class:builtins.Exception
+1171:28:Call -> Const:NoneType:None | U | Const:NoneType:None
+1171:28:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1171:28:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1171:75:Name -> ExcInst:builtins.Exception
+1189:23:Call -> U
+1189:23:Attribute -> U
+1189:23:Attribute -> U
+1189:23:Name -> Inst:salt.crypt.AsyncAuth
+1190:11:Name -> U
+1191:22:Name -> U
+1192:24:Call -> U
+1192:24:Attribute -> U
+1192:24:Attribute -> U
+1192:24:Name -> Inst:salt.crypt.AsyncAuth
+1193:11:Name -> U
+1194:19:Name -> U
+1195:21:Call -> U
+1195:21:Attribute -> U
+1195:21:Attribute -> U
+1195:21:Name -> Inst:salt.crypt.AsyncAuth
+1196:11:Name -> U
+1197:20:Name -> U
+1200:15:Name -> Const:NoneType:None | U
+1202:22:Call -> Inst:salt.channel.client.AsyncReqChannel
+1202:22:Attribute -> BM:salt.channel.client.AsyncReqChannel.factory
+1202:22:Attribute -> Class:salt.channel.client.AsyncReqChannel
+1202:22:Attribute -> Module:salt.channel.client
+1202:22:Attribute -> Module:salt.channel
+1202:22:Name -> Module:salt
+1203:16:Attribute -> U
+1203:16:Name -> Inst:salt.crypt.AsyncAuth
+1203:50:Attribute -> U
+1203:50:Name -> Inst:salt.crypt.AsyncAuth
+1206:26:Call -> Dict:0
+1206:26:Attribute -> BM:salt.crypt.AsyncAuth.minion_sign_in_payload
+1206:26:Name -> Inst:salt.crypt.AsyncAuth
+1208:28:Call -> U
+1208:28:Attribute -> U | BM:salt.channel.client.AsyncReqChannel.send
+1208:28:Name -> Const:NoneType:None | U | Inst:salt.channel.client.AsyncReqChannel
+1208:41:Name -> Dict:0
+1208:64:Name -> Const:int:1 | U
+1208:79:Name -> Const:int:60 | U
+1209:15:Name -> Class:salt.exceptions.SaltReqTimeoutError
+1210:15:Name -> Const:bool:True | U
+1211:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1211:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1211:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1211:55:Name -> ExcInst:salt.exceptions.SaltReqTimeoutError
+1213:15:Call -> U
+1213:15:Attribute -> U
+1213:15:Attribute -> U
+1213:15:Name -> Inst:salt.crypt.AsyncAuth
+1216:22:Call -> ExcInst:salt.exceptions.SaltClientError
+1216:22:Name -> Class:salt.exceptions.SaltClientError
+1221:15:Name -> Const:bool:False | Const:bool:True
+1222:16:Call -> U | Const:NoneType:None
+1222:16:Attribute -> U | BM:salt.channel.client.AsyncReqChannel.close
+1222:16:Name -> Const:NoneType:None | U | Inst:salt.channel.client.AsyncReqChannel
+1223:15:Call -> Const:bool:False | Const:str:'bad enc algo' | Const:str:'bad sig algo' | Const:str:'retry' | Const:str:'full' | Const:str:'retry' | Dict:0
+1223:15:Attribute -> BM:salt.crypt.AsyncAuth.handle_signin_response
+1223:15:Name -> Inst:salt.crypt.AsyncAuth
+1223:43:Name -> Dict:0
+1223:60:Name -> U
+1227:19:Call -> U
+1227:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1227:19:Attribute -> Module:posixpath | Module:ntpath
+1227:19:Name -> Module:os
+1227:32:Attribute -> U
+1227:32:Name -> Inst:salt.crypt.AsyncAuth
+1227:54:Attribute -> Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1227:54:Name -> Inst:salt.crypt.AsyncAuth
+1228:8:Name -> Dict:0
+1228:29:Attribute -> U
+1228:29:Name -> Inst:salt.crypt.AsyncAuth
+1229:15:Call -> ERR
+1229:15:Name -> Func:builtins.isinstance
+1229:26:Name -> U
+1229:35:Name -> Class:builtins.dict
+1229:58:Name -> U
+1230:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1230:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1230:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1230:52:Name -> U
+1232:13:Call -> ERR
+1232:13:Name -> Func:builtins.isinstance
+1232:24:Name -> U
+1232:41:Name -> Class:builtins.dict
+1232:60:Name -> U
+1233:15:Name -> U
+1234:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1234:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1234:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1234:56:Name -> U
+1236:17:Name -> U
+1237:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1237:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1237:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1237:56:Name -> U
+1240:28:Name -> U
+1241:26:Name -> U
+1242:18:Call -> U | Dict:0 | List:0
+1242:18:Attribute -> Func:salt.payload.loads
+1242:18:Attribute -> Module:salt.payload
+1242:18:Name -> Module:salt
+1242:37:Name -> U
+1243:24:Name -> U | Dict:0 | List:0
+1244:12:Name -> Dict:0
+1244:26:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | U
+1244:26:Attribute -> BM:salt.crypt.AsyncAuth.verify_master
+1244:26:Name -> Inst:salt.crypt.AsyncAuth
+1245:16:Name -> U | Dict:0 | List:0
+1245:47:Name -> U
+1247:19:Name -> Dict:0
+1248:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1248:16:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1248:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1256:20:Attribute -> Const:str:'Uninferable' | Const:str:'Instance of builtins.int' | Const:str:'Uninferable.Uninferable' | Const:str:'Uninferable.Instance of builtins.int' | Const:str:'Instance of builtins.int.Uninferable' | Const:str:'Instance of builtins.int.Instance of bu | U
+1256:20:Attribute -> Module:salt.version
+1256:20:Name -> Module:salt
+1257:20:Name -> U
+1259:22:Call -> ExcInst:salt.exceptions.SaltClientError
+1259:22:Name -> Class:salt.exceptions.SaltClientError
+1261:18:Call -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1261:18:Attribute -> BM:salt.crypt.AsyncAuth.get_keys
+1261:18:Name -> Inst:salt.crypt.AsyncAuth
+1262:12:Name -> Dict:0
+1262:30:Call -> U
+1262:30:Attribute -> BM:salt.crypt.PrivateKey.decrypt
+1262:30:Name -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1263:16:Name -> U | Dict:0 | List:0
+1263:36:Attribute -> U
+1263:36:Name -> Inst:salt.crypt.AsyncAuth
+1266:29:Call -> U
+1266:29:Attribute -> Func:posixpath.join | Func:ntpath.join
+1266:29:Attribute -> Module:posixpath | Module:ntpath
+1266:29:Name -> Module:os
+1266:42:Attribute -> U
+1266:42:Name -> Inst:salt.crypt.AsyncAuth
+1266:64:Attribute -> Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1266:64:Name -> Inst:salt.crypt.AsyncAuth
+1267:11:Call -> Const:bool:False | Const:bool:True | U
+1267:11:Attribute -> Func:genericpath.exists | U
+1267:11:Attribute -> Module:posixpath | Module:ntpath
+1267:11:Name -> Module:os
+1267:26:Name -> U
+1267:54:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+1267:54:Attribute -> BM:salt.crypt.PublicKey.verify
+1267:54:Call -> Inst:salt.crypt.PublicKey
+1267:54:Attribute -> BM:salt.crypt.BaseKey.from_file
+1267:54:Name -> Class:salt.crypt.PublicKey
+1268:12:Name -> U
+1270:12:Name -> U
+1271:12:Name -> U
+1272:22:Attribute -> U
+1272:22:Name -> Inst:salt.crypt.AsyncAuth
+1274:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1274:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1274:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1275:18:Call -> ExcInst:salt.exceptions.SaltClientError
+1275:18:Name -> Class:salt.exceptions.SaltClientError
+1277:11:Name -> U | Dict:0 | List:0
+1277:31:Name -> U
+1278:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1278:12:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1278:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1279:18:Call -> ExcInst:salt.exceptions.SaltClientError
+1279:18:Name -> Class:salt.exceptions.SaltClientError
+1281:20:Name -> U | Dict:0 | List:0
+1282:19:Name -> U | Dict:0 | List:0
+1283:19:Attribute -> U
+1283:19:Name -> Inst:salt.crypt.AsyncAuth
+1284:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1284:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1284:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1292:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1292:20:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1292:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1302:20:Call -> ERR
+1302:20:Attribute -> Func:time.sleep
+1302:20:Name -> Module:time
+1302:31:Call -> U
+1302:31:Attribute -> BM:random.Random.randint
+1302:31:Name -> Module:random
+1303:20:Call -> ERR
+1303:20:Attribute -> Func:sys.exit
+1303:20:Name -> Module:sys
+1303:29:Attribute -> Const:int:77
+1303:29:Attribute -> Module:salt.defaults.exitcodes
+1303:29:Attribute -> Module:salt.defaults
+1303:29:Name -> Module:salt
+1305:17:Name -> U | Dict:0 | List:0
+1308:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1308:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1308:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1312:20:Attribute -> U
+1312:20:Name -> Inst:salt.crypt.AsyncAuth
+1316:11:Call -> U
+1316:11:Attribute -> U
+1316:11:Attribute -> U
+1316:11:Name -> Inst:salt.crypt.AsyncAuth
+1317:28:Call -> U
+1317:28:Attribute -> U
+1317:28:Attribute -> U
+1317:28:Name -> Inst:salt.crypt.AsyncAuth
+1318:33:Call -> U
+1318:33:Attribute -> U
+1318:33:Attribute -> U
+1318:33:Name -> Inst:salt.crypt.AsyncAuth
+1320:15:Name -> U
+1322:20:Call -> Const:str:'' | Const:str:'' | U
+1322:20:Attribute -> Func:salt.utils.crypt.pem_finger
+1322:20:Attribute -> Module:salt.utils.crypt
+1322:20:Attribute -> Module:salt.utils
+1322:20:Name -> Module:salt
+1323:24:Name -> U
+1323:43:Attribute -> U
+1323:43:Name -> Inst:salt.crypt.AsyncAuth
+1325:23:Name -> U
+1327:20:Call -> Const:NoneType:None
+1327:20:Attribute -> BM:salt.crypt.AsyncAuth._finger_fail
+1327:20:Name -> Inst:salt.crypt.AsyncAuth
+1327:38:Name -> U
+1327:53:Name -> U
+1329:15:Call -> U
+1329:15:Attribute -> U
+1329:15:Attribute -> U
+1329:15:Name -> Inst:salt.crypt.AsyncAuth
+1331:20:Call -> Const:str:'' | Const:str:'' | U
+1331:20:Attribute -> Func:salt.utils.crypt.pem_finger
+1331:20:Attribute -> Module:salt.utils.crypt
+1331:20:Attribute -> Module:salt.utils
+1331:20:Name -> Module:salt
+1332:24:Name -> U
+1332:43:Attribute -> U
+1332:43:Name -> Inst:salt.crypt.AsyncAuth
+1334:23:Attribute -> U
+1334:23:Name -> Inst:salt.crypt.AsyncAuth
+1336:20:Call -> Const:NoneType:None
+1336:20:Attribute -> BM:salt.crypt.AsyncAuth._finger_fail
+1336:20:Name -> Inst:salt.crypt.AsyncAuth
+1336:38:Attribute -> U
+1336:38:Name -> Inst:salt.crypt.AsyncAuth
+1336:66:Name -> U
+1338:8:Name -> Dict:0
+1338:31:Name -> U | Dict:0 | List:0
+1339:15:Name -> Dict:0
+1348:11:Attribute -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1348:11:Name -> Inst:salt.crypt.AsyncAuth
+1350:19:Call -> U
+1350:19:Attribute -> U
+1350:19:Attribute -> U
+1350:19:Name -> Inst:salt.crypt.AsyncAuth
+1351:12:Call -> Const:NoneType:None
+1351:12:Attribute -> Func:salt.utils.verify.check_path_traversal
+1351:12:Attribute -> Module:salt.utils.verify
+1351:12:Attribute -> Module:salt.utils
+1351:12:Name -> Module:salt
+1351:51:Attribute -> U
+1351:51:Name -> Inst:salt.crypt.AsyncAuth
+1351:73:Name -> U
+1353:19:Call -> Const:bool:False | Const:bool:True | U
+1353:19:Attribute -> Func:genericpath.exists | U
+1353:19:Attribute -> Module:posixpath | Module:ntpath
+1353:19:Name -> Module:os
+1353:34:Attribute -> U
+1353:34:Name -> Inst:salt.crypt.AsyncAuth
+1354:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1354:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1354:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1354:48:Attribute -> U
+1354:48:Name -> Inst:salt.crypt.AsyncAuth
+1355:30:Call -> Tuple:2
+1355:30:Name -> Func:salt.crypt.gen_keys
+1355:39:Attribute -> U
+1355:39:Name -> Inst:salt.crypt.AsyncAuth
+1359:16:Call -> U
+1359:16:Attribute -> U
+1359:16:Attribute -> Inst:salt.cache.Cache
+1359:16:Name -> Inst:salt.crypt.AsyncAuth
+1359:62:Name -> U
+1360:16:Call -> U
+1360:16:Attribute -> U
+1360:16:Attribute -> Inst:salt.cache.Cache
+1360:16:Name -> Inst:salt.crypt.AsyncAuth
+1360:62:Name -> U
+1362:23:Call -> U | Dict:0
+1362:23:Attribute -> BM:salt.cache.Cache.fetch
+1362:23:Attribute -> Inst:salt.cache.Cache
+1362:23:Name -> Inst:salt.crypt.AsyncAuth
+1364:12:Name -> Inst:salt.crypt.AsyncAuth
+1364:32:Call -> Inst:salt.crypt.PrivateKey
+1364:32:Attribute -> BM:salt.crypt.BaseKey.from_str
+1364:32:Name -> Class:salt.crypt.PrivateKey
+1364:52:Name -> U | Dict:0
+1365:15:Attribute -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1365:15:Name -> Inst:salt.crypt.AsyncAuth
+1367:5:Attribute -> Func:salt.utils.decorators.memoize
+1367:5:Attribute -> Module:salt.utils.decorators
+1367:5:Attribute -> Module:salt.utils
+1367:5:Name -> Module:salt
+1369:15:Call -> U
+1369:15:Attribute -> U
+1369:15:Name -> U
+1369:27:Name -> U
+1380:15:Call -> U
+1380:15:Attribute -> BM:salt.crypt.AsyncAuth._gen_token
+1380:15:Name -> Inst:salt.crypt.AsyncAuth
+1380:31:Call -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1380:31:Attribute -> BM:salt.crypt.AsyncAuth.get_keys
+1380:31:Name -> Inst:salt.crypt.AsyncAuth
+1380:48:Name -> U
+1392:8:Name -> Dict:0
+1393:8:Name -> Dict:0
+1393:24:Attribute -> U
+1393:24:Name -> Inst:salt.crypt.AsyncAuth
+1394:8:Name -> Dict:0
+1394:27:Attribute -> Const:str:'00000000000000000000000000000000'
+1394:27:Call -> Inst:uuid.UUID
+1394:27:Attribute -> Func:uuid.uuid4
+1394:27:Name -> Module:uuid
+1395:8:Name -> Dict:0
+1395:30:Attribute -> U
+1395:30:Name -> Inst:salt.crypt.AsyncAuth
+1396:8:Name -> Dict:0
+1396:30:Attribute -> U
+1396:30:Name -> Inst:salt.crypt.AsyncAuth
+1397:32:Attribute -> U
+1397:32:Name -> Inst:salt.crypt.AsyncAuth
+1399:25:Attribute -> U
+1399:25:Name -> Inst:salt.crypt.AsyncAuth
+1400:16:Name -> Dict:0
+1400:32:Name -> U
+1400:41:Call -> U
+1400:41:Attribute -> U
+1400:41:Attribute -> U
+1400:41:Name -> Inst:salt.crypt.AsyncAuth
+1400:65:Name -> U
+1401:12:Name -> Dict:0
+1401:41:Name -> Dict:0
+1403:26:Call -> U
+1403:26:Attribute -> Func:posixpath.join | Func:ntpath.join
+1403:26:Attribute -> Module:posixpath | Module:ntpath
+1403:26:Name -> Module:os
+1403:39:Attribute -> U
+1403:39:Name -> Inst:salt.crypt.AsyncAuth
+1403:61:Attribute -> Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1403:61:Name -> Inst:salt.crypt.AsyncAuth
+1404:18:Call -> Inst:salt.crypt.PublicKey
+1404:18:Attribute -> BM:salt.crypt.BaseKey.from_file
+1404:18:Name -> Class:salt.crypt.PublicKey
+1404:38:Name -> U
+1405:12:Name -> Dict:0
+1405:31:Call -> U
+1405:31:Attribute -> BM:salt.crypt.PublicKey.encrypt
+1405:31:Name -> Inst:salt.crypt.PublicKey
+1406:16:Attribute -> U | Inst:builtins.bytes
+1406:16:Name -> Inst:salt.crypt.AsyncAuth
+1406:28:Attribute -> U
+1406:28:Name -> Inst:salt.crypt.AsyncAuth
+1408:15:Name -> Class:builtins.FileNotFoundError
+1409:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1409:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1409:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1410:15:Name -> Class:builtins.Exception
+1411:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1411:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1411:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1411:61:Name -> ExcInst:builtins.Exception
+1412:13:Call -> U
+1412:13:Attribute -> Func:salt.utils.files.fopen
+1412:13:Attribute -> Module:salt.utils.files
+1412:13:Attribute -> Module:salt.utils
+1412:13:Name -> Module:salt
+1412:36:Attribute -> U
+1412:36:Name -> Inst:salt.crypt.AsyncAuth
+1413:12:Name -> Dict:0
+1413:29:Call -> Const:str:''
+1413:29:Name -> Func:salt.crypt.clean_key
+1413:39:Call -> U
+1413:39:Attribute -> U
+1413:39:Name -> U
+1414:15:Name -> Dict:0
+1439:11:Call -> U
+1439:11:Attribute -> U
+1439:11:Attribute -> U
+1439:11:Name -> Inst:salt.crypt.AsyncAuth
+1440:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1440:12:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1440:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1440:43:Call -> Const:str:''
+1440:43:Attribute -> BM:builtins.str.join
+1440:51:Call -> List:0
+1440:51:Attribute -> Func:traceback.format_stack
+1440:51:Name -> Module:traceback
+1442:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1442:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1442:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1444:14:Call -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1444:14:Attribute -> BM:salt.crypt.AsyncAuth.get_keys
+1444:14:Name -> Inst:salt.crypt.AsyncAuth
+1445:18:Call -> U
+1445:18:Attribute -> BM:salt.crypt.PrivateKey.decrypt
+1445:18:Name -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1445:30:Name -> U
+1445:46:Attribute -> U
+1445:46:Name -> Inst:salt.crypt.AsyncAuth
+1446:20:Name -> U
+1447:21:Call -> U
+1447:21:Attribute -> Func:posixpath.join | Func:ntpath.join
+1447:21:Attribute -> Module:posixpath | Module:ntpath
+1447:21:Name -> Module:os
+1447:34:Attribute -> U
+1447:34:Name -> Inst:salt.crypt.AsyncAuth
+1447:56:Attribute -> Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1447:56:Name -> Inst:salt.crypt.AsyncAuth
+1448:15:Call -> Const:bool:False | Const:bool:True | U
+1448:15:Attribute -> Func:genericpath.exists | U
+1448:15:Attribute -> Module:posixpath | Module:ntpath
+1448:15:Name -> Module:os
+1448:30:Name -> U
+1450:27:Call -> Inst:salt.crypt.PublicKey
+1450:27:Attribute -> BM:salt.crypt.BaseKey.from_file
+1450:27:Name -> Class:salt.crypt.PublicKey
+1450:47:Name -> U
+1451:23:Name -> Class:builtins.Exception
+1452:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1452:20:Attribute -> BM:logging.Logger.exception | U | BM:logging.Logger.exception
+1452:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1454:25:Call -> Const:str:''
+1454:25:Attribute -> BM:hashlib.sha256.hexdigest
+1454:25:Call -> Inst:hashlib.sha256
+1454:25:Attribute -> Class:hashlib.sha256
+1454:25:Name -> Module:hashlib
+1454:40:Name -> U
+1455:25:Call -> Const:str:'' | Inst:builtins.bytes | Const:bytes:b''
+1455:25:Attribute -> Func:salt.utils.stringutils.to_bytes
+1455:25:Attribute -> Module:salt.utils.stringutils
+1455:25:Attribute -> Module:salt.utils
+1455:25:Name -> Module:salt
+1455:57:Name -> Const:str:''
+1456:27:Call -> U
+1456:27:Attribute -> BM:salt.crypt.PublicKey.decrypt
+1456:27:Name -> Inst:salt.crypt.PublicKey
+1456:40:Name -> U
+1457:19:Name -> U
+1457:31:Name -> Const:str:'' | Inst:builtins.bytes | Const:bytes:b''
+1462:18:Call -> U
+1462:18:Attribute -> Func:salt.utils.stringutils.to_str
+1462:18:Attribute -> Module:salt.utils.stringutils
+1462:18:Attribute -> Module:salt.utils
+1462:18:Name -> Module:salt
+1462:48:Name -> U
+1464:20:Name -> U
+1465:19:Call -> U
+1465:19:Attribute -> U
+1465:19:Name -> U
+1467:26:Name -> U
+1468:24:Call -> U
+1468:24:Attribute -> BM:salt.crypt.PrivateKey.decrypt
+1468:24:Name -> Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1468:36:Name -> U
+1468:54:Attribute -> U
+1468:54:Name -> Inst:salt.crypt.AsyncAuth
+1469:23:Name -> U
+1469:32:Name -> U
+1470:21:Name -> Const:bool:True | U
+1471:23:Name -> U
+1482:11:Attribute -> U
+1482:11:Name -> Inst:salt.crypt.AsyncAuth
+1483:19:Call -> U
+1483:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1483:19:Attribute -> Module:posixpath | Module:ntpath
+1483:19:Name -> Module:os
+1484:16:Attribute -> U
+1484:16:Name -> Inst:salt.crypt.AsyncAuth
+1484:38:Attribute -> U
+1484:38:Name -> Inst:salt.crypt.AsyncAuth
+1487:15:Call -> Const:bool:False | U
+1487:15:Attribute -> Func:genericpath.isfile | U
+1487:15:Attribute -> Module:posixpath | Module:ntpath
+1487:15:Name -> Module:os
+1487:30:Name -> U
+1488:22:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+1488:22:Name -> Func:salt.crypt.verify_signature
+1489:20:Name -> U
+1490:20:Name -> U
+1491:20:Call -> ERR
+1491:20:Attribute -> Func:binascii.a2b_base64
+1491:20:Name -> Module:binascii
+1491:40:Name -> U
+1492:30:Attribute -> U
+1492:30:Name -> Inst:salt.crypt.AsyncAuth
+1495:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1495:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1495:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1498:20:Call -> U
+1498:20:Attribute -> Func:posixpath.basename | Func:ntpath.basename
+1498:20:Attribute -> Module:posixpath | Module:ntpath
+1498:20:Name -> Module:os
+1498:37:Name -> U
+1501:15:Name -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+1502:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1502:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1502:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1505:20:Attribute -> U
+1505:20:Name -> Inst:salt.crypt.AsyncAuth
+1509:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1509:16:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1509:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1512:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1512:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1512:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1521:15:Call -> Const:bool:False | Const:bool:True | Const:bool:False | Const:bool:False
+1521:15:Attribute -> BM:salt.crypt.AsyncAuth.verify_pubkey_sig
+1521:15:Name -> Inst:salt.crypt.AsyncAuth
+1521:38:Name -> U
+1521:58:Name -> U
+1522:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1522:16:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1522:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1524:20:Attribute -> U
+1524:20:Name -> Inst:salt.crypt.AsyncAuth
+1526:27:Call -> U
+1526:27:Attribute -> Func:posixpath.join | Func:ntpath.join
+1526:27:Attribute -> Module:posixpath | Module:ntpath
+1526:27:Name -> Module:os
+1526:40:Attribute -> U
+1526:40:Name -> Inst:salt.crypt.AsyncAuth
+1526:62:Attribute -> Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1526:62:Name -> Inst:salt.crypt.AsyncAuth
+1527:22:Call -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+1527:22:Attribute -> Func:salt.utils.user.get_uid
+1527:22:Attribute -> Module:salt.utils.user
+1527:22:Attribute -> Module:salt.utils
+1527:22:Name -> Module:salt
+1527:46:Call -> U
+1527:46:Attribute -> U
+1527:46:Attribute -> U
+1527:46:Name -> Inst:salt.crypt.AsyncAuth
+1528:21:Call -> Gen:salt.utils.files.fpopen
+1528:21:Attribute -> Func:salt.utils.files.fpopen
+1528:21:Attribute -> Module:salt.utils.files
+1528:21:Attribute -> Module:salt.utils
+1528:21:Name -> Module:salt
+1528:45:Name -> U
+1528:66:Name -> Const:NoneType:None | U | Const:NoneType:None | Const:NoneType:None
+1529:20:Call -> U
+1529:20:Attribute -> U
+1529:20:Name -> U
+1529:30:Call -> U | Inst:builtins.bytes
+1529:30:Attribute -> Func:salt.utils.stringutils.to_bytes
+1529:30:Attribute -> Module:salt.utils.stringutils
+1529:30:Attribute -> Module:salt.utils
+1529:30:Name -> Module:salt
+1529:62:Name -> U
+1532:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1532:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1532:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1535:20:Attribute -> U
+1535:20:Name -> Inst:salt.crypt.AsyncAuth
+1538:15:Name -> Class:builtins.Exception
+1539:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1539:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1539:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1542:18:Call -> ExcInst:builtins.Exception
+1542:18:Name -> Class:builtins.Exception
+1542:28:Name -> ExcInst:builtins.Exception
+1557:24:Name -> U
+1557:36:Attribute -> U
+1557:36:Name -> Inst:salt.crypt.AsyncAuth
+1560:30:Name -> U
+1560:46:Attribute -> U
+1560:46:Name -> Inst:salt.crypt.AsyncAuth
+1564:26:Name -> U
+1564:42:Attribute -> U
+1564:42:Name -> Inst:salt.crypt.AsyncAuth
+1565:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1565:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1565:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1573:30:Name -> U
+1573:42:Attribute -> U
+1573:42:Name -> Inst:salt.crypt.AsyncAuth
+1574:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1574:12:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1574:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1597:11:Name -> Const:bool:True | U
+1599:29:Call -> Tuple:2 | Tuple:2 | Tuple:2 | U | Tuple:2 | Tuple:2 | Tuple:2
+1599:29:Attribute -> BM:salt.crypt.AsyncAuth.decrypt_aes
+1599:29:Name -> Inst:salt.crypt.AsyncAuth
+1599:46:Name -> U
+1599:55:Name -> Const:bool:True | U
+1600:19:Name -> Const:str:'' | Const:str:'' | Const:str:''
+1600:28:Attribute -> U | Inst:builtins.bytes
+1600:28:Name -> Inst:salt.crypt.AsyncAuth
+1601:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1601:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1601:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1603:19:Name -> Class:builtins.Exception
+1604:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1604:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1604:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1606:19:Name -> Const:str:'' | Const:str:'' | Const:str:''
+1608:25:Call -> Tuple:2 | Tuple:2 | Tuple:2 | U | Tuple:2 | Tuple:2 | Tuple:2
+1608:25:Attribute -> BM:salt.crypt.AsyncAuth.decrypt_aes
+1608:25:Name -> Inst:salt.crypt.AsyncAuth
+1608:42:Name -> U
+1608:51:Name -> U
+1609:19:Name -> Const:str:'' | Const:str:'' | Const:str:''
+1627:19:Call -> U
+1627:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1627:19:Attribute -> Module:posixpath | Module:ntpath
+1627:19:Name -> Module:os
+1627:32:Attribute -> U
+1627:32:Name -> Inst:salt.crypt.AsyncAuth
+1627:54:Attribute -> Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1627:54:Name -> Inst:salt.crypt.AsyncAuth
+1628:23:Call -> Const:bool:False | U
+1628:23:Attribute -> Func:genericpath.isfile | U
+1628:23:Attribute -> Module:posixpath | Module:ntpath
+1628:23:Name -> Module:os
+1628:38:Name -> U
+1629:11:Name -> Const:bool:False | U
+1629:28:Name -> Const:bool:True | U
+1629:47:Attribute -> U
+1629:47:Name -> Inst:salt.crypt.AsyncAuth
+1630:17:Call -> U
+1630:17:Attribute -> Func:salt.utils.files.fopen
+1630:17:Attribute -> Module:salt.utils.files
+1630:17:Attribute -> Module:salt.utils
+1630:17:Name -> Module:salt
+1630:40:Name -> U
+1631:35:Call -> Const:str:''
+1631:35:Name -> Func:salt.crypt.clean_key
+1631:45:Call -> U
+1631:45:Attribute -> U
+1631:45:Name -> U
+1633:15:Name -> U
+1633:37:Name -> Const:str:''
+1634:23:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+1634:23:Attribute -> BM:salt.crypt.AsyncAuth.check_auth_deps
+1634:23:Name -> Inst:salt.crypt.AsyncAuth
+1634:44:Name -> U
+1637:19:Attribute -> U
+1637:19:Name -> Inst:salt.crypt.AsyncAuth
+1638:23:Call -> Const:bool:True | Const:bool:False
+1638:23:Attribute -> BM:salt.crypt.AsyncAuth.verify_signing_master
+1638:23:Name -> Inst:salt.crypt.AsyncAuth
+1638:50:Name -> U
+1639:31:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+1639:31:Attribute -> BM:salt.crypt.AsyncAuth.extract_aes
+1639:31:Name -> Inst:salt.crypt.AsyncAuth
+1639:48:Name -> U
+1644:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1644:20:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1644:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1652:23:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+1652:23:Attribute -> BM:salt.crypt.AsyncAuth.check_auth_deps
+1652:23:Name -> Inst:salt.crypt.AsyncAuth
+1652:44:Name -> U
+1656:19:Attribute -> U
+1656:19:Name -> Inst:salt.crypt.AsyncAuth
+1657:23:Call -> Const:bool:True | Const:bool:False
+1657:23:Attribute -> BM:salt.crypt.AsyncAuth.verify_signing_master
+1657:23:Name -> Inst:salt.crypt.AsyncAuth
+1657:50:Name -> U
+1658:31:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+1658:31:Attribute -> BM:salt.crypt.AsyncAuth.extract_aes
+1658:31:Name -> Inst:salt.crypt.AsyncAuth
+1658:48:Name -> U
+1660:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1660:24:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1660:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1663:28:Attribute -> U
+1663:28:Name -> Inst:salt.crypt.AsyncAuth
+1668:27:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+1668:27:Attribute -> BM:salt.crypt.AsyncAuth.extract_aes
+1668:27:Name -> Inst:salt.crypt.AsyncAuth
+1668:44:Name -> U
+1670:19:Call -> Const:bool:True | Const:bool:True | Const:bool:False | Const:bool:False
+1670:19:Attribute -> BM:salt.crypt.AsyncAuth.check_auth_deps
+1670:19:Name -> Inst:salt.crypt.AsyncAuth
+1670:40:Name -> U
+1675:15:Attribute -> U
+1675:15:Name -> Inst:salt.crypt.AsyncAuth
+1676:19:Call -> Const:bool:True | Const:bool:False
+1676:19:Attribute -> BM:salt.crypt.AsyncAuth.verify_signing_master
+1676:19:Name -> Inst:salt.crypt.AsyncAuth
+1676:46:Name -> U
+1677:27:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+1677:27:Attribute -> BM:salt.crypt.AsyncAuth.extract_aes
+1677:27:Name -> Inst:salt.crypt.AsyncAuth
+1677:44:Name -> U
+1681:23:Name -> Const:bool:False | U
+1684:25:Call -> U
+1684:25:Attribute -> Func:salt.utils.files.fopen
+1684:25:Attribute -> Module:salt.utils.files
+1684:25:Attribute -> Module:salt.utils
+1684:25:Name -> Module:salt
+1684:48:Name -> U
+1685:24:Call -> U
+1685:24:Attribute -> U
+1685:24:Name -> U
+1685:34:Call -> U | Inst:builtins.bytes
+1685:34:Attribute -> Func:salt.utils.stringutils.to_bytes
+1685:34:Attribute -> Module:salt.utils.stringutils
+1685:34:Attribute -> Module:salt.utils
+1685:34:Name -> Module:salt
+1685:66:Name -> U
+1686:23:Call -> Const:str:'' | Const:str:'' | Const:str:'' | Const:str:'' | Const:str:''
+1686:23:Attribute -> BM:salt.crypt.AsyncAuth.extract_aes
+1686:23:Name -> Inst:salt.crypt.AsyncAuth
+1686:40:Name -> U
+1689:8:Call -> Const:NoneType:None | U | Const:NoneType:None
+1689:8:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+1689:8:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1695:12:Name -> U
+1696:12:Call -> Const:str:'' | Const:str:'' | U
+1696:12:Attribute -> Func:salt.utils.crypt.pem_finger
+1696:12:Attribute -> Module:salt.utils.crypt
+1696:12:Attribute -> Module:salt.utils
+1696:12:Name -> Module:salt
+1696:40:Name -> U
+1696:61:Attribute -> U
+1696:61:Name -> Inst:salt.crypt.AsyncAuth
+1698:8:Call -> ERR
+1698:8:Attribute -> Func:sys.exit
+1698:8:Name -> Module:sys
+1702:12:Name -> Class:salt.crypt.AsyncAuth
+1708:16:Call -> Inst:weakref.WeakValueDictionary
+1708:16:Attribute -> Class:weakref.WeakValueDictionary
+1708:16:Name -> Module:weakref
+1714:14:Call -> Tuple:4
+1714:14:Attribute -> BM:salt.crypt.SAuth.__key
+1714:14:Name -> Class:salt.crypt.SAuth
+1714:24:Name -> U
+1715:15:Call -> Const:NoneType:None | U
+1715:15:Attribute -> BM:weakref.WeakValueDictionary.get
+1715:15:Attribute -> Inst:weakref.WeakValueDictionary
+1715:15:Name -> Class:salt.crypt.SAuth
+1715:35:Name -> Tuple:4
+1716:11:Name -> Const:NoneType:None | U
+1717:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1717:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1717:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1717:55:Name -> Tuple:4
+1718:19:Call -> Inst:salt.crypt.SAuth
+1718:19:Attribute -> BM:builtins.object.__new__ | BM:builtins.object.__new__
+1718:19:Name -> Class:builtins.object
+1718:34:Name -> Class:salt.crypt.SAuth
+1719:12:Call -> Const:NoneType:None
+1719:12:Attribute -> BM:salt.crypt.SAuth.__singleton_init__
+1719:12:Name -> Inst:salt.crypt.SAuth
+1719:36:Name -> U
+1720:12:Attribute -> Inst:weakref.WeakValueDictionary
+1720:12:Name -> Class:salt.crypt.SAuth
+1720:28:Name -> Tuple:4
+1720:35:Name -> Inst:salt.crypt.SAuth
+1722:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1722:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1722:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1722:47:Name -> Tuple:4
+1723:15:Name -> Const:NoneType:None | U | Inst:salt.crypt.SAuth
+1725:5:Name -> Class:builtins.classmethod
+1727:15:Call -> Tuple:4
+1727:15:Name -> Func:salt.crypt._auth_singleton_key
+1727:35:Name -> U
+1731:8:Call -> U
+1731:8:Attribute -> BM:salt.crypt.AsyncAuth.__init__ | BM:builtins.object.__init__
+1731:8:Call -> Super
+1731:8:Name -> Class:builtins.super
+1731:25:Name -> U
+1731:39:Name -> Const:NoneType:None | U
+1742:8:Name -> Inst:salt.crypt.SAuth
+1742:20:Name -> U
+1743:8:Name -> Inst:salt.crypt.SAuth
+1743:21:Call -> Inst:salt.cache.Cache
+1743:21:Attribute -> Class:salt.cache.Cache
+1743:21:Attribute -> Module:salt.cache
+1743:21:Name -> Module:salt
+1743:38:Name -> U
+1743:51:Name -> U
+1744:8:Name -> Inst:salt.crypt.SAuth
+1744:21:Call -> U | Inst:builtins.bytes
+1744:21:Attribute -> Func:salt.utils.stringutils.to_bytes
+1744:21:Attribute -> Module:salt.utils.stringutils
+1744:21:Attribute -> Module:salt.utils
+1744:21:Name -> Module:salt
+1744:53:Call -> U
+1744:53:Attribute -> BM:salt.crypt.Crypticle.generate_key_string
+1744:53:Name -> Class:salt.crypt.Crypticle
+1745:8:Name -> Inst:salt.crypt.SAuth
+1745:24:Call -> U
+1745:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+1745:24:Attribute -> Module:posixpath | Module:ntpath
+1745:24:Name -> Module:os
+1745:37:Attribute -> U
+1745:37:Name -> Inst:salt.crypt.SAuth
+1746:8:Name -> Inst:salt.crypt.SAuth
+1746:24:Call -> U
+1746:24:Attribute -> Func:posixpath.join | Func:ntpath.join
+1746:24:Attribute -> Module:posixpath | Module:ntpath
+1746:24:Name -> Module:os
+1746:37:Attribute -> U
+1746:37:Name -> Inst:salt.crypt.SAuth
+1747:8:Name -> Inst:salt.crypt.SAuth
+1748:8:Name -> Inst:salt.crypt.SAuth
+1749:30:Attribute -> U
+1749:30:Name -> Inst:salt.crypt.SAuth
+1750:12:Name -> Inst:salt.crypt.SAuth
+1751:31:Attribute -> U
+1751:31:Name -> Inst:salt.crypt.SAuth
+1752:12:Name -> Inst:salt.crypt.SAuth
+1754:12:Name -> Inst:salt.crypt.SAuth
+1755:15:Call -> Const:bool:False | U
+1755:15:Attribute -> Func:genericpath.isfile | U
+1755:15:Attribute -> Module:posixpath | Module:ntpath
+1755:15:Name -> Module:os
+1755:30:Attribute -> U
+1755:30:Name -> Inst:salt.crypt.SAuth
+1756:12:Call -> Const:NoneType:None | Const:NoneType:None | Inst:salt.crypt.PrivateKey
+1756:12:Attribute -> BM:salt.crypt.AsyncAuth.get_keys
+1756:12:Name -> Inst:salt.crypt.SAuth
+1758:5:Name -> Class:builtins.property
+1760:15:Call -> Const:bool:True
+1760:15:Name -> Func:builtins.hasattr
+1760:23:Name -> Inst:salt.crypt.SAuth
+1761:12:Call -> Const:NoneType:None
+1761:12:Attribute -> BM:salt.crypt.SAuth.authenticate
+1761:12:Name -> Inst:salt.crypt.SAuth
+1762:15:Attribute -> Const:NoneType:None | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | U | Const:NoneType:None
+1762:15:Name -> Inst:salt.crypt.SAuth
+1764:5:Name -> Class:builtins.property
+1766:15:Call -> Const:bool:True
+1766:15:Name -> Func:builtins.hasattr
+1766:23:Name -> Inst:salt.crypt.SAuth
+1767:12:Call -> Const:NoneType:None
+1767:12:Attribute -> BM:salt.crypt.SAuth.authenticate
+1767:12:Name -> Inst:salt.crypt.SAuth
+1768:15:Attribute -> Inst:salt.crypt.Crypticle
+1768:15:Name -> Inst:salt.crypt.SAuth
+1780:31:Attribute -> U
+1780:31:Name -> Inst:salt.crypt.SAuth
+1781:35:Attribute -> U
+1781:35:Name -> Inst:salt.crypt.SAuth
+1782:15:Name -> U
+1783:39:Name -> U
+1784:13:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+1784:13:Attribute -> Func:salt.channel.client.ReqChannel.factory
+1784:13:Attribute -> Class:salt.channel.client.ReqChannel
+1784:13:Attribute -> Module:salt.channel.client
+1784:13:Attribute -> Module:salt.channel
+1784:13:Name -> Module:salt
+1785:12:Attribute -> U
+1785:12:Name -> Inst:salt.crypt.SAuth
+1788:24:Call -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1788:24:Attribute -> Func:tests.pytests.unit.test_crypt.test_sauth_aes_key_rotation.mock_sign_in | Func:tests.pytests.unit.test_crypt.test_auth_aes_key_rotation.mock_sign_in | Func:tests.pytests.unit.test_auth_creds_event.test_authenticate_fires_creds_event_synchronously.mock_sign_in
+1788:24:Name -> Inst:salt.crypt.SAuth
+1788:45:Name -> Inst:salt.utils.asynchronous.SyncWrapper | U
+1789:19:Name -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1790:23:Call -> U
+1790:23:Attribute -> U
+1790:23:Attribute -> U
+1790:23:Name -> Inst:salt.crypt.SAuth
+1793:27:Call -> U
+1793:27:Attribute -> U
+1793:27:Attribute -> U
+1793:27:Name -> Inst:salt.crypt.SAuth
+1794:36:Call -> ExcInst:salt.exceptions.SaltClientError
+1794:36:Name -> Class:salt.exceptions.SaltClientError
+1801:28:Call -> ERR
+1801:28:Name -> Func:builtins.print
+1805:28:Call -> ERR
+1805:28:Attribute -> Func:sys.exit
+1805:28:Name -> Module:sys
+1806:23:Name -> U
+1807:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1807:24:Attribute -> BM:logging.Logger.info | U | BM:logging.Logger.info
+1807:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1808:64:Name -> U
+1810:24:Call -> ERR
+1810:24:Attribute -> Func:time.sleep
+1810:24:Name -> Module:time
+1810:35:Name -> U
+1811:23:Name -> U
+1811:46:Name -> U
+1812:48:Name -> U
+1813:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+1813:24:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1813:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1814:62:Name -> U
+1819:15:Attribute -> Const:NoneType:None | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | U | Const:NoneType:None
+1819:15:Name -> Inst:salt.crypt.SAuth
+1821:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1821:16:Attribute -> BM:logging.Logger.error | U | BM:logging.Logger.error
+1821:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1821:56:Name -> Inst:salt.crypt.SAuth
+1823:19:Attribute -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | U
+1823:19:Name -> Inst:salt.crypt.SAuth
+1823:41:Name -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1825:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1825:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1825:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1825:70:Name -> Inst:salt.crypt.SAuth
+1826:19:Attribute -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | U
+1826:19:Name -> Inst:salt.crypt.SAuth
+1826:45:Name -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1828:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+1828:20:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1828:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1828:74:Name -> Inst:salt.crypt.SAuth
+1829:15:Name -> Const:bool:False | Const:bool:True
+1829:26:Name -> Const:bool:False | Const:bool:True
+1829:41:Name -> Const:bool:False | Const:bool:True
+1830:16:Name -> Inst:salt.crypt.SAuth
+1830:30:Name -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1831:16:Name -> Inst:salt.crypt.SAuth
+1831:34:Call -> Inst:salt.crypt.Crypticle
+1831:34:Name -> Class:salt.crypt.Crypticle
+1831:44:Attribute -> U
+1831:44:Name -> Inst:salt.crypt.SAuth
+1831:55:Name -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1832:16:Name -> Inst:salt.crypt.SAuth
+1832:42:Call -> Inst:salt.crypt.Crypticle
+1832:42:Name -> Class:salt.crypt.Crypticle
+1832:52:Attribute -> U
+1832:52:Name -> Inst:salt.crypt.SAuth
+1832:63:Name -> Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3 | Dict:3
+1854:23:Call -> U
+1854:23:Attribute -> U
+1854:23:Attribute -> U
+1854:23:Name -> Inst:salt.crypt.SAuth
+1855:11:Name -> U
+1856:22:Name -> U
+1857:24:Call -> U
+1857:24:Attribute -> U
+1857:24:Attribute -> U
+1857:24:Name -> Inst:salt.crypt.SAuth
+1858:11:Name -> U
+1859:19:Name -> U
+1860:21:Call -> U
+1860:21:Attribute -> U
+1860:21:Attribute -> U
+1860:21:Name -> Inst:salt.crypt.SAuth
+1861:11:Name -> U
+1862:20:Name -> U
+1864:19:Call -> U
+1864:19:Attribute -> Func:posixpath.join | Func:ntpath.join
+1864:19:Attribute -> Module:posixpath | Module:ntpath
+1864:19:Name -> Module:os
+1864:32:Attribute -> U
+1864:32:Name -> Inst:salt.crypt.SAuth
+1864:54:Attribute -> Const:str:'syndic_master.pub' | Const:str:'monitor_master.pub' | Const:str:'minion_master.pub' | Const:str:'syndic_master.pub' | Const:str:'minion_master.pub'
+1864:54:Name -> Inst:salt.crypt.SAuth
+1866:8:Name -> Dict:0
+1866:29:Attribute -> U
+1866:29:Name -> Inst:salt.crypt.SAuth
+1869:15:Name -> Const:NoneType:None | U
+1871:22:Call -> Inst:salt.utils.asynchronous.SyncWrapper
+1871:22:Attribute -> Func:salt.channel.client.ReqChannel.factory
+1871:22:Attribute -> Class:salt.channel.client.ReqChannel
+1871:22:Attribute -> Module:salt.channel.client
+1871:22:Attribute -> Module:salt.channel
+1871:22:Name -> Module:salt
+1871:61:Attribute -> U
+1871:61:Name -> Inst:salt.crypt.SAuth
+1873:26:Call -> Dict:0
+1873:26:Attribute -> BM:salt.crypt.AsyncAuth.minion_sign_in_payload
+1873:26:Name -> Inst:salt.crypt.SAuth
+1875:22:Call -> U
+1875:22:Attribute -> U
+1875:22:Name -> Const:NoneType:None | U | Inst:salt.utils.asynchronous.SyncWrapper
+1875:35:Name -> Dict:0
+1875:58:Name -> Const:int:1 | U
+1875:73:Name -> Const:int:60 | U
+1876:15:Name -> Class:salt.exceptions.SaltReqTimeoutError
+1877:15:Name -> Const:bool:True | U
+1878:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+1878:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+1878:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1878:55:Name -> ExcInst:salt.exceptions.SaltReqTimeoutError
+1880:18:Call -> ExcInst:salt.exceptions.SaltClientError
+1880:18:Name -> Class:salt.exceptions.SaltClientError
+1884:15:Name -> Const:bool:False | Const:bool:True
+1885:16:Call -> U | Const:NoneType:None
+1885:16:Attribute -> U | BM:salt.utils.asynchronous.SyncWrapper.close
+1885:16:Name -> Const:NoneType:None | U | Inst:salt.utils.asynchronous.SyncWrapper
+1887:15:Call -> Const:bool:False | Const:str:'bad enc algo' | Const:str:'bad sig algo' | Const:str:'retry' | Const:str:'full' | Const:str:'retry' | Dict:0
+1887:15:Attribute -> BM:salt.crypt.AsyncAuth.handle_signin_response
+1887:15:Name -> Inst:salt.crypt.SAuth
+1887:43:Name -> Dict:0
+1887:60:Name -> U
+1900:15:Attribute -> Const:int:1
+1900:15:Call -> Inst:hashlib.sha256
+1900:15:Attribute -> Class:hashlib.sha256
+1900:15:Name -> Module:hashlib
+1903:8:Name -> Inst:salt.crypt.Crypticle
+1903:26:Name -> U
+1904:8:Name -> Inst:salt.crypt.Crypticle
+1904:20:Call -> Tuple:2
+1904:20:Attribute -> BM:salt.crypt.Crypticle.extract_keys
+1904:20:Name -> Inst:salt.crypt.Crypticle
+1904:38:Attribute -> U
+1904:38:Name -> Inst:salt.crypt.Crypticle
+1904:55:Name -> Const:int:192 | U
+1905:8:Name -> Inst:salt.crypt.Crypticle
+1905:24:Name -> Const:int:192 | U
+1906:8:Name -> Inst:salt.crypt.Crypticle
+1906:22:Name -> Const:int:0 | U
+1908:5:Name -> Class:builtins.classmethod
+1910:14:Call -> ERR
+1910:14:Attribute -> Func:posix.urandom
+1910:14:Name -> Module:os
+1910:25:Name -> Const:int:192 | U
+1910:41:Attribute -> Const:int:1
+1910:41:Name -> Class:salt.crypt.Crypticle
+1911:17:Call -> U
+1911:17:Attribute -> Func:base64.b64encode
+1911:17:Name -> Module:base64
+1911:34:Name -> U
+1912:17:Call -> U
+1912:17:Attribute -> U
+1912:17:Name -> U
+1914:15:Call -> U
+1914:15:Attribute -> U
+1914:15:Name -> U
+1916:5:Name -> Class:builtins.classmethod
+1918:20:Attribute -> Inst:pathlib.Path
+1918:20:Call -> Inst:pathlib.Path
+1918:20:Attribute -> Class:pathlib.Path
+1918:20:Name -> Module:pathlib
+1918:33:Name -> U
+1919:13:Call -> Gen:salt.utils.files.set_umask
+1919:13:Attribute -> Func:salt.utils.files.set_umask
+1919:13:Attribute -> Module:salt.utils.files
+1919:13:Attribute -> Module:salt.utils
+1919:13:Name -> Module:salt
+1920:22:Call -> Tuple:2
+1920:22:Attribute -> Func:tempfile.mkstemp
+1920:22:Name -> Module:tempfile
+1920:43:Name -> Inst:pathlib.Path
+1921:12:Call -> ERR
+1921:12:Attribute -> Func:posix.close
+1921:12:Name -> Module:os
+1921:21:Name -> U
+1922:17:Call -> U
+1922:17:Attribute -> Func:salt.utils.files.fopen
+1922:17:Attribute -> Module:salt.utils.files
+1922:17:Attribute -> Module:salt.utils
+1922:17:Name -> Module:salt
+1922:40:Name -> U
+1923:16:Call -> U
+1923:16:Attribute -> U
+1923:16:Name -> U
+1923:25:Call -> U
+1923:25:Attribute -> BM:salt.crypt.Crypticle.generate_key_string
+1923:25:Name -> Class:salt.crypt.Crypticle
+1923:49:Name -> Const:int:192 | U
+1924:12:Call -> ERR
+1924:12:Attribute -> Func:posix.rename
+1924:12:Name -> Module:os
+1924:22:Name -> U
+1924:27:Name -> U
+1926:5:Name -> Class:builtins.classmethod
+1929:17:Call -> U
+1929:17:Attribute -> Func:salt.utils.files.fopen
+1929:17:Attribute -> Module:salt.utils.files
+1929:17:Attribute -> Module:salt.utils
+1929:17:Name -> Module:salt
+1929:40:Name -> U
+1930:23:Call -> U
+1930:23:Attribute -> U
+1930:23:Name -> U
+1931:15:Name -> Class:builtins.FileNotFoundError
+1934:5:Name -> Class:builtins.classmethod
+1936:14:Call -> U | Inst:builtins.bytes
+1936:14:Attribute -> Func:salt.utils.stringutils.to_bytes
+1936:14:Attribute -> Module:salt.utils.stringutils
+1936:14:Attribute -> Module:salt.utils
+1936:14:Name -> Module:salt
+1936:46:Call -> U
+1936:46:Attribute -> Func:base64.b64decode
+1936:46:Name -> Module:base64
+1936:63:Name -> U
+1937:15:Call -> ERR
+1937:15:Name -> Func:builtins.len
+1937:19:Name -> U | Inst:builtins.bytes
+1937:27:Name -> U
+1937:42:Attribute -> Const:int:1
+1937:42:Name -> Class:salt.crypt.Crypticle
+1938:15:Name -> U | Inst:builtins.bytes
+1938:22:Attribute -> Const:int:1
+1938:22:Name -> Class:salt.crypt.Crypticle
+1938:37:Name -> U | Inst:builtins.bytes
+1938:42:Attribute -> Const:int:1
+1938:42:Name -> Class:salt.crypt.Crypticle
+1944:28:Attribute -> Tuple:2
+1944:28:Name -> Inst:salt.crypt.Crypticle
+1945:14:Attribute -> Const:int:16
+1945:14:Name -> Inst:salt.crypt.Crypticle
+1945:36:Call -> ERR
+1945:36:Name -> Func:builtins.len
+1945:40:Name -> U
+1945:48:Attribute -> Const:int:16
+1945:48:Name -> Inst:salt.crypt.Crypticle
+1946:15:Name -> U
+1946:22:Call -> U | Inst:builtins.bytes
+1946:22:Attribute -> Func:salt.utils.stringutils.to_bytes
+1946:22:Attribute -> Module:salt.utils.stringutils
+1946:22:Attribute -> Module:salt.utils
+1946:22:Name -> Module:salt
+1946:54:Name -> U
+1946:60:Call -> ERR
+1946:60:Name -> Func:builtins.chr
+1946:64:Name -> U
+1947:19:Call -> ERR
+1947:19:Attribute -> Func:posix.urandom
+1947:19:Name -> Module:os
+1947:30:Attribute -> Const:int:16
+1947:30:Name -> Inst:salt.crypt.Crypticle
+1948:17:Call -> U
+1948:17:Name -> U
+1948:24:Call -> U
+1948:24:Attribute -> U
+1948:24:Name -> U
+1948:39:Name -> U
+1948:49:Call -> U
+1948:49:Attribute -> U
+1948:49:Name -> U
+1948:59:Name -> U
+1949:20:Call -> U
+1949:20:Attribute -> U
+1949:20:Name -> U
+1950:15:Call -> U
+1950:15:Attribute -> U
+1950:15:Name -> U
+1950:32:Name -> U
+1951:16:Call -> U
+1951:16:Attribute -> U
+1951:16:Name -> U
+1952:15:Name -> U
+1952:26:Name -> U
+1953:14:Call -> U
+1953:14:Attribute -> BM:hmac.HMAC.digest
+1953:14:Call -> Inst:hmac.HMAC
+1953:14:Attribute -> Func:hmac.new
+1953:14:Name -> Module:hmac
+1953:23:Name -> U
+1953:33:Name -> U
+1953:39:Attribute -> Class:hashlib.sha256
+1953:39:Name -> Module:hashlib
+1954:15:Name -> U
+1954:22:Name -> U
+1960:28:Attribute -> Tuple:2
+1960:28:Name -> Inst:salt.crypt.Crypticle
+1961:14:Name -> U
+1961:20:Attribute -> Const:int:1
+1961:20:Name -> Inst:salt.crypt.Crypticle
+1962:15:Name -> U
+1962:23:Attribute -> Const:int:1
+1962:23:Name -> Inst:salt.crypt.Crypticle
+1963:15:Call -> ERR
+1963:15:Name -> Func:builtins.isinstance
+1963:26:Name -> U
+1963:32:Name -> Class:builtins.bytes
+1964:19:Call -> U | Inst:builtins.bytes
+1964:19:Attribute -> Func:salt.utils.stringutils.to_bytes
+1964:19:Attribute -> Module:salt.utils.stringutils
+1964:19:Attribute -> Module:salt.utils
+1964:19:Name -> Module:salt
+1964:51:Name -> U
+1965:20:Call -> U
+1965:20:Attribute -> BM:hmac.HMAC.digest
+1965:20:Call -> Inst:hmac.HMAC
+1965:20:Attribute -> Func:hmac.new
+1965:20:Name -> Module:hmac
+1965:29:Name -> U
+1965:39:Name -> U | Inst:builtins.bytes
+1965:45:Attribute -> Class:hashlib.sha256
+1965:45:Name -> Module:hashlib
+1966:11:Call -> ERR
+1966:11:Name -> Func:builtins.len
+1966:15:Name -> U
+1966:29:Call -> ERR
+1966:29:Name -> Func:builtins.len
+1966:33:Name -> U
+1967:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1967:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1967:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1968:18:Call -> ExcInst:salt.exceptions.AuthenticationError
+1968:18:Name -> Class:salt.exceptions.AuthenticationError
+1970:34:Call -> Inst:builtins.zip
+1970:34:Name -> Class:builtins.zip
+1970:38:Name -> U
+1970:49:Name -> U
+1971:22:Name -> U
+1971:33:Name -> U
+1972:11:Name -> Const:int:0 | U
+1973:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+1973:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+1973:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+1974:18:Call -> ExcInst:salt.exceptions.AuthenticationError
+1974:18:Name -> Class:salt.exceptions.AuthenticationError
+1975:19:Name -> U | Inst:builtins.bytes
+1975:26:Attribute -> Const:int:16
+1975:26:Name -> Inst:salt.crypt.Crypticle
+1976:15:Name -> U | Inst:builtins.bytes
+1976:20:Attribute -> Const:int:16
+1976:20:Name -> Inst:salt.crypt.Crypticle
+1977:17:Call -> U
+1977:17:Name -> U
+1977:24:Call -> U
+1977:24:Attribute -> U
+1977:24:Name -> U
+1977:39:Name -> U
+1977:49:Call -> U
+1977:49:Attribute -> U
+1977:49:Name -> U
+1977:59:Name -> U
+1978:20:Call -> U
+1978:20:Attribute -> U
+1978:20:Name -> U
+1979:15:Call -> U
+1979:15:Attribute -> U
+1979:15:Name -> U
+1979:32:Name -> U
+1979:40:Call -> U
+1979:40:Attribute -> U
+1979:40:Name -> U
+1980:15:Name -> U
+1980:23:Name -> U
+1986:11:Name -> Const:NoneType:None | U
+1987:24:Attribute -> Const:bytes:b'pickle::'
+1987:24:Name -> Inst:salt.crypt.Crypticle
+1987:42:Call -> U
+1987:42:Attribute -> U
+1987:42:Name -> U
+1987:59:Call -> U
+1987:59:Attribute -> Func:salt.payload.dumps
+1987:59:Attribute -> Module:salt.payload
+1987:59:Name -> Module:salt
+1987:78:Name -> U
+1989:24:Attribute -> Const:bytes:b'pickle::'
+1989:24:Name -> Inst:salt.crypt.Crypticle
+1989:42:Call -> U
+1989:42:Attribute -> Func:salt.payload.dumps
+1989:42:Attribute -> Module:salt.payload
+1989:42:Name -> Module:salt
+1989:61:Name -> U
+1990:15:Call -> U
+1990:15:Attribute -> BM:salt.crypt.Crypticle.encrypt
+1990:15:Name -> Inst:salt.crypt.Crypticle
+1990:28:Name -> U
+1996:15:Call -> U
+1996:15:Attribute -> BM:salt.crypt.Crypticle.decrypt
+1996:15:Name -> Inst:salt.crypt.Crypticle
+1996:28:Name -> U
+1998:15:Call -> U
+1998:15:Attribute -> U
+1998:15:Name -> U
+1998:31:Attribute -> Const:bytes:b'pickle::'
+1998:31:Name -> Inst:salt.crypt.Crypticle
+2000:15:Name -> U
+2000:20:Call -> Const:int:8
+2000:20:Name -> Func:builtins.len
+2000:24:Attribute -> Const:bytes:b'pickle::'
+2000:24:Name -> Inst:salt.crypt.Crypticle
+2001:11:Name -> Const:NoneType:None | U
+2002:24:Call -> U
+2002:24:Attribute -> U
+2002:24:Name -> U
+2003:19:Name -> U
+2004:15:Name -> U
+2004:28:Name -> U
+2005:22:Call -> ExcInst:salt.exceptions.SaltClientError
+2005:22:Name -> Class:salt.exceptions.SaltClientError
+2005:66:Name -> U
+2005:78:Name -> U
+2006:18:Call -> U | Dict:0 | List:0
+2006:18:Attribute -> Func:salt.payload.loads
+2006:18:Attribute -> Module:salt.payload
+2006:18:Name -> Module:salt
+2006:37:Name -> U
+2006:47:Name -> Const:bool:False | U
+2007:11:Call -> ERR
+2007:11:Name -> Func:builtins.isinstance
+2007:22:Name -> U | Dict:0 | List:0
+2007:31:Name -> Class:builtins.dict
+2008:27:Name -> U | Dict:0 | List:0
+2009:25:Call -> U
+2009:25:Attribute -> U | BM:builtins.dict.pop | BM:builtins.list.pop
+2009:25:Name -> U | Dict:0 | List:0
+2010:19:Name -> U
+2010:29:Attribute -> Const:int:0 | U
+2010:29:Name -> Inst:salt.crypt.Crypticle
+2011:20:Call -> Const:NoneType:None | U | Const:NoneType:None
+2011:20:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+2011:20:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2016:24:Name -> U
+2017:24:Attribute -> Const:int:0 | U
+2017:24:Name -> Inst:salt.crypt.Crypticle
+2020:16:Name -> Inst:salt.crypt.Crypticle
+2020:30:Name -> U
+2021:15:Name -> U | Dict:0 | List:0
+2024:24:Name -> Class:salt.crypt.Crypticle
+2036:8:Call -> Const:NoneType:None
+2036:8:Attribute -> BM:salt.crypt.Crypticle.__init__ | BM:builtins.object.__init__
+2036:8:Call -> Super
+2036:8:Name -> Class:builtins.super
+2036:25:Name -> U
+2036:31:Name -> U
+2036:43:Name -> Const:int:192 | U
+2036:53:Name -> Const:int:0 | U
+2037:8:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2037:20:Name -> U
+2058:11:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+2058:11:Attribute -> Func:salt.transport.tls_util.can_skip_aes_encryption
+2058:11:Attribute -> Module:salt.transport.tls_util
+2058:11:Attribute -> Module:salt.transport
+2058:11:Name -> Module:salt
+2059:12:Attribute -> U
+2059:12:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2059:33:Name -> Const:NoneType:None | U
+2059:55:Name -> Const:NoneType:None | U
+2062:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2062:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2062:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2062:74:Name -> Const:NoneType:None | U
+2063:15:Name -> Const:NoneType:None | U
+2065:20:Attribute -> Const:bytes:b'tls_opt::'
+2065:20:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2066:22:Attribute -> Const:bytes:b'pickle::'
+2066:22:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2067:22:Call -> U
+2067:22:Attribute -> U
+2067:22:Name -> U
+2068:22:Call -> U
+2068:22:Attribute -> Func:salt.payload.dumps
+2068:22:Attribute -> Module:salt.payload
+2068:22:Name -> Module:salt
+2068:41:Name -> U
+2071:28:Attribute -> Const:bytes:b'tls_opt::'
+2071:28:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2071:46:Attribute -> Const:bytes:b'pickle::'
+2071:46:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2071:64:Call -> U
+2071:64:Attribute -> Func:salt.payload.dumps
+2071:64:Attribute -> Module:salt.payload
+2071:64:Name -> Module:salt
+2071:83:Name -> U
+2072:19:Name -> U
+2075:19:Call -> U
+2075:19:Attribute -> BM:salt.crypt.Crypticle.dumps
+2075:19:Call -> Super
+2075:19:Name -> Class:builtins.super
+2075:33:Name -> U
+2075:44:Name -> Const:NoneType:None | U
+2096:11:Call -> U
+2096:11:Attribute -> U
+2096:11:Name -> U
+2096:27:Attribute -> Const:bytes:b'tls_opt::'
+2096:27:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2098:19:Call -> Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:False | Const:bool:True
+2098:19:Attribute -> Func:salt.transport.tls_util.can_skip_aes_encryption
+2098:19:Attribute -> Module:salt.transport.tls_util
+2098:19:Attribute -> Module:salt.transport
+2098:19:Name -> Module:salt
+2099:16:Attribute -> U
+2099:16:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2099:37:Name -> Const:NoneType:None | U
+2099:59:Name -> Const:NoneType:None | U
+2101:16:Call -> Const:NoneType:None | U | Const:NoneType:None
+2101:16:Attribute -> BM:logging.Logger.warning | U | BM:logging.Logger.warning
+2101:16:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2106:12:Call -> Const:NoneType:None | U | Const:NoneType:None
+2106:12:Attribute -> BM:logging.Logger.debug | U | BM:logging.Logger.debug
+2106:12:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2106:74:Name -> Const:NoneType:None | U
+2108:19:Name -> U
+2108:24:Call -> Const:int:9
+2108:24:Name -> Func:builtins.len
+2108:28:Attribute -> Const:bytes:b'tls_opt::'
+2108:28:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2111:19:Call -> U
+2111:19:Attribute -> U
+2111:19:Name -> U
+2111:35:Attribute -> Const:bytes:b'pickle::'
+2111:35:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2113:19:Name -> U
+2113:24:Call -> Const:int:8
+2113:24:Name -> Func:builtins.len
+2113:28:Attribute -> Const:bytes:b'pickle::'
+2113:28:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2116:15:Name -> Const:NoneType:None | U
+2117:28:Call -> U
+2117:28:Attribute -> U
+2117:28:Name -> U
+2118:23:Name -> U
+2119:19:Name -> U
+2119:32:Name -> U
+2122:26:Call -> ExcInst:salt.exceptions.SaltClientError
+2122:26:Name -> Class:salt.exceptions.SaltClientError
+2123:52:Name -> U
+2123:64:Name -> U
+2127:22:Call -> U | Dict:0 | List:0
+2127:22:Attribute -> Func:salt.payload.loads
+2127:22:Attribute -> Module:salt.payload
+2127:22:Name -> Module:salt
+2127:41:Name -> U
+2127:51:Name -> Const:bool:False | U
+2130:15:Call -> ERR
+2130:15:Name -> Func:builtins.isinstance
+2130:26:Name -> U | Dict:0 | List:0
+2130:35:Name -> Class:builtins.dict
+2131:31:Name -> U | Dict:0 | List:0
+2132:29:Call -> U
+2132:29:Attribute -> U | BM:builtins.dict.pop | BM:builtins.list.pop
+2132:29:Name -> U | Dict:0 | List:0
+2133:23:Name -> U
+2133:33:Attribute -> U
+2133:33:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2134:24:Call -> Const:NoneType:None | U | Const:NoneType:None
+2134:24:Attribute -> BM:logging.Logger.critical | U | BM:logging.Logger.critical
+2134:24:Name -> Inst:logging.RootLogger | Const:NoneType:None | U | Inst:logging.Logger
+2139:28:Name -> U
+2140:28:Attribute -> U
+2140:28:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2143:20:Name -> Inst:salt.crypt.TLSAwareCrypticle
+2143:34:Name -> U
+2144:19:Name -> U | Dict:0 | List:0
+2147:19:Call -> Dict:0 | Dict:0 | U | Dict:0 | List:0
+2147:19:Attribute -> BM:salt.crypt.Crypticle.loads
+2147:19:Call -> Super
+2147:19:Name -> Class:builtins.super
+2147:33:Name -> U
+2147:43:Name -> Const:bool:False | U
+2147:54:Name -> Const:NoneType:None | U
