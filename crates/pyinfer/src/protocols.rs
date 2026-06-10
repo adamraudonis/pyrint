@@ -1056,6 +1056,27 @@ impl Engine {
                                 *finished = true;
                                 Drive::Stop
                             }
+                            NV::V(
+                                v @ (Value::SynthConst(_)
+                                | Value::SynthSeq { .. }
+                                | Value::SynthDict { .. }
+                                | Value::FrozenSet { .. }),
+                            ) => {
+                                // Const.getitem / _container_getitem build a
+                                // FRESH node per call (node_classes.py:2134,
+                                // :236-266); `yield from assigned.infer(ctx)`
+                                // is a full NodeNG.infer hop on it: one
+                                // yield, then the post-yield bump fires when
+                                // the consumer pulls again (skipped if the
+                                // consumer abandons at the yield).
+                                let d = sink(v.clone());
+                                if let Drive::Stop = d {
+                                    *stopped = true;
+                                    return Drive::Stop;
+                                }
+                                ctx.bump_inferred();
+                                Drive::Go
+                            }
                             _ => {
                                 // yield from assigned.infer(context) — errors
                                 // propagate (no try in astroid)

@@ -2113,22 +2113,37 @@ impl Engine {
             },
             _ => return None,
         };
-        let f = self.infer(expr, &copy_context(Some(ctx)));
-        if f.vals.is_empty() {
-            return None;
+        // brain_builtin_inference._infer_copy_method:
+        // `node.func.expr.infer(context=context)` — the LIVE context: the
+        // receiver's path pushes PERSIST into the caller's path (a later
+        // re-pull of the same Name in the default Attribute._infer is then
+        // path-blocked -> InferenceError -> the call site yields U).
+        // `all(...)` short-circuits: the generator is abandoned right after
+        // the first non-container value (its post-yield bump never fires).
+        let mut vals: Vec<Value> = Vec::new();
+        let mut bad = false;
+        let _ = {
+            let vals = &mut vals;
+            let bad = &mut bad;
+            self.infer_to(expr, ctx, &mut |v| {
+                let is_container = matches!(
+                    v,
+                    Value::SynthDict { .. } | Value::SynthSeq { .. } | Value::FrozenSet { .. }
+                ) || matches!(&v, Value::Node(g)
+                    if self.kind_is(*g, |k| matches!(k,
+                        NodeKind::Dict { .. } | NodeKind::List { .. } | NodeKind::Set { .. })));
+                if !is_container {
+                    *bad = true;
+                    return crate::value::Drive::Stop;
+                }
+                vals.push(v);
+                crate::value::Drive::Go
+            })
+        };
+        if bad || vals.is_empty() {
+            return None; // UseInferenceDefault
         }
-        let all_containers = f.vals.iter().all(|v| {
-            matches!(
-                v,
-                Value::SynthDict { .. } | Value::SynthSeq { .. } | Value::FrozenSet { .. }
-            ) || matches!(v, Value::Node(g)
-                if self.kind_is(*g, |k| matches!(k,
-                    NodeKind::Dict { .. } | NodeKind::List { .. } | NodeKind::Set { .. })))
-        });
-        if !all_containers {
-            return None;
-        }
-        Some(Flow::ok(f.vals))
+        Some(Flow::ok(vals))
     }
 
     fn tip_str_format(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
