@@ -1,0 +1,20 @@
+[package]
+name = "prylint"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "prylint"
+path = "src/main.rs"
+
+[dependencies]
+pyast = { path = "../pyast" }
+pyinfer = { path = "../pyinfer" }
+pycheckers = { path = "../pycheckers" }
+rayon = { workspace = true }
+rustc-hash = { workspace = true }
+indexmap = { workspace = true }
+regex = { workspace = true }
+anyhow = { workspace = true }
+serde_json = { workspace = true }

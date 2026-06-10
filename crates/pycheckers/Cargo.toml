@@ -1,0 +1,11 @@
+[package]
+name = "pycheckers"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+pyast = { path = "../pyast" }
+pyinfer = { path = "../pyinfer" }
+rustc-hash = { workspace = true }
+regex = { workspace = true }

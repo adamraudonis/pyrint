@@ -1,52 +1,30 @@
-[package]
-name = "prylint"
-version = "0.1.1"
+[workspace]
+resolver = "2"
+members = ["crates/cli", "crates/pyast", "crates/pyinfer", "crates/pycheckers"]
+
+[workspace.package]
+version = "0.2.0"
 edition = "2021"
-authors = ["Prylint Contributors"]
-description = "A fast Python linter written in Rust, compatible with Pylint"
 license = "MIT OR Apache-2.0"
 
-[dependencies]
-# Python AST parsing
-rustpython-parser = "0.3"
-rustpython-ast = "0.3"
-
-# Error handling and utilities
-anyhow = "1.0"
-thiserror = "1.0"
-
-# CLI and configuration
-clap = { version = "4.4", features = ["derive"] }
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-toml = "0.8"
-
-# File handling and parallel processing
-walkdir = "2.4"
-rayon = "1.8"
-glob = "0.3"
-
-# Text processing and reporting
-colored = "2.1"
-regex = "1.10"
-
-# Performance monitoring (optional)
-mimalloc = { version = "0.1", default-features = false, optional = true }
-
-[dev-dependencies]
-criterion = "0.5"
-pretty_assertions = "1.4"
-tempfile = "3.8"
-
-[features]
-default = []
-jemalloc = ["mimalloc"]
+[workspace.dependencies]
+ruff_python_parser = { git = "https://github.com/astral-sh/ruff", tag = "0.15.16" }
+ruff_python_ast = { git = "https://github.com/astral-sh/ruff", tag = "0.15.16" }
+ruff_text_size = { git = "https://github.com/astral-sh/ruff", tag = "0.15.16" }
+ruff_source_file = { git = "https://github.com/astral-sh/ruff", tag = "0.15.16" }
+rayon = "1.10"
+rustc-hash = "2"
+indexmap = "2"
+regex = "1.11"
+anyhow = "1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+memchr = "2"
 
 [profile.release]
-lto = true
+lto = "thin"
 codegen-units = 1
-opt-level = 3
 
-[[bench]]
-name = "lint_performance"
-harness = false
+[profile.profiling]
+inherits = "release"
+debug = true
