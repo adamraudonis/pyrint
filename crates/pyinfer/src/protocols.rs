@@ -1313,8 +1313,17 @@ impl Engine {
         };
         let lhs_ctx = copy_context(Some(ctx));
         let rhs_ctx = copy_context(Some(ctx));
+        // itertools.product materializes both iterators before yielding
+        // anything (node_classes.py:1549): an error from either side
+        // propagates with no values produced.
         let lhs_flow = self.infer(left, &lhs_ctx);
+        if let Some(e) = lhs_flow.err {
+            return Flow::err(e);
+        }
         let rhs_flow = self.infer(right, &rhs_ctx);
+        if let Some(e) = rhs_flow.err {
+            return Flow::err(e);
+        }
         let mut out = Vec::new();
         'outer: for lhs in &lhs_flow.vals {
             for rhs in &rhs_flow.vals {
@@ -1341,10 +1350,17 @@ impl Engine {
             ),
             _ => return Flow::err(ErrKind::Inference),
         };
-        // lhs: target.infer_lhs
+        // lhs: target.infer_lhs; product materializes both iterators
+        // (node_classes.py:1430) — errors propagate before any yield.
         let lhs_flow = self.infer_lhs(target, ctx);
+        if let Some(e) = lhs_flow.err {
+            return Flow::err(e);
+        }
         let rhs_ctx = ctx.clone_ctx();
         let rhs_flow = self.infer(value, &rhs_ctx);
+        if let Some(e) = rhs_flow.err {
+            return Flow::err(e);
+        }
         let mut out = Vec::new();
         'outer: for lhs in &lhs_flow.vals {
             for rhs in &rhs_flow.vals {

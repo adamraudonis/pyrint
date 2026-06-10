@@ -37,6 +37,13 @@ impl Engine {
         if self.depth.get() >= self.max_depth {
             return Flow::err(ErrKind::Recursion);
         }
+        // synthetic-class base placeholders standing for raw cross-module
+        // nodes (bases.py _infer_type_new_call stores the original Tuple
+        // elts as bases): inference goes straight to the original node.
+        let node = match self.redirects.borrow().get(&node) {
+            Some(NV::N(g)) => *g,
+            _ => node,
+        };
         self.depth.set(self.depth.get() + 1);
         let r = self.infer_entry(node, ctx_in);
         self.depth.set(self.depth.get() - 1);
@@ -119,6 +126,12 @@ impl Engine {
     // ---------- per-kind dispatch with decorator table (notes/07 §4.1) ----------
 
     fn infer_dispatch(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
+        // EvaluatedObject._infer (node_classes.py EvaluatedObject: yields the
+        // stored value) and proxy values stored in synthetic-class locals
+        // (enum members): undecorated, yields the value as-is.
+        if let Some(NV::V(v)) = self.redirects.borrow().get(&node) {
+            return Flow::one(v.clone());
+        }
         let md = self.md(node.m);
         let kind = &md.tree.nodes[node.n.idx()].kind;
         match kind {

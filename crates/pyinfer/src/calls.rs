@@ -463,8 +463,19 @@ impl Engine {
     // ---------- ClassDef.infer_call_result (scoped_nodes.py:2071-2102) ----------
 
     fn class_infer_call_result(&self, cls: GNode, caller: Option<GNode>, ctx: Option<&Rc<Ctx>>) -> Flow {
-        // type("X", bases, attrs) — _infer_type_call not ported yet
-        let _ = caller;
+        // type("X", bases, attrs) (scoped_nodes.py:2076-2079)
+        if let Some(call) = caller {
+            let n_args = match &self.md(call.m).tree.nodes[call.n.idx()].kind {
+                NodeKind::Call { args, .. } => args.len(),
+                _ => 0,
+            };
+            if n_args == 3 && self.is_subtype_of(cls, "builtins.type", ctx) {
+                return match self.infer_type_call(call, ctx) {
+                    Ok(v) => Flow::one(v),
+                    Err(e) => Flow::err(e),
+                };
+            }
+        }
         let mut dunder_call: Option<Value> = None;
         if let Some(Value::Node(meta)) = self.metaclass(cls, ctx) {
             let call_sym = self.sym("__call__");
@@ -487,6 +498,274 @@ impl Engine {
         Flow::one(self.instantiate_class(cls))
     }
 
+    // ---------- _infer_type_call / _infer_type_new_call ----------
+
+    /// first inferred value of an argument node, astroid `next(x.infer(ctx))`
+    /// (StopIteration -> InferenceError).
+    fn infer_first(&self, node: GNode, ctx: Option<&Rc<Ctx>>) -> Result<Value, ErrKind> {
+        let c = match ctx {
+            Some(c) => Rc::clone(c),
+            None => Ctx::new(),
+        };
+        let f = self.infer(node, &c);
+        match f.vals.into_iter().next() {
+            Some(v) => Ok(v),
+            None => Err(f.err.unwrap_or(ErrKind::Inference)),
+        }
+    }
+
+    /// container elements as NVs (`itered()` over Tuple/List nodes or the
+    /// synthetic sequences our brains produce).
+    fn container_elts(&self, v: &Value) -> Option<Vec<NV>> {
+        match v {
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Tuple { elts, .. } | NodeKind::List { elts, .. } => Some(
+                        elts.iter().map(|&e| NV::N(GNode { m: g.m, n: e })).collect(),
+                    ),
+                    _ => None,
+                }
+            }
+            Value::SynthSeq { kind, elems } if !matches!(kind, SeqKind::Set) => {
+                Some(elems.iter().cloned().map(NV::V).collect())
+            }
+            _ => None,
+        }
+    }
+
+    /// scoped_nodes.py:2017-2069 _infer_type_call — reconstruct the class a
+    /// 3-arg `type()` call (or metaclass call) creates.
+    fn infer_type_call(&self, caller: GNode, ctx: Option<&Rc<Ctx>>) -> Result<Value, ErrKind> {
+        let md = self.md(caller.m);
+        let args: Vec<GNode> = match &md.tree.nodes[caller.n.idx()].kind {
+            NodeKind::Call { args, .. } => {
+                args.iter().map(|&a| GNode { m: caller.m, n: a }).collect()
+            }
+            _ => return Err(ErrKind::Inference),
+        };
+        // name: first inferred value of args[0]; non-Const-str -> Uninferable
+        let name_v = self.infer_first(args[0], ctx)?;
+        let name = match self.value_const(&name_v) {
+            Some(ConstValue::Str(s)) => s.to_string(),
+            _ => return Ok(Value::Uninferable),
+        };
+        // bases: first inferred value of args[1]; must be Tuple/List
+        let bases_v = self.infer_first(args[1], ctx)?;
+        let Some(base_elts) = self.container_elts(&bases_v) else {
+            return Ok(Value::Uninferable);
+        };
+        // each base becomes EvaluatedObject(original, first-inferred value);
+        // skipped when inference yields nothing or a falsy value
+        // (`if inferred:` — Uninferable is falsy, nodes are objects).
+        let mut eval_bases: Vec<Value> = Vec::new();
+        for elt in &base_elts {
+            let first = match elt {
+                NV::N(g) => {
+                    let c = match ctx {
+                        Some(c) => Rc::clone(c),
+                        None => Ctx::new(),
+                    };
+                    self.infer(*g, &c).vals.into_iter().next()
+                }
+                NV::V(v) => Some(v.clone()),
+            };
+            if let Some(v) = first {
+                if !v.is_uninferable() {
+                    eval_bases.push(v);
+                }
+            }
+        }
+        // members: first inferred value of args[2]; errors -> None
+        let members = self.infer_first(args[2], ctx).ok();
+        let mut locals: Vec<(GSym, NV)> = Vec::new();
+        if let Some(m) = &members {
+            if let Some(items) = self.value_dict_items_nv(m) {
+                for (k, v) in items {
+                    let kc = match &k {
+                        NV::N(g) => self.value_const(&Value::Node(*g)),
+                        NV::V(v) => self.value_const(v),
+                    };
+                    if let Some(ConstValue::Str(s)) = kc {
+                        locals.push((self.sym(&s), v));
+                    }
+                }
+            }
+        }
+        // parent=caller.parent — qname prefix is its frame's qname
+        // (ClassDef created with lineno=0)
+        let parent_frame = match self.parent(caller) {
+            Some(p) => self.frame(p),
+            None => self.frame(caller),
+        };
+        let modname = self.qname(parent_frame);
+        let n_extra = locals.iter().filter(|(_, v)| matches!(v, NV::V(_))).count();
+        let (cls, base_slots, _, extra_slots) =
+            self.build_synth_class(&modname, &name, 0, 0, eval_bases.len(), false, n_extra);
+        {
+            let mut red = self.redirects.borrow_mut();
+            for (slot, v) in base_slots.iter().zip(eval_bases) {
+                red.insert(GNode { m: cls.m, n: *slot }, NV::V(v));
+            }
+        }
+        // locals: dict-assignment REPLACE semantics per name
+        let cmd = self.md(cls.m);
+        let mut lmap = cmd.locals.borrow_mut();
+        let entry = lmap.entry(cls.n).or_default();
+        let mut extra_iter = extra_slots.into_iter();
+        for (sym, v) in locals {
+            let g = match v {
+                NV::N(g) => g,
+                NV::V(val) => {
+                    let slot = extra_iter.next().expect("extra slot");
+                    let g = GNode { m: cls.m, n: slot };
+                    self.redirects.borrow_mut().insert(g, NV::V(val));
+                    g
+                }
+            };
+            entry.insert(sym, vec![g]);
+        }
+        Ok(Value::Node(cls))
+    }
+
+    /// Dict items as NV pairs (Dict nodes or SynthDict values).
+    fn value_dict_items_nv(&self, v: &Value) -> Option<Vec<(NV, NV)>> {
+        match v {
+            Value::SynthDict { items } => Some(
+                items
+                    .iter()
+                    .map(|(k, val)| (NV::V(k.clone()), NV::V(val.clone())))
+                    .collect(),
+            ),
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => Some(
+                        items
+                            .iter()
+                            .map(|&(k, val)| {
+                                (
+                                    NV::N(GNode { m: g.m, n: k }),
+                                    NV::N(GNode { m: g.m, n: val }),
+                                )
+                            })
+                            .collect(),
+                    ),
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
+    }
+
+    /// bases.py:555-654 _infer_type_new_call — type.__new__(mcs, name,
+    /// bases, attrs). Returns Ok(None) when any validation falls through
+    /// (-> normal call inference).
+    fn infer_type_new_call(
+        &self,
+        caller: GNode,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Option<Value>, ErrKind> {
+        let md = self.md(caller.m);
+        let args: Vec<GNode> = match &md.tree.nodes[caller.n.idx()].kind {
+            NodeKind::Call { args, .. } => {
+                args.iter().map(|&a| GNode { m: caller.m, n: a }).collect()
+            }
+            _ => return Ok(None),
+        };
+        // mcs: ClassDef subtype of builtins.type
+        let mcs_v = self.infer_first(args[0], ctx)?;
+        let mcs = match &mcs_v {
+            Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) => *g,
+            _ => return Ok(None),
+        };
+        if !self.is_subtype_of(mcs, "builtins.type", None) {
+            return Ok(None);
+        }
+        // name: Const str
+        let name_v = self.infer_first(args[1], ctx)?;
+        let name = match self.value_const(&name_v) {
+            Some(ConstValue::Str(s)) => s.to_string(),
+            _ => return Ok(None),
+        };
+        // bases: Tuple of ClassDefs (raw elts kept as the class bases)
+        let bases_v = self.infer_first(args[2], ctx)?;
+        let base_elts: Vec<NV> = match &bases_v {
+            Value::Node(g)
+                if self.kind_is(*g, |k| matches!(k, NodeKind::Tuple { .. })) =>
+            {
+                let bmd = self.md(g.m);
+                match &bmd.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Tuple { elts, .. } => {
+                        elts.iter().map(|&e| NV::N(GNode { m: g.m, n: e })).collect()
+                    }
+                    _ => return Ok(None),
+                }
+            }
+            Value::SynthSeq {
+                kind: SeqKind::Tuple,
+                elems,
+            } => elems.iter().cloned().map(NV::V).collect(),
+            _ => return Ok(None),
+        };
+        for elt in &base_elts {
+            let first = match elt {
+                NV::N(g) => Some(self.infer_first(*g, ctx)?),
+                NV::V(v) => Some(v.clone()),
+            };
+            match first {
+                Some(Value::Node(g))
+                    if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => {}
+                _ => return Ok(None),
+            }
+        }
+        // attrs: Dict; keys/values fully inferred (defaultdict(list) APPEND)
+        let attrs_v = self.infer_first(args[3], ctx)?;
+        let Some(items) = self.value_dict_items_nv(&attrs_v) else {
+            return Ok(None);
+        };
+        let mut locals: Vec<(GSym, Value)> = Vec::new();
+        for (k, v) in items {
+            let kv = match &k {
+                NV::N(g) => self.infer_first(*g, ctx)?,
+                NV::V(val) => val.clone(),
+            };
+            let vv = match &v {
+                NV::N(g) => self.infer_first(*g, ctx)?,
+                NV::V(val) => val.clone(),
+            };
+            if let Some(ConstValue::Str(s)) = self.value_const(&kv) {
+                locals.push((self.sym(&s), vv));
+            }
+        }
+        // build: parent=caller, lineno=caller.lineno, metaclass=mcs
+        let modname = self.qname(self.frame(caller));
+        let lineno = self.fromlineno(caller);
+        let col = self.md(caller.m).tree.nodes[caller.n.idx()].col_offset;
+        let (cls, base_slots, meta_slot, extra_slots) =
+            self.build_synth_class(&modname, &name, lineno, col, base_elts.len(), true, locals.len());
+        {
+            let mut red = self.redirects.borrow_mut();
+            for (slot, v) in base_slots.iter().zip(base_elts) {
+                red.insert(GNode { m: cls.m, n: *slot }, v);
+            }
+            if let Some(ms) = meta_slot {
+                red.insert(GNode { m: cls.m, n: ms }, NV::V(Value::Node(mcs)));
+            }
+        }
+        let cmd = self.md(cls.m);
+        let mut lmap = cmd.locals.borrow_mut();
+        let entry = lmap.entry(cls.n).or_default();
+        let mut extra_iter = extra_slots.into_iter();
+        for (sym, val) in locals {
+            let slot = extra_iter.next().expect("extra slot");
+            let g = GNode { m: cls.m, n: slot };
+            self.redirects.borrow_mut().insert(g, NV::V(val));
+            entry.entry(sym).or_default().push(g);
+        }
+        Ok(Some(Value::Node(cls)))
+    }
+
     // ---------- Bound/Unbound method ----------
 
     fn bound_method_infer_call_result(
@@ -497,8 +776,24 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
     ) -> Flow {
         let ctx2 = bind_context_to_node(ctx, (**bound).clone());
-        // type.__new__(mcs, name, bases, attrs) — _infer_type_new_call not
-        // ported yet (synthetic class building); falls through.
+        // type.__new__(mcs, name, bases, attrs) (bases.py:656-674)
+        if let Some(call) = caller {
+            let is_type_new = matches!(&**bound, Value::Node(b)
+                    if self.kind_is(*b, |k| matches!(k, NodeKind::ClassDef(_)))
+                        && self.node_name(*b).as_deref() == Some("type"))
+                && self.node_name(func).as_deref() == Some("__new__")
+                && matches!(
+                    &self.md(call.m).tree.nodes[call.n.idx()].kind,
+                    NodeKind::Call { args, .. } if args.len() == 4
+                );
+            if is_type_new {
+                match self.infer_type_new_call(call, Some(&ctx2)) {
+                    Ok(Some(v)) => return Flow::one(v),
+                    Ok(None) => {}
+                    Err(e) => return Flow::err(e),
+                }
+            }
+        }
         self.unbound_method_infer_call_result_with(func, caller, Some(&ctx2))
     }
 

@@ -41,6 +41,7 @@ pub struct SnapModule {
 }
 
 struct Loader {
+    modname: String,
     nodes: Vec<Node>,
     interner: Interner,
     idmap: FxHashMap<u64, NodeId>,
@@ -216,6 +217,22 @@ impl Loader {
                 }))
             }
             "Const" => NodeKind::Const(const_value(&v["value"])),
+            // str/bytes brain stub bodies (brain_builtin_inference on_bootstrap)
+            "Return" => NodeKind::Return {
+                value: self.load_opt(&ch["value"], id),
+            },
+            // live Instance values stored in locals (e.g. _io.BufferedReader.raw
+            // = <FileIO instance>, raw_building object_build_class members):
+            // represent as EmptyNode inferring to Instance of that class.
+            "Instance" => {
+                let cls = v["name"].as_str().unwrap_or("");
+                let q = match v["qn"].as_str() {
+                    Some(q) => q.to_string(),
+                    None => format!("{}.{}", self.modname, cls),
+                };
+                self.einf.insert(id, vec![EInf::Inst(q)]);
+                NodeKind::EmptyNode
+            }
             "Name" => NodeKind::Name {
                 name: self.interner.intern(v["name"].as_str().unwrap_or("")),
             },
@@ -355,6 +372,7 @@ impl Loader {
 pub fn load_snapshot(json: &str) -> Option<SnapModule> {
     let v: J = serde_json::from_str(json).ok()?;
     let mut loader = Loader {
+        modname: v["modname"].as_str().unwrap_or("").to_string(),
         nodes: Vec::new(),
         interner: Interner::default(),
         idmap: FxHashMap::default(),

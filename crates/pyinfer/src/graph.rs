@@ -153,6 +153,11 @@ pub struct Engine {
     /// typing-brain synthetic classes, cached per origin node regardless of
     /// context (astroid pins node._explicit_inference to a fixed lambda)
     pub typing_tip_cache: RefCell<FxHashMap<GNode, Vec<Value>>>,
+    /// placeholder nodes in runtime-built synthetic class modules that stand
+    /// for cross-module nodes (NV::N — raw bases of _infer_type_new_call) or
+    /// pre-inferred values (NV::V — EvaluatedObject / enum-member instances
+    /// stored in locals). infer() forwards through this table.
+    pub redirects: RefCell<FxHashMap<GNode, crate::value::NV>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -194,6 +199,7 @@ impl Engine {
             isfile_cache: RefCell::new(FxHashMap::default()),
             isdir_cache: RefCell::new(FxHashMap::default()),
             typing_tip_cache: RefCell::new(FxHashMap::default()),
+            redirects: RefCell::new(FxHashMap::default()),
         };
         e.bootstrap();
         e
@@ -400,6 +406,114 @@ impl Engine {
         };
         self.mods.borrow_mut().push(Rc::new(md));
         id
+    }
+
+    /// Build a runtime synthetic ClassDef hosted in its own module (used by
+    /// _infer_type_call (scoped_nodes.py:2017-2069), _infer_type_new_call
+    /// (bases.py:555-654) and the enum/namedtuple brains). The host module
+    /// is named like the astroid parent frame's qname so qname() composes
+    /// identically; never registered in astroid_cache. `n_bases` Unknown
+    /// placeholder nodes become ClassData.bases (wire them via `redirects`),
+    /// `with_metaclass` adds one placeholder wired as the declared metaclass,
+    /// and `n_extra` placeholders are free slots for value-valued locals.
+    /// Returns (class node, base slots, metaclass slot, extra slots).
+    #[allow(clippy::too_many_arguments)]
+    pub fn build_synth_class(
+        &self,
+        modname: &str,
+        clsname: &str,
+        lineno: u32,
+        col: i32,
+        n_bases: usize,
+        with_metaclass: bool,
+        n_extra: usize,
+    ) -> (GNode, Vec<NodeId>, Option<NodeId>, Vec<NodeId>) {
+        let mut interner = pyast::tree::Interner::default();
+        let name_sym = interner.intern(clsname);
+        let mut nodes: Vec<Node> = Vec::new();
+        let mk = |kind: NodeKind, parent: NodeId, line: u32, c: i32| Node {
+            kind,
+            parent,
+            fromlineno: line,
+            col_offset: c,
+            end_lineno: line,
+            end_col_offset: -1,
+            tolineno: line,
+        };
+        // node 0: Module (patched with body below)
+        nodes.push(mk(
+            NodeKind::Module(Box::new(ModuleData {
+                name: modname.into(),
+                file: "<synthetic>".into(),
+                package: false,
+                body: vec![NodeId(1)],
+                doc_node: None,
+                future_imports: Vec::new(),
+            })),
+            NodeId::MODULE,
+            0,
+            0,
+        ));
+        let cls_id = NodeId(1);
+        // placeholder ids start at 2
+        let mut next = 2u32;
+        let base_slots: Vec<NodeId> = (0..n_bases)
+            .map(|_| {
+                let id = NodeId(next);
+                next += 1;
+                id
+            })
+            .collect();
+        let meta_slot: Option<NodeId> = if with_metaclass {
+            let id = NodeId(next);
+            next += 1;
+            Some(id)
+        } else {
+            None
+        };
+        let extra_slots: Vec<NodeId> = (0..n_extra)
+            .map(|_| {
+                let id = NodeId(next);
+                next += 1;
+                id
+            })
+            .collect();
+        nodes.push(mk(
+            NodeKind::ClassDef(Box::new(pyast::tree::ClassData {
+                name: name_sym,
+                decorators: None,
+                bases: base_slots.clone(),
+                keywords: Vec::new(),
+                metaclass: meta_slot,
+                type_params: Vec::new(),
+                body: Vec::new(),
+                doc_node: None,
+            })),
+            NodeId::MODULE,
+            lineno,
+            col,
+        ));
+        for _ in 0..(next - 2) {
+            nodes.push(mk(NodeKind::Unknown, cls_id, lineno, col));
+        }
+        let tree = Tree {
+            nodes,
+            interner,
+            locals: FxHashMap::default(),
+        };
+        let mid = self.register_module(
+            modname.to_string(),
+            "<synthetic>".to_string(),
+            tree,
+            false,
+            true,
+        );
+        (
+            GNode { m: mid, n: cls_id },
+            base_slots,
+            meta_slot,
+            extra_slots,
+        )
     }
 
     /// manager.cache_module: setdefault — first module wins.
