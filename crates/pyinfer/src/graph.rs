@@ -520,6 +520,48 @@ impl Engine {
         )
     }
 
+    /// Allocate `count` orphan Unknown nodes in a fresh synthetic module —
+    /// hosts for redirect placeholders (enum-member instances and other
+    /// VALUE-valued locals entries).
+    pub fn alloc_placeholders(&self, count: usize) -> Vec<GNode> {
+        let interner = pyast::tree::Interner::default();
+        let mut nodes: Vec<Node> = Vec::new();
+        nodes.push(Node {
+            kind: NodeKind::Module(Box::new(ModuleData {
+                name: "".into(),
+                file: "<synthetic>".into(),
+                package: false,
+                body: Vec::new(),
+                doc_node: None,
+                future_imports: Vec::new(),
+            })),
+            parent: NodeId::MODULE,
+            fromlineno: 0,
+            col_offset: 0,
+            end_lineno: 0,
+            end_col_offset: -1,
+            tolineno: 0,
+        });
+        for _ in 0..count {
+            nodes.push(Node {
+                kind: NodeKind::Unknown,
+                parent: NodeId::MODULE,
+                fromlineno: 0,
+                col_offset: 0,
+                end_lineno: 0,
+                end_col_offset: -1,
+                tolineno: 0,
+            });
+        }
+        let tree = Tree {
+            nodes,
+            interner,
+            locals: FxHashMap::default(),
+        };
+        let mid = self.register_module(String::new(), "<synthetic>".to_string(), tree, false, true);
+        (1..=count as u32).map(|i| GNode { m: mid, n: NodeId(i) }).collect()
+    }
+
     /// manager.cache_module: setdefault — first module wins.
     pub fn cache_module(&self, name: &str, id: ModId) {
         self.astroid_cache

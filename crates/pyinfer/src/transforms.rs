@@ -678,6 +678,7 @@ impl Engine {
         // predicate _is_enum_subclass = is_subtype_of("enum.Enum") —
         // inference happens even when False
         if self.is_subtype_of(g, "enum.Enum", None) {
+            self.apply_enum_transform(g);
             self.wipe();
         }
         // brain_namedtuple_enum typing.NamedTuple base tip
@@ -877,5 +878,312 @@ impl Engine {
         {
             self.wipe();
         }
+    }
+}
+
+
+// ===================== brain_namedtuple_enum.infer_enum_class =====================
+
+impl Engine {
+    /// infer_enum_class (brain_namedtuple_enum.py:391-538): replace each
+    /// all-AssignName local of an enum subclass with an Instance of a fake
+    /// per-member class (name/value/_name_/_value_ properties), add
+    /// `_value2member_map_` / `__members__`, and a guessed `name` property
+    /// when no member is called "name". The whole body runs ONCE (for the
+    /// first basename in the mro chain) — `break` at the end — and is
+    /// skipped entirely for classes defined in the `enum` module itself.
+    fn apply_enum_transform(&self, node: GNode) {
+        // for basename in (b for cls in node.mro() for b in cls.basenames):
+        let first_basename = {
+            let mro = match self.mro(node, None) {
+                Ok(m) => m,
+                Err(_) => return, // MroError propagates out in astroid; be tolerant
+            };
+            let mut found: Option<String> = None;
+            'outer: for cls in mro {
+                let md = self.md(cls.m);
+                let bases: Vec<NodeId> = match &md.tree.nodes[cls.n.idx()].kind {
+                    NodeKind::ClassDef(d) => d.bases.clone(),
+                    _ => continue,
+                };
+                for b in bases {
+                    if let Some(s) = self.dotted_string(GNode { m: cls.m, n: b }) {
+                        found = Some(s);
+                        break 'outer;
+                    }
+                }
+            }
+            match found {
+                Some(b) => b,
+                None => return, // no basenames at all -> loop body never runs
+            }
+        };
+        if self.md(node.m).name == "enum" {
+            return;
+        }
+        let node_md = self.md(node.m);
+        // basenames text of THIS class (types in the fake source)
+        let basenames: Vec<String> = {
+            match &node_md.tree.nodes[node.n.idx()].kind {
+                NodeKind::ClassDef(d) => d
+                    .bases
+                    .iter()
+                    .filter_map(|&b| self.dotted_string(GNode { m: node.m, n: b }))
+                    .collect(),
+                _ => Vec::new(),
+            }
+        };
+        let types = basenames.join(", ");
+        let enum_qname = self.qname(node);
+        // snapshot of the locals entries (astroid iterates .items() while
+        // REPLACING values of existing keys)
+        let entries: Vec<(crate::value::GSym, Vec<GNode>)> = {
+            let locals = node_md.locals.borrow();
+            match locals.get(&node.n) {
+                Some(map) => map.iter().map(|(k, v)| (*k, v.clone())).collect(),
+                None => Vec::new(),
+            }
+        };
+        let mut dunder_members: Vec<(String, GNode)> = Vec::new(); // (local, fake cls)
+        let mut target_names: rustc_hash::FxHashSet<String> = Default::default();
+        // mymethods: FIRST local of each key that is a FunctionDef
+        let mymethods: Vec<(crate::value::GSym, GNode)> = entries
+            .iter()
+            .filter_map(|(k, v)| {
+                v.first().and_then(|&g| {
+                    if self.kind_is(g, |kd| {
+                        matches!(kd, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                    }) {
+                        Some((*k, g))
+                    } else {
+                        None
+                    }
+                })
+            })
+            .collect();
+        for (local, values) in &entries {
+            let local_str = self.sname(*local);
+            if local_str == "_ignore_"
+                || values.iter().any(|&v| {
+                    !self.kind_is(v, |k| matches!(k, NodeKind::AssignName { .. }))
+                })
+                || values.is_empty()
+            {
+                continue;
+            }
+            let Some(stmt) = self.statement(values[0]) else { continue };
+            let smd = self.md(stmt.m);
+            // targets per statement kind
+            let (targets, stmt_value): (Vec<GNode>, Option<GNode>) =
+                match &smd.tree.nodes[stmt.n.idx()].kind {
+                    NodeKind::Assign { targets, value, .. } => {
+                        let t0 = targets[0];
+                        let ts = match &smd.tree.nodes[t0.idx()].kind {
+                            NodeKind::Tuple { elts, .. } => {
+                                elts.iter().map(|&e| GNode { m: stmt.m, n: e }).collect()
+                            }
+                            _ => targets.iter().map(|&t| GNode { m: stmt.m, n: t }).collect(),
+                        };
+                        (ts, Some(GNode { m: stmt.m, n: *value }))
+                    }
+                    NodeKind::AnnAssign { target, value, .. } => (
+                        vec![GNode { m: stmt.m, n: *target }],
+                        value.map(|v| GNode { m: stmt.m, n: v }),
+                    ),
+                    _ => continue,
+                };
+            // inferred_return_value
+            let return_value: String = match stmt_value {
+                None => "None".to_string(), // format(None) -> "None"
+                Some(v) => {
+                    let vmd = self.md(v.m);
+                    match &vmd.tree.nodes[v.n.idx()].kind {
+                        NodeKind::Const(pyast::tree::ConstValue::Str(sv)) => {
+                            pyast::pyrepr::repr_str(sv)
+                        }
+                        NodeKind::Const(c) => const_format(c),
+                        _ => self
+                            .expr_source(v)
+                            .unwrap_or_else(|| "____astroid_unparse_fallback".to_string()),
+                    }
+                }
+            };
+            let mut new_targets: Vec<GNode> = Vec::new();
+            let mut placeholders =
+                self.alloc_placeholders(targets.len()).into_iter();
+            let mut made_any = false;
+            for target in &targets {
+                let tmd = self.md(target.m);
+                let tname = match &tmd.tree.nodes[target.n.idx()].kind {
+                    NodeKind::AssignName { name } => tmd.tree.s(*name).to_string(),
+                    NodeKind::Starred { .. } => continue,
+                    _ => continue,
+                };
+                target_names.insert(tname.clone());
+                let mut classdef = format!(
+                    "\nclass {name}({types}):\n    @property\n    def value(self):\n        return {rv}\n    @property\n    def _value_(self):\n        return {rv}\n    @property\n    def name(self):\n        return \"{name}\"\n    @property\n    def _name_(self):\n        return \"{name}\"\n",
+                    name = tname,
+                    types = types,
+                    rv = return_value,
+                );
+                if first_basename.contains("IntFlag") {
+                    classdef.push_str(&format!(
+                        "    def __or__(self, other):\n        return {n}(self.value | other.value)\n    def __and__(self, other):\n        return {n}(self.value & other.value)\n    def __xor__(self, other):\n        return {n}(self.value ^ other.value)\n    def __add__(self, other):\n        return {n}(self.value + other.value)\n    def __div__(self, other):\n        return {n}(self.value / other.value)\n    def __invert__(self):\n        return {n}(~self.value)\n    def __mul__(self, other):\n        return {n}(self.value * other.value)\n",
+                        n = tname
+                    ));
+                }
+                // fake module named like the ENUM CLASS qname so the fake
+                // member class qname composes to <enum>.<member>
+                let Some(fake_mid) = self.build_template_module(&classdef, &enum_qname)
+                else {
+                    continue;
+                };
+                let sym = self.sym(&tname);
+                let fake_cls = {
+                    let fmd = self.md(fake_mid);
+                    let locals = fmd.locals.borrow();
+                    match locals
+                        .get(&NodeId::MODULE)
+                        .and_then(|l| l.get(&sym))
+                        .and_then(|v| v.first())
+                    {
+                        Some(&g) => g,
+                        None => continue,
+                    }
+                };
+                // fake.locals[method.name] = [method] for mymethods
+                {
+                    let fmd = self.md(fake_mid);
+                    let mut locals = fmd.locals.borrow_mut();
+                    let entry = locals.entry(fake_cls.n).or_default();
+                    for (mname, mnode) in &mymethods {
+                        entry.insert(*mname, vec![*mnode]);
+                    }
+                }
+                // new_targets.append(fake.instantiate_class())
+                let inst = self.instantiate_class(fake_cls);
+                let ph = placeholders.next().expect("placeholder");
+                self.redirects.borrow_mut().insert(ph, crate::value::NV::V(inst));
+                new_targets.push(ph);
+                made_any = true;
+                if stmt_value.is_none() {
+                    continue;
+                }
+                dunder_members.push((local_str.clone(), fake_cls));
+            }
+            let _ = made_any;
+            // node.locals[local] = new_targets (REPLACE)
+            let mut locals = node_md.locals.borrow_mut();
+            let map = locals.entry(node.n).or_default();
+            map.insert(*local, new_targets);
+        }
+        // _value2member_map_ = [Dict()] and __members__ = [Dict(...)]
+        let extra = self.alloc_placeholders(2);
+        self.redirects.borrow_mut().insert(
+            extra[0],
+            crate::value::NV::V(Value::SynthDict {
+                items: std::rc::Rc::new(Vec::new()),
+            }),
+        );
+        let member_items: Vec<(Value, Value)> = dunder_members
+            .iter()
+            .map(|(k, fake)| {
+                (
+                    Value::SynthConst(std::rc::Rc::new(pyast::tree::ConstValue::Str(
+                        k.clone().into(),
+                    ))),
+                    self.instantiate_class(*fake),
+                )
+            })
+            .collect();
+        self.redirects.borrow_mut().insert(
+            extra[1],
+            crate::value::NV::V(Value::SynthDict {
+                items: std::rc::Rc::new(member_items),
+            }),
+        );
+        {
+            let mut locals = node_md.locals.borrow_mut();
+            let map = locals.entry(node.n).or_default();
+            map.insert(self.sym("_value2member_map_"), vec![extra[0]]);
+            map.insert(self.sym("__members__"), vec![extra[1]]);
+        }
+        // guessed `name` property when no member named "name"
+        if !target_names.contains("name") {
+            let src = "@property\ndef name(self):\n    return ''\n";
+            if let Some(mid) = self.build_template_module(src, "") {
+                let sym = self.sym("name");
+                let func = {
+                    let fmd = self.md(mid);
+                    let locals = fmd.locals.borrow();
+                    locals
+                        .get(&NodeId::MODULE)
+                        .and_then(|l| l.get(&sym))
+                        .and_then(|v| v.first())
+                        .copied()
+                };
+                if let Some(func) = func {
+                    let mut locals = node_md.locals.borrow_mut();
+                    let map = locals.entry(node.n).or_default();
+                    map.insert(sym, vec![func]);
+                }
+            }
+        }
+    }
+
+    /// source slice for an expression (as_string() approximation: enum
+    /// member values are formatted back into the fake class source).
+    fn expr_source(&self, g: GNode) -> Option<String> {
+        let md = self.md(g.m);
+        if md.file.starts_with('<') {
+            return None;
+        }
+        let n = &md.tree.nodes[g.n.idx()];
+        let bytes = std::fs::read(&md.file).ok()?;
+        let text = String::from_utf8_lossy(&bytes);
+        let lines: Vec<&str> = text.split_inclusive('\n').collect();
+        let (l1, c1, l2, c2) = (
+            n.fromlineno as usize,
+            n.col_offset.max(0) as usize,
+            n.end_lineno as usize,
+            n.end_col_offset.max(0) as usize,
+        );
+        if l1 == 0 || l2 == 0 || l1 > lines.len() || l2 > lines.len() {
+            return None;
+        }
+        let slice = if l1 == l2 {
+            lines[l1 - 1].as_bytes().get(c1..c2).map(|b| String::from_utf8_lossy(b).into_owned())?
+        } else {
+            let mut out = String::from_utf8_lossy(lines[l1 - 1].as_bytes().get(c1..)?).into_owned();
+            for l in &lines[l1..l2 - 1] {
+                out.push_str(l);
+            }
+            out.push_str(&String::from_utf8_lossy(lines[l2 - 1].as_bytes().get(..c2)?));
+            out
+        };
+        let s = slice.trim().to_string();
+        if s.is_empty() {
+            None
+        } else {
+            Some(s)
+        }
+    }
+}
+
+/// "{}".format(python_value) for non-str Consts in the enum fake source.
+fn const_format(c: &pyast::tree::ConstValue) -> String {
+    use pyast::tree::{ConstValue, IntValue};
+    match c {
+        ConstValue::None => "None".to_string(),
+        ConstValue::Bool(b) => if *b { "True" } else { "False" }.to_string(),
+        ConstValue::Int(IntValue::Small(i)) => i.to_string(),
+        ConstValue::Int(IntValue::Big(s)) => s.to_string(),
+        ConstValue::Float(f) => pyast::pyrepr::repr_float(*f),
+        ConstValue::Complex { .. } => "0j".to_string(),
+        ConstValue::Bytes(_) => "b''".to_string(),
+        ConstValue::Ellipsis => "Ellipsis".to_string(),
+        ConstValue::NotImplemented => "NotImplemented".to_string(),
+        ConstValue::Str(s) => s.to_string(),
+        ConstValue::StrSurrogate(_) => String::new(),
     }
 }
