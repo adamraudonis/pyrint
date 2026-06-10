@@ -168,6 +168,58 @@ pylint behavior — bugs are replicated.
      dataclasses field tips; six.with_metaclass infer_call_result hack;
      recursion-guard probe-tuning (still 350); namedtuple/enum leftover:
      functional Enum("X", "a b") call tip.
+   - **phase 3 (diff-reduction round 2, N=200)**: 14.3k -> 4.2k diff lines.
+     LANDED (probe-verified, all in harness/infertests/): (a) yield-before-
+     break cap semantics — node_ng.py:164-167 suspends at `yield U` BEFORE
+     `break`; the post-loop cache write only runs if the consumer pulls
+     again, so abandoning consumers leave NO poisoned [..,U] cache entries
+     (os.path/abspath chains); (b) CallSite._unpack_* MUTATES the passed
+     context: extra_context = argument_context_map (arguments.py:95/:135) —
+     the Call._infer populated map is clobbered before arg inference (HUGE:
+     django 2864->619); the _arguments_infer_argname path instead builds
+     CallSite with context=None → FRESH unpack contexts + caller's
+     extra_context as the map (protocols.py:387-389, super().m(**kwargs));
+     (c) inference_tip.py:50-52 — EMPTY contexts are nulled before tips run:
+     tip-internal inference burns its own counters, never the caller's;
+     (d) tips_active per module — _explicit_inference only exists after the
+     module's transform phase (builder.py:175-177): delayed_assattr
+     inference runs tip-less (super() in _py_abc → Inst:builtins.super);
+     (e) ancestors() does NOT clone the context (lookupname preserved into
+     base-infer cache keys); declared_metaclass full port (bases loop runs
+     EVERY call, with_metaclass hide-override side table, _find_metaclass
+     recursion drops ctx); _metaclass_lookup_attribute copies ctx + runs
+     attrs through the _infer_stmts hop before BM wrapping; (f) numpy brains
+     (generated numpy_templates.rs: ndarray class template + multiarray/
+     function_base/numeric member tips; lookup-based predicates work without
+     numpy importable; pandas -55%); (g) ObjectModel __new__/__init__
+     synthetic BMs (+ Super model fallback incl. __thisclass__ etc.,
+     InstanceModel __doc__ = class docstring); (h) exact f-string port
+     (FormattedValue format() of astroid objects → 'Instance of X'/
+     'Uninferable' strings; JoinedStr {Uninferable} marker, first-failure-
+     only U, node._infer no-bump pulls); (i) isinstance/len rewrites per
+     helpers.py (object_type set semantics, bases.Instance sanitisation,
+     object_len raise tail); (j) dataclass engine transform: instance_attrs
+     Unknown placeholders + infer_dataclass_attribute/field_call tips;
+     (k) DictModel items/keys/values special BMs + DictItems iteration;
+     (l) brain_type/brain_pathlib/brain_collections/brain_attrs predicate+
+     tip ports (predicate side effects at scan time, applicability recorded
+     in side tables); (m) path_wrapper dedup keys synthetic values by Rc
+     pointer identity (BoolOp product reuse); (n) assigned_stmts node
+     results re-infer via _infer_stmts hop (nvify); (o) snapshot/sys.json
+     regenerated in a dump_infer-equivalent process (sys.modules count is
+     oracle-process-dependent: 203; harness/regen_sys_snapshot.py).
+     N=200 differing files/lines: django 34/501, pylfunc 18/34, pandas
+     91/1817, salt 60/1076, airflow 38/431, sentry 34/224, core 33/138.
+     REMAINING (by volume): deep-chain counter drift in pandas/salt asv
+     benchmarks (DataFrame/Index call chains hit the 100-cap a few bumps
+     apart — values flip U<->Inst near the boundary; needs more per-bump
+     parity, use PRYLINT_DUMP_COUNTS + dump_infer_count.py --only=...);
+     %-formatting of non-tuple RHS still U-only; descriptor __get__ model
+     (FunctionModel.attr___get__, 2 pylfunc lines); brain_re Pattern
+     __class_getitem__; six.with_metaclass infer_call_result hack (hidden
+     temporary_class — side tables exist, call-result synthesis not wired);
+     subprocess/multiprocessing brains; recursion guard still 350 (no
+     probe-detected divergence this round).
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the
