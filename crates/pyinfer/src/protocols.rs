@@ -1705,7 +1705,16 @@ impl Engine {
                 ctx2.constraints.borrow_mut().insert(name_sym, Rc::new(cs));
                 self.infer_stmts(&stmts, Some(&ctx2), Some(frame)).raise_if_nothing()
             }
-            NodeKind::AssignAttr { .. } => self.infer_attribute_load(node, ctx).raise_if_nothing(),
+            NodeKind::AssignAttr { .. } => {
+                // AssignAttr.infer_lhs (node_classes.py:1178-1183):
+                // raise_if_nothing_inferred + PATH_WRAPPER — re-entry on
+                // the same (node, lookupname) is an empty generator ->
+                // InferenceError (blocks `self.x += 1` lhs recursion)
+                if ctx.push(node) {
+                    return Flow::err(ErrKind::Inference);
+                }
+                self.infer_attribute_load(node, ctx).raise_if_nothing()
+            }
             NodeKind::Subscript { .. } => self.infer_subscript(node, ctx).raise_if_nothing(),
             _ => self.infer(node, ctx),
         }

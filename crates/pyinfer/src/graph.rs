@@ -701,6 +701,84 @@ impl Engine {
     /// Allocate `count` orphan Unknown nodes in a fresh synthetic module —
     /// hosts for redirect placeholders (enum-member instances and other
     /// VALUE-valued locals entries).
+    /// PropertyModel._init_function (objectmodel.py:896-921): a fresh
+    /// empty FunctionDef (no body, empty Arguments) named `name`,
+    /// reparented under `parent` so qname composes through it.
+    pub fn alloc_synth_funcdef(&self, name: &str, parent: GNode) -> GNode {
+        let mut interner = pyast::tree::Interner::default();
+        let name_sym = interner.intern(name);
+        let mut nodes: Vec<Node> = Vec::new();
+        nodes.push(Node {
+            kind: NodeKind::Module(Box::new(ModuleData {
+                name: "".into(),
+                file: "<synthetic>".into(),
+                package: false,
+                body: vec![pyast::NodeId(1)],
+                doc_node: None,
+                future_imports: Vec::new(),
+            })),
+            parent: NodeId::MODULE,
+            fromlineno: 0,
+            col_offset: 0,
+            end_lineno: 0,
+            end_col_offset: -1,
+            tolineno: 0,
+        });
+        nodes.push(Node {
+            kind: NodeKind::FunctionDef(Box::new(pyast::tree::FunctionData {
+                name: name_sym,
+                decorators: None,
+                args: pyast::NodeId(2),
+                returns: None,
+                type_params: Vec::new(),
+                body: Vec::new(),
+                doc_node: None,
+            })),
+            parent: NodeId::MODULE,
+            fromlineno: 0,
+            col_offset: 0,
+            end_lineno: 0,
+            end_col_offset: -1,
+            tolineno: 0,
+        });
+        nodes.push(Node {
+            kind: NodeKind::Arguments(Box::new(pyast::tree::ArgumentsData {
+                posonlyargs: Vec::new(),
+                args: Vec::new(),
+                vararg: None,
+                vararg_node: None,
+                kwonlyargs: Vec::new(),
+                kwarg: None,
+                kwarg_node: None,
+                defaults: Vec::new(),
+                kw_defaults: Vec::new(),
+                annotations: Vec::new(),
+                posonlyargs_annotations: Vec::new(),
+                kwonlyargs_annotations: Vec::new(),
+                varargannotation: None,
+                kwargannotation: None,
+                tc_last_posonly: false,
+                tc_last_arg: false,
+                tc_last_kwonly: false,
+            })),
+            parent: pyast::NodeId(1),
+            fromlineno: 0,
+            col_offset: 0,
+            end_lineno: 0,
+            end_col_offset: -1,
+            tolineno: 0,
+        });
+        let tree = Tree {
+            nodes,
+            interner,
+            locals: FxHashMap::default(),
+        };
+        let mid = self.register_module("".to_string(), "<synthetic>".to_string(), tree, false, true);
+        let g = GNode { m: mid, n: pyast::NodeId(1) };
+        self.reparents.borrow_mut().insert(g, parent);
+        g
+    }
+
     pub fn alloc_placeholders(&self, count: usize) -> Vec<GNode> {
         let interner = pyast::tree::Interner::default();
         let mut nodes: Vec<Node> = Vec::new();

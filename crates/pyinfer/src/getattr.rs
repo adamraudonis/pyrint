@@ -1236,8 +1236,24 @@ impl Engine {
         let name_str = self.sname(name);
         match name_str.as_str() {
             "fget" => return Ok(Flow::one(Value::Node(func))),
-            "fset" | "deleter" | "getter" | "setter" => {
-                // PropertyModel: functions; approximate with the function
+            "setter" | "deleter" | "getter" => {
+                // PropertyModel attr_setter/deleter/getter
+                // (objectmodel.py:896-921 + 988-998): a FRESH empty
+                // FunctionDef named after the accessor, parented to the
+                // Property (qname = <property qname>.<accessor>).
+                // The model result goes through _infer_stmts ->
+                // stmt.infer — a full hop on the fresh node (+1).
+                let _ = owner;
+                let synth = self.alloc_synth_funcdef(&name_str, func);
+                let c = match ctx {
+                    Some(c) => Rc::clone(c),
+                    None => Ctx::new(),
+                };
+                return Ok(self.infer(synth, &c));
+            }
+            "fset" => {
+                // attr_fset finds the @<name>.setter sibling; keep the
+                // function approximation (rarely dumped)
                 let _ = owner;
                 return Ok(Flow::one(Value::Node(func)));
             }
@@ -1909,7 +1925,36 @@ impl Engine {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
                 (md.tree.s(d.name).to_string(), d.decorators)
             }
-            NodeKind::Lambda(_) => return FType::Function,
+            NodeKind::Lambda(d) => {
+                // Lambda.type (scoped_nodes.py:908-918): "method" when the
+                // first argument is literally named `self` and the lambda's
+                // parent scope is a ClassDef
+                let first_is_self = match &md.tree.nodes[d.args.idx()].kind {
+                    NodeKind::Arguments(a) => {
+                        let first = a.posonlyargs.first().or(a.args.first());
+                        first
+                            .map(|&arg| match &md.tree.nodes[arg.idx()].kind {
+                                NodeKind::AssignName { name } => md.tree.s(*name) == "self",
+                                _ => false,
+                            })
+                            .unwrap_or(false)
+                    }
+                    _ => false,
+                };
+                if first_is_self {
+                    let in_class = self
+                        .parent(func)
+                        .map(|p| {
+                            let s = self.scope(p);
+                            self.kind_is(s, |k| matches!(k, NodeKind::ClassDef(_)))
+                        })
+                        .unwrap_or(false);
+                    if in_class {
+                        return FType::Method;
+                    }
+                }
+                return FType::Function;
+            }
             _ => return FType::Function,
         };
         // extra_decorators: `meth = staticmethod(meth)` in the class body
@@ -2344,6 +2389,9 @@ impl Engine {
         };
         let ph = self.alloc_synth_node(kind);
         self.implicit_owner.borrow_mut().insert(ph, cls);
+        // parent = the class (the model Const's statement() resolves to it
+        // during _filter_stmts when the name is looked up from class scope)
+        self.reparents.borrow_mut().insert(ph, cls);
         self.implicit_locals.borrow_mut().insert((cls, which), ph);
         ph
     }

@@ -983,6 +983,23 @@ impl Engine {
                 }
             }
         }
+        // UnboundMethod delegates to self._proxied.infer_call_result —
+        // for a Lambda that is Lambda.infer_call_result = body.infer
+        // (scoped_nodes.py:987-993)
+        let lambda_body = {
+            let md = self.md(func.m);
+            match &md.tree.nodes[func.n.idx()].kind {
+                NodeKind::Lambda(d) => Some(GNode { m: func.m, n: d.body }),
+                _ => None,
+            }
+        };
+        if let Some(body) = lambda_body {
+            let c = match ctx {
+                Some(c) => Rc::clone(c),
+                None => Ctx::new(),
+            };
+            return self.infer_to(body, &c, sink);
+        }
         self.function_infer_call_result_to(func, caller, ctx, sink)
     }
 

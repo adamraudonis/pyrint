@@ -704,6 +704,17 @@ impl Engine {
     }
 
     fn infer_assign_attr_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
+        // AssignAttr._infer (node_classes.py:1165-1177) is IDENTICAL to
+        // AssignName._infer, including the AugAssign delegation:
+        // `self.x += 1` re-enters AugAssign.infer, whose infer_lhs is
+        // path_wrapped on the SAME (target-node, lookupname) key — the
+        // recursion blocks -> InferenceError -> _infer_stmts yields U
+        let parent = self.parent(node);
+        if let Some(p) = parent {
+            if self.kind_is(p, |k| matches!(k, NodeKind::AugAssign { .. })) {
+                return self.infer_to(p, ctx, sink);
+            }
+        }
         let stmts = match self.assigned_stmts(node, Some(ctx), None) {
             Ok(s) => s,
             Err(e) => return End::Raised(e),

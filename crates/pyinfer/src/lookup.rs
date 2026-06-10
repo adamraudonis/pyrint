@@ -161,11 +161,34 @@ impl Engine {
     /// mixin.py:78-98 _scope_lookup
     pub fn base_scope_lookup(&self, scope: GNode, node: GNode, name: GSym, offset: i32) -> LookupResult {
         let stmts = {
+            // ClassDef.implicit_locals() (scoped_nodes.py:1911-1933): the
+            // implicit __module__/__qualname__ Const + __annotations__
+            // Unknown sit FIRST in every class's locals — Name lookups
+            // inside the class body resolve them
+            let implicit: Option<GNode> = if self
+                .kind_is(scope, |k| matches!(k, NodeKind::ClassDef(_)))
+            {
+                match self.sname(name).as_str() {
+                    "__module__" => Some(self.implicit_class_local(scope, 0)),
+                    "__qualname__" => Some(self.implicit_class_local(scope, 1)),
+                    "__annotations__" => Some(self.implicit_class_local(scope, 2)),
+                    _ => None,
+                }
+            } else {
+                None
+            };
             let md = self.md(scope.m);
             let locals = md.locals.borrow();
-            match locals.get(&scope.n).and_then(|l| l.get(&name)) {
-                Some(list) => self.filter_stmts(node, list, scope, offset),
-                None => Vec::new(),
+            let real = locals.get(&scope.n).and_then(|l| l.get(&name));
+            if implicit.is_some() || real.is_some() {
+                let mut list: Vec<GNode> = Vec::new();
+                list.extend(implicit);
+                if let Some(r) = real {
+                    list.extend(r.iter().copied());
+                }
+                self.filter_stmts(node, &list, scope, offset)
+            } else {
+                Vec::new()
             }
         };
         if !stmts.is_empty() {
