@@ -135,6 +135,39 @@ pylint behavior — bugs are replicated.
      str.format fold, functools.partial, typing brain (TypeVar/NewType
      template, _alias/_TupleType/_CallableType synthetic classes,
      typing.X[...] subscripts, TypedDict) via template-module parsing.
+   - **phase 2 (diff-reduction round, N=200)**: 22.3k -> 14.3k diff lines.
+     LANDED: (a) lazy-pull restructure — sink-based generator-exact
+     inference (Sink/Drive/End in value.rs; abandonment skips cache writes
+     + post-yield bumps; path poisoning across callees; single-pull next()
+     sites incl. safe_infer/_infer_builtin_new/declared_metaclass/binop/
+     unaryop/getitem/context-managers); (b) _infer_type_call +
+     _infer_type_new_call via runtime synthetic-class modules
+     (build_synth_class + Engine.redirects); (c) enum class transform +
+     namedtuple brain (4 tips) + type()-1-arg set semantics;
+     TRANSFORM CACHE INVALIDATION: every applied transform wipes the GLOBAL
+     inference cache (transforms.py:66-72) — ported as transforms.rs
+     wipe_scan (registration-ordered predicates incl. inference-bearing
+     ones) run at end of every build; EmptyNode._infer replays
+     manager.infer_ast_from_something via module igetattr under the SHARED
+     context (snapshot "ek" field; snapshots REGENERATED); streaming
+     ancestors()/exact _class_type/_is_metaclass/ClassDef.slots()/
+     _can_assign_attr/delayed_assattr; snapshot loader fixes (Return nodes
+     — str/bytes stub bodies!, live Instance locals, NotImplemented const).
+     TOOLS: PRYLINT_DUMP_COUNTS + PRYLINT_TRACE_INFER (rust) and
+     harness/dump_infer_count.py (oracle) — per-node nodes_inferred
+     counter diffing + NodeNG.infer trace diffing localize counter-parity
+     bugs exactly; harness/infertests/ + run_infertests.sh regression
+     probes (7 probes, all PASS).
+     N=200 differing files/lines: django 61/2959, pylfunc 34/111, pandas
+     132/6499, salt 104/2667, airflow 76/976, sentry 77/600, core 75/505.
+     REMAINING (by volume): counter/cache-dynamics clusters (U<->Inst/Class
+     flips, dup values — continue with the tracer; next known divergence:
+     metaclass-lookup re-pull timing in the __slots__ igetattr chain, see
+     /tmp/probe10 os.path.abspath trace); brain_numpy inference tips
+     (pandas Func:.array ~400 lines; wipe predicates ported, tips not);
+     dataclasses field tips; six.with_metaclass infer_call_result hack;
+     recursion-guard probe-tuning (still 350); namedtuple/enum leftover:
+     functional Enum("X", "a b") call tip.
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the
