@@ -13,16 +13,28 @@ use crate::value::{GNode, GSym, NV};
 pub type LookupResult = (GNode, Vec<NV>);
 
 impl Engine {
-    /// LookupMixIn.lookup — lru_cached on (node, name).
+    /// LookupMixIn.lookup — `@lru_cache` with the DEFAULT maxsize=128
+    /// (_base_nodes.py:262). Exact functools semantics: hits refresh
+    /// recency; an insert at capacity evicts the least-recently-used
+    /// entry. Evictions matter: re-misses recompute against LIVE locals
+    /// (cross-module delayed_assattr mutations) and re-mint fresh
+    /// module-model Consts (__name__ hop bumps fire again).
     pub fn lookup(&self, node: GNode, name: GSym) -> Rc<LookupResult> {
-        if let Some(hit) = self.lookup_cache.borrow().get(&(node, name)) {
-            return Rc::clone(hit);
+        let tick = self.lookup_tick.get() + 1;
+        self.lookup_tick.set(tick);
+        if let Some(entry) = self.lookup_cache.borrow_mut().get_mut(&(node, name)) {
+            entry.1 = tick;
+            return Rc::clone(&entry.0);
         }
         let scope = self.scope(node);
         let res = Rc::new(self.scope_lookup(scope, node, name, 0));
-        self.lookup_cache
-            .borrow_mut()
-            .insert((node, name), Rc::clone(&res));
+        let mut cache = self.lookup_cache.borrow_mut();
+        if cache.len() >= 128 {
+            if let Some((&oldest, _)) = cache.iter().min_by_key(|(_, e)| e.1) {
+                cache.remove(&oldest);
+            }
+        }
+        cache.insert((node, name), (Rc::clone(&res), tick));
         res
     }
 

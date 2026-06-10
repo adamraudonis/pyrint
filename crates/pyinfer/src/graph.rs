@@ -143,8 +143,17 @@ pub struct Engine {
     pub iattrs: RefCell<FxHashMap<GNode, IndexMap<GSym, Vec<GNode>>>>,
     /// global inference cache (context.py:19-23)
     pub inf_cache: RefCell<FxHashMap<InfKey, Rc<Vec<Value>>>>,
-    /// LookupMixIn.lookup lru_cache
-    pub lookup_cache: RefCell<FxHashMap<(GNode, GSym), Rc<crate::lookup::LookupResult>>>,
+    /// LookupMixIn.lookup `@lru_cache` — DEFAULT maxsize=128
+    /// (_base_nodes.py:262)! One tiny GLOBAL LRU for all (node, name)
+    /// pairs: hits refresh recency, inserts beyond 128 evict the least
+    /// recent. Eviction is semantic: a re-MISS recomputes the lookup
+    /// against LIVE module locals (delayed_assattr from later-built
+    /// modules lands in earlier modules' locals — e.g. salt compat.py's
+    /// `copy._deepcopy_dispatch = pre_dispatch` only becomes visible to
+    /// copy.py Name lookups after the stale entry ages out).
+    pub lookup_cache:
+        RefCell<FxHashMap<(GNode, GSym), (Rc<crate::lookup::LookupResult>, u64)>>,
+    pub lookup_tick: Cell<u64>,
     /// FunctionDef.type cached_property
     pub ftype_cache: RefCell<FxHashMap<GNode, FType>>,
     /// ClassDef._type memo (scoped_nodes.py:1759-1762 — persists for the run)
@@ -282,6 +291,7 @@ impl Engine {
             iattrs: RefCell::new(FxHashMap::default()),
             inf_cache: RefCell::new(FxHashMap::default()),
             lookup_cache: RefCell::new(FxHashMap::default()),
+            lookup_tick: Cell::new(0),
             ftype_cache: RefCell::new(FxHashMap::default()),
             cls_type_cache: RefCell::new(FxHashMap::default()),
             slots_cache: RefCell::new(FxHashMap::default()),
