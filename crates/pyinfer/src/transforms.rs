@@ -920,6 +920,8 @@ impl Engine {
             if attr == "parents" {
                 if let Ok(Value::Inst { cls }) = self.infer_first(value, None) {
                     if self.qname(cls) == "pathlib._PathParents" {
+                        // tip applicability is decided HERE (transform time)
+                        self.pathlib_subscripts.borrow_mut().insert(g);
                         self.wipe();
                     }
                 }

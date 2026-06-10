@@ -43,6 +43,8 @@ pub enum Tip {
     NumpyNdarray,
     /// brain_type: Name "type" directly under a Subscript
     TypeSubscript,
+    /// brain_pathlib: <path>.parents[const] (predicate matched at scan time)
+    PathlibParents,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -99,6 +101,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::NumpyMember(i) => (7, i),
         Tip::NumpyNdarray => (7, 31),
         Tip::TypeSubscript => (7, 30),
+        Tip::PathlibParents => (7, 29),
     }
 }
 
@@ -203,8 +206,12 @@ impl Engine {
     /// build; they are pure syntactic checks so this is equivalent).
     fn find_tip(&self, node: GNode) -> Option<Tip> {
         let md = self.md(node.m);
-        // Subscript tip: typing.X[...] (brain_typing _looks_like_typing_subscript)
+        // Subscript tips: brain_pathlib parents (decided at scan time),
+        // then typing.X[...] (brain_typing _looks_like_typing_subscript)
         if let NodeKind::Subscript { value, .. } = &md.tree.nodes[node.n.idx()].kind {
+            if self.pathlib_subscripts.borrow().contains(&node) {
+                return Some(Tip::PathlibParents);
+            }
             if self.looks_like_typing_subscript(GNode { m: node.m, n: *value }) {
                 return Some(Tip::TypingSubscript);
             }
@@ -448,7 +455,30 @@ impl Engine {
                 self.tip_numpy_extract(crate::numpy_templates::NUMPY_NDARRAY_SRC, ctx)
             }
             Tip::TypeSubscript => self.tip_type_subscript(node, ctx),
+            Tip::PathlibParents => self.tip_pathlib_parents(node, ctx),
         }
+    }
+
+    /// brain_pathlib.infer_parents_subscript: Const slice -> Inst of the
+    /// REAL pathlib.Path (PATH_TEMPLATE re-imports pathlib; the Name infer
+    /// bumps the live context)
+    fn tip_pathlib_parents(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let md = self.md(node.m);
+        let slice_is_const = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Subscript { slice, .. } => {
+                matches!(md.tree.nodes[slice.idx()].kind, NodeKind::Const(_))
+            }
+            _ => false,
+        };
+        if !slice_is_const {
+            return None; // UseInferenceDefault
+        }
+        let flow = self.tip_numpy_extract("from pathlib import Path\nPath\n", ctx)?;
+        let cls = flow.vals.into_iter().find_map(|v| match v {
+            Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => Some(g),
+            _ => None,
+        })?;
+        Some(Flow::ok(vec![self.instantiate_class(cls)]))
     }
 
     /// brain_type.infer_type_sub: `type[...]` only when "type" resolves to
@@ -475,10 +505,14 @@ impl Engine {
     fn tip_numpy_extract(&self, source: &str, ctx: &Rc<Ctx>) -> Option<Flow> {
         let mid = self.build_template_module(source, "")?;
         let md = self.md(mid);
-        let last = match &md.tree.nodes[pyast::NodeId::MODULE.idx()].kind {
+        let mut last = match &md.tree.nodes[pyast::NodeId::MODULE.idx()].kind {
             NodeKind::Module(d) => *d.body.last()?,
             _ => return None,
         };
+        // extract_node unwraps Expr statements to their value
+        if let NodeKind::Expr { value } = &md.tree.nodes[last.idx()].kind {
+            last = *value;
+        }
         let g = GNode { m: mid, n: last };
         Some(self.infer(g, ctx))
     }

@@ -179,6 +179,9 @@ pub struct Engine {
     /// ClassDef.hide — true only for synthesized temporary_class nodes
     /// (scoped_nodes.py:1603 with_metaclass hack)
     pub hidden_classes: RefCell<FxHashSet<GNode>>,
+    /// Subscript nodes whose brain_pathlib parents-predicate matched at
+    /// transform time (predicates run inference; tips are FIXED then)
+    pub pathlib_subscripts: RefCell<FxHashSet<GNode>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -226,6 +229,7 @@ impl Engine {
             meta_override: RefCell::new(FxHashMap::default()),
             obj_model_funcs: RefCell::new(None),
             hidden_classes: RefCell::new(FxHashSet::default()),
+            pathlib_subscripts: RefCell::new(FxHashSet::default()),
         };
         e.bootstrap();
         e

@@ -1330,7 +1330,36 @@ impl Engine {
             }
         }
         if !found {
-            return End::Raised(ErrKind::Attribute);
+            // objects.py:166-169: `if not found and name in
+            // self.special_attributes: yield ...` — SuperModel
+            // (__thisclass__/__self_class__/__self__/__class__) + the
+            // inherited ObjectModel __new__/__init__ bound methods
+            let (mro_pointer, self_class) = match owner {
+                Value::Super { mro_pointer, self_class, .. } => (*mro_pointer, *self_class),
+                _ => return End::Raised(ErrKind::Attribute),
+            };
+            let model: Option<Value> = match name_str.as_str() {
+                "__thisclass__" => Some(Value::Node(mro_pointer)),
+                "__self_class__" => Some(Value::Node(self_class)),
+                "__self__" => Some((*mro_type).clone()),
+                "__new__" => self.obj_model_func_nodes().map(|(f, _)| Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(owner.clone()),
+                }),
+                "__init__" => self.obj_model_func_nodes().map(|(_, f)| Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(owner.clone()),
+                }),
+                _ => None,
+            };
+            let _ = scope;
+            match model {
+                Some(v) => {
+                    yield_v!(sink, v);
+                    return End::Done;
+                }
+                None => return End::Raised(ErrKind::Attribute),
+            }
         }
         End::Done
     }
