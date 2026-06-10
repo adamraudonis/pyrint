@@ -783,8 +783,6 @@ impl<'a> Builder<'a> {
     /// venv where third-party modules are NOT importable (so astroid's
     /// inference falls back to literal name matching for them).
     fn looks_like_dataclass_decorator(&self, dec: NodeId, start_scope: NodeId) -> bool {
-        const DATACLASS_MODULES: &[&str] =
-            &["dataclasses", "marshmallow_dataclass", "pydantic.dataclasses"];
         let func = match &self.nodes[dec.idx()].kind {
             NodeKind::Call { func, .. } => *func,
             _ => dec,
@@ -808,13 +806,17 @@ impl<'a> Builder<'a> {
                                 if local != n {
                                     continue;
                                 }
-                                if DATACLASS_MODULES.contains(&m.as_str())
+                                // resolvable module (only stdlib `dataclasses`
+                                // in the pinned venv): inference succeeds and
+                                // matches the real FunctionDef name
+                                if m == "dataclasses"
                                     && self.interner.get(*orig) == "dataclass"
                                 {
                                     return true;
                                 }
-                                // unresolvable (third-party) module: astroid
-                                // inference fails -> literal name fallback
+                                // unresolvable (pydantic.dataclasses, etc.):
+                                // astroid inference fails -> literal alias
+                                // name fallback (`dataclass` only)
                                 if m != "dataclasses" && literal {
                                     return true;
                                 }
@@ -930,13 +932,51 @@ impl<'a> Builder<'a> {
                 }
                 NodeKind::Attribute { expr: inner, attrname: a, .. } => {
                     let (inner, a) = (*inner, *a);
-                    if matches!(self.nodes[inner.idx()].kind, NodeKind::Name { .. }) {
+                    if let NodeKind::Name { name: iname } = &self.nodes[inner.idx()].kind {
+                        let iname = *iname;
                         if let Some((cls, FuncKind::Method)) = self.first_param_class(inner) {
                             if self.interner.get(a) == "__class__" {
                                 // self.__class__ infers to the class
                                 targets.push(cls);
                             } else if let Some(classes) = self_attr_map.get(&(cls, a)) {
                                 targets.extend(classes.iter().copied());
+                            }
+                        } else if self.interner.get(a) == "__class__" {
+                            // `v = LocalClass(); v.__class__.attr = ...`:
+                            // v infers to an Instance, .__class__ to the class
+                            let scope = self.frame_of(self.nodes[inner.idx()].parent);
+                            for b in self.lookup_bindings(scope, iname) {
+                                if !matches!(
+                                    self.nodes[b.idx()].kind,
+                                    NodeKind::AssignName { .. }
+                                ) {
+                                    continue;
+                                }
+                                let stmt = self.statement_of(b);
+                                let NodeKind::Assign { value, .. } =
+                                    &self.nodes[stmt.idx()].kind
+                                else {
+                                    continue;
+                                };
+                                let NodeKind::Call { func, .. } =
+                                    &self.nodes[value.idx()].kind
+                                else {
+                                    continue;
+                                };
+                                let NodeKind::Name { name: kname } =
+                                    &self.nodes[func.idx()].kind
+                                else {
+                                    continue;
+                                };
+                                let kscope = self.frame_of(self.nodes[func.idx()].parent);
+                                for kb in self.lookup_bindings(kscope, *kname) {
+                                    if matches!(
+                                        self.nodes[kb.idx()].kind,
+                                        NodeKind::ClassDef(_)
+                                    ) {
+                                        targets.push(kb);
+                                    }
+                                }
                             }
                         }
                     }
@@ -1465,6 +1505,68 @@ impl<'a> Builder<'a> {
                 _ => {}
             }
         }
+
+        // brain_typing infer_typing_generic_class_pep695 (PY312+): an
+        // inference TIP that adds locals["__class_getitem__"] to a generic
+        // (PEP 695) class when the class is inferred during the transform
+        // phase. In practice that happens when the class is referenced in
+        // some class's bases (the enum predicate is_subtype_of infers every
+        // class's bases) or in a class decorator (attrs/dataclass
+        // predicates infer those).
+        let mut inferred_classes: rustc_hash::FxHashSet<NodeId> = Default::default();
+        for i in 0..n {
+            let id = NodeId(i as u32);
+            let NodeKind::ClassDef(d) = &self.nodes[i].kind else { continue };
+            let mut referenced: Vec<NodeId> = Vec::new();
+            for &base in &d.bases {
+                match &self.nodes[base.idx()].kind {
+                    NodeKind::Subscript { value, .. } => referenced.push(*value),
+                    _ => referenced.push(base),
+                }
+            }
+            if let Some(dec_id) = d.decorators {
+                if let NodeKind::Decorators { nodes } = &self.nodes[dec_id.idx()].kind {
+                    for &dn in nodes {
+                        match &self.nodes[dn.idx()].kind {
+                            NodeKind::Call { func, .. } => referenced.push(*func),
+                            _ => referenced.push(dn),
+                        }
+                    }
+                }
+            }
+            let start_scope = self.frame_of(self.nodes[id.idx()].parent);
+            for r in referenced {
+                let name = match &self.nodes[r.idx()].kind {
+                    NodeKind::Name { name } => *name,
+                    // `A.Inner` in bases: inference evaluates Name A first
+                    NodeKind::Attribute { expr, .. } => match &self.nodes[expr.idx()].kind {
+                        NodeKind::Name { name } => *name,
+                        _ => continue,
+                    },
+                    _ => continue,
+                };
+                for b in self.lookup_bindings(start_scope, name) {
+                    if matches!(self.nodes[b.idx()].kind, NodeKind::ClassDef(_)) {
+                        inferred_classes.insert(b);
+                    }
+                }
+            }
+        }
+        for i in 0..n {
+            let id = NodeId(i as u32);
+            if !inferred_classes.contains(&id) {
+                continue;
+            }
+            let is_generic = matches!(
+                &self.nodes[i].kind,
+                NodeKind::ClassDef(d) if !d.type_params.is_empty()
+            );
+            if !is_generic {
+                continue;
+            }
+            let sym = self.sym("__class_getitem__");
+            self.locals.entry(id).or_default().entry(sym).or_default();
+        }
     }
 
     // ---------- statements ----------
@@ -1741,11 +1843,14 @@ impl<'a> Builder<'a> {
         // (args, body, ..., type_params); name set_local happens LAST
         // (rebuilder._visit_functiondef), so body-level `global` assignments
         // land in the parent scope before the function's own name.
-        let decorators = self.decorators(&f.decorator_list, id);
-        let returns = f.returns.as_ref().map(|r| self.expr(r, id));
+        // Decorators/returns are visited with the function as their frame: a
+        // walrus inside them lands in the FUNCTION's locals (NamedExpr
+        // .frame() resolves through Decorators to the FunctionDef).
         self.locals.entry(id).or_default();
         self.scope_stack.push(ScopeCtx { scope: id, is_comprehension: false });
         self.global_stack.push(rustc_hash::FxHashSet::default());
+        let decorators = self.decorators(&f.decorator_list, id);
+        let returns = f.returns.as_ref().map(|r| self.expr(r, id));
 
         let args = self.arguments(&f.parameters, id, true);
         let body_ids = self.stmts(&f.body, id);
@@ -1802,7 +1907,6 @@ impl<'a> Builder<'a> {
     fn class_def(&mut self, id: NodeId, c: &ast::StmtClassDef, parent: NodeId) -> NodeId {
         let name = self.sym(c.name.as_str());
 
-        let decorators = self.decorators(&c.decorator_list, id);
         self.locals.entry(id).or_default();
         // implicit class locals (astroid ClassDef.implicit_locals: always all three)
         for implicit in ["__module__", "__qualname__", "__annotations__"] {
@@ -1812,7 +1916,10 @@ impl<'a> Builder<'a> {
         // class bodies do NOT push a `global` frame (astroid only pushes
         // _global_names in _visit_functiondef), so nested `global` stmts
         // accumulate in the enclosing function's set.
+        // The class scope is pushed before decorators/bases: a walrus there
+        // resolves its frame() to the ClassDef itself.
         self.scope_stack.push(ScopeCtx { scope: id, is_comprehension: false });
+        let decorators = self.decorators(&c.decorator_list, id);
 
         let mut bases = Vec::new();
         let mut keywords = Vec::new();
@@ -2647,6 +2754,11 @@ impl<'a> Builder<'a> {
         pending: &mut Option<(String, TextRange)>,
     ) {
         if let Some((s, range)) = pending.take() {
+            if s.is_empty() {
+                // e.g. f"""\<newline>...: the literal decodes to nothing;
+                // CPython emits no Constant for it
+                return;
+            }
             let cid = self.push_placeholder();
             self.finish(
                 cid,

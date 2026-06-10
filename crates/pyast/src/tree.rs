@@ -404,10 +404,10 @@ impl Tree {
             MatchValue { value } => out.push(*value),
             MatchSequence { patterns } => out.extend(patterns),
             MatchMapping { keys, patterns, rest } => {
-                for (k, p) in keys.iter().zip(patterns) {
-                    out.push(*k);
-                    out.push(*p);
-                }
+                // astroid _astroid_fields = ("keys", "patterns", "rest"):
+                // all keys first, then all patterns (NOT interleaved)
+                out.extend(keys);
+                out.extend(patterns);
                 push_opt(out, rest);
             }
             MatchClass { cls, patterns, kwd_patterns, .. } => {

@@ -16,3 +16,12 @@ print(t0 := 5)
 
 class K:
     val = [(kx := 2) for _ in range(2)]
+
+
+class WithDecorators:
+    @(lambda f: f)
+    def plain(self):
+        pass
+
+    def deco_walrus(self, *, default=(dw := 3)):
+        return dw
