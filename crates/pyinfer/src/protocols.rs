@@ -1405,7 +1405,10 @@ impl Engine {
             method_name: String,
             other: Value,
         }
-        let bin_method = bin_op_method(op).ok_or(ErrKind::Inference)?;
+        // AugAssign ops arrive as "+="; the binary method table is keyed on
+        // the base operator (astroid keeps separate AUGMENTED_OP_METHOD).
+        let base_op = if aug { op.trim_end_matches('=') } else { op };
+        let bin_method = bin_op_method(base_op).ok_or(ErrKind::Inference)?;
         let reflected = reflected_name(bin_method);
         let mut methods: Vec<Try> = Vec::new();
         let same_type = match (&left_type, &right_type) {
@@ -1502,7 +1505,7 @@ impl Engine {
             if m.method_name == "__or_union__" {
                 return Ok(vec![Value::UnionType]);
             }
-            match self.invoke_binop_inference(&m.instance, op, &m.other, &m.method_name, ctx) {
+            match self.invoke_binop_inference(&m.instance, base_op, &m.other, &m.method_name, ctx) {
                 Ok(results) => {
                     if results.iter().any(|r| r.is_uninferable()) {
                         return Ok(vec![Value::Uninferable]);

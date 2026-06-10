@@ -150,6 +150,9 @@ pub struct Engine {
     pub b: RefCell<Option<Rc<BuiltinRefs>>>,
     pub isfile_cache: RefCell<FxHashMap<String, bool>>,
     pub isdir_cache: RefCell<FxHashMap<String, bool>>,
+    /// typing-brain synthetic classes, cached per origin node regardless of
+    /// context (astroid pins node._explicit_inference to a fixed lambda)
+    pub typing_tip_cache: RefCell<FxHashMap<GNode, Vec<Value>>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -190,6 +193,7 @@ impl Engine {
             b: RefCell::new(None),
             isfile_cache: RefCell::new(FxHashMap::default()),
             isdir_cache: RefCell::new(FxHashMap::default()),
+            typing_tip_cache: RefCell::new(FxHashMap::default()),
         };
         e.bootstrap();
         e
@@ -940,11 +944,65 @@ impl Engine {
         Ok(id)
     }
 
+    /// build a module from generated source (extract_node-equivalent for
+    /// brain templates). Never cached in astroid_cache; post_build runs so
+    /// ImportFrom names land in locals.
+    pub fn build_template_module(&self, source: &str, modname: &str) -> Option<ModId> {
+        let src = pyast::decode_source(source.as_bytes(), "<template>").ok()?;
+        let outcome = pyast::parse::parse_module(&src, modname, "<template>", false);
+        let tree = outcome.tree?;
+        let id = self.register_module(
+            modname.to_string(),
+            "<template>".to_string(),
+            tree,
+            false,
+            true,
+        );
+        self.post_build(id);
+        Some(id)
+    }
+
     // ---------- _post_build: star imports + delayed assattr ----------
 
     fn post_build(&self, id: ModId) {
         self.add_from_names_to_locals(id);
         self.process_delayed_assattr(id);
+        self.apply_module_extenders(id);
+    }
+
+    /// brain register_module_extender ports (brain/helpers.py:18-29):
+    /// the extension module's locals REPLACE same-named entries; astroid
+    /// reparents the nodes into the target module — we get equivalent
+    /// qnames by naming the template module identically.
+    fn apply_module_extenders(&self, id: ModId) {
+        // never extend the extension templates themselves (infinite build)
+        if self.md(id).file == "<template>" {
+            return;
+        }
+        let name = self.md(id).name.clone();
+        let source: &str = match name.as_str() {
+            // brain_typing._typing_transform (PY312 subset)
+            "typing" => "class Generic:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\nclass ParamSpec:\n    @property\n    def args(self):\n        return ParamSpecArgs(self)\n    @property\n    def kwargs(self):\n        return ParamSpecKwargs(self)\nclass ParamSpecArgs: ...\nclass ParamSpecKwargs: ...\nclass TypeAlias: ...\nclass Type:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\nclass TypeVar:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\nclass TypeVarTuple: ...\nclass ContextManager:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\nclass AsyncContextManager:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\nclass Pattern:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\nclass Match:\n    @classmethod\n    def __class_getitem__(cls, item):  return cls\n",
+            // brain_collections._collections_transform
+            "collections" => "class defaultdict(dict):\n    default_factory = None\n    def __missing__(self, key): pass\n    def __getitem__(self, key): return default_factory\n\nclass deque(object):\n    maxlen = 0\n    def __init__(self, iterable=None, maxlen=None):\n        self.iterable = iterable or []\n    def append(self, x): pass\n    def appendleft(self, x): pass\n    def clear(self): pass\n    def count(self, x): return 0\n    def extend(self, iterable): pass\n    def extendleft(self, iterable): pass\n    def pop(self): return self.iterable[0]\n    def popleft(self): return self.iterable[0]\n    def remove(self, value): pass\n    def reverse(self): return reversed(self.iterable)\n    def rotate(self, n=1): return self\n    def __iter__(self): return self\n    def __reversed__(self): return self.iterable[::-1]\n    def __getitem__(self, index): return self.iterable[index]\n    def __setitem__(self, index, value): pass\n    def __delitem__(self, index): pass\n    def __bool__(self): return bool(self.iterable)\n    def __nonzero__(self): return bool(self.iterable)\n    def __contains__(self, o): return o in self.iterable\n    def __len__(self): return len(self.iterable)\n    def __copy__(self): return deque(self.iterable)\n    def copy(self): return deque(self.iterable)\n    def index(self, x, start=0, end=0): return 0\n    def insert(self, i, x): pass\n    def __add__(self, other): pass\n    def __iadd__(self, other): pass\n    def __mul__(self, other): pass\n    def __imul__(self, other): pass\n    def __rmul__(self, other): pass\n    @classmethod\n    def __class_getitem__(self, item): return cls\n\nclass OrderedDict(dict):\n    def __reversed__(self): return self[::-1]\n    def move_to_end(self, key, last=False): pass\n    @classmethod\n    def __class_getitem__(cls, item): return cls\n",
+            // brain_datetime (PY312: C-accelerated; use the Python source)
+            "datetime" => "from _pydatetime import *\n",
+            _ => return,
+        };
+        let Some(ext) = self.build_template_module(source, &name) else {
+            return;
+        };
+        let ext_md = self.md(ext);
+        let target_md = self.md(id);
+        let ext_locals = ext_md.locals.borrow();
+        let Some(ext_map) = ext_locals.get(&NodeId::MODULE) else {
+            return;
+        };
+        let mut tgt = target_md.locals.borrow_mut();
+        let tgt_map = tgt.entry(NodeId::MODULE).or_default();
+        for (sym, objs) in ext_map {
+            tgt_map.insert(*sym, objs.clone());
+        }
     }
 
     /// builder.add_from_names_to_locals (builder.py:213-246): re-adds every

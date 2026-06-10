@@ -19,6 +19,14 @@ pub enum Tip {
     CopyMethod,
     StrFormat,
     Partial,
+    /// typing.TypeVar(...) / typing.NewType(...) calls
+    TypingTypeVar,
+    /// `X = _alias(...)` / special alias calls inside typing.py
+    TypingAlias,
+    /// typing.X[...] subscripts (non-alias members)
+    TypingSubscript,
+    /// typing.TypedDict FunctionDef -> ClassDef
+    TypedDictFunc,
 }
 
 const BUILTIN_NAMES: [&str; 18] = [
@@ -49,8 +57,66 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::CopyMethod => (2, 0),
         Tip::StrFormat => (3, 0),
         Tip::Partial => (4, 0),
+        Tip::TypingTypeVar => (5, 0),
+        Tip::TypingAlias => (5, 1),
+        Tip::TypingSubscript => (5, 2),
+        Tip::TypedDictFunc => (5, 3),
     }
 }
+
+/// typing.__all__ on CPython 3.12 (brain_typing TYPING_MEMBERS)
+const TYPING_MEMBERS: [&str; 99] = [
+    "Self", "TYPE_CHECKING", "Text", "TypeAlias", "TypeAliasType",
+    "TypeGuard", "Unpack",
+    "Annotated", "Any", "Callable", "ClassVar", "Concatenate", "Final",
+    "ForwardRef", "Generic", "Literal", "Optional", "ParamSpec", "Protocol",
+    "Tuple", "Type", "TypeVar", "TypeVarTuple", "Union", "AbstractSet",
+    "ByteString", "Container", "ContextManager", "Hashable", "ItemsView",
+    "Iterable", "Iterator", "KeysView", "Mapping", "MappingView",
+    "MutableMapping", "MutableSequence", "MutableSet", "Sequence", "Sized",
+    "ValuesView", "Awaitable", "AsyncIterator", "AsyncIterable", "Coroutine",
+    "Collection", "AsyncGenerator", "AsyncContextManager", "Reversible",
+    "SupportsAbs", "SupportsBytes", "SupportsComplex", "SupportsFloat",
+    "SupportsIndex", "SupportsInt", "SupportsRound", "ChainMap", "Counter",
+    "Deque", "Dict", "DefaultDict", "List", "OrderedDict", "Set", "FrozenSet",
+    "NamedTuple", "TypedDict", "Generator", "BinaryIO", "IO", "Match",
+    "Pattern", "TextIO", "AnyStr", "assert_type", "assert_never", "cast",
+    "clear_overloads", "dataclass_transform", "final", "get_args",
+    "get_origin", "get_overloads", "get_type_hints", "is_typeddict",
+    "LiteralString", "Never", "NewType", "no_type_check",
+    "no_type_check_decorator", "NoReturn", "NotRequired", "overload",
+    "override", "ParamSpecArgs", "ParamSpecKwargs", "Required", "reveal_type",
+    "runtime_checkable",
+];
+
+const TYPING_ALIAS_QNAMES: [&str; 41] = [
+    "typing.Hashable", "typing.Awaitable", "typing.Coroutine",
+    "typing.AsyncIterable", "typing.AsyncIterator", "typing.Iterable",
+    "typing.Iterator", "typing.Reversible", "typing.Sized",
+    "typing.Container", "typing.Collection", "typing.Callable",
+    "typing.AbstractSet", "typing.MutableSet", "typing.Mapping",
+    "typing.MutableMapping", "typing.Sequence", "typing.MutableSequence",
+    "typing.ByteString", "typing.Tuple", "typing.List", "typing.Deque",
+    "typing.Set", "typing.FrozenSet", "typing.MappingView",
+    "typing.KeysView", "typing.ItemsView", "typing.ValuesView",
+    "typing.ContextManager", "typing.AsyncContextManager", "typing.Dict",
+    "typing.DefaultDict", "typing.OrderedDict", "typing.Counter",
+    "typing.ChainMap", "typing.Generator", "typing.AsyncGenerator",
+    "typing.Type", "typing.Pattern", "typing.Match", "typing.NoReturn",
+];
+
+const TYPING_TYPE_TEMPLATE: &str = "
+class Meta(type):
+    def __getitem__(self, item):
+        return self
+
+    @property
+    def __args__(self):
+        return ()
+
+class {0}(metaclass=Meta):
+    pass
+";
 
 impl Engine {
     /// NodeNG._explicit_inference equivalent. None => no tip applies or
@@ -91,6 +157,21 @@ impl Engine {
     /// build; they are pure syntactic checks so this is equivalent).
     fn find_tip(&self, node: GNode) -> Option<Tip> {
         let md = self.md(node.m);
+        // Subscript tip: typing.X[...] (brain_typing _looks_like_typing_subscript)
+        if let NodeKind::Subscript { value, .. } = &md.tree.nodes[node.n.idx()].kind {
+            if self.looks_like_typing_subscript(GNode { m: node.m, n: *value }) {
+                return Some(Tip::TypingSubscript);
+            }
+            return None;
+        }
+        // FunctionDef tip: typing.TypedDict
+        if matches!(md.tree.nodes[node.n.idx()].kind, NodeKind::FunctionDef(_)) {
+            let q = self.qname(node);
+            if q == "typing.TypedDict" || q == "typing_extensions.TypedDict" {
+                return Some(Tip::TypedDictFunc);
+            }
+            return None;
+        }
         let NodeKind::Call { func, .. } = &md.tree.nodes[node.n.idx()].kind else {
             return None;
         };
@@ -99,6 +180,33 @@ impl Engine {
                 let n = md.tree.s(*name);
                 if n == "partial" {
                     return Some(Tip::Partial);
+                }
+                if n == "TypeVar" || n == "NewType" {
+                    return Some(Tip::TypingTypeVar);
+                }
+                // _looks_like_typing_alias / _looks_like_special_alias
+                if let NodeKind::Call { args, .. } = &md.tree.nodes[node.n.idx()].kind {
+                    if (n == "_alias" || n == "_DeprecatedGenericAlias")
+                        && args.len() == 2
+                        && matches!(
+                            md.tree.nodes[args[0].idx()].kind,
+                            NodeKind::Attribute { .. } | NodeKind::Name { .. }
+                        )
+                    {
+                        return Some(Tip::TypingAlias);
+                    }
+                    if n == "_TupleType" || n == "_CallableType" {
+                        let first_ok = args.first().map(|&a| match &md.tree.nodes[a.idx()].kind {
+                            NodeKind::Name { name } => {
+                                n == "_TupleType" && md.tree.s(*name) == "tuple"
+                            }
+                            NodeKind::Attribute { .. } => n == "_CallableType",
+                            _ => false,
+                        }) == Some(true);
+                        if first_ok {
+                            return Some(Tip::TypingAlias);
+                        }
+                    }
                 }
                 let idx = BUILTIN_NAMES.iter().position(|&b| b == n)?;
                 // re module Pattern/Match carve-out
@@ -121,6 +229,9 @@ impl Engine {
             }
             NodeKind::Attribute { expr, attrname, .. } => {
                 let attr = md.tree.s(*attrname);
+                if attr == "TypeVar" || attr == "NewType" {
+                    return Some(Tip::TypingTypeVar);
+                }
                 if attr == "fromkeys" {
                     if let NodeKind::Name { name } = &md.tree.nodes[expr.idx()].kind {
                         if md.tree.s(*name) == "dict" {
@@ -203,7 +314,285 @@ impl Engine {
             Tip::CopyMethod => self.tip_copy_method(node, ctx),
             Tip::StrFormat => self.tip_str_format(node, ctx),
             Tip::Partial => self.tip_partial(node, ctx),
+            Tip::TypingTypeVar => self.tip_typing_typevar(node, ctx),
+            Tip::TypingAlias => self.tip_typing_alias(node, ctx),
+            Tip::TypingSubscript => self.tip_typing_subscript(node, ctx),
+            Tip::TypedDictFunc => self.tip_typeddict_func(node),
         }
+    }
+
+    fn looks_like_typing_subscript(&self, value: GNode) -> bool {
+        let md = self.md(value.m);
+        match &md.tree.nodes[value.n.idx()].kind {
+            NodeKind::Name { name } => TYPING_MEMBERS.contains(&md.tree.s(*name)),
+            NodeKind::Attribute { attrname, .. } => {
+                TYPING_MEMBERS.contains(&md.tree.s(*attrname))
+            }
+            NodeKind::Subscript { value: v, .. } => {
+                self.looks_like_typing_subscript(GNode { m: value.m, n: *v })
+            }
+            _ => false,
+        }
+    }
+
+    /// brain_typing.infer_typing_typevar_or_newtype
+    fn tip_typing_typevar(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
+            return Some(Flow::ok(cached.clone()));
+        }
+        let md = self.md(node.m);
+        let (func, args) = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { func, args, .. } => (GNode { m: node.m, n: *func }, args.clone()),
+            _ => return None,
+        };
+        let f = self.infer(func, &copy_context(Some(ctx)));
+        let q = self.value_qname(f.vals.first()?)?;
+        if !matches!(
+            q.as_str(),
+            "typing.TypeVar" | "typing.NewType" | "typing_extensions.TypeVar"
+        ) {
+            return None;
+        }
+        let first = args.first()?;
+        let typename = match &md.tree.nodes[first.idx()].kind {
+            NodeKind::Const(ConstValue::Str(s)) => s.to_string(),
+            NodeKind::JoinedStr { .. } => return None,
+            _ => return None, // as_string of non-Const rarely a valid identifier
+        };
+        if !typename
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '_')
+            || typename.is_empty()
+        {
+            return None;
+        }
+        let src = TYPING_TYPE_TEMPLATE.replace("{0}", &typename);
+        let mid = self.build_template_module(&src, "")?;
+        let sym = self.sym(&typename);
+        let tmd = self.md(mid);
+        let cls = {
+            let locals = tmd.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&sym))
+                .and_then(|v| v.first().copied())?
+        };
+        let vals = vec![Value::Node(cls)];
+        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
+        Some(Flow::ok(vals))
+    }
+
+    /// brain_typing.infer_typing_alias + infer_special_alias
+    fn tip_typing_alias(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
+            return Some(Flow::ok(cached.clone()));
+        }
+        let md = self.md(node.m);
+        // parent must be single-target Assign to an AssignName
+        let parent = self.parent(node)?;
+        let target_name = match &md.tree.nodes[parent.n.idx()].kind {
+            NodeKind::Assign { targets, .. } if targets.len() == 1 => {
+                match &md.tree.nodes[targets[0].idx()].kind {
+                    NodeKind::AssignName { name } => md.tree.s(*name).to_string(),
+                    _ => return None,
+                }
+            }
+            _ => return None,
+        };
+        let (args, is_special) = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { func, args, .. } => {
+                let special = matches!(
+                    &md.tree.nodes[func.idx()].kind,
+                    NodeKind::Name { name } if {
+                        let n = md.tree.s(*name);
+                        n == "_TupleType" || n == "_CallableType"
+                    }
+                );
+                (args.clone(), special)
+            }
+            _ => return None,
+        };
+        let res = self
+            .infer(GNode { m: node.m, n: args[0] }, &copy_context(Some(ctx)))
+            .vals
+            .first()
+            .cloned();
+        let base: Option<GNode> = match res {
+            Some(Value::Node(g))
+                if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) =>
+            {
+                Some(g)
+            }
+            _ => None,
+        };
+        // subscriptable: special aliases always; _alias when args[1] Const > 0
+        let subscriptable = is_special
+            || args.get(1).map(|&a| match &md.tree.nodes[a.idx()].kind {
+                NodeKind::Const(ConstValue::Int(pyast::tree::IntValue::Small(i))) => *i > 0,
+                NodeKind::Const(ConstValue::Bool(b)) => *b,
+                _ => false,
+            }) == Some(true);
+        // build via source template; module named like the origin module so
+        // qname matches (typing.Set etc.)
+        let modname = md.name.clone();
+        let mut src = String::new();
+        let mut base_clause = String::new();
+        if let Some(b) = base {
+            let bmd = self.md(b.m);
+            let bname = self.node_name(b)?;
+            // base importable only when top-level in its module
+            let top_level = self
+                .parent(b)
+                .map(|p| self.frame(p))
+                .map(|f| f.n == NodeId::MODULE)
+                .unwrap_or(false);
+            if top_level && bmd.name != modname {
+                src.push_str(&format!(
+                    "from {} import {} as _alias_base
+",
+                    bmd.name, bname
+                ));
+                base_clause = "(_alias_base)".to_string();
+            } else if bmd.name == "builtins" {
+                base_clause = format!("({bname})");
+            }
+        }
+        src.push_str(&format!("class {target_name}{base_clause}:
+"));
+        if subscriptable {
+            src.push_str("    @classmethod
+    def __class_getitem__(cls, item):
+        return cls
+");
+        } else {
+            src.push_str("    pass
+");
+        }
+        let mid = self.build_template_module(&src, &modname)?;
+        let sym = self.sym(&target_name);
+        let tmd = self.md(mid);
+        let cls = {
+            let locals = tmd.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&sym))
+                .and_then(|v| v.last().copied())?
+        };
+        let vals = vec![Value::Node(cls)];
+        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
+        Some(Flow::ok(vals))
+    }
+
+    /// brain_typing.infer_typing_attr (Subscript)
+    fn tip_typing_subscript(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
+            return Some(Flow::ok(cached.clone()));
+        }
+        let md = self.md(node.m);
+        let value = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Subscript { value, .. } => GNode { m: node.m, n: *value },
+            _ => return None,
+        };
+        let first = self
+            .infer(value, &Ctx::new())
+            .vals
+            .first()
+            .cloned()?;
+        let q = self.value_qname(&first)?;
+        if !q.starts_with("typing.") || TYPING_ALIAS_QNAMES.contains(&q.as_str()) {
+            return None;
+        }
+        if let Value::Node(g) = &first {
+            if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_)))
+                && matches!(
+                    q.as_str(),
+                    "typing.Generic" | "typing.Annotated" | "typing_extensions.Annotated"
+                )
+            {
+                // subscriptable via injected __class_getitem__
+                let cg = self.sym("__class_getitem__");
+                let already = !self.class_locals_get(*g, cg).is_empty();
+                if !already {
+                    if let Some(tmid) = self.build_template_module(
+                        "class _CG:
+    @classmethod
+    def __class_getitem__(cls, item):
+        return cls
+",
+                        "",
+                    ) {
+                        let tmd = self.md(tmid);
+                        let csym = self.sym("_CG");
+                        let cls_g = {
+                            let locals = tmd.locals.borrow();
+                            locals
+                                .get(&NodeId::MODULE)
+                                .and_then(|l| l.get(&csym))
+                                .and_then(|v| v.first().copied())
+                        };
+                        if let Some(cls_g) = cls_g {
+                            let func = self.class_locals_get(cls_g, cg);
+                            if let Some(&f) = func.first() {
+                                let gmd = self.md(g.m);
+                                gmd.locals
+                                    .borrow_mut()
+                                    .entry(g.n)
+                                    .or_default()
+                                    .insert(cg, vec![f]);
+                            }
+                        }
+                    }
+                }
+                let vals = vec![first.clone()];
+                self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
+                return Some(Flow::ok(vals));
+            }
+        }
+        let last_seg = q.rsplit('.').next().unwrap_or("X").to_string();
+        if !last_seg
+            .chars()
+            .all(|c| c.is_ascii_alphanumeric() || c == '_')
+            || last_seg.is_empty()
+        {
+            return None;
+        }
+        let src = TYPING_TYPE_TEMPLATE.replace("{0}", &last_seg);
+        let mid = self.build_template_module(&src, "")?;
+        let sym = self.sym(&last_seg);
+        let tmd = self.md(mid);
+        let cls = {
+            let locals = tmd.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&sym))
+                .and_then(|v| v.first().copied())?
+        };
+        let vals = vec![Value::Node(cls)];
+        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
+        Some(Flow::ok(vals))
+    }
+
+    /// brain_typing.infer_typedDict
+    fn tip_typeddict_func(&self, node: GNode) -> Option<Flow> {
+        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
+            return Some(Flow::ok(cached.clone()));
+        }
+        let modname = self.md(node.m).name.clone();
+        let mid = self.build_template_module("class TypedDict(dict):
+    pass
+", &modname)?;
+        let sym = self.sym("TypedDict");
+        let tmd = self.md(mid);
+        let cls = {
+            let locals = tmd.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&sym))
+                .and_then(|v| v.first().copied())?
+        };
+        let vals = vec![Value::Node(cls)];
+        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
+        Some(Flow::ok(vals))
     }
 
     fn run_builtin_tip(&self, name: &str, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {

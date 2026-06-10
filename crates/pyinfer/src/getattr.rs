@@ -352,19 +352,34 @@ impl Engine {
         match self.class_getattr(cls, name, Some(&ctx), class_context) {
             Ok(mut attributes) => {
                 // same-scope filtering for multiple attributes
+                // (scoped_nodes.py:2426-2433); proxies resolve .parent via
+                // their wrapped function (Proxy.__getattr__)
                 if attributes.len() > 1 {
-                    if let NV::N(first) = attributes[0] {
-                        let first_scope = self.parent(first).map(|p| self.scope(p));
+                    let scope_of = |nv: &NV| -> Option<GNode> {
+                        match nv {
+                            NV::N(g) => self.parent(*g).map(|p| self.scope(p)),
+                            NV::V(Value::BoundMethod { func, .. })
+                            | NV::V(Value::UnboundMethod { func })
+                            | NV::V(Value::Property { func })
+                            | NV::V(Value::Partial { func, .. }) => {
+                                self.parent(*func).map(|p| self.scope(p))
+                            }
+                            NV::V(_) => None,
+                        }
+                    };
+                    let first_scope = scope_of(&attributes[0]);
+                    if first_scope.is_some() {
                         let mut filtered = vec![attributes[0].clone()];
                         for attr in &attributes[1..] {
-                            match attr {
-                                NV::N(g) => {
-                                    let scope = self.parent(*g).map(|p| self.scope(p));
-                                    if scope == first_scope {
-                                        filtered.push(attr.clone());
-                                    }
+                            let s = scope_of(attr);
+                            if s == first_scope || s.is_none() {
+                                if s.is_some() {
+                                    filtered.push(attr.clone());
+                                } else if matches!(attr, NV::V(_)) {
+                                    // model values without parents: kept to
+                                    // avoid astroid's AttributeError path
+                                    filtered.push(attr.clone());
                                 }
-                                NV::V(_) => filtered.push(attr.clone()),
                             }
                         }
                         attributes = filtered;
@@ -953,15 +968,14 @@ impl Engine {
         let mut out: Vec<Value> = Vec::new();
         let mut found = false;
         for cls in mro {
+            // objects.py:184-189: only cls[name] (the FIRST local) is
+            // inferred, and bound methods bind to the mro class `cls`.
             let locs = self.class_locals_get(cls, name);
-            if locs.is_empty() {
-                continue;
-            }
+            let Some(&first_loc) = locs.first() else { continue };
             found = true;
             let ctx2 = copy_context(ctx);
             ctx2.lookupname.set(Some(name));
-            let nv: Vec<NV> = locs.into_iter().map(NV::N).collect();
-            let flow = self.infer_stmts(&nv, Some(&ctx2), Some(cls));
+            let flow = self.infer_stmts(&[NV::N(first_loc)], Some(&ctx2), None);
             for inferred in flow.vals {
                 match &inferred {
                     Value::Node(g)
@@ -970,37 +984,42 @@ impl Engine {
                         }) =>
                     {
                         let ft = self.func_type(*g);
-                        // scope is the calling method
                         let caller_is_classmethod =
                             self.func_type(scope) == FType::ClassMethod;
-                        match ft {
-                            FType::ClassMethod => out.push(Value::BoundMethod {
+                        let class_based = matches!(
+                            &*mro_type,
+                            Value::Node(g2) if self.kind_is(*g2, |k| matches!(k, NodeKind::ClassDef(_)))
+                        );
+                        if ft == FType::ClassMethod {
+                            out.push(Value::BoundMethod {
                                 func: *g,
                                 bound: Rc::new(Value::Node(cls)),
-                            }),
-                            FType::StaticMethod => out.push(inferred.clone()),
-                            FType::Method if caller_is_classmethod => {
-                                out.push(inferred.clone())
+                            });
+                        } else if caller_is_classmethod && ft == FType::Method {
+                            out.push(inferred.clone());
+                        } else if class_based || ft == FType::StaticMethod {
+                            out.push(inferred.clone());
+                        } else if self.is_property(*g, &ctx2) {
+                            let f = self.function_infer_call_result(*g, None, ctx);
+                            if f.vals.is_empty() {
+                                out.push(Value::Uninferable);
+                            } else {
+                                out.extend(f.vals);
                             }
-                            _ => {
-                                let class_based = matches!(
-                                    &*mro_type,
-                                    Value::Node(g2) if self.kind_is(*g2, |k| matches!(k, NodeKind::ClassDef(_)))
-                                );
-                                if class_based {
-                                    out.push(inferred.clone());
-                                } else {
-                                    out.push(Value::BoundMethod {
-                                        func: *g,
-                                        bound: Rc::new((*mro_type).clone()),
-                                    });
-                                }
-                            }
+                        } else {
+                            out.push(Value::BoundMethod {
+                                func: *g,
+                                bound: Rc::new(Value::Node(cls)),
+                            });
                         }
                     }
                     Value::Property { func } => {
                         let f = self.function_infer_call_result(*func, None, ctx);
-                        out.extend(f.vals);
+                        if f.vals.is_empty() {
+                            out.push(Value::Uninferable);
+                        } else {
+                            out.extend(f.vals);
+                        }
                     }
                     _ => out.push(inferred),
                 }

@@ -87,8 +87,70 @@ pylint behavior — bugs are replicated.
    lines are accepted FNs until then); files CPython accepts but ruff
    rejects with clean tokenize are skipped with a stderr note (none in
    corpora).
-3. Then **pyinfer** per notes/00-architecture.md + notes/07 (scope_lookup/
-   _filter_stmts first — unblocks VariablesChecker), snapshot loader.
+3. **pyinfer foundations**: DONE (phase 1) — `crates/pyinfer` ports the
+   astroid 4.0.4 engine per notes/07; `prylint --dump-infer <items.jsonl>`
+   mirrors harness/dump_infer.py (phase-1 prebuild of every fileitem in
+   order, preorder Name/Attribute/Call dump, render parity incl. the
+   blank-line-on-empty-file print quirk; runs in a 1GB-stack thread ≈
+   setrecursionlimit(8000)).
+   - Value model (value.rs), InferenceContext/CallContext + global cache
+     keyed (node, lookupname, callcontext-IDENTITY via unique id,
+     boundnode structural key) (ctx.rs/graph.rs), depth guard max_depth=350
+     standing in for RecursionError (NOT yet probe-tuned).
+   - ModuleGraph (graph.rs): sys.path = [realpath(cwd)] + pinned venv
+     sys.path (PRYLINT_PYTHON probe, exe-relative .venv-pylint fallback);
+     find_spec port (ImportlibFinder incl. pkg/__init__ + EXTENSION_SUFFIXES
+     order, namespace portions for PathSpecFinder; frozen branch dead in
+     this env, os.path special-cased like modutils); astroid_cache with
+     setdefault semantics (PROBE-VERIFIED: first module wins, the old
+     "second wins" gotcha below is WRONG for astroid 4); _post_build =
+     cache-before-delayed + star-import locals expansion via real module
+     resolution (replaces pyast's static stdlib table at engine load; per-add
+     fromlineno re-sort like add_from_names_to_locals) + delayed_assattr
+     with real inference (cross-module instance_attrs/locals mutation);
+     module extenders ported for typing/collections/datetime (template
+     modules parsed from brain sources, named like the target so qnames
+     match).
+   - Snapshot loader (snapshot.rs); snapshot REGENERATED with fixes:
+     bootstrap-first (the old builtins.json was an unextended duplicate —
+     no brain str/bytes stubs, no generator class), "xtra" sidecars for
+     locals-only nodes, EmptyNode einf descriptors (resolved lazily via
+     qname → graph), authoritative "qn" qnames (raw-built nodes are
+     reparented by add_local_node; ser() nesting lies).
+   - lookup.rs: scope_lookup per scope type + _filter_stmts verbatim +
+     are_exclusive; infer.rs: NodeNG.infer dispatch with the §4.1 decorator
+     table (path_wrapper dedup incl. exact-class Instance→proxied rule),
+     _infer_stmts + constraints (NoneConstraint AND BooleanConstraint —
+     notes/07 understates 4.0.4); protocols.rs: assigned_stmts family,
+     subscript/getitem, BinOp/AugAssign (op arrives as "+=" — strip '='),
+     UnaryOp, %-formatting subset; getattr.rs: Module/Class/Instance/Super
+     getattr+igetattr (same-scope filter incl. proxy parents, descriptor→
+     Uninferable, last-function-wins, metaclass lookup with the cls!=self
+     guard — type's implicit metaclass is itself), MRO C3 + ancestors,
+     FunctionDef.type incl. extra_decorators; calls.rs: CallSite +
+     infer_argument, infer_call_result per callable (generator/implicit-None/
+     is_abstract first-stmt quirk/builtin __new__/partial merge); Super
+     binds methods to the MRO class and infers only cls[name][0]
+     (objects.py:184-217). brains.rs: builtin call tips, .copy(),
+     str.format fold, functools.partial, typing brain (TypeVar/NewType
+     template, _alias/_TupleType/_CallableType synthetic classes,
+     typing.X[...] subscripts, TypedDict) via template-module parsing.
+   - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
+     match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
+     (a) nodes_inferred counter parity — our eager evaluation burns the
+     shared 100-cap faster than astroid's lazy pulls, truncating chains
+     like `self.client.get(...)` one value early (probe_s7; `c.get()`
+     matches); needs lazy/capped inference plumbing. (b) _infer_type_call /
+     _infer_type_new_call (type() 3-arg, modelform_factory) not ported —
+     needs synthetic-class building. (c) enum brain, namedtuple brain,
+     dataclasses field tips not ported. (d) with_metaclass hack skipped.
+     (e) some GT diffs are STRUCTURAL at N=60: the cache was warmed with
+     ALL files prebuilt (delayed_assattr from file 61+ feeds instance_attrs
+     the 60-file run can't see) — compare with N=all for truth.
+   - NOTE pyast changes: ConstValue::NotImplemented variant (synthetic
+     only), Interner::len, vararg/kwarg AssignName nodes now built
+     (astroid parity; not in get_children so dumps unchanged — tree gate
+     still 0).
 4. Then checkers fan-out (variables first: salt is the acid test), each code
    driven to 0 FP/FN via `diffmsg.py --code=EXXXX` on all 7 corpora — wire
    them into the phase-2 walk placeholder in `run.rs::lint_one` using
@@ -106,7 +168,8 @@ pylint behavior — bugs are replicated.
   just the 130 enabled ones.
 - Inference caching in astroid is global across the whole run; per-module
   fresh caches may cause rare diffs — check before optimizing.
-- Two files, same modname → astroid cache overwrite (second wins for
-  importers); reporter header printed once per module NAME.
+- Two files, same modname → astroid 4 cache_module is setdefault: FIRST
+  wins for importers (probe-verified; an older note here claimed second
+  wins — wrong). Reporter header printed once per module NAME.
 - py-version gating: harness venv is 3.12.12; `MessageDef.may_be_emitted`
   already folded into msgs.rs `enabled`.
