@@ -1591,11 +1591,13 @@ impl Engine {
                 _ => return None,
             }
         } else {
-            let obj = self
-                .infer_nv(&pos[0], &copy_context(Some(ctx)))
-                .vals
-                .first()?
-                .clone();
+            // infer_issubclass: `next(obj_node.infer(context=context))` —
+            // a SINGLE abandoned pull under the tip's own context
+            // (brain_builtin_inference.py:755); no cache write, no bump.
+            let obj = match &pos[0] {
+                NV::N(g) => self.first_value(*g, ctx).ok().flatten()?,
+                NV::V(v) => v.clone(),
+            };
             match obj {
                 Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
                 _ => return None,
@@ -1804,8 +1806,14 @@ impl Engine {
                 }
             }
             Value::DictItems(r) => {
-                // elts are synthetic Tuple nodes pairing key/value
-                // (objectmodel.py:856-867)
+                // elts are synthetic Tuple nodes pairing key/value, built
+                // ONCE per DictItems object (objectmodel.py:856-867 builds
+                // the Tuples at attr_items time; the same nodes are seen by
+                // every later consumer) — keyed by the DictRef pointer.
+                let key = Rc::as_ptr(r) as usize;
+                if let Some(cached) = self.dictitems_elts_cache.borrow().get(&key) {
+                    return cached.iter().cloned().map(NV::V).collect();
+                }
                 let pairs: Vec<(Value, Value)> = match &**r {
                     crate::value::DictRef::Node(g) => {
                         let md = self.md(g.m);
@@ -1824,15 +1832,17 @@ impl Engine {
                     }
                     crate::value::DictRef::Synth(items) => items.to_vec(),
                 };
-                pairs
+                let built: Vec<Value> = pairs
                     .into_iter()
-                    .map(|(k, val)| {
-                        NV::V(Value::SynthSeq {
-                            kind: SeqKind::Tuple,
-                            elems: Rc::new(vec![k, val]),
-                        })
+                    .map(|(k, val)| Value::SynthSeq {
+                        kind: SeqKind::Tuple,
+                        elems: Rc::new(vec![k, val]),
                     })
-                    .collect()
+                    .collect();
+                self.dictitems_elts_cache
+                    .borrow_mut()
+                    .insert(key, Rc::new(built.clone()));
+                built.into_iter().map(NV::V).collect()
             }
             _ => Vec::new(),
         }
@@ -1887,7 +1897,13 @@ impl Engine {
                                 out.push(v);
                             }
                         }
-                        NV::V(v) => out.push(v), // safe_infer of a value -> itself
+                        NV::V(v) => {
+                            // safe_infer of a synthetic NODE (DictModel's
+                            // fresh Tuples etc.) completes a real
+                            // NodeNG.infer: bump-once per ctx key
+                            self.synth_value_pull(&v, ctx);
+                            out.push(v);
+                        }
                     }
                 }
                 return Ok(Some(cont_build(klass, out)));

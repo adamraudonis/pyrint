@@ -1589,8 +1589,11 @@ impl Engine {
         ctx: &Rc<Ctx>,
         aug: bool,
     ) -> Result<Vec<Value>, ErrKind> {
-        let left_type = self.object_type(left, ctx);
-        let right_type = self.object_type(right, ctx);
+        // helpers.object_type(left) — NO context (_base_nodes.py:633-634):
+        // node-backed operands are RE-INFERRED under a fresh context
+        // (set-collapse over all results; real cache pulls/writes!)
+        let left_type = self.operand_object_type(left);
+        let right_type = self.operand_object_type(right);
         // method flow
         struct Try {
             instance: Value,
@@ -1883,25 +1886,35 @@ impl Engine {
             }
             return Ok(vec![Value::SynthConst(Rc::new(ConstValue::NotImplemented))]);
         }
-        // Tuple / List
+        // Tuple / List — protocols.py:176-220 tl_infer_binary_op.
         if let Some((kind, elems)) = self.value_seq_parts(instance) {
             if matches!(kind, SeqKind::Tuple | SeqKind::List) {
+                // protocols.py:193 — the boundnode is cleared on the SHARED
+                // context before element inference (cache keys!)
+                *ctx.boundnode.borrow_mut() = None;
                 if op == "+" {
                     if let Some((okind, oelems)) = self.value_seq_parts(other) {
                         if okind == kind {
+                            // _filter_uninferable_nodes (protocols.py:161-172):
+                            // FULL inference of each elt under the SAME
+                            // context; ALL values are kept (flattened);
+                            // Uninferable elts/results -> UNATTACHED_UNKNOWN
+                            let unk = Value::Node(self.unknown_singleton());
                             let mut all = Vec::new();
                             for e in elems.iter().chain(oelems.iter()) {
-                                // _filter_uninferable_nodes infers each elt
-                                let inferred = match e {
-                                    NV::N(g) => self
-                                        .infer(*g, &ctx.clone_ctx())
-                                        .vals
-                                        .first()
-                                        .cloned()
-                                        .unwrap_or(Value::Uninferable),
-                                    NV::V(v) => v.clone(),
-                                };
-                                all.push(inferred);
+                                match e {
+                                    NV::N(g) => {
+                                        for v in self.infer(*g, ctx).vals {
+                                            if v.is_uninferable() {
+                                                all.push(unk.clone());
+                                            } else {
+                                                all.push(v);
+                                            }
+                                        }
+                                    }
+                                    NV::V(v) if v.is_uninferable() => all.push(unk.clone()),
+                                    NV::V(v) => all.push(v.clone()),
+                                }
                             }
                             return Ok(vec![Value::SynthSeq {
                                 kind,
@@ -1912,31 +1925,58 @@ impl Engine {
                     return Ok(vec![Value::SynthConst(Rc::new(ConstValue::NotImplemented))]);
                 }
                 if op == "*" {
-                    if let Some(ConstValue::Int(IntValue::Small(n))) = self.value_const(other) {
-                        let n = n.max(0) as usize;
-                        if elems.len().saturating_mul(n) > 100_000_000 {
-                            return Ok(vec![Value::Uninferable]);
-                        }
-                        let mut all = Vec::new();
-                        for _ in 0..n {
-                            for e in &elems {
-                                all.push(match e {
-                                    NV::N(g) => self
-                                        .infer(*g, &ctx.clone_ctx())
-                                        .vals
-                                        .first()
-                                        .cloned()
-                                        .unwrap_or(Value::Uninferable),
-                                    NV::V(v) => v.clone(),
-                                });
+                    // other.value must be an int (bool is an int subclass)
+                    let n: i64 = match self.value_const(other) {
+                        Some(ConstValue::Int(IntValue::Small(n))) => n,
+                        Some(ConstValue::Bool(b)) => b as i64,
+                        Some(ConstValue::Int(IntValue::Big(s))) => {
+                            // beyond i64: sign decides empty vs the 1e8 guard
+                            if s.starts_with('-') {
+                                -1
+                            } else {
+                                i64::MAX
                             }
                         }
+                        _ => {
+                            return Ok(vec![Value::SynthConst(Rc::new(
+                                ConstValue::NotImplemented,
+                            ))])
+                        }
+                    };
+                    // _multiply_seq_by_int (protocols.py:139-158)
+                    if !(n > 0 && !elems.is_empty()) {
                         return Ok(vec![Value::SynthSeq {
                             kind,
-                            elems: Rc::new(all),
+                            elems: Rc::new(Vec::new()),
                         }]);
                     }
-                    return Ok(vec![Value::SynthConst(Rc::new(ConstValue::NotImplemented))]);
+                    if (elems.len() as i64).saturating_mul(n) > 100_000_000 {
+                        return Ok(vec![Value::SynthSeq {
+                            kind,
+                            elems: Rc::new(vec![Value::Uninferable]),
+                        }]);
+                    }
+                    // safe_infer(elt, context) or Uninferable — ONCE per
+                    // element (then the list is repeated), same context;
+                    // Uninferable elts are filtered OUT entirely
+                    let mut base: Vec<Value> = Vec::new();
+                    for e in &elems {
+                        match e {
+                            NV::V(v) if v.is_uninferable() => continue,
+                            NV::N(g) => base.push(
+                                self.safe_infer(*g, ctx).unwrap_or(Value::Uninferable),
+                            ),
+                            NV::V(v) => base.push(v.clone()),
+                        }
+                    }
+                    let mut all = Vec::with_capacity(base.len() * n as usize);
+                    for _ in 0..n {
+                        all.extend(base.iter().cloned());
+                    }
+                    return Ok(vec![Value::SynthSeq {
+                        kind,
+                        elems: Rc::new(all),
+                    }]);
                 }
                 return Ok(vec![Value::SynthConst(Rc::new(ConstValue::NotImplemented))]);
             }
@@ -2310,6 +2350,19 @@ impl Engine {
         }
     }
 
+    /// helpers.object_type for binop operands: node-backed values go
+    /// through the full _object_type inference (fresh context), proxies
+    /// map structurally (Proxy.infer yields self without NodeNG.infer).
+    fn operand_object_type(&self, v: &Value) -> Option<GNode> {
+        match v {
+            Value::Node(g) => match self.object_type_of_node(*g, &Ctx::new()) {
+                Value::Node(t) => Some(t),
+                _ => None,
+            },
+            _ => self.object_type(v, &Ctx::new()),
+        }
+    }
+
     /// helpers.is_subtype / is_supertype with _NonDeducibleTypeHierarchy
     /// (-> Err(AstroidType) stands in for the sentinel)
     fn is_subtype(&self, t1: GNode, t2: GNode) -> Result<bool, ErrKind> {
@@ -2332,6 +2385,17 @@ impl Engine {
     }
 
     pub fn has_known_bases(&self, cls: GNode, depth: u32) -> bool {
+        // klass._all_bases_known memo (helpers.py:175-178): permanent per
+        // class node, survives inference-cache wipes
+        if let Some(&v) = self.known_bases_cache.borrow().get(&cls) {
+            return v;
+        }
+        let v = self.has_known_bases_uncached(cls, depth);
+        self.known_bases_cache.borrow_mut().insert(cls, v);
+        v
+    }
+
+    fn has_known_bases_uncached(&self, cls: GNode, depth: u32) -> bool {
         if depth > 50 {
             return false;
         }

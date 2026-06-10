@@ -192,6 +192,7 @@ impl Engine {
     /// cache (lookup lru / tip caches survive).
     fn wipe(&self) {
         self.inf_cache.borrow_mut().clear();
+        self.synth_hop_cache.borrow_mut().clear();
     }
 
     /// Bottom-up transform application over a freshly built module.

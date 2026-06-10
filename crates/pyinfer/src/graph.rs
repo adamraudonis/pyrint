@@ -213,6 +213,21 @@ pub struct Engine {
     pub dataclass_attrs: RefCell<FxHashMap<GNode, GNode>>,
     /// Call nodes whose dataclass-field predicate matched at transform time
     pub dataclass_field_calls: RefCell<FxHashSet<GNode>>,
+    /// node_classes.py:5007 UNATTACHED_UNKNOWN singleton (Unknown node used
+    /// by protocols._filter_uninferable_nodes for U container elements)
+    pub unattached_unknown: RefCell<Option<GNode>>,
+    /// klass._all_bases_known memo (helpers.py:175-189 has_known_bases)
+    pub known_bases_cache: RefCell<FxHashMap<GNode, bool>>,
+    /// `stmt.infer(context)` entries for SYNTHETIC nodes flowing through
+    /// _infer_stmts (bases.py:198): in astroid those are real fresh nodes —
+    /// the first hop under a given (lookupname, callcontext, boundnode) key
+    /// is a cache miss (1 nodes_inferred bump + cache write), later hops
+    /// replay bump-free. Keyed by Rc pointer identity; cleared with the
+    /// global inference cache.
+    pub synth_hop_cache: RefCell<FxHashSet<(u8, usize, Option<GSym>, Option<u64>, Option<crate::value::ValueKey>)>>,
+    /// DictModel attr_items Tuple elements, built once per DictItems object
+    /// (objectmodel.py:856-867) and reused — keyed by the DictRef pointer
+    pub dictitems_elts_cache: RefCell<FxHashMap<usize, Rc<Vec<Value>>>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -268,6 +283,10 @@ impl Engine {
             pathlib_subscripts: RefCell::new(FxHashSet::default()),
             dataclass_attrs: RefCell::new(FxHashMap::default()),
             dataclass_field_calls: RefCell::new(FxHashSet::default()),
+            unattached_unknown: RefCell::new(None),
+            known_bases_cache: RefCell::new(FxHashMap::default()),
+            synth_hop_cache: RefCell::new(FxHashSet::default()),
+            dictitems_elts_cache: RefCell::new(FxHashMap::default()),
         };
         e.bootstrap();
         e
@@ -288,6 +307,17 @@ impl Engine {
         let id = self.callctx_id.get();
         self.callctx_id.set(id + 1);
         id
+    }
+
+    /// The UNATTACHED_UNKNOWN singleton (node_classes.py:5007) — lazily
+    /// allocated Unknown node in a synthetic module.
+    pub fn unknown_singleton(&self) -> GNode {
+        if let Some(g) = *self.unattached_unknown.borrow() {
+            return g;
+        }
+        let g = self.alloc_placeholders(1)[0];
+        *self.unattached_unknown.borrow_mut() = Some(g);
+        g
     }
 
     fn isfile(&self, p: &str) -> bool {

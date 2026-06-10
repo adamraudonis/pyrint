@@ -27,6 +27,22 @@ macro_rules! yield_v {
     };
 }
 
+/// Identity of a synthetic value that corresponds to a real (fresh) AST
+/// node in astroid — these go through NodeNG.infer when re-inferred via
+/// _infer_stmts. Proxies (Instance/BoundMethod/Generator/Super/...) return
+/// None: Proxy.infer yields self without entering NodeNG.infer.
+pub(crate) fn synth_node_id(v: &Value) -> Option<(u8, usize)> {
+    use std::rc::Rc;
+    match v {
+        Value::SynthConst(rc) => Some((0, Rc::as_ptr(rc) as usize)),
+        Value::SynthSeq { elems, .. } => Some((1, Rc::as_ptr(elems) as *const u8 as usize)),
+        Value::SynthDict { items } => Some((2, Rc::as_ptr(items) as *const u8 as usize)),
+        Value::SynthSlice { bounds } => Some((3, Rc::as_ptr(bounds) as usize)),
+        Value::FrozenSet { elems } => Some((4, Rc::as_ptr(elems) as *const u8 as usize)),
+        _ => None,
+    }
+}
+
 #[derive(PartialEq, Eq, Hash, Clone, Copy)]
 pub enum DedupKey {
     Node(GNode),
@@ -484,10 +500,39 @@ impl Engine {
         for stmt in stmts {
             let stmt_node = match stmt {
                 NV::V(v) => {
-                    // proxies / object-model values infer to themselves
-                    // (Proxy.infer yields self — no bump, no cache)
-                    yield_v!(sink, v.clone());
+                    // Proxies (Instance/BoundMethod/Generator/...) infer to
+                    // themselves via Proxy.infer — no bump, no cache. But
+                    // SYNTHETIC NODES (const_factory Consts, fresh
+                    // containers, FrozenSet...) go through NodeNG.infer:
+                    // the first hop under a (lookupname=None via
+                    // _infer_name, callcontext, boundnode) key is a cache
+                    // miss — the post-yield bump runs only if the consumer
+                    // pulls again, and a consumer abandoning at the yield
+                    // skips both bump and cache write (bases.py:198 +
+                    // node_ng.py:160-176).
+                    let hop_key = synth_node_id(v).map(|(tag, ptr)| {
+                        (
+                            tag,
+                            ptr,
+                            None,
+                            ctx.callcontext.borrow().as_ref().map(|c| c.id),
+                            ctx.boundnode.borrow().as_ref().map(crate::value::value_key),
+                        )
+                    });
+                    let is_replay = hop_key
+                        .as_ref()
+                        .map(|k| self.synth_hop_cache.borrow().contains(k))
+                        .unwrap_or(true);
                     inferred = true;
+                    if let Drive::Stop = sink(v.clone()) {
+                        return End::Stopped;
+                    }
+                    if !is_replay {
+                        if let Some(k) = hop_key {
+                            self.synth_hop_cache.borrow_mut().insert(k);
+                            ctx.bump_inferred();
+                        }
+                    }
                     continue;
                 }
                 NV::N(g) => *g,
@@ -812,7 +857,20 @@ impl Engine {
     // ---------- FunctionDef (§11.2) ----------
 
     fn infer_functiondef(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        if self.is_property(node, ctx) {
+        // `self.decorators and bases._is_property(self)` — context None
+        // (scoped_nodes.py:1526); the decorators check is inside is_property
+        // only for phase 3, so replicate the outer guard here.
+        let has_decorators = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                    d.decorators.is_some()
+                }
+                _ => false,
+            }
+        };
+        let _ = ctx;
+        if has_decorators && self.is_property(node, None) {
             Flow::one(Value::Property { func: node })
         } else {
             Flow::one(Value::Node(node))
@@ -1512,6 +1570,27 @@ impl Engine {
 
     /// util.safe_infer: pulls at most TWO values then abandons the
     /// generator (no cache write / no bump for the second value).
+    /// Emulate a completed `value.infer(context)` pull over a SYNTHETIC
+    /// value standing for a fresh astroid node (safe_infer of container
+    /// elements etc.): the first completion under a (lookupname=None,
+    /// callcontext, boundnode) key bumps nodes_inferred once and "caches";
+    /// replays are bump-free. Proxies are no-ops.
+    pub fn synth_value_pull(&self, v: &Value, ctx: &Rc<Ctx>) {
+        if let Some((tag, ptr)) = synth_node_id(v) {
+            let key = (
+                tag,
+                ptr,
+                None,
+                ctx.callcontext.borrow().as_ref().map(|c| c.id),
+                ctx.boundnode.borrow().as_ref().map(crate::value::value_key),
+            );
+            if !self.synth_hop_cache.borrow().contains(&key) {
+                self.synth_hop_cache.borrow_mut().insert(key);
+                ctx.bump_inferred();
+            }
+        }
+    }
+
     pub fn safe_infer(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Value> {
         let mut first: Option<Value> = None;
         let mut ambiguous = false;

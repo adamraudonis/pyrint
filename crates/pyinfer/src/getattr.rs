@@ -575,9 +575,10 @@ impl Engine {
             let last_function = *functions.last().unwrap();
             attributes.retain(|a| match a {
                 NV::N(g) => {
+                    // bases._is_property(a) — context None (scoped_nodes.py:2467)
                     !functions.contains(g)
                         || *g == last_function
-                        || self.is_property(*g, &copy_context(Some(&ctx)))
+                        || self.is_property(*g, None)
                 }
                 NV::V(_) => true,
             });
@@ -888,7 +889,8 @@ impl Engine {
     fn wrap_value_to(&self, owner: &Value, v: Value, ctx: &Rc<Ctx>, sink: &mut Sink) -> Drive {
         match &v {
             Value::UnboundMethod { func } => {
-                if self.is_property(*func, ctx) {
+                // _is_property(attr) — context None (bases.py:305)
+                if self.is_property(*func, None) {
                     let mut stopped = false;
                     let _ = self.function_infer_call_result_to(*func, None, Some(ctx), &mut |x| {
                         let d = sink(x);
@@ -989,14 +991,19 @@ impl Engine {
             if matches!(name, "items" | "keys" | "values") {
                 let dict_cls = self.builtins().dict;
                 let sym = self.sym(name);
+                // `next(self._instance._proxied.igetattr(name), None)` —
+                // class_context=True wraps the method as UnboundMethod
+                // (function_to_method) before the single pull
                 let meth = self.class_igetattr_first(dict_cls, sym, None, true).ok().flatten();
-                if let Some(Value::Node(f)) = meth {
-                    return Some(Value::BoundMethod {
-                        func: f,
-                        bound: Rc::new(owner.clone()),
-                    });
+                match meth {
+                    Some(Value::Node(f)) | Some(Value::UnboundMethod { func: f }) => {
+                        return Some(Value::BoundMethod {
+                            func: f,
+                            bound: Rc::new(owner.clone()),
+                        });
+                    }
+                    _ => return None,
                 }
-                return None;
             }
         }
         match name {
@@ -1362,7 +1369,9 @@ impl Engine {
                                 sink(inferred.clone())
                             } else if class_based || ft == FType::StaticMethod {
                                 sink(inferred.clone())
-                            } else if self.is_property(*g, &ctx3) {
+                            // bases._is_property(inferred) — context None
+                            // (objects.py:211)
+                            } else if self.is_property(*g, None) {
                                 let mut any = false;
                                 let mut inner_stop = false;
                                 let _ = self.function_infer_call_result_to(*g, None, ctx, &mut |x| {
@@ -2079,9 +2088,29 @@ impl Engine {
                 decnodes.extend(nodes.iter().map(|&n| GNode { m: func.m, n }));
             }
         }
+        // decoratornames += self.extra_decorators (scoped_nodes.py:1459)
+        let parent_frame = self.parent(func).map(|p| self.frame(p));
+        if let Some(frame) = parent_frame {
+            if self.kind_is(frame, |k| matches!(k, NodeKind::ClassDef(_))) {
+                let fname = match &md.tree.nodes[func.n.idx()].kind {
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                        md.tree.s(d.name).to_string()
+                    }
+                    _ => String::new(),
+                };
+                if !fname.is_empty() {
+                    decnodes.extend(self.extra_decorators(func, frame, &fname));
+                }
+            }
+        }
         for dn in decnodes {
-            let c = copy_context(ctx);
-            let flow = self.infer(dn, &c);
+            // scoped_nodes.py:1462 `decnode.infer(context=context)` — the
+            // caller's context AS-IS (lookupname intact -> cache keys are
+            // per-attribute-name in the igetattr setter scan!)
+            let flow = match ctx {
+                Some(c) => self.infer(dn, c),
+                None => self.infer(dn, &crate::ctx::Ctx::new()),
+            };
             for v in &flow.vals {
                 result.push(self.value_qname(v));
             }
@@ -2110,17 +2139,18 @@ impl Engine {
         }
     }
 
-    /// bases._is_property (bases.py:69-108)
-    pub fn is_property(&self, func: GNode, ctx: &Rc<Ctx>) -> bool {
+    /// bases._is_property (bases.py:69-108). All astroid call sites pass
+    /// context=None (bases.py:305, scoped_nodes.py:1526/:2467,
+    /// objects.py:211) — decorator inference then runs under FRESH contexts.
+    pub fn is_property(&self, func: GNode, ctx: Option<&Rc<Ctx>>) -> bool {
         let md = self.md(func.m);
         let decorators = match &md.tree.nodes[func.n.idx()].kind {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.decorators,
             _ => return false,
         };
-        if decorators.is_none() {
-            return false;
-        }
-        let decnames = self.decoratornames(func, Some(ctx));
+        // decoratornames runs FIRST, even without syntactic decorators
+        // (extra_decorators feed it) — bases.py:72
+        let decnames = self.decoratornames(func, ctx);
         for n in decnames.iter().flatten() {
             if PROPERTIES.contains(&n.as_str()) {
                 return true;
@@ -2132,6 +2162,10 @@ impl Engine {
                 return true;
             }
         }
+        // bases.py:83: no syntactic decorators -> False before phase 3
+        if decorators.is_none() {
+            return false;
+        }
         // decorator classes subtyping a property class
         let dec = decorators.unwrap();
         let dec_nodes: Vec<NodeId> = match &md.tree.nodes[dec.idx()].kind {
@@ -2140,13 +2174,21 @@ impl Engine {
         };
         for dn in dec_nodes {
             let g = GNode { m: func.m, n: dn };
-            let inferred = self.safe_infer(g, &copy_context(Some(ctx)));
+            // safe_infer(decorator, context=context) — the ctx AS-IS
+            // (None -> fresh per pull)
+            let c = match ctx {
+                Some(c) => Rc::clone(c),
+                None => crate::ctx::Ctx::new(),
+            };
+            let inferred = self.safe_infer(g, &c);
             let Some(inferred) = inferred else { continue };
             if let Value::Node(icls) = inferred {
                 if self.kind_is(icls, |k| matches!(k, NodeKind::ClassDef(_))) {
+                    // inferred.is_subtype_of(pclass) — context None
+                    // (bases.py:92)
                     if PROPERTIES
                         .iter()
-                        .any(|p| self.is_subtype_of(icls, p, Some(ctx)))
+                        .any(|p| self.is_subtype_of(icls, p, None))
                     {
                         return true;
                     }
@@ -2158,9 +2200,11 @@ impl Engine {
                                 &cmd.tree.nodes[b.idx()].kind
                             {
                                 let vg = GNode { m: icls.m, n: *value };
-                                if let Some(Value::Node(vcls)) =
-                                    self.safe_infer(vg, &copy_context(Some(ctx)))
-                                {
+                                let c2 = match ctx {
+                                    Some(c) => Rc::clone(c),
+                                    None => crate::ctx::Ctx::new(),
+                                };
+                                if let Some(Value::Node(vcls)) = self.safe_infer(vg, &c2) {
                                     if self.node_name(vcls).as_deref() == Some("cached_property")
                                         && self.md(vcls.m).name == "functools"
                                     {
