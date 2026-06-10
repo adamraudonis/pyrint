@@ -1660,39 +1660,130 @@ impl Engine {
 
     /// _class_type subset for the metaclass check in _arguments_infer
     /// (scoped_nodes.py:1750-1785).
+    /// ClassDef.type — _class_type (scoped_nodes.py:1750-1785), memoized
+    /// on the class for the whole run.
     pub fn class_type(&self, cls: GNode) -> &'static str {
-        if self.is_metaclass_class(cls, 0) {
-            return "metaclass";
+        self.class_type_inner(cls, &mut Default::default())
+    }
+
+    fn class_type_inner(
+        &self,
+        cls: GNode,
+        ancestors: &mut rustc_hash::FxHashSet<String>,
+    ) -> &'static str {
+        if let Some(&t) = self.cls_type_cache.borrow().get(&cls) {
+            return t;
         }
-        if self
+        let mut ty: Option<&'static str> = None;
+        if self.is_metaclass_class(cls, &mut Default::default()) {
+            ty = Some("metaclass");
+        } else if self
             .node_name(cls)
             .map(|n| n.ends_with("Exception"))
             .unwrap_or(false)
         {
-            return "exception";
+            ty = Some("exception");
+        } else {
+            let qn = self.qname(cls);
+            if ancestors.contains(&qn) {
+                // ancestor loop -> "class" (memoized)
+                self.cls_type_cache.borrow_mut().insert(cls, "class");
+                return "class";
+            }
+            ancestors.insert(qn);
+            // for base in klass.ancestors(recurs=False): break abandons
+            let mut found: Option<&'static str> = None;
+            let _ = self.ancestors_to(cls, false, None, &mut |base| {
+                let name = self.class_type_inner(base, ancestors);
+                if name != "class" {
+                    if name == "metaclass" {
+                        // don't propagate metaclass to non-metaclasses
+                        return crate::value::Drive::Go;
+                    }
+                    found = Some(name);
+                    return crate::value::Drive::Stop;
+                }
+                crate::value::Drive::Go
+            });
+            ty = found;
         }
-        "class"
+        let t = ty.unwrap_or("class");
+        self.cls_type_cache.borrow_mut().insert(cls, t);
+        t
     }
 
-    fn is_metaclass_class(&self, cls: GNode, depth: u32) -> bool {
-        if depth > 50 {
-            return false;
-        }
-        if self.node_name(cls).as_deref() == Some("type")
-            && self.md(cls.m).name == "builtins"
-        {
+    /// _is_metaclass (scoped_nodes.py:1714-1747): infers base expressions
+    /// (fresh contexts), seen-set keyed by qname, abandons base generators
+    /// on early returns.
+    fn is_metaclass_class(
+        &self,
+        cls: GNode,
+        seen: &mut rustc_hash::FxHashSet<String>,
+    ) -> bool {
+        if self.node_name(cls).as_deref() == Some("type") {
             return true;
         }
         for base in self.class_bases(cls) {
-            let f = self.infer(base, &Ctx::new());
-            for v in &f.vals {
-                if let Value::Node(g) = v {
-                    if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_)))
-                        && self.is_metaclass_class(*g, depth + 1)
-                    {
-                        return true;
+            let mut verdict: Option<bool> = None;
+            let _ = {
+                let verdict = &mut verdict;
+                let seen2: *mut rustc_hash::FxHashSet<String> = seen;
+                self.infer_to(base, &Ctx::new(), &mut |baseobj| {
+                    // SAFETY: sequential single-threaded access
+                    let seen = unsafe { &mut *seen2 };
+                    let qn = match self.value_qname(&baseobj) {
+                        Some(q) => q,
+                        None => match &baseobj {
+                            Value::Uninferable => "Uninferable".to_string(),
+                            _ => return crate::value::Drive::Go,
+                        },
+                    };
+                    if seen.contains(&qn) {
+                        return crate::value::Drive::Go;
                     }
-                }
+                    seen.insert(qn);
+                    // isinstance(baseobj, bases.Instance) — Const and the
+                    // container literals are Instance subclasses too
+                    let is_instance = matches!(
+                        baseobj,
+                        Value::Inst { .. }
+                            | Value::ExcInst { .. }
+                            | Value::SynthConst(_)
+                            | Value::SynthSeq { .. }
+                            | Value::SynthDict { .. }
+                            | Value::FrozenSet { .. }
+                            | Value::Generator { .. }
+                    ) || matches!(&baseobj, Value::Node(g)
+                        if self.kind_is(*g, |k| matches!(k,
+                            NodeKind::Const(_) | NodeKind::List { .. } | NodeKind::Tuple { .. }
+                                | NodeKind::Set { .. } | NodeKind::Dict { .. })));
+                    if is_instance {
+                        *verdict = Some(false);
+                        return crate::value::Drive::Stop;
+                    }
+                    let g = match &baseobj {
+                        Value::Node(g)
+                            if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
+                        {
+                            *g
+                        }
+                        _ => return crate::value::Drive::Go,
+                    };
+                    if g == cls {
+                        return crate::value::Drive::Go;
+                    }
+                    if self.cls_type_cache.borrow().get(&g) == Some(&"metaclass")
+                        || self.is_metaclass_class(g, seen)
+                    {
+                        *verdict = Some(true);
+                        return crate::value::Drive::Stop;
+                    }
+                    crate::value::Drive::Go
+                })
+            };
+            match verdict {
+                Some(v) => return v,
+                None => continue, // InferenceError -> continue too
             }
         }
         false

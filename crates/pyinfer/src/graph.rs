@@ -22,7 +22,7 @@ use pyast::NodeId;
 use crate::intern::GlobalInterner;
 use crate::pyenv::{self, PyEnv};
 use crate::snapshot::{load_snapshot, EInf};
-use crate::value::{ErrKind, GNode, GSym, ModId, Value, ValueKey};
+use crate::value::{ErrKind, GNode, GSym, ModId, Value, ValueKey, NV};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FType {
@@ -136,6 +136,10 @@ pub struct Engine {
     pub lookup_cache: RefCell<FxHashMap<(GNode, GSym), Rc<crate::lookup::LookupResult>>>,
     /// FunctionDef.type cached_property
     pub ftype_cache: RefCell<FxHashMap<GNode, FType>>,
+    /// ClassDef._type memo (scoped_nodes.py:1759-1762 — persists for the run)
+    pub cls_type_cache: RefCell<FxHashMap<GNode, &'static str>>,
+    /// ClassDef._all_slots cached_property
+    pub slots_cache: RefCell<FxHashMap<GNode, Result<Option<Rc<Vec<String>>>, ()>>>,
     /// inference-tip recursion guard + cache (inference_tip.py:37-86)
     pub tip_guard: RefCell<FxHashSet<(u8, GNode)>>,
     pub tip_cache: RefCell<FxHashMap<(u8, GNode), Rc<Vec<Value>>>>,
@@ -187,6 +191,8 @@ impl Engine {
             inf_cache: RefCell::new(FxHashMap::default()),
             lookup_cache: RefCell::new(FxHashMap::default()),
             ftype_cache: RefCell::new(FxHashMap::default()),
+            cls_type_cache: RefCell::new(FxHashMap::default()),
+            slots_cache: RefCell::new(FxHashMap::default()),
             tip_guard: RefCell::new(FxHashSet::default()),
             tip_cache: RefCell::new(FxHashMap::default()),
             tip_order: RefCell::new(std::collections::VecDeque::new()),
@@ -1440,22 +1446,22 @@ impl Engine {
             _ => return,
         };
         let ctx = crate::ctx::Ctx::new();
-        let flow = self.infer(expr, &ctx);
-        if flow.err.map(|e| e.is_inference()).unwrap_or(false) && flow.vals.is_empty() {
-            return;
-        }
-        if let Some(e) = flow.err {
-            if !e.is_inference() {
-                return; // astroid only catches InferenceError; others crash
-                        // the build — be permissive instead.
-            }
-        }
-        for inferred in &flow.vals {
+        // for inferred in node.expr.infer(): the per-value bookkeeping
+        // (incl. the slots() inference in _can_assign_attr) runs while the
+        // expr generator is SUSPENDED (builder.py:255-283).
+        let _ = self.infer_to(expr, &ctx, &mut |inferred| {
+            self.delayed_assattr_one(&inferred, node, attrname);
+            crate::value::Drive::Go
+        });
+    }
+
+    fn delayed_assattr_one(&self, inferred: &Value, node: GNode, attrname: GSym) {
+        {
             match inferred {
-                Value::Uninferable => continue,
+                Value::Uninferable => {}
                 Value::Inst { cls } | Value::ExcInst { cls, .. } => {
                     if !self.can_assign_attr(*cls, attrname) {
-                        continue;
+                        return;
                     }
                     let mut ia = self.iattrs.borrow_mut();
                     let vals = ia.entry(*cls).or_default().entry(attrname).or_default();
@@ -1490,20 +1496,159 @@ impl Engine {
                         }
                         // Const/containers (Instance subclasses) and
                         // everything without locals: AttributeError -> skip
-                        _ => continue,
+                        _ => {}
                     }
                 }
                 // proxies (BoundMethod/Generator/...) -> continue
-                _ => continue,
+                _ => {}
             }
         }
     }
 
-    /// builder._can_assign_attr — slots subset: full ClassDef.slots() is
-    /// ported later with the slots checkers; only the builtins.object guard
-    /// is load-bearing for instance_attrs fidelity in practice.
-    fn can_assign_attr(&self, cls: GNode, _attrname: GSym) -> bool {
-        self.qname(cls) != "builtins.object"
+    /// builder.py:58-70 _can_assign_attr: consults ClassDef.slots().
+    fn can_assign_attr(&self, cls: GNode, attrname: GSym) -> bool {
+        match self.all_slots(cls) {
+            Err(()) => true, // NotImplementedError (mro failure / old-style)
+            Ok(None) => true,
+            Ok(Some(slots)) => {
+                if slots.is_empty() {
+                    return true; // `if slots and ...` — empty is falsy
+                }
+                let name = self.sname(attrname);
+                slots.iter().any(|s| *s == name)
+            }
+        }
+    }
+
+    /// ClassDef._all_slots (scoped_nodes.py:2761-2798), cached per class.
+    /// Err(()) = NotImplementedError (MroError); Ok(None) = no/uninferable
+    /// slots; Ok(Some(values)) = slot name strings.
+    pub fn all_slots(&self, cls: GNode) -> Result<Option<Rc<Vec<String>>>, ()> {
+        if let Some(cached) = self.slots_cache.borrow().get(&cls) {
+            return cached.clone();
+        }
+        let result = self.compute_all_slots(cls);
+        self.slots_cache.borrow_mut().insert(cls, result.clone());
+        result
+    }
+
+    fn compute_all_slots(&self, cls: GNode) -> Result<Option<Rc<Vec<String>>>, ()> {
+        let mro = match self.mro(cls, None) {
+            Ok(m) => m,
+            Err(_) => return Err(()), // NotImplementedError
+        };
+        let mut all: Vec<String> = Vec::new();
+        for c in mro {
+            if self.qname(c) == "builtins.object" {
+                continue;
+            }
+            match self.class_slots_of(c) {
+                None => return Ok(None), // a None in grouped_slots
+                Some(vals) => all.extend(vals),
+            }
+        }
+        // sorted(set(...), key=value): membership semantics only
+        all.sort();
+        all.dedup();
+        Ok(Some(Rc::new(all)))
+    }
+
+    /// ClassDef._slots/_islots (scoped_nodes.py:2695-2759). None = class has
+    /// no (or uninferable) __slots__; Some(vec) = slot value strings (empty
+    /// = explicitly empty slots).
+    fn class_slots_of(&self, cls: GNode) -> Option<Vec<String>> {
+        let slots_sym = self.sym("__slots__");
+        let has_local = {
+            let md = self.md(cls.m);
+            let locals = md.locals.borrow();
+            locals
+                .get(&cls.n)
+                .map(|l| l.contains_key(&slots_sym))
+                .unwrap_or(false)
+        };
+        if !has_local {
+            return None;
+        }
+        // for slots in self.igetattr("__slots__") — fresh context
+        let flow = match self.class_igetattr(cls, slots_sym, None, true) {
+            Ok(f) => f,
+            Err(_) => return None,
+        };
+        let mut out: Vec<String> = Vec::new();
+        let mut any = false;
+        for slots in &flow.vals {
+            // must support iteration (__iter__ / __getitem__ on the type)
+            let iterable = self.proxied_class(slots).map(|pc| {
+                let i1 = self.sym("__iter__");
+                let i2 = self.sym("__getitem__");
+                self.class_getattr(pc, i1, None, false).is_ok()
+                    || self.class_getattr(pc, i2, None, false).is_ok()
+            });
+            if iterable != Some(true) {
+                continue;
+            }
+            // Const string: yield if non-empty
+            if let Some(c) = self.value_const(slots) {
+                if let pyast::tree::ConstValue::Str(sv) = c {
+                    if !sv.is_empty() {
+                        any = true;
+                        out.push(sv.to_string());
+                    }
+                }
+                continue;
+            }
+            // containers
+            let elts: Vec<NV> = match slots {
+                Value::Node(g) => {
+                    let md = self.md(g.m);
+                    match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::List { elts, .. }
+                        | NodeKind::Tuple { elts, .. }
+                        | NodeKind::Set { elts } => elts
+                            .iter()
+                            .map(|&e| NV::N(GNode { m: g.m, n: e }))
+                            .collect(),
+                        NodeKind::Dict { items } => items
+                            .iter()
+                            .map(|&(k, _)| NV::N(GNode { m: g.m, n: k }))
+                            .collect(),
+                        _ => continue,
+                    }
+                }
+                Value::SynthSeq { elems, .. } | Value::FrozenSet { elems } => {
+                    elems.iter().cloned().map(NV::V).collect()
+                }
+                Value::SynthDict { items } => {
+                    items.iter().map(|(k, _)| NV::V(k.clone())).collect()
+                }
+                _ => continue,
+            };
+            if elts.is_empty() {
+                // empty list of slots stops the iteration -> explicit []
+                return Some(Vec::new());
+            }
+            for elt in elts {
+                // for inferred in elt.infer(): Const str filter
+                let vals: Vec<Value> = match &elt {
+                    NV::N(g) => self.infer(*g, &crate::ctx::Ctx::new()).vals,
+                    NV::V(v) => vec![v.clone()],
+                };
+                for inferred in vals {
+                    if let Some(pyast::tree::ConstValue::Str(sv)) = self.value_const(&inferred)
+                    {
+                        if !sv.is_empty() {
+                            any = true;
+                            out.push(sv.to_string());
+                        }
+                    }
+                }
+            }
+        }
+        if !any && out.is_empty() {
+            // no values produced and no explicit empty -> None
+            return None;
+        }
+        Some(out)
     }
 }
 

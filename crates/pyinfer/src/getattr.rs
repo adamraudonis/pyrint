@@ -1268,74 +1268,113 @@ impl Engine {
         }
     }
 
-    /// ancestors() (scoped_nodes.py:2167-2211) — prefix DFS
+    /// ancestors() (scoped_nodes.py:2167-2211) — prefix DFS; eager shim.
     pub fn ancestors(&self, cls: GNode, recurs: bool, ctx: Option<&Rc<Ctx>>) -> Vec<GNode> {
-        let mut yielded: rustc_hash::FxHashSet<GNode> = Default::default();
-        yielded.insert(cls);
         let mut out = Vec::new();
-        let ctx = copy_context(ctx);
-        self.ancestors_into(cls, recurs, &ctx, &mut yielded, &mut out, cls, 0);
+        let _ = self.ancestors_to(cls, recurs, ctx, &mut |g| {
+            out.push(g);
+            Drive::Go
+        });
         out
     }
 
-    fn ancestors_into(
+    /// streaming ancestors(): one frame of scoped_nodes.py:2167-2211. Each
+    /// recursion level is its own generator with its OWN `yielded` set
+    /// (fresh `{self}`); base inference is pulled value-by-value (the base
+    /// generator stays SUSPENDED while grandparents are walked), and
+    /// consumers can abandon early (is_subtype_of / metaclass search).
+    pub fn ancestors_to(
+        &self,
+        cls: GNode,
+        recurs: bool,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut dyn FnMut(GNode) -> Drive,
+    ) -> End {
+        let ctx = copy_context(ctx);
+        self.ancestors_frame(cls, recurs, &ctx, 0, sink)
+    }
+
+    fn ancestors_frame(
         &self,
         cls: GNode,
         recurs: bool,
         ctx: &Rc<Ctx>,
-        yielded: &mut rustc_hash::FxHashSet<GNode>,
-        out: &mut Vec<GNode>,
-        self_class: GNode,
         depth: u32,
-    ) {
+        sink: &mut dyn FnMut(GNode) -> Drive,
+    ) -> End {
         if depth > 100 {
-            return;
+            // stand-in for Python's RecursionError on cyclic bases
+            return End::Done;
         }
+        let mut yielded: rustc_hash::FxHashSet<GNode> = Default::default();
+        yielded.insert(cls);
         let bases = self.class_bases(cls);
         if bases.is_empty() {
             if self.qname(cls) != "builtins.object" {
                 let obj = self.builtins().object;
-                if yielded.insert(obj) {
-                    out.push(obj);
+                if let Drive::Stop = sink(obj) {
+                    return End::Stopped;
                 }
             }
-            return;
+            return End::Done;
         }
         for base in bases {
-            // restore_path
+            // with context.restore_path(): per-base snapshot
             let saved_path = ctx.path.borrow().clone();
-            let flow = self.infer(base, ctx);
+            let mut consumer_stop = false;
+            let _ = {
+                let yielded = &mut yielded;
+                let consumer_stop = &mut consumer_stop;
+                self.infer_to(base, ctx, &mut |baseobj| {
+                    let basecls = match &baseobj {
+                        Value::Node(g)
+                            if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
+                        {
+                            *g
+                        }
+                        Value::Inst { cls } | Value::ExcInst { cls, .. } => *cls,
+                        _ => return Drive::Go,
+                    };
+                    if yielded.insert(basecls) {
+                        if let Drive::Stop = sink(basecls) {
+                            *consumer_stop = true;
+                            return Drive::Stop;
+                        }
+                    }
+                    if !recurs {
+                        return Drive::Go;
+                    }
+                    // for grandpa in baseobj.ancestors(recurs=True, context):
+                    // fresh generator (own yielded set); `grandpa is self`
+                    // breaks the INNER loop only
+                    let mut inner_stop = false;
+                    let _ = self.ancestors_frame(basecls, true, ctx, depth + 1, &mut |gp| {
+                        if gp == cls {
+                            return Drive::Stop; // break
+                        }
+                        if !yielded.insert(gp) {
+                            return Drive::Go; // continue
+                        }
+                        let d = sink(gp);
+                        if let Drive::Stop = d {
+                            inner_stop = true;
+                        }
+                        d
+                    });
+                    if inner_stop {
+                        *consumer_stop = true;
+                        return Drive::Stop;
+                    }
+                    Drive::Go
+                })
+            };
             *ctx.path.borrow_mut() = saved_path;
-            for baseobj in &flow.vals {
-                let basecls = match baseobj {
-                    Value::Node(g)
-                        if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
-                    {
-                        *g
-                    }
-                    Value::Inst { cls } | Value::ExcInst { cls, .. } => *cls,
-                    _ => continue,
-                };
-                if yielded.insert(basecls) {
-                    out.push(basecls);
-                }
-                if !recurs {
-                    continue;
-                }
-                // grandparents: stop the chain at self
-                let mut grand: Vec<GNode> = Vec::new();
-                let mut sub_yielded = yielded.clone();
-                self.ancestors_into(basecls, true, ctx, &mut sub_yielded, &mut grand, self_class, depth + 1);
-                for gp in grand {
-                    if gp == self_class {
-                        break;
-                    }
-                    if yielded.insert(gp) {
-                        out.push(gp);
-                    }
-                }
+            if consumer_stop {
+                return End::Stopped;
             }
+            // InferenceError from a base -> continue with next base
         }
+        End::Done
     }
 
     /// _compute_mro / mro() (scoped_nodes.py:2837-2863) — C3
@@ -1441,14 +1480,22 @@ impl Engine {
         out
     }
 
-    /// is_subtype_of (scoped_nodes.py:2004-2015)
+    /// is_subtype_of (scoped_nodes.py:2004-2015): `any(...)` abandons the
+    /// ancestors generator on the first match.
     pub fn is_subtype_of(&self, cls: GNode, type_name: &str, ctx: Option<&Rc<Ctx>>) -> bool {
         if self.qname(cls) == type_name {
             return true;
         }
-        self.ancestors(cls, true, ctx)
-            .iter()
-            .any(|&a| self.qname(a) == type_name)
+        let mut found = false;
+        let _ = self.ancestors_to(cls, true, ctx, &mut |a| {
+            if self.qname(a) == type_name {
+                found = true;
+                Drive::Stop
+            } else {
+                Drive::Go
+            }
+        });
+        found
     }
 
     // ---------- metaclass ----------
@@ -1492,14 +1539,18 @@ impl Engine {
         if let Some(k) = self.declared_metaclass(cls, ctx) {
             return Some(k);
         }
-        for parent in self.ancestors(cls, true, ctx) {
+        // `return klass` inside the loop abandons the ancestors generator
+        let mut found: Option<Value> = None;
+        let _ = self.ancestors_to(cls, true, ctx, &mut |parent| {
             if !seen.contains(&parent) {
                 if let Some(k) = self.find_metaclass(parent, seen, ctx) {
-                    return Some(k);
+                    found = Some(k);
+                    return Drive::Stop;
                 }
             }
-        }
-        None
+            Drive::Go
+        });
+        found
     }
 
     // ---------- ClassDef.type / instantiate_class ----------

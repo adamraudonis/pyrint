@@ -190,6 +190,9 @@ impl Engine {
             NodeKind::Name { name } | NodeKind::AssignName { name } | NodeKind::DelName { name } => {
                 Some(md.tree.s(*name).to_string())
             }
+            NodeKind::Attribute { attrname, .. } | NodeKind::AssignAttr { attrname, .. } => {
+                Some(md.tree.s(*attrname).to_string())
+            }
             NodeKind::Lambda(_) => Some("<lambda>".to_string()),
             _ => None,
         }
