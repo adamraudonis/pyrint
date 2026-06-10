@@ -1729,6 +1729,12 @@ impl Engine {
     pub fn infer_nv_to(&self, nv: &NV, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
         match nv {
             NV::N(g) => self.infer_to(*g, ctx, sink),
+            // a NODE that travelled as a VALUE (e.g. ClassDef.getitem's
+            // `next(infer_call_result(...))` result): astroid calls
+            // `.infer(context)` on it — the FULL NodeNG.infer hop (tips,
+            // cache key, bump). Proxies (Inst/Generator/...) instead
+            // yield self undecorated (bases.py:139).
+            NV::V(Value::Node(g)) => self.infer_to(*g, ctx, sink),
             NV::V(v) => {
                 yield_v!(sink, v.clone());
                 End::Done

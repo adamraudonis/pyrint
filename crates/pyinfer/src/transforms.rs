@@ -1418,8 +1418,12 @@ impl Engine {
                     ));
                 }
                 // fake module named like the ENUM CLASS qname so the fake
-                // member class qname composes to <enum>.<member>
-                let Some(fake_mid) = self.build_template_module(&classdef, &enum_qname)
+                // member class qname composes to <enum>.<member>.
+                // apply_transforms=False (brain_namedtuple_enum.py:126-128):
+                // no transform scan — nothing infers the fake's base Names
+                // before the reparent below, no wipes, no tips on the fake.
+                let Some(fake_mid) =
+                    self.build_template_module_no_transforms(&classdef, &enum_qname)
                 else {
                     continue;
                 };
@@ -1436,6 +1440,18 @@ impl Engine {
                         None => continue,
                     }
                 };
+                // fake.parent = target.parent (brain_namedtuple_enum.py:
+                // infer_enum_class) — the fake class is REPARENTED into the
+                // enum's module: its base Name (e.g. `Enum`) resolves
+                // through the enum class's scope chain (class scope skipped
+                // -> module locals -> the real ImportFrom), and igetattr's
+                // descriptor checks re-infer those per-member base Names.
+                if let Some(tp) = self.parent(*target) {
+                    if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                        eprintln!("REPARENT fake {} -> {:?}", tname, tp);
+                    }
+                    self.reparents.borrow_mut().insert(fake_cls, tp);
+                }
                 // fake.locals[method.name] = [method] for mymethods
                 {
                     let fmd = self.md(fake_mid);
@@ -1449,6 +1465,9 @@ impl Engine {
                 let inst = self.instantiate_class(fake_cls);
                 let ph = placeholders.next().expect("placeholder");
                 self.redirects.borrow_mut().insert(ph, crate::value::NV::V(inst));
+                // the locals entry holds the Instance PROXY itself —
+                // stmt.infer is a bare `yield self` (no NodeNG machinery)
+                self.proxy_placeholders.borrow_mut().insert(ph);
                 new_targets.push(ph);
                 made_any = true;
                 if stmt_value.is_none() {

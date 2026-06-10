@@ -23,13 +23,22 @@ impl Engine {
 
     pub fn parent(&self, g: GNode) -> Option<GNode> {
         if g.n == NodeId::MODULE {
+            // brain-reparented nodes (`fake.parent = target.parent`) keep
+            // NodeId::MODULE in their own tree; the override redirects the
+            // walk into the target module. Module roots aren't reparented.
             return None;
         }
         let md = self.md(g.m);
-        Some(GNode {
-            m: g.m,
-            n: md.tree.nodes[g.n.idx()].parent,
-        })
+        let p = md.tree.nodes[g.n.idx()].parent;
+        if p == NodeId::MODULE {
+            let rp = self.reparents.borrow();
+            if !rp.is_empty() {
+                if let Some(&over) = rp.get(&g) {
+                    return Some(over);
+                }
+            }
+        }
+        Some(GNode { m: g.m, n: p })
     }
 
     pub fn fromlineno(&self, g: GNode) -> u32 {
@@ -153,15 +162,17 @@ impl Engine {
         let mut parts: Vec<String> = Vec::new();
         let mut cur = g;
         loop {
-            let name = match &md.tree.nodes[cur.n.idx()].kind {
+            // re-fetch per iteration: reparented nodes cross module trees
+            let cmd = self.md(cur.m);
+            let name = match &cmd.tree.nodes[cur.n.idx()].kind {
                 NodeKind::Module(d) => {
                     parts.push(d.name.to_string());
                     break;
                 }
                 NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
-                    md.tree.s(d.name).to_string()
+                    cmd.tree.s(d.name).to_string()
                 }
-                NodeKind::ClassDef(d) => md.tree.s(d.name).to_string(),
+                NodeKind::ClassDef(d) => cmd.tree.s(d.name).to_string(),
                 NodeKind::Lambda(_) => "<lambda>".to_string(),
                 _ => {
                     // shouldn't happen for qname targets; fall to parent

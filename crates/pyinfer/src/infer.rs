@@ -93,6 +93,22 @@ impl Engine {
         if self.depth.get() >= self.max_depth {
             return End::Raised(ErrKind::Recursion);
         }
+        // PROXY placeholders (enum member Instances stored in locals):
+        // astroid's Proxy.infer is a bare `yield self` (bases.py:139) —
+        // no NodeNG.infer entry, no bump, no cache, no trace.
+        if self.proxy_placeholders.borrow().contains(&node) {
+            // drop the redirects borrow BEFORE driving the consumer
+            let proxy_val = match self.redirects.borrow().get(&node) {
+                Some(NV::V(v)) => Some(v.clone()),
+                _ => None,
+            };
+            if let Some(v) = proxy_val {
+                return match sink(v) {
+                    Drive::Stop => End::Stopped,
+                    Drive::Go => End::Done,
+                };
+            }
+        }
         // synthetic-class base placeholders standing for raw cross-module
         // nodes (bases.py _infer_type_new_call stores the original Tuple
         // elts as bases): inference goes straight to the original node.
@@ -126,13 +142,22 @@ impl Engine {
                 bn,
                 ctx_in.nodes_inferred.get()
             );
-            let mut wrapped = |v: Value| -> Drive {
-                eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
-                let dr = sink(v);
-                eprintln!("{}  <-{:?}", "  ".repeat(d), dr);
-                dr
+            let mut any = false;
+            let r = {
+                let any = &mut any;
+                let mut wrapped = |v: Value| -> Drive {
+                    *any = true;
+                    eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
+                    let dr = sink(v);
+                    eprintln!("{}  <-{:?}", "  ".repeat(d), dr);
+                    dr
+                };
+                self.infer_entry_to_inner(node, ctx_in, &mut wrapped)
             };
-            return self.infer_entry_to_inner(node, ctx_in, &mut wrapped);
+            if !any {
+                eprintln!("{}  (empty end={:?})", "  ".repeat(d), r);
+            }
+            return r;
         }
         self.infer_entry_to_inner(node, ctx_in, sink)
     }

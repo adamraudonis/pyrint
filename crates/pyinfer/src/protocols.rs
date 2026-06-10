@@ -552,13 +552,13 @@ impl Engine {
             NodeKind::ExceptHandler { type_, .. } => *type_,
             _ => None,
         };
-        let c = match ctx {
-            Some(c) => Rc::clone(c),
-            None => Ctx::new(),
-        };
+        // protocols.py:529 `node_classes.unpack_infer(self.type)` — NO
+        // context: every stmt.infer(None) inside runs under fresh
+        // InferenceContexts (no shared-counter bumps from the caller)
+        let _ = ctx;
         let mut assigned: Vec<NV> = Vec::new();
         if let Some(t) = type_ {
-            for v in self.unpack_infer(GNode { m: handler.m, n: t }, &c)? {
+            for v in self.unpack_infer_fresh(GNode { m: handler.m, n: t })? {
                 match v {
                     Value::Node(g)
                         if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) =>
@@ -603,27 +603,57 @@ impl Engine {
         Ok(assigned)
     }
 
-    /// node_classes.py:89-113 unpack_infer
-    pub fn unpack_infer(&self, stmt: GNode, ctx: &Rc<Ctx>) -> Result<Vec<Value>, ErrKind> {
+    /// node_classes.py:89-113 unpack_infer, called with context=None
+    /// (its only in-engine caller, protocols.py:529, passes no context):
+    /// EVERY stmt.infer(None) creates its own fresh InferenceContext —
+    /// fresh path set, fresh counter. Pull structure ported exactly:
+    /// a SINGLE abandoned pull first (`next(stmt.infer(context), U)` —
+    /// no cache write), the early `inferred is stmt` return, then a full
+    /// second drain under a NEW fresh context.
+    pub fn unpack_infer_fresh(&self, stmt: GNode) -> Result<Vec<Value>, ErrKind> {
         let md = self.md(stmt.m);
         match &md.tree.nodes[stmt.n.idx()].kind {
             NodeKind::List { elts, .. } | NodeKind::Tuple { elts, .. } => {
                 let mut out = Vec::new();
                 for &e in elts {
-                    out.extend(self.unpack_infer(GNode { m: stmt.m, n: e }, ctx)?);
+                    out.extend(self.unpack_infer_fresh(GNode { m: stmt.m, n: e })?);
                 }
                 Ok(out)
             }
             _ => {
-                let flow = self.infer(stmt, ctx);
+                // next(stmt.infer(context), Uninferable) — abandoned pull
+                let first = match self.infer_first_fresh(stmt) {
+                    Ok(Some(v)) => v,
+                    Ok(None) => Value::Uninferable,
+                    Err(e) => return Err(e),
+                };
+                if matches!(&first, Value::Node(g) if *g == stmt) {
+                    return Ok(vec![first]);
+                }
+                // full second drain, fresh context
+                let c = Ctx::new();
+                let flow = self.infer(stmt, &c);
                 let mut out = Vec::new();
                 for v in flow.vals {
                     match &v {
-                        Value::Node(g) if *g == stmt => out.push(v),
                         Value::Uninferable => out.push(v),
                         Value::Node(g) => {
-                            out.extend(self.unpack_infer(*g, ctx)?);
+                            out.extend(self.unpack_infer_fresh(*g)?);
                         }
+                        Value::SynthSeq { elems, .. } => {
+                            // container VALUE: astroid recurses into the
+                            // List/Tuple branch of unpack_infer
+                            for e in elems.iter() {
+                                match e {
+                                    Value::Node(g) => {
+                                        out.extend(self.unpack_infer_fresh(*g)?)
+                                    }
+                                    other => out.push(other.clone()),
+                                }
+                            }
+                        }
+                        // proxies (Inst/ExcInst/...) re-infer to themselves
+                        // one level down: net effect is a passthrough
                         _ => out.push(v),
                     }
                 }
@@ -1108,7 +1138,7 @@ impl Engine {
             Value::Node(g) => {
                 let md = self.md(g.m);
                 match &md.tree.nodes[g.n.idx()].kind {
-                    NodeKind::Const(c) => self.const_getitem(c, index),
+                    NodeKind::Const(c) => self.const_getitem(c, index, ctx),
                     NodeKind::List { elts, .. } | NodeKind::Tuple { elts, .. } => {
                         let elems: Vec<NV> = elts
                             .iter()
@@ -1120,7 +1150,7 @@ impl Engine {
                         } else {
                             SeqKind::Tuple
                         };
-                        self.container_getitem(&elems, kind, index)
+                        self.container_getitem(&elems, kind, index, ctx)
                     }
                     NodeKind::Dict { items } => {
                         let pairs: Vec<(NV, NV)> = items
@@ -1138,7 +1168,7 @@ impl Engine {
                     _ => Err(ErrKind::AstroidType),
                 }
             }
-            Value::SynthConst(c) => self.const_getitem(c, index),
+            Value::SynthConst(c) => self.const_getitem(c, index, ctx),
             Value::SynthSeq { kind, elems } => {
                 let elems: Vec<NV> = elems
                     .iter()
@@ -1147,7 +1177,7 @@ impl Engine {
                         other => NV::V(other.clone()),
                     })
                     .collect();
-                self.container_getitem(&elems, *kind, index)
+                self.container_getitem(&elems, *kind, index, ctx)
             }
             Value::SynthDict { items } => {
                 let pairs: Vec<(NV, NV)> = items
@@ -1172,7 +1202,7 @@ impl Engine {
         }
     }
 
-    fn const_getitem(&self, c: &ConstValue, index: &Value) -> Result<NV, ErrKind> {
+    fn const_getitem(&self, c: &ConstValue, index: &Value, ctx: &Rc<Ctx>) -> Result<NV, ErrKind> {
         let idx_const = self.value_const(index);
         match c {
             ConstValue::Str(s) => {
@@ -1191,7 +1221,7 @@ impl Engine {
                             chars[i].to_string().into(),
                         )))))
                     }
-                    _ => match self.value_slice(index) {
+                    _ => match self.value_slice(index, ctx) {
                         Some(sl) => {
                             let sliced: String =
                                 slice_seq(&chars, &sl).into_iter().collect();
@@ -1210,7 +1240,7 @@ impl Engine {
                         IntValue::Small(b[i] as i64),
                     )))))
                 }
-                _ => match self.value_slice(index) {
+                _ => match self.value_slice(index, ctx) {
                     Some(sl) => {
                         let v: Vec<u8> = slice_seq(b, &sl);
                         Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Bytes(
@@ -1229,6 +1259,7 @@ impl Engine {
         elems: &[NV],
         kind: SeqKind,
         index: &Value,
+        ctx: &Rc<Ctx>,
     ) -> Result<NV, ErrKind> {
         match self.value_const(index) {
             Some(ConstValue::Int(IntValue::Small(i))) => {
@@ -1239,7 +1270,7 @@ impl Engine {
                 let i = norm_index(b as i64, elems.len()).ok_or(ErrKind::AstroidIndex)?;
                 Ok(elems[i].clone())
             }
-            _ => match self.value_slice(index) {
+            _ => match self.value_slice(index, ctx) {
                 Some(sl) => {
                     let sliced = slice_seq(elems, &sl);
                     let vals: Vec<Value> = sliced
@@ -1373,7 +1404,10 @@ impl Engine {
         let mut from_class_getitem = false;
         if methods.is_empty() {
             let cg = self.sym("__class_getitem__");
-            match self.class_getattr(cls, cg, Some(ctx), true) {
+            // scoped_nodes.py:2561 `self.getattr("__class_getitem__")` —
+            // NO context: the ancestors walk + metaclass lookup run under
+            // fresh contexts (no shared-counter bumps)
+            match self.class_getattr(cls, cg, None, true) {
                 Ok(attrs) => {
                     methods = attrs
                         .into_iter()
@@ -1411,7 +1445,7 @@ impl Engine {
     }
 
     /// slice value of an index (Slice node / SynthSlice)
-    fn value_slice(&self, index: &Value) -> Option<PySlice> {
+    fn value_slice(&self, index: &Value, ctx: &Rc<Ctx>) -> Option<PySlice> {
         match index {
             Value::SynthSlice { bounds } => Some(PySlice {
                 start: const_as_int(bounds[0].as_ref()),
@@ -1434,9 +1468,13 @@ impl Engine {
                                         }
                                         NodeKind::Const(ConstValue::None) => Some(None),
                                         _ => {
-                                            let f =
-                                                self.infer(gg, &Ctx::new());
-                                            match f.vals.first().and_then(|v| self.value_const(v))
+                                            // _slice_value (node_classes.py:194-218):
+                                            // `next(index.infer(context=context))` —
+                                            // SINGLE pull under the LIVE context
+                                            match self
+                                                .infer_first(gg, Some(ctx))
+                                                .ok()
+                                                .and_then(|v| self.value_const(&v))
                                             {
                                                 Some(ConstValue::Int(IntValue::Small(i))) => {
                                                     Some(Some(i))

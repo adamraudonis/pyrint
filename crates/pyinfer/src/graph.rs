@@ -174,6 +174,18 @@ pub struct Engine {
     /// pre-inferred values (NV::V — EvaluatedObject / enum-member instances
     /// stored in locals). infer() forwards through this table.
     pub redirects: RefCell<FxHashMap<GNode, crate::value::NV>>,
+    /// redirect placeholders standing for PROXY objects stored directly in
+    /// locals (enum member Instances, brain_namedtuple_enum.py
+    /// `new_targets.append(fake.instantiate_class())`): astroid's
+    /// Proxy.infer is a bare `yield self` (bases.py:139) — NO NodeNG.infer
+    /// entry, no bump, no cache write. infer_to short-circuits these.
+    pub proxy_placeholders: RefCell<rustc_hash::FxHashSet<GNode>>,
+    /// cross-module parent overrides: astroid reparents brain-built nodes
+    /// into real modules (`fake.parent = target.parent`,
+    /// brain_namedtuple_enum.py infer_enum_class) so their scope chains —
+    /// and thus base-Name lookups — resolve in the TARGET module.
+    /// Consulted by treeutil::parent().
+    pub reparents: RefCell<FxHashMap<GNode, GNode>>,
     /// six.with_metaclass hack: persistent `self._metaclass = baseobj._metaclass`
     /// mutation from declared_metaclass (scoped_nodes.py:2638-2645)
     pub meta_override: RefCell<FxHashMap<GNode, GNode>>,
@@ -277,6 +289,8 @@ impl Engine {
             isdir_cache: RefCell::new(FxHashMap::default()),
             typing_tip_cache: RefCell::new(FxHashMap::default()),
             redirects: RefCell::new(FxHashMap::default()),
+            proxy_placeholders: RefCell::new(rustc_hash::FxHashSet::default()),
+            reparents: RefCell::new(FxHashMap::default()),
             meta_override: RefCell::new(FxHashMap::default()),
             obj_model_funcs: RefCell::new(None),
             implicit_locals: RefCell::new(FxHashMap::default()),
@@ -1336,6 +1350,33 @@ impl Engine {
             true,
         );
         self.post_build(id);
+        Some(id)
+    }
+
+    /// AstroidBuilder(manager, apply_transforms=False).string_build(...) —
+    /// used by infer_enum_class for member fake classes: NO transform scan
+    /// (no wipes, no tips, and crucially no inference of the fake's base
+    /// Names before the brain reparents the class into the real module).
+    pub fn build_template_module_no_transforms(
+        &self,
+        source: &str,
+        modname: &str,
+    ) -> Option<ModId> {
+        let src = pyast::decode_source(source.as_bytes(), "<template>").ok()?;
+        let outcome = pyast::parse::parse_module(&src, modname, "<template>", false);
+        let tree = outcome.tree?;
+        let id = self.register_module(
+            modname.to_string(),
+            "<template>".to_string(),
+            tree,
+            false,
+            true,
+        );
+        // _post_build minus visit_transforms (builder.py:166-178 with
+        // self._apply_transforms False): star imports + delayed assattr
+        // still run; tips never activate for this module.
+        self.add_from_names_to_locals(id);
+        self.process_delayed_assattr(id);
         Some(id)
     }
 

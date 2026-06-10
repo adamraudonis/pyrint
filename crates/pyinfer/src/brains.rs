@@ -756,6 +756,20 @@ impl Engine {
             (Some(d), None) => Some(self.infer(GNode { m: node.m, n: d }, ctx)),
             (None, Some(f)) => {
                 let fg = GNode { m: node.m, n: f };
+                // brain_dataclasses.py:430-432: `new_call =
+                // parse(default.as_string()).body[0].value` — a REAL
+                // template module build whose transform scan applies the
+                // builtin Call tips (each application WIPES the global
+                // inference cache mid-dump, transforms.py:72), then
+                // `yield from new_call.infer(context=ctx)` under the live
+                // ctx. Name/Attribute factories take this path; other
+                // shapes keep the value-equivalent emulation below.
+                if let Some(dotted) = self.dotted_of(fg) {
+                    let src = format!("{dotted}()\n");
+                    if let Some(tmpl_call) = self.template_extract_node(&src) {
+                        return Some(self.infer(tmpl_call, ctx));
+                    }
+                }
                 // emulate `parse(factory.as_string() + "()").infer(ctx)`
                 let flow = self.infer(fg, ctx);
                 let mut out: Vec<Value> = Vec::new();
@@ -862,8 +876,9 @@ impl Engine {
     }
 
     /// brain_pathlib.infer_parents_subscript: Const slice -> Inst of the
-    /// REAL pathlib.Path (PATH_TEMPLATE re-imports pathlib; the Name infer
-    /// bumps the live context)
+    /// REAL pathlib.Path. brain_pathlib.py:44
+    /// `next(_extract_single_node(PATH_TEMPLATE).infer())` — NO context
+    /// (fresh InferenceContext, no live-counter bumps) and a SINGLE pull.
     fn tip_pathlib_parents(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
         let md = self.md(node.m);
         let slice_is_const = match &md.tree.nodes[node.n.idx()].kind {
@@ -875,11 +890,12 @@ impl Engine {
         if !slice_is_const {
             return None; // UseInferenceDefault
         }
-        let flow = self.tip_numpy_extract("from pathlib import Path\nPath\n", ctx)?;
-        let cls = flow.vals.into_iter().find_map(|v| match v {
-            Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => Some(g),
-            _ => None,
-        })?;
+        let g = self.template_extract_node("from pathlib import Path\nPath\n")?;
+        let cls = match self.infer_first(g, None).ok()? {
+            Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
+            _ => return None,
+        };
+        let _ = ctx;
         Some(Flow::ok(vec![self.instantiate_class(cls)]))
     }
 
@@ -905,6 +921,13 @@ impl Engine {
     /// template module per tip run (module name '' -> qname ".array" etc.),
     /// inferred with the LIVE context (counter bumps included).
     fn tip_numpy_extract(&self, source: &str, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let g = self.template_extract_node(source)?;
+        Some(self.infer(g, ctx))
+    }
+
+    /// extract_node(source) on a fresh template module: the last body
+    /// statement, unwrapped from Expr
+    fn template_extract_node(&self, source: &str) -> Option<GNode> {
         let mid = self.build_template_module(source, "")?;
         let md = self.md(mid);
         let mut last = match &md.tree.nodes[pyast::NodeId::MODULE.idx()].kind {
@@ -915,8 +938,7 @@ impl Engine {
         if let NodeKind::Expr { value } = &md.tree.nodes[last.idx()].kind {
             last = *value;
         }
-        let g = GNode { m: mid, n: last };
-        Some(self.infer(g, ctx))
+        Some(GNode { m: mid, n: last })
     }
 
     fn looks_like_typing_subscript(&self, value: GNode) -> bool {
@@ -935,9 +957,6 @@ impl Engine {
 
     /// brain_typing.infer_typing_typevar_or_newtype
     fn tip_typing_typevar(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
-        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
-            return Some(Flow::ok(cached.clone()));
-        }
         let md = self.md(node.m);
         let (func, args) = match &md.tree.nodes[node.n.idx()].kind {
             NodeKind::Call { func, args, .. } => (GNode { m: node.m, n: *func }, args.clone()),
@@ -975,9 +994,9 @@ impl Engine {
                 .and_then(|l| l.get(&sym))
                 .and_then(|v| v.first().copied())?
         };
-        let vals = vec![Value::Node(cls)];
-        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
-        Some(Flow::ok(vals))
+        // brain_typing.py:131-133: fresh template per run, then
+        // `return node.infer(context=context_itton)` — live-ctx infer hop
+        Some(self.infer(cls, ctx))
     }
 
     /// brain_typing.infer_typing_alias + infer_special_alias
@@ -1165,9 +1184,12 @@ impl Engine {
                 .and_then(|l| l.get(&sym))
                 .and_then(|v| v.first().copied())?
         };
-        let vals = vec![Value::Node(cls)];
-        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
-        Some(Flow::ok(vals))
+        // brain_typing.py:192-193: a FRESH template per tip run, then
+        // `return node.infer(context=ctx)` — a full NodeNG.infer hop on
+        // the template ClassDef under the LIVE context (+1 bump when the
+        // consumer drains; cache write under the live key). Empty-context
+        // runs are cached by the generic tip cache (explicit_inference).
+        Some(self.infer(cls, ctx))
     }
 
     /// brain_typing.infer_typedDict
@@ -1267,10 +1289,12 @@ impl Engine {
                     (Value::Uninferable, _) | (_, None) => Some(Flow::uninferable()),
                     (obj, Some(attr)) => {
                         let sym = self.sym(&attr);
-                        match self.igetattr_value(&obj, sym, Some(ctx)) {
-                            Ok(f) if !f.vals.is_empty() => {
-                                Some(Flow::one(f.vals[0].clone()))
-                            }
+                        // next(obj.igetattr(attr, context=context)) — SINGLE
+                        // pull (brain_builtin_inference.py infer_getattr):
+                        // the suspended igetattr chain is abandoned (no
+                        // cache writes / post-yield bumps)
+                        match self.igetattr_first(&obj, sym, Some(ctx)) {
+                            Ok(Some(v)) => Some(Flow::one(v)),
                             _ => {
                                 if args.len() == 3 {
                                     // next(node.args[2].infer(context)) —
@@ -2467,10 +2491,18 @@ impl Engine {
         };
         let (cls, base_slots, _, _) =
             self.build_synth_class("__astroid_synthetic", &name, lineno, col, 1, false, 0);
-        self.redirects.borrow_mut().insert(
-            GNode { m: cls.m, n: base_slots[0] },
-            crate::value::NV::V(Value::Node(self.builtins().tuple)),
-        );
+        // bases=[_extract_single_node("tuple")] (brain_namedtuple_enum.py:
+        // infer_named_tuple) — the base is a real Name node in a fresh
+        // throwaway module; inferring it enters Name.infer THEN the builtins
+        // tuple ClassDef.infer (two NodeNG.infer hops, two bumps when the
+        // consumer drains). NV::N makes the slot transparent.
+        let base_redirect = self
+            .template_extract_node("tuple\n")
+            .map(crate::value::NV::N)
+            .unwrap_or(crate::value::NV::V(Value::Node(self.builtins().tuple)));
+        self.redirects
+            .borrow_mut()
+            .insert(GNode { m: cls.m, n: base_slots[0] }, base_redirect);
         // instance_attrs: EmptyNode-ish placeholders per attribute
         {
             let phs = self.alloc_placeholders(attributes.len());
