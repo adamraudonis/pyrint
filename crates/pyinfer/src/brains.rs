@@ -1427,17 +1427,17 @@ impl Engine {
         let f = self.class_igetattr(t, sym, Some(ctx), true).ok()?;
         let len_call = f.vals.first()?.clone();
         let res = self.infer_call_result(&len_call, None, Some(&copy_context(Some(ctx))));
+        // helpers.object_len tail: int Const -> value; None result or an
+        // int-subclass Instance -> InferenceError (-> UseInferenceDefault
+        // -> ERR through the raw builtin); anything else AstroidTypeError
+        // (also UseInferenceDefault)
         match res.vals.first() {
             Some(v) => match self.value_const(v) {
                 Some(ConstValue::Int(IntValue::Small(i))) => Some(i),
-                _ => match v {
-                    Value::Inst { cls } if self.is_subtype_of(*cls, "builtins.int", None) => {
-                        Some(0)
-                    }
-                    _ => None,
-                },
+                Some(ConstValue::Bool(_)) => None, // pytype is builtins.bool
+                _ => None,
             },
-            None => Some(0),
+            None => None,
         }
     }
 
