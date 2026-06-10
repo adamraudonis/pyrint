@@ -182,6 +182,26 @@ pub struct Engine {
     /// `def __init__(self, *args, **kwargs): return None`, reparented to
     /// builtins.object (qname builtins.object.__new__/__init__)
     pub obj_model_funcs: RefCell<Option<(GNode, GNode)>>,
+    /// ClassDef.implicit_locals() (scoped_nodes.py:1911-1933): every class
+    /// gets `__module__`/`__qualname__`/`__annotations__` Const/Unknown
+    /// locals at CONSTRUCTION time (values frozen with the then-current
+    /// parent chain). Materialized lazily as redirect placeholders keyed
+    /// (class, 0|1|2); implicit_owner records the owning class for the
+    /// igetattr same-scope filter (placeholder "parent" is the class).
+    pub implicit_locals: RefCell<FxHashMap<(GNode, u8), GNode>>,
+    pub implicit_owner: RefCell<FxHashMap<GNode, GNode>>,
+    /// Property objects built by the property(...) builtin tip: astroid
+    /// names them "<property>" parented to SYNTHETIC_ROOT
+    /// (brain_builtin_inference.py:610-647) -> qname
+    /// "__astroid_synthetic.<property>" regardless of the function.
+    pub synth_props: RefCell<FxHashSet<GNode>>,
+    /// functions decorated with functools.lru_cache get LruWrappedModel
+    /// special_attributes (brain_functools.py:133-142 predicate, raw
+    /// transform returns None -> no wipe)
+    pub lru_wrapped: RefCell<FxHashSet<GNode>>,
+    /// lazily-built `def cache_clear(self): pass` template function
+    /// (LruWrappedModel.attr_cache_clear, brain_functools.py:59-62)
+    pub lru_cache_clear_fn: RefCell<Option<GNode>>,
     /// ClassDef.hide — true only for synthesized temporary_class nodes
     /// (scoped_nodes.py:1603 with_metaclass hack)
     pub hidden_classes: RefCell<FxHashSet<GNode>>,
@@ -239,6 +259,11 @@ impl Engine {
             redirects: RefCell::new(FxHashMap::default()),
             meta_override: RefCell::new(FxHashMap::default()),
             obj_model_funcs: RefCell::new(None),
+            implicit_locals: RefCell::new(FxHashMap::default()),
+            implicit_owner: RefCell::new(FxHashMap::default()),
+            synth_props: RefCell::new(FxHashSet::default()),
+            lru_wrapped: RefCell::new(FxHashSet::default()),
+            lru_cache_clear_fn: RefCell::new(None),
             hidden_classes: RefCell::new(FxHashSet::default()),
             pathlib_subscripts: RefCell::new(FxHashSet::default()),
             dataclass_attrs: RefCell::new(FxHashMap::default()),
@@ -561,6 +586,47 @@ impl Engine {
             meta_slot,
             extra_slots,
         )
+    }
+
+    /// Allocate a single orphan node of the given kind in a fresh synthetic
+    /// module (implicit class locals: Const/Unknown that infer to themselves
+    /// with stable identity, no redirects).
+    pub fn alloc_synth_node(&self, kind: NodeKind) -> GNode {
+        let interner = pyast::tree::Interner::default();
+        let nodes: Vec<Node> = vec![
+            Node {
+                kind: NodeKind::Module(Box::new(ModuleData {
+                    name: "".into(),
+                    file: "<synthetic>".into(),
+                    package: false,
+                    body: Vec::new(),
+                    doc_node: None,
+                    future_imports: Vec::new(),
+                })),
+                parent: NodeId::MODULE,
+                fromlineno: 0,
+                col_offset: 0,
+                end_lineno: 0,
+                end_col_offset: -1,
+                tolineno: 0,
+            },
+            Node {
+                kind,
+                parent: NodeId::MODULE,
+                fromlineno: 0,
+                col_offset: 0,
+                end_lineno: 0,
+                end_col_offset: -1,
+                tolineno: 0,
+            },
+        ];
+        let tree = Tree {
+            nodes,
+            interner,
+            locals: FxHashMap::default(),
+        };
+        let mid = self.register_module(String::new(), "<synthetic>".to_string(), tree, false, true);
+        GNode { m: mid, n: NodeId(1) }
     }
 
     /// Allocate `count` orphan Unknown nodes in a fresh synthetic module —

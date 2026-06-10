@@ -898,6 +898,32 @@ impl Engine {
     }
 
     fn scan_functiondef(&self, g: GNode) {
+        // brain_functools _looks_like_lru_cache (syntactic; transform
+        // returns None -> no wipe)
+        {
+            for dec in self.decorator_nodes(g) {
+                let md = self.md(dec.m);
+                let hit = match &md.tree.nodes[dec.n.idx()].kind {
+                    NodeKind::Attribute { attrname, .. } => {
+                        md.tree.s(*attrname) == "lru_cache"
+                    }
+                    NodeKind::Call { func, .. } => match &md.tree.nodes[func.idx()].kind {
+                        NodeKind::Name { name } => md.tree.s(*name) == "lru_cache",
+                        NodeKind::Attribute { expr, attrname, .. } => {
+                            md.tree.s(*attrname) == "lru_cache"
+                                && matches!(&md.tree.nodes[expr.idx()].kind,
+                                    NodeKind::Name { name } if md.tree.s(*name) == "functools")
+                        }
+                        _ => false,
+                    },
+                    _ => false,
+                };
+                if hit {
+                    self.lru_wrapped.borrow_mut().insert(g);
+                    break;
+                }
+            }
+        }
         // brain_hypothesis composite (raw, returns node)
         {
             let md = self.md(g.m);

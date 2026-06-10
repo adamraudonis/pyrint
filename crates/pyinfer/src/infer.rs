@@ -1150,16 +1150,9 @@ impl Engine {
                     (Some(sp), _) if self.value_const(v).is_some() => {
                         format_const(&self.value_const(v).unwrap(), sp)
                     }
-                    (Some(sp), Value::Inst { cls } | Value::ExcInst { cls, .. })
-                        if sp.is_empty() =>
-                    {
-                        let root = self.md(cls.m).name.clone();
-                        let name = self.node_name(*cls).unwrap_or_default();
-                        Some(format!("Instance of {root}.{name}"))
-                    }
-                    (Some(sp), Value::Uninferable) if sp.is_empty() => {
-                        Some("Uninferable".to_string())
-                    }
+                    // format(obj, "") of a non-Const inference result calls
+                    // object.__format__ -> str(obj) (node_classes.py:4719)
+                    (Some(sp), _) if sp.is_empty() => self.astroid_object_str(v),
                     _ => None,
                 };
                 match formatted {
@@ -1844,4 +1837,265 @@ fn format_const(c: &ConstValue, spec: &str) -> Option<String> {
         ConstValue::None => Some("None".to_string()),
         _ => None,
     }
+}
+
+// ===================== str(astroid object) for f-string folding =====================
+
+/// fake id() stand-ins sized like real CPython ids so pprint wrapping
+/// decisions match GT (the digits themselves are nondeterministic in
+/// astroid too — only the truncated 40-char render window must align,
+/// and there the id is virtually never visible).
+const FAKE_HEX_ID: &str = "0x102345678";
+const FAKE_DEC_ID: &str = "4400000000";
+
+/// pprint.pformat(list-of-leaf-reprs, indent=2, width=w) emulation for the
+/// single nesting level NodeNG.__str__ feeds it (lists of node reprs or
+/// 2-tuples of node reprs). Returns lines WITHOUT the outer alignment
+/// prefix (the caller adds it like node_ng.py:200-205).
+fn pformat_seq(items: &[String], width: usize, open: char, close: char) -> String {
+    let oneline = format!(
+        "{}{}{}",
+        open,
+        items.join(", "),
+        close
+    );
+    if oneline.len() <= width || items.is_empty() {
+        return oneline;
+    }
+    // multiline: "[ a,\n  b,\n  c]" (indent_per_level=2)
+    let mut out = String::new();
+    out.push(open);
+    out.push(' ');
+    for (i, it) in items.iter().enumerate() {
+        if i > 0 {
+            out.push_str(",\n  ");
+        }
+        out.push_str(it);
+    }
+    out.push(close);
+    out
+}
+
+impl Engine {
+    /// str(obj) for InferenceResult objects per astroid:
+    /// bases.py:372-373 (Instance), :721-722 (Generator), :447-452
+    /// (UnboundMethod repr — str falls back to repr), node_ng.py:187-211
+    /// (NodeNG pprint render). None => not rendered (caller yields U).
+    pub fn astroid_object_str(&self, v: &Value) -> Option<String> {
+        match v {
+            Value::Uninferable => Some("Uninferable".to_string()),
+            Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+                let root = self.md(cls.m).name.clone();
+                let name = self.node_name(*cls).unwrap_or_default();
+                Some(format!("Instance of {root}.{name}"))
+            }
+            Value::Generator { is_async, .. } => Some(if *is_async {
+                "AsyncGenerator(async_generator)".to_string()
+            } else {
+                "Generator(generator)".to_string()
+            }),
+            Value::UnionType => Some("UnionType(UnionType)".to_string()),
+            Value::BoundMethod { func, .. } | Value::UnboundMethod { func } => {
+                // bases.py:447-452 __repr__ (no __str__ override; note the
+                // missing closing '>' and DECIMAL id after '0x')
+                let kind = if matches!(v, Value::BoundMethod { .. }) {
+                    "BoundMethod"
+                } else {
+                    "UnboundMethod"
+                };
+                let name = self.node_name(*func).unwrap_or_default();
+                let frame = self.parent(*func).map(|p| self.frame(p))?;
+                let q = self.qname(frame);
+                Some(format!("<{kind} {name} of {q} at 0x{FAKE_DEC_ID}"))
+            }
+            Value::SynthSeq { kind, elems } => {
+                let reprs: Vec<String> =
+                    elems.iter().map(|e| self.astroid_value_repr(e)).collect();
+                Some(container_str(*kind, Some("Load"), &reprs))
+            }
+            Value::FrozenSet { elems } => {
+                let reprs: Vec<String> =
+                    elems.iter().map(|e| self.astroid_value_repr(e)).collect();
+                Some(frozenset_str(&reprs))
+            }
+            Value::SynthDict { items } => {
+                let pairs: Vec<(String, String)> = items
+                    .iter()
+                    .map(|(k, vv)| (self.astroid_value_repr(k), self.astroid_value_repr(vv)))
+                    .collect();
+                Some(dict_str(&pairs))
+            }
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items, .. } => {
+                        let pairs: Vec<(String, String)> = items
+                            .iter()
+                            .map(|(k, vv)| {
+                                (
+                                    self.astroid_node_repr(GNode { m: g.m, n: *k }),
+                                    self.astroid_node_repr(GNode { m: g.m, n: *vv }),
+                                )
+                            })
+                            .collect();
+                        Some(dict_str(&pairs))
+                    }
+                    NodeKind::List { elts, ctx }
+                    | NodeKind::Tuple { elts, ctx } => {
+                        let kind = match &md.tree.nodes[g.n.idx()].kind {
+                            NodeKind::List { .. } => SeqKind::List,
+                            _ => SeqKind::Tuple,
+                        };
+                        let ctx_name = match ctx {
+                            ExprCtx::Load => "Load",
+                            ExprCtx::Store => "Store",
+                            ExprCtx::Del => "Del",
+                        };
+                        let reprs: Vec<String> = elts
+                            .iter()
+                            .map(|&e| self.astroid_node_repr(GNode { m: g.m, n: e }))
+                            .collect();
+                        Some(container_str(kind, Some(ctx_name), &reprs))
+                    }
+                    NodeKind::Set { elts } => {
+                        let reprs: Vec<String> = elts
+                            .iter()
+                            .map(|&e| self.astroid_node_repr(GNode { m: g.m, n: e }))
+                            .collect();
+                        Some(container_str(SeqKind::Set, None, &reprs))
+                    }
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
+    }
+
+    /// repr(node) — node_ng.py:213-231 "<{cname}.{rname} l.{lineno} at 0x..>"
+    fn astroid_node_repr(&self, g: GNode) -> String {
+        let md = self.md(g.m);
+        let lineno = md.tree.nodes[g.n.idx()].fromlineno;
+        let (cname, rname): (&str, String) = match &md.tree.nodes[g.n.idx()].kind {
+            NodeKind::Const(c) => ("Const", const_type_name(c).to_string()),
+            NodeKind::Name { name } => ("Name", md.tree.s(*name).to_string()),
+            NodeKind::Attribute { attrname, .. } => {
+                ("Attribute", md.tree.s(*attrname).to_string())
+            }
+            NodeKind::List { .. } => ("List", "list".to_string()),
+            NodeKind::Tuple { .. } => ("Tuple", "tuple".to_string()),
+            NodeKind::Set { .. } => ("Set", "set".to_string()),
+            NodeKind::Dict { .. } => ("Dict", "dict".to_string()),
+            NodeKind::Call { .. } => ("Call", String::new()),
+            NodeKind::FunctionDef(d) => ("FunctionDef", md.tree.s(d.name).to_string()),
+            NodeKind::ClassDef(d) => ("ClassDef", md.tree.s(d.name).to_string()),
+            _ => ("NodeNG", String::new()),
+        };
+        if rname.is_empty() {
+            format!("<{cname} l.{lineno} at {FAKE_HEX_ID}>")
+        } else {
+            format!("<{cname}.{rname} l.{lineno} at {FAKE_HEX_ID}>")
+        }
+    }
+
+    /// repr(value) for already-inferred element values inside synthetic
+    /// containers (astroid holds real objects there: Const nodes, Instances)
+    fn astroid_value_repr(&self, v: &Value) -> String {
+        match v {
+            Value::Node(g) => self.astroid_node_repr(*g),
+            Value::Uninferable => "Uninferable".to_string(),
+            Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+                let root = self.md(cls.m).name.clone();
+                let name = self.node_name(*cls).unwrap_or_default();
+                format!("<Instance of {root}.{name} at 0x{FAKE_DEC_ID}>")
+            }
+            Value::SynthConst(c) => {
+                format!("<Const.{} l.0 at {FAKE_HEX_ID}>", const_type_name(c))
+            }
+            _ => format!("<NodeNG l.0 at {FAKE_HEX_ID}>"),
+        }
+    }
+}
+
+fn const_type_name(c: &ConstValue) -> &'static str {
+    match c {
+        ConstValue::Str(_) => "str",
+        ConstValue::Bytes(_) => "bytes",
+        ConstValue::Int(_) => "int",
+        ConstValue::Float(_) => "float",
+        ConstValue::Complex { .. } => "complex",
+        ConstValue::Bool(_) => "bool",
+        ConstValue::None => "NoneType",
+        ConstValue::Ellipsis => "ellipsis",
+        ConstValue::NotImplemented => "NotImplementedType",
+        ConstValue::StrSurrogate(_) => "str",
+    }
+}
+
+/// NodeNG.__str__ for containers: "List.list(ctx=<Context.Load: 1>,\n
+/// {align}elts=[...])"; Set has NO ctx field (_other_fields empty).
+fn container_str(kind: SeqKind, ctx: Option<&str>, elt_reprs: &[String]) -> String {
+    let (cname, rname) = match kind {
+        SeqKind::List => ("List", "list"),
+        SeqKind::Tuple => ("Tuple", "tuple"),
+        SeqKind::Set => ("Set", "set"),
+    };
+    let alignment = cname.len() + rname.len() + 2;
+    let mut fields: Vec<String> = Vec::new();
+    if !matches!(kind, SeqKind::Set) {
+        let ctx_name = ctx.unwrap_or("Load");
+        let num = match ctx_name {
+            "Store" => 2,
+            "Del" => 3,
+            _ => 1,
+        };
+        fields.push(format!("ctx=<Context.{ctx_name}: {num}>"));
+    }
+    let width = 80usize.saturating_sub(4 + alignment); // len("elts")
+    let body = pformat_seq(elt_reprs, width, '[', ']');
+    let aligned = align_lines(&body, alignment);
+    fields.push(format!("elts={aligned}"));
+    let joined = fields.join(&format!(",\n{}", " ".repeat(alignment)));
+    format!("{cname}.{rname}({joined})")
+}
+
+fn frozenset_str(elt_reprs: &[String]) -> String {
+    let alignment = "FrozenSet".len() + "frozenset".len() + 2;
+    let width = 80usize.saturating_sub(4 + alignment);
+    let body = pformat_seq(elt_reprs, width, '[', ']');
+    let aligned = align_lines(&body, alignment);
+    format!("FrozenSet.frozenset(elts={aligned})")
+}
+
+/// Dict.__str__: items is a list of 2-tuples of nodes; pprint nests.
+fn dict_str(pairs: &[(String, String)]) -> String {
+    let alignment = "Dict".len() + "dict".len() + 2; // 10
+    let width = 80usize.saturating_sub(5 + alignment); // len("items")
+    let tuples: Vec<String> = pairs
+        .iter()
+        .map(|(k, v)| {
+            let one = format!("({k}, {v})");
+            if one.len() <= width.saturating_sub(4) {
+                one
+            } else {
+                // pprint breaks the tuple: "( k,\n    v)" (nested indent 4)
+                format!("( {k},\n    {v})")
+            }
+        })
+        .collect();
+    let body = pformat_seq(&tuples, width, '[', ']');
+    let aligned = align_lines(&body, alignment);
+    format!("Dict.dict(items={aligned})")
+}
+
+fn align_lines(s: &str, alignment: usize) -> String {
+    let pad = " ".repeat(alignment);
+    let mut out = String::new();
+    for (i, line) in s.split('\n').enumerate() {
+        if i > 0 {
+            out.push('\n');
+            out.push_str(&pad);
+        }
+        out.push_str(line);
+    }
+    out
 }

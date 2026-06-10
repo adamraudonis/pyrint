@@ -306,12 +306,31 @@ impl Engine {
         if name_str.is_empty() {
             return Err(ErrKind::Attribute);
         }
-        let mut values: Vec<NV> = self
-            .class_locals_get(cls, name)
-            .into_iter()
-            .map(NV::N)
-            .collect();
+        // ClassDef.implicit_locals(): __module__/__qualname__/__annotations__
+        // Consts/Unknown added at class construction -> FIRST in locals
+        let which: Option<u8> = match name_str.as_str() {
+            "__module__" => Some(0),
+            "__qualname__" => Some(1),
+            "__annotations__" => Some(2),
+            _ => None,
+        };
+        let mut values: Vec<NV> = Vec::new();
+        // snapshot classes already carry the implicit consts as real
+        // serialized locals (raw-built ClassDef.__init__ ran in astroid)
+        let needs_implicit =
+            |e: &Self, c: GNode| -> bool { e.md(c.m).file != "<snapshot>" };
+        if let Some(w) = which {
+            if needs_implicit(self, cls) {
+                values.push(NV::N(self.implicit_class_local(cls, w)));
+            }
+        }
+        values.extend(self.class_locals_get(cls, name).into_iter().map(NV::N));
         for anc in self.ancestors(cls, true, ctx) {
+            if let Some(w) = which {
+                if needs_implicit(self, anc) {
+                    values.push(NV::N(self.implicit_class_local(anc, w)));
+                }
+            }
             values.extend(self.class_locals_get(anc, name).into_iter().map(NV::N));
         }
         if CLASS_MODEL_ATTRS.contains(&name_str.as_str()) && class_context && values.is_empty() {
@@ -485,7 +504,20 @@ impl Engine {
         if attributes.len() > 1 {
             let scope_of = |nv: &NV| -> Option<GNode> {
                 match nv {
-                    NV::N(g) => self.parent(*g).map(|p| self.scope(p)),
+                    NV::N(g) => {
+                        // implicit class locals: parent IS the owning class
+                        // (add_local_node), which is itself a scope
+                        if let Some(owner) = self.implicit_owner.borrow().get(g) {
+                            return Some(*owner);
+                        }
+                        self.parent(*g).map(|p| self.scope(p))
+                    }
+                    NV::V(Value::Node(g)) => {
+                        if let Some(owner) = self.implicit_owner.borrow().get(g) {
+                            return Some(*owner);
+                        }
+                        self.parent(*g).map(|p| self.scope(p))
+                    }
                     NV::V(Value::BoundMethod { func, .. })
                     | NV::V(Value::UnboundMethod { func })
                     | NV::V(Value::Property { func })
@@ -1061,10 +1093,65 @@ impl Engine {
             }
         }
         let name_str = self.sname(name);
+        // LruWrappedModel (brain_functools.py:26-62): replaces the
+        // FunctionModel for lru_cache-decorated functions
+        if self.lru_wrapped.borrow().contains(&func) {
+            match name_str.as_str() {
+                "__wrapped__" => return Ok(Flow::one(Value::Node(func))),
+                "cache_clear" => {
+                    let f = self.lru_cache_clear_template();
+                    let bound = self.parent(func).map(|p| self.scope(p));
+                    return Ok(Flow::one(Value::BoundMethod {
+                        func: f,
+                        bound: Rc::new(match bound {
+                            Some(b) => Value::Node(b),
+                            None => Value::Uninferable,
+                        }),
+                    }));
+                }
+                "cache_info" => {
+                    // CacheInfoBoundMethod proxying the function; calling it
+                    // yields a _CacheInfo namedtuple instance — approximate
+                    // the BM with the function itself (render parity:
+                    // BM:<func qname>) — calls fall back to normal result
+                    return Ok(Flow::one(Value::BoundMethod {
+                        func,
+                        bound: Rc::new(Value::Node(func)),
+                    }));
+                }
+                _ => {}
+            }
+        }
         if let Some(v) = self.function_model_attr(func, &name_str) {
             return Ok(Flow::one(v));
         }
         Err(ErrKind::Inference)
+    }
+
+    /// extract_node("def cache_clear(self): pass") — module name '' so the
+    /// BM renders as BM:.cache_clear
+    fn lru_cache_clear_template(&self) -> GNode {
+        if let Some(g) = *self.lru_cache_clear_fn.borrow() {
+            return g;
+        }
+        let g = self
+            .build_template_module("def cache_clear(self): pass\n", "")
+            .map(|mid| {
+                let md = self.md(mid);
+                let locals = md.locals.borrow();
+                locals
+                    .get(&pyast::NodeId::MODULE)
+                    .and_then(|l| l.get(&self.sym("cache_clear")))
+                    .and_then(|v| v.first())
+                    .copied()
+            })
+            .flatten()
+            .unwrap_or(GNode {
+                m: crate::value::ModId(0),
+                n: pyast::NodeId::MODULE,
+            });
+        *self.lru_cache_clear_fn.borrow_mut() = Some(g);
+        g
     }
 
     fn method_igetattr(
@@ -2154,6 +2241,25 @@ const CLASS_MODEL_ATTRS: [&str; 14] = [
 ];
 
 impl Engine {
+    /// get-or-create the implicit class local placeholder (scoped_nodes.py:
+    /// 1911-1933 + objectmodel ClassModel attrs evaluated at construction:
+    /// __module__ = Const(root().qname()), __qualname__ = Const(qname()),
+    /// __annotations__ = Unknown -> Uninferable)
+    pub fn implicit_class_local(&self, cls: GNode, which: u8) -> GNode {
+        if let Some(g) = self.implicit_locals.borrow().get(&(cls, which)) {
+            return *g;
+        }
+        let kind = match which {
+            0 => NodeKind::Const(ConstValue::Str(self.md(cls.m).name.clone().into())),
+            1 => NodeKind::Const(ConstValue::Str(self.qname(cls).into())),
+            _ => NodeKind::Unknown,
+        };
+        let ph = self.alloc_synth_node(kind);
+        self.implicit_owner.borrow_mut().insert(ph, cls);
+        self.implicit_locals.borrow_mut().insert((cls, which), ph);
+        ph
+    }
+
     fn class_model_attr(&self, cls: GNode, name: &str, ctx: Option<&Rc<Ctx>>) -> Value {
         match name {
             "__name__" => Value::SynthConst(Rc::new(ConstValue::Str(

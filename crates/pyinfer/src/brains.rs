@@ -51,6 +51,8 @@ pub enum Tip {
     DataclassFieldCall,
     /// brain_re infer_pattern_match: `Pattern = type(...)` in stdlib re
     RePatternMatch,
+    /// brain_argparse infer_namespace: argparse.Namespace(...) calls
+    ArgparseNamespace,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -111,6 +113,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::DataclassAttr => (7, 28),
         Tip::DataclassFieldCall => (7, 27),
         Tip::RePatternMatch => (7, 26),
+        Tip::ArgparseNamespace => (7, 25),
     }
 }
 
@@ -381,6 +384,15 @@ impl Engine {
             }
             NodeKind::Attribute { expr, attrname, .. } => {
                 let attr = md.tree.s(*attrname);
+                // brain_argparse._looks_like_namespace (registered FIRST in
+                // register_all_brains)
+                if attr == "Namespace" {
+                    if let NodeKind::Name { name } = &md.tree.nodes[expr.idx()].kind {
+                        if md.tree.s(*name) == "argparse" {
+                            return Some(Tip::ArgparseNamespace);
+                        }
+                    }
+                }
                 if attr == "namedtuple" {
                     return Some(Tip::NamedTupleCall);
                 }
@@ -491,7 +503,50 @@ impl Engine {
             Tip::DataclassAttr => self.tip_dataclass_attr(node, ctx),
             Tip::DataclassFieldCall => self.tip_dataclass_field_call(node, ctx),
             Tip::RePatternMatch => self.tip_re_pattern_match(node),
+            Tip::ArgparseNamespace => self.tip_argparse_namespace(node, ctx),
         }
+    }
+
+    /// brain_argparse.infer_namespace: keyword-only CallSite -> fresh
+    /// `Namespace` ClassDef parented to SYNTHETIC_ROOT with EmptyNode
+    /// instance_attrs per keyword; yields instantiate_class().
+    fn tip_argparse_namespace(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let call_site = self.call_site_of_call(node, ctx);
+        let kw: Vec<GSym> = call_site
+            .keyword_arguments()
+            .into_iter()
+            .map(|(k, _)| k)
+            .collect();
+        if kw.is_empty() {
+            return None; // UseInferenceDefault
+        }
+        let fake_mid = self.build_template_module(
+            "class Namespace:
+    pass
+",
+            "__astroid_synthetic",
+        )?;
+        let cls = {
+            let fmd = self.md(fake_mid);
+            let locals = fmd.locals.borrow();
+            locals
+                .get(&pyast::NodeId::MODULE)
+                .and_then(|l| l.get(&self.sym("Namespace")))
+                .and_then(|v| v.first())
+                .copied()?
+        };
+        {
+            let mut ia = self.iattrs.borrow_mut();
+            let map = ia.entry(cls).or_default();
+            for k in kw {
+                if map.contains_key(&k) {
+                    continue; // set() semantics: one entry per name
+                }
+                let ph = self.alloc_synth_node(NodeKind::EmptyNode);
+                map.insert(k, vec![ph]);
+            }
+        }
+        Some(Flow::one(self.instantiate_class(cls)))
     }
 
     /// brain_re.infer_pattern_match (brain_re.py:79-92): a FRESH ClassDef
@@ -1052,6 +1107,10 @@ impl Engine {
                             )
                         }) =>
                     {
+                        // objects.Property(name="<property>",
+                        // parent=SYNTHETIC_ROOT) — qname is the synthetic
+                        // root's, not the function's
+                        self.synth_props.borrow_mut().insert(*g);
                         Some(Flow::one(Value::Property { func: *g }))
                     }
                     _ => None,
