@@ -17,6 +17,7 @@ pub mod graph;
 pub mod infer;
 pub mod intern;
 pub mod lookup;
+pub mod numpy_templates;
 pub mod protocols;
 pub mod pyenv;
 pub mod snapshot;

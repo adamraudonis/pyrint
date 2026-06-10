@@ -35,7 +35,28 @@ pub enum Tip {
     TypingNamedTupleClass,
     /// the typing.NamedTuple FunctionDef itself -> _NamedTuple class
     TypingNamedTupleFunc,
+    /// brain_numpy member tips: index into NUMPY_MEMBER_SRC (Attribute
+    /// nodes via attribute_name_looks_like_numpy_member, Name nodes via
+    /// member_name_looks_like_numpy_member — multiarray only)
+    NumpyMember(u8),
+    /// brain_numpy_ndarray: ANY Attribute with attrname == "ndarray"
+    NumpyNdarray,
 }
+
+/// registration-ordered numpy member templates: function_base (3),
+/// multiarray (20), numeric (1); name sets are disjoint.
+const NUMPY_MEMBER_SRC: [(&str, &str); 24] = {
+    let fb = crate::numpy_templates::NUMPY_FUNCTION_BASE_SRC;
+    let ma = crate::numpy_templates::NUMPY_MULTIARRAY_SRC;
+    let nu = crate::numpy_templates::NUMPY_NUMERIC_SRC;
+    [
+        fb[0], fb[1], fb[2],
+        ma[0], ma[1], ma[2], ma[3], ma[4], ma[5], ma[6], ma[7], ma[8], ma[9],
+        ma[10], ma[11], ma[12], ma[13], ma[14], ma[15], ma[16], ma[17], ma[18], ma[19],
+        nu[0],
+    ]
+};
+
 
 const BUILTIN_NAMES: [&str; 18] = [
     "bool",
@@ -73,6 +94,8 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::TypingNamedTupleCall => (6, 1),
         Tip::TypingNamedTupleClass => (6, 2),
         Tip::TypingNamedTupleFunc => (6, 3),
+        Tip::NumpyMember(i) => (7, i),
+        Tip::NumpyNdarray => (7, 31),
     }
 }
 
@@ -211,6 +234,38 @@ impl Engine {
             }
             if q == "typing.TypedDict" || q == "typing_extensions.TypedDict" {
                 return Some(Tip::TypedDictFunc);
+            }
+            return None;
+        }
+        // brain_numpy Attribute tips (registration order: function_base,
+        // multiarray, numeric member tips, then ndarray)
+        if let NodeKind::Attribute { expr, attrname, .. } = &md.tree.nodes[node.n.idx()].kind {
+            let attr = md.tree.s(*attrname).to_string();
+            let expr = GNode { m: node.m, n: *expr };
+            if let Some(idx) = NUMPY_MEMBER_SRC.iter().position(|(n, _)| *n == attr) {
+                // attribute_name_looks_like_numpy_member: expr is a Name
+                // representing a numpy import (lookup-based, works without
+                // numpy being importable)
+                if self.kind_is(expr, |k| matches!(k, NodeKind::Name { .. }))
+                    && self.is_a_numpy_module(expr)
+                {
+                    return Some(Tip::NumpyMember(idx as u8));
+                }
+            }
+            // brain_numpy_ndarray._looks_like_numpy_ndarray: attrname only
+            if attr == "ndarray" {
+                return Some(Tip::NumpyNdarray);
+            }
+            return None;
+        }
+        // brain_numpy_core_multiarray Name tip
+        // (member_name_looks_like_numpy_member: only inside numpy modules)
+        if let NodeKind::Name { name } = &md.tree.nodes[node.n.idx()].kind {
+            let n = md.tree.s(*name);
+            if md.name.starts_with("numpy") {
+                if let Some(idx) = NUMPY_MEMBER_SRC[3..23].iter().position(|(m, _)| *m == n) {
+                    return Some(Tip::NumpyMember((idx + 3) as u8));
+                }
             }
             return None;
         }
@@ -376,7 +431,28 @@ impl Engine {
             Tip::TypingNamedTupleCall => self.tip_typing_namedtuple_call(node, ctx),
             Tip::TypingNamedTupleClass => self.tip_typing_namedtuple_class(node, ctx),
             Tip::TypingNamedTupleFunc => self.tip_typing_namedtuple_func(node, ctx),
+            Tip::NumpyMember(i) => {
+                self.tip_numpy_extract(NUMPY_MEMBER_SRC[i as usize].1, ctx)
+            }
+            Tip::NumpyNdarray => {
+                self.tip_numpy_extract(crate::numpy_templates::NUMPY_NDARRAY_SRC, ctx)
+            }
         }
+    }
+
+    /// brain_numpy_utils.infer_numpy_attribute / infer_numpy_name:
+    /// `extract_node(sources[name]).infer(context=context)` — a FRESH
+    /// template module per tip run (module name '' -> qname ".array" etc.),
+    /// inferred with the LIVE context (counter bumps included).
+    fn tip_numpy_extract(&self, source: &str, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let mid = self.build_template_module(source, "")?;
+        let md = self.md(mid);
+        let last = match &md.tree.nodes[pyast::NodeId::MODULE.idx()].kind {
+            NodeKind::Module(d) => *d.body.last()?,
+            _ => return None,
+        };
+        let g = GNode { m: mid, n: last };
+        Some(self.infer(g, ctx))
     }
 
     fn looks_like_typing_subscript(&self, value: GNode) -> bool {

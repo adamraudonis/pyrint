@@ -373,7 +373,7 @@ impl Engine {
     }
 
     /// brain_numpy_utils._is_a_numpy_module: lookup-based Import check.
-    fn is_a_numpy_module(&self, name_node: GNode) -> bool {
+    pub(crate) fn is_a_numpy_module(&self, name_node: GNode) -> bool {
         let Some(nick) = self.name_of(name_node) else {
             return false;
         };
@@ -891,9 +891,10 @@ impl Engine {
         let Some((expr, attr)) = self.attr_of(g) else {
             return;
         };
-        // brain_numpy_core_function_base + multiarray Attribute tips
+        // brain_numpy_core_function_base + multiarray + numeric Attribute tips
         if (NUMPY_FUNCTION_BASE.contains(&attr.as_str())
-            || NUMPY_MULTIARRAY.contains(&attr.as_str()))
+            || NUMPY_MULTIARRAY.contains(&attr.as_str())
+            || attr == "ones")
             && self.kind_is(expr, |k| matches!(k, NodeKind::Name { .. }))
             && self.is_a_numpy_module(expr)
         {

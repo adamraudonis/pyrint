@@ -1,0 +1,2 @@
+import posixpath
+posixpath.normpath('.')
