@@ -261,6 +261,12 @@ pub struct ArgumentsData {
     pub kwonlyargs_annotations: Vec<Option<NodeId>>,
     pub varargannotation: Option<NodeId>,
     pub kwargannotation: Option<NodeId>,
+    /// Whether the LAST posonly/regular/kwonly parameter carries a valid
+    /// per-arg type comment (`a,  # type: int`). astroid keeps the parsed
+    /// nodes in type_comment_* fields, which only matter for tolineno.
+    pub tc_last_posonly: bool,
+    pub tc_last_arg: bool,
+    pub tc_last_kwonly: bool,
 }
 
 pub struct Node {
@@ -490,19 +496,20 @@ impl Tree {
                 out.extend(body);
             }
             Arguments(d) => {
-                // astroid Arguments.get_children: yields args, posonlyargs handling,
-                // defaults, kwonlyargs, kw_defaults, annotations... order verified
-                // empirically via dump differential.
+                // astroid Arguments.get_children (node_classes.py): posonly,
+                // posonly annotations, args, defaults, kwonly, kw_defaults,
+                // annotations, varargannotation, kwargannotation, kwonly
+                // annotations (in that exact order, Nones skipped).
                 out.extend(&d.posonlyargs);
+                out.extend(d.posonlyargs_annotations.iter().flatten());
                 out.extend(&d.args);
                 out.extend(&d.defaults);
                 out.extend(&d.kwonlyargs);
                 out.extend(d.kw_defaults.iter().flatten());
                 out.extend(d.annotations.iter().flatten());
-                out.extend(d.posonlyargs_annotations.iter().flatten());
-                out.extend(d.kwonlyargs_annotations.iter().flatten());
                 push_opt(out, &d.varargannotation);
                 push_opt(out, &d.kwargannotation);
+                out.extend(d.kwonlyargs_annotations.iter().flatten());
             }
             Keyword { value, .. } => out.push(*value),
             Decorators { nodes } => out.extend(nodes),

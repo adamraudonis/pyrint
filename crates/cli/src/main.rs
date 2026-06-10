@@ -29,7 +29,16 @@ fn main() -> ExitCode {
     if dump_ast {
         for path in &paths {
             println!("=== {path}");
-            let bytes = match std::fs::read(path) {
+            // astroid modutils.get_source_file: given X.pyi, prefer the
+            // sibling X.py source when it exists (PY_SOURCE_EXTS order).
+            let mut read_path = path.clone();
+            if let Some(base) = path.strip_suffix(".pyi") {
+                let py = format!("{base}.py");
+                if std::path::Path::new(&py).exists() {
+                    read_path = py;
+                }
+            }
+            let bytes = match std::fs::read(&read_path) {
                 Ok(b) => b,
                 Err(e) => {
                     println!("READERROR {e}");
@@ -38,7 +47,11 @@ fn main() -> ExitCode {
             };
             let text = String::from_utf8_lossy(&bytes).into_owned();
             let src = pyast::SourceFile::from_text(text, "utf-8".to_string());
-            match pyast::parse::parse_module(&src, "mod", path, false) {
+            let stem = std::path::Path::new(path)
+                .file_stem()
+                .map(|s| s == "__init__")
+                .unwrap_or(false);
+            match pyast::parse::parse_module(&src, "mod", path, stem) {
                 pyast::parse::ParseOutcome { tree: Some(tree), .. } => {
                     print!("{}", tree.dump());
                 }

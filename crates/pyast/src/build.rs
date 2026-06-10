@@ -25,8 +25,9 @@ pub struct BuildOptions {
 
 struct ScopeCtx {
     scope: NodeId,
-    /// names declared `global` in the current function frame stack
-    global_names: Vec<rustc_hash::FxHashSet<Sym>>,
+    /// comprehension scopes are not frames (astroid NodeNG.frame() walks
+    /// past GeneratorExp/ListComp/SetComp/DictComp)
+    is_comprehension: bool,
 }
 
 pub struct Builder<'a> {
@@ -34,13 +35,29 @@ pub struct Builder<'a> {
     nodes: Vec<Node>,
     interner: Interner,
     locals: rustc_hash::FxHashMap<NodeId, indexmap::IndexMap<Sym, Vec<NodeId>>>,
-    /// (module-level or not) ImportFrom nodes for delayed locals insertion
-    delayed_import_from: Vec<NodeId>,
+    /// `global` name sets per FUNCTION frame only (astroid rebuilder
+    /// _global_names: pushed in _visit_functiondef / visit_lambda, so class
+    /// bodies nested in a function share the function's set).
+    global_stack: Vec<rustc_hash::FxHashSet<Sym>>,
+    /// ImportFrom nodes for delayed locals insertion, with the `global`
+    /// names captured at visit time (astroid rebuilder.py:1102).
+    delayed_import_from: Vec<(NodeId, rustc_hash::FxHashSet<Sym>)>,
     /// token start offsets of `def` / `class` keywords, sorted
     def_class_tokens: Vec<(TextSize, bool)>, // (offset, is_def)
     /// token start offsets of `async` keywords, sorted
     async_tokens: Vec<(TextSize, bool)>,
+    /// all tokens triaged for paren matching: (start, end, kind)
+    /// kind: 0 = other, 1 = '(', 2 = ')', 3 = trivia (comments/non-logical newlines)
+    all_tokens: Vec<(u32, u32, u8)>,
     scope_stack: Vec<ScopeCtx>,
+    /// stack of Arguments nodes being built (to spot walrus targets whose
+    /// NamedExpr is a DIRECT child of Arguments, see NamedExpr.frame())
+    arguments_stack: Vec<NodeId>,
+    /// AssignAttr nodes for astroid builder.delayed_assattr
+    delayed_assattr: Vec<NodeId>,
+    /// every NamedExpr node built (used to spot walruses in dataclass
+    /// attribute defaults, which break astroid's generated __init__)
+    walrus_ids: Vec<NodeId>,
 }
 
 impl<'a> Builder<'a> {
@@ -49,6 +66,7 @@ impl<'a> Builder<'a> {
         parsed: &ast::ModModule,
         tokens: &[(TextSize, bool)],
         async_tokens: &[(TextSize, bool)],
+        all_tokens: &[(u32, u32, u8)],
         opts: &BuildOptions,
     ) -> Tree {
         let mut b = Builder {
@@ -56,18 +74,20 @@ impl<'a> Builder<'a> {
             nodes: Vec::with_capacity(1024),
             interner: Interner::default(),
             locals: rustc_hash::FxHashMap::default(),
+            global_stack: Vec::new(),
             delayed_import_from: Vec::new(),
             def_class_tokens: tokens.to_vec(),
             async_tokens: async_tokens.to_vec(),
+            all_tokens: all_tokens.to_vec(),
             scope_stack: Vec::new(),
+            arguments_stack: Vec::new(),
+            delayed_assattr: Vec::new(),
+            walrus_ids: Vec::new(),
         };
         // Module node id 0
         let module_id = b.push_placeholder();
         b.locals.entry(module_id).or_default();
-        b.scope_stack.push(ScopeCtx {
-            scope: module_id,
-            global_names: vec![],
-        });
+        b.scope_stack.push(ScopeCtx { scope: module_id, is_comprehension: false });
 
         let mut body: Vec<NodeId> = Vec::new();
         for stmt in &parsed.body {
@@ -104,9 +124,17 @@ impl<'a> Builder<'a> {
         };
 
         // delayed ImportFrom locals (astroid processes them in _post_build)
-        for if_id in std::mem::take(&mut b.delayed_import_from) {
-            b.delayed_import_from_locals(if_id);
+        for (if_id, globals) in std::mem::take(&mut b.delayed_import_from) {
+            b.delayed_import_from_locals(if_id, &globals);
         }
+
+        // delayed AssignAttr (astroid builder.delayed_assattr): visible
+        // effect is Class.attr = ... adding `attr` to the class's locals
+        b.process_delayed_assattr();
+
+        // brain transforms (astroid applies them after delayed locals,
+        // see builder.py _post_build -> visit_transforms)
+        b.apply_brains();
 
         let mut tree = Tree {
             nodes: b.nodes,
@@ -179,12 +207,48 @@ impl<'a> Builder<'a> {
     }
 
     /// astroid _save_assignment: if name is declared global in the current
-    /// frame, assign to module locals instead.
+    /// function frame, assign to module locals instead.
     fn save_assignment(&mut self, name: Sym, node: NodeId) {
-        let ctx = self.scope_stack.last().unwrap();
-        let is_global = ctx.global_names.iter().any(|s| s.contains(&name));
-        let scope = if is_global { NodeId::MODULE } else { ctx.scope };
+        let is_global = self
+            .global_stack
+            .last()
+            .is_some_and(|s| s.contains(&name));
+        let scope = if is_global {
+            NodeId::MODULE
+        } else {
+            self.cur_scope()
+        };
         self.set_local(scope, name, node);
+    }
+
+    /// astroid NamedExpr.set_local: walrus targets land in the nearest
+    /// FRAME (Module/FunctionDef/Lambda/ClassDef; comprehension scopes are
+    /// skipped). A NamedExpr that is a DIRECT child of Arguments (a default
+    /// or annotation) escapes the function too (Arguments.parent.parent
+    /// .frame()). `global` declarations still win (AssignName goes through
+    /// _save_assignment first).
+    fn walrus_assignment(&mut self, name: Sym, node: NodeId, namedexpr_parent: NodeId) {
+        if self
+            .global_stack
+            .last()
+            .is_some_and(|s| s.contains(&name))
+        {
+            self.set_local(NodeId::MODULE, name, node);
+            return;
+        }
+        let mut skip_one_frame = self.arguments_stack.last() == Some(&namedexpr_parent);
+        for ctx in self.scope_stack.iter().rev() {
+            if ctx.is_comprehension {
+                continue;
+            }
+            if skip_one_frame && ctx.scope != NodeId::MODULE {
+                skip_one_frame = false;
+                continue;
+            }
+            let scope = ctx.scope;
+            self.set_local(scope, name, node);
+            return;
+        }
     }
 
     /// CPython gives `def`/`class` statements the keyword's position
@@ -204,17 +268,133 @@ impl<'a> Builder<'a> {
             Some(i) => {
                 let mut off = self.def_class_tokens[i].0;
                 if is_async {
-                    // anchor at the `async` token directly before
-                    if i > 0 {
-                        if let Some(&(aoff, _)) = self.async_tokens_before(off) {
-                            off = aoff;
-                        }
+                    // anchor at the `async` token directly before (CPython
+                    // gives AsyncFunctionDef the `async` keyword position)
+                    if let Some(&(aoff, _)) = self.async_tokens_before(off) {
+                        off = aoff;
                     }
                 }
                 TextRange::new(off, body_range.end())
             }
             None => body_range,
         }
+    }
+
+    /// Extend a range to the enclosing parens, skipping trivia tokens.
+    fn extend_parens(&self, range: TextRange) -> TextRange {
+        let start = range.start().to_u32();
+        let end = range.end().to_u32();
+        // backward: last non-trivia token ending at or before start
+        let mut i = self.all_tokens.partition_point(|t| t.1 <= start);
+        let mut new_start = range.start();
+        while i > 0 {
+            i -= 1;
+            match self.all_tokens[i].2 {
+                3 => continue,
+                1 => {
+                    new_start = TextSize::from(self.all_tokens[i].0);
+                    break;
+                }
+                _ => break,
+            }
+        }
+        if new_start == range.start() {
+            return range; // no opening paren found; keep as-is
+        }
+        // forward: first non-trivia token starting at or after end
+        let mut j = self.all_tokens.partition_point(|t| t.0 < end);
+        let mut new_end = range.end();
+        while j < self.all_tokens.len() {
+            match self.all_tokens[j].2 {
+                3 => j += 1,
+                2 => {
+                    new_end = TextSize::from(self.all_tokens[j].1);
+                    break;
+                }
+                _ => break,
+            }
+        }
+        if new_end == range.end() {
+            return range;
+        }
+        TextRange::new(new_start, new_end)
+    }
+
+    /// Match CPython's tokenizer type-comment prefix `"# type: "` against
+    /// `text` (which must start at a `#`). Each space in the prefix matches
+    /// any run of spaces/tabs. Returns the payload (text after the prefix),
+    /// or None. `# type: ignore...` (per CPython's TYPE_IGNORE rule) yields
+    /// None as it never attaches to statements.
+    fn type_comment_payload(text: &str) -> Option<&str> {
+        let mut rest = text.strip_prefix('#')?;
+        rest = rest.trim_start_matches([' ', '\t']);
+        rest = rest.strip_prefix("type:")?;
+        rest = rest.trim_start_matches([' ', '\t']);
+        // TYPE_IGNORE: "ignore" followed by EOL or a non-alphanumeric char
+        if let Some(after) = rest.strip_prefix("ignore") {
+            match after.bytes().next() {
+                None => return None,
+                Some(c) if !c.is_ascii_alphanumeric() => return None,
+                _ => {}
+            }
+        }
+        Some(rest)
+    }
+
+    /// If the source line containing `range.end()` continues with only
+    /// whitespace and then a `# type:` comment, extend the range to the end
+    /// of that line (CPython's TYPE_COMMENT token is part of the Assign).
+    fn extend_assign_type_comment(&self, range: TextRange) -> TextRange {
+        let end = range.end().to_u32() as usize;
+        let text = &self.src.text;
+        let line_end = text[end..]
+            .find('\n')
+            .map(|i| end + i)
+            .unwrap_or(text.len());
+        let mut tail = &text[end..line_end];
+        if tail.ends_with('\r') {
+            tail = &tail[..tail.len() - 1];
+        }
+        let trimmed = tail.trim_start_matches([' ', '\t']);
+        if !trimmed.starts_with('#') {
+            return range;
+        }
+        if Self::type_comment_payload(trimmed).is_none() {
+            return range;
+        }
+        let new_end = end + tail.len();
+        TextRange::new(range.start(), TextSize::from(new_end as u32))
+    }
+
+    /// Whether a *valid* per-argument type comment (`a,  # type: int`)
+    /// attaches to the parameter ending at `param_end`, looking up to
+    /// `limit` (start of the next parameter, or end of the parameter list).
+    /// "Valid" mirrors astroid check_type_comment: the payload must parse as
+    /// a module whose first statement is an expression.
+    fn arg_has_type_comment(&self, param_end: TextSize, limit: TextSize) -> bool {
+        let lo = param_end.to_u32();
+        let hi = limit.to_u32();
+        let i = self.all_tokens.partition_point(|t| t.0 < lo);
+        for t in &self.all_tokens[i..] {
+            if t.0 >= hi {
+                break;
+            }
+            let s = &self.src.text[t.0 as usize..t.1 as usize];
+            if !s.starts_with('#') {
+                continue;
+            }
+            if let Some(payload) = Self::type_comment_payload(s) {
+                // astroid parses the payload; only Expr statements count
+                let parsed = ruff_python_parser::parse_module(payload);
+                if let Ok(m) = parsed {
+                    if let Some(ruff_python_ast::Stmt::Expr(_)) = m.syntax().body.first() {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+        false
     }
 
     fn async_tokens_before(&self, def_off: TextSize) -> Option<&(TextSize, bool)> {
@@ -245,9 +425,14 @@ impl<'a> Builder<'a> {
         (None, body)
     }
 
-    fn delayed_import_from_locals(&mut self, if_id: NodeId) {
-        // parent of the ImportFrom decides the scope (its frame); we recorded
-        // them only to defer ordering. Wildcards handled later w/ manager.
+    fn delayed_import_from_locals(
+        &mut self,
+        if_id: NodeId,
+        globals: &rustc_hash::FxHashSet<Sym>,
+    ) {
+        // astroid builder.add_from_names_to_locals: names go to the
+        // ImportFrom's parent scope, except names declared `global` in the
+        // surrounding function which go to the module.
         let parent = self.nodes[if_id.idx()].parent;
         let scope = self.frame_of(parent);
         if let NodeKind::ImportFrom { names, .. } = &self.nodes[if_id.idx()].kind {
@@ -255,10 +440,15 @@ impl<'a> Builder<'a> {
             for (name, asname) in names {
                 let n = self.interner.get(name).to_string();
                 if n == "*" {
-                    continue; // wildcard: resolved with manager later
+                    continue; // wildcard: needs module resolution (manager)
                 }
                 let local = asname.unwrap_or(name);
-                self.set_local(scope, local, if_id);
+                let target = if globals.contains(&local) {
+                    NodeId::MODULE
+                } else {
+                    scope
+                };
+                self.set_local(target, local, if_id);
             }
         }
     }
@@ -284,6 +474,484 @@ impl<'a> Builder<'a> {
         }
     }
 
+    // ---------- brain transforms (astroid brain/*.py, dump-visible only) ----------
+
+    /// astroid as_string() for plain dotted names (Name / Attribute chains).
+    fn dotted_name(&self, id: NodeId) -> Option<String> {
+        match &self.nodes[id.idx()].kind {
+            NodeKind::Name { name } => Some(self.interner.get(*name).to_string()),
+            NodeKind::Attribute { expr, attrname, .. } => {
+                let base = self.dotted_name(*expr)?;
+                Some(format!("{}.{}", base, self.interner.get(*attrname)))
+            }
+            _ => None,
+        }
+    }
+
+    /// All bindings of `name` walking the scope chain starting at `scope`.
+    fn lookup_bindings(&self, mut scope: NodeId, name: Sym) -> Vec<NodeId> {
+        loop {
+            if let Some(map) = self.locals.get(&scope) {
+                if let Some(v) = map.get(&name) {
+                    if !v.is_empty() {
+                        return v.clone();
+                    }
+                }
+            }
+            if scope == NodeId::MODULE {
+                return Vec::new();
+            }
+            let p = self.nodes[scope.idx()].parent;
+            scope = self.frame_of(p);
+        }
+    }
+
+    fn statement_of(&self, mut id: NodeId) -> NodeId {
+        use NodeKind::*;
+        loop {
+            if matches!(
+                self.nodes[id.idx()].kind,
+                Module(_) | FunctionDef(_) | AsyncFunctionDef(_) | ClassDef(_)
+                    | Return { .. } | Delete { .. } | Assign { .. } | AugAssign { .. }
+                    | AnnAssign { .. } | TypeAlias { .. } | For(_) | AsyncFor(_)
+                    | While { .. } | If { .. } | With(_) | AsyncWith(_) | Match { .. }
+                    | Raise { .. } | Try(_) | TryStar(_) | Assert { .. } | Import { .. }
+                    | ImportFrom { .. } | Global { .. } | Nonlocal { .. } | Expr { .. }
+                    | Pass | Break | Continue | ExceptHandler { .. }
+            ) {
+                return id;
+            }
+            let p = self.nodes[id.idx()].parent;
+            if p == id {
+                return id;
+            }
+            id = p;
+        }
+    }
+
+    /// brain_namedtuple_enum._is_enum_subclass, approximated without full
+    /// inference: a base resolves to stdlib enum.{Enum,IntEnum,...} via this
+    /// module's imports, or to a local ClassDef that is itself one.
+    fn is_enum_subclass(
+        &self,
+        class_id: NodeId,
+        memo: &mut rustc_hash::FxHashMap<NodeId, bool>,
+    ) -> bool {
+        const ENUM_NAMES: &[&str] = &["Enum", "IntEnum", "StrEnum", "Flag", "IntFlag", "ReprEnum"];
+        if let Some(&v) = memo.get(&class_id) {
+            return v;
+        }
+        memo.insert(class_id, false); // cycle guard
+        let bases: Vec<NodeId> = match &self.nodes[class_id.idx()].kind {
+            NodeKind::ClassDef(d) => d.bases.clone(),
+            _ => return false,
+        };
+        let start_scope = self.frame_of(self.nodes[class_id.idx()].parent);
+        let mut result = false;
+        'outer: for base in bases {
+            match &self.nodes[base.idx()].kind {
+                NodeKind::Name { name } => {
+                    let n = *name;
+                    for b in self.lookup_bindings(start_scope, n) {
+                        match &self.nodes[b.idx()].kind {
+                            NodeKind::ImportFrom { modname, names, .. } => {
+                                if self.interner.get(*modname) == "enum" {
+                                    for (orig, asname) in names {
+                                        let local = asname.unwrap_or(*orig);
+                                        if local == n
+                                            && ENUM_NAMES.contains(&self.interner.get(*orig))
+                                        {
+                                            result = true;
+                                            break 'outer;
+                                        }
+                                    }
+                                }
+                            }
+                            NodeKind::ClassDef(_) => {
+                                if self.is_enum_subclass(b, memo) {
+                                    result = true;
+                                    break 'outer;
+                                }
+                            }
+                            _ => {}
+                        }
+                    }
+                }
+                NodeKind::Attribute { expr, attrname, .. } => {
+                    if ENUM_NAMES.contains(&self.interner.get(*attrname)) {
+                        if let NodeKind::Name { name: m } = &self.nodes[expr.idx()].kind {
+                            let m = *m;
+                            for b in self.lookup_bindings(start_scope, m) {
+                                if let NodeKind::Import { names } = &self.nodes[b.idx()].kind {
+                                    for (full, asname) in names {
+                                        let local = match asname {
+                                            Some(a) => *a,
+                                            None => {
+                                                let f = self.interner.get(*full);
+                                                if f == "enum" { *full } else { continue }
+                                            }
+                                        };
+                                        if local == m && self.interner.get(*full) == "enum" {
+                                            result = true;
+                                            break 'outer;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+        memo.insert(class_id, result);
+        result
+    }
+
+    /// brain_dataclasses._looks_like_dataclass_decorator, approximated for a
+    /// venv where third-party modules are NOT importable (so astroid's
+    /// inference falls back to literal name matching for them).
+    fn looks_like_dataclass_decorator(&self, dec: NodeId, start_scope: NodeId) -> bool {
+        const DATACLASS_MODULES: &[&str] =
+            &["dataclasses", "marshmallow_dataclass", "pydantic.dataclasses"];
+        let func = match &self.nodes[dec.idx()].kind {
+            NodeKind::Call { func, .. } => *func,
+            _ => dec,
+        };
+        match &self.nodes[func.idx()].kind {
+            NodeKind::Attribute { attrname, .. } => self.interner.get(*attrname) == "dataclass",
+            NodeKind::Name { name } => {
+                let n = *name;
+                let literal = self.interner.get(n) == "dataclass";
+                let bindings = self.lookup_bindings(start_scope, n);
+                if bindings.is_empty() {
+                    // unbound name: inference fails -> fallback name match
+                    return literal;
+                }
+                for b in &bindings {
+                    match &self.nodes[b.idx()].kind {
+                        NodeKind::ImportFrom { modname, names, .. } => {
+                            let m = self.interner.get(*modname).to_string();
+                            for (orig, asname) in names {
+                                let local = asname.unwrap_or(*orig);
+                                if local != n {
+                                    continue;
+                                }
+                                if DATACLASS_MODULES.contains(&m.as_str())
+                                    && self.interner.get(*orig) == "dataclass"
+                                {
+                                    return true;
+                                }
+                                // unresolvable (third-party) module: astroid
+                                // inference fails -> literal name fallback
+                                if m != "dataclasses" && literal {
+                                    return true;
+                                }
+                            }
+                        }
+                        NodeKind::Import { .. } => {
+                            if literal {
+                                return true;
+                            }
+                        }
+                        _ => {} // local def/class/assign: infers non-dataclass
+                    }
+                }
+                false
+            }
+            _ => false,
+        }
+    }
+
+    /// astroid builder.delayed_assattr: for every `x.attr = ...`, infer x;
+    /// when it is a ClassDef the attr name is appended to the class LOCALS
+    /// (Instances/functions only get invisible instance_attrs). We resolve
+    /// plain Names to ClassDefs defined in this module.
+    fn process_delayed_assattr(&mut self) {
+        for id in std::mem::take(&mut self.delayed_assattr) {
+            let (expr, attrname) = match &self.nodes[id.idx()].kind {
+                NodeKind::AssignAttr { expr, attrname } => (*expr, *attrname),
+                _ => continue,
+            };
+            let name = match &self.nodes[expr.idx()].kind {
+                NodeKind::Name { name } => *name,
+                _ => continue,
+            };
+            let scope = self.frame_of(self.nodes[expr.idx()].parent);
+            for b in self.lookup_bindings(scope, name) {
+                let mut class_target: Option<NodeId> = None;
+                match &self.nodes[b.idx()].kind {
+                    NodeKind::ClassDef(_) => class_target = Some(b),
+                    // first parameter of a classmethod infers to the class
+                    // (protocols._arguments_infer_argname)
+                    NodeKind::AssignName { .. } => {
+                        let args_id = self.nodes[b.idx()].parent;
+                        if let NodeKind::Arguments(a) = &self.nodes[args_id.idx()].kind {
+                            let first = a.posonlyargs.first().or(a.args.first()).copied();
+                            if first == Some(b) {
+                                let func = self.nodes[args_id.idx()].parent;
+                                if self.is_classmethod(func) {
+                                    let cls = self.frame_of(self.nodes[func.idx()].parent);
+                                    if matches!(self.nodes[cls.idx()].kind, NodeKind::ClassDef(_)) {
+                                        class_target = Some(cls);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+                if let Some(cls) = class_target {
+                    let values = self
+                        .locals
+                        .entry(cls)
+                        .or_default()
+                        .entry(attrname)
+                        .or_default();
+                    if !values.contains(&id) {
+                        values.push(id);
+                    }
+                }
+            }
+        }
+    }
+
+    /// Whether any NamedExpr lies in the subtree rooted at `ancestor`.
+    fn has_walrus_within(&self, ancestor: NodeId) -> bool {
+        'walrus: for &w in &self.walrus_ids {
+            let mut cur = w;
+            loop {
+                if cur == ancestor {
+                    return true;
+                }
+                let p = self.nodes[cur.idx()].parent;
+                if p == cur || cur == NodeId::MODULE {
+                    continue 'walrus;
+                }
+                cur = p;
+            }
+        }
+        false
+    }
+
+    /// astroid FunctionDef.type == "classmethod" for methods in a class:
+    /// implicit (__new__/__init_subclass__/__class_getitem__) or decorated
+    /// with `classmethod` / `builtins.classmethod`.
+    fn is_classmethod(&self, func: NodeId) -> bool {
+        let (name, decorators) = match &self.nodes[func.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => (d.name, d.decorators),
+            _ => return false,
+        };
+        let n = self.interner.get(name);
+        if matches!(n, "__new__" | "__init_subclass__" | "__class_getitem__") {
+            return true;
+        }
+        if let Some(dec_id) = decorators {
+            if let NodeKind::Decorators { nodes } = &self.nodes[dec_id.idx()].kind {
+                for &d in nodes {
+                    match self.dotted_name(d).as_deref() {
+                        Some("classmethod") | Some("builtins.classmethod") => return true,
+                        _ => {}
+                    }
+                }
+            }
+        }
+        false
+    }
+
+    /// astroid silently drops the synthesized dataclass __init__ when the
+    /// generated source fails to parse. The common trigger is a walrus in an
+    /// attribute default: as_string() renders NamedExpr without parentheses.
+    fn dataclass_init_unparseable(&self, class_id: NodeId) -> bool {
+        let body: Vec<NodeId> = match &self.nodes[class_id.idx()].kind {
+            NodeKind::ClassDef(d) => d.body.clone(),
+            _ => return false,
+        };
+        for stmt in body {
+            if let NodeKind::AnnAssign { target, value: Some(v), .. } = &self.nodes[stmt.idx()].kind
+            {
+                if matches!(self.nodes[target.idx()].kind, NodeKind::AssignName { .. })
+                    && self.has_walrus_within(*v)
+                {
+                    return true;
+                }
+            }
+        }
+        false
+    }
+
+    fn apply_brains(&mut self) {
+        const ATTRS_NAMES: &[&str] = &[
+            "attr.s", "attrs", "attr.attrs", "attr.attributes", "attr.define",
+            "attr.mutable", "attr.frozen", "attrs.define", "attrs.mutable", "attrs.frozen",
+        ];
+        const COMPOSITE_NAMES: &[&str] = &[
+            "composite", "st.composite", "strategies.composite", "hypothesis.strategies.composite",
+        ];
+        let n = self.nodes.len();
+        let mut enum_memo: rustc_hash::FxHashMap<NodeId, bool> = Default::default();
+        let ignore_sym = self.sym("_ignore_");
+        let name_sym = self.sym("name");
+        for i in 0..n {
+            let id = NodeId(i as u32);
+            match &self.nodes[i].kind {
+                // brain_hypothesis: remove the `draw` parameter from
+                // @st.composite strategies (sync FunctionDef only).
+                NodeKind::FunctionDef(d) => {
+                    let (decorators, args_id) = (d.decorators, d.args);
+                    let Some(dec_id) = decorators else { continue };
+                    let dec_nodes = match &self.nodes[dec_id.idx()].kind {
+                        NodeKind::Decorators { nodes } => nodes.clone(),
+                        _ => continue,
+                    };
+                    let first_is_draw = match &self.nodes[args_id.idx()].kind {
+                        NodeKind::Arguments(a) => a.args.first().is_some_and(|&f| {
+                            matches!(&self.nodes[f.idx()].kind,
+                                NodeKind::AssignName { name } if self.interner.get(*name) == "draw")
+                        }),
+                        _ => false,
+                    };
+                    if !first_is_draw {
+                        continue;
+                    }
+                    let is_composite = dec_nodes.iter().any(|&dn| {
+                        self.dotted_name(dn)
+                            .is_some_and(|s| COMPOSITE_NAMES.contains(&s.as_str()))
+                    });
+                    if is_composite {
+                        if let NodeKind::Arguments(a) = &mut self.nodes[args_id.idx()].kind {
+                            a.args.remove(0);
+                            a.annotations.remove(0);
+                        }
+                    }
+                }
+                NodeKind::ClassDef(d) => {
+                    let decorators = d.decorators;
+                    // --- brain_attrs ---
+                    if let Some(dec_id) = decorators {
+                        let dec_nodes = match &self.nodes[dec_id.idx()].kind {
+                            NodeKind::Decorators { nodes } => nodes.clone(),
+                            _ => Vec::new(),
+                        };
+                        let is_attrs = dec_nodes.iter().any(|&dn| {
+                            let f = match &self.nodes[dn.idx()].kind {
+                                NodeKind::Call { func, .. } => *func,
+                                _ => dn,
+                            };
+                            self.dotted_name(f)
+                                .is_some_and(|s| ATTRS_NAMES.contains(&s.as_str()))
+                        });
+                        if is_attrs {
+                            let s = self.sym("__attrs_attrs__");
+                            self.locals.entry(id).or_default().entry(s).or_default();
+                        }
+                        // --- brain_dataclasses ---
+                        let start_scope = self.frame_of(self.nodes[i].parent);
+                        let is_dc = dec_nodes
+                            .iter()
+                            .any(|&dn| self.looks_like_dataclass_decorator(dn, start_scope));
+                        if is_dc {
+                            let init_sym = self.sym("__init__");
+                            let has_init = self
+                                .locals
+                                .get(&id)
+                                .is_some_and(|m| m.contains_key(&init_sym));
+                            // found = LAST Call decorator that looks like
+                            // dataclass; init=False on it disables generation
+                            let mut init_false = false;
+                            let mut found: Option<NodeId> = None;
+                            for &dn in &dec_nodes {
+                                if matches!(self.nodes[dn.idx()].kind, NodeKind::Call { .. })
+                                    && self.looks_like_dataclass_decorator(dn, start_scope)
+                                {
+                                    found = Some(dn);
+                                }
+                            }
+                            if let Some(f) = found {
+                                if let NodeKind::Call { keywords, .. } = &self.nodes[f.idx()].kind {
+                                    for &kw in keywords {
+                                        if let NodeKind::Keyword { arg: Some(a), value } =
+                                            &self.nodes[kw.idx()].kind
+                                        {
+                                            if self.interner.get(*a) == "init"
+                                                && matches!(
+                                                    &self.nodes[value.idx()].kind,
+                                                    NodeKind::Const(ConstValue::Bool(false))
+                                                        | NodeKind::Const(ConstValue::Int(
+                                                            IntValue::Small(0)
+                                                        ))
+                                                )
+                                            {
+                                                init_false = true;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                            if !has_init && !init_false && !self.dataclass_init_unparseable(id) {
+                                self.locals
+                                    .entry(id)
+                                    .or_default()
+                                    .entry(init_sym)
+                                    .or_default();
+                                let factory = self.sym("_HAS_DEFAULT_FACTORY");
+                                self.locals
+                                    .entry(NodeId::MODULE)
+                                    .or_default()
+                                    .entry(factory)
+                                    .or_default();
+                            }
+                        }
+                    }
+                    // --- brain_namedtuple_enum (infer_enum_class) ---
+                    if self.is_enum_subclass(id, &mut enum_memo) {
+                        let mut target_names: rustc_hash::FxHashSet<Sym> = Default::default();
+                        let entries: Vec<(Sym, Vec<NodeId>)> = self
+                            .locals
+                            .get(&id)
+                            .map(|m| m.iter().map(|(k, v)| (*k, v.clone())).collect())
+                            .unwrap_or_default();
+                        for (key, values) in entries {
+                            if key == ignore_sym || values.is_empty() {
+                                continue;
+                            }
+                            if !values.iter().all(|v| {
+                                matches!(self.nodes[v.idx()].kind, NodeKind::AssignName { .. })
+                            }) {
+                                continue;
+                            }
+                            let stmt = self.statement_of(values[0]);
+                            let targets: Vec<NodeId> = match &self.nodes[stmt.idx()].kind {
+                                NodeKind::Assign { targets, .. } => {
+                                    match &self.nodes[targets[0].idx()].kind {
+                                        NodeKind::Tuple { elts, .. } => elts.clone(),
+                                        _ => targets.clone(),
+                                    }
+                                }
+                                NodeKind::AnnAssign { target, .. } => vec![*target],
+                                _ => continue,
+                            };
+                            for t in targets {
+                                if let NodeKind::AssignName { name } = &self.nodes[t.idx()].kind {
+                                    target_names.insert(*name);
+                                }
+                            }
+                        }
+                        let v2m = self.sym("_value2member_map_");
+                        let members = self.sym("__members__");
+                        let map = self.locals.entry(id).or_default();
+                        map.entry(v2m).or_default();
+                        map.entry(members).or_default();
+                        if !target_names.contains(&name_sym) {
+                            map.entry(name_sym).or_default();
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+
     // ---------- statements ----------
 
     fn stmts(&mut self, stmts: &[Stmt], parent: NodeId) -> Vec<NodeId> {
@@ -306,7 +974,10 @@ impl<'a> Builder<'a> {
             Stmt::Assign(a) => {
                 let targets: Vec<NodeId> = a.targets.iter().map(|t| self.expr(t, id)).collect();
                 let value = self.expr(&a.value, id);
-                self.finish(id, NodeKind::Assign { targets, value }, parent, a.range)
+                // CPython (type_comments=True, as astroid parses) extends an
+                // Assign's end position through a trailing `# type:` comment.
+                let range = self.extend_assign_type_comment(a.range);
+                self.finish(id, NodeKind::Assign { targets, value }, parent, range)
             }
             Stmt::AugAssign(a) => {
                 let target = self.expr(&a.target, id);
@@ -490,18 +1161,14 @@ impl<'a> Builder<'a> {
                     parent,
                     im.range,
                 );
-                self.delayed_import_from.push(fin);
+                let captured = self.global_stack.last().cloned().unwrap_or_default();
+                self.delayed_import_from.push((fin, captured));
                 fin
             }
             Stmt::Global(g) => {
                 let names: Vec<Sym> = g.names.iter().map(|n| self.sym(n.as_str())).collect();
-                if let Some(set) = self
-                    .scope_stack
-                    .last_mut()
-                    .unwrap()
-                    .global_names
-                    .last_mut()
-                {
+                // astroid: `global` at module level has no effect (rebuilder.py:1255)
+                if let Some(set) = self.global_stack.last_mut() {
                     for n in &names {
                         set.insert(*n);
                     }
@@ -554,25 +1221,26 @@ impl<'a> Builder<'a> {
 
     fn function_def(&mut self, id: NodeId, f: &ast::StmtFunctionDef, parent: NodeId) -> NodeId {
         let name = self.sym(f.name.as_str());
-        // set_local in the parent scope (astroid: frame of parent)
-        self.save_assignment(name, id);
 
+        // astroid evaluation order: decorators, returns, then postinit
+        // (args, body, ..., type_params); name set_local happens LAST
+        // (rebuilder._visit_functiondef), so body-level `global` assignments
+        // land in the parent scope before the function's own name.
         let decorators = self.decorators(&f.decorator_list, id);
-        self.locals.entry(id).or_default();
-        self.scope_stack.push(ScopeCtx {
-            scope: id,
-            global_names: vec![rustc_hash::FxHashSet::default()],
-        });
-
-        let args = self.arguments(&f.parameters, id);
         let returns = f.returns.as_ref().map(|r| self.expr(r, id));
+        self.locals.entry(id).or_default();
+        self.scope_stack.push(ScopeCtx { scope: id, is_comprehension: false });
+        self.global_stack.push(rustc_hash::FxHashSet::default());
+
+        let args = self.arguments(&f.parameters, id, true);
+        let body_ids = self.stmts(&f.body, id);
+        let (doc_node, body) = self.extract_doc(body_ids);
         let type_params = f
             .type_params
             .as_ref()
             .map(|tp| self.type_params(tp, id))
             .unwrap_or_default();
-        let body_ids = self.stmts(&f.body, id);
-        let (doc_node, body) = self.extract_doc(body_ids);
+        self.global_stack.pop();
         self.scope_stack.pop();
 
         let range = self.def_class_pos(f.range, f.is_async);
@@ -590,24 +1258,46 @@ impl<'a> Builder<'a> {
         } else {
             NodeKind::FunctionDef(data)
         };
-        self.finish(id, kind, parent, range)
+        let fin = self.finish(id, kind, parent, range);
+        // astroid FunctionDef.fromlineno quirk (scoped_nodes): lineno is the
+        // first decorator's line; fromlineno adds each decorator's span.
+        // Comments/blank lines between decorators and `def` are NOT counted,
+        // so this can differ from the actual `def` line.
+        if let Some(dec_id) = decorators {
+            if let NodeKind::Decorators { nodes } = &self.nodes[dec_id.idx()].kind {
+                let nodes = nodes.clone();
+                if let Some(&first) = nodes.first() {
+                    let mut lineno = self.nodes[first.idx()].fromlineno;
+                    for d in &nodes {
+                        let n = &self.nodes[d.idx()];
+                        let to = if n.end_lineno != 0 { n.end_lineno } else { n.fromlineno };
+                        lineno += to - n.fromlineno + 1;
+                    }
+                    self.nodes[id.idx()].fromlineno = lineno;
+                }
+            }
+        }
+        // name set_local in the parent scope (plain set_local: astroid uses
+        // parent.set_local directly, ignoring `global` declarations)
+        let scope = self.cur_scope();
+        self.set_local(scope, name, fin);
+        fin
     }
 
     fn class_def(&mut self, id: NodeId, c: &ast::StmtClassDef, parent: NodeId) -> NodeId {
         let name = self.sym(c.name.as_str());
-        self.save_assignment(name, id);
 
         let decorators = self.decorators(&c.decorator_list, id);
         self.locals.entry(id).or_default();
-        // implicit class locals, in astroid order
-        for implicit in ["__module__", "__qualname__"] {
+        // implicit class locals (astroid ClassDef.implicit_locals: always all three)
+        for implicit in ["__module__", "__qualname__", "__annotations__"] {
             let s = self.sym(implicit);
             self.locals.get_mut(&id).unwrap().entry(s).or_default();
         }
-        self.scope_stack.push(ScopeCtx {
-            scope: id,
-            global_names: vec![],
-        });
+        // class bodies do NOT push a `global` frame (astroid only pushes
+        // _global_names in _visit_functiondef), so nested `global` stmts
+        // accumulate in the enclosing function's set.
+        self.scope_stack.push(ScopeCtx { scope: id, is_comprehension: false });
 
         let mut bases = Vec::new();
         let mut keywords = Vec::new();
@@ -633,39 +1323,20 @@ impl<'a> Builder<'a> {
                 }
             }
         }
+        let body_ids = self.stmts(&c.body, id);
+        let (doc_node, body) = self.extract_doc(body_ids);
+        // astroid visits type_params last in postinit: their AssignNames are
+        // appended to the class locals after the body's names.
         let type_params = c
             .type_params
             .as_ref()
             .map(|tp| self.type_params(tp, id))
             .unwrap_or_default();
-        let body_ids = self.stmts(&c.body, id);
-        let (doc_node, body) = self.extract_doc(body_ids);
 
-        // __annotations__ implicit local if any AnnAssign in body? Determined
-        // empirically: astroid adds it when the class has annotated assigns.
-        let has_ann = body.iter().any(|&s| matches!(self.nodes[s.idx()].kind, NodeKind::AnnAssign { .. }));
-        if has_ann {
-            let s = self.sym("__annotations__");
-            let lm = self.locals.get_mut(&id).unwrap();
-            // astroid inserts __annotations__ right after __qualname__
-            let entry_exists = lm.contains_key(&s);
-            if !entry_exists {
-                let mut newmap = indexmap::IndexMap::new();
-                let mut inserted = false;
-                for (k, v) in lm.drain(..) {
-                    newmap.insert(k, v);
-                    if !inserted && self.interner.get(k) == "__qualname__" {
-                        newmap.insert(s, vec![]);
-                        inserted = true;
-                    }
-                }
-                *lm = newmap;
-            }
-        }
         self.scope_stack.pop();
 
         let range = self.def_class_pos(c.range, false);
-        self.finish(
+        let fin = self.finish(
             id,
             NodeKind::ClassDef(Box::new(ClassData {
                 name,
@@ -679,7 +1350,11 @@ impl<'a> Builder<'a> {
             })),
             parent,
             range,
-        )
+        );
+        // name set_local after children (astroid visit_classdef)
+        let scope = self.cur_scope();
+        self.set_local(scope, name, fin);
+        fin
     }
 
     fn decorators(&mut self, list: &[ast::Decorator], parent: NodeId) -> Option<NodeId> {
@@ -695,8 +1370,14 @@ impl<'a> Builder<'a> {
         Some(self.finish(id, NodeKind::Decorators { nodes }, parent, range))
     }
 
-    fn arguments(&mut self, params: &ast::Parameters, parent: NodeId) -> NodeId {
+    fn arguments(
+        &mut self,
+        params: &ast::Parameters,
+        parent: NodeId,
+        allow_type_comments: bool,
+    ) -> NodeId {
         let id = self.push_placeholder();
+        self.arguments_stack.push(id);
         let mut posonlyargs = Vec::new();
         let mut posonlyargs_annotations = Vec::new();
         let mut args = Vec::new();
@@ -747,9 +1428,10 @@ impl<'a> Builder<'a> {
             None => (None, None, None),
         };
 
-        // locals order: posonly+args, kwonly, vararg, kwarg
+        // locals insertion order mirrors astroid visit_arguments: args,
+        // kwonlyargs, then posonlyargs (visited later!), then vararg/kwarg.
         let scope = self.cur_scope();
-        for &a in posonlyargs.iter().chain(args.iter()).chain(kwonlyargs.iter()) {
+        for &a in args.iter().chain(kwonlyargs.iter()).chain(posonlyargs.iter()) {
             if let NodeKind::AssignName { name } = self.nodes[a.idx()].kind {
                 self.set_local(scope, name, a);
             }
@@ -761,6 +1443,48 @@ impl<'a> Builder<'a> {
             self.set_local(scope, k, id);
         }
 
+        // Per-arg type comments (`a,  # type: int`): astroid stores parsed
+        // nodes in type_comment_* fields which are last in _astroid_fields,
+        // so NodeNG.last_child / Arguments.tolineno sees them (the parsed
+        // node always has tolineno 1). Record presence for the LAST arg of
+        // each category; that is all tolineno needs.
+        let mut tc_last_posonly = false;
+        let mut tc_last_arg = false;
+        let mut tc_last_kwonly = false;
+        if allow_type_comments {
+            let list_end = params.range.end();
+            let next_after_posonly = params
+                .args
+                .first()
+                .map(|p| p.range.start())
+                .or(params.vararg.as_ref().map(|v| v.range.start()))
+                .or(params.kwonlyargs.first().map(|p| p.range.start()))
+                .or(params.kwarg.as_ref().map(|v| v.range.start()))
+                .unwrap_or(list_end);
+            let next_after_args = params
+                .vararg
+                .as_ref()
+                .map(|v| v.range.start())
+                .or(params.kwonlyargs.first().map(|p| p.range.start()))
+                .or(params.kwarg.as_ref().map(|v| v.range.start()))
+                .unwrap_or(list_end);
+            let next_after_kwonly = params
+                .kwarg
+                .as_ref()
+                .map(|v| v.range.start())
+                .unwrap_or(list_end);
+            if let Some(p) = params.posonlyargs.last() {
+                tc_last_posonly = self.arg_has_type_comment(p.range.end(), next_after_posonly);
+            }
+            if let Some(p) = params.args.last() {
+                tc_last_arg = self.arg_has_type_comment(p.range.end(), next_after_args);
+            }
+            if let Some(p) = params.kwonlyargs.last() {
+                tc_last_kwonly = self.arg_has_type_comment(p.range.end(), next_after_kwonly);
+            }
+        }
+
+        self.arguments_stack.pop();
         self.finish_nopos(
             id,
             NodeKind::Arguments(Box::new(ArgumentsData {
@@ -778,6 +1502,9 @@ impl<'a> Builder<'a> {
                 kwonlyargs_annotations,
                 varargannotation,
                 kwargannotation,
+                tc_last_posonly,
+                tc_last_arg,
+                tc_last_kwonly,
             })),
             parent,
         )
@@ -786,7 +1513,9 @@ impl<'a> Builder<'a> {
     fn param_name(&mut self, p: &ast::Parameter, parent: NodeId) -> NodeId {
         let id = self.push_placeholder();
         let name = self.sym(p.name.as_str());
-        self.finish(id, NodeKind::AssignName { name }, parent, p.name.range())
+        // ast.arg spans name AND annotation; astroid passes that range to
+        // the AssignName (rebuilder.visit_arg -> visit_assignname).
+        self.finish(id, NodeKind::AssignName { name }, parent, p.range())
     }
 
     fn type_params(&mut self, tp: &ast::TypeParams, parent: NodeId) -> Vec<NodeId> {
@@ -794,25 +1523,30 @@ impl<'a> Builder<'a> {
             .iter()
             .map(|p| {
                 let id = self.push_placeholder();
+                // astroid visit_typevar/paramspec/typevartuple: the AssignName
+                // takes the WHOLE type-param node's position (incl. `*`/`**`
+                // and any bound) and is _save_assignment'd into the scope.
                 match p {
                     ast::TypeParam::TypeVar(t) => {
                         let nid = self.push_placeholder();
                         let name = self.sym(t.name.as_str());
-                        self.finish(nid, NodeKind::AssignName { name }, id, t.name.range());
-                        self.set_local(id, name, nid);
+                        self.finish(nid, NodeKind::AssignName { name }, id, t.range);
+                        self.save_assignment(name, nid);
                         let bound = t.bound.as_ref().map(|b| self.expr(b, id));
                         self.finish(id, NodeKind::TypeVar { name: nid, bound }, parent, t.range)
                     }
                     ast::TypeParam::ParamSpec(t) => {
                         let nid = self.push_placeholder();
                         let name = self.sym(t.name.as_str());
-                        self.finish(nid, NodeKind::AssignName { name }, id, t.name.range());
+                        self.finish(nid, NodeKind::AssignName { name }, id, t.range);
+                        self.save_assignment(name, nid);
                         self.finish(id, NodeKind::ParamSpec { name: nid }, parent, t.range)
                     }
                     ast::TypeParam::TypeVarTuple(t) => {
                         let nid = self.push_placeholder();
                         let name = self.sym(t.name.as_str());
-                        self.finish(nid, NodeKind::AssignName { name }, id, t.name.range());
+                        self.finish(nid, NodeKind::AssignName { name }, id, t.range);
+                        self.save_assignment(name, nid);
                         self.finish(id, NodeKind::TypeVarTuple { name: nid }, parent, t.range)
                     }
                 }
@@ -964,10 +1698,7 @@ impl<'a> Builder<'a> {
         generators: &[ast::Comprehension],
     ) -> Vec<NodeId> {
         self.locals.entry(id).or_default();
-        self.scope_stack.push(ScopeCtx {
-            scope: id,
-            global_names: vec![],
-        });
+        self.scope_stack.push(ScopeCtx { scope: id, is_comprehension: true });
         let out: Vec<NodeId> = generators
             .iter()
             .map(|g| {
@@ -1016,8 +1747,17 @@ impl<'a> Builder<'a> {
                 )
             }
             Expr::Named(n) => {
-                let target = self.expr(&n.target, id);
+                let target = if let Expr::Name(t) = &*n.target {
+                    let tid = self.push_placeholder();
+                    let name = self.sym(t.id.as_str());
+                    let fin = self.finish(tid, NodeKind::AssignName { name }, id, t.range);
+                    self.walrus_assignment(name, fin, parent);
+                    fin
+                } else {
+                    self.expr(&n.target, id)
+                };
                 let value = self.expr(&n.value, id);
+                self.walrus_ids.push(id);
                 self.finish(id, NodeKind::NamedExpr { target, value }, parent, n.range)
             }
             Expr::BinOp(b) => {
@@ -1054,12 +1794,10 @@ impl<'a> Builder<'a> {
             }
             Expr::Lambda(l) => {
                 self.locals.entry(id).or_default();
-                self.scope_stack.push(ScopeCtx {
-                    scope: id,
-                    global_names: vec![rustc_hash::FxHashSet::default()],
-                });
+                self.scope_stack.push(ScopeCtx { scope: id, is_comprehension: false });
                 let args = match &l.parameters {
-                    Some(p) => self.arguments(p, id),
+                    // lambdas cannot carry per-arg type comments
+                    Some(p) => self.arguments(p, id, false),
                     None => {
                         let aid = self.push_placeholder();
                         self.finish_nopos(
@@ -1079,6 +1817,9 @@ impl<'a> Builder<'a> {
                                 kwonlyargs_annotations: vec![],
                                 varargannotation: None,
                                 kwargannotation: None,
+                                tc_last_posonly: false,
+                                tc_last_arg: false,
+                                tc_last_kwonly: false,
                             })),
                             id,
                         )
@@ -1166,11 +1907,18 @@ impl<'a> Builder<'a> {
                 let generators = self.comprehension_scope(id, &c.generators);
                 let elt = self.expr(&c.elt, id);
                 self.scope_stack.pop();
+                // CPython gives genexps paren-inclusive ranges; when the
+                // genexp is a sole call argument the call's parens are used.
+                let range = if c.parenthesized {
+                    c.range
+                } else {
+                    self.extend_parens(c.range)
+                };
                 self.finish(
                     id,
                     NodeKind::GeneratorExp(Box::new(CompData { elt, generators })),
                     parent,
-                    c.range,
+                    range,
                 )
             }
             Expr::Await(a) => {
@@ -1266,6 +2014,7 @@ impl<'a> Builder<'a> {
             Expr::Attribute(a) => {
                 let e = self.expr(&a.value, id);
                 let attrname = self.sym(a.attr.as_str());
+                let is_store = matches!(a.ctx, ast::ExprContext::Store);
                 let kind = match a.ctx {
                     ast::ExprContext::Store => NodeKind::AssignAttr { expr: e, attrname },
                     ast::ExprContext::Del => NodeKind::DelAttr { expr: e, attrname },
@@ -1275,7 +2024,12 @@ impl<'a> Builder<'a> {
                         ctx: Ctx::Load,
                     },
                 };
-                self.finish(id, kind, parent, a.range)
+                let fin = self.finish(id, kind, parent, a.range);
+                if is_store {
+                    // astroid rebuilder delays AssignAttr handling
+                    self.delayed_assattr.push(fin);
+                }
+                fin
             }
             Expr::Subscript(s) => {
                 let value = self.expr(&s.value, id);
@@ -1343,144 +2097,121 @@ impl<'a> Builder<'a> {
         // Adjacent literal string parts and literal fstring elements merge.
         let mut values: Vec<NodeId> = Vec::new();
         let mut pending: Option<(String, TextRange)> = None;
-        let mut flush = |b: &mut Builder, values: &mut Vec<NodeId>, pending: &mut Option<(String, TextRange)>| {
-            if let Some((s, range)) = pending.take() {
-                let cid = b.push_placeholder();
-                b.finish(
-                    cid,
-                    NodeKind::Const(ConstValue::Str(s.into_boxed_str())),
-                    id,
-                    range,
-                );
-                values.push(cid);
-            }
-        };
         for part in f.value.iter() {
             match part {
                 ast::FStringPart::Literal(lit) => {
-                    match &mut pending {
-                        Some((s, range)) => {
-                            s.push_str(lit.as_str());
-                            *range = TextRange::new(range.start(), lit.range.end());
-                        }
-                        None => pending = Some((lit.as_str().to_string(), lit.range)),
-                    }
+                    Self::merge_pending(&mut pending, lit.as_str(), lit.range);
                 }
                 ast::FStringPart::FString(fs) => {
-                    for elem in fs.elements.iter() {
-                        match elem {
-                            ast::InterpolatedStringElement::Literal(lit) => match &mut pending {
-                                Some((s, range)) => {
-                                    s.push_str(&lit.value);
-                                    *range = TextRange::new(range.start(), lit.range.end());
-                                }
-                                None => {
-                                    pending = Some((lit.value.to_string(), lit.range))
-                                }
-                            },
-                            ast::InterpolatedStringElement::Interpolation(fv) => {
-                                flush(self, &mut values, &mut pending);
-                                let fid = self.push_placeholder();
-                                let value = self.expr(&fv.expression, fid);
-                                let conversion = fv.conversion as i32;
-                                let format_spec = fv.format_spec.as_ref().map(|spec| {
-                                    let sid = self.push_placeholder();
-                                    let mut spec_values: Vec<NodeId> = Vec::new();
-                                    let mut spending: Option<(String, TextRange)> = None;
-                                    for se in spec.elements.iter() {
-                                        match se {
-                                            ast::InterpolatedStringElement::Literal(lit) => {
-                                                match &mut spending {
-                                                    Some((s, range)) => {
-                                                        s.push_str(&lit.value);
-                                                        *range = TextRange::new(
-                                                            range.start(),
-                                                            lit.range.end(),
-                                                        );
-                                                    }
-                                                    None => {
-                                                        spending = Some((
-                                                            lit.value.to_string(),
-                                                            lit.range,
-                                                        ))
-                                                    }
-                                                }
-                                            }
-                                            ast::InterpolatedStringElement::Interpolation(
-                                                sfv,
-                                            ) => {
-                                                if let Some((s, range)) = spending.take() {
-                                                    let cid = self.push_placeholder();
-                                                    self.finish(
-                                                        cid,
-                                                        NodeKind::Const(ConstValue::Str(
-                                                            s.into_boxed_str(),
-                                                        )),
-                                                        sid,
-                                                        range,
-                                                    );
-                                                    spec_values.push(cid);
-                                                }
-                                                let sfid = self.push_placeholder();
-                                                let sval = self.expr(&sfv.expression, sfid);
-                                                self.finish(
-                                                    sfid,
-                                                    NodeKind::FormattedValue {
-                                                        value: sval,
-                                                        conversion: sfv.conversion as i32,
-                                                        format_spec: None,
-                                                    },
-                                                    sid,
-                                                    sfv.range,
-                                                );
-                                                spec_values.push(sfid);
-                                            }
-                                        }
-                                    }
-                                    if let Some((s, range)) = spending.take() {
-                                        let cid = self.push_placeholder();
-                                        self.finish(
-                                            cid,
-                                            NodeKind::Const(ConstValue::Str(s.into_boxed_str())),
-                                            sid,
-                                            range,
-                                        );
-                                        spec_values.push(cid);
-                                    }
-                                    // CPython positions the format_spec
-                                    // JoinedStr starting AT the colon
-                                    let spec_range = TextRange::new(
-                                        spec.range.start() - TextSize::from(1),
-                                        spec.range.end(),
-                                    );
-                                    self.finish(
-                                        sid,
-                                        NodeKind::JoinedStr {
-                                            values: spec_values,
-                                        },
-                                        fid,
-                                        spec_range,
-                                    )
-                                });
-                                self.finish(
-                                    fid,
-                                    NodeKind::FormattedValue {
-                                        value,
-                                        conversion,
-                                        format_spec,
-                                    },
-                                    id,
-                                    fv.range,
-                                );
-                                values.push(fid);
-                            }
-                        }
-                    }
+                    self.fstring_elements(&fs.elements, id, &mut values, &mut pending);
                 }
             }
         }
-        flush(self, &mut values, &mut pending);
+        self.flush_pending(id, &mut values, &mut pending);
         self.finish(id, NodeKind::JoinedStr { values }, parent, f.range)
+    }
+
+    fn merge_pending(pending: &mut Option<(String, TextRange)>, text: &str, range: TextRange) {
+        match pending {
+            Some((s, r)) => {
+                s.push_str(text);
+                *r = TextRange::new(r.start(), range.end());
+            }
+            None => *pending = Some((text.to_string(), range)),
+        }
+    }
+
+    fn flush_pending(
+        &mut self,
+        parent: NodeId,
+        values: &mut Vec<NodeId>,
+        pending: &mut Option<(String, TextRange)>,
+    ) {
+        if let Some((s, range)) = pending.take() {
+            let cid = self.push_placeholder();
+            self.finish(
+                cid,
+                NodeKind::Const(ConstValue::Str(s.into_boxed_str())),
+                parent,
+                range,
+            );
+            values.push(cid);
+        }
+    }
+
+    /// Build JoinedStr children from interpolated-string elements (used for
+    /// both f-string bodies and, recursively, format specs).
+    fn fstring_elements(
+        &mut self,
+        elements: &ast::InterpolatedStringElements,
+        parent: NodeId,
+        values: &mut Vec<NodeId>,
+        pending: &mut Option<(String, TextRange)>,
+    ) {
+        for elem in elements.iter() {
+            match elem {
+                ast::InterpolatedStringElement::Literal(lit) => {
+                    Self::merge_pending(pending, &lit.value, lit.range);
+                }
+                ast::InterpolatedStringElement::Interpolation(fv) => {
+                    // f-string `=` debug specifier: CPython appends the raw
+                    // source `{`..`=` (leading ws + expr text + trailing
+                    // incl. `=`) to the preceding Constant, extending its
+                    // range to just past the debug text.
+                    if let Some(dbg) = &fv.debug_text {
+                        let er = fv.expression.range();
+                        let expr_src =
+                            &self.src.text[er.start().to_u32() as usize..er.end().to_u32() as usize];
+                        let text = format!("{}{}{}", dbg.leading(), expr_src, dbg.trailing());
+                        let dbg_end = er.end() + TextSize::from(dbg.trailing().len() as u32);
+                        match pending {
+                            Some((s, r)) => {
+                                s.push_str(&text);
+                                *r = TextRange::new(r.start(), dbg_end);
+                            }
+                            None => {
+                                let start = fv.range.start() + TextSize::from(1);
+                                *pending = Some((text, TextRange::new(start, dbg_end)));
+                            }
+                        }
+                    }
+                    self.flush_pending(parent, values, pending);
+                    let fid = self.push_placeholder();
+                    let value = self.expr(&fv.expression, fid);
+                    let conversion = fv.conversion as i32;
+                    let format_spec = fv.format_spec.as_ref().map(|spec| {
+                        let sid = self.push_placeholder();
+                        let mut spec_values: Vec<NodeId> = Vec::new();
+                        let mut spending: Option<(String, TextRange)> = None;
+                        self.fstring_elements(&spec.elements, sid, &mut spec_values, &mut spending);
+                        self.flush_pending(sid, &mut spec_values, &mut spending);
+                        // CPython positions the format_spec JoinedStr
+                        // starting AT the colon
+                        let spec_range = TextRange::new(
+                            spec.range.start() - TextSize::from(1),
+                            spec.range.end(),
+                        );
+                        self.finish(
+                            sid,
+                            NodeKind::JoinedStr { values: spec_values },
+                            fid,
+                            spec_range,
+                        )
+                    });
+                    self.finish(
+                        fid,
+                        NodeKind::FormattedValue {
+                            value,
+                            conversion,
+                            format_spec,
+                        },
+                        parent,
+                        fv.range,
+                    );
+                    values.push(fid);
+                }
+            }
+        }
     }
 }
 
@@ -1562,19 +2293,62 @@ fn finalize_positions(tree: &mut Tree) {
 
     fn rec(tree: &mut Tree, id: NodeId) {
         if tree.nodes[id.idx()].col_offset < 0 && id != NodeId::MODULE {
-            tree.nodes[id.idx()].fromlineno = fixed_source_line(tree, id);
+            let mut from = fixed_source_line(tree, id);
+            // astroid Arguments.fromlineno override (node_classes.py:785):
+            // max(super().fromlineno, parent.fromlineno or 0)
+            if matches!(tree.nodes[id.idx()].kind, NodeKind::Arguments(_)) {
+                let parent = tree.nodes[id.idx()].parent;
+                from = from.max(tree.nodes[parent.idx()].fromlineno);
+            }
+            tree.nodes[id.idx()].fromlineno = from;
         }
         let children = tree.children(id);
         for c in &children {
             rec(tree, *c);
         }
         let n = &tree.nodes[id.idx()];
-        let tol = if n.end_lineno != 0 {
-            n.end_lineno
-        } else if let Some(last) = children.last() {
-            tree.nodes[last.idx()].tolineno
-        } else {
-            n.fromlineno
+        let tol = match &n.kind {
+            // astroid NodeNG.tolineno via last_child() over REVERSED
+            // _astroid_fields, where the type_comment_* lists come last and
+            // are lists-of-None whenever the matching arg list is non-empty:
+            // a trailing None last_child yields tolineno = fromlineno. With
+            // actual per-arg type comments the parsed node has tolineno 1.
+            NodeKind::Arguments(d) => {
+                if !d.posonlyargs.is_empty() {
+                    if d.tc_last_posonly { 1 } else { n.fromlineno }
+                } else if !d.kwonlyargs.is_empty() {
+                    if d.tc_last_kwonly { 1 } else { n.fromlineno }
+                } else if !d.args.is_empty() {
+                    if d.tc_last_arg { 1 } else { n.fromlineno }
+                } else if let Some(ka) = d.kwargannotation {
+                    tree.nodes[ka.idx()].tolineno
+                } else if let Some(va) = d.varargannotation {
+                    tree.nodes[va.idx()].tolineno
+                } else {
+                    n.fromlineno
+                }
+            }
+            // astroid Module._astroid_fields = ("doc_node", "body"):
+            // last_child is body[-1], else the doc node.
+            NodeKind::Module(d) => {
+                if let Some(&last) = d.body.last() {
+                    tree.nodes[last.idx()].tolineno
+                } else if let Some(doc) = d.doc_node {
+                    let dn = &tree.nodes[doc.idx()];
+                    if dn.end_lineno != 0 { dn.end_lineno } else { dn.fromlineno }
+                } else {
+                    n.fromlineno
+                }
+            }
+            _ => {
+                if n.end_lineno != 0 {
+                    n.end_lineno
+                } else if let Some(last) = children.last() {
+                    tree.nodes[last.idx()].tolineno
+                } else {
+                    n.fromlineno
+                }
+            }
         };
         tree.nodes[id.idx()].tolineno = tol;
     }
