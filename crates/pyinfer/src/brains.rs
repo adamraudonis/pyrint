@@ -29,6 +29,8 @@ pub enum Tip {
     TypedDictFunc,
     /// namedtuple(...) calls (brain_namedtuple_enum.infer_named_tuple)
     NamedTupleCall,
+    /// Enum("X", "a b") functional calls (brain_namedtuple_enum.infer_enum)
+    EnumCall,
     /// typing.NamedTuple(...) calls
     TypingNamedTupleCall,
     /// class X(NamedTuple): ... (infer_typing_namedtuple_class)
@@ -107,6 +109,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::TypingSubscript => (5, 2),
         Tip::TypedDictFunc => (5, 3),
         Tip::NamedTupleCall => (6, 0),
+        Tip::EnumCall => (6, 4),
         Tip::TypingNamedTupleCall => (6, 1),
         Tip::TypingNamedTupleClass => (6, 2),
         Tip::TypingNamedTupleFunc => (6, 3),
@@ -175,6 +178,41 @@ class Meta(type):
 
 class {0}(metaclass=Meta):
     pass
+";
+
+/// brain_namedtuple_enum.py:325-358 — the infer_enum EnumMeta template
+/// (post-dedent _extract_single_node source; rebuilt FRESH per invocation).
+const ENUM_META_SRC: &str = "
+class EnumMeta(object):
+    'docstring'
+    def __call__(self, node):
+        class EnumAttribute(object):
+            name = ''
+            value = 0
+        return EnumAttribute()
+    def __iter__(self):
+        class EnumAttribute(object):
+            name = ''
+            value = 0
+        return [EnumAttribute()]
+    def __reversed__(self):
+        class EnumAttribute(object):
+            name = ''
+            value = 0
+        return (EnumAttribute, )
+    def __next__(self):
+        return next(iter(self))
+    def __getitem__(self, attr):
+        class Value(object):
+            @property
+            def name(self):
+                return ''
+            @property
+            def value(self):
+                return attr
+
+        return Value()
+    __members__ = ['']
 ";
 
 /// Container classes appearing in the klass/iterables parameters of the
@@ -305,37 +343,72 @@ impl Engine {
             // visit_transforms(rhs_node) directly)
             return None;
         }
+        // brain_typing.py:189/332/394 REPLACE node._explicit_inference with
+        // `lambda node, context: iter([class_def])` — subsequent infer()
+        // calls invoke the lambda DIRECTLY: no recursion guard, no FIFO
+        // lookup and (critically) no FIFO insert/eviction.
+        if let Some(vals) = self.typing_tip_cache.borrow().get(&node) {
+            return Some(Flow::ok(vals.clone()));
+        }
         let tip = self.find_tip(node)?;
         let (a, b) = tip_id(tip);
-        let key = (a * 32 + b, node);
-        if self.tip_guard.borrow().contains(&key) {
-            return None; // recursion -> UseInferenceDefault
+        let guard_key = (a * 32 + b, node);
+        // inference_tip.py:45-50: a re-entry on (func, node) REMOVES the
+        // in-flight guard entry (the outer's finally-remove then no-ops:
+        // "Recursion may beat us to the punch") and raises
+        // UseInferenceDefault.
+        if self.tip_guard.borrow_mut().remove(&guard_key) {
+            return None;
         }
-        let cacheable = ctx.is_empty();
-        if cacheable {
-            if let Some(hit) = self.tip_cache.borrow().get(&key) {
-                return Some(Flow::ok(hit.to_vec()));
-            }
-        }
-        self.tip_guard.borrow_mut().insert(key);
         // inference_tip.py:50-52: `if context is not None and
-        // context.is_empty(): context = None` — tips invoked from a fresh
-        // (dump-level) context run with NO context: their internal
+        // context.is_empty(): context = None` — cache key None; otherwise
+        // the key is the context OBJECT IDENTITY (contexts are unhashable
+        // by value), so non-empty-context invocations basically always
+        // miss and recompute.
+        let empty = ctx.is_empty();
+        let ckey = (
+            a * 32 + b,
+            node,
+            if empty { 0 } else { Rc::as_ptr(ctx) as usize },
+        );
+        if let Some((hit, _)) = self.tip_cache.borrow().get(&ckey) {
+            return Some(Flow::ok(hit.to_vec()));
+        }
+        self.tip_guard.borrow_mut().insert(guard_key);
+        // empty ctx => the tip runs with context=None: its internal
         // inference does NOT bump the caller's nodes_inferred counter.
-        let run_ctx = if cacheable { Ctx::new() } else { Rc::clone(ctx) };
+        let run_ctx = if empty { Ctx::new() } else { Rc::clone(ctx) };
         let res = self.run_tip(tip, node, &run_ctx);
-        self.tip_guard.borrow_mut().remove(&key);
+        // finally-remove (may have been removed by an inner recursion trip)
+        self.tip_guard.borrow_mut().remove(&guard_key);
         if let Some(flow) = &res {
-            if cacheable && flow.err.is_none() {
+            if flow.err.is_none() {
+                // EVERY successful miss inserts (even ctx-identity keys);
+                // evict the OLDEST insertion when len exceeds 64
+                // (inference_tip.py:64-66, 78-79).
                 let mut cache = self.tip_cache.borrow_mut();
                 let mut order = self.tip_order.borrow_mut();
-                if cache.len() >= 64 {
-                    if let Some(oldest) = order.pop_front() {
-                        cache.remove(&oldest);
+                let pin = if empty { None } else { Some(Rc::clone(ctx)) };
+                if cache
+                    .insert(ckey, (Rc::new(flow.vals.clone()), pin))
+                    .is_none()
+                {
+                    order.push_back(ckey);
+                }
+                while cache.len() > 64 {
+                    match order.pop_front() {
+                        Some(oldest) => {
+                            cache.remove(&oldest);
+                        }
+                        None => break,
                     }
                 }
-                cache.insert(key, Rc::new(flow.vals.clone()));
-                order.push_back(key);
+            } else {
+                // exception during the eager `list(func(...))`
+                // materialization (inference_tip.py:64-66): partial yields
+                // are DISCARDED, the error alone propagates; nothing is
+                // cached.
+                return Some(Flow::err(flow.err.clone().unwrap()));
             }
         }
         res
@@ -450,6 +523,10 @@ impl Engine {
                 if n == "namedtuple" {
                     return Some(Tip::NamedTupleCall);
                 }
+                // _looks_like_enum (brain_namedtuple_enum.py:187)
+                if n == "Enum" {
+                    return Some(Tip::EnumCall);
+                }
                 if n == "NamedTuple" {
                     return Some(Tip::TypingNamedTupleCall);
                 }
@@ -522,6 +599,10 @@ impl Engine {
                 }
                 if attr == "namedtuple" {
                     return Some(Tip::NamedTupleCall);
+                }
+                // _looks_like_enum (brain_namedtuple_enum.py:187)
+                if attr == "Enum" {
+                    return Some(Tip::EnumCall);
                 }
                 if attr == "NamedTuple" {
                     return Some(Tip::TypingNamedTupleCall);
@@ -619,6 +700,7 @@ impl Engine {
             Tip::TypingSubscript => self.tip_typing_subscript(node, ctx),
             Tip::TypedDictFunc => self.tip_typeddict_func(node),
             Tip::NamedTupleCall => self.tip_named_tuple(node, ctx),
+            Tip::EnumCall => self.tip_enum_call(node, ctx),
             Tip::TypingNamedTupleCall => self.tip_typing_namedtuple_call(node, ctx),
             Tip::TypingNamedTupleClass => self.tip_typing_namedtuple_class(node, ctx),
             Tip::TypingNamedTupleFunc => self.tip_typing_namedtuple_func(node, ctx),
@@ -1033,11 +1115,11 @@ impl Engine {
         Some(self.infer(cls, ctx))
     }
 
-    /// brain_typing.infer_typing_alias + infer_special_alias
+    /// brain_typing.infer_typing_alias + infer_special_alias. The final
+    /// `node._explicit_inference = lambda ...` replacement is modeled by the
+    /// typing_tip_cache insert below — explicit_inference consults that map
+    /// FIRST (bypassing guard + FIFO) on later invocations.
     fn tip_typing_alias(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
-        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
-            return Some(Flow::ok(cached.clone()));
-        }
         let md = self.md(node.m);
         // parent must be single-target Assign to an AssignName
         let parent = self.parent(node)?;
@@ -1134,11 +1216,11 @@ impl Engine {
         Some(Flow::ok(vals))
     }
 
-    /// brain_typing.infer_typing_attr (Subscript)
+    /// brain_typing.infer_typing_attr (Subscript). Only the Generic/
+    /// Annotated branch pins node._explicit_inference (typing_tip_cache);
+    /// the TYPING_TYPE_TEMPLATE branch re-builds a fresh synthetic class on
+    /// every FIFO miss (brain_typing.py:192-193).
     fn tip_typing_subscript(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
-        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
-            return Some(Flow::ok(cached.clone()));
-        }
         let md = self.md(node.m);
         let value = match &md.tree.nodes[node.n.idx()].kind {
             NodeKind::Subscript { value, .. } => GNode { m: node.m, n: *value },
@@ -1225,11 +1307,10 @@ impl Engine {
         Some(self.infer(cls, ctx))
     }
 
-    /// brain_typing.infer_typedDict
+    /// brain_typing.infer_typedDict (brain_typing.py:217-233): builds a
+    /// FRESH ClassDef on every invocation — no node._explicit_inference
+    /// replacement, so re-runs whenever the 64-FIFO misses.
     fn tip_typeddict_func(&self, node: GNode) -> Option<Flow> {
-        if let Some(cached) = self.typing_tip_cache.borrow().get(&node) {
-            return Some(Flow::ok(cached.clone()));
-        }
         let modname = self.md(node.m).name.clone();
         let mid = self.build_template_module("class TypedDict(dict):
     pass
@@ -1243,9 +1324,7 @@ impl Engine {
                 .and_then(|l| l.get(&sym))
                 .and_then(|v| v.first().copied())?
         };
-        let vals = vec![Value::Node(cls)];
-        self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
-        Some(Flow::ok(vals))
+        Some(Flow::ok(vec![Value::Node(cls)]))
     }
 
     fn run_builtin_tip(&self, name: &str, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
@@ -2478,6 +2557,170 @@ impl Engine {
     fn tip_named_tuple(&self, call: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
         let cls = self.infer_named_tuple_core(call, ctx)?;
         Some(Flow::one(Value::Node(cls)))
+    }
+
+    /// brain_namedtuple_enum.infer_enum (brain_namedtuple_enum.py:309-370):
+    /// a synthetic class (parent __astroid_synthetic) whose single base is a
+    /// FRESH EnumMeta template ClassDef; yields class_node.instantiate_class().
+    fn tip_enum_call(&self, call: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        use crate::value::{Drive, End};
+        let func = {
+            let md = self.md(call.m);
+            match &md.tree.nodes[call.n.idx()].kind {
+                NodeKind::Call { func, .. } => GNode { m: call.m, n: *func },
+                _ => return None,
+            }
+        };
+        // `any(... for item in node.func.infer(context))` — LAZY pulls under
+        // the ctx AS-IS, stopping at the FIRST enum.Enum ClassDef (the rest
+        // of the generator is abandoned). Only generator CREATION sits in
+        // the try (brain_namedtuple_enum.py:314-317) — an InferenceError
+        // raised during the any() iteration propagates out of the tip's
+        // eager list() materialization.
+        let mut is_enum = false;
+        let end = self.infer_to(func, ctx, &mut |v| {
+            if let Value::Node(g) = &v {
+                if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_)))
+                    && self.qname(*g) == "enum.Enum"
+                {
+                    is_enum = true;
+                    return Drive::Stop;
+                }
+            }
+            Drive::Go
+        });
+        if !is_enum {
+            return match end {
+                End::Raised(e) => Some(Flow::err(e)),
+                _ => None, // UseInferenceDefault
+            };
+        }
+        // enum_meta = _extract_single_node(...) — a fresh template build
+        // per invocation (brain_namedtuple_enum.py:325-358)
+        let meta_mid = self.build_template_module(ENUM_META_SRC, "")?;
+        let meta_cls = {
+            let mmd = self.md(meta_mid);
+            let locals = mmd.locals.borrow();
+            let sym = self.sym("EnumMeta");
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&sym))
+                .and_then(|v| v.first().copied())?
+        };
+        // infer_func_form(node, enum_meta, parent=SYNTHETIC_ROOT, enum=True)
+        let (args, kws) = self.call_parts(call);
+        let name_v = self.func_form_arg(&args, &kws, 0, "typename", ctx)?;
+        let names_v = self.func_form_arg(&args, &kws, 1, "field_names", ctx)?;
+        // `name.value` — AttributeError on non-Const -> UseInferenceDefault
+        let name_cv = self.value_const(&name_v)?.clone();
+        // attributes (brain_namedtuple_enum.py:91-131, enum=True branch)
+        let attributes: Vec<String> = match self.value_const(&names_v) {
+            Some(ConstValue::Str(s)) => s
+                .replace(',', " ")
+                .split_whitespace()
+                .map(String::from)
+                .collect(),
+            _ => {
+                let attrs = self.enum_container_attrs(&names_v, ctx)?;
+                if attrs.is_empty() {
+                    // `if not attributes: raise AttributeError` (py:130-131)
+                    return None;
+                }
+                attrs
+            }
+        };
+        // namedtuple's str() mapping is SKIPPED for enum=True; the
+        // space-filter still applies (brain_namedtuple_enum.py:140)
+        let attributes: Vec<String> =
+            attributes.into_iter().filter(|a| !a.contains(' ')).collect();
+        // `name = name or "Uninferable"` (falsy Const values included)
+        let name: String = match &name_cv {
+            ConstValue::Str(s) if !s.is_empty() => s.to_string(),
+            ConstValue::Str(_) => "Uninferable".to_string(),
+            _ => return None, // non-str class names don't occur in practice
+        };
+        let (lineno, col) = {
+            let md = self.md(call.m);
+            let n = &md.tree.nodes[call.n.idx()];
+            (n.fromlineno, n.col_offset)
+        };
+        let (cls, base_slots, _, _) =
+            self.build_synth_class("__astroid_synthetic", &name, lineno, col, 1, false, 0);
+        // bases=[enum_meta] — the template ClassDef NODE itself
+        // (brain_namedtuple_enum.py:361-363 FIXME notes the broken
+        // parent invariant; inferring the base is ONE ClassDef.infer hop)
+        self.redirects
+            .borrow_mut()
+            .insert(GNode { m: cls.m, n: base_slots[0] }, NV::N(meta_cls));
+        {
+            let phs = self.alloc_placeholders(attributes.len());
+            let mut ia = self.iattrs.borrow_mut();
+            let entry = ia.entry(cls).or_default();
+            for (attr, ph) in attributes.iter().zip(phs) {
+                entry.insert(self.sym(attr), vec![ph]);
+            }
+        }
+        Some(Flow::one(self.instantiate_class(cls)))
+    }
+
+    /// infer_func_form enum container handling (brain_namedtuple_enum.py:
+    /// 104-131): dict keys / list of pairs / list of strs, each via
+    /// _infer_first under the live ctx.
+    fn enum_container_attrs(&self, names_v: &Value, ctx: &Rc<Ctx>) -> Option<Vec<String>> {
+        let infer_first_str = |g: GNode| -> Option<String> {
+            match self.infer_first(g, Some(ctx)) {
+                Ok(v) if !v.is_uninferable() => match self.value_const(&v) {
+                    Some(ConstValue::Str(s)) => Some(s.to_string()),
+                    _ => None,
+                },
+                _ => None,
+            }
+        };
+        match names_v {
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    // `hasattr(names, "items")` — Dict node: Const keys only
+                    // (_infer_first(const[0]) — a Const infers to itself)
+                    NodeKind::Dict { items } => {
+                        let mut out = Vec::new();
+                        for (k, _) in items.iter() {
+                            if let NodeKind::Const(ConstValue::Str(s)) =
+                                &md.tree.nodes[k.idx()].kind
+                            {
+                                out.push(s.to_string());
+                            }
+                        }
+                        Some(out)
+                    }
+                    NodeKind::List { elts, .. }
+                    | NodeKind::Tuple { elts, .. }
+                    | NodeKind::Set { elts } => {
+                        let all_tuples = elts.iter().all(|&e| {
+                            matches!(md.tree.nodes[e.idx()].kind, NodeKind::Tuple { .. })
+                        });
+                        let mut out = Vec::new();
+                        if all_tuples {
+                            for &e in elts.iter() {
+                                if let NodeKind::Tuple { elts: pair, .. } =
+                                    &md.tree.nodes[e.idx()].kind
+                                {
+                                    let first = *pair.first()?;
+                                    out.push(infer_first_str(GNode { m: g.m, n: first })?);
+                                }
+                            }
+                        } else {
+                            for &e in elts.iter() {
+                                out.push(infer_first_str(GNode { m: g.m, n: e })?);
+                            }
+                        }
+                        Some(out)
+                    }
+                    _ => None, // raise AttributeError -> UseInferenceDefault
+                }
+            }
+            _ => None,
+        }
     }
 
     /// _find_func_form_arguments member: positional or keyword,

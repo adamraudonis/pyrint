@@ -2287,7 +2287,10 @@ fn const_str_value(c: &ConstValue) -> String {
 
 fn format_const(c: &ConstValue, spec: &str) -> Option<String> {
     if !spec.is_empty() {
-        return None;
+        // format(value, spec) — node_classes.py:4719: the FULL format-spec
+        // mini-language applies to Const values; ValueError/TypeError from
+        // an invalid spec/value combination yields Uninferable (None here).
+        return python_format(c, spec);
     }
     match c {
         ConstValue::Str(s) => Some(s.to_string()),
@@ -2298,6 +2301,489 @@ fn format_const(c: &ConstValue, spec: &str) -> Option<String> {
         ConstValue::None => Some("None".to_string()),
         _ => None,
     }
+}
+
+// ============== python format() spec mini-language for Consts ==============
+
+struct FmtSpec {
+    fill: char,
+    align: Option<char>, // < > ^ =
+    sign: Option<char>,  // + - space
+    alt: bool,           // #
+    zero: bool,          // 0 flag (implies fill '0', align '=' for numbers)
+    width: usize,
+    grouping: Option<char>, // , or _
+    precision: Option<usize>,
+    typ: Option<char>,
+}
+
+fn parse_fmt_spec(spec: &str) -> Option<FmtSpec> {
+    let cs: Vec<char> = spec.chars().collect();
+    let mut i = 0usize;
+    let mut fill = ' ';
+    let mut align: Option<char> = None;
+    if cs.len() >= 2 && matches!(cs[1], '<' | '>' | '^' | '=') {
+        fill = cs[0];
+        align = Some(cs[1]);
+        i = 2;
+    } else if !cs.is_empty() && matches!(cs[0], '<' | '>' | '^' | '=') {
+        align = Some(cs[0]);
+        i = 1;
+    }
+    let mut sign: Option<char> = None;
+    if i < cs.len() && matches!(cs[i], '+' | '-' | ' ') {
+        sign = Some(cs[i]);
+        i += 1;
+    }
+    if i < cs.len() && cs[i] == 'z' {
+        return None; // PEP 682 negative-zero coercion: not folded
+    }
+    let mut alt = false;
+    if i < cs.len() && cs[i] == '#' {
+        alt = true;
+        i += 1;
+    }
+    let mut zero = false;
+    if i < cs.len() && cs[i] == '0' {
+        zero = true;
+        i += 1;
+    }
+    let mut width = 0usize;
+    while i < cs.len() && cs[i].is_ascii_digit() {
+        width = width.checked_mul(10)?.checked_add(cs[i] as usize - '0' as usize)?;
+        i += 1;
+    }
+    if zero && width == 0 {
+        // bare "0" was actually a zero width digit... CPython treats "0"
+        // as zero-flag with width 0 (no-op padding); keep as parsed
+    }
+    let mut grouping: Option<char> = None;
+    if i < cs.len() && (cs[i] == ',' || cs[i] == '_') {
+        grouping = Some(cs[i]);
+        i += 1;
+    }
+    let mut precision: Option<usize> = None;
+    if i < cs.len() && cs[i] == '.' {
+        i += 1;
+        if i >= cs.len() || !cs[i].is_ascii_digit() {
+            return None; // ValueError: Format specifier missing precision
+        }
+        let mut p = 0usize;
+        while i < cs.len() && cs[i].is_ascii_digit() {
+            p = p.checked_mul(10)?.checked_add(cs[i] as usize - '0' as usize)?;
+            i += 1;
+        }
+        precision = Some(p);
+    }
+    let mut typ: Option<char> = None;
+    if i < cs.len() {
+        typ = Some(cs[i]);
+        i += 1;
+    }
+    if i != cs.len() {
+        return None; // ValueError: invalid format spec
+    }
+    Some(FmtSpec {
+        fill,
+        align,
+        sign,
+        alt,
+        zero,
+        width,
+        grouping,
+        precision,
+        typ,
+    })
+}
+
+/// apply fill/align/width to a finished body. `numeric`: default align '>'
+/// and '='/zero-padding insert the fill between sign and digits.
+fn fmt_pad(body: &str, fs: &FmtSpec, numeric: bool) -> String {
+    let len = body.chars().count();
+    if len >= fs.width {
+        return body.to_string();
+    }
+    let pad = fs.width - len;
+    let (fill, align) = if fs.align.is_some() {
+        (fs.fill, fs.align.unwrap())
+    } else if numeric && fs.zero {
+        ('0', '=')
+    } else if numeric {
+        (if fs.zero { '0' } else { fs.fill }, '>')
+    } else {
+        (fs.fill, '<')
+    };
+    let fill_s: String = std::iter::repeat(fill).take(pad).collect();
+    match align {
+        '<' => format!("{body}{fill_s}"),
+        '>' => format!("{fill_s}{body}"),
+        '^' => {
+            let left = pad / 2;
+            let l: String = std::iter::repeat(fill).take(left).collect();
+            let r: String = std::iter::repeat(fill).take(pad - left).collect();
+            format!("{l}{body}{r}")
+        }
+        '=' => {
+            // pad between sign and digits
+            let sign_len = usize::from(body.starts_with(['-', '+', ' ']));
+            let (s, rest) = body.split_at(sign_len);
+            format!("{s}{fill_s}{rest}")
+        }
+        _ => body.to_string(),
+    }
+}
+
+/// insert a grouping separator every `group` digits from the right
+fn group_digits(digits: &str, sep: char, group: usize) -> String {
+    let n = digits.len();
+    let mut out = String::new();
+    for (idx, ch) in digits.chars().enumerate() {
+        if idx > 0 && (n - idx) % group == 0 {
+            out.push(sep);
+        }
+        out.push(ch);
+    }
+    out
+}
+
+fn fmt_sign(neg: bool, sign: Option<char>) -> &'static str {
+    if neg {
+        "-"
+    } else {
+        match sign {
+            Some('+') => "+",
+            Some(' ') => " ",
+            _ => "",
+        }
+    }
+}
+
+fn python_format(c: &ConstValue, spec: &str) -> Option<String> {
+    let fs = parse_fmt_spec(spec)?;
+    match c {
+        ConstValue::Str(s) => fmt_spec_str(s, &fs),
+        ConstValue::Int(IntValue::Small(i)) => fmt_spec_int(*i, &fs),
+        ConstValue::Int(IntValue::Big(s)) => fmt_spec_bigint(s, &fs),
+        // bool: int.__format__ via the int path for numeric types; empty
+        // type renders str(self)
+        ConstValue::Bool(b) => match fs.typ {
+            None => {
+                if fs.sign.is_some() || fs.alt || fs.zero || fs.align == Some('=') {
+                    return None;
+                }
+                Some(fmt_pad(if *b { "True" } else { "False" }, &fs, false))
+            }
+            _ => fmt_spec_int(*b as i64, &fs),
+        },
+        ConstValue::Float(f) => fmt_spec_float(*f, &fs),
+        // object.__format__ raises TypeError on any non-empty spec
+        _ => None,
+    }
+}
+
+fn fmt_spec_str(s: &str, fs: &FmtSpec) -> Option<String> {
+    if !matches!(fs.typ, None | Some('s')) {
+        return None; // ValueError: unknown format code for str
+    }
+    if fs.sign.is_some() || fs.alt || fs.grouping.is_some() {
+        return None; // ValueError: sign/#/grouping not allowed for str
+    }
+    if fs.zero || fs.align == Some('=') {
+        return None; // ValueError: '=' alignment not allowed for str
+    }
+    let body: String = match fs.precision {
+        Some(p) => s.chars().take(p).collect(),
+        None => s.to_string(),
+    };
+    Some(fmt_pad(&body, fs, false))
+}
+
+fn fmt_spec_int(i: i64, fs: &FmtSpec) -> Option<String> {
+    match fs.typ {
+        Some('e') | Some('E') | Some('f') | Some('F') | Some('g') | Some('G') | Some('%') => {
+            return fmt_spec_float(i as f64, fs);
+        }
+        None | Some('d') | Some('n') | Some('b') | Some('o') | Some('x') | Some('X')
+        | Some('c') => {}
+        _ => return None, // ValueError: unknown format code
+    }
+    if fs.precision.is_some() {
+        return None; // ValueError: precision not allowed for int
+    }
+    let typ = fs.typ.unwrap_or('d');
+    if typ == 'c' {
+        if fs.sign.is_some() || fs.grouping.is_some() || i < 0 || i > 0x10FFFF {
+            return None;
+        }
+        let ch = char::from_u32(i as u32)?;
+        return Some(fmt_pad(&ch.to_string(), fs, true));
+    }
+    // grouping legality: ',' only for 'd'/default; '_' also for b/o/x/X
+    let group: usize = match (fs.grouping, typ) {
+        (None, _) => 0,
+        (Some(','), 'd') => 3,
+        (Some(','), _) => return None,
+        (Some('_'), 'd' | 'n') => 3,
+        (Some('_'), 'b' | 'o' | 'x' | 'X') => 4,
+        _ => return None,
+    };
+    if fs.grouping == Some(',') && typ == 'n' {
+        return None;
+    }
+    let neg = i < 0;
+    let mag = (i as i128).unsigned_abs();
+    let mut digits = match typ {
+        'd' | 'n' => mag.to_string(),
+        'b' => format!("{mag:b}"),
+        'o' => format!("{mag:o}"),
+        'x' => format!("{mag:x}"),
+        'X' => format!("{mag:X}"),
+        _ => unreachable!(),
+    };
+    if group > 0 {
+        let sep = fs.grouping.unwrap();
+        // zero-padding with grouping: CPython pads digits so the rendered
+        // string (separators included) reaches the width; a leading
+        // separator forces one extra zero
+        if fs.zero && fs.align.is_none() {
+            let sign_len = usize::from(neg || matches!(fs.sign, Some('+') | Some(' ')));
+            loop {
+                let rendered = group_digits(&digits, sep, group);
+                if rendered.len() + sign_len >= fs.width {
+                    break;
+                }
+                digits.insert(0, '0');
+            }
+            if (digits.len()) % group == 0 {
+                // leading char would be a separator after one more pad
+            }
+            let mut rendered = group_digits(&digits, sep, group);
+            if rendered.len() + usize::from(neg || matches!(fs.sign, Some('+') | Some(' ')))
+                < fs.width
+            {
+                digits.insert(0, '0');
+                rendered = group_digits(&digits, sep, group);
+            }
+            let body = format!("{}{}", fmt_sign(neg, fs.sign), rendered);
+            return Some(body);
+        }
+        digits = group_digits(&digits, sep, group);
+    }
+    let prefix = if fs.alt {
+        match typ {
+            'b' => "0b",
+            'o' => "0o",
+            'x' => "0x",
+            'X' => "0X",
+            _ => "",
+        }
+    } else {
+        ""
+    };
+    let body = format!("{}{}{}", fmt_sign(neg, fs.sign), prefix, digits);
+    Some(fmt_pad(&body, fs, true))
+}
+
+fn fmt_spec_bigint(s: &str, fs: &FmtSpec) -> Option<String> {
+    if !matches!(fs.typ, None | Some('d')) || fs.precision.is_some() {
+        return None;
+    }
+    let neg = s.starts_with('-');
+    let mut digits = s.trim_start_matches('-').to_string();
+    if let Some(sep) = fs.grouping {
+        if fs.zero && fs.align.is_none() {
+            return None; // rare; skip the zero-pad+grouping interaction
+        }
+        digits = group_digits(&digits, sep, 3);
+    }
+    let body = format!("{}{}", fmt_sign(neg, fs.sign), digits);
+    Some(fmt_pad(&body, fs, true))
+}
+
+/// 'g'-style mantissa/exponent split via Rust's correctly-rounded
+/// exponential formatting. Returns (digits_no_dot, exponent) for
+/// `sig` significant digits of |f|.
+fn float_sig_digits(f: f64, sig: usize) -> (String, i32) {
+    let e = format!("{:.*e}", sig - 1, f.abs());
+    let (mant, exp) = e.split_once('e').unwrap();
+    let exp: i32 = exp.parse().unwrap();
+    let digits: String = mant.chars().filter(|c| c.is_ascii_digit()).collect();
+    (digits, exp)
+}
+
+/// render g-style given significant digits: fixed when -4 <= exp < p,
+/// exponential otherwise; trailing zeros stripped unless alt.
+fn fmt_g_core(f: f64, p: usize, upper: bool, alt: bool) -> String {
+    let (digits, exp) = float_sig_digits(f, p);
+    let mut body = if exp >= -4 && (exp as i64) < p as i64 {
+        // fixed notation with p-1-exp digits after the point
+        if exp >= 0 {
+            let int_part = &digits[..(exp as usize + 1).min(digits.len())];
+            let mut frac: String = digits[(exp as usize + 1).min(digits.len())..].to_string();
+            if !alt {
+                while frac.ends_with('0') {
+                    frac.pop();
+                }
+            }
+            if frac.is_empty() {
+                if alt {
+                    format!("{int_part}.")
+                } else {
+                    int_part.to_string()
+                }
+            } else {
+                format!("{int_part}.{frac}")
+            }
+        } else {
+            let zeros: String = std::iter::repeat('0').take((-exp - 1) as usize).collect();
+            let mut frac = format!("{zeros}{digits}");
+            if !alt {
+                while frac.ends_with('0') {
+                    frac.pop();
+                }
+            }
+            format!("0.{frac}")
+        }
+    } else {
+        // exponential notation
+        let first = &digits[..1];
+        let mut rest = digits[1..].to_string();
+        if !alt {
+            while rest.ends_with('0') {
+                rest.pop();
+            }
+        }
+        let mant = if rest.is_empty() {
+            first.to_string()
+        } else {
+            format!("{first}.{rest}")
+        };
+        format!("{mant}e{exp:+03}")
+    };
+    if upper {
+        body = body.to_uppercase();
+    }
+    body
+}
+
+fn fmt_spec_float(f: f64, fs: &FmtSpec) -> Option<String> {
+    let typ = fs.typ;
+    if matches!(
+        typ,
+        Some('d') | Some('b') | Some('o') | Some('x') | Some('X') | Some('c') | Some('s')
+    ) {
+        return None; // ValueError: unknown format code for float
+    }
+    if let Some(t) = typ {
+        if !matches!(t, 'e' | 'E' | 'f' | 'F' | 'g' | 'G' | 'n' | '%') {
+            return None;
+        }
+    }
+    if fs.grouping == Some(',') && typ == Some('n') {
+        return None;
+    }
+    let neg = f.is_sign_negative() && !(f == 0.0 && !f.is_sign_negative());
+    let abs = f.abs();
+    // nan/inf: no zero-fill digits, but padding applies
+    if f.is_nan() || f.is_infinite() {
+        let mut t = if f.is_nan() {
+            "nan".to_string()
+        } else {
+            "inf".to_string()
+        };
+        if matches!(typ, Some('F') | Some('E') | Some('G')) {
+            t = t.to_uppercase();
+        }
+        if typ == Some('%') {
+            t.push('%');
+        }
+        let body = format!("{}{}", fmt_sign(f.is_sign_negative(), fs.sign), t);
+        return Some(fmt_pad(&body, fs, true));
+    }
+    let mut body = match typ {
+        Some('f') | Some('F') | Some('%') => {
+            let p = fs.precision.unwrap_or(6);
+            let scaled = if typ == Some('%') { abs * 100.0 } else { abs };
+            let mut t = format!("{scaled:.p$}");
+            if t.starts_with("inf") {
+                // % scaling overflow
+                t = "inf".to_string();
+            } else if let Some(sep) = fs.grouping {
+                let (int_part, frac) = match t.split_once('.') {
+                    Some((a, b)) => (a.to_string(), Some(b.to_string())),
+                    None => (t.clone(), None),
+                };
+                t = group_digits(&int_part, sep, 3);
+                if let Some(fr) = frac {
+                    t.push('.');
+                    t.push_str(&fr);
+                }
+            }
+            if typ == Some('%') {
+                t.push('%');
+            }
+            t
+        }
+        Some('e') | Some('E') => {
+            let p = fs.precision.unwrap_or(6);
+            let (digits, exp) = float_sig_digits(abs, p + 1);
+            let first = &digits[..1];
+            let rest = &digits[1..];
+            let mant = if rest.is_empty() {
+                first.to_string()
+            } else {
+                format!("{first}.{rest}")
+            };
+            let mut t = format!("{mant}e{exp:+03}");
+            if typ == Some('E') {
+                t = t.to_uppercase();
+            }
+            t
+        }
+        Some('g') | Some('G') | Some('n') => {
+            let p = match fs.precision.unwrap_or(6) {
+                0 => 1,
+                p => p,
+            };
+            fmt_g_core(abs, p, typ == Some('G'), fs.alt)
+        }
+        None => match fs.precision {
+            // empty type with precision: 'g' + ".0" for integral results
+            Some(p) => {
+                let p = if p == 0 { 1 } else { p };
+                let mut t = fmt_g_core(abs, p, false, false);
+                if !t.contains('.') && !t.contains('e') {
+                    t.push_str(".0");
+                }
+                t
+            }
+            // empty type without precision: repr (shortest round-trip)
+            None => {
+                let r = pyast::pyrepr::repr_float(abs);
+                r
+            }
+        },
+        _ => return None,
+    };
+    if fs.grouping.is_some() && !matches!(typ, Some('f') | Some('F') | Some('%')) {
+        // grouping for e/g/empty types groups the integer part too
+        if let Some(sep) = fs.grouping {
+            if !body.contains('e') && !body.contains('E') {
+                let (int_part, frac) = match body.split_once('.') {
+                    Some((a, b)) => (a.to_string(), Some(b.to_string())),
+                    None => (body.clone(), None),
+                };
+                body = group_digits(&int_part, sep, 3);
+                if let Some(fr) = frac {
+                    body.push('.');
+                    body.push_str(&fr);
+                }
+            }
+        }
+    }
+    let _ = neg;
+    let body = format!("{}{}", fmt_sign(f.is_sign_negative(), fs.sign), body);
+    Some(fmt_pad(&body, fs, true))
 }
 
 // ===================== str(astroid object) for f-string folding =====================

@@ -69,6 +69,8 @@ def capture(fn):
 
 from astroid.brain import (  # noqa: E402
     brain_crypt,
+    brain_ctypes,
+    brain_curses,
     brain_hashlib,
     brain_http,
     brain_multiprocessing,
@@ -91,6 +93,8 @@ def one(name, modname, fn):
 
 one("HASHLIB", "hashlib", brain_hashlib._hashlib_transform)
 one("CRYPT", "crypt", brain_crypt._re_transform)
+one("CTYPES", "ctypes", brain_ctypes.enrich_ctypes_redefined_types)
+one("CURSES", "curses", brain_curses._curses_transform)
 one("SUBPROCESS", "subprocess", brain_subprocess._subprocess_transform)
 one("THREADING", "threading", brain_threading._thread_transform)
 one("SIGNAL", "signal", brain_signal._signals_enums_transform)

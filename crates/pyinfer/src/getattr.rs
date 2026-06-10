@@ -945,6 +945,36 @@ impl Engine {
                     })
                 }
             }
+            Value::BoundMethod { func, .. } => {
+                // bases.py:304: `isinstance(attr, UnboundMethod)` — BoundMethod
+                // IS an UnboundMethod subclass! Classmethods arriving from the
+                // class-igetattr fallback (function_to_method wrapped them as
+                // BoundMethod(n, klass)) re-run the FULL _is_property walk
+                // here (decoratornames + safe_infer pulls, all UNCACHED in
+                // astroid), then get re-wrapped `BoundMethod(attr, self)` —
+                // the outer bind is overridden by the inner one at call time
+                // (BoundMethod.infer_call_result rebinds to self.bound), so
+                // we keep the inner BM value.
+                if self.is_property(*func, None) {
+                    // bases.py:306 `yield from attr.infer_call_result(self,
+                    // context)` — through the BM's bind semantics
+                    let mut stopped = false;
+                    let _ = self.infer_call_result_to(&v, None, Some(ctx), &mut |x| {
+                        let d = sink(x);
+                        if let Drive::Stop = d {
+                            stopped = true;
+                        }
+                        d
+                    });
+                    if stopped {
+                        Drive::Stop
+                    } else {
+                        Drive::Go
+                    }
+                } else {
+                    sink(v)
+                }
+            }
             Value::Node(g)
                 if self.kind_is(*g, |k| matches!(k, NodeKind::Lambda(_))) =>
             {

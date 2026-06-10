@@ -170,10 +170,21 @@ pub struct Engine {
         FxHashMap<(GNode, GSym, Option<usize>), (Rc<Vec<crate::value::NV>>, u64, Option<Rc<Ctx>>)>,
     >,
     pub metalookup_tick: Cell<u64>,
-    /// inference-tip recursion guard + cache (inference_tip.py:37-86)
+    /// inference-tip recursion guard + cache (inference_tip.py:37-86).
+    /// Key: (func id, node, ctx identity) — ctx identity is 0 for the
+    /// empty-context normalization (`if context.is_empty(): context = None`,
+    /// inference_tip.py:50-52) and the Rc pointer otherwise: astroid keys
+    /// the OrderedDict by InferenceContext OBJECT identity, the key tuple
+    /// keeping the ctx alive (we pin the Rc in the entry for the same
+    /// pointer-stability guarantee). 64-entry FIFO: EVERY successful miss
+    /// inserts — non-empty-ctx entries virtually never hit again but they
+    /// EVICT the useful None-keyed ones (inference_tip.py:78-79
+    /// `if len(_cache) > 64: _cache.popitem(last=False)`).
     pub tip_guard: RefCell<FxHashSet<(u8, GNode)>>,
-    pub tip_cache: RefCell<FxHashMap<(u8, GNode), Rc<Vec<Value>>>>,
-    pub tip_order: RefCell<std::collections::VecDeque<(u8, GNode)>>,
+    #[allow(clippy::type_complexity)]
+    pub tip_cache:
+        RefCell<FxHashMap<(u8, GNode, usize), (Rc<Vec<Value>>, Option<Rc<Ctx>>)>>,
+    pub tip_order: RefCell<std::collections::VecDeque<(u8, GNode, usize)>>,
     /// recursion depth guard standing in for Python's RecursionError
     pub depth: Cell<u32>,
     pub max_depth: u32,
