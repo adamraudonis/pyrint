@@ -548,20 +548,25 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
         sink: &mut Sink,
     ) -> End {
-        // type("X", bases, attrs) (scoped_nodes.py:2076-2079)
-        if let Some(call) = caller {
-            let n_args = match &self.md(call.m).tree.nodes[call.n.idx()].kind {
-                NodeKind::Call { args, .. } => args.len(),
-                _ => 0,
-            };
-            if n_args == 3 && self.is_subtype_of(cls, "builtins.type", ctx) {
-                return match self.infer_type_call(call, ctx) {
-                    Ok(v) => {
-                        yield_v!(sink, v);
-                        End::Done
-                    }
-                    Err(e) => End::Raised(e),
+        // type("X", bases, attrs) (scoped_nodes.py:2076-2079).
+        // ORDER MATTERS: is_subtype_of(context) runs FIRST (its ancestors()
+        // walk infers base expressions under the SHARED context — counter
+        // bumps happen even when the call is not 3-arg).
+        if self.is_subtype_of(cls, "builtins.type", ctx) {
+            if let Some(call) = caller {
+                let n_args = match &self.md(call.m).tree.nodes[call.n.idx()].kind {
+                    NodeKind::Call { args, .. } => args.len(),
+                    _ => 0,
                 };
+                if n_args == 3 {
+                    return match self.infer_type_call(call, ctx) {
+                        Ok(v) => {
+                            yield_v!(sink, v);
+                            End::Done
+                        }
+                        Err(e) => End::Raised(e),
+                    };
+                }
             }
         }
         let mut dunder_call: Option<Value> = None;

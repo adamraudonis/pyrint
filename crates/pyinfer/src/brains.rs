@@ -718,12 +718,13 @@ impl Engine {
                 if args.len() != 1 {
                     return None;
                 }
-                let f = self.infer(args[0], &copy_context(Some(ctx)));
-                let first = f.vals.first()?.clone();
-                match self.object_type(&first, ctx) {
-                    Some(t) => Some(Flow::one(Value::Node(t))),
-                    None => Some(Flow::uninferable()),
-                }
+                // helpers.object_type: set(_object_type(node, ctx)) over ALL
+                // inferred values; len != 1 -> Uninferable; InferenceError ->
+                // Uninferable. Function/method/module types are FRESH proxy
+                // classes per occurrence (never equal); class metaclasses /
+                // _proxied dedupe by node identity; Uninferable is a
+                // singleton (helpers.py _object_type/object_type).
+                Some(Flow::one(self.object_type_of_node(args[0], ctx)))
             }
             "slice" => {
                 if args.is_empty() || args.len() > 3 {

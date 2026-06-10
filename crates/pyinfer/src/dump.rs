@@ -116,14 +116,30 @@ fn dump_module<W: Write>(engine: &Engine, mid: ModId, out: &mut W) {
         } else {
             flow.vals.iter().map(|v| render(engine, v)).collect()
         };
-        let _ = writeln!(
-            out,
-            "{}:{}:{} -> {}",
-            node_info.fromlineno,
-            node_info.col_offset,
-            kind_name,
-            rendered.join(" | ")
-        );
+        // debug aid: append the per-node nodes_inferred counter so bump
+        // dynamics can be diffed against the python oracle
+        // (harness/dump_infer_count.py).
+        let counts = std::env::var("PRYLINT_DUMP_COUNTS").is_ok();
+        if counts {
+            let _ = writeln!(
+                out,
+                "{}:{}:{} -> {} ##{}",
+                node_info.fromlineno,
+                node_info.col_offset,
+                kind_name,
+                rendered.join(" | "),
+                ctx.nodes_inferred.get()
+            );
+        } else {
+            let _ = writeln!(
+                out,
+                "{}:{}:{} -> {}",
+                node_info.fromlineno,
+                node_info.col_offset,
+                kind_name,
+                rendered.join(" | ")
+            );
+        }
         wrote_any = true;
     }
     if !wrote_any {

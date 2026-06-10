@@ -2028,6 +2028,65 @@ impl Engine {
     }
 
     /// helpers.object_type — None == Uninferable
+    /// helpers.object_type over a NODE: full inference, set-collapse.
+    pub fn object_type_of_node(&self, node: GNode, ctx: &Rc<Ctx>) -> Value {
+        let b = self.builtins();
+        let flow = self.infer(node, &copy_context(Some(ctx)));
+        if flow.err.map(|e| e.is_inference()).unwrap_or(false) {
+            // InferenceError anywhere in _object_type -> Uninferable
+            return Value::Uninferable;
+        }
+        #[derive(PartialEq, Eq, Hash)]
+        enum Entry {
+            Class(GNode),
+            Fresh(u32), // unique per occurrence (fresh build_class)
+            Uninferable,
+        }
+        let mut set: rustc_hash::FxHashSet<Entry> = Default::default();
+        let mut fresh = 0u32;
+        let mut last: Option<Value> = None;
+        for v in &flow.vals {
+            let entry = match v {
+                Value::Uninferable => {
+                    last = match set.contains(&Entry::Uninferable) {
+                        true => last,
+                        false => Some(Value::Uninferable),
+                    };
+                    Entry::Uninferable
+                }
+                Value::Node(g)
+                    if self.kind_is(*g, |k| matches!(k, NodeKind::Unknown)) =>
+                {
+                    return Value::Uninferable; // raise InferenceError
+                }
+                _ => match self.object_type(v, ctx) {
+                    Some(t) => {
+                        let is_fresh = {
+                            // function/method/module proxies are fresh objects
+                            t == b.function
+                                || t == b.builtin_function_or_method
+                                || t == b.method
+                                || t == b.module
+                        };
+                        last = Some(Value::Node(t));
+                        if is_fresh {
+                            fresh += 1;
+                            Entry::Fresh(fresh)
+                        } else {
+                            Entry::Class(t)
+                        }
+                    }
+                    None => return Value::Uninferable,
+                },
+            };
+            set.insert(entry);
+        }
+        if set.len() != 1 {
+            return Value::Uninferable;
+        }
+        last.unwrap_or(Value::Uninferable)
+    }
+
     pub fn object_type(&self, v: &Value, ctx: &Rc<Ctx>) -> Option<GNode> {
         let b = self.builtins();
         match v {
@@ -2041,8 +2100,10 @@ impl Engine {
                     },
                     NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
                     | NodeKind::Lambda(_) => {
+                        // _function_type (helpers.py): builtins-rooted
+                        // functions proxy builtin_function_or_method
                         if md.name == "builtins" {
-                            Some(b.function) // builtin_function_or_method-ish
+                            Some(b.builtin_function_or_method)
                         } else {
                             Some(b.function)
                         }

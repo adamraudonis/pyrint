@@ -57,6 +57,26 @@ def const_value(v):
     return {"t": "other", "repr": repr(v)[:200]}
 
 
+def _empty_klass(node):
+    """klass.__module__/__name__ + instance-branch flag mirroring
+    manager.infer_ast_from_something — the Rust engine replays the
+    `modastroid.igetattr(name, context)` lookup (with its counter bumps)
+    instead of introspecting live objects."""
+    if not node.has_underlying_object():
+        return None
+    obj = node.object
+    try:
+        if hasattr(obj, "__class__") and not isinstance(obj, type):
+            klass, inst = obj.__class__, True
+        elif isinstance(obj, type):
+            klass, inst = obj, False
+        else:
+            return None
+        return {"mod": klass.__module__, "name": klass.__name__, "inst": inst}
+    except Exception:  # noqa: BLE001
+        return None
+
+
 def _empty_inf(node):
     """What this EmptyNode infers to (EmptyNode._infer ->
     infer_ast_from_something on the live object), as resolvable
@@ -123,6 +143,7 @@ def ser(node):
             pass
     if type(node).__name__ == "EmptyNode":
         d["einf"] = _empty_inf(node)
+        d["ek"] = _empty_klass(node)
     # children in _astroid_fields order
     ch = {}
     for field in node._astroid_fields:

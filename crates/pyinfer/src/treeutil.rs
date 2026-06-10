@@ -420,6 +420,14 @@ pub fn kind_label(k: &NodeKind) -> &'static str {
         NodeKind::ClassDef(_) => "ClassDef",
         NodeKind::Lambda(_) => "Lambda",
         NodeKind::Const(_) => "Const",
+        NodeKind::Name { .. } => "Name",
+        NodeKind::AssignName { .. } => "AssignName",
+        NodeKind::Attribute { .. } => "Attribute",
+        NodeKind::Call { .. } => "Call",
+        NodeKind::Import { .. } => "Import",
+        NodeKind::ImportFrom { .. } => "ImportFrom",
+        NodeKind::Subscript { .. } => "Subscript",
+        NodeKind::Arguments(_) => "Arguments",
         _ => "Node",
     }
 }

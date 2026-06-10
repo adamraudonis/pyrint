@@ -23,6 +23,16 @@ pub enum EInf {
     Inst(String),
 }
 
+/// klass.__module__/__name__ + instance flag for an EmptyNode's underlying
+/// object (gen_snapshot._empty_klass) — drives the live
+/// infer_ast_from_something replay (manager.py igetattr branch).
+#[derive(Debug, Clone)]
+pub struct EKlass {
+    pub module: String,
+    pub name: String,
+    pub instance: bool,
+}
+
 pub struct SnapModule {
     pub tree: Tree,
     pub name: String,
@@ -36,6 +46,7 @@ pub struct SnapModule {
     /// FunctionDef.type values recorded from the live introspection
     pub ftype: FxHashMap<NodeId, String>,
     pub einf: FxHashMap<NodeId, Vec<EInf>>,
+    pub eklass: FxHashMap<NodeId, EKlass>,
     /// raw-built Arguments with args=None (unknown signature)
     pub args_unknown: FxHashMap<NodeId, bool>,
 }
@@ -50,6 +61,7 @@ struct Loader {
     iattrs: Vec<(NodeId, Vec<(String, Vec<u64>)>)>,
     ftype: FxHashMap<NodeId, String>,
     einf: FxHashMap<NodeId, Vec<EInf>>,
+    eklass: FxHashMap<NodeId, EKlass>,
     args_unknown: FxHashMap<NodeId, bool>,
 }
 
@@ -263,6 +275,18 @@ impl Loader {
                 }
             }
             "EmptyNode" => {
+                if let Some(ek) = v["ek"].as_object() {
+                    if let (Some(m), Some(n)) = (ek["mod"].as_str(), ek["name"].as_str()) {
+                        self.eklass.insert(
+                            id,
+                            EKlass {
+                                module: m.to_string(),
+                                name: n.to_string(),
+                                instance: ek["inst"].as_bool().unwrap_or(false),
+                            },
+                        );
+                    }
+                }
                 if let Some(arr) = v["einf"].as_array() {
                     let descs = arr
                         .iter()
@@ -384,6 +408,7 @@ pub fn load_snapshot(json: &str) -> Option<SnapModule> {
         iattrs: Vec::new(),
         ftype: FxHashMap::default(),
         einf: FxHashMap::default(),
+        eklass: FxHashMap::default(),
         args_unknown: FxHashMap::default(),
     };
     loader.load(&v, NodeId::MODULE)?;
@@ -423,6 +448,7 @@ pub fn load_snapshot(json: &str) -> Option<SnapModule> {
         iattrs,
         ftype: loader.ftype,
         einf: loader.einf,
+        eklass: loader.eklass,
         args_unknown: loader.args_unknown,
     })
 }

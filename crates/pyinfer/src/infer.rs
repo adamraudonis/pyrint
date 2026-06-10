@@ -81,6 +81,30 @@ impl Engine {
     }
 
     fn infer_entry_to(&self, node: GNode, ctx_in: &Rc<Ctx>, sink: &mut Sink) -> End {
+        // debug trace (PRYLINT_TRACE_INFER) mirroring the astroid
+        // NodeNG.infer monkeypatch used for bump-parity debugging
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            let md = self.md(node.m);
+            let kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
+            let name = self.node_name(node).unwrap_or_default();
+            let d = self.depth.get() as usize;
+            eprintln!(
+                "{}> {} {} ln={:?}",
+                "  ".repeat(d),
+                kind,
+                name,
+                ctx_in.lookupname.get().map(|s| self.sname(s))
+            );
+            let mut wrapped = |v: Value| -> Drive {
+                eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
+                sink(v)
+            };
+            return self.infer_entry_to_inner(node, ctx_in, &mut wrapped);
+        }
+        self.infer_entry_to_inner(node, ctx_in, sink)
+    }
+
+    fn infer_entry_to_inner(&self, node: GNode, ctx_in: &Rc<Ctx>, sink: &mut Sink) -> End {
         // extra_context swap (node_ng.py:125-128)
         let ctx = {
             let extra = ctx_in.extra_context.borrow();
@@ -345,10 +369,7 @@ impl Engine {
                 e.path_wrapped_to(node, ctx, s, |e, s| e.infer_global_to(node, ctx, s))
             }),
             14 => self.rin_to(sink, |e, s| {
-                e.path_wrapped_to(node, ctx, s, |e, s| {
-                    let f = e.infer_empty_node(node);
-                    e.stream_flow(f, s)
-                })
+                e.path_wrapped_to(node, ctx, s, |e, s| e.infer_empty_node_to(node, ctx, s))
             }),
             15 => self.rin_to(sink, |e, s| e.infer_ifexp_to(node, ctx, s)),
             16 => self.rin_to(sink, |e, s| {
@@ -1173,21 +1194,80 @@ impl Engine {
 
     // ---------- EmptyNode ----------
 
-    fn infer_empty_node(&self, node: GNode) -> Flow {
-        let md = self.md(node.m);
-        match md.einf.get(&node.n) {
-            None => Flow::uninferable(),
-            Some(descs) => {
-                let mut out = Vec::new();
-                for d in descs {
-                    out.push(self.resolve_einf(d));
+    /// EmptyNode._infer (node_classes.py:2568-2581) →
+    /// AstroidManager.infer_ast_from_something (manager.py): resolves the
+    /// live object's class via `modastroid.igetattr(name, context)` — under
+    /// the SHARED context, so the lookup work bumps nodes_inferred exactly
+    /// like astroid. The snapshot einf descriptor supplies klass.__module__
+    /// + __name__ (qname) and whether obj was an instance (instantiate
+    /// branch) or the class/function itself.
+    fn infer_empty_node_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
+        let (descs, ek) = {
+            let md = self.md(node.m);
+            (md.einf.get(&node.n).cloned(), md.eklass.get(&node.n).cloned())
+        };
+        let Some(ek) = ek else {
+            // no underlying object -> Uninferable; legacy einf-only
+            // snapshots replay recorded values
+            match descs {
+                Some(descs) if !descs.is_empty() => {
+                    for d in &descs {
+                        yield_v!(sink, self.resolve_einf(d));
+                    }
                 }
-                if out.is_empty() {
-                    Flow::uninferable()
-                } else {
-                    Flow::ok(out)
-                }
+                _ => yield_v!(sink, Value::Uninferable),
             }
+            return End::Done;
+        };
+        let (modname, name, instantiate) = (ek.module, ek.name, ek.instance);
+        let mid = match self.ast_from_module_name(&modname, true) {
+            Ok(m) => m,
+            Err(_) => {
+                // AstroidError -> Uninferable
+                yield_v!(sink, Value::Uninferable);
+                return End::Done;
+            }
+        };
+        let sym = self.sym(&name);
+        let owner = Value::Node(GNode {
+            m: mid,
+            n: NodeId::MODULE,
+        });
+        let mut stopped = false;
+        let end = {
+            let stopped = &mut stopped;
+            self.igetattr_value_to(&owner, sym, Some(ctx), &mut |v| {
+                let out = if instantiate {
+                    match &v {
+                        // Uninferable.instantiate_class() is Uninferable
+                        Value::Uninferable => Value::Uninferable,
+                        Value::Node(g)
+                            if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
+                        {
+                            self.instantiate_class(*g)
+                        }
+                        other => other.clone(),
+                    }
+                } else {
+                    v
+                };
+                let d = sink(out);
+                if let Drive::Stop = d {
+                    *stopped = true;
+                }
+                d
+            })
+        };
+        if stopped {
+            return End::Stopped;
+        }
+        match end {
+            // InferenceError is an AstroidError -> yield Uninferable
+            End::Raised(_) => {
+                yield_v!(sink, Value::Uninferable);
+                End::Done
+            }
+            e => e,
         }
     }
 

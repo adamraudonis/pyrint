@@ -20,6 +20,7 @@ pub mod lookup;
 pub mod protocols;
 pub mod pyenv;
 pub mod snapshot;
+pub mod transforms;
 pub mod treeutil;
 pub mod value;
 

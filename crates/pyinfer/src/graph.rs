@@ -48,6 +48,7 @@ pub struct Module {
     /// snapshot FunctionDef.type overrides
     pub ftype: FxHashMap<NodeId, FType>,
     pub einf: FxHashMap<NodeId, Vec<EInf>>,
+    pub eklass: FxHashMap<NodeId, crate::snapshot::EKlass>,
     /// raw-built Arguments with args=None (unknown signature)
     pub args_unknown: FxHashMap<NodeId, bool>,
     /// snapshot qname overrides (raw-built node reparenting)
@@ -110,6 +111,7 @@ pub struct BuiltinRefs {
     pub generator: GNode,
     pub async_generator: GNode,
     pub function: GNode,
+    pub builtin_function_or_method: GNode,
     pub method: GNode,
     pub module: GNode,
     pub none_type: GNode,
@@ -285,6 +287,7 @@ impl Engine {
             generator: find("generator"),
             async_generator: find("async_generator"),
             function: find("function"),
+            builtin_function_or_method: find("builtin_function_or_method"),
             method: find("method"),
             module: find("module"),
             traceback: find("traceback"),
@@ -401,6 +404,7 @@ impl Engine {
             locals: RefCell::new(locals),
             ftype: FxHashMap::default(),
             einf: FxHashMap::default(),
+            eklass: FxHashMap::default(),
             args_unknown: FxHashMap::default(),
             qnames: FxHashMap::default(),
         };
@@ -572,10 +576,15 @@ impl Engine {
             locals: RefCell::new(locals),
             ftype,
             einf: snap.einf,
+            eklass: snap.eklass,
             args_unknown: snap.args_unknown,
             qnames: snap.qnames,
         };
         self.mods.borrow_mut().push(Rc::new(md));
+        // raw-built modules also go through visit_transforms
+        // (builder.py:103-109 module_build) — run the wipe scan. Note the
+        // bootstrap builtins module is scanned too (harmless: cache empty).
+        self.wipe_scan(id);
         // instance_attrs from the snapshot (exception classes etc.)
         {
             let mut ia = self.iattrs.borrow_mut();
@@ -1081,6 +1090,11 @@ impl Engine {
     fn post_build(&self, id: ModId) {
         self.add_from_names_to_locals(id);
         self.process_delayed_assattr(id);
+        // TransformVisitor runs LAST (builder.py:175-177); every applied
+        // transform that returns non-None wipes the global inference cache
+        // (transforms.py:66-72). Extenders return None (no wipe) and apply
+        // at the Module node — after all child transforms.
+        self.wipe_scan(id);
         self.apply_module_extenders(id);
     }
 
