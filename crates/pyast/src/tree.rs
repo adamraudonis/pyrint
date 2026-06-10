@@ -60,6 +60,10 @@ pub enum ConstValue {
     Float(f64),
     Complex { real: f64, imag: f64 },
     Str(Box<str>),
+    /// String containing lone surrogates (e.g. "\ud800" escapes), which
+    /// Rust strings cannot hold. Stored as raw code points; only the dump
+    /// (length + repr) consumes this.
+    StrSurrogate(Box<[u32]>),
     Bytes(Box<[u8]>),
 }
 
@@ -756,6 +760,14 @@ fn fmt_const(v: &ConstValue) -> String {
         ConstValue::Str(s) => {
             let truncated: String = s.chars().take(20).collect();
             format!("str:{}:{}", s.chars().count(), crate::pyrepr::repr_str(&truncated))
+        }
+        ConstValue::StrSurrogate(points) => {
+            let truncated: Vec<u32> = points.iter().take(20).copied().collect();
+            format!(
+                "str:{}:{}",
+                points.len(),
+                crate::pyrepr::repr_str_points(&truncated)
+            )
         }
         ConstValue::Bytes(b) => format!("bytes:{}", b.len()),
     }

@@ -1,0 +1,7 @@
+a = "\ud83d"
+b = "\ud800foo"
+c = "abc\udc80\udcffdef"
+d = "'\udac0'"
+e = "normal é string"
+g = "literal � replacement"
+h = "\U0001F600 emoji and \N{BULLET}"

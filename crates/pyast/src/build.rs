@@ -23,6 +23,14 @@ pub struct BuildOptions {
     pub package: bool,
 }
 
+#[derive(Clone, Copy, PartialEq, Eq, Debug)]
+enum FuncKind {
+    Function,
+    Method,
+    ClassMethod,
+    StaticMethod,
+}
+
 struct ScopeCtx {
     scope: NodeId,
     /// comprehension scopes are not frames (astroid NodeNG.frame() walks
@@ -397,6 +405,143 @@ impl<'a> Builder<'a> {
         false
     }
 
+    /// If any literal part contains a `\\u`/`\\U` escape that decodes to a
+    /// lone surrogate, decode the WHOLE string ourselves into raw code
+    /// points (CPython semantics). Returns None when no surrogates appear
+    /// (or when we bail on \\N{...} escapes).
+    fn decode_str_with_surrogates(&self, s: &ast::ExprStringLiteral) -> Option<Vec<u32>> {
+        let mut might = false;
+        for part in s.value.iter() {
+            if part.flags.prefix().is_raw() {
+                continue;
+            }
+            let src = &self.src.text
+                [part.range.start().to_u32() as usize..part.range.end().to_u32() as usize];
+            if src.contains("\\u") || src.contains("\\U") {
+                might = true;
+            }
+        }
+        if !might {
+            return None;
+        }
+        let mut points: Vec<u32> = Vec::new();
+        let mut found_surrogate = false;
+        for part in s.value.iter() {
+            if part.flags.prefix().is_raw() {
+                // raw parts cannot produce escapes; copy decoded value
+                points.extend(part.value.chars().map(|c| c as u32));
+                continue;
+            }
+            use ruff_python_ast::StringFlags as _;
+            let inner_start = part.range.start().to_u32() + part.flags.opener_len().to_u32();
+            let inner_end = part.range.end().to_u32() - part.flags.closer_len().to_u32();
+            let inner = &self.src.text[inner_start as usize..inner_end as usize];
+            if !Self::unescape_py(inner, &mut points, &mut found_surrogate) {
+                return None; // \\N{...} or malformed: trust ruff's value
+            }
+        }
+        if found_surrogate { Some(points) } else { None }
+    }
+
+    /// CPython non-raw str escape decoding into raw code points. Returns
+    /// false to bail (\\N escapes need the Unicode name DB).
+    fn unescape_py(inner: &str, out: &mut Vec<u32>, found_surrogate: &mut bool) -> bool {
+        let b: Vec<char> = inner.chars().collect();
+        let mut i = 0usize;
+        let hexval = |cs: &[char]| -> Option<u32> {
+            let s: String = cs.iter().collect();
+            u32::from_str_radix(&s, 16).ok()
+        };
+        while i < b.len() {
+            let c = b[i];
+            if c != '\\' {
+                out.push(c as u32);
+                i += 1;
+                continue;
+            }
+            if i + 1 >= b.len() {
+                out.push('\\' as u32);
+                break;
+            }
+            let e = b[i + 1];
+            i += 2;
+            match e {
+                '\n' => {}
+                '\r' => {
+                    // line continuation over \r\n
+                    if i < b.len() && b[i] == '\n' {
+                        i += 1;
+                    }
+                }
+                '\\' | '\'' | '"' => out.push(e as u32),
+                'a' => out.push(7),
+                'b' => out.push(8),
+                'f' => out.push(12),
+                'n' => out.push(10),
+                'r' => out.push(13),
+                't' => out.push(9),
+                'v' => out.push(11),
+                '0'..='7' => {
+                    let mut v = e as u32 - '0' as u32;
+                    let mut n = 1;
+                    while n < 3 && i < b.len() && ('0'..='7').contains(&b[i]) {
+                        v = v * 8 + (b[i] as u32 - '0' as u32);
+                        i += 1;
+                        n += 1;
+                    }
+                    out.push(v);
+                }
+                'x' => {
+                    if i + 2 > b.len() {
+                        return false;
+                    }
+                    match hexval(&b[i..i + 2]) {
+                        Some(v) => out.push(v),
+                        None => return false,
+                    }
+                    i += 2;
+                }
+                'u' => {
+                    if i + 4 > b.len() {
+                        return false;
+                    }
+                    match hexval(&b[i..i + 4]) {
+                        Some(v) => {
+                            if (0xD800..=0xDFFF).contains(&v) {
+                                *found_surrogate = true;
+                            }
+                            out.push(v);
+                        }
+                        None => return false,
+                    }
+                    i += 4;
+                }
+                'U' => {
+                    if i + 8 > b.len() {
+                        return false;
+                    }
+                    match hexval(&b[i..i + 8]) {
+                        Some(v) => {
+                            if (0xD800..=0xDFFF).contains(&v) {
+                                *found_surrogate = true;
+                            }
+                            out.push(v);
+                        }
+                        None => return false,
+                    }
+                    i += 8;
+                }
+                'N' => return false,
+                other => {
+                    // unknown escape: CPython keeps backslash + char
+                    out.push('\\' as u32);
+                    out.push(other as u32);
+                }
+            }
+        }
+        true
+    }
+
     fn async_tokens_before(&self, def_off: TextSize) -> Option<&(TextSize, bool)> {
         // async token list: stored separately
         let idx = self
@@ -415,7 +560,7 @@ impl<'a> Builder<'a> {
                 let v = *value;
                 if matches!(
                     &self.nodes[v.idx()].kind,
-                    NodeKind::Const(ConstValue::Str(_))
+                    NodeKind::Const(ConstValue::Str(_) | ConstValue::StrSurrogate(_))
                 ) {
                     body.remove(0);
                     return (Some(v), body);
@@ -437,10 +582,36 @@ impl<'a> Builder<'a> {
         let scope = self.frame_of(parent);
         if let NodeKind::ImportFrom { names, .. } = &self.nodes[if_id.idx()].kind {
             let names: Vec<(Sym, Option<Sym>)> = names.clone();
+            let modname = match &self.nodes[if_id.idx()].kind {
+                NodeKind::ImportFrom { modname, level, .. } => {
+                    if level.is_some() {
+                        None // relative: unresolvable with modname "mod"
+                    } else {
+                        Some(self.interner.get(*modname).to_string())
+                    }
+                }
+                _ => None,
+            };
             for (name, asname) in names {
                 let n = self.interner.get(name).to_string();
                 if n == "*" {
-                    continue; // wildcard: needs module resolution (manager)
+                    // astroid resolves the module and adds public_names();
+                    // only stdlib modules resolve in the pinned harness
+                    // environment (see harness/gen_stdlib_wildcard.py).
+                    if let Some(m) = &modname {
+                        if let Some(pubnames) = crate::stdlib_wildcard::wildcard_names(m) {
+                            for pn in pubnames {
+                                let local = self.sym(pn);
+                                let target = if globals.contains(&local) {
+                                    NodeId::MODULE
+                                } else {
+                                    scope
+                                };
+                                self.set_local(target, local, if_id);
+                            }
+                        }
+                    }
+                    continue;
                 }
                 let local = asname.unwrap_or(name);
                 let target = if globals.contains(&local) {
@@ -664,36 +835,251 @@ impl<'a> Builder<'a> {
     }
 
     /// astroid builder.delayed_assattr: for every `x.attr = ...`, infer x;
-    /// when it is a ClassDef the attr name is appended to the class LOCALS
-    /// (Instances/functions only get invisible instance_attrs). We resolve
-    /// plain Names to ClassDefs defined in this module.
+    /// visible effects (in node.locals, which the dump shows):
+    /// - `LocalClass.attr = ...`            -> class locals
+    /// - `cls.attr = ...` in a classmethod  -> class locals
+    /// - first-arg `.attr = ...` in any method of a METACLASS -> class locals
+    /// - `self.__class__.attr = ...` in a method -> class locals
+    /// - `self.X.attr = ...` where self.X was assigned a local class -> that
+    ///   class's locals
+    /// - `f.attr = ...` where f is a lambda  -> the Lambda's locals
+    /// Instances and named functions only get invisible instance_attrs.
     fn process_delayed_assattr(&mut self) {
-        for id in std::mem::take(&mut self.delayed_assattr) {
+        let delayed = std::mem::take(&mut self.delayed_assattr);
+        let mut meta_memo: rustc_hash::FxHashMap<NodeId, bool> = Default::default();
+
+        // pre-pass: map (class, attr) -> classes assigned via `self.attr = LocalClass`
+        let mut self_attr_map: rustc_hash::FxHashMap<(NodeId, Sym), Vec<NodeId>> =
+            Default::default();
+        for &id in &delayed {
+            let NodeKind::AssignAttr { expr, attrname } = &self.nodes[id.idx()].kind else {
+                continue;
+            };
+            let (expr, attrname) = (*expr, *attrname);
+            if !matches!(self.nodes[expr.idx()].kind, NodeKind::Name { .. }) {
+                continue;
+            }
+            let Some((cls, FuncKind::Method)) = self.first_param_class(expr) else {
+                continue;
+            };
+            let assign = self.nodes[id.idx()].parent;
+            let NodeKind::Assign { value, .. } = &self.nodes[assign.idx()].kind else {
+                continue;
+            };
+            let NodeKind::Name { name: vname } = &self.nodes[value.idx()].kind else {
+                continue;
+            };
+            let vscope = self.frame_of(self.nodes[value.idx()].parent);
+            for b in self.lookup_bindings(vscope, *vname) {
+                if matches!(self.nodes[b.idx()].kind, NodeKind::ClassDef(_)) {
+                    self_attr_map.entry((cls, attrname)).or_default().push(b);
+                }
+            }
+        }
+
+        for id in delayed {
             let (expr, attrname) = match &self.nodes[id.idx()].kind {
                 NodeKind::AssignAttr { expr, attrname } => (*expr, *attrname),
                 _ => continue,
             };
-            let name = match &self.nodes[expr.idx()].kind {
-                NodeKind::Name { name } => *name,
-                _ => continue,
+            let mut targets: Vec<NodeId> = Vec::new();
+            match &self.nodes[expr.idx()].kind {
+                NodeKind::Name { name } => {
+                    let name = *name;
+                    let scope = self.frame_of(self.nodes[expr.idx()].parent);
+                    for b in self.lookup_bindings(scope, name) {
+                        match &self.nodes[b.idx()].kind {
+                            NodeKind::ClassDef(_) => targets.push(b),
+                            NodeKind::AssignName { .. } => {
+                                // (a) first parameter of a classmethod / a
+                                // metaclass method infers to the class
+                                if let Some((cls, kind)) = self.param_class_of_binding(b) {
+                                    match kind {
+                                        FuncKind::ClassMethod => targets.push(cls),
+                                        FuncKind::Method => {
+                                            if self.is_metaclass_class(cls, &mut meta_memo) {
+                                                targets.push(cls);
+                                            }
+                                        }
+                                        _ => {}
+                                    }
+                                    continue;
+                                }
+                                // (b) name assigned a lambda: astroid routes
+                                // the attr into the Lambda's locals
+                                let stmt = self.statement_of(b);
+                                if let NodeKind::Assign { value, .. } =
+                                    &self.nodes[stmt.idx()].kind
+                                {
+                                    if matches!(
+                                        self.nodes[value.idx()].kind,
+                                        NodeKind::Lambda(_)
+                                    ) {
+                                        targets.push(*value);
+                                    }
+                                }
+                                // (c) `for k, v in D.items(): v.attr = ...`
+                                // where D is a dict of calls to local
+                                // functions returning local classes (astroid
+                                // infers through the whole chain)
+                                targets.extend(self.dict_items_value_classes(b, stmt));
+                            }
+                            _ => {}
+                        }
+                    }
+                }
+                NodeKind::Attribute { expr: inner, attrname: a, .. } => {
+                    let (inner, a) = (*inner, *a);
+                    if matches!(self.nodes[inner.idx()].kind, NodeKind::Name { .. }) {
+                        if let Some((cls, FuncKind::Method)) = self.first_param_class(inner) {
+                            if self.interner.get(a) == "__class__" {
+                                // self.__class__ infers to the class
+                                targets.push(cls);
+                            } else if let Some(classes) = self_attr_map.get(&(cls, a)) {
+                                targets.extend(classes.iter().copied());
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+            for cls in targets {
+                let values = self
+                    .locals
+                    .entry(cls)
+                    .or_default()
+                    .entry(attrname)
+                    .or_default();
+                if !values.contains(&id) {
+                    values.push(id);
+                }
+            }
+        }
+    }
+
+    /// If `name_node` (a Name use) resolves to the first parameter of a
+    /// method defined directly in a class, return (class, function kind).
+    fn first_param_class(&self, name_node: NodeId) -> Option<(NodeId, FuncKind)> {
+        let NodeKind::Name { name } = &self.nodes[name_node.idx()].kind else {
+            return None;
+        };
+        let scope = self.frame_of(self.nodes[name_node.idx()].parent);
+        for b in self.lookup_bindings(scope, *name) {
+            if matches!(self.nodes[b.idx()].kind, NodeKind::AssignName { .. }) {
+                if let Some(res) = self.param_class_of_binding(b) {
+                    return Some(res);
+                }
+            }
+        }
+        None
+    }
+
+    /// If binding `b` is the first parameter of a function whose frame is a
+    /// class, return (class, function kind).
+    fn param_class_of_binding(&self, b: NodeId) -> Option<(NodeId, FuncKind)> {
+        let args_id = self.nodes[b.idx()].parent;
+        let NodeKind::Arguments(a) = &self.nodes[args_id.idx()].kind else {
+            return None;
+        };
+        let first = a.posonlyargs.first().or(a.args.first()).copied();
+        if first != Some(b) {
+            return None;
+        }
+        let func = self.nodes[args_id.idx()].parent;
+        if !matches!(
+            self.nodes[func.idx()].kind,
+            NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+        ) {
+            return None;
+        }
+        let cls = self.frame_of(self.nodes[func.idx()].parent);
+        if !matches!(self.nodes[cls.idx()].kind, NodeKind::ClassDef(_)) {
+            return None;
+        }
+        Some((cls, self.func_kind(func, cls)))
+    }
+
+    /// Narrow replica of astroid's inference for the pattern
+    /// `for key, v in SOME_DICT.items(): v.attr = ...` where SOME_DICT is a
+    /// local dict literal whose values are local classes or calls to local
+    /// functions that `return <LocalClass>` (django/template/smartif.py).
+    fn dict_items_value_classes(&self, binding: NodeId, stmt: NodeId) -> Vec<NodeId> {
+        let mut out = Vec::new();
+        let NodeKind::For(fd) = &self.nodes[stmt.idx()].kind else {
+            return out;
+        };
+        // binding must be the SECOND element of the unpacking tuple
+        let NodeKind::Tuple { elts, .. } = &self.nodes[fd.target.idx()].kind else {
+            return out;
+        };
+        if elts.len() != 2 || elts[1] != binding {
+            return out;
+        }
+        let NodeKind::Call { func, args, keywords } = &self.nodes[fd.iter.idx()].kind else {
+            return out;
+        };
+        if !args.is_empty() || !keywords.is_empty() {
+            return out;
+        }
+        let NodeKind::Attribute { expr: dexpr, attrname, .. } = &self.nodes[func.idx()].kind
+        else {
+            return out;
+        };
+        if self.interner.get(*attrname) != "items" {
+            return out;
+        }
+        let NodeKind::Name { name: dname } = &self.nodes[dexpr.idx()].kind else {
+            return out;
+        };
+        let dscope = self.frame_of(self.nodes[dexpr.idx()].parent);
+        for db in self.lookup_bindings(dscope, *dname) {
+            if !matches!(self.nodes[db.idx()].kind, NodeKind::AssignName { .. }) {
+                continue;
+            }
+            let dstmt = self.statement_of(db);
+            let NodeKind::Assign { value, .. } = &self.nodes[dstmt.idx()].kind else {
+                continue;
             };
-            let scope = self.frame_of(self.nodes[expr.idx()].parent);
-            for b in self.lookup_bindings(scope, name) {
-                let mut class_target: Option<NodeId> = None;
-                match &self.nodes[b.idx()].kind {
-                    NodeKind::ClassDef(_) => class_target = Some(b),
-                    // first parameter of a classmethod infers to the class
-                    // (protocols._arguments_infer_argname)
-                    NodeKind::AssignName { .. } => {
-                        let args_id = self.nodes[b.idx()].parent;
-                        if let NodeKind::Arguments(a) = &self.nodes[args_id.idx()].kind {
-                            let first = a.posonlyargs.first().or(a.args.first()).copied();
-                            if first == Some(b) {
-                                let func = self.nodes[args_id.idx()].parent;
-                                if self.is_classmethod(func) {
-                                    let cls = self.frame_of(self.nodes[func.idx()].parent);
-                                    if matches!(self.nodes[cls.idx()].kind, NodeKind::ClassDef(_)) {
-                                        class_target = Some(cls);
+            let NodeKind::Dict { items } = &self.nodes[value.idx()].kind else {
+                continue;
+            };
+            for (_, v) in items {
+                match &self.nodes[v.idx()].kind {
+                    NodeKind::Name { name } => {
+                        let vscope = self.frame_of(self.nodes[v.idx()].parent);
+                        for vb in self.lookup_bindings(vscope, *name) {
+                            if matches!(self.nodes[vb.idx()].kind, NodeKind::ClassDef(_)) {
+                                out.push(vb);
+                            }
+                        }
+                    }
+                    NodeKind::Call { func: cf, .. } => {
+                        let NodeKind::Name { name: fname } = &self.nodes[cf.idx()].kind else {
+                            continue;
+                        };
+                        let fscope = self.frame_of(self.nodes[cf.idx()].parent);
+                        for fb in self.lookup_bindings(fscope, *fname) {
+                            let NodeKind::FunctionDef(fdata) = &self.nodes[fb.idx()].kind
+                            else {
+                                continue;
+                            };
+                            for &bstmt in &fdata.body {
+                                let NodeKind::Return { value: Some(rv) } =
+                                    &self.nodes[bstmt.idx()].kind
+                                else {
+                                    continue;
+                                };
+                                let NodeKind::Name { name: rname } =
+                                    &self.nodes[rv.idx()].kind
+                                else {
+                                    continue;
+                                };
+                                for rb in self.lookup_bindings(fb, *rname) {
+                                    if matches!(
+                                        self.nodes[rb.idx()].kind,
+                                        NodeKind::ClassDef(_)
+                                    ) {
+                                        out.push(rb);
                                     }
                                 }
                             }
@@ -701,19 +1087,162 @@ impl<'a> Builder<'a> {
                     }
                     _ => {}
                 }
-                if let Some(cls) = class_target {
-                    let values = self
-                        .locals
-                        .entry(cls)
-                        .or_default()
-                        .entry(attrname)
-                        .or_default();
-                    if !values.contains(&id) {
-                        values.push(id);
+            }
+        }
+        out.sort();
+        out.dedup();
+        out
+    }
+
+    /// astroid FunctionDef.type (the parts we can compute without full
+    /// inference): extra_decorators (`m = classmethod(m)` in the class
+    /// body), implicit classmethods, then literal decorators.
+    fn func_kind(&self, func: NodeId, class_id: NodeId) -> FuncKind {
+        let (name, decorators) = match &self.nodes[func.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => (d.name, d.decorators),
+            _ => return FuncKind::Function,
+        };
+        if let Some(k) = self.extra_decorator_kind(name, class_id) {
+            return k;
+        }
+        let n = self.interner.get(name);
+        if matches!(n, "__new__" | "__init_subclass__" | "__class_getitem__") {
+            return FuncKind::ClassMethod;
+        }
+        if let Some(dec_id) = decorators {
+            if let NodeKind::Decorators { nodes } = &self.nodes[dec_id.idx()].kind {
+                for &d in nodes {
+                    match self.dotted_name(d).as_deref() {
+                        Some("classmethod") | Some("builtins.classmethod") => {
+                            return FuncKind::ClassMethod
+                        }
+                        Some("staticmethod") | Some("builtins.staticmethod") => {
+                            return FuncKind::StaticMethod
+                        }
+                        _ => {}
                     }
                 }
             }
         }
+        FuncKind::Method
+    }
+
+    /// astroid FunctionDef.extra_decorators: `name = classmethod(name)`
+    /// style rebinding in the class body (any nesting within the same
+    /// frame), provided the first binding of `name` is the function.
+    fn extra_decorator_kind(&self, fname: Sym, class_id: NodeId) -> Option<FuncKind> {
+        let first_is_func = self
+            .locals
+            .get(&class_id)
+            .and_then(|m| m.get(&fname))
+            .and_then(|v| v.first())
+            .is_some_and(|&n| {
+                matches!(
+                    self.nodes[n.idx()].kind,
+                    NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                )
+            });
+        if !first_is_func {
+            return None;
+        }
+        let body = match &self.nodes[class_id.idx()].kind {
+            NodeKind::ClassDef(d) => d.body.clone(),
+            _ => return None,
+        };
+        let mut stack = body;
+        while let Some(stmt) = stack.pop() {
+            match &self.nodes[stmt.idx()].kind {
+                NodeKind::Assign { targets, value } => {
+                    let hits_name = targets.iter().any(|&t| {
+                        matches!(&self.nodes[t.idx()].kind,
+                            NodeKind::AssignName { name } if *name == fname)
+                    });
+                    if !hits_name {
+                        continue;
+                    }
+                    if let NodeKind::Call { func, .. } = &self.nodes[value.idx()].kind {
+                        if let NodeKind::Name { name } = &self.nodes[func.idx()].kind {
+                            match self.interner.get(*name) {
+                                "classmethod" => return Some(FuncKind::ClassMethod),
+                                "staticmethod" => return Some(FuncKind::StaticMethod),
+                                _ => {}
+                            }
+                        }
+                    }
+                }
+                NodeKind::If { body, orelse, .. } | NodeKind::While { body, orelse, .. } => {
+                    stack.extend(body.iter().chain(orelse));
+                }
+                NodeKind::For(d) | NodeKind::AsyncFor(d) => {
+                    stack.extend(d.body.iter().chain(&d.orelse));
+                }
+                NodeKind::With(d) | NodeKind::AsyncWith(d) => stack.extend(&d.body),
+                NodeKind::Try(d) | NodeKind::TryStar(d) => {
+                    stack.extend(
+                        d.body
+                            .iter()
+                            .chain(&d.handlers)
+                            .chain(&d.orelse)
+                            .chain(&d.finalbody),
+                    );
+                }
+                NodeKind::ExceptHandler { body, .. } => stack.extend(body),
+                _ => {}
+            }
+        }
+        None
+    }
+
+    /// astroid ClassDef.type == "metaclass": subclass of builtins.type,
+    /// resolved through local classes / the `type` builtin.
+    fn is_metaclass_class(
+        &self,
+        class_id: NodeId,
+        memo: &mut rustc_hash::FxHashMap<NodeId, bool>,
+    ) -> bool {
+        if let Some(&v) = memo.get(&class_id) {
+            return v;
+        }
+        memo.insert(class_id, false);
+        let bases: Vec<NodeId> = match &self.nodes[class_id.idx()].kind {
+            NodeKind::ClassDef(d) => d.bases.clone(),
+            _ => return false,
+        };
+        let start_scope = self.frame_of(self.nodes[class_id.idx()].parent);
+        let mut result = false;
+        'outer: for base in bases {
+            match &self.nodes[base.idx()].kind {
+                NodeKind::Name { name } => {
+                    let n = *name;
+                    let bindings = self.lookup_bindings(start_scope, n);
+                    if bindings.is_empty() && self.interner.get(n) == "type" {
+                        result = true;
+                        break 'outer;
+                    }
+                    for b in bindings {
+                        if matches!(self.nodes[b.idx()].kind, NodeKind::ClassDef(_))
+                            && self.is_metaclass_class(b, memo)
+                        {
+                            result = true;
+                            break 'outer;
+                        }
+                    }
+                }
+                NodeKind::Attribute { expr, attrname, .. } => {
+                    if self.interner.get(*attrname) == "type" {
+                        if let NodeKind::Name { name } = &self.nodes[expr.idx()].kind {
+                            if self.interner.get(*name) == "builtins" {
+                                result = true;
+                                break 'outer;
+                            }
+                        }
+                    }
+                }
+                _ => {}
+            }
+        }
+        memo.insert(class_id, result);
+        result
     }
 
     /// Whether any NamedExpr lies in the subtree rooted at `ancestor`.
@@ -729,31 +1258,6 @@ impl<'a> Builder<'a> {
                     continue 'walrus;
                 }
                 cur = p;
-            }
-        }
-        false
-    }
-
-    /// astroid FunctionDef.type == "classmethod" for methods in a class:
-    /// implicit (__new__/__init_subclass__/__class_getitem__) or decorated
-    /// with `classmethod` / `builtins.classmethod`.
-    fn is_classmethod(&self, func: NodeId) -> bool {
-        let (name, decorators) = match &self.nodes[func.idx()].kind {
-            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => (d.name, d.decorators),
-            _ => return false,
-        };
-        let n = self.interner.get(name);
-        if matches!(n, "__new__" | "__init_subclass__" | "__class_getitem__") {
-            return true;
-        }
-        if let Some(dec_id) = decorators {
-            if let NodeKind::Decorators { nodes } = &self.nodes[dec_id.idx()].kind {
-                for &d in nodes {
-                    match self.dotted_name(d).as_deref() {
-                        Some("classmethod") | Some("builtins.classmethod") => return true,
-                        _ => {}
-                    }
-                }
             }
         }
         false
@@ -827,6 +1331,17 @@ impl<'a> Builder<'a> {
                 }
                 NodeKind::ClassDef(d) => {
                     let decorators = d.decorators;
+                    // --- brain_io: any class literally named BufferedReader/
+                    // BufferedWriter gets locals["raw"]; TextIOWrapper gets
+                    // locals["buffer"] (predicate is the bare name only).
+                    let cname = self.interner.get(d.name);
+                    if matches!(cname, "BufferedReader" | "BufferedWriter") {
+                        let raw = self.sym("raw");
+                        self.locals.entry(id).or_default().entry(raw).or_default();
+                    } else if cname == "TextIOWrapper" {
+                        let buffer = self.sym("buffer");
+                        self.locals.entry(id).or_default().entry(buffer).or_default();
+                    }
                     // --- brain_attrs ---
                     if let Some(dec_id) = decorators {
                         let dec_nodes = match &self.nodes[dec_id.idx()].kind {
@@ -1968,13 +2483,17 @@ impl<'a> Builder<'a> {
             }
             Expr::FString(f) => self.fstring(id, f, parent),
             Expr::StringLiteral(s) => {
-                let v: String = s.value.to_str().to_string();
-                self.finish(
-                    id,
-                    NodeKind::Const(ConstValue::Str(v.into_boxed_str())),
-                    parent,
-                    s.range,
-                )
+                // ruff replaces lone-surrogate escapes (\ud800) with U+FFFD;
+                // CPython keeps them as real (unpaired) code points. Re-decode
+                // when a part smells like it contains such an escape.
+                let cv = match self.decode_str_with_surrogates(s) {
+                    Some(points) => ConstValue::StrSurrogate(points.into_boxed_slice()),
+                    None => {
+                        let v: String = s.value.to_str().to_string();
+                        ConstValue::Str(v.into_boxed_str())
+                    }
+                };
+                self.finish(id, NodeKind::Const(cv), parent, s.range)
             }
             Expr::BytesLiteral(b) => {
                 let mut v: Vec<u8> = Vec::new();

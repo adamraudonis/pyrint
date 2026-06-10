@@ -6,6 +6,7 @@ pub mod build;
 pub mod parse;
 pub mod pyrepr;
 pub mod source;
+pub mod stdlib_wildcard;
 pub mod tree;
 
 pub use source::SourceFile;
