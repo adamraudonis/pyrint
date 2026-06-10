@@ -273,6 +273,82 @@ pylint behavior — bugs are replicated.
      no_member_augassign (2), __code__ Unknown (2). (3) six.with_metaclass
      call-result synthesis still unwired (~20 lines). (4) recursion guard
      350 — no probe-detected divergence this round.
+   - **phase 5 (diff-reduction round 4, N=200)**: 3.25k -> 1.77k diff
+     lines. LANDED (all probe-verified in harness/infertests/):
+     (a) **bases.Instance OBJECT IDENTITY in cache boundnode keys** — the
+     big one: astroid keys context.boundnode by id() (no __eq__ on
+     Proxy/Instance); Value::Inst now carries InstId (fresh per
+     instantiate_class, preserved through cache replay); our old
+     structural Inst(cls) key merged distinct receivers -> spurious cache
+     hits (cheap replays where astroid re-burns toward the 100-cap; e.g.
+     `with mock.patch(...) as b` -> [U] vs our stale 5-value replay).
+     dedup_key (path_wrapper) still unproxies to the class node.
+     (b) **consumer abandonment beats producer completion**: producers
+     that complete via `yield U; return` (Subscript etc.) STILL skip the
+     NodeNG.infer cache write when the consumer abandoned at that yield
+     (wrapper dropped suspended) — infer_entry_to: Done+consumer_stopped
+     -> Stopped. Killed whole spuriously-cached frozen chains
+     (package.py line.split…strip counts now exact).
+     (c) Value::Generator carries copy_context(call-time ctx)
+     (bases.py:698); _infer_context_manager pulls
+     next(infer_yield_types()) under THAT context, single lazy pull incl.
+     YieldFrom (Yield subclass); decorator check uses the with-site ctx
+     uncopied; Instance branch routes through BM infer_call_result
+     (boundnode -> `return self` infers the SUBCLASS instance);
+     ValueKey::Generator keyed by captured-ctx pointer.
+     (d) exact builtin-container tips (_infer_builtin_container port):
+     per-builtin iterables whitelists, klass-first check
+     (frozenset(set-literal) -> FrozenSet), DictKeys/Values/Items
+     elements (objectmodel.py:856-890), all-Const build_elts with python
+     value-equality dedupe for set/frozenset, _use_default abort on
+     non-Const dict keys, single-pull arg inference.
+     (e) brain tips arg pulls are SINGLE PULLS with the SAME context
+     (`next(arg.infer(context=context))`): int/bool/callable/property/
+     getattr(+default)/hasattr/super/dict.fromkeys/functools.partial/
+     typing-TypeVar — our eager copied-ctx pulls completed+cached chains
+     astroid leaves frozen (int_tip_single_pull_counts probe is
+     count-exact).
+     (f) instance-call attribute shortcut propagates igetattr errors
+     (bases.py:327-330): `inst.attr(...)` where the instance lacks attr
+     -> InferenceError aborts the call (salt __zypper__ ERR cluster).
+     (g) Decorators.scope() skip-to-class applies mid-walk (names in
+     method decorators see class attrs); bytes/bool sequence repetition
+     in const binop folds (b"x"*5); f-string error propagation
+     (_safe_infer_from_node catches ONLY InferenceError -> trailing U;
+     other kinds propagate; FormattedValue value/spec raises propagate
+     after yielded values; suffix generators recreated per prefix).
+     (h) sys snapshot canonicalized: sys.json regenerated via
+     harness/regen_sys_snapshot.py (python -E, dump_infer import set;
+     5-entry sys.path, 203-entry sys.modules); engine prepends
+     realpath(cwd) to the snapshot sys.path List at load (oracle main()
+     inserts the corpus root); dump_infer_count.py un-pollutes its
+     sys.modules/sys.path so counter comparisons match the warm cache.
+     TOOLS: harness/catdiffs.py (value-pattern diff categorizer),
+     harness/run_probe_counts.sh, run_infertests.sh COUNTS=1 mode
+     (counted dumps; 20/43 probes have KNOWN count-only gaps — the
+     residual counter-parity punch list), CACHEW lines under
+     PRYLINT_TRACE_INFER (cache-write tracing; pair with
+     /tmp/trace_infer_gt.py + a logging _INFERENCE_CACHE for GT).
+     N=200 differing files/lines: django 22/123, pylfunc 8/17, pandas
+     73/1203, salt 30/343, airflow 14/44, sentry 4/8, core 10/27.
+     REMAINING (by volume): (1) counter/cache-dynamics drift, now
+     LOCALIZED to igetattr/MRO-walk internals — run
+     `COUNTS=1 harness/run_infertests.sh` for 20 small reproducible
+     count-only probe gaps (e.g. dict-model BM lookup does 3 extra
+     base-resolution Name infers after the first FunctionDef pull —
+     container_builtins_dictviews ##5 vs ##6; enum transform ##17 vs
+     ##20; ctxmanager Gen ##3 vs ##6); fix these and the pandas/salt
+     cap-boundary clusters should collapse. The clean count-diff
+     workflow: dump_infer_count.py (full corpus, --only=<comma list>!)
+     vs PRYLINT_DUMP_COUNTS=1 (note: check_inferdump N=200 uses the
+     FIRST 200 items so cache prefixes match the full-dump warm cache).
+     (2) pylfunc leftovers unchanged (17 lines, see phase 4). (3)
+     six.with_metaclass call-result synthesis (~20 lines). (4) int tip:
+     ints beyond i64 in int('huge-str') fold to 0 (astroid folds big) —
+     no corpus hit. (5) set/frozenset all-Const dedupe keeps FIRST
+     occurrence order; CPython set iteration order (hash-based) is not
+     emulated — only visible if a folded set's ELEMENTS get dumped in
+     order (none observed).
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the

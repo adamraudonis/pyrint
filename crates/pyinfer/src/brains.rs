@@ -943,8 +943,8 @@ impl Engine {
             NodeKind::Call { func, args, .. } => (GNode { m: node.m, n: *func }, args.clone()),
             _ => return None,
         };
-        let f = self.infer(func, &copy_context(Some(ctx)));
-        let q = self.value_qname(f.vals.first()?)?;
+        // next(node.func.infer(context=context)) — single pull, same ctx
+        let q = self.value_qname(&self.infer_first(func, Some(ctx)).ok()?)?;
         if !matches!(
             q.as_str(),
             "typing.TypeVar" | "typing.NewType" | "typing_extensions.TypeVar"
@@ -1205,10 +1205,10 @@ impl Engine {
                         false,
                     )))));
                 }
-                let f = self.infer(args[0], &copy_context(Some(ctx)));
-                let first = match f.vals.first() {
-                    Some(v) => v.clone(),
-                    None => return Some(Flow::uninferable()),
+                // next(argument.infer(context=context)) — single pull
+                let first = match self.infer_first(args[0], Some(ctx)) {
+                    Ok(v) => v,
+                    Err(_) => return Some(Flow::uninferable()),
                 };
                 if first.is_uninferable() {
                     return Some(Flow::uninferable());
@@ -1223,10 +1223,10 @@ impl Engine {
                 if args.len() != 1 {
                     return None;
                 }
-                let f = self.infer(args[0], &copy_context(Some(ctx)));
-                let first = match f.vals.first() {
-                    Some(v) => v.clone(),
-                    None => return Some(Flow::uninferable()),
+                // next(argument.infer(context=context)) — single pull
+                let first = match self.infer_first(args[0], Some(ctx)) {
+                    Ok(v) => v,
+                    Err(_) => return Some(Flow::uninferable()),
                 };
                 if first.is_uninferable() {
                     return Some(Flow::uninferable());
@@ -1239,8 +1239,9 @@ impl Engine {
                 if args.is_empty() {
                     return None;
                 }
-                let f = self.infer(args[0], &copy_context(Some(ctx)));
-                match f.vals.first() {
+                // next(getter.infer(context=context)) — single pull
+                let f = self.infer_first(args[0], Some(ctx)).ok();
+                match f.as_ref() {
                     Some(Value::Node(g))
                         if self.kind_is(*g, |k| {
                             matches!(
@@ -1272,8 +1273,11 @@ impl Engine {
                             }
                             _ => {
                                 if args.len() == 3 {
-                                    let f = self.infer(args[2], &copy_context(Some(ctx)));
-                                    f.vals.first().map(|v| Flow::one(v.clone()))
+                                    // next(node.args[2].infer(context)) —
+                                    // single pull, same ctx
+                                    self.infer_first(args[2], Some(ctx))
+                                        .ok()
+                                        .map(Flow::one)
                                 } else {
                                     None
                                 }
@@ -1365,8 +1369,12 @@ impl Engine {
                 }
                 let pos = site.positional_arguments();
                 if let Some(first) = pos.first() {
-                    let f = self.infer_nv(first, &copy_context(Some(ctx)));
-                    let first_value = f.vals.first()?.clone();
+                    // next(call.positional_arguments[0].infer(context)) —
+                    // single pull, same ctx
+                    let first_value = match first {
+                        NV::N(g) => self.infer_first(*g, Some(ctx)).ok()?,
+                        NV::V(v) => v.clone(),
+                    };
                     if first_value.is_uninferable() {
                         return None;
                     }
@@ -1408,8 +1416,9 @@ impl Engine {
         if args.len() != 2 && args.len() != 3 {
             return None;
         }
-        let obj = self.infer(args[0], &copy_context(Some(ctx))).vals.first()?.clone();
-        let attr = self.infer(args[1], &copy_context(Some(ctx))).vals.first()?.clone();
+        // next(node.args[i].infer(context=context)) — single pulls
+        let obj = self.infer_first(args[0], Some(ctx)).ok()?;
+        let attr = self.infer_first(args[1], Some(ctx)).ok()?;
         if obj.is_uninferable() || attr.is_uninferable() {
             return Some((Value::Uninferable, None));
         }
@@ -1498,8 +1507,9 @@ impl Engine {
             };
             (Value::Node(cls), t)
         } else {
-            let p = self.infer(args[0], &copy_context(Some(ctx))).vals.first()?.clone();
-            let t = self.infer(args[1], &copy_context(Some(ctx))).vals.first()?.clone();
+            // next(node.args[i].infer(context=context)) — single pulls
+            let p = self.infer_first(args[0], Some(ctx)).ok()?;
+            let t = self.infer_first(args[1], Some(ctx)).ok()?;
             (p, t)
         };
         if mro_pointer.is_uninferable() || mro_type.is_uninferable() {
@@ -1997,9 +2007,10 @@ impl Engine {
             }))
         };
         let inferred = match &pos[0] {
-            NV::N(g) => match self.infer(*g, &copy_context(Some(ctx))).vals.first() {
-                Some(v) => v.clone(),
-                None => return empty(),
+            // next(values.infer(context=context)) — single pull
+            NV::N(g) => match self.infer_first(*g, Some(ctx)) {
+                Ok(v) => v,
+                Err(_) => return empty(),
             },
             NV::V(v) => v.clone(),
         };
@@ -2140,7 +2151,8 @@ impl Engine {
             return None;
         }
         let wrapped = match &pos[0] {
-            NV::N(g) => self.infer(*g, &copy_context(Some(ctx))).vals.first().cloned(),
+            // next(partial_function.infer(context=context)) — single pull
+            NV::N(g) => self.infer_first(*g, Some(ctx)).ok(),
             NV::V(v) => Some(v.clone()),
         }?;
         let func = match wrapped {
