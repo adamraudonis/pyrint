@@ -772,6 +772,20 @@ impl Engine {
         if self.qname(g) == "boto3.resources.factory.ResourceFactory" {
             self.wipe();
         }
+        // brain_uuid _patch_uuid_class: locals["int"] = [Const(0,
+        // parent=node)] (transform returns None -> no wipe)
+        if self.qname(g) == "uuid.UUID" {
+            let ph = self.alloc_synth_node(NodeKind::Const(
+                pyast::tree::ConstValue::Int(pyast::tree::IntValue::Small(0)),
+            ));
+            self.implicit_owner.borrow_mut().insert(ph, g);
+            let md = self.md(g.m);
+            let mut locals = md.locals.borrow_mut();
+            locals
+                .entry(g.n)
+                .or_default()
+                .insert(self.sym("int"), vec![ph]);
+        }
         // brain_builtin_inference @object.__new__ decorator tip
         for dec in self.decorator_nodes(g) {
             if self.dotted_string(dec).as_deref() == Some("object.__new__") {

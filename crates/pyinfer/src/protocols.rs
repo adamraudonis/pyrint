@@ -2645,83 +2645,222 @@ fn pct_format(fmt: &str, args: &PctArgs) -> Option<String> {
         PctArgs::Many(v) => (v.iter().collect(), None),
         PctArgs::Mapping(m) => (Vec::new(), Some(m)),
     };
+    let chars: Vec<char> = fmt.chars().collect();
     let mut out = String::new();
-    let mut chars = fmt.chars().peekable();
-    let mut vi = 0;
-    while let Some(c) = chars.next() {
+    let mut i = 0usize;
+    let mut vi = 0usize;
+    while i < chars.len() {
+        let c = chars[i];
+        i += 1;
         if c != '%' {
             out.push(c);
             continue;
         }
-        // %(key)X mapping directives
-        if let Some(m) = mapping {
-            if chars.peek() == Some(&'(') {
-                chars.next();
-                let mut key = String::new();
-                loop {
-                    match chars.next() {
-                        Some(')') => break,
-                        Some(ch) => key.push(ch),
-                        None => return None, // ValueError: incomplete format
+        if i < chars.len() && chars[i] == '%' {
+            out.push('%');
+            i += 1;
+            continue;
+        }
+        // %(key) for mappings
+        let mut key: Option<String> = None;
+        if i < chars.len() && chars[i] == '(' {
+            i += 1;
+            let mut k = String::new();
+            loop {
+                if i >= chars.len() {
+                    return None; // ValueError: incomplete format key
+                }
+                if chars[i] == ')' {
+                    i += 1;
+                    break;
+                }
+                k.push(chars[i]);
+                i += 1;
+            }
+            key = Some(k);
+        }
+        // flags
+        let mut minus = false;
+        let mut plus = false;
+        let mut space = false;
+        let mut zero = false;
+        let mut alt = false;
+        while i < chars.len() {
+            match chars[i] {
+                '-' => minus = true,
+                '+' => plus = true,
+                ' ' => space = true,
+                '0' => zero = true,
+                '#' => alt = true,
+                _ => break,
+            }
+            i += 1;
+        }
+        // width
+        let mut width = 0usize;
+        let mut has_width = false;
+        while i < chars.len() && chars[i].is_ascii_digit() {
+            has_width = true;
+            width = width * 10 + (chars[i] as usize - '0' as usize);
+            i += 1;
+        }
+        // precision
+        let mut prec: Option<usize> = None;
+        if i < chars.len() && chars[i] == '.' {
+            i += 1;
+            let mut p = 0usize;
+            while i < chars.len() && chars[i].is_ascii_digit() {
+                p = p * 10 + (chars[i] as usize - '0' as usize);
+                i += 1;
+            }
+            prec = Some(p);
+        }
+        // length modifiers (h/l/L) — ignored by Python
+        while i < chars.len() && matches!(chars[i], 'h' | 'l' | 'L') {
+            i += 1;
+        }
+        if i >= chars.len() {
+            return None; // ValueError: incomplete format
+        }
+        let conv = chars[i];
+        i += 1;
+        let v: &ConstValue = match (&key, mapping) {
+            (Some(k), Some(m)) => m.iter().rev().find(|(mk, _)| mk == k).map(|(_, mv)| mv)?,
+            (None, Some(_)) => return None, // TypeError: format requires a mapping
+            (Some(_), None) => return None,
+            (None, None) => {
+                let v = values.get(vi)?;
+                vi += 1;
+                v
+            }
+        };
+        let body: String = match conv {
+            's' => {
+                let mut t = const_str(v)?;
+                if let Some(p) = prec {
+                    t.truncate(p);
+                }
+                t
+            }
+            'r' => {
+                let mut t = match v {
+                    ConstValue::Str(s) => pyast::pyrepr::repr_str(s),
+                    _ => const_str(v)?,
+                };
+                if let Some(p) = prec {
+                    t.truncate(p);
+                }
+                t
+            }
+            'd' | 'i' | 'u' => {
+                let n: i64 = match v {
+                    ConstValue::Int(IntValue::Small(i)) => *i,
+                    ConstValue::Bool(b) => *b as i64,
+                    ConstValue::Float(f) => *f as i64,
+                    _ => return None,
+                };
+                format_int_directive(n, plus, space, 10, false, alt)
+            }
+            'x' | 'X' | 'o' => {
+                let n: i64 = match v {
+                    ConstValue::Int(IntValue::Small(i)) => *i,
+                    ConstValue::Bool(b) => *b as i64,
+                    _ => return None, // TypeError for floats/strs
+                };
+                let base = if conv == 'o' { 8 } else { 16 };
+                let mut t = format_int_directive(n, plus, space, base, conv == 'X', alt);
+                if alt {
+                    // '#': 0x/0o prefix — insert after sign
+                    let prefix = match conv {
+                        'x' => "0x",
+                        'X' => "0X",
+                        _ => "0o",
+                    };
+                    let sign_len = usize::from(t.starts_with(['-', '+', ' ']));
+                    t.insert_str(sign_len, prefix);
+                }
+                t
+            }
+            'f' | 'F' => {
+                let f: f64 = match v {
+                    ConstValue::Float(f) => *f,
+                    ConstValue::Int(IntValue::Small(i)) => *i as f64,
+                    ConstValue::Bool(b) => (*b as i64) as f64,
+                    _ => return None,
+                };
+                let p = prec.unwrap_or(6);
+                let mut t = format!("{:.*}", p, f);
+                if f >= 0.0 {
+                    if plus {
+                        t.insert(0, '+');
+                    } else if space {
+                        t.insert(0, ' ');
                     }
                 }
-                let v = m.iter().rev().find(|(k, _)| *k == key).map(|(_, v)| v)?;
-                match chars.next() {
-                    Some('s') => out.push_str(&const_str(v)?),
-                    Some('d') | Some('i') => match v {
-                        ConstValue::Int(IntValue::Small(i)) => out.push_str(&i.to_string()),
-                        ConstValue::Bool(b) => out.push_str(if *b { "1" } else { "0" }),
-                        ConstValue::Float(f) => out.push_str(&(*f as i64).to_string()),
-                        _ => return None,
-                    },
-                    Some('r') => match v {
-                        ConstValue::Str(s) => out.push_str(&pyast::pyrepr::repr_str(s)),
-                        _ => out.push_str(&const_str(v)?),
-                    },
-                    _ => return None,
+                t
+            }
+            'c' => match v {
+                ConstValue::Str(s) if s.chars().count() == 1 => s.to_string(),
+                ConstValue::Int(IntValue::Small(i)) => {
+                    char::from_u32(*i as u32).map(String::from)?
                 }
-                continue;
+                _ => return None,
+            },
+            _ => return None, // unsupported conversion (e/g/*-width...)
+        };
+        // width padding
+        let padded = if has_width && body.chars().count() < width {
+            let pad = width - body.chars().count();
+            if minus {
+                format!("{}{}", body, " ".repeat(pad))
+            } else if zero && matches!(conv, 'd' | 'i' | 'u' | 'x' | 'X' | 'o' | 'f' | 'F') {
+                // zero-pad after any sign
+                let sign_len = usize::from(body.starts_with(['-', '+', ' ']));
+                let (sign, rest) = body.split_at(sign_len);
+                format!("{}{}{}", sign, "0".repeat(pad), rest)
+            } else {
+                format!("{}{}", " ".repeat(pad), body)
             }
-            if chars.peek() == Some(&'%') {
-                chars.next();
-                out.push('%');
-                continue;
-            }
-            // non-mapping directive with mapping args: TypeError
-            return None;
-        }
-        match chars.next() {
-            Some('%') => out.push('%'),
-            Some('s') => {
-                let v = values.get(vi)?;
-                vi += 1;
-                out.push_str(&const_str(v)?);
-            }
-            Some('d') | Some('i') => {
-                let v = values.get(vi)?;
-                vi += 1;
-                match v {
-                    ConstValue::Int(IntValue::Small(i)) => out.push_str(&i.to_string()),
-                    ConstValue::Bool(b) => out.push_str(if *b { "1" } else { "0" }),
-                    ConstValue::Float(f) => out.push_str(&(*f as i64).to_string()),
-                    _ => return None,
-                }
-            }
-            Some('r') => {
-                let v = values.get(vi)?;
-                vi += 1;
-                match v {
-                    ConstValue::Str(s) => out.push_str(&pyast::pyrepr::repr_str(s)),
-                    _ => out.push_str(&const_str(v)?),
-                }
-            }
-            _ => return None,
-        }
+        } else {
+            body
+        };
+        out.push_str(&padded);
     }
-    if vi != values.len() {
+    if mapping.is_none() && vi != values.len() {
         return None; // TypeError: not all arguments converted
     }
     Some(out)
+}
+
+fn format_int_directive(
+    n: i64,
+    plus: bool,
+    space: bool,
+    base: u32,
+    upper: bool,
+    _alt: bool,
+) -> String {
+    let mag = (n as i128).unsigned_abs();
+    let digits = match base {
+        8 => format!("{:o}", mag),
+        16 => {
+            if upper {
+                format!("{:X}", mag)
+            } else {
+                format!("{:x}", mag)
+            }
+        }
+        _ => format!("{}", mag),
+    };
+    if n < 0 {
+        format!("-{digits}")
+    } else if plus {
+        format!("+{digits}")
+    } else if space {
+        format!(" {digits}")
+    } else {
+        digits
+    }
 }
 
 fn const_str(c: &ConstValue) -> Option<String> {
