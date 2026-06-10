@@ -135,7 +135,9 @@ pub enum ValueKey {
     Partial(GNode),
     Super(GNode, GNode),
     UnionType,
-    Synth(u8),
+    /// synthetic nodes/proxies key by Rc POINTER identity (fresh python
+    /// objects compare by id(); Value clones share the Rc => same object)
+    Synth(u8, usize),
 }
 
 pub fn value_key(v: &Value) -> ValueKey {
@@ -161,14 +163,14 @@ pub fn value_key(v: &Value) -> ValueKey {
             ..
         } => ValueKey::Super(*mro_pointer, *self_class),
         Value::UnionType => ValueKey::UnionType,
-        Value::SynthConst(_) => ValueKey::Synth(0),
-        Value::SynthSeq { .. } => ValueKey::Synth(1),
-        Value::SynthDict { .. } => ValueKey::Synth(2),
-        Value::SynthSlice { .. } => ValueKey::Synth(3),
-        Value::FrozenSet { .. } => ValueKey::Synth(4),
-        Value::DictItems(_) => ValueKey::Synth(5),
-        Value::DictKeys(_) => ValueKey::Synth(6),
-        Value::DictValues(_) => ValueKey::Synth(7),
+        Value::SynthConst(rc) => ValueKey::Synth(0, Rc::as_ptr(rc) as usize),
+        Value::SynthSeq { elems, .. } => ValueKey::Synth(1, Rc::as_ptr(elems) as *const u8 as usize),
+        Value::SynthDict { items } => ValueKey::Synth(2, Rc::as_ptr(items) as *const u8 as usize),
+        Value::SynthSlice { bounds } => ValueKey::Synth(3, Rc::as_ptr(bounds) as usize),
+        Value::FrozenSet { elems } => ValueKey::Synth(4, Rc::as_ptr(elems) as *const u8 as usize),
+        Value::DictItems(rc) => ValueKey::Synth(5, Rc::as_ptr(rc) as usize),
+        Value::DictKeys(rc) => ValueKey::Synth(6, Rc::as_ptr(rc) as usize),
+        Value::DictValues(rc) => ValueKey::Synth(7, Rc::as_ptr(rc) as usize),
     }
 }
 

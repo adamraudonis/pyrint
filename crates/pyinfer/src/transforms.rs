@@ -187,15 +187,36 @@ const COMPOSITE_NAMES: [&str; 4] = [
     "hypothesis.strategies.composite",
 ];
 
+thread_local! {
+    /// (module, line, kind) of the node currently being transform-scanned —
+    /// debug context for WIPE traces
+    static CUR_SCAN: std::cell::RefCell<(ModId, u32, u8)> =
+        const { std::cell::RefCell::new((ModId(0), 0, 0)) };
+}
+
+fn m_name(e: &Engine, m: ModId) -> String {
+    e.md(m).name.clone()
+}
+
 impl Engine {
     /// transforms.py _invalidate_cache: clears ONLY the global inference
     /// cache (lookup lru / tip caches survive).
     fn wipe(&self) {
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            CUR_SCAN.with(|c| {
+                let (m, l, k) = *c.borrow();
+                eprintln!("WIPE {} line={} kind={}", m_name(self, m), l, k);
+            });
+        }
         self.inf_cache.borrow_mut().clear();
         self.synth_hop_cache.borrow_mut().clear();
     }
 
     /// Bottom-up transform application over a freshly built module.
+    pub fn wipe_scan_set_cur(&self, mid: ModId, line: u32, kind: u8) {
+        CUR_SCAN.with(|c| *c.borrow_mut() = (mid, line, kind));
+    }
+
     pub fn wipe_scan(&self, mid: ModId) {
         // bootstrap (builtins snapshot) loads before BuiltinRefs exist; the
         // cache is empty then and astroid's bootstrap is special-cased anyway
@@ -218,6 +239,14 @@ impl Engine {
                     _ => 0,
                 }
             };
+            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                let line = self.md(mid).tree.nodes[n.idx()].fromlineno as u32;
+                self.wipe_scan_set_cur(mid, line, kind_tag);
+                if kind_tag == 2 || kind_tag == 3 {
+                    let nm = self.node_name(g).unwrap_or_default();
+                    eprintln!("SCAN {} {} @{}:{}", if kind_tag == 2 { "ClassDef" } else { "FunctionDef" }, nm, self.md(mid).name, line);
+                }
+            }
             match kind_tag {
                 1 => self.scan_call(g),
                 2 => self.scan_classdef(g),
@@ -738,12 +767,17 @@ impl Engine {
         "attrs.s",
     ];
 
+    /// ClassDef transform chain in EXACT astroid registration order with
+    /// the transforms.py:60-78 break rule: an APPLIED transform whose
+    /// return value's class differs from ClassDef (incl. the common
+    /// `return None`) STOPS the remaining transforms for this node — and
+    /// only non-None returns invalidate the inference cache.
     fn scan_classdef(&self, g: GNode) {
-        // brain_attrs is_decorated_with_attrs (brain_attrs.py:48-61):
+        // 1. brain_attrs is_decorated_with_attrs (brain_attrs.py:48-61):
         // registered FIRST; per decorator: Call -> func; as_string() name
         // match short-circuits, otherwise safe_infer (2 pulls) runs for
         // EVERY decorated class and checks root module "attr._next_gen".
-        // The transform mutates locals and returns None (no wipe).
+        // The transform mutates locals and returns None -> BREAK, no wipe.
         {
             let mut matched = false;
             for dec in self.decorator_nodes(g) {
@@ -759,47 +793,41 @@ impl Engine {
                 }
                 let v = self.safe_infer(target, &Ctx::new());
                 if let Some(Value::Node(ng)) = &v {
-                    if self.md(ng.m).name == "attr._next_gen" {
+                    if self.kind_is(*ng, |k| {
+                        matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                    }) && self.md(ng.m).name == "attr._next_gen"
+                    {
                         matched = true;
                         break;
                     }
                 }
             }
-            // attr_attributes_transform not ported (no attrs usage in the
-            // pinned venv corpora resolves); predicate side effects only
-            let _ = matched;
+            if matched {
+                // attr_attributes_transform mutations not ported (no attrs
+                // usage resolves in the pinned corpora venv); returns None
+                return;
+            }
         }
-        // brain_boto3
-        if self.qname(g) == "boto3.resources.factory.ResourceFactory" {
+        // 2. brain_boto3 (qname == boto3.resources.base.ServiceResource);
+        // service_request_transform returns node -> wipe + continue
+        if self.qname(g) == "boto3.resources.base.ServiceResource" {
             self.wipe();
         }
-        // brain_uuid _patch_uuid_class: locals["int"] = [Const(0,
-        // parent=node)] (transform returns None -> no wipe)
-        if self.qname(g) == "uuid.UUID" {
-            let ph = self.alloc_synth_node(NodeKind::Const(
-                pyast::tree::ConstValue::Int(pyast::tree::IntValue::Small(0)),
-            ));
-            self.implicit_owner.borrow_mut().insert(ph, g);
-            let md = self.md(g.m);
-            let mut locals = md.locals.borrow_mut();
-            locals
-                .entry(g.n)
-                .or_default()
-                .insert(self.sym("int"), vec![ph]);
-        }
-        // brain_builtin_inference @object.__new__ decorator tip
+        // 3. brain_builtin_inference @object.__new__ decorator tip
+        // (inference_tip -> returns node -> wipe + continue)
         for dec in self.decorator_nodes(g) {
             if self.dotted_string(dec).as_deref() == Some("object.__new__") {
                 self.wipe();
                 break;
             }
         }
-        // brain_collections easy_class_getitem_inference
+        // 4. brain_collections easy_class_getitem_inference
         // (brain_collections.py:92-133): the predicate runs a full
         // class-context getattr('__class_getitem__') — inference side
         // effects (metaclass chain) run for EVERY collections/_collections*
         // class; on success locals['__class_getitem__'] is REPLACED with a
-        // fresh extract_node template (transform returns None — no wipe)
+        // fresh extract_node template. Transform returns None -> BREAK,
+        // no wipe.
         {
             let q = self.qname(g);
             if q.starts_with("_collections") || q.starts_with("collections") {
@@ -823,39 +851,50 @@ impl Engine {
                             locals.entry(g.n).or_default().insert(cgi, vec![func]);
                         }
                     }
+                    return; // transform applied, returned None
                 }
             }
         }
-        // brain_dataclasses dataclass_transform (raw, returns node)
+        // 5. brain_dataclasses dataclass_transform: returns node (-> wipe +
+        // continue) only when an __init__ is generated
+        // (_check_generate_dataclass_init); otherwise None -> BREAK no wipe
         if self.is_decorated_with_dataclass(g) {
             self.apply_dataclass_transform(g);
-            self.wipe();
-        }
-        // brain_typing infer_typing_generic_class_pep695 (inference_tip on
-        // ClassDef with type_params — transform returns node -> wipe)
-        {
-            let md = self.md(g.m);
-            let has_tp = matches!(&md.tree.nodes[g.n.idx()].kind,
-                NodeKind::ClassDef(d) if !d.type_params.is_empty());
-            drop(md);
-            if has_tp {
+            if self.check_generate_dataclass_init(g) {
                 self.wipe();
+            } else {
+                return;
             }
         }
-        // brain_namedtuple_enum infer_enum_class (raw, returns node);
-        // predicate _is_enum_subclass = is_subtype_of("enum.Enum") —
-        // inference happens even when False
+        // 6/7. brain_io: BufferedReader/BufferedWriter get locals["raw"] =
+        // [FileIO instance]; TextIOWrapper gets locals["buffer"] =
+        // [BufferedWriter instance] (any module!). Returns None -> BREAK.
+        {
+            let name = self.node_name(g).unwrap_or_default();
+            if name == "BufferedReader" || name == "BufferedWriter" {
+                self.apply_io_transform(g, "raw", "FileIO");
+                return;
+            }
+            if name == "TextIOWrapper" {
+                self.apply_io_transform(g, "buffer", "BufferedWriter");
+                return;
+            }
+        }
+        // 8. brain_namedtuple_enum infer_enum_class (raw, returns node ->
+        // wipe + continue); predicate _is_enum_subclass =
+        // is_subtype_of("enum.Enum") — inference happens even when False
         if self.is_subtype_of(g, "enum.Enum", None) {
             self.apply_enum_transform(g);
             self.wipe();
         }
-        // brain_namedtuple_enum typing.NamedTuple base tip
+        // 9. brain_namedtuple_enum typing.NamedTuple base tip (wipe+continue)
         {
             let md = self.md(g.m);
             let bases: Vec<NodeId> = match &md.tree.nodes[g.n.idx()].kind {
                 NodeKind::ClassDef(d) => d.bases.clone(),
                 _ => Vec::new(),
             };
+            drop(md);
             let has_nt_base = bases.iter().any(|&b| {
                 self.dotted_string(GNode { m: g.m, n: b })
                     .map(|s| {
@@ -869,15 +908,60 @@ impl Engine {
                 self.wipe();
             }
         }
-        // brain_six add_metaclass / with_metaclass (raw, return node)
-        for dec in self.decorator_nodes(g) {
-            if let Some(f) = self.call_func(dec) {
-                if self.dotted_string(f).as_deref() == Some("six.add_metaclass") {
+        // 10. brain_qt transform_pyside_signal (qname gated to PySide) — not
+        // ported (no PySide in the pinned corpora).
+        // 11. brain_six add_metaclass: predicate is the SYNTACTIC
+        // as_string() == "six.add_metaclass" check; the transform then
+        // single-pulls each Call decorator's func — match with args returns
+        // node (wipe + continue), otherwise None -> BREAK no wipe
+        // (brain_six.py:169-192).
+        {
+            let mut pred = false;
+            for dec in self.decorator_nodes(g) {
+                if let Some(f) = self.call_func(dec) {
+                    if self.dotted_string(f).as_deref() == Some("six.add_metaclass") {
+                        pred = true;
+                        break;
+                    }
+                }
+            }
+            if pred {
+                let mut applied = false;
+                for dec in self.decorator_nodes(g) {
+                    let Some(f) = self.call_func(dec) else { continue };
+                    let inferred = self.first_value(f, &Ctx::new()).ok().flatten();
+                    let Some(Value::Node(fg)) = inferred else { continue };
+                    let is_func_or_class = self.kind_is(fg, |k| {
+                        matches!(
+                            k,
+                            NodeKind::FunctionDef(_)
+                                | NodeKind::AsyncFunctionDef(_)
+                                | NodeKind::ClassDef(_)
+                        )
+                    });
+                    let has_args = {
+                        let md = self.md(dec.m);
+                        matches!(&md.tree.nodes[dec.n.idx()].kind,
+                            NodeKind::Call { args, .. } if !args.is_empty())
+                    };
+                    if is_func_or_class
+                        && self.qname(fg) == "six.add_metaclass"
+                        && has_args
+                    {
+                        // node._metaclass = decorator.args[0] side table
+                        self.apply_six_add_metaclass(g, dec);
+                        applied = true;
+                        break;
+                    }
+                }
+                if applied {
                     self.wipe();
-                    break;
+                } else {
+                    return; // transform ran and returned None
                 }
             }
         }
+        // 12. brain_six with_metaclass (returns node -> wipe + continue)
         {
             let md = self.md(g.m);
             let bases: Vec<NodeId> = match &md.tree.nodes[g.n.idx()].kind {
@@ -914,13 +998,115 @@ impl Engine {
                     }
                 }
             }
-            // brain_typing pep695 generic class tip
+        }
+        // 13. brain_typing pep695 generic class tip (wipe + continue)
+        {
+            let md = self.md(g.m);
             if let NodeKind::ClassDef(d) = &md.tree.nodes[g.n.idx()].kind {
                 if !d.type_params.is_empty() {
                     self.wipe();
                 }
             }
         }
+        // 14. brain_uuid _patch_uuid_class: locals["int"] = [Const(0,
+        // parent=node)] (returns None -> break; last in the chain)
+        if self.qname(g) == "uuid.UUID" {
+            let ph = self.alloc_synth_node(NodeKind::Const(
+                pyast::tree::ConstValue::Int(pyast::tree::IntValue::Small(0)),
+            ));
+            self.implicit_owner.borrow_mut().insert(ph, g);
+            let md = self.md(g.m);
+            let mut locals = md.locals.borrow_mut();
+            locals
+                .entry(g.n)
+                .or_default()
+                .insert(self.sym("int"), vec![ph]);
+        }
+    }
+
+    /// brain_io._generic_io_transform: locals[name] = [Instance of _io.<cls>]
+    fn apply_io_transform(&self, g: GNode, name: &str, cls_name: &str) {
+        // AstroidManager().ast_from_module_name("_io")
+        let Ok(io_mod) = self.ast_from_module_name("_io", true) else { return };
+        let cls = {
+            let md = self.md(io_mod);
+            let locals = md.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|m| m.get(&self.sym(cls_name)))
+                .and_then(|v| v.first().copied())
+        };
+        let Some(cls) = cls else { return };
+        let inst = self.instantiate_class(cls);
+        let ph = self.alloc_placeholders(1)[0];
+        self.redirects.borrow_mut().insert(ph, crate::value::NV::V(inst));
+        let md = self.md(g.m);
+        let mut locals = md.locals.borrow_mut();
+        locals
+            .entry(g.n)
+            .or_default()
+            .insert(self.sym(name), vec![ph]);
+    }
+
+    /// six.add_metaclass: node._metaclass = decorator.args[0]
+    fn apply_six_add_metaclass(&self, g: GNode, dec: GNode) {
+        let md = self.md(dec.m);
+        if let NodeKind::Call { args, .. } = &md.tree.nodes[dec.n.idx()].kind {
+            if let Some(&meta) = args.first() {
+                self.meta_override
+                    .borrow_mut()
+                    .insert(g, GNode { m: dec.m, n: meta });
+            }
+        }
+    }
+
+    /// brain_dataclasses._check_generate_dataclass_init
+    /// (brain_dataclasses.py): True when the class has no own __init__ and
+    /// the dataclass decorator call has no init=False keyword.
+    fn check_generate_dataclass_init(&self, g: GNode) -> bool {
+        let init_sym = self.sym("__init__");
+        {
+            let md = self.md(g.m);
+            let locals = md.locals.borrow();
+            if locals
+                .get(&g.n)
+                .map(|l| l.contains_key(&init_sym))
+                .unwrap_or(false)
+            {
+                return false;
+            }
+        }
+        // find the LAST dataclass-looking Call decorator
+        let mut found: Option<GNode> = None;
+        for dec in self.decorator_nodes(g) {
+            let md = self.md(dec.m);
+            let is_call = matches!(md.tree.nodes[dec.n.idx()].kind, NodeKind::Call { .. });
+            drop(md);
+            if !is_call {
+                continue;
+            }
+            if self.looks_like_dataclass_decorator(dec) {
+                found = Some(dec);
+            }
+        }
+        let Some(found) = found else { return true };
+        // not any(kw.arg == "init" and kw.value.bool_value() is False)
+        let md = self.md(found.m);
+        if let NodeKind::Call { keywords, .. } = &md.tree.nodes[found.n.idx()].kind {
+            for &kw in keywords {
+                if let NodeKind::Keyword { arg: Some(a), value } = &md.tree.nodes[kw.idx()].kind
+                {
+                    if md.tree.s(*a) == "init" {
+                        if let NodeKind::Const(pyast::tree::ConstValue::Bool(false)) =
+                            &md.tree.nodes[value.idx()].kind
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        true
     }
 
     fn scan_functiondef(&self, g: GNode) {
@@ -946,7 +1132,9 @@ impl Engine {
                 };
                 if hit {
                     self.lru_wrapped.borrow_mut().insert(g);
-                    break;
+                    // _transform_lru_cache returns None -> the remaining
+                    // FunctionDef transforms are SKIPPED (transforms.py:74-77)
+                    return;
                 }
             }
         }

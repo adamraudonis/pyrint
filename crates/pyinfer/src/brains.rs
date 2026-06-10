@@ -1814,6 +1814,8 @@ impl Engine {
                 if let Some(cached) = self.dictitems_elts_cache.borrow().get(&key) {
                     return cached.iter().cloned().map(NV::V).collect();
                 }
+                // pin the DictItems identity (keyed by pointer)
+                self.pin_value_identity(v);
                 let pairs: Vec<(Value, Value)> = match &**r {
                     crate::value::DictRef::Node(g) => {
                         let md = self.md(g.m);

@@ -228,6 +228,11 @@ pub struct Engine {
     /// DictModel attr_items Tuple elements, built once per DictItems object
     /// (objectmodel.py:856-867) and reused — keyed by the DictRef pointer
     pub dictitems_elts_cache: RefCell<FxHashMap<usize, Rc<Vec<Value>>>>,
+    /// keep-alive pins for values whose Rc POINTER is used as an identity
+    /// key (synth_hop_cache / ValueKey::Synth / dictitems_elts_cache):
+    /// python ids stay unique while referenced; without pinning the
+    /// allocator recycles freed Rc addresses and keys collide (ABA).
+    pub synth_pins: RefCell<Vec<Value>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -287,6 +292,7 @@ impl Engine {
             known_bases_cache: RefCell::new(FxHashMap::default()),
             synth_hop_cache: RefCell::new(FxHashSet::default()),
             dictitems_elts_cache: RefCell::new(FxHashMap::default()),
+            synth_pins: RefCell::new(Vec::new()),
         };
         e.bootstrap();
         e
@@ -307,6 +313,25 @@ impl Engine {
         let id = self.callctx_id.get();
         self.callctx_id.set(id + 1);
         id
+    }
+
+    /// Keep a value alive whose Rc pointer serves as an identity key
+    /// (ValueKey::Synth / Generator ctx pointer / synth_hop_cache /
+    /// dictitems_elts_cache) — prevents allocator address reuse from
+    /// aliasing distinct "python objects".
+    pub fn pin_value_identity(&self, v: &Value) {
+        match v {
+            Value::SynthConst(_)
+            | Value::SynthSeq { .. }
+            | Value::SynthDict { .. }
+            | Value::SynthSlice { .. }
+            | Value::FrozenSet { .. }
+            | Value::DictItems(_)
+            | Value::DictKeys(_)
+            | Value::DictValues(_)
+            | Value::Generator { .. } => self.synth_pins.borrow_mut().push(v.clone()),
+            _ => {}
+        }
     }
 
     /// The UNATTACHED_UNKNOWN singleton (node_classes.py:5007) — lazily
@@ -804,6 +829,11 @@ impl Engine {
             ext_locals: RefCell::new(IndexMap::new()),
         };
         self.mods.borrow_mut().push(Rc::new(md));
+        // InspectBuilder caches the module BEFORE module_build's
+        // visit_transforms (raw_building.py:460) — transforms that
+        // ast_from_module_name the module being scanned (brain_io on _io's
+        // own classes!) must hit the cache, not rebuild.
+        self.cache_module(modname, id);
         // raw-built modules also go through visit_transforms
         // (builder.py:103-109 module_build) — run the wipe scan. Note the
         // bootstrap builtins module is scanned too (harmless: cache empty).
@@ -1836,15 +1866,22 @@ impl Engine {
             Ok(m) => m,
             Err(_) => return Err(()), // NotImplementedError
         };
+        // `slots = list(grouped_slots(mro))` (scoped_nodes.py:2787-2795):
+        // the FULL mro is walked (inference side effects per class!) even
+        // when an early class already yielded None.
         let mut all: Vec<String> = Vec::new();
+        let mut any_none = false;
         for c in mro {
             if self.qname(c) == "builtins.object" {
                 continue;
             }
             match self.class_slots_of(c) {
-                None => return Ok(None), // a None in grouped_slots
+                None => any_none = true,
                 Some(vals) => all.extend(vals),
             }
+        }
+        if any_none {
+            return Ok(None);
         }
         // sorted(set(...), key=value): membership semantics only
         all.sort();

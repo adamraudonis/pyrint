@@ -230,12 +230,20 @@ impl Engine {
             End::Done if consumer_stopped => End::Stopped,
             End::Done => {
                 trace_write(results.len());
+                // pin pointer-keyed boundnodes (astroid's cache key tuple
+                // holds the object — its id can't be recycled)
+                if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                    self.pin_value_identity(bn);
+                }
                 self.inf_cache.borrow_mut().insert(key, Rc::new(results));
                 End::Done
             }
             End::Stopped => {
                 if truncated && cache_after_trunc {
                     trace_write(results.len());
+                    if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                        self.pin_value_identity(bn);
+                    }
                     self.inf_cache.borrow_mut().insert(key, Rc::new(results));
                     End::Done
                 } else {
@@ -393,16 +401,10 @@ impl Engine {
                 e.path_wrapped_to(node, ctx, s, |e, s| e.infer_call_to(node, ctx, s))
             }),
             7 => self.rin_to(sink, |e, s| {
-                e.path_wrapped_to(node, ctx, s, |e, s| {
-                    let f = e.infer_augassign_filtered(node, ctx);
-                    e.stream_flow(f, s)
-                })
+                e.path_wrapped_to(node, ctx, s, |e, s| e.infer_augassign_to(node, ctx, s))
             }),
             8 => self.yin_to(sink, |e, s| {
-                e.path_wrapped_to(node, ctx, s, |e, s| {
-                    let f = e.infer_binop_filtered(node, ctx);
-                    e.stream_flow(f, s)
-                })
+                e.path_wrapped_to(node, ctx, s, |e, s| e.infer_binop_to(node, ctx, s))
             }),
             9 => self.rin_to(sink, |e, s| {
                 e.path_wrapped_to(node, ctx, s, |e, s| {
@@ -499,6 +501,10 @@ impl Engine {
         };
         for stmt in stmts {
             let stmt_node = match stmt {
+                // a real node arriving as a pre-resolved value (object-model
+                // results like InstanceModel.__class__) still goes through
+                // the full stmt.infer(context) hop in astroid
+                NV::V(Value::Node(g)) => *g,
                 NV::V(v) => {
                     // Proxies (Instance/BoundMethod/Generator/...) infer to
                     // themselves via Proxy.infer — no bump, no cache. But
@@ -529,6 +535,10 @@ impl Engine {
                     }
                     if !is_replay {
                         if let Some(k) = hop_key {
+                            self.pin_value_identity(v);
+                            if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                                self.pin_value_identity(bn);
+                            }
                             self.synth_hop_cache.borrow_mut().insert(k);
                             ctx.bump_inferred();
                         }
@@ -1584,9 +1594,19 @@ impl Engine {
                 ctx.callcontext.borrow().as_ref().map(|c| c.id),
                 ctx.boundnode.borrow().as_ref().map(crate::value::value_key),
             );
+            let tag = key.0;
             if !self.synth_hop_cache.borrow().contains(&key) {
+                self.pin_value_identity(v);
+                if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                    self.pin_value_identity(bn);
+                }
                 self.synth_hop_cache.borrow_mut().insert(key);
                 ctx.bump_inferred();
+                if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                    eprintln!("SYNTHPULL bump tag={} ni={}", tag, ctx.nodes_inferred.get());
+                }
+            } else if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                eprintln!("SYNTHPULL replay tag={}", tag);
             }
         }
     }

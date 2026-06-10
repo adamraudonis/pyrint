@@ -1466,26 +1466,36 @@ impl Engine {
 
     /// BinOp._infer with Bad-message filtering (-> Uninferable)
     pub fn infer_binop_filtered(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let f = self.infer_binop_raw(node, ctx);
+        let mut vals = Vec::new();
+        let end = self.infer_binop_to(node, ctx, &mut |v| {
+            vals.push(v);
+            crate::value::Drive::Go
+        });
         Flow {
-            vals: f
-                .vals
-                .into_iter()
-                .map(|v| if matches!(v, Value::Uninferable) { v } else { v })
-                .collect(),
-            err: f.err,
+            vals,
+            err: end.err_opt(),
         }
     }
 
-    fn infer_binop_raw(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let md = self.md(node.m);
-        let (left, op, right) = match &md.tree.nodes[node.n.idx()].kind {
-            NodeKind::BinOp { left, op, right } => (
-                GNode { m: node.m, n: *left },
-                op.clone(),
-                GNode { m: node.m, n: *right },
-            ),
-            _ => return Flow::err(ErrKind::Inference),
+    /// BinOp._infer body, STREAMING: each (lhs, rhs) pair's results reach
+    /// the consumer before the next pair runs (node_classes.py:1549-1554) —
+    /// abandonment mid-pairs skips the remaining pairs entirely.
+    pub fn infer_binop_to(
+        &self,
+        node: GNode,
+        ctx: &Rc<Ctx>,
+        sink: &mut crate::infer::Sink,
+    ) -> End {
+        let (left, op, right) = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::BinOp { left, op, right } => (
+                    GNode { m: node.m, n: *left },
+                    op.clone(),
+                    GNode { m: node.m, n: *right },
+                ),
+                _ => return End::Raised(ErrKind::Inference),
+            }
         };
         let lhs_ctx = copy_context(Some(ctx));
         let rhs_ctx = copy_context(Some(ctx));
@@ -1494,26 +1504,37 @@ impl Engine {
         // propagates with no values produced.
         let lhs_flow = self.infer(left, &lhs_ctx);
         if let Some(e) = lhs_flow.err {
-            return Flow::err(e);
+            return End::Raised(e);
         }
         let rhs_flow = self.infer(right, &rhs_ctx);
         if let Some(e) = rhs_flow.err {
-            return Flow::err(e);
+            return End::Raised(e);
         }
-        let mut out = Vec::new();
-        'outer: for lhs in &lhs_flow.vals {
+        for lhs in &lhs_flow.vals {
             for rhs in &rhs_flow.vals {
                 if lhs.is_uninferable() || rhs.is_uninferable() {
-                    out.push(Value::Uninferable);
-                    break 'outer;
+                    if let crate::value::Drive::Stop = sink(Value::Uninferable) {
+                        return End::Stopped;
+                    }
+                    return End::Done;
                 }
                 match self.infer_binary_operation(lhs, rhs, &op, node, ctx, false) {
-                    Ok(mut vals) => out.append(&mut vals),
-                    Err(_) => out.push(Value::Uninferable),
+                    Ok(vals) => {
+                        for v in vals {
+                            if let crate::value::Drive::Stop = sink(v) {
+                                return End::Stopped;
+                            }
+                        }
+                    }
+                    Err(_) => {
+                        if let crate::value::Drive::Stop = sink(Value::Uninferable) {
+                            return End::Stopped;
+                        }
+                    }
                 }
             }
         }
-        Flow::ok(out)
+        End::Done
     }
 
     pub fn infer_augassign_filtered(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
@@ -1551,6 +1572,60 @@ impl Engine {
             }
         }
         Flow::ok(out)
+    }
+
+    /// AugAssign._infer body, STREAMING (mirrors infer_binop_to).
+    pub fn infer_augassign_to(
+        &self,
+        node: GNode,
+        ctx: &Rc<Ctx>,
+        sink: &mut crate::infer::Sink,
+    ) -> End {
+        let (target, op, value) = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::AugAssign { target, op, value } => (
+                    GNode { m: node.m, n: *target },
+                    op.clone(),
+                    GNode { m: node.m, n: *value },
+                ),
+                _ => return End::Raised(ErrKind::Inference),
+            }
+        };
+        let lhs_flow = self.infer_lhs(target, ctx);
+        if let Some(e) = lhs_flow.err {
+            return End::Raised(e);
+        }
+        let rhs_ctx = ctx.clone_ctx();
+        let rhs_flow = self.infer(value, &rhs_ctx);
+        if let Some(e) = rhs_flow.err {
+            return End::Raised(e);
+        }
+        for lhs in &lhs_flow.vals {
+            for rhs in &rhs_flow.vals {
+                if lhs.is_uninferable() || rhs.is_uninferable() {
+                    if let crate::value::Drive::Stop = sink(Value::Uninferable) {
+                        return End::Stopped;
+                    }
+                    return End::Done;
+                }
+                match self.infer_binary_operation(lhs, rhs, &op, node, ctx, true) {
+                    Ok(vals) => {
+                        for v in vals {
+                            if let crate::value::Drive::Stop = sink(v) {
+                                return End::Stopped;
+                            }
+                        }
+                    }
+                    Err(_) => {
+                        if let crate::value::Drive::Stop = sink(Value::Uninferable) {
+                            return End::Stopped;
+                        }
+                    }
+                }
+            }
+        }
+        End::Done
     }
 
     /// AssignName.infer_lhs / Subscript.infer_lhs / AssignAttr.infer_lhs
