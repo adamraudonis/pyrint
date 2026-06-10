@@ -2,6 +2,11 @@
 //! node taxonomy, positions (fromlineno/tolineno/col_offset), scopes and
 //! locals dictionaries, matching astroid 4.0.4 semantics exactly.
 
+pub mod build;
+pub mod parse;
+pub mod pyrepr;
 pub mod source;
+pub mod tree;
 
 pub use source::SourceFile;
+pub use tree::{Node, NodeId, NodeKind, Tree};
