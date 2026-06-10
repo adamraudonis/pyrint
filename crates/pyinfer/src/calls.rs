@@ -1340,6 +1340,12 @@ impl Engine {
     // ---------- CallSite (arguments.py) ----------
 
     pub fn call_site_from(&self, cc: &CallCtx, ctx: &Rc<Ctx>) -> CallSite {
+        // CallSite._unpack_args/_unpack_keywords MUTATE the passed context:
+        // `context.extra_context = self.argument_context_map` (arguments.py
+        // :95/:135) — the map populated by Call._infer is CLOBBERED with the
+        // empty default before any argument inference (so call args do NOT
+        // swap to the populated plain-clone context downstream).
+        *ctx.extra_context.borrow_mut() = Rc::new(rustc_hash::FxHashMap::default());
         // unpack args
         let mut unpacked_args: Vec<NV> = Vec::new();
         for arg in cc.args.borrow().iter() {
