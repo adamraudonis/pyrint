@@ -45,7 +45,7 @@ pub enum DedupKey {
 pub fn dedup_key(v: &Value) -> Option<DedupKey> {
     match v {
         Value::Node(g) => Some(DedupKey::Node(*g)),
-        Value::Inst { cls } => Some(DedupKey::Node(*cls)),
+        Value::Inst { cls, .. } => Some(DedupKey::Node(*cls)),
         Value::Uninferable => Some(DedupKey::Uninferable),
         Value::SynthConst(rc) => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(rc) as usize)),
         Value::SynthSeq { elems, .. } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(elems) as usize)),
@@ -654,7 +654,7 @@ impl Engine {
                     {
                         Some(*g)
                     }
-                    Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(*cls),
+                    Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(*cls),
                     _ => None,
                 };
                 if let Some(frame) = frame_for_constraints {
@@ -1335,7 +1335,7 @@ impl Engine {
             EInf::Class(q) | EInf::Inst(q) | EInf::Func(q) => {
                 match self.resolve_qname(q) {
                     Some(g) => match d {
-                        EInf::Inst(_) => Value::Inst { cls: g },
+                        EInf::Inst(_) => Value::Inst { cls: g, id: crate::value::fresh_inst_id() },
                         _ => Value::Node(g),
                     },
                     None => Value::Uninferable,
@@ -1539,7 +1539,7 @@ impl Engine {
     pub fn proxied_class(&self, v: &Value) -> Option<GNode> {
         let b = self.builtins();
         match v {
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(*cls),
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(*cls),
             Value::SynthConst(c) => Some(self.const_class(c)),
             Value::SynthSeq { kind, .. } => Some(match kind {
                 SeqKind::List => b.list,
@@ -1884,7 +1884,7 @@ impl Engine {
     pub fn astroid_object_str(&self, v: &Value) -> Option<String> {
         match v {
             Value::Uninferable => Some("Uninferable".to_string()),
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
                 let root = self.md(cls.m).name.clone();
                 let name = self.node_name(*cls).unwrap_or_default();
                 Some(format!("Instance of {root}.{name}"))
@@ -2003,7 +2003,7 @@ impl Engine {
         match v {
             Value::Node(g) => self.astroid_node_repr(*g),
             Value::Uninferable => "Uninferable".to_string(),
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
                 let root = self.md(cls.m).name.clone();
                 let name = self.node_name(*cls).unwrap_or_default();
                 format!("<Instance of {root}.{name} at 0x{FAKE_DEC_ID}>")

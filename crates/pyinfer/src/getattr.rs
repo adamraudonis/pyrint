@@ -959,7 +959,7 @@ impl Engine {
                 }
                 "__traceback__" => {
                     let tb = self.builtins().traceback;
-                    return Some(Value::Inst { cls: tb });
+                    return Some(Value::Inst { cls: tb, id: crate::value::fresh_inst_id() });
                 }
                 "exceptions" => {
                     if let Some(ex) = exceptions {
@@ -1295,7 +1295,7 @@ impl Engine {
         };
         let cls = match &**mro_type {
             Value::Node(g) => *g,
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => *cls,
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => *cls,
             _ => return Err(ErrKind::Super),
         };
         let mro = self.mro(cls, None).map_err(|_| ErrKind::Super)?;
@@ -1550,7 +1550,7 @@ impl Engine {
                         {
                             *g
                         }
-                        Value::Inst { cls } | Value::ExcInst { cls, .. } => *cls,
+                        Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => *cls,
                         _ => return Drive::Go,
                     };
                     if yielded.insert(basecls) {
@@ -1689,7 +1689,7 @@ impl Engine {
             let last = flow.vals.last().cloned();
             let Some(last) = last else { continue };
             let basecls = match last {
-                Value::Inst { cls } | Value::ExcInst { cls, .. } => cls,
+                Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => cls,
                 Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
                 _ => continue,
             };
@@ -1832,7 +1832,7 @@ impl Engine {
                 };
             }
         }
-        Value::Inst { cls }
+        Value::Inst { cls, id: crate::value::fresh_inst_id() }
     }
 
     /// FunctionDef.type (scoped_nodes.py:1313-1384), cached
@@ -1970,7 +1970,7 @@ impl Engine {
             .flatten()?;
         let result = &result;
         let rescls = match result {
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(*cls),
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(*cls),
             Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) => Some(*g),
             _ => None,
         };
@@ -2094,7 +2094,7 @@ impl Engine {
         match v {
             Value::Uninferable => None,
             Value::Node(g) => Some(self.qname(*g)),
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(self.qname(*cls)),
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(self.qname(*cls)),
             Value::BoundMethod { func, .. }
             | Value::UnboundMethod { func }
             | Value::Property { func }

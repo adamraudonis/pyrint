@@ -57,15 +57,20 @@ impl Engine {
     /// including self. Decorators get the scope OUTSIDE the function
     /// (node_classes.py Decorators.scope -> parent.parent.scope()).
     pub fn scope(&self, g: GNode) -> GNode {
-        let md = self.md(g.m);
-        if matches!(md.tree.nodes[g.n.idx()].kind, NodeKind::Decorators { .. }) {
-            // decorators live outside the decorated frame
-            let p = self.parent(g).unwrap_or(g);
-            let pp = self.parent(p).unwrap_or(p);
-            return self.scope(pp);
-        }
         let mut cur = g;
         loop {
+            {
+                let md = self.md(cur.m);
+                if matches!(md.tree.nodes[cur.n.idx()].kind, NodeKind::Decorators { .. }) {
+                    // Decorators.scope() skips the decorated frame:
+                    // parent.parent.scope() — applies whenever the upward
+                    // walk REACHES a Decorators node (names inside method
+                    // decorators resolve in the class scope)
+                    let p = self.parent(cur).unwrap_or(cur);
+                    let pp = self.parent(p).unwrap_or(p);
+                    return self.scope(pp);
+                }
+            }
             if self.is_scope(cur) {
                 return cur;
             }

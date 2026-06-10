@@ -415,7 +415,7 @@ impl Engine {
             // _is_keyword_only_sentinel: safe_infer + qname check
             let kw_only = matches!(
                 self.safe_infer(ann, &Ctx::new()),
-                Some(Value::Inst { cls: c }) if self.qname(c) == "dataclasses._KW_ONLY_TYPE"
+                Some(Value::Inst { cls: c, .. }) if self.qname(c) == "dataclasses._KW_ONLY_TYPE"
             );
             if kw_only {
                 continue;
@@ -1033,7 +1033,7 @@ impl Engine {
         // pathlib._PathParents instances
         if let Some((_, attr)) = self.attr_of(value) {
             if attr == "parents" {
-                if let Ok(Value::Inst { cls }) = self.infer_first(value, None) {
+                if let Ok(Value::Inst { cls, .. }) = self.infer_first(value, None) {
                     if self.qname(cls) == "pathlib._PathParents" {
                         // tip applicability is decided HERE (transform time)
                         self.pathlib_subscripts.borrow_mut().insert(g);

@@ -465,8 +465,12 @@ impl Engine {
                     .flatten()
                     .ok_or(ErrKind::Inference)?;
                 match &enter {
-                    Value::BoundMethod { func, .. } => {
-                        let res = self.function_infer_call_result(*func, None, Some(ctx));
+                    Value::BoundMethod { .. } => {
+                        // yield from enter.infer_call_result(self, context)
+                        // — BoundMethod binds context.boundnode to the
+                        // instance (bases.py BoundMethod.infer_call_result),
+                        // so `return self` infers to the SUBCLASS instance
+                        let res = self.infer_call_result(&enter, None, Some(ctx));
                         Ok(res.vals.into_iter().map(nvify).collect())
                     }
                     _ => Err(ErrKind::Inference),
@@ -1816,7 +1820,7 @@ impl Engine {
                     _ => Err(ErrKind::Attribute),
                 }
             }
-            Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
                 let mut res = self.class_locals_get(*cls, name);
                 for anc in self.ancestors(*cls, true, None) {
                     res.extend(self.class_locals_get(anc, name));
@@ -2504,6 +2508,18 @@ fn reflected_name(method: &str) -> String {
 }
 
 /// BIN_OP_IMPL const folding (protocols.py:103-136)
+/// int-like operand for sequence repetition: Some(Some(n)) for small
+/// ints/bools, Some(None) for ints overflowing Py_ssize_t (OverflowError),
+/// None for non-ints
+fn int_index(c: &ConstValue) -> Option<Option<i64>> {
+    match c {
+        ConstValue::Int(IntValue::Small(i)) => Some(Some(*i)),
+        ConstValue::Bool(b) => Some(Some(*b as i64)),
+        ConstValue::Int(IntValue::Big(_)) => Some(None),
+        _ => None,
+    }
+}
+
 fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
     use ConstValue::*;
     let notimpl = || Value::SynthConst(Rc::new(NotImplemented));
@@ -2554,8 +2570,36 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
             _ => notimpl(),
         },
         "*" => match (l, r) {
-            (Str(a), Int(IntValue::Small(n))) => sstr(a.repeat((*n).max(0) as usize)),
-            (Int(IntValue::Small(n)), Str(a)) => sstr(a.repeat((*n).max(0) as usize)),
+            // seq * int / int * seq: python evaluates natively
+            // (BIN_OP_IMPL "*", protocols.py const_infer_binary_op);
+            // bool counts as int (True * "x" == "x"); ints beyond
+            // Py_ssize_t raise OverflowError -> except Exception ->
+            // Uninferable; giant results approximate MemoryError -> U
+            (Str(a), n) | (n, Str(a)) if int_index(n).is_some() => match int_index(n).unwrap()
+            {
+                Option::Some(k) => {
+                    let k = k.max(0) as usize;
+                    if a.len().saturating_mul(k) > 100_000_000 {
+                        Value::Uninferable
+                    } else {
+                        sstr(a.repeat(k))
+                    }
+                }
+                Option::None => Value::Uninferable,
+            },
+            (Bytes(b), n) | (n, Bytes(b)) if int_index(n).is_some() => match int_index(n)
+                .unwrap()
+            {
+                Option::Some(k) => {
+                    let k = k.max(0) as usize;
+                    if b.len().saturating_mul(k) > 100_000_000 {
+                        Value::Uninferable
+                    } else {
+                        Value::SynthConst(Rc::new(Bytes(b.repeat(k).into())))
+                    }
+                }
+                Option::None => Value::Uninferable,
+            },
             _ => match (num_l, num_r) {
                 (Some(a), Some(b)) => {
                     if is_int(l) && is_int(r) {

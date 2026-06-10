@@ -31,6 +31,26 @@ pub enum SeqKind {
 /// inference (const_factory results, implicit-return Const(None), unpacked
 /// vararg tuples, brain container builds...). Fresh Python objects are never
 /// identical to each other, hence Synth values never dedupe in path_wrapper.
+/// Identity of a bases.Instance python OBJECT. Instances have no __eq__,
+/// so the inference-cache boundnode slot keys them by id(); each
+/// instantiate_class() call creates a fresh object, while cache replay
+/// yields the SAME object. Clones of a Value preserve the id (same
+/// python object).
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub struct InstId(pub u64);
+
+thread_local! {
+    static NEXT_INST_ID: std::cell::Cell<u64> = const { std::cell::Cell::new(1) };
+}
+
+pub fn fresh_inst_id() -> InstId {
+    NEXT_INST_ID.with(|c| {
+        let v = c.get();
+        c.set(v + 1);
+        InstId(v)
+    })
+}
+
 #[derive(Debug, Clone)]
 pub enum Value {
     Uninferable,
@@ -45,7 +65,7 @@ pub enum Value {
     /// objects.FrozenSet
     FrozenSet { elems: Rc<Vec<Value>> },
     /// bases.Instance of a ClassDef
-    Inst { cls: GNode },
+    Inst { cls: GNode, id: InstId },
     /// objects.ExceptionInstance (instance_attrs live in Engine.exc_iattrs
     /// keyed by an id when needed; the common case carries none)
     ExcInst { cls: GNode, exceptions: Option<Rc<Vec<Value>>> },
@@ -103,7 +123,7 @@ impl Value {
 pub enum ValueKey {
     Uninferable,
     Node(GNode),
-    Inst(GNode),
+    Inst(GNode, InstId),
     ExcInst(GNode),
     BoundMethod(GNode, Box<ValueKey>),
     UnboundMethod(GNode),
@@ -122,7 +142,7 @@ pub fn value_key(v: &Value) -> ValueKey {
     match v {
         Value::Uninferable => ValueKey::Uninferable,
         Value::Node(g) => ValueKey::Node(*g),
-        Value::Inst { cls } => ValueKey::Inst(*cls),
+        Value::Inst { cls, id } => ValueKey::Inst(*cls, *id),
         Value::ExcInst { cls, .. } => ValueKey::ExcInst(*cls),
         Value::BoundMethod { func, bound } => {
             ValueKey::BoundMethod(*func, Box::new(value_key(bound)))

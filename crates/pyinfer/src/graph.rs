@@ -1360,7 +1360,7 @@ impl Engine {
             }
         };
         for inst in &insts {
-            let Value::Inst { cls } = inst else { continue };
+            let Value::Inst { cls, .. } = inst else { continue };
             let entries: Vec<(GSym, GNode)> = {
                 let cmd = self.md(cls.m);
                 let locals = cmd.locals.borrow();
@@ -1688,7 +1688,7 @@ impl Engine {
         {
             match inferred {
                 Value::Uninferable => {}
-                Value::Inst { cls } | Value::ExcInst { cls, .. } => {
+                Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
                     if !self.can_assign_attr(*cls, attrname) {
                         return;
                     }

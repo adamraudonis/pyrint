@@ -208,7 +208,7 @@ pub fn render(engine: &Engine, v: &Value) -> String {
         },
         Value::SynthDict { items } => format!("Dict:{}", items.len()),
         Value::SynthSlice { .. } => "Slice".to_string(),
-        Value::Inst { cls } => format!("Inst:{}", engine.qname(*cls)),
+        Value::Inst { cls, .. } => format!("Inst:{}", engine.qname(*cls)),
     }
 }
 

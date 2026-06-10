@@ -1057,7 +1057,7 @@ impl Engine {
                 }
                 if let Value::Node(g) = &first {
                     if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) {
-                        to_yield.push(Value::Inst { cls: *g });
+                        to_yield.push(Value::Inst { cls: *g, id: crate::value::fresh_inst_id() });
                     }
                 }
                 Drive::Stop // raise InferenceError abandons the generator
@@ -1249,7 +1249,7 @@ impl Engine {
                 })
                 .unwrap_or(false);
             if let Some(bn) = ctx.boundnode.borrow().as_ref() {
-                if let Value::Inst { cls } | Value::ExcInst { cls, .. } = bn {
+                if let Value::Inst { cls, .. } | Value::ExcInst { cls, .. } = bn {
                     cls_value = Some(Value::Node(*cls));
                 }
             }
