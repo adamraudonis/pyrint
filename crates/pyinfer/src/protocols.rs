@@ -1421,7 +1421,7 @@ impl Engine {
     /// ClassDef.getitem (scoped_nodes.py:2540-2590)
     fn class_getitem(&self, cls: GNode, index: &Value, ctx: &Rc<Ctx>) -> Result<NV, ErrKind> {
         let sym = self.sym("__getitem__");
-        let mut methods = self.dunder_lookup_class(cls, sym);
+        let mut methods = self.dunder_lookup_class(cls, sym, Some(ctx));
         let mut from_class_getitem = false;
         if methods.is_empty() {
             let cg = self.sym("__class_getitem__");
@@ -1956,7 +1956,7 @@ impl Engine {
                         }
                     }
                     NodeKind::ClassDef(_) => {
-                        let res = self.dunder_lookup_class(*g, name);
+                        let res = self.dunder_lookup_class(*g, name, None);
                         if res.is_empty() {
                             Err(ErrKind::Attribute)
                         } else {
@@ -1993,9 +1993,14 @@ impl Engine {
         }
     }
 
-    /// _class_lookup: dunders on a class go to its METACLASS
-    fn dunder_lookup_class(&self, cls: GNode, name: GSym) -> Vec<GNode> {
-        match self.metaclass(cls, None) {
+    /// _class_lookup: dunders on a class go to its METACLASS.
+    /// dunder_lookup.py:60-67 `node.metaclass(context=context)` — the LIVE
+    /// context is threaded only from ClassDef.getitem
+    /// (scoped_nodes.py:2552 `lookup(self, "__getitem__", context=context)`);
+    /// binop/unaryop callers pass none (_base_nodes.py:396,
+    /// node_classes.py:4360). _lookup_in_mro itself runs context-free.
+    fn dunder_lookup_class(&self, cls: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Vec<GNode> {
+        match self.metaclass(cls, ctx) {
             Some(Value::Node(meta)) => {
                 let mut res = self.class_locals_get(meta, name);
                 if res.is_empty() {

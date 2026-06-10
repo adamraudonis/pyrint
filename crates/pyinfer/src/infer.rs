@@ -147,7 +147,12 @@ impl Engine {
                 let any = &mut any;
                 let mut wrapped = |v: Value| -> Drive {
                     *any = true;
-                    eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
+                    eprintln!(
+                        "{}  yield {} ni={}",
+                        "  ".repeat(d),
+                        crate::dump::render(self, &v),
+                        ctx_in.nodes_inferred.get()
+                    );
                     let dr = sink(v);
                     eprintln!("{}  <-{:?}", "  ".repeat(d), dr);
                     dr

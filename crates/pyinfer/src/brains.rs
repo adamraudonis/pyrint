@@ -55,6 +55,8 @@ pub enum Tip {
     ArgparseNamespace,
     /// brain_typing infer_typing_generic_class_pep695 (type_params classes)
     Pep695Generic,
+    /// brain_typing infer_typing_cast (cast(typ, val) -> val)
+    TypingCast,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -117,6 +119,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::RePatternMatch => (7, 26),
         Tip::ArgparseNamespace => (7, 25),
         Tip::Pep695Generic => (7, 24),
+        Tip::TypingCast => (5, 4),
     }
 }
 
@@ -456,6 +459,11 @@ impl Engine {
                 if n == "TypeVar" || n == "NewType" {
                     return Some(Tip::TypingTypeVar);
                 }
+                // brain_typing _looks_like_typing_cast (registered after
+                // typevar/newtype; purely syntactic)
+                if n == "cast" {
+                    return Some(Tip::TypingCast);
+                }
                 // _looks_like_typing_alias / _looks_like_special_alias
                 if let NodeKind::Call { args, .. } = &md.tree.nodes[node.n.idx()].kind {
                     if (n == "_alias" || n == "_DeprecatedGenericAlias")
@@ -520,6 +528,9 @@ impl Engine {
                 }
                 if attr == "TypeVar" || attr == "NewType" {
                     return Some(Tip::TypingTypeVar);
+                }
+                if attr == "cast" {
+                    return Some(Tip::TypingCast);
                 }
                 if attr == "fromkeys" {
                     if let NodeKind::Name { name } = &md.tree.nodes[expr.idx()].kind {
@@ -624,7 +635,30 @@ impl Engine {
             Tip::RePatternMatch => self.tip_re_pattern_match(node),
             Tip::ArgparseNamespace => self.tip_argparse_namespace(node, ctx),
             Tip::Pep695Generic => self.tip_pep695_generic(node),
+            Tip::TypingCast => self.tip_typing_cast(node, ctx),
         }
+    }
+
+    /// brain_typing.infer_typing_cast (brain_typing.py:404-422):
+    /// func = next(node.func.infer(context=ctx)) — single pull, LIVE ctx;
+    /// must be FunctionDef qname "typing.cast" with exactly 2 positional
+    /// args, else UseInferenceDefault; result = node.args[1].infer(ctx).
+    fn tip_typing_cast(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let md = self.md(node.m);
+        let (func, args) = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { func, args, .. } => (GNode { m: node.m, n: *func }, args.clone()),
+            _ => return None,
+        };
+        let first = self.infer_first(func, Some(ctx)).ok()?;
+        let q = self.value_qname(&first)?;
+        let is_funcdef = matches!(&first, Value::Node(g) if self.kind_is(*g, |k| {
+            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+        }));
+        if !is_funcdef || q != "typing.cast" || args.len() != 2 {
+            return None;
+        }
+        let val = GNode { m: node.m, n: args[1] };
+        Some(self.infer(val, ctx))
     }
 
     /// infer_typing_generic_class_pep695 (brain_typing.py:201-207): inject

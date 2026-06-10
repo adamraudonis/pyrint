@@ -19,6 +19,7 @@ use rustc_hash::{FxHashMap, FxHashSet};
 use pyast::tree::{ModuleData, Node, NodeKind, Tree};
 use pyast::NodeId;
 
+use crate::ctx::Ctx;
 use crate::intern::GlobalInterner;
 use crate::pyenv::{self, PyEnv};
 use crate::snapshot::{load_snapshot, EInf};
@@ -150,6 +151,16 @@ pub struct Engine {
     pub cls_type_cache: RefCell<FxHashMap<GNode, &'static str>>,
     /// ClassDef._all_slots cached_property
     pub slots_cache: RefCell<FxHashMap<GNode, Result<Option<Rc<Vec<String>>>, ()>>>,
+    /// _metaclass_lookup_attribute @lru_cache(maxsize=1024)
+    /// (scoped_nodes.py:2375-2386): key (self, name, context-IDENTITY);
+    /// context=None keys are stable for the whole run. The Rc<Ctx> is
+    /// pinned inside the entry so the pointer can't be recycled (the
+    /// Python lru cache holds the context object itself).
+    #[allow(clippy::type_complexity)]
+    pub metalookup_cache: RefCell<
+        FxHashMap<(GNode, GSym, Option<usize>), (Rc<Vec<crate::value::NV>>, u64, Option<Rc<Ctx>>)>,
+    >,
+    pub metalookup_tick: Cell<u64>,
     /// inference-tip recursion guard + cache (inference_tip.py:37-86)
     pub tip_guard: RefCell<FxHashSet<(u8, GNode)>>,
     pub tip_cache: RefCell<FxHashMap<(u8, GNode), Rc<Vec<Value>>>>,
@@ -274,6 +285,8 @@ impl Engine {
             ftype_cache: RefCell::new(FxHashMap::default()),
             cls_type_cache: RefCell::new(FxHashMap::default()),
             slots_cache: RefCell::new(FxHashMap::default()),
+            metalookup_cache: RefCell::new(FxHashMap::default()),
+            metalookup_tick: Cell::new(0),
             tip_guard: RefCell::new(FxHashSet::default()),
             tip_cache: RefCell::new(FxHashMap::default()),
             tip_order: RefCell::new(std::collections::VecDeque::new()),

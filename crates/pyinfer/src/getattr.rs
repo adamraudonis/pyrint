@@ -37,6 +37,13 @@ const POSSIBLE_PROPERTIES: [&str; 12] = [
 ];
 
 impl Engine {
+    /// TEMP debug: high-level walk markers under PRYLINT_TRACE_INFER
+    pub fn twalk(&self, tag: &str, cls: GNode) {
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            eprintln!("WALK {} {}", tag, self.qname(cls));
+        }
+    }
+
     // ---------- dispatch igetattr over a value ----------
 
     /// eager shim: Err only when the generator raised before any yield.
@@ -367,7 +374,34 @@ impl Engine {
     /// _metaclass_lookup_attribute (scoped_nodes.py:2375-2415).
     /// astroid collects into a set (id-ordered); we use insertion order:
     /// implicit metaclass first, declared metaclass second (notes/07 §21.4).
+    /// @lru_cache(maxsize=1024) keyed (self, name, context-IDENTITY) —
+    /// hits replay the set with NO re-inference (no counter bumps);
+    /// hits refresh recency, inserts beyond 1024 evict the LRU entry.
     fn metaclass_lookup_attribute(&self, cls: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Vec<NV> {
+        let key = (cls, name, ctx.map(|c| Rc::as_ptr(c) as usize));
+        let tick = self.metalookup_tick.get() + 1;
+        self.metalookup_tick.set(tick);
+        if let Some(entry) = self.metalookup_cache.borrow_mut().get_mut(&key) {
+            entry.1 = tick; // refresh recency (lru_cache hit)
+            return entry.0.as_ref().clone();
+        }
+        let out = self.metaclass_lookup_attribute_uncached(cls, name, ctx);
+        let mut cache = self.metalookup_cache.borrow_mut();
+        if cache.len() >= 1024 {
+            if let Some((&oldest, _)) = cache.iter().min_by_key(|(_, e)| e.1) {
+                cache.remove(&oldest);
+            }
+        }
+        cache.insert(key, (Rc::new(out.clone()), tick, ctx.map(Rc::clone)));
+        out
+    }
+
+    fn metaclass_lookup_attribute_uncached(
+        &self,
+        cls: GNode,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Vec<NV> {
         let mut out = Vec::new();
         let implicit = self.builtins().type_;
         // scoped_nodes.py:2380 — `context = copy_context(context)` BEFORE
@@ -1570,6 +1604,7 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
         sink: &mut dyn FnMut(GNode) -> Drive,
     ) -> End {
+        self.twalk("ANC", cls);
         // scoped_nodes.py:2167-2180 — ancestors() does NOT clone the
         // context: `if context is None: context = InferenceContext()`.
         // lookupname set by callers (e.g. igetattr's '__slots__') is
@@ -1740,6 +1775,7 @@ impl Engine {
 
     /// _inferred_bases (scoped_nodes.py:2803-2835)
     fn inferred_bases(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Vec<GNode> {
+        self.twalk("INFBASES", cls);
         let bases = self.class_bases(cls);
         if bases.is_empty() {
             if self.qname(cls) != "builtins.object" {
@@ -1747,13 +1783,20 @@ impl Engine {
             }
             return Vec::new();
         }
+        // scoped_nodes.py:2817-2818 — context normalized ONCE for the whole
+        // bases walk (a fresh InferenceContext when None); _infer_last then
+        // clones per base. Clones SHARE the nodes_inferred cell, so counter
+        // bumps accumulate across one class's bases (but NOT across the
+        // _compute_mro recursion, which passes the caller's `context` —
+        // still None — to base._compute_mro).
+        let base_root = match ctx {
+            Some(c) => Rc::clone(c),
+            None => Ctx::new(),
+        };
         let mut out = Vec::new();
         for base in bases {
             // _infer_last with a cloned context
-            let c = match ctx {
-                Some(c) => c.clone_ctx(),
-                None => Ctx::new(),
-            };
+            let c = base_root.clone_ctx();
             let flow = self.infer(base, &c);
             let last = flow.vals.last().cloned();
             let Some(last) = last else { continue };
@@ -1770,6 +1813,7 @@ impl Engine {
     /// is_subtype_of (scoped_nodes.py:2004-2015): `any(...)` abandons the
     /// ancestors generator on the first match.
     pub fn is_subtype_of(&self, cls: GNode, type_name: &str, ctx: Option<&Rc<Ctx>>) -> bool {
+        self.twalk("SUBTYPE", cls);
         if self.qname(cls) == type_name {
             return true;
         }
@@ -1793,13 +1837,16 @@ impl Engine {
     /// a hidden baseobj (six.with_metaclass temporary_class) persistently
     /// overwrites self._metaclass (scoped_nodes.py:2638-2645).
     pub fn declared_metaclass(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Option<Value> {
+        self.twalk("DECLMETA", cls);
         // for base in self.bases: for baseobj in base.infer(context):
-        // (context passed through unchanged, NOT copied)
-        let base_ctx = match ctx {
-            Some(c) => Rc::clone(c),
-            None => Ctx::new(),
-        };
+        // (context passed through unchanged, NOT copied). With context=None
+        // each base.infer(None) builds its OWN fresh InferenceContext —
+        // counters do NOT accumulate across bases (scoped_nodes.py:2640-2648)
         for base in self.class_bases(cls) {
+            let base_ctx = match ctx {
+                Some(c) => Rc::clone(c),
+                None => Ctx::new(),
+            };
             let _ = self.infer_to(base, &base_ctx, &mut |baseobj| {
                 if let Value::Node(g) = &baseobj {
                     if self.is_hidden_class(*g) {
@@ -1864,6 +1911,7 @@ impl Engine {
         seen: &mut rustc_hash::FxHashSet<GNode>,
         ctx: Option<&Rc<Ctx>>,
     ) -> Option<Value> {
+        self.twalk("FINDMETA", cls);
         seen.insert(cls);
         if let Some(k) = self.declared_metaclass(cls, ctx) {
             return Some(k);

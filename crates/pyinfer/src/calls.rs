@@ -1772,6 +1772,7 @@ impl Engine {
         cls: GNode,
         ancestors: &mut rustc_hash::FxHashSet<String>,
     ) -> &'static str {
+        self.twalk("CLSTYPE", cls);
         if let Some(&t) = self.cls_type_cache.borrow().get(&cls) {
             return t;
         }
@@ -1821,6 +1822,7 @@ impl Engine {
         cls: GNode,
         seen: &mut rustc_hash::FxHashSet<String>,
     ) -> bool {
+        self.twalk("ISMETA", cls);
         if self.node_name(cls).as_deref() == Some("type") {
             return true;
         }
