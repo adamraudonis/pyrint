@@ -1,0 +1,6 @@
+# Files where astroid parses but ruff rejects (trailing-backslash EOF):
+# pylint emits the phase-2 tokenize-form E0001 and never walks the tree,
+# so tree fidelity is moot. Owned by the E0001/oracle subsystem.
+pylfunc:./t/tokenize_error.py
+pylfunc:./t/tokenize_error_jython.py
+pylfunc:./t/tokenize_error_py312.py

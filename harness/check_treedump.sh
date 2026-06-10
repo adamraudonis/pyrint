@@ -78,8 +78,18 @@ def norm(text):
         out.append(line)
     return ''.join(out)
 
+allow = set()
+try:
+    for line in open(os.path.expanduser('~/Desktop/Projects/prylint/harness/treedump_allow.txt')):
+        line = line.strip()
+        if line and not line.startswith('#') and line.startswith(corpus + ':'):
+            allow.add(line.split(':', 1)[1])
+except FileNotFoundError:
+    pass
 diffs = []
 for f in files:
+    if f in allow:
+        continue
     p = os.path.join(cache, f.lstrip('./') + '.dump')
     try:
         gt = open(p, encoding='utf-8', errors='replace').read()
