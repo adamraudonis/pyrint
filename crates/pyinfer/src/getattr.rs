@@ -1107,9 +1107,35 @@ impl Engine {
                 };
                 Some(Value::SynthConst(Rc::new(doc.unwrap_or(ConstValue::None))))
             }
-            "__dict__" => Some(Value::SynthDict {
-                items: Rc::new(Vec::new()),
-            }),
+            // InstanceModel.attr___dict__ (objectmodel.py:747-749):
+            // _dunder_dict(instance, instance.instance_attrs) — keys are
+            // Const(attr name), values the LAST assignment node per attr
+            // (objectmodel.py:49-68; instance_attrs is the proxied class's
+            // OWN dict, no ancestors)
+            "__dict__" => {
+                let items: Vec<(Value, Value)> = self
+                    .iattrs
+                    .borrow()
+                    .get(&cls)
+                    .map(|attrs| {
+                        attrs
+                            .iter()
+                            .filter(|(_, v)| !v.is_empty())
+                            .map(|(&k, v)| {
+                                (
+                                    Value::SynthConst(Rc::new(ConstValue::Str(
+                                        self.sname(k).into(),
+                                    ))),
+                                    Value::Node(*v.last().unwrap()),
+                                )
+                            })
+                            .collect()
+                    })
+                    .unwrap_or_default();
+                Some(Value::SynthDict {
+                    items: Rc::new(items),
+                })
+            }
             // ObjectModel.attr___new__/attr___init__ (objectmodel.py:136-164):
             // synthetic FunctionDefs parented to builtins.object, wrapped as
             // BoundMethod(proxy=node, bound=instance)

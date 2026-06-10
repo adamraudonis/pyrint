@@ -357,6 +357,15 @@ impl Engine {
         // -E message set (revisit on diff evidence).
         let body: Vec<NodeId> = match &md.tree.nodes[func.n.idx()].kind {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
+            // Lambda.infer_call_result (scoped_nodes.py:987-993):
+            // `return self.body.infer(context)` — no Const(None)/abstract
+            // logic (reached e.g. via Property(function=<lambda>) solving,
+            // ClassDef.igetattr scoped_nodes.py:1669)
+            NodeKind::Lambda(d) => {
+                let b = GNode { m: func.m, n: d.body };
+                drop(md);
+                return self.infer_to(b, &ctx, sink);
+            }
             _ => return End::Raised(ErrKind::Inference),
         };
         drop(md);

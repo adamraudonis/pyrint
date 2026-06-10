@@ -396,7 +396,7 @@ impl Engine {
         }
     }
 
-    fn is_decorated_with_dataclass(&self, cls: GNode) -> bool {
+    pub(crate) fn is_decorated_with_dataclass(&self, cls: GNode) -> bool {
         self.decorator_nodes(cls)
             .into_iter()
             .any(|d| self.looks_like_dataclass_decorator(d))

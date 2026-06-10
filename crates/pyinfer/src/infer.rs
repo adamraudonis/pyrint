@@ -2380,6 +2380,37 @@ impl Engine {
                             .collect();
                         Some(container_str(SeqKind::Set, None, &reprs))
                     }
+                    // NodeNG.__str__ (node_ng.py:187-211): pprint render of
+                    // _other_fields + _astroid_fields. Only the head is
+                    // observable through the dump's 40-char Const repr cut;
+                    // we render name (+ is_dataclass for ClassDef) exactly
+                    // and a stable filler beyond.
+                    NodeKind::ClassDef(d) => {
+                        let name = md.tree.s(d.name).to_string();
+                        let align = " ".repeat("ClassDef".len() + name.len() + 2);
+                        let dc = if self.is_decorated_with_dataclass(*g) {
+                            "True"
+                        } else {
+                            "False"
+                        };
+                        Some(format!(
+                            "ClassDef.{name}(name='{name}',\n{align}is_dataclass={dc},\n{align}position=None"
+                        ))
+                    }
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                        let cname = match &md.tree.nodes[g.n.idx()].kind {
+                            NodeKind::AsyncFunctionDef(_) => "AsyncFunctionDef",
+                            _ => "FunctionDef",
+                        };
+                        let name = md.tree.s(d.name).to_string();
+                        let align = " ".repeat(cname.len() + name.len() + 2);
+                        Some(format!("{cname}.{name}(name='{name}',\n{align}position=None"))
+                    }
+                    NodeKind::Module(_) => {
+                        let name = md.name.clone();
+                        let align = " ".repeat("Module".len() + name.len() + 2);
+                        Some(format!("Module.{name}(name='{name}',\n{align}file=None"))
+                    }
                     _ => None,
                 }
             }

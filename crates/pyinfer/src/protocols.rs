@@ -1023,10 +1023,13 @@ impl Engine {
                             *finished = true;
                             return Drive::Stop;
                         }
-                        // determine index value
+                        // determine index value (node_classes.py:3752-3758):
+                        // `if value.__class__ == Instance: index_value =
+                        // index` — the INFERRED index result, same as the
+                        // default branch (only exact-Instance INDICES get
+                        // the __index__ conversion)
                         let index_value: Value = if matches!(val, Value::Inst { .. }) {
-                            // exact-class Instance: raw index NODE
-                            Value::Node(slice)
+                            index.clone()
                         } else if matches!(index, Value::Inst { .. }) {
                             match self.class_instance_as_index(&index) {
                                 Some(v) => v,
