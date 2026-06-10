@@ -470,6 +470,69 @@ pylint behavior — bugs are replicated.
      the global cache during mid-dump template builds more often than we
      do (e.g. Name cast ##3 vs ##0 in frame.py) — audit which template
      builds apply tip transforms.
+   - **phase 8 (diff-reduction round 7, N=1000)**: 2.07k -> 1.16k diff
+     lines. LANDED (probe-verified, harness/infertests now 58 probes):
+     (a) **context-threading parity batch**: ClassDef.getitem threads the
+     LIVE context into dunder_lookup (dunder_lookup.py:60-67 ->
+     metaclass(context) -> declared_metaclass base inference under the
+     shared counter cell); declared_metaclass(None) gives each
+     base.infer(None) its OWN fresh cell (scoped_nodes.py:2640-48);
+     _inferred_bases normalizes ONE fresh ctx for the bases walk (clones
+     share the cell) while _compute_mro recursion keeps passing None.
+     (b) **_metaclass_lookup_attribute @lru_cache(1024)** keyed
+     (cls, name, context-IDENTITY) — context=None keys are stable for the
+     whole run: repeated no-context getattrs replay the set with ZERO
+     re-inference (huge event-stream aligner; scoped_nodes.py:2375).
+     (c) **brain_typing infer_typing_cast** ported (cast(typ, val) ->
+     single-pull func check, then val.infer under the live ctx) — was THE
+     'val vs dtype' divergence from phase 7: frame.py cast() sites now
+     bind through the tip.
+     (d) **Lambda.infer_call_result** = body.infer (scoped_nodes.py:987)
+     — lambda properties (django's `url = property(lambda self: ...)`)
+     now solve through ClassDef.igetattr's Property branch (django
+     middleware cluster, -83 lines).
+     (e) **Instance subscript index parity** (node_classes.py:3752-58):
+     Instance owners receive the INFERRED index — we passed the raw slice
+     node, leaking wrong CallContext args into nested __getitem__ chains
+     (ResponseHeaders[key.lower()] etc.).
+     (f) InstanceModel.__dict__ = _dunder_dict(instance_attrs) — Dict:N
+     of (Const name, LAST assign node) (objectmodel.py:49-68, 747-49).
+     (g) NodeNG.__str__ heads for ClassDef/FunctionDef/Module in
+     f-string format() of non-Const results (asv_bench hdf.py cluster).
+     (h) container tips: safe_infer results that are Uninferable are
+     SKIPPED in _container_generic_transform (bool(Uninferable) is False,
+     brain_builtin_inference.py:281; salt vsphere Tuple:0); infer_dict's
+     _get_elts is next(arg.infer(ctx)) SINGLE pull with exact
+     is_iterable/pair/key-kind checks (dict(parse_qsl(q)) -> Dict:0).
+     (i) extra_decorators: `meth = frame[name]` is locals[name][0] (FIRST
+     local) — `as_manager = classmethod(as_manager)` -> BoundMethod.
+     (j) **_islots streaming abandonment** (scoped_nodes.py:2728-29):
+     `return values` on an EMPTY slots container abandons the igetattr
+     generator AT ITS YIELD — suspended AssignName/Tuple NodeNG.infer
+     frames never cache, so later mro walks re-MISS them exactly like
+     astroid (typing._NotIterable re-inference pattern).
+     TOOLS: harness/diff_infer.py (aligned GT/RS value diffs per file);
+     WALK/SLOTSOF/ALLSLOTS/SCAN/WIPE markers under PRYLINT_TRACE_INFER;
+     trace yields now print ni=; /tmp/seg_diff.py + flat-event diffing
+     with ni-wildcards for GT context=None calls (ni=-1).
+     N=1000 differing files/lines: django 14/57, pylfunc 10/15, pandas
+     156/827, salt 27/132, airflow 21/76, sentry 10/25, core 11/23.
+     REMAINING (by volume): (1) pandas cap-cliff count drift (~800 lines)
+     — context-CELL accounting still diverges deep in groupby/frame/
+     nanops chains (e.g. notna probe: GT ##114 vs ours ##109, values
+     truncate at the 100-cap one pull apart; localized next divergence:
+     `type(list[int])` in _collections_abc ancestors walk accumulates
+     cell bumps differently around the builtin type() tip / GenericAlias
+     getitem). asv U-vs-ERR (~160 lines) and frame.py GT-extra clusters
+     are downstream of the same cap timing. (2) enum-class CALL result
+     (TableauJobFinishCode(x): GT solves EnumType.__call__ ->
+     cls.__new__ -> member-fake-class chain to Inst:<enum cls>; ours
+     reaches real Enum.__new__ -> Class:enum.EnumType + Const None×2;
+     ~7 airflow + few salt lines). (3) salt _Constant value-order (18) +
+     ImmutableDict instance_attrs (22). (4) pylfunc NOTREE x3 +
+     os.environ GT-env noise (irreducible here). (5) six.with_metaclass
+     call-result synthesis still unwired (no diff evidence at N=1000).
+     (6) recursion guard still 350 (no diff evidence at N=1000).
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the

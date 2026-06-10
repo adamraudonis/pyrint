@@ -1994,6 +1994,9 @@ impl Engine {
     }
 
     fn compute_all_slots(&self, cls: GNode) -> Result<Option<Rc<Vec<String>>>, ()> {
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            eprintln!("ALLSLOTS {}", self.qname(cls));
+        }
         let mro = match self.mro(cls, None) {
             Ok(m) => m,
             Err(_) => return Err(()), // NotImplementedError
@@ -2025,6 +2028,9 @@ impl Engine {
     /// no (or uninferable) __slots__; Some(vec) = slot value strings (empty
     /// = explicitly empty slots).
     fn class_slots_of(&self, cls: GNode) -> Option<Vec<String>> {
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            eprintln!("SLOTSOF {}", self.qname(cls));
+        }
         let slots_sym = self.sym("__slots__");
         let has_local = {
             let md = self.md(cls.m);
@@ -2037,39 +2043,41 @@ impl Engine {
         if !has_local {
             return None;
         }
-        // for slots in self.igetattr("__slots__") — fresh context
-        let flow = match self.class_igetattr(cls, slots_sym, None, true) {
-            Ok(f) => f,
-            Err(_) => return None,
-        };
+        // _islots (scoped_nodes.py:2695-2745): `for slots in
+        // self.igetattr("__slots__")` is STREAMED — `return values` on an
+        // EMPTY container ABANDONS the igetattr generator at its yield
+        // (consumer Stop): the suspended AssignName/Tuple NodeNG.infer
+        // frames never run their cache writes, so the next class walking
+        // the same __slots__ re-infers them (MISS) exactly like astroid.
         let mut out: Vec<String> = Vec::new();
         let mut any = false;
-        for slots in &flow.vals {
+        let mut empty_stop = false;
+        let res = self.class_igetattr_to(cls, slots_sym, None, true, &mut |slots| {
             // must support iteration: `slots.getattr(meth)` — container
             // literals ARE Instances (BaseContainer <- bases.Instance), so
             // this is the full Instance.getattr chain (instance_attr
             // ancestors walk + class getattr, scoped_nodes.py:2700-2706)
-            let iterable = self.proxied_class(slots).is_some() && {
+            let iterable = self.proxied_class(&slots).is_some() && {
                 let i1 = self.sym("__iter__");
                 let i2 = self.sym("__getitem__");
-                self.instance_getattr(slots, i1, None, true).is_ok()
-                    || self.instance_getattr(slots, i2, None, true).is_ok()
+                self.instance_getattr(&slots, i1, None, true).is_ok()
+                    || self.instance_getattr(&slots, i2, None, true).is_ok()
             };
             if !iterable {
-                continue;
+                return crate::value::Drive::Go;
             }
             // Const string: yield if non-empty
-            if let Some(c) = self.value_const(slots) {
+            if let Some(c) = self.value_const(&slots) {
                 if let pyast::tree::ConstValue::Str(sv) = c {
                     if !sv.is_empty() {
                         any = true;
                         out.push(sv.to_string());
                     }
                 }
-                continue;
+                return crate::value::Drive::Go;
             }
             // containers
-            let elts: Vec<NV> = match slots {
+            let elts: Vec<NV> = match &slots {
                 Value::Node(g) => {
                     let md = self.md(g.m);
                     match &md.tree.nodes[g.n.idx()].kind {
@@ -2083,7 +2091,7 @@ impl Engine {
                             .iter()
                             .map(|&(k, _)| NV::N(GNode { m: g.m, n: k }))
                             .collect(),
-                        _ => continue,
+                        _ => return crate::value::Drive::Go,
                     }
                 }
                 Value::SynthSeq { elems, .. } | Value::FrozenSet { elems } => {
@@ -2092,11 +2100,12 @@ impl Engine {
                 Value::SynthDict { items } => {
                     items.iter().map(|(k, _)| NV::V(k.clone())).collect()
                 }
-                _ => continue,
+                _ => return crate::value::Drive::Go,
             };
             if elts.is_empty() {
-                // empty list of slots stops the iteration -> explicit []
-                return Some(Vec::new());
+                // `return values` — empty slots list ABANDONS the generator
+                empty_stop = true;
+                return crate::value::Drive::Stop;
             }
             for elt in elts {
                 // for inferred in elt.infer(): Const str filter
@@ -2114,6 +2123,16 @@ impl Engine {
                     }
                 }
             }
+            crate::value::Drive::Go
+        });
+        if let crate::value::End::Raised(_) = res {
+            if !any && !empty_stop {
+                return None;
+            }
+        }
+        if empty_stop {
+            // explicit empty slots
+            return Some(Vec::new());
         }
         if !any && out.is_empty() {
             // no values produced and no explicit empty -> None
