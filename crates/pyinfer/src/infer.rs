@@ -117,13 +117,14 @@ impl Engine {
             let ccid = ctx_in.callcontext.borrow().as_ref().map(|c| c.id);
             let bn = ctx_in.boundnode.borrow().is_some();
             eprintln!(
-                "{}> {} {} ln={:?} cc={:?} bn={}",
+                "{}> {} {} ln={:?} cc={:?} bn={} ni={}",
                 "  ".repeat(d),
                 kind,
                 name,
                 ctx_in.lookupname.get().map(|s| self.sname(s)),
                 ccid,
-                bn
+                bn,
+                ctx_in.nodes_inferred.get()
             );
             let mut wrapped = |v: Value| -> Drive {
                 eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
@@ -446,8 +447,8 @@ impl Engine {
             19 => self.stream_flow(self.infer_functiondef(node, ctx), sink),
             20 => self.stream_flow(self.infer_dict(node, ctx), sink),
             21 => self.stream_flow(self.infer_compare(node, ctx), sink),
-            22 => self.stream_flow(self.infer_joinedstr(node, ctx), sink),
-            23 => self.stream_flow(self.infer_formatted_value(node, ctx), sink),
+            22 => self.infer_joinedstr_to(node, ctx, sink),
+            23 => self.infer_formatted_value_to(node, ctx, sink),
             24 => {
                 yield_v!(sink, Value::Uninferable);
                 End::Done
@@ -1197,192 +1198,290 @@ impl Engine {
     // ---------- f-strings (§16.6) ----------
 
     fn infer_formatted_value(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let md = self.md(node.m);
-        let (value, format_spec) = match &md.tree.nodes[node.n.idx()].kind {
-            NodeKind::FormattedValue {
-                value, format_spec, ..
-            } => (*value, *format_spec),
-            _ => return Flow::err(ErrKind::Inference),
+        let mut vals = Vec::new();
+        let end = self.infer_formatted_value_to(node, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    /// FormattedValue._infer, STREAMING and LAZY like the astroid
+    /// generators (node_classes.py:4699-4747): the spec generator stays
+    /// suspended through each spec's value loop (its post-yield bump fires
+    /// only on the NEXT pull), and a raise from the value generator
+    /// abandons the suspended spec generator (no bump, no cache write).
+    fn infer_formatted_value_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
+        let (value, format_spec) = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::FormattedValue {
+                    value, format_spec, ..
+                } => (*value, *format_spec),
+                _ => return End::Raised(ErrKind::Inference),
+            }
         };
-        drop(md);
-        let mut out = Vec::new();
+        let value_g = GNode { m: node.m, n: value };
         let mut uninferable_already = false;
-        // format_specs = Const("") if None else format_spec; .infer() — the
-        // synthetic Const("") infer bumps once (fresh node, cache miss)
-        let mut pending_err: Option<ErrKind> = None;
-        let specs: Vec<Value> = match format_spec {
-            None => {
-                ctx.bump_inferred();
-                vec![Value::SynthConst(Rc::new(ConstValue::Str("".into())))]
-            }
-            Some(fs) => {
-                let f = self.infer(GNode { m: node.m, n: fs }, ctx);
-                // a raise from format_specs.infer(...) propagates out of
-                // FormattedValue._infer after the yielded values
-                pending_err = f.err;
-                f.vals
-            }
-        };
-        for spec_v in specs {
-            let spec = match self.value_const(&spec_v) {
+        enum Ctl {
+            Go,
+            ConsumerStop,
+            Raised(ErrKind),
+        }
+        // process one inferred format-spec value (the body of astroid's
+        // spec loop)
+        let mut process_spec = |e: &Self,
+                                spec_v: &Value,
+                                uninferable_already: &mut bool,
+                                sink: &mut Sink|
+         -> Ctl {
+            let spec: Option<String> = match e.value_const(spec_v) {
                 Some(ConstValue::Str(sp)) => Some(sp.to_string()),
                 Some(_) => None, // non-str Const spec: format() TypeError per value
                 None => {
                     // not a Const at all -> single Uninferable
-                    if !uninferable_already {
-                        out.push(Value::Uninferable);
-                        uninferable_already = true;
+                    if !*uninferable_already {
+                        *uninferable_already = true;
+                        if let Drive::Stop = sink(Value::Uninferable) {
+                            return Ctl::ConsumerStop;
+                        }
                     }
-                    continue;
+                    return Ctl::Go;
                 }
             };
-            let vf = self.infer(GNode { m: node.m, n: value }, ctx);
-            if vf.err.is_some() {
-                // self.value.infer(context) raising mid-iteration aborts
-                // FormattedValue._infer (no try/except around it,
-                // node_classes.py:4768-4771); the values yielded before the
-                // raise still come through first
-                pending_err = vf.err;
+            let mut consumer_stop = false;
+            let vend = {
+                let consumer_stop = &mut consumer_stop;
+                let uninferable_already = &mut *uninferable_already;
+                e.infer_to(value_g, ctx, &mut |v| {
+                    // format(value_to_format, spec): Const values use python
+                    // format(); other inference results are formatted as
+                    // their astroid str() — Instance: "Instance of X"
+                    // (bases.py:373), Uninferable: "Uninferable"
+                    let formatted: Option<String> = match (&spec, &v) {
+                        (Some(sp), _) if e.value_const(&v).is_some() => {
+                            format_const(&e.value_const(&v).unwrap(), sp)
+                        }
+                        // format(obj, "") of a non-Const result calls
+                        // object.__format__ -> str(obj) (node_classes.py:4719)
+                        (Some(sp), _) if sp.is_empty() => e.astroid_object_str(&v),
+                        _ => None,
+                    };
+                    let d = match formatted {
+                        Some(sf) => {
+                            sink(Value::SynthConst(Rc::new(ConstValue::Str(sf.into()))))
+                        }
+                        None => {
+                            *uninferable_already = true;
+                            sink(Value::Uninferable)
+                        }
+                    };
+                    if let Drive::Stop = d {
+                        *consumer_stop = true;
+                    }
+                    d
+                })
+            };
+            if consumer_stop {
+                return Ctl::ConsumerStop;
             }
-            for v in &vf.vals {
-                // format(value_to_format, spec): Const values use python
-                // format(); other inference results are formatted as their
-                // astroid str() — Instance: "Instance of {root}.{name}"
-                // (bases.py:373), Uninferable: "Uninferable"
-                let formatted: Option<String> = match (&spec, v) {
-                    (Some(sp), _) if self.value_const(v).is_some() => {
-                        format_const(&self.value_const(v).unwrap(), sp)
-                    }
-                    // format(obj, "") of a non-Const inference result calls
-                    // object.__format__ -> str(obj) (node_classes.py:4719)
-                    (Some(sp), _) if sp.is_empty() => self.astroid_object_str(v),
-                    _ => None,
-                };
-                match formatted {
-                    Some(sf) => {
-                        out.push(Value::SynthConst(Rc::new(ConstValue::Str(sf.into()))))
-                    }
-                    None => {
-                        out.push(Value::Uninferable);
-                        uninferable_already = true;
+            match vend {
+                // a raise from self.value.infer aborts FormattedValue._infer
+                // (no try/except, node_classes.py:4736-4741)
+                End::Raised(e2) => Ctl::Raised(e2),
+                _ => Ctl::Go,
+            }
+        };
+        match format_spec {
+            None => {
+                // fresh Const("") generator: 1 value, body runs while it is
+                // suspended; the post-yield bump fires on the loop's second
+                // pull — only when the body completed normally
+                let spec_v = Value::SynthConst(Rc::new(ConstValue::Str("".into())));
+                match process_spec(self, &spec_v, &mut uninferable_already, sink) {
+                    Ctl::ConsumerStop => End::Stopped,
+                    Ctl::Raised(e) => End::Raised(e),
+                    Ctl::Go => {
+                        ctx.bump_inferred();
+                        End::Done
                     }
                 }
             }
-            if vf.err.is_some() {
-                // the raise aborts the outer spec loop too
-                break;
+            Some(fs) => {
+                let fs_g = GNode { m: node.m, n: fs };
+                let mut pending: Option<Ctl> = None;
+                let end = {
+                    let pending = &mut pending;
+                    let uninferable_already = &mut uninferable_already;
+                    self.infer_to(fs_g, ctx, &mut |spec_v| {
+                        match process_spec(self, &spec_v, uninferable_already, sink) {
+                            Ctl::Go => Drive::Go,
+                            ctl => {
+                                *pending = Some(ctl);
+                                Drive::Stop
+                            }
+                        }
+                    })
+                };
+                match pending {
+                    Some(Ctl::ConsumerStop) => End::Stopped,
+                    Some(Ctl::Raised(e)) => End::Raised(e),
+                    _ => match end {
+                        // a raise from format_specs.infer propagates after
+                        // its yielded values
+                        End::Raised(e) => End::Raised(e),
+                        End::Stopped => End::Stopped,
+                        End::Done => End::Done,
+                    },
+                }
             }
         }
-        Flow {
-            vals: out,
-            err: pending_err,
+    }
+
+    /// _safe_infer_from_node (node_classes.py:4846-4853), STREAMING:
+    /// node._infer (no NodeNG wrapper for the part node itself); an
+    /// InferenceError raised at ANY point yields one trailing Uninferable;
+    /// other raises propagate after the yielded values.
+    fn joinedstr_safe_to(&self, g: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
+        let mut stopped = false;
+        let end = {
+            let stopped = &mut stopped;
+            self.infer_dispatch_to(g, ctx, &mut |v| {
+                let d = sink(v);
+                if let Drive::Stop = d {
+                    *stopped = true;
+                }
+                d
+            })
+        };
+        if stopped {
+            return End::Stopped;
+        }
+        match end {
+            End::Raised(e) if e.is_inference() => {
+                yield_v!(sink, Value::Uninferable);
+                End::Done
+            }
+            e => e,
         }
     }
 
     /// JoinedStr._infer_from_values (node_classes.py:4822-4844), recursive
-    /// cartesian concatenation; parts inferred via node._infer (NO
-    /// NodeNG.infer wrapper: no cache, no bumps — _safe_infer_from_node)
-    fn joinedstr_parts(&self, values: &[NodeId], m: crate::value::ModId, ctx: &Rc<Ctx>) -> Flow {
+    /// cartesian concatenation, STREAMING and LAZY: each prefix value's
+    /// suffix recursion runs while the prefix generator is suspended
+    /// (deferred post-yield bumps; abandonment on raise/stop).
+    fn joinedstr_parts_to(
+        &self,
+        values: &[NodeId],
+        m: crate::value::ModId,
+        ctx: &Rc<Ctx>,
+        sink: &mut Sink,
+    ) -> End {
         if values.is_empty() {
-            return Flow::ok(Vec::new());
+            return End::Done;
         }
-        // _safe_infer_from_node: node._infer; `except InferenceError` ->
-        // yield U AFTER the already-yielded values (node_classes.py
-        // 4846-4853). Non-InferenceError raises (Attribute, Recursion...)
-        // propagate.
-        let safe = |n: NodeId| -> Flow {
-            let g = GNode { m, n };
-            let mut vals = Vec::new();
-            let end = self.infer_dispatch_to(g, ctx, &mut |v| {
-                vals.push(v);
-                Drive::Go
-            });
-            match end {
-                End::Raised(e) if e.is_inference() => {
-                    vals.push(Value::Uninferable);
-                    Flow::ok(vals)
-                }
-                End::Raised(e) => Flow {
-                    vals,
-                    err: Some(e),
-                },
-                _ => Flow::ok(vals),
-            }
-        };
         if values.len() == 1 {
-            let f = safe(values[0]);
-            let mut out = Vec::new();
-            for v in f.vals {
+            let g = GNode { m, n: values[0] };
+            return self.joinedstr_safe_to(g, ctx, &mut |v| {
                 if self.value_const(&v).is_some() {
-                    out.push(v);
+                    sink(v)
                 } else {
-                    out.push(Value::SynthConst(Rc::new(ConstValue::Str(
+                    sink(Value::SynthConst(Rc::new(ConstValue::Str(
                         "{Uninferable}".into(),
-                    ))));
+                    ))))
                 }
-            }
-            return Flow { vals: out, err: f.err };
+            });
         }
-        let pf = safe(values[0]);
-        let mut out = Vec::new();
-        let mut err = None;
-        for prefix in &pf.vals {
-            // the suffix generator is recreated per prefix
-            let sf = self.joinedstr_parts(&values[1..], m, ctx);
-            for suffix in &sf.vals {
-                let mut result = String::new();
-                for part in [prefix, suffix] {
-                    match self.value_const(part) {
-                        Some(c) => result.push_str(&const_str_value(&c)),
-                        None => result.push_str("{Uninferable}"),
+        let g = GNode { m, n: values[0] };
+        let rest = &values[1..];
+        let mut pending: Option<End> = None;
+        let end = {
+            let pending = &mut pending;
+            self.joinedstr_safe_to(g, ctx, &mut |prefix| {
+                // the suffix generator is recreated per prefix
+                let mut consumer_stop = false;
+                let send = {
+                    let consumer_stop = &mut consumer_stop;
+                    let prefix = &prefix;
+                    self.joinedstr_parts_to(rest, m, ctx, &mut |suffix| {
+                        let mut result = String::new();
+                        for part in [prefix, &suffix] {
+                            match self.value_const(part) {
+                                Some(c) => result.push_str(&const_str_value(&c)),
+                                None => result.push_str("{Uninferable}"),
+                            }
+                        }
+                        let d =
+                            sink(Value::SynthConst(Rc::new(ConstValue::Str(result.into()))));
+                        if let Drive::Stop = d {
+                            *consumer_stop = true;
+                        }
+                        d
+                    })
+                };
+                if consumer_stop {
+                    *pending = Some(End::Stopped);
+                    return Drive::Stop;
+                }
+                match send {
+                    End::Raised(e) => {
+                        // a suffix raise propagates, abandoning the prefix
+                        // generator mid-suspension
+                        *pending = Some(End::Raised(e));
+                        Drive::Stop
                     }
+                    _ => Drive::Go,
                 }
-                out.push(Value::SynthConst(Rc::new(ConstValue::Str(result.into()))));
-            }
-            if sf.err.is_some() {
-                err = sf.err;
-                break;
-            }
+            })
+        };
+        match pending {
+            Some(p) => p,
+            None => end,
         }
-        // a prefix-iterator raise surfaces only after all its values (and
-        // their suffix products) were consumed
-        if err.is_none() {
-            err = pf.err;
-        }
-        Flow { vals: out, err }
     }
 
     fn infer_joinedstr(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let md = self.md(node.m);
-        let values: Vec<NodeId> = match &md.tree.nodes[node.n.idx()].kind {
-            NodeKind::JoinedStr { values } => values.clone(),
-            _ => return Flow::err(ErrKind::Inference),
-        };
-        drop(md);
-        if values.is_empty() {
-            return Flow::one(Value::SynthConst(Rc::new(ConstValue::Str("".into()))));
+        let mut vals = Vec::new();
+        let end = self.infer_joinedstr_to(node, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
         }
-        // _infer_with_values: failed = U or Const str containing the
-        // "{Uninferable}" marker; only the FIRST failure yields U — later
-        // failures fall through and yield the raw marker Const
-        // (node_classes.py:4807-4820, bug-for-bug)
-        let mut out = Vec::new();
+    }
+
+    /// JoinedStr._infer / _infer_with_values (node_classes.py:4799-4820),
+    /// STREAMING. failed = U or Const str containing the "{Uninferable}"
+    /// marker; only the FIRST failure yields U — later failures fall
+    /// through and yield the raw marker Const (bug-for-bug).
+    fn infer_joinedstr_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
+        let (values, m) = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::JoinedStr { values } => (values.clone(), node.m),
+                _ => return End::Raised(ErrKind::Inference),
+            }
+        };
+        if values.is_empty() {
+            yield_v!(sink, Value::SynthConst(Rc::new(ConstValue::Str("".into()))));
+            return End::Done;
+        }
         let mut uninferable_already = false;
-        let parts = self.joinedstr_parts(&values, node.m, ctx);
-        for v in parts.vals {
+        let uninferable_already = &mut uninferable_already;
+        self.joinedstr_parts_to(&values, m, ctx, &mut |v| {
             let failed = v.is_uninferable()
                 || matches!(self.value_const(&v), Some(ConstValue::Str(sv)) if sv.contains("{Uninferable}"));
-            if failed && !uninferable_already {
-                uninferable_already = true;
-                out.push(Value::Uninferable);
-                continue;
+            if failed && !*uninferable_already {
+                *uninferable_already = true;
+                return sink(Value::Uninferable);
             }
-            out.push(v);
-        }
-        Flow {
-            vals: out,
-            err: parts.err,
-        }
+            sink(v)
+        })
     }
 
     // ---------- EmptyNode ----------

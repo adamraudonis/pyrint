@@ -6,7 +6,7 @@
 use std::rc::Rc;
 
 use indexmap::IndexMap;
-use pyast::tree::{ConstValue, NodeKind};
+use pyast::tree::{ConstValue, IntValue, NodeKind};
 use pyast::NodeId;
 
 use crate::ctx::{copy_context, CallCtx, Ctx};
@@ -975,6 +975,50 @@ impl Engine {
                     // SyntaxError model
                     if self.qname(cls) == "builtins.SyntaxError" {
                         return Some(Value::SynthConst(Rc::new(ConstValue::Str("".into()))));
+                    }
+                }
+                // OSErrorInstanceModel (objectmodel.py:779-792): selected
+                // for the EXACT qnames in BUILTIN_EXCEPTIONS (OSError +
+                // aliases/subclasses listed there)
+                "filename" | "strerror" | "filename2" | "errno" => {
+                    const OSERROR_QNAMES: &[&str] = &[
+                        "builtins.OSError",
+                        "builtins.BlockingIOError",
+                        "builtins.BrokenPipeError",
+                        "builtins.ChildProcessError",
+                        "builtins.ConnectionAbortedError",
+                        "builtins.ConnectionError",
+                        "builtins.ConnectionRefusedError",
+                        "builtins.ConnectionResetError",
+                        "builtins.FileExistsError",
+                        "builtins.FileNotFoundError",
+                        "builtins.InterruptedError",
+                        "builtins.IsADirectoryError",
+                        "builtins.NotADirectoryError",
+                        "builtins.PermissionError",
+                        "builtins.ProcessLookupError",
+                        "builtins.TimeoutError",
+                    ];
+                    if OSERROR_QNAMES.contains(&self.qname(cls).as_str()) {
+                        return Some(Value::SynthConst(Rc::new(if name == "errno" {
+                            ConstValue::Int(IntValue::Small(0))
+                        } else {
+                            ConstValue::Str("".into())
+                        })));
+                    }
+                }
+                // ImportErrorInstanceModel (objectmodel.py:795-803)
+                "name" | "path" => {
+                    if self.qname(cls) == "builtins.ImportError" {
+                        return Some(Value::SynthConst(Rc::new(ConstValue::Str("".into()))));
+                    }
+                }
+                // UnicodeDecodeErrorInstanceModel (objectmodel.py:805-808)
+                "object" => {
+                    if self.qname(cls) == "builtins.UnicodeDecodeError" {
+                        return Some(Value::SynthConst(Rc::new(ConstValue::Bytes(
+                            Vec::new().into(),
+                        ))));
                     }
                 }
                 _ => {}
