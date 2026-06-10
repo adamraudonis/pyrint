@@ -11,7 +11,9 @@ use pyast::NodeId;
 
 use crate::ctx::{bind_context_to_node, copy_context, CallCtx, Ctx};
 use crate::graph::{Engine, FType};
-use crate::value::{ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
+use crate::infer::Sink;
+use crate::yield_v;
+use crate::value::{Drive, End, ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
 
 pub struct ArgSpec {
     pub args: Vec<GNode>,
@@ -88,7 +90,7 @@ impl Engine {
 
     // ---------- Call._infer (node_classes.py:1744-1784) ----------
 
-    pub fn infer_call(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
+    pub fn infer_call_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
         let md = self.md(node.m);
         let (func, args, keywords) = match &md.tree.nodes[node.n.idx()].kind {
             NodeKind::Call { func, args, keywords } => (
@@ -96,7 +98,7 @@ impl Engine {
                 args.iter().map(|&a| GNode { m: node.m, n: a }).collect::<Vec<_>>(),
                 keywords.clone(),
             ),
-            _ => return Flow::err(ErrKind::Inference),
+            _ => return End::Raised(ErrKind::Inference),
         };
         let callctx = copy_context(Some(ctx));
         *callctx.boundnode.borrow_mut() = None;
@@ -128,50 +130,85 @@ impl Engine {
                 _ => None,
             })
             .collect();
-        let callees = self.infer(func, ctx);
-        let mut out: Vec<Value> = Vec::new();
-        for callee in &callees.vals {
-            if callee.is_uninferable() {
-                out.push(Value::Uninferable);
-                continue;
-            }
-            if !self.has_infer_call_result(callee) {
-                continue;
-            }
-            *callctx.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
-                id: self.next_callctx_id(),
-                args: RefCell::new(args.iter().map(|&a| NV::N(a)).collect()),
-                keywords: RefCell::new(kw_pairs.clone()),
-                callee: RefCell::new(Some(callee.clone())),
-            }));
-            let f = self.infer_call_result(callee, Some(node), Some(&callctx));
-            out.extend(f.vals);
-            if let Some(e) = f.err {
-                if !e.is_inference() {
-                    return Flow { vals: out, err: Some(e) };
+        // callees pulled one at a time (node_classes.py:1764-1782)
+        let mut hard_err: Option<ErrKind> = None;
+        let end = {
+            let hard_err = &mut hard_err;
+            let callctx = &callctx;
+            let args = &args;
+            let kw_pairs = &kw_pairs;
+            self.infer_to(func, ctx, &mut |callee| {
+                if callee.is_uninferable() {
+                    return sink(Value::Uninferable);
                 }
-                // InferenceError from one callee: continue
-            }
+                if !self.has_infer_call_result(&callee) {
+                    return Drive::Go; // silently skipped
+                }
+                *callctx.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
+                    id: self.next_callctx_id(),
+                    args: RefCell::new(args.iter().map(|&a| NV::N(a)).collect()),
+                    keywords: RefCell::new(kw_pairs.clone()),
+                    callee: RefCell::new(Some(callee.clone())),
+                }));
+                let mut stopped = false;
+                let e = self.infer_call_result_to(&callee, Some(node), Some(callctx), &mut |v| {
+                    let d = sink(v);
+                    if let Drive::Stop = d {
+                        stopped = true;
+                    }
+                    d
+                });
+                if stopped {
+                    return Drive::Stop;
+                }
+                match e {
+                    End::Raised(err) if err.is_inference() => Drive::Go, // continue
+                    End::Raised(err) => {
+                        *hard_err = Some(err);
+                        Drive::Stop
+                    }
+                    _ => Drive::Go,
+                }
+            })
+        };
+        if let Some(e) = hard_err {
+            return End::Raised(e);
         }
-        if let Some(e) = callees.err {
-            return Flow { vals: out, err: Some(e) };
-        }
-        Flow::ok(out)
+        end
     }
 
     // ---------- infer_call_result dispatch ----------
 
+    /// eager shim
     pub fn infer_call_result(
         &self,
         callee: &Value,
         caller: Option<GNode>,
         ctx: Option<&Rc<Ctx>>,
     ) -> Flow {
+        let mut vals = Vec::new();
+        let end = self.infer_call_result_to(callee, caller, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    pub fn infer_call_result_to(
+        &self,
+        callee: &Value,
+        caller: Option<GNode>,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
         if self.depth.get() >= self.max_depth {
-            return Flow::err(ErrKind::Recursion);
+            return End::Raised(ErrKind::Recursion);
         }
         self.depth.set(self.depth.get() + 1);
-        let r = self.infer_call_result_inner(callee, caller, ctx);
+        let r = self.infer_call_result_inner(callee, caller, ctx, sink);
         self.depth.set(self.depth.get() - 1);
         r
     }
@@ -181,41 +218,51 @@ impl Engine {
         callee: &Value,
         caller: Option<GNode>,
         ctx: Option<&Rc<Ctx>>,
-    ) -> Flow {
+        sink: &mut Sink,
+    ) -> End {
         match callee {
             Value::Node(g) => {
-                let md = self.md(g.m);
-                match &md.tree.nodes[g.n.idx()].kind {
-                    NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_) => {
-                        self.function_infer_call_result(*g, caller, ctx)
+                let mut lambda_body: Option<GNode> = None;
+                let kind_tag = {
+                    let md = self.md(g.m);
+                    match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_) => 1,
+                        NodeKind::Lambda(d) => {
+                            lambda_body = Some(GNode { m: g.m, n: d.body });
+                            4
+                        }
+                        NodeKind::ClassDef(_) => 2,
+                        // Const / containers -> BaseInstance
+                        NodeKind::Const(_)
+                        | NodeKind::List { .. }
+                        | NodeKind::Tuple { .. }
+                        | NodeKind::Set { .. }
+                        | NodeKind::Dict { .. } => 3,
+                        _ => 0,
                     }
-                    NodeKind::Lambda(d) => {
-                        let body = GNode { m: g.m, n: d.body };
+                };
+                match kind_tag {
+                    1 => self.function_infer_call_result_to(*g, caller, ctx, sink),
+                    2 => self.class_infer_call_result_to(*g, caller, ctx, sink),
+                    3 => self.base_instance_infer_call_result_to(callee, caller, ctx, sink),
+                    4 => {
+                        // Lambda.infer_call_result: return self.body.infer
                         let c = match ctx {
                             Some(c) => Rc::clone(c),
                             None => Ctx::new(),
                         };
-                        self.infer(body, &c)
+                        self.infer_to(lambda_body.unwrap(), &c, sink)
                     }
-                    NodeKind::ClassDef(_) => self.class_infer_call_result(*g, caller, ctx),
-                    // Const / containers -> BaseInstance
-                    NodeKind::Const(_)
-                    | NodeKind::List { .. }
-                    | NodeKind::Tuple { .. }
-                    | NodeKind::Set { .. }
-                    | NodeKind::Dict { .. } => {
-                        self.base_instance_infer_call_result(callee, caller, ctx)
-                    }
-                    _ => Flow::err(ErrKind::Inference),
+                    _ => End::Raised(ErrKind::Inference),
                 }
             }
             Value::BoundMethod { func, bound } => {
-                self.bound_method_infer_call_result(*func, bound, caller, ctx)
+                self.bound_method_infer_call_result_to(*func, bound, caller, ctx, sink)
             }
             Value::UnboundMethod { func } => {
-                self.unbound_method_infer_call_result(*func, caller, ctx)
+                self.unbound_method_infer_call_result_with_to(*func, caller, ctx, sink)
             }
-            Value::Property { .. } => Flow::err(ErrKind::Inference),
+            Value::Property { .. } => End::Raised(ErrKind::Inference),
             Value::Partial {
                 func,
                 filled_args,
@@ -240,7 +287,7 @@ impl Engine {
                         *cc.args.borrow_mut() = new_args;
                     }
                 }
-                self.function_infer_call_result(*func, caller, ctx)
+                self.function_infer_call_result_to(*func, caller, ctx, sink)
             }
             Value::Inst { .. }
             | Value::ExcInst { .. }
@@ -249,20 +296,39 @@ impl Engine {
             | Value::SynthDict { .. }
             | Value::FrozenSet { .. }
             | Value::Generator { .. } => {
-                self.base_instance_infer_call_result(callee, caller, ctx)
+                self.base_instance_infer_call_result_to(callee, caller, ctx, sink)
             }
-            _ => Flow::err(ErrKind::Inference),
+            _ => End::Raised(ErrKind::Inference),
         }
     }
 
     // ---------- FunctionDef.infer_call_result (scoped_nodes.py:1555-1636) ----------
 
+    /// eager shim
     pub fn function_infer_call_result(
         &self,
         func: GNode,
         caller: Option<GNode>,
         ctx: Option<&Rc<Ctx>>,
     ) -> Flow {
+        let mut vals = Vec::new();
+        let end = self.function_infer_call_result_to(func, caller, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    pub fn function_infer_call_result_to(
+        &self,
+        func: GNode,
+        caller: Option<GNode>,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
         let _ = caller;
         let ctx = match ctx {
             Some(c) => Rc::clone(c),
@@ -274,51 +340,64 @@ impl Engine {
             NodeKind::AsyncFunctionDef(_)
         );
         if self.is_generator(func) {
-            return Flow::one(Value::Generator {
-                func,
-                is_async,
-            });
+            yield_v!(sink, Value::Generator { func, is_async });
+            return End::Done;
         }
         // NOTE: the six `with_metaclass` hack (scoped_nodes.py:1577-1615)
         // is not ported yet; none of the pinned corpora rely on it for the
         // -E message set (revisit on diff evidence).
         let body: Vec<NodeId> = match &md.tree.nodes[func.n.idx()].kind {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
-            _ => return Flow::err(ErrKind::Inference),
+            _ => return End::Raised(ErrKind::Inference),
         };
+        drop(md);
         let returns = self.return_nodes_skip_functions(func);
         if returns.is_empty() {
             if !body.is_empty() {
                 if self.is_abstract(func, true, true) {
-                    return Flow::uninferable();
+                    yield_v!(sink, Value::Uninferable);
+                } else {
+                    yield_v!(sink, Value::SynthConst(Rc::new(ConstValue::None)));
                 }
-                return Flow::one(Value::SynthConst(Rc::new(ConstValue::None)));
+                return End::Done;
             }
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         }
-        let mut out = Vec::new();
         for ret in returns {
-            let rmd = self.md(ret.m);
-            let value = match &rmd.tree.nodes[ret.n.idx()].kind {
-                NodeKind::Return { value } => *value,
-                _ => None,
+            let value = {
+                let rmd = self.md(ret.m);
+                match &rmd.tree.nodes[ret.n.idx()].kind {
+                    NodeKind::Return { value } => *value,
+                    _ => None,
+                }
             };
             match value {
-                None => out.push(Value::SynthConst(Rc::new(ConstValue::None))),
+                None => yield_v!(sink, Value::SynthConst(Rc::new(ConstValue::None))),
                 Some(v) => {
-                    let f = self.infer(GNode { m: ret.m, n: v }, &ctx);
-                    out.extend(f.vals);
-                    if let Some(e) = f.err {
-                        if e.is_inference() {
-                            out.push(Value::Uninferable);
-                        } else {
-                            return Flow { vals: out, err: Some(e) };
+                    // `yield from returnnode.value.infer(context)` with
+                    // `except InferenceError: yield Uninferable` per return
+                    let mut stopped = false;
+                    let e = self.infer_to(GNode { m: ret.m, n: v }, &ctx, &mut |val| {
+                        let d = sink(val);
+                        if let Drive::Stop = d {
+                            stopped = true;
                         }
+                        d
+                    });
+                    if stopped {
+                        return End::Stopped;
+                    }
+                    match e {
+                        End::Raised(err) if err.is_inference() => {
+                            yield_v!(sink, Value::Uninferable);
+                        }
+                        End::Raised(err) => return End::Raised(err),
+                        _ => {}
                     }
                 }
             }
         }
-        Flow::ok(out)
+        End::Done
     }
 
     /// is_generator (scoped_nodes.py:1511-1519): a Yield/YieldFrom not
@@ -462,7 +541,13 @@ impl Engine {
 
     // ---------- ClassDef.infer_call_result (scoped_nodes.py:2071-2102) ----------
 
-    fn class_infer_call_result(&self, cls: GNode, caller: Option<GNode>, ctx: Option<&Rc<Ctx>>) -> Flow {
+    fn class_infer_call_result_to(
+        &self,
+        cls: GNode,
+        caller: Option<GNode>,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
         // type("X", bases, attrs) (scoped_nodes.py:2076-2079)
         if let Some(call) = caller {
             let n_args = match &self.md(call.m).tree.nodes[call.n.idx()].kind {
@@ -471,8 +556,11 @@ impl Engine {
             };
             if n_args == 3 && self.is_subtype_of(cls, "builtins.type", ctx) {
                 return match self.infer_type_call(call, ctx) {
-                    Ok(v) => Flow::one(v),
-                    Err(e) => Flow::err(e),
+                    Ok(v) => {
+                        yield_v!(sink, v);
+                        End::Done
+                    }
+                    Err(e) => End::Raised(e),
                 };
             }
         }
@@ -480,8 +568,9 @@ impl Engine {
         if let Some(Value::Node(meta)) = self.metaclass(cls, ctx) {
             let call_sym = self.sym("__call__");
             if !self.class_locals_get(meta, call_sym).is_empty() {
-                if let Ok(f) = self.class_igetattr(meta, call_sym, ctx, true) {
-                    dunder_call = f.vals.into_iter().next();
+                // next(metaclass.igetattr("__call__", context)) — one pull
+                if let Ok(f) = self.class_igetattr_first(meta, call_sym, ctx, true) {
+                    dunder_call = f;
                 }
             }
         }
@@ -492,25 +581,53 @@ impl Engine {
                 if let Some(cc) = ctx2.callcontext.borrow().as_ref() {
                     *cc.callee.borrow_mut() = Some(dc.clone());
                 }
-                return self.infer_call_result(&dc, caller, Some(&ctx2));
+                return self.infer_call_result_to(&dc, caller, Some(&ctx2), sink);
             }
         }
-        Flow::one(self.instantiate_class(cls))
+        yield_v!(sink, self.instantiate_class(cls));
+        End::Done
     }
 
     // ---------- _infer_type_call / _infer_type_new_call ----------
 
     /// first inferred value of an argument node, astroid `next(x.infer(ctx))`
-    /// (StopIteration -> InferenceError).
-    fn infer_first(&self, node: GNode, ctx: Option<&Rc<Ctx>>) -> Result<Value, ErrKind> {
+    /// (StopIteration -> InferenceError). Single pull: the generator is
+    /// abandoned afterwards (no cache write, no bump for the value).
+    pub fn infer_first(&self, node: GNode, ctx: Option<&Rc<Ctx>>) -> Result<Value, ErrKind> {
         let c = match ctx {
             Some(c) => Rc::clone(c),
             None => Ctx::new(),
         };
-        let f = self.infer(node, &c);
-        match f.vals.into_iter().next() {
+        let mut first: Option<Value> = None;
+        let end = {
+            let first = &mut first;
+            self.infer_to(node, &c, &mut |v| {
+                *first = Some(v);
+                Drive::Stop
+            })
+        };
+        match first {
             Some(v) => Ok(v),
-            None => Err(f.err.unwrap_or(ErrKind::Inference)),
+            None => Err(end.err_opt().unwrap_or(ErrKind::Inference)),
+        }
+    }
+
+    /// `next(x.infer(), None)` — single pull, fresh context. Ok(None) on
+    /// StopIteration; raised errors propagate (Err).
+    pub fn infer_first_fresh(&self, node: GNode) -> Result<Option<Value>, ErrKind> {
+        let c = Ctx::new();
+        let mut first: Option<Value> = None;
+        let end = {
+            let first = &mut first;
+            self.infer_to(node, &c, &mut |v| {
+                *first = Some(v);
+                Drive::Stop
+            })
+        };
+        match (first, end) {
+            (Some(v), _) => Ok(Some(v)),
+            (None, End::Raised(e)) => Err(e),
+            (None, _) => Ok(None),
         }
     }
 
@@ -768,13 +885,14 @@ impl Engine {
 
     // ---------- Bound/Unbound method ----------
 
-    fn bound_method_infer_call_result(
+    fn bound_method_infer_call_result_to(
         &self,
         func: GNode,
         bound: &Rc<Value>,
         caller: Option<GNode>,
         ctx: Option<&Rc<Ctx>>,
-    ) -> Flow {
+        sink: &mut Sink,
+    ) -> End {
         let ctx2 = bind_context_to_node(ctx, (**bound).clone());
         // type.__new__(mcs, name, bases, attrs) (bases.py:656-674)
         if let Some(call) = caller {
@@ -788,55 +906,59 @@ impl Engine {
                 );
             if is_type_new {
                 match self.infer_type_new_call(call, Some(&ctx2)) {
-                    Ok(Some(v)) => return Flow::one(v),
+                    Ok(Some(v)) => {
+                        yield_v!(sink, v);
+                        return End::Done;
+                    }
                     Ok(None) => {}
-                    Err(e) => return Flow::err(e),
+                    Err(e) => return End::Raised(e),
                 }
             }
         }
-        self.unbound_method_infer_call_result_with(func, caller, Some(&ctx2))
+        self.unbound_method_infer_call_result_with_to(func, caller, Some(&ctx2), sink)
     }
 
-    fn unbound_method_infer_call_result(
+    fn unbound_method_infer_call_result_with_to(
         &self,
         func: GNode,
         caller: Option<GNode>,
         ctx: Option<&Rc<Ctx>>,
-    ) -> Flow {
-        self.unbound_method_infer_call_result_with(func, caller, ctx)
-    }
-
-    fn unbound_method_infer_call_result_with(
-        &self,
-        func: GNode,
-        caller: Option<GNode>,
-        ctx: Option<&Rc<Ctx>>,
-    ) -> Flow {
+        sink: &mut Sink,
+    ) -> End {
         let name = self.node_name(func);
         if name.as_deref() == Some("__new__") {
             let frame = self.parent(func).map(|p| self.frame(p));
             if let Some(frame) = frame {
                 let q = self.qname(frame);
                 if q.starts_with("builtins.") && q != "builtins.type" {
-                    return self.infer_builtin_new(caller, ctx);
+                    return self.infer_builtin_new_to(caller, ctx, sink);
                 }
             }
         }
-        self.function_infer_call_result(func, caller, ctx)
+        self.function_infer_call_result_to(func, caller, ctx, sink)
     }
 
-    /// bases.py:497-530 _infer_builtin_new
-    fn infer_builtin_new(&self, caller: Option<GNode>, ctx: Option<&Rc<Ctx>>) -> Flow {
+    /// bases.py:497-530 _infer_builtin_new — note the unconditional
+    /// `raise InferenceError` after handling the FIRST inferred value of
+    /// args[0] (the generator is abandoned: no cache write for args[0]).
+    fn infer_builtin_new_to(
+        &self,
+        caller: Option<GNode>,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
         let Some(caller) = caller else {
-            return Flow::empty();
+            return End::Done;
         };
-        let md = self.md(caller.m);
-        let args: Vec<NodeId> = match &md.tree.nodes[caller.n.idx()].kind {
-            NodeKind::Call { args, .. } => args.clone(),
-            _ => return Flow::empty(),
+        let args: Vec<NodeId> = {
+            let md = self.md(caller.m);
+            match &md.tree.nodes[caller.n.idx()].kind {
+                NodeKind::Call { args, .. } => args.clone(),
+                _ => return End::Done,
+            }
         };
         if args.is_empty() {
-            return Flow::empty();
+            return End::Done;
         }
         let ctx = match ctx {
             Some(c) => Rc::clone(c),
@@ -844,16 +966,28 @@ impl Engine {
         };
         if args.len() > 1 {
             let a1 = GNode { m: caller.m, n: args[1] };
-            let cv = match &md.tree.nodes[args[1].idx()].kind {
-                NodeKind::Const(c) => Some(c.clone()),
-                _ => {
-                    let f = self.infer(a1, &ctx);
-                    f.vals.first().and_then(|v| self.value_const(v))
+            let is_const = {
+                let md = self.md(caller.m);
+                matches!(&md.tree.nodes[args[1].idx()].kind, NodeKind::Const(_))
+            };
+            let cv = if is_const {
+                let md = self.md(caller.m);
+                match &md.tree.nodes[args[1].idx()].kind {
+                    NodeKind::Const(c) => Some(c.clone()),
+                    _ => None,
+                }
+            } else {
+                // next(caller.args[1].infer(), None) — NO context, one pull;
+                // raised errors propagate out of _infer_builtin_new
+                match self.infer_first_fresh(a1) {
+                    Ok(v) => v.and_then(|v| self.value_const(&v)),
+                    Err(e) => return End::Raised(e),
                 }
             };
             if let Some(cv) = cv {
                 if !matches!(cv, ConstValue::None) {
-                    return Flow::one(Value::SynthConst(Rc::new(cv)));
+                    yield_v!(sink, Value::SynthConst(Rc::new(cv)));
+                    return End::Done;
                 }
             }
         }
@@ -864,108 +998,188 @@ impl Engine {
             .get(&a0)
             .cloned()
             .unwrap_or_else(Ctx::new);
-        let f = self.infer(a0, &node_ctx);
-        let mut out = Vec::new();
-        if let Some(first) = f.vals.first() {
-            if first.is_uninferable() {
-                out.push(Value::Uninferable);
-            }
-            if let Value::Node(g) = first {
-                if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) {
-                    out.push(Value::Inst { cls: *g });
+        // first value only, then unconditional raise (loop abandons a0's
+        // generator on the raise)
+        let mut to_yield: Vec<Value> = Vec::new();
+        let mut got_one = false;
+        let end = {
+            let to_yield = &mut to_yield;
+            let got_one = &mut got_one;
+            self.infer_to(a0, &node_ctx, &mut |first| {
+                *got_one = true;
+                if first.is_uninferable() {
+                    to_yield.push(Value::Uninferable);
                 }
+                if let Value::Node(g) = &first {
+                    if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) {
+                        to_yield.push(Value::Inst { cls: *g });
+                    }
+                }
+                Drive::Stop // raise InferenceError abandons the generator
+            })
+        };
+        if got_one {
+            for v in to_yield {
+                yield_v!(sink, v);
             }
-            return Flow {
-                vals: out,
-                err: Some(ErrKind::Inference),
-            };
+            return End::Raised(ErrKind::Inference);
         }
-        Flow::empty()
+        match end {
+            End::Raised(e) => End::Raised(e), // error from a0's generator propagates
+            _ => End::Done,
+        }
     }
 
     // ---------- BaseInstance.infer_call_result (bases.py:317-345) ----------
 
-    fn base_instance_infer_call_result(
+    fn base_instance_infer_call_result_to(
         &self,
         instance: &Value,
         caller: Option<GNode>,
         ctx: Option<&Rc<Ctx>>,
-    ) -> Flow {
+        sink: &mut Sink,
+    ) -> End {
         let ctx2 = bind_context_to_node(ctx, instance.clone());
         let mut inferred = false;
-        let mut out: Vec<Value> = Vec::new();
-        // attribute-call shortcut
+        // attribute-call shortcut: infer the attribute itself
         if let Some(caller) = caller {
-            let md = self.md(caller.m);
-            if let NodeKind::Call { func, .. } = &md.tree.nodes[caller.n.idx()].kind {
-                if let NodeKind::Attribute { attrname, .. } = &md.tree.nodes[func.idx()].kind {
-                    let sym = self.g(&md, *attrname);
-                    if let Ok(f) = self.igetattr_value(instance, sym, Some(&ctx2)) {
-                        if !f.vals.is_empty() {
-                            inferred = true;
-                        }
-                        out.extend(f.vals);
+            let sym = {
+                let md = self.md(caller.m);
+                if let NodeKind::Call { func, .. } = &md.tree.nodes[caller.n.idx()].kind {
+                    if let NodeKind::Attribute { attrname, .. } = &md.tree.nodes[func.idx()].kind {
+                        Some(self.g(&md, *attrname))
+                    } else {
+                        None
                     }
+                } else {
+                    None
+                }
+            };
+            if let Some(sym) = sym {
+                let mut stopped = false;
+                let _ = self.igetattr_value_to(instance, sym, Some(&ctx2), &mut |v| {
+                    inferred = true;
+                    let d = sink(v);
+                    if let Drive::Stop = d {
+                        stopped = true;
+                    }
+                    d
+                });
+                if stopped {
+                    return End::Stopped;
                 }
             }
         }
         let proxied = self.proxied_class(instance);
         if let Some(cls) = proxied {
             let call_sym = self.sym("__call__");
-            if let Ok(f) = self.class_igetattr(cls, call_sym, Some(&ctx2), true) {
-                for node in f.vals {
-                    if node.is_uninferable() || !self.value_callable(&node, &ctx2) {
-                        continue;
+            let mut stopped = false;
+            let mut hard_err: Option<ErrKind> = None;
+            let _ = {
+                let inferred = &mut inferred;
+                let stopped = &mut stopped;
+                let hard_err = &mut hard_err;
+                let ctx2 = &ctx2;
+                self.class_igetattr_to(cls, call_sym, Some(ctx2), true, &mut |node| {
+                    if node.is_uninferable() || !self.value_callable(&node, ctx2) {
+                        return Drive::Go;
                     }
                     // recursion prevention: instance of same class
                     let same = self.proxied_class(&node) == proxied
                         && matches!(node, Value::Inst { .. });
                     if same {
-                        inferred = true;
-                        out.push(node);
-                        continue;
+                        *inferred = true;
+                        let d = sink(node);
+                        if let Drive::Stop = d {
+                            *stopped = true;
+                        }
+                        return d;
                     }
-                    let sub = self.infer_call_result(&node, caller, Some(&ctx2));
-                    if !sub.vals.is_empty() {
-                        inferred = true;
+                    let e = self.infer_call_result_to(&node, caller, Some(ctx2), &mut |v| {
+                        *inferred = true;
+                        let d = sink(v);
+                        if let Drive::Stop = d {
+                            *stopped = true;
+                        }
+                        d
+                    });
+                    if *stopped {
+                        return Drive::Stop;
                     }
-                    out.extend(sub.vals);
-                }
+                    match e {
+                        End::Raised(err) => {
+                            // no try/except here in astroid — errors from a
+                            // dunder's infer_call_result propagate
+                            *hard_err = Some(err);
+                            Drive::Stop
+                        }
+                        _ => Drive::Go,
+                    }
+                })
+            };
+            if stopped {
+                return End::Stopped;
+            }
+            if let Some(e) = hard_err {
+                return End::Raised(e);
             }
         }
         if !inferred {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         }
-        Flow::ok(out)
+        End::Done
     }
 
     // ---------- Arguments._infer + protocols (§10) ----------
 
-    pub fn infer_arguments_node(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
+    pub fn infer_arguments_node_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
         let name = match ctx.lookupname.get() {
             Some(n) => n,
-            None => return Flow::err(ErrKind::Inference),
+            None => return End::Raised(ErrKind::Inference),
         };
-        self.arguments_infer_argname(node, Some(name), ctx)
+        self.arguments_infer_argname_to(node, Some(name), ctx, sink)
     }
 
-    /// protocols.py:352-413 _arguments_infer_argname
+    /// eager shim
     pub fn arguments_infer_argname(
         &self,
         arguments_node: GNode,
         name: Option<GSym>,
         ctx: &Rc<Ctx>,
     ) -> Flow {
+        let mut vals = Vec::new();
+        let end = self.arguments_infer_argname_to(arguments_node, name, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    /// protocols.py:352-413 _arguments_infer_argname
+    pub fn arguments_infer_argname_to(
+        &self,
+        arguments_node: GNode,
+        name: Option<GSym>,
+        ctx: &Rc<Ctx>,
+        sink: &mut Sink,
+    ) -> End {
         let Some(spec) = self.arg_spec_of_arguments(arguments_node) else {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         };
         let all_args = spec.arguments();
         if all_args.is_empty() {
-            return Flow::uninferable();
+            yield_v!(sink, Value::Uninferable);
+            return End::Done;
         }
         let func = match self.parent(arguments_node) {
             Some(f) => f,
-            None => return Flow::uninferable(),
+            None => {
+                yield_v!(sink, Value::Uninferable);
+                return End::Done;
+            }
         };
         let functype = self.func_type(func);
         // args excluding vararg/kwarg names
@@ -995,7 +1209,10 @@ impl Engine {
                 }
             }
             if is_metaclass || functype == FType::ClassMethod {
-                return Flow::ok(cls_value.into_iter().collect());
+                for v in cls_value {
+                    yield_v!(sink, v);
+                }
+                return End::Done;
             }
             if functype == FType::Method {
                 let inst = match cls_value {
@@ -1006,7 +1223,10 @@ impl Engine {
                     }
                     other => other,
                 };
-                return Flow::ok(inst.into_iter().collect());
+                for v in inst {
+                    yield_v!(sink, v);
+                }
+                return End::Done;
             }
         }
         // call-context path
@@ -1024,8 +1244,8 @@ impl Engine {
             if callee_name.is_some() && callee_name == self.node_name(func) {
                 let site = self.call_site_from(&cc, ctx);
                 return match name {
-                    Some(n) => self.infer_argument(&site, func, n, ctx),
-                    None => Flow::err(ErrKind::Inference),
+                    Some(n) => self.infer_argument_to(&site, func, n, ctx, sink),
+                    None => End::Raised(ErrKind::Inference),
                 };
             }
         }
@@ -1041,26 +1261,37 @@ impl Engine {
                     }
                 }
             }
-            return Flow::one(Value::SynthSeq {
+            yield_v!(sink, Value::SynthSeq {
                 kind: SeqKind::Tuple,
                 elems: Rc::new(elems),
             });
+            return End::Done;
         }
         if name.is_some() && name == spec.kwarg {
-            return Flow::one(Value::SynthDict {
+            yield_v!(sink, Value::SynthDict {
                 items: Rc::new(Vec::new()),
             });
+            return End::Done;
         }
         let _ = name_str;
-        // default value + Uninferable
+        // default value + Uninferable (protocols.py:404-413):
+        // `yield from default.infer(context); yield Uninferable` — errors
+        // from the default's inference propagate (only NoDefault is caught).
         match name.and_then(|n| self.default_value(&spec, n)) {
             Some(def) => {
                 let c = copy_context(Some(ctx));
-                let mut f = self.infer(def, &c);
-                f.vals.push(Value::Uninferable);
-                Flow::ok(f.vals)
+                match self.infer_to(def, &c, sink) {
+                    End::Done => {
+                        yield_v!(sink, Value::Uninferable);
+                        End::Done
+                    }
+                    e => e,
+                }
             }
-            None => Flow::uninferable(),
+            None => {
+                yield_v!(sink, Value::Uninferable);
+                End::Done
+            }
         }
     }
 
@@ -1201,7 +1432,7 @@ impl Engine {
         }
     }
 
-    /// CallSite.infer_argument (arguments.py:141-309)
+    /// eager shim
     pub fn infer_argument(
         &self,
         site: &CallSite,
@@ -1209,6 +1440,26 @@ impl Engine {
         name: GSym,
         ctx: &Rc<Ctx>,
     ) -> Flow {
+        let mut vals = Vec::new();
+        let end = self.infer_argument_to(site, funcnode, name, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    /// CallSite.infer_argument (arguments.py:141-309)
+    pub fn infer_argument_to(
+        &self,
+        site: &CallSite,
+        funcnode: GNode,
+        name: GSym,
+        ctx: &Rc<Ctx>,
+        sink: &mut Sink,
+    ) -> End {
         let is_func = self.kind_is(funcnode, |k| {
             matches!(
                 k,
@@ -1216,10 +1467,10 @@ impl Engine {
             )
         });
         if !is_func {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         }
         if site.duplicated_keywords.contains(&name) {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         }
         // keywords first
         if let Some((_, v)) = site
@@ -1227,20 +1478,20 @@ impl Engine {
             .into_iter()
             .find(|(k, _)| *k == name)
         {
-            return self.infer_nv(&v, ctx);
+            return self.infer_nv_to(&v, ctx, sink);
         }
         let Some(spec) = self.arg_spec(funcnode) else {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         };
         if spec.args_unknown {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         }
         let positional_all = site.positional_arguments();
         if positional_all.len() > spec.args.len()
             && spec.vararg.is_none()
             && spec.posonlyargs.is_empty()
         {
-            return Flow::err(ErrKind::Inference);
+            return End::Raised(ErrKind::Inference);
         }
         let mut positional: Vec<NV> = positional_all
             .iter()
@@ -1284,7 +1535,7 @@ impl Engine {
             let mut boundnode = ctx.boundnode.borrow().clone();
             if argindex == 0 && matches!(functype, FType::Method | FType::ClassMethod) {
                 if boundnode.is_none() && functype == FType::Method && !positional.is_empty() {
-                    return self.infer_nv(&positional[0], ctx);
+                    return self.infer_nv_to(&positional[0], ctx, sink);
                 }
                 if boundnode.is_none() {
                     boundnode = self.parent(funcnode).map(|p| Value::Node(self.frame(p)));
@@ -1295,7 +1546,10 @@ impl Engine {
                         let meta = self.metaclass(*bcls, Some(ctx));
                         if let (Some(ms), Some(Value::Node(mg))) = (method_scope, &meta) {
                             if ms == *mg {
-                                return Flow::ok(boundnode.into_iter().collect());
+                                for v in boundnode {
+                                    yield_v!(sink, v);
+                                }
+                                return End::Done;
                             }
                         }
                     }
@@ -1309,10 +1563,16 @@ impl Engine {
                         }
                         other => other,
                     };
-                    return Flow::ok(bn.into_iter().collect());
+                    for v in bn {
+                        yield_v!(sink, v);
+                    }
+                    return End::Done;
                 }
                 if functype == FType::ClassMethod {
-                    return Flow::ok(boundnode.into_iter().collect());
+                    for v in boundnode {
+                        yield_v!(sink, v);
+                    }
+                    return End::Done;
                 }
             }
             let mut argindex = argindex;
@@ -1322,12 +1582,12 @@ impl Engine {
                 argindex = argindex.saturating_sub(1);
             }
             if argindex < positional_all.len() {
-                return self.infer_nv(&positional_all[argindex], ctx);
+                return self.infer_nv_to(&positional_all[argindex], ctx, sink);
             }
         }
         if spec.kwarg == Some(name) {
             if site.has_invalid_keywords() {
-                return Flow::err(ErrKind::Inference);
+                return End::Raised(ErrKind::Inference);
             }
             let items: Vec<(Value, Value)> = kwargs
                 .into_iter()
@@ -1341,13 +1601,14 @@ impl Engine {
                     )
                 })
                 .collect();
-            return Flow::one(Value::SynthDict {
+            yield_v!(sink, Value::SynthDict {
                 items: Rc::new(items),
             });
+            return End::Done;
         }
         if spec.vararg == Some(name) {
             if site.has_invalid_arguments() {
-                return Flow::err(ErrKind::Inference);
+                return End::Raised(ErrKind::Inference);
             }
             let elems: Vec<Value> = vararg
                 .into_iter()
@@ -1356,21 +1617,39 @@ impl Engine {
                     NV::V(val) => val,
                 })
                 .collect();
-            return Flow::one(Value::SynthSeq {
+            yield_v!(sink, Value::SynthSeq {
                 kind: SeqKind::Tuple,
                 elems: Rc::new(elems),
             });
+            return End::Done;
         }
         match self.default_value(&spec, name) {
-            Some(def) => self.infer(def, ctx),
-            None => Flow::err(ErrKind::Inference),
+            Some(def) => self.infer_to(def, ctx, sink),
+            None => End::Raised(ErrKind::Inference),
         }
     }
 
     pub fn infer_nv(&self, nv: &NV, ctx: &Rc<Ctx>) -> Flow {
+        let mut vals = Vec::new();
+        let end = self.infer_nv_to(nv, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    /// arg.infer(context) where the arg may be an already-inferred value
+    /// (operator-protocol call contexts): values infer to themselves.
+    pub fn infer_nv_to(&self, nv: &NV, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
         match nv {
-            NV::N(g) => self.infer(*g, ctx),
-            NV::V(v) => Flow::one(v.clone()),
+            NV::N(g) => self.infer_to(*g, ctx, sink),
+            NV::V(v) => {
+                yield_v!(sink, v.clone());
+                End::Done
+            }
         }
     }
 

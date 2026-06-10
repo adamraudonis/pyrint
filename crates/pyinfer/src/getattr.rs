@@ -11,7 +11,9 @@ use pyast::NodeId;
 
 use crate::ctx::{copy_context, CallCtx, Ctx};
 use crate::graph::{Engine, FType};
-use crate::value::{DictRef, ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
+use crate::infer::Sink;
+use crate::value::{DictRef, Drive, End, ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
+use crate::yield_v;
 
 const PROPERTIES: [&str; 4] = [
     "builtins.property",
@@ -37,38 +39,87 @@ const POSSIBLE_PROPERTIES: [&str; 12] = [
 impl Engine {
     // ---------- dispatch igetattr over a value ----------
 
+    /// eager shim: Err only when the generator raised before any yield.
     pub fn igetattr_value(
         &self,
         owner: &Value,
         name: GSym,
         ctx: Option<&Rc<Ctx>>,
     ) -> Result<Flow, ErrKind> {
+        let mut vals = Vec::new();
+        let end = self.igetattr_value_to(owner, name, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        match end {
+            End::Raised(e) if vals.is_empty() => Err(e),
+            e => Ok(Flow {
+                vals,
+                err: e.err_opt(),
+            }),
+        }
+    }
+
+    pub fn igetattr_value_to(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
+        // Result<Flow>-based sub-lookups stream their eager Flow
+        let stream_result = |r: Result<Flow, ErrKind>, sink: &mut Sink| -> End {
+            match r {
+                Ok(flow) => {
+                    for v in flow.vals {
+                        yield_v!(sink, v);
+                    }
+                    match flow.err {
+                        Some(e) => End::Raised(e),
+                        None => End::Done,
+                    }
+                }
+                Err(e) => End::Raised(e),
+            }
+        };
         match owner {
-            Value::Uninferable => Ok(Flow::uninferable()),
+            Value::Uninferable => {
+                yield_v!(sink, Value::Uninferable);
+                End::Done
+            }
             Value::Node(g) => {
-                let md = self.md(g.m);
-                match &md.tree.nodes[g.n.idx()].kind {
-                    NodeKind::Module(_) => {
-                        let stmts = self.module_getattr(g.m, name, false).map_err(|e| e)?;
+                let tag = {
+                    let md = self.md(g.m);
+                    match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::Module(_) => 1,
+                        NodeKind::ClassDef(_) => 2,
+                        NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                        | NodeKind::Lambda(_) => 3,
+                        NodeKind::Slice { .. } => 4,
+                        NodeKind::Const(_)
+                        | NodeKind::List { .. }
+                        | NodeKind::Tuple { .. }
+                        | NodeKind::Set { .. }
+                        | NodeKind::Dict { .. } => 5,
+                        _ => 0,
+                    }
+                };
+                match tag {
+                    1 => {
+                        // Module.igetattr (scoped_nodes.py:381-397)
+                        let stmts = match self.module_getattr(g.m, name, false) {
+                            Ok(s) => s,
+                            Err(_) => return End::Raised(ErrKind::Inference),
+                        };
                         let ctx2 = copy_context(ctx);
                         ctx2.lookupname.set(Some(name));
-                        let f = self.infer_stmts(&stmts, Some(&ctx2), Some(*g));
-                        if f.vals.is_empty() && f.err.is_some() {
-                            return Err(ErrKind::Inference);
-                        }
-                        Ok(f)
+                        self.infer_stmts_to(&stmts, Some(&ctx2), Some(*g), sink)
                     }
-                    NodeKind::ClassDef(_) => self.class_igetattr(*g, name, ctx, true),
-                    NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
-                    | NodeKind::Lambda(_) => self.function_igetattr(*g, name, ctx),
-                    NodeKind::Slice { .. } => self.slice_igetattr(*g, name, ctx),
-                    // Const / containers: instances of builtin classes
-                    NodeKind::Const(_)
-                    | NodeKind::List { .. }
-                    | NodeKind::Tuple { .. }
-                    | NodeKind::Set { .. }
-                    | NodeKind::Dict { .. } => self.instance_igetattr(owner, name, ctx),
-                    _ => Err(ErrKind::Attribute),
+                    2 => self.class_igetattr_to(*g, name, ctx, true, sink),
+                    3 => stream_result(self.function_igetattr(*g, name, ctx), sink),
+                    4 => stream_result(self.slice_igetattr(*g, name, ctx), sink),
+                    5 => self.instance_igetattr_to(owner, name, ctx, sink),
+                    _ => End::Raised(ErrKind::Attribute),
                 }
             }
             Value::Inst { .. }
@@ -78,18 +129,22 @@ impl Engine {
             | Value::SynthDict { .. }
             | Value::FrozenSet { .. }
             | Value::Generator { .. }
-            | Value::UnionType => self.instance_igetattr(owner, name, ctx),
-            Value::SynthSlice { .. } => self.synth_slice_igetattr(owner, name, ctx),
+            | Value::UnionType => self.instance_igetattr_to(owner, name, ctx, sink),
+            Value::SynthSlice { .. } => {
+                stream_result(self.synth_slice_igetattr(owner, name, ctx), sink)
+            }
             Value::BoundMethod { func, bound } => {
-                self.method_igetattr(*func, Some(bound), name, ctx)
+                stream_result(self.method_igetattr(*func, Some(bound), name, ctx), sink)
             }
-            Value::UnboundMethod { func } => self.method_igetattr(*func, None, name, ctx),
+            Value::UnboundMethod { func } => {
+                stream_result(self.method_igetattr(*func, None, name, ctx), sink)
+            }
             Value::Property { func } | Value::Partial { func, .. } => {
-                self.property_igetattr(owner, *func, name, ctx)
+                stream_result(self.property_igetattr(owner, *func, name, ctx), sink)
             }
-            Value::Super { .. } => self.super_igetattr(owner, name, ctx),
+            Value::Super { .. } => self.super_igetattr_to(owner, name, ctx, sink),
             Value::DictItems(_) | Value::DictKeys(_) | Value::DictValues(_) => {
-                Err(ErrKind::Attribute)
+                End::Raised(ErrKind::Attribute)
             }
         }
     }
@@ -339,6 +394,7 @@ impl Engine {
         out
     }
 
+    /// eager shim
     pub fn class_igetattr(
         &self,
         cls: GNode,
@@ -346,163 +402,242 @@ impl Engine {
         ctx_in: Option<&Rc<Ctx>>,
         class_context: bool,
     ) -> Result<Flow, ErrKind> {
-        let ctx = copy_context(ctx_in);
-        ctx.lookupname.set(Some(name));
-        let metaclass = self.metaclass(cls, Some(&ctx));
-        match self.class_getattr(cls, name, Some(&ctx), class_context) {
-            Ok(mut attributes) => {
-                // same-scope filtering for multiple attributes
-                // (scoped_nodes.py:2426-2433); proxies resolve .parent via
-                // their wrapped function (Proxy.__getattr__)
-                if attributes.len() > 1 {
-                    let scope_of = |nv: &NV| -> Option<GNode> {
-                        match nv {
-                            NV::N(g) => self.parent(*g).map(|p| self.scope(p)),
-                            NV::V(Value::BoundMethod { func, .. })
-                            | NV::V(Value::UnboundMethod { func })
-                            | NV::V(Value::Property { func })
-                            | NV::V(Value::Partial { func, .. }) => {
-                                self.parent(*func).map(|p| self.scope(p))
-                            }
-                            NV::V(_) => None,
-                        }
-                    };
-                    let first_scope = scope_of(&attributes[0]);
-                    if first_scope.is_some() {
-                        let mut filtered = vec![attributes[0].clone()];
-                        for attr in &attributes[1..] {
-                            let s = scope_of(attr);
-                            if s == first_scope || s.is_none() {
-                                if s.is_some() {
-                                    filtered.push(attr.clone());
-                                } else if matches!(attr, NV::V(_)) {
-                                    // model values without parents: kept to
-                                    // avoid astroid's AttributeError path
-                                    filtered.push(attr.clone());
-                                }
-                            }
-                        }
-                        attributes = filtered;
-                    }
-                }
-                let functions: Vec<GNode> = attributes
-                    .iter()
-                    .filter_map(|a| match a {
-                        NV::N(g)
-                            if self.kind_is(*g, |k| {
-                                matches!(
-                                    k,
-                                    NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
-                                )
-                            }) =>
-                        {
-                            Some(*g)
-                        }
-                        _ => None,
-                    })
-                    .collect();
-                // setter scan
-                let mut setter: Option<GNode> = None;
-                'outer: for function in &functions {
-                    for dec_name in self.decoratornames(*function, Some(&ctx)).into_iter().flatten() {
-                        if dec_name.rsplit('.').next() == Some("setter") {
-                            setter = Some(*function);
-                            break 'outer;
-                        }
-                    }
-                }
-                if !functions.is_empty() {
-                    let last_function = *functions.last().unwrap();
-                    attributes.retain(|a| match a {
-                        NV::N(g) => {
-                            !functions.contains(g)
-                                || *g == last_function
-                                || self.is_property(*g, &copy_context(Some(&ctx)))
-                        }
-                        NV::V(_) => true,
-                    });
-                }
-                let inferred_flow = self.infer_stmts(&attributes, Some(&ctx), Some(cls));
-                let mut out: Vec<Value> = Vec::new();
-                for inferred in &inferred_flow.vals {
-                    let is_const = self.value_const(inferred).is_some();
-                    let is_instance = matches!(
-                        inferred,
-                        Value::Inst { .. }
-                            | Value::ExcInst { .. }
-                            | Value::SynthSeq { .. }
-                            | Value::SynthDict { .. }
-                            | Value::FrozenSet { .. }
-                            | Value::Generator { .. }
-                    ) || matches!(inferred, Value::Node(g)
-                        if self.kind_is(*g, |k| matches!(k,
-                            NodeKind::List{..} | NodeKind::Tuple{..} | NodeKind::Set{..} | NodeKind::Dict{..})));
-                    if !is_const && is_instance {
-                        // descriptor check: instance of a class with __get__
-                        if let Some(pcls) = self.proxied_class(inferred) {
-                            let get_sym = self.sym("__get__");
-                            if self.class_getattr(pcls, get_sym, Some(&ctx), true).is_ok() {
-                                out.push(Value::Uninferable);
-                            } else {
-                                out.push(inferred.clone());
-                            }
-                        } else {
-                            out.push(inferred.clone());
-                        }
-                    } else if let Value::Property { func } = inferred {
-                        if !class_context {
-                            if ctx.callcontext.borrow().is_none() && setter.is_none() {
-                                let args = self.func_arg_nodes(*func);
-                                *ctx.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
-                                    id: self.next_callctx_id(),
-                                    args: std::cell::RefCell::new(
-                                        args.into_iter().map(crate::value::NV::N).collect(),
-                                    ),
-                                    keywords: std::cell::RefCell::new(Vec::new()),
-                                    callee: std::cell::RefCell::new(Some(inferred.clone())),
-                                }));
-                            }
-                            let f = self.function_infer_call_result(*func, Some(cls), Some(&ctx));
-                            out.extend(f.vals);
-                        } else if metaclass.is_some() && {
-                            let fscope = self.parent(*func).map(|p| self.scope(p));
-                            match (&fscope, &metaclass) {
-                                (Some(fs), Some(Value::Node(mg))) => fs == mg,
-                                _ => false,
-                            }
-                        } {
-                            let f = self.function_infer_call_result(*func, Some(cls), Some(&ctx));
-                            out.extend(f.vals);
-                        } else {
-                            out.push(inferred.clone());
-                        }
-                    } else {
-                        out.push(self.function_to_method(inferred, cls));
-                    }
-                }
-                if let Some(e) = inferred_flow.err {
-                    if out.is_empty() {
-                        return self.class_igetattr_fallback(cls, name, &ctx, e);
-                    }
-                }
-                Ok(Flow::ok(out))
-            }
-            Err(e) => self.class_igetattr_fallback(cls, name, &ctx, e),
+        let mut vals = Vec::new();
+        let end = self.class_igetattr_to(cls, name, ctx_in, class_context, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        match end {
+            End::Raised(e) if vals.is_empty() => Err(e),
+            e => Ok(Flow {
+                vals,
+                err: e.err_opt(),
+            }),
         }
     }
 
-    fn class_igetattr_fallback(
+    /// next(cls.igetattr(name, ctx)) — single pull, abandoning the
+    /// generator (no cache writes for partially-evaluated attributes).
+    pub fn class_igetattr_first(
+        &self,
+        cls: GNode,
+        name: GSym,
+        ctx_in: Option<&Rc<Ctx>>,
+        class_context: bool,
+    ) -> Result<Option<Value>, ErrKind> {
+        let mut first: Option<Value> = None;
+        let end = {
+            let first = &mut first;
+            self.class_igetattr_to(cls, name, ctx_in, class_context, &mut |v| {
+                *first = Some(v);
+                Drive::Stop
+            })
+        };
+        match (first, end) {
+            (Some(v), _) => Ok(Some(v)),
+            (None, End::Raised(e)) => Err(e),
+            (None, _) => Ok(None),
+        }
+    }
+
+    pub fn class_igetattr_to(
+        &self,
+        cls: GNode,
+        name: GSym,
+        ctx_in: Option<&Rc<Ctx>>,
+        class_context: bool,
+        sink: &mut Sink,
+    ) -> End {
+        let ctx = copy_context(ctx_in);
+        ctx.lookupname.set(Some(name));
+        let metaclass = self.metaclass(cls, Some(&ctx));
+        let mut attributes = match self.class_getattr(cls, name, Some(&ctx), class_context) {
+            Ok(a) => a,
+            Err(e) => return self.class_igetattr_fallback_to(cls, name, &ctx, e, sink),
+        };
+        // same-scope filtering for multiple attributes
+        // (scoped_nodes.py:2426-2433); proxies resolve .parent via
+        // their wrapped function (Proxy.__getattr__)
+        if attributes.len() > 1 {
+            let scope_of = |nv: &NV| -> Option<GNode> {
+                match nv {
+                    NV::N(g) => self.parent(*g).map(|p| self.scope(p)),
+                    NV::V(Value::BoundMethod { func, .. })
+                    | NV::V(Value::UnboundMethod { func })
+                    | NV::V(Value::Property { func })
+                    | NV::V(Value::Partial { func, .. }) => {
+                        self.parent(*func).map(|p| self.scope(p))
+                    }
+                    NV::V(_) => None,
+                }
+            };
+            let first_scope = scope_of(&attributes[0]);
+            if first_scope.is_some() {
+                let mut filtered = vec![attributes[0].clone()];
+                for attr in &attributes[1..] {
+                    let s = scope_of(attr);
+                    if s == first_scope || s.is_none() {
+                        if s.is_some() {
+                            filtered.push(attr.clone());
+                        } else if matches!(attr, NV::V(_)) {
+                            // model values without parents: kept to
+                            // avoid astroid's AttributeError path
+                            filtered.push(attr.clone());
+                        }
+                    }
+                }
+                attributes = filtered;
+            }
+        }
+        let functions: Vec<GNode> = attributes
+            .iter()
+            .filter_map(|a| match a {
+                NV::N(g)
+                    if self.kind_is(*g, |k| {
+                        matches!(
+                            k,
+                            NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                        )
+                    }) =>
+                {
+                    Some(*g)
+                }
+                _ => None,
+            })
+            .collect();
+        // setter scan
+        let mut setter: Option<GNode> = None;
+        'outer: for function in &functions {
+            for dec_name in self.decoratornames(*function, Some(&ctx)).into_iter().flatten() {
+                if dec_name.rsplit('.').next() == Some("setter") {
+                    setter = Some(*function);
+                    break 'outer;
+                }
+            }
+        }
+        if !functions.is_empty() {
+            let last_function = *functions.last().unwrap();
+            attributes.retain(|a| match a {
+                NV::N(g) => {
+                    !functions.contains(g)
+                        || *g == last_function
+                        || self.is_property(*g, &copy_context(Some(&ctx)))
+                }
+                NV::V(_) => true,
+            });
+        }
+        // stream _infer_stmts, transforming per value
+        // (scoped_nodes.py:2452-2483)
+        let mut stopped = false;
+        let end = {
+            let stopped = &mut stopped;
+            let ctx = &ctx;
+            let metaclass = &metaclass;
+            let setter = &setter;
+            self.infer_stmts_to(&attributes, Some(ctx), Some(cls), &mut |inferred| {
+                let is_const = self.value_const(&inferred).is_some();
+                let is_instance = matches!(
+                    inferred,
+                    Value::Inst { .. }
+                        | Value::ExcInst { .. }
+                        | Value::SynthSeq { .. }
+                        | Value::SynthDict { .. }
+                        | Value::FrozenSet { .. }
+                        | Value::Generator { .. }
+                ) || matches!(&inferred, Value::Node(g)
+                    if self.kind_is(*g, |k| matches!(k,
+                        NodeKind::List{..} | NodeKind::Tuple{..} | NodeKind::Set{..} | NodeKind::Dict{..})));
+                let d = if !is_const && is_instance {
+                    // descriptor check: instance of a class with __get__
+                    if let Some(pcls) = self.proxied_class(&inferred) {
+                        let get_sym = self.sym("__get__");
+                        if self.class_getattr(pcls, get_sym, Some(ctx), true).is_ok() {
+                            sink(Value::Uninferable)
+                        } else {
+                            sink(inferred)
+                        }
+                    } else {
+                        sink(inferred)
+                    }
+                } else if let Value::Property { func } = &inferred {
+                    let func = *func;
+                    if !class_context {
+                        if ctx.callcontext.borrow().is_none() && setter.is_none() {
+                            let args = self.func_arg_nodes(func);
+                            *ctx.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
+                                id: self.next_callctx_id(),
+                                args: std::cell::RefCell::new(
+                                    args.into_iter().map(crate::value::NV::N).collect(),
+                                ),
+                                keywords: std::cell::RefCell::new(Vec::new()),
+                                callee: std::cell::RefCell::new(Some(inferred.clone())),
+                            }));
+                        }
+                        let mut inner_stop = false;
+                        let _ = self.function_infer_call_result_to(func, Some(cls), Some(ctx), &mut |v| {
+                            let d = sink(v);
+                            if let Drive::Stop = d {
+                                inner_stop = true;
+                            }
+                            d
+                        });
+                        if inner_stop {
+                            Drive::Stop
+                        } else {
+                            Drive::Go
+                        }
+                    } else if metaclass.is_some() && {
+                        let fscope = self.parent(func).map(|p| self.scope(p));
+                        match (&fscope, metaclass) {
+                            (Some(fs), Some(Value::Node(mg))) => fs == mg,
+                            _ => false,
+                        }
+                    } {
+                        let mut inner_stop = false;
+                        let _ = self.function_infer_call_result_to(func, Some(cls), Some(ctx), &mut |v| {
+                            let d = sink(v);
+                            if let Drive::Stop = d {
+                                inner_stop = true;
+                            }
+                            d
+                        });
+                        if inner_stop {
+                            Drive::Stop
+                        } else {
+                            Drive::Go
+                        }
+                    } else {
+                        sink(inferred)
+                    }
+                } else {
+                    sink(self.function_to_method(&inferred, cls))
+                };
+                if let Drive::Stop = d {
+                    *stopped = true;
+                }
+                d
+            })
+        };
+        if stopped {
+            return End::Stopped;
+        }
+        end
+    }
+
+    fn class_igetattr_fallback_to(
         &self,
         cls: GNode,
         name: GSym,
         ctx: &Rc<Ctx>,
         _e: ErrKind,
-    ) -> Result<Flow, ErrKind> {
+        sink: &mut Sink,
+    ) -> End {
         let name_str = self.sname(name);
         if !name_str.starts_with("__") && self.has_dynamic_getattr(cls, ctx) {
-            Ok(Flow::uninferable())
+            yield_v!(sink, Value::Uninferable);
+            End::Done
         } else {
-            Err(ErrKind::Inference)
+            End::Raised(ErrKind::Inference)
         }
     }
 
@@ -602,13 +737,35 @@ impl Engine {
         }
     }
 
-    /// BaseInstance.igetattr (bases.py:274-297)
+    /// eager shim
     pub fn instance_igetattr(
         &self,
         owner: &Value,
         name: GSym,
         ctx_in: Option<&Rc<Ctx>>,
     ) -> Result<Flow, ErrKind> {
+        let mut vals = Vec::new();
+        let end = self.instance_igetattr_to(owner, name, ctx_in, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        match end {
+            End::Raised(e) if vals.is_empty() => Err(e),
+            e => Ok(Flow {
+                vals,
+                err: e.err_opt(),
+            }),
+        }
+    }
+
+    /// BaseInstance.igetattr (bases.py:274-297)
+    pub fn instance_igetattr_to(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx_in: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
         let ctx = match ctx_in {
             Some(c) => Rc::clone(c),
             None => Ctx::new(),
@@ -616,93 +773,113 @@ impl Engine {
         ctx.lookupname.set(Some(name));
         match self.instance_getattr(owner, name, Some(&ctx), false) {
             Ok(attrs) => {
-                let wrapped = self.wrap_attrs(owner, attrs, &ctx);
-                let f = self.infer_stmts_wrapped(wrapped, &ctx, owner);
-                Ok(f)
+                // _infer_stmts(self._wrap_attr(get_attr, ...), ...) with a
+                // post-inference wrap (see wrap note below)
+                let mut stopped = false;
+                let end = {
+                    let stopped = &mut stopped;
+                    let ctx2 = Rc::clone(&ctx);
+                    self.infer_stmts_to(&attrs, Some(&ctx), None, &mut |v| {
+                        let d = self.wrap_value_to(owner, v, &ctx2, sink);
+                        if let Drive::Stop = d {
+                            *stopped = true;
+                        }
+                        d
+                    })
+                };
+                if stopped {
+                    return End::Stopped;
+                }
+                end
             }
             Err(_) => {
                 // fallback to class igetattr (descriptor logic)
                 let cls = match self.proxied_class(owner) {
                     Some(c) => c,
-                    None => return Err(ErrKind::Inference),
+                    None => return End::Raised(ErrKind::Inference),
                 };
-                match self.class_igetattr(cls, name, Some(&ctx), false) {
-                    Ok(flow) => {
-                        // _wrap_attr over inferred results
-                        let wrapped = self.wrap_values(owner, flow.vals, &ctx);
-                        Ok(Flow {
-                            vals: wrapped,
-                            err: flow.err,
-                        })
-                    }
-                    Err(_) => Err(ErrKind::Inference),
+                let mut stopped = false;
+                let mut any = false;
+                let end = {
+                    let stopped = &mut stopped;
+                    let any = &mut any;
+                    let ctx2 = Rc::clone(&ctx);
+                    self.class_igetattr_to(cls, name, Some(&ctx), false, &mut |v| {
+                        *any = true;
+                        let d = self.wrap_value_to(owner, v, &ctx2, sink);
+                        if let Drive::Stop = d {
+                            *stopped = true;
+                        }
+                        d
+                    })
+                };
+                if stopped {
+                    return End::Stopped;
+                }
+                match end {
+                    End::Raised(_) if !any => End::Raised(ErrKind::Inference),
+                    e => e,
                 }
             }
         }
     }
 
-    /// _wrap_attr (bases.py:299-315) over raw getattr nodes: applied via
-    /// _infer_stmts in astroid; we infer first then wrap, except properties.
-    fn infer_stmts_wrapped(&self, attrs: Vec<NV>, ctx: &Rc<Ctx>, owner: &Value) -> Flow {
-        let flow = self.infer_stmts(&attrs, Some(ctx), None);
-        let vals = self.wrap_values(owner, flow.vals, ctx);
-        Flow {
-            vals,
-            err: flow.err,
-        }
-    }
-
-    fn wrap_attrs(&self, _owner: &Value, attrs: Vec<NV>, _ctx: &Rc<Ctx>) -> Vec<NV> {
-        attrs
-    }
-
-    fn wrap_values(&self, owner: &Value, vals: Vec<Value>, ctx: &Rc<Ctx>) -> Vec<Value> {
-        let mut out = Vec::new();
-        for v in vals {
-            match &v {
-                Value::UnboundMethod { func } => {
-                    if self.is_property(*func, ctx) {
-                        let f = self.function_infer_call_result(*func, None, Some(ctx));
-                        out.extend(f.vals);
+    /// _wrap_attr (bases.py:299-315) applied per inferred value; streams
+    /// property call results.
+    fn wrap_value_to(&self, owner: &Value, v: Value, ctx: &Rc<Ctx>, sink: &mut Sink) -> Drive {
+        match &v {
+            Value::UnboundMethod { func } => {
+                if self.is_property(*func, ctx) {
+                    let mut stopped = false;
+                    let _ = self.function_infer_call_result_to(*func, None, Some(ctx), &mut |x| {
+                        let d = sink(x);
+                        if let Drive::Stop = d {
+                            stopped = true;
+                        }
+                        d
+                    });
+                    if stopped {
+                        Drive::Stop
                     } else {
-                        out.push(Value::BoundMethod {
-                            func: *func,
-                            bound: Rc::new(owner.clone()),
-                        });
+                        Drive::Go
                     }
+                } else {
+                    sink(Value::BoundMethod {
+                        func: *func,
+                        bound: Rc::new(owner.clone()),
+                    })
                 }
-                Value::Node(g)
-                    if self.kind_is(*g, |k| matches!(k, NodeKind::Lambda(_))) =>
-                {
-                    // bind lambdas whose first arg is literally `self`
-                    let md = self.md(g.m);
-                    let first_arg_self = match &md.tree.nodes[g.n.idx()].kind {
-                        NodeKind::Lambda(d) => match &md.tree.nodes[d.args.idx()].kind {
-                            NodeKind::Arguments(a) => a.args.first().map(|&arg| {
-                                match &md.tree.nodes[arg.idx()].kind {
-                                    NodeKind::AssignName { name } => {
-                                        md.tree.s(*name) == "self"
-                                    }
-                                    _ => false,
+            }
+            Value::Node(g)
+                if self.kind_is(*g, |k| matches!(k, NodeKind::Lambda(_))) =>
+            {
+                // bind lambdas whose first arg is literally `self`
+                let md = self.md(g.m);
+                let first_arg_self = match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Lambda(d) => match &md.tree.nodes[d.args.idx()].kind {
+                        NodeKind::Arguments(a) => a.args.first().map(|&arg| {
+                            match &md.tree.nodes[arg.idx()].kind {
+                                NodeKind::AssignName { name } => {
+                                    md.tree.s(*name) == "self"
                                 }
-                            }) == Some(true),
-                            _ => false,
-                        },
+                                _ => false,
+                            }
+                        }) == Some(true),
                         _ => false,
-                    };
-                    if first_arg_self {
-                        out.push(Value::BoundMethod {
-                            func: *g,
-                            bound: Rc::new(owner.clone()),
-                        });
-                    } else {
-                        out.push(v);
-                    }
+                    },
+                    _ => false,
+                };
+                if first_arg_self {
+                    sink(Value::BoundMethod {
+                        func: *g,
+                        bound: Rc::new(owner.clone()),
+                    })
+                } else {
+                    sink(v)
                 }
-                _ => out.push(v),
             }
+            _ => sink(v),
         }
-        out
     }
 
     fn instance_special_attr(
@@ -952,20 +1129,26 @@ impl Engine {
         }
     }
 
-    fn super_igetattr(&self, owner: &Value, name: GSym, ctx: Option<&Rc<Ctx>>) -> Result<Flow, ErrKind> {
+    fn super_igetattr_to(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
         let name_str = self.sname(name);
         let (mro_type, scope) = match owner {
             Value::Super { mro_type, scope, .. } => (Rc::clone(mro_type), *scope),
-            _ => return Err(ErrKind::Attribute),
+            _ => return End::Raised(ErrKind::Attribute),
         };
         if name_str == "__class__" {
-            return Ok(Flow::one(Value::Node(self.builtins().super_)));
+            yield_v!(sink, Value::Node(self.builtins().super_));
+            return End::Done;
         }
         let mro = match self.super_mro(owner) {
             Ok(m) => m,
-            Err(_) => return Err(ErrKind::Attribute),
+            Err(_) => return End::Raised(ErrKind::Attribute),
         };
-        let mut out: Vec<Value> = Vec::new();
         let mut found = false;
         for cls in mro {
             // objects.py:184-189: only cls[name] (the FIRST local) is
@@ -975,60 +1158,100 @@ impl Engine {
             found = true;
             let ctx2 = copy_context(ctx);
             ctx2.lookupname.set(Some(name));
-            let flow = self.infer_stmts(&[NV::N(first_loc)], Some(&ctx2), None);
-            for inferred in flow.vals {
-                match &inferred {
-                    Value::Node(g)
-                        if self.kind_is(*g, |k| {
-                            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
-                        }) =>
-                    {
-                        let ft = self.func_type(*g);
-                        let caller_is_classmethod =
-                            self.func_type(scope) == FType::ClassMethod;
-                        let class_based = matches!(
-                            &*mro_type,
-                            Value::Node(g2) if self.kind_is(*g2, |k| matches!(k, NodeKind::ClassDef(_)))
-                        );
-                        if ft == FType::ClassMethod {
-                            out.push(Value::BoundMethod {
-                                func: *g,
-                                bound: Rc::new(Value::Node(cls)),
-                            });
-                        } else if caller_is_classmethod && ft == FType::Method {
-                            out.push(inferred.clone());
-                        } else if class_based || ft == FType::StaticMethod {
-                            out.push(inferred.clone());
-                        } else if self.is_property(*g, &ctx2) {
-                            let f = self.function_infer_call_result(*g, None, ctx);
-                            if f.vals.is_empty() {
-                                out.push(Value::Uninferable);
+            let mut stopped = false;
+            let end = {
+                let stopped = &mut stopped;
+                let ctx3 = Rc::clone(&ctx2);
+                let mro_type = &mro_type;
+                self.infer_stmts_to(&[NV::N(first_loc)], Some(&ctx2), None, &mut |inferred| {
+                    let d = match &inferred {
+                        Value::Node(g)
+                            if self.kind_is(*g, |k| {
+                                matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                            }) =>
+                        {
+                            let ft = self.func_type(*g);
+                            let caller_is_classmethod =
+                                self.func_type(scope) == FType::ClassMethod;
+                            let class_based = matches!(
+                                &**mro_type,
+                                Value::Node(g2) if self.kind_is(*g2, |k| matches!(k, NodeKind::ClassDef(_)))
+                            );
+                            if ft == FType::ClassMethod {
+                                sink(Value::BoundMethod {
+                                    func: *g,
+                                    bound: Rc::new(Value::Node(cls)),
+                                })
+                            } else if caller_is_classmethod && ft == FType::Method {
+                                sink(inferred.clone())
+                            } else if class_based || ft == FType::StaticMethod {
+                                sink(inferred.clone())
+                            } else if self.is_property(*g, &ctx3) {
+                                let mut any = false;
+                                let mut inner_stop = false;
+                                let _ = self.function_infer_call_result_to(*g, None, ctx, &mut |x| {
+                                    any = true;
+                                    let d = sink(x);
+                                    if let Drive::Stop = d {
+                                        inner_stop = true;
+                                    }
+                                    d
+                                });
+                                if inner_stop {
+                                    Drive::Stop
+                                } else if !any {
+                                    sink(Value::Uninferable)
+                                } else {
+                                    Drive::Go
+                                }
                             } else {
-                                out.extend(f.vals);
+                                sink(Value::BoundMethod {
+                                    func: *g,
+                                    bound: Rc::new(Value::Node(cls)),
+                                })
                             }
-                        } else {
-                            out.push(Value::BoundMethod {
-                                func: *g,
-                                bound: Rc::new(Value::Node(cls)),
+                        }
+                        Value::Property { func } => {
+                            let func = *func;
+                            let mut any = false;
+                            let mut inner_stop = false;
+                            let _ = self.function_infer_call_result_to(func, None, ctx, &mut |x| {
+                                any = true;
+                                let d = sink(x);
+                                if let Drive::Stop = d {
+                                    inner_stop = true;
+                                }
+                                d
                             });
+                            if inner_stop {
+                                Drive::Stop
+                            } else if !any {
+                                sink(Value::Uninferable)
+                            } else {
+                                Drive::Go
+                            }
                         }
+                        _ => sink(inferred),
+                    };
+                    if let Drive::Stop = d {
+                        *stopped = true;
                     }
-                    Value::Property { func } => {
-                        let f = self.function_infer_call_result(*func, None, ctx);
-                        if f.vals.is_empty() {
-                            out.push(Value::Uninferable);
-                        } else {
-                            out.extend(f.vals);
-                        }
-                    }
-                    _ => out.push(inferred),
+                    d
+                })
+            };
+            if stopped {
+                return End::Stopped;
+            }
+            if let End::Raised(e) = end {
+                if !e.is_inference() {
+                    return End::Raised(e);
                 }
             }
         }
         if !found {
-            return Err(ErrKind::Attribute);
+            return End::Raised(ErrKind::Attribute);
         }
-        Ok(Flow::ok(out))
+        End::Done
     }
 
     // ---------- MRO / ancestors (§13) ----------
@@ -1237,8 +1460,22 @@ impl Engine {
             _ => None,
         }?;
         let c = copy_context(ctx);
-        let flow = self.infer(GNode { m: cls.m, n: meta }, &c);
-        flow.vals.into_iter().find(|v| !v.is_uninferable())
+        // next(node for node in infer() if not Uninferable) — pulls until
+        // the first non-Uninferable value, then abandons the generator
+        // (scoped_nodes.py:2640-2648).
+        let mut found: Option<Value> = None;
+        let _ = {
+            let found = &mut found;
+            self.infer_to(GNode { m: cls.m, n: meta }, &c, &mut |v| {
+                if v.is_uninferable() {
+                    Drive::Go
+                } else {
+                    *found = Some(v);
+                    Drive::Stop
+                }
+            })
+        };
+        found
     }
 
     pub fn metaclass(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Option<Value> {
@@ -1365,9 +1602,9 @@ impl Engine {
             let ctx = Ctx::new();
             if let NodeKind::Call { func: cf, .. } = &md.tree.nodes[dn.idx()].kind {
                 let cg = GNode { m: func.m, n: *cf };
-                let f = self.infer(cg, &ctx);
-                if let Some(current) = f.vals.first() {
-                    if let Some(t) = self.infer_decorator_callchain(current) {
+                // next(node.func.infer()) — single pull
+                if let Ok(Some(current)) = self.first_value(cg, &ctx) {
+                    if let Some(t) = self.infer_decorator_callchain(&current) {
                         return t;
                     }
                 }
@@ -1413,8 +1650,12 @@ impl Engine {
             }
             _ => return None,
         };
-        let flow = self.function_infer_call_result(func, None, None);
-        let result = flow.vals.first()?;
+        // next(node.infer_call_result(caller=None), None) — single pull
+        let result = self
+            .infer_call_result_first(&Value::Node(func), None, None)
+            .ok()
+            .flatten()?;
+        let result = &result;
         let rescls = match result {
             Value::Inst { cls } | Value::ExcInst { cls, .. } => Some(*cls),
             Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) => Some(*g),

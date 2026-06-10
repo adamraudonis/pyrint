@@ -173,6 +173,34 @@ impl ErrKind {
     }
 }
 
+/// Consumer's instruction to a streaming producer. `Stop` mirrors a Python
+/// consumer dropping a suspended generator (`next()` then abandon): the
+/// producer must unwind immediately — code "after the yield" (counter
+/// bumps, cache writes) must NOT run.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Drive {
+    Go,
+    Stop,
+}
+
+/// How a streaming producer ended: clean StopIteration, consumer
+/// abandonment, or a raised exception.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum End {
+    Done,
+    Stopped,
+    Raised(ErrKind),
+}
+
+impl End {
+    pub fn err_opt(self) -> Option<ErrKind> {
+        match self {
+            End::Raised(e) => Some(e),
+            _ => None,
+        }
+    }
+}
+
 /// Result of running a Python generator eagerly: the values yielded before
 /// termination plus the exception (if any) that ended it. `err: None` means
 /// clean StopIteration.

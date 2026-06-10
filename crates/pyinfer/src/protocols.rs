@@ -9,7 +9,9 @@ use pyast::NodeId;
 
 use crate::ctx::{bind_context_to_node, copy_context, CallCtx, Ctx};
 use crate::graph::Engine;
-use crate::value::{ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
+use crate::infer::Sink;
+use crate::yield_v;
+use crate::value::{Drive, End, ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
 
 impl Engine {
     // ================= assigned_stmts =================
@@ -390,8 +392,12 @@ impl Engine {
 
     /// _infer_context_manager (protocols.py:567-602)
     fn infer_context_manager(&self, mgr: GNode, ctx: &Rc<Ctx>) -> Result<Vec<NV>, ErrKind> {
-        let flow = self.infer(mgr, ctx);
-        let inferred = flow.vals.first().cloned().ok_or(ErrKind::Inference)?;
+        // next(mgr.infer(context)) — single pull
+        let inferred = self
+            .first_value(mgr, ctx)
+            .ok()
+            .flatten()
+            .ok_or(ErrKind::Inference)?;
         match &inferred {
             Value::Generator { func, .. } => {
                 // only contextlib.contextmanager-decorated generators
@@ -409,9 +415,11 @@ impl Engine {
                 };
                 let mut is_cm = false;
                 for dn in dec_nodes {
-                    let f = self.infer(GNode { m: func.m, n: dn }, &Ctx::new());
-                    if let Some(first) = f.vals.first() {
-                        if self.value_qname(first).as_deref() == Some("contextlib.contextmanager") {
+                    // next(decorator_node.infer(context), None) — single pull
+                    if let Ok(Some(first)) =
+                        self.first_value(GNode { m: func.m, n: dn }, &copy_context(Some(ctx)))
+                    {
+                        if self.value_qname(&first).as_deref() == Some("contextlib.contextmanager") {
                             is_cm = true;
                             break;
                         }
@@ -429,10 +437,12 @@ impl Engine {
             }
             Value::Inst { .. } | Value::ExcInst { .. } => {
                 let enter_sym = self.sym("__enter__");
-                let f = self
-                    .igetattr_value(&inferred, enter_sym, Some(ctx))
-                    .map_err(|_| ErrKind::Inference)?;
-                let enter = f.vals.first().cloned().ok_or(ErrKind::Inference)?;
+                // next(inferred.igetattr("__enter__", context)) — single pull
+                let enter = self
+                    .igetattr_first(&inferred, enter_sym, Some(ctx))
+                    .ok()
+                    .flatten()
+                    .ok_or(ErrKind::Inference)?;
                 match &enter {
                     Value::BoundMethod { func, .. } => {
                         let res = self.function_infer_call_result(*func, None, Some(ctx));
@@ -662,10 +672,10 @@ impl Engine {
                 if starred_count > 1 {
                     return Err(ErrKind::Inference);
                 }
-                let rhs_flow = self.infer(GNode { m: stmt.m, n: *value }, &c);
-                let rhs = match rhs_flow.vals.first() {
-                    Some(v) => v.clone(),
-                    None => return Ok(vec![NV::V(Value::Uninferable)]),
+                // rhs = next(value.infer(context)) — single pull
+                let rhs = match self.first_value(GNode { m: stmt.m, n: *value }, &c) {
+                    Ok(Some(v)) => v,
+                    _ => return Ok(vec![NV::V(Value::Uninferable)]),
                 };
                 let elts = match self.value_itered(&rhs) {
                     Some(e) => e,
@@ -702,10 +712,10 @@ impl Engine {
                 Ok(vec![NV::V(Value::Uninferable)])
             }
             NodeKind::For(d) => {
-                let iter_flow = self.infer(GNode { m: stmt.m, n: d.iter }, &c);
-                let inferred_iterable = match iter_flow.vals.first() {
-                    Some(v) => v.clone(),
-                    None => return Ok(vec![NV::V(Value::Uninferable)]),
+                // next(self.iter.infer(context)) — single pull
+                let inferred_iterable = match self.first_value(GNode { m: stmt.m, n: d.iter }, &c) {
+                    Ok(Some(v)) => v,
+                    _ => return Ok(vec![NV::V(Value::Uninferable)]),
                 };
                 let itered = match self.value_itered(&inferred_iterable) {
                     Some(i) => i,
@@ -843,72 +853,136 @@ impl Engine {
 
     // ================= Subscript (§15) =================
 
+    /// eager shim (infer_lhs path)
     pub fn infer_subscript(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
+        let mut vals = Vec::new();
+        let end = self.infer_subscript_to(node, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        Flow {
+            vals,
+            err: end.err_opt(),
+        }
+    }
+
+    /// Subscript._infer_subscript (node_classes.py:3729-3795), streaming.
+    pub fn infer_subscript_to(&self, node: GNode, ctx: &Rc<Ctx>, sink: &mut Sink) -> End {
         let md = self.md(node.m);
         let (value, slice) = match &md.tree.nodes[node.n.idx()].kind {
             NodeKind::Subscript { value, slice, .. } => (
                 GNode { m: node.m, n: *value },
                 GNode { m: node.m, n: *slice },
             ),
-            _ => return Flow::err(ErrKind::Inference),
+            _ => return End::Raised(ErrKind::Inference),
         };
-        let mut out: Vec<Value> = Vec::new();
-        let values = self.infer(value, ctx);
-        for val in &values.vals {
-            if val.is_uninferable() {
-                out.push(Value::Uninferable);
-                return Flow::ok(out);
-            }
-            let indexes = self.infer(slice, ctx);
-            for index in &indexes.vals {
-                if index.is_uninferable() {
-                    out.push(Value::Uninferable);
-                    return Flow::ok(out);
+        // outcome of the whole generator decided inside the nested pulls
+        let mut finished = false; // yielded U + `return` (abandons outer)
+        let mut raised: Option<ErrKind> = None;
+        let mut stopped = false;
+        let end = {
+            let finished = &mut finished;
+            let raised = &mut raised;
+            let stopped = &mut stopped;
+            self.infer_to(value, ctx, &mut |val| {
+                if val.is_uninferable() {
+                    let _ = sink(Value::Uninferable);
+                    *finished = true;
+                    return Drive::Stop;
                 }
-                // determine index value
-                let index_value: Value = if matches!(val, Value::Inst { .. }) {
-                    // exact-class Instance: raw index NODE
-                    Value::Node(slice)
-                } else if matches!(index, Value::Inst { .. }) {
-                    match self.class_instance_as_index(index) {
-                        Some(v) => v,
-                        None => return Flow { vals: out, err: Some(ErrKind::Inference) },
-                    }
-                } else {
-                    index.clone()
-                };
-                let assigned = match self.getitem(val, &index_value, ctx) {
-                    Ok(nv) => nv,
-                    Err(_) => return Flow { vals: out, err: Some(ErrKind::Inference) },
-                };
-                match &assigned {
-                    NV::N(g) if *g == node => {
-                        out.push(Value::Uninferable);
-                        return Flow::ok(out);
-                    }
-                    NV::V(Value::Uninferable) => {
-                        out.push(Value::Uninferable);
-                        return Flow::ok(out);
-                    }
-                    _ => {
-                        let f = self.infer_nv(&assigned, ctx);
-                        out.extend(f.vals);
-                        if let Some(e) = f.err {
-                            if !e.is_inference() {
-                                return Flow { vals: out, err: Some(e) };
+                // inner: self.slice.infer(context), pulled per value
+                let inner_end = {
+                    let finished = &mut *finished;
+                    let raised = &mut *raised;
+                    let stopped = &mut *stopped;
+                    let val = &val;
+                    self.infer_to(slice, ctx, &mut |index| {
+                        if index.is_uninferable() {
+                            let _ = sink(Value::Uninferable);
+                            *finished = true;
+                            return Drive::Stop;
+                        }
+                        // determine index value
+                        let index_value: Value = if matches!(val, Value::Inst { .. }) {
+                            // exact-class Instance: raw index NODE
+                            Value::Node(slice)
+                        } else if matches!(index, Value::Inst { .. }) {
+                            match self.class_instance_as_index(&index) {
+                                Some(v) => v,
+                                None => {
+                                    *raised = Some(ErrKind::Inference);
+                                    return Drive::Stop;
+                                }
+                            }
+                        } else {
+                            index.clone()
+                        };
+                        let assigned = match self.getitem(val, &index_value, ctx) {
+                            Ok(nv) => nv,
+                            Err(_) => {
+                                *raised = Some(ErrKind::Inference);
+                                return Drive::Stop;
+                            }
+                        };
+                        match &assigned {
+                            NV::N(g) if *g == node => {
+                                let _ = sink(Value::Uninferable);
+                                *finished = true;
+                                Drive::Stop
+                            }
+                            NV::V(Value::Uninferable) => {
+                                let _ = sink(Value::Uninferable);
+                                *finished = true;
+                                Drive::Stop
+                            }
+                            _ => {
+                                // yield from assigned.infer(context) — errors
+                                // propagate (no try in astroid)
+                                let mut inner_stop = false;
+                                let e = self.infer_nv_to(&assigned, ctx, &mut |v| {
+                                    let d = sink(v);
+                                    if let Drive::Stop = d {
+                                        inner_stop = true;
+                                    }
+                                    d
+                                });
+                                if inner_stop {
+                                    *stopped = true;
+                                    return Drive::Stop;
+                                }
+                                match e {
+                                    End::Raised(err) => {
+                                        *raised = Some(err);
+                                        Drive::Stop
+                                    }
+                                    _ => Drive::Go,
+                                }
                             }
                         }
-                    }
+                    })
+                };
+                if *finished || *stopped || raised.is_some() {
+                    return Drive::Stop;
                 }
-            }
-            if let Some(e) = indexes.err {
-                return Flow { vals: out, err: Some(e) };
-            }
+                match inner_end {
+                    End::Raised(e) => {
+                        *raised = Some(e);
+                        Drive::Stop
+                    }
+                    _ => Drive::Go,
+                }
+            })
+        };
+        if stopped {
+            return End::Stopped;
         }
-        if let Some(e) = values.err {
-            return Flow { vals: out, err: Some(e) };
+        if finished {
+            return End::Done;
         }
-        Flow::ok(out)
+        if let Some(e) = raised {
+            return End::Raised(e);
+        }
+        end
     }
 
     /// helpers.class_instance_as_index
@@ -1164,10 +1238,12 @@ impl Engine {
     fn instance_getitem(&self, instance: &Value, index: &Value, ctx: &Rc<Ctx>) -> Result<NV, ErrKind> {
         let new_ctx = bind_context_to_node(Some(ctx), instance.clone());
         let sym = self.sym("__getitem__");
-        let flow = self
-            .igetattr_value(instance, sym, Some(&new_ctx))
-            .map_err(|_| ErrKind::Inference)?;
-        let method = flow.vals.first().cloned().ok_or(ErrKind::Inference)?;
+        // method = next(self.igetattr("__getitem__", context)) — single pull
+        let method = self
+            .igetattr_first(instance, sym, Some(&new_ctx))
+            .ok()
+            .flatten()
+            .ok_or(ErrKind::Inference)?;
         let func = match &method {
             Value::BoundMethod { func, .. } => *func,
             _ => return Err(ErrKind::Inference),
@@ -1184,7 +1260,15 @@ impl Engine {
             keywords: RefCell::new(Vec::new()),
             callee: RefCell::new(Some(method.clone())),
         }));
-        let res = self.infer_call_result(&method, None, Some(&new_ctx));
+        let res = Flow {
+            vals: self
+                .infer_call_result_first(&method, None, Some(&new_ctx))
+                .ok()
+                .flatten()
+                .into_iter()
+                .collect(),
+            err: None,
+        };
         match res.vals.into_iter().next() {
             Some(v) => Ok(NV::V(v)),
             None => Ok(NV::V(Value::Uninferable)),
@@ -1227,11 +1311,12 @@ impl Engine {
             keywords: RefCell::new(Vec::new()),
             callee: RefCell::new(Some(Value::Node(method))),
         }));
-        let res = self.infer_call_result(&Value::Node(method), None, Some(&new_ctx));
-        if res.vals.is_empty() {
-            return Ok(NV::V(Value::Uninferable));
+        // next(methods[0].infer_call_result(self, ctx), ...) — single pull;
+        // InferenceError -> Uninferable (scoped_nodes.py:2575-2590)
+        match self.infer_call_result_first(&Value::Node(method), None, Some(&new_ctx)) {
+            Ok(Some(v)) => Ok(NV::V(v)),
+            _ => Ok(NV::V(Value::Uninferable)),
         }
-        Ok(NV::V(res.vals[0].clone()))
     }
 
     /// slice value of an index (Slice node / SynthSlice)
@@ -1589,11 +1674,12 @@ impl Engine {
                 return Ok(self.infer_old_style_string_formatting(&fmt, other, &context));
             }
         }
+        // inferred = next(method.infer(context)) — single pull
+        // (_base_nodes.py:404-409)
         let inferred = self
-            .infer(method, &context)
-            .vals
-            .first()
-            .cloned()
+            .first_value(method, &context)
+            .ok()
+            .flatten()
             .ok_or(ErrKind::Inference)?;
         if inferred.is_uninferable() {
             return Err(ErrKind::Inference);
@@ -1905,8 +1991,11 @@ impl Engine {
                         out.push(Value::Uninferable);
                         continue;
                     };
-                    let f = self.infer(meth, &copy_context(Some(ctx)));
-                    let Some(inferred) = f.vals.first().cloned() else { continue };
+                    // inferred = next(meth.infer()) — single pull
+                    let Ok(Some(inferred)) = self.first_value(meth, &copy_context(Some(ctx)))
+                    else {
+                        continue;
+                    };
                     if inferred.is_uninferable() || !self.value_callable(&inferred, ctx) {
                         continue;
                     }
@@ -1917,10 +2006,12 @@ impl Engine {
                         keywords: RefCell::new(Vec::new()),
                         callee: RefCell::new(Some(inferred.clone())),
                     }));
-                    let res = self.infer_call_result(&inferred, None, Some(&c2));
-                    match res.vals.into_iter().next() {
-                        None => out.push(operand_v.clone()),
-                        Some(r) => out.push(r),
+                    // result = next(inferred.infer_call_result(self, ctx), None)
+                    match self.infer_call_result_first(&inferred, None, Some(&c2)) {
+                        Ok(Some(r)) => out.push(r),
+                        Ok(None) => out.push(operand_v.clone()),
+                        Err(e) if e.is_inference() => out.push(Value::Uninferable),
+                        Err(_) => out.push(Value::Uninferable),
                     }
                 }
             }

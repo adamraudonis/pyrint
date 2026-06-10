@@ -77,8 +77,11 @@ fn const_value(v: &J) -> ConstValue {
                 .map(|a| a.iter().filter_map(|x| x.as_u64().map(|b| b as u8)).collect())
                 .unwrap_or_default(),
         ),
-        // "frozenset" / "tuple" / "other": value lost; treat as Ellipsis-ish
-        // marker. None appear in the current snapshots (census-verified).
+        // "other": only builtins.NotImplemented in the current snapshots
+        // (census-verified) — load-bearing for the binary-operator
+        // NotImplemented protocol (_base_nodes.py:646-655).
+        "other" if v["repr"].as_str() == Some("NotImplemented") => ConstValue::NotImplemented,
+        // "frozenset" / "tuple": value lost; none appear in the snapshots.
         _ => ConstValue::None,
     }
 }
