@@ -693,11 +693,14 @@ impl Engine {
         for elt in &base_elts {
             let first = match elt {
                 NV::N(g) => {
+                    // `next(base.infer(context=context), None)` — a SINGLE
+                    // abandoned pull (scoped_nodes.py:2049): no bump, no
+                    // cache write
                     let c = match ctx {
                         Some(c) => Rc::clone(c),
                         None => Ctx::new(),
                     };
-                    self.infer(*g, &c).vals.into_iter().next()
+                    self.first_value(*g, &c).ok().flatten()
                 }
                 NV::V(v) => Some(v.clone()),
             };
