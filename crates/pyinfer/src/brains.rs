@@ -1110,11 +1110,10 @@ impl Engine {
             NodeKind::Subscript { value, .. } => GNode { m: node.m, n: *value },
             _ => return None,
         };
-        let first = self
-            .infer(value, &Ctx::new())
-            .vals
-            .first()
-            .cloned()?;
+        // brain_typing.py:151 `value = next(node.value.infer())` — fresh
+        // context, SINGLE pull (the suspended chain is abandoned: no cache
+        // writes for the value Name)
+        let first = self.infer_first_fresh(value).ok().flatten()?;
         let q = self.value_qname(&first)?;
         if !q.starts_with("typing.") || TYPING_ALIAS_QNAMES.contains(&q.as_str()) {
             return None;

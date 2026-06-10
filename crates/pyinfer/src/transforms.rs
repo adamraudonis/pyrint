@@ -767,6 +767,144 @@ impl Engine {
         "attrs.s",
     ];
 
+    const NEW_ATTRS_NAMES: [&'static str; 3] = ["attrs.define", "attrs.mutable", "attrs.frozen"];
+
+    const ATTRIB_NAMES: [&'static str; 7] = [
+        "attr.Factory",
+        "attr.ib",
+        "attrib",
+        "attr.attrib",
+        "attr.field",
+        "attrs.field",
+        "field",
+    ];
+
+    /// brain_attrs.attr_attributes_transform (brain_attrs.py:65-107):
+    /// rewrite attrs class attributes as instance attributes — fresh
+    /// Unknown placeholders (parent = the body statement, via reparents)
+    /// REPLACE both locals[name] and instance_attrs[name].
+    fn apply_attrs_transform(&self, node: GNode) {
+        let md = self.md(node.m);
+        // node.locals["__attrs_attrs__"] = [Unknown(parent=node)]
+        {
+            let ph = self.alloc_placeholders(1)[0];
+            self.reparents.borrow_mut().insert(ph, node);
+            let sym = self.sym("__attrs_attrs__");
+            md.locals
+                .borrow_mut()
+                .entry(node.n)
+                .or_default()
+                .insert(sym, vec![ph]);
+        }
+        // use_bare_annotations = is_decorated_with_attrs(node, NEW_ATTRS_NAMES)
+        // (re-runs the decorator scan incl. safe_infer side effects)
+        let use_bare_annotations = {
+            let mut m = false;
+            for dec in self.decorator_nodes(node) {
+                let target = match self.call_func(dec) {
+                    Some(f) => f,
+                    None => dec,
+                };
+                if let Some(ds) = self.dotted_string(target) {
+                    if Self::NEW_ATTRS_NAMES.contains(&ds.as_str()) {
+                        m = true;
+                        break;
+                    }
+                }
+                let v = self.safe_infer(target, &Ctx::new());
+                if let Some(Value::Node(ng)) = &v {
+                    if self.kind_is(*ng, |k| {
+                        matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                    }) && self.md(ng.m).name == "attr._next_gen"
+                    {
+                        m = true;
+                        break;
+                    }
+                }
+            }
+            m
+        };
+        let body: Vec<NodeId> = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::ClassDef(d) => d.body.clone(),
+            _ => return,
+        };
+        for stmt in body {
+            let (targets, value, annotation): (Vec<NodeId>, Option<NodeId>, Option<NodeId>) =
+                match &md.tree.nodes[stmt.idx()].kind {
+                    NodeKind::Assign { targets, value, .. } => {
+                        (targets.clone(), Some(*value), None)
+                    }
+                    NodeKind::AnnAssign {
+                        target,
+                        value,
+                        annotation,
+                        ..
+                    } => (vec![*target], *value, Some(*annotation)),
+                    _ => continue,
+                };
+            // value Call -> func name must be an attrib constructor
+            let value_is_call = value
+                .map(|v| matches!(md.tree.nodes[v.idx()].kind, NodeKind::Call { .. }))
+                .unwrap_or(false);
+            if value_is_call {
+                let func = match &md.tree.nodes[value.unwrap().idx()].kind {
+                    NodeKind::Call { func, .. } => GNode { m: node.m, n: *func },
+                    _ => continue,
+                };
+                match self.dotted_string(func) {
+                    Some(fs) if Self::ATTRIB_NAMES.contains(&fs.as_str()) => {}
+                    _ => continue,
+                }
+            } else if !use_bare_annotations {
+                continue;
+            }
+            // skip ClassVar-annotated attributes (brain/helpers.is_class_var:
+            // next(node.infer()) — fresh single pull; name == "ClassVar")
+            if let Some(ann) = annotation {
+                let ag = GNode { m: node.m, n: ann };
+                let is_cv = match self.infer_first_fresh(ag) {
+                    Ok(Some(v)) => {
+                        let nm = match &v {
+                            Value::Node(g) => self.node_name(*g),
+                            other => self
+                                .proxied_class(other)
+                                .and_then(|c| self.node_name(c)),
+                        };
+                        nm.as_deref() == Some("ClassVar")
+                    }
+                    _ => false,
+                };
+                if is_cv {
+                    continue;
+                }
+            }
+            for t in targets {
+                let tg = GNode { m: node.m, n: t };
+                let tname = match &md.tree.nodes[t.idx()].kind {
+                    NodeKind::AssignName { name } => *name,
+                    _ => continue,
+                };
+                let _ = tg;
+                let ph = self.alloc_placeholders(1)[0];
+                // Unknown(parent=cdef_body_node)
+                self.reparents
+                    .borrow_mut()
+                    .insert(ph, GNode { m: node.m, n: stmt });
+                let gsym = self.sym(md.tree.s(tname));
+                md.locals
+                    .borrow_mut()
+                    .entry(node.n)
+                    .or_default()
+                    .insert(gsym, vec![ph]);
+                self.iattrs
+                    .borrow_mut()
+                    .entry(node)
+                    .or_default()
+                    .insert(gsym, vec![ph]);
+            }
+        }
+    }
+
     /// ClassDef transform chain in EXACT astroid registration order with
     /// the transforms.py:60-78 break rule: an APPLIED transform whose
     /// return value's class differs from ClassDef (incl. the common
@@ -803,8 +941,9 @@ impl Engine {
                 }
             }
             if matched {
-                // attr_attributes_transform mutations not ported (no attrs
-                // usage resolves in the pinned corpora venv); returns None
+                // attr_attributes_transform (brain_attrs.py:65-107):
+                // returns None -> BREAK, no wipe
+                self.apply_attrs_transform(g);
                 return;
             }
         }
