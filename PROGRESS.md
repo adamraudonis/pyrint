@@ -220,6 +220,59 @@ pylint behavior — bugs are replicated.
      temporary_class — side tables exist, call-result synthesis not wired);
      subprocess/multiprocessing brains; recursion guard still 350 (no
      probe-detected divergence this round).
+   - **phase 4 (diff-reduction round 3, N=200)**: 4.2k -> 3.25k diff lines.
+     LANDED (all probe-verified in harness/infertests/): (a) stdlib
+     module-extender brains via EXACT generated templates
+     (harness/gen_ext_templates.py captures the post-dedent sources the
+     pinned brains pass to parse() -> crates/pyinfer/src/ext_templates.rs):
+     subprocess/hashlib/ssl/signal/re/http/http.client/threading/crypt/
+     unittest + multiprocessing(.managers) — the mp probe instantiates
+     DefaultContext()/BaseContext() and appends public context-class
+     FunctionDefs as BoundMethod VALUES into module locals
+     (Module.ext_locals consulted by module_getattr; brain_multiprocessing
+     .py:31-48 set_local=append semantics); (b) brain_re Pattern/Match
+     Call tip (fresh ClassDef w/ __class_getitem__ per inference); (c)
+     ClassDef.implicit_locals() (scoped_nodes.py:1911-1933): every
+     non-snapshot class lazily gets __module__/__qualname__ Const +
+     __annotations__ Unknown FIRST in locals (construction-time values;
+     synth Const/Unknown nodes + implicit_owner side map feeds the
+     igetattr same-scope filter; snapshot classes already carry them);
+     (d) f-string format(obj,'') folds ALL results via str(obj):
+     NodeNG.__str__ pprint emulation (Dict/List/Tuple/Set/FrozenSet +
+     synthetic values; fake ids sized like CPython's so pprint wrapping
+     matches — ids virtually never inside the 40-char dump window),
+     Instance/Generator/UnionType/Bound-UnboundMethod reprs; (e)
+     property(...) tip Property named '<property>' under SYNTHETIC_ROOT;
+     (f) brain_argparse Namespace tip (EmptyNode instance_attrs); (g)
+     functools LruWrappedModel (__wrapped__/cache_clear/cache_info); (h)
+     exact _infer_old_style_string_formatting branches (safe-inferred
+     tuple elements, non-all-Const -> fmt % None fold, dict mapping) and
+     a REAL printf-directive parser (%(key), flags -+0#space, width,
+     .prec, s/r/d/i/u/x/X/o/f/F/c) — uuid4().hex now folds to '0'*32 via
+     brain_uuid locals['int']=Const(0); (i) isinstance/issubclass accepts
+     binop-synthetic Tuples (per-element single pull); (j) brain_typing
+     PEP695 __class_getitem__ ClassDef tip (type_params classes, + scan
+     wipe); (k) for_assigned_stmts propagates the raised error KIND when
+     the iterable yields nothing (NameInferenceError reaches _infer_stmts
+     -> silent skip -> Name ERR; genexp-in-class-scope).
+     N=200 differing files/lines: django 33/475, pylfunc 8/20, pandas
+     86/1725, salt 53/699, airflow 34/227, sentry 15/57, core 22/50.
+     REMAINING (by volume): (1) counter/cache-dynamics drift — pandas core
+     (frame/managers/series/blocks ~1.4k), django test clusters (~450),
+     salt (ipaddress/git_pillar/zypper/nxos ~650), airflow mock clusters
+     (~200). Concrete traced instance: during lazily-built stdlib module
+     transform scans our base-Name cache pulls/wipes land in a different
+     ORDER than astroid (extra full re-infer of e.g. Name Awaitable around
+     the _collections_abc scan; salt.utils.data.decode counts ##118 vs GT
+     ##120 -> 100-cap truncation flips downstream values). Tooling: the GT
+     tracer /tmp/trace_infer_gt.py (NodeNG.infer monkeypatch) diffs
+     structurally against PRYLINT_TRACE_INFER. (2) pylfunc leftovers (20
+     lines): os.environ GT-env noise (4, irreducible), tokenize_error
+     NOTREE (6 — ruff rejects trailing backslash-EOF CPython accepts;
+     tree-fidelity owns), FunctionModel attr___get__ descriptor model (6),
+     no_member_augassign (2), __code__ Unknown (2). (3) six.with_metaclass
+     call-result synthesis still unwired (~20 lines). (4) recursion guard
+     350 — no probe-detected divergence this round.
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the
