@@ -340,7 +340,16 @@ impl Engine {
             NodeKind::AsyncFunctionDef(_)
         );
         if self.is_generator(func) {
-            yield_v!(sink, Value::Generator { func, is_async });
+            // bases.Generator.__init__ captures copy_context(context) as
+            // _call_context (bases.py:698); a fresh object per call
+            yield_v!(
+                sink,
+                Value::Generator {
+                    func,
+                    is_async,
+                    call_ctx: copy_context(Some(&ctx)),
+                }
+            );
             return End::Done;
         }
         // NOTE: the six `with_metaclass` hack (scoped_nodes.py:1577-1615)

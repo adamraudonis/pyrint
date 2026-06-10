@@ -174,6 +174,117 @@ class {0}(metaclass=Meta):
     pass
 ";
 
+/// Container classes appearing in the klass/iterables parameters of the
+/// _infer_builtin_container partials (brain_builtin_inference.py:319-360).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum ContClass {
+    List,
+    Tuple,
+    Set,
+    Frozen,
+    DictItems,
+    DictKeys,
+    DictValues,
+}
+
+/// the `iterables` whitelist per builtin (brain_builtin_inference.py:319-360)
+fn cont_iterables(klass: ContClass) -> &'static [ContClass] {
+    match klass {
+        // tuple: List, Set, FrozenSet, DictItems, DictKeys, DictValues
+        ContClass::Tuple => &[
+            ContClass::List,
+            ContClass::Set,
+            ContClass::Frozen,
+            ContClass::DictItems,
+            ContClass::DictKeys,
+            ContClass::DictValues,
+        ],
+        // list: Tuple, Set, FrozenSet, DictItems, DictKeys, DictValues
+        ContClass::List => &[
+            ContClass::Tuple,
+            ContClass::Set,
+            ContClass::Frozen,
+            ContClass::DictItems,
+            ContClass::DictKeys,
+            ContClass::DictValues,
+        ],
+        // set: List, Tuple, FrozenSet, DictKeys
+        ContClass::Set => &[
+            ContClass::List,
+            ContClass::Tuple,
+            ContClass::Frozen,
+            ContClass::DictKeys,
+        ],
+        // frozenset: List, Tuple, Set, FrozenSet, DictKeys
+        ContClass::Frozen => &[
+            ContClass::List,
+            ContClass::Tuple,
+            ContClass::Set,
+            ContClass::Frozen,
+            ContClass::DictKeys,
+        ],
+        _ => &[],
+    }
+}
+
+/// klass.from_elements over already-inferred element VALUES
+fn cont_build(klass: ContClass, elems: Vec<Value>) -> Value {
+    let elems = Rc::new(elems);
+    match klass {
+        ContClass::List => Value::SynthSeq { kind: SeqKind::List, elems },
+        ContClass::Tuple => Value::SynthSeq { kind: SeqKind::Tuple, elems },
+        ContClass::Set => Value::SynthSeq { kind: SeqKind::Set, elems },
+        ContClass::Frozen => Value::FrozenSet { elems },
+        _ => unreachable!(),
+    }
+}
+
+/// dedupe key emulating CPython value equality for build_elts=set/frozenset
+/// (True == 1 == 1.0; bytes/str by content)
+fn const_py_key(c: &ConstValue) -> String {
+    match c {
+        ConstValue::None => "N".into(),
+        ConstValue::NotImplemented => "NI".into(),
+        ConstValue::Ellipsis => "E".into(),
+        ConstValue::Bool(b) => format!("i{}", *b as i64),
+        ConstValue::Int(IntValue::Small(i)) => format!("i{i}"),
+        ConstValue::Int(IntValue::Big(d)) => format!("i{d}"),
+        ConstValue::Float(f) => {
+            if f.fract() == 0.0 && f.abs() < 9e15 {
+                format!("i{}", *f as i64)
+            } else {
+                format!("f{}", f.to_bits())
+            }
+        }
+        ConstValue::Complex { real, imag } => {
+            if *imag == 0.0 && real.fract() == 0.0 && real.abs() < 9e15 {
+                format!("i{}", *real as i64)
+            } else {
+                format!("c{}:{}", real.to_bits(), imag.to_bits())
+            }
+        }
+        ConstValue::Str(s) => format!("s{s}"),
+        ConstValue::StrSurrogate(cp) => format!("u{cp:?}"),
+        ConstValue::Bytes(b) => format!("b{b:?}"),
+    }
+}
+
+/// klass.from_elements(build_elts(values)) for the all-Const branch:
+/// set/frozenset deduplicate by python value equality (first occurrence
+/// kept), list/tuple keep order
+fn cont_build_consts(klass: ContClass, values: Vec<ConstValue>) -> Value {
+    let dedupe = matches!(klass, ContClass::Set | ContClass::Frozen);
+    let mut seen = std::collections::HashSet::new();
+    let mut out = Vec::new();
+    for v in values {
+        if dedupe && !seen.insert(const_py_key(&v)) {
+            continue;
+        }
+        out.push(Value::SynthConst(Rc::new(v)));
+    }
+    cont_build(klass, out)
+}
+
 impl Engine {
     /// NodeNG._explicit_inference equivalent. None => no tip applies or
     /// UseInferenceDefault.
@@ -1189,21 +1300,10 @@ impl Engine {
                     }
                 }
             }
-            "tuple" => self.tip_container(node, &args, &kws, SeqKind::Tuple, ctx),
-            "set" => self.tip_container(node, &args, &kws, SeqKind::Set, ctx),
-            "list" => self.tip_container(node, &args, &kws, SeqKind::List, ctx),
-            "frozenset" => {
-                let f = self.tip_container(node, &args, &kws, SeqKind::Set, ctx)?;
-                let mapped: Vec<Value> = f
-                    .vals
-                    .into_iter()
-                    .map(|v| match v {
-                        Value::SynthSeq { elems, .. } => Value::FrozenSet { elems },
-                        other => other,
-                    })
-                    .collect();
-                Some(Flow::ok(mapped))
-            }
+            "tuple" => self.tip_container(node, &args, ContClass::Tuple, ctx),
+            "set" => self.tip_container(node, &args, ContClass::Set, ctx),
+            "list" => self.tip_container(node, &args, ContClass::List, ctx),
+            "frozenset" => self.tip_container(node, &args, ContClass::Frozen, ctx),
             "dict" => self.tip_dict(node, ctx),
             "type" => {
                 if args.len() != 1 {
@@ -1583,140 +1683,241 @@ impl Engine {
         }
     }
 
+    /// _container_generic_inference (brain_builtin_inference.py:227-257),
+    /// exact port. `klass` is the container class of the builtin being
+    /// called (List/Tuple/Set/Frozen).
     fn tip_container(
         &self,
         _node: GNode,
         args: &[GNode],
-        _kws: &[(Option<GSym>, GNode)],
-        kind: SeqKind,
+        klass: ContClass,
         ctx: &Rc<Ctx>,
     ) -> Option<Flow> {
         if args.is_empty() {
-            return Some(Flow::one(Value::SynthSeq {
-                kind,
-                elems: Rc::new(Vec::new()),
-            }));
+            // node_type(lineno=..., parent=node.parent) — fresh empty container
+            return Some(Flow::one(cont_build(klass, Vec::new())));
         }
         if args.len() > 1 {
-            return None;
+            return None; // UseInferenceDefault
         }
         let arg = args[0];
-        // transform on the raw node first
-        let md = self.md(arg.m);
-        let node_matches = match (&md.tree.nodes[arg.n.idx()].kind, kind) {
-            (NodeKind::List { .. }, SeqKind::List)
-            | (NodeKind::Tuple { .. }, SeqKind::Tuple)
-            | (NodeKind::Set { .. }, SeqKind::Set) => true,
-            _ => false,
+        // transform(arg) on the RAW node first
+        let transformed = match self.cont_transform(&Value::Node(arg), klass, ctx) {
+            Err(()) => return None, // _use_default() raised inside the transform
+            Ok(t) => t,
         };
-        if node_matches {
-            return Some(Flow::one(Value::Node(arg)));
-        }
-        let transformed = self.container_transform(&Value::Node(arg), kind, ctx);
         if let Some(t) = transformed {
             return Some(Flow::one(t));
         }
-        let inferred = self.infer(arg, &copy_context(Some(ctx))).vals.first()?.clone();
+        // not transformed: `next(arg.infer(context=context))` — single pull
+        // with the tip's context (brain_builtin_inference.py:248-253);
+        // InferenceError/StopIteration -> UseInferenceDefault
+        let inferred = self.infer_first(arg, Some(ctx)).ok()?;
         if inferred.is_uninferable() {
             return None;
         }
-        let transformed = self.container_transform(&inferred, kind, ctx)?;
-        Some(Flow::one(transformed))
+        let t = self.cont_transform(&inferred, klass, ctx).ok()??;
+        if t.is_uninferable() {
+            return None;
+        }
+        Some(Flow::one(t))
     }
 
-    /// _container_generic_transform
-    fn container_transform(&self, arg: &Value, kind: SeqKind, ctx: &Rc<Ctx>) -> Option<Value> {
-        // same class -> as-is
-        match (arg, kind) {
-            (Value::SynthSeq { kind: k, .. }, _) if *k == kind => return Some(arg.clone()),
-            (Value::Node(g), _) => {
+    /// the ContClass a value would isinstance-match in
+    /// _container_generic_transform's klass/iterables checks
+    fn cont_class_of(&self, v: &Value) -> Option<ContClass> {
+        match v {
+            Value::SynthSeq { kind, .. } => Some(match kind {
+                SeqKind::List => ContClass::List,
+                SeqKind::Tuple => ContClass::Tuple,
+                SeqKind::Set => ContClass::Set,
+            }),
+            Value::FrozenSet { .. } => Some(ContClass::Frozen),
+            Value::DictItems(_) => Some(ContClass::DictItems),
+            Value::DictKeys(_) => Some(ContClass::DictKeys),
+            Value::DictValues(_) => Some(ContClass::DictValues),
+            Value::Node(g) => {
                 let md = self.md(g.m);
-                let matches = match (&md.tree.nodes[g.n.idx()].kind, kind) {
-                    (NodeKind::List { .. }, SeqKind::List)
-                    | (NodeKind::Tuple { .. }, SeqKind::Tuple)
-                    | (NodeKind::Set { .. }, SeqKind::Set) => true,
-                    _ => false,
-                };
-                if matches {
-                    return Some(arg.clone());
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::List { .. } => Some(ContClass::List),
+                    NodeKind::Tuple { .. } => Some(ContClass::Tuple),
+                    NodeKind::Set { .. } => Some(ContClass::Set),
+                    _ => None,
                 }
             }
-            _ => {}
+            _ => None,
         }
-        // iterables
-        if let Some(elts) = self.value_elts(arg) {
-            let mut out = Vec::new();
-            for e in elts {
-                let v = match &e {
-                    Value::Node(g) => self.safe_infer(*g, &copy_context(Some(ctx))),
-                    other => Some(other.clone()),
-                };
-                if let Some(v) = v {
-                    out.push(v);
+    }
+
+    /// elements (`arg.elts`) of a container-ish value for the transform.
+    /// DictKeys/Values/Items proxy a synthesized List whose elts are the
+    /// dict's key/value nodes (objectmodel.py:856-890).
+    fn cont_elts(&self, v: &Value) -> Vec<NV> {
+        match v {
+            Value::SynthSeq { elems, .. } | Value::FrozenSet { elems } => {
+                elems.iter().cloned().map(NV::V).collect()
+            }
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::List { elts, .. }
+                    | NodeKind::Tuple { elts, .. }
+                    | NodeKind::Set { elts } => elts
+                        .iter()
+                        .map(|&e| NV::N(GNode { m: g.m, n: e }))
+                        .collect(),
+                    _ => Vec::new(),
                 }
             }
-            return Some(Value::SynthSeq {
-                kind,
-                elems: Rc::new(out),
-            });
-        }
-        // dict -> keys (must be Const)
-        if let Some(items) = self.value_dict_items(arg) {
-            let mut out = Vec::new();
-            for (k, _) in items {
-                let kc = match &k {
-                    Value::Node(g) => {
+            Value::DictKeys(r) | Value::DictValues(r) => {
+                let want_key = matches!(v, Value::DictKeys(_));
+                match &**r {
+                    crate::value::DictRef::Node(g) => {
                         let md = self.md(g.m);
                         match &md.tree.nodes[g.n.idx()].kind {
-                            NodeKind::Const(c) => Some(c.clone()),
-                            _ => None,
+                            NodeKind::Dict { items } => items
+                                .iter()
+                                .map(|&(k, val)| {
+                                    NV::N(GNode {
+                                        m: g.m,
+                                        n: if want_key { k } else { val },
+                                    })
+                                })
+                                .collect(),
+                            _ => Vec::new(),
                         }
                     }
-                    Value::SynthConst(c) => Some((**c).clone()),
-                    _ => None,
-                }?;
-                out.push(Value::SynthConst(Rc::new(kc)));
+                    crate::value::DictRef::Synth(items) => items
+                        .iter()
+                        .map(|(k, val)| NV::V(if want_key { k.clone() } else { val.clone() }))
+                        .collect(),
+                }
             }
-            return Some(Value::SynthSeq {
-                kind,
-                elems: Rc::new(out),
-            });
+            Value::DictItems(r) => {
+                // elts are synthetic Tuple nodes pairing key/value
+                // (objectmodel.py:856-867)
+                let pairs: Vec<(Value, Value)> = match &**r {
+                    crate::value::DictRef::Node(g) => {
+                        let md = self.md(g.m);
+                        match &md.tree.nodes[g.n.idx()].kind {
+                            NodeKind::Dict { items } => items
+                                .iter()
+                                .map(|&(k, val)| {
+                                    (
+                                        Value::Node(GNode { m: g.m, n: k }),
+                                        Value::Node(GNode { m: g.m, n: val }),
+                                    )
+                                })
+                                .collect(),
+                            _ => Vec::new(),
+                        }
+                    }
+                    crate::value::DictRef::Synth(items) => items.to_vec(),
+                };
+                pairs
+                    .into_iter()
+                    .map(|(k, val)| {
+                        NV::V(Value::SynthSeq {
+                            kind: SeqKind::Tuple,
+                            elems: Rc::new(vec![k, val]),
+                        })
+                    })
+                    .collect()
+            }
+            _ => Vec::new(),
         }
-        // Const str/bytes
+    }
+
+    /// _container_generic_transform (brain_builtin_inference.py:260-297).
+    /// Err(()) = UseInferenceDefault raised mid-transform (_use_default for
+    /// non-Const dict keys); Ok(None) = arg not transformable.
+    fn cont_transform(
+        &self,
+        arg: &Value,
+        klass: ContClass,
+        ctx: &Rc<Ctx>,
+    ) -> Result<Option<Value>, ()> {
+        let cls = self.cont_class_of(arg);
+        // if isinstance(arg, klass): return arg
+        if cls == Some(klass) {
+            return Ok(Some(arg.clone()));
+        }
+        // if isinstance(arg, iterables)
+        if let Some(c) = cls {
+            if cont_iterables(klass).contains(&c) {
+                let elts = self.cont_elts(arg);
+                let consts: Option<Vec<ConstValue>> = elts
+                    .iter()
+                    .map(|e| match e {
+                        NV::N(g) => {
+                            let md = self.md(g.m);
+                            match &md.tree.nodes[g.n.idx()].kind {
+                                NodeKind::Const(c) => Some(c.clone()),
+                                _ => None,
+                            }
+                        }
+                        NV::V(Value::SynthConst(c)) => Some((**c).clone()),
+                        _ => None,
+                    })
+                    .collect();
+                if let Some(values) = consts {
+                    // build_elts over raw python values (set()/frozenset()
+                    // deduplicate by value equality)
+                    return Ok(Some(cont_build_consts(klass, values)));
+                }
+                // EvaluatedObject branch: `if not element: continue`
+                // (only Uninferable is falsy), safe_infer with the SAME
+                // context; failures skipped. No dedup (astroid TODO).
+                let mut out = Vec::new();
+                for e in elts {
+                    match e {
+                        NV::V(Value::Uninferable) => continue,
+                        NV::N(g) => {
+                            if let Some(v) = self.safe_infer(g, ctx) {
+                                out.push(v);
+                            }
+                        }
+                        NV::V(v) => out.push(v), // safe_infer of a value -> itself
+                    }
+                }
+                return Ok(Some(cont_build(klass, out)));
+            }
+        }
+        // elif isinstance(arg, nodes.Dict): keys must already be Const
+        if matches!(arg, Value::SynthDict { .. })
+            || matches!(arg, Value::Node(g) if matches!(&self.md(g.m).tree.nodes[g.n.idx()].kind, NodeKind::Dict { .. }))
+        {
+            let items = self.value_dict_items(arg).unwrap_or_default();
+            let mut keys = Vec::new();
+            for (k, _) in items {
+                match self.value_const(&k) {
+                    Some(c) => keys.push(c),
+                    None => return Err(()), // _use_default()
+                }
+            }
+            return Ok(Some(cont_build_consts(klass, keys)));
+        }
+        // elif Const str/bytes: elts = arg.value (iterate chars / byte ints)
         if let Some(c) = self.value_const(arg) {
             match c {
                 ConstValue::Str(s) => {
-                    return Some(Value::SynthSeq {
-                        kind,
-                        elems: Rc::new(
-                            s.chars()
-                                .map(|ch| {
-                                    Value::SynthConst(Rc::new(ConstValue::Str(
-                                        ch.to_string().into(),
-                                    )))
-                                })
-                                .collect(),
-                        ),
-                    })
+                    let vals = s
+                        .chars()
+                        .map(|ch| ConstValue::Str(ch.to_string().into()))
+                        .collect();
+                    return Ok(Some(cont_build_consts(klass, vals)));
                 }
                 ConstValue::Bytes(b) => {
-                    return Some(Value::SynthSeq {
-                        kind,
-                        elems: Rc::new(
-                            b.iter()
-                                .map(|&x| {
-                                    Value::SynthConst(Rc::new(ConstValue::Int(IntValue::Small(
-                                        x as i64,
-                                    ))))
-                                })
-                                .collect(),
-                        ),
-                    })
+                    let vals = b
+                        .iter()
+                        .map(|&x| ConstValue::Int(IntValue::Small(x as i64)))
+                        .collect();
+                    return Ok(Some(cont_build_consts(klass, vals)));
                 }
-                _ => return None,
+                _ => {}
             }
         }
-        None
+        Ok(None)
     }
 
     fn tip_dict(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {

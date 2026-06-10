@@ -51,7 +51,15 @@ pub enum Value {
     ExcInst { cls: GNode, exceptions: Option<Rc<Vec<Value>>> },
     BoundMethod { func: GNode, bound: Rc<Value> },
     UnboundMethod { func: GNode },
-    Generator { func: GNode, is_async: bool },
+    /// bases.Generator/AsyncGenerator. `call_ctx` is the context captured
+    /// at creation time (bases.py:698 `self._call_context =
+    /// copy_context(generator_initial_context)`); infer_yield_types uses
+    /// it, NOT the consumer's context (bases.py:703-704).
+    Generator {
+        func: GNode,
+        is_async: bool,
+        call_ctx: Rc<crate::ctx::Ctx>,
+    },
     /// objects.Property wrapping a FunctionDef
     Property { func: GNode },
     /// objects.PartialFunction (functools.partial brain)
@@ -99,7 +107,10 @@ pub enum ValueKey {
     ExcInst(GNode),
     BoundMethod(GNode, Box<ValueKey>),
     UnboundMethod(GNode),
-    Generator(GNode, bool),
+    /// generator objects compare by identity in python: key includes the
+    /// captured-context pointer (fresh per infer_call_result run; preserved
+    /// through cache replay clones)
+    Generator(GNode, bool, usize),
     Property(GNode),
     Partial(GNode),
     Super(GNode, GNode),
@@ -117,7 +128,11 @@ pub fn value_key(v: &Value) -> ValueKey {
             ValueKey::BoundMethod(*func, Box::new(value_key(bound)))
         }
         Value::UnboundMethod { func } => ValueKey::UnboundMethod(*func),
-        Value::Generator { func, is_async } => ValueKey::Generator(*func, *is_async),
+        Value::Generator {
+            func,
+            is_async,
+            call_ctx,
+        } => ValueKey::Generator(*func, *is_async, Rc::as_ptr(call_ctx) as usize),
         Value::Property { func } => ValueKey::Property(*func),
         Value::Partial { func, .. } => ValueKey::Partial(*func),
         Value::Super {

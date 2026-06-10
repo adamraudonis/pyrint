@@ -40,6 +40,12 @@ pub struct Ctx {
     pub nodes_inferred: Rc<Cell<u32>>,
 }
 
+impl std::fmt::Debug for Ctx {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(f, "Ctx@{:p}", self as *const Ctx)
+    }
+}
+
 pub const MAX_INFERRED: u32 = 100;
 /// AstroidManager.max_inferable_values (manager.py:63)
 pub const MAX_INFERABLE_VALUES: usize = 100;

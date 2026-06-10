@@ -193,7 +193,7 @@ pub fn render(engine: &Engine, v: &Value) -> String {
         Value::DictValues(_) => "DictValues".to_string(),
         Value::BoundMethod { func, .. } => format!("BM:{}", engine.qname(*func)),
         Value::UnboundMethod { func } => format!("UM:{}", engine.qname(*func)),
-        Value::Generator { func, is_async } => {
+        Value::Generator { func, is_async, .. } => {
             if *is_async {
                 format!("AGen:{}", engine.qname(*func))
             } else {

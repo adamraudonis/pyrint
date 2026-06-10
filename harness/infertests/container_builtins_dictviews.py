@@ -1,0 +1,18 @@
+events = {"a": 1, "b": 2}
+x = list(events.keys())
+y = list(events.values())
+z = list(events.items())
+fs = frozenset({"q", "w"})
+fs2 = frozenset(["a", "b", "a"])
+fs3 = frozenset((1, 2))
+s1 = set([1, 1, 2])
+s2 = set((3, 4))
+s3 = set(events.keys())
+s4 = set(events.values())
+t1 = tuple({5, 6})
+t2 = tuple(events.items())
+l1 = list({7: "x", 8: "y"})
+fs4 = frozenset()
+e2 = {}
+x2 = list(e2.keys())
+print(x, y, z, fs, fs2, fs3, s1, s2, s3, s4, t1, t2, l1, fs4, x2)

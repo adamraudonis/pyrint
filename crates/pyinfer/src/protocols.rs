@@ -421,7 +421,7 @@ impl Engine {
             .flatten()
             .ok_or(ErrKind::Inference)?;
         match &inferred {
-            Value::Generator { func, .. } => {
+            Value::Generator { func, call_ctx, .. } => {
                 // only contextlib.contextmanager-decorated generators
                 let md = self.md(func.m);
                 let decorators = match &md.tree.nodes[func.n.idx()].kind {
@@ -437,9 +437,10 @@ impl Engine {
                 };
                 let mut is_cm = false;
                 for dn in dec_nodes {
-                    // next(decorator_node.infer(context), None) — single pull
+                    // next(decorator_node.infer(context), None) — single
+                    // pull with the SAME context object (protocols.py:582)
                     if let Ok(Some(first)) =
-                        self.first_value(GNode { m: func.m, n: dn }, &copy_context(Some(ctx)))
+                        self.first_value(GNode { m: func.m, n: dn }, ctx)
                     {
                         if self.value_qname(&first).as_deref() == Some("contextlib.contextmanager") {
                             is_cm = true;
@@ -450,12 +451,10 @@ impl Engine {
                 if !is_cm {
                     return Err(ErrKind::Inference);
                 }
-                // yield first of infer_yield_types
-                let yields = self.infer_yield_result(*func, ctx);
-                match yields.into_iter().next() {
-                    Some(v) => Ok(vec![NV::V(v)]),
-                    None => Err(ErrKind::Inference),
-                }
+                // next(inferred.infer_yield_types()) — single pull with the
+                // generator's CAPTURED creation context (bases.py:703-704)
+                let v = self.infer_yield_first(*func, call_ctx)?;
+                Ok(vec![NV::V(v)])
             }
             Value::Inst { .. } | Value::ExcInst { .. } => {
                 let enter_sym = self.sym("__enter__");
@@ -477,15 +476,22 @@ impl Engine {
         }
     }
 
-    /// FunctionDef.infer_yield_result (scoped_nodes.py:1543-1553)
-    pub fn infer_yield_result(&self, func: GNode, ctx: &Rc<Ctx>) -> Vec<Value> {
+    /// `next(gen.infer_yield_types())` — single lazy pull of
+    /// FunctionDef.infer_yield_result (scoped_nodes.py:1543-1553).
+    /// nodes_of_class(Yield) includes YieldFrom (a Yield subclass,
+    /// node_classes.py:4607). The consumer abandons the generator after
+    /// the first value (no further counter burn); an empty per-yield infer
+    /// falls through to the next yield; exhaustion -> InferenceError.
+    pub fn infer_yield_first(&self, func: GNode, ctx: &Rc<Ctx>) -> Result<Value, ErrKind> {
         let md = self.md(func.m);
-        let mut out = Vec::new();
         let mut stack = vec![func.n];
         let mut buf = Vec::new();
         let mut yields: Vec<NodeId> = Vec::new();
         while let Some(n) = stack.pop() {
-            if let NodeKind::Yield { .. } = &md.tree.nodes[n.idx()].kind {
+            if matches!(
+                &md.tree.nodes[n.idx()].kind,
+                NodeKind::Yield { .. } | NodeKind::YieldFrom { .. }
+            ) {
                 yields.push(n);
             }
             buf.clear();
@@ -493,24 +499,42 @@ impl Engine {
             stack.extend(buf.iter().copied());
         }
         yields.sort();
+        drop(md);
         for y in yields {
+            let md = self.md(func.m);
             let value = match &md.tree.nodes[y.idx()].kind {
                 NodeKind::Yield { value } => *value,
+                NodeKind::YieldFrom { value } => Some(*value),
                 _ => None,
             };
+            drop(md);
             match value {
-                None => out.push(Value::SynthConst(Rc::new(ConstValue::None))),
+                // `yield` (no value): Const(None), NO scope check
+                // (scoped_nodes.py:1550-1551)
+                None => return Ok(Value::SynthConst(Rc::new(ConstValue::None))),
                 Some(v) => {
-                    // only yields whose scope is this function
+                    // elif yield_.scope() == self
                     let g = GNode { m: func.m, n: y };
-                    if self.frame(g) == func {
-                        let f = self.infer(GNode { m: func.m, n: v }, ctx);
-                        out.extend(f.vals);
+                    if self.frame(g) != func {
+                        continue;
+                    }
+                    let mut first: Option<Value> = None;
+                    let end = {
+                        let first = &mut first;
+                        self.infer_to(GNode { m: func.m, n: v }, ctx, &mut |val| {
+                            *first = Some(val);
+                            Drive::Stop
+                        })
+                    };
+                    match (first, end) {
+                        (Some(v), _) => return Ok(v),
+                        (None, End::Raised(e)) => return Err(e),
+                        (None, _) => continue, // empty infer -> next yield
                     }
                 }
             }
         }
-        out
+        Err(ErrKind::Inference) // StopIteration -> InferenceError(node=func)
     }
 
     /// excepthandler_assigned_stmts (protocols.py:522-564)
