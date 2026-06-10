@@ -1198,7 +1198,12 @@ impl Engine {
         }
     }
 
-    /// node_classes.py:1859-1905 _do_compare — literal folding only.
+    /// node_classes.py:1859-1905 _do_compare — `_to_literal` is
+    /// `ast.literal_eval(node.as_string())`: Consts plus literal
+    /// containers fold; `in`/`not in` are real COMPARE_OPS (only
+    /// `is`/`is not` are UNINFERABLE_OPS). Mixed-type `==`/`!=` gives
+    /// False/True (operator.eq never raises); order/membership TypeErrors
+    /// become AstroidTypeError -> the caller yields Uninferable.
     /// Returns None for Uninferable.
     fn do_compare(&self, lefts: &[Value], op: &str, rights: &[Value]) -> Option<bool> {
         if op == "is" || op == "is not" {
@@ -1207,9 +1212,9 @@ impl Engine {
         let mut retval: Option<bool> = None;
         for left in lefts {
             for right in rights {
-                let lc = self.value_const(left)?;
-                let rc = self.value_const(right)?;
-                let r = compare_consts(&lc, op, &rc)?;
+                let ll = self.to_literal(left)?;
+                let rl = self.to_literal(right)?;
+                let r = compare_literals(&ll, op, &rl)?;
                 match retval {
                     None => retval = Some(r),
                     Some(prev) if prev == r => {}
@@ -1218,6 +1223,64 @@ impl Engine {
             }
         }
         retval
+    }
+
+    /// Compare._to_literal: ast.literal_eval(value.as_string()) — Consts
+    /// and literal containers (all elements recursively literal) fold;
+    /// anything else raises -> Uninferable (None).
+    fn to_literal(&self, v: &Value) -> Option<Lit> {
+        if let Some(c) = self.value_const(v) {
+            return Some(Lit::Const(c));
+        }
+        match v {
+            Value::SynthSeq { kind, elems } => {
+                let lits: Option<Vec<Lit>> = elems.iter().map(|e| self.to_literal(e)).collect();
+                Some(match kind {
+                    crate::value::SeqKind::List => Lit::List(lits?),
+                    crate::value::SeqKind::Tuple => Lit::Tuple(lits?),
+                    crate::value::SeqKind::Set => Lit::Set(lits?),
+                })
+            }
+            Value::SynthDict { items } => {
+                let lits: Option<Vec<(Lit, Lit)>> = items
+                    .iter()
+                    .map(|(k, val)| Some((self.to_literal(k)?, self.to_literal(val)?)))
+                    .collect();
+                Some(Lit::Dict(lits?))
+            }
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::List { elts, .. } | NodeKind::Tuple { elts, .. }
+                    | NodeKind::Set { elts } => {
+                        let lits: Option<Vec<Lit>> = elts
+                            .iter()
+                            .map(|&e| self.to_literal(&Value::Node(GNode { m: g.m, n: e })))
+                            .collect();
+                        let lits = lits?;
+                        Some(match &md.tree.nodes[g.n.idx()].kind {
+                            NodeKind::List { .. } => Lit::List(lits),
+                            NodeKind::Tuple { .. } => Lit::Tuple(lits),
+                            _ => Lit::Set(lits),
+                        })
+                    }
+                    NodeKind::Dict { items } => {
+                        let lits: Option<Vec<(Lit, Lit)>> = items
+                            .iter()
+                            .map(|&(k, val)| {
+                                Some((
+                                    self.to_literal(&Value::Node(GNode { m: g.m, n: k }))?,
+                                    self.to_literal(&Value::Node(GNode { m: g.m, n: val }))?,
+                                ))
+                            })
+                            .collect();
+                        Some(Lit::Dict(lits?))
+                    }
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
     }
 
     // ---------- f-strings (§16.6) ----------
@@ -2038,35 +2101,105 @@ pub fn const_truth(c: &ConstValue) -> bool {
 
 /// numeric/str comparison for Compare folding. Mirrors Python's comparison
 /// for the literal types ast.literal_eval can produce. None => Uninferable.
-fn compare_consts(l: &ConstValue, op: &str, r: &ConstValue) -> Option<bool> {
-    use std::cmp::Ordering;
-    let ord: Option<Ordering> = match (const_num(l), const_num(r)) {
-        (Some(a), Some(b)) => a.partial_cmp(&b),
-        _ => match (l, r) {
-            (ConstValue::Str(a), ConstValue::Str(b)) => Some(a.cmp(b)),
-            (ConstValue::Bytes(a), ConstValue::Bytes(b)) => Some(a.cmp(b)),
-            _ => None,
-        },
-    };
-    let eq: Option<bool> = match (l, r) {
-        (ConstValue::Str(a), ConstValue::Str(b)) => Some(a == b),
-        (ConstValue::Bytes(a), ConstValue::Bytes(b)) => Some(a == b),
-        (ConstValue::None, ConstValue::None) => Some(true),
-        (ConstValue::None, _) | (_, ConstValue::None) => Some(false),
+/// Python literal value for Compare folding (_to_literal results)
+#[derive(Clone, Debug)]
+pub enum Lit {
+    Const(ConstValue),
+    List(Vec<Lit>),
+    Tuple(Vec<Lit>),
+    Set(Vec<Lit>),
+    Dict(Vec<(Lit, Lit)>),
+}
+
+/// Python `==` over literals — operator.eq never raises: mismatched
+/// types are simply unequal.
+fn lit_eq(l: &Lit, r: &Lit) -> bool {
+    match (l, r) {
+        (Lit::Const(a), Lit::Const(b)) => const_eq(a, b),
+        (Lit::List(a), Lit::List(b)) | (Lit::Tuple(a), Lit::Tuple(b)) => {
+            a.len() == b.len() && a.iter().zip(b).all(|(x, y)| lit_eq(x, y))
+        }
+        (Lit::Set(a), Lit::Set(b)) => {
+            a.len() == b.len()
+                && a.iter().all(|x| b.iter().any(|y| lit_eq(x, y)))
+                && b.iter().all(|y| a.iter().any(|x| lit_eq(x, y)))
+        }
+        (Lit::Dict(a), Lit::Dict(b)) => {
+            a.len() == b.len()
+                && a.iter().all(|(k, v)| {
+                    b.iter().any(|(k2, v2)| lit_eq(k, k2) && lit_eq(v, v2))
+                })
+        }
+        _ => false,
+    }
+}
+
+fn const_eq(l: &ConstValue, r: &ConstValue) -> bool {
+    match (l, r) {
+        (ConstValue::Str(a), ConstValue::Str(b)) => a == b,
+        (ConstValue::Bytes(a), ConstValue::Bytes(b)) => a == b,
+        (ConstValue::None, ConstValue::None) => true,
         _ => match (const_num(l), const_num(r)) {
-            (Some(a), Some(b)) => Some(a == b),
-            _ => None,
+            (Some(a), Some(b)) => a == b,
+            _ => false, // mixed types: unequal, no raise
         },
-    };
+    }
+}
+
+/// COMPARE_OPS (node_classes.py:1787-1796) over literals. None means the
+/// Python operator would raise TypeError (-> AstroidTypeError -> U) or we
+/// can't faithfully fold.
+fn compare_literals(l: &Lit, op: &str, r: &Lit) -> Option<bool> {
+    use std::cmp::Ordering;
     match op {
-        "==" => eq,
-        "!=" => eq.map(|b| !b),
-        "<" => ord.map(|o| o == Ordering::Less),
-        "<=" => ord.map(|o| o != Ordering::Greater),
-        ">" => ord.map(|o| o == Ordering::Greater),
-        ">=" => ord.map(|o| o != Ordering::Less),
-        // in / not in over literals: rarely fold-worthy; Uninferable
-        _ => None,
+        "==" => Some(lit_eq(l, r)),
+        "!=" => Some(!lit_eq(l, r)),
+        "<" | "<=" | ">" | ">=" => {
+            let ord: Option<Ordering> = match (l, r) {
+                (Lit::Const(a), Lit::Const(b)) => match (const_num(a), const_num(b)) {
+                    (Some(x), Some(y)) => x.partial_cmp(&y),
+                    _ => match (a, b) {
+                        (ConstValue::Str(x), ConstValue::Str(y)) => Some(x.cmp(y)),
+                        (ConstValue::Bytes(x), ConstValue::Bytes(y)) => Some(x.cmp(y)),
+                        _ => None, // TypeError
+                    },
+                },
+                _ => None,
+            };
+            let o = ord?;
+            Some(match op {
+                "<" => o == Ordering::Less,
+                "<=" => o != Ordering::Greater,
+                ">" => o == Ordering::Greater,
+                _ => o != Ordering::Less,
+            })
+        }
+        "in" | "not in" => {
+            let contains: Option<bool> = match r {
+                Lit::Const(ConstValue::Str(hay)) => match l {
+                    // `a in b` over strs is SUBSTRING containment
+                    Lit::Const(ConstValue::Str(needle)) => {
+                        Some(hay.contains(needle.as_ref() as &str))
+                    }
+                    _ => None, // TypeError: 'in <string>' requires string
+                },
+                Lit::Const(ConstValue::Bytes(hay)) => match l {
+                    Lit::Const(ConstValue::Bytes(needle)) => Some(
+                        hay.windows(needle.len().max(1))
+                            .any(|w| w == needle.as_ref() as &[u8])
+                            || needle.is_empty(),
+                    ),
+                    _ => None,
+                },
+                Lit::List(elems) | Lit::Tuple(elems) | Lit::Set(elems) => {
+                    Some(elems.iter().any(|e| lit_eq(l, e)))
+                }
+                Lit::Dict(items) => Some(items.iter().any(|(k, _)| lit_eq(l, k))),
+                _ => None, // TypeError
+            };
+            contains.map(|b| if op == "in" { b } else { !b })
+        }
+        _ => None, // is / is not handled by the caller
     }
 }
 
