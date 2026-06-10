@@ -57,6 +57,12 @@ pub struct Module {
     /// the TransformVisitor at the END of build (builder.py:175-177);
     /// build-time inference (delayed_assattr) runs WITHOUT tips.
     pub tips_active: Cell<bool>,
+    /// module-extender locals carrying live VALUES (brain_multiprocessing
+    /// rebinds context methods as BoundMethod objects directly into module
+    /// locals — brain_multiprocessing.py:36-48). Keys present here OVERRIDE
+    /// the plain `locals` entry for module-level getattr; consulted by
+    /// module_getattr / public_names only.
+    pub ext_locals: RefCell<IndexMap<GSym, Vec<crate::value::NV>>>,
 }
 
 impl Module {
@@ -443,6 +449,7 @@ impl Engine {
             args_unknown: FxHashMap::default(),
             qnames: FxHashMap::default(),
             tips_active: Cell::new(false),
+            ext_locals: RefCell::new(IndexMap::new()),
         };
         self.mods.borrow_mut().push(Rc::new(md));
         id
@@ -658,6 +665,7 @@ impl Engine {
             args_unknown: snap.args_unknown,
             qnames: snap.qnames,
             tips_active: Cell::new(false),
+            ext_locals: RefCell::new(IndexMap::new()),
         };
         self.mods.borrow_mut().push(Rc::new(md));
         // raw-built modules also go through visit_transforms
@@ -1198,21 +1206,141 @@ impl Engine {
             "collections" => "class defaultdict(dict):\n    default_factory = None\n    def __missing__(self, key): pass\n    def __getitem__(self, key): return default_factory\n\nclass deque(object):\n    maxlen = 0\n    def __init__(self, iterable=None, maxlen=None):\n        self.iterable = iterable or []\n    def append(self, x): pass\n    def appendleft(self, x): pass\n    def clear(self): pass\n    def count(self, x): return 0\n    def extend(self, iterable): pass\n    def extendleft(self, iterable): pass\n    def pop(self): return self.iterable[0]\n    def popleft(self): return self.iterable[0]\n    def remove(self, value): pass\n    def reverse(self): return reversed(self.iterable)\n    def rotate(self, n=1): return self\n    def __iter__(self): return self\n    def __reversed__(self): return self.iterable[::-1]\n    def __getitem__(self, index): return self.iterable[index]\n    def __setitem__(self, index, value): pass\n    def __delitem__(self, index): pass\n    def __bool__(self): return bool(self.iterable)\n    def __nonzero__(self): return bool(self.iterable)\n    def __contains__(self, o): return o in self.iterable\n    def __len__(self): return len(self.iterable)\n    def __copy__(self): return deque(self.iterable)\n    def copy(self): return deque(self.iterable)\n    def index(self, x, start=0, end=0): return 0\n    def insert(self, i, x): pass\n    def __add__(self, other): pass\n    def __iadd__(self, other): pass\n    def __mul__(self, other): pass\n    def __imul__(self, other): pass\n    def __rmul__(self, other): pass\n    @classmethod\n    def __class_getitem__(self, item): return cls\n\nclass OrderedDict(dict):\n    def __reversed__(self): return self[::-1]\n    def move_to_end(self, key, last=False): pass\n    @classmethod\n    def __class_getitem__(cls, item): return cls\n",
             // brain_datetime (PY312: C-accelerated; use the Python source)
             "datetime" => "from _pydatetime import *\n",
-            _ => return,
+            // brain_multiprocessing: template merge + the DefaultContext/
+            // BaseContext BoundMethod probe (brain_multiprocessing.py:13-48)
+            "multiprocessing" => {
+                self.extend_multiprocessing(id);
+                return;
+            }
+            _ => {
+                match crate::ext_templates::EXTENDERS
+                    .iter()
+                    .find(|(m, _)| *m == name)
+                {
+                    Some((_, src)) => *src,
+                    None => return,
+                }
+            }
         };
-        let Some(ext) = self.build_template_module(source, &name) else {
-            return;
-        };
+        self.merge_extension(id, source, &name);
+    }
+
+    /// register_module_extender merge: extension locals REPLACE same-named
+    /// target entries (brain/helpers.py:22-27). Returns the template ModId.
+    fn merge_extension(&self, id: ModId, source: &str, name: &str) -> Option<ModId> {
+        let ext = self.build_template_module(source, name)?;
         let ext_md = self.md(ext);
         let target_md = self.md(id);
         let ext_locals = ext_md.locals.borrow();
         let Some(ext_map) = ext_locals.get(&NodeId::MODULE) else {
-            return;
+            return Some(ext);
         };
         let mut tgt = target_md.locals.borrow_mut();
         let tgt_map = tgt.entry(NodeId::MODULE).or_default();
         for (sym, objs) in ext_map {
             tgt_map.insert(*sym, objs.clone());
+        }
+        Some(ext)
+    }
+
+    /// brain_multiprocessing._multiprocessing_transform: after the plain
+    /// template, instantiate multiprocessing.context.DefaultContext and
+    /// BaseContext and append their public class locals to the module —
+    /// FunctionDefs rebound as BoundMethod VALUES (brain_multiprocessing.py:
+    /// 31-48; `module[key] = value` is set_local = APPEND). Either probe
+    /// name failing to infer aborts the loop (only the template merge runs).
+    fn extend_multiprocessing(&self, id: ModId) {
+        use crate::value::{Value, NV};
+        let Some(ext) = self.merge_extension(id, crate::ext_templates::MP_TEMPLATE, "multiprocessing")
+        else {
+            return;
+        };
+        let Some(probe) = self.build_template_module(crate::ext_templates::MP_PROBE, "") else {
+            return;
+        };
+        // next(node["default"].infer()) / node["base"] — first inferred value
+        let mut insts: Vec<Value> = Vec::new();
+        for var in ["default", "base"] {
+            let sym = self.sym(var);
+            let assign = {
+                let pmd = self.md(probe);
+                let locals = pmd.locals.borrow();
+                match locals
+                    .get(&NodeId::MODULE)
+                    .and_then(|l| l.get(&sym))
+                    .and_then(|v| v.first())
+                {
+                    Some(&g) => g,
+                    None => return,
+                }
+            };
+            let flow = self.infer_fresh(assign);
+            match flow.vals.first() {
+                Some(v @ Value::Inst { .. }) => insts.push(v.clone()),
+                _ => return, // InferenceError/StopIteration -> return module
+            }
+        }
+        // merged final lists: template locals first (insertion order), then
+        // per-instance appends
+        let mut merged: IndexMap<GSym, Vec<NV>> = {
+            let emd = self.md(ext);
+            let locals = emd.locals.borrow();
+            match locals.get(&NodeId::MODULE) {
+                Some(map) => map
+                    .iter()
+                    .map(|(k, v)| (*k, v.iter().map(|&g| NV::N(g)).collect()))
+                    .collect(),
+                None => IndexMap::new(),
+            }
+        };
+        for inst in &insts {
+            let Value::Inst { cls } = inst else { continue };
+            let entries: Vec<(GSym, GNode)> = {
+                let cmd = self.md(cls.m);
+                let locals = cmd.locals.borrow();
+                match locals.get(&cls.n) {
+                    Some(map) => map
+                        .iter()
+                        .filter(|(k, v)| !self.sname(**k).starts_with('_') && !v.is_empty())
+                        .map(|(k, v)| (*k, v[0]))
+                        .collect(),
+                    None => Vec::new(),
+                }
+            };
+            for (key, v0) in entries {
+                let entry = if self.kind_is(v0, |k| {
+                    matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                }) {
+                    NV::V(Value::BoundMethod {
+                        func: v0,
+                        bound: std::rc::Rc::new(inst.clone()),
+                    })
+                } else {
+                    NV::N(v0)
+                };
+                merged.entry(key).or_default().push(entry);
+            }
+        }
+        // write back: node projection into locals (public_names/star-import
+        // consumers), full mixed lists into ext_locals (module_getattr)
+        let target_md = self.md(id);
+        {
+            let mut tgt = target_md.locals.borrow_mut();
+            let tgt_map = tgt.entry(NodeId::MODULE).or_default();
+            for (sym, list) in &merged {
+                let nodes: Vec<GNode> = list
+                    .iter()
+                    .filter_map(|nv| match nv {
+                        NV::N(g) => Some(*g),
+                        NV::V(_) => None,
+                    })
+                    .collect();
+                tgt_map.insert(*sym, nodes);
+            }
+        }
+        let mut extl = target_md.ext_locals.borrow_mut();
+        for (sym, list) in merged {
+            extl.insert(sym, list);
         }
     }
 

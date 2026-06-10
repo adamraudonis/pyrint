@@ -163,7 +163,10 @@ impl Engine {
             return Err(ErrKind::Attribute);
         }
         let mut result: Vec<NV> = Vec::new();
-        let name_in_locals = {
+        // module-extender VALUE locals (brain_multiprocessing BoundMethods)
+        // override the plain node lists — see graph.rs ext_locals.
+        let ext_hit: Option<Vec<NV>> = md.ext_locals.borrow().get(&name).cloned();
+        let name_in_locals = ext_hit.is_some() || {
             let locals = md.locals.borrow();
             locals
                 .get(&NodeId::MODULE)
@@ -178,12 +181,17 @@ impl Engine {
                 )))));
             }
         } else if !ignore_locals && name_in_locals {
-            let locals = md.locals.borrow();
-            result = locals
-                .get(&NodeId::MODULE)
-                .and_then(|l| l.get(&name))
-                .map(|v| v.iter().map(|&g| NV::N(g)).collect())
-                .unwrap_or_default();
+            result = match ext_hit {
+                Some(list) => list,
+                None => {
+                    let locals = md.locals.borrow();
+                    locals
+                        .get(&NodeId::MODULE)
+                        .and_then(|l| l.get(&name))
+                        .map(|v| v.iter().map(|&g| NV::N(g)).collect())
+                        .unwrap_or_default()
+                }
+            };
         } else if md.package {
             // submodule import fallback (relative_only=True)
             let submod = format!("{}.{}", md.name, name_str);

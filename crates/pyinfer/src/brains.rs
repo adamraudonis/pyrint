@@ -49,6 +49,8 @@ pub enum Tip {
     DataclassAttr,
     /// brain_dataclasses infer_dataclass_field_call
     DataclassFieldCall,
+    /// brain_re infer_pattern_match: `Pattern = type(...)` in stdlib re
+    RePatternMatch,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -108,6 +110,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::PathlibParents => (7, 29),
         Tip::DataclassAttr => (7, 28),
         Tip::DataclassFieldCall => (7, 27),
+        Tip::RePatternMatch => (7, 26),
     }
 }
 
@@ -356,7 +359,9 @@ impl Engine {
                     }
                 }
                 let idx = BUILTIN_NAMES.iter().position(|&b| b == n)?;
-                // re module Pattern/Match carve-out
+                // re module Pattern/Match carve-out: the builtin type() tip
+                // does NOT apply (brain_builtin_inference.py:171-180) but
+                // brain_re.infer_pattern_match DOES (brain_re.py:56-92)
                 if n == "type" && md.name == "re" {
                     let parent = md.tree.nodes[node.n.idx()].parent;
                     if let NodeKind::Assign { targets, .. } = &md.tree.nodes[parent.idx()].kind {
@@ -366,7 +371,7 @@ impl Engine {
                             {
                                 let t = md.tree.s(*tn);
                                 if t == "Pattern" || t == "Match" {
-                                    return None;
+                                    return Some(Tip::RePatternMatch);
                                 }
                             }
                         }
@@ -485,7 +490,38 @@ impl Engine {
             Tip::PathlibParents => self.tip_pathlib_parents(node, ctx),
             Tip::DataclassAttr => self.tip_dataclass_attr(node, ctx),
             Tip::DataclassFieldCall => self.tip_dataclass_field_call(node, ctx),
+            Tip::RePatternMatch => self.tip_re_pattern_match(node),
         }
+    }
+
+    /// brain_re.infer_pattern_match (brain_re.py:79-92): a FRESH ClassDef
+    /// named after the assign target with only __class_getitem__ in locals;
+    /// parent = node.parent so qname composes to re.Pattern / re.Match.
+    fn tip_re_pattern_match(&self, node: GNode) -> Option<Flow> {
+        let md = self.md(node.m);
+        let parent = md.tree.nodes[node.n.idx()].parent;
+        let tname = match &md.tree.nodes[parent.idx()].kind {
+            NodeKind::Assign { targets, .. } if targets.len() == 1 => {
+                match &md.tree.nodes[targets[0].idx()].kind {
+                    NodeKind::AssignName { name } => md.tree.s(*name).to_string(),
+                    _ => return None,
+                }
+            }
+            _ => return None,
+        };
+        let src = format!(
+            "class {tname}:\n    @classmethod\n    def __class_getitem__(cls, item):\n        return cls\n"
+        );
+        let fake_mid = self.build_template_module(&src, "re")?;
+        let sym = self.sym(&tname);
+        let fmd = self.md(fake_mid);
+        let locals = fmd.locals.borrow();
+        let cls = locals
+            .get(&pyast::NodeId::MODULE)
+            .and_then(|l| l.get(&sym))
+            .and_then(|v| v.first())
+            .copied()?;
+        Some(Flow::ok(vec![crate::value::Value::Node(cls)]))
     }
 
     /// brain_dataclasses.infer_dataclass_field_call: default -> the value's

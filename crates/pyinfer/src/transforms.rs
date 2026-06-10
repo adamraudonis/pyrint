@@ -494,6 +494,10 @@ impl Engine {
                 };
                 if !re_carveout {
                     self.wipe();
+                } else {
+                    // brain_re.infer_pattern_match applies instead
+                    // (inference_tip transform returns the node -> wipe)
+                    self.wipe();
                 }
             }
         }

@@ -12,6 +12,7 @@ pub mod calls;
 pub mod constraint;
 pub mod ctx;
 pub mod dump;
+pub mod ext_templates;
 pub mod getattr;
 pub mod graph;
 pub mod infer;
