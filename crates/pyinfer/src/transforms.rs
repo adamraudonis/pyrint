@@ -658,7 +658,53 @@ impl Engine {
         }
     }
 
+    const ATTRS_NAMES: [&'static str; 13] = [
+        "attr.s",
+        "attrs",
+        "attr.attrs",
+        "attr.attributes",
+        "attr.define",
+        "attr.mutable",
+        "attr.frozen",
+        "attrs.define",
+        "attrs.mutable",
+        "attrs.frozen",
+        "attr.dataclass",
+        "attrs.attrs",
+        "attrs.s",
+    ];
+
     fn scan_classdef(&self, g: GNode) {
+        // brain_attrs is_decorated_with_attrs (brain_attrs.py:48-61):
+        // registered FIRST; per decorator: Call -> func; as_string() name
+        // match short-circuits, otherwise safe_infer (2 pulls) runs for
+        // EVERY decorated class and checks root module "attr._next_gen".
+        // The transform mutates locals and returns None (no wipe).
+        {
+            let mut matched = false;
+            for dec in self.decorator_nodes(g) {
+                let target = match self.call_func(dec) {
+                    Some(f) => f,
+                    None => dec,
+                };
+                if let Some(ds) = self.dotted_string(target) {
+                    if Self::ATTRS_NAMES.contains(&ds.as_str()) {
+                        matched = true;
+                        break;
+                    }
+                }
+                let v = self.safe_infer(target, &Ctx::new());
+                if let Some(Value::Node(ng)) = &v {
+                    if self.md(ng.m).name == "attr._next_gen" {
+                        matched = true;
+                        break;
+                    }
+                }
+            }
+            // attr_attributes_transform not ported (no attrs usage in the
+            // pinned venv corpora resolves); predicate side effects only
+            let _ = matched;
+        }
         // brain_boto3
         if self.qname(g) == "boto3.resources.factory.ResourceFactory" {
             self.wipe();
@@ -668,6 +714,38 @@ impl Engine {
             if self.dotted_string(dec).as_deref() == Some("object.__new__") {
                 self.wipe();
                 break;
+            }
+        }
+        // brain_collections easy_class_getitem_inference
+        // (brain_collections.py:92-133): the predicate runs a full
+        // class-context getattr('__class_getitem__') — inference side
+        // effects (metaclass chain) run for EVERY collections/_collections*
+        // class; on success locals['__class_getitem__'] is REPLACED with a
+        // fresh extract_node template (transform returns None — no wipe)
+        {
+            let q = self.qname(g);
+            if q.starts_with("_collections") || q.starts_with("collections") {
+                let cgi = self.sym("__class_getitem__");
+                if self.class_getattr(g, cgi, None, true).is_ok() {
+                    if let Some(tmpl) = self.build_template_module(
+                        "@classmethod\ndef __class_getitem__(cls, item):\n    return cls\n",
+                        "",
+                    ) {
+                        let func = {
+                            let tmd = self.md(tmpl);
+                            let locals = tmd.locals.borrow();
+                            locals
+                                .get(&NodeId::MODULE)
+                                .and_then(|m| m.get(&cgi))
+                                .and_then(|v| v.first().copied())
+                        };
+                        if let Some(func) = func {
+                            let md = self.md(g.m);
+                            let mut locals = md.locals.borrow_mut();
+                            locals.entry(g.n).or_default().insert(cgi, vec![func]);
+                        }
+                    }
+                }
             }
         }
         // brain_dataclasses dataclass_transform (raw, returns node)

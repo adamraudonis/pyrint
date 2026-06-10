@@ -134,6 +134,14 @@ impl Engine {
     /// NodeNG._explicit_inference equivalent. None => no tip applies or
     /// UseInferenceDefault.
     pub fn explicit_inference(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        // _explicit_inference is registered on nodes by the TransformVisitor
+        // at the END of the module's build (builder.py:175-177): inference
+        // running during delayed_assattr of a module-in-build sees NO tips
+        // on that module's nodes (default path; results land in the global
+        // cache and are only erased if a later transform wipes it).
+        if !self.md(node.m).tips_active.get() {
+            return None;
+        }
         let tip = self.find_tip(node)?;
         let (a, b) = tip_id(tip);
         let key = (a * 32 + b, node);

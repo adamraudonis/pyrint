@@ -431,6 +431,10 @@ pub fn kind_label(k: &NodeKind) -> &'static str {
         NodeKind::ImportFrom { .. } => "ImportFrom",
         NodeKind::Subscript { .. } => "Subscript",
         NodeKind::Arguments(_) => "Arguments",
+        NodeKind::Tuple { .. } => "Tuple",
+        NodeKind::List { .. } => "List",
+        NodeKind::Set { .. } => "Set",
+        NodeKind::Dict { .. } => "Dict",
         _ => "Node",
     }
 }

@@ -13,6 +13,17 @@ use crate::infer::Sink;
 use crate::yield_v;
 use crate::value::{Drive, End, ErrKind, Flow, GNode, GSym, SeqKind, Value, NV};
 
+/// assigned_stmts results are re-run through _infer_stmts by
+/// infer_assign (protocols.py + node_classes.py): NODE results get a full
+/// stmt.infer() hop (counter bump + cache write) while proxy values
+/// (Instance/BoundMethod/...) pass through via Proxy.infer (yield self).
+fn nvify(v: Value) -> NV {
+    match v {
+        Value::Node(g) => NV::N(g),
+        other => NV::V(other),
+    }
+}
+
 impl Engine {
     // ================= assigned_stmts =================
 
@@ -97,7 +108,7 @@ impl Engine {
                     if f.vals.is_empty() {
                         return Err(f.err.unwrap_or(ErrKind::Inference));
                     }
-                    Ok(f.vals.into_iter().map(NV::V).collect())
+                    Ok(f.vals.into_iter().map(nvify).collect())
                 } else {
                     Err(ErrKind::Inference)
                 }
@@ -446,7 +457,7 @@ impl Engine {
                 match &enter {
                     Value::BoundMethod { func, .. } => {
                         let res = self.function_infer_call_result(*func, None, Some(ctx));
-                        Ok(res.vals.into_iter().map(NV::V).collect())
+                        Ok(res.vals.into_iter().map(nvify).collect())
                     }
                     _ => Err(ErrKind::Inference),
                 }
@@ -617,13 +628,13 @@ impl Engine {
                 if f.vals.is_empty() {
                     return Err(f.err.unwrap_or(ErrKind::Inference));
                 }
-                return Ok(f.vals.into_iter().map(NV::V).collect());
+                return Ok(f.vals.into_iter().map(nvify).collect());
             }
             let f = self.arguments_infer_argname(arguments_node, node_name, c);
             if f.vals.is_empty() {
                 return Err(f.err.unwrap_or(ErrKind::Inference));
             }
-            return Ok(f.vals.into_iter().map(NV::V).collect());
+            return Ok(f.vals.into_iter().map(nvify).collect());
         }
         let c = match ctx {
             Some(c) => Rc::clone(c),
@@ -633,7 +644,7 @@ impl Engine {
         if f.vals.is_empty() {
             return Err(f.err.unwrap_or(ErrKind::Inference));
         }
-        Ok(f.vals.into_iter().map(NV::V).collect())
+        Ok(f.vals.into_iter().map(nvify).collect())
     }
 
     /// starred_assigned_stmts (protocols.py:704-899), yes_if_nothing

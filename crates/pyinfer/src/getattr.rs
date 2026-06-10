@@ -343,6 +343,10 @@ impl Engine {
     fn metaclass_lookup_attribute(&self, cls: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Vec<NV> {
         let mut out = Vec::new();
         let implicit = self.builtins().type_;
+        // scoped_nodes.py:2380 — `context = copy_context(context)` BEFORE
+        // metaclass(): lookupname is reset for the whole metaclass chain
+        let ctx = copy_context(ctx);
+        let ctx = Some(&ctx);
         let metaclass = self.metaclass(cls, ctx);
         // scoped_nodes.py:2375-2386: `if cls and cls != self` — the
         // implicit metaclass of `type` is `type` itself; without this guard
@@ -358,40 +362,52 @@ impl Engine {
         }
         for meta in metaclasses {
             if let Ok(attrs) = self.class_getattr(meta, name, ctx, true) {
-                for attr in attrs {
-                    match attr {
-                        NV::N(g) if self.kind_is(g, |k| {
+                // _get_attribute_from_metaclass (scoped_nodes.py:2388-2415):
+                // `for attr in bases._infer_stmts(attrs, context, frame=cls)`
+                // — node attrs get a FULL infer hop (bump + cache) and the
+                // INFERRED values are then wrapped (properties already
+                // resolved to Property objects by FunctionDef._infer)
+                let flow = self.infer_stmts(&attrs, ctx, Some(meta));
+                for attr in flow.vals {
+                    match &attr {
+                        Value::Node(g) if self.kind_is(*g, |k| {
                             matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
                         }) =>
                         {
-                            // _get_attribute_from_metaclass
-                            match self.func_type(g) {
+                            match self.func_type(*g) {
                                 FType::ClassMethod => {
-                                    let bound = Value::Node(cls);
+                                    // BoundMethod(attr, get_wrapping_class(attr) or self)
+                                    let frame = self.wrapping_class_of(*g).unwrap_or(cls);
                                     out.push(NV::V(Value::BoundMethod {
-                                        func: g,
-                                        bound: Rc::new(bound),
+                                        func: *g,
+                                        bound: Rc::new(Value::Node(frame)),
                                     }));
                                 }
-                                FType::StaticMethod => out.push(NV::N(g)),
-                                _ => {
-                                    if self.is_property(g, &copy_context(ctx)) {
-                                        out.push(NV::N(g));
-                                    } else {
-                                        out.push(NV::V(Value::BoundMethod {
-                                            func: g,
-                                            bound: Rc::new(Value::Node(cls)),
-                                        }));
-                                    }
-                                }
+                                FType::StaticMethod => out.push(NV::V(attr.clone())),
+                                _ => out.push(NV::V(Value::BoundMethod {
+                                    func: *g,
+                                    bound: Rc::new(Value::Node(cls)),
+                                })),
                             }
                         }
-                        other => out.push(other),
+                        _ => out.push(NV::V(attr.clone())),
                     }
                 }
             }
         }
         out
+    }
+
+    /// scoped_nodes.get_wrapping_class: nearest ClassDef frame at or above
+    fn wrapping_class_of(&self, node: GNode) -> Option<GNode> {
+        let mut k = self.frame(node);
+        loop {
+            if self.kind_is(k, |kind| matches!(kind, NodeKind::ClassDef(_))) {
+                return Some(k);
+            }
+            let parent = self.parent(k)?;
+            k = self.frame(parent);
+        }
     }
 
     /// eager shim
@@ -681,7 +697,10 @@ impl Engine {
     // ---------- Instance getattr / igetattr (§12.2-12.3) ----------
 
     /// ClassDef.instance_attr (scoped_nodes.py:2281-2301)
-    pub fn instance_attr(&self, cls: GNode, name: GSym) -> Result<Vec<GNode>, ErrKind> {
+    /// ClassDef.instance_attr + instance_attr_ancestors
+    /// (scoped_nodes.py): the ancestors walk gets the caller's context —
+    /// including the lookupname mutated by Instance.igetattr (bases.py:281)
+    pub fn instance_attr(&self, cls: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Result<Vec<GNode>, ErrKind> {
         let mut values: Vec<GNode> = self
             .iattrs
             .borrow()
@@ -689,7 +708,7 @@ impl Engine {
             .and_then(|m| m.get(&name))
             .cloned()
             .unwrap_or_default();
-        for anc in self.ancestors(cls, true, None) {
+        for anc in self.ancestors(cls, true, ctx) {
             if let Some(v) = self.iattrs.borrow().get(&anc).and_then(|m| m.get(&name)) {
                 values.extend(v.iter().copied());
             }
@@ -714,7 +733,7 @@ impl Engine {
             Some(c) => c,
             None => return Err(ErrKind::Attribute),
         };
-        match self.instance_attr(cls, name) {
+        match self.instance_attr(cls, name, ctx) {
             Err(_) => {
                 let name_str = self.sname(name);
                 if let Some(v) = self.instance_special_attr(owner, &name_str, ctx) {
@@ -940,12 +959,69 @@ impl Engine {
             "__module__" => Some(Value::SynthConst(Rc::new(ConstValue::Str(
                 self.md(cls.m).name.clone().into(),
             )))),
-            "__doc__" => Some(Value::SynthConst(Rc::new(ConstValue::None))),
+            // InstanceModel.attr___doc__ (objectmodel.py:744-746):
+            // Const(getattr(self._instance.doc_node, "value", None)) —
+            // Instance proxies doc_node to the CLASS docstring
+            "__doc__" => {
+                let doc = {
+                    let md = self.md(cls.m);
+                    match &md.tree.nodes[cls.n.idx()].kind {
+                        NodeKind::ClassDef(d) => {
+                            d.doc_node.and_then(|doc| match &md.tree.nodes[doc.idx()].kind {
+                                NodeKind::Const(c) => Some(c.clone()),
+                                _ => None,
+                            })
+                        }
+                        _ => None,
+                    }
+                };
+                Some(Value::SynthConst(Rc::new(doc.unwrap_or(ConstValue::None))))
+            }
             "__dict__" => Some(Value::SynthDict {
                 items: Rc::new(Vec::new()),
             }),
+            // ObjectModel.attr___new__/attr___init__ (objectmodel.py:136-164):
+            // synthetic FunctionDefs parented to builtins.object, wrapped as
+            // BoundMethod(proxy=node, bound=instance)
+            "__new__" => {
+                let (new_fn, _) = self.obj_model_func_nodes()?;
+                Some(Value::BoundMethod {
+                    func: new_fn,
+                    bound: Rc::new(owner.clone()),
+                })
+            }
+            "__init__" => {
+                let (_, init_fn) = self.obj_model_func_nodes()?;
+                Some(Value::BoundMethod {
+                    func: init_fn,
+                    bound: Rc::new(owner.clone()),
+                })
+            }
             _ => None,
         }
+    }
+
+    /// lazily build the ObjectModel __new__/__init__ template module
+    /// (objectmodel.py:136-164); the host module is named builtins.object so
+    /// qname() composes to builtins.object.__new__ / builtins.object.__init__
+    fn obj_model_func_nodes(&self) -> Option<(GNode, GNode)> {
+        if let Some(p) = *self.obj_model_funcs.borrow() {
+            return Some(p);
+        }
+        let mid = self.build_template_module(
+            "def __new__(self, cls): return cls()\ndef __init__(self, *args, **kwargs): return None\n",
+            "builtins.object",
+        )?;
+        let md = self.md(mid);
+        let locals = md.locals.borrow();
+        let map = locals.get(&NodeId::MODULE)?;
+        let new_sym = self.interner.borrow_mut().intern("__new__");
+        let init_sym = self.interner.borrow_mut().intern("__init__");
+        let new_fn = *map.get(&new_sym)?.first()?;
+        let init_fn = *map.get(&init_sym)?.first()?;
+        drop(locals);
+        *self.obj_model_funcs.borrow_mut() = Some((new_fn, init_fn));
+        Some((new_fn, init_fn))
     }
 
     // ---------- FunctionDef getattr ----------
@@ -1256,6 +1332,12 @@ impl Engine {
 
     // ---------- MRO / ancestors (§13) ----------
 
+    /// ClassDef.hide (scoped_nodes.py:1849; set only at :1603 for the
+    /// with_metaclass temporary_class)
+    pub fn is_hidden_class(&self, g: GNode) -> bool {
+        self.hidden_classes.borrow().contains(&g)
+    }
+
     pub fn class_bases(&self, cls: GNode) -> Vec<GNode> {
         let md = self.md(cls.m);
         match &md.tree.nodes[cls.n.idx()].kind {
@@ -1290,7 +1372,14 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
         sink: &mut dyn FnMut(GNode) -> Drive,
     ) -> End {
-        let ctx = copy_context(ctx);
+        // scoped_nodes.py:2167-2180 — ancestors() does NOT clone the
+        // context: `if context is None: context = InferenceContext()`.
+        // lookupname set by callers (e.g. igetattr's '__slots__') is
+        // preserved into base inference cache keys.
+        let ctx = match ctx {
+            Some(c) => Rc::clone(c),
+            None => Ctx::new(),
+        };
         self.ancestors_frame(cls, recurs, &ctx, 0, sink)
     }
 
@@ -1500,20 +1589,49 @@ impl Engine {
 
     // ---------- metaclass ----------
 
+    /// declared_metaclass (scoped_nodes.py:2626-2661). The bases loop runs
+    /// on EVERY call (even with no metaclass keyword): each base is fully
+    /// materialized via base.infer(context) — counter bumps included — and
+    /// a hidden baseobj (six.with_metaclass temporary_class) persistently
+    /// overwrites self._metaclass (scoped_nodes.py:2638-2645).
     pub fn declared_metaclass(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Option<Value> {
-        let md = self.md(cls.m);
-        let meta = match &md.tree.nodes[cls.n.idx()].kind {
-            NodeKind::ClassDef(d) => d.metaclass,
-            _ => None,
-        }?;
-        let c = copy_context(ctx);
-        // next(node for node in infer() if not Uninferable) — pulls until
-        // the first non-Uninferable value, then abandons the generator
-        // (scoped_nodes.py:2640-2648).
+        // for base in self.bases: for baseobj in base.infer(context):
+        // (context passed through unchanged, NOT copied)
+        let base_ctx = match ctx {
+            Some(c) => Rc::clone(c),
+            None => Ctx::new(),
+        };
+        for base in self.class_bases(cls) {
+            let _ = self.infer_to(base, &base_ctx, &mut |baseobj| {
+                if let Value::Node(g) = &baseobj {
+                    if self.is_hidden_class(*g) {
+                        // self._metaclass = baseobj._metaclass;
+                        // self._metaclass_hack = True; break (inner loop)
+                        if let Some(meta) = self.class_metaclass_node(*g) {
+                            self.meta_override.borrow_mut().insert(cls, meta);
+                        }
+                        return Drive::Stop;
+                    }
+                }
+                Drive::Go
+            });
+        }
+        let meta: GNode = match self.meta_override.borrow().get(&cls).copied() {
+            Some(g) => g,
+            None => self.class_metaclass_node(cls)?,
+        };
+        // next(node for node in self._metaclass.infer(context=context) if
+        // not Uninferable) — context passed through unchanged
+        // (scoped_nodes.py:2651-2658); abandons the generator on the first
+        // non-Uninferable value.
+        let c = match ctx {
+            Some(c) => Rc::clone(c),
+            None => Ctx::new(),
+        };
         let mut found: Option<Value> = None;
         let _ = {
             let found = &mut found;
-            self.infer_to(GNode { m: cls.m, n: meta }, &c, &mut |v| {
+            self.infer_to(meta, &c, &mut |v| {
                 if v.is_uninferable() {
                     Drive::Go
                 } else {
@@ -1523,6 +1641,19 @@ impl Engine {
             })
         };
         found
+    }
+
+    /// the `metaclass=` keyword node of a ClassDef (TreeRebuilder
+    /// _metaclass), before any with_metaclass override
+    fn class_metaclass_node(&self, cls: GNode) -> Option<GNode> {
+        if let Some(meta) = self.meta_override.borrow().get(&cls).copied() {
+            return Some(meta);
+        }
+        let md = self.md(cls.m);
+        match &md.tree.nodes[cls.n.idx()].kind {
+            NodeKind::ClassDef(d) => d.metaclass.map(|n| GNode { m: cls.m, n }),
+            _ => None,
+        }
     }
 
     pub fn metaclass(&self, cls: GNode, ctx: Option<&Rc<Ctx>>) -> Option<Value> {
@@ -1543,7 +1674,9 @@ impl Engine {
         let mut found: Option<Value> = None;
         let _ = self.ancestors_to(cls, true, ctx, &mut |parent| {
             if !seen.contains(&parent) {
-                if let Some(k) = self.find_metaclass(parent, seen, ctx) {
+                // scoped_nodes.py:2673 `parent._find_metaclass(seen)` —
+                // the context is DROPPED on recursion (bug-for-bug)
+                if let Some(k) = self.find_metaclass(parent, seen, None) {
                     found = Some(k);
                     return Drive::Stop;
                 }

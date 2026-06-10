@@ -31,6 +31,12 @@ macro_rules! yield_v {
 pub enum DedupKey {
     Node(GNode),
     Uninferable,
+    /// Python object identity for synthetic values: clones of the same Rc
+    /// (e.g. BoolOp's materialized operand lists reused across product
+    /// pairs — node_classes.py:1668 itertools.product) are the SAME object
+    /// in astroid and dedup in path_wrapper; independently const_factory'd
+    /// values are distinct objects and do NOT dedup.
+    Ptr(usize),
 }
 
 /// path_wrapper dedup identity (decorators.py:25-54): exact-class Instance
@@ -41,6 +47,10 @@ pub fn dedup_key(v: &Value) -> Option<DedupKey> {
         Value::Node(g) => Some(DedupKey::Node(*g)),
         Value::Inst { cls } => Some(DedupKey::Node(*cls)),
         Value::Uninferable => Some(DedupKey::Uninferable),
+        Value::SynthConst(rc) => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(rc) as usize)),
+        Value::SynthSeq { elems, .. } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(elems) as usize)),
+        Value::SynthDict { items } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(items) as usize)),
+        Value::FrozenSet { elems } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(elems) as usize)),
         _ => None,
     }
 }
@@ -88,12 +98,16 @@ impl Engine {
             let kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
             let name = self.node_name(node).unwrap_or_default();
             let d = self.depth.get() as usize;
+            let ccid = ctx_in.callcontext.borrow().as_ref().map(|c| c.id);
+            let bn = ctx_in.boundnode.borrow().is_some();
             eprintln!(
-                "{}> {} {} ln={:?}",
+                "{}> {} {} ln={:?} cc={:?} bn={}",
                 "  ".repeat(d),
                 kind,
                 name,
-                ctx_in.lookupname.get().map(|s| self.sname(s))
+                ctx_in.lookupname.get().map(|s| self.sname(s)),
+                ccid,
+                bn
             );
             let mut wrapped = |v: Value| -> Drive {
                 eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
@@ -144,17 +158,26 @@ impl Engine {
         let mut results: Vec<Value> = Vec::new();
         let mut i: usize = 0;
         let mut truncated = false;
+        let mut cache_after_trunc = false;
         let end = {
             let results = &mut results;
             let i = &mut i;
             let truncated = &mut truncated;
+            let cache_after_trunc = &mut cache_after_trunc;
             let ctx2 = Rc::clone(&ctx);
             self.infer_dispatch_to(node, &ctx, &mut |v| {
                 if *i >= MAX_INFERABLE_VALUES || ctx2.nodes_inferred.get() > MAX_INFERRED {
                     results.push(Value::Uninferable);
-                    let _ = sink(Value::Uninferable);
+                    let d = sink(Value::Uninferable);
                     *truncated = true;
-                    return Drive::Stop; // `break` — but the cache IS written
+                    // node_ng.py:164-167: `yield Uninferable` SUSPENDS
+                    // before `break` — the cache write below the loop only
+                    // runs if the consumer pulls again (Drive::Go). A
+                    // consumer abandoning at this yield drops the generator
+                    // while suspended: NO cache write (probe: os.path attr
+                    // chain stays uncached after a capped abspath call).
+                    *cache_after_trunc = matches!(d, Drive::Go);
+                    return Drive::Stop;
                 }
                 results.push(v.clone());
                 let d = sink(v);
@@ -175,7 +198,7 @@ impl Engine {
                 End::Done
             }
             End::Stopped => {
-                if truncated {
+                if truncated && cache_after_trunc {
                     self.inf_cache.borrow_mut().insert(key, Rc::new(results));
                     End::Done
                 } else {

@@ -53,6 +53,10 @@ pub struct Module {
     pub args_unknown: FxHashMap<NodeId, bool>,
     /// snapshot qname overrides (raw-built node reparenting)
     pub qnames: FxHashMap<NodeId, String>,
+    /// transforms applied yet? inference tips are registered on nodes by
+    /// the TransformVisitor at the END of build (builder.py:175-177);
+    /// build-time inference (delayed_assattr) runs WITHOUT tips.
+    pub tips_active: Cell<bool>,
 }
 
 impl Module {
@@ -164,6 +168,17 @@ pub struct Engine {
     /// pre-inferred values (NV::V — EvaluatedObject / enum-member instances
     /// stored in locals). infer() forwards through this table.
     pub redirects: RefCell<FxHashMap<GNode, crate::value::NV>>,
+    /// six.with_metaclass hack: persistent `self._metaclass = baseobj._metaclass`
+    /// mutation from declared_metaclass (scoped_nodes.py:2638-2645)
+    pub meta_override: RefCell<FxHashMap<GNode, GNode>>,
+    /// ObjectModel.attr___new__/attr___init__ synthetic FunctionDefs
+    /// (objectmodel.py:136-164): `def __new__(self, cls): return cls()` and
+    /// `def __init__(self, *args, **kwargs): return None`, reparented to
+    /// builtins.object (qname builtins.object.__new__/__init__)
+    pub obj_model_funcs: RefCell<Option<(GNode, GNode)>>,
+    /// ClassDef.hide — true only for synthesized temporary_class nodes
+    /// (scoped_nodes.py:1603 with_metaclass hack)
+    pub hidden_classes: RefCell<FxHashSet<GNode>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -208,6 +223,9 @@ impl Engine {
             isdir_cache: RefCell::new(FxHashMap::default()),
             typing_tip_cache: RefCell::new(FxHashMap::default()),
             redirects: RefCell::new(FxHashMap::default()),
+            meta_override: RefCell::new(FxHashMap::default()),
+            obj_model_funcs: RefCell::new(None),
+            hidden_classes: RefCell::new(FxHashSet::default()),
         };
         e.bootstrap();
         e
@@ -413,6 +431,7 @@ impl Engine {
             eklass: FxHashMap::default(),
             args_unknown: FxHashMap::default(),
             qnames: FxHashMap::default(),
+            tips_active: Cell::new(false),
         };
         self.mods.borrow_mut().push(Rc::new(md));
         id
@@ -627,11 +646,13 @@ impl Engine {
             eklass: snap.eklass,
             args_unknown: snap.args_unknown,
             qnames: snap.qnames,
+            tips_active: Cell::new(false),
         };
         self.mods.borrow_mut().push(Rc::new(md));
         // raw-built modules also go through visit_transforms
         // (builder.py:103-109 module_build) — run the wipe scan. Note the
         // bootstrap builtins module is scanned too (harmless: cache empty).
+        self.md(id).tips_active.set(true);
         self.wipe_scan(id);
         // instance_attrs from the snapshot (exception classes etc.)
         {
@@ -1142,6 +1163,9 @@ impl Engine {
         // transform that returns non-None wipes the global inference cache
         // (transforms.py:66-72). Extenders return None (no wipe) and apply
         // at the Module node — after all child transforms.
+        // Tips become live HERE: inference during delayed_assattr above ran
+        // with untransformed nodes (no _explicit_inference yet).
+        self.md(id).tips_active.set(true);
         self.wipe_scan(id);
         self.apply_module_extenders(id);
     }
@@ -1577,14 +1601,17 @@ impl Engine {
         let mut out: Vec<String> = Vec::new();
         let mut any = false;
         for slots in &flow.vals {
-            // must support iteration (__iter__ / __getitem__ on the type)
-            let iterable = self.proxied_class(slots).map(|pc| {
+            // must support iteration: `slots.getattr(meth)` — container
+            // literals ARE Instances (BaseContainer <- bases.Instance), so
+            // this is the full Instance.getattr chain (instance_attr
+            // ancestors walk + class getattr, scoped_nodes.py:2700-2706)
+            let iterable = self.proxied_class(slots).is_some() && {
                 let i1 = self.sym("__iter__");
                 let i2 = self.sym("__getitem__");
-                self.class_getattr(pc, i1, None, false).is_ok()
-                    || self.class_getattr(pc, i2, None, false).is_ok()
-            });
-            if iterable != Some(true) {
+                self.instance_getattr(slots, i1, None, true).is_ok()
+                    || self.instance_getattr(slots, i2, None, true).is_ok()
+            };
+            if !iterable {
                 continue;
             }
             // Const string: yield if non-empty
