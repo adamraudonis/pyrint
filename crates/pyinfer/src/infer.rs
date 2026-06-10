@@ -228,6 +228,9 @@ impl Engine {
                     // while suspended: NO cache write (probe: os.path attr
                     // chain stays uncached after a capped abspath call).
                     *cache_after_trunc = matches!(d, Drive::Go);
+                    if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                        eprintln!("TRUNC i={} ni={} d={:?}", i, ctx2.nodes_inferred.get(), d);
+                    }
                     return Drive::Stop;
                 }
                 results.push(v.clone());
@@ -253,6 +256,27 @@ impl Engine {
             }
         };
         match end {
+            // node_ng.py:163-167: after the truncation `yield Uninferable`
+            // the wrapper is SUSPENDED before `break`; the cache write
+            // below the loop runs ONLY if the consumer pulls again
+            // (cache_after_trunc). How the producer ended is irrelevant —
+            // astroid never pulls it after the break. Without this arm a
+            // producer that completes Done after the truncation Stop fell
+            // into the unconditional cache branch, freezing every
+            // mid-cascade node of a cap blow (GT re-burns ##103 on the
+            // next dump node; we replayed ##0).
+            _ if truncated => {
+                if cache_after_trunc {
+                    trace_write(results.len());
+                    if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                        self.pin_value_identity(bn);
+                    }
+                    self.inf_cache.borrow_mut().insert(key, Rc::new(results));
+                    End::Done
+                } else {
+                    End::Stopped
+                }
+            }
             // a producer may "complete" internally (e.g. Subscript's
             // `yield Uninferable; return`) even though the CONSUMER
             // abandoned at that yield — in astroid the NodeNG.infer
@@ -269,18 +293,7 @@ impl Engine {
                 self.inf_cache.borrow_mut().insert(key, Rc::new(results));
                 End::Done
             }
-            End::Stopped => {
-                if truncated && cache_after_trunc {
-                    trace_write(results.len());
-                    if let Some(bn) = ctx.boundnode.borrow().as_ref() {
-                        self.pin_value_identity(bn);
-                    }
-                    self.inf_cache.borrow_mut().insert(key, Rc::new(results));
-                    End::Done
-                } else {
-                    End::Stopped
-                }
-            }
+            End::Stopped => End::Stopped,
             End::Raised(e) => End::Raised(e), // nothing cached
         }
     }
@@ -1910,6 +1923,38 @@ impl Engine {
                     NodeKind::Set { .. } => Some(b.set),
                     NodeKind::Dict { .. } => Some(b.dict),
                     NodeKind::Slice { .. } => Some(b.slice),
+                    _ => None,
+                }
+            }
+            _ => None,
+        }
+    }
+
+    /// astroid `isinstance(x, bases.Instance)` -> `x._proxied`. ONLY the
+    /// variants that are real `Instance` subclasses in astroid: Instance,
+    /// ExceptionInstance, Const (node_classes.py `class Const(..., Instance)`),
+    /// BaseContainer (List/Tuple/Set + objects.FrozenSet), Dict.
+    /// NOT Generator/UnionType (BaseInstance only), NOT Slice/methods/etc.
+    pub fn instance_unproxy(&self, v: &Value) -> Option<GNode> {
+        let b = self.builtins();
+        match v {
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(*cls),
+            Value::SynthConst(c) => Some(self.const_class(c)),
+            Value::SynthSeq { kind, .. } => Some(match kind {
+                SeqKind::List => b.list,
+                SeqKind::Tuple => b.tuple,
+                SeqKind::Set => b.set,
+            }),
+            Value::SynthDict { .. } => Some(b.dict),
+            Value::FrozenSet { .. } => Some(b.frozenset),
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Const(c) => Some(self.const_class(c)),
+                    NodeKind::List { .. } => Some(b.list),
+                    NodeKind::Tuple { .. } => Some(b.tuple),
+                    NodeKind::Set { .. } => Some(b.set),
+                    NodeKind::Dict { .. } => Some(b.dict),
                     _ => None,
                 }
             }

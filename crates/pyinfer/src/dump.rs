@@ -104,6 +104,13 @@ fn dump_module<W: Write>(engine: &Engine, mid: ModId, out: &mut W) {
             _ => "Call",
         };
         let node_info = &md.tree.nodes[n.idx()];
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            // sentinel for trace alignment with the GT tracer's @@DUMPNODE
+            eprintln!(
+                "@@DUMPNODE {}:{}:{}",
+                node_info.fromlineno, node_info.col_offset, kind_name
+            );
+        }
         let ctx = Ctx::new();
         let flow = engine.infer(g, &ctx);
         let rendered: Vec<String> = if let Some(e) = flow.err {

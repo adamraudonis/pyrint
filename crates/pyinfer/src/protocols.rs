@@ -1384,9 +1384,13 @@ impl Engine {
     fn instance_getitem(&self, instance: &Value, index: &Value, ctx: &Rc<Ctx>) -> Result<NV, ErrKind> {
         let new_ctx = bind_context_to_node(Some(ctx), instance.clone());
         let sym = self.sym("__getitem__");
-        // method = next(self.igetattr("__getitem__", context)) — single pull
+        // method = next(self.igetattr("__getitem__", context=context)) —
+        // single pull under the ORIGINAL context (bases.py:421: only the
+        // infer_call_result below gets new_context with the boundnode; the
+        // igetattr MRO/ancestors walks run bn-FREE, hitting/writing the
+        // (node, name, None, None) global cache keys)
         let method = self
-            .igetattr_first(instance, sym, Some(&new_ctx))
+            .igetattr_first(instance, sym, Some(ctx))
             .ok()
             .flatten()
             .ok_or(ErrKind::Inference)?;
@@ -2408,9 +2412,13 @@ impl Engine {
 
     /// helpers.object_type — None == Uninferable
     /// helpers.object_type over a NODE: full inference, set-collapse.
+    /// helpers.py:43-46 `_object_type` uses the caller's context AS-IS
+    /// (`context = context or InferenceContext()` — no copy): lookupname
+    /// and path mutations flow through (type(self) under a Property
+    /// igetattr keeps ln='_constructor' in the arg pull).
     pub fn object_type_of_node(&self, node: GNode, ctx: &Rc<Ctx>) -> Value {
         let b = self.builtins();
-        let flow = self.infer(node, &copy_context(Some(ctx)));
+        let flow = self.infer(node, ctx);
         if flow.err.map(|e| e.is_inference()).unwrap_or(false) {
             // InferenceError anywhere in _object_type -> Uninferable
             return Value::Uninferable;

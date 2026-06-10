@@ -1674,14 +1674,20 @@ impl Engine {
                 let yielded = &mut yielded;
                 let consumer_stop = &mut consumer_stop;
                 self.infer_to(base, ctx, &mut |baseobj| {
+                    // scoped_nodes.py:2185-2189: non-ClassDef baseobjs that
+                    // are astroid `Instance`s (incl. Const/containers!)
+                    // unproxy to their class (Const None -> NoneType -> its
+                    // ancestors walk yields object BEFORE later bases)
                     let basecls = match &baseobj {
                         Value::Node(g)
                             if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
                         {
                             *g
                         }
-                        Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => *cls,
-                        _ => return Drive::Go,
+                        other => match self.instance_unproxy(other) {
+                            Some(c) => c,
+                            None => return Drive::Go,
+                        },
                     };
                     if yielded.insert(basecls) {
                         if let Drive::Stop = sink(basecls) {
@@ -1826,10 +1832,14 @@ impl Engine {
             let flow = self.infer(base, &c);
             let last = flow.vals.last().cloned();
             let Some(last) = last else { continue };
+            // scoped_nodes.py:2828-2831: Instance baseobjs (incl. Const/
+            // containers) unproxy to their class before the ClassDef check
             let basecls = match last {
-                Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => cls,
                 Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
-                _ => continue,
+                other => match self.instance_unproxy(&other) {
+                    Some(c) => c,
+                    None => continue,
+                },
             };
             out.push(basecls);
         }
