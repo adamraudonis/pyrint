@@ -2210,10 +2210,13 @@ impl Engine {
                     for t in targets {
                         if let NodeKind::AssignName { name: tn } = &md.tree.nodes[t.idx()].kind {
                             if md.tree.s(*tn) == name {
-                                // meth must be a FunctionDef in this frame
+                                // `meth = frame[self.name]` — LocalsDictNodeNG
+                                // __getitem__ = locals[name][0]: the FIRST
+                                // local (the FunctionDef), not the last
+                                // (which is the AssignName of the rebind)
                                 let sym = self.g(&md, *tn);
                                 let locs = self.class_locals_get(frame, sym);
-                                if let Some(meth) = locs.last() {
+                                if let Some(meth) = locs.first() {
                                     if self.kind_is(*meth, |k| {
                                         matches!(
                                             k,

@@ -1952,8 +1952,13 @@ impl Engine {
                     match e {
                         NV::V(Value::Uninferable) => continue,
                         NV::N(g) => {
+                            // `if inferred:` (brain_builtin_inference.py:281)
+                            // — bool(Uninferable) is False: a safe_infer
+                            // that resolves to Uninferable is SKIPPED
                             if let Some(v) = self.safe_infer(g, ctx) {
-                                out.push(v);
+                                if !v.is_uninferable() {
+                                    out.push(v);
+                                }
                             }
                         }
                         NV::V(v) => {
@@ -2049,19 +2054,71 @@ impl Engine {
     }
 
     fn dict_arg_elts(&self, arg: &NV, ctx: &Rc<Ctx>) -> Option<Vec<(Value, Value)>> {
-        let inferred = self.safe_infer_nv(arg, ctx)?;
+        // _get_elts (brain_builtin_inference.py:362-388):
+        // `inferred = next(arg.infer(context))` — SINGLE pull (abandoned),
+        // NOT safe_infer: dict(parse_qsl(q)) takes the first return value
+        let inferred = match arg {
+            NV::N(g) => self.infer_first(*g, Some(ctx)).ok()?,
+            NV::V(v) => v.clone(),
+        };
         if let Some(items) = self.value_dict_items(&inferred) {
-            // each key must be Const-ish per _get_elts
             return Some(items);
         }
-        let elts = self.value_elts(&inferred)?;
+        // is_iterable: nodes.List/Tuple/Set EXACTLY (no FrozenSet/Const str)
+        let is_iter_kind = |v: &Value| -> Option<Vec<NV>> {
+            match v {
+                Value::Node(g) => {
+                    let md = self.md(g.m);
+                    match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::List { elts, .. }
+                        | NodeKind::Tuple { elts, .. }
+                        | NodeKind::Set { elts } => Some(
+                            elts.iter().map(|&e| NV::N(GNode { m: g.m, n: e })).collect(),
+                        ),
+                        _ => None,
+                    }
+                }
+                Value::SynthSeq { kind, elems }
+                    if matches!(kind, SeqKind::List | SeqKind::Tuple | SeqKind::Set) =>
+                {
+                    Some(elems.iter().cloned().map(NV::V).collect())
+                }
+                _ => None,
+            }
+        };
+        let elts = is_iter_kind(&inferred)?;
         let mut out = Vec::new();
         for e in elts {
-            let pair = self.value_elts(&e)?;
+            let ev = match &e {
+                NV::N(g) => Value::Node(*g),
+                NV::V(v) => v.clone(),
+            };
+            // each item must itself be a List/Tuple/Set pair of 2
+            let pair = is_iter_kind(&ev)?;
             if pair.len() != 2 {
                 return None;
             }
-            out.push((pair[0].clone(), pair[1].clone()));
+            // elts[0] must be Tuple/Const/Name (hashable-ish filter)
+            let key_ok = match &pair[0] {
+                NV::N(g) => {
+                    let md = self.md(g.m);
+                    matches!(
+                        &md.tree.nodes[g.n.idx()].kind,
+                        NodeKind::Tuple { .. } | NodeKind::Const(_) | NodeKind::Name { .. }
+                    )
+                }
+                NV::V(Value::SynthConst(_)) => true,
+                NV::V(Value::SynthSeq { kind: SeqKind::Tuple, .. }) => true,
+                _ => false,
+            };
+            if !key_ok {
+                return None;
+            }
+            let to_v = |nv: &NV| match nv {
+                NV::N(g) => Value::Node(*g),
+                NV::V(v) => v.clone(),
+            };
+            out.push((to_v(&pair[0]), to_v(&pair[1])));
         }
         Some(out)
     }
