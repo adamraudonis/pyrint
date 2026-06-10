@@ -45,6 +45,10 @@ pub enum Tip {
     TypeSubscript,
     /// brain_pathlib: <path>.parents[const] (predicate matched at scan time)
     PathlibParents,
+    /// brain_dataclasses infer_dataclass_attribute (Unknown placeholders)
+    DataclassAttr,
+    /// brain_dataclasses infer_dataclass_field_call
+    DataclassFieldCall,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -102,6 +106,8 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::NumpyNdarray => (7, 31),
         Tip::TypeSubscript => (7, 30),
         Tip::PathlibParents => (7, 29),
+        Tip::DataclassAttr => (7, 28),
+        Tip::DataclassFieldCall => (7, 27),
     }
 }
 
@@ -168,7 +174,12 @@ impl Engine {
         // running during delayed_assattr of a module-in-build sees NO tips
         // on that module's nodes (default path; results land in the global
         // cache and are only erased if a later transform wipes it).
-        if !self.md(node.m).tips_active.get() {
+        if !self.md(node.m).tips_active.get()
+            && !self.dataclass_attrs.borrow().contains_key(&node)
+        {
+            // dataclass Unknown placeholders live in synthetic modules but
+            // get their tip applied at creation (dataclass_transform calls
+            // visit_transforms(rhs_node) directly)
             return None;
         }
         let tip = self.find_tip(node)?;
@@ -206,6 +217,13 @@ impl Engine {
     /// build; they are pure syntactic checks so this is equivalent).
     fn find_tip(&self, node: GNode) -> Option<Tip> {
         let md = self.md(node.m);
+        // brain_dataclasses Unknown attribute placeholders
+        if matches!(md.tree.nodes[node.n.idx()].kind, NodeKind::Unknown) {
+            if self.dataclass_attrs.borrow().contains_key(&node) {
+                return Some(Tip::DataclassAttr);
+            }
+            return None;
+        }
         // Subscript tips: brain_pathlib parents (decided at scan time),
         // then typing.X[...] (brain_typing _looks_like_typing_subscript)
         if let NodeKind::Subscript { value, .. } = &md.tree.nodes[node.n.idx()].kind {
@@ -289,6 +307,10 @@ impl Engine {
         let NodeKind::Call { func, .. } = &md.tree.nodes[node.n.idx()].kind else {
             return None;
         };
+        // brain_dataclasses field() tip (decided at transform time)
+        if self.dataclass_field_calls.borrow().contains(&node) {
+            return Some(Tip::DataclassFieldCall);
+        }
         match &md.tree.nodes[func.idx()].kind {
             NodeKind::Name { name } => {
                 let n = md.tree.s(*name);
@@ -456,7 +478,147 @@ impl Engine {
             }
             Tip::TypeSubscript => self.tip_type_subscript(node, ctx),
             Tip::PathlibParents => self.tip_pathlib_parents(node, ctx),
+            Tip::DataclassAttr => self.tip_dataclass_attr(node, ctx),
+            Tip::DataclassFieldCall => self.tip_dataclass_field_call(node, ctx),
         }
+    }
+
+    /// brain_dataclasses.infer_dataclass_field_call: default -> the value's
+    /// inference; default_factory -> the factory called with no arguments
+    /// (astroid re-parses `<factory>()` — the synthetic call gets the
+    /// builtin container tips)
+    fn tip_dataclass_field_call(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let md = self.md(node.m);
+        let parent = md.tree.nodes[node.n.idx()].parent;
+        if !matches!(
+            md.tree.nodes[parent.idx()].kind,
+            NodeKind::AnnAssign { .. } | NodeKind::Assign { .. }
+        ) {
+            return None; // UseInferenceDefault
+        }
+        let keywords: Vec<pyast::NodeId> = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { keywords, .. } => keywords.clone(),
+            _ => return None,
+        };
+        let mut default: Option<pyast::NodeId> = None;
+        let mut default_factory: Option<pyast::NodeId> = None;
+        for kw in keywords {
+            if let NodeKind::Keyword { arg: Some(a), value } = &md.tree.nodes[kw.idx()].kind {
+                match md.tree.s(*a) {
+                    "default" => default = Some(*value),
+                    "default_factory" => default_factory = Some(*value),
+                    _ => {}
+                }
+            }
+        }
+        drop(md);
+        match (default, default_factory) {
+            (Some(d), None) => Some(self.infer(GNode { m: node.m, n: d }, ctx)),
+            (None, Some(f)) => {
+                let fg = GNode { m: node.m, n: f };
+                // emulate `parse(factory.as_string() + "()").infer(ctx)`
+                let flow = self.infer(fg, ctx);
+                let mut out: Vec<Value> = Vec::new();
+                for callee in flow.vals {
+                    if callee.is_uninferable() {
+                        out.push(Value::Uninferable);
+                        continue;
+                    }
+                    // builtin container classes get the builtin Call tip in
+                    // astroid's re-parsed module: empty containers
+                    if let Value::Node(g) = &callee {
+                        let b = self.builtins();
+                        let kind = if *g == b.list {
+                            Some(crate::value::SeqKind::List)
+                        } else if *g == b.tuple {
+                            Some(crate::value::SeqKind::Tuple)
+                        } else if *g == b.set {
+                            Some(crate::value::SeqKind::Set)
+                        } else {
+                            None
+                        };
+                        if let Some(kind) = kind {
+                            out.push(Value::SynthSeq { kind, elems: Rc::new(Vec::new()) });
+                            continue;
+                        }
+                        if *g == b.dict {
+                            out.push(Value::SynthDict { items: Rc::new(Vec::new()) });
+                            continue;
+                        }
+                        if *g == b.frozenset {
+                            out.push(Value::FrozenSet { elems: Rc::new(Vec::new()) });
+                            continue;
+                        }
+                    }
+                    let ctx2 = copy_context(Some(ctx));
+                    *ctx2.boundnode.borrow_mut() = None;
+                    *ctx2.callcontext.borrow_mut() = Some(Rc::new(crate::ctx::CallCtx {
+                        id: self.next_callctx_id(),
+                        args: std::cell::RefCell::new(Vec::new()),
+                        keywords: std::cell::RefCell::new(Vec::new()),
+                        callee: std::cell::RefCell::new(Some(callee.clone())),
+                    }));
+                    let res = self.infer_call_result(&callee, None, Some(&ctx2));
+                    out.extend(res.vals);
+                }
+                Some(Flow::ok(out))
+            }
+            _ => Some(Flow::one(Value::Uninferable)),
+        }
+    }
+
+    /// brain_dataclasses.infer_dataclass_attribute: default value infers
+    /// first, then an instance from the annotation
+    fn tip_dataclass_attr(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let assign = *self.dataclass_attrs.borrow().get(&node)?;
+        let (annotation, value) = {
+            let md = self.md(assign.m);
+            match &md.tree.nodes[assign.n.idx()].kind {
+                NodeKind::AnnAssign { annotation, value, .. } => (*annotation, *value),
+                _ => return Some(Flow::one(Value::Uninferable)),
+            }
+        };
+        let mut vals: Vec<Value> = Vec::new();
+        if let Some(v) = value {
+            let f = self.infer(GNode { m: assign.m, n: v }, ctx);
+            if let Some(e) = f.err {
+                if vals.is_empty() && f.vals.is_empty() {
+                    return Some(Flow::err(e));
+                }
+            }
+            vals.extend(f.vals);
+        }
+        // _infer_instance_from_annotation
+        let ann = GNode { m: assign.m, n: annotation };
+        let klass = self.first_value(ann, ctx).ok().flatten();
+        let mut from_ann: Vec<Value> = Vec::new();
+        if klass.is_none() {
+            from_ann.push(Value::Uninferable);
+        }
+        match &klass {
+            Some(Value::Node(g))
+                if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
+            {
+                let root = self.md(g.m).name.clone();
+                if matches!(root.as_str(), "typing" | "_collections_abc" | "") {
+                    let n = self.node_name(*g).unwrap_or_default();
+                    if matches!(n.as_str(), "Dict" | "FrozenSet" | "List" | "Set" | "Tuple") {
+                        from_ann.push(self.instantiate_class(*g));
+                    } else {
+                        from_ann.push(Value::Uninferable);
+                    }
+                } else {
+                    from_ann.push(self.instantiate_class(*g));
+                }
+            }
+            _ => {
+                // not a ClassDef (incl. the None-after-error case — astroid
+                // falls through the isinstance check and yields U again)
+                from_ann.push(Value::Uninferable);
+            }
+        }
+        vals.extend(from_ann);
+        Some(Flow::ok(vals))
     }
 
     /// brain_pathlib.infer_parents_subscript: Const slice -> Inst of the
@@ -1131,34 +1293,89 @@ impl Engine {
         if pos.len() != 2 {
             return None;
         }
-        let obj = self.infer_nv(&pos[0], &copy_context(Some(ctx))).vals.first()?.clone();
+        // _class_or_tuple_to_container (brain_builtin_inference.py): a
+        // SINGLE pull of the second arg; Tuple literal -> single pull per
+        // element; any InferenceError -> UseInferenceDefault
+        let cls_first = match &pos[1] {
+            NV::N(g) => self.first_value(*g, ctx).ok().flatten()?,
+            NV::V(v) => v.clone(),
+        };
+        let classes: Vec<Value> = match &cls_first {
+            Value::Node(g)
+                if self.kind_is(*g, |k| matches!(k, NodeKind::Tuple { .. })) =>
+            {
+                let md = self.md(g.m);
+                let elts: Vec<pyast::NodeId> = match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Tuple { elts, .. } => elts.clone(),
+                    _ => Vec::new(),
+                };
+                let mut out = Vec::new();
+                for e in elts {
+                    out.push(self.first_value(GNode { m: g.m, n: e }, ctx).ok().flatten()?);
+                }
+                out
+            }
+            other => vec![other.clone()],
+        };
         let obj_type: GNode = if name == "isinstance" {
-            self.object_type(&obj, ctx)?
+            // helpers.object_isinstance -> object_type(obj_node): full
+            // inference of the ARG NODE with set-of-types semantics
+            let t = match &pos[0] {
+                NV::N(g) => self.object_type_of_node(*g, ctx),
+                NV::V(v) => match self.object_type(v, ctx) {
+                    Some(t) => Value::Node(t),
+                    None => Value::Uninferable,
+                },
+            };
+            match t {
+                // Uninferable obj type -> infer_isinstance raises
+                // UseInferenceDefault (brain_builtin_inference.py)
+                Value::Node(g) => g,
+                _ => return None,
+            }
         } else {
+            let obj = self
+                .infer_nv(&pos[0], &copy_context(Some(ctx)))
+                .vals
+                .first()?
+                .clone();
             match obj {
                 Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
                 _ => return None,
             }
         };
-        // second arg: class or tuple of classes
-        let cls_v = self.safe_infer_nv(&pos[1], ctx)?;
-        let classes: Vec<Value> = match self.value_elts(&cls_v) {
-            Some(elts) => elts
-                .iter()
-                .map(|e| match e {
-                    Value::Node(g) => self
-                        .safe_infer(*g, &copy_context(Some(ctx)))
-                        .unwrap_or(Value::Uninferable),
-                    o => o.clone(),
-                })
-                .collect(),
-            None => vec![cls_v],
-        };
-        let mro = self.mro(obj_type, None).ok()?;
         for klass in &classes {
-            if klass.is_uninferable() {
-                return None; // AstroidTypeError -> UseInferenceDefault
+            // class_seq sanitisation (helpers.object_isinstance): any
+            // Instance (incl. Const/containers) -> AstroidTypeError ->
+            // UseInferenceDefault
+            let instance_like = match klass {
+                Value::Uninferable => true,
+                // bases.Instance subclasses only: UnionType/Generator are
+                // BaseInstance but NOT Instance (bases.py class hierarchy)
+                Value::Inst { .. }
+                | Value::ExcInst { .. }
+                | Value::SynthConst(_)
+                | Value::SynthSeq { .. }
+                | Value::SynthDict { .. }
+                | Value::FrozenSet { .. } => true,
+                Value::Node(g) => self.kind_is(*g, |k| {
+                    matches!(
+                        k,
+                        NodeKind::Const(_)
+                            | NodeKind::List { .. }
+                            | NodeKind::Tuple { .. }
+                            | NodeKind::Set { .. }
+                            | NodeKind::Dict { .. }
+                    )
+                }),
+                _ => false,
+            };
+            if instance_like {
+                return None;
             }
+            // for obj_subclass in obj_type.mro(): MroError ->
+            // UseInferenceDefault
+            let mro = self.mro(obj_type, None).ok()?;
             if let Value::Node(kg) = klass {
                 if mro.contains(kg) {
                     return Some(Flow::one(Value::SynthConst(Rc::new(ConstValue::Bool(
@@ -1171,6 +1388,7 @@ impl Engine {
             false,
         )))))
     }
+
 
     fn safe_infer_nv(&self, nv: &NV, ctx: &Rc<Ctx>) -> Option<Value> {
         match nv {

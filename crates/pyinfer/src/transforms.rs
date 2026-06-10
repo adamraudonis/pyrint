@@ -372,6 +372,64 @@ impl Engine {
             .any(|d| self.looks_like_dataclass_decorator(d))
     }
 
+    /// brain_dataclasses.dataclass_transform (instance_attrs part): every
+    /// dataclass AnnAssign target gets instance_attrs[name] = [Unknown]
+    /// (infers to Uninferable). The attribute filters run inference at
+    /// transform time (_is_class_var: next(annotation.infer());
+    /// _is_keyword_only_sentinel: safe_infer).
+    fn apply_dataclass_transform(&self, cls: GNode) {
+        let body: Vec<NodeId> = {
+            let md = self.md(cls.m);
+            match &md.tree.nodes[cls.n.idx()].kind {
+                NodeKind::ClassDef(d) => d.body.clone(),
+                _ => return,
+            }
+        };
+        for stmt in body {
+            let (target, annotation) = {
+                let md = self.md(cls.m);
+                match &md.tree.nodes[stmt.idx()].kind {
+                    NodeKind::AnnAssign { target, annotation, .. } => {
+                        match &md.tree.nodes[target.idx()].kind {
+                            NodeKind::AssignName { name } => {
+                                (md.tree.s(*name).to_string(), *annotation)
+                            }
+                            _ => continue,
+                        }
+                    }
+                    _ => continue,
+                }
+            };
+            let ann = GNode { m: cls.m, n: annotation };
+            // _is_class_var: next(node.infer()) — single pull, name check
+            let is_class_var = match self.infer_first(ann, None) {
+                // getattr(inferred, "name", "") == "ClassVar"
+                Ok(Value::Node(vg)) => {
+                    self.node_name(vg).as_deref() == Some("ClassVar")
+                }
+                _ => false,
+            };
+            if is_class_var {
+                continue;
+            }
+            // _is_keyword_only_sentinel: safe_infer + qname check
+            let kw_only = matches!(
+                self.safe_infer(ann, &Ctx::new()),
+                Some(Value::Inst { cls: c }) if self.qname(c) == "dataclasses._KW_ONLY_TYPE"
+            );
+            if kw_only {
+                continue;
+            }
+            let unknown = self.alloc_placeholders(1)[0];
+            self.dataclass_attrs
+                .borrow_mut()
+                .insert(unknown, GNode { m: cls.m, n: stmt });
+            let sym = self.sym(&target);
+            let mut ia = self.iattrs.borrow_mut();
+            ia.entry(cls).or_default().insert(sym, vec![unknown]);
+        }
+    }
+
     /// brain_numpy_utils._is_a_numpy_module: lookup-based Import check.
     pub(crate) fn is_a_numpy_module(&self, name_node: GNode) -> bool {
         let Some(nick) = self.name_of(name_node) else {
@@ -477,8 +535,9 @@ impl Engine {
                 }
             }
         }
-        // brain_dataclasses field() tip
+        // brain_dataclasses field() tip — applicability decided HERE
         if self.looks_like_dataclass_field_call(g) {
+            self.dataclass_field_calls.borrow_mut().insert(g);
             self.wipe();
         }
         // brain_functools partial tip
@@ -750,6 +809,7 @@ impl Engine {
         }
         // brain_dataclasses dataclass_transform (raw, returns node)
         if self.is_decorated_with_dataclass(g) {
+            self.apply_dataclass_transform(g);
             self.wipe();
         }
         // brain_namedtuple_enum infer_enum_class (raw, returns node);

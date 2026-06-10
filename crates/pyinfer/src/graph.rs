@@ -182,6 +182,11 @@ pub struct Engine {
     /// Subscript nodes whose brain_pathlib parents-predicate matched at
     /// transform time (predicates run inference; tips are FIXED then)
     pub pathlib_subscripts: RefCell<FxHashSet<GNode>>,
+    /// dataclass attribute Unknown placeholders -> their AnnAssign stmt
+    /// (brain_dataclasses.dataclass_transform rhs_node, parent=assign)
+    pub dataclass_attrs: RefCell<FxHashMap<GNode, GNode>>,
+    /// Call nodes whose dataclass-field predicate matched at transform time
+    pub dataclass_field_calls: RefCell<FxHashSet<GNode>>,
 }
 
 fn snapshot_dir() -> PathBuf {
@@ -230,6 +235,8 @@ impl Engine {
             obj_model_funcs: RefCell::new(None),
             hidden_classes: RefCell::new(FxHashSet::default()),
             pathlib_subscripts: RefCell::new(FxHashSet::default()),
+            dataclass_attrs: RefCell::new(FxHashMap::default()),
+            dataclass_field_calls: RefCell::new(FxHashSet::default()),
         };
         e.bootstrap();
         e
