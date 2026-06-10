@@ -249,6 +249,17 @@ impl Engine {
             None => Ctx::new(),
         };
         let parts = self.infer(iter, &c);
+        // `for lst in self.iter.infer(context)`: an error raised on the
+        // first pull (e.g. NameInferenceError from a class-scope name not
+        // visible in the genexp) propagates AS-IS out of assigned_stmts
+        // (protocols.py:290-316; raise_if_nothing_inferred only converts
+        // StopIteration). Preserving the kind matters: _infer_stmts skips
+        // NameInferenceError silently but yields U for InferenceError.
+        if parts.vals.is_empty() {
+            if let Some(e) = parts.err {
+                return Err(e);
+            }
+        }
         let mut out: Vec<NV> = Vec::new();
         match path {
             None => {
@@ -1954,29 +1965,126 @@ impl Engine {
         other: &Value,
         ctx: &Rc<Ctx>,
     ) -> Vec<Value> {
-        let _ = ctx;
-        let inferred = match other {
+        // exact port of _base_nodes.py:350-384
+        enum Branch {
+            Tuple(Vec<Value>),          // safe-inferred positional elements
+            Dict(Vec<(GNode, GNode)>),  // raw item nodes
+            SynthDictV(Vec<(Value, Value)>),
+            One(ConstValue),
+            Other,
+        }
+        let branch = match other {
             Value::Node(g) => {
                 let md = self.md(g.m);
                 match &md.tree.nodes[g.n.idx()].kind {
-                    NodeKind::Const(c) => Some(PctArgs::One(c.clone())),
+                    NodeKind::Const(c) => Branch::One(c.clone()),
                     NodeKind::Tuple { elts, .. } => {
-                        let mut consts = Vec::new();
-                        for &e in elts {
-                            match &md.tree.nodes[e.idx()].kind {
-                                NodeKind::Const(c) => consts.push(c.clone()),
-                                _ => return vec![Value::Uninferable],
+                        let elem_nodes: Vec<GNode> =
+                            elts.iter().map(|&e| GNode { m: g.m, n: e }).collect();
+                        drop(md);
+                        let mut inferred = Vec::new();
+                        for e in elem_nodes {
+                            // util.safe_infer(i, context); None (ambiguous /
+                            // error) is NOT a Const -> values = None
+                            match self.safe_infer(e, &copy_context(Some(ctx))) {
+                                Some(v) => inferred.push(v),
+                                None => inferred.push(Value::Uninferable),
                             }
                         }
-                        Some(PctArgs::Many(consts))
+                        Branch::Tuple(inferred)
                     }
-                    _ => None,
+                    NodeKind::Dict { items, .. } => Branch::Dict(
+                        items
+                            .iter()
+                            .map(|(k, v)| (GNode { m: g.m, n: *k }, GNode { m: g.m, n: *v }))
+                            .collect(),
+                    ),
+                    _ => Branch::Other,
                 }
             }
-            Value::SynthConst(c) => Some(PctArgs::One((**c).clone())),
-            _ => None,
+            Value::SynthConst(c) => Branch::One((**c).clone()),
+            Value::SynthSeq { kind: SeqKind::Tuple, elems } => {
+                // synthetic Tuples (CallSite varargs) hold values already;
+                // `util.Uninferable in other.elts` -> single U
+                if elems.iter().any(|e| e.is_uninferable()) {
+                    return vec![Value::Uninferable];
+                }
+                Branch::Tuple(
+                    elems
+                        .iter()
+                        .map(|e| self.safe_infer_value(e).unwrap_or(Value::Uninferable))
+                        .collect(),
+                )
+            }
+            Value::SynthDict { items } => Branch::SynthDictV(items.to_vec()),
+            _ => Branch::Other,
         };
-        match inferred.and_then(|args| pct_format(fmt, &args)) {
+        let args: Option<PctArgs> = match branch {
+            Branch::One(c) => Some(PctArgs::One(c)),
+            Branch::Tuple(vals) => {
+                let mut consts = Vec::new();
+                let mut all_const = true;
+                for v in &vals {
+                    match self.value_const(v) {
+                        Some(c) => consts.push(c),
+                        None => {
+                            all_const = false;
+                            break;
+                        }
+                    }
+                }
+                if all_const {
+                    Some(PctArgs::Many(consts))
+                } else {
+                    // values = None -> `fmt % None` (single None value)
+                    Some(PctArgs::One(ConstValue::None))
+                }
+            }
+            Branch::Dict(items) => {
+                let mut map: Vec<(String, ConstValue)> = Vec::new();
+                for (k, v) in items {
+                    let kc = self
+                        .safe_infer(k, &copy_context(Some(ctx)))
+                        .and_then(|x| self.value_const(&x));
+                    let Some(ConstValue::Str(ks)) = kc else {
+                        // non-Const key -> (Uninferable,) ... astroid also
+                        // requires Const but ANY const key works as mapping
+                        // key; non-str Const keys can't be addressed by
+                        // %(name)s anyway — treat non-Const as U
+                        match kc {
+                            Some(_) => return vec![Value::Uninferable],
+                            None => return vec![Value::Uninferable],
+                        }
+                    };
+                    let vc = self
+                        .safe_infer(v, &copy_context(Some(ctx)))
+                        .and_then(|x| self.value_const(&x));
+                    match vc {
+                        Some(c) => map.push((ks.to_string(), c)),
+                        None => return vec![Value::Uninferable],
+                    }
+                }
+                Some(PctArgs::Mapping(map))
+            }
+            Branch::SynthDictV(items) => {
+                let mut map: Vec<(String, ConstValue)> = Vec::new();
+                for (k, v) in items {
+                    let kc = self
+                        .safe_infer_value(&k)
+                        .and_then(|x| self.value_const(&x));
+                    let Some(ConstValue::Str(ks)) = kc else {
+                        return vec![Value::Uninferable];
+                    };
+                    match self.safe_infer_value(&v).and_then(|x| self.value_const(&x)) {
+                        Some(c) => map.push((ks.to_string(), c)),
+                        None => return vec![Value::Uninferable],
+                    }
+                }
+                Some(PctArgs::Mapping(map))
+            }
+            Branch::Other => None, // -> (Uninferable,)
+        };
+        match args.and_then(|a| pct_format(fmt, &a)) {
             Some(s) => vec![Value::SynthConst(Rc::new(ConstValue::Str(s.into())))],
             None => vec![Value::Uninferable],
         }
@@ -2523,16 +2631,19 @@ fn const_unary_fold(c: &ConstValue, op: &str) -> Option<Value> {
     }
 }
 
+#[allow(dead_code)]
 enum PctArgs {
     One(ConstValue),
     Many(Vec<ConstValue>),
+    Mapping(Vec<(String, ConstValue)>),
 }
 
 /// minimal %-format folding for Const operands
 fn pct_format(fmt: &str, args: &PctArgs) -> Option<String> {
-    let values: Vec<&ConstValue> = match args {
-        PctArgs::One(c) => vec![c],
-        PctArgs::Many(v) => v.iter().collect(),
+    let (values, mapping): (Vec<&ConstValue>, Option<&Vec<(String, ConstValue)>>) = match args {
+        PctArgs::One(c) => (vec![c], None),
+        PctArgs::Many(v) => (v.iter().collect(), None),
+        PctArgs::Mapping(m) => (Vec::new(), Some(m)),
     };
     let mut out = String::new();
     let mut chars = fmt.chars().peekable();
@@ -2541,6 +2652,43 @@ fn pct_format(fmt: &str, args: &PctArgs) -> Option<String> {
         if c != '%' {
             out.push(c);
             continue;
+        }
+        // %(key)X mapping directives
+        if let Some(m) = mapping {
+            if chars.peek() == Some(&'(') {
+                chars.next();
+                let mut key = String::new();
+                loop {
+                    match chars.next() {
+                        Some(')') => break,
+                        Some(ch) => key.push(ch),
+                        None => return None, // ValueError: incomplete format
+                    }
+                }
+                let v = m.iter().rev().find(|(k, _)| *k == key).map(|(_, v)| v)?;
+                match chars.next() {
+                    Some('s') => out.push_str(&const_str(v)?),
+                    Some('d') | Some('i') => match v {
+                        ConstValue::Int(IntValue::Small(i)) => out.push_str(&i.to_string()),
+                        ConstValue::Bool(b) => out.push_str(if *b { "1" } else { "0" }),
+                        ConstValue::Float(f) => out.push_str(&(*f as i64).to_string()),
+                        _ => return None,
+                    },
+                    Some('r') => match v {
+                        ConstValue::Str(s) => out.push_str(&pyast::pyrepr::repr_str(s)),
+                        _ => out.push_str(&const_str(v)?),
+                    },
+                    _ => return None,
+                }
+                continue;
+            }
+            if chars.peek() == Some(&'%') {
+                chars.next();
+                out.push('%');
+                continue;
+            }
+            // non-mapping directive with mapping args: TypeError
+            return None;
         }
         match chars.next() {
             Some('%') => out.push('%'),

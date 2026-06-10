@@ -53,6 +53,8 @@ pub enum Tip {
     RePatternMatch,
     /// brain_argparse infer_namespace: argparse.Namespace(...) calls
     ArgparseNamespace,
+    /// brain_typing infer_typing_generic_class_pep695 (type_params classes)
+    Pep695Generic,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -114,6 +116,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::DataclassFieldCall => (7, 27),
         Tip::RePatternMatch => (7, 26),
         Tip::ArgparseNamespace => (7, 25),
+        Tip::Pep695Generic => (7, 24),
     }
 }
 
@@ -249,6 +252,11 @@ impl Engine {
         // ClassDef tip: NamedTuple bases (brain_namedtuple_enum
         // _has_namedtuple_base; registered before the typing tips)
         if let NodeKind::ClassDef(d) = &md.tree.nodes[node.n.idx()].kind {
+            // brain_typing PEP695 generic classes (registered after the
+            // namedtuple tips; disjoint predicates)
+            if !d.type_params.is_empty() {
+                return Some(Tip::Pep695Generic);
+            }
             let has_nt = d.bases.iter().any(|&b| {
                 let g = GNode { m: node.m, n: b };
                 self.dotted_of(g)
@@ -504,7 +512,32 @@ impl Engine {
             Tip::DataclassFieldCall => self.tip_dataclass_field_call(node, ctx),
             Tip::RePatternMatch => self.tip_re_pattern_match(node),
             Tip::ArgparseNamespace => self.tip_argparse_namespace(node, ctx),
+            Tip::Pep695Generic => self.tip_pep695_generic(node),
         }
+    }
+
+    /// infer_typing_generic_class_pep695 (brain_typing.py:201-207): inject
+    /// __class_getitem__ into the class locals and yield the class.
+    fn tip_pep695_generic(&self, node: GNode) -> Option<Flow> {
+        let cgi = self.sym("__class_getitem__");
+        let tmpl = self.build_template_module(
+            "@classmethod\ndef __class_getitem__(cls, item):\n    return cls\n",
+            "",
+        )?;
+        let func = {
+            let tmd = self.md(tmpl);
+            let locals = tmd.locals.borrow();
+            locals
+                .get(&pyast::NodeId::MODULE)
+                .and_then(|m| m.get(&cgi))
+                .and_then(|v| v.first().copied())
+        }?;
+        {
+            let md = self.md(node.m);
+            let mut locals = md.locals.borrow_mut();
+            locals.entry(node.n).or_default().insert(cgi, vec![func]);
+        }
+        Some(Flow::one(crate::value::Value::Node(node)))
     }
 
     /// brain_argparse.infer_namespace: keyword-only CallSite -> fresh
@@ -1412,6 +1445,20 @@ impl Engine {
                 let mut out = Vec::new();
                 for e in elts {
                     out.push(self.first_value(GNode { m: g.m, n: e }, ctx).ok().flatten()?);
+                }
+                out
+            }
+            Value::SynthSeq { kind: SeqKind::Tuple, elems } => {
+                // synthetic Tuples (binop concat) are nodes.Tuple in
+                // astroid: each element gets a single infer pull
+                let mut out = Vec::new();
+                for e in elems.iter() {
+                    match e {
+                        Value::Node(g) => {
+                            out.push(self.first_value(*g, ctx).ok().flatten()?)
+                        }
+                        v => out.push(v.clone()),
+                    }
                 }
                 out
             }

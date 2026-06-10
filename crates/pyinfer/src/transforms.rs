@@ -816,6 +816,17 @@ impl Engine {
             self.apply_dataclass_transform(g);
             self.wipe();
         }
+        // brain_typing infer_typing_generic_class_pep695 (inference_tip on
+        // ClassDef with type_params — transform returns node -> wipe)
+        {
+            let md = self.md(g.m);
+            let has_tp = matches!(&md.tree.nodes[g.n.idx()].kind,
+                NodeKind::ClassDef(d) if !d.type_params.is_empty());
+            drop(md);
+            if has_tp {
+                self.wipe();
+            }
+        }
         // brain_namedtuple_enum infer_enum_class (raw, returns node);
         // predicate _is_enum_subclass = is_subtype_of("enum.Enum") —
         // inference happens even when False
