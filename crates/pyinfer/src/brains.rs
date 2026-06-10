@@ -195,7 +195,12 @@ impl Engine {
             }
         }
         self.tip_guard.borrow_mut().insert(key);
-        let res = self.run_tip(tip, node, ctx);
+        // inference_tip.py:50-52: `if context is not None and
+        // context.is_empty(): context = None` — tips invoked from a fresh
+        // (dump-level) context run with NO context: their internal
+        // inference does NOT bump the caller's nodes_inferred counter.
+        let run_ctx = if cacheable { Ctx::new() } else { Rc::clone(ctx) };
+        let res = self.run_tip(tip, node, &run_ctx);
         self.tip_guard.borrow_mut().remove(&key);
         if let Some(flow) = &res {
             if cacheable && flow.err.is_none() {
@@ -1751,19 +1756,25 @@ impl Engine {
             _ => return Some(Flow::uninferable()),
         };
         let site = self.call_site_of_call(node, ctx);
+        // brain_builtin_inference._infer_str_format_call: any non-Const
+        // (incl. ambiguous safe_infer) argument -> Uninferable
         let mut pos_values: Vec<String> = Vec::new();
         for p in site.positional_arguments() {
-            let v = self.safe_infer_nv(&p, ctx)?;
-            match self.value_const(&v) {
-                Some(c) => pos_values.push(const_format_value(&c)?),
+            let Some(v) = self.safe_infer_nv(&p, ctx) else {
+                return Some(Flow::uninferable());
+            };
+            match self.value_const(&v).and_then(|c| const_format_value(&c)) {
+                Some(fv) => pos_values.push(fv),
                 None => return Some(Flow::uninferable()),
             }
         }
         let mut kw_values: Vec<(String, String)> = Vec::new();
         for (k, v) in site.keyword_arguments() {
-            let v = self.safe_infer_nv(&v, ctx)?;
-            match self.value_const(&v) {
-                Some(c) => kw_values.push((self.sname(k), const_format_value(&c)?)),
+            let Some(v) = self.safe_infer_nv(&v, ctx) else {
+                return Some(Flow::uninferable());
+            };
+            match self.value_const(&v).and_then(|c| const_format_value(&c)) {
+                Some(fv) => kw_values.push((self.sname(k), fv)),
                 None => return Some(Flow::uninferable()),
             }
         }
