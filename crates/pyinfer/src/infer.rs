@@ -1197,18 +1197,6 @@ impl Engine {
 
     // ---------- f-strings (§16.6) ----------
 
-    fn infer_formatted_value(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let mut vals = Vec::new();
-        let end = self.infer_formatted_value_to(node, ctx, &mut |v| {
-            vals.push(v);
-            Drive::Go
-        });
-        Flow {
-            vals,
-            err: end.err_opt(),
-        }
-    }
-
     /// FormattedValue._infer, STREAMING and LAZY like the astroid
     /// generators (node_classes.py:4699-4747): the spec generator stays
     /// suspended through each spec's value loop (its post-yield bump fires
@@ -1440,18 +1428,6 @@ impl Engine {
         match pending {
             Some(p) => p,
             None => end,
-        }
-    }
-
-    fn infer_joinedstr(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let mut vals = Vec::new();
-        let end = self.infer_joinedstr_to(node, ctx, &mut |v| {
-            vals.push(v);
-            Drive::Go
-        });
-        Flow {
-            vals,
-            err: end.err_opt(),
         }
     }
 

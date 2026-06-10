@@ -266,7 +266,7 @@ impl Engine {
             tip_cache: RefCell::new(FxHashMap::default()),
             tip_order: RefCell::new(std::collections::VecDeque::new()),
             depth: Cell::new(0),
-            max_depth: 350,
+            max_depth: std::env::var("PRYLINT_MAX_DEPTH").ok().and_then(|v| v.parse().ok()).unwrap_or(350),
             callctx_id: Cell::new(1),
             env,
             sys_path,

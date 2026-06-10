@@ -349,6 +349,67 @@ pylint behavior — bugs are replicated.
      occurrence order; CPython set iteration order (hash-based) is not
      emulated — only visible if a folded set's ELEMENTS get dumped in
      order (none observed).
+   - **phase 6 (diff-reduction round 5, N=200)**: 1.77k -> 1.30k diff
+     lines. LANDED (probe-verified; new probes in harness/infertests/):
+     (a) **transform-chain BREAK rule** (transforms.py:60-78): an APPLIED
+     transform whose return's class differs from the node's class — incl.
+     the COMMON `return None` (attrs, collections __class_getitem__,
+     dataclasses-without-init-gen, brain_io, qt, uuid, functools lru) —
+     STOPS the remaining transforms for that node, and ONLY non-None
+     returns wipe the inference cache. scan_classdef/scan_functiondef
+     rewritten in exact registration order with per-transform
+     return-semantics (dataclass wipe now gated on
+     _check_generate_dataclass_init; six.add_metaclass exact single-pull
+     apply + meta_override; boto3 qname fixed to
+     boto3.resources.base.ServiceResource; brain_io ported: BufferedReader/
+     BufferedWriter locals["raw"]=FileIO instance, TextIOWrapper
+     locals["buffer"]=BufferedWriter instance — required cache_module
+     BEFORE the snapshot module's wipe_scan like raw_building.py:460).
+     (b) **streaming/lazy generator parity**: BinOp/AugAssign per-pair
+     streaming (results reach the consumer before the next product pair —
+     yield ORDER + abandonment skips later pairs); FormattedValue/JoinedStr
+     full suspended-generator semantics (spec/value loops lazy, post-yield
+     bumps deferred to the next pull, raises abandon suspended generators;
+     _safe_infer_from_node trailing-U streaming; fresh Const("") spec bump
+     fires only after the body completes).
+     (c) **counter parity batch**: tl binop elt inference under the SHARED
+     ctx with boundnode cleared (ALL values flattened, U->UNATTACHED_UNKNOWN
+     singleton; seq*int safe_infers each elt ONCE then repeats);
+     has_known_bases _all_bases_known memo; binop operand object_type
+     re-infers node-backed operands (fresh ctx, set-collapse); synthetic
+     node hop-bumps: SynthConst/SynthSeq/SynthDict/SynthSlice/FrozenSet
+     passing through _infer_stmts emulate stmt.infer cache-miss/replay via
+     synth_hop_cache keyed by Rc pointer (+pins against ABA address reuse;
+     ValueKey::Synth now pointer-keyed — fixes spurious boundnode cache
+     hits on synthetic dicts); NV::V(Value::Node) routes through the full
+     stmt.infer hop; issubclass/`_infer_type_call` bases/dict-model BM
+     single pulls (DictModel wraps the UnboundMethod from class igetattr);
+     decoratornames(context) passes the caller ctx AS-IS (lookupname in
+     decorator cache keys; extra_decorators included); _is_property always
+     ctx=None (all astroid call sites); ClassDef._all_slots walks the FULL
+     mro (grouped_slots) even after a None; _islots elt.infer pulls.
+     (d) exception instance models: OSError-family
+     filename/errno/strerror/filename2 (exact BUILTIN_EXCEPTIONS qname
+     list), ImportError name/path, UnicodeDecodeError object.
+     TOOLS: PRYLINT_TRACE_INFER now prints ni= (nodes_inferred at entry) +
+     SYNTHPULL/WIPE/SCAN events; /tmp norm_trace.py-style flat-event
+     diffing against the GT NodeNG.infer monkeypatch localizes bump drift.
+     N=200 differing files/lines: django 20/87, pylfunc 8/17, pandas
+     58/906, salt 26/220, airflow 13/42, sentry 3/6, core 7/18.
+     REMAINING (by volume): (1) pandas deep-chain cap-boundary drift
+     (frame.py property/instance_attr chains flip values near the 100-cap;
+     asv_bench getattr-receiver chains GT=U vs ours ERR ~58 lines;
+     managers.py self.blocks value-set drift ~41); counted probes still
+     failing (run COUNTS=1 harness/run_infertests.sh): enum transform
+     (GT re-infers more in igetattr after the transform wipe; ours
+     replays — ##17 vs ##20), namedtuple/dataclass-field (±1),
+     ctxmanager_getattr_param (_io extender inference order),
+     pathlib parents (+2), pep695 (+1), type_subscript ndarray,
+     brain_ssl http.HTTPStatus (±1), os_path_abspath_cap (##107 vs
+     ##109 — posixpath splitroot Call caching divergence under
+     callcontext). (2) pylfunc leftovers unchanged (17 lines, see phase
+     4). (3) six.with_metaclass call-result synthesis still unwired.
+     (4) recursion guard still 350.
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the
