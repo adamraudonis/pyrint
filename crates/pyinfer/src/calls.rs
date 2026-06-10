@@ -1278,7 +1278,15 @@ impl Engine {
                 _ => None,
             });
             if callee_name.is_some() && callee_name == self.node_name(func) {
-                let site = self.call_site_from(&cc, ctx);
+                // protocols.py:387-389: CallSite(context.callcontext,
+                // context.extra_context) — context=None: the unpack
+                // safe_infers run under FRESH contexts (cc/bn None, own
+                // counters), with the caller's extra_context as the
+                // argument_context_map; infer_argument then gets the LIVE
+                // context (callcontext still set)
+                let fresh = Ctx::new();
+                let map = ctx.extra_context.borrow().clone();
+                let site = self.call_site_from_map(&cc, &fresh, map);
                 return match name {
                     Some(n) => self.infer_argument_to(&site, func, n, ctx, sink),
                     None => End::Raised(ErrKind::Inference),
@@ -1371,12 +1379,22 @@ impl Engine {
     // ---------- CallSite (arguments.py) ----------
 
     pub fn call_site_from(&self, cc: &CallCtx, ctx: &Rc<Ctx>) -> CallSite {
-        // CallSite._unpack_args/_unpack_keywords MUTATE the passed context:
-        // `context.extra_context = self.argument_context_map` (arguments.py
-        // :95/:135) — the map populated by Call._infer is CLOBBERED with the
-        // empty default before any argument inference (so call args do NOT
-        // swap to the populated plain-clone context downstream).
-        *ctx.extra_context.borrow_mut() = Rc::new(rustc_hash::FxHashMap::default());
+        self.call_site_from_map(cc, ctx, Rc::new(rustc_hash::FxHashMap::default()))
+    }
+
+    /// CallSite(callcontext, argument_context_map, context): _unpack_args/
+    /// _unpack_keywords MUTATE the passed context: `context.extra_context =
+    /// self.argument_context_map` (arguments.py:95/:135). With the default
+    /// empty map (arguments_assigned_stmts path) the populated Call._infer
+    /// map is CLOBBERED; _arguments_infer_argname instead passes context=
+    /// None (FRESH unpack contexts) + the caller's extra_context as the map.
+    pub fn call_site_from_map(
+        &self,
+        cc: &CallCtx,
+        ctx: &Rc<Ctx>,
+        map: Rc<rustc_hash::FxHashMap<GNode, Rc<Ctx>>>,
+    ) -> CallSite {
+        *ctx.extra_context.borrow_mut() = map;
         // unpack args
         let mut unpacked_args: Vec<NV> = Vec::new();
         for arg in cc.args.borrow().iter() {
