@@ -53,10 +53,27 @@ fn run_dump_infer_inner(items_path: &str) -> i32 {
             Err(_) => trees.push(None),
         }
     }
-    // Phase 2: dump.
+    // Phase 2: dump. PRYLINT_DUMP_ONLY=<file of paths> restricts which files
+    // are dumped while STILL prebuilding everything above (mirrors pylint
+    // phase 1 + dump_infer.py --only; sampled runs otherwise miss cross-file
+    // instance_attrs the oracle saw).
+    let only: Option<rustc_hash::FxHashSet<String>> = std::env::var("PRYLINT_DUMP_ONLY")
+        .ok()
+        .and_then(|p| std::fs::read_to_string(p).ok())
+        .map(|d| {
+            d.lines()
+                .filter(|l| !l.trim().is_empty())
+                .map(String::from)
+                .collect()
+        });
     let stdout = std::io::stdout();
     let mut out = std::io::BufWriter::new(stdout.lock());
     for ((_name, path), tree) in items.iter().zip(trees.iter()) {
+        if let Some(set) = &only {
+            if !set.contains(path.as_str()) {
+                continue;
+            }
+        }
         let _ = writeln!(out, "=== {path}");
         let Some(mid) = tree else {
             let _ = writeln!(out, "NOTREE");

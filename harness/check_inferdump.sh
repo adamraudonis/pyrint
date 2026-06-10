@@ -21,8 +21,10 @@ if [ "$N" = "all" ]; then
 else
   head -$N /tmp/inferitems_$1.jsonl > /tmp/inferlist_$1.jsonl
 fi
-# rust side: one invocation, reads fileitems jsonl
-$ROOT/target/release/prylint . --dump-infer /tmp/inferlist_$1.jsonl > /tmp/inferdump_rs_$1.out 2>/dev/null
+# rust side: ALWAYS prebuild the full fileitem list (mirrors pylint phase 1 /
+# the oracle's warm run), but only dump the sampled subset via PRYLINT_DUMP_ONLY.
+python3 -c "import json,sys; [print(json.loads(l)['path']) for l in open('/tmp/inferlist_$1.jsonl') if l.strip()]" > /tmp/inferonly_$1.txt
+PRYLINT_DUMP_ONLY=/tmp/inferonly_$1.txt $ROOT/target/release/prylint . --dump-infer /tmp/inferitems_$1.jsonl > /tmp/inferdump_rs_$1.out 2>/dev/null
 python3 - "$1" "$CACHE" <<'PYEOF'
 import json, os, sys
 corpus, cache = sys.argv[1], sys.argv[2]
