@@ -15,7 +15,7 @@
 
 use std::collections::HashSet;
 use std::fs;
-use std::path::{Component, Path, PathBuf};
+use std::path::{Path, PathBuf};
 
 use indexmap::IndexMap;
 use regex::Regex;
@@ -258,7 +258,7 @@ fn get_relative_base_path(filename: &str, path_to_check: &str) -> Option<Vec<Str
 
 /// os.path.abspath: join with cwd + normpath, but WITHOUT resolving symlinks
 /// in the trailing components. Note Python's getcwd() resolves the cwd itself.
-fn absolute(path: &str) -> String {
+pub fn absolute(path: &str) -> String {
     if path.starts_with('/') {
         normpath(path)
     } else {

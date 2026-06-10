@@ -5,6 +5,10 @@ Rust parser rejects.
 Protocol: JSON lines on stdin: {"path": ..., "modname": ...}
           JSON lines on stdout, one of:
   {"ok": true}                                  -- astroid parses fine (caller bug or ruff/CPython mismatch)
+  {"ok": true, "tokenize": {"line": N, "col": N, "msg": "..."}}
+      -- astroid parses, but pylint's utils.tokenize_module would raise
+         tokenize.TokenError (the tokenize-form E0001: args[0] verbatim,
+         line/col from args[1]; pylinter.py:1080-1090)
   {"kind": "syntax-error", "line": N, "offset": N|null, "msg": "..."}
       -- msg is the full E0001 args: "Parsing failed: '<...>'"
   {"kind": "parse-error", "msg": "..."}          -- F0010 args
@@ -15,6 +19,7 @@ Mirrors pylint/lint/pylinter.py get_ast() with MANAGER.ast_from_file.
 
 import json
 import sys
+import tokenize
 
 import astroid
 from astroid import MANAGER
@@ -22,7 +27,7 @@ from astroid import MANAGER
 
 def handle(path, modname):
     try:
-        MANAGER.ast_from_file(path, modname, source=True)
+        module = MANAGER.ast_from_file(path, modname, source=True)
     except astroid.AstroidSyntaxError as ex:
         line = getattr(ex.error, "lineno", None)
         if line is None:
@@ -38,6 +43,21 @@ def handle(path, modname):
         return {"kind": "parse-error", "msg": str(ex)}
     except Exception:  # noqa: BLE001
         return {"kind": "astroid-error"}
+    # pylint utils.tokenize_module (pylint/utils/utils.py:151-154)
+    try:
+        with module.stream() as stream:
+            list(tokenize.tokenize(stream.readline))
+    except tokenize.TokenError as ex:
+        return {
+            "ok": True,
+            "tokenize": {
+                "line": ex.args[1][0],
+                "col": ex.args[1][1],
+                "msg": ex.args[0],
+            },
+        }
+    except Exception:  # noqa: BLE001
+        pass  # other tokenize crashes take pylint's F0002 path; out of scope
     return {"ok": True}
 
 

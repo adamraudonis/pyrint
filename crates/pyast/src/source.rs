@@ -168,6 +168,41 @@ fn find_cookie(
     Ok(Some(Cookie { entry, name }))
 }
 
+/// CPython `tokenize.detect_encoding` over the first two lines, returning the
+/// encoding name (as `_get_normal_name` spells it, e.g. "utf-8", "utf-8-sig",
+/// or the original cookie spelling) plus the line count pylint's unicode
+/// checker derives the codec-definition line from (`len(lines) or 1`,
+/// unicode.py:443): 1 for empty/BOM-only files and first-line cookies, 2 when
+/// the second line was consulted.
+pub fn detect_encoding_lines(bytes: &[u8], filename: &str) -> Result<(String, u32), DecodeError> {
+    let mut pos = 0usize;
+    let mut first = readline(bytes, &mut pos);
+    let mut bom_found = false;
+    if first.starts_with(BOM_UTF8) {
+        bom_found = true;
+        first = &first[3..];
+    }
+    let default_name =
+        || if bom_found { "utf-8-sig" } else { "utf-8" }.to_string();
+    if first.is_empty() {
+        return Ok((default_name(), 1)); // lines == [] -> `len(lines) or 1` == 1
+    }
+    if let Some(c) = find_cookie(first, filename, bom_found)? {
+        return Ok((c.name, 1));
+    }
+    if !is_blank_line(first) {
+        return Ok((default_name(), 1));
+    }
+    let second = readline(bytes, &mut pos);
+    if second.is_empty() {
+        return Ok((default_name(), 1)); // lines == [first]
+    }
+    if let Some(c) = find_cookie(second, filename, bom_found)? {
+        return Ok((c.name, 2));
+    }
+    Ok((default_name(), 2))
+}
+
 /// Decode raw file bytes exactly as astroid.builder.open_source_file does:
 /// tokenize.detect_encoding over the first two lines, then a text-mode read
 /// with that encoding and universal newlines. `filename` should be the

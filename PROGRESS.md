@@ -65,23 +65,37 @@ pylint behavior — bugs are replicated.
 
 ## Running / next
 
-1. **tree-fidelity workflow** (bg): drive `--dump-ast` diff to zero on all
-   corpora. Owns `crates/pyast` + commits.
-2. Next workflow (after 1, sequential — shared git tree): **pipeline shell**:
-   pragma parser port (pragma_parser.py + message_state_handler.process_tokens
-   + FileState block expansion — needs Tree.block_range), MsgState, reporter,
-   orchestration (two-phase, rayon parse, ordered flush), syntax-oracle
-   subprocess integration, E0001 paths incl. ruff target-version 3.12
-   (UnsupportedSyntaxError = parse failure → oracle). Acceptance: full-run
-   diff vs ground truth shows ONLY missing-checker FNs (E0001 family exact,
-   incl. pylfunc encoding cases; no FPs).
+1. **tree-fidelity workflow**: DONE — `--dump-ast` byte-identical on all 7
+   corpora. Owns `crates/pyast`.
+2. **pipeline shell**: DONE — full lint pipeline in `crates/cli`
+   (`run.rs` two-phase orchestration w/ rayon + ordered flush, `pragma.rs`
+   OPTION_PO/TOK_REGEX/parse_pragma regex-exact port w/ differential tests,
+   `msgstate.rs` GlobalState/FileState block expansion (astroid block_range
+   for Module/Class/Func/If/Try/TryStar/While + default) + process_tokens +
+   is_message_enabled incl. past-EOF raw-pragma fallback, `reporter.rs`
+   TextReporter, `oracle.rs` batched syntax-oracle subprocess), plus
+   `pycheckers::{msgstore,unicode}` (message resolution w/ old_names +
+   deleted/moved tables + checker-name/category/'all' expansion; unicode raw
+   checker E2501/E2502/C2503/E2510-15 bug-for-bug). syntax_oracle.py also
+   reports tokenize.TokenError (tokenize-form E0001). check_shell.py PASSES
+   on ALL 7 corpora (pylfunc exit 6, django/sentry/salt/core exit 2,
+   pandas/airflow clean exit 0); core runs in ~4s vs pylint's 1357s.
+   Known gaps: F0002 crash-path message uses a placeholder crash-file path
+   (wall-clock dependent in pylint; no corpus emits it); I0020/I0021
+   useless-suppression machinery deliberately not emitted (needs checker
+   _ignored_msgs bookkeeping — would FP without real checkers; 2 pylfunc GT
+   lines are accepted FNs until then); files CPython accepts but ruff
+   rejects with clean tokenize are skipped with a stderr note (none in
+   corpora).
 3. Then **pyinfer** per notes/00-architecture.md + notes/07 (scope_lookup/
    _filter_stmts first — unblocks VariablesChecker), snapshot loader.
 4. Then checkers fan-out (variables first: salt is the acid test), each code
-   driven to 0 FP/FN via `diffmsg.py --code=EXXXX` on all 7 corpora.
+   driven to 0 FP/FN via `diffmsg.py --code=EXXXX` on all 7 corpora — wire
+   them into the phase-2 walk placeholder in `run.rs::lint_one` using
+   `walk_order.rs` dispatch tables.
 5. Then byte-exactness (ordering/headers), pylint-functional sweep, perf
    (10x = whole-suite ≤ ~250s; budget core ≤ 135s incl. oracle for 318
-   broken files).
+   broken files — currently ~4s).
 
 ## Gotchas for future rounds
 

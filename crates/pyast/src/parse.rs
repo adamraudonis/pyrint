@@ -10,6 +10,32 @@ use crate::tree::Tree;
 pub struct ParseOutcome {
     pub tree: Option<Tree>,
     pub error: Option<ParseFailure>,
+    /// Compacted token stream for pylint's `process_tokens` pragma pass
+    /// (message_state_handler.py:347-444). Only populated on success.
+    pub tokens: Vec<TokEvent>,
+}
+
+/// What pylint's pragma loop needs from the token stream: row transitions,
+/// NL/NEWLINE tokens (`seen_newline` tracking) and COMMENT tokens.
+/// Consecutive same-row "other" tokens are collapsed (only the first token of
+/// each physical row matters for the `saw_newline` backslash-continuation
+/// rule).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum TokEventKind {
+    Other,
+    /// tokenize.NL / tokenize.NEWLINE
+    Nl,
+    Comment,
+}
+
+#[derive(Debug, Clone, Copy)]
+pub struct TokEvent {
+    /// 1-based row of the token start
+    pub row: u32,
+    pub kind: TokEventKind,
+    /// byte range into the decoded source text (comments only; 0..0 otherwise)
+    pub start: u32,
+    pub end: u32,
 }
 
 #[derive(Debug, Clone)]
@@ -38,6 +64,7 @@ pub fn parse_module(src: &SourceFile, modname: &str, filepath: &str, package: bo
                 offset: col + 1,
                 message: format!("{}", err.error),
             }),
+            tokens: Vec::new(),
         };
     }
     if let Some(err) = parsed.unsupported_syntax_errors().first() {
@@ -49,6 +76,7 @@ pub fn parse_module(src: &SourceFile, modname: &str, filepath: &str, package: bo
                 offset: col + 1,
                 message: format!("{err}"),
             }),
+            tokens: Vec::new(),
         };
     }
     let module = match parsed.syntax() {
@@ -61,6 +89,8 @@ pub fn parse_module(src: &SourceFile, modname: &str, filepath: &str, package: bo
     let mut def_class: Vec<(TextSize, bool)> = Vec::new();
     let mut asyncs: Vec<(TextSize, bool)> = Vec::new();
     let mut all_tokens: Vec<(u32, u32, u8)> = Vec::new();
+    let mut tok_events: Vec<TokEvent> = Vec::new();
+    let mut last_row: u32 = 0;
     for tok in parsed.tokens() {
         use ruff_python_ast::token::TokenKind;
         match tok.kind() {
@@ -77,6 +107,25 @@ pub fn parse_module(src: &SourceFile, modname: &str, filepath: &str, package: bo
             _ => 0,
         };
         all_tokens.push((tok.range().start().to_u32(), tok.range().end().to_u32(), kind));
+
+        // pragma-pass token events (Python tokenize equivalents: NL/NEWLINE
+        // and COMMENT; plus the first token of every physical row for the
+        // row-transition logic in message_state_handler.process_tokens)
+        let ev_kind = match tok.kind() {
+            TokenKind::Comment => TokEventKind::Comment,
+            TokenKind::Newline | TokenKind::NonLogicalNewline => TokEventKind::Nl,
+            _ => TokEventKind::Other,
+        };
+        let (row, _) = src.line_col(tok.range().start().to_u32());
+        if ev_kind != TokEventKind::Other || row != last_row {
+            let (s, e) = if ev_kind == TokEventKind::Comment {
+                (tok.range().start().to_u32(), tok.range().end().to_u32())
+            } else {
+                (0, 0)
+            };
+            tok_events.push(TokEvent { row, kind: ev_kind, start: s, end: e });
+        }
+        last_row = row;
     }
 
     let opts = BuildOptions {
@@ -88,5 +137,6 @@ pub fn parse_module(src: &SourceFile, modname: &str, filepath: &str, package: bo
     ParseOutcome {
         tree: Some(tree),
         error: None,
+        tokens: tok_events,
     }
 }
