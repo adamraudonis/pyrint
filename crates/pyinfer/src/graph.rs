@@ -682,7 +682,47 @@ impl Engine {
     fn load_snapshot_module(&self, modname: &str) -> Option<ModId> {
         let path = self.snapshot_dir.join(format!("{modname}.json"));
         let data = std::fs::read_to_string(path).ok()?;
-        let snap = load_snapshot(&data)?;
+        let mut snap = load_snapshot(&data)?;
+        if modname == "sys" {
+            // The oracle (dump_infer.py main) runs `sys.path.insert(0,
+            // os.path.realpath(root))` before astroid raw-builds the live
+            // sys module, so the frozen sys.path List leads with the
+            // corpus root; the snapshot stores the corpus-independent
+            // tail. Mirror the insert here.
+            if let Some((_, ids)) = snap
+                .locals
+                .iter()
+                .find(|(scope, _)| *scope == NodeId::MODULE)
+                .and_then(|(_, l)| l.iter().find(|(n, _)| n.as_str() == "path"))
+            {
+                if let Some(&list_id) = ids.first() {
+                    let root = self.sys_path.first().cloned().unwrap_or_default();
+                    let p = &snap.tree.nodes[list_id.idx()];
+                    let (fl, co, el, ec, tl) = (
+                        p.fromlineno,
+                        p.col_offset,
+                        p.end_lineno,
+                        p.end_col_offset,
+                        p.tolineno,
+                    );
+                    let new_id = NodeId(snap.tree.nodes.len() as u32);
+                    snap.tree.nodes.push(pyast::tree::Node {
+                        kind: NodeKind::Const(pyast::tree::ConstValue::Str(root.into())),
+                        parent: list_id,
+                        fromlineno: fl,
+                        col_offset: co,
+                        end_lineno: el,
+                        end_col_offset: ec,
+                        tolineno: tl,
+                    });
+                    if let NodeKind::List { elts, .. } =
+                        &mut snap.tree.nodes[list_id.idx()].kind
+                    {
+                        elts.insert(0, new_id);
+                    }
+                }
+            }
+        }
         let id = ModId(self.mods.borrow().len() as u32);
         let n_syms = snap.tree.interner.len();
         let mut gsym = Vec::with_capacity(n_syms);

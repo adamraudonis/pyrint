@@ -1120,12 +1120,19 @@ impl Engine {
         let mut uninferable_already = false;
         // format_specs = Const("") if None else format_spec; .infer() — the
         // synthetic Const("") infer bumps once (fresh node, cache miss)
+        let mut pending_err: Option<ErrKind> = None;
         let specs: Vec<Value> = match format_spec {
             None => {
                 ctx.bump_inferred();
                 vec![Value::SynthConst(Rc::new(ConstValue::Str("".into())))]
             }
-            Some(fs) => self.infer(GNode { m: node.m, n: fs }, ctx).vals,
+            Some(fs) => {
+                let f = self.infer(GNode { m: node.m, n: fs }, ctx);
+                // a raise from format_specs.infer(...) propagates out of
+                // FormattedValue._infer after the yielded values
+                pending_err = f.err;
+                f.vals
+            }
         };
         for spec_v in specs {
             let spec = match self.value_const(&spec_v) {
@@ -1141,6 +1148,13 @@ impl Engine {
                 }
             };
             let vf = self.infer(GNode { m: node.m, n: value }, ctx);
+            if vf.err.is_some() {
+                // self.value.infer(context) raising mid-iteration aborts
+                // FormattedValue._infer (no try/except around it,
+                // node_classes.py:4768-4771); the values yielded before the
+                // raise still come through first
+                pending_err = vf.err;
+            }
             for v in &vf.vals {
                 // format(value_to_format, spec): Const values use python
                 // format(); other inference results are formatted as their
@@ -1165,35 +1179,51 @@ impl Engine {
                     }
                 }
             }
+            if vf.err.is_some() {
+                // the raise aborts the outer spec loop too
+                break;
+            }
         }
-        Flow::ok(out)
+        Flow {
+            vals: out,
+            err: pending_err,
+        }
     }
 
     /// JoinedStr._infer_from_values (node_classes.py:4822-4844), recursive
     /// cartesian concatenation; parts inferred via node._infer (NO
     /// NodeNG.infer wrapper: no cache, no bumps — _safe_infer_from_node)
-    fn joinedstr_parts(&self, values: &[NodeId], m: crate::value::ModId, ctx: &Rc<Ctx>) -> Vec<Value> {
+    fn joinedstr_parts(&self, values: &[NodeId], m: crate::value::ModId, ctx: &Rc<Ctx>) -> Flow {
         if values.is_empty() {
-            return Vec::new();
+            return Flow::ok(Vec::new());
         }
-        // _safe_infer_from_node: node._infer; InferenceError -> single U
-        let safe = |n: NodeId| -> Vec<Value> {
+        // _safe_infer_from_node: node._infer; `except InferenceError` ->
+        // yield U AFTER the already-yielded values (node_classes.py
+        // 4846-4853). Non-InferenceError raises (Attribute, Recursion...)
+        // propagate.
+        let safe = |n: NodeId| -> Flow {
             let g = GNode { m, n };
             let mut vals = Vec::new();
             let end = self.infer_dispatch_to(g, ctx, &mut |v| {
                 vals.push(v);
                 Drive::Go
             });
-            if vals.is_empty() {
-                if let End::Raised(_) = end {
-                    return vec![Value::Uninferable];
+            match end {
+                End::Raised(e) if e.is_inference() => {
+                    vals.push(Value::Uninferable);
+                    Flow::ok(vals)
                 }
+                End::Raised(e) => Flow {
+                    vals,
+                    err: Some(e),
+                },
+                _ => Flow::ok(vals),
             }
-            vals
         };
         if values.len() == 1 {
+            let f = safe(values[0]);
             let mut out = Vec::new();
-            for v in safe(values[0]) {
+            for v in f.vals {
                 if self.value_const(&v).is_some() {
                     out.push(v);
                 } else {
@@ -1202,13 +1232,17 @@ impl Engine {
                     ))));
                 }
             }
-            return out;
+            return Flow { vals: out, err: f.err };
         }
+        let pf = safe(values[0]);
         let mut out = Vec::new();
-        for prefix in safe(values[0]) {
-            for suffix in self.joinedstr_parts(&values[1..], m, ctx) {
+        let mut err = None;
+        for prefix in &pf.vals {
+            // the suffix generator is recreated per prefix
+            let sf = self.joinedstr_parts(&values[1..], m, ctx);
+            for suffix in &sf.vals {
                 let mut result = String::new();
-                for part in [&prefix, &suffix] {
+                for part in [prefix, suffix] {
                     match self.value_const(part) {
                         Some(c) => result.push_str(&const_str_value(&c)),
                         None => result.push_str("{Uninferable}"),
@@ -1216,8 +1250,17 @@ impl Engine {
                 }
                 out.push(Value::SynthConst(Rc::new(ConstValue::Str(result.into()))));
             }
+            if sf.err.is_some() {
+                err = sf.err;
+                break;
+            }
         }
-        out
+        // a prefix-iterator raise surfaces only after all its values (and
+        // their suffix products) were consumed
+        if err.is_none() {
+            err = pf.err;
+        }
+        Flow { vals: out, err }
     }
 
     fn infer_joinedstr(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
@@ -1236,7 +1279,8 @@ impl Engine {
         // (node_classes.py:4807-4820, bug-for-bug)
         let mut out = Vec::new();
         let mut uninferable_already = false;
-        for v in self.joinedstr_parts(&values, node.m, ctx) {
+        let parts = self.joinedstr_parts(&values, node.m, ctx);
+        for v in parts.vals {
             let failed = v.is_uninferable()
                 || matches!(self.value_const(&v), Some(ConstValue::Str(sv)) if sv.contains("{Uninferable}"));
             if failed && !uninferable_already {
@@ -1246,7 +1290,10 @@ impl Engine {
             }
             out.push(v);
         }
-        Flow::ok(out)
+        Flow {
+            vals: out,
+            err: parts.err,
+        }
     }
 
     // ---------- EmptyNode ----------

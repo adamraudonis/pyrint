@@ -8,6 +8,14 @@ import dump_infer
 from astroid.context import InferenceContext
 import astroid
 
+# Keep process state identical to a plain `python dump_infer.py` run: that
+# run never has 'dump_infer' in sys.modules (it IS __main__) and no extra
+# harness path entry beyond the script dir. astroid raw-builds the `sys`
+# module lazily DURING prebuild, freezing live sys.modules/sys.path into
+# Dict:N/List:N — pollution here shifts those renders vs the warm cache.
+del sys.modules['dump_infer']
+sys.path.pop(0)
+
 _orig_infer_node = dump_infer.infer_node
 
 def infer_node_count(n):
