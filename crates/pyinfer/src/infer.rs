@@ -1115,40 +1115,116 @@ impl Engine {
             } => (*value, *format_spec),
             _ => return Flow::err(ErrKind::Inference),
         };
+        drop(md);
         let mut out = Vec::new();
-        let specs: Vec<Option<String>> = match format_spec {
-            None => vec![Some(String::new())],
-            Some(fs) => {
-                let f = self.infer(GNode { m: node.m, n: fs }, ctx);
-                f.vals
-                    .iter()
-                    .map(|v| match self.value_const(v) {
-                        Some(ConstValue::Str(s)) => Some(s.to_string()),
-                        _ => None,
-                    })
-                    .collect()
+        let mut uninferable_already = false;
+        // format_specs = Const("") if None else format_spec; .infer() — the
+        // synthetic Const("") infer bumps once (fresh node, cache miss)
+        let specs: Vec<Value> = match format_spec {
+            None => {
+                ctx.bump_inferred();
+                vec![Value::SynthConst(Rc::new(ConstValue::Str("".into())))]
             }
+            Some(fs) => self.infer(GNode { m: node.m, n: fs }, ctx).vals,
         };
-        for spec in specs {
-            match spec {
-                None => out.push(Value::Uninferable),
-                Some(spec) => {
-                    let vf = self.infer(GNode { m: node.m, n: value }, ctx);
-                    for v in &vf.vals {
-                        match self.value_const(v) {
-                            Some(c) => match format_const(&c, &spec) {
-                                Some(s) => out.push(Value::SynthConst(Rc::new(ConstValue::Str(
-                                    s.into(),
-                                )))),
-                                None => out.push(Value::Uninferable),
-                            },
-                            None => out.push(Value::Uninferable),
-                        }
+        for spec_v in specs {
+            let spec = match self.value_const(&spec_v) {
+                Some(ConstValue::Str(sp)) => Some(sp.to_string()),
+                Some(_) => None, // non-str Const spec: format() TypeError per value
+                None => {
+                    // not a Const at all -> single Uninferable
+                    if !uninferable_already {
+                        out.push(Value::Uninferable);
+                        uninferable_already = true;
+                    }
+                    continue;
+                }
+            };
+            let vf = self.infer(GNode { m: node.m, n: value }, ctx);
+            for v in &vf.vals {
+                // format(value_to_format, spec): Const values use python
+                // format(); other inference results are formatted as their
+                // astroid str() — Instance: "Instance of {root}.{name}"
+                // (bases.py:373), Uninferable: "Uninferable"
+                let formatted: Option<String> = match (&spec, v) {
+                    (Some(sp), _) if self.value_const(v).is_some() => {
+                        format_const(&self.value_const(v).unwrap(), sp)
+                    }
+                    (Some(sp), Value::Inst { cls } | Value::ExcInst { cls, .. })
+                        if sp.is_empty() =>
+                    {
+                        let root = self.md(cls.m).name.clone();
+                        let name = self.node_name(*cls).unwrap_or_default();
+                        Some(format!("Instance of {root}.{name}"))
+                    }
+                    (Some(sp), Value::Uninferable) if sp.is_empty() => {
+                        Some("Uninferable".to_string())
+                    }
+                    _ => None,
+                };
+                match formatted {
+                    Some(sf) => {
+                        out.push(Value::SynthConst(Rc::new(ConstValue::Str(sf.into()))))
+                    }
+                    None => {
+                        out.push(Value::Uninferable);
+                        uninferable_already = true;
                     }
                 }
             }
         }
         Flow::ok(out)
+    }
+
+    /// JoinedStr._infer_from_values (node_classes.py:4822-4844), recursive
+    /// cartesian concatenation; parts inferred via node._infer (NO
+    /// NodeNG.infer wrapper: no cache, no bumps — _safe_infer_from_node)
+    fn joinedstr_parts(&self, values: &[NodeId], m: crate::value::ModId, ctx: &Rc<Ctx>) -> Vec<Value> {
+        if values.is_empty() {
+            return Vec::new();
+        }
+        // _safe_infer_from_node: node._infer; InferenceError -> single U
+        let safe = |n: NodeId| -> Vec<Value> {
+            let g = GNode { m, n };
+            let mut vals = Vec::new();
+            let end = self.infer_dispatch_to(g, ctx, &mut |v| {
+                vals.push(v);
+                Drive::Go
+            });
+            if vals.is_empty() {
+                if let End::Raised(_) = end {
+                    return vec![Value::Uninferable];
+                }
+            }
+            vals
+        };
+        if values.len() == 1 {
+            let mut out = Vec::new();
+            for v in safe(values[0]) {
+                if self.value_const(&v).is_some() {
+                    out.push(v);
+                } else {
+                    out.push(Value::SynthConst(Rc::new(ConstValue::Str(
+                        "{Uninferable}".into(),
+                    ))));
+                }
+            }
+            return out;
+        }
+        let mut out = Vec::new();
+        for prefix in safe(values[0]) {
+            for suffix in self.joinedstr_parts(&values[1..], m, ctx) {
+                let mut result = String::new();
+                for part in [&prefix, &suffix] {
+                    match self.value_const(part) {
+                        Some(c) => result.push_str(&const_str_value(&c)),
+                        None => result.push_str("{Uninferable}"),
+                    }
+                }
+                out.push(Value::SynthConst(Rc::new(ConstValue::Str(result.into()))));
+            }
+        }
+        out
     }
 
     fn infer_joinedstr(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
@@ -1157,60 +1233,25 @@ impl Engine {
             NodeKind::JoinedStr { values } => values.clone(),
             _ => return Flow::err(ErrKind::Inference),
         };
+        drop(md);
         if values.is_empty() {
             return Flow::one(Value::SynthConst(Rc::new(ConstValue::Str("".into()))));
         }
-        // cartesian combination; non-Const parts -> "{Uninferable}" marker
-        let mut parts: Vec<Vec<Option<String>>> = Vec::new();
-        for v in &values {
-            let f = self.infer(GNode { m: node.m, n: *v }, ctx);
-            if f.vals.is_empty() {
-                return Flow::err(ErrKind::Inference);
-            }
-            parts.push(
-                f.vals
-                    .iter()
-                    .map(|val| match self.value_const(val) {
-                        Some(ConstValue::Str(s)) => Some(s.to_string()),
-                        _ => None,
-                    })
-                    .collect(),
-            );
-        }
-        let mut out: Vec<Value> = Vec::new();
+        // _infer_with_values: failed = U or Const str containing the
+        // "{Uninferable}" marker; only the FIRST failure yields U — later
+        // failures fall through and yield the raw marker Const
+        // (node_classes.py:4807-4820, bug-for-bug)
+        let mut out = Vec::new();
         let mut uninferable_already = false;
-        let mut idx = vec![0usize; parts.len()];
-        'outer: loop {
-            let mut s = String::new();
-            let mut bad = false;
-            for (i, &j) in idx.iter().enumerate() {
-                match &parts[i][j] {
-                    Some(p) => s.push_str(p),
-                    None => {
-                        bad = true;
-                    }
-                }
+        for v in self.joinedstr_parts(&values, node.m, ctx) {
+            let failed = v.is_uninferable()
+                || matches!(self.value_const(&v), Some(ConstValue::Str(sv)) if sv.contains("{Uninferable}"));
+            if failed && !uninferable_already {
+                uninferable_already = true;
+                out.push(Value::Uninferable);
+                continue;
             }
-            if bad {
-                if !uninferable_already {
-                    out.push(Value::Uninferable);
-                    uninferable_already = true;
-                }
-            } else {
-                out.push(Value::SynthConst(Rc::new(ConstValue::Str(s.into()))));
-            }
-            let mut i = idx.len();
-            loop {
-                if i == 0 {
-                    break 'outer;
-                }
-                i -= 1;
-                idx[i] += 1;
-                if idx[i] < parts[i].len() {
-                    break;
-                }
-                idx[i] = 0;
-            }
+            out.push(v);
         }
         Flow::ok(out)
     }
@@ -1780,6 +1821,16 @@ fn const_num(c: &ConstValue) -> Option<f64> {
 
 /// format(value, spec) folding for f-strings; only the empty/simple specs
 /// matter in practice — bail (None => Uninferable) otherwise.
+/// str(value) for JoinedStr concatenation (node_classes.py:4840
+/// `result += str(node.value)`)
+fn const_str_value(c: &ConstValue) -> String {
+    format_const(c, "").unwrap_or_else(|| match c {
+        ConstValue::Bytes(b) => format!("b{:?}", String::from_utf8_lossy(b)),
+        ConstValue::Ellipsis => "Ellipsis".to_string(),
+        _ => String::new(),
+    })
+}
+
 fn format_const(c: &ConstValue, spec: &str) -> Option<String> {
     if !spec.is_empty() {
         return None;
