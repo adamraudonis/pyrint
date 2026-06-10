@@ -898,6 +898,37 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
         sink: &mut Sink,
     ) -> End {
+        // DictMethodBoundMethod (objectmodel.py:840-852): a dict-model BM
+        // (bound to a Dict literal/synth, func = builtins.dict.items/keys/
+        // values) yields the DictItems/Keys/Values object directly
+        {
+            let dict_like = matches!(&**bound, Value::SynthDict { .. })
+                || matches!(&**bound, Value::Node(g)
+                    if self.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })));
+            if dict_like {
+                let q = self.qname(func);
+                let dr = || match &**bound {
+                    Value::SynthDict { items } => crate::value::DictRef::Synth(Rc::clone(items)),
+                    Value::Node(g) => crate::value::DictRef::Node(*g),
+                    _ => unreachable!(),
+                };
+                match q.as_str() {
+                    "builtins.dict.items" => {
+                        yield_v!(sink, Value::DictItems(Rc::new(dr())));
+                        return End::Done;
+                    }
+                    "builtins.dict.keys" => {
+                        yield_v!(sink, Value::DictKeys(Rc::new(dr())));
+                        return End::Done;
+                    }
+                    "builtins.dict.values" => {
+                        yield_v!(sink, Value::DictValues(Rc::new(dr())));
+                        return End::Done;
+                    }
+                    _ => {}
+                }
+            }
+        }
         let ctx2 = bind_context_to_node(ctx, (**bound).clone());
         // type.__new__(mcs, name, bases, attrs) (bases.py:656-674)
         if let Some(call) = caller {

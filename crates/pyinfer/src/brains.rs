@@ -41,6 +41,8 @@ pub enum Tip {
     NumpyMember(u8),
     /// brain_numpy_ndarray: ANY Attribute with attrname == "ndarray"
     NumpyNdarray,
+    /// brain_type: Name "type" directly under a Subscript
+    TypeSubscript,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -96,6 +98,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::TypingNamedTupleFunc => (6, 3),
         Tip::NumpyMember(i) => (7, i),
         Tip::NumpyNdarray => (7, 31),
+        Tip::TypeSubscript => (7, 30),
     }
 }
 
@@ -265,6 +268,13 @@ impl Engine {
             if md.name.starts_with("numpy") {
                 if let Some(idx) = NUMPY_MEMBER_SRC[3..23].iter().position(|(m, _)| *m == n) {
                     return Some(Tip::NumpyMember((idx + 3) as u8));
+                }
+            }
+            // brain_type._looks_like_type_subscript: parent is Subscript
+            if n == "type" {
+                let parent = md.tree.nodes[node.n.idx()].parent;
+                if matches!(md.tree.nodes[parent.idx()].kind, NodeKind::Subscript { .. }) {
+                    return Some(Tip::TypeSubscript);
                 }
             }
             return None;
@@ -437,7 +447,25 @@ impl Engine {
             Tip::NumpyNdarray => {
                 self.tip_numpy_extract(crate::numpy_templates::NUMPY_NDARRAY_SRC, ctx)
             }
+            Tip::TypeSubscript => self.tip_type_subscript(node, ctx),
         }
+    }
+
+    /// brain_type.infer_type_sub: `type[...]` only when "type" resolves to
+    /// the builtins module; yields a synthetic `class type` (qname ".type")
+    fn tip_type_subscript(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let sym = self.sym("type");
+        let scope = self.scope(node);
+        let (found_scope, _) = self.scope_lookup(scope, node, sym, 0);
+        if !self.kind_is(found_scope, |k| matches!(k, NodeKind::Module(_)))
+            || self.md(found_scope.m).name != "builtins"
+        {
+            return None; // UseInferenceDefault
+        }
+        self.tip_numpy_extract(
+            "class type:\n    def __class_getitem__(cls, key):\n        return cls\n",
+            ctx,
+        )
     }
 
     /// brain_numpy_utils.infer_numpy_attribute / infer_numpy_name:

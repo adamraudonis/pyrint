@@ -938,20 +938,25 @@ impl Engine {
                 _ => {}
             }
         }
-        // Dict model
+        // DictModel (objectmodel.py:840-889): items/keys/values resolve to
+        // a special BoundMethod proxying `next(dict_cls.igetattr(name))`
+        // (inference side effect!) whose infer_call_result yields the
+        // DictItems/DictKeys/DictValues object — see the qname carve-out in
+        // bound_method_infer_call_result_to.
         if matches!(owner, Value::SynthDict { .. })
             || matches!(owner, Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })))
         {
-            let dr = match owner {
-                Value::SynthDict { items } => DictRef::Synth(Rc::clone(items)),
-                Value::Node(g) => DictRef::Node(*g),
-                _ => unreachable!(),
-            };
-            match name {
-                "items" => return Some(Value::DictItems(Rc::new(dr))),
-                "keys" => return Some(Value::DictKeys(Rc::new(dr))),
-                "values" => return Some(Value::DictValues(Rc::new(dr))),
-                _ => {}
+            if matches!(name, "items" | "keys" | "values") {
+                let dict_cls = self.builtins().dict;
+                let sym = self.sym(name);
+                let meth = self.class_igetattr_first(dict_cls, sym, None, true).ok().flatten();
+                if let Some(Value::Node(f)) = meth {
+                    return Some(Value::BoundMethod {
+                        func: f,
+                        bound: Rc::new(owner.clone()),
+                    });
+                }
+                return None;
             }
         }
         match name {

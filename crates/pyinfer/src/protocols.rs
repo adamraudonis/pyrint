@@ -831,6 +831,29 @@ impl Engine {
 
     /// `.itered()`: List/Tuple/Set -> elts; Dict -> keys; Const str/bytes ->
     /// char Consts; FrozenSet -> elts. None => no attribute / TypeError.
+    /// (key, value) pairs of a DictRef as Values (Dict literal children
+    /// stay nodes)
+    pub fn dictref_pairs(&self, dr: &crate::value::DictRef) -> Vec<(Value, Value)> {
+        match dr {
+            crate::value::DictRef::Synth(items) => items.as_ref().clone(),
+            crate::value::DictRef::Node(g) => {
+                let md = self.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => items
+                        .iter()
+                        .map(|&(k, v)| {
+                            (
+                                Value::Node(GNode { m: g.m, n: k }),
+                                Value::Node(GNode { m: g.m, n: v }),
+                            )
+                        })
+                        .collect(),
+                    _ => Vec::new(),
+                }
+            }
+        }
+    }
+
     pub fn value_itered(&self, v: &Value) -> Option<Vec<Value>> {
         match v {
             Value::SynthSeq { elems, .. } | Value::FrozenSet { elems } => Some(elems.to_vec()),
@@ -838,6 +861,24 @@ impl Engine {
                 Some(items.iter().map(|(k, _)| k.clone()).collect())
             }
             Value::SynthConst(c) => const_itered(c),
+            // DictItems proxies a List of Tuple(key, value) nodes built by
+            // DictModel.attr_items (objectmodel.py:855-867); Keys/Values
+            // proxy Lists of the keys/values
+            Value::DictItems(dr) => Some(
+                self.dictref_pairs(dr)
+                    .into_iter()
+                    .map(|(k, v)| Value::SynthSeq {
+                        kind: SeqKind::Tuple,
+                        elems: Rc::new(vec![k, v]),
+                    })
+                    .collect(),
+            ),
+            Value::DictKeys(dr) => {
+                Some(self.dictref_pairs(dr).into_iter().map(|(k, _)| k).collect())
+            }
+            Value::DictValues(dr) => {
+                Some(self.dictref_pairs(dr).into_iter().map(|(_, v)| v).collect())
+            }
             Value::Node(g) => {
                 let md = self.md(g.m);
                 match &md.tree.nodes[g.n.idx()].kind {
