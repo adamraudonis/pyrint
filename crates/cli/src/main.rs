@@ -40,13 +40,35 @@ fn main() -> ExitCode {
             }
             let bytes = match std::fs::read(&read_path) {
                 Ok(b) => b,
-                Err(e) => {
-                    println!("READERROR {e}");
+                Err(_) => {
+                    // astroid: OSError in open_source_file -> AstroidBuildingError
+                    // (builder.py:120); the harness dumper prints BUILDERROR <type>.
+                    println!("BUILDERROR AstroidBuildingError");
                     continue;
                 }
             };
-            let text = String::from_utf8_lossy(&bytes).into_owned();
-            let src = pyast::SourceFile::from_text(text, "utf-8".to_string());
+            // Error messages embed os.path.abspath of the source path
+            // (modutils.get_source_file absolutizes before file_build).
+            let abs = std::path::absolute(&read_path)
+                .map(|p| p.to_string_lossy().into_owned())
+                .unwrap_or_else(|_| read_path.clone());
+            let src = match pyast::decode_source(&bytes, &abs) {
+                Ok(src) => src,
+                Err(pyast::DecodeError::Syntax(msg)) => {
+                    // SyntaxError from detect_encoding: lineno/offset are None.
+                    println!("SYNTAXERROR None:None {msg}");
+                    continue;
+                }
+                Err(pyast::DecodeError::Lookup(msg)) => {
+                    // LookupError has no lineno/offset attrs; dumper getattr -> 0.
+                    println!("SYNTAXERROR 0:0 {msg}");
+                    continue;
+                }
+                Err(pyast::DecodeError::Unicode) => {
+                    println!("BUILDERROR AstroidBuildingError");
+                    continue;
+                }
+            };
             let stem = std::path::Path::new(path)
                 .file_stem()
                 .map(|s| s == "__init__")
