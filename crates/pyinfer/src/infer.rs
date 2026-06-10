@@ -111,7 +111,9 @@ impl Engine {
             );
             let mut wrapped = |v: Value| -> Drive {
                 eprintln!("{}  yield {}", "  ".repeat(d), crate::dump::render(self, &v));
-                sink(v)
+                let dr = sink(v);
+                eprintln!("{}  <-{:?}", "  ".repeat(d), dr);
+                dr
             };
             return self.infer_entry_to_inner(node, ctx_in, &mut wrapped);
         }
@@ -159,11 +161,13 @@ impl Engine {
         let mut i: usize = 0;
         let mut truncated = false;
         let mut cache_after_trunc = false;
+        let mut consumer_stopped = false;
         let end = {
             let results = &mut results;
             let i = &mut i;
             let truncated = &mut truncated;
             let cache_after_trunc = &mut cache_after_trunc;
+            let consumer_stopped = &mut consumer_stopped;
             let ctx2 = Rc::clone(&ctx);
             self.infer_dispatch_to(node, &ctx, &mut |v| {
                 if *i >= MAX_INFERABLE_VALUES || ctx2.nodes_inferred.get() > MAX_INFERRED {
@@ -185,6 +189,7 @@ impl Engine {
                     // consumer abandoned at the yield: the post-yield
                     // `context.nodes_inferred += 1` never runs, and the
                     // cache write is skipped (generator dropped).
+                    *consumer_stopped = true;
                     return Drive::Stop;
                 }
                 ctx2.bump_inferred();
@@ -192,13 +197,29 @@ impl Engine {
                 Drive::Go
             })
         };
+        let trace_write = |n: usize| {
+            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                let md = self.md(node.m);
+                let kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
+                let name = self.node_name(node).unwrap_or_default();
+                eprintln!("CACHEW {kind} {name} vals={n}");
+            }
+        };
         match end {
+            // a producer may "complete" internally (e.g. Subscript's
+            // `yield Uninferable; return`) even though the CONSUMER
+            // abandoned at that yield — in astroid the NodeNG.infer
+            // wrapper is then dropped while suspended, so its tail cache
+            // write never runs. Consumer abandonment wins over Done.
+            End::Done if consumer_stopped => End::Stopped,
             End::Done => {
+                trace_write(results.len());
                 self.inf_cache.borrow_mut().insert(key, Rc::new(results));
                 End::Done
             }
             End::Stopped => {
                 if truncated && cache_after_trunc {
+                    trace_write(results.len());
                     self.inf_cache.borrow_mut().insert(key, Rc::new(results));
                     End::Done
                 } else {

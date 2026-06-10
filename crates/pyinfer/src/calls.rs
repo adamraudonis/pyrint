@@ -1102,7 +1102,7 @@ impl Engine {
             };
             if let Some(sym) = sym {
                 let mut stopped = false;
-                let _ = self.igetattr_value_to(instance, sym, Some(&ctx2), &mut |v| {
+                let end = self.igetattr_value_to(instance, sym, Some(&ctx2), &mut |v| {
                     inferred = true;
                     let d = sink(v);
                     if let Drive::Stop = d {
@@ -1112,6 +1112,17 @@ impl Engine {
                 });
                 if stopped {
                     return End::Stopped;
+                }
+                if let End::Raised(e) = end {
+                    // bases.py:327-330: the shortcut's igetattr is NOT
+                    // wrapped -- a missing attribute on the instance
+                    // aborts the whole call inference (InferenceError;
+                    // Instance.igetattr converts AttributeInferenceError)
+                    return End::Raised(if e == ErrKind::Attribute {
+                        ErrKind::Inference
+                    } else {
+                        e
+                    });
                 }
             }
         }
