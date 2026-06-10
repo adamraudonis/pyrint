@@ -27,6 +27,14 @@ pub enum Tip {
     TypingSubscript,
     /// typing.TypedDict FunctionDef -> ClassDef
     TypedDictFunc,
+    /// namedtuple(...) calls (brain_namedtuple_enum.infer_named_tuple)
+    NamedTupleCall,
+    /// typing.NamedTuple(...) calls
+    TypingNamedTupleCall,
+    /// class X(NamedTuple): ... (infer_typing_namedtuple_class)
+    TypingNamedTupleClass,
+    /// the typing.NamedTuple FunctionDef itself -> _NamedTuple class
+    TypingNamedTupleFunc,
 }
 
 const BUILTIN_NAMES: [&str; 18] = [
@@ -61,6 +69,10 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::TypingAlias => (5, 1),
         Tip::TypingSubscript => (5, 2),
         Tip::TypedDictFunc => (5, 3),
+        Tip::NamedTupleCall => (6, 0),
+        Tip::TypingNamedTupleCall => (6, 1),
+        Tip::TypingNamedTupleClass => (6, 2),
+        Tip::TypingNamedTupleFunc => (6, 3),
     }
 }
 
@@ -164,9 +176,31 @@ impl Engine {
             }
             return None;
         }
-        // FunctionDef tip: typing.TypedDict
+        // ClassDef tip: NamedTuple bases (brain_namedtuple_enum
+        // _has_namedtuple_base; registered before the typing tips)
+        if let NodeKind::ClassDef(d) = &md.tree.nodes[node.n.idx()].kind {
+            let has_nt = d.bases.iter().any(|&b| {
+                let g = GNode { m: node.m, n: b };
+                self.dotted_of(g)
+                    .map(|s| {
+                        s == "NamedTuple"
+                            || s == "typing.NamedTuple"
+                            || s == "typing_extensions.NamedTuple"
+                    })
+                    .unwrap_or(false)
+            });
+            if has_nt {
+                return Some(Tip::TypingNamedTupleClass);
+            }
+            return None;
+        }
+        // FunctionDef tips: typing.NamedTuple function
+        // (brain_namedtuple_enum) and typing.TypedDict (brain_typing)
         if matches!(md.tree.nodes[node.n.idx()].kind, NodeKind::FunctionDef(_)) {
             let q = self.qname(node);
+            if q == "typing.NamedTuple" && md.name == "typing" {
+                return Some(Tip::TypingNamedTupleFunc);
+            }
             if q == "typing.TypedDict" || q == "typing_extensions.TypedDict" {
                 return Some(Tip::TypedDictFunc);
             }
@@ -178,6 +212,12 @@ impl Engine {
         match &md.tree.nodes[func.idx()].kind {
             NodeKind::Name { name } => {
                 let n = md.tree.s(*name);
+                if n == "namedtuple" {
+                    return Some(Tip::NamedTupleCall);
+                }
+                if n == "NamedTuple" {
+                    return Some(Tip::TypingNamedTupleCall);
+                }
                 if n == "partial" {
                     return Some(Tip::Partial);
                 }
@@ -229,6 +269,12 @@ impl Engine {
             }
             NodeKind::Attribute { expr, attrname, .. } => {
                 let attr = md.tree.s(*attrname);
+                if attr == "namedtuple" {
+                    return Some(Tip::NamedTupleCall);
+                }
+                if attr == "NamedTuple" {
+                    return Some(Tip::TypingNamedTupleCall);
+                }
                 if attr == "TypeVar" || attr == "NewType" {
                     return Some(Tip::TypingTypeVar);
                 }
@@ -318,6 +364,10 @@ impl Engine {
             Tip::TypingAlias => self.tip_typing_alias(node, ctx),
             Tip::TypingSubscript => self.tip_typing_subscript(node, ctx),
             Tip::TypedDictFunc => self.tip_typeddict_func(node),
+            Tip::NamedTupleCall => self.tip_named_tuple(node, ctx),
+            Tip::TypingNamedTupleCall => self.tip_typing_namedtuple_call(node, ctx),
+            Tip::TypingNamedTupleClass => self.tip_typing_namedtuple_class(node, ctx),
+            Tip::TypingNamedTupleFunc => self.tip_typing_namedtuple_func(node, ctx),
         }
     }
 
@@ -1503,4 +1553,487 @@ fn simple_str_format(
         }
     }
     Some(out)
+}
+
+// ============== brain_namedtuple_enum: namedtuple / typing.NamedTuple ==============
+
+const PY_KEYWORDS: [&str; 35] = [
+    "False", "None", "True", "and", "as", "assert", "async", "await", "break",
+    "class", "continue", "def", "del", "elif", "else", "except", "finally",
+    "for", "from", "global", "if", "import", "in", "is", "lambda", "nonlocal",
+    "not", "or", "pass", "raise", "return", "try", "while", "with", "yield",
+];
+
+fn is_identifier(s: &str) -> bool {
+    let mut chars = s.chars();
+    match chars.next() {
+        Some(c) if c.is_alphabetic() || c == '_' => {}
+        _ => return false,
+    }
+    chars.all(|c| c.is_alphanumeric() || c == '_')
+}
+
+impl Engine {
+    fn dotted_of(&self, g: GNode) -> Option<String> {
+        let md = self.md(g.m);
+        match &md.tree.nodes[g.n.idx()].kind {
+            NodeKind::Name { name } => Some(md.tree.s(*name).to_string()),
+            NodeKind::Attribute { expr, attrname, .. } => {
+                let base = self.dotted_of(GNode { m: g.m, n: *expr })?;
+                Some(format!("{}.{}", base, md.tree.s(*attrname)))
+            }
+            _ => None,
+        }
+    }
+
+    /// brain_namedtuple_enum.infer_named_tuple — Call tip. None =>
+    /// UseInferenceDefault.
+    fn tip_named_tuple(&self, call: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let cls = self.infer_named_tuple_core(call, ctx)?;
+        Some(Flow::one(Value::Node(cls)))
+    }
+
+    /// _find_func_form_arguments member: positional or keyword,
+    /// `_infer_first` (single pull; Uninferable -> UseInferenceDefault).
+    fn func_form_arg(
+        &self,
+        args: &[GNode],
+        kws: &[(Option<GSym>, GNode)],
+        position: usize,
+        key_name: &str,
+        ctx: &Rc<Ctx>,
+    ) -> Option<Value> {
+        let node = if args.len() > position {
+            args[position]
+        } else {
+            let sym = self.sym(key_name);
+            kws.iter().find(|(k, _)| *k == Some(sym))?.1
+        };
+        match self.infer_first(node, Some(ctx)) {
+            Ok(v) if !v.is_uninferable() => Some(v),
+            _ => None,
+        }
+    }
+
+    fn infer_named_tuple_core(&self, call: GNode, ctx: &Rc<Ctx>) -> Option<GNode> {
+        let (args, kws) = self.call_parts(call);
+        let name_v = self.func_form_arg(&args, &kws, 0, "typename", ctx)?;
+        let names_v = self.func_form_arg(&args, &kws, 1, "field_names", ctx)?;
+        let name = match self.value_const(&name_v) {
+            Some(ConstValue::Str(s)) => s.to_string(),
+            _ => return None, // non-str typename fails the checks anyway
+        };
+        // attributes: str field spec or container of Consts / 2-tuples
+        let attributes: Vec<String> = match self.value_const(&names_v) {
+            Some(ConstValue::Str(s)) => s
+                .replace(',', " ")
+                .split_whitespace()
+                .map(String::from)
+                .collect(),
+            _ => {
+                // _get_namedtuple_fields (as_string round-trip through
+                // extract_node; net effect: Const values stringified)
+                let elts = self.value_elts(&names_v).or_else(|| match &names_v {
+                    Value::Node(g) => {
+                        let md = self.md(g.m);
+                        match &md.tree.nodes[g.n.idx()].kind {
+                            NodeKind::List { elts, .. }
+                            | NodeKind::Tuple { elts, .. }
+                            | NodeKind::Set { elts } => Some(
+                                elts.iter()
+                                    .map(|&e| Value::Node(GNode { m: g.m, n: e }))
+                                    .collect(),
+                            ),
+                            _ => None,
+                        }
+                    }
+                    _ => None,
+                })?;
+                let mut out = Vec::new();
+                for elt in elts {
+                    // pairs: (name, type)
+                    let first = match &elt {
+                        Value::Node(g) => {
+                            let md = self.md(g.m);
+                            match &md.tree.nodes[g.n.idx()].kind {
+                                NodeKind::List { elts, .. } | NodeKind::Tuple { elts, .. } => {
+                                    if elts.len() != 2 {
+                                        return None;
+                                    }
+                                    Value::Node(GNode { m: g.m, n: elts[0] })
+                                }
+                                NodeKind::Const(_) => elt.clone(),
+                                _ => return None,
+                            }
+                        }
+                        Value::SynthSeq { elems, .. } => {
+                            if elems.len() != 2 {
+                                return None;
+                            }
+                            elems[0].clone()
+                        }
+                        Value::SynthConst(_) => elt.clone(),
+                        _ => return None,
+                    };
+                    // str(value): Const str -> the string; other Consts
+                    // stringify (and then fail the identifier checks)
+                    let v = match &first {
+                        Value::Node(g) => {
+                            let md = self.md(g.m);
+                            match &md.tree.nodes[g.n.idx()].kind {
+                                NodeKind::Const(c) => c.clone(),
+                                _ => return None,
+                            }
+                        }
+                        Value::SynthConst(c) => (**c).clone(),
+                        _ => return None,
+                    };
+                    out.push(match v {
+                        ConstValue::Str(s) => s.to_string(),
+                        other => crate::dump::render(self, &Value::SynthConst(Rc::new(other)))
+                            .split(':')
+                            .nth(2)
+                            .unwrap_or("")
+                            .to_string(),
+                    });
+                }
+                out
+            }
+        };
+        let attributes: Vec<String> = attributes
+            .into_iter()
+            .filter(|a| !a.contains(' '))
+            .collect();
+        // rename: CallSite.infer_argument against the REAL
+        // collections.namedtuple (InferenceError/StopIteration -> False)
+        let rename = self.namedtuple_rename(call, ctx);
+        let attributes = check_namedtuple_attributes(&name, attributes, rename)?;
+        if !is_identifier(&name) || PY_KEYWORDS.contains(&name.as_str()) {
+            return None;
+        }
+        // class_node: ClassDef(name, parent=SYNTHETIC_ROOT, lineno=call)
+        let (lineno, col) = {
+            let md = self.md(call.m);
+            let n = &md.tree.nodes[call.n.idx()];
+            (n.fromlineno, n.col_offset)
+        };
+        let (cls, base_slots, _, _) =
+            self.build_synth_class("__astroid_synthetic", &name, lineno, col, 1, false, 0);
+        self.redirects.borrow_mut().insert(
+            GNode { m: cls.m, n: base_slots[0] },
+            crate::value::NV::V(Value::Node(self.builtins().tuple)),
+        );
+        // instance_attrs: EmptyNode-ish placeholders per attribute
+        {
+            let phs = self.alloc_placeholders(attributes.len());
+            let mut ia = self.iattrs.borrow_mut();
+            let entry = ia.entry(cls).or_default();
+            for (attr, ph) in attributes.iter().zip(phs) {
+                entry.insert(self.sym(attr), vec![ph]);
+            }
+        }
+        // fake module (string_build, module name "") with the helpers
+        let replace_args = attributes
+            .iter()
+            .map(|a| format!("{a}=None"))
+            .collect::<Vec<_>>()
+            .join(", ");
+        let field_defs = attributes
+            .iter()
+            .enumerate()
+            .map(|(i, a)| {
+                format!(
+                    "    {a} = property(lambda self: self[{i}], doc='Alias for field number {i}')"
+                )
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+        // _check_namedtuple_attributes returns a TUPLE: {attributes!r}
+        let fields_repr = if attributes.len() == 1 {
+            format!("({},)", pyast::pyrepr::repr_str(&attributes[0]))
+        } else {
+            format!(
+                "({})",
+                attributes
+                    .iter()
+                    .map(|a| pyast::pyrepr::repr_str(a))
+                    .collect::<Vec<_>>()
+                    .join(", ")
+            )
+        };
+        let src = format!(
+            "\nclass {name}(tuple):\n    __slots__ = ()\n    _fields = {fields_repr}\n    def _asdict(self):\n        return self.__dict__\n    @classmethod\n    def _make(cls, iterable, new=tuple.__new__, len=len):\n        return new(cls, iterable)\n    def _replace(self, {replace_args}):\n        return self\n    def __getnewargs__(self):\n        return tuple(self)\n{field_defs}\n    "
+        );
+        let fake_mid = self.build_template_module(&src, "")?;
+        let name_sym = self.sym(&name);
+        let fake_cls = {
+            let fmd = self.md(fake_mid);
+            let locals = fmd.locals.borrow();
+            locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&name_sym))
+                .and_then(|v| v.first())
+                .copied()?
+        };
+        // copy locals (insertion order: _asdict, _make, _replace, _fields,
+        // then the field properties)
+        {
+            let fmd = self.md(fake_mid);
+            let flocals = fmd.locals.borrow();
+            let fmap = flocals.get(&fake_cls.n)?;
+            let cmd = self.md(cls.m);
+            let mut clocals = cmd.locals.borrow_mut();
+            let centry = clocals.entry(cls.n).or_default();
+            for key in ["_asdict", "_make", "_replace", "_fields"] {
+                let sym = self.sym(key);
+                if let Some(v) = fmap.get(&sym) {
+                    centry.insert(sym, v.clone());
+                }
+            }
+            for attr in &attributes {
+                let sym = self.sym(attr);
+                if let Some(v) = fmap.get(&sym) {
+                    centry.insert(sym, v.clone());
+                }
+            }
+        }
+        Some(cls)
+    }
+
+    fn namedtuple_rename(&self, call: GNode, ctx: &Rc<Ctx>) -> bool {
+        // func = safe_infer(extract_node("import collections;
+        // collections.namedtuple")) — the real FunctionDef
+        let Ok(collections_mid) = self.ast_from_module_name("collections", true) else {
+            return false;
+        };
+        let nt_sym = self.sym("namedtuple");
+        let func = {
+            let md = self.md(collections_mid);
+            let locals = md.locals.borrow();
+            match locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&nt_sym))
+                .and_then(|v| v.first())
+            {
+                Some(&g) => g,
+                None => return false,
+            }
+        };
+        if !self.kind_is(func, |k| {
+            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+        }) {
+            return false;
+        }
+        let site = self.call_site_of_call(call, ctx);
+        let rename_sym = self.sym("rename");
+        let mut first: Option<Value> = None;
+        let _ = {
+            let first = &mut first;
+            self.infer_argument_to(&site, func, rename_sym, ctx, &mut |v| {
+                *first = Some(v);
+                crate::value::Drive::Stop
+            })
+        };
+        match first {
+            Some(v) => self.bool_value(&v, &Ctx::new()) == Some(true),
+            None => false,
+        }
+    }
+
+    /// brain_namedtuple_enum.infer_typing_namedtuple — Call tip.
+    fn tip_typing_namedtuple_call(&self, call: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        // func must first-infer to typing.NamedTuple
+        let func = {
+            let md = self.md(call.m);
+            match &md.tree.nodes[call.n.idx()].kind {
+                NodeKind::Call { func, .. } => GNode { m: call.m, n: *func },
+                _ => return None,
+            }
+        };
+        let f = self.infer_first(func, None).ok()?;
+        let q = self.value_qname(&f)?;
+        if q != "typing.NamedTuple" && q != "typing_extensions.NamedTuple" {
+            return None;
+        }
+        let (args, _) = self.call_parts(call);
+        if args.len() != 2 {
+            return None;
+        }
+        if !self.kind_is(args[1], |k| {
+            matches!(k, NodeKind::List { .. } | NodeKind::Tuple { .. })
+        }) {
+            return None;
+        }
+        self.tip_named_tuple(call, ctx)
+    }
+
+    /// brain_namedtuple_enum.infer_typing_namedtuple_class — ClassDef tip.
+    fn tip_typing_namedtuple_class(&self, cls_node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let md = self.md(cls_node.m);
+        let (name, body): (String, Vec<NodeId>) = match &md.tree.nodes[cls_node.n.idx()].kind {
+            NodeKind::ClassDef(d) => (md.tree.s(d.name).to_string(), d.body.clone()),
+            _ => return None,
+        };
+        let fields: Vec<String> = body
+            .iter()
+            .filter_map(|&b| match &md.tree.nodes[b.idx()].kind {
+                NodeKind::AnnAssign { target, .. } => {
+                    match &md.tree.nodes[target.idx()].kind {
+                        NodeKind::AssignName { name } => Some(md.tree.s(*name).to_string()),
+                        _ => None,
+                    }
+                }
+                _ => None,
+            })
+            .collect();
+        // extract_node(f"from collections import namedtuple\n
+        //               namedtuple({typename!r}, {fields!r})")
+        let src = format!(
+            "\nfrom collections import namedtuple\nnamedtuple({}, {})\n",
+            pyast::pyrepr::repr_str(&name),
+            pyast::pyrepr::repr_str(&fields.join(","))
+        );
+        let tmpl = self.build_template_module(&src, "")?;
+        let call = {
+            let tmd = self.md(tmpl);
+            // module body: ImportFrom, Expr(Call)
+            let mb = match &tmd.tree.nodes[NodeId::MODULE.idx()].kind {
+                NodeKind::Module(d) => d.body.clone(),
+                _ => return None,
+            };
+            let expr = *mb.get(1)?;
+            match &tmd.tree.nodes[expr.idx()].kind {
+                NodeKind::Expr { value } => GNode { m: tmpl, n: *value },
+                _ => return None,
+            }
+        };
+        // InferenceError from infer_named_tuple -> InferenceError (the tip
+        // raises); UseInferenceDefault -> default
+        let generated = self.infer_named_tuple_core(call, ctx)?;
+        // copy methods + Assign/ClassDef body entries into generated locals
+        {
+            let entries: Vec<(GSym, Vec<GNode>)> = {
+                let locals = md.locals.borrow();
+                match locals.get(&cls_node.n) {
+                    Some(map) => map.iter().map(|(k, v)| (*k, v.clone())).collect(),
+                    None => Vec::new(),
+                }
+            };
+            let gmd = self.md(generated.m);
+            let mut glocals = gmd.locals.borrow_mut();
+            let gentry = glocals.entry(generated.n).or_default();
+            // mymethods: first local per key that is a FunctionDef
+            for (k, v) in &entries {
+                if let Some(&first) = v.first() {
+                    if self.kind_is(first, |kd| {
+                        matches!(kd, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                    }) {
+                        gentry.insert(*k, vec![first]);
+                    }
+                }
+            }
+            // body Assign targets / nested ClassDefs
+            for &b in &body {
+                match &md.tree.nodes[b.idx()].kind {
+                    NodeKind::Assign { targets, .. } => {
+                        for &t in targets {
+                            if let NodeKind::AssignName { name } = &md.tree.nodes[t.idx()].kind {
+                                let sym = self.g(&md, *name);
+                                let from_cls = {
+                                    let locals = md.locals.borrow();
+                                    locals
+                                        .get(&cls_node.n)
+                                        .and_then(|l| l.get(&sym))
+                                        .cloned()
+                                };
+                                if let Some(v) = from_cls {
+                                    gentry.insert(sym, v);
+                                }
+                            }
+                        }
+                    }
+                    NodeKind::ClassDef(d) => {
+                        let sym = self.g(&md, d.name);
+                        gentry.insert(sym, vec![GNode { m: cls_node.m, n: b }]);
+                    }
+                    _ => {}
+                }
+            }
+        }
+        Some(Flow::one(Value::Node(generated)))
+    }
+}
+
+/// _check_namedtuple_attributes + _get_renamed_namedtuple_attributes.
+/// None => UseInferenceDefault (Astroid{Type,Value}Error).
+fn check_namedtuple_attributes(
+    typename: &str,
+    attributes: Vec<String>,
+    rename: bool,
+) -> Option<Vec<String>> {
+    let attributes = if rename {
+        let mut names = attributes.clone();
+        let mut seen: std::collections::HashSet<String> = Default::default();
+        for (i, name) in attributes.iter().enumerate() {
+            let invalid = !name.chars().all(|c| c.is_alphanumeric() || c == '_')
+                || PY_KEYWORDS.contains(&name.as_str())
+                || name.is_empty()
+                || name.chars().next().map(|c| c.is_ascii_digit()) == Some(true)
+                || name.starts_with('_')
+                || seen.contains(name);
+            if invalid {
+                names[i] = format!("_{i}");
+            }
+            seen.insert(name.clone());
+        }
+        names
+    } else {
+        attributes
+    };
+    for name in std::iter::once(typename).chain(attributes.iter().map(|s| s.as_str())) {
+        if !is_identifier(name) {
+            return None;
+        }
+        if PY_KEYWORDS.contains(&name) {
+            return None;
+        }
+    }
+    let mut seen: std::collections::HashSet<&str> = Default::default();
+    for name in &attributes {
+        if name.starts_with('_') && !rename {
+            return None;
+        }
+        if seen.contains(name.as_str()) {
+            return None;
+        }
+        seen.insert(name);
+    }
+    Some(attributes)
+}
+
+
+impl Engine {
+    /// brain_namedtuple_enum.infer_typing_namedtuple_function: the typing
+    /// NamedTuple FunctionDef infers as `_NamedTuple` (extract_node
+    /// "from typing import _NamedTuple\n_NamedTuple" -> klass.infer(ctx)).
+    fn tip_typing_namedtuple_func(&self, _node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let tmpl = self.build_template_module(
+            "from typing import _NamedTuple\n_NamedTuple\n",
+            "",
+        )?;
+        let name_node = {
+            let tmd = self.md(tmpl);
+            let mb = match &tmd.tree.nodes[NodeId::MODULE.idx()].kind {
+                NodeKind::Module(d) => d.body.clone(),
+                _ => return None,
+            };
+            let expr = *mb.get(1)?;
+            match &tmd.tree.nodes[expr.idx()].kind {
+                NodeKind::Expr { value } => GNode { m: tmpl, n: *value },
+                _ => return None,
+            }
+        };
+        let f = self.infer(name_node, &copy_context(Some(ctx)));
+        Some(f)
+    }
 }
