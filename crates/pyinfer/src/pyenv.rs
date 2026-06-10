@@ -17,6 +17,10 @@ pub struct PyEnv {
     pub ext_suffixes: Vec<String>,
     /// os.path.__file__ (modutils.file_info_from_modpath special case)
     pub os_path_file: String,
+    /// frozen-module spec table (spec.py:169-192): full dotted name ->
+    /// loader_state.filename (None for sourceless e.g. _frozen_importlib).
+    /// Only names whose importlib.util.find_spec loader is FrozenImporter.
+    pub frozen_specs: std::collections::HashMap<String, Option<String>>,
 }
 
 fn python_exe() -> String {
@@ -41,13 +45,22 @@ fn python_exe() -> String {
 }
 
 const PROBE: &str = r#"
-import importlib.machinery, json, os, sys
+import importlib.machinery, importlib.util, json, os, sys, _imp
+frozen = {}
+for name in _imp._frozen_module_names():
+    try:
+        spec = importlib.util.find_spec(name)
+    except (ValueError, ImportError):
+        continue
+    if spec and spec.loader is importlib.machinery.FrozenImporter:
+        frozen[name] = getattr(spec.loader_state, "filename", None)
 print(json.dumps({
     "sys_path": sys.path,
     "builtin": list(sys.builtin_module_names),
     "stdlib": list(sys.stdlib_module_names),
     "ext_suffixes": importlib.machinery.EXTENSION_SUFFIXES,
     "os_path_file": os.path.__file__,
+    "frozen_specs": frozen,
 }))
 "#;
 
@@ -70,12 +83,21 @@ pub fn probe() -> PyEnv {
                     })
                     .unwrap_or_default()
             };
+            let frozen_specs = v["frozen_specs"]
+                .as_object()
+                .map(|o| {
+                    o.iter()
+                        .map(|(k, val)| (k.clone(), val.as_str().map(|s| s.to_string())))
+                        .collect()
+                })
+                .unwrap_or_default();
             PyEnv {
                 sys_path: arr("sys_path"),
                 builtin_module_names: arr("builtin"),
                 stdlib_module_names: arr("stdlib"),
                 ext_suffixes: arr("ext_suffixes"),
                 os_path_file: v["os_path_file"].as_str().unwrap_or("").to_string(),
+                frozen_specs,
             }
         }
         None => {
@@ -86,6 +108,7 @@ pub fn probe() -> PyEnv {
                 stdlib_module_names: Vec::new(),
                 ext_suffixes: vec![".so".into()],
                 os_path_file: String::new(),
+                frozen_specs: Default::default(),
             }
         }
     }

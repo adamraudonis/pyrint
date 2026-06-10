@@ -1054,6 +1054,7 @@ impl Engine {
     fn importlib_finder(
         &self,
         modname: &str,
+        processed: &[&str],
         submodule_path: Option<&[String]>,
     ) -> Option<Spec> {
         if submodule_path.is_none()
@@ -1112,10 +1113,31 @@ impl Engine {
                 });
             }
         }
-        // The PY_FROZEN branch (spec.py:169-192) requires a live
-        // interpreter; in the pinned venv every frozen stdlib module has
-        // sources on sys.path and `os.path` is special-cased upstream in
-        // file_info_from_modpath, so this is intentionally not ported.
+        // PY_FROZEN branch (spec.py:169-192): runs only after the
+        // search-path scan failed, gated on stdlib membership. The live
+        // `importlib.util.find_spec` results were captured at probe time
+        // into env.frozen_specs (FrozenImporter-loaded names only):
+        // _frozen_importlib -> location None (manager builds an EMPTY
+        // stub module — importlib/__init__.py `import _frozen_importlib
+        // as _bootstrap`), _frozen_importlib_external -> _bootstrap_external.py.
+        let in_stdlib = |n: &str| self.env.stdlib_module_names.iter().any(|m| m == n);
+        if (processed.is_empty() && in_stdlib(modname))
+            || (!processed.is_empty() && in_stdlib(processed[0]))
+        {
+            let full = processed
+                .iter()
+                .copied()
+                .chain(std::iter::once(modname))
+                .collect::<Vec<_>>()
+                .join(".");
+            if let Some(filename) = self.env.frozen_specs.get(&full) {
+                return Some(Spec {
+                    type_: SpecType::PyFrozen,
+                    location: filename.clone(),
+                    submodule_search_locations: None,
+                });
+            }
+        }
         None
     }
 
@@ -1154,7 +1176,7 @@ impl Engine {
             let modname = modpath.remove(0);
             let submodule_path = search_paths.clone();
             let spec = self
-                .importlib_finder(modname, submodule_path.as_deref())
+                .importlib_finder(modname, &processed, submodule_path.as_deref())
                 .or_else(|| self.pathspec_finder(modname, submodule_path.as_deref()));
             let mut spec = match spec {
                 Some(s) => s,

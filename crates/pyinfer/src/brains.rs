@@ -1593,6 +1593,24 @@ impl Engine {
         if pos.len() != 2 {
             return None;
         }
+        // ARG PULL ORDER differs per tip: infer_issubclass pulls the OBJ
+        // first (brain_builtin_inference.py:751-757 — a non-ClassDef obj
+        // raises UseInferenceDefault BEFORE the 2nd arg is ever inferred);
+        // infer_isinstance builds the class container first (:783-787).
+        let issubclass_obj: Option<GNode> = if name == "issubclass" {
+            let obj = match &pos[0] {
+                NV::N(g) => self.first_value(*g, ctx).ok().flatten()?,
+                NV::V(v) => v.clone(),
+            };
+            match obj {
+                Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => {
+                    Some(g)
+                }
+                _ => return None,
+            }
+        } else {
+            None
+        };
         // _class_or_tuple_to_container (brain_builtin_inference.py): a
         // SINGLE pull of the second arg; Tuple literal -> single pull per
         // element; any InferenceError -> UseInferenceDefault
@@ -1648,17 +1666,9 @@ impl Engine {
                 _ => return None,
             }
         } else {
-            // infer_issubclass: `next(obj_node.infer(context=context))` —
-            // a SINGLE abandoned pull under the tip's own context
-            // (brain_builtin_inference.py:755); no cache write, no bump.
-            let obj = match &pos[0] {
-                NV::N(g) => self.first_value(*g, ctx).ok().flatten()?,
-                NV::V(v) => v.clone(),
-            };
-            match obj {
-                Value::Node(g) if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) => g,
-                _ => return None,
-            }
+            // infer_issubclass: obj was already pulled (and ClassDef-
+            // checked) BEFORE the class container above.
+            issubclass_obj?
         };
         for klass in &classes {
             // class_seq sanitisation (helpers.object_isinstance): any

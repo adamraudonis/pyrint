@@ -2522,7 +2522,12 @@ impl Engine {
                 Some(m) => m,
                 None => Value::Node(self.builtins().type_),
             },
-            "__subclasses__" | "mro" | "__call__" | "__new__" | "__init__" => Value::Uninferable,
+            // ClassModel.attr___call__ (objectmodel.py:707-710): calling a
+            // class A() returns an instance of A — feeds the igetattr
+            // descriptor check (getattr('__get__') metaclass walk burns
+            // shared-counter bumps before the InferenceError)
+            "__call__" => self.instantiate_class(cls),
+            "__subclasses__" | "mro" | "__new__" | "__init__" => Value::Uninferable,
             "__dict__" => Value::SynthDict {
                 items: Rc::new(Vec::new()),
             },
