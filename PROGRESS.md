@@ -410,6 +410,66 @@ pylint behavior — bugs are replicated.
      callcontext). (2) pylfunc leftovers unchanged (17 lines, see phase
      4). (3) six.with_metaclass call-result synthesis still unwired.
      (4) recursion guard still 350.
+   - **phase 7 (diff-reduction round 6, N=1000)**: 8.2k -> 2.07k diff
+     lines (first N=1000 round; the harness now prebuilds the full corpus
+     and restricts dumping via PRYLINT_DUMP_ONLY). LANDED (all
+     probe-verified in harness/infertests/, now 54 probes):
+     (a) **inference-tip cache semantics**: astroid's _inference_tip_cached
+     keys (func, node, context) — non-empty contexts RE-RUN tip internals
+     (typing typevar/subscript template branches rebuilt per run, template
+     class inferred via a live-ctx NodeNG hop); ClassDef.getitem's
+     __class_getitem__ fallback getattr runs with NO context
+     (scoped_nodes.py:2561); brain_pathlib tip = fresh-ctx single pull;
+     getattr tip = next(igetattr) SINGLE pull (chain abandoned).
+     (b) **fresh-ctx ports**: excepthandler unpack_infer(self.type) with NO
+     context + exact double-pull port; _slice_value single pull under the
+     LIVE ctx; namedtuple synthetic base = real template Name node (two
+     infer hops like _extract_single_node("tuple")).
+     (c) **dataclass field default_factory** rebuilt as a REAL
+     parse("<factory>()") template build — the transform scan applies the
+     builtin Call tip and WIPES the global inference cache MID-DUMP exactly
+     like astroid (brain_dataclasses.py:430).
+     (d) **enum transform exactness**: member fake classes built with
+     apply_transforms=False and REPARENTED into the real module
+     (`fake.parent = target.parent`; new cross-module `reparents` table in
+     treeutil::parent); member locals hold Instance PROXIES (bare yield —
+     no NodeNG machinery; proxy_placeholders set).
+     (e) **copy-tip path poisoning** (THE pandas fix, -3k lines):
+     _infer_copy_method infers the receiver under the LIVE context with
+     all(...) short-circuit — the abandoned pull poisons the caller's path
+     so the default Attribute._infer re-pull of the same Name is
+     path-blocked -> the call site yields U (sort_values cap clusters).
+     (f) **brain_attrs attr_attributes_transform** ported (airflow task-sdk
+     -770 lines): __attrs_attrs__ + per-target Unknown placeholders REPLACE
+     locals/instance_attrs; ClassVar skip via is_class_var.
+     (g) **Compare literal folding completed**: in/not-in are COMPARE_OPS
+     (str substring + container membership), _to_literal covers literal
+     containers, mixed-type ==/!= folds to False/True.
+     (h) PropertyModel attr_setter/deleter/getter = fresh synthetic empty
+     FunctionDef parented to the property; Lambda.type "method" rule +
+     UnboundMethod-on-Lambda call result = body.infer; implicit class
+     locals (__module__/__qualname__/__annotations__) resolve in Name
+     LOOKUP (not just getattr); AssignAttr._infer delegates AugAssign
+     parents + AssignAttr.infer_lhs is path_wrapped (self.x += 1 lhs
+     recursion blocks -> U); NV::V(Value::Node) routes through the full
+     NodeNG.infer hop; subscript getitem results that astroid builds as
+     FRESH nodes (Const/container getitem) bump on drain.
+     N=1000 differing files/lines: django 27/166, pylfunc 12/20, pandas
+     196/1547, salt 35/163, airflow 26/94, sentry 14/44, core 16/36.
+     REMAINING (by volume): (1) pandas deep-chain cap-boundary drift
+     (~1.4k lines: frame.py/_validate_dtype/pandas_dtype chains burn +3-17
+     vs GT before the 100-cap — divergence localized to a registry.find/
+     construct_from_string path picking different arg names ('val' vs
+     'dtype'); use the /tmp prefix-counted-dump workflow from this round:
+     PRYLINT_DUMP_ONLY=<prefix list> + PRYLINT_DUMP_COUNTS=1 vs
+     dump_infer_count.py, then trace_gt_ni2.py/trace_gt_hit.py (in /tmp,
+     copy into harness/ if needed) event-stream diffs); (2) brain_ssl
+     counted probe ±1 (EnumType.__new__ metaclass-lookup pull-count;
+     single probe line); (3) pylfunc NOTREE x3 (tree-fidelity owns) +
+     os.environ GT-env noise; (4) GT wipe-frequency parity: astroid wipes
+     the global cache during mid-dump template builds more often than we
+     do (e.g. Name cast ##3 vs ##0 in frame.py) — audit which template
+     builds apply tip transforms.
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the
