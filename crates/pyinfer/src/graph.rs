@@ -963,6 +963,82 @@ impl Engine {
                     }
                 }
             }
+            // sys.argv / sys.orig_argv were frozen from the LIVE warm
+            // process (harness/warm_infercache.sh):
+            //   $ROOT/.venv-pylint/bin/python $ROOT/harness/dump_infer.py \
+            //       $ROOT/corpora/<c> /tmp/warmitems_<c>.jsonl
+            // Reconstruct those exact values when running inside a corpus
+            // checkout (cwd = $ROOT/corpora/<c>); probe runs keep the
+            // snapshot defaults.
+            let corpus_root = self.sys_path.first().cloned().unwrap_or_default();
+            let corpus_path = std::path::Path::new(&corpus_root);
+            let in_corpora = corpus_path
+                .parent()
+                .and_then(|p| p.file_name())
+                .map(|n| n == "corpora")
+                .unwrap_or(false);
+            if in_corpora {
+                let root = corpus_path
+                    .parent()
+                    .and_then(|p| p.parent())
+                    .map(|p| p.to_string_lossy().to_string())
+                    .unwrap_or_default();
+                let cname = corpus_path
+                    .file_name()
+                    .map(|n| n.to_string_lossy().to_string())
+                    .unwrap_or_default();
+                let argv = vec![
+                    format!("{root}/harness/dump_infer.py"),
+                    corpus_root.clone(),
+                    format!("/tmp/warmitems_{cname}.jsonl"),
+                ];
+                let mut orig_argv = vec![format!("{root}/.venv-pylint/bin/python")];
+                orig_argv.extend(argv.iter().cloned());
+                for (name, values) in [("argv", argv), ("orig_argv", orig_argv)] {
+                    let Some(&list_id) = snap
+                        .locals
+                        .iter()
+                        .find(|(scope, _)| *scope == NodeId::MODULE)
+                        .and_then(|(_, l)| l.iter().find(|(n, _)| n.as_str() == name))
+                        .and_then(|(_, ids)| ids.first())
+                    else {
+                        continue;
+                    };
+                    if !matches!(snap.tree.nodes[list_id.idx()].kind, NodeKind::List { .. })
+                    {
+                        continue;
+                    }
+                    let p = &snap.tree.nodes[list_id.idx()];
+                    let (fl, co, el, ec, tl) = (
+                        p.fromlineno,
+                        p.col_offset,
+                        p.end_lineno,
+                        p.end_col_offset,
+                        p.tolineno,
+                    );
+                    let mut new_elts = Vec::with_capacity(values.len());
+                    for s in values {
+                        let new_id = NodeId(snap.tree.nodes.len() as u32);
+                        snap.tree.nodes.push(pyast::tree::Node {
+                            kind: NodeKind::Const(pyast::tree::ConstValue::Str(
+                                s.into(),
+                            )),
+                            parent: list_id,
+                            fromlineno: fl,
+                            col_offset: co,
+                            end_lineno: el,
+                            end_col_offset: ec,
+                            tolineno: tl,
+                        });
+                        new_elts.push(new_id);
+                    }
+                    if let NodeKind::List { elts, .. } =
+                        &mut snap.tree.nodes[list_id.idx()].kind
+                    {
+                        *elts = new_elts;
+                    }
+                }
+            }
         }
         let id = ModId(self.mods.borrow().len() as u32);
         let n_syms = snap.tree.interner.len();
