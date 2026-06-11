@@ -588,6 +588,7 @@ impl Engine {
                         if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))) =>
                     {
                         assigned.push(NV::V(Value::ExcInst {
+                            id: crate::value::fresh_inst_id(),
                             cls: g,
                             exceptions: None,
                         }));
@@ -613,6 +614,7 @@ impl Engine {
                     })
                     .collect();
                 return Ok(vec![NV::V(Value::ExcInst {
+                    id: crate::value::fresh_inst_id(),
                     cls: *cls,
                     exceptions: Some(Rc::new(vec![Value::SynthSeq {
                         kind: SeqKind::List,

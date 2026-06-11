@@ -67,8 +67,11 @@ pub enum Value {
     /// bases.Instance of a ClassDef
     Inst { cls: GNode, id: InstId },
     /// objects.ExceptionInstance (instance_attrs live in Engine.exc_iattrs
-    /// keyed by an id when needed; the common case carries none)
-    ExcInst { cls: GNode, exceptions: Option<Rc<Vec<Value>>> },
+    /// keyed by an id when needed; the common case carries none).
+    /// `id` is python OBJECT IDENTITY like Inst: astroid materializes a
+    /// fresh ExceptionInstance per inference, so cache boundnode keys
+    /// never merge distinct receivers (cache replays clone the SAME id).
+    ExcInst { cls: GNode, id: InstId, exceptions: Option<Rc<Vec<Value>>> },
     BoundMethod { func: GNode, bound: Rc<Value> },
     UnboundMethod { func: GNode },
     /// bases.Generator/AsyncGenerator. `call_ctx` is the context captured
@@ -127,7 +130,7 @@ pub enum ValueKey {
     Uninferable,
     Node(GNode),
     Inst(GNode, InstId),
-    ExcInst(GNode),
+    ExcInst(GNode, InstId),
     BoundMethod(GNode, Box<ValueKey>),
     UnboundMethod(GNode),
     /// generator objects compare by identity in python: key includes the
@@ -148,7 +151,7 @@ pub fn value_key(v: &Value) -> ValueKey {
         Value::Uninferable => ValueKey::Uninferable,
         Value::Node(g) => ValueKey::Node(*g),
         Value::Inst { cls, id } => ValueKey::Inst(*cls, *id),
-        Value::ExcInst { cls, .. } => ValueKey::ExcInst(*cls),
+        Value::ExcInst { cls, id, .. } => ValueKey::ExcInst(*cls, *id),
         Value::BoundMethod { func, bound } => {
             ValueKey::BoundMethod(*func, Box::new(value_key(bound)))
         }

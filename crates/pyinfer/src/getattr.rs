@@ -2096,6 +2096,7 @@ impl Engine {
             });
             if is_exc {
                 return Value::ExcInst {
+                    id: crate::value::fresh_inst_id(),
                     cls,
                     exceptions: None,
                 };

@@ -336,7 +336,12 @@ impl Engine {
             // abandoned at that yield — in astroid the NodeNG.infer
             // wrapper is then dropped while suspended, so its tail cache
             // write never runs. Consumer abandonment wins over Done.
-            End::Done if consumer_stopped => End::Stopped,
+            End::Done if consumer_stopped => {
+                if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                    eprintln!("NOCACHE-CONSUMERSTOP");
+                }
+                End::Stopped
+            }
             End::Done => {
                 trace_write(results.len());
                 // pin pointer-keyed boundnodes (astroid's cache key tuple
