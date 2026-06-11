@@ -2195,7 +2195,7 @@ dict
     /// elements (`arg.elts`) of a container-ish value for the transform.
     /// DictKeys/Values/Items proxy a synthesized List whose elts are the
     /// dict's key/value nodes (objectmodel.py:856-890).
-    fn cont_elts(&self, v: &Value) -> Vec<NV> {
+    pub(crate) fn cont_elts(&self, v: &Value) -> Vec<NV> {
         match v {
             Value::SynthSeq { elems, .. } | Value::FrozenSet { elems } => {
                 elems.iter().cloned().map(NV::V).collect()

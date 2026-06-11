@@ -2737,6 +2737,31 @@ impl Engine {
                 {
                     return Value::Uninferable; // raise InferenceError
                 }
+                Value::DictKeys(_) | Value::DictValues(_) | Value::DictItems(_) => {
+                    // _object_type's Proxy branch (helpers.py:104-105):
+                    // DictKeys/Values/Items yield `inferred._proxied` — the
+                    // per-access synthesized List NODE of the dict's keys/
+                    // values/item-Tuples (objectmodel.py:856-890), NOT a
+                    // class. So type({}.keys()) infers to an empty list:
+                    // _collections_abc.dict_keys & co resolve to list
+                    // instances (drives E1126 on dict_keys[...] subscripts
+                    // in typeshed stubs).
+                    let elems: Vec<Value> = self
+                        .cont_elts(v)
+                        .into_iter()
+                        .map(|nv| match nv {
+                            NV::N(g) => Value::Node(g),
+                            NV::V(val) => val,
+                        })
+                        .collect();
+                    last = Some(Value::SynthSeq {
+                        kind: SeqKind::List,
+                        elems: Rc::new(elems),
+                    });
+                    // each proxied List is a distinct freshly-built node
+                    fresh += 1;
+                    Entry::Fresh(fresh)
+                }
                 _ => match self.object_type(v, ctx) {
                     Some(t) => {
                         let is_fresh = {

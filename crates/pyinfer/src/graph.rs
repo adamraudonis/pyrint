@@ -714,13 +714,198 @@ impl Engine {
                 tolineno: 0,
             });
         }
+        // UnionType is NOT bare: raw_building.py:673-694 runs
+        // builder.object_build(_UnionTypeType, types.UnionType), populating
+        // the proxied class with the live interpreter's member set (the
+        // class itself stays OUT of builtins.locals). Member presence is
+        // pylint-visible: types.UnionType.__getitem__ exists on 3.12 →
+        // supports_getitem(UnionType instance) is True (no E1136 on
+        // subscripted PEP 604 union aliases, e.g. typeshed copyreg.pyi).
+        // Mirrored from the pinned 3.12.12 venv astroid in insertion order
+        // (__class__ → the real raw-built `type` is wired engine-side
+        // below, since tree.locals can't reference another module).
+        let union_cls = NodeId(4);
+        let mut union_locals: indexmap::IndexMap<pyast::tree::Sym, Vec<NodeId>> =
+            indexmap::IndexMap::new();
+        {
+            let mut push = |nodes: &mut Vec<Node>, kind: NodeKind, parent: NodeId| -> NodeId {
+                let id = NodeId(nodes.len() as u32);
+                nodes.push(Node {
+                    kind,
+                    parent,
+                    fromlineno: 0,
+                    col_offset: 0,
+                    end_lineno: 0,
+                    end_col_offset: -1,
+                    tolineno: 0,
+                });
+                id
+            };
+            // class doc_node (types.UnionType.__doc__)
+            let doc = push(
+                &mut nodes,
+                NodeKind::Const(pyast::tree::ConstValue::Str(
+                    "Represent a PEP 604 union type\n\nE.g. for int | str".into(),
+                )),
+                union_cls,
+            );
+            if let NodeKind::ClassDef(cd) = &mut nodes[union_cls.idx()].kind {
+                cd.doc_node = Some(doc);
+            }
+            let mut add_const = |nodes: &mut Vec<Node>,
+                                 interner: &mut pyast::tree::Interner,
+                                 locals: &mut indexmap::IndexMap<pyast::tree::Sym, Vec<NodeId>>,
+                                 name: &str,
+                                 val: &str| {
+                let id = push(
+                    nodes,
+                    NodeKind::Const(pyast::tree::ConstValue::Str(val.into())),
+                    union_cls,
+                );
+                locals.insert(interner.intern(name), vec![id]);
+            };
+            add_const(&mut nodes, &mut interner, &mut union_locals, "__module__", "builtins");
+            add_const(
+                &mut nodes,
+                &mut interner,
+                &mut union_locals,
+                "__qualname__",
+                "builtins.UnionType",
+            );
+            let ann = push(&mut nodes, NodeKind::Unknown, union_cls);
+            union_locals.insert(interner.intern("__annotations__"), vec![ann]);
+            // raw-built data descriptors -> empty ClassDefs named after the
+            // member (__class__ handled engine-side)
+            let mut add_dd = |nodes: &mut Vec<Node>,
+                              interner: &mut pyast::tree::Interner,
+                              locals: &mut indexmap::IndexMap<pyast::tree::Sym, Vec<NodeId>>,
+                              name: &str| {
+                let sym = interner.intern(name);
+                let id = push(
+                    nodes,
+                    NodeKind::ClassDef(Box::new(pyast::tree::ClassData {
+                        name: sym,
+                        decorators: None,
+                        bases: Vec::new(),
+                        keywords: Vec::new(),
+                        metaclass: None,
+                        type_params: Vec::new(),
+                        body: Vec::new(),
+                        doc_node: None,
+                    })),
+                    union_cls,
+                );
+                locals.insert(sym, vec![id]);
+            };
+            let mut add_meth = |nodes: &mut Vec<Node>,
+                                interner: &mut pyast::tree::Interner,
+                                locals: &mut indexmap::IndexMap<pyast::tree::Sym, Vec<NodeId>>,
+                                name: &str| {
+                let sym = interner.intern(name);
+                let args = push(
+                    nodes,
+                    NodeKind::Arguments(Box::new(pyast::tree::ArgumentsData {
+                        posonlyargs: Vec::new(),
+                        args: Vec::new(),
+                        vararg: None,
+                        vararg_node: None,
+                        kwonlyargs: Vec::new(),
+                        kwarg: None,
+                        kwarg_node: None,
+                        defaults: Vec::new(),
+                        kw_defaults: Vec::new(),
+                        annotations: Vec::new(),
+                        posonlyargs_annotations: Vec::new(),
+                        kwonlyargs_annotations: Vec::new(),
+                        varargannotation: None,
+                        kwargannotation: None,
+                        tc_last_posonly: false,
+                        tc_last_arg: false,
+                        tc_last_kwonly: false,
+                    })),
+                    union_cls, // re-parented to the FunctionDef just below
+                );
+                let id = push(
+                    nodes,
+                    NodeKind::FunctionDef(Box::new(pyast::tree::FunctionData {
+                        name: sym,
+                        decorators: None,
+                        args,
+                        returns: None,
+                        type_params: Vec::new(),
+                        body: Vec::new(),
+                        doc_node: None,
+                    })),
+                    union_cls,
+                );
+                nodes[args.idx()].parent = id;
+                locals.insert(sym, vec![id]);
+            };
+            add_dd(&mut nodes, &mut interner, &mut union_locals, "__args__");
+            for m in [
+                "__delattr__", "__dir__", "__eq__", "__format__", "__ge__",
+                "__getattribute__", "__getitem__", "__getstate__", "__gt__",
+                "__hash__", "__init__",
+            ] {
+                add_meth(&mut nodes, &mut interner, &mut union_locals, m);
+            }
+            let isub = push(&mut nodes, NodeKind::EmptyNode, union_cls);
+            union_locals.insert(interner.intern("__init_subclass__"), vec![isub]);
+            for m in ["__le__", "__lt__", "__ne__", "__new__", "__or__"] {
+                add_meth(&mut nodes, &mut interner, &mut union_locals, m);
+            }
+            add_dd(&mut nodes, &mut interner, &mut union_locals, "__parameters__");
+            for m in [
+                "__reduce__", "__reduce_ex__", "__repr__", "__ror__",
+                "__setattr__", "__sizeof__", "__str__", "__subclasshook__",
+            ] {
+                add_meth(&mut nodes, &mut interner, &mut union_locals, m);
+            }
+        }
+        let mut tree_locals: FxHashMap<NodeId, indexmap::IndexMap<pyast::tree::Sym, Vec<NodeId>>> =
+            FxHashMap::default();
+        tree_locals.insert(union_cls, union_locals);
         let tree = Tree {
             nodes,
             interner,
-            locals: FxHashMap::default(),
+            locals: tree_locals,
             positions: FxHashMap::default(),
         };
-        self.register_module("builtins".to_string(), "<synthetic>".to_string(), tree, false, false)
+        let mid = self.register_module(
+            "builtins".to_string(),
+            "<synthetic>".to_string(),
+            tree,
+            false,
+            false,
+        );
+        // __class__ -> the REAL raw-built `type` class from the builtins
+        // snapshot (raw building attaches the live class object). Appended
+        // after registration because tree.locals NodeIds are module-local.
+        {
+            let bid = self
+                .astroid_cache
+                .borrow()
+                .get("builtins")
+                .copied()
+                .expect("builtins loaded before synth module");
+            let type_g = {
+                let bm = self.md(bid);
+                let sym = self.sym("type");
+                let locs = bm.locals.borrow();
+                locs.get(&NodeId::MODULE)
+                    .and_then(|l| l.get(&sym))
+                    .and_then(|v| v.first().copied())
+            };
+            if let Some(type_g) = type_g {
+                let md = self.md(mid);
+                let cls_sym = self.sym("__class__");
+                let mut locs = md.locals.borrow_mut();
+                if let Some(map) = locs.get_mut(&union_cls) {
+                    map.insert(cls_sym, vec![type_g]);
+                }
+            }
+        }
+        mid
     }
 
     // ---------- module registration ----------
