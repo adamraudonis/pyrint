@@ -1431,7 +1431,15 @@ pylint behavior — bugs are replicated.
    - GATES: check_treedump django 400 == 0; check_inferdump django 200
      == 0; check_shell PASS x7 (full owned list + --strict-exit); 151
      infertests PASS. core 33.6s (was ~23s; checker burn — budget 135s).
-7. Remaining: perf polish if needed (suite ≈ 104s, well under the ~250s
+7. **FULL BYTE PARITY RE-VERIFIED (2026-06-11, clean rebuild)**: all 7
+   corpora `cmp` byte-identical on .out AND equal .exit (pylfunc 524/14,
+   django 898/2, pandas 616/2, salt 8690/2, airflow 667/2, sentry 515/2,
+   core 82243/2). All gates green in the same pass: check_treedump django
+   400 == 0, check_inferdump django 200 == 0 (108076 inference lines),
+   check_shell PASS x7 (full owned list + --strict-exit), 151 infertests
+   PASS. Suite timing ours 103.4s vs pylint 2522s (~24x; slowest single
+   corpus core 33.6s vs 1357s).
+8. Remaining: perf polish if needed (suite ≈ 104s, well under the ~250s
    10x bar), and watching the stderr resurrection warnings on new
    codebases for messages worth porting next.
 
