@@ -270,6 +270,12 @@ pub struct Engine {
     /// Subscript nodes whose brain_pathlib parents-predicate matched at
     /// transform time (predicates run inference; tips are FIXED then)
     pub pathlib_subscripts: RefCell<FxHashSet<GNode>>,
+    /// Call nodes whose _is_str_format_call predicate matched at transform
+    /// time (brain_builtin_inference.py:1090-1101): the predicate's
+    /// safe_infer(node.func.expr) runs ONCE during the module's transform
+    /// scan — tip applicability is FIXED then; infer-time re-evaluation
+    /// would re-pull the expr under live state (airflowctl comprehension).
+    pub str_format_calls: RefCell<FxHashSet<GNode>>,
     /// dataclass attribute Unknown placeholders -> their AnnAssign stmt
     /// (brain_dataclasses.dataclass_transform rhs_node, parent=assign)
     pub dataclass_attrs: RefCell<FxHashMap<GNode, GNode>>,
@@ -384,6 +390,7 @@ impl Engine {
             lru_cache_clear_fn: RefCell::new(None),
             hidden_classes: RefCell::new(FxHashSet::default()),
             pathlib_subscripts: RefCell::new(FxHashSet::default()),
+            str_format_calls: RefCell::new(FxHashSet::default()),
             dataclass_attrs: RefCell::new(FxHashMap::default()),
             dataclass_field_calls: RefCell::new(FxHashSet::default()),
             is_dataclass_flag: RefCell::new(FxHashSet::default()),

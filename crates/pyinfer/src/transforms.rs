@@ -592,6 +592,9 @@ impl Engine {
                     }
                 };
                 if is_const_str {
+                    // tip applicability is decided HERE (transform time);
+                    // infer-time tip_for consults the side table only
+                    self.str_format_calls.borrow_mut().insert(g);
                     self.wipe();
                 }
             }

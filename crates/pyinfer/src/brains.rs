@@ -650,18 +650,12 @@ impl Engine {
                     return Some(Tip::CopyMethod);
                 }
                 if attr == "format" {
-                    // _is_str_format_call
-                    let expr_g = GNode { m: node.m, n: *expr };
-                    let value_is_str = match &md.tree.nodes[expr.idx()].kind {
-                        NodeKind::Const(ConstValue::Str(_)) => true,
-                        NodeKind::Name { .. } => matches!(
-                            self.safe_infer(expr_g, &Ctx::new())
-                                .and_then(|v| self.value_const(&v)),
-                            Some(ConstValue::Str(_))
-                        ),
-                        _ => false,
-                    };
-                    if value_is_str {
+                    // _is_str_format_call ran at TRANSFORM-SCAN time (its
+                    // safe_infer side effect happened then); applicability
+                    // was recorded in str_format_calls — never re-evaluated
+                    // at infer time (astroid stores _explicit_inference on
+                    // the node during the scan).
+                    if self.str_format_calls.borrow().contains(&node) {
                         return Some(Tip::StrFormat);
                     }
                     return None;
