@@ -1860,6 +1860,12 @@ impl Engine {
             instance: Value,
             method_name: String,
             other: Value,
+            /// the op string handed to infer_binary_op: the AUG attempt
+            /// keeps the augmented form ("+=") — protocols.py _aug_op —
+            /// so tl_infer_binary_op's EXACT `operator == "+"` check fails
+            /// and the flow falls through to the plain __add__ attempt
+            /// (BIN_OP_IMPL has the "+=" keys for Consts only).
+            op: String,
         }
         // AugAssign ops arrive as "+="; the binary method table is keyed on
         // the base operator (astroid keeps separate AUGMENTED_OP_METHOD).
@@ -1877,6 +1883,7 @@ impl Engine {
                 instance: left.clone(),
                 method_name: aug_method,
                 other: right.clone(),
+                op: op.to_string(),
             });
         }
         if same_type {
@@ -1884,6 +1891,7 @@ impl Engine {
                 instance: left.clone(),
                 method_name: bin_method.to_string(),
                 other: right.clone(),
+                op: base_op.to_string(),
             });
         } else {
             let subtype = match (&left_type, &right_type) {
@@ -1900,6 +1908,7 @@ impl Engine {
                         instance: left.clone(),
                         method_name: bin_method.to_string(),
                         other: right.clone(),
+                        op: base_op.to_string(),
                     });
                 }
                 (_, Ok(true)) => {
@@ -1907,11 +1916,13 @@ impl Engine {
                         instance: right.clone(),
                         method_name: reflected.clone(),
                         other: left.clone(),
+                        op: base_op.to_string(),
                     });
                     methods.push(Try {
                         instance: left.clone(),
                         method_name: bin_method.to_string(),
                         other: right.clone(),
+                        op: base_op.to_string(),
                     });
                 }
                 (Err(ErrKind::Inference), _) | (_, Err(ErrKind::Inference))
@@ -1921,11 +1932,13 @@ impl Engine {
                         instance: left.clone(),
                         method_name: bin_method.to_string(),
                         other: right.clone(),
+                        op: base_op.to_string(),
                     });
                     methods.push(Try {
                         instance: right.clone(),
                         method_name: reflected.clone(),
                         other: left.clone(),
+                        op: base_op.to_string(),
                     });
                 }
                 (Err(ErrKind::AstroidType), _) | (_, Err(ErrKind::AstroidType)) => {
@@ -1937,11 +1950,13 @@ impl Engine {
                         instance: left.clone(),
                         method_name: bin_method.to_string(),
                         other: right.clone(),
+                        op: base_op.to_string(),
                     });
                     methods.push(Try {
                         instance: right.clone(),
                         method_name: reflected.clone(),
                         other: left.clone(),
+                        op: base_op.to_string(),
                     });
                 }
             }
@@ -1954,6 +1969,7 @@ impl Engine {
                     instance: Value::UnionType,
                     method_name: "__or_union__".to_string(),
                     other: right.clone(),
+                    op: base_op.to_string(),
                 });
             }
         }
@@ -1961,7 +1977,7 @@ impl Engine {
             if m.method_name == "__or_union__" {
                 return Ok(vec![Value::UnionType]);
             }
-            match self.invoke_binop_inference(&m.instance, base_op, &m.other, &m.method_name, ctx) {
+            match self.invoke_binop_inference(&m.instance, &m.op, &m.other, &m.method_name, ctx) {
                 Ok(results) => {
                     if results.iter().any(|r| r.is_uninferable()) {
                         return Ok(vec![Value::Uninferable]);
@@ -2144,7 +2160,10 @@ impl Engine {
         // Const
         if let Some(lc) = self.value_const(instance) {
             if let Some(rc) = self.value_const(other) {
-                return Ok(vec![const_binop_fold(&lc, op, &rc)]);
+                // BIN_OP_IMPL adds a "<op>=" alias for EVERY operator
+                // (protocols.py:138-140) — Const folds accept the aug form
+                let fold_op = op.strip_suffix('=').unwrap_or(op);
+                return Ok(vec![const_binop_fold(&lc, fold_op, &rc)]);
             }
             // str % nonconst handled earlier; other type -> NotImplemented
             if matches!(lc, ConstValue::Str(_)) && op == "%" {
