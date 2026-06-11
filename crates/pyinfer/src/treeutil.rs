@@ -425,7 +425,13 @@ impl Engine {
                 } else if matches!(k, NodeKind::Try(_)) {
                     let c2 = self.locate_child(node, previous2);
                     let c1 = self.locate_child(node, child1);
-                    if previous2 != child1 {
+                    // astroid locate_child returns the whole LIST for
+                    // sequence fields, so `c1node is not c2node`
+                    // (node_classes.py:156) is really a FIELD-identity
+                    // check on Try (all four fields are lists): two
+                    // different ExceptHandlers share the `handlers` list
+                    // and take the elif (node_classes.py:181-182).
+                    if c1 != c2 {
                         // exceptions=None: ExceptHandler.catch(None) is True
                         let first_in_body_caught = c2 == Some("handlers") && c1 == Some("body");
                         let second_in_body_caught = c2 == Some("body") && c1 == Some("handlers");

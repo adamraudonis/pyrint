@@ -666,52 +666,8 @@ impl Engine {
             }
         }
         // brain_statistics quantiles
-        {
-            let stat_match = match (&func_name, &func_attr) {
-                (_, Some((expr, attr)))
-                    if attr == "quantiles"
-                        && self.name_of(*expr).as_deref() == Some("statistics") =>
-                {
-                    true
-                }
-                (Some(n), _) if n == "quantiles" => {
-                    // from statistics import quantiles in the frame body
-                    let frame = self.frame(g);
-                    let md = self.md(frame.m);
-                    let sym = self.sym("quantiles");
-                    let has_local = md
-                        .locals
-                        .borrow()
-                        .get(&frame.n)
-                        .map(|l| l.contains_key(&sym))
-                        .unwrap_or(false);
-                    has_local && {
-                        let body: Vec<NodeId> = match &md.tree.nodes[frame.n.idx()].kind {
-                            NodeKind::Module(d) => d.body.clone(),
-                            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
-                                d.body.clone()
-                            }
-                            NodeKind::ClassDef(d) => d.body.clone(),
-                            _ => Vec::new(),
-                        };
-                        body.iter().any(|&b| {
-                            match &md.tree.nodes[b.idx()].kind {
-                                NodeKind::ImportFrom { modname, names, .. } => {
-                                    md.tree.s(*modname) == "statistics"
-                                        && names
-                                            .iter()
-                                            .any(|(n, _)| md.tree.s(*n) == "quantiles")
-                                }
-                                _ => false,
-                            }
-                        })
-                    }
-                }
-                _ => false,
-            };
-            if stat_match {
-                self.wipe();
-            }
+        if self.looks_like_statistics_quantiles(g) {
+            self.wipe();
         }
         // brain_typing tips
         if let Some(s) = &simple {
@@ -739,6 +695,52 @@ impl Engine {
             {
                 self.wipe();
             }
+        }
+    }
+
+    /// brain_statistics._looks_like_statistics_quantiles (purely syntactic
+    /// except the frame-locals/body ImportFrom check for the bare-Name form)
+    pub(crate) fn looks_like_statistics_quantiles(&self, g: GNode) -> bool {
+        let Some(func) = self.call_func(g) else {
+            return false;
+        };
+        let md = self.md(g.m);
+        match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::Attribute { expr, attrname, .. } => {
+                md.tree.s(*attrname) == "quantiles"
+                    && matches!(&md.tree.nodes[expr.idx()].kind,
+                        NodeKind::Name { name } if md.tree.s(*name) == "statistics")
+            }
+            NodeKind::Name { name } if md.tree.s(*name) == "quantiles" => {
+                // from statistics import quantiles in the frame body
+                let frame = self.frame(g);
+                let fmd = self.md(frame.m);
+                let sym = self.sym("quantiles");
+                let has_local = fmd
+                    .locals
+                    .borrow()
+                    .get(&frame.n)
+                    .map(|l| l.contains_key(&sym))
+                    .unwrap_or(false);
+                has_local && {
+                    let body: Vec<NodeId> = match &fmd.tree.nodes[frame.n.idx()].kind {
+                        NodeKind::Module(d) => d.body.clone(),
+                        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                            d.body.clone()
+                        }
+                        NodeKind::ClassDef(d) => d.body.clone(),
+                        _ => Vec::new(),
+                    };
+                    body.iter().any(|&b| match &fmd.tree.nodes[b.idx()].kind {
+                        NodeKind::ImportFrom { modname, names, .. } => {
+                            fmd.tree.s(*modname) == "statistics"
+                                && names.iter().any(|(n, _)| fmd.tree.s(*n) == "quantiles")
+                        }
+                        _ => false,
+                    })
+                }
+            }
+            _ => false,
         }
     }
 

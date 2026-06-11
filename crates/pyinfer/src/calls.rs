@@ -1388,9 +1388,17 @@ impl Engine {
                         && self.class_type(c) == "metaclass"
                 })
                 .unwrap_or(false);
+            // protocols.py:375-376: `if context.boundnode and
+            // isinstance(context.boundnode, bases.Instance): cls =
+            // context.boundnode._proxied` — the AMBIENT boundnode hijacks
+            // `self` even when totally unrelated: a `%`-fold's str.__mod__
+            // dunder context (boundnode = the Const format string!) makes
+            // `self.__class__` infer to builtins.str inside the method
+            // (django Q.deconstruct 'builtins.str' cluster). Const /
+            // container NODES are bases.Instance subclasses too.
             if let Some(bn) = ctx.boundnode.borrow().as_ref() {
-                if let Value::Inst { cls, .. } | Value::ExcInst { cls, .. } = bn {
-                    cls_value = Some(Value::Node(*cls));
+                if let Some(cls) = self.instance_unproxy(bn) {
+                    cls_value = Some(Value::Node(cls));
                 }
             }
             if is_metaclass || functype == FType::ClassMethod {

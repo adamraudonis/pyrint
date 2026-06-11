@@ -2234,7 +2234,14 @@ impl Engine {
             | Value::Property { .. }
             | Value::Partial { .. }
             | Value::Super { .. } => Some(true),
-            Value::DictItems(_) | Value::DictKeys(_) | Value::DictValues(_) => None,
+            // dict-view proxies delegate bool_value to the objectmodel's
+            // synthesized List (Proxy.__getattr__ -> List.bool_value =
+            // bool(self.elts)): an items() view of an empty dict literal is
+            // FALSY (BooleanConstraint rejects it — core triggers/event.py
+            // event_data_items)
+            Value::DictItems(dr) | Value::DictKeys(dr) | Value::DictValues(dr) => {
+                Some(!self.dictref_pairs(dr).is_empty())
+            }
             Value::Inst { .. } | Value::ExcInst { .. } => self.instance_bool_value(v, ctx),
             Value::Node(g) => {
                 let md = self.md(g.m);

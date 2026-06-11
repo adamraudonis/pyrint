@@ -59,6 +59,8 @@ pub enum Tip {
     Pep695Generic,
     /// brain_typing infer_typing_cast (cast(typ, val) -> val)
     TypingCast,
+    /// brain_statistics infer_statistics_quantiles: yields Uninferable
+    StatisticsQuantiles,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -123,6 +125,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::ArgparseNamespace => (7, 25),
         Tip::Pep695Generic => (7, 24),
         Tip::TypingCast => (5, 4),
+        Tip::StatisticsQuantiles => (7, 23),
     }
 }
 
@@ -518,6 +521,11 @@ impl Engine {
         if self.dataclass_field_calls.borrow().contains(&node) {
             return Some(Tip::DataclassFieldCall);
         }
+        // brain_statistics (registered LAST among Call tips its predicate
+        // can co-match; the syntactic predicate is disjoint in practice)
+        if self.looks_like_statistics_quantiles(node) {
+            return Some(Tip::StatisticsQuantiles);
+        }
         match &md.tree.nodes[func.idx()].kind {
             NodeKind::Name { name } => {
                 let n = md.tree.s(*name);
@@ -737,6 +745,9 @@ impl Engine {
             Tip::ArgparseNamespace => self.tip_argparse_namespace(node, ctx),
             Tip::Pep695Generic => self.tip_pep695_generic(node),
             Tip::TypingCast => self.tip_typing_cast(node, ctx),
+            // brain_statistics.infer_statistics_quantiles: yields U
+            // unconditionally (brain_statistics.py:52-65)
+            Tip::StatisticsQuantiles => Some(Flow::one(Value::Uninferable)),
         }
     }
 
@@ -3018,6 +3029,14 @@ impl Engine {
                             ),
                             _ => None,
                         }
+                    }
+                    // `isinstance(container, nodes.BaseContainer)` is an
+                    // EXACT node-class check (brain_namedtuple_enum.py:635)
+                    // — dict-view proxies (DictKeys from `d.keys()`) are
+                    // NOT BaseContainer -> UseInferenceDefault (airflow
+                    // test_container_instances namedtuple-from-keys -> U)
+                    Value::DictItems(_) | Value::DictKeys(_) | Value::DictValues(_) => {
+                        None
                     }
                     _ => self.value_elts(&container),
                 }?;

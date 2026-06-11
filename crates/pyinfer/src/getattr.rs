@@ -1636,6 +1636,26 @@ impl Engine {
     fn function_model_attr(&self, func: GNode, name: &str) -> Option<Value> {
         let md = self.md(func.m);
         match name {
+            // ObjectModel attr___new__/attr___init__ (objectmodel.py:136-164):
+            // synthetic `def __init__(self,*a,**kw): return None` parented to
+            // builtins.object, bound to _get_bound_node(model) — for
+            // function/UM/BM models that resolves to the FUNCTION node
+            // (cls._dataclass.__init__ -> BM:builtins.object.__init__).
+            "__new__" => {
+                return self.obj_model_func_nodes().map(|(f, _)| Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(Value::Node(func)),
+                })
+            }
+            "__init__" => {
+                return self.obj_model_func_nodes().map(|(_, f)| Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(Value::Node(func)),
+                })
+            }
+            _ => {}
+        }
+        match name {
             "__name__" => self
                 .node_name(func)
                 .map(|n| Value::SynthConst(Rc::new(ConstValue::Str(n.into())))),
