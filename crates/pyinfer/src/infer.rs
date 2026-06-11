@@ -1119,12 +1119,35 @@ impl Engine {
                         }
                     }
                     Some(val @ Value::SynthDict { .. }) => {
-                        // an already-folded synthetic Dict: its items are
-                        // pre-inferred values (astroid's fresh Dict of
-                        // EvaluatedObject-like pairs)
+                        // an already-folded synthetic Dict (e.g. the fresh
+                        // Dict infer_argument builds for **kwargs): astroid
+                        // recurses _infer_map over it, SAFE-INFERRING every
+                        // key/value -- fresh Const keys and call-site value
+                        // nodes each get a real infer hop (+1 bump first
+                        // time; sentry build_expected_result counts)
                         match self.value_dict_items(&val) {
                             Some(pairs) => {
                                 for (ik, iv) in pairs {
+                                    let ik = match &ik {
+                                        Value::Node(g) => match self.safe_infer(*g, ctx) {
+                                            Some(v2) => v2,
+                                            None => return Err(ErrKind::Inference),
+                                        },
+                                        other => {
+                                            self.synth_value_pull(other, ctx);
+                                            other.clone()
+                                        }
+                                    };
+                                    let iv = match &iv {
+                                        Value::Node(g) => match self.safe_infer(*g, ctx) {
+                                            Some(v2) => v2,
+                                            None => return Err(ErrKind::Inference),
+                                        },
+                                        other => {
+                                            self.synth_value_pull(other, ctx);
+                                            other.clone()
+                                        }
+                                    };
                                     if ik.is_uninferable() || iv.is_uninferable() {
                                         return Err(ErrKind::Inference);
                                     }
