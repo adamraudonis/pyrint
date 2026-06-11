@@ -7,8 +7,8 @@ Asserts, against harness/results/<corpus>.iso.out:
  1. ZERO false positives (every line we emit, pylint emits).
  2. Our message lines form an ordered SUBSEQUENCE of pylint's (headers incl.),
     validating emission order without requiring all checkers.
- 3. For OWNED codes (prefix match), zero false negatives — except E0001
-    'Cannot import' lines (need module graph; explicitly deferred).
+ 3. For OWNED codes (prefix match), zero false negatives. (The old E0001
+    'Cannot import' exemption was removed once the imports checker landed.)
  4. Exit code self-consistency: equals bitmask of OUR displayed messages
     (F=1,E=2,W=4,R=8,C=16), or full equality if --strict-exit.
 Exit 0 = pass.
