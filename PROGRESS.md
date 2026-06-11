@@ -680,6 +680,61 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 14 (diff-reduction round 13, sample=ALL files)**: 298 -> 157
+     diff lines (round logs /tmp/inferdump_all_round{1,2,3}.log; round-3:
+     django 10/15, pylfunc 4/5, pandas 9/40, salt 6/14, airflow 8/22,
+     sentry 1/2, core 16/59). LANDED (probe-verified; harness/infertests
+     now 131 probes):
+     (a) **EvaluatedObject elements** (new Value variant): container tips
+     wrap mixed-branch elements (brain_builtin_inference.py:283-285);
+     infer hop yields the inner value, but NO getitem on the element —
+     loop-unpack `stmt.getitem` AttributeError -> continue
+     (protocols.py:268-276). Killed the 50-line salt service.py cluster.
+     unpack_infer recurses through them (except tuple(MAP.keys()) as e).
+     (b) **per-InstId proxy-class instance_attrs** (helpers.py:39-57
+     _build_proxy_class is FRESH per evaluation): delayed assattrs on
+     instances of function/module/method/builtin_function_or_method land in
+     proxy_iattrs[(cls, InstId)]; transform WIPEs + fresh re-derivation
+     decide later visibility exactly like astroid (probe pair:
+     module-level visible / function-level invisible). Killed salt
+     functools/test_path/lazy Dict:N, sentry importer, core frame.py.
+     (c) **sys.argv/orig_argv reconstruction**: the sys snapshot rebuilds
+     them at load to match warm_infercache.sh's dump_infer.py invocation
+     (django autoreload cluster).
+     (d) **UnboundMethodModel gating**: UM model = ObjectModel-based
+     (__class__/__func__/__self__/im_* only); everything else hops through
+     FunctionDef.igetattr/_infer_stmts (count parity as_view ##5).
+     BM.__func__ = `._proxied._proxied` -> AttributeError for BMs proxying
+     a FunctionDef directly (class-access classmethods -> ERR).
+     (e) **PropertyModel.attr_fset find_setter** evaluates `.name` on EVERY
+     class child -> AttributeError on nameless kinds (Assign/Attribute/
+     Keyword children; django ChoiceField.choices.fset -> ERR); synth
+     properties (parent SYNTHETIC_ROOT) have no children -> InferenceError.
+     (f) **Lambda has NO igetattr** (only getattr, scoped_nodes.py:1047-60):
+     Attribute on a Lambda owner -> AttributeError -> owner skipped.
+     (g) str.format folds {x!r}/{x!s}/{x!a} conversions; exact decimal
+     bigint add/sub past i128 ((2**128)-1); extender-template Lambda
+     renders root().name through reparents.
+     REMAINING (157 lines, by volume): (1) count/cache-dynamics clusters —
+     core sensor trio (31: GT third value Const:None after our cap-U),
+     pandas test_indexing (30: GT misses Inst:slice we produce — enum
+     count divergence family; standalone enum-call probe shows GT##108 vs
+     RS##112, first split inside metaclass-attr machinery; corpus-faithful
+     GT+RS traces captured in /tmp/gttrace_core_sensor2.err +
+     /tmp/rstrace_core_sensor.err and pandas equivalents — full-prebuild +
+     --only-prefix replay procedure VERIFIES against the cache byte-exact,
+     use it for future rounds), core device_condition (19), airflow
+     simple_auth_manager (5) + ibm/mq conftest ERR-vs-U (4 — our
+     module-instance attr stays visible where GT wiped), salt http.py (4),
+     misc singles (~15). (2) irreducible GT-environment noise (~21):
+     os.environ content/order (pylfunc 2, airflow 7), PYTHONHASHSEED
+     set-iteration order (salt test_man 4, deltaproxy RNG 2), live-process
+     sys.path_importer_cache growth (salt lazy.py 3), pylfunc NOTREE x3
+     (tree-fidelity owns). (3) TryStar `assigned.instance_attrs[...] = ...`
+     mutates the eg CLASS instance_attrs globally in astroid (core ring
+     coordinator List:1, 1 line) — needs class-level exceptions storage.
+     (4) two known count off-by-ones in the suite (typeddict_lru_strenum
+     ##111 vs ##110; standalone StrEnum(None) call ##108 vs ##112).
    - **phase 13 (diff-reduction round 12, sample=ALL files)**: 530 -> ~280
      diff lines (final numbers in the round log /tmp/measure_round6.log;
      round-5 checkpoint: pylfunc 5, django 30, pandas 42, salt 99, airflow
