@@ -680,6 +680,87 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 17 (diff-reduction round 16, sample=ALL files)**: 42 -> 26
+     diff lines; **CORE joins django/pandas/sentry at ZERO** (core 0/0,
+     django 0/0, pandas 0/0, sentry 0/0, airflow 3/8, salt 5/13, pylfunc
+     4/5; tree gate 0, shell gate PASS x7, 150 probes PASS). KEY WORKFLOW
+     UNLOCK: GT-side dump_infer.py with FULL corpus items +
+     --only=<target> reproduces the cached dump EXACTLY for most
+     remaining files (prebuild state is what matters, not earlier dumped
+     files) — single-target GT trace sessions became cheap (verified for
+     airflow secrets_masker/spark_sql/ctl + ALL core targets; salt http
+     is prefix-dependent BUT its 4 diff lines reproduce in only-mode
+     too). LANDED (probe-verified):
+     (a) **TryStar class-level exceptions** (protocols.py:553-556):
+     ExceptionInstance is a Proxy — `assigned.instance_attrs["exceptions"]
+     = [List.from_elements(...)]` writes through to the
+     builtins.ExceptionGroup ClassDef GLOBALLY (last except* site wins,
+     REPLACE); plain `except ExceptionGroup as eg` and direct
+     instantiations see the leaked List via instance_attr-before-model
+     order (bases.py:249). ONE synthetic redirect node per mutation
+     (re-reads replay its cache entry). Kills the old per-ExcInst
+     double-wrap (List:1 for every except* tuple). The throwaway
+     extract_node Name lookup burns a 128-LRU slot BEFORE the
+     handler-type unpack (lookup_burn_throwaway). core ring/coordinator.
+     (b) **synthetic stmt-infer hops apply the 100-cap truncation**
+     (node_ng.py:160-167): a cache-MISS hop over a synthetic value (model
+     Tuple of `.args` at ni>100) yields Uninferable INSTEAD of the value,
+     NO bump, caches [U] (synth_hop_trunc twin set; replays yield U;
+     proxies exempt; Property/Partial always-hop truncate too). The miss
+     let over-cap exception-model accesses yield REAL values where
+     astroid's U is path_wrapper-deduped away -> extra trailing values +
+     uncached abandoned producers flipping the NEXT dump node from
+     1-event replay to full re-infer (airflow secrets_masker -4).
+     (c) **tl-concat synthetic elements get the FULL elt.infer drain hop**
+     (_filter_uninferable_nodes, protocols.py:161-172): astroid's
+     accumulated aug-chain lists hold re-materialized REAL nodes (str()
+     folds are fresh Consts) — each `+=` step re-drains every element
+     under the SHARED ctx with the step's own CallContext key: re-miss +
+     BUMP per step per synthetic elt (synth_elt_full_drain; over-cap ->
+     U -> UNATTACHED_UNKNOWN elt; EvaluatedObject drains to its wrapped
+     value). airflow spark_sql -2.
+     (d) **Dict.getitem key-infer raises ABORT the scan**
+     (node_classes.py:2307 — `for inferredkey in key.infer(context)` has
+     NO try): a path-blocked/unresolvable key propagates InferenceError
+     out of Dict.getitem through Subscript._infer to _infer_stmts' yield
+     U. We kept scanning and solved subscripts astroid leaves U. core
+     test_history -3 AND config_validation -1.
+     (e) **_is_str_format_call applicability FIXED at transform-scan
+     time**: the predicate's safe_infer(node.func.expr) runs ONCE during
+     the module's scan (node._explicit_inference is attached THEN);
+     infer-time re-evaluation pulled the expr under live state.
+     str_format_calls side table (like pathlib_subscripts). airflow
+     ctl -1.
+     (f) **Super cache-boundnode OBJECT identity**: objects.Super has no
+     __eq__ — astroid keys the cache boundnode slot by id() and every
+     super() Call._infer builds a FRESH Super. Our structural
+     (mro_pointer, self_class) key false-HIT [U] entries across distinct
+     super() evaluations (iron_os 498:17 replayed line 465's truncation).
+     Identity = the per-construction mro_type Rc pointer (pinned).
+     core iron_os + hassio + shelly -3.
+     (g) **dataclass lambda default_factory re-parse + reparent-aware
+     annotation root** (brain_dataclasses.py:430-432, :614): the factory
+     re-parse `(lambda: ...)()` (Call.as_string precedence parens) gives
+     the synthetic Call a REAL infer hop + fresh template Lambda;
+     _infer_instance_from_annotation uses the REPARENT-AWARE root name
+     (extender-template defaultdict lives in a ''-named module -> the ''
+     branch wrongly yielded U). core esphome -1 -> core ZERO.
+     REMAINING (26 lines): (1) irreducible-by-construction (~19):
+     os.environ content/order (airflow conf 2/parser 3/setup_idea 3,
+     pylfunc unused_import 2), PYTHONHASHSEED (salt test_man 4),
+     random.sample RNG (salt deltaproxy 2), sys.path_importer_cache
+     growth (salt lazy 3), pylfunc NOTREE x3 (pyast/ruff rejects
+     `""\\<EOF>` CPython accepts — tree-fidelity owns). (2) salt
+     http.py 4 (reducible, needs its own session): `opts.get(key,
+     DEFAULT_MINION_OPTS[...])` — the `default` param's CallSite
+     safe_infer sees ambiguity/raise in GT (-> U) where we complete with
+     ONE value (Inst:ImmutableDict); the third-Subscript subtrees are
+     ENTRY-IDENTICAL on both sides (155 events) — the divergence is in
+     the value/ambiguity stream around Instance.getitem of the
+     freeze()-chain owners (ImmutableSet has no __getitem__: getitem
+     raise mid-stream should abort like (d) does for keys); traces in
+     /tmp/{gt,rs}_http_trace.err seg 800, reproduces with
+     PRYLINT_DUMP_ONLY/--only single-target runs.
    - **phase 16 (diff-reduction round 15, sample=ALL files)**: 64 -> 42
      diff lines; django 0/0, pandas 0/0, sentry 0/0 (first corpora at
      ZERO), pylfunc 4/5, salt 5/13, airflow 6/15, core 7/9 (tree gate 0,
