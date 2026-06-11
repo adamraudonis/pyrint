@@ -97,6 +97,10 @@ pub struct LintCaches {
     /// safe_infer(compare_constructors=True) keys (same python LRU, distinct
     /// key space via the flag tuple element)
     pub safe_infer_cc: RefCell<Lru<Option<Value>>>,
+    /// utils.is_overload_stub @lru_cache(1024) — pure, plain map
+    pub overload_stub: RefCell<FxHashMap<GNode, bool>>,
+    /// utils.class_is_abstract @lru_cache(1024)
+    pub class_abstract: RefCell<FxHashMap<GNode, bool>>,
     builtin_syms: RefCell<Option<Rc<FxHashSet<GSym>>>>,
     scope_attr_syms: RefCell<Option<Rc<FxHashSet<GSym>>>>,
 }
@@ -107,6 +111,8 @@ impl Default for LintCaches {
             infer_all: RefCell::new(Lru::new(512)),
             safe_infer: RefCell::new(Lru::new(1024)),
             safe_infer_cc: RefCell::new(Lru::new(1024)),
+            overload_stub: RefCell::new(FxHashMap::default()),
+            class_abstract: RefCell::new(FxHashMap::default()),
             builtin_syms: RefCell::new(None),
             scope_attr_syms: RefCell::new(None),
         }

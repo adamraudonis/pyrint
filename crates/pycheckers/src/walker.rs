@@ -16,7 +16,7 @@ use pyinfer::value::{GNode, ModId};
 use crate::ckutils as u;
 use crate::ckutils::LintCaches;
 use crate::imports::ImportsChecker;
-use crate::typecheck::TypeCk;
+use crate::typecheck::{IterCk, TypeCk};
 use crate::variables::VarsChecker;
 
 /// A message produced by a checker (text fully formatted; gating and
@@ -70,6 +70,7 @@ pub struct LintRun {
     pub imports: ImportsChecker,
     pub vars: VarsChecker,
     pub ty: TypeCk,
+    pub iter: IterCk,
     pub caches: LintCaches,
 }
 
@@ -79,6 +80,7 @@ impl Default for LintRun {
             imports: ImportsChecker,
             vars: VarsChecker::default(),
             ty: TypeCk::default(),
+            iter: IterCk,
             caches: LintCaches::default(),
         }
     }
@@ -103,6 +105,7 @@ impl LintRun {
             imp: &mut self.imports,
             vars: &mut self.vars,
             ty: &mut self.ty,
+            iter: &mut self.iter,
         };
         walker.walk(&mut cx, GNode { m: mid, n: NodeId::MODULE });
     }
@@ -112,6 +115,7 @@ struct Walker<'w> {
     imp: &'w mut ImportsChecker,
     vars: &'w mut VarsChecker,
     ty: &'w mut TypeCk,
+    iter: &'w mut IterCk,
 }
 
 impl Walker<'_> {
@@ -136,14 +140,19 @@ impl Walker<'_> {
             Tag::ClassDef => {
                 // BasicChecker/BasicErrorChecker/ClassChecker unwired;
                 // ImportsChecker.visit_functiondef no-op
-                // TypeChecker.visit_classdef (E1139) wired in phase B
+                self.ty.visit_classdef(cx, g);
                 self.vars.visit_classdef(cx, g);
             }
             Tag::FunctionDef => {
                 self.vars.visit_functiondef(cx, g);
             }
             Tag::Lambda => self.vars.visit_lambda(cx, g),
-            Tag::Comp => self.vars.visit_comprehension_scope(cx, g),
+            Tag::Comp => {
+                // IterableChecker.visit_{listcomp,dictcomp,setcomp,
+                // generatorexp} run BEFORE VariablesChecker
+                self.iter.visit_comp(cx, g);
+                self.vars.visit_comprehension_scope(cx, g);
+            }
             Tag::Name => self.vars.visit_name(cx, g),
             Tag::AssignName => self.vars.visit_assignname(cx, g),
             Tag::DelName => self.vars.visit_delname(cx, g),
@@ -155,10 +164,34 @@ impl Walker<'_> {
             }
             Tag::Call => {
                 // BasicChecker/Dataclass/Logging/MethodArgs/Stdlib/
-                // StringFormat visit_call unported; IterableChecker phase B
+                // StringFormat visit_call unported
+                self.iter.visit_call(cx, g);
                 self.ty.visit_call(cx, g);
             }
             Tag::Await => self.ty.visit_await(cx, g),
+            Tag::Compare => self.ty.visit_compare(cx, g),
+            Tag::Dict => self.ty.visit_dict(cx, g),
+            Tag::Set => self.ty.visit_set(cx, g),
+            Tag::For => {
+                // ImportsChecker.visit_functiondef no-op;
+                // ModifiedIterationChecker.visit_for unported
+                self.iter.visit_for(cx, g);
+                self.ty.visit_for(cx, g);
+            }
+            Tag::AsyncFor => self.iter.visit_asyncfor(cx, g),
+            Tag::YieldFrom => {
+                // BasicErrorChecker.visit_yieldfrom unported
+                self.iter.visit_yieldfrom(cx, g);
+            }
+            Tag::Subscript => {
+                // VariablesChecker.visit_subscript (E0643) unported
+                self.ty.visit_subscript(cx, g);
+            }
+            Tag::With => self.ty.visit_with(cx, g),
+            Tag::UnaryOp => {
+                // BasicErrorChecker.visit_unaryop unported
+                self.ty.visit_unaryop(cx, g);
+            }
             Tag::Other => {}
         }
         // ---- children ----
@@ -196,6 +229,15 @@ enum Tag {
     Assign,
     Call,
     Await,
+    Compare,
+    Dict,
+    Set,
+    For,
+    AsyncFor,
+    YieldFrom,
+    Subscript,
+    With,
+    UnaryOp,
     Other,
 }
 
@@ -215,6 +257,15 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Assign { .. } => Tag::Assign,
         NodeKind::Call { .. } => Tag::Call,
         NodeKind::Await { .. } => Tag::Await,
+        NodeKind::Compare { .. } => Tag::Compare,
+        NodeKind::Dict { .. } => Tag::Dict,
+        NodeKind::Set { .. } => Tag::Set,
+        NodeKind::For(_) => Tag::For,
+        NodeKind::AsyncFor(_) => Tag::AsyncFor,
+        NodeKind::YieldFrom { .. } => Tag::YieldFrom,
+        NodeKind::Subscript { .. } => Tag::Subscript,
+        NodeKind::With(_) => Tag::With,
+        NodeKind::UnaryOp { .. } => Tag::UnaryOp,
         _ => Tag::Other,
     }
 }
