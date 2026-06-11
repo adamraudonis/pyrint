@@ -450,13 +450,39 @@ impl Engine {
             if kw_only {
                 continue;
             }
+            // _is_init_var (brain_dataclasses.py:565-572): next(node.infer())
+            // — pull C, a CACHE HIT after the safe_infer above wrote the
+            // annotation's value cache. InitVar fields are SKIPPED in the
+            // init=False pass (_get_dataclass_attributes:130-132).
+            if self.is_init_var(ann) {
+                continue;
+            }
             let unknown = self.alloc_placeholders(1)[0];
             self.dataclass_attrs
                 .borrow_mut()
                 .insert(unknown, GNode { m: cls.m, n: stmt });
             let sym = self.sym(&target);
-            let mut ia = self.iattrs.borrow_mut();
-            ia.entry(cls).or_default().insert(sym, vec![unknown]);
+            {
+                let mut ia = self.iattrs.borrow_mut();
+                ia.entry(cls).or_default().insert(sym, vec![unknown]);
+            }
+            // rhs_node = AstroidManager().visit_transforms(rhs_node)
+            // (brain_dataclasses.py:69): the Unknown-node inference_tip
+            // predicate _looks_like_dataclass_attribute re-checks
+            // is_decorated_with_dataclass(scope) — one decorator pull —
+            // and the applied tip transform returns the node -> WIPE
+            // (transforms.py:66-72), once per field.
+            let _ = self.is_decorated_with_dataclass(cls);
+            self.wipe();
+        }
+    }
+
+    /// brain_dataclasses._is_init_var: single next(node.infer()) pull;
+    /// matches by inferred .name == "InitVar".
+    pub(crate) fn is_init_var(&self, ann: GNode) -> bool {
+        match self.infer_first(ann, None) {
+            Ok(Value::Node(vg)) => self.node_name(vg).as_deref() == Some("InitVar"),
+            _ => false,
         }
     }
 
@@ -998,8 +1024,38 @@ impl Engine {
         // continue) only when an __init__ is generated
         // (_check_generate_dataclass_init); otherwise None -> BREAK no wipe
         if self.is_decorated_with_dataclass(g) {
+            // node.is_dataclass = True (brain_dataclasses.py:59)
+            self.is_dataclass_flag.borrow_mut().insert(g);
             self.apply_dataclass_transform(g);
             if self.check_generate_dataclass_init(g) {
+                // kw_only_decorated (brain_dataclasses.py:76-85): breaks
+                // False on the first non-Call decorator; otherwise the LAST
+                // kw_only keyword across all Call decorators wins.
+                let mut kw_only_decorated = false;
+                for dec in self.decorator_nodes(g) {
+                    let md = self.md(dec.m);
+                    let keywords: Vec<NodeId> = match &md.tree.nodes[dec.n.idx()].kind {
+                        NodeKind::Call { keywords, .. } => keywords.clone(),
+                        _ => {
+                            kw_only_decorated = false;
+                            break;
+                        }
+                    };
+                    for kw in keywords {
+                        if let NodeKind::Keyword { arg: Some(a), value } =
+                            &md.tree.nodes[kw.idx()].kind
+                        {
+                            if md.tree.s(*a) == "kw_only" {
+                                // keyword.value.bool_value() is True
+                                kw_only_decorated = matches!(
+                                    &md.tree.nodes[value.idx()].kind,
+                                    NodeKind::Const(pyast::tree::ConstValue::Bool(true))
+                                );
+                            }
+                        }
+                    }
+                }
+                self.generate_dataclass_init(g, kw_only_decorated);
                 self.wipe();
             } else {
                 return;
@@ -1248,6 +1304,524 @@ impl Engine {
         true
     }
 
+    /// brain_dataclasses._generate_dataclass_init + the locals["__init__"]
+    /// install (brain_dataclasses.py:86-106, 244-390). Pull-for-pull port:
+    /// the assigns listing re-runs per-field is_class_var (next) +
+    /// _is_keyword_only_sentinel (safe_infer); the body re-checks property
+    /// overrides (decoratornames inference), field calls (func next-pull)
+    /// and _is_init_var (cache hit); base mro walks happen via mro().
+    fn generate_dataclass_init(&self, node: GNode, kw_only_decorated: bool) {
+        const DEFAULT_FACTORY: &str = "_HAS_DEFAULT_FACTORY";
+        // assigns = list(_get_dataclass_attributes(node, init=True))
+        let body: Vec<NodeId> = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::ClassDef(d) => d.body.clone(),
+                _ => return,
+            }
+        };
+        struct FieldAssign {
+            name: String,
+            ann: GNode,
+            value: Option<GNode>,
+        }
+        let mut assigns: Vec<FieldAssign> = Vec::new();
+        for stmt in &body {
+            let md = self.md(node.m);
+            let (target, annotation, value) = match &md.tree.nodes[stmt.idx()].kind {
+                NodeKind::AnnAssign { target, annotation, value, .. } => {
+                    match &md.tree.nodes[target.idx()].kind {
+                        NodeKind::AssignName { name } => {
+                            (md.tree.s(*name).to_string(), *annotation, *value)
+                        }
+                        _ => continue,
+                    }
+                }
+                _ => continue,
+            };
+            drop(md);
+            let ann = GNode { m: node.m, n: annotation };
+            // is_class_var: next(node.infer())
+            let is_class_var = match self.infer_first(ann, None) {
+                Ok(Value::Node(vg)) => self.node_name(vg).as_deref() == Some("ClassVar"),
+                _ => false,
+            };
+            if is_class_var {
+                continue;
+            }
+            // _is_keyword_only_sentinel: safe_infer
+            let kw_only = matches!(
+                self.safe_infer(ann, &Ctx::new()),
+                Some(Value::Inst { cls: c, .. }) if self.qname(c) == "dataclasses._KW_ONLY_TYPE"
+            );
+            if kw_only {
+                continue;
+            }
+            // init=True: InitVar fields are KEPT (no _is_init_var pull here)
+            assigns.push(FieldAssign {
+                name: target,
+                ann,
+                value: value.map(|v| GNode { m: node.m, n: v }),
+            });
+        }
+        // _find_arguments_from_base_classes(node)
+        type ParamData = (Option<String>, Option<String>);
+        let mut prev_pos: indexmap::IndexMap<String, ParamData> = Default::default();
+        let mut prev_kw: indexmap::IndexMap<String, ParamData> = Default::default();
+        let mro = self.mro(node, None).unwrap_or_default();
+        let init_sym = self.sym("__init__");
+        for base in mro.iter().rev() {
+            if !self.is_dataclass_flag.borrow().contains(base) {
+                continue;
+            }
+            let init_fn = {
+                let md = self.md(base.m);
+                let locals = md.locals.borrow();
+                match locals
+                    .get(&base.n)
+                    .and_then(|l| l.get(&init_sym))
+                    .and_then(|v| v.first())
+                {
+                    Some(&f) => f,
+                    None => continue,
+                }
+            };
+            if let Some((pos, kw)) = self.dataclass_init_params.borrow().get(&init_fn) {
+                for (n, a, d) in pos {
+                    prev_pos.insert(n.clone(), (a.clone(), d.clone()));
+                }
+                for (n, a, d) in kw {
+                    prev_kw.insert(n.clone(), (a.clone(), d.clone()));
+                }
+            }
+            // dataclass bases with a HANDWRITTEN __init__ (init=False) fall
+            // through _get_arguments_data on real Arguments — out of corpus
+            // scope (no side data): skipped.
+        }
+        // main loop
+        let mut params: Vec<(String, Option<String>, Option<String>)> = Vec::new();
+        let mut kw_only_params: Vec<(String, Option<String>, Option<String>)> = Vec::new();
+        let mut assignments: Vec<String> = Vec::new();
+        let prop_qname = "builtins.property".to_string();
+        for fa in &assigns {
+            let name = &fa.name;
+            // property override check: decoratornames() inference
+            let mut property_node: Option<GNode> = None;
+            {
+                let locs: Vec<GNode> = {
+                    let md = self.md(node.m);
+                    let locals = md.locals.borrow();
+                    let sym = self.sym(name);
+                    locals
+                        .get(&node.n)
+                        .and_then(|l| l.get(&sym))
+                        .cloned()
+                        .unwrap_or_default()
+                };
+                for additional in locs {
+                    if !self.kind_is(additional, |k| {
+                        matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                    }) {
+                        continue;
+                    }
+                    if self.decorator_nodes(additional).is_empty() {
+                        continue;
+                    }
+                    if self
+                        .decoratornames(additional, None)
+                        .into_iter()
+                        .flatten()
+                        .any(|q| q == prop_qname)
+                    {
+                        property_node = Some(additional);
+                        break;
+                    }
+                }
+            }
+            let is_field = match fa.value {
+                Some(v)
+                    if self.kind_is(v, |k| matches!(k, NodeKind::Call { .. })) =>
+                {
+                    self.looks_like_dataclass_field_call_noscope(v)
+                }
+                _ => false,
+            };
+            if is_field {
+                // skip fields with init=False
+                let v = fa.value.unwrap();
+                let md = self.md(v.m);
+                let mut skip = false;
+                if let NodeKind::Call { keywords, .. } = &md.tree.nodes[v.n.idx()].kind {
+                    for &kw in keywords {
+                        if let NodeKind::Keyword { arg: Some(a), value } =
+                            &md.tree.nodes[kw.idx()].kind
+                        {
+                            if md.tree.s(*a) == "init"
+                                && matches!(
+                                    &md.tree.nodes[value.idx()].kind,
+                                    NodeKind::Const(pyast::tree::ConstValue::Bool(false))
+                                )
+                            {
+                                skip = true;
+                            }
+                        }
+                    }
+                }
+                drop(md);
+                if skip {
+                    prev_pos.shift_remove(name);
+                    prev_kw.shift_remove(name);
+                    continue;
+                }
+            }
+            // _is_init_var(annotation): next pull (cache hit after the
+            // safe_infer in the listing pass)
+            let init_var = self.is_init_var(fa.ann);
+            let (ann_node, mut assignment): (Option<GNode>, String) = if init_var {
+                let md = self.md(fa.ann.m);
+                let slice = match &md.tree.nodes[fa.ann.n.idx()].kind {
+                    NodeKind::Subscript { slice, .. } => {
+                        Some(GNode { m: fa.ann.m, n: *slice })
+                    }
+                    _ => None,
+                };
+                (slice, String::new())
+            } else {
+                (Some(fa.ann), format!("self.{name} = {name}"))
+            };
+            let ann_str: Option<String> = ann_node.and_then(|a| self.expr_source(a));
+            let mut default_str: Option<String> = None;
+            if let Some(v) = fa.value {
+                if is_field {
+                    match self.dataclass_field_default(v) {
+                        Some((false, dn)) => default_str = self.expr_source(dn),
+                        Some((true, dn)) => {
+                            default_str = Some(DEFAULT_FACTORY.to_string());
+                            let f = self
+                                .expr_source(dn)
+                                .unwrap_or_else(|| "None".to_string());
+                            // new_call.as_string() == f"{factory}()"
+                            assignment = format!(
+                                "self.{name} = {f}() if {name} is {DEFAULT_FACTORY} else {name}"
+                            );
+                        }
+                        None => {}
+                    }
+                } else {
+                    default_str = self.expr_source(v);
+                }
+            } else if let Some(pn) = property_node {
+                // str(next(property_node.infer_call_result(None)).as_string())
+                let cx = Ctx::new();
+                match self.infer_call_result_first(&Value::Node(pn), None, Some(&cx)) {
+                    Ok(Some(v)) => {
+                        default_str = Some(match &v {
+                            Value::Uninferable => "Uninferable".to_string(),
+                            Value::Node(g) => self
+                                .expr_source(*g)
+                                .unwrap_or_else(|| "None".to_string()),
+                            Value::SynthConst(c) => match c.as_ref() {
+                                pyast::tree::ConstValue::Str(s) => {
+                                    pyast::pyrepr::repr_str(s)
+                                }
+                                other => const_format(other),
+                            },
+                            _ => "None".to_string(),
+                        });
+                    }
+                    _ => {}
+                }
+            } else {
+                // _get_previous_field_default(node, name) — astroid calls
+                // node.mro() FRESH here (inference side effects repeat)
+                let mro2 = self.mro(node, None).unwrap_or_default();
+                'outer: for base in mro2.iter().rev() {
+                    if !self.is_dataclass_flag.borrow().contains(base) {
+                        continue;
+                    }
+                    let locs: Vec<GNode> = {
+                        let md = self.md(base.m);
+                        let locals = md.locals.borrow();
+                        let sym = self.sym(name);
+                        locals
+                            .get(&base.n)
+                            .and_then(|l| l.get(&sym))
+                            .cloned()
+                            .unwrap_or_default()
+                    };
+                    for assign in locs {
+                        let Some(parent) = self.parent(assign) else { continue };
+                        let md = self.md(parent.m);
+                        let pv = match &md.tree.nodes[parent.n.idx()].kind {
+                            NodeKind::AnnAssign { value: Some(v), .. } => {
+                                GNode { m: parent.m, n: *v }
+                            }
+                            _ => continue,
+                        };
+                        let is_call = matches!(
+                            md.tree.nodes[pv.n.idx()].kind,
+                            NodeKind::Call { .. }
+                        );
+                        drop(md);
+                        if !is_call || !self.looks_like_dataclass_field_call(pv) {
+                            continue;
+                        }
+                        if let Some((is_factory, dn)) = self.dataclass_field_default(pv) {
+                            default_str = if is_factory {
+                                self.expr_source(dn).map(|f| format!("{f}()"))
+                            } else {
+                                self.expr_source(dn)
+                            };
+                            break 'outer;
+                        }
+                    }
+                }
+            }
+            // param tuple
+            let param = (name.clone(), ann_str.clone(), default_str.clone());
+            // field-level kw_only keyword overrides the decorator
+            if is_field {
+                let v = fa.value.unwrap();
+                let md = self.md(v.m);
+                let mut kw_only_kw: Option<bool> = None;
+                if let NodeKind::Call { keywords, .. } = &md.tree.nodes[v.n.idx()].kind {
+                    for &kw in keywords {
+                        if let NodeKind::Keyword { arg: Some(a), value } =
+                            &md.tree.nodes[kw.idx()].kind
+                        {
+                            if md.tree.s(*a) == "kw_only" && kw_only_kw.is_none() {
+                                kw_only_kw = Some(matches!(
+                                    &md.tree.nodes[value.idx()].kind,
+                                    NodeKind::Const(pyast::tree::ConstValue::Bool(true))
+                                ));
+                            }
+                        }
+                    }
+                }
+                drop(md);
+                if let Some(is_kw) = kw_only_kw {
+                    if is_kw {
+                        kw_only_params.push(param);
+                    } else {
+                        params.push(param);
+                    }
+                    continue;
+                }
+            }
+            if kw_only_decorated {
+                if prev_kw.contains_key(name) {
+                    prev_kw.insert(name.clone(), (ann_str, default_str));
+                } else {
+                    kw_only_params.push(param);
+                }
+            } else if prev_pos.contains_key(name) {
+                prev_pos.insert(name.clone(), (ann_str, default_str));
+            } else if prev_kw.contains_key(name) {
+                // params = [name, *params] — bare name promoted to FRONT
+                params.insert(0, (name.clone(), None, None));
+                prev_kw.shift_remove(name);
+            } else {
+                params.push(param);
+            }
+            if !init_var {
+                assignments.push(assignment);
+            }
+        }
+        // _parse_arguments_into_strings
+        let render = |store: &indexmap::IndexMap<String, ParamData>| -> String {
+            let mut s = String::new();
+            for (n, (a, d)) in store {
+                s.push_str(n);
+                if let Some(a) = a {
+                    s.push_str(": ");
+                    s.push_str(a);
+                }
+                if let Some(d) = d {
+                    s.push_str(" = ");
+                    s.push_str(d);
+                }
+                s.push_str(", ");
+            }
+            s
+        };
+        let render_param = |(n, a, d): &(String, Option<String>, Option<String>)| {
+            let mut s = n.clone();
+            if let Some(a) = a {
+                s.push_str(&format!(": {a}"));
+            }
+            if let Some(d) = d {
+                s.push_str(&format!(" = {d}"));
+            }
+            s
+        };
+        let prev_pos_only = render(&prev_pos);
+        let prev_kw_only = render(&prev_kw);
+        // `"self" in prev_pos_only` — SUBSTRING check on the rendered string
+        // (brain_dataclasses.py:377), bug-for-bug
+        let mut params_string = if prev_pos_only.contains("self") {
+            String::new()
+        } else {
+            "self, ".to_string()
+        };
+        params_string.push_str(&prev_pos_only);
+        params_string.push_str(
+            &params.iter().map(render_param).collect::<Vec<_>>().join(", "),
+        );
+        if !params_string.ends_with(", ") {
+            params_string.push_str(", ");
+        }
+        if !prev_kw_only.is_empty() || !kw_only_params.is_empty() {
+            params_string.push_str("*, ");
+        }
+        params_string.push_str(&prev_kw_only);
+        params_string.push_str(
+            &kw_only_params
+                .iter()
+                .map(render_param)
+                .collect::<Vec<_>>()
+                .join(", "),
+        );
+        let assignments_string = if assignments.is_empty() {
+            "pass".to_string()
+        } else {
+            assignments.join("\n    ")
+        };
+        let init_str =
+            format!("def __init__({params_string}) -> None:\n    {assignments_string}");
+        // parse(init_str) — astroid's parse builds with modname '' and
+        // applies transforms; AstroidSyntaxError -> no init installed
+        let Some(mid) = self.build_template_module(&init_str, "") else {
+            return;
+        };
+        let init_fn = {
+            let md = self.md(mid);
+            let locals = md.locals.borrow();
+            match locals
+                .get(&NodeId::MODULE)
+                .and_then(|l| l.get(&init_sym))
+                .and_then(|v| v.first())
+            {
+                Some(&f) => f,
+                None => return,
+            }
+        };
+        // init_node.parent = node; node.locals["__init__"] = [init_node]
+        self.reparents.borrow_mut().insert(init_fn, node);
+        {
+            let md = self.md(node.m);
+            let mut locals = md.locals.borrow_mut();
+            locals
+                .entry(node.n)
+                .or_default()
+                .insert(init_sym, vec![init_fn]);
+        }
+        // side data for subclass _find_arguments_from_base_classes: pos =
+        // self + merged prev + params; kw = merged prev + kw_only_params
+        {
+            let mut pos_data: Vec<(String, Option<String>, Option<String>)> = Vec::new();
+            if !prev_pos_only.contains("self") {
+                pos_data.push(("self".to_string(), None, None));
+            }
+            for (n, (a, d)) in &prev_pos {
+                pos_data.push((n.clone(), a.clone(), d.clone()));
+            }
+            pos_data.extend(params.iter().cloned());
+            let mut kw_data: Vec<(String, Option<String>, Option<String>)> = Vec::new();
+            for (n, (a, d)) in &prev_kw {
+                kw_data.push((n.clone(), a.clone(), d.clone()));
+            }
+            kw_data.extend(kw_only_params.iter().cloned());
+            self.dataclass_init_params
+                .borrow_mut()
+                .insert(init_fn, (pos_data, kw_data));
+        }
+        // DEFAULT_FACTORY sentinel in the class's root module locals
+        {
+            let fac_sym = self.sym(DEFAULT_FACTORY);
+            let has = {
+                let md = self.md(node.m);
+                let locals = md.locals.borrow();
+                locals
+                    .get(&NodeId::MODULE)
+                    .map(|l| l.contains_key(&fac_sym))
+                    .unwrap_or(false)
+            };
+            if !has {
+                if let Some(fmid) =
+                    self.build_template_module(&format!("{DEFAULT_FACTORY} = object()"), "")
+                {
+                    let assign_name = {
+                        let fmd = self.md(fmid);
+                        let locals = fmd.locals.borrow();
+                        locals
+                            .get(&NodeId::MODULE)
+                            .and_then(|l| l.get(&fac_sym))
+                            .and_then(|v| v.first())
+                            .copied()
+                    };
+                    if let Some(an) = assign_name {
+                        // new_assign.parent = root
+                        let stmt = self.statement(an).unwrap_or(an);
+                        self.reparents.borrow_mut().insert(stmt, GNode {
+                            m: node.m,
+                            n: NodeId::MODULE,
+                        });
+                        let md = self.md(node.m);
+                        let mut locals = md.locals.borrow_mut();
+                        locals
+                            .entry(NodeId::MODULE)
+                            .or_default()
+                            .insert(fac_sym, vec![an]);
+                    }
+                }
+            }
+        }
+    }
+
+    /// _looks_like_dataclass_field_call(value, check_scope=False)
+    fn looks_like_dataclass_field_call_noscope(&self, call: GNode) -> bool {
+        let Some(func) = self.call_func(call) else {
+            return false;
+        };
+        match self.infer_first(func, None) {
+            Ok(Value::Node(g))
+                if self.kind_is(g, |k| {
+                    matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                }) =>
+            {
+                let md = self.md(g.m);
+                self.node_name(g).as_deref() == Some("field")
+                    && DATACLASS_MODULES.contains(&md.name.as_str())
+            }
+            _ => false,
+        }
+    }
+
+    /// brain_dataclasses._get_field_default -> (is_factory, value node)
+    fn dataclass_field_default(&self, field_call: GNode) -> Option<(bool, GNode)> {
+        let md = self.md(field_call.m);
+        let keywords: Vec<NodeId> = match &md.tree.nodes[field_call.n.idx()].kind {
+            NodeKind::Call { keywords, .. } => keywords.clone(),
+            _ => return None,
+        };
+        let mut default: Option<NodeId> = None;
+        let mut default_factory: Option<NodeId> = None;
+        for kw in keywords {
+            if let NodeKind::Keyword { arg: Some(a), value } = &md.tree.nodes[kw.idx()].kind {
+                match md.tree.s(*a) {
+                    "default" => default = Some(*value),
+                    "default_factory" => default_factory = Some(*value),
+                    _ => {}
+                }
+            }
+        }
+        match (default, default_factory) {
+            (Some(d), None) => Some((false, GNode { m: field_call.m, n: d })),
+            (None, Some(f)) => Some((true, GNode { m: field_call.m, n: f })),
+            _ => None,
+        }
+    }
+
     fn scan_functiondef(&self, g: GNode) {
         // brain_functools _looks_like_lru_cache (syntactic; transform
         // returns None -> no wipe)
@@ -1468,7 +2042,7 @@ impl Engine {
                 None => Vec::new(),
             }
         };
-        let mut dunder_members: Vec<(String, GNode)> = Vec::new(); // (local, fake cls)
+        let mut dunder_members: Vec<(String, GNode)> = Vec::new(); // (local, member proxy ph)
         let mut target_names: rustc_hash::FxHashSet<String> = Default::default();
         // mymethods: FIRST local of each key that is a FunctionDef
         let mymethods: Vec<(crate::value::GSym, GNode)> = entries
@@ -1612,7 +2186,7 @@ impl Engine {
                 if stmt_value.is_none() {
                     continue;
                 }
-                dunder_members.push((local_str.clone(), fake_cls));
+                dunder_members.push((local_str.clone(), ph));
             }
             let _ = made_any;
             // node.locals[local] = new_targets (REPLACE)
@@ -1628,14 +2202,19 @@ impl Engine {
                 items: std::rc::Rc::new(Vec::new()),
             }),
         );
+        // astroid's __members__ Dict values are LAZY Name nodes referencing
+        // the member locals (brain_namedtuple_enum.py:489-507) — they
+        // resolve through the class locals to the SAME Instance proxy as
+        // new_targets (identity preserved; no second instantiate_class, so
+        // no second per-member mro/INFBASES walk at transform time).
         let member_items: Vec<(Value, Value)> = dunder_members
             .iter()
-            .map(|(k, fake)| {
+            .map(|(k, ph)| {
                 (
                     Value::SynthConst(std::rc::Rc::new(pyast::tree::ConstValue::Str(
                         k.clone().into(),
                     ))),
-                    self.instantiate_class(*fake),
+                    Value::Node(*ph),
                 )
             })
             .collect();

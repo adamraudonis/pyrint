@@ -1350,7 +1350,11 @@ impl Engine {
         // class_def.locals["__call__"] = [func_to_add]
         // (brain_typing.py:228-231 -- instances of the synthetic class are
         // callable; calling them instantiates builtins.dict)
-        let mid = self.build_template_module(
+        // NO transform scan: astroid constructs the ClassDef MANUALLY
+        // (brain_typing.py:221-231) — no ClassDef transform ever sees it, so
+        // our template build must not infer the `dict` base eagerly
+        // (counter parity: the esphome try_parse_enum cap truncation).
+        let mid = self.build_template_module_no_transforms(
             "class TypedDict(dict):
     pass
 dict

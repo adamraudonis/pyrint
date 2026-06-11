@@ -332,12 +332,19 @@ impl Engine {
         }
     }
 
-    /// `For`/`AsyncFor`/`Comprehension`.optional_assign
+    /// `For`/`AsyncFor`/`Comprehension`/`NamedExpr`.optional_assign
+    /// (node_classes.py:1951 — NamedExpr sets optional_assign = True, which
+    /// makes _filter_stmts keep BOTH copies of a walrus AssignName: the
+    /// `_stmts = [node]` branch THEN the unconditional append, with the
+    /// pindex dedup-delete skipped; filter_statements.py:143-159,195,227)
     pub fn optional_assign(&self, g: GNode) -> bool {
         let md = self.md(g.m);
         matches!(
             md.tree.nodes[g.n.idx()].kind,
-            NodeKind::For(_) | NodeKind::AsyncFor(_) | NodeKind::Comprehension { .. }
+            NodeKind::For(_)
+                | NodeKind::AsyncFor(_)
+                | NodeKind::Comprehension { .. }
+                | NodeKind::NamedExpr { .. }
         )
     }
 

@@ -3183,7 +3183,9 @@ impl Engine {
                     NodeKind::ClassDef(d) => {
                         let name = md.tree.s(d.name).to_string();
                         let align = " ".repeat("ClassDef".len() + name.len() + 2);
-                        let dc = if self.is_decorated_with_dataclass(*g) {
+                        // node.is_dataclass FLAG (set by dataclass_transform,
+                        // brain_dataclasses.py:59) — read with NO inference
+                        let dc = if self.is_dataclass_flag.borrow().contains(g) {
                             "True"
                         } else {
                             "False"

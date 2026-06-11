@@ -3061,6 +3061,19 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
             _ => notimpl(),
         },
         "<<" | ">>" | "&" | "|" | "^" => match (l, r) {
+            // CPython bool.__and__/__or__/__xor__ return BOOL when both
+            // operands are bool (astroid folds via the real operator,
+            // protocols.py:103-136 BIN_OP_IMPL) — `negated ^ self.negated`
+            // must stay Const:bool, not collapse to int.
+            (Bool(a), Bool(b)) if matches!(op, "&" | "|" | "^") => {
+                let v = match op {
+                    "&" => *a && *b,
+                    "|" => *a || *b,
+                    "^" => *a != *b,
+                    _ => unreachable!(),
+                };
+                Value::SynthConst(Rc::new(Bool(v)))
+            }
             (Int(IntValue::Small(a)), Int(IntValue::Small(b))) => {
                 match op {
                     "<<" => {

@@ -266,6 +266,25 @@ pub struct Engine {
     pub dataclass_attrs: RefCell<FxHashMap<GNode, GNode>>,
     /// Call nodes whose dataclass-field predicate matched at transform time
     pub dataclass_field_calls: RefCell<FxHashSet<GNode>>,
+    /// `node.is_dataclass = True` flags (brain_dataclasses.py:59 — set at
+    /// transform start, read WITHOUT inference by
+    /// _find_arguments_from_base_classes / renders)
+    pub is_dataclass_flag: RefCell<FxHashSet<GNode>>,
+    /// generated dataclass __init__ FunctionDef -> structured param data
+    /// (pos-or-kw, kw-only) of (name, annotation_str, default_str) — stands
+    /// in for Arguments._get_arguments_data (node_classes.py:861-925) on the
+    /// synthesized init (whose annotations/defaults were as_string'd from
+    /// these exact strings)
+    #[allow(clippy::type_complexity)]
+    pub dataclass_init_params: RefCell<
+        FxHashMap<
+            GNode,
+            (
+                Vec<(String, Option<String>, Option<String>)>,
+                Vec<(String, Option<String>, Option<String>)>,
+            ),
+        >,
+    >,
     /// node_classes.py:5007 UNATTACHED_UNKNOWN singleton (Unknown node used
     /// by protocols._filter_uninferable_nodes for U container elements)
     pub unattached_unknown: RefCell<Option<GNode>>,
@@ -348,6 +367,8 @@ impl Engine {
             pathlib_subscripts: RefCell::new(FxHashSet::default()),
             dataclass_attrs: RefCell::new(FxHashMap::default()),
             dataclass_field_calls: RefCell::new(FxHashSet::default()),
+            is_dataclass_flag: RefCell::new(FxHashSet::default()),
+            dataclass_init_params: RefCell::new(FxHashMap::default()),
             unattached_unknown: RefCell::new(None),
             known_bases_cache: RefCell::new(FxHashMap::default()),
             synth_hop_cache: RefCell::new(FxHashSet::default()),
@@ -1592,8 +1613,19 @@ impl Engine {
 
     /// register_module_extender merge: extension locals REPLACE same-named
     /// target entries (brain/helpers.py:22-27). Returns the template ModId.
+    ///
+    /// astroid parses the extension source with modname '' (builder.parse
+    /// default), so the template's OWN transform scan runs with qnames like
+    /// '.defaultdict' — name-gated predicates (brain_collections
+    /// _looks_like_subscriptable, brain_collections.py:93-105) FAIL at scan
+    /// time. Only afterwards does register_module_extender REPARENT each
+    /// top-level obj into the target module (brain/helpers.py:25-27),
+    /// composing the final qname. Building the template under the real name
+    /// would inject __class_getitem__ templates astroid never installs
+    /// (defaultdict[..] then calls them instead of EmptyNode -> return self).
     fn merge_extension(&self, id: ModId, source: &str, name: &str) -> Option<ModId> {
-        let ext = self.build_template_module(source, name)?;
+        let _ = name;
+        let ext = self.build_template_module(source, "")?;
         let ext_md = self.md(ext);
         let target_md = self.md(id);
         let ext_locals = ext_md.locals.borrow();
@@ -1602,8 +1634,19 @@ impl Engine {
         };
         let mut tgt = target_md.locals.borrow_mut();
         let tgt_map = tgt.entry(NodeId::MODULE).or_default();
+        let target_mod = GNode { m: id, n: NodeId::MODULE };
+        let mut rp = self.reparents.borrow_mut();
         for (sym, objs) in ext_map {
             tgt_map.insert(*sym, objs.clone());
+            for &obj in objs {
+                // `if obj.parent is extension_module: obj.parent = node`
+                if obj.m == ext
+                    && ext_md.tree.nodes[obj.n.idx()].parent == NodeId::MODULE
+                    && obj.n != NodeId::MODULE
+                {
+                    rp.insert(obj, target_mod);
+                }
+            }
         }
         Some(ext)
     }
