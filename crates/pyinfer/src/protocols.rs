@@ -2947,9 +2947,10 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
             _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
                 (Option::Some(a), Option::Some(b)) => match a.checked_add(b) {
                     Option::Some(v) => int_exact(v),
-                    Option::None => Value::Uninferable,
+                    Option::None => big_addsub_value(l, r, false),
                 },
-                _ => Value::Uninferable, // Big beyond i128 — astroid folds; out of scope
+                // Big beyond i128 — astroid folds with arbitrary precision
+                _ => big_addsub_value(l, r, false),
             },
             _ => match (num_l, num_r) {
                 (Some(a), Some(b)) => float(a + b),
@@ -2960,9 +2961,9 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
             _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
                 (Option::Some(a), Option::Some(b)) => match a.checked_sub(b) {
                     Option::Some(v) => int_exact(v),
-                    Option::None => Value::Uninferable,
+                    Option::None => big_addsub_value(l, r, true),
                 },
-                _ => Value::Uninferable,
+                _ => big_addsub_value(l, r, true),
             },
             (Some(a), Some(b)) => float(a - b),
             _ => notimpl(),
@@ -3267,6 +3268,133 @@ fn big_shl_decimal(a: i64, b: u32) -> Option<String> {
         s.push_str(&format!("{limb:09}"));
     }
     Some(s)
+}
+
+/// add/sub fold result for int operands past i128: exact decimal via
+/// big_decimal_addsub, downcast to Small when the result fits i64
+fn big_addsub_value(l: &ConstValue, r: &ConstValue, subtract: bool) -> Value {
+    match big_decimal_addsub(l, r, subtract) {
+        Some(s) => match s.parse::<i64>() {
+            Ok(v) => Value::SynthConst(Rc::new(ConstValue::Int(IntValue::Small(v)))),
+            Err(_) => Value::SynthConst(Rc::new(ConstValue::Int(IntValue::Big(s.into())))),
+        },
+        None => Value::Uninferable,
+    }
+}
+
+/// Exact decimal-string add/sub for int Consts whose values exceed i128
+/// (CPython folds with arbitrary precision — salt ipaddress `(2**128) - 1`,
+/// django test_uuid). Signs handled; magnitudes as base-1e9 limbs.
+fn big_decimal_addsub(a: &ConstValue, b: &ConstValue, subtract: bool) -> Option<String> {
+    fn dec_of(c: &ConstValue) -> Option<String> {
+        match c {
+            ConstValue::Int(IntValue::Small(i)) => Some(i.to_string()),
+            ConstValue::Int(IntValue::Big(s)) => Some(s.to_string()),
+            ConstValue::Bool(b) => Some((*b as i64).to_string()),
+            _ => None,
+        }
+    }
+    fn limbs(mag: &str) -> Option<Vec<u64>> {
+        if mag.is_empty() || !mag.bytes().all(|b| b.is_ascii_digit()) {
+            return None;
+        }
+        let mut out = Vec::with_capacity(mag.len() / 9 + 1);
+        let bytes = mag.as_bytes();
+        let mut end = bytes.len();
+        while end > 0 {
+            let start = end.saturating_sub(9);
+            out.push(mag[start..end].parse::<u64>().ok()?);
+            end = start;
+        }
+        Some(out)
+    }
+    fn cmp_mag(a: &[u64], b: &[u64]) -> std::cmp::Ordering {
+        let (la, lb) = (
+            a.iter().rposition(|&l| l != 0).map_or(0, |i| i + 1),
+            b.iter().rposition(|&l| l != 0).map_or(0, |i| i + 1),
+        );
+        la.cmp(&lb).then_with(|| {
+            for i in (0..la).rev() {
+                match a[i].cmp(&b[i]) {
+                    std::cmp::Ordering::Equal => {}
+                    o => return o,
+                }
+            }
+            std::cmp::Ordering::Equal
+        })
+    }
+    fn add_mag(a: &[u64], b: &[u64]) -> Vec<u64> {
+        let mut out = Vec::with_capacity(a.len().max(b.len()) + 1);
+        let mut carry = 0u64;
+        for i in 0..a.len().max(b.len()) {
+            let v = a.get(i).copied().unwrap_or(0) + b.get(i).copied().unwrap_or(0) + carry;
+            out.push(v % 1_000_000_000);
+            carry = v / 1_000_000_000;
+        }
+        if carry > 0 {
+            out.push(carry);
+        }
+        out
+    }
+    /// a - b, requires |a| >= |b|
+    fn sub_mag(a: &[u64], b: &[u64]) -> Vec<u64> {
+        let mut out = Vec::with_capacity(a.len());
+        let mut borrow = 0i64;
+        for i in 0..a.len() {
+            let mut v = a[i] as i64 - b.get(i).copied().unwrap_or(0) as i64 - borrow;
+            if v < 0 {
+                v += 1_000_000_000;
+                borrow = 1;
+            } else {
+                borrow = 0;
+            }
+            out.push(v as u64);
+        }
+        out
+    }
+    fn render(neg: bool, mag: &[u64]) -> String {
+        let top = mag.iter().rposition(|&l| l != 0);
+        match top {
+            None => "0".to_string(),
+            Some(t) => {
+                let mut s = String::new();
+                if neg {
+                    s.push('-');
+                }
+                s.push_str(&mag[t].to_string());
+                for limb in mag[..t].iter().rev() {
+                    s.push_str(&format!("{limb:09}"));
+                }
+                s
+            }
+        }
+    }
+    let da = dec_of(a)?;
+    let db = dec_of(b)?;
+    let (neg_a, mag_a) = match da.strip_prefix('-') {
+        Some(rest) => (true, rest.to_string()),
+        None => (false, da),
+    };
+    let (mut neg_b, mag_b) = match db.strip_prefix('-') {
+        Some(rest) => (true, rest.to_string()),
+        None => (false, db),
+    };
+    if subtract {
+        neg_b = !neg_b;
+    }
+    let la = limbs(&mag_a)?;
+    let lb = limbs(&mag_b)?;
+    if la.len().max(lb.len()) > 12_000 {
+        return None; // anti-DoS, mirrors big_pow_decimal cap
+    }
+    Some(if neg_a == neg_b {
+        render(neg_a, &add_mag(&la, &lb))
+    } else {
+        match cmp_mag(&la, &lb) {
+            std::cmp::Ordering::Less => render(neg_b, &sub_mag(&lb, &la)),
+            _ => render(neg_a, &sub_mag(&la, &lb)),
+        }
+    })
 }
 
 fn const_unary_fold(c: &ConstValue, op: &str) -> Option<Value> {

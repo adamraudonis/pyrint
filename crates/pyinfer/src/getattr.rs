@@ -1566,7 +1566,38 @@ impl Engine {
     ) -> Result<Flow, ErrKind> {
         let name_str = self.sname(name);
         match name_str.as_str() {
-            "__func__" => return Ok(Flow::one(Value::Node(func))),
+            "__func__" => {
+                // BoundMethodModel.attr___func__ (objectmodel.py:688-691) is
+                // `self._instance._proxied._proxied` — when the BM proxies a
+                // FunctionDef DIRECTLY (function_to_method classmethod wrap,
+                // metaclass lookup, Super) the second `._proxied` raises
+                // AttributeError -> the owner is skipped by _infer_attribute
+                // (pandas ExtensionArray._from_sequence_of_strings.__func__
+                // -> ERR). Instance-access BMs wrap an UnboundMethod
+                // (bases._wrap_attr) so `._proxied._proxied` lands on the
+                // function. We encode the wrap chain by bound kind: bound to
+                // a ClassDef/FunctionDef/Module node => direct FunctionDef
+                // proxy => AttributeError; everything else (instances,
+                // consts, ...) came through _wrap_attr.
+                if let Some(b) = bound {
+                    if let Value::Node(g) = &**b {
+                        let classish = self.kind_is(*g, |k| {
+                            matches!(
+                                k,
+                                NodeKind::ClassDef(_)
+                                    | NodeKind::FunctionDef(_)
+                                    | NodeKind::AsyncFunctionDef(_)
+                                    | NodeKind::Lambda(_)
+                                    | NodeKind::Module(_)
+                            )
+                        });
+                        if classish {
+                            return Err(ErrKind::Attribute);
+                        }
+                    }
+                }
+                return Ok(Flow::one(Value::Node(func)));
+            }
             "__self__" => {
                 return Ok(Flow::one(match bound {
                     Some(b) => (**b).clone(),
@@ -1575,8 +1606,33 @@ impl Engine {
             }
             _ => {}
         }
-        // Bound/UnboundMethod.igetattr yields special-attribute model
-        // results RAW (bases.py:466-469 `iter((self.special_attributes
+        // UnboundMethodModel is ObjectModel-based (objectmodel.py:620-638):
+        // ONLY __class__/__func__/__self__/im_* (+ ObjectModel
+        // __new__/__init__) are model attrs. Everything else falls through
+        // to self._proxied.igetattr (bases.py:470) — the FunctionDef path,
+        // where model results hop through _infer_stmts (+1 each).
+        // BoundMethodModel(FunctionModel) keeps the full function model.
+        if bound.is_none() {
+            return match name_str.as_str() {
+                "im_func" => Ok(Flow::one(Value::Node(func))),
+                "im_self" => {
+                    Ok(Flow::one(Value::SynthConst(Rc::new(ConstValue::None))))
+                }
+                // attr___class__ = helpers.object_type(UM) -> proxy class
+                // 'function' (objectmodel.py:622-627, helpers.py:44-57)
+                "im_class" | "__class__" => {
+                    Ok(Flow::one(Value::Node(self.builtins().function)))
+                }
+                "__new__" | "__init__" => match self.function_model_attr(func, &name_str)
+                {
+                    Some(v) => Ok(Flow::one(v)),
+                    None => self.function_igetattr(func, name, ctx),
+                },
+                _ => self.function_igetattr(func, name, ctx),
+            };
+        }
+        // BoundMethod.igetattr yields special-attribute model results RAW
+        // (bases.py:466-469 `iter((self.special_attributes
         // .lookup(name),))` — NO _infer_stmts hop): `bm.__code__` renders
         // 'Unknown', `bm.__get__` is a DescriptorBoundMethod wrapping the
         // BOUND method value.
@@ -1629,7 +1685,19 @@ impl Engine {
             "fset" => {
                 // attr_fset (objectmodel.py:952-986): find the sibling
                 // `@<name>.setter`-decorated def with the same name; no
-                // setter -> InferenceError.
+                // setter -> InferenceError. find_setter's comprehension
+                // `[t for t in func.parent.get_children() if t.name == ...]`
+                // evaluates `.name` on EVERY child — any child kind without
+                // a `name` attribute (Assign targets, Attribute bases,
+                // Keyword, ...) raises AttributeError, which escapes
+                // attr_fset and is swallowed per-owner by _infer_attribute
+                // (django ChoiceField.choices.fset -> ERR: `widget = Select`
+                // class attrs have no .name).
+                if let Value::Property { synth: true, .. } = owner {
+                    // infer_property products are parented to
+                    // SYNTHETIC_ROOT (no children) -> find_setter None
+                    return Err(ErrKind::Inference);
+                }
                 let fname = self.node_name(func).unwrap_or_default();
                 let parent = self.parent(func);
                 let mut setter: Option<GNode> = None;
@@ -1640,6 +1708,28 @@ impl Engine {
                         md.tree.push_children(p.n, &mut buf);
                         buf.into_iter().map(|n| GNode { m: p.m, n }).collect()
                     };
+                    // pass 1: `.name` access on every child (AttributeError
+                    // on kinds without it — astroid nodes with a name attr:
+                    // Module/FunctionDef/ClassDef/Lambda/Name/AssignName/
+                    // DelName)
+                    for child in &kids {
+                        let has_name_attr = self.kind_is(*child, |k| {
+                            matches!(
+                                k,
+                                NodeKind::Module(_)
+                                    | NodeKind::FunctionDef(_)
+                                    | NodeKind::AsyncFunctionDef(_)
+                                    | NodeKind::ClassDef(_)
+                                    | NodeKind::Lambda(_)
+                                    | NodeKind::Name { .. }
+                                    | NodeKind::AssignName { .. }
+                                    | NodeKind::DelName { .. }
+                            )
+                        });
+                        if !has_name_attr {
+                            return Err(ErrKind::Attribute); // AttributeError
+                        }
+                    }
                     for child in kids {
                         if self.node_name(child).as_deref() != Some(fname.as_str()) {
                             continue;

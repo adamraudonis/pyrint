@@ -177,11 +177,26 @@ pub fn render(engine: &Engine, v: &Value) -> String {
                 NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_) => {
                     format!("Func:{}", engine.qname(*g))
                 }
-                NodeKind::Lambda(_) => format!(
-                    "Lambda:{}:{}",
-                    md.name,
-                    md.tree.nodes[g.n.idx()].fromlineno
-                ),
+                NodeKind::Lambda(_) => {
+                    // dump_infer.py renders v.root().name — REPARENT-AWARE:
+                    // extension-template lambdas (multiprocessing.managers
+                    // `__exit__ = lambda *args: args`) live in a ''-named
+                    // template module whose classes are reparented into the
+                    // real module (brain/helpers.py:25-27); root() walks
+                    // through the override.
+                    let root_name = {
+                        let mut top = *g;
+                        while let Some(p) = engine.parent(top) {
+                            top = p;
+                        }
+                        &engine.md(top.m).name
+                    };
+                    format!(
+                        "Lambda:{}:{}",
+                        root_name,
+                        md.tree.nodes[g.n.idx()].fromlineno
+                    )
+                }
                 NodeKind::Module(_) => format!("Module:{}", md.name),
                 NodeKind::List { elts, .. } => format!("List:{}", elts.len()),
                 NodeKind::Tuple { elts, .. } => format!("Tuple:{}", elts.len()),
