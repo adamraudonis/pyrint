@@ -1,0 +1,9 @@
+b = b'.'
+c = 1j
+d = ...
+s1 = f"python.exe {b}; exit"
+s2 = f"x{c}y"
+s3 = f"x{d}y"
+r1 = s1
+r2 = s2
+r3 = s3

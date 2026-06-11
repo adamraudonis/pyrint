@@ -602,6 +602,83 @@ pylint behavior — bugs are replicated.
      rsax931 trailing Const None (23). (4) pylfunc NOTREE x3 + os.environ
      noise (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence). (6) recursion guard still 350 (no diff evidence).
+   - **phase 10 (diff-reduction round 9, N=1000)**: 970 -> 498 diff lines.
+     LANDED (probe-verified, harness/infertests now 69 probes):
+     (a) **inference_tip 64-FIFO EXACT** (inference_tip.py:22-86): the
+     OrderedDict caps at 64 with popitem(last=False); EVERY successful
+     miss INSERTS — non-empty-context entries are keyed by InferenceContext
+     OBJECT IDENTITY (we pin the Rc in the entry so the pointer can't
+     recycle) and virtually never hit, but they EVICT the useful None-keyed
+     entries, so astroid re-runs tips constantly where our old
+     empty-ctx-only cache replayed forever. Guard trips REMOVE the
+     in-flight key (re-entry allowed once); a tip raising mid-stream drops
+     its partial yields (eager `list(func(...))`). Per-node
+     `node._explicit_inference = lambda` replacements (typing alias/
+     special-alias/Generic-Annotated subscripts) bypass guard+FIFO
+     entirely; infer_typedDict re-runs per miss (no per-node memo).
+     (b) **tips run with context=None**, NOT one shared fresh ctx: every
+     internal node.infer(None) materializes its OWN InferenceContext
+     (Ctx::new_none() marker + infer_to substitution; clone of the marker
+     = plain fresh ctx, mirroring copy_context(None)).
+     (c) **lazy _resolve_assignment_parts** (protocols.py:482-519): the
+     rhs `parts` generator is pulled lazily; every `return` ABANDONS the
+     suspended chain mid-stream (no unwind bumps / truncated-wrapper cache
+     writes); `if not assigned: return` fires for U regardless of
+     remaining path. This alone was ~300 pandas lines (tuple-target
+     `ts.index, ts.columns = rng, rng` stale-[U] cluster from phase 9).
+     (d) **model-attr infer hops**: objectmodel attrs returned as FRESH
+     NODES (ClassModel __name__/__qualname__/__module__/__doc__/__mro__/
+     __bases__/__dict__/__annotations__, FormattedValue's `Const("")`
+     spec) get a full NodeNG.infer hop via model_hop_node (fresh synth
+     node + redirect; bump/cap/cache exactly like astroid); Proxy results
+     (attr___call__, mro, __subclasses__) stay hop-free; __class__ hops
+     on the REAL object_type node.
+     (e) **single-pull/abandonment parity batch**: Dict.getitem lazy key
+     scan (`return value` abandons the key generator), helpers.object_len
+     (`next(igetattr("__len__"))` + `next(inferred, None)`; empty result
+     -> Const 0), PartialFunction.__init__ SECOND fresh
+     `next(wrapped.infer())` (+ nested Partial filled-arg merge),
+     _get_namedtuple_fields SECOND fresh `next(args[1].infer())` +
+     field_names keyword fallback + BaseContainer gate, infer_enum's
+     any() stopping at the first enum.Enum ClassDef.
+     (f) **class_getitem AttributeError parity** (scoped_nodes.py:
+     2575-2595): methods without infer_call_result (e.g. os.PathLike's
+     `__class_getitem__ = classmethod(GenericAlias)` AssignName) raise
+     -> Subscript._infer -> InferenceError (was: swallowed to U);
+     infer_call_result errors propagate.
+     (g) **_wrap_attr BM re-walk** (bases.py:304): BoundMethod IS an
+     UnboundMethod subclass — classmethods from the class-igetattr
+     fallback re-run the FULL un-contexted _is_property walk and re-wrap.
+     (h) **brains**: ctypes + curses module extenders (locals REPLACE,
+     gen_ext_templates.py regenerated — fixes `Class:c_long | c_int`
+     pairs), functional `Enum("X", "a b")` call brain (EnumMeta template
+     per invocation, synthetic class instance), FULL format-spec
+     mini-language for f-string Const folding (fill/align/sign/#/0/width/
+     grouping/precision/types s d b o x X c e E f F g G n % — probe
+     fstring_format_spec.py covers 65 cases), f-string str() folds for
+     bytes/complex/Ellipsis consts.
+     (i) **lambda-in-decorator lookup**: `parent_function.lookup(name)`
+     uses the FUNCTION as filter base node (is_from_decorator doesn't
+     re-fire), so the higher-function-scope fallback resolves params
+     (pytest parametrize lambda cluster, was ERR-vs-U).
+     TOOLS: /tmp/cmp_dumptrace2.py (ENTRY-event + entry-ni comparator —
+     relay-yield prints are tracer artifacts at differing depths and are
+     ignored); trace_gt_ni6.py (= ni5 + `del sys.modules['dump_infer']` —
+     the tracer import polluted sys.modules vs the __main__ cache-warm
+     run, making sys.modules Dict:204 vs 203 a phantom diff).
+     N=1000 differing files/lines: django 12/39, pylfunc 10/15, pandas
+     78/305, salt 13/71, airflow 11/33, sentry 6/16, core 9/19 (total
+     498). REMAINING (by volume): (1) pandas count drift continues
+     (~250 lines): copy_view/test_methods bool tails (GT folds
+     `df.method(copy=copy)` chains one branch further), `[None] * n`
+     binop operand-pull event diffs (values+counts re-sync; cache-state
+     second-order only), asv U-vs-ERR residue. (2) salt zypperpkg
+     `Inst:dict | Dict:0` vs U (18) + ModuleType instance_attrs Dict:9
+     vs Dict:0 (test_path) + ipaddress GT-cap-earlier chains. (3) django
+     as_view __doc__ pair / backend_class __module__ ordering (each
+     needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
+     (irreducible). (5) six.with_metaclass still unwired (no diff
+     evidence at N=1000).
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the

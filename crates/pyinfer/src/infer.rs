@@ -2375,7 +2375,32 @@ fn format_const(c: &ConstValue, spec: &str) -> Option<String> {
         ConstValue::Bool(b) => Some(if *b { "True" } else { "False" }.to_string()),
         ConstValue::Float(f) => Some(pyast::pyrepr::repr_float(*f)),
         ConstValue::None => Some("None".to_string()),
+        // format(obj, "") falls back to str(obj) for the remaining Const
+        // types: bytes/complex/Ellipsis (object.__format__ empty-spec)
+        ConstValue::Bytes(b) => Some(crate::dump::repr_bytes_pub(b)),
+        ConstValue::Complex { real, imag } => Some(complex_str(*real, *imag)),
+        ConstValue::Ellipsis => Some("Ellipsis".to_string()),
         _ => None,
+    }
+}
+
+/// str(complex) — Python prints `1j`, `(1+2j)`, `(-0-1j)` forms; the float
+/// components drop a trailing `.0`
+fn complex_str(real: f64, imag: f64) -> String {
+    let fmt = |f: f64| -> String {
+        let r = pyast::pyrepr::repr_float(f);
+        r.strip_suffix(".0").map(|s| s.to_string()).unwrap_or(r)
+    };
+    let imag_s = fmt(imag);
+    if real == 0.0 && real.is_sign_positive() && !(imag == 0.0 && imag.is_sign_negative()) {
+        format!("{imag_s}j")
+    } else {
+        let real_s = fmt(real);
+        if imag >= 0.0 || imag.is_nan() {
+            format!("({real_s}+{imag_s}j)")
+        } else {
+            format!("({real_s}{imag_s}j)")
+        }
     }
 }
 

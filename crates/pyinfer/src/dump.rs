@@ -261,6 +261,11 @@ fn trim_float(f: f64) -> String {
     r.strip_suffix(".0").map(|s| s.to_string()).unwrap_or(r)
 }
 
+/// public alias for f-string `format(bytes, "")` folding (str(bytes) = repr)
+pub fn repr_bytes_pub(b: &[u8]) -> String {
+    repr_bytes(b)
+}
+
 fn repr_bytes(b: &[u8]) -> String {
     let has_single = b.contains(&b'\'');
     let has_double = b.contains(&b'"');
