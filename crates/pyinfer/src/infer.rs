@@ -1255,13 +1255,18 @@ impl Engine {
             _ => return Flow::err(ErrKind::Inference),
         };
         let mut retval: Option<bool> = None;
-        let lhs_flow = self.infer(GNode { m: node.m, n: left }, &ctx.clone_ctx());
+        // `lhs = list(left_node.infer(context=context))` — the context is
+        // passed AS-IS (node_classes.py:1846-1853): operand path pushes
+        // land on the SHARED context object, so later recursion frames
+        // copied from it inherit the entries (shares_memory-style
+        // self-recursion path blocks)
+        let lhs_flow = self.infer(GNode { m: node.m, n: left }, ctx);
         if lhs_flow.is_err() {
             return Flow { vals: lhs_flow.vals, err: lhs_flow.err };
         }
         let mut lhs = lhs_flow.vals;
         for (op, right) in &ops {
-            let rhs_flow = self.infer(GNode { m: node.m, n: *right }, &ctx.clone_ctx());
+            let rhs_flow = self.infer(GNode { m: node.m, n: *right }, ctx);
             if rhs_flow.is_err() {
                 return Flow { vals: Vec::new(), err: rhs_flow.err };
             }

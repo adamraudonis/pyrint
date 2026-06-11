@@ -1112,9 +1112,9 @@ impl Engine {
         // (inference side effect!) whose infer_call_result yields the
         // DictItems/DictKeys/DictValues object — see the qname carve-out in
         // bound_method_infer_call_result_to.
-        if matches!(owner, Value::SynthDict { .. })
-            || matches!(owner, Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })))
-        {
+        let dict_owner = matches!(owner, Value::SynthDict { .. })
+            || matches!(owner, Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })));
+        if dict_owner {
             if matches!(name, "items" | "keys" | "values") {
                 let dict_cls = self.builtins().dict;
                 let sym = self.sym(name);
@@ -1133,11 +1133,28 @@ impl Engine {
                 }
             }
         }
+        // Dict literals/instances use DictModel (objects.py:256, set on the
+        // Dict node class), which has ONLY __class__ + items/keys/values —
+        // __module__/__doc__/__dict__ fall through to the class lookup
+        // (`{}.__doc__` is an InferenceError in astroid).
+        if dict_owner && matches!(name, "__module__" | "__doc__" | "__dict__") {
+            return None;
+        }
         match name {
             "__class__" => Some(Value::Node(cls)),
-            "__module__" => Some(Value::SynthConst(Rc::new(ConstValue::Str(
-                self.md(cls.m).name.clone().into(),
-            )))),
+            // InstanceModel.attr___module__ = Const(self._instance.root()
+            // .qname()) (objectmodel.py:735-737): for node-backed instances
+            // (Const/List/Tuple/Set literals subclass bases.Instance!) the
+            // root is the module CONTAINING THE LITERAL, not the proxied
+            // builtin class's module (django: `backend_class = None` →
+            // None.__module__ == 'tests.mail.test_backends')
+            "__module__" => {
+                let modname = match owner {
+                    Value::Node(g) => self.md(g.m).name.clone(),
+                    _ => self.md(cls.m).name.clone(),
+                };
+                Some(Value::SynthConst(Rc::new(ConstValue::Str(modname.into()))))
+            }
             // InstanceModel.attr___doc__ (objectmodel.py:744-746):
             // Const(getattr(self._instance.doc_node, "value", None)) —
             // Instance proxies doc_node to the CLASS docstring
