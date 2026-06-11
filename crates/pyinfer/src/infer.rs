@@ -991,7 +991,7 @@ impl Engine {
         };
         let _ = ctx;
         if has_decorators && self.is_property(node, None) {
-            Flow::one(Value::Property { func: node })
+            Flow::one(Value::Property { func: node, synth: false })
         } else {
             Flow::one(Value::Node(node))
         }
@@ -1059,18 +1059,43 @@ impl Engine {
         if !has_unpack {
             return Flow::one(Value::Node(node));
         }
-        // _infer_map (node_classes.py:2485-2506) with update-replace
-        // semantics keyed by as_string; we key Const values by value and
-        // others by identity.
+        drop(md);
+        match self.dict_infer_map(node, ctx) {
+            Ok(out) => Flow::one(Value::SynthDict {
+                items: Rc::new(out),
+            }),
+            Err(e) => Flow::err(e),
+        }
+    }
+
+    /// Dict._infer_map (node_classes.py:2485-2506): safe_infer of EVERY
+    /// key/value (an ambiguous or Uninferable element raises
+    /// InferenceError); `**expr` unpacks recurse into the unpacked dict's
+    /// OWN _infer_map (its items get safe-inferred too — an IfExp value
+    /// inside the source dict poisons the whole literal, pandas to_latex).
+    /// _update_with_replacement keys by key.as_string(): the slot keeps
+    /// its FIRST position, later duplicates overwrite (key, value) in
+    /// place.
+    fn dict_infer_map(
+        &self,
+        node: GNode,
+        ctx: &Rc<Ctx>,
+    ) -> Result<Vec<(Value, Value)>, ErrKind> {
+        let md = self.md(node.m);
+        let items: Vec<(NodeId, NodeId)> = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Dict { items } => items.clone(),
+            _ => return Err(ErrKind::Inference),
+        };
         let mut out: Vec<(Value, Value)> = Vec::new();
-        let mut replace = |k: Value, v: Value, out: &mut Vec<(Value, Value)>| {
+        let replace = |k: Value, v: Value, out: &mut Vec<(Value, Value)>| {
             let kc = self.value_const(&k);
             if let Some(kc) = kc {
                 if let Some(pos) = out
                     .iter()
                     .position(|(ek, _)| self.value_const(ek).as_ref() == Some(&kc))
                 {
-                    out.remove(pos);
+                    out[pos] = (k, v);
+                    return;
                 }
             }
             out.push((k, v));
@@ -1079,15 +1104,33 @@ impl Engine {
             if matches!(md.tree.nodes[k.idx()].kind, NodeKind::DictUnpack) {
                 let inner = self.safe_infer(GNode { m: node.m, n: v }, ctx);
                 match inner {
-                    Some(val) => match self.value_dict_items(&val) {
-                        Some(pairs) => {
-                            for (ik, iv) in pairs {
-                                replace(ik, iv, &mut out);
-                            }
+                    Some(Value::Node(g))
+                        if self.kind_is(g, |kd| matches!(kd, NodeKind::Dict { .. })) =>
+                    {
+                        // double_starred._infer_map(context) — recursive
+                        let pairs = self.dict_infer_map(g, ctx)?;
+                        for (ik, iv) in pairs {
+                            replace(ik, iv, &mut out);
                         }
-                        None => return Flow::err(ErrKind::Inference),
-                    },
-                    None => return Flow::err(ErrKind::Inference),
+                    }
+                    Some(val @ Value::SynthDict { .. }) => {
+                        // an already-folded synthetic Dict: its items are
+                        // pre-inferred values (astroid's fresh Dict of
+                        // EvaluatedObject-like pairs)
+                        match self.value_dict_items(&val) {
+                            Some(pairs) => {
+                                for (ik, iv) in pairs {
+                                    if ik.is_uninferable() || iv.is_uninferable() {
+                                        return Err(ErrKind::Inference);
+                                    }
+                                    replace(ik, iv, &mut out);
+                                }
+                            }
+                            None => return Err(ErrKind::Inference),
+                        }
+                    }
+                    // `if not isinstance(double_starred, Dict): raise`
+                    _ => return Err(ErrKind::Inference),
                 }
             } else {
                 let ik = self.safe_infer(GNode { m: node.m, n: k }, ctx);
@@ -1095,17 +1138,15 @@ impl Engine {
                 match (ik, iv) {
                     (Some(ik), Some(iv)) => {
                         if ik.is_uninferable() || iv.is_uninferable() {
-                            return Flow::err(ErrKind::Inference);
+                            return Err(ErrKind::Inference);
                         }
                         replace(ik, iv, &mut out);
                     }
-                    _ => return Flow::err(ErrKind::Inference),
+                    _ => return Err(ErrKind::Inference),
                 }
             }
         }
-        Flow::one(Value::SynthDict {
-            items: Rc::new(out),
-        })
+        Ok(out)
     }
 
     // ---------- BoolOp (§16.4) ----------

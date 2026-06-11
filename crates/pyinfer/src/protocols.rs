@@ -704,7 +704,7 @@ impl Engine {
                 Value::Node(g) => Some(*g),
                 Value::BoundMethod { func, .. }
                 | Value::UnboundMethod { func }
-                | Value::Property { func }
+                | Value::Property { func, .. }
                 | Value::Partial { func, .. } => Some(*func),
                 _ => None,
             });
@@ -2775,6 +2775,10 @@ fn num_of(c: &ConstValue) -> Option<f64> {
     match c {
         ConstValue::Bool(b) => Some(if *b { 1.0 } else { 0.0 }),
         ConstValue::Int(IntValue::Small(i)) => Some(*i as f64),
+        // big ints participate in float arithmetic like CPython's
+        // int->float conversion (correctly rounded; 2**63 / 86.4e12 folds
+        // to 106751.99116730064 in pandas test_to_timedelta)
+        ConstValue::Int(IntValue::Big(s)) => s.parse::<f64>().ok(),
         ConstValue::Float(f) => Some(*f),
         _ => None,
     }

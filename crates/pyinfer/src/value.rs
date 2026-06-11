@@ -80,8 +80,11 @@ pub enum Value {
         is_async: bool,
         call_ctx: Rc<crate::ctx::Ctx>,
     },
-    /// objects.Property wrapping a FunctionDef
-    Property { func: GNode },
+    /// objects.Property wrapping a FunctionDef. `synth` marks the
+    /// property(...) call-tip product (objects.Property named "<property>"
+    /// under SYNTHETIC_ROOT — its qname is the synthetic root's, NOT the
+    /// wrapped function's).
+    Property { func: GNode, synth: bool },
     /// objects.PartialFunction (functools.partial brain)
     Partial {
         func: GNode,
@@ -155,7 +158,7 @@ pub fn value_key(v: &Value) -> ValueKey {
             is_async,
             call_ctx,
         } => ValueKey::Generator(*func, *is_async, Rc::as_ptr(call_ctx) as usize),
-        Value::Property { func } => ValueKey::Property(*func),
+        Value::Property { func, .. } => ValueKey::Property(*func),
         Value::Partial { func, .. } => ValueKey::Partial(*func),
         Value::Super {
             mro_pointer,

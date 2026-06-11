@@ -1021,7 +1021,12 @@ impl Engine {
     fn tip_type_subscript(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
         let sym = self.sym("type");
         let scope = self.scope(node);
-        let (found_scope, _) = self.scope_lookup(scope, node, sym, 0);
+        // `node.scope().lookup("type")` (brain_type.py:55) — LookupMixIn
+        // .lookup uses SELF as the filter node: the SCOPE node, not the
+        // subscripted Name! A class-level `type: type[X] = ...` binding IS
+        // visible from the class node's own perspective, so node_scope is
+        // the ClassDef -> UseInferenceDefault (pandas CategoricalDtype).
+        let (found_scope, _) = self.scope_lookup(scope, scope, sym, 0);
         if !self.kind_is(found_scope, |k| matches!(k, NodeKind::Module(_)))
             || self.md(found_scope.m).name != "builtins"
         {
@@ -1391,7 +1396,7 @@ impl Engine {
                         // parent=SYNTHETIC_ROOT) — qname is the synthetic
                         // root's, not the function's
                         self.synth_props.borrow_mut().insert(*g);
-                        Some(Flow::one(Value::Property { func: *g }))
+                        Some(Flow::one(Value::Property { func: *g, synth: true }))
                     }
                     _ => None,
                 }

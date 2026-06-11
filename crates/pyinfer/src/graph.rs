@@ -238,6 +238,11 @@ pub struct Engine {
     /// (brain_builtin_inference.py:610-647) -> qname
     /// "__astroid_synthetic.<property>" regardless of the function.
     pub synth_props: RefCell<FxHashSet<GNode>>,
+    /// PropertyModel attr_fget/attr_fset accessors (objectmodel.py:921-986):
+    /// fresh PropertyFuncAccessor FunctionDefs whose infer_call_result
+    /// delegates to the wrapped function (after a caller-arg-count gate).
+    /// accessor synth node -> (wrapped function, required caller argc)
+    pub prop_accessors: RefCell<FxHashMap<GNode, (GNode, usize)>>,
     /// functions decorated with functools.lru_cache get LruWrappedModel
     /// special_attributes (brain_functools.py:133-142 predicate, raw
     /// transform returns None -> no wipe)
@@ -330,6 +335,7 @@ impl Engine {
             implicit_locals: RefCell::new(FxHashMap::default()),
             implicit_owner: RefCell::new(FxHashMap::default()),
             synth_props: RefCell::new(FxHashSet::default()),
+            prop_accessors: RefCell::new(FxHashMap::default()),
             lru_wrapped: RefCell::new(FxHashSet::default()),
             lru_cache_clear_fn: RefCell::new(None),
             hidden_classes: RefCell::new(FxHashSet::default()),

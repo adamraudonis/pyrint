@@ -193,8 +193,8 @@ pub fn render(engine: &Engine, v: &Value) -> String {
                 k => format!("Other:{}", crate::treeutil::kind_label(k)),
             }
         }
-        Value::Property { func } => {
-            if engine.synth_props.borrow().contains(func) {
+        Value::Property { func, synth } => {
+            if *synth {
                 "Prop:__astroid_synthetic.<property>".to_string()
             } else {
                 format!("Prop:{}", engine.qname(*func))

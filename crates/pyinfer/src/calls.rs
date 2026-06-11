@@ -329,6 +329,25 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
         sink: &mut Sink,
     ) -> End {
+        // PropertyFuncAccessor.infer_call_result (objectmodel.py:926-939 /
+        // 957-972): gate on the caller's raw arg count, then delegate to
+        // the wrapped function
+        let accessor = self.prop_accessors.borrow().get(&func).copied();
+        if let Some((target, argc)) = accessor {
+            if let Some(c) = caller {
+                let nargs = {
+                    let md = self.md(c.m);
+                    match &md.tree.nodes[c.n.idx()].kind {
+                        NodeKind::Call { args, .. } => args.len(),
+                        _ => 0,
+                    }
+                };
+                if nargs != argc {
+                    return End::Raised(ErrKind::Inference);
+                }
+            }
+            return self.function_infer_call_result_to(target, caller, ctx, sink);
+        }
         let _ = caller;
         let ctx = match ctx {
             Some(c) => Rc::clone(c),
@@ -1325,7 +1344,7 @@ impl Engine {
                 Value::Node(g) => self.node_name(*g),
                 Value::BoundMethod { func, .. }
                 | Value::UnboundMethod { func }
-                | Value::Property { func }
+                | Value::Property { func, .. }
                 | Value::Partial { func, .. } => self.node_name(*func),
                 _ => None,
             });

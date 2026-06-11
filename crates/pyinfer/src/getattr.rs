@@ -146,8 +146,12 @@ impl Engine {
             Value::UnboundMethod { func } => {
                 stream_result(self.method_igetattr(*func, None, name, ctx), sink)
             }
-            Value::Property { func } | Value::Partial { func, .. } => {
+            Value::Property { func, .. } => {
                 stream_result(self.property_igetattr(owner, *func, name, ctx), sink)
+            }
+            // PartialFunction is a plain FunctionDef subclass: FunctionModel
+            Value::Partial { func, .. } => {
+                stream_result(self.function_igetattr(*func, name, ctx), sink)
             }
             Value::Super { .. } => self.super_igetattr_to(owner, name, ctx, sink),
             Value::DictItems(_) | Value::DictKeys(_) | Value::DictValues(_) => {
@@ -573,7 +577,7 @@ impl Engine {
                     }
                     NV::V(Value::BoundMethod { func, .. })
                     | NV::V(Value::UnboundMethod { func })
-                    | NV::V(Value::Property { func })
+                    | NV::V(Value::Property { func, .. })
                     | NV::V(Value::Partial { func, .. }) => {
                         self.parent(*func).map(|p| self.scope(p))
                     }
@@ -669,7 +673,7 @@ impl Engine {
                     } else {
                         sink(inferred)
                     }
-                } else if let Value::Property { func } = &inferred {
+                } else if let Value::Property { func, .. } = &inferred {
                     let func = *func;
                     if !class_context {
                         if ctx.callcontext.borrow().is_none() && setter.is_none() {
@@ -1352,6 +1356,10 @@ impl Engine {
         self.function_igetattr(func, name, ctx)
     }
 
+    /// objects.Property getattr: special_attributes is PropertyModel ONLY
+    /// (fget/fset/setter/getter/deleter + ObjectModel __new__/__init__) —
+    /// anything else raises AttributeInferenceError -> InferenceError
+    /// (`prop.__doc__` is ERR, unlike plain functions).
     fn property_igetattr(
         &self,
         owner: &Value,
@@ -1359,33 +1367,75 @@ impl Engine {
         name: GSym,
         ctx: Option<&Rc<Ctx>>,
     ) -> Result<Flow, ErrKind> {
+        let _ = owner;
         let name_str = self.sname(name);
+        let hop = |synth: GNode| -> Result<Flow, ErrKind> {
+            // model result through _infer_stmts -> stmt.infer hop (+1)
+            let c = match ctx {
+                Some(c) => Rc::clone(c),
+                None => Ctx::new(),
+            };
+            Ok(self.infer(synth, &c))
+        };
         match name_str.as_str() {
-            "fget" => return Ok(Flow::one(Value::Node(func))),
-            "setter" | "deleter" | "getter" => {
-                // PropertyModel attr_setter/deleter/getter
-                // (objectmodel.py:896-921 + 988-998): a FRESH empty
-                // FunctionDef named after the accessor, parented to the
-                // Property (qname = <property qname>.<accessor>).
-                // The model result goes through _infer_stmts ->
-                // stmt.infer — a full hop on the fresh node (+1).
-                let _ = owner;
-                let synth = self.alloc_synth_funcdef(&name_str, func);
-                let c = match ctx {
-                    Some(c) => Rc::clone(c),
-                    None => Ctx::new(),
-                };
-                return Ok(self.infer(synth, &c));
+            "fget" => {
+                // attr_fget (objectmodel.py:921-950): PropertyFuncAccessor
+                // named 'fget' parented to the Property (qname composes as
+                // <property qname>.fget); calling it requires exactly ONE
+                // caller arg and delegates to the wrapped function.
+                let synth = self.alloc_synth_funcdef("fget", func);
+                self.prop_accessors.borrow_mut().insert(synth, (func, 1));
+                hop(synth)
             }
             "fset" => {
-                // attr_fset finds the @<name>.setter sibling; keep the
-                // function approximation (rarely dumped)
-                let _ = owner;
-                return Ok(Flow::one(Value::Node(func)));
+                // attr_fset (objectmodel.py:952-986): find the sibling
+                // `@<name>.setter`-decorated def with the same name; no
+                // setter -> InferenceError.
+                let fname = self.node_name(func).unwrap_or_default();
+                let parent = self.parent(func);
+                let mut setter: Option<GNode> = None;
+                if let Some(p) = parent {
+                    let kids: Vec<GNode> = {
+                        let md = self.md(p.m);
+                        let mut buf = Vec::new();
+                        md.tree.push_children(p.n, &mut buf);
+                        buf.into_iter().map(|n| GNode { m: p.m, n }).collect()
+                    };
+                    for child in kids {
+                        if self.node_name(child).as_deref() != Some(fname.as_str()) {
+                            continue;
+                        }
+                        for dec in self.decoratornames(child, None).into_iter().flatten() {
+                            if dec.ends_with(&format!("{fname}.setter")) {
+                                setter = Some(child);
+                                break;
+                            }
+                        }
+                        if setter.is_some() {
+                            break;
+                        }
+                    }
+                }
+                match setter {
+                    Some(s) => {
+                        let synth = self.alloc_synth_funcdef("fset", func);
+                        self.prop_accessors.borrow_mut().insert(synth, (s, 2));
+                        hop(synth)
+                    }
+                    None => Err(ErrKind::Inference),
+                }
             }
-            _ => {}
+            "setter" | "deleter" | "getter" => {
+                // PropertyModel attr_setter/deleter/getter
+                // (objectmodel.py:988-998): a FRESH empty FunctionDef named
+                // after the accessor, parented to the Property.
+                let synth = self.alloc_synth_funcdef(&name_str, func);
+                hop(synth)
+            }
+            // ObjectModel base attrs still resolve (__new__/__init__ BMs)
+            "__new__" | "__init__" => self.function_igetattr(func, name, ctx),
+            _ => Err(ErrKind::Inference),
         }
-        self.function_igetattr(func, name, ctx)
     }
 
     fn function_model_attr(&self, func: GNode, name: &str) -> Option<Value> {
@@ -1582,7 +1632,7 @@ impl Engine {
                                 })
                             }
                         }
-                        Value::Property { func } => {
+                        Value::Property { func, .. } => {
                             let func = *func;
                             let mut any = false;
                             let mut inner_stop = false;
@@ -2376,7 +2426,7 @@ impl Engine {
             Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(self.qname(*cls)),
             Value::BoundMethod { func, .. }
             | Value::UnboundMethod { func }
-            | Value::Property { func }
+            | Value::Property { func, .. }
             | Value::Partial { func, .. } => Some(self.qname(*func)),
             Value::Generator { is_async, .. } => Some(if *is_async {
                 "builtins.async_generator".to_string()

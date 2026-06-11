@@ -13,3 +13,6 @@ L = 2 ** -1
 M = (2**70) + (2**70)
 N = True ** 3
 print(A, B, C, D, E, F, G, H, I, J, K, L, M, N)
+ONEDAY_NS = 1e9 * 60 * 60 * 24
+TDMAX = 2**63 / ONEDAY_NS
+print(TDMAX, TDMAX - 0.005, -TDMAX + 0.005)
