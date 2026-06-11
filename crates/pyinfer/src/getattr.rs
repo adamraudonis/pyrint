@@ -366,6 +366,9 @@ impl Engine {
         class_context: bool,
     ) -> Result<Vec<NV>, ErrKind> {
         let name_str = self.sname(name);
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            eprintln!("GETATTR {} .{} cc={}", self.qname(cls), name_str, class_context);
+        }
         if name_str.is_empty() {
             return Err(ErrKind::Attribute);
         }
@@ -460,6 +463,9 @@ impl Engine {
             entry.1 = tick; // refresh recency (lru_cache hit)
             return entry.0.as_ref().clone();
         }
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            eprintln!("MLA {} .{}", self.qname(cls), self.sname(name));
+        }
         let out = self.metaclass_lookup_attribute_uncached(cls, name, ctx);
         let mut cache = self.metalookup_cache.borrow_mut();
         if cache.len() >= 1024 {
@@ -478,6 +484,43 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
     ) -> Vec<NV> {
         let mut out = Vec::new();
+        // scoped_nodes.py:2378 — `attrs = set()` + attrs.update(...): python
+        // SET semantics dedup by OBJECT IDENTITY (NodeNG/Proxy define no
+        // __eq__). Both metaclass walks (implicit type + declared) yielding
+        // the SAME node object (e.g. `__class__` resolving to the one
+        // builtins.type ClassDef) collapse to ONE entry — the consumer's
+        // _infer_stmts then pulls it once, not twice (the StrEnum
+        // metacls.__new__ +4-bump cascade). Fresh objects (BoundMethods
+        // constructed below, per-materialization instances) never dedup.
+        let mut seen: std::collections::HashSet<crate::infer::DedupKey> =
+            std::collections::HashSet::new();
+        let mut push = |out: &mut Vec<NV>, v: NV| {
+            let key = match &v {
+                NV::V(val) => match val {
+                    Value::Node(g) => Some(crate::infer::DedupKey::Node(*g)),
+                    Value::Uninferable => Some(crate::infer::DedupKey::Uninferable),
+                    // python id(): InstId is fresh per materialization and
+                    // preserved through clones/cache replays
+                    Value::Inst { id, .. } => Some(crate::infer::DedupKey::ExcId(*id)),
+                    Value::ExcInst { id, .. } => Some(crate::infer::DedupKey::ExcId(*id)),
+                    Value::BoundMethod { func, bound } => Some(crate::infer::DedupKey::BMId(
+                        *func,
+                        Rc::as_ptr(bound) as *const () as usize,
+                    )),
+                    Value::Generator { call_ctx, .. } => Some(crate::infer::DedupKey::Ptr(
+                        Rc::as_ptr(call_ctx) as *const () as usize,
+                    )),
+                    _ => None, // treated as always-unique (fresh objects)
+                },
+                NV::N(g) => Some(crate::infer::DedupKey::Node(*g)),
+            };
+            if let Some(k) = key {
+                if !seen.insert(k) {
+                    return;
+                }
+            }
+            out.push(v);
+        };
         let implicit = self.builtins().type_;
         // scoped_nodes.py:2380 — `context = copy_context(context)` BEFORE
         // metaclass(): lookupname is reset for the whole metaclass chain
@@ -497,6 +540,15 @@ impl Engine {
             }
         }
         for meta in metaclasses {
+            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                eprintln!(
+                    "GAFM self={} ({:?},{:?}) meta={} ({:?},{:?}) implicit=({:?},{:?}) .{}",
+                    self.qname(cls), cls.m, cls.n,
+                    self.qname(meta), meta.m, meta.n,
+                    implicit.m, implicit.n,
+                    self.sname(name)
+                );
+            }
             if let Ok(attrs) = self.class_getattr(meta, name, ctx, true) {
                 // _get_attribute_from_metaclass (scoped_nodes.py:2388-2415):
                 // `for attr in bases._infer_stmts(attrs, context, frame=cls)`
@@ -514,19 +566,19 @@ impl Engine {
                                 FType::ClassMethod => {
                                     // BoundMethod(attr, get_wrapping_class(attr) or self)
                                     let frame = self.wrapping_class_of(*g).unwrap_or(cls);
-                                    out.push(NV::V(Value::BoundMethod {
+                                    push(&mut out, NV::V(Value::BoundMethod {
                                         func: *g,
                                         bound: Rc::new(Value::Node(frame)),
                                     }));
                                 }
-                                FType::StaticMethod => out.push(NV::V(attr.clone())),
-                                _ => out.push(NV::V(Value::BoundMethod {
+                                FType::StaticMethod => push(&mut out, NV::V(attr.clone())),
+                                _ => push(&mut out, NV::V(Value::BoundMethod {
                                     func: *g,
                                     bound: Rc::new(Value::Node(cls)),
                                 })),
                             }
                         }
-                        _ => out.push(NV::V(attr.clone())),
+                        _ => push(&mut out, NV::V(attr.clone())),
                     }
                 }
             }
@@ -653,6 +705,21 @@ impl Engine {
                 }
                 attributes = filtered;
             }
+        }
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            let descr: Vec<String> = attributes
+                .iter()
+                .map(|a| match a {
+                    NV::N(g) => format!("N:{}", self.qname(*g)),
+                    NV::V(v) => format!("V:{}", crate::dump::render(self, v)),
+                })
+                .collect();
+            eprintln!(
+                "IGA-ATTRS {} .{} = [{}]",
+                self.qname(cls),
+                self.sname(name),
+                descr.join(", ")
+            );
         }
         let functions: Vec<GNode> = attributes
             .iter()

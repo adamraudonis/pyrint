@@ -132,6 +132,24 @@ impl Loader {
         if v.is_null() {
             return None;
         }
+        // {"k":"Ref","r":i} — the SAME astroid object serialized earlier
+        // (gen_snapshot.ser dedups by id()): astroid genuinely attaches one
+        // node at several tree positions (builtins.type in every exception's
+        // __class__ locals, OSError==IOError body re-appends), and object
+        // IDENTITY is load-bearing (`cls != self` metaclass guards, set()
+        // dedup, lru keys). Refs always point backwards in ser order.
+        if v["k"].as_str() == Some("Ref") {
+            let r = v["r"].as_u64()?;
+            return Some(match self.idmap.get(&r) {
+                Some(&n) => n,
+                None => {
+                    debug_assert!(false, "forward snapshot Ref {r}");
+                    let p = self.placeholder();
+                    self.idmap.insert(r, p);
+                    p
+                }
+            });
+        }
         let id = self.placeholder();
         if let Some(i) = v["i"].as_u64() {
             self.idmap.insert(i, id);
@@ -398,8 +416,9 @@ impl Loader {
 
 pub fn load_snapshot(json: &str) -> Option<SnapModule> {
     let v: J = serde_json::from_str(json).ok()?;
+    let modname = v["modname"].as_str().unwrap_or("").to_string();
     let mut loader = Loader {
-        modname: v["modname"].as_str().unwrap_or("").to_string(),
+        modname,
         nodes: Vec::new(),
         interner: Interner::default(),
         idmap: FxHashMap::default(),
@@ -412,6 +431,21 @@ pub fn load_snapshot(json: &str) -> Option<SnapModule> {
         args_unknown: FxHashMap::default(),
     };
     loader.load(&v, NodeId::MODULE)?;
+    // parent fixups: a node's serialization position differs from astroid's
+    // final .parent (add_local_node overwrites; last attach wins) — e.g.
+    // builtins.type first serialized inside ArithmeticError's __class__
+    // locals xtra, while its astroid parent is the builtins Module.
+    if let Some(pf) = v["parfix"].as_object() {
+        for (i, pi) in pf {
+            if let (Ok(i), Some(pi)) = (i.parse::<u64>(), pi.as_u64()) {
+                if let (Some(&n), Some(&p)) =
+                    (loader.idmap.get(&i), loader.idmap.get(&pi))
+                {
+                    loader.nodes[n.idx()].parent = p;
+                }
+            }
+        }
+    }
     let resolve = |entries: Vec<(NodeId, Vec<(String, Vec<u64>)>)>,
                    idmap: &FxHashMap<u64, NodeId>| {
         entries

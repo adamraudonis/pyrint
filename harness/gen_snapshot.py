@@ -33,6 +33,7 @@ OUT_DIR = os.path.join(
 
 COUNTER = 0
 NODE_IDS = {}
+PARENT_FIX = []
 
 
 def const_value(v):
@@ -107,15 +108,29 @@ def _empty_inf(node):
     return out
 
 
-def ser(node):
+def ser(node, pos_parent=None):
     global COUNTER
     if node is None:
         return None
     if isinstance(node, (list, tuple)):
-        return [ser(n) for n in node]
+        return [ser(n, pos_parent) for n in node]
+    if id(node) in NODE_IDS:
+        # the SAME astroid object reachable from several tree positions
+        # (raw_building re-attaches: builtins.type in every exception's
+        # __class__ locals, OSError==IOError body re-appends). Identity is
+        # load-bearing (`cls != self` metaclass guards, set() dedup, lru
+        # keys) — emit a reference, never a second copy. Distinct raw
+        # builds that happen to be content-identical (sys.excepthook vs
+        # sys.__excepthook__) have different id()s and stay separate.
+        return {"k": "Ref", "r": NODE_IDS[id(node)]}
     d = {"k": type(node).__name__, "i": COUNTER}
     NODE_IDS[id(node)] = COUNTER
     COUNTER += 1
+    # astroid's final .parent (add_local_node overwrites on every attach;
+    # the last attach wins) can differ from this serialization position —
+    # record the discrepancy for the loader's parent fixup.
+    if pos_parent is not None and getattr(node, "parent", None) is not pos_parent:
+        PARENT_FIX.append((d["i"], id(node.parent)))
     if getattr(node, "lineno", None) is not None:
         d["pos"] = [node.lineno, getattr(node, "col_offset", 0) or 0]
     # kind-specific scalar fields
@@ -147,7 +162,7 @@ def ser(node):
     # children in _astroid_fields order
     ch = {}
     for field in node._astroid_fields:
-        ch[field] = ser(getattr(node, field))
+        ch[field] = ser(getattr(node, field), node)
     if ch:
         d["ch"] = ch
     # scope locals (after children so ids exist)
@@ -163,7 +178,7 @@ def ser(node):
             ids = []
             for v in vals:
                 if id(v) not in NODE_IDS:
-                    xtra.append(ser(v))
+                    xtra.append(ser(v, node))
                 ids.append(NODE_IDS[id(v)])
             loc[name] = ids
         d["locals"] = loc
@@ -176,7 +191,7 @@ def ser(node):
             ids = []
             for v in vals:
                 if id(v) not in NODE_IDS:
-                    xtra_ia.append(ser(v))
+                    xtra_ia.append(ser(v, node))
                 ids.append(NODE_IDS[id(v)])
             ia[name] = ids
         d["iattrs"] = ia
@@ -187,9 +202,10 @@ def ser(node):
 
 
 def snapshot_module(modname):
-    global COUNTER, NODE_IDS
+    global COUNTER, NODE_IDS, PARENT_FIX
     COUNTER = 0
     NODE_IDS = {}
+    PARENT_FIX = []
     try:
         mod = MANAGER.ast_from_module_name(modname)
     except Exception as e:  # noqa: BLE001
@@ -201,6 +217,14 @@ def snapshot_module(modname):
     data = ser(mod)
     data["modname"] = modname
     data["pure_python"] = bool(mod.pure_python)
+    # parent fixups: serialization position != astroid's final .parent
+    # (resolved here because the parent may serialize after the child)
+    parfix = {}
+    for i, pid in PARENT_FIX:
+        if pid in NODE_IDS:
+            parfix[str(i)] = NODE_IDS[pid]
+    if parfix:
+        data["parfix"] = parfix
     return data
 
 
