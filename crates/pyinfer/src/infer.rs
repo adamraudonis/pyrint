@@ -665,6 +665,21 @@ impl Engine {
                             .all(|c| self.constraint_satisfied(c, &v, &ctx))
                         {
                             constraint_failed = true;
+                            // the _infer_stmts for-loop pulls the stmt
+                            // generator AGAIN after the rejected value —
+                            // the post-yield bump and the cache write of
+                            // the synthetic hop still run (node_ng.py
+                            // wrapper resumes past the yield)
+                            if !is_replay {
+                                if let Some(k) = hop_key {
+                                    self.pin_value_identity(&v);
+                                    if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                                        self.pin_value_identity(bn);
+                                    }
+                                    self.synth_hop_cache.borrow_mut().insert(k);
+                                    ctx.bump_inferred();
+                                }
+                            }
                             continue;
                         }
                     }
