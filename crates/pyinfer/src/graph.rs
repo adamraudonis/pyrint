@@ -270,6 +270,10 @@ pub struct Engine {
     /// transform start, read WITHOUT inference by
     /// _find_arguments_from_base_classes / renders)
     pub is_dataclass_flag: RefCell<FxHashSet<GNode>>,
+    /// lru-wrapped function -> the `_CacheInfo(0, 0, 0, 0)` template Call
+    /// from the most recent attr_cache_info access (brain_functools.py:
+    /// 38-56) — CacheInfoBoundMethod.infer_call_result safe_infers it
+    pub cacheinfo_calls: RefCell<FxHashMap<GNode, GNode>>,
     /// generated dataclass __init__ FunctionDef -> structured param data
     /// (pos-or-kw, kw-only) of (name, annotation_str, default_str) — stands
     /// in for Arguments._get_arguments_data (node_classes.py:861-925) on the
@@ -369,6 +373,7 @@ impl Engine {
             dataclass_field_calls: RefCell::new(FxHashSet::default()),
             is_dataclass_flag: RefCell::new(FxHashSet::default()),
             dataclass_init_params: RefCell::new(FxHashMap::default()),
+            cacheinfo_calls: RefCell::new(FxHashMap::default()),
             unattached_unknown: RefCell::new(None),
             known_bases_cache: RefCell::new(FxHashMap::default()),
             synth_hop_cache: RefCell::new(FxHashSet::default()),

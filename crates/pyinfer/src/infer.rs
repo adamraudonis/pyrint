@@ -56,6 +56,12 @@ pub enum DedupKey {
     /// ExceptionInstance object identity (InstId is fresh per
     /// materialization, preserved through clones/cache replay)
     ExcId(crate::value::InstId),
+    /// BoundMethod object identity: every construction site wraps `bound`
+    /// in a FRESH Rc, and cache replays clone the value (sharing the Rc) —
+    /// so (func, bound-Rc-ptr) mirrors astroid's id(BoundMethod): replays
+    /// dedup in path_wrapper, fresh materializations don't (the walrus
+    /// double-stmt `BM | BM` collapse, update/__init__ latest_version).
+    BMId(GNode, usize),
 }
 
 /// path_wrapper dedup identity (decorators.py:25-54): exact-class Instance
@@ -82,6 +88,10 @@ pub fn dedup_key(v: &Value) -> Option<DedupKey> {
         // (bases.py:698) and shared by replay clones.
         Value::Generator { call_ctx, .. } => {
             Some(DedupKey::Ptr(std::rc::Rc::as_ptr(call_ctx) as usize))
+        }
+        // BoundMethod identity via the per-construction bound Rc
+        Value::BoundMethod { func, bound } => {
+            Some(DedupKey::BMId(*func, std::rc::Rc::as_ptr(bound) as *const () as usize))
         }
         _ => None,
     }
@@ -1243,10 +1253,20 @@ impl Engine {
             return Flow::err(ErrKind::Inference);
         }
         let shortcircuit = op.as_ref() == "or";
-        // infer each operand fully (node_classes.py:1655-1663)
+        // infer each operand fully (node_classes.py:1655-1663). The
+        // try/except around the comprehension only covers generator
+        // CREATION (which can't raise); itertools.product drains the
+        // generators OUTSIDE it, so a mid-drain InferenceError PROPAGATES
+        // out of BoolOp._infer (the already-pulled values are discarded —
+        // their counter burns persist). django get_system_encoding:
+        // `locale.getlocale()[1] or "ascii"` -> whole BoolOp ERR -> the
+        // consuming _infer_stmts yields U.
         let mut inferred_ops: Vec<Vec<Value>> = Vec::new();
         for v in &values {
             let f = self.infer(GNode { m: node.m, n: *v }, ctx);
+            if let Some(e) = f.err {
+                return Flow::err(e);
+            }
             if f.vals.is_empty() {
                 return Flow::err(ErrKind::Inference);
             }

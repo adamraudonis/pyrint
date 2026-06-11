@@ -257,6 +257,19 @@ impl Engine {
                 }
             }
             Value::BoundMethod { func, bound } => {
+                // CacheInfoBoundMethod.infer_call_result (brain_functools.py
+                // 45-54): yields safe_infer(cache_info template) — the BM is
+                // recognizable by bound == the function itself (only the
+                // attr_cache_info path builds that shape).
+                if matches!(&**bound, Value::Node(b) if b == func) {
+                    if let Some(call) = self.cacheinfo_calls.borrow().get(func).copied() {
+                        let v = self
+                            .safe_infer(call, &Ctx::new())
+                            .unwrap_or(Value::Uninferable);
+                        yield_v!(sink, v);
+                        return End::Done;
+                    }
+                }
                 self.bound_method_infer_call_result_to(*func, bound, caller, ctx, sink)
             }
             // DescriptorBoundMethod.infer_call_result

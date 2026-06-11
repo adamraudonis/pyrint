@@ -1205,22 +1205,36 @@ impl Engine {
         let mut src = String::new();
         let mut base_clause = String::new();
         if let Some(b) = base {
-            let bmd = self.md(b.m);
             let bname = self.node_name(b)?;
+            // REPARENT-AWARE root module name: extension-template classes
+            // (collections.defaultdict etc.) live in a ''-named template
+            // module but are reparented into the real module — walk parents
+            // to the top like astroid's b.root() (astroid puts the inferred
+            // ClassDef node DIRECTLY in bases; our textual import must
+            // resolve to the same class through the merged module).
+            let broot_name = {
+                let mut top = b;
+                while let Some(p) = self.parent(top) {
+                    top = p;
+                }
+                self.md(top.m).name.clone()
+            };
             // base importable only when top-level in its module
             let top_level = self
                 .parent(b)
                 .map(|p| self.frame(p))
-                .map(|f| f.n == NodeId::MODULE)
+                .map(|f| {
+                    self.kind_is(f, |k| matches!(k, NodeKind::Module(_)))
+                })
                 .unwrap_or(false);
-            if top_level && bmd.name != modname {
+            if top_level && broot_name != modname && !broot_name.is_empty() {
                 src.push_str(&format!(
                     "from {} import {} as _alias_base
 ",
-                    bmd.name, bname
+                    broot_name, bname
                 ));
                 base_clause = "(_alias_base)".to_string();
-            } else if bmd.name == "builtins" {
+            } else if broot_name == "builtins" {
                 base_clause = format!("({bname})");
             }
         }

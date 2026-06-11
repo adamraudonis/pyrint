@@ -933,24 +933,40 @@ impl Engine {
         ctx.lookupname.set(Some(name));
         match self.instance_getattr(owner, name, Some(&ctx), false) {
             Ok(attrs) => {
-                // _infer_stmts(self._wrap_attr(get_attr, ...), ...) with a
-                // post-inference wrap (see wrap note below)
-                let mut stopped = false;
-                let end = {
-                    let stopped = &mut stopped;
-                    let ctx2 = Rc::clone(&ctx);
-                    self.infer_stmts_to(&attrs, Some(&ctx), None, &mut |v| {
-                        let d = self.wrap_value_to(owner, v, &ctx2, sink);
-                        if let Drive::Stop = d {
-                            *stopped = true;
+                // bases.py:283-285: `_infer_stmts(self._wrap_attr(get_attr,
+                // context), context, frame=self)` — _wrap_attr runs over the
+                // RAW attr list BEFORE inference: AssignAttr nodes pass
+                // through untouched, only UnboundMethod VALUES get
+                // bound/property-resolved. The INFERRED results are yielded
+                // RAW — an instance attr holding `StreamOutput.recv` stays
+                // UM (core stream/conftest _original_recv).
+                let mut wrapped: Vec<NV> = Vec::new();
+                for a in &attrs {
+                    match a {
+                        NV::V(Value::UnboundMethod { func }) => {
+                            if self.is_property(*func, None) {
+                                let mut vals: Vec<Value> = Vec::new();
+                                let _ = self.function_infer_call_result_to(
+                                    *func,
+                                    None,
+                                    Some(&ctx),
+                                    &mut |x| {
+                                        vals.push(x);
+                                        Drive::Go
+                                    },
+                                );
+                                wrapped.extend(vals.into_iter().map(NV::V));
+                            } else {
+                                wrapped.push(NV::V(Value::BoundMethod {
+                                    func: *func,
+                                    bound: Rc::new(owner.clone()),
+                                }));
+                            }
                         }
-                        d
-                    })
-                };
-                if stopped {
-                    return End::Stopped;
+                        other => wrapped.push(other.clone()),
+                    }
                 }
-                end
+                self.infer_stmts_to(&wrapped, Some(&ctx), None, sink)
             }
             Err(_) => {
                 // fallback to class igetattr (descriptor logic)
@@ -1098,6 +1114,16 @@ impl Engine {
                         return Some(Value::SynthSeq {
                             kind: SeqKind::List,
                             elems: Rc::new(ex.to_vec()),
+                        });
+                    }
+                    // GroupExceptionInstanceModel.attr_exceptions
+                    // (objectmodel.py:773-776): a FRESH empty Tuple per
+                    // access — EXACT qname builtins.ExceptionGroup only
+                    // (BUILTIN_EXCEPTIONS, objectmodel.py:813)
+                    if self.qname(cls) == "builtins.ExceptionGroup" {
+                        return Some(Value::SynthSeq {
+                            kind: SeqKind::Tuple,
+                            elems: Rc::new(Vec::new()),
                         });
                     }
                 }
@@ -1405,10 +1431,16 @@ impl Engine {
                     }));
                 }
                 "cache_info" => {
-                    // CacheInfoBoundMethod proxying the function; calling it
-                    // yields a _CacheInfo namedtuple instance — approximate
-                    // the BM with the function itself (render parity:
-                    // BM:<func qname>) — calls fall back to normal result
+                    // attr_cache_info (brain_functools.py:38-56): a FRESH
+                    // `_CacheInfo(0, 0, 0, 0)` extract_node template per
+                    // access; the CacheInfoBoundMethod proxies the FUNCTION
+                    // (renders BM:<func qname>, bound = the function) and
+                    // its infer_call_result yields safe_infer(cache_info)
+                    // (Inst:__astroid_synthetic.CacheInfo via the
+                    // namedtuple brain on functools._CacheInfo).
+                    if let Some(call) = self.lru_cacheinfo_template() {
+                        self.cacheinfo_calls.borrow_mut().insert(func, call);
+                    }
                     return Ok(Flow::one(Value::BoundMethod {
                         func,
                         bound: Rc::new(Value::Node(func)),
@@ -1459,6 +1491,26 @@ impl Engine {
             });
         *self.lru_cache_clear_fn.borrow_mut() = Some(g);
         g
+    }
+
+    /// extract_node("from functools import _CacheInfo\n_CacheInfo(0,0,0,0)")
+    /// — built FRESH per attr_cache_info access (brain_functools.py:39-44);
+    /// returns the template's Call node.
+    fn lru_cacheinfo_template(&self) -> Option<GNode> {
+        let mid = self.build_template_module(
+            "from functools import _CacheInfo\n_CacheInfo(0, 0, 0, 0)\n",
+            "",
+        )?;
+        let md = self.md(mid);
+        let body: Vec<pyast::NodeId> = match &md.tree.nodes[pyast::NodeId::MODULE.idx()].kind {
+            NodeKind::Module(m) => m.body.clone(),
+            _ => return None,
+        };
+        let last = *body.last()?;
+        match &md.tree.nodes[last.idx()].kind {
+            NodeKind::Expr { value } => Some(GNode { m: mid, n: *value }),
+            _ => None,
+        }
     }
 
     fn method_igetattr(
