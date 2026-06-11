@@ -1,6 +1,22 @@
 //! Loader for crates/pyinfer/snapshot/*.json — astroid's post-brain view of
 //! builtins + C-extension stdlib modules (schema: harness/gen_snapshot.py).
 //! Reconstructs a pyast `Tree` plus the scope-locals / instance-attrs maps.
+//!
+//! The JSONs are EMBEDDED in the binary (build.rs -> snapshot_data.rs) so a
+//! released prylint runs without the repo; PRYLINT_SNAPSHOT_DIR overrides
+//! with an on-disk directory (snapshot regeneration / differential debug).
+
+mod embedded {
+    include!(concat!(env!("OUT_DIR"), "/snapshot_data.rs"));
+}
+
+/// The embedded snapshot JSON for `modname`, if one was generated.
+pub fn embedded_json(modname: &str) -> Option<&'static str> {
+    embedded::SNAPSHOTS
+        .binary_search_by_key(&modname, |(n, _)| n)
+        .ok()
+        .map(|i| embedded::SNAPSHOTS[i].1)
+}
 
 use indexmap::IndexMap;
 use rustc_hash::FxHashMap;

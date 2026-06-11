@@ -101,7 +101,11 @@ pub fn probe() -> PyEnv {
             }
         }
         None => {
-            eprintln!("prylint: failed to probe {exe}; imports limited to the corpus root");
+            eprintln!(
+                "prylint: cannot probe the python environment ({exe} failed to run); \
+                 install python3 or set PRYLINT_PYTHON. Module resolution is limited \
+                 to the project root (stdlib/site-packages imports unresolved)."
+            );
             PyEnv {
                 sys_path: Vec::new(),
                 builtin_module_names: Vec::new(),

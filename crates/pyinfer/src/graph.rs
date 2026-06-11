@@ -303,7 +303,9 @@ pub struct Engine {
     pub env: PyEnv,
     /// [realpath(cwd)] + venv sys.path
     pub sys_path: Vec<String>,
-    pub snapshot_dir: PathBuf,
+    /// None = use the snapshots embedded in the binary;
+    /// Some = PRYLINT_SNAPSHOT_DIR on-disk override.
+    pub snapshot_dir: Option<PathBuf>,
     pub builtins_mod: Cell<ModId>,
     pub b: RefCell<Option<Rc<BuiltinRefs>>>,
     pub isfile_cache: RefCell<FxHashMap<String, bool>>,
@@ -431,11 +433,11 @@ pub struct Engine {
     pub synth_pins: RefCell<Vec<Value>>,
 }
 
-fn snapshot_dir() -> PathBuf {
-    if let Ok(d) = std::env::var("PRYLINT_SNAPSHOT_DIR") {
-        return PathBuf::from(d);
-    }
-    PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("snapshot")
+/// Snapshots are embedded in the binary (snapshot::embedded_json);
+/// PRYLINT_SNAPSHOT_DIR overrides with an on-disk directory for snapshot
+/// regeneration / differential debugging.
+fn snapshot_dir() -> Option<PathBuf> {
+    std::env::var("PRYLINT_SNAPSHOT_DIR").ok().map(PathBuf::from)
 }
 
 impl Engine {
@@ -1262,8 +1264,12 @@ impl Engine {
     }
 
     fn load_snapshot_module(&self, modname: &str) -> Option<ModId> {
-        let path = self.snapshot_dir.join(format!("{modname}.json"));
-        let data = std::fs::read_to_string(path).ok()?;
+        let data: std::borrow::Cow<'_, str> = match &self.snapshot_dir {
+            Some(dir) => {
+                std::fs::read_to_string(dir.join(format!("{modname}.json"))).ok()?.into()
+            }
+            None => crate::snapshot::embedded_json(modname)?.into(),
+        };
         let mut snap = load_snapshot(&data)?;
         if modname == "sys" {
             // The oracle (dump_infer.py main) runs `sys.path.insert(0,
