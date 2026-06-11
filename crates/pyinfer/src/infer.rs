@@ -1116,20 +1116,26 @@ impl Engine {
             let g = GNode { m: node.m, n: e };
             match &md.tree.nodes[e.idx()].kind {
                 NodeKind::Starred { value, .. } => {
+                    // `if not starred: raise` (node_classes.py:370-371) —
+                    // safe_infer returning Uninferable is FALSY in python,
+                    // so it raises exactly like the None (ambiguous) case
                     let starred = self.safe_infer(GNode { m: node.m, n: *value }, ctx);
                     match starred {
-                        Some(v) => match self.value_elts(&v) {
+                        Some(v) if !v.is_uninferable() => match self.value_elts(&v) {
                             Some(sub) => values.extend(sub),
                             None => return Flow::err(ErrKind::Inference),
                         },
-                        None => return Flow::err(ErrKind::Inference),
+                        _ => return Flow::err(ErrKind::Inference),
                     }
                 }
                 NodeKind::NamedExpr { value, .. } => {
+                    // `if not value: raise` (node_classes.py:379-380):
+                    // Uninferable is falsy — `c1 := Cell(...)` with an
+                    // uninferable call poisons the whole literal
                     let v = self.safe_infer(GNode { m: node.m, n: *value }, ctx);
                     match v {
-                        Some(v) => values.push(v),
-                        None => return Flow::err(ErrKind::Inference),
+                        Some(v) if !v.is_uninferable() => values.push(v),
+                        _ => return Flow::err(ErrKind::Inference),
                     }
                 }
                 _ => values.push(Value::Node(g)),

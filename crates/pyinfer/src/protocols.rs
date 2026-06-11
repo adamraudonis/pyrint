@@ -1334,53 +1334,85 @@ impl Engine {
     }
 
     fn const_getitem(&self, c: &ConstValue, index: &Value, ctx: &Rc<Ctx>) -> Result<NV, ErrKind> {
-        let idx_const = self.value_const(index);
+        // Const.getitem (node_classes.py:2098-2112): the INDEX is
+        // classified FIRST — `_infer_slice(index, context)` runs for ANY
+        // Const receiver (even None/int, where the result is discarded
+        // and AstroidTypeError raised afterwards). The bound-inference
+        // pulls it burns (and their global-cache writes) are load-bearing
+        // for count parity.
+        enum CIdx {
+            C(ConstValue),
+            S(PySlice),
+        }
+        let is_slice = match index {
+            Value::SynthSlice { .. } => true,
+            Value::Node(g) => {
+                let md = self.md(g.m);
+                matches!(md.tree.nodes[g.n.idx()].kind, NodeKind::Slice { .. })
+            }
+            _ => false,
+        };
+        let idx: CIdx = if let Some(ic) = self.value_const(index) {
+            CIdx::C(ic)
+        } else if is_slice {
+            match self.value_slice(index, ctx) {
+                Some(sl) => CIdx::S(sl),
+                // _infer_slice raise -> AstroidTypeError
+                None => return Err(ErrKind::AstroidType),
+            }
+        } else {
+            return Err(ErrKind::AstroidType);
+        };
         match c {
             ConstValue::Str(s) => {
                 let chars: Vec<char> = s.chars().collect();
-                match &idx_const {
-                    Some(ConstValue::Int(IntValue::Small(i))) => {
+                match &idx {
+                    CIdx::C(ConstValue::Int(IntValue::Small(i))) => {
                         let i = norm_index(*i, chars.len()).ok_or(ErrKind::AstroidIndex)?;
                         Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Str(
                             chars[i].to_string().into(),
                         )))))
                     }
-                    Some(ConstValue::Bool(b)) => {
+                    CIdx::C(ConstValue::Bool(b)) => {
                         let i = norm_index(*b as i64, chars.len())
                             .ok_or(ErrKind::AstroidIndex)?;
                         Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Str(
                             chars[i].to_string().into(),
                         )))))
                     }
-                    _ => match self.value_slice(index, ctx) {
-                        Some(sl) => {
-                            let sliced: String =
-                                slice_seq(&chars, &sl).into_iter().collect();
-                            Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Str(
-                                sliced.into(),
-                            )))))
-                        }
-                        None => Err(ErrKind::AstroidType),
-                    },
+                    CIdx::S(sl) => {
+                        let sliced: String = slice_seq(&chars, sl).into_iter().collect();
+                        Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Str(
+                            sliced.into(),
+                        )))))
+                    }
+                    // str[non-int const] -> TypeError -> AstroidTypeError
+                    CIdx::C(_) => Err(ErrKind::AstroidType),
                 }
             }
-            ConstValue::Bytes(b) => match &idx_const {
-                Some(ConstValue::Int(IntValue::Small(i))) => {
+            ConstValue::Bytes(b) => match &idx {
+                CIdx::C(ConstValue::Int(IntValue::Small(i))) => {
                     let i = norm_index(*i, b.len()).ok_or(ErrKind::AstroidIndex)?;
                     Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Int(
                         IntValue::Small(b[i] as i64),
                     )))))
                 }
-                _ => match self.value_slice(index, ctx) {
-                    Some(sl) => {
-                        let v: Vec<u8> = slice_seq(b, &sl);
-                        Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Bytes(
-                            v.into(),
-                        )))))
-                    }
-                    None => Err(ErrKind::AstroidType),
-                },
+                CIdx::C(ConstValue::Bool(bb)) => {
+                    let i = norm_index(*bb as i64, b.len()).ok_or(ErrKind::AstroidIndex)?;
+                    Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Int(
+                        IntValue::Small(b[i] as i64),
+                    )))))
+                }
+                CIdx::S(sl) => {
+                    let v: Vec<u8> = slice_seq(b, sl);
+                    Ok(NV::V(Value::SynthConst(Rc::new(ConstValue::Bytes(
+                        v.into(),
+                    )))))
+                }
+                CIdx::C(_) => Err(ErrKind::AstroidType),
             },
+            // `if isinstance(self.value, (str, bytes))` fails -> fall
+            // through to `raise AstroidTypeError` (node_classes.py:2134)
             _ => Err(ErrKind::AstroidType),
         }
     }
@@ -1623,7 +1655,8 @@ impl Engine {
                 let md = self.md(g.m);
                 match &md.tree.nodes[g.n.idx()].kind {
                     NodeKind::Slice { lower, upper, step } => {
-                        // _infer_slice: bounds must be Const int/None
+                        // _infer_slice (node_classes.py:221-233): bounds
+                        // must be Const int/None (bool is an int subclass)
                         let get = |o: &Option<NodeId>| -> Option<Option<i64>> {
                             match o {
                                 None => Some(None),
@@ -1632,6 +1665,9 @@ impl Engine {
                                     match &md.tree.nodes[n.idx()].kind {
                                         NodeKind::Const(ConstValue::Int(IntValue::Small(i))) => {
                                             Some(Some(*i))
+                                        }
+                                        NodeKind::Const(ConstValue::Bool(b)) => {
+                                            Some(Some(*b as i64))
                                         }
                                         NodeKind::Const(ConstValue::None) => Some(None),
                                         _ => {
@@ -1646,6 +1682,9 @@ impl Engine {
                                                 Some(ConstValue::Int(IntValue::Small(i))) => {
                                                     Some(Some(i))
                                                 }
+                                                Some(ConstValue::Bool(b)) => {
+                                                    Some(Some(b as i64))
+                                                }
                                                 Some(ConstValue::None) => Some(None),
                                                 _ => None,
                                             }
@@ -1654,10 +1693,18 @@ impl Engine {
                                 }
                             }
                         };
+                        // EAGER: astroid evaluates lower, upper AND step
+                        // before the `if all(...)` check (node_classes.py:
+                        // 222-226) — a failing lower still burns the
+                        // upper/step inference pulls (and their global
+                        // cache writes)
+                        let lo = get(lower);
+                        let hi = get(upper);
+                        let st = get(step);
                         Some(PySlice {
-                            start: get(lower)?,
-                            stop: get(upper)?,
-                            step: get(step)?,
+                            start: lo?,
+                            stop: hi?,
+                            step: st?,
                         })
                     }
                     _ => None,
