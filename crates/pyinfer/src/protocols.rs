@@ -1534,7 +1534,7 @@ impl Engine {
             // the suspended key generator (no post-yield bump for the
             // matching key, no cache write for its truncated wrapper).
             let mut matched: Option<NV> = None;
-            let _ = {
+            let end = {
                 let matched = &mut matched;
                 self.infer_nv_to(k, ctx, &mut |ik| {
                     if ik.is_uninferable() {
@@ -1553,6 +1553,16 @@ impl Engine {
             };
             if let Some(found) = matched {
                 return Ok(found);
+            }
+            // node_classes.py:2307 `for inferredkey in key.infer(context)`
+            // has NO try around it: a key whose inference RAISES aborts
+            // the WHOLE getitem scan — the InferenceError propagates out
+            // of Dict.getitem through Subscript._infer to _infer_stmts'
+            // `except InferenceError -> yield Uninferable`. Continuing to
+            // later keys solved subscripts astroid leaves U (core
+            // test_history `states[entity_id]` after a path-blocked key).
+            if let End::Raised(e) = end {
+                return Err(e);
             }
         }
         Err(ErrKind::AstroidIndex)
