@@ -123,7 +123,7 @@ impl Engine {
                         self.infer_stmts_to(&stmts, Some(&ctx2), Some(*g), sink)
                     }
                     2 => self.class_igetattr_to(*g, name, ctx, true, sink),
-                    3 => stream_result(self.function_igetattr(*g, name, ctx), sink),
+                    3 => self.function_igetattr_to(*g, name, ctx, sink),
                     4 => stream_result(self.slice_igetattr(*g, name, ctx), sink),
                     5 => self.instance_igetattr_to(owner, name, ctx, sink),
                     _ => End::Raised(ErrKind::Attribute),
@@ -1252,6 +1252,47 @@ impl Engine {
 
     // ---------- FunctionDef getattr ----------
 
+    /// STREAMING FunctionDef.igetattr: the instance_attrs branch relays
+    /// values lazily through _infer_stmts (scoped_nodes.py:1298-1311 —
+    /// `bases._infer_stmts(self.getattr(...))` is a generator: each value
+    /// reaches the outer Attribute/Call relays BEFORE the next stmt is
+    /// pulled, so resume bumps land in astroid's order; salt
+    /// `set_logging_options_dict.__options_dict__` chains).
+    fn function_igetattr_to(
+        &self,
+        func: GNode,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+        sink: &mut Sink,
+    ) -> End {
+        let vals = self
+            .iattrs
+            .borrow()
+            .get(&func)
+            .and_then(|m| m.get(&name))
+            .cloned();
+        if let Some(vals) = vals {
+            if !vals.is_empty() {
+                let nv: Vec<NV> = vals.into_iter().map(NV::N).collect();
+                let ctx2 = copy_context(ctx);
+                ctx2.lookupname.set(Some(name));
+                return self.infer_stmts_to(&nv, Some(&ctx2), None, sink);
+            }
+        }
+        match self.function_igetattr_rest(func, name, ctx) {
+            Ok(flow) => {
+                for v in flow.vals {
+                    yield_v!(sink, v);
+                }
+                match flow.err {
+                    Some(e) => End::Raised(e),
+                    None => End::Done,
+                }
+            }
+            Err(e) => End::Raised(e),
+        }
+    }
+
     fn function_igetattr(
         &self,
         func: GNode,
@@ -1273,6 +1314,17 @@ impl Engine {
                 return Ok(self.infer_stmts(&nv, Some(&ctx2), None));
             }
         }
+        self.function_igetattr_rest(func, name, ctx)
+    }
+
+    /// model-attr / lru-model portion of FunctionDef.igetattr (all
+    /// single-value results -- eager is bump-equivalent)
+    fn function_igetattr_rest(
+        &self,
+        func: GNode,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Flow, ErrKind> {
         let name_str = self.sname(name);
         // LruWrappedModel (brain_functools.py:26-62): replaces the
         // FunctionModel for lru_cache-decorated functions
