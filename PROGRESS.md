@@ -1259,3 +1259,12 @@ pylint behavior — bugs are replicated.
   wins — wrong). Reporter header printed once per module NAME.
 - py-version gating: harness venv is 3.12.12; `MessageDef.may_be_emitted`
   already folded into msgs.rs `enabled`.
+
+## Inference residue classification (final, full corpora)
+
+django/pandas/sentry/core: ZERO inference-dump diffs. airflow 3 files /
+salt 5 / pylfunc 4 (26 lines total): ALL in files with zero ground-truth
+messages; root causes are process-environment nondeterminism (astroid
+raw_building snapshots the live os.environ; PYTHONHASHSEED set ordering),
+i.e. pylint itself is run-to-run unstable there. NOT engine bugs. Frozen as
+known-benign; revisit only if a checker diff ever points here.
