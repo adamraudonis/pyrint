@@ -8,6 +8,7 @@ pub mod imports;
 pub mod logging_ck;
 pub mod msgs;
 pub mod msgstore;
+pub mod pyset;
 pub mod strings;
 pub mod tailmisc;
 pub mod typecheck;

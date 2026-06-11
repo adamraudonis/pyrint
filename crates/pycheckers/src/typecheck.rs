@@ -716,11 +716,18 @@ impl TypeCk {
         };
         let site = eng.call_site_from(&cc, &Ctx::new());
 
-        // E1132 repeated-keyword (emitted BEFORE the invalid bail)
-        for kw in &site.duplicated_keywords {
-            let kws = eng.sname(*kw);
+        // E1132 repeated-keyword (emitted BEFORE the invalid bail).
+        // typecheck.py:1487 iterates CallSite.duplicated_keywords — a Python
+        // set[str]. Our Vec preserves CPython's set INSERTION order (first
+        // add per key); the visible order is the seed-0 set ITERATION order
+        // (GT pinned at PYTHONHASHSEED=0, see crate::pyset).
+        let dup_names: Vec<String> =
+            site.duplicated_keywords.iter().map(|k| eng.sname(*k)).collect();
+        let dup_refs: Vec<&str> = dup_names.iter().map(|s| s.as_str()).collect();
+        for i in crate::pyset::cpython_set_order(&dup_refs) {
+            let kws = &dup_names[i];
             cx.emit_node("E1132", u::lineno(eng, node), u::col_offset(eng, node) as i64,
-                u::format_template("Got multiple values for keyword argument %r in function call", &[&kws]));
+                u::format_template("Got multiple values for keyword argument %r in function call", &[kws]));
         }
 
         if site.has_invalid_arguments() || site.has_invalid_keywords() {

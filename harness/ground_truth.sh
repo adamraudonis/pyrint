@@ -1,6 +1,12 @@
 #!/bin/bash
 # Usage: ground_truth.sh <corpus-name> [iso|native]
 set -u
+# PINNED: pylint output is hash-seed dependent where it iterates Python sets
+# (proven: typecheck.py E1132 iterates CallSite.duplicated_keywords, a
+# set[str] — order varies run-to-run under hash randomization). Ground truth
+# is pinned at PYTHONHASHSEED=0; prylint replicates CPython's seed-0 string
+# hash (siphash13, zero key) + set table order where pylint-visible.
+export PYTHONHASHSEED=0
 ROOT=~/Desktop/Projects/prylint
 CORPUS="$1"; VARIANT="${2:-iso}"
 FLAGS=$(cat $ROOT/harness/flags.txt)
