@@ -2336,9 +2336,19 @@ impl TypeCk {
             Some(v) if !v.is_uninferable() => v,
             _ => return,
         };
-        // decorated inferred values (typecheck.py:2185-2195)
-        if let Value::Node(g) = &inferred {
-            let decs = decorator_nodes(eng, *g);
+        // decorated inferred values (typecheck.py:2185-2195):
+        // `getattr(inferred, "decorators", None)` — BoundMethod/UnboundMethod
+        // PROXY the wrapped function's decorators
+        let dec_owner: Option<GNode> = match &inferred {
+            Value::Node(g) => Some(*g),
+            Value::BoundMethod { func, .. }
+            | Value::DescBM { func, .. }
+            | Value::UnboundMethod { func } => Some(*func),
+            // Property/PartialFunction: postinit without decorators -> None
+            _ => None,
+        };
+        if let Some(owner) = dec_owner {
+            let decs = decorator_nodes(eng, owner);
             if !decs.is_empty() {
                 // astroid.util.safe_infer of the FIRST decorator
                 let first_dec = eng.safe_infer(decs[0], &Ctx::new());
@@ -2738,4 +2748,24 @@ impl IterCk {
             self.check_iterable(cx, iter, is_async);
         }
     }
+}
+
+// ---------------------------------------------------------------------------
+// pub shims for the classes checkers
+// ---------------------------------------------------------------------------
+
+pub fn clone_const_pub(c: &ConstValue) -> ConstValue {
+    clone_const(c)
+}
+
+/// nodes_of_class without skip_klass: full preorder below root
+pub fn nodes_of_class_skip_pub<FT>(eng: &Engine, root: GNode, target: FT) -> Vec<GNode>
+where
+    FT: Fn(&NodeKind) -> bool,
+{
+    nodes_of_class_skip(eng, root, target, |_| false)
+}
+
+pub fn decorator_nodes_pub(eng: &Engine, func: GNode) -> Vec<GNode> {
+    decorator_nodes(eng, func)
 }

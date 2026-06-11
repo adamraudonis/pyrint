@@ -1,6 +1,7 @@
 //! Ported pylint 4.0.5 checkers (E/F categories in scope).
 
 pub mod ckutils;
+pub mod classes;
 pub mod imports;
 pub mod msgs;
 pub mod msgstore;

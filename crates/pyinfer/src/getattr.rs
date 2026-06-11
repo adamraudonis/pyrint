@@ -2493,6 +2493,7 @@ impl Engine {
 
     fn compute_mro(&self, cls: GNode, ctx: Option<&Rc<Ctx>>, depth: u32) -> Result<Vec<GNode>, ErrKind> {
         if depth > 100 {
+            self.last_mro_dup.set(false);
             return Err(ErrKind::Mro);
         }
         if self.qname(cls) == "builtins.object" {
@@ -2517,12 +2518,21 @@ impl Engine {
             for &node in seq {
                 let key = (self.fromlineno(node), self.qname(node));
                 if !seen.insert(key) {
+                    // astroid DuplicateBasesError (mro.py clean_duplicates_mro)
+                    self.last_mro_dup.set(true);
                     return Err(ErrKind::Mro);
                 }
             }
         }
         self.clean_typing_generic_mro(&mut unmerged);
-        c3_merge(unmerged).ok_or(ErrKind::Mro)
+        match c3_merge(unmerged) {
+            Some(m) => Ok(m),
+            None => {
+                // astroid InconsistentMroError
+                self.last_mro_dup.set(false);
+                Err(ErrKind::Mro)
+            }
+        }
     }
 
     fn clean_typing_generic_mro(&self, sequences: &mut Vec<Vec<GNode>>) {

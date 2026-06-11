@@ -321,6 +321,9 @@ pub struct Engine {
     pub unattached_unknown: RefCell<Option<GNode>>,
     /// klass._all_bases_known memo (helpers.py:175-189 has_known_bases)
     pub known_bases_cache: RefCell<FxHashMap<GNode, bool>>,
+    /// set by compute_mro on failure: true = DuplicateBasesError,
+    /// false = InconsistentMroError (E0241 vs E0240 distinction)
+    pub last_mro_dup: std::cell::Cell<bool>,
     /// `stmt.infer(context)` entries for SYNTHETIC nodes flowing through
     /// _infer_stmts (bases.py:198): in astroid those are real fresh nodes —
     /// the first hop under a given (lookupname, callcontext, boundnode) key
@@ -411,6 +414,7 @@ impl Engine {
             cacheinfo_calls: RefCell::new(FxHashMap::default()),
             unattached_unknown: RefCell::new(None),
             known_bases_cache: RefCell::new(FxHashMap::default()),
+            last_mro_dup: std::cell::Cell::new(false),
             synth_hop_cache: RefCell::new(FxHashSet::default()),
             synth_hop_trunc: RefCell::new(FxHashSet::default()),
             dictitems_elts_cache: RefCell::new(FxHashMap::default()),

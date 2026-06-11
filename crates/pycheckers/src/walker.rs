@@ -15,6 +15,7 @@ use pyinfer::value::{GNode, ModId};
 
 use crate::ckutils as u;
 use crate::ckutils::LintCaches;
+use crate::classes::{ClassCk, NewStyleCk, SpecialCk};
 use crate::imports::ImportsChecker;
 use crate::typecheck::{IterCk, TypeCk};
 use crate::variables::VarsChecker;
@@ -71,6 +72,9 @@ pub struct LintRun {
     pub vars: VarsChecker,
     pub ty: TypeCk,
     pub iter: IterCk,
+    pub special: SpecialCk,
+    pub classes: ClassCk,
+    pub newstyle: NewStyleCk,
     pub caches: LintCaches,
 }
 
@@ -81,6 +85,9 @@ impl Default for LintRun {
             vars: VarsChecker::default(),
             ty: TypeCk::default(),
             iter: IterCk,
+            special: SpecialCk,
+            classes: ClassCk::default(),
+            newstyle: NewStyleCk,
             caches: LintCaches::default(),
         }
     }
@@ -106,6 +113,9 @@ impl LintRun {
             vars: &mut self.vars,
             ty: &mut self.ty,
             iter: &mut self.iter,
+            special: &mut self.special,
+            classes: &mut self.classes,
+            newstyle: &mut self.newstyle,
         };
         walker.walk(&mut cx, GNode { m: mid, n: NodeId::MODULE });
     }
@@ -116,6 +126,9 @@ struct Walker<'w> {
     vars: &'w mut VarsChecker,
     ty: &'w mut TypeCk,
     iter: &'w mut IterCk,
+    special: &'w mut SpecialCk,
+    classes: &'w mut ClassCk,
+    newstyle: &'w mut NewStyleCk,
 }
 
 impl Walker<'_> {
@@ -138,12 +151,18 @@ impl Walker<'_> {
                 self.imp.visit_importfrom(cx, g);
             }
             Tag::ClassDef => {
-                // BasicChecker/BasicErrorChecker/ClassChecker unwired;
+                // BasicChecker/BasicErrorChecker unported;
                 // ImportsChecker.visit_functiondef no-op
+                self.classes.visit_classdef(cx, g);
                 self.ty.visit_classdef(cx, g);
                 self.vars.visit_classdef(cx, g);
             }
             Tag::FunctionDef => {
+                // (Async)FunctionDef order: AsyncChecker/BasicErrorChecker/
+                // StdlibChecker unported; ImportsChecker no-op
+                self.special.visit_functiondef(cx, g);
+                self.classes.visit_functiondef(cx, g);
+                self.newstyle.visit_functiondef(cx, g);
                 self.vars.visit_functiondef(cx, g);
             }
             Tag::Lambda => self.vars.visit_lambda(cx, g),
@@ -188,6 +207,13 @@ impl Walker<'_> {
                 self.ty.visit_subscript(cx, g);
             }
             Tag::With => self.ty.visit_with(cx, g),
+            Tag::Attribute => self.classes.visit_attribute(cx, g),
+            Tag::AssignAttr => {
+                // TypeChecker.visit_assignattr AugAssign no-member burn:
+                // E1101 disabled (visit_assignattr is ungated and runs, but
+                // only burns inference) — skipped
+                self.classes.visit_assignattr(cx, g);
+            }
             Tag::UnaryOp => {
                 // BasicErrorChecker.visit_unaryop unported
                 self.ty.visit_unaryop(cx, g);
@@ -205,8 +231,14 @@ impl Walker<'_> {
                 // ImportsChecker.leave_module: ungrouped-imports (C) — no-op
                 self.vars.leave_module(cx, g);
             }
-            Tag::ClassDef => self.vars.leave_classdef(cx, g),
-            Tag::FunctionDef => self.vars.leave_functiondef(cx, g),
+            Tag::ClassDef => {
+                self.classes.leave_classdef(cx, g);
+                self.vars.leave_classdef(cx, g);
+            }
+            Tag::FunctionDef => {
+                self.classes.leave_functiondef(cx, g);
+                self.vars.leave_functiondef(cx, g);
+            }
             Tag::Lambda => self.vars.leave_lambda(cx, g),
             Tag::Comp => self.vars.leave_comprehension_scope(cx, g),
             _ => {}
@@ -238,6 +270,8 @@ enum Tag {
     Subscript,
     With,
     UnaryOp,
+    Attribute,
+    AssignAttr,
     Other,
 }
 
@@ -266,6 +300,8 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Subscript { .. } => Tag::Subscript,
         NodeKind::With(_) => Tag::With,
         NodeKind::UnaryOp { .. } => Tag::UnaryOp,
+        NodeKind::Attribute { .. } => Tag::Attribute,
+        NodeKind::AssignAttr { .. } => Tag::AssignAttr,
         _ => Tag::Other,
     }
 }
