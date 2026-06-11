@@ -7,6 +7,7 @@
 //! astroid's caches are process-global and order-sensitive, so we mirror
 //! that with one `Engine` owning every cache.
 
+pub mod asstr;
 pub mod brains;
 pub mod calls;
 pub mod constraint;

@@ -16,6 +16,7 @@ use pyinfer::value::{GNode, ModId};
 use crate::ckutils as u;
 use crate::ckutils::LintCaches;
 use crate::imports::ImportsChecker;
+use crate::typecheck::TypeCk;
 use crate::variables::VarsChecker;
 
 /// A message produced by a checker (text fully formatted; gating and
@@ -68,6 +69,7 @@ impl WalkCx<'_> {
 pub struct LintRun {
     pub imports: ImportsChecker,
     pub vars: VarsChecker,
+    pub ty: TypeCk,
     pub caches: LintCaches,
 }
 
@@ -76,6 +78,7 @@ impl Default for LintRun {
         LintRun {
             imports: ImportsChecker,
             vars: VarsChecker::default(),
+            ty: TypeCk::default(),
             caches: LintCaches::default(),
         }
     }
@@ -96,59 +99,85 @@ impl LintRun {
             emit,
             import_oracle,
         };
-        walk(&mut self.imports, &mut self.vars, &mut cx, GNode { m: mid, n: NodeId::MODULE });
+        let mut walker = Walker {
+            imp: &mut self.imports,
+            vars: &mut self.vars,
+            ty: &mut self.ty,
+        };
+        walker.walk(&mut cx, GNode { m: mid, n: NodeId::MODULE });
     }
 }
 
-fn walk(imp: &mut ImportsChecker, vars: &mut VarsChecker, cx: &mut WalkCx, g: GNode) {
-    // ---- visit (VISIT_ORDER in walk_order.rs) ----
-    let kind_tag = {
-        let md = cx.eng.md(g.m);
-        kind_tag(&md.tree.nodes[g.n.idx()].kind)
-    };
-    match kind_tag {
-        Tag::Module => {
-            // ImportsChecker.visit_module: stores node.package (W-only) — no-op
-            vars.visit_module(cx, g);
+struct Walker<'w> {
+    imp: &'w mut ImportsChecker,
+    vars: &'w mut VarsChecker,
+    ty: &'w mut TypeCk,
+}
+
+impl Walker<'_> {
+    fn walk(&mut self, cx: &mut WalkCx, g: GNode) {
+        // ---- visit (VISIT_ORDER in walk_order.rs) ----
+        let kind_tag = {
+            let md = cx.eng.md(g.m);
+            kind_tag(&md.tree.nodes[g.n.idx()].kind)
+        };
+        match kind_tag {
+            Tag::Module => {
+                // BasicChecker/ImportsChecker/LoggingChecker.visit_module: no-op
+                self.ty.visit_module(cx, g);
+                self.vars.visit_module(cx, g);
+            }
+            Tag::Import => {
+                self.imp.visit_import(cx, g);
+            }
+            Tag::ImportFrom => {
+                self.imp.visit_importfrom(cx, g);
+            }
+            Tag::ClassDef => {
+                // BasicChecker/BasicErrorChecker/ClassChecker unwired;
+                // ImportsChecker.visit_functiondef no-op
+                // TypeChecker.visit_classdef (E1139) wired in phase B
+                self.vars.visit_classdef(cx, g);
+            }
+            Tag::FunctionDef => {
+                self.vars.visit_functiondef(cx, g);
+            }
+            Tag::Lambda => self.vars.visit_lambda(cx, g),
+            Tag::Comp => self.vars.visit_comprehension_scope(cx, g),
+            Tag::Name => self.vars.visit_name(cx, g),
+            Tag::AssignName => self.vars.visit_assignname(cx, g),
+            Tag::DelName => self.vars.visit_delname(cx, g),
+            Tag::Assign => {
+                // BasicErrorChecker.visit_assign / ImportsChecker.compute_
+                // first_non_import_node: no-op; VariablesChecker.visit_assign
+                // (E0633) unported
+                self.ty.visit_assign(cx, g);
+            }
+            Tag::Call => {
+                // BasicChecker/Dataclass/Logging/MethodArgs/Stdlib/
+                // StringFormat visit_call unported; IterableChecker phase B
+                self.ty.visit_call(cx, g);
+            }
+            Tag::Await => self.ty.visit_await(cx, g),
+            Tag::Other => {}
         }
-        Tag::Import => {
-            imp.visit_import(cx, g);
-            // VariablesChecker.visit_import: E0611 disabled — no-op
+        // ---- children ----
+        let children: Vec<NodeId> = cx.eng.md(g.m).tree.children(g.n);
+        for c in children {
+            self.walk(cx, GNode { m: g.m, n: c });
         }
-        Tag::ImportFrom => {
-            imp.visit_importfrom(cx, g);
+        // ---- leave (LEAVE_ORDER in walk_order.rs) ----
+        match kind_tag {
+            Tag::Module => {
+                // ImportsChecker.leave_module: ungrouped-imports (C) — no-op
+                self.vars.leave_module(cx, g);
+            }
+            Tag::ClassDef => self.vars.leave_classdef(cx, g),
+            Tag::FunctionDef => self.vars.leave_functiondef(cx, g),
+            Tag::Lambda => self.vars.leave_lambda(cx, g),
+            Tag::Comp => self.vars.leave_comprehension_scope(cx, g),
+            _ => {}
         }
-        Tag::ClassDef => {
-            // BasicChecker/BasicErrorChecker/ClassChecker/TypeChecker unwired;
-            // ImportsChecker.visit_functiondef no-op
-            vars.visit_classdef(cx, g);
-        }
-        Tag::FunctionDef => {
-            vars.visit_functiondef(cx, g);
-        }
-        Tag::Lambda => vars.visit_lambda(cx, g),
-        Tag::Comp => vars.visit_comprehension_scope(cx, g),
-        Tag::Name => vars.visit_name(cx, g),
-        Tag::AssignName => vars.visit_assignname(cx, g),
-        Tag::DelName => vars.visit_delname(cx, g),
-        Tag::Other => {}
-    }
-    // ---- children ----
-    let children: Vec<NodeId> = cx.eng.md(g.m).tree.children(g.n);
-    for c in children {
-        walk(imp, vars, cx, GNode { m: g.m, n: c });
-    }
-    // ---- leave (LEAVE_ORDER in walk_order.rs) ----
-    match kind_tag {
-        Tag::Module => {
-            // ImportsChecker.leave_module: ungrouped-imports (C) — no-op
-            vars.leave_module(cx, g);
-        }
-        Tag::ClassDef => vars.leave_classdef(cx, g),
-        Tag::FunctionDef => vars.leave_functiondef(cx, g),
-        Tag::Lambda => vars.leave_lambda(cx, g),
-        Tag::Comp => vars.leave_comprehension_scope(cx, g),
-        _ => {}
     }
 }
 
@@ -164,6 +193,9 @@ enum Tag {
     Name,
     AssignName,
     DelName,
+    Assign,
+    Call,
+    Await,
     Other,
 }
 
@@ -180,6 +212,9 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Name { .. } => Tag::Name,
         NodeKind::AssignName { .. } => Tag::AssignName,
         NodeKind::DelName { .. } => Tag::DelName,
+        NodeKind::Assign { .. } => Tag::Assign,
+        NodeKind::Call { .. } => Tag::Call,
+        NodeKind::Await { .. } => Tag::Await,
         _ => Tag::Other,
     }
 }

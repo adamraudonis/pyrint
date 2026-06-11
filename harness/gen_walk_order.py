@@ -1,7 +1,8 @@
 import os, sys, io, json
+flags = open(os.path.expanduser("~/Desktop/Projects/prylint/harness/flags.txt")).read().split()
 from pylint.lint.run import Run
 sys.stdout, real = io.StringIO(), sys.stdout
-run = Run(["--errors-only", os.devnull], exit=False)
+run = Run(flags + [os.devnull], exit=False)
 sys.stdout = real
 linter = run.linter
 from pylint.utils.ast_walker import ASTWalker

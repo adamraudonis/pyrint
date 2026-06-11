@@ -1503,6 +1503,13 @@ impl Engine {
         let new_fn = *map.get(&new_sym)?.first()?;
         let init_fn = *map.get(&init_sym)?.first()?;
         drop(locals);
+        // objectmodel.py:145/:162 — `node.parent = builtins_module["object"]`:
+        // the template defs are REPARENTED to the object ClassDef (makes
+        // FunctionDef.type "classmethod" for __new__, "method" for __init__;
+        // pylint's _determine_callable reads .type for the message text)
+        let object_cls = self.builtins().object;
+        self.reparents.borrow_mut().insert(new_fn, object_cls);
+        self.reparents.borrow_mut().insert(init_fn, object_cls);
         *self.obj_model_funcs.borrow_mut() = Some((new_fn, init_fn));
         Some((new_fn, init_fn))
     }

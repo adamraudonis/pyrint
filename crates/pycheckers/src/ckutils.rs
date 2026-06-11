@@ -94,6 +94,9 @@ pub struct LintCaches {
     pub infer_all: RefCell<Lru<Rc<Vec<Value>>>>,
     /// utils.safe_infer `@lru_cache(maxsize=1024)` (utils.py:1346)
     pub safe_infer: RefCell<Lru<Option<Value>>>,
+    /// safe_infer(compare_constructors=True) keys (same python LRU, distinct
+    /// key space via the flag tuple element)
+    pub safe_infer_cc: RefCell<Lru<Option<Value>>>,
     builtin_syms: RefCell<Option<Rc<FxHashSet<GSym>>>>,
     scope_attr_syms: RefCell<Option<Rc<FxHashSet<GSym>>>>,
 }
@@ -103,6 +106,7 @@ impl Default for LintCaches {
         LintCaches {
             infer_all: RefCell::new(Lru::new(512)),
             safe_infer: RefCell::new(Lru::new(1024)),
+            safe_infer_cc: RefCell::new(Lru::new(1024)),
             builtin_syms: RefCell::new(None),
             scope_attr_syms: RefCell::new(None),
         }
@@ -369,7 +373,7 @@ pub fn safe_infer(eng: &Engine, caches: &LintCaches, g: GNode) -> Option<Value> 
     res
 }
 
-fn safe_infer_of_flow(eng: &Engine, flow: &pyinfer::value::Flow) -> Option<Value> {
+pub fn safe_infer_of_flow(eng: &Engine, flow: &pyinfer::value::Flow) -> Option<Value> {
     if flow.vals.is_empty() {
         return None; // InferenceError on first pull (or empty -> raise_if_nothing)
     }
@@ -399,11 +403,17 @@ fn safe_infer_of_flow(eng: &Engine, flow: &pyinfer::value::Flow) -> Option<Value
         if !types.contains(&t) {
             return None;
         }
-        // function_arguments_are_ambiguous check skipped: requires two
-        // FunctionDef values with identical pytype; arg-name comparison
-        if let (Value::Node(a), Value::Node(b)) = (first, v) {
-            if is_functiondef(eng, *a) && is_functiondef(eng, *b) && fn_args_ambiguous(eng, *a, *b)
-            {
+        // isinstance(x, nodes.FunctionDef) is True for FunctionDef AND the
+        // objects.Property / objects.PartialFunction subclasses
+        let fnode_of = |val: &Value| -> Option<GNode> {
+            match val {
+                Value::Node(g) if is_functiondef(eng, *g) => Some(*g),
+                Value::Property { func, .. } | Value::Partial { func, .. } => Some(*func),
+                _ => None,
+            }
+        };
+        if let (Some(a), Some(b)) = (fnode_of(first), fnode_of(v)) {
+            if fn_args_ambiguous(eng, a, b) {
                 return None;
             }
         }
@@ -415,34 +425,87 @@ fn safe_infer_of_flow(eng: &Engine, flow: &pyinfer::value::Flow) -> Option<Value
     }
 }
 
-/// utils.function_arguments_are_ambiguous (utils.py:1425-1444): differing
-/// argument names or differing keyword-only names.
+/// pub re-export for the typecheck checker (class_constructors_are_ambiguous)
+pub fn fn_args_ambiguous_pub(eng: &Engine, a: GNode, b: GNode) -> bool {
+    fn_args_ambiguous(eng, a, b)
+}
+
+/// utils.function_arguments_are_ambiguous (utils.py:1425-1448) FULL port:
+/// argnames() inequality, then the defaults pairs — note the early `return`
+/// inside the zip loop: only the FIRST zipped pair is actually compared,
+/// and (None, None) kw_default pairs hit the `case _: return True` arm.
 fn fn_args_ambiguous(eng: &Engine, a: GNode, b: GNode) -> bool {
-    let names = |g: GNode| -> Option<(Vec<GSym>, Vec<GSym>)> {
-        let md = eng.md(g.m);
-        let argsn = match &md.tree.nodes[g.n.idx()].kind {
-            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
-            _ => return None,
-        };
-        let NodeKind::Arguments(ad) = &md.tree.nodes[argsn.idx()].kind else { return None };
-        let mut pos = Vec::new();
-        for &an in ad.posonlyargs.iter().chain(ad.args.iter()) {
-            if let NodeKind::AssignName { name } = &md.tree.nodes[an.idx()].kind {
-                pos.push(eng.g(&md, *name));
-            }
-        }
-        let mut kw = Vec::new();
-        for &an in ad.kwonlyargs.iter() {
-            if let NodeKind::AssignName { name } = &md.tree.nodes[an.idx()].kind {
-                kw.push(eng.g(&md, *name));
-            }
-        }
-        Some((pos, kw))
+    let spec_of = |g: GNode| eng.arg_spec(g);
+    let (sa, sb) = match (spec_of(a), spec_of(b)) {
+        (Some(x), Some(y)) => (x, y),
+        _ => return false,
     };
-    match (names(a), names(b)) {
-        (Some((pa, ka)), Some((pb, kb))) => pa != pb || ka != kb,
-        _ => false,
+    // argnames() = [elt.name for elt in args.arguments] (one combined list)
+    let argnames = |s: &pyinfer::calls::ArgSpec| -> Vec<GSym> {
+        s.arguments().iter().filter_map(|&an| eng.assign_name_of(an)).collect()
+    };
+    if argnames(&sa) != argnames(&sb) {
+        return true;
     }
+    // pairs_of_defaults: (defaults, defaults) then (kw_defaults, kw_defaults)
+    // `None in zippable_default` -> raw-built args (args_unknown) lists None
+    enum DefEntry {
+        Node(GNode),
+        NoneEntry,
+    }
+    let pairs: Vec<(Option<Vec<DefEntry>>, Option<Vec<DefEntry>>)> = vec![
+        (
+            if sa.args_unknown { None } else { Some(sa.defaults.iter().map(|&d| DefEntry::Node(d)).collect()) },
+            if sb.args_unknown { None } else { Some(sb.defaults.iter().map(|&d| DefEntry::Node(d)).collect()) },
+        ),
+        (
+            if sa.args_unknown { None } else {
+                Some(sa.kw_defaults.iter().map(|d| match d {
+                    Some(g) => DefEntry::Node(*g),
+                    None => DefEntry::NoneEntry,
+                }).collect())
+            },
+            if sb.args_unknown { None } else {
+                Some(sb.kw_defaults.iter().map(|d| match d {
+                    Some(g) => DefEntry::Node(*g),
+                    None => DefEntry::NoneEntry,
+                }).collect())
+            },
+        ),
+    ];
+    for (da, db) in pairs {
+        let (da, db) = match (da, db) {
+            (Some(x), Some(y)) => (x, y),
+            _ => continue,
+        };
+        if da.len() != db.len() {
+            return true;
+        }
+        // zip: the FIRST pair decides (early return, utils.py:1437-1444)
+        if let (Some(d1), Some(d2)) = (da.first(), db.first()) {
+            return match (d1, d2) {
+                (DefEntry::Node(g1), DefEntry::Node(g2)) => {
+                    let md1 = eng.md(g1.m);
+                    let md2 = eng.md(g2.m);
+                    let k1 = &md1.tree.nodes[g1.n.idx()].kind;
+                    let k2 = &md2.tree.nodes[g2.n.idx()].kind;
+                    match (k1, k2) {
+                        (NodeKind::Const(c1), NodeKind::Const(c2)) => {
+                            // python `!=` over const values
+                            py_key(c1) != py_key(c2)
+                        }
+                        (NodeKind::Name { name: n1 }, NodeKind::Name { name: n2 }) => {
+                            eng.g(&md1, *n1) != eng.g(&md2, *n2)
+                        }
+                        _ => true,
+                    }
+                }
+                _ => true,
+            };
+        }
+        // empty zip: fall through to the next pair
+    }
+    false
 }
 
 /// node.pytype() for inference results (None when the object has no pytype).

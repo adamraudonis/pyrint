@@ -1622,7 +1622,10 @@ impl Engine {
                                     Some(ConstValue::Str(s)) => {
                                         let sym = self.sym(&s);
                                         if unpacked_kwargs.iter().any(|(k2, _)| *k2 == sym) {
-                                            duplicated.push(sym);
+                                            // duplicated_keywords is a set
+                                            if !duplicated.contains(&sym) {
+                                                duplicated.push(sym);
+                                            }
                                             if let Some(e) = unpacked_kwargs
                                                 .iter_mut()
                                                 .find(|(k2, _)| *k2 == sym)
@@ -1654,11 +1657,12 @@ impl Engine {
                     }
                 }
                 Some(n) => {
-                    if unpacked_kwargs.iter().any(|(k2, _)| k2 == n) {
-                        duplicated.push(*n);
-                        if let Some(e) = unpacked_kwargs.iter_mut().find(|(k2, _)| k2 == n) {
-                            e.1 = NV::V(Value::Uninferable);
-                        }
+                    // arguments.py:140 `values[name] = value` — the explicit
+                    // keyword branch NEVER checks membership: a collision
+                    // with an earlier **-unpacked key silently OVERWRITES
+                    // (position preserved), no duplicated_keywords entry.
+                    if let Some(e) = unpacked_kwargs.iter_mut().find(|(k2, _)| k2 == n) {
+                        e.1 = NV::N(*value);
                     } else {
                         unpacked_kwargs.push((*n, NV::N(*value)));
                     }

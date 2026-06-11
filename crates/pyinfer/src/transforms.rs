@@ -1510,17 +1510,22 @@ impl Engine {
             } else {
                 (Some(fa.ann), format!("self.{name} = {name}"))
             };
-            let ann_str: Option<String> = ann_node.and_then(|a| self.expr_source(a));
+            // annotation.as_string() / default.as_string() — the REAL
+            // as_string port (asstr.rs): astroid renders NamedExpr bare,
+            // so walrus defaults make the generated init UNPARSEABLE
+            // (brain_dataclasses.py:91-94 `except AstroidSyntaxError: pass`)
+            let ann_str: Option<String> =
+                ann_node.map(|a| crate::asstr::as_string(self, a));
             let mut default_str: Option<String> = None;
             if let Some(v) = fa.value {
                 if is_field {
                     match self.dataclass_field_default(v) {
-                        Some((false, dn)) => default_str = self.expr_source(dn),
+                        Some((false, dn)) => {
+                            default_str = Some(crate::asstr::as_string(self, dn))
+                        }
                         Some((true, dn)) => {
                             default_str = Some(DEFAULT_FACTORY.to_string());
-                            let f = self
-                                .expr_source(dn)
-                                .unwrap_or_else(|| "None".to_string());
+                            let f = crate::asstr::as_string(self, dn);
                             // new_call.as_string() == f"{factory}()"
                             assignment = format!(
                                 "self.{name} = {f}() if {name} is {DEFAULT_FACTORY} else {name}"
@@ -1529,7 +1534,7 @@ impl Engine {
                         None => {}
                     }
                 } else {
-                    default_str = self.expr_source(v);
+                    default_str = Some(crate::asstr::as_string(self, v));
                 }
             } else if let Some(pn) = property_node {
                 // str(next(property_node.infer_call_result(None)).as_string())
@@ -1538,15 +1543,8 @@ impl Engine {
                     Ok(Some(v)) => {
                         default_str = Some(match &v {
                             Value::Uninferable => "Uninferable".to_string(),
-                            Value::Node(g) => self
-                                .expr_source(*g)
-                                .unwrap_or_else(|| "None".to_string()),
-                            Value::SynthConst(c) => match c.as_ref() {
-                                pyast::tree::ConstValue::Str(s) => {
-                                    pyast::pyrepr::repr_str(s)
-                                }
-                                other => const_format(other),
-                            },
+                            Value::Node(g) => crate::asstr::as_string(self, *g),
+                            Value::SynthConst(c) => crate::asstr::const_repr(c),
                             _ => "None".to_string(),
                         });
                     }
@@ -1589,9 +1587,9 @@ impl Engine {
                         }
                         if let Some((is_factory, dn)) = self.dataclass_field_default(pv) {
                             default_str = if is_factory {
-                                self.expr_source(dn).map(|f| format!("{f}()"))
+                                Some(format!("{}()", crate::asstr::as_string(self, dn)))
                             } else {
-                                self.expr_source(dn)
+                                Some(crate::asstr::as_string(self, dn))
                             };
                             break 'outer;
                         }

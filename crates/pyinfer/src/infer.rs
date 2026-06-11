@@ -2513,6 +2513,7 @@ impl Engine {
             }
             Value::Inst { .. } | Value::ExcInst { .. } => self.instance_callable(v),
             Value::BoundMethod { .. }
+            | Value::DescBM { .. }
             | Value::UnboundMethod { .. }
             | Value::Property { .. }
             | Value::Partial { .. } => true,
