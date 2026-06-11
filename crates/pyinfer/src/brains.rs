@@ -61,6 +61,8 @@ pub enum Tip {
     TypingCast,
     /// brain_statistics infer_statistics_quantiles: yields Uninferable
     StatisticsQuantiles,
+    /// brain_random infer_random_sample
+    RandomSample,
 }
 
 /// registration-ordered numpy member templates: function_base (3),
@@ -126,6 +128,7 @@ fn tip_id(t: Tip) -> (u8, u8) {
         Tip::Pep695Generic => (7, 24),
         Tip::TypingCast => (5, 4),
         Tip::StatisticsQuantiles => (7, 23),
+        Tip::RandomSample => (7, 22),
     }
 }
 
@@ -526,6 +529,11 @@ impl Engine {
         if self.looks_like_statistics_quantiles(node) {
             return Some(Tip::StatisticsQuantiles);
         }
+        // brain_random._looks_like_random_sample: ANY `<x>.sample(...)`
+        // attribute call or bare `sample(...)` (brain_random.py:84-90)
+        if self.looks_like_random_sample(node) {
+            return Some(Tip::RandomSample);
+        }
         match &md.tree.nodes[func.idx()].kind {
             NodeKind::Name { name } => {
                 let n = md.tree.s(*name);
@@ -748,7 +756,81 @@ impl Engine {
             // brain_statistics.infer_statistics_quantiles: yields U
             // unconditionally (brain_statistics.py:52-65)
             Tip::StatisticsQuantiles => Some(Flow::one(Value::Uninferable)),
+            Tip::RandomSample => self.tip_random_sample(node, ctx),
         }
+    }
+
+    /// brain_random._looks_like_random_sample (brain_random.py:84-90)
+    fn looks_like_random_sample(&self, node: GNode) -> bool {
+        let md = self.md(node.m);
+        let func = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { func, .. } => *func,
+            _ => return false,
+        };
+        match &md.tree.nodes[func.idx()].kind {
+            NodeKind::Attribute { attrname, .. } => md.tree.s(*attrname) == "sample",
+            NodeKind::Name { name } => md.tree.s(*name) == "sample",
+            _ => false,
+        }
+    }
+
+    /// brain_random.infer_random_sample (brain_random.py:41-80): safe_infer
+    /// both args; the sequence must be a real List/Set/Tuple container and
+    /// k <= len; the result is a fresh List of k CLONED elements chosen by
+    /// `random.sample` AT INFERENCE TIME — the warm oracle's unseeded
+    /// Mersenne state makes the SELECTION irreducible; we pick a stable
+    /// pseudo-random subset (deterministic LCG) so the List length (the
+    /// dump-visible part) matches and reruns are stable.
+    fn tip_random_sample(&self, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
+        let md = self.md(node.m);
+        let args: Vec<pyast::NodeId> = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { args, .. } => args.clone(),
+            _ => return None,
+        };
+        if args.len() != 2 {
+            return None; // UseInferenceDefault
+        }
+        let k = match self.safe_infer(GNode { m: node.m, n: args[1] }, ctx) {
+            Some(v) => match self.value_const(&v) {
+                Some(ConstValue::Int(pyast::tree::IntValue::Small(i))) => i,
+                Some(ConstValue::Bool(b)) => b as i64,
+                _ => return None,
+            },
+            None => return None,
+        };
+        let seq = self.safe_infer(GNode { m: node.m, n: args[0] }, ctx)?;
+        let elts: Vec<Value> = match &seq {
+            Value::Node(g) => {
+                let smd = self.md(g.m);
+                match &smd.tree.nodes[g.n.idx()].kind {
+                    NodeKind::List { elts, .. }
+                    | NodeKind::Tuple { elts, .. }
+                    | NodeKind::Set { elts } => elts
+                        .iter()
+                        .map(|&e| Value::Node(GNode { m: g.m, n: e }))
+                        .collect(),
+                    _ => return None,
+                }
+            }
+            Value::SynthSeq { elems, .. } => elems.to_vec(),
+            _ => return None,
+        };
+        if k < 0 || k as usize > elts.len() {
+            return None; // ValueError -> UseInferenceDefault
+        }
+        // deterministic Fisher-Yates with an LCG keyed off the node
+        let mut pool: Vec<Value> = elts;
+        let mut state: u64 = 0x9E3779B97F4A7C15u64 ^ ((node.n.idx() as u64) << 16);
+        let mut chosen: Vec<Value> = Vec::with_capacity(k as usize);
+        for _ in 0..k {
+            state = state.wrapping_mul(6364136223846793005).wrapping_add(1442695040888963407);
+            let idx = (state >> 33) as usize % pool.len();
+            chosen.push(pool.remove(idx));
+        }
+        Some(Flow::one(Value::SynthSeq {
+            kind: crate::value::SeqKind::List,
+            elems: Rc::new(chosen),
+        }))
     }
 
     /// brain_typing.infer_typing_cast (brain_typing.py:404-422):

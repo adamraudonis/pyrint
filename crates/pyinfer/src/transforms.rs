@@ -669,6 +669,21 @@ impl Engine {
         if self.looks_like_statistics_quantiles(g) {
             self.wipe();
         }
+        // brain_random sample (predicate is syntactic: ANY .sample() call)
+        {
+            let md = self.md(g.m);
+            let is_sample = match &md.tree.nodes[g.n.idx()].kind {
+                NodeKind::Call { func, .. } => match &md.tree.nodes[func.idx()].kind {
+                    NodeKind::Attribute { attrname, .. } => md.tree.s(*attrname) == "sample",
+                    NodeKind::Name { name } => md.tree.s(*name) == "sample",
+                    _ => false,
+                },
+                _ => false,
+            };
+            if is_sample {
+                self.wipe();
+            }
+        }
         // brain_typing tips
         if let Some(s) = &simple {
             if s == "TypeVar" || s == "NewType" || s == "cast" {

@@ -93,6 +93,13 @@ pub fn dedup_key(v: &Value) -> Option<DedupKey> {
         Value::BoundMethod { func, bound } => {
             Some(DedupKey::BMId(*func, std::rc::Rc::as_ptr(bound) as *const () as usize))
         }
+        // Slice objects: astroid's slice(...) tip builds a fresh Slice NODE
+        // whose cache replays are the SAME object (dedup); our SynthSlice
+        // clones share the bounds Rc (pandas _convert_slice_indexer's
+        // repeated `return key` relays collapse to one Slice)
+        Value::SynthSlice { bounds } => {
+            Some(DedupKey::Ptr(std::rc::Rc::as_ptr(bounds) as *const () as usize))
+        }
         _ => None,
     }
 }
