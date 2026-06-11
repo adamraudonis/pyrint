@@ -2288,7 +2288,7 @@ impl Engine {
 
     /// source slice for an expression (as_string() approximation: enum
     /// member values are formatted back into the fake class source).
-    fn expr_source(&self, g: GNode) -> Option<String> {
+    pub(crate) fn expr_source(&self, g: GNode) -> Option<String> {
         let md = self.md(g.m);
         if md.file.starts_with('<') {
             return None;

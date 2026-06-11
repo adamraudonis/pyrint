@@ -986,8 +986,20 @@ impl Engine {
                 // `yield from new_call.infer(context=ctx)` under the live
                 // ctx. Name/Attribute factories take this path; other
                 // shapes keep the value-equivalent emulation below.
-                if let Some(dotted) = self.dotted_of(fg) {
-                    let src = format!("{dotted}()\n");
+                let src_opt = if let Some(dotted) = self.dotted_of(fg) {
+                    Some(format!("{dotted}()\n"))
+                } else if self.kind_is(fg, |k| matches!(k, NodeKind::Lambda(_))) {
+                    // Call.as_string puts precedence parens around a lambda
+                    // func (as_string.py _precedence_parens):
+                    // `(lambda: defaultdict(dict))()` — the re-parse builds
+                    // a FRESH Lambda (template line 1) whose body call gets
+                    // its own NodeNG.infer hops (esphome entry_data
+                    // field(default_factory=lambda: defaultdict(dict)))
+                    self.expr_source(fg).map(|s| format!("({s})()\n"))
+                } else {
+                    None
+                };
+                if let Some(src) = src_opt {
                     if let Some(tmpl_call) = self.template_extract_node(&src) {
                         // `new_call.parent = node.parent`
                         // (brain_dataclasses.py:431): the re-parsed call is
@@ -1085,7 +1097,19 @@ impl Engine {
             Some(Value::Node(g))
                 if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))) =>
             {
-                let root = self.md(g.m).name.clone();
+                // klass.root().name (brain_dataclasses.py:614) — REPARENT-
+                // AWARE: extender-template classes (collections.defaultdict)
+                // live in a ''-named template module but are reparented
+                // into the real module (brain/helpers.py:25-27); the raw
+                // module name matched the '' branch and wrongly yielded U
+                // (esphome entry_data defaultdict annotation).
+                let root = {
+                    let mut top = *g;
+                    while let Some(p) = self.parent(top) {
+                        top = p;
+                    }
+                    self.md(top.m).name.clone()
+                };
                 if matches!(root.as_str(), "typing" | "_collections_abc" | "") {
                     let n = self.node_name(*g).unwrap_or_default();
                     if matches!(n.as_str(), "Dict" | "FrozenSet" | "List" | "Set" | "Tuple") {
