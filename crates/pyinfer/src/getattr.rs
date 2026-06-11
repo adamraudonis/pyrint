@@ -2788,12 +2788,23 @@ impl Engine {
             self.ftype_cache.borrow_mut().insert(func, t);
             return t;
         }
-        let t = self.compute_func_type(func);
+        let t = self.compute_func_type(func, None);
         self.ftype_cache.borrow_mut().insert(func, t);
         t
     }
 
-    fn compute_func_type(&self, func: GNode) -> FType {
+    /// FunctionDef.type for an objects.PartialFunction: same algorithm as
+    /// the wrapped FunctionDef's, but `self.parent` is the partial(...)
+    /// Call's parent (so the frame check sees the assignment site's frame).
+    /// NOT cached (fresh PartialFunction object per inference in astroid).
+    pub fn partial_func_type(&self, func: GNode, parent: Option<GNode>) -> FType {
+        match parent {
+            Some(p) => self.compute_func_type(func, Some(p)),
+            None => self.func_type(func),
+        }
+    }
+
+    fn compute_func_type(&self, func: GNode, parent_override: Option<GNode>) -> FType {
         let md = self.md(func.m);
         let (name, decorators) = match &md.tree.nodes[func.n.idx()].kind {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
@@ -2832,7 +2843,9 @@ impl Engine {
             _ => return FType::Function,
         };
         // extra_decorators: `meth = staticmethod(meth)` in the class body
-        let parent_frame = self.parent(func).map(|p| self.frame(p));
+        let parent_frame = parent_override
+            .or_else(|| self.parent(func))
+            .map(|p| self.frame(p));
         let in_class = parent_frame
             .map(|f| self.kind_is(f, |k| matches!(k, NodeKind::ClassDef(_))))
             .unwrap_or(false);

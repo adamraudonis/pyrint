@@ -104,6 +104,10 @@ pub enum Value {
         func: GNode,
         filled_args: Rc<Vec<GNode>>,
         filled_keywords: Rc<Vec<(GSym, GNode)>>,
+        /// PartialFunction.parent = the partial(...) Call's parent
+        /// (brain_functools.py:119) — determines FunctionDef.type ("method"
+        /// when the partial is assigned in a class body)
+        parent: Option<GNode>,
     },
     /// objects.Super
     Super {

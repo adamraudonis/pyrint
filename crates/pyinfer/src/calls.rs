@@ -344,6 +344,7 @@ impl Engine {
                 func,
                 filled_args,
                 filled_keywords,
+                ..
             } => {
                 if let Some(c) = ctx {
                     if let Some(cc) = c.callcontext.borrow().as_ref() {

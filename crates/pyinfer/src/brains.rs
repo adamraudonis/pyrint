@@ -2793,6 +2793,7 @@ dict
             func,
             filled_args: Rc::new(filled_args),
             filled_keywords: Rc::new(filled_keywords),
+            parent: self.parent(node),
         }))
     }
 }

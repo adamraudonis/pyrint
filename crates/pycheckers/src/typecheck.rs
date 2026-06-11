@@ -360,9 +360,14 @@ pub fn determine_callable(eng: &Engine, called: &Option<Value>) -> Option<Determ
         Value::UnboundMethod { func } => {
             Some(Determined { value: v.clone(), func: *func, implicit: 0, name: "unbound method", desc_get: false })
         }
-        Value::Partial { func, .. } => {
-            // PartialFunction: FunctionDef arm; .type resolves "function"
-            Some(Determined { value: v.clone(), func: *func, implicit: 0, name: "function", desc_get: false })
+        Value::Partial { func, parent, .. } => {
+            // PartialFunction: FunctionDef arm. Its .type is computed with
+            // parent = the partial(...) Call's parent (brain_functools):
+            // a partial assigned in a class body is a "method", and
+            // implicit_parameters() = 1 (is_bound, scoped_nodes.py:1412).
+            let t = eng.partial_func_type(*func, *parent);
+            let implicit = matches!(t, FType::Method | FType::ClassMethod) as usize;
+            Some(Determined { value: v.clone(), func: *func, implicit, name: ftype_str(t), desc_get: false })
         }
         Value::Property { func, .. } => {
             // objects.Property.type = "property" (objects.py:349)
