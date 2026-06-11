@@ -2159,7 +2159,12 @@ dict
                 for e in elts {
                     match e {
                         NV::V(Value::Uninferable) => continue,
-                        NV::N(g) => {
+                        // raw AST nodes — whether held directly (parsed
+                        // containers) or inside a fresh Tuple's elts (the
+                        // materialized *args tuple holds the call site's
+                        // RAW argument nodes, arguments.py infer_argument)
+                        // — go through safe_infer; failures skipped
+                        NV::N(g) | NV::V(Value::Node(g)) => {
                             // `if inferred:` (brain_builtin_inference.py:281)
                             // — bool(Uninferable) is False: a safe_infer
                             // that resolves to Uninferable is SKIPPED

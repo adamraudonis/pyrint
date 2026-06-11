@@ -3064,7 +3064,8 @@ impl Engine {
             Value::SynthSeq { kind, elems } => {
                 let reprs: Vec<String> =
                     elems.iter().map(|e| self.astroid_value_repr(e)).collect();
-                Some(container_str(*kind, Some("Load"), &reprs))
+                // fresh containers are constructed without ctx -> ctx=None
+                Some(container_str(*kind, Some("None"), &reprs))
             }
             Value::FrozenSet { elems } => {
                 let reprs: Vec<String> =
@@ -3227,12 +3228,19 @@ fn container_str(kind: SeqKind, ctx: Option<&str>, elt_reprs: &[String]) -> Stri
     let mut fields: Vec<String> = Vec::new();
     if !matches!(kind, SeqKind::Set) {
         let ctx_name = ctx.unwrap_or("Load");
-        let num = match ctx_name {
-            "Store" => 2,
-            "Del" => 3,
-            _ => 1,
-        };
-        fields.push(format!("ctx=<Context.{ctx_name}: {num}>"));
+        if ctx_name == "None" {
+            // inference-fabricated containers (Sequence._infer new_seq,
+            // brain _container_generic_inference) are constructed without
+            // ctx — NodeNG.__str__ prints `ctx=None`
+            fields.push("ctx=None".to_string());
+        } else {
+            let num = match ctx_name {
+                "Store" => 2,
+                "Del" => 3,
+                _ => 1,
+            };
+            fields.push(format!("ctx=<Context.{ctx_name}: {num}>"));
+        }
     }
     let width = 80usize.saturating_sub(4 + alignment); // len("elts")
     let body = pformat_seq(elt_reprs, width, '[', ']');
