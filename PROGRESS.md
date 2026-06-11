@@ -680,6 +680,77 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 12 (diff-reduction round 11, sample=ALL files)**: harness fix
+     (PRYLINT_DUMP_ONLY prebuilds full corpus, dumps subset) made full-corpus
+     runs the gate. 998 -> 530 diff lines across all 7 (django 121->66,
+     pylfunc 8->7, pandas 46->46, salt 330->117, airflow 227->75, sentry
+     50->43, core 216->176; ~13.6M inference lines checked total).
+     LANDED (probe-verified; harness/infertests now 101 probes):
+     (a) **NameInferenceError KIND propagation**: tuple-unpack rhs pulls
+     (_resolve_assignment_parts top level, protocols.py:465/482-519 — the
+     nested recursion's except swallows, the top level re-raises AS-IS) and
+     _infer_context_manager's next(mgr.infer()) (protocols.py:568-571 — only
+     StopIteration converts). _infer_stmts skips NameInferenceError stmts
+     silently (bases.py:190) -> whole-Name ERR. Killed the 247-line ERRvsU
+     cluster (salt states/modules `source=source` kwargs, airflow psrp/asb
+     `with ... as ps`).
+     (b) **path_wrapper identity dedup for ExcInst/Generator**
+     (decorators.py:46 checks __class__.__name__ == "Instance" — everything
+     else dedups by object id): InstId / captured-ctx Rc ptr mirror python
+     identity (airflow run_utils duplicate ExcInst, test_choices Gen dups).
+     (c) **_transform_wrapper PERMANENT module reparent**
+     (brain_builtin_inference.py:206-210): builtin-tip results with no
+     parent (Modules — `getattr(self, "x", pickle)` default) get
+     result.parent = the Call node; qname() of the whole subtree changes for
+     the rest of the run (Func:<mod>.DockerOperator._copy_from_docker.pickle
+     ._loads — 28-line airflow cluster). reparents now apply to module roots;
+     qname() walks through them.
+     (d) **infer_hasattr returns Uninferable on UseInferenceDefault**
+     (brain_builtin_inference.py:579-581) — never falls back to default Call
+     inference (vesync/connection.py UvsERR cluster).
+     (e) **enum-member PROXY placeholders survive _filter_stmts**: Instance
+     objects in class locals delegate statement/assign_type/ancestors to
+     their _proxied fake ClassDef (reparented) — Name refs to earlier
+     members inside the enum body (QUEUED in `NON_TERMINAL = (QUEUED,)`)
+     infer to the member instance.
+     (f) **container tips safe_infer raw-node elements**
+     (brain_builtin_inference.py:277-285): elements that are AST nodes —
+     incl. nodes held INSIDE a materialized *args tuple — are safe-inferred
+     and SKIPPED on failure (django i18n_patterns list(urls) -> List:0);
+     synthetic container __str__ prints ctx=None (fabricated without ctx).
+     (g) **dict-view proxies (DictKeys/Values/Items)**: hasattr(x,"elts") is
+     True (objectmodel synthesized List) — starred unpack and CallSite
+     *args iterate them; igetattr delegates to the List node as a
+     builtins.list instance (d.keys().sort -> BM:builtins.list.sort); but
+     object_len (helpers.py:278-81) and dict.fromkeys keep their EXACT
+     node-class checks (proxies fall through -> ERR / empty dict).
+     (h) **BooleanConstraint on synthetic model-attr hops** (bases.py:184-89
+     constraint filtering runs for every stmt result): exception-model
+     .args under `... if self.args else ...` fails truthiness -> trailing
+     yield U; the rejected value still burns the pull-again bump.
+     (i) **ModuleModel inherits ObjectModel __new__/__init__** BMs — the raw
+     builder's `from builtins import __new__` C-member shims resolve through
+     module getattr (ctypes Structure cluster, salt platform/win.py).
+     (j) **PartialFunction generator qname**: Generator.parent is the
+     PartialFunction whose qname() is the literal class name
+     (objects.py:325-26) -> Gen:PartialFunction.
+     REMAINING (530 lines, by volume): (1) **nodes_inferred counter/cap
+     dynamics** (~330 lines: gtU-we-values 189 + chunks of EXTRA/MISSING/
+     mismatch): e.g. namedtuple+Enum mixin attr access burns ##61 in astroid
+     vs ##37 ours (the fake member classes re-infer the textual
+     `namedtuple(...)` base Call in a no-tip module, 13+11 bumps), salt
+     consensus/service.py instance-attr dict walks cap-truncate to U in GT,
+     core config/__init__ module list truncates one element earlier, esphome
+     try_parse_enum third value. Two known count off-by-ones in the suite
+     (as_view_function_attrs ##5 vs ##4, brain_ssl_signal_re_http ##116 vs
+     ##115). (2) **irreducible-by-construction** (~25 lines): os.environ
+     snapshot content/order from the live warm process (airflow conf/parser,
+     pylfunc; would need re-snapshot in an identical env), and CPython
+     set-iteration ORDER of string sets (PYTHONHASHSEED randomization in the
+     warm run — salt test_man, core). (3) long tail of context-dependent
+     clusters (test_deprecation_tools module-__getattr__, ibm/mq conftest,
+     reset_warning_registry sys.modules mutation) that only reproduce with
+     full-corpus cache state.
    - **phase 11 (diff-reduction round 10, N=1000)**: 496 -> 50 diff lines.
      LANDED (probe-verified, harness/infertests now 84 probes):
      (a) **streaming UnaryOp._infer** (node_classes._infer_unaryop is a
