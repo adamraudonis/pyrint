@@ -1531,6 +1531,51 @@ pylint behavior — bugs are replicated.
       200 == 0 (108076 lines), 151 infertests PASS. Suite ≈ 121s
       (slowest core 21.2s).
 
+13. **standalone binary (PyPI prep)**: DONE — the binary runs with NO repo
+    checkout and NO astroid/pylint installed; only a python3 (any install,
+    PRYLINT_PYTHON overrides) is consulted at runtime.
+    - **Embedded oracle**: harness/syntax_oracle.py (astroid-importing) is
+      replaced at runtime by crates/cli/src/syntax_oracle.py — a STDLIB-ONLY
+      replica of pylint get_ast()/astroid file_build error taxonomy,
+      include_str!'d into oracle.rs, materialized to a content-keyed temp
+      file and spawned `python3 -I`. Replicates: open_source_file encoding
+      arms (detect_encoding SyntaxError/LookupError → E0001 w/ ABSOLUTE
+      path; UnicodeError → F0010 "Wrong or no encoding"; OSError → F0010
+      "Unable to load file"), modutils.get_source_file .pyi→.py redirect,
+      _parse_string (data+'\n', filename=modname iff truthy, type-comment
+      retry sans filename → '(<unknown>, line N)'), null-bytes ValueError
+      (line 0), MemoryError, tokenize.TokenError pass, AND astroid's
+      TreeRebuilder RecursionError on deep trees: a frame-faithful walk
+      (2 python frames/AST level; 3 for For/With/FunctionDef + Dict whose
+      children rebuild under the _visit_* helper / _visit_dict_items
+      generator frame; expr_context/operator nodes skipped), shim-
+      calibrated to pinned astroid's crash boundary (first crash at 494
+      nested binop/unary/attr/ifexp/lambda levels; parenthesized nesting
+      is capped ~200 by CPython's parser itself → exact SyntaxError parity
+      for free). This drives sympy's two F0002s (resolvent_lookup crashes
+      the rebuild; galois_resolvents F0002 via the import-recrash set).
+      harness/check_oracle.py = differential gate vs .venv astroid: all
+      355 corpus E0001 files + 68 synthetic edge/boundary cases, 0
+      mismatches. PRYLINT_ORACLE env still swaps in a custom script.
+    - **Embedded snapshots**: crates/pyinfer/build.rs include_str!s all
+      103 snapshot JSONs (sorted table, binary_search lookup in
+      snapshot::embedded_json); PRYLINT_SNAPSHOT_DIR is now only an
+      on-disk override for regeneration/debug. Binary 6.6MB → 14.3MB.
+    - **Degradation without python3** (documented contract): files our
+      parser parses still lint fully except stdlib/site-packages imports
+      are unresolved (pyenv probe failure, sys.path = project root only);
+      ruff-rejected files report F0002 astroid-error instead of exact
+      E0001; deep-tree (≥350) crash candidates also F0002. One clear
+      stderr note each from the oracle spawn + pyenv probe.
+    - **harness/check_standalone.sh**: copies the binary ALONE to an empty
+      temp dir, fresh project (syntax-error file, t-string file, broken-
+      module import, snapshot-driven E1102 math.pi()) → byte-identical vs
+      .venv-pylint pylint (PYTHONHASHSEED=0) + equal exits + empty stderr.
+      Default-PATH python3 (3.14) run also verified: t-string file parses
+      there → "parses with CPython but not with ruff; module skipped"
+      stderr note (verdicts are interpreter-version-dependent by design,
+      exactly as for pylint itself).
+
 ## Gotchas for future rounds
 
 - Don't sort anything pylint doesn't sort. Order comes from readdir + dict
