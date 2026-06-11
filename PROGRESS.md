@@ -680,11 +680,16 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
-   - **phase 14 (diff-reduction round 13, sample=ALL files)**: 298 -> 157
-     diff lines (round logs /tmp/inferdump_all_round{1,2,3}.log; round-3:
-     django 10/15, pylfunc 4/5, pandas 9/40, salt 6/14, airflow 8/22,
-     sentry 1/2, core 16/59). LANDED (probe-verified; harness/infertests
-     now 131 probes):
+   - **phase 14 (diff-reduction round 13, sample=ALL files)**: 298 -> 126
+     diff lines (round logs /tmp/inferdump_all_round{1,2,3}.log; final:
+     django 10/15, pylfunc 4/5, pandas 6/9, salt 6/14, airflow 8/22,
+     sentry 1/2, core 16/59; tree gate 0, shell gate PASS x7, 130 probes
+     PASS). LANDED (probe-verified):
+     (-) **infer_slice safe-infers ALL args EAGERLY under the SHARED
+     context** (brain_builtin_inference.py:687-688 list comprehension runs
+     BEFORE validation; bumps land even when a later check bails to
+     default) — pandas test_indexing 40 -> 9 (astroid caps at the slice
+     callee; we used to bail after the first non-Const arg).
      (a) **EvaluatedObject elements** (new Value variant): container tips
      wrap mixed-branch elements (brain_builtin_inference.py:283-285);
      infer hop yields the inner value, but NO getitem on the element —
@@ -715,18 +720,30 @@ pylint behavior — bugs are replicated.
      (g) str.format folds {x!r}/{x!s}/{x!a} conversions; exact decimal
      bigint add/sub past i128 ((2**128)-1); extender-template Lambda
      renders root().name through reparents.
-     REMAINING (157 lines, by volume): (1) count/cache-dynamics clusters —
-     core sensor trio (31: GT third value Const:None after our cap-U),
-     pandas test_indexing (30: GT misses Inst:slice we produce — enum
-     count divergence family; standalone enum-call probe shows GT##108 vs
-     RS##112, first split inside metaclass-attr machinery; corpus-faithful
-     GT+RS traces captured in /tmp/gttrace_core_sensor2.err +
-     /tmp/rstrace_core_sensor.err and pandas equivalents — full-prebuild +
-     --only-prefix replay procedure VERIFIES against the cache byte-exact,
-     use it for future rounds), core device_condition (19), airflow
-     simple_auth_manager (5) + ibm/mq conftest ERR-vs-U (4 — our
-     module-instance attr stays visible where GT wiped), salt http.py (4),
-     misc singles (~15). (2) irreducible GT-environment noise (~21):
+     REMAINING (126 lines, by volume): (1) ONE dominant count-parity root:
+     the StrEnum/IntEnum **mixin-enum CALL chain** (core sensor trio 31 +
+     device_condition 19 + airflow simple_auth_manager 5; minimal repro:
+     `class S(StrEnum): pass; S(None)` gives GT##108 vs RS##112 — plain
+     Enum and metaclass-__call__ probes MATCH). Corpus trace and the
+     minimal probe diverge IDENTICALLY: in the `metacls.__new__` resolution
+     (enum chain) GT pulls `ClassDef type` 6x then ONE FunctionDef __new__
+     (no bump, consumer abandons); we pull 7x type + extra
+     `Name object/ClassDef object` (+1 bump) + THREE FunctionDef pulls
+     (+2 bumps) -> the shared cap fires ~4 pulls later than astroid
+     downstream. Corpus-faithful trace replay procedure (full items +
+     --only=<prefix paths> on GT / PRYLINT_DUMP_ONLY + PRYLINT_TRACE_START
+     WITHOUT PRYLINT_TRACE_INFER on RS) verifies byte-exact vs the cache —
+     traces in /tmp/gttrace_core_sensor2.err + /tmp/rstrace_core_sensor.err
+     and /tmp/probe5. (2) context-dependent ERR-vs-U / cap singles: ibm/mq
+     conftest (4 — our module-instance attr stays visible where GT's
+     transform-wipe re-derivation lost it), salt http.py (4), django
+     test_middleware/test_formsets/admin_views/distapp/introspection/
+     rasterapp/test_choices/related/base (12), core config/shelly/hassio/
+     iron_os/config_validation/entry_data (7), airflow secrets_masker/
+     cli_parser/airflowctl/spark_sql (6), sentry test_snowflake (2),
+     salt build.py/test_clear_funcs (2), pandas singles (9: sas7bdat,
+     test_fiscal, test_box_unbox, test_nanops, test_to_latex). (3)
+     irreducible GT-environment noise (~21):
      os.environ content/order (pylfunc 2, airflow 7), PYTHONHASHSEED
      set-iteration order (salt test_man 4, deltaproxy RNG 2), live-process
      sys.path_importer_cache growth (salt lazy.py 3), pylfunc NOTREE x3
