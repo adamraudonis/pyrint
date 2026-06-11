@@ -252,6 +252,33 @@ pub const DEFAULT_ENABLED_MAIN: &[&str] = &[
     "E0015",
 ];
 
+/// Disabled-by-default (W/C/R/I) msgids our ported checkers nevertheless
+/// COMPUTE — an inline `# pylint: enable=` can resurrect these exactly.
+/// Enables naming anything else (and not enabled under the flags) get a
+/// stderr warning: the resurrected message would be a false negative.
+pub const EMITTED_DISABLED_MSGIDS: &[&str] = &[
+    // pragma machinery (cli)
+    "I0010", "I0011", "I0013", "I0020", "I0021", "I0022", "R0022", "W0012",
+    // basic / basic_error
+    "W0101", "W0122", "W0123", "W0134", "W0136", "W0137",
+    // variables
+    "W0611", "W0614", "W0632", "W0642", "W0644",
+    // exceptions
+    "W0702", "W0705", "W0706", "W0707", "W0711", "W0715", "W0718", "W0719",
+    // logging
+    "W1201", "W1202", "W1203",
+    // strings
+    "W1300", "W1301", "W1302", "W1303", "W1304", "W1305", "W1306", "W1307",
+    "W1308", "W1310",
+    // stdlib
+    "W1501", "W1503", "W1506", "W1507", "W1508", "W1509", "W1510", "W1514",
+    "W1515", "W1518",
+    // method_args / modified_iterating / match
+    "W3101", "W4701", "R1906",
+    // imports
+    "C0411", "C0412", "C0413",
+];
+
 /// Registered checker name -> msgids (`linter._checkers`), dumped from the
 /// pinned pylint 4.0.5 (`PyLinter.load_default_plugins`). Used by the
 /// checker-name branch of `_get_messages_to_set`.

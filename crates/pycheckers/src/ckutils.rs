@@ -908,6 +908,73 @@ pub fn is_terminating_func(eng: &Engine, caches: &LintCaches, call: GNode) -> bo
 // are_exclusive with exceptions (astroid node_classes.py:116-186)
 // ---------------------------------------------------------------------------
 
+/// astroid.are_exclusive(stmt1, stmt2) with exceptions=None: the If branch
+/// is ENABLED ("test" in attrs -> False; different branches -> True) and
+/// handler.catch(None) is always True.
+pub fn are_exclusive(eng: &Engine, stmt1: GNode, stmt2: GNode) -> bool {
+    let mut stmt1_parents: FxHashMap<GNode, GNode> = FxHashMap::default();
+    let mut previous = stmt1;
+    let mut cur = stmt1;
+    while let Some(node) = eng.parent(cur) {
+        stmt1_parents.insert(node, previous);
+        previous = node;
+        cur = node;
+    }
+    let mut previous2 = stmt2;
+    let mut cur2 = stmt2;
+    while let Some(node) = eng.parent(cur2) {
+        if let Some(&child1) = stmt1_parents.get(&node) {
+            if eng.kind_is(node, |k| matches!(k, NodeKind::If { .. })) {
+                let c2 = eng.locate_child(node, previous2);
+                let c1 = eng.locate_child(node, child1);
+                if c1 == Some("test") || c2 == Some("test") {
+                    return false;
+                }
+                if c1 != c2 {
+                    return true;
+                }
+            } else if eng.kind_is(node, |k| matches!(k, NodeKind::Try(_) | NodeKind::TryStar(_))) {
+                let c2 = eng.locate_child(node, previous2);
+                let c1 = eng.locate_child(node, child1);
+                if child1 != previous2 {
+                    let first_in_body_caught = c2 == Some("handlers") && c1 == Some("body");
+                    let second_in_body_caught = c2 == Some("body") && c1 == Some("handlers");
+                    let first_in_else = c2 == Some("handlers") && c1 == Some("orelse");
+                    let second_in_else = c2 == Some("orelse") && c1 == Some("handlers");
+                    if first_in_body_caught
+                        || second_in_body_caught
+                        || first_in_else
+                        || second_in_else
+                    {
+                        return true;
+                    }
+                } else if c2 == Some("handlers") && c1 == Some("handlers") {
+                    return previous2 != child1;
+                }
+            }
+            return false;
+        }
+        previous2 = node;
+        cur2 = node;
+    }
+    false
+}
+
+/// NodeNG.next_sibling(): delegate up to the enclosing statement, then the
+/// next statement in the parent's child sequence (None at end / for Module).
+pub fn next_sibling(eng: &Engine, g: GNode) -> Option<GNode> {
+    let stmt = eng.statement(g)?;
+    let parent = eng.parent(stmt)?;
+    let md = eng.md(parent.m);
+    let seqs = child_sequences(&md.tree.nodes[parent.n.idx()].kind);
+    for seq in seqs {
+        if let Some(pos) = seq.iter().position(|&n| n == stmt.n) {
+            return seq.get(pos + 1).map(|&n| GNode { m: stmt.m, n });
+        }
+    }
+    None
+}
+
 pub fn are_exclusive_exc(eng: &Engine, stmt1: GNode, stmt2: GNode, exceptions: &[&str]) -> bool {
     let mut stmt1_parents: FxHashMap<GNode, GNode> = FxHashMap::default();
     let mut previous = stmt1;

@@ -69,8 +69,12 @@ pub struct FileState<'t> {
     /// _module_msgs_state: msgid -> line -> state (block-EXPANDED)
     pub module_state: FxHashMap<MsgIdx, FxHashMap<u32, bool>>,
     /// _raw_module_msgs_state: msgid -> [(line, state)] in insertion order
-    /// (dict semantics: same-line overwrite keeps position)
-    pub raw_state: FxHashMap<MsgIdx, Vec<(u32, bool)>>,
+    /// (dict semantics: same-line overwrite keeps position); msgid keys in
+    /// first-insertion order (python dict semantics — iter_spurious order)
+    pub raw_state: indexmap::IndexMap<MsgIdx, Vec<(u32, bool)>>,
+    /// _suppression_mapping: (msgid, line) -> ORIGINAL pragma line
+    /// (file_state.py:170-176; set on disable, popped on enable)
+    pub suppression_mapping: FxHashMap<(MsgIdx, u32), u32>,
     /// module.tolineno (_effective_max_line_number)
     pub max_line: u32,
     /// cache: pragma line -> consuming (innermost containing) node
@@ -100,7 +104,8 @@ impl<'t> FileState<'t> {
             tree,
             postorder,
             module_state: FxHashMap::default(),
-            raw_state: FxHashMap::default(),
+            raw_state: indexmap::IndexMap::default(),
+            suppression_mapping: FxHashMap::default(),
             max_line,
             block_cache: FxHashMap::default(),
         }
@@ -112,7 +117,7 @@ impl<'t> FileState<'t> {
         if scope != Scope::Line {
             self.set_state_on_block_lines(idx, line, status);
         } else {
-            self.set_line(idx, line, status);
+            self.set_line(idx, line, status, line);
         }
         // store the raw value (dict overwrite keeps insertion position)
         let raw = self.raw_state.entry(idx).or_default();
@@ -122,7 +127,14 @@ impl<'t> FileState<'t> {
         }
     }
 
-    fn set_line(&mut self, idx: MsgIdx, line: u32, state: bool) {
+    /// _set_message_state_on_line (file_state.py:163-182): module state +
+    /// suppression mapping maintenance.
+    fn set_line(&mut self, idx: MsgIdx, line: u32, state: bool, original_lineno: u32) {
+        if !state {
+            self.suppression_mapping.insert((idx, line), original_lineno);
+        } else {
+            self.suppression_mapping.remove(&(idx, line));
+        }
         self.module_state.entry(idx).or_default().insert(line, state);
     }
 
@@ -310,10 +322,24 @@ impl<'t> FileState<'t> {
             if line == lineno {
                 state = status; // "state change in the same block"
             }
-            self.set_line(idx, line, state);
+            self.set_line(idx, line, state, lineno);
         }
     }
+
+    /// FileState.handle_ignored_message (file_state.py:207-223) — only the
+    /// MSG_STATE_SCOPE_MODULE branch records (the message line was disabled
+    /// by an in-module pragma).
+    pub fn state_scope_is_module(&self, idx: MsgIdx, line: u32) -> bool {
+        self.module_state
+            .get(&idx)
+            .map(|m| m.contains_key(&line))
+            .unwrap_or(false)
+    }
 }
+
+/// pylint constants.INCOMPATIBLE_WITH_USELESS_SUPPRESSION
+pub const INCOMPATIBLE_WITH_USELESS_SUPPRESSION: &[&str] =
+    &["R0401", "W0402", "W1505", "W1511", "W1512", "W1513", "R0801"];
 
 /// `_is_one_message_enabled` (message_state_handler.py:279-313).
 pub fn is_message_enabled(
@@ -442,6 +468,17 @@ pub fn process_tokens(
                     Ok(defs) => {
                         for idx in defs {
                             let def = msgstore::def(idx);
+                            if enable
+                                && !def.enabled
+                                && !msgstore::EMITTED_DISABLED_MSGIDS.contains(&def.msgid)
+                            {
+                                // inline enable resurrects a message we do
+                                // not compute -> guaranteed false negative
+                                eprintln!(
+                                    "prylint: warning: inline 'enable={}' names unimplemented message {} ({}) — it cannot be emitted",
+                                    msgid, def.msgid, def.symbol
+                                );
+                            }
                             match meth {
                                 Meth::Disable | Meth::Enable => {
                                     file_state.set_msg_status(idx, l_start, enable, Scope::Module);

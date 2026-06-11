@@ -455,10 +455,31 @@ fn lint_one(
             let path = p.abspath.replacen(strip_prefix, "", 1);
             let mut msgs: Vec<OutMsg> = Vec::new();
             let mut stats = Stats::default();
+            // FileState._ignored_msgs: (msgid, pragma line) -> message lines
+            // (file_state.py:41-43); RefCell since the walker borrows fs
+            // immutably while recording.
+            let ignored_msgs: std::cell::RefCell<
+                indexmap::IndexMap<(msgstore::MsgIdx, u32), std::collections::BTreeSet<u32>>,
+            > = std::cell::RefCell::new(indexmap::IndexMap::new());
+            let record_ignored = |fs: &FileState,
+                                  idx: msgstore::MsgIdx,
+                                  line: u32| {
+                // handle_ignored_message: MSG_STATE_SCOPE_MODULE only
+                if fs.state_scope_is_module(idx, line) {
+                    if let Some(&orig) = fs.suppression_mapping.get(&(idx, line)) {
+                        ignored_msgs
+                            .borrow_mut()
+                            .entry((idx, orig))
+                            .or_default()
+                            .insert(line);
+                    }
+                }
+            };
             {
                 let mut add = |fs: &mut FileState, msgid: &str, line: u32, col: i64, text: String| {
                     let Some(&idx) = store().by_msgid.get(msgid) else { return };
                     if !is_message_enabled(global, Some(fs), idx, Some(line)) {
+                        record_ignored(fs, idx, line);
                         return;
                     }
                     stats.count(msgid);
@@ -509,9 +530,11 @@ fn lint_one(
                         let fs_ref = &fs;
                         let stats_ref = &mut stats;
                         let msgs_ref = &mut msgs;
+                        let record_ignored_ref = &record_ignored;
                         let mut emit = |m: pycheckers::walker::CheckMsg| {
                             let Some(&idx) = store().by_msgid.get(m.msgid) else { return };
                             if !is_message_enabled(global, Some(fs_ref), idx, Some(m.line)) {
+                                record_ignored_ref(fs_ref, idx, m.line);
                                 return;
                             }
                             stats_ref.count(m.msgid);
@@ -532,9 +555,83 @@ fn lint_one(
                         let mut import_oracle = |p: &str, modname: &str| {
                             oracle_proc.syntax_error_str(p, modname)
                         };
-                        lint_run.walk_module(engine, mid, &mut emit, &mut import_oracle);
+                        let is_enabled = |msgid: &str, line: u32| -> bool {
+                            match store().by_msgid.get(msgid) {
+                                Some(&idx) => {
+                                    is_message_enabled(global, Some(fs_ref), idx, Some(line))
+                                }
+                                None => true, // unknown ids treated enabled
+                            }
+                        };
+                        let add_ignored = |msgid: &str, line: u32| {
+                            // linter.add_ignored_message (pylinter.py:1320-44)
+                            if let Some(&idx) = store().by_msgid.get(msgid) {
+                                record_ignored_ref(fs_ref, idx, line);
+                            }
+                        };
+                        lint_run.walk_module(
+                            engine,
+                            mid,
+                            &mut emit,
+                            &mut import_oracle,
+                            &is_enabled,
+                            &add_ignored,
+                        );
                     }
                     stats.statements += count_statements(&p.tree);
+                    // ---- iter_spurious_suppression_messages ----
+                    // (file_state.py:225-256; added via add_message AFTER
+                    //  check_astroid_module, pylinter.py:825-830)
+                    let mut spurious: Vec<(&'static str, u32, String)> = Vec::new();
+                    for (&idx, lines) in fs.raw_state.iter() {
+                        let def = msgstore::def(idx);
+                        for &(line, enable) in lines {
+                            if !enable
+                                && !ignored_msgs.borrow().contains_key(&(idx, line))
+                                && !crate::msgstate::INCOMPATIBLE_WITH_USELESS_SUPPRESSION
+                                    .contains(&def.msgid)
+                            {
+                                spurious.push((
+                                    "I0021",
+                                    line,
+                                    format!("Useless suppression of '{}'", def.symbol),
+                                ));
+                            }
+                        }
+                    }
+                    // I0020 suppressed-message (list() snapshot)
+                    let snapshot: Vec<((msgstore::MsgIdx, u32), Vec<u32>)> = ignored_msgs
+                        .borrow()
+                        .iter()
+                        .map(|(k, v)| (*k, v.iter().copied().collect()))
+                        .collect();
+                    for ((widx, from), lines) in snapshot {
+                        let wdef = msgstore::def(widx);
+                        for line in lines {
+                            spurious.push((
+                                "I0020",
+                                line,
+                                format!("Suppressed '{}' (from line {})", wdef.symbol, from),
+                            ));
+                        }
+                    }
+                    for (msgid, line, text) in spurious {
+                        let Some(&idx) = store().by_msgid.get(msgid) else { continue };
+                        if !is_message_enabled(global, Some(&fs), idx, Some(line)) {
+                            record_ignored(&fs, idx, line);
+                            continue;
+                        }
+                        stats.count(msgid);
+                        msgs.push(OutMsg {
+                            module: module.clone(),
+                            path: path.clone(),
+                            line: if line == 0 { 1 } else { line as i64 },
+                            col: 0,
+                            msgid: msgstore::def(idx).msgid,
+                            symbol: msgstore::def(idx).symbol,
+                            text,
+                        });
+                    }
                 }
             }
             out.msgs = msgs;

@@ -1225,9 +1225,206 @@ impl VarsChecker {
         let not_consumed = self.to_consume.pop().map(|c| c.to_consume).unwrap_or_default();
         let all_sym = cx.eng.sym("__all__");
         if locals_contains(cx.eng, node, all_sym) {
-            self.check_all(cx, node, not_consumed);
+            self.check_all(cx, node, not_consumed.clone());
         }
-        // _check_globals / _check_imports: W-only
+        // _check_globals: allow-global-unused-variables default True -> no-op
+        // `if not init_import and node.package: return` (variables.py:1438)
+        let is_package = {
+            let md = cx.eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Module(d) => d.package,
+                _ => false,
+            }
+        };
+        if is_package {
+            return;
+        }
+        self.check_imports(cx, not_consumed);
+    }
+
+    /// _check_imports (variables.py:3298-3385) — W0611 unused-import +
+    /// W0614 unused-wildcard-import (disabled; resurrection + I0021)
+    fn check_imports(&mut self, cx: &mut WalkCx, not_consumed: IndexMap<GSym, Vec<GNode>>) {
+        let eng = cx.eng;
+        // _fix_dot_imports (variables.py:209-253)
+        let mut names: indexmap::IndexMap<String, GNode> = indexmap::IndexMap::new();
+        for (name_sym, stmts) in &not_consumed {
+            let name = eng.sname(*name_sym);
+            // AugAssign-assigned AssignName -> skip whole name
+            let has_aug = stmts.iter().any(|&s| {
+                eng.kind_is(s, |k| matches!(k, NodeKind::AssignName { .. }))
+                    && eng
+                        .parent(s)
+                        .map(|p| {
+                            // assign_type(): walk to the assignment stmt
+                            let st = u::assign_parent(eng, s);
+                            let _ = p;
+                            eng.kind_is(st, |k| matches!(k, NodeKind::AugAssign { .. }))
+                        })
+                        .unwrap_or(false)
+            });
+            if has_aug {
+                continue;
+            }
+            for &stmt in stmts {
+                let md = eng.md(stmt.m);
+                let import_names: Vec<(String, Option<String>)> =
+                    match &md.tree.nodes[stmt.n.idx()].kind {
+                        NodeKind::Import { names } | NodeKind::ImportFrom { names, .. } => names
+                            .iter()
+                            .map(|&(n, a)| {
+                                (
+                                    md.tree.s(n).to_string(),
+                                    a.map(|x| md.tree.s(x).to_string()),
+                                )
+                            })
+                            .collect(),
+                        _ => continue,
+                    };
+                drop(md);
+                for (import_module_name, _alias) in &import_names {
+                    let second_name: Option<String> = if import_module_name == "*" {
+                        Some(name.clone())
+                    } else {
+                        let dotted = import_module_name.starts_with(name.as_str())
+                            && import_module_name.contains('.');
+                        let in_imports = import_names
+                            .iter()
+                            .any(|(n, a)| *n == name || a.as_deref() == Some(name.as_str()));
+                        if dotted || in_imports {
+                            Some(import_module_name.clone())
+                        } else {
+                            None
+                        }
+                    };
+                    if let Some(sn) = second_name {
+                        names.entry(sn).or_insert(stmt);
+                    }
+                }
+            }
+        }
+        let mut local_names: Vec<(String, GNode)> = names.into_iter().collect();
+        local_names.sort_by_key(|(_, stmt)| u::lineno(eng, *stmt));
+        // the main loop
+        let mut checked: std::collections::HashSet<String> = std::collections::HashSet::new();
+        let mut unused_wildcard: indexmap::IndexMap<(String, GNode), Vec<String>> =
+            indexmap::IndexMap::new();
+        for (name, stmt) in local_names {
+            let md = eng.md(stmt.m);
+            let (is_import, modname, import_names): (bool, String, Vec<(String, Option<String>)>) =
+                match &md.tree.nodes[stmt.n.idx()].kind {
+                    NodeKind::Import { names } => (
+                        true,
+                        String::new(),
+                        names
+                            .iter()
+                            .map(|&(n, a)| {
+                                (md.tree.s(n).to_string(), a.map(|x| md.tree.s(x).to_string()))
+                            })
+                            .collect(),
+                    ),
+                    NodeKind::ImportFrom { modname, names, .. } => (
+                        false,
+                        md.tree.s(*modname).to_string(),
+                        names
+                            .iter()
+                            .map(|&(n, a)| {
+                                (md.tree.s(n).to_string(), a.map(|x| md.tree.s(x).to_string()))
+                            })
+                            .collect(),
+                    ),
+                    _ => continue,
+                };
+            drop(md);
+            for (imported_name, as_name) in &import_names {
+                let real_name = if imported_name == "*" { name.clone() } else { imported_name.clone() };
+                if checked.contains(&real_name) {
+                    continue;
+                }
+                if name != real_name && Some(name.as_str()) != as_name.as_deref() {
+                    continue;
+                }
+                checked.insert(real_name.clone());
+                // _type_annotation_names: type comments only — not tracked
+                let is_dummy_import = as_name
+                    .as_deref()
+                    .map(dummy_rgx_match)
+                    .unwrap_or(false);
+                if is_import || (!is_import && modname.is_empty()) {
+                    if !is_import && special_obj_match(imported_name) {
+                        continue;
+                    }
+                    if is_dummy_import {
+                        continue;
+                    }
+                    let msg = match as_name {
+                        None => format!("import {imported_name}"),
+                        Some(a) => format!("{imported_name} imported as {a}"),
+                    };
+                    if !u::in_type_checking_block(eng, cx.caches, stmt) {
+                        cx.emit_node(
+                            "W0611",
+                            u::lineno(eng, stmt),
+                            u::col_offset(eng, stmt) as i64,
+                            u::format_template("Unused %s", &[&msg]),
+                        );
+                    }
+                } else if !is_import && modname != "__future__" {
+                    if special_obj_match(imported_name) {
+                        continue;
+                    }
+                    // _is_from_future_import: name loaded from a __future__
+                    // import in the imported module
+                    if is_from_future_import(eng, stmt, &name) {
+                        continue;
+                    }
+                    if is_dummy_import {
+                        continue;
+                    }
+                    if imported_name == "*" {
+                        unused_wildcard
+                            .entry((modname.clone(), stmt))
+                            .or_default()
+                            .push(name.clone());
+                    } else {
+                        let msg = match as_name {
+                            None => format!("{imported_name} imported from {modname}"),
+                            Some(a) => {
+                                format!("{imported_name} imported from {modname} as {a}")
+                            }
+                        };
+                        if !u::in_type_checking_block(eng, cx.caches, stmt) {
+                            cx.emit_node(
+                                "W0611",
+                                u::lineno(eng, stmt),
+                                u::col_offset(eng, stmt) as i64,
+                                u::format_template("Unused %s", &[&msg]),
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        for ((module, stmt), unused_list) in unused_wildcard {
+            let arg_string = if unused_list.len() == 1 {
+                unused_list[0].clone()
+            } else {
+                format!(
+                    "{} and {}",
+                    unused_list[..unused_list.len() - 1].join(", "),
+                    unused_list[unused_list.len() - 1]
+                )
+            };
+            cx.emit_node(
+                "W0614",
+                u::lineno(eng, stmt),
+                u::col_offset(eng, stmt) as i64,
+                u::format_template(
+                    "Unused import(s) %s from wildcard import of %s",
+                    &[&arg_string, &module],
+                ),
+            );
+        }
     }
 
     pub fn visit_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
@@ -1306,6 +1503,302 @@ impl VarsChecker {
         let Some(stmt) = cx.eng.statement(node) else { return };
         self.undefined_and_used_before_checker(cx, node, stmt);
         // _loopvar_name: W0631 only — not ported
+    }
+
+    /// visit_assign (variables.py:2152-2170) — E0633 unpacking-non-sequence
+    /// (+ W0632/W0644 unbalanced unpacking, W0642 self-cls-assignment)
+    pub fn visit_assign(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        self.check_self_cls_assign(cx, node);
+        let (targets, value): (Vec<NodeId>, GNode) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Assign { targets, value } => {
+                    (targets.clone(), GNode { m: node.m, n: *value })
+                }
+                _ => return,
+            }
+        };
+        let Some(&t0) = targets.first() else { return };
+        let target_elts: Vec<GNode> = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[t0.idx()].kind {
+                NodeKind::Tuple { elts, .. } | NodeKind::List { elts, .. } => {
+                    elts.iter().map(|&e| GNode { m: node.m, n: e }).collect()
+                }
+                _ => return,
+            }
+        };
+        if target_elts
+            .iter()
+            .any(|&t| eng.kind_is(t, |k| matches!(k, NodeKind::Starred { .. })))
+        {
+            return;
+        }
+        // node.value.inferred(): InferenceError -> return
+        let inferred = u::infer_all(eng, cx.caches, value);
+        if inferred.len() == 1 {
+            self.check_unpacking(cx, &inferred[0], node, value, &target_elts);
+        }
+    }
+
+    /// _check_unpacking (variables.py:3087-3122)
+    fn check_unpacking(
+        &mut self,
+        cx: &mut WalkCx,
+        inferred: &Value,
+        node: GNode,
+        value: GNode,
+        targets: &[GNode],
+    ) {
+        let eng = cx.eng;
+        if crate::typecheck::is_inside_abstract_class(cx.caches, eng, node) {
+            return;
+        }
+        // is_comprehension(node): an Assign is never a comprehension
+        if inferred.is_uninferable() {
+            return;
+        }
+        // vararg exemption: inferred.parent is Arguments and value is the
+        // Name of that vararg
+        if let Value::Node(g) = inferred {
+            if let Some(p) = eng.parent(*g) {
+                let md = eng.md(p.m);
+                if let NodeKind::Arguments(a) = &md.tree.nodes[p.n.idx()].kind {
+                    let vararg = a.vararg.map(|s| md.tree.s(s).to_string());
+                    drop(md);
+                    let vmd = eng.md(value.m);
+                    if let NodeKind::Name { name } = &vmd.tree.nodes[value.n.idx()].kind {
+                        let vn = vmd.tree.s(*name).to_string();
+                        if Some(vn) == vararg {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        let values = nodes_to_unpack_len(eng, inferred);
+        let details = unpacking_extra_info(eng, node, value, inferred);
+        match values {
+            Some(count) => {
+                if targets.len() != count {
+                    // W0632 / W0644 (disabled; resurrection)
+                    let is_dict = value_is_dict_type(eng, inferred);
+                    let (msgid, template) = if is_dict {
+                        ("W0644", "Possible unbalanced dict unpacking with %s: left side has %d label%s, right side has %d value%s")
+                    } else {
+                        ("W0632", "Possible unbalanced tuple unpacking with sequence %s: left side has %d label%s, right side has %d value%s")
+                    };
+                    let lp = if targets.len() == 1 { "" } else { "s" };
+                    let vp = if count == 1 { "" } else { "s" };
+                    cx.emit_node(
+                        msgid,
+                        u::lineno(eng, node),
+                        u::col_offset(eng, node) as i64,
+                        u::format_template(
+                            template,
+                            &[&details, &targets.len().to_string(), lp, &count.to_string(), vp],
+                        ),
+                    );
+                }
+            }
+            None => {
+                if !crate::typecheck::is_iterable(eng, cx.caches, inferred, false) {
+                    let details = if !details.is_empty() && !details.starts_with(' ') {
+                        format!(" {details}")
+                    } else {
+                        details
+                    };
+                    cx.emit_node(
+                        "E0633",
+                        u::lineno(eng, node),
+                        u::col_offset(eng, node) as i64,
+                        format!("Attempting to unpack a non-sequence{details}"),
+                    );
+                }
+            }
+        }
+    }
+
+    /// _check_self_cls_assign (variables.py:3054-3085) — W0642
+    fn check_self_cls_assign(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let mut assign_names: Vec<String> = Vec::new();
+        {
+            let md = eng.md(node.m);
+            let NodeKind::Assign { targets, .. } = &md.tree.nodes[node.n.idx()].kind else {
+                return;
+            };
+            for &t in targets {
+                match &md.tree.nodes[t.idx()].kind {
+                    NodeKind::AssignName { name } => {
+                        assign_names.push(md.tree.s(*name).to_string());
+                    }
+                    NodeKind::Tuple { elts, .. } => {
+                        for &e in elts {
+                            if let NodeKind::AssignName { name } = &md.tree.nodes[e.idx()].kind {
+                                assign_names.push(md.tree.s(*name).to_string());
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+            }
+        }
+        let mut scope = eng.scope(node);
+        // nonlocals_with_same_name: any Nonlocal in scope.body
+        let has_nonlocal = {
+            let md = eng.md(scope.m);
+            let body: Vec<NodeId> = match &md.tree.nodes[scope.n.idx()].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
+                NodeKind::ClassDef(d) => d.body.clone(),
+                NodeKind::Module(d) => d.body.clone(),
+                _ => Vec::new(),
+            };
+            body.iter().any(|&b| {
+                matches!(md.tree.nodes[b.idx()].kind, NodeKind::Nonlocal { .. })
+            }) && eng.parent(scope).is_some()
+        };
+        if has_nonlocal {
+            if let Some(p) = eng.parent(scope) {
+                scope = eng.scope(p);
+            }
+        }
+        let is_fn = eng.kind_is(scope, |k| {
+            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+        });
+        if !is_fn || !is_method(eng, scope) {
+            return;
+        }
+        if eng
+            .decoratornames(scope, None)
+            .iter()
+            .any(|q| q.as_deref() == Some("builtins.staticmethod"))
+        {
+            return;
+        }
+        // argnames()[0]
+        let first_arg: Option<String> = {
+            let md = eng.md(scope.m);
+            let args_id = match &md.tree.nodes[scope.n.idx()].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+                _ => return,
+            };
+            let NodeKind::Arguments(a) = &md.tree.nodes[args_id.idx()].kind else { return };
+            let first = a
+                .posonlyargs
+                .first()
+                .or(a.args.first())
+                .copied();
+            match first {
+                Some(f) => match &md.tree.nodes[f.idx()].kind {
+                    NodeKind::AssignName { name } => {
+                        Some(md.tree.s(*name).to_string())
+                    }
+                    _ => None,
+                },
+                None => {
+                    if a.vararg.is_some() {
+                        Some(md.tree.s(a.vararg.unwrap()).to_string())
+                    } else {
+                        None
+                    }
+                }
+            }
+        };
+        let Some(self_cls_name) = first_arg else { return };
+        if assign_names.iter().any(|n| *n == self_cls_name) {
+            cx.emit_node(
+                "W0642",
+                u::lineno(eng, node),
+                u::col_offset(eng, node) as i64,
+                u::format_template("Invalid assignment to %s in method", &[&self_cls_name]),
+            );
+        }
+    }
+
+    /// visit_subscript (variables.py:3458-3496) — E0643 potential-index-error
+    pub fn visit_subscript(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let (value, slice) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Subscript { value, slice, .. } => {
+                    (GNode { m: node.m, n: *value }, GNode { m: node.m, n: *slice })
+                }
+                _ => return,
+            }
+        };
+        let inferred_slice = u::safe_infer(eng, cx.caches, slice);
+        // _check_potential_index_error
+        let idx: Option<i64> = match &inferred_slice {
+            Some(Value::Node(g)) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Const(ConstValue::Int(pyast::tree::IntValue::Small(i))) => Some(*i),
+                    NodeKind::Const(ConstValue::Int(pyast::tree::IntValue::Big(_))) => Some(i64::MAX),
+                    NodeKind::Const(ConstValue::Bool(b)) => Some(*b as i64),
+                    _ => None,
+                }
+            }
+            Some(Value::SynthConst(c)) => match &**c {
+                ConstValue::Int(pyast::tree::IntValue::Small(i)) => Some(*i),
+                ConstValue::Int(pyast::tree::IntValue::Big(_)) => Some(i64::MAX),
+                ConstValue::Bool(b) => Some(*b as i64),
+                _ => None,
+            },
+            _ => None,
+        };
+        let Some(idx) = idx else { return };
+        let elts: Vec<GNode> = {
+            let md = eng.md(value.m);
+            match &md.tree.nodes[value.n.idx()].kind {
+                NodeKind::Tuple { elts, .. } | NodeKind::List { elts, .. } => {
+                    elts.iter().map(|&e| GNode { m: value.m, n: e }).collect()
+                }
+                _ => return,
+            }
+        };
+        // _inferred_iterable_length
+        let mut length: i64 = 0;
+        for elt in elts {
+            let is_starred = eng.kind_is(elt, |k| matches!(k, NodeKind::Starred { .. }));
+            if !is_starred {
+                length += 1;
+                continue;
+            }
+            let inner = {
+                let md = eng.md(elt.m);
+                match &md.tree.nodes[elt.n.idx()].kind {
+                    NodeKind::Starred { value, .. } => GNode { m: elt.m, n: *value },
+                    _ => continue,
+                }
+            };
+            let unpacked = u::safe_infer(eng, cx.caches, inner);
+            let n = match &unpacked {
+                Some(Value::Node(g)) => {
+                    let md = eng.md(g.m);
+                    match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::Tuple { elts, .. }
+                        | NodeKind::List { elts, .. }
+                        | NodeKind::Set { elts, .. } => Some(elts.len() as i64),
+                        _ => None,
+                    }
+                }
+                Some(Value::SynthSeq { elems, .. }) => Some(elems.len() as i64),
+                Some(Value::FrozenSet { elems }) => Some(elems.len() as i64),
+                _ => None,
+            };
+            length += n.unwrap_or(1);
+        }
+        if length < idx + 1 {
+            cx.emit_node(
+                "E0643",
+                u::lineno(eng, node),
+                u::col_offset(eng, node) as i64,
+                "Invalid index for iterable length".into(),
+            );
+        }
     }
 
     /// _undefined_and_used_before_checker (variables.py:1711-1759)
@@ -2599,4 +3092,198 @@ fn has_nonlocal_in_enclosing_frame(
         frame = eng.parent(f).map(|p| eng.frame(p));
     }
     false
+}
+
+// ---------------------------------------------------------------------------
+// E0633 / unused-import helpers
+// ---------------------------------------------------------------------------
+
+/// _nodes_to_unpack length (variables.py:3140-3150)
+fn nodes_to_unpack_len(eng: &Engine, v: &Value) -> Option<usize> {
+    match v {
+        Value::Node(g) => {
+            let md = eng.md(g.m);
+            match &md.tree.nodes[g.n.idx()].kind {
+                NodeKind::Tuple { elts, .. }
+                | NodeKind::List { elts, .. }
+                | NodeKind::Set { elts, .. } => Some(elts.len()),
+                NodeKind::Dict { items } => Some(items.len()),
+                _ => None,
+            }
+        }
+        Value::SynthSeq { elems, .. } => Some(elems.len()),
+        Value::FrozenSet { elems } => Some(elems.len()),
+        Value::SynthDict { items } => Some(items.len()),
+        Value::DictKeys(dr) | Value::DictValues(dr) | Value::DictItems(dr) => match &**dr {
+            pyinfer::value::DictRef::Node(g) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => Some(items.len()),
+                    _ => None,
+                }
+            }
+            pyinfer::value::DictRef::Synth(items) => Some(items.len()),
+        },
+        Value::Inst { cls, .. } => {
+            // typing.NamedTuple-derived instance: AssignName first-locals
+            let is_nt = eng
+                .ancestors(*cls, true, None)
+                .iter()
+                .any(|&a| eng.qname(a) == "typing.NamedTuple");
+            if !is_nt {
+                return None;
+            }
+            let md = eng.md(cls.m);
+            let locals = md.locals.borrow();
+            let count = locals
+                .get(&cls.n)
+                .map(|m| {
+                    m.values()
+                        .filter(|vs| {
+                            vs.first()
+                                .map(|&g| {
+                                    eng.kind_is(g, |k| {
+                                        matches!(k, NodeKind::AssignName { .. })
+                                    })
+                                })
+                                .unwrap_or(false)
+                        })
+                        .count()
+                })
+                .unwrap_or(0);
+            Some(count)
+        }
+        _ => None,
+    }
+}
+
+fn value_is_dict_type(eng: &Engine, v: &Value) -> bool {
+    match v {
+        Value::Node(g) => eng.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })),
+        Value::SynthDict { .. }
+        | Value::DictKeys(_)
+        | Value::DictValues(_)
+        | Value::DictItems(_) => true,
+        _ => false,
+    }
+}
+
+/// _get_unpacking_extra_info (variables.py:101-122)
+fn unpacking_extra_info(eng: &Engine, node: GNode, value: GNode, inferred: &Value) -> String {
+    if value_is_dict_type(eng, inferred) {
+        // node is an Assign -> more = node.value.as_string()
+        return u::as_string(eng, value);
+    }
+    let (inferred_root, inferred_line, inferred_node): (String, u32, Option<GNode>) =
+        match inferred {
+            Value::Node(g) => (
+                crate::tailmisc::root_name(eng, *g),
+                raw_lineno(eng, *g),
+                Some(*g),
+            ),
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
+                (crate::tailmisc::root_name(eng, *cls), raw_lineno(eng, *cls), None)
+            }
+            Value::BoundMethod { func, .. }
+            | Value::DescBM { func, .. }
+            | Value::UnboundMethod { func }
+            | Value::Property { func, .. }
+            | Value::Partial { func, .. }
+            | Value::Generator { func, .. } => {
+                (crate::tailmisc::root_name(eng, *func), raw_lineno(eng, *func), None)
+            }
+            _ => (String::new(), 0, None),
+        };
+    let node_root = eng.md(node.m).name.clone();
+    if node_root == inferred_root {
+        if eng.fromlineno(node) == inferred_line {
+            if let Some(g) = inferred_node {
+                return format!("'{}'", u::as_string(eng, g));
+            }
+            return String::new();
+        } else if inferred_line != 0 {
+            return format!("defined at line {inferred_line}");
+        }
+        String::new()
+    } else if inferred_line != 0 {
+        format!("defined at line {inferred_line} of {inferred_root}")
+    } else {
+        String::new()
+    }
+}
+
+/// dummy-variables-rgx default:
+/// `_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_` (re.match)
+fn dummy_rgx_match(name: &str) -> bool {
+    if !name.is_empty() && name.chars().all(|c| c == '_') {
+        return true;
+    }
+    if name.starts_with('_')
+        && name.len() >= 2
+        && name
+            .chars()
+            .skip(1)
+            .all(|c| c.is_ascii_alphanumeric() || c == '_')
+        && name.chars().last().map(|c| c.is_ascii_alphanumeric()).unwrap_or(false)
+    {
+        return true;
+    }
+    name.starts_with("dummy") || name.starts_with("ignored_") || name.starts_with("unused_")
+}
+
+/// SPECIAL_OBJ regex `^_{2}[a-z]+_{2}$` (re.search == fullmatch here)
+fn special_obj_match(name: &str) -> bool {
+    name.len() > 4
+        && name.starts_with("__")
+        && name.ends_with("__")
+        && name[2..name.len() - 2]
+            .chars()
+            .all(|c| c.is_ascii_lowercase())
+        && !name[2..name.len() - 2].is_empty()
+}
+
+/// _is_from_future_import (variables.py:88-98)
+fn is_from_future_import(eng: &Engine, stmt: GNode, name: &str) -> bool {
+    let modname: String = {
+        let md = eng.md(stmt.m);
+        match &md.tree.nodes[stmt.n.idx()].kind {
+            NodeKind::ImportFrom { modname, .. } => md.tree.s(*modname).to_string(),
+            _ => return false,
+        }
+    };
+    let Ok(mid) = eng.do_import_module(stmt, Some(&modname)) else {
+        return false;
+    };
+    let sym = eng.sym(name);
+    let md = eng.md(mid);
+    let locals = md.locals.borrow();
+    let Some(vals) = locals.get(&pyast::NodeId::MODULE) else { return false };
+    let Some(list) = vals.get(&sym) else { return false };
+    list.iter().any(|&g| {
+        let gm = eng.md(g.m);
+        matches!(&gm.tree.nodes[g.n.idx()].kind,
+            NodeKind::ImportFrom { modname, .. }
+                if gm.tree.s(*modname) == "__future__")
+    })
+}
+
+/// astroid raw `.lineno` attribute: decorated FunctionDef/ClassDef carry
+/// the FIRST DECORATOR's line (rebuilder.py:1130-1139), unlike fromlineno
+/// (position-based def/class line).
+fn raw_lineno(eng: &Engine, g: GNode) -> u32 {
+    let md = eng.md(g.m);
+    let dec = match &md.tree.nodes[g.n.idx()].kind {
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.decorators,
+        NodeKind::ClassDef(d) => d.decorators,
+        _ => None,
+    };
+    if let Some(dn) = dec {
+        if let NodeKind::Decorators { nodes } = &md.tree.nodes[dn.idx()].kind {
+            if let Some(&first) = nodes.first() {
+                return md.tree.nodes[first.idx()].fromlineno;
+            }
+        }
+    }
+    drop(md);
+    eng.fromlineno(g)
 }
