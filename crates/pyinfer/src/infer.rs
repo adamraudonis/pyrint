@@ -669,10 +669,19 @@ impl Engine {
                             ctx.boundnode.borrow().as_ref().map(crate::value::value_key),
                         )
                     });
-                    let is_replay = hop_key
-                        .as_ref()
-                        .map(|k| self.synth_hop_cache.borrow().contains(k))
-                        .unwrap_or(true);
+                    // objects.Property/PartialFunction subclass FunctionDef
+                    // (objects.py:334, real node classes, NOT Proxy):
+                    // stmt.infer(context) on them is a FULL NodeNG.infer hop.
+                    // FunctionDef._infer constructs a FRESH Property per
+                    // materialization, so the hop key never replays — always
+                    // bump (the Suit.choices metaclass-property re-yield).
+                    let always_hop =
+                        matches!(v, Value::Property { .. } | Value::Partial { .. });
+                    let is_replay = !always_hop
+                        && hop_key
+                            .as_ref()
+                            .map(|k| self.synth_hop_cache.borrow().contains(k))
+                            .unwrap_or(true);
                     // constraint filtering applies to synthetic stmt hops
                     // too (bases.py:184-189): the model's fresh Tuple for
                     // `self.args` under `... if self.args else ...` fails
@@ -713,6 +722,8 @@ impl Engine {
                                     }
                                     self.synth_hop_cache.borrow_mut().insert(k);
                                     ctx.bump_inferred();
+                                } else if always_hop {
+                                    ctx.bump_inferred();
                                 }
                             }
                             continue;
@@ -729,6 +740,8 @@ impl Engine {
                                 self.pin_value_identity(bn);
                             }
                             self.synth_hop_cache.borrow_mut().insert(k);
+                            ctx.bump_inferred();
+                        } else if always_hop {
                             ctx.bump_inferred();
                         }
                     }

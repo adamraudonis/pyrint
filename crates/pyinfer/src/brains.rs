@@ -2017,11 +2017,15 @@ dict
             return None;
         }
         if let Some(c) = self.value_const(&inferred) {
-            return match c {
-                ConstValue::Str(s) => Some(s.chars().count() as i64),
-                ConstValue::Bytes(b) => Some(b.len() as i64),
-                _ => None,
-            };
+            match c {
+                ConstValue::Str(s) => return Some(s.chars().count() as i64),
+                ConstValue::Bytes(b) => return Some(b.len() as i64),
+                // helpers.py:276-277 `isinstance(inferred_node, Const) and
+                // isinstance(value, (bytes, str))` — OTHER consts (None,
+                // int, ...) fall THROUGH to object_type + __len__ lookup,
+                // burning those pulls before AstroidTypeError
+                _ => {}
+            }
         }
         // helpers.py:278-281: ONLY List/Set/Tuple/FrozenSet (node classes)
         // and Dict take the elts/items shortcut — DictKeys/Values/Items
