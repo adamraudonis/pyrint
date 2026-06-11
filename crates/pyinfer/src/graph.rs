@@ -157,6 +157,11 @@ pub enum BuildFail {
     /// Subclass of AstroidImportError in astroid — sites that handle
     /// failures generically must treat it like Import.
     TooManyLevels,
+    /// astroid would CRASH building this file (RecursionError in the
+    /// rebuilder on pathologically deep trees). pylint never catches it:
+    /// the whole module check aborts -> F0002. The engine trips
+    /// `crash_tripped` whenever such a build is attempted.
+    Crash,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -215,6 +220,12 @@ pub struct Engine {
     pub astroid_cache: RefCell<FxHashMap<String, ModId>>,
     /// _mod_file_cache (modname, contextfile=None) -> spec | cached error
     pub mod_file_cache: RefCell<FxHashMap<String, Result<Spec, String>>>,
+    /// abs paths of files whose astroid build CRASHES (RecursionError in
+    /// the rebuilder; oracle-verified). Any build attempt trips
+    /// `crash_tripped` — pylint's RecursionError propagates uncaught and
+    /// aborts the current module's check (-> F0002).
+    pub crash_files: RefCell<std::collections::HashSet<String>>,
+    pub crash_tripped: std::cell::Cell<bool>,
     /// memo of failed file_build attempts keyed by (abs path, modname).
     /// astroid re-reads + re-parses broken files on EVERY import (failures
     /// never enter astroid_cache and have no side effects), so memoizing
@@ -441,6 +452,8 @@ impl Engine {
             mods: RefCell::new(Vec::new()),
             astroid_cache: RefCell::new(FxHashMap::default()),
             mod_file_cache: RefCell::new(FxHashMap::default()),
+            crash_files: RefCell::new(std::collections::HashSet::new()),
+            crash_tripped: std::cell::Cell::new(false),
             build_fail_cache: RefCell::new(FxHashMap::default()),
             iattrs: RefCell::new(FxHashMap::default()),
             proxy_iattrs: RefCell::new(FxHashMap::default()),
@@ -631,6 +644,17 @@ impl Engine {
 
     pub fn builtins(&self) -> Rc<BuiltinRefs> {
         Rc::clone(self.b.borrow().as_ref().unwrap())
+    }
+
+    /// register a file whose astroid build crashes (see `crash_files`)
+    pub fn add_crash_file(&self, abspath: String) {
+        self.crash_files.borrow_mut().insert(abspath);
+    }
+    pub fn crash_tripped(&self) -> bool {
+        self.crash_tripped.get()
+    }
+    pub fn reset_crash_trip(&self) {
+        self.crash_tripped.set(false);
     }
 
     fn build_synth_module(&self) -> ModId {
@@ -1703,6 +1727,13 @@ impl Engine {
     /// builder.file_build + _data_build + _post_build
     fn file_build(&self, path: &str, modname: &str) -> Result<ModId, BuildFail> {
         let abs = abspath(path);
+        // astroid-crash files: EVERY build attempt re-crashes in astroid
+        // (failures never enter astroid_cache), so the trip fires on every
+        // attempt, before any memoization.
+        if self.crash_files.borrow().contains(&abs) {
+            self.crash_tripped.set(true);
+            return Err(BuildFail::Crash);
+        }
         let memo_key = (abs.clone(), modname.to_string());
         if let Some(fail) = self.build_fail_cache.borrow().get(&memo_key) {
             return Err(fail.clone());

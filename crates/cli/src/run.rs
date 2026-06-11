@@ -173,6 +173,61 @@ pub fn run(opts: &RunOpts) -> i32 {
         }
     }
 
+    // ---- astroid-crash candidates: files whose tree is deep enough to
+    // RecursionError astroid's rebuilder (empirical boundary ~495 nested
+    // BinOps at the default recursion limit; threshold kept well below).
+    // The pinned-astroid oracle delivers the EXACT pylint verdict for each
+    // candidate: AstroidError -> phase-1 F0002 (pylinter._get_asts caught
+    // AstroidBuildingError), never linted, and any later import of the file
+    // re-crashes the importing module's check (engine crash set).
+    // Verdict Ok -> linted normally (the depth probe was conservative).
+    let mut crash_abs: Vec<String> = Vec::new();
+    {
+        let deep: Vec<usize> = trees
+            .iter()
+            .filter(|(_, p)| tree_depth(&p.tree) >= 350)
+            .map(|(i, _)| *i)
+            .collect();
+        if !deep.is_empty() {
+            let reqs: Vec<(String, String)> = deep
+                .iter()
+                .map(|&i| (items[i].filepath.clone(), items[i].name.clone()))
+                .collect();
+            let verdicts = oracle::run_oracle(&reqs);
+            let mut dead: std::collections::HashSet<usize> = Default::default();
+            for (&i, verdict) in deep.iter().zip(verdicts.into_iter()) {
+                match verdict {
+                    Verdict::AstroidError => {
+                        phase1.push((i, "F0002", 1, 0, fatal_error_text(&items[i].filepath)));
+                        if let Some((_, pf)) = trees.iter().find(|(j, _)| *j == i) {
+                            crash_abs.push(pf.abspath.clone());
+                        }
+                        dead.insert(i);
+                    }
+                    Verdict::SyntaxError { line, offset, msg } => {
+                        phase1.push((
+                            i,
+                            "E0001",
+                            if line == 0 { 1 } else { line },
+                            offset.unwrap_or(0),
+                            msg,
+                        ));
+                        dead.insert(i);
+                    }
+                    Verdict::ParseError { msg } => {
+                        phase1.push((i, "F0010", 1, 0, format!("error while code parsing: {msg}")));
+                        dead.insert(i);
+                    }
+                    Verdict::Ok { .. } => {}
+                }
+            }
+            if !dead.is_empty() {
+                trees.retain(|(i, _)| !dead.contains(i));
+            }
+        }
+    }
+    let crash_abs = crash_abs;
+
     // prepare_checkers (pylinter.py:588-598): the unicode raw checker is
     // kept iff any of its messages is enabled package-wise
     let unicode_prepared = ["E2501", "E2502", "C2503", "E2510", "E2511", "E2512", "E2513", "E2514", "E2515"]
@@ -190,10 +245,14 @@ pub fn run(opts: &RunOpts) -> i32 {
         let global = &global;
         let strip_prefix = &strip_prefix;
         let cwd = std::path::PathBuf::from(&cwd);
+        let crash_abs = &crash_abs;
         let engine_thread = std::thread::Builder::new()
             .stack_size(1 << 30)
             .spawn_scoped(scope, move || {
                 let engine = pyinfer::Engine::new(&cwd);
+                for p in crash_abs {
+                    engine.add_crash_file(p.clone());
+                }
                 let mut lint_run = pycheckers::walker::LintRun::default();
                 let mut oracle_proc = oracle::OracleProc::default();
                 // boot the import-oracle interpreter NOW so it loads while
@@ -202,6 +261,8 @@ pub fn run(opts: &RunOpts) -> i32 {
                 // pylint phase 1 builds EVERY file's AST through the astroid
                 // manager in file order (pylinter.get_ast -> ast_from_file
                 // source=True); the cache state at check time depends on it.
+                // Crash-marked files are skipped: astroid's attempt failed
+                // and cached nothing.
                 let mods: Vec<Option<pyinfer::ModId>> = items
                     .iter()
                     .map(|it| {
@@ -210,6 +271,7 @@ pub fn run(opts: &RunOpts) -> i32 {
                             .ok()
                     })
                     .collect();
+                engine.reset_crash_trip();
                 trees
                     .iter()
                     .map(|(i, p)| {
@@ -251,19 +313,9 @@ pub fn run(opts: &RunOpts) -> i32 {
                 }
                 Verdict::AstroidError => {
                     // F0002 astroid-error: "%s: %s" with the crash-report
-                    // message (lint/utils.py:107-112). The crash file path is
-                    // wall-clock dependent; we synthesize the same format
-                    // without writing it.
-                    let p = &items[i].filepath;
-                    phase1.push((
-                        i,
-                        "F0002",
-                        1,
-                        0,
-                        format!(
-                            "{p}: Fatal error while checking '{p}'. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in 'pylint-crash.txt'."
-                        ),
-                    ));
+                    // message (lint/utils.py:107-112); timestamped template
+                    // path under PYLINT_HOME (normalized by bytecmp.py).
+                    phase1.push((i, "F0002", 1, 0, fatal_error_text(&items[i].filepath)));
                 }
                 Verdict::Ok { tokenize: Some(t) } => {
                     extras.push((
@@ -543,7 +595,9 @@ fn lint_tree(
                     //    (walk_order.rs dispatch); other checkers pending.
                     //    The walker also accumulates nbstatements
                     //    (ast_walker.py:79-80).
+                    let crashed = std::cell::Cell::new(false);
                     if let Some(mid) = emod {
+                        engine.reset_crash_trip();
                         // node msgs use the astroid module name (`.__init__`
                         // stripped); node-LESS msgs (E0001 Cannot-import) use
                         // the raw FileItem name (notes/02; GT: core
@@ -602,9 +656,36 @@ fn lint_tree(
                             &mut import_oracle,
                             &is_enabled,
                             &add_ignored,
+                            &crashed,
                         );
+                        if engine.crash_tripped() {
+                            crashed.set(true);
+                            engine.reset_crash_trip();
+                        }
                     }
                     stats.statements += count_statements(&p.tree);
+                    if crashed.get() {
+                        // the module check CRASHED (pylint: exception out of
+                        // check_astroid_module -> AstroidError caught in
+                        // _lint_files -> F0002, spurious-suppression step
+                        // skipped). Messages emitted before the crash stay.
+                        let idx = store().by_msgid["F0002"];
+                        if is_message_enabled(global, Some(&fs), idx, None) {
+                            stats.count("F0002");
+                            msgs.push(OutMsg {
+                                module: item.name.clone(),
+                                path: path.clone(),
+                                line: 1,
+                                col: 0,
+                                msgid: msgstore::def(idx).msgid,
+                                symbol: msgstore::def(idx).symbol,
+                                text: fatal_error_text(&item.filepath),
+                            });
+                        }
+                        out.msgs = msgs;
+                        out.stats = stats;
+                        return out;
+                    }
                     // ---- iter_spurious_suppression_messages ----
                     // (file_state.py:225-256; added via add_message AFTER
                     //  check_astroid_module, pylinter.py:825-830)
@@ -665,6 +746,70 @@ fn lint_tree(
             out
         }
     }
+}
+
+/// PYLINT_HOME (pylint/constants.py): $PYLINT_HOME else the platform
+/// user-cache dir for "pylint" (macOS ~/Library/Caches/pylint, linux
+/// $XDG_CACHE_HOME/pylint or ~/.cache/pylint).
+fn pylint_home() -> String {
+    if let Ok(h) = std::env::var("PYLINT_HOME") {
+        if !h.is_empty() {
+            return h;
+        }
+    }
+    let home = std::env::var("HOME").unwrap_or_default();
+    if cfg!(target_os = "macos") {
+        format!("{home}/Library/Caches/pylint")
+    } else {
+        match std::env::var("XDG_CACHE_HOME") {
+            Ok(x) if !x.is_empty() => format!("{x}/pylint"),
+            _ => format!("{home}/.cache/pylint"),
+        }
+    }
+}
+
+/// prepare_crash_report's issue-template path: PYLINT_HOME /
+/// datetime.now().strftime("pylint-crash-%Y-%m-%d-%H-%M-%S.txt").
+/// Wall-clock dependent; harness/bytecmp.py normalizes the timestamp for
+/// byte comparison. We do not write the template file.
+fn crash_file_path() -> String {
+    let ts = std::process::Command::new("date")
+        .arg("+%Y-%m-%d-%H-%M-%S")
+        .output()
+        .ok()
+        .map(|o| String::from_utf8_lossy(&o.stdout).trim().to_string())
+        .filter(|s| !s.is_empty())
+        .unwrap_or_else(|| "1970-01-01-00-00-00".to_string());
+    format!("{}/pylint-crash-{}.txt", pylint_home(), ts)
+}
+
+/// F0002 astroid-error text: "%s: %s" with
+/// (filepath, get_fatal_error_message(filepath, template_path))
+/// (lint/utils.py:107-112).
+fn fatal_error_text(display_path: &str) -> String {
+    format!(
+        "{p}: Fatal error while checking '{p}'. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in '{c}'.",
+        p = display_path,
+        c = crash_file_path()
+    )
+}
+
+/// max nesting depth of the built tree — a cheap stand-in for the python
+/// recursion depth astroid's rebuilder needs. Builder allocates parents
+/// before children, so a forward pass suffices.
+fn tree_depth(tree: &Tree) -> u32 {
+    let n = tree.nodes.len();
+    let mut depth = vec![1u32; n];
+    let mut maxd = 1;
+    for i in 1..n {
+        let p = tree.nodes[i].parent.idx();
+        let d = if p < i { depth[p] + 1 } else { 2 };
+        depth[i] = d;
+        if d > maxd {
+            maxd = d;
+        }
+    }
+    maxd
 }
 
 /// astroid `is_statement` node kinds (subclasses of _base_nodes.Statement).

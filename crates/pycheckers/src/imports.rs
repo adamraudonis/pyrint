@@ -479,6 +479,10 @@ impl ImportsChecker {
             // under the target flags -> `if not is_message_enabled(...)
             // return None` fires first (imports.py:1039-1040)
             Err(BuildFail::Import(_)) => None,
+            // astroid-crash build: pylint's RecursionError is NOT caught by
+            // _get_imported_module — it aborts the module check (F0002).
+            // The engine already tripped the crash flag; emit nothing.
+            Err(BuildFail::Crash) => None,
         }
     }
 }

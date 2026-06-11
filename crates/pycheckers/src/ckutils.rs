@@ -584,7 +584,7 @@ pub fn value_pytype(eng: &Engine, v: &Value) -> Option<String> {
                 NodeKind::Slice { .. } => Some("builtins.slice".into()),
                 NodeKind::ClassDef(_) => Some("builtins.type".into()),
                 NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_) | NodeKind::Lambda(_) => {
-                    Some("builtins.function".into())
+                    Some(funcdef_pytype(eng, *g).into())
                 }
                 NodeKind::Module(_) => Some("builtins.module".into()),
                 _ => None,
@@ -603,19 +603,44 @@ pub fn value_pytype(eng: &Engine, v: &Value) -> Option<String> {
         Value::SynthSlice { .. } => Some("builtins.slice".into()),
         Value::FrozenSet { .. } => Some("builtins.frozenset".into()),
         Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => q(*cls),
-        Value::BoundMethod { .. } | Value::DescBM { .. } => Some("builtins.method".into()),
-        Value::UnboundMethod { .. } => Some("builtins.function".into()),
+        // UnboundMethod/BoundMethod are Proxy objects WITHOUT their own
+        // pytype: attribute access falls through to the wrapped
+        // FunctionDef.pytype() — "builtins.instancemethod" iff "method" is
+        // in self.type (scoped_nodes; covers class/staticmethod too)
+        Value::BoundMethod { func, .. }
+        | Value::DescBM { func, .. }
+        | Value::UnboundMethod { func } => Some(funcdef_pytype(eng, *func).into()),
         Value::Generator { is_async, .. } => Some(
             if *is_async { "builtins.async_generator" } else { "builtins.generator" }.into(),
         ),
         Value::Property { .. } => Some("builtins.property".into()),
-        Value::Partial { .. } => Some("builtins.function".into()),
+        // PartialFunction inherits FunctionDef.pytype; its .type is
+        // computed with the partial-call parent (see partial_func_type)
+        Value::Partial { func, parent, .. } => Some(
+            if eng.partial_func_type(*func, *parent) != pyinfer::graph::FType::Function {
+                "builtins.instancemethod"
+            } else {
+                "builtins.function"
+            }
+            .into(),
+        ),
         Value::Super { .. } => q(b.super_),
         Value::UnionType => Some("types.UnionType".into()),
         Value::DictItems(_) => Some("builtins.dict_items".into()),
         Value::DictKeys(_) => Some("builtins.dict_keys".into()),
         Value::DictValues(_) => Some("builtins.dict_values".into()),
         Value::EvaluatedObject { .. } => None,
+    }
+}
+
+/// FunctionDef/Lambda.pytype(): "builtins.instancemethod" iff "method" in
+/// self.type — true for method/classmethod/staticmethod (substring check in
+/// astroid!), else "builtins.function".
+fn funcdef_pytype(eng: &Engine, func: GNode) -> &'static str {
+    if eng.func_type(func) != pyinfer::graph::FType::Function {
+        "builtins.instancemethod"
+    } else {
+        "builtins.function"
     }
 }
 

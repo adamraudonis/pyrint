@@ -237,9 +237,17 @@ impl LoggingCk {
             match &md.tree.nodes[args[format_pos].n.idx()].kind {
                 NodeKind::Const(ConstValue::Str(s)) => Some(s.to_string()),
                 NodeKind::Const(ConstValue::Bytes(b)) => {
-                    // bytes.decode() with utf-8; failure would raise in
-                    // pylint (crash) — lossy here
-                    Some(String::from_utf8_lossy(b).to_string())
+                    // format_string.decode() — STRICT utf-8 (logging.py:333).
+                    // A non-decodable bytes literal raises UnicodeDecodeError
+                    // in pylint, aborting the whole module check -> F0002
+                    // (pip tests/unit/test_base_command.py:62 b"... \xe9")
+                    match std::str::from_utf8(b) {
+                        Ok(s) => Some(s.to_string()),
+                        Err(_) => {
+                            cx.crashed.set(true);
+                            return;
+                        }
+                    }
                 }
                 _ => None,
             }

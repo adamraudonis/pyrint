@@ -47,13 +47,28 @@ pub struct WalkCx<'a> {
     /// linter.add_ignored_message(msgid, line) — record a would-be message
     /// suppressed by checker-internal short-circuits (I0021 bookkeeping)
     pub add_ignored: &'a dyn Fn(&str, u32),
+    /// set when the module check CRASHES (pylint: an exception propagates
+    /// out of check_astroid_module -> AstroidError -> F0002 and every
+    /// later message of the module is lost). Sources: the logging checker's
+    /// bytes-format .decode() UnicodeDecodeError, and engine builds of
+    /// crash-marked files (eng.crash_tripped).
+    pub crashed: &'a std::cell::Cell<bool>,
 }
 
 impl WalkCx<'_> {
+    pub fn is_crashed(&self) -> bool {
+        self.crashed.get() || self.eng.crash_tripped()
+    }
     pub fn emit_node(&mut self, msgid: &'static str, line: u32, col: i64, text: String) {
+        if self.is_crashed() {
+            return; // pylint: the exception already aborted the walk
+        }
         (self.emit)(CheckMsg { msgid, line, col, text, nodeless: false });
     }
     pub fn emit_nodeless(&mut self, msgid: &'static str, line: u32, col: i64, text: String) {
+        if self.is_crashed() {
+            return;
+        }
         (self.emit)(CheckMsg { msgid, line, col, text, nodeless: true });
     }
     /// E0601/E0602/E0606 helper: message at the name node.
@@ -132,6 +147,7 @@ impl LintRun {
         import_oracle: &mut dyn FnMut(&str, &str) -> Option<String>,
         is_enabled: &dyn Fn(&str, u32) -> bool,
         add_ignored: &dyn Fn(&str, u32),
+        crashed: &std::cell::Cell<bool>,
     ) {
         let mut cx = WalkCx {
             eng,
@@ -141,6 +157,7 @@ impl LintRun {
             import_oracle,
             is_enabled,
             add_ignored,
+            crashed,
         };
         let mut walker = Walker {
             imp: &mut self.imports,
@@ -189,6 +206,11 @@ struct Walker<'w> {
 
 impl Walker<'_> {
     fn walk(&mut self, cx: &mut WalkCx, g: GNode) {
+        // a crashed check visits nothing further (pylint: the exception
+        // unwinds the whole ASTWalker.walk)
+        if cx.is_crashed() {
+            return;
+        }
         // ---- visit (VISIT_ORDER in walk_order.rs) ----
         let kind_tag = {
             let md = cx.eng.md(g.m);
