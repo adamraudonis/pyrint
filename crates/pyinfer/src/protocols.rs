@@ -2889,6 +2889,96 @@ fn num_of(c: &ConstValue) -> Option<f64> {
     }
 }
 
+/// numeric -> complex promotion (CPython binop coercion); None for
+/// non-numeric kinds.
+fn cplx_of(c: &ConstValue) -> Option<(f64, f64)> {
+    match c {
+        ConstValue::Complex { real, imag } => Some((*real, *imag)),
+        other => num_of(other).map(|f| (f, 0.0)),
+    }
+}
+
+/// _Py_c_quot (CPython complexobject.c) — Smith's scaled division for bit
+/// parity with the oracle's folds. Returns None on division by zero
+/// (ZeroDivisionError -> Uninferable via the `except Exception` branch).
+fn c_quot(a: (f64, f64), b: (f64, f64)) -> Option<(f64, f64)> {
+    let (ar, ai) = a;
+    let (br, bi) = b;
+    let abs_br = br.abs();
+    let abs_bi = bi.abs();
+    if abs_br >= abs_bi {
+        if abs_br == 0.0 {
+            return None;
+        }
+        let ratio = bi / br;
+        let denom = br + bi * ratio;
+        Some(((ar + ai * ratio) / denom, (ai - ar * ratio) / denom))
+    } else if abs_bi >= abs_br {
+        let ratio = br / bi;
+        let denom = br * ratio + bi;
+        Some(((ar * ratio + ai) / denom, (ai * ratio - ar) / denom))
+    } else {
+        Some((f64::NAN, f64::NAN))
+    }
+}
+
+fn c_mul(a: (f64, f64), b: (f64, f64)) -> (f64, f64) {
+    (a.0 * b.0 - a.1 * b.1, a.0 * b.1 + a.1 * b.0)
+}
+
+/// _Py_c_pow + complex_pow integer fast path (complexobject.c):
+/// integral exponents |n| <= 100 use repeated squaring (c_powu/c_powi),
+/// everything else the polar form. None -> exception (ZeroDivisionError /
+/// OverflowError) -> Uninferable.
+fn c_pow(a: (f64, f64), b: (f64, f64)) -> Option<(f64, f64)> {
+    fn powu(x: (f64, f64), mut n: u32) -> (f64, f64) {
+        let mut r = (1.0, 0.0);
+        let mut p = x;
+        let mut mask = 1u32;
+        while mask > 0 && n >= mask {
+            if n & mask != 0 {
+                r = c_mul(r, p);
+                n -= mask;
+            }
+            mask <<= 1;
+            p = c_mul(p, p);
+        }
+        r
+    }
+    let out = if b.1 == 0.0 && b.0 == b.0.floor() && b.0.abs() <= 100.0 {
+        let n = b.0 as i32;
+        if n >= 0 {
+            powu(a, n as u32)
+        } else {
+            // c_powi negative: _Py_c_quot(c_1, c_powu(x, -n))
+            c_quot((1.0, 0.0), powu(a, (-n) as u32))?
+        }
+    } else if b.0 == 0.0 && b.1 == 0.0 {
+        (1.0, 0.0)
+    } else if a.0 == 0.0 && a.1 == 0.0 {
+        // 0 ** negative-or-complex -> ZeroDivisionError
+        if b.1 != 0.0 || b.0 < 0.0 {
+            return None;
+        }
+        (0.0, 0.0)
+    } else {
+        let vabs = a.0.hypot(a.1);
+        let mut len = vabs.powf(b.0);
+        let at = a.1.atan2(a.0);
+        let mut phase = at * b.0;
+        if b.1 != 0.0 {
+            len /= (at * b.1).exp();
+            phase += b.1 * vabs.ln();
+        }
+        (len * phase.cos(), len * phase.sin())
+    };
+    // complex_pow: Py_ADJUST_ERANGE2 -> OverflowError -> except -> U
+    if out.0.is_infinite() || out.1.is_infinite() {
+        return None;
+    }
+    Some(out)
+}
+
 fn bin_op_method(op: &str) -> Option<&'static str> {
     Some(match op {
         "+" => "__add__",
@@ -2967,6 +3057,38 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
     let num_l = num_of(l);
     let num_r = num_of(r);
     let is_int = |c: &ConstValue| matches!(c, Int(_) | Bool(_));
+    // complex arithmetic (BIN_OP_IMPL runs the REAL operator on python
+    // values — complex participates in + - * / ** with numeric promotion;
+    // // % >> etc. raise TypeError -> NotImplemented via the num_of None
+    // fallbacks below)
+    let has_cplx = matches!(l, Complex { .. }) || matches!(r, Complex { .. });
+    let cpx = |v: (f64, f64)| {
+        Value::SynthConst(Rc::new(Complex {
+            real: v.0,
+            imag: v.1,
+        }))
+    };
+    if has_cplx {
+        if let (Option::Some(a), Option::Some(b)) = (cplx_of(l), cplx_of(r)) {
+            return match op {
+                "+" => cpx((a.0 + b.0, a.1 + b.1)),
+                "-" => cpx((a.0 - b.0, a.1 - b.1)),
+                "*" => cpx(c_mul(a, b)),
+                "/" => match c_quot(a, b) {
+                    Option::Some(v) => cpx(v), // ZeroDivisionError -> U
+                    Option::None => Value::Uninferable,
+                },
+                "**" => match c_pow(a, b) {
+                    Option::Some(v) => cpx(v), // ZeroDiv/Overflow -> U
+                    Option::None => Value::Uninferable,
+                },
+                // TypeError (can't take floor/mod of complex, shifts,
+                // bitwise) -> NotImplemented
+                _ => notimpl(),
+            };
+        }
+        return notimpl();
+    }
     match op {
         "+" => match (l, r) {
             (Str(a), Str(b)) => sstr(format!("{a}{b}")),
