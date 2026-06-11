@@ -2493,18 +2493,19 @@ fn compare_literals(l: &Lit, op: &str, r: &Lit) -> Option<bool> {
         "==" => Some(lit_eq(l, r)),
         "!=" => Some(!lit_eq(l, r)),
         "<" | "<=" | ">" | ">=" => {
-            let ord: Option<Ordering> = match (l, r) {
-                (Lit::Const(a), Lit::Const(b)) => match (const_num(a), const_num(b)) {
-                    (Some(x), Some(y)) => x.partial_cmp(&y),
-                    _ => match (a, b) {
-                        (ConstValue::Str(x), ConstValue::Str(y)) => Some(x.cmp(y)),
-                        (ConstValue::Bytes(x), ConstValue::Bytes(y)) => Some(x.cmp(y)),
-                        _ => None, // TypeError
-                    },
-                },
-                _ => None,
-            };
-            let o = ord?;
+            // python set ordering is SUBSET relation, not a total order
+            if let (Lit::Set(a), Lit::Set(b)) = (l, r) {
+                let sub = |x: &[Lit], y: &[Lit]| x.iter().all(|e| y.iter().any(|f| lit_eq(e, f)));
+                let le = sub(a, b);
+                let ge = sub(b, a);
+                return Some(match op {
+                    "<" => le && !ge,
+                    "<=" => le,
+                    ">" => ge && !le,
+                    _ => ge,
+                });
+            }
+            let o = lit_cmp(l, r)?;
             Some(match op {
                 "<" => o == Ordering::Less,
                 "<=" => o != Ordering::Greater,
@@ -2538,6 +2539,33 @@ fn compare_literals(l: &Lit, op: &str, r: &Lit) -> Option<bool> {
             contains.map(|b| if op == "in" { b } else { !b })
         }
         _ => None, // is / is not handled by the caller
+    }
+}
+
+/// python three-way ordering over literals; None means TypeError
+/// (`ast.literal_eval` products compared by COMPARE_OPS — tuples/lists
+/// order lexicographically with the first-`!=`-element deciding, shorter
+/// sequence is less; cross-kind and dict orderings raise)
+fn lit_cmp(l: &Lit, r: &Lit) -> Option<std::cmp::Ordering> {
+    match (l, r) {
+        (Lit::Const(a), Lit::Const(b)) => match (const_num(a), const_num(b)) {
+            (Some(x), Some(y)) => x.partial_cmp(&y),
+            _ => match (a, b) {
+                (ConstValue::Str(x), ConstValue::Str(y)) => Some(x.cmp(y)),
+                (ConstValue::Bytes(x), ConstValue::Bytes(y)) => Some(x.cmp(y)),
+                _ => None, // TypeError
+            },
+        },
+        (Lit::Tuple(a), Lit::Tuple(b)) | (Lit::List(a), Lit::List(b)) => {
+            for (x, y) in a.iter().zip(b.iter()) {
+                if lit_eq(x, y) {
+                    continue;
+                }
+                return lit_cmp(x, y); // first mismatch decides (or raises)
+            }
+            Some(a.len().cmp(&b.len()))
+        }
+        _ => None, // TypeError (tuple vs list, dicts, mixed)
     }
 }
 

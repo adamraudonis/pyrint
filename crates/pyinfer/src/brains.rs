@@ -1568,6 +1568,22 @@ dict
             }
             "getattr" => {
                 let (obj, attr) = self.tip_getattr_args(&args, ctx)?;
+                // infer_getattr: `or not hasattr(obj, "igetattr")` ->
+                // Uninferable (no default fallback!). Objects WITHOUT an
+                // igetattr attribute: Lambda (scoped_nodes.py:883 — only
+                // FunctionDef defines igetattr), Unknown, EvaluatedObject
+                // (plain NodeNG subclasses). Containers/Const mix in
+                // bases.Instance, Slice defines its own — they all have it.
+                let no_igetattr = match &obj {
+                    Value::Node(g) => self.kind_is(*g, |k| {
+                        matches!(k, NodeKind::Lambda(_) | NodeKind::Unknown)
+                    }),
+                    Value::EvaluatedObject { .. } => true,
+                    _ => false,
+                };
+                if no_igetattr {
+                    return Some(Flow::uninferable());
+                }
                 match (obj, attr) {
                     (Value::Uninferable, _) | (_, None) => Some(Flow::uninferable()),
                     (obj, Some(attr)) => {

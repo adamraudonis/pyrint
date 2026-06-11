@@ -693,6 +693,16 @@ impl Engine {
                     | NV::V(Value::Partial { func, .. }) => {
                         self.parent(*func).map(|p| self.scope(p))
                     }
+                    // bases.Proxy.__getattr__ delegates .parent to _proxied:
+                    // Instance.parent == ClassDef.parent
+                    NV::V(Value::Inst { cls, .. }) | NV::V(Value::ExcInst { cls, .. }) => {
+                        self.parent(*cls).map(|p| self.scope(p))
+                    }
+                    // ClassModel consts (__name__/__qualname__/__module__/
+                    // __doc__, objectmodel.py:499-513) have parent=None —
+                    // astroid's `attr.parent and ...` (scoped_nodes.py:2446)
+                    // drops them; other synthetic model values carry a
+                    // parent that is never the first attr's scope here
                     NV::V(_) => None,
                 }
             };
@@ -700,15 +710,11 @@ impl Engine {
             if first_scope.is_some() {
                 let mut filtered = vec![attributes[0].clone()];
                 for attr in &attributes[1..] {
-                    let s = scope_of(attr);
-                    if s == first_scope || s.is_none() {
-                        if s.is_some() {
-                            filtered.push(attr.clone());
-                        } else if matches!(attr, NV::V(_)) {
-                            // model values without parents: kept to
-                            // avoid astroid's AttributeError path
-                            filtered.push(attr.clone());
-                        }
+                    // scoped_nodes.py:2444-2449: keep only attrs whose
+                    // parent scope matches the first attr's scope; parentless
+                    // values are dropped by the `attr.parent and` guard
+                    if scope_of(attr) == first_scope {
+                        filtered.push(attr.clone());
                     }
                 }
                 attributes = filtered;

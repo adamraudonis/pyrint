@@ -237,10 +237,24 @@ impl Engine {
                     ))));
                     match e.getitem(&part, &idx, ctx) {
                         Ok(nv) => Some(nv),
-                        Err(ErrKind::AstroidType) | Err(ErrKind::AstroidIndex) => {
-                            return Drive::Stop
+                        // protocols.py:497-499 `except (AstroidTypeError,
+                        // AstroidIndexError, AstroidValueError): return`
+                        Err(ErrKind::AstroidType)
+                        | Err(ErrKind::AstroidIndex)
+                        | Err(ErrKind::AstroidValue) => return Drive::Stop,
+                        // anything else (e.g. InferenceError from
+                        // Instance.getitem when __getitem__ is missing,
+                        // bases.py:579-582) is NOT caught here — it
+                        // propagates out of _resolve_assignment_parts: the
+                        // top level aborts AssignName._infer's eager
+                        // `list(self.assigned_stmts(...))`
+                        // (node_classes.py:451) discarding earlier parts;
+                        // a nested level is swallowed by the parent's
+                        // `except InferenceError: return`
+                        Err(err) => {
+                            *hard = Some(err);
+                            return Drive::Stop;
                         }
-                        Err(_) => None,
                     }
                 }
             };
@@ -321,16 +335,18 @@ impl Engine {
             None => Ctx::new(),
         };
         let parts = self.infer(iter, &c);
-        // `for lst in self.iter.infer(context)`: an error raised on the
-        // first pull (e.g. NameInferenceError from a class-scope name not
-        // visible in the genexp) propagates AS-IS out of assigned_stmts
-        // (protocols.py:290-316; raise_if_nothing_inferred only converts
-        // StopIteration). Preserving the kind matters: _infer_stmts skips
+        // `for lst in self.iter.infer(context)`: an error raised on ANY
+        // pull — first or mid-stream — propagates AS-IS out of
+        // assigned_stmts (protocols.py:290-316, no try around the loop);
+        // the consumer is AssignName._infer's EAGER
+        // `list(self.assigned_stmts(...))` (node_classes.py:451), so parts
+        // yielded before the raise are discarded (e.g. `spec["choices"]`
+        // inferring List then RAISING on a ListComp value — ListComp has no
+        // inference function — makes the whole target Uninferable).
+        // Preserving the kind matters: _infer_stmts skips
         // NameInferenceError silently but yields U for InferenceError.
-        if parts.vals.is_empty() {
-            if let Some(e) = parts.err {
-                return Err(e);
-            }
+        if let Some(e) = parts.err {
+            return Err(e);
         }
         let mut out: Vec<NV> = Vec::new();
         match path {
@@ -2425,42 +2441,39 @@ impl Engine {
                 }
             }
             Branch::Dict(items) => {
-                let mut map: Vec<(String, ConstValue)> = Vec::new();
+                // _base_nodes.py:366-376: every key AND value must safe_infer
+                // to a Const (ANY const type — `"%s" % {1: 2}` folds to
+                // "{1: 2}"); the result is a real python dict, so insert with
+                // python-dict semantics (first position kept, last value wins)
+                let mut map: Vec<(ConstValue, ConstValue)> = Vec::new();
                 for (k, v) in items {
                     let kc = self
                         .safe_infer(k, &copy_context(Some(ctx)))
                         .and_then(|x| self.value_const(&x));
-                    let Some(ConstValue::Str(ks)) = kc else {
-                        // non-Const key -> (Uninferable,) ... astroid also
-                        // requires Const but ANY const key works as mapping
-                        // key; non-str Const keys can't be addressed by
-                        // %(name)s anyway — treat non-Const as U
-                        match kc {
-                            Some(_) => return vec![Value::Uninferable],
-                            None => return vec![Value::Uninferable],
-                        }
+                    let Some(kc) = kc else {
+                        return vec![Value::Uninferable];
                     };
                     let vc = self
                         .safe_infer(v, &copy_context(Some(ctx)))
                         .and_then(|x| self.value_const(&x));
                     match vc {
-                        Some(c) => map.push((ks.to_string(), c)),
+                        Some(c) => pct_map_insert(&mut map, kc, c),
                         None => return vec![Value::Uninferable],
                     }
                 }
                 Some(PctArgs::Mapping(map))
             }
             Branch::SynthDictV(items) => {
-                let mut map: Vec<(String, ConstValue)> = Vec::new();
+                let mut map: Vec<(ConstValue, ConstValue)> = Vec::new();
                 for (k, v) in items {
                     let kc = self
                         .safe_infer_value(&k)
                         .and_then(|x| self.value_const(&x));
-                    let Some(ConstValue::Str(ks)) = kc else {
+                    let Some(kc) = kc else {
                         return vec![Value::Uninferable];
                     };
                     match self.safe_infer_value(&v).and_then(|x| self.value_const(&x)) {
-                        Some(c) => map.push((ks.to_string(), c)),
+                        Some(c) => pct_map_insert(&mut map, kc, c),
                         None => return vec![Value::Uninferable],
                     }
                 }
@@ -3587,15 +3600,96 @@ fn const_unary_fold(c: &ConstValue, op: &str) -> Option<Value> {
 enum PctArgs {
     One(ConstValue),
     Many(Vec<ConstValue>),
-    Mapping(Vec<(String, ConstValue)>),
+    Mapping(Vec<(ConstValue, ConstValue)>),
 }
 
-/// minimal %-format folding for Const operands
+/// python-dict insert semantics for the %-format mapping: equal key keeps its
+/// original position, value overwritten (astroid builds a REAL dict,
+/// _base_nodes.py:368 `values[key.value] = value.value`)
+fn pct_map_insert(map: &mut Vec<(ConstValue, ConstValue)>, k: ConstValue, v: ConstValue) {
+    for (ek, ev) in map.iter_mut() {
+        if const_py_eq(ek, &k) {
+            *ev = v;
+            return;
+        }
+    }
+    map.push((k, v));
+}
+
+/// python `==` on const values (dict-key identity): numeric group compares
+/// across bool/int/float, NaN never equal, str/bytes exact
+fn const_py_eq(a: &ConstValue, b: &ConstValue) -> bool {
+    fn num(c: &ConstValue) -> Option<f64> {
+        match c {
+            ConstValue::Bool(b) => Some(*b as i64 as f64),
+            ConstValue::Int(IntValue::Small(i)) => Some(*i as f64),
+            ConstValue::Float(f) => Some(*f),
+            _ => None,
+        }
+    }
+    match (a, b) {
+        (ConstValue::Str(x), ConstValue::Str(y)) => x == y,
+        (ConstValue::Bytes(x), ConstValue::Bytes(y)) => x == y,
+        (ConstValue::None, ConstValue::None) => true,
+        (ConstValue::Int(IntValue::Big(x)), ConstValue::Int(IntValue::Big(y))) => x == y,
+        _ => match (num(a), num(b)) {
+            (Some(x), Some(y)) => x == y, // NaN != NaN per IEEE, matching python
+            _ => false,
+        },
+    }
+}
+
+/// repr() of a const value, for dict-as-%s-argument folding
+fn const_repr(c: &ConstValue) -> Option<String> {
+    Some(match c {
+        ConstValue::Str(s) => pyast::pyrepr::repr_str(s),
+        ConstValue::StrSurrogate(p) => pyast::pyrepr::repr_str_points(p),
+        _ => const_str(c)?,
+    })
+}
+
+/// repr() of the const-only mapping dict (CPython treats the dict itself as
+/// the single positional argument for plain conversions — unicodeobject.c
+/// getnextarg returns `args` when arglen < 0)
+fn pct_dict_repr(map: &[(ConstValue, ConstValue)]) -> Option<String> {
+    let mut out = String::from("{");
+    for (i, (k, v)) in map.iter().enumerate() {
+        if i > 0 {
+            out.push_str(", ");
+        }
+        out.push_str(&const_repr(k)?);
+        out.push_str(": ");
+        out.push_str(&const_repr(v)?);
+    }
+    out.push('}');
+    Some(out)
+}
+
+/// minimal %-format folding for Const operands.
+/// arg-consumption model is CPython unicodeobject.c unicode_mod:
+/// - tuple rhs: positional list, trailing "not all arguments converted" check
+/// - non-tuple rhs (Const or Dict): a SINGLE positional value (the object
+///   itself) consumable once; Dict rhs additionally serves %(key)s lookups
+///   and SKIPS the trailing not-all-converted check (dict != NULL)
 fn pct_format(fmt: &str, args: &PctArgs) -> Option<String> {
-    let (values, mapping): (Vec<&ConstValue>, Option<&Vec<(String, ConstValue)>>) = match args {
-        PctArgs::One(c) => (vec![c], None),
-        PctArgs::Many(v) => (v.iter().collect(), None),
-        PctArgs::Mapping(m) => (Vec::new(), Some(m)),
+    // values: positional pool; single: one-shot whole-object value
+    enum Pool<'a> {
+        Tuple(Vec<&'a ConstValue>),
+        Single(Option<PctVal<'a>>),
+    }
+    #[derive(Clone, Copy)]
+    enum PctVal<'a> {
+        C(&'a ConstValue),
+        Map(&'a [(ConstValue, ConstValue)]),
+    }
+    let mapping: Option<&Vec<(ConstValue, ConstValue)>> = match args {
+        PctArgs::Mapping(m) => Some(m),
+        _ => None,
+    };
+    let mut pool: Pool = match args {
+        PctArgs::One(c) => Pool::Single(Some(PctVal::C(c))),
+        PctArgs::Many(v) => Pool::Tuple(v.iter().collect()),
+        PctArgs::Mapping(m) => Pool::Single(Some(PctVal::Map(m))),
     };
     let chars: Vec<char> = fmt.chars().collect();
     let mut out = String::new();
@@ -3676,15 +3770,63 @@ fn pct_format(fmt: &str, args: &PctArgs) -> Option<String> {
         }
         let conv = chars[i];
         i += 1;
-        let v: &ConstValue = match (&key, mapping) {
-            (Some(k), Some(m)) => m.iter().rev().find(|(mk, _)| mk == k).map(|(_, mv)| mv)?,
-            (None, Some(_)) => return None, // TypeError: format requires a mapping
-            (Some(_), None) => return None,
-            (None, None) => {
-                let v = values.get(vi)?;
-                vi += 1;
-                v
+        let vv: PctVal = match (&key, mapping) {
+            // %(key)s — python dict lookup; only str keys can match.
+            // CPython REPLACES ctx->args with the looked-up value and resets
+            // argidx=-2 (unicode_format_arg_parse), then getnextarg consumes
+            // it — so any named conversion exhausts the single-value pool:
+            // '%(a)s %s' % {'a':1} is TypeError but '%s %(a)s' % {'a':1} works
+            (Some(k), Some(m)) => {
+                let v = m
+                    .iter()
+                    .find(|(mk, _)| matches!(mk, ConstValue::Str(s) if &**s == k.as_str()))
+                    .map(|(_, mv)| mv)?; // KeyError
+                if let Pool::Single(s) = &mut pool {
+                    *s = None;
+                }
+                PctVal::C(v)
             }
+            (Some(_), None) => return None, // TypeError: format requires a mapping
+            (None, _) => match &mut pool {
+                Pool::Tuple(vals) => {
+                    let v = *vals.get(vi)?; // TypeError: not enough arguments
+                    vi += 1;
+                    PctVal::C(v)
+                }
+                // non-tuple rhs is ONE positional value (the object itself,
+                // dict included); a second plain conversion is "not enough
+                // arguments for format string"
+                Pool::Single(s) => s.take()?,
+            },
+        };
+        if let PctVal::Map(m) = vv {
+            // the dict itself as the value: str(dict) == repr(dict)
+            let body = match conv {
+                's' | 'r' => {
+                    let mut t = pct_dict_repr(m)?;
+                    if let Some(p) = prec {
+                        t.truncate(p);
+                    }
+                    t
+                }
+                _ => return None, // TypeError: %d format: a number is required
+            };
+            let padded = if has_width && body.chars().count() < width {
+                let pad = width - body.chars().count();
+                if minus {
+                    format!("{}{}", body, " ".repeat(pad))
+                } else {
+                    format!("{}{}", " ".repeat(pad), body)
+                }
+            } else {
+                body
+            };
+            out.push_str(&padded);
+            continue;
+        }
+        let v: &ConstValue = match vv {
+            PctVal::C(c) => c,
+            PctVal::Map(_) => unreachable!(),
         };
         let body: String = match conv {
             's' => {
@@ -3778,8 +3920,21 @@ fn pct_format(fmt: &str, args: &PctArgs) -> Option<String> {
         };
         out.push_str(&padded);
     }
-    if mapping.is_none() && vi != values.len() {
-        return None; // TypeError: not all arguments converted
+    // CPython end check: `if (argidx < arglen && !dict)` -> TypeError "not
+    // all arguments converted during string formatting". dict rhs skips it
+    // (`"hello" % {}` -> 'hello'); unconsumed single non-dict errors
+    // (`"hello" % "x"` -> TypeError); fully-consumed tuple passes.
+    match &pool {
+        Pool::Tuple(vals) => {
+            if vi != vals.len() {
+                return None;
+            }
+        }
+        Pool::Single(s) => {
+            if mapping.is_none() && s.is_some() {
+                return None;
+            }
+        }
     }
     Some(out)
 }
