@@ -1892,6 +1892,20 @@ impl Engine {
             // cache key, bump). Proxies (Inst/Generator/...) instead
             // yield self undecorated (bases.py:139).
             NV::V(Value::Node(g)) => self.infer_to(*g, ctx, sink),
+            // EvaluatedObject node: NodeNG.infer yields the wrapped value
+            // (node_classes.py:5024-5028) — a real hop (bump-on-pull-again)
+            NV::V(v @ Value::EvaluatedObject { value }) => {
+                let inner = (**value).clone();
+                match sink(inner) {
+                    // consumer abandoned at the yield: post-yield bump and
+                    // cache write skipped (node_ng.py:160-176)
+                    Drive::Stop => End::Stopped,
+                    Drive::Go => {
+                        self.synth_value_pull(v, ctx);
+                        End::Done
+                    }
+                }
+            }
             NV::V(v) => {
                 yield_v!(sink, v.clone());
                 End::Done

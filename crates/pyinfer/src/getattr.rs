@@ -100,8 +100,14 @@ impl Engine {
                     match &md.tree.nodes[g.n.idx()].kind {
                         NodeKind::Module(_) => 1,
                         NodeKind::ClassDef(_) => 2,
-                        NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
-                        | NodeKind::Lambda(_) => 3,
+                        NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_) => 3,
+                        // Lambda defines getattr but NO igetattr
+                        // (scoped_nodes.py:1047-1060 vs FunctionDef's
+                        // 1313+): `owner.igetattr(...)` in _infer_attribute
+                        // raises AttributeError -> owner skipped
+                        // (`lambda x: x` then `.__name__` -> ERR, pandas
+                        // test_aggregation)
+                        NodeKind::Lambda(_) => 0,
                         NodeKind::Slice { .. } => 4,
                         NodeKind::Const(_)
                         | NodeKind::List { .. }
@@ -140,6 +146,9 @@ impl Engine {
             Value::SynthSlice { .. } => {
                 stream_result(self.synth_slice_igetattr(owner, name, ctx), sink)
             }
+            // EvaluatedObject has no igetattr -> AttributeError, owner
+            // skipped by _infer_attribute
+            Value::EvaluatedObject { .. } => End::Raised(ErrKind::Attribute),
             Value::BoundMethod { func, bound } => {
                 stream_result(self.method_igetattr(*func, Some(bound), name, ctx), sink)
             }

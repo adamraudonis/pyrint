@@ -64,6 +64,12 @@ pub enum Value {
     SynthSlice { bounds: Rc<[Option<ConstValue>; 3]> },
     /// objects.FrozenSet
     FrozenSet { elems: Rc<Vec<Value>> },
+    /// nodes.EvaluatedObject (node_classes.py:5010-5028): container-tip
+    /// elements wrap their safe-inferred value
+    /// (brain_builtin_inference.py:277-285). `_infer` yields the inner
+    /// value; the node has NO getitem/itered, so loop-unpack getitem on an
+    /// element raises AttributeError -> continue (protocols.py:268-276).
+    EvaluatedObject { value: Rc<Value> },
     /// bases.Instance of a ClassDef
     Inst { cls: GNode, id: InstId },
     /// objects.ExceptionInstance (instance_attrs live in Engine.exc_iattrs
@@ -185,6 +191,9 @@ pub fn value_key(v: &Value) -> ValueKey {
         Value::DictItems(rc) => ValueKey::Synth(5, Rc::as_ptr(rc) as usize),
         Value::DictKeys(rc) => ValueKey::Synth(6, Rc::as_ptr(rc) as usize),
         Value::DictValues(rc) => ValueKey::Synth(7, Rc::as_ptr(rc) as usize),
+        Value::EvaluatedObject { value } => {
+            ValueKey::Synth(8, Rc::as_ptr(value) as usize)
+        }
     }
 }
 

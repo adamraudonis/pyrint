@@ -168,6 +168,9 @@ fn dump_module<W: Write>(engine: &Engine, mid: ModId, out: &mut W) {
 pub fn render(engine: &Engine, v: &Value) -> String {
     match v {
         Value::Uninferable => "U".to_string(),
+        // dump_infer.py render() has no EvaluatedObject case — falls to
+        // the Other:<type> tail
+        Value::EvaluatedObject { .. } => "Other:EvaluatedObject".to_string(),
         Value::SynthConst(c) => render_const(c),
         Value::Node(g) => {
             let md = engine.md(g.m);

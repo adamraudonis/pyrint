@@ -39,6 +39,9 @@ pub(crate) fn synth_node_id(v: &Value) -> Option<(u8, usize)> {
         Value::SynthDict { items } => Some((2, Rc::as_ptr(items) as *const u8 as usize)),
         Value::SynthSlice { bounds } => Some((3, Rc::as_ptr(bounds) as usize)),
         Value::FrozenSet { elems } => Some((4, Rc::as_ptr(elems) as *const u8 as usize)),
+        // a fresh NodeNG per tip evaluation; its infer hop yields the inner
+        // value (node_classes.py:5024-5028)
+        Value::EvaluatedObject { value } => Some((5, Rc::as_ptr(value) as usize)),
         _ => None,
     }
 }
@@ -669,6 +672,13 @@ impl Engine {
                     // trailing `yield Uninferable`. (Uninferable stmts
                     // bypass in astroid, but satisfied_by(U) is True for
                     // every constraint kind — same outcome.)
+                    // EvaluatedObject._infer yields the wrapped value
+                    // (node_classes.py:5024-5028); the hop/cache identity
+                    // stays keyed on the wrapper node
+                    let yielded: Value = match v {
+                        Value::EvaluatedObject { value } => (**value).clone(),
+                        other => other.clone(),
+                    };
                     if !matches!(v, Value::Uninferable) {
                         let mut stmt_constraints: Vec<&crate::constraint::Constraint> =
                             Vec::new();
@@ -679,7 +689,7 @@ impl Engine {
                         }
                         if !stmt_constraints
                             .iter()
-                            .all(|c| self.constraint_satisfied(c, &v, &ctx))
+                            .all(|c| self.constraint_satisfied(c, &yielded, &ctx))
                         {
                             constraint_failed = true;
                             // the _infer_stmts for-loop pulls the stmt
@@ -701,7 +711,7 @@ impl Engine {
                         }
                     }
                     inferred = true;
-                    if let Drive::Stop = sink(v.clone()) {
+                    if let Drive::Stop = sink(yielded) {
                         return End::Stopped;
                     }
                     if !is_replay {
@@ -2229,6 +2239,9 @@ impl Engine {
         match v {
             Value::Uninferable => None,
             Value::DescBM { .. } => Some(true),
+            // EvaluatedObject keeps NodeNG's default bool_value
+            // (Uninferable) — it does not delegate to the wrapped value
+            Value::EvaluatedObject { .. } => None,
             Value::SynthConst(c) => Some(const_truth(c)),
             Value::SynthSeq { elems, .. } => Some(!elems.is_empty()),
             Value::SynthDict { items } => Some(!items.is_empty()),

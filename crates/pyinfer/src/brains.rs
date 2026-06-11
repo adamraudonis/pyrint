@@ -2291,10 +2291,17 @@ dict
                         NV::N(g) | NV::V(Value::Node(g)) => {
                             // `if inferred:` (brain_builtin_inference.py:281)
                             // — bool(Uninferable) is False: a safe_infer
-                            // that resolves to Uninferable is SKIPPED
+                            // that resolves to Uninferable is SKIPPED.
+                            // Successes are wrapped in an EvaluatedObject
+                            // (brain_builtin_inference.py:283-285) — the
+                            // element carries the value but exposes NO
+                            // getitem (loop-unpack getitem on it raises
+                            // AttributeError -> continue).
                             if let Some(v) = self.safe_infer(g, ctx) {
                                 if !v.is_uninferable() {
-                                    out.push(v);
+                                    out.push(Value::EvaluatedObject {
+                                        value: Rc::new(v),
+                                    });
                                 }
                             }
                         }
@@ -2303,7 +2310,7 @@ dict
                             // fresh Tuples etc.) completes a real
                             // NodeNG.infer: bump-once per ctx key
                             self.synth_value_pull(&v, ctx);
-                            out.push(v);
+                            out.push(Value::EvaluatedObject { value: Rc::new(v) });
                         }
                     }
                 }
@@ -2750,6 +2757,16 @@ fn const_format_value(c: &ConstValue) -> Option<String> {
     })
 }
 
+/// python repr() of a Const value (the {x!r} conversion)
+fn const_py_repr(c: &ConstValue) -> Option<String> {
+    Some(match c {
+        ConstValue::Str(s) => pyast::pyrepr::repr_str(s),
+        ConstValue::Bytes(_) | ConstValue::Complex { .. }
+        | ConstValue::StrSurrogate(_) => return None,
+        other => const_format_value(other)?,
+    })
+}
+
 /// str.format with auto/explicit numbering and named fields (no format
 /// specs beyond plain {}; specs bail to None -> Uninferable)
 fn simple_str_format(
@@ -2784,16 +2801,22 @@ fn simple_str_format(
                 if depth != 0 {
                     return None;
                 }
-                // `name[:spec]` — the real str.format applies the full
-                // format-spec mini-language (astroid folds via the real
-                // `.format(...)`); conversions / attribute access /
-                // nested-brace specs are out of scope -> Uninferable
+                // `name[!conv][:spec]` — the real str.format applies the
+                // full mini-language (astroid folds via the real
+                // `.format(...)`); attribute access / nested-brace specs
+                // are out of scope -> Uninferable
                 let (name_part, spec) = match field.split_once(':') {
                     Some((n, sp)) => (n, Some(sp)),
                     None => (field.as_str(), None),
                 };
-                if name_part.contains('!') || name_part.contains('.')
-                    || name_part.contains('[')
+                // conversion: {x!r} / {x!s} / {x!a} (invalid -> ValueError
+                // -> Uninferable)
+                let (name_part, conv) = match name_part.split_once('!') {
+                    Some((n, c)) if matches!(c, "r" | "s" | "a") => (n, Some(c)),
+                    Some(_) => return None,
+                    None => (name_part, None),
+                };
+                if name_part.contains('.') || name_part.contains('[')
                     || spec.is_some_and(|sp| sp.contains('{'))
                 {
                     return None;
@@ -2808,6 +2831,32 @@ fn simple_str_format(
                 } else {
                     &kw.iter().find(|(k, _)| *k == *name_part)?.1
                 };
+                // apply the conversion first; the spec then formats the
+                // resulting STRING (CPython Formatter.convert_field)
+                let converted: Option<ConstValue> = match conv {
+                    None => None,
+                    Some("s") => Some(ConstValue::Str(const_format_value(c)?.into())),
+                    Some("r") => Some(ConstValue::Str(const_py_repr(c)?.into())),
+                    Some("a") => {
+                        let r = const_py_repr(c)?;
+                        let mut esc = String::new();
+                        for ch in r.chars() {
+                            let cp = ch as u32;
+                            if cp < 0x80 {
+                                esc.push(ch);
+                            } else if cp <= 0xff {
+                                esc.push_str(&format!("\\x{cp:02x}"));
+                            } else if cp <= 0xffff {
+                                esc.push_str(&format!("\\u{cp:04x}"));
+                            } else {
+                                esc.push_str(&format!("\\U{cp:08x}"));
+                            }
+                        }
+                        Some(ConstValue::Str(esc.into()))
+                    }
+                    _ => return None,
+                };
+                let c = converted.as_ref().unwrap_or(c);
                 match spec {
                     None | Some("") => out.push_str(&const_format_value(c)?),
                     Some(sp) => out.push_str(&crate::infer::python_format(c, sp)?),
