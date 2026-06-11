@@ -3139,6 +3139,20 @@ impl Engine {
                 "Generator(generator)".to_string()
             }),
             Value::UnionType => Some("UnionType(UnionType)".to_string()),
+            // dict-view proxies have no __str__/__repr__ override: default
+            // object.__repr__ `<astroid.objects.DictKeys object at 0x...>`.
+            // The address is the warm process's heap pointer (irreducible);
+            // the dump's 40-char Const cut usually hides everything past
+            // '...at 0x1' on this machine's typical heap range.
+            Value::DictKeys(_) => {
+                Some("<astroid.objects.DictKeys object at 0x10".to_string())
+            }
+            Value::DictValues(_) => {
+                Some("<astroid.objects.DictValues object at 0x10".to_string())
+            }
+            Value::DictItems(_) => {
+                Some("<astroid.objects.DictItems object at 0x10".to_string())
+            }
             Value::BoundMethod { func, .. } | Value::UnboundMethod { func } => {
                 // bases.py:447-452 __repr__ (no __str__ override; note the
                 // missing closing '>' and DECIMAL id after '0x')

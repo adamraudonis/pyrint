@@ -3083,7 +3083,27 @@ impl Engine {
                     bound: Rc::new(Value::Node(cls)),
                 })
                 .unwrap_or(Value::Uninferable),
-            "__subclasses__" | "mro" => Value::Uninferable,
+            // ClassModel.attr_mro (objectmodel.py:521-541): an
+            // MroBoundMethod proxying implicit_metaclass.locals["mro"][0]
+            // (renders BM:builtins.type.mro); calling it yields
+            // attr___mro__ — a Tuple of the class's mro. We carry the
+            // modeled CLASS in `bound` so the call interception can
+            // compute its mro (see bound_method_infer_call_result_to).
+            "mro" => {
+                let b = self.builtins();
+                let mro_fn = self
+                    .class_locals_get(b.type_, self.sym("mro"))
+                    .first()
+                    .copied();
+                match mro_fn {
+                    Some(f) => Value::BoundMethod {
+                        func: f,
+                        bound: Rc::new(Value::Node(cls)),
+                    },
+                    None => Value::Uninferable,
+                }
+            }
+            "__subclasses__" => Value::Uninferable,
             "__dict__" => Value::SynthDict {
                 items: Rc::new(Vec::new()),
             },

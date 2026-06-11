@@ -270,6 +270,29 @@ impl Engine {
                         return End::Done;
                     }
                 }
+                // MroBoundMethod.infer_call_result (objectmodel.py:528-534):
+                // `Cls.mro()` yields attr___mro__ — a Tuple of the modeled
+                // class's mro. The model BM proxies builtins.type.mro with
+                // the class carried in `bound`.
+                if let Value::Node(b) = &**bound {
+                    if self.kind_is(*b, |k| matches!(k, pyast::tree::NodeKind::ClassDef(_)))
+                        && Some(*func)
+                            == self
+                                .class_locals_get(self.builtins().type_, self.sym("mro"))
+                                .first()
+                                .copied()
+                    {
+                        let v = match self.mro(*b, ctx) {
+                            Ok(m) => Value::SynthSeq {
+                                kind: crate::value::SeqKind::Tuple,
+                                elems: Rc::new(m.into_iter().map(Value::Node).collect()),
+                            },
+                            Err(_) => return End::Raised(ErrKind::Inference),
+                        };
+                        yield_v!(sink, v);
+                        return End::Done;
+                    }
+                }
                 self.bound_method_infer_call_result_to(*func, bound, caller, ctx, sink)
             }
             // DescriptorBoundMethod.infer_call_result
