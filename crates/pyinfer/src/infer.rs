@@ -2525,7 +2525,11 @@ impl Engine {
     }
 
     fn instance_callable(&self, v: &Value) -> bool {
-        // Instance.callable: class getattr("__call__", class_context=False)
+        // Instance.callable: class getattr("__call__", class_context=False).
+        // The object_type proxy classes (b.function & co.) are EMPTY synth
+        // classes (no locals, ancestors [object]) -> their instances are
+        // NOT callable, exactly like astroid's fresh _build_proxy_class
+        // products (sqlalchemy testing/util.py:318 types.FunctionType(...)).
         match self.proxied_class(v) {
             Some(cls) => {
                 let sym = self.sym("__call__");

@@ -616,10 +616,10 @@ impl Engine {
             super_: find("super"),
             generator: find("generator"),
             async_generator: find("async_generator"),
-            function: find("function"),
-            builtin_function_or_method: find("builtin_function_or_method"),
-            method: find("method"),
-            module: find("module"),
+            function: GNode { m: synth, n: NodeId(5) },
+            builtin_function_or_method: GNode { m: synth, n: NodeId(6) },
+            method: GNode { m: synth, n: NodeId(7) },
+            module: GNode { m: synth, n: NodeId(8) },
             traceback: find("traceback"),
             none_type: GNode { m: synth, n: NodeId(1) },
             notimpl_type: GNode { m: synth, n: NodeId(2) },
@@ -637,7 +637,21 @@ impl Engine {
         // Module named "builtins" (for qname purposes) holding bare classes.
         let mut interner = pyast::tree::Interner::default();
         let mut nodes: Vec<Node> = Vec::new();
-        let class_names = ["NoneType", "NotImplementedType", "Ellipsis", "UnionType"];
+        // first four: Const proxies. last four: object_type PROXY classes
+        // (helpers.py _build_proxy_class builds FRESH EMPTY "function"/
+        // "builtin_function_or_method"/"method"/"module" classes parented
+        // to builtins — DISTINCT from the raw-built full classes in the
+        // snapshot's builtins locals, which einf descriptors resolve to)
+        let class_names = [
+            "NoneType",
+            "NotImplementedType",
+            "Ellipsis",
+            "UnionType",
+            "function",
+            "builtin_function_or_method",
+            "method",
+            "module",
+        ];
         let body: Vec<NodeId> = (1..=class_names.len() as u32).map(NodeId).collect();
         nodes.push(Node {
             kind: NodeKind::Module(Box::new(ModuleData {
