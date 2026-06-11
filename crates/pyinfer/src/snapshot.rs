@@ -162,12 +162,16 @@ impl Loader {
             "Module" => {
                 let name = v["name"].as_str().unwrap_or("").to_string();
                 let body = self.load_list(&ch["body"], id);
+                // C-ext module docstrings are real (ModuleModel.attr___doc__
+                // -> Const(doc_node.value); e.g. readline.__doc__ mentions
+                // libedit — ansible cli/console.py:570 membership test)
+                let doc_node = self.load_opt(&ch["doc_node"], id);
                 NodeKind::Module(Box::new(ModuleData {
                     name: name.into(),
                     file: "<snapshot>".into(),
                     package: false,
                     body,
-                    doc_node: None,
+                    doc_node,
                     future_imports: Vec::new(),
                 }))
             }

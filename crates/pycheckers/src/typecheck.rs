@@ -529,11 +529,18 @@ impl TypeCk {
                 "Assigning result of a function call, where the function has no return".into());
             return;
         }
-        // function_node.root().fully_defined(): real .py file
+        // function_node.root().fully_defined(): real .py file.
+        // PartialFunction.root() walks its SYNTHETIC parent (the partial
+        // call's parent, brain_functools.py:119) — the module of the
+        // partial() assignment site, NOT the wrapped function's module
+        // (pip urllib3/util/wait.py:53 partial(select.select, ...)).
         {
             let root_node = match accessor {
                 Some((w, _)) => w,
-                None => fnode,
+                None => match &function_node {
+                    Some(Value::Partial { parent: Some(p), .. }) => *p,
+                    _ => fnode,
+                },
             };
             let root = eng.md(root_node.m);
             if root.file == "<snapshot>" || !root.file.ends_with(".py") {
