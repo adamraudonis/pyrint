@@ -31,6 +31,12 @@ pub struct CheckMsg {
     /// true for messages emitted WITHOUT a node (E0001 Cannot-import):
     /// pylint renders those under the raw (unstripped) FileItem module name
     pub nodeless: bool,
+    /// the anchor node's module, when the node may belong to ANOTHER
+    /// module's tree: pylint stamps node messages with node.root().name /
+    /// node.root().file (pylinter.py:1257-1263) — e.g. E0603 on __all__
+    /// elements inferred through an ImportFrom (numpy.char checks flag
+    /// Const nodes living in numpy._core.defchararray's tree).
+    pub root_mid: Option<ModId>,
 }
 
 pub struct WalkCx<'a> {
@@ -63,13 +69,28 @@ impl WalkCx<'_> {
         if self.is_crashed() {
             return; // pylint: the exception already aborted the walk
         }
-        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: false });
+        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: false, root_mid: None });
+    }
+    /// node message whose anchor may live in a FOREIGN module's tree
+    /// (module/path attribution from node.root(), pylinter.py:1257-1263)
+    pub fn emit_node_rooted(
+        &mut self,
+        msgid: &'static str,
+        node: GNode,
+        line: u32,
+        col: i64,
+        text: String,
+    ) {
+        if self.is_crashed() {
+            return;
+        }
+        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: false, root_mid: Some(node.m) });
     }
     pub fn emit_nodeless(&mut self, msgid: &'static str, line: u32, col: i64, text: String) {
         if self.is_crashed() {
             return;
         }
-        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: true });
+        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: true, root_mid: None });
     }
     /// E0601/E0602/E0606 helper: message at the name node.
     pub fn emit_name_msg(&mut self, msgid: &'static str, node: GNode, name: &str) {

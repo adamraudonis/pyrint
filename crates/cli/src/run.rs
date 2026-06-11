@@ -618,13 +618,31 @@ fn lint_tree(
                                 return;
                             }
                             stats_ref.count(m.msgid);
+                            // node messages take module/path from
+                            // node.root() (pylinter.py:1257-1263): anchors
+                            // living in ANOTHER module's tree are attributed
+                            // to THAT module (numpy E0603 on inferred
+                            // __all__ elements)
+                            let (msg_module, msg_path) = match m.root_mid {
+                                Some(rmid) if rmid != mid => {
+                                    let rmd = engine.md(rmid);
+                                    (
+                                        rmd.name.clone(),
+                                        rmd.file.replacen(strip_prefix, "", 1),
+                                    )
+                                }
+                                _ => (
+                                    if m.nodeless {
+                                        item.name.clone()
+                                    } else {
+                                        stripped.clone()
+                                    },
+                                    path.clone(),
+                                ),
+                            };
                             msgs_ref.push(OutMsg {
-                                module: if m.nodeless {
-                                    item.name.clone()
-                                } else {
-                                    stripped.clone()
-                                },
-                                path: path.clone(),
+                                module: msg_module,
+                                path: msg_path,
                                 line: if m.line == 0 { 1 } else { m.line as i64 },
                                 col: m.col,
                                 msgid: msgstore::def(idx).msgid,

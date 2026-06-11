@@ -2569,8 +2569,9 @@ impl VarsChecker {
                     "Invalid object {} in __all__, must contain only strings",
                     u::py_repr_str(&u::as_string(eng, en))
                 );
-                cx.emit_node(
+                cx.emit_node_rooted(
                     "E0604",
+                    en,
                     u::lineno(eng, en),
                     u::col_offset(eng, en).max(0) as i64,
                     text,
@@ -2598,8 +2599,9 @@ impl VarsChecker {
                     "Undefined variable name {} in __all__",
                     u::py_repr_str(&elt_name_str)
                 );
-                cx.emit_node(
+                cx.emit_node_rooted(
                     "E0603",
+                    en,
                     u::lineno(cx.eng, en),
                     u::col_offset(cx.eng, en).max(0) as i64,
                     text,

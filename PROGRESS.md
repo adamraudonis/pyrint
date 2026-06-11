@@ -1442,6 +1442,56 @@ pylint behavior — bugs are replicated.
 8. Remaining: perf polish if needed (suite ≈ 104s, well under the ~250s
    10x bar), and watching the stderr resurrection warnings on new
    codebases for messages worth porting next.
+9. **10-corpus BLIND battery (2026-06-11): ALL 17 corpora identical.**
+   New pinned corpora: scrapy, celery, pip, fastapi, sqlalchemy, numpy,
+   scikit-learn, matplotlib, ansible, sympy (ground truth in
+   harness/results/<c>.iso.*). 11 divergence mechanisms found and fixed:
+   - t-strings/PEP750 (sqlalchemy): already covered by the
+     unsupported-syntax → oracle route (ruff target 3.12).
+   - E0102: astroid injects __module__/__qualname__/__annotations__ into
+     every ClassDef's locals at construction → implicit defined_self
+     (celery local.py); pylint anchors node messages at node.position
+     (def/class keyword line — NOT the fromlineno decorator quirk):
+     pyast Tree.positions + ckutils msg_line/msg_col, all def/class-anchored
+     emits switched (matplotlib text.py).
+   - E1124: PartialFunction.parent = the partial-call parent → .type
+     "method" → implicit_parameters()==1 (matplotlib dviread @_dispatch).
+   - E1102: object_type/type() proxy classes are FRESH EMPTY classes
+     (helpers._build_proxy_class) — b.function/method/module/bfom are now
+     empty synthetic classes, distinct from the raw-built snapshot classes
+     that einf descriptors resolve (sqlalchemy testing/util.py
+     types.FunctionType(...); sklearn _repr_html/base.py).
+   - E1111: PartialFunction.root() walks the synthetic parent → the
+     assignment-site module decides fully_defined() (pip urllib3 wait.py).
+   - E1135: snapshot Module doc_node wired → real C-ext __doc__ strings
+     (ansible console.py readline.__doc__).
+   - E1120/E1123: UnboundMethod/BoundMethod pytype falls through to the
+     wrapped FunctionDef.pytype ("builtins.instancemethod" iff "method" in
+     .type) → safe_infer no longer ambiguous on [UM, BM] (sympy
+     test_basic.py "in unbound method call").
+   - E0603 attribution: pylint stamps node messages with node.root().name
+     / node.root().file (pylinter.py:1257-1263) — __all__ elements
+     inferred through ImportFrom are attributed to the DEFINING module
+     (numpy.char checks → numpy._core.defchararray sections); CheckMsg
+     carries root_mid.
+   - F0002 crash replication: (a) logging _check_format_string does a
+     STRICT bytes.decode() — UnicodeDecodeError aborts the module check
+     (pip test_base_command.py); (b) astroid's rebuilder RecursionErrors
+     on ~495+ deep BinOp chains — trees deeper than 350 are re-judged by
+     the oracle → exact phase-1 F0002 (sympy resolvent_lookup.py), and any
+     import of a crash file re-trips the importing module's check via
+     Engine.crash_files/crash_tripped (sympy galois_resolvents.py).
+     WalkCx.crashed: pre-crash messages kept, later ones dropped,
+     spurious-suppression step skipped, F0002 appended, fatal exit bit.
+   - **F0002 TIMESTAMP NORMALIZATION**: our F0002 embeds a real
+     PYLINT_HOME/pylint-crash-%Y-%m-%d-%H-%M-%S.txt path (own wall clock).
+     ACCEPTANCE for corpora with F0002 uses harness/bytecmp.py — raw cmp
+     except `pylint-crash-[0-9-]*\.txt` is rewritten to
+     `pylint-crash-TS.txt` in BOTH inputs. Everything else stays raw-byte.
+   - Acceptance (2026-06-11): all 17 corpora bytecmp-identical + exit codes
+     equal (pip exit 3, sympy exit 3 — fatal bits). Gates: check_treedump
+     django 400 == 0, check_inferdump django/pandas/salt 200 == 0, 151
+     infertests PASS, 36 treetests identical.
 
 ## Gotchas for future rounds
 
