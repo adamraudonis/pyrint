@@ -2879,7 +2879,24 @@ impl Engine {
             // descriptor check (getattr('__get__') metaclass walk burns
             // shared-counter bumps before the InferenceError)
             "__call__" => self.instantiate_class(cls),
-            "__subclasses__" | "mro" | "__new__" | "__init__" => Value::Uninferable,
+            // ObjectModel.attr___new__/attr___init__ (objectmodel.py:
+            // 135-165): synthetic BoundMethods on the extracted template
+            // defs, bound to _get_bound_node(self) = the class itself
+            "__new__" => self
+                .obj_model_func_nodes()
+                .map(|(f, _)| Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(Value::Node(cls)),
+                })
+                .unwrap_or(Value::Uninferable),
+            "__init__" => self
+                .obj_model_func_nodes()
+                .map(|(_, f)| Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(Value::Node(cls)),
+                })
+                .unwrap_or(Value::Uninferable),
+            "__subclasses__" | "mro" => Value::Uninferable,
             "__dict__" => Value::SynthDict {
                 items: Rc::new(Vec::new()),
             },

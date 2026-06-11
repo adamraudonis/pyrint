@@ -884,6 +884,16 @@ impl Engine {
                 if let Some(dotted) = self.dotted_of(fg) {
                     let src = format!("{dotted}()\n");
                     if let Some(tmpl_call) = self.template_extract_node(&src) {
+                        // `new_call.parent = node.parent`
+                        // (brain_dataclasses.py:431): the re-parsed call is
+                        // REPARENTED to the field call's parent, so its
+                        // factory Name resolves in the REAL module's scope
+                        // (airflow `field(default_factory=ParamsDict)`)
+                        let parent = {
+                            let md = self.md(node.m);
+                            GNode { m: node.m, n: md.tree.nodes[node.n.idx()].parent }
+                        };
+                        self.reparents.borrow_mut().insert(tmpl_call, parent);
                         return Some(self.infer(tmpl_call, ctx));
                     }
                 }

@@ -30,7 +30,11 @@ impl Engine {
         }
         let md = self.md(g.m);
         let p = md.tree.nodes[g.n.idx()].parent;
-        if p == NodeId::MODULE {
+        {
+            // reparent overrides apply to ANY node astroid rebinds
+            // (`new_call.parent = node.parent` in brain_dataclasses puts a
+            // template CALL -- whose tree parent is an Expr -- into the
+            // real module's scope chain)
             let rp = self.reparents.borrow();
             if !rp.is_empty() {
                 if let Some(&over) = rp.get(&g) {
