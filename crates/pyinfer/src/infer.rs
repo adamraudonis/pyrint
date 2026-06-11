@@ -645,6 +645,29 @@ impl Engine {
                         .as_ref()
                         .map(|k| self.synth_hop_cache.borrow().contains(k))
                         .unwrap_or(true);
+                    // constraint filtering applies to synthetic stmt hops
+                    // too (bases.py:184-189): the model's fresh Tuple for
+                    // `self.args` under `... if self.args else ...` fails
+                    // the BooleanConstraint -> constraint_failed -> the
+                    // trailing `yield Uninferable`. (Uninferable stmts
+                    // bypass in astroid, but satisfied_by(U) is True for
+                    // every constraint kind — same outcome.)
+                    if !matches!(v, Value::Uninferable) {
+                        let mut stmt_constraints: Vec<&crate::constraint::Constraint> =
+                            Vec::new();
+                        for (_cstmt, cs) in constraints.iter() {
+                            // fresh synthetic values have no tree position:
+                            // `constraint_stmt.parent_of(stmt)` is False
+                            stmt_constraints.extend(cs.iter());
+                        }
+                        if !stmt_constraints
+                            .iter()
+                            .all(|c| self.constraint_satisfied(c, &v, &ctx))
+                        {
+                            constraint_failed = true;
+                            continue;
+                        }
+                    }
                     inferred = true;
                     if let Drive::Stop = sink(v.clone()) {
                         return End::Stopped;
