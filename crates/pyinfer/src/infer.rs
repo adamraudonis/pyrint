@@ -3014,7 +3014,15 @@ impl Engine {
         match v {
             Value::Uninferable => Some("Uninferable".to_string()),
             Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
-                let root = self.md(cls.m).name.clone();
+                // bases.py:372: self._proxied.root().name — root() walks
+                // PARENTS (reparent-aware: enum member fake classes are
+                // reparented to the enum's module, so str() shows
+                // 'Instance of homeassistant.const.KILO_WATT_HOUR')
+                let mut top = *cls;
+                while let Some(p) = self.parent(top) {
+                    top = p;
+                }
+                let root = self.md(top.m).name.clone();
                 let name = self.node_name(*cls).unwrap_or_default();
                 Some(format!("Instance of {root}.{name}"))
             }

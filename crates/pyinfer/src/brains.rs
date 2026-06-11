@@ -2109,6 +2109,16 @@ dict
                             }
                         }
                         NV::V(Value::SynthConst(c)) => Some((**c).clone()),
+                        // SynthSeq elements carrying REAL Const nodes (binop
+                        // list concat keeps the original elt nodes — astroid's
+                        // fresh List node passes all(isinstance(elt, Const)))
+                        NV::V(Value::Node(g)) => {
+                            let md = self.md(g.m);
+                            match &md.tree.nodes[g.n.idx()].kind {
+                                NodeKind::Const(c) => Some(c.clone()),
+                                _ => None,
+                            }
+                        }
                         _ => None,
                     })
                     .collect();
