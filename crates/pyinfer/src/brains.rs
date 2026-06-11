@@ -2434,19 +2434,27 @@ impl Engine {
             NV::N(g) => self.infer_first(*g, Some(ctx)).ok(),
             NV::V(v) => Some(v.clone()),
         }?;
-        let func = match wrapped {
+        // `isinstance(inferred_wrapped_function, nodes.FunctionDef)` —
+        // objects.PartialFunction IS a FunctionDef subclass: nested
+        // partial(partial(f, 1), 2) passes the check; its own parameter
+        // set is empty (no postinit), so any keywords -> UseInferenceDefault
+        let (func, wrapped_partial) = match &wrapped {
             Value::Node(g)
-                if self.kind_is(g, |k| {
+                if self.kind_is(*g, |k| {
                     matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
                 }) =>
             {
-                g
+                (*g, false)
             }
+            Value::Partial { func, .. } => (*func, true),
             _ => return None,
         };
         // keyword names must be parameters of the wrapped function
-        let spec = self.arg_spec(func);
-        if let Some(spec) = &spec {
+        if wrapped_partial {
+            if !kwargs.is_empty() {
+                return None;
+            }
+        } else if let Some(spec) = &self.arg_spec(func) {
             let mut param_names: Vec<GSym> = Vec::new();
             for a in spec
                 .args
