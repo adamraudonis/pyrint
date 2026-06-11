@@ -602,7 +602,7 @@ pylint behavior — bugs are replicated.
      rsax931 trailing Const None (23). (4) pylfunc NOTREE x3 + os.environ
      noise (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence). (6) recursion guard still 350 (no diff evidence).
-   - **phase 10 (diff-reduction round 9, N=1000)**: 970 -> 498 diff lines.
+   - **phase 10 (diff-reduction round 9, N=1000)**: 970 -> 496 diff lines.
      LANDED (probe-verified, harness/infertests now 69 probes):
      (a) **inference_tip 64-FIFO EXACT** (inference_tip.py:22-86): the
      OrderedDict caps at 64 with popitem(last=False); EVERY successful
@@ -667,8 +667,9 @@ pylint behavior — bugs are replicated.
      the tracer import polluted sys.modules vs the __main__ cache-warm
      run, making sys.modules Dict:204 vs 203 a phantom diff).
      N=1000 differing files/lines: django 12/39, pylfunc 10/15, pandas
-     78/305, salt 13/71, airflow 11/33, sentry 6/16, core 9/19 (total
-     498). REMAINING (by volume): (1) pandas count drift continues
+     78/305, salt 13/71, airflow 10/31, sentry 6/16, core 9/19 (total
+     496; also landed: nested functools.partial wrapped-function —
+     PartialFunction isinstance FunctionDef). REMAINING (by volume): (1) pandas count drift continues
      (~250 lines): copy_view/test_methods bool tails (GT folds
      `df.method(copy=copy)` chains one branch further), `[None] * n`
      binop operand-pull event diffs (values+counts re-sync; cache-state
