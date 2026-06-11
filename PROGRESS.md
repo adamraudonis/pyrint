@@ -1378,12 +1378,62 @@ pylint behavior — bugs are replicated.
      the AugAssign/DelAttr paths run visit_attribute in pylint),
      _check_redefined_slots burn (W0244). E1127/E1144 not emitted for
      SynthSlice (brain slice() products; zero corpus mass).
-6. Then remaining checkers (BasicErrorChecker E01xx, ExceptionsChecker
-   E07xx, LoggingChecker E12xx, StringFormatChecker E13xx, AsyncChecker
-   E17xx, MatchStatementChecker E19xx, DataclassChecker E3701, E0633/E0643,
-   I0021/W0012/R1906 pylfunc pragmas), byte-exactness (ordering/headers),
-   pylint-functional sweep, perf (10x = whole-suite ≤ ~250s; budget core ≤
-   135s incl. oracle for 318 broken files — currently ~23s with checkers).
+6. **checkers fan-out — round 3 (FINAL) DONE: ALL 7 CORPORA BYTE-IDENTICAL**
+   (`cmp` on .out AND .exit: django 898/2, pandas 616/2, salt 8690/2,
+   airflow 667/2, sentry 515/2, pylfunc 524/14, core 82243/2). Every
+   remaining enabled message ported: BasicErrorChecker+BasicChecker
+   (`basicerr.rs`: E0100-E0119), ExceptionsChecker (`exceptions.rs`:
+   E0701-E0712), StringFormatChecker (`strings.rs`: E1300-E1310 + EXACT
+   parse_format_string / Formatter().parse / field-name-split ports),
+   LoggingChecker (`logging_ck.rs`: E1200/01/05/06), AsyncChecker+Match+
+   MethodArgs+Dataclass+ModifiedIterating+Stdlib (`tailmisc.rs`: E1700/01,
+   E1901-04+R1906, E3102, E3701, E4702/03, E1507/19/20), variables
+   E0633/E0643 + unused-import computation, imports C0411/12/13 recording
+   machinery (isort py3-union STDLIB table). walker.rs now dispatches the
+   FULL walk_order. Disabled W/C/R messages the visit bodies compute are
+   EMITTED into the gating layer — inline `# pylint: enable=` resurrection
+   works (pylfunc: R1906 x2, W0012 x2 byte-exact) and feeds I0021.
+   - **I0021 useless-suppression EXACT** (pylfunc x2): FileState grows
+     _suppression_mapping + insertion-ordered raw_state; every FILTERED
+     emission routes handle_ignored_message (module-pragma scope only);
+     iter_spurious_suppression_messages runs after the walk, emits
+     I0021/I0020 through normal gating. Import-order/unused-import
+     attempt-recording (incl. linter.add_ignored_message call sites in
+     imports.py:713/:824-868) makes 'used suppressions' exact.
+   - Inline enable of a NOT-computed message (outside
+     msgstore::EMITTED_DISABLED_MSGIDS) prints a stderr warning — the only
+     class of silent false negatives left by design (e.g. salt inline
+     enables of E0401/E0611/E1101/C0103: zero GT hits today).
+   - **Port gotchas found**: (a) utils.is_subclass_of -> astroid
+     helpers.is_subtype -> _type_check runs ASTROID-flavor has_known_bases
+     (strict safe_infer) whose `_all_bases_known` memo (our
+     Engine.known_bases_cache) is SHARED with pylint's has_known_bases —
+     the W0706 _check_try_except_raise burn POISONS the memo and silences
+     a later E0712 (try_except_raise_crash); order is load-bearing.
+     (b) E0633's `_get_unpacking_extra_info` uses the RAW astroid .lineno —
+     for decorated defs that's the FIRST DECORATOR line
+     (rebuilder.py:1130-1139), NOT fromlineno (core mystrom/overkiz).
+     (c) inferred-tuple `except` types carry EvaluatedObject elements —
+     safe_infer of those yields the wrapped value (core motionblinds).
+     (d) TypeChecker.visit_binop is DEAD on py3.12 (`_py310_plus` early
+     return) — E1131 unreachable; _visit_binop/_visit_augassign are
+     disabled in pylint source (leading underscore). (e) Formatter.parse
+     does NOT raise the "cannot switch from manual" ValueError on 3.12 —
+     that collect_string_fields branch is dead; all parse errors map to
+     IncompleteFormatString. (f) E1700 fires only for YieldFrom on the
+     3.12 host (sys.version_info check in async_checker.py:48-54).
+   - NOT implemented (unreachable under the pinned contract): E0013/E0014/
+     E0015/F0001/F0011 (config/plugin/CLI parse errors — flags are fixed
+     and valid, rcfile empty), F0202 (caller filters make it dead code),
+     E1131 (py3.12-dead). DeprecatedMixin tables (W0402/W1505/W1511/W1512)
+     not ported — they are in INCOMPATIBLE_WITH_USELESS_SUPPRESSION (no
+     I0021 interplay) and inline enables of them warn on stderr.
+   - GATES: check_treedump django 400 == 0; check_inferdump django 200
+     == 0; check_shell PASS x7 (full owned list + --strict-exit); 151
+     infertests PASS. core 33.6s (was ~23s; checker burn — budget 135s).
+7. Remaining: perf polish if needed (suite ≈ 104s, well under the ~250s
+   10x bar), and watching the stderr resurrection warnings on new
+   codebases for messages worth porting next.
 
 ## Gotchas for future rounds
 
