@@ -7,6 +7,15 @@ mod run;
 
 use std::process::ExitCode;
 
+// The phase-2 engine is allocation-heavy (Rc values, per-inference Vecs):
+// samply showed ~35% self time in libsystem_malloc + 12% memset/memmove on
+// django. mimalloc is a drop-in allocator swap — timing-only, no semantic
+// surface (no iteration orders, no cache keys depend on addresses... except
+// none do: identity keys use Rc pointers whose VALUES change run-to-run
+// already under ASLR; orders are insertion-derived).
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
 fn main() -> ExitCode {
     let args: Vec<String> = std::env::args().skip(1).collect();
     let mut paths: Vec<String> = Vec::new();
