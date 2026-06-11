@@ -2016,6 +2016,25 @@ impl Engine {
             Value::SynthSeq { elems, .. } | Value::FrozenSet { elems } => {
                 Some(elems.to_vec())
             }
+            // DictKeys/Values/Items proxy a synthesized List
+            // (objectmodel.py:856-890) — `hasattr(x, "elts")` is True and
+            // .elts holds the dict's raw key/value nodes (items: fresh
+            // 2-Tuples of them)
+            Value::DictKeys(dr) => Some(
+                self.dictref_pairs(dr).into_iter().map(|(k, _)| k).collect(),
+            ),
+            Value::DictValues(dr) => Some(
+                self.dictref_pairs(dr).into_iter().map(|(_, val)| val).collect(),
+            ),
+            Value::DictItems(dr) => Some(
+                self.dictref_pairs(dr)
+                    .into_iter()
+                    .map(|(k, val)| Value::SynthSeq {
+                        kind: SeqKind::Tuple,
+                        elems: Rc::new(vec![k, val]),
+                    })
+                    .collect(),
+            ),
             Value::Node(g) => {
                 let md = self.md(g.m);
                 match &md.tree.nodes[g.n.idx()].kind {

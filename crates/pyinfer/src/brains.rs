@@ -1882,8 +1882,21 @@ dict
                 _ => None,
             };
         }
-        if let Some(elts) = self.value_elts(&inferred) {
-            return Some(elts.len() as i64);
+        // helpers.py:278-281: ONLY List/Set/Tuple/FrozenSet (node classes)
+        // and Dict take the elts/items shortcut — DictKeys/Values/Items
+        // proxies fall through to the __len__ lookup (which fails -> the
+        // len() tip raises UseInferenceDefault -> default Call inference)
+        let is_seq = matches!(
+            inferred,
+            Value::SynthSeq { .. } | Value::FrozenSet { .. }
+        ) || matches!(&inferred, Value::Node(g) if self.kind_is(*g, |k| matches!(
+            k,
+            NodeKind::List { .. } | NodeKind::Tuple { .. } | NodeKind::Set { .. }
+        )));
+        if is_seq {
+            if let Some(elts) = self.value_elts(&inferred) {
+                return Some(elts.len() as i64);
+            }
         }
         if let Some(items) = self.value_dict_items(&inferred) {
             return Some(items.len() as i64);
@@ -2362,8 +2375,18 @@ dict
         if inferred.is_uninferable() {
             return empty();
         }
-        // container of Consts / str / dict keys
-        let keys: Vec<Value> = if let Some(elts) = self.value_elts(&inferred) {
+        // container of Consts / str / dict keys.
+        // brain_builtin_inference.py:1019-1027: ONLY List/Set/Tuple node
+        // classes take the elts branch — DictKeys/Values/Items proxies fall
+        // to the else -> empty dict
+        let is_seq = matches!(inferred, Value::SynthSeq { .. })
+            || matches!(&inferred, Value::Node(g) if self.kind_is(*g, |k| matches!(
+                k,
+                NodeKind::List { .. } | NodeKind::Tuple { .. } | NodeKind::Set { .. }
+            )));
+        let keys: Vec<Value> = if let Some(elts) =
+            if is_seq { self.value_elts(&inferred) } else { None }
+        {
             for e in &elts {
                 let is_const = matches!(e, Value::SynthConst(_))
                     || matches!(e, Value::Node(g)
