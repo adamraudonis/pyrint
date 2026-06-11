@@ -1298,10 +1298,92 @@ pylint behavior — bugs are replicated.
      consult inference (infer_all of if-tests, safe_infer, metaclass(),
      __all__) are values-stable in all corpora today but cap-boundary
      flips are possible until the remaining checkers land.
-5. Then remaining checkers (BasicErrorChecker, TypeChecker E1xxx — core has
-   37k E1123 —, ClassChecker, ...), byte-exactness (ordering/headers),
+5. **checkers fan-out — round 2 DONE**: TypeChecker + IterableChecker
+   (E1102/E1111/E112x/E113x/E114x), SpecialMethodsChecker (E0301-E0313),
+   ClassChecker (E0202/E0203/E0211/E0213/E0236-E0245/F0202),
+   NewStyleConflictChecker (E1003). **ALL owned codes (E0001, E0011, E25xx,
+   E0402, E0601-E0606, E11xx, E02xx, E03xx, F0202, E1003) at ZERO FP/FN on
+   ALL 7 corpora**; extended check_shell gate (owned=...,E11,E02,E03,F0202,
+   E1003) PASSES x7; tree gate 0; inferdump django+core N=200 == 0; 151
+   infertests PASS. core ~23s (TypeChecker inference burn; budget 135s).
+   - **Code layout**: `crates/pycheckers/src/{typecheck,classes}.rs` joined
+     walker.rs dispatch (callback order per regenerated walk_order.rs — the
+     OLD file was generated with plain `-E`, not the full flags:
+     TypeChecker.visit_attribute and BasicErrorChecker.visit_call are NOT
+     registered under the true flags; gen_walk_order.py now reads flags.txt).
+   - **visit_call family** (E1102/E1120/21/23/24/25/32): CallSite from the
+     ENGINE port (fixed: explicit-keyword after `**{...}` OVERWRITES silently
+     per arguments.py:140 — was wrongly flagged duplicated);
+     safe_infer(compare_constructors=True) variant + FULL
+     function_arguments_are_ambiguous (argnames + first-defaults-pair early
+     return incl. the (None,None) kw_default -> ambiguous quirk);
+     _determine_callable port: BoundMethod/UnboundMethod/Partial/Property
+     (objects.Property.type == "property") arms, ClassDef __new__/__init__
+     local_attr resolution ([-1] LAST def, object/builtin-module fallbacks);
+     DescriptorBoundMethod (func.__get__): implicit_parameters=0 + synthetic
+     args = func.args + mandatory 'type' (objectmodel.py:416-459);
+     PropertyFuncAccessor synths (prop.fget/fset) carry the WRAPPED
+     function's args; fget body = Property.body = [] -> E1111 fires on
+     `x = Cls.prop.fget(self)`; no-context variadic machinery
+     (typecheck.py:674-746) incl. SynthSeq/SynthDict param-representation
+     mapping; isinstance special case; keyword-in-all-decorator-returns.
+   - **ENGINE fixes found via checkers** (all probe/inferdump-verified):
+     (a) ObjectModel __new__/__init__ template defs REPARENTED to
+     builtins.object (objectmodel.py:145/:162) — FunctionDef.type
+     "classmethod" for the model __new__ (E1120 'in classmethod call');
+     (b) **asstr.rs: faithful AsStringVisitor port** (precedence table,
+     format_args, the NamedExpr-renders-BARE bug) — the dataclass
+     __init__ generation now renders annotations/defaults via as_string
+     like brain_dataclasses does: walrus-containing defaults make the
+     generated init UNPARSEABLE -> no __init__ injected -> pylint sees
+     object.__init__ (args None) -> visit_call bails (core alexa_devices
+     E1123-FP/E1125-FN cluster); (c) compute_mro records
+     DuplicateBases-vs-InconsistentMro in Engine.last_mro_dup (E0241/E0240);
+     (d) Value::DescBM is callable() (BoundMethod subclass).
+   - **protocol checks**: _supports_protocol/_supports_protocol_method over
+     Values (ClassDef -> metaclass lookup; dict views -> callback on the
+     proxied dict instance; BaseInstance arm incl. Generator/UnionType);
+     pylint has_known_bases SHARES astroid's node memo
+     (Engine.known_bases_cache) but computes with PYLINT safe_infer;
+     is_inside_abstract_class/class_is_abstract/is_overload_stub in
+     LintCaches (module-level lru parity); is_hashable; dunder_lookup
+     (literal nodes -> proxied class OWN locals only); E1126/27/44 sequence
+     index chain; E1130 type_errors (any-Uninferable-discards-all);
+     E1139 metaclass-factory callcontext quirk (callee None blocks param
+     consumption -> empty-args callcontext is behaviorally exact).
+   - **E1136 decorators branch**: `getattr(inferred, "decorators", None)` is
+     proxy-aware — BoundMethod values expose the WRAPPED function's
+     decorators; astroid-safe_infer of the first decorator (django
+     cached_property -> Uninferable -> conservative return killed the
+     sentry/core E1136/37/38 FP cluster).
+   - **classes checkers**: _safe_infer_call_result EXACT two-pull (value +
+     ambiguity probe — eager draining burns extra inference);
+     E0244 reads the enum transform's __members__ SynthDict redirect;
+     E0203 ScopeAccessMap + _first_attrs stack (statics push None; pop only
+     when is_method && args known) + are_exclusive(AttributeError|Exception|
+     BaseException); E0202 decorator data-descriptor exemptions +
+     _check_functools_or_not import-lookup arm; slots family over ilookup'd
+     values incl. synthetic containers.
+   - **Burn-only paths ported** for cache parity: signature_mutators
+     decorated_with (empty qnames still infer decorators), W1116
+     _is_invalid_isinstance_type safe_infer chain, W1117 posonly-keyword
+     `continue` consumption, _check_typing_final safe_infer+decorator burn,
+     class_is_abstract in _check_bases_classes, E0244's
+     is_subtype_of(enum.IntFlag).
+   - NOT ported (no diff evidence on corpora; revisit if FPs appear):
+     unimplemented_abstract_methods burn (W0223), _check_init burn
+     (W0231/W0233), _check_useless_super_delegation burn (W0246),
+     _check_signature W-burn, _check_unused_private_* safe_infer burn,
+     TypeChecker.visit_assignattr/delattr no-member burn (E1101 disabled but
+     the AugAssign/DelAttr paths run visit_attribute in pylint),
+     _check_redefined_slots burn (W0244). E1127/E1144 not emitted for
+     SynthSlice (brain slice() products; zero corpus mass).
+6. Then remaining checkers (BasicErrorChecker E01xx, ExceptionsChecker
+   E07xx, LoggingChecker E12xx, StringFormatChecker E13xx, AsyncChecker
+   E17xx, MatchStatementChecker E19xx, DataclassChecker E3701, E0633/E0643,
+   I0021/W0012/R1906 pylfunc pragmas), byte-exactness (ordering/headers),
    pylint-functional sweep, perf (10x = whole-suite ≤ ~250s; budget core ≤
-   135s incl. oracle for 318 broken files — currently ~14s with checkers).
+   135s incl. oracle for 318 broken files — currently ~23s with checkers).
 
 ## Gotchas for future rounds
 
