@@ -141,6 +141,15 @@ pub struct Engine {
     pub mod_file_cache: RefCell<FxHashMap<String, Result<Spec, String>>>,
     /// instance_attrs for every class/function (cross-module mutable)
     pub iattrs: RefCell<FxHashMap<GNode, IndexMap<GSym, Vec<GNode>>>>,
+    /// instance_attrs for instances of the object_type PROXY classes
+    /// (function/builtin_function_or_method/method/module): astroid builds
+    /// a FRESH `_build_proxy_class` ClassDef per evaluation
+    /// (helpers.py:39-57), so delayed assattrs land on per-evaluation
+    /// classes — keyed here by (class, InstId), the instance identity that
+    /// cache replays preserve. The SHARED snapshot class never accumulates
+    /// entries (matches astroid: its raw class stays clean while fresh
+    /// proxies come and go across transform-wipes).
+    pub proxy_iattrs: RefCell<FxHashMap<(GNode, crate::value::InstId), IndexMap<GSym, Vec<GNode>>>>,
     /// global inference cache (context.py:19-23)
     pub inf_cache: RefCell<FxHashMap<InfKey, Rc<Vec<Value>>>>,
     /// LookupMixIn.lookup `@lru_cache` — DEFAULT maxsize=128
@@ -333,6 +342,7 @@ impl Engine {
             astroid_cache: RefCell::new(FxHashMap::default()),
             mod_file_cache: RefCell::new(FxHashMap::default()),
             iattrs: RefCell::new(FxHashMap::default()),
+            proxy_iattrs: RefCell::new(FxHashMap::default()),
             inf_cache: RefCell::new(FxHashMap::default()),
             lookup_cache: RefCell::new(FxHashMap::default()),
             lookup_tick: Cell::new(0),
@@ -2035,6 +2045,22 @@ impl Engine {
         {
             match inferred {
                 Value::Uninferable => {}
+                Value::Inst { cls, id } if self.is_object_type_proxy_cls(*cls) => {
+                    // fresh-proxy-class instance: the attr lands on the
+                    // per-evaluation class (helpers.py _build_proxy_class)
+                    if !self.can_assign_attr(*cls, attrname) {
+                        return;
+                    }
+                    let mut ia = self.proxy_iattrs.borrow_mut();
+                    let vals = ia
+                        .entry((*cls, *id))
+                        .or_default()
+                        .entry(attrname)
+                        .or_default();
+                    if !vals.contains(&node) {
+                        vals.push(node);
+                    }
+                }
                 Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
                     if !self.can_assign_attr(*cls, attrname) {
                         return;
@@ -2079,6 +2105,16 @@ impl Engine {
                 _ => {}
             }
         }
+    }
+
+    /// is this the snapshot stand-in for an object_type proxy class
+    /// (helpers.py:39-57 — astroid builds these FRESH per evaluation)?
+    pub fn is_object_type_proxy_cls(&self, cls: GNode) -> bool {
+        let b = self.builtins();
+        cls == b.function
+            || cls == b.builtin_function_or_method
+            || cls == b.method
+            || cls == b.module
     }
 
     /// builder.py:58-70 _can_assign_attr: consults ClassDef.slots().

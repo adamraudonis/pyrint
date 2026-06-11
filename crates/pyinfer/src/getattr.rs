@@ -861,6 +861,44 @@ impl Engine {
     /// (scoped_nodes.py): the ancestors walk gets the caller's context —
     /// including the lookupname mutated by Instance.igetattr (bases.py:281)
     pub fn instance_attr(&self, cls: GNode, name: GSym, ctx: Option<&Rc<Ctx>>) -> Result<Vec<GNode>, ErrKind> {
+        self.instance_attr_of(cls, None, name, ctx)
+    }
+
+    /// owner-aware variant: instances of the object_type PROXY classes
+    /// read the per-(class, InstId) attrs (astroid: fresh
+    /// _build_proxy_class per evaluation — the shared snapshot class never
+    /// holds entries; the fresh class has NO bases so its ancestors walk is
+    /// just [object])
+    pub fn instance_attr_of(
+        &self,
+        cls: GNode,
+        inst: Option<crate::value::InstId>,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Vec<GNode>, ErrKind> {
+        if self.is_object_type_proxy_cls(cls) {
+            let mut values: Vec<GNode> = match inst {
+                Some(id) => self
+                    .proxy_iattrs
+                    .borrow()
+                    .get(&(cls, id))
+                    .and_then(|m| m.get(&name))
+                    .cloned()
+                    .unwrap_or_default(),
+                None => Vec::new(),
+            };
+            // ancestors of the fresh proxy class: [builtins.object]
+            let obj = self.builtins().object;
+            if let Some(v) = self.iattrs.borrow().get(&obj).and_then(|m| m.get(&name)) {
+                values.extend(v.iter().copied());
+            }
+            values.retain(|g| !self.kind_is(*g, |k| matches!(k, NodeKind::DelAttr { .. })));
+            return if values.is_empty() {
+                Err(ErrKind::Attribute)
+            } else {
+                Ok(values)
+            };
+        }
         let mut values: Vec<GNode> = self
             .iattrs
             .borrow()
@@ -893,7 +931,11 @@ impl Engine {
             Some(c) => c,
             None => return Err(ErrKind::Attribute),
         };
-        match self.instance_attr(cls, name, ctx) {
+        let inst_id = match owner {
+            Value::Inst { id, .. } | Value::ExcInst { id, .. } => Some(*id),
+            _ => None,
+        };
+        match self.instance_attr_of(cls, inst_id, name, ctx) {
             Err(_) => {
                 let name_str = self.sname(name);
                 if let Some(v) = self.instance_special_attr(owner, &name_str, ctx) {
@@ -1305,25 +1347,39 @@ impl Engine {
             // (objectmodel.py:49-68; instance_attrs is the proxied class's
             // OWN dict, no ancestors)
             "__dict__" => {
-                let items: Vec<(Value, Value)> = self
-                    .iattrs
-                    .borrow()
-                    .get(&cls)
-                    .map(|attrs| {
-                        attrs
-                            .iter()
-                            .filter(|(_, v)| !v.is_empty())
-                            .map(|(&k, v)| {
-                                (
-                                    Value::SynthConst(Rc::new(ConstValue::Str(
-                                        self.sname(k).into(),
-                                    ))),
-                                    Value::Node(*v.last().unwrap()),
-                                )
-                            })
-                            .collect()
-                    })
-                    .unwrap_or_default();
+                let collect = |attrs: &IndexMap<GSym, Vec<GNode>>| -> Vec<(Value, Value)> {
+                    attrs
+                        .iter()
+                        .filter(|(_, v)| !v.is_empty())
+                        .map(|(&k, v)| {
+                            (
+                                Value::SynthConst(Rc::new(ConstValue::Str(
+                                    self.sname(k).into(),
+                                ))),
+                                Value::Node(*v.last().unwrap()),
+                            )
+                        })
+                        .collect()
+                };
+                // object_type proxy-class instances read their
+                // per-evaluation class attrs (fresh _build_proxy_class)
+                let items: Vec<(Value, Value)> = if self.is_object_type_proxy_cls(cls) {
+                    match owner {
+                        Value::Inst { id, .. } | Value::ExcInst { id, .. } => self
+                            .proxy_iattrs
+                            .borrow()
+                            .get(&(cls, *id))
+                            .map(|m| collect(m))
+                            .unwrap_or_default(),
+                        _ => Vec::new(),
+                    }
+                } else {
+                    self.iattrs
+                        .borrow()
+                        .get(&cls)
+                        .map(|m| collect(m))
+                        .unwrap_or_default()
+                };
                 Some(Value::SynthDict {
                     items: Rc::new(items),
                 })

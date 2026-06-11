@@ -727,6 +727,18 @@ impl Engine {
                                     Value::Node(g) => {
                                         out.extend(self.unpack_infer_fresh(*g)?)
                                     }
+                                    // tip-materialized element: unpack_infer
+                                    // infers it (EvaluatedObject._infer ->
+                                    // inner value) then recurses on the
+                                    // result (`except tuple(MAP.keys()) as
+                                    // e` binds ExcInst of the inner classes)
+                                    Value::EvaluatedObject { value } => {
+                                        match &**value {
+                                            Value::Node(g) => out
+                                                .extend(self.unpack_infer_fresh(*g)?),
+                                            other => out.push(other.clone()),
+                                        }
+                                    }
                                     other => out.push(other.clone()),
                                 }
                             }
