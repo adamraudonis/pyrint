@@ -819,20 +819,30 @@ impl Engine {
 
     /// scoped_nodes.py:2516-2538 has_dynamic_getattr
     pub fn has_dynamic_getattr(&self, cls: GNode, ctx: &Rc<Ctx>) -> bool {
-        let look = |name: &str| -> bool {
+        // _valid_getattr(self.getattr(name, context)[0]) — the FIRST attr
+        // only (scoped_nodes.py:2516-2538): IPlugin(threading.local)'s
+        // first __getattribute__ comes from C `_thread._local` (not
+        // pure_python) -> False -> the missing-attr lookup stays ERR even
+        // though _threading_local.local's pure-python one is further down.
+        // __getattribute__ is consulted ONLY when __getattr__ is not found
+        // (the first `return` short-circuits an invalid __getattr__).
+        let look = |name: &str| -> Option<bool> {
             let sym = self.sym(name);
             match self.class_getattr(cls, sym, Some(ctx), true) {
-                Ok(attrs) => attrs.iter().any(|a| match a {
-                    NV::N(g) => {
+                Ok(attrs) => Some(match attrs.first() {
+                    Some(NV::N(g)) => {
                         let md = self.md(g.m);
                         md.pure_python && md.name != "builtins"
                     }
-                    NV::V(_) => false,
+                    _ => false,
                 }),
-                Err(_) => false,
+                Err(_) => None,
             }
         };
-        look("__getattr__") || look("__getattribute__")
+        match look("__getattr__") {
+            Some(v) => v,
+            None => look("__getattribute__").unwrap_or(false),
+        }
     }
 
     // ---------- Instance getattr / igetattr (§12.2-12.3) ----------
@@ -1212,6 +1222,40 @@ impl Engine {
         // (`{}.__doc__` is an InferenceError in astroid).
         if dict_owner && matches!(name, "__module__" | "__doc__" | "__dict__") {
             return None;
+        }
+        // GeneratorBaseModel mixes in ContextManagerModel
+        // (objectmodel.py:640-684,696): gen.__enter__/__exit__ resolve to
+        // fresh synthetic FunctionDefs PARENTED TO builtins.object
+        // (extract_node per access), wrapped as BoundMethods bound to
+        // _get_bound_node(model) = the generator class. Calling them yields
+        // Const(None) (`...` body, no returns).
+        if let Value::Generator { is_async, .. } = owner {
+            if matches!(name, "__enter__" | "__exit__") {
+                let src = if name == "__enter__" {
+                    "def __enter__(self): ...\n"
+                } else {
+                    "def __exit__(self, exc_type, exc_value, traceback): ...\n"
+                };
+                // template module named builtins.object so the func qname
+                // composes to builtins.object.__enter__ (like the
+                // ObjectModel __new__/__init__ templates)
+                let mid = self.build_template_module(src, "builtins.object")?;
+                let f = {
+                    let fmd = self.md(mid);
+                    let locals = fmd.locals.borrow();
+                    locals
+                        .get(&pyast::NodeId::MODULE)
+                        .and_then(|l| l.get(&self.sym(name)))
+                        .and_then(|v| v.first())
+                        .copied()?
+                };
+                let b = self.builtins();
+                let bound = if *is_async { b.async_generator } else { b.generator };
+                return Some(Value::BoundMethod {
+                    func: f,
+                    bound: Rc::new(Value::Node(bound)),
+                });
+            }
         }
         match name {
             "__class__" => Some(Value::Node(cls)),
