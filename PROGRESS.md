@@ -1492,11 +1492,51 @@ pylint behavior — bugs are replicated.
      equal (pip exit 3, sympy exit 3 — fatal bits). Gates: check_treedump
      django 400 == 0, check_inferdump django/pandas/salt 200 == 0, 151
      infertests PASS, 36 treetests identical.
+10. **batch-3 BLIND battery close-out (2026-06-11): ALL 27 corpora
+    identical.** New pinned corpora: rich, tornado, werkzeug, black,
+    botocore, mypy, pydantic, twisted, nova, zulip. The 3 remaining
+    mechanisms, fixed (one commit each):
+    - E0242 (rich): astroid's implicit class locals (__module__/
+      __qualname__/__annotations__, scoped_nodes.py:1911-1933) are FIRST
+      in every ClassDef.locals — slots naming them always conflict, and
+      the single-bare-AnnAssign skip can never match them.
+    - E1132 ordering (nova): **pylint is nondeterministic here** —
+      typecheck.py:1487 iterates CallSite.duplicated_keywords, a Python
+      set[str]; probe showed 5 different orders in 5 runs. CONTRACT
+      CHANGE: harness/ground_truth.sh now exports PYTHONHASHSEED=0; nova
+      GT regenerated (diff = exactly the 8 multi-message E1132 sites).
+      pycheckers::pyset ports CPython 3.12 str hash (siphash13, zeroed
+      _Py_HashSecret, PEP 393 buffer) + setobject.c table semantics
+      (LINEAR_PROBES=9, PERTURB_SHIFT=5, grow at fill*5>=mask*3 to
+      used*4, resize re-inserts in old-slot order); fuzzed 3000 random
+      insertion sequences vs the pinned interpreter — 0 mismatches. Any
+      future pylint-visible set/dict-hash iteration order must use it.
+    - E1126 FNs + E1136 FPs (mypy typeshed stubs — NOT .pyi-specific):
+      (a) helpers._object_type's Proxy branch yields ._proxied for
+      DictKeys/Values/Items = the SYNTHESIZED LIST of keys/values/
+      item-tuples (objectmodel.py:856-890), so _collections_abc's
+      `dict_keys = type({}.keys())` infers to an EMPTY LIST literal and
+      `dict_keys[str, x]` annotations are invalid-sequence-index;
+      (b) the UnionType proxied class is NOT empty — raw_building.py:
+      673-694 object_builds it from live types.UnionType (3.12 HAS
+      __getitem__) → PEP 604 union aliases ARE subscriptable (no E1136
+      on copyreg.pyi _Reduce[_T]). Full member set mirrored into the
+      synth module; __class__ wired engine-side to the real `type`.
+      (Known approximation: the mirrored dunder FunctionDefs carry
+      EMPTY args, not args_unknown — only visible if a corpus ever
+      CALLS a union dunder directly; acceptance is clean.)
+    - Acceptance (2026-06-11, clean run): all 27 corpora bytecmp-
+      identical + equal exits (pylfunc 14, pip/sympy/tornado 3, rest 2).
+      Gates: check_treedump django 400 == 0, check_inferdump django
+      200 == 0 (108076 lines), 151 infertests PASS. Suite ≈ 121s
+      (slowest core 21.2s).
 
 ## Gotchas for future rounds
 
 - Don't sort anything pylint doesn't sort. Order comes from readdir + dict
-  insertion everywhere.
+  insertion everywhere. Where pylint iterates a raw SET, the order is
+  hash-seed dependent: GT is pinned at PYTHONHASHSEED=0 and
+  pycheckers::pyset replicates the seed-0 order exactly.
 - `# pylint: enable=` inside files can re-enable ANY message under -E
   (pylfunc exit 14 proves it) — message table must keep ALL messages, not
   just the 130 enabled ones.
