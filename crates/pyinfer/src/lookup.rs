@@ -285,20 +285,29 @@ impl Engine {
         let mut _stmts: Vec<GNode> = Vec::new();
         let mut _stmt_parents: Vec<GNode> = Vec::new();
 
-        // _get_filtered_node_statements
-        let mut statements: Vec<(GNode, GNode)> = stmts
+        // _get_filtered_node_statements. Enum-member PROXY placeholders
+        // (Instance objects stored directly in class locals by
+        // brain_namedtuple_enum) delegate every structural attribute
+        // (statement/fromlineno/assign_type/ancestors) to their _proxied
+        // fake ClassDef via Instance.__getattr__ — which we reparented
+        // into the real tree. Use the proxied class for STRUCTURE, but
+        // keep yielding the placeholder itself.
+        let mut statements: Vec<(GNode, GNode, GNode)> = stmts
             .iter()
-            .filter_map(|&n| self.statement(n).map(|s| (n, s)))
+            .filter_map(|&n| {
+                let sn = self.proxy_struct(n);
+                self.statement(sn).map(|s| (n, sn, s))
+            })
             .collect();
         if statements.len() > 1
             && statements
                 .iter()
-                .all(|(_, s)| self.kind_is(*s, |k| matches!(k, NodeKind::ExceptHandler { .. })))
+                .all(|(_, _, s)| self.kind_is(*s, |k| matches!(k, NodeKind::ExceptHandler { .. })))
         {
-            statements.retain(|(_, s)| self.parent_of(*s, base_node));
+            statements.retain(|(_, _, s)| self.parent_of(*s, base_node));
         }
 
-        for (node, stmt) in statements {
+        for (node, snode, stmt) in statements {
             let stmt_line = self.fromlineno(stmt);
             if stmt_line != 0 && mylineno > 0 && stmt_line > mylineno {
                 break;
@@ -307,11 +316,11 @@ impl Engine {
             if mystmt == Some(stmt) && self.is_from_decorator(base_node) {
                 continue;
             }
-            if self.has_base(node, base_node) {
+            if self.has_base(snode, base_node) {
                 break;
             }
 
-            if self.kind_is(node, |k| matches!(k, NodeKind::EmptyNode)) {
+            if self.kind_is(snode, |k| matches!(k, NodeKind::EmptyNode)) {
                 _stmts.push(node);
                 continue;
             }
@@ -400,11 +409,11 @@ impl Engine {
                 }
             }
 
-            if self.are_exclusive(base_node, node) {
+            if self.are_exclusive(base_node, snode) {
                 continue;
             }
 
-            let node_kind_is_assign_name_or_named = self.kind_is(node, |k| {
+            let node_kind_is_assign_name_or_named = self.kind_is(snode, |k| {
                 matches!(k, NodeKind::AssignName { .. } | NodeKind::NamedExpr { .. })
             });
             if node_kind_is_assign_name_or_named {
@@ -422,16 +431,16 @@ impl Engine {
                     _stmts = Vec::new();
                     _stmt_parents = Vec::new();
                 }
-            } else if self.kind_is(node, |k| matches!(k, NodeKind::DelName { .. })) {
+            } else if self.kind_is(snode, |k| matches!(k, NodeKind::DelName { .. })) {
                 _stmts = Vec::new();
                 _stmt_parents = Vec::new();
                 continue;
             }
 
             _stmts.push(node);
-            let node_is_arguments = self.kind_is(node, |k| matches!(k, NodeKind::Arguments(_)));
+            let node_is_arguments = self.kind_is(snode, |k| matches!(k, NodeKind::Arguments(_)));
             let parent_is_arguments = self
-                .parent(node)
+                .parent(snode)
                 .map(|p| self.kind_is(p, |k| matches!(k, NodeKind::Arguments(_))))
                 .unwrap_or(false);
             if node_is_arguments || parent_is_arguments {

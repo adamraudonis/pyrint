@@ -260,8 +260,27 @@ impl Engine {
         }
     }
 
+    /// PROXY placeholders (Instance objects stored in locals, e.g. enum
+    /// members) delegate structural attributes to their _proxied class
+    /// via Instance.__getattr__ (bases.py Proxy). Returns the proxied
+    /// ClassDef for such placeholders, the node itself otherwise.
+    pub fn proxy_struct(&self, g: GNode) -> GNode {
+        if self.proxy_placeholders.borrow().contains(&g) {
+            if let Some(crate::value::NV::V(
+                crate::value::Value::Inst { cls, .. } | crate::value::Value::ExcInst { cls, .. },
+            )) = self.redirects.borrow().get(&g)
+            {
+                return *cls;
+            }
+        }
+        g
+    }
+
     /// _base_nodes.py:90-126 + node_classes assign_type dispatch.
+    /// Proxy placeholders delegate to their _proxied class (Instance
+    /// assign_type -> ClassDef.assign_type -> self).
     pub fn assign_type(&self, g: GNode) -> GNode {
+        let g = self.proxy_struct(g);
         let md = self.md(g.m);
         match &md.tree.nodes[g.n.idx()].kind {
             // FilterStmtsBaseNode + AssignTypeNode -> self
