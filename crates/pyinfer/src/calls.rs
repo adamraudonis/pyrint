@@ -510,10 +510,13 @@ impl Engine {
             };
             for dn in nodes {
                 let g = GNode { m: func.m, n: dn };
-                let f = self.infer(g, &Ctx::new());
-                if let Some(first) = f.vals.first() {
+                // `next(node.infer())` — SINGLE abandoned pull
+                // (scoped_nodes.py:1487-1489): the suspended generator chain
+                // never completes, so none of its nodes cache (@overload
+                // stub decorators recompute on every is_abstract call)
+                if let Ok(Some(first)) = self.first_value(g, &Ctx::new()) {
                     if !first.is_uninferable() {
-                        if let Some(q) = self.value_qname(first) {
+                        if let Some(q) = self.value_qname(&first) {
                             if q == "abc.abstractproperty" || q == "abc.abstractmethod" {
                                 return true;
                             }

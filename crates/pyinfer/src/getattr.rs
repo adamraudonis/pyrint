@@ -2141,19 +2141,22 @@ impl Engine {
                 }
                 _ => {}
             }
-            // decorator call chains + inferred classes: infer the decorator
+            // decorator call chains + inferred classes: infer the decorator.
+            // BOTH pulls are no-context calls in astroid (scoped_nodes.py:
+            // 1358 `next(node.func.infer())`, :1366 `node.infer()`) — each
+            // materializes its OWN InferenceContext; sharing one ctx lets
+            // the abandoned func pull path-block the decorator re-infer.
             let g = GNode { m: func.m, n: dn };
-            let ctx = Ctx::new();
             if let NodeKind::Call { func: cf, .. } = &md.tree.nodes[dn.idx()].kind {
                 let cg = GNode { m: func.m, n: *cf };
-                // next(node.func.infer()) — single pull
-                if let Ok(Some(current)) = self.first_value(cg, &ctx) {
+                // next(node.func.infer()) — single pull, fresh ctx
+                if let Ok(Some(current)) = self.first_value(cg, &Ctx::new()) {
                     if let Some(t) = self.infer_decorator_callchain(&current) {
                         return t;
                     }
                 }
             }
-            let flow = self.infer(g, &ctx);
+            let flow = self.infer(g, &Ctx::new());
             if flow.err.map(|e| e.is_inference()).unwrap_or(false) && flow.vals.is_empty() {
                 continue;
             }
@@ -2184,19 +2187,24 @@ impl Engine {
 
     /// _infer_decorator_callchain (scoped_nodes.py:846-881)
     fn infer_decorator_callchain(&self, v: &Value) -> Option<FType> {
-        let func = match v {
+        // isinstance(node, FunctionDef) — objects.PartialFunction subclasses
+        // FunctionDef, so partial values run THEIR infer_call_result here
+        // (functools.wraps(f) decorators pull update_wrapper's `return
+        // wrapper`; scoped_nodes.py:846-857)
+        let callee: Value = match v {
             Value::Node(g)
                 if self.kind_is(*g, |k| {
                     matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
                 }) =>
             {
-                *g
+                Value::Node(*g)
             }
+            Value::Partial { .. } => v.clone(),
             _ => return None,
         };
         // next(node.infer_call_result(caller=None), None) — single pull
         let result = self
-            .infer_call_result_first(&Value::Node(func), None, None)
+            .infer_call_result_first(&callee, None, None)
             .ok()
             .flatten()?;
         let result = &result;

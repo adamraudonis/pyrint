@@ -511,10 +511,7 @@ impl Engine {
                 })
             }),
             10 => self.rin_to(sink, |e, s| {
-                e.path_wrapped_to(node, ctx, s, |e, s| {
-                    let f = e.infer_unaryop_filtered(node, ctx);
-                    e.stream_flow(f, s)
-                })
+                e.path_wrapped_to(node, ctx, s, |e, s| e.infer_unaryop_to(node, ctx, s))
             }),
             11 => self.rin_to(sink, |e, s| {
                 e.path_wrapped_to(node, ctx, s, |e, s| {
@@ -1140,28 +1137,28 @@ impl Engine {
             if pair.iter().any(|v| v.is_uninferable()) {
                 out.push(Value::Uninferable);
             } else {
-                let mut yielded = false;
-                for (i, value) in pair.iter().enumerate() {
-                    if i == pair.len() - 1 {
-                        break;
-                    }
-                    match self.bool_value(value, ctx) {
-                        None => {
-                            out.push(Value::Uninferable);
+                // `bool_values = [item.bool_value() for item in pair]`
+                // (node_classes.py:1662): EVERY item — including the LAST —
+                // gets a NO-CONTEXT bool_value (Instance.bool_value
+                // materializes a fresh InferenceContext: its __bool__/__len__
+                // igetattr burns happen in a separate counter cell), and the
+                // comprehension does NOT short-circuit on Uninferable.
+                let bool_values: Vec<Option<bool>> =
+                    pair.iter().map(|v| self.bool_value(v, &Ctx::new())).collect();
+                if bool_values.iter().any(|b| b.is_none()) {
+                    out.push(Value::Uninferable);
+                } else {
+                    let mut yielded = false;
+                    for (value, bv) in pair.iter().zip(&bool_values) {
+                        if bv.unwrap_or(false) == shortcircuit {
+                            out.push((*value).clone());
                             yielded = true;
                             break;
                         }
-                        Some(b) => {
-                            if b == shortcircuit {
-                                out.push((*value).clone());
-                                yielded = true;
-                                break;
-                            }
-                        }
                     }
-                }
-                if !yielded {
-                    out.push(pair[pair.len() - 1].clone());
+                    if !yielded {
+                        out.push(pair[pair.len() - 1].clone());
+                    }
                 }
             }
             // increment cartesian counter

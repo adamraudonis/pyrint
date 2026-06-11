@@ -2370,100 +2370,117 @@ impl Engine {
     }
 
     /// UnaryOp._infer with message filtering
-    pub fn infer_unaryop_filtered(&self, node: GNode, ctx: &Rc<Ctx>) -> Flow {
-        let md = self.md(node.m);
-        let (op, operand) = match &md.tree.nodes[node.n.idx()].kind {
-            NodeKind::UnaryOp { op, operand } => {
-                (op.clone(), GNode { m: node.m, n: *operand })
+    /// UnaryOp._infer — STREAMING port of node_classes.py _infer_unaryop:
+    /// `for operand in self.operand.infer(context): yield <fold>` — each
+    /// operand value folds and reaches the consumer BEFORE the next operand
+    /// pull; abandonment mid-stream suspends the operand chain (no cache
+    /// writes / unwind bumps). The dunder branch REBINDS the local
+    /// `context` variable (`context = copy_context(context)`), so later
+    /// iterations' `next(meth.infer(context=context))` pulls run under the
+    /// rebound (boundnode+callcontext) context — replicated bug-for-bug.
+    pub fn infer_unaryop_to(
+        &self,
+        node: GNode,
+        ctx: &Rc<Ctx>,
+        sink: &mut Sink,
+    ) -> End {
+        let (op, operand) = {
+            let md = self.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::UnaryOp { op, operand } => {
+                    (op.clone(), GNode { m: node.m, n: *operand })
+                }
+                _ => return End::Raised(ErrKind::Inference),
             }
-            _ => return Flow::err(ErrKind::Inference),
         };
-        let flow = self.infer(operand, ctx);
-        let mut out = Vec::new();
-        for operand_v in &flow.vals {
-            if operand_v.is_uninferable() {
-                out.push(Value::Uninferable);
-                continue;
-            }
-            // Const/containers: direct infer_unary_op
-            if let Some(c) = self.value_const(operand_v) {
-                match const_unary_fold(&c, &op) {
-                    Some(v) => out.push(v),
-                    None => out.push(Value::Uninferable), // Bad message -> U
+        // astroid's local `context` (rebound by the dunder branch)
+        let cur_ctx: RefCell<Rc<Ctx>> = RefCell::new(Rc::clone(ctx));
+        let outer: RefCell<&mut Sink> = RefCell::new(sink);
+        self.infer_to(operand, ctx, &mut |operand_v: Value| {
+            // one folded value (or None = `continue`)
+            let folded: Option<Value> = 'fold: {
+                if operand_v.is_uninferable() {
+                    break 'fold Some(Value::Uninferable);
                 }
-                continue;
-            }
-            if op.as_ref() == "not" {
-                match self.bool_value(operand_v, ctx) {
-                    Some(b) => out.push(Value::SynthConst(Rc::new(ConstValue::Bool(!b)))),
-                    None => out.push(Value::Uninferable),
+                // Const: direct infer_unary_op
+                if let Some(c) = self.value_const(&operand_v) {
+                    break 'fold Some(match const_unary_fold(&c, &op) {
+                        Some(v) => v,
+                        None => Value::Uninferable, // Bad message -> U
+                    });
                 }
-                continue;
-            }
-            // containers with unary op -> TypeError -> Bad -> U
-            if self.value_elts(operand_v).is_some() {
-                out.push(Value::Uninferable);
-                continue;
-            }
-            // Instance/ClassDef: dunder lookup
-            let meth_name = match op.as_ref() {
-                "+" => "__pos__",
-                "-" => "__neg__",
-                "~" => "__invert__",
-                _ => {
-                    out.push(Value::Uninferable);
-                    continue;
+                if op.as_ref() == "not" {
+                    // `operand.bool_value()` — NO context: Instance
+                    // bool_value burns __bool__/__len__ in a FRESH
+                    // context cell, not the caller's
+                    break 'fold Some(match self.bool_value(&operand_v, &Ctx::new()) {
+                        Some(b) => Value::SynthConst(Rc::new(ConstValue::Bool(!b))),
+                        None => Value::Uninferable,
+                    });
+                }
+                // containers with unary op -> TypeError -> Bad -> U
+                if self.value_elts(&operand_v).is_some() {
+                    break 'fold Some(Value::Uninferable);
+                }
+                // Instance/ClassDef: dunder lookup
+                let meth_name = match op.as_ref() {
+                    "+" => "__pos__",
+                    "-" => "__neg__",
+                    "~" => "__invert__",
+                    _ => break 'fold Some(Value::Uninferable),
+                };
+                let is_inst_or_class = matches!(
+                    operand_v,
+                    Value::Inst { .. } | Value::ExcInst { .. }
+                ) || matches!(operand_v, Value::Node(g)
+                        if self.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_))));
+                if !is_inst_or_class {
+                    break 'fold Some(Value::Uninferable); // BadUnaryOperationMessage
+                }
+                let sym = self.sym(meth_name);
+                match self.dunder_lookup(&operand_v, sym) {
+                    Err(_) => Some(Value::Uninferable), // Bad message
+                    Ok(methods) => {
+                        let Some(&meth) = methods.first() else {
+                            break 'fold Some(Value::Uninferable);
+                        };
+                        // inferred = next(meth.infer(context=context)) —
+                        // single pull under the CURRENT (possibly rebound)
+                        // context, passed AS-IS
+                        let mctx = Rc::clone(&cur_ctx.borrow());
+                        let Ok(Some(inferred)) = self.first_value(meth, &mctx) else {
+                            break 'fold Option::None; // continue
+                        };
+                        if inferred.is_uninferable()
+                            || !self.value_callable(&inferred, &mctx)
+                        {
+                            break 'fold Option::None; // continue
+                        }
+                        // context = copy_context(context); boundnode;
+                        // callcontext — REBINDS the loop-local context
+                        let c2 = bind_context_to_node(Some(&mctx), operand_v.clone());
+                        *c2.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
+                            id: self.next_callctx_id(),
+                            args: RefCell::new(Vec::new()),
+                            keywords: RefCell::new(Vec::new()),
+                            callee: RefCell::new(Some(inferred.clone())),
+                        }));
+                        *cur_ctx.borrow_mut() = Rc::clone(&c2);
+                        // result = next(inferred.infer_call_result(self, ctx), None)
+                        match self.infer_call_result_first(&inferred, None, Some(&c2)) {
+                            Ok(Some(r)) => Some(r),
+                            Ok(None) => Some(operand_v.clone()),
+                            Err(e) if e.is_inference() => Some(Value::Uninferable),
+                            Err(_) => Some(Value::Uninferable),
+                        }
+                    }
                 }
             };
-            let is_inst_or_class = matches!(operand_v, Value::Inst { .. } | Value::ExcInst { .. })
-                || matches!(operand_v, Value::Node(g)
-                    if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_))));
-            if !is_inst_or_class {
-                out.push(Value::Uninferable); // BadUnaryOperationMessage
-                continue;
+            match folded {
+                Some(v) => (outer.borrow_mut())(v),
+                None => Drive::Go,
             }
-            let sym = self.sym(meth_name);
-            match self.dunder_lookup(operand_v, sym) {
-                Err(_) => out.push(Value::Uninferable), // Bad message
-                Ok(methods) => {
-                    let Some(&meth) = methods.first() else {
-                        out.push(Value::Uninferable);
-                        continue;
-                    };
-                    // inferred = next(meth.infer()) — single pull
-                    let Ok(Some(inferred)) = self.first_value(meth, &copy_context(Some(ctx)))
-                    else {
-                        continue;
-                    };
-                    if inferred.is_uninferable() || !self.value_callable(&inferred, ctx) {
-                        continue;
-                    }
-                    let c2 = bind_context_to_node(Some(ctx), operand_v.clone());
-                    *c2.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
-                        id: self.next_callctx_id(),
-                        args: RefCell::new(Vec::new()),
-                        keywords: RefCell::new(Vec::new()),
-                        callee: RefCell::new(Some(inferred.clone())),
-                    }));
-                    // result = next(inferred.infer_call_result(self, ctx), None)
-                    match self.infer_call_result_first(&inferred, None, Some(&c2)) {
-                        Ok(Some(r)) => out.push(r),
-                        Ok(None) => out.push(operand_v.clone()),
-                        Err(e) if e.is_inference() => out.push(Value::Uninferable),
-                        Err(_) => out.push(Value::Uninferable),
-                    }
-                }
-            }
-        }
-        if out.is_empty() {
-            if let Some(e) = flow.err {
-                return Flow::err(e);
-            }
-        }
-        Flow {
-            vals: out,
-            err: flow.err,
-        }
+        })
     }
 
     /// helpers.object_type — None == Uninferable
@@ -2799,6 +2816,28 @@ fn int_index(c: &ConstValue) -> Option<Option<i64>> {
     }
 }
 
+/// exact integer view of an int/bool Const, incl. Big decimals that fit i128
+/// (CPython folds with arbitrary precision; i128 covers every corpus case)
+fn to_i128(c: &ConstValue) -> Option<i128> {
+    match c {
+        ConstValue::Int(IntValue::Small(i)) => Some(*i as i128),
+        ConstValue::Bool(b) => Some(*b as i128),
+        ConstValue::Int(IntValue::Big(s)) => s.parse::<i128>().ok(),
+        _ => None,
+    }
+}
+
+/// i128 result -> Small if it fits, else exact Big decimal
+fn int_exact(v: i128) -> Value {
+    if let Ok(small) = i64::try_from(v) {
+        Value::SynthConst(Rc::new(ConstValue::Int(IntValue::Small(small))))
+    } else {
+        Value::SynthConst(Rc::new(ConstValue::Int(IntValue::Big(
+            v.to_string().into(),
+        ))))
+    }
+}
+
 fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
     use ConstValue::*;
     let notimpl = || Value::SynthConst(Rc::new(NotImplemented));
@@ -2827,25 +2866,27 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
                 v.extend(b.iter());
                 Value::SynthConst(Rc::new(Bytes(v.into())))
             }
+            _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
+                (Option::Some(a), Option::Some(b)) => match a.checked_add(b) {
+                    Option::Some(v) => int_exact(v),
+                    Option::None => Value::Uninferable,
+                },
+                _ => Value::Uninferable, // Big beyond i128 — astroid folds; out of scope
+            },
             _ => match (num_l, num_r) {
-                (Some(a), Some(b)) => {
-                    if is_int(l) && is_int(r) {
-                        int((a + b) as i64)
-                    } else {
-                        float(a + b)
-                    }
-                }
+                (Some(a), Some(b)) => float(a + b),
                 _ => notimpl(),
             },
         },
         "-" => match (num_l, num_r) {
-            (Some(a), Some(b)) => {
-                if is_int(l) && is_int(r) {
-                    int((a - b) as i64)
-                } else {
-                    float(a - b)
-                }
-            }
+            _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
+                (Option::Some(a), Option::Some(b)) => match a.checked_sub(b) {
+                    Option::Some(v) => int_exact(v),
+                    Option::None => Value::Uninferable,
+                },
+                _ => Value::Uninferable,
+            },
+            (Some(a), Some(b)) => float(a - b),
             _ => notimpl(),
         },
         "*" => match (l, r) {
@@ -2879,14 +2920,15 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
                 }
                 Option::None => Value::Uninferable,
             },
+            _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
+                (Option::Some(a), Option::Some(b)) => match a.checked_mul(b) {
+                    Option::Some(v) => int_exact(v),
+                    Option::None => Value::Uninferable,
+                },
+                _ => Value::Uninferable,
+            },
             _ => match (num_l, num_r) {
-                (Some(a), Some(b)) => {
-                    if is_int(l) && is_int(r) {
-                        int((a * b) as i64)
-                    } else {
-                        float(a * b)
-                    }
-                }
+                (Some(a), Some(b)) => float(a * b),
                 _ => notimpl(),
             },
         },
@@ -2897,35 +2939,66 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
         },
         "//" => match (num_l, num_r) {
             (Some(_), Some(b)) if b == 0.0 => Value::Uninferable,
-            (Some(a), Some(b)) => {
-                if is_int(l) && is_int(r) {
-                    int((a / b).floor() as i64)
-                } else {
-                    float((a / b).floor())
+            _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
+                (Option::Some(_), Option::Some(0)) => Value::Uninferable,
+                (Option::Some(a), Option::Some(b)) => {
+                    // python floor division semantics
+                    let mut q = a / b;
+                    if a % b != 0 && (a < 0) != (b < 0) {
+                        q -= 1;
+                    }
+                    int_exact(q)
                 }
-            }
+                _ => Value::Uninferable,
+            },
+            (Some(a), Some(b)) => float((a / b).floor()),
             _ => notimpl(),
         },
         "%" => match (num_l, num_r) {
             (Some(_), Some(b)) if b == 0.0 => Value::Uninferable,
+            _ if is_int(l) && is_int(r) => match (to_i128(l), to_i128(r)) {
+                (Option::Some(_), Option::Some(0)) => Value::Uninferable,
+                (Option::Some(a), Option::Some(b)) => {
+                    // python modulo takes the divisor's sign
+                    let mut rem = a % b;
+                    if rem != 0 && (rem < 0) != (b < 0) {
+                        rem += b;
+                    }
+                    int_exact(rem)
+                }
+                _ => Value::Uninferable,
+            },
             (Some(a), Some(b)) => {
                 let rem = a - (a / b).floor() * b;
-                if is_int(l) && is_int(r) {
-                    int(rem as i64)
-                } else {
-                    float(rem)
-                }
+                float(rem)
             }
             _ => notimpl(),
         },
         "**" => match (num_l, num_r) {
-            (Some(a), Some(b)) => {
-                if is_int(l) && is_int(r) && b >= 0.0 {
-                    int(a.powf(b) as i64)
-                } else {
-                    float(a.powf(b))
+            _ if is_int(l) && is_int(r) && num_r.is_some_and(|b| b >= 0.0) => {
+                // CPython int.__pow__ is exact arbitrary precision (astroid
+                // folds via the real `**` operator, protocols.py
+                // BIN_OP_IMPL) — overflow past i64 must produce the exact
+                // big integer, not a saturated cast (sentry: 2**70).
+                match (to_i128(l), to_i128(r)) {
+                    (Option::Some(a), Option::Some(b)) => {
+                        match u32::try_from(b).ok().and_then(|e| a.checked_pow(e)) {
+                            Option::Some(v) => int_exact(v),
+                            Option::None => match i64::try_from(a)
+                                .ok()
+                                .and_then(|ia| big_pow_decimal(ia, b as u64))
+                            {
+                                Option::Some(digits) => Value::SynthConst(Rc::new(
+                                    ConstValue::Int(IntValue::Big(digits.into())),
+                                )),
+                                Option::None => Value::Uninferable,
+                            },
+                        }
+                    }
+                    _ => Value::Uninferable,
                 }
             }
+            (Some(a), Some(b)) => float(a.powf(b)),
             _ => notimpl(),
         },
         "<<" | ">>" | "&" | "|" | "^" => match (l, r) {
@@ -2951,6 +3024,45 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
     }
 }
 
+/// Exact decimal-string `base ** exp` for results past i64 (CPython int pow
+/// is arbitrary precision). Returns None on absurd sizes (>100k digits) —
+/// astroid would fold those too, but no corpus goes there and a runaway
+/// multiply would hang the dump.
+fn big_pow_decimal(base: i64, exp: u64) -> Option<String> {
+    let neg = base < 0 && exp % 2 == 1;
+    let ubase = base.unsigned_abs() as u128;
+    // little-endian base-1e9 limbs; limb * m + carry fits u128 for any u64 m
+    let mut acc: Vec<u64> = vec![1];
+    let mul = |acc: &mut Vec<u64>, m: u128| {
+        let mut carry: u128 = 0;
+        for limb in acc.iter_mut() {
+            let v = (*limb as u128) * m + carry;
+            *limb = (v % 1_000_000_000) as u64;
+            carry = v / 1_000_000_000;
+        }
+        while carry > 0 {
+            acc.push((carry % 1_000_000_000) as u64);
+            carry /= 1_000_000_000;
+        }
+    };
+    for _ in 0..exp {
+        mul(&mut acc, ubase);
+        if acc.len() > 12_000 {
+            // > ~100k digits
+            return None;
+        }
+    }
+    let mut s = String::new();
+    if neg {
+        s.push('-');
+    }
+    s.push_str(&acc.last().copied().unwrap_or(0).to_string());
+    for limb in acc.iter().rev().skip(1) {
+        s.push_str(&format!("{limb:09}"));
+    }
+    Some(s)
+}
+
 fn const_unary_fold(c: &ConstValue, op: &str) -> Option<Value> {
     use ConstValue as C;
     let some = |c: ConstValue| Some(Value::SynthConst(Rc::new(c)));
@@ -2958,6 +3070,12 @@ fn const_unary_fold(c: &ConstValue, op: &str) -> Option<Value> {
         "not" => some(C::Bool(!crate::infer::const_truth(c))),
         "-" => match c {
             C::Int(IntValue::Small(i)) => some(C::Int(IntValue::Small(-i))),
+            C::Int(IntValue::Big(s)) => some(C::Int(IntValue::Big(
+                match s.strip_prefix('-') {
+                    Some(rest) => rest.to_string().into(),
+                    None => format!("-{s}").into(),
+                },
+            ))),
             C::Float(f) => some(C::Float(-f)),
             C::Bool(b) => some(C::Int(IntValue::Small(if *b { -1 } else { 0 }))),
             C::NotImplemented => some(C::NotImplemented),

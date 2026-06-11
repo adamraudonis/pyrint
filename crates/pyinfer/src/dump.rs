@@ -66,12 +66,22 @@ fn run_dump_infer_inner(items_path: &str) -> i32 {
                 .map(String::from)
                 .collect()
         });
+    // Debug aid: PRYLINT_TRACE_START=<path substring> turns PRYLINT_TRACE_INFER
+    // on only once the dump loop reaches a matching file (keeps prefix-state
+    // trace runs from emitting gigabytes for the warm-up files).
+    let trace_start = std::env::var("PRYLINT_TRACE_START").ok();
     let stdout = std::io::stdout();
     let mut out = std::io::BufWriter::new(stdout.lock());
     for ((_name, path), tree) in items.iter().zip(trees.iter()) {
         if let Some(set) = &only {
             if !set.contains(path.as_str()) {
                 continue;
+            }
+        }
+        if let Some(ts) = &trace_start {
+            if path.contains(ts.as_str()) {
+                // dump runs single-threaded inside its own 1GB-stack thread
+                unsafe { std::env::set_var("PRYLINT_TRACE_INFER", "1") };
             }
         }
         let _ = writeln!(out, "=== {path}");

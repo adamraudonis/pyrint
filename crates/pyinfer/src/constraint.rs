@@ -148,7 +148,10 @@ impl Engine {
                 if inferred.is_uninferable() {
                     return true;
                 }
-                match self.bool_value(inferred, ctx) {
+                // `inferred.bool_value()` — NO context (constraint.py:119):
+                // Instance bool_value burns in a fresh counter cell
+                let _ = ctx;
+                match self.bool_value(inferred, &Ctx::new()) {
                     None => true, // Uninferable boolean
                     Some(b) => c.negate ^ b,
                 }
