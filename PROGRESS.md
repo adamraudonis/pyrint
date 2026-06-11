@@ -680,6 +680,84 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 11 (diff-reduction round 10, N=1000)**: 496 -> 50 diff lines.
+     LANDED (probe-verified, harness/infertests now 84 probes):
+     (a) **streaming UnaryOp._infer** (node_classes._infer_unaryop is a
+     true generator): per-operand fold reaches the consumer BEFORE the
+     next operand pull; the dunder branch REBINDS the loop-local context
+     bug-for-bug; `not` folds call operand.bool_value() with NO context
+     (fresh counter cell). BoolOp pair eval computes bool_value for ALL
+     pair items (incl. the LAST, list-comprehension no-short-circuit) —
+     any U bool -> U. THE pandas notna/isna fix (nanops.py count-exact).
+     (b) **Compare operands infer under the SHARED ctx** (no clone,
+     node_classes.py:1846-53): operand path pushes persist so recursion
+     frames copied later inherit them (tm.shares_memory self-recursion
+     path blocks; -50 pandas lines).
+     (c) **is_abstract decorator check = next(node.infer()) SINGLE
+     abandoned pull** (scoped_nodes.py:1487-89) — @overload stub chains
+     never cache; FunctionDef.type gives the func pull and decorator pull
+     each their OWN fresh ctx; _infer_decorator_callchain accepts
+     PartialFunction (functools.wraps).
+     (d) **ExceptionInstance OBJECT IDENTITY** in cache boundnode keys
+     (fresh InstId per materialization — django ErrorDict cluster).
+     (e) **STREAMING FunctionDef.igetattr** instance_attrs through lazy
+     _infer_stmts relays (salt __options_dict__ cluster), and
+     FunctionDef.getattr APPENDS the model attr to instance_attrs
+     (scoped_nodes.py:1303-06; django as_view __doc__ pairs); model
+     results hop through _infer_stmts.
+     (f) **FunctionModel completed**: attr___get__ DescriptorBoundMethod
+     (new Value::DescBM with descriptor-binding call result), Unknown
+     family (__code__/__class__/__closure__/__call__/...; UM/BM model
+     yields RAW per bases.py:466-69, FunctionDef path hops -> U), exact
+     __defaults__/__kwdefaults__/__annotations__ fresh nodes.
+     (g) **PropertyModel exact**: fget/fset PropertyFuncAccessors (fresh
+     synth defs, qname <prop>.fget, caller-argc-gated delegation), fset
+     sibling @x.setter search, NO FunctionModel fallback (prop.__doc__ is
+     ERR); Property values carry a synth flag (the property() tip no
+     longer poisons the wrapped function's render); Partial routes to the
+     plain FunctionModel.
+     (h) **Dict._infer_map exact**: recursive per-item safe_infer inside
+     **unpacks (ambiguous IfExp value -> InferenceError; pandas to_latex),
+     SynthDict unpacks (infer_argument's **kwargs Dict) safe-infer every
+     key/value with real hops (sentry build_expected_result), in-place
+     replacement order.
+     (i) **NamedExpr.scope() parent-skip** (walrus under Arguments/Keyword/
+     Comprehension resolves OUTSIDE the comprehension scope, PEP 572 —
+     airflow ecs walrus dict-comp ERR cluster).
+     (j) **exact big-int arithmetic**: ** past i64 via decimal bignum,
+     i128-exact + - * // % with python floor/mod, << with arbitrary
+     precision (salt 65535<<48), >> sign-saturation, bitwise ops accept
+     Big-in-i128, Big participates in float arithmetic (2**63/ns), unary
+     minus on Big. str.format folds the FULL format-spec mini-language
+     (kwargs + specs; '#06x' pads between prefix and digits).
+     (k) **brains**: brain_type lookup uses the SCOPE node as filter
+     (class-level `type:` annotations), TypedDict synthetic class gets
+     locals['__call__']=[Name dict] (instances callable -> Inst:dict),
+     dataclass default_factory template REPARENTED into the real module
+     scope (reparents override generalized to ANY node), ClassModel
+     __new__/__init__ = ObjectModel BMs (unresolved-base classes),
+     ClassModel __doc__ = class docstring, InstanceModel __module__ =
+     literal's root module (Const/List/Tuple/Set are Instances; Dict uses
+     DictModel — no __module__/__doc__/__dict__), all-Const set folds
+     accept Node-Const elements (binop concat dedupe), Instance str()
+     root() is reparent-aware (enum member fake classes).
+     TOOLS: harness/trace_gt_file.py + trace_gt_cachew.py (file-gated GT
+     tracers; cachew logs global cache writes via a LogDict), rust-side
+     PRYLINT_TRACE_START=<path substring> turns PRYLINT_TRACE_INFER on
+     mid-dump.
+     N=1000 differing files/lines: django 5/9, pylfunc 6/8, pandas 11/15,
+     salt 4/7, airflow 5/5, sentry 2/3, core 2/3 (total 50). REMAINING:
+     (1) pylfunc 3 NOTREE (tree-fidelity owns) + 2 os.environ GT-env noise
+     (machine-dependent; irreducible) + control_pragmas ERR/U +
+     class_members type.mro (2). (2) pandas singles: sas7bdat f-string
+     tail, test_fiscal datetime, series/range Slice dup tails, indexing
+     bool tail, test_to_latex style folds, test_nanops complex,
+     extension/io ERR-vs-Func (~15 lines, each needs its own prefix-trace
+     session). (3) django: migrations f-string Instance pair, partials
+     ERR/U, asgi Dict:10, auth 'next', signing str (9). (4) salt setup.py
+     ERR/U + ipaddress GT-cap-earlier folds + build.py/test_path (7).
+     (5) six.with_metaclass still unwired (no diff evidence at N=1000).
+     (6) recursion guard still 350 (no diff evidence at N=1000).
    - check_inferdump (60 files): django 1290/38063 lines differ (96.6%
      match), pylfunc 37/1987 (98.1%). Known gap clusters for phase 2:
      (a) nodes_inferred counter parity — our eager evaluation burns the

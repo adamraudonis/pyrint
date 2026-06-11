@@ -16,3 +16,7 @@ print(A, B, C, D, E, F, G, H, I, J, K, L, M, N)
 ONEDAY_NS = 1e9 * 60 * 60 * 24
 TDMAX = 2**63 / ONEDAY_NS
 print(TDMAX, TDMAX - 0.005, -TDMAX + 0.005)
+SEG = (65535 << 48) | (1024 & 0xFFFF)
+NEG_SHR = (-7) >> 100
+BIG_SHL = 3 << 130
+print(SEG, NEG_SHR, BIG_SHL)

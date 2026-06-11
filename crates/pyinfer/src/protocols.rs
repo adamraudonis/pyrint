@@ -3009,20 +3009,97 @@ fn const_binop_fold(l: &ConstValue, op: &str, r: &ConstValue) -> Value {
         },
         "<<" | ">>" | "&" | "|" | "^" => match (l, r) {
             (Int(IntValue::Small(a)), Int(IntValue::Small(b))) => {
-                let v = match op {
+                match op {
                     "<<" => {
+                        if *b < 0 {
+                            return Value::Uninferable; // ValueError
+                        }
                         if *b > 10_000 {
+                            // anti-DoS guard (astroid computes arbitrarily
+                            // large shifts; no corpus goes there)
                             return Value::Uninferable;
                         }
-                        a.checked_shl(*b as u32).unwrap_or(0)
+                        // exact arbitrary-precision shift like CPython
+                        // (salt: 65535 << 48 = 0xFFFF000000000000)
+                        match (*a as i128).checked_shl(*b as u32) {
+                            Option::Some(v)
+                                if *b < 100
+                                    && (v >> (*b as u32)) == *a as i128 =>
+                            {
+                                int_exact(v)
+                            }
+                            _ => match big_shl_decimal(*a, *b as u32) {
+                                Option::Some(d) => Value::SynthConst(Rc::new(
+                                    ConstValue::Int(IntValue::Big(d.into())),
+                                )),
+                                Option::None => Value::Uninferable,
+                            },
+                        }
                     }
-                    ">>" => a.checked_shr(*b as u32).unwrap_or(0),
-                    "&" => a & b,
-                    "|" => a | b,
-                    "^" => a ^ b,
+                    ">>" => {
+                        if *b < 0 {
+                            return Value::Uninferable;
+                        }
+                        // python >> floors toward -inf; shifts past the
+                        // width saturate to 0 / -1 by sign
+                        let v = if *b >= 63 {
+                            if *a < 0 { -1 } else { 0 }
+                        } else {
+                            a >> b
+                        };
+                        int(v)
+                    }
+                    "&" => int(a & b),
+                    "|" => int(a | b),
+                    "^" => int(a ^ b),
                     _ => unreachable!(),
-                };
-                int(v)
+                }
+            }
+            // int/bool mixes incl. Big operands that fit i128 (the
+            // packed-offset OR in salt mmap_cache)
+            _ if is_int(l) && is_int(r) && !matches!(op, "<<" | ">>") => {
+                match (to_i128(l), to_i128(r)) {
+                    (Option::Some(a), Option::Some(b)) => int_exact(match op {
+                        "&" => a & b,
+                        "|" => a | b,
+                        "^" => a ^ b,
+                        _ => unreachable!(),
+                    }),
+                    _ => Value::Uninferable,
+                }
+            }
+            _ if is_int(l) && is_int(r) => {
+                // shift with bool/Big operands
+                match (to_i128(l), to_i128(r)) {
+                    (Option::Some(a), Option::Some(b)) if b >= 0 && b <= 10_000 => {
+                        if op == ">>" {
+                            let v = if b >= 127 {
+                                if a < 0 { -1 } else { 0 }
+                            } else {
+                                a >> (b as u32)
+                            };
+                            int_exact(v)
+                        } else {
+                            match a.checked_shl(b as u32) {
+                                Option::Some(v)
+                                    if b < 100 && (v >> (b as u32)) == a =>
+                                {
+                                    int_exact(v)
+                                }
+                                _ => match i64::try_from(a)
+                                    .ok()
+                                    .and_then(|sa| big_shl_decimal(sa, b as u32))
+                                {
+                                    Option::Some(d) => Value::SynthConst(Rc::new(
+                                        ConstValue::Int(IntValue::Big(d.into())),
+                                    )),
+                                    Option::None => Value::Uninferable,
+                                },
+                            }
+                        }
+                    }
+                    _ => Value::Uninferable,
+                }
             }
             _ => notimpl(),
         },
@@ -3055,6 +3132,44 @@ fn big_pow_decimal(base: i64, exp: u64) -> Option<String> {
         mul(&mut acc, ubase);
         if acc.len() > 12_000 {
             // > ~100k digits
+            return None;
+        }
+    }
+    let mut s = String::new();
+    if neg {
+        s.push('-');
+    }
+    s.push_str(&acc.last().copied().unwrap_or(0).to_string());
+    for limb in acc.iter().rev().skip(1) {
+        s.push_str(&format!("{limb:09}"));
+    }
+    Some(s)
+}
+
+/// exact decimal `a << b` past i128 (a * 2^b)
+fn big_shl_decimal(a: i64, b: u32) -> Option<String> {
+    let neg = a < 0;
+    let ua = a.unsigned_abs() as u128;
+    let mut acc: Vec<u64> = Vec::new();
+    let mut x = ua;
+    while x > 0 {
+        acc.push((x % 1_000_000_000) as u64);
+        x /= 1_000_000_000;
+    }
+    if acc.is_empty() {
+        return Some("0".to_string());
+    }
+    for _ in 0..b {
+        let mut carry: u64 = 0;
+        for limb in acc.iter_mut() {
+            let v = *limb * 2 + carry;
+            *limb = v % 1_000_000_000;
+            carry = v / 1_000_000_000;
+        }
+        if carry > 0 {
+            acc.push(carry);
+        }
+        if acc.len() > 12_000 {
             return None;
         }
     }
