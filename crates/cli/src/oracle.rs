@@ -1,7 +1,10 @@
 //! Batched syntax-oracle subprocess: files our parser (ruff @ target 3.12)
-//! rejects are re-judged by the pinned CPython/astroid via
-//! harness/syntax_oracle.py, replicating pylint's get_ast() error taxonomy
-//! exactly (E0001 / F0010 / F0002 / tokenize-form E0001).
+//! rejects are re-judged by CPython via the EMBEDDED stdlib-only
+//! syntax_oracle.py (include_str! below), replicating pylint's get_ast()
+//! error taxonomy exactly (E0001 / F0010 / F0002 / tokenize-form E0001).
+//! No repo checkout and no astroid/pylint install is needed at runtime:
+//! the script is materialized to a content-keyed temp file and run with
+//! `python3 -I` (PRYLINT_PYTHON overrides which python).
 
 use std::io::{BufRead, BufReader, Write};
 use std::path::PathBuf;
@@ -24,20 +27,71 @@ pub struct TokenizeErr {
     pub msg: String,
 }
 
-fn oracle_script_path() -> PathBuf {
-    if let Ok(p) = std::env::var("PRYLINT_ORACLE") {
-        return PathBuf::from(p);
-    }
-    // exe at <root>/target/<profile>/prylint -> <root>/harness/syntax_oracle.py
-    if let Ok(exe) = std::env::current_exe() {
-        if let Some(root) = exe.parent().and_then(|p| p.parent()).and_then(|p| p.parent()) {
-            let candidate = root.join("harness/syntax_oracle.py");
-            if candidate.exists() {
-                return candidate;
-            }
+/// The stdlib-only oracle script, embedded in the binary.
+const ORACLE_SRC: &str = include_str!("syntax_oracle.py");
+
+/// Materialize the embedded oracle script to a stable content-keyed path in
+/// the temp dir. Idempotent and race-free: concurrent processes write to a
+/// pid-unique name and rename over the target; an existing file with
+/// matching contents is reused as-is.
+fn embedded_script_path() -> std::io::Result<PathBuf> {
+    use std::hash::{Hash, Hasher};
+    let mut h = std::collections::hash_map::DefaultHasher::new();
+    ORACLE_SRC.hash(&mut h);
+    let dir = std::env::temp_dir();
+    let path = dir.join(format!("prylint-syntax-oracle-{:016x}.py", h.finish()));
+    if let Ok(existing) = std::fs::read_to_string(&path) {
+        if existing == ORACLE_SRC {
+            return Ok(path);
         }
     }
-    PathBuf::from("harness/syntax_oracle.py")
+    let tmp = dir.join(format!(
+        "prylint-syntax-oracle-{:016x}.{}.tmp",
+        h.finish(),
+        std::process::id()
+    ));
+    std::fs::write(&tmp, ORACLE_SRC)?;
+    std::fs::rename(&tmp, &path)?;
+    Ok(path)
+}
+
+fn oracle_python() -> String {
+    std::env::var("PRYLINT_PYTHON").unwrap_or_else(|_| "python3".to_string())
+}
+
+/// Build the oracle command: `python3 -I <materialized embedded script>`,
+/// or `python3 <PRYLINT_ORACLE>` when the env override points at a custom
+/// script (kept for differential debugging; the override script may need
+/// site-packages, so no -I there).
+fn oracle_command() -> std::io::Result<Command> {
+    let mut cmd = Command::new(oracle_python());
+    if let Ok(p) = std::env::var("PRYLINT_ORACLE") {
+        cmd.arg(p);
+    } else {
+        cmd.arg("-I").arg(embedded_script_path()?);
+    }
+    Ok(cmd)
+}
+
+/// Spawn the oracle coprocess; on failure print one clear degradation note.
+/// Without a working python3 the lint still runs: only files the built-in
+/// parser rejects fall back to F0002 (astroid-error) verdicts.
+fn spawn_oracle() -> Option<std::process::Child> {
+    let spawned = oracle_command().and_then(|mut cmd| {
+        cmd.stdin(Stdio::piped()).stdout(Stdio::piped()).stderr(Stdio::inherit()).spawn()
+    });
+    match spawned {
+        Ok(child) => Some(child),
+        Err(e) => {
+            eprintln!(
+                "prylint: cannot run the python syntax oracle ({}: {e}); install \
+                 python3 or set PRYLINT_PYTHON. Files that fail to parse will be \
+                 reported as astroid-error (F0002) instead of exact E0001 messages.",
+                oracle_python()
+            );
+            None
+        }
+    }
 }
 
 /// Run the oracle once over all requests; one verdict per request, in order.
@@ -46,20 +100,8 @@ pub fn run_oracle(requests: &[(String, String)]) -> Vec<Verdict> {
     if requests.is_empty() {
         return Vec::new();
     }
-    let python = std::env::var("PRYLINT_PYTHON").unwrap_or_else(|_| "python3".to_string());
-    let script = oracle_script_path();
-    let mut child = match Command::new(&python)
-        .arg(&script)
-        .stdin(Stdio::piped())
-        .stdout(Stdio::piped())
-        .stderr(Stdio::inherit())
-        .spawn()
-    {
-        Ok(c) => c,
-        Err(e) => {
-            eprintln!("prylint: failed to spawn syntax oracle {python} {script:?}: {e}");
-            return fallback;
-        }
+    let Some(mut child) = spawn_oracle() else {
+        return fallback;
     };
     let mut stdin = child.stdin.take().expect("piped stdin");
     let stdout = child.stdout.take().expect("piped stdout");
@@ -133,24 +175,15 @@ impl OracleProc {
         if self.spawn_failed {
             return false;
         }
-        let python = std::env::var("PRYLINT_PYTHON").unwrap_or_else(|_| "python3".to_string());
-        let script = oracle_script_path();
-        match Command::new(&python)
-            .arg(&script)
-            .stdin(Stdio::piped())
-            .stdout(Stdio::piped())
-            .stderr(Stdio::inherit())
-            .spawn()
-        {
-            Ok(mut child) => {
+        match spawn_oracle() {
+            Some(mut child) => {
                 let stdin = child.stdin.take().expect("piped stdin");
                 let stdout = child.stdout.take().expect("piped stdout");
                 self.proc = Some((stdin, BufReader::new(stdout)));
                 self.child = Some(child);
                 true
             }
-            Err(e) => {
-                eprintln!("prylint: failed to spawn syntax oracle {python} {script:?}: {e}");
+            None => {
                 self.spawn_failed = true;
                 false
             }
