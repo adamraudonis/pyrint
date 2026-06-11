@@ -83,6 +83,28 @@ impl Engine {
                     let pp = self.parent(p).unwrap_or(p);
                     return self.scope(pp);
                 }
+                if matches!(md.tree.nodes[cur.n.idx()].kind, NodeKind::NamedExpr { .. }) {
+                    // NamedExpr.scope() (node_classes.py:4940-4957): a
+                    // walrus whose parent is Arguments/Keyword/Comprehension
+                    // evaluates in the parent's parent scope —
+                    // parent.parent.parent.scope() (PEP 572: names inside
+                    // `(x := ...)` in a comprehension resolve OUTSIDE the
+                    // comprehension scope)
+                    if let Some(p) = self.parent(cur) {
+                        let pmd = self.md(p.m);
+                        if matches!(
+                            pmd.tree.nodes[p.n.idx()].kind,
+                            NodeKind::Arguments(_)
+                                | NodeKind::Keyword { .. }
+                                | NodeKind::Comprehension { .. }
+                        ) {
+                            drop(pmd);
+                            let pp = self.parent(p).unwrap_or(p);
+                            let ppp = self.parent(pp).unwrap_or(pp);
+                            return self.scope(ppp);
+                        }
+                    }
+                }
             }
             if self.is_scope(cur) {
                 return cur;
