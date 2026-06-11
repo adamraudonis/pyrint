@@ -2087,6 +2087,59 @@ impl Engine {
     /// elements etc.): the first completion under a (lookupname=None,
     /// callcontext, boundnode) key bumps nodes_inferred once and "caches";
     /// replays are bump-free. Proxies are no-ops.
+    /// Emulate a FULL `elt.infer(context)` drain over a SYNTHETIC value
+    /// standing for a real fresh astroid node — tl-concat element
+    /// re-inference (_filter_uninferable_nodes, protocols.py:161-172):
+    /// astroid's accumulated chain lists hold re-materialized Const/
+    /// container NODES, so every element drain is a NodeNG.infer hop under
+    /// the SHARED context (each `+=` step carries its own callcontext —
+    /// re-miss + BUMP per step). A miss whose result arrives over the 100
+    /// cap yields Uninferable instead, no bump (node_ng.py:160-167), and
+    /// records the truncation for replays. EvaluatedObject drains to its
+    /// wrapped value (node_classes.py:5024-5028). Proxies (no synthetic
+    /// node id) yield themselves hop-free. GT traces show ln=None inside
+    /// the binop element pulls — key lookupname is None.
+    pub fn synth_elt_full_drain(&self, v: &Value, ctx: &Rc<Ctx>) -> Value {
+        let Some((tag, ptr)) = synth_node_id(v) else {
+            return v.clone();
+        };
+        let key = (
+            tag,
+            ptr,
+            None,
+            ctx.callcontext.borrow().as_ref().map(|c| c.id),
+            ctx.boundnode.borrow().as_ref().map(crate::value::value_key),
+        );
+        let yielded = match v {
+            Value::EvaluatedObject { value } => (**value).clone(),
+            other => other.clone(),
+        };
+        if self.synth_hop_cache.borrow().contains(&key) {
+            if self.synth_hop_trunc.borrow().contains(&key) {
+                return Value::Uninferable;
+            }
+            return yielded;
+        }
+        self.pin_value_identity(v);
+        if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+            self.pin_value_identity(bn);
+        }
+        if ctx.nodes_inferred.get() > MAX_INFERRED {
+            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                eprintln!("SYNTH-TRUNC drain ni={}", ctx.nodes_inferred.get());
+            }
+            self.synth_hop_cache.borrow_mut().insert(key.clone());
+            self.synth_hop_trunc.borrow_mut().insert(key);
+            return Value::Uninferable;
+        }
+        self.synth_hop_cache.borrow_mut().insert(key);
+        ctx.bump_inferred();
+        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            eprintln!("SYNTHDRAIN bump tag={} ni={}", tag, ctx.nodes_inferred.get());
+        }
+        yielded
+    }
+
     pub fn synth_value_pull(&self, v: &Value, ctx: &Rc<Ctx>) {
         if let Some((tag, ptr)) = synth_node_id(v) {
             let key = (

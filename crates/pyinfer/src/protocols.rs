@@ -2317,7 +2317,25 @@ impl Engine {
                                         }
                                     }
                                     NV::V(v) if v.is_uninferable() => all.push(unk.clone()),
-                                    NV::V(v) => all.push(v.clone()),
+                                    NV::V(v) => {
+                                        // synthetic elts are REAL fresh nodes
+                                        // in astroid (tl_infer_binary_op
+                                        // re-materializes results, str()
+                                        // folds build Const nodes): the
+                                        // `elt.infer(context)` full drain is
+                                        // a NodeNG.infer hop under the
+                                        // SHARED ctx — each chain step has
+                                        // its own callcontext so every step
+                                        // re-misses and BUMPS (spark_sql
+                                        // aug-chain). Over the 100 cap the
+                                        // hop yields U -> UNATTACHED_UNKNOWN.
+                                        let out = self.synth_elt_full_drain(v, ctx);
+                                        if out.is_uninferable() {
+                                            all.push(unk.clone());
+                                        } else {
+                                            all.push(out);
+                                        }
+                                    }
                                 }
                             }
                             return Ok(vec![Value::SynthSeq {
