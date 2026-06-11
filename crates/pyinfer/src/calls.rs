@@ -328,7 +328,31 @@ impl Engine {
                         *cc.args.borrow_mut() = new_args;
                     }
                 }
-                self.function_infer_call_result_to(*func, caller, ctx, sink)
+                // super().infer_call_result with self = the
+                // PartialFunction: a generator result gets parent =
+                // PartialFunction -> qname() renders "PartialFunction"
+                // (objects.py:304-326)
+                let mut stopped = false;
+                let end = {
+                    let stopped = &mut stopped;
+                    self.function_infer_call_result_to(*func, caller, ctx, &mut |v| {
+                        if let Value::Generator { call_ctx, .. } = &v {
+                            self.partial_gen_ctxs.borrow_mut().insert(
+                                Rc::as_ptr(call_ctx) as usize,
+                                Rc::clone(call_ctx),
+                            );
+                        }
+                        let d = sink(v);
+                        if let Drive::Stop = d {
+                            *stopped = true;
+                        }
+                        d
+                    })
+                };
+                if stopped {
+                    return End::Stopped;
+                }
+                end
             }
             Value::Inst { .. }
             | Value::ExcInst { .. }

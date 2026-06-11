@@ -186,6 +186,11 @@ pub struct Engine {
         RefCell<FxHashMap<(u8, GNode, usize), (Rc<Vec<Value>>, Option<Rc<Ctx>>)>>,
     pub tip_order: RefCell<std::collections::VecDeque<(u8, GNode, usize)>>,
     /// recursion depth guard standing in for Python's RecursionError
+    /// Generators created through a PartialFunction call: their parent
+    /// is the synthetic PartialFunction whose qname() is the literal class
+    /// name "PartialFunction" (objects.py:325-326). Keyed by the captured
+    /// call_ctx Rc pointer; the Rc is pinned so the key can't be recycled.
+    pub partial_gen_ctxs: RefCell<FxHashMap<usize, Rc<Ctx>>>,
     pub depth: Cell<u32>,
     pub max_depth: u32,
     pub callctx_id: Cell<u64>,
@@ -330,6 +335,7 @@ impl Engine {
             redirects: RefCell::new(FxHashMap::default()),
             proxy_placeholders: RefCell::new(rustc_hash::FxHashSet::default()),
             reparents: RefCell::new(FxHashMap::default()),
+            partial_gen_ctxs: RefCell::new(FxHashMap::default()),
             meta_override: RefCell::new(FxHashMap::default()),
             obj_model_funcs: RefCell::new(None),
             implicit_locals: RefCell::new(FxHashMap::default()),

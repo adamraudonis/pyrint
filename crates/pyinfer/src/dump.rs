@@ -212,11 +212,22 @@ pub fn render(engine: &Engine, v: &Value) -> String {
             format!("BM:{}", engine.qname(*func))
         }
         Value::UnboundMethod { func } => format!("UM:{}", engine.qname(*func)),
-        Value::Generator { func, is_async, .. } => {
-            if *is_async {
-                format!("AGen:{}", engine.qname(*func))
+        Value::Generator { func, is_async, call_ctx } => {
+            // Generator.parent is the PartialFunction object when created
+            // through a partial call; its qname() is "PartialFunction"
+            let q = if engine
+                .partial_gen_ctxs
+                .borrow()
+                .contains_key(&(std::rc::Rc::as_ptr(call_ctx) as usize))
+            {
+                "PartialFunction".to_string()
             } else {
-                format!("Gen:{}", engine.qname(*func))
+                engine.qname(*func)
+            };
+            if *is_async {
+                format!("AGen:{q}")
+            } else {
+                format!("Gen:{q}")
             }
         }
         Value::UnionType => "Union".to_string(),

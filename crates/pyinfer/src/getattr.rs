@@ -160,8 +160,28 @@ impl Engine {
                 stream_result(self.function_igetattr(*func, name, ctx), sink)
             }
             Value::Super { .. } => self.super_igetattr_to(owner, name, ctx, sink),
-            Value::DictItems(_) | Value::DictKeys(_) | Value::DictValues(_) => {
-                End::Raised(ErrKind::Attribute)
+            // bare bases.Proxy (objects.py:262-274): __getattr__ delegates
+            // igetattr to the _proxied synthesized List NODE, which acts as
+            // a builtins.list instance (BaseInstance.igetattr) — e.g.
+            // d.keys().sort -> BM:builtins.list.sort
+            Value::DictItems(dr) | Value::DictKeys(dr) | Value::DictValues(dr) => {
+                let pairs = self.dictref_pairs(dr);
+                let elems: Vec<Value> = match owner {
+                    Value::DictKeys(_) => pairs.into_iter().map(|(k, _)| k).collect(),
+                    Value::DictValues(_) => pairs.into_iter().map(|(_, v)| v).collect(),
+                    _ => pairs
+                        .into_iter()
+                        .map(|(k, v)| Value::SynthSeq {
+                            kind: crate::value::SeqKind::Tuple,
+                            elems: Rc::new(vec![k, v]),
+                        })
+                        .collect(),
+                };
+                let as_list = Value::SynthSeq {
+                    kind: crate::value::SeqKind::List,
+                    elems: Rc::new(elems),
+                };
+                self.instance_igetattr_to(&as_list, name, ctx, sink)
             }
         }
     }
@@ -259,6 +279,23 @@ impl Engine {
                 }
             }
             "__dict__" | "builtins" => self.dunder_dict_of_locals(md),
+            // ObjectModel base attrs (objectmodel.py:136-164): ModuleModel
+            // inherits attr___new__/attr___init__ — BoundMethods of the
+            // synthetic builtins.object functions bound to the MODULE (the
+            // raw builder's `from builtins import __new__` member shims
+            // resolve through this, e.g. _ctypes.Structure.__new__)
+            "__new__" | "__init__" => {
+                let Some((new_fn, init_fn)) = self.obj_model_func_nodes() else {
+                    return Value::Uninferable;
+                };
+                Value::BoundMethod {
+                    func: if name == "__new__" { new_fn } else { init_fn },
+                    bound: Rc::new(Value::Node(GNode {
+                        m: md.id,
+                        n: NodeId::MODULE,
+                    })),
+                }
+            }
             // __spec__/__loader__/__cached__ are Unknown -> infer Uninferable
             _ => Value::Uninferable,
         }
