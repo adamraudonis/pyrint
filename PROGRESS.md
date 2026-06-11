@@ -680,6 +680,111 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 13 (diff-reduction round 12, sample=ALL files)**: 530 -> ~280
+     diff lines (final numbers in the round log /tmp/measure_round6.log;
+     round-5 checkpoint: pylfunc 5, django 30, pandas 42, salt 99, airflow
+     56, sentry 5, core 61). LANDED (probe-verified; harness/infertests now
+     121 probes):
+     (a) **dataclass __init__ SYNTHESIS** (_generate_dataclass_init full
+     port, brain_dataclasses.py:244-390): parsed init template installed in
+     class locals (qname <cls>.__init__ via reparent), _HAS_DEFAULT_FACTORY
+     root local, base-class param merging via a side table standing in for
+     Arguments._get_arguments_data, kw_only quirks ("self" SUBSTRING check
+     on the rendered prev-params string), is_dataclass FLAG (no re-infer at
+     render). Pull/WIPE parity in the transform: per-field is_class_var
+     (next) + kw-sentinel (safe_infer) + _is_init_var (cache-hit) pulls,
+     per-field Unknown-tip predicate re-check + WIPE, pass-4 re-pulls
+     (property decoratornames, field-call func pulls, prev-default mro
+     walks). Killed core llm.py super().__init__ + esphome counter drift.
+     (b) **module-extender templates build with modname ''** (astroid
+     parse() default) then REPARENT top-level objs into the target module
+     (brain/helpers.py:25-27): name-gated scan predicates (collections
+     _looks_like_subscriptable) correctly FAIL at template-scan time —
+     defaultdict/deque subscripts now hit the EmptyNode -> `return self`
+     path of ClassDef.getitem instead of calling an injected
+     __class_getitem__ (core filter/sensor deque cluster); typing-alias tip
+     resolves the base import via the reparent-aware root walk.
+     (c) **enum __members__ values are the LAZY locals proxies** (Name refs
+     in astroid, brain_namedtuple_enum.py:489-507) — no second
+     instantiate_class, no second per-member INFBASES walk at scan time.
+     (d) **walrus double-stmt**: NamedExpr.optional_assign = True makes
+     _filter_stmts keep BOTH copies (the `_stmts = [node]` branch THEN the
+     unconditional append; filter_statements.py:143-159,195,227); the
+     duplicate collapses through value-cache replay + the new BoundMethod
+     REPLAY-IDENTITY dedup (DedupKey::BMId on the bound Rc pointer —
+     mirrors id(BoundMethod); update/__init__ latest_version pairs).
+     SynthSlice dedups by bounds-Rc likewise (pandas
+     _convert_slice_indexer repeated `return key`).
+     (e) **are_exclusive handler-vs-handler**: astroid's locate_child
+     returns the whole LIST for sequence fields, so `c1node is not c2node`
+     is a FIELD-identity check — two different ExceptHandlers share
+     `handlers` and take the elif (exclusive). Killed the salt
+     templates.py dup-accumulation + dsmr/excl clusters.
+     (f) **BoolOp operand mid-drain raise PROPAGATES** (only generator
+     CREATION is inside the try, node_classes.py:1651-57; product() drains
+     outside) — django get_system_encoding locale cluster ('iso-8859-15'
+     fold -> U).
+     (g) **brains**: brain_statistics (quantiles -> U, syntactic predicate),
+     brain_random sample (real sampling at inference time; our selection is
+     a deterministic LCG — the warm oracle's RNG selection is IRREDUCIBLE,
+     only the List:k shape matches), lru_cache attr_cache_info
+     (CacheInfoBoundMethod -> Inst:__astroid_synthetic.CacheInfo via fresh
+     _CacheInfo(0,0,0,0) extract per access), GroupExceptionInstanceModel
+     (eg.exceptions -> fresh EMPTY Tuple, exact builtins.ExceptionGroup),
+     ClassModel attr_mro (MroBoundMethod proxying builtins.type.mro, call
+     -> Tuple of mro), Generator ContextManagerModel __enter__/__exit__
+     (synthetic defs qname builtins.object.*, call -> Const None; salt
+     minion span cluster), ObjectModel __init__/__new__ BMs on
+     function/UM/BM models (cls._dataclass.__init__ ->
+     BM:builtins.object.__init__), namedtuple _get_namedtuple_fields exact
+     BaseContainer check (dict-view proxies -> UseInferenceDefault),
+     TypedDict tip builds its template with NO transform scan.
+     (h) **`self` boundnode hijack** (protocols.py:375-376): ANY ambient
+     bases.Instance boundnode (incl. Const/container NODES — Const
+     subclasses Instance!) replaces the owning class in
+     _arguments_infer_argname: a %-fold's str.__mod__ context makes
+     `self.__class__` infer to builtins.str (django Q.deconstruct
+     'builtins.str' cluster, ~12 lines).
+     (i) **has_dynamic_getattr checks attrs[0] ONLY** and __getattribute__
+     only when __getattr__ is missing (scoped_nodes.py:2516-38) — sentry
+     IPlugin(threading.local) missing attrs are ERR again.
+     (j) **instance-attr UM stays RAW** (bases.py:283-285: _wrap_attr runs
+     over the raw attr list BEFORE inference) — core stream/conftest
+     _original_recv yields UM not BM.
+     (k) **dict-view bool_value** = bool of the synthesized List's elts
+     (BooleanConstraint rejects items() of an empty dict literal — core
+     triggers/event.py), dict-view default-repr folds
+     ('<astroid.objects.DictKeys object at 0x10' under the 40-char cut).
+     (l) **AUG binop attempts keep the augmented op string** (_aug_op):
+     tl_infer_binary_op's EXACT `operator == "+"` check fails for '+=' ->
+     NotImplemented -> the plain __add__ attempt runs too (extra method
+     pull, airflow spark_sql); Const folds accept the BIN_OP_IMPL aug
+     aliases.
+     (m) bool & | ^ bool folds stay BOOL (CPython semantics via the real
+     operator; django where.py/admin main, core purge/event/mqtt).
+     REMAINING (~280 lines, by volume): (1) **nodes_inferred/cap dynamics +
+     aug-chain structure** (~110: salt consensus/service.py ~45 the
+     largest; salt http/lazy/ssh; core try_parse_enum trailing-None ~14 +
+     config 3; django request/response iri_to_uri + formatted_description
+     ~15; airflow ctl str.format counts; spark_sql aug-chain pull structure
+     — traced to per-pair tl-concat element re-inference timing, needs its
+     own session). The tpe3 probe pins a 1-bump gap (##110 vs ##111) in
+     the EnumType.__call__ -> type.__new__ igetattr region. (2)
+     **irreducible-by-construction** (~45): os.environ/sys.argv snapshot
+     content+order from the live warm process (django autoreload 17,
+     airflow conf/setup_idea, pylfunc, salt test_man hash order, core),
+     random.sample SELECTION (salt deltaproxy 4), str(obj) heap addresses
+     past the 40-char cut. (3) cross-file cache-state long tail (~40):
+     module-class instance_attrs accumulation order (sentry importer,
+     salt test_path/lazy Dict:N), sys.modules mutation
+     (reset_warning_registry, test_deprecation_tools, ibm/mq conftest,
+     core frame/conftest), pandas sas7bdat/fiscal/datetimes ctx flips.
+     (4) pandas to_latex JoinedStr cap folds (4), test_nanops
+     Class:builtins.complex.real values (3), model_enums one-early
+     truncation. TOOLS: /tmp/cmp_dumptrace2.py alignment via
+     difflib.SequenceMatcher over (kind,name) entry streams (drift
+     blocks); single-file oracle items lists (/tmp/one_*.jsonl pattern)
+     reproduce most context clusters without full-corpus warms.
    - **phase 12 (diff-reduction round 11, sample=ALL files)**: harness fix
      (PRYLINT_DUMP_ONLY prebuilds full corpus, dumps subset) made full-corpus
      runs the gate. 998 -> 530 diff lines across all 7 (django 121->66,
