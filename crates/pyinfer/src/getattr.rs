@@ -220,10 +220,18 @@ impl Engine {
                 .unwrap_or(false)
         };
         if MODULE_MODEL_ATTRS.contains(&name_str.as_str()) && !ignore_locals && !name_in_locals {
-            result = vec![NV::V(self.module_model_attr(&md, &name_str))];
+            // ModuleModel attrs are FRESH NODES per access (objectmodel.py:
+            // 167-241 Const/List/Unknown built with parent=module) — the
+            // consumer's _infer_stmts gives each a real NodeNG.infer hop
+            // (entry + bump + fresh-key cache write), exactly like the
+            // ClassModel hop (phase 10d). panel.__name__ chains in core
+            // config/__init__ are count-exact only with the hop.
+            result = vec![NV::N(
+                self.model_hop_node(self.module_model_attr(&md, &name_str)),
+            )];
             if name_str == "__name__" {
-                result.push(NV::V(Value::SynthConst(Rc::new(ConstValue::Str(
-                    "__main__".into(),
+                result.push(NV::N(self.model_hop_node(Value::SynthConst(Rc::new(
+                    ConstValue::Str("__main__".into()),
                 )))));
             }
         } else if !ignore_locals && name_in_locals {
