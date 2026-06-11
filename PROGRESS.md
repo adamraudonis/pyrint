@@ -680,6 +680,75 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 16 (diff-reduction round 15, sample=ALL files)**: 64 -> 42
+     diff lines; django 0/0, pandas 0/0, sentry 0/0 (first corpora at
+     ZERO), pylfunc 4/5, salt 5/13, airflow 6/15, core 7/9 (tree gate 0,
+     shell gate PASS x7, 144 probes PASS). LANDED (probe-verified):
+     (a) **%-format dict rhs** (CPython unicodeobject.c unicode_mod arg
+     model): non-tuple rhs is ONE positional value (the object itself —
+     `"%s" % {}` folds to '{}'); a NAMED conversion REPLACES ctx->args and
+     resets argidx (unicode_format_arg_parse), so '%(a)s %s' % d is
+     TypeError but '%s %(a)s' % d works; dict rhs skips the trailing
+     not-all-converted check ('x' % {} -> 'x'); mapping keys are ANY Const
+     with python dict insert semantics (first position, last value);
+     dict-as-value renders via repr (django rasterfield).
+     (b) **ClassDef.igetattr same-scope filter exact** (scoped_nodes.py:
+     2442-2449): parentless ClassModel consts (__doc__/__name__/
+     __qualname__/__module__, objectmodel.py:499-513) DROP per the
+     `attr.parent and` guard; Inst proxies delegate .parent to their class
+     (django base.py cls.__doc__ no longer leaks type's doc).
+     (c) **Compare sequence ordering**: tuple/list lexicographic fold
+     (first `!=` element decides via lit_cmp, shorter is less), set
+     subset relations; `psycopg_version() >= (3, 2)` folds to False via
+     Tuple:0 >= (3,2) (django introspection).
+     (d) **unpack rhs raise**: Instance-without-__getitem__ getitem raises
+     InferenceError OUT of _resolve_assignment_parts — AssignName._infer's
+     EAGER list(assigned_stmts) (node_classes.py:451) discards earlier
+     parts -> single U (django distapp `dist1, dist2 = dist`); same for
+     for/comprehension assigned_stmts mid-stream iter raises (ListComp
+     values have NO inference function -> the whole target U; django
+     test_templatetags spec["choices"]).
+     (e) **getattr() brain hasattr-igetattr gate**: Lambda/Unknown/
+     EvaluatedObject lack igetattr -> Uninferable, NEVER the default
+     (django test_middleware get_redirect_field_name(lambda: None)).
+     (f) **NamedExpr/Starred falsy raise** in _infer_sequence_helper:
+     safe_infer -> Uninferable is FALSY (`if not value: raise`), the
+     walrus literal poisons whole (sentry test_snowflake).
+     (g) **count-exact _infer_slice**: lower/upper/step ALL inferred
+     before the all() check (node_classes.py:222-226) and Const.getitem
+     classifies the index FIRST — _infer_slice runs for ANY Const receiver
+     before the str/bytes check raises (the discarded pulls warm the
+     GLOBAL _INFERENCE_CACHE: pandas sas7bdat went count-byte-identical,
+     fixing its f-string cap truncations).
+     (h) **object_len const fall-through** (helpers.py:276-291): None/int
+     consts run object_type + __len__ lookup before AstroidTypeError
+     (pandas test_indexers).
+     (i) **Property/Partial stmt-infer hop**: objects.Property/
+     PartialFunction subclass FunctionDef (objects.py:334) — _infer_stmts'
+     stmt.infer on them is a FULL NodeNG.infer hop, always-fresh (never
+     replays); django model_enums enum-list truncation now exact.
+     TOOLING: harness/show_inferdiff.py (per-file GT-vs-ours diff lines);
+     trace-block comparator pattern (cmp_blocks: GT trace_gt_file.py
+     blocks vs @@DUMPNODE blocks, ENTRY-event streams) localizes count
+     divergences to single dump nodes — used for (g)/(h)/(i).
+     REMAINING (42 lines): (1) irreducible-by-construction (~21):
+     os.environ content/order (airflow conf 2/parser 3/setup_idea 3,
+     pylfunc unused_import 2), PYTHONHASHSEED (salt test_man 4),
+     random.sample RNG (salt deltaproxy x2 files 4), sys.path_importer_
+     cache growth (salt lazy 3), pylfunc NOTREE x3 (pyast parser rejects
+     `""\\<EOF>` where CPython ast.parse accepts — tree-fidelity owns).
+     (2) lazy-module-build count cascades (~19): brain transform-time
+     inference during LAZY builds (urllib.parse namedtuple chains, frame
+     f_back/inspect, collections.namedtuple type(...) source returns)
+     burns counts in different ORDER than ours -> 100-cap lands one stmt
+     early/late under full-prebuild global-cache state: salt http.py 4
+     (tl-concat _filter_uninferable extra Tuple entry), airflow ctl
+     format 1 / spark_sql aug-chain 2 / secrets_masker 4 (GT caps after
+     5th ExcInst at ##111, ours ##104 — divergence starts at the
+     inspect.currentframe dump node), core singles 9. Each needs its own
+     trace-block session against the FULL-corpus prebuild state
+     (single-file and pair count dumps all MATCH — the drift is
+     cross-file cache warmth only).
    - **phase 15 (diff-reduction round 14, sample=ALL files)**: 126 -> 64
      diff lines (django 7/10, pylfunc 4/5, pandas 4/7, salt 5/13, airflow
      7/17, sentry 1/2, core 8/10; tree gate 0, shell gate PASS x7, 135
