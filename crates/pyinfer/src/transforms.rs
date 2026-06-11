@@ -2037,13 +2037,25 @@ impl Engine {
             return;
         }
         let node_md = self.md(node.m);
-        // basenames text of THIS class (types in the fake source)
+        // basenames text of THIS class (types in the fake source).
+        // ClassDef.basenames = [b.as_string() for b in bases] — the FULL
+        // expression text, NOT just dotted names: `class Role(
+        // namedtuple("Role", "name order"), Enum)` keeps the namedtuple
+        // CALL as a textual base of every member fake class; the fake
+        // module has no tips (apply_transforms=False), so each member's
+        // ancestors walk infers that Call through the REAL
+        // collections.namedtuple infer_call_result (+13 bumps per member —
+        // Role.OP count parity). expr_source = raw source slice (~
+        // as_string); dotted fallback for template-built enums.
         let basenames: Vec<String> = {
             match &node_md.tree.nodes[node.n.idx()].kind {
                 NodeKind::ClassDef(d) => d
                     .bases
                     .iter()
-                    .filter_map(|&b| self.dotted_string(GNode { m: node.m, n: b }))
+                    .filter_map(|&b| {
+                        let g = GNode { m: node.m, n: b };
+                        self.expr_source(g).or_else(|| self.dotted_string(g))
+                    })
                     .collect(),
                 _ => Vec::new(),
             }

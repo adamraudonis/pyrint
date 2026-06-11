@@ -3345,23 +3345,26 @@ impl Engine {
     }
 
     fn namedtuple_rename(&self, call: GNode, ctx: &Rc<Ctx>) -> bool {
-        // func = safe_infer(extract_node("import collections;
-        // collections.namedtuple")) — the real FunctionDef
-        let Ok(collections_mid) = self.ast_from_module_name("collections", true) else {
-            return false;
-        };
-        let nt_sym = self.sym("namedtuple");
-        let func = {
-            let md = self.md(collections_mid);
-            let locals = md.locals.borrow();
-            match locals
-                .get(&NodeId::MODULE)
-                .and_then(|l| l.get(&nt_sym))
-                .and_then(|v| v.first())
-            {
-                Some(&g) => g,
-                None => return false,
+        // func = util.safe_infer(_extract_single_node("import collections;
+        // collections.namedtuple")) — brain_namedtuple_enum.py:201-203 runs
+        // this PER TIP INVOCATION: a fresh throwaway module is built and the
+        // Attribute is inferred under a context=None fresh ctx (the
+        // Attribute -> Name collections -> Import -> FunctionDef module-
+        // igetattr chain burns real pulls every run; the namedtuple+Enum
+        // mixin member access Role.OP is count-exact only with them).
+        let func = match self
+            .template_extract_node("import collections; collections.namedtuple\n")
+        {
+            Some(attr_node) => {
+                let fresh = Ctx::new();
+                match self.safe_infer(attr_node, &fresh) {
+                    Some(Value::Node(g)) => g,
+                    Some(Value::BoundMethod { func, .. })
+                    | Some(Value::UnboundMethod { func }) => func,
+                    _ => return false,
+                }
             }
+            None => return false,
         };
         if !self.kind_is(func, |k| {
             matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
