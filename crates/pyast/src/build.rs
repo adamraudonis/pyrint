@@ -66,6 +66,8 @@ pub struct Builder<'a> {
     /// every NamedExpr node built (used to spot walruses in dataclass
     /// attribute defaults, which break astroid's generated __init__)
     walrus_ids: Vec<NodeId>,
+    /// astroid `node.position` (keyword line+col) for def/class nodes
+    positions: rustc_hash::FxHashMap<NodeId, (u32, u32)>,
 }
 
 impl<'a> Builder<'a> {
@@ -91,6 +93,7 @@ impl<'a> Builder<'a> {
             arguments_stack: Vec::new(),
             delayed_assattr: Vec::new(),
             walrus_ids: Vec::new(),
+            positions: rustc_hash::FxHashMap::default(),
         };
         // Module node id 0
         let module_id = b.push_placeholder();
@@ -148,6 +151,7 @@ impl<'a> Builder<'a> {
             nodes: b.nodes,
             interner: b.interner,
             locals: b.locals,
+            positions: b.positions,
         };
         finalize_positions(&mut tree);
         tree
@@ -263,7 +267,7 @@ impl<'a> Builder<'a> {
     /// (decorators excluded; `async def` anchors at `async`). Ruff ranges
     /// include decorators, so find the first def/class (or preceding async)
     /// token inside the range.
-    fn def_class_pos(&self, body_range: TextRange, is_async: bool) -> TextRange {
+    fn def_class_pos(&self, body_range: TextRange, is_async: bool) -> (TextRange, bool) {
         let start = body_range.start();
         let mut found: Option<usize> = None;
         for (i, &(off, _)) in self.def_class_tokens.iter().enumerate() {
@@ -282,9 +286,9 @@ impl<'a> Builder<'a> {
                         off = aoff;
                     }
                 }
-                TextRange::new(off, body_range.end())
+                (TextRange::new(off, body_range.end()), true)
             }
-            None => body_range,
+            None => (body_range, false),
         }
     }
 
@@ -1863,7 +1867,13 @@ impl<'a> Builder<'a> {
         self.global_stack.pop();
         self.scope_stack.pop();
 
-        let range = self.def_class_pos(f.range, f.is_async);
+        let (range, kw_found) = self.def_class_pos(f.range, f.is_async);
+        if kw_found {
+            // astroid node.position (rebuilder _get_position_info): the
+            // def/async keyword line+col — used by pylint message locations
+            let (pl, pc) = self.src.line_col(range.start().to_u32());
+            self.positions.insert(id, (pl, pc));
+        }
         let data = Box::new(FunctionData {
             name,
             decorators,
@@ -1957,7 +1967,11 @@ impl<'a> Builder<'a> {
 
         self.scope_stack.pop();
 
-        let range = self.def_class_pos(c.range, false);
+        let (range, kw_found) = self.def_class_pos(c.range, false);
+        if kw_found {
+            let (pl, pc) = self.src.line_col(range.start().to_u32());
+            self.positions.insert(id, (pl, pc));
+        }
         let fin = self.finish(
             id,
             NodeKind::ClassDef(Box::new(ClassData {

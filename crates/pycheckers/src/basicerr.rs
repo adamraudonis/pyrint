@@ -231,8 +231,8 @@ impl BasicErrCk {
             if is_generator(eng, node) {
                 cx.emit_node(
                     "E0100",
-                    u::lineno(eng, node),
-                    u::col_offset(eng, node) as i64,
+                    u::msg_line(eng, node),
+                    u::msg_col(eng, node),
                     "__init__ method is a generator".into(),
                 );
             } else {
@@ -259,8 +259,8 @@ impl BasicErrCk {
                 if any_non_none {
                     cx.emit_node(
                         "E0101",
-                        u::lineno(eng, node),
-                        u::col_offset(eng, node) as i64,
+                        u::msg_line(eng, node),
+                        u::msg_col(eng, node),
                         "Explicit return in __init__".into(),
                     );
                 }
@@ -367,8 +367,8 @@ impl BasicErrCk {
             if globals_.contains(name) {
                 cx.emit_node(
                     "E0115",
-                    u::lineno(eng, node),
-                    u::col_offset(eng, node) as i64,
+                    u::msg_line(eng, node),
+                    u::msg_col(eng, node),
                     u::format_template("Name %r is nonlocal and global", &[name]),
                 );
             }
@@ -399,14 +399,28 @@ impl BasicErrCk {
                     NodeKind::AnnAssign { simple, .. } if *simple)
             })
             .collect();
-        let defined_self = redefinitions
-            .iter()
-            .copied()
-            .find(|&l| !is_overload_stub(cx.caches, eng, l))
-            .unwrap_or(node);
-        if defined_self == node || u::are_exclusive(eng, node, defined_self) {
-            return;
-        }
+        // astroid ClassDef construction injects implicit locals FIRST
+        // (__module__/__qualname__ Const + __annotations__ Unknown,
+        // scoped_nodes.py:1911-1933 + objectmodel ClassModel): for those
+        // names defined_self is the implicit node — never `node`, never an
+        // overload stub, and never exclusive with it (the implicit Const is
+        // a direct child of the ClassDef, so are_exclusive's common
+        // ancestor is the ClassDef — not an If/Try branch).
+        let implicit_first = is_classdef(eng, parent_frame)
+            && matches!(name.as_str(), "__module__" | "__qualname__" | "__annotations__");
+        let defined_self: Option<GNode> = if implicit_first {
+            None // the implicit class local
+        } else {
+            let d = redefinitions
+                .iter()
+                .copied()
+                .find(|&l| !is_overload_stub(cx.caches, eng, l))
+                .unwrap_or(node);
+            if d == node || u::are_exclusive(eng, node, d) {
+                return;
+            }
+            Some(d)
+        };
         if is_classdef(eng, parent_frame) && name == "__module__" {
             return; // REDEFINABLE_METHODS
         }
@@ -461,13 +475,30 @@ impl BasicErrCk {
                 }
             }
         }
+        // message arg: defined_self.fromlineno. For the implicit class
+        // local: Const has no lineno -> _fixed_source_line falls back to
+        // the parent ClassDef's RAW lineno (the class keyword line, no
+        // decorator-quirk adjustment).
+        let defined_line = match defined_self {
+            Some(d) => u::lineno(eng, d),
+            None => {
+                let md = eng.md(parent_frame.m);
+                match md.tree.positions.get(&parent_frame.n) {
+                    Some(&(l, _)) => l,
+                    None => {
+                        drop(md);
+                        eng.fromlineno(parent_frame)
+                    }
+                }
+            }
+        };
         cx.emit_node(
             "E0102",
-            u::lineno(eng, node),
-            u::col_offset(eng, node) as i64,
+            u::msg_line(eng, node),
+            u::msg_col(eng, node),
             u::format_template(
                 "%s already defined line %s",
-                &[redeftype, &u::lineno(eng, defined_self).to_string()],
+                &[redeftype, &defined_line.to_string()],
             ),
         );
     }

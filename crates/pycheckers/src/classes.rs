@@ -411,7 +411,7 @@ impl SpecialCk {
     fn dispatch_protocol(&mut self, cx: &mut WalkCx, node: GNode, name: &str, v: &Value) {
         let eng = cx.eng;
         let emit = |cx: &mut WalkCx, msgid: &'static str, text: &str| {
-            cx.emit_node(msgid, u::lineno(cx.eng, node), u::col_offset(cx.eng, node) as i64,
+            cx.emit_node(msgid, u::msg_line(cx.eng, node), u::msg_col(cx.eng, node),
                 text.to_string());
         };
         match name {
@@ -489,7 +489,7 @@ impl SpecialCk {
         let eng = cx.eng;
         const TEXT: &str = "__getnewargs_ex__ does not return a tuple containing (tuple, dict)";
         if !is_tuple_v(eng, v) {
-            cx.emit_node("E0313", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+            cx.emit_node("E0313", u::msg_line(eng, node), u::msg_col(eng, node),
                 TEXT.to_string());
             return;
         }
@@ -527,7 +527,7 @@ impl SpecialCk {
             }
         }
         if found_error {
-            cx.emit_node("E0313", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+            cx.emit_node("E0313", u::msg_line(eng, node), u::msg_col(eng, node),
                 TEXT.to_string());
         }
     }
@@ -577,7 +577,7 @@ impl SpecialCk {
             let text = format!(
                 "The special method {nrepr} expects {expected_str} param(s), {current_params} {verb} given"
             );
-            cx.emit_node("E0302", u::lineno(eng, node), u::col_offset(eng, node) as i64, text);
+            cx.emit_node("E0302", u::msg_line(eng, node), u::msg_col(eng, node), text);
         }
     }
 }
@@ -1025,10 +1025,10 @@ impl ClassCk {
             if matches!(e, pyinfer::value::ErrKind::Mro) {
                 let name = eng.node_name(node).unwrap_or_default();
                 if eng.last_mro_dup.get() {
-                    cx.emit_node("E0241", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+                    cx.emit_node("E0241", u::msg_line(eng, node), u::msg_col(eng, node),
                         u::format_template("Duplicate bases for class %r", &[&name]));
                 } else {
-                    cx.emit_node("E0240", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+                    cx.emit_node("E0240", u::msg_line(eng, node), u::msg_col(eng, node),
                         u::format_template("Inconsistent method resolution order for class %r", &[&name]));
                 }
             }
@@ -1067,7 +1067,7 @@ impl ClassCk {
             };
             if invalid {
                 let txt = pyinfer::asstr::as_string(eng, base);
-                cx.emit_node("E0239", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+                cx.emit_node("E0239", u::msg_line(eng, node), u::msg_col(eng, node),
                     u::format_template("Inheriting %r, which is not a class.", &[&txt]));
             }
             if let Some(cls) = ancestor_cls {
@@ -1136,7 +1136,7 @@ impl ClassCk {
                         }
                         let aname = eng.node_name(ancestor).unwrap_or_default();
                         let text = format!("Extending inherited Enum class \"{aname}\"");
-                        cx.emit_node("E0244", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+                        cx.emit_node("E0244", u::msg_line(eng, node), u::msg_col(eng, node),
                             text);
                         break;
                     }
@@ -1186,7 +1186,7 @@ impl ClassCk {
                     | NodeKind::GeneratorExp(_)
             )));
             if !tc::is_iterable(eng, cx.caches, slots, false) && !is_comp {
-                cx.emit_node("E0238", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+                cx.emit_node("E0238", u::msg_line(eng, node), u::msg_col(eng, node),
                     "Invalid __slots__ object".to_string());
                 continue;
             }
@@ -1504,7 +1504,7 @@ impl ClassCk {
             "An attribute defined in {} line {} hides this method",
             module_name, line
         );
-        cx.emit_node("E0202", u::lineno(eng, node), u::col_offset(eng, node) as i64, text);
+        cx.emit_node("E0202", u::msg_line(eng, node), u::msg_col(eng, node), text);
     }
 
     /// _check_functools_or_not lookup arm (class_checker.py:1507-1523)
@@ -1573,14 +1573,14 @@ impl ClassCk {
             && spec.vararg.is_none()
             && spec.kwarg.is_none()
         {
-            cx.emit_node("E0211", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+            cx.emit_node("E0211", u::msg_line(eng, node), u::msg_col(eng, node),
                 u::format_template("Method %r has no argument", &[&name]));
         } else if metaclass {
             // bad-mcs-classmethod-argument / bad-mcs-method-argument: C
         } else if ftype == FType::ClassMethod || name == "__class_getitem__" {
             // bad-classmethod-argument: C0202
         } else if first.map(|s| eng.sname(s)).as_deref() != Some("self") {
-            cx.emit_node("E0213", u::lineno(eng, node), u::col_offset(eng, node) as i64,
+            cx.emit_node("E0213", u::msg_line(eng, node), u::msg_col(eng, node),
                 u::format_template("Method %r should have \"self\" as first argument", &[&name]));
         }
     }

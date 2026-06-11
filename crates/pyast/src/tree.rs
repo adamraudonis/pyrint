@@ -297,6 +297,11 @@ pub struct Tree {
     pub interner: Interner,
     /// locals per scope node, in astroid insertion order
     pub locals: FxHashMap<NodeId, IndexMap<Sym, Vec<NodeId>>>,
+    /// astroid `node.position` (def/class/async keyword line+col) for
+    /// FunctionDef/AsyncFunctionDef/ClassDef nodes (rebuilder
+    /// `_get_position_info`). pylint anchors node messages here when set
+    /// (pylinter.py:1213-1221).
+    pub positions: FxHashMap<NodeId, (u32, u32)>,
 }
 
 impl Tree {

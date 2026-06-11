@@ -472,6 +472,7 @@ pub fn load_snapshot(json: &str) -> Option<SnapModule> {
         nodes: loader.nodes,
         interner: loader.interner,
         locals: FxHashMap::default(),
+        positions: FxHashMap::default(),
     };
     Some(SnapModule {
         name: v["modname"].as_str().unwrap_or("").to_string(),

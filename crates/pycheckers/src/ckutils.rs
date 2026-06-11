@@ -254,6 +254,25 @@ pub fn col_offset(eng: &Engine, g: GNode) -> i32 {
     eng.md(g.m).tree.nodes[g.n.idx()].col_offset
 }
 
+/// Message-anchor line for a node: pylint uses `node.position` when set
+/// (pylinter.py:1213-1221) — the def/class/async keyword line for
+/// FunctionDef/AsyncFunctionDef/ClassDef — else `node.fromlineno`.
+pub fn msg_line(eng: &Engine, g: GNode) -> u32 {
+    if let Some(&(l, _)) = eng.md(g.m).tree.positions.get(&g.n) {
+        return l;
+    }
+    eng.fromlineno(g)
+}
+
+/// Message-anchor column (see `msg_line`).
+pub fn msg_col(eng: &Engine, g: GNode) -> i64 {
+    let md = eng.md(g.m);
+    if let Some(&(_, c)) = md.tree.positions.get(&g.n) {
+        return c as i64;
+    }
+    md.tree.nodes[g.n.idx()].col_offset as i64
+}
+
 /// _is_before (variables.py:308-317)
 pub fn is_before(eng: &Engine, node: GNode, reference: GNode) -> bool {
     let (nl, rl) = (lineno(eng, node), lineno(eng, reference));
