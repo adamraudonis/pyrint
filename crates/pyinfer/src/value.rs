@@ -73,6 +73,11 @@ pub enum Value {
     /// never merge distinct receivers (cache replays clone the SAME id).
     ExcInst { cls: GNode, id: InstId, exceptions: Option<Rc<Vec<Value>>> },
     BoundMethod { func: GNode, bound: Rc<Value> },
+    /// FunctionModel.attr___get__ DescriptorBoundMethod
+    /// (objectmodel.py:352-460): renders/keys like a BoundMethod on the
+    /// wrapped function; CALLING it performs descriptor binding (1-2 args;
+    /// yields the inner BM as-is, or a BM bound to the first arg's class).
+    DescBM { func: GNode, inner: Rc<Value> },
     UnboundMethod { func: GNode },
     /// bases.Generator/AsyncGenerator. `call_ctx` is the context captured
     /// at creation time (bases.py:698 `self._call_context =
@@ -154,6 +159,9 @@ pub fn value_key(v: &Value) -> ValueKey {
         Value::ExcInst { cls, id, .. } => ValueKey::ExcInst(*cls, *id),
         Value::BoundMethod { func, bound } => {
             ValueKey::BoundMethod(*func, Box::new(value_key(bound)))
+        }
+        Value::DescBM { func, inner } => {
+            ValueKey::BoundMethod(*func, Box::new(value_key(inner)))
         }
         Value::UnboundMethod { func } => ValueKey::UnboundMethod(*func),
         Value::Generator {

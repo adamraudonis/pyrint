@@ -143,6 +143,12 @@ impl Engine {
             Value::BoundMethod { func, bound } => {
                 stream_result(self.method_igetattr(*func, Some(bound), name, ctx), sink)
             }
+            // DescriptorBoundMethod getattr: BoundMethod semantics on the
+            // wrapped function
+            Value::DescBM { func, inner } => {
+                let inner = Rc::clone(inner);
+                stream_result(self.method_igetattr(*func, Some(&inner), name, ctx), sink)
+            }
             Value::UnboundMethod { func } => {
                 stream_result(self.method_igetattr(*func, None, name, ctx), sink)
             }
@@ -1356,6 +1362,19 @@ impl Engine {
             }
         }
         if let Some(v) = self.function_model_attr(func, &name_str) {
+            // FunctionDef.igetattr runs the model node through
+            // _infer_stmts (scoped_nodes.py:1298-1311): fresh Unknown
+            // nodes hop to Uninferable (the Bound/UnboundMethod model
+            // path yields them RAW instead — see method_igetattr)
+            if let Value::Node(g) = &v {
+                if self.kind_is(*g, |k| matches!(k, NodeKind::Unknown)) {
+                    let c = match ctx {
+                        Some(c) => Rc::clone(c),
+                        None => Ctx::new(),
+                    };
+                    return Ok(self.infer(*g, &c));
+                }
+            }
             return Ok(Flow::one(v));
         }
         Err(ErrKind::Inference)
@@ -1404,6 +1423,23 @@ impl Engine {
                 }))
             }
             _ => {}
+        }
+        // Bound/UnboundMethod.igetattr yields special-attribute model
+        // results RAW (bases.py:466-469 `iter((self.special_attributes
+        // .lookup(name),))` — NO _infer_stmts hop): `bm.__code__` renders
+        // 'Unknown', `bm.__get__` is a DescriptorBoundMethod wrapping the
+        // BOUND method value.
+        if let Some(v) = self.function_model_attr(func, &name_str) {
+            if let (Value::DescBM { func: f, .. }, Some(b)) = (&v, bound) {
+                return Ok(Flow::one(Value::DescBM {
+                    func: *f,
+                    inner: Rc::new(Value::BoundMethod {
+                        func: *f,
+                        bound: Rc::clone(b),
+                    }),
+                }));
+            }
+            return Ok(Flow::one(v));
         }
         self.function_igetattr(func, name, ctx)
     }
@@ -1514,13 +1550,152 @@ impl Engine {
                 };
                 Some(Value::SynthConst(Rc::new(doc.unwrap_or(ConstValue::None))))
             }
-            "__dict__" => Some(Value::SynthDict {
+            "__dict__" | "__globals__" => Some(Value::SynthDict {
                 items: Rc::new(Vec::new()),
             }),
-            "__defaults__" | "__kwdefaults__" | "__annotations__" => Some(Value::Uninferable),
-            "__class__" => Some(Value::Node(self.builtins().function)),
+            // attr___defaults__ (objectmodel.py:261-268): Const(None) when
+            // no defaults, else a fresh Tuple of the default value nodes
+            "__defaults__" => {
+                let defaults = self.func_defaults(func);
+                if defaults.is_empty() {
+                    Some(Value::SynthConst(Rc::new(ConstValue::None)))
+                } else {
+                    Some(Value::SynthSeq {
+                        kind: SeqKind::Tuple,
+                        elems: Rc::new(defaults.into_iter().map(Value::Node).collect()),
+                    })
+                }
+            }
+            // attr___kwdefaults__ (objectmodel.py:322-345): Dict of kwonly
+            // (Const name, default node) pairs
+            "__kwdefaults__" => Some(Value::SynthDict {
+                items: Rc::new(
+                    self.func_kwonly_defaults(func)
+                        .into_iter()
+                        .map(|(n, d)| {
+                            (
+                                Value::SynthConst(Rc::new(ConstValue::Str(n.into()))),
+                                Value::Node(d),
+                            )
+                        })
+                        .collect(),
+                ),
+            }),
+            // attr___annotations__ (objectmodel.py:270-309): Dict of
+            // (Const name, annotation node) incl. 'return'
+            "__annotations__" => Some(Value::SynthDict {
+                items: Rc::new(
+                    self.func_annotation_pairs(func)
+                        .into_iter()
+                        .map(|(n, a)| {
+                            (
+                                Value::SynthConst(Rc::new(ConstValue::Str(n.into()))),
+                                Value::Node(a),
+                            )
+                        })
+                        .collect(),
+                ),
+            }),
+            // attr___get__ (objectmodel.py:352-460): DescriptorBoundMethod
+            "__get__" => Some(Value::DescBM {
+                func,
+                inner: Rc::new(Value::Node(func)),
+            }),
+            // the attr___ne__ Unknown family (objectmodel.py:462-485):
+            // fresh Unknown nodes — infer to Uninferable through the
+            // FunctionDef.igetattr hop, render 'Unknown' raw on the
+            // Bound/UnboundMethod model path. NOTE astroid's
+            // attr___setattr___/attr___delattr___ strip to THREE-underscore
+            // names that never match real lookups (bug kept: '__setattr__'
+            // and '__delattr__' are NOT in the model).
+            "__ne__" | "__subclasshook__" | "__str__" | "__sizeof__" | "__repr__"
+            | "__reduce__" | "__reduce_ex__" | "__lt__" | "__eq__" | "__gt__"
+            | "__format__" | "__getattribute__" | "__hash__" | "__dir__" | "__call__"
+            | "__class__" | "__closure__" | "__code__" => {
+                Some(Value::Node(self.alloc_synth_node(NodeKind::Unknown)))
+            }
             _ => None,
         }
+    }
+
+    /// args.defaults value nodes
+    fn func_defaults(&self, func: GNode) -> Vec<GNode> {
+        let md = self.md(func.m);
+        let args = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+            NodeKind::Lambda(d) => d.args,
+            _ => return Vec::new(),
+        };
+        match &md.tree.nodes[args.idx()].kind {
+            NodeKind::Arguments(a) => {
+                a.defaults.iter().map(|&n| GNode { m: func.m, n }).collect()
+            }
+            _ => Vec::new(),
+        }
+    }
+
+    /// kwonly (name, default node) pairs with a default present
+    fn func_kwonly_defaults(&self, func: GNode) -> Vec<(String, GNode)> {
+        let md = self.md(func.m);
+        let args = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+            NodeKind::Lambda(d) => d.args,
+            _ => return Vec::new(),
+        };
+        let mut out = Vec::new();
+        if let NodeKind::Arguments(a) = &md.tree.nodes[args.idx()].kind {
+            for (arg, def) in a.kwonlyargs.iter().zip(a.kw_defaults.iter()) {
+                let (Some(def), NodeKind::AssignName { name }) =
+                    (def, &md.tree.nodes[arg.idx()].kind)
+                else {
+                    continue;
+                };
+                out.push((md.tree.s(*name).to_string(), GNode { m: func.m, n: *def }));
+            }
+        }
+        out
+    }
+
+    /// (arg name, annotation node) pairs incl. 'return'
+    /// (objectmodel.py:285-299; later duplicates overwrite)
+    fn func_annotation_pairs(&self, func: GNode) -> Vec<(String, GNode)> {
+        let md = self.md(func.m);
+        let (args, returns) = match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => (d.args, d.returns),
+            _ => return Vec::new(),
+        };
+        let mut out: Vec<(String, GNode)> = Vec::new();
+        let push = |name: String, ann: GNode, out: &mut Vec<(String, GNode)>| {
+            if let Some(pos) = out.iter().position(|(n, _)| *n == name) {
+                out[pos] = (name, ann);
+            } else {
+                out.push((name, ann));
+            }
+        };
+        if let NodeKind::Arguments(a) = &md.tree.nodes[args.idx()].kind {
+            let pairs = a
+                .args
+                .iter()
+                .zip(a.annotations.iter())
+                .chain(a.kwonlyargs.iter().zip(a.kwonlyargs_annotations.iter()))
+                .chain(a.posonlyargs.iter().zip(a.posonlyargs_annotations.iter()));
+            for (arg, ann) in pairs {
+                let (Some(ann), NodeKind::AssignName { name }) =
+                    (ann, &md.tree.nodes[arg.idx()].kind)
+                else {
+                    continue;
+                };
+                push(
+                    md.tree.s(*name).to_string(),
+                    GNode { m: func.m, n: *ann },
+                    &mut out,
+                );
+            }
+        }
+        if let Some(r) = returns {
+            push("return".to_string(), GNode { m: func.m, n: r }, &mut out);
+        }
+        out
     }
 
     // ---------- Slice ----------

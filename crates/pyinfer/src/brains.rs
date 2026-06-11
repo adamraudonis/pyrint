@@ -1318,10 +1318,19 @@ impl Engine {
     /// replacement, so re-runs whenever the 64-FIFO misses.
     fn tip_typeddict_func(&self, node: GNode) -> Option<Flow> {
         let modname = self.md(node.m).name.clone();
-        let mid = self.build_template_module("class TypedDict(dict):
+        // trailing bare `dict` Expr supplies the Name node injected as
+        // class_def.locals["__call__"] = [func_to_add]
+        // (brain_typing.py:228-231 -- instances of the synthetic class are
+        // callable; calling them instantiates builtins.dict)
+        let mid = self.build_template_module(
+            "class TypedDict(dict):
     pass
-", &modname)?;
+dict
+",
+            &modname,
+        )?;
         let sym = self.sym("TypedDict");
+        let call_sym = self.sym("__call__");
         let tmd = self.md(mid);
         let cls = {
             let locals = tmd.locals.borrow();
@@ -1330,6 +1339,23 @@ impl Engine {
                 .and_then(|l| l.get(&sym))
                 .and_then(|v| v.first().copied())?
         };
+        // the module's last statement is Expr(Name dict)
+        let dict_name: Option<GNode> = match &tmd.tree.nodes[NodeId::MODULE.idx()].kind {
+            NodeKind::Module(m) => m.body.last().and_then(|&stmt| {
+                match &tmd.tree.nodes[stmt.idx()].kind {
+                    NodeKind::Expr { value } => Some(GNode { m: mid, n: *value }),
+                    _ => None,
+                }
+            }),
+            _ => None,
+        };
+        if let Some(dn) = dict_name {
+            tmd.locals
+                .borrow_mut()
+                .entry(cls.n)
+                .or_default()
+                .insert(call_sym, vec![dn]);
+        }
         Some(Flow::ok(vec![Value::Node(cls)]))
     }
 
@@ -2396,23 +2422,23 @@ impl Engine {
         let site = self.call_site_of_call(node, ctx);
         // brain_builtin_inference._infer_str_format_call: any non-Const
         // (incl. ambiguous safe_infer) argument -> Uninferable
-        let mut pos_values: Vec<String> = Vec::new();
+        let mut pos_values: Vec<ConstValue> = Vec::new();
         for p in site.positional_arguments() {
             let Some(v) = self.safe_infer_nv(&p, ctx) else {
                 return Some(Flow::uninferable());
             };
-            match self.value_const(&v).and_then(|c| const_format_value(&c)) {
-                Some(fv) => pos_values.push(fv),
+            match self.value_const(&v) {
+                Some(c) => pos_values.push(c),
                 None => return Some(Flow::uninferable()),
             }
         }
-        let mut kw_values: Vec<(String, String)> = Vec::new();
+        let mut kw_values: Vec<(String, ConstValue)> = Vec::new();
         for (k, v) in site.keyword_arguments() {
             let Some(v) = self.safe_infer_nv(&v, ctx) else {
                 return Some(Flow::uninferable());
             };
-            match self.value_const(&v).and_then(|c| const_format_value(&c)) {
-                Some(fv) => kw_values.push((self.sname(k), fv)),
+            match self.value_const(&v) {
+                Some(c) => kw_values.push((self.sname(k), c)),
                 None => return Some(Flow::uninferable()),
             }
         }
@@ -2544,8 +2570,8 @@ fn const_format_value(c: &ConstValue) -> Option<String> {
 /// specs beyond plain {}; specs bail to None -> Uninferable)
 fn simple_str_format(
     template: &str,
-    pos: &[String],
-    kw: &[(String, String)],
+    pos: &[ConstValue],
+    kw: &[(String, ConstValue)],
 ) -> Option<String> {
     let mut out = String::new();
     let mut chars = template.chars().peekable();
@@ -2574,22 +2600,33 @@ fn simple_str_format(
                 if depth != 0 {
                     return None;
                 }
-                // no conversions / format specs / attribute access support
-                if field.contains(':') || field.contains('!') || field.contains('.')
-                    || field.contains('[')
+                // `name[:spec]` — the real str.format applies the full
+                // format-spec mini-language (astroid folds via the real
+                // `.format(...)`); conversions / attribute access /
+                // nested-brace specs are out of scope -> Uninferable
+                let (name_part, spec) = match field.split_once(':') {
+                    Some((n, sp)) => (n, Some(sp)),
+                    None => (field.as_str(), None),
+                };
+                if name_part.contains('!') || name_part.contains('.')
+                    || name_part.contains('[')
+                    || spec.is_some_and(|sp| sp.contains('{'))
                 {
                     return None;
                 }
-                if field.is_empty() {
+                let c: &ConstValue = if name_part.is_empty() {
                     let v = pos.get(auto)?;
                     auto += 1;
-                    out.push_str(v);
-                } else if field.chars().all(|ch| ch.is_ascii_digit()) {
-                    let i: usize = field.parse().ok()?;
-                    out.push_str(pos.get(i)?);
+                    v
+                } else if name_part.chars().all(|ch| ch.is_ascii_digit()) {
+                    let i: usize = name_part.parse().ok()?;
+                    pos.get(i)?
                 } else {
-                    let v = kw.iter().find(|(k, _)| *k == field)?;
-                    out.push_str(&v.1);
+                    &kw.iter().find(|(k, _)| *k == *name_part)?.1
+                };
+                match spec {
+                    None | Some("") => out.push_str(&const_format_value(c)?),
+                    Some(sp) => out.push_str(&crate::infer::python_format(c, sp)?),
                 }
             }
             '}' => {

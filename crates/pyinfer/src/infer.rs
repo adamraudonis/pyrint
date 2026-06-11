@@ -2105,6 +2105,7 @@ impl Engine {
     pub fn bool_value(&self, v: &Value, ctx: &Rc<Ctx>) -> Option<bool> {
         match v {
             Value::Uninferable => None,
+            Value::DescBM { .. } => Some(true),
             Value::SynthConst(c) => Some(const_truth(c)),
             Value::SynthSeq { elems, .. } => Some(!elems.is_empty()),
             Value::SynthDict { items } => Some(!items.is_empty()),
@@ -2209,6 +2210,7 @@ impl Engine {
             Value::Inst { .. }
             | Value::ExcInst { .. }
             | Value::BoundMethod { .. }
+            | Value::DescBM { .. }
             | Value::UnboundMethod { .. }
             | Value::Property { .. }
             | Value::Partial { .. }
@@ -2573,9 +2575,17 @@ fn fmt_pad(body: &str, fs: &FmtSpec, numeric: bool) -> String {
             format!("{l}{body}{r}")
         }
         '=' => {
-            // pad between sign and digits
-            let sign_len = usize::from(body.starts_with(['-', '+', ' ']));
-            let (s, rest) = body.split_at(sign_len);
+            // pad between sign (and any 0b/0o/0x alt prefix) and digits --
+            // CPython renders '{:#06x}'.format(255) as '0x00ff'
+            let mut keep = usize::from(body.starts_with(['-', '+', ' ']));
+            let rest0 = &body[keep..];
+            if rest0.len() >= 2
+                && rest0.starts_with('0')
+                && matches!(rest0.as_bytes()[1], b'b' | b'o' | b'x' | b'X' | b'B' | b'O')
+            {
+                keep += 2;
+            }
+            let (s, rest) = body.split_at(keep);
             format!("{s}{fill_s}{rest}")
         }
         _ => body.to_string(),
@@ -2607,7 +2617,7 @@ fn fmt_sign(neg: bool, sign: Option<char>) -> &'static str {
     }
 }
 
-fn python_format(c: &ConstValue, spec: &str) -> Option<String> {
+pub(crate) fn python_format(c: &ConstValue, spec: &str) -> Option<String> {
     let fs = parse_fmt_spec(spec)?;
     match c {
         ConstValue::Str(s) => fmt_spec_str(s, &fs),

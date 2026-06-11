@@ -208,7 +208,9 @@ pub fn render(engine: &Engine, v: &Value) -> String {
         Value::DictItems(_) => "DictItems".to_string(),
         Value::DictKeys(_) => "DictKeys".to_string(),
         Value::DictValues(_) => "DictValues".to_string(),
-        Value::BoundMethod { func, .. } => format!("BM:{}", engine.qname(*func)),
+        Value::BoundMethod { func, .. } | Value::DescBM { func, .. } => {
+            format!("BM:{}", engine.qname(*func))
+        }
         Value::UnboundMethod { func } => format!("UM:{}", engine.qname(*func)),
         Value::Generator { func, is_async, .. } => {
             if *is_async {

@@ -259,6 +259,47 @@ impl Engine {
             Value::BoundMethod { func, bound } => {
                 self.bound_method_infer_call_result_to(*func, bound, caller, ctx, sink)
             }
+            // DescriptorBoundMethod.infer_call_result
+            // (objectmodel.py:365-414): 1-2 caller args required; first arg
+            // must infer (copy_context single pull); a BoundMethod proxy
+            // yields AS-IS, a plain function re-binds to the inferred class.
+            Value::DescBM { func, inner } => {
+                let Some(c) = caller else {
+                    return End::Raised(ErrKind::Inference);
+                };
+                let args: Vec<NodeId> = {
+                    let md = self.md(c.m);
+                    match &md.tree.nodes[c.n.idx()].kind {
+                        NodeKind::Call { args, .. } => args.clone(),
+                        _ => Vec::new(),
+                    }
+                };
+                if args.is_empty() || args.len() > 2 {
+                    return End::Raised(ErrKind::Inference);
+                }
+                // cls = next(caller.args[0].infer(context=copy_context(ctx)))
+                let c2 = copy_context(ctx);
+                let cls = match self.first_value(GNode { m: c.m, n: args[0] }, &c2) {
+                    Ok(Some(v)) => v,
+                    _ => return End::Raised(ErrKind::Inference),
+                };
+                if cls.is_uninferable() {
+                    return End::Raised(ErrKind::Inference);
+                }
+                if let Value::BoundMethod { .. } = &**inner {
+                    yield_v!(sink, (**inner).clone());
+                    return End::Done;
+                }
+                // rebuild + bind: BoundMethod(UnboundMethod(new_func), cls)
+                yield_v!(
+                    sink,
+                    Value::BoundMethod {
+                        func: *func,
+                        bound: Rc::new(cls),
+                    }
+                );
+                End::Done
+            }
             Value::UnboundMethod { func } => {
                 self.unbound_method_infer_call_result_with_to(*func, caller, ctx, sink)
             }
