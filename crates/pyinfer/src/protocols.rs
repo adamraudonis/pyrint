@@ -166,7 +166,14 @@ impl Engine {
                     None => Ctx::new(),
                 };
                 let mut out = Vec::new();
-                self.resolve_assignment_parts_from(NV::N(value), &path, &c, &mut out);
+                // `yield from _resolve_assignment_parts(self.value.infer(
+                // context), ...)` (protocols.py:465): an error raised by the
+                // TOP-level rhs pull propagates AS-IS out of assigned_stmts
+                // (and out of AssignName._infer's list()) — previously
+                // yielded parts are discarded by the raising list().
+                // Preserving the kind matters: NameInferenceError makes the
+                // consuming _infer_stmts skip the stmt (bases.py:190).
+                self.resolve_assignment_parts_from(NV::N(value), &path, &c, &mut out)?;
                 if out.is_empty() {
                     return Err(ErrKind::Inference);
                 }
@@ -181,16 +188,27 @@ impl Engine {
     /// generator mid-stream (no post-yield bumps for the remaining levels,
     /// no cache writes for truncated wrappers). `src` is the unevaluated
     /// origin whose inference feeds the part loop.
+    /// Returns Err only for errors that PROPAGATE in astroid: a raise from
+    /// this level's `parts` pull (the caller's `self.value.infer(context)`
+    /// at the top level), or a non-InferenceError (RecursionError) from any
+    /// depth. Nested-level InferenceErrors are swallowed by the
+    /// `except InferenceError: return` around the recursion
+    /// (protocols.py:514-519).
     fn resolve_assignment_parts_from(
         &self,
         src: NV,
         path: &[usize],
         ctx: &Rc<Ctx>,
         out: &mut Vec<NV>,
-    ) {
+    ) -> Result<(), ErrKind> {
         let mut path = path.to_vec();
         let index = path.remove(0);
-        let process = &mut |e: &Self, part: Value, out: &mut Vec<NV>| -> crate::value::Drive {
+        let mut hard_err: Option<ErrKind> = None;
+        let process = &mut |e: &Self,
+                            part: Value,
+                            out: &mut Vec<NV>,
+                            hard: &mut Option<ErrKind>|
+         -> crate::value::Drive {
             use crate::value::Drive;
             let assigned: Option<NV> = match &part {
                 Value::Node(g)
@@ -236,25 +254,55 @@ impl Engine {
                 out.push(assigned);
             } else {
                 // nested `yield from _resolve_assignment_parts(
-                // assigned.infer(context), ...)`: the nested return ends
-                // only the NESTED loop; an InferenceError from the nested
-                // pull aborts the outer too (protocols.py:514-519) — but
-                // only when nothing was inferred before it (the generator
-                // re-raises at the first pull).
-                e.resolve_assignment_parts_from(assigned, &path, ctx, out);
+                // assigned.infer(context), ...)` is wrapped in
+                // `try: ... except InferenceError: return`
+                // (protocols.py:514-519): an InferenceError (incl.
+                // NameInferenceError) from the nested level abandons THIS
+                // level's loop silently; non-InferenceError (RecursionError)
+                // propagates.
+                match e.resolve_assignment_parts_from(assigned, &path, ctx, out) {
+                    Ok(()) => {}
+                    Err(err) if err.is_inference() => return Drive::Stop,
+                    Err(err) => {
+                        *hard = Some(err);
+                        return Drive::Stop;
+                    }
+                }
             }
             Drive::Go
         };
-        match src {
+        let end = match src {
             NV::N(g) => {
-                let _ = self.infer_to(g, ctx, &mut |part| process(self, part, out));
+                let hard_cell = &mut hard_err;
+                self.infer_to(g, ctx, &mut |part| {
+                    let mut hard_local: Option<ErrKind> = None;
+                    let d = process(self, part, out, &mut hard_local);
+                    if let Some(h) = hard_local {
+                        *hard_cell = Some(h);
+                    }
+                    d
+                })
             }
             NV::V(v) => {
                 // pre-inferred value: astroid's assigned.infer(context)
                 // for a Proxy yields itself (no hop)
-                let _ = process(self, v, out);
+                let mut hard_local: Option<ErrKind> = None;
+                let _ = process(self, v, out, &mut hard_local);
+                if let Some(h) = hard_local {
+                    hard_err = Some(h);
+                }
+                End::Done
             }
+        };
+        if let Some(h) = hard_err {
+            return Err(h);
         }
+        // a raise from THIS level's parts pull propagates to the caller
+        // (top level: out of assigned_stmts) with its kind intact
+        if let End::Raised(e) = end {
+            return Err(e);
+        }
+        Ok(())
     }
 
     /// for_assigned_stmts (protocols.py:290-316), raise_if_nothing
@@ -438,12 +486,17 @@ impl Engine {
 
     /// _infer_context_manager (protocols.py:567-602)
     fn infer_context_manager(&self, mgr: GNode, ctx: &Rc<Ctx>) -> Result<Vec<NV>, ErrKind> {
-        // next(mgr.infer(context)) — single pull
-        let inferred = self
-            .first_value(mgr, ctx)
-            .ok()
-            .flatten()
-            .ok_or(ErrKind::Inference)?;
+        // next(mgr.infer(context)) — single pull. Only StopIteration is
+        // converted to InferenceError (protocols.py:568-571); any error
+        // RAISED by the pull (e.g. NameInferenceError from a name bound in
+        // the same With statement) propagates AS-IS — the kind matters at
+        // the consuming _infer_stmts (bases.py:190 skips NameInferenceError
+        // silently, making the whole Name inference raise ERR).
+        let inferred = match self.first_value(mgr, ctx) {
+            Ok(Some(v)) => v,
+            Ok(None) => return Err(ErrKind::Inference),
+            Err(e) => return Err(e),
+        };
         match &inferred {
             Value::Generator { func, call_ctx, .. } => {
                 // only contextlib.contextmanager-decorated generators

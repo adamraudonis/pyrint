@@ -53,6 +53,9 @@ pub enum DedupKey {
     /// in astroid and dedup in path_wrapper; independently const_factory'd
     /// values are distinct objects and do NOT dedup.
     Ptr(usize),
+    /// ExceptionInstance object identity (InstId is fresh per
+    /// materialization, preserved through clones/cache replay)
+    ExcId(crate::value::InstId),
 }
 
 /// path_wrapper dedup identity (decorators.py:25-54): exact-class Instance
@@ -67,6 +70,19 @@ pub fn dedup_key(v: &Value) -> Option<DedupKey> {
         Value::SynthSeq { elems, .. } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(elems) as usize)),
         Value::SynthDict { items } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(items) as usize)),
         Value::FrozenSet { elems } => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(elems) as usize)),
+        // ExceptionInstance is NOT exact-class "Instance"
+        // (decorators.py:46 checks __class__.__name__), so path_wrapper
+        // dedups it by python OBJECT identity: a cache replay yields the
+        // SAME object (dedups), a fresh materialization a new one. InstId
+        // mirrors exactly that (fresh per materialization, preserved
+        // through Value clones / cache replays).
+        Value::ExcInst { id, .. } => Some(DedupKey::ExcId(*id)),
+        // Generator objects likewise dedup by identity; the captured
+        // creation-context Rc is fresh per materialization
+        // (bases.py:698) and shared by replay clones.
+        Value::Generator { call_ctx, .. } => {
+            Some(DedupKey::Ptr(std::rc::Rc::as_ptr(call_ctx) as usize))
+        }
         _ => None,
     }
 }
