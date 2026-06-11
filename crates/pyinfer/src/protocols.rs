@@ -649,6 +649,17 @@ impl Engine {
         // context: every stmt.infer(None) inside runs under fresh
         // InferenceContexts (no shared-counter bumps from the caller)
         let _ = ctx;
+        // except* (protocols.py:538-546): the eg-class extract_node lookup
+        // runs BEFORE the handler-type unpack (from_elements drains
+        // _generate_assigned only at protocols.py:554) — its 128-LRU
+        // insert/eviction must precede the type Names' lookup inserts.
+        let parent_is_trystar = self
+            .parent(handler)
+            .map(|p| self.kind_is(p, |k| matches!(k, NodeKind::TryStar(_))))
+            .unwrap_or(false);
+        if parent_is_trystar {
+            self.lookup_burn_throwaway(self.sym("ExceptionGroup"));
+        }
         let mut assigned: Vec<NV> = Vec::new();
         if let Some(t) = type_ {
             for v in self.unpack_infer_fresh(GNode { m: handler.m, n: t })? {
@@ -659,7 +670,6 @@ impl Engine {
                         assigned.push(NV::V(Value::ExcInst {
                             id: crate::value::fresh_inst_id(),
                             cls: g,
-                            exceptions: None,
                         }));
                     }
                     other => assigned.push(NV::V(other)),
@@ -667,10 +677,6 @@ impl Engine {
             }
         }
         // except* -> ExceptionGroup instance
-        let parent_is_trystar = self
-            .parent(handler)
-            .map(|p| self.kind_is(p, |k| matches!(k, NodeKind::TryStar(_))))
-            .unwrap_or(false);
         if parent_is_trystar {
             let eg_sym = self.sym("ExceptionGroup");
             let (_, eg) = self.builtin_lookup(eg_sym);
@@ -682,13 +688,32 @@ impl Engine {
                         NV::N(g) => Value::Node(*g),
                     })
                     .collect();
+                // protocols.py:553-556 `assigned.instance_attrs["exceptions"]
+                // = [List.from_elements(...)]` — ExceptionInstance is a
+                // Proxy with NO own instance_attrs, so the write lands on
+                // the builtins.ExceptionGroup CLASS instance_attrs (Proxy.
+                // __getattr__ delegation), GLOBALLY for the rest of the run
+                // and REPLACING any previous except* site's list. Every
+                // later `.exceptions` read on ANY ExceptionGroup(-subclass)
+                // instance — incl. plain `except ExceptionGroup as eg` and
+                // direct instantiations — sees the LAST list via
+                // Instance.getattr's instance_attr-first order
+                // (bases.py:249). One synthetic List node per mutation:
+                // re-reads replay its NodeNG.infer cache entry like
+                // astroid's reused List node.
+                let list_node = self.model_hop_node(Value::SynthSeq {
+                    kind: SeqKind::List,
+                    elems: Rc::new(exceptions),
+                });
+                let exc_sym = self.sym("exceptions");
+                self.iattrs
+                    .borrow_mut()
+                    .entry(*cls)
+                    .or_default()
+                    .insert(exc_sym, vec![list_node]);
                 return Ok(vec![NV::V(Value::ExcInst {
                     id: crate::value::fresh_inst_id(),
                     cls: *cls,
-                    exceptions: Some(Rc::new(vec![Value::SynthSeq {
-                        kind: SeqKind::List,
-                        elems: Rc::new(exceptions),
-                    }])),
                 })]);
             }
         }

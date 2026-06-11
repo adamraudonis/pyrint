@@ -77,7 +77,7 @@ pub enum Value {
     /// `id` is python OBJECT IDENTITY like Inst: astroid materializes a
     /// fresh ExceptionInstance per inference, so cache boundnode keys
     /// never merge distinct receivers (cache replays clone the SAME id).
-    ExcInst { cls: GNode, id: InstId, exceptions: Option<Rc<Vec<Value>>> },
+    ExcInst { cls: GNode, id: InstId },
     BoundMethod { func: GNode, bound: Rc<Value> },
     /// FunctionModel.attr___get__ DescriptorBoundMethod
     /// (objectmodel.py:352-460): renders/keys like a BoundMethod on the

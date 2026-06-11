@@ -1239,7 +1239,7 @@ impl Engine {
     ) -> Option<Value> {
         let cls = self.proxied_class(owner)?;
         // Exception instance extras first
-        if let Value::ExcInst { exceptions, .. } = owner {
+        if let Value::ExcInst { .. } = owner {
             match name {
                 "args" => {
                     return Some(Value::SynthSeq {
@@ -1252,16 +1252,14 @@ impl Engine {
                     return Some(Value::Inst { cls: tb, id: crate::value::fresh_inst_id() });
                 }
                 "exceptions" => {
-                    if let Some(ex) = exceptions {
-                        return Some(Value::SynthSeq {
-                            kind: SeqKind::List,
-                            elems: Rc::new(ex.to_vec()),
-                        });
-                    }
                     // GroupExceptionInstanceModel.attr_exceptions
                     // (objectmodel.py:773-776): a FRESH empty Tuple per
                     // access — EXACT qname builtins.ExceptionGroup only
-                    // (BUILTIN_EXCEPTIONS, objectmodel.py:813)
+                    // (BUILTIN_EXCEPTIONS, objectmodel.py:813). Reached
+                    // only while NO except* site has run yet: the TryStar
+                    // assigned_stmts mutation writes the class
+                    // instance_attrs, which instance_getattr consults
+                    // FIRST (bases.py:249 instance_attr-before-model).
                     if self.qname(cls) == "builtins.ExceptionGroup" {
                         return Some(Value::SynthSeq {
                             kind: SeqKind::Tuple,
@@ -2732,7 +2730,6 @@ impl Engine {
                 return Value::ExcInst {
                     id: crate::value::fresh_inst_id(),
                     cls,
-                    exceptions: None,
                 };
             }
         }

@@ -38,6 +38,29 @@ impl Engine {
         res
     }
 
+    /// protocols.py:540-546 (excepthandler_assigned_stmts, TryStar branch):
+    /// `next(unpack_infer(extract_node("from builtins import ExceptionGroup
+    /// \nExceptionGroup")))` — the throwaway Name's _infer calls
+    /// LookupMixIn.lookup, INSERTING a never-hit-again (node, name) key
+    /// into the global 128-LRU and evicting the LRU entry. The throwaway
+    /// module build applies no transforms (no Name/ImportFrom/Module
+    /// predicates match -> no cache wipe) and every infer pull inside
+    /// unpack_infer is abandoned mid-stream (no global cache writes), so
+    /// this eviction is the ONLY persistent global side effect to replay.
+    pub fn lookup_burn_throwaway(&self, name: GSym) {
+        let node = self.alloc_synth_node(NodeKind::Unknown);
+        let tick = self.lookup_tick.get() + 1;
+        self.lookup_tick.set(tick);
+        let res: Rc<LookupResult> = Rc::new((node, Vec::new()));
+        let mut cache = self.lookup_cache.borrow_mut();
+        if cache.len() >= 128 {
+            if let Some((&oldest, _)) = cache.iter().min_by_key(|(_, e)| e.1) {
+                cache.remove(&oldest);
+            }
+        }
+        cache.insert((node, name), (res, tick));
+    }
+
     /// dispatch over the scope node type (notes/07 §7.3)
     pub fn scope_lookup(&self, scope: GNode, node: GNode, name: GSym, offset: i32) -> LookupResult {
         let md = self.md(scope.m);
