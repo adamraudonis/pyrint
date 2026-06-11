@@ -438,7 +438,9 @@ impl Engine {
             | Value::DictItems(_)
             | Value::DictKeys(_)
             | Value::DictValues(_)
-            | Value::Generator { .. } => self.synth_pins.borrow_mut().push(v.clone()),
+            | Value::Generator { .. }
+            // Super boundnode keys use the mro_type Rc pointer identity
+            | Value::Super { .. } => self.synth_pins.borrow_mut().push(v.clone()),
             _ => {}
         }
     }

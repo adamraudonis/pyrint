@@ -150,7 +150,7 @@ pub enum ValueKey {
     Generator(GNode, bool, usize),
     Property(GNode),
     Partial(GNode),
-    Super(GNode, GNode),
+    Super(usize),
     UnionType,
     /// synthetic nodes/proxies key by Rc POINTER identity (fresh python
     /// objects compare by id(); Value clones share the Rc => same object)
@@ -177,11 +177,14 @@ pub fn value_key(v: &Value) -> ValueKey {
         } => ValueKey::Generator(*func, *is_async, Rc::as_ptr(call_ctx) as usize),
         Value::Property { func, .. } => ValueKey::Property(*func),
         Value::Partial { func, .. } => ValueKey::Partial(*func),
-        Value::Super {
-            mro_pointer,
-            self_class,
-            ..
-        } => ValueKey::Super(*mro_pointer, *self_class),
+        // objects.Super has no __eq__: astroid's cache boundnode keys use
+        // the OBJECT id — every super() Call._infer builds a FRESH Super,
+        // so keys never merge across distinct super() sites/evaluations.
+        // The per-construction mro_type Rc is the identity (clones/cache
+        // replays share it). A structural (mro_pointer, self_class) key
+        // produced FALSE cache hits: the iron_os 498:17 super() property
+        // chain replayed a [U] entry written under line 465's Super.
+        Value::Super { mro_type, .. } => ValueKey::Super(Rc::as_ptr(mro_type) as usize),
         Value::UnionType => ValueKey::UnionType,
         Value::SynthConst(rc) => ValueKey::Synth(0, Rc::as_ptr(rc) as usize),
         Value::SynthSeq { elems, .. } => ValueKey::Synth(1, Rc::as_ptr(elems) as *const u8 as usize),
