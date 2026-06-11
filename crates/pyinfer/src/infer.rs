@@ -92,6 +92,14 @@ pub fn dedup_key(v: &Value) -> Option<DedupKey> {
         Value::Generator { call_ctx, .. } => {
             Some(DedupKey::Ptr(std::rc::Rc::as_ptr(call_ctx) as usize))
         }
+        // objects.DictItems/DictKeys/DictValues are NOT exact-class
+        // "Instance" (decorators.py:46) -> python id() dedup: cache
+        // replays share the DictRef Rc (same object), fresh
+        // materializations get a new one (django CallableChoiceIterator
+        // DictItems pairs).
+        Value::DictItems(r) => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(r) as *const () as usize)),
+        Value::DictKeys(r) => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(r) as *const () as usize)),
+        Value::DictValues(r) => Some(DedupKey::Ptr(std::rc::Rc::as_ptr(r) as *const () as usize)),
         // BoundMethod identity via the per-construction bound Rc
         Value::BoundMethod { func, bound } => {
             Some(DedupKey::BMId(*func, std::rc::Rc::as_ptr(bound) as *const () as usize))
