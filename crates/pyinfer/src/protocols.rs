@@ -2009,7 +2009,12 @@ impl Engine {
                     return Ok(results);
                 }
                 Err(ErrKind::Attribute) => continue,
-                Err(ErrKind::Inference) => return Ok(vec![Value::Uninferable]),
+                // `except InferenceError` (_base_nodes.py:650) catches
+                // NameInferenceError too (subclass) — elt raises from the
+                // tl-concat element re-inference land here
+                Err(ErrKind::Inference) | Err(ErrKind::NameError) => {
+                    return Ok(vec![Value::Uninferable])
+                }
                 Err(e) => return Err(e),
             }
         }
@@ -2201,7 +2206,21 @@ impl Engine {
                             for e in elems.iter().chain(oelems.iter()) {
                                 match e {
                                     NV::N(g) => {
-                                        for v in self.infer(*g, ctx).vals {
+                                        let flow = self.infer(*g, ctx);
+                                        // protocols.py:168 — elt.infer raises
+                                        // PROPAGATE out of the chain/list()
+                                        // (only Uninferable VALUES become
+                                        // UNATTACHED_UNKNOWN); the raise is
+                                        // caught by _infer_binary_operation's
+                                        // `except InferenceError` -> the whole
+                                        // binop yields ONE Uninferable
+                                        // (_base_nodes.py:650-652). `[entry.id]`
+                                        // concats with an unresolvable Name ->
+                                        // the AugAssign value is U, not List:N.
+                                        if let Some(err) = flow.err {
+                                            return Err(err);
+                                        }
+                                        for v in flow.vals {
                                             if v.is_uninferable() {
                                                 all.push(unk.clone());
                                             } else {
