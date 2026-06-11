@@ -680,6 +680,71 @@ pylint behavior — bugs are replicated.
      needs a per-node trace). (4) pylfunc NOTREE x3 + os.environ noise
      (irreducible). (5) six.with_metaclass still unwired (no diff
      evidence at N=1000).
+   - **phase 15 (diff-reduction round 14, sample=ALL files)**: 126 -> 64
+     diff lines (django 7/10, pylfunc 4/5, pandas 4/7, salt 5/13, airflow
+     7/17, sentry 1/2, core 8/10; tree gate 0, shell gate PASS x7, 135
+     probes PASS). LANDED (probe-verified):
+     (a) **snapshot OBJECT IDENTITY** (the StrEnum/mixin fix, core -47):
+     gen_snapshot.ser() now dedups by id() — `{"k":"Ref","r":i}` whenever
+     the SAME astroid object recurs (raw_building re-attaches one node at
+     many positions: builtins.type in every exception's __class__ locals,
+     OSError==IOError==EnvironmentError body re-appends, object.__base__);
+     "parfix" side map records nodes whose ser position != astroid's final
+     .parent (last add_local_node attach wins) and the loader rewires.
+     Identity is load-bearing: `cls != self` in _metaclass_lookup_attribute
+     (scoped_nodes.py:2383) — our duplicated type made MLA(type,'__new__')
+     run a spurious GAFM -> +4 bumps in EVERY enum-mixin call chain
+     (S(None) ##112 vs GT ##108 -> exact). CAUTION: a qn/content-based
+     LOADER dedup was tried first and OVER-MERGED distinct-but-identical
+     raw builds (sys.excepthook vs sys.__excepthook__ — astroid builds a
+     fresh FunctionDef PER MEMBER NAME; airflow structlog regressed) —
+     id()-at-ser-time is the only correct identity source. Snapshots
+     regenerated (7 files changed; sys.json BYTE-IDENTICAL via
+     regen_sys_snapshot.py — env reproducibility confirmed). MLA also
+     collects into an identity-deduped set (attrs=set(); id() since NodeNG
+     has no __eq__).
+     (b) **tl-concat element raises propagate** (protocols.py:161-172
+     _filter_uninferable_nodes lets elt.infer raises out of list(chain());
+     _base_nodes.py:650-652 `except InferenceError` — NameInferenceError
+     is a subclass — converts to ONE Uninferable and stops):
+     `conditions += [{**base, ...}]` with an uninferable element is U,
+     not List:N (core device_condition -19, django formsets/related).
+     (c) **namedtuple+Enum mixin count parity**: ClassDef.basenames is
+     [b.as_string() for b in bases] — the FULL text; our dotted_string
+     DROPPED Call bases so member fakes lost the namedtuple(...) base that
+     astroid's ancestors walks infer PLAIN through the real
+     collections.namedtuple (+13 bumps/member); + the namedtuple tip runs
+     util.safe_infer(extract_node("import collections;
+     collections.namedtuple")) PER INVOCATION (fresh throwaway module,
+     fresh-ctx Attribute chain) — probe ##61/##99 exact (airflow
+     simple_auth_manager).
+     (d) DictItems/DictKeys/DictValues path_wrapper identity dedup
+     (DedupKey::Ptr on the DictRef Rc — not exact-class "Instance", so
+     id() dedup; django test_choices).
+     (e) CPython-exact complex const binop folds (complexobject.c port:
+     Smith's _Py_c_quot, c_powi |n|<=100 repeated squaring, polar
+     _Py_c_pow; TypeError ops -> NotImplemented, ZeroDiv/ERANGE -> U)
+     — num_of(complex) was None -> U (pandas test_box_unbox/test_nanops).
+     (f) ModuleModel attrs hop through model_hop_node (fresh Const/List/
+     Unknown per access, objectmodel.py:167-241) — panel.__name__ chains
+     count-exact (core config/__init__ truncation point).
+     TOOLS: GETATTR/MLA/GAFM/IGA-ATTRS markers under PRYLINT_TRACE_INFER.
+     REMAINING (64 lines, by volume): (1) irreducible-by-construction
+     (~24): os.environ content/order (airflow conf 2/parser 3/setup_idea 3,
+     pylfunc 2), PYTHONHASHSEED set order (salt test_man 4), random.sample
+     RNG (salt deltaproxy 2), sys.path_importer_cache growth (salt lazy 3),
+     pylfunc NOTREE x3 (tree-fidelity owns). (2) context-dependent
+     cap/ctx singles, each needs its own prefix-trace session (~40):
+     core trailing-value flips (esphome/shelly/hassio/iron_os/test_entity
+     +1 value, test_history List:0-vs-U x3, config_validation ERRvsU,
+     ring TryStar List:1 — needs class-level exceptions storage),
+     django (middleware 'next' 2, model_enums 1, templatetags 2,
+     rasterfield 1, distapp 2, introspection 1, base.py __doc__ 1),
+     pandas (sas7bdat 2, to_latex 2, fiscal 2, indexers 1), salt http 4,
+     airflow (ctl format 1, spark_sql aug-chain 2, secrets_masker 4,
+     cli_parser 2), sentry test_snowflake 2. (3) six.with_metaclass
+     call-result synthesis still unwired; recursion guard still 350 (no
+     diff evidence at full-corpus sample).
    - **phase 14 (diff-reduction round 13, sample=ALL files)**: 298 -> 126
      diff lines (round logs /tmp/inferdump_all_round{1,2,3}.log; final:
      django 10/15, pylfunc 4/5, pandas 6/9, salt 6/14, airflow 8/22,
