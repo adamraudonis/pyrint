@@ -310,6 +310,11 @@ pub struct Engine {
     /// replay bump-free. Keyed by Rc pointer identity; cleared with the
     /// global inference cache.
     pub synth_hop_cache: RefCell<FxHashSet<(u8, usize, Option<GSym>, Option<u64>, Option<crate::value::ValueKey>)>>,
+    /// synth-hop entries whose first (miss) pull happened while the shared
+    /// counter was over the 100 cap: astroid's NodeNG.infer wrapper yields
+    /// Uninferable INSTEAD of the value (node_ng.py:161-167; no bump) and
+    /// caches [Uninferable] — replays of the same key must yield U too.
+    pub synth_hop_trunc: RefCell<FxHashSet<(u8, usize, Option<GSym>, Option<u64>, Option<crate::value::ValueKey>)>>,
     /// DictModel attr_items Tuple elements, built once per DictItems object
     /// (objectmodel.py:856-867) and reused — keyed by the DictRef pointer
     pub dictitems_elts_cache: RefCell<FxHashMap<usize, Rc<Vec<Value>>>>,
@@ -387,6 +392,7 @@ impl Engine {
             unattached_unknown: RefCell::new(None),
             known_bases_cache: RefCell::new(FxHashMap::default()),
             synth_hop_cache: RefCell::new(FxHashSet::default()),
+            synth_hop_trunc: RefCell::new(FxHashSet::default()),
             dictitems_elts_cache: RefCell::new(FxHashMap::default()),
             synth_pins: RefCell::new(Vec::new()),
         };

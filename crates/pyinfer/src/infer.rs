@@ -682,6 +682,51 @@ impl Engine {
                             .as_ref()
                             .map(|k| self.synth_hop_cache.borrow().contains(k))
                             .unwrap_or(true);
+                    // node_ng.py:160-167 applies to the synthetic stmt.infer
+                    // hop too: a cache-MISS pull whose first result arrives
+                    // while the shared counter is over the 100 cap yields
+                    // Uninferable INSTEAD of the value (NO bump) and caches
+                    // [Uninferable] — later replays of the same key yield U
+                    // (the model Tuple of `.args` at ni=104 -> U; the outer
+                    // path_wrapper then dedups it away — airflow
+                    // secrets_masker cap cascade). Proxies (hop_key None)
+                    // never enter NodeNG.infer and are exempt; cache-hit
+                    // replays bypass the limit loop entirely.
+                    let trunc_replay = is_replay
+                        && hop_key
+                            .as_ref()
+                            .map(|k| self.synth_hop_trunc.borrow().contains(k))
+                            .unwrap_or(false);
+                    let trunc_now = !is_replay
+                        && hop_key.is_some()
+                        && ctx.nodes_inferred.get() > MAX_INFERRED;
+                    let trunc_always = always_hop && ctx.nodes_inferred.get() > MAX_INFERRED;
+                    if trunc_replay || trunc_now || trunc_always {
+                        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                            eprintln!(
+                                "SYNTH-TRUNC replay={} ni={}",
+                                trunc_replay,
+                                ctx.nodes_inferred.get()
+                            );
+                        }
+                        inferred = true;
+                        if let Drive::Stop = sink(Value::Uninferable) {
+                            return End::Stopped;
+                        }
+                        // consumer pulled again -> the suspended wrapper
+                        // resumes past `break` and writes [Uninferable]
+                        if trunc_now {
+                            if let Some(k) = hop_key {
+                                self.pin_value_identity(v);
+                                if let Some(bn) = ctx.boundnode.borrow().as_ref() {
+                                    self.pin_value_identity(bn);
+                                }
+                                self.synth_hop_cache.borrow_mut().insert(k.clone());
+                                self.synth_hop_trunc.borrow_mut().insert(k);
+                            }
+                        }
+                        continue;
+                    }
                     // constraint filtering applies to synthetic stmt hops
                     // too (bases.py:184-189): the model's fresh Tuple for
                     // `self.args` under `... if self.args else ...` fails
