@@ -118,6 +118,14 @@ impl Default for OracleProc {
 }
 
 impl OracleProc {
+    /// Spawn the coprocess eagerly so the python interpreter boots while the
+    /// caller does other work; the first `query` then finds it ready instead
+    /// of paying the ~80ms interpreter start inline. Behavior is otherwise
+    /// identical to the lazy `ensure` on first query.
+    pub fn prespawn(&mut self) {
+        self.ensure();
+    }
+
     fn ensure(&mut self) -> bool {
         if self.proc.is_some() {
             return true;

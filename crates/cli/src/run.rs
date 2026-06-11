@@ -52,15 +52,6 @@ enum FileData {
     NeedsOracle,
 }
 
-enum Phase2Plan {
-    Tree(Box<ParsedFile>),
-    /// pylint's tokenize raised TokenError (E0001 tokenize form, no prefix)
-    TokenizeErr { line: i64, col: i64, msg: String },
-    /// astroid parses + tokenizes but ruff rejected: pylint would lint it;
-    /// we cannot (no tree). Counts as linted, emits nothing.
-    Untracked,
-}
-
 #[derive(Default, Clone, Copy)]
 struct Stats {
     fatal: u64,
@@ -155,7 +146,11 @@ pub fn run(opts: &RunOpts) -> i32 {
     // ---- phase 1: parse all files (rayon, results in file order) ------
     let mut data: Vec<FileData> = items.par_iter().map(parse_one).collect();
 
-    // batched oracle pass for ruff-rejected files
+    // batched oracle pass for ruff-rejected files. The subprocess (python
+    // interpreter boot + per-file verdicts) runs on its OWN thread so it
+    // overlaps with the phase-2 engine below — pure scheduling: verdicts
+    // only feed phase-1 messages and engine-less plans (TokenizeErr/
+    // Untracked); the engine thread's input sequence is verdict-independent.
     let oracle_idx: Vec<usize> = data
         .iter()
         .enumerate()
@@ -166,104 +161,44 @@ pub fn run(opts: &RunOpts) -> i32 {
         .iter()
         .map(|&i| (items[i].filepath.clone(), items[i].name.clone()))
         .collect();
-    let verdicts = oracle::run_oracle(&requests);
-    let mut phase2_extra: Vec<(usize, Phase2Plan)> = Vec::new();
-    for (&i, verdict) in oracle_idx.iter().zip(verdicts.into_iter()) {
-        match verdict {
-            Verdict::SyntaxError { line, offset, msg } => {
-                data[i] = FileData::Phase1 {
-                    msgid: "E0001",
-                    // `line or 1` / `col_offset or 0` (pylinter.py:1277-1278)
-                    line: if line == 0 { 1 } else { line },
-                    col: offset.unwrap_or(0),
-                    text: msg,
-                };
-            }
-            Verdict::ParseError { msg } => {
-                data[i] = FileData::Phase1 {
-                    msgid: "F0010",
-                    line: 1,
-                    col: 0,
-                    text: format!("error while code parsing: {msg}"),
-                };
-            }
-            Verdict::AstroidError => {
-                // F0002 astroid-error: "%s: %s" with the crash-report message
-                // (lint/utils.py:107-112). The crash file path is wall-clock
-                // dependent; we synthesize the same format without writing it.
-                let p = &items[i].filepath;
-                data[i] = FileData::Phase1 {
-                    msgid: "F0002",
-                    line: 1,
-                    col: 0,
-                    text: format!(
-                        "{p}: Fatal error while checking '{p}'. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in 'pylint-crash.txt'."
-                    ),
-                };
-            }
-            Verdict::Ok { tokenize: Some(t) } => {
-                phase2_extra.push((i, Phase2Plan::TokenizeErr { line: t.line, col: t.col, msg: t.msg }));
-            }
-            Verdict::Ok { tokenize: None } => {
-                eprintln!(
-                    "prylint: {} parses with CPython but not with ruff; module skipped",
-                    items[i].filepath
-                );
-                phase2_extra.push((i, Phase2Plan::Untracked));
-            }
-        }
-    }
 
-    // ---- flush phase-1 messages in file order --------------------------
-    let mut stats = Stats::default();
-    let mut phase2: Vec<(usize, Phase2Plan)> = Vec::new();
+    // split parse results: tree plans (engine thread) vs phase-1 messages
+    let mut trees: Vec<(usize, Box<ParsedFile>)> = Vec::new();
+    let mut phase1: Vec<(usize, &'static str, i64, i64, String)> = Vec::new();
     for (i, d) in data.into_iter().enumerate() {
         match d {
-            FileData::Phase1 { msgid, line, col, text } => {
-                let idx = store().by_msgid[msgid];
-                // base FileState during phase 1: global state only
-                if !is_message_enabled(&global, None, idx, Some(line.max(0) as u32)) {
-                    continue;
-                }
-                stats.count(msgid);
-                reporter.handle(&OutMsg {
-                    module: items[i].name.clone(),
-                    // node-less: abspath = current_file = FileItem.filepath
-                    // as discovered (relative): cwd strip is a no-op
-                    path: items[i].filepath.replacen(&strip_prefix, "", 1),
-                    line,
-                    col,
-                    msgid,
-                    symbol: msgstore::def(idx).symbol,
-                    text,
-                });
-            }
-            FileData::Parsed(p) => phase2.push((i, Phase2Plan::Tree(p))),
-            FileData::NeedsOracle => {} // replaced above
+            FileData::Parsed(p) => trees.push((i, p)),
+            FileData::Phase1 { msgid, line, col, text } => phase1.push((i, msgid, line, col, text)),
+            FileData::NeedsOracle => {} // verdict handled below
         }
     }
-    phase2.extend(phase2_extra);
-    phase2.sort_by_key(|(i, _)| *i);
 
-    // ---- phase 2: per-module checks (sequential on a big-stack engine
-    // thread: astroid's caches are process-global and order-sensitive, and
-    // checker inference must run in pylint's file order) ------------------
     // prepare_checkers (pylinter.py:588-598): the unicode raw checker is
     // kept iff any of its messages is enabled package-wise
     let unicode_prepared = ["E2501", "E2502", "C2503", "E2510", "E2511", "E2512", "E2513", "E2514", "E2515"]
         .iter()
         .any(|m| global.enabled(store().by_msgid[m]));
 
-    let results: Vec<ModuleOut> = std::thread::scope(|scope| {
+    // ---- phase 2: per-module checks (sequential on a big-stack engine
+    // thread: astroid's caches are process-global and order-sensitive, and
+    // checker inference must run in pylint's file order) ------------------
+    let mut stats = Stats::default();
+    let mut extras: Vec<(usize, ModuleOut)> = Vec::new();
+    let results: Vec<(usize, ModuleOut)> = std::thread::scope(|scope| {
         let items = &items;
-        let phase2 = &phase2;
+        let trees = &trees;
         let global = &global;
         let strip_prefix = &strip_prefix;
         let cwd = std::path::PathBuf::from(&cwd);
-        std::thread::Builder::new()
+        let engine_thread = std::thread::Builder::new()
             .stack_size(1 << 30)
             .spawn_scoped(scope, move || {
                 let engine = pyinfer::Engine::new(&cwd);
+                let mut lint_run = pycheckers::walker::LintRun::default();
+                let mut oracle_proc = oracle::OracleProc::default();
+                // boot the import-oracle interpreter NOW so it loads while
+                // the engine works; first query then responds immediately
+                oracle_proc.prespawn();
                 // pylint phase 1 builds EVERY file's AST through the astroid
                 // manager in file order (pylinter.get_ast -> ast_from_file
                 // source=True); the cache state at check time depends on it.
@@ -275,32 +210,113 @@ pub fn run(opts: &RunOpts) -> i32 {
                             .ok()
                     })
                     .collect();
-                let mut lint_run = pycheckers::walker::LintRun::default();
-                let mut oracle_proc = oracle::OracleProc::default();
-                phase2
+                trees
                     .iter()
-                    .map(|(i, plan)| {
-                        lint_one(
-                            &items[*i],
-                            plan,
-                            global,
-                            strip_prefix,
-                            unicode_prepared,
-                            &engine,
-                            mods[*i],
-                            &mut lint_run,
-                            &mut oracle_proc,
+                    .map(|(i, p)| {
+                        (
+                            *i,
+                            lint_tree(
+                                &items[*i],
+                                p,
+                                global,
+                                strip_prefix,
+                                unicode_prepared,
+                                &engine,
+                                mods[*i],
+                                &mut lint_run,
+                                &mut oracle_proc,
+                            ),
                         )
                     })
-                    .collect()
+                    .collect::<Vec<_>>()
             })
-            .expect("spawn phase-2 thread")
-            .join()
-            .expect("phase-2 thread panicked")
+            .expect("spawn phase-2 thread");
+
+        // oracle verdicts (subprocess runs concurrently with the engine)
+        let verdicts = oracle::run_oracle(&requests);
+        for (&i, verdict) in oracle_idx.iter().zip(verdicts.into_iter()) {
+            match verdict {
+                Verdict::SyntaxError { line, offset, msg } => {
+                    // `line or 1` / `col_offset or 0` (pylinter.py:1277-1278)
+                    phase1.push((
+                        i,
+                        "E0001",
+                        if line == 0 { 1 } else { line },
+                        offset.unwrap_or(0),
+                        msg,
+                    ));
+                }
+                Verdict::ParseError { msg } => {
+                    phase1.push((i, "F0010", 1, 0, format!("error while code parsing: {msg}")));
+                }
+                Verdict::AstroidError => {
+                    // F0002 astroid-error: "%s: %s" with the crash-report
+                    // message (lint/utils.py:107-112). The crash file path is
+                    // wall-clock dependent; we synthesize the same format
+                    // without writing it.
+                    let p = &items[i].filepath;
+                    phase1.push((
+                        i,
+                        "F0002",
+                        1,
+                        0,
+                        format!(
+                            "{p}: Fatal error while checking '{p}'. Please open an issue in our bug tracker so we address this. There is a pre-filled template that you can use in 'pylint-crash.txt'."
+                        ),
+                    ));
+                }
+                Verdict::Ok { tokenize: Some(t) } => {
+                    extras.push((
+                        i,
+                        lint_tokenize_err(&items[i], t.line, t.col, &t.msg, global, strip_prefix),
+                    ));
+                }
+                Verdict::Ok { tokenize: None } => {
+                    eprintln!(
+                        "prylint: {} parses with CPython but not with ruff; module skipped",
+                        items[i].filepath
+                    );
+                    // astroid parses + tokenizes but ruff rejected: pylint
+                    // would lint it; we cannot (no tree). Counts as linted,
+                    // emits nothing.
+                    extras.push((i, ModuleOut { msgs: Vec::new(), stats: Stats::default(), linted: true }));
+                }
+            }
+        }
+
+        // ---- flush phase-1 messages in file order (before any phase-2
+        // output is written; the engine results are merged below) ---------
+        phase1.sort_by_key(|(i, ..)| *i);
+        for (i, msgid, line, col, text) in &phase1 {
+            let idx = store().by_msgid[msgid];
+            // base FileState during phase 1: global state only
+            if !is_message_enabled(global, None, idx, Some((*line).max(0) as u32)) {
+                continue;
+            }
+            stats.count(msgid);
+            reporter.handle(&OutMsg {
+                module: items[*i].name.clone(),
+                // node-less: abspath = current_file = FileItem.filepath
+                // as discovered (relative): cwd strip is a no-op
+                path: items[*i].filepath.replacen(strip_prefix, "", 1),
+                line: *line,
+                col: *col,
+                msgid,
+                symbol: msgstore::def(idx).symbol,
+                text: text.clone(),
+            });
+        }
+
+        engine_thread.join().expect("phase-2 thread panicked")
     });
 
+    // merge engine results with oracle-derived extras, in file order
+    let mut merged: Vec<(usize, ModuleOut)> = results;
+    merged.extend(extras);
+    merged.sort_by_key(|(i, _)| *i);
+
     let mut any_linted = false;
-    for r in &results {
+    for (_, r) in &merged {
         any_linted |= r.linted;
         stats.fatal += r.stats.fatal;
         stats.error += r.stats.error;
@@ -410,12 +426,45 @@ fn parse_one(item: &FileItem) -> FileData {
     }
 }
 
-/// Phase-2 work for one module (`_lint_file` + `_check_astroid_module`,
+/// Phase-2 outcome for a ruff-rejected file where pylint's tokenize raised
+/// TokenError (E0001 tokenize form, no prefix). Engine-less by construction.
+fn lint_tokenize_err(
+    item: &FileItem,
+    line: i64,
+    col: i64,
+    msg: &str,
+    global: &GlobalState,
+    strip_prefix: &str,
+) -> ModuleOut {
+    let mut out = ModuleOut { msgs: Vec::new(), stats: Stats::default(), linted: true };
+    // tokenize.TokenError -> E0001 with args = ex.args[0] verbatim
+    // (NO "Parsing failed:" prefix), line/col from ex.args[1]
+    // (pylinter.py:1080-1090); module skipped afterwards
+    let idx = store().by_msgid["E0001"];
+    // fresh FileState exists in pylint here, but with no pragmas
+    // processed the lookup reduces to global state
+    if is_message_enabled(global, None, idx, Some(line.max(0) as u32)) {
+        out.stats.count("E0001");
+        out.msgs.push(OutMsg {
+            module: item.name.clone(),
+            // current_file was reset to module.file (absolute)
+            path: discover::absolute(&item.filepath).replacen(strip_prefix, "", 1),
+            line: if line == 0 { 1 } else { line },
+            col,
+            msgid: "E0001",
+            symbol: "syntax-error",
+            text: msg.to_string(),
+        });
+    }
+    out
+}
+
+/// Phase-2 work for one parsed module (`_lint_file` + `_check_astroid_module`,
 /// pylinter.py:798-830 / 1062-1106).
 #[allow(clippy::too_many_arguments)]
-fn lint_one(
+fn lint_tree(
     item: &FileItem,
-    plan: &Phase2Plan,
+    p: &ParsedFile,
     global: &GlobalState,
     strip_prefix: &str,
     unicode_prepared: bool,
@@ -425,31 +474,8 @@ fn lint_one(
     oracle_proc: &mut oracle::OracleProc,
 ) -> ModuleOut {
     let mut out = ModuleOut { msgs: Vec::new(), stats: Stats::default(), linted: true };
-    match plan {
-        Phase2Plan::Untracked => out,
-        Phase2Plan::TokenizeErr { line, col, msg } => {
-            // tokenize.TokenError -> E0001 with args = ex.args[0] verbatim
-            // (NO "Parsing failed:" prefix), line/col from ex.args[1]
-            // (pylinter.py:1080-1090); module skipped afterwards
-            let idx = store().by_msgid["E0001"];
-            // fresh FileState exists in pylint here, but with no pragmas
-            // processed the lookup reduces to global state
-            if is_message_enabled(global, None, idx, Some((*line).max(0) as u32)) {
-                out.stats.count("E0001");
-                out.msgs.push(OutMsg {
-                    module: item.name.clone(),
-                    // current_file was reset to module.file (absolute)
-                    path: discover::absolute(&item.filepath).replacen(strip_prefix, "", 1),
-                    line: if *line == 0 { 1 } else { *line },
-                    col: *col,
-                    msgid: "E0001",
-                    symbol: "syntax-error",
-                    text: msg.clone(),
-                });
-            }
-            out
-        }
-        Phase2Plan::Tree(p) => {
+    {
+        {
             let mut fs = FileState::new(&p.tree);
             let module = item.name.clone();
             let path = p.abspath.replacen(strip_prefix, "", 1);
