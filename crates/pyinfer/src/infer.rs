@@ -740,9 +740,13 @@ impl Engine {
         self.infer_stmts_to(&stmts, Some(&ctx2), Some(frame), sink)
     }
 
-    /// parent_function.lookup(name) — without going through node.scope()
-    fn lookup_in(&self, scope: GNode, node: GNode, name: GSym) -> Vec<NV> {
-        self.scope_lookup(scope, node, name, 0).1
+    /// `parent_function.lookup(name)` (node_ng.py lookup: `return
+    /// self.scope().scope_lookup(self, name)`) — the BASE NODE for
+    /// filtering is the FUNCTION itself, not the original Name: the
+    /// is_from_decorator same-statement filter does NOT re-fire, so the
+    /// function's own params are visible (lambda-in-decorator case).
+    fn lookup_in(&self, scope: GNode, _node: GNode, name: GSym) -> Vec<NV> {
+        self.scope_lookup(scope, scope, name, 0).1
     }
 
     fn higher_function_scope(&self, scope: GNode) -> Option<GNode> {
