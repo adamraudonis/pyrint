@@ -1279,7 +1279,19 @@ impl Engine {
             .cloned();
         if let Some(vals) = vals {
             if !vals.is_empty() {
-                let nv: Vec<NV> = vals.into_iter().map(NV::N).collect();
+                let mut nv: Vec<NV> = vals.into_iter().map(NV::N).collect();
+                // FunctionDef.getattr APPENDS the special-attribute model
+                // result to the instance_attrs list (scoped_nodes.py:
+                // 1303-1306: `found_attrs.append(special_attributes
+                // .lookup(name))`) — `view.__doc__` yields the AssignAttr
+                // value AND the model Const (django as_view pair)
+                let name_str = self.sname(name);
+                if let Some(mv) = self.function_model_attr(func, &name_str) {
+                    nv.push(match &mv {
+                        Value::Node(g) => NV::N(*g),
+                        _ => NV::V(mv),
+                    });
+                }
                 let ctx2 = copy_context(ctx);
                 ctx2.lookupname.set(Some(name));
                 return self.infer_stmts_to(&nv, Some(&ctx2), None, sink);
@@ -1305,7 +1317,7 @@ impl Engine {
         name: GSym,
         ctx: Option<&Rc<Ctx>>,
     ) -> Result<Flow, ErrKind> {
-        // instance_attrs first (scoped_nodes.py:1298-1311)
+        // instance_attrs + appended model attr (scoped_nodes.py:1298-1311)
         if let Some(vals) = self
             .iattrs
             .borrow()
@@ -1314,7 +1326,14 @@ impl Engine {
             .cloned()
         {
             if !vals.is_empty() {
-                let nv: Vec<NV> = vals.into_iter().map(NV::N).collect();
+                let mut nv: Vec<NV> = vals.into_iter().map(NV::N).collect();
+                let name_str = self.sname(name);
+                if let Some(mv) = self.function_model_attr(func, &name_str) {
+                    nv.push(match &mv {
+                        Value::Node(g) => NV::N(*g),
+                        _ => NV::V(mv),
+                    });
+                }
                 let ctx2 = copy_context(ctx);
                 ctx2.lookupname.set(Some(name));
                 return Ok(self.infer_stmts(&nv, Some(&ctx2), None));
@@ -1362,20 +1381,19 @@ impl Engine {
             }
         }
         if let Some(v) = self.function_model_attr(func, &name_str) {
-            // FunctionDef.igetattr runs the model node through
-            // _infer_stmts (scoped_nodes.py:1298-1311): fresh Unknown
-            // nodes hop to Uninferable (the Bound/UnboundMethod model
-            // path yields them RAW instead — see method_igetattr)
-            if let Value::Node(g) = &v {
-                if self.kind_is(*g, |k| matches!(k, NodeKind::Unknown)) {
-                    let c = match ctx {
-                        Some(c) => Rc::clone(c),
-                        None => Ctx::new(),
-                    };
-                    return Ok(self.infer(*g, &c));
-                }
-            }
-            return Ok(Flow::one(v));
+            // FunctionDef.igetattr runs the model result through
+            // _infer_stmts (scoped_nodes.py:1298-1311): fresh nodes
+            // (Unknown -> U, Const/Tuple/Dict) get a full stmt.infer hop
+            // (+1 bump); proxies (DescBM) pass through hop-free. The
+            // Bound/UnboundMethod model path yields RAW instead — see
+            // method_igetattr.
+            let nv = vec![match &v {
+                Value::Node(g) => NV::N(*g),
+                _ => NV::V(v),
+            }];
+            let ctx2 = copy_context(ctx);
+            ctx2.lookupname.set(Some(name));
+            return Ok(self.infer_stmts(&nv, Some(&ctx2), None));
         }
         Err(ErrKind::Inference)
     }
@@ -2851,7 +2869,23 @@ impl Engine {
             "__module__" => Value::SynthConst(Rc::new(ConstValue::Str(
                 self.md(cls.m).name.clone().into(),
             ))),
-            "__doc__" => Value::SynthConst(Rc::new(ConstValue::None)),
+            // ClassModel.attr___doc__ (objectmodel.py:511-513):
+            // Const(getattr(self._instance.doc_node, "value", None))
+            "__doc__" => {
+                let doc = {
+                    let md = self.md(cls.m);
+                    match &md.tree.nodes[cls.n.idx()].kind {
+                        NodeKind::ClassDef(d) => d.doc_node.and_then(|dn| {
+                            match &md.tree.nodes[dn.idx()].kind {
+                                NodeKind::Const(c) => Some(c.clone()),
+                                _ => None,
+                            }
+                        }),
+                        _ => None,
+                    }
+                };
+                Value::SynthConst(Rc::new(doc.unwrap_or(ConstValue::None)))
+            }
             "__mro__" => match self.mro(cls, ctx) {
                 Ok(m) => Value::SynthSeq {
                     kind: SeqKind::Tuple,
