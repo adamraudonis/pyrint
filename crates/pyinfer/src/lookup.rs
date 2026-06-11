@@ -23,6 +23,7 @@ impl Engine {
         let tick = self.lookup_tick.get() + 1;
         self.lookup_tick.set(tick);
         if let Some(entry) = self.lookup_cache.borrow_mut().get_mut(&(node, name)) {
+            self.lookup_evict.borrow_mut().touch(entry.1, tick, (node, name));
             entry.1 = tick;
             return Rc::clone(&entry.0);
         }
@@ -30,11 +31,15 @@ impl Engine {
         let res = Rc::new(self.scope_lookup(scope, node, name, 0));
         let mut cache = self.lookup_cache.borrow_mut();
         if cache.len() >= 128 {
-            if let Some((&oldest, _)) = cache.iter().min_by_key(|(_, e)| e.1) {
+            if let Some(oldest) = self.lookup_evict.borrow_mut().pop_lru() {
                 cache.remove(&oldest);
             }
         }
-        cache.insert((node, name), (Rc::clone(&res), tick));
+        let mut evict = self.lookup_evict.borrow_mut();
+        if let Some(old) = cache.insert((node, name), (Rc::clone(&res), tick)) {
+            evict.forget(old.1);
+        }
+        evict.insert(tick, (node, name));
         res
     }
 
@@ -54,11 +59,15 @@ impl Engine {
         let res: Rc<LookupResult> = Rc::new((node, Vec::new()));
         let mut cache = self.lookup_cache.borrow_mut();
         if cache.len() >= 128 {
-            if let Some((&oldest, _)) = cache.iter().min_by_key(|(_, e)| e.1) {
+            if let Some(oldest) = self.lookup_evict.borrow_mut().pop_lru() {
                 cache.remove(&oldest);
             }
         }
-        cache.insert((node, name), (res, tick));
+        let mut evict = self.lookup_evict.borrow_mut();
+        if let Some(old) = cache.insert((node, name), (res, tick)) {
+            evict.forget(old.1);
+        }
+        evict.insert(tick, (node, name));
     }
 
     /// dispatch over the scope node type (notes/07 §7.3)

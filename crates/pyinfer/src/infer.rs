@@ -175,7 +175,7 @@ impl Engine {
     fn infer_entry_to(&self, node: GNode, ctx_in: &Rc<Ctx>, sink: &mut Sink) -> End {
         // debug trace (PRYLINT_TRACE_INFER) mirroring the astroid
         // NodeNG.infer monkeypatch used for bump-parity debugging
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             let md = self.md(node.m);
             let mut kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
             // model-hop stand-ins: label by the VALUE kind so traces align
@@ -326,7 +326,7 @@ impl Engine {
                     // while suspended: NO cache write (probe: os.path attr
                     // chain stays uncached after a capped abspath call).
                     *cache_after_trunc = matches!(d, Drive::Go);
-                    if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                    if crate::graph::trace_infer() {
                         eprintln!("TRUNC i={} ni={} d={:?}", i, ctx2.nodes_inferred.get(), d);
                     }
                     return Drive::Stop;
@@ -346,7 +346,7 @@ impl Engine {
             })
         };
         let trace_write = |n: usize| {
-            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            if crate::graph::trace_infer() {
                 let md = self.md(node.m);
                 let kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
                 let name = self.node_name(node).unwrap_or_default();
@@ -381,7 +381,7 @@ impl Engine {
             // wrapper is then dropped while suspended, so its tail cache
             // write never runs. Consumer abandonment wins over Done.
             End::Done if consumer_stopped => {
-                if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                if crate::graph::trace_infer() {
                     eprintln!("NOCACHE-CONSUMERSTOP");
                 }
                 End::Stopped
@@ -702,7 +702,7 @@ impl Engine {
                         && ctx.nodes_inferred.get() > MAX_INFERRED;
                     let trunc_always = always_hop && ctx.nodes_inferred.get() > MAX_INFERRED;
                     if trunc_replay || trunc_now || trunc_always {
-                        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                        if crate::graph::trace_infer() {
                             eprintln!(
                                 "SYNTH-TRUNC replay={} ni={}",
                                 trunc_replay,
@@ -2125,7 +2125,7 @@ impl Engine {
             self.pin_value_identity(bn);
         }
         if ctx.nodes_inferred.get() > MAX_INFERRED {
-            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            if crate::graph::trace_infer() {
                 eprintln!("SYNTH-TRUNC drain ni={}", ctx.nodes_inferred.get());
             }
             self.synth_hop_cache.borrow_mut().insert(key.clone());
@@ -2134,7 +2134,7 @@ impl Engine {
         }
         self.synth_hop_cache.borrow_mut().insert(key);
         ctx.bump_inferred();
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             eprintln!("SYNTHDRAIN bump tag={} ni={}", tag, ctx.nodes_inferred.get());
         }
         yielded
@@ -2157,10 +2157,10 @@ impl Engine {
                 }
                 self.synth_hop_cache.borrow_mut().insert(key);
                 ctx.bump_inferred();
-                if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                if crate::graph::trace_infer() {
                     eprintln!("SYNTHPULL bump tag={} ni={}", tag, ctx.nodes_inferred.get());
                 }
-            } else if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            } else if crate::graph::trace_infer() {
                 eprintln!("SYNTHPULL replay tag={}", tag);
             }
         }

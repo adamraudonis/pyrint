@@ -25,6 +25,76 @@ use crate::pyenv::{self, PyEnv};
 use crate::snapshot::{load_snapshot, EInf};
 use crate::value::{ErrKind, GNode, GSym, ModId, Value, ValueKey, NV};
 
+/// Cached PRYLINT_TRACE_INFER check: `std::env::var` (getenv + String
+/// alloc) showed up at >10% inclusive in the django profile from the
+/// per-call checks sprinkled through inference. The PRYLINT_TRACE_START
+/// debug aid flips it on mid-run via `set_trace_infer`.
+pub fn trace_infer() -> bool {
+    TRACE_INIT.call_once(|| {
+        TRACE_INFER.store(
+            std::env::var("PRYLINT_TRACE_INFER").is_ok(),
+            std::sync::atomic::Ordering::Relaxed,
+        );
+    });
+    TRACE_INFER.load(std::sync::atomic::Ordering::Relaxed)
+}
+
+static TRACE_INFER: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
+static TRACE_INIT: std::sync::Once = std::sync::Once::new();
+
+/// Recency index for the lru_cache mirrors: O(log n) eviction instead of
+/// the old O(n) `min_by_key` scan over the whole cache. Ticks are unique
+/// per live entry, so popping the minimum LIVE tick selects EXACTLY the
+/// same entry the linear scan did — eviction order (= semantics, via
+/// re-miss recompute effects) is unchanged.
+pub struct EvictIndex<K> {
+    heap: std::collections::BinaryHeap<std::cmp::Reverse<u64>>,
+    by_tick: FxHashMap<u64, K>,
+    compact_at: usize,
+}
+
+impl<K: Copy + Eq + std::hash::Hash> EvictIndex<K> {
+    pub fn new(cap: usize) -> Self {
+        EvictIndex {
+            heap: std::collections::BinaryHeap::new(),
+            by_tick: FxHashMap::default(),
+            compact_at: 8 * cap.max(64),
+        }
+    }
+    /// record a refreshed recency (lru hit): old tick dies, new tick lives
+    pub fn touch(&mut self, old_tick: u64, new_tick: u64, k: K) {
+        self.by_tick.remove(&old_tick);
+        self.insert(new_tick, k);
+    }
+    pub fn insert(&mut self, tick: u64, k: K) {
+        self.by_tick.insert(tick, k);
+        self.heap.push(std::cmp::Reverse(tick));
+        if self.heap.len() > self.compact_at {
+            self.heap = self.by_tick.keys().map(|&t| std::cmp::Reverse(t)).collect();
+        }
+    }
+    /// drop a tick whose cache entry was overwritten (recursive re-insert
+    /// of the same key during the miss computation)
+    pub fn forget(&mut self, tick: u64) {
+        self.by_tick.remove(&tick);
+    }
+    /// pop the key with the minimum live tick (the LRU entry)
+    pub fn pop_lru(&mut self) -> Option<K> {
+        while let Some(std::cmp::Reverse(t)) = self.heap.pop() {
+            if let Some(k) = self.by_tick.remove(&t) {
+                return Some(k);
+            }
+        }
+        None
+    }
+}
+
+/// Turn the trace flag on at runtime (PRYLINT_TRACE_START debug aid).
+pub fn set_trace_infer(on: bool) {
+    let _ = trace_infer(); // force env init first so it can't overwrite us
+    TRACE_INFER.store(on, std::sync::atomic::Ordering::Relaxed);
+}
+
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum FType {
     Function,
@@ -175,6 +245,8 @@ pub struct Engine {
     pub lookup_cache:
         RefCell<FxHashMap<(GNode, GSym), (Rc<crate::lookup::LookupResult>, u64)>>,
     pub lookup_tick: Cell<u64>,
+    /// recency index for lookup_cache eviction (same order, O(log n))
+    pub lookup_evict: RefCell<EvictIndex<(GNode, GSym)>>,
     /// FunctionDef.type cached_property
     pub ftype_cache: RefCell<FxHashMap<GNode, FType>>,
     /// ClassDef._type memo (scoped_nodes.py:1759-1762 — persists for the run)
@@ -191,6 +263,8 @@ pub struct Engine {
         FxHashMap<(GNode, GSym, Option<usize>), (Rc<Vec<crate::value::NV>>, u64, Option<Rc<Ctx>>)>,
     >,
     pub metalookup_tick: Cell<u64>,
+    /// recency index for metalookup_cache eviction (same order, O(log n))
+    pub metalookup_evict: RefCell<EvictIndex<(GNode, GSym, Option<usize>)>>,
     /// inference-tip recursion guard + cache (inference_tip.py:37-86).
     /// Key: (func id, node, ctx identity) — ctx identity is 0 for the
     /// empty-context normalization (`if context.is_empty(): context = None`,
@@ -373,11 +447,13 @@ impl Engine {
             inf_cache: RefCell::new(FxHashMap::default()),
             lookup_cache: RefCell::new(FxHashMap::default()),
             lookup_tick: Cell::new(0),
+            lookup_evict: RefCell::new(EvictIndex::new(128)),
             ftype_cache: RefCell::new(FxHashMap::default()),
             cls_type_cache: RefCell::new(FxHashMap::default()),
             slots_cache: RefCell::new(FxHashMap::default()),
             metalookup_cache: RefCell::new(FxHashMap::default()),
             metalookup_tick: Cell::new(0),
+            metalookup_evict: RefCell::new(EvictIndex::new(1024)),
             tip_guard: RefCell::new(FxHashSet::default()),
             tip_cache: RefCell::new(FxHashMap::default()),
             tip_order: RefCell::new(std::collections::VecDeque::new()),
@@ -429,6 +505,11 @@ impl Engine {
     }
     pub fn sname(&self, s: GSym) -> String {
         self.interner.borrow().get(s).to_string()
+    }
+    /// run `f` against the interned str WITHOUT allocating a String.
+    /// `f` must not touch the interner (the borrow is held across the call).
+    pub fn with_sname<R>(&self, s: GSym, f: impl FnOnce(&str) -> R) -> R {
+        f(self.interner.borrow().get(s))
     }
     /// translate a tree-local sym to the global interner
     pub fn g(&self, md: &Module, sym: pyast::tree::Sym) -> GSym {
@@ -2279,7 +2360,7 @@ impl Engine {
     }
 
     fn compute_all_slots(&self, cls: GNode) -> Result<Option<Rc<Vec<String>>>, ()> {
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             eprintln!("ALLSLOTS {}", self.qname(cls));
         }
         let mro = match self.mro(cls, None) {
@@ -2313,7 +2394,7 @@ impl Engine {
     /// no (or uninferable) __slots__; Some(vec) = slot value strings (empty
     /// = explicitly empty slots).
     fn class_slots_of(&self, cls: GNode) -> Option<Vec<String>> {
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             eprintln!("SLOTSOF {}", self.qname(cls));
         }
         let slots_sym = self.sym("__slots__");

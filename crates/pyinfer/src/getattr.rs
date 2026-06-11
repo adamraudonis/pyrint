@@ -39,7 +39,7 @@ const POSSIBLE_PROPERTIES: [&str; 12] = [
 impl Engine {
     /// TEMP debug: high-level walk markers under PRYLINT_TRACE_INFER
     pub fn twalk(&self, tag: &str, cls: GNode) {
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             eprintln!("WALK {} {}", tag, self.qname(cls));
         }
     }
@@ -366,6 +366,16 @@ impl Engine {
             .unwrap_or_default()
     }
 
+    /// `class_locals_get` without the per-call Vec clone (hot in
+    /// class_getattr: one call per ancestor per attribute lookup)
+    fn class_locals_extend(&self, cls: GNode, name: GSym, out: &mut Vec<NV>) {
+        let md = self.md(cls.m);
+        let locals = md.locals.borrow();
+        if let Some(l) = locals.get(&cls.n).and_then(|l| l.get(&name)) {
+            out.extend(l.iter().map(|&g| NV::N(g)));
+        }
+    }
+
     pub fn class_getattr(
         &self,
         cls: GNode,
@@ -373,21 +383,30 @@ impl Engine {
         ctx: Option<&Rc<Ctx>>,
         class_context: bool,
     ) -> Result<Vec<NV>, ErrKind> {
-        let name_str = self.sname(name);
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
-            eprintln!("GETATTR {} .{} cc={}", self.qname(cls), name_str, class_context);
+        // classify the name once against the borrowed interned str — this
+        // function is hot enough (11% self time on django) that the former
+        // per-call `sname` String alloc was measurable
+        let (name_is_empty, which, is_model_attr) = self.with_sname(name, |ns| {
+            (
+                ns.is_empty(),
+                // ClassDef.implicit_locals(): __module__/__qualname__/
+                // __annotations__ Consts/Unknown added at class
+                // construction -> FIRST in locals
+                match ns {
+                    "__module__" => Some(0u8),
+                    "__qualname__" => Some(1),
+                    "__annotations__" => Some(2),
+                    _ => None,
+                },
+                CLASS_MODEL_ATTRS.contains(&ns),
+            )
+        });
+        if crate::graph::trace_infer() {
+            eprintln!("GETATTR {} .{} cc={}", self.qname(cls), self.sname(name), class_context);
         }
-        if name_str.is_empty() {
+        if name_is_empty {
             return Err(ErrKind::Attribute);
         }
-        // ClassDef.implicit_locals(): __module__/__qualname__/__annotations__
-        // Consts/Unknown added at class construction -> FIRST in locals
-        let which: Option<u8> = match name_str.as_str() {
-            "__module__" => Some(0),
-            "__qualname__" => Some(1),
-            "__annotations__" => Some(2),
-            _ => None,
-        };
         let mut values: Vec<NV> = Vec::new();
         // snapshot classes already carry the implicit consts as real
         // serialized locals (raw-built ClassDef.__init__ ran in astroid)
@@ -398,16 +417,17 @@ impl Engine {
                 values.push(NV::N(self.implicit_class_local(cls, w)));
             }
         }
-        values.extend(self.class_locals_get(cls, name).into_iter().map(NV::N));
+        self.class_locals_extend(cls, name, &mut values);
         for anc in self.ancestors(cls, true, ctx) {
             if let Some(w) = which {
                 if needs_implicit(self, anc) {
                     values.push(NV::N(self.implicit_class_local(anc, w)));
                 }
             }
-            values.extend(self.class_locals_get(anc, name).into_iter().map(NV::N));
+            self.class_locals_extend(anc, name, &mut values);
         }
-        if CLASS_MODEL_ATTRS.contains(&name_str.as_str()) && class_context && values.is_empty() {
+        if is_model_attr && class_context && values.is_empty() {
+            let name_str = self.sname(name);
             let v = self.class_model_attr(cls, &name_str, ctx);
             // objectmodel.py ClassModel: most attrs are FRESH NODES (Const /
             // Tuple / Dict / Unknown / ClassDef) built per access — they get
@@ -468,20 +488,25 @@ impl Engine {
         let tick = self.metalookup_tick.get() + 1;
         self.metalookup_tick.set(tick);
         if let Some(entry) = self.metalookup_cache.borrow_mut().get_mut(&key) {
+            self.metalookup_evict.borrow_mut().touch(entry.1, tick, key);
             entry.1 = tick; // refresh recency (lru_cache hit)
             return entry.0.as_ref().clone();
         }
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             eprintln!("MLA {} .{}", self.qname(cls), self.sname(name));
         }
         let out = self.metaclass_lookup_attribute_uncached(cls, name, ctx);
         let mut cache = self.metalookup_cache.borrow_mut();
         if cache.len() >= 1024 {
-            if let Some((&oldest, _)) = cache.iter().min_by_key(|(_, e)| e.1) {
+            if let Some(oldest) = self.metalookup_evict.borrow_mut().pop_lru() {
                 cache.remove(&oldest);
             }
         }
-        cache.insert(key, (Rc::new(out.clone()), tick, ctx.map(Rc::clone)));
+        let mut evict = self.metalookup_evict.borrow_mut();
+        if let Some(old) = cache.insert(key, (Rc::new(out.clone()), tick, ctx.map(Rc::clone))) {
+            evict.forget(old.1);
+        }
+        evict.insert(tick, key);
         out
     }
 
@@ -548,7 +573,7 @@ impl Engine {
             }
         }
         for meta in metaclasses {
-            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            if crate::graph::trace_infer() {
                 eprintln!(
                     "GAFM self={} ({:?},{:?}) meta={} ({:?},{:?}) implicit=({:?},{:?}) .{}",
                     self.qname(cls), cls.m, cls.n,
@@ -720,7 +745,7 @@ impl Engine {
                 attributes = filtered;
             }
         }
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             let descr: Vec<String> = attributes
                 .iter()
                 .map(|a| match a {

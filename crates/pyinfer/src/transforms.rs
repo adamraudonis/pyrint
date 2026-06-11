@@ -202,7 +202,7 @@ impl Engine {
     /// transforms.py _invalidate_cache: clears ONLY the global inference
     /// cache (lookup lru / tip caches survive).
     fn wipe(&self) {
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             CUR_SCAN.with(|c| {
                 let (m, l, k) = *c.borrow();
                 eprintln!("WIPE {} line={} kind={}", m_name(self, m), l, k);
@@ -240,7 +240,7 @@ impl Engine {
                     _ => 0,
                 }
             };
-            if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+            if crate::graph::trace_infer() {
                 let line = self.md(mid).tree.nodes[n.idx()].fromlineno as u32;
                 self.wipe_scan_set_cur(mid, line, kind_tag);
                 if kind_tag == 2 || kind_tag == 3 {
@@ -2191,7 +2191,7 @@ impl Engine {
                 // -> module locals -> the real ImportFrom), and igetattr's
                 // descriptor checks re-infer those per-member base Names.
                 if let Some(tp) = self.parent(*target) {
-                    if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+                    if crate::graph::trace_infer() {
                         eprintln!("REPARENT fake {} -> {:?}", tname, tp);
                     }
                     self.reparents.borrow_mut().insert(fake_cls, tp);

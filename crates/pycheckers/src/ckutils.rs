@@ -62,29 +62,63 @@ pub struct Lru<V> {
     map: FxHashMap<GNode, (V, u64)>,
     tick: u64,
     cap: usize,
+    /// recency index for O(log n) eviction: min-heap of ticks with lazy
+    /// deletion + tick->key map. Ticks are unique per live entry, so
+    /// "evict the key with the minimum live tick" picks EXACTLY the same
+    /// entry the old O(n) `min_by_key` scan did (django: 5.7% self time).
+    heap: std::collections::BinaryHeap<std::cmp::Reverse<u64>>,
+    by_tick: FxHashMap<u64, GNode>,
 }
 
 impl<V: Clone> Lru<V> {
     pub fn new(cap: usize) -> Self {
-        Lru { map: FxHashMap::default(), tick: 0, cap }
+        Lru {
+            map: FxHashMap::default(),
+            tick: 0,
+            cap,
+            heap: std::collections::BinaryHeap::new(),
+            by_tick: FxHashMap::default(),
+        }
     }
     pub fn get(&mut self, k: GNode) -> Option<V> {
         self.tick += 1;
         let t = self.tick;
         if let Some(e) = self.map.get_mut(&k) {
+            let old_t = e.1;
             e.1 = t;
-            return Some(e.0.clone());
+            let v = e.0.clone();
+            self.by_tick.remove(&old_t);
+            self.by_tick.insert(t, k);
+            self.heap.push(std::cmp::Reverse(t));
+            self.maybe_compact();
+            return Some(v);
         }
         None
     }
     pub fn put(&mut self, k: GNode, v: V) {
         self.tick += 1;
         if self.map.len() >= self.cap {
-            if let Some((&old, _)) = self.map.iter().min_by_key(|(_, e)| e.1) {
-                self.map.remove(&old);
+            // evict the (unique) minimum-tick live entry; stale heap ticks
+            // are skipped because they are no longer in by_tick
+            while let Some(std::cmp::Reverse(t)) = self.heap.pop() {
+                if let Some(old) = self.by_tick.remove(&t) {
+                    self.map.remove(&old);
+                    break;
+                }
             }
         }
-        self.map.insert(k, (v, self.tick));
+        if let Some((_, old_t)) = self.map.insert(k, (v, self.tick)) {
+            self.by_tick.remove(&old_t);
+        }
+        self.by_tick.insert(self.tick, k);
+        self.heap.push(std::cmp::Reverse(self.tick));
+        self.maybe_compact();
+    }
+    fn maybe_compact(&mut self) {
+        // drop accumulated stale ticks so the heap stays O(cap)
+        if self.heap.len() > 8 * self.cap.max(64) {
+            self.heap = self.by_tick.keys().map(|&t| std::cmp::Reverse(t)).collect();
+        }
     }
 }
 

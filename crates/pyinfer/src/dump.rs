@@ -80,8 +80,7 @@ fn run_dump_infer_inner(items_path: &str) -> i32 {
         }
         if let Some(ts) = &trace_start {
             if path.contains(ts.as_str()) {
-                // dump runs single-threaded inside its own 1GB-stack thread
-                unsafe { std::env::set_var("PRYLINT_TRACE_INFER", "1") };
+                crate::graph::set_trace_infer(true);
             }
         }
         let _ = writeln!(out, "=== {path}");
@@ -114,7 +113,7 @@ fn dump_module<W: Write>(engine: &Engine, mid: ModId, out: &mut W) {
             _ => "Call",
         };
         let node_info = &md.tree.nodes[n.idx()];
-        if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
+        if crate::graph::trace_infer() {
             // sentinel for trace alignment with the GT tracer's @@DUMPNODE
             eprintln!(
                 "@@DUMPNODE {}:{}:{}",
