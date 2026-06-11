@@ -691,7 +691,25 @@ impl Engine {
 
     fn run_tip(&self, tip: Tip, node: GNode, ctx: &Rc<Ctx>) -> Option<Flow> {
         match tip {
-            Tip::Builtin(i) => self.run_builtin_tip(BUILTIN_NAMES[i as usize], node, ctx),
+            Tip::Builtin(i) => {
+                let res = self.run_builtin_tip(BUILTIN_NAMES[i as usize], node, ctx);
+                // _transform_wrapper (brain_builtin_inference.py:201-218):
+                // `if result and not result.parent: result.parent = node` —
+                // a parentless NODE result (a Module, e.g. the default arg
+                // of getattr) is PERMANENTLY reparented under the Call,
+                // changing qname() of its whole subtree for the rest of
+                // the run.
+                if let Some(flow) = &res {
+                    if flow.err.is_none() && flow.vals.len() == 1 {
+                        if let Value::Node(g) = &flow.vals[0] {
+                            if self.parent(*g).is_none() {
+                                self.reparents.borrow_mut().insert(*g, node);
+                            }
+                        }
+                    }
+                }
+                res
+            }
             Tip::DictFromkeys => self.tip_dict_fromkeys(node, ctx),
             Tip::CopyMethod => self.tip_copy_method(node, ctx),
             Tip::StrFormat => self.tip_str_format(node, ctx),
@@ -1465,7 +1483,14 @@ dict
                 }
             }
             "hasattr" => {
-                let (obj, attr) = self.tip_getattr_args(&args, ctx)?;
+                // infer_hasattr (brain_builtin_inference.py:570-585):
+                // UseInferenceDefault from _infer_getattr_args is CAUGHT
+                // and returns Uninferable — hasattr never falls back to
+                // default Call inference (unlike getattr).
+                let (obj, attr) = match self.tip_getattr_args(&args, ctx) {
+                    Some(x) => x,
+                    None => return Some(Flow::uninferable()),
+                };
                 match (obj, attr) {
                     (Value::Uninferable, _) | (_, None) => Some(Flow::uninferable()),
                     (obj, Some(attr)) => {

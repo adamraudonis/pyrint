@@ -23,9 +23,19 @@ impl Engine {
 
     pub fn parent(&self, g: GNode) -> Option<GNode> {
         if g.n == NodeId::MODULE {
-            // brain-reparented nodes (`fake.parent = target.parent`) keep
-            // NodeId::MODULE in their own tree; the override redirects the
-            // walk into the target module. Module roots aren't reparented.
+            // Module roots normally have no parent — EXCEPT when a
+            // register_builtin_transform tip returned the module and
+            // _transform_wrapper mutated it permanently
+            // (brain_builtin_inference.py:206-210 `if not result.parent:
+            // result.parent = node` — e.g. `getattr(self, "x", pickle)`
+            // reparents the pickle module under the getattr Call, changing
+            // qname() of everything in pickle for the rest of the run).
+            let rp = self.reparents.borrow();
+            if !rp.is_empty() {
+                if let Some(&over) = rp.get(&g) {
+                    return Some(over);
+                }
+            }
             return None;
         }
         let md = self.md(g.m);
@@ -193,7 +203,17 @@ impl Engine {
             let name = match &cmd.tree.nodes[cur.n.idx()].kind {
                 NodeKind::Module(d) => {
                     parts.push(d.name.to_string());
-                    break;
+                    // `if self.parent is None: return self.name` — a module
+                    // REPARENTED by _transform_wrapper
+                    // (brain_builtin_inference.py:206-210) keeps walking:
+                    // qname = parent.frame().qname() + "." + name
+                    match self.parent(cur) {
+                        Some(p) => {
+                            cur = p;
+                            continue;
+                        }
+                        None => break,
+                    }
                 }
                 NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
                     cmd.tree.s(d.name).to_string()
