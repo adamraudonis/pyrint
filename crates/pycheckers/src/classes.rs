@@ -1237,10 +1237,21 @@ impl ClassCk {
                 }
                 continue;
             };
-            // E0242: conflicts with class locals
+            // E0242: conflicts with class locals.
+            // astroid ClassDef.implicit_locals() injects __module__/
+            // __qualname__/__annotations__ synthetic Consts FIRST in every
+            // class's locals (scoped_nodes.py:1911-1933) — node.locals.get()
+            // in _check_slots_elt sees them, so these names ALWAYS conflict.
+            // The synthetic Const's parent is the ClassDef, never an
+            // AnnAssign, and being first it also defeats the single-bare-
+            // annotation skip (list len >= 2 with any explicit entry).
             let vsym = eng.sym(&value);
             let class_variable = eng.class_locals_get(cls, vsym);
-            if class_variable.len() == 1 {
+            let implicit_local = matches!(
+                value.as_str(),
+                "__module__" | "__qualname__" | "__annotations__"
+            );
+            if !implicit_local && class_variable.len() == 1 {
                 // single bare annotation -> STOP the whole element check
                 let only = class_variable[0];
                 let ann_only = eng
@@ -1253,7 +1264,7 @@ impl ClassCk {
                     return;
                 }
             }
-            if !class_variable.is_empty() {
+            if implicit_local || !class_variable.is_empty() {
                 if let Some(rn) = report_node {
                     cx.emit_node("E0242", u::lineno(eng, rn), u::col_offset(eng, rn) as i64,
                         u::format_template("Value %r in slots conflicts with class variable", &[&value]));
