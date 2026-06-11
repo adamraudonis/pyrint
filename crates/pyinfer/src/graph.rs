@@ -732,6 +732,18 @@ impl Engine {
         GNode { m: mid, n: NodeId(1) }
     }
 
+    /// A FRESH per-access stand-in for objectmodel attrs that astroid
+    /// returns as newly-built NODES (Const/Tuple/Dict/Unknown/...): the
+    /// consumer's stmt.infer() gets a full NodeNG.infer hop (+1 bump, cap
+    /// check, fresh-key cache write) whose _infer yields the value as-is.
+    /// A new node per call — astroid never reuses these, so the cache key
+    /// can never hit.
+    pub fn model_hop_node(&self, v: crate::value::Value) -> GNode {
+        let g = self.alloc_synth_node(NodeKind::Unknown);
+        self.redirects.borrow_mut().insert(g, crate::value::NV::V(v));
+        g
+    }
+
     /// Allocate `count` orphan Unknown nodes in a fresh synthetic module —
     /// hosts for redirect placeholders (enum-member instances and other
     /// VALUE-valued locals entries).

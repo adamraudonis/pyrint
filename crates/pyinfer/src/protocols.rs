@@ -165,8 +165,8 @@ impl Engine {
                     Some(c) => Rc::clone(c),
                     None => Ctx::new(),
                 };
-                let parts = self.infer(value, &c);
-                let out = self.resolve_assignment_parts(&parts.vals, &path, &c);
+                let mut out = Vec::new();
+                self.resolve_assignment_parts_from(NV::N(value), &path, &c, &mut out);
                 if out.is_empty() {
                     return Err(ErrKind::Inference);
                 }
@@ -175,21 +175,33 @@ impl Engine {
         }
     }
 
-    /// _resolve_assignment_parts (protocols.py:482-519)
-    fn resolve_assignment_parts(&self, parts: &[Value], path: &[usize], ctx: &Rc<Ctx>) -> Vec<NV> {
+    /// _resolve_assignment_parts (protocols.py:482-519) — the `parts`
+    /// generator is pulled LAZILY (`self.value.infer(context)` passed
+    /// unconsumed): every `return` in the body ABANDONS the suspended rhs
+    /// generator mid-stream (no post-yield bumps for the remaining levels,
+    /// no cache writes for truncated wrappers). `src` is the unevaluated
+    /// origin whose inference feeds the part loop.
+    fn resolve_assignment_parts_from(
+        &self,
+        src: NV,
+        path: &[usize],
+        ctx: &Rc<Ctx>,
+        out: &mut Vec<NV>,
+    ) {
         let mut path = path.to_vec();
         let index = path.remove(0);
-        let mut out = Vec::new();
-        for part in parts {
-            let assigned: Option<NV> = match part {
+        let process = &mut |e: &Self, part: Value, out: &mut Vec<NV>| -> crate::value::Drive {
+            use crate::value::Drive;
+            let assigned: Option<NV> = match &part {
                 Value::Node(g)
-                    if self.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })) =>
+                    if e.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })) =>
                 {
-                    let md = self.md(g.m);
+                    let md = e.md(g.m);
                     match &md.tree.nodes[g.n.idx()].kind {
                         NodeKind::Dict { items } => match items.get(index) {
                             Some((k, _)) => Some(NV::N(GNode { m: g.m, n: *k })),
-                            None => return out,
+                            // IndexError -> return (abandon)
+                            None => return Drive::Stop,
                         },
                         _ => None,
                     }
@@ -199,38 +211,50 @@ impl Engine {
                         Value::Node(g) => NV::N(*g),
                         other => NV::V(other.clone()),
                     }),
-                    None => return out,
+                    None => return Drive::Stop,
                 },
                 _ => {
                     let idx = Value::SynthConst(Rc::new(ConstValue::Int(IntValue::Small(
                         index as i64,
                     ))));
-                    match self.getitem(part, &idx, ctx) {
+                    match e.getitem(&part, &idx, ctx) {
                         Ok(nv) => Some(nv),
-                        Err(ErrKind::AstroidType) | Err(ErrKind::AstroidIndex) => return out,
+                        Err(ErrKind::AstroidType) | Err(ErrKind::AstroidIndex) => {
+                            return Drive::Stop
+                        }
                         Err(_) => None,
                     }
                 }
             };
+            // `if not assigned: return` (protocols.py:502-503) — None AND
+            // Uninferable (falsy) abandon REGARDLESS of remaining path
             let assigned = match assigned {
+                Some(NV::V(Value::Uninferable)) | None => return Drive::Stop,
                 Some(a) => a,
-                None => return out,
             };
-            // `if not assigned` — None or Uninferable
-            if matches!(assigned, NV::V(Value::Uninferable)) && !path.is_empty() {
-                return out;
-            }
             if path.is_empty() {
                 out.push(assigned);
             } else {
-                let flow = self.infer_nv(&assigned, ctx);
-                if flow.err.map(|e| e.is_inference()).unwrap_or(false) && flow.vals.is_empty() {
-                    return out;
-                }
-                out.extend(self.resolve_assignment_parts(&flow.vals, &path, ctx));
+                // nested `yield from _resolve_assignment_parts(
+                // assigned.infer(context), ...)`: the nested return ends
+                // only the NESTED loop; an InferenceError from the nested
+                // pull aborts the outer too (protocols.py:514-519) — but
+                // only when nothing was inferred before it (the generator
+                // re-raises at the first pull).
+                e.resolve_assignment_parts_from(assigned, &path, ctx, out);
+            }
+            Drive::Go
+        };
+        match src {
+            NV::N(g) => {
+                let _ = self.infer_to(g, ctx, &mut |part| process(self, part, out));
+            }
+            NV::V(v) => {
+                // pre-inferred value: astroid's assigned.infer(context)
+                // for a Proxy yields itself (no hop)
+                let _ = process(self, v, out);
             }
         }
-        out
     }
 
     /// for_assigned_stmts (protocols.py:290-316), raise_if_nothing
@@ -1365,16 +1389,30 @@ impl Engine {
                     continue;
                 }
             }
-            let key_flow = self.infer_nv(k, ctx);
-            for ik in &key_flow.vals {
-                if ik.is_uninferable() {
-                    continue;
-                }
-                if let (Some(kc), Some(ic)) = (self.value_const(ik), index_const.as_ref()) {
-                    if const_eq(&kc, ic) {
-                        return Ok(v.clone());
+            // `for inferredkey in key.infer(context): ... return value` —
+            // LAZY pulls; the match RETURNS from inside the loop, abandoning
+            // the suspended key generator (no post-yield bump for the
+            // matching key, no cache write for its truncated wrapper).
+            let mut matched: Option<NV> = None;
+            let _ = {
+                let matched = &mut matched;
+                self.infer_nv_to(k, ctx, &mut |ik| {
+                    if ik.is_uninferable() {
+                        return Drive::Go;
                     }
-                }
+                    if let (Some(kc), Some(ic)) =
+                        (self.value_const(&ik), index_const.as_ref())
+                    {
+                        if const_eq(&kc, ic) {
+                            *matched = Some(v.clone());
+                            return Drive::Stop;
+                        }
+                    }
+                    Drive::Go
+                })
+            };
+            if let Some(found) = matched {
+                return Ok(found);
             }
         }
         Err(ErrKind::AstroidIndex)
@@ -1457,6 +1495,22 @@ impl Engine {
         if self.kind_is(method, |k| matches!(k, NodeKind::EmptyNode)) {
             return Ok(NV::N(cls));
         }
+        // `method.infer_call_result` — nodes WITHOUT the attribute raise a
+        // Python AttributeError BEFORE any inference (scoped_nodes.py:
+        // 2585-2595 `raise`): e.g. os.PathLike's
+        // `__class_getitem__ = classmethod(GenericAlias)` AssignName.
+        // Subscript._infer catches AttributeError -> raise InferenceError.
+        if !self.kind_is(method, |k| {
+            matches!(
+                k,
+                NodeKind::FunctionDef(_)
+                    | NodeKind::AsyncFunctionDef(_)
+                    | NodeKind::Lambda(_)
+                    | NodeKind::ClassDef(_)
+            )
+        }) {
+            return Err(ErrKind::Attribute);
+        }
         let new_ctx = bind_context_to_node(Some(ctx), Value::Node(cls));
         *new_ctx.callcontext.borrow_mut() = Some(Rc::new(CallCtx {
             id: self.next_callctx_id(),
@@ -1464,11 +1518,13 @@ impl Engine {
             keywords: RefCell::new(Vec::new()),
             callee: RefCell::new(Some(Value::Node(method))),
         }));
-        // next(methods[0].infer_call_result(self, ctx), ...) — single pull;
-        // InferenceError -> Uninferable (scoped_nodes.py:2575-2590)
+        // `next(methods[0].infer_call_result(self, ctx), util.Uninferable)`
+        // — single pull; StopIteration -> Uninferable; an InferenceError
+        // during the pull PROPAGATES (scoped_nodes.py:2575-2590, no catch)
         match self.infer_call_result_first(&Value::Node(method), None, Some(&new_ctx)) {
             Ok(Some(v)) => Ok(NV::V(v)),
-            _ => Ok(NV::V(Value::Uninferable)),
+            Ok(None) => Ok(NV::V(Value::Uninferable)),
+            Err(e) => Err(e),
         }
     }
 

@@ -375,9 +375,10 @@ impl Engine {
             return Some(Flow::ok(hit.to_vec()));
         }
         self.tip_guard.borrow_mut().insert(guard_key);
-        // empty ctx => the tip runs with context=None: its internal
-        // inference does NOT bump the caller's nodes_inferred counter.
-        let run_ctx = if empty { Ctx::new() } else { Rc::clone(ctx) };
+        // empty ctx => the tip runs with context=None: EVERY internal
+        // node.infer(None) materializes its own fresh context (no shared
+        // counter, no shared path) — modeled by the synthetic_none marker.
+        let run_ctx = if empty { Ctx::new_none() } else { Rc::clone(ctx) };
         let res = self.run_tip(tip, node, &run_ctx);
         // finally-remove (may have been removed by an inner recursion trip)
         self.tip_guard.borrow_mut().remove(&guard_key);
@@ -1824,20 +1825,62 @@ impl Engine {
         // __len__ through the type
         let t = self.object_type(&inferred, ctx)?;
         let sym = self.sym("__len__");
-        let f = self.class_igetattr(t, sym, Some(ctx), true).ok()?;
-        let len_call = f.vals.first()?.clone();
-        let res = self.infer_call_result(&len_call, None, Some(&copy_context(Some(ctx))));
-        // helpers.object_len tail: int Const -> value; None result or an
-        // int-subclass Instance -> InferenceError (-> UseInferenceDefault
-        // -> ERR through the raw builtin); anything else AstroidTypeError
-        // (also UseInferenceDefault)
-        match res.vals.first() {
-            Some(v) => match self.value_const(v) {
+        // helpers.py:288 `next(node_type.igetattr("__len__", context))` —
+        // a SINGLE pull, the rest of the igetattr stream ABANDONED (no
+        // post-yield bump for the FunctionDef, no truncated-wrapper cache
+        // writes); StopIteration/AttributeInferenceError -> AstroidTypeError
+        let mut len_call: Option<Value> = None;
+        let _ = {
+            let len_call = &mut len_call;
+            self.class_igetattr_to(t, sym, Some(ctx), true, &mut |v| {
+                *len_call = Some(v);
+                crate::value::Drive::Stop
+            })
+        };
+        let len_call = len_call?;
+        // helpers.py:296-313: `result_of_len = next(inferred, None)` —
+        // single abandoned pull; NO result -> `return 0`; Const int ->
+        // value; int-subclass Instance -> 0; anything else (incl. U) ->
+        // AstroidTypeError; an InferenceError during the pull propagates
+        // (infer_len catches both -> UseInferenceDefault)
+        let mut result: Option<Value> = None;
+        let mut raised = false;
+        let end = {
+            let result = &mut result;
+            self.infer_call_result_to(&len_call, None, Some(&copy_context(Some(ctx))), &mut |v| {
+                *result = Some(v);
+                crate::value::Drive::Stop
+            })
+        };
+        if let crate::value::End::Raised(_) = end {
+            if result.is_none() {
+                raised = true;
+            }
+        }
+        if raised {
+            return None;
+        }
+        match result {
+            Some(v) => match self.value_const(&v) {
+                // pytype() == "builtins.int" excludes bool Consts
                 Some(ConstValue::Int(IntValue::Small(i))) => Some(i),
-                Some(ConstValue::Bool(_)) => None, // pytype is builtins.bool
-                _ => None,
+                Some(_) => None,
+                None => {
+                    if matches!(v, Value::Inst { .. })
+                        && self
+                            .proxied_class(&v)
+                            .map(|c| self.is_subtype_of(c, "builtins.int", None))
+                            .unwrap_or(false)
+                    {
+                        // unknown instance-call arguments -> fake 0
+                        Some(0)
+                    } else {
+                        None
+                    }
+                }
             },
-            None => None,
+            // next(inferred, None) exhausted -> result None -> return 0
+            None => Some(0),
         }
     }
 
@@ -2435,6 +2478,35 @@ impl Engine {
                 NV::V(_) => None,
             })
             .collect();
+        // PartialFunction.__init__ (objects.py:292-296):
+        // `next(wrapped_function.infer())` — a SECOND single pull, NO
+        // context (fresh; abandoned generator: no cache write). Only used
+        // to merge filled args of a nested PartialFunction.
+        let second = match &pos[0] {
+            NV::N(g) => self.infer_first_fresh(*g).ok().flatten(),
+            NV::V(v) => Some(v.clone()),
+        };
+        let (filled_args, filled_keywords) = if let Some(Value::Partial {
+            filled_args: pa,
+            filled_keywords: pk,
+            ..
+        }) = &second
+        {
+            let mut args: Vec<GNode> = pa.to_vec();
+            args.extend(filled_args);
+            // dict-merge: earlier keys keep position, later values win
+            let mut kws: Vec<(GSym, GNode)> = pk.to_vec();
+            for (k, v) in filled_keywords {
+                if let Some(slot) = kws.iter_mut().find(|(ek, _)| *ek == k) {
+                    slot.1 = v;
+                } else {
+                    kws.push((k, v));
+                }
+            }
+            (args, kws)
+        } else {
+            (filled_args, filled_keywords)
+        };
         Some(Flow::one(Value::Partial {
             func,
             filled_args: Rc::new(filled_args),
@@ -2761,9 +2833,38 @@ impl Engine {
                 .map(String::from)
                 .collect(),
             _ => {
-                // _get_namedtuple_fields (as_string round-trip through
-                // extract_node; net effect: Const values stringified)
-                let elts = self.value_elts(&names_v).or_else(|| match &names_v {
+                // _get_namedtuple_fields (brain_namedtuple_enum.py:611-650):
+                // `container = next(node.args[1].infer())` — a SECOND,
+                // FRESH single pull (abandoned generator: no cache writes),
+                // falling back to the field_names keyword when absent/falsy;
+                // non-BaseContainer results -> UseInferenceDefault. The
+                // as_string round-trip through extract_node nets out to
+                // Const values stringified.
+                let container: Option<Value> = if args.len() > 1 {
+                    match self.infer_first_fresh(args[1]) {
+                        Ok(Some(v)) => Some(v),
+                        // StopIteration / InferenceError -> UseInferenceDefault
+                        _ => return None,
+                    }
+                } else {
+                    None // IndexError -> pass
+                };
+                // `if not container:` — Uninferable is falsy
+                let mut container = match container {
+                    Some(Value::Uninferable) | None => None,
+                    c => c,
+                };
+                if container.is_none() {
+                    let fn_sym = self.sym("field_names");
+                    if let Some((_, vnode)) = kws.iter().find(|(k, _)| *k == Some(fn_sym)) {
+                        container = match self.infer_first_fresh(*vnode) {
+                            Ok(Some(v)) => Some(v),
+                            _ => return None,
+                        };
+                    }
+                }
+                let container = container?;
+                let elts = match &container {
                     Value::Node(g) => {
                         let md = self.md(g.m);
                         match &md.tree.nodes[g.n.idx()].kind {
@@ -2772,13 +2873,13 @@ impl Engine {
                             | NodeKind::Set { elts } => Some(
                                 elts.iter()
                                     .map(|&e| Value::Node(GNode { m: g.m, n: e }))
-                                    .collect(),
+                                    .collect::<Vec<Value>>(),
                             ),
                             _ => None,
                         }
                     }
-                    _ => None,
-                })?;
+                    _ => self.value_elts(&container),
+                }?;
                 let mut out = Vec::new();
                 for elt in elts {
                     // pairs: (name, type)

@@ -93,6 +93,12 @@ impl Engine {
         if self.depth.get() >= self.max_depth {
             return End::Raised(ErrKind::Recursion);
         }
+        // `context=None` marker (tip bodies): each node.infer(None) call
+        // materializes its OWN InferenceContext (node_ng.py:135-136)
+        if ctx_in.synthetic_none.get() {
+            let fresh = Ctx::new();
+            return self.infer_to(node, &fresh, sink);
+        }
         // PROXY placeholders (enum member Instances stored in locals):
         // astroid's Proxy.infer is a bare `yield self` (bases.py:139) —
         // no NodeNG.infer entry, no bump, no cache, no trace.
@@ -127,8 +133,57 @@ impl Engine {
         // NodeNG.infer monkeypatch used for bump-parity debugging
         if std::env::var("PRYLINT_TRACE_INFER").is_ok() {
             let md = self.md(node.m);
-            let kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
-            let name = self.node_name(node).unwrap_or_default();
+            let mut kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
+            // model-hop stand-ins: label by the VALUE kind so traces align
+            // with astroid's fresh Const/Tuple/Dict model nodes
+            if matches!(md.tree.nodes[node.n.idx()].kind, NodeKind::Unknown) {
+                if let Some(NV::V(v)) = self.redirects.borrow().get(&node) {
+                    kind = match v {
+                        Value::SynthConst(_) => "Const",
+                        Value::SynthSeq { kind: SeqKind::Tuple, .. } => "Tuple",
+                        Value::SynthSeq { kind: SeqKind::List, .. } => "List",
+                        Value::SynthDict { .. } => "Dict",
+                        Value::Uninferable => "Unknown",
+                        // _infer_type_call/_infer_type_new_call slots wrap
+                        // pre-inferred nodes like astroid's EvaluatedObject
+                        Value::Node(_) => "EvaluatedObject",
+                        _ => kind,
+                    };
+                }
+            }
+            return self.infer_entry_trace_labeled(node, ctx_in, sink, kind);
+        }
+        self.infer_entry_to_inner(node, ctx_in, sink)
+    }
+
+    fn infer_entry_trace_labeled(
+        &self,
+        node: GNode,
+        ctx_in: &Rc<Ctx>,
+        sink: &mut Sink,
+        kind: &str,
+    ) -> End {
+        {
+            let name = if kind == "EvaluatedObject" {
+                "EvaluatedObject".to_string()
+            } else {
+                let mut n = self.node_name(node).unwrap_or_default();
+                // raw-built import stubs get `.name` set by
+                // raw_building._attach_local_node — mirror in the trace
+                if n.is_empty() && kind == "ImportFrom" {
+                    let md = self.md(node.m);
+                    if !md.pure_python {
+                        if let NodeKind::ImportFrom { names, .. } =
+                            &md.tree.nodes[node.n.idx()].kind
+                        {
+                            if let Some((nm, _)) = names.first() {
+                                n = md.tree.s(*nm).to_string();
+                            }
+                        }
+                    }
+                }
+                n
+            };
             let d = self.depth.get() as usize;
             let ccid = ctx_in.callcontext.borrow().as_ref().map(|c| c.id);
             let bn = ctx_in.boundnode.borrow().is_some();
@@ -162,9 +217,8 @@ impl Engine {
             if !any {
                 eprintln!("{}  (empty end={:?})", "  ".repeat(d), r);
             }
-            return r;
+            r
         }
-        self.infer_entry_to_inner(node, ctx_in, sink)
     }
 
     fn infer_entry_to_inner(&self, node: GNode, ctx_in: &Rc<Ctx>, sink: &mut Sink) -> End {
@@ -1402,17 +1456,35 @@ impl Engine {
         };
         match format_spec {
             None => {
-                // fresh Const("") generator: 1 value, body runs while it is
-                // suspended; the post-yield bump fires on the loop's second
-                // pull — only when the body completed normally
-                let spec_v = Value::SynthConst(Rc::new(ConstValue::Str("".into())));
-                match process_spec(self, &spec_v, &mut uninferable_already, sink) {
-                    Ctl::ConsumerStop => End::Stopped,
-                    Ctl::Raised(e) => End::Raised(e),
-                    Ctl::Go => {
-                        ctx.bump_inferred();
-                        End::Done
-                    }
+                // node_classes.py:4707 `format_specs = Const("")` — a FRESH
+                // Const NODE; `format_specs.infer(context)` is a FULL
+                // NodeNG.infer hop (trace entry, cap check, fresh-key cache
+                // write, post-yield bump when the spec loop pulls again).
+                let hop = self.model_hop_node(Value::SynthConst(Rc::new(ConstValue::Str(
+                    "".into(),
+                ))));
+                let mut pending: Option<Ctl> = None;
+                let end = {
+                    let pending = &mut pending;
+                    let uninferable_already = &mut uninferable_already;
+                    self.infer_to(hop, ctx, &mut |spec_v| {
+                        match process_spec(self, &spec_v, uninferable_already, sink) {
+                            Ctl::Go => Drive::Go,
+                            ctl => {
+                                *pending = Some(ctl);
+                                Drive::Stop
+                            }
+                        }
+                    })
+                };
+                match pending {
+                    Some(Ctl::ConsumerStop) => End::Stopped,
+                    Some(Ctl::Raised(e)) => End::Raised(e),
+                    _ => match end {
+                        End::Raised(e) => End::Raised(e),
+                        End::Stopped => End::Stopped,
+                        End::Done => End::Done,
+                    },
                 }
             }
             Some(fs) => {

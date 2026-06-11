@@ -341,7 +341,26 @@ impl Engine {
             values.extend(self.class_locals_get(anc, name).into_iter().map(NV::N));
         }
         if CLASS_MODEL_ATTRS.contains(&name_str.as_str()) && class_context && values.is_empty() {
-            return Ok(vec![NV::V(self.class_model_attr(cls, &name_str, ctx))]);
+            let v = self.class_model_attr(cls, &name_str, ctx);
+            // objectmodel.py ClassModel: most attrs are FRESH NODES (Const /
+            // Tuple / Dict / Unknown / ClassDef) built per access — they get
+            // a real NodeNG.infer hop in _infer_stmts (+1 bump, cap check,
+            // fresh-key cache write). Proxy results (attr___call__ Instance,
+            // attr_mro / attr___subclasses__ BoundMethods) infer via
+            // Proxy.infer `yield self` — NO hop (bases.py:139).
+            let hop = match name_str.as_str() {
+                "__call__" | "mro" | "__subclasses__" | "__new__" | "__init__" => false,
+                _ => true,
+            };
+            if hop {
+                // attr___class__ = helpers.object_type(...) — the REAL
+                // ClassDef node: the hop (and its cache write) lands on it
+                if let Value::Node(g) = &v {
+                    return Ok(vec![NV::N(*g)]);
+                }
+                return Ok(vec![NV::N(self.model_hop_node(v))]);
+            }
+            return Ok(vec![NV::V(v)]);
         }
         if class_context {
             values.extend(self.metaclass_lookup_attribute(cls, name, ctx));

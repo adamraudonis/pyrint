@@ -38,6 +38,12 @@ pub struct Ctx {
     pub constraints: RefCell<FxHashMap<GSym, Rc<ConstraintSet>>>,
     /// shared across clones (context.py:49-98); max 100
     pub nodes_inferred: Rc<Cell<u32>>,
+    /// stand-in for Python's `context=None` inside inference tips
+    /// (inference_tip.py:50-52 sets context = None for empty contexts; the
+    /// tip body then passes None around and EVERY `node.infer(None)` /
+    /// path_wrapper materializes its OWN fresh InferenceContext). infer_to
+    /// substitutes a fresh Ctx per entry when this is set.
+    pub synthetic_none: Cell<bool>,
 }
 
 impl std::fmt::Debug for Ctx {
@@ -60,10 +66,19 @@ impl Ctx {
             extra_context: RefCell::new(Rc::new(FxHashMap::default())),
             constraints: RefCell::new(FxHashMap::default()),
             nodes_inferred: Rc::new(Cell::new(0)),
+            synthetic_none: Cell::new(false),
         })
     }
 
-    /// context.py:123-136 clone()
+    /// the `context=None` marker handed to tip bodies
+    pub fn new_none() -> Rc<Ctx> {
+        let c = Ctx::new();
+        c.synthetic_none.set(true);
+        c
+    }
+
+    /// context.py:123-136 clone(). Cloning the None-marker mirrors
+    /// copy_context(None): a plain fresh context.
     pub fn clone_ctx(self: &Rc<Ctx>) -> Rc<Ctx> {
         Rc::new(Ctx {
             path: RefCell::new(self.path.borrow().clone()),
@@ -72,7 +87,12 @@ impl Ctx {
             boundnode: RefCell::new(self.boundnode.borrow().clone()),
             extra_context: RefCell::new(self.extra_context.borrow().clone()),
             constraints: RefCell::new(self.constraints.borrow().clone()),
-            nodes_inferred: Rc::clone(&self.nodes_inferred),
+            nodes_inferred: if self.synthetic_none.get() {
+                Rc::new(Cell::new(0))
+            } else {
+                Rc::clone(&self.nodes_inferred)
+            },
+            synthetic_none: Cell::new(false),
         })
     }
 
