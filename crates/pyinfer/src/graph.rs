@@ -79,8 +79,14 @@ impl Module {
 pub enum BuildFail {
     /// AstroidImportError (+ message text for imports checker later)
     Import(String),
-    /// AstroidSyntaxError
-    Syntax(String),
+    /// AstroidSyntaxError. `path`/`modname` identify the failing build so
+    /// the imports checker can recover the exact `str(exc.error)` text
+    /// (via the CPython oracle); `msg` is our ruff-derived approximation.
+    Syntax { msg: String, path: String, modname: String },
+    /// astroid TooManyLevelsError (relative import above the top level).
+    /// Subclass of AstroidImportError in astroid — sites that handle
+    /// failures generically must treat it like Import.
+    TooManyLevels,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -139,6 +145,12 @@ pub struct Engine {
     pub astroid_cache: RefCell<FxHashMap<String, ModId>>,
     /// _mod_file_cache (modname, contextfile=None) -> spec | cached error
     pub mod_file_cache: RefCell<FxHashMap<String, Result<Spec, String>>>,
+    /// memo of failed file_build attempts keyed by (abs path, modname).
+    /// astroid re-reads + re-parses broken files on EVERY import (failures
+    /// never enter astroid_cache and have no side effects), so memoizing
+    /// the failure is behaviourally invisible — it only saves the 27k
+    /// re-parses of core's 318 broken files at lint time.
+    pub build_fail_cache: RefCell<FxHashMap<(String, String), BuildFail>>,
     /// instance_attrs for every class/function (cross-module mutable)
     pub iattrs: RefCell<FxHashMap<GNode, IndexMap<GSym, Vec<GNode>>>>,
     /// instance_attrs for instances of the object_type PROXY classes
@@ -352,6 +364,7 @@ impl Engine {
             mods: RefCell::new(Vec::new()),
             astroid_cache: RefCell::new(FxHashMap::default()),
             mod_file_cache: RefCell::new(FxHashMap::default()),
+            build_fail_cache: RefCell::new(FxHashMap::default()),
             iattrs: RefCell::new(FxHashMap::default()),
             proxy_iattrs: RefCell::new(FxHashMap::default()),
             inf_cache: RefCell::new(FxHashMap::default()),
@@ -1455,6 +1468,14 @@ impl Engine {
         Ok(found)
     }
 
+    /// astroid.modutils.file_from_modpath equivalent for the variables
+    /// checker's `__all__` package-submodule resolution (variables.py:3268):
+    /// can the dotted path be resolved to a file/spec? modutils does NOT use
+    /// the manager's _mod_file_cache.
+    pub fn modutils_can_resolve(&self, parts: &[&str]) -> bool {
+        self.file_info_from_modpath(parts).is_ok()
+    }
+
     /// manager.file_from_module_name with the _mod_file_cache
     fn file_from_module_name(&self, modname: &str) -> Result<Spec, String> {
         if let Some(cached) = self.mod_file_cache.borrow().get(modname) {
@@ -1576,20 +1597,34 @@ impl Engine {
     /// builder.file_build + _data_build + _post_build
     fn file_build(&self, path: &str, modname: &str) -> Result<ModId, BuildFail> {
         let abs = abspath(path);
+        let memo_key = (abs.clone(), modname.to_string());
+        if let Some(fail) = self.build_fail_cache.borrow().get(&memo_key) {
+            return Err(fail.clone());
+        }
+        let memo = |fail: BuildFail| -> BuildFail {
+            self.build_fail_cache
+                .borrow_mut()
+                .insert(memo_key.clone(), fail.clone());
+            fail
+        };
         let bytes = std::fs::read(&abs).map_err(|e| {
-            BuildFail::Import(format!("Unable to load file {path}:\n{e}"))
+            memo(BuildFail::Import(format!("Unable to load file {path}:\n{e}")))
         })?;
         let src = match pyast::decode_source(&bytes, &abs) {
             Ok(src) => src,
             Err(pyast::DecodeError::Syntax(msg)) | Err(pyast::DecodeError::Lookup(msg)) => {
-                return Err(BuildFail::Syntax(format!(
-                    "Python 3 encoding specification error or unknown encoding:\n{msg}"
-                )))
+                return Err(memo(BuildFail::Syntax {
+                    msg: format!(
+                        "Python 3 encoding specification error or unknown encoding:\n{msg}"
+                    ),
+                    path: abs.clone(),
+                    modname: modname.to_string(),
+                }))
             }
             Err(pyast::DecodeError::Unicode) => {
-                return Err(BuildFail::Import(format!(
+                return Err(memo(BuildFail::Import(format!(
                     "Wrong or no encoding specified for {abs}."
-                )))
+                ))))
             }
         };
         // _data_build: modname ".__init__" suffix => package
@@ -1607,10 +1642,16 @@ impl Engine {
             Some(t) => t,
             None => {
                 let e = outcome.error.unwrap();
-                return Err(BuildFail::Syntax(format!(
-                    "Parsing Python code failed:\n{} ({}, line {})",
-                    e.message, modname2, e.line
-                )));
+                return Err(memo(BuildFail::Syntax {
+                    msg: format!(
+                        "Parsing Python code failed:\n{} ({}, line {})",
+                        e.message, modname2, e.line
+                    ),
+                    path: abs.clone(),
+                    // str(SyntaxError) embeds the post-strip name that
+                    // astroid passed to compile() as the filename
+                    modname: modname2.clone(),
+                }));
             }
         };
         let id = self.register_module(modname2.clone(), abs, tree, package, true);
@@ -2009,9 +2050,7 @@ impl Engine {
         let mymodule = self.md(node.m);
         let absmodname = self
             .relative_to_absolute_name(&mymodule, &modname, level)
-            .map_err(|_| BuildFail::Import(format!(
-                "Relative import with too many levels for module {modname:?}"
-            )))?;
+            .map_err(|_| BuildFail::TooManyLevels)?;
         // cache bypass for self-import
         let use_cache = absmodname != mymodule.name;
         self.import_module(&mymodule, &modname, level.map(|l| l >= 1).unwrap_or(false), level, use_cache, &absmodname)

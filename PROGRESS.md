@@ -1237,13 +1237,71 @@ pylint behavior — bugs are replicated.
      only), Interner::len, vararg/kwarg AssignName nodes now built
      (astroid parity; not in get_children so dumps unchanged — tree gate
      still 0).
-4. Then checkers fan-out (variables first: salt is the acid test), each code
-   driven to 0 FP/FN via `diffmsg.py --code=EXXXX` on all 7 corpora — wire
-   them into the phase-2 walk placeholder in `run.rs::lint_one` using
-   `walk_order.rs` dispatch tables.
-5. Then byte-exactness (ordering/headers), pylint-functional sweep, perf
-   (10x = whole-suite ≤ ~250s; budget core ≤ 135s incl. oracle for 318
-   broken files — currently ~4s).
+4. **checkers fan-out — round 1 DONE**: ImportsChecker (E0001
+   'Cannot import' + E0402) and VariablesChecker (E0601/E0602/E0603/E0604/
+   E0605/E0606, FULL NamesConsumer machinery) ported and wired into the
+   phase-2 walk. **0 FP / 0 FN on all 8 codes on ALL 7 corpora**; extended
+   check_shell gate (owned=E0001,E0011,E25,E0402,E0601-E0606, 'Cannot
+   import' exemption REMOVED) PASSES x7.
+   - **Code layout**: `crates/pycheckers/src/{ckutils,imports,variables,
+     walker}.rs`. walker.rs drives our two checkers in walk_order.rs
+     callback order (other checkers' slots inert); recursion runs on the
+     phase-2 1GB-stack thread. ckutils.rs ports pylint utils: exact
+     157-name `is_builtin` snapshot, `in_type_checking_block`,
+     `is_sys_guard`, `node_ignores_exception` (literal handler-name catch +
+     contextlib.suppress via safe_infer), `is_defined_before` +
+     `defnode_in_scope`, `are_exclusive(..., exceptions)` (If branch
+     disabled, handler.catch name match), `is_terminating_func`, pylint
+     `safe_infer` (lru 1024, pytype-set ambiguity + FunctionDef-args check)
+     and `infer_all` (lru 512) on the live Engine, astroid `as_string`
+     subset (equality-grade), `%`-template formatter.
+   - **run.rs**: phase 2 is now SEQUENTIAL on a 1GB-stack scoped thread:
+     `Engine::new(cwd)` + prebuild of EVERY fileitem in file order
+     (mirrors pylint phase 1 `get_ast` cache warmth), then per file:
+     pragmas -> unicode -> AST walk (`LintRun::walk_module`) -> statement
+     count. Message naming: node msgs use the astroid module name
+     (`.__init__` stripped), node-less msgs (E0001 Cannot-import) the raw
+     FileItem name — ONE FILE can emit under TWO module headers (GT:
+     homeassistant.auth.__init__ then homeassistant.auth).
+   - **E0001 Cannot-import** (imports.py:1023-1053): engine
+     `do_import_module` errors now carry kind — `BuildFail::TooManyLevels`
+     (E0402 path, `_ignore_import_failure` = TYPE_CHECKING block / sys
+     guard / except-ImportError) and `BuildFail::Syntax{path,modname}`.
+     Exact `str(exc.error)` text comes from a PERSISTENT oracle coprocess
+     (`oracle::OracleProc`, JSONL over the existing syntax_oracle.py)
+     queried with the RESOLVED modname so the SyntaxError filename token is
+     astroid-exact; None verdict (ruff/CPython mismatch) -> no message.
+     `Engine.build_fail_cache` memoizes failed file_builds keyed
+     (path, modname) — behaviourally invisible (failures never cache or
+     mutate state in astroid), kills 27k re-parses in core.
+   - **Port gotchas found** (now load-bearing): (a)
+     `node.nodes_of_class(nodes.Break, nodes.Continue)` in
+     `_inferred_to_define_name_raise_or_return_for_if_node` passes Continue
+     as SKIP_KLASS — only Break is permissive (the comment lies; 8 E0606s
+     across salt/django/core hinge on it). (b) ClassDef implicit locals
+     (__module__/__qualname__/__annotations__) are PHYSICALLY in class
+     locals (ClassDef.__init__ -> add_local_node -> _append_node sets
+     parent=class), FIRST in insertion order — class-body uses of
+     __module__ resolve through the class consumer (54 sentry FPs without
+     it); Consumer::new injects engine `implicit_class_local` nodes.
+     (c) `_check_consumer`'s consumed_uncertain defaultdict KEY-CREATION on
+     read access is replicated with entry().or_default().
+   - Not ported (no in-scope effect, noted): `_loopvar_name` (W0631) incl.
+     its lookup side effects, `_check_late_binding_closure` (gated off),
+     VariablesChecker.visit_import/importfrom bodies (E0611 disabled; their
+     module-build side effects largely duplicate ImportsChecker's),
+     visit_assign (E0633 later), visit_subscript (E0643 later),
+     compute_first_non_import_node family (feeds W only).
+   - KNOWN INEXACTNESS (accepted this phase): inference cache/counter
+     state during the walk differs from pylint's because unported checkers
+     (TypeChecker et al.) burn inference pylint-side; E06xx decisions that
+     consult inference (infer_all of if-tests, safe_infer, metaclass(),
+     __all__) are values-stable in all corpora today but cap-boundary
+     flips are possible until the remaining checkers land.
+5. Then remaining checkers (BasicErrorChecker, TypeChecker E1xxx — core has
+   37k E1123 —, ClassChecker, ...), byte-exactness (ordering/headers),
+   pylint-functional sweep, perf (10x = whole-suite ≤ ~250s; budget core ≤
+   135s incl. oracle for 318 broken files — currently ~14s with checkers).
 
 ## Gotchas for future rounds
 

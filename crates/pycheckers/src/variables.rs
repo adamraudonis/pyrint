@@ -1,0 +1,2602 @@
+//! VariablesChecker port — E0601/E0602/E0603/E0604/E0605/E0606 with the FULL
+//! NamesConsumer machinery.
+//!
+//! Truth: pylint 4.0.5 pylint/checkers/variables.py (cited variables.py:NNN),
+//! spec reference/notes/05-variables.md. Disabled sibling messages
+//! (W0611/W0621/W0631/W0640/E0611/...) are NOT emitted but state they share
+//! with the in-scope logic is preserved. Config defaults assumed:
+//! additional-builtins=(), init-import=False, py-version=3.12.
+
+use indexmap::IndexMap;
+use pyast::tree::{ConstValue, Ctx as ExprCtx, NodeKind};
+use pyast::NodeId;
+use pyinfer::graph::Engine;
+use pyinfer::value::{GNode, GSym, Value};
+use rustc_hash::{FxHashMap, FxHashSet};
+
+use crate::ckutils as u;
+use crate::walker::WalkCx;
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum ScopeType {
+    Module,
+    Class,
+    Function,
+    Lambda,
+    Comprehension,
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+enum Action {
+    Continue,
+    Return,
+}
+
+/// NamesConsumer (variables.py:504-559)
+pub struct Consumer {
+    node: GNode,
+    scope_type: ScopeType,
+    to_consume: IndexMap<GSym, Vec<GNode>>,
+    consumed: IndexMap<GSym, Vec<GNode>>,
+    /// defaultdict(list): key EXISTENCE matters (notes/05 §3, §10)
+    consumed_uncertain: IndexMap<GSym, Vec<GNode>>,
+    names_under_always_false_test: FxHashSet<GSym>,
+    names_defined_under_one_branch_only: FxHashSet<GSym>,
+}
+
+impl Consumer {
+    fn new(eng: &Engine, node: GNode, scope_type: ScopeType) -> Consumer {
+        let md = eng.md(node.m);
+        let mut to_consume: IndexMap<GSym, Vec<GNode>> = IndexMap::new();
+        if scope_type == ScopeType::Class {
+            // astroid ClassDef.__init__ add_local_node's the implicit locals
+            // (__module__/__qualname__/__annotations__, scoped_nodes.py:
+            // 1910-1912, 1921-1933) BEFORE any body name; their parent is
+            // the class (add_local_node -> _append_node sets child.parent).
+            for (w, nm) in ["__module__", "__qualname__", "__annotations__"]
+                .iter()
+                .enumerate()
+            {
+                let sym = eng.sym(nm);
+                to_consume.insert(sym, vec![eng.implicit_class_local(node, w as u8)]);
+            }
+        }
+        if let Some(locals) = md.locals.borrow().get(&node.n) {
+            for (k, v) in locals {
+                to_consume
+                    .entry(*k)
+                    .or_default()
+                    .extend(v.iter().copied());
+            }
+        }
+        Consumer {
+            node,
+            scope_type,
+            to_consume,
+            consumed: IndexMap::new(),
+            consumed_uncertain: IndexMap::new(),
+            names_under_always_false_test: FxHashSet::default(),
+            names_defined_under_one_branch_only: FxHashSet::default(),
+        }
+    }
+
+    /// mark_as_consumed (variables.py:547-559)
+    fn mark_as_consumed(&mut self, name: GSym, consumed_nodes: Vec<GNode>) {
+        let set: FxHashSet<GNode> = consumed_nodes.iter().copied().collect();
+        let unconsumed: Vec<GNode> = self
+            .to_consume
+            .get(&name)
+            .map(|v| v.iter().copied().filter(|n| !set.contains(n)).collect())
+            .unwrap_or_default();
+        self.consumed.insert(name, consumed_nodes);
+        if !unconsumed.is_empty() {
+            self.to_consume.insert(name, unconsumed);
+        } else {
+            self.to_consume.shift_remove(&name);
+        }
+    }
+}
+
+pub struct VarsChecker {
+    to_consume: Vec<Consumer>,
+    postponed_evaluation_enabled: bool,
+    /// _reported_type_checking_usage_scopes — instance state, persists
+    /// ACROSS modules (variables.py:1334-1336)
+    reported_type_checking_usage_scopes: FxHashMap<String, Vec<GNode>>,
+}
+
+impl Default for VarsChecker {
+    fn default() -> Self {
+        VarsChecker {
+            to_consume: Vec::new(),
+            postponed_evaluation_enabled: false,
+            reported_type_checking_usage_scopes: FxHashMap::default(),
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// small node helpers
+// ---------------------------------------------------------------------------
+
+fn name_of(eng: &Engine, g: GNode) -> Option<GSym> {
+    u::name_gsym(eng, g)
+}
+
+fn stmt_of(eng: &Engine, g: GNode) -> GNode {
+    eng.statement(g).unwrap_or(g)
+}
+
+/// type_params of a ClassDef/FunctionDef: any param AssignName == name?
+fn type_param_matches(eng: &Engine, scope: GNode, name: GSym) -> bool {
+    let md = eng.md(scope.m);
+    let tps: Vec<NodeId> = match &md.tree.nodes[scope.n.idx()].kind {
+        NodeKind::ClassDef(d) => d.type_params.clone(),
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.type_params.clone(),
+        _ => return false,
+    };
+    drop(md);
+    for tp in tps {
+        let g = GNode { m: scope.m, n: tp };
+        let md = eng.md(g.m);
+        let nm = match &md.tree.nodes[tp.idx()].kind {
+            NodeKind::TypeVar { name, .. }
+            | NodeKind::ParamSpec { name }
+            | NodeKind::TypeVarTuple { name } => *name,
+            _ => continue,
+        };
+        if let NodeKind::AssignName { name: n } = &md.tree.nodes[nm.idx()].kind {
+            if eng.g(&md, *n) == name {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// node is (by identity) inside defframe.type_params subtrees
+fn defnode_in_type_params(eng: &Engine, defframe: GNode, defnode: GNode) -> bool {
+    let md = eng.md(defframe.m);
+    let tps: Vec<NodeId> = match &md.tree.nodes[defframe.n.idx()].kind {
+        NodeKind::ClassDef(d) => d.type_params.clone(),
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.type_params.clone(),
+        _ => return false,
+    };
+    drop(md);
+    tps.iter().any(|&tp| defnode.n == tp && defnode.m == defframe.m)
+}
+
+fn locals_contains(eng: &Engine, scope: GNode, name: GSym) -> bool {
+    eng.md(scope.m)
+        .locals
+        .borrow()
+        .get(&scope.n)
+        .map(|l| l.contains_key(&name))
+        .unwrap_or(false)
+}
+
+fn locals_get(eng: &Engine, scope: GNode, name: GSym) -> Vec<GNode> {
+    eng.md(scope.m)
+        .locals
+        .borrow()
+        .get(&scope.n)
+        .and_then(|l| l.get(&name).cloned())
+        .unwrap_or_default()
+}
+
+fn module_node(g: GNode) -> GNode {
+    GNode { m: g.m, n: NodeId::MODULE }
+}
+
+/// _flattened_scope_names over Global nodes of a frame (top-down preorder)
+fn global_names_in(eng: &Engine, frame: GNode) -> FxHashSet<GSym> {
+    let mut out = FxHashSet::default();
+    for n in u::preorder(eng, frame) {
+        let md = eng.md(n.m);
+        if let NodeKind::Global { names } = &md.tree.nodes[n.n.idx()].kind {
+            for &s in names {
+                out.insert(eng.g(&md, s));
+            }
+        }
+    }
+    out
+}
+
+/// _is_nonlocal_name (variables.py:320-330)
+fn is_nonlocal_name(eng: &Engine, node: GNode, frame: GNode) -> bool {
+    if !u::is_functiondef(eng, frame) {
+        return false;
+    }
+    let Some(name) = name_of(eng, node) else { return false };
+    let md = eng.md(frame.m);
+    let body: Vec<NodeId> = match &md.tree.nodes[frame.n.idx()].kind {
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
+        _ => return false,
+    };
+    drop(md);
+    for b in body {
+        let g = GNode { m: frame.m, n: b };
+        let md = eng.md(g.m);
+        if let NodeKind::Nonlocal { names } = &md.tree.nodes[b.idx()].kind {
+            if names.iter().any(|&s| eng.g(&md, s) == name) {
+                drop(md);
+                if u::is_before(eng, g, node) {
+                    return true;
+                }
+            }
+        }
+    }
+    false
+}
+
+/// _find_frame_imports (variables.py:255-274)
+fn find_frame_imports(eng: &Engine, name: GSym, frame: GNode) -> bool {
+    if global_names_in(eng, frame).contains(&name) {
+        return false;
+    }
+    for n in u::preorder(eng, frame) {
+        let md = eng.md(n.m);
+        if let NodeKind::Import { names } | NodeKind::ImportFrom { names, .. } =
+            &md.tree.nodes[n.n.idx()].kind
+        {
+            for (imp, alias) in names {
+                if let Some(a) = alias {
+                    if eng.g(&md, *a) == name {
+                        return true;
+                    }
+                } else if eng.g(&md, *imp) == name {
+                    return true;
+                }
+            }
+        }
+    }
+    false
+}
+
+/// _assigned_locally (variables.py:299-305)
+fn assigned_locally(eng: &Engine, node: GNode) -> bool {
+    let Some(name) = name_of(eng, node) else { return false };
+    let scope = eng.scope(node);
+    for n in u::preorder(eng, scope) {
+        if eng.kind_is(n, |k| matches!(k, NodeKind::AssignName { .. }))
+            && name_of(eng, n) == Some(name)
+        {
+            return true;
+        }
+    }
+    find_frame_imports(eng, name, scope)
+}
+
+// ---------------------------------------------------------------------------
+// NamesConsumer machinery
+// ---------------------------------------------------------------------------
+
+impl Consumer {
+    /// get_next_to_consume (variables.py:561-654).
+    /// None => CONTINUE to outer; Some(empty) => unfound path; Some(v) => defs.
+    fn get_next_to_consume(&mut self, cx: &mut WalkCx, node: GNode) -> Option<Vec<GNode>> {
+        let eng = cx.eng;
+        let name = name_of(eng, node)?;
+        let parent_node = eng.parent(node);
+        let mut found_nodes: Option<Vec<GNode>> = self.to_consume.get(&name).cloned();
+        let node_statement = stmt_of(eng, node);
+
+        let truthy = |f: &Option<Vec<GNode>>| f.as_ref().map(|v| !v.is_empty()).unwrap_or(false);
+
+        // (a) `x = x` self-definition
+        if truthy(&found_nodes) {
+            if let Some(pn) = parent_node {
+                if eng.kind_is(pn, |k| matches!(k, NodeKind::Assign { .. })) {
+                    let first = found_nodes.as_ref().unwrap()[0];
+                    if eng.parent(first) == Some(pn) {
+                        let md = eng.md(pn.m);
+                        if let NodeKind::Assign { targets, .. } = &md.tree.nodes[pn.n.idx()].kind {
+                            if let Some(&t0) = targets.first() {
+                                if let NodeKind::AssignName { name: lhs } =
+                                    &md.tree.nodes[t0.idx()].kind
+                                {
+                                    if eng.g(&md, *lhs) == name {
+                                        found_nodes = None;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        // (b) `for x in x:`
+        if truthy(&found_nodes) {
+            if let Some(pn) = parent_node {
+                let md = eng.md(pn.m);
+                if let NodeKind::For(d) | NodeKind::AsyncFor(d) = &md.tree.nodes[pn.n.idx()].kind {
+                    let (target, iter) = (d.target, d.iter);
+                    drop(md);
+                    let tg = GNode { m: pn.m, n: target };
+                    if iter == node.n
+                        && found_nodes.as_ref().unwrap().contains(&tg)
+                    {
+                        let others: Vec<GNode> = found_nodes
+                            .as_ref()
+                            .unwrap()
+                            .iter()
+                            .copied()
+                            .filter(|&fnode| fnode != tg)
+                            .collect();
+                        found_nodes = if others.is_empty() { None } else { Some(others) };
+                    }
+                }
+            }
+        }
+
+        // (c) nonlocal in node.frame() -> unfiltered
+        if is_nonlocal_name(eng, node, eng.frame(node)) {
+            return found_nodes;
+        }
+        // (d) comprehension between frame and node -> unfiltered
+        if comprehension_between_frame_and_node(eng, node) {
+            return found_nodes;
+        }
+
+        // (e) except-binding filter (silent)
+        if truthy(&found_nodes) {
+            let filtered: Vec<GNode> = found_nodes
+                .as_ref()
+                .unwrap()
+                .iter()
+                .copied()
+                .filter(|&n| {
+                    let st = stmt_of(eng, n);
+                    !u::is_excepthandler(eng, st) || eng.parent_of(st, node)
+                })
+                .collect();
+            found_nodes = Some(filtered);
+        }
+
+        // (f) if-test filter
+        if truthy(&found_nodes) {
+            let uncertain = self.uncertain_nodes_if_tests(cx, found_nodes.as_ref().unwrap(), node);
+            let entry = self.consumed_uncertain.entry(name).or_default();
+            entry.extend(uncertain.iter().copied());
+            let set: FxHashSet<GNode> = uncertain.into_iter().collect();
+            found_nodes = Some(
+                found_nodes
+                    .unwrap()
+                    .into_iter()
+                    .filter(|n| !set.contains(n))
+                    .collect(),
+            );
+        }
+        // (g) except-block filter
+        if truthy(&found_nodes) {
+            let uncertain =
+                uncertain_nodes_in_except_blocks(cx, found_nodes.as_ref().unwrap(), node, node_statement);
+            let entry = self.consumed_uncertain.entry(name).or_default();
+            entry.extend(uncertain.iter().copied());
+            let set: FxHashSet<GNode> = uncertain.into_iter().collect();
+            found_nodes = Some(
+                found_nodes
+                    .unwrap()
+                    .into_iter()
+                    .filter(|n| !set.contains(n))
+                    .collect(),
+            );
+        }
+        // (h) try-vs-finally filter
+        if truthy(&found_nodes) {
+            let uncertain = uncertain_nodes_in_try_finally(
+                cx,
+                found_nodes.as_ref().unwrap(),
+                node_statement,
+                name,
+            );
+            let entry = self.consumed_uncertain.entry(name).or_default();
+            entry.extend(uncertain.iter().copied());
+            let set: FxHashSet<GNode> = uncertain.into_iter().collect();
+            found_nodes = Some(
+                found_nodes
+                    .unwrap()
+                    .into_iter()
+                    .filter(|n| !set.contains(n))
+                    .collect(),
+            );
+        }
+        // (i) try-vs-except filter
+        if truthy(&found_nodes) {
+            let uncertain = uncertain_nodes_in_try_except(
+                cx.eng,
+                found_nodes.as_ref().unwrap(),
+                node_statement,
+            );
+            let entry = self.consumed_uncertain.entry(name).or_default();
+            entry.extend(uncertain.iter().copied());
+            let set: FxHashSet<GNode> = uncertain.into_iter().collect();
+            found_nodes = Some(
+                found_nodes
+                    .unwrap()
+                    .into_iter()
+                    .filter(|n| !set.contains(n))
+                    .collect(),
+            );
+        }
+        found_nodes
+    }
+
+    /// _uncertain_nodes_if_tests (variables.py:759-809)
+    fn uncertain_nodes_if_tests(
+        &mut self,
+        cx: &mut WalkCx,
+        found_nodes: &[GNode],
+        node: GNode,
+    ) -> Vec<GNode> {
+        let eng = cx.eng;
+        let mut uncertain = Vec::new();
+        for &other_node in found_nodes {
+            let name: GSym = {
+                let md = eng.md(other_node.m);
+                match &md.tree.nodes[other_node.n.idx()].kind {
+                    NodeKind::AssignName { name } => eng.g(&md, *name),
+                    NodeKind::Import { .. } | NodeKind::ImportFrom { .. } => {
+                        drop(md);
+                        match name_of(eng, node) {
+                            Some(s) => s,
+                            None => continue,
+                        }
+                    }
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => eng.g(&md, d.name),
+                    NodeKind::ClassDef(d) => eng.g(&md, d.name),
+                    _ => continue,
+                }
+            };
+            let all_if: Vec<GNode> = u::ancestors(eng, other_node)
+                .into_iter()
+                .filter(|&a| u::is_if(eng, a) && !eng.parent_of(a, node))
+                .collect();
+            if all_if.is_empty() {
+                continue;
+            }
+            let closest_if = all_if[0];
+            let node_is_assignname =
+                eng.kind_is(node, |k| matches!(k, NodeKind::AssignName { .. }));
+            if node_is_assignname && eng.frame(node) != eng.frame(closest_if) {
+                continue;
+            }
+            if eng.parent_of(closest_if, node) {
+                continue;
+            }
+            let outer_if = *all_if.last().unwrap();
+            if node_guarded_by_same_test(cx, node, outer_if) {
+                continue;
+            }
+            if self.inferred_to_define_name_raise_or_return(cx, name, outer_if) {
+                continue;
+            }
+            uncertain.push(other_node);
+        }
+        uncertain
+    }
+
+    /// _inferred_to_define_name_raise_or_return (variables.py:656-700)
+    fn inferred_to_define_name_raise_or_return(
+        &mut self,
+        cx: &mut WalkCx,
+        name: GSym,
+        node: GNode,
+    ) -> bool {
+        let eng = cx.eng;
+        let md = eng.md(node.m);
+        match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Try(d) => {
+                // try_except_node = node (next over self-inclusive preorder)
+                let handlers = d.handlers.clone();
+                drop(md);
+                if defines_name_raises_or_returns_recursive(cx, name, node) {
+                    return true;
+                }
+                handlers.iter().all(|&h| {
+                    defines_name_raises_or_returns_recursive(cx, name, GNode { m: node.m, n: h })
+                })
+            }
+            NodeKind::With(_)
+            | NodeKind::AsyncWith(_)
+            | NodeKind::For(_)
+            | NodeKind::AsyncFor(_)
+            | NodeKind::While { .. } => {
+                drop(md);
+                defines_name_raises_or_returns_recursive(cx, name, node)
+            }
+            NodeKind::Match { cases, .. } => {
+                let cases = cases.clone();
+                drop(md);
+                cases.iter().all(|&c| {
+                    defines_name_raises_or_returns_recursive(cx, name, GNode { m: node.m, n: c })
+                })
+            }
+            NodeKind::If { .. } => {
+                drop(md);
+                self.inferred_to_define_name_raise_or_return_for_if_node(cx, name, node)
+            }
+            _ => false, // unreachable per pylint AssertionError
+        }
+    }
+
+    /// _inferred_to_define_name_raise_or_return_for_if_node
+    /// (variables.py:702-737)
+    fn inferred_to_define_name_raise_or_return_for_if_node(
+        &mut self,
+        cx: &mut WalkCx,
+        name: GSym,
+        node: GNode,
+    ) -> bool {
+        let eng = cx.eng;
+        // "Be permissive if there is a break or a continue" — but
+        // `node.nodes_of_class(nodes.Break, nodes.Continue)` passes Continue
+        // as SKIP_KLASS (node_ng.py:497-528): only Break nodes match!
+        if u::preorder(eng, node)
+            .iter()
+            .any(|&n| eng.kind_is(n, |k| matches!(k, NodeKind::Break)))
+        {
+            return true;
+        }
+        if defines_name_raises_or_returns(cx, name, node) {
+            return true;
+        }
+        let test = {
+            let md = eng.md(node.m);
+            let NodeKind::If { test, .. } = &md.tree.nodes[node.n.idx()].kind else {
+                return false;
+            };
+            let t = GNode { m: node.m, n: *test };
+            match &md.tree.nodes[t.n.idx()].kind {
+                NodeKind::NamedExpr { value, .. } => GNode { m: node.m, n: *value },
+                _ => t,
+            }
+        };
+        let all_inferred = u::infer_all(eng, cx.caches, test);
+        let mut only_search_else = true;
+        for inferred in all_inferred.iter() {
+            match eng.value_const(inferred) {
+                None => {
+                    only_search_else = false;
+                    continue;
+                }
+                Some(c) => {
+                    // only_search_if is computed but never used (dead code)
+                    only_search_else = only_search_else && !u::const_truthy(&c);
+                }
+            }
+        }
+        let (body, orelse) = {
+            let md = eng.md(node.m);
+            let NodeKind::If { body, orelse, .. } = &md.tree.nodes[node.n.idx()].kind else {
+                return false;
+            };
+            (body.clone(), orelse.clone())
+        };
+        if !all_inferred.is_empty() && only_search_else {
+            self.names_under_always_false_test.insert(name);
+            return self.branch_handles_name(cx, name, node.m, &orelse);
+        }
+        let if_branch_handles = self.branch_handles_name(cx, name, node.m, &body);
+        let else_branch_handles = self.branch_handles_name(cx, name, node.m, &orelse);
+        if if_branch_handles ^ else_branch_handles {
+            self.names_defined_under_one_branch_only.insert(name);
+        } else if self.names_defined_under_one_branch_only.contains(&name) {
+            self.names_defined_under_one_branch_only.remove(&name);
+        }
+        if_branch_handles && else_branch_handles
+    }
+
+    /// _branch_handles_name (variables.py:739-757)
+    fn branch_handles_name(
+        &mut self,
+        cx: &mut WalkCx,
+        name: GSym,
+        m: pyinfer::value::ModId,
+        body: &[NodeId],
+    ) -> bool {
+        for &stmt in body {
+            let g = GNode { m, n: stmt };
+            if defines_name_raises_or_returns(cx, name, g) {
+                return true;
+            }
+            let is_compound = cx.eng.kind_is(g, |k| {
+                matches!(
+                    k,
+                    NodeKind::If { .. }
+                        | NodeKind::Try(_)
+                        | NodeKind::With(_)
+                        | NodeKind::AsyncWith(_)
+                        | NodeKind::For(_)
+                        | NodeKind::AsyncFor(_)
+                        | NodeKind::While { .. }
+                        | NodeKind::Match { .. }
+                )
+            });
+            if is_compound && self.inferred_to_define_name_raise_or_return(cx, name, g) {
+                return true;
+            }
+        }
+        false
+    }
+}
+
+/// _comprehension_between_frame_and_node (variables.py:3010-3020)
+fn comprehension_between_frame_and_node(eng: &Engine, node: GNode) -> bool {
+    let closest = u::first_ancestor(eng, node, |k| {
+        matches!(
+            k,
+            NodeKind::ListComp(_) | NodeKind::SetComp(_) | NodeKind::DictComp(_) | NodeKind::GeneratorExp(_)
+        )
+    });
+    match closest {
+        Some(c) => eng.parent_of(eng.frame(node), c),
+        None => false,
+    }
+}
+
+/// _node_guarded_by_same_test (variables.py:811-845)
+fn node_guarded_by_same_test(cx: &mut WalkCx, node: GNode, other_if: GNode) -> bool {
+    let eng = cx.eng;
+    let other_if_test = {
+        let md = eng.md(other_if.m);
+        let NodeKind::If { test, .. } = &md.tree.nodes[other_if.n.idx()].kind else {
+            return false;
+        };
+        let t = GNode { m: other_if.m, n: *test };
+        match &md.tree.nodes[t.n.idx()].kind {
+            NodeKind::NamedExpr { target, .. } => GNode { m: other_if.m, n: *target },
+            _ => t,
+        }
+    };
+    let other_str = u::as_string(eng, other_if_test);
+    let other_inferred = u::infer_all(eng, cx.caches, other_if_test);
+    for ancestor in u::ancestors(eng, node) {
+        let md = eng.md(ancestor.m);
+        let test = match &md.tree.nodes[ancestor.n.idx()].kind {
+            NodeKind::If { test, .. } | NodeKind::IfExp { test, .. } => {
+                GNode { m: ancestor.m, n: *test }
+            }
+            _ => continue,
+        };
+        drop(md);
+        if u::as_string(eng, test) == other_str {
+            return true;
+        }
+        if eng.kind_is(test, |k| matches!(k, NodeKind::Name { .. })) {
+            continue;
+        }
+        let all_inferred = u::infer_all(eng, cx.caches, test);
+        if all_inferred.len() == other_inferred.len() {
+            let mut all_const = true;
+            let mut set_a: FxHashSet<u::PyKey> = FxHashSet::default();
+            let mut set_b: FxHashSet<u::PyKey> = FxHashSet::default();
+            for v in all_inferred.iter() {
+                match eng.value_const(v) {
+                    Some(c) => {
+                        set_a.insert(u::py_key(&c));
+                    }
+                    None => {
+                        all_const = false;
+                        break;
+                    }
+                }
+            }
+            if all_const {
+                for v in other_inferred.iter() {
+                    match eng.value_const(v) {
+                        Some(c) => {
+                            set_b.insert(u::py_key(&c));
+                        }
+                        None => {
+                            all_const = false;
+                            break;
+                        }
+                    }
+                }
+            }
+            if !all_const {
+                continue;
+            }
+            if set_a != set_b {
+                continue;
+            }
+            return true;
+        }
+    }
+    false
+}
+
+/// _defines_name_raises_or_returns (variables.py:928-980)
+fn defines_name_raises_or_returns(cx: &mut WalkCx, name: GSym, node: GNode) -> bool {
+    let eng = cx.eng;
+    let md = eng.md(node.m);
+    match &md.tree.nodes[node.n.idx()].kind {
+        NodeKind::Raise { .. } | NodeKind::Assert { .. } | NodeKind::Return { .. }
+        | NodeKind::Continue => return true,
+        NodeKind::Expr { value } => {
+            let v = GNode { m: node.m, n: *value };
+            if let NodeKind::Call { func, .. } = &md.tree.nodes[v.n.idx()].kind {
+                let func = GNode { m: node.m, n: *func };
+                drop(md);
+                if u::is_terminating_func(eng, cx.caches, v) {
+                    return true;
+                }
+                let md = eng.md(func.m);
+                if let NodeKind::Name { name: fname } = &md.tree.nodes[func.n.idx()].kind {
+                    if md.tree.s(*fname) == "assert_never" {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        NodeKind::AnnAssign { target, value: Some(_), .. } => {
+            if let NodeKind::AssignName { name: t } = &md.tree.nodes[target.idx()].kind {
+                if eng.g(&md, *t) == name {
+                    return true;
+                }
+            }
+        }
+        _ => {}
+    }
+    let md = eng.md(node.m);
+    if let NodeKind::Assign { targets, .. } = &md.tree.nodes[node.n.idx()].kind {
+        let targets = targets.clone();
+        drop(md);
+        for t in targets {
+            for elt in u::get_all_elements(eng, GNode { m: node.m, n: t }) {
+                let elt = {
+                    let md = eng.md(elt.m);
+                    match &md.tree.nodes[elt.n.idx()].kind {
+                        NodeKind::Starred { value, .. } => GNode { m: elt.m, n: *value },
+                        _ => elt,
+                    }
+                };
+                if eng.kind_is(elt, |k| matches!(k, NodeKind::AssignName { .. }))
+                    && name_of(eng, elt) == Some(name)
+                {
+                    return true;
+                }
+            }
+        }
+    }
+    let md = eng.md(node.m);
+    if matches!(md.tree.nodes[node.n.idx()].kind, NodeKind::If { .. }) {
+        drop(md);
+        for sub in u::preorder(eng, node) {
+            let md = eng.md(sub.m);
+            if let NodeKind::NamedExpr { target, .. } = &md.tree.nodes[sub.n.idx()].kind {
+                if let NodeKind::AssignName { name: t } = &md.tree.nodes[target.idx()].kind {
+                    if eng.g(&md, *t) == name {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    let md = eng.md(node.m);
+    if let NodeKind::Import { names } | NodeKind::ImportFrom { names, .. } =
+        &md.tree.nodes[node.n.idx()].kind
+    {
+        let name_str = eng.sname(name);
+        for (n, asn) in names {
+            let n_str = md.tree.s(*n);
+            if let Some(a) = asn {
+                if md.tree.s(*a) == name_str {
+                    return true;
+                }
+            }
+            if n_str == name_str || n_str.starts_with(&format!("{name_str}.")) {
+                return true;
+            }
+        }
+    }
+    let md = eng.md(node.m);
+    if let NodeKind::With(d) | NodeKind::AsyncWith(d) = &md.tree.nodes[node.n.idx()].kind {
+        for (_, var) in &d.items {
+            if let Some(v) = var {
+                if let NodeKind::AssignName { name: t } = &md.tree.nodes[v.idx()].kind {
+                    if eng.g(&md, *t) == name {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    let md = eng.md(node.m);
+    match &md.tree.nodes[node.n.idx()].kind {
+        NodeKind::ClassDef(d) => {
+            if eng.g(&md, d.name) == name {
+                return true;
+            }
+        }
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+            if eng.g(&md, d.name) == name {
+                return true;
+            }
+        }
+        NodeKind::ExceptHandler { name: Some(n), .. } => {
+            if let NodeKind::AssignName { name: t } = &md.tree.nodes[n.idx()].kind {
+                if eng.g(&md, *t) == name {
+                    return true;
+                }
+            }
+        }
+        _ => {}
+    }
+    false
+}
+
+/// _defines_name_raises_or_returns_recursive (variables.py:982-1014)
+fn defines_name_raises_or_returns_recursive(cx: &mut WalkCx, name: GSym, node: GNode) -> bool {
+    let eng = cx.eng;
+    let children: Vec<NodeId> = eng.md(node.m).tree.children(node.n);
+    for c in children {
+        let stmt = GNode { m: node.m, n: c };
+        if defines_name_raises_or_returns(cx, name, stmt) {
+            return true;
+        }
+        let md = eng.md(stmt.m);
+        match &md.tree.nodes[stmt.n.idx()].kind {
+            NodeKind::If { .. } | NodeKind::With(_) | NodeKind::AsyncWith(_) => {
+                drop(md);
+                let kids = eng.md(stmt.m).tree.children(stmt.n);
+                if kids
+                    .iter()
+                    .any(|&k| defines_name_raises_or_returns(cx, name, GNode { m: stmt.m, n: k }))
+                {
+                    return true;
+                }
+            }
+            NodeKind::Try(d) => {
+                let has_final = !d.finalbody.is_empty();
+                drop(md);
+                if !has_final && defines_name_raises_or_returns_recursive(cx, name, stmt) {
+                    return true;
+                }
+            }
+            NodeKind::Match { cases, .. } => {
+                let cases = cases.clone();
+                drop(md);
+                // beware: returns IMMEDIATELY (even when False)
+                return cases.iter().all(|&case| {
+                    defines_name_raises_or_returns_recursive(cx, name, GNode { m: stmt.m, n: case })
+                });
+            }
+            _ => {}
+        }
+    }
+    false
+}
+
+/// _uncertain_nodes_in_except_blocks (variables.py:847-926)
+fn uncertain_nodes_in_except_blocks(
+    cx: &mut WalkCx,
+    found_nodes: &[GNode],
+    node: GNode,
+    node_statement: GNode,
+) -> Vec<GNode> {
+    let eng = cx.eng;
+    let mut uncertain = Vec::new();
+    for &other_node in found_nodes {
+        let other_statement = stmt_of(eng, other_node);
+        let Some(closest_handler) = u::first_ancestor(eng, other_statement, |k| {
+            matches!(k, NodeKind::ExceptHandler { .. })
+        }) else {
+            continue;
+        };
+        if eng.parent_of(closest_handler, node) {
+            continue;
+        }
+        let closest_try_except = eng.parent(closest_handler).unwrap_or(closest_handler);
+        let md = eng.md(closest_try_except.m);
+        let NodeKind::Try(d) = &md.tree.nodes[closest_try_except.n.idx()].kind else {
+            continue;
+        };
+        let (body, orelse, handlers) = (d.body.clone(), d.orelse.clone(), d.handlers.clone());
+        drop(md);
+        let is_return = |n: &NodeId| {
+            eng.kind_is(GNode { m: closest_try_except.m, n: *n }, |k| {
+                matches!(k, NodeKind::Return { .. })
+            })
+        };
+        let try_block_returns = body.iter().any(is_return);
+        let else_block_returns = orelse.iter().any(is_return);
+        let else_block_exits = orelse.iter().any(|&n| {
+            let g = GNode { m: closest_try_except.m, n };
+            let md = eng.md(g.m);
+            if let NodeKind::Expr { value } = &md.tree.nodes[g.n.idx()].kind {
+                let v = GNode { m: g.m, n: *value };
+                if matches!(md.tree.nodes[v.n.idx()].kind, NodeKind::Call { .. }) {
+                    drop(md);
+                    return u::is_terminating_func(eng, cx.caches, v);
+                }
+            }
+            false
+        });
+        let else_block_continues = orelse.iter().any(|&n| {
+            eng.kind_is(GNode { m: closest_try_except.m, n }, |k| matches!(k, NodeKind::Continue))
+        });
+        let stmt_parent = eng.parent(node_statement);
+        if else_block_continues {
+            if let Some(p) = stmt_parent {
+                let in_loop = eng.kind_is(p, |k| {
+                    matches!(
+                        k,
+                        NodeKind::For(_) | NodeKind::AsyncFor(_) | NodeKind::While { .. }
+                    )
+                });
+                let tep = eng.parent(closest_try_except);
+                if in_loop
+                    && tep.map(|t| eng.parent_of(t, node_statement)).unwrap_or(false)
+                {
+                    continue;
+                }
+            }
+        }
+
+        if try_block_returns || else_block_returns || else_block_exits {
+            let mut appended = false;
+            if let Some(p) = stmt_parent {
+                if u::is_try(eng, p) {
+                    let md = eng.md(p.m);
+                    if let NodeKind::Try(pd) = &md.tree.nodes[p.n.idx()].kind {
+                        let in_final = pd.finalbody.contains(&node_statement.n);
+                        let in_orelse = pd.orelse.contains(&node_statement.n);
+                        drop(md);
+                        let tep = eng.parent(closest_try_except);
+                        let guard =
+                            tep.map(|t| eng.parent_of(t, node_statement)).unwrap_or(false);
+                        if (in_final || in_orelse) && guard {
+                            uncertain.push(other_node);
+                            appended = true;
+                        }
+                    }
+                }
+            }
+            if !appended
+                && handlers.iter().all(|&h| {
+                    defines_name_raises_or_returns_recursive(
+                        cx,
+                        name_of(cx.eng, node).unwrap_or(0),
+                        GNode { m: closest_try_except.m, n: h },
+                    )
+                })
+            {
+                continue;
+            }
+            // NOTE bug-for-bug: when the first two sub-branches appended,
+            // control FALLS THROUGH to the checks below (possible duplicate
+            // append of other_node).
+        }
+
+        if check_loop_finishes_via_except(cx, node, closest_try_except) {
+            continue;
+        }
+        uncertain.push(other_node);
+    }
+    uncertain
+}
+
+/// _check_loop_finishes_via_except (variables.py:1016-1089)
+fn check_loop_finishes_via_except(cx: &mut WalkCx, node: GNode, try_except: GNode) -> bool {
+    let eng = cx.eng;
+    let md = eng.md(try_except.m);
+    let NodeKind::Try(d) = &md.tree.nodes[try_except.n.idx()].kind else {
+        return false;
+    };
+    let orelse = d.orelse.clone();
+    drop(md);
+    if orelse.is_empty() {
+        return false;
+    }
+    let Some(closest_loop) = u::first_ancestor(eng, node, |k| {
+        matches!(k, NodeKind::For(_) | NodeKind::AsyncFor(_) | NodeKind::While { .. })
+    }) else {
+        return false;
+    };
+    let loop_orelse: Vec<NodeId> = {
+        let md = eng.md(closest_loop.m);
+        match &md.tree.nodes[closest_loop.n.idx()].kind {
+            NodeKind::For(d) | NodeKind::AsyncFor(d) => d.orelse.clone(),
+            NodeKind::While { orelse, .. } => orelse.clone(),
+            _ => return false,
+        }
+    };
+    if !loop_orelse.iter().any(|&s| {
+        let g = GNode { m: closest_loop.m, n: s };
+        g == node || eng.parent_of(g, node)
+    }) {
+        return false;
+    }
+    let mut break_stmt: Option<GNode> = None;
+    for &s in &orelse {
+        let g = GNode { m: try_except.m, n: s };
+        if eng.kind_is(g, |k| matches!(k, NodeKind::Break)) {
+            break_stmt = Some(g);
+            break;
+        }
+    }
+    let Some(break_stmt) = break_stmt else { return false };
+
+    let try_in_loop_body = |loop_node: GNode| -> bool {
+        let md = eng.md(loop_node.m);
+        let body: Vec<NodeId> = match &md.tree.nodes[loop_node.n.idx()].kind {
+            NodeKind::For(d) | NodeKind::AsyncFor(d) => d.body.clone(),
+            NodeKind::While { body, .. } => body.clone(),
+            _ => return false,
+        };
+        drop(md);
+        body.iter().any(|&s| {
+            let g = GNode { m: loop_node.m, n: s };
+            g == try_except || eng.parent_of(g, try_except)
+        })
+    };
+
+    if !try_in_loop_body(closest_loop) {
+        let mut found = false;
+        for anc in u::ancestors(eng, closest_loop) {
+            if eng.kind_is(anc, |k| {
+                matches!(k, NodeKind::For(_) | NodeKind::AsyncFor(_) | NodeKind::While { .. })
+            }) && try_in_loop_body(anc)
+            {
+                found = true;
+                break;
+            }
+        }
+        if !found {
+            return false;
+        }
+    }
+
+    let loop_body: Vec<NodeId> = {
+        let md = eng.md(closest_loop.m);
+        match &md.tree.nodes[closest_loop.n.idx()].kind {
+            NodeKind::For(d) | NodeKind::AsyncFor(d) => d.body.clone(),
+            NodeKind::While { body, .. } => body.clone(),
+            _ => return false,
+        }
+    };
+    for &s in &loop_body {
+        if recursive_search_for_continue_before_break(
+            eng,
+            GNode { m: closest_loop.m, n: s },
+            break_stmt,
+        ) {
+            return false;
+        }
+    }
+    true
+}
+
+/// _recursive_search_for_continue_before_break (variables.py:1091-1110)
+fn recursive_search_for_continue_before_break(eng: &Engine, stmt: GNode, break_stmt: GNode) -> bool {
+    if stmt == break_stmt {
+        return false;
+    }
+    if eng.kind_is(stmt, |k| matches!(k, NodeKind::Continue)) {
+        return true;
+    }
+    let stmt_is_loop = eng.kind_is(stmt, |k| {
+        matches!(k, NodeKind::For(_) | NodeKind::AsyncFor(_) | NodeKind::While { .. })
+    });
+    let children = eng.md(stmt.m).tree.children(stmt.n);
+    for c in children {
+        // NOTE: pylint checks `stmt` (not child!) — loops skip ALL children
+        if stmt_is_loop {
+            continue;
+        }
+        if recursive_search_for_continue_before_break(eng, GNode { m: stmt.m, n: c }, break_stmt) {
+            return true;
+        }
+    }
+    false
+}
+
+/// _uncertain_nodes_in_try_blocks_when_evaluating_except_blocks
+/// (variables.py:1112-1159)
+fn uncertain_nodes_in_try_except(
+    eng: &Engine,
+    found_nodes: &[GNode],
+    node_statement: GNode,
+) -> Vec<GNode> {
+    let mut uncertain = Vec::new();
+    let Some(closest_handler) = u::first_ancestor(eng, node_statement, |k| {
+        matches!(k, NodeKind::ExceptHandler { .. })
+    }) else {
+        return uncertain;
+    };
+    for &other_node in found_nodes {
+        let other_statement = stmt_of(eng, other_node);
+        if other_statement == closest_handler {
+            continue;
+        }
+        let Some((try_anc, try_child)) =
+            u::first_ancestor_and_child(eng, other_statement, |k| matches!(k, NodeKind::Try(_)))
+        else {
+            continue;
+        };
+        let md = eng.md(try_anc.m);
+        let NodeKind::Try(d) = &md.tree.nodes[try_anc.n.idx()].kind else { continue };
+        let (body, handlers) = (d.body.clone(), d.handlers.clone());
+        drop(md);
+        if !body.contains(&try_child.n) {
+            continue;
+        }
+        let closest_in_handlers = handlers.contains(&closest_handler.n)
+            && closest_handler.m == try_anc.m;
+        let handler_ancestors: FxHashSet<GNode> =
+            u::ancestors(eng, closest_handler).into_iter().collect();
+        let related = handlers.iter().any(|&h| {
+            closest_in_handlers || handler_ancestors.contains(&GNode { m: try_anc.m, n: h })
+        });
+        if !related {
+            continue;
+        }
+        uncertain.push(other_node);
+    }
+    uncertain
+}
+
+/// _uncertain_nodes_in_try_blocks_when_evaluating_finally_blocks
+/// (variables.py:1161-1220)
+fn uncertain_nodes_in_try_finally(
+    cx: &mut WalkCx,
+    found_nodes: &[GNode],
+    node_statement: GNode,
+    name: GSym,
+) -> Vec<GNode> {
+    let eng = cx.eng;
+    let mut uncertain = Vec::new();
+    let Some((closest_try, child_of_closest)) =
+        u::first_ancestor_and_child(eng, node_statement, |k| matches!(k, NodeKind::Try(_)))
+    else {
+        return uncertain;
+    };
+    {
+        let md = eng.md(closest_try.m);
+        let NodeKind::Try(d) = &md.tree.nodes[closest_try.n.idx()].kind else {
+            return uncertain;
+        };
+        if !d.finalbody.contains(&child_of_closest.n) {
+            return uncertain;
+        }
+    }
+    for &other_node in found_nodes {
+        let other_statement = stmt_of(eng, other_node);
+        let Some((other_try, other_child)) =
+            u::first_ancestor_and_child(eng, other_statement, |k| matches!(k, NodeKind::Try(_)))
+        else {
+            continue;
+        };
+        let (body, finalbody, handlers) = {
+            let md = eng.md(other_try.m);
+            let NodeKind::Try(d) = &md.tree.nodes[other_try.n.idx()].kind else { continue };
+            (d.body.clone(), d.finalbody.clone(), d.handlers.clone())
+        };
+        if !body.contains(&other_child.n) {
+            continue;
+        }
+        if other_try != closest_try {
+            let covers = finalbody.iter().any(|&s| {
+                let g = GNode { m: other_try.m, n: s };
+                g == closest_try || eng.parent_of(g, closest_try)
+            });
+            if !covers {
+                continue;
+            }
+        }
+        // Is the name defined in all exception clauses?
+        if !handlers.is_empty()
+            && handlers.iter().all(|&h| {
+                defines_name_raises_or_returns_recursive(
+                    cx,
+                    name,
+                    GNode { m: other_try.m, n: h },
+                )
+            })
+        {
+            continue;
+        }
+        uncertain.push(other_node);
+    }
+    uncertain
+}
+
+// ---------------------------------------------------------------------------
+// VariablesChecker visit/leave + core
+// ---------------------------------------------------------------------------
+
+const METACLASS_NAME_TRANSFORMS: &[(&str, &str)] = &[("_py_abc", "abc")];
+
+impl VarsChecker {
+    pub fn visit_module(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.to_consume = vec![Consumer::new(cx.eng, node, ScopeType::Module)];
+        self.postponed_evaluation_enabled =
+            u::is_postponed_evaluation_enabled(cx.eng, node.m);
+        // redefined-builtin loop: W0622 disabled — skip
+    }
+
+    pub fn leave_module(&mut self, cx: &mut WalkCx, node: GNode) {
+        debug_assert_eq!(self.to_consume.len(), 1);
+        self.check_metaclasses(cx, node);
+        let not_consumed = self.to_consume.pop().map(|c| c.to_consume).unwrap_or_default();
+        let all_sym = cx.eng.sym("__all__");
+        if locals_contains(cx.eng, node, all_sym) {
+            self.check_all(cx, node, not_consumed);
+        }
+        // _check_globals / _check_imports: W-only
+    }
+
+    pub fn visit_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.to_consume.push(Consumer::new(cx.eng, node, ScopeType::Class));
+    }
+
+    /// leave_classdef (variables.py:1450-1461)
+    pub fn leave_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        for name_node in u::preorder(eng, node) {
+            if !eng.kind_is(name_node, |k| matches!(k, NodeKind::Name { .. })) {
+                continue;
+            }
+            let Some(parent) = eng.parent(name_node) else { continue };
+            let md = eng.md(parent.m);
+            let NodeKind::Call { func, .. } = &md.tree.nodes[parent.n.idx()].kind else {
+                continue;
+            };
+            let func = *func;
+            let NodeKind::Attribute { expr, .. } = &md.tree.nodes[func.idx()].kind else {
+                continue;
+            };
+            let expr = *expr;
+            let NodeKind::Name { name } = &md.tree.nodes[expr.idx()].kind else {
+                continue;
+            };
+            let name = eng.g(&md, *name);
+            drop(md);
+            // consumer scan OUTER -> INNER (list order; module first)
+            for consumer in self.to_consume.iter_mut() {
+                if let Some(nodes) = consumer.to_consume.get(&name).cloned() {
+                    consumer.mark_as_consumed(name, nodes);
+                    break;
+                }
+            }
+        }
+        self.to_consume.pop();
+    }
+
+    pub fn visit_lambda(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.to_consume.push(Consumer::new(cx.eng, node, ScopeType::Lambda));
+    }
+    pub fn leave_lambda(&mut self, _cx: &mut WalkCx, _node: GNode) {
+        self.to_consume.pop();
+    }
+    pub fn visit_comprehension_scope(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.to_consume.push(Consumer::new(cx.eng, node, ScopeType::Comprehension));
+    }
+    pub fn leave_comprehension_scope(&mut self, _cx: &mut WalkCx, _node: GNode) {
+        self.to_consume.pop();
+    }
+    pub fn visit_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.to_consume.push(Consumer::new(cx.eng, node, ScopeType::Function));
+        // redefined-outer-name / redefined-builtin gate: both disabled
+    }
+    pub fn leave_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.check_metaclasses(cx, node);
+        self.to_consume.pop();
+        // unused-variable family disabled -> early return
+    }
+
+    /// visit_assignname (variables.py:1667-1669)
+    pub fn visit_assignname(&mut self, cx: &mut WalkCx, node: GNode) {
+        let at = cx.eng.assign_type(node);
+        if cx.eng.kind_is(at, |k| matches!(k, NodeKind::AugAssign { .. })) {
+            self.visit_name(cx, node);
+        }
+    }
+    /// visit_delname (variables.py:1671-1672)
+    pub fn visit_delname(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.visit_name(cx, node);
+    }
+
+    /// visit_name (variables.py:1674-1687)
+    pub fn visit_name(&mut self, cx: &mut WalkCx, node: GNode) {
+        let Some(stmt) = cx.eng.statement(node) else { return };
+        self.undefined_and_used_before_checker(cx, node, stmt);
+        // _loopvar_name: W0631 only — not ported
+    }
+
+    /// _undefined_and_used_before_checker (variables.py:1711-1759)
+    fn undefined_and_used_before_checker(&mut self, cx: &mut WalkCx, node: GNode, stmt: GNode) {
+        let eng = cx.eng;
+        let Some(name) = name_of(eng, node) else { return };
+        let frame = eng.scope(stmt);
+        let start_index = self.to_consume.len().saturating_sub(1);
+        let base_scope_type = self.to_consume[start_index].scope_type;
+
+        let mut i = start_index as isize;
+        while i >= 0 {
+            let idx = i as usize;
+            i -= 1;
+            if self.should_node_be_skipped(cx, node, idx, idx == start_index) {
+                continue;
+            }
+            let (action, nodes_to_consume) =
+                self.check_consumer(cx, node, stmt, frame, idx, base_scope_type);
+            if let Some(mut ntc) = nodes_to_consume {
+                if !ntc.is_empty() {
+                    // += consumed_uncertain[name] (defaultdict access creates key)
+                    let extra = self.to_consume[idx]
+                        .consumed_uncertain
+                        .entry(name)
+                        .or_default()
+                        .clone();
+                    ntc.extend(extra);
+                    self.to_consume[idx].mark_as_consumed(name, ntc);
+                }
+            }
+            match action {
+                Action::Continue => continue,
+                Action::Return => return,
+            }
+        }
+
+        // final fallback: undefined-variable (variables.py:1742-1759)
+        let name_str = eng.sname(name);
+        let is_scope_attr = u::SCOPE_ATTRS.contains(&name_str.as_str());
+        let is_class_in_method = name_str == "__class__"
+            && u::ancestors(eng, node).iter().any(|&a| {
+                u::is_functiondef(eng, a) && is_method(eng, a)
+            });
+        if !(is_scope_attr
+            || cx.caches.is_builtin(eng, name)
+            || is_class_in_method)
+            && !u::node_ignores_exception(eng, cx.caches, node, "NameError")
+        {
+            cx.emit_name_msg("E0602", node, &name_str);
+        }
+    }
+
+    /// _should_node_be_skipped (variables.py:1761-1808)
+    fn should_node_be_skipped(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        idx: usize,
+        is_start_index: bool,
+    ) -> bool {
+        let eng = cx.eng;
+        let consumer_node = self.to_consume[idx].node;
+        let scope_type = self.to_consume[idx].scope_type;
+        let Some(name) = name_of(eng, node) else { return false };
+        match scope_type {
+            ScopeType::Class => {
+                if u::is_ancestor_name(eng, consumer_node, node)
+                    || (!is_start_index && self.ignore_class_scope(cx, node))
+                {
+                    if type_param_matches(eng, consumer_node, name) {
+                        return false;
+                    }
+                    return true;
+                }
+                // Keyword whose parent is ClassDef (metaclass= lookup)
+                if let Some(p) = eng.parent(node) {
+                    if eng.kind_is(p, |k| matches!(k, NodeKind::Keyword { .. })) {
+                        if let Some(pp) = eng.parent(p) {
+                            if u::is_classdef(eng, pp) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+                false
+            }
+            ScopeType::Function => {
+                if defined_in_function_definition(eng, node, consumer_node) {
+                    if type_param_matches(eng, consumer_node, name) {
+                        return false;
+                    }
+                    return true;
+                }
+                false
+            }
+            ScopeType::Lambda => u::is_default_argument(eng, node, Some(consumer_node)),
+            _ => false,
+        }
+    }
+
+    /// _ignore_class_scope (variables.py:2584-2622)
+    fn ignore_class_scope(&self, cx: &mut WalkCx, node: GNode) -> bool {
+        let eng = cx.eng;
+        let Some(name) = name_of(eng, node) else { return true };
+        let frame = eng.scope(stmt_of(eng, node));
+        let in_ann = defined_in_function_definition(eng, node, frame);
+        let in_ancestor_list = u::is_ancestor_name(eng, frame, node);
+        let frame_locals_scope = if in_ann || in_ancestor_list {
+            eng.parent(frame).map(|p| eng.scope(p)).unwrap_or(frame)
+        } else {
+            frame
+        };
+        let name_in_locals = locals_contains(eng, frame_locals_scope, name);
+        !((u::is_classdef(eng, frame) || in_ann)
+            && !in_lambda_or_comprehension_body(eng, node, frame)
+            && name_in_locals)
+    }
+
+    /// _check_consumer (variables.py:1811-2019)
+    #[allow(clippy::too_many_arguments)]
+    fn check_consumer(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        stmt: GNode,
+        frame: GNode,
+        idx: usize,
+        base_scope_type: ScopeType,
+    ) -> (Action, Option<Vec<GNode>>) {
+        let eng = cx.eng;
+        let Some(name) = name_of(eng, node) else { return (Action::Return, None) };
+
+        // consumed fast path (variables.py:1820-1829)
+        if self.to_consume[idx].consumed.contains_key(&name) {
+            // _check_late_binding_closure: no-op (cell-var-from-loop disabled)
+            return (Action::Return, None);
+        }
+
+        let found_nodes = {
+            let consumer = &mut self.to_consume[idx];
+            consumer.get_next_to_consume(cx, node)
+        };
+        let Some(found_nodes) = found_nodes else {
+            return (Action::Continue, None);
+        };
+        if found_nodes.is_empty() {
+            let is_reported = self.report_unfound_name_definition(cx, node, idx);
+            let nodes_to_consume = self.to_consume[idx]
+                .consumed_uncertain
+                .entry(name)
+                .or_default()
+                .clone();
+            let nodes_to_consume = self.filter_type_checking_definitions_from_consumption(
+                cx,
+                node,
+                nodes_to_consume,
+                is_reported,
+            );
+            return (Action::Return, Some(nodes_to_consume));
+        }
+
+        let defnode = u::assign_parent(eng, found_nodes[0]);
+        let defstmt = stmt_of(eng, defnode);
+        let defframe = eng.frame(defstmt);
+
+        // recursive class reference (variables.py:1853-1886)
+        let is_recursive_klass = frame == defframe
+            && eng.parent_of(defframe, node)
+            && u::is_classdef(eng, defframe)
+            && eng.node_name(defframe).as_deref() == Some(eng.sname(name).as_str());
+
+        if is_recursive_klass
+            && u::first_ancestor(eng, node, |k| matches!(k, NodeKind::Lambda(_))).is_some()
+            && !(u::is_default_argument(eng, node, None) && {
+                let sc = eng.scope(node);
+                eng.parent(sc).map(|p| eng.scope(p)) == Some(defframe)
+            })
+        {
+            return (Action::Return, None);
+        }
+
+        let (maybe_before_assign, annotation_return, use_outer_definition) = self
+            .is_variable_violation(
+                cx,
+                node,
+                defnode,
+                stmt,
+                defstmt,
+                frame,
+                defframe,
+                base_scope_type,
+                is_recursive_klass,
+            );
+
+        if use_outer_definition {
+            return (Action::Continue, None);
+        }
+
+        let name_str = cx.eng.sname(name);
+        if maybe_before_assign
+            && !u::is_defined_before(cx.eng, node)
+            && !u::are_exclusive_exc(cx.eng, stmt, defstmt, &["NameError"])
+        {
+            let defined_by_stmt = defstmt == stmt
+                && cx.eng.kind_is(node, |k| {
+                    matches!(k, NodeKind::DelName { .. } | NodeKind::AssignName { .. })
+                });
+            let defstmt_is_delete =
+                cx.eng.kind_is(defstmt, |k| matches!(k, NodeKind::Delete { .. }));
+
+            if is_recursive_klass || defined_by_stmt || annotation_return || defstmt_is_delete {
+                if !u::node_ignores_exception(cx.eng, cx.caches, node, "NameError") {
+                    // postponed evaluation of annotations
+                    let stmt_kind_ok = cx.eng.kind_is(stmt, |k| {
+                        matches!(
+                            k,
+                            NodeKind::AnnAssign { .. }
+                                | NodeKind::FunctionDef(_)
+                                | NodeKind::AsyncFunctionDef(_)
+                                | NodeKind::Arguments(_)
+                        )
+                    });
+                    let in_root_locals = locals_contains(cx.eng, module_node(node), name);
+                    if !(self.postponed_evaluation_enabled && stmt_kind_ok && in_root_locals) {
+                        if defined_by_stmt {
+                            return (Action::Continue, Some(vec![node]));
+                        }
+                        return (Action::Continue, None);
+                    }
+                }
+                // fall through to final return
+            } else if base_scope_type != ScopeType::Lambda {
+                // operator precedence: see notes/05 §9.6
+                let stmt_is_annassign =
+                    cx.eng.kind_is(stmt, |k| matches!(k, NodeKind::AnnAssign { .. }));
+                let stmt_is_functiondef = cx.eng.kind_is(stmt, |k| {
+                    matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                });
+                let stmt_is_typealias =
+                    cx.eng.kind_is(stmt, |k| matches!(k, NodeKind::TypeAlias { .. }));
+                let node_in_defaults = if stmt_is_functiondef {
+                    let md = cx.eng.md(stmt.m);
+                    let args_n = match &md.tree.nodes[stmt.n.idx()].kind {
+                        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+                        _ => unreachable!(),
+                    };
+                    let NodeKind::Arguments(ad) = &md.tree.nodes[args_n.idx()].kind else {
+                        unreachable!()
+                    };
+                    ad.defaults.iter().any(|&d| d == node.n)
+                        || ad.kw_defaults.iter().any(|o| *o == Some(node.n))
+                } else {
+                    false
+                };
+                let exempt = (self.postponed_evaluation_enabled
+                    && (stmt_is_annassign || (stmt_is_functiondef && !node_in_defaults)))
+                    || (stmt_is_annassign
+                        && u::first_ancestor(cx.eng, stmt, |k| {
+                            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+                        })
+                        .is_some())
+                    || stmt_is_typealias;
+                if !exempt {
+                    cx.emit_name_msg("E0601", node, &name_str);
+                    return (Action::Return, Some(found_nodes));
+                }
+                // else fall through to final return
+            } else {
+                // base_scope_type == "lambda" (variables.py:1968-1988)
+                if u::is_classdef(cx.eng, frame)
+                    && locals_contains(cx.eng, frame, name)
+                    && u::lineno(cx.eng, stmt) <= u::lineno(cx.eng, defstmt)
+                {
+                    cx.emit_name_msg("E0601", node, &name_str);
+                }
+                // falls through to final return (consume found_nodes)
+            }
+        } else if !self.is_builtin(cx, name) && self.is_only_type_assignment(cx, node, defstmt) {
+            if !locals_get(cx.eng, cx.eng.scope(node), name).is_empty() {
+                cx.emit_name_msg("E0601", node, &name_str);
+            } else {
+                cx.emit_name_msg("E0602", node, &name_str);
+            }
+            return (Action::Return, Some(found_nodes));
+        } else if cx.eng.kind_is(defstmt, |k| matches!(k, NodeKind::ClassDef(_)))
+            && !defnode_in_type_params(cx.eng, defframe, defnode)
+        {
+            return self.is_first_level_self_reference(cx, node, defstmt, found_nodes);
+        } else if cx.eng.kind_is(defnode, |k| matches!(k, NodeKind::NamedExpr { .. })) {
+            if let Some(p) = cx.eng.parent(defnode) {
+                if cx.eng.kind_is(p, |k| matches!(k, NodeKind::IfExp { .. }))
+                    && is_never_evaluated(cx, defnode, p)
+                {
+                    cx.emit_name_msg("E0602", node, &name_str);
+                    return (Action::Return, Some(found_nodes));
+                }
+            }
+        }
+
+        (Action::Return, Some(found_nodes))
+    }
+
+    /// _is_variable_violation (variables.py:2259-2413)
+    #[allow(clippy::too_many_arguments)]
+    fn is_variable_violation(
+        &self,
+        cx: &mut WalkCx,
+        node: GNode,
+        defnode: GNode,
+        stmt: GNode,
+        defstmt: GNode,
+        frame: GNode,
+        defframe: GNode,
+        base_scope_type: ScopeType,
+        is_recursive_klass: bool,
+    ) -> (bool, bool, bool) {
+        let eng = cx.eng;
+        let name = name_of(eng, node).unwrap_or(0);
+        let mut maybe_before_assign = true;
+        let mut annotation_return = false;
+        let mut use_outer_definition = false;
+
+        if frame != defframe {
+            maybe_before_assign = detect_global_scope(eng, node, frame, defframe);
+        } else if eng.parent(defframe).is_none() {
+            // module level
+            let name_str = eng.sname(name);
+            if u::SCOPE_ATTRS.contains(&name_str.as_str())
+                || !eng.builtin_lookup(name).1.is_empty()
+            {
+                maybe_before_assign = false;
+            }
+        } else {
+            // local scope
+            let forbid_lookup = (u::is_functiondef(eng, frame)
+                || u::is_lambda(eng, eng.frame(node)))
+                && assigned_locally(eng, node);
+            if !forbid_lookup && !eng.lookup(module_node(defframe), name).1.is_empty() {
+                maybe_before_assign = false;
+                use_outer_definition = stmt == defstmt
+                    && !eng.kind_is(defnode, |k| matches!(k, NodeKind::Comprehension { .. }));
+            } else if locals_contains(eng, defframe, name) {
+                maybe_before_assign = !is_nonlocal_name(eng, node, defframe);
+            }
+        }
+
+        if base_scope_type == ScopeType::Lambda
+            && u::is_classdef(eng, frame)
+            && locals_contains(eng, frame, name)
+        {
+            // bar = None; foo = lambda bar=bar: bar
+            let in_defaults = {
+                let md = eng.md(defnode.m);
+                if let NodeKind::Arguments(ad) = &md.tree.nodes[defnode.n.idx()].kind {
+                    ad.defaults.iter().any(|&d| d == node.n)
+                } else {
+                    false
+                }
+            };
+            maybe_before_assign = !(in_defaults && {
+                let fl = locals_get(eng, frame, name);
+                !fl.is_empty()
+                    && u::lineno(eng, fl[0]) < u::lineno(eng, defstmt)
+            });
+        } else if u::is_classdef(eng, defframe) && u::is_functiondef(eng, frame) {
+            // function return annotations (variables.py:2310-2356)
+            let frame_returns: Option<GNode> = {
+                let md = eng.md(frame.m);
+                match &md.tree.nodes[frame.n.idx()].kind {
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                        d.returns.map(|r| GNode { m: frame.m, n: r })
+                    }
+                    _ => None,
+                }
+            };
+            if frame_returns == Some(node) {
+                if eng.parent_of(defframe, node) {
+                    annotation_return = true;
+                    let dlocals = locals_get(eng, defframe, name);
+                    if !dlocals.is_empty() {
+                        let definition = dlocals[0];
+                        maybe_before_assign =
+                            u::lineno(eng, definition) >= u::lineno(eng, frame);
+                    } else {
+                        maybe_before_assign = true;
+                    }
+                } else {
+                    let defframe_parent = eng.parent(defframe);
+                    let is_module_parent = defframe_parent
+                        .map(|p| u::is_module(eng, p))
+                        .unwrap_or(false);
+                    let frame_ancestors = u::ancestors(eng, frame);
+                    let any_funcdef = frame_ancestors
+                        .iter()
+                        .any(|&a| u::is_functiondef(eng, a));
+                    let last_is_defframe_parent = frame_ancestors
+                        .last()
+                        .map(|&l| Some(l) == defframe_parent)
+                        .unwrap_or(false);
+                    if is_module_parent
+                        && !frame_ancestors.is_empty()
+                        && any_funcdef
+                        && last_is_defframe_parent
+                    {
+                        annotation_return = true;
+                        maybe_before_assign = false;
+                    }
+                }
+            }
+            if eng
+                .parent(node)
+                .map(|p| eng.kind_is(p, |k| matches!(k, NodeKind::Arguments(_))))
+                .unwrap_or(false)
+            {
+                maybe_before_assign = u::lineno(eng, stmt) <= u::lineno(eng, defstmt);
+            }
+        } else if is_recursive_klass {
+            maybe_before_assign = true;
+        } else {
+            maybe_before_assign =
+                maybe_before_assign && u::lineno(eng, stmt) <= u::lineno(eng, defstmt);
+            if maybe_before_assign && u::lineno(eng, stmt) == u::lineno(eng, defstmt) {
+                let defframe_is_func = u::is_functiondef(eng, defframe);
+                if defframe_is_func
+                    && frame == defframe
+                    && eng.parent_of(defframe, node)
+                    && (defnode_in_type_params(eng, defframe, defnode) || stmt != defstmt)
+                {
+                    maybe_before_assign = false;
+                } else if eng.kind_is(defstmt, |k| {
+                    matches!(
+                        k,
+                        NodeKind::Assign { .. }
+                            | NodeKind::AnnAssign { .. }
+                            | NodeKind::AugAssign { .. }
+                            | NodeKind::Expr { .. }
+                            | NodeKind::Return { .. }
+                            | NodeKind::Match { .. }
+                            | NodeKind::TypeAlias { .. }
+                    )
+                }) && maybe_used_and_assigned_at_once(eng, defstmt)
+                    && frame == defframe
+                    && eng.parent_of(defframe, node)
+                    && stmt == defstmt
+                {
+                    maybe_before_assign = false;
+                } else if eng.kind_is(defnode, |k| matches!(k, NodeKind::NamedExpr { .. }))
+                    && frame == defframe
+                    && eng.parent_of(defframe, stmt)
+                    && stmt == defstmt
+                    && u::is_before(eng, defnode, node)
+                {
+                    let defnode_value = {
+                        let md = eng.md(defnode.m);
+                        match &md.tree.nodes[defnode.n.idx()].kind {
+                            NodeKind::NamedExpr { value, .. } => {
+                                Some(GNode { m: defnode.m, n: *value })
+                            }
+                            _ => None,
+                        }
+                    };
+                    maybe_before_assign = defnode_value == Some(node)
+                        || u::ancestors(eng, node)
+                            .iter()
+                            .any(|&a| Some(a) == defnode_value);
+                } else if u::is_classdef(eng, defframe)
+                    && defnode_in_type_params(eng, defframe, defnode)
+                {
+                    maybe_before_assign = false;
+                }
+            }
+        }
+        (maybe_before_assign, annotation_return, use_outer_definition)
+    }
+
+    fn is_builtin(&self, cx: &mut WalkCx, name: GSym) -> bool {
+        // additional_builtins default () + utils.is_builtin
+        cx.caches.is_builtin(cx.eng, name)
+    }
+
+    /// _is_only_type_assignment (variables.py:2478-2533)
+    fn is_only_type_assignment(&self, cx: &mut WalkCx, node: GNode, defstmt: GNode) -> bool {
+        let eng = cx.eng;
+        let is_bare_annassign = eng.kind_is(defstmt, |k| {
+            matches!(k, NodeKind::AnnAssign { value: None, .. })
+        });
+        if !is_bare_annassign {
+            return false;
+        }
+        let Some(name) = name_of(eng, node) else { return false };
+        let defstmt_frame = eng.frame(defstmt);
+        let node_frame = eng.frame(node);
+        let mut parent: Option<GNode> = Some(node);
+        let boundary = eng.parent(defstmt_frame);
+        while parent.is_some() && parent != boundary {
+            let parent_scope = eng.scope(parent.unwrap());
+            // nonlocal assignment in inner functions?
+            for inner in u::preorder(eng, parent_scope) {
+                if !u::is_functiondef(eng, inner) || inner == parent_scope {
+                    continue;
+                }
+                let mut has_nonlocal = false;
+                let mut has_assign = false;
+                for n in u::preorder(eng, inner) {
+                    let md = eng.md(n.m);
+                    match &md.tree.nodes[n.n.idx()].kind {
+                        NodeKind::Nonlocal { names } => {
+                            if names.iter().any(|&s| eng.g(&md, s) == name) {
+                                has_nonlocal = true;
+                            }
+                        }
+                        NodeKind::AssignName { name: an } => {
+                            if eng.g(&md, *an) == name {
+                                has_assign = true;
+                            }
+                        }
+                        _ => {}
+                    }
+                }
+                if has_nonlocal && has_assign {
+                    return false;
+                }
+            }
+            let local_refs = locals_get(eng, parent_scope, name);
+            for ref_node in local_refs {
+                if defstmt_frame == node_frame && u::lineno(eng, ref_node) > u::lineno(eng, node)
+                {
+                    break;
+                }
+                let ref_parent = eng.parent(ref_node);
+                let parent_is_bare_annassign = ref_parent
+                    .map(|p| {
+                        eng.kind_is(p, |k| matches!(k, NodeKind::AnnAssign { value: None, .. }))
+                    })
+                    .unwrap_or(false);
+                let walrus_ancestor = ref_parent
+                    .map(|p| {
+                        let md = eng.md(p.m);
+                        if let NodeKind::NamedExpr { value, .. } = &md.tree.nodes[p.n.idx()].kind {
+                            let vg = GNode { m: p.m, n: *value };
+                            drop(md);
+                            u::ancestors(eng, node).iter().any(|&a| a == vg)
+                        } else {
+                            false
+                        }
+                    })
+                    .unwrap_or(false);
+                if !parent_is_bare_annassign && !walrus_ancestor {
+                    return false;
+                }
+            }
+            parent = eng.parent(parent_scope);
+        }
+        true
+    }
+
+    /// _is_first_level_self_reference (variables.py:2535-2555)
+    fn is_first_level_self_reference(
+        &self,
+        cx: &mut WalkCx,
+        node: GNode,
+        defstmt: GNode,
+        found_nodes: Vec<GNode>,
+    ) -> (Action, Option<Vec<GNode>>) {
+        let eng = cx.eng;
+        let nf = eng.frame(node);
+        if eng.parent(nf) == Some(defstmt) && stmt_of(eng, node) == nf {
+            if u::is_node_in_type_annotation_context(eng, node) {
+                if !self.postponed_evaluation_enabled {
+                    return (Action::Continue, None);
+                }
+                return (Action::Return, None);
+            }
+            if let Some(p) = eng.parent(node) {
+                if eng.kind_is(p, |k| matches!(k, NodeKind::Call { .. })) {
+                    if let Some(pp) = eng.parent(p) {
+                        if eng.kind_is(pp, |k| matches!(k, NodeKind::Arguments(_))) {
+                            return (Action::Continue, None);
+                        }
+                    }
+                }
+            }
+        }
+        (Action::Return, Some(found_nodes))
+    }
+
+    /// _report_unfound_name_definition (variables.py:2021-2068)
+    fn report_unfound_name_definition(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        idx: usize,
+    ) -> bool {
+        let eng = cx.eng;
+        let Some(name) = name_of(eng, node) else { return false };
+        let name_str = eng.sname(name);
+        if (self.postponed_evaluation_enabled && u::is_node_in_type_annotation_context(eng, node))
+            || u::is_node_in_pep695_type_context(eng, node)
+        {
+            return false;
+        }
+        if self.is_builtin(cx, name) {
+            return false;
+        }
+        if is_variable_annotation_in_function(eng, node) {
+            return false;
+        }
+        let uncertain = self.to_consume[idx]
+            .consumed_uncertain
+            .get(&name)
+            .cloned()
+            .unwrap_or_default();
+        if has_nonlocal_in_enclosing_frame(eng, node, &uncertain) {
+            return false;
+        }
+        if let Some(scopes) = self.reported_type_checking_usage_scopes.get(&name_str) {
+            if scopes.contains(&eng.scope(node)) {
+                return false;
+            }
+        }
+        let msg = if self.to_consume[idx]
+            .names_defined_under_one_branch_only
+            .contains(&name)
+        {
+            "E0606"
+        } else {
+            "E0601"
+        };
+        cx.emit_name_msg(msg, node, &name_str);
+        true
+    }
+
+    /// _filter_type_checking_definitions_from_consumption (variables.py:2070-2094)
+    fn filter_type_checking_definitions_from_consumption(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        nodes_to_consume: Vec<GNode>,
+        is_reported: bool,
+    ) -> Vec<GNode> {
+        let eng = cx.eng;
+        let mut type_checking: FxHashSet<GNode> = FxHashSet::default();
+        for &n in &nodes_to_consume {
+            let is_kind = eng.kind_is(n, |k| {
+                matches!(
+                    k,
+                    NodeKind::Import { .. } | NodeKind::ImportFrom { .. } | NodeKind::ClassDef(_)
+                )
+            });
+            if is_kind && u::in_type_checking_block(eng, cx.caches, n) {
+                type_checking.insert(n);
+            }
+        }
+        if !type_checking.is_empty() && is_reported {
+            let name_str = eng.sname(name_of(eng, node).unwrap_or(0));
+            self.reported_type_checking_usage_scopes
+                .entry(name_str)
+                .or_default()
+                .push(eng.scope(node));
+        }
+        nodes_to_consume
+            .into_iter()
+            .filter(|n| !type_checking.contains(n))
+            .collect()
+    }
+
+    // -----------------------------------------------------------------
+    // __all__ checks: E0603/E0604/E0605 (variables.py:3220-3276)
+    // -----------------------------------------------------------------
+    fn check_all(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        mut not_consumed: IndexMap<GSym, Vec<GNode>>,
+    ) {
+        let eng = cx.eng;
+        let all_sym = eng.sym("__all__");
+        let assigned = match eng.igetattr_first(&Value::Node(node), all_sym, None) {
+            Ok(Some(v)) => v,
+            _ => return, // InferenceError / StopIteration -> silent
+        };
+        if assigned.is_uninferable() {
+            return;
+        }
+        let pytype = u::value_pytype(eng, &assigned);
+        let ok_type = matches!(pytype.as_deref(), Some("builtins.list") | Some("builtins.tuple"));
+        if !ok_type {
+            // E0605 at line=assigned.tolineno, col=assigned.col_offset
+            let (line, col) = match &assigned {
+                Value::Node(g) => {
+                    let md = eng.md(g.m);
+                    let n = &md.tree.nodes[g.n.idx()];
+                    (n.tolineno, n.col_offset.max(0) as i64)
+                }
+                _ => (0, 0),
+            };
+            cx.emit_node(
+                "E0605",
+                if line == 0 { 1 } else { line },
+                col,
+                "Invalid format for __all__, must be tuple or list".to_string(),
+            );
+            return;
+        }
+        // elements
+        enum Elt {
+            Node(GNode),
+            Val(Value),
+        }
+        let elts: Vec<Elt> = match &assigned {
+            Value::Node(g) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::List { elts, .. } | NodeKind::Tuple { elts, .. } => elts
+                        .iter()
+                        .map(|&e| Elt::Node(GNode { m: g.m, n: e }))
+                        .collect(),
+                    _ => Vec::new(), // getattr(assigned, "elts", ())
+                }
+            }
+            Value::SynthSeq { elems, .. } => elems.iter().map(|v| Elt::Val(v.clone())).collect(),
+            _ => Vec::new(),
+        };
+        for elt in elts {
+            let (elt_node, inferred): (Option<GNode>, Option<Value>) = match elt {
+                Elt::Node(g) => {
+                    // next(elt.infer()) — single pull
+                    match eng.first_value(g, &u::fresh_ctx()) {
+                        Ok(Some(v)) => (Some(g), Some(v)),
+                        _ => continue, // InferenceError -> continue
+                    }
+                }
+                Elt::Val(v) => match v {
+                    Value::Node(g) => match eng.first_value(g, &u::fresh_ctx()) {
+                        Ok(Some(iv)) => (Some(g), Some(iv)),
+                        _ => continue,
+                    },
+                    other => (None, Some(other)),
+                },
+            };
+            let Some(inferred) = inferred else { continue };
+            if inferred.is_uninferable() {
+                continue;
+            }
+            // `if not elt_name.parent: continue`
+            let inferred_node = match &inferred {
+                Value::Node(g) => Some(*g),
+                _ => None,
+            };
+            match inferred_node {
+                Some(g) => {
+                    if eng.parent(g).is_none() {
+                        continue;
+                    }
+                }
+                None => continue, // synthetic results have no parent
+            }
+            let const_val = eng.value_const(&inferred);
+            let is_str = matches!(
+                const_val,
+                Some(ConstValue::Str(_)) | Some(ConstValue::StrSurrogate(_))
+            );
+            if !is_str {
+                // E0604 — args = elt.as_string()
+                let Some(en) = elt_node else { continue };
+                let text = format!(
+                    "Invalid object {} in __all__, must contain only strings",
+                    u::py_repr_str(&u::as_string(eng, en))
+                );
+                cx.emit_node(
+                    "E0604",
+                    u::lineno(eng, en),
+                    u::col_offset(eng, en).max(0) as i64,
+                    text,
+                );
+                continue;
+            }
+            let elt_name_str = match const_val {
+                Some(ConstValue::Str(s)) => s.to_string(),
+                _ => continue, // surrogate strings: skip (no corpus hit)
+            };
+            let elt_sym = eng.sym(&elt_name_str);
+            if not_consumed.contains_key(&elt_sym) {
+                not_consumed.shift_remove(&elt_sym);
+                continue;
+            }
+            if locals_contains(eng, node, elt_sym) {
+                continue;
+            }
+            let md = eng.md(node.m);
+            let package = md.package;
+            let file = md.file.clone();
+            drop(md);
+            let emit_e0603 = |cx: &mut WalkCx, en: GNode| {
+                let text = format!(
+                    "Undefined variable name {} in __all__",
+                    u::py_repr_str(&elt_name_str)
+                );
+                cx.emit_node(
+                    "E0603",
+                    u::lineno(cx.eng, en),
+                    u::col_offset(cx.eng, en).max(0) as i64,
+                    text,
+                );
+            };
+            let Some(en) = elt_node else { continue };
+            if !package {
+                emit_e0603(cx, en);
+            } else {
+                // basename check: __init__ file
+                let base = std::path::Path::new(&file)
+                    .file_stem()
+                    .map(|s| s == "__init__")
+                    .unwrap_or(false);
+                if base {
+                    let mod_name = eng.md(node.m).name.clone();
+                    let full = format!("{mod_name}.{elt_name_str}");
+                    let parts: Vec<&str> = full.split('.').collect();
+                    if !eng.modutils_can_resolve(&parts) {
+                        emit_e0603(cx, en);
+                    }
+                }
+            }
+        }
+    }
+
+    // -----------------------------------------------------------------
+    // metaclass E0602 (variables.py:3388-3456)
+    // -----------------------------------------------------------------
+    fn check_metaclasses(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let children = eng.md(node.m).tree.children(node.n);
+        let mut consumed: Vec<(usize, GSym)> = Vec::new();
+        for c in children {
+            let g = GNode { m: node.m, n: c };
+            if u::is_classdef(eng, g) {
+                consumed.extend(self.check_classdef_metaclasses(cx, g, node));
+            }
+        }
+        for (idx, name) in consumed {
+            self.to_consume[idx].to_consume.shift_remove(&name);
+        }
+    }
+
+    fn check_classdef_metaclasses(
+        &mut self,
+        cx: &mut WalkCx,
+        klass: GNode,
+        parent_node: GNode,
+    ) -> Vec<(usize, GSym)> {
+        let eng = cx.eng;
+        let metaclass_expr: Option<GNode> = {
+            let md = eng.md(klass.m);
+            match &md.tree.nodes[klass.n.idx()].kind {
+                NodeKind::ClassDef(d) => d.metaclass.map(|n| GNode { m: klass.m, n }),
+                _ => None,
+            }
+        };
+        let Some(mexpr) = metaclass_expr else { return Vec::new() };
+        let mut consumed: Vec<(usize, GSym)> = Vec::new();
+        let metaclass = eng.metaclass(klass, None);
+        let mut name_str = String::new();
+        {
+            let md = eng.md(mexpr.m);
+            match &md.tree.nodes[mexpr.n.idx()].kind {
+                NodeKind::Name { name } => name_str = md.tree.s(*name).to_string(),
+                NodeKind::Attribute { expr, .. } => {
+                    let mut attr = GNode { m: mexpr.m, n: *expr };
+                    drop(md);
+                    loop {
+                        let md = eng.md(attr.m);
+                        match &md.tree.nodes[attr.n.idx()].kind {
+                            NodeKind::Name { name } => {
+                                name_str = md.tree.s(*name).to_string();
+                                break;
+                            }
+                            NodeKind::Attribute { expr, .. } => {
+                                let e = *expr;
+                                drop(md);
+                                attr = GNode { m: attr.m, n: e };
+                            }
+                            _ => break, // would AttributeError in pylint; bail
+                        }
+                    }
+                }
+                NodeKind::Call { func, .. } => {
+                    if let NodeKind::Name { name } = &md.tree.nodes[func.idx()].kind {
+                        name_str = md.tree.s(*name).to_string();
+                    } else if metaclass.is_some() {
+                        drop(md);
+                        name_str = metaclass_root_name(eng, metaclass.as_ref().unwrap());
+                    }
+                }
+                _ => {
+                    if metaclass.is_some() {
+                        drop(md);
+                        name_str = metaclass_root_name(eng, metaclass.as_ref().unwrap());
+                    }
+                }
+            }
+        }
+        for (from, to) in METACLASS_NAME_TRANSFORMS {
+            if name_str == *from {
+                name_str = to.to_string();
+            }
+        }
+        let mut found = false;
+        if !name_str.is_empty() {
+            let name = eng.sym(&name_str);
+            let klass_line = u::lineno(eng, klass);
+            // INNER -> OUTER ([::-1]); does NOT break across consumers
+            for i in (0..self.to_consume.len()).rev() {
+                let found_nodes = self.to_consume[i].to_consume.get(&name).cloned().unwrap_or_default();
+                for fnode in found_nodes {
+                    if u::lineno(eng, fnode) <= klass_line {
+                        consumed.push((i, name));
+                        found = true;
+                        break;
+                    }
+                }
+            }
+            for fnode in locals_get(eng, parent_node, name) {
+                if u::lineno(eng, fnode) <= klass_line {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if !found && metaclass.is_none() {
+            let is_exempt = u::SCOPE_ATTRS.contains(&name_str.as_str())
+                || (!name_str.is_empty() && cx.caches.is_builtin(eng, eng.sym(&name_str)))
+                || (name_str.is_empty() && {
+                    // "" in scope_attrs is False; is_builtin("") False
+                    false
+                });
+            if !is_exempt {
+                let text = format!("Undefined variable {}", u::py_repr_str(&name_str));
+                cx.emit_node(
+                    "E0602",
+                    u::lineno(eng, klass),
+                    u::col_offset(eng, klass).max(0) as i64,
+                    text,
+                );
+            }
+        }
+        consumed
+    }
+}
+
+fn metaclass_root_name(eng: &Engine, v: &Value) -> String {
+    match v {
+        Value::Node(g) => {
+            let mut top = *g;
+            while let Some(p) = eng.parent(top) {
+                top = p;
+            }
+            eng.md(top.m).name.clone()
+        }
+        Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
+            let mut top = *cls;
+            while let Some(p) = eng.parent(top) {
+                top = p;
+            }
+            eng.md(top.m).name.clone()
+        }
+        _ => String::new(),
+    }
+}
+
+/// FunctionDef.is_method (astroid scoped_nodes.py)
+fn is_method(eng: &Engine, func: GNode) -> bool {
+    let t = eng.func_type(func);
+    if t == pyinfer::graph::FType::Function {
+        return false;
+    }
+    eng.parent(func)
+        .map(|p| u::is_classdef(eng, eng.frame(p)))
+        .unwrap_or(false)
+}
+
+/// _defined_in_function_definition (variables.py:2205-2227)
+fn defined_in_function_definition(eng: &Engine, node: GNode, frame: GNode) -> bool {
+    if !u::is_functiondef(eng, frame) {
+        return false;
+    }
+    if eng.statement(node) != Some(frame) {
+        return false;
+    }
+    let md = eng.md(frame.m);
+    let (args_n, decorators, returns) = match &md.tree.nodes[frame.n.idx()].kind {
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+            (d.args, d.decorators, d.returns)
+        }
+        _ => return false,
+    };
+    let NodeKind::Arguments(ad) = &md.tree.nodes[args_n.idx()].kind else { return false };
+    let in_annotations = ad
+        .annotations
+        .iter()
+        .chain(ad.posonlyargs_annotations.iter())
+        .chain(ad.kwonlyargs_annotations.iter())
+        .any(|o| *o == Some(node.n))
+        || ad.varargannotation == Some(node.n)
+        || ad.kwargannotation == Some(node.n);
+    drop(md);
+    if in_annotations {
+        return true;
+    }
+    let args_g = GNode { m: frame.m, n: args_n };
+    if eng.parent_of(args_g, node) {
+        return true;
+    }
+    if let Some(dec) = decorators {
+        let dg = GNode { m: frame.m, n: dec };
+        if eng.parent_of(dg, node) {
+            return true;
+        }
+    }
+    if let Some(r) = returns {
+        let rg = GNode { m: frame.m, n: r };
+        if rg == node || eng.parent_of(rg, node) {
+            return true;
+        }
+    }
+    false
+}
+
+/// _in_lambda_or_comprehension_body (variables.py:2229-2257)
+fn in_lambda_or_comprehension_body(eng: &Engine, node: GNode, frame: GNode) -> bool {
+    let mut child = node;
+    let mut parent = eng.parent(node);
+    while let Some(p) = parent {
+        if p == frame {
+            return false;
+        }
+        let md = eng.md(p.m);
+        match &md.tree.nodes[p.n.idx()].kind {
+            NodeKind::Lambda(d) => {
+                if child.n != d.args {
+                    return true;
+                }
+            }
+            NodeKind::Comprehension { iter, .. } => {
+                if child.n != *iter {
+                    return true;
+                }
+            }
+            NodeKind::ListComp(d) | NodeKind::SetComp(d) | NodeKind::GeneratorExp(d) => {
+                if !(!d.generators.is_empty() && child.n == d.generators[0]) {
+                    return true;
+                }
+            }
+            NodeKind::DictComp(d) => {
+                if !(!d.generators.is_empty() && child.n == d.generators[0]) {
+                    return true;
+                }
+            }
+            _ => {}
+        }
+        drop(md);
+        child = p;
+        parent = eng.parent(p);
+    }
+    false
+}
+
+/// _detect_global_scope (variables.py:125-200)
+fn detect_global_scope(eng: &Engine, node: GNode, frame: GNode, defframe: GNode) -> bool {
+    let scope = eng.parent(frame).map(|p| eng.scope(p));
+    let def_scope = eng.parent(defframe).map(|p| eng.scope(p));
+    if u::is_classdef(eng, frame) && scope != def_scope {
+        let first_func_anc = u::first_ancestor(eng, node, |k| {
+            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+        });
+        if scope == first_func_anc {
+            return false;
+        }
+    }
+    if u::is_functiondef(eng, frame) {
+        if eng.parent_of(frame, defframe) {
+            return u::lineno(eng, node) < u::lineno(eng, defframe);
+        }
+        let parent_ok = eng
+            .parent(node)
+            .map(|p| {
+                eng.kind_is(p, |k| {
+                    matches!(
+                        k,
+                        NodeKind::FunctionDef(_)
+                            | NodeKind::AsyncFunctionDef(_)
+                            | NodeKind::Arguments(_)
+                    )
+                })
+            })
+            .unwrap_or(false);
+        if !parent_ok {
+            return false;
+        }
+    }
+    // for current_scope in (scope or frame, def_scope): while parent_scope:
+    // a None def_scope contributes nothing (the while never runs).
+    let mut break_scopes: Vec<GNode> = Vec::new();
+    for current in [Some(scope.unwrap_or(frame)), def_scope] {
+        let mut parent_scope = current;
+        while let Some(ps) = parent_scope {
+            let is_class_or_module = eng.kind_is(ps, |k| {
+                matches!(k, NodeKind::ClassDef(_) | NodeKind::Module(_))
+            });
+            if !is_class_or_module {
+                break_scopes.push(ps);
+                break;
+            }
+            parent_scope = eng.parent(ps).map(|p| eng.scope(p));
+        }
+    }
+    let set: FxHashSet<GNode> = break_scopes.into_iter().collect();
+    if set.len() > 1 {
+        return false;
+    }
+    u::lineno(eng, frame) < u::lineno(eng, defframe)
+}
+
+/// _maybe_used_and_assigned_at_once (variables.py:2415-2454)
+fn maybe_used_and_assigned_at_once(eng: &Engine, defstmt: GNode) -> bool {
+    let md = eng.md(defstmt.m);
+    match &md.tree.nodes[defstmt.n.idx()].kind {
+        NodeKind::Match { cases, .. } => {
+            let cases = cases.clone();
+            drop(md);
+            return cases.iter().any(|&c| {
+                eng.kind_is(GNode { m: defstmt.m, n: c }, |k| {
+                    matches!(k, NodeKind::MatchCase { guard: Some(_), .. })
+                })
+            });
+        }
+        NodeKind::IfExp { .. } => return true,
+        NodeKind::TypeAlias { .. } => return true,
+        _ => {}
+    }
+    let value: Option<NodeId> = match &md.tree.nodes[defstmt.n.idx()].kind {
+        NodeKind::Assign { value, .. } => Some(*value),
+        NodeKind::AnnAssign { value, .. } => *value,
+        NodeKind::AugAssign { value, .. } => Some(*value),
+        NodeKind::Expr { value } => Some(*value),
+        NodeKind::Return { value } => *value,
+        _ => None,
+    };
+    drop(md);
+    let Some(value) = value else { return false };
+    let vg = GNode { m: defstmt.m, n: value };
+    let md = eng.md(vg.m);
+    match &md.tree.nodes[vg.n.idx()].kind {
+        NodeKind::List { elts, .. } | NodeKind::Tuple { elts, .. } | NodeKind::Set { elts } => {
+            let elts = elts.clone();
+            drop(md);
+            return elts.iter().any(|&e| {
+                let eg = GNode { m: vg.m, n: e };
+                let matches_kind = eng.kind_is(eg, |k| {
+                    matches!(
+                        k,
+                        NodeKind::Assign { .. }
+                            | NodeKind::AnnAssign { .. }
+                            | NodeKind::AugAssign { .. }
+                            | NodeKind::Expr { .. }
+                            | NodeKind::Return { .. }
+                            | NodeKind::Match { .. }
+                            | NodeKind::TypeAlias { .. }
+                            | NodeKind::IfExp { .. }
+                    )
+                });
+                matches_kind && maybe_used_and_assigned_at_once(eng, eg)
+            });
+        }
+        NodeKind::IfExp { .. } => return true,
+        NodeKind::Lambda(d) => {
+            let body = d.body;
+            drop(md);
+            return eng.kind_is(GNode { m: vg.m, n: body }, |k| {
+                matches!(k, NodeKind::IfExp { .. })
+            });
+        }
+        NodeKind::Dict { items } => {
+            let items = items.clone();
+            drop(md);
+            if items.iter().any(|&(k, v)| {
+                eng.kind_is(GNode { m: vg.m, n: k }, |kk| matches!(kk, NodeKind::IfExp { .. }))
+                    || eng.kind_is(GNode { m: vg.m, n: v }, |kk| {
+                        matches!(kk, NodeKind::IfExp { .. })
+                    })
+            }) {
+                return true;
+            }
+            return false;
+        }
+        NodeKind::Call { .. } => {}
+        _ => return false,
+    }
+    drop(md);
+    // any Call under value with IfExp args/kwargs/func.expr
+    for call in u::preorder(eng, vg) {
+        let md = eng.md(call.m);
+        let NodeKind::Call { func, args, keywords } = &md.tree.nodes[call.n.idx()].kind else {
+            continue;
+        };
+        let is_ifexp = |n: NodeId| {
+            matches!(md.tree.nodes[n.idx()].kind, NodeKind::IfExp { .. })
+        };
+        if keywords.iter().any(|&kw| {
+            if let NodeKind::Keyword { value, .. } = &md.tree.nodes[kw.idx()].kind {
+                is_ifexp(*value)
+            } else {
+                false
+            }
+        }) {
+            return true;
+        }
+        if args.iter().any(|&a| is_ifexp(a)) {
+            return true;
+        }
+        if let NodeKind::Attribute { expr, .. } = &md.tree.nodes[func.idx()].kind {
+            if is_ifexp(*expr) {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// _is_never_evaluated (variables.py:2557-2571)
+fn is_never_evaluated(cx: &mut WalkCx, defnode: GNode, ifexp: GNode) -> bool {
+    let eng = cx.eng;
+    let md = eng.md(ifexp.m);
+    let NodeKind::IfExp { test, body, orelse } = &md.tree.nodes[ifexp.n.idx()].kind else {
+        return false;
+    };
+    let (test, body, orelse) = (*test, *body, *orelse);
+    drop(md);
+    let tv = u::safe_infer(eng, cx.caches, GNode { m: ifexp.m, n: test });
+    if let Some(v) = tv {
+        match eng.value_const(&v) {
+            Some(ConstValue::Bool(true)) => return defnode.n == orelse,
+            Some(ConstValue::Bool(false)) => return defnode.n == body,
+            _ => {}
+        }
+    }
+    false
+}
+
+/// _is_variable_annotation_in_function (variables.py:2573-2582)
+fn is_variable_annotation_in_function(eng: &Engine, node: GNode) -> bool {
+    let Some(ann_assign) = u::first_ancestor(eng, node, |k| matches!(k, NodeKind::AnnAssign { .. }))
+    else {
+        return false;
+    };
+    let md = eng.md(ann_assign.m);
+    let NodeKind::AnnAssign { annotation, .. } = &md.tree.nodes[ann_assign.n.idx()].kind else {
+        return false;
+    };
+    let ag = GNode { m: ann_assign.m, n: *annotation };
+    drop(md);
+    (ag == node || eng.parent_of(ag, node))
+        && u::first_ancestor(eng, ann_assign, |k| {
+            matches!(k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+        })
+        .is_some()
+}
+
+/// _has_nonlocal_in_enclosing_frame (variables.py:2459-2476)
+fn has_nonlocal_in_enclosing_frame(
+    eng: &Engine,
+    node: GNode,
+    uncertain_definitions: &[GNode],
+) -> bool {
+    let defining_frames: FxHashSet<GNode> = uncertain_definitions
+        .iter()
+        .map(|&d| eng.frame(d))
+        .collect();
+    let mut frame: Option<GNode> = Some(eng.frame(node));
+    let mut is_enclosing = false;
+    while let Some(f) = frame {
+        if is_enclosing {
+            break;
+        }
+        is_enclosing = defining_frames
+            .iter()
+            .all(|&df| f == df || eng.parent_of(f, df));
+        if is_enclosing && is_nonlocal_name(eng, node, f) {
+            return true;
+        }
+        frame = eng.parent(f).map(|p| eng.frame(p));
+    }
+    false
+}

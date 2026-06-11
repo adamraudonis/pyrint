@@ -245,17 +245,59 @@ pub fn run(opts: &RunOpts) -> i32 {
     phase2.extend(phase2_extra);
     phase2.sort_by_key(|(i, _)| *i);
 
-    // ---- phase 2: per-module checks (rayon, ordered flush) ------------
+    // ---- phase 2: per-module checks (sequential on a big-stack engine
+    // thread: astroid's caches are process-global and order-sensitive, and
+    // checker inference must run in pylint's file order) ------------------
     // prepare_checkers (pylinter.py:588-598): the unicode raw checker is
     // kept iff any of its messages is enabled package-wise
     let unicode_prepared = ["E2501", "E2502", "C2503", "E2510", "E2511", "E2512", "E2513", "E2514", "E2515"]
         .iter()
         .any(|m| global.enabled(store().by_msgid[m]));
 
-    let results: Vec<ModuleOut> = phase2
-        .par_iter()
-        .map(|(i, plan)| lint_one(&items[*i], plan, &global, &strip_prefix, unicode_prepared))
-        .collect();
+    let results: Vec<ModuleOut> = std::thread::scope(|scope| {
+        let items = &items;
+        let phase2 = &phase2;
+        let global = &global;
+        let strip_prefix = &strip_prefix;
+        let cwd = std::path::PathBuf::from(&cwd);
+        std::thread::Builder::new()
+            .stack_size(1 << 30)
+            .spawn_scoped(scope, move || {
+                let engine = pyinfer::Engine::new(&cwd);
+                // pylint phase 1 builds EVERY file's AST through the astroid
+                // manager in file order (pylinter.get_ast -> ast_from_file
+                // source=True); the cache state at check time depends on it.
+                let mods: Vec<Option<pyinfer::ModId>> = items
+                    .iter()
+                    .map(|it| {
+                        engine
+                            .ast_from_file(&it.filepath, Some(&it.name), false, true)
+                            .ok()
+                    })
+                    .collect();
+                let mut lint_run = pycheckers::walker::LintRun::default();
+                let mut oracle_proc = oracle::OracleProc::default();
+                phase2
+                    .iter()
+                    .map(|(i, plan)| {
+                        lint_one(
+                            &items[*i],
+                            plan,
+                            global,
+                            strip_prefix,
+                            unicode_prepared,
+                            &engine,
+                            mods[*i],
+                            &mut lint_run,
+                            &mut oracle_proc,
+                        )
+                    })
+                    .collect()
+            })
+            .expect("spawn phase-2 thread")
+            .join()
+            .expect("phase-2 thread panicked")
+    });
 
     let mut any_linted = false;
     for r in &results {
@@ -370,12 +412,17 @@ fn parse_one(item: &FileItem) -> FileData {
 
 /// Phase-2 work for one module (`_lint_file` + `_check_astroid_module`,
 /// pylinter.py:798-830 / 1062-1106).
+#[allow(clippy::too_many_arguments)]
 fn lint_one(
     item: &FileItem,
     plan: &Phase2Plan,
     global: &GlobalState,
     strip_prefix: &str,
     unicode_prepared: bool,
+    engine: &pyinfer::Engine,
+    emod: Option<pyinfer::ModId>,
+    lint_run: &mut pycheckers::walker::LintRun,
+    oracle_proc: &mut oracle::OracleProc,
 ) -> ModuleOut {
     let mut out = ModuleOut { msgs: Vec::new(), stats: Stats::default(), linted: true };
     match plan {
@@ -445,8 +492,48 @@ fn lint_one(
                             });
                         }
                     }
-                    // 3. AST walk — no checkers registered yet; the walker
-                    //    still accumulates nbstatements (ast_walker.py:79-80)
+                    // 3. AST walk: ImportsChecker + VariablesChecker wired
+                    //    (walk_order.rs dispatch); other checkers pending.
+                    //    The walker also accumulates nbstatements
+                    //    (ast_walker.py:79-80).
+                    if let Some(mid) = emod {
+                        // node msgs use the astroid module name (`.__init__`
+                        // stripped); node-LESS msgs (E0001 Cannot-import) use
+                        // the raw FileItem name (notes/02; GT: core
+                        // homeassistant.auth.__init__ vs homeassistant.auth)
+                        let stripped: String = item
+                            .name
+                            .strip_suffix(".__init__")
+                            .unwrap_or(&item.name)
+                            .to_string();
+                        let fs_ref = &fs;
+                        let stats_ref = &mut stats;
+                        let msgs_ref = &mut msgs;
+                        let mut emit = |m: pycheckers::walker::CheckMsg| {
+                            let Some(&idx) = store().by_msgid.get(m.msgid) else { return };
+                            if !is_message_enabled(global, Some(fs_ref), idx, Some(m.line)) {
+                                return;
+                            }
+                            stats_ref.count(m.msgid);
+                            msgs_ref.push(OutMsg {
+                                module: if m.nodeless {
+                                    item.name.clone()
+                                } else {
+                                    stripped.clone()
+                                },
+                                path: path.clone(),
+                                line: if m.line == 0 { 1 } else { m.line as i64 },
+                                col: m.col,
+                                msgid: msgstore::def(idx).msgid,
+                                symbol: msgstore::def(idx).symbol,
+                                text: m.text,
+                            });
+                        };
+                        let mut import_oracle = |p: &str, modname: &str| {
+                            oracle_proc.syntax_error_str(p, modname)
+                        };
+                        lint_run.walk_module(engine, mid, &mut emit, &mut import_oracle);
+                    }
                     stats.statements += count_statements(&p.tree);
                 }
             }

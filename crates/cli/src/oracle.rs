@@ -99,6 +99,117 @@ pub fn run_oracle(requests: &[(String, String)]) -> Vec<Verdict> {
     verdicts
 }
 
+/// Persistent oracle coprocess for the imports checker: per-(path, resolved
+/// modname) exact `str(AstroidSyntaxError.error)` strings. The oracle is
+/// invoked with the RESOLVED module name so the SyntaxError filename token
+/// embeds exactly what astroid's import-time build would produce
+/// (imports.py:1032-1036 `Cannot import {modname!r} due to '{exc.error}'`).
+pub struct OracleProc {
+    proc: Option<(std::process::ChildStdin, BufReader<std::process::ChildStdout>)>,
+    child: Option<std::process::Child>,
+    spawn_failed: bool,
+    cache: rustc_hash::FxHashMap<(String, String), Option<String>>,
+}
+
+impl Default for OracleProc {
+    fn default() -> Self {
+        OracleProc { proc: None, child: None, spawn_failed: false, cache: Default::default() }
+    }
+}
+
+impl OracleProc {
+    fn ensure(&mut self) -> bool {
+        if self.proc.is_some() {
+            return true;
+        }
+        if self.spawn_failed {
+            return false;
+        }
+        let python = std::env::var("PRYLINT_PYTHON").unwrap_or_else(|_| "python3".to_string());
+        let script = oracle_script_path();
+        match Command::new(&python)
+            .arg(&script)
+            .stdin(Stdio::piped())
+            .stdout(Stdio::piped())
+            .stderr(Stdio::inherit())
+            .spawn()
+        {
+            Ok(mut child) => {
+                let stdin = child.stdin.take().expect("piped stdin");
+                let stdout = child.stdout.take().expect("piped stdout");
+                self.proc = Some((stdin, BufReader::new(stdout)));
+                self.child = Some(child);
+                true
+            }
+            Err(e) => {
+                eprintln!("prylint: failed to spawn syntax oracle {python} {script:?}: {e}");
+                self.spawn_failed = true;
+                false
+            }
+        }
+    }
+
+    /// `str(exc.error)` for an AstroidSyntaxError raised when building
+    /// (path, modname); None when astroid builds it fine or fails with a
+    /// non-syntax error.
+    pub fn syntax_error_str(&mut self, path: &str, modname: &str) -> Option<String> {
+        let key = (path.to_string(), modname.to_string());
+        if let Some(v) = self.cache.get(&key) {
+            return v.clone();
+        }
+        let res = self.query(path, modname);
+        self.cache.insert(key, res.clone());
+        res
+    }
+
+    fn query(&mut self, path: &str, modname: &str) -> Option<String> {
+        if !self.ensure() {
+            return None;
+        }
+        let (stdin, stdout) = self.proc.as_mut().unwrap();
+        let req = serde_json::json!({"path": path, "modname": modname});
+        if writeln!(stdin, "{req}").is_err() || stdin.flush().is_err() {
+            self.proc = None;
+            return None;
+        }
+        let mut line = String::new();
+        loop {
+            line.clear();
+            match stdout.read_line(&mut line) {
+                Ok(0) | Err(_) => {
+                    self.proc = None;
+                    return None;
+                }
+                Ok(_) => {
+                    if !line.trim().is_empty() {
+                        break;
+                    }
+                }
+            }
+        }
+        match parse_verdict(line.trim()) {
+            Verdict::SyntaxError { msg, .. } => {
+                // msg = "Parsing failed: '<str(exc.error)>'"
+                let inner = msg
+                    .strip_prefix("Parsing failed: '")
+                    .and_then(|s| s.strip_suffix('\''))
+                    .unwrap_or(&msg);
+                Some(inner.to_string())
+            }
+            _ => None,
+        }
+    }
+}
+
+impl Drop for OracleProc {
+    fn drop(&mut self) {
+        self.proc = None; // closes stdin -> child exits
+        if let Some(mut c) = self.child.take() {
+            let _ = c.wait();
+        }
+    }
+}
+
 fn parse_verdict(line: &str) -> Verdict {
     let v: serde_json::Value = match serde_json::from_str(line) {
         Ok(v) => v,

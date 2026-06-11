@@ -80,8 +80,6 @@ def main():
         code = m.group(1)
         if not any(code.startswith(o) for o in owned):
             continue
-        if "E0001: Cannot import '" in g:
-            continue  # deferred: needs module graph
         if ours_set.get(g, 0) > 0:
             ours_set[g] -= 1
         else:
