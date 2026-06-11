@@ -1639,12 +1639,26 @@ dict
                 if args.is_empty() || args.len() > 3 {
                     return None;
                 }
+                // `args = [infer_func(arg) for arg in args]`
+                // (brain_builtin_inference.py:687-688): EAGER safe_infer of
+                // EVERY arg under the SHARED context (partial(safe_infer,
+                // context=context)) BEFORE any validation — the count
+                // bumps land even when a later check bails to default
+                // (pandas _partial_date_slice slice(left, right) caps the
+                // chain at the callee in astroid).
+                let inferred: Vec<Option<Value>> =
+                    args.iter().map(|&a| self.safe_infer(a, ctx)).collect();
                 let mut bounds: [Option<ConstValue>; 3] = [None, None, None];
-                for (i, &a) in args.iter().enumerate() {
-                    let v = self.safe_infer(a, &copy_context(Some(ctx)))?;
-                    let c = self.value_const(&v)?;
+                for (i, v) in inferred.iter().enumerate() {
+                    let Some(v) = v else { return None };
+                    if v.is_uninferable() {
+                        return None;
+                    }
+                    let c = self.value_const(v)?;
                     match c {
-                        ConstValue::None | ConstValue::Int(_) => bounds[i] = Some(c),
+                        ConstValue::None | ConstValue::Int(_) | ConstValue::Bool(_) => {
+                            bounds[i] = Some(c)
+                        }
                         _ => return None,
                     }
                 }
