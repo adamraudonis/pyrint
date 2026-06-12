@@ -63,6 +63,13 @@ fn main() -> ExitCode {
             "--jobs" | "-j" => {
                 jobs = take_value(&mut i).and_then(|v| v.parse().ok());
             }
+            // Output-neutral pylint options: accepted and ignored.
+            // --persistent only affects pylint's stats cache (score history);
+            // it changes no messages and no exit codes.
+            _ if a.starts_with("--persistent=") => {}
+            "--persistent" => {
+                let _ = take_value(&mut i);
+            }
             _ if a.starts_with('-') && a.len() > 1 => {
                 // argparse error path: usage message to stderr, exit 32
                 eprintln!("usage: pylint [options]");
@@ -72,6 +79,26 @@ fn main() -> ExitCode {
             _ => paths.push(a.clone()),
         }
         i += 1;
+    }
+
+    // prylint implements pylint's errors-only contract. Running without -E
+    // would silently under-report (W/R/C checkers are not implemented), which
+    // is dangerous in CI: a hook would pass on code real pylint fails. Refuse
+    // loudly unless explicitly overridden.
+    if !errors_only && !dump_fileitems && !dump_ast && dump_infer.is_none() {
+        if std::env::var("PRYLINT_ALLOW_PARTIAL").is_err() {
+            eprintln!(
+                "prylint: this build implements pylint's errors-only mode (-E) with \
+                 byte-identical output; running without -E would silently miss W/R/C \
+                 messages that real pylint reports.\n\
+                 Add -E to the invocation, or set PRYLINT_ALLOW_PARTIAL=1 to run anyway."
+            );
+            return ExitCode::from(32);
+        }
+        eprintln!(
+            "prylint: warning: running without -E; W/R/C messages real pylint would \
+             report are NOT checked (PRYLINT_ALLOW_PARTIAL is set)."
+        );
     }
 
     if let Some(n) = jobs {
