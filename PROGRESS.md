@@ -1878,3 +1878,29 @@ unchanged since round 2 fixes — rounds 3 and 4 made no code changes).
 Gates re-certified on the current binary: 27-corpus -E byte parity green
 (out + exit), check_treedump django 400 == 0, check_inferdump django
 200 == 0.
+
+## Phase B zero-round 5 (re-validation sweep, no code changes needed)
+
+Fresh ours-runs on every combo with COMPLETE GT (42 = 22 corpora hook +
+20 full; black.full/sentry.full GT still mid-generation upstream — the
+two pylint processes are live), owned-code multiset + exact owned-line
+subsequence order vs footer-stripped GT (harness/check_owned.sh):
+- 40/42 combos 0FP/0FN with EXACT order (incl. sentry hook 292/292,
+  black hook 591/591, django full 31154/31154, twisted full 38947/38947,
+  mypy full 21616/21616, nova full 21537/21537).
+- matplotlib full: C0103 x1 FP (.circleci/fetch_doc_logs.py:36) —
+  unchanged from rounds 2-4; walker still skips the E1101 visitor
+  (crates/pycheckers/src/walker.rs:619). BLOCKED on typecheck full-mode
+  phase (E1101 visit_attribute getattr cache side effects).
+- sqlalchemy full: C0116 9FN/2FP (orm/attributes.py, orm/base.py,
+  dialects/postgresql) — unchanged, same exact lines as rounds 2-4.
+  BLOCKED on classes/variables/design/refactoring full-mode phases
+  (W0212/W0613/R0901/R1705/C0209/E1101 visitors' corpus-run cache
+  effects; single-file probes are byte-identical both ways).
+Zero-GT owned codes: still no occurrences in any GT; re-validated on the
+CURRENT binary with a fresh micro-probe (/tmp/probe_b5r5 covering C0131,
+C0132, W0128, W0199, W0177, W0136, W0137 + C0105/W0150 interplay):
+byte-identical output AND exit code vs pinned pylint, both profiles.
+Gates re-certified on the current binary: 27-corpus -E byte parity green
+(out + exit), check_treedump django 400 == 0, check_inferdump django
+200 == 0.
