@@ -959,10 +959,23 @@ pub fn is_terminating_func(eng: &Engine, caches: &LintCaches, call: GNode) -> bo
         // FunctionDef with returns annotation Name inferring to NoReturn/Never
         let func_node = match inferred {
             Value::Node(g) if is_functiondef(eng, *g) => Some(*g),
-            // BoundMethod(_proxied=UnboundMethod(_proxied=p)) unwrap — our
-            // value model loses the UM-wrapping distinction; plain BMs in
-            // astroid do NOT pass the isinstance(FunctionDef) check, so be
-            // conservative and skip BMs entirely (qname matched above).
+            // BoundMethod(_proxied=UnboundMethod(_proxied=p)) unwrap:
+            // Instance.igetattr wraps class-level UnboundMethods into
+            // BoundMethods (bases._wrap_attr), so the COMMON instance
+            // method access IS the double wrap. Classmethod-style BMs
+            // (function_to_method: BoundMethod(func, klass), _proxied = the
+            // FunctionDef directly) do NOT match pylint's pattern — mirror
+            // via the bound value: instance-like bound -> unwrap, ClassDef
+            // bound -> skip. DescriptorBoundMethod also skips.
+            Value::BoundMethod { func, bound } => {
+                let bound_is_class =
+                    matches!(&**bound, Value::Node(b) if eng.kind_is(*b, |k| matches!(k, NodeKind::ClassDef(_))));
+                if bound_is_class {
+                    None
+                } else {
+                    Some(*func)
+                }
+            }
             _ => None,
         };
         let Some(fg) = func_node else { continue };
@@ -1025,7 +1038,10 @@ pub fn are_exclusive(eng: &Engine, stmt1: GNode, stmt2: GNode) -> bool {
             } else if eng.kind_is(node, |k| matches!(k, NodeKind::Try(_) | NodeKind::TryStar(_))) {
                 let c2 = eng.locate_child(node, previous2);
                 let c1 = eng.locate_child(node, child1);
-                if child1 != previous2 {
+                // astroid locate_child returns the FIELD LIST for list
+                // members, so `c1node is not c2node` means "different
+                // fields" (node_classes.py:101-113 + 156)
+                if c1 != c2 {
                     let first_in_body_caught = c2 == Some("handlers") && c1 == Some("body");
                     let second_in_body_caught = c2 == Some("body") && c1 == Some("handlers");
                     let first_in_else = c2 == Some("handlers") && c1 == Some("orelse");

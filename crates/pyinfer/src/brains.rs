@@ -1400,37 +1400,39 @@ impl Engine {
                     "typing.Generic" | "typing.Annotated" | "typing_extensions.Annotated"
                 )
             {
-                // subscriptable via injected __class_getitem__
+                // subscriptable via injected __class_getitem__:
+                // `value.locals["__class_getitem__"] = [func_to_add]`
+                // (brain_typing.py:177) REPLACES any existing entry — the
+                // real typing.Annotated defines __class_getitem__ returning
+                // _AnnotatedAlias, which astroid deliberately shadows so
+                // Alias[...] re-subscripts keep yielding the ClassDef
                 let cg = self.sym("__class_getitem__");
-                let already = !self.class_locals_get(*g, cg).is_empty();
-                if !already {
-                    if let Some(tmid) = self.build_template_module(
-                        "class _CG:
+                if let Some(tmid) = self.build_template_module(
+                    "class _CG:
     @classmethod
     def __class_getitem__(cls, item):
         return cls
 ",
-                        "",
-                    ) {
-                        let tmd = self.md(tmid);
-                        let csym = self.sym("_CG");
-                        let cls_g = {
-                            let locals = tmd.locals.borrow();
-                            locals
-                                .get(&NodeId::MODULE)
-                                .and_then(|l| l.get(&csym))
-                                .and_then(|v| v.first().copied())
-                        };
-                        if let Some(cls_g) = cls_g {
-                            let func = self.class_locals_get(cls_g, cg);
-                            if let Some(&f) = func.first() {
-                                let gmd = self.md(g.m);
-                                gmd.locals
-                                    .borrow_mut()
-                                    .entry(g.n)
-                                    .or_default()
-                                    .insert(cg, vec![f]);
-                            }
+                    "",
+                ) {
+                    let tmd = self.md(tmid);
+                    let csym = self.sym("_CG");
+                    let cls_g = {
+                        let locals = tmd.locals.borrow();
+                        locals
+                            .get(&NodeId::MODULE)
+                            .and_then(|l| l.get(&csym))
+                            .and_then(|v| v.first().copied())
+                    };
+                    if let Some(cls_g) = cls_g {
+                        let func = self.class_locals_get(cls_g, cg);
+                        if let Some(&f) = func.first() {
+                            let gmd = self.md(g.m);
+                            gmd.locals
+                                .borrow_mut()
+                                .entry(g.n)
+                                .or_default()
+                                .insert(cg, vec![f]);
                         }
                     }
                 }

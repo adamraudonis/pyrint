@@ -380,6 +380,11 @@ pub struct Engine {
     pub dataclass_attrs: RefCell<FxHashMap<GNode, GNode>>,
     /// Call nodes whose dataclass-field predicate matched at transform time
     pub dataclass_field_calls: RefCell<FxHashSet<GNode>>,
+    /// enum class -> astroid `__members__` value-Name names, i.e.
+    /// `[v.name for k, v in dunder_members.items()]` — the LAST target of
+    /// each member statement (brain_namedtuple_enum infer_enum_class;
+    /// pylint utils.is_enum_member reads name_obj.name, not the keys)
+    pub enum_member_names: RefCell<FxHashMap<GNode, Vec<String>>>,
     /// `node.is_dataclass = True` flags (brain_dataclasses.py:59 — set at
     /// transform start, read WITHOUT inference by
     /// _find_arguments_from_base_classes / renders)
@@ -500,6 +505,7 @@ impl Engine {
             str_format_calls: RefCell::new(FxHashSet::default()),
             dataclass_attrs: RefCell::new(FxHashMap::default()),
             dataclass_field_calls: RefCell::new(FxHashSet::default()),
+            enum_member_names: RefCell::new(FxHashMap::default()),
             is_dataclass_flag: RefCell::new(FxHashSet::default()),
             dataclass_init_params: RefCell::new(FxHashMap::default()),
             cacheinfo_calls: RefCell::new(FxHashMap::default()),

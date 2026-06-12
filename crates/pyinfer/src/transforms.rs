@@ -434,10 +434,10 @@ impl Engine {
             let ann = GNode { m: cls.m, n: annotation };
             // _is_class_var: next(node.infer()) — single pull, name check
             let is_class_var = match self.infer_first(ann, None) {
-                // getattr(inferred, "name", "") == "ClassVar"
-                Ok(Value::Node(vg)) => {
-                    self.node_name(vg).as_deref() == Some("ClassVar")
-                }
+                // getattr(inferred, "name", "") == "ClassVar" — the name
+                // attribute PROXIES through Instances (Instance.__getattr__
+                // -> _proxied.name), so an Instance of ClassVar matches too
+                Ok(v) => self.getattr_name_of(&v).as_deref() == Some("ClassVar"),
                 _ => false,
             };
             if is_class_var {
@@ -482,8 +482,21 @@ impl Engine {
     /// matches by inferred .name == "InitVar".
     pub(crate) fn is_init_var(&self, ann: GNode) -> bool {
         match self.infer_first(ann, None) {
-            Ok(Value::Node(vg)) => self.node_name(vg).as_deref() == Some("InitVar"),
+            // getattr(inferred, "name", "") == "InitVar" (name proxies
+            // through Instances: InitVar[str] infers to an InitVar Instance)
+            Ok(v) => self.getattr_name_of(&v).as_deref() == Some("InitVar"),
             _ => false,
+        }
+    }
+
+    /// `getattr(inferred, "name", "")` over inference results: direct
+    /// attribute for named nodes (ClassDef/FunctionDef/Module), proxied
+    /// class name for Instance-likes (bases.Proxy.__getattr__).
+    pub(crate) fn getattr_name_of(&self, v: &Value) -> Option<String> {
+        match v {
+            Value::Node(g) => self.node_name(*g),
+            Value::Uninferable => None,
+            _ => self.proxied_class(v).and_then(|c| self.node_name(c)),
         }
     }
 
@@ -2073,7 +2086,10 @@ impl Engine {
                 None => Vec::new(),
             }
         };
-        let mut dunder_members: Vec<(String, GNode)> = Vec::new(); // (local, member proxy ph)
+        // (local, fake name, member proxy ph) — DICT semantics keyed by
+        // local (astroid `dunder_members[local] = fake`: last target wins,
+        // first-insertion position kept)
+        let mut dunder_members: Vec<(String, String, GNode)> = Vec::new();
         let mut target_names: rustc_hash::FxHashSet<String> = Default::default();
         // mymethods: FIRST local of each key that is a FunctionDef
         let mymethods: Vec<(crate::value::GSym, GNode)> = entries
@@ -2217,7 +2233,13 @@ impl Engine {
                 if stmt_value.is_none() {
                     continue;
                 }
-                dunder_members.push((local_str.clone(), ph));
+                // dunder_members[local] = fake (replace, keep position)
+                if let Some(e) = dunder_members.iter_mut().find(|(l, ..)| *l == local_str) {
+                    e.1 = tname.clone();
+                    e.2 = ph;
+                } else {
+                    dunder_members.push((local_str.clone(), tname.clone(), ph));
+                }
             }
             let _ = made_any;
             // node.locals[local] = new_targets (REPLACE)
@@ -2240,7 +2262,7 @@ impl Engine {
         // no second per-member mro/INFBASES walk at transform time).
         let member_items: Vec<(Value, Value)> = dunder_members
             .iter()
-            .map(|(k, ph)| {
+            .map(|(k, _, ph)| {
                 (
                     Value::SynthConst(std::rc::Rc::new(pyast::tree::ConstValue::Str(
                         k.clone().into(),
@@ -2249,6 +2271,12 @@ impl Engine {
                 )
             })
             .collect();
+        // pylint is_enum_member reads `[name_obj.name for _, name_obj in
+        // members.items]` — the value-Name names, NOT the keys
+        self.enum_member_names.borrow_mut().insert(
+            node,
+            dunder_members.iter().map(|(_, n, _)| n.clone()).collect(),
+        );
         self.redirects.borrow_mut().insert(
             extra[1],
             crate::value::NV::V(Value::SynthDict {

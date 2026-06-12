@@ -786,6 +786,10 @@ impl BasicCk {
             }
             Value::Generator { .. } | Value::UnboundMethod { .. } | Value::BoundMethod { .. }
             | Value::DescBM { .. } => (true, None),
+            // objects.Property subclasses FunctionDef; its
+            // infer_call_result raises InferenceError (not callable) ->
+            // W0125 only
+            Value::Property { .. } => (true, None),
             _ => (false, None),
         };
         if !is_const_value {
@@ -1197,10 +1201,17 @@ fn check_callable_comparison(cx: &mut WalkCx, node: GNode, left: GNode, right: G
     let mut count = 0;
     for operand in [left, right] {
         let inferred = u::safe_infer(eng, cx.caches, operand);
+        // bare_callables = (nodes.FunctionDef, astroid.BoundMethod);
+        // objects.Property SUBCLASSES FunctionDef (synthetic '<property>'
+        // with empty body and no decorators -> always counts)
         let func: Option<GNode> = match &inferred {
             Some(Value::Node(g)) if u::is_functiondef(eng, *g) => Some(*g),
             Some(Value::BoundMethod { func, .. }) | Some(Value::DescBM { func, .. }) => {
                 Some(*func)
+            }
+            Some(Value::Property { .. }) => {
+                count += 1;
+                continue;
             }
             _ => None,
         };
@@ -1575,14 +1586,29 @@ fn name_hint(node_type: &str) -> &'static str {
 
 // --- default naming regex matchers (python `re` unicode semantics) --------
 
-/// python \w: unicode alphanumeric or underscore
+/// python \w = str.isalnum() or '_': general category L* or N*
+/// (isalpha: Lu/Ll/Lt/Lm/Lo; isdecimal/isdigit/isnumeric: Nd/Nl/No).
+/// NOT Rust's is_alphanumeric (Alphabetic property includes Other_Alphabetic
+/// combining marks like Khmer vowel signs, which python isalnum rejects).
 fn is_word(c: char) -> bool {
-    c == '_' || c.is_alphanumeric()
+    use unicode_general_category::{get_general_category, GeneralCategory as G};
+    c == '_'
+        || matches!(
+            get_general_category(c),
+            G::UppercaseLetter
+                | G::LowercaseLetter
+                | G::TitlecaseLetter
+                | G::ModifierLetter
+                | G::OtherLetter
+                | G::DecimalNumber
+                | G::LetterNumber
+                | G::OtherNumber
+        )
 }
+/// python \d = general category Nd
 fn is_unicode_digit(c: char) -> bool {
-    // python \d = unicode Nd; approximate with ascii digits + non-ascii
-    // numerics (identifier-legal digits are Nd)
-    c.is_ascii_digit() || (!c.is_ascii() && c.is_numeric())
+    use unicode_general_category::{get_general_category, GeneralCategory as G};
+    matches!(get_general_category(c), G::DecimalNumber)
 }
 
 /// snake DEFAULT/MOD: `[^\W\dA-Z][^\WA-Z]*$`
@@ -2352,23 +2378,16 @@ fn is_enum_member(eng: &Engine, node: GNode, frame: GNode) -> bool {
     if eng.md(frame.m).name == "enum" {
         return false;
     }
+    // members = frame.locals.get("__members__"); name in [name_obj.name
+    // for _, name_obj in members[0].items] — the value-Name names (the
+    // LAST target of each member stmt; enum_member_names side table)
     let sym = eng.sym("__members__");
     let members = eng.class_locals_get(frame, sym);
-    let Some(&first) = members.first() else { return false };
-    // the placeholder redirects to a SynthDict of member names
-    let names: Vec<String> = match eng.redirects.borrow().get(&first) {
-        Some(NV::V(Value::SynthDict { items })) => items
-            .iter()
-            .filter_map(|(k, _)| match k {
-                Value::SynthConst(c) => match &**c {
-                    ConstValue::Str(s) => Some(s.to_string()),
-                    _ => None,
-                },
-                _ => None,
-            })
-            .collect(),
-        _ => return false,
-    };
+    if members.is_empty() {
+        return false;
+    }
+    let table = eng.enum_member_names.borrow();
+    let Some(names) = table.get(&frame) else { return false };
     let Some(name) = name_of(eng, node) else { return false };
     names.contains(&name)
 }
