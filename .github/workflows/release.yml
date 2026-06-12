@@ -28,7 +28,9 @@ jobs:
       matrix:
         platform:
           - { os: ubuntu-latest, target: x86_64, manylinux: auto }
-          - { os: ubuntu-latest, target: aarch64, manylinux: auto }
+          # manylinux2014's gcc can't build libmimalloc-sys for aarch64
+          # (-Wdate-time unsupported); the 2_28 image has a modern toolchain.
+          - { os: ubuntu-latest, target: aarch64, manylinux: 2_28 }
           - { os: macos-14, target: aarch64 }
           # macos-13 (the last Intel runner) has hour-plus queues since
           # deprecation; cross-compile the x86_64 wheel on the arm runner.
