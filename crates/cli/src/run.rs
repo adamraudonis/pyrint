@@ -40,8 +40,12 @@ struct ParsedFile {
     tree: Tree,
     src: SourceFile,
     tokens: Vec<TokEvent>,
-    read_path: String,
     abspath: String,
+    /// unicode raw-checker results, precomputed during the parallel parse
+    /// phase from the same bytes the parse read (pure function of bytes;
+    /// emission order preserved). Replayed in phase 2 where the sequential
+    /// checker used to run, so pragma handling is unchanged.
+    unicode_msgs: Vec<pycheckers::unicode::UnicodeMsg>,
 }
 
 enum FileData {
@@ -82,7 +86,23 @@ struct ModuleOut {
     linted: bool,
 }
 
+/// Env-gated phase timing (PRYLINT_PHASE_TIMING=1): prints coarse phase
+/// durations to stderr. Debug aid only; no output-visible effect.
+fn phase_timing() -> bool {
+    static ON: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *ON.get_or_init(|| std::env::var("PRYLINT_PHASE_TIMING").is_ok())
+}
+
+macro_rules! phase_mark {
+    ($t0:expr, $label:expr) => {
+        if phase_timing() {
+            eprintln!("[phase] {:<12} {:8.3}s", $label, $t0.elapsed().as_secs_f64());
+        }
+    };
+}
+
 pub fn run(opts: &RunOpts) -> i32 {
+    let t0 = std::time::Instant::now();
     let cwd = std::env::current_dir()
         .map(|p| p.to_string_lossy().into_owned())
         .unwrap_or_default();
@@ -143,8 +163,22 @@ pub fn run(opts: &RunOpts) -> i32 {
     let cfg = discover::DiscoverConfig::default();
     let items = discover::expand_modules_fs(&opts.paths, &cfg);
 
+    // prepare_checkers (pylinter.py:588-598): the unicode raw checker is
+    // kept iff any of its messages is enabled package-wise. Decided here
+    // (config-only) so the parse phase can precompute its results.
+    let unicode_prepared = ["E2501", "E2502", "C2503", "E2510", "E2511", "E2512", "E2513", "E2514", "E2515"]
+        .iter()
+        .any(|m| global.enabled(store().by_msgid[m]));
+
     // ---- phase 1: parse all files (rayon, results in file order) ------
-    let mut data: Vec<FileData> = items.par_iter().map(parse_one).collect();
+    phase_mark!(t0, "discover");
+    let mut data: Vec<FileData> =
+        items.par_iter().map(|it| parse_one(it, unicode_prepared)).collect();
+    phase_mark!(t0, "parse");
+    if std::env::var("PRYLINT_PARSE_ONLY").is_ok() {
+        eprintln!("[phase] parse-only abort (files={})", data.len());
+        std::process::exit(0);
+    }
 
     // batched oracle pass for ruff-rejected files. The subprocess (python
     // interpreter boot + per-file verdicts) runs on its OWN thread so it
@@ -228,12 +262,6 @@ pub fn run(opts: &RunOpts) -> i32 {
     }
     let crash_abs = crash_abs;
 
-    // prepare_checkers (pylinter.py:588-598): the unicode raw checker is
-    // kept iff any of its messages is enabled package-wise
-    let unicode_prepared = ["E2501", "E2502", "C2503", "E2510", "E2511", "E2512", "E2513", "E2514", "E2515"]
-        .iter()
-        .any(|m| global.enabled(store().by_msgid[m]));
-
     // ---- phase 2: per-module checks (sequential on a big-stack engine
     // thread: astroid's caches are process-global and order-sensitive, and
     // checker inference must run in pylint's file order) ------------------
@@ -246,51 +274,93 @@ pub fn run(opts: &RunOpts) -> i32 {
         let strip_prefix = &strip_prefix;
         let cwd = std::path::PathBuf::from(&cwd);
         let crash_abs = &crash_abs;
+        // PRYLINT_SHARD_PROBE=N (debug aid): simulate N-way phase-2 sharding
+        // in ONE process — engine k boots ALL files (mirroring pylint's
+        // phase-1 cache state) but walks only its round-robin residue class.
+        // Output then flows through the normal in-order merge: byte-comparing
+        // against the sequential run proves (or refutes) that per-worker
+        // cache divergence is output-invisible.
+        let shard_probe: usize = std::env::var("PRYLINT_SHARD_PROBE")
+            .ok()
+            .and_then(|v| v.parse().ok())
+            .filter(|&n| n >= 2)
+            .unwrap_or(1);
         let engine_thread = std::thread::Builder::new()
             .stack_size(1 << 30)
             .spawn_scoped(scope, move || {
-                let engine = pyinfer::Engine::new(&cwd);
-                for p in crash_abs {
-                    engine.add_crash_file(p.clone());
+                let mut all: Vec<(usize, ModuleOut)> = Vec::new();
+                for k in 0..shard_probe {
+                    let engine = pyinfer::Engine::new(&cwd);
+                    for p in crash_abs {
+                        engine.add_crash_file(p.clone());
+                    }
+                    let mut lint_run = pycheckers::walker::LintRun::default();
+                    let mut oracle_proc = oracle::OracleProc::default();
+                    // boot the import-oracle interpreter NOW so it loads while
+                    // the engine works; first query then responds immediately
+                    oracle_proc.prespawn();
+                    // pylint phase 1 builds EVERY file's AST through the astroid
+                    // manager in file order (pylinter.get_ast -> ast_from_file
+                    // source=True); the cache state at check time depends on it.
+                    // Crash-marked files are skipped: astroid's attempt failed
+                    // and cached nothing.
+                    let mods: Vec<Option<pyinfer::ModId>> = items
+                        .iter()
+                        .map(|it| {
+                            engine
+                                .ast_from_file(&it.filepath, Some(&it.name), false, true)
+                                .ok()
+                        })
+                        .collect();
+                    engine.reset_crash_trip();
+                    phase_mark!(t0, "engine-boot");
+                    if std::env::var("PRYLINT_BOOT_ONLY").is_ok() {
+                        // debug aid: report boot-graph footprint and stop
+                        eprintln!("[phase] boot-only abort");
+                        std::process::exit(0);
+                    }
+                    // PRYLINT_WALK_PREFIX=m + PRYLINT_WALK_PLUS=substr (debug
+                    // aid, requires PRYLINT_SHARD_PROBE>=2 path): walk only
+                    // tree positions < m plus paths containing substr.
+                    let walk_prefix: Option<usize> =
+                        std::env::var("PRYLINT_WALK_PREFIX").ok().and_then(|v| v.parse().ok());
+                    let walk_plus = std::env::var("PRYLINT_WALK_PLUS").ok();
+                    if k == 0 && std::env::var("PRYLINT_LIST_POS").is_ok() {
+                        for (pos, (i, _)) in trees.iter().enumerate() {
+                            eprintln!("[pos] {pos} {}", items[*i].filepath);
+                        }
+                    }
+                    all.extend(trees.iter().enumerate().filter(|(pos, (i, _))| {
+                        match (&walk_prefix, &walk_plus) {
+                            (None, _) => pos % shard_probe == k,
+                            (Some(m), plus) => {
+                                k == 0
+                                    && (pos < m
+                                        || plus
+                                            .as_ref()
+                                            .is_some_and(|s| items[*i].filepath.contains(s.as_str())))
+                            }
+                        }
+                    }).map(
+                        |(_, (i, p))| {
+                            (
+                                *i,
+                                lint_tree(
+                                    &items[*i],
+                                    p,
+                                    global,
+                                    strip_prefix,
+                                    unicode_prepared,
+                                    &engine,
+                                    mods[*i],
+                                    &mut lint_run,
+                                    &mut oracle_proc,
+                                ),
+                            )
+                        },
+                    ));
                 }
-                let mut lint_run = pycheckers::walker::LintRun::default();
-                let mut oracle_proc = oracle::OracleProc::default();
-                // boot the import-oracle interpreter NOW so it loads while
-                // the engine works; first query then responds immediately
-                oracle_proc.prespawn();
-                // pylint phase 1 builds EVERY file's AST through the astroid
-                // manager in file order (pylinter.get_ast -> ast_from_file
-                // source=True); the cache state at check time depends on it.
-                // Crash-marked files are skipped: astroid's attempt failed
-                // and cached nothing.
-                let mods: Vec<Option<pyinfer::ModId>> = items
-                    .iter()
-                    .map(|it| {
-                        engine
-                            .ast_from_file(&it.filepath, Some(&it.name), false, true)
-                            .ok()
-                    })
-                    .collect();
-                engine.reset_crash_trip();
-                trees
-                    .iter()
-                    .map(|(i, p)| {
-                        (
-                            *i,
-                            lint_tree(
-                                &items[*i],
-                                p,
-                                global,
-                                strip_prefix,
-                                unicode_prepared,
-                                &engine,
-                                mods[*i],
-                                &mut lint_run,
-                                &mut oracle_proc,
-                            ),
-                        )
-                    })
-                    .collect::<Vec<_>>()
+                all
             })
             .expect("spawn phase-2 thread");
 
@@ -359,7 +429,9 @@ pub fn run(opts: &RunOpts) -> i32 {
             });
         }
 
-        engine_thread.join().expect("phase-2 thread panicked")
+        let r = engine_thread.join().expect("phase-2 thread panicked");
+        phase_mark!(t0, "phase2");
+        r
     });
 
     // merge engine results with oracle-derived extras, in file order
@@ -408,7 +480,7 @@ pub fn run(opts: &RunOpts) -> i32 {
 
 /// Phase-1 work for one file: read, decode, parse (pylinter.get_ast /
 /// astroid file_build error taxonomy, builder.py:113-149).
-fn parse_one(item: &FileItem) -> FileData {
+fn parse_one(item: &FileItem, unicode_prepared: bool) -> FileData {
     // modutils.get_source_file: a .pyi argument resolves to the sibling .py
     // source when it exists (PY_SOURCE_EXTS order, prefer_stubs=False)
     let mut read_path = item.filepath.clone();
@@ -467,13 +539,23 @@ fn parse_one(item: &FileItem) -> FileData {
     };
     let outcome = pyast::parse::parse_module(&src, &modname, &abspath, package);
     match outcome.tree {
-        Some(tree) => FileData::Parsed(Box::new(ParsedFile {
-            tree,
-            src,
-            tokens: outcome.tokens,
-            read_path,
-            abspath,
-        })),
+        Some(tree) => {
+            // unicode raw checker on the same bytes (pure; replayed in
+            // phase 2 in this order). Pylint runs raw checkers only for
+            // modules that reach the check phase, so parse failures above
+            // never get here — same as before.
+            let mut unicode_msgs = Vec::new();
+            if unicode_prepared {
+                pycheckers::unicode::process_module(&bytes, &mut |um| unicode_msgs.push(um));
+            }
+            FileData::Parsed(Box::new(ParsedFile {
+                tree,
+                src,
+                tokens: outcome.tokens,
+                abspath,
+                unicode_msgs,
+            }))
+        }
         None => FileData::NeedsOracle,
     }
 }
@@ -578,17 +660,16 @@ fn lint_tree(
                 };
                 let ignore_file = process_tokens(&p.tokens, &p.src, &mut fs, &mut pragma_sink);
                 if !ignore_file {
-                    // 2. raw checkers in prepared order (unicode only)
+                    // 2. raw checkers in prepared order (unicode only) —
+                    //    results precomputed in phase 1, replayed here
                     if unicode_prepared {
-                        if let Ok(bytes) = std::fs::read(&p.read_path) {
-                            pycheckers::unicode::process_module(&bytes, &mut |um| {
-                                let text = store()
-                                    .by_msgid
-                                    .get(um.msgid)
-                                    .map(|&i| msgstore::def(i).template.to_string())
-                                    .unwrap_or_default();
-                                add(&mut fs, um.msgid, um.line, um.col as i64, text);
-                            });
+                        for um in &p.unicode_msgs {
+                            let text = store()
+                                .by_msgid
+                                .get(um.msgid)
+                                .map(|&i| msgstore::def(i).template.to_string())
+                                .unwrap_or_default();
+                            add(&mut fs, um.msgid, um.line, um.col as i64, text);
                         }
                     }
                     // 3. AST walk: ImportsChecker + VariablesChecker wired

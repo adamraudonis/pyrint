@@ -2754,6 +2754,34 @@ impl Engine {
 // ---------- path helpers ----------
 
 pub fn abspath(p: &str) -> String {
+    // std::path::absolute hits getcwd(2) for every relative input; the
+    // process cwd never changes during a lint run, so resolve relative
+    // paths against a cached cwd instead. cwd is absolute and
+    // component-normalized (getcwd), so absolute(cwd.join(p)) ==
+    // absolute(p) — the normalization pass is the same std code path.
+    if p.is_empty() {
+        // std::path::absolute errors on "" -> original fallback returned p
+        return p.to_string();
+    }
+    if !p.starts_with('/') {
+        thread_local! {
+            static CWD: std::path::PathBuf =
+                std::env::current_dir().unwrap_or_default();
+        }
+        let joined = CWD.with(|cwd| {
+            if cwd.as_os_str().is_empty() {
+                None // getcwd failed at init: fall through to std
+            } else {
+                Some(cwd.join(p))
+            }
+        });
+        if let Some(joined) = joined {
+            return match std::path::absolute(&joined) {
+                Ok(a) => a.to_string_lossy().into_owned(),
+                Err(_) => p.to_string(),
+            };
+        }
+    }
     match std::path::absolute(p) {
         Ok(a) => a.to_string_lossy().into_owned(),
         Err(_) => p.to_string(),

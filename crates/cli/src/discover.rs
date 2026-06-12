@@ -262,8 +262,15 @@ pub fn absolute(path: &str) -> String {
     if path.starts_with('/') {
         normpath(path)
     } else {
-        let cwd = std::env::current_dir().unwrap_or_default();
-        normpath(&format!("{}/{}", cwd.to_string_lossy(), path))
+        // cwd never changes during a run; cache the getcwd(2) result
+        static CWD: std::sync::OnceLock<String> = std::sync::OnceLock::new();
+        let cwd = CWD.get_or_init(|| {
+            std::env::current_dir()
+                .unwrap_or_default()
+                .to_string_lossy()
+                .into_owned()
+        });
+        normpath(&format!("{cwd}/{path}"))
     }
 }
 
