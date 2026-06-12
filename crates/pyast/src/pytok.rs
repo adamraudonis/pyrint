@@ -180,6 +180,46 @@ pub fn tokenize_for_checkers(text: &str) -> PyTokens {
                 start = tk.row_starts[end_row as usize - 1];
             }
         }
+        if kind == PyTokKind::FStringMiddle {
+            // CPython 3.12 splits FSTRING_MIDDLE at escaped-brace pairs
+            // ("{{" / "}}"): the current token ends right AFTER the pair's
+            // first char and the next middle starts right AFTER the pair's
+            // second char (a trailing empty piece is not emitted). Ruff
+            // keeps the whole literal run as one token — re-split so the
+            // format checker sees CPython row triggers (probed on the
+            // pinned venv; zulip llms_txt.py C0301 case).
+            let raw = &text.as_bytes()[start as usize..end as usize];
+            let mut cur = 0usize; // relative to `start`
+            let mut i = 0usize;
+            while i + 1 < raw.len() {
+                if (raw[i] == b'{' && raw[i + 1] == b'{')
+                    || (raw[i] == b'}' && raw[i + 1] == b'}')
+                {
+                    let piece_start = start + cur as u32;
+                    let piece_end = start + i as u32 + 1; // include pair's 1st char
+                    tk.toks.push(PyTok {
+                        kind,
+                        row: tk.row_of(piece_start),
+                        start: piece_start,
+                        end: piece_end,
+                    });
+                    cur = i + 2;
+                    i += 2;
+                } else {
+                    i += 1;
+                }
+            }
+            if (cur as u32) < end - start {
+                let piece_start = start + cur as u32;
+                tk.toks.push(PyTok {
+                    kind,
+                    row: tk.row_of(piece_start),
+                    start: piece_start,
+                    end,
+                });
+            }
+            continue;
+        }
         tk.toks.push(PyTok { kind, row, start, end });
     }
 

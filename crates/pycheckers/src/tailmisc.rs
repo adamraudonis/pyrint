@@ -1172,7 +1172,7 @@ impl StdlibCk {
                 "W1518",
                 u::lineno(eng, d),
                 u::col_offset(eng, d) as i64,
-                "'cache' or 'lru_cache' with 'maxsize=None' shouldn't be used on methods as the instances will never be garbage collected"
+                "'lru_cache(maxsize=None)' or 'cache' will keep all method args alive indefinitely, including 'self'"
                     .into(),
             );
         }
