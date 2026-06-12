@@ -2618,10 +2618,32 @@ pub fn name_visit_assignname(cx: &mut WalkCx, node: GNode) {
         }
     } else if u::is_classdef(eng, frame) {
         let sym = eng.sym(&name);
-        let inherited = eng
-            .ancestors(frame, true, None)
-            .iter()
-            .any(|&anc| !eng.class_locals_get(anc, sym).is_empty());
+        // `any(frame.local_attr_ancestors(node.name))` — ClassDef.
+        // local_attr_ancestors (scoped_nodes.py) tries mro(context)[1:]
+        // FIRST (recomputed per call; its base inference writes the global
+        // cache — these repeated class-scope walks progressively warm
+        // clamp-prone bases like sqlalchemy's `Mapped[_T_co]` so the later
+        // C0116 ancestors() walk resolves them), falling back to a LAZY
+        // ancestors() walk on MroError, where any() abandons the generator
+        // at the first defining ancestor.
+        let inherited = match eng.mro(frame, None) {
+            Ok(m) => m
+                .get(1..)
+                .unwrap_or(&[])
+                .iter()
+                .any(|&anc| !eng.class_locals_get(anc, sym).is_empty()),
+            Err(_) => {
+                let mut found = false;
+                let _ = eng.ancestors_to(frame, true, None, &mut |anc| {
+                    if !eng.class_locals_get(anc, sym).is_empty() {
+                        found = true;
+                        return pyinfer::value::Drive::Stop;
+                    }
+                    pyinfer::value::Drive::Go
+                });
+                found
+            }
+        };
         if inherited {
             return;
         }
