@@ -2581,19 +2581,28 @@ impl Engine {
             || cls == b.module
     }
 
-    /// builder.py:58-70 _can_assign_attr: consults ClassDef.slots().
+    /// builder.py:58-70 _can_assign_attr: consults ClassDef.slots(), then
+    /// `return node.qname() != "builtins.object"` — a delayed assattr NEVER
+    /// lands on builtins.object (probe: twisted test_endpoints.py:81
+    /// `ConchUser = object` fallback + line 163 `avatar.channelLookup = ...`
+    /// would otherwise pollute object.instance_attrs, making
+    /// instance_attr_ancestors() suppress the C0103 attr-name check for
+    /// `channelLookup` on EVERY class corpus-wide).
     fn can_assign_attr(&self, cls: GNode, attrname: GSym) -> bool {
         match self.all_slots(cls) {
-            Err(()) => true, // NotImplementedError (mro failure / old-style)
-            Ok(None) => true,
+            Err(()) => {}  // NotImplementedError (mro failure / old-style)
+            Ok(None) => {} // `if slots and ...` — None is falsy
             Ok(Some(slots)) => {
-                if slots.is_empty() {
-                    return true; // `if slots and ...` — empty is falsy
+                if !slots.is_empty() {
+                    // `if slots and attrname not in {...}: return False`
+                    let name = self.sname(attrname);
+                    if !slots.iter().any(|s| *s == name) {
+                        return false;
+                    }
                 }
-                let name = self.sname(attrname);
-                slots.iter().any(|s| *s == name)
             }
         }
+        self.qname(cls) != "builtins.object"
     }
 
     /// ClassDef._all_slots (scoped_nodes.py:2761-2798), cached per class.

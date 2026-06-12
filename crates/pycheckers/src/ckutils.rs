@@ -10,7 +10,7 @@ use std::rc::Rc;
 use pyast::tree::{ConstValue, Ctx as ExprCtx, IntValue, NodeKind};
 use pyinfer::ctx::Ctx;
 use pyinfer::graph::Engine;
-use pyinfer::value::{GNode, GSym, Value, NV};
+use pyinfer::value::{Drive, GNode, GSym, Value, NV};
 use rustc_hash::{FxHashMap, FxHashSet};
 
 // ---------------------------------------------------------------------------
@@ -437,10 +437,95 @@ pub fn safe_infer(eng: &Engine, caches: &LintCaches, g: GNode) -> Option<Value> 
     if let Some(v) = caches.safe_infer.borrow_mut().get(g) {
         return v;
     }
-    let flow = eng.infer(g, &Ctx::new());
-    let res = safe_infer_of_flow(eng, &flow);
+    let res = safe_infer_streaming(eng, &Ctx::new(), g, None);
     caches.safe_infer.borrow_mut().put(g, res.clone());
     res
+}
+
+/// LAZY pull-by-pull port of pylint utils.safe_infer (utils.py:1346-1410).
+/// The python version abandons the inference generator the moment a stop
+/// condition fires (`return None` mid-loop): nothing further is explored,
+/// so no extra nodes_inferred bumps, no context.path growth and no global
+/// inference-cache writes happen past that point. An eager full drain
+/// poisons astroid's GLOBAL inference cache with truncated [Uninferable]
+/// entries that pylint never writes (probe: twisted _signals.py:90
+/// `signal.getsignal(SIGCHLD) == SIG_DFL` — astroid's safe_infer stops the
+/// Call generator after [U, Inst:Handlers]; a full drain keeps exploring
+/// EnumType.__call__ -> _create_(class_name=value, ...) and caches a
+/// clamped [U] for enum.py:759 `value` bn=Handlers, which the W0125
+/// inference of line 148 then replays, flipping W0143).
+/// `ctor_ambiguous`: the compare_constructors=True per-value check
+/// (utils.py:1397-1403), passed as a callback by the typecheck checker.
+pub fn safe_infer_streaming(
+    eng: &Engine,
+    ctx: &Rc<Ctx>,
+    g: GNode,
+    ctor_ambiguous: Option<&dyn Fn(GNode, GNode) -> bool>,
+) -> Option<Value> {
+    let mut first: Option<Value> = None;
+    // inferred_types: None = empty set (first was Uninferable), Some(t) = {t}
+    let mut first_type: Option<Option<String>> = None;
+    let mut stopped_none = false;
+    // isinstance(x, nodes.FunctionDef) is True for FunctionDef AND the
+    // objects.Property / objects.PartialFunction subclasses
+    let fnode_of = |val: &Value| -> Option<GNode> {
+        match val {
+            Value::Node(g) if is_functiondef(eng, *g) => Some(*g),
+            Value::Property { func, .. } | Value::Partial { func, .. } => Some(*func),
+            _ => None,
+        }
+    };
+    let end = {
+        let first = &mut first;
+        let first_type = &mut first_type;
+        let stopped_none = &mut stopped_none;
+        eng.infer_to(g, ctx, &mut |v| {
+            if first.is_none() {
+                // value = next(infer_gen)
+                if !v.is_uninferable() {
+                    *first_type = Some(value_pytype(eng, &v));
+                }
+                *first = Some(v);
+                return Drive::Go;
+            }
+            let fv = first.as_ref().unwrap();
+            let t = if v.is_uninferable() {
+                // Uninferable "pytype" is the Uninferable singleton — never a str
+                Some("\u{0}Uninferable".to_string())
+            } else {
+                value_pytype(eng, &v)
+            };
+            // `if inferred_type not in inferred_types: return None`
+            let in_set = matches!(&first_type, Some(ft) if *ft == t);
+            if !in_set {
+                *stopped_none = true;
+                return Drive::Stop;
+            }
+            if let (Some(a), Some(b)) = (fnode_of(fv), fnode_of(&v)) {
+                if fn_args_ambiguous(eng, a, b) {
+                    *stopped_none = true;
+                    return Drive::Stop;
+                }
+            }
+            if let Some(cb) = ctor_ambiguous {
+                if let (Value::Node(a), Value::Node(b)) = (fv, &v) {
+                    if cb(*a, *b) {
+                        *stopped_none = true;
+                        return Drive::Stop;
+                    }
+                }
+            }
+            Drive::Go
+        })
+    };
+    if stopped_none {
+        return None;
+    }
+    if end.err_opt().is_some() {
+        // InferenceError on the first pull or while pulling a later value
+        return None;
+    }
+    first
 }
 
 pub fn safe_infer_of_flow(eng: &Engine, flow: &pyinfer::value::Flow) -> Option<Value> {

@@ -151,26 +151,15 @@ pub fn safe_infer_cc(eng: &Engine, caches: &u::LintCaches, g: GNode) -> Option<V
     if let Some(v) = caches.safe_infer_cc.borrow_mut().get(g) {
         return v;
     }
-    let flow = eng.infer(g, &Ctx::new());
-    let mut res = u::safe_infer_of_flow(eng, &flow);
-    // class_constructors_are_ambiguous (utils.py:1451-1463): applies per
-    // subsequent ClassDef with the FIRST value also a ClassDef
-    if res.is_some() && flow.vals.len() > 1 {
-        if let Value::Node(first) = &flow.vals[0] {
-            if is_classdef(eng, *first) {
-                for v in &flow.vals[1..] {
-                    if let Value::Node(other) = v {
-                        if is_classdef(eng, *other)
-                            && class_constructors_ambiguous(eng, *first, *other)
-                        {
-                            res = None;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
-    }
+    // class_constructors_are_ambiguous (utils.py:1451-1463): per subsequent
+    // ClassDef with the FIRST value also a ClassDef; LAZY like the python
+    // loop (the generator is abandoned at the first ambiguous pair).
+    let ctor = |first: GNode, other: GNode| -> bool {
+        is_classdef(eng, first)
+            && is_classdef(eng, other)
+            && class_constructors_ambiguous(eng, first, other)
+    };
+    let res = u::safe_infer_streaming(eng, &Ctx::new(), g, Some(&ctor));
     caches.safe_infer_cc.borrow_mut().put(g, res.clone());
     res
 }
@@ -2036,10 +2025,11 @@ impl TypeCk {
         };
         drop(md);
         for ctx_mgr in items {
-            // fresh InferenceContext kept for context.path inspection
+            // fresh InferenceContext kept for context.path inspection;
+            // LAZY safe_infer (the path contents reflect exactly what the
+            // abandoned generator explored, like pylint's)
             let ictx = Ctx::new();
-            let flow = eng.infer(ctx_mgr, &ictx);
-            let inferred = match u::safe_infer_of_flow(eng, &flow) {
+            let inferred = match u::safe_infer_streaming(eng, &ictx, ctx_mgr, None) {
                 Some(v) if !v.is_uninferable() => v,
                 _ => continue,
             };
