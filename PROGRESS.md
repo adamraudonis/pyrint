@@ -1713,3 +1713,78 @@ Validation:
   design, similarities, strings-W).
 - -E 27-corpus gate: 27/27 byte-identical + exit codes equal.
   check_treedump django 400 == 0. pyinfer untouched.
+
+## Full-pylint mode — phase B (checkers/base W/C/R) (2026-06-12)
+
+Built `pycheckers::basicwc` + BasicCk extensions per notes/09-basic-wc.md:
+- BasicChecker W-codes: W0101 (incl. terminating-func INFERENCE arm; the
+  return+Expr(Yield/YieldFrom) empty-generator skip — YieldFrom SUBCLASSES
+  Yield), W0102 (next(default.infer()) single pull, 10-qname table, the
+  4 message-arg shapes), W0104/W0105/W0106/W0131/W0133 via visit_expr,
+  W0107 PassChecker (child_sequence len + doc_node), W0108 (filter_vararg
+  Starred semantics, lookup-resolves-to-lambda bail), W0109/W0130 (python
+  value-equality keys, %r of the SECOND occurrence, Attribute-key
+  as_string collision), W0124, W0125/W0126 (safe_infer const-nodes incl.
+  objects.Property; FunctionDef/Lambda infer_call_result truthiness;
+  _name_holds_generator frame lookup; with_metaclass AttributeError ->
+  F0002 crash replicated), W0127 (class-scope locals exemption), W0128
+  (dummy-rgx whole-check abort, Counter.most_common stable ordering),
+  W0129/W0199, W0134+_trys stack (crash leaves the stack dirty — leave_try
+  pop gated on !crashed), W0150 (TryStar finalbody matched via hasattr,
+  _trys gate Try-only), W0122/W0123 (pre-existing).
+- BasicErrorChecker W0120 (orelse[0].lineno-1 anchor, loop col;
+  _loop_exits_early break-ownership walk; AsyncFor isinstance-For).
+- ComparisonChecker C0121 (is_test_condition bool()-wrap rule, truthiness/
+  falsiness suggestion table), C0123 (type(x)==type(y) literal-arg
+  exemption), R0123 (textual "is not" replace-all), R0124 (Const-value /
+  Name-name equality only), R0133, W0143 (bare callables = FunctionDef |
+  BoundMethod | objects.Property — Property SUBCLASSES FunctionDef with
+  empty body; _SpecialForm + top-level-Raise exemptions), W0177 (float
+  ("nan") inferred()[0] crash semantics + np.NaN syntactic).
+- NameChecker C0103/C0104 (hand-rolled python-re matchers: snake/UPPER/
+  Pascal with \w = isalnum-categories, \d = Nd; typevar/paramspec/
+  typevartuple/typealias lookaround families), the full visit_assignname
+  dispatch (typevar/typealias inference, tuple-target fallthrough,
+  Uninferable+const-shaped igetattr bail, are_exclusive pairwise const
+  upgrade, _redefines_import, reassigned-before/after line scans, enum
+  members via Engine.enum_member_names, dataclass Final->class_attribute),
+  C0105/C0131/C0132 (variance kwargs; non-Const variance kwarg -> crash),
+  instance_attrs attr checks at classdef visit (dataclass/attrs Unknown
+  placeholders resolved through dataclass_attrs/reparents to their
+  class-body stmts; node.root() foreign-module attribution).
+- DocStringChecker C0112/C0114/C0115/C0116 (`^_` gate, property setter/
+  deleter + overload-stub exemptions, overridden-method scan with
+  builtins.object qname skip, __doc__ locals fallback, str-format-first-
+  stmt heuristic, empty-module lines==0).
+- FunctionChecker W0135 (Generator.parent unwrap, caller-yield Const
+  bail, yield-is-last-stmt walk, try-finalbody/handler analysis).
+
+Engine fixes surfaced by the zero-round (all -E/treedump/inferdump green):
+- are_exclusive: astroid locate_child returns the FIELD LIST for list
+  members -> different except-handlers ARE exclusive (try/import consts).
+- brain_typing: typing.Annotated/Generic __class_getitem__ is OVERWRITTEN
+  unconditionally (Alias[...] re-subscripts yield the ClassDef; pydantic
+  OnErrorOmit alias exemption via variable->ClassDef safe_infer).
+- brain_dataclasses _is_init_var/_is_class_var: getattr(inferred,"name")
+  proxies through Instances (InitVar[str] fields out of instance_attrs).
+- enum transform: dunder_members dict-replace keyed by local with the
+  LAST target's fake (tuple-target enums); Engine.enum_member_names side
+  table = the astroid __members__ value-Name names pylint reads.
+- is_terminating_func: Instance.igetattr wraps methods as BoundMethod(
+  UnboundMethod(f)) -> unwrap instance-bound BMs (class-bound skip).
+
+Validation (footer-stripped GT, owned-code multiset + exact subsequence
+order): rich/fastapi/werkzeug/tornado/pydantic/mypy/pip/celery/botocore/
+django/zulip/salt/ansible: 0FP/0FN both profiles. scrapy/matplotlib/
+sqlalchemy/twisted hook: 0FP/0FN except twisted hook W0143 x1. black hook
+0FP/0FN (full GT was truncated mid-run — regenerated).
+Zero-GT codes (W0177/W0199/C0131/C0132/W0136/W0137/W0128) validated
+byte-identical on micro-probes vs the pinned pylint.
+Known full-profile residue, all confirmed fresh-state-identical (pylint on
+the same inputs in isolation matches us byte-for-byte; the divergence is
+the full-run inference cache state built by checkers other phases haven't
+ported yet — re-verify after variables/typecheck/refactoring phases):
+scrapy C0103 x1 (f-string after attr burn), matplotlib C0103 x1 (JoinedStr
+shared-context part inference), twisted W0143 x1 + C0103-attr x2 + (hook)
+W0143 x1, sqlalchemy full C0116 9FN/2FP (generic-base ancestors order
+sensitivity).
