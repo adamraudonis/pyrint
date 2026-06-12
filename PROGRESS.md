@@ -1904,3 +1904,39 @@ byte-identical output AND exit code vs pinned pylint, both profiles.
 Gates re-certified on the current binary: 27-corpus -E byte parity green
 (out + exit), check_treedump django 400 == 0, check_inferdump django
 200 == 0.
+
+## Phase B zero-round 6 (re-validation + partial-GT prefix audit)
+
+Fresh ours-runs on every combo with COMPLETE GT (42 = 22 corpora hook +
+20 full; black.full/sentry.full GT pylint processes still live),
+owned-code multiset + exact owned-line subsequence order vs
+footer-stripped GT (harness/check_owned.sh):
+- 40/42 combos 0FP/0FN with EXACT order. Owned GT volume across the 42
+  combos: 273,509 (C0116 139,294 / C0103 68,782 / C0115 41,875 / C0114
+  12,695 / C0104 2,385 / W0104 2,229 / the rest in the hundreds).
+- matplotlib full: C0103 x1 FP (.circleci/fetch_doc_logs.py:36) —
+  unchanged from rounds 2-5; walker still skips the E1101 visitor.
+  BLOCKED on typecheck full-mode phase.
+- sqlalchemy full: C0116 9FN/2FP — same exact 11 lines as rounds 2-5
+  (attributes.py 410/421/453/456/461/690, array.py 244, ext.py 122/127
+  FN; base.py 858/863 FP). BLOCKED on classes/variables/design/
+  refactoring full-mode phases.
+NEW this round — partial-GT prefix audit (/tmp/prefix_owned.py: compare
+owned lines restricted to GT-COMPLETE module blocks, dropping the final
+mid-write block):
+- black.full prefix (294 complete modules): owned 3,687/3,687, 0FP/0FN,
+  EXACT order.
+- sentry.full prefix (7,217 complete modules): owned 63,152/63,152,
+  0FP/0FN, EXACT order — first owned-code signal from the largest
+  full-profile corpus.
+- A stale black.oursfull.out (14:47, pre-15:54 rebuild) showed a
+  transient C0103 FP at action/main.py:134 (JoinedStr const inference);
+  it does NOT reproduce on the HEAD binary: double-run byte-identical,
+  matches the fresh sweep, and single-file probes agree with pinned
+  pylint both ways. Dismissed as stale-binary artifact.
+Zero-GT owned codes (W0128/W0177/W0199/C0131/C0132/W0136/W0137):
+re-validated on the current binary via /tmp/probe_b5r5 micro-probe —
+byte-identical output AND exit code vs pinned pylint, both profiles.
+Gates re-certified on the current binary: 27-corpus -E byte parity green
+(out + exit, 27/27), check_treedump django 400 == 0, check_inferdump
+django 200 == 0.
