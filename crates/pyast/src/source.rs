@@ -290,3 +290,67 @@ pub fn decode_source(bytes: &[u8], filename: &str) -> Result<SourceFile, DecodeE
     };
     Ok(SourceFile::from_text(text, cookie.name))
 }
+
+/// Like `decode_source` but WITHOUT the universal-newline translation:
+/// the decoded text keeps `\r\n`/`\r` byte-for-byte. This is what pylint's
+/// token-layer checkers see (`tokenize.tokenize` decodes the raw byte
+/// stream line by line; line endings survive). Returns None on any decode
+/// error — callers only use this for files whose `decode_source` already
+/// succeeded.
+pub fn decode_source_raw(bytes: &[u8], filename: &str) -> Option<String> {
+    let mut pos = 0usize;
+    let mut first = readline(bytes, &mut pos);
+    let mut bom_found = false;
+    if first.starts_with(BOM_UTF8) {
+        bom_found = true;
+        first = &first[3..];
+    }
+    let default = || Cookie {
+        entry: lookup("utf_8").expect("utf-8 codec in registry"),
+        name: if bom_found { "utf-8-sig" } else { "utf-8" }.to_string(),
+    };
+    let cookie = if first.is_empty() {
+        default()
+    } else if let Some(c) = find_cookie(first, filename, bom_found).ok()? {
+        c
+    } else if !is_blank_line(first) {
+        default()
+    } else {
+        let second = readline(bytes, &mut pos);
+        if second.is_empty() {
+            default()
+        } else if let Some(c) = find_cookie(second, filename, bom_found).ok()? {
+            c
+        } else {
+            default()
+        }
+    };
+    let data = if cookie.name.ends_with("-sig") && bytes.starts_with(BOM_UTF8) {
+        &bytes[3..]
+    } else {
+        bytes
+    };
+    match cookie.entry.kind {
+        CodecKind::Utf8 => Some(std::str::from_utf8(data).ok()?.to_string()),
+        CodecKind::Ascii => {
+            if !data.is_ascii() {
+                return None;
+            }
+            Some(std::str::from_utf8(data).ok()?.to_string())
+        }
+        CodecKind::Latin1 => Some(data.iter().map(|&b| b as char).collect()),
+        CodecKind::Table(table) => {
+            let mut s = String::with_capacity(data.len());
+            for &b in data {
+                let v = table[b as usize];
+                if v == 0xFFFE {
+                    return None;
+                }
+                s.push(char::from_u32(v)?);
+            }
+            Some(s)
+        }
+        CodecKind::OtherText => Some(data.iter().map(|&b| b as char).collect()),
+        CodecKind::Undefined | CodecKind::NotText => None,
+    }
+}

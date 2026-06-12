@@ -105,6 +105,9 @@ impl ImportsChecker {
         };
         drop(md);
         for name in &names {
+            // check_deprecated_module (mixin) — W4901, per name, BEFORE the
+            // import resolution (imports.py:543-545)
+            crate::deprecated::check_deprecated_module(cx, node, name);
             let imported = self.get_imported_module(cx, node, name);
             if cx
                 .eng
@@ -132,6 +135,9 @@ impl ImportsChecker {
         };
         drop(md);
         let imported = self.get_imported_module(cx, node, &basename);
+        // W4901 on the ABSOLUTE (relative-resolved) name (imports.py:561)
+        let absolute_name = importfrom_absolute_name(cx.eng, node);
+        crate::deprecated::check_deprecated_module(cx, node, &absolute_name);
         if cx
             .eng
             .parent(node)
@@ -584,4 +590,21 @@ fn ignore_import_failure(cx: &mut WalkCx, node: GNode, _modname: &str) -> bool {
         }
     }
     u::node_ignores_exception(cx.eng, cx.caches, node, "ImportError")
+}
+
+
+/// utils.get_import_name (pylint utils.py:1820-1843): resolve a relative
+/// ImportFrom to its absolute dotted name (TooManyLevelsError -> unchanged).
+pub fn importfrom_absolute_name(eng: &pyinfer::graph::Engine, node: GNode) -> String {
+    let md = eng.md(node.m);
+    let (modname, level) = match &md.tree.nodes[node.n.idx()].kind {
+        NodeKind::ImportFrom { modname, level, .. } => (md.tree.s(*modname).to_string(), *level),
+        _ => return String::new(),
+    };
+    match level {
+        Some(l) if l > 0 => eng
+            .relative_to_absolute_name(&md, &modname, Some(l))
+            .unwrap_or(modname),
+        _ => modname,
+    }
 }

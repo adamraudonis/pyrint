@@ -1634,3 +1634,82 @@ messages; root causes are process-environment nondeterminism (astroid
 raw_building snapshots the live os.environ; PYTHONHASHSEED set ordering),
 i.e. pylint itself is run-to-run unstable there. NOT engine bugs. Frozen as
 known-benign; revisit only if a checker diff ever points here.
+
+## Full-pylint mode — phase A (token/raw layer + misc checkers)
+
+New mission: byte parity WITHOUT `-E` (arbitrary --disable lists). Profiles:
+`harness/flags_hook.txt` (Adam's pre-commit disables) and
+`harness/flags_full.txt` (no disables). GT in `harness/results/<c>.{hook,full}.out`;
+compare with the score footer stripped (`harness/strip_footer.py` — the one
+sanctioned GT transform until phase F implements the footer).
+
+Done this phase (specs: notes/09-format.md, 09-misc-wc.md, 09-pipeline-noE.md):
+
+- **Full-mode message state**: `GlobalState::full_default()` = 389 − 10
+  `default_enabled:False` − 2 py-gated (E0106/W1502) = 377 enabled, then CLI
+  --disable. `-E` keeps the old baked state — mode-split at run().
+- **CPython-tokenize-equivalent stream** (`pyast::pytok`) from ruff's lexer
+  over the UNnormalized decoded bytes (`decode_source_raw` — \r\n preserved;
+  pylint tokenizes raw bytes). Synthesis patched to CPython semantics
+  (ENCODING/ENDMARKER, EOF `NL ''` after comments/blank partial lines, EOF
+  DEDENT re-rowing, backslash-continuation INDENT clamping). Probed against
+  the pinned venv's tokenize.
+- **FormatChecker** (`pycheckers::format`): token side C0301 (pragma-text
+  excision + checker_off→add_ignored quirk, URL regex), C0302 (run-global
+  `_pragma_lineno` leak — map now maintained by the cli pragma scan in
+  sequential module order), C0303/C0304/C0305 (specific_splitlines
+  buffer-drop, \f-protection), W0301, W0311 (both call paths), C0325 (full
+  state machine incl. walrus/double-paren/else-recursion), C0327/C0328
+  (C0328 inert at default config). AST side C0321 via visit_default
+  semantics (field-list previous_sibling, Try else/finally line inference,
+  blockstart_tolineno per node kind, _visited_lines 1/2 protocol,
+  Ellipsis-stub + With exemptions).
+- **misc** W0511 fixme (anchored case-insensitive regex, col+1 quirk);
+  EncodingChecker raw side is a documented no-op; I0023 not ported
+  (default-off, checker dropped).
+- **non_ascii_names** C2401/W2402/C2403 (lambda-param "Variable" label via
+  frame dispatch, ClassDef-entry instance-attr emission order,
+  instance_attr_ancestors skip).
+- **unicode** C2503 now displayable (was already computed).
+- **small checkers** (`pycheckers::smallck`): C2801 unnecessary-dunder-call
+  (DUNDER_METHODS map generated from the pinned venv, lambda exceptions,
+  super() and non-Instance inference gates), W2101 useless-with-lock, C3001/
+  C3002 lambda-expressions, W3301 nested-min-max (identity-compare of the
+  inferred builtins FunctionDef, genexp bail, stale-enumerate splat rewrite
+  with the empty-tail-slice bug, as_string suggestion), W3601
+  bad-chained-comparison (sorted-unique operator groups).
+- **deprecated framework** (`pycheckers::deprecated` + generated
+  `depdata.rs`, harness/gen_deprecated_rs.py — sys.version_info-filtered
+  tables in seed-0 set order): W4901 via ImportsChecker (per-name on import,
+  absolute name on importfrom, `__import__("x")` mixin call path), W4902/
+  W4903 (qname-or-bare-callsite-name set, 2-element seed-0 set order via
+  pyset), W4904 (dict.update module-table replacement bug kept: importlib.abc
+  "Finder" / typing "Text" lost), W4905 (first decorator only), W4906.
+  W3101 was already ported (method_args).
+- **Walker**: full-mode callback positions extracted from the pinned venv
+  with an empty rcfile (harness/gen_walk_order_full.py) and hand-wired into
+  the dispatch behind `Prepared` gates (prepare_checkers drop rule + the
+  only_required_for_messages method gates). Under -E every gate is false →
+  -E dispatch byte-identical. Per-module order: pragma scan → RAW checkers
+  (format/misc no-ops, unicode) → TOKEN checkers (format, miscellaneous) →
+  AST walk, sorted-checker-name interleaving verified order-identical on
+  corpora.
+- W3201 bad-dunder-name is in pylint/extensions (NOT loaded by default) —
+  out of scope, confirmed against the master coverage table.
+
+Validation:
+- Probe corpora (every phase-A code incl. zero-GT ones: W0301, C0327, W2402,
+  C2403, W2101, C3002, W3601) byte-identical vs pinned pylint after
+  filtering out-of-phase codes.
+- 14 corpora × {hook, full}: phase-A codes at ZERO FP / ZERO FN —
+  C0301 31304, C0321 2628, W0511 1768, C0302 476, C2801 306, C0325 253,
+  W0311 232, W4901 226, C3001 188, C0303 70, C0304 42, W4902 14, W4904 18,
+  C2401 22, C0305 10, W3301 4, W4903 4, W4905 2, C2503 2 — all exact, and
+  the merged streams are ORDER-identical for every exactly-matched code.
+- Remaining hook/full FPs are pre-existing port bugs in other phases' codes
+  now visible without -E (W0707/W0611/C0411/W0706/W0632/W0614/W1518/W1202)
+  plus F0002 crash-template timestamps (bytecmp-normalized); FNs are the
+  not-yet-ported W/C/R checkers (basic, variables-W, classes-W, refactoring,
+  design, similarities, strings-W).
+- -E 27-corpus gate: 27/27 byte-identical + exit codes equal.
+  check_treedump django 400 == 0. pyinfer untouched.

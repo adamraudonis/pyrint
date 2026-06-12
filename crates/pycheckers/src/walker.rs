@@ -14,12 +14,71 @@ use crate::ckutils as u;
 use crate::ckutils::LintCaches;
 use crate::classes::{ClassCk, NewStyleCk, SpecialCk};
 use crate::exceptions::ExceptionsCk;
+use crate::format::FormatWalkState;
 use crate::imports::ImportsChecker;
 use crate::logging_ck::LoggingCk;
+use crate::nonascii::NonAsciiCk;
+use crate::smallck::{ChainedCompCk, DunderCallCk, LambdaExprCk, NestedMinMaxCk, ThreadingCk};
 use crate::strings::StringCk;
 use crate::tailmisc::{AsyncCk, DataclassCk, MatchCk, MethodArgsCk, ModIterCk, StdlibCk};
 use crate::typecheck::{IterCk, TypeCk};
 use crate::variables::VarsChecker;
+
+/// prepare_checkers / only_required_for_messages gates for the full-mode
+/// checkers (notes/09-format.md §0.3): a checker whose messages are ALL
+/// config-disabled is DROPPED (inline `enable` cannot resurrect it); visit
+/// methods behind @only_required_for_messages need one config-enabled
+/// message from their list. Under `-E` every flag here is false — the new
+/// callbacks never run, preserving byte-identical -E behavior.
+#[derive(Default, Clone, Copy)]
+pub struct Prepared {
+    /// FormatChecker prepared -> visit_default registered for EVERY node
+    /// (C0321; the checks_msgs gate is bypassed for visit_default)
+    pub format: bool,
+    /// nonascii visit_module gate: non-ascii-name | non-ascii-file-name
+    pub nonascii_module: bool,
+    /// nonascii name-only visit methods gate: non-ascii-name
+    pub nonascii_name: bool,
+    /// nonascii visit_import/importfrom gate: C2401 | C2403
+    pub nonascii_import: bool,
+    pub dunder: bool,
+    pub threading: bool,
+    pub lambda_expr: bool,
+    pub nested_min_max: bool,
+    pub chained: bool,
+    /// StdlibChecker (DeprecatedMixin) visit_attribute gate: W4906
+    pub dep_attr: bool,
+    /// visit_decorators gate: W4905
+    pub dep_dec: bool,
+    /// stdlib mixin visit_import/visit_importfrom gate: W4901 | W4904
+    pub dep_import: bool,
+    /// imports mixin visit_call gate (deprecated-* messages)
+    pub imports_call: bool,
+}
+
+impl Prepared {
+    pub fn from_enabled(enabled: &dyn Fn(&str) -> bool) -> Prepared {
+        let any = |ids: &[&str]| ids.iter().any(|m| enabled(m));
+        Prepared {
+            format: any(&[
+                "C0301", "C0302", "C0303", "C0304", "C0305", "W0311", "W0301", "C0321", "C0325",
+                "C0327", "C0328",
+            ]),
+            nonascii_module: any(&["C2401", "W2402"]),
+            nonascii_name: enabled("C2401"),
+            nonascii_import: any(&["C2401", "C2403"]),
+            dunder: enabled("C2801"),
+            threading: enabled("W2101"),
+            lambda_expr: any(&["C3001", "C3002"]),
+            nested_min_max: enabled("W3301"),
+            chained: enabled("W3601"),
+            dep_attr: enabled("W4906"),
+            dep_dec: enabled("W4905"),
+            dep_import: any(&["W4901", "W4904"]),
+            imports_call: any(&["W4901", "W4902", "W4903", "W4904"]),
+        }
+    }
+}
 
 /// A message produced by a checker (text fully formatted; gating and
 /// module/path resolution happen in the caller).
@@ -129,6 +188,13 @@ pub struct LintRun {
     pub dataclass: DataclassCk,
     pub mod_iter: ModIterCk,
     pub stdlib: StdlibCk,
+    pub nonascii: NonAsciiCk,
+    pub dunder: DunderCallCk,
+    pub threading: ThreadingCk,
+    pub lambda_expr: LambdaExprCk,
+    pub nested: NestedMinMaxCk,
+    pub chained: ChainedCompCk,
+    pub format_state: FormatWalkState,
     pub caches: LintCaches,
 }
 
@@ -153,6 +219,13 @@ impl Default for LintRun {
             dataclass: DataclassCk,
             mod_iter: ModIterCk,
             stdlib: StdlibCk,
+            nonascii: NonAsciiCk,
+            dunder: DunderCallCk,
+            threading: ThreadingCk,
+            lambda_expr: LambdaExprCk,
+            nested: NestedMinMaxCk,
+            chained: ChainedCompCk,
+            format_state: FormatWalkState::default(),
             caches: LintCaches::default(),
         }
     }
@@ -160,16 +233,19 @@ impl Default for LintRun {
 
 impl LintRun {
     #[allow(clippy::too_many_arguments)]
+    #[allow(clippy::too_many_arguments)]
     pub fn walk_module(
         &mut self,
         eng: &Engine,
         mid: ModId,
+        prep: &Prepared,
         emit: &mut dyn FnMut(CheckMsg),
         import_oracle: &mut dyn FnMut(&str, &str) -> Option<String>,
         is_enabled: &dyn Fn(&str, u32) -> bool,
         add_ignored: &dyn Fn(&str, u32),
         crashed: &std::cell::Cell<bool>,
     ) {
+        self.format_state.clear();
         let mut cx = WalkCx {
             eng,
             mid,
@@ -181,6 +257,7 @@ impl LintRun {
             crashed,
         };
         let mut walker = Walker {
+            prep: *prep,
             imp: &mut self.imports,
             vars: &mut self.vars,
             ty: &mut self.ty,
@@ -199,12 +276,20 @@ impl LintRun {
             dataclass: &mut self.dataclass,
             mod_iter: &mut self.mod_iter,
             stdlib: &mut self.stdlib,
+            nonascii: &mut self.nonascii,
+            dunder: &mut self.dunder,
+            threading: &mut self.threading,
+            lambda_expr: &mut self.lambda_expr,
+            nested: &mut self.nested,
+            chained: &mut self.chained,
+            format_state: &mut self.format_state,
         };
         walker.walk(&mut cx, GNode { m: mid, n: NodeId::MODULE });
     }
 }
 
 struct Walker<'w> {
+    prep: Prepared,
     imp: &'w mut ImportsChecker,
     vars: &'w mut VarsChecker,
     ty: &'w mut TypeCk,
@@ -223,41 +308,106 @@ struct Walker<'w> {
     dataclass: &'w mut DataclassCk,
     mod_iter: &'w mut ModIterCk,
     stdlib: &'w mut StdlibCk,
+    nonascii: &'w mut NonAsciiCk,
+    dunder: &'w mut DunderCallCk,
+    threading: &'w mut ThreadingCk,
+    lambda_expr: &'w mut LambdaExprCk,
+    nested: &'w mut NestedMinMaxCk,
+    chained: &'w mut ChainedCompCk,
+    format_state: &'w mut FormatWalkState,
 }
 
 impl Walker<'_> {
+    /// FormatChecker.visit_default (C0321) — full mode only. Its position
+    /// per node class comes from the full-mode walk-order extraction
+    /// (harness gen_walk_order, empty rcfile): "format" sorts between the
+    /// basic/classes block and imports/..., so most tags run it before
+    /// their first implemented callback; the `fmt_late` tags inline it.
+    fn fmt(&mut self, cx: &mut WalkCx, g: GNode) {
+        if self.prep.format {
+            self.format_state.visit_default(cx, g);
+        }
+    }
+
     fn walk(&mut self, cx: &mut WalkCx, g: GNode) {
         // a crashed check visits nothing further (pylint: the exception
         // unwinds the whole ASTWalker.walk)
         if cx.is_crashed() {
             return;
         }
-        // ---- visit (VISIT_ORDER in walk_order.rs) ----
+        // ---- visit (VISIT_ORDER in walk_order.rs; full-mode insertions
+        // from the full-profile extraction) ----
         let kind_tag = {
             let md = cx.eng.md(g.m);
             kind_tag(&md.tree.nodes[g.n.idx()].kind)
         };
+        let fmt_late = matches!(
+            kind_tag,
+            Tag::ClassDef
+                | Tag::FunctionDef
+                | Tag::AsyncFunctionDef
+                | Tag::Assign
+                | Tag::AssignAttr
+                | Tag::Call
+                | Tag::Compare
+                | Tag::AsyncWith
+                | Tag::Yield
+                | Tag::YieldFrom
+                | Tag::UnaryOp
+                | Tag::Return
+                | Tag::Break
+                | Tag::Continue
+                | Tag::Nonlocal
+                | Tag::Starred
+                | Tag::Raise
+                | Tag::Try
+                | Tag::TryStar
+                | Tag::Attribute
+        );
+        if !fmt_late {
+            self.fmt(cx, g);
+        }
         match kind_tag {
             Tag::Module => {
                 // BasicChecker.visit_module: stats only
                 self.imp.visit_module(cx, g);
                 self.logging.visit_module(cx, g);
+                if self.prep.nonascii_module {
+                    self.nonascii.visit_module(cx, g);
+                }
                 self.ty.visit_module(cx, g);
                 self.vars.visit_module(cx, g);
             }
             Tag::Import => {
                 self.imp.visit_import(cx, g);
                 self.logging.visit_import(cx, g);
+                if self.prep.nonascii_import {
+                    self.nonascii.visit_import(cx, g);
+                }
+                if self.prep.dep_import {
+                    crate::deprecated::stdlib_visit_import(cx, g);
+                }
             }
             Tag::ImportFrom => {
                 self.imp.visit_importfrom(cx, g);
                 self.logging.visit_importfrom(cx, g);
+                if self.prep.nonascii_import {
+                    self.nonascii.visit_import(cx, g);
+                }
+                if self.prep.dep_import {
+                    let basename = crate::imports::importfrom_absolute_name(cx.eng, g);
+                    crate::deprecated::stdlib_visit_importfrom(cx, g, &basename);
+                }
             }
             Tag::ClassDef => {
                 // BasicChecker.visit_classdef: stats only
                 self.basicerr.visit_classdef(cx, g);
                 self.classes.visit_classdef(cx, g);
+                self.fmt(cx, g);
                 self.imp.visit_functiondef_family(cx, g);
+                if self.prep.nonascii_name {
+                    self.nonascii.visit_classdef(cx, g);
+                }
                 self.ty.visit_classdef(cx, g);
                 self.vars.visit_classdef(cx, g);
             }
@@ -265,8 +415,12 @@ impl Walker<'_> {
                 self.basicerr.visit_functiondef(cx, g);
                 self.special.visit_functiondef(cx, g);
                 self.classes.visit_functiondef(cx, g);
+                self.fmt(cx, g);
                 self.imp.visit_functiondef_family(cx, g);
                 self.newstyle.visit_functiondef(cx, g);
+                if self.prep.nonascii_name {
+                    self.nonascii.visit_functiondef(cx, g);
+                }
                 self.stdlib.visit_functiondef(cx, g);
                 self.vars.visit_functiondef(cx, g);
             }
@@ -275,7 +429,11 @@ impl Walker<'_> {
                 self.basicerr.visit_functiondef(cx, g);
                 self.special.visit_functiondef(cx, g);
                 self.classes.visit_functiondef(cx, g);
+                self.fmt(cx, g);
                 self.newstyle.visit_functiondef(cx, g);
+                if self.prep.nonascii_name {
+                    self.nonascii.visit_functiondef(cx, g);
+                }
                 self.vars.visit_functiondef(cx, g);
             }
             Tag::Lambda => self.vars.visit_lambda(cx, g),
@@ -291,17 +449,25 @@ impl Walker<'_> {
             Tag::Name => self.vars.visit_name(cx, g),
             Tag::AssignName => {
                 self.match_ck.visit_assignname(cx, g);
+                if self.prep.nonascii_name {
+                    self.nonascii.visit_assignname(cx, g);
+                }
                 self.vars.visit_assignname(cx, g);
             }
             Tag::DelName => self.vars.visit_delname(cx, g),
             Tag::Assign => {
                 self.basicerr.visit_assign(cx, g);
+                self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
+                if self.prep.lambda_expr {
+                    self.lambda_expr.visit_assign(cx, g);
+                }
                 self.ty.visit_assign(cx, g);
                 self.vars.visit_assign(cx, g);
             }
             Tag::AssignAttr => {
                 self.classes.visit_assignattr(cx, g);
+                self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
                 // TypeChecker.visit_assignattr AugAssign no-member burn:
                 // E1101 disabled — skipped
@@ -312,12 +478,28 @@ impl Walker<'_> {
             Tag::Call => {
                 self.basic.visit_call(cx, g);
                 self.dataclass.visit_call(cx, g);
+                self.fmt(cx, g);
+                if self.prep.imports_call {
+                    crate::deprecated::imports_visit_call(cx, g);
+                }
+                if self.prep.lambda_expr {
+                    self.lambda_expr.visit_call(cx, g);
+                }
                 self.logging.visit_call(cx, g);
                 self.method_args.visit_call(cx, g);
+                if self.prep.nested_min_max {
+                    self.nested.visit_call(cx, g);
+                }
+                if self.prep.nonascii_name {
+                    self.nonascii.visit_call(cx, g);
+                }
                 self.stdlib.visit_call(cx, g);
                 self.strings.visit_call(cx, g);
                 self.iter.visit_call(cx, g);
                 self.ty.visit_call(cx, g);
+                if self.prep.dunder {
+                    self.dunder.visit_call(cx, g);
+                }
             }
             Tag::Await => self.ty.visit_await(cx, g),
             Tag::BinOp => {
@@ -325,7 +507,13 @@ impl Walker<'_> {
                 // TypeChecker.visit_binop: `|` only and dead on py3.12
                 // (_py310_plus early return)
             }
-            Tag::Compare => self.ty.visit_compare(cx, g),
+            Tag::Compare => {
+                if self.prep.chained {
+                    self.chained.visit_compare(cx, g);
+                }
+                self.fmt(cx, g);
+                self.ty.visit_compare(cx, g);
+            }
             Tag::Dict => self.ty.visit_dict(cx, g),
             Tag::Set => self.ty.visit_set(cx, g),
             Tag::For => {
@@ -338,36 +526,92 @@ impl Walker<'_> {
                 self.imp.visit_functiondef_family(cx, g);
             }
             Tag::AsyncFor => self.iter.visit_asyncfor(cx, g),
-            Tag::AsyncWith => self.async_ck.visit_asyncwith(cx, g),
-            Tag::Yield => self.basicerr.visit_yield(cx, g),
+            Tag::AsyncWith => {
+                self.async_ck.visit_asyncwith(cx, g);
+                self.fmt(cx, g);
+            }
+            Tag::Yield => {
+                self.basicerr.visit_yield(cx, g);
+                self.fmt(cx, g);
+            }
             Tag::YieldFrom => {
                 self.basicerr.visit_yield(cx, g);
+                self.fmt(cx, g);
                 self.iter.visit_yieldfrom(cx, g);
             }
             Tag::Subscript => {
                 self.ty.visit_subscript(cx, g);
                 self.vars.visit_subscript(cx, g);
             }
-            Tag::With => self.ty.visit_with(cx, g),
-            Tag::Attribute => self.classes.visit_attribute(cx, g),
+            Tag::With => {
+                if self.prep.threading {
+                    self.threading.visit_with(cx, g);
+                }
+                self.ty.visit_with(cx, g);
+            }
+            Tag::Attribute => {
+                self.classes.visit_attribute(cx, g);
+                self.fmt(cx, g);
+                if self.prep.dep_attr {
+                    crate::deprecated::visit_attribute(cx, g);
+                }
+            }
             Tag::UnaryOp => {
                 self.basicerr.visit_unaryop(cx, g);
+                self.fmt(cx, g);
                 self.ty.visit_unaryop(cx, g);
             }
-            Tag::Return => self.basicerr.visit_return(cx, g),
-            Tag::Break => self.basicerr.visit_loopkw(cx, g, "break"),
-            Tag::Continue => self.basicerr.visit_loopkw(cx, g, "continue"),
-            Tag::Nonlocal => self.basicerr.visit_nonlocal(cx, g),
-            Tag::Starred => self.basicerr.visit_starred(cx, g),
-            Tag::Raise => self.exceptions.visit_raise(cx, g),
+            Tag::Return => {
+                self.basicerr.visit_return(cx, g);
+                self.fmt(cx, g);
+            }
+            Tag::Break => {
+                self.basicerr.visit_loopkw(cx, g, "break");
+                self.fmt(cx, g);
+            }
+            Tag::Continue => {
+                self.basicerr.visit_loopkw(cx, g, "continue");
+                self.fmt(cx, g);
+            }
+            Tag::Nonlocal => {
+                self.basicerr.visit_nonlocal(cx, g);
+                self.fmt(cx, g);
+            }
+            Tag::Starred => {
+                self.basicerr.visit_starred(cx, g);
+                self.fmt(cx, g);
+            }
+            Tag::Raise => {
+                self.exceptions.visit_raise(cx, g);
+                self.fmt(cx, g);
+            }
             Tag::Try => {
                 self.basic.visit_try(cx, g);
                 self.exceptions.visit_try(cx, g);
+                self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
             }
-            Tag::TryStar => self.exceptions.visit_trystar(cx, g),
+            Tag::TryStar => {
+                self.exceptions.visit_trystar(cx, g);
+                self.fmt(cx, g);
+            }
             Tag::Match => self.match_ck.visit_match(cx, g),
             Tag::MatchClass => self.match_ck.visit_matchclass(cx, g),
+            Tag::Global => {
+                if self.prep.nonascii_name {
+                    self.nonascii.visit_global(cx, g);
+                }
+            }
+            Tag::NamedExpr => {
+                if self.prep.lambda_expr {
+                    self.lambda_expr.visit_namedexpr(cx, g);
+                }
+            }
+            Tag::Decorators => {
+                if self.prep.dep_dec {
+                    crate::deprecated::visit_decorators(cx, g);
+                }
+            }
             Tag::Other => {}
         }
         // ---- children ----
@@ -444,6 +688,9 @@ enum Tag {
     TryStar,
     Match,
     MatchClass,
+    Global,
+    NamedExpr,
+    Decorators,
     Other,
 }
 
@@ -493,6 +740,9 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::TryStar(_) => Tag::TryStar,
         NodeKind::Match { .. } => Tag::Match,
         NodeKind::MatchClass { .. } => Tag::MatchClass,
+        NodeKind::Global { .. } => Tag::Global,
+        NodeKind::NamedExpr { .. } => Tag::NamedExpr,
+        NodeKind::Decorators { .. } => Tag::Decorators,
         _ => Tag::Other,
     }
 }

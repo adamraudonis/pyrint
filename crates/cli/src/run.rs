@@ -29,10 +29,9 @@ pub struct RunOpts {
     pub paths: Vec<String>,
     /// --disable values, comma-split, in CLI order
     pub disables: Vec<String>,
-    /// -E/--errors-only. The baked global state (msgs.rs `enabled`) already
-    /// assumes error mode; the flag is accepted and recorded for the future
-    /// non-error-mode path.
-    #[allow(dead_code)]
+    /// -E/--errors-only. With -E the baked global state (msgs.rs `enabled`)
+    /// applies; without it the full-pylint default state (377 enabled
+    /// messages) is seeded and the token/raw W/C checkers run.
     pub errors_only: bool,
 }
 
@@ -46,6 +45,13 @@ struct ParsedFile {
     /// emission order preserved). Replayed in phase 2 where the sequential
     /// checker used to run, so pragma handling is unchanged.
     unicode_msgs: Vec<pycheckers::unicode::UnicodeMsg>,
+    /// FormatChecker token-phase messages (full mode; precomputed in
+    /// parallel — pure function of the raw bytes EXCEPT the C0302 line
+    /// attribution, which is re-resolved at flush time against the
+    /// run-global _pragma_lineno map).
+    fmt_msgs: Vec<pycheckers::format::FmtMsg>,
+    /// EncodingChecker (fixme) token-phase messages (full mode)
+    fixme_msgs: Vec<pycheckers::miscck::FixmeMsg>,
 }
 
 enum FileData {
@@ -110,7 +116,11 @@ pub fn run(opts: &RunOpts) -> i32 {
     let strip_prefix = format!("{cwd}/");
 
     // ---- config phase ------------------------------------------------
-    let mut global = GlobalState::for_target_flags();
+    let mut global = if opts.errors_only {
+        GlobalState::for_target_flags()
+    } else {
+        GlobalState::full_default()
+    };
     // unknown/deleted --disable values are stashed and printed under module
     // "Command line" BEFORE -E folds W/R away (config_initialization.py:128
     // runs before _parse_error_mode at :145 — empirically confirmed,
@@ -169,11 +179,20 @@ pub fn run(opts: &RunOpts) -> i32 {
     let unicode_prepared = ["E2501", "E2502", "C2503", "E2510", "E2511", "E2512", "E2513", "E2514", "E2515"]
         .iter()
         .any(|m| global.enabled(store().by_msgid[m]));
+    // full-mode prepared/only_required gates for the new checkers (all
+    // false under -E: those checkers are config-dropped there)
+    let enabled_by_id = |m: &str| global.enabled(store().by_msgid[m]);
+    let prep = pycheckers::walker::Prepared::from_enabled(&enabled_by_id);
+    // token-checker preparation (format / miscellaneous): -E drops both
+    let format_prepared = prep.format;
+    let misc_prepared = !opts.errors_only && enabled_by_id("W0511");
 
     // ---- phase 1: parse all files (rayon, results in file order) ------
     phase_mark!(t0, "discover");
-    let mut data: Vec<FileData> =
-        items.par_iter().map(|it| parse_one(it, unicode_prepared)).collect();
+    let mut data: Vec<FileData> = items
+        .par_iter()
+        .map(|it| parse_one(it, unicode_prepared, format_prepared, misc_prepared))
+        .collect();
     phase_mark!(t0, "parse");
     if std::env::var("PRYLINT_PARSE_ONLY").is_ok() {
         eprintln!("[phase] parse-only abort (files={})", data.len());
@@ -271,6 +290,7 @@ pub fn run(opts: &RunOpts) -> i32 {
         let items = &items;
         let trees = &trees;
         let global = &global;
+        let prep = prep;
         let strip_prefix = &strip_prefix;
         let cwd = std::path::PathBuf::from(&cwd);
         let crash_abs = &crash_abs;
@@ -294,6 +314,10 @@ pub fn run(opts: &RunOpts) -> i32 {
                     for p in crash_abs {
                         engine.add_crash_file(p.clone());
                     }
+                    // linter._pragma_lineno: run-global, updated in module
+                    // order by the sequential pragma scans (C0302 leak)
+                    let mut pragma_lineno: rustc_hash::FxHashMap<String, u32> =
+                        rustc_hash::FxHashMap::default();
                     let mut lint_run = pycheckers::walker::LintRun::default();
                     let mut oracle_proc = oracle::OracleProc::default();
                     // boot the import-oracle interpreter NOW so it loads while
@@ -351,10 +375,12 @@ pub fn run(opts: &RunOpts) -> i32 {
                                     global,
                                     strip_prefix,
                                     unicode_prepared,
+                                    &prep,
                                     &engine,
                                     mods[*i],
                                     &mut lint_run,
                                     &mut oracle_proc,
+                                    &mut pragma_lineno,
                                 ),
                             )
                         },
@@ -480,7 +506,12 @@ pub fn run(opts: &RunOpts) -> i32 {
 
 /// Phase-1 work for one file: read, decode, parse (pylinter.get_ast /
 /// astroid file_build error taxonomy, builder.py:113-149).
-fn parse_one(item: &FileItem, unicode_prepared: bool) -> FileData {
+fn parse_one(
+    item: &FileItem,
+    unicode_prepared: bool,
+    format_prepared: bool,
+    misc_prepared: bool,
+) -> FileData {
     // modutils.get_source_file: a .pyi argument resolves to the sibling .py
     // source when it exists (PY_SOURCE_EXTS order, prefer_stubs=False)
     let mut read_path = item.filepath.clone();
@@ -548,12 +579,36 @@ fn parse_one(item: &FileItem, unicode_prepared: bool) -> FileData {
             if unicode_prepared {
                 pycheckers::unicode::process_module(&bytes, &mut |um| unicode_msgs.push(um));
             }
+            // token-layer checkers (full mode): pylint tokenizes the RAW
+            // byte stream — line endings preserved, unlike `src.text`.
+            // C0302's line is provisional (resolved against the run-global
+            // _pragma_lineno map at flush).
+            let mut fmt_msgs = Vec::new();
+            let mut fixme_msgs = Vec::new();
+            if format_prepared || misc_prepared {
+                if let Some(raw) = pyast::decode_source_raw(&bytes, &abspath) {
+                    let tk = pyast::pytok::tokenize_for_checkers(&raw);
+                    if format_prepared {
+                        let empty = rustc_hash::FxHashMap::default();
+                        pycheckers::format::process_tokens(&raw, &tk, &empty, &mut |m| {
+                            fmt_msgs.push(m)
+                        });
+                    }
+                    if misc_prepared {
+                        pycheckers::miscck::process_tokens(&raw, &tk, &mut |m| {
+                            fixme_msgs.push(m)
+                        });
+                    }
+                }
+            }
             FileData::Parsed(Box::new(ParsedFile {
                 tree,
                 src,
                 tokens: outcome.tokens,
                 abspath,
                 unicode_msgs,
+                fmt_msgs,
+                fixme_msgs,
             }))
         }
         None => FileData::NeedsOracle,
@@ -602,10 +657,12 @@ fn lint_tree(
     global: &GlobalState,
     strip_prefix: &str,
     unicode_prepared: bool,
+    prep: &pycheckers::walker::Prepared,
     engine: &pyinfer::Engine,
     emod: Option<pyinfer::ModId>,
     lint_run: &mut pycheckers::walker::LintRun,
     oracle_proc: &mut oracle::OracleProc,
+    pragma_lineno: &mut rustc_hash::FxHashMap<String, u32>,
 ) -> ModuleOut {
     let mut out = ModuleOut { msgs: Vec::new(), stats: Stats::default(), linted: true };
     {
@@ -658,10 +715,13 @@ fn lint_tree(
                 let mut pragma_sink = |fs: &mut FileState, msgid: &str, line: u32, text: String| {
                     add(fs, msgid, line, 0, text);
                 };
-                let ignore_file = process_tokens(&p.tokens, &p.src, &mut fs, &mut pragma_sink);
+                let ignore_file =
+                    process_tokens(&p.tokens, &p.src, &mut fs, pragma_lineno, &mut pragma_sink);
                 if !ignore_file {
-                    // 2. raw checkers in prepared order (unicode only) —
-                    //    results precomputed in phase 1, replayed here
+                    // 2. raw checkers in sorted-name order: format (no-op),
+                    //    miscellaneous (no-op), similarities (not ported),
+                    //    string (not ported), unicode_checker — results
+                    //    precomputed in phase 1, replayed here
                     if unicode_prepared {
                         for um in &p.unicode_msgs {
                             let text = store()
@@ -671,6 +731,34 @@ fn lint_tree(
                                 .unwrap_or_default();
                             add(&mut fs, um.msgid, um.line, um.col as i64, text);
                         }
+                    }
+                    // 2b. TOKEN checkers in sorted-name order: format,
+                    //     miscellaneous (refactoring/spelling/string not in
+                    //     this phase). Messages precomputed in phase 1.
+                    for fm in &p.fmt_msgs {
+                        if fm.ignored_only {
+                            // C0301 checker_off: linter.add_ignored_message
+                            if let Some(&idx) = store().by_msgid.get(fm.msgid) {
+                                record_ignored(&fs, idx, fm.line);
+                            }
+                            continue;
+                        }
+                        // C0302's line attribution comes from the RUN-GLOBAL
+                        // _pragma_lineno map (state as of THIS module's scan)
+                        let line = if fm.msgid == "C0302" {
+                            ["C0302", "too-many-lines"]
+                                .iter()
+                                .filter_map(|k| pragma_lineno.get(*k))
+                                .find(|&&l| l != 0)
+                                .copied()
+                                .unwrap_or(1)
+                        } else {
+                            fm.line
+                        };
+                        add(&mut fs, fm.msgid, line, fm.col, fm.text.clone());
+                    }
+                    for xm in &p.fixme_msgs {
+                        add(&mut fs, "W0511", xm.line, xm.col, xm.text.clone());
                     }
                     // 3. AST walk: ImportsChecker + VariablesChecker wired
                     //    (walk_order.rs dispatch); other checkers pending.
@@ -751,6 +839,7 @@ fn lint_tree(
                         lint_run.walk_module(
                             engine,
                             mid,
+                            prep,
                             &mut emit,
                             &mut import_oracle,
                             &is_enabled,

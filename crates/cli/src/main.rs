@@ -1,7 +1,6 @@
 mod discover;
 mod msgstate;
 mod oracle;
-mod pragma;
 mod reporter;
 mod run;
 

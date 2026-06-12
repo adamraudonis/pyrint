@@ -33,6 +33,21 @@ fn is_word(c: char) -> bool {
 /// from which `\bpylint:` + a non-empty payload can be matched; failing that,
 /// the `\s*` alternative binds group 1 to the first viable '#'.
 pub fn option_po_search(content: &str) -> Option<String> {
+    option_po_search_pos(content).map(|m| m.payload)
+}
+
+/// An OPTION_PO match with group-1 byte positions (group 1 =
+/// `\#.*?\bpylint:\s*([^;#\n]+)`, ending right after group 2). Needed by
+/// FormatChecker.remove_pylint_option_from_lines (format.py:604-612).
+pub struct OptionPoMatch {
+    pub payload: String,
+    /// byte offset of the matched '#' (mobj.start(1))
+    pub g1_start: usize,
+    /// byte offset one past group 2's end (mobj.end(1))
+    pub g1_end: usize,
+}
+
+pub fn option_po_search_pos(content: &str) -> Option<OptionPoMatch> {
     let hashes: Vec<usize> = content
         .char_indices()
         .filter(|&(_, c)| c == '#')
@@ -64,7 +79,7 @@ pub fn option_po_search(content: &str) -> Option<String> {
 /// the payload `\s*([^;#\n]+)` needs at least one char before the next
 /// `;`/`#`/newline (an all-whitespace region backtracks `\s*` to leave its
 /// last char for the `+`).
-fn viable_payload(content: &str, q: usize) -> Option<String> {
+fn viable_payload(content: &str, q: usize) -> Option<OptionPoMatch> {
     let bytes = content.as_bytes();
     let mut from = q + 1;
     loop {
@@ -94,11 +109,12 @@ fn viable_payload(content: &str, q: usize) -> Option<String> {
             .char_indices()
             .find(|&(_, c)| !c.is_whitespace())
             .map(|(i, _)| i);
-        return Some(match trimmed_start {
+        let payload = match trimmed_start {
             Some(i) => region[i..].to_string(),
             // all-whitespace region: `\s*` gives back one char to `[^;#\n]+`
             None => region.chars().next_back().unwrap().to_string(),
-        });
+        };
+        return Some(OptionPoMatch { payload, g1_start: q, g1_end: end });
     }
 }
 

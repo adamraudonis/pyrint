@@ -1,6 +1,14 @@
-//! Ported pylint 4.0.5 checkers (E/F categories in scope).
+//! Ported pylint 4.0.5 checkers (full-pylint mode: E/F plus the W/C/R
+//! token/raw-layer and misc checkers).
 
 pub mod basicerr;
+pub mod depdata;
+pub mod deprecated;
+pub mod format;
+pub mod miscck;
+pub mod nonascii;
+pub mod pragma;
+pub mod smallck;
 pub mod ckutils;
 pub mod classes;
 pub mod exceptions;

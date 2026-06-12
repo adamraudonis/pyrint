@@ -6,9 +6,10 @@ pub mod build;
 pub mod codecs_gen;
 pub mod parse;
 pub mod pyrepr;
+pub mod pytok;
 pub mod source;
 pub mod stdlib_wildcard;
 pub mod tree;
 
-pub use source::{decode_source, DecodeError, SourceFile};
+pub use source::{decode_source, decode_source_raw, DecodeError, SourceFile};
 pub use tree::{Node, NodeId, NodeKind, Tree};

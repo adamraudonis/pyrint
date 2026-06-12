@@ -15,10 +15,10 @@
 use pyast::parse::{TokEvent, TokEventKind};
 use pyast::source::SourceFile;
 use pyast::tree::{NodeId, NodeKind, Tree};
-use pycheckers::msgstore::{self, get_messages_to_set, MsgIdx, ResolveError};
+use pycheckers::msgstore::{self, get_messages_to_set, store, MsgIdx, ResolveError};
 use rustc_hash::FxHashMap;
 
-use crate::pragma::{option_po_search, parse_pragma, PragmaError};
+use pycheckers::pragma::{option_po_search, parse_pragma, PragmaError};
 
 /// Global ("package") message state: msgid index -> explicit state.
 /// Absent = enabled (`_msgs_state.get(msgid, True)`).
@@ -36,6 +36,23 @@ impl GlobalState {
             if !m.enabled {
                 state.insert(i as MsgIdx, false);
             }
+        }
+        GlobalState { state }
+    }
+
+    /// Full-pylint mode default state (notes/09-pipeline-noE.md §3.2):
+    /// everything enabled EXCEPT the ten `default_enabled: False` messages
+    /// (disabled at checker registration) and the two py-version-gated ones
+    /// at the pinned (3,12): E0106 (max 3.3) and W1502 (max 3.5).
+    pub fn full_default() -> Self {
+        const DEFAULT_OFF: &[&str] = &[
+            "C1804", "C1805", "I0001", "I0010", "I0011", "I0013", "I0020", "I0021", "I0022",
+            "I0023",
+        ];
+        const PY_GATED_OFF: &[&str] = &["E0106", "W1502"];
+        let mut state = FxHashMap::default();
+        for id in DEFAULT_OFF.iter().chain(PY_GATED_OFF.iter()) {
+            state.insert(store().by_msgid[*id], false);
         }
         GlobalState { state }
     }
@@ -387,6 +404,7 @@ pub fn process_tokens(
     tokens: &[TokEvent],
     src: &SourceFile,
     file_state: &mut FileState,
+    pragma_lineno: &mut FxHashMap<String, u32>,
     sink: &mut dyn FnMut(&mut FileState, &str, u32, String),
 ) -> bool {
     let mut prev_line: u32 = 0; // None
@@ -449,8 +467,12 @@ pub fn process_tokens(
                 _ => unreachable!(),
             };
             for msgid in &repr.messages {
-                // (self._pragma_lineno bookkeeping consumed only by the
-                //  format checker -- skipped)
+                // linter._pragma_lineno: RAW pragma message string -> row of
+                // the last control pragma mentioning it; RUN-GLOBAL, never
+                // cleared (message_state_handler.py:396-399; feeds C0302).
+                if matches!(repr.action, "disable" | "disable-next" | "enable") {
+                    pragma_lineno.insert(msgid.clone(), row);
+                }
                 if repr.action == "disable" && msgid == "all" {
                     sink(
                         file_state,

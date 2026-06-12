@@ -1015,6 +1015,9 @@ pub struct StdlibCk;
 impl StdlibCk {
     /// visit_call (stdlib.py:690-721)
     pub fn visit_call(&mut self, cx: &mut WalkCx, node: GNode) {
+        // DeprecatedMixin pieces (stdlib.py:690-693): W4904 class-in-call
+        // first, then per-inferred check_deprecated_method at the loop tail.
+        crate::deprecated::check_deprecated_class_in_call(cx, node);
         let eng = cx.eng;
         let Some((fnode, args, keywords)) = call_parts(eng, node) else { return };
         let vals = u::infer_all(eng, cx.caches, fnode);
@@ -1077,6 +1080,9 @@ impl StdlibCk {
                     }
                 }
             }
+            // check_deprecated_method runs for EVERY non-Uninferable
+            // inferred value (stdlib.py:721) — W4902/W4903
+            crate::deprecated::check_deprecated_method(cx, node, v);
         }
     }
 

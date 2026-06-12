@@ -1620,6 +1620,28 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
             format!("{{{}}}", parts.join(", "))
         }
         NodeKind::Starred { value, .. } => format!("*{}", s(*value)),
+        // Import/ImportFrom (astroid as_string.py visit_import/visit_importfrom)
+        NodeKind::Import { names } => {
+            let parts: Vec<String> = names
+                .iter()
+                .map(|(n, alias)| match alias {
+                    Some(a) => format!("{} as {}", tree.s(*n), tree.s(*a)),
+                    None => tree.s(*n).to_string(),
+                })
+                .collect();
+            format!("import {}", parts.join(", "))
+        }
+        NodeKind::ImportFrom { modname, names, level } => {
+            let parts: Vec<String> = names
+                .iter()
+                .map(|(n, alias)| match alias {
+                    Some(a) => format!("{} as {}", tree.s(*n), tree.s(*a)),
+                    None => tree.s(*n).to_string(),
+                })
+                .collect();
+            let dots = ".".repeat(level.unwrap_or(0) as usize);
+            format!("from {}{} import {}", dots, tree.s(*modname), parts.join(", "))
+        }
         NodeKind::NamedExpr { target, value } => format!("({} := {})", s(*target), s(*value)),
         NodeKind::IfExp { test, body, orelse } => {
             format!("{} if {} else {}", s(*body), s(*test), s(*orelse))
