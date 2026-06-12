@@ -1788,3 +1788,46 @@ scrapy C0103 x1 (f-string after attr burn), matplotlib C0103 x1 (JoinedStr
 shared-context part inference), twisted W0143 x1 + C0103-attr x2 + (hook)
 W0143 x1, sqlalchemy full C0116 9FN/2FP (generic-base ancestors order
 sensitivity).
+
+## Phase B zero-round 2 (full sweep, both profiles)
+
+Root causes found for the previous round's "fresh-state-identical" residue
+and fixed at the ENGINE level (not per-message patches):
+- utils.safe_infer is LAZY: pylint abandons the inference generator at the
+  first stop condition (`return None` mid-loop). Our eager full drain kept
+  exploring and wrote truncated [Uninferable] entries into the GLOBAL
+  inference cache that astroid never writes (twisted _signals.py:90 drain
+  explored EnumType._create_ and poisoned enum.py:759 `value`, flipping
+  W0143@148 two visits later). safe_infer / safe_infer_cc / typecheck
+  visit_with now stream pull-by-pull with Drive::Stop at pylint's exact
+  return-None points. Fixed: twisted W0143 (hook+full), twisted C0103-attr
+  x2, scrapy C0103, black-hook.
+- builder._can_assign_attr ends with `qname() != "builtins.object"`: a
+  delayed assattr NEVER lands on builtins.object (twisted `ConchUser =
+  object` fallback polluted object.instance_attrs and suppressed the
+  C0103 attr check for channelLookup corpus-wide).
+- name checker class-scope `any(local_attr_ancestors)`: mro(context)[1:]
+  FIRST (recomputed per call), lazy ancestors() fallback on MroError only.
+
+Sweep result (footer-stripped GT, owned-code multiset + exact owned-line
+subsequence order, 22 corpora hook+full where GT finished; black.full /
+sentry.full GT still generating upstream):
+- 41/43 combos 0FP/0FN with EXACT order (incl. sentry hook 292/292).
+- matplotlib full: C0103 x1 FP (.circleci/fetch_doc_logs.py:36
+  artifact_url). Root-caused: pylint's E1101 visit_attribute getattr
+  (Instance.getattr -> instance_attr_ancestors -> ancestors -> namedtuple
+  tip re-run under non-empty context) rebuilds the synthetic proxy and
+  fires transforms.py _invalidate_cache between visits; our walker still
+  skips the E1101 visitor ("E1101 disabled — skipped" walker.rs), so the
+  stale Call entry replays and the JoinedStr stays under the ni clamp.
+  BLOCKED on the typecheck full-mode phase porting E1101's visit walk.
+- sqlalchemy full: C0116 9FN/2FP (orm/attributes.py, orm/base.py,
+  dialects/postgresql). Same class: the docstring checker's `overridden`
+  ancestors() walk reads global-cache state shaped by W0212/W0613/R0901/
+  R1705/C0209/E1101 visitors not yet ported (41 missing message lines on
+  orm/base.py alone single-file). Single-file probes agree both ways;
+  divergence only with the missing visitors' wipe/warm side effects.
+  BLOCKED on classes/variables/design/refactoring full-mode phases.
+
+Gates after every step: 27-corpus -E byte parity green, check_treedump
+django 400 == 0, check_inferdump django 200 == 0.
