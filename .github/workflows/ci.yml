@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request: {}
+
+jobs:
+  build-and-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+      - name: Build
+        run: cargo build --release
+      - name: Unit tests
+        run: cargo test --release
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Smoke parity vs real pylint
+        # Tiny end-to-end check: identical bytes + exit code on a probe
+        # project covering syntax errors, pragmas, undefined names, and a
+        # dataclass call. The full 27-corpus gate runs locally (see
+        # scripts/setup_corpora.sh); this protects CI against regressions
+        # in the self-contained binary.
+        run: |
+          python -m pip install --quiet "pylint==4.0.5" "astroid==4.0.4"
+          mkdir -p /tmp/smoke && cd /tmp/smoke
+          cat > a.py <<'PY'
+          """Probe."""
+          import dataclasses
+
+
+          @dataclasses.dataclass
+          class C:
+              x: int
+
+
+          C(y=1)
+          print(undefined_name)  # pylint: disable=undefined-variable
+          print(undefined_two)
+          PY
+          printf 'def broken(:\n' > bad.py
+          FLAGS="-E --disable=$(python -c "print('C0301,W0511,C0114,R0402,C0116,R0914,W0718,R1735,W0105,R1705,W0603,W0104,C0209,W0719,C0411,C0412,R0912,R0915,C0413,C0115,C0103,W0613,R0801,W0602,R0913,R0917,W0622,R0902,R0911,R0913,R1702,R1716,W0212,R1728,C0121,R0916,C0415,W1401,C0206,C0302,R0904,W1514,R0903,E0110,R1714,W0707,R1718,W1309,W1203,E0611,W0611,W0108,W0177,E1101,C1803,R1721,W0123,R1720,R1710,W0221,W0122,C0201,W1510,R1729,R1737,C0325,R0401,E0401')")"
+          PYTHONHASHSEED=0 pylint . $FLAGS > expected.out; echo $? > expected.exit
+          $GITHUB_WORKSPACE/target/release/prylint . $FLAGS > ours.out; echo $? > ours.exit
+          diff expected.out ours.out
+          diff expected.exit ours.exit
+          echo "smoke parity OK"

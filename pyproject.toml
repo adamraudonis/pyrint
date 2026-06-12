@@ -1,0 +1,41 @@
+[build-system]
+requires = ["maturin>=1.7,<2.0"]
+build-backend = "maturin"
+
+[project]
+name = "prylint"
+version = "0.2.0"
+description = "A Rust reimplementation of pylint's error checking that produces byte-for-byte identical output to pylint — 15-84x faster"
+readme = "README.md"
+license = "GPL-2.0-or-later"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+authors = [{ name = "Adam Raudonis", email = "adam.raudonis@gmail.com" }]
+keywords = ["pylint", "linter", "lint", "static-analysis", "rust", "python"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "Programming Language :: Rust",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Operating System :: MacOS",
+    "Operating System :: POSIX :: Linux",
+    "Operating System :: Microsoft :: Windows",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Debuggers",
+]
+
+[project.urls]
+Repository = "https://github.com/adamraudonis/prylint"
+Issues = "https://github.com/adamraudonis/prylint/issues"
+Changelog = "https://github.com/adamraudonis/prylint/blob/main/PROGRESS.md"
+
+[tool.maturin]
+bindings = "bin"
+manifest-path = "crates/cli/Cargo.toml"
+profile = "release"

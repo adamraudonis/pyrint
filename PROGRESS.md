@@ -1576,6 +1576,39 @@ pylint behavior — bugs are replicated.
       stderr note (verdicts are interpreter-version-dependent by design,
       exactly as for pylint itself).
 
+## Release — v0.2.0 PyPI packaging (2026-06-11)
+
+- **Packaging**: maturin (`bindings = "bin"`, `manifest-path =
+  crates/cli/Cargo.toml`, `profile = "release"`) via `pyproject.toml` at the
+  repo root; workspace layout untouched. Wheel ships the 14.3MB
+  self-contained binary as a console script (`prylint-0.2.0.data/scripts/`);
+  sdist is the 4 workspace crates + Cargo.lock + embedded snapshot JSONs
+  (168 files, ~1.1MB — no corpora/harness leakage; verified by listing).
+- **Artifacts** (`dist/`, `twine check` PASSED on both):
+  `prylint-0.2.0-py3-none-macosx_11_0_arm64.whl` + `prylint-0.2.0.tar.gz`.
+  Upload deliberately NOT done (no credentials in this session); release is
+  `scripts/release.sh 0.2.0` (twine upload + tag push → CI builds the
+  Linux/Windows/macOS-x86_64 wheels).
+- **Install tests**: wheel → fresh venv → probe project (E0602) OK, AND
+  installed binary on corpora/scrapy with harness/flags.txt +
+  PRYLINT_PYTHON=.venv-pylint → byte-identical vs scrapy.iso.out, equal
+  exit. Sdist → second venv → pip compiles via cargo (needs network for the
+  ruff git deps) → same probe + scrapy byte-parity PASS.
+- **License**: aligned everywhere to **GPL-2.0-or-later** (root LICENSE was
+  already GPLv2 text; Cargo.toml/README previously claimed MIT OR
+  Apache-2.0). pylint is GPL-2.0-or-later and prylint reproduces its message
+  strings/behavior verbatim, so GPL is the only defensible choice.
+- **GOTCHA (bit us this round): never pip-install ANYTHING into
+  .venv-pylint.** It is the parity interpreter (PRYLINT_PYTHON): its
+  site-packages define module resolution for inference. Installing
+  maturin+twine there (twine pulls pygments/rich/requests/...) flipped pip
+  (2 extra E1136 in vendored pygments) and nova (2 lost E1120) to BROKEN.
+  Fixed by uninstalling back to exactly {pylint, astroid, isort, dill,
+  platformdirs, tomlkit, mccabe} (+ no pip!) and re-verifying. Packaging
+  tools live in the dedicated `.venv-build` (uv venv --seed);
+  scripts/release.sh now uses it.
+- 27/27 gate re-verified on the release tree after packaging.
+
 ## Gotchas for future rounds
 
 - Don't sort anything pylint doesn't sort. Order comes from readdir + dict
