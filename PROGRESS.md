@@ -1940,3 +1940,40 @@ byte-identical output AND exit code vs pinned pylint, both profiles.
 Gates re-certified on the current binary: 27-corpus -E byte parity green
 (out + exit, 27/27), check_treedump django 400 == 0, check_inferdump
 django 200 == 0.
+
+## Phase B zero-round 7 (re-validation sweep, no code changes needed)
+
+Binary re-confirmed == HEAD (cargo build no-op; no .rs newer than the
+binary). Fresh ours-runs on every combo with COMPLETE GT (42 = 22
+corpora hook + 20 full; black.full/sentry.full GT pylint processes
+still live in corpora/black + corpora/sentry), owned-code multiset +
+exact owned-line subsequence order vs footer-stripped GT
+(harness/check_owned.sh):
+- 40/42 combos 0FP/0FN with EXACT order. Owned GT volume across the 42
+  combos: 273,509 (C0116 139,294 / C0103 68,782 / C0115 41,875 / C0114
+  12,695 / C0104 2,385 / W0104 2,229 / the rest in the hundreds).
+- matplotlib full: C0103 x1 FP (.circleci/fetch_doc_logs.py:36) —
+  unchanged from rounds 2-6; walker still skips the E1101 visitor
+  (crates/pycheckers/src/walker.rs:619). BLOCKED on typecheck full-mode
+  phase (E1101 visit_attribute getattr cache side effects).
+- sqlalchemy full: C0116 9FN/2FP — same exact 11 lines as rounds 2-6
+  (attributes.py 410/421/453/456/461/690, array.py 244, ext.py 122/127
+  FN; base.py 858/863 FP). BLOCKED on classes/variables/design/
+  refactoring full-mode phases.
+Partial-GT prefix audit (/tmp/prefix_owned.py on fresh GT snapshots):
+black.full 294 complete modules / 3,687 owned lines and sentry.full
+7,217 complete modules / 63,152 owned lines — both 0FP/0FN EXACT order
+(GT prefix byte-count unchanged since round 6: the live pylint
+processes flushed nothing new — block-buffered stdout, both mid-module).
+Zero-GT owned codes (W0128/W0177/W0199/C0131/C0132/W0136/W0137):
+re-validated on the current binary via /tmp/probe_b5r5 micro-probe
+(emits all 7 + C0105/W0150) — byte-identical output AND exit code vs
+pinned pylint, both profiles.
+NEW observation (cross-phase, expected): profile-run EXIT codes differ
+on 20/42 combos by exactly bit 8 (refactor) — GT 30/31 vs ours 22/23 —
+because later-phase R-codes (refactoring/design) are not yet emitted
+under PRYLINT_ALLOW_PARTIAL. Owned-code parity is unaffected; exit
+parity lands with phase F.
+Gates re-certified on the current binary: 27-corpus -E byte parity green
+(out + exit, 27/27 incl. core/pandas/sympy/airflow), check_treedump
+django 400 == 0, check_inferdump django 200 == 0.
