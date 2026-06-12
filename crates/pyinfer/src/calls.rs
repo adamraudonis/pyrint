@@ -565,7 +565,7 @@ impl Engine {
     }
 
     /// _get_return_nodes_skip_functions over multi-line block fields
-    fn return_nodes_skip_functions(&self, func: GNode) -> Vec<GNode> {
+    pub fn return_nodes_skip_functions(&self, func: GNode) -> Vec<GNode> {
         let md = self.md(func.m);
         let body: Vec<NodeId> = match &md.tree.nodes[func.n.idx()].kind {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),

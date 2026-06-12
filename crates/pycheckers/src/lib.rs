@@ -2,6 +2,7 @@
 //! token/raw-layer and misc checkers).
 
 pub mod basicerr;
+pub mod basicwc;
 pub mod depdata;
 pub mod deprecated;
 pub mod format;

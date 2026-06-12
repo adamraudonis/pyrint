@@ -375,6 +375,17 @@ pub fn previous_sibling(eng: &Engine, g: GNode) -> Option<GNode> {
     prev.map(|n| GNode { m: parent.m, n })
 }
 
+/// `len(parent.child_sequence(node))` — size of the body/orelse/... list
+/// containing `child` (astroid node_ng.py:325-349); 0 when not found.
+pub fn child_sequence_len(parent_kind: &NodeKind, child: pyast::NodeId) -> usize {
+    for seq in child_sequences(parent_kind) {
+        if seq.contains(&child) {
+            return seq.len();
+        }
+    }
+    0
+}
+
 /// statement-list fields of a node (the sequences `child_sequence` can find)
 fn child_sequences(k: &NodeKind) -> Vec<Vec<pyast::NodeId>> {
     match k {

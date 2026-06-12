@@ -780,7 +780,11 @@ fn too_many_starred_for_tuple(eng: &Engine, assign_tuple: GNode) -> bool {
 // ---------------------------------------------------------------------------
 
 #[derive(Default)]
-pub struct BasicCk;
+pub struct BasicCk {
+    /// BasicChecker._trys stack (visit_try/leave_try, undecorated) — the
+    /// W0150 lost-exception gate
+    pub trys: Vec<GNode>,
+}
 
 impl BasicCk {
     /// visit_call (basic_checker.py:689-712)
@@ -988,7 +992,8 @@ impl BasicCk {
         }
     }
 
-    /// visit_try — W0134 return-in-finally (syntactic; feeds I0021)
+    /// visit_try — _trys push + W0134 return-in-finally (undecorated:
+    /// registered whenever the BasicChecker is kept)
     pub fn visit_try(&mut self, cx: &mut WalkCx, node: GNode) {
         let eng = cx.eng;
         let md = eng.md(node.m);
@@ -997,6 +1002,7 @@ impl BasicCk {
             _ => return,
         };
         drop(md);
+        self.trys.push(node);
         for f in finalbody {
             let fg = GNode { m: node.m, n: f };
             for r in nodes_of_class(eng, fg, |k| matches!(k, NodeKind::Return { .. }), |_| false) {

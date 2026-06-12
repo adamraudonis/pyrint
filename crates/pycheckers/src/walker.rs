@@ -54,6 +54,54 @@ pub struct Prepared {
     pub dep_import: bool,
     /// imports mixin visit_call gate (deprecated-* messages)
     pub imports_call: bool,
+    // ---- checkers/base (notes/09-basic-wc.md) ----
+    /// BasicChecker kept at all (any of its messages enabled) — gates the
+    /// UNDECORATED visit_try/leave_try (W0134 + _trys stack)
+    pub basic_kept: bool,
+    /// BasicChecker.visit_call gate: W0123|W0122|E0111|E0119|W0101
+    pub basic_call: bool,
+    /// visit_assert: W0129|W0199
+    pub basic_assert: bool,
+    /// visit_assign: W0127|W0128
+    pub basic_assign: bool,
+    /// visit_for (BasicChecker): W0128
+    pub basic_for: bool,
+    /// visit_expr: W0104|W0133|W0105|W0106|W0131
+    pub basic_expr: bool,
+    /// visit_lambda: W0108
+    pub basic_lambda: bool,
+    /// visit_dict: W0109
+    pub basic_dict: bool,
+    /// visit_set: W0130
+    pub basic_set: bool,
+    /// visit_with: W0124
+    pub basic_with: bool,
+    /// visit_if/visit_ifexp/visit_comprehension: W0125|W0126
+    pub basic_test: bool,
+    /// visit_functiondef (BasicChecker): W0102
+    pub basic_fndef: bool,
+    /// visit_return/visit_break: W0101|W0150
+    pub basic_return: bool,
+    /// visit_continue/visit_raise: W0101
+    pub basic_unreach: bool,
+    /// BasicErrorChecker.visit_for/visit_while: W0120
+    pub erro_else: bool,
+    /// PassChecker (single-message checker): W0107
+    pub pass_ck: bool,
+    /// ComparisonChecker.visit_compare: any of its seven messages
+    pub comparison: bool,
+    /// NameChecker.visit_module/classdef/functiondef: C0103|C0104
+    pub name_main: bool,
+    /// NameChecker.visit_assignname: C0103|C0104|C0105|C0131|C0132
+    pub name_assign: bool,
+    /// DocStringChecker.visit_module: C0114|C0112
+    pub doc_module: bool,
+    /// DocStringChecker.visit_classdef: C0115|C0112
+    pub doc_class: bool,
+    /// DocStringChecker.visit_functiondef: C0116|C0112
+    pub doc_func: bool,
+    /// FunctionChecker (single-message checker): W0135
+    pub function_ck: bool,
 }
 
 impl Prepared {
@@ -76,6 +124,33 @@ impl Prepared {
             dep_dec: enabled("W4905"),
             dep_import: any(&["W4901", "W4904"]),
             imports_call: any(&["W4901", "W4902", "W4903", "W4904"]),
+            basic_kept: any(&[
+                "W0101", "W0102", "W0104", "W0105", "W0106", "W0108", "W0109", "W0122", "W0123",
+                "W0124", "W0125", "W0126", "W0127", "W0128", "W0129", "W0130", "W0131", "W0133",
+                "W0134", "W0150", "W0199", "E0111", "E0119",
+            ]),
+            basic_call: any(&["W0123", "W0122", "E0111", "E0119", "W0101"]),
+            basic_assert: any(&["W0129", "W0199"]),
+            basic_assign: any(&["W0127", "W0128"]),
+            basic_for: enabled("W0128"),
+            basic_expr: any(&["W0104", "W0133", "W0105", "W0106", "W0131"]),
+            basic_lambda: enabled("W0108"),
+            basic_dict: enabled("W0109"),
+            basic_set: enabled("W0130"),
+            basic_with: enabled("W0124"),
+            basic_test: any(&["W0125", "W0126"]),
+            basic_fndef: enabled("W0102"),
+            basic_return: any(&["W0101", "W0150"]),
+            basic_unreach: enabled("W0101"),
+            erro_else: enabled("W0120"),
+            pass_ck: enabled("W0107"),
+            comparison: any(&["C0121", "C0123", "R0123", "R0124", "R0133", "W0143", "W0177"]),
+            name_main: any(&["C0103", "C0104"]),
+            name_assign: any(&["C0103", "C0104", "C0105", "C0131", "C0132"]),
+            doc_module: any(&["C0114", "C0112"]),
+            doc_class: any(&["C0115", "C0112"]),
+            doc_func: any(&["C0116", "C0112"]),
+            function_ck: enabled("W0135"),
         }
     }
 }
@@ -208,7 +283,7 @@ impl Default for LintRun {
             special: SpecialCk,
             classes: ClassCk::default(),
             newstyle: NewStyleCk,
-            basic: BasicCk,
+            basic: BasicCk::default(),
             basicerr: BasicErrCk,
             exceptions: ExceptionsCk,
             strings: StringCk,
@@ -363,13 +438,35 @@ impl Walker<'_> {
                 | Tag::Try
                 | Tag::TryStar
                 | Tag::Attribute
+                | Tag::Module
+                | Tag::AssignName
+                | Tag::Assert
+                | Tag::Pass
+                | Tag::Expr
+                | Tag::If
+                | Tag::IfExp
+                | Tag::Comprehension
+                | Tag::Lambda
+                | Tag::Dict
+                | Tag::Set
+                | Tag::With
+                | Tag::For
+                | Tag::While
         );
         if !fmt_late {
             self.fmt(cx, g);
         }
         match kind_tag {
             Tag::Module => {
-                // BasicChecker.visit_module: stats only
+                // full order: DocString, Name, Basic(stats only), Misdesign,
+                // Format, Imports, Logging, NonAscii, Spelling, Type, Vars
+                if self.prep.doc_module {
+                    crate::basicwc::doc_visit_module(cx, g);
+                }
+                if self.prep.name_main {
+                    crate::basicwc::name_visit_module(cx, g);
+                }
+                self.fmt(cx, g);
                 self.imp.visit_module(cx, g);
                 self.logging.visit_module(cx, g);
                 if self.prep.nonascii_module {
@@ -400,7 +497,13 @@ impl Walker<'_> {
                 }
             }
             Tag::ClassDef => {
-                // BasicChecker.visit_classdef: stats only
+                // full order: DocString, Name, Basic(stats), BasicError, ...
+                if self.prep.doc_class {
+                    crate::basicwc::doc_visit_classdef(cx, g);
+                }
+                if self.prep.name_main {
+                    crate::basicwc::name_visit_classdef(cx, g);
+                }
                 self.basicerr.visit_classdef(cx, g);
                 self.classes.visit_classdef(cx, g);
                 self.fmt(cx, g);
@@ -412,6 +515,20 @@ impl Walker<'_> {
                 self.vars.visit_classdef(cx, g);
             }
             Tag::FunctionDef => {
+                // full order: Function, DocString, Name, Basic, BasicError,
+                // Special, Class, Misdesign, Format, Imports, NewStyle, ...
+                if self.prep.function_ck {
+                    crate::basicwc::function_visit_functiondef(cx, g);
+                }
+                if self.prep.doc_func {
+                    crate::basicwc::doc_visit_functiondef(cx, g);
+                }
+                if self.prep.name_main {
+                    crate::basicwc::name_visit_functiondef(cx, g);
+                }
+                if self.prep.basic_fndef {
+                    self.basic.visit_functiondef(cx, g);
+                }
                 self.basicerr.visit_functiondef(cx, g);
                 self.special.visit_functiondef(cx, g);
                 self.classes.visit_functiondef(cx, g);
@@ -426,6 +543,18 @@ impl Walker<'_> {
             }
             Tag::AsyncFunctionDef => {
                 self.async_ck.visit_asyncfunctiondef(cx, g);
+                if self.prep.function_ck {
+                    crate::basicwc::function_visit_functiondef(cx, g);
+                }
+                if self.prep.doc_func {
+                    crate::basicwc::doc_visit_functiondef(cx, g);
+                }
+                if self.prep.name_main {
+                    crate::basicwc::name_visit_functiondef(cx, g);
+                }
+                if self.prep.basic_fndef {
+                    self.basic.visit_functiondef(cx, g);
+                }
                 self.basicerr.visit_functiondef(cx, g);
                 self.special.visit_functiondef(cx, g);
                 self.classes.visit_functiondef(cx, g);
@@ -436,7 +565,13 @@ impl Walker<'_> {
                 }
                 self.vars.visit_functiondef(cx, g);
             }
-            Tag::Lambda => self.vars.visit_lambda(cx, g),
+            Tag::Lambda => {
+                if self.prep.basic_lambda {
+                    self.basic.visit_lambda(cx, g);
+                }
+                self.fmt(cx, g);
+                self.vars.visit_lambda(cx, g);
+            }
             Tag::Comp => {
                 // IterableChecker.visit_{listcomp,dictcomp,setcomp,
                 // generatorexp} run BEFORE VariablesChecker
@@ -444,10 +579,18 @@ impl Walker<'_> {
                 self.vars.visit_comprehension_scope(cx, g);
             }
             Tag::Comprehension => {
+                if self.prep.basic_test {
+                    self.basic.visit_comprehension(cx, g);
+                }
+                self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
             }
             Tag::Name => self.vars.visit_name(cx, g),
             Tag::AssignName => {
+                if self.prep.name_assign {
+                    crate::basicwc::name_visit_assignname(cx, g);
+                }
+                self.fmt(cx, g);
                 self.match_ck.visit_assignname(cx, g);
                 if self.prep.nonascii_name {
                     self.nonascii.visit_assignname(cx, g);
@@ -456,6 +599,9 @@ impl Walker<'_> {
             }
             Tag::DelName => self.vars.visit_delname(cx, g),
             Tag::Assign => {
+                if self.prep.basic_assign {
+                    self.basic.visit_assign(cx, g);
+                }
                 self.basicerr.visit_assign(cx, g);
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
@@ -472,11 +618,24 @@ impl Walker<'_> {
                 // TypeChecker.visit_assignattr AugAssign no-member burn:
                 // E1101 disabled — skipped
             }
-            Tag::Expr | Tag::If | Tag::IfExp => {
+            Tag::Expr => {
+                if self.prep.basic_expr {
+                    self.basic.visit_expr(cx, g);
+                }
+                self.fmt(cx, g);
+                self.imp.compute_first_non_import_node(cx, g);
+            }
+            Tag::If | Tag::IfExp => {
+                if self.prep.basic_test {
+                    self.basic.visit_if_test(cx, g);
+                }
+                self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
             }
             Tag::Call => {
-                self.basic.visit_call(cx, g);
+                if self.prep.basic_call {
+                    self.basic.visit_call(cx, g);
+                }
                 self.dataclass.visit_call(cx, g);
                 self.fmt(cx, g);
                 if self.prep.imports_call {
@@ -511,18 +670,46 @@ impl Walker<'_> {
                 if self.prep.chained {
                     self.chained.visit_compare(cx, g);
                 }
+                if self.prep.comparison {
+                    crate::basicwc::visit_compare(cx, g);
+                }
                 self.fmt(cx, g);
                 self.ty.visit_compare(cx, g);
             }
-            Tag::Dict => self.ty.visit_dict(cx, g),
-            Tag::Set => self.ty.visit_set(cx, g),
+            Tag::Dict => {
+                if self.prep.basic_dict {
+                    self.basic.visit_dict(cx, g);
+                }
+                self.fmt(cx, g);
+                self.ty.visit_dict(cx, g);
+            }
+            Tag::Set => {
+                if self.prep.basic_set {
+                    self.basic.visit_set(cx, g);
+                }
+                self.fmt(cx, g);
+                self.ty.visit_set(cx, g);
+            }
             Tag::For => {
+                // full order: Basic.visit_for, BasicError.visit_for,
+                // Misdesign, Format, Imports, ModifiedIteration, ...
+                if self.prep.basic_for {
+                    self.basic.visit_for_basic(cx, g);
+                }
+                if self.prep.erro_else {
+                    crate::basicwc::check_else_on_loop(cx, g);
+                }
+                self.fmt(cx, g);
                 self.imp.visit_functiondef_family(cx, g);
                 self.mod_iter.visit_for(cx, g);
                 self.iter.visit_for(cx, g);
                 self.ty.visit_for(cx, g);
             }
             Tag::While => {
+                if self.prep.erro_else {
+                    crate::basicwc::check_else_on_loop(cx, g);
+                }
+                self.fmt(cx, g);
                 self.imp.visit_functiondef_family(cx, g);
             }
             Tag::AsyncFor => self.iter.visit_asyncfor(cx, g),
@@ -544,6 +731,10 @@ impl Walker<'_> {
                 self.vars.visit_subscript(cx, g);
             }
             Tag::With => {
+                if self.prep.basic_with {
+                    self.basic.visit_with(cx, g);
+                }
+                self.fmt(cx, g);
                 if self.prep.threading {
                     self.threading.visit_with(cx, g);
                 }
@@ -562,14 +753,25 @@ impl Walker<'_> {
                 self.ty.visit_unaryop(cx, g);
             }
             Tag::Return => {
+                if self.prep.basic_return {
+                    self.basic.check_unreachable_stmt(cx, g);
+                    self.basic.check_not_in_finally(cx, g, "return", false);
+                }
                 self.basicerr.visit_return(cx, g);
                 self.fmt(cx, g);
             }
             Tag::Break => {
+                if self.prep.basic_return {
+                    self.basic.check_unreachable_stmt(cx, g);
+                    self.basic.check_not_in_finally(cx, g, "break", true);
+                }
                 self.basicerr.visit_loopkw(cx, g, "break");
                 self.fmt(cx, g);
             }
             Tag::Continue => {
+                if self.prep.basic_unreach {
+                    self.basic.check_unreachable_stmt(cx, g);
+                }
                 self.basicerr.visit_loopkw(cx, g, "continue");
                 self.fmt(cx, g);
             }
@@ -582,11 +784,16 @@ impl Walker<'_> {
                 self.fmt(cx, g);
             }
             Tag::Raise => {
+                if self.prep.basic_unreach {
+                    self.basic.check_unreachable_stmt(cx, g);
+                }
                 self.exceptions.visit_raise(cx, g);
                 self.fmt(cx, g);
             }
             Tag::Try => {
-                self.basic.visit_try(cx, g);
+                if self.prep.basic_kept {
+                    self.basic.visit_try(cx, g);
+                }
                 self.exceptions.visit_try(cx, g);
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
@@ -612,6 +819,18 @@ impl Walker<'_> {
                     crate::deprecated::visit_decorators(cx, g);
                 }
             }
+            Tag::Assert => {
+                if self.prep.basic_assert {
+                    self.basic.visit_assert(cx, g);
+                }
+                self.fmt(cx, g);
+            }
+            Tag::Pass => {
+                if self.prep.pass_ck {
+                    crate::basicwc::visit_pass(cx, g);
+                }
+                self.fmt(cx, g);
+            }
             Tag::Other => {}
         }
         // ---- children ----
@@ -635,9 +854,16 @@ impl Walker<'_> {
             }
             Tag::Lambda => self.vars.leave_lambda(cx, g),
             Tag::Comp => self.vars.leave_comprehension_scope(cx, g),
+            Tag::Try => {
+                // BasicChecker.leave_try pops _trys; after a crash pylint's
+                // exception unwinds past every leave (stack leaks into the
+                // next module — run-level checker state)
+                if self.prep.basic_kept && !cx.is_crashed() {
+                    self.basic.trys.pop();
+                }
+            }
             // leave_assign/leave_with (_store_type_annotation_names): type
             // comments only — our tree drops them; no-op.
-            // BasicChecker.leave_try: _trys stack for W0150 only — no-op.
             _ => {}
         }
     }
@@ -691,6 +917,8 @@ enum Tag {
     Global,
     NamedExpr,
     Decorators,
+    Assert,
+    Pass,
     Other,
 }
 
@@ -743,6 +971,8 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Global { .. } => Tag::Global,
         NodeKind::NamedExpr { .. } => Tag::NamedExpr,
         NodeKind::Decorators { .. } => Tag::Decorators,
+        NodeKind::Assert { .. } => Tag::Assert,
+        NodeKind::Pass => Tag::Pass,
         _ => Tag::Other,
     }
 }
