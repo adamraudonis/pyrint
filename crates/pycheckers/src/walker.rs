@@ -191,6 +191,35 @@ pub struct Prepared {
     /// visit_assign: assignment-from-no-return | assignment-from-none |
     /// non-str-assignment-to-dunder-name (the visit_assign decorator)
     pub ty_w1115: bool,
+    // ---- phase E: MisdesignChecker (notes/09-design-similarities.md) ----
+    /// design checker KEPT iff any of R0901-R0917 enabled. Gates the
+    /// run-global visit_default statement counter + the ungated visitors
+    /// (visit_return/visit_try/visit_while/visit_for/visit_match).
+    pub design_kept: bool,
+    /// visit_classdef gate: R0901|R0902|R0903|R0904
+    pub design_visit_classdef: bool,
+    /// leave_classdef gate: R0903|R0904
+    pub design_leave_classdef: bool,
+    /// visit_functiondef gate: R0911|R0912|R0913|R0914|R0915|R0917|W1113
+    pub design_visit_func: bool,
+    /// leave_functiondef gate: R0911|R0912|R0913|R0914|R0915 (NOT R0917/W1113)
+    pub design_leave_func: bool,
+    /// visit_if gate: R0916|R0912
+    pub design_visit_if: bool,
+    /// individual message enable flags (the per-message `if gate` inside the
+    /// shared visit/leave methods — a visitor can be registered while only a
+    /// subset of its messages emit).
+    pub d_r0901: bool,
+    pub d_r0902: bool,
+    pub d_r0903: bool,
+    pub d_r0904: bool,
+    pub d_r0911: bool,
+    pub d_r0912: bool,
+    pub d_r0913: bool,
+    pub d_r0914: bool,
+    pub d_r0915: bool,
+    pub d_r0916: bool,
+    pub d_r0917: bool,
 }
 
 impl Prepared {
@@ -284,9 +313,36 @@ impl Prepared {
             implbool_c1805: enabled("C1805"),
             ty_w1113: enabled("W1113"),
             ty_w1115: any(&["E1111", "E1128", "W1115"]),
+            // ---- phase E: design ----
+            design_kept: any(&DESIGN_ALL),
+            design_visit_classdef: any(&["R0901", "R0902", "R0903", "R0904"]),
+            design_leave_classdef: any(&["R0903", "R0904"]),
+            // NOTE the stray W1113 on visit_functiondef (design_analysis.py:536)
+            design_visit_func: any(&[
+                "R0911", "R0912", "R0913", "R0914", "R0915", "R0917", "W1113",
+            ]),
+            design_leave_func: any(&["R0911", "R0912", "R0913", "R0914", "R0915"]),
+            design_visit_if: any(&["R0916", "R0912"]),
+            d_r0901: enabled("R0901"),
+            d_r0902: enabled("R0902"),
+            d_r0903: enabled("R0903"),
+            d_r0904: enabled("R0904"),
+            d_r0911: enabled("R0911"),
+            d_r0912: enabled("R0912"),
+            d_r0913: enabled("R0913"),
+            d_r0914: enabled("R0914"),
+            d_r0915: enabled("R0915"),
+            d_r0916: enabled("R0916"),
+            d_r0917: enabled("R0917"),
         }
     }
 }
+
+/// every MisdesignChecker (R0901-R0917) message id.
+const DESIGN_ALL: [&str; 11] = [
+    "R0901", "R0902", "R0903", "R0904", "R0911", "R0912", "R0913", "R0914", "R0915", "R0916",
+    "R0917",
+];
 
 /// every RefactoringChecker (R1701-R1737) message id.
 const REFAC_ALL: [&str; 37] = [
@@ -424,6 +480,7 @@ pub struct LintRun {
     pub nested: NestedMinMaxCk,
     pub chained: ChainedCompCk,
     pub refac: crate::refactoring::RefactoringCk,
+    pub design: crate::design::DesignCk,
     pub format_state: FormatWalkState,
     pub caches: LintCaches,
 }
@@ -456,6 +513,7 @@ impl Default for LintRun {
             nested: NestedMinMaxCk,
             chained: ChainedCompCk,
             refac: crate::refactoring::RefactoringCk::default(),
+            design: crate::design::DesignCk::default(),
             format_state: FormatWalkState::default(),
             caches: LintCaches::default(),
         }
@@ -517,6 +575,7 @@ impl LintRun {
             nested: &mut self.nested,
             chained: &mut self.chained,
             refac: &mut self.refac,
+            design: &mut self.design,
             format_state: &mut self.format_state,
         };
         walker.walk(&mut cx, GNode { m: mid, n: NodeId::MODULE });
@@ -550,6 +609,7 @@ struct Walker<'w> {
     nested: &'w mut NestedMinMaxCk,
     chained: &'w mut ChainedCompCk,
     refac: &'w mut crate::refactoring::RefactoringCk,
+    design: &'w mut crate::design::DesignCk,
     format_state: &'w mut FormatWalkState,
 }
 
@@ -560,8 +620,67 @@ impl Walker<'_> {
     /// basic/classes block and imports/..., so most tags run it before
     /// their first implemented callback; the `fmt_late` tags inline it.
     fn fmt(&mut self, cx: &mut WalkCx, g: GNode) {
+        // MisdesignChecker callbacks run IMMEDIATELY before
+        // FormatChecker.visit_default for every node class in full-mode walk
+        // order. The emitting design visitors (visit_classdef/functiondef/if)
+        // are exactly here; the non-emitting counters (visit_default and the
+        // ungated visit_return/try/while/for/match) emit nothing so their
+        // position is irrelevant — running them at this single slot yields
+        // correct R0915/R0912/R0911 leave-time counts.
+        self.design_dispatch(cx, g);
         if self.prep.format {
             self.format_state.visit_default(cx, g);
+        }
+    }
+
+    /// MisdesignChecker per-node visit dispatch (notes/09-design §A.2). The
+    /// checker is registered iff `design_kept`. Specific visitors are gated
+    /// by @only_required_for_messages; a node class WITHOUT a registered
+    /// (enabled) specific visitor falls through to visit_default (which only
+    /// increments the statement counter for is_statement nodes — the R0915
+    /// coupling).
+    fn design_dispatch(&mut self, cx: &mut WalkCx, g: GNode) {
+        if !self.prep.design_kept {
+            return;
+        }
+        let kind_tag = {
+            let md = cx.eng.md(g.m);
+            kind_tag(&md.tree.nodes[g.n.idx()].kind)
+        };
+        match kind_tag {
+            Tag::ClassDef if self.prep.design_visit_classdef => {
+                self.design
+                    .visit_classdef(cx, g, self.prep.d_r0901, self.prep.d_r0902);
+            }
+            Tag::FunctionDef | Tag::AsyncFunctionDef if self.prep.design_visit_func => {
+                self.design.visit_functiondef(
+                    cx,
+                    g,
+                    self.prep.d_r0913,
+                    self.prep.d_r0917,
+                    self.prep.d_r0914,
+                );
+            }
+            Tag::If if self.prep.design_visit_if => {
+                self.design.visit_if(cx, g, self.prep.d_r0916);
+            }
+            // ungated visitors (always registered when the checker is kept).
+            // visit_try is registered only for cid "try"; TryStar (cid
+            // "trystar") and AsyncFor (cid "asyncfor") have NO design handler
+            // -> visit_default (+1 stmt). visit_for == visit_while for cid
+            // "for"; "while" has its own. (Tag::TryStar/AsyncFor fall to the
+            // catch-all visit_default arm below.)
+            Tag::Return => self.design.visit_return(),
+            Tag::Try => self.design.visit_try(cx, g),
+            Tag::While | Tag::For => self.design.visit_while_or_for(cx, g),
+            Tag::Match => self.design.visit_match(cx, g),
+            // every other node class -> visit_default (incl. ClassDef/
+            // FunctionDef/If when their specific visitor is gated OFF, and
+            // TryStar/AsyncFor which have no design handler)
+            _ => {
+                let md = cx.eng.md(g.m);
+                self.design.visit_default_stmt(&md.tree.nodes[g.n.idx()].kind);
+            }
         }
     }
 
@@ -614,6 +733,14 @@ impl Walker<'_> {
                 | Tag::For
                 | Tag::While
                 | Tag::BinOp
+                // BoolOp/AugAssign call self.fmt INSIDE their arm (after the
+                // Misdesign/Format slot, before Refactoring.visit_boolop/
+                // visit_augassign) — they must skip the early fmt or it would
+                // double-fire FormatChecker.visit_default (latent before
+                // phase E, now load-bearing: design statement-counting runs
+                // inside fmt and a double call double-counts statements).
+                | Tag::BoolOp
+                | Tag::AugAssign
         );
         if !fmt_late {
             self.fmt(cx, g);
@@ -1172,6 +1299,12 @@ impl Walker<'_> {
             }
             Tag::ClassDef => {
                 self.classes.leave_classdef(cx, g);
+                // MisdesignChecker.leave_classdef (R0904 then R0903), gated on
+                // R0903|R0904; runs after Class, before Refactoring.
+                if self.prep.design_leave_classdef {
+                    self.design
+                        .leave_classdef(cx, g, self.prep.d_r0904, self.prep.d_r0903);
+                }
                 // RefactoringChecker.leave_classdef (R1732 class-scope flush),
                 // @only_required_for_messages("consider-using-with")
                 if self.prep.refac_cuw {
@@ -1181,6 +1314,17 @@ impl Walker<'_> {
             }
             Tag::FunctionDef => {
                 self.classes.leave_functiondef(cx, g);
+                // MisdesignChecker.leave_functiondef (R0911, R0912, R0915),
+                // gated on R0911|R0912|R0913|R0914|R0915.
+                if self.prep.design_leave_func {
+                    self.design.leave_functiondef(
+                        cx,
+                        g,
+                        self.prep.d_r0911,
+                        self.prep.d_r0912,
+                        self.prep.d_r0915,
+                    );
+                }
                 // RefactoringChecker.leave_functiondef fires for sync DEF only
                 // (exact-name dispatch: async never reaches it).
                 if self.prep.refac_leave_func {
@@ -1190,6 +1334,15 @@ impl Walker<'_> {
             }
             Tag::AsyncFunctionDef => {
                 self.classes.leave_functiondef(cx, g);
+                if self.prep.design_leave_func {
+                    self.design.leave_functiondef(
+                        cx,
+                        g,
+                        self.prep.d_r0911,
+                        self.prep.d_r0912,
+                        self.prep.d_r0915,
+                    );
+                }
                 self.vars.leave_functiondef(cx, g);
             }
             Tag::Lambda => self.vars.leave_lambda(cx, g),

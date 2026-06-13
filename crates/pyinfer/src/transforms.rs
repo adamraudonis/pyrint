@@ -459,6 +459,14 @@ impl Engine {
                 continue;
             }
             let unknown = self.alloc_placeholders(1)[0];
+            // brain_dataclasses.py:64-68: Unknown(parent=assign_node) — the
+            // AnnAssign field statement. The reparent makes unknown.root()
+            // resolve to the REAL module so the R0902 filter
+            // (v[0].root() is root, design_analysis.py:474) keeps these
+            // synthetic attributes.
+            self.reparents
+                .borrow_mut()
+                .insert(unknown, GNode { m: cls.m, n: stmt });
             self.dataclass_attrs
                 .borrow_mut()
                 .insert(unknown, GNode { m: cls.m, n: stmt });

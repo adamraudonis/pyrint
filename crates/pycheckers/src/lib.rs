@@ -12,6 +12,7 @@ pub mod pragma;
 pub mod smallck;
 pub mod ckutils;
 pub mod classes;
+pub mod design;
 pub mod exceptions;
 pub mod imports;
 pub mod logging_ck;

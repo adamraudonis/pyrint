@@ -142,6 +142,16 @@ impl Engine {
         )
     }
 
+    /// NodeNG.root() (node_ng.py): walk parents to the top node (a Module in
+    /// normal trees; reparent-aware for brain-extended objects).
+    pub fn root(&self, g: GNode) -> GNode {
+        let mut top = g;
+        while let Some(p) = self.parent(top) {
+            top = p;
+        }
+        top
+    }
+
     /// nearest frame (Module/FunctionDef/Lambda/ClassDef), including self.
     pub fn frame(&self, g: GNode) -> GNode {
         let mut cur = g;
