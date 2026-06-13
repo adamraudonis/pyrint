@@ -2801,3 +2801,74 @@ GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
 (egate.sh, fresh run); check_treedump django 400 = 0 differing; check_inferdump
 not required (pyinfer untouched). Clean working tree — pure re-validation +
 diagnostic round (all instrumentation reverted; `git diff` empty).
+
+## Phase F zero-round 8 (independent re-validation: full owned-code coverage census + bidirectionality confirmation)
+
+Rebuilt the committed binary (clean tree at zero-round 7; cargo recompiled
+nothing), REGENERATED all 27×2 .ours captures FRESH (hook + full) and re-ran
+the entire owned-code audit (R0901-R0917, R0401, R0801, R17xx×37, C1804/C1805,
+W1113/W1116) across all 27 corpora × 2 profiles vs footer-stripped GT. No source
+changes — this round re-proves the state on freshly-generated outputs, adds a
+GT-coverage CENSUS, and re-confirms the sqlalchemy gap's bidirectionality with a
+direct dual-engine probe.
+
+RESULT — **52/54 combos: 0 FP / 0 FN, EXACT owned-line order.** Order verified
+EXACT on the dense full captures (airflow 17345, sentry 17712, sympy 15511, salt
+10753, nova 8397, black 8804 incl. all R0801 blocks, django 5111, pandas 5522,
+mypy 6345, fastapi 5363, zulip 6081) AND the dense hook captures (nova 2000,
+sympy 553, salt 638, airflow 390, ansible 503, twisted 192, matplotlib 139, pip
+60, celery 53). The 2 non-zero combos are the SAME two truncated-GT captures
+gt_integrity.py flags (and ONLY those):
+- **sentry.hook** (exit=30, ends-on-bare-module-header; 217 naive "FP"):
+  restricted to the 521 GT-reached files → **49/49, 0FP/0FN, EXACT**.
+- **core.full** (exit=143 OOM SIGKILL before close(); 18693 naive "FP" =
+  R0801×18422 + R0401×266 close-time + R0903×1/R0912×2/R0914×2 past the kill):
+  restricted to 15234 GT-reached files, exclude-close → **12990/12990, 0FP/0FN,
+  EXACT.** prylint completes (exit 30) where pylint was killed.
+
+### GT owned-code coverage census (new this round)
+Tallied every owned code across all 27×2 GT captures (~250k owned-code lines):
+**51 of 54 owned codes have real GT occurrences, ALL matched 0FP/0FN** except the
+sqlalchemy R0901↔R0903 gap. Top volumes: R0801 35659, R0903 27387, R0913 18960,
+R0917 15357, R1705 11386, R1735 9004, R0914 8590, R0401 8331, R0912 5658, R0915
+3937, R1725 4031, R0902 3240, R1710 2717, R0901 2452, R0904 2107, R0911 1660,
+R1732 1403, R1720 1381, W1113 893, R0916 268, W1116 60. The 3 codes with ZERO GT
+occurrences (checker built, no corpus exercises them under these profiles):
+**C1804, C1805** (default_enabled:False — expected) and **R1712**
+(consider-swap-variables — no corpus test case). These are FNs-by-absence-of-
+input, not gaps: nothing to emit.
+
+### sqlalchemy — sole genuine gap; bidirectionality re-proved with a live probe
+hook 1FP (array.py:93 R0901 43/7 — R0901 IS hook-enabled), full 15FP/12FN
+(R0901×15 FP; R0901×3+R0903×9 FN), all R0901↔R0903 generic-base ancestor flips.
+This round nailed the BIDIRECTIONALITY directly (a fix can't be one-directional):
+- prylint OVER-resolves: array.py:93 GT R0903(1/2) → prylint R0901(43/7);
+  hstore.py ×8 GT R0903(0/2) → prylint R0901(55/7); ext.py, orm/attributes.py.
+- prylint UNDER-resolves: selectable.py:211 GT R0901(44/7) → prylint R0901(32/7);
+  orm/base.py:762 GT 15/7 → prylint 14/7; orm/base.py:844 GT R0901(16/7) →
+  prylint resolves <7 (no emit, FN).
+- **Isolation vs warm-cache PROVED both engines this round:** pylint
+  array.py-alone = R0903; pylint sql/ + array.py (fast reproducer) = STILL R0903
+  (astroid's cycle-guarded recursive ancestors collapses the deep generic chain
+  to 0 even warm). prylint array.py-alone = R0903 (matches); prylint sql/ +
+  array.py = R0901(25/7); prylint full-corpus = R0901(43/7). So prylint matches
+  astroid byte-for-byte in ISOLATION and the divergence appears ONLY under the
+  warm full-corpus inference cache — confirming an EMERGENT global-cache-warming
+  ORDER effect through the recursive Subscript→ClassDef.getitem→__class_getitem__
+  →ancestors path, not a structural rule. design.rs count_parents is a faithful
+  `_get_parents_iter` port (re-verified line-by-line against
+  design_analysis.py:246-279; ignored_parents = STDLIB_CLASSES_IGNORE_ANCESTOR ∪
+  config.ignored_parents=() per :457; ancestors() fresh-context-per-call +
+  restore_path per base per scoped_nodes.py:2166-2211 — faithfully mirrored in
+  getattr.rs ancestors_frame). Matching it bit-for-bit requires altering the
+  shared pyinfer cache-key/path/cycle machinery (the phase-1..17 domain), guarded
+  by the INVIOLABLE -E 27-corpus byte gate and the 4 pyinfer-ZERO inferdump
+  corpora (django/pandas/sentry/core). Perturbing it for a bidirectional flip
+  confined to sqlalchemy's deep generic hierarchies is the wrong trade; no -E
+  corpus leaks it (R0901 is not an -E code; EGATE 27/27 EQUAL). BLOCKED.
+
+GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
+(egate.sh, fresh run, sqlalchemy EQUAL — gap does not leak to -E);
+check_treedump django 400 = 0 differing; check_inferdump not required (pyinfer
+untouched — no source changes). Clean working tree — pure re-validation +
+diagnostic round.
