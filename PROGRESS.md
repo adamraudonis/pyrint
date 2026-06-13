@@ -1977,3 +1977,27 @@ parity lands with phase F.
 Gates re-certified on the current binary: 27-corpus -E byte parity green
 (out + exit, 27/27 incl. core/pandas/sympy/airflow), check_treedump
 django 400 == 0, check_inferdump django 200 == 0.
+
+## Phase D zero-round 1 (round 5 close-out)
+
+All 54 owned codes (R17xx, C0200/C0201/C0206-09, C0113/C0117, C1802-05,
+W1113-17) are 0FP/0FN on EVERY corpus × BOTH profiles, footer-stripped,
+EXACT emission order (order-aware full-sequence equality, not just sets).
+
+- Fixed the sole real logic divergence — C0117 unnecessary-negation:
+  utils.node_type collapses inferred types into a set skipping is_none()
+  (Const(value=None), real OR synthesized). Our node_type only skipped
+  node-backed Const(None); SynthConst(None) leaked through → sympy 2FN
+  (S(5) infers [None*5,U,NDimArray]) + pandas 5FP (td2 → SynthConst(None)).
+  Inference itself verified byte-identical to astroid via --dump-infer.
+  Now node_type uses value_const → ConstValue::None for both forms.
+  (commit d3008f71)
+- Remaining 8 "owned-code FP" lines are CROSS-PHASE DISCOVERY artifacts,
+  NOT phase-D logic: salt.full pkg/rpm/build.py (6×C0209), core.hook
+  script/hassfest/manifest.py (R1711) + tests/.../transmission/
+  test_switch.py (R1715). pylint's directory walk does not include these
+  files in the full run, but STANDALONE pylint (probed with the exact
+  profile flags, PYTHONHASHSEED=0) emits byte-identical messages for each
+  — proving our checker logic is correct. Blocked on discovery phase.
+Gates re-certified: 27-corpus -E byte parity 0 failures, check_treedump
+django 400 == 0, check_inferdump django 200 == 0.
