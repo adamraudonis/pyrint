@@ -10,7 +10,12 @@ ROOT=~/Desktop/Projects/prylint
 C="$1"; P="$2"
 FLAGS=$(sed "s|HARNESS_EMPTY_RC|$ROOT/harness/empty.rcfile|" $ROOT/harness/flags_$P.txt)
 OUT=$ROOT/harness/results/$C.$P
-PLH=$(mktemp -d /tmp/gtiso.XXXXXX)
+# DETERMINISTIC per-(corpus,profile) PYLINTHOME so the crash-template path in
+# any F0002 message has the SAME prefix as the prylint run (run_full.sh uses
+# the same path), leaving only the wall-clock timestamp for bytecmp.py to
+# normalize. Emptied each run so the footer has no previous-run suffix.
+PLH=/tmp/prylint-plh-$C-$P
+rm -rf "$PLH"; mkdir -p "$PLH"
 export PYTHONHASHSEED=0
 export PYLINTHOME=$PLH
 cd $ROOT/corpora/$C || exit 1

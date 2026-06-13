@@ -2295,3 +2295,76 @@ benefit on the other 26 corpora.
 Gates re-certified on the rebuilt committed binary: 27-corpus -E byte parity
 27/27 EQUAL (26 in-loop + black EQUAL out-of-loop), check_treedump django
 400 == 0, check_inferdump django 200 == 0.
+
+## Full-pylint mode — phase F (no-E pipeline) (2026-06-13)
+
+Ported the no-`-E` pipeline per notes/09-pipeline-noE.md. The PRYLINT_ALLOW_PARTIAL
+refusal is REMOVED — prylint now runs full mode by default.
+
+LANDED (crates/cli):
+- **Score footer** (run.rs `fmt2`/`fmt2_signed` + EvaluationSection bytes):
+  `"\n" + dashes + "\n" + msg + "\n\n"`, dash count = char-length of the FULL
+  msg, `Your code has been rated at {note:.2f}/10` (+ `(previous run:
+  {pnote:.2f}/10, {delta:+.2f})`). Gated on config.score (display) AND
+  statements>0 AND something-linted (_is_base_filestate). VERIFIED byte-exact
+  incl. negative delta (`-10.00`), zero-statement / empty-file suppression,
+  `-E` footer-less.
+- **Persistent stats** (stats.rs + embedded stdlib-only stats_helper.py,
+  oracle coprocess pattern): load previous global_note (unconditional, drives
+  the suffix) + save (gated on --persistent=yes). Save emits raw protocol-4
+  pickle opcodes (STACK_GLOBAL pylint.utils.linterstats LinterStats + NEWOBJ +
+  BUILD) — VERIFIED BIDIRECTIONAL interop (real pylint reads ours as a genuine
+  LinterStats; we read pylint's). Filename = `_get_pdata_path` (base_name
+  Path-parts join + `_1.stats`, recurs=1); base_name = last-linted FileItem's
+  expand_modules basename (new FileItem.base; `pylint .` -> "." -> _1.stats,
+  `pylint a.py b.py` -> last file -> b_1.stats). PYLINTHOME isolation behaves.
+- **Exit ladder** (run.py:245-260): exit-zero / fail-on short-circuit /
+  score>=fail_under exits 0 EVEN WITH messages / else msg_status or 1.
+  PROBED == pylint: --fail-under=5/-100, --exit-zero, --fail-on=W, jobs<0
+  (exit 32), --disable=all "No files to lint: exiting." (exit 32),
+  --disable=all --enable=X runs normally.
+- **Config files** (config.rs + embedded config_helper.py): discovery
+  (find_default_config_files first yield, cwd-relative CONFIG_NAMES + content
+  checks) and INI/TOML parse via stdlib configparser/tomllib (bug-for-bug:
+  the malformed-pyproject-during-discovery path prints "Failed to load..." and
+  skips, exit 0; explicit missing --rcfile exits 32). CLI-over-file precedence
+  for store-options; file-then-CLI disable/enable accumulation. init-hook
+  `_unquote` + exec via a python probe subprocess; sys.path additions
+  forwarded to the engine (PRYLINT_EXTRA_SYSPATH, graph.rs); non-path side
+  effects warned on stderr.
+- **Option parsing** (main.rs): --score/--persistent (yn-validated, exit 32 on
+  bad value), --fail-under/--fail-on/--exit-zero, --enable, --rcfile,
+  --init-hook; --reports/-r/--output-format/-v accepted+ignored; -j accepted.
+
+**-j1 vs -jN**: prylint emits -j1-equivalent output (sequential engine + ordered
+flush). pylint's own -jN differs from -j1 (notes/09 §9.5): (1) E0001/F0002 stream
+two-phase in -j1 but at file position in -jN; (2) R0801/R0401 attribute to the
+last-LINTED module in -j1 vs the last FileItem in -jN; (3) by_msg inflated in -jN
+reports (worker open() doesn't reset by_msg — VERIFIED bug). prylint's -j1 ground
+truth is the parity target; -jN reproduction is out of scope.
+
+**Adam-hook replica** (test repo /tmp/hookrepo: pkg + .pylintrc with init-hook +
+disable=missing-* + score=yes, invoked with file args `pkg/a.py pkg/sub/b.py`):
+pylint vs prylint **BYTE-IDENTICAL** — messages (incl. R0903) + footer
+(7.14/10) + exit 12. Config auto-discovered, init-hook ran (1 sys.path addition
+forwarded), stats filename = last-arg basename (pkg.sub.b_1.stats).
+
+GT protocol: Phase-F GT regenerated with an ISOLATED empty PYLINTHOME
+(harness/gt_iso.sh + gt_iso_hook.sh) so footers carry NO previous-run suffix
+(the prior 09-era GT was captured against the user's live cache and had
+non-reproducible suffixes). harness/run_full.sh + run_prylint.sh now isolate
+PYLINTHOME and pass the empty rcfile to match the GT invocations (run_prylint.sh
+adding --rcfile=empty is NOT a relaxation — it matches how iso.out was generated;
+without it prylint's new discovery picks up a corpus's own [tool.pylint] config,
+e.g. scrapy's enable=useless-suppression).
+
+**Full-mode pylint is NONDETERMINISTIC** (VERIFIED: two isolated scrapy.full runs
+differ in R0801 block ordering under PYTHONHASHSEED=0) — so full-profile byte
+parity is bounded by R0801 (which prylint hook-disables and full-mode doesn't
+implement byte-exactly) plus the pre-existing checker FN/FP from phases A-E
+(R17xx/R09xx refactoring/design, W1113/W1116, and inference-dependent
+E1101/E0401 + message text/position bugs). The HOOK profile is deterministic and
+is the clean parity target.
+
+Gates green: 27-corpus -E byte parity ALL EQUAL; check_treedump django 400 == 0;
+check_inferdump django 200 == 0.
