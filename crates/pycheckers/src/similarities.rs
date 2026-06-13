@@ -331,35 +331,43 @@ struct CplLines {
 /// couples in INSERTION ORDER. The head absorbs the run's ends and grows
 /// effective by 1 per absorbed couple; absorbed keys are removed.
 fn remove_successive(all_couples: &mut indexmap::IndexMap<(usize, usize), CplLines>) {
-    // for couple in tuple(all_couples.keys()): snapshot of INSERTION order.
+    // pylint pops absorbed keys from the live dict (dict.pop is O(1)); our
+    // previous IndexMap::shift_remove is O(n) per pop -> O(n^2) on the
+    // pathological hash-bucket blowups (black profiling/list_huge: ~88M
+    // couples). Replicate the EXACT semantics with O(1) membership and a
+    // single order-preserving rebuild at the end:
+    //  * iterate keys in insertion order (the snapshot pylint takes),
+    //  * a key already absorbed by an earlier head is a no-op (its chain was
+    //    popped, so `while test in all_couples` never fires),
+    //  * a live head walks its (i+1,j+1) chain, absorbing each live successor
+    //    (ends + effective) and marking it removed,
+    //  * removed keys are dropped from the final map preserving relative order.
     let keys: Vec<(usize, usize)> = all_couples.keys().copied().collect();
-    for couple in keys {
-        let mut to_remove: Vec<(usize, usize)> = Vec::new();
+    let mut removed: rustc_hash::FxHashSet<(usize, usize)> =
+        rustc_hash::FxHashSet::default();
+    for couple in &keys {
+        if removed.contains(couple) {
+            continue;
+        }
         let mut test = (couple.0 + 1, couple.1 + 1);
-        // `while test in all_couples`: re-test against the LIVE dict. Absorbed
-        // keys are popped AFTER the loop, so a chain reads each successive
-        // couple once. When `couple` was itself absorbed+removed by an earlier
-        // head, every `test` in its chain is already gone -> the loop body
-        // never runs (so the get_mut below is never reached for a dead head).
-        while all_couples.contains_key(&test) {
-            let (te_first, te_second) = {
-                let t = all_couples[&test];
-                (t.first.1, t.second.1)
-            };
-            let Some(head) = all_couples.get_mut(&couple) else {
+        loop {
+            // live == present in the original map AND not yet absorbed.
+            if removed.contains(&test) {
+                break;
+            }
+            let Some(succ) = all_couples.get(&test).copied() else {
                 break;
             };
-            head.first.1 = te_first;
-            head.second.1 = te_second;
+            let head = all_couples.get_mut(couple).unwrap();
+            head.first.1 = succ.first.1;
+            head.second.1 = succ.second.1;
             head.effective += 1;
-            to_remove.push(test);
+            removed.insert(test);
             test = (test.0 + 1, test.1 + 1);
         }
-        // dict.pop preserves the order of the remaining keys; IndexMap
-        // shift_remove does the same (relative order intact).
-        for t in to_remove {
-            all_couples.shift_remove(&t);
-        }
+    }
+    if !removed.is_empty() {
+        all_couples.retain(|k, _| !removed.contains(k));
     }
 }
 
