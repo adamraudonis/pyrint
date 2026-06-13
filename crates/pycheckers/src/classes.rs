@@ -2636,8 +2636,11 @@ impl ClassCk {
     /// leave_classdef -> _check_attribute_defined_outside_init — E0203
     pub fn leave_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
         let eng = cx.eng;
-        // _check_unused_private_* : W disabled; safe_infer burn on
-        // type(self)-style calls only — skipped (TODO if FPs)
+        if cx.full {
+            self.check_unused_private_functions(cx, node);
+            self.check_unused_private_variables(cx, node);
+            self.check_unused_private_attributes(cx, node);
+        }
         let cname = eng.node_name(node).unwrap_or_default();
         // mixin_class_rgx `.*[Mm]ixin` re.match: contains Mixin/mixin
         if cname.contains("Mixin") || cname.contains("mixin") {
@@ -2730,6 +2733,268 @@ impl ClassCk {
                     );
                 }
             }
+        }
+    }
+
+    /// _check_unused_private_functions (class_checker.py:1061-1115) — W0238
+    fn check_unused_private_functions(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let node_name = eng.node_name(node).unwrap_or_default();
+        let funcs: Vec<GNode> = u::preorder(eng, node)
+            .into_iter()
+            .filter(|&g| is_funcdef(eng, g))
+            .collect();
+        let uses: Vec<GNode> = u::preorder(eng, node)
+            .into_iter()
+            .filter(|&g| {
+                eng.kind_is(g, |k| {
+                    matches!(k, NodeKind::Name { .. } | NodeKind::Attribute { .. })
+                })
+            })
+            .collect();
+        'funcs: for function_def in funcs {
+            let fname = eng.node_name(function_def).unwrap_or_default();
+            if !is_attr_private(&fname) {
+                continue;
+            }
+            let parent_scope = eng.scope(eng.parent(function_def).unwrap_or(function_def));
+            if is_funcdef(eng, parent_scope) {
+                // nested function: a Name use in the enclosing function
+                let used = u::preorder(eng, parent_scope).into_iter().any(|g| {
+                    let md = eng.md(g.m);
+                    matches!(&md.tree.nodes[g.n.idx()].kind,
+                        NodeKind::Name { name } if md.tree.s(*name) == fname)
+                });
+                if used {
+                    continue;
+                }
+            }
+            for &child in &uses {
+                let md = eng.md(child.m);
+                match &md.tree.nodes[child.n.idx()].kind {
+                    NodeKind::Name { name } => {
+                        if md.tree.s(*name) == fname {
+                            continue 'funcs; // used (break)
+                        }
+                    }
+                    NodeKind::Attribute { expr, attrname, .. } => {
+                        let an = md.tree.s(*attrname).to_string();
+                        let expr = GNode { m: child.m, n: *expr };
+                        drop(md);
+                        if an != fname || eng.scope(child) == function_def {
+                            continue;
+                        }
+                        let md = eng.md(expr.m);
+                        if let NodeKind::Name { name } = &md.tree.nodes[expr.n.idx()].kind {
+                            let en = md.tree.s(*name);
+                            if en == "self" || en == "cls" || en == node_name {
+                                continue 'funcs; // used
+                            }
+                        } else if matches!(
+                            md.tree.nodes[expr.n.idx()].kind,
+                            NodeKind::Call { .. }
+                        ) {
+                            drop(md);
+                            // type(self).__attrname
+                            if let Some(Value::Node(g)) = u::safe_infer(eng, cx.caches, expr) {
+                                if is_classdef(eng, g)
+                                    && eng.node_name(g).as_deref() == Some(node_name.as_str())
+                                {
+                                    continue 'funcs; // used
+                                }
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+            }
+            // unused: build the dotted repr through enclosing scopes
+            let mut name_stack: Vec<String> = Vec::new();
+            let mut curr = parent_scope;
+            while curr != node {
+                name_stack.push(eng.node_name(curr).unwrap_or_default());
+                curr = eng.scope(eng.parent(curr).unwrap_or(curr));
+            }
+            name_stack.reverse();
+            let outer = name_stack.join(".");
+            let args_str = {
+                let spec = eng.arg_spec(function_def);
+                match spec {
+                    Some(sp) => pyinfer::asstr::as_string(
+                        eng,
+                        sp.arguments_node,
+                    ),
+                    None => String::new(),
+                }
+            };
+            let function_repr =
+                format!("{}.{}({})", outer, fname, args_str);
+            let text = u::format_template(
+                "Unused private member `%s.%s`",
+                &[&node_name, function_repr.trim_start_matches('.')],
+            );
+            cx.emit_node(
+                "W0238",
+                u::msg_line(eng, function_def),
+                u::msg_col(eng, function_def),
+                text,
+            );
+        }
+    }
+
+    /// _check_unused_private_variables (class_checker.py:1117-1138) — W0238
+    fn check_unused_private_variables(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let node_name = eng.node_name(node).unwrap_or_default();
+        let assigns: Vec<GNode> = u::preorder(eng, node)
+            .into_iter()
+            .filter(|&g| eng.kind_is(g, |k| matches!(k, NodeKind::AssignName { .. })))
+            .collect();
+        let uses: Vec<GNode> = u::preorder(eng, node)
+            .into_iter()
+            .filter(|&g| {
+                eng.kind_is(g, |k| {
+                    matches!(k, NodeKind::Name { .. } | NodeKind::Attribute { .. })
+                })
+            })
+            .collect();
+        'assigns: for assign_name in assigns {
+            if eng
+                .parent(assign_name)
+                .map(|p| eng.kind_is(p, |k| matches!(k, NodeKind::Arguments(_))))
+                .unwrap_or(false)
+            {
+                continue;
+            }
+            let aname = name_of_str(eng, assign_name);
+            if !is_attr_private(&aname) {
+                continue;
+            }
+            for &child in &uses {
+                let md = eng.md(child.m);
+                match &md.tree.nodes[child.n.idx()].kind {
+                    NodeKind::Name { name } => {
+                        if md.tree.s(*name) == aname {
+                            continue 'assigns;
+                        }
+                    }
+                    NodeKind::Attribute { expr, attrname, .. } => {
+                        let is_name_expr = matches!(
+                            md.tree.nodes[expr.idx()].kind,
+                            NodeKind::Name { .. }
+                        );
+                        if !is_name_expr {
+                            continue 'assigns; // break (counted as used)
+                        }
+                        if md.tree.s(*attrname) == aname {
+                            if let NodeKind::Name { name } = &md.tree.nodes[expr.idx()].kind {
+                                let en = md.tree.s(*name);
+                                if en == "self" || en == "cls" || en == node_name {
+                                    continue 'assigns;
+                                }
+                            }
+                        }
+                    }
+                    _ => {}
+                }
+            }
+            let text = u::format_template(
+                "Unused private member `%s.%s`",
+                &[&node_name, &aname],
+            );
+            cx.emit_node(
+                "W0238",
+                u::msg_line(eng, assign_name),
+                u::msg_col(eng, assign_name),
+                text,
+            );
+        }
+    }
+
+    /// _check_unused_private_attributes (class_checker.py:1140-1190) — W0238
+    fn check_unused_private_attributes(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let node_name = eng.node_name(node).unwrap_or_default();
+        let assign_attrs: Vec<GNode> = u::preorder(eng, node)
+            .into_iter()
+            .filter(|&g| eng.kind_is(g, |k| matches!(k, NodeKind::AssignAttr { .. })))
+            .collect();
+        let attributes: Vec<GNode> = u::preorder(eng, node)
+            .into_iter()
+            .filter(|&g| eng.kind_is(g, |k| matches!(k, NodeKind::Attribute { .. })))
+            .collect();
+        'outer: for assign_attr in assign_attrs {
+            let (aname, aexpr): (String, GNode) = {
+                let md = eng.md(assign_attr.m);
+                match &md.tree.nodes[assign_attr.n.idx()].kind {
+                    NodeKind::AssignAttr { expr, attrname } => (
+                        md.tree.s(*attrname).to_string(),
+                        GNode { m: assign_attr.m, n: *expr },
+                    ),
+                    _ => continue,
+                }
+            };
+            if !is_attr_private(&aname) {
+                continue;
+            }
+            let aexpr_name: Option<String> = {
+                let md = eng.md(aexpr.m);
+                match &md.tree.nodes[aexpr.n.idx()].kind {
+                    NodeKind::Name { name } => Some(md.tree.s(*name).to_string()),
+                    _ => None,
+                }
+            };
+            let Some(aexpr_name) = aexpr_name else { continue };
+            // __new__ returned object names
+            let mut acceptable: Vec<String> = vec!["self".to_string()];
+            let scope = eng.scope(assign_attr);
+            if is_funcdef(eng, scope) && eng.node_name(scope).as_deref() == Some("__new__") {
+                for r in u::preorder(eng, scope) {
+                    let md = eng.md(r.m);
+                    if let NodeKind::Return { value: Some(v) } = &md.tree.nodes[r.n.idx()].kind {
+                        if let NodeKind::Name { name } = &md.tree.nodes[v.idx()].kind {
+                            acceptable.push(md.tree.s(*name).to_string());
+                        }
+                    }
+                }
+            }
+            for &attribute in &attributes {
+                let md = eng.md(attribute.m);
+                let NodeKind::Attribute { expr, attrname, .. } =
+                    &md.tree.nodes[attribute.n.idx()].kind
+                else {
+                    continue;
+                };
+                if md.tree.s(*attrname) != aname {
+                    continue;
+                }
+                let en: Option<&str> = match &md.tree.nodes[expr.idx()].kind {
+                    NodeKind::Name { name } => Some(md.tree.s(*name)),
+                    _ => None,
+                };
+                let Some(en) = en else { continue };
+                if (aexpr_name == "cls" || aexpr_name == node_name)
+                    && (en == "cls" || en == "self" || en == node_name)
+                {
+                    continue 'outer;
+                }
+                if acceptable.iter().any(|a| *a == aexpr_name) && en == "self" {
+                    continue 'outer;
+                }
+                if aexpr_name == en && en == node_name {
+                    continue 'outer;
+                }
+            }
+            let text = u::format_template(
+                "Unused private member `%s.%s`",
+                &[&node_name, &aname],
+            );
+            cx.emit_node(
+                "W0238",
+                u::msg_line(eng, assign_attr),
+                u::msg_col(eng, assign_attr),
+                text,
+            );
         }
     }
 
@@ -3367,6 +3632,10 @@ fn called_in_methods(cx: &mut WalkCx, func: GNode, klass: GNode, methods: &[&str
         }
     }
     false
+}
+
+fn name_of_str(eng: &Engine, g: GNode) -> String {
+    u::name_gsym(eng, g).map(|s| eng.sname(s)).unwrap_or_default()
 }
 
 /// `inferred.__class__.__name__` for E0243
