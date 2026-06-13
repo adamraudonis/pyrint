@@ -189,15 +189,12 @@ impl DesignCk {
     }
 
     /// visit_classdef (design_analysis.py:447-481) — R0901, R0902.
-    /// `gate_r0901` etc. tell us which of the four messages are enabled.
-    pub fn visit_classdef(
-        &mut self,
-        cx: &mut WalkCx,
-        node: GNode,
-        gate_r0901: bool,
-        gate_r0902: bool,
-    ) {
-        if gate_r0901 {
+    /// pylint computes both metrics and calls add_message unconditionally;
+    /// the per-line is_message_enabled filter runs downstream. We emit
+    /// unconditionally (the visitor-registration gate design_visit_classdef =
+    /// any(R0901..R0904) is the package-scope analog, enforced by the walker).
+    pub fn visit_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
+        {
             // _get_parents: work-list DFS over ancestors(recurs=False),
             // skipping ignored qnames (and their ancestors), dedup by node.
             let nb_parents = self.count_parents(cx, node);
@@ -210,7 +207,7 @@ impl DesignCk {
                 );
             }
         }
-        if gate_r0902 {
+        {
             // filtered_attrs = [k for (k,v) in instance_attrs.items()
             //                   if v[0].root() is root]
             let root = cx.eng.root(node);
@@ -254,15 +251,12 @@ impl DesignCk {
     }
 
     /// leave_classdef (design_analysis.py:483-527) — R0904 then R0903.
-    pub fn leave_classdef(
-        &mut self,
-        cx: &mut WalkCx,
-        node: GNode,
-        gate_r0904: bool,
-        gate_r0903: bool,
-    ) {
+    /// Emits unconditionally (pylint has no per-message guard); the per-line
+    /// is_message_enabled filter runs downstream. The R0903 exemption / type
+    /// early-return matches pylint's control flow exactly.
+    pub fn leave_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
         // my_methods = count of mymethods() whose name has no leading "_"
-        if gate_r0904 {
+        {
             let my_methods = self
                 .mymethods(cx, node)
                 .iter()
@@ -278,9 +272,6 @@ impl DesignCk {
             }
         }
 
-        if !gate_r0903 {
-            return;
-        }
         // exclude-too-few-public-methods default [] -> exclusion #1 skipped.
         // exclusion #2: if node.type != "class" or _is_exempt: return
         if cx.eng.class_type(node) != "class" || self.is_exempt_from_public_methods(cx, node) {
@@ -440,14 +431,19 @@ impl DesignCk {
 
     /// visit_functiondef / visit_asyncfunctiondef (design_analysis.py:538-596)
     /// — R0913, R0917, R0914; pushes the return + statement frames.
-    pub fn visit_functiondef(
-        &mut self,
-        cx: &mut WalkCx,
-        node: GNode,
-        gate_r0913: bool,
-        gate_r0917: bool,
-        gate_r0914: bool,
-    ) {
+    ///
+    /// pylint's visit_functiondef calls `add_message` UNCONDITIONALLY (no
+    /// per-message guard in the method body); `add_message` does the per-LINE
+    /// `is_message_enabled` check. So a package-disabled R0913/R0914/R0917 can
+    /// still emit when an in-module pragma re-enables it at the node's line
+    /// (the "late-disable re-enable" rule — e.g. salt restartcheck.py:112
+    /// where a module-level `disable=too-many-locals` at line 475 enables
+    /// R0914 for the lines before it). We therefore emit unconditionally and
+    /// let the downstream per-line filter (run.rs emit closure) drop the
+    /// package-disabled, not-pragma-enabled cases. The VISITOR registration
+    /// gate (design_visit_func = any(R0911..R0917,W1113)) is the package-scope
+    /// `_is_method_enabled` analog and is enforced by the walker.
+    pub fn visit_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
         self.returns.push(0);
 
         let md = cx.eng.md(node.m);
@@ -498,7 +494,7 @@ impl DesignCk {
         let ignored_args_num = ignored_pos_args_num + ignored_kwonly;
 
         // R0913: compare argnum (ignored excluded), report len(args) (bug)
-        if gate_r0913 {
+        {
             let argnum = len_args - ignored_args_num;
             if argnum > MAX_ARGS {
                 cx.emit_node(
@@ -510,7 +506,7 @@ impl DesignCk {
             }
         }
         // R0917: pos_args_count = len(args) - len(kwonlyargs) - ignored_pos
-        if gate_r0917 {
+        {
             let pos_args_count = len_args - n_kwonly as i64 - ignored_pos_args_num;
             if pos_args_count > MAX_POSITIONAL_ARGS {
                 cx.emit_node(
@@ -524,7 +520,7 @@ impl DesignCk {
             }
         }
         // R0914: locnum = len(node.locals) - ignored_args_num; -1 if "_" local
-        if gate_r0914 {
+        {
             let (n_locals, has_underscore) = {
                 let md2 = cx.eng.md(node.m);
                 let locals = md2.locals.borrow();
@@ -553,16 +549,12 @@ impl DesignCk {
     }
 
     /// leave_functiondef (design_analysis.py:605-632) — R0911, R0912, R0915.
-    pub fn leave_functiondef(
-        &mut self,
-        cx: &mut WalkCx,
-        node: GNode,
-        gate_r0911: bool,
-        gate_r0912: bool,
-        gate_r0915: bool,
-    ) {
+    /// Emits unconditionally (pylint calls add_message with no per-message
+    /// guard); the per-line is_message_enabled filter runs downstream. The
+    /// frame pops (returns/stmts) must happen regardless of enablement.
+    pub fn leave_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
         let returns = self.returns.pop().unwrap_or(0);
-        if gate_r0911 && returns > MAX_RETURNS {
+        if returns > MAX_RETURNS {
             cx.emit_node(
                 "R0911",
                 u::msg_line(cx.eng, node),
@@ -571,7 +563,7 @@ impl DesignCk {
             );
         }
         let branches = self.branches.get(&node).copied().unwrap_or(0);
-        if gate_r0912 && branches > MAX_BRANCHES {
+        if branches > MAX_BRANCHES {
             cx.emit_node(
                 "R0912",
                 u::msg_line(cx.eng, node),
@@ -580,7 +572,7 @@ impl DesignCk {
             );
         }
         let stmts = self.stmts.pop().unwrap_or(0);
-        if gate_r0915 && stmts > MAX_STATEMENTS {
+        if stmts > MAX_STATEMENTS {
             cx.emit_node(
                 "R0915",
                 u::msg_line(cx.eng, node),
@@ -613,11 +605,12 @@ impl DesignCk {
         self.inc_all_stmts(branches);
     }
 
-    /// visit_if (gated R0916|R0912): boolean-expr check + branches + stmts.
-    pub fn visit_if(&mut self, cx: &mut WalkCx, node: GNode, gate_r0916: bool) {
-        if gate_r0916 {
-            self.check_boolean_expressions(cx, node);
-        }
+    /// visit_if (registered on R0916|R0912): boolean-expr check (R0916) +
+    /// branches + stmts. pylint calls _check_boolean_expressions
+    /// unconditionally; we emit R0916 unconditionally and let the downstream
+    /// per-line filter drop the package-disabled cases.
+    pub fn visit_if(&mut self, cx: &mut WalkCx, node: GNode) {
+        self.check_boolean_expressions(cx, node);
         let md = cx.eng.md(node.m);
         let mut branches = 1i64;
         if let NodeKind::If { orelse, .. } = &md.tree.nodes[node.n.idx()].kind {

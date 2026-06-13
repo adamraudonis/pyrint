@@ -206,20 +206,14 @@ pub struct Prepared {
     pub design_leave_func: bool,
     /// visit_if gate: R0916|R0912
     pub design_visit_if: bool,
-    /// individual message enable flags (the per-message `if gate` inside the
-    /// shared visit/leave methods — a visitor can be registered while only a
-    /// subset of its messages emit).
-    pub d_r0901: bool,
-    pub d_r0902: bool,
-    pub d_r0903: bool,
-    pub d_r0904: bool,
-    pub d_r0911: bool,
-    pub d_r0912: bool,
-    pub d_r0913: bool,
-    pub d_r0914: bool,
-    pub d_r0915: bool,
-    pub d_r0916: bool,
-    pub d_r0917: bool,
+    // NOTE: no per-message d_rXXXX flags. pylint's design visitors call
+    // add_message UNCONDITIONALLY once the visitor is registered (the
+    // @only_required_for_messages decorator only gates REGISTRATION, package-
+    // scope, via design_visit_*/design_leave_*). add_message then does the
+    // per-LINE is_message_enabled check. So a package-disabled design message
+    // (e.g. R0914 under the hook profile) still emits when an in-module pragma
+    // re-enables it at the node's line. We emit unconditionally and let the
+    // downstream per-line filter (run.rs) drop the package-disabled cases.
     /// SimilaritiesChecker (R0801) prepared: default --reports=n -> RP0801
     /// disabled, so prepared iff R0801 enabled. Gates per-module
     /// process_module (lineset collection) + close() emission.
@@ -327,17 +321,6 @@ impl Prepared {
             ]),
             design_leave_func: any(&["R0911", "R0912", "R0913", "R0914", "R0915"]),
             design_visit_if: any(&["R0916", "R0912"]),
-            d_r0901: enabled("R0901"),
-            d_r0902: enabled("R0902"),
-            d_r0903: enabled("R0903"),
-            d_r0904: enabled("R0904"),
-            d_r0911: enabled("R0911"),
-            d_r0912: enabled("R0912"),
-            d_r0913: enabled("R0913"),
-            d_r0914: enabled("R0914"),
-            d_r0915: enabled("R0915"),
-            d_r0916: enabled("R0916"),
-            d_r0917: enabled("R0917"),
             sim_kept: full && enabled("R0801"),
         }
     }
@@ -656,20 +639,13 @@ impl Walker<'_> {
         };
         match kind_tag {
             Tag::ClassDef if self.prep.design_visit_classdef => {
-                self.design
-                    .visit_classdef(cx, g, self.prep.d_r0901, self.prep.d_r0902);
+                self.design.visit_classdef(cx, g);
             }
             Tag::FunctionDef | Tag::AsyncFunctionDef if self.prep.design_visit_func => {
-                self.design.visit_functiondef(
-                    cx,
-                    g,
-                    self.prep.d_r0913,
-                    self.prep.d_r0917,
-                    self.prep.d_r0914,
-                );
+                self.design.visit_functiondef(cx, g);
             }
             Tag::If if self.prep.design_visit_if => {
-                self.design.visit_if(cx, g, self.prep.d_r0916);
+                self.design.visit_if(cx, g);
             }
             // ungated visitors (always registered when the checker is kept).
             // visit_try is registered only for cid "try"; TryStar (cid
@@ -1306,11 +1282,12 @@ impl Walker<'_> {
             }
             Tag::ClassDef => {
                 self.classes.leave_classdef(cx, g);
-                // MisdesignChecker.leave_classdef (R0904 then R0903), gated on
-                // R0903|R0904; runs after Class, before Refactoring.
+                // MisdesignChecker.leave_classdef (R0904 then R0903),
+                // registered iff R0903|R0904 enabled package-wise; emits
+                // unconditionally (per-line filter downstream). Runs after
+                // Class, before Refactoring.
                 if self.prep.design_leave_classdef {
-                    self.design
-                        .leave_classdef(cx, g, self.prep.d_r0904, self.prep.d_r0903);
+                    self.design.leave_classdef(cx, g);
                 }
                 // RefactoringChecker.leave_classdef (R1732 class-scope flush),
                 // @only_required_for_messages("consider-using-with")
@@ -1322,15 +1299,11 @@ impl Walker<'_> {
             Tag::FunctionDef => {
                 self.classes.leave_functiondef(cx, g);
                 // MisdesignChecker.leave_functiondef (R0911, R0912, R0915),
-                // gated on R0911|R0912|R0913|R0914|R0915.
+                // registered iff R0911|R0912|R0913|R0914|R0915 enabled
+                // package-wise; emits unconditionally (per-line filter
+                // downstream).
                 if self.prep.design_leave_func {
-                    self.design.leave_functiondef(
-                        cx,
-                        g,
-                        self.prep.d_r0911,
-                        self.prep.d_r0912,
-                        self.prep.d_r0915,
-                    );
+                    self.design.leave_functiondef(cx, g);
                 }
                 // RefactoringChecker.leave_functiondef fires for sync DEF only
                 // (exact-name dispatch: async never reaches it).
@@ -1342,13 +1315,7 @@ impl Walker<'_> {
             Tag::AsyncFunctionDef => {
                 self.classes.leave_functiondef(cx, g);
                 if self.prep.design_leave_func {
-                    self.design.leave_functiondef(
-                        cx,
-                        g,
-                        self.prep.d_r0911,
-                        self.prep.d_r0912,
-                        self.prep.d_r0915,
-                    );
+                    self.design.leave_functiondef(cx, g);
                 }
                 self.vars.leave_functiondef(cx, g);
             }
