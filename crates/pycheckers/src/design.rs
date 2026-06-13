@@ -305,7 +305,18 @@ impl DesignCk {
         let locals = md.locals.borrow();
         let mut out = Vec::new();
         if let Some(scope_locals) = locals.get(&node.n) {
-            for (_name, bindings) in scope_locals.iter() {
+            for (name, bindings) in scope_locals.iter() {
+                // astroid injects __module__/__qualname__ (Const) and
+                // __annotations__ (Dict) as the FIRST class-local binding at
+                // class creation (ClassDef.implicit_locals); our locals map
+                // omits the synthetic node (getattr injects it lazily), so a
+                // user `def __module__` would otherwise be the first binding.
+                // values()[0] for these names is ALWAYS the synthetic
+                // non-FunctionDef -> they never appear in mymethods().
+                let nm = cx.eng.sname(*name);
+                if nm == "__module__" || nm == "__qualname__" || nm == "__annotations__" {
+                    continue;
+                }
                 if let Some(&first) = bindings.first() {
                     let fmd = cx.eng.md(first.m);
                     if matches!(
