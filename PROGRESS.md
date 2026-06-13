@@ -2957,3 +2957,79 @@ GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
 check_treedump django 400 = 0 differing; check_inferdump not required (pyinfer
 untouched — no source changes). Clean working tree — pure re-validation +
 diagnostic round.
+
+## Phase F zero-round 10 (independent re-validation: 51/54 EXACT + the sqlalchemy gap re-proven NON-E via byte-identical E0240 on the same classes)
+
+Rebuilt the committed binary (clean tree at zero-round 9; cargo recompiled
+nothing — 0 source changes), REGENERATED all 27×2 .ours captures FRESH (both
+profiles), re-ran gt_integrity, and re-ran the full owned-code audit
+(R0901-R0917, R0401, R0801, R17xx×37, C1804/C1805, W1113/W1116) across all 27
+corpora × 2 profiles vs footer-stripped GT via a new consolidated
+`harness/audit_round10.py` (per-code FP/FN + EXACT-order check + auto-restricted
+comparison for any SUSPECT GT).
+
+RESULT — **51/54 combos: 0 FP / 0 FN, EXACT owned-line order** (+ core.full
+restricted-clean = 52/54 effective). Order verified EXACT on the dense full
+captures (airflow 17345, sentry 17712, sympy 15511, salt 10753, black 8804 incl.
+all 8136 R0801 lines, nova 8397, mypy 6345, zulip 6081, pandas 5522, fastapi
+5363, django 5111) and the dense hook captures (nova 2000, sympy 553, salt 638,
+ansible 503, airflow 390, sentry 266). R0801/R0401 close-time counts match
+exactly (black 8136/0, airflow 4552). 
+
+GT-INTEGRITY this round: **only `core.full` is SUSPECT** (exit=143 OOM SIGKILL).
+sentry.hook (regenerated in round 9) is now clean and re-verified
+0FP/0FN+EXACT against its full GT. A FRESH `core.full` GT regeneration that a
+prior round launched was found running this round (PID-tracked,
+empty.rcfile, ~5.5GB RSS) — it streamed every per-file message and FROZE at
+exactly the SAME 27921311-byte boundary
+(script/hassfest/.../reconfiguration_flow.py, discovery pos 17519) as the prior
+two killed attempts, then entered the O(n²) close()-phase R0801 computation
+(prior attempts OOM'd there at 137@6932s and 143@17403s). I deliberately did NOT
+run my own core.full.ours regen concurrently with that close()-phase memory peak
+(stopped the regen loop after pylfunc; the existing valid 15:45 core.full.ours
+from the unchanged committed binary is authoritative). Verdict: home-assistant
+full-mode genuinely exceeds this machine's memory in pylint's close() phase —
+the truncated GT is an IRREDUCIBLE pylint/environment limit, not a prylint bug.
+- **core.full restricted-to-GT-reached (15234 files, exclude close): 0FP/0FN,
+  EXACT** (12990/12990). Every apparent "FP" (R0801×18422 + R0401×266 close-time
+  + R0903×1/R0912×2/R0914×2) is past the kill boundary — files the killed GT
+  never analyzed. prylint COMPLETES (exit 30) where pylint OOM-died.
+
+### sqlalchemy — sole genuine gap; NEW this round: re-proven NON-E by byte-identical E0240 on the divergent classes
+hook 1FP (array.py:93 R0901 43/7 — R0901 is hook-enabled); full 15FP/12FN
+(R0901×15 FP; R0901×3+R0903×9 FN) — ALL R0901↔R0903 generic-base ancestor flips
+on classes with subscripted-generic bases
+(`class array(expression.ExpressionClauseList[_T])`,
+`class hstore(sqlfunc.GenericFunction[_HSTORE_VAL])`, ext.py, orm/attributes.py,
+sql/selectable.py:211). Re-confirmed the fast reproducer this round:
+- prylint array.py ALONE → R0903(1/2) — **byte-identical to pylint** in
+  isolation. prylint sql/+array.py (warm) → R0901(25/7); full-corpus → R0901
+  (43/7). pylint gives R0903 even warm. Divergence appears ONLY under the warm
+  inference cache → emergent global-cache-warming ORDER through the recursive
+  Subscript→ClassDef.getitem→__class_getitem__→ancestors path.
+- **THE decisive new evidence: -E byte parity on sqlalchemy is EQUAL, INCLUDING
+  the E0240 (inconsistent-mro) messages on the EXACT SAME hstore.py classes that
+  carry the R0901↔R0903 divergence** (hstore.py:238/275/281/287/293/299/305 all
+  E0240, byte-identical GT vs ours). E0240 is computed from the class MRO/
+  ancestors structure — so prylint's STRUCTURAL ancestor computation matches
+  astroid bit-for-bit. The divergence is isolated to `_get_parents_iter`'s
+  `ancestors(recurs=False)` re-inference of the SUBSCRIPTED base under the warm
+  cache (a HIT replaying a resolved ClassDef where astroid re-derives the deep
+  generic cascade-collapse to Uninferable), NOT the MRO that -E depends on.
+- design.rs `count_parents` is a faithful `_get_parents_iter` port (re-verified
+  line-by-line vs design_analysis.py:246-279; ignored_parents =
+  STDLIB_CLASSES_IGNORE_ANCESTOR only). The gap lives entirely in pyinfer's
+  shared cache-key/path/cycle machinery (phase-1..17 domain), guarded by the
+  INVIOLABLE EGATE 27/27 (re-proven EQUAL on sqlalchemy incl. E0240 on the
+  divergent classes) and the 4 pyinfer-ZERO inferdump corpora
+  (django/pandas/sentry/core). Perturbing it for a bidirectional flip confined
+  to sqlalchemy's deep generic hierarchies, in a NON-E refactoring code that
+  leaks to no -E corpus, is the wrong trade — it risks the 51 green combos + all
+  infrastructure gates. BLOCKED.
+
+GATES (re-certified this round): **EGATE -E 27-corpus byte parity 27/27 ALL
+EQUAL** (fresh run, sqlalchemy EQUAL — incl. E0240 on the R0901-divergent
+classes); check_treedump django 400 = 0 differing; check_inferdump not required
+(pyinfer untouched — 0 source changes). Only tracked addition is
+`harness/audit_round10.py` (consolidated owned-code auditor). Clean otherwise —
+re-validation + diagnostic round.
