@@ -1612,7 +1612,7 @@ fn is_abstract_class_name(name: &str) -> bool {
 }
 
 /// utils.is_protocol_class (utils.py:1677-1697)
-fn is_protocol_class(eng: &Engine, cls: GNode) -> bool {
+pub fn is_protocol_class(eng: &Engine, cls: GNode) -> bool {
     const NAMES: &[&str] = &["typing.Protocol", "typing_extensions.Protocol", ".Protocol"];
     if NAMES.contains(&eng.qname(cls).as_str()) {
         return true;

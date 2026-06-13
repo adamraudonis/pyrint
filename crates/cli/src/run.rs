@@ -182,7 +182,7 @@ pub fn run(opts: &RunOpts) -> i32 {
     // full-mode prepared/only_required gates for the new checkers (all
     // false under -E: those checkers are config-dropped there)
     let enabled_by_id = |m: &str| global.enabled(store().by_msgid[m]);
-    let prep = pycheckers::walker::Prepared::from_enabled(&enabled_by_id);
+    let prep = pycheckers::walker::Prepared::from_enabled(&enabled_by_id, !opts.errors_only);
     // token-checker preparation (format / miscellaneous): -E drops both
     let format_prepared = prep.format;
     let misc_prepared = !opts.errors_only && enabled_by_id("W0511");
@@ -385,6 +385,48 @@ pub fn run(opts: &RunOpts) -> i32 {
                             )
                         },
                     ));
+                    // ---- checker close() phase: R0401 cyclic-import
+                    // (imports.py:484-490). Attributed to the last checked
+                    // module; enablement is CONFIG-level (line=None path) —
+                    // per-edge pragma suppression already happened at graph
+                    // build time (probed on the pinned venv).
+                    if prep.full && k == 0 {
+                        let idx = store().by_msgid["R0401"];
+                        if is_message_enabled(global, None, idx, None) {
+                            let mut texts: Vec<String> = Vec::new();
+                            lint_run.imports.close_cycles(&mut |t| texts.push(t));
+                            if !texts.is_empty() {
+                                let mut out = ModuleOut {
+                                    msgs: Vec::new(),
+                                    stats: Stats::default(),
+                                    linted: false,
+                                };
+                                if let Some(&(i, _)) =
+                                    trees.iter().map(|(i, p)| (*i, p)).collect::<Vec<_>>().last()
+                                {
+                                    let item = &items[i];
+                                    let module = item
+                                        .name
+                                        .clone();
+                                    let path = discover::absolute(&item.filepath)
+                                        .replacen(strip_prefix.as_str(), "", 1);
+                                    for t in texts {
+                                        out.stats.count("R0401");
+                                        out.msgs.push(OutMsg {
+                                            module: module.clone(),
+                                            path: path.clone(),
+                                            line: 1,
+                                            col: 0,
+                                            msgid: "R0401",
+                                            symbol: "cyclic-import",
+                                            text: format!("Cyclic import ({t})"),
+                                        });
+                                    }
+                                    all.push((i, out));
+                                }
+                            }
+                        }
+                    }
                 }
                 all
             })
@@ -830,6 +872,13 @@ fn lint_tree(
                                 None => true, // unknown ids treated enabled
                             }
                         };
+                        // line=None path: config-level state only
+                        let cfg_enabled = |msgid: &str| -> bool {
+                            match store().by_msgid.get(msgid) {
+                                Some(&idx) => global.enabled(idx),
+                                None => true,
+                            }
+                        };
                         let add_ignored = |msgid: &str, line: u32| {
                             // linter.add_ignored_message (pylinter.py:1320-44)
                             if let Some(&idx) = store().by_msgid.get(msgid) {
@@ -843,6 +892,7 @@ fn lint_tree(
                             &mut emit,
                             &mut import_oracle,
                             &is_enabled,
+                            &cfg_enabled,
                             &add_ignored,
                             &crashed,
                         );

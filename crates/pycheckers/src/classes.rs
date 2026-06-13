@@ -8,6 +8,7 @@
 use std::rc::Rc;
 
 use pyast::tree::{ConstValue, NodeKind};
+use pyast::NodeId;
 use pyinfer::ctx::Ctx;
 use pyinfer::graph::{Engine, FType};
 use pyinfer::value::{GNode, GSym, Value, NV};
@@ -37,6 +38,68 @@ pub fn is_method(eng: &Engine, func: GNode) -> bool {
         Some(p) => is_classdef(eng, eng.frame(p)),
         None => false,
     }
+}
+
+/// exclude-protected default config (class_checker.py:806-816)
+const EXCLUDE_PROTECTED: &[&str] = &["_asdict", "_fields", "_replace", "_source", "_make", "os._exit"];
+
+/// utils.is_attr_protected (utils.py:666-674)
+fn is_attr_protected(attrname: &str) -> bool {
+    attrname.starts_with('_')
+        && attrname != "_"
+        && !(attrname.starts_with("__") && attrname.ends_with("__"))
+}
+
+/// utils.get_outer_class (utils.py:702-706)
+fn get_outer_class(eng: &Engine, class_node: GNode) -> Option<GNode> {
+    let parent = eng.parent(class_node)?;
+    let pk = eng.frame(parent);
+    if is_classdef(eng, pk) {
+        Some(pk)
+    } else {
+        None
+    }
+}
+
+/// ClassDef.basenames: as_string of each base expression
+fn class_basenames(eng: &Engine, cls: GNode) -> Vec<String> {
+    class_bases_nodes(eng, cls)
+        .into_iter()
+        .map(|b| u::as_string(eng, b))
+        .collect()
+}
+
+/// _is_class_or_instance_attribute (class_checker.py:2001-2016)
+fn is_class_or_instance_attribute(eng: &Engine, name: GSym, klass: GNode) -> bool {
+    if eng.class_getattr(klass, name, None, true).is_ok() {
+        return true;
+    }
+    matches!(eng.instance_attr(klass, name, None), Ok(v) if !v.is_empty())
+}
+
+/// _is_called_inside_special_method (class_checker.py:1971-1975)
+fn is_called_inside_special_method(eng: &Engine, node: GNode) -> bool {
+    let frame = eng.frame(node);
+    match eng.node_name(frame) {
+        Some(n) => !n.is_empty() && u::PYMETHODS.contains(&n.as_str()),
+        None => false,
+    }
+}
+
+/// utils._is_property_kind (utils.py:818-830)
+fn is_property_kind(eng: &Engine, func: GNode, kinds: &[&str]) -> bool {
+    if !is_funcdef(eng, func) {
+        return false;
+    }
+    for dec in tc::decorator_nodes_pub(eng, func) {
+        let md = eng.md(dec.m);
+        if let NodeKind::Attribute { attrname, .. } = &md.tree.nodes[dec.n.idx()].kind {
+            if kinds.contains(&md.tree.s(*attrname)) {
+                return true;
+            }
+        }
+    }
+    false
 }
 
 /// utils.node_frame_class (utils.py:677-699): walk frames to the class
@@ -768,7 +831,9 @@ impl ClassCk {
     /// ClassChecker.visit_attribute (class_checker.py:1680-1697)
     pub fn visit_attribute(&mut self, cx: &mut WalkCx, node: GNode) {
         let eng = cx.eng;
-        // _check_super_without_brackets: W0245 disabled, no inference burn
+        if cx.full {
+            self.check_super_without_brackets(cx, node);
+        }
         let md = eng.md(node.m);
         let (expr, attrname) = match &md.tree.nodes[node.n.idx()].kind {
             NodeKind::Attribute { expr, attrname, .. } => {
@@ -779,8 +844,303 @@ impl ClassCk {
         drop(md);
         if self.is_mandatory_method_param(eng, expr) {
             self.set_accessed(eng, node, attrname);
+            return;
         }
-        // protected-access disabled -> return
+        if (cx.cfg_enabled)("W0212") {
+            self.check_protected_attribute_access(cx, node, expr, attrname);
+        }
+    }
+
+    /// _check_super_without_brackets (class_checker.py:1699-1712) — W0245
+    fn check_super_without_brackets(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let frame = eng.frame(node);
+        if !is_funcdef(eng, frame) {
+            return;
+        }
+        let parent_frame_is_class = eng
+            .parent(frame)
+            .map(|p| is_classdef(eng, eng.frame(p)))
+            .unwrap_or(false);
+        if !parent_frame_is_class {
+            return;
+        }
+        if !eng
+            .parent(node)
+            .map(|p| eng.kind_is(p, |k| matches!(k, NodeKind::Call { .. })))
+            .unwrap_or(false)
+        {
+            return;
+        }
+        let expr: Option<GNode> = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Attribute { expr, .. } => Some(GNode { m: node.m, n: *expr }),
+                _ => None,
+            }
+        };
+        let Some(expr) = expr else { return };
+        let is_super_name = {
+            let md = eng.md(expr.m);
+            matches!(&md.tree.nodes[expr.n.idx()].kind,
+                NodeKind::Name { name } if md.tree.s(*name) == "super")
+        };
+        if is_super_name {
+            cx.emit_node(
+                "W0245",
+                u::lineno(eng, expr),
+                u::col_offset(eng, expr).max(0) as i64,
+                "Super call without brackets".to_string(),
+            );
+        }
+    }
+
+    /// ClassChecker.visit_assign (class_checker.py:1826-1837)
+    pub fn visit_assign(&mut self, cx: &mut WalkCx, assign_node: GNode) {
+        let eng = cx.eng;
+        self.check_classmethod_declaration(cx, assign_node);
+        let t0: Option<GNode> = {
+            let md = eng.md(assign_node.m);
+            match &md.tree.nodes[assign_node.n.idx()].kind {
+                NodeKind::Assign { targets, .. } => {
+                    targets.first().map(|&t| GNode { m: assign_node.m, n: t })
+                }
+                _ => None,
+            }
+        };
+        let Some(node) = t0 else { return };
+        let (expr, attrname) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::AssignAttr { expr, attrname } => {
+                    (GNode { m: node.m, n: *expr }, eng.g(&md, *attrname))
+                }
+                _ => return,
+            }
+        };
+        if self.is_mandatory_method_param(eng, expr) {
+            return;
+        }
+        self.check_protected_attribute_access(cx, node, expr, attrname);
+    }
+
+    /// _check_classmethod_declaration (class_checker.py:1839-1870) —
+    /// R0202/R0203
+    fn check_classmethod_declaration(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let (value, t0): (GNode, Option<NodeId>) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Assign { value, targets } => {
+                    (GNode { m: node.m, n: *value }, targets.first().copied())
+                }
+                _ => return,
+            }
+        };
+        let (func_kind, method_name): (u8, GSym) = {
+            let md = eng.md(value.m);
+            let NodeKind::Call { func, args, .. } = &md.tree.nodes[value.n.idx()].kind else {
+                return;
+            };
+            let kind = match &md.tree.nodes[func.idx()].kind {
+                NodeKind::Name { name } => match md.tree.s(*name) {
+                    "classmethod" => 1u8,
+                    "staticmethod" => 2u8,
+                    _ => return,
+                },
+                _ => return,
+            };
+            let Some(&a0) = args.first() else { return };
+            let mn = match &md.tree.nodes[a0.idx()].kind {
+                NodeKind::Name { name } => eng.g(&md, *name),
+                _ => return,
+            };
+            (kind, mn)
+        };
+        let parent_class = eng.scope(node);
+        if !is_classdef(eng, parent_class) {
+            return;
+        }
+        // mymethods(): locals values that are FunctionDef
+        let has_method = {
+            let md = eng.md(parent_class.m);
+            let l = md.locals.borrow();
+            match l.get(&parent_class.n) {
+                Some(map) => map.iter().any(|(_, v)| {
+                    v.first()
+                        .map(|&g| {
+                            is_funcdef(eng, g)
+                                && eng.node_name(g).as_deref()
+                                    == Some(eng.sname(method_name).as_str())
+                        })
+                        .unwrap_or(false)
+                }),
+                None => false,
+            }
+        };
+        if has_method {
+            let Some(t0) = t0 else { return };
+            let tg = GNode { m: node.m, n: t0 };
+            let (msgid, text) = if func_kind == 1 {
+                ("R0202", "Consider using a decorator instead of calling classmethod")
+            } else {
+                ("R0203", "Consider using a decorator instead of calling staticmethod")
+            };
+            cx.emit_node(
+                msgid,
+                u::lineno(eng, tg),
+                u::col_offset(eng, tg).max(0) as i64,
+                text.to_string(),
+            );
+        }
+    }
+
+    /// _check_protected_attribute_access (class_checker.py:1872-1969) — W0212
+    fn check_protected_attribute_access(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        expr: GNode,
+        attrname: GSym,
+    ) {
+        let eng = cx.eng;
+        let attr = eng.sname(attrname);
+        if !is_attr_protected(&attr) || EXCLUDE_PROTECTED.contains(&attr.as_str()) {
+            return;
+        }
+        if u::is_node_in_type_annotation_context(eng, node) {
+            return;
+        }
+        let emit = |cx: &mut WalkCx| {
+            cx.emit_node(
+                "W0212",
+                u::lineno(cx.eng, node),
+                u::col_offset(cx.eng, node).max(0) as i64,
+                u::format_template(
+                    "Access to a protected member %s of a client class",
+                    &[&attr],
+                ),
+            );
+        };
+        // module/class-level exclude-protected qualification
+        let inferred = u::safe_infer(eng, cx.caches, expr);
+        if let Some(Value::Node(g)) = &inferred {
+            if (is_classdef(eng, *g) || u::is_module(eng, *g))
+                && EXCLUDE_PROTECTED.contains(
+                    &format!("{}.{}", eng.node_name(*g).unwrap_or_default(), attr).as_str(),
+                )
+            {
+                return;
+            }
+        }
+        let klass = node_frame_class(eng, node);
+        let Some(klass) = klass else {
+            emit(cx);
+            return;
+        };
+        // super() call prefix
+        {
+            let md = eng.md(expr.m);
+            if let NodeKind::Call { func, .. } = &md.tree.nodes[expr.n.idx()].kind {
+                if matches!(&md.tree.nodes[func.idx()].kind,
+                    NodeKind::Name { name } if md.tree.s(*name) == "super")
+                {
+                    return;
+                }
+            }
+        }
+        if self.is_type_self_call(eng, expr) {
+            return;
+        }
+        // nested-class scope walk over the dotted callee (REPLICATE the
+        // leaked `callee` loop variable: after a break it holds the
+        // mismatching component)
+        let mut inside_klass = true;
+        let mut outer_klass: Option<GNode> = Some(klass);
+        let full_callee = u::as_string(eng, expr);
+        let mut callee: &str = &full_callee;
+        for component in full_callee.split('.').rev() {
+            callee = component;
+            let ok = outer_klass
+                .map(|ok| eng.node_name(ok).as_deref() == Some(component))
+                .unwrap_or(false);
+            if !ok {
+                inside_klass = false;
+                break;
+            }
+            outer_klass = get_outer_class(eng, outer_klass.unwrap());
+        }
+        let in_basenames = class_basenames(eng, klass).iter().any(|b| b == callee);
+        if !(inside_klass || in_basenames) {
+            // property assignment in the class body
+            if let Some(stmt) = eng.parent(node).and_then(|p| eng.statement(p)) {
+                let prop_name: Option<String> = {
+                    let md = eng.md(stmt.m);
+                    match &md.tree.nodes[stmt.n.idx()].kind {
+                        NodeKind::Assign { targets, .. } if targets.len() == 1 => {
+                            match &md.tree.nodes[targets[0].idx()].kind {
+                                NodeKind::AssignName { name } => {
+                                    Some(md.tree.s(*name).to_string())
+                                }
+                                _ => None,
+                            }
+                        }
+                        _ => None,
+                    }
+                };
+                if let Some(pn) = prop_name {
+                    if is_attribute_property(eng, cx.caches, &pn, klass) {
+                        return;
+                    }
+                }
+            }
+            if self.is_classmethod_frame(eng, eng.frame(node))
+                && self.is_inferred_instance(cx, expr, klass)
+                && is_class_or_instance_attribute(eng, attrname, klass)
+            {
+                return;
+            }
+            let licit_protected_member = !attr.starts_with("__");
+            if licit_protected_member && is_called_inside_special_method(eng, node) {
+                return;
+            }
+            emit(cx);
+        }
+    }
+
+    /// _is_type_self_call (class_checker.py:1977-1981)
+    fn is_type_self_call(&self, eng: &Engine, expr: GNode) -> bool {
+        let md = eng.md(expr.m);
+        let NodeKind::Call { func, args, .. } = &md.tree.nodes[expr.n.idx()].kind else {
+            return false;
+        };
+        if !matches!(&md.tree.nodes[func.idx()].kind,
+            NodeKind::Name { name } if md.tree.s(*name) == "type")
+        {
+            return false;
+        }
+        if args.len() != 1 {
+            return false;
+        }
+        let a0 = GNode { m: expr.m, n: args[0] };
+        drop(md);
+        self.is_mandatory_method_param(eng, a0)
+    }
+
+    /// _is_classmethod (class_checker.py:1983-1988)
+    fn is_classmethod_frame(&self, eng: &Engine, func: GNode) -> bool {
+        is_funcdef(eng, func)
+            && (eng.func_type(func) == FType::ClassMethod
+                || eng.node_name(func).as_deref() == Some("__class_getitem__"))
+    }
+
+    /// _is_inferred_instance (class_checker.py:1990-1998)
+    fn is_inferred_instance(&self, cx: &mut WalkCx, expr: GNode, klass: GNode) -> bool {
+        let eng = cx.eng;
+        match u::safe_infer(eng, cx.caches, expr) {
+            Some(Value::Inst { cls, .. }) | Some(Value::ExcInst { cls, .. }) => cls == klass,
+            _ => false,
+        }
     }
 
     /// ClassChecker.visit_assignattr (class_checker.py:1714-1723)
@@ -1010,13 +1370,105 @@ impl ClassCk {
     /// ClassChecker.visit_classdef (class_checker.py:876-883)
     pub fn visit_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
         let eng = cx.eng;
-        // _check_bases_classes: W0223 disabled; class_is_abstract burns
-        let _ = tc::class_is_abstract(cx.caches, eng, node);
+        if cx.full {
+            self.check_bases_classes(cx, node);
+        } else {
+            // -E pipeline: class_is_abstract burn only (frozen behavior)
+            let _ = tc::class_is_abstract(cx.caches, eng, node);
+        }
         self.check_slots(cx, node);
         self.check_proper_bases(cx, node);
         self.check_typing_final(cx, node);
         self.check_consistent_mro(cx, node);
         self.check_declare_non_slot(cx, node);
+    }
+
+    /// _check_bases_classes (class_checker.py:2173-2204) — W0223
+    fn check_bases_classes(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        if tc::class_is_abstract(cx.caches, eng, node) {
+            return;
+        }
+        // utils.unimplemented_abstract_methods (utils.py:945-994):
+        // reversed(mro()); last definition along the walk wins
+        let mro = match eng.mro(node, None) {
+            Ok(m) => m,
+            Err(_) => return, // ResolveError -> {}
+        };
+        let mut visited: indexmap::IndexMap<String, GNode> = indexmap::IndexMap::new();
+        for &ancestor in mro.iter().rev() {
+            let values: Vec<(String, GNode)> = {
+                let md = eng.md(ancestor.m);
+                let l = md.locals.borrow();
+                match l.get(&ancestor.n) {
+                    Some(map) => map
+                        .iter()
+                        .filter_map(|(k, v)| v.first().map(|&g| (eng.sname(*k), g)))
+                        .collect(),
+                    None => Vec::new(),
+                }
+            };
+            for (obj_name, obj) in values {
+                let mut inferred: Option<GNode> = Some(obj);
+                if eng.kind_is(obj, |k| matches!(k, NodeKind::AssignName { .. })) {
+                    match u::safe_infer(eng, cx.caches, obj) {
+                        None => {
+                            visited.shift_remove(&obj_name);
+                            continue;
+                        }
+                        Some(v) if v.is_uninferable() => {
+                            // safe_infer returned Uninferable -> falsy
+                            visited.shift_remove(&obj_name);
+                            continue;
+                        }
+                        Some(Value::Node(g)) if is_funcdef(eng, g) => {
+                            inferred = Some(g);
+                        }
+                        Some(_) => {
+                            // not a FunctionDef
+                            visited.shift_remove(&obj_name);
+                            inferred = None;
+                        }
+                    }
+                }
+                if let Some(g) = inferred {
+                    if is_funcdef(eng, g) {
+                        let abstract_ = func_is_abstract_strict(cx, g);
+                        if abstract_ {
+                            visited.insert(obj_name.clone(), g);
+                        } else if visited.contains_key(&obj_name) {
+                            visited.shift_remove(&obj_name);
+                        }
+                    }
+                }
+            }
+        }
+        let mut methods: Vec<(String, GNode)> =
+            visited.iter().map(|(k, v)| (k.clone(), *v)).collect();
+        methods.sort_by(|a, b| a.0.cmp(&b.0));
+        let node_name = eng.node_name(node).unwrap_or_default();
+        for (name, method) in methods {
+            let owner = eng.frame(match eng.parent(method) {
+                Some(p) => p,
+                None => continue,
+            });
+            if owner == node {
+                continue;
+            }
+            if locals_contains_name(eng, node, &name) {
+                continue;
+            }
+            let owner_name = eng.node_name(owner).unwrap_or_default();
+            cx.emit_node(
+                "W0223",
+                u::msg_line(eng, node),
+                u::msg_col(eng, node),
+                u::format_template(
+                    "Method %r is abstract in class %r but is not overridden in child class %r",
+                    &[&name, &owner_name, &node_name],
+                ),
+            );
+        }
     }
 
     fn check_consistent_mro(&mut self, cx: &mut WalkCx, node: GNode) {
@@ -1075,7 +1527,26 @@ impl ClassCk {
                     self.check_enum_base(cx, node, cls);
                 }
             }
-            // useless-object-inheritance: R0205 disabled, no burn
+            // R0205 useless-object-inheritance: name-only check
+            if cx.full {
+                let aname: Option<String> = match &ancestor {
+                    Value::Node(g) => eng.node_name(*g),
+                    Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => eng.node_name(*cls),
+                    _ => None,
+                };
+                if aname.as_deref() == Some("object") {
+                    let cname = eng.node_name(node).unwrap_or_default();
+                    cx.emit_node(
+                        "R0205",
+                        u::msg_line(eng, node),
+                        u::msg_col(eng, node),
+                        u::format_template(
+                            "Class %r inherits from object, can be safely removed from bases in python3",
+                            &[&cname],
+                        ),
+                    );
+                }
+            }
         }
     }
 
@@ -1158,10 +1629,29 @@ impl ClassCk {
             };
             if let Value::Node(g) = &ancestor {
                 if is_classdef(eng, *g) {
-                    let _ = tc::decorated_with(eng, *g, &["typing.final"]);
-                    // uninferable_final_decorators: safe_infer per decorator
-                    for dec in tc::decorator_nodes_pub(eng, *g) {
-                        let _ = u::safe_infer(eng, cx.caches, dec);
+                    if cx.full {
+                        // W0240 subclassed-final-class
+                        if tc::decorated_with(eng, *g, &["typing.final"])
+                            || has_uninferable_final_decorators(cx, *g)
+                        {
+                            let cname = eng.node_name(node).unwrap_or_default();
+                            let aname = eng.node_name(*g).unwrap_or_default();
+                            cx.emit_node(
+                                "W0240",
+                                u::msg_line(eng, node),
+                                u::msg_col(eng, node),
+                                u::format_template(
+                                    "Class %r is a subclass of a class decorated with typing.final: %r",
+                                    &[&cname, &aname],
+                                ),
+                            );
+                        }
+                    } else {
+                        let _ = tc::decorated_with(eng, *g, &["typing.final"]);
+                        // uninferable_final_decorators: safe_infer burn
+                        for dec in tc::decorator_nodes_pub(eng, *g) {
+                            let _ = u::safe_infer(eng, cx.caches, dec);
+                        }
                     }
                 }
             }
@@ -1191,7 +1681,13 @@ impl ClassCk {
                 continue;
             }
             if value_const(eng, slots).is_some() {
-                // single-string-used-for-slots: C0205 disabled
+                // C0205 single-string-used-for-slots (node = the ClassDef)
+                cx.emit_node(
+                    "C0205",
+                    u::msg_line(eng, node),
+                    u::msg_col(eng, node),
+                    "Class __slots__ should be a non-string iterable".to_string(),
+                );
                 continue;
             }
             let elts = match slots_elements(eng, slots) {
@@ -1382,14 +1878,18 @@ impl ClassCk {
         if !is_method(eng, node) {
             return;
         }
-        // _check_useless_super_delegation (W0246) / _check_property_with_
-        // parameters (R0206): disabled — burn skipped (TODO if FPs)
+        if cx.full {
+            self.check_useless_super_delegation(cx, node);
+            self.check_property_with_parameters(cx, node);
+        }
         let klass = eng.frame(eng.parent(node).unwrap());
         let is_metaclass = eng.class_type(klass) == "metaclass";
         self.check_first_arg_for_type(cx, node, is_metaclass);
         let name = eng.node_name(node).unwrap_or_default();
         if name == "__init__" {
-            // _check_init: W0231/W0233 disabled — burn skipped (TODO)
+            if (cx.cfg_enabled)("W0231") || (cx.cfg_enabled)("W0233") {
+                self.check_init(cx, node, klass);
+            }
             return;
         }
         // override loop: first MRO ancestor defining the name
@@ -1408,8 +1908,11 @@ impl ClassCk {
                 if !is_funcdef(eng, parent_function) {
                     continue;
                 }
-                // _check_signature: F0202 unreachable (both are FunctionDefs);
-                // W0221/W0222/W0236/W0239 disabled — burn skipped
+                // F0202 unreachable here (both are FunctionDefs)
+                if cx.full {
+                    self.check_signature(cx, node, parent_function, klass);
+                    self.check_invalid_overridden_method(cx, node, parent_function);
+                }
                 break;
             }
         }
@@ -1569,7 +2072,17 @@ impl ClassCk {
         if ftype == FType::StaticMethod {
             let fa = first_arg.map(|s| eng.sname(s));
             if matches!(fa.as_deref(), Some("self") | Some("cls") | Some("mcs")) {
-                // bad-staticmethod-argument: W0211 disabled
+                // W0211 bad-staticmethod-argument; NOTE _first_attrs[-1]
+                // keeps the bad name (no None overwrite before return)
+                cx.emit_node(
+                    "W0211",
+                    u::msg_line(eng, node),
+                    u::msg_col(eng, node),
+                    u::format_template(
+                        "Static method with %r as first argument",
+                        &[fa.as_deref().unwrap_or("")],
+                    ),
+                );
                 return;
             }
             *self.first_attrs.last_mut().unwrap() = None;
@@ -1587,12 +2100,525 @@ impl ClassCk {
             cx.emit_node("E0211", u::msg_line(eng, node), u::msg_col(eng, node),
                 u::format_template("Method %r has no argument", &[&name]));
         } else if metaclass {
-            // bad-mcs-classmethod-argument / bad-mcs-method-argument: C
+            if ftype == FType::ClassMethod {
+                self.check_first_arg_config(cx, node, first, &["mcs"], "C0204",
+                    "Metaclass class method %s should have %s as first argument", &name);
+            } else {
+                self.check_first_arg_config(cx, node, first, &["cls"], "C0203",
+                    "Metaclass method %s should have %s as first argument", &name);
+            }
         } else if ftype == FType::ClassMethod || name == "__class_getitem__" {
-            // bad-classmethod-argument: C0202
+            self.check_first_arg_config(cx, node, first, &["cls"], "C0202",
+                "Class method %s should have %s as first argument", &name);
         } else if first.map(|s| eng.sname(s)).as_deref() != Some("self") {
             cx.emit_node("E0213", u::msg_line(eng, node), u::msg_col(eng, node),
                 u::format_template("Method %r should have \"self\" as first argument", &[&name]));
+        }
+    }
+
+    /// _check_first_arg_config (class_checker.py:2157-2171)
+    #[allow(clippy::too_many_arguments)]
+    fn check_first_arg_config(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        first: Option<GSym>,
+        config: &[&str],
+        msgid: &'static str,
+        template: &'static str,
+        method_name: &str,
+    ) {
+        let eng = cx.eng;
+        let first_str = first.map(|s| eng.sname(s));
+        if first_str.as_deref().map(|f| config.contains(&f)).unwrap_or(false) {
+            return;
+        }
+        let valid = if config.len() == 1 {
+            u::py_repr_str(config[0])
+        } else {
+            let mut v = config[..config.len() - 1]
+                .iter()
+                .map(|c| u::py_repr_str(c))
+                .collect::<Vec<_>>()
+                .join(", ");
+            v.push_str(&format!(" or {}", u::py_repr_str(config[config.len() - 1])));
+            v
+        };
+        cx.emit_node(
+            msgid,
+            u::msg_line(eng, node),
+            u::msg_col(eng, node),
+            u::format_template(template, &[method_name, &valid]),
+        );
+    }
+
+    /// _check_useless_super_delegation (class_checker.py:1361-1447) — W0246
+    fn check_useless_super_delegation(&mut self, cx: &mut WalkCx, function: GNode) {
+        let eng = cx.eng;
+        // ---- _is_trivial_super_delegation (class_checker.py:146-196) ----
+        if !is_method(eng, function) {
+            return;
+        }
+        let (body, decorators, name) = {
+            let md = eng.md(function.m);
+            match &md.tree.nodes[function.n.idx()].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                    (d.body.clone(), d.decorators, eng.g(&md, d.name))
+                }
+                _ => return,
+            }
+        };
+        if decorators.is_some() || body.len() != 1 {
+            return;
+        }
+        let stmt = GNode { m: function.m, n: body[0] };
+        let call: Option<GNode> = {
+            let md = eng.md(stmt.m);
+            match &md.tree.nodes[stmt.n.idx()].kind {
+                NodeKind::Expr { value } | NodeKind::Return { value: Some(value) } => {
+                    Some(GNode { m: stmt.m, n: *value })
+                }
+                _ => None,
+            }
+        };
+        let Some(call) = call else { return };
+        let (func_attr, super_expr): (GSym, GNode) = {
+            let md = eng.md(call.m);
+            let NodeKind::Call { func, .. } = &md.tree.nodes[call.n.idx()].kind else {
+                return;
+            };
+            match &md.tree.nodes[func.idx()].kind {
+                NodeKind::Attribute { expr, attrname, .. } => {
+                    (eng.g(&md, *attrname), GNode { m: call.m, n: *expr })
+                }
+                _ => return,
+            }
+        };
+        let super_call = u::safe_infer(eng, cx.caches, super_expr);
+        let Some(Value::Super { mro_pointer, mro_type, .. }) = super_call else {
+            return;
+        };
+        if func_attr != name {
+            return;
+        }
+        let current_scope = eng.scope(eng.parent(function).unwrap_or(function));
+        if mro_pointer != current_scope {
+            return;
+        }
+        let type_name_ok = match &*mro_type {
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
+                eng.node_name(*cls) == eng.node_name(current_scope)
+            }
+            _ => false,
+        };
+        if !type_name_ok {
+            return;
+        }
+        // ---- main body ----
+        let name_str = eng.sname(name);
+        if name_str == "__hash__" {
+            // mymethods scan for __eq__
+            let parent = eng.parent(function).map(|p| eng.frame(p));
+            if let Some(parent) = parent {
+                let md = eng.md(parent.m);
+                let l = md.locals.borrow();
+                if let Some(map) = l.get(&parent.n) {
+                    let has_eq = map.iter().any(|(_, v)| {
+                        v.first()
+                            .map(|&g| {
+                                is_funcdef(eng, g)
+                                    && eng.node_name(g).as_deref() == Some("__eq__")
+                            })
+                            .unwrap_or(false)
+                    });
+                    if has_eq {
+                        return;
+                    }
+                }
+            }
+        }
+        let klass = eng.frame(eng.parent(function).unwrap_or(function));
+        let sym = name;
+        let mut meth_node: Option<GNode> = None;
+        let ancs = match eng.mro(klass, None) {
+            Ok(m) => m.get(1..).map(|s| s.to_vec()).unwrap_or_default(),
+            Err(_) => eng.ancestors(klass, true, None),
+        };
+        for anc in ancs {
+            let vals = eng.class_locals_get(anc, sym);
+            let Some(&mn) = vals.first() else { continue };
+            meth_node = Some(mn);
+            let f_spec = eng.arg_spec(function);
+            let m_spec = eng.arg_spec(mn);
+            let bad = !is_funcdef(eng, mn)
+                || has_different_parameters_default_value(cx, m_spec.as_ref(), f_spec.as_ref())
+                || (m_spec.as_ref().map(|sp| sp.args_unknown).unwrap_or(true) && {
+                    // function.argnames() != ["self"]
+                    let f_names: Vec<String> = f_spec
+                        .as_ref()
+                        .map(|sp| {
+                            sp.arguments()
+                                .iter()
+                                .filter_map(|&g| eng.assign_name_of(g).map(|s| eng.sname(s)))
+                                .collect()
+                        })
+                        .unwrap_or_default();
+                    f_names != ["self"]
+                });
+            if bad {
+                return;
+            }
+            break;
+        }
+        let f_spec = match eng.arg_spec(function) {
+            Some(sp) => sp,
+            None => return,
+        };
+        if let Some(mn) = meth_node {
+            let Some(m_spec) = eng.arg_spec(mn) else { return };
+            // vararg guard
+            if m_spec.vararg.is_some()
+                && (f_spec.vararg.is_none() || f_spec.args.len() > m_spec.args.len())
+            {
+                return;
+            }
+            // annotation guard: posonly annotations + annotations as_string
+            let form = |g: GNode, spec: &pyinfer::calls::ArgSpec| -> Vec<String> {
+                let md = eng.md(g.m);
+                let args_id = spec.arguments_node;
+                let NodeKind::Arguments(a) = &md.tree.nodes[args_id.n.idx()].kind else {
+                    return Vec::new();
+                };
+                let mut out = Vec::new();
+                for ann in a.posonlyargs_annotations.iter().chain(a.annotations.iter()) {
+                    if let Some(an) = ann {
+                        out.push(u::as_string(eng, GNode { m: g.m, n: *an }));
+                    }
+                }
+                out
+            };
+            let called = form(function, &f_spec);
+            let overridden_anns = form(mn, &m_spec);
+            if !called.is_empty() && !overridden_anns.is_empty() && called != overridden_anns {
+                return;
+            }
+            // return annotations
+            let returns_of = |g: GNode| -> Option<GNode> {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                        d.returns.map(|r| GNode { m: g.m, n: r })
+                    }
+                    _ => None,
+                }
+            };
+            if let (Some(fr), Some(mr)) = (returns_of(function), returns_of(mn)) {
+                if u::as_string(eng, mr) != u::as_string(eng, fr) {
+                    return;
+                }
+            }
+        }
+        if definition_equivalent_to_call(eng, &f_spec, call) {
+            cx.emit_node(
+                "W0246",
+                u::msg_line(eng, function),
+                u::msg_col(eng, function),
+                u::format_template(
+                    "Useless parent or super() delegation in method %r",
+                    &[&name_str],
+                ),
+            );
+        }
+    }
+
+    /// _check_property_with_parameters (class_checker.py:1449-1455) — R0206
+    fn check_property_with_parameters(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let Some(spec) = eng.arg_spec(node) else { return };
+        if spec.arguments().len() > 1
+            && tc::decorated_with_property(eng, cx.caches, node)
+            && !is_property_kind(eng, node, &["setter"])
+        {
+            cx.emit_node(
+                "R0206",
+                u::msg_line(eng, node),
+                u::msg_col(eng, node),
+                "Cannot have defined parameters for properties".to_string(),
+            );
+        }
+    }
+
+    /// _check_init (class_checker.py:2206-2270) — W0231/W0233
+    fn check_init(&mut self, cx: &mut WalkCx, node: GNode, klass_node: GNode) {
+        let eng = cx.eng;
+        let init_sym = eng.sym("__init__");
+        // _ancestors_to_call
+        let mut not_called_yet: indexmap::IndexMap<GNode, GNode> = indexmap::IndexMap::new();
+        for base in eng.ancestors(klass_node, false, None) {
+            match eng.class_igetattr_first(base, init_sym, None, true) {
+                Ok(Some(Value::UnboundMethod { func }))
+                | Ok(Some(Value::BoundMethod { func, .. })) => {
+                    // BoundMethod IS an UnboundMethod subclass in astroid
+                    if func_is_abstract_default(cx, func) {
+                        continue;
+                    }
+                    not_called_yet.insert(base, func);
+                }
+                _ => continue,
+            }
+        }
+        let mut parents_with_called_inits: rustc_hash::FxHashSet<Option<GNode>> =
+            rustc_hash::FxHashSet::default();
+        let direct_ancestors: Vec<GNode> = eng.ancestors(klass_node, false, None);
+        for stmt in u::preorder(eng, node) {
+            let (expr_attr, expr_expr): (GSym, GNode) = {
+                let md = eng.md(stmt.m);
+                let NodeKind::Call { func, .. } = &md.tree.nodes[stmt.n.idx()].kind else {
+                    continue;
+                };
+                match &md.tree.nodes[func.idx()].kind {
+                    NodeKind::Attribute { expr, attrname, .. } => {
+                        (eng.g(&md, *attrname), GNode { m: stmt.m, n: *expr })
+                    }
+                    _ => continue,
+                }
+            };
+            if eng.sname(expr_attr) != "__init__" {
+                continue;
+            }
+            // skip the whole check on super().__init__
+            {
+                let md = eng.md(expr_expr.m);
+                if let NodeKind::Call { func, .. } = &md.tree.nodes[expr_expr.n.idx()].kind {
+                    if matches!(&md.tree.nodes[func.idx()].kind,
+                        NodeKind::Name { name } if md.tree.s(*name) == "super")
+                    {
+                        return;
+                    }
+                }
+            }
+            let flow = eng.infer(expr_expr, &Ctx::new());
+            if flow.err.is_some() && flow.vals.is_empty() {
+                continue; // InferenceError
+            }
+            for klass in &flow.vals {
+                if klass.is_uninferable() {
+                    continue;
+                }
+                match klass {
+                    Value::Inst { cls, .. }
+                        if eng.node_name(*cls).as_deref() == Some("super")
+                            && eng.md(cls.m).name == "builtins" =>
+                    {
+                        return;
+                    }
+                    Value::Super { .. } => return,
+                    _ => {}
+                }
+                let klass_cls: Option<GNode> = match klass {
+                    Value::Node(g) if is_classdef(eng, *g) => Some(*g),
+                    _ => None,
+                };
+                if let Some(g) = klass_cls {
+                    if let Some(method) = not_called_yet.shift_remove(&g) {
+                        parents_with_called_inits.insert(node_frame_class(eng, method));
+                        continue;
+                    }
+                }
+                // KeyError branch
+                let in_direct = klass_cls
+                    .map(|g| direct_ancestors.contains(&g))
+                    .unwrap_or(false);
+                if !in_direct {
+                    let kname: Option<String> = match klass {
+                        Value::Node(g) => eng.node_name(*g),
+                        Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
+                            eng.node_name(*cls)
+                        }
+                        _ => None,
+                    };
+                    if let Some(kn) = kname {
+                        // node = expr (the Attribute func)
+                        let func_node: Option<GNode> = {
+                            let md = eng.md(stmt.m);
+                            match &md.tree.nodes[stmt.n.idx()].kind {
+                                NodeKind::Call { func, .. } => {
+                                    Some(GNode { m: stmt.m, n: *func })
+                                }
+                                _ => None,
+                            }
+                        };
+                        if let Some(fnode) = func_node {
+                            cx.emit_node(
+                                "W0233",
+                                u::lineno(eng, fnode),
+                                u::col_offset(eng, fnode).max(0) as i64,
+                                u::format_template(
+                                    "__init__ method from a non direct base class %r is called",
+                                    &[&kn],
+                                ),
+                            );
+                        }
+                    }
+                }
+            }
+        }
+        let entries: Vec<(GNode, GNode)> =
+            not_called_yet.iter().map(|(k, v)| (*k, *v)).collect();
+        for (klass, method) in entries {
+            if parents_with_called_inits.contains(&node_frame_class(eng, method)) {
+                return; // NOTE: return, not continue
+            }
+            if is_classdef(eng, klass) && tc::is_protocol_class(eng, klass) {
+                return; // also return!
+            }
+            if tc::decorated_with(eng, node, &["typing.overload"]) {
+                continue;
+            }
+            let kname = eng.node_name(klass).unwrap_or_default();
+            cx.emit_node(
+                "W0231",
+                u::msg_line(eng, node),
+                u::msg_col(eng, node),
+                u::format_template(
+                    "__init__ method from base class %r is not called",
+                    &[&kname],
+                ),
+            );
+        }
+    }
+
+    /// _check_signature (class_checker.py:2272-2357) — W0221/W0222/W0237
+    fn check_signature(
+        &mut self,
+        cx: &mut WalkCx,
+        method1: GNode,
+        refmethod: GNode,
+        _cls: GNode,
+    ) {
+        let eng = cx.eng;
+        let Some(m1_spec) = eng.arg_spec(method1) else { return };
+        let Some(ref_spec) = eng.arg_spec(refmethod) else { return };
+        if m1_spec.args_unknown || ref_spec.args_unknown {
+            return;
+        }
+        let name = eng.node_name(method1).unwrap_or_default();
+        if is_attr_private(&name) {
+            return;
+        }
+        if is_property_kind(eng, method1, &["setter"]) {
+            return;
+        }
+        let arg_differ_output =
+            different_parameters(cx, refmethod, &ref_spec, method1, &m1_spec);
+        let class_type = "overriding";
+        if !arg_differ_output.is_empty() {
+            let frame_name = |f: GNode| -> String {
+                eng.parent(f)
+                    .map(|p| eng.node_name(eng.frame(p)).unwrap_or_default())
+                    .unwrap_or_default()
+            };
+            for msg in &arg_differ_output {
+                let (msgid, first_arg): (&'static str, String) = if msg.contains("Number") {
+                    let total = |sp: &pyinfer::calls::ArgSpec| -> usize {
+                        sp.args.len()
+                            + usize::from(sp.vararg.is_some())
+                            + usize::from(sp.kwarg.is_some())
+                            + sp.kwonlyargs.len()
+                    };
+                    (
+                        "W0221",
+                        format!(
+                            "{}was {} in '{}.{}' and is now {} in",
+                            msg,
+                            total(&ref_spec),
+                            frame_name(refmethod),
+                            eng.node_name(refmethod).unwrap_or_default(),
+                            total(&m1_spec)
+                        ),
+                    )
+                } else if msg.contains("renamed") {
+                    ("W0237", msg.clone())
+                } else {
+                    ("W0221", msg.clone())
+                };
+                let third = format!("{}.{}", frame_name(method1), name);
+                cx.emit_node(
+                    msgid,
+                    u::msg_line(eng, method1),
+                    u::msg_col(eng, method1),
+                    u::format_template("%s %s %r method", &[&first_arg, class_type, &third]),
+                );
+            }
+        } else if m1_spec.defaults.len() < ref_spec.defaults.len() && m1_spec.vararg.is_none() {
+            cx.emit_node(
+                "W0222",
+                u::msg_line(eng, method1),
+                u::msg_col(eng, method1),
+                u::format_template(
+                    "Signature differs from %s %r method",
+                    &["overridden", &name],
+                ),
+            );
+        }
+    }
+
+    /// _check_invalid_overridden_method (class_checker.py:1457-1505) —
+    /// W0236/W0239
+    fn check_invalid_overridden_method(
+        &mut self,
+        cx: &mut WalkCx,
+        function_node: GNode,
+        parent_function: GNode,
+    ) {
+        let eng = cx.eng;
+        let parent_is_property = tc::decorated_with_property(eng, cx.caches, parent_function)
+            || is_property_kind(eng, parent_function, &["setter", "deleter"]);
+        let current_is_property = tc::decorated_with_property(eng, cx.caches, function_node)
+            || is_property_kind(eng, function_node, &["setter", "deleter"]);
+        let name = eng.node_name(function_node).unwrap_or_default();
+        let emit_w0236 = |cx: &mut WalkCx, a2: &str, a3: &str| {
+            cx.emit_node(
+                "W0236",
+                u::msg_line(cx.eng, function_node),
+                u::msg_col(cx.eng, function_node),
+                u::format_template(
+                    "Method %r was expected to be %r, found it instead as %r",
+                    &[&name, a2, a3],
+                ),
+            );
+        };
+        if parent_is_property && !current_is_property {
+            emit_w0236(cx, "property", &astroid_type_str(eng, function_node));
+        } else if !parent_is_property && current_is_property {
+            emit_w0236(cx, "method", "property");
+        }
+        let parent_is_async =
+            eng.kind_is(parent_function, |k| matches!(k, NodeKind::AsyncFunctionDef(_)));
+        let current_is_async =
+            eng.kind_is(function_node, |k| matches!(k, NodeKind::AsyncFunctionDef(_)));
+        if parent_is_async && !current_is_async {
+            emit_w0236(cx, "async", "non-async");
+        } else if !parent_is_async && current_is_async {
+            emit_w0236(cx, "non-async", "async");
+        }
+        // W0239 (py38+ always true on 3.12)
+        if tc::decorated_with(eng, parent_function, &["typing.final"])
+            || has_uninferable_final_decorators(cx, parent_function)
+        {
+            let owner = eng
+                .parent(parent_function)
+                .map(|p| eng.node_name(eng.frame(p)).unwrap_or_default())
+                .unwrap_or_default();
+            cx.emit_node(
+                "W0239",
+                u::msg_line(eng, function_node),
+                u::msg_col(eng, function_node),
+                u::format_template(
+                    "Method %r overrides a method decorated with typing.final which is defined in class %r",
+                    &[&name, &owner],
+                ),
+            );
         }
     }
 
@@ -1620,7 +2646,91 @@ impl ClassCk {
         if eng.class_type(node) != "metaclass" {
             self.check_accessed_members(cx, node);
         }
-        // attribute-defined-outside-init disabled -> return
+        if !(cx.cfg_enabled)("W0201") {
+            return;
+        }
+        // _check_attribute_defined_outside_init body (class_checker.py:1210+)
+        const DEFINING: &[&str] = &["__init__", "__new__", "setUp", "asyncSetUp", "__post_init__"];
+        let current_module = node.m;
+        let instance_attrs: Vec<(GSym, Vec<GNode>)> = eng
+            .instance_attrs_of(node)
+            .iter()
+            .map(|(k, v)| (*k, v.clone()))
+            .collect();
+        for (attr, nodes_lst) in instance_attrs {
+            let attr_s = eng.sname(attr);
+            if attr_s == "__dict__" {
+                continue;
+            }
+            let nodes_lst: Vec<GNode> = nodes_lst
+                .into_iter()
+                .filter(|&n| {
+                    let st = eng.statement(n);
+                    let bad_stmt = st
+                        .map(|st| {
+                            eng.kind_is(st, |k| {
+                                matches!(k, NodeKind::Delete { .. } | NodeKind::AugAssign { .. })
+                            })
+                        })
+                        .unwrap_or(false);
+                    !bad_stmt && n.m == current_module
+                })
+                .collect();
+            if nodes_lst.is_empty() {
+                continue;
+            }
+            let frame_ok = nodes_lst.iter().any(|&n| {
+                let frame = eng.frame(n);
+                let fname = eng.node_name(frame).unwrap_or_default();
+                DEFINING.contains(&fname.as_str()) || is_property_kind(eng, frame, &["setter"])
+            });
+            if frame_ok {
+                continue;
+            }
+            // instance_attr_ancestors: ancestors() (recursive), NOT mro
+            let mut attr_defined_in_ancestor = false;
+            let ancs = eng.ancestors(node, true, None);
+            for parent in ancs {
+                let pattrs = eng.instance_attrs_of(parent);
+                let Some(pnodes) = pattrs.get(&attr) else { continue };
+                let mut attr_defined = false;
+                for &pn in pnodes {
+                    let fname = eng.node_name(eng.frame(pn)).unwrap_or_default();
+                    if DEFINING.contains(&fname.as_str()) {
+                        attr_defined = true;
+                    }
+                }
+                if attr_defined {
+                    attr_defined_in_ancestor = true;
+                    break;
+                }
+            }
+            if attr_defined_in_ancestor {
+                continue;
+            }
+            // class attribute? (cnode.local_attr)
+            if !tc::class_local_attr(eng, node, &attr_s).is_empty() {
+                continue;
+            }
+            for &n in &nodes_lst {
+                let frame = eng.frame(n);
+                let fname = eng.node_name(frame).unwrap_or_default();
+                if !DEFINING.contains(&fname.as_str()) {
+                    if called_in_methods(cx, frame, node, DEFINING) {
+                        continue;
+                    }
+                    cx.emit_node(
+                        "W0201",
+                        u::lineno(eng, n),
+                        u::col_offset(eng, n).max(0) as i64,
+                        u::format_template(
+                            "Attribute %r defined outside __init__",
+                            &[&attr_s],
+                        ),
+                    );
+                }
+            }
+        }
     }
 
     /// _check_accessed_members (class_checker.py:2017-2077) — E0203
@@ -1687,6 +2797,576 @@ impl ClassCk {
             }
         }
     }
+}
+
+/// astroid Arguments.default_value(name) (node_classes.py:930-955):
+/// Ok(node) or Err(NoDefault)
+fn default_value(eng: &Engine, spec: &pyinfer::calls::ArgSpec, argname: &str) -> Result<GNode, ()> {
+    let name_of = |g: GNode| eng.assign_name_of(g).map(|s| eng.sname(s));
+    // kwonly first
+    if let Some(idx) = spec
+        .kwonlyargs
+        .iter()
+        .position(|&g| name_of(g).as_deref() == Some(argname))
+    {
+        if spec.kw_defaults.len() > idx {
+            return match spec.kw_defaults[idx] {
+                Some(d) => Ok(d),
+                None => Err(()),
+            };
+        }
+    }
+    // args = arguments minus vararg/kwarg NAMES
+    let vararg = spec.vararg.map(|s| eng.sname(s));
+    let kwarg = spec.kwarg.map(|s| eng.sname(s));
+    let args: Vec<GNode> = spec
+        .arguments()
+        .into_iter()
+        .filter(|&g| {
+            let n = name_of(g);
+            n != vararg || n.is_none()
+        })
+        .filter(|&g| {
+            let n = name_of(g);
+            n != kwarg || n.is_none()
+        })
+        .collect();
+    if let Some(index) = args.iter().position(|&g| name_of(g).as_deref() == Some(argname)) {
+        let total = args.len() as i64;
+        let idx = index as i64 - (total - spec.defaults.len() as i64 - spec.kw_defaults.len() as i64);
+        if idx >= 0 && (idx as usize) < spec.defaults.len() {
+            return Ok(spec.defaults[idx as usize]);
+        }
+    }
+    Err(())
+}
+
+/// ASTROID_TYPE_COMPARATORS-driven equality of two default-value nodes
+/// (class_checker.py:54-61). Returns None when "unhandled" (treated as
+/// different by callers).
+fn astroid_default_eq(cx: &mut WalkCx, a: GNode, b: GNode) -> Option<bool> {
+    let eng = cx.eng;
+    let (ka, kb) = {
+        let mda = eng.md(a.m);
+        let ka = std::mem::discriminant(&mda.tree.nodes[a.n.idx()].kind);
+        drop(mda);
+        let mdb = eng.md(b.m);
+        let kb = std::mem::discriminant(&mdb.tree.nodes[b.n.idx()].kind);
+        (ka, kb)
+    };
+    if ka != kb {
+        // `not isinstance(overridden_default, original_type)` -> different
+        return Some(false);
+    }
+    let mda = eng.md(a.m);
+    match &mda.tree.nodes[a.n.idx()].kind {
+        NodeKind::Const(ca) => {
+            let ca = ca.clone();
+            drop(mda);
+            let mdb = eng.md(b.m);
+            let NodeKind::Const(cb) = &mdb.tree.nodes[b.n.idx()].kind else {
+                return Some(false);
+            };
+            Some(const_py_eq(&ca, cb))
+        }
+        NodeKind::ClassDef(_) => {
+            // a.qname == b.qname compares BOUND METHOD objects -> identity
+            Some(a == b)
+        }
+        NodeKind::Tuple { elts: ea, .. } | NodeKind::List { elts: ea, .. } => {
+            let ea = ea.clone();
+            drop(mda);
+            let mdb = eng.md(b.m);
+            let eb: Vec<pyast::NodeId> = match &mdb.tree.nodes[b.n.idx()].kind {
+                NodeKind::Tuple { elts, .. } | NodeKind::List { elts, .. } => elts.clone(),
+                _ => return Some(false),
+            };
+            drop(mdb);
+            // a.elts == b.elts: element-wise NODE IDENTITY
+            Some(
+                ea.len() == eb.len()
+                    && ea
+                        .iter()
+                        .zip(eb.iter())
+                        .all(|(&x, &y)| GNode { m: a.m, n: x } == GNode { m: b.m, n: y }),
+            )
+        }
+        NodeKind::Dict { items: ia } => {
+            let la = ia.len();
+            drop(mda);
+            let mdb = eng.md(b.m);
+            let NodeKind::Dict { items: ib } = &mdb.tree.nodes[b.n.idx()].kind else {
+                return Some(false);
+            };
+            // items lists of node pairs -> identity equality ([]==[] True)
+            Some((la == 0 && ib.is_empty()) || a == b)
+        }
+        NodeKind::Name { .. } => {
+            drop(mda);
+            // set(a.infer()) == set(b.infer()) — node results by identity
+            let fa = u::infer_all(eng, cx.caches, a);
+            let fb = u::infer_all(eng, cx.caches, b);
+            let key = |v: &Value| -> Option<(usize, usize)> {
+                match v {
+                    Value::Node(g) => Some((g.m.0 as usize, g.n.idx())),
+                    Value::Uninferable => Some((usize::MAX, usize::MAX)),
+                    _ => None,
+                }
+            };
+            let mut sa = std::collections::HashSet::new();
+            for v in fa.iter() {
+                match key(v) {
+                    Some(k) => {
+                        sa.insert(k);
+                    }
+                    None => return Some(false), // non-keyable: treat as different
+                }
+            }
+            let mut sb = std::collections::HashSet::new();
+            for v in fb.iter() {
+                match key(v) {
+                    Some(k) => {
+                        sb.insert(k);
+                    }
+                    None => return Some(false),
+                }
+            }
+            Some(sa == sb)
+        }
+        _ => None, // unhandled comparator
+    }
+}
+
+/// python `==` on const values (for default comparison)
+fn const_py_eq(a: &ConstValue, b: &ConstValue) -> bool {
+    u::py_key(a) == u::py_key(b)
+}
+
+/// _has_different_parameters_default_value (class_checker.py:216-259)
+fn has_different_parameters_default_value(
+    cx: &mut WalkCx,
+    original: Option<&pyinfer::calls::ArgSpec>,
+    overridden: Option<&pyinfer::calls::ArgSpec>,
+) -> bool {
+    let eng = cx.eng;
+    let (Some(original), Some(overridden)) = (original, overridden) else { return false };
+    if original.args_unknown || overridden.args_unknown {
+        return false;
+    }
+    let params: Vec<String> = original
+        .args
+        .iter()
+        .chain(original.kwonlyargs.iter())
+        .filter_map(|&g| eng.assign_name_of(g).map(|s| eng.sname(s)))
+        .collect();
+    for pname in params {
+        let od = default_value(eng, original, &pname);
+        let vd = default_value(eng, overridden, &pname);
+        match (od, vd) {
+            (Err(()), Err(())) => continue,
+            (Err(()), Ok(_)) => return true,  // only the original missing
+            (Ok(_), Err(())) => return true,  // only the override has none
+            (Ok(a), Ok(b)) => match astroid_default_eq(cx, a, b) {
+                Some(true) => continue,
+                Some(false) => return true,
+                None => return true, // unhandled comparator
+            },
+        }
+    }
+    false
+}
+
+/// _signature_from_call + _definition_equivalent_to_call
+/// (class_checker.py:81-143)
+fn definition_equivalent_to_call(
+    eng: &Engine,
+    spec: &pyinfer::calls::ArgSpec,
+    call: GNode,
+) -> bool {
+    // _signature_from_call
+    let mut kws: Vec<Option<String>> = Vec::new(); // keys only matter
+    let mut call_args: Vec<Option<String>> = Vec::new();
+    let mut starred_args: Vec<String> = Vec::new();
+    let mut starred_kws: Vec<String> = Vec::new();
+    {
+        let md = eng.md(call.m);
+        let NodeKind::Call { args, keywords, .. } = &md.tree.nodes[call.n.idx()].kind else {
+            return false;
+        };
+        for &kw in keywords {
+            if let NodeKind::Keyword { arg, value } = &md.tree.nodes[kw.idx()].kind {
+                let vname: Option<String> = match &md.tree.nodes[value.idx()].kind {
+                    NodeKind::Name { name } => Some(md.tree.s(*name).to_string()),
+                    _ => None,
+                };
+                match (arg, vname) {
+                    (None, Some(n)) => starred_kws.push(n),
+                    (Some(a), _) => kws.push(Some(md.tree.s(*a).to_string())),
+                    (None, None) => kws.push(None), // kws[None] = None
+                }
+            }
+        }
+        for &a in args {
+            match &md.tree.nodes[a.idx()].kind {
+                NodeKind::Starred { value, .. } => {
+                    if let NodeKind::Name { name } = &md.tree.nodes[value.idx()].kind {
+                        starred_args.push(md.tree.s(*name).to_string());
+                    } else {
+                        // non-name Starred: pylint appends nothing? — the
+                        // match has no catch for Starred(non-Name): falls to
+                        // `case _: args.append(None)`
+                        call_args.push(None);
+                    }
+                }
+                NodeKind::Name { name } => call_args.push(Some(md.tree.s(*name).to_string())),
+                _ => call_args.push(None),
+            }
+        }
+    }
+    // _signature_from_arguments: posonly+args names, any arg NAMED "self"
+    // dropped regardless of position
+    let def_args: Vec<String> = spec
+        .posonlyargs
+        .iter()
+        .chain(spec.args.iter())
+        .filter_map(|&g| eng.assign_name_of(g).map(|s| eng.sname(s)))
+        .filter(|n| n != "self")
+        .collect();
+    let def_kwonly: Vec<String> = spec
+        .kwonlyargs
+        .iter()
+        .filter_map(|&g| eng.assign_name_of(g).map(|s| eng.sname(s)))
+        .collect();
+    let def_vararg = spec.vararg.map(|s| eng.sname(s));
+    let def_kwarg = spec.kwarg.map(|s| eng.sname(s));
+    // _definition_equivalent_to_call
+    if let Some(k) = &def_kwarg {
+        if !starred_kws.iter().any(|x| x == k) {
+            return false;
+        }
+    } else if !starred_kws.is_empty() {
+        return false;
+    }
+    if let Some(v) = &def_vararg {
+        if !starred_args.iter().any(|x| x == v) {
+            return false;
+        }
+    } else if !starred_args.is_empty() {
+        return false;
+    }
+    let kw_names: Vec<&str> = kws.iter().filter_map(|o| o.as_deref()).collect();
+    if def_kwonly.iter().any(|k| !kw_names.contains(&k.as_str())) {
+        return false;
+    }
+    let call_arg_names: Vec<Option<&str>> = call_args.iter().map(|o| o.as_deref()).collect();
+    let def_arg_opts: Vec<Option<&str>> = def_args.iter().map(|s| Some(s.as_str())).collect();
+    if def_arg_opts != call_arg_names {
+        return false;
+    }
+    // no extra kwargs in call: `kw in call.args or kw in definition.kwonlyargs`
+    kws.iter().all(|kw| {
+        call_arg_names.iter().any(|a| *a == kw.as_deref())
+            || kw
+                .as_deref()
+                .map(|k| def_kwonly.iter().any(|a| a == k))
+                .unwrap_or(false)
+    })
+}
+
+/// _positional_parameters (class_checker.py:202-206) after
+/// function_to_method wrapping: drop the first arg iff classmethod
+fn positional_parameters(eng: &Engine, func: GNode, spec: &pyinfer::calls::ArgSpec) -> Vec<GNode> {
+    let mut positional: Vec<GNode> = spec.args.clone();
+    if eng.func_type(func) == FType::ClassMethod && !positional.is_empty() {
+        positional.remove(0);
+    }
+    positional
+}
+
+/// _different_parameters (class_checker.py:316-390)
+fn different_parameters(
+    cx: &mut WalkCx,
+    original: GNode,
+    original_spec: &pyinfer::calls::ArgSpec,
+    overridden: GNode,
+    overridden_spec: &pyinfer::calls::ArgSpec,
+) -> Vec<String> {
+    let eng = cx.eng;
+    let name_of = |g: GNode| eng.assign_name_of(g).map(|s| eng.sname(s)).unwrap_or_default();
+    let mut output_messages: Vec<String> = Vec::new();
+    let mut original_parameters = positional_parameters(eng, original, original_spec);
+    let overridden_parameters = positional_parameters(eng, overridden, overridden_spec);
+    let mut original_kwonlyargs: Vec<GNode> = original_spec.kwonlyargs.clone();
+    if overridden_spec.vararg.is_some() {
+        let overridden_names: Vec<String> =
+            overridden_parameters.iter().map(|&g| name_of(g)).collect();
+        original_parameters.retain(|&g| overridden_names.contains(&name_of(g)));
+    }
+    if overridden_spec.kwarg.is_some() {
+        let overridden_names: Vec<String> = overridden_spec
+            .kwonlyargs
+            .iter()
+            .map(|&g| name_of(g))
+            .collect();
+        original_kwonlyargs.retain(|&g| overridden_names.contains(&name_of(g)));
+    }
+    // _has_different_parameters (zip_longest)
+    let mut different_positional: Vec<String> = Vec::new();
+    let maxlen = original_parameters.len().max(overridden_parameters.len());
+    for i in 0..maxlen {
+        let op = original_parameters.get(i);
+        let vp = overridden_parameters.get(i);
+        let Some(&vp) = vp else {
+            different_positional = vec!["Number of parameters ".to_string()];
+            break;
+        };
+        let Some(&op) = op else {
+            // overridden_param.parent.default_value(name): NoDefault -> Number
+            if default_value(eng, overridden_spec, &name_of(vp)).is_err() {
+                different_positional = vec!["Number of parameters ".to_string()];
+                break;
+            }
+            continue;
+        };
+        let on = name_of(op);
+        let vn = name_of(vp);
+        if dummy_param_match(&on) || dummy_param_match(&vn) {
+            continue;
+        }
+        if on != vn {
+            different_positional
+                .push(format!("Parameter '{on}' has been renamed to '{vn}' in"));
+        }
+    }
+    // _has_different_keyword_only_parameters
+    let mut different_kwonly: Vec<String> = Vec::new();
+    {
+        let original_names: Vec<String> =
+            original_kwonlyargs.iter().map(|&g| name_of(g)).collect();
+        let overridden_names: Vec<String> = overridden_spec
+            .kwonlyargs
+            .iter()
+            .map(|&g| name_of(g))
+            .collect();
+        if original_names.iter().any(|n| !overridden_names.contains(n)) {
+            different_kwonly = vec!["Number of parameters ".to_string()];
+        } else {
+            for name in &overridden_names {
+                if original_names.contains(name) {
+                    continue;
+                }
+                if default_value(eng, overridden_spec, name).is_err() {
+                    different_kwonly = vec!["Number of parameters ".to_string()];
+                    break;
+                }
+            }
+        }
+    }
+    if !different_kwonly.is_empty() && !different_positional.is_empty() {
+        if different_positional[0].contains("Number ") && different_kwonly[0].contains("Number ")
+        {
+            output_messages.push("Number of parameters ".to_string());
+            output_messages.extend(different_positional[1..].iter().cloned());
+            output_messages.extend(different_kwonly[1..].iter().cloned());
+        } else {
+            output_messages.extend(different_positional);
+            output_messages.extend(different_kwonly);
+        }
+    } else {
+        output_messages.extend(different_positional);
+        output_messages.extend(different_kwonly);
+    }
+    let kwarg_lost = original_spec.kwarg.is_some() && overridden_spec.kwarg.is_none();
+    let vararg_lost = original_spec.vararg.is_some() && overridden_spec.vararg.is_none();
+    if kwarg_lost || vararg_lost {
+        output_messages.push("Variadics removed in".to_string());
+    }
+    let original_name = eng.node_name(original).unwrap_or_default();
+    if u::PYMETHODS.contains(&original_name.as_str()) {
+        output_messages.clear();
+    }
+    let _ = cx;
+    output_messages
+}
+
+/// dummy-variables-rgx re.match for parameter-name comparison
+fn dummy_param_match(name: &str) -> bool {
+    crate::variables::dummy_rgx_match_pub(name)
+}
+
+/// astroid FunctionDef.type as a string (for the W0236 third arg)
+fn astroid_type_str(eng: &Engine, func: GNode) -> String {
+    match eng.func_type(func) {
+        FType::ClassMethod => "classmethod".to_string(),
+        FType::StaticMethod => "staticmethod".to_string(),
+        FType::Method => "method".to_string(),
+        FType::Function => "function".to_string(),
+    }
+}
+
+/// utils.uninferable_final_decorators truthiness (utils.py:894-941)
+fn has_uninferable_final_decorators(cx: &mut WalkCx, func: GNode) -> bool {
+    let eng = cx.eng;
+    for decorator in tc::decorator_nodes_pub(eng, func) {
+        let import_nodes: Vec<NV> = {
+            let md = eng.md(decorator.m);
+            match &md.tree.nodes[decorator.n.idx()].kind {
+                NodeKind::Attribute { expr, .. } => {
+                    let e = GNode { m: decorator.m, n: *expr };
+                    drop(md);
+                    match u::safe_infer(eng, cx.caches, e) {
+                        Some(Value::Node(g))
+                            if u::is_module(eng, g) && eng.md(g.m).name == "typing" =>
+                        {
+                            let sym = match u::name_gsym(eng, e) {
+                                Some(s) => s,
+                                None => continue,
+                            };
+                            eng.lookup(e, sym).1.clone()
+                        }
+                        _ => continue,
+                    }
+                }
+                NodeKind::Name { name } => {
+                    let sym = eng.g(&md, *name);
+                    drop(md);
+                    eng.lookup(decorator, sym).1.clone()
+                }
+                _ => continue,
+            }
+        };
+        let Some(NV::N(import_node)) = import_nodes.first() else { continue };
+        let md = eng.md(import_node.m);
+        let (is_from_import, is_import) = match &md.tree.nodes[import_node.n.idx()].kind {
+            NodeKind::ImportFrom { modname, names, .. } => {
+                let from_ok = names.iter().any(|(n, _)| md.tree.s(*n) == "final")
+                    && md.tree.s(*modname) == "typing";
+                (from_ok, false)
+            }
+            NodeKind::Import { names } => {
+                let has_typing = names.iter().any(|(n, _)| md.tree.s(*n) == "typing");
+                let attr_final = {
+                    let md2 = eng.md(decorator.m);
+                    matches!(&md2.tree.nodes[decorator.n.idx()].kind,
+                        NodeKind::Attribute { attrname, .. } if md2.tree.s(*attrname) == "final")
+                };
+                (false, has_typing && attr_final)
+            }
+            _ => (false, false),
+        };
+        drop(md);
+        if is_from_import || is_import {
+            match u::safe_infer(eng, cx.caches, decorator) {
+                None => return true,
+                Some(v) if v.is_uninferable() => return true,
+                _ => {}
+            }
+        }
+    }
+    false
+}
+
+/// _ancestors_to_call's init_node.is_abstract() (pass_is_abstract=True)
+fn func_is_abstract_default(cx: &mut WalkCx, func: GNode) -> bool {
+    crate::variables::func_is_abstract_pub(cx, func)
+}
+
+/// `name in node.locals`
+fn locals_contains_name(eng: &Engine, scope: GNode, name: &str) -> bool {
+    let sym = eng.sym(name);
+    let md = eng.md(scope.m);
+    let l = md.locals.borrow();
+    l.get(&scope.n).map(|m| m.contains_key(&sym)).unwrap_or(false)
+}
+
+/// astroid FunctionDef.is_abstract(pass_is_abstract=False) (W0223 callback)
+fn func_is_abstract_strict(cx: &mut WalkCx, func: GNode) -> bool {
+    let eng = cx.eng;
+    for dec in tc::decorator_nodes_pub(eng, func) {
+        let inferred = match eng.first_value(dec, &Ctx::new()) {
+            Ok(Some(v)) => v,
+            _ => continue,
+        };
+        if let Some(q) = eng.value_qname(&inferred) {
+            if q == "abc.abstractproperty" || q == "abc.abstractmethod" {
+                return true;
+            }
+        }
+    }
+    let body: Vec<pyast::NodeId> = {
+        let md = eng.md(func.m);
+        match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
+            _ => return false,
+        }
+    };
+    for &child in &body {
+        let g = GNode { m: func.m, n: child };
+        let exc: Option<Option<pyast::NodeId>> = {
+            let md = eng.md(g.m);
+            match &md.tree.nodes[g.n.idx()].kind {
+                NodeKind::Raise { exc, .. } => Some(*exc),
+                _ => None,
+            }
+        };
+        if let Some(Some(e)) = exc {
+            let eg = GNode { m: func.m, n: e };
+            let raises_ni = u::preorder(eng, eg).iter().any(|&n| {
+                let md = eng.md(n.m);
+                matches!(&md.tree.nodes[n.n.idx()].kind,
+                    NodeKind::Name { name } if md.tree.s(*name) == "NotImplementedError")
+            });
+            if raises_ni {
+                return true;
+            }
+        }
+        // pass_is_abstract=False: a `pass` body does NOT count
+        return false;
+    }
+    // empty body (unreachable for parsed source)
+    false
+}
+
+/// _called_in_methods (class_checker.py:416-446)
+fn called_in_methods(cx: &mut WalkCx, func: GNode, klass: GNode, methods: &[&str]) -> bool {
+    let eng = cx.eng;
+    if !is_funcdef(eng, func) {
+        return false;
+    }
+    let func_name = eng.node_name(func).unwrap_or_default();
+    for method in methods {
+        let attrs = match eng.class_getattr(klass, eng.sym(method), None, true) {
+            Ok(a) => a,
+            Err(_) => continue,
+        };
+        for infer_method in &attrs {
+            let NV::N(im) = infer_method else { continue };
+            for call in u::preorder(eng, *im) {
+                let cfunc: Option<GNode> = {
+                    let md = eng.md(call.m);
+                    match &md.tree.nodes[call.n.idx()].kind {
+                        NodeKind::Call { func, .. } => Some(GNode { m: call.m, n: *func }),
+                        _ => None,
+                    }
+                };
+                let Some(cf) = cfunc else { continue };
+                let bound = match eng.first_value(cf, &Ctx::new()) {
+                    Ok(Some(v)) => v,
+                    _ => continue,
+                };
+                let bfunc: Option<GNode> = match &bound {
+                    Value::BoundMethod { func, .. } | Value::DescBM { func, .. } => Some(*func),
+                    _ => None,
+                };
+                if let Some(bf) = bfunc {
+                    if eng.node_name(bf).as_deref() == Some(func_name.as_str()) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    false
 }
 
 /// `inferred.__class__.__name__` for E0243

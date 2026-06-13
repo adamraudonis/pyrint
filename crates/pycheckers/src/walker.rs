@@ -102,12 +102,36 @@ pub struct Prepared {
     pub doc_func: bool,
     /// FunctionChecker (single-message checker): W0135
     pub function_ck: bool,
+    // ---- phase C (notes/09-variables-imports-classes-wc.md) ----
+    /// full-pylint mode (not -E): unconditional full-mode computations that
+    /// pylint runs regardless of message state (burns) hang off this so the
+    /// -E pipeline stays byte-frozen.
+    pub full: bool,
+    /// ExceptionsChecker.visit_binop/visit_compare: W0716
+    pub exc_op: bool,
+    /// VariablesChecker.visit_global: W0601|W0602|W0603|W0604|W0622
+    pub vars_global: bool,
+    /// VariablesChecker.visit_for: W0644
+    pub vars_for: bool,
+    /// VariablesChecker.visit_const: W0611|W0612
+    pub vars_const: bool,
+    /// VariablesChecker.visit_excepthandler/leave_excepthandler: W0621
+    pub vars_except: bool,
+    /// ClassChecker.visit_assign: W0212|R0202|R0203
+    pub classes_assign: bool,
 }
 
 impl Prepared {
-    pub fn from_enabled(enabled: &dyn Fn(&str) -> bool) -> Prepared {
+    pub fn from_enabled(enabled: &dyn Fn(&str) -> bool, full: bool) -> Prepared {
         let any = |ids: &[&str]| ids.iter().any(|m| enabled(m));
         Prepared {
+            full,
+            exc_op: enabled("W0716"),
+            vars_global: any(&["W0601", "W0602", "W0603", "W0604", "W0622"]),
+            vars_for: enabled("W0644"),
+            vars_const: any(&["W0611", "W0612"]),
+            vars_except: enabled("W0621"),
+            classes_assign: any(&["W0212", "R0202", "R0203"]),
             format: any(&[
                 "C0301", "C0302", "C0303", "C0304", "C0305", "W0311", "W0301", "C0321", "C0325",
                 "C0327", "C0328",
@@ -184,6 +208,12 @@ pub struct WalkCx<'a> {
     /// linter.is_message_enabled(msgid, line) against the CURRENT module
     /// pragma state (used by _helper_string / import-order recording)
     pub is_enabled: &'a dyn Fn(&str, u32) -> bool,
+    /// linter.is_message_enabled(msgid) with NO line: config-level state
+    /// only (pylint _is_one_message_enabled line=None path)
+    pub cfg_enabled: &'a dyn Fn(&str) -> bool,
+    /// full-pylint mode (not -E): gates computations pylint runs
+    /// unconditionally whose burns the frozen -E pipeline never did
+    pub full: bool,
     /// linter.add_ignored_message(msgid, line) — record a would-be message
     /// suppressed by checker-internal short-circuits (I0021 bookkeeping)
     pub add_ignored: &'a dyn Fn(&str, u32),
@@ -317,6 +347,7 @@ impl LintRun {
         emit: &mut dyn FnMut(CheckMsg),
         import_oracle: &mut dyn FnMut(&str, &str) -> Option<String>,
         is_enabled: &dyn Fn(&str, u32) -> bool,
+        cfg_enabled: &dyn Fn(&str) -> bool,
         add_ignored: &dyn Fn(&str, u32),
         crashed: &std::cell::Cell<bool>,
     ) {
@@ -328,6 +359,8 @@ impl LintRun {
             emit,
             import_oracle,
             is_enabled,
+            cfg_enabled,
+            full: prep.full,
             add_ignored,
             crashed,
         };
@@ -452,6 +485,7 @@ impl Walker<'_> {
                 | Tag::With
                 | Tag::For
                 | Tag::While
+                | Tag::BinOp
         );
         if !fmt_late {
             self.fmt(cx, g);
@@ -603,6 +637,9 @@ impl Walker<'_> {
                     self.basic.visit_assign(cx, g);
                 }
                 self.basicerr.visit_assign(cx, g);
+                if self.prep.classes_assign {
+                    self.classes.visit_assign(cx, g);
+                }
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
                 if self.prep.lambda_expr {
@@ -662,6 +699,12 @@ impl Walker<'_> {
             }
             Tag::Await => self.ty.visit_await(cx, g),
             Tag::BinOp => {
+                // full order: Misdesign, Exceptions.visit_binop, Format,
+                // StringFormat, Type
+                if self.prep.exc_op {
+                    self.exceptions.visit_binop(cx, g);
+                }
+                self.fmt(cx, g);
                 self.strings.visit_binop(cx, g);
                 // TypeChecker.visit_binop: `|` only and dead on py3.12
                 // (_py310_plus early return)
@@ -672,6 +715,9 @@ impl Walker<'_> {
                 }
                 if self.prep.comparison {
                     crate::basicwc::visit_compare(cx, g);
+                }
+                if self.prep.exc_op {
+                    self.exceptions.visit_compare(cx, g);
                 }
                 self.fmt(cx, g);
                 self.ty.visit_compare(cx, g);
@@ -704,6 +750,9 @@ impl Walker<'_> {
                 self.mod_iter.visit_for(cx, g);
                 self.iter.visit_for(cx, g);
                 self.ty.visit_for(cx, g);
+                if self.prep.vars_for {
+                    self.vars.visit_for(cx, g);
+                }
             }
             Tag::While => {
                 if self.prep.erro_else {
@@ -808,6 +857,23 @@ impl Walker<'_> {
                 if self.prep.nonascii_name {
                     self.nonascii.visit_global(cx, g);
                 }
+                if self.prep.vars_global {
+                    self.vars.visit_global(cx, g);
+                }
+            }
+            Tag::ExceptHandler => {
+                // full order: Misdesign, Format, Refactoring,
+                // UnsupportedVersion, Variables (fmt ran early via !fmt_late)
+                if self.prep.vars_except {
+                    self.vars.visit_excepthandler(cx, g);
+                }
+            }
+            Tag::Const => {
+                // full order: Misdesign, Format, Recommendation,
+                // StringConstant, Ellipsis, Variables (fmt ran early)
+                if self.prep.vars_const {
+                    self.vars.visit_const(cx, g);
+                }
             }
             Tag::NamedExpr => {
                 if self.prep.lambda_expr {
@@ -854,6 +920,11 @@ impl Walker<'_> {
             }
             Tag::Lambda => self.vars.leave_lambda(cx, g),
             Tag::Comp => self.vars.leave_comprehension_scope(cx, g),
+            Tag::ExceptHandler => {
+                if self.prep.vars_except && !cx.is_crashed() {
+                    self.vars.leave_excepthandler(cx, g);
+                }
+            }
             Tag::Try => {
                 // BasicChecker.leave_try pops _trys; after a crash pylint's
                 // exception unwinds past every leave (stack leaks into the
@@ -919,6 +990,8 @@ enum Tag {
     Decorators,
     Assert,
     Pass,
+    ExceptHandler,
+    Const,
     Other,
 }
 
@@ -973,6 +1046,8 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Decorators { .. } => Tag::Decorators,
         NodeKind::Assert { .. } => Tag::Assert,
         NodeKind::Pass => Tag::Pass,
+        NodeKind::ExceptHandler { .. } => Tag::ExceptHandler,
+        NodeKind::Const(_) => Tag::Const,
         _ => Tag::Other,
     }
 }

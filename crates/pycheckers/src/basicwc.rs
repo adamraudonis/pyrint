@@ -1991,7 +1991,7 @@ fn is_method(eng: &Engine, func: GNode) -> bool {
 }
 
 /// is_property_setter / is_property_deleter (syntactic)
-fn is_property_setter_or_deleter(eng: &Engine, func: GNode) -> bool {
+pub fn is_property_setter_or_deleter(eng: &Engine, func: GNode) -> bool {
     let md = eng.md(func.m);
     let dec = match &md.tree.nodes[func.n.idx()].kind {
         NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.decorators,

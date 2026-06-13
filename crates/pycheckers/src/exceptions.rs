@@ -444,6 +444,100 @@ impl ExceptionsCk {
         }
     }
 
+    /// visit_binop (exceptions.py:535-551) — W0716 wrong-exception-operation
+    pub fn visit_binop(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        if !cx
+            .eng
+            .parent(node)
+            .map(|p| eng.kind_is(p, |k| matches!(k, NodeKind::ExceptHandler { .. })))
+            .unwrap_or(false)
+        {
+            return;
+        }
+        let (left, right, op) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::BinOp { left, right, op } => (
+                    GNode { m: node.m, n: *left },
+                    GNode { m: node.m, n: *right },
+                    op.to_string(),
+                ),
+                _ => return,
+            }
+        };
+        let is_tuple_or_uninf = |g: GNode| -> bool {
+            match u::safe_infer(eng, cx.caches, g) {
+                Some(v) if v.is_uninferable() => true,
+                Some(Value::Node(t)) => eng.kind_is(t, |k| matches!(k, NodeKind::Tuple { .. })),
+                Some(Value::SynthSeq { kind: pyinfer::value::SeqKind::Tuple, .. }) => true,
+                _ => false,
+            }
+        };
+        let both_tuple = is_tuple_or_uninf(left) && is_tuple_or_uninf(right);
+        let suggestion = if both_tuple {
+            if op == "+" {
+                return;
+            }
+            format!(
+                "Did you mean '({} + {})' instead?",
+                u::as_string(eng, left),
+                u::as_string(eng, right)
+            )
+        } else {
+            format!(
+                "Did you mean '({}, {})' instead?",
+                u::as_string(eng, left),
+                u::as_string(eng, right)
+            )
+        };
+        cx.emit_node(
+            "W0716",
+            u::lineno(eng, node),
+            u::col_offset(eng, node) as i64,
+            u::format_template("Invalid exception operation. %s", &[&suggestion]),
+        );
+    }
+
+    /// visit_compare (exceptions.py:553-561) — W0716
+    pub fn visit_compare(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        if !cx
+            .eng
+            .parent(node)
+            .map(|p| eng.kind_is(p, |k| matches!(k, NodeKind::ExceptHandler { .. })))
+            .unwrap_or(false)
+        {
+            return;
+        }
+        let (left, comparators): (GNode, Vec<NodeId>) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Compare { left, ops } => (
+                    GNode { m: node.m, n: *left },
+                    ops.iter().map(|(_, c)| *c).collect(),
+                ),
+                _ => return,
+            }
+        };
+        let ops_str = comparators
+            .iter()
+            .map(|&c| u::as_string(eng, GNode { m: node.m, n: c }))
+            .collect::<Vec<_>>()
+            .join(", ");
+        let suggestion = format!(
+            "Did you mean '({}, {})' instead?",
+            u::as_string(eng, left),
+            ops_str
+        );
+        cx.emit_node(
+            "W0716",
+            u::lineno(eng, node),
+            u::col_offset(eng, node) as i64,
+            u::format_template("Invalid exception operation. %s", &[&suggestion]),
+        );
+    }
+
     pub fn visit_trystar(&mut self, cx: &mut WalkCx, node: GNode) {
         self.visit_try(cx, node);
     }

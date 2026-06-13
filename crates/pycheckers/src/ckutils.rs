@@ -51,6 +51,33 @@ pub const BUILTINS: &[&str] = &[
     "__builtins__",
 ];
 
+/// pylint utils.PYMETHODS = set(SPECIAL_METHODS_PARAMS) (utils.py:78-193)
+pub const PYMETHODS: &[&str] = &[
+    "__new__", "__init__", "__call__", "__init_subclass__",
+    "__del__", "__repr__", "__str__", "__bytes__", "__hash__", "__bool__",
+    "__dir__", "__len__", "__length_hint__", "__iter__", "__reversed__",
+    "__neg__", "__pos__", "__abs__", "__invert__", "__complex__", "__int__",
+    "__float__", "__index__", "__trunc__", "__floor__", "__ceil__",
+    "__enter__", "__aenter__", "__getnewargs_ex__", "__getnewargs__",
+    "__getstate__", "__reduce__", "__copy__", "__unicode__", "__nonzero__",
+    "__await__", "__aiter__", "__anext__", "__fspath__", "__subclasses__",
+    "__format__", "__lt__", "__le__", "__eq__", "__ne__", "__gt__", "__ge__",
+    "__getattr__", "__getattribute__", "__delattr__", "__delete__",
+    "__instancecheck__", "__subclasscheck__", "__getitem__", "__missing__",
+    "__delitem__", "__contains__", "__add__", "__sub__", "__mul__",
+    "__truediv__", "__floordiv__", "__rfloordiv__", "__mod__", "__divmod__",
+    "__lshift__", "__rshift__", "__and__", "__xor__", "__or__", "__radd__",
+    "__rsub__", "__rmul__", "__rtruediv__", "__rmod__", "__rdivmod__",
+    "__rpow__", "__rlshift__", "__rrshift__", "__rand__", "__rxor__",
+    "__ror__", "__iadd__", "__isub__", "__imul__", "__itruediv__",
+    "__ifloordiv__", "__imod__", "__ilshift__", "__irshift__", "__iand__",
+    "__ixor__", "__ior__", "__ipow__", "__setstate__", "__reduce_ex__",
+    "__deepcopy__", "__cmp__", "__matmul__", "__rmatmul__", "__imatmul__",
+    "__div__",
+    "__setattr__", "__get__", "__set__", "__setitem__", "__set_name__",
+    "__exit__", "__aexit__", "__round__", "__pow__",
+];
+
 /// astroid `nodes.Module.scope_attrs` (scoped_nodes.py:218-224).
 pub const SCOPE_ATTRS: &[&str] = &["__name__", "__doc__", "__file__", "__path__", "__package__"];
 

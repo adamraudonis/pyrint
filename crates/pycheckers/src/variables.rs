@@ -11,7 +11,7 @@ use indexmap::IndexMap;
 use pyast::tree::{ConstValue, Ctx as ExprCtx, NodeKind};
 use pyast::NodeId;
 use pyinfer::graph::Engine;
-use pyinfer::value::{GNode, GSym, Value};
+use pyinfer::value::{GNode, GSym, Value, NV};
 use rustc_hash::{FxHashMap, FxHashSet};
 
 use crate::ckutils as u;
@@ -103,6 +103,13 @@ pub struct VarsChecker {
     /// _reported_type_checking_usage_scopes — instance state, persists
     /// ACROSS modules (variables.py:1334-1336)
     reported_type_checking_usage_scopes: FxHashMap<String, Vec<GNode>>,
+    /// _type_annotation_names (string-literal annotations recorded by
+    /// visit_const). NOT reset when leave_module returns early for a
+    /// package __init__ — the LEAK into the next module is replicated
+    /// (variables.py:1438-1444, notes/09 §1.3.1).
+    type_annotation_names: Vec<String>,
+    /// _except_handler_names_queue: (outer handler, its AssignName)
+    except_handler_names_queue: Vec<(GNode, GNode)>,
 }
 
 impl Default for VarsChecker {
@@ -111,6 +118,8 @@ impl Default for VarsChecker {
             to_consume: Vec::new(),
             postponed_evaluation_enabled: false,
             reported_type_checking_usage_scopes: FxHashMap::default(),
+            type_annotation_names: Vec::new(),
+            except_handler_names_queue: Vec::new(),
         }
     }
 }
@@ -200,6 +209,231 @@ fn global_names_in(eng: &Engine, frame: GNode) -> FxHashSet<GSym> {
         }
     }
     out
+}
+
+/// _flattened_scope_names over Nonlocal nodes of a frame
+fn nonlocal_names_in(eng: &Engine, frame: GNode) -> FxHashSet<GSym> {
+    let mut out = FxHashSet::default();
+    for n in u::preorder(eng, frame) {
+        let md = eng.md(n.m);
+        if let NodeKind::Nonlocal { names } = &md.tree.nodes[n.n.idx()].kind {
+            for &s in names {
+                out.insert(eng.g(&md, s));
+            }
+        }
+    }
+    out
+}
+
+/// utils.find_assigned_names_recursive (utils.py:2051-2061)
+fn find_assigned_names_recursive(eng: &Engine, target: GNode, out: &mut FxHashSet<GSym>) {
+    let md = eng.md(target.m);
+    match &md.tree.nodes[target.n.idx()].kind {
+        NodeKind::AssignName { name } => {
+            out.insert(eng.g(&md, *name));
+        }
+        NodeKind::Tuple { elts, .. } | NodeKind::List { elts, .. } | NodeKind::Set { elts } => {
+            let elts = elts.clone();
+            drop(md);
+            for e in elts {
+                find_assigned_names_recursive(eng, GNode { m: target.m, n: e }, out);
+            }
+        }
+        _ => {}
+    }
+}
+
+/// _import_name_is_global (variables.py:277-289)
+fn import_name_is_global(eng: &Engine, stmt: GNode, global_names: &FxHashSet<GSym>) -> bool {
+    let md = eng.md(stmt.m);
+    let pairs: Vec<(GSym, Option<GSym>)> = match &md.tree.nodes[stmt.n.idx()].kind {
+        NodeKind::Global { names } => names.iter().map(|&s| (eng.g(&md, s), None)).collect(),
+        NodeKind::Import { names } | NodeKind::ImportFrom { names, .. } => names
+            .iter()
+            .map(|&(n, a)| (eng.g(&md, n), a.map(|x| eng.g(&md, x))))
+            .collect(),
+        _ => return false,
+    };
+    drop(md);
+    for (import_name, alias) in pairs {
+        if let Some(a) = alias {
+            if global_names.contains(&a) {
+                return true;
+            }
+        } else if global_names.contains(&import_name) {
+            return true;
+        }
+    }
+    false
+}
+
+/// FunctionDef.argnames(): posonly + args + vararg + kwonly + kwarg
+fn func_argnames(eng: &Engine, func: GNode) -> Vec<GSym> {
+    let Some(spec) = eng.arg_spec(func) else { return Vec::new() };
+    let mut out: Vec<GSym> = Vec::new();
+    for g in spec.posonlyargs.iter().chain(spec.args.iter()) {
+        if let Some(s) = eng.assign_name_of(*g) {
+            out.push(s);
+        }
+    }
+    if let Some(v) = spec.vararg {
+        out.push(v);
+    }
+    for g in &spec.kwonlyargs {
+        if let Some(s) = eng.assign_name_of(*g) {
+            out.push(s);
+        }
+    }
+    if let Some(k) = spec.kwarg {
+        out.push(k);
+    }
+    out
+}
+
+/// _has_locals_call_after_node (variables.py:333-348)
+fn has_locals_call_after_node(cx: &mut WalkCx, stmt: GNode, scope: GNode) -> bool {
+    let eng = cx.eng;
+    let calls = crate::basicerr::nodes_of_class(
+        eng,
+        scope,
+        |k| matches!(k, NodeKind::Call { .. }),
+        |k| {
+            matches!(
+                k,
+                NodeKind::FunctionDef(_)
+                    | NodeKind::AsyncFunctionDef(_)
+                    | NodeKind::ClassDef(_)
+                    | NodeKind::Import { .. }
+                    | NodeKind::ImportFrom { .. }
+            )
+        },
+    );
+    for call in calls {
+        let func = {
+            let md = eng.md(call.m);
+            match &md.tree.nodes[call.n.idx()].kind {
+                NodeKind::Call { func, .. } => GNode { m: call.m, n: *func },
+                _ => continue,
+            }
+        };
+        let inferred = u::safe_infer(eng, cx.caches, func);
+        if let Some(Value::Node(g)) = inferred {
+            if eng.md(g.m).name == "builtins"
+                && eng.node_name(g).as_deref() == Some("locals")
+                && raw_lineno(eng, stmt) < eng.fromlineno(call)
+            {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// utils.overridden_method (utils.py:2323-2340)
+fn overridden_method(eng: &Engine, klass: GNode, name: &str) -> Option<GNode> {
+    if !u::is_classdef(eng, klass) {
+        return None;
+    }
+    let sym = eng.sym(name);
+    // ClassDef.local_attr_ancestors: mro()[1:] first, lazy ancestors()
+    // fallback on MroError; next() abandons after the FIRST hit.
+    let parent: Option<GNode> = match eng.mro(klass, None) {
+        Ok(m) => m
+            .get(1..)
+            .unwrap_or(&[])
+            .iter()
+            .copied()
+            .find(|&anc| !eng.class_locals_get(anc, sym).is_empty()),
+        Err(_) => {
+            let mut found = None;
+            let _ = eng.ancestors_to(klass, true, None, &mut |anc| {
+                if !eng.class_locals_get(anc, sym).is_empty() {
+                    found = Some(anc);
+                    return pyinfer::value::Drive::Stop;
+                }
+                pyinfer::value::Drive::Go
+            });
+            found
+        }
+    };
+    let parent = parent?;
+    let meth_node = *eng.class_locals_get(parent, sym).first()?;
+    if u::is_functiondef(eng, meth_node) {
+        Some(meth_node)
+    } else {
+        None
+    }
+}
+
+/// astroid FunctionDef.is_abstract(pass_is_abstract=True)
+fn func_is_abstract(cx: &mut WalkCx, func: GNode) -> bool {
+    let eng = cx.eng;
+    for dec in crate::typecheck::decorator_nodes_pub(eng, func) {
+        let inferred = match eng.first_value(dec, &u::fresh_ctx()) {
+            Ok(Some(v)) => v,
+            _ => continue,
+        };
+        if let Some(q) = eng.value_qname(&inferred) {
+            if q == "abc.abstractproperty" || q == "abc.abstractmethod" {
+                return true;
+            }
+        }
+    }
+    let body: Vec<NodeId> = {
+        let md = eng.md(func.m);
+        match &md.tree.nodes[func.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
+            _ => return false,
+        }
+    };
+    for &child in &body {
+        let g = GNode { m: func.m, n: child };
+        let exc: Option<NodeId> = {
+            let md = eng.md(g.m);
+            match &md.tree.nodes[g.n.idx()].kind {
+                NodeKind::Raise { exc, .. } => Some(exc.unwrap_or(pyast::NodeId::MODULE)),
+                _ => None,
+            }
+        };
+        if let Some(e) = exc {
+            // raises_not_implemented: any Name node in exc subtree named
+            // NotImplementedError (textual, node_classes.py:3470-3479)
+            if e != pyast::NodeId::MODULE {
+                let eg = GNode { m: func.m, n: e };
+                let raises_ni = u::preorder(eng, eg).iter().any(|&n| {
+                    let md = eng.md(n.m);
+                    matches!(&md.tree.nodes[n.n.idx()].kind,
+                        NodeKind::Name { name } if md.tree.s(*name) == "NotImplementedError")
+                });
+                if raises_ni {
+                    return true;
+                }
+            }
+        }
+        // first child decides (the loop returns on its first iteration)
+        return eng.kind_is(g, |k| matches!(k, NodeKind::Pass));
+    }
+    // empty function body == single pass
+    true
+}
+
+/// _is_exception_binding_used_in_handler (variables.py:2943-2950)
+fn is_exception_binding_used_in_handler(eng: &Engine, stmt: GNode, name: GSym) -> bool {
+    let Some(parent) = eng.parent(stmt) else { return false };
+    if !u::is_excepthandler(eng, parent) {
+        return false;
+    }
+    let is_handler_name = {
+        let md = eng.md(parent.m);
+        matches!(&md.tree.nodes[parent.n.idx()].kind,
+            NodeKind::ExceptHandler { name: Some(n), .. } if *n == stmt.n)
+    };
+    if !is_handler_name {
+        return false;
+    }
+    u::preorder(eng, parent).iter().any(|&n| {
+        eng.kind_is(n, |k| matches!(k, NodeKind::Name { .. })) && name_of(eng, n) == Some(name)
+    })
 }
 
 /// _is_nonlocal_name (variables.py:320-330)
@@ -1216,19 +1450,60 @@ impl VarsChecker {
         self.to_consume = vec![Consumer::new(cx.eng, node, ScopeType::Module)];
         self.postponed_evaluation_enabled =
             u::is_postponed_evaluation_enabled(cx.eng, node.m);
-        // redefined-builtin loop: W0622 disabled — skip
+        // redefined-builtin (a): module locals loop (variables.py:1401-1414;
+        // undecorated — runs in every mode, emission filtered downstream)
+        let eng = cx.eng;
+        let locals: Vec<(GSym, GNode)> = {
+            let md = eng.md(node.m);
+            let l = md.locals.borrow();
+            match l.get(&node.n) {
+                Some(map) => map
+                    .iter()
+                    .filter_map(|(k, v)| v.first().map(|&g| (*k, g)))
+                    .collect(),
+                None => Vec::new(),
+            }
+        };
+        for (name, stmt0) in locals {
+            if cx.caches.is_builtin(eng, name) {
+                let name_str = eng.sname(name);
+                if should_ignore_redefined_builtin(eng, stmt0) || name_str == "__doc__" {
+                    continue;
+                }
+                cx.emit_node(
+                    "W0622",
+                    u::msg_line(eng, stmt0),
+                    u::msg_col(eng, stmt0),
+                    u::format_template("Redefining built-in %r", &[&name_str]),
+                );
+            }
+        }
     }
 
     pub fn leave_module(&mut self, cx: &mut WalkCx, node: GNode) {
+        // only_required_for_messages gate (variables.py:1416-1425): skipped
+        // when ALL eight are config-disabled (visit_module reassigns
+        // _to_consume per module, so the unpopped consumer doesn't leak)
+        if !["W0611", "W0614", "W0622", "E0603", "E0604", "E0605", "W0612", "E0602"]
+            .iter()
+            .any(|m| (cx.cfg_enabled)(m))
+        {
+            return;
+        }
         debug_assert_eq!(self.to_consume.len(), 1);
         self.check_metaclasses(cx, node);
-        let not_consumed = self.to_consume.pop().map(|c| c.to_consume).unwrap_or_default();
+        let mut not_consumed =
+            self.to_consume.pop().map(|c| c.to_consume).unwrap_or_default();
         let all_sym = cx.eng.sym("__all__");
         if locals_contains(cx.eng, node, all_sym) {
-            self.check_all(cx, node, not_consumed.clone());
+            // _check_all also DELETES __all__-exported names from
+            // not_consumed (variables.py:3253-3255) -> no W0611/W0612
+            self.check_all(cx, node, &mut not_consumed);
         }
         // _check_globals: allow-global-unused-variables default True -> no-op
         // `if not init_import and node.package: return` (variables.py:1438)
+        // NOTE this early return also skips the _type_annotation_names
+        // reset — the __init__.py LEAK (notes/09 §1.3.1) is replicated.
         let is_package = {
             let md = cx.eng.md(node.m);
             match &md.tree.nodes[node.n.idx()].kind {
@@ -1240,6 +1515,7 @@ impl VarsChecker {
             return;
         }
         self.check_imports(cx, not_consumed);
+        self.type_annotation_names = Vec::new();
     }
 
     /// _check_imports (variables.py:3298-3385) — W0611 unused-import +
@@ -1345,7 +1621,10 @@ impl VarsChecker {
                     continue;
                 }
                 checked.insert(real_name.clone());
-                // _type_annotation_names: type comments only — not tracked
+                let is_type_annotation_import = self
+                    .type_annotation_names
+                    .iter()
+                    .any(|t| t == imported_name || Some(t.as_str()) == as_name.as_deref());
                 let is_dummy_import = as_name
                     .as_deref()
                     .map(dummy_rgx_match)
@@ -1354,7 +1633,7 @@ impl VarsChecker {
                     if !is_import && special_obj_match(imported_name) {
                         continue;
                     }
-                    if is_dummy_import {
+                    if is_type_annotation_import || is_dummy_import {
                         continue;
                     }
                     let msg = match as_name {
@@ -1378,7 +1657,7 @@ impl VarsChecker {
                     if is_from_future_import(eng, stmt, &name) {
                         continue;
                     }
-                    if is_dummy_import {
+                    if is_type_annotation_import || is_dummy_import {
                         continue;
                     }
                     if imported_name == "*" {
@@ -1478,12 +1757,563 @@ impl VarsChecker {
     }
     pub fn visit_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
         self.to_consume.push(Consumer::new(cx.eng, node, ScopeType::Function));
-        // redefined-outer-name / redefined-builtin gate: both disabled
+        // redefined-outer-name / redefined-builtin (variables.py:1502-1544)
+        if !((cx.cfg_enabled)("W0621") || (cx.cfg_enabled)("W0622")) {
+            return;
+        }
+        let eng = cx.eng;
+        let module = module_node(node);
+        // node.items(): (name, locals[name][0]) in locals insertion order
+        let items: Vec<(GSym, GNode)> = {
+            let md = eng.md(node.m);
+            let l = md.locals.borrow();
+            match l.get(&node.n) {
+                Some(map) => map
+                    .iter()
+                    .filter_map(|(k, v)| v.first().map(|&g| (*k, g)))
+                    .collect(),
+                None => Vec::new(),
+            }
+        };
+        for (name, stmt) in items {
+            let globs = locals_get(eng, module, name);
+            let stmt_is_global = eng.kind_is(stmt, |k| matches!(k, NodeKind::Global { .. }));
+            if !globs.is_empty() && !stmt_is_global {
+                let definition = globs[0];
+                // __future__ directive, not a symbol
+                let is_future = {
+                    let md = eng.md(definition.m);
+                    matches!(&md.tree.nodes[definition.n.idx()].kind,
+                        NodeKind::ImportFrom { modname, .. }
+                            if md.tree.s(*modname) == "__future__")
+                };
+                if is_future {
+                    continue;
+                }
+                if globs
+                    .iter()
+                    .any(|&d| u::in_type_checking_block(eng, cx.caches, d))
+                {
+                    continue;
+                }
+                // outer `except ... as e` binding
+                let is_except_binding = eng.kind_is(globs[0], |k| {
+                    matches!(k, NodeKind::AssignName { .. })
+                }) && eng
+                    .parent(globs[0])
+                    .map(|p| u::is_excepthandler(eng, p))
+                    .unwrap_or(false);
+                if is_except_binding {
+                    continue;
+                }
+                let line = eng.fromlineno(definition);
+                if !is_name_ignored(eng, stmt, name) {
+                    let name_str = eng.sname(name);
+                    cx.emit_node(
+                        "W0621",
+                        u::msg_line(eng, stmt),
+                        u::msg_col(eng, stmt),
+                        u::format_template(
+                            "Redefining name %r from outer scope (line %s)",
+                            &[&name_str, &line.to_string()],
+                        ),
+                    );
+                }
+            } else if cx.caches.is_builtin(eng, name)
+                && !should_ignore_redefined_builtin(eng, stmt)
+            {
+                // allowed-redefined-builtins default () — no exemption
+                let name_str = eng.sname(name);
+                cx.emit_node(
+                    "W0622",
+                    u::msg_line(eng, stmt),
+                    u::msg_col(eng, stmt),
+                    u::format_template("Redefining built-in %r", &[&name_str]),
+                );
+            }
+        }
+    }
+
+    /// visit_global (variables.py:1595-1665) — W0601/W0602/W0603/W0604 +
+    /// the special-attribute W0622 arm
+    pub fn visit_global(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let frame = eng.frame(node);
+        let line = u::lineno(eng, node);
+        let col = u::col_offset(eng, node).max(0) as i64;
+        if u::is_module(eng, frame) {
+            cx.emit_node(
+                "W0604",
+                line,
+                col,
+                "Using the global statement at the module level".to_string(),
+            );
+            return;
+        }
+        let module = module_node(node);
+        let names: Vec<GSym> = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Global { names } => names.iter().map(|&s| eng.g(&md, s)).collect(),
+                _ => return,
+            }
+        };
+        let mut default_message = true;
+        for name in names {
+            let assign_nodes = locals_get(eng, module, name);
+            let not_defined_locally_by_import = !locals_get(eng, module, name).iter().any(|&l| {
+                eng.kind_is(l, |k| {
+                    matches!(k, NodeKind::Import { .. } | NodeKind::ImportFrom { .. })
+                })
+            });
+            if !is_reassigned_after_current(eng, node, name)
+                && !is_deleted_after_current(eng, node, name)
+                && not_defined_locally_by_import
+            {
+                let name_str = eng.sname(name);
+                cx.emit_node(
+                    "W0602",
+                    line,
+                    col,
+                    u::format_template(
+                        "Using global for %r but no assignment is done",
+                        &[&name_str],
+                    ),
+                );
+                default_message = false;
+                continue;
+            }
+            let mut broke = false;
+            for anode in &assign_nodes {
+                let is_special_assignname = eng
+                    .kind_is(*anode, |k| matches!(k, NodeKind::AssignName { .. }))
+                    && MODULE_SPECIAL_ATTRIBUTES
+                        .contains(&eng.sname(name_of(eng, *anode).unwrap_or(0)).as_str());
+                if is_special_assignname {
+                    let name_str = eng.sname(name);
+                    cx.emit_node(
+                        "W0622",
+                        line,
+                        col,
+                        u::format_template("Redefining built-in %r", &[&name_str]),
+                    );
+                    broke = true;
+                    break;
+                }
+                if eng.frame(*anode) == module {
+                    broke = true;
+                    break;
+                }
+                let is_def = eng.kind_is(*anode, |k| {
+                    matches!(
+                        k,
+                        NodeKind::ClassDef(_)
+                            | NodeKind::FunctionDef(_)
+                            | NodeKind::AsyncFunctionDef(_)
+                    )
+                });
+                if is_def && eng.parent(*anode) == Some(module) {
+                    broke = true;
+                    break;
+                }
+            }
+            if !broke && not_defined_locally_by_import {
+                let name_str = eng.sname(name);
+                cx.emit_node(
+                    "W0601",
+                    line,
+                    col,
+                    u::format_template(
+                        "Global variable %r undefined at the module level",
+                        &[&name_str],
+                    ),
+                );
+                default_message = false;
+            }
+        }
+        if default_message {
+            cx.emit_node("W0603", line, col, "Using the global statement".to_string());
+        }
+    }
+
+    /// visit_excepthandler (variables.py:1689-1704) — W0621 except queue
+    pub fn visit_excepthandler(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let name_node: Option<GNode> = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::ExceptHandler { name: Some(n), .. } => Some(GNode { m: node.m, n: *n }),
+                _ => None,
+            }
+        };
+        let Some(name_node) = name_node else { return };
+        if !eng.kind_is(name_node, |k| matches!(k, NodeKind::AssignName { .. })) {
+            return;
+        }
+        let nm = name_of(eng, name_node);
+        for (outer_except, outer_assign) in self.except_handler_names_queue.clone() {
+            if name_of(eng, outer_assign) == nm {
+                let name_str = eng.sname(nm.unwrap_or(0));
+                let outer_line = eng.fromlineno(outer_except);
+                cx.emit_node(
+                    "W0621",
+                    u::lineno(eng, node),
+                    u::col_offset(eng, node).max(0) as i64,
+                    u::format_template(
+                        "Redefining name %r from outer scope (line %s)",
+                        &[&name_str, &outer_line.to_string()],
+                    ),
+                );
+                break;
+            }
+        }
+        self.except_handler_names_queue.push((node, name_node));
+    }
+
+    /// leave_excepthandler (variables.py:1706-1709)
+    pub fn leave_excepthandler(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let has_assignname = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::ExceptHandler { name: Some(n), .. } => matches!(
+                    md.tree.nodes[n.idx()].kind,
+                    NodeKind::AssignName { .. }
+                ),
+                _ => false,
+            }
+        };
+        if !has_assignname {
+            return;
+        }
+        self.except_handler_names_queue.pop();
     }
     pub fn leave_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
         self.check_metaclasses(cx, node);
-        self.to_consume.pop();
-        // unused-variable family disabled -> early return
+        // type_comment_returns/_args: `# type:` comments — dropped by our tree
+        let not_consumed = self.to_consume.pop().map(|c| c.to_consume).unwrap_or_default();
+        if !((cx.cfg_enabled)("W0612")
+            || (cx.cfg_enabled)("W0641")
+            || (cx.cfg_enabled)("W0613"))
+        {
+            return;
+        }
+        let eng = cx.eng;
+        // utils.is_error: the body only raises
+        let body: Vec<NodeId> = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
+                _ => return,
+            }
+        };
+        if body.len() == 1
+            && eng.kind_is(GNode { m: node.m, n: body[0] }, |k| {
+                matches!(k, NodeKind::Raise { .. })
+            })
+        {
+            return;
+        }
+        let is_meth = is_method(eng, node);
+        if is_meth && func_is_abstract(cx, node) {
+            return;
+        }
+        let global_names = global_names_in(eng, node);
+        let nonlocal_names = nonlocal_names_in(eng, node);
+        let mut comprehension_target_names: FxHashSet<GSym> = FxHashSet::default();
+        for comp in u::preorder(eng, node) {
+            let md = eng.md(comp.m);
+            let generators: Vec<NodeId> = match &md.tree.nodes[comp.n.idx()].kind {
+                NodeKind::ListComp(d) | NodeKind::SetComp(d) | NodeKind::GeneratorExp(d) => {
+                    d.generators.clone()
+                }
+                NodeKind::DictComp(d) => d.generators.clone(),
+                _ => continue,
+            };
+            drop(md);
+            for g in generators {
+                let target: Option<NodeId> = {
+                    let md = eng.md(comp.m);
+                    match &md.tree.nodes[g.idx()].kind {
+                        NodeKind::Comprehension { target, .. } => Some(*target),
+                        _ => None,
+                    }
+                };
+                if let Some(t) = target {
+                    find_assigned_names_recursive(
+                        eng,
+                        GNode { m: comp.m, n: t },
+                        &mut comprehension_target_names,
+                    );
+                }
+            }
+        }
+        let entries: Vec<(GSym, GNode)> = not_consumed
+            .iter()
+            .filter_map(|(k, v)| v.first().map(|&g| (*k, g)))
+            .collect();
+        for (name, stmt0) in entries {
+            self.check_is_unused(
+                cx,
+                name,
+                node,
+                stmt0,
+                &global_names,
+                &nonlocal_names,
+                &comprehension_target_names,
+            );
+        }
+    }
+
+    /// _check_is_unused (variables.py:2774-2872)
+    #[allow(clippy::too_many_arguments)]
+    fn check_is_unused(
+        &mut self,
+        cx: &mut WalkCx,
+        name: GSym,
+        node: GNode,
+        stmt: GNode,
+        global_names: &FxHashSet<GSym>,
+        nonlocal_names: &FxHashSet<GSym>,
+        comprehension_target_names: &FxHashSet<GSym>,
+    ) {
+        let eng = cx.eng;
+        if is_name_ignored(eng, stmt, name) {
+            return;
+        }
+        // `__class__` dynamic-locals guard: astroid does not inject
+        // __class__ into method locals (probed) — pattern can't match.
+        let stmt_is_global_or_import = eng.kind_is(stmt, |k| {
+            matches!(
+                k,
+                NodeKind::Global { .. } | NodeKind::Import { .. } | NodeKind::ImportFrom { .. }
+            )
+        });
+        if stmt_is_global_or_import
+            && !global_names.is_empty()
+            && import_name_is_global(eng, stmt, global_names)
+        {
+            return;
+        }
+        if comprehension_target_names.contains(&name) {
+            return;
+        }
+        let mut name_str = eng.sname(name);
+        if self.type_annotation_names.iter().any(|t| *t == name_str) {
+            return;
+        }
+        let argnames = func_argnames(eng, node);
+        if argnames.contains(&name) {
+            // __new__ + __init__-defined special case
+            if eng.node_name(node).as_deref() == Some("__new__") {
+                if let Some(parent) = eng.parent(node) {
+                    let children = eng.md(parent.m).tree.children(parent.n);
+                    let has_init = children.iter().any(|&c| {
+                        let g = GNode { m: parent.m, n: c };
+                        eng.node_name(g).as_deref() == Some("__init__")
+                            || name_of(eng, g).map(|s| eng.sname(s)).as_deref()
+                                == Some("__init__")
+                    });
+                    if has_init {
+                        return;
+                    }
+                }
+            }
+            self.check_unused_arguments(cx, name, node, stmt, &argnames, nonlocal_names);
+        } else {
+            let parent_kind_ok = eng
+                .parent(stmt)
+                .map(|p| {
+                    eng.kind_is(p, |k| {
+                        matches!(
+                            k,
+                            NodeKind::Assign { .. }
+                                | NodeKind::AnnAssign { .. }
+                                | NodeKind::Tuple { .. }
+                                | NodeKind::For(_)
+                        )
+                    })
+                })
+                .unwrap_or(false);
+            if parent_kind_ok && nonlocal_names.contains(&name) {
+                return;
+            }
+            let mut qname: Option<String> = None;
+            let mut asname: Option<String> = None;
+            let stmt_import_kind: u8 = {
+                let md = eng.md(stmt.m);
+                match &md.tree.nodes[stmt.n.idx()].kind {
+                    NodeKind::Import { .. } => 1,
+                    NodeKind::ImportFrom { .. } => 2,
+                    _ => 0,
+                }
+            };
+            if stmt_import_kind != 0 {
+                let md = eng.md(stmt.m);
+                let names: Vec<(String, Option<String>)> = match &md.tree.nodes[stmt.n.idx()].kind
+                {
+                    NodeKind::Import { names } | NodeKind::ImportFrom { names, .. } => names
+                        .iter()
+                        .map(|&(n, a)| {
+                            (md.tree.s(n).to_string(), a.map(|x| md.tree.s(x).to_string()))
+                        })
+                        .collect(),
+                    _ => Vec::new(),
+                };
+                drop(md);
+                let import_names: Option<(String, Option<String>)> = if names.len() > 1 {
+                    names
+                        .iter()
+                        .find(|(q, a)| *q == name_str || a.as_deref() == Some(name_str.as_str()))
+                        .cloned()
+                } else {
+                    names.first().cloned()
+                };
+                if let Some((q, a)) = import_names {
+                    qname = Some(q.clone());
+                    asname = a.clone();
+                    name_str = a.unwrap_or(q);
+                }
+            }
+            let message_is_possibly = has_locals_call_after_node(cx, stmt, eng.scope(node));
+            if !message_is_possibly {
+                if stmt_import_kind == 1 {
+                    let msg = match &asname {
+                        Some(a) => format!("{} imported as {}", qname.as_deref().unwrap_or(""), a),
+                        None => format!("import {name_str}"),
+                    };
+                    cx.emit_node(
+                        "W0611",
+                        u::lineno(eng, stmt),
+                        u::col_offset(eng, stmt).max(0) as i64,
+                        u::format_template("Unused %s", &[&msg]),
+                    );
+                    return;
+                }
+                if stmt_import_kind == 2 {
+                    let modname: String = {
+                        let md = eng.md(stmt.m);
+                        match &md.tree.nodes[stmt.n.idx()].kind {
+                            NodeKind::ImportFrom { modname, .. } => {
+                                md.tree.s(*modname).to_string()
+                            }
+                            _ => String::new(),
+                        }
+                    };
+                    let msg = match &asname {
+                        Some(a) => format!(
+                            "{} imported from {} as {}",
+                            qname.as_deref().unwrap_or(""),
+                            modname,
+                            a
+                        ),
+                        None => format!("{name_str} imported from {modname}"),
+                    };
+                    cx.emit_node(
+                        "W0611",
+                        u::lineno(eng, stmt),
+                        u::col_offset(eng, stmt).max(0) as i64,
+                        u::format_template("Unused %s", &[&msg]),
+                    );
+                    return;
+                }
+            }
+            // decorated nested function counts as used
+            let stmt_is_decorated_func = {
+                let md = eng.md(stmt.m);
+                match &md.tree.nodes[stmt.n.idx()].kind {
+                    NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                        d.decorators.is_some()
+                    }
+                    _ => false,
+                }
+            };
+            if stmt_is_decorated_func {
+                return;
+            }
+            if crate::typecheck::is_overload_stub(cx.caches, eng, node) {
+                return;
+            }
+            if is_exception_binding_used_in_handler(eng, stmt, name) {
+                return;
+            }
+            let (msgid, template) = if message_is_possibly {
+                ("W0641", "Possibly unused variable %r")
+            } else {
+                ("W0612", "Unused variable %r")
+            };
+            cx.emit_node(
+                msgid,
+                u::msg_line(eng, stmt),
+                u::msg_col(eng, stmt),
+                u::format_template(template, &[&name_str]),
+            );
+        }
+    }
+
+    /// _check_unused_arguments (variables.py:2890-2941) — W0613
+    fn check_unused_arguments(
+        &mut self,
+        cx: &mut WalkCx,
+        name: GSym,
+        node: GNode,
+        stmt: GNode,
+        argnames: &[GSym],
+        nonlocal_names: &FxHashSet<GSym>,
+    ) {
+        let eng = cx.eng;
+        let is_meth = is_method(eng, node);
+        let klass = eng.frame(eng.parent(node).unwrap_or(node));
+        if is_meth && u::is_classdef(eng, klass) {
+            // confidence selection burn (INFERENCE vs INFERENCE_FAILURE)
+            let _ = crate::typecheck::has_known_bases(eng, cx.caches, klass);
+        }
+        let func_name = eng.node_name(node).unwrap_or_default();
+        if is_meth {
+            if eng.func_type(node) != pyinfer::graph::FType::StaticMethod
+                && Some(&name) == argnames.first()
+            {
+                return;
+            }
+            if let Some(overridden) = overridden_method(eng, klass, &func_name) {
+                if func_argnames(eng, overridden).contains(&name) {
+                    return;
+                }
+            }
+            if u::PYMETHODS.contains(&func_name.as_str())
+                && func_name != "__init__"
+                && func_name != "__new__"
+            {
+                return;
+            }
+        }
+        // callbacks default ("cb_", "_cb") — against the FUNCTION name
+        if func_name.starts_with("cb_")
+            || func_name.ends_with("cb_")
+            || func_name.starts_with("_cb")
+            || func_name.ends_with("_cb")
+        {
+            return;
+        }
+        if crate::basicerr::is_registered_in_singledispatch_function(eng, cx, node) {
+            return;
+        }
+        if crate::typecheck::is_overload_stub(cx.caches, eng, node) {
+            return;
+        }
+        if u::is_classdef(eng, klass) && crate::typecheck::is_protocol_class(eng, klass) {
+            return;
+        }
+        if nonlocal_names.contains(&name) {
+            return;
+        }
+        let name_str = eng.sname(name);
+        cx.emit_node(
+            "W0613",
+            u::msg_line(eng, stmt),
+            u::msg_col(eng, stmt),
+            u::format_template("Unused argument %r", &[&name_str]),
+        );
     }
 
     /// visit_assignname (variables.py:1667-1669)
@@ -1502,7 +2332,256 @@ impl VarsChecker {
     pub fn visit_name(&mut self, cx: &mut WalkCx, node: GNode) {
         let Some(stmt) = cx.eng.statement(node) else { return };
         self.undefined_and_used_before_checker(cx, node, stmt);
-        // _loopvar_name: W0631 only — not ported
+        // _loopvar_name (W0631). pylint runs it unconditionally; we gate on
+        // the message's config state so the -E pipeline stays byte-frozen
+        // (its inference burns are output-inert there: 27-corpus -E parity
+        // was achieved without them).
+        if (cx.cfg_enabled)("W0631") {
+            self.loopvar_name(cx, node);
+        }
+    }
+
+    /// _loopvar_name (variables.py:2625-2771) — W0631
+    fn loopvar_name(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let Some(name) = name_of(eng, node) else { return };
+        let name_str = eng.sname(name);
+        let emit = |cx: &mut WalkCx| {
+            cx.emit_node(
+                "W0631",
+                u::lineno(cx.eng, node),
+                u::col_offset(cx.eng, node).max(0) as i64,
+                u::format_template("Using possibly undefined loop variable %r", &[&name_str]),
+            );
+        };
+        let lk = eng.lookup(node, name);
+        let astmts: Vec<GNode> = lk
+            .1
+            .iter()
+            .filter_map(|nv| match nv {
+                NV::N(g) => Some(*g),
+                _ => None,
+            })
+            .collect();
+        let scope = eng.scope(node);
+        if eng.kind_is(scope, |k| {
+            matches!(k, NodeKind::Lambda(_) | NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_))
+        }) && astmts.iter().any(|&a| eng.parent_of(eng.scope(a), scope))
+        {
+            return;
+        }
+        let mut filtered: Vec<GNode> = Vec::new();
+        let drop_all = astmts.is_empty() || {
+            let a0 = astmts[0];
+            let a0_parent = eng.parent(a0);
+            let a0_root = module_node(a0);
+            let cond1 = a0_parent == Some(a0_root)
+                && a0_parent.map(|p| eng.parent_of(p, node)).unwrap_or(false);
+            let cond2 = {
+                let is_stmt = eng.statement(a0) == Some(a0);
+                is_stmt
+                    || (!a0_parent
+                        .map(|p| u::is_module(eng, p))
+                        .unwrap_or(false)
+                        && eng
+                            .statement(a0)
+                            .map(|st| eng.parent_of(st, node))
+                            .unwrap_or(false))
+            };
+            cond1 || cond2
+        };
+        if !drop_all {
+            filtered.push(astmts[0]);
+        }
+        for (i, &stmt) in astmts.iter().enumerate().skip(1) {
+            // NOTE pylint indexes astmts[i] == the PREVIOUS element
+            let prev = astmts[i - 1];
+            let Some(prev_statement) = eng.statement(prev) else { continue };
+            if eng.parent_of(prev_statement, stmt)
+                && !in_for_else_branch(eng, prev_statement, stmt)
+            {
+                continue;
+            }
+            filtered.push(stmt);
+        }
+        if filtered.len() != 1 {
+            return;
+        }
+        let assign = eng.assign_type(filtered[0]);
+        let assign_is_loopish = eng.kind_is(assign, |k| {
+            matches!(
+                k,
+                NodeKind::For(_) | NodeKind::Comprehension { .. } | NodeKind::GeneratorExp(_)
+            )
+        });
+        if !(assign_is_loopish && eng.statement(assign) != eng.statement(node)) {
+            return;
+        }
+        if !eng.kind_is(assign, |k| matches!(k, NodeKind::For(_))) {
+            emit(cx);
+            return;
+        }
+        let (orelse, iter_n): (Vec<NodeId>, NodeId) = {
+            let md = eng.md(assign.m);
+            match &md.tree.nodes[assign.n.idx()].kind {
+                NodeKind::For(d) => (d.orelse.clone(), d.iter),
+                _ => return,
+            }
+        };
+        for &es in &orelse {
+            let eg = GNode { m: assign.m, n: es };
+            if eng.kind_is(eg, |k| {
+                matches!(
+                    k,
+                    NodeKind::Return { .. }
+                        | NodeKind::Raise { .. }
+                        | NodeKind::Break
+                        | NodeKind::Continue
+                )
+            }) {
+                return;
+            }
+            let call_func: Option<GNode> = {
+                let md = eng.md(eg.m);
+                match &md.tree.nodes[eg.n.idx()].kind {
+                    NodeKind::Expr { value } => match &md.tree.nodes[value.idx()].kind {
+                        NodeKind::Call { func, .. } => Some(GNode { m: eg.m, n: *func }),
+                        _ => None,
+                    },
+                    _ => None,
+                }
+            };
+            if let Some(f) = call_func {
+                if let Some(Value::Node(fd)) = u::safe_infer(eng, cx.caches, f) {
+                    let returns: Option<GNode> = {
+                        let md = eng.md(fd.m);
+                        match &md.tree.nodes[fd.n.idx()].kind {
+                            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                                d.returns.map(|r| GNode { m: fd.m, n: r })
+                            }
+                            _ => None,
+                        }
+                    };
+                    if let Some(r) = returns {
+                        let inferred_return = u::safe_infer(eng, cx.caches, r);
+                        match &inferred_return {
+                            Some(Value::Node(g)) if u::is_functiondef(eng, *g) => {
+                                let q = eng.qname(*g);
+                                if [
+                                    "typing.NoReturn",
+                                    "typing_extensions.NoReturn",
+                                    "typing.Never",
+                                    "typing_extensions.Never",
+                                    "typing._SpecialForm",
+                                ]
+                                .contains(&q.as_str())
+                                {
+                                    return;
+                                }
+                            }
+                            Some(v @ (Value::Inst { .. } | Value::ExcInst { .. })) => {
+                                if eng.value_qname(v).as_deref() == Some("typing._SpecialForm") {
+                                    return;
+                                }
+                            }
+                            _ => {}
+                        }
+                    }
+                }
+            }
+        }
+        // walrus-in-comprehension exemption (variables.py:2716-2732)
+        let maybe_walrus =
+            u::first_ancestor(eng, node, |k| matches!(k, NodeKind::NamedExpr { .. }));
+        if let Some(w) = maybe_walrus {
+            if let Some(comp) =
+                u::first_ancestor(eng, w, |k| matches!(k, NodeKind::Comprehension { .. }))
+            {
+                let comp_scope = u::first_ancestor(eng, comp, |k| {
+                    matches!(
+                        k,
+                        NodeKind::ListComp(_)
+                            | NodeKind::SetComp(_)
+                            | NodeKind::DictComp(_)
+                            | NodeKind::GeneratorExp(_)
+                    )
+                });
+                if let Some(cs) = comp_scope {
+                    let parent_scope_ok = eng
+                        .parent(cs)
+                        .map(|p| eng.scope(p) == scope)
+                        .unwrap_or(false);
+                    if parent_scope_ok && locals_contains(eng, cs, name) {
+                        return;
+                    }
+                }
+            }
+        }
+        // iterable length heuristic
+        let iter_g = GNode { m: assign.m, n: iter_n };
+        let mut inferred = match eng.first_value(iter_g, &u::fresh_ctx()) {
+            Ok(Some(v)) => v,
+            _ => {
+                emit(cx);
+                return;
+            }
+        };
+        if matches!(&inferred, Value::Inst { .. } | Value::ExcInst { .. })
+            && eng.value_qname(&inferred).as_deref() == Some("builtins.enumerate")
+        {
+            let likely_call: GNode = {
+                let md = eng.md(iter_g.m);
+                match &md.tree.nodes[iter_g.n.idx()].kind {
+                    NodeKind::IfExp { body, .. } => GNode { m: iter_g.m, n: *body },
+                    _ => iter_g,
+                }
+            };
+            let first_arg: Option<GNode> = {
+                let md = eng.md(likely_call.m);
+                match &md.tree.nodes[likely_call.n.idx()].kind {
+                    NodeKind::Call { args, .. } => {
+                        args.first().map(|&a| GNode { m: likely_call.m, n: a })
+                    }
+                    _ => None,
+                }
+            };
+            if let Some(a0) = first_arg {
+                match eng.first_value(a0, &u::fresh_ctx()) {
+                    Ok(Some(v)) => inferred = v,
+                    _ => {
+                        emit(cx);
+                        return;
+                    }
+                }
+            }
+        }
+        if matches!(&inferred, Value::Inst { .. } | Value::ExcInst { .. })
+            && eng.value_qname(&inferred).as_deref() == Some("builtins.range")
+        {
+            return;
+        }
+        // sequences: List/Tuple/Dict/Set nodes, synth seqs/dicts, FrozenSet
+        let elements: Option<usize> = match &inferred {
+            Value::Node(g) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Tuple { elts, .. }
+                    | NodeKind::List { elts, .. }
+                    | NodeKind::Set { elts } => Some(elts.len()),
+                    NodeKind::Dict { items } => Some(items.len()),
+                    _ => None,
+                }
+            }
+            Value::SynthSeq { elems, .. } => Some(elems.len()),
+            Value::SynthDict { items } => Some(items.len()),
+            Value::FrozenSet { elems } => Some(elems.len()),
+            _ => None,
+        };
+        match elements {
+            None => emit(cx),
+            Some(0) => emit(cx),
+            Some(_) => {}
+        }
     }
 
     /// visit_assign (variables.py:2152-2170) — E0633 unpacking-non-sequence
@@ -1715,6 +2794,245 @@ impl VarsChecker {
                 u::format_template("Invalid assignment to %s in method", &[&self_cls_name]),
             );
         }
+    }
+
+    /// _check_late_binding_closure (variables.py:2952-3000) — W0640
+    fn check_late_binding_closure(&mut self, cx: &mut WalkCx, node: GNode) {
+        if !(cx.cfg_enabled)("W0640") {
+            return;
+        }
+        let eng = cx.eng;
+        let Some(name) = name_of(eng, node) else { return };
+        let mut node_scope = eng.frame(node);
+        if u::is_default_argument(eng, node, Some(node_scope)) {
+            if let Some(p) = eng.parent(node_scope) {
+                node_scope = eng.frame(p);
+            }
+        }
+        let scope_is_fn = eng.kind_is(node_scope, |k| {
+            matches!(
+                k,
+                NodeKind::Lambda(_) | NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+            )
+        });
+        if !scope_is_fn || locals_contains(eng, node_scope, name) {
+            return;
+        }
+        let lk = eng.lookup(node, name);
+        let assign_scope = lk.0;
+        let stmts: Vec<GNode> = lk
+            .1
+            .iter()
+            .filter_map(|nv| match nv {
+                NV::N(g) => Some(*g),
+                _ => None,
+            })
+            .collect();
+        if stmts.is_empty() || !eng.parent_of(assign_scope, node_scope) {
+            return;
+        }
+        let name_str = eng.sname(name);
+        let is_comprehension = eng.kind_is(assign_scope, |k| {
+            matches!(
+                k,
+                NodeKind::ListComp(_)
+                    | NodeKind::SetComp(_)
+                    | NodeKind::DictComp(_)
+                    | NodeKind::GeneratorExp(_)
+            )
+        });
+        if is_comprehension {
+            cx.emit_node(
+                "W0640",
+                u::lineno(eng, node),
+                u::col_offset(eng, node).max(0) as i64,
+                u::format_template("Cell variable %s defined in loop", &[&name_str]),
+            );
+            return;
+        }
+        let assignment_node = stmts[0];
+        // while maybe_for and not For: break at assign_scope / climb
+        let mut maybe_for: Option<GNode> = Some(assignment_node);
+        let mut broke = false;
+        while let Some(mf) = maybe_for {
+            if eng.kind_is(mf, |k| matches!(k, NodeKind::For(_))) {
+                break;
+            }
+            if mf == assign_scope {
+                broke = true;
+                break;
+            }
+            maybe_for = eng.parent(mf);
+        }
+        if broke {
+            return;
+        }
+        let Some(mf) = maybe_for else {
+            // walked off the tree without finding a For: while-condition
+            // exit with maybe_for falsy -> the `if maybe_for and ...` guard
+            // fails -> no message
+            return;
+        };
+        // is_being_called: node_scope.parent is Call with func == node_scope
+        let is_being_called = eng
+            .parent(node_scope)
+            .map(|p| {
+                let md = eng.md(p.m);
+                matches!(&md.tree.nodes[p.n.idx()].kind,
+                    NodeKind::Call { func, .. } if *func == node_scope.n)
+            })
+            .unwrap_or(false);
+        let stmt_is_return = eng
+            .statement(node_scope)
+            .map(|st| eng.kind_is(st, |k| matches!(k, NodeKind::Return { .. })))
+            .unwrap_or(false);
+        if eng.parent_of(mf, node_scope)
+            && !is_being_called
+            && eng.parent(node_scope).is_some()
+            && !stmt_is_return
+        {
+            cx.emit_node(
+                "W0640",
+                u::lineno(eng, node),
+                u::col_offset(eng, node).max(0) as i64,
+                u::format_template("Cell variable %s defined in loop", &[&name_str]),
+            );
+        }
+    }
+
+    /// visit_for (variables.py:1346-1396) — W0644 (dict-iter path)
+    pub fn visit_for(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let (target, iter_n): (NodeId, NodeId) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::For(d) => (d.target, d.iter),
+                _ => return,
+            }
+        };
+        let targets: Vec<GNode> = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[target.idx()].kind {
+                NodeKind::Tuple { elts, .. } => {
+                    elts.iter().map(|&e| GNode { m: node.m, n: e }).collect()
+                }
+                _ => return,
+            }
+        };
+        let iter_g = GNode { m: node.m, n: iter_n };
+        let Some(inferred) = u::safe_infer(eng, cx.caches, iter_g) else { return };
+        if !value_is_dict_type(eng, &inferred) {
+            return;
+        }
+        let values = dict_unpack_values(eng, &inferred);
+        let Some(values) = values else { return };
+        if values.is_empty() {
+            return;
+        }
+        let any_starred = targets
+            .iter()
+            .any(|&t| eng.kind_is(t, |k| matches!(k, NodeKind::Starred { .. })));
+        if matches!(&inferred, Value::DictItems(_)) {
+            if targets.len() == 2 && values.iter().all(|v| v.tuple_len() == Some(2)) {
+                return;
+            }
+            if any_starred {
+                return;
+            }
+        }
+        let is_raw_dict = matches!(&inferred, Value::Node(g) if eng.kind_is(*g, |k| matches!(k, NodeKind::Dict { .. })))
+            || matches!(&inferred, Value::SynthDict { .. });
+        if is_raw_dict {
+            // CONTROL-FLOW QUIRK: the value loop lives in the `else` of
+            // `isinstance(inferred, nodes.Dict)` — a raw Dict never reaches
+            // it; only the Name-iter 2-target early return applies.
+            if eng.kind_is(iter_g, |k| matches!(k, NodeKind::Name { .. })) && targets.len() == 2 {
+            }
+            return;
+        }
+        for value in &values {
+            let value_length = value.length(eng);
+            let is_valid_star_unpack = any_starred && value_length >= targets.len();
+            if targets.len() != value_length && !is_valid_star_unpack {
+                // details: For -> node.iter.as_string()
+                let details = u::as_string(eng, iter_g);
+                let lp = if targets.len() == 1 { "" } else { "s" };
+                let vp = if value_length == 1 { "" } else { "s" };
+                cx.emit_node(
+                    "W0644",
+                    u::msg_line(eng, node),
+                    u::msg_col(eng, node),
+                    u::format_template(
+                        "Possible unbalanced dict unpacking with %s: left side has %d label%s, right side has %d value%s",
+                        &[&details, &targets.len().to_string(), lp, &value_length.to_string(), vp],
+                    ),
+                );
+                break;
+            }
+        }
+    }
+
+    /// visit_const (variables.py:3502-3530): record string-literal type
+    /// annotation names for W0611/W0612 suppression
+    pub fn visit_const(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let value: String = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Const(ConstValue::Str(sv)) => sv.to_string(),
+                _ => return,
+            }
+        };
+        if !u::is_node_in_type_annotation_context(eng, node) {
+            return;
+        }
+        // parent (through Tuple) Subscript origin typing.Literal/Annotated
+        let mut parent = eng.parent(node);
+        if let Some(p) = parent {
+            if eng.kind_is(p, |k| matches!(k, NodeKind::Tuple { .. })) {
+                parent = eng.parent(p);
+            }
+        }
+        if let Some(p) = parent {
+            let origin: Option<GNode> = {
+                let md = eng.md(p.m);
+                match &md.tree.nodes[p.n.idx()].kind {
+                    NodeKind::Subscript { value, .. } => Some(GNode { m: p.m, n: *value }),
+                    _ => None,
+                }
+            };
+            if let Some(origin) = origin {
+                if is_typing_member(cx, origin, &["Annotated", "Literal"]) {
+                    return;
+                }
+            }
+        }
+        // extract_node(node.value) on the annotation string; parse errors
+        // swallowed (ValueError / AstroidSyntaxError)
+        self.store_type_annotation_string(&value);
+    }
+
+    /// parse an annotation string (astroid extract_node) and run
+    /// _store_type_annotation_node (variables.py:3022-3043) over the
+    /// standalone tree; parse errors swallowed
+    fn store_type_annotation_string(&mut self, src: &str) {
+        let Ok(decoded) = pyast::decode_source(src.as_bytes(), "<annotation>") else {
+            return;
+        };
+        let outcome = pyast::parse::parse_module(&decoded, "<annotation>", "<annotation>", false);
+        let Some(tree) = outcome.tree else { return };
+        // extract_node: the LAST top-level statement, Expr unwrapped;
+        // empty body -> ValueError (swallowed)
+        let body: Vec<pyast::NodeId> = match &tree.nodes[pyast::NodeId::MODULE.idx()].kind {
+            NodeKind::Module(d) => d.body.clone(),
+            _ => return,
+        };
+        let Some(&last) = body.last() else { return };
+        let root = match &tree.nodes[last.idx()].kind {
+            NodeKind::Expr { value } => *value,
+            _ => last,
+        };
+        store_type_annotation_tree(&tree, root, &mut self.type_annotation_names);
     }
 
     /// visit_subscript (variables.py:3458-3496) — E0643 potential-index-error
@@ -1934,7 +3252,9 @@ impl VarsChecker {
 
         // consumed fast path (variables.py:1820-1829)
         if self.to_consume[idx].consumed.contains_key(&name) {
-            // _check_late_binding_closure: no-op (cell-var-from-loop disabled)
+            // `not isinstance(node, ComprehensionScope)` is always True for
+            // a Name -> _check_late_binding_closure always runs here
+            self.check_late_binding_closure(cx, node);
             return (Action::Return, None);
         }
 
@@ -1960,6 +3280,8 @@ impl VarsChecker {
             );
             return (Action::Return, Some(nodes_to_consume));
         }
+
+        self.check_late_binding_closure(cx, node);
 
         let defnode = u::assign_parent(eng, found_nodes[0]);
         let defstmt = stmt_of(eng, defnode);
@@ -2473,7 +3795,7 @@ impl VarsChecker {
         &mut self,
         cx: &mut WalkCx,
         node: GNode,
-        mut not_consumed: IndexMap<GSym, Vec<GNode>>,
+        not_consumed: &mut IndexMap<GSym, Vec<GNode>>,
     ) {
         let eng = cx.eng;
         let all_sym = eng.sym("__all__");
@@ -3214,6 +4536,239 @@ fn unpacking_extra_info(eng: &Engine, node: GNode, value: GNode, inferred: &Valu
     }
 }
 
+/// utils.in_for_else_branch (utils.py:2043-2048)
+fn in_for_else_branch(eng: &Engine, parent: GNode, stmt: GNode) -> bool {
+    let md = eng.md(parent.m);
+    let NodeKind::For(d) = &md.tree.nodes[parent.n.idx()].kind else { return false };
+    let orelse = d.orelse.clone();
+    drop(md);
+    orelse.iter().any(|&e| {
+        let g = GNode { m: parent.m, n: e };
+        g == stmt || eng.parent_of(g, stmt)
+    })
+}
+
+/// utils.is_typing_member (utils.py:2020-2040)
+fn is_typing_member(cx: &mut WalkCx, node: GNode, names_to_check: &[&str]) -> bool {
+    let eng = cx.eng;
+    let md = eng.md(node.m);
+    match &md.tree.nodes[node.n.idx()].kind {
+        NodeKind::Name { name } => {
+            let sym = eng.g(&md, *name);
+            let local_name = md.tree.s(*name).to_string();
+            drop(md);
+            let lk = eng.lookup(node, sym);
+            let Some(NV::N(first)) = lk.1.first() else { return false };
+            let md = eng.md(first.m);
+            if let NodeKind::ImportFrom { modname, names, .. } = &md.tree.nodes[first.n.idx()].kind
+            {
+                if md.tree.s(*modname) == "typing" {
+                    // real_name(node.name)
+                    for (q, a) in names {
+                        let qs = md.tree.s(*q);
+                        match a {
+                            Some(al) if md.tree.s(*al) == local_name => {
+                                return names_to_check.contains(&qs);
+                            }
+                            None if qs == local_name => {
+                                return names_to_check.contains(&qs);
+                            }
+                            _ => {}
+                        }
+                    }
+                    return false;
+                }
+            }
+            false
+        }
+        NodeKind::Attribute { expr, attrname, .. } => {
+            let attr = md.tree.s(*attrname).to_string();
+            let e = GNode { m: node.m, n: *expr };
+            drop(md);
+            match u::safe_infer(eng, cx.caches, e) {
+                Some(Value::Node(g))
+                    if u::is_module(eng, g) && eng.md(g.m).name == "typing" =>
+                {
+                    names_to_check.contains(&attr.as_str())
+                }
+                _ => false,
+            }
+        }
+        _ => false,
+    }
+}
+
+/// element of a dict-view unpack (visit_for W0644)
+enum UnpackVal {
+    /// DictItems element: synthetic Tuple(key, value) — always length 2
+    Pair,
+    Node(GNode),
+    Val(Value),
+}
+
+impl UnpackVal {
+    fn tuple_len(&self) -> Option<usize> {
+        match self {
+            UnpackVal::Pair => Some(2),
+            _ => None,
+        }
+    }
+    /// _get_value_length (variables.py:3123-3138)
+    fn length(&self, eng: &Engine) -> usize {
+        match self {
+            UnpackVal::Pair => 2,
+            UnpackVal::Node(g) => {
+                if let Some(n) = nodes_to_unpack_len(eng, &Value::Node(*g)) {
+                    return n;
+                }
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Const(ConstValue::Str(sv)) => sv.chars().count(),
+                    NodeKind::Const(ConstValue::Bytes(b)) => b.len(),
+                    NodeKind::Subscript { slice, .. } => {
+                        // value_node.slice.{upper,lower,step} Const arithmetic
+                        if let NodeKind::Slice { lower, upper, step } =
+                            &md.tree.nodes[slice.idx()].kind
+                        {
+                            let cint = |o: &Option<NodeId>| -> Option<i64> {
+                                o.and_then(|n| match &md.tree.nodes[n.idx()].kind {
+                                    NodeKind::Const(ConstValue::Int(
+                                        pyast::tree::IntValue::Small(i),
+                                    )) => Some(*i),
+                                    _ => None,
+                                })
+                            };
+                            if let (Some(lo), Some(up)) = (cint(lower), cint(upper)) {
+                                let st = cint(step).unwrap_or(1);
+                                if st != 0 {
+                                    let range = (up - lo) as f64;
+                                    return (range / st as f64).ceil() as usize;
+                                }
+                            }
+                        }
+                        1
+                    }
+                    _ => 1,
+                }
+            }
+            UnpackVal::Val(v) => {
+                if let Some(n) = nodes_to_unpack_len(eng, v) {
+                    return n;
+                }
+                if let Value::SynthConst(c) = v {
+                    match &**c {
+                        ConstValue::Str(sv) => return sv.chars().count(),
+                        ConstValue::Bytes(b) => return b.len(),
+                        _ => {}
+                    }
+                }
+                1
+            }
+        }
+    }
+}
+
+/// _nodes_to_unpack for the dict-view For path: per-element values
+fn dict_unpack_values(eng: &Engine, v: &Value) -> Option<Vec<UnpackVal>> {
+    use pyinfer::value::DictRef;
+    match v {
+        Value::DictItems(dr) => Some(match &**dr {
+            DictRef::Node(g) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => items.iter().map(|_| UnpackVal::Pair).collect(),
+                    _ => Vec::new(),
+                }
+            }
+            DictRef::Synth(items) => items.iter().map(|_| UnpackVal::Pair).collect(),
+        }),
+        Value::DictKeys(dr) => Some(match &**dr {
+            DictRef::Node(g) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => items
+                        .iter()
+                        .map(|&(k, _)| UnpackVal::Node(GNode { m: g.m, n: k }))
+                        .collect(),
+                    _ => Vec::new(),
+                }
+            }
+            DictRef::Synth(items) => {
+                items.iter().map(|(k, _)| UnpackVal::Val(k.clone())).collect()
+            }
+        }),
+        Value::DictValues(dr) => Some(match &**dr {
+            DictRef::Node(g) => {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => items
+                        .iter()
+                        .map(|&(_, vn)| UnpackVal::Node(GNode { m: g.m, n: vn }))
+                        .collect(),
+                    _ => Vec::new(),
+                }
+            }
+            DictRef::Synth(items) => {
+                items.iter().map(|(_, vv)| UnpackVal::Val(vv.clone())).collect()
+            }
+        }),
+        Value::Node(g) => {
+            let md = eng.md(g.m);
+            match &md.tree.nodes[g.n.idx()].kind {
+                // Dict.itered() == the KEYS
+                NodeKind::Dict { items } => Some(
+                    items
+                        .iter()
+                        .map(|&(k, _)| UnpackVal::Node(GNode { m: g.m, n: k }))
+                        .collect(),
+                ),
+                _ => None,
+            }
+        }
+        Value::SynthDict { items } => Some(
+            items.iter().map(|(k, _)| UnpackVal::Val(k.clone())).collect(),
+        ),
+        _ => None,
+    }
+}
+
+/// _store_type_annotation_node over a standalone annotation-string tree
+fn store_type_annotation_tree(
+    tree: &pyast::tree::Tree,
+    node: pyast::NodeId,
+    out: &mut Vec<String>,
+) {
+    match &tree.nodes[node.idx()].kind {
+        NodeKind::Name { name } => out.push(tree.s(*name).to_string()),
+        NodeKind::Attribute { expr, .. } => store_type_annotation_tree(tree, *expr, out),
+        NodeKind::Subscript { value, .. } => {
+            if let NodeKind::Attribute { expr, .. } = &tree.nodes[value.idx()].kind {
+                if let NodeKind::Name { name } = &tree.nodes[expr.idx()].kind {
+                    if tree.s(*name) == "typing" {
+                        out.push("typing".to_string());
+                        return;
+                    }
+                }
+            }
+            // all Name descendants (preorder)
+            let mut stack = vec![node];
+            let mut order: Vec<pyast::NodeId> = Vec::new();
+            while let Some(n) = stack.pop() {
+                order.push(n);
+                for &c in tree.children(n).iter().rev() {
+                    stack.push(c);
+                }
+            }
+            for n in order {
+                if let NodeKind::Name { name } = &tree.nodes[n.idx()].kind {
+                    out.push(tree.s(*name).to_string());
+                }
+            }
+        }
+        _ => {}
+    }
+}
+
 /// dummy-variables-rgx default:
 /// `_+$|(_[a-zA-Z0-9_]*[a-zA-Z0-9]+?$)|dummy|^ignored_|^unused_` (re.match)
 fn dummy_rgx_match(name: &str) -> bool {
@@ -3231,6 +4786,107 @@ fn dummy_rgx_match(name: &str) -> bool {
         return true;
     }
     name.starts_with("dummy") || name.starts_with("ignored_") || name.starts_with("unused_")
+}
+
+/// astroid ModuleModel attributes (interpreter/objectmodel.py) — probed on
+/// the pinned venv: ObjectModel base + module attrs. NOTE `builtins` (no
+/// dunder) and no `__qualname__`.
+const MODULE_SPECIAL_ATTRIBUTES: &[&str] = &[
+    "__cached__", "__dict__", "__doc__", "__file__", "__init__", "__loader__",
+    "__name__", "__new__", "__package__", "__path__", "__spec__", "builtins",
+];
+
+/// _should_ignore_redefined_builtin (variables.py:3002-3005);
+/// redefining-builtins-modules default config list.
+fn should_ignore_redefined_builtin(eng: &Engine, stmt: GNode) -> bool {
+    const MODS: &[&str] = &["six.moves", "past.builtins", "future.builtins", "builtins", "io"];
+    let md = eng.md(stmt.m);
+    matches!(&md.tree.nodes[stmt.n.idx()].kind,
+        NodeKind::ImportFrom { modname, .. } if MODS.contains(&md.tree.s(*modname)))
+}
+
+/// ignored-argument-names default `_.*|^ignored_|^unused_` (re.match)
+fn ignored_argument_match(name: &str) -> bool {
+    name.starts_with('_') || name.starts_with("ignored_") || name.starts_with("unused_")
+}
+
+/// _is_name_ignored (variables.py:2874-2888)
+fn is_name_ignored(eng: &Engine, stmt: GNode, name: GSym) -> bool {
+    let name_str = eng.sname(name);
+    let is_arg = eng.kind_is(stmt, |k| matches!(k, NodeKind::Arguments(_)))
+        || (eng.kind_is(stmt, |k| matches!(k, NodeKind::AssignName { .. }))
+            && eng
+                .parent(stmt)
+                .map(|p| eng.kind_is(p, |k| matches!(k, NodeKind::Arguments(_))))
+                .unwrap_or(false));
+    if is_arg {
+        ignored_argument_match(&name_str)
+    } else {
+        dummy_rgx_match(&name_str)
+    }
+}
+
+/// utils.is_reassigned_after_current (utils.py:1876-1912)
+fn is_reassigned_after_current(eng: &Engine, node: GNode, name: GSym) -> bool {
+    let node_scope = eng.scope(node);
+    let node_lineno = eng.fromlineno(node);
+    for a in u::preorder(eng, node_scope) {
+        let md = eng.md(a.m);
+        let (a_name, a_line, is_def) = match &md.tree.nodes[a.n.idx()].kind {
+            NodeKind::AssignName { name: n } => (eng.g(&md, *n), eng.fromlineno(a), false),
+            NodeKind::ClassDef(d) => (eng.g(&md, d.name), 0, true),
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                (eng.g(&md, d.name), 0, true)
+            }
+            _ => continue,
+        };
+        drop(md);
+        // .lineno: raw attribute (first-decorator line for decorated defs)
+        let a_line = if is_def { raw_lineno(eng, a) } else { a_line };
+        if a_name == name && a_line > node_lineno {
+            // _is_node_in_same_scope
+            let same = if is_def {
+                eng.parent(a).map(|p| eng.scope(p)) == Some(node_scope)
+            } else {
+                eng.scope(a) == node_scope
+            };
+            if same {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// utils.is_deleted_after_current (utils.py:1914-1922)
+fn is_deleted_after_current(eng: &Engine, node: GNode, name: GSym) -> bool {
+    let node_scope = eng.scope(node);
+    let node_lineno = eng.fromlineno(node);
+    for d in u::preorder(eng, node_scope) {
+        let md = eng.md(d.m);
+        let NodeKind::Delete { targets } = &md.tree.nodes[d.n.idx()].kind else {
+            continue;
+        };
+        let targets = targets.clone();
+        drop(md);
+        for t in targets {
+            let tg = GNode { m: d.m, n: t };
+            if name_of(eng, tg) == Some(name) && eng.fromlineno(tg) > node_lineno {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// dummy_rgx_match for sibling checkers (W0221 parameter comparison)
+pub fn dummy_rgx_match_pub(name: &str) -> bool {
+    dummy_rgx_match(name)
+}
+
+/// FunctionDef.is_abstract(pass_is_abstract=True) for sibling checkers
+pub fn func_is_abstract_pub(cx: &mut WalkCx, func: GNode) -> bool {
+    func_is_abstract(cx, func)
 }
 
 /// SPECIAL_OBJ regex `^_{2}[a-z]+_{2}$` (re.search == fullmatch here)
