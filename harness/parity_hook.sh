@@ -17,7 +17,7 @@ for c in $CORPORA; do
   python3 "$ROOT/harness/strip_footer.py" "$ROOT/harness/results/$c.hook.ours" | sed "$CN" > /tmp/p_ours_b 2>/dev/null
   full=$(python3 "$ROOT/harness/bytecmp.py" "$ROOT/harness/results/$c.hook.out" "$ROOT/harness/results/$c.hook.ours" && echo Y || echo N)
   body=$(python3 "$ROOT/harness/bytecmp.py" /tmp/p_gt_b /tmp/p_ours_b && echo Y || echo N)
-  fp=$(diff /tmp/p_gt_b /tmp/p_ours_b | grep '^>' | grep -vc "Module")
-  fn=$(diff /tmp/p_gt_b /tmp/p_ours_b | grep '^<' | grep -vc "Module")
+  fp=$(diff /tmp/p_gt_b /tmp/p_ours_b | grep '^>' | grep -vc "^\*\*\*\*")
+  fn=$(diff /tmp/p_gt_b /tmp/p_ours_b | grep '^<' | grep -vc "^\*\*\*\*")
   printf "%-14s full=%s body=%s exit(gt=%s ours=%s) FP=%s FN=%s\n" "$c" "$full" "$body" "$exitgt" "$exitours" "$fp" "$fn"
 done
