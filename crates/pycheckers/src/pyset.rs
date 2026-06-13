@@ -92,6 +92,34 @@ pub fn pyhash_str_seed0(s: &str) -> i64 {
     }
 }
 
+/// CPython 3.12 `tuplehash` (Objects/tupleobject.c) over a slice of element
+/// hashes — the xxHash-derived algorithm. Used by symilar: `LinesChunk._hash`
+/// is `hash(tuple_of_line_strings)` (the `*succ_lines` in hash_lineset
+/// captures the enumerate window as a SINGLE tuple arg, so the chunk hash is
+/// the ORDER-SENSITIVE tuple hash, not the sum of line hashes — notes spec
+/// B.4 mis-described this). Element hashes are the CPython str hashes
+/// (pyhash_str_seed0); PYTHONHASHSEED=0 doesn't affect tuple hashing (the
+/// xxprime constants are fixed).
+pub fn pyhash_tuple_i64(elems: &[i64]) -> i64 {
+    const XXPRIME_1: u64 = 11400714785074694791;
+    const XXPRIME_2: u64 = 14029467366897019727;
+    const XXPRIME_5: u64 = 2870177450012600261;
+    let xxrotate = |x: u64| (x << 31) | (x >> 33);
+    let mut acc: u64 = XXPRIME_5;
+    for &e in elems {
+        let lane = e as u64; // Py_uhash_t cast of the element hash
+        acc = acc.wrapping_add(lane.wrapping_mul(XXPRIME_2));
+        acc = xxrotate(acc);
+        acc = acc.wrapping_mul(XXPRIME_1);
+    }
+    acc = acc.wrapping_add((elems.len() as u64) ^ (XXPRIME_5 ^ 3527539));
+    if acc == u64::MAX {
+        // (Py_uhash_t)-1 -> 1546275796
+        return 1546275796;
+    }
+    acc as i64
+}
+
 const LINEAR_PROBES: usize = 9;
 const PERTURB_SHIFT: u32 = 5;
 const PYSET_MINSIZE: usize = 8;
@@ -227,5 +255,20 @@ mod tests {
             order,
             ["host", "updated_at", "disabled", "created_at", "availability_zone", "binary"]
         );
+    }
+}
+
+#[cfg(test)]
+mod tuple_hash_tests {
+    use super::*;
+    #[test]
+    fn tuple_hash_matches_cpython_seed0() {
+        let lines = ["}", "static", "char *key = \"__f2py_cb_", "return ("];
+        let hs: Vec<i64> = lines.iter().map(|s| pyhash_str_seed0(s)).collect();
+        assert_eq!(pyhash_tuple_i64(&hs), 1707547713546452791);
+        // reordered -> different (order-sensitive)
+        let w18 = ["static", "char *key = \"__f2py_cb_", "return (", "}"];
+        let hs18: Vec<i64> = w18.iter().map(|s| pyhash_str_seed0(s)).collect();
+        assert_eq!(pyhash_tuple_i64(&hs18), -3792152961302195129);
     }
 }

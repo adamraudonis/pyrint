@@ -16,7 +16,7 @@ use pyast::NodeId;
 use pyinfer::graph::Engine;
 use pyinfer::value::ModId;
 
-use crate::pyset::pyhash_str_seed0;
+use crate::pyset::{pyhash_str_seed0, pyhash_tuple_i64};
 
 const MIN_SIMILARITY_LINES: usize = 4;
 const IGNORE_COMMENTS: bool = true;
@@ -263,14 +263,14 @@ impl SimilaritiesCk {
     /// in the operand the intersection iterated. We reproduce that selection.
     fn common_hashes(
         &self,
-        h2i_1: &indexmap::IndexMap<i128, Vec<usize>>,
-        h2i_2: &indexmap::IndexMap<i128, Vec<usize>>,
-    ) -> Vec<i128> {
+        h2i_1: &Hash2Index,
+        h2i_2: &Hash2Index,
+    ) -> Vec<i64> {
         // smaller operand iterated; ties -> hash_2 (the right operand)
         let from_2 = h2i_2.len() <= h2i_1.len();
         // intersection: hashes present in both, with representative _index
         // (first-occurrence index) from the iterated operand.
-        let mut common: Vec<(usize, i128)> = Vec::new();
+        let mut common: Vec<(usize, i64)> = Vec::new();
         if from_2 {
             for (h, idxs) in h2i_2 {
                 if h2i_1.contains_key(h) {
@@ -391,8 +391,12 @@ fn has_word_char(s: &str) -> bool {
 
 /// hash_lineset (symilar.py:207-245): sliding windows of `m` stripped lines.
 /// Returns (hash -> [start indices], start index -> (real_start, real_end)).
-/// Hash key is the i128 sum of per-line CPython str hashes (no wrap).
-type Hash2Index = indexmap::IndexMap<i128, Vec<usize>>;
+/// Hash key is CPython's ORDER-SENSITIVE tuple hash over the window's m line
+/// strings (`LinesChunk._hash = hash(tuple(succ_lines))` — the `*succ_lines`
+/// captures the enumerate window as one tuple, so the chunk hash is the tuple
+/// hash, NOT the sum of line hashes; the spec's B.4 "sum" description is
+/// wrong). pyhash_tuple_i64 over the per-line CPython str hashes.
+type Hash2Index = indexmap::IndexMap<i64, Vec<usize>>;
 type Index2Lines = Vec<(usize, usize)>;
 
 fn hash_lineset(lineset: &LineSet, m: usize) -> (Hash2Index, Index2Lines) {
@@ -405,7 +409,7 @@ fn hash_lineset(lineset: &LineSet, m: usize) -> (Hash2Index, Index2Lines) {
         return (hash2index, index2lines);
     }
     let num_windows = n - m + 1;
-    // precompute per-line hashes
+    // precompute per-line CPython str hashes (siphash13, PYTHONHASHSEED=0)
     let line_hashes: Vec<i64> = stripped.iter().map(|l| pyhash_str_seed0(&l.text)).collect();
     for i in 0..num_windows {
         let start_linenumber = stripped[i].line_number;
@@ -417,11 +421,8 @@ fn hash_lineset(lineset: &LineSet, m: usize) -> (Hash2Index, Index2Lines) {
             stripped[n - 1].line_number + 1
         };
         index2lines.push((start_linenumber, end_linenumber));
-        // chunk hash = sum of per-line hashes over the window (i128, no wrap)
-        let mut h: i128 = 0;
-        for k in i..(i + m) {
-            h += line_hashes[k] as i128;
-        }
+        // chunk hash = CPython tuple hash of the m window line strings
+        let h = pyhash_tuple_i64(&line_hashes[i..i + m]);
         hash2index.entry(h).or_default().push(i);
     }
     (hash2index, index2lines)
