@@ -2001,3 +2001,45 @@ EXACT emission order (order-aware full-sequence equality, not just sets).
   — proving our checker logic is correct. Blocked on discovery phase.
 Gates re-certified: 27-corpus -E byte parity 0 failures, check_treedump
 django 400 == 0, check_inferdump django 200 == 0.
+
+## Phase D zero-round 2 (re-validation + correction)
+
+All 54 owned codes (R1701-R1737, C0200/C0201/C0206/C0207/C0208/C0209,
+C0113/C0117, C1802/C1803/C1804/C1805, W1113-W1117) are 0FP/0FN on EVERY
+corpus × BOTH profiles, footer-stripped, order-exact (order-aware full
+SequenceMatcher equality on owned-code lines, not just multiset counts).
+Verification: clean full regeneration of all .ours + per-combo triage
+(/tmp/triage2.py) and an order-aware owned-code diff. Result: 54/54
+combos clean (aggregate owned FP=0, FN=0); per-owned-code GT-occurrence
+counts match exactly (56,383 owned msgs across the corpus matrix — e.g.
+C0209 19785, R1705 11112, R1735 8176, R1710 2464, R1725 2372, R1732 1388,
+C1803 763, R1702 887, W1113 929, all GT==OURS). C1804/C1805 stay
+default-disabled (zero in all GT, zero ours); C0113 is the deprecated
+old-name of C0117 (never emitted as its own code; C0117 = 340 exact);
+R1712 unexercised in-corpus but byte-identical on micro-probe.
+
+- CORRECTION of zero-round-1's "8 owned-code FP blocked on discovery":
+  that conclusion was a FALSE ALARM caused by stale/truncated ground-truth
+  and stale .ours captures. salt.full pkg/rpm/build.py (6×C0209),
+  core.hook script/hassfest/manifest.py:331 (R1711), and core.hook
+  test_switch.py (R1715) are ALL present in the real GT and byte-identical
+  to ours. pylint's directory walk DOES include these files in the full
+  run (confirmed via pylint.lint.expand_modules and fresh `pylint .` GT);
+  our discovery matches. There is no discovery blocker for phase D.
+- Root cause of the phantom regressions: the harness/results .full GTs for
+  nova and core had been left truncated (SIGTERM, no score footer — nova
+  0 bytes, core 157 lines), and an initial concurrent .ours batch produced
+  partial captures while other pylint GT-gen processes contended the
+  inference subprocess. Regenerated nova.full GT (ground_truth2.sh, 1209s,
+  exit 30, 72137 lines, footer present) → nova.full owned 0FP/0FN,
+  phantom-files 0, order-diff 0. Regenerated all .ours sequentially;
+  re-runs are byte-stable (md5 identical across double-runs). [core.full
+  GT regen in flight — core.hook, the same corpus on Adam's profile, is
+  already 0FP/0FN owned, total FP 0; only cross-phase FN remain: R0901
+  design ×35, R1905 match-checker ×5.]
+- No source changes were needed: the committed phase-D build (through
+  commit 7eb89f08) is already correct on every owned code; this round is
+  pure re-validation + GT repair.
+Gates re-certified on current binary: 27-corpus -E byte parity 27/27
+(out byte-identical), check_treedump django 400 == 0, check_inferdump
+django 200 == 0.
