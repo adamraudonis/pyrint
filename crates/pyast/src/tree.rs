@@ -302,6 +302,10 @@ pub struct Tree {
     /// `_get_position_info`). pylint anchors node messages here when set
     /// (pylinter.py:1213-1221).
     pub positions: FxHashMap<NodeId, (u32, u32)>,
+    /// `# type:` comments attached per CPython type_comments=True rules
+    /// (astroid passes them through to FunctionDef.type_comment_args/
+    /// _returns and stmt.type_annotation). bool = func-signature form.
+    pub type_comments: Vec<(NodeId, bool, Box<str>)>,
 }
 
 impl Tree {

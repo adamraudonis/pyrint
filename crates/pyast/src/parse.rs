@@ -6,6 +6,7 @@ use ruff_text_size::{Ranged, TextSize};
 use crate::build::{BuildOptions, Builder};
 use crate::source::SourceFile;
 use crate::tree::Tree;
+use crate::NodeId;
 
 pub struct ParseOutcome {
     pub tree: Option<Tree>,
@@ -133,10 +134,164 @@ pub fn parse_module(src: &SourceFile, modname: &str, filepath: &str, package: bo
         filepath: filepath.to_string(),
         package,
     };
-    let tree = Builder::build(src, module, &def_class, &asyncs, &all_tokens, &opts);
+    let mut tree = Builder::build(src, module, &def_class, &asyncs, &all_tokens, &opts);
+    attach_type_comments(src, &tok_events, &mut tree);
     ParseOutcome {
         tree: Some(tree),
         error: None,
         tokens: tok_events,
+    }
+}
+
+/// CPython `type_comments=True` association, approximated for the positions
+/// the corpora use (astroid feeds them to VariablesChecker only):
+/// - Assign / For / With (+async): `# type: T` at the end of the header's
+///   logical line -> stmt.type_annotation
+/// - FunctionDef: `# type: (...) -> T` on the header colon line or on its
+///   own line between header and first body statement ->
+///   type_comment_args/_returns
+/// `# type: ignore...` is never an annotation.
+fn attach_type_comments(src: &SourceFile, tok_events: &[TokEvent], tree: &mut Tree) {
+    use crate::tree::NodeKind;
+    // line -> payload (first `# type:` comment per line)
+    let mut by_line: std::collections::BTreeMap<u32, &str> = std::collections::BTreeMap::new();
+    for ev in tok_events {
+        if ev.kind != TokEventKind::Comment {
+            continue;
+        }
+        let text = &src.text[ev.start as usize..ev.end as usize];
+        let Some(rest) = text.strip_prefix('#') else { continue };
+        let rest = rest.trim_start_matches([' ', '\t']);
+        let Some(payload) = rest.strip_prefix("type:") else { continue };
+        let payload = payload.trim();
+        // TYPE_IGNORE: "ignore" followed by end or a non-alphanumeric
+        let is_ignore = payload.strip_prefix("ignore").map_or(false, |r| {
+            r.chars().next().map_or(true, |c| !c.is_alphanumeric())
+        });
+        if payload.is_empty() || is_ignore {
+            continue;
+        }
+        by_line.entry(ev.row).or_insert(payload);
+    }
+    if by_line.is_empty() {
+        return;
+    }
+    let mut used: std::collections::HashSet<u32> = std::collections::HashSet::new();
+    let n = tree.nodes.len();
+    // pass 1: Assign / For / With header-line comments (deepest-first by
+    // iterating in node order; first consumer of a line wins)
+    for idx in 0..n {
+        let id = NodeId(idx as u32);
+        let header_line: Option<u32> = match &tree.nodes[idx].kind {
+            NodeKind::Assign { .. } => Some(tree.nodes[idx].tolineno),
+            NodeKind::For(d) | NodeKind::AsyncFor(d) => {
+                Some(tree.nodes[d.iter.idx()].tolineno)
+            }
+            NodeKind::With(d) | NodeKind::AsyncWith(d) => d
+                .items
+                .last()
+                .map(|&(cm, opt)| tree.nodes[opt.unwrap_or(cm).idx()].tolineno),
+            _ => None,
+        };
+        let Some(line) = header_line else { continue };
+        if used.contains(&line) {
+            continue;
+        }
+        if let Some(payload) = by_line.get(&line) {
+            // For/With: the body must NOT start on the header line
+            // (a one-liner puts the comment after the block, not in the
+            // grammar's TYPE_COMMENT slot)
+            let ok = match &tree.nodes[idx].kind {
+                NodeKind::For(d) | NodeKind::AsyncFor(d) => d
+                    .body
+                    .first()
+                    .map(|&b| tree.nodes[b.idx()].fromlineno > line)
+                    .unwrap_or(false),
+                NodeKind::With(d) | NodeKind::AsyncWith(d) => d
+                    .body
+                    .first()
+                    .map(|&b| tree.nodes[b.idx()].fromlineno > line)
+                    .unwrap_or(false),
+                _ => true,
+            };
+            if ok {
+                used.insert(line);
+                tree.type_comments.push((id, false, (*payload).into()));
+            }
+        }
+    }
+    // pass 1b: per-argument comments (`a,  # type: T` inside the parens)
+    // attached to the Arguments node; signature-form payloads (leading
+    // '(') are left for pass 2
+    for idx in 0..n {
+        let (args_id, body0): (NodeId, Option<NodeId>) = match &tree.nodes[idx].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                (d.args, d.body.first().copied())
+            }
+            _ => continue,
+        };
+        let Some(body0) = body0 else { continue };
+        let from = tree.nodes[idx].fromlineno;
+        let body0_line = tree.nodes[body0.idx()].fromlineno;
+        if body0_line <= from + 1 {
+            continue; // header fits one line: no per-arg comment positions
+        }
+        let to = body0_line - 1;
+        for l in from..=to {
+            if used.contains(&l) {
+                continue;
+            }
+            if let Some(payload) = by_line.get(&l) {
+                if payload.trim_start().starts_with('(') {
+                    continue; // signature form -> pass 2
+                }
+                used.insert(l);
+                tree.type_comments.push((args_id, false, (*payload).into()));
+            }
+        }
+    }
+    // pass 2: function signature comments
+    for idx in 0..n {
+        let id = NodeId(idx as u32);
+        let (args, returns, body0): (NodeId, Option<NodeId>, Option<NodeId>) =
+            match &tree.nodes[idx].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                    (d.args, d.returns, d.body.first().copied())
+                }
+                _ => continue,
+            };
+        let Some(body0) = body0 else { continue };
+        let body0_line = tree.nodes[body0.idx()].fromlineno;
+        let mut header_last = tree.nodes[idx].fromlineno;
+        header_last = header_last.max(tree.nodes[args.idx()].tolineno);
+        if let Some(r) = returns {
+            header_last = header_last.max(tree.nodes[r.idx()].tolineno);
+        }
+        if body0_line <= header_last {
+            continue; // one-liner: no TYPE_COMMENT slot
+        }
+        // same-line form, else first `# type:` line strictly between
+        let mut hit: Option<u32> = if by_line.contains_key(&header_last)
+            && !used.contains(&header_last)
+        {
+            Some(header_last)
+        } else {
+            None
+        };
+        if hit.is_none() {
+            for l in (header_last + 1)..body0_line {
+                if used.contains(&l) {
+                    continue;
+                }
+                if by_line.contains_key(&l) {
+                    hit = Some(l);
+                    break;
+                }
+            }
+        }
+        if let Some(l) = hit {
+            used.insert(l);
+            tree.type_comments.push((id, true, (*by_line.get(&l).unwrap()).into()));
+        }
     }
 }

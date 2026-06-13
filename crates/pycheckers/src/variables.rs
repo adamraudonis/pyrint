@@ -1990,7 +1990,20 @@ impl VarsChecker {
     }
     pub fn leave_functiondef(&mut self, cx: &mut WalkCx, node: GNode) {
         self.check_metaclasses(cx, node);
-        // type_comment_returns/_args: `# type:` comments — dropped by our tree
+        // type_comment_returns/_args (`# type: (...) -> T` signature form)
+        {
+            let payload: Option<String> = {
+                let md = cx.eng.md(node.m);
+                md.tree
+                    .type_comments
+                    .iter()
+                    .find(|(n, is_func, _)| *n == node.n && *is_func)
+                    .map(|(_, _, p)| p.to_string())
+            };
+            if let Some(p) = payload {
+                self.store_func_type_comment(&p);
+            }
+        }
         let not_consumed = self.to_consume.pop().map(|c| c.to_consume).unwrap_or_default();
         if !((cx.cfg_enabled)("W0612")
             || (cx.cfg_enabled)("W0641")
@@ -3045,6 +3058,94 @@ impl VarsChecker {
         // extract_node(node.value) on the annotation string; parse errors
         // swallowed (ValueError / AstroidSyntaxError)
         self.store_type_annotation_string(&value);
+    }
+
+    /// visit_arguments (variables.py:2188-2190): per-argument `# type:`
+    /// comments feed _type_annotation_names
+    pub fn visit_arguments(&mut self, cx: &mut WalkCx, node: GNode) {
+        let payloads: Vec<String> = {
+            let md = cx.eng.md(node.m);
+            md.tree
+                .type_comments
+                .iter()
+                .filter(|(n, is_func, _)| *n == node.n && !*is_func)
+                .map(|(_, _, p)| p.to_string())
+                .collect()
+        };
+        for p in payloads {
+            self.store_type_annotation_string(p.trim().trim_start_matches('*').trim());
+        }
+    }
+
+    /// leave_assign / leave_with / leave_for — _store_type_annotation_names
+    /// (`# type: T` statement comments)
+    pub fn leave_stmt_type_comment(&mut self, cx: &mut WalkCx, node: GNode) {
+        let payload: Option<String> = {
+            let md = cx.eng.md(node.m);
+            md.tree
+                .type_comments
+                .iter()
+                .find(|(n, is_func, _)| *n == node.n && !*is_func)
+                .map(|(_, _, p)| p.to_string())
+        };
+        if let Some(p) = payload {
+            self.store_type_annotation_string(&p);
+        }
+    }
+
+    /// `# type: (a, b) -> r` signature comment: store arg annotations then
+    /// the return annotation (pylint leave_functiondef order: returns FIRST,
+    /// then each arg — variables.py:1550-1555)
+    fn store_func_type_comment(&mut self, payload: &str) {
+        let Some(open) = payload.find('(') else { return };
+        // matching close paren at depth 0
+        let bytes = payload.as_bytes();
+        let mut depth = 0i32;
+        let mut close = None;
+        for (i, &b) in bytes.iter().enumerate().skip(open) {
+            match b {
+                b'(' | b'[' | b'{' => depth += 1,
+                b')' | b']' | b'}' => {
+                    depth -= 1;
+                    if depth == 0 && b == b')' {
+                        close = Some(i);
+                        break;
+                    }
+                }
+                _ => {}
+            }
+        }
+        let Some(close) = close else { return };
+        let after = payload[close + 1..].trim_start();
+        let Some(ret) = after.strip_prefix("->") else { return };
+        // returns first (type_comment_returns), then each arg
+        self.store_type_annotation_string(ret.trim());
+        let inner = &payload[open + 1..close];
+        let mut depth = 0i32;
+        let mut seg_start = 0usize;
+        let ib = inner.as_bytes();
+        let mut segs: Vec<&str> = Vec::new();
+        for (i, &b) in ib.iter().enumerate() {
+            match b {
+                b'(' | b'[' | b'{' => depth += 1,
+                b')' | b']' | b'}' => depth -= 1,
+                b',' if depth == 0 => {
+                    segs.push(&inner[seg_start..i]);
+                    seg_start = i + 1;
+                }
+                _ => {}
+            }
+        }
+        if seg_start < inner.len() {
+            segs.push(&inner[seg_start..]);
+        }
+        for seg in segs {
+            let seg = seg.trim().trim_start_matches('*').trim();
+            if seg.is_empty() {
+                continue;
+            }
+            self.store_type_annotation_string(seg);
+        }
     }
 
     /// parse an annotation string (astroid extract_node) and run

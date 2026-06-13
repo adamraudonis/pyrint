@@ -885,6 +885,13 @@ impl Walker<'_> {
                     crate::deprecated::visit_decorators(cx, g);
                 }
             }
+            Tag::Arguments => {
+                // full order: Misdesign, Format(default, ran early),
+                // UnsupportedVersion, Variables.visit_arguments
+                if self.prep.full {
+                    self.vars.visit_arguments(cx, g);
+                }
+            }
             Tag::Assert => {
                 if self.prep.basic_assert {
                     self.basic.visit_assert(cx, g);
@@ -930,6 +937,11 @@ impl Walker<'_> {
                 if self.prep.vars_except {
                     self.vars.leave_excepthandler(cx, g);
                 }
+            }
+            // leave_assign/leave_with/leave_for: _store_type_annotation_names
+            // (`# type:` statement comments; full-mode only)
+            Tag::Assign | Tag::With | Tag::For if self.prep.full => {
+                self.vars.leave_stmt_type_comment(cx, g);
             }
             Tag::Try => {
                 // BasicChecker.leave_try pops _trys (crash unwinding is
@@ -997,6 +1009,7 @@ enum Tag {
     Pass,
     ExceptHandler,
     Const,
+    Arguments,
     Other,
 }
 
@@ -1053,6 +1066,7 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Pass => Tag::Pass,
         NodeKind::ExceptHandler { .. } => Tag::ExceptHandler,
         NodeKind::Const(_) => Tag::Const,
+        NodeKind::Arguments(_) => Tag::Arguments,
         _ => Tag::Other,
     }
 }

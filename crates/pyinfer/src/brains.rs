@@ -1260,6 +1260,38 @@ impl Engine {
         Some(self.infer(cls, ctx))
     }
 
+    /// brain_typing CLASS_GETITEM_TEMPLATE injection: a BARE @classmethod
+    /// function from an anonymous extract_node module (its parent.frame()
+    /// name is '' — visible in W0221 message text), inserted into the
+    /// target class's locals (REPLACING any existing entry).
+    fn inject_class_getitem_template(&self, cls: GNode) {
+        let cg = self.sym("__class_getitem__");
+        if let Some(tmid) = self.build_template_module(
+            "@classmethod
+def __class_getitem__(cls, item):
+    return cls
+",
+            "",
+        ) {
+            let tmd = self.md(tmid);
+            let f = {
+                let locals = tmd.locals.borrow();
+                locals
+                    .get(&NodeId::MODULE)
+                    .and_then(|l| l.get(&cg))
+                    .and_then(|v| v.first().copied())
+            };
+            if let Some(f) = f {
+                let gmd = self.md(cls.m);
+                gmd.locals
+                    .borrow_mut()
+                    .entry(cls.n)
+                    .or_default()
+                    .insert(cg, vec![f]);
+            }
+        }
+    }
+
     /// brain_typing.infer_typing_alias + infer_special_alias. The final
     /// `node._explicit_inference = lambda ...` replacement is modeled by the
     /// typing_tip_cache insert below — explicit_inference consults that map
@@ -1350,16 +1382,8 @@ impl Engine {
             }
         }
         src.push_str(&format!("class {target_name}{base_clause}:
+    pass
 "));
-        if subscriptable {
-            src.push_str("    @classmethod
-    def __class_getitem__(cls, item):
-        return cls
-");
-        } else {
-            src.push_str("    pass
-");
-        }
         let mid = self.build_template_module(&src, &modname)?;
         let sym = self.sym(&target_name);
         let tmd = self.md(mid);
@@ -1370,6 +1394,11 @@ impl Engine {
                 .and_then(|l| l.get(&sym))
                 .and_then(|v| v.last().copied())?
         };
+        if subscriptable {
+            // astroid: class_def.locals["__class_getitem__"] = [shared
+            // CLASS_GETITEM_TEMPLATE func] (brain_typing.py:124-127)
+            self.inject_class_getitem_template(cls);
+        }
         let vals = vec![Value::Node(cls)];
         self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
         Some(Flow::ok(vals))
@@ -1406,34 +1435,8 @@ impl Engine {
                 // real typing.Annotated defines __class_getitem__ returning
                 // _AnnotatedAlias, which astroid deliberately shadows so
                 // Alias[...] re-subscripts keep yielding the ClassDef
-                let cg = self.sym("__class_getitem__");
-                // astroid CLASS_GETITEM_TEMPLATE (brain_typing.py:94-98) is
-                // a BARE @classmethod function — its parent is the synthetic
-                // extract_node module (frame name ''), visible in W0221 text
-                if let Some(tmid) = self.build_template_module(
-                    "@classmethod
-def __class_getitem__(cls, item):
-    return cls
-",
-                    "",
-                ) {
-                    let tmd = self.md(tmid);
-                    let f = {
-                        let locals = tmd.locals.borrow();
-                        locals
-                            .get(&NodeId::MODULE)
-                            .and_then(|l| l.get(&cg))
-                            .and_then(|v| v.first().copied())
-                    };
-                    if let Some(f) = f {
-                        let gmd = self.md(g.m);
-                        gmd.locals
-                            .borrow_mut()
-                            .entry(g.n)
-                            .or_default()
-                            .insert(cg, vec![f]);
-                    }
-                }
+                // astroid CLASS_GETITEM_TEMPLATE (brain_typing.py:94-98)
+                self.inject_class_getitem_template(*g);
                 let vals = vec![first.clone()];
                 self.typing_tip_cache.borrow_mut().insert(node, vals.clone());
                 return Some(Flow::ok(vals));

@@ -152,6 +152,7 @@ impl<'a> Builder<'a> {
             interner: b.interner,
             locals: b.locals,
             positions: b.positions,
+            type_comments: Vec::new(),
         };
         finalize_positions(&mut tree);
         tree
