@@ -2721,3 +2721,83 @@ artifact):
 GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**;
 check_treedump django 400 = 0 differing; check_inferdump not required (pyinfer
 untouched, no source changes). Clean working tree — pure re-validation round.
+
+## Phase F zero-round 7 (independent re-validation + DEEPER dissection: direct dual-engine pathlen+path-content traces of the sqlalchemy gap)
+
+Rebuilt the committed binary (clean tree at zero-round 6; cargo recompiled
+nothing), REGENERATED all 27×2 .ours captures FRESH (regen_hook.sh + regen_all_
+full.sh) and re-ran the entire owned-code audit (R0901-R0917, R0401, R0801,
+R17xx, C1804/C1805, W1113/W1116) across all 27 corpora × 2 profiles vs
+footer-stripped GT. No source changes — this round re-proves the state on
+freshly-generated outputs AND dissects the sqlalchemy gap one layer deeper than
+prior rounds with DIRECT side-by-side astroid+prylint instrumentation.
+
+RESULT — **52/54 combos: 0 FP / 0 FN, EXACT owned-line order.** Verified on the
+dense full captures: sentry.full 17712, airflow 17345, sympy 15511, salt 10753,
+core(restricted) 12990, black 8804 (incl. all R0801 blocks), nova 8397, mypy
+6345, zulip 6081, fastapi 5363, pandas 5522, django 5111. The 2 non-zero combos
+are the SAME two truncated-GT captures gt_integrity.py flags (and ONLY those):
+- **sentry.hook** (exit=30, ends-on-bare-module-header — 217 naive "FP"):
+  restricted to the 521 GT-reached files → **49/49, 0FP/0FN, EXACT**.
+- **core.full** (exit=143 OOM SIGKILL before close(); 18693 naive "FP" =
+  R0801×18422 + R0401×266 close-time + R0903×1/R0912×2/R0914×2 past the kill):
+  restricted to 15234 GT-reached files, exclude-close → **12990/12990, 0FP/0FN,
+  EXACT.** prylint completes (exit 30) where pylint was killed.
+
+### sqlalchemy — sole genuine gap; FIRST-PRINCIPLES root cause nailed (still BLOCKED)
+hook 1FP (array.py:93 R0901 43/7 — R0901 IS hook-enabled), full 15FP/12FN
+(R0901×15 FP, R0901×3+R0903×9 FN), all R0901↔R0903 generic-base ancestor flips.
+This round ran DIRECT dual-engine traces (26 .venv-pylint probes + a custom
+prylint build with PRYLINT_DBG_GETITEM instrumentation, since reverted) on a NEW
+FAST REPRODUCER and pinned the mechanism to a single observable:
+- **Fast reproducer found** (≈10s vs full-corpus ≈3min): `prylint/pylint
+  lib/sqlalchemy/sql/ lib/sqlalchemy/dialects/postgresql/array.py` —
+  pylint=R0903, prylint=R0901(25/7). The `dialects/postgresql/` subset ALONE
+  (no sql/) gives R0903 on BOTH — so warming sql/elements.py BEFORE array's
+  check is what flips prylint. Isolated `array.py` alone = R0903 on BOTH.
+- **astroid mechanism (traced, layer by layer):** R0901's `_get_parents_iter`
+  calls `array.ancestors(recurs=False)` which infers `array.bases[0] =
+  expression.ExpressionClauseList[_T]` (a Subscript). In the warm cache this
+  `base.infer()` **RAISES InferenceError at pathlen=0, cache_hit=False, EVERY
+  time** (NodeNG.infer never reaches the `context.inferred[key]=tuple(results)`
+  write when `_infer` raises with no yields — so astroid NEVER caches the base).
+  The raise cascades: `getitem(ECL)`→`getattr(ECL,__class_getitem__)`→
+  `ancestors(ECL)`→infer base `OperatorExpression[_T]`→`getitem(OE)`→… down to
+  `getitem(ColumnElement)`, which returns **Uninferable** because `cls`
+  (the inherited typing.Generic `__class_getitem__`'s `return cls`) infers to
+  Uninferable at deep path. That Uninferable bubbles up: `getattr(OE,
+  __class_getitem__)` then RAISES AttributeInferenceError (OE.ancestors never
+  reaches typing.Generic) → `getitem(OE)`→AstroidTypeError → `getattr(ECL,…)`
+  raises → `getitem(ECL)` AstroidTypeError → base InferenceError → 0 ancestors
+  → R0903.
+- **The divergence is ONE observable:** `getitem(ColumnElement)` result is a
+  function of the GLOBAL `_INFERENCE_CACHE` state AND `context.path` CONTENTS,
+  not just depth — PROVED by tracing: at the IDENTICAL pl=3 with the IDENTICAL
+  path `['ColumnElement@L','Subscript@L','_T@L']`, astroid returns BOTH ClassDef
+  (23×) and Uninferable (22×) over the run as the warm cache evolves. prylint's
+  `count_parents` for array gets a pure **cache HIT** on the base Subscript
+  (NO getitem re-fires) replaying a RESOLVED ClassDef (cached earlier at a
+  shallow non-blocked path), where astroid re-derives the cascade-collapse from
+  its differently-warmed sub-node cache. prylint reaches the same path DEPTHS
+  (pl up to 36-37, returns Uninferable there) and the same per-`getitem`
+  path-blocking logic — confirming the path/cycle machinery is a faithful port;
+  the gap is purely the EMERGENT global-cache-warming ORDER through the
+  recursive subscript→getitem→getattr→ancestors path.
+- **Port faithfulness re-confirmed in source:** design.rs count_parents IS an
+  exact `_get_parents_iter` port (verified against design_analysis.py:246-279);
+  ClassDef.getattr ancestors-walk (no context for `__class_getitem__`) matches
+  scoped_nodes.py:2351/2560; NodeNG.infer cache-write-only-on-Done (no cache on
+  raise) matches node_ng.py:159-176; class_getitem `__class_getitem__`
+  infer_call_result single-pull matches scoped_nodes.py:2540-2590.
+- It is BIDIRECTIONAL (array.py over-resolves R0901; selectable.py:211
+  under-resolves), confirming an emergent global-cache effect, not one rule.
+  Matching it bit-for-bit requires altering the shared pyinfer
+  cache-key/path/cycle machinery (the phase-1..17 domain), guarded by the
+  INVIOLABLE -E 27-corpus byte gate and the 4 pyinfer-ZERO inferdump corpora
+  (django/pandas/sentry/core). Perturbing it for 1 FP confined to sqlalchemy's
+  deep generic hierarchies is the wrong trade; no -E corpus leaks it. BLOCKED.
+
+GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
+(egate.sh, fresh run); check_treedump django 400 = 0 differing; check_inferdump
+not required (pyinfer untouched). Clean working tree — pure re-validation +
+diagnostic round (all instrumentation reverted; `git diff` empty).
