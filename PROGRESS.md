@@ -2421,3 +2421,80 @@ Test repo /tmp/hookrepo (pkg + .pylintrc init-hook + disable=missing-* + score)
 invoked with file args: pylint vs prylint BYTE-IDENTICAL (messages + 7.14/10
 footer + exit 12); config discovered, init-hook ran + forwarded 1 sys.path entry,
 stats file = last-arg basename (pkg.sub.b_1.stats).
+
+## Phase F zero-round 2 (owned-code re-validation, all 27 corpora x 2 profiles)
+
+Owned codes (R0901-R0917 design, R0801 duplicate-code, R0401 cyclic-import,
+R1701-R1737 refactoring, C1804/C1805 default-off, W1113/W1116 typecheck-W)
+driven to ZERO FP/FN. Triage = harness/check_owned_f.sh (multiset + exact
+owned-line order vs footer-stripped GT). Result across all 54 combos:
+
+- **53/54 combos: 0 FP / 0 FN, EXACT owned-line order.** Owned-line GT volume
+  spot-checked large: sentry.full 17712, airflow.full 17345, sympy.full 15511,
+  sqlalchemy.full 12920, black.full 8804 (incl. all 8136 R0801 blocks),
+  mypy.full 6345, zulip.full 6081 — all exact.
+- **1 combo with a genuine divergence: sqlalchemy** (full 12FN/15FP, hook 1FP)
+  — see below.
+
+### R0801 remove_successive O(n) fix (the big perf+correctness win)
+The duplicate-code couple-merge popped absorbed keys via IndexMap::shift_remove
+(O(n)/pop) -> O(n^2) on pathological hash-bucket blowups. black's
+profiling/list_huge.py (22431 lines, only 4 unique) collapses into ONE 4-line
+hash bucket of ~22000 windows; the cartesian product against list_big (~3900)
+is ~88M couples, and the O(n^2) sweep never finished (killed >13 min; the GT
+itself took 26.7 HOURS — black.full.time=96059s). Rewrote remove_successive
+with exact pylint dict.pop semantics (O(1) removed-set + one order-preserving
+IndexMap::retain): black.full R0801-only now 34.5s, all 8136 blocks; 8104/8136
+byte-identical, the 32 residual diffs are the documented id()-based
+couple-iteration block-BODY nondeterminism (locators + headers + order exact).
+
+### Two TRUNCATED ground-truth captures (NOT prylint defects)
+harness/gt_integrity.py flags GTs that were killed/cut mid-stream:
+- **core.full exit=143 (SIGKILLed)** — pylint's R0801 over 17536 files is
+  computationally infeasible; the kill landed before close(), so the GT has
+  0 R0801 / 0 R0401 where a complete run emits ~18422 R0801 + ~266 R0401.
+  Naive diff shows 18693 "FP"; restricting to the files the GT reached and
+  excluding the close-time codes the GT never wrote: **0 FP / 0 FN EXACT**
+  (12990/12990 per-file owned codes).
+- **sentry.hook** — capture cut mid-stream (ends on a bare
+  `************* Module ...` header, no trailing newline) despite exit 30.
+  Naive diff shows 217 "FP" (all in files past the cut); restricting to
+  GT-reached files: **0 FP / 0 FN EXACT** (49/49).
+All other 52 captures are clean (gt_integrity.py).
+
+### sqlalchemy: generic-subscript ancestor over-resolution (BLOCKED on pyinfer)
+The sole genuine owned-code divergence. R0901/R0903 on classes whose base is a
+subscripted generic, e.g. `class array(expression.ExpressionClauseList[_T])`:
+GT emits R0903 (few public methods, ancestors collapsed), ours emits R0901
+(43/7). Root cause is in pyinfer's `ancestors()`/MRO, NOT design.rs (count_parents
+is a faithful _get_parents_iter port). Minimal repro (single file, sqlalchemy on
+path): `class Asub(ColumnElement[_T])` vs `class Abare(ColumnElement)`:
+  * astroid CORPUS run: array(ECL[_T]) collapses (R0903); single-file run:
+    Abare(ColumnElement) RESOLVES to 41 ancestors (R0901) while Asub collapses.
+  * ours: INVERTED relative to each — single-file collapses BOTH; corpus
+    over-resolves array(ECL[_T]).
+The behavior is INVERTED between single-file and corpus runs on BOTH sides ->
+the divergence is emergent from the GLOBAL inference-cache warming ORDER, not a
+structural rule. astroid's `ColumnElement[_T].infer()` yields Uninferable (its
+Generic-brain `__class_getitem__` `return cls` binds `cls` to Uninferable under
+the corpus cache state at MRO-walk time) and the Uninferable base is dropped
+from `_inferred_bases`, collapsing the MRO; `BinaryElementRole[_T]` (shorter
+MRO) resolves to its class under the same path. Matching it bit-for-bit requires
+exact pyinfer cache-state replication through the full-corpus inference order
+(the phase-1..17 pyinfer domain), and any change to the shared MRO/getitem/Generic
+path risks the four pyinfer-ZERO corpora (django/pandas/sentry/core). Documented
+BLOCKED — same root cause flagged across phases B-E ("generic-base ancestors
+order"); 12FN/15FP full, 1FP hook, confined to sqlalchemy.
+
+### no-E pipeline (footer/exit/config) — machinery exact, value-coupled to totals
+Score footer renders byte-exact in structure (`\n` + `-`*len + rating line +
+optional `(previous run: ...)`); the rounded score VALUE matches only where the
+COMPLETE message set matches (it is `f(5*error+warning+refactor+convention,
+statement)` over ALL codes, so it tracks non-owned-code coverage, not just
+phase-F codes). Exit-code ladder + bitmask verified per corpus.
+
+### Gates (re-certified on the R0801-fix binary)
+-E 27-corpus byte parity: ALL EQUAL (28/28 incl. EGATE banner).
+check_treedump django 400: 0 differing. inferdump: not required (pyinfer
+untouched). Full-mode FALSE POSITIVES: NONE except the sqlalchemy generic-base
+pyinfer divergence above (the cardinal sin is otherwise clean on 53/54 combos).
