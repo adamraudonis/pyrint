@@ -2542,3 +2542,58 @@ enters the over-resolved MRO).
 GATES (re-certified): **-E 27-corpus byte parity 27/27 ALL EQUAL**;
 check_treedump django 0 differing; check_inferdump django 200 0 differing files
 (0 lines). No source changes → no regression surface.
+
+## Phase F zero-round 4 (full re-validation + fresh root-cause confirmation)
+
+Regenerated ALL 54 `.ours` captures on the current binary (hook+full via
+harness/run_full.sh; full via new harness/regen_all_full.sh — black R0801 incl.)
+and re-audited every owned code (R0901-R0917, R0401, R0801, R17xx, C1804/C1805,
+W1113/W1116) vs footer-stripped GT (harness/audit_all_owned.sh wrapping
+check_owned_f.sh). No source changes this round — owned codes already at their
+zero-round-3 best; this round re-proves the state on a fresh capture set and
+nails down the sqlalchemy divergence with NEW determinism evidence.
+
+RESULT — **52/54 combos: 0 FP / 0 FN, EXACT owned-line order.** Large full
+captures spot-verified: black 8804 (all 8136 R0801 blocks), sentry 17712,
+airflow 17345, sympy 15511, zulip 6081, mypy 6345, sqlalchemy 12920 — all exact.
+The 2 non-zero combos are the SAME documented truncated-GT captures
+(gt_integrity.py flags exactly these two, no others); new helper
+harness/check_owned_restricted.py restricts BOTH sides to GT-reached files
+(and excludes close-time codes a killed run never wrote) and confirms prylint
+is correct:
+- **sentry.hook** (naive 217 "FP"): GT cut mid-stream at a bare module header,
+  exit 30. Restricted to the 521 GT-reached files: **49/49, 0FP/0FN, EXACT.**
+- **core.full** (naive 18693 "FP" = R0801×18422 + R0401×266 + R0903×1 +
+  R0912×2 + R0914×2): GT exit=143 (OOM SIGKILL) before close(). Restricted to
+  15234 GT-reached files, close-codes excluded: **12990/12990, 0FP/0FN, EXACT.**
+  prylint's full run completes (exit 30) where pylint was killed.
+
+### sqlalchemy — sole genuine divergence, NEW determinism proof (still BLOCKED)
+hook 1FP (R0901 array.py:93 — and R0901 IS hook-enabled: flags_hook disables
+R0902/R0903/R0904 but NOT R0901, so this is a real cardinal-sin hook FP, not a
+footer-stripped-only artifact), full 15FP/12FN (all R0901↔R0903 generic-base
+ancestor flips). NEW this round:
+- **pylint is DETERMINISTIC on these lines**: two isolated full-corpus pylint
+  runs (PYTHONHASHSEED=0, fresh PYLINTHOME each) produce BYTE-IDENTICAL R0901/
+  R0903 on the divergent classes (7/7 lines, `diff` empty). So this is NOT
+  pylint run-to-run nondeterminism — it is a stable astroid warm-cache outcome
+  prylint's pyinfer doesn't reproduce bit-for-bit.
+- **prylint is byte-identical to pylint in ISOLATION**: `prylint array.py` and
+  `pylint array.py` both emit R0903(1/2) — the generic base
+  `ExpressionClauseList[_T]` collapses identically when only that file is built.
+- The divergence is **bidirectional** (array.py: ours over-resolves 43 vs GT
+  collapsed→R0903; selectable.py:211 ours UNDER-resolves 32 vs GT 44; base.py:762
+  ours 14 vs GT 15) — emergent from global inference-cache warming ORDER through
+  the Generic `__class_getitem__`→`return cls`→MRO path, NOT a single structural
+  design.rs rule (count_parents is a faithful _get_parents_iter port; the diff is
+  entirely in pyinfer's ancestors()/inferred_bases()/class_getitem warm-cache
+  resolution of subscripted-generic bases).
+Matching it requires altering shared pyinfer internals (Generic getitem / MRO /
+recursion-guard, the phase-1..17 domain) guarded by the inviolable -E 27-corpus
+byte gate and the 4 pyinfer-ZERO inferdump corpora (django/pandas/sentry/core).
+Remains BLOCKED for 1 FP on 1 corpus.
+
+GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
+(EGATE banner re-run); check_treedump django 400 = 0 differing; check_inferdump
+django 200 = 0 differing files (0 lines). No source changes → no regression
+surface (only new harness helpers committed).
