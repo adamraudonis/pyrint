@@ -116,18 +116,18 @@ fn node_frame_class(eng: &Engine, node: GNode) -> Option<GNode> {
 
 /// utils.is_attr_private: `^_{2,10}.*[^_]+_?$`
 pub fn is_attr_private(name: &str) -> bool {
+    // `^_{2,10}.*[^_]+_?$` (re.match): >=2 leading underscores, at most ONE
+    // trailing underscore (dunders are NOT private), some non-underscore.
     let b = name.as_bytes();
-    let mut i = 0;
-    while i < b.len() && b[i] == b'_' {
-        i += 1;
-    }
-    if !(2..=10).contains(&i) {
+    let lead = b.iter().take_while(|&&c| c == b'_').count();
+    if lead < 2 {
         return false;
     }
-    // `.*[^_]+_?$`: needs at least one non-underscore after the prefix
-    let rest = &b[i..];
-    let trimmed = rest.strip_suffix(b"_").unwrap_or(rest);
-    trimmed.iter().any(|&c| c != b'_')
+    let trail = b.iter().rev().take_while(|&&c| c == b'_').count();
+    if trail > 1 {
+        return false;
+    }
+    b.iter().any(|&c| c != b'_')
 }
 
 fn class_body(eng: &Engine, cls: GNode) -> Vec<GNode> {

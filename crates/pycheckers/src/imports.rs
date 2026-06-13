@@ -166,10 +166,10 @@ pub struct ImportsChecker {
 
 impl ImportsChecker {
     pub fn visit_module(&mut self, cx: &mut WalkCx, node: GNode) {
-        // pylint resets these in leave_module; visit_module only stores
-        // _current_module_package. Reset here too for crash-safety.
-        self.imports_stack.clear();
-        self.first_non_import_node = None;
+        // pylint resets _imports_stack/_first_non_import_node ONLY in
+        // leave_module — a module whose check CRASHES (F0002) leaks them
+        // into the next module (tornado log_test -> tcpclient_test C0413).
+        // visit_module stores just _current_module_package.
         self.current_module_package = {
             let md = cx.eng.md(node.m);
             match &md.tree.nodes[node.n.idx()].kind {

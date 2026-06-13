@@ -178,6 +178,15 @@ fn class_constructors_ambiguous(eng: &Engine, c1: GNode, c2: GNode) -> bool {
 /// astroid ClassDef.local_attr (scoped_nodes.py): own locals, else first
 /// MRO ancestor's locals; DelAttr filtered; empty = NotFoundError.
 pub fn class_local_attr(eng: &Engine, cls: GNode, name: &str) -> Vec<GNode> {
+    // astroid ClassDef.locals contain the IMPLICIT entries __module__/
+    // __qualname__/__annotations__ (scoped_nodes.py:1910-1933) — local_attr
+    // therefore always succeeds for them (W0201/E0203 `cnode.local_attr`).
+    match name {
+        "__module__" => return vec![eng.implicit_class_local(cls, 0)],
+        "__qualname__" => return vec![eng.implicit_class_local(cls, 1)],
+        "__annotations__" => return vec![eng.implicit_class_local(cls, 2)],
+        _ => {}
+    }
     let sym = eng.sym(name);
     let mut result = eng.class_locals_get(cls, sym);
     if result.is_empty() {

@@ -865,6 +865,8 @@ impl ExceptionsCk {
                         .collect();
                     Some(out)
                 }
+                // `elif exceptions_in_handler:` — Uninferable is FALSY
+                Some(v) if v.is_uninferable() => None,
                 Some(v) => Some(vec![v]),
                 None => None,
             }

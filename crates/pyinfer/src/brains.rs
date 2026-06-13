@@ -1407,33 +1407,31 @@ impl Engine {
                 // _AnnotatedAlias, which astroid deliberately shadows so
                 // Alias[...] re-subscripts keep yielding the ClassDef
                 let cg = self.sym("__class_getitem__");
+                // astroid CLASS_GETITEM_TEMPLATE (brain_typing.py:94-98) is
+                // a BARE @classmethod function — its parent is the synthetic
+                // extract_node module (frame name ''), visible in W0221 text
                 if let Some(tmid) = self.build_template_module(
-                    "class _CG:
-    @classmethod
-    def __class_getitem__(cls, item):
-        return cls
+                    "@classmethod
+def __class_getitem__(cls, item):
+    return cls
 ",
                     "",
                 ) {
                     let tmd = self.md(tmid);
-                    let csym = self.sym("_CG");
-                    let cls_g = {
+                    let f = {
                         let locals = tmd.locals.borrow();
                         locals
                             .get(&NodeId::MODULE)
-                            .and_then(|l| l.get(&csym))
+                            .and_then(|l| l.get(&cg))
                             .and_then(|v| v.first().copied())
                     };
-                    if let Some(cls_g) = cls_g {
-                        let func = self.class_locals_get(cls_g, cg);
-                        if let Some(&f) = func.first() {
-                            let gmd = self.md(g.m);
-                            gmd.locals
-                                .borrow_mut()
-                                .entry(g.n)
-                                .or_default()
-                                .insert(cg, vec![f]);
-                        }
+                    if let Some(f) = f {
+                        let gmd = self.md(g.m);
+                        gmd.locals
+                            .borrow_mut()
+                            .entry(g.n)
+                            .or_default()
+                            .insert(cg, vec![f]);
                     }
                 }
                 let vals = vec![first.clone()];

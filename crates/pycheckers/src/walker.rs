@@ -905,6 +905,12 @@ impl Walker<'_> {
             self.walk(cx, GNode { m: g.m, n: c });
         }
         // ---- leave (LEAVE_ORDER in walk_order.rs) ----
+        // a crashed check runs NO leave callbacks (pylint: the exception
+        // unwinds the whole ASTWalker.walk; per-module checker state like
+        // ImportsChecker._imports_stack leaks into the NEXT module)
+        if cx.is_crashed() {
+            return;
+        }
         match kind_tag {
             Tag::Module => {
                 self.imp.leave_module(cx, g);
@@ -921,15 +927,14 @@ impl Walker<'_> {
             Tag::Lambda => self.vars.leave_lambda(cx, g),
             Tag::Comp => self.vars.leave_comprehension_scope(cx, g),
             Tag::ExceptHandler => {
-                if self.prep.vars_except && !cx.is_crashed() {
+                if self.prep.vars_except {
                     self.vars.leave_excepthandler(cx, g);
                 }
             }
             Tag::Try => {
-                // BasicChecker.leave_try pops _trys; after a crash pylint's
-                // exception unwinds past every leave (stack leaks into the
-                // next module — run-level checker state)
-                if self.prep.basic_kept && !cx.is_crashed() {
+                // BasicChecker.leave_try pops _trys (crash unwinding is
+                // handled by the early return above)
+                if self.prep.basic_kept {
                     self.basic.trys.pop();
                 }
             }

@@ -1558,15 +1558,15 @@ impl VarsChecker {
                         _ => continue,
                     };
                 drop(md);
-                for (import_module_name, _alias) in &import_names {
+                for (import_module_name, alias) in &import_names {
                     let second_name: Option<String> = if import_module_name == "*" {
                         Some(name.clone())
                     } else {
                         let dotted = import_module_name.starts_with(name.as_str())
                             && import_module_name.contains('.');
-                        let in_imports = import_names
-                            .iter()
-                            .any(|(n, a)| *n == name || a.as_deref() == Some(name.as_str()));
+                        // `name in imports`: the CURRENT (qname, alias) tuple
+                        let in_imports =
+                            *import_module_name == name || alias.as_deref() == Some(name.as_str());
                         if dotted || in_imports {
                             Some(import_module_name.clone())
                         } else {
@@ -2652,6 +2652,41 @@ impl VarsChecker {
                         if Some(vn) == vararg {
                             return;
                         }
+                    }
+                }
+            }
+        }
+        // astroid infers a context-free vararg name to a fresh Tuple
+        // PARENTED TO the Arguments node (protocols.py); our engine yields
+        // a synthetic tuple — recover the parent link via the binding
+        if matches!(
+            inferred,
+            Value::SynthSeq { kind: pyinfer::value::SeqKind::Tuple, .. }
+        ) {
+            if let Some(vn) = name_of(eng, value) {
+                let lk = eng.lookup(value, vn);
+                if let Some(NV::N(def0)) = lk.1.first() {
+                    // the binding resolves to the Arguments node (or the
+                    // vararg AssignName) — match the vararg name
+                    let md = eng.md(def0.m);
+                    match &md.tree.nodes[def0.n.idx()].kind {
+                        NodeKind::Arguments(a) => {
+                            if a.vararg.map(|sy| eng.g(&md, sy)) == Some(vn) {
+                                return;
+                            }
+                        }
+                        NodeKind::AssignName { .. } => {
+                            drop(md);
+                            if let Some(p) = eng.parent(*def0) {
+                                let md = eng.md(p.m);
+                                if let NodeKind::Arguments(a) = &md.tree.nodes[p.n.idx()].kind {
+                                    if a.vararg_node == Some(def0.n) {
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                        _ => {}
                     }
                 }
             }

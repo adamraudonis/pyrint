@@ -291,13 +291,15 @@ pub fn msg_line(eng: &Engine, g: GNode) -> u32 {
     eng.fromlineno(g)
 }
 
-/// Message-anchor column (see `msg_line`).
+/// Message-anchor column (see `msg_line`). col_offset -1 encodes astroid
+/// None — pylint renders `col_offset or 0` over an actual None as 0
+/// (vararg/kwarg AssignName anchors, e.g. W0613).
 pub fn msg_col(eng: &Engine, g: GNode) -> i64 {
     let md = eng.md(g.m);
     if let Some(&(_, c)) = md.tree.positions.get(&g.n) {
         return c as i64;
     }
-    md.tree.nodes[g.n.idx()].col_offset as i64
+    (md.tree.nodes[g.n.idx()].col_offset as i64).max(0)
 }
 
 /// _is_before (variables.py:308-317)
