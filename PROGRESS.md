@@ -2043,3 +2043,82 @@ R1712 unexercised in-corpus but byte-identical on micro-probe.
 Gates re-certified on current binary: 27-corpus -E byte parity 27/27
 (out byte-identical), check_treedump django 400 == 0, check_inferdump
 django 200 == 0.
+
+## Full-pylint mode — phase E (design R0901-R0917 + similarities R0801) (2026-06-13)
+
+Two checkers ported per reference/notes/09-design-similarities.md:
+
+- **MisdesignChecker** (`crates/pycheckers/src/design.rs`, name="design"):
+  R0901-R0917 statement/branch/return/arg/local/attr/ancestor counting.
+  Walk-integrated at the FormatChecker.visit_default slot (Misdesign is
+  always immediately before Format in full-mode walk order for the three
+  EMITTING visitors classdef/functiondef/if); leave_classdef/leave_functiondef
+  after Class, before Refactoring. Bug-for-bug: R0915 visit_default per-node-
+  class statement coupling + nested-frame _inc_all_stmts leakage; R0913
+  numerator bug (compare argnum, report len(args)); `bulitins.frozenset`
+  ignore-set typo; SPECIAL_OBJ dunder counting; R0902 instance_attrs
+  v[0].root() filter; R0903 enum/namedtuple/dataclass/attrs exemptions;
+  R0916 reports on the BoolOp node.
+- **SimilaritiesChecker** (`crates/pycheckers/src/similarities.rs`,
+  name="similarities"): R0801 duplicate-code. Per-module LineSet collection
+  (process_module: readlines() of the file_encoding-decoded bytes, lineset
+  name = RAW FileItem name) + close()-time cross-module duplicate detection
+  emitted BEFORE R0401 (reversed prepare order), attributed to the last
+  module at line 1 col 0. Exact stripped-line pipeline (pragma-drop, strip,
+  docstring state machine, comment split, import/signature blanking), the
+  documented remove_successive undercount merge, filter_noncode_lines +
+  strict eff>4, per-num dedup.
+
+THREE bugs found+fixed during corpus validation (all spec/inference gaps,
+not transcription):
+1. R0801 chunk hash is CPython's ORDER-SENSITIVE tuple hash
+   `hash(tuple(succ_lines))`, NOT the order-insensitive sum the notes B.4
+   described (the `*succ_lines` captures the window as one tuple). Ported
+   CPython 3.12 tuplehash (pyset::pyhash_tuple_i64). The sum version caused
+   numpy 2 R0801 FP (self-match off-diagonal from multiset collisions) +
+   pydantic equal-num ORDER divergence.
+2. R0903/R0904 mymethods must skip __module__/__qualname__/__annotations__:
+   astroid injects them as the FIRST class-local binding (a synthetic Const/
+   Dict), so a user `def __module__` is values()[1] and never counted. Our
+   locals map carries empty implicit bindings (getattr injects lazily) →
+   fixed in DesignCk::mymethods. Was django R0903 2FP/2FN.
+3. dataclass field instance_attrs: apply_dataclass_transform now reparents
+   the Unknown placeholder to the AnnAssign field (astroid parent=assign_node)
+   so the synthetic attrs survive the R0902 v[0].root() filter. Was werkzeug
+   R0902 1FN (12-field @dataclass Cookie).
+
+ACCEPTANCE (footer-stripped full profile, order-exact). R09xx 0FP/0FN on 23
+of 24 corpora; R0801 message HEADERS + ==name:[s:e] ranges byte-exact in
+ORDER with 0FP/0FN on all 25 corpora that emit R0801:
+  pylfunc 29, scrapy 117, celery 36, pip 94, botocore 85, tornado 9,
+  werkzeug 31, rich 575, twisted 170, numpy 710, pydantic 430, fastapi 4515,
+  matplotlib 454, scikit-learn 406, django 580, mypy 601, ansible 508,
+  zulip 676, nova 807, pandas 587, sympy 714, salt 2153, sqlalchemy 2404,
+  sentry 6280, airflow 4552.
+Only the R0801 trailing real-lines code block differs where the two matched
+regions' rstripped text differs — CONFIRMED UPSTREAM-NONDETERMINISTIC in
+pylint itself (3 PYTHONHASHSEED=0 runs on pylfunc disagree; LineSet.__hash__
+= id()). prylint policy: emit the block from the couple whose ==header sorts
+first (deterministic; matches the pinned GT majority). For true copy-paste
+the block is identical regardless.
+
+KNOWN CROSS-PHASE GAP (not a phase-E checker bug): sqlalchemy R0901
+15FP/3FN. The design checker faithfully counts ClassDef.ancestors(); the
+divergence is the INFERENCE engine resolving generic-subscript bases that
+astroid abandons — e.g. `class array(expression.ExpressionClauseList[_T])`:
+pylint's astroid raises InferenceError on the subscripted base → 0
+ancestors → no R0901; our pyinfer resolves the full MRO → 43. Same shared-
+inference fidelity gap the notes flagged for sqlalchemy C0116. Confined to
+sqlalchemy's deep generic hierarchies; all other 23 corpora are R09xx
+0FP/0FN.
+
+PERF: black duplicate-code is O(files^2) pathological in pylint itself
+(pylint R0801-only on black ~179s) and remains slow here; the tuple-hash
+fix removed the spurious-collision blowup and a claimed-triple dedup made
+compute_sims O(n) instead of O(commonalities^2). Per-lineset hash_lineset
+is computed once (pylint recomputes per pair).
+
+Gates: 27-corpus -E byte parity 27/27 (black -E EQUAL re-confirmed),
+check_treedump django 400 == 0, check_inferdump django 200 == 0. Design +
+similarities are config-gated off under -E (sim_kept/design_kept require
+full mode), so the -E pipeline stays byte-frozen.
