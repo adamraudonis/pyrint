@@ -2498,3 +2498,47 @@ phase-F codes). Exit-code ladder + bitmask verified per corpus.
 check_treedump django 400: 0 differing. inferdump: not required (pyinfer
 untouched). Full-mode FALSE POSITIVES: NONE except the sqlalchemy generic-base
 pyinfer divergence above (the cardinal sin is otherwise clean on 53/54 combos).
+
+## Phase F zero-round 3 (full re-validation, all 27 corpora x 2 profiles)
+
+Re-ran the entire owned-code audit on a freshly-rebuilt binary (no source
+changes this round — owned codes already at their best achievable state from
+zero-round 2; the build was current). Regenerated all 54 `.ours` captures
+(hook ~3min, full ~3min incl. black R0801 34s) and diffed owned codes
+(R0901-R0917, R0401, R0801, R17xx, C1804/C1805, W1113/W1116) vs footer-stripped
+GT via check_owned_f.sh.
+
+RESULT — **52/54 combos: 0 FP / 0 FN, EXACT owned-line order.** The 2 apparent
+non-zero combos are BOTH the documented truncated-GT captures (gt_integrity.py
+flags exactly these two, no others):
+- **sentry.hook** (naive 217 "FP"): GT cut mid-stream at a bare
+  `************* Module src.sentry.discover.dashboard_widget_split` header (no
+  trailing newline, exit 30). Restricting to the 521 GT-reached files:
+  **49/49, 0FP/0FN, EXACT order.** All 217 "FPs" are owned-code lines in files
+  the killed capture never streamed.
+- **core.full** (naive 18693 "FP" = R0801×18422 + R0401×266 + R0903×1 +
+  R0912×2 + R0914×2): GT exit=143 (OOM SIGKILL) before close(). Restricting to
+  the 15234 GT-reached files and excluding the close-time R0801/R0401 the GT
+  never reached: **12990/12990, 0FP/0FN, EXACT order.** prylint correctly emits
+  the close-time codes; pylint was killed first.
+
+The SOLE genuine owned divergence remains **sqlalchemy** (hook 1FP, full
+15FP/12FN), all R0901↔R0903 pairs, ONE root cause: generic-subscript ancestor
+over-resolution. NEW PROOF this round it is a pure pyinfer cache-warming-ORDER
+effect, not a structural design.rs rule:
+- pylint ISOLATED on array.py: `ExpressionClauseList[_T]` base.infer() raises
+  InferenceError → array.ancestors()==0 → R0903(1/2). pylint CORPUS: same
+  collapse → R0903(1/2) in GT.
+- **prylint ISOLATED on array.py: R0903(1/2) — byte-IDENTICAL to pylint.** Our
+  engine collapses correctly in isolation. Only in the warm full-corpus cache
+  does our `infer_to(Subscript)` resolve the generic to the real ClassDef
+  (43 ancestors → R0901) where astroid's stays Uninferable.
+The fix lives in the shared MRO/getitem/Generic pyinfer path (phase-1..17
+domain), risks the inviolable -E byte gate and the 4 pyinfer-ZERO inferdump
+corpora, for 1 FP on 1 corpus. Remains BLOCKED. The same root cause also drives
+the corpus's 1 non-owned W0223 FP at array.py:93 (Operators.__sa_operate__
+enters the over-resolved MRO).
+
+GATES (re-certified): **-E 27-corpus byte parity 27/27 ALL EQUAL**;
+check_treedump django 0 differing; check_inferdump django 200 0 differing files
+(0 lines). No source changes → no regression surface.
