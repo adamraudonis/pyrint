@@ -4353,11 +4353,13 @@ fn node_type(eng: &Engine, caches: &u::LintCaches, node: GNode) -> Option<Value>
         if v.is_uninferable() {
             continue;
         }
-        // is_none: None / Const(None)
-        if let Value::Node(g) = v {
-            if eng.kind_is(*g, |k| matches!(k, NodeKind::Const(ConstValue::None))) {
-                continue;
-            }
+        // utils.is_none (utils.py:1487): matches Const(value=None) — whether
+        // a real Const node OR a synthesized None (e.g. an implicit-return
+        // None yielded from a called function). astroid's `infer()` can hand
+        // back SynthConst(None) here; both must be skipped exactly like
+        // node-backed Const(None) so the type set collapses identically.
+        if matches!(eng.value_const(v), Some(ConstValue::None)) {
+            continue;
         }
         let k = value_key(v);
         if !keys.contains(&k) {
