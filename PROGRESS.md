@@ -2597,3 +2597,52 @@ GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
 (EGATE banner re-run); check_treedump django 400 = 0 differing; check_inferdump
 django 200 = 0 differing files (0 lines). No source changes → no regression
 surface (only new harness helpers committed).
+
+## Phase F zero-round 5 (full re-validation + mechanism trace of the sole gap)
+
+Rebuilt the release binary (no source delta — `cargo build --release` recompiled
+nothing) and re-ran the entire owned-code audit (R0901-R0917, R0401, R0801,
+R17xx, C1804/C1805, W1113/W1116) across all 27 corpora × 2 profiles vs
+footer-stripped GT (harness/audit_all_owned.sh).
+
+RESULT — **52/54 combos: 0 FP / 0 FN.** The 2 non-zero combos are the SAME two
+truncated-GT captures gt_integrity.py flags (and ONLY those two):
+- **sentry.hook** (exit=30, ends-on-bare-module-header): restricted to the 521
+  GT-reached files → **49/49, 0FP/0FN, EXACT order** (check_owned_restricted.py).
+- **core.full** (exit=143 OOM SIGKILL): restricted to 15234 GT-reached files,
+  close-time codes excluded → **12990/12990, 0FP/0FN, EXACT order.** prylint's
+  full run completes (exit 30) where pylint was killed.
+
+### sqlalchemy — sole genuine gap, ROOT CAUSE traced to astroid's getitem (still BLOCKED)
+hook 1FP (array.py:93 R0901 — R0901 IS hook-enabled; flags_hook disables only
+R0902/R0903/R0904 of the R090x set, so this is a real cardinal-sin hook FP),
+full 15FP/12FN (all R0901↔R0903 generic-base ancestor flips). This round traced
+the EXACT astroid mechanism via a direct probe (.venv-pylint python on
+array.py): the class is `array(expression.ExpressionClauseList[_T])`.
+`ExpressionClauseList` is **NOT a typing.Generic subclass and has NO
+__class_getitem__** (probe: `is generic? False`, `has __class_getitem__? False`).
+So astroid's `Subscript._infer_subscript` → `ClassDef.getitem` → finds no
+__getitem__/__class_getitem__ → **raises InferenceError** for the base. This is
+astroid's behavior BOTH cold (isolated `ast_from_file`) AND warm (all 255
+sqlalchemy modules pre-built): `array.ancestors() == 0` → R0903(1/2), byte-stable
+across two PYTHONHASHSEED=0 corpus runs. prylint matches this IN ISOLATION
+(`prylint --enable=R0901 array.py` emits nothing; cold = R0903) but in the WARM
+full-corpus cache prylint's `class_getitem` (protocols.rs:1617) — via the
+warm-cache `dunder_lookup_class`/`class_getattr` ancestors walk — finds a
+__getitem__/__class_getitem__ the cold walk doesn't, resolves the subscript to
+the real ClassDef, and counts 43 ancestors → R0901. The diff is therefore
+ENTIRELY in pyinfer's warm-cache ancestors()/inferred_bases()/class_getitem
+resolution order (the phase-1..17 domain), NOT in design.rs (count_parents is a
+faithful _get_parents_iter port). It is bidirectional (array.py over-resolves;
+selectable.py:211 under-resolves 32 vs 44) — emergent from global inference-cache
+warming ORDER, not one structural rule. Forcing it requires altering
+class_getitem / dunder_lookup_class / ancestors warm-cache behavior, guarded by
+the inviolable -E 27-corpus byte gate and the 4 pyinfer-ZERO inferdump corpora
+(django/pandas/sentry/core). Remains BLOCKED for 1 hook FP + 15FP/12FN on the
+single sqlalchemy corpus; confined there (no -E corpus leaks it).
+
+GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
+(EGATE banner re-run); check_treedump django 400 = 0 differing; check_inferdump
+django 200 = 0 differing files (0 lines). No source changes → no regression
+surface. Removed stray phase-E detached-finalizer artifact harness/finalize_e.sh
+(unreferenced).
