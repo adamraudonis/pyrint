@@ -2418,6 +2418,7 @@ impl RefactoringCk {
     pub fn visit_comprehension(&mut self, cx: &mut WalkCx, node: GNode) {
         self.check_unnecessary_comprehension(cx, node);
         self.check_unnecessary_dict_index_lookup(cx, node, false);
+        self.check_list_index_lookup_for(cx, node);
     }
 
     /// R1714 consider-using-in (refactoring_checker.py:1365-1409).
@@ -2896,7 +2897,7 @@ impl RefactoringCk {
             return;
         }
         // inferred_truth = safe_infer(truth, compare_constants=True)
-        let inferred = match u::safe_infer(eng, cx.caches, truth) {
+        let inferred = match u::safe_infer_compare_constants(eng, truth) {
             Some(v) if !v.is_uninferable() => v,
             _ => return,
         };

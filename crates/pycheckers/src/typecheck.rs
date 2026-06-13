@@ -1077,6 +1077,9 @@ impl TypeCk {
     /// typecheck.py:1423-1452
     fn check_isinstance_args(&mut self, cx: &mut WalkCx, node: GNode, args: &[GNode], callable_name: &str) {
         let eng = cx.eng;
+        // NOTE: the `> 2` branch does NOT return (typecheck.py:1423-1452) —
+        // it emits too-many-function-args AND still runs the W1116 check on
+        // args[1]. Only the `< 2` branch returns early.
         if args.len() > 2 {
             cx.emit_node("E1121", u::lineno(eng, node), u::col_offset(eng, node) as i64,
                 u::format_template("Too many positional arguments for %s call", &[callable_name]));
@@ -1086,16 +1089,17 @@ impl TypeCk {
                 cx.emit_node("E1120", u::lineno(eng, node), u::col_offset(eng, node) as i64,
                     u::format_template("No value for argument %s in %s call", &[p, callable_name]));
             }
-        } else {
-            // W1116 isinstance-second-argument-not-valid-type
-            if is_invalid_isinstance_type(eng, cx.caches, args[1]) {
-                cx.emit_node(
-                    "W1116",
-                    u::lineno(eng, node),
-                    u::col_offset(eng, node) as i64,
-                    "Second argument of isinstance is not a type".to_string(),
-                );
-            }
+            return;
+        }
+        // W1116 isinstance-second-argument-not-valid-type (reached for == 2
+        // AND > 2 args)
+        if is_invalid_isinstance_type(eng, cx.caches, args[1]) {
+            cx.emit_node(
+                "W1116",
+                u::lineno(eng, node),
+                u::col_offset(eng, node) as i64,
+                "Second argument of isinstance is not a type".to_string(),
+            );
         }
     }
 

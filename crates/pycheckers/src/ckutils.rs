@@ -557,6 +557,21 @@ pub fn safe_infer_streaming(
     first
 }
 
+/// safe_infer with compare_constants=True (utils.py:1385-1392, used by
+/// R1706/R1709): two Const values of the same type but UNEQUAL `.value`
+/// are also ambiguous -> None. Not cached (distinct flag from `safe_infer`).
+pub fn safe_infer_compare_constants(eng: &Engine, g: GNode) -> Option<Value> {
+    let cb = |a: GNode, b: GNode| -> bool {
+        let mda = eng.md(a.m);
+        let mdb = eng.md(b.m);
+        match (&mda.tree.nodes[a.n.idx()].kind, &mdb.tree.nodes[b.n.idx()].kind) {
+            (NodeKind::Const(ca), NodeKind::Const(cb)) => ca != cb,
+            _ => false,
+        }
+    };
+    safe_infer_streaming(eng, &Ctx::new(), g, Some(&cb))
+}
+
 pub fn safe_infer_of_flow(eng: &Engine, flow: &pyinfer::value::Flow) -> Option<Value> {
     if flow.vals.is_empty() {
         return None; // InferenceError on first pull (or empty -> raise_if_nothing)
