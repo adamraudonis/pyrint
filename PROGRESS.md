@@ -2802,6 +2802,91 @@ GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
 not required (pyinfer untouched). Clean working tree — pure re-validation +
 diagnostic round (all instrumentation reverted; `git diff` empty).
 
+## Phase F zero-round 9 (GT REGENERATION of the 2 truncated/killed captures → full-GT proof, not restricted)
+
+Rebuilt the committed binary (clean tree; cargo recompiled nothing — 0 source
+changes), REGENERATED all 27×2 .ours captures FRESH and re-ran the full owned-code
+audit. KEY NEW CONTRIBUTION this round: the prior rounds proved sentry.hook and
+core.full at 0FP/0FN only on the *restricted* GT-reached subset, because both GT
+captures were corrupt (gt_integrity.py flagged them SUSPECT). This round I
+**regenerated the corrupt GTs from the pinned pylint** (`gt_iso.sh`, the bash
+script — must use it, NOT a hand-rolled invocation: zsh/Bash-tool word-splitting
+does NOT split the multi-flag `$FLAGS` and `--persistent` swallows the whole
+string → exit 2, 0-byte out; the truncations were caused by interrupted/competing
+regen processes, not pylint nondeterminism) and re-audited against the COMPLETE GT.
+
+RESULT — **sentry.hook now CLEAN against the full unrestricted GT**: regenerated
+GT = 1036 module headers, exit 30, footer "rated 9.92/10", gt_integrity OK;
+`check_owned_f.sh sentry hook` → **owned GT=266 ours=266, 0FP/0FN, order EXACT**.
+The earlier "143/217 FP" was 100% the truncated GT (it cut off mid-stream at
+`src.sentry.discover.dashboard_widget_split` with no newline, missing ~210
+files incl. src/bitfield, src/social_auth — all real W1113/R17xx that pylint
+DOES emit when those files are analyzed; verified `pylint src/bitfield/models.py`
+alone → W1113 at :85). **All 50 non-suspect combos** (25 corpora × 2 profiles
+excl. core.full-regenerating + sqlalchemy) re-verified **0FP/0FN + EXACT order**
+on fresh captures.
+
+- **core.full** GT regen LAUNCHED this round (the prior was exit=143 SIGKILL at
+  ~4.8h, before close() emitted R0801/R0401). PROVED every apparent FP is a
+  past-the-kill artifact, NOT a prylint bug: the killed GT's last streamed file
+  is `script/hassfest/quality_scale_validation/reconfiguration_flow.py`
+  (discovery pos 17519); EVERY non-R0801/R0401 owned "FP" file
+  (quality_scale_validation/__init__.py R0903 @17521,
+  script/translations/deduplicate.py + migrate.py R0912/R0914 @17530/17537)
+  lies AFTER pos 17519 — never analyzed by the killed GT. Up to the cut the
+  killed GT's owned counts already match ours (R0913 4017=4017, R0917
+  3867=3867, R0903 2256 vs 2257, etc. — the +1/+2 deltas are exactly the
+  past-cut files). R0801 0-in-GT = close() never ran. prylint completes (exit
+  30) where pylint OOM-died.
+
+### R0801 block-content nondeterminism PROVEN upstream (new direct evidence)
+The block-aware `triage_owned2.py` flags FPblocks==FNblocks on R0801-dense full
+captures (django/fastapi/airflow/sentry…) — these are NOT prylint defects. Ran the
+pinned pylint **3× on pylfunc full, PYTHONHASHSEED=0**: the R0801 message-LINE
+count (7), the sorted `==headers` (14), and percent are BYTE-IDENTICAL across all
+3 runs, but the displayed code-BLOCK content DIFFERS run-to-run (one shows
+`# [multiple-statements]` trailing comments, another omits them). Root cause
+re-confirmed in symilar.py:848-855: the checker iterates `couples` as a raw `set`
+and shows `real_lines` of the LAST-iterated couple; `LineSet.__hash__ == id(self)`
+(:701) → heap-address-keyed → irreproducible (the standalone `_display_sims`
+:450 uses `sorted(couples)` but the CHECKER does not). The deterministic part
+(what `check_owned_f.sh` measures) matches; the residual block text is pylint's
+own heap nondeterminism. Existing sorts-first policy is correct.
+
+### sqlalchemy — sole genuine gap, root cause nailed to the exact astroid line
+Independently re-confirmed 16 FP (15 full R0901 + 1 hook R0901) + 12 FN (3 R0901
+count-flips + 9 R0903), ALL R0901↔R0903 generic-base ancestor flips on classes
+with subscripted-generic bases (`class array(expression.ExpressionClauseList[_T])`,
+`class hstore(sqlfunc.GenericFunction[_HSTORE_VAL])`, …). NEW this round — pinned
+the EXACT divergence point: `dunder_lookup._class_lookup` (dunder_lookup.py:60-67)
+does `metaclass = node.metaclass(context); if metaclass is None: raise` and
+`ClassDef.metaclass()` returns **None for any class without an EXPLICIT metaclass**
+(probe-verified on a plain class) → `__getitem__` lookup always raises for these
+→ the `__class_getitem__` fallback (scoped_nodes.py:2560 `self.getattr(...)`, NO
+context) must reach `typing.Generic.__class_getitem__` via the FULL ancestors
+walk. In the WARM full-corpus cache, `OperatorExpression.ancestors()` collapses to
+0 (its only base `ColumnElement[_T]` infers Uninferable LIVE — NOT cached; probe
+showed 0 `_INFERENCE_CACHE` entries for that Subscript), so the getattr fails →
+`getitem` raises AstroidTypeError → Subscript Uninferable → ancestors empty →
+R0903 instead of R0901. The collapse is an EMERGENT global-cache-warm ORDER effect
+through the recursive Subscript→getitem→__class_getitem__→ancestors path:
+prylint matches astroid byte-for-byte in ISOLATION (array.py-alone → R0903 both
+engines) and diverges only warm (full-corpus → R0901). sqlalchemy is NOT in the
+inferdump fidelity gate (only the 7 original corpora are warmed/driven to
+byte-exact); matching this bit-for-bit needs the phase-1..17 cache-order domain.
+Our design.rs/getattr.rs (_get_parents_iter, ancestors_frame fresh-ctx-per-call +
+restore_path-per-base) are faithful line-by-line ports; the gap is purely the
+shared cache machinery, guarded by EGATE 27/27 + the 4 pyinfer-ZERO inferdump
+corpora. R0901 is NOT an -E code (EGATE 27/27 EQUAL incl. sqlalchemy — no leak).
+BLOCKED — perturbing the cache key/path/cycle for a flip confined to sqlalchemy's
+deep generic hierarchies risks the 50 green combos + all gates; wrong trade.
+
+GATES (re-certified this round): **EGATE -E 27-corpus byte parity 27/27 ALL EQUAL**
+(fresh run, sqlalchemy EQUAL); check_treedump django 400 = 0 differing;
+check_inferdump not required (pyinfer untouched, 0 source changes). Clean working
+tree — GT regeneration + re-validation round; harness/results gitignored so no
+tracked diff.
+
 ## Phase F zero-round 8 (independent re-validation: full owned-code coverage census + bidirectionality confirmation)
 
 Rebuilt the committed binary (clean tree at zero-round 7; cargo recompiled
