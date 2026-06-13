@@ -1679,8 +1679,16 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
             tree.s(*name).to_string()
         }
         NodeKind::Attribute { expr, attrname, .. } | NodeKind::AssignAttr { expr, attrname } => {
-            format!("{}.{}", s(*expr), tree.s(*attrname))
+            // visit_attribute (as_string.py): receiver gets precedence parens;
+            // a bare-digit receiver is also parenthesized (1 .real).
+            let mut left = precedence_parens(eng, g, GNode { m: g.m, n: *expr }, true);
+            if !left.is_empty() && left.chars().all(|c| c.is_ascii_digit()) {
+                left = format!("({left})");
+            }
+            format!("{}.{}", left, tree.s(*attrname))
         }
+        // visit_const (as_string.py): Ellipsis -> "...", else repr(value).
+        NodeKind::Const(ConstValue::Ellipsis) => "...".to_string(),
         NodeKind::Const(c) => const_repr(c),
         NodeKind::Call { func, args, keywords } => {
             let mut parts: Vec<String> = args.iter().map(|&a| s(a)).collect();
@@ -1698,12 +1706,13 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
             parts.join(&format!(" {op} "))
         }
         NodeKind::BinOp { left, op, right } => {
-            format!(
-                "{} {} {}",
-                paren_if_needed(eng, g, GNode { m: g.m, n: *left }),
-                op,
-                paren_if_needed(eng, g, GNode { m: g.m, n: *right })
-            )
+            let l = precedence_parens(eng, g, GNode { m: g.m, n: *left }, true);
+            let r = precedence_parens(eng, g, GNode { m: g.m, n: *right }, false);
+            if &**op == "**" {
+                format!("{l}{op}{r}")
+            } else {
+                format!("{l} {op} {r}")
+            }
         }
         NodeKind::UnaryOp { op, operand } => {
             let o = paren_if_needed(eng, g, GNode { m: g.m, n: *operand });
@@ -1714,17 +1723,34 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
             }
         }
         NodeKind::Compare { left, ops } => {
-            let mut out = paren_if_needed(eng, g, GNode { m: g.m, n: *left });
+            let mut out = precedence_parens(eng, g, GNode { m: g.m, n: *left }, true);
             for (op, r) in ops {
                 out.push_str(&format!(
                     " {} {}",
                     op,
-                    paren_if_needed(eng, g, GNode { m: g.m, n: *r })
+                    precedence_parens(eng, g, GNode { m: g.m, n: *r }, false)
                 ));
             }
             out
         }
-        NodeKind::Subscript { value, slice, .. } => format!("{}[{}]", s(*value), s(*slice)),
+        NodeKind::Subscript { value, slice, .. } => {
+            // visit_subscript (as_string.py): value gets precedence parens;
+            // a non-empty Tuple slice has its outer parens stripped
+            // (a[0, idx] not a[(0, idx)]).
+            let mut idxstr = s(*slice);
+            let is_nonempty_tuple = matches!(
+                &tree.nodes[slice.idx()].kind,
+                NodeKind::Tuple { elts, .. } if !elts.is_empty()
+            );
+            if is_nonempty_tuple {
+                // strip one leading '(' and trailing ')'
+                let chars: Vec<char> = idxstr.chars().collect();
+                if chars.len() >= 2 && chars[0] == '(' && *chars.last().unwrap() == ')' {
+                    idxstr = chars[1..chars.len() - 1].iter().collect();
+                }
+            }
+            format!("{}[{}]", precedence_parens(eng, g, GNode { m: g.m, n: *value }, true), idxstr)
+        }
         NodeKind::Slice { lower, upper, step } => {
             let f = |o: &Option<pyast::NodeId>| o.map(s).unwrap_or_default();
             match step {
@@ -1793,24 +1819,86 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
             None => "yield".to_string(),
         },
         NodeKind::YieldFrom { value } => format!("yield from {}", s(*value)),
-        NodeKind::Lambda(d) => format!("lambda {}: {}", args_as_string(eng, GNode { m: g.m, n: d.args }), s(d.body)),
+        NodeKind::Lambda(d) => {
+            // visit_lambda (as_string.py): no space before ':' when no args.
+            let args = args_as_string(eng, GNode { m: g.m, n: d.args });
+            if args.is_empty() {
+                format!("lambda: {}", s(d.body))
+            } else {
+                format!("lambda {}: {}", args, s(d.body))
+            }
+        }
         NodeKind::JoinedStr { values } => {
-            let mut out = String::from("f'");
+            // astroid visit_joinedstr (as_string.py): repr(Const)[1:-1] with
+            // brace-doubling for literal parts, FormattedValue accept() for
+            // the rest, then pick the first quote not present in the string.
+            let mut string = String::new();
             for &v in values {
                 match &tree.nodes[v.idx()].kind {
-                    NodeKind::Const(ConstValue::Str(st)) => out.push_str(st),
-                    _ => {
-                        out.push('{');
-                        out.push_str(&s(v));
-                        out.push('}');
+                    NodeKind::Const(ConstValue::Str(st)) => {
+                        let r = pyast::pyrepr::repr_str(st);
+                        // strip the leading/trailing quote char (one each)
+                        let inner = &r[1..r.len() - 1];
+                        string.push_str(&inner.replace('{', "{{").replace('}', "}}"));
                     }
+                    _ => string.push_str(&s(v)),
                 }
             }
-            out.push('\'');
-            out
+            let quote = ["'", "\"", "\"\"\"", "'''"]
+                .iter()
+                .find(|q| !string.contains(*q))
+                .copied()
+                .unwrap_or("'");
+            format!("f{q}{string}{q}", q = quote)
         }
-        NodeKind::FormattedValue { value, .. } => s(*value),
-        NodeKind::GeneratorExp(d) => format!("({})", s(d.elt)),
+        NodeKind::FormattedValue { value, conversion, format_spec } => {
+            let mut result = s(*value);
+            if *conversion >= 0 {
+                if let Some(c) = char::from_u32(*conversion as u32) {
+                    result.push('!');
+                    result.push(c);
+                }
+            }
+            if let Some(spec) = format_spec {
+                // format_spec is itself a JoinedStr; strip the leading f+quote
+                // (2 chars) and trailing quote (1 char).
+                let spec_str = s(*spec);
+                let chars: Vec<char> = spec_str.chars().collect();
+                let trimmed: String = if chars.len() >= 3 {
+                    chars[2..chars.len() - 1].iter().collect()
+                } else {
+                    String::new()
+                };
+                result.push(':');
+                result.push_str(&trimmed);
+            }
+            format!("{{{result}}}")
+        }
+        NodeKind::Comprehension { target, iter, ifs, is_async } => {
+            let ifs_str: String = ifs.iter().map(|&n| format!(" if {}", s(n))).collect();
+            let generated = format!("for {} in {}{}", s(*target), s(*iter), ifs_str);
+            if *is_async {
+                format!("async {generated}")
+            } else {
+                generated
+            }
+        }
+        NodeKind::ListComp(d) => {
+            let gens: Vec<String> = d.generators.iter().map(|&n| s(n)).collect();
+            format!("[{} {}]", s(d.elt), gens.join(" "))
+        }
+        NodeKind::SetComp(d) => {
+            let gens: Vec<String> = d.generators.iter().map(|&n| s(n)).collect();
+            format!("{{{} {}}}", s(d.elt), gens.join(" "))
+        }
+        NodeKind::GeneratorExp(d) => {
+            let gens: Vec<String> = d.generators.iter().map(|&n| s(n)).collect();
+            format!("({} {})", s(d.elt), gens.join(" "))
+        }
+        NodeKind::DictComp(d) => {
+            let gens: Vec<String> = d.generators.iter().map(|&n| s(n)).collect();
+            format!("{{{}: {} {}}}", s(d.key), s(d.value), gens.join(" "))
+        }
         _ => {
             // fallback: deterministic join of children (self-consistent)
             let kids = tree.children(g.n);
@@ -1822,25 +1910,75 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
     }
 }
 
-fn paren_if_needed(eng: &Engine, _parent: GNode, child: GNode) -> String {
-    let needs = eng.kind_is(child, |k| {
-        matches!(
-            k,
-            NodeKind::BoolOp { .. }
-                | NodeKind::BinOp { .. }
-                | NodeKind::UnaryOp { .. }
-                | NodeKind::Compare { .. }
-                | NodeKind::IfExp { .. }
-                | NodeKind::Lambda(_)
-                | NodeKind::Await { .. }
-        )
-    });
+/// astroid OP_PRECEDENCE (nodes/const.py): operator/node-class -> precedence
+/// rank (lower = binds looser). Highest rank (never wrapped) = the table len.
+fn op_precedence_rank(eng: &Engine, g: GNode) -> i32 {
+    const TABLE_LEN: i32 = 15; // 15 precedence levels (0..=14)
+    let md = eng.md(g.m);
+    match &md.tree.nodes[g.n.idx()].kind {
+        NodeKind::Lambda(_) => 0,
+        NodeKind::IfExp { .. } => 1,
+        NodeKind::BoolOp { op, .. } => {
+            if &**op == "or" {
+                2
+            } else {
+                3
+            }
+        }
+        NodeKind::UnaryOp { op, .. } => {
+            if &**op == "not" {
+                4 // "not"
+            } else {
+                12 // "UnaryOp" (+, -, ~)
+            }
+        }
+        NodeKind::Compare { .. } => 5,
+        NodeKind::BinOp { op, .. } => match &**op {
+            "|" => 6,
+            "^" => 7,
+            "&" => 8,
+            "<<" | ">>" => 9,
+            "+" | "-" => 10,
+            "*" | "@" | "/" | "//" | "%" => 11,
+            "**" => 13,
+            _ => TABLE_LEN,
+        },
+        NodeKind::Await { .. } => 14,
+        _ => TABLE_LEN,
+    }
+}
+
+/// op_left_associative (node_classes.py): everything left-assoc except `**`
+/// and IfExp.
+fn op_left_associative(eng: &Engine, g: GNode) -> bool {
+    let md = eng.md(g.m);
+    match &md.tree.nodes[g.n.idx()].kind {
+        NodeKind::BinOp { op, .. } => &**op != "**",
+        NodeKind::IfExp { .. } => false,
+        _ => true,
+    }
+}
+
+/// as_string._precedence_parens / _should_wrap (as_string.py:54-85).
+fn precedence_parens(eng: &Engine, parent: GNode, child: GNode, is_left: bool) -> String {
+    let np = op_precedence_rank(eng, parent);
+    let cp = op_precedence_rank(eng, child);
+    let wrap = if np > cp {
+        true
+    } else {
+        np == cp && is_left != op_left_associative(eng, parent)
+    };
     let s = as_string(eng, child);
-    if needs {
+    if wrap {
         format!("({s})")
     } else {
         s
     }
+}
+
+/// Back-compat wrapper used by BoolOp/UnaryOp/Compare (is_left = True).
+fn paren_if_needed(eng: &Engine, parent: GNode, child: GNode) -> String {
+    precedence_parens(eng, parent, child, true)
 }
 
 fn args_as_string(eng: &Engine, args: GNode) -> String {

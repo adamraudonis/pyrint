@@ -119,6 +119,78 @@ pub struct Prepared {
     pub vars_except: bool,
     /// ClassChecker.visit_assign: W0212|R0202|R0203
     pub classes_assign: bool,
+    // ---- phase D: refactoring package (notes/09-refactoring.md) ----
+    /// RefactoringChecker.process_tokens registered at all (the checker is
+    /// KEPT iff any of its messages enabled). Gates the _elifs token scan.
+    pub refac_kept: bool,
+    /// trailing-comma-tuple (R1707) enabled at FILE start (process_tokens
+    /// gate for emission; the elif scan runs regardless of this).
+    pub refac_r1707: bool,
+    /// visit_try / visit_while: too-many-nested-blocks | no-else-return
+    pub refac_try: bool,
+    /// visit_for: redefined-argument-from-local | too-many-nested-blocks |
+    /// unnecessary-dict-index-lookup | unnecessary-list-index-lookup
+    pub refac_for: bool,
+    /// visit_excepthandler: redefined-argument-from-local
+    pub refac_excepthandler: bool,
+    /// visit_with: redefined-argument-from-local | consider-using-with
+    pub refac_with: bool,
+    /// visit_if: nested | simplifiable-if | no-else-* | consider-using-get |
+    /// consider-using-min/max-builtin
+    pub refac_if: bool,
+    /// visit_ifexp: simplifiable-if-expression
+    pub refac_ifexp: bool,
+    /// leave_functiondef: nested | inconsistent-return | useless-return |
+    /// consider-using-with  (visit_functiondef is UNDECORATED -> always)
+    pub refac_leave_func: bool,
+    /// leave_classdef / leave_module: consider-using-with (R1732)
+    pub refac_cuw: bool,
+    /// visit_raise: stop-iteration-return
+    pub refac_raise: bool,
+    /// visit_call: many R17xx
+    pub refac_call: bool,
+    /// visit_yield: use-yield-from
+    pub refac_yield: bool,
+    /// visit_boolop: merging-isinstance | using-in | chained-comparison |
+    /// simplifiable-condition | condition-evals-to-constant
+    pub refac_boolop: bool,
+    /// visit_assign: simplify-boolean | using-ternary | swap-variables |
+    /// consider-using-with
+    pub refac_assign: bool,
+    /// visit_return: simplify-boolean | using-ternary | swap-variables
+    pub refac_return: bool,
+    /// visit_augassign: consider-using-join
+    pub refac_augassign: bool,
+    /// visit_comprehension: unnecessary-comprehension | dict-index | list-index
+    pub refac_comprehension: bool,
+    // NotChecker.visit_unaryop: unnecessary-negation (C0117)
+    pub not_unaryop: bool,
+    // RecommendationChecker
+    /// visit_for: consider-using-enumerate | consider-using-dict-items |
+    /// use-sequence-for-iteration
+    pub recom_for: bool,
+    /// visit_call: consider-iterating-dictionary | use-maxsplit-arg
+    pub recom_call: bool,
+    /// visit_comprehension: consider-using-dict-items | use-sequence-for-iteration
+    pub recom_comprehension: bool,
+    /// visit_const: consider-using-f-string (C0209)
+    pub recom_const: bool,
+    // ImplicitBooleanessChecker
+    /// visit_call: use-implicit-booleaness-not-len (C1802)
+    pub implbool_call: bool,
+    /// visit_unaryop: use-implicit-booleaness-not-len (C1802)
+    pub implbool_unaryop: bool,
+    /// visit_compare: C1803 | C1804 | C1805
+    pub implbool_compare: bool,
+    /// the three real visit_compare gates (separately read in the body)
+    pub implbool_c1803: bool,
+    pub implbool_c1805: bool,
+    // TypeChecker W-codes
+    /// visit_functiondef/asyncfunctiondef: keyword-arg-before-vararg (W1113)
+    pub ty_w1113: bool,
+    /// visit_assign: assignment-from-no-return | assignment-from-none |
+    /// non-str-assignment-to-dunder-name (the visit_assign decorator)
+    pub ty_w1115: bool,
 }
 
 impl Prepared {
@@ -175,9 +247,54 @@ impl Prepared {
             doc_class: any(&["C0115", "C0112"]),
             doc_func: any(&["C0116", "C0112"]),
             function_ck: enabled("W0135"),
+            // ---- phase D ----
+            // RefactoringChecker is KEPT iff ANY R1701-R1737 enabled.
+            refac_kept: any(&REFAC_ALL),
+            refac_r1707: enabled("R1707"),
+            refac_try: any(&["R1702", "R1705"]),
+            refac_for: any(&["R1704", "R1702", "R1733", "R1736"]),
+            refac_excepthandler: enabled("R1704"),
+            refac_with: any(&["R1704", "R1732"]),
+            refac_if: any(&[
+                "R1702", "R1703", "R1705", "R1720", "R1723", "R1724", "R1715", "R1730", "R1731",
+            ]),
+            refac_ifexp: enabled("R1719"),
+            refac_leave_func: any(&["R1702", "R1710", "R1711", "R1732"]),
+            refac_cuw: enabled("R1732"),
+            refac_raise: enabled("R1708"),
+            refac_call: any(&[
+                "R1708", "R1717", "R1718", "R1722", "R1725", "R1728", "R1732", "R1734", "R1735",
+                "R1729",
+            ]),
+            refac_yield: enabled("R1737"),
+            refac_boolop: any(&["R1701", "R1714", "R1716", "R1726", "R1727"]),
+            refac_assign: any(&["R1709", "R1706", "R1712", "R1732"]),
+            refac_return: any(&["R1709", "R1706", "R1712"]),
+            refac_augassign: enabled("R1713"),
+            refac_comprehension: any(&["R1721", "R1733", "R1736"]),
+            not_unaryop: enabled("C0117"),
+            recom_for: any(&["C0200", "C0206", "C0208"]),
+            recom_call: any(&["C0201", "C0207"]),
+            recom_comprehension: any(&["C0206", "C0208"]),
+            recom_const: enabled("C0209"),
+            implbool_call: enabled("C1802"),
+            implbool_unaryop: enabled("C1802"),
+            implbool_compare: any(&["C1803", "C1804", "C1805"]),
+            implbool_c1803: enabled("C1803"),
+            implbool_c1805: enabled("C1805"),
+            ty_w1113: enabled("W1113"),
+            ty_w1115: any(&["E1111", "E1128", "W1115"]),
         }
     }
 }
+
+/// every RefactoringChecker (R1701-R1737) message id.
+const REFAC_ALL: [&str; 37] = [
+    "R1701", "R1702", "R1703", "R1704", "R1705", "R1706", "R1707", "R1708", "R1709", "R1710",
+    "R1711", "R1712", "R1713", "R1714", "R1715", "R1716", "R1717", "R1718", "R1719", "R1720",
+    "R1721", "R1722", "R1723", "R1724", "R1725", "R1726", "R1727", "R1728", "R1729", "R1730",
+    "R1731", "R1732", "R1733", "R1734", "R1735", "R1736", "R1737",
+];
 
 /// A message produced by a checker (text fully formatted; gating and
 /// module/path resolution happen in the caller).
@@ -306,6 +423,7 @@ pub struct LintRun {
     pub lambda_expr: LambdaExprCk,
     pub nested: NestedMinMaxCk,
     pub chained: ChainedCompCk,
+    pub refac: crate::refactoring::RefactoringCk,
     pub format_state: FormatWalkState,
     pub caches: LintCaches,
 }
@@ -337,6 +455,7 @@ impl Default for LintRun {
             lambda_expr: LambdaExprCk,
             nested: NestedMinMaxCk,
             chained: ChainedCompCk,
+            refac: crate::refactoring::RefactoringCk::default(),
             format_state: FormatWalkState::default(),
             caches: LintCaches::default(),
         }
@@ -397,6 +516,7 @@ impl LintRun {
             lambda_expr: &mut self.lambda_expr,
             nested: &mut self.nested,
             chained: &mut self.chained,
+            refac: &mut self.refac,
             format_state: &mut self.format_state,
         };
         walker.walk(&mut cx, GNode { m: mid, n: NodeId::MODULE });
@@ -429,6 +549,7 @@ struct Walker<'w> {
     lambda_expr: &'w mut LambdaExprCk,
     nested: &'w mut NestedMinMaxCk,
     chained: &'w mut ChainedCompCk,
+    refac: &'w mut crate::refactoring::RefactoringCk,
     format_state: &'w mut FormatWalkState,
 }
 
@@ -579,7 +700,17 @@ impl Walker<'_> {
                 if self.prep.nonascii_name {
                     self.nonascii.visit_functiondef(cx, g);
                 }
+                // RefactoringChecker.visit_functiondef is UNDECORATED ->
+                // always registered (builds _return_nodes for R1710/R1711).
+                // But the whole checker is dropped if no R17xx is enabled.
+                if self.prep.refac_kept {
+                    self.refac.visit_functiondef(cx, g);
+                }
                 self.stdlib.visit_functiondef(cx, g);
+                // TypeChecker.visit_functiondef (W1113), after Stdlib.
+                if self.prep.ty_w1113 {
+                    self.ty.visit_functiondef_w1113(cx, g);
+                }
                 self.vars.visit_functiondef(cx, g);
             }
             Tag::AsyncFunctionDef => {
@@ -604,6 +735,10 @@ impl Walker<'_> {
                 if self.prep.nonascii_name {
                     self.nonascii.visit_functiondef(cx, g);
                 }
+                // TypeChecker.visit_asyncfunctiondef = visit_functiondef (W1113)
+                if self.prep.ty_w1113 {
+                    self.ty.visit_functiondef_w1113(cx, g);
+                }
                 self.vars.visit_functiondef(cx, g);
             }
             Tag::Lambda => {
@@ -625,6 +760,12 @@ impl Walker<'_> {
                 }
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
+                if self.prep.recom_comprehension {
+                    self.refac.recom_visit_comprehension(cx, g);
+                }
+                if self.prep.refac_comprehension {
+                    self.refac.visit_comprehension(cx, g);
+                }
             }
             Tag::Name => self.vars.visit_name(cx, g),
             Tag::AssignName => {
@@ -652,6 +793,9 @@ impl Walker<'_> {
                 if self.prep.lambda_expr {
                     self.lambda_expr.visit_assign(cx, g);
                 }
+                if self.prep.refac_assign {
+                    self.refac.visit_assign(cx, g);
+                }
                 self.ty.visit_assign(cx, g);
                 self.vars.visit_assign(cx, g);
             }
@@ -669,12 +813,25 @@ impl Walker<'_> {
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
             }
-            Tag::If | Tag::IfExp => {
+            Tag::If => {
                 if self.prep.basic_test {
                     self.basic.visit_if_test(cx, g);
                 }
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
+                if self.prep.refac_if {
+                    self.refac.visit_if(cx, g);
+                }
+            }
+            Tag::IfExp => {
+                if self.prep.basic_test {
+                    self.basic.visit_if_test(cx, g);
+                }
+                self.fmt(cx, g);
+                self.imp.compute_first_non_import_node(cx, g);
+                if self.prep.refac_ifexp {
+                    self.refac.visit_ifexp(cx, g);
+                }
             }
             Tag::Call => {
                 if self.prep.basic_call {
@@ -695,6 +852,16 @@ impl Walker<'_> {
                 }
                 if self.prep.nonascii_name {
                     self.nonascii.visit_call(cx, g);
+                }
+                // ImplicitBooleaness -> Recommendation -> Refactoring
+                if self.prep.implbool_call {
+                    self.refac.implbool_visit_call(cx, g);
+                }
+                if self.prep.recom_call {
+                    self.refac.recom_visit_call(cx, g);
+                }
+                if self.prep.refac_call {
+                    self.refac.visit_call(cx, g);
                 }
                 self.stdlib.visit_call(cx, g);
                 self.strings.visit_call(cx, g);
@@ -727,6 +894,15 @@ impl Walker<'_> {
                     self.exceptions.visit_compare(cx, g);
                 }
                 self.fmt(cx, g);
+                // ImplicitBooleaness.visit_compare (C1803/C1804/C1805)
+                if self.prep.implbool_compare {
+                    self.refac.implbool_visit_compare(
+                        cx,
+                        g,
+                        self.prep.implbool_c1803,
+                        self.prep.implbool_c1805,
+                    );
+                }
                 self.ty.visit_compare(cx, g);
             }
             Tag::Dict => {
@@ -755,6 +931,12 @@ impl Walker<'_> {
                 self.fmt(cx, g);
                 self.imp.visit_functiondef_family(cx, g);
                 self.mod_iter.visit_for(cx, g);
+                if self.prep.recom_for {
+                    self.refac.recom_visit_for(cx, g);
+                }
+                if self.prep.refac_for {
+                    self.refac.visit_for(cx, g);
+                }
                 self.iter.visit_for(cx, g);
                 self.ty.visit_for(cx, g);
                 if self.prep.vars_for {
@@ -767,6 +949,12 @@ impl Walker<'_> {
                 }
                 self.fmt(cx, g);
                 self.imp.visit_functiondef_family(cx, g);
+                // visit_while = visit_try (alias). Only nested-blocks +
+                // return/raise no-else matter (While is neither If nor Try
+                // so the no-else emit-condition is always False).
+                if self.prep.refac_try {
+                    self.refac.visit_try(cx, g);
+                }
             }
             Tag::AsyncFor => self.iter.visit_asyncfor(cx, g),
             Tag::AsyncWith => {
@@ -776,6 +964,9 @@ impl Walker<'_> {
             Tag::Yield => {
                 self.basicerr.visit_yield(cx, g);
                 self.fmt(cx, g);
+                if self.prep.refac_yield {
+                    self.refac.visit_yield(cx, g);
+                }
             }
             Tag::YieldFrom => {
                 self.basicerr.visit_yield(cx, g);
@@ -791,6 +982,9 @@ impl Walker<'_> {
                     self.basic.visit_with(cx, g);
                 }
                 self.fmt(cx, g);
+                if self.prep.refac_with {
+                    self.refac.visit_with(cx, g);
+                }
                 if self.prep.threading {
                     self.threading.visit_with(cx, g);
                 }
@@ -806,6 +1000,14 @@ impl Walker<'_> {
             Tag::UnaryOp => {
                 self.basicerr.visit_unaryop(cx, g);
                 self.fmt(cx, g);
+                // ImplicitBooleaness.visit_unaryop (C1802b) -> NotChecker
+                // (C0117) -> TypeChecker.visit_unaryop
+                if self.prep.implbool_unaryop {
+                    self.refac.implbool_visit_unaryop(cx, g);
+                }
+                if self.prep.not_unaryop {
+                    self.refac.not_visit_unaryop(cx, g);
+                }
                 self.ty.visit_unaryop(cx, g);
             }
             Tag::Return => {
@@ -815,6 +1017,9 @@ impl Walker<'_> {
                 }
                 self.basicerr.visit_return(cx, g);
                 self.fmt(cx, g);
+                if self.prep.refac_return {
+                    self.refac.visit_return(cx, g);
+                }
             }
             Tag::Break => {
                 if self.prep.basic_return {
@@ -845,6 +1050,9 @@ impl Walker<'_> {
                 }
                 self.exceptions.visit_raise(cx, g);
                 self.fmt(cx, g);
+                if self.prep.refac_raise {
+                    self.refac.visit_raise(cx, g);
+                }
             }
             Tag::Try => {
                 if self.prep.basic_kept {
@@ -853,6 +1061,9 @@ impl Walker<'_> {
                 self.exceptions.visit_try(cx, g);
                 self.fmt(cx, g);
                 self.imp.compute_first_non_import_node(cx, g);
+                if self.prep.refac_try {
+                    self.refac.visit_try(cx, g);
+                }
             }
             Tag::TryStar => {
                 self.exceptions.visit_trystar(cx, g);
@@ -871,6 +1082,9 @@ impl Walker<'_> {
             Tag::ExceptHandler => {
                 // full order: Misdesign, Format, Refactoring,
                 // UnsupportedVersion, Variables (fmt ran early via !fmt_late)
+                if self.prep.refac_excepthandler {
+                    self.refac.visit_excepthandler(cx, g);
+                }
                 if self.prep.vars_except {
                     self.vars.visit_excepthandler(cx, g);
                 }
@@ -878,6 +1092,9 @@ impl Walker<'_> {
             Tag::Const => {
                 // full order: Misdesign, Format, Recommendation,
                 // StringConstant, Ellipsis, Variables (fmt ran early)
+                if self.prep.recom_const {
+                    self.refac.recom_visit_const(cx, g);
+                }
                 if self.prep.vars_const {
                     self.vars.visit_const(cx, g);
                 }
@@ -911,6 +1128,20 @@ impl Walker<'_> {
                 }
                 self.fmt(cx, g);
             }
+            Tag::BoolOp => {
+                // full order: Misdesign, Format, RefactoringChecker.visit_boolop
+                self.fmt(cx, g);
+                if self.prep.refac_boolop {
+                    self.refac.visit_boolop(cx, g);
+                }
+            }
+            Tag::AugAssign => {
+                // full order: Misdesign, Format, RefactoringChecker.visit_augassign
+                self.fmt(cx, g);
+                if self.prep.refac_augassign {
+                    self.refac.visit_augassign(cx, g);
+                }
+            }
             Tag::Other => {}
         }
         // ---- children ----
@@ -928,13 +1159,36 @@ impl Walker<'_> {
         match kind_tag {
             Tag::Module => {
                 self.imp.leave_module(cx, g);
+                // RefactoringChecker.leave_module
+                // (@only_required_for_messages("consider-using-with")): only
+                // registered when R1732 enabled. When DISABLED it never runs,
+                // so _init() never resets _elifs -> state leaks across modules
+                // (notes/09-refactoring.md §1.3). The refac state lives in the
+                // run-scope LintRun, so the leak is automatic if we skip this.
+                if self.prep.refac_cuw {
+                    self.refac.leave_module(cx, g);
+                }
                 self.vars.leave_module(cx, g);
             }
             Tag::ClassDef => {
                 self.classes.leave_classdef(cx, g);
+                // RefactoringChecker.leave_classdef (R1732 class-scope flush),
+                // @only_required_for_messages("consider-using-with")
+                if self.prep.refac_cuw {
+                    self.refac.leave_classdef(cx, g);
+                }
                 self.vars.leave_classdef(cx, g);
             }
-            Tag::FunctionDef | Tag::AsyncFunctionDef => {
+            Tag::FunctionDef => {
+                self.classes.leave_functiondef(cx, g);
+                // RefactoringChecker.leave_functiondef fires for sync DEF only
+                // (exact-name dispatch: async never reaches it).
+                if self.prep.refac_leave_func {
+                    self.refac.leave_functiondef(cx, g);
+                }
+                self.vars.leave_functiondef(cx, g);
+            }
+            Tag::AsyncFunctionDef => {
                 self.classes.leave_functiondef(cx, g);
                 self.vars.leave_functiondef(cx, g);
             }
@@ -1017,6 +1271,8 @@ enum Tag {
     ExceptHandler,
     Const,
     Arguments,
+    BoolOp,
+    AugAssign,
     Other,
 }
 
@@ -1074,6 +1330,8 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::ExceptHandler { .. } => Tag::ExceptHandler,
         NodeKind::Const(_) => Tag::Const,
         NodeKind::Arguments(_) => Tag::Arguments,
+        NodeKind::BoolOp { .. } => Tag::BoolOp,
+        NodeKind::AugAssign { .. } => Tag::AugAssign,
         _ => Tag::Other,
     }
 }

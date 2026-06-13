@@ -466,10 +466,87 @@ impl TypeCk {
         self.postponed_eval = u::is_postponed_evaluation_enabled(cx.eng, cx.mid);
     }
 
-    /// typecheck.py:1226-1307 — E1111 / E1128
+    /// W1113 keyword-arg-before-vararg (typecheck.py:1012-1024). Gated by the
+    /// caller on W1113 enablement (@only_required_for_messages). Fires for
+    /// FunctionDef AND AsyncFunctionDef (visit_asyncfunctiondef alias).
+    pub fn visit_functiondef_w1113(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let md = eng.md(node.m);
+        let args_id = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+            _ => return,
+        };
+        let name = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => md.tree.s(d.name).to_string(),
+            _ => return,
+        };
+        let NodeKind::Arguments(a) = &md.tree.nodes[args_id.idx()].kind else { return };
+        // if node.args.vararg and node.args.defaults
+        if a.vararg.is_none() || a.defaults.is_empty() {
+            return;
+        }
+        // if posonlyargs and not args: return
+        if !a.posonlyargs.is_empty() && a.args.is_empty() {
+            return;
+        }
+        drop(md);
+        cx.emit_node(
+            "W1113",
+            u::msg_line(eng, node),
+            u::msg_col(eng, node),
+            u::format_template(
+                "Keyword argument before variable positional arguments list in the definition of %s function",
+                &[&name],
+            ),
+        );
+    }
+
+    /// typecheck.py:1226-1307 — E1111 / E1128 / W1115
     pub fn visit_assign(&mut self, cx: &mut WalkCx, node: GNode) {
         self.check_assignment_from_function_call(cx, node);
-        // _check_dundername_is_string: W-only, no inference burn
+        self.check_dundername_is_string(cx, node);
+    }
+
+    /// W1115 non-str-assignment-to-dunder-name (typecheck.py:1309-1328).
+    fn check_dundername_is_string(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        // lhs = node.targets[0]; must be AssignAttr with attrname == "__name__"
+        let (lhs_attr_ok, rhs): (bool, GNode) = {
+            let md = eng.md(node.m);
+            let NodeKind::Assign { targets, value } = &md.tree.nodes[node.n.idx()].kind else {
+                return;
+            };
+            let Some(&lhs) = targets.first() else { return };
+            let ok = matches!(
+                &md.tree.nodes[lhs.idx()].kind,
+                NodeKind::AssignAttr { attrname, .. } if md.tree.s(*attrname) == "__name__"
+            );
+            (ok, GNode { m: node.m, n: *value })
+        };
+        if !lhs_attr_ok {
+            return;
+        }
+        // if isinstance(rhs, Const) and isinstance(rhs.value, str): return
+        if eng.kind_is(rhs, |k| matches!(k, NodeKind::Const(ConstValue::Str(_)))) {
+            return;
+        }
+        // match safe_infer(rhs): not inferred -> return; Const(str) -> ok;
+        // else -> message
+        match u::safe_infer(eng, cx.caches, rhs) {
+            None => {}                              // not inferred (Uninferable falsy) -> bail
+            Some(v) if v.is_uninferable() => {}     // Uninferable falsy -> bail
+            Some(Value::Node(g))
+                if eng.kind_is(g, |k| matches!(k, NodeKind::Const(ConstValue::Str(_)))) => {}
+            Some(Value::SynthConst(c)) if matches!(&*c, ConstValue::Str(_)) => {}
+            Some(_) => {
+                cx.emit_node(
+                    "W1115",
+                    u::msg_line(eng, node),
+                    u::msg_col(eng, node),
+                    "Non-string value assigned to __name__".to_string(),
+                );
+            }
+        }
     }
 
     fn check_assignment_from_function_call(&mut self, cx: &mut WalkCx, node: GNode) {
@@ -815,6 +892,10 @@ impl TypeCk {
             }
         }
 
+        // W1114 arguments-out-of-order (typecheck.py:1561-1563), called
+        // BEFORE positional matching, AFTER `parameters` is built.
+        self.check_argument_order(cx, node, &det, &parameters, &site);
+
         // 1. positional matching -> E1121 (typecheck.py:1565-1580)
         for i in 0..num_positional_args {
             if i < parameters.len() {
@@ -839,8 +920,18 @@ impl TypeCk {
         let called_qname = eng.value_qname(&det.value).unwrap_or_default();
         for &keyword in &keyword_args {
             if spec.kwarg.is_some() && posonly_names.contains(&keyword) {
-                // W1117 kwarg-superseded-by-positional-arg: disabled, but
-                // the `continue` consumes the keyword
+                // W1117 kwarg-superseded-by-positional-arg (typecheck.py:1582-1595)
+                let kws = eng.sname(keyword);
+                let kwarg_disp = format!("**{}", eng.sname(spec.kwarg.unwrap()));
+                cx.emit_node(
+                    "W1117",
+                    u::lineno(eng, node),
+                    u::col_offset(eng, node) as i64,
+                    u::format_template(
+                        "%r will be included in %r since a positional-only parameter with this name already exists",
+                        &[&kws, &kwarg_disp],
+                    ),
+                );
                 continue;
             }
             if let Some(&i) = param_index.get(&keyword) {
@@ -908,6 +999,81 @@ impl TypeCk {
         }
     }
 
+    /// W1114 _check_argument_order (typecheck.py:1377-1421).
+    fn check_argument_order(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        det: &Determined,
+        parameters: &[((Option<GSym>, bool), bool)],
+        site: &pyinfer::calls::CallSite,
+    ) {
+        let eng = cx.eng;
+        // called_param_names = [p[0][0] for p in parameters]
+        let mut called_param_names: Vec<String> = parameters
+            .iter()
+            .map(|((name, _), _)| name.map(|s| eng.sname(s)).unwrap_or_default())
+            .collect();
+        // is_classdef and called_param_names[0] == "self" -> drop first;
+        // IndexError (empty) -> return.
+        if called_param_names.is_empty() {
+            return;
+        }
+        // is_classdef = isinstance(called.parent, ClassDef) where `called`
+        // is the resolved callable (det.func is the FunctionDef).
+        let is_classdef = matches!(eng.parent(det.func), Some(p) if is_classdef(eng, p));
+        if is_classdef && called_param_names[0] == "self" {
+            called_param_names.remove(0);
+        }
+        // calling_parg_names = [p.name for p in positional_arguments]
+        // calling_kwarg_names = [arg.name for arg in keyword_arguments.values()]
+        // AttributeError on any non-Name node -> return.
+        let name_of_nv = |nv: &NV| -> Option<String> {
+            match nv {
+                NV::N(g) => {
+                    let md = eng.md(g.m);
+                    match &md.tree.nodes[g.n.idx()].kind {
+                        NodeKind::Name { name } => Some(md.tree.s(*name).to_string()),
+                        _ => None, // AttributeError (Const, etc.)
+                    }
+                }
+                NV::V(_) => None,
+            }
+        };
+        let mut calling_parg_names: Vec<String> = Vec::new();
+        for nv in site.positional_arguments() {
+            match name_of_nv(&nv) {
+                Some(n) => calling_parg_names.push(n),
+                None => return,
+            }
+        }
+        let mut calling_kwarg_names: Vec<String> = Vec::new();
+        for (_, nv) in site.keyword_arguments() {
+            match name_of_nv(&nv) {
+                Some(n) => calling_kwarg_names.push(n),
+                None => return,
+            }
+        }
+        // arg_set == param_set (exactly the same names supplied)
+        use std::collections::HashSet;
+        let arg_set: HashSet<&String> =
+            calling_parg_names.iter().chain(calling_kwarg_names.iter()).collect();
+        let param_set: HashSet<&String> = called_param_names.iter().collect();
+        if arg_set != param_set {
+            return;
+        }
+        // calling_parg_names != called_param_names[:len(calling_parg_names)]
+        let prefix = &called_param_names[..calling_parg_names.len().min(called_param_names.len())];
+        if calling_parg_names != prefix {
+            cx.emit_node(
+                "W1114",
+                u::lineno(eng, node),
+                u::col_offset(eng, node) as i64,
+                "Positional arguments appear to be out of order".to_string(),
+            );
+        }
+    }
+
     /// typecheck.py:1423-1452
     fn check_isinstance_args(&mut self, cx: &mut WalkCx, node: GNode, args: &[GNode], callable_name: &str) {
         let eng = cx.eng;
@@ -921,8 +1087,15 @@ impl TypeCk {
                     u::format_template("No value for argument %s in %s call", &[p, callable_name]));
             }
         } else {
-            // W1116 disabled; burn its safe_infer chain for cache parity
-            burn_invalid_isinstance_type(eng, cx.caches, args[1]);
+            // W1116 isinstance-second-argument-not-valid-type
+            if is_invalid_isinstance_type(eng, cx.caches, args[1]) {
+                cx.emit_node(
+                    "W1116",
+                    u::lineno(eng, node),
+                    u::col_offset(eng, node) as i64,
+                    "Second argument of isinstance is not a type".to_string(),
+                );
+            }
         }
     }
 
@@ -1399,32 +1572,70 @@ where
     out
 }
 
-/// burn-only port of _is_invalid_isinstance_type (typecheck.py:806-828):
-/// W1116 is disabled; only the safe_infer pulls matter for cache parity.
-fn burn_invalid_isinstance_type(eng: &Engine, caches: &u::LintCaches, arg: GNode) {
-    let md = eng.md(arg.m);
-    if let NodeKind::BinOp { op, left, right } = &md.tree.nodes[arg.n.idx()].kind {
-        if &**op == "|" {
-            let (l, r) = (GNode { m: arg.m, n: *left }, GNode { m: arg.m, n: *right });
-            drop(md);
-            // any() short-circuit: left first; `_is_invalid... and not
-            // is_none` — is_none is syntactic, no burn
-            burn_invalid_isinstance_type(eng, caches, l);
-            burn_invalid_isinstance_type(eng, caches, r);
-            return;
+/// _is_invalid_isinstance_type (typecheck.py:806-828) — True only when SURE
+/// the arg is not a type. Recurses syntactically on `X | Y`, then on the
+/// inferred Tuple/UnionType.
+fn is_invalid_isinstance_type(eng: &Engine, caches: &u::LintCaches, arg: GNode) -> bool {
+    // if isinstance(arg, BinOp) and arg.op == "|":
+    let binop = {
+        let md = eng.md(arg.m);
+        match &md.tree.nodes[arg.n.idx()].kind {
+            NodeKind::BinOp { op, left, right } if &**op == "|" => {
+                Some((GNode { m: arg.m, n: *left }, GNode { m: arg.m, n: *right }))
+            }
+            _ => None,
         }
+    };
+    if let Some((l, r)) = binop {
+        // any(_is_invalid(elt) and not is_none(elt) for elt in (left, right))
+        return (is_invalid_isinstance_type(eng, caches, l) && !is_none_arg(eng, l))
+            || (is_invalid_isinstance_type(eng, caches, r) && !is_none_arg(eng, r));
     }
     let inferred = u::safe_infer(eng, caches, arg);
-    if let Some(Value::Node(g)) = &inferred {
-        let md = eng.md(g.m);
-        if let NodeKind::Tuple { elts, .. } = &md.tree.nodes[g.n.idx()].kind {
-            let elts: Vec<GNode> = elts.iter().map(|&e| GNode { m: g.m, n: e }).collect();
-            drop(md);
-            for e in elts {
-                burn_invalid_isinstance_type(eng, caches, e);
-            }
+    match &inferred {
+        None => false, // can't infer -> skip
+        Some(v) if v.is_uninferable() => false,
+        Some(Value::Node(g)) if eng.kind_is(*g, |k| matches!(k, NodeKind::Tuple { .. })) => {
+            let elts: Vec<GNode> = {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Tuple { elts, .. } => {
+                        elts.iter().map(|&e| GNode { m: g.m, n: e }).collect()
+                    }
+                    _ => Vec::new(),
+                }
+            };
+            elts.iter().any(|&e| is_invalid_isinstance_type(eng, caches, e))
         }
+        // nodes.ClassDef() -> valid
+        Some(Value::Node(g)) if is_classdef(eng, *g) => false,
+        // bases.Instance() with qname builtins.tuple -> valid (tuple(...) /
+        // SynthSeq tuple / any tuple instance). Covers Inst + SynthSeq{Tuple}.
+        Some(v) if value_pytype_is_tuple(eng, v) => false,
+        // PEP604 union (inferred UnionType): a union of real types is valid.
+        Some(Value::UnionType) => false,
+        Some(_) => true,
     }
+}
+
+/// True if the inferred value's pytype is builtins.tuple (Instance / SynthSeq
+/// tuple / FrozenSet-no). Used by W1116's tuple-arg validity check.
+fn value_pytype_is_tuple(eng: &Engine, v: &Value) -> bool {
+    match v {
+        Value::SynthSeq { kind, .. } => matches!(kind, pyinfer::value::SeqKind::Tuple),
+        _ => u::value_pytype(eng, v).as_deref() == Some("builtins.tuple"),
+    }
+}
+
+/// is_none (utils.py:1487-1491): None / Const(None).
+fn is_none_arg(eng: &Engine, g: GNode) -> bool {
+    eng.kind_is(g, |k| matches!(k, NodeKind::Const(ConstValue::None)))
+}
+
+/// Retained for the (rare) cache-warming path: pull the safe_infer chain
+/// without emitting (kept for byte-parity where W1116 would not fire).
+fn burn_invalid_isinstance_type(eng: &Engine, caches: &u::LintCaches, arg: GNode) {
+    let _ = is_invalid_isinstance_type(eng, caches, arg);
 }
 
 // ---------------------------------------------------------------------------

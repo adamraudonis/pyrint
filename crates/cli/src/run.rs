@@ -52,6 +52,10 @@ struct ParsedFile {
     fmt_msgs: Vec<pycheckers::format::FmtMsg>,
     /// EncodingChecker (fixme) token-phase messages (full mode)
     fixme_msgs: Vec<pycheckers::miscck::FixmeMsg>,
+    /// RefactoringChecker token-phase scan: _elifs positions + R1707 lines
+    /// (full mode). Pure function of the raw token stream; the _elifs feed
+    /// the AST walk (and leak across modules when R1732 disabled).
+    refac_tokens: pycheckers::refactoring::RefacTokens,
 }
 
 enum FileData {
@@ -186,12 +190,24 @@ pub fn run(opts: &RunOpts) -> i32 {
     // token-checker preparation (format / miscellaneous): -E drops both
     let format_prepared = prep.format;
     let misc_prepared = !opts.errors_only && enabled_by_id("W0511");
+    // RefactoringChecker token scan (full mode): kept iff any R17xx enabled.
+    let refac_prepared = prep.refac_kept;
+    let refac_r1707 = prep.refac_r1707;
 
     // ---- phase 1: parse all files (rayon, results in file order) ------
     phase_mark!(t0, "discover");
     let mut data: Vec<FileData> = items
         .par_iter()
-        .map(|it| parse_one(it, unicode_prepared, format_prepared, misc_prepared))
+        .map(|it| {
+            parse_one(
+                it,
+                unicode_prepared,
+                format_prepared,
+                misc_prepared,
+                refac_prepared,
+                refac_r1707,
+            )
+        })
         .collect();
     phase_mark!(t0, "parse");
     if std::env::var("PRYLINT_PARSE_ONLY").is_ok() {
@@ -553,6 +569,8 @@ fn parse_one(
     unicode_prepared: bool,
     format_prepared: bool,
     misc_prepared: bool,
+    refac_prepared: bool,
+    refac_r1707: bool,
 ) -> FileData {
     // modutils.get_source_file: a .pyi argument resolves to the sibling .py
     // source when it exists (PY_SOURCE_EXTS order, prefer_stubs=False)
@@ -627,7 +645,8 @@ fn parse_one(
             // _pragma_lineno map at flush).
             let mut fmt_msgs = Vec::new();
             let mut fixme_msgs = Vec::new();
-            if format_prepared || misc_prepared {
+            let mut refac_tokens = pycheckers::refactoring::RefacTokens::default();
+            if format_prepared || misc_prepared || refac_prepared {
                 if let Some(raw) = pyast::decode_source_raw(&bytes, &abspath) {
                     let tk = pyast::pytok::tokenize_for_checkers(&raw);
                     if format_prepared {
@@ -641,6 +660,13 @@ fn parse_one(
                             fixme_msgs.push(m)
                         });
                     }
+                    if refac_prepared {
+                        // file-start R1707 state = config-level enablement
+                        // (is_message_enabled(..., line=None)); the in-file
+                        // enable-pragma rescan flips per-token after that.
+                        refac_tokens =
+                            pycheckers::refactoring::process_tokens(&tk, &raw, refac_r1707);
+                    }
                 }
             }
             FileData::Parsed(Box::new(ParsedFile {
@@ -651,6 +677,7 @@ fn parse_one(
                 unicode_msgs,
                 fmt_msgs,
                 fixme_msgs,
+                refac_tokens,
             }))
         }
         None => FileData::NeedsOracle,
@@ -801,6 +828,16 @@ fn lint_tree(
                     }
                     for xm in &p.fixme_msgs {
                         add(&mut fs, "W0511", xm.line, xm.col, xm.text.clone());
+                    }
+                    // RefactoringChecker token pass (sorts after Format +
+                    // Encoding in token-checker order). Populate _elifs for
+                    // the AST walk (EXTEND, mirroring self._elifs.extend; the
+                    // leak across modules when R1732 disabled is automatic —
+                    // leave_module clears only when R1732 enabled) and emit
+                    // R1707 (line= only, col 0, HIGH confidence).
+                    lint_run.refac.elifs.extend(p.refac_tokens.elifs.iter().copied());
+                    for &line in &p.refac_tokens.r1707_lines {
+                        add(&mut fs, "R1707", line, 0, "Disallow trailing comma tuple".to_string());
                     }
                     // 3. AST walk: ImportsChecker + VariablesChecker wired
                     //    (walk_order.rs dispatch); other checkers pending.
