@@ -2122,3 +2122,87 @@ Gates: 27-corpus -E byte parity 27/27 (black -E EQUAL re-confirmed),
 check_treedump django 400 == 0, check_inferdump django 200 == 0. Design +
 similarities are config-gated off under -E (sim_kept/design_kept require
 full mode), so the -E pipeline stays byte-frozen.
+
+## Full-pylint mode — phase E zero-round 1 (2026-06-13)
+
+Drove owned design+similarities codes (R0901-R0917, R0801) toward 0FP/0FN
+on every corpus × both profiles (footer-stripped, order-exact). Result:
+24/27 corpora CLEAN both profiles owned-codes ORDER-EXACT; salt R0914
+pragma-resurrection FN FIXED; sqlalchemy alone remains divergent (the
+pre-existing cross-phase inference gap, classified below — NOT a phase-E
+checker bug).
+
+ONE source fix (commit ddedbc10): **design messages now emit
+UNCONDITIONALLY** once their visitor is registered. Root cause: pylint's
+MisdesignChecker visitors call `add_message` with NO per-message guard in
+the method body; the `@only_required_for_messages` decorator gates only
+VISITOR REGISTRATION (package-scope, evaluated once at add_checker time,
+ast_walker.py `_is_method_enabled`). `add_message` then does the per-LINE
+`is_message_enabled` check. We were additionally gating each emit on a
+package-scope `d_rXXXX` flag, which suppressed the message BEFORE the
+per-line filter could resurrect it via an in-module pragma. Removed the
+d_rXXXX gates from visit_classdef (R0901/R0902), leave_classdef
+(R0903/R0904), visit_functiondef (R0913/R0914/R0917), leave_functiondef
+(R0911/R0912/R0915), visit_if (R0916); the visitors emit unconditionally
+and run.rs's per-line filter drops the package-disabled, not-pragma-enabled
+cases. Registration gates (design_visit_*/design_leave_* = any(...)) unchanged.
+- Fixes salt.hook R0914 1FN at salt/modules/restartcheck.py:112
+  (_deleted_files, 21 locals). R0914 is CLI-disabled on the hook profile,
+  but a MODULE-level `# pylint: disable=too-many-locals` at line 475
+  re-enables it for lines 1..474 (Module.block_range with lineno>firstchild
+  -> the "late-disable re-enable" state=true rule, file_state.py). R0914
+  lives in visit_functiondef, which IS registered on hook because W1113
+  (keyword-arg-before-vararg) is enabled, keeping the visitor live. The old
+  per-message gate hid it; the new unconditional emit + per-line filter
+  resurrects it exactly as pylint does. Single-file pylint repro confirmed.
+- Safe under -E: design_kept/sim_kept require full mode AND enabled codes;
+  R09xx/R0801 are category-disabled under -E, so the -E pipeline is
+  untouched. The I0020/I0021 useless-suppression bookkeeping is unaffected
+  (both default-disabled, not in either profile).
+
+ACCEPTANCE (footer-stripped, order-aware, owned-code SequenceMatcher
+equality): 24 corpora 0FP/0FN BOTH profiles — airflow, ansible, botocore,
+celery, django, fastapi, matplotlib, mypy, nova, numpy, pandas, pip,
+pydantic, pylfunc, rich, salt, scikit-learn, scrapy, sentry, sympy,
+tornado, twisted, werkzeug, zulip. Dense full-profile owned counts all
+exact in order: django.full 3254, sentry.full 9417, airflow.full 11227,
+salt.full 5386, sympy.full 4481, nova.full 4149, numpy.full 2396,
+twisted.full 2855, ansible.full 2048. salt.full R0914 743 exact.
+[black.full + core.full GT confirmation in flight — both FULL profile,
+where the gate removal is a proven no-op (all design enabled -> old gates
+true -> identical emit); core.full GT had to be regenerated (the prior
+capture was SIGTERM-truncated at 207k lines / no footer).]
+
+KNOWN CROSS-PHASE GAP (blocked, NOT a phase-E checker bug): sqlalchemy
+R0901/R0903 — hook 1FP (array.py:93), full 15FP/12FN. ALL trace to ONE
+inference divergence: our deterministic engine resolves subscripted-generic
+ancestor chains (e.g. `class array(expression.ExpressionClauseList[_T])`,
+`aggregate_order_by(expression.ColumnElement[_T])`, hstore
+`GenericFunction[_HSTORE_VAL]`) that astroid ABANDONS. Confirmed astroid
+behavior is INTERNALLY NON-DETERMINISTIC: across PYTHONHASHSEED=0 probe
+runs in one process, `ColumnElement.ancestors()` returns 41 then 23, and
+`OperatorExpression.getattr("__class_getitem__")` returns FOUND then
+NOT-FOUND — driven by astroid's mutable global `_INFERENCE_CACHE` +
+InferenceContext.path cycle/recursion guards warmed differently by the
+exact set of active checkers. R0901 over-counts (we resolve -> emit) where
+GT bails; R0903 under-emits (we resolve more ancestors -> count more
+inherited public methods -> exceed min -> no R0903) where GT (0 ancestors)
+emits. Same shared-inference fidelity gap Phase B documented for
+sqlalchemy.full C0116 9FN/2FP on the SAME files (orm/attributes.py,
+orm/base.py, dialects/postgresql) — Phase B's note explicitly predicted it
+"BLOCKED on ... design ... full-mode phases", and now that R0901 is ported
+the cache state shifts again. Replicating it requires porting astroid's
+entire stateful inference cache + path semantics bug-for-bug across the
+whole corpus walk, which would jeopardize the 27/27 -E byte gate (the
+cardinal infrastructure) for zero benefit on the other 26 corpora.
+Confined to sqlalchemy's deep generic hierarchies.
+
+PERF NOTE: black.full duplicate-code (R0801) emits ~8136 R0801 messages
+whose code blocks total ~16M lines / 646MB — pathologically slow in pylint
+itself and slow here (the O(files^2) commonality scan + the giant output
+emission). Not a correctness issue; flagged previously in the phase-E
+close-out.
+
+Gates re-certified on current binary (commit ddedbc10): 27-corpus -E byte
+parity 27/27 EQUAL, check_treedump django 400 == 0, check_inferdump django
+200 == 0.
