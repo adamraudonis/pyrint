@@ -2206,9 +2206,149 @@ impl RefactoringCk {
         }
     }
 
-    /// R1736 unnecessary-list-index-lookup — placeholder (enumerate form;
-    /// wired if corpus FNs warrant).
-    fn check_list_index_lookup_for(&mut self, _cx: &mut WalkCx, _node: GNode) {}
+    /// R1736 unnecessary-list-index-lookup (refactoring_checker.py:2266-2454).
+    fn check_list_index_lookup_for(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        // node.iter must be Call(func=Name("enumerate"))
+        let iter = match comp_or_for_iter(eng, node) {
+            Some(i) => i,
+            None => return,
+        };
+        let is_enumerate = {
+            let md = eng.md(iter.m);
+            match &md.tree.nodes[iter.n.idx()].kind {
+                NodeKind::Call { func, .. } => {
+                    matches!(&md.tree.nodes[func.idx()].kind, NodeKind::Name { name } if md.tree.s(*name) == "enumerate")
+                }
+                _ => false,
+            }
+        };
+        if !is_enumerate {
+            return;
+        }
+        // iterable_arg = get_argument_from_call(iter, 0, "iterable")
+        let iterable_arg = match get_argument_from_call(eng, iter, 0, "iterable") {
+            Some(a) => a,
+            None => {
+                // infer_kwarg_from_call(iter, "iterable")
+                match infer_kwarg_from_call(eng, cx.caches, iter, "iterable") {
+                    Some(a) => a,
+                    None => return,
+                }
+            }
+        };
+        // must be a Name
+        if !eng.kind_is(iterable_arg, |k| matches!(k, NodeKind::Name { .. })) {
+            return;
+        }
+        let iterating_object_name = name_of(eng, iterable_arg).unwrap_or_default();
+        // node.target = Tuple(elts=[AssignName(name1), AssignName(name2), *_])
+        let (name1, name2): (String, String) = {
+            let target = match comp_or_for_target(eng, node) {
+                Some(t) => t,
+                None => return,
+            };
+            let md = eng.md(target.m);
+            let NodeKind::Tuple { elts, .. } = &md.tree.nodes[target.n.idx()].kind else { return };
+            if elts.len() < 2 {
+                return;
+            }
+            let n1 = match &md.tree.nodes[elts[0].idx()].kind {
+                NodeKind::AssignName { name } => md.tree.s(*name).to_string(),
+                _ => return,
+            };
+            let n2 = match &md.tree.nodes[elts[1].idx()].kind {
+                NodeKind::AssignName { name } => md.tree.s(*name).to_string(),
+                _ => return,
+            };
+            (n1, n2)
+        };
+        // has_start_arg -> bail
+        if enumerate_with_start(eng, cx.caches, iter) {
+            return;
+        }
+        let is_for = eng.kind_is(node, |k| matches!(k, NodeKind::For(_)));
+        let children: Vec<GNode> = if is_for {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::For(d) => d.body.iter().map(|&c| GNode { m: node.m, n: c }).collect(),
+                _ => return,
+            }
+        } else {
+            let parent = match eng.parent(node) {
+                Some(p) => p,
+                None => return,
+            };
+            eng.md(parent.m).tree.children(parent.n).iter().map(|&c| GNode { m: parent.m, n: c }).collect()
+        };
+        let has_nested = children.iter().any(|&c| {
+            !nodes_of_class(eng, c, |k| matches!(k, NodeKind::For(_) | NodeKind::While { .. } | NodeKind::AsyncFor(_)), |_| false).is_empty()
+        });
+        let has_if = children.iter().any(|&c| {
+            !nodes_of_class(eng, c, |k| matches!(k, NodeKind::If { .. }), |_| false).is_empty()
+        });
+        let mut bad_nodes: Vec<GNode> = Vec::new();
+        for child in &children {
+            for sub in nodes_of_class(eng, *child, |k| matches!(k, NodeKind::Subscript { .. }), |_| false) {
+                if is_for && is_part_of_assignment_target(eng, sub) {
+                    return;
+                }
+                if let Some(p) = eng.parent(sub) {
+                    if eng.kind_is(p, |k| matches!(k, NodeKind::Delete { .. })) {
+                        return;
+                    }
+                }
+                let (sub_value, index): (GNode, GNode) = {
+                    let md = eng.md(sub.m);
+                    match &md.tree.nodes[sub.n.idx()].kind {
+                        NodeKind::Subscript { value, slice, .. } => {
+                            (GNode { m: sub.m, n: *value }, GNode { m: sub.m, n: *slice })
+                        }
+                        _ => continue,
+                    }
+                };
+                if !eng.kind_is(index, |k| matches!(k, NodeKind::Name { .. })) {
+                    continue;
+                }
+                let index_name = name_of(eng, index).unwrap_or_default();
+                if index_name != name1 || iterating_object_name != u::as_string(eng, sub_value) {
+                    continue;
+                }
+                if is_for {
+                    if let Some(ll) = lookup_last_lineno(eng, index, &index_name) {
+                        if ll > lineno(eng, node) {
+                            continue;
+                        }
+                    }
+                    if let Some(ll) = lookup_last_lineno(eng, index, &name2) {
+                        if ll > lineno(eng, node) {
+                            continue;
+                        }
+                    }
+                }
+                if has_nested {
+                    bad_nodes.push(sub);
+                } else if has_if {
+                    continue;
+                } else {
+                    cx.emit_node(
+                        "R1736",
+                        u::msg_line(eng, sub),
+                        u::msg_col(eng, sub),
+                        u::format_template("Unnecessary list index lookup, use '%s' instead", &[&name2]),
+                    );
+                }
+            }
+        }
+        for sub in bad_nodes {
+            cx.emit_node(
+                "R1736",
+                u::msg_line(eng, sub),
+                u::msg_col(eng, sub),
+                u::format_template("Unnecessary list index lookup, use '%s' instead", &[&name2]),
+            );
+        }
+    }
 
     pub fn visit_raise(&mut self, cx: &mut WalkCx, node: GNode) {
         self.check_stop_iteration_in_generator(cx, node);
@@ -3454,8 +3594,135 @@ impl RefactoringCk {
         })
     }
 
-    /// C0207 use-maxsplit-arg — placeholder (complex; wired if FN warrants).
-    fn check_use_maxsplit_arg(&mut self, _cx: &mut WalkCx, _n: GNode) {}
+    /// C0207 use-maxsplit-arg (recommendation_checker.py:108-179).
+    fn check_use_maxsplit_arg(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let (func, attrname, recv): (GNode, String, GNode) = {
+            let md = eng.md(node.m);
+            let NodeKind::Call { func, .. } = &md.tree.nodes[node.n.idx()].kind else { return };
+            match &md.tree.nodes[func.idx()].kind {
+                NodeKind::Attribute { attrname, expr, .. } => {
+                    let an = md.tree.s(*attrname).to_string();
+                    (GNode { m: node.m, n: *func }, an, GNode { m: node.m, n: *expr })
+                }
+                _ => return,
+            }
+        };
+        if attrname != "split" && attrname != "rsplit" {
+            return;
+        }
+        if !matches!(safe_infer(eng, cx.caches, func), Some(Value::BoundMethod { .. })) {
+            return;
+        }
+        // a non-node bases.Instance receiver bails; Const passes (Const is a
+        // node-backed Instance whose nodes_of_class(ClassDef) is empty).
+        if let Some(v) = safe_infer(eng, cx.caches, recv) {
+            if matches!(v, Value::Inst { .. } | Value::ExcInst { .. }) {
+                return;
+            }
+        }
+        let mut confidence_inference = false;
+        let sep = match get_argument_from_call(eng, node, 0, "sep") {
+            Some(s) => s,
+            None => match infer_kwarg_from_call(eng, cx.caches, node, "sep") {
+                Some(s) => {
+                    confidence_inference = true;
+                    s
+                }
+                None => return,
+            },
+        };
+        // maxsplit must be absent
+        if get_argument_from_call(eng, node, 1, "maxsplit").is_some() {
+            return;
+        }
+        if infer_kwarg_from_call(eng, cx.caches, node, "maxsplit").is_some() {
+            return;
+        }
+        let Some(parent) = eng.parent(node) else { return };
+        if !eng.kind_is(parent, |k| matches!(k, NodeKind::Subscript { .. })) {
+            return;
+        }
+        let pslice = {
+            let md = eng.md(parent.m);
+            match &md.tree.nodes[parent.n.idx()].kind {
+                NodeKind::Subscript { slice, .. } => GNode { m: parent.m, n: *slice },
+                _ => return,
+            }
+        };
+        let subscript_value = match get_subscript_const_value(eng, cx.caches, pslice) {
+            Some(v) => v,
+            None => return,
+        };
+        // loop-mutation guard when the slice is a Name
+        if eng.kind_is(pslice, |k| matches!(k, NodeKind::Name { .. })) {
+            let slice_name = name_of(eng, pslice).unwrap_or_default();
+            let scope = eng.scope(node);
+            for loop_node in nodes_of_class(
+                eng,
+                scope,
+                |k| matches!(k, NodeKind::For(_) | NodeKind::While { .. } | NodeKind::AsyncFor(_)),
+                |_| false,
+            ) {
+                if !eng.parent_of(loop_node, node) {
+                    continue;
+                }
+                for a in nodes_of_class(eng, loop_node, |k| matches!(k, NodeKind::AugAssign { .. }), |_| false) {
+                    let tgt = {
+                        let md = eng.md(a.m);
+                        match &md.tree.nodes[a.n.idx()].kind {
+                            NodeKind::AugAssign { target, .. } => GNode { m: a.m, n: *target },
+                            _ => continue,
+                        }
+                    };
+                    if name_of_assign(eng, tgt).as_deref() == Some(slice_name.as_str()) {
+                        return;
+                    }
+                }
+                for a in nodes_of_class(eng, loop_node, |k| matches!(k, NodeKind::Assign { .. }), |_| false) {
+                    let targets: Vec<pyast::NodeId> = {
+                        let md = eng.md(a.m);
+                        match &md.tree.nodes[a.n.idx()].kind {
+                            NodeKind::Assign { targets, .. } => targets.clone(),
+                            _ => continue,
+                        }
+                    };
+                    for t in targets {
+                        if name_of_assign(eng, GNode { m: a.m, n: t }).as_deref()
+                            == Some(slice_name.as_str())
+                        {
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        let (is_neg1, is_zero) = subscript_value_neg1_or_zero(&subscript_value);
+        if !is_neg1 && !is_zero {
+            return;
+        }
+        let new_fn = if is_neg1 { "rsplit" } else { "split" };
+        let func_str = u::as_string(eng, func);
+        let prefix = match func_str.rfind(&attrname) {
+            Some(i) => &func_str[..i],
+            None => &func_str[..],
+        };
+        let value_repr = subscript_value_repr(&subscript_value);
+        let new_name = format!(
+            "{}{}({}, maxsplit=1)[{}]",
+            prefix,
+            new_fn,
+            u::as_string(eng, sep),
+            value_repr
+        );
+        let _ = confidence_inference;
+        cx.emit_node(
+            "C0207",
+            u::msg_line(eng, node),
+            u::msg_col(eng, node),
+            u::format_template("Use %s instead", &[&new_name]),
+        );
+    }
 
     /// C0200 consider-using-enumerate (recommendation_checker.py:191-262).
     fn check_consider_using_enumerate(&mut self, cx: &mut WalkCx, node: GNode) {
@@ -4234,6 +4501,165 @@ fn simplified_node_rank(eng: &Engine, g: GNode) -> i32 {
         NodeKind::Await { .. } => 14,
         _ => 15,
     }
+}
+
+/// _enumerate_with_start (refactoring_checker.py:2402-2434) + _get_start_value
+/// (2436-2454): True if the enumerate call has a non-zero start.
+fn enumerate_with_start(eng: &Engine, caches: &u::LintCaches, iter: GNode) -> bool {
+    // second positional arg or start= keyword
+    let start = get_argument_from_call(eng, iter, 1, "start");
+    let Some(start) = start else { return false };
+    // _get_start_value: Const -> value; UnaryOp(operand=Const) -> operand.value
+    // (sign dropped!); else safe_infer Const -> value; else None.
+    let val: Option<ConstValue> = {
+        let md = eng.md(start.m);
+        match &md.tree.nodes[start.n.idx()].kind {
+            NodeKind::Const(c) => Some(c.clone()),
+            NodeKind::UnaryOp { operand, .. } => match &md.tree.nodes[operand.idx()].kind {
+                NodeKind::Const(c) => Some(c.clone()),
+                _ => None,
+            },
+            _ => {
+                drop(md);
+                match safe_infer(eng, caches, start) {
+                    Some(Value::Node(g)) => {
+                        let m2 = eng.md(g.m);
+                        match &m2.tree.nodes[g.n.idx()].kind {
+                            NodeKind::Const(c) => Some(c.clone()),
+                            _ => None,
+                        }
+                    }
+                    Some(Value::SynthConst(c)) => Some((*c).clone()),
+                    _ => None,
+                }
+            }
+        }
+    };
+    // return not start_val == 0 ; None -> False (no start)
+    match val {
+        None => false,
+        Some(c) => !const_is_zeroish(&c),
+    }
+}
+
+/// start_val == 0 with the `False == 0` quirk.
+fn const_is_zeroish(c: &ConstValue) -> bool {
+    use pyast::tree::IntValue;
+    match c {
+        ConstValue::Int(IntValue::Small(0)) => true,
+        ConstValue::Bool(false) => true,
+        ConstValue::Float(f) if *f == 0.0 => true,
+        _ => false,
+    }
+}
+
+/// utils.get_argument_from_call (utils.py:717): positional index else keyword
+/// by name; None if neither present (NoSuchArgumentError).
+fn get_argument_from_call(
+    eng: &Engine,
+    call: GNode,
+    position: usize,
+    keyword: &str,
+) -> Option<GNode> {
+    let md = eng.md(call.m);
+    let NodeKind::Call { args, keywords, .. } = &md.tree.nodes[call.n.idx()].kind else {
+        return None;
+    };
+    // positional: args[position] if not a Starred
+    if let Some(&a) = args.get(position) {
+        if !matches!(&md.tree.nodes[a.idx()].kind, NodeKind::Starred { .. }) {
+            return Some(GNode { m: call.m, n: a });
+        }
+    }
+    // keyword by name
+    for &kw in keywords {
+        if let NodeKind::Keyword { arg: Some(arg), value } = &md.tree.nodes[kw.idx()].kind {
+            if md.tree.s(*arg) == keyword {
+                return Some(GNode { m: call.m, n: *value });
+            }
+        }
+    }
+    None
+}
+
+/// utils.infer_kwarg_from_call (utils.py:747): look in call.kwargs (**d),
+/// infer d as Dict, return the value node for `keyword`.
+fn infer_kwarg_from_call(
+    eng: &Engine,
+    caches: &u::LintCaches,
+    call: GNode,
+    keyword: &str,
+) -> Option<GNode> {
+    let kwargs: Vec<GNode> = {
+        let md = eng.md(call.m);
+        let NodeKind::Call { keywords, .. } = &md.tree.nodes[call.n.idx()].kind else {
+            return None;
+        };
+        keywords
+            .iter()
+            .filter_map(|&kw| match &md.tree.nodes[kw.idx()].kind {
+                NodeKind::Keyword { arg: None, value } => Some(GNode { m: call.m, n: *value }),
+                _ => None,
+            })
+            .collect()
+    };
+    for d in kwargs {
+        if let Some(Value::Node(g)) = safe_infer(eng, caches, d) {
+            let items: Vec<(pyast::NodeId, pyast::NodeId)> = {
+                let md = eng.md(g.m);
+                match &md.tree.nodes[g.n.idx()].kind {
+                    NodeKind::Dict { items } => items.clone(),
+                    _ => continue,
+                }
+            };
+            for (k, v) in items {
+                let md = eng.md(g.m);
+                if matches!(&md.tree.nodes[k.idx()].kind, NodeKind::Const(ConstValue::Str(s)) if &**s == keyword)
+                {
+                    return Some(GNode { m: g.m, n: v });
+                }
+            }
+        }
+    }
+    None
+}
+
+/// utils.get_subscript_const_value (utils.py:1806): safe_infer(slice) must be
+/// a Const; returns its ConstValue, else None (InferredTypeError).
+fn get_subscript_const_value(
+    eng: &Engine,
+    caches: &u::LintCaches,
+    slice: GNode,
+) -> Option<ConstValue> {
+    match safe_infer(eng, caches, slice) {
+        Some(Value::Node(g)) => {
+            let md = eng.md(g.m);
+            match &md.tree.nodes[g.n.idx()].kind {
+                NodeKind::Const(c) => Some(c.clone()),
+                _ => None,
+            }
+        }
+        Some(Value::SynthConst(c)) => Some((*c).clone()),
+        _ => None,
+    }
+}
+
+/// subscript_value in (-1, 0): (is_neg1, is_zero). False==0 quirk replicated.
+fn subscript_value_neg1_or_zero(c: &ConstValue) -> (bool, bool) {
+    use pyast::tree::IntValue;
+    match c {
+        ConstValue::Int(IntValue::Small(-1)) => (true, false),
+        ConstValue::Int(IntValue::Small(0)) => (false, true),
+        ConstValue::Bool(false) => (false, true),       // False == 0
+        ConstValue::Float(f) if *f == -1.0 => (true, false),
+        ConstValue::Float(f) if *f == 0.0 => (false, true),
+        _ => (false, false),
+    }
+}
+
+/// f"[{subscript_value}]" — str(value). int -> digits, float -> repr, etc.
+fn subscript_value_repr(c: &ConstValue) -> String {
+    const_str(c)
 }
 
 /// iter of a For OR a Comprehension node.
