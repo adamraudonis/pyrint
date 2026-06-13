@@ -74,6 +74,14 @@ from astroid.brain import (  # noqa: E402
     brain_hashlib,
     brain_http,
     brain_multiprocessing,
+    brain_numpy_core_einsumfunc,
+    brain_numpy_core_fromnumeric,
+    brain_numpy_core_multiarray,
+    brain_numpy_core_numeric,
+    brain_numpy_core_numerictypes,
+    brain_numpy_core_umath,
+    brain_numpy_ma,
+    brain_numpy_random_mtrand,
     brain_re,
     brain_signal,
     brain_ssl,
@@ -104,6 +112,21 @@ one("HTTP", "http", brain_http._http_transform)
 one("HTTP_CLIENT", "http.client", brain_http._http_client_transform)
 one("MP_MANAGERS", "multiprocessing.managers",
     brain_multiprocessing._multiprocessing_managers_transform)
+one("NUMPY_CORE_UMATH", "numpy.core.umath",
+    brain_numpy_core_umath.numpy_core_umath_transform)
+one("NUMPY_CORE_FROMNUMERIC", "numpy.core.fromnumeric",
+    brain_numpy_core_fromnumeric.numpy_core_fromnumeric_transform)
+one("NUMPY_CORE_MULTIARRAY", "numpy.core.multiarray",
+    brain_numpy_core_multiarray.numpy_core_multiarray_transform)
+one("NUMPY_CORE_NUMERIC", "numpy.core.numeric",
+    brain_numpy_core_numeric.numpy_core_numeric_transform)
+one("NUMPY_CORE_NUMERICTYPES", "numpy.core.numerictypes",
+    brain_numpy_core_numerictypes.numpy_core_numerictypes_transform)
+one("NUMPY_CORE_EINSUMFUNC", "numpy.core.einsumfunc",
+    brain_numpy_core_einsumfunc.numpy_core_einsumfunc_transform)
+one("NUMPY_MA", "numpy.ma", brain_numpy_ma.numpy_ma_transform)
+one("NUMPY_RANDOM_MTRAND", "numpy.random.mtrand",
+    brain_numpy_random_mtrand.numpy_random_mtrand_transform)
 
 # unittest: the real template is `from .async_case import ...` (relative);
 # our template modules are package=False so emit the absolute equivalent.

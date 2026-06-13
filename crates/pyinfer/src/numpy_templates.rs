@@ -68,7 +68,8 @@ pub const NUMPY_NUMERIC_SRC: [(&str, &str); 1] = [
 
 /// brain_numpy_ndarray template (numpy_supports_type_hints() is False
 /// in the pinned venv — numpy not importable — so no __class_getitem__).
-pub const NUMPY_NDARRAY_SRC: &str = r#"class ndarray(object):
+pub const NUMPY_NDARRAY_SRC: &str = r#"
+class ndarray(object):
     def __init__(self, shape, dtype=float, buffer=None, offset=0,
                  strides=None, order=None):
         self.T = numpy.ndarray([0, 0])
@@ -192,4 +193,5 @@ pub const NUMPY_NDARRAY_SRC: &str = r#"class ndarray(object):
     def trace(self, offset=0, axis1=0, axis2=1, dtype=None, out=None): return np.ndarray([0, 0])
     def transpose(self, *axes): return np.ndarray([0, 0])
     def var(self, axis=None, dtype=None, out=None, ddof=0, keepdims=False): return np.ndarray([0, 0])
-    def view(self, dtype=None, type=None): return np.ndarray([0, 0])"#;
+    def view(self, dtype=None, type=None): return np.ndarray([0, 0])
+"#;

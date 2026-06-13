@@ -1144,6 +1144,453 @@ class SyncManager(object):
         pass
 "#;
 
+pub static NUMPY_CORE_UMATH: &str = r#"
+class FakeUfunc:
+    def __init__(self):
+        self.__doc__ = str()
+        self.__name__ = str()
+        self.nin = 0
+        self.nout = 0
+        self.nargs = 0
+        self.ntypes = 0
+        self.types = None
+        self.identity = None
+        self.signature = None
+
+    @classmethod
+    def reduce(cls, a, axis=None, dtype=None, out=None):
+        return numpy.ndarray([0, 0])
+
+    @classmethod
+    def accumulate(cls, array, axis=None, dtype=None, out=None):
+        return numpy.ndarray([0, 0])
+
+    @classmethod
+    def reduceat(cls, a, indices, axis=None, dtype=None, out=None):
+        return numpy.ndarray([0, 0])
+
+    @classmethod
+    def outer(cls, A, B, **kwargs):
+        return numpy.ndarray([0, 0])
+
+    @classmethod
+    def at(cls, a, indices, b=None):
+        return numpy.ndarray([0, 0])
+
+class FakeUfuncOneArg(FakeUfunc):
+    def __call__(self, x, out=None, where=True, casting='same_kind', order='K', dtype=None, subok=True):
+        return numpy.ndarray([0, 0])
+
+class FakeUfuncOneArgBis(FakeUfunc):
+    def __call__(self, x, out=None, where=True, casting='same_kind', order='K', dtype=None, subok=True):
+        return numpy.ndarray([0, 0]), numpy.ndarray([0, 0])
+
+class FakeUfuncTwoArgs(FakeUfunc):
+    def __call__(self, x1, x2, out=None, where=True, casting='same_kind', order='K', dtype=None, subok=True):
+        return numpy.ndarray([0, 0])
+
+# Constants
+e = 2.718281828459045
+euler_gamma = 0.5772156649015329
+
+# One arg functions with optional kwargs
+arccos = FakeUfuncOneArg()
+arccosh = FakeUfuncOneArg()
+arcsin = FakeUfuncOneArg()
+arcsinh = FakeUfuncOneArg()
+arctan = FakeUfuncOneArg()
+arctanh = FakeUfuncOneArg()
+cbrt = FakeUfuncOneArg()
+conj = FakeUfuncOneArg()
+conjugate = FakeUfuncOneArg()
+cosh = FakeUfuncOneArg()
+deg2rad = FakeUfuncOneArg()
+degrees = FakeUfuncOneArg()
+exp2 = FakeUfuncOneArg()
+expm1 = FakeUfuncOneArg()
+fabs = FakeUfuncOneArg()
+frexp = FakeUfuncOneArgBis()
+isfinite = FakeUfuncOneArg()
+isinf = FakeUfuncOneArg()
+log = FakeUfuncOneArg()
+log1p = FakeUfuncOneArg()
+log2 = FakeUfuncOneArg()
+logical_not = FakeUfuncOneArg()
+modf = FakeUfuncOneArgBis()
+negative = FakeUfuncOneArg()
+positive = FakeUfuncOneArg()
+rad2deg = FakeUfuncOneArg()
+radians = FakeUfuncOneArg()
+reciprocal = FakeUfuncOneArg()
+rint = FakeUfuncOneArg()
+sign = FakeUfuncOneArg()
+signbit = FakeUfuncOneArg()
+sinh = FakeUfuncOneArg()
+spacing = FakeUfuncOneArg()
+square = FakeUfuncOneArg()
+tan = FakeUfuncOneArg()
+tanh = FakeUfuncOneArg()
+trunc = FakeUfuncOneArg()
+
+# Two args functions with optional kwargs
+add = FakeUfuncTwoArgs()
+bitwise_and = FakeUfuncTwoArgs()
+bitwise_or = FakeUfuncTwoArgs()
+bitwise_xor = FakeUfuncTwoArgs()
+copysign = FakeUfuncTwoArgs()
+divide = FakeUfuncTwoArgs()
+divmod = FakeUfuncTwoArgs()
+equal = FakeUfuncTwoArgs()
+float_power = FakeUfuncTwoArgs()
+floor_divide = FakeUfuncTwoArgs()
+fmax = FakeUfuncTwoArgs()
+fmin = FakeUfuncTwoArgs()
+fmod = FakeUfuncTwoArgs()
+greater = FakeUfuncTwoArgs()
+gcd = FakeUfuncTwoArgs()
+hypot = FakeUfuncTwoArgs()
+heaviside = FakeUfuncTwoArgs()
+lcm = FakeUfuncTwoArgs()
+ldexp = FakeUfuncTwoArgs()
+left_shift = FakeUfuncTwoArgs()
+less = FakeUfuncTwoArgs()
+logaddexp = FakeUfuncTwoArgs()
+logaddexp2 = FakeUfuncTwoArgs()
+logical_and = FakeUfuncTwoArgs()
+logical_or = FakeUfuncTwoArgs()
+logical_xor = FakeUfuncTwoArgs()
+maximum = FakeUfuncTwoArgs()
+minimum = FakeUfuncTwoArgs()
+multiply = FakeUfuncTwoArgs()
+nextafter = FakeUfuncTwoArgs()
+not_equal = FakeUfuncTwoArgs()
+power = FakeUfuncTwoArgs()
+remainder = FakeUfuncTwoArgs()
+right_shift = FakeUfuncTwoArgs()
+subtract = FakeUfuncTwoArgs()
+true_divide = FakeUfuncTwoArgs()
+"#;
+
+pub static NUMPY_CORE_FROMNUMERIC: &str = r#"
+def sum(a, axis=None, dtype=None, out=None, keepdims=None, initial=None):
+    return numpy.ndarray([0, 0])
+"#;
+
+pub static NUMPY_CORE_MULTIARRAY: &str = r#"
+# different functions defined in multiarray.py
+def inner(a, b):
+    return numpy.ndarray([0, 0])
+
+def vdot(a, b):
+    return numpy.ndarray([0, 0])
+"#;
+
+pub static NUMPY_CORE_NUMERIC: &str = r#"
+# different functions defined in numeric.py
+import numpy
+def zeros_like(a, dtype=None, order='K', subok=True, shape=None): return numpy.ndarray((0, 0))
+def ones_like(a, dtype=None, order='K', subok=True, shape=None): return numpy.ndarray((0, 0))
+def full_like(a, fill_value, dtype=None, order='K', subok=True, shape=None): return numpy.ndarray((0, 0))
+"#;
+
+pub static NUMPY_CORE_NUMERICTYPES: &str = r#"
+class generic(object):
+    def __init__(self, value):
+        self.T = np.ndarray([0, 0])
+        self.base = None
+        self.data = None
+        self.dtype = None
+        self.flags = None
+        # Should be a numpy.flatiter instance but not available for now
+        # Putting an array instead so that iteration and indexing are authorized
+        self.flat = np.ndarray([0, 0])
+        self.imag = None
+        self.itemsize = None
+        self.nbytes = None
+        self.ndim = None
+        self.real = None
+        self.size = None
+        self.strides = None
+
+    def all(self): return uninferable
+    def any(self): return uninferable
+    def argmax(self): return uninferable
+    def argmin(self): return uninferable
+    def argsort(self): return uninferable
+    def astype(self, dtype, order='K', casting='unsafe', subok=True, copy=True): return np.ndarray([0, 0])
+    def base(self): return uninferable
+    def byteswap(self): return uninferable
+    def choose(self): return uninferable
+    def clip(self): return uninferable
+    def compress(self): return uninferable
+    def conj(self): return uninferable
+    def conjugate(self): return uninferable
+    def copy(self): return uninferable
+    def cumprod(self): return uninferable
+    def cumsum(self): return uninferable
+    def data(self): return uninferable
+    def diagonal(self): return uninferable
+    def dtype(self): return uninferable
+    def dump(self): return uninferable
+    def dumps(self): return uninferable
+    def fill(self): return uninferable
+    def flags(self): return uninferable
+    def flat(self): return uninferable
+    def flatten(self): return uninferable
+    def getfield(self): return uninferable
+    def imag(self): return uninferable
+    def item(self): return uninferable
+    def itemset(self): return uninferable
+    def itemsize(self): return uninferable
+    def max(self): return uninferable
+    def mean(self): return uninferable
+    def min(self): return uninferable
+    def nbytes(self): return uninferable
+    def ndim(self): return uninferable
+    def newbyteorder(self): return uninferable
+    def nonzero(self): return uninferable
+    def prod(self): return uninferable
+    def ptp(self): return uninferable
+    def put(self): return uninferable
+    def ravel(self): return uninferable
+    def real(self): return uninferable
+    def repeat(self): return uninferable
+    def reshape(self): return uninferable
+    def resize(self): return uninferable
+    def round(self): return uninferable
+    def searchsorted(self): return uninferable
+    def setfield(self): return uninferable
+    def setflags(self): return uninferable
+    def shape(self): return uninferable
+    def size(self): return uninferable
+    def sort(self): return uninferable
+    def squeeze(self): return uninferable
+    def std(self): return uninferable
+    def strides(self): return uninferable
+    def sum(self): return uninferable
+    def swapaxes(self): return uninferable
+    def take(self): return uninferable
+    def tobytes(self): return uninferable
+    def tofile(self): return uninferable
+    def tolist(self): return uninferable
+    def tostring(self): return uninferable
+    def trace(self): return uninferable
+    def transpose(self): return uninferable
+    def var(self): return uninferable
+    def view(self): return uninferable
+
+class dtype(object):
+    def __init__(self, obj, align=False, copy=False):
+        self.alignment = None
+        self.base = None
+        self.byteorder = None
+        self.char = None
+        self.descr = None
+        self.fields = None
+        self.flags = None
+        self.hasobject = None
+        self.isalignedstruct = None
+        self.isbuiltin = None
+        self.isnative = None
+        self.itemsize = None
+        self.kind = None
+        self.metadata = None
+        self.name = None
+        self.names = None
+        self.num = None
+        self.shape = None
+        self.str = None
+        self.subdtype = None
+        self.type = None
+
+    def newbyteorder(self, new_order='S'): return uninferable
+    def __neg__(self): return uninferable
+
+class busdaycalendar(object):
+    def __init__(self, weekmask='1111100', holidays=None):
+        self.holidays = None
+        self.weekmask = None
+
+class flexible(generic): pass
+class bool_(generic): pass
+class number(generic):
+    def __neg__(self): return uninferable
+class datetime64(generic):
+    def __init__(self, nb, unit=None): pass
+
+
+class void(flexible):
+    def __init__(self, *args, **kwargs):
+        self.base = None
+        self.dtype = None
+        self.flags = None
+    def getfield(self): return uninferable
+    def setfield(self): return uninferable
+
+
+class character(flexible): pass
+
+
+class integer(number):
+    def __init__(self, value):
+       self.denominator = None
+       self.numerator = None
+
+
+class inexact(number): pass
+
+
+class str_(str, character):
+    def maketrans(self, x, y=None, z=None): return uninferable
+
+
+class bytes_(bytes, character):
+    def fromhex(self, string): return uninferable
+    def maketrans(self, frm, to): return uninferable
+
+
+class signedinteger(integer): pass
+
+
+class unsignedinteger(integer): pass
+
+
+class complexfloating(inexact): pass
+
+
+class floating(inexact): pass
+
+
+class float64(floating, float):
+    def fromhex(self, string): return uninferable
+
+
+class uint64(unsignedinteger): pass
+class complex64(complexfloating): pass
+class int16(signedinteger): pass
+class float96(floating): pass
+class int8(signedinteger): pass
+class uint32(unsignedinteger): pass
+class uint8(unsignedinteger): pass
+class _typedict(dict): pass
+class complex192(complexfloating): pass
+class timedelta64(signedinteger):
+    def __init__(self, nb, unit=None): pass
+class int32(signedinteger): pass
+class uint16(unsignedinteger): pass
+class float32(floating): pass
+class complex128(complexfloating, complex): pass
+class float16(floating): pass
+class int64(signedinteger): pass
+
+buffer_type = memoryview
+bool8 = bool_
+byte = int8
+bytes0 = bytes_
+cdouble = complex128
+cfloat = complex128
+clongdouble = complex192
+clongfloat = complex192
+complex_ = complex128
+csingle = complex64
+double = float64
+float_ = float64
+half = float16
+int0 = int32
+int_ = int32
+intc = int32
+intp = int32
+long = int32
+longcomplex = complex192
+longdouble = float96
+longfloat = float96
+longlong = int64
+object0 = object_
+object_ = object_
+short = int16
+single = float32
+singlecomplex = complex64
+str0 = str_
+string_ = bytes_
+ubyte = uint8
+uint = uint32
+uint0 = uint32
+uintc = uint32
+uintp = uint32
+ulonglong = uint64
+unicode = str_
+unicode_ = str_
+ushort = uint16
+void0 = void
+"#;
+
+pub static NUMPY_CORE_EINSUMFUNC: &str = r#"
+def einsum(*operands, out=None, optimize=False, **kwargs):
+    return numpy.ndarray([0, 0])
+"#;
+
+pub static NUMPY_MA: &str = r#"
+import numpy.ma
+def masked_where(condition, a, copy=True):
+    return numpy.ma.masked_array(a, mask=[])
+
+def masked_invalid(a, copy=True):
+    return numpy.ma.masked_array(a, mask=[])
+"#;
+
+pub static NUMPY_RANDOM_MTRAND: &str = r#"
+def beta(a, b, size=None): return uninferable
+def binomial(n, p, size=None): return uninferable
+def bytes(length): return uninferable
+def chisquare(df, size=None): return uninferable
+def choice(a, size=None, replace=True, p=None): return uninferable
+def dirichlet(alpha, size=None): return uninferable
+def exponential(scale=1.0, size=None): return uninferable
+def f(dfnum, dfden, size=None): return uninferable
+def gamma(shape, scale=1.0, size=None): return uninferable
+def geometric(p, size=None): return uninferable
+def get_state(): return uninferable
+def gumbel(loc=0.0, scale=1.0, size=None): return uninferable
+def hypergeometric(ngood, nbad, nsample, size=None): return uninferable
+def laplace(loc=0.0, scale=1.0, size=None): return uninferable
+def logistic(loc=0.0, scale=1.0, size=None): return uninferable
+def lognormal(mean=0.0, sigma=1.0, size=None): return uninferable
+def logseries(p, size=None): return uninferable
+def multinomial(n, pvals, size=None): return uninferable
+def multivariate_normal(mean, cov, size=None): return uninferable
+def negative_binomial(n, p, size=None): return uninferable
+def noncentral_chisquare(df, nonc, size=None): return uninferable
+def noncentral_f(dfnum, dfden, nonc, size=None): return uninferable
+def normal(loc=0.0, scale=1.0, size=None): return uninferable
+def pareto(a, size=None): return uninferable
+def permutation(x): return uninferable
+def poisson(lam=1.0, size=None): return uninferable
+def power(a, size=None): return uninferable
+def rand(*args): return uninferable
+def randint(low, high=None, size=None, dtype='l'):
+    import numpy
+    return numpy.ndarray((1,1))
+def randn(*args): return uninferable
+def random(size=None): return uninferable
+def random_integers(low, high=None, size=None): return uninferable
+def random_sample(size=None): return uninferable
+def rayleigh(scale=1.0, size=None): return uninferable
+def seed(seed=None): return uninferable
+def set_state(state): return uninferable
+def shuffle(x): return uninferable
+def standard_cauchy(size=None): return uninferable
+def standard_exponential(size=None): return uninferable
+def standard_gamma(shape, size=None): return uninferable
+def standard_normal(size=None): return uninferable
+def standard_t(df, size=None): return uninferable
+def triangular(left, mode, right, size=None): return uninferable
+def uniform(low=0.0, high=1.0, size=None): return uninferable
+def vonmises(mu, kappa, size=None): return uninferable
+def wald(mean, scale, size=None): return uninferable
+def weibull(a, size=None): return uninferable
+def zipf(a, size=None): return uninferable
+"#;
+
 pub static UNITTEST: &str = r#"
 from unittest.async_case import IsolatedAsyncioTestCase
 "#;
@@ -1175,5 +1622,13 @@ pub static EXTENDERS: &[(&str, &str)] = &[
     ("http", HTTP),
     ("http.client", HTTP_CLIENT),
     ("multiprocessing.managers", MP_MANAGERS),
+    ("numpy.core.umath", NUMPY_CORE_UMATH),
+    ("numpy.core.fromnumeric", NUMPY_CORE_FROMNUMERIC),
+    ("numpy.core.multiarray", NUMPY_CORE_MULTIARRAY),
+    ("numpy.core.numeric", NUMPY_CORE_NUMERIC),
+    ("numpy.core.numerictypes", NUMPY_CORE_NUMERICTYPES),
+    ("numpy.core.einsumfunc", NUMPY_CORE_EINSUMFUNC),
+    ("numpy.ma", NUMPY_MA),
+    ("numpy.random.mtrand", NUMPY_RANDOM_MTRAND),
     ("unittest", UNITTEST),
 ];

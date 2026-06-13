@@ -248,7 +248,14 @@ impl WalkCx<'_> {
         if self.is_crashed() {
             return;
         }
-        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: false, root_mid: Some(node.m) });
+        // node.root(): walk parents to the top — REPARENT-AWARE (brain
+        // extender templates re-parent top-level objects into the target
+        // module, astroid brain/helpers.py:25-27)
+        let mut top = node;
+        while let Some(p) = self.eng.parent(top) {
+            top = p;
+        }
+        (self.emit)(CheckMsg { msgid, line, col, text, nodeless: false, root_mid: Some(top.m) });
     }
     pub fn emit_nodeless(&mut self, msgid: &'static str, line: u32, col: i64, text: String) {
         if self.is_crashed() {

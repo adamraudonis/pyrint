@@ -431,6 +431,11 @@ pub struct Engine {
     /// DictModel attr_items Tuple elements, built once per DictItems object
     /// (objectmodel.py:856-867) and reused — keyed by the DictRef pointer
     pub dictitems_elts_cache: RefCell<FxHashMap<usize, Rc<Vec<Value>>>>,
+    /// register_builtin_transform position copy (brain_builtin_inference
+    /// _transform_wrapper): a from_elements container result gets the CALL
+    /// node's parent/lineno. Keyed by the elems Rc pointer; the Weak ref
+    /// guards against address reuse.
+    pub cont_prov: RefCell<FxHashMap<usize, (std::rc::Weak<Vec<Value>>, GNode)>>,
     /// keep-alive pins for values whose Rc POINTER is used as an identity
     /// key (synth_hop_cache / ValueKey::Synth / dictitems_elts_cache):
     /// python ids stay unique while referenced; without pinning the
@@ -515,6 +520,7 @@ impl Engine {
             synth_hop_cache: RefCell::new(FxHashSet::default()),
             synth_hop_trunc: RefCell::new(FxHashSet::default()),
             dictitems_elts_cache: RefCell::new(FxHashMap::default()),
+            cont_prov: RefCell::new(FxHashMap::default()),
             synth_pins: RefCell::new(Vec::new()),
         };
         e.bootstrap();
@@ -566,6 +572,37 @@ impl Engine {
 
     /// The UNATTACHED_UNKNOWN singleton (node_classes.py:5007) — lazily
     /// allocated Unknown node in a synthetic module.
+    /// record container-brain provenance (only when absent — astroid
+    /// copies position only onto PARENTLESS from_elements results)
+    pub fn set_container_prov(&self, v: &Value, node: GNode) {
+        let elems = match v {
+            Value::SynthSeq { elems, .. } => elems,
+            Value::FrozenSet { elems } => elems,
+            _ => return,
+        };
+        self.cont_prov
+            .borrow_mut()
+            .entry(Rc::as_ptr(elems) as usize)
+            .or_insert_with(|| (Rc::downgrade(elems), node));
+    }
+
+    /// provenance node of a container-brain value, if recorded and alive
+    pub fn container_prov(&self, v: &Value) -> Option<GNode> {
+        let elems = match v {
+            Value::SynthSeq { elems, .. } => elems,
+            Value::FrozenSet { elems } => elems,
+            _ => return None,
+        };
+        let map = self.cont_prov.borrow();
+        let (weak, node) = map.get(&(Rc::as_ptr(elems) as usize))?;
+        let alive = weak.upgrade().map(|rc| Rc::ptr_eq(&rc, elems)).unwrap_or(false);
+        if alive {
+            Some(*node)
+        } else {
+            None
+        }
+    }
+
     pub fn unknown_singleton(&self) -> GNode {
         if let Some(g) = *self.unattached_unknown.borrow() {
             return g;
@@ -2006,12 +2043,12 @@ impl Engine {
     /// brain templates). Never cached in astroid_cache; post_build runs so
     /// ImportFrom names land in locals.
     pub fn build_template_module(&self, source: &str, modname: &str) -> Option<ModId> {
-        let src = pyast::decode_source(source.as_bytes(), "<template>").ok()?;
-        let outcome = pyast::parse::parse_module(&src, modname, "<template>", false);
+        let src = pyast::decode_source(source.as_bytes(), "<?>").ok()?;
+        let outcome = pyast::parse::parse_module(&src, modname, "<?>", false);
         let tree = outcome.tree?;
         let id = self.register_module(
             modname.to_string(),
-            "<template>".to_string(),
+            "<?>".to_string(),
             tree,
             false,
             true,
@@ -2029,12 +2066,12 @@ impl Engine {
         source: &str,
         modname: &str,
     ) -> Option<ModId> {
-        let src = pyast::decode_source(source.as_bytes(), "<template>").ok()?;
-        let outcome = pyast::parse::parse_module(&src, modname, "<template>", false);
+        let src = pyast::decode_source(source.as_bytes(), "<?>").ok()?;
+        let outcome = pyast::parse::parse_module(&src, modname, "<?>", false);
         let tree = outcome.tree?;
         let id = self.register_module(
             modname.to_string(),
-            "<template>".to_string(),
+            "<?>".to_string(),
             tree,
             false,
             true,
@@ -2069,7 +2106,7 @@ impl Engine {
     /// qnames by naming the template module identically.
     fn apply_module_extenders(&self, id: ModId) {
         // never extend the extension templates themselves (infinite build)
-        if self.md(id).file == "<template>" {
+        if self.md(id).file == "<?>" {
             return;
         }
         let name = self.md(id).name.clone();

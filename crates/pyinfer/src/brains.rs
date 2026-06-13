@@ -2141,7 +2141,9 @@ dict
     ) -> Option<Flow> {
         if args.is_empty() {
             // node_type(lineno=..., parent=node.parent) — fresh empty container
-            return Some(Flow::one(cont_build(klass, Vec::new())));
+            let v = cont_build(klass, Vec::new());
+            self.set_container_prov(&v, _node);
+            return Some(Flow::one(v));
         }
         if args.len() > 1 {
             return None; // UseInferenceDefault
@@ -2153,6 +2155,7 @@ dict
             Ok(t) => t,
         };
         if let Some(t) = transformed {
+            self.set_container_prov(&t, _node);
             return Some(Flow::one(t));
         }
         // not transformed: `next(arg.infer(context=context))` — single pull
@@ -2166,6 +2169,7 @@ dict
         if t.is_uninferable() {
             return None;
         }
+        self.set_container_prov(&t, _node);
         Some(Flow::one(t))
     }
 

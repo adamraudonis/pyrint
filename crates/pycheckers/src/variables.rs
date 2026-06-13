@@ -1470,8 +1470,9 @@ impl VarsChecker {
                 if should_ignore_redefined_builtin(eng, stmt0) || name_str == "__doc__" {
                     continue;
                 }
-                cx.emit_node(
+                cx.emit_node_rooted(
                     "W0622",
+                    stmt0,
                     u::msg_line(eng, stmt0),
                     u::msg_col(eng, stmt0),
                     u::format_template("Redefining built-in %r", &[&name_str]),
@@ -1641,10 +1642,11 @@ impl VarsChecker {
                         Some(a) => format!("{imported_name} imported as {a}"),
                     };
                     if !u::in_type_checking_block(eng, cx.caches, stmt) {
-                        cx.emit_node(
+                        cx.emit_node_rooted(
                             "W0611",
+                            stmt,
                             u::lineno(eng, stmt),
-                            u::col_offset(eng, stmt) as i64,
+                            u::col_offset(eng, stmt).max(0) as i64,
                             u::format_template("Unused %s", &[&msg]),
                         );
                     }
@@ -1694,10 +1696,11 @@ impl VarsChecker {
                     unused_list[unused_list.len() - 1]
                 )
             };
-            cx.emit_node(
+            cx.emit_node_rooted(
                 "W0614",
+                stmt,
                 u::lineno(eng, stmt),
-                u::col_offset(eng, stmt) as i64,
+                u::col_offset(eng, stmt).max(0) as i64,
                 u::format_template(
                     "Unused import(s) %s from wildcard import of %s",
                     &[&arg_string, &module],
@@ -1809,8 +1812,9 @@ impl VarsChecker {
                 let line = eng.fromlineno(definition);
                 if !is_name_ignored(eng, stmt, name) {
                     let name_str = eng.sname(name);
-                    cx.emit_node(
+                    cx.emit_node_rooted(
                         "W0621",
+                        stmt,
                         u::msg_line(eng, stmt),
                         u::msg_col(eng, stmt),
                         u::format_template(
@@ -1824,8 +1828,9 @@ impl VarsChecker {
             {
                 // allowed-redefined-builtins default () — no exemption
                 let name_str = eng.sname(name);
-                cx.emit_node(
+                cx.emit_node_rooted(
                     "W0622",
+                    stmt,
                     u::msg_line(eng, stmt),
                     u::msg_col(eng, stmt),
                     u::format_template("Redefining built-in %r", &[&name_str]),
@@ -2195,8 +2200,9 @@ impl VarsChecker {
                         Some(a) => format!("{} imported as {}", qname.as_deref().unwrap_or(""), a),
                         None => format!("import {name_str}"),
                     };
-                    cx.emit_node(
+                    cx.emit_node_rooted(
                         "W0611",
+                        stmt,
                         u::lineno(eng, stmt),
                         u::col_offset(eng, stmt).max(0) as i64,
                         u::format_template("Unused %s", &[&msg]),
@@ -2222,8 +2228,9 @@ impl VarsChecker {
                         ),
                         None => format!("{name_str} imported from {modname}"),
                     };
-                    cx.emit_node(
+                    cx.emit_node_rooted(
                         "W0611",
+                        stmt,
                         u::lineno(eng, stmt),
                         u::col_offset(eng, stmt).max(0) as i64,
                         u::format_template("Unused %s", &[&msg]),
@@ -2255,8 +2262,9 @@ impl VarsChecker {
             } else {
                 ("W0612", "Unused variable %r")
             };
-            cx.emit_node(
+            cx.emit_node_rooted(
                 msgid,
+                stmt,
                 u::msg_line(eng, stmt),
                 u::msg_col(eng, stmt),
                 u::format_template(template, &[&name_str]),
@@ -2321,8 +2329,9 @@ impl VarsChecker {
             return;
         }
         let name_str = eng.sname(name);
-        cx.emit_node(
+        cx.emit_node_rooted(
             "W0613",
+            stmt,
             u::msg_line(eng, stmt),
             u::msg_col(eng, stmt),
             u::format_template("Unused argument %r", &[&name_str]),
@@ -4641,6 +4650,14 @@ fn unpacking_extra_info(eng: &Engine, node: GNode, value: GNode, inferred: &Valu
                 raw_lineno(eng, *g),
                 Some(*g),
             ),
+            // container-brain results: register_builtin_transform parented
+            // the fresh node to the builtin CALL and copied its lineno
+            Value::SynthSeq { .. } | Value::FrozenSet { .. }
+                if eng.container_prov(inferred).is_some() =>
+            {
+                let call = eng.container_prov(inferred).unwrap();
+                (crate::tailmisc::root_name(eng, call), eng.fromlineno(call), None)
+            }
             Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => {
                 (crate::tailmisc::root_name(eng, *cls), raw_lineno(eng, *cls), None)
             }
@@ -4659,6 +4676,11 @@ fn unpacking_extra_info(eng: &Engine, node: GNode, value: GNode, inferred: &Valu
         if eng.fromlineno(node) == inferred_line {
             if let Some(g) = inferred_node {
                 return format!("'{}'", u::as_string(eng, g));
+            }
+            // container-brain value: astroid renders the from_elements
+            // node's as_string (Tuple/List/Set of consts)
+            if let Some(rendered) = synth_container_as_string(inferred) {
+                return format!("'{rendered}'");
             }
             return String::new();
         } else if inferred_line != 0 {
@@ -4903,6 +4925,33 @@ fn store_type_annotation_tree(
         }
         _ => {}
     }
+}
+
+/// astroid as_string of a from_elements container holding only consts
+/// (EvaluatedObject elements are unrenderable here -> None)
+fn synth_container_as_string(v: &Value) -> Option<String> {
+    let (open, close, elems): (&str, &str, &std::rc::Rc<Vec<Value>>) = match v {
+        Value::SynthSeq { kind, elems } => match kind {
+            pyinfer::value::SeqKind::Tuple => ("(", ")", elems),
+            pyinfer::value::SeqKind::List => ("[", "]", elems),
+            pyinfer::value::SeqKind::Set => ("{", "}", elems),
+        },
+        _ => return None,
+    };
+    let mut parts: Vec<String> = Vec::new();
+    for e in elems.iter() {
+        match e {
+            Value::SynthConst(c) => parts.push(pyinfer::asstr::const_repr(c.as_ref())),
+            _ => return None,
+        }
+    }
+    let inner = parts.join(", ");
+    if matches!(v, Value::SynthSeq { kind: pyinfer::value::SeqKind::Tuple, .. })
+        && parts.len() == 1
+    {
+        return Some(format!("({inner}, )"));
+    }
+    Some(format!("{open}{inner}{close}"))
 }
 
 /// dummy-variables-rgx default:
