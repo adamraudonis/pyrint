@@ -4,7 +4,7 @@
 
 use std::io::Write;
 
-use rustc_hash::FxHashSet;
+use rustc_hash::{FxHashMap, FxHashSet};
 
 /// MSG_TYPES_STATUS (pylint/constants.py:43).
 pub fn status_bit(category: char) -> i32 {
@@ -38,11 +38,19 @@ pub struct Reporter<W: Write> {
     out: W,
     modules_seen: FxHashSet<String>,
     pub msg_status: i32,
+    /// stats.by_msg: symbol -> displayed count (incremented only for DISPLAYED
+    /// messages, pylinter.py:1248-1251). Drives --fail-on and the stats pickle.
+    pub by_msg: FxHashMap<String, u64>,
 }
 
 impl<W: Write> Reporter<W> {
     pub fn new(out: W) -> Self {
-        Reporter { out, modules_seen: FxHashSet::default(), msg_status: 0 }
+        Reporter {
+            out,
+            modules_seen: FxHashSet::default(),
+            msg_status: 0,
+            by_msg: FxHashMap::default(),
+        }
     }
 
     /// TextReporter.handle_message (text.py:156-161).
@@ -59,6 +67,12 @@ impl<W: Write> Reporter<W> {
             m.path, m.line, m.col, m.msgid, m.text, m.symbol
         );
         self.msg_status |= status_bit(m.msgid.chars().next().unwrap_or('I'));
+        *self.by_msg.entry(m.symbol.to_string()).or_insert(0) += 1;
+    }
+
+    /// Write a raw string to the output stream (the score footer).
+    pub fn write_raw(&mut self, s: &str) {
+        let _ = self.out.write_all(s.as_bytes());
     }
 
     pub fn flush(&mut self) {

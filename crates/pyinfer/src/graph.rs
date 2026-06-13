@@ -458,6 +458,17 @@ impl Engine {
             .to_string_lossy()
             .into_owned();
         let mut sys_path = vec![real_root];
+        // init-hook sys.path deltas (Phase F): the CLI runs the rcfile/CLI
+        // init-hook through python and forwards the resulting sys.path additions
+        // here so import resolution sees them (notes/09 §8.4). Inserted right
+        // after the cwd realpath, before the interpreter sys.path, mirroring an
+        // init-hook's `sys.path.insert(0, ...)` / append being visible to the
+        // subsequent astroid module search.
+        if let Ok(extra) = std::env::var("PRYLINT_EXTRA_SYSPATH") {
+            for p in extra.split(':').filter(|s| !s.is_empty()) {
+                sys_path.push(p.to_string());
+            }
+        }
         sys_path.extend(env.sys_path.clone());
         let e = Engine {
             interner: RefCell::new(GlobalInterner::default()),

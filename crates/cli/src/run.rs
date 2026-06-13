@@ -27,12 +27,88 @@ use crate::reporter::{OutMsg, Reporter};
 
 pub struct RunOpts {
     pub paths: Vec<String>,
-    /// --disable values, comma-split, in CLI order
+    /// --disable values, comma-split, in CLI order (after config-file disables,
+    /// which are prepended by the config layer).
     pub disables: Vec<String>,
+    /// --enable values, comma-split, in CLI+config order.
+    pub enables: Vec<(EnableSrc, String)>,
     /// -E/--errors-only. With -E the baked global state (msgs.rs `enabled`)
     /// applies; without it the full-pylint default state (377 enabled
     /// messages) is seeded and the token/raw W/C checkers run.
     pub errors_only: bool,
+    /// --score (-s): default True; gates ONLY the footer display. The score
+    /// is still computed/returned for the exit ladder. -E forces it False.
+    pub score: bool,
+    /// --persistent: default True. Gates writing the PYLINT_HOME stats pickle.
+    /// Loading the previous note for the footer suffix is UNCONDITIONAL.
+    /// -E forces it False.
+    pub persistent: bool,
+    /// --fail-under (default 10.0): score >= fail_under exits 0 even with
+    /// displayed messages (run.py:253).
+    pub fail_under: f64,
+    /// --fail-on: category letters and/or msgid/symbol; any displayed match
+    /// forces a failing exit (run.py:248).
+    pub fail_on: Vec<String>,
+    /// --exit-zero: always exit 0 when the exit ladder runs.
+    pub exit_zero: bool,
+}
+
+/// Source of an --enable value: config-file enables are applied before CLI
+/// enables (parse-order accumulation, notes/09 §8.6).
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub enum EnableSrc {
+    Config,
+    Cli,
+}
+
+/// Apply one `--enable` value to the global state, stashing W0012/R0022 on
+/// resolution errors (the _EnableAction stash path, callback_actions.py).
+fn apply_enable(
+    global: &mut GlobalState,
+    item: &str,
+    stashed: &mut Vec<(&'static str, String)>,
+) {
+    match global.cli_enable(item) {
+        Ok(()) => {}
+        Err(ResolveError::Unknown) => stashed.push((
+            "W0012",
+            format!(
+                "Unknown option value for '--enable', expected a valid pylint message and got '{item}'"
+            ),
+        )),
+        Err(ResolveError::Deleted(s)) | Err(ResolveError::Moved(s)) => {
+            stashed.push(("R0022", format!("Useless option value for '--enable', {s}")))
+        }
+    }
+}
+
+/// `enable_fail_on_messages` (pylinter.py:509-538): category letters match
+/// every message of that category; everything else matches msgid OR symbol
+/// and is self.enable()d. Returns the set of symbols whose DISPLAY forces a
+/// failing exit (checked against stats.by_msg keys at exit).
+fn resolve_fail_on(global: &mut GlobalState, fail_on: &[String]) -> std::collections::HashSet<String> {
+    let mut symbols: std::collections::HashSet<String> = Default::default();
+    const CATEGORIES: &[&str] = &["I", "C", "R", "W", "E", "F"];
+    for val in fail_on {
+        if CATEGORIES.contains(&val.as_str()) {
+            // every message of that category contributes its symbol
+            let cat = val.chars().next().unwrap();
+            for (i, m) in pycheckers::msgs::MESSAGES.iter().enumerate() {
+                if m.msgid.starts_with(cat) {
+                    symbols.insert(msgstore::def(i as msgstore::MsgIdx).symbol.to_string());
+                }
+            }
+        } else {
+            // msgid or symbol: enable() it and record its symbol(s)
+            if let Ok(idxs) = msgstore::get_messages_to_set(val, true) {
+                for idx in &idxs {
+                    global.state.insert(*idx, true);
+                    symbols.insert(msgstore::def(*idx).symbol.to_string());
+                }
+            }
+        }
+    }
+    symbols
 }
 
 struct ParsedFile {
@@ -135,6 +211,14 @@ pub fn run(opts: &RunOpts) -> i32 {
     // runs before _parse_error_mode at :145 — empirically confirmed,
     // notes/02 §18.5)
     let mut stashed: Vec<(&'static str, String)> = Vec::new();
+    // Config-source enables run first (parse order: config file, then CLI;
+    // §8.6). For the hook/full profiles `enables` is empty.
+    for (src, item) in &opts.enables {
+        if *src != EnableSrc::Config {
+            continue;
+        }
+        apply_enable(&mut global, item, &mut stashed);
+    }
     for item in &opts.disables {
         match global.cli_disable(item) {
             Ok(()) => {}
@@ -149,6 +233,20 @@ pub fn run(opts: &RunOpts) -> i32 {
             }
         }
     }
+    // CLI enables (after disables in the simplified single-list model; for the
+    // profiles there are none, so order vs CLI disables is moot).
+    for (src, item) in &opts.enables {
+        if *src != EnableSrc::Cli {
+            continue;
+        }
+        apply_enable(&mut global, item, &mut stashed);
+    }
+
+    // --fail-on: msgid/symbol values are self.enable()d (even if disabled) and
+    // recorded; category letters flag every message of that category. Resolve
+    // the set of symbols that, if displayed, force a failing exit
+    // (pylinter.py:509-541). For the profiles fail_on is empty.
+    let fail_on_symbols = resolve_fail_on(&mut global, &opts.fail_on);
 
     let stdout = std::io::stdout();
     let mut reporter = Reporter::new(BufWriter::new(stdout.lock()));
@@ -176,6 +274,34 @@ pub fn run(opts: &RunOpts) -> i32 {
         });
         // config-phase messages set msg_status but their stats are zeroed by
         // PyLinter.open() before checking starts (linterstats.py:328-335)
+    }
+    // PyLinter.open() resets the per-run stat counters (by_msg etc.) AFTER
+    // config-phase messages were emitted, so those don't count toward by_msg /
+    // the score (msg_status was already OR-ed and persists).
+    reporter.by_msg.clear();
+
+    // ---- "No files to lint" bail (run.py:202-211, notes/09 §3.3) --------
+    // disable_all_msg_set = all symbols - the 11 main-checker default-enabled
+    // messages; bail (print + exit 32) when enable is empty AND every message
+    // outside that set is disabled (i.e. --disable=all with no --enable).
+    {
+        // F/E/W/R main-checker messages with default_enabled (excludes the
+        // I00xx, which carry default_enabled:False).
+        const MAIN_DEFAULT_ENABLED: &[&str] = &[
+            "F0001", "F0002", "F0010", "F0011", "E0001", "E0011", "W0012", "R0022", "E0013",
+            "E0014", "E0015",
+        ];
+        let all_off = pycheckers::msgs::MESSAGES.iter().enumerate().all(|(i, m)| {
+            MAIN_DEFAULT_ENABLED.contains(&m.msgid) || !global.enabled(i as msgstore::MsgIdx)
+        });
+        if opts.enables.is_empty() && all_off {
+            println!("No files to lint: exiting.");
+            // flush the stashed config-phase messages already written? run.py
+            // prints them before this bail only if they fired; the bail itself
+            // prints to STDOUT and exits 32.
+            reporter.flush();
+            return 32;
+        }
     }
 
     // ---- discovery ----------------------------------------------------
@@ -589,8 +715,19 @@ pub fn run(opts: &RunOpts) -> i32 {
     merged.sort_by_key(|(i, _)| *i);
 
     let mut any_linted = false;
-    for (_, r) in &merged {
-        any_linted |= r.linted;
+    // FileState.base_name follows the LAST linted module (notes/09 §5.2); the
+    // verbose footer's modules_names set is the FILEPATHS of linted files
+    // (only the serial _lint_files path adds them — pylinter.py:786).
+    let mut last_base: Option<String> = None;
+    let mut module_count: u64 = 0;
+    let mut modules_names: Vec<String> = Vec::new();
+    for (i, r) in &merged {
+        if r.linted {
+            any_linted = true;
+            module_count += 1;
+            last_base = Some(items[*i].base.clone());
+            modules_names.push(items[*i].filepath.clone());
+        }
         stats.fatal += r.stats.fatal;
         stats.error += r.stats.error;
         stats.warning += r.stats.warning;
@@ -602,29 +739,123 @@ pub fn run(opts: &RunOpts) -> i32 {
             reporter.handle(m);
         }
     }
-    reporter.flush();
 
-    // ---- exit code (run.py:245-260 + _report_evaluation) ---------------
+    // ---- score / footer (pylinter.py:1149-1192 _report_evaluation) ------
     let msg_status = reporter.msg_status;
+    // _is_base_filestate is True only when NO module was linted -> no footer,
+    // score None (notes/09 §4.1). stats.statement == 0 -> early return, also
+    // no footer (§4.2).
     let score: Option<f64> = if !any_linted || stats.statements == 0 {
         None
-    } else if stats.fatal > 0 {
-        Some(0.0)
     } else {
-        let penalty = (5 * stats.error + stats.warning + stats.refactor + stats.convention) as f64;
-        Some((10.0 - penalty / stats.statements as f64 * 10.0).max(0.0))
+        // eval(default_evaluation): max(0, 0 if fatal else 10.0 - penalty/stmt*10)
+        let note = if stats.fatal > 0 {
+            0.0_f64
+        } else {
+            let penalty =
+                (5 * stats.error + stats.warning + stats.refactor + stats.convention) as f64;
+            (10.0 - penalty / stats.statements as f64 * 10.0).max(0.0)
+        };
+        Some(note)
     };
+
+    // Persistent stats: load the previous global_note (UNCONDITIONAL — only
+    // SAVING is gated by --persistent; -E disables both score and persistent).
+    // The footer suffix and the saved pickle both use the same base_name.
+    let base_name = last_base.clone();
+    let mut stats_proc = crate::stats::StatsProc::default();
+    let home = crate::stats::pylint_home();
+    let pdata = base_name
+        .as_ref()
+        .zip(home.as_ref())
+        .map(|(b, h)| crate::stats::pdata_path(h, b));
+
+    if let Some(note) = score {
+        let previous = pdata.as_ref().and_then(|p| stats_proc.load_global_note(p));
+        // msg = "Your code has been rated at {note:.2f}/10" (+ suffix)
+        let mut msg = format!("Your code has been rated at {}/10", fmt2(note));
+        if let Some(pnote) = previous {
+            // previous_stats truthiness: load_results returns an object whenever
+            // the file existed (global_note never None in practice). The suffix
+            // is printed whenever a stats file loaded.
+            msg.push_str(&format!(
+                " (previous run: {}/10, {})",
+                fmt2(pnote),
+                fmt2_signed(note - pnote)
+            ));
+        }
+        // EvaluationSection bytes (text_writer): "\n" + dashes + "\n" + msg +
+        // "\n\n". dash count = char-length of the FULL msg. Gated on
+        // config.score (display only).
+        if opts.score {
+            let dashes = "-".repeat(msg.chars().count());
+            reporter.write_raw(&format!("\n{dashes}\n{msg}\n\n"));
+        }
+    }
+    reporter.flush();
+
+    // Save the stats pickle when persistent (and something was linted). Done
+    // AFTER _report_evaluation so global_note is current (§5.5). Stats are zero
+    // when nothing linted -> no save (pdata is None then).
+    if opts.persistent {
+        if let (Some(p), Some(note)) = (&pdata, score) {
+            let mut by_msg: Vec<(String, u64)> =
+                reporter.by_msg.iter().map(|(k, v)| (k.clone(), *v)).collect();
+            by_msg.sort();
+            stats_proc.save(
+                p,
+                &crate::stats::StatsSnapshot {
+                    global_note: Some(note),
+                    statement: stats.statements,
+                    fatal: stats.fatal,
+                    error: stats.error,
+                    warning: stats.warning,
+                    refactor: stats.refactor,
+                    convention: stats.convention,
+                    info: stats.info,
+                    by_msg,
+                    modules_names: modules_names.clone(),
+                    module_count,
+                },
+            );
+        }
+    }
+
+    // ---- exit ladder (run.py:245-260) ----------------------------------
+    if opts.exit_zero {
+        return 0;
+    }
+    // any_fail_on_issues: any displayed symbol is in fail_on_symbols
+    let fail_on_hit = !fail_on_symbols.is_empty()
+        && reporter.by_msg.keys().any(|s| fail_on_symbols.contains(s));
+    if fail_on_hit {
+        return if msg_status != 0 { msg_status } else { 1 };
+    }
     match score {
-        None => msg_status,
-        Some(s) if s >= 10.0 => 0,
-        Some(_) => {
-            if msg_status != 0 {
+        Some(s) => {
+            if s >= opts.fail_under {
+                0
+            } else if msg_status != 0 {
                 msg_status
             } else {
                 1
             }
         }
+        None => msg_status,
     }
+}
+
+/// Python `f"{x:.2f}"`: correctly-rounded fixed-point, ties-to-even. Rust's
+/// `{:.2}` matches CPython's float repr rounding (both IEEE-754 round-half-
+/// to-even on the exact double).
+fn fmt2(x: f64) -> String {
+    format!("{x:.2}")
+}
+
+/// Python `f"{x:+.2f}"` — forced sign. Handles the -0.00 case identically
+/// (Rust prints "-0.00" for a negative-zero-rounding delta, matching CPython).
+fn fmt2_signed(x: f64) -> String {
+    format!("{x:+.2}")
 }
 
 /// Phase-1 work for one file: read, decode, parse (pylinter.get_ast /
@@ -1134,13 +1365,16 @@ fn lint_tree(
     }
 }
 
-/// PYLINT_HOME (pylint/constants.py): $PYLINT_HOME else the platform
+/// PYLINT_HOME (pylint/constants.py:100-108): $PYLINTHOME else the platform
 /// user-cache dir for "pylint" (macOS ~/Library/Caches/pylint, linux
-/// $XDG_CACHE_HOME/pylint or ~/.cache/pylint).
+/// $XDG_CACHE_HOME/pylint or ~/.cache/pylint). The env var is PYLINTHOME (no
+/// underscore); we also honor the legacy PYLINT_HOME for back-compat.
 fn pylint_home() -> String {
-    if let Ok(h) = std::env::var("PYLINT_HOME") {
-        if !h.is_empty() {
-            return h;
+    for var in ["PYLINTHOME", "PYLINT_HOME"] {
+        if let Ok(h) = std::env::var(var) {
+            if !h.is_empty() {
+                return h;
+            }
         }
     }
     let home = std::env::var("HOME").unwrap_or_default();

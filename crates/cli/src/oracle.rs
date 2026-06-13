@@ -55,7 +55,7 @@ fn embedded_script_path() -> std::io::Result<PathBuf> {
     Ok(path)
 }
 
-fn oracle_python() -> String {
+pub fn oracle_python() -> String {
     std::env::var("PRYLINT_PYTHON").unwrap_or_else(|_| "python3".to_string())
 }
 

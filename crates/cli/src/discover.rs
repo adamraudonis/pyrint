@@ -29,6 +29,11 @@ pub struct FileItem {
     pub filepath: String,
     /// True if this path was given directly as an argument.
     pub is_arg: bool,
+    /// expand_modules `basename`: the top-level argument's modname, propagated
+    /// to the argument itself AND every submodule discovered under it
+    /// (expand_modules.py:144,182). This is `FileState.base_name`, which drives
+    /// the PYLINT_HOME stats filename (notes/09 §5.2). For `pylint .` it is ".".
+    pub base: String,
 }
 
 pub struct DiscoverConfig {
@@ -341,6 +346,9 @@ pub fn expand_modules_fs(args: &[String], cfg: &DiscoverConfig) -> Vec<FileItem>
         path: String,
         is_arg: bool,
         is_ignored: bool,
+        /// expand_modules `basename` (per-argument modname), inherited by all
+        /// submodules of the argument; drives the stats filename.
+        base: String,
     }
     let mut result: IndexMap<String, Desc> = IndexMap::new();
 
@@ -353,6 +361,7 @@ pub fn expand_modules_fs(args: &[String], cfg: &DiscoverConfig) -> Vec<FileItem>
                     path: something.clone(),
                     is_arg: false,
                     is_ignored: true,
+                    base: String::new(),
                 },
             );
             continue;
@@ -392,12 +401,17 @@ pub fn expand_modules_fs(args: &[String], cfg: &DiscoverConfig) -> Vec<FileItem>
         // the dir isn't importable as a module name; emulate the two cases.
         let (is_namespace, is_directory) = spec_lookup(&modparts, &filepath, something);
 
+        // expand_modules `basename` field = `modname` (the per-arg modname),
+        // which for `pylint .` resolves to "." (modpath_from_file raises
+        // ImportError -> os.path.splitext(os.path.basename("."))[0] == ".").
+        let arg_base = if modname.is_empty() { something.clone() } else { modname.clone() };
         if !is_namespace {
             let e = result.entry(filepath.clone()).or_insert(Desc {
                 name: modname.clone(),
                 path: filepath.clone(),
                 is_arg: true,
                 is_ignored: false,
+                base: arg_base.clone(),
             });
             e.is_arg = true;
         }
@@ -421,6 +435,7 @@ pub fn expand_modules_fs(args: &[String], cfg: &DiscoverConfig) -> Vec<FileItem>
                             path: subfilepath,
                             is_arg: false,
                             is_ignored: true,
+                            base: String::new(),
                         },
                     );
                     continue;
@@ -442,6 +457,8 @@ pub fn expand_modules_fs(args: &[String], cfg: &DiscoverConfig) -> Vec<FileItem>
                         path: subfilepath,
                         is_arg: isarg,
                         is_ignored: false,
+                        // submodules inherit the argument's basename
+                        base: arg_base.clone(),
                     },
                 );
             }
@@ -462,6 +479,7 @@ pub fn expand_modules_fs(args: &[String], cfg: &DiscoverConfig) -> Vec<FileItem>
                 name: d.name,
                 filepath: d.path,
                 is_arg: d.is_arg,
+                base: d.base,
             })
         })
         .collect()

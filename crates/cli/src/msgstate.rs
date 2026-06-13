@@ -67,6 +67,17 @@ impl GlobalState {
         Ok(())
     }
 
+    /// CLI/rcfile `--enable=item` (callback_actions._EnableAction): package-
+    /// scope enable. Same expansion as disable (category/checker/all/symbol/
+    /// msgid/old-name). Errors stashed by the caller.
+    pub fn cli_enable(&mut self, item: &str) -> Result<(), ResolveError> {
+        let defs = get_messages_to_set(item, true)?;
+        for idx in defs {
+            self.state.insert(idx, true);
+        }
+        Ok(())
+    }
+
     pub fn enabled(&self, idx: MsgIdx) -> bool {
         *self.state.get(&idx).unwrap_or(&true)
     }
