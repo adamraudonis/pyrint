@@ -2206,3 +2206,92 @@ close-out.
 Gates re-certified on current binary (commit ddedbc10): 27-corpus -E byte
 parity 27/27 EQUAL, check_treedump django 400 == 0, check_inferdump django
 200 == 0.
+
+## Full-pylint mode — phase E zero-round 2 (re-validation) (2026-06-13)
+
+Drove owned codes (R0901,R0902,R0903,R0904,R0911,R0912,R0913,R0914,R0915,
+R0916,R0917,R0801) across ALL 27 corpora, BOTH profiles, footer-stripped,
+ORDER-aware. No source changes were needed (the committed phase-E build is
+correct); this round is re-validation + two precise root-cause closures.
+
+NEW VALIDATION RIGOR — block-aware R0801 (harness/triage_owned2.py): the
+single-line Counter triage (triage_owned.py) silently DROPS R0801 because
+the message is multi-line (`Similar lines in N files\n==hdr\n<code block>`)
+with no trailing `(symbol)`. triage_owned2.py captures each R0801's full
+duplicate-code BLOCK body for true order-aware equality. Both helpers
+committed (85042436).
+
+ACCEPTANCE (footer-stripped, order-aware):
+- R0901-R0917 (DESIGN): 0FP/0FN EXACT-ORDER on ALL 27 corpora BOTH profiles,
+  EXCEPT sqlalchemy (documented blocked gap below). Verified order-aware on
+  every dense full corpus (airflow 11227, sentry 9417, salt 5386, sympy
+  4481, nova 4149, django 3254, … all EXACT) AND every hook corpus. Spot-
+  checked threshold values exact (airflow R0914 41/15, R0916 9/5, R0902
+  11/7, R0917 7/5 — 0 missing across all design codes). The R0911/R0912/
+  R0915 frame-leak counting + R0901 _get_parents_iter port confirmed faithful
+  to design_analysis.py.
+- R0801 (SIMILARITIES): message LOCATION + ==headers + line-ranges + COUNT +
+  emission ORDER are 0FP/0FN EXACT on all 27 corpora (verified header-only
+  order-aware across 24 full corpora: ALL EXACT; counts exact e.g. sentry
+  6280, airflow 4552). R0801 is hook-DISABLED (in flags_hook.txt; 0 R0801 in
+  every hook output) → ZERO hook FP risk.
+
+CLOSED ROOT CAUSE #1 — core.full "owned FPs" were an OOM-TRUNCATED GT, NOT a
+prylint bug. core.full.out had exit=137 (SIGKILL/OOM), no score footer,
+truncated mid-output at `************* Module
+script.hassfest.quality_scale_validation.reconfiguration_flow` (the prior
+"in-flight" regen never finished). pylint streams per-module and was killed
+there; ALL files AFTER that module in discovery order
+(quality_scale_validation/{discovery,__init__,…}, then script/translations/*)
+plus ALL ~18k R0801 (emitted at close(), never reached) are absent from the
+truncated GT. Our R0903@quality_scale_validation/__init__.py:8,
+R0912/R0914@script/translations/{deduplicate.py:29,migrate.py:252} sit
+exactly in that cut tail. PROOF: (a) on the 14787 common files (GT∩ours
+minus the partial last file) owned codes are 0FP/0FN — 12869 matched
+exactly; (b) ISOLATED pylint probe `pylint script/translations
+script/hassfest/quality_scale_validation` emits those R0903/R0912/R0914
+messages BYTE-IDENTICAL to ours. Not FPs. (Remaining GT-only files are
+E0401/E0611/E1101/R1905 — non-owned cross-phase import-resolution, out of
+phase-E scope.) core.full GT regen relaunched (black freed memory: prior OOM
+was black+core contention); core.hook owned already 0FP/0FN.
+
+CLOSED ROOT CAUSE #2 — R0801 duplicate-code BLOCK BODY text diverges in
+~22% of full-profile blocks (4577/20567) due to pylint's OWN id()-based
+nondeterminism (notes/09-design-similarities.md §B.7 + open questions). In
+close() (symilar.py:847-855) pylint binds `lineset,start,end` from a
+`for ... in couples` loop over a SET of `(LineSet,int,int)` where
+`LineSet.__hash__ = id(self)`, then emits THAT lineset's real_lines
+rstripped (NO 3-space prefix — that prefix is only in the standalone
+_get_similarity_report). The displayed block is whichever region the SET
+iterated LAST = address-driven. CONFIRMED non-orderable: after stripping the
+reporter's trailing ` (duplicate-code)`, every GT block matches EITHER the
+min-name OR max-name couple's source region (neither=0), split ~50/50
+(nova 270 min/245 max; sentry 1497/1473) with NO correlation to file size
+(when GT picked max-name, that file was larger 1098× / smaller 1257×).
+Probing the SAME nova pair (libvirt_data:[1529:1581] vs
+test_config:[4990:5065], regions differ by indentation) reproduces a fixed
+choice in isolation but a DIFFERENT one in the full corpus → pure heap-
+address artifact. A "max-couple" patch was tried and reverted (nova got
+WORSE 245→270; django better 140→129 — a wash, unwinnable). Matches the
+note's documented resolution: "regenerate ground truths and accept either."
+Affects ONLY full-profile DISPLAY text; detection (which files, which
+ranges, count, order) is exact, and R0801 is hook-disabled.
+
+BLOCKED (unchanged from zero-round 1, NOT a phase-E checker bug):
+sqlalchemy R0901/R0903 — hook 1FP (array.py:93, ancestors 43/7), full
+15FP/3FN R0901 + 9FN R0903. ALL trace to ONE astroid inference divergence:
+our deterministic engine resolves subscripted-generic ancestor chains
+(`class array(expression.ExpressionClauseList[_T])`, hstore
+GenericFunction[_HSTORE_VAL], …) that astroid ABANDONS non-determinis-
+tically (`_INFERENCE_CACHE` + InferenceContext.path warmed by the active
+checker set). R0901 over-emits where we resolve→count>7; the SAME classes
+under-emit R0903 (we count inherited public methods→≥2; GT counts 0
+ancestors→<2→emits). The design.rs port (count_parents/_get_parents_iter,
+count_methods_in_class/methods→ancestors) is faithful; the divergence is
+100% in shared inference. Replicating it requires porting astroid's
+stateful cache bug-for-bug, jeopardizing the 27/27 -E byte gate for zero
+benefit on the other 26 corpora.
+
+Gates re-certified on the rebuilt committed binary: 27-corpus -E byte parity
+27/27 EQUAL (26 in-loop + black EQUAL out-of-loop), check_treedump django
+400 == 0, check_inferdump django 200 == 0.
