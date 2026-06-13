@@ -2646,3 +2646,78 @@ GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**
 django 200 = 0 differing files (0 lines). No source changes → no regression
 surface. Removed stray phase-E detached-finalizer artifact harness/finalize_e.sh
 (unreferenced).
+
+## Phase F zero-round 6 (independent re-validation + full astroid-mechanism dissection of the sole gap)
+
+Re-ran the entire owned-code audit (R0901-R0917, R0401, R0801, R17xx,
+C1804/C1805, W1113/W1116) across all 27 corpora × 2 profiles on the committed
+binary (clean working tree at zero-round 5; `cargo build --release` recompiled
+nothing). No source changes — owned codes are at their achievable best; this
+round independently re-proves the state AND dissects the sqlalchemy gap one
+inference layer deeper than prior rounds.
+
+RESULT — **52/54 combos: 0 FP / 0 FN, EXACT owned-line order.** Confirmed on the
+dense full captures: sentry 17712, airflow 17345, sympy 15511, salt 10753, nova
+8397, black 8804 (incl. all R0801 blocks), mypy 6345, zulip 6081, fastapi 5363,
+django 5111, pandas 5522. The 2 non-zero combos are the SAME two truncated-GT
+captures gt_integrity.py flags (and ONLY those two):
+- **sentry.hook** (exit=30, ends-on-bare-module-header): restricted to the 521
+  GT-reached files → **49/49, 0FP/0FN, EXACT** (check_owned_restricted.py).
+- **core.full** (exit=143 OOM SIGKILL before close()): restricted to 15234
+  GT-reached files → **12990/12990, 0FP/0FN, EXACT.** prylint completes (exit 30)
+  where pylint was killed.
+
+### sqlalchemy — sole genuine gap, FULL mechanism dissected (still BLOCKED)
+hook 1FP (array.py:93 R0901 43/7 — R0901 IS hook-enabled; the diff vs GT is
+exactly ONE sorted line), full 15FP/12FN (R0901×15 FP, R0901×3+R0903×9 FN), all
+R0901↔R0903 generic-base ancestor flips. This round traced the EXACT astroid
+mechanism, layer by layer, with 26 direct .venv-pylint probes (NOT a "nondeterm-
+inism" hand-wave — it is a *deterministic* astroid warm-cache cycle-guard
+artifact):
+- The class is `array(expression.ExpressionClauseList[_T])`. In the real corpus
+  walk pylint names sqlalchemy modules by PATH (`pylint .` from the repo root,
+  sqlalchemy rooted at `lib/`): `lib.sqlalchemy.sql.expression`, and the package
+  __init__ is cached under `lib.sqlalchemy.sql.__init__` (expand_modules's
+  `<pkg>.__init__` naming) so the bare-package key `lib.sqlalchemy.sql` resolves
+  only because the __init__ ALSO caches under the bare name.
+- `array.ancestors()` recursively walks `array → ExpressionClauseList[_T] →
+  OperatorExpression → ColumnElement[_T] → …`. Each subscripted-generic base is
+  a `Subscript` whose inference calls `ClassDef.getitem(_T)`
+  (scoped_nodes.py:2540) → `dunder_lookup.lookup(self,"__getitem__")` →
+  `_class_lookup` → `metaclass()`. For these classes `metaclass() is None`
+  (dunder_lookup.py:63-65 → AttributeInferenceError), so it falls to
+  `getattr("__class_getitem__")`, which needs `typing.Generic` reachable through
+  `ancestors()`. **Under the recursive ancestors walk** (InferenceContext.path
+  already loaded + warm `_INFERENCE_CACHE`), astroid's `ColumnElement.ancestors()`
+  re-entrantly returns 0 → `typing.Generic` (and its `__class_getitem__`) is NOT
+  reachable → `getattr("__class_getitem__")` raises AttributeInferenceError →
+  `getitem` raises **AstroidTypeError** → `_infer_subscript` raises
+  InferenceError → the base is dropped from `_inferred_bases` → the collapse
+  cascades up to `array` → 0 ancestors → R0903.
+- PROVED this is path/cache-state-driven, not structural: a FRESH
+  `ColumnElement.getitem(x)` returns OK and `ColumnElement.ancestors()` includes
+  `typing.Generic` (41 ancestors), but the SAME call inside the recursive
+  `array.ancestors()` collapses. prylint's pyast/pyinfer NAMING is correct
+  (strips `.__init__`, package=true — verified) and prylint matches astroid
+  byte-for-byte in ISOLATION on BOTH the non-generic-base collapse
+  (`class Sub(Plain[int])` → R0903 both) AND the genuinely-generic chain
+  (`Deep(Mid[G[_T]])` → resolves both). Only in the WARM full-corpus cache does
+  prylint's `ancestors_frame`/`infer_subscript`/`class_getitem` resolve the deep
+  generic chain (43 ancestors → R0901) where astroid's cycle-guarded recursion
+  collapses it.
+- The diff is therefore ENTIRELY in pyinfer's warm-cache InferenceContext.path
+  push/pop + `_INFERENCE_CACHE` keying through the recursive
+  subscript→getitem→ancestors path (design.rs count_parents/_get_parents_iter is
+  a faithful port — confirmed). It is BIDIRECTIONAL (array.py over-resolves;
+  selectable.py:211 under-resolves 32 vs 44), confirming it is emergent from the
+  global cache-warming ORDER, not one rule. Matching it bit-for-bit requires
+  altering the shared pyinfer cycle/path/cache machinery (the phase-1..17
+  domain), guarded by the INVIOLABLE -E 27-corpus byte gate (cardinal
+  infrastructure) and the 4 pyinfer-ZERO inferdump corpora
+  (django/pandas/sentry/core). Perturbing it for 1 FP on 1 corpus is the wrong
+  trade. Remains BLOCKED, confined to sqlalchemy's deep generic hierarchies;
+  no -E corpus leaks it (EGATE 27/27 EQUAL).
+
+GATES (re-certified this round): **-E 27-corpus byte parity 27/27 ALL EQUAL**;
+check_treedump django 400 = 0 differing; check_inferdump not required (pyinfer
+untouched, no source changes). Clean working tree — pure re-validation round.
