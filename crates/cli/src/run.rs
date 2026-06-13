@@ -56,6 +56,11 @@ struct ParsedFile {
     /// (full mode). Pure function of the raw token stream; the _elifs feed
     /// the AST walk (and leak across modules when R1732 disabled).
     refac_tokens: pycheckers::refactoring::RefacTokens,
+    /// SimilaritiesChecker readlines() of the file (full mode, R0801): the
+    /// raw real lines (with terminators, BOM-stripped for utf-8-sig, split on
+    /// \n/\r\n/\r) the LineSet stores. None when the checker isn't prepared;
+    /// empty Vec on a UnicodeDecodeError (matches append_stream's bail-out).
+    sim_lines: Option<Vec<String>>,
 }
 
 enum FileData {
@@ -193,6 +198,10 @@ pub fn run(opts: &RunOpts) -> i32 {
     // RefactoringChecker token scan (full mode): kept iff any R17xx enabled.
     let refac_prepared = prep.refac_kept;
     let refac_r1707 = prep.refac_r1707;
+    // SimilaritiesChecker (R0801) prepared: default --reports=n disables
+    // RP0801, so the checker is prepared iff R0801 is enabled
+    // (notes/09-design-similarities §B.1). Under -E R0801 is disabled.
+    let sim_prepared = !opts.errors_only && enabled_by_id("R0801");
 
     // ---- phase 1: parse all files (rayon, results in file order) ------
     phase_mark!(t0, "discover");
@@ -206,6 +215,7 @@ pub fn run(opts: &RunOpts) -> i32 {
                 misc_prepared,
                 refac_prepared,
                 refac_r1707,
+                sim_prepared,
             )
         })
         .collect();
@@ -401,6 +411,61 @@ pub fn run(opts: &RunOpts) -> i32 {
                             )
                         },
                     ));
+                    // ---- checker close() phase ----
+                    // reversed(prepare_checkers) order: "similarities" sorts
+                    // after "imports" alphabetically, so in REVERSED order
+                    // SimilaritiesChecker.close() (R0801) runs BEFORE
+                    // ImportsChecker.close() (R0401). Both attribute to the
+                    // LAST linted module (current_name) at line 1 col 0; equal
+                    // index entries keep push order under the stable merge
+                    // sort, so R0801 (pushed first) precedes R0401 in output.
+                    //
+                    // SimilaritiesChecker.close() (R0801 duplicate-code).
+                    if prep.sim_kept && k == 0 {
+                        let idx = store().by_msgid["R0801"];
+                        // close()-time enablement is CONFIG-level (line=None
+                        // path): per-file pragmas can't suppress here (they
+                        // dropped lines at collection time).
+                        let enabled = is_message_enabled(global, None, idx, None);
+                        let mut bodies: Vec<(usize, String)> = Vec::new();
+                        let (_dup, _total) =
+                            lint_run.similarities.close(&mut |nfiles, body| {
+                                bodies.push((nfiles, body));
+                            });
+                        if enabled && !bodies.is_empty() {
+                            if let Some(&(i, _)) =
+                                trees.iter().map(|(i, p)| (*i, p)).collect::<Vec<_>>().last()
+                            {
+                                let item = &items[i];
+                                // R0801 is a node-LESS message: module/abspath
+                                // = linter.current_name/current_file of the
+                                // LAST linted module (the raw FileItem name,
+                                // matching the cyclic-import R0401 attribution
+                                // below).
+                                let module = item.name.clone();
+                                let path = discover::absolute(&item.filepath)
+                                    .replacen(strip_prefix.as_str(), "", 1);
+                                let mut out = ModuleOut {
+                                    msgs: Vec::new(),
+                                    stats: Stats::default(),
+                                    linted: false,
+                                };
+                                for (nfiles, body) in bodies {
+                                    out.stats.count("R0801");
+                                    out.msgs.push(OutMsg {
+                                        module: module.clone(),
+                                        path: path.clone(),
+                                        line: 1,
+                                        col: 0,
+                                        msgid: "R0801",
+                                        symbol: "duplicate-code",
+                                        text: format!("Similar lines in {nfiles} files\n{body}"),
+                                    });
+                                }
+                                all.push((i, out));
+                            }
+                        }
+                    }
                     // ---- checker close() phase: R0401 cyclic-import
                     // (imports.py:484-490). Attributed to the last checked
                     // module; enablement is CONFIG-level (line=None path) —
@@ -571,6 +636,7 @@ fn parse_one(
     misc_prepared: bool,
     refac_prepared: bool,
     refac_r1707: bool,
+    sim_prepared: bool,
 ) -> FileData {
     // modutils.get_source_file: a .pyi argument resolves to the sibling .py
     // source when it exists (PY_SOURCE_EXTS order, prefer_stubs=False)
@@ -669,6 +735,19 @@ fn parse_one(
                     }
                 }
             }
+            // SimilaritiesChecker (R0801): process_module decodes the binary
+            // stream via file_encoding + readlines(). decode_source_raw
+            // already applies the cookie encoding + BOM strip for utf-8-sig
+            // and preserves \r\n/\r; readlines() then splits keepends. A
+            // decode failure -> empty lineset (UnicodeDecodeError bail-out).
+            let sim_lines = if sim_prepared {
+                Some(match pyast::decode_source_raw(&bytes, &abspath) {
+                    Some(raw) => pycheckers::similarities::readlines(&raw),
+                    None => Vec::new(),
+                })
+            } else {
+                None
+            };
             FileData::Parsed(Box::new(ParsedFile {
                 tree,
                 src,
@@ -678,6 +757,7 @@ fn parse_one(
                 fmt_msgs,
                 fixme_msgs,
                 refac_tokens,
+                sim_lines,
             }))
         }
         None => FileData::NeedsOracle,
@@ -799,6 +879,37 @@ fn lint_tree(
                                 .map(|&i| msgstore::def(i).template.to_string())
                                 .unwrap_or_default();
                             add(&mut fs, um.msgid, um.line, um.col as i64, text);
+                        }
+                    }
+                    // SimilaritiesChecker.process_module (R0801): collect this
+                    // module's LineSet (no per-module emission; close() at
+                    // end-of-run does the work). Runs only for pure_python,
+                    // non-skip-file modules — both guaranteed here (emod parsed
+                    // OK, !ignore_file). lineset.name = the .__init__-stripped
+                    // module name (== linter.current_name).
+                    if prep.sim_kept {
+                        if let (Some(lines), Some(mid)) = (p.sim_lines.clone(), emod) {
+                            let r0801_idx = store().by_msgid["R0801"];
+                            let import_lines =
+                                pycheckers::similarities::import_lines_of(engine, mid);
+                            let signature_lines =
+                                pycheckers::similarities::signature_lines_of(engine, mid);
+                            // lineset.name = linter.current_name = the RAW
+                            // FileItem name (NOT .__init__-stripped). When the
+                            // run target is `.` an __init__ module's name is
+                            // e.g. `tornado.__init__` and that is what appears
+                            // in the ==name:[s:e] header.
+                            let sim_name = item.name.clone();
+                            let is_line_enabled = |lineno: u32| -> bool {
+                                is_message_enabled(global, Some(&fs), r0801_idx, Some(lineno))
+                            };
+                            lint_run.similarities.process_module(
+                                &sim_name,
+                                lines,
+                                &import_lines,
+                                &signature_lines,
+                                &is_line_enabled,
+                            );
                         }
                     }
                     // 2b. TOKEN checkers in sorted-name order: format,

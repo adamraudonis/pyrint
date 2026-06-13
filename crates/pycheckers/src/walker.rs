@@ -220,6 +220,10 @@ pub struct Prepared {
     pub d_r0915: bool,
     pub d_r0916: bool,
     pub d_r0917: bool,
+    /// SimilaritiesChecker (R0801) prepared: default --reports=n -> RP0801
+    /// disabled, so prepared iff R0801 enabled. Gates per-module
+    /// process_module (lineset collection) + close() emission.
+    pub sim_kept: bool,
 }
 
 impl Prepared {
@@ -334,6 +338,7 @@ impl Prepared {
             d_r0915: enabled("R0915"),
             d_r0916: enabled("R0916"),
             d_r0917: enabled("R0917"),
+            sim_kept: full && enabled("R0801"),
         }
     }
 }
@@ -481,6 +486,7 @@ pub struct LintRun {
     pub chained: ChainedCompCk,
     pub refac: crate::refactoring::RefactoringCk,
     pub design: crate::design::DesignCk,
+    pub similarities: crate::similarities::SimilaritiesCk,
     pub format_state: FormatWalkState,
     pub caches: LintCaches,
 }
@@ -514,6 +520,7 @@ impl Default for LintRun {
             chained: ChainedCompCk,
             refac: crate::refactoring::RefactoringCk::default(),
             design: crate::design::DesignCk::default(),
+            similarities: crate::similarities::SimilaritiesCk::default(),
             format_state: FormatWalkState::default(),
             caches: LintCaches::default(),
         }
