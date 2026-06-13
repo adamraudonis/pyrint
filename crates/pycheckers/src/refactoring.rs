@@ -4157,12 +4157,17 @@ impl RefactoringCk {
                     return;
                 }
             }
-            // bail if Instance of set/frozenset
-            if let Value::Inst { cls, .. } = &ty {
-                let qn = eng.qname(*cls);
-                if qn == "builtins.set" || qn == "builtins.frozenset" {
-                    return;
-                }
+            // bail if the inferred value is a set/frozenset Instance. astroid:
+            // isinstance(_type, Instance) and qname in {set,frozenset}.
+            // Value::Inst covers set instances; the objects.FrozenSet proxy
+            // value (assumps in sympy) is qname builtins.frozenset.
+            let set_qn = match &ty {
+                Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(eng.qname(*cls)),
+                Value::FrozenSet { .. } => Some("builtins.frozenset".to_string()),
+                _ => None,
+            };
+            if matches!(set_qn.as_deref(), Some("builtins.set") | Some("builtins.frozenset")) {
+                return;
             }
         }
         let suggestion = format!(
