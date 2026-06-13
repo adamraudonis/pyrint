@@ -99,10 +99,20 @@ impl SimilaritiesCk {
             // NONDETERMINISTIC when the two regions' rstripped real lines
             // differ (confirmed: 3 PYTHONHASHSEED=0 pylint runs on pylfunc
             // disagree; notes/09-design-similarities §B.7 + open questions).
-            // Deterministic policy: emit the block from the couple whose
-            // ==header sorts FIRST (the region listed first in the message).
-            // For true copy-paste (identical rstripped text) any choice is
-            // byte-identical; this matches the pinned GT's majority choice.
+            // Policy: emit the block from the couple whose ==header sorts
+            // FIRST. For true copy-paste (identical rstripped text) any choice
+            // is byte-identical. When the two regions' rstripped real lines
+            // DIFFER (e.g. a trailing comment present in only one region, or a
+            // differing-length window), pylint shows whichever couple its
+            // `couples` SET iterated LAST — and LineSet.__hash__ == id(self),
+            // so the choice is keyed by heap-pointer hash and is UPSTREAM-
+            // NONDETERMINISTIC run-to-run (notes/09 §B.7 + open questions;
+            // confirmed: the GT's per-block choice splits ~evenly between the
+            // two header regions, django 82 first / 71 last, and neither a
+            // sorts-first nor sorts-last nor lineset-index rule matches it —
+            // it is irreproducible without CPython heap addresses). We adopt a
+            // stable sorts-first policy; the residual mismatches are pylint's
+            // own nondeterminism, not a prylint defect.
             if let Some((_, chosen)) =
                 headers.iter().min_by(|a, b| a.0.cmp(&b.0))
             {
