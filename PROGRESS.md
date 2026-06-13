@@ -2368,3 +2368,56 @@ is the clean parity target.
 
 Gates green: 27-corpus -E byte parity ALL EQUAL; check_treedump django 400 == 0;
 check_inferdump django 200 == 0.
+
+### Phase-F hook-profile parity table (harness/parity_table.sh)
+
+full = footer-included bytecmp; body = footer-stripped + crash-template
+normalized; footer = rating-line match; exit = gt==ours; FP = ours-only lines
+(cardinal sin); FN = GT-only lines (pre-existing checker coverage). FPs are ALL
+pre-existing (HEAD binary reproduces them — W1202 column offset, W4701 empty
+container name, F0002 crash on specific files, numpy/sqla/scikit inference
+divergences). Footer mismatches occur ONLY where FNs are numerous enough to
+shift the rounded 2-decimal score (the formula + statement count are correct;
+the inputs differ by the missing messages). Exit codes match on EVERY corpus.
+
+```
+CORPUS         full  body  footer exit       FP     FN
+pylfunc        N     N     N      30==30     9      56
+werkzeug       Y     Y     Y      30==30     0      0
+tornado        N     N     Y      31==31     0      4
+rich           Y     Y     Y      30==30     0      0
+scrapy         Y     Y     Y      30==30     0      0
+botocore       N     N     Y      30==30     0      7
+celery         N     N     Y      30==30     0      1
+fastapi        Y     Y     Y      30==30     0      0
+pydantic       N     N     Y      30==30     0      25
+pip            N     N     Y      31==31     1      7
+twisted        N     N     N      30==30     0      132
+matplotlib     N     N     Y      30==30     0      34
+mypy           N     N     Y      30==30     0      16
+ansible        N     N     N      30==30     0      1656
+scikit-learn   N     N     Y      30==30     2      5
+sqlalchemy     N     N     Y      30==30     4      45
+numpy          N     N     Y      30==30     4      10
+zulip          Y     Y     Y      30==30     0      0
+pandas         N     N     Y      30==30     0      21
+nova           N     N     N      30==30     0      726
+sympy          N     N     Y      31==31     0      72
+django         N     N     Y      30==30     0      11
+(salt, airflow, sentry, core, black: hook GT regenerating — same pattern)
+```
+
+5 corpora FULLY byte-identical (werkzeug, rich, scrapy, fastapi, zulip);
+18/22 footer-exact; exit-code parity 22/22; FP=0 on 17/22 (the rest pre-existing).
+
+### Full-profile (no-disable) status
+Exit codes match (verified pylfunc/werkzeug/tornado/rich/scrapy/fastapi); footer
++ body diverge because full mode (a) is R0801-nondeterministic and (b) exercises
+the unimplemented R17xx/R09xx checkers — FN dominated by R0801 (rich 1150,
+fastapi 9030 dup-code lines we don't emit). NOT a clean parity target (documented).
+
+### Adam-hook replica
+Test repo /tmp/hookrepo (pkg + .pylintrc init-hook + disable=missing-* + score)
+invoked with file args: pylint vs prylint BYTE-IDENTICAL (messages + 7.14/10
+footer + exit 12); config discovered, init-hook ran + forwarded 1 sys.path entry,
+stats file = last-arg basename (pkg.sub.b_1.stats).
