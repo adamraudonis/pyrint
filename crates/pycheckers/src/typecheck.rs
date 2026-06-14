@@ -548,6 +548,57 @@ fn string_distance(seq1: &str, seq2: &str) -> usize {
     prev[m]
 }
 
+/// astroid FunctionModel.attributes() — the special attributes that a
+/// FunctionDef.getattr resolves (objectmodel.py FunctionModel, py3.12).
+const FUNCTION_MODEL_ATTRS: &[&str] = &[
+    "__annotations__", "__call__", "__class__", "__closure__", "__code__",
+    "__defaults__", "__delattr___", "__dict__", "__dir__", "__doc__",
+    "__eq__", "__format__", "__get__", "__getattribute__", "__globals__",
+    "__gt__", "__hash__", "__init__", "__kwdefaults__", "__lt__",
+    "__module__", "__name__", "__ne__", "__new__", "__qualname__",
+    "__reduce__", "__reduce_ex__", "__repr__", "__setattr___", "__sizeof__",
+    "__str__", "__subclasshook__",
+];
+
+/// FunctionDef.getattr (scoped_nodes.py:1047-1060): the attribute resolves
+/// iff it is in the function's instance_attrs OR in FunctionModel's special
+/// attributes. (A function's `locals` are NOT consulted by getattr.)
+fn func_getattr_found(eng: &Engine, func: GNode, attrname: &str) -> bool {
+    if FUNCTION_MODEL_ATTRS.contains(&attrname) {
+        return true;
+    }
+    // instance_attrs assigned to the function object (e.g. `func.x = ...`).
+    let sym = eng.sym(attrname);
+    eng.instance_attrs_of(func).contains_key(&sym)
+}
+
+/// FunctionDef.display_type (scoped_nodes.py:954-962) via FunctionDef.type
+/// (scoped_nodes.py:908-917): "Method" iff the first formal arg is named
+/// "self" AND the function's parent scope is a ClassDef; else "Function".
+fn funcdef_display_type(eng: &Engine, func: GNode) -> &'static str {
+    let md = eng.md(func.m);
+    let args_id = match &md.tree.nodes[func.n.idx()].kind {
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
+        _ => return "Function",
+    };
+    let first_is_self = match &md.tree.nodes[args_id.idx()].kind {
+        NodeKind::Arguments(a) => match a.args.first() {
+            Some(&arg) => match &md.tree.nodes[arg.idx()].kind {
+                NodeKind::AssignName { name } => md.tree.s(*name) == "self",
+                _ => false,
+            },
+            None => false,
+        },
+        _ => false,
+    };
+    drop(md);
+    if first_is_self && is_classdef(eng, eng.scope(func)) {
+        "Method"
+    } else {
+        "Function"
+    }
+}
+
 /// _emit_no_member const-False IF/IfExp guard (typecheck.py:508-529): walk
 /// parents from `node` up to its scope; if any enclosing `if`/IfExp has a test
 /// that safe-infers to a const whose bool_value is False and `node`'s subtree
@@ -668,6 +719,22 @@ impl TypeCk {
             .all(|v| matches!(v, Value::Inst { .. } | Value::ExcInst { .. }));
         if all_instances && (cx.is_enabled)("E1101", e1101_line) {
             self.emit_no_member_instances(cx, node, &attrname, e1101_line);
+            return;
+        }
+
+        // Homogeneous all-Function/Method owner case. A FunctionDef owner's
+        // getattr (scoped_nodes.py:1047-1060) resolves only instance_attrs +
+        // the FunctionModel special attributes; anything else raises
+        // NotFoundError -> no-member. The _emit_no_member FunctionDef gate
+        // (typecheck.py:458-461) suppresses decorated/abstract functions.
+        let all_funcs = inferred.iter().all(|v| matches!(
+            v,
+            Value::Node(g) if eng.kind_is(*g, |k| matches!(
+                k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+            ))
+        ));
+        if all_funcs && (cx.is_enabled)("E1101", e1101_line) {
+            self.emit_no_member_functions(cx, node, &attrname, e1101_line);
             return;
         }
 
@@ -834,6 +901,146 @@ impl TypeCk {
                 ),
             );
         }
+    }
+
+    /// E1101 no-member for the homogeneous all-Function/Method owner case
+    /// (TypeChecker.visit_attribute restricted to FunctionDef owners).
+    /// owner.getattr resolves instance_attrs + FunctionModel special attrs;
+    /// _emit_no_member suppresses decorated/abstract functions and applies the
+    /// AttributeError-handler / const-False-if guards.
+    fn emit_no_member_functions(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        attrname: &str,
+        line: u32,
+    ) {
+        let eng = cx.eng;
+        let expr = match &eng.md(node.m).tree.nodes[node.n.idx()].kind {
+            NodeKind::Attribute { expr, .. } => GNode { m: node.m, n: *expr },
+            _ => return,
+        };
+        let flow = eng.infer(expr, &Ctx::new());
+        let inferred = flow.vals.clone();
+        if inferred.is_empty() {
+            return;
+        }
+        let mut missing: Vec<GNode> = Vec::new();
+        let mut found = false;
+        for owner in &inferred {
+            let func = match owner {
+                Value::Node(g) if eng.kind_is(*g, |k| matches!(
+                    k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
+                )) => *g,
+                _ => continue,
+            };
+            // _is_owner_ignored: a FunctionDef qname never collides with the
+            // ignored-classes / ignored-modules defaults -> never ignored.
+            // owner.getattr(attrname): instance_attrs + FunctionModel.
+            if func_getattr_found(eng, func, attrname) {
+                found = true;
+                break;
+            }
+            // NotFoundError path: _emit_no_member gates for a FunctionDef.
+            if Self::emit_no_member_function_gate(cx, node, func) {
+                missing.push(func);
+            }
+        }
+        if found {
+            return;
+        }
+        let col = u::col_offset(eng, node) as i64;
+        let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
+        for func in missing {
+            if !done.insert(func) {
+                continue;
+            }
+            let owner_name = eng.node_name(func).unwrap_or_default();
+            let display = funcdef_display_type(eng, func);
+            let hint = Self::func_similar_names_hint(eng, func, attrname);
+            cx.emit_node(
+                "E1101",
+                line,
+                col,
+                u::format_template(
+                    "%s %r has no %r member%s",
+                    &[display, &owner_name, attrname, &hint],
+                ),
+            );
+        }
+    }
+
+    /// _emit_no_member (typecheck.py:429-531) FunctionDef-owner gates: the
+    /// AttributeError-handler guard, the decorator/abstract escape (also the
+    /// NotFoundError decorator escape, typecheck.py:1135-1139), and the
+    /// const-False IF/IfExp guard.
+    fn emit_no_member_function_gate(cx: &mut WalkCx, node: GNode, func: GNode) -> bool {
+        let eng = cx.eng;
+        let caches = cx.caches;
+        if u::node_ignores_exception(eng, caches, node, "AttributeError") {
+            return false;
+        }
+        // isinstance(owner, FunctionDef) and (owner.decorators or
+        // owner.is_abstract()): return False. is_abstract() uses its astroid
+        // defaults pass_is_abstract=True (so an empty/pass-only body — every
+        // c-extension stub function from the snapshot — counts as abstract),
+        // any_raise=False.
+        if !decorator_nodes_pub(eng, func).is_empty() || eng.is_abstract(func, true, false) {
+            return false;
+        }
+        if guarded_by_const_false_if(eng, caches, node) {
+            return false;
+        }
+        true
+    }
+
+    /// _get_nomember_msgid_hint similar-name hint for a Function owner
+    /// (_node_names generic branch: the function's locals.keys()).
+    fn func_similar_names_hint(eng: &Engine, func: GNode, attrname: &str) -> String {
+        const DISTANCE: usize = 1;
+        const MAX_CHOICES: usize = 1;
+        let mut names: Vec<String> = Vec::new();
+        {
+            let md = eng.md(func.m);
+            let locals = md.locals.borrow();
+            if let Some(l) = locals.get(&func.n) {
+                for sym in l.keys() {
+                    names.push(eng.sname(*sym));
+                }
+            }
+        }
+        let attr_len = attrname.chars().count();
+        let mut possible: Vec<(String, usize)> = Vec::new();
+        for name in &names {
+            if name == attrname {
+                continue;
+            }
+            if attr_len.abs_diff(name.chars().count()) > DISTANCE {
+                continue;
+            }
+            let distance = string_distance(attrname, name);
+            if distance <= DISTANCE {
+                possible.push((name.clone(), distance));
+            }
+        }
+        possible.sort_by(|a, b| a.1.cmp(&b.1));
+        let mut picked: Vec<String> =
+            possible.into_iter().take(MAX_CHOICES).map(|(n, _)| n).collect();
+        picked.sort();
+        if picked.is_empty() {
+            return String::new();
+        }
+        let names_hint = if picked.len() == 1 {
+            format!("'{}'", picked[0])
+        } else {
+            let head = picked[..picked.len() - 1]
+                .iter()
+                .map(|n| format!("'{n}'"))
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("one of {} or '{}'", head, picked[picked.len() - 1])
+        };
+        format!("; maybe {names_hint}?")
     }
 
     /// _is_owner_ignored (typecheck.py:108-131) for an Instance owner with the
