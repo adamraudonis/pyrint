@@ -3254,7 +3254,14 @@ impl VarsChecker {
     }
 
     /// visit_arguments (variables.py:2188-2190): per-argument `# type:`
-    /// comments feed _type_annotation_names
+    /// comments feed _type_annotation_names. astroid's `type_comment_args`
+    /// (rebuilder.py:567-574) is built ONLY from posonlyargs + args +
+    /// kwonlyargs — the vararg/kwarg type comments (`# type: *T` / `**T`,
+    /// which CPython attaches to vararg.type_comment / kwarg.type_comment)
+    /// are EXCLUDED. So a `*`-prefixed payload (the only way a comment can
+    /// belong to *args/**kwargs) must be dropped, not stripped-and-used:
+    /// otherwise its inner name spuriously marks an import as used (black
+    /// comments6.py: `# type: *Any` on *args wrongly suppressed W0611 Any).
     pub fn visit_arguments(&mut self, cx: &mut WalkCx, node: GNode) {
         let payloads: Vec<String> = {
             let md = cx.eng.md(node.m);
@@ -3266,7 +3273,11 @@ impl VarsChecker {
                 .collect()
         };
         for p in payloads {
-            self.store_type_annotation_string(p.trim().trim_start_matches('*').trim());
+            let t = p.trim();
+            if t.starts_with('*') {
+                continue;
+            }
+            self.store_type_annotation_string(t);
         }
     }
 
