@@ -414,6 +414,45 @@ fn is_other_node(k: &NodeKind) -> bool {
 pub struct StringCk;
 
 impl StringCk {
+    /// visit_joinedstr -> _check_interpolation (strings.py:408-417):
+    /// W1309 f-string-without-interpolation. Skip when the JoinedStr's parent
+    /// is a TemplateStr/FormattedValue (a nested f-string inside a format
+    /// spec; TemplateStr is py3.14 t-strings, absent on 3.12), or when any of
+    /// its values is a FormattedValue (i.e. it has interpolation). Otherwise
+    /// the f-string is constant-only -> emit on the JoinedStr node.
+    pub fn visit_joinedstr(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        // parent is FormattedValue -> return (e.g. an f-string used as a
+        // format spec of another FormattedValue).
+        if let Some(p) = eng.parent(node) {
+            if eng.kind_is(p, |k| matches!(k, NodeKind::FormattedValue { .. })) {
+                return;
+            }
+        }
+        let values = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::JoinedStr { values } => values.clone(),
+                _ => return,
+            }
+        };
+        // any value is a FormattedValue -> has interpolation -> return.
+        for v in &values {
+            if matches!(
+                eng.md(node.m).tree.nodes[v.idx()].kind,
+                NodeKind::FormattedValue { .. }
+            ) {
+                return;
+            }
+        }
+        cx.emit_node(
+            "W1309",
+            u::lineno(eng, node),
+            u::col_offset(eng, node) as i64,
+            "Using an f-string that does not have any interpolated variables".to_string(),
+        );
+    }
+
     /// visit_binop (strings.py:251-405)
     pub fn visit_binop(&mut self, cx: &mut WalkCx, node: GNode) {
         let eng = cx.eng;

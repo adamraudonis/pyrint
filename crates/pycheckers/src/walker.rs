@@ -183,6 +183,9 @@ pub struct Prepared {
     pub strconst_concat: bool,
     /// StringConstantChecker visit_const: redundant-u-string-prefix (W1406)
     pub strconst_u: bool,
+    /// StringFormatChecker visit_joinedstr: f-string-without-interpolation
+    /// (W1309)
+    pub str_joinedstr: bool,
     /// EllipsisChecker visit_const: unnecessary-ellipsis (W2301)
     pub ellipsis_const: bool,
     /// MatchStatementChecker visit_matchas: match-class-bind-self (R1905)
@@ -319,6 +322,7 @@ impl Prepared {
             recom_const: enabled("C0209"),
             strconst_concat: enabled("W1404"),
             strconst_u: enabled("W1406"),
+            str_joinedstr: enabled("W1309"),
             ellipsis_const: enabled("W2301"),
             match_bind_self: enabled("R1905"),
             implbool_call: enabled("C1802"),
@@ -1311,6 +1315,11 @@ impl Walker<'_> {
                     crate::string_const::visit_tuple(cx, g);
                 }
             }
+            Tag::JoinedStr => {
+                if self.prep.str_joinedstr {
+                    self.strings.visit_joinedstr(cx, g);
+                }
+            }
             Tag::Other => {}
         }
         // ---- children ----
@@ -1462,6 +1471,7 @@ enum Tag {
     List,
     Tuple,
     MatchAs,
+    JoinedStr,
     Other,
 }
 
@@ -1524,6 +1534,7 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::List { .. } => Tag::List,
         NodeKind::Tuple { .. } => Tag::Tuple,
         NodeKind::MatchAs { .. } => Tag::MatchAs,
+        NodeKind::JoinedStr { .. } => Tag::JoinedStr,
         _ => Tag::Other,
     }
 }
