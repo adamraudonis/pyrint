@@ -783,6 +783,9 @@ impl Walker<'_> {
                 if self.prep.dep_import {
                     crate::deprecated::stdlib_visit_import(cx, g);
                 }
+                // full-profile order: VariablesChecker.visit_import LAST
+                // (no-name-in-module / E0611). Gated on cx.full inside.
+                self.vars.visit_import(cx, g);
             }
             Tag::ImportFrom => {
                 self.imp.visit_importfrom(cx, g);

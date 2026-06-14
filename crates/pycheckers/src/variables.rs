@@ -1713,6 +1713,48 @@ impl VarsChecker {
     /// Scoped to the relative-import-resolves-to-empty-module case: `from .
     /// import X` in a non-package module loaded by path resolves to astroid's
     /// bootstrap empty module (name='', file='<?>'), so pylint's
+    /// visit_import (variables.py:2096-2117) — E0611 no-name-in-module for
+    /// `import a.b.c`. For each dotted name: infer parts[0] to a Module, then
+    /// _check_module_attrs(node, module, parts[1:]).
+    pub fn visit_import(&mut self, cx: &mut WalkCx, node: GNode) {
+        if !cx.full {
+            return;
+        }
+        let eng = cx.eng;
+        let md = eng.md(node.m);
+        let names: Vec<String> = match &md.tree.nodes[node.n.idx()].kind {
+            NodeKind::Import { names } => {
+                names.iter().map(|&(n, _)| md.tree.s(n).to_string()).collect()
+            }
+            _ => return,
+        };
+        drop(md);
+        if u::is_from_fallback_block(eng, node) {
+            return;
+        }
+        if u::in_type_checking_block(eng, cx.caches, node) {
+            return;
+        }
+        if let Some(p) = eng.parent(node) {
+            if eng.kind_is(p, |k| matches!(k, NodeKind::If { .. })) && u::is_sys_guard(eng, p) {
+                return;
+            }
+        }
+        let line = u::lineno(eng, node);
+        let col = u::col_offset(eng, node).max(0) as i64;
+        for name in &names {
+            let parts: Vec<&str> = name.split('.').collect();
+            // module = next(_infer_name_module(node, parts[0])); ResolveError
+            // -> continue; not a Module -> continue.
+            let root = match eng.do_import_module(node, Some(parts[0])) {
+                Ok(m) => m,
+                Err(_) => continue,
+            };
+            let rest: Vec<String> = parts[1..].iter().map(|s| s.to_string()).collect();
+            self.check_module_attrs(cx, node, root, &rest, line, col);
+        }
+    }
+
     /// visit_importfrom (variables.py:2119-2144) — E0611 no-name-in-module.
     /// Full _check_module_attrs port: resolve the module path, then verify
     /// each imported name exists via Module.getattr (NotFoundError -> E0611).
