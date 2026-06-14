@@ -1614,8 +1614,139 @@ impl ClassCk {
                 }
             }
         }
-        // W0213 implicit-flag-alias burn: is_subtype_of only
-        let _ = eng.is_subtype_of(ancestor, "enum.IntFlag", None);
+        // implicit-flag-alias (W0213): ancestor is a subtype of enum.IntFlag.
+        if eng.is_subtype_of(ancestor, "enum.IntFlag", None) {
+            self.check_implicit_flag_alias(cx, node);
+        }
+    }
+
+    /// class_checker.py:956-993 — W0213 implicit-flag-alias. Insertion order
+    /// matters: Python defaultdicts preserve first-seen order, which drives
+    /// the emit order (per overlap value, then per assignment node).
+    fn check_implicit_flag_alias(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let cname = eng.node_name(node).unwrap_or_default();
+        // assignments: int value -> list of AssignName GNodes (preorder).
+        // `for assign_name in node.nodes_of_class(AssignName):
+        //    match assign_name.parent: case Assign(value=object(value=int())):`
+        // insertion order = first-seen value.
+        let mut assign_keys: Vec<i64> = Vec::new();
+        let mut assignments: FxHashMap<i64, Vec<GNode>> = FxHashMap::default();
+        let assign_names = crate::basicerr::nodes_of_class(
+            eng,
+            node,
+            |k| matches!(k, NodeKind::AssignName { .. }),
+            |_| false,
+        );
+        for an in assign_names {
+            let Some(parent) = eng.parent(an) else { continue };
+            let value_node = {
+                let md = eng.md(parent.m);
+                match &md.tree.nodes[parent.n.idx()].kind {
+                    NodeKind::Assign { value, .. } => Some(*value),
+                    _ => None,
+                }
+            };
+            let Some(vn) = value_node else { continue };
+            // object(value=int()): the Assign value must be a Const int.
+            // bool is an int subclass in Python, so True/False match too.
+            let ival: Option<i64> = {
+                let md = eng.md(parent.m);
+                match &md.tree.nodes[vn.idx()].kind {
+                    NodeKind::Const(ConstValue::Int(pyast::tree::IntValue::Small(i))) => Some(*i),
+                    NodeKind::Const(ConstValue::Bool(b)) => Some(*b as i64),
+                    _ => None,
+                }
+            };
+            let Some(value) = ival else { continue };
+            if !assignments.contains_key(&value) {
+                assign_keys.push(value);
+            }
+            assignments.entry(value).or_default().push(an);
+        }
+
+        // bit_flags: bit position -> set of flags (insertion-ordered).
+        // `for flag in assignments` iterates assignments in insertion order.
+        let mut bit_order: Vec<u32> = Vec::new();
+        let mut bit_flags: FxHashMap<u32, Vec<i64>> = FxHashMap::default();
+        for &flag in &assign_keys {
+            if flag < 0 {
+                // bin() of a negative is "-0b..."; pylint's bit scan over
+                // reversed(bin(flag)) would still find '1' chars but the
+                // mypy/socket flags are all non-negative. Guard to avoid
+                // surprising behavior; pylint would scan the magnitude bits.
+            }
+            let mut bit = 0u32;
+            let mut v = flag;
+            // enumerate set bits of `flag` (pylint scans reversed(bin(flag))).
+            while v != 0 {
+                if v & 1 == 1 {
+                    if !bit_flags.contains_key(&bit) {
+                        bit_order.push(bit);
+                    }
+                    let set = bit_flags.entry(bit).or_default();
+                    if !set.contains(&flag) {
+                        set.push(flag);
+                    }
+                }
+                v = ((v as u64) >> 1) as i64;
+                bit += 1;
+            }
+        }
+
+        // overlaps: conflict value -> list of source values (insertion order).
+        let mut overlap_keys: Vec<i64> = Vec::new();
+        let mut overlaps: FxHashMap<i64, Vec<i64>> = FxHashMap::default();
+        for &bit in &bit_order {
+            let mut flags = bit_flags.get(&bit).cloned().unwrap_or_default();
+            flags.sort_unstable();
+            if flags.is_empty() {
+                continue;
+            }
+            let source = flags[0];
+            for &conflict in &flags[1..] {
+                if !overlaps.contains_key(&conflict) {
+                    overlap_keys.push(conflict);
+                }
+                overlaps.entry(conflict).or_default().push(source);
+            }
+        }
+
+        // Report (per overlap value, then per assignment node).
+        for &overlap in &overlap_keys {
+            let sources = overlaps.get(&overlap).cloned().unwrap_or_default();
+            for &assignment_node in assignments.get(&overlap).unwrap_or(&Vec::new()) {
+                let aname = eng.node_name(assignment_node).unwrap_or_default();
+                let overlap_str = format!("<{cname}.{aname}: {overlap}>");
+                let sources_str = sources
+                    .iter()
+                    .map(|&source| {
+                        let sname = assignments
+                            .get(&source)
+                            .and_then(|v| v.first())
+                            .and_then(|&g| eng.node_name(g))
+                            .unwrap_or_default();
+                        format!(
+                            "<{cname}.{sname}: {source}> ({overlap} & {source} = {})",
+                            overlap & source
+                        )
+                    })
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                // template: "Flag member %(overlap)s shares bit positions
+                // with %(sources)s" — named %s substitutions of pre-built
+                // strings (no repr).
+                let text = format!(
+                    "Flag member {overlap_str} shares bit positions with {sources_str}"
+                );
+                cx.emit_node(
+                    "W0213",
+                    u::msg_line(eng, assignment_node),
+                    u::msg_col(eng, assignment_node),
+                    text,
+                );
+            }
+        }
     }
 
     /// _check_typing_final (class_checker.py:1024-1043) — W subclassed-final
