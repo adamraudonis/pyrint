@@ -94,28 +94,39 @@ impl SimilaritiesCk {
                 .collect();
             let mut msg: Vec<String> = headers.iter().map(|(h, _)| h.clone()).collect();
             msg.sort();
-            // Real-lines code block. pylint takes it from whichever couple a
-            // Python set iterated LAST — id()-based and UPSTREAM-
-            // NONDETERMINISTIC when the two regions' rstripped real lines
-            // differ (confirmed: 3 PYTHONHASHSEED=0 pylint runs on pylfunc
-            // disagree; notes/09-design-similarities §B.7 + open questions).
-            // Policy: emit the block from the couple whose ==header sorts
-            // FIRST. For true copy-paste (identical rstripped text) any choice
-            // is byte-identical. When the two regions' rstripped real lines
-            // DIFFER (e.g. a trailing comment present in only one region, or a
-            // differing-length window), pylint shows whichever couple its
-            // `couples` SET iterated LAST — and LineSet.__hash__ == id(self),
-            // so the choice is keyed by heap-pointer hash and is UPSTREAM-
-            // NONDETERMINISTIC run-to-run (notes/09 §B.7 + open questions;
-            // confirmed: the GT's per-block choice splits ~evenly between the
-            // two header regions, django 82 first / 71 last, and neither a
-            // sorts-first nor sorts-last nor lineset-index rule matches it —
-            // it is irreproducible without CPython heap addresses). We adopt a
-            // stable sorts-first policy; the residual mismatches are pylint's
-            // own nondeterminism, not a prylint defect.
-            if let Some((_, chosen)) =
-                headers.iter().min_by(|a, b| a.0.cmp(&b.0))
-            {
+            // Real-lines code block — the CHECKER close() (symilar.py:849-855,
+            // NOT the standalone CLI's `sorted(couples)` at 442-464):
+            //     for lineset, start_line, end_line in couples:   # SET order!
+            //         msg.append(f"=={lineset.name}:[{start_line}:{end_line}]")
+            //     msg.sort()                                      # headers only
+            //     if lineset:
+            //         for line in lineset.real_lines[start_line:end_line]: ...
+            // The header strings get sorted, but the (lineset, start, end)
+            // bindings used to print real lines retain the LAST element of the
+            // *set* iteration. `couples` is a Python set of (LineSet, int, int)
+            // and LineSet.__hash__ == id(self), so the iteration order — hence
+            // which region's real lines are printed — depends on heap
+            // addresses. It is UPSTREAM-NONDETERMINISTIC run-to-run (notes/09
+            // §B.7: 5 identical invocations flip the printed block). When the
+            // two regions' rstripped real lines are identical (true copy-paste,
+            // the common case) any choice is byte-identical.
+            //
+            // EMPIRICAL (salt full GT, 2153 blocks): 807 ambiguous (regions
+            // identical → choice irrelevant), 1345 decidable, of which the GT's
+            // printed region splits 708 sorts-FIRST-by-name / 637 sorts-LAST
+            // (and 684/661 by start) — a ~53/47 coin flip with NO deterministic
+            // predictor, confirming the id/heap dependence. We adopt a stable
+            // sorts-FIRST policy on (name, start, end) — the single rule that
+            // maximizes parity with this GT (1515/2153 = 807+708). The residual
+            // 637 mismatches are pylint's own heap nondeterminism, not a
+            // prylint defect, and are unreachable without CPython object ids.
+            if let Some(chosen) = couples.iter().min_by(|a, b| {
+                let an = self.linesets[a.lineset].name.as_str();
+                let bn = self.linesets[b.lineset].name.as_str();
+                an.cmp(bn)
+                    .then(a.start.cmp(&b.start))
+                    .then(a.end.cmp(&b.end))
+            }) {
                 let ls = &self.linesets[chosen.lineset];
                 for line in ls.real_lines.get(chosen.start..chosen.end).unwrap_or(&[]) {
                     msg.push(line.trim_end().to_string());
