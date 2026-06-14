@@ -1713,17 +1713,16 @@ impl VarsChecker {
     /// Scoped to the relative-import-resolves-to-empty-module case: `from .
     /// import X` in a non-package module loaded by path resolves to astroid's
     /// bootstrap empty module (name='', file='<?>'), so pylint's
-    /// _check_module_attrs reports E0611 for every imported name (the empty
-    /// module has none of them). The general dotted-package E0611 path is not
-    /// yet ported; restricting to the empty module keeps the check
-    /// false-positive-free (no getattr-parity dependence).
+    /// visit_importfrom (variables.py:2119-2144) — E0611 no-name-in-module.
+    /// Full _check_module_attrs port: resolve the module path, then verify
+    /// each imported name exists via Module.getattr (NotFoundError -> E0611).
     pub fn visit_importfrom(&mut self, cx: &mut WalkCx, node: GNode) {
         if !cx.full {
             return;
         }
         let eng = cx.eng;
         let md = eng.md(node.m);
-        let (modname, level, names): (String, Option<u32>, Vec<String>) =
+        let (modname, _level, names): (String, Option<u32>, Vec<String>) =
             match &md.tree.nodes[node.n.idx()].kind {
                 NodeKind::ImportFrom { modname, level, names } => (
                     md.tree.s(*modname).to_string(),
@@ -1733,11 +1732,6 @@ impl VarsChecker {
                 _ => return,
             };
         drop(md);
-        // Only the empty-resolution relative-import case (level>=1, empty modname).
-        if modname.is_empty() && level.map(|l| l >= 1).unwrap_or(false) {
-        } else {
-            return;
-        }
         // analyse_fallback_blocks default False: skip fallback ImportError blocks.
         if u::is_from_fallback_block(eng, node) {
             return;
@@ -1751,37 +1745,109 @@ impl VarsChecker {
                 return;
             }
         }
-        // module = node.do_import_module(name_parts[0]); name_parts = ''.split('.')
-        // = [''] -> do_import_module(''). AstroidBuildingError -> return.
-        let mid = match eng.do_import_module(node, Some("")) {
+        let line = u::lineno(eng, node);
+        let col = u::col_offset(eng, node).max(0) as i64;
+        // name_parts = node.modname.split("."); module = do_import_module(parts[0]).
+        // AstroidBuildingError -> return. (do_import_module resolves the full
+        // relative/absolute modname; we then walk parts[1:] via getattr.)
+        let name_parts: Vec<&str> = modname.split('.').collect();
+        let mid = match eng.do_import_module(node, Some(name_parts[0])) {
             Ok(m) => m,
             Err(_) => return,
         };
-        // The resolved module must be astroid's empty bootstrap module.
-        let (resolved_name, is_empty_mod) = {
-            let rmd = eng.md(mid);
-            (rmd.name.clone(), rmd.name.is_empty() && rmd.file == "<?>")
+        // _check_module_attrs(node, module, name_parts[1:]): traverse the
+        // remaining dotted module path. NotFoundError on a part -> E0611 at
+        // that part, then stop.
+        let parts_rest: Vec<String> = name_parts[1..].iter().map(|s| s.to_string()).collect();
+        let module = match self.check_module_attrs(cx, node, mid, &parts_rest, line, col) {
+            Some(m) => m,
+            None => return,
         };
-        if !is_empty_mod {
-            return;
-        }
-        let line = u::lineno(eng, node);
-        let col = u::col_offset(eng, node).max(0) as i64;
-        // _check_module_attrs(node, module, name.split('.')) for each imported name.
-        // The empty module has no locals, so every '*'-less name raises
-        // NotFoundError -> no-name-in-module. (ignored-modules default ()).
+        let eng = cx.eng;
+        let _ = eng;
+        // for name, _ in node.names: skip '*'; _check_module_attrs(node, module, name.split('.'))
         for name in &names {
             if name == "*" {
                 continue;
             }
-            // name.split('.')[0]; the empty module lacks it -> E0611.
-            cx.emit_node_rooted(
-                "E0611",
-                node,
-                line,
-                col,
-                u::format_template("No name %r in module %r", &[name, &resolved_name]),
-            );
+            let parts: Vec<String> = name.split('.').map(|s| s.to_string()).collect();
+            self.check_module_attrs(cx, node, module, &parts, line, col);
+        }
+    }
+
+    /// _check_module_attrs (variables.py:3179-3217): walk `module_names`
+    /// through `module` via getattr; on NotFoundError emit no-name-in-module
+    /// and return None. Returns the final Module if the chain resolves to one.
+    /// (ignored-modules default () -> is_module_ignored always False.)
+    fn check_module_attrs(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        start: pyinfer::value::ModId,
+        module_names: &[String],
+        line: u32,
+        col: i64,
+    ) -> Option<pyinfer::value::ModId> {
+        let mut module = Some(start);
+        for name in module_names {
+            if name == "__dict__" {
+                module = None;
+                break;
+            }
+            let cur = module?;
+            let sym = cx.eng.sym(name);
+            match cx.eng.module_getattr(cur, sym, false) {
+                Ok(vals) => {
+                    // module = module.getattr(name)[0]; if not Module -> next(infer)
+                    let first = vals.into_iter().next();
+                    module = self.nv_to_module(cx, first);
+                    if module.is_none() {
+                        // not isinstance(module, Module) after infer -> return None
+                        return None;
+                    }
+                }
+                Err(_) => {
+                    // NotFoundError (AttributeInferenceError) -> no-name-in-module.
+                    let modname = cx.eng.md(cur).name.clone();
+                    cx.emit_node_rooted(
+                        "E0611",
+                        node,
+                        line,
+                        col,
+                        u::format_template("No name %r in module %r", &[name, &modname]),
+                    );
+                    return None;
+                }
+            }
+        }
+        // InferenceError during infer -> handled as None in nv_to_module path.
+        module
+    }
+
+    /// Resolve a getattr result NV to a Module: if it is already a Module node
+    /// use it; else `next(module.infer())` and require the result be a Module.
+    /// Any non-Module / inference failure -> None (mirrors the isinstance gate).
+    fn nv_to_module(
+        &self,
+        cx: &mut WalkCx,
+        nv: Option<pyinfer::value::NV>,
+    ) -> Option<pyinfer::value::ModId> {
+        let eng = cx.eng;
+        let is_module_node = |g: GNode| -> bool {
+            g.n == pyast::NodeId::MODULE
+                && eng.kind_is(g, |k| matches!(k, NodeKind::Module(_)))
+        };
+        match nv? {
+            NV::N(g) if is_module_node(g) => Some(g.m),
+            NV::N(g) => {
+                // next(node.infer()): require a Module result.
+                match eng.infer_first(g, Some(&pyinfer::ctx::Ctx::new())) {
+                    Ok(Value::Node(m)) if is_module_node(m) => Some(m.m),
+                    _ => None,
+                }
+            }
+            NV::V(Value::Node(m)) if is_module_node(m) => Some(m.m),
+            NV::V(_) => None,
         }
     }
 
