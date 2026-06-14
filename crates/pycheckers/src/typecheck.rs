@@ -584,34 +584,17 @@ fn func_getattr_found(eng: &Engine, func: GNode, attrname: &str) -> bool {
     eng.instance_attrs_of(func).contains_key(&sym)
 }
 
-/// FunctionDef.display_type (scoped_nodes.py:954-962) via FunctionDef.type
-/// (scoped_nodes.py:908-917): "Method" iff the first formal arg is named
-/// "self" AND the function's parent scope is a ClassDef; else "Function".
+/// FunctionDef.display_type (scoped_nodes.py:953-961): "Method" iff
+/// `"method" in self.type` — true for FType Method, ClassMethod AND
+/// StaticMethod ("staticmethod" contains the substring "method"); only
+/// FType::Function maps to "Function". FunctionDef.type itself
+/// (scoped_nodes.py:1314-1387) is `"method"` whenever the function's frame is
+/// a ClassDef (NO first-arg-self check — a c-ext stub like socket.sendto with
+/// `args.args == None` is still a Method), refined by descriptor decorators.
 fn funcdef_display_type(eng: &Engine, func: GNode) -> &'static str {
-    let md = eng.md(func.m);
-    let args_id = match &md.tree.nodes[func.n.idx()].kind {
-        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.args,
-        _ => return "Function",
-    };
-    let first_is_self = match &md.tree.nodes[args_id.idx()].kind {
-        NodeKind::Arguments(a) => match a.args.first() {
-            Some(&arg) => match &md.tree.nodes[arg.idx()].kind {
-                NodeKind::AssignName { name } => md.tree.s(*name) == "self",
-                _ => false,
-            },
-            None => false,
-        },
-        _ => false,
-    };
-    drop(md);
-    // FunctionDef.type (scoped_nodes.py:914-916): `self.parent and
-    // isinstance(self.parent.scope(), ClassDef)`. The function node IS its
-    // own scope, so look at the ENCLOSING scope via its parent.
-    let parent_scope = eng.parent(func).map(|p| eng.scope(p));
-    if first_is_self && parent_scope.map(|s| is_classdef(eng, s)).unwrap_or(false) {
-        "Method"
-    } else {
-        "Function"
+    match eng.func_type(func) {
+        FType::Function => "Function",
+        _ => "Method",
     }
 }
 
@@ -1338,8 +1321,9 @@ impl TypeCk {
                 found = true;
                 break;
             }
-            // NotFoundError path: _emit_no_member gates for a FunctionDef.
-            if Self::emit_no_member_function_gate(cx, node, func) {
+            // NotFoundError path: _emit_no_member gates for a FunctionDef /
+            // BoundMethod owner.
+            if Self::emit_no_member_function_gate(cx, node, func, method_proxy) {
                 missing.push((func, method_proxy));
             }
         }
@@ -1347,16 +1331,23 @@ impl TypeCk {
             return;
         }
         let col = u::col_offset(eng, node) as i64;
+        // Final dedup (typecheck.py:1184-1208): `actual = owner` (not an
+        // Instance here), keyed on object identity. A bare FunctionDef owner is
+        // a singleton AST node, so two inferences of it collapse to one message
+        // (dedup by GNode). A BoundMethod/UnboundMethod owner is a FRESH astroid
+        // object per inference, so two inferred copies are DISTINCT in the set
+        // and each emits — e.g. `socket.sendto.called` infers to two distinct
+        // BoundMethod objects -> two no-member messages. Method-proxy owners are
+        // therefore NOT deduped by func GNode.
         let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
         for (func, method_proxy) in missing {
-            if !done.insert(func) {
+            if !method_proxy && !done.insert(func) {
                 continue;
             }
             let owner_name = eng.node_name(func).unwrap_or_default();
             // (Un)BoundMethod is an astroid Proxy with no display_type
             // override -> it proxies to the wrapped FunctionDef.display_type
-            // (scoped_nodes.py:954-962), same as a bare FunctionDef owner.
-            let _ = method_proxy;
+            // (scoped_nodes.py:953-961), same as a bare FunctionDef owner.
             let display = funcdef_display_type(eng, func);
             let hint = Self::func_similar_names_hint(eng, func, attrname);
             cx.emit_node(
@@ -1371,22 +1362,41 @@ impl TypeCk {
         }
     }
 
-    /// _emit_no_member (typecheck.py:429-531) FunctionDef-owner gates: the
-    /// AttributeError-handler guard, the decorator/abstract escape (also the
-    /// NotFoundError decorator escape, typecheck.py:1135-1139), and the
-    /// const-False IF/IfExp guard.
-    fn emit_no_member_function_gate(cx: &mut WalkCx, node: GNode, func: GNode) -> bool {
+    /// _emit_no_member (typecheck.py:429-531) FunctionDef / BoundMethod owner
+    /// gates: the AttributeError-handler guard, the NotFoundError decorator
+    /// escape (typecheck.py:1133-1139 — `isinstance(owner, (FunctionDef,
+    /// BoundMethod)) and owner.decorators`), the FunctionDef-only abstract/
+    /// decorator escape in `_emit_no_member` (typecheck.py:458-461 —
+    /// `isinstance(owner, FunctionDef) and (owner.decorators or
+    /// owner.is_abstract())`), and the const-False IF/IfExp guard.
+    ///
+    /// `method_proxy` is True when the owner is an (Un)BoundMethod rather than
+    /// a bare FunctionDef. A method-proxy owner is NOT a `nodes.FunctionDef`,
+    /// so the FunctionDef-only `is_abstract()` suppression does NOT apply to it
+    /// (only the decorator escape, which BoundMethod proxies). This is what
+    /// makes `socket.sendto.called` (an empty c-ext stub method — abstract via
+    /// pass_is_abstract, but NOT decorated) correctly report no-member.
+    fn emit_no_member_function_gate(
+        cx: &mut WalkCx,
+        node: GNode,
+        func: GNode,
+        method_proxy: bool,
+    ) -> bool {
         let eng = cx.eng;
         let caches = cx.caches;
         if u::node_ignores_exception(eng, caches, node, "AttributeError") {
             return false;
         }
-        // isinstance(owner, FunctionDef) and (owner.decorators or
-        // owner.is_abstract()): return False. is_abstract() uses its astroid
-        // defaults pass_is_abstract=True (so an empty/pass-only body — every
-        // c-extension stub function from the snapshot — counts as abstract),
-        // any_raise=False.
-        if !decorator_nodes_pub(eng, func).is_empty() || eng.is_abstract(func, true, false) {
+        let has_decorators = !decorator_nodes_pub(eng, func).is_empty();
+        // NotFoundError decorator escape (applies to FunctionDef AND BoundMethod).
+        if has_decorators {
+            return false;
+        }
+        // FunctionDef-only abstract/decorator escape in _emit_no_member.
+        // is_abstract() uses astroid defaults pass_is_abstract=True (so an
+        // empty/pass-only body — every c-extension stub — counts as abstract),
+        // any_raise=False. NOT applied to a BoundMethod owner (not a FunctionDef).
+        if !method_proxy && eng.is_abstract(func, true, false) {
             return false;
         }
         if guarded_by_const_false_if(eng, caches, node) {
