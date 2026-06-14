@@ -1049,10 +1049,41 @@ sorted couples (`sorted(couples)` — LineSet `__lt__` by name), report lines
 
 # Open questions
 
-- R0801 real-lines block nondeterminism (B.7): decide prylint policy
-  (suggest: emit the SECOND lineset's block — matched 3/5 observed runs —
-  or better, regenerate ground truths and accept either; flag corpora
-  where the two regions' rstripped text differs).
+- R0801 real-lines block nondeterminism (B.7): RESOLVED as far as
+  possible. prylint adopts the stable sorts-FIRST-on-(name,start,end)
+  policy (similarities.rs close()), which is the parity-maximizing rule.
+  FULL-PROFILE SALT CEILING (measured against a freshly regenerated,
+  UNCORRUPTED GT — the prior salt.full.out was truncated mid-close(),
+  see below): 2153 R0801 blocks total, message count / `==file:[a:b]`
+  headers / block ORDER / module attribution (pkg/rpm/build.py, the last
+  linted module) / score footer (6.26/10) / exit (30) ALL byte-identical;
+  1523/2153 (70.7%) blocks fully byte-identical incl. body; 630 differ
+  ONLY in which region's real lines are printed — these are CPython
+  heap-address-dependent (couples is a set of (LineSet,int,int) with
+  LineSet.__hash__==id(self)). The 630 count itself shifts run-to-run
+  (was ~637 against the old GT), confirming irreducible upstream
+  nondeterminism. Not a prylint defect; unreachable without CPython ids.
+- GROUND-TRUTH INTEGRITY (salt full): the salt.full.out GT was found
+  TRUNCATED (67701 lines, no footer, no R0801, exit-file said 30) — the
+  previous capture was killed during the O(n^2) R0801 close() phase
+  (~1890s clean; the old run hit a kill before close finished). This
+  produced 324 PHANTOM FPs in triage (R0401 cyclic-import et al. that GT
+  simply had not emitted yet). Regenerated via gt_iso.sh salt full →
+  114584 lines, footer present, 2153 R0801. gt_integrity.py only flags
+  exit 143/137 or bare-module-header tails; it MISSED this truncation
+  (footer-absent + R0801-absent on a full-profile run is a stronger
+  signal — consider adding: full-profile .out with zero R0801 AND no
+  "Your code has been rated" => SUSPECT).
+- E1101 union-owner message ORDER is ALSO upstream-nondeterministic:
+  typecheck.py:1185 iterates `missingattr` (a set of (owner,name) with
+  astroid-node id-hash). salt tests/eventlisten.py:116 SaltEvent vs
+  MasterEvent order flips run-to-run; same root cause as R0801. The 4
+  salt/channel/server.py:3880/3882 E1101 (_FakePusher/_BrokenPusher on
+  self.pushers) are a genuine cross-module instance-attr inference FN
+  (those classes live in tests/* and assign `ch.pushers=[_FakePusher()]`
+  on MasterPubServerChannel instances; prylint does not aggregate the
+  cross-module instance_attrs union). Deep pyinfer work, low reward
+  (4 msgs, themselves order-nondeterministic).
 - CPython str-hash sum: confirm acceptance of non-bit-identical collision
   behavior with a non-siphash 64-bit hash, or port siphash13 with
   PYTHONHASHSEED=0 secret (straightforward; hash input is the str's
