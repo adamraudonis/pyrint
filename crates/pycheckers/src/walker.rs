@@ -63,6 +63,7 @@ pub struct Prepared {
     pub basic_kept: bool,
     /// BasicChecker.visit_call gate: W0123|W0122|E0111|E0119|W0101
     pub basic_call: bool,
+    pub basicerr_call: bool,
     /// visit_assert: W0129|W0199
     pub basic_assert: bool,
     /// visit_assign: W0127|W0128
@@ -269,6 +270,7 @@ impl Prepared {
                 "W0134", "W0150", "W0199", "E0111", "E0119",
             ]),
             basic_call: any(&["W0123", "W0122", "E0111", "E0119", "W0101"]),
+            basicerr_call: enabled("E0110"),
             basic_assert: any(&["W0129", "W0199"]),
             basic_assign: any(&["W0127", "W0128"]),
             basic_for: enabled("W0128"),
@@ -983,6 +985,9 @@ impl Walker<'_> {
             Tag::Call => {
                 if self.prep.basic_call {
                     self.basic.visit_call(cx, g);
+                }
+                if self.prep.basicerr_call {
+                    self.basicerr.visit_call(cx, g);
                 }
                 self.dataclass.visit_call(cx, g);
                 self.fmt(cx, g);

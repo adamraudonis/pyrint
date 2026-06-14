@@ -1450,60 +1450,12 @@ impl ClassCk {
         if tc::class_is_abstract(cx.caches, eng, node) {
             return;
         }
-        // utils.unimplemented_abstract_methods (utils.py:945-994):
-        // reversed(mro()); last definition along the walk wins
-        let mro = match eng.mro(node, None) {
-            Ok(m) => m,
-            Err(_) => return, // ResolveError -> {}
+        // utils.unimplemented_abstract_methods (utils.py:945-994), strict
+        // is_abstract callback (W0223): pass_is_abstract=False.
+        let visited = match unimplemented_abstract_methods(cx, node, AbstractCb::Strict) {
+            Some(v) => v,
+            None => return, // ResolveError -> {}
         };
-        let mut visited: indexmap::IndexMap<String, GNode> = indexmap::IndexMap::new();
-        for &ancestor in mro.iter().rev() {
-            let values: Vec<(String, GNode)> = {
-                let md = eng.md(ancestor.m);
-                let l = md.locals.borrow();
-                match l.get(&ancestor.n) {
-                    Some(map) => map
-                        .iter()
-                        .filter_map(|(k, v)| v.first().map(|&g| (eng.sname(*k), g)))
-                        .collect(),
-                    None => Vec::new(),
-                }
-            };
-            for (obj_name, obj) in values {
-                let mut inferred: Option<GNode> = Some(obj);
-                if eng.kind_is(obj, |k| matches!(k, NodeKind::AssignName { .. })) {
-                    match u::safe_infer(eng, cx.caches, obj) {
-                        None => {
-                            visited.shift_remove(&obj_name);
-                            continue;
-                        }
-                        Some(v) if v.is_uninferable() => {
-                            // safe_infer returned Uninferable -> falsy
-                            visited.shift_remove(&obj_name);
-                            continue;
-                        }
-                        Some(Value::Node(g)) if is_funcdef(eng, g) => {
-                            inferred = Some(g);
-                        }
-                        Some(_) => {
-                            // not a FunctionDef
-                            visited.shift_remove(&obj_name);
-                            inferred = None;
-                        }
-                    }
-                }
-                if let Some(g) = inferred {
-                    if is_funcdef(eng, g) {
-                        let abstract_ = func_is_abstract_strict(cx, g);
-                        if abstract_ {
-                            visited.insert(obj_name.clone(), g);
-                        } else if visited.contains_key(&obj_name) {
-                            visited.shift_remove(&obj_name);
-                        }
-                    }
-                }
-            }
-        }
         let mut methods: Vec<(String, GNode)> =
             visited.iter().map(|(k, v)| (k.clone(), *v)).collect();
         methods.sort_by(|a, b| a.0.cmp(&b.0));
@@ -3832,6 +3784,87 @@ fn locals_contains_name(eng: &Engine, scope: GNode, name: &str) -> bool {
     let md = eng.md(scope.m);
     let l = md.locals.borrow();
     l.get(&scope.n).map(|m| m.contains_key(&sym)).unwrap_or(false)
+}
+
+/// is_abstract callback selector for unimplemented_abstract_methods.
+#[derive(Clone, Copy)]
+pub enum AbstractCb {
+    /// W0223: FunctionDef.is_abstract(pass_is_abstract=False).
+    Strict,
+    /// default (utils.unimplemented_abstract_methods): decorated_with(ABC_METHODS).
+    AbcDecorated,
+}
+
+pub const ABC_METHODS: &[&str] = &[
+    "abc.abstractproperty",
+    "abc.abstractmethod",
+    "abc.abstractclassmethod",
+    "abc.abstractstaticmethod",
+];
+
+fn abstract_cb(cx: &mut WalkCx, func: GNode, cb: AbstractCb) -> bool {
+    match cb {
+        AbstractCb::Strict => func_is_abstract_strict(cx, func),
+        AbstractCb::AbcDecorated => tc::decorated_with(cx.eng, func, ABC_METHODS),
+    }
+}
+
+/// utils.unimplemented_abstract_methods (utils.py:945-994): reversed(mro());
+/// last definition along the walk wins. Returns None on ResolveError (mro fail).
+pub fn unimplemented_abstract_methods(
+    cx: &mut WalkCx,
+    node: GNode,
+    cb: AbstractCb,
+) -> Option<indexmap::IndexMap<String, GNode>> {
+    let eng = cx.eng;
+    let mro = eng.mro(node, None).ok()?;
+    let mut visited: indexmap::IndexMap<String, GNode> = indexmap::IndexMap::new();
+    for &ancestor in mro.iter().rev() {
+        let values: Vec<(String, GNode)> = {
+            let md = eng.md(ancestor.m);
+            let l = md.locals.borrow();
+            match l.get(&ancestor.n) {
+                Some(map) => map
+                    .iter()
+                    .filter_map(|(k, v)| v.first().map(|&g| (eng.sname(*k), g)))
+                    .collect(),
+                None => Vec::new(),
+            }
+        };
+        for (obj_name, obj) in values {
+            let mut inferred: Option<GNode> = Some(obj);
+            if eng.kind_is(obj, |k| matches!(k, NodeKind::AssignName { .. })) {
+                match u::safe_infer(eng, cx.caches, obj) {
+                    None => {
+                        visited.shift_remove(&obj_name);
+                        continue;
+                    }
+                    Some(v) if v.is_uninferable() => {
+                        visited.shift_remove(&obj_name);
+                        continue;
+                    }
+                    Some(Value::Node(g)) if is_funcdef(eng, g) => {
+                        inferred = Some(g);
+                    }
+                    Some(_) => {
+                        visited.shift_remove(&obj_name);
+                        inferred = None;
+                    }
+                }
+            }
+            if let Some(g) = inferred {
+                if is_funcdef(eng, g) {
+                    let abstract_ = abstract_cb(cx, g, cb);
+                    if abstract_ {
+                        visited.insert(obj_name.clone(), g);
+                    } else if visited.contains_key(&obj_name) {
+                        visited.shift_remove(&obj_name);
+                    }
+                }
+            }
+        }
+    }
+    Some(visited)
 }
 
 /// astroid FunctionDef.is_abstract(pass_is_abstract=False) (W0223 callback)

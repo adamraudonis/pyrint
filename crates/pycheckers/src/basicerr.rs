@@ -24,6 +24,18 @@ fn is_funcdef(eng: &Engine, g: GNode) -> bool {
 fn is_classdef(eng: &Engine, g: GNode) -> bool {
     eng.kind_is(g, |k| matches!(k, NodeKind::ClassDef(_)))
 }
+
+/// utils.node_frame_class: nearest enclosing ClassDef frame, or None.
+fn frame_class(eng: &Engine, node: GNode) -> Option<GNode> {
+    let mut klass = eng.frame(node);
+    loop {
+        if is_classdef(eng, klass) {
+            return Some(klass);
+        }
+        let p = eng.parent(klass)?;
+        klass = eng.frame(p);
+    }
+}
 fn is_lambda(eng: &Engine, g: GNode) -> bool {
     eng.kind_is(g, |k| matches!(k, NodeKind::Lambda(_)))
 }
@@ -213,6 +225,83 @@ impl BasicErrCk {
     /// visit_classdef — E0102 only
     pub fn visit_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
         self.check_redefinition(cx, "class", node);
+    }
+
+    /// visit_call (basic_error_checker.py:491-534) — E0110
+    /// abstract-class-instantiated. Instantiating a class whose metaclass is
+    /// abc.ABCMeta (or that inherits abc.ABC) while it still has unimplemented
+    /// abstract methods.
+    pub fn visit_call(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let func = match &eng.md(node.m).tree.nodes[node.n.idx()].kind {
+            NodeKind::Call { func, .. } => GNode { m: node.m, n: *func },
+            _ => return,
+        };
+        // infer_all(node.func): list(func.infer()); InferenceError -> [].
+        let flow = eng.infer(func, &Ctx::new());
+        let inferred: Vec<Value> = if flow.err.is_some() {
+            Vec::new()
+        } else {
+            flow.vals
+        };
+        for v in inferred {
+            self.check_inferred_class_is_abstract(cx, node, &v);
+        }
+    }
+
+    fn check_inferred_class_is_abstract(&mut self, cx: &mut WalkCx, node: GNode, inferred: &Value) {
+        let eng = cx.eng;
+        let Value::Node(cls) = inferred else { return };
+        let cls = *cls;
+        if !is_classdef(eng, cls) {
+            return;
+        }
+        // klass = node_frame_class(node); if klass is inferred -> return.
+        if frame_class(eng, node) == Some(cls) {
+            return;
+        }
+        // _has_abstract_methods: unimplemented_abstract_methods (default ABC cb).
+        let has_abstract = crate::classes::unimplemented_abstract_methods(
+            cx,
+            cls,
+            crate::classes::AbstractCb::AbcDecorated,
+        )
+        .map(|m| !m.is_empty())
+        .unwrap_or(false);
+        if !has_abstract {
+            return;
+        }
+        let eng = cx.eng;
+        let name = eng.node_name(cls).unwrap_or_default();
+        let metaclass = eng.metaclass(cls, None);
+        match metaclass {
+            None => {
+                // Python 3.4 abc.ABC won't be detected by metaclass(); scan
+                // ancestors for abc.ABC.
+                for anc in eng.ancestors(cls, true, None) {
+                    if eng.qname(anc) == "abc.ABC" {
+                        self.emit_e0110(cx, node, &name);
+                        break;
+                    }
+                }
+            }
+            Some(m) => {
+                let q = eng.value_qname(&m).unwrap_or_default();
+                if q == "abc.ABCMeta" || q == "_py_abc.ABCMeta" {
+                    self.emit_e0110(cx, node, &name);
+                }
+            }
+        }
+    }
+
+    fn emit_e0110(&mut self, cx: &mut WalkCx, node: GNode, name: &str) {
+        let eng = cx.eng;
+        cx.emit_node(
+            "E0110",
+            u::msg_line(eng, node),
+            u::msg_col(eng, node),
+            u::format_template("Abstract class %r with abstract methods instantiated", &[name]),
+        );
     }
 
     /// visit_functiondef / visit_asyncfunctiondef
