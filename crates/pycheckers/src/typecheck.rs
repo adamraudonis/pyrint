@@ -854,7 +854,24 @@ impl TypeCk {
         if u::node_ignores_exception(eng, caches, node, "AttributeError") {
             return false;
         }
-        // is_super(owner) / type == "metaclass": an Instance is neither.
+        // is_super(owner) (utils.is_super, _emit_no_member typecheck.py:454):
+        // owner.name == "super" and owner.root().name == "builtins". When a
+        // `super(Cls, self)` call cannot build an astroid.objects.Super (e.g.
+        // a base argument that is Uninferable because it comes from an
+        // unresolvable import), astroid falls back to the default inference
+        // which yields a plain Instance of the builtins `super` class. For
+        // such an owner is_super() is True, so the no-member check is skipped.
+        if eng.qname(cls) == "builtins.super" {
+            return false;
+        }
+        // getattr(owner, "type", None) == "metaclass" (_emit_no_member
+        // typecheck.py:454): an Instance proxies `.type` to its class. A
+        // class whose `_class_type` is "metaclass" (subclass of `type`,
+        // e.g. `object.__new__(cls)` where cls is the metaclass-instance
+        // first arg of a metaclass `__call__`) suppresses the no-member.
+        if eng.class_type(cls) == "metaclass" {
+            return false;
+        }
         // owner_name && ignored_mixins && mixin_class_rgx.match(owner_name):
         // default mixin-class-rgx = ".*[Mm]ixin" and no-member is in
         // ignored-checks-for-mixins by default (ignored_mixins=True).
