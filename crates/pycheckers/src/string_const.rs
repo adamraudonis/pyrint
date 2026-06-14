@@ -329,7 +329,11 @@ pub fn visit_const(cx: &mut WalkCx, node: GNode) {
             return;
         }
     }
-    cx.emit_node(
+    // _detect_u_string_prefix emits with line/col only (NO node=), so pylint
+    // attributes it to linter.current_name (the raw FileItem name) rather than
+    // node.root().name. For a package __init__.py these differ ("X.__init__"
+    // vs the astroid-stripped "X") — use emit_nodeless to match.
+    cx.emit_nodeless(
         "W1406",
         u::lineno(eng, node),
         u::col_offset(eng, node) as i64,
