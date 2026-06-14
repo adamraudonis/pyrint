@@ -217,6 +217,67 @@ fn nv_const(eng: &Engine, nv: &NV) -> Option<ConstValue> {
     }
 }
 
+/// _get_slots_names per element (class_checker.py:1600-1610): a Const slot
+/// contributes its string value directly; anything else is safe_infer'd and
+/// kept only if the inferred value is a str.
+fn slot_name_of(eng: &Engine, caches: &u::LintCaches, elt: &NV) -> Option<String> {
+    // Const branch: the element is literally a Const node / SynthConst.
+    let is_const = match elt {
+        NV::N(g) | NV::V(Value::Node(g)) => {
+            eng.kind_is(*g, |k| matches!(k, NodeKind::Const(_)))
+        }
+        NV::V(Value::SynthConst(_)) => true,
+        _ => false,
+    };
+    if is_const {
+        return match nv_const(eng, elt) {
+            Some(ConstValue::Str(s)) => Some(s.to_string()),
+            _ => None,
+        };
+    }
+    // else: safe_infer(slot); keep .value if it is a str.
+    let inferred = match elt {
+        NV::N(g) => u::safe_infer(eng, caches, *g)?,
+        NV::V(v) => v.clone(),
+    };
+    match value_const(eng, &inferred) {
+        Some(ConstValue::Str(s)) => Some(s.to_string()),
+        _ => None,
+    }
+}
+
+/// Position of the inferred __slots__ value used as the W0244 anchor. A real
+/// container node carries its own (fromlineno, col_offset); a synthesized
+/// binop-concat container has no position, so pylint uses node.fromlineno
+/// (first child's line) with col_offset None -> 0.
+fn slots_node_pos(eng: &Engine, slots: &Value) -> (u32, i64) {
+    match slots {
+        Value::Node(g) => (u::lineno(eng, *g), u::col_offset(eng, *g) as i64),
+        Value::SynthSeq { elems, .. } => {
+            // fromlineno of a fresh container = first element's line.
+            let line = elems
+                .iter()
+                .find_map(|e| match e {
+                    Value::Node(g) => Some(u::lineno(eng, *g)),
+                    _ => None,
+                })
+                .unwrap_or(0);
+            (line, 0)
+        }
+        Value::SynthDict { items } => {
+            let line = items
+                .iter()
+                .find_map(|(k, _)| match k {
+                    Value::Node(g) => Some(u::lineno(eng, *g)),
+                    _ => None,
+                })
+                .unwrap_or(0);
+            (line, 0)
+        }
+        _ => (0, 0),
+    }
+}
+
 // ---------------------------------------------------------------------------
 // SpecialMethodsChecker (E0301-E0313)
 // ---------------------------------------------------------------------------
@@ -1828,9 +1889,107 @@ impl ClassCk {
             for elt in &elts {
                 self.check_slots_elt(cx, node, elt);
             }
-            // _check_redefined_slots: W0244 disabled (mro+slots walks
-            // cached) — skipped
+            self.check_redefined_slots(cx, node, slots, &elts);
         }
+    }
+
+    /// _check_redefined_slots (class_checker.py:1612-1636) — W0244.
+    /// Emits when this class's __slots__ redefines a slot already declared in
+    /// an ancestor. The message anchors on `slots_node` (the inferred
+    /// __slots__ value): a real Tuple/List node carries its own position; a
+    /// binop-concat result is a synthesized container with no position, so
+    /// pylint falls back to `node.fromlineno` (first child's line) and
+    /// `col_offset` None -> 0.
+    fn check_redefined_slots(&mut self, cx: &mut WalkCx, node: GNode, slots: &Value, elts: &[NV]) {
+        let eng = cx.eng;
+        // _get_slots_names(slots_list): Const.value, else safe_infer -> .value
+        let slots_names: Vec<String> = elts
+            .iter()
+            .filter_map(|elt| slot_name_of(eng, cx.caches, elt))
+            .collect();
+        if slots_names.is_empty() {
+            return;
+        }
+        // ancestors_slots_names = {slot.value for ancestor in
+        //   node.local_attr_ancestors("__slots__") for slot in ancestor.slots()}
+        // local_attr_ancestors = mro[1:] (fallback ancestors()) of `node`
+        // containing __slots__ in their locals; ancestor.slots() ==
+        // ancestor._all_slots (our all_slots) which returns None — yielding no
+        // names — whenever ANY class in the ancestor's MRO lacks __slots__
+        // (e.g. a `str`/`object` base). That None-collapse is load-bearing: it
+        // suppresses W0244 for subclasses of non-slotted classes.
+        let slots_sym = eng.sym("__slots__");
+        let ancestors: Vec<GNode> = match eng.mro(node, None) {
+            Ok(m) => m.into_iter().skip(1).collect(),
+            Err(_) => eng.ancestors(node, true, None),
+        };
+        let mut ancestors_slots_names: rustc_hash::FxHashSet<String> = Default::default();
+        for anc in &ancestors {
+            let anc = *anc;
+            if eng.class_locals_get(anc, slots_sym).is_empty() {
+                continue;
+            }
+            // ancestor.slots() (== _all_slots) collapses to None when ANY
+            // class in the ancestor's MRO (except object) lacks a local
+            // __slots__; replicate that None-test structurally (mro + local
+            // presence) and pull the actual names from each slotted class's
+            // own __slots__, avoiding the value-extraction inference that
+            // all_slots() performs.
+            let anc_mro = match eng.mro(anc, None) {
+                Ok(m) => m,
+                Err(_) => continue,
+            };
+            let mut none_collapse = false;
+            for c in &anc_mro {
+                if eng.qname(*c) == "builtins.object" {
+                    continue;
+                }
+                if eng.class_locals_get(*c, slots_sym).is_empty() {
+                    none_collapse = true;
+                    break;
+                }
+            }
+            if none_collapse {
+                continue;
+            }
+            for c in &anc_mro {
+                if eng.qname(*c) == "builtins.object" {
+                    continue;
+                }
+                for nm in self.classdef_slots_names(cx, *c) {
+                    ancestors_slots_names.insert(nm);
+                }
+            }
+        }
+        // redefined = ancestors ∩ slots_names; emit if non-empty.
+        let redefined: rustc_hash::FxHashSet<&String> = slots_names
+            .iter()
+            .filter(|n| ancestors_slots_names.contains(n.as_str()))
+            .collect();
+        if redefined.is_empty() {
+            return;
+        }
+        // args = [name for name in slots_names if name in redefined_slots]
+        let arg_list: Vec<&str> = slots_names
+            .iter()
+            .filter(|n| redefined.contains(*n))
+            .map(|s| s.as_str())
+            .collect();
+        let formatted = format!(
+            "[{}]",
+            arg_list
+                .iter()
+                .map(|s| format!("'{s}'"))
+                .collect::<Vec<_>>()
+                .join(", ")
+        );
+        let (line, col) = slots_node_pos(eng, slots);
+        cx.emit_node(
+            "W0244",
+            line,
+            col,
+            u::format_template("Redefined slots %s in subclass", &[&formatted]),
+        );
     }
 
     /// _check_slots_elt (class_checker.py:1638-1666) — E0236 + E0242
