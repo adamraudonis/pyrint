@@ -457,6 +457,75 @@ pub fn value_callable(eng: &Engine, v: &Value) -> bool {
     eng.value_callable(v, &Ctx::new())
 }
 
+/// _is_c_extension(module_node) (typecheck.py:798-803): a Module that is not a
+/// stdlib module and was not fully defined (astroid only fully-defines modules
+/// built from a .py source; .pyi stubs and synthetic/empty modules are not).
+fn is_c_extension_module(eng: &Engine, owner_mod: GNode) -> bool {
+    let md = eng.md(owner_mod.m);
+    // is_stdlib_module(name): name.split(".")[0] in sys.stdlib_module_names
+    let top = md.name.split('.').next().unwrap_or(&md.name);
+    let is_stdlib = eng.env.stdlib_module_names.iter().any(|m| m == top);
+    if is_stdlib {
+        return false;
+    }
+    // fully_defined(): file is not None and file.endswith(".py")
+    let fully_defined = md.file.ends_with(".py");
+    !fully_defined
+}
+
+/// _emit_no_member const-False IF/IfExp guard (typecheck.py:508-529): walk
+/// parents from `node` up to its scope; if any enclosing `if`/IfExp has a test
+/// that safe-infers to a const whose bool_value is False and `node`'s subtree
+/// is in that branch's body, the access is dead -> suppress.
+fn guarded_by_const_false_if(eng: &Engine, caches: &u::LintCaches, node: GNode) -> bool {
+    let scope = eng.scope(node);
+    let mut node_origin = node;
+    let mut parent = match eng.parent(node) {
+        Some(p) => p,
+        None => return false,
+    };
+    while parent != scope {
+        let kind_if = eng.kind_is(parent, |k| matches!(k, NodeKind::If { .. }));
+        let kind_ifexp = eng.kind_is(parent, |k| matches!(k, NodeKind::IfExp { .. }));
+        if kind_if || kind_ifexp {
+            let (test, body_ids, ifexp_body): (GNode, Vec<GNode>, Option<GNode>) = {
+                let md = eng.md(parent.m);
+                match &md.tree.nodes[parent.n.idx()].kind {
+                    NodeKind::If { test, body, .. } => (
+                        GNode { m: parent.m, n: *test },
+                        body.iter().map(|&b| GNode { m: parent.m, n: b }).collect(),
+                        None,
+                    ),
+                    NodeKind::IfExp { test, body, .. } => (
+                        GNode { m: parent.m, n: *test },
+                        Vec::new(),
+                        Some(GNode { m: parent.m, n: *body }),
+                    ),
+                    _ => unreachable!(),
+                }
+            };
+            if let Some(v) = u::safe_infer(eng, caches, test) {
+                if eng.value_const(&v).is_some() && eng.bool_value(&v, &Ctx::new()) == Some(false) {
+                    let in_branch = if kind_if {
+                        body_ids.contains(&node_origin)
+                    } else {
+                        ifexp_body == Some(node_origin)
+                    };
+                    if in_branch {
+                        return true;
+                    }
+                }
+            }
+        }
+        node_origin = parent;
+        parent = match eng.parent(parent) {
+            Some(p) => p,
+            None => break,
+        };
+    }
+    false
+}
+
 // ---------------------------------------------------------------------------
 // TypeChecker callbacks
 // ---------------------------------------------------------------------------
@@ -464,6 +533,160 @@ pub fn value_callable(eng: &Engine, v: &Value) -> bool {
 impl TypeCk {
     pub fn visit_module(&mut self, cx: &mut WalkCx, _g: GNode) {
         self.postponed_eval = u::is_postponed_evaluation_enabled(cx.eng, cx.mid);
+    }
+
+    /// TypeChecker.visit_attribute (typecheck.py:1067-1200) restricted to the
+    /// I1101 c-extension-no-member surface. E1101 (no-member) is disabled under
+    /// the target profiles, so the only message this can emit is
+    /// c-extension-no-member, which fires solely when the attribute owner is a
+    /// C-extension Module (a non-stdlib Module that astroid did not build from
+    /// a .py source). All other owner kinds would only ever produce the
+    /// disabled E1101, so we skip them entirely — but the control flow that
+    /// decides whether ANY owner has the attribute (which suppresses the
+    /// message) is preserved faithfully so we never over-emit.
+    pub fn visit_attribute(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        let (expr, attrname) = {
+            let md = eng.md(node.m);
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::Attribute { expr, attrname, .. } => {
+                    (GNode { m: node.m, n: *expr }, md.tree.s(*attrname).to_string())
+                }
+                _ => return,
+            }
+        };
+        // generated-members: default empty -> no patterns, skip the match.
+
+        // postponed-evaluation guard: skip attributes inside type annotations.
+        if self.postponed_eval && u::is_node_in_type_annotation_context(eng, node) {
+            return;
+        }
+
+        // inferred = list(node.expr.infer()); InferenceError -> return.
+        let flow = eng.infer(expr, &Ctx::new());
+        if flow.vals.is_empty() {
+            // empty generator that raised -> InferenceError
+            return;
+        }
+        let inferred = &flow.vals;
+
+        // ignore_on_opaque_inference (default True): if inference is ambiguous
+        // (any Unknown/Uninferable result), bail to avoid false positives.
+        let has_opaque = inferred.iter().any(|v| v.is_uninferable());
+        if has_opaque {
+            return;
+        }
+
+        // I1101 can only originate from a Module owner. If ANY inferred owner
+        // is NOT a Module, we cannot (without full E1101 inference) verify
+        // whether that owner has the attribute and would therefore make pylint
+        // `break` (suppressing the message). To stay strictly conservative and
+        // never over-emit, restrict to the homogeneous all-Module case.
+        let all_modules = inferred.iter().all(|v| matches!(
+            v,
+            Value::Node(g) if eng.kind_is(*g, |k| matches!(k, NodeKind::Module(_)))
+        ));
+        if !all_modules {
+            return;
+        }
+
+        // missing-attr owners we would report (only c-extension Modules here).
+        let mut missing: Vec<GNode> = Vec::new();
+        let mut found = false;
+        let sym = eng.sym(&attrname);
+        for owner in inferred {
+            let Value::Node(owner_mod) = owner else { continue };
+            let owner_mod = *owner_mod;
+            match eng.module_getattr(owner_mod.m, sym, false) {
+                Ok(_) => {
+                    // owner has the attribute -> stop, nothing to report.
+                    found = true;
+                    break;
+                }
+                Err(_) => {
+                    if Self::emit_no_member_module(eng, cx.caches, node, owner_mod, &attrname) {
+                        missing.push(owner_mod);
+                    }
+                }
+            }
+        }
+        if found {
+            return;
+        }
+        // emit for each distinct missing c-extension Module owner.
+        let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
+        for owner_mod in missing {
+            if !done.insert(owner_mod) {
+                continue;
+            }
+            if !is_c_extension_module(eng, owner_mod) {
+                continue;
+            }
+            let modname = eng.qname(owner_mod);
+            // I1101 template: "%s %r has no %r member%s, but source is
+            // unavailable. Consider adding this module to extension-pkg-
+            // allow-list ...". args = (display_type, name, attrname, hint);
+            // for a c-extension owner the hint is "" so the %s after "member"
+            // collapses, leaving the literal ", but source is unavailable..."
+            // tail that is part of the template.
+            cx.emit_node(
+                "I1101",
+                u::lineno(eng, node),
+                u::col_offset(eng, node) as i64,
+                u::format_template(
+                    "%s %r has no %r member%s, but source is unavailable. Consider adding this module to extension-pkg-allow-list if you want to perform analysis based on run-time introspection of living objects.",
+                    &["Module", &modname, &attrname, ""],
+                ),
+            );
+        }
+    }
+
+    /// _emit_no_member (typecheck.py:429-531) reduced to the Module-owner gates.
+    /// Returns true if the missing attribute on this Module owner should be
+    /// reported. The instance/class/super/function gates cannot apply to a
+    /// Module owner, so only the AttributeError-handler guard, the module
+    /// __getattr__ escape, the private-name-mangling check, and the
+    /// const-False IF/IfExp guard remain.
+    fn emit_no_member_module(
+        eng: &Engine,
+        caches: &u::LintCaches,
+        node: GNode,
+        owner_mod: GNode,
+        attrname: &str,
+    ) -> bool {
+        // node_ignores_exception(node, AttributeError)
+        if u::node_ignores_exception(eng, caches, node, "AttributeError") {
+            return false;
+        }
+        // Module owner: if it defines module-level __getattr__, attribute
+        // access can succeed at runtime -> suppress.
+        let ga = eng.sym("__getattr__");
+        if eng.module_getattr(owner_mod.m, ga, false).is_ok() {
+            return false;
+        }
+        // private-name mangling: attrname.startswith("_" + owner_name)
+        let owner_name = eng.qname(owner_mod);
+        // owner.name for a Module is its (qualified) name; pylint uses
+        // getattr(owner, "name", None) which for Module is the full dotted
+        // name. The mangling heuristic compares against that.
+        if !owner_name.is_empty() {
+            let prefix = format!("_{owner_name}");
+            if attrname.starts_with(&prefix) {
+                let unmangled = &attrname[prefix.len()..];
+                let usym = eng.sym(unmangled);
+                match eng.module_getattr(owner_mod.m, usym, false) {
+                    Ok(_) => return false,
+                    Err(_) => return true,
+                }
+            }
+        }
+        // const-False IF/IfExp guard: walk parents up to the node's scope; if
+        // guarded by an `if <const-false>:` (node in body) or IfExp body,
+        // suppress.
+        if guarded_by_const_false_if(eng, caches, node) {
+            return false;
+        }
+        true
     }
 
     /// W1113 keyword-arg-before-vararg (typecheck.py:1012-1024). Gated by the

@@ -48,6 +48,9 @@ pub struct Prepared {
     pub chained: bool,
     /// StdlibChecker (DeprecatedMixin) visit_attribute gate: W4906
     pub dep_attr: bool,
+    /// TypeChecker.visit_attribute gate (@only_required_for_messages):
+    /// no-member (E1101) | c-extension-no-member (I1101)
+    pub ty_attr: bool,
     /// visit_decorators gate: W4905
     pub dep_dec: bool,
     /// stdlib mixin visit_import/visit_importfrom gate: W4901 | W4904
@@ -253,6 +256,7 @@ impl Prepared {
             nested_min_max: enabled("W3301"),
             chained: enabled("W3601"),
             dep_attr: enabled("W4906"),
+            ty_attr: any(&["E1101", "I1101"]),
             dep_dec: enabled("W4905"),
             dep_import: any(&["W4901", "W4904"]),
             imports_call: any(&["W4901", "W4902", "W4903", "W4904"]),
@@ -1129,10 +1133,16 @@ impl Walker<'_> {
                 self.ty.visit_with(cx, g);
             }
             Tag::Attribute => {
+                // full order: ClassChecker, Misdesign(default), Format(default),
+                // Imports.visit_attribute, Stdlib(Deprecated).visit_attribute,
+                // TypeChecker.visit_attribute (last).
                 self.classes.visit_attribute(cx, g);
                 self.fmt(cx, g);
                 if self.prep.dep_attr {
                     crate::deprecated::visit_attribute(cx, g);
+                }
+                if self.prep.ty_attr {
+                    self.ty.visit_attribute(cx, g);
                 }
             }
             Tag::UnaryOp => {
