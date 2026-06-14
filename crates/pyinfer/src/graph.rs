@@ -1884,13 +1884,26 @@ impl Engine {
 
     /// manager.ast_from_module_name (manager.py:195-276)
     pub fn ast_from_module_name(&self, modname: &str, use_cache: bool) -> Result<ModId, BuildFail> {
-        if modname.is_empty() {
-            return Err(BuildFail::Import("No module name given.".to_string()));
-        }
         if use_cache {
             if let Some(&id) = self.astroid_cache.borrow().get(modname) {
                 return Ok(id);
             }
+        }
+        if modname.is_empty() {
+            // astroid bootstrap leaves an empty-name module (name='', file='<?>')
+            // in MANAGER.astroid_cache (brain_builtin_inference._extend_string_class
+            // string_build with default modname '' / path None). A `from . import X`
+            // whose relative_to_absolute_name resolves to '' (a non-package module
+            // loaded by path, so module.name is an abspath and package_name is
+            // empty) therefore RESOLVES to that cached empty module rather than
+            // raising AstroidImportError — pylint's _get_imported_module returns it
+            // (no import-error / E0401) and variables.py then emits no-name-in-module
+            // (E0611) for each imported name absent from the (empty) module.
+            // Replicate by synthesizing+caching the empty module. The astroid
+            // bootstrap module carries a single 'whatever' local; we omit it since
+            // no real relative import targets that name and its presence would only
+            // suppress an (impossible) E0611 for `from . import whatever`.
+            return Ok(self.string_build_empty(""));
         }
         if modname == "__main__" {
             return Ok(self.string_build_empty(modname));

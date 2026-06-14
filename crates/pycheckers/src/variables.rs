@@ -1709,6 +1709,82 @@ impl VarsChecker {
         }
     }
 
+    /// visit_importfrom (variables.py:2119-2143) — no-name-in-module (E0611).
+    /// Scoped to the relative-import-resolves-to-empty-module case: `from .
+    /// import X` in a non-package module loaded by path resolves to astroid's
+    /// bootstrap empty module (name='', file='<?>'), so pylint's
+    /// _check_module_attrs reports E0611 for every imported name (the empty
+    /// module has none of them). The general dotted-package E0611 path is not
+    /// yet ported; restricting to the empty module keeps the check
+    /// false-positive-free (no getattr-parity dependence).
+    pub fn visit_importfrom(&mut self, cx: &mut WalkCx, node: GNode) {
+        if !cx.full {
+            return;
+        }
+        let eng = cx.eng;
+        let md = eng.md(node.m);
+        let (modname, level, names): (String, Option<u32>, Vec<String>) =
+            match &md.tree.nodes[node.n.idx()].kind {
+                NodeKind::ImportFrom { modname, level, names } => (
+                    md.tree.s(*modname).to_string(),
+                    *level,
+                    names.iter().map(|&(n, _)| md.tree.s(n).to_string()).collect(),
+                ),
+                _ => return,
+            };
+        drop(md);
+        // Only the empty-resolution relative-import case (level>=1, empty modname).
+        if modname.is_empty() && level.map(|l| l >= 1).unwrap_or(false) {
+        } else {
+            return;
+        }
+        // analyse_fallback_blocks default False: skip fallback ImportError blocks.
+        if u::is_from_fallback_block(eng, node) {
+            return;
+        }
+        // Skip TYPE_CHECKING / sys.version_info guards (variables.py:2126-2131).
+        if u::in_type_checking_block(eng, cx.caches, node) {
+            return;
+        }
+        if let Some(p) = eng.parent(node) {
+            if eng.kind_is(p, |k| matches!(k, NodeKind::If { .. })) && u::is_sys_guard(eng, p) {
+                return;
+            }
+        }
+        // module = node.do_import_module(name_parts[0]); name_parts = ''.split('.')
+        // = [''] -> do_import_module(''). AstroidBuildingError -> return.
+        let mid = match eng.do_import_module(node, Some("")) {
+            Ok(m) => m,
+            Err(_) => return,
+        };
+        // The resolved module must be astroid's empty bootstrap module.
+        let (resolved_name, is_empty_mod) = {
+            let rmd = eng.md(mid);
+            (rmd.name.clone(), rmd.name.is_empty() && rmd.file == "<?>")
+        };
+        if !is_empty_mod {
+            return;
+        }
+        let line = u::lineno(eng, node);
+        let col = u::col_offset(eng, node).max(0) as i64;
+        // _check_module_attrs(node, module, name.split('.')) for each imported name.
+        // The empty module has no locals, so every '*'-less name raises
+        // NotFoundError -> no-name-in-module. (ignored-modules default ()).
+        for name in &names {
+            if name == "*" {
+                continue;
+            }
+            // name.split('.')[0]; the empty module lacks it -> E0611.
+            cx.emit_node_rooted(
+                "E0611",
+                node,
+                line,
+                col,
+                u::format_template("No name %r in module %r", &[name, &resolved_name]),
+            );
+        }
+    }
+
     pub fn visit_classdef(&mut self, cx: &mut WalkCx, node: GNode) {
         self.to_consume.push(Consumer::new(cx.eng, node, ScopeType::Class));
     }

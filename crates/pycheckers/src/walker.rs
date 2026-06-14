@@ -794,6 +794,10 @@ impl Walker<'_> {
                     let basename = crate::imports::importfrom_absolute_name(cx.eng, g);
                     crate::deprecated::stdlib_visit_importfrom(cx, g, &basename);
                 }
+                // full-profile order: VariablesChecker.visit_importfrom LAST
+                // (no-name-in-module / E0611). Only active when E0611 is enabled
+                // (@only_required_for_messages) — gated on cx.full inside.
+                self.vars.visit_importfrom(cx, g);
             }
             Tag::ClassDef => {
                 // full order: DocString, Name, Basic(stats), BasicError, ...
