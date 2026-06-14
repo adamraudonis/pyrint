@@ -494,6 +494,7 @@ pub fn load_snapshot(json: &str) -> Option<SnapModule> {
         locals: FxHashMap::default(),
         positions: FxHashMap::default(),
         type_comments: Vec::new(),
+        u_string_consts: Default::default(),
     };
     Some(SnapModule {
         name: v["modname"].as_str().unwrap_or("").to_string(),

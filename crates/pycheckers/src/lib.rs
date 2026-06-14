@@ -21,6 +21,7 @@ pub mod msgstore;
 pub mod pyset;
 pub mod refactoring;
 pub mod similarities;
+pub mod string_const;
 pub mod strings;
 pub mod tailmisc;
 pub mod typecheck;

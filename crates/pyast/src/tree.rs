@@ -306,6 +306,11 @@ pub struct Tree {
     /// (astroid passes them through to FunctionDef.type_comment_args/
     /// _returns and stmt.type_annotation). bool = func-signature form.
     pub type_comments: Vec<(NodeId, bool, Box<str>)>,
+    /// Const(Str) node ids whose astroid `Const.kind == "u"` — set iff the
+    /// (first) string literal part carried a LOWERCASE `u` prefix (CPython
+    /// `Constant.kind`; capital `U` does NOT count). Consumed by the
+    /// StringConstantChecker's redundant-u-string-prefix (W1406).
+    pub u_string_consts: rustc_hash::FxHashSet<NodeId>,
 }
 
 impl Tree {

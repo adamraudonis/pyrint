@@ -175,6 +175,13 @@ pub struct Prepared {
     pub recom_comprehension: bool,
     /// visit_const: consider-using-f-string (C0209)
     pub recom_const: bool,
+    /// StringConstantChecker visit_call/list/set/tuple/assign:
+    /// implicit-str-concat (W1404)
+    pub strconst_concat: bool,
+    /// StringConstantChecker visit_const: redundant-u-string-prefix (W1406)
+    pub strconst_u: bool,
+    /// EllipsisChecker visit_const: unnecessary-ellipsis (W2301)
+    pub ellipsis_const: bool,
     // ImplicitBooleanessChecker
     /// visit_call: use-implicit-booleaness-not-len (C1802)
     pub implbool_call: bool,
@@ -304,6 +311,9 @@ impl Prepared {
             recom_call: any(&["C0201", "C0207"]),
             recom_comprehension: any(&["C0206", "C0208"]),
             recom_const: enabled("C0209"),
+            strconst_concat: enabled("W1404"),
+            strconst_u: enabled("W1406"),
+            ellipsis_const: enabled("W2301"),
             implbool_call: enabled("C1802"),
             implbool_unaryop: enabled("C1802"),
             implbool_compare: any(&["C1803", "C1804", "C1805"]),
@@ -384,6 +394,10 @@ pub struct WalkCx<'a> {
     /// bytes-format .decode() UnicodeDecodeError, and engine builds of
     /// crash-marked files (eng.crash_tripped).
     pub crashed: &'a std::cell::Cell<bool>,
+    /// StringConstantChecker.string_tokens for THIS module (built in phase 1's
+    /// process_tokens). Keyed by (row, byte_col). Consumed by the W1404
+    /// implicit-str-concat callbacks.
+    pub strconst_tokens: &'a rustc_hash::FxHashMap<(u32, u32), crate::string_const::StrTokInfo>,
 }
 
 impl WalkCx<'_> {
@@ -524,6 +538,7 @@ impl LintRun {
         cfg_enabled: &dyn Fn(&str) -> bool,
         add_ignored: &dyn Fn(&str, u32),
         crashed: &std::cell::Cell<bool>,
+        strconst_tokens: &rustc_hash::FxHashMap<(u32, u32), crate::string_const::StrTokInfo>,
     ) {
         self.format_state.clear();
         let mut cx = WalkCx {
@@ -537,6 +552,7 @@ impl LintRun {
             full: prep.full,
             add_ignored,
             crashed,
+            strconst_tokens,
         };
         let mut walker = Walker {
             prep: *prep,
@@ -906,6 +922,9 @@ impl Walker<'_> {
                 if self.prep.refac_assign {
                     self.refac.visit_assign(cx, g);
                 }
+                if self.prep.strconst_concat {
+                    crate::string_const::visit_assign(cx, g);
+                }
                 self.ty.visit_assign(cx, g);
                 self.vars.visit_assign(cx, g);
             }
@@ -975,6 +994,9 @@ impl Walker<'_> {
                 }
                 self.stdlib.visit_call(cx, g);
                 self.strings.visit_call(cx, g);
+                if self.prep.strconst_concat {
+                    crate::string_const::visit_call(cx, g);
+                }
                 self.iter.visit_call(cx, g);
                 self.ty.visit_call(cx, g);
                 if self.prep.dunder {
@@ -1027,6 +1049,9 @@ impl Walker<'_> {
                     self.basic.visit_set(cx, g);
                 }
                 self.fmt(cx, g);
+                if self.prep.strconst_concat {
+                    crate::string_const::visit_set(cx, g);
+                }
                 self.ty.visit_set(cx, g);
             }
             Tag::For => {
@@ -1205,6 +1230,12 @@ impl Walker<'_> {
                 if self.prep.recom_const {
                     self.refac.recom_visit_const(cx, g);
                 }
+                if self.prep.strconst_u {
+                    crate::string_const::visit_const(cx, g);
+                }
+                if self.prep.ellipsis_const {
+                    crate::tailmisc::ellipsis_visit_const(cx, g);
+                }
                 if self.prep.vars_const {
                     self.vars.visit_const(cx, g);
                 }
@@ -1250,6 +1281,16 @@ impl Walker<'_> {
                 self.fmt(cx, g);
                 if self.prep.refac_augassign {
                     self.refac.visit_augassign(cx, g);
+                }
+            }
+            Tag::List => {
+                if self.prep.strconst_concat {
+                    crate::string_const::visit_list(cx, g);
+                }
+            }
+            Tag::Tuple => {
+                if self.prep.strconst_concat {
+                    crate::string_const::visit_tuple(cx, g);
                 }
             }
             Tag::Other => {}
@@ -1400,6 +1441,8 @@ enum Tag {
     Arguments,
     BoolOp,
     AugAssign,
+    List,
+    Tuple,
     Other,
 }
 
@@ -1459,6 +1502,8 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::Arguments(_) => Tag::Arguments,
         NodeKind::BoolOp { .. } => Tag::BoolOp,
         NodeKind::AugAssign { .. } => Tag::AugAssign,
+        NodeKind::List { .. } => Tag::List,
+        NodeKind::Tuple { .. } => Tag::Tuple,
         _ => Tag::Other,
     }
 }

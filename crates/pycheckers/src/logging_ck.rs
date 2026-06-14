@@ -211,11 +211,14 @@ impl LoggingCk {
         if is_complex_format_str(eng, cx, &bound) {
             return;
         }
-        let hs = helper_string(cx, lognode);
+        // pylint: _check_call_func(format_arg) then add_message(node=format_arg)
+        // — the position AND helper_string line are the INNER .format() Call,
+        // not the outer logging call (logging.py:306-320).
+        let hs = helper_string(cx, call);
         cx.emit_node(
             "W1202",
-            u::lineno(eng, lognode),
-            u::col_offset(eng, lognode) as i64,
+            u::lineno(eng, call),
+            u::col_offset(eng, call) as i64,
             u::format_template("Use %s formatting in logging functions", &[&hs]),
         );
     }

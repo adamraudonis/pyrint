@@ -731,7 +731,10 @@ impl ModIterCk {
             msg_id = Some("E4703");
         }
         if let Some(msg) = msg_id {
-            // iter_obj.repr_name(): Name -> name; Attribute -> attrname
+            // iter_obj.repr_name(): Name -> name; Attribute -> attrname;
+            // container literals carry a class-level `name` attr in astroid
+            // (List="list", Dict="dict", Set="set", Tuple="tuple"), so
+            // node_ng.repr_name() returns it (node_ng.py:178-185).
             let repr_name = {
                 let md = eng.md(iter_obj.m);
                 match &md.tree.nodes[iter_obj.n.idx()].kind {
@@ -739,6 +742,10 @@ impl ModIterCk {
                     NodeKind::Attribute { attrname, .. } => {
                         md.tree.s(*attrname).to_string()
                     }
+                    NodeKind::List { .. } => "list".to_string(),
+                    NodeKind::Dict { .. } => "dict".to_string(),
+                    NodeKind::Set { .. } => "set".to_string(),
+                    NodeKind::Tuple { .. } => "tuple".to_string(),
                     _ => String::new(),
                 }
             };
@@ -1696,5 +1703,65 @@ fn const_str_of(c: &ConstValue) -> String {
         ConstValue::Ellipsis => "Ellipsis".into(),
         ConstValue::NotImplemented => "NotImplemented".into(),
         ConstValue::StrSurrogate(_) => String::new(),
+    }
+}
+
+// ---------------------------------------------------------------------------
+// EllipsisChecker — W2301 unnecessary-ellipsis (ellipsis_checker.py)
+// ---------------------------------------------------------------------------
+
+/// `EllipsisChecker.visit_const` (ellipsis_checker.py:33-54). Fires when an
+/// `...` Const wrapped in an Expr is either preceded by a docstring on its
+/// scope (ClassDef/FunctionDef with doc_node) or shares its `.body` with at
+/// least one other statement.
+pub fn ellipsis_visit_const(cx: &mut WalkCx, node: GNode) {
+    let eng = cx.eng;
+    // node.pytype() == "builtins.Ellipsis"
+    if !eng.kind_is(node, |k| matches!(k, NodeKind::Const(ConstValue::Ellipsis))) {
+        return;
+    }
+    // isinstance(node.parent, Expr)
+    let Some(parent) = eng.parent(node) else { return };
+    if !eng.kind_is(parent, |k| matches!(k, NodeKind::Expr { .. })) {
+        return;
+    }
+    let Some(pp) = eng.parent(parent) else { return };
+    let md = eng.md(pp.m);
+    let fires = match &md.tree.nodes[pp.n.idx()].kind {
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+            d.doc_node.is_some() || d.body.len() > 1
+        }
+        NodeKind::ClassDef(d) => d.doc_node.is_some() || d.body.len() > 1,
+        // any other node: only the len(parent.parent.body) > 1 branch (the
+        // doc_node branch requires ClassDef/FunctionDef). pylint reads the
+        // literal `.body` attribute, so only nodes that HAVE a `.body` field
+        // qualify (Module/For/While/If/With/Try/ExceptHandler/MatchCase);
+        // others would AttributeError -> never the ellipsis statement's scope.
+        k => primary_body(k).is_some_and(|b| b.len() > 1),
+    };
+    if fires {
+        cx.emit_node(
+            "W2301",
+            u::lineno(eng, node),
+            u::col_offset(eng, node) as i64,
+            "Unnecessary ellipsis constant".to_string(),
+        );
+    }
+}
+
+/// The primary `.body` statement list of a node, mirroring the astroid `.body`
+/// attribute (NOT orelse/handlers/finalbody). None for nodes without a body.
+fn primary_body(k: &NodeKind) -> Option<&[NodeId]> {
+    match k {
+        NodeKind::Module(d) => Some(&d.body),
+        NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => Some(&d.body),
+        NodeKind::ClassDef(d) => Some(&d.body),
+        NodeKind::For(d) | NodeKind::AsyncFor(d) => Some(&d.body),
+        NodeKind::While { body, .. } | NodeKind::If { body, .. } => Some(body),
+        NodeKind::With(d) | NodeKind::AsyncWith(d) => Some(&d.body),
+        NodeKind::Try(d) | NodeKind::TryStar(d) => Some(&d.body),
+        NodeKind::ExceptHandler { body, .. } => Some(body),
+        NodeKind::MatchCase { body, .. } => Some(body),
+        _ => None,
     }
 }

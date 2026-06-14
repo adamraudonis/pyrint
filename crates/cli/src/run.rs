@@ -137,6 +137,10 @@ struct ParsedFile {
     /// \n/\r\n/\r) the LineSet stores. None when the checker isn't prepared;
     /// empty Vec on a UnicodeDecodeError (matches append_stream's bail-out).
     sim_lines: Option<Vec<String>>,
+    /// StringConstantChecker.process_tokens results (full mode): W1401/W1402
+    /// token-phase messages + the string_tokens map consumed by the W1404
+    /// implicit-str-concat AST callbacks.
+    strconst_tokens: pycheckers::string_const::StrConstTokens,
 }
 
 enum FileData {
@@ -328,6 +332,12 @@ pub fn run(opts: &RunOpts) -> i32 {
     // RP0801, so the checker is prepared iff R0801 is enabled
     // (notes/09-design-similarities §B.1). Under -E R0801 is disabled.
     let sim_prepared = !opts.errors_only && enabled_by_id("R0801");
+    // StringConstantChecker (BaseTokenChecker): prepared iff any of its msgs
+    // (W1401/W1402/W1404/W1405/W1406) is enabled. -E drops all of them.
+    let strconst_prepared = !opts.errors_only
+        && ["W1401", "W1402", "W1404", "W1405", "W1406"]
+            .iter()
+            .any(|m| enabled_by_id(m));
 
     // ---- phase 1: parse all files (rayon, results in file order) ------
     phase_mark!(t0, "discover");
@@ -342,6 +352,7 @@ pub fn run(opts: &RunOpts) -> i32 {
                 refac_prepared,
                 refac_r1707,
                 sim_prepared,
+                strconst_prepared,
             )
         })
         .collect();
@@ -868,6 +879,7 @@ fn parse_one(
     refac_prepared: bool,
     refac_r1707: bool,
     sim_prepared: bool,
+    strconst_prepared: bool,
 ) -> FileData {
     // modutils.get_source_file: a .pyi argument resolves to the sibling .py
     // source when it exists (PY_SOURCE_EXTS order, prefer_stubs=False)
@@ -943,7 +955,8 @@ fn parse_one(
             let mut fmt_msgs = Vec::new();
             let mut fixme_msgs = Vec::new();
             let mut refac_tokens = pycheckers::refactoring::RefacTokens::default();
-            if format_prepared || misc_prepared || refac_prepared {
+            let mut strconst_tokens = pycheckers::string_const::StrConstTokens::default();
+            if format_prepared || misc_prepared || refac_prepared || strconst_prepared {
                 if let Some(raw) = pyast::decode_source_raw(&bytes, &abspath) {
                     let tk = pyast::pytok::tokenize_for_checkers(&raw);
                     if format_prepared {
@@ -963,6 +976,10 @@ fn parse_one(
                         // enable-pragma rescan flips per-token after that.
                         refac_tokens =
                             pycheckers::refactoring::process_tokens(&tk, &raw, refac_r1707);
+                    }
+                    if strconst_prepared {
+                        strconst_tokens =
+                            pycheckers::string_const::process_tokens(&raw, &tk);
                     }
                 }
             }
@@ -989,6 +1006,7 @@ fn parse_one(
                 fixme_msgs,
                 refac_tokens,
                 sim_lines,
+                strconst_tokens,
             }))
         }
         None => FileData::NeedsOracle,
@@ -1181,6 +1199,13 @@ fn lint_tree(
                     for &line in &p.refac_tokens.r1707_lines {
                         add(&mut fs, "R1707", line, 0, "Disallow trailing comma tuple".to_string());
                     }
+                    // StringConstantChecker token pass (sorts LAST among the
+                    // enabled token checkers, name "string"). W1401/W1402 are
+                    // emitted here in process_string_token order; the
+                    // string_tokens map feeds the W1404 AST callbacks below.
+                    for sm in &p.strconst_tokens.msgs {
+                        add(&mut fs, sm.msgid, sm.line, sm.col, sm.text.clone());
+                    }
                     // 3. AST walk: ImportsChecker + VariablesChecker wired
                     //    (walk_order.rs dispatch); other checkers pending.
                     //    The walker also accumulates nbstatements
@@ -1274,6 +1299,7 @@ fn lint_tree(
                             &cfg_enabled,
                             &add_ignored,
                             &crashed,
+                            &p.strconst_tokens.string_tokens,
                         );
                         if engine.crash_tripped() {
                             crashed.set(true);

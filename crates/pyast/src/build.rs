@@ -68,6 +68,8 @@ pub struct Builder<'a> {
     walrus_ids: Vec<NodeId>,
     /// astroid `node.position` (keyword line+col) for def/class nodes
     positions: rustc_hash::FxHashMap<NodeId, (u32, u32)>,
+    /// Const(Str) ids with astroid `Const.kind == "u"` (lowercase-`u` prefix).
+    u_string_consts: rustc_hash::FxHashSet<NodeId>,
 }
 
 impl<'a> Builder<'a> {
@@ -94,6 +96,7 @@ impl<'a> Builder<'a> {
             delayed_assattr: Vec::new(),
             walrus_ids: Vec::new(),
             positions: rustc_hash::FxHashMap::default(),
+            u_string_consts: rustc_hash::FxHashSet::default(),
         };
         // Module node id 0
         let module_id = b.push_placeholder();
@@ -153,6 +156,7 @@ impl<'a> Builder<'a> {
             locals: b.locals,
             positions: b.positions,
             type_comments: Vec::new(),
+            u_string_consts: b.u_string_consts,
         };
         finalize_positions(&mut tree);
         tree
@@ -2620,6 +2624,18 @@ impl<'a> Builder<'a> {
                         ConstValue::Str(v.into_boxed_str())
                     }
                 };
+                // astroid `Const.kind == "u"`: CPython sets it iff the (first)
+                // string part has a LOWERCASE `u` prefix; capital `U` -> None.
+                // For implicit concatenation the FIRST part's prefix wins.
+                if let Some(part) = s.value.iter().next() {
+                    use ruff_python_ast::str_prefix::StringLiteralPrefix;
+                    if matches!(part.flags.prefix(), StringLiteralPrefix::Unicode) {
+                        let start = part.range.start().to_u32() as usize;
+                        if self.src.text.as_bytes().get(start) == Some(&b'u') {
+                            self.u_string_consts.insert(id);
+                        }
+                    }
+                }
                 self.finish(id, NodeKind::Const(cv), parent, s.range)
             }
             Expr::BytesLiteral(b) => {

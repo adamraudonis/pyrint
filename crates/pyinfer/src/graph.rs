@@ -927,6 +927,7 @@ impl Engine {
             locals: tree_locals,
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let mid = self.register_module(
             "builtins".to_string(),
@@ -1119,6 +1120,7 @@ impl Engine {
             locals: FxHashMap::default(),
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let mid = self.register_module(
             modname.to_string(),
@@ -1173,6 +1175,7 @@ impl Engine {
             locals: FxHashMap::default(),
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let mid = self.register_module(String::new(), "<synthetic>".to_string(), tree, false, true);
         GNode { m: mid, n: NodeId(1) }
@@ -1266,6 +1269,7 @@ impl Engine {
             locals: FxHashMap::default(),
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let mid = self.register_module("".to_string(), "<synthetic>".to_string(), tree, false, true);
         let g = GNode { m: mid, n: pyast::NodeId(1) };
@@ -1309,6 +1313,7 @@ impl Engine {
             locals: FxHashMap::default(),
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let mid = self.register_module(String::new(), "<synthetic>".to_string(), tree, false, true);
         (1..=count as u32).map(|i| GNode { m: mid, n: NodeId(i) }).collect()
@@ -1548,6 +1553,7 @@ impl Engine {
             locals: FxHashMap::default(),
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let id = self.register_module(modname.to_string(), "<?>".to_string(), tree, false, true);
         self.cache_module(modname, id);
@@ -1578,6 +1584,7 @@ impl Engine {
             locals: FxHashMap::default(),
             positions: FxHashMap::default(),
             type_comments: Vec::new(),
+            u_string_consts: Default::default(),
         };
         let id = self.register_module(modname.to_string(), String::new(), tree, true, true);
         self.cache_module(modname, id);
