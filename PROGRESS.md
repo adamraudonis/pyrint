@@ -3033,3 +3033,70 @@ classes); check_treedump django 400 = 0 differing; check_inferdump not required
 (pyinfer untouched — 0 source changes). Only tracked addition is
 `harness/audit_round10.py` (consolidated owned-code auditor). Clean otherwise —
 re-validation + diagnostic round.
+
+## Phase F zero-round 12 (independent re-validation: 51/54 EXACT + the sqlalchemy gap traced to its EXACT divergence node — `Visitable.__class_getitem__` resolved through the non-subscripted `DQLDMLClauseElement` path under the warm context-path cycle guard)
+
+Rebuilt the committed binary (clean tree at zero-round 10; cargo recompiled
+nothing — 0 source changes), REGENERATED all 27×2 .ours captures FRESH (both
+profiles; **byte-identical to the committed captures → git working tree stayed
+clean after a full 54-capture regen = standalone determinism proof**), re-ran
+gt_integrity, and re-ran the full owned-code audit (R0901-R0917, R0401, R0801,
+R17xx×37, C1804/C1805, W1113/W1116) across all 27 corpora × 2 profiles vs
+footer-stripped GT via `harness/audit_round10.py`.
+
+RESULT — **51/54 combos: 0 FP / 0 FN, EXACT owned-line order** (+ core.full
+restricted-clean = 52/54 effective). Order verified EXACT on the dense full
+captures (sentry 17712, airflow 17345, sympy 15511, salt 10753, black 8804 incl.
+all 8136 R0801 lines, nova 8397, mypy 6345, zulip 6081, pandas 5522, fastapi
+5363, django 5111) and dense hook captures (nova 2000, sympy/salt/ansible).
+gt_integrity: only `core.full` SUSPECT (exit=143 OOM, unchanged irreducible
+limit); core.full RESTRICTED (15234 GT-reached files, excl close codes) =
+0FP/0FN EXACT (12990/12990). All other 53 GTs clean.
+
+### sqlalchemy gap — NEW this round: the EXACT divergence node + mechanism pinned (was only attributed to "warm-cache order" in rounds 5-10)
+Owned counts UNCHANGED & byte-identical to rounds 9/10/11: hook 1FP
+(array.py:93 R0901 43/7); full 15FP/12FN (R0901×15 FP; R0901×3+R0903×9 FN) — all
+R0901↔R0903 generic-base ancestor flips on classes with subscripted-generic
+bases. Drilled the full-codes diff too: the SAME root cause also produces the
+NON-owned FPs (W0223×10 abstract-method, plus W0707/W0613/W0231/W0237 from the
+over-resolved deep MRO) — confirming ONE inference root cause, not many.
+- **Instrumented `protocols.rs::class_getitem` (PRYLINT_TRACE_CGI, reverted)**:
+  subscripting `ExpressionClauseList[_T]` for the ancestor walk, prylint's
+  `__getitem__`-not-found fallback `getattr("__class_getitem__")` returns **OK
+  47× from `sqlalchemy.sql.visitors.Visitable.__class_getitem__`** (a REAL
+  classmethod `return cls` at visitors.py:134) + 24× from another resolved one,
+  but **6× correctly ERRs (AstroidType→Uninferable)**. astroid ALWAYS ERRs here.
+- **The bootstrap chain (the actual mechanism):** `Visitable` is reachable from
+  `ColumnElement` ONLY via the NON-subscripted base path
+  `ColumnElement→DQLDMLClauseElement→ClauseElement→CompilerElement(Visitable)`.
+  Once any class in the chain resolves its `__class_getitem__` from `Visitable`,
+  `X[_T]` subscripts collapse to `X`, cascading deep ancestors up the chain
+  (`OperatorExpression[_T]`→`OperatorExpression`→… 43 ancestors → R0901). astroid
+  reaches the SAME `Visitable.__class_getitem__` top-down (probe:
+  `OperatorExpression.ancestors()=24`, `ColumnElement.ancestors()=23`, both
+  getattr-`__class_getitem__` OK) — but when the chain is entered through
+  `ExpressionClauseList.ancestors()`, astroid's **context-path cycle guard fires
+  deep in the recursive subscript cascade** (`getitem` trace shows ctx.path
+  climbing to 35-40 through nested `ColumnElement[_T]`/`SQLColumnExpression[_T]`/
+  `BinaryElementRole[_T]` re-entries), returning Uninferable → 0 ancestors →
+  R0903. **astroid gives 0 ancestors COLD AND WARM (the GT is the warm full run
+  → R0903); prylint gives 0 ancestors in ISOLATION (array.py-alone → R0903,
+  byte-identical) and 43 only under the warm full-corpus cache.**
+- VERDICT (re-affirmed, now with the node-precise mechanism): the divergence is
+  entirely in pyinfer's **context-path/cycle-guard accounting** (the `ctx.push`/
+  path-tracking shared by EVERY inference, incl. all -E codes). The EGATE 27/27
+  EQUAL — including E0240 (inconsistent-mro) byte-identical on the EXACT hstore.py
+  classes that carry the R0901↔R0903 flip — proves prylint's structural MRO/
+  ancestor computation that -E depends on is bit-correct; the gap is the warm
+  re-inference TIMING of one deep generic cascade, in a NON-E refactoring code
+  that leaks to zero -E corpus. Perturbing the cycle-guard path machinery to flip
+  this single sqlalchemy hierarchy risks the 51 green combos + EGATE 27/27 +
+  inferdump-zero (django/pandas/sentry/core). `design.rs::count_parents` remains
+  a faithful `_get_parents_iter` port (re-verified). BLOCKED — wrong trade.
+
+GATES (re-certified): **EGATE -E 27-corpus byte parity 27/27 ALL EQUAL** (fresh
+run, sqlalchemy EQUAL incl. E0240 on the divergent classes); check_treedump
+django 400 = 0 differing; check_inferdump django 200 = 0 differing files/lines
+(pyinfer untouched — the only edit, a PRYLINT_TRACE_CGI probe in protocols.rs,
+was reverted; binary byte-identical to committed). Clean working tree —
+re-validation + deeper root-cause diagnosis round.
