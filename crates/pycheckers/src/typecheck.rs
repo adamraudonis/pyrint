@@ -730,9 +730,14 @@ impl TypeCk {
         // E1101 is enabled at this line, replicate pylint's owner.getattr +
         // _emit_no_member gates for the instance owner.
         let e1101_line = u::lineno(eng, node);
+        // BaseInstance owners (display_type "Instance of"): real Instances and
+        // the literal/synth instances that astroid models as instance
+        // subclasses — Const, List/Tuple/Set, Dict, FrozenSet (instance_unproxy
+        // captures exactly this set). A `dict` literal bound to a salt loader
+        // global (__grains__ = {}), a returned tuple, etc. all route here.
         let all_instances = inferred
             .iter()
-            .all(|v| matches!(v, Value::Inst { .. } | Value::ExcInst { .. }));
+            .all(|v| eng.instance_unproxy(v).is_some());
         if all_instances && (cx.is_enabled)("E1101", e1101_line) {
             self.emit_no_member_instances(cx, node, &attrname, e1101_line);
             return;
@@ -864,9 +869,11 @@ impl TypeCk {
         let mut missing: Vec<GNode> = Vec::new();
         let mut found = false;
         for owner in inferred {
-            let cls = match owner {
-                Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => *cls,
-                _ => continue,
+            // _proxied class of a BaseInstance owner (real Instance or a
+            // literal/synth dict/tuple/const/etc.).
+            let cls = match eng.instance_unproxy(owner) {
+                Some(c) => c,
+                None => continue,
             };
             // _is_owner_ignored: ignored-classes / ignored-modules defaults do
             // not match a project-local class -> never ignored. (Defaults are
@@ -1106,6 +1113,17 @@ impl TypeCk {
         let caches = cx.caches;
         // node_ignores_exception(node, AttributeError)
         if u::node_ignores_exception(eng, caches, node, "AttributeError") {
+            return false;
+        }
+        // ignored_none (default True) and isinstance(owner, Const) and
+        // owner.value is None: return False (typecheck.py:452). A `None`
+        // constant owner never reports no-member.
+        let owner_is_none = match owner {
+            Value::SynthConst(c) => matches!(&**c, ConstValue::None),
+            Value::Node(g) => eng.kind_is(*g, |k| matches!(k, NodeKind::Const(ConstValue::None))),
+            _ => false,
+        };
+        if owner_is_none {
             return false;
         }
         // is_super(owner) (utils.is_super, _emit_no_member typecheck.py:454):
