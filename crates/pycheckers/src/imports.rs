@@ -994,10 +994,37 @@ impl ImportsChecker {
                 }
                 None
             }
-            // AstroidBuildingError branch: import-error (E0401) is disabled
-            // under the target flags -> `if not is_message_enabled(...)
-            // return None` fires first (imports.py:1039-1040)
-            Err(BuildFail::Import(_)) => None,
+            // AstroidBuildingError branch (imports.py:1038-1050).
+            Err(BuildFail::Import(_)) => {
+                // if not is_message_enabled("import-error"): return None.
+                // Under -E and the hook profile E0401 is disabled at config
+                // level, so this short-circuits (no message); under the full
+                // no-disable profile it is enabled and we fall through.
+                if !(cx.cfg_enabled)("E0401") {
+                    return None;
+                }
+                // if _ignore_import_failure(...): return None
+                if ignore_import_failure(cx, importnode, modname) {
+                    return None;
+                }
+                // if not analyse_fallback_blocks (default False) and
+                // is_from_fallback_block(importnode): return None
+                if u::is_from_fallback_block(cx.eng, importnode) {
+                    return None;
+                }
+                // dotted_modname = get_import_name(importnode, modname);
+                // add_message("import-error", args=repr(dotted_modname), node)
+                let dotted = get_import_name(cx.eng, importnode, modname);
+                let line = u::lineno(cx.eng, importnode);
+                let col = u::col_offset(cx.eng, importnode).max(0) as i64;
+                cx.emit_node(
+                    "E0401",
+                    line,
+                    col,
+                    u::format_template("Unable to import %s", &[&u::py_repr_str(&dotted)]),
+                );
+                None
+            }
             // astroid-crash build: pylint's RecursionError is NOT caught by
             // _get_imported_module — it aborts the module check (F0002).
             // The engine already tripped the crash flag; emit nothing.
@@ -1119,6 +1146,23 @@ pub fn importfrom_absolute_name(eng: &pyinfer::graph::Engine, node: GNode) -> St
             .relative_to_absolute_name(&md, &modname, Some(l))
             .unwrap_or(modname),
         _ => modname,
+    }
+}
+
+/// utils.get_import_name (utils.py:1820-1842): for a relative ImportFrom
+/// (level > 0) return the absolute qualified name (TooManyLevelsError ->
+/// modname unchanged); otherwise return modname unchanged.
+fn get_import_name(eng: &pyinfer::graph::Engine, node: GNode, modname: &str) -> String {
+    let md = eng.md(node.m);
+    let level = match &md.tree.nodes[node.n.idx()].kind {
+        NodeKind::ImportFrom { level, .. } => *level,
+        _ => return modname.to_string(),
+    };
+    match level {
+        Some(l) if l > 0 => eng
+            .relative_to_absolute_name(&md, modname, Some(l))
+            .unwrap_or_else(|_| modname.to_string()),
+        _ => modname.to_string(),
     }
 }
 

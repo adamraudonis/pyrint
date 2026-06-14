@@ -945,6 +945,60 @@ pub fn node_ignores_exception(eng: &Engine, caches: &LintCaches, g: GNode, exc: 
     false
 }
 
+/// is_from_fallback_block (utils.py:1028-1050): the node is inside a
+/// try/except whose handlers catch ImportError/ModuleNotFoundError OR whose
+/// sibling body (the try-body, or — when node is in an ExceptHandler — the
+/// other handlers' bodies) contains fallback import statements.
+pub fn is_from_fallback_block(eng: &Engine, g: GNode) -> bool {
+    let Some(context) = find_try_except_wrapper(eng, g) else {
+        return false;
+    };
+    // Collect (other_body, handlers) per pylint's branch on context kind.
+    let (other_body, handlers): (Vec<pyast::NodeId>, Vec<pyast::NodeId>) =
+        if eng.kind_is(context, |k| matches!(k, NodeKind::ExceptHandler { .. })) {
+            // context.parent is the Try; other_body = Try.body, handlers = Try.handlers
+            let Some(tryp) = eng.parent(context) else { return false };
+            let md = eng.md(tryp.m);
+            match &md.tree.nodes[tryp.n.idx()].kind {
+                NodeKind::Try(d) | NodeKind::TryStar(d) => {
+                    (d.body.clone(), d.handlers.clone())
+                }
+                _ => return false,
+            }
+        } else {
+            // context is the Try; other_body = chain of all handler bodies
+            let md = eng.md(context.m);
+            match &md.tree.nodes[context.n.idx()].kind {
+                NodeKind::Try(d) | NodeKind::TryStar(d) => {
+                    let handlers = d.handlers.clone();
+                    let mut body: Vec<pyast::NodeId> = Vec::new();
+                    for &h in &handlers {
+                        if let NodeKind::ExceptHandler { body: hb, .. } =
+                            &md.tree.nodes[h.idx()].kind
+                        {
+                            body.extend(hb.iter().copied());
+                        }
+                    }
+                    (body, handlers)
+                }
+                _ => return false,
+            }
+        };
+    let m = context.m;
+    let has_fallback_imports = other_body.iter().any(|&n| {
+        eng.kind_is(GNode { m, n }, |k| {
+            matches!(k, NodeKind::Import { .. } | NodeKind::ImportFrom { .. })
+        })
+    });
+    // _except_handlers_ignores_exceptions for (ImportError, ModuleNotFoundError)
+    let ignores_import_error = handlers.iter().any(|&h| {
+        let hg = GNode { m, n: h };
+        error_of_type(eng, hg, "ImportError")
+            || error_of_type(eng, hg, "ModuleNotFoundError")
+    });
+    ignores_import_error || has_fallback_imports
+}
+
 // ---------------------------------------------------------------------------
 // TYPE_CHECKING / sys guards (utils.py:1990-2017, 1845-1865)
 // ---------------------------------------------------------------------------
