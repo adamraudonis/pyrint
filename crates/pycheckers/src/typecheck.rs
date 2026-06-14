@@ -774,6 +774,16 @@ impl TypeCk {
             return;
         }
 
+        // Homogeneous all-Super owner case (`super().method()`): owner.getattr
+        // walks the super MRO after the mro_pointer; display_type "Super of",
+        // name = mro_pointer.name. _emit_no_member's Super gate verifies a
+        // valid super_mro() and known bases for every class in owner.type.mro().
+        let all_supers = inferred.iter().all(|v| matches!(v, Value::Super { .. }));
+        if all_supers && (cx.is_enabled)("E1101", e1101_line) {
+            self.emit_no_member_supers(cx, node, &attrname, e1101_line);
+            return;
+        }
+
         // I1101 can only originate from a Module owner. If ANY inferred owner
         // is NOT a Module, we cannot (without full E1101 inference) verify
         // whether that owner has the attribute and would therefore make pylint
@@ -1010,6 +1020,142 @@ impl TypeCk {
                 ),
             );
         }
+    }
+
+    /// E1101 no-member for the homogeneous all-Super owner case
+    /// (`super().attr`). owner.getattr == objects.Super.getattr (the super-MRO
+    /// walk after mro_pointer); display_type "Super of"; name == mro_pointer's
+    /// name. _node_names has no entry for a Super (no `.locals`) so the hint is
+    /// always empty. The Super-specific _emit_no_member gate (typecheck.py:
+    /// 482-491) requires a valid super_mro() and known bases for every class in
+    /// owner.type.mro().
+    fn emit_no_member_supers(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        attrname: &str,
+        line: u32,
+    ) {
+        let eng = cx.eng;
+        let expr = match &eng.md(node.m).tree.nodes[node.n.idx()].kind {
+            NodeKind::Attribute { expr, .. } => GNode { m: node.m, n: *expr },
+            _ => return,
+        };
+        let flow = eng.infer(expr, &Ctx::new());
+        let inferred = flow.vals.clone();
+        if inferred.is_empty() {
+            return;
+        }
+        let sym = eng.sym(attrname);
+        // (owner_value, owner_name): astroid dedups missingattr on the owner
+        // object itself; each Super owner here is a distinct object.
+        let mut missing: Vec<Value> = Vec::new();
+        let mut found = false;
+        for owner in &inferred {
+            let (mro_pointer, mro_type) = match owner {
+                Value::Super { mro_pointer, mro_type, .. } => (*mro_pointer, mro_type),
+                _ => continue,
+            };
+            let owner_name = eng.node_name(mro_pointer).unwrap_or_default();
+            // _is_owner_ignored: name == mro_pointer.name; the ignored-classes
+            // defaults never collide with a project class name.
+            // owner.getattr(attrname): the super-MRO walk.
+            match eng.super_getattr(owner, sym, None) {
+                Ok(vals) if !vals.is_empty() => {
+                    found = true;
+                    break;
+                }
+                _ => {
+                    if Self::emit_no_member_super_gate(cx, node, owner, mro_type, &owner_name, attrname) {
+                        missing.push(owner.clone());
+                    }
+                }
+            }
+        }
+        if found {
+            return;
+        }
+        let col = u::col_offset(eng, node) as i64;
+        for owner in missing {
+            let mro_pointer = match &owner {
+                Value::Super { mro_pointer, .. } => *mro_pointer,
+                _ => continue,
+            };
+            let owner_name = eng.node_name(mro_pointer).unwrap_or_default();
+            cx.emit_node(
+                "E1101",
+                line,
+                col,
+                u::format_template(
+                    "%s %r has no %r member%s",
+                    &["Super of", &owner_name, attrname, ""],
+                ),
+            );
+        }
+    }
+
+    /// _emit_no_member (typecheck.py:429-531) Super-owner gates: AttributeError
+    /// handler guard, the mixin regex on the mro_pointer name, valid super_mro,
+    /// known bases across owner.type.mro(), private-name mangling, const-False
+    /// IF/IfExp guard. (is_super(objects.Super) is False — name is the
+    /// mro_pointer's, not "super" — so the early Super short-circuit does not
+    /// fire; the dedicated Super block at typecheck.py:482 applies.)
+    fn emit_no_member_super_gate(
+        cx: &mut WalkCx,
+        node: GNode,
+        owner: &Value,
+        mro_type: &Value,
+        owner_name: &str,
+        attrname: &str,
+    ) -> bool {
+        let eng = cx.eng;
+        let caches = cx.caches;
+        if u::node_ignores_exception(eng, caches, node, "AttributeError") {
+            return false;
+        }
+        // owner_name && ignored_mixins && mixin_class_rgx.match(owner_name)
+        if !owner_name.is_empty() && mixin_class_rgx_match(owner_name) {
+            return false;
+        }
+        // Super block: super_mro() must succeed.
+        if eng.super_mro(owner).is_err() {
+            return false;
+        }
+        // all(has_known_bases(base) for base in owner.type.mro())
+        let type_cls = match mro_type {
+            Value::Node(g) if is_classdef(eng, *g) => Some(*g),
+            Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => Some(*cls),
+            _ => eng.proxied_class(mro_type),
+        };
+        if let Some(tc) = type_cls {
+            match eng.mro(tc, None) {
+                Ok(mro) => {
+                    if !mro.iter().all(|&b| has_known_bases(eng, caches, b)) {
+                        return false;
+                    }
+                }
+                // owner.type.mro() raising is not one of the caught exceptions
+                // here (the super_mro() check above already covered MroError on
+                // the super path); be conservative and suppress.
+                Err(_) => return false,
+            }
+        }
+        // private-name mangling: attrname.startswith("_" + owner_name).
+        if !owner_name.is_empty() {
+            let prefix = format!("_{owner_name}");
+            if attrname.starts_with(&prefix) {
+                let unmangled = &attrname[prefix.len()..];
+                let usym = eng.sym(unmangled);
+                match eng.super_getattr(owner, usym, None) {
+                    Ok(v) if !v.is_empty() => return false,
+                    _ => return true,
+                }
+            }
+        }
+        if guarded_by_const_false_if(eng, caches, node) {
+            return false;
+        }
+        true
     }
 
     /// E1101 no-member for the homogeneous all-Function/Method owner case

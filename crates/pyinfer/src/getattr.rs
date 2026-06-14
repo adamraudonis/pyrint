@@ -2235,6 +2235,26 @@ impl Engine {
         }
     }
 
+    /// objects.Super.getattr == list(igetattr); AttributeInferenceError when
+    /// the MRO walk yields nothing (mapped to ErrKind::Attribute). Used by the
+    /// TypeChecker no-member owner loop (owner.getattr(attrname)).
+    pub fn super_getattr(
+        &self,
+        owner: &Value,
+        name: GSym,
+        ctx: Option<&Rc<Ctx>>,
+    ) -> Result<Vec<Value>, ErrKind> {
+        let mut vals = Vec::new();
+        let end = self.super_igetattr_to(owner, name, ctx, &mut |v| {
+            vals.push(v);
+            Drive::Go
+        });
+        match end {
+            End::Raised(e) if vals.is_empty() => Err(e),
+            _ => Ok(vals),
+        }
+    }
+
     fn super_igetattr_to(
         &self,
         owner: &Value,
