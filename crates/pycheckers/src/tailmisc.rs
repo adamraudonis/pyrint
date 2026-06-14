@@ -1392,7 +1392,10 @@ impl StdlibCk {
             || mode_uninferable
             || (mode_const.is_some() && !truthy_with_b);
         if encoding_path {
-            let encoding_arg_node: Option<GNode> = if open_module != "_io" {
+            // get_argument_from_call(position/keyword); on NoSuchArgumentError
+            // fall back to infer_kwarg_from_call (open(..., **{"encoding": ..}))
+            // exactly like the mode lookup above and pylint stdlib.py:884-911.
+            let mut encoding_arg_node: Option<GNode> = if open_module != "_io" {
                 match func_name {
                     "read_text" => get_arg(0, "encoding"),
                     "write_text" => get_arg(1, "encoding"),
@@ -1401,6 +1404,9 @@ impl StdlibCk {
             } else {
                 get_arg(3, "encoding")
             };
+            if encoding_arg_node.is_none() {
+                encoding_arg_node = infer_kwarg_from_call(eng, cx, keywords, "encoding");
+            }
             match encoding_arg_node {
                 None => {
                     cx.emit_node(
