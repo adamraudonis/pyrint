@@ -941,15 +941,38 @@ impl Engine {
         // though _threading_local.local's pure-python one is further down.
         // __getattribute__ is consulted ONLY when __getattr__ is not found
         // (the first `return` short-circuits an invalid __getattr__).
+        // _valid_getattr(node): root = node.root(); root.name != "builtins"
+        // and getattr(root, "pure_python", None). The attr may be a raw
+        // FunctionDef node OR an already-bound (Un)BoundMethod / Property /
+        // descriptor value (the metaclass-lookup path binds class methods —
+        // scoped_nodes._get_attribute_from_metaclass). Every such Value is an
+        // astroid Proxy whose .root() proxies to the wrapped function's root
+        // module, so resolve the underlying node and use its root.
+        let valid = |g: GNode| -> bool {
+            let root = self.root(g);
+            let md = self.md(root.m);
+            md.pure_python && md.name != "builtins"
+        };
         let look = |name: &str| -> Option<bool> {
             let sym = self.sym(name);
             match self.class_getattr(cls, sym, Some(ctx), true) {
                 Ok(attrs) => Some(match attrs.first() {
-                    Some(NV::N(g)) => {
-                        let md = self.md(g.m);
-                        md.pure_python && md.name != "builtins"
-                    }
-                    _ => false,
+                    Some(NV::N(g)) => valid(*g),
+                    Some(NV::V(v)) => match v {
+                        Value::Node(g) => valid(*g),
+                        Value::BoundMethod { func, .. }
+                        | Value::UnboundMethod { func }
+                        | Value::DescBM { func, .. }
+                        | Value::Property { func, .. }
+                        | Value::Partial { func, .. }
+                        | Value::Generator { func, .. } => valid(*func),
+                        // A non-callable value (e.g. SynthConst) has no
+                        // pure_python module root the way astroid's _valid_getattr
+                        // would dereference; treat as not-valid (conservative,
+                        // matches astroid raising on .root() for such).
+                        _ => false,
+                    },
+                    None => false,
                 }),
                 Err(_) => None,
             }

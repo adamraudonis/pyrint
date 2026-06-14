@@ -761,13 +761,18 @@ impl TypeCk {
             return;
         }
 
-        // NOTE: a homogeneous all-ClassDef owner branch (class-object member
-        // access, e.g. dict.__add__, ZipFile.assert_not_called) is NOT enabled
-        // here: it exposed E1101 FPs on classes whose locally-scoped metaclass
-        // defines __getattr__ (sqlalchemy test Point(metaclass=MetaPoint)),
-        // because our has_dynamic_getattr does not yet resolve a function-
-        // scoped metaclass __getattr__ the way astroid does. Leaving the 4
-        // Class-owner FNs unflagged keeps the cardinal-sin FP count at zero.
+        // Homogeneous all-ClassDef owner case (class-object member access,
+        // e.g. `dict.__add__`, `ZipFile.assert_not_called`). owner.getattr is
+        // ClassDef.getattr(class_context=True) which consults the metaclass,
+        // so a class whose metaclass defines __getattr__ (sqlalchemy
+        // Point(metaclass=MetaPoint)) is suppressed by has_dynamic_getattr.
+        let all_classes = inferred.iter().all(|v| matches!(
+            v, Value::Node(g) if is_classdef(eng, *g)
+        ));
+        if all_classes && (cx.is_enabled)("E1101", e1101_line) {
+            self.emit_no_member_classes(cx, node, &attrname, e1101_line);
+            return;
+        }
 
         // I1101 can only originate from a Module owner. If ANY inferred owner
         // is NOT a Module, we cannot (without full E1101 inference) verify
@@ -939,10 +944,7 @@ impl TypeCk {
     /// E1101 no-member for the homogeneous all-ClassDef owner case
     /// (class-object member access). owner.getattr is ClassDef.getattr with
     /// class_context=True; the gates are the shared (Instance, ClassDef)
-    /// _emit_no_member gates; display_type "Class". Currently NOT wired into
-    /// the dispatch (see visit_attribute) pending a metaclass-__getattr__
-    /// has_dynamic_getattr fix; retained for that follow-up.
-    #[allow(dead_code)]
+    /// _emit_no_member gates; display_type "Class".
     fn emit_no_member_classes(
         &mut self,
         cx: &mut WalkCx,
