@@ -301,6 +301,8 @@ impl MatchCk {
         );
     }
 
+    // (helper for W1518 — see below)
+
     /// get_match_args_for_class (match_statements_checker.py:144-166)
     fn get_match_args_for_class(&self, cx: &mut WalkCx, node: GNode) -> Option<Vec<String>> {
         let eng = cx.eng;
@@ -1193,18 +1195,23 @@ impl StdlibCk {
             }
             for v in &flow.vals {
                 let q = eng.value_qname(v).unwrap_or_default();
+                // NON_INSTANCE_METHODS (stdlib.py:44).
+                if matches!(q.as_str(), "builtins.classmethod" | "builtins.staticmethod") {
+                    return;
+                }
+                // LRU_CACHE set (stdlib.py:39-43): the qnames @lru_cache and
+                // @lru_cache() infer to across py versions.
                 if matches!(
                     q.as_str(),
-                    "functools.cached_property" | "builtins.classmethod" | "builtins.staticmethod"
-                ) {
-                    return; // NON_INSTANCE_METHODS
-                }
-                if (q == "functools.lru_cache" || q == "functools._lru_cache_wrapper")
-                    && eng.kind_is(d, |k| matches!(k, NodeKind::Call { .. }))
+                    "functools.lru_cache"
+                        | "functools._lru_cache_wrapper.wrapper"
+                        | "functools.lru_cache.decorating_function"
+                ) && eng.kind_is(d, |k| matches!(k, NodeKind::Call { .. }))
                 {
                     // get_argument_from_call(d, position=0, keyword="maxsize")
                     let Some((_, dargs, dkws)) = call_parts(eng, d) else { break };
                     let mut arg: Option<GNode> = dargs.first().copied();
+                    let mut arg_is_value_node = false;
                     if arg.is_none() {
                         for &k in &dkws {
                             let md = eng.md(k.m);
@@ -1217,16 +1224,22 @@ impl StdlibCk {
                             }
                         }
                     }
+                    if arg.is_none() {
+                        // NoSuchArgumentError -> infer_kwarg_from_call: scan the
+                        // `**dict` unpack keywords, infer each to a Dict and
+                        // return the value node for key "maxsize"
+                        // (utils.py:747-760). The returned node is checked as
+                        // `isinstance(arg, Const) and arg.value is None` below.
+                        arg = infer_maxsize_kwarg(eng, cx, &dkws);
+                        arg_is_value_node = arg.is_some();
+                    }
                     let is_const_none = match arg {
-                        Some(a) => {
-                            // NoSuchArgument -> infer_kwarg_from_call (kwargs
-                            // dict unpack) — skipped: no **kwargs path here
-                            eng.kind_is(a, |k| {
-                                matches!(k, NodeKind::Const(ConstValue::None))
-                            })
-                        }
+                        Some(a) => eng.kind_is(a, |k| {
+                            matches!(k, NodeKind::Const(ConstValue::None))
+                        }),
                         None => false,
                     };
+                    let _ = arg_is_value_node;
                     if !is_const_none {
                         break;
                     }
@@ -1328,7 +1341,12 @@ impl StdlibCk {
             "pathlib" | "pathlib._local" => mode_arg_node = get_arg(0, "mode"),
             _ => {}
         }
-        // infer_kwarg_from_call fallback skipped (needs **kwargs dict unpack)
+        // NoSuchArgumentError -> infer_kwarg_from_call (open(..., **{"mode": ..}))
+        if mode_arg_node.is_none()
+            && matches!(open_module, "_io" | "pathlib" | "pathlib._local")
+        {
+            mode_arg_node = infer_kwarg_from_call(eng, cx, keywords, "mode");
+        }
         let mode_val: Option<Value> = mode_arg_node.and_then(|a| u::safe_infer(eng, cx.caches, a));
         let mode_const: Option<ConstValue> = match &mode_val {
             Some(Value::Node(g)) => {
@@ -1509,7 +1527,7 @@ impl StdlibCk {
         keywords: &[GNode],
     ) {
         let eng = cx.eng;
-        let arg: Option<GNode> = args.first().copied().or_else(|| {
+        let mut arg: Option<GNode> = args.first().copied().or_else(|| {
             for &k in keywords {
                 let md = eng.md(k.m);
                 if let NodeKind::Keyword { arg: Some(s), value } = &md.tree.nodes[k.n.idx()].kind {
@@ -1520,6 +1538,10 @@ impl StdlibCk {
             }
             None
         });
+        // NoSuchArgumentError -> infer_kwarg_from_call (copy.copy(**{"x": ..}))
+        if arg.is_none() {
+            arg = infer_kwarg_from_call(eng, cx, keywords, "x");
+        }
         let Some(arg) = arg else { return };
         let vals = u::infer_all(eng, cx.caches, arg);
         for v in vals.iter() {
@@ -1829,4 +1851,45 @@ fn primary_body(k: &NodeKind) -> Option<&[NodeId]> {
         NodeKind::MatchCase { body, .. } => Some(body),
         _ => None,
     }
+}
+
+fn infer_maxsize_kwarg(eng: &Engine, cx: &mut WalkCx, keywords: &[GNode]) -> Option<GNode> {
+    infer_kwarg_from_call(eng, cx, keywords, "maxsize")
+}
+
+/// `infer_kwarg_from_call(call, keyword)` (utils.py:747-760): scan a Call's
+/// `**`-unpack keywords (Keyword arg=None), safe_infer each to a Dict, and
+/// return the VALUE node for the first item whose key Const value == `keyword`.
+/// Used by W1518 / W1501 / W1507 for `**{...}` / `**KWARGS` argument passing.
+pub fn infer_kwarg_from_call(
+    eng: &Engine,
+    cx: &mut WalkCx,
+    keywords: &[GNode],
+    keyword: &str,
+) -> Option<GNode> {
+    for &k in keywords {
+        let value_node = {
+            let md = eng.md(k.m);
+            match &md.tree.nodes[k.n.idx()].kind {
+                NodeKind::Keyword { arg: None, value } => GNode { m: k.m, n: *value },
+                _ => continue,
+            }
+        };
+        let inferred = u::safe_infer(eng, cx.caches, value_node);
+        // Only a Dict node carries item KEY nodes we can compare; this mirrors
+        // astroid's isinstance(inferred, nodes.Dict) for `**{...}` sources.
+        if let Some(Value::Node(g)) = inferred {
+            let md = eng.md(g.m);
+            if let NodeKind::Dict { items } = &md.tree.nodes[g.n.idx()].kind {
+                for &(key, val) in items {
+                    if let NodeKind::Const(ConstValue::Str(s)) = &md.tree.nodes[key.idx()].kind {
+                        if &**s == keyword {
+                            return Some(GNode { m: g.m, n: val });
+                        }
+                    }
+                }
+            }
+        }
+    }
+    None
 }
