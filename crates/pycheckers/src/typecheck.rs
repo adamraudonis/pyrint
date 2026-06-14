@@ -473,6 +473,81 @@ fn is_c_extension_module(eng: &Engine, owner_mod: GNode) -> bool {
     !fully_defined
 }
 
+/// mixin-class-rgx default `.*[Mm]ixin` under `re.match` (anchored at start
+/// but `.*`-prefixed) -> matches any name CONTAINING "Mixin" or "mixin".
+fn mixin_class_rgx_match(name: &str) -> bool {
+    name.contains("Mixin") || name.contains("mixin")
+}
+
+/// utils.is_attribute_typed_annotation (utils.py:1728-1741): the attr is a
+/// class-level `AnnAssign` annotation in `cls` or any of its (inferable) bases.
+fn is_attribute_typed_annotation(
+    eng: &Engine,
+    caches: &u::LintCaches,
+    cls: GNode,
+    attr_name: &str,
+) -> bool {
+    let sym = eng.sym(attr_name);
+    // node.locals.get(attr_name, [None])[0] is an AssignName whose parent is an
+    // AnnAssign.
+    let first_local = {
+        let md = eng.md(cls.m);
+        let locals = md.locals.borrow();
+        let r = locals
+            .get(&cls.n)
+            .and_then(|l| l.get(&sym))
+            .and_then(|v| v.first().copied());
+        r
+    };
+    if let Some(an) = first_local {
+        let is_ann_assign_name = {
+            let md = eng.md(an.m);
+            if matches!(&md.tree.nodes[an.n.idx()].kind, NodeKind::AssignName { .. }) {
+                eng.parent(an).is_some_and(|p| {
+                    eng.kind_is(p, |k| matches!(k, NodeKind::AnnAssign { .. }))
+                })
+            } else {
+                false
+            }
+        };
+        if is_ann_assign_name {
+            return true;
+        }
+    }
+    for base in eng.class_bases(cls) {
+        if let Some(Value::Node(g)) = u::safe_infer(eng, caches, base) {
+            if is_classdef(eng, g) && g != cls && is_attribute_typed_annotation(eng, caches, g, attr_name) {
+                return true;
+            }
+        }
+    }
+    false
+}
+
+/// _string_distance (typecheck.py:147-174): Levenshtein edit distance.
+fn string_distance(seq1: &str, seq2: &str) -> usize {
+    let s1: Vec<char> = seq1.chars().collect();
+    let s2: Vec<char> = seq2.chars().collect();
+    let (n, m) = (s1.len(), s2.len());
+    if n == 0 {
+        return m;
+    }
+    if m == 0 {
+        return n;
+    }
+    let mut prev: Vec<usize> = (0..=m).collect();
+    let mut cur = vec![0usize; m + 1];
+    for i in 1..=n {
+        cur[0] = i;
+        for j in 1..=m {
+            let cost = usize::from(s1[i - 1] != s2[j - 1]);
+            cur[j] = (prev[j] + 1).min(cur[j - 1] + 1).min(prev[j - 1] + cost);
+        }
+        std::mem::swap(&mut prev, &mut cur);
+    }
+    prev[m]
+}
+
 /// _emit_no_member const-False IF/IfExp guard (typecheck.py:508-529): walk
 /// parents from `node` up to its scope; if any enclosing `if`/IfExp has a test
 /// that safe-infers to a const whose bool_value is False and `node`'s subtree
@@ -577,6 +652,25 @@ impl TypeCk {
             return;
         }
 
+        // E1101 (no-member) is disabled at config level under the target
+        // profiles, so `add_message("no-member", line)` only survives when an
+        // inline `# pylint: enable=E1101`/`enable=no-member` pragma re-enables
+        // it at the access line. TypeChecker.visit_attribute still RUNS (the
+        // method is registered because c-extension-no-member/I1101 is config-
+        // enabled), so a pragma-enabled instance access must surface E1101.
+        // Restrict to the homogeneous all-Instance case (mirroring the all-
+        // Module restriction below): if every inferred owner is an Instance and
+        // E1101 is enabled at this line, replicate pylint's owner.getattr +
+        // _emit_no_member gates for the instance owner.
+        let e1101_line = u::lineno(eng, node);
+        let all_instances = inferred
+            .iter()
+            .all(|v| matches!(v, Value::Inst { .. } | Value::ExcInst { .. }));
+        if all_instances && (cx.is_enabled)("E1101", e1101_line) {
+            self.emit_no_member_instances(cx, node, &attrname, e1101_line);
+            return;
+        }
+
         // I1101 can only originate from a Module owner. If ANY inferred owner
         // is NOT a Module, we cannot (without full E1101 inference) verify
         // whether that owner has the attribute and would therefore make pylint
@@ -639,6 +733,250 @@ impl TypeCk {
                 ),
             );
         }
+    }
+
+    /// E1101 no-member for the homogeneous all-Instance owner case
+    /// (TypeChecker.visit_attribute, typecheck.py:1111-1200, restricted to
+    /// Instance owners). Only reached when E1101 is pragma-enabled at the
+    /// access line (config-disabled under the target profiles). Replicates
+    /// `owner.getattr` (BaseInstance.getattr) + `_emit_no_member` instance
+    /// gates + the `_node_names`/`_string_distance` similar-name hint.
+    fn emit_no_member_instances(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        attrname: &str,
+        line: u32,
+    ) {
+        let eng = cx.eng;
+        let expr = match &eng.md(node.m).tree.nodes[node.n.idx()].kind {
+            NodeKind::Attribute { expr, .. } => GNode { m: node.m, n: *expr },
+            _ => return,
+        };
+        let flow = eng.infer(expr, &Ctx::new());
+        let inferred = &flow.vals;
+        if inferred.is_empty() {
+            return;
+        }
+        let sym = eng.sym(attrname);
+        // (cls, owner_name) of each missing-attribute instance owner.
+        let mut missing: Vec<GNode> = Vec::new();
+        let mut found = false;
+        for owner in inferred {
+            let cls = match owner {
+                Value::Inst { cls, .. } | Value::ExcInst { cls, .. } => *cls,
+                _ => continue,
+            };
+            // _is_owner_ignored: ignored-classes / ignored-modules defaults do
+            // not match a project-local class -> never ignored. (Defaults are
+            // optparse.Values, thread._local, _thread._local, argparse.Namespace
+            // and an empty ignored-modules list; a project class' qname/root
+            // qname never collides with those.)
+            let owner_name = eng.node_name(cls).unwrap_or_default();
+            if Self::instance_owner_ignored(eng, cls, attrname) {
+                continue;
+            }
+            // owner.getattr(attrname) == BaseInstance.getattr(lookupclass=True).
+            match eng.instance_getattr(owner, sym, None, true) {
+                Ok(vals) if !vals.is_empty() => {
+                    // pylint filters out augmented/self-referencing assignment
+                    // nodes; if every found node is filtered the owner is still
+                    // "missing". For instance owners reaching here the attribute
+                    // genuinely resolves, so treat as found.
+                    found = true;
+                    break;
+                }
+                _ => {
+                    if self.emit_no_member_instance_gate(
+                        cx, node, owner, cls, &owner_name, attrname,
+                    ) {
+                        missing.push(cls);
+                    }
+                }
+            }
+        }
+        if found {
+            return;
+        }
+        let col = u::col_offset(eng, node) as i64;
+        let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
+        for cls in missing {
+            // dedup on the proxied ClassDef (pylint: owner._proxied for an
+            // Instance).
+            if !done.insert(cls) {
+                continue;
+            }
+            let owner_name = eng.node_name(cls).unwrap_or_default();
+            let hint = Self::similar_names_hint(eng, cls, attrname);
+            cx.emit_node(
+                "E1101",
+                line,
+                col,
+                u::format_template(
+                    "%s %r has no %r member%s",
+                    &["Instance of", &owner_name, attrname, &hint],
+                ),
+            );
+        }
+    }
+
+    /// _is_owner_ignored (typecheck.py:108-131) for an Instance owner with the
+    /// stock ignored-classes / ignored-modules defaults.
+    fn instance_owner_ignored(eng: &Engine, cls: GNode, attrname: &str) -> bool {
+        const IGNORED_CLASSES: [&str; 4] = [
+            "optparse.Values",
+            "thread._local",
+            "_thread._local",
+            "argparse.Namespace",
+        ];
+        let qname = eng.qname(cls);
+        IGNORED_CLASSES
+            .iter()
+            .any(|ic| *ic == qname || *ic == attrname)
+    }
+
+    /// _emit_no_member (typecheck.py:429-531) for an Instance owner: the
+    /// applicable gates are the AttributeError-handler guard, enum/getattr/
+    /// known-bases/typed-annotation instance gates, the mixin regex, the
+    /// private-name mangling check, and the const-False IF/IfExp guard.
+    fn emit_no_member_instance_gate(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        owner: &Value,
+        cls: GNode,
+        owner_name: &str,
+        attrname: &str,
+    ) -> bool {
+        let eng = cx.eng;
+        let caches = cx.caches;
+        // node_ignores_exception(node, AttributeError)
+        if u::node_ignores_exception(eng, caches, node, "AttributeError") {
+            return false;
+        }
+        // is_super(owner) / type == "metaclass": an Instance is neither.
+        // owner_name && ignored_mixins && mixin_class_rgx.match(owner_name):
+        // default mixin-class-rgx = ".*[Mm]ixin" and no-member is in
+        // ignored-checks-for-mixins by default (ignored_mixins=True).
+        if !owner_name.is_empty() && mixin_class_rgx_match(owner_name) {
+            return false;
+        }
+        // isinstance(owner, (Instance, ClassDef)) gates:
+        // enum metaclass special-case.
+        if let Some(meta) = eng.metaclass(cls, None) {
+            if let Some(mg) = eng.proxied_class(&meta).or_else(|| match meta {
+                Value::Node(g) if is_classdef(eng, g) => Some(g),
+                _ => None,
+            }) {
+                let mq = eng.qname(mg);
+                if mq == "enum.EnumMeta" || mq == "enum.EnumType" {
+                    // _enum_has_attribute: conservatively suppress (an enum
+                    // instance with a __getattr__-style metaclass). No enum
+                    // instance reaches the target profiles' E1101 scope.
+                    return false;
+                }
+            }
+        }
+        // has_dynamic_getattr(): __getattr__/__getattribute__ defined.
+        if eng.has_dynamic_getattr(cls, &Ctx::new()) {
+            return false;
+        }
+        // has_known_bases()
+        if !has_known_bases(eng, caches, cls) {
+            return false;
+        }
+        // is_attribute_typed_annotation(owner, attrname)
+        if is_attribute_typed_annotation(eng, caches, cls, attrname) {
+            return false;
+        }
+        // private-name mangling: attrname.startswith("_" + owner_name)
+        if !owner_name.is_empty() {
+            let prefix = format!("_{owner_name}");
+            if attrname.starts_with(&prefix) {
+                let unmangled = &attrname[prefix.len()..];
+                let usym = eng.sym(unmangled);
+                // owner.getattr(unmangled) — Instance.getattr on the SAME owner.
+                match eng.instance_getattr(owner, usym, None, true) {
+                    Ok(v) if !v.is_empty() => return false,
+                    _ => return true,
+                }
+            }
+        }
+        // const-False IF/IfExp guard.
+        if guarded_by_const_false_if(eng, caches, node) {
+            return false;
+        }
+        true
+    }
+
+    /// _similar_names + _get_nomember_msgid_hint (typecheck.py:178-217,
+    /// 1209-1224) for an Instance owner. Returns the `%s` hint tail
+    /// ("" or "; maybe <names>?"). Defaults: missing-member-hint=True,
+    /// distance=1, max-choices=1.
+    fn similar_names_hint(eng: &Engine, cls: GNode, attrname: &str) -> String {
+        const DISTANCE: usize = 1;
+        const MAX_CHOICES: usize = 1;
+        // _node_names for an Instance: instance_attrs.keys() + locals.keys()
+        // of the class, then MRO ancestors' names.
+        let mut names: Vec<String> = Vec::new();
+        let push_class_names = |c: GNode, names: &mut Vec<String>| {
+            // instance_attrs.keys()
+            for (sym, _) in eng.instance_attrs_of(c) {
+                names.push(eng.sname(sym));
+            }
+            // locals.keys()
+            let md = eng.md(c.m);
+            let locals = md.locals.borrow();
+            if let Some(l) = locals.get(&c.n) {
+                for sym in l.keys() {
+                    names.push(eng.sname(*sym));
+                }
+            }
+        };
+        push_class_names(cls, &mut names);
+        // mro()[1:] (ancestors excluding self); fall back to ancestors().
+        let mro = match eng.mro(cls, None) {
+            Ok(m) => m.into_iter().skip(1).collect::<Vec<_>>(),
+            Err(_) => eng.ancestors(cls, true, None),
+        };
+        for anc in mro {
+            push_class_names(anc, &mut names);
+        }
+        let attr_len = attrname.chars().count();
+        let mut possible: Vec<(String, usize)> = Vec::new();
+        for name in &names {
+            if name == attrname {
+                continue;
+            }
+            let name_len = name.chars().count();
+            let min_distance = attr_len.abs_diff(name_len);
+            if min_distance > DISTANCE {
+                continue;
+            }
+            let distance = string_distance(attrname, name);
+            if distance <= DISTANCE {
+                possible.push((name.clone(), distance));
+            }
+        }
+        // heapq.nsmallest(MAX_CHOICES, possible, key=distance) then sorted().
+        possible.sort_by(|a, b| a.1.cmp(&b.1));
+        let mut picked: Vec<String> =
+            possible.into_iter().take(MAX_CHOICES).map(|(n, _)| n).collect();
+        picked.sort();
+        if picked.is_empty() {
+            return String::new();
+        }
+        let names_hint = if picked.len() == 1 {
+            format!("'{}'", picked[0])
+        } else {
+            let head = picked[..picked.len() - 1]
+                .iter()
+                .map(|n| format!("'{n}'"))
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("one of {} or '{}'", head, picked[picked.len() - 1])
+        };
+        format!("; maybe {names_hint}?")
     }
 
     /// _emit_no_member (typecheck.py:429-531) reduced to the Module-owner gates.
