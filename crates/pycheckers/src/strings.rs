@@ -1051,13 +1051,19 @@ impl StringCk {
                         }
                     }
                     FieldSpec::IndexNum(_) | FieldSpec::IndexStr(_) => {
-                        let (spec_str, idx_val): (String, Value) = match spec {
+                        // `specifier` is the int/str from formatter_field_name_split
+                        // (utils.parse_format_method_string): numeric field parts
+                        // are Python ints, named parts are str. The W1307 message
+                        // formats `%r % specifier` — int repr has NO quotes.
+                        let (spec_str, spec_repr, idx_val): (String, String, Value) = match spec {
                             FieldSpec::IndexNum(n) => (
+                                n.to_string(),
                                 n.to_string(),
                                 Value::SynthConst(std::rc::Rc::new(ConstValue::Int(pyast::tree::IntValue::Small(*n)))),
                             ),
                             FieldSpec::IndexStr(s) => (
                                 s.clone(),
+                                u::py_repr_str(s),
                                 Value::SynthConst(std::rc::Rc::new(ConstValue::Str(
                                     s.clone().into_boxed_str(),
                                 ))),
@@ -1066,8 +1072,13 @@ impl StringCk {
                         };
                         parsed.push((false, spec_str.clone()));
                         let mut warn_error = false;
-                        // hasattr(previous, "getitem") — Instance has NO
-                        // getitem attr; ClassDef/containers/Const do
+                        // hasattr(previous, "getitem") — Python hasattr on the
+                        // astroid NODE: True for List/Tuple/Dict/Set/Const/
+                        // ClassDef/Instance/FrozenSet, False for FunctionDef/
+                        // Module/BoundMethod/Generator/Uninferable. An Instance
+                        // (e.g. `list(extra.keys())` -> generic list Instance)
+                        // HAS getitem, and Instance.getitem(Const(0)) raises
+                        // AstroidTypeError -> W1307 (salt args.py:465).
                         let has_getitem_attr = match &previous {
                             Value::Node(g) => {
                                 let md = eng.md(g.m);
@@ -1081,7 +1092,9 @@ impl StringCk {
                                         | NodeKind::ClassDef(_)
                                 ) || is_classdef(eng, *g)
                             }
-                            Value::SynthConst(_)
+                            Value::Inst { .. }
+                            | Value::ExcInst { .. }
+                            | Value::SynthConst(_)
                             | Value::SynthSeq { .. }
                             | Value::SynthDict { .. }
                             | Value::FrozenSet { .. } => true,
@@ -1118,8 +1131,8 @@ impl StringCk {
                                 u::lineno(eng, node),
                                 u::col_offset(eng, node) as i64,
                                 u::format_template(
-                                    "Using invalid lookup key %r in format specifier %r",
-                                    &[&spec_str, &path],
+                                    "Using invalid lookup key %s in format specifier %r",
+                                    &[&spec_repr, &path],
                                 ),
                             );
                             break 'specloop;
