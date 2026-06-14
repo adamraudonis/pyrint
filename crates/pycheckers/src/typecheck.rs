@@ -784,6 +784,18 @@ impl TypeCk {
             return;
         }
 
+        // Homogeneous all-Generator owner case (`gen.attr`). A bases.Generator
+        // is a BaseInstance proxied to the builtins `generator`/`async_generator`
+        // class but is NOT an astroid.Instance, so the Instance/ClassDef
+        // _emit_no_member gate block (has_dynamic_getattr / has_known_bases /
+        // typed-annotation) does NOT run for it. display_type "Generator"/
+        // "AsyncGenerator"; name == proxied class name "generator"/"async_generator".
+        let all_generators = inferred.iter().all(|v| matches!(v, Value::Generator { .. }));
+        if all_generators && (cx.is_enabled)("E1101", e1101_line) {
+            self.emit_no_member_generators(cx, node, &attrname, e1101_line);
+            return;
+        }
+
         // I1101 can only originate from a Module owner. If ANY inferred owner
         // is NOT a Module, we cannot (without full E1101 inference) verify
         // whether that owner has the attribute and would therefore make pylint
@@ -1147,6 +1159,127 @@ impl TypeCk {
                 let unmangled = &attrname[prefix.len()..];
                 let usym = eng.sym(unmangled);
                 match eng.super_getattr(owner, usym, None) {
+                    Ok(v) if !v.is_empty() => return false,
+                    _ => return true,
+                }
+            }
+        }
+        if guarded_by_const_false_if(eng, caches, node) {
+            return false;
+        }
+        true
+    }
+
+    /// E1101 no-member for the homogeneous all-Generator owner case
+    /// (`gen.attr`). owner.getattr == BaseInstance.getattr on the proxied
+    /// `generator`/`async_generator` class (instance_attrs + GeneratorModel
+    /// special attrs + class getattr). A bases.Generator is NOT an
+    /// astroid.Instance, so the Instance/ClassDef gate block is skipped; the
+    /// applicable gates are the AttributeError-handler guard, the mixin regex,
+    /// private-name mangling, and the const-False IF/IfExp guard.
+    fn emit_no_member_generators(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        attrname: &str,
+        line: u32,
+    ) {
+        let eng = cx.eng;
+        let expr = match &eng.md(node.m).tree.nodes[node.n.idx()].kind {
+            NodeKind::Attribute { expr, .. } => GNode { m: node.m, n: *expr },
+            _ => return,
+        };
+        let flow = eng.infer(expr, &Ctx::new());
+        let inferred = flow.vals.clone();
+        if inferred.is_empty() {
+            return;
+        }
+        let sym = eng.sym(attrname);
+        // dedup on the proxied (generator / async_generator) ClassDef.
+        let mut missing: Vec<GNode> = Vec::new();
+        let mut found = false;
+        for owner in &inferred {
+            let is_async = match owner {
+                Value::Generator { is_async, .. } => *is_async,
+                _ => continue,
+            };
+            let cls = match eng.proxied_class(owner) {
+                Some(c) => c,
+                None => continue,
+            };
+            let owner_name = eng.node_name(cls).unwrap_or_default();
+            // owner.getattr(attrname): BaseInstance.getattr (lookupclass=True
+            // so the proxied class getattr is consulted too).
+            match eng.instance_getattr(owner, sym, None, true) {
+                Ok(vals) if !vals.is_empty() => {
+                    found = true;
+                    break;
+                }
+                _ => {
+                    if Self::emit_no_member_generator_gate(cx, node, owner, &owner_name, attrname) {
+                        missing.push(cls);
+                    }
+                }
+            }
+            let _ = is_async;
+        }
+        if found {
+            return;
+        }
+        let col = u::col_offset(eng, node) as i64;
+        let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
+        for owner in &inferred {
+            let (is_async, cls) = match owner {
+                Value::Generator { is_async, .. } => {
+                    let c = match eng.proxied_class(owner) { Some(c) => c, None => continue };
+                    (*is_async, c)
+                }
+                _ => continue,
+            };
+            if !missing.contains(&cls) || !done.insert(cls) {
+                continue;
+            }
+            let owner_name = eng.node_name(cls).unwrap_or_default();
+            let display = if is_async { "AsyncGenerator" } else { "Generator" };
+            cx.emit_node(
+                "E1101",
+                line,
+                col,
+                u::format_template(
+                    "%s %r has no %r member%s",
+                    &[display, &owner_name, attrname, ""],
+                ),
+            );
+        }
+    }
+
+    /// _emit_no_member Generator-owner gates: AttributeError handler, mixin
+    /// regex on the proxied class name, private-name mangling, const-False IF.
+    /// (Generator is a BaseInstance but not an astroid.Instance, so the
+    /// Instance/ClassDef block — incl. has_dynamic_getattr / has_known_bases —
+    /// does not apply.)
+    fn emit_no_member_generator_gate(
+        cx: &mut WalkCx,
+        node: GNode,
+        owner: &Value,
+        owner_name: &str,
+        attrname: &str,
+    ) -> bool {
+        let eng = cx.eng;
+        let caches = cx.caches;
+        if u::node_ignores_exception(eng, caches, node, "AttributeError") {
+            return false;
+        }
+        if !owner_name.is_empty() && mixin_class_rgx_match(owner_name) {
+            return false;
+        }
+        // private-name mangling: attrname.startswith("_" + owner_name).
+        if !owner_name.is_empty() {
+            let prefix = format!("_{owner_name}");
+            if attrname.starts_with(&prefix) {
+                let unmangled = &attrname[prefix.len()..];
+                let usym = eng.sym(unmangled);
+                match eng.instance_getattr(owner, usym, None, true) {
                     Ok(v) if !v.is_empty() => return false,
                     _ => return true,
                 }
