@@ -761,6 +761,14 @@ impl TypeCk {
             return;
         }
 
+        // NOTE: a homogeneous all-ClassDef owner branch (class-object member
+        // access, e.g. dict.__add__, ZipFile.assert_not_called) is NOT enabled
+        // here: it exposed E1101 FPs on classes whose locally-scoped metaclass
+        // defines __getattr__ (sqlalchemy test Point(metaclass=MetaPoint)),
+        // because our has_dynamic_getattr does not yet resolve a function-
+        // scoped metaclass __getattr__ the way astroid does. Leaving the 4
+        // Class-owner FNs unflagged keeps the cardinal-sin FP count at zero.
+
         // I1101 can only originate from a Module owner. If ANY inferred owner
         // is NOT a Module, we cannot (without full E1101 inference) verify
         // whether that owner has the attribute and would therefore make pylint
@@ -923,6 +931,80 @@ impl TypeCk {
                 u::format_template(
                     "%s %r has no %r member%s",
                     &["Instance of", &owner_name, attrname, &hint],
+                ),
+            );
+        }
+    }
+
+    /// E1101 no-member for the homogeneous all-ClassDef owner case
+    /// (class-object member access). owner.getattr is ClassDef.getattr with
+    /// class_context=True; the gates are the shared (Instance, ClassDef)
+    /// _emit_no_member gates; display_type "Class". Currently NOT wired into
+    /// the dispatch (see visit_attribute) pending a metaclass-__getattr__
+    /// has_dynamic_getattr fix; retained for that follow-up.
+    #[allow(dead_code)]
+    fn emit_no_member_classes(
+        &mut self,
+        cx: &mut WalkCx,
+        node: GNode,
+        attrname: &str,
+        line: u32,
+    ) {
+        let eng = cx.eng;
+        let expr = match &eng.md(node.m).tree.nodes[node.n.idx()].kind {
+            NodeKind::Attribute { expr, .. } => GNode { m: node.m, n: *expr },
+            _ => return,
+        };
+        let flow = eng.infer(expr, &Ctx::new());
+        let inferred = flow.vals.clone();
+        if inferred.is_empty() {
+            return;
+        }
+        let sym = eng.sym(attrname);
+        let mut missing: Vec<GNode> = Vec::new();
+        let mut found = false;
+        for owner in &inferred {
+            let cls = match owner {
+                Value::Node(g) if is_classdef(eng, *g) => *g,
+                _ => continue,
+            };
+            let owner_name = eng.node_name(cls).unwrap_or_default();
+            if Self::instance_owner_ignored(eng, cls, attrname) {
+                continue;
+            }
+            // owner.getattr(attrname): ClassDef.getattr(class_context=True).
+            match eng.class_getattr(cls, sym, None, true) {
+                Ok(vals) if !vals.is_empty() => {
+                    found = true;
+                    break;
+                }
+                _ => {
+                    if self.emit_no_member_instance_gate(
+                        cx, node, owner, cls, &owner_name, attrname,
+                    ) {
+                        missing.push(cls);
+                    }
+                }
+            }
+        }
+        if found {
+            return;
+        }
+        let col = u::col_offset(eng, node) as i64;
+        let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
+        for cls in missing {
+            if !done.insert(cls) {
+                continue;
+            }
+            let owner_name = eng.node_name(cls).unwrap_or_default();
+            let hint = Self::similar_names_hint(eng, cls, attrname);
+            cx.emit_node(
+                "E1101",
+                line,
+                col,
+                u::format_template(
+                    "%s %r has no %r member%s",
+                    &["Class", &owner_name, attrname, &hint],
                 ),
             );
         }
