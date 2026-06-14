@@ -990,12 +990,22 @@ impl StringCk {
                 continue;
             }
             let Some(mut previous) = argument else { continue };
-            // argument.parent is Arguments -> skip
+            // argument.parent is Arguments -> skip (strings.py:574-577). astroid
+            // parents the synthetic *args Tuple / **kwargs Dict to the
+            // Arguments node, so a value inferred FROM a vararg/kwarg parameter
+            // is ignored. Our synthetic containers carry no parent, so we
+            // detect the case from the source: a bare Name argument that
+            // resolves to a vararg/kwarg AssignName.
             if let Value::Node(g) = &previous {
                 if let Some(p) = eng.parent(*g) {
                     if eng.kind_is(p, |k| matches!(k, NodeKind::Arguments(_))) {
                         continue;
                     }
+                }
+            }
+            if let NV::N(g) = &argname {
+                if argname_is_vararg_or_kwarg(eng, *g) {
+                    continue;
                 }
             }
             let mut parsed: Vec<(bool, String)> = Vec::new();
@@ -1221,4 +1231,57 @@ fn const_repr_for_msg(c: &ConstValue) -> String {
         ConstValue::NotImplemented => "NotImplemented".into(),
         ConstValue::StrSurrogate(_) => String::new(),
     }
+}
+
+/// Whether the call-argument node `g` is a bare Name that resolves to a
+/// `*args`/`**kwargs` parameter. astroid infers such a Name to a synthetic
+/// Tuple/Dict parented to the Arguments node; pylint's W1306/W1307 then skip it
+/// (strings.py:574-577 "Ignore any object coming from an argument"). Our
+/// synthetic containers carry no parent, so we replicate the test on the
+/// source: resolve the Name and check whether any binding is the vararg/kwarg
+/// AssignName of an Arguments node. Uses the engine lookup whose (node, name)
+/// key was already populated by the preceding safe_infer (cache hit, no burn).
+fn argname_is_vararg_or_kwarg(eng: &Engine, g: GNode) -> bool {
+    let name_sym = {
+        let md = eng.md(g.m);
+        match &md.tree.nodes[g.n.idx()].kind {
+            NodeKind::Name { name } => eng.g(&md, *name),
+            _ => return false,
+        }
+    };
+    let res = eng.lookup(g, name_sym);
+    for nv in res.1.iter() {
+        let bind = match nv {
+            NV::N(b) => *b,
+            _ => continue,
+        };
+        let md = eng.md(bind.m);
+        match &md.tree.nodes[bind.n.idx()].kind {
+            // Our lookup resolves a *args/**kwargs name to the Arguments
+            // frame directly: check its vararg/kwarg sym (local Sym -> GSym).
+            NodeKind::Arguments(a) => {
+                let vararg_g = a.vararg.map(|s| eng.g(&md, s));
+                let kwarg_g = a.kwarg.map(|s| eng.g(&md, s));
+                if vararg_g == Some(name_sym) || kwarg_g == Some(name_sym) {
+                    return true;
+                }
+            }
+            // ...or to the AssignName itself, whose Arguments parent's
+            // vararg/kwarg node matches.
+            NodeKind::AssignName { .. } => {
+                let bn = bind.n;
+                drop(md);
+                if let Some(parent) = eng.parent(bind) {
+                    let pmd = eng.md(parent.m);
+                    if let NodeKind::Arguments(a) = &pmd.tree.nodes[parent.n.idx()].kind {
+                        if a.vararg_node == Some(bn) || a.kwarg_node == Some(bn) {
+                            return true;
+                        }
+                    }
+                }
+            }
+            _ => {}
+        }
+    }
+    false
 }

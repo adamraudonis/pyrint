@@ -182,6 +182,8 @@ pub struct Prepared {
     pub strconst_u: bool,
     /// EllipsisChecker visit_const: unnecessary-ellipsis (W2301)
     pub ellipsis_const: bool,
+    /// MatchStatementChecker visit_matchas: match-class-bind-self (R1905)
+    pub match_bind_self: bool,
     // ImplicitBooleanessChecker
     /// visit_call: use-implicit-booleaness-not-len (C1802)
     pub implbool_call: bool,
@@ -314,6 +316,7 @@ impl Prepared {
             strconst_concat: enabled("W1404"),
             strconst_u: enabled("W1406"),
             ellipsis_const: enabled("W2301"),
+            match_bind_self: enabled("R1905"),
             implbool_call: enabled("C1802"),
             implbool_unaryop: enabled("C1802"),
             implbool_compare: any(&["C1803", "C1804", "C1805"]),
@@ -1206,6 +1209,11 @@ impl Walker<'_> {
             }
             Tag::Match => self.match_ck.visit_match(cx, g),
             Tag::MatchClass => self.match_ck.visit_matchclass(cx, g),
+            Tag::MatchAs => {
+                if self.prep.match_bind_self {
+                    self.match_ck.visit_matchas(cx, g);
+                }
+            }
             Tag::Global => {
                 if self.prep.nonascii_name {
                     self.nonascii.visit_global(cx, g);
@@ -1443,6 +1451,7 @@ enum Tag {
     AugAssign,
     List,
     Tuple,
+    MatchAs,
     Other,
 }
 
@@ -1504,6 +1513,7 @@ fn kind_tag(k: &NodeKind) -> Tag {
         NodeKind::AugAssign { .. } => Tag::AugAssign,
         NodeKind::List { .. } => Tag::List,
         NodeKind::Tuple { .. } => Tag::Tuple,
+        NodeKind::MatchAs { .. } => Tag::MatchAs,
         _ => Tag::Other,
     }
 }

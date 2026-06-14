@@ -236,6 +236,71 @@ impl MatchCk {
         }
     }
 
+    /// visit_matchas — R1905 (match_statements_checker.py:124-142). Fires on a
+    /// MatchAs(name=AssignName, pattern=None) whose parent is a
+    /// MatchClass(cls=Name, patterns=[single]) where the cls infers to one of
+    /// the self-binding builtin classes.
+    pub fn visit_matchas(&mut self, cx: &mut WalkCx, node: GNode) {
+        let eng = cx.eng;
+        // node.name is AssignName and node.pattern is None
+        let (name_str, parent) = {
+            let md = eng.md(node.m);
+            let NodeKind::MatchAs { pattern, name } = &md.tree.nodes[node.n.idx()].kind else {
+                return;
+            };
+            if pattern.is_some() {
+                return;
+            }
+            let Some(name_id) = name else { return };
+            let nm = match &md.tree.nodes[name_id.idx()].kind {
+                NodeKind::AssignName { name } => md.tree.s(*name).to_string(),
+                _ => return,
+            };
+            (nm, eng.parent(node))
+        };
+        let Some(parent) = parent else { return };
+        // parent is MatchClass(cls=Name, patterns=[exactly one])
+        let cls_name_node = {
+            let md = eng.md(parent.m);
+            let NodeKind::MatchClass { cls, patterns, .. } =
+                &md.tree.nodes[parent.n.idx()].kind
+            else {
+                return;
+            };
+            if patterns.len() != 1 {
+                return;
+            }
+            let cls = *cls;
+            if !matches!(md.tree.nodes[cls.idx()].kind, NodeKind::Name { .. }) {
+                return;
+            }
+            GNode { m: parent.m, n: cls }
+        };
+        // safe_infer(cls_name) is a ClassDef whose qname is in the self set
+        let inferred = u::safe_infer(eng, cx.caches, cls_name_node);
+        let Some(Value::Node(cls)) = inferred else { return };
+        if !is_classdef(eng, cls) {
+            return;
+        }
+        let q = eng.value_qname(&Value::Node(cls)).unwrap_or_default();
+        if !MATCH_CLASS_SELF_NAMES.contains(&q.as_str()) {
+            return;
+        }
+        let cls_name = {
+            let md = eng.md(cls_name_node.m);
+            match &md.tree.nodes[cls_name_node.n.idx()].kind {
+                NodeKind::Name { name } => md.tree.s(*name).to_string(),
+                _ => String::new(),
+            }
+        };
+        cx.emit_node(
+            "R1905",
+            u::lineno(eng, node),
+            u::col_offset(eng, node) as i64,
+            u::format_template("Use '%s() as %s' instead", &[&cls_name, &name_str]),
+        );
+    }
+
     /// get_match_args_for_class (match_statements_checker.py:144-166)
     fn get_match_args_for_class(&self, cx: &mut WalkCx, node: GNode) -> Option<Vec<String>> {
         let eng = cx.eng;
