@@ -560,6 +560,18 @@ const FUNCTION_MODEL_ATTRS: &[&str] = &[
     "__str__", "__subclasshook__",
 ];
 
+/// Method-model special attributes that a (Un)BoundMethod owner resolves
+/// beyond the wrapped FunctionDef (BoundMethodModel adds __func__/__self__;
+/// UnboundMethodModel adds im_class/im_func/im_self). Union is used: it is a
+/// superset of either model so it never under-reports, and these names never
+/// collide with a real missing-member access in practice.
+fn method_model_extra_attr(attrname: &str) -> bool {
+    matches!(
+        attrname,
+        "__func__" | "__self__" | "im_class" | "im_func" | "im_self"
+    )
+}
+
 /// FunctionDef.getattr (scoped_nodes.py:1047-1060): the attribute resolves
 /// iff it is in the function's instance_attrs OR in FunctionModel's special
 /// attributes. (A function's `locals` are NOT consulted by getattr.)
@@ -592,7 +604,11 @@ fn funcdef_display_type(eng: &Engine, func: GNode) -> &'static str {
         _ => false,
     };
     drop(md);
-    if first_is_self && is_classdef(eng, eng.scope(func)) {
+    // FunctionDef.type (scoped_nodes.py:914-916): `self.parent and
+    // isinstance(self.parent.scope(), ClassDef)`. The function node IS its
+    // own scope, so look at the ENCLOSING scope via its parent.
+    let parent_scope = eng.parent(func).map(|p| eng.scope(p));
+    if first_is_self && parent_scope.map(|s| is_classdef(eng, s)).unwrap_or(false) {
         "Method"
     } else {
         "Function"
@@ -724,15 +740,17 @@ impl TypeCk {
 
         // Homogeneous all-Function/Method owner case. A FunctionDef owner's
         // getattr (scoped_nodes.py:1047-1060) resolves only instance_attrs +
-        // the FunctionModel special attributes; anything else raises
-        // NotFoundError -> no-member. The _emit_no_member FunctionDef gate
-        // (typecheck.py:458-461) suppresses decorated/abstract functions.
-        let all_funcs = inferred.iter().all(|v| matches!(
-            v,
-            Value::Node(g) if eng.kind_is(*g, |k| matches!(
+        // the FunctionModel special attributes; (Un)BoundMethod owners proxy
+        // to the FunctionDef plus their own method-model attrs. Anything else
+        // raises NotFoundError -> no-member. The _emit_no_member FunctionDef
+        // gate (typecheck.py:458-461) suppresses decorated/abstract functions.
+        let all_funcs = inferred.iter().all(|v| match v {
+            Value::Node(g) => eng.kind_is(*g, |k| matches!(
                 k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
-            ))
-        ));
+            )),
+            Value::BoundMethod { .. } | Value::UnboundMethod { .. } => true,
+            _ => false,
+        });
         if all_funcs && (cx.is_enabled)("E1101", e1101_line) {
             self.emit_no_member_functions(cx, node, &attrname, e1101_line);
             return;
@@ -925,25 +943,34 @@ impl TypeCk {
         if inferred.is_empty() {
             return;
         }
-        let mut missing: Vec<GNode> = Vec::new();
+        // (func, is_method_proxy): a (Un)BoundMethod owner proxies getattr/
+        // display_type/name/is_abstract to its FunctionDef but also carries
+        // its own method-model special attrs.
+        let mut missing: Vec<(GNode, bool)> = Vec::new();
         let mut found = false;
         for owner in &inferred {
-            let func = match owner {
+            let (func, method_proxy) = match owner {
                 Value::Node(g) if eng.kind_is(*g, |k| matches!(
                     k, NodeKind::FunctionDef(_) | NodeKind::AsyncFunctionDef(_)
-                )) => *g,
+                )) => (*g, false),
+                Value::BoundMethod { func, .. } | Value::UnboundMethod { func } => {
+                    (*func, true)
+                }
                 _ => continue,
             };
             // _is_owner_ignored: a FunctionDef qname never collides with the
             // ignored-classes / ignored-modules defaults -> never ignored.
-            // owner.getattr(attrname): instance_attrs + FunctionModel.
-            if func_getattr_found(eng, func, attrname) {
+            // owner.getattr(attrname): (method-model attrs +) FunctionDef
+            // getattr (instance_attrs + FunctionModel).
+            if (method_proxy && method_model_extra_attr(attrname))
+                || func_getattr_found(eng, func, attrname)
+            {
                 found = true;
                 break;
             }
             // NotFoundError path: _emit_no_member gates for a FunctionDef.
             if Self::emit_no_member_function_gate(cx, node, func) {
-                missing.push(func);
+                missing.push((func, method_proxy));
             }
         }
         if found {
@@ -951,11 +978,15 @@ impl TypeCk {
         }
         let col = u::col_offset(eng, node) as i64;
         let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
-        for func in missing {
+        for (func, method_proxy) in missing {
             if !done.insert(func) {
                 continue;
             }
             let owner_name = eng.node_name(func).unwrap_or_default();
+            // (Un)BoundMethod is an astroid Proxy with no display_type
+            // override -> it proxies to the wrapped FunctionDef.display_type
+            // (scoped_nodes.py:954-962), same as a bare FunctionDef owner.
+            let _ = method_proxy;
             let display = funcdef_display_type(eng, func);
             let hint = Self::func_similar_names_hint(eng, func, attrname);
             cx.emit_node(
