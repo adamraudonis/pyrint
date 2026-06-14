@@ -707,31 +707,47 @@ impl TypeCk {
         if found {
             return;
         }
-        // emit for each distinct missing c-extension Module owner.
+        // emit for each distinct missing Module owner. A c-extension module
+        // yields I1101 (c-extension-no-member, always config-enabled); a
+        // regular module yields E1101 (no-member), only when E1101 is enabled
+        // at this line (full no-disable profile).
+        let e1101_enabled = (cx.is_enabled)("E1101", e1101_line);
         let mut done: rustc_hash::FxHashSet<GNode> = Default::default();
         for owner_mod in missing {
             if !done.insert(owner_mod) {
                 continue;
             }
-            if !is_c_extension_module(eng, owner_mod) {
-                continue;
-            }
             let modname = eng.qname(owner_mod);
-            // I1101 template: "%s %r has no %r member%s, but source is
-            // unavailable. Consider adding this module to extension-pkg-
-            // allow-list ...". args = (display_type, name, attrname, hint);
-            // for a c-extension owner the hint is "" so the %s after "member"
-            // collapses, leaving the literal ", but source is unavailable..."
-            // tail that is part of the template.
-            cx.emit_node(
-                "I1101",
-                u::lineno(eng, node),
-                u::col_offset(eng, node) as i64,
-                u::format_template(
-                    "%s %r has no %r member%s, but source is unavailable. Consider adding this module to extension-pkg-allow-list if you want to perform analysis based on run-time introspection of living objects.",
-                    &["Module", &modname, &attrname, ""],
-                ),
-            );
+            if is_c_extension_module(eng, owner_mod) {
+                // I1101 template: "%s %r has no %r member%s, but source is
+                // unavailable. Consider adding this module to extension-pkg-
+                // allow-list ...". args = (display_type, name, attrname, hint);
+                // for a c-extension owner the hint is "" so the %s after
+                // "member" collapses, leaving the literal ", but source is
+                // unavailable..." tail that is part of the template.
+                cx.emit_node(
+                    "I1101",
+                    u::lineno(eng, node),
+                    u::col_offset(eng, node) as i64,
+                    u::format_template(
+                        "%s %r has no %r member%s, but source is unavailable. Consider adding this module to extension-pkg-allow-list if you want to perform analysis based on run-time introspection of living objects.",
+                        &["Module", &modname, &attrname, ""],
+                    ),
+                );
+            } else if e1101_enabled {
+                // _get_nomember_msgid_hint: non-c-extension -> "no-member"
+                // with the similar-names hint from the module's locals.
+                let hint = Self::module_similar_names_hint(eng, owner_mod, &attrname);
+                cx.emit_node(
+                    "E1101",
+                    e1101_line,
+                    u::col_offset(eng, node) as i64,
+                    u::format_template(
+                        "%s %r has no %r member%s",
+                        &["Module", &modname, &attrname, &hint],
+                    ),
+                );
+            }
         }
     }
 
@@ -976,6 +992,58 @@ impl TypeCk {
             }
         }
         // heapq.nsmallest(MAX_CHOICES, possible, key=distance) then sorted().
+        possible.sort_by(|a, b| a.1.cmp(&b.1));
+        let mut picked: Vec<String> =
+            possible.into_iter().take(MAX_CHOICES).map(|(n, _)| n).collect();
+        picked.sort();
+        if picked.is_empty() {
+            return String::new();
+        }
+        let names_hint = if picked.len() == 1 {
+            format!("'{}'", picked[0])
+        } else {
+            let head = picked[..picked.len() - 1]
+                .iter()
+                .map(|n| format!("'{n}'"))
+                .collect::<Vec<_>>()
+                .join(", ");
+            format!("one of {} or '{}'", head, picked[picked.len() - 1])
+        };
+        format!("; maybe {names_hint}?")
+    }
+
+    /// _get_nomember_msgid_hint similar-name hint for a Module owner
+    /// (_node_names generic branch, typecheck.py:135-138): the module's
+    /// top-level locals.keys(). missing-member-hint default True, distance
+    /// 1, max-choices 1.
+    fn module_similar_names_hint(eng: &Engine, owner_mod: GNode, attrname: &str) -> String {
+        const DISTANCE: usize = 1;
+        const MAX_CHOICES: usize = 1;
+        let mut names: Vec<String> = Vec::new();
+        {
+            let md = eng.md(owner_mod.m);
+            let locals = md.locals.borrow();
+            if let Some(l) = locals.get(&pyast::NodeId::MODULE) {
+                for sym in l.keys() {
+                    names.push(eng.sname(*sym));
+                }
+            }
+        }
+        let attr_len = attrname.chars().count();
+        let mut possible: Vec<(String, usize)> = Vec::new();
+        for name in &names {
+            if name == attrname {
+                continue;
+            }
+            let name_len = name.chars().count();
+            if attr_len.abs_diff(name_len) > DISTANCE {
+                continue;
+            }
+            let distance = string_distance(attrname, name);
+            if distance <= DISTANCE {
+                possible.push((name.clone(), distance));
+            }
+        }
         possible.sort_by(|a, b| a.1.cmp(&b.1));
         let mut picked: Vec<String> =
             possible.into_iter().take(MAX_CHOICES).map(|(n, _)| n).collect();
