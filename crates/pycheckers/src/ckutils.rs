@@ -1914,6 +1914,16 @@ pub fn as_string(eng: &Engine, g: GNode) -> String {
             let gens: Vec<String> = d.generators.iter().map(|&n| s(n)).collect();
             format!("{{{}: {} {}}}", s(d.key), s(d.value), gens.join(" "))
         }
+        // visit_raise (as_string.py): "raise <exc> from <cause>" / "raise <exc>" / "raise"
+        NodeKind::Raise { exc, cause } => match (exc, cause) {
+            (Some(e), Some(c)) => format!(
+                "raise {} from {}",
+                s(*e),
+                s(*c)
+            ),
+            (Some(e), None) => format!("raise {}", s(*e)),
+            _ => "raise".to_string(),
+        },
         _ => {
             // fallback: deterministic join of children (self-consistent)
             let kids = tree.children(g.n);
