@@ -1381,8 +1381,15 @@ impl StdlibCk {
             Some(c) => crate::ckutils::const_truthy(c) && const_str_of(c).contains('b'),
             None => false,
         };
+        // `if not mode_arg`: mode_arg here is the safe_infer RESULT. It is
+        // falsy when inference failed/was ambiguous (None) and also when it is
+        // Uninferable (e.g. `write_text(json.dumps(...))` — the position-0
+        // "mode" slot holds an Uninferable Call). Both must enter the
+        // encoding check, otherwise W1514 is silently dropped.
+        let mode_uninferable = mode_val.as_ref().map(|v| v.is_uninferable()).unwrap_or(false);
         let encoding_path = mode_arg_node.is_none()
             || mode_val.is_none()
+            || mode_uninferable
             || (mode_const.is_some() && !truthy_with_b);
         if encoding_path {
             let encoding_arg_node: Option<GNode> = if open_module != "_io" {
