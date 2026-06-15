@@ -45,16 +45,26 @@ def normalize(path, drop_no_member):
         line = lines[i]
         m = MSG.match(line)
         if m and m.group(4) == "R0801":
-            # R0801 message + following block (until next MSG/HEADER/footer)
+            # R0801 message + following duplicate-code block. The block source
+            # content + reported file-pair are NONDETERMINISTIC in pylint
+            # itself (LineSet set-iteration keyed by id(self)/heap address), so
+            # we canonicalize each finding to a count. The block content is
+            # ARBITRARY Python source — it can contain lines that look like
+            # MSG/HEADER/footer markers (markdown docstrings, code fences,
+            # file:line:col strings), so a content-based terminator desyncs.
+            # The RELIABLE terminator is pylint's appended symbol: every R0801
+            # block ends with exactly one line ending in ' (duplicate-code)'
+            # (the message-symbol suffix on the last displayed line). Verified
+            # across corpora: #R0801-headers == #'(duplicate-code)'-terminators
+            # (rich 575=575, black 8136=8136, fastapi 4515=4515), and the
+            # header line itself never carries the suffix. Skip up to and
+            # INCLUDING that terminator.
             j = i + 1
-            while j < len(lines):
-                nxt = lines[j]
-                if MSG.match(nxt) or HEADER.match(nxt) or nxt.startswith("---") or nxt.startswith("Your code"):
-                    break
+            while j < len(lines) and not lines[j].endswith(" (duplicate-code)"):
                 j += 1
             # canonicalize: drop location + block; key on the message text only
             pending_r0801.append("R0801-DUPLICATE-CODE-FINDING")
-            i = j
+            i = j + 1  # skip the terminator line too
             continue
         if m and m.group(4) == "F0002":
             out.append(CRASH.sub("in 'CRASH-PATH'", line))
