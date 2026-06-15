@@ -3169,3 +3169,64 @@ GATES (re-certified this round): **EGATE -E 27/27 ALL EQUAL** (fresh run);
 check_treedump django 0 differing; check_inferdump django 200 0 differing
 (pyinfer/binary untouched — only harness/bytecmp2.py changed). Working tree:
 the 2 bytecmp2 commits only.
+
+## FP-elimination round 2 (re-census + W0143 root-cause pinned, no binary change)
+
+Round 1 already fixed bytecmp2.py (verified this round: reflexive — every
+.out/.ours OK vs itself; the two mandated byte-identical pairs scrapy.hook +
+tornado.hook OK; symmetric on scrapy/tornado/pip/rich/salt). So round 2 is a
+fresh full re-census (all 27 corpora × both profiles, ours regenerated in
+567s) + a deeper root-cause drill on the smallest remaining cluster.
+
+### Real-FP census (F0002-normalized, R0801 count-canonical, no-member excl)
+UNCHANGED from round 1 — 23/27 corpora 0 FP on BOTH profiles:
+- core.full: 1 (W0143) ; nova.full: 40 (E1120) ; sqlalchemy hook 4 / full 38 ;
+  sympy.full 35 (W0223×31, W0221×2, E1136×2). Grand total: hook 4, full 114.
+- The pip/tornado "FP=1 FN=1" the naive census shows are NOT real FPs — they
+  are the F0002 crash-message whose only diff is the wall-clock crash-path
+  (sanctioned, normalized by bytecmp2 → both OK). The census script now
+  normalizes F0002 to match the gate.
+
+### W0143 (core, test_runner.py:54) — node-precise mechanism nailed this round
+`assert threading._shutdown == thread.deadlock_safe_shutdown`. Instrumented
+the checker (PRYLINT_TRACE_W0143, reverted): `threading._shutdown` →
+FunctionDef (count +1); `thread.deadlock_safe_shutdown` → **Uninferable**
+because the `thread` Name (`from homeassistant.util import thread`) itself
+infers **Uninferable** under the warm full-corpus cache. count=1 → emit (FP).
+- COLD ISOLATION REPRODUCED (tiny package /tmp/w0143probe: ha/util/thread.py +
+  test importing it): BOTH prylint and pylint emit 0 W0143 — `thread` resolves
+  to the Module, count=2. Byte-identical structural inference.
+- NOT a depth-guard hit: PRYLINT_MAX_DEPTH 350/700/2000 all still FP — the
+  Uninferable is a CACHED result keyed by warm-cache state, not a live
+  recursion abort. Same cache-key/cycle-guard-accounting root cause as the
+  sqlalchemy/sympy generic-base cascade.
+
+### sympy W0223 (31) — confirmed SAME root cause, no checker-level fix
+`AlgebraicField/GMPYRationalField/PythonRationalField` report Domain's
+abstract methods (gcd/invert/...) as unoverridden because their subscripted-
+generic bases (`Field[Alg]` etc.) fail to keep `Field` in the warm ancestor
+walk → `Field`'s overrides drop out of the MRO. pylint's `_check_bases_classes`
+(class_checker.py:2173) has NO Uninferable-base skip that would help (the base
+collapses to a WRONG resolution, not Uninferable), so the only fix is the
+inference cache — not the checker. COLD: algebraicfield.py-alone → 0 W0223
+BOTH engines (verified this round with the current binary).
+
+### VERDICT (re-affirmed): BLOCKED — same single warm-cache-timing root cause
+All 118 real FPs trace to ONE root cause: the warm full-corpus
+inference-cache / cycle-guard accounting that resolves subscripted-generic
+bases (and the `thread`/decorator imports that cascade off them) differently
+under the warm cache than astroid does — while being BYTE-IDENTICAL cold/in
+isolation. This machinery is shared by EVERY inference incl. all -E codes and
+is guarded by the INVIOLABLE EGATE -E 27/27 (re-run fresh this round: ALL
+EQUAL, incl. E0240 inconsistent-mro on the exact divergent sqlalchemy classes)
++ the 4 inferdump-zero corpora. transforms.rs is already an exhaustive
+pull-for-pull port of astroid's TransformVisitor wipe-scan (cache invalidation
+on every non-None brain transform). Perturbing the residual cache-timing to
+flip these NON-E divergences (confined to 4 corpora's deep generic
+hierarchies, leaking to ZERO -E corpus) risks the 23 clean corpora + EGATE +
+inferdump-zero — the wrong trade, consistent with rounds 5-12 + round 1.
+
+GATES (re-certified): EGATE -E 27/27 ALL EQUAL (fresh); check_treedump django
+400 = 0 differing; pyinfer/binary UNTOUCHED (clean working tree — the only
+edit this round was a reverted PRYLINT_TRACE_W0143 probe + an append to this
+doc). No commit beyond the round-1 bytecmp2 fixes.
