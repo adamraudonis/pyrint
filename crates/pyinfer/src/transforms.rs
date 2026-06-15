@@ -192,6 +192,54 @@ thread_local! {
     /// debug context for WIPE traces
     static CUR_SCAN: std::cell::RefCell<(ModId, u32, u8)> =
         const { std::cell::RefCell::new((ModId(0), 0, 0)) };
+    /// env-gated wipe-source attribution counter (PRYLINT_WIPESRC=1)
+    static WIPE_SRC: std::cell::RefCell<rustc_hash::FxHashMap<String, u64>> =
+        std::cell::RefCell::new(rustc_hash::FxHashMap::default());
+    /// optional label for the next wipe (set by scan_call branches)
+    static WIPE_LABEL: std::cell::RefCell<Option<String>> =
+        const { std::cell::RefCell::new(None) };
+}
+
+/// env-gated wipe-source attribution (PRYLINT_WIPESRC=1).
+pub fn wipesrc_enabled() -> bool {
+    static V: std::sync::OnceLock<bool> = std::sync::OnceLock::new();
+    *V.get_or_init(|| std::env::var("PRYLINT_WIPESRC").is_ok())
+}
+
+/// set the label for the immediately-following wipe() call.
+pub fn set_wipe_label(label: impl Into<String>) {
+    if wipesrc_enabled() {
+        WIPE_LABEL.with(|c| *c.borrow_mut() = Some(label.into()));
+    }
+}
+
+thread_local! {
+    static TMPL_BUILDS: std::cell::RefCell<rustc_hash::FxHashMap<String, u64>> =
+        std::cell::RefCell::new(rustc_hash::FxHashMap::default());
+}
+
+/// env-gated count of template builds keyed by source snippet (mirrors
+/// astroid's AstroidBuilder.string_build trace).
+pub fn count_template_build(source: &str) {
+    if wipesrc_enabled() {
+        let snip: String = source.chars().take(50).collect::<String>().replace('\n', "\\n");
+        TMPL_BUILDS.with(|c| *c.borrow_mut().entry(snip).or_insert(0) += 1);
+    }
+}
+
+pub fn dump_template_builds() -> Vec<(String, u64)> {
+    let mut v: Vec<(String, u64)> =
+        TMPL_BUILDS.with(|c| c.borrow().iter().map(|(k, n)| (k.clone(), *n)).collect());
+    v.sort_by(|a, b| b.1.cmp(&a.1));
+    v
+}
+
+/// dump + clear the accumulated wipe-source counts.
+pub fn dump_wipesrc() -> Vec<(String, u64)> {
+    let mut v: Vec<(String, u64)> =
+        WIPE_SRC.with(|c| c.borrow().iter().map(|(k, n)| (k.clone(), *n)).collect());
+    v.sort_by(|a, b| b.1.cmp(&a.1));
+    v
 }
 
 fn m_name(e: &Engine, m: ModId) -> String {
@@ -208,6 +256,20 @@ impl Engine {
                 let (m, l, k) = *c.borrow();
                 eprintln!("WIPE {} line={} kind={}", m_name(self, m), l, k);
             });
+        }
+        if wipesrc_enabled() {
+            let _ = WIPE_LABEL.with(|c| c.borrow_mut().take());
+            // attribute by the module that owns the wipe-firing scanned node
+            let label = CUR_SCAN.with(|c| {
+                let (m, _l, _k) = *c.borrow();
+                let md = self.md(m);
+                if md.file == "<?>" {
+                    format!("tmpl:{}", md.name)
+                } else {
+                    format!("mod:{}", md.name)
+                }
+            });
+            WIPE_SRC.with(|c| *c.borrow_mut().entry(label).or_insert(0) += 1);
         }
         self.inf_cache.borrow_mut().clear();
         self.synth_hop_cache.borrow_mut().clear();
@@ -241,6 +303,10 @@ impl Engine {
                     _ => 0,
                 }
             };
+            if wipesrc_enabled() {
+                let line = self.md(mid).tree.nodes[n.idx()].fromlineno as u32;
+                self.wipe_scan_set_cur(mid, line, kind_tag);
+            }
             if crate::graph::trace_infer() {
                 let line = self.md(mid).tree.nodes[n.idx()].fromlineno as u32;
                 self.wipe_scan_set_cur(mid, line, kind_tag);
@@ -544,6 +610,7 @@ impl Engine {
         // brain_argparse: argparse.Namespace(...)
         if let Some((expr, attr)) = &func_attr {
             if attr == "Namespace" && self.name_of(*expr).as_deref() == Some("argparse") {
+                set_wipe_label("call::Namespace");
                 self.wipe();
             }
         }
@@ -572,10 +639,12 @@ impl Engine {
                         .unwrap_or(false)
                 };
                 if !re_carveout {
+                    set_wipe_label(format!("call::{fname}"));
                     self.wipe();
                 } else {
                     // brain_re.infer_pattern_match applies instead
                     // (inference_tip transform returns the node -> wipe)
+                    set_wipe_label("call::re_type_carveout");
                     self.wipe();
                 }
             }
@@ -583,12 +652,14 @@ impl Engine {
         // dict.fromkeys
         if let Some((expr, attr)) = &func_attr {
             if attr == "fromkeys" && self.name_of(*expr).as_deref() == Some("dict") {
+                set_wipe_label("call::fromkeys");
                 self.wipe();
             }
         }
         // _infer_copy_method: <expr>.copy()
         if let Some((_, attr)) = &func_attr {
             if attr == "copy" {
+                set_wipe_label("call::copy");
                 self.wipe();
             }
         }

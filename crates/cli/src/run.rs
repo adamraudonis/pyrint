@@ -507,6 +507,14 @@ pub fn run(opts: &RunOpts) -> i32 {
                             engine.module_count()
                         );
                     }
+                    if let Ok(p) = std::env::var("PRYLINT_DUMP_PHASE1_MODS") {
+                        let names = engine.dump_module_names();
+                        let _ = std::fs::write(&p, names.join("\n") + "\n");
+                        eprintln!("[phase1mods] wrote {} module names to {}", names.len(), p);
+                        if std::env::var("PRYLINT_PHASE1_ONLY").is_ok() {
+                            std::process::exit(0);
+                        }
+                    }
                     phase_mark!(t0, "engine-boot");
                     if std::env::var("PRYLINT_BOOT_ONLY").is_ok() {
                         // debug aid: report boot-graph footprint and stop
@@ -564,6 +572,22 @@ pub fn run(opts: &RunOpts) -> i32 {
                             pyinfer::graph::wipe_count(),
                             engine.module_count()
                         );
+                    }
+                    if let Ok(p) = std::env::var("PRYLINT_DUMP_FINAL_MODS") {
+                        let names = engine.dump_module_names();
+                        let _ = std::fs::write(&p, names.join("\n") + "\n");
+                        eprintln!("[finalmods] wrote {} module names to {}", names.len(), p);
+                    }
+                    if pyinfer::transforms::wipesrc_enabled() {
+                        eprintln!("=== prylint wipe sources ===");
+                        for (k, n) in pyinfer::transforms::dump_wipesrc() {
+                            eprintln!("  {n:6}  {k}");
+                        }
+                        eprintln!("=== prylint template builds (total={}) ===",
+                            pyinfer::transforms::dump_template_builds().iter().map(|(_,n)| n).sum::<u64>());
+                        for (k, n) in pyinfer::transforms::dump_template_builds().into_iter().take(50) {
+                            eprintln!("  {n:6}  {k}");
+                        }
                     }
                     // ---- checker close() phase ----
                     // reversed(prepare_checkers) order: "similarities" sorts
@@ -1159,6 +1183,23 @@ fn lint_tree(
                     // module name (== linter.current_name).
                     if prep.sim_kept {
                         if let (Some(lines), Some(mid)) = (p.sim_lines.clone(), emod) {
+                            // symilar.stripped_lines (symilar.py:587-588): with
+                            // ignore-imports AND ignore-signatures BOTH defaulting
+                            // True, the SimilaritiesChecker re-parses this file's
+                            // FULL source via `astroid.parse("".join(lines))` —
+                            // a fresh anonymous module whose TransformVisitor
+                            // fires `_invalidate_cache()` once per builtin-call
+                            // node (transforms.py:66-72). These ~8 wipes/file are
+                            // the dominant phase-2 cache-cooling event (≈12k over
+                            // a 1500-file corpus); without them prylint's global
+                            // inference cache stays WARMER than astroid's, so deep
+                            // decorated-classmethod / MRO chains that astroid
+                            // re-truncates at the 100-cap (-> Uninferable) instead
+                            // resolve in prylint -> spurious E1120/W0223/R0901.
+                            // R0801 is disabled under -E and the hook profile, so
+                            // this re-parse is full-profile-only (matches the GT).
+                            let joined: String = lines.concat();
+                            engine.build_template_module(&joined, "");
                             let r0801_idx = store().by_msgid["R0801"];
                             let import_lines =
                                 pycheckers::similarities::import_lines_of(engine, mid);

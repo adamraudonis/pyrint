@@ -632,6 +632,14 @@ impl Engine {
         self.mods.borrow().len()
     }
 
+    /// debug aid: sorted list of module names currently in astroid_cache
+    /// (mirrors astroid.MANAGER.astroid_cache.keys()).
+    pub fn dump_module_names(&self) -> Vec<String> {
+        let mut v: Vec<String> = self.astroid_cache.borrow().keys().cloned().collect();
+        v.sort();
+        v
+    }
+
     /// Keep a value alive whose Rc pointer serves as an identity key
     /// (ValueKey::Synth / Generator ctx pointer / synth_hop_cache /
     /// dictitems_elts_cache) — prevents allocator address reuse from
@@ -2146,6 +2154,7 @@ impl Engine {
     /// brain templates). Never cached in astroid_cache; post_build runs so
     /// ImportFrom names land in locals.
     pub fn build_template_module(&self, source: &str, modname: &str) -> Option<ModId> {
+        crate::transforms::count_template_build(source);
         let src = pyast::decode_source(source.as_bytes(), "<?>").ok()?;
         let outcome = pyast::parse::parse_module(&src, modname, "<?>", false);
         let tree = outcome.tree?;
@@ -2169,6 +2178,7 @@ impl Engine {
         source: &str,
         modname: &str,
     ) -> Option<ModId> {
+        crate::transforms::count_template_build(source);
         let src = pyast::decode_source(source.as_bytes(), "<?>").ok()?;
         let outcome = pyast::parse::parse_module(&src, modname, "<?>", false);
         let tree = outcome.tree?;
