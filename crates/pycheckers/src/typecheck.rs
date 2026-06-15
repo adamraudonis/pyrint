@@ -159,7 +159,33 @@ pub fn safe_infer_cc(eng: &Engine, caches: &u::LintCaches, g: GNode) -> Option<V
             && is_classdef(eng, other)
             && class_constructors_ambiguous(eng, first, other)
     };
-    let res = u::safe_infer_streaming(eng, &Ctx::new(), g, Some(&ctor));
+    let ctx = Ctx::new();
+    let res = u::safe_infer_streaming(eng, &ctx, g, Some(&ctor));
+    // PRYLINT_TRACE_SICC="line:col,line:col" — lint-path safe_infer_cc trace:
+    // dump the inferred func value + nodes_inferred at the call-site func node
+    // (observes the GLOBAL inf_cache warmth at checker query time, unlike the
+    // preorder dump-infer walk). Debug-only; never on the normal lint path.
+    if let Ok(spec) = std::env::var("PRYLINT_TRACE_SICC") {
+        let ln = u::lineno(eng, g);
+        let col = u::col_offset(eng, g);
+        let fname = func_name(eng, g).unwrap_or_default();
+        let want = format!("{}:{}", ln, col);
+        // spec entries are either "line:col" or "name" (e.g. get_by_uuid)
+        if spec.split(',').any(|t| t == want || t == fname) {
+            let r = match &res {
+                Some(Value::UnboundMethod { .. }) => "UM".to_string(),
+                Some(Value::BoundMethod { .. }) => "BM".to_string(),
+                Some(v) => format!("{:?}", std::mem::discriminant(v)),
+                None => "None".to_string(),
+            };
+            eprintln!(
+                "SICC {}:{}:{} -> {} ##{} wipes={} file={}",
+                fname, ln, col, r, ctx.nodes_inferred.get(),
+                pyinfer::graph::wipe_count(),
+                pyinfer::graph::cur_lint_file()
+            );
+        }
+    }
     caches.safe_infer_cc.borrow_mut().put(g, res.clone());
     res
 }

@@ -202,6 +202,7 @@ impl Engine {
     /// transforms.py _invalidate_cache: clears ONLY the global inference
     /// cache (lookup lru / tip caches survive).
     fn wipe(&self) {
+        crate::graph::bump_wipe_count();
         if crate::graph::trace_infer() {
             CUR_SCAN.with(|c| {
                 let (m, l, k) = *c.borrow();

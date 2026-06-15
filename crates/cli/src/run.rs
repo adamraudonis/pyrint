@@ -500,6 +500,13 @@ pub fn run(opts: &RunOpts) -> i32 {
                         })
                         .collect();
                     engine.reset_crash_trip();
+                    if std::env::var("PRYLINT_WIPESTAT").is_ok() {
+                        eprintln!(
+                            "[wipestat] after phase-1 build: wipes={} mods={}",
+                            pyinfer::graph::wipe_count(),
+                            engine.module_count()
+                        );
+                    }
                     phase_mark!(t0, "engine-boot");
                     if std::env::var("PRYLINT_BOOT_ONLY").is_ok() {
                         // debug aid: report boot-graph footprint and stop
@@ -550,6 +557,13 @@ pub fn run(opts: &RunOpts) -> i32 {
                     ));
                     if std::env::var("PRYLINT_CACHESTAT").is_ok() {
                         eprintln!("{}", engine.cache_stat_line());
+                    }
+                    if std::env::var("PRYLINT_WIPESTAT").is_ok() {
+                        eprintln!(
+                            "[wipestat] after phase-2 checks: wipes={} mods={}",
+                            pyinfer::graph::wipe_count(),
+                            engine.module_count()
+                        );
                     }
                     // ---- checker close() phase ----
                     // reversed(prepare_checkers) order: "similarities" sorts
@@ -1071,6 +1085,10 @@ fn lint_tree(
             let mut fs = FileState::new(&p.tree);
             let module = item.name.clone();
             let path = p.abspath.replacen(strip_prefix, "", 1);
+            pyinfer::graph::set_cur_lint_file(&path);
+            if std::env::var("PRYLINT_PERFILE_WIPES").is_ok() {
+                eprintln!("PFW_START {} wipes={}", path, pyinfer::graph::wipe_count());
+            }
             let mut msgs: Vec<OutMsg> = Vec::new();
             let mut stats = Stats::default();
             // FileState._ignored_msgs: (msgid, pragma line) -> message lines

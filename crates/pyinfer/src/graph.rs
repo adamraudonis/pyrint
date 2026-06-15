@@ -42,6 +42,31 @@ pub fn trace_infer() -> bool {
 static TRACE_INFER: std::sync::atomic::AtomicBool = std::sync::atomic::AtomicBool::new(false);
 static TRACE_INIT: std::sync::Once = std::sync::Once::new();
 
+thread_local! {
+    /// debug-only: the file currently being linted (set by lint_tree). Lets
+    /// focused probes (PRYLINT_TRACE_NODE) scope to one module.
+    static CUR_LINT_FILE: std::cell::RefCell<String> = const { std::cell::RefCell::new(String::new()) };
+}
+
+/// debug-only: record the file currently being linted.
+pub fn set_cur_lint_file(path: &str) {
+    CUR_LINT_FILE.with(|f| *f.borrow_mut() = path.to_string());
+}
+
+/// debug-only: read the file currently being linted.
+pub fn cur_lint_file() -> String {
+    CUR_LINT_FILE.with(|f| f.borrow().clone())
+}
+
+/// debug-only: global count of inference-cache wipes (transforms).
+static WIPE_COUNT: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+pub fn bump_wipe_count() {
+    WIPE_COUNT.fetch_add(1, std::sync::atomic::Ordering::Relaxed);
+}
+pub fn wipe_count() -> u64 {
+    WIPE_COUNT.load(std::sync::atomic::Ordering::Relaxed)
+}
+
 /// Recency index for the lru_cache mirrors: O(log n) eviction instead of
 /// the old O(n) `min_by_key` scan over the whole cache. Ticks are unique
 /// per live entry, so popping the minimum LIVE tick selects EXACTLY the
@@ -600,6 +625,11 @@ impl Engine {
             self.inf_cache.borrow().len(),
             self.tip_cache.borrow().len(),
         )
+    }
+
+    /// debug aid: number of modules currently built in the graph.
+    pub fn module_count(&self) -> usize {
+        self.mods.borrow().len()
     }
 
     /// Keep a value alive whose Rc pointer serves as an identity key

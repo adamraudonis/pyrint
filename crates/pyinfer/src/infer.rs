@@ -17,6 +17,19 @@ use crate::value::{value_key, Drive, End, ErrKind, Flow, GNode, GSym, SeqKind, V
 /// like dropping a suspended Python generator.
 pub type Sink<'a> = dyn FnMut(Value) -> Drive + 'a;
 
+/// debug-only: short label for a Value's discriminant (PRYLINT_TRACE_NODE).
+fn value_kind_label(v: &Value) -> &'static str {
+    match v {
+        Value::Uninferable => "U",
+        Value::Node(_) => "Node",
+        Value::Inst { .. } => "Inst",
+        Value::ExcInst { .. } => "ExcInst",
+        Value::UnboundMethod { .. } => "UM",
+        Value::BoundMethod { .. } => "BM",
+        _ => "other",
+    }
+}
+
 /// yield one value to a sink, propagating consumer abandonment.
 #[macro_export]
 macro_rules! yield_v {
@@ -293,13 +306,51 @@ impl Engine {
             ctx.callcontext.borrow().as_ref().map(|c| c.id),
             ctx.boundnode.borrow().as_ref().map(value_key),
         );
+        // PRYLINT_TRACE_NODE=line:col[,line:col] — focused cache-event probe:
+        // log HIT/MISS for the target node(s) with lookupname + value kinds.
+        // Debug-only.
+        let trace_node = || -> bool {
+            if let Ok(spec) = std::env::var("PRYLINT_TRACE_NODE") {
+                if let Ok(fsub) = std::env::var("PRYLINT_TRACE_FILE") {
+                    if !crate::graph::cur_lint_file().contains(&fsub) {
+                        return false;
+                    }
+                }
+                let md = self.md(node.m);
+                let ni = &md.tree.nodes[node.n.idx()];
+                let key = format!("{}:{}", ni.fromlineno, ni.col_offset);
+                spec.split(',').any(|t| t == key)
+            } else {
+                false
+            }
+        };
         let cached = self.inf_cache.borrow().get(&key).cloned();
         if let Some(cached) = cached {
+            if trace_node() {
+                let md = self.md(node.m);
+                let ni = &md.tree.nodes[node.n.idx()];
+                let kind = crate::treeutil::kind_label(&ni.kind);
+                let kinds: Vec<&str> = cached.iter().map(|v| value_kind_label(v)).collect();
+                eprintln!(
+                    "TNODE HIT {}:{} {} ln={:?} -> [{}]",
+                    ni.fromlineno, ni.col_offset, kind, ctx.lookupname.get(), kinds.join(",")
+                );
+            }
             // replay without bumping nodes_inferred (node_ng.py:155-157)
             for v in cached.iter() {
                 yield_v!(sink, v.clone());
             }
             return End::Done;
+        }
+        let do_trace_node = trace_node();
+        if do_trace_node {
+            let md = self.md(node.m);
+            let ni = &md.tree.nodes[node.n.idx()];
+            let kind = crate::treeutil::kind_label(&ni.kind);
+            eprintln!(
+                "TNODE MISS {}:{} {} ln={:?} ni_in={}",
+                ni.fromlineno, ni.col_offset, kind, ctx.lookupname.get(), ctx.nodes_inferred.get()
+            );
         }
         // limit loop (node_ng.py:160-176)
         let mut results: Vec<Value> = Vec::new();
