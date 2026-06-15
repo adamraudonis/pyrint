@@ -3230,3 +3230,99 @@ GATES (re-certified): EGATE -E 27/27 ALL EQUAL (fresh); check_treedump django
 400 = 0 differing; pyinfer/binary UNTOUCHED (clean working tree — the only
 edit this round was a reverted PRYLINT_TRACE_W0143 probe + an append to this
 doc). No commit beyond the round-1 bytecmp2 fixes.
+
+## FP-elimination round 3 (bytecmp2 score-footer fix + node-precise re-root-cause)
+
+### NEW bytecmp2 fix this round — score-report footer normalization (committed)
+Rounds 1-2 reported "23/27 corpora 0 FP" but the BYTE-PARITY GATE
+(bytecmp2 --drop-no-member) was STILL failing on 22 full-profile pairs — 14 of
+which had ZERO real FPs. Root cause: the full profile (no --reports=no) prints
+a derived score-report footer:
+    <blank> / -----...----- (len == rating-line len) / Your code has been
+    rated at X/10[ (previous run: Y/10, +Z)]
+bytecmp2 did NOT normalize it, so it diverged for two SANCTIONED reasons:
+  (a) score X recomputes from displayed counts; we drop no-member (E1101/I1101)
+      so GT's score is lower, and the dash line's length tracks the rating-line
+      length → both differ. Downstream of the sanctioned no-member drop.
+  (b) "(previous run: ...)" is pure PYLINTHOME warm-cache state; our isolated
+      run is cold and omits it.
+FIX: canonicalize the rating line + dash run to fixed placeholders (RATING /
+DASHES regexes). PROVEN SAFE — every real message line is compared verbatim
+BEFORE the footer, so a real FP still surfaces (adversarially verified: an
+injected bogus message line is still caught, exit 1). Self-compare OK on all
+27×2; symmetric (bytecmp2(a,b)==bytecmp2(b,a)) on all pairs. Failing pairs
+22 → 8.
+
+### Real-FP census (post-footer-fix, F0002/R0801/no-member normalized) — 8 pairs
+The 8 remaining gate failures, split by kind:
+- REAL FPs (cardinal sin) — 5 pairs, ONE shared root cause (below):
+  - sqlalchemy.hook: R0901×1 W0223×1 W0231×2
+  - sqlalchemy.full: R0901×15 W0223×10 W0613×6 W0231×3 C0116×2 W0237×1 E1136×1
+  - sympy.full:      W0223×31 W0221×2 E1136×2
+  - nova.full:       E1120×40
+  - core.full:       W0143×1
+- FN-ONLY (NOT the cardinal sin) — 3 pairs, no real FP:
+  - pip.full:        miss E0611 "No name 'packages'/'utils'" (+ F0002 crash-path,
+                     normalized)
+  - scikit-learn.full: miss E1102 not-callable (no-member family); its 3 "FPs"
+                     are all E1101 (excluded)
+  - pylfunc.full:    miss E0611 distutils + I1101/E1101 (all no-member family)
+
+### Root cause re-confirmed node-precise (independent of rounds 1-2, same verdict)
+Drilled sqlalchemy `array(expression.ExpressionClauseList[_T])` and sympy
+`AlgebraicField(Field[Alg], CharacteristicZero, SimpleDomain[Alg],
+RingExtension[Alg, MPQ])` to the exact divergence:
+- pylint's `_compute_mro` → `_inferred_bases` uses `_infer_last` = the LAST
+  inferred value of each base. A subscripted-generic base `Class[idx]` infers
+  to `[Class, Uninferable]` (the trailing Uninferable comes from the index:
+  e.g. `Alg = ANP[MPQ]` and `MPQ` is a conditional gmpy/python import that
+  infers `[MPQ, U, PythonMPQ]`; `ANP[MPQ]` → `[ANP, U]`). `_infer_last` = U →
+  NOT a ClassDef → base DROPPED → MRO collapses to `[self]` → 0 abstract
+  methods inherited → 0 W0223. astroid plugin-probe in the REAL run confirms
+  `AlgebraicField.mro() == ['AlgebraicField']` while `.ancestors() ==
+  ['Field','Ring','Domain','Generic','object']` (ancestors keeps the FIRST
+  ClassDef; mro takes the LAST → they DIVERGE by design).
+- Our engine resolves more of these bases under the warm checker-time cache:
+  our `mro(AlgebraicField) == [AlgebraicField, CharacteristicZero,
+  RingExtension, Domain, Generic, object]` (DBG probe), so the inherited
+  abstract methods leak → W0223 FP; the inflated ancestor count → R0901 FP.
+  (R0902/R0904 MATCH GT — they use the tolerant ancestors() path.)
+- Even the PLAIN-Name base `CharacteristicZero` is Uninferable at checker-time
+  in pylint: `b.lookup` → ImportFrom@10; `imp.infer(context)` RAISES
+  InferenceError under the live context, while `module.igetattr("Characteristic
+  Zero")` (fresh context) returns the ClassDef. The InferenceError is a
+  context-PATH cycle-guard hit (every base class is `@public`-decorated; the
+  decorator's `return obj` re-infers the class under a path that already
+  contains it → cycle → Uninferable). Our engine doesn't reproduce this exact
+  context-path state → resolves it → keeps the base.
+- nova E1120 (`objects.Instance.get_by_uuid(ctxt, uuid)`): SAME class —
+  `get_by_uuid` is `@base.remotable_classmethod`-decorated; full-mode warm
+  cache makes pylint infer it as a bound classmethod (or Uninferable) so no
+  E1120, while we infer the unbound function → arg 'uuid' unfilled → FP.
+  Confirmed: nova -E (iso) GT ALSO emits this E1120 (true positive in -E);
+  only FULL mode (more checkers warming the cache first) suppresses it.
+- core W0143 (`threading._shutdown == thread.deadlock_safe_shutdown`): need
+  BOTH operands inferred as bare callables (count==2 → no emit). Warm full
+  cache makes `thread.deadlock_safe_shutdown` a FunctionDef (count 2); ours
+  yields only 1 → emit. Same warm-cache import-resolution root.
+
+### VERDICT (round 3): BLOCKED — same single warm-cache/context-path root cause
+All 5 real-FP pairs reduce to ONE mechanism: at CHECKER time, pylint's
+inference of subscripted-generic bases AND the `@public`/`remotable_*`-
+decorated imports that cascade off them yields Uninferable (via `_infer_last`
+last-value-drop and context-path cycle-guards), DROPPING the base/callable;
+our engine resolves them under a slightly different warm-cache + context-path
+state. This is byte-identical COLD/in-isolation (verified) and is the SAME
+machinery that drives all -E codes — guarded by the INVIOLABLE EGATE 27/27
+(re-run fresh this round: ALL EQUAL) + inferdump-zero. A safe checker-level
+fix does not exist (the base collapses to a wrong/Uninferable resolution, not
+a flag the checker could test); the only true fix is reproducing pylint's
+exact checker-time cache + context-path accounting, which risks the 23 clean
+corpora + EGATE + inferdump — the wrong trade (consistent with rounds 1-2 and
+5-12). The one safe, net-new win this round was the bytecmp2 score-footer
+normalization (committed) which correctly clears the 14 footer-only failures.
+
+GATES (round 3, re-certified): EGATE -E 27/27 ALL EQUAL (fresh full re-run);
+bytecmp2 self-compare 0 fail + symmetric 0 fail on all 27×2; binary/pyinfer
+UNTOUCHED (only edit: harness/bytecmp2.py, committed; a W0223 DBG eprintln was
+added then fully reverted — working tree clean apart from this doc).
