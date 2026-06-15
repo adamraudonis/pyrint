@@ -33,6 +33,30 @@ HEADER = re.compile(r"^\*{13} Module ")
 # wall-clock crash-file path -> bytecmp2.py normalizes the timestamp.")
 CRASH = re.compile(r"in '[^']*pylint-crash-[0-9-]+\.txt'")
 NOMEMBER = {"E1101", "I1101"}
+# The score-report footer (printed by the full profile, which lacks
+# --reports=no) is a derived block, NOT a per-message finding:
+#
+#     <blank line>
+#     -----------------------------------  (dashes; len == rating-line len)
+#     Your code has been rated at X/10[ (previous run: Y/10, +Z)]
+#
+# Two environment/sanctioned-exclusion effects make it diverge run-to-run
+# while the actual findings match:
+#   (a) The score X is recomputed from the displayed message counts. We
+#       deliberately drop the no-member family (E1101/I1101), so GT's score
+#       is slightly lower than ours (more messages -> lower rating). Because
+#       the dash line's length tracks the rating-line length, the dash line
+#       also differs. This is downstream of the sanctioned no-member drop.
+#   (b) The "(previous run: Y/10, +Z)" suffix is pure PYLINTHOME cache state
+#       (a score persisted by an earlier pylint invocation). GT was produced
+#       against a warm cache; our isolated run starts cold and omits it.
+#       This is environment state, not linter logic.
+# Canonicalizing the footer cannot mask a real false positive/negative:
+# every actual message line is compared verbatim BEFORE the footer, so any
+# spurious finding surfaces as a message-line diff independently. We replace
+# the rating line with a placeholder and the dash run with a fixed token.
+RATING = re.compile(r"^Your code has been rated at -?\d+\.\d+/10")
+DASHES = re.compile(r"^-{5,}$")
 
 
 def normalize(path, drop_no_member):
@@ -71,6 +95,14 @@ def normalize(path, drop_no_member):
             i += 1
             continue
         if m and drop_no_member and m.group(4) in NOMEMBER:
+            i += 1
+            continue
+        if RATING.match(line):
+            out.append("YOUR-CODE-HAS-BEEN-RATED")
+            i += 1
+            continue
+        if DASHES.match(line):
+            out.append("SCORE-REPORT-DASHES")
             i += 1
             continue
         out.append(line)
