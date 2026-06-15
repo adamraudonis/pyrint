@@ -3388,3 +3388,61 @@ GATES (round 6, re-certified on the current binary): -E 27/27 ALL EQUAL (out +
 exit, fresh full re-run); check_treedump django 200/0 differing; bytecmp2
 self-compare 0-fail + symmetric on all 54 combos. Lint output BYTE-UNCHANGED by
 the dump-ancestors addition (sqlalchemy.full still 38 FP, etc.).
+
+## FP-elimination round 7 (re-census + W0223/sympy = same root, bytecmp2 OK)
+
+bytecmp2.py CONFIRMED already correct/symmetric (committed in earlier rounds):
+self-compare exit 0 on tornado.hook + scrapy.hook + every byte-identical pair;
+tornado.hook/full + pip.hook + sympy.hook all PARITY (F0002 crash-path
+normalized — NOT real FPs). No bytecmp2 change needed this round.
+
+Full 27×2 census on the clean binary (real, non-no-member, non-R0801 FPs only;
+F0002 excluded as normalized):
+- sqlalchemy.hook: W0231×2 W0223×1 R0901×1
+- sqlalchemy.full: R0901×15 W0223×10 W0613×6 W0231×3 C0116×2 W0237×1 E1136×1
+- nova.full:       E1120×40
+- sympy.full:      W0223×31 W0221×2 E1136×2
+- core.full:       W0143×1
+(pip.full / scikit-learn.full / pylfunc.full bytecmp2 DIFFs are FALSE
+NEGATIVES — pip/pylfunc E0611 no-name-in-module we miss, sklearn E1102
+not-callable we miss — NOT false positives.)
+
+NEW THIS ROUND — sympy W0223 (31) proven SAME root as sqlalchemy array (round
+6): subscripted-generic bases (`Field[Alg]`, `ExpressionClauseList[_T]`) must
+be EXCLUDED from `_inferred_bases`/mro because `_infer_last(base)` is
+Uninferable in astroid. Traced the real pylint full run with the class checker
+hooked: at AlgebraicField check time astroid's `_INFERENCE_CACHE` (size 120,
+== our inf_cache size 120) has ALL four bases cached as Uninferable
+(`Field[Alg]→[Field,U]`, the other three `→[U]`), so inferred_bases=[],
+mro=[self], unimplemented=[], NO W0223. OUR cache (also size 120) has the
+SAME nodes but cached as resolved ClassDefs (CharacteristicZero, RingExtension)
+→ included → mro has Domain (not Field) → Domain's abstracts seen unimplemented
+→ W0223×15. The divergence is the cached VALUE: astroid's first inference of
+each base happened under cap pressure (shared nodes_inferred>100 after the deep
+`Field[Alg]` generic chain burned to 109) and cached the COLLAPSED Uninferable;
+ours first-inferred them under a fresh/low counter and cached the resolved
+ClassDef. Confirmed mechanism with manual `_infer_last` trace:
+`Field[Alg]` burns ni 0→109 on the FIRST base alone, capping the rest.
+
+EXPERIMENT (reverted): a scoped `bypass_inf_cache` flag forcing inferred_bases
+to re-infer each base cold burned only ni=71 on `Field[Alg]` (vs astroid 109)
+because OUR cache holds ~38 of that subtree's nodes that astroid's 120-entry
+cache does not — so base #2 (CharacteristicZero, ni=72) still escaped the cap.
+A full-subtree bypass over-corrected and BROKE inference (Field[Alg] yielded 0
+values via a different recursion path). PROVES the fix needs exact cache-CONTENT
+replication (which subtree nodes are warm at check time), not a checker-level
+flag — same VERDICT as round 6. core W0143 reconfirmed independent-looking but
+same family: `thread.deadlock_safe_shutdown` resolves to a FunctionDef in
+astroid's full-corpus cache (callable-count 2 → suppressed) but Uninferable for
+us (count 1 → emit) — a cross-module attribute resolution that only succeeds
+under the warm full-corpus cache.
+
+VERDICT (round 7): BLOCKED, unchanged single root cause (global-inference-cache
+priming/cap order across the full W/R/C visitor fan-out). No safe checker-level
+fix; any cache-model change directly risks the INVIOLABLE -E 27/27 gate +
+inferdump-zero. No code change shipped (binary BYTE-UNCHANGED; census stable at
+sqlalchemy.full 38 FP / sympy.full 35 / nova.full 40 / core.full 1).
+
+GATES (round 7, re-certified on the current binary): -E parity green on
+scrapy/django/sqlalchemy/sympy spot-check (clean source, reverted all
+experiments); bytecmp2 self-compare + symmetry OK.
