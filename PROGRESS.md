@@ -3661,3 +3661,79 @@ treedump django 200/0; inferdump django 200/0. FP census unchanged (1 full + 4
 hook, all sqlalchemy, same nodes). No source changes landed (diagnosis-only);
 new GT lint-path tracers added (harness/trace_gt_{sqla,w0231,metaburn,node}.py,
 env-gated, do not touch prylint output).
+
+## ZERO-FP round 5 (DECISIVE proof: cold costs MATCH; FP is pure warm-cache order)
+
+Re-census (clean HEAD build, all 27 corpora x {full,hook}, --drop-no-member,
+filtering E1101/I1101/F0002): ONLY sqlalchemy has real FPs, IDENTICAL nodes to
+rounds 2/4:
+  sqlalchemy.full : W0231 x1  (orm/properties.py:561, base _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2  (orm/attributes.py:198 _DeclarativeMapped,
+                               orm/attributes.py:620 QueryableAttribute)
+                  + R0901 x1 + W0223 x1 (postgresql/array.py:93 array,
+                               ExpressionClauseList[_T] deep-MRO ancestors walk)
+ALL OTHER 26 corpora ZERO real FP in BOTH profiles. The nova E1120 (x40),
+sympy W0223 (x31)/W0221/E1136 and the other sqlalchemy codes from the original
+~114-FP census are GONE: nova full+hook = 0 real FP (gate PASS); sympy full+hook
+= 0 real FP (its 2-3 F0002 are crash-path noise, bytecmp2 PASS). The full-mode
+parity-fails on pip/pylfunc/core are FALSE NEGATIVES ONLY (E0611/C0103 we miss +
+F0002 crash-path, all normalized) — not FPs. So the entire remaining real-FP
+surface is 1 full + 4 hook, all sqlalchemy, all ONE mechanism.
+
+THE DECISIVE NEW EVIDENCE (this round closed the root cause beyond doubt):
+1. **Cold cost is byte-identical AND cold ALSO yields [U]** — ran astroid on the
+   REAL corpus file with an empty cache: `Mapped[_T_co].infer(lookupname="__init__")`
+   costs ni=102 and yields [Uninferable] (cold); `_MappedAttribute[_T_co]` then
+   costs 0 more (over-cap) -> [U]. prylint cold is ni=107 -> [U] (the 5-node gap
+   is the documented cold-cost tolerance and is IRRELEVANT — both are over the
+   100-cap so both truncate). => COLD, astroid W0231 WOULD FIRE TOO. The FP is
+   100% a WARM-cache artifact, not a localized inference bug.
+2. **The single divergent entry, node-precise**: at the deciding W0231 call,
+   `_DeclarativeMapped.igetattr("__init__")` runs metaclass(ctx) which infers the
+   bases under lookupname="__init__". prylint's FIRST base `Mapped[_T_co]`
+   (base.py:844:25) burns the ctx 0->107 (re-inferring cold) and yields [U]; the
+   SECOND base `_MappedAttribute[_T_co]` (844:40) then runs at ni=107 (over cap)
+   -> [U] -> ancestors() yields NOTHING -> class_getattr falls to the ObjectModel
+   synthetic non-abstract __init__ (def returns None) -> W0231 fires. GT's
+   deciding call: base `Mapped[_T_co]` costs ~0 (its inner (*,"__init__",*) keys
+   are WARM) so `_MappedAttribute[_T_co]` runs at ni=0 and HITS a warm
+   `(844:40,"__init__",None,None) -> [Class:_MappedAttribute]` entry that GT
+   MINTED EARLIER at ni=89 (UNDER cap) from a different corpus call. A cache HIT
+   bypasses the cap (node_ng.py:154-157), so GT's ancestors reach object ->
+   abstract object.__init__ -> NO W0231. (GT mints that entry only twice in the
+   whole run, but it is warm before the very first deciding call.)
+3. **Cap-INSENSITIVE**: swept PRYLINT_LOOKUP_CAP/PRYLINT_META_CAP at
+   {128/1024 (astroid default), 64/512, 256/2048, 32/256} — the W0231@561 FP
+   fires in ALL. => the bounded LRUs (lookup maxsize=128, metaclass-lookup
+   maxsize=1024) are NOT the lever; they are already astroid-exact and changing
+   their eviction does not move this FP. The divergence lives entirely in the
+   UNBOUNDED global _INFERENCE_CACHE: which (node,lookupname,cc,bn) entries got
+   minted UNDER-cap vs OVER-cap, which is a function of the whole corpus's
+   inference FAN-OUT ORDER (which earlier file's igetattr("__init__") on a
+   _DeclarativeMapped-derived class ran while ctx_ni<100 and minted the base
+   entry cold).
+
+CONCLUSION (unchanged verdict, now PROVEN): there is NO astroid-faithful LOCALIZED
+lever. The metaclass+getattr share the ctx counter bug-for-bug; find_metaclass
+drops ctx on parent recursion exactly like scoped_nodes.py:2674; declared_metaclass
+threads lookupname="__init__" into the base infers exactly like astroid
+(verified by monkeypatch); ClassDef.getitem binds the context into
+__class_getitem__'s infer_call_result exactly like bind_context_to_node. The ONLY
+way to eliminate the FP is to make prylint's corpus-wide inference fan-out mint the
+deciding base entry UNDER-cap at the same earlier point astroid does — a global
+engine-warmth-ordering change that directly risks the INVIOLABLE -E 27/27 gate,
+the django/nova inferdump + treedump gates, and the 26 clean corpora. NOT safely
+landable; deferred to a dedicated engine-warmth-parity effort (would need
+bit-exact phase-2 inference order across thousands of files). No source change is
+the correct action this round — any localized hack (memoize metaclass(),
+separate the metaclass burn from getattr, special-case ObjectModel __init__
+abstractness) would diverge from astroid and could regress the clean corpora.
+
+GATES (round 5, re-certified, clean HEAD build): -E 27/27 byte-identical
+(out+exit, all EQUAL); treedump django 200/0; inferdump django 200/0; inferdump
+nova 3 files/11 lines = the documented IRREDUCIBLE os.environ env-noise
+(Dict:44 GT vs Dict:43 ours — one extra env var in the GT process; affects NO
+check). FP census unchanged (1 full + 4 hook, all sqlalchemy, same nodes). No
+source changes landed (diagnosis-only); new env-gated GT tracer
+harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
+declared_metaclass; does not touch prylint output).
