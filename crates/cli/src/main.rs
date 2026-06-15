@@ -37,6 +37,7 @@ fn main() -> ExitCode {
     let mut dump_fileitems = false;
     let mut dump_ast = false;
     let mut dump_infer: Option<String> = None;
+    let mut dump_ancestors: Option<String> = None;
     let mut score = true;
     let mut persistent = true;
     let mut fail_under: f64 = 10.0;
@@ -64,6 +65,9 @@ fn main() -> ExitCode {
             "--dump-ast" => dump_ast = true,
             "--dump-infer" => {
                 dump_infer = take_value(&mut i);
+            }
+            "--dump-ancestors" => {
+                dump_ancestors = take_value(&mut i);
             }
             _ if a.starts_with("--disable=") => {
                 disables.extend(csv(&a["--disable=".len()..]));
@@ -290,6 +294,11 @@ fn main() -> ExitCode {
 
     if let Some(items) = dump_infer {
         let code = pyinfer::dump::run_dump_infer(&items);
+        return ExitCode::from(code as u8);
+    }
+
+    if let Some(items) = dump_ancestors {
+        let code = pyinfer::dump::run_dump_ancestors(&items);
         return ExitCode::from(code as u8);
     }
 

@@ -3326,3 +3326,65 @@ GATES (round 3, re-certified): EGATE -E 27/27 ALL EQUAL (fresh full re-run);
 bytecmp2 self-compare 0 fail + symmetric 0 fail on all 27×2; binary/pyinfer
 UNTOUCHED (only edit: harness/bytecmp2.py, committed; a W0223 DBG eprintln was
 added then fully reverted — working tree clean apart from this doc).
+
+## FP-elimination round 6 (re-census + warm-cache confirmation tooling)
+
+bytecmp2 RE-VERIFIED correct/symmetric FIRST (the round-1 fix holds): every
+27×2 self-compare returns OK; a→b ≡ b→a exit on all 54 combos; synthetic
+real-diff / R0801-count / extra-message cases all caught. The CLAUDE.md
+"tornado/pip hook reports DIFF" bug is GONE (both pass — their only raw diff is
+the sanctioned F0002 crash-path, which CRASH-normalizes). No bytecmp2 change
+needed this round.
+
+Re-census (fresh ours runs, all 27 corpora both profiles; non-no-member,
+non-F0002-path FPs only) — IDENTICAL set to round 3, mechanism unchanged:
+- sqlalchemy.hook FP=4  (R0901:1 W0223:1 W0231:2)
+- sqlalchemy.full FP=38 (R0901:15 W0223:10 W0613:6 W0231:3 C0116:2 W0237:1 E1136:1)
+- nova.full       FP=40 (E1120:40)
+- sympy.full      FP=35 (W0223:31 E1136:2 W0221:2)
+- core.full       FP=1  (W0143:1)
+(scikit-learn.full / pip.full / pylfunc.full fail the gate on FN/no-member/
+useless-suppression ONLY — zero real FPs; verified.)
+
+NEW EMPIRICAL CONFIRMATION (net-new `--dump-ancestors` debug driver, added to
+crates/cli/src/main.rs + crates/pyinfer/src/dump.rs — debug-only, never on the
+lint path; PRYLINT_ANC_TARGETS="path:lineno" per line). It prebuilds the
+corpus exactly like the real run, then for a target ClassDef prints BOTH the
+recursive `ancestors()` (shared-context, observes the nodes_inferred>100 cap)
+and the `count_parents` work-list (fresh None-context, hits the warm GLOBAL
+cache) — the latter being precisely what the R0901 checker calls. Findings on
+sqlalchemy array.py:93 (`array(ExpressionClauseList[_T])`):
+- prylint COLD/isolated `ancestors()` = 0 (nodes_inferred=104) — BYTE-MATCHES
+  astroid: `OperatorExpression[_T]`/`ExpressionClauseList[_T]` Subscript bases
+  fail to infer once cumulative nodes_inferred crosses max_inferred=100
+  (node_ng.py:165), so `mro()` collapses to length-1 and `__class_getitem__`
+  is never found → InferenceError → base dropped → R0903 (CORRECT, == GT).
+- Linting array.py ALONE (or with elements.py) → R0903 in BOTH prylint and
+  pylint (proven). The FP appears ONLY in the full-corpus run.
+- BISECTED the trigger: needs files #592-669 of 669 BUILT (phase-1) before
+  array.py is checked; no single file flips it (accumulation), confirming it
+  is global-inference-cache priming, not a structural bug. Minimal repro
+  (synthetic 8-deep `Foo[_T]` chain) does NOT collapse — the collapse is
+  width/depth/cap-pressure-driven on sqlalchemy's real graph only.
+- Root, restated precisely: in the warm full run some earlier (now-ported)
+  W/R/C visitor infers `OperatorExpression[_T]` under a FRESH counter (no cap
+  pressure) → resolves the full chain → writes the resolved result into the
+  global inference cache; R0901's later `count_parents` (fresh None-context)
+  then hits that warm RESOLVED entry → 43 ancestors. pylint's first inference
+  of the same subscript happens under cap pressure → caches the COLLAPSED
+  (Uninferable) result → 0 ancestors. SAME machinery for nova E1120 (decorated
+  classmethod binding) and core W0143 (cross-file callable resolution).
+
+VERDICT (round 6): BLOCKED — unchanged single root cause, now confirmed with a
+reusable measurement tool rather than inference alone. A safe checker-level fix
+still does not exist (the cache entry is a wrong/Uninferable RESOLUTION, not a
+flag a checker can test). The only true fix is exact checker-time
+nodes_inferred-cap + global-cache priming-order accounting across the
+full-mode visitor fan-out — which directly risks the INVIOLABLE -E 27/27 gate
++ inferdump-zero and the 22 clean corpora. Net-new safe deliverable this round:
+the `--dump-ancestors` driver (committed) for future cap-accounting work.
+
+GATES (round 6, re-certified on the current binary): -E 27/27 ALL EQUAL (out +
+exit, fresh full re-run); check_treedump django 200/0 differing; bytecmp2
+self-compare 0-fail + symmetric on all 54 combos. Lint output BYTE-UNCHANGED by
+the dump-ancestors addition (sqlalchemy.full still 38 FP, etc.).

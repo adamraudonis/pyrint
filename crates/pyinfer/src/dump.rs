@@ -10,7 +10,7 @@ use pyast::tree::{ConstValue, IntValue, NodeKind};
 
 use crate::ctx::Ctx;
 use crate::graph::Engine;
-use crate::value::{ErrKind, GNode, ModId, SeqKind, Value};
+use crate::value::{Drive, ErrKind, GNode, ModId, SeqKind, Value};
 
 pub fn run_dump_infer(items_path: &str) -> i32 {
     // Deep inference recursion (astroid runs with setrecursionlimit(8000))
@@ -22,6 +22,104 @@ pub fn run_dump_infer(items_path: &str) -> i32 {
         .expect("spawn dump thread")
         .join()
         .unwrap_or(1)
+}
+
+/// `--dump-ancestors <items.jsonl>` debug driver. Prebuilds the corpus
+/// exactly like the real run (phase 1, file order), then for every ClassDef
+/// whose `file:line` matches an entry in PRYLINT_ANC_TARGETS (one
+/// `path:lineno` per line) prints its ancestor count + the post-walk
+/// nodes_inferred counter so the astroid `nodes_inferred>100` collapse can be
+/// diffed. Debug-only: never touches the lint path.
+pub fn run_dump_ancestors(items_path: &str) -> i32 {
+    let items_path = items_path.to_string();
+    std::thread::Builder::new()
+        .stack_size(1 << 30)
+        .spawn(move || run_dump_ancestors_inner(&items_path))
+        .expect("spawn dump-ancestors thread")
+        .join()
+        .unwrap_or(1)
+}
+
+fn run_dump_ancestors_inner(items_path: &str) -> i32 {
+    let cwd = std::env::current_dir().unwrap_or_default();
+    let engine = Engine::new(&cwd);
+    let data = std::fs::read_to_string(items_path).unwrap_or_default();
+    let items: Vec<(String, String)> = data
+        .lines()
+        .filter(|l| !l.trim().is_empty())
+        .filter_map(|l| {
+            let v: serde_json::Value = serde_json::from_str(l).ok()?;
+            Some((
+                v["name"].as_str()?.to_string(),
+                v["path"].as_str()?.to_string(),
+            ))
+        })
+        .collect();
+    let mut trees: Vec<Option<ModId>> = Vec::with_capacity(items.len());
+    for (name, path) in &items {
+        trees.push(engine.ast_from_file(path, Some(name), false, true).ok());
+    }
+    // targets: "path:lineno" per line
+    let targets: Vec<(String, u32)> = std::env::var("PRYLINT_ANC_TARGETS")
+        .ok()
+        .and_then(|p| std::fs::read_to_string(p).ok())
+        .map(|d| {
+            d.lines()
+                .filter_map(|l| {
+                    let l = l.trim();
+                    if l.is_empty() {
+                        return None;
+                    }
+                    let (p, ln) = l.rsplit_once(':')?;
+                    Some((p.to_string(), ln.parse::<u32>().ok()?))
+                })
+                .collect()
+        })
+        .unwrap_or_default();
+    for ((_name, path), tree) in items.iter().zip(trees.iter()) {
+        let Some(mid) = tree else { continue };
+        let md = engine.md(*mid);
+        for n in engine.walk_preorder(*mid) {
+            if !matches!(md.tree.nodes[n.idx()].kind, NodeKind::ClassDef(_)) {
+                continue;
+            }
+            let g = GNode { m: *mid, n };
+            let line = md.tree.nodes[n.idx()].fromlineno;
+            let want = targets.is_empty()
+                || targets.iter().any(|(p, ln)| path.ends_with(p.as_str()) && *ln == line);
+            if !want {
+                continue;
+            }
+            // full recursive ancestors with a SHARED context to observe the cap
+            let ctx2 = Ctx::new();
+            let mut ancs: Vec<GNode> = Vec::new();
+            engine.ancestors_to(g, true, Some(&ctx2), &mut |a| {
+                ancs.push(a);
+                Drive::Go
+            });
+            // count_parents-style walk (design_analysis _get_parents_iter):
+            // ancestors(recurs=false) work-list, each with a FRESH None ctx —
+            // this is what the R0901 checker actually does, and it hits the
+            // warm GLOBAL inference cache.
+            let mut parents: rustc_hash::FxHashSet<GNode> = Default::default();
+            let mut to_explore = engine.ancestors(g, false, None);
+            while let Some(p) = to_explore.pop() {
+                if parents.insert(p) {
+                    to_explore.extend(engine.ancestors(p, false, None));
+                }
+            }
+            println!(
+                "{}:{}: {} recurs_ancestors={} ni={} count_parents={}",
+                path,
+                line,
+                engine.qname(g),
+                ancs.len(),
+                ctx2.nodes_inferred.get(),
+                parents.len(),
+            );
+        }
+    }
+    0
 }
 
 fn run_dump_infer_inner(items_path: &str) -> i32 {
