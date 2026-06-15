@@ -3737,3 +3737,96 @@ check). FP census unchanged (1 full + 4 hook, all sqlalchemy, same nodes). No
 source changes landed (diagnosis-only); new env-gated GT tracer
 harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
 declared_metaclass; does not touch prylint output).
+
+## ZERO-FP round 6 (ROOT CAUSE CORRECTED: localized 11-node cold-cost over-burn, NOT warm-cache order)
+
+Re-census (clean HEAD build, all 27 corpora x {full,hook}, --drop-no-member,
+filtering E1101/I1101/F0002): ONLY sqlalchemy has real FPs, IDENTICAL nodes to
+rounds 2/4/5:
+  sqlalchemy.full : W0231 x1 (orm/properties.py:561, base _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2 (orm/attributes.py:198 _DeclarativeMapped,
+                              orm/attributes.py:620 QueryableAttribute)
+                  + R0901 x1 + W0223 x1 (postgresql/array.py:93 array,
+                              ExpressionClauseList[_T] deep-MRO ancestors walk)
+ALL OTHER 26 corpora ZERO real FP in BOTH profiles (nova/sympy E1120/W0223 still
+GONE; tornado/pip/sympy F0002 = crash-path noise, bytecmp2 PASS). -E 27/27
+byte-identical (out+exit); treedump django 200/0; inferdump django 200/0.
+
+THIS ROUND OVERTURNS the round-4/5 verdict with decisive node-precise evidence.
+Rounds 4/5 concluded the FP was an UNBOUNDED-global-cache WARM-ORDER artifact
+with "no localized lever". That is WRONG. The FP is a LOCALIZED COLD-COST
+COUNTER-PARITY bug: prylint burns ~11 extra nodes_inferred in ONE cold call,
+pushing it over the 100-cap where astroid stays under.
+
+THE DECISIVE MEASUREMENT (new tracers, env-gated, all reverted before commit):
+1. The deciding call is `_DeclarativeMapped.declared_metaclass(ln="__init__")`
+   (run by W0231 _ancestors_to_call -> igetattr("__init__") -> metaclass()).
+   - prylint (DBGDM probe in declared_metaclass): base@25 `Mapped[_T_co]` cold
+     at ni_in=0 burns 0->107, OVER cap -> truncates -> [U]; base@40
+     `_MappedAttribute[_T_co]` then runs at ni=107 -> [U]. ancestors() empty ->
+     class_getattr falls to the ObjectModel synthetic NON-abstract __init__
+     (`def __init__(self,*a,**k): return None`, is_abstract==False) -> W0231.
+   - astroid (DM2 tracer = ClassDef.declared_metaclass monkeypatch): the SAME
+     deciding call costs ni 0->96, UNDER cap -> base@25 -> [Class:Mapped],
+     base@40 -> [Class:_MappedAttribute]; ancestors reach builtins.object ->
+     REAL abstract object.__init__ -> NO W0231. (round 5's "cold cost is 102,
+     both over cap" measured `Mapped[_T_co].infer` in ISOLATION on the single
+     file, NOT the full declared_metaclass call in the warm corpus -> wrong.)
+2. The 11-node gap is SIX redundant `_T_co` TypeVar `Call` re-inferences.
+   Full NodeNG.infer event-tree diff of the deciding subtree (GT tree tracer vs
+   PRYLINT_DBG_DECLMETA_TREE which flips set_trace_infer on for the one call):
+   GT does ZERO `> Call` inferences in the whole subtree; prylint does 6. Every
+   `_T_co` (a `from .._typing import _T_co` resolving to
+   `_T_co = TypeVar("_T_co", ...)`) in GT replays `AssignName _T_co @134:0 ->
+   [Class:_T_co]` at cost 0 with `cc=None bn=None`; in prylint the same index
+   is inferred under `bn=true` (boundnode leaked from class_getitem's
+   bind_context_to_node), MISSES the cache, and re-runs the brain_typing
+   TypeVar tip (Name TypeVar / SCAN / Name type / ClassDef _T_co), burning ~2
+   nodes each.
+3. The trigger is `metaclass(*bcls, Some(ctx))` at calls.rs:1791 inside
+   infer_argument's classmethod-cls resolution (astroid arguments.py:230
+   `method_scope is boundnode.metaclass(context=context)`). The METACOST tracer
+   (ClassDef.metaclass monkeypatch) proves the EXACT divergence: astroid calls
+   `metaclass(cls, context)` TWICE per class on the chain — once bn=False
+   (top-level declared_metaclass, does the work + caches) then once bn=True
+   (cls resolution) which REPLAYS at cost 0:
+     SQLORMOperations  bn=False cost=14  ->  bn=True cost=0
+     SQLORMExpression  bn=False cost=51  ->  bn=True cost=0
+     Mapped            bn=False cost=85  ->  bn=True cost=0
+   prylint's bn=True metaclass calls cost 2 EACH (METAARG probe) because the
+   bn=true subscript-index (`_T_co`) inferences MISS the cache the bn=False call
+   warmed. ~12 such calls on the deciding chain -> the 107 vs 96 gap.
+
+WHY GT's bn=True metaclass replays at 0 (the unresolved cache-key mechanic): in
+the GT event stream EVERY `_T_co`/`AssignName _T_co`/subscript-index inference
+runs at `cc=None bn=None` even when reached from a bn=true `metaclass(context)`
+call, so its global-cache key is stable and the bn=False entry is hit. prylint
+threads `cc=fresh-id, bn=Node(cls)` (from class_getitem's
+bind_context_to_node + fresh CallCtx id per getitem) into the same index
+inference -> distinct key -> miss -> TypeVar tip re-run. Static analysis of
+astroid (Name._infer/ImportFrom._infer/AssignName._infer/_infer_subscript all
+`copy_context` PRESERVE bn; declared_metaclass/metaclass/_find_metaclass all
+pass context THROUGH) does NOT reveal where astroid drops the cc/bn before the
+index cache key — needs a LOGGING _INFERENCE_CACHE on the GT side keyed exactly
+like node_ng.py to see which (node,lookupname,cc,bn) the bn=True base/index
+inferences actually query. THAT is the precise next step.
+
+THE FIX TARGET (next round): make prylint's repeat `metaclass(cls, bn-ctx)`
+(calls.rs:1791, and the declared_metaclass base-subscript-index inference it
+drives) replay from the cache exactly like astroid's cost-0 bn=True calls —
+i.e. ensure the `_T_co`/subscript-index inferences reached through a bn=true
+metaclass walk key the SAME way astroid does so the bn=False-warmed entries
+hit. This drops the deciding cold cost 107 -> <=96, base@25/40 resolve to
+[Class] instead of [U], ancestors reach object, and the W0231/R0901/W0223
+FPs vanish. NOT landed this round: the cache-key parity is intricate and a
+speculative change directly risks the INVIOLABLE -E 27-gate + the
+django/nova/sqlalchemy/sympy inferdump/treedump gates; the exact key the
+bn=true index inferences must match has to be confirmed with a GT
+_INFERENCE_CACHE logger FIRST.
+
+GATES (round 6, re-certified, clean HEAD build, NO source changes landed): -E
+27/27 byte-identical (out+exit ALL EQUAL); treedump django 200/0; inferdump
+django 200/0. FP census unchanged (1 full + 4 hook, all sqlalchemy, same nodes).
+Diagnosis-only; new env-gated probes (PRYLINT_DBG_DECLMETA / _TREE in
+declared_metaclass, PRYLINT_DBG_META_ARG in infer_argument; GT tracers
+trace_dm2/trace_dm_tree/trace_meta_cost) were all reverted before commit.
