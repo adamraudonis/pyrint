@@ -1056,6 +1056,9 @@ impl Engine {
         package: bool,
         pure_python: bool,
     ) -> ModId {
+        if std::env::var("PRYLINT_TRACE_MODBUILD").map(|v| !name.is_empty() && v.split(',').any(|t| t == name)).unwrap_or(false) {
+            eprintln!("MODBUILD {} during lint_file={}", name, crate::graph::cur_lint_file());
+        }
         let id = ModId(self.mods.borrow().len() as u32);
         // gsym translation table
         let n_syms = tree.interner.len();
