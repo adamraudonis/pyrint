@@ -3446,3 +3446,54 @@ sqlalchemy.full 38 FP / sympy.full 35 / nova.full 40 / core.full 1).
 GATES (round 7, re-certified on the current binary): -E parity green on
 scrapy/django/sqlalchemy/sympy spot-check (clean source, reverted all
 experiments); bytecmp2 self-compare + symmetry OK.
+
+## ZERO-FP round 1 (root cause QUANTIFIED: phase-2 cache-wipe-timing skew)
+
+Re-census (binary BYTE-UNCHANGED; all new probes env-gated): nova.full
+E1120x40, sqlalchemy.full 38, sympy.full 35 real (F0002 normalized),
+core.full W0143x1 — IDENTICAL to rounds 3/6/7, single root cause confirmed.
+
+NEW MEASUREMENTS (go beyond the inference-only rounds 6/7):
+1. Warmed nova/ infercache (harness/infercache/nova) + check_inferdump nova all
+   = 8 files / 21 lines, ALL os.environ Dict:43-vs-44 environment-var-count
+   noise (snapshot posix.environ froze 43; live pinned python has 44), NONE
+   overlapping the 40 E1120 FP files. => the E1120 FPs are INVISIBLE to the
+   preorder dump-infer walk (dump-infer resolves password.py:73 get_by_uuid ->
+   UM in BOTH), so 7-corpus inferdump-ZERO does not catch the lint-path warming
+   divergence. dump-infer parity is necessary but NOT sufficient.
+2. Lint-path probes (PRYLINT_TRACE_SICC / PRYLINT_TRACE_NODE / PRYLINT_WIPESTAT /
+   PRYLINT_PERFILE_WIPES) + GT lint-path tracers (harness/trace_gt_e1120.py,
+   harness/trace_gt_wipesrc.py): at the canonical FP password.py:73:23 astroid
+   has done 29864 inf-cache WIPES and infers get_by_uuid -> Uninferable (no
+   E1120); prylint has done 17894 wipes and infers -> UnboundMethod ##0 (cache
+   HIT) -> E1120 FP. COLD cost is byte-identical (U ##102 both). Within the SAME
+   file astroid splits 73->U (cold/first) vs 79->UM (warm); GT emits E1120 at
+   75/79 not 73. GT fires E1120 at 3629 real sites — the 40 FPs are exactly
+   astroid's cold-truncated get_by_uuid sites (GT 51 distinct U vs 181 UM).
+3. The lever is CACHE-WIPE TIMING, not bounded-LRU caps (round-1 cap sweep
+   already disproved caps). astroid's extra wipes come from inference_tip.
+   transform on builtin Call nodes (len/str/dict/set/super/list/getattr/int/
+   type/isinstance/tuple) inside modules lazily built DURING phase-2 checks
+   (e.g. +237 such wipes while checking test_compute.py); the per-file wipe gap
+   grows monotonically (cmd/manage ~500 -> password ~12000). prylint pre-builds
+   more of nova's transitive imports in phase 1 (mods 1980 after phase-1, 17248
+   after phase-2; only +3546 phase-2 wipes vs astroid's >13000), so its
+   tip-wipes fire EARLY on a cold cache (harmless) instead of LATE on a warm
+   cache (which would cool the get_by_uuid chain to cold -> U). pylint 4.0.5
+   ALSO two-phases (_get_asts then _lint_files), so the divergence is the
+   phase-1 lazy-build SET/aggressiveness, not the phase split itself.
+
+VERDICT (zero-fp round 1): BLOCKED on the SAME single root cause, now precisely
+quantified as phase-2 inference-cache-wipe TIMING (driven by phase-1 lazy
+module-build over-aggressiveness vs astroid). A true fix must replicate
+astroid's exact lazy-module-build set+order across the full-mode visitor
+fan-out so the builtin-tip wipes land at the same times — an engine-architecture
+change that directly risks the INVIOLABLE -E 27/27 gate + inferdump-zero + the
+22 clean full-mode corpora; not safely landable this round. sqlalchemy/sympy
+(subscripted-generic base cap-truncation) and core W0143 (cross-module callable
+resolution) are the same warm-vs-cold class.
+
+GATES (zero-fp round 1, re-certified): -E 27/27 ALL EQUAL (out+exit); treedump
+django 200/0; inferdump django/core/pandas/sentry 0/0, nova 8/21 (os.environ
+env-noise only); FP census unchanged. Net deliverable: the lint-path
+wipe-timing measurement toolchain (committed) + this quantified diagnosis.
