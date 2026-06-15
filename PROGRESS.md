@@ -3497,3 +3497,80 @@ GATES (zero-fp round 1, re-certified): -E 27/27 ALL EQUAL (out+exit); treedump
 django 200/0; inferdump django/core/pandas/sentry 0/0, nova 8/21 (os.environ
 env-noise only); FP census unchanged. Net deliverable: the lint-path
 wipe-timing measurement toolchain (committed) + this quantified diagnosis.
+
+## ZERO-FP round 2 (ROOT CAUSE FIXED: symilar stripped_lines re-parse wipes)
+
+The round-1 "phase-1 over-aggressive lazy build" hypothesis was WRONG about the
+mechanism. Definitive measurement (nova, instrumented both sides):
+- phase-1 wipes MATCH (astroid 14638 vs prylint 14647) and phase-1 module sets
+  are IDENTICAL (1554 vs 1554, off-by-one `_ssl.ssl`). So phase-1 is NOT the
+  divergence.
+- FINAL wipes diverge hugely: astroid 30467 vs prylint 18193 — but the final
+  MODULE sets are IDENTICAL (1643 vs 1642). Same modules, 12k fewer wipes.
+- Attributed EVERY wipe by the source-module of the firing node (PRYLINT_WIPESRC
+  + a GT TransformVisitor._transform monkeypatch keyed by node.root()): every
+  per-REAL-FILE bucket matched within ±2 (test_hardware 972=972, typing 367/349,
+  inspect 281/279...). The ENTIRE 12k gap was in ONE bucket — anonymous
+  templates (root.file is None): astroid 13701 vs prylint 1506.
+- Traced those anonymous parses (AstroidBuilder.string_build monkeypatch +
+  traceback): the dominant source is `astroid.parse("".join(lines))` inside
+  symilar.stripped_lines (symilar.py:587-588), called PER ANALYZED FILE because
+  the SimilaritiesChecker options ignore-imports AND ignore-signatures BOTH
+  default True. Each full-module re-parse's TransformVisitor fires
+  _invalidate_cache() once per builtin-call node (~8/file → ~12k over the
+  corpus). prylint's similarities checker used real_lines + the existing tree
+  and fired ZERO such wipes.
+
+WHY -E WAS ALWAYS PERFECT: -E AND the hook profile both DISABLE R0801, so astroid
+ALSO skips the stripped_lines parse there → its cache stays as warm as prylint's
+→ byte-match. The FPs are exclusively a full-profile (R0801-enabled) artifact:
+the per-file re-parse wipes cool deep decorated-classmethod / subscripted-generic
+-base / abstract-method chains that astroid re-truncates at the nodes_inferred
+=100 cap (→ Uninferable → check doesn't fire), whereas prylint stayed warm and
+the chain resolved → spurious E1120 / W0223 / R0901 / W0231 / E1136.
+
+FIX (run.rs, full-profile R0801 raw-checker slot, sim_kept-gated): a throwaway
+`engine.build_template_module(joined_source, "")` per file whose post_build
+wipe_scan replicates the per-builtin-call wipes at the exact point astroid runs
+SimilaritiesChecker.process_module. Dump-infer path untouched; -E/hook untouched.
+
+RESULTS (full-profile --drop-no-member FP census, all 27):
+  nova        E1120 40 → 0   (parity EXIT 0; phase-2 wipes 18193 → 30377 vs GT 30467)
+  sympy       35    → 0 real (parity EXIT 0; F0002 = crash-path, normalized)
+  sqlalchemy  38    → 1       (W0231 properties.py:561 residual)
+  core        W0143 → 0
+  ALL OTHER 23 corpora: ZERO real FP (tornado/pip F0002 = crash-path noise only;
+  pip/pylfunc/core parity-fail on FALSE NEGATIVES only — E0611/no-member/NOTREE).
+Net full-profile real-FP count: 114-ish → 1 (sqlalchemy W0231).
+
+HOOK profile (R0801 disabled → the fix is a no-op there, by design): only
+sqlalchemy has real FPs — W0231×2, W0223×1, R0901×1 (pre-existing; same warmth
+class). All other 26 corpora ZERO real FP in hook.
+
+REMAINING (1 full + 4 hook, ALL sqlalchemy, ALL the `_DeclarativeMapped[_T]` /
+`Operators` deep-MRO warmth chain): NOT a localized bug. Proven by --dump-ancestors:
+COLD, prylint resolves `array` (postgresql/array.py:93) with recurs_ancestors=0,
+ni=104 — i.e. truncates at the cap EXACTLY like astroid (no R0901 cold). The
+43-ancestor FP only appears WARM in the full-corpus run. The residual is a diffuse
+~400-wipe / ~0.8% phase-2 wipe-TIMING drift: module sets are identical (840=840),
+final wipes astroid 51340 vs prylint 50938. The drift localizes to recurring
+`-18`-wipe per-file deltas where astroid lazily builds difflib/shutil/shlex DURING
+a later file's checks while prylint built them during an EARLIER file's inference
+(so the cooling wipe lands too early). Closing this requires bit-exact phase-2
+lazy-module-build ORDER parity across the whole corpus — an engine-wide change
+that risks the INVIOLABLE -E 27/27 gate and the 26 clean corpora; deferred.
+
+GATES (round 2, re-certified): -E 27/27 byte-identical + exit 0 mismatches;
+treedump django 400/0; inferdump django 200/0, nova all = 8/21 (pre-existing
+os.environ Dict:43-vs-44 env-var noise, unchanged). Dump-infer path structurally
+untouched. Tooling added (env-gated, output byte-unchanged): PRYLINT_WIPESRC
+(per-source + per-template-source wipe attribution), PRYLINT_DUMP_PHASE1_MODS /
+PRYLINT_DUMP_FINAL_MODS (engine module-name dumps); GT-side /tmp wipe/parse/
+module tracers (wipe_probe*.py, gt_wipemod.py, gt_wipebysrc.py, gt_who_parses.py,
+gt_filewin_mods.py).
+
+VERDICT (zero-fp round 2): 26/27 corpora ZERO real FP in BOTH profiles. The one
+holdout (sqlalchemy) dropped from 38 → 1 (full) and stays at 4 (hook), all the
+same proven-warmth `_DeclarativeMapped`/`Operators` MRO chain with byte-correct
+COLD inference. NOT YET fully zero — blocked on the residual ~0.8% phase-2
+wipe-timing drift (sqlalchemy only), which is an engine-architecture-level fix.
