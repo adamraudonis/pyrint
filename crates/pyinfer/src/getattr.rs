@@ -497,7 +497,7 @@ impl Engine {
         }
         let out = self.metaclass_lookup_attribute_uncached(cls, name, ctx);
         let mut cache = self.metalookup_cache.borrow_mut();
-        if cache.len() >= 1024 {
+        if cache.len() >= crate::graph::meta_cap() {
             if let Some(oldest) = self.metalookup_evict.borrow_mut().pop_lru() {
                 cache.remove(&oldest);
             }
@@ -2568,6 +2568,17 @@ impl Engine {
             return Ok(vec![cls]);
         }
         let inferred_bases = self.inferred_bases(cls, ctx);
+        if depth == 0 {
+            if let Ok(want) = std::env::var("PRYLINT_DBG_MRO") {
+                if self.qname(cls).ends_with(&want) {
+                    eprintln!(
+                        "MROIB {} ib={:?}",
+                        self.qname(cls),
+                        inferred_bases.iter().map(|&g| self.qname(g)).collect::<Vec<_>>()
+                    );
+                }
+            }
+        }
         let mut bases_mro: Vec<Vec<GNode>> = Vec::new();
         for &base in &inferred_bases {
             if base == cls {
@@ -2659,11 +2670,35 @@ impl Engine {
             None => Ctx::new(),
         };
         let mut out = Vec::new();
+        let dbg_ib = std::env::var("PRYLINT_DBG_INFBASES").is_ok()
+            && self.qname(cls).ends_with(&std::env::var("PRYLINT_DBG_INFBASES").unwrap_or_default());
         for base in bases {
             // _infer_last with a cloned context
             let c = base_root.clone_ctx();
+            let key_cached = {
+                let key: crate::graph::InfKey = (base, None, None, None);
+                self.inf_cache.borrow().contains_key(&key)
+            };
             let flow = self.infer(base, &c);
             let last = flow.vals.last().cloned();
+            if dbg_ib {
+                eprintln!("  [base node cached at (base,None,None,None)? {}]", key_cached);
+                let desc = match &last {
+                    Some(Value::Node(g)) => format!("Node({})", self.qname(*g)),
+                    Some(v) if v.is_uninferable() => "Uninferable".to_string(),
+                    Some(v) => format!("{:?}", self.value_qname(v)),
+                    None => "NONE".to_string(),
+                };
+                eprintln!(
+                    "INFBASE {} base#{} -> last={} (nvals={}) ni_before={} ni_after={}",
+                    self.qname(cls),
+                    out.len(),
+                    desc,
+                    flow.vals.len(),
+                    base_root.nodes_inferred.get(),
+                    c.nodes_inferred.get()
+                );
+            }
             let Some(last) = last else { continue };
             // scoped_nodes.py:2828-2831: Instance baseobjs (incl. Const/
             // containers) unproxy to their class before the ClassDef check

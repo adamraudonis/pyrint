@@ -548,6 +548,9 @@ pub fn run(opts: &RunOpts) -> i32 {
                             )
                         },
                     ));
+                    if std::env::var("PRYLINT_CACHESTAT").is_ok() {
+                        eprintln!("{}", engine.cache_stat_line());
+                    }
                     // ---- checker close() phase ----
                     // reversed(prepare_checkers) order: "similarities" sorts
                     // after "imports" alphabetically, so in REVERSED order

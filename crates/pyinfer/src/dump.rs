@@ -170,6 +170,54 @@ fn run_dump_infer_inner(items_path: &str) -> i32 {
     let trace_start = std::env::var("PRYLINT_TRACE_START").ok();
     let stdout = std::io::stdout();
     let mut out = std::io::BufWriter::new(stdout.lock());
+    // PRYLINT_PROBE_COLD=<path_suffix>:<line>:<col>:<kind> — after the full
+    // prebuild, infer ONLY this one node with a FRESH context (no preorder
+    // warming) to measure the genuine cold result + nodes_inferred, mirroring
+    // what a checker's safe_infer sees as the first inference of the subtree.
+    if let Ok(spec) = std::env::var("PRYLINT_PROBE_COLD") {
+        let parts: Vec<&str> = spec.rsplitn(3, ':').collect(); // [col, line, path]
+        if parts.len() == 3 {
+            let want_path = parts[2];
+            let want_line: u32 = parts[1].parse().unwrap_or(0);
+            let want_col: u32 = parts[0].parse().unwrap_or(0);
+            for ((_n, path), tree) in items.iter().zip(trees.iter()) {
+                if !path.ends_with(want_path) {
+                    continue;
+                }
+                let Some(mid) = tree else { continue };
+                let want_kind = std::env::var("PRYLINT_PROBE_KIND").unwrap_or_default();
+                for n in engine.walk_preorder(*mid) {
+                    let md = engine.md(*mid);
+                    let ni = &md.tree.nodes[n.idx()];
+                    let kname = match &ni.kind {
+                        NodeKind::Name { .. } => "Name",
+                        NodeKind::Attribute { .. } => "Attribute",
+                        NodeKind::Call { .. } => "Call",
+                        _ => "Other",
+                    };
+                    if ni.fromlineno == want_line
+                        && ni.col_offset as u32 == want_col
+                        && (want_kind.is_empty() || want_kind == kname)
+                    {
+                        let g = GNode { m: *mid, n };
+                        for rep in 0..3 {
+                            let ctx = Ctx::new();
+                            let flow = engine.infer(g, &ctx);
+                            let rendered: Vec<String> =
+                                flow.vals.iter().map(|v| render(&engine, v)).collect();
+                            eprintln!(
+                                "PROBE_COLD#{} {}:{}:{}:{} -> {} ##{} err={:?}",
+                                rep, path, ni.fromlineno, ni.col_offset, kname,
+                                rendered.join(" | "),
+                                ctx.nodes_inferred.get(),
+                                flow.err,
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
     for ((_name, path), tree) in items.iter().zip(trees.iter()) {
         if let Some(set) = &only {
             if !set.contains(path.as_str()) {

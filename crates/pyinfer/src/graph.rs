@@ -89,6 +89,30 @@ impl<K: Copy + Eq + std::hash::Hash> EvictIndex<K> {
     }
 }
 
+/// debug aid: bounded-cache capacities, env-overridable for warmth
+/// sensitivity experiments (PRYLINT_LOOKUP_CAP / PRYLINT_META_CAP). Default
+/// to astroid's exact maxsize (128 / 1024). Read once and memoized.
+pub fn lookup_cap() -> usize {
+    use std::sync::OnceLock;
+    static V: OnceLock<usize> = OnceLock::new();
+    *V.get_or_init(|| {
+        std::env::var("PRYLINT_LOOKUP_CAP")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(128)
+    })
+}
+pub fn meta_cap() -> usize {
+    use std::sync::OnceLock;
+    static V: OnceLock<usize> = OnceLock::new();
+    *V.get_or_init(|| {
+        std::env::var("PRYLINT_META_CAP")
+            .ok()
+            .and_then(|s| s.parse().ok())
+            .unwrap_or(1024)
+    })
+}
+
 /// Turn the trace flag on at runtime (PRYLINT_TRACE_START debug aid).
 pub fn set_trace_infer(on: bool) {
     let _ = trace_infer(); // force env init first so it can't overwrite us
@@ -483,13 +507,13 @@ impl Engine {
             inf_cache: RefCell::new(FxHashMap::default()),
             lookup_cache: RefCell::new(FxHashMap::default()),
             lookup_tick: Cell::new(0),
-            lookup_evict: RefCell::new(EvictIndex::new(128)),
+            lookup_evict: RefCell::new(EvictIndex::new(lookup_cap())),
             ftype_cache: RefCell::new(FxHashMap::default()),
             cls_type_cache: RefCell::new(FxHashMap::default()),
             slots_cache: RefCell::new(FxHashMap::default()),
             metalookup_cache: RefCell::new(FxHashMap::default()),
             metalookup_tick: Cell::new(0),
-            metalookup_evict: RefCell::new(EvictIndex::new(1024)),
+            metalookup_evict: RefCell::new(EvictIndex::new(meta_cap())),
             tip_guard: RefCell::new(FxHashSet::default()),
             tip_cache: RefCell::new(FxHashMap::default()),
             tip_order: RefCell::new(std::collections::VecDeque::new()),
@@ -558,6 +582,24 @@ impl Engine {
         let id = self.callctx_id.get();
         self.callctx_id.set(id + 1);
         id
+    }
+
+    /// debug aid (PRYLINT_CACHESTAT): final fill levels of the bounded
+    /// caches. lookup_tick / metalookup_tick are total access counts (hits
+    /// + inserts); cache lens are the live entry counts (capped at the
+    /// bound iff eviction ever fired).
+    pub fn cache_stat_line(&self) -> String {
+        format!(
+            "CACHESTAT lookup={}/{} accesses={} | meta={}/{} accesses={} | inf={} | tip={}",
+            self.lookup_cache.borrow().len(),
+            128,
+            self.lookup_tick.get(),
+            self.metalookup_cache.borrow().len(),
+            1024,
+            self.metalookup_tick.get(),
+            self.inf_cache.borrow().len(),
+            self.tip_cache.borrow().len(),
+        )
     }
 
     /// Keep a value alive whose Rc pointer serves as an identity key

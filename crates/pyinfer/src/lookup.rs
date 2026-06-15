@@ -30,7 +30,7 @@ impl Engine {
         let scope = self.scope(node);
         let res = Rc::new(self.scope_lookup(scope, node, name, 0));
         let mut cache = self.lookup_cache.borrow_mut();
-        if cache.len() >= 128 {
+        if cache.len() >= crate::graph::lookup_cap() {
             if let Some(oldest) = self.lookup_evict.borrow_mut().pop_lru() {
                 cache.remove(&oldest);
             }
@@ -58,7 +58,7 @@ impl Engine {
         self.lookup_tick.set(tick);
         let res: Rc<LookupResult> = Rc::new((node, Vec::new()));
         let mut cache = self.lookup_cache.borrow_mut();
-        if cache.len() >= 128 {
+        if cache.len() >= crate::graph::lookup_cap() {
             if let Some(oldest) = self.lookup_evict.borrow_mut().pop_lru() {
                 cache.remove(&oldest);
             }

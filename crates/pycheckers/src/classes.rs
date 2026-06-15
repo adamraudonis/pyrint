@@ -3818,6 +3818,16 @@ pub fn unimplemented_abstract_methods(
 ) -> Option<indexmap::IndexMap<String, GNode>> {
     let eng = cx.eng;
     let mro = eng.mro(node, None).ok()?;
+    if std::env::var("PRYLINT_DBG_UNIMPL").is_ok() {
+        let qn = eng.qname(node);
+        if qn.ends_with(&std::env::var("PRYLINT_DBG_UNIMPL").unwrap_or_default()) {
+            eprintln!(
+                "UNIMPL {} mro={:?}",
+                qn,
+                mro.iter().map(|&g| eng.qname(g)).collect::<Vec<_>>()
+            );
+        }
+    }
     let mut visited: indexmap::IndexMap<String, GNode> = indexmap::IndexMap::new();
     for &ancestor in mro.iter().rev() {
         let values: Vec<(String, GNode)> = {
