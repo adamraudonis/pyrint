@@ -3100,3 +3100,72 @@ django 400 = 0 differing; check_inferdump django 200 = 0 differing files/lines
 (pyinfer untouched — the only edit, a PRYLINT_TRACE_CGI probe in protocols.rs,
 was reverted; binary byte-identical to committed). Clean working tree —
 re-validation + deeper root-cause diagnosis round.
+
+## FP-elimination round 1 (bytecmp2 correctness + full-mode FP census, all 27×2)
+
+Two harness-correctness fixes to bytecmp2.py (the byte-parity gate), then a
+fresh real-FP census across all 27 corpora × both profiles (hook = Adam's
+pre-commit flags, full = maximal no-disable). No binary/pyinfer changes —
+pure harness fix + measurement.
+
+### bytecmp2.py fixed (round-1 mandate): now correct + symmetric + reflexive
+1. **F0002 crash-path normalization** — the old CRASH regex only normalized
+   the timestamped basename (`pylint-crash-TS.txt`) but left the crash-file
+   DIRECTORY, which is PYLINTHOME-dependent (GT `/private/tmp/gtiso.XXXX` or
+   `~/Library/Caches/pylint` vs ours `/tmp/prylint-plh-<c>-<p>`). Byte-identical
+   pairs whose ONLY difference was that directory falsely reported DIFF
+   (tornado.hook, pip.hook). Now canonicalizes the whole quoted crash path to
+   `'CRASH-PATH'`. tornado.hook + pip.hook now correctly OK.
+2. **R0801 block terminator** — the old content-based terminator (skip until
+   next MSG/HEADER/`---`/`Your code`) desynced because R0801 block content is
+   ARBITRARY Python source (markdown docstrings, code fences, file:line:col
+   strings can look like pylint output), AND is nondeterministic in pylint
+   itself. rich.full leaked its R0401 cyclic-import block as a false DIFF.
+   FIX: every R0801 block ends with exactly one line carrying the appended
+   symbol ` (duplicate-code)` on its last displayed source line (verified
+   #R0801-headers == #terminators: rich 575=575, black 8136=8136, fastapi
+   4515=4515; header never carries the suffix). Skip up to+including that
+   terminator → rich.full + salt.full now correctly OK (were 0FP/0FN).
+   VERIFIED: reflexive (every .out/.ours OK vs itself), symmetric (a,b==b,a).
+
+### Real-FP census (excl no-member E1101/I1101, R0801 count-canonical, F0002)
+**23/27 corpora: 0 FP on BOTH profiles.** All FPs concentrate in 4 corpora,
+ALL from the single documented warm-full-corpus inference-cache-order root
+cause (subscripted-generic-base `__class_getitem__`/ancestor cascade +
+Uninferable-decorator inference) — PROVEN warm-only this round by re-running
+the COLD isolation micro-probes: every cluster is byte-identical to pinned
+pylint in isolation and diverges only under the warm full-corpus cache.
+- **sqlalchemy** hook 4 (W0231×2, W0223×1, R0901×1), full 38 (R0901×15,
+  W0223×10, W0613×6, W0231×3, C0116×2, W0237×1, E1136×1) — the BLOCKED
+  R0901↔R0903 generic-base cascade (rounds 5-12). Cold: attributes.py-alone
+  → 0 W0231 both engines; array.py-alone → R0903 both engines.
+- **nova** full 40 E1120 — `objects.Instance.get_by_uuid(...)` etc.; HOOK is
+  byte-PERFECT (E1120 3669==3669) and only FULL diverges (GT 3629 vs ours
+  3669): a full-mode W/R/C checker warms astroid's cache before typecheck so
+  pylint's OWN E1120 drops 40 in full mode. `remotable_classmethod` resolves
+  to an UNINFERABLE import (oslo_versionedobjects not installed) → the
+  classmethod-decorator inference is cache-order-sensitive. Cold isolation
+  micro-probe (threading._shutdown + plain def): clean both engines.
+- **sympy** full 35 (W0223×31, W0221×2, E1136×2) — SAME root as sqlalchemy:
+  `class AlgebraicField(Field[Alg], CharacteristicZero, SimpleDomain[Alg],
+  RingExtension[Alg, MPQ])` subscripted-generic bases; `Field` overrides
+  div/exquo/gcd so AlgebraicField is NOT abstract — pylint resolves the
+  bases warm and drops the W0223s. W0223 HOOK is byte-PERFECT (1512==1512);
+  only FULL diverges. Cold: algebraicfield.py-alone → 15 W0223 BOTH engines
+  (exact match).
+- **core** full 1 W0143 — `assert threading._shutdown == thread.deadlock_
+  safe_shutdown` (test_runner.py:54): both operands are bare callables
+  (count 2 → no emit) but warm we infer only 1. Cold isolation: clean.
+
+Total real FP: hook 4, full 114 (grand 118). Every one is warm-cache-order,
+in the pyinfer cache-key/path/cycle-guard machinery guarded by the INVIOLABLE
+EGATE 27/27 (re-proven EQUAL, incl. E0240 on the sqlalchemy divergent
+classes) + the 4 inferdump-zero corpora (django/pandas/sentry/core byte-exact
+N=1000). Perturbing it for a NON-E divergence confined to 3 corpora's deep
+generic hierarchies risks the 23 clean corpora + all gates — the wrong trade,
+consistent with the BLOCKED verdict of rounds 5-12. BLOCKED.
+
+GATES (re-certified this round): **EGATE -E 27/27 ALL EQUAL** (fresh run);
+check_treedump django 0 differing; check_inferdump django 200 0 differing
+(pyinfer/binary untouched — only harness/bytecmp2.py changed). Working tree:
+the 2 bytecmp2 commits only.
