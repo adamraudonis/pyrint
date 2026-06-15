@@ -3574,3 +3574,90 @@ holdout (sqlalchemy) dropped from 38 → 1 (full) and stays at 4 (hook), all the
 same proven-warmth `_DeclarativeMapped`/`Operators` MRO chain with byte-correct
 COLD inference. NOT YET fully zero — blocked on the residual ~0.8% phase-2
 wipe-timing drift (sqlalchemy only), which is an engine-architecture-level fix.
+
+## ZERO-FP round 4 (NODE-PRECISE root cause: metaclass-burn-ORDER, not wipe count)
+
+Re-census (clean release build, all 27 corpora × {full,hook}, --drop-no-member,
+filtering E1101/I1101): only sqlalchemy has real FPs — IDENTICAL to round-2:
+  sqlalchemy.full : W0231 ×1  (orm/properties.py:561 MappedColumn)
+  sqlalchemy.hook : R0901 ×1 + W0223 ×1 (postgresql/array.py:93 array)
+                  + W0231 ×2 (orm/attributes.py:198 QueryableAttribute,
+                              orm/attributes.py:620 Proxy)
+All other 26 corpora ZERO real FP in BOTH profiles (tornado/pip/sympy F0002 =
+crash-path noise, bytecmp2 gate PASS; pip/pylfunc/core full parity-fail on FALSE
+NEGATIVES only). -E 27/27 byte-identical; treedump django 200/0; inferdump
+django 200/0. Census UNCHANGED from round 2.
+
+This round did NOT change the FP count but TRACED IT TO THE EXACT NODE +
+MECHANISM (rounds 1-2 only knew it was "warmth"; now it is a single cache entry).
+Method: lint-path GT tracers (harness/trace_gt_{sqla,w0231,metaburn,node}.py —
+monkeypatch ClassDef.{ancestors,getattr,igetattr,metaclass} + NodeNG.infer with
+the SAME _INFERENCE_CACHE key astroid uses) vs prylint env probes
+(PRYLINT_TRACE_NODE=line:col HIT/MISS+lookupname+ni, + ad-hoc dump.rs/getattr.rs/
+classes.rs eprintln probes, all reverted).
+
+EXACT CHAIN (canonical FP: properties.py:561 MappedColumn, base _DeclarativeMapped):
+1. W0231 _check_init -> _ancestors_to_call: for each base of MappedColumn it does
+   `next(base.igetattr("__init__"))` with FRESH ctx (ni=0). 3 bases resolve
+   `__init__` -> the REAL builtins.object.__init__ (snapshot, EMPTY body) which
+   is is_abstract()==True (is_abstract: empty body == single `pass`); base
+   `_DeclarativeMapped` resolves `__init__` -> the ObjectModel SYNTHETIC
+   `def __init__(self,*a,**k): return None` (getattr.rs obj_model_func_nodes,
+   built as template module "builtins.object") which is is_abstract()==FALSE
+   (first body child is Return, not Pass). => only _DeclarativeMapped lands in
+   not_called_yet => W0231 fires. GT: ALL 4 bases resolve to the REAL abstract
+   object.__init__ => to_call==[] => NO W0231.
+2. WHY prylint hits the ObjectModel for _DeclarativeMapped: ClassDef.getattr only
+   consults special_attributes (ObjectModel) when the ancestors-locals walk
+   yields NOTHING (`if name in special_attributes and class_context and not
+   values`). prylint's `class_getattr -> ancestors(cls,true,ctx)` returns ZERO
+   ancestors because the ctx is ALREADY OVER THE 100-CAP (ctx_ni=107) when it
+   runs: every base infers to Uninferable (over-cap truncation). With a FRESH
+   None ctx the SAME walk reaches all 17 ancestors incl. builtins.object
+   (`--dump-ancestors` recurs_ancestors=17), so the object.__init__ IS reachable
+   — only the over-cap counter kills it.
+3. WHERE the 107 comes from: class_igetattr_to (getattr.rs:700) computes
+   `metaclass(cls, ctx)` BEFORE class_getattr, SHARING the ctx counter — exactly
+   like astroid igetattr (scoped_nodes.py:2436-2438: same context object, shared
+   _nodes_inferred list). prylint's metaclass(_DeclarativeMapped) burns 0->107
+   in ONE cold call (METABURN probe). GT's metaclass(_DeclarativeMapped) ALSO
+   costs ~104 on a COLD call (GTMETA #1 ni 2->106, #3 4->108) BUT is a CACHE HIT
+   (cost 0) at the moment of the FIRST igetattr("__init__") (GTMETA #2 ni 0->0),
+   so GT's getattr ancestors run with ni still ~0 -> COLD base infer ->
+   `Mapped[_T_co].infer(ln="__init__")` resolves to [Class:Mapped] and CACHES it
+   under (Subscript@base.py:844:25, lookupname="__init__", cc, bn).
+4. THE single divergent cache entry: NodeNG.infer caches by
+   (node, lookupname, callcontext, boundnode) and a cache HIT BYPASSES the cap
+   (node_ng.py:154-157 returns before the line-165 cap check). GT has
+   `Mapped[_T_co]` cached as [Class:Mapped] under lookupname="__init__" (minted
+   cold, ni=0), so the later over-cap getattr REPLAYS it (no cap) and the
+   ancestors reach object. prylint NEVER mints that entry: its ONLY
+   igetattr("__init__") runs the metaclass cold (107) first, so the ln="__init__"
+   key is queried only OVER-CAP -> truncates to [U] and CACHES [U]. (Under
+   lookupname=None prylint correctly resolves Mapped[_T_co]->[Node] and GT
+   ->[U]; the keys differ, so neither side's None-entry helps the __init__ path.)
+   R0901/W0223 (array.py:93 ExpressionClauseList[_T] base) and the other two
+   W0231 are the SAME class: an over-cap deep-MRO ancestors/metaclass walk that
+   GT replays from a warm (node,lookupname)-keyed entry and prylint re-truncates.
+
+CONCLUSION: the FP is NOT the symilar wipe COUNT (prylint 50938 vs GT 51340 final
+wipes; module sets identical). It is which (node,lookupname) inference-cache
+entries are WARM at the instant the metaclass burn pushes the W0231/R0901 ctx
+over the 100-cap — i.e. astroid called metaclass(_DeclarativeMapped) MORE times
+(5+, warming the bases) before the deciding igetattr, while prylint calls it
+ONCE cold. Matching this requires bit-exact phase-2 inference FAN-OUT + cache-wipe
+ORDER across the whole corpus so the deciding base entries are warm at the same
+instant — an engine-architecture change that directly risks the INVIOLABLE -E
+27/27 gate, the django/core/etc. inferdump/treedump gates, and the 26 clean
+corpora. The metaclass+getattr SHARE the ctx counter bug-for-bug (verified
+against astroid), and prylint's find_metaclass already drops ctx on parent
+recursion exactly like scoped_nodes.py:2674 — so there is NO astroid-faithful
+LOCALIZED lever (separating the metaclass burn from the getattr, or memoizing
+metaclass(), would diverge from astroid and could regress elsewhere). NOT safely
+landable this round; deferred to a dedicated engine-warmth-parity effort.
+
+GATES (round 4, re-certified, clean build): -E 27/27 byte-identical (out+exit);
+treedump django 200/0; inferdump django 200/0. FP census unchanged (1 full + 4
+hook, all sqlalchemy, same nodes). No source changes landed (diagnosis-only);
+new GT lint-path tracers added (harness/trace_gt_{sqla,w0231,metaburn,node}.py,
+env-gated, do not touch prylint output).
