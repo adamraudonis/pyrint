@@ -3738,6 +3738,76 @@ source changes landed (diagnosis-only); new env-gated GT tracer
 harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
 declared_metaclass; does not touch prylint output).
 
+## ZERO-FP round 11 (NEW node-precise mechanism: astroid warms 741:4 bn=SQLORMExpression during MappedColumn.ancestors() BEFORE the _DeclarativeMapped igetattr; prylint mints it cold INSIDE the igetattr — a warm/cold INVERSION on sub-entries, still irreducible global warmth)
+
+FP census UNCHANGED (clean HEAD build, NO source changes landed — only a new
+diagnostic harness/trace_gt_741life.py, which does not touch prylint):
+  full  : sqlalchemy W0231 x1 (orm/properties.py:561, base _DeclarativeMapped)
+  hook  : sqlalchemy W0231 x2 + W0223 x1 + R0901 x1
+ALL 26 other corpora ZERO real FP (full sweep re-run): nova E1120 GONE; sympy
+W0223/W0221/E1136 GONE (sympy F0002 x2 = crash-path noise PRESENT IN GT too,
+same files galois_resolvents.py/resolvent_lookup.py — both pylint AND prylint
+crash); core W0143 = ZERO; scikit-learn/sympy E1101 = no-member excluded;
+core C0103 + nova E1101 = FNs not FPs. -E gate byte-identical (scrapy/sqlalchemy/
+nova/sympy re-verified out+exit EQUAL); no source delta from round-10 cert.
+
+THE NODE-PRECISE MECHANISM (newly traced this round, both sides instrumented;
+all rust probes reverted before build). The sole deciding entry is still
+`(base.py:741:4 SQLORMOperations[_T_co], lk=None, cc=None, bn=SQLORMExpression)`.
+The W0231 FP fires at `MappedColumn.check_init` (properties.py:561). check_init =
+`_ancestors_to_call(MappedColumn)`: `for base in MappedColumn.ancestors(recurs=
+False): next(base.igetattr('__init__'))`. The deciding base is `_DeclarativeMapped`
+(MappedColumn's LAST direct base, properties.py:520 `_DeclarativeMapped[_T]`).
+
+Both-sides timeline at the check (harness probes: rust PRYLINT_DBG741 cache
+WRITE/WIPE + PRYLINT_DMW/_DMWALL declared_metaclass(__init__) window markers;
+GT harness/trace_gt_741life.py = LogDict on _INFERENCE_CACHE + declared_metaclass
+monkeypatch, mirroring exactly):
+  ASTROID (properties.py):
+    [ancestors() of MappedColumn yields _DeclarativeMapped — inferring the
+     _DeclarativeMapped[_T] base Subscript runs __class_getitem__ `return cls` ->
+     infer_argument -> _DeclarativeMapped.metaclass(ctx) -> walks Mapped[_T_co]
+     -> SQLORMExpression -> MINTS 741:4 bn=SQLORMExpression]  <- DBG741 WRITE 39621
+    DMW-OPEN _DeclarativeMapped.declared_metaclass(__init__) @39621  (SAME wipe,
+     AFTER the write) -> its SQLORMExpression base-walk REPLAYS 741 from the warm
+     entry (subinfer: `741:4 bn=SQLORMExpression ... cache_hit=True ni=51`),
+     stays UNDER cap (finalNi=96), resolves [Class], ancestors reach object,
+     object.__init__ is abstract -> NO W0231.
+    DBG741 WIPE @39622 (one wipe later; the warm window already used it).
+  PRYLINT (properties.py):
+    DMW-OPEN _DeclarativeMapped.declared_metaclass(__init__) @39214 ni=0 FIRST,
+    THEN inside that window the SQLORMExpression base-walk hits 741:4
+    bn=SQLORMExpression COLD (PSUB `cache_hit=false`), mints it at ni=96 ->
+    DBG741 WRITE @39214 INSIDE the window (too late: the cap blow already
+    happened) -> finalNi=107 OVER cap -> _DeclarativeMapped.__init__ truncates
+    [U] -> ancestors() empty -> ObjectModel synthetic non-abstract __init__ ->
+    W0231 FP.
+  i.e. the WRITE-vs-WINDOW ORDER is REVERSED: astroid writes 741 in ancestors()
+  BEFORE the igetattr window; prylint writes it INSIDE the window after the blow.
+
+ROOT OF THE INVERSION (the genuinely new finding): it is NOT that prylint is
+globally colder — it is a SUB-ENTRY warm/cold INVERSION. prylint's
+`ancestors()` inference of the `_DeclarativeMapped[_T]` base Subscript resolves
+CHEAPLY (its __class_getitem__/subscript sub-entries are WARM) and so does NOT
+re-run the full `_DeclarativeMapped.metaclass()` walk -> never mints 741 there.
+astroid's same sub-entries are COLDER, so its ancestors() takes the LONG path
+through metaclass() and mints 741 as a side effect — which then makes the
+immediately-following igetattr cheap. Each side is warm on a DIFFERENT set of
+sub-entries; neither answer is "more correct" (astroid's single-file COLD run
+ALSO gives _DeclarativeMapped[_T] -> Uninferable, ancestors(recurs=False)==[],
+verified). So there is STILL no astroid-faithful localized lever: forcing
+prylint's ancestors() to re-walk metaclass(), pinning 741, or special-casing
+the _DeclarativeMapped[_T] subscript all DIVERGE from astroid and regress the
+26 clean corpora / -E gate / inferdump+treedump.
+
+VERDICT (round 11): BLOCKED on the same single cross-file cache-warmth root,
+now characterized to the EXACT inversion site (MappedColumn.ancestors() base
+Subscript resolution vs the following igetattr metaclass walk). Closing it
+requires bit-identical global warmth-profile parity at the deciding instant,
+which directly risks the INVIOLABLE -E 27-gate + 26 clean corpora. Deferred to a
+dedicated engine warmth-parity effort. KEPT: harness/trace_gt_741life.py
+(WRITE/WIPE/DMW-OPEN lifecycle tracer for the 741 entry, both-sides parity).
+
 ## ZERO-FP round 10 (DECISIVE NEW evidence: astroid's OWN cold answer IS the FP; node-precise 107-vs-96 metaclass-burn at the W0231 check moment)
 
 RE-CENSUS (clean HEAD build, all 27 corpora × {full,hook}, --drop-no-member,
