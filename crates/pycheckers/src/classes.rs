@@ -1881,12 +1881,25 @@ impl ClassCk {
             if eng.class_locals_get(anc, slots_sym).is_empty() {
                 continue;
             }
-            // ancestor.slots() (== _all_slots) collapses to None when ANY
-            // class in the ancestor's MRO (except object) lacks a local
-            // __slots__; replicate that None-test structurally (mro + local
-            // presence) and pull the actual names from each slotted class's
-            // own __slots__, avoiding the value-extraction inference that
-            // all_slots() performs.
+            // astroid evaluates `ancestor.slots()` (== ancestor._all_slots)
+            // here, whose _islots igetattr('__slots__') walk over the
+            // ancestor's MRO has an inference SIDE EFFECT: it warms the global
+            // inference cache for the deep __class_getitem__ / metaclass /
+            // TypeVar sub-chain of generic-slotted bases. A later same-class
+            // _check_init (W0231) then REPLAYS that warm sub-chain instead of
+            // re-inferring it cold and over-budgeting the cap — without it,
+            // _DeclarativeMapped's __init__ over-caps to Uninferable and yields
+            // a spurious super-init-not-called (the sole sqlalchemy full-mode
+            // FP). This warming is a full-mode-only concern (the -E pipeline
+            // emits no W0231/W0244 and its byte output must stay identical, so
+            // it keeps the cheaper structural slot-name derivation below).
+            if cx.full {
+                let _ = eng.all_slots(anc);
+            }
+            // ancestor.slots() collapses to None when ANY class in the
+            // ancestor's MRO (except object) lacks a local __slots__; replicate
+            // that None-test structurally (mro + local presence) and pull the
+            // names from each slotted class's own __slots__.
             let anc_mro = match eng.mro(anc, None) {
                 Ok(m) => m,
                 Err(_) => continue,
