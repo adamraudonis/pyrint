@@ -3447,6 +3447,92 @@ GATES (round 7, re-certified on the current binary): -E parity green on
 scrapy/django/sqlalchemy/sympy spot-check (clean source, reverted all
 experiments); bytecmp2 self-compare + symmetry OK.
 
+## ZERO-FP round 14 (NODE-PRECISE: the cold MISS that decides W0231 is `Mapped[_T_co]@base.py:844:25 lk=__init__`; astroid resolves it to [Class:Mapped] in-corpus, prylint truncates to [U]; FP IS cap-sensitive — overturns round-12's "cap-insensitive"; still warm-ORDER, not safely landable)
+
+Re-census (clean HEAD binary `zerofp-round8`, NO source changes landed; all 27
+corpora × {full,hook}, harness/fp_census.sh excluding E1101/I1101/E0611/F0002):
+UNCHANGED from round 13 — ONLY sqlalchemy has real FPs:
+  full : W0231 x1 (orm/properties.py:561 base _DeclarativeMapped, class MappedColumn)
+  hook : W0231 x2 (orm/attributes.py:198/620) + W0223 x1 + R0901 x1 (postgresql/array.py:93)
+  ALL OTHER 26 corpora ZERO real FP both profiles. nova E1120, sympy
+  W0223/W0221/E1136, sqlalchemy R0901x15/W0223x10/W0231/W0237/W0613/C0116/E1136,
+  core W0143 all STILL GONE. sympy/tornado/pip F0002 = crash-path; bytecmp2
+  --drop-no-member PASSES nova/sympy/core/etc.
+
+DECISIVE NEW NODE-PRECISE EVIDENCE this round (env-gated probes, all reverted
+before build; binary byte-unchanged, -E gate proves it):
+1. The W0231 check runs `class_igetattr_first(_DeclarativeMapped, "__init__")`
+   (classes.rs:2600). It calls `metaclass(cls)` FIRST (getattr.rs:696) which burns
+   the budget, THEN `class_getattr` walks the MRO. PROBE: prylint
+   `metaclass(_DeclarativeMapped)` reaches ni=107 (OVER the 100 cap) cold; the
+   subsequent ancestors-walk inside class_getattr then truncates BEFORE reaching
+   builtins.object, so the surviving `__init__` is the ObjectModel SYNTHETIC
+   `def __init__(self,*a,**k): return None` (is_abstract=FALSE) -> W0231 fires.
+   For the SIBLING bases (_DataclassDefaultsDontSet/_IntrospectsAnnotations/
+   _MapsColumns) the SAME getattr resolves the REAL builtins.object.__init__
+   (body=pass, is_abstract=TRUE) -> no W0231. (PRYLINT_DBG_W0231/_IGA probes.)
+2. astroid's WARM lint-path (trace_gt_w0231.py) resolves _DeclarativeMapped
+   `__init__` -> `UM(abstract=True, frame=object)` — the REAL abstract object
+   init — and `to_call keys: []` -> NO W0231. astroid does the FULL metaclass
+   walk too (trace_gt_infarg_meta.py: META reaches `_DeclarativeMapped bn=None
+   ni=108`, OVER cap) yet still resolves, because warm HITS bypass the cap
+   (node_ng.py:155-157) and the Mapped->...->object chain is already cached.
+3. THE DECIDING NODE is `Mapped[_T_co]` = Subscript@orm/base.py:844:25 with
+   lookupname=__init__ (the first base of _DeclarativeMapped). trace_gt_node.py
+   (GT_NODE=844:25 GT_FILE=orm/base.py): astroid does ONE cold MISS at ni_in=0
+   that RESOLVES `[Class:Mapped]` and caches, then HITs at ni=96 / ni=102 (over
+   cap) replaying `[Class:Mapped]` at cost 0. prylint (PRYLINT_TRACE_NODE=844:25):
+   the node is queried EXACTLY ONCE in the whole corpus (the W0231 check), with
+   `lk=__init__ bn=None cc=false ni_in=0`, and it WRITEs `trunc=true -> [U]`. The
+   global cache key includes lookupname, so the 936 prior `lk=None` warmings of
+   844:25 (-> [Class:Mapped]) DO NOT help the single `lk=__init__` query.
+4. WHY prylint's cold `Mapped[_T_co] lk=__init__` burns >100 while astroid's
+   resolves cheap: full subtree trace (PRYLINT_TRACE_NODE_SUBTREE, LK=__init__)
+   shows the recursion descends every base subscript with lk=__init__
+   (Mapped->SQLORMExpression[_T_co]->SQLORMOperations[_T_co]->SQLCoreOperations
+   [_T_co]->...), and each `__class_getitem__(cls,item)` cls-resolution fires a
+   FULL `find_metaclass` walk (132 FINDMETA calls in the one cold subtree;
+   class_getitem sets a callcontext w/ callee=__class_getitem__ at protocols.rs:
+   1664-1670, so arguments_infer_argname takes the EXPENSIVE infer_argument path
+   -> calls.rs:1791 `metaclass(*bcls, ctx)`). astroid runs the IDENTICAL recursion
+   but its deep sub-inferences are WARM global-cache HITS (cost 0) at the
+   properties.py moment, so the same walk stays under the 100 cap. ISOLATION
+   PROOF: with only base.py built (cold), astroid ALSO returns [U] ni=1 for
+   844:25 lk=__init__ (cross-module imports unbuilt) — i.e. astroid is NOT
+   cheaper cold; it is cheaper only when the corpus has pre-warmed the sub-chain.
+5. CAP-SENSITIVITY (overturns round 12's "cap-insensitive"): with a DEBUG cap
+   override (PRYLINT_DBG_CAP=200/500 on the infer.rs:414 truncation only), the
+   full-profile properties.py:561 W0231 DISAPPEARS — class_getattr then returns
+   [N:builtins.object.__init__ (real, abstract=true), ...]. At cap=100 it
+   truncates. So the FP IS a budget-boundary effect, NOT cap-insensitive. BUT the
+   100 cap is astroid-exact (manager.max_inferable_values=100); raising it would
+   diverge from astroid on ALL 27 corpora and is NOT a valid fix.
+
+VERDICT (round 14, refines 13): the FP is a cross-file WARM-ORDER artifact — at
+the properties.py W0231 moment astroid's deep `Mapped`-base metaclass sub-chain
+(SQLORMExpression[_T_co]/SQLORMOperations[_T_co]/_T_co ImportFrom/intermediate
+`lk=__init__` subscripts) is WARM in the global cache so the deciding
+`Mapped[_T_co] lk=__init__` resolves under the 100 cap; prylint's same sub-chain
+is COLD (those exact (node,lk=__init__,...) keys were never minted earlier), so
+it re-burns >100 and truncates. prylint is byte-faithful in mechanism (cold cost,
+cache-key shape incl. lookupname, cap-bypass-on-hit, metaclass/getattr/
+class_getitem order, bounded-LRU lookup=128 + _metaclass_lookup_attribute=1024).
+The ONLY lever is making prylint mint/keep the deciding deep `lk=__init__`
+sub-chain entries warm at properties.py exactly as astroid's corpus-wide phase-2
+fan-out does — a bit-exact inference-ORDERING change that directly risks the
+INVIOLABLE SHIPPED -E 27/27 gate + the django/nova/sqlalchemy treedump/inferdump
+gates + the 26 clean corpora, for ONE emergent FP where prylint is already
+byte-faithful. NOT safely landable; deferred. NO source change landed.
+
+GATES (round 14, re-certified, clean HEAD, NO source changes): -E 27/27
+byte-identical (egate.sh ALL EQUAL out+exit); treedump django 400/0; inferdump
+django 200/0; inferdump nova 3/11 + sqlalchemy 5/8 + sympy 7/55 = documented
+os.environ / big-int-fold env-noise ONLY (test files, none in the FP-chain
+base.py/properties.py/attributes.py/array.py; affect no check). Diagnosis-only;
+all env-gated probes (PRYLINT_DBG_META/_IGA/_W0231/_CAP, GT trace_gt_* tracers)
+reverted before build. NOT done: zero-FP not achieved (sqlalchemy 1 full + 4 hook
+remain, same single root cause).
+
 ## ZERO-FP round 13 (DECISIVE: byte-exact COLD-COST PARITY — prylint==astroid cold (ni=103); astroid itself FPs cold; the FP is irreducible warm-ORDER; round-12 [U]-vs-[Node] confusion RECONCILED)
 
 Re-census (clean HEAD binary, NO source changes; new reusable
