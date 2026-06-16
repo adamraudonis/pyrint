@@ -3447,6 +3447,101 @@ GATES (round 7, re-certified on the current binary): -E parity green on
 scrapy/django/sqlalchemy/sympy spot-check (clean source, reverted all
 experiments); bytecmp2 self-compare + symmetry OK.
 
+## ZERO-FP round 12 (DECISIVE: FP is CAP-INSENSITIVE — bounded-LRU is NOT the lever; byte-exact warm/cold proof at Subscript@741)
+
+NEW EVIDENCE this round overturns the round-12 MISSION HYPOTHESIS (that the
+bounded-LRU eviction maxsize/key is the lever). It is NOT. Two independent
+decisive measurements, neither available to rounds 1-11:
+
+1. **CAP-INSENSITIVITY (the killer datum).** Swept PRYLINT_LOOKUP_CAP ×
+   PRYLINT_META_CAP over {32/256, 64/512, 128/1024 (astroid-exact),
+   256/1024, 512/2048, 1000000/1000000}. The sqlalchemy W0231 FP at
+   properties.py:561 is PRESENT in ALL SIX, including UNBOUNDED 1M/1M. The
+   bounded LRUs (LookupMixIn.lookup 128, _metaclass_lookup_attribute 1024)
+   are therefore PROVABLY NOT the mechanism — the FP lives entirely in the
+   UNBOUNDED global inf_cache (`context.inferred` IS `_INFERENCE_CACHE`,
+   astroid context.py:107). Any further LRU-eviction/key tuning cannot move
+   this FP. (The bounded-LRU work from prior steps DID land the big wins:
+   nova E1120×40, sympy W0223×31+W0221+E1136, sqlalchemy R0901×15+W0223×10+
+   W0231/W0237/W0613/C0116/E1136 are ALL GONE and re-verified GONE here.)
+
+2. **BYTE-EXACT WARM/COLD HIT-vs-MISS at the deciding entry.** Built matched
+   prylint (DBGTCO SUB probe) + astroid (trace_gt + monkeypatched
+   _ancestors_to_call) tracers logging every infer of `SQLCoreOperations[_T_co]`
+   Subscript@741 (base.py) during MappedColumn's W0231 check. At the IDENTICAL
+   budget instant (both ni=51, lk=None, cc=None, bn=SQLORMExpression):
+       astroid:  GTSUB741 col=4 bn=SQLORMExpression ni=51 hit=TRUE   (+0 cost)
+       prylint:  DBGTCO SUB @741:4 bn=SQLORMExpression ni=51 hit=FALSE (+21 cost)
+   astroid REPLAYS the whole subscript (GTTCO_SQLORM=0: it never descends to
+   _T_co); prylint MISSES, descends, re-infers 6 `_T_co` TypeVar Names under
+   bn=SQLORMExpression (the tip cache keys non-empty ctx by identity ->
+   always misses; brain_typing.py:50-52, ported faithfully), burning 51->81.
+   Net metaclass(_DeclarativeMapped) burn: prylint 107, astroid 89. cap=100.
+
+CHAIN TO THE FP (re-confirmed node-precise, matches astroid igetattr order
+scoped_nodes.py:2435 metaclass-before-getattr exactly):
+  - W0231 _ancestors_to_call -> class_igetattr_first(_DeclarativeMapped,
+    "__init__", ctx=None). class_igetattr_to copies ctx, then (faithfully,
+    like astroid) calls metaclass(cls, ctx) BEFORE class_getattr.
+  - metaclass(_DeclarativeMapped, ctx) burns 107 (DBGCIG: ni_in=0 ->
+    ni_after_metaclass=107) because of the cold bn=SQLORMExpression
+    Subscript@741 re-burn above.
+  - class_getattr(_DeclarativeMapped,"__init__") then runs with ni=107 (OVER
+    cap). ancestors(cls,true,ctx) returns [] (DBGCGA: ni_before=107 ni_after=107
+    ancestors=[]) — even though a FRESH-ctx ancestors() DOES contain
+    builtins.object (DBGW0231ANC, position 6 of 17). The real abstract
+    object.__init__ (body=[], is_abstract(pass_is_abstract=True)=True) is
+    never collected; class_getattr falls to the ObjectModel synthetic
+    `def __init__(self,*a,**k): return None` (is_abstract=False) -> W0231.
+  - astroid at ni<100 resolves ancestors fully, finds the empty-body abstract
+    object.__init__ -> SKIPPED at _ancestors_to_call's is_abstract() -> NO FP.
+
+WHERE astroid's warm entry comes from (MINT741 tracer, monkeypatched
+NodeNG.infer logging cold mints of the exact 4-tuple key): astroid mints
+`(Subscript@741, lk=None, cc=None, bn=SQLORMExpression)` COLD (ni=81) first in
+instrumentation.py, then RE-MINTS it 100+ times across the corpus
+(instrumentation/hybrid/strategies/events/_orm_constructors/descriptor_props/
+...). It is warm at MappedColumn's check because the LAST wipe before that
+check landed on the OTHER side of the mint than prylint's did. astroid's OWN
+cold cost for metaclass(_DeclarativeMapped) (fresh _INFERENCE_CACHE, lk=
+'__init__') is ni=103 — ALSO over cap; astroid only escapes the FP via warmth.
+
+WIPE PARITY (re-measured, PRYLINT_WIPESTAT + monkeypatched _invalidate_cache):
+prylint TOTAL wipes 50938 vs astroid 51340 — match within 0.8%. prylint
+phase-1 build 23127, phase-2 ~27811. Two-phase structure matches astroid
+(run.rs:494 builds ALL files in phase 1, then checks). The divergence is
+NOT wipe FREQUENCY and NOT cold COST (103 vs 107, both over cap) — it is the
+SURVIVAL of ONE global entry across an otherwise byte-matched wipe sequence,
+i.e. pure cross-file warm-ORDER. Invisible in -E (caches never fill to fire
+this chain), which is why -E stays 27/27 byte-identical.
+
+VERDICT: there is NO bounded-LRU lever (cap-insensitive) and NO
+astroid-faithful localized lever (the W0231 check logic, the metaclass/getattr
+order, the cache key shape, the tip-cache identity-keying, and the cold costs
+all MATCH astroid; the only divergence is global-cache entry survival, a
+corpus-wide phase-2 inference-ORDER property). Killing it requires a bit-exact
+phase-2 inference-ordering change that directly risks the INVIOLABLE -E 27-gate
++ django/nova treedump/inferdump + the 26 clean corpora. NOT safely landable in
+this mechanism; correctly deferred (consistent with rounds 7/9/10/11). NO source
+change landed — every probe (DBGW0231/ANC, DBGCGA, DBGCIG, DBGTCO/SUB, DBG741
+WIPE, set_dbg_tco) reverted before the certified build.
+
+FP CENSUS (authoritative, clean HEAD build, bytecmp2 --drop-no-member +
+diffmsg filtering E1101/I1101/E0611/F0002/R0801, ALL 27 corpora × {full,hook}):
+  sqlalchemy.full : W0231 x1 (orm/properties.py:561 _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2 + W0223 x1 + R0901 x1
+                    (orm/attributes.py + postgresql/array.py:93 `array`,
+                     same _DeclarativeMapped/deep-generic-MRO over-budget class)
+  ALL OTHER 26 corpora (incl. nova/sympy/core): ZERO real FP in BOTH profiles.
+  (pip.full C0413 + core.full E0601/C0103 "diffs" are downstream of no-member-
+   family FALSE NEGATIVES (E0611/E1101) shifting line alignment — verified
+   NOT FPs: the C0413 lines are byte-identical to GT. pip/sympy F0002 are
+   matching crashes on the same files, env-noise normalized by bytecmp2.)
+
+GATES (round 12, re-certified, clean HEAD, NO source changes): -E 27/27
+byte-identical (egate.sh ALL EQUAL); treedump django 400/0; inferdump django
+200/0; inferdump nova 3/11 = documented round-7 env-noise. Diagnosis-only.
+
 ## ZERO-FP round 1 (root cause QUANTIFIED: phase-2 cache-wipe-timing skew)
 
 Re-census (binary BYTE-UNCHANGED; all new probes env-gated): nova.full
