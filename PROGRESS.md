@@ -3447,6 +3447,114 @@ GATES (round 7, re-certified on the current binary): -E parity green on
 scrapy/django/sqlalchemy/sympy spot-check (clean source, reverted all
 experiments); bytecmp2 self-compare + symmetry OK.
 
+## ZERO-FP round 13 (DECISIVE: byte-exact COLD-COST PARITY — prylint==astroid cold (ni=103); astroid itself FPs cold; the FP is irreducible warm-ORDER; round-12 [U]-vs-[Node] confusion RECONCILED)
+
+Re-census (clean HEAD binary, NO source changes; new reusable
+harness/fp_census.sh, all 27 corpora × {full,hook}, sed/grep FP block extract,
+excluding E1101/I1101/E0611/F0002): UNCHANGED, ONLY sqlalchemy has real FPs:
+  sqlalchemy.full : W0231 x1 (orm/properties.py:561 _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2 (orm/attributes.py:198/620) + W0223 x1 + R0901 x1
+                    (dialects/postgresql/array.py:93 `array`)
+  ALL OTHER 26 corpora: ZERO real FP both profiles. NO new FP surfaced by the
+  bounded-LRU work; all prior wins (nova E1120x40, sympy W0223x31+W0221+E1136,
+  sqlalchemy R0901x15+W0223x10+W0231/W0237/W0613/C0116/E1136) STILL GONE.
+
+THREE NEW DECISIVE MEASUREMENTS this round (none available to rounds 1-12):
+
+1. **BYTE-EXACT COLD-COST PARITY (the killer datum — supersedes the round-6
+   "11-node over-burn" AND clarifies round-12).** Measured the COLD cost of the
+   deciding `_DeclarativeMapped.ancestors(recurs=True)` walk on BOTH sides with
+   only orm/base.py built (fresh global cache):
+     prylint  (--dump-ancestors, PRYLINT_ANC_TARGETS=orm/base.py:844):
+              recurs_ancestors=0  ni=103
+     astroid  (MANAGER.ast_from_file + cls.ancestors(recurs=True, ctx)):
+              0 ancestors            ni=103
+   IDENTICAL: 0 ancestors, ni=103, BOTH truncate at the 100-cap. There is NO
+   cold-cost lever to close. Furthermore astroid's COLD `igetattr("__init__")`
+   returns `BoundMethod abstract=False frame=object` at ni=102 — i.e. the
+   ObjectModel SYNTHETIC non-abstract `__init__` — so **astroid ITSELF would
+   emit W0231 cold on this class.** astroid escapes the FP in the full corpus
+   ONLY because warm intermediate global-cache entries let `ancestors()` resolve
+   the Mapped->...->object chain BEFORE the shared counter crosses 100.
+
+2. **RECONCILED the round-12 [U]-vs-[Node] confusion (round 12 was a misread).**
+   Round 12 claimed astroid had `(Subscript@741:4,lk=None,cc=None,bn=SQLORM
+   Expression)` warm as a resolved class while prylint missed. NEW tracer
+   harness/trace_gt_741all.py logs the ACTUAL cached result for that exact
+   4-tuple across the corpus: astroid resolves it to `[U]` (Uninferable) on
+   EVERY mint AND every hit, in properties.py (ni=51 MINT->[U], ni=103
+   MINT->[U]) and everywhere else (9 distinct mints, all `-> [U]`). prylint's
+   PRYLINT_TRACE_NODE=741:4 also writes `[U]`. So 741:4/bn=SQLORMExpression is
+   NOT the divergence — it truncates identically on both. (Round 12's CK trace
+   logged hit/miss but NOT results; the "[Node] hit" was inferred, never
+   verified.) The SQLORMExpression base of Mapped is over-cap-Uninferable on
+   both sides; that branch contributes nothing.
+
+3. **THE TRUE NODE-PRECISE MECHANISM (the deciding node is 844:25, not 741:4).**
+   W0231 `_ancestors_to_call(MappedColumn)` iterates `ancestors(recurs=False)`;
+   for base `_DeclarativeMapped` it runs `next(igetattr("__init__"))` in a FRESH
+   InferenceContext (ni starts at 0, full 100-budget available — NOT a
+   pre-consumed-budget issue). That igetattr does metaclass()-before-getattr,
+   then class_getattr walks `_DeclarativeMapped`'s OWN ancestors to find
+   `object.__init__`. The deciding base subscript is `Mapped[_T_co]`
+   (Subscript@orm/base.py:844:25), NOT 741:4. WARM full-corpus cost
+   (trace_gt_dmcost_warm.py = _ancestors_to_call monkeypatch, fresh ctx per
+   base, REAL warm global cache):
+     astroid: MappedColumn base=_DeclarativeMapped ni=114 -> UM(abstract=True,
+              frame=object)  =>  NO W0231
+   astroid reaches ni=114 (WAY over the 100 cap) yet STILL resolves the abstract
+   object.__init__ — because the cap only truncates a node being COMPUTED
+   (miss); warm HITS (yield from context.inferred[key], node_ng.py:155-157) cost
+   ZERO and bypass the cap. astroid's Mapped->SQLORMExpression->...->object
+   chain is established EARLY (under 100) via warm intermediate ClassDef/
+   Subscript/ImportFrom HITS, so `object` is found before the late
+   _MappedAttribute/DDLConstraintColumnRole bases push ni to 114.
+   prylint WARM (PRYLINT_TRACE_NODE=844:25 + _SUBTREE): the cold first-pass of
+   `844:25 lk=__init__` burns 0->107 (191 Subscript descents, 15 _T_co Name
+   descents) and TRUNCATES to [U] at the `bn=true cc=Some(252191)` metaclass
+   classmethod-cls resolution (calls.rs:1791 -> declared_metaclass base walk),
+   BEFORE the object chain is cached. prylint's intermediates are COLD (misses)
+   where astroid's are WARM (hits) -> prylint over-budgets first -> ancestors
+   empty -> ObjectModel synthetic non-abstract __init__ -> W0231.
+
+KEY-FAITHFULNESS RE-VERIFIED (trace_gt_cachekey.py logs the EXACT
+(node,lookupname,callcontext,boundnode) key for every orm/base.py infer during
+the warm `_DeclarativeMapped.igetattr`): astroid threads bn=SQLORMExpression
+into the base subscripts AND their `_T_co` slice (node_classes.py:3742-3746
+`_infer_subscript` passes `context` UNCHANGED to both `value.infer` and
+`slice.infer` — it does NOT clear bn). prylint keys identically. infer_argument
+(arguments.py:229) ALSO threads bn into `boundnode.metaclass(context=context)`.
+Round 6's "astroid drops bn=None for the _T_co index" claim is REFUTED by source
++ trace. The key shapes match; the divergence is purely WHICH entries survive.
+
+VERDICT (round 13, consistent with 7/9/10/11/12, now nailed with cold-cost
+parity): the FP is an IRREDUCIBLE cross-file inference-ORDER artifact. prylint
+is byte-faithful to astroid in EVERY measurable dimension — cold cost (ni=103
+both), cache key shape, cap/truncation-caching semantics, metaclass/getattr
+order, bounded-LRU eviction (cap-insensitive per round 12), and wipe count
+(50938 vs 51340, within 0.8%). astroid itself FPs cold; it escapes only via
+warm-order. The ONLY lever is making prylint's corpus-wide phase-2 inference
+fan-out keep the deciding intermediate global-cache entries
+(Mapped/SQLORMExpression ClassDef + _T_co ImportFrom + intermediate `lk=__init__`
+subscripts) warm at properties.py exactly as astroid does — a bit-exact phase-2
+ordering change that DIRECTLY risks the INVIOLABLE, SHIPPED -E 27/27 gate and the
+26 clean corpora, for ONE emergent FP where prylint is already byte-faithful.
+NOT safely landable; correctly deferred. NO source change landed (binary
+byte-unchanged: -E gate stayed 27/27 EQUAL, which it could not if the engine
+moved). NOT done: zero-FP not achieved (sqlalchemy 1 full + 4 hook remain).
+
+GATES (round 13, re-certified, clean HEAD, NO source changes): -E 27/27
+byte-identical (egate.sh ALL EQUAL); treedump django 400/0; inferdump django
+200/0, sympy 0/0; inferdump nova 3/11 + sqlalchemy 5/8 = documented os.environ
+`Dict:44 | Inst:os._Environ` env-noise ONLY (none in the FP-chain files
+base.py/properties.py/attributes.py/array.py; affects no check). New KEPT
+diagnostic tooling (env-gated GT tracers, zero engine impact): harness/
+trace_gt_cachekey.py (exact 4-tuple key logger during the warm igetattr),
+trace_gt_741all.py (reconciles [U]-vs-[Node]), trace_gt_741sqlorm.py (cold-mint
+locator), trace_gt_declmeta_cost.py (COLD per-base igetattr cost),
+trace_gt_dmcost_warm.py (WARM per-base igetattr cost), harness/fp_census.sh
+(reusable 27x2 FP census).
+
 ## ZERO-FP round 12 (DECISIVE: FP is CAP-INSENSITIVE — bounded-LRU is NOT the lever; byte-exact warm/cold proof at Subscript@741)
 
 NEW EVIDENCE this round overturns the round-12 MISSION HYPOTHESIS (that the
