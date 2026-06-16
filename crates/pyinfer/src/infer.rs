@@ -324,6 +324,31 @@ impl Engine {
                 false
             }
         };
+        // PRYLINT_TRACE_SUBPATH: log every base.py Subscript infer with bn/cc/
+        // lk/ni + cache-hit + on-path state (mirrors harness/trace_gt_subinfer.py
+        // on the astroid side). Debug-only, env-gated, zero behavioral change.
+        if std::env::var("PRYLINT_TRACE_SUBPATH").is_ok() {
+            let md = self.md(node.m);
+            let ni_node = &md.tree.nodes[node.n.idx()];
+            if matches!(ni_node.kind, NodeKind::Subscript { .. })
+                && md.file.ends_with("base.py")
+            {
+                let hit = self.inf_cache.borrow().contains_key(&key);
+                let on_path = ctx.path.borrow().contains(&(node, ctx.lookupname.get()));
+                let bnstr = match ctx.boundnode.borrow().as_ref() {
+                    None => "None".to_string(),
+                    Some(Value::Node(g)) => self.node_name(*g).unwrap_or_default(),
+                    Some(v) => value_kind_label(v).to_string(),
+                };
+                let lkstr = ctx.lookupname.get().map(|s| self.sname(s)).unwrap_or_else(|| "None".into());
+                eprintln!(
+                    "PSUB @{}:{} bn={} cc={} lk={} ni={} on_path={} cache_hit={}",
+                    ni_node.fromlineno, ni_node.col_offset, bnstr,
+                    ctx.callcontext.borrow().is_some(), lkstr,
+                    ctx.nodes_inferred.get(), on_path, hit
+                );
+            }
+        }
         let cached = self.inf_cache.borrow().get(&key).cloned();
         if let Some(cached) = cached {
             if trace_node() {

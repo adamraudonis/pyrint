@@ -3738,6 +3738,83 @@ source changes landed (diagnosis-only); new env-gated GT tracer
 harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
 declared_metaclass; does not touch prylint output).
 
+## ZERO-FP round 9 (ATOMIC root cause nailed: the sole FP is one global inf_cache entry `741:4 bn=SQLORMExpression`, warmed cross-file in instrumentation.py on the astroid side, wiped before properties.py on the prylint side)
+
+RE-CENSUS (clean build, all 27 corpora x {full,hook}, --drop-no-member, excl
+E1101/I1101 no-member + F0002 crash-path PYLINTHOME-timestamp noise): the ONLY
+real FP is sqlalchemy, SAME nodes as rounds 2-8:
+  sqlalchemy.full : W0231 x1 (orm/properties.py:561, base _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2 (attributes.py:198/:620) + W0223 x1 + R0901 x1
+                    (dialects/postgresql/array.py:93)
+ALL 26 others ZERO real FP both profiles (nova E1120, sympy W0223/W0221/E1136
+still GONE; pip/tornado/sympy F0002 = crash-path noise bytecmp2-PASS;
+scikit-learn/sympy E1101 = no-member excluded; core/pip diffs = FNs not FPs).
+-E 27/27 byte-identical (egate ALL EQUAL); treedump django 400/0; inferdump
+django 200/0; inferdump nova 3/11 = documented os.environ env-noise (unchanged).
+
+ATOMIC ROOT CAUSE (BOTH-SIDES, supersedes round-8's "lk='__init__' poison"
+framing — the poisoned `Mapped[_T_co]` lk='__init__' [U] entry is a SYMPTOM; the
+CAUSE is one deeper entry going cold). The deciding cold mint is
+`_DeclarativeMapped.declared_metaclass(lk='__init__')` run during properties.py
+(by W0231 _ancestors_to_call -> base_node.igetattr('__init__')). It walks the
+metaclass chain and the `cls` classmethod-arg resolution (Generic.__class_getitem__
+-> infer_argument -> boundnode.metaclass(context), arguments.py:229) re-infers
+each base Subscript at bn=set. BOTH-SIDES tracers (harness/trace_gt_tvcalls.py,
+trace_gt_subinfer.py + the new env-gated PSUB probe in infer.rs):
+  ASTROID window: TypeVarCalls=0, TcoNames=11 ALL bn=None, finalNi=96 (UNDER cap)
+  PRYLINT window: 6 TypeVar(...) Call re-runs at bn=true, finalNi=107 (OVER cap)
+The single divergent global-inf_cache entry is
+`(base.py:741:4 SQLORMOperations[_T_co], lk=None, cc=None, bn=SQLORMExpression)`:
+at the deciding mint astroid has it CACHED (cache_hit=True ni=51 -> stays under
+cap), prylint has it COLD (cache_hit=False ni=51 -> re-walks the _T_co slice ->
+runs the brain_typing TypeVar tip 6x at bn=true -> +11 nodes -> 107 OVER cap ->
+truncates `_DeclarativeMapped.__init__` to [U] -> ancestors() empty -> the
+ObjectModel synthetic NON-abstract __init__ (def __init__(self,*a,**k):return
+None, identical both sides) -> W0231). When prylint over-caps, the same chain
+re-truncates Mapped[_T_co] lk='__init__' -> the round-8 "lk='__init__' poison"
+is just this entry's downstream child.
+
+WHY astroid has it warm and prylint cold — PROVEN cross-file warmth (NOT a
+key-shape/bn/cc/lk/path/abstractness bug; every one verified byte-faithful):
+harness/trace_gt_741mint.py logs astroid's FIRST cold mint of
+`741:4 bn=SQLORMExpression` as happening while linting `instrumentation.py` (an
+EARLIER corpus file), off-path, ni=81 -> it lands in the UNBOUNDED global
+_INFERENCE_CACHE and SURVIVES (no transforms._invalidate_cache wipe fires before
+properties.py's W0231 mint). prylint warms the SAME entry early too (PSUB shows
+139 off-path bn=SQLORMExpression mints before the deciding window, first cold at
+line 1585), but a transforms.rs wipe() (port of astroid transforms.py
+_invalidate_cache, fired bottom-up per replacing transform during a LAZY phase-2
+module build) clears the whole inf_cache between the warming and the
+properties.py mint -> prylint arrives COLD. The wipe TRIGGER is faithful (only
+on a node-replacing transform, matching astroid's `ret is not None`); the
+divergence is purely the INSTANT a lazy module build (and its wipe) interleaves
+relative to the check sequence -> the deciding entry's warm-vs-wiped state lands
+one wipe apart.
+
+VERDICT (round 9): BLOCKED on the same single cross-file warm-cache root, now
+nailed to the ATOMIC entry (`741:4 bn=SQLORMExpression`) + the EXACT warming file
+(`instrumentation.py`) + the EXACT mechanism (a lazy-build transform-wipe between
+warm and use). There is NO astroid-faithful LOCALIZED lever: the cache key shape,
+the bn=set metaclass-cls walk, the path-guard, the ObjectModel abstractness, and
+the wipe trigger are ALL byte-faithful. Closing it requires making prylint's
+phase-2 lazy module-build + _invalidate_cache interleaving bit-identical to
+astroid's so this one entry stays warm through properties.py — a global
+build/wipe-ordering change that DIRECTLY risks the INVIOLABLE -E 27/27 gate and
+the 26 clean corpora (it alters inference fan-out everywhere). Deferred to a
+dedicated phase-ordering/warmth-parity effort; NOT a single-FP hack (forcing
+object into uninferable-base ancestors, special-casing the ObjectModel/metaclass
+abstractness, pinning the 741:4 entry against wipes, or clearing bn on the _T_co
+index inference all DIVERGE from astroid and would regress clean corpora /
+django+nova inferdump/treedump gates).
+
+GATES (round 9, re-certified, clean build — only source delta is the env-gated
+PSUB probe in infer.rs, zero behavioral change with PRYLINT_TRACE_SUBPATH
+unset): -E 27/27 byte-identical (egate ALL EQUAL); treedump django 400/0;
+inferdump django 200/0; inferdump nova 3/11 = documented env-noise. FP census
+unchanged (1 full + 4 hook, all sqlalchemy, same nodes). New KEPT tooling:
+PRYLINT_TRACE_SUBPATH base.py-Subscript path/cache probe (infer.rs); GT tracers
+harness/trace_gt_{741mint,subinfer,tvcalls,dmbn,dmbase,sub844,tco_global}.py.
+
 ## ZERO-FP round 8 (bounded-LRU verified in place; CONFIRMED: nova/sympy FPs GONE; sqlalchemy = irreducible warm-cache, traced to the GLOBAL inf_cache lk='__init__' poison — round-7 re-confirmed with both-sides cache writers)
 
 BOUNDED-LRU STATUS: the lookup `@lru_cache(128)` (lookup.rs + EvictIndex in
