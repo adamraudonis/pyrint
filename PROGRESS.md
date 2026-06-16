@@ -3738,6 +3738,103 @@ source changes landed (diagnosis-only); new env-gated GT tracer
 harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
 declared_metaclass; does not touch prylint output).
 
+## ZERO-FP round 7 (DEFINITIVE: irreducible cross-file cache-warmth; round-6's "localized cold-cost" was a warm-vs-cold trace artifact)
+
+Re-census (clean HEAD build, all 27 corpora x {full,hook}, FP-only, excluding
+no-member E1101/I1101 and F0002 crash-path; R0801/R0124 "other lines" context
+where gt==cand are byte-identical block-reordering, NOT FPs): ONLY sqlalchemy
+has real FPs, SAME nodes as rounds 2/4/5/6:
+  sqlalchemy.full : W0231 x1 (orm/properties.py:561, base _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2 (orm/attributes.py:198 _DeclarativeMapped,
+                              orm/attributes.py:620 QueryableAttribute)
+                  + R0901 x1 + W0223 x1 (dialects/postgresql/array.py:93)
+ALL OTHER 26 corpora ZERO real FP both profiles. -E 27/27 byte-identical
+(out+exit ALL EQUAL, egate.sh); treedump django 200/0; inferdump django 200/0;
+inferdump nova 3 files/11 lines = the documented IRREDUCIBLE os.environ
+env-noise (Dict:44 GT vs Dict:43 ours; affects no check).
+
+THIS ROUND OVERTURNS round 6 and RESTORES (with decisive proof) the round-4/5
+verdict: the FP is an IRREDUCIBLE cross-file inference-cache-warmth artifact,
+NOT a localized cold-cost over-burn. Round 6's "11-node localized over-burn"
+measurement compared a WARM astroid call against a COLD prylint call and
+mis-attributed the gap.
+
+THE FULL MECHANISM (node-precise, both-sides traced — new env-gated probes
+PRYLINT_DBG_DMKEY/_DMW in infer.rs+getattr.rs and GT tracers
+harness/trace_gt_dmkey.py / trace_gt_dmw.py / trace_gt_wipephase.py, all the
+rust probes reverted before commit; the harness/trace_gt_*.py kept):
+1. The W0231 check on MappedColumn (properties.py) runs _ancestors_to_call ->
+   for the _DeclarativeMapped ancestor it does `next(igetattr("__init__"))`.
+   ClassDef.getattr (scoped_nodes.py:2349-2358) collects __init__ from
+   self.locals + EVERY ancestor's locals; `if name in special_attributes and
+   class_context and not values:` falls back to the ObjectModel synthetic
+   `def __init__(self,*a,**k): return None` ONLY when NO ancestor's locals had
+   __init__. The deciding fact is therefore: does _DeclarativeMapped.ancestors()
+   REACH builtins.object?
+   - YES (bases resolve under the 100-cap) -> real object.__init__ (EMPTY C-stub
+     body) is found -> is_abstract(pass_is_abstract=True)==True (empty body ==
+     single pass, scoped_nodes.py:1505-1507) -> base SKIPPED -> NO W0231.
+   - NO  (bases over-cap to Uninferable -> ancestors() empty) -> ObjectModel
+     synthetic __init__ (body `return None`, NON-empty) -> is_abstract==False
+     -> W0231 fires. (VERIFIED both sides: GT trace_gt_w0231 shows
+     `_DeclarativeMapped: __init__ -> UM(abstract=True, frame=object)` -> NO
+     W0231; a truly-unresolvable-bases toy class `C(Base1,Base2)` gives astroid
+     itself `igetattr __init__ -> BoundMethod frame=object abstract=False` ->
+     astroid WOULD fire W0231 — so prylint's abstract=False/synthetic path is
+     CORRECT astroid behaviour; the only divergence is ancestor-emptiness.)
+2. The deciding call is _DeclarativeMapped.declared_metaclass(lookupname=
+   "__init__"), reached cc=- bn=- (CLEAN context) on BOTH sides (NOT bn=true as
+   round 6 claimed — the bn=true metaclass(*bcls) at calls.rs:1791 is a NESTED
+   sub-call). Its full cost: GT ENTER ni=0 -> EXIT ni=96 (UNDER cap); prylint
+   ENTER ni=0 -> EXIT ni=107 (OVER cap -> bases truncate to [U]).
+3. The ENTIRE 11-node gap is ONE metaclass sub-call: `metaclass(SQLORMExpression,
+   bn=SQLORMExpression-ctx)` (the calls.rs:1791 classmethod-cls resolution while
+   inferring a TypeVar base subscript). META-tree trace: every other class on the
+   chain matches (SQLCoreOperations bn=X cost 2/2, SQLORMOperations 0/0,
+   SQLColumnExpression 0/0, ExpressionElementRole 0/0, Mapped 0/0,
+   _MappedAttribute 2/2) — ONLY SQLORMExpression's bn=true metaclass call:
+   GT cost=0 (REPLAY), prylint cost=41 (re-burns the base chain @741/@676 ->
+   2 extra AssignName _T_co@134 TypeVar-tip re-inferences). GT replays at 0
+   purely because its global cache HAS `(Subscript@741, lk=None, cc=None,
+   bn=SQLORMExpression)` warm at that instant; prylint MISSES and recomputes.
+4. WHY astroid has the entry warm and prylint doesn't is PURE phase-2 ordering,
+   NOT a wipe-frequency or key-shape bug:
+   - the cache key shape is byte-faithful: (node, lookupname, callcontext-id,
+     boundnode-value_key); both key boundnode by stable identity (astroid id(),
+     prylint GNode). VERIFIED identical for this entry.
+   - BOTH wipe the global _INFERENCE_CACHE during phase-2 checks at ~equal
+     frequency (transform scans on lazy/cross-module inference): GT properties.py
+     ~wipe 39529, prylint ~wipe 39214 (trace_gt_wipephase + PRYLINT_DBG_DMW).
+   - the GTDMW logger shows `Subscript@741 bn=SQLORMExpression` is recomputed
+     FRESH and CAPPED (cap=True, [U]) in properties.py on the GT side too
+     (cost 21+19), then replays cost-0 for the REST of the file's checks. The FP
+     hinges on WHICH class's W0231 check in properties.py recomputes-cold vs
+     replays-warm: astroid's MappedColumn check happens to land AFTER the entry
+     is warm (under cap), prylint's lands while it is cold (over cap). The
+     per-pull cap-boundary lands ~one inference apart, exactly the cross-file
+     warm-order class that is invisible in -E (caches never fill to fire this).
+
+CONCLUSION (PROVEN, supersedes round 6): there is NO astroid-faithful LOCALIZED
+lever. The W0231 abstract/synthetic decision is correct astroid behaviour; the
+metaclass/declared_metaclass/getattr context threading is byte-faithful; the
+cache key and wipe semantics match. The ONLY way to kill the FP is to make
+prylint's corpus-wide phase-2 inference fan-out mint/keep the deciding
+`(Subscript@741, bn=SQLORMExpression)` entry under-cap at the same instant
+astroid does — a bit-exact phase-2 inference-ordering change that directly
+risks the INVIOLABLE -E 27/27 gate, the django/nova inferdump+treedump gates,
+and the 26 clean corpora. NOT safely landable; deferred to a dedicated
+engine-warmth-parity effort. No source change is the correct action this round —
+any localized hack (force object into the ancestors of uninferable-base classes,
+memoize the SQLORMExpression metaclass, special-case ObjectModel __init__
+abstractness) would DIVERGE from astroid and regress the clean corpora.
+
+GATES (round 7, re-certified, clean HEAD build, NO engine source changes): -E
+27/27 byte-identical (egate.sh ALL EQUAL); treedump django 200/0; inferdump
+django 200/0; inferdump nova 3/11 = documented env-noise. FP census unchanged
+(1 full + 4 hook, all sqlalchemy, same nodes). Diagnosis-only; new GT tracers
+added under harness/ (trace_gt_dmkey/_dmw/_wipephase.py); all rust-side probes
+reverted before build.
+
 ## ZERO-FP round 6 (ROOT CAUSE CORRECTED: localized 11-node cold-cost over-burn, NOT warm-cache order)
 
 Re-census (clean HEAD build, all 27 corpora x {full,hook}, --drop-no-member,
