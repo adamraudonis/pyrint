@@ -330,6 +330,7 @@ fn main() -> ExitCode {
         fail_under,
         fail_on,
         exit_zero,
+        jobs,
     };
     let code = run::run(&opts);
     ExitCode::from((code & 0xff) as u8)

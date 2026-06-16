@@ -51,6 +51,14 @@ pub struct RunOpts {
     pub fail_on: Vec<String>,
     /// --exit-zero: always exit 0 when the exit ladder runs.
     pub exit_zero: bool,
+    /// -j/--jobs: number of phase-2 worker threads. None or Some(1) -> the
+    /// EXACT serial path (single engine thread). Some(0) -> auto =
+    /// available_parallelism(). Some(N>1) -> N per-worker engines, each
+    /// processing a DETERMINISTIC round-robin file shard. The serial path is
+    /// byte-identical to pylint; -j N may differ from serial (like pylint's
+    /// own -j) because each worker holds an independent inference cache, but
+    /// is itself DETERMINISTIC per run (fixed partition, fixed merge order).
+    pub jobs: Option<usize>,
 }
 
 /// Source of an --enable value: config-file enables are applied before CLI
@@ -444,12 +452,27 @@ pub fn run(opts: &RunOpts) -> i32 {
     }
     let crash_abs = crash_abs;
 
-    // ---- phase 2: per-module checks (sequential on a big-stack engine
-    // thread: astroid's caches are process-global and order-sensitive, and
-    // checker inference must run in pylint's file order) ------------------
+    // ---- phase 2: per-module checks --------------------------------------
+    // SERIAL path (`-j 1` / no -j): ONE big-stack engine thread walks every
+    // module in pylint's file order on a single process-global, order-
+    // sensitive astroid cache — byte-identical to pylint.
+    //
+    // PARALLEL path (`-j N>1`, or `-j 0` = auto): N big-stack worker threads,
+    // each with its OWN inference engine (Rc caches are thread-local, so no
+    // Arc refactor of the engine is needed). Every worker boots ALL files in
+    // file order (mirroring pylint's phase-1 cache warming) but WALKS only its
+    // round-robin residue class `pos % N == k` — a FIXED partition, so the
+    // result is reproducible run-to-run. Per-worker outputs are merged and
+    // flushed strictly in original file order below, exactly as serial does.
+    // The user accepts that -j N output may differ from serial (independent
+    // caches), like pylint's own -j.
     let mut stats = Stats::default();
     let mut extras: Vec<(usize, ModuleOut)> = Vec::new();
-    let results: Vec<(usize, ModuleOut)> = std::thread::scope(|scope| {
+    // Hoist the worker function and its captured data ABOVE thread::scope so
+    // the spawned worker threads can borrow them for the whole scope lifetime
+    // (locals created INSIDE the scope closure would be dropped before the
+    // implicit join, which the borrow checker rejects).
+    let results: Vec<(usize, ModuleOut)> = {
         let items = &items;
         let trees = &trees;
         let global = &global;
@@ -458,21 +481,46 @@ pub fn run(opts: &RunOpts) -> i32 {
         let cwd = std::path::PathBuf::from(&cwd);
         let crash_abs = &crash_abs;
         // PRYLINT_SHARD_PROBE=N (debug aid): simulate N-way phase-2 sharding
-        // in ONE process — engine k boots ALL files (mirroring pylint's
+        // in ONE thread — engine k boots ALL files (mirroring pylint's
         // phase-1 cache state) but walks only its round-robin residue class.
         // Output then flows through the normal in-order merge: byte-comparing
         // against the sequential run proves (or refutes) that per-worker
-        // cache divergence is output-invisible.
+        // cache divergence is output-invisible. Only meaningful on the serial
+        // (single-thread) path.
         let shard_probe: usize = std::env::var("PRYLINT_SHARD_PROBE")
             .ok()
             .and_then(|v| v.parse().ok())
             .filter(|&n| n >= 2)
             .unwrap_or(1);
-        let engine_thread = std::thread::Builder::new()
-            .stack_size(1 << 30)
-            .spawn_scoped(scope, move || {
-                let mut all: Vec<(usize, ModuleOut)> = Vec::new();
-                for k in 0..shard_probe {
+        // Effective phase-2 worker count. jobs None/Some(1) -> serial (1
+        // thread, the byte-identical path). Some(0) -> auto. Some(N>1) -> N.
+        // The PRYLINT_SHARD_PROBE knob only sub-shards the SERIAL thread; it
+        // never combines with -j N>1 (parallel always uses real threads).
+        let njobs: usize = match opts.jobs {
+            None | Some(1) => 1,
+            Some(0) => std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1),
+            Some(n) => n,
+        };
+        // run_shard(k, nshards): the per-worker body. Builds a fresh engine,
+        // boots ALL files in order, then walks exactly the modules in residue
+        // class `pos % nshards == k`. Returns this shard's (file_index,
+        // ModuleOut) pairs (incl. the close()-phase R0801/R0401 entries, which
+        // only the k==0 shard emits). For nshards==1 this is the EXACT serial
+        // body. `outer_k`/`outer_n` carry the residue class used for the WALK
+        // filter; SHARD_PROBE uses them to sub-shard a single thread.
+        let run_shard = |outer_k: usize, outer_n: usize| -> Vec<(usize, ModuleOut)> {
+            let mut all: Vec<(usize, ModuleOut)> = Vec::new();
+            // SHARD_PROBE only applies on the serial path (outer_n == 1): it
+            // loops k=0..shard_probe in this one thread, each iteration a fresh
+            // engine walking residue class `pos % shard_probe == k`. On a real
+            // parallel worker (outer_n > 1) there is exactly one iteration that
+            // walks `pos % outer_n == outer_k`.
+            let (kmin, kmax, nshards) = if outer_n == 1 {
+                (0usize, shard_probe, shard_probe)
+            } else {
+                (outer_k, outer_k + 1, outer_n)
+            };
+            for k in kmin..kmax {
                     let engine = pyinfer::Engine::new(&cwd);
                     for p in crash_abs {
                         engine.add_crash_file(p.clone());
@@ -534,7 +582,7 @@ pub fn run(opts: &RunOpts) -> i32 {
                     }
                     all.extend(trees.iter().enumerate().filter(|(pos, (i, _))| {
                         match (&walk_prefix, &walk_plus) {
-                            (None, _) => pos % shard_probe == k,
+                            (None, _) => pos % nshards == k,
                             (Some(m), plus) => {
                                 k == 0
                                     && (pos < m
@@ -687,9 +735,25 @@ pub fn run(opts: &RunOpts) -> i32 {
                         }
                     }
                 }
-                all
+            all
+        };
+        let run_shard = &run_shard;
+
+        let results: Vec<(usize, ModuleOut)> = std::thread::scope(|scope| {
+        // Dispatch: serial = 1 big-stack thread running run_shard(0, 1) (the
+        // EXACT byte-identical path). Parallel = njobs big-stack threads, each
+        // running run_shard(k, njobs) for k in 0..njobs. The oracle subprocess
+        // runs concurrently on the main thread in both cases. We spawn ALL
+        // phase-2 worker threads, then do the oracle pass, then join workers in
+        // shard order and concatenate their outputs.
+        let workers: Vec<_> = (0..njobs)
+            .map(|k| {
+                std::thread::Builder::new()
+                    .stack_size(1 << 30)
+                    .spawn_scoped(scope, move || run_shard(k, njobs))
+                    .expect("spawn phase-2 worker thread")
             })
-            .expect("spawn phase-2 thread");
+            .collect();
 
         // oracle verdicts (subprocess runs concurrently with the engine)
         let verdicts = oracle::run_oracle(&requests);
@@ -756,10 +820,20 @@ pub fn run(opts: &RunOpts) -> i32 {
             });
         }
 
-        let r = engine_thread.join().expect("phase-2 thread panicked");
+        // Join workers in shard order; concatenate their (file_index,
+        // ModuleOut) pairs. Final ordering is restored by the file-index sort
+        // in the merge below, so the concatenation order here is irrelevant to
+        // output — but joining in shard order keeps the close()-phase entries
+        // (only shard 0 emits them) grouped deterministically.
+        let mut r: Vec<(usize, ModuleOut)> = Vec::new();
+        for w in workers {
+            r.extend(w.join().expect("phase-2 worker thread panicked"));
+        }
         phase_mark!(t0, "phase2");
         r
-    });
+        });
+        results
+    };
 
     // merge engine results with oracle-derived extras, in file order
     let mut merged: Vec<(usize, ModuleOut)> = results;
