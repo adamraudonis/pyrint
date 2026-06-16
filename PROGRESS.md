@@ -3738,6 +3738,104 @@ source changes landed (diagnosis-only); new env-gated GT tracer
 harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
 declared_metaclass; does not touch prylint output).
 
+## ZERO-FP round 10 (DECISIVE NEW evidence: astroid's OWN cold answer IS the FP; node-precise 107-vs-96 metaclass-burn at the W0231 check moment)
+
+RE-CENSUS (clean HEAD build, all 27 corpora × {full,hook}, --drop-no-member,
+excl E1101/I1101 no-member + F0002 crash-path noise): UNCHANGED from rounds 2-9.
+  sqlalchemy.full : W0231 ×1 (orm/properties.py:561, base _DeclarativeMapped)
+  sqlalchemy.hook : W0231 ×2 (attributes.py:198/:620) + W0223 ×1 + R0901 ×1
+                    (dialects/postgresql/array.py:93)
+ALL OTHER 26 corpora ZERO real FP both profiles (nova E1120 / sympy
+W0223/W0221/E1136 GONE; sympy F0002 = crash-path noise, bytecmp2 PASS;
+scikit-learn/sympy E1101 = no-member excluded; core C0103 + nova E1101 are FNs,
+not FPs). -E 27/27 byte-identical (egate ALL EQUAL); treedump django 200/0;
+inferdump django 200/0.
+
+NEW THIS ROUND — two pieces of decisive evidence that close the diagnosis:
+
+1. **astroid's OWN COLD result IS the FP.** Running pinned astroid on
+   orm/base.py in ISOLATION (fresh MANAGER, single file):
+     `_DeclarativeMapped.ancestors()` -> `[]` (EMPTY)
+     `next(_DeclarativeMapped.igetattr('__init__'))` ->
+         `BoundMethod, is_abstract()==False, parent.name=='object'`
+   i.e. COLD astroid returns a NON-abstract object.__init__ -> would FP. WARM
+   (full-corpus) astroid (trace_gt_w0231.py `_ancestors_to_call` patch at the
+   real warm moment) returns:
+     `_DeclarativeMapped.ancestors()` -> ['Mapped','SQLORMExpression',...,
+       'object', ...17 names...] (REACHES object)
+     `igetattr('__init__')` -> `UnboundMethod, abstract=True, frame=object`
+   -> to_call empty -> NO W0231. So the W0231 decision is PURELY warmth-order;
+   there is NO single "correct" astroid answer to match — astroid itself flips
+   COLD<->WARM. This DEFINITIVELY rules out any localized astroid-faithful
+   abstractness/ancestors lever (any such fix would diverge from cold-astroid
+   and regress the clean corpora / -E gate).
+
+2. **Node-precise burn at the deciding W0231 check (both sides instrumented).**
+   The W0231 `_ancestors_to_call` does `base.igetattr('__init__')` =
+   `ClassDef.igetattr` which runs `metaclass(context)` THEN `getattr` on the
+   SAME context (shared nodes_inferred counter; astroid never resets it between
+   the two — node_ng.py keeps lookupname/bn through the infer wrapper).
+   - astroid (trace patch on ClassDef.igetattr + ClassDef.ancestors): the
+     deciding `_DeclarativeMapped.igetattr('__init__')` runs `metaclass()`
+     leaving ni≈96 (UNDER the 100-cap) -> the subsequent `getattr` ancestors
+     walk replays `Mapped[_T_co]` from the WARM global cache (cap-check skipped
+     on cached replays) -> reaches object -> abstract __init__ -> NO FP. (A
+     SECOND igetattr in the same file lands at ni=102 over-cap, but
+     `next(igetattr)` takes the FIRST = the under-cap one.)
+   - prylint (PRYLINT_DBG_IGA / _CGA env probes in class_igetattr_to /
+     class_getattr): the metaclass() call ALWAYS burns 0->107 (OVER cap) ->
+     `class_getattr(_DeclarativeMapped,'__init__')` is entered at ni=107 ->
+     `ancestors(cls, true, ctx[ni=107])` truncates every base to [U]
+     IMMEDIATELY -> ctx_ancs=[] (while the SAME ancestors() with a FRESH ctx
+     gives fresh_ancs.len=17) -> values empty -> falls to the ObjectModel
+     synthetic `def __init__(self,*a,**k): return None` (getattr.rs:1543,
+     non-abstract) -> W0231 FP.
+   The 11-node gap (107 vs 96) is EXACTLY 6 `_T_co` TypeVar `Call` re-runs:
+   PRYLINT_DBG_IGA_TRACE (full infer tracer armed for ONLY the deciding
+   metaclass call) shows prylint does 6 `> Call` TypeVar-tip re-inferences + 6
+   `_T_co` Names at bn=true; the GT tco_global tracer shows astroid does 0 Calls
+   + 10 `_T_co` Names ALL at bn=None. The bn=true `_T_co` come from
+   infer_argument's classmethod `cls` resolution -> `boundnode.metaclass(ctx
+   [bn=SQLORMExpression])` (calls.rs:1791, faithful to astroid arguments.py:229)
+   -> declared_metaclass infers `SQLORMOperations[_T_co]`@base.py:741:4 at
+   bn=SQLORMExpression. astroid REPLAYS that `(741:4,lk=None,cc=None,
+   bn=SQLORMExpression)` global-cache entry at cost 0 (warm from instrumentation
+   .py, trace_gt_741mint.py: cold-mint #1 at ni=81 curfile=instrumentation.py);
+   prylint MISSES it cold -> re-runs the brain_typing TypeVar tip 6× -> +11
+   nodes -> 96 becomes 107.
+
+WHY astroid's 741 entry is warm at properties.py and prylint's is not: BOTH wipe
+the global cache ~equally (prylint ~51k vs astroid 51340 total `_invalidate_cache`)
+and the `(741:4,bn=SQLORMExpression)` entry is re-minted/wiped MANY times in BOTH
+(trace_gt_741bn.py: astroid MISSES it cold in instrumentation/decl_base/
+descriptor_props/strategies/... and HITS it 141× warm within attributes.py).
+There are ZERO direct `741:4 bn=SQLORMExpression` infers during astroid's
+properties.py phase-2 check — the deciding W0231 there REPLAYS the whole
+metaclass/`Mapped[_T_co]`/__init__ resolution from COARSER warm entries minted
+earlier (cross-file). prylint, having wiped+not-re-minted the coarser entries by
+the time it reaches the same check, re-resolves cold and over-burns. This is the
+identical IRREDUCIBLE cross-file global-cache-warmth verdict of rounds 7/8/9, now
+nailed to the node and the burn-count.
+
+VERDICT (round 10, re-confirmed): NO astroid-faithful LOCALIZED lever exists.
+Every cache (global inf_cache key (node,lk,cc-id,bn-value-key); inference-tip
+FIFO-64 with empty-ctx None-normalization; lookup lru-128; _metaclass_lookup_
+attribute lru-1024 keyed by ctx identity), the bn=set metaclass-cls walk, the
+path-guard, the ObjectModel synthetic, the `_infer_stmts` clone-preserves-bn,
+and the wipe trigger are ALL byte-faithful (re-verified this round). astroid's
+own cold==FP proves the only fix is bit-exact phase-2 global-cache mint/wipe/
+fanout ORDERING parity so prylint re-mints the coarse `Mapped[_T_co]`/metaclass
+entries under-cap at the same instant astroid does — a change that directly
+risks the INVIOLABLE -E 27/27 gate + the django/nova/sqlalchemy/sympy inferdump+
+treedump gates + the 26 clean corpora. NOT safely landable as a localized fix;
+BLOCKED, the single remaining FP class (sqlalchemy W0231/W0223/R0901) is deferred
+to a dedicated phase-2 engine-warmth-parity effort.
+
+GATES (round 10, clean HEAD build, NO source changes shipped — all probes
+env-gated and reverted before commit): -E 27/27 byte-identical (egate ALL
+EQUAL); treedump django 200/0; inferdump django 200/0. FP census unchanged
+(1 full + 4 hook, all sqlalchemy, same nodes). Diagnosis-only.
+
 ## ZERO-FP round 9 (ATOMIC root cause nailed: the sole FP is one global inf_cache entry `741:4 bn=SQLORMExpression`, warmed cross-file in instrumentation.py on the astroid side, wiped before properties.py on the prylint side)
 
 RE-CENSUS (clean build, all 27 corpora x {full,hook}, --drop-no-member, excl
