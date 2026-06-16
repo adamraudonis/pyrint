@@ -347,10 +347,30 @@ impl Engine {
             let md = self.md(node.m);
             let ni = &md.tree.nodes[node.n.idx()];
             let kind = crate::treeutil::kind_label(&ni.kind);
+            let lkstr = ctx.lookupname.get().map(|s| self.sname(s)).unwrap_or_else(|| "None".into());
+            let bnstr = match ctx.boundnode.borrow().as_ref() {
+                None => "None".to_string(),
+                Some(Value::Node(g)) => format!("Node:{}", self.node_name(*g).unwrap_or_default()),
+                Some(v) => value_kind_label(v).to_string(),
+            };
+            let ccset = ctx.callcontext.borrow().is_some();
             eprintln!(
-                "TNODE MISS {}:{} {} ln={:?} ni_in={}",
-                ni.fromlineno, ni.col_offset, kind, ctx.lookupname.get(), ctx.nodes_inferred.get()
+                "TNODE MISS {}:{} {} lk={} bn={} cc={} file={} ni_in={}",
+                ni.fromlineno, ni.col_offset, kind, lkstr, bnstr, ccset,
+                crate::graph::cur_lint_file(),
+                ctx.nodes_inferred.get()
             );
+        }
+        // PRYLINT_TRACE_NODE_SUBTREE: when tracing the target node AND its
+        // lookupname matches PRYLINT_TRACE_NODE_LK, turn full TRACE_INFER on
+        // for the duration of THIS dispatch (the deciding over-cap subtree).
+        let subtree_trace = do_trace_node
+            && std::env::var("PRYLINT_TRACE_NODE_SUBTREE").is_ok()
+            && std::env::var("PRYLINT_TRACE_NODE_LK").ok().map_or(true, |want| {
+                ctx.lookupname.get().map(|s| self.sname(s)).as_deref() == Some(want.as_str())
+            });
+        if subtree_trace {
+            crate::graph::set_trace_infer(true);
         }
         // limit loop (node_ng.py:160-176)
         let mut results: Vec<Value> = Vec::new();
@@ -396,12 +416,27 @@ impl Engine {
                 Drive::Go
             })
         };
+        if subtree_trace {
+            crate::graph::set_trace_infer(false);
+        }
         let trace_write = |n: usize| {
             if crate::graph::trace_infer() {
                 let md = self.md(node.m);
                 let kind = crate::treeutil::kind_label(&md.tree.nodes[node.n.idx()].kind);
                 let name = self.node_name(node).unwrap_or_default();
                 eprintln!("CACHEW {kind} {name} vals={n}");
+            }
+            if do_trace_node {
+                let md = self.md(node.m);
+                let ni = &md.tree.nodes[node.n.idx()];
+                let kind = crate::treeutil::kind_label(&ni.kind);
+                let lkstr = ctx.lookupname.get().map(|s| self.sname(s)).unwrap_or_else(|| "None".into());
+                let vk: Vec<&str> = results.iter().map(value_kind_label).collect();
+                eprintln!(
+                    "TNODE WRITE {}:{} {} lk={} trunc={} file={} -> [{}]",
+                    ni.fromlineno, ni.col_offset, kind, lkstr, truncated,
+                    crate::graph::cur_lint_file(), vk.join(",")
+                );
             }
         };
         match end {

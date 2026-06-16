@@ -3738,6 +3738,95 @@ source changes landed (diagnosis-only); new env-gated GT tracer
 harness/trace_gt_baseburn.py (per-base infer cost + cache-key/result inside
 declared_metaclass; does not touch prylint output).
 
+## ZERO-FP round 8 (bounded-LRU verified in place; CONFIRMED: nova/sympy FPs GONE; sqlalchemy = irreducible warm-cache, traced to the GLOBAL inf_cache lk='__init__' poison — round-7 re-confirmed with both-sides cache writers)
+
+BOUNDED-LRU STATUS: the lookup `@lru_cache(128)` (lookup.rs + EvictIndex in
+graph.rs) and `_metaclass_lookup_attribute @lru_cache(1024)`
+(getattr.rs:486 metaclass_lookup_attribute, keyed (cls,name,ctx-IDENTITY)) are
+PRESENT and astroid-faithful (touch-on-hit, LRU evict, env-overridable caps
+PRYLINT_LOOKUP_CAP/PRYLINT_META_CAP). Sweeping caps 16/32/64/128 x 64/256/1024
+does NOT change the sqlalchemy W0231 FP -> the bounded LRUs are NOT the lever
+for this FP (the poison lives in the UNBOUNDED global inf_cache, not lookup).
+
+CENSUS (clean HEAD build, full+hook, --drop-no-member, excl E1101/I1101/F0002):
+ONLY sqlalchemy has real FPs, SAME nodes as rounds 2-7:
+  sqlalchemy.full : W0231 x1 (orm/properties.py:561, base _DeclarativeMapped)
+  sqlalchemy.hook : W0231 x2 (attributes.py:198/:620) + R0901 x1 + W0223 x1
+                    (dialects/postgresql/array.py:93)
+nova E1120 (was x40): GONE (bytecmp2 PASS, diffmsg FP=0).
+sympy W0223/W0221/E1136 (was x33): GONE (only F0002 x2 crash-path noise, PASS).
+core: ZERO FP (the bytecmp2 "length differs" is R0801/E0001-ordering; diffmsg
+FP=0; the only core diffs are 2 FNs: C0103 SETUP_ORDER_SORT_KEY + 1 no-member).
+ALL 26 other corpora ZERO real FP both profiles. -E 27/27 byte-identical
+(egate.sh ALL EQUAL); treedump django 200/0; inferdump django 200/0; inferdump
+nova 3/11 = documented os.environ env-noise (unchanged).
+
+NEW THIS ROUND — node-precise BOTH-SIDES cache-state proof (supersedes the
+round-6/7 single-sided traces). The deciding fact is the GLOBAL inf_cache entry
+for `Mapped[_T_co]` (orm/base.py:844:25, the first base of _DeclarativeMapped):
+1. prylint at the MappedColumn W0231 check HOLDS a POISONED
+   `(Mapped[_T_co], lk='__init__', cc=None, bn=None) = [Uninferable]` entry,
+   WRITTEN by a trunc=true over-cap DURING properties.py itself (TNODE WRITE
+   trace, PRYLINT_TRACE_NODE=844:25 + the new PRYLINT_TRACE_NODE_SUBTREE/_LK
+   subtree tracer in infer.rs). class_getattr's `ancestors(_DeclarativeMapped,
+   ctx[lk=__init__])` REPLAYS that [U] -> ancestors EMPTY -> the ObjectModel
+   synthetic NON-abstract __init__ -> W0231 fires.
+2. DROPPING just the lk='__init__' inf_cache entries and re-running the exact
+   igetattr makes prylint resolve `_DeclarativeMapped.__init__ -> UM(frame=
+   builtins.object, abstract=true)` -> NO W0231 == astroid. So the poison IS
+   the sole cause (PRYLINT_DBG_W0231_DROP probe, reverted).
+3. astroid does NOT hold that poison. GT _INFERENCE_CACHE write-tracer
+   (harness/trace_gt_mapped_writes.py — swaps in a logging dict subclass +
+   re-patches _invalidate_cache) proves astroid writes
+   `(Mapped[_T_co], '__init__', None, None) -> ['Class:Mapped']` (RESOLVED,
+   under the 100-cap) exactly ONCE; it NEVER writes the [U] there. GT cache
+   DUMP at the check (harness/trace_gt_w0231_cache.py) shows no lk='__init__'
+   entry present BEFORE the MappedColumn igetattr -> astroid's first such infer
+   happens AT the check and lands UNDER cap.
+4. WHY astroid lands under cap and prylint over-caps is PURE cross-file
+   warm-cache fan-out timing, NOT a key-shape/bn/cc/lookupname bug — ALL of
+   these match astroid bit-for-bit (verified: ClassDef.getitem
+   bind_context_to_node(ctx,cls)+fresh CallContext == protocols.rs:1664-1670;
+   dunder_lookup _class_lookup metaclass(context); class_getattr("__class_get
+   item__") with NO context == protocols.rs:1626; declared_metaclass/find_meta
+   class/ancestors context threading; infer_argument boundnode.metaclass(
+   context)). GT tracers prove astroid's deciding metaclass walk uses the SAME
+   bn=cls keys prylint does (harness/trace_gt_infarg_meta.py: META cls=Mapped
+   bn=Mapped ni=85, SQLORMExpression bn=SQLORMExpression ni=51, etc.) and the
+   SAME lk='__init__'/cc=None/bn=None _T_co index keys
+   (harness/trace_gt_tco.py: every _T_co at lk='__init__' cc=False bn=None).
+   The ONLY divergence is the nodes_inferred COUNT when each side first reaches
+   `Mapped[_T_co]` lk='__init__' in properties.py: astroid ni=96 (UNDER 100),
+   prylint ni=107 (OVER) — astroid's intermediate _T_co/TypingOnly/base-chain
+   sub-inferences replay from a ~11-node-warmer cache (cross-file phase-2 fan-
+   out ordering). prylint builds ALL ASTs in phase 1 then lazily builds +49.6k
+   modules with +27.8k cache wipes during phase 2 (PRYLINT_WIPESTAT) — astroid
+   does the equivalent, but the exact instant the deciding entry mints/replays
+   lands ~one inference apart.
+
+VERDICT (round 8): BLOCKED on the SAME single root cause round 7 proved, now
+nailed to the EXACT inf_cache entry with a BOTH-SIDES cache writer/dumper.
+There is NO astroid-faithful LOCALIZED lever: every cache key (node/lookupname/
+callcontext/boundnode) and every context handoff is byte-faithful; the FP
+hinges solely on a ~11-node cross-file warm-cache fan-out skew that lands the
+deciding `Mapped[_T_co]` infer one cap-boundary off. Closing it requires a
+bit-exact phase-2 inference-fan-out warmth change that DIRECTLY risks the
+INVIOLABLE -E 27/27 gate and the 26 clean corpora — deferred to a dedicated
+engine-warmth-parity effort (NOT a single-FP hack: forcing object into
+uninferable-base ancestors, special-casing the metaclass/ObjectModel
+abstractness, or clearing bn/cc on the _T_co index inference all DIVERGE from
+astroid and would regress the clean corpora / the django/nova inferdump gates).
+
+GATES (round 8, re-certified, clean HEAD-equivalent build — the only source
+delta is env-gated debug tracing in infer.rs, zero behavioral change with the
+env unset): -E 27/27 byte-identical (egate.sh ALL EQUAL); treedump django
+200/0; inferdump django 200/0; inferdump nova 3/11 = documented env-noise. FP
+census unchanged (1 full + 4 hook, all sqlalchemy, same nodes). New KEPT
+tooling: PRYLINT_TRACE_NODE now prints lk/bn/cc/file + a TNODE WRITE event +
+the PRYLINT_TRACE_NODE_SUBTREE/_LK subtree-on-during-target-dispatch tracer
+(infer.rs); GT cache writers/dumpers harness/trace_gt_{mapped_writes,w0231_
+cache,tco,infarg_meta}.py.
+
 ## ZERO-FP round 7 (DEFINITIVE: irreducible cross-file cache-warmth; round-6's "localized cold-cost" was a warm-vs-cold trace artifact)
 
 Re-census (clean HEAD build, all 27 corpora x {full,hook}, FP-only, excluding
