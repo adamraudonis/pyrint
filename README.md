@@ -30,11 +30,44 @@ Use it exactly like pylint — full check mode is the default:
 prylint .                      # all checks (like `pylint .`)
 prylint -E .                   # errors only (like `pylint -E .`)
 prylint --disable=C0114,... .  # same --disable / --enable / inline pragmas
+prylint -j 8 .                 # opt-in parallel mode (see "Parallelism" below)
 ```
 
 Output, message order, exit codes, the score footer, `--rcfile` /
 `pyproject.toml` discovery, `init-hook`, and `# pylint:` pragmas all match
 pylint 4.0.5.
+
+## Parallelism
+
+prylint is **single-threaded by default** in the checking phase, on purpose:
+the byte-identity guarantee depends on replicating astroid's process-global,
+order-sensitive inference cache exactly, which parallelizing would perturb. The
+default path is the one verified byte-identical to pylint.
+
+`-j N` (alias `--jobs N`) is an **opt-in** parallel mode, mirroring pylint's
+own `-j`:
+
+- **The serial default stays byte-identical.** `-j 1`, or no `-j`, runs the
+  exact existing single-engine path. The parallel branch is taken only for
+  `-j N>1` (or `-j 0` = auto = number of cores).
+- **`-j N` may differ from serial — just like pylint's `-j`.** Each worker has
+  its own thread-local inference cache and checks a fixed `file_index % N`
+  slice of the files, so cache warmth differs and the cross-file "close" checks
+  (`R0801` duplicate-code, `R0401` cyclic-import) see only one slice. On django
+  (full mode, 10-core M-series), serial vs `-j 8` differs by ~938 message
+  lines, ~99% of which are R0801/R0401.
+- **It is deterministic per run.** The partition is fixed (not work-stealing)
+  and outputs merge in file order, so the same input gives the same `-j N`
+  output every run — it just isn't equal to `-j 1`.
+- **Speedup is modest and partition-bound.** Each worker re-boots the full file
+  set (the cost of determinism), so on django the win is ~15.4s → ~13.7s at
+  `-j 8` (~1.1×); it grows on corpora where per-module inference dominates the
+  boot cost.
+
+**Use the default when you need byte-identity to pylint; reach for `-j N` only
+when the single-core run is long and exact parity is not required.** Full
+details and the divergence breakdown are in
+[LIMITATIONS.md](LIMITATIONS.md) §5.
 
 ## Benchmarks
 
@@ -63,9 +96,12 @@ single-threaded:
 
 Median per-repo speedup ~85×; the aggregate is higher because pylint's
 duplicate-code check (`R0801`) is O(n²) and dominates on test-heavy repos like
-black. **This is single-core** — the inference engine is deliberately
-single-threaded to replicate astroid's order-sensitive global cache exactly
-(see [LIMITATIONS.md](LIMITATIONS.md)).
+black. **These are single-core numbers** — the default inference engine is
+deliberately single-threaded to replicate astroid's order-sensitive global
+cache exactly (see [LIMITATIONS.md](LIMITATIONS.md)). An opt-in `-j N` mode
+trades that byte-identity for cores (see [Parallelism](#parallelism)); the
+byte-identical default is already 15–2300× pylint, so parallelism is rarely the
+bottleneck.
 
 Every row above is also an accuracy test: each repo's full output is
 byte-identical to pylint's (see exceptions in [LIMITATIONS.md](LIMITATIONS.md)).

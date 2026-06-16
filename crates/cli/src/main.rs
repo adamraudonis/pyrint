@@ -17,6 +17,35 @@ use std::process::ExitCode;
 #[global_allocator]
 static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
 
+/// Short usage banner. prylint's full `--help` is not a byte-parity target
+/// (the differential gate never invokes it); this lists the options prylint
+/// actually honors, including the opt-in `-j N` parallel mode.
+fn print_usage() {
+    println!("usage: prylint [options] <files-or-dirs>");
+    println!();
+    println!("A Rust reimplementation of pylint with byte-for-byte identical");
+    println!("output (pylint 4.0.5 / astroid 4.0.4 / CPython 3.12).");
+    println!();
+    println!("options:");
+    println!("  -E, --errors-only       only report error (E) messages");
+    println!("  -d, --disable=MSGS      comma-separated message ids/categories to disable");
+    println!("  -e, --enable=MSGS       comma-separated message ids/categories to enable");
+    println!("  --rcfile=FILE           configuration file (pyproject.toml / .pylintrc)");
+    println!("  --init-hook=CODE        Python executed before linting (sys.path setup)");
+    println!("  -j, --jobs=N            number of parallel jobs for the checking phase.");
+    println!("                          DEFAULT 1 (serial), which is byte-identical to");
+    println!("                          pylint. N>1 (or 0 = auto) is OPT-IN and may differ");
+    println!("                          from serial, like pylint's own -j; it is");
+    println!("                          deterministic per run. See LIMITATIONS.md.");
+    println!("  -s, --score=y/n         print the score footer (default y)");
+    println!("  --persistent=y/n        persist run stats between runs (default y)");
+    println!("  --fail-under=FLOAT      exit non-zero if the score is below this");
+    println!("  --fail-on=MSGS          exit non-zero if any of these messages are emitted");
+    println!("  --exit-zero            always exit 0");
+    println!("  --version              print version and exit");
+    println!("  -h, --help             show this help and exit");
+}
+
 /// _yn_validator (argument_parsing): accepts y/yes/true and n/no/false
 /// (case-insensitive). Anything else is an argparse error -> exit 32.
 fn parse_yn(v: &str) -> Option<bool> {
@@ -29,6 +58,17 @@ fn parse_yn(v: &str) -> Option<bool> {
 
 fn main() -> ExitCode {
     let args: Vec<String> = std::env::args().skip(1).collect();
+    // --help/-h and --version are handled up front (not byte-parity targets;
+    // the differential gate never passes them). They never touch the checking
+    // path.
+    if args.iter().any(|a| a == "--help" || a == "-h") {
+        print_usage();
+        return ExitCode::SUCCESS;
+    }
+    if args.iter().any(|a| a == "--version") {
+        println!("prylint {}", env!("CARGO_PKG_VERSION"));
+        return ExitCode::SUCCESS;
+    }
     let mut paths: Vec<String> = Vec::new();
     let mut disables: Vec<String> = Vec::new();
     let mut enables: Vec<(run::EnableSrc, String)> = Vec::new();
