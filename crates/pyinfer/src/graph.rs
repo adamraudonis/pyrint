@@ -1411,13 +1411,27 @@ impl Engine {
     }
 
     fn load_snapshot_module(&self, modname: &str) -> Option<ModId> {
-        let data: std::borrow::Cow<'_, str> = match &self.snapshot_dir {
+        // FAST path: load the post-walk SnapModule from the compact postcard
+        // binary (no serde_json DOM). Falls back to the JSON walk only when no
+        // binary is available for this module.
+        let mut snap = match &self.snapshot_dir {
+            // PRYLINT_SNAPSHOT_DIR override (dev/debug, snapshot regen): prefer
+            // an on-disk <mod>.bin, else the <mod>.json JSON path.
             Some(dir) => {
-                std::fs::read_to_string(dir.join(format!("{modname}.json"))).ok()?.into()
+                if let Ok(bytes) = std::fs::read(dir.join(format!("{modname}.bin"))) {
+                    crate::snapshot::load_snapshot_bin(&bytes)?
+                } else {
+                    let json =
+                        std::fs::read_to_string(dir.join(format!("{modname}.json"))).ok()?;
+                    load_snapshot(&json)?
+                }
             }
-            None => crate::snapshot::embedded_json(modname)?.into(),
+            // Released binary: embedded postcard blob, else embedded JSON.
+            None => match crate::snapshot::embedded_bin(modname) {
+                Some(bytes) => crate::snapshot::load_snapshot_bin(bytes)?,
+                None => load_snapshot(crate::snapshot::embedded_json(modname)?)?,
+            },
         };
-        let mut snap = load_snapshot(&data)?;
         if modname == "sys" {
             // The oracle (dump_infer.py main) runs `sys.path.insert(0,
             // os.path.realpath(root))` before astroid raw-builds the live

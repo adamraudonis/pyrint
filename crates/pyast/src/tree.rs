@@ -15,6 +15,7 @@ use indexmap::IndexMap;
 use rustc_hash::FxHashMap;
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct NodeId(pub u32);
 
 impl NodeId {
@@ -26,6 +27,7 @@ impl NodeId {
 
 /// Interned string symbol.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash, PartialOrd, Ord)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Sym(pub u32);
 
 #[derive(Default)]
@@ -35,6 +37,21 @@ pub struct Interner {
 }
 
 impl Interner {
+    /// Rebuild an interner from its ordered symbol table (snapshot binary
+    /// load path). Sym(i) maps to `strings[i]`, matching the order the
+    /// strings were originally interned in.
+    pub fn from_strings(strings: Vec<Box<str>>) -> Interner {
+        let mut map = FxHashMap::default();
+        for (i, s) in strings.iter().enumerate() {
+            map.insert(s.clone(), Sym(i as u32));
+        }
+        Interner { map, vec: strings }
+    }
+    /// The ordered symbol table (Sym(i) -> strings[i]); used to serialize the
+    /// interner into the snapshot binary.
+    pub fn strings(&self) -> &[Box<str>] {
+        &self.vec
+    }
     pub fn intern(&mut self, s: &str) -> Sym {
         if let Some(&sym) = self.map.get(s) {
             return sym;
@@ -58,6 +75,7 @@ impl Interner {
 
 /// Python constant value (astroid Const.value).
 #[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum ConstValue {
     None,
     /// only created synthetically by pyinfer (operator protocol results);
@@ -77,6 +95,7 @@ pub enum ConstValue {
 }
 
 #[derive(Debug, Clone, PartialEq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum IntValue {
     Small(i64),
     /// Decimal digits for ints that do not fit i64.
@@ -84,6 +103,7 @@ pub enum IntValue {
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum Ctx {
     Load,
     Store,
@@ -92,6 +112,7 @@ pub enum Ctx {
 
 /// All astroid node kinds. Payload boxed where large.
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum NodeKind {
     Module(Box<ModuleData>),
     // ---- statements ----
@@ -182,6 +203,7 @@ pub enum NodeKind {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ModuleData {
     pub name: Box<str>,
     pub file: Box<str>,
@@ -193,6 +215,7 @@ pub struct ModuleData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct FunctionData {
     pub name: Sym,
     pub decorators: Option<NodeId>,
@@ -204,6 +227,7 @@ pub struct FunctionData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ClassData {
     pub name: Sym,
     pub decorators: Option<NodeId>,
@@ -217,6 +241,7 @@ pub struct ClassData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ForData {
     pub target: NodeId,
     pub iter: NodeId,
@@ -225,6 +250,7 @@ pub struct ForData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct WithData {
     /// astroid flattens with-items to (context_expr, optional_vars) pairs
     pub items: Vec<(NodeId, Option<NodeId>)>,
@@ -232,6 +258,7 @@ pub struct WithData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct TryData {
     pub body: Vec<NodeId>,
     pub handlers: Vec<NodeId>,
@@ -240,18 +267,21 @@ pub struct TryData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct LambdaData {
     pub args: NodeId,
     pub body: NodeId,
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct CompData {
     pub elt: NodeId,
     pub generators: Vec<NodeId>,
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct DictCompData {
     pub key: NodeId,
     pub value: NodeId,
@@ -259,6 +289,7 @@ pub struct DictCompData {
 }
 
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct ArgumentsData {
     pub posonlyargs: Vec<NodeId>,
     pub args: Vec<NodeId>,
@@ -282,6 +313,7 @@ pub struct ArgumentsData {
     pub tc_last_kwonly: bool,
 }
 
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub struct Node {
     pub kind: NodeKind,
     pub parent: NodeId,

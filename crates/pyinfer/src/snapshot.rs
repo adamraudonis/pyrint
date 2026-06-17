@@ -20,6 +20,7 @@ pub fn embedded_json(modname: &str) -> Option<&'static str> {
 
 use indexmap::IndexMap;
 use rustc_hash::FxHashMap;
+use serde::{Deserialize, Serialize};
 use serde_json::Value as J;
 
 use pyast::tree::{
@@ -29,7 +30,7 @@ use pyast::tree::{
 use pyast::NodeId;
 
 /// What an EmptyNode infers to (recorded by gen_snapshot._empty_inf).
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub enum EInf {
     Uninferable,
     Const(ConstValue),
@@ -42,7 +43,7 @@ pub enum EInf {
 /// klass.__module__/__name__ + instance flag for an EmptyNode's underlying
 /// object (gen_snapshot._empty_klass) — drives the live
 /// infer_ast_from_something replay (manager.py igetattr branch).
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, serde::Serialize, serde::Deserialize)]
 pub struct EKlass {
     pub module: String,
     pub name: String,
@@ -508,6 +509,123 @@ pub fn load_snapshot(json: &str) -> Option<SnapModule> {
         eklass: loader.eklass,
         args_unknown: loader.args_unknown,
     })
+}
+
+// ---------------------------------------------------------------------------
+// Binary snapshot format (postcard)
+//
+// The JSON loader above (`load_snapshot`) walks a serde_json DOM to build the
+// final, fully-resolved `SnapModule`. That walk is the slow part of engine
+// boot (~60ms for builtins). The binary format below captures that SAME
+// post-walk `SnapModule` — the arena `nodes`, the interner's ordered string
+// table, and the already-NodeId-resolved locals/iattrs/qnames/ftype/einf/
+// eklass/args_unknown maps — so the runtime path is a single
+// `postcard::from_bytes` with no DOM and no id-remapping. The reconstructed
+// `SnapModule` is byte-for-byte identical to what `load_snapshot` produced.
+//
+// Authoring flow is unchanged: gen_snapshot.py -> snapshot/*.json is the
+// source of truth. The .bin blobs are build artifacts produced from the JSON
+// by the `gen_snapshot_bin` binary (which reuses `load_snapshot`), committed
+// alongside the JSON and embedded via include_bytes! (build.rs).
+// ---------------------------------------------------------------------------
+
+/// Serializable mirror of the post-walk `SnapModule`. Field order and types
+/// match `SnapModule` exactly; the only transformation is the `Tree` ->
+/// (nodes, interner string table) split (the `Interner` map is rebuilt on
+/// load) and the FxHashMap fields stored as deterministic, sorted `Vec`s.
+#[derive(Serialize, Deserialize)]
+pub struct SnapBin {
+    name: String,
+    pure_python: bool,
+    nodes: Vec<Node>,
+    interner: Vec<Box<str>>,
+    qnames: Vec<(NodeId, String)>,
+    locals: Vec<(NodeId, Vec<(String, Vec<NodeId>)>)>,
+    iattrs: Vec<(NodeId, Vec<(String, Vec<NodeId>)>)>,
+    ftype: Vec<(NodeId, String)>,
+    einf: Vec<(NodeId, Vec<EInf>)>,
+    eklass: Vec<(NodeId, EKlass)>,
+    args_unknown: Vec<(NodeId, bool)>,
+}
+
+fn sorted_by_id<V: Clone>(m: &FxHashMap<NodeId, V>) -> Vec<(NodeId, V)> {
+    let mut v: Vec<(NodeId, V)> = m.iter().map(|(k, val)| (*k, val.clone())).collect();
+    v.sort_by_key(|(k, _)| *k);
+    v
+}
+
+impl SnapBin {
+    /// Project a fully-loaded `SnapModule` (output of `load_snapshot`) into the
+    /// serializable mirror. Consumes the module — used only by the build-time
+    /// generator. The `Tree`'s `locals`/`positions`/`type_comments`/
+    /// `u_string_consts` are always empty for snapshots (the engine reads
+    /// locals from `SnapModule.locals` instead), so they are not stored.
+    fn from_module(m: SnapModule) -> SnapBin {
+        debug_assert!(m.tree.locals.is_empty());
+        debug_assert!(m.tree.positions.is_empty());
+        debug_assert!(m.tree.type_comments.is_empty());
+        debug_assert!(m.tree.u_string_consts.is_empty());
+        SnapBin {
+            name: m.name,
+            pure_python: m.pure_python,
+            interner: m.tree.interner.strings().to_vec(),
+            nodes: m.tree.nodes,
+            qnames: sorted_by_id(&m.qnames),
+            locals: m.locals,
+            iattrs: m.iattrs,
+            ftype: sorted_by_id(&m.ftype),
+            einf: sorted_by_id(&m.einf),
+            eklass: sorted_by_id(&m.eklass),
+            args_unknown: sorted_by_id(&m.args_unknown),
+        }
+    }
+
+    /// Reconstruct the `SnapModule`. Must produce a structure identical to what
+    /// `load_snapshot` returned for the same source JSON.
+    fn into_module(self) -> SnapModule {
+        let tree = Tree {
+            nodes: self.nodes,
+            interner: Interner::from_strings(self.interner),
+            locals: FxHashMap::default(),
+            positions: FxHashMap::default(),
+            type_comments: Vec::new(),
+            u_string_consts: Default::default(),
+        };
+        SnapModule {
+            name: self.name,
+            pure_python: self.pure_python,
+            tree,
+            qnames: self.qnames.into_iter().collect(),
+            locals: self.locals,
+            iattrs: self.iattrs,
+            ftype: self.ftype.into_iter().collect(),
+            einf: self.einf.into_iter().collect(),
+            eklass: self.eklass.into_iter().collect(),
+            args_unknown: self.args_unknown.into_iter().collect(),
+        }
+    }
+}
+
+/// Serialize a JSON snapshot string into the compact postcard binary blob.
+/// Build-time only (gen_snapshot_bin). Returns None if the JSON fails to load.
+pub fn json_to_bin(json: &str) -> Option<Vec<u8>> {
+    let m = load_snapshot(json)?;
+    postcard::to_allocvec(&SnapBin::from_module(m)).ok()
+}
+
+/// Deserialize a postcard binary blob into a `SnapModule` — the FAST runtime
+/// path that replaces the serde_json DOM walk.
+pub fn load_snapshot_bin(bytes: &[u8]) -> Option<SnapModule> {
+    let bin: SnapBin = postcard::from_bytes(bytes).ok()?;
+    Some(bin.into_module())
+}
+
+/// The embedded snapshot binary blob for `modname`, if one was generated.
+pub fn embedded_bin(modname: &str) -> Option<&'static [u8]> {
+    embedded::SNAPSHOT_BINS
+        .binary_search_by_key(&modname, |(n, _)| n)
+        .ok()
+        .map(|i| embedded::SNAPSHOT_BINS[i].1)
 }
 
 /// IndexMap-based ordered locals used by the engine.

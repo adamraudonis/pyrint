@@ -13,3 +13,10 @@ rustc-hash = { workspace = true }
 indexmap = { workspace = true }
 memchr = { workspace = true }
 unicode-general-category = "1"
+serde = { workspace = true, optional = true }
+
+[features]
+# Enables serde Serialize/Deserialize on the tree node types so pyinfer can
+# encode the post-walk builtins/C-ext snapshot into a compact binary blob.
+# Off by default (zero cost for the parser path); pyinfer turns it on.
+serde = ["dep:serde"]

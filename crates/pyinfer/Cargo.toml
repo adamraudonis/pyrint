@@ -5,7 +5,17 @@ edition.workspace = true
 license.workspace = true
 
 [dependencies]
-pyast = { path = "../pyast" }
+pyast = { path = "../pyast", features = ["serde"] }
 rustc-hash = { workspace = true }
 indexmap = { workspace = true }
+serde = { workspace = true }
 serde_json = { workspace = true, features = ["preserve_order"] }
+postcard = { version = "1", features = ["use-std"] }
+
+# Build-time generator: JSON snapshot -> postcard .bin. Not part of the
+# released prylint; invoked manually (see harness regen recipe) when the JSON
+# source of truth changes. Reuses pyinfer's own JSON Loader for the walk so
+# the binary captures byte-for-byte the same post-walk SnapModule.
+[[bin]]
+name = "gen_snapshot_bin"
+path = "src/bin/gen_snapshot_bin.rs"
