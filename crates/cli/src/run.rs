@@ -480,6 +480,18 @@ pub fn run(opts: &RunOpts) -> i32 {
         let strip_prefix = &strip_prefix;
         let cwd = std::path::PathBuf::from(&cwd);
         let crash_abs = &crash_abs;
+        // Win A — lazy syntax/import oracle: the import-oracle interpreter is
+        // ONLY ever queried for modules our parser rejected as syntax errors
+        // (imports.rs BuildFail::Syntax). When this run has NO ruff-rejected
+        // files (`requests` empty) and no deep-tree astroid-crash candidates
+        // (`crash_abs` empty), no import can resolve to a broken module, so the
+        // oracle is never queried — prespawning it would be pure waste (the
+        // common single-valid-file / precommit case). We prespawn ONLY when
+        // such broken files exist (so the interpreter boots while the engine
+        // works); otherwise OracleProc's lazy `ensure()` still spawns on demand
+        // the first time a query is actually needed, so correctness is
+        // unaffected either way.
+        let oracle_may_be_needed = !requests.is_empty() || !crash_abs.is_empty();
         // PRYLINT_SHARD_PROBE=N (debug aid): simulate N-way phase-2 sharding
         // in ONE thread — engine k boots ALL files (mirroring pylint's
         // phase-1 cache state) but walks only its round-robin residue class.
@@ -532,8 +544,13 @@ pub fn run(opts: &RunOpts) -> i32 {
                     let mut lint_run = pycheckers::walker::LintRun::default();
                     let mut oracle_proc = oracle::OracleProc::default();
                     // boot the import-oracle interpreter NOW so it loads while
-                    // the engine works; first query then responds immediately
-                    oracle_proc.prespawn();
+                    // the engine works; first query then responds immediately.
+                    // Win A: only when this run actually has broken-syntax files
+                    // that an import could resolve to — otherwise no query ever
+                    // fires and prespawning would spawn python for nothing.
+                    if oracle_may_be_needed {
+                        oracle_proc.prespawn();
+                    }
                     // pylint phase 1 builds EVERY file's AST through the astroid
                     // manager in file order (pylinter.get_ast -> ast_from_file
                     // source=True); the cache state at check time depends on it.

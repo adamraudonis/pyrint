@@ -64,7 +64,43 @@ print(json.dumps({
 }))
 "#;
 
+/// Build a PyEnv from the probe JSON (whatever produced it). Shared by both the
+/// env-injected fast path and the self-spawn fallback.
+fn from_probe_json(v: &serde_json::Value) -> PyEnv {
+    let arr = |key: &str| -> Vec<String> {
+        v[key]
+            .as_array()
+            .map(|a| a.iter().filter_map(|x| x.as_str().map(|s| s.to_string())).collect())
+            .unwrap_or_default()
+    };
+    let frozen_specs = v["frozen_specs"]
+        .as_object()
+        .map(|o| {
+            o.iter().map(|(k, val)| (k.clone(), val.as_str().map(|s| s.to_string()))).collect()
+        })
+        .unwrap_or_default();
+    PyEnv {
+        sys_path: arr("sys_path"),
+        builtin_module_names: arr("builtin"),
+        stdlib_module_names: arr("stdlib"),
+        ext_suffixes: arr("ext_suffixes"),
+        os_path_file: v["os_path_file"].as_str().unwrap_or("").to_string(),
+        frozen_specs,
+    }
+}
+
 pub fn probe() -> PyEnv {
+    // Fast path: the CLI's unified startup driver (startup.rs) already ran the
+    // probe in its single python process — BEFORE any init-hook mutated
+    // sys.path — and serialized the result here. Using it avoids a redundant
+    // interpreter spawn (and guarantees the pristine pre-init-hook sys.path,
+    // since the init-hook delta is forwarded separately via
+    // PRYLINT_EXTRA_SYSPATH).
+    if let Ok(js) = std::env::var("PRYLINT_PYENV_JSON") {
+        if let Ok(v) = serde_json::from_str::<serde_json::Value>(&js) {
+            return from_probe_json(&v);
+        }
+    }
     let exe = python_exe();
     let out = Command::new(&exe).arg("-c").arg(PROBE).output();
     let parsed: Option<serde_json::Value> = out
@@ -72,34 +108,7 @@ pub fn probe() -> PyEnv {
         .filter(|o| o.status.success())
         .and_then(|o| serde_json::from_slice(&o.stdout).ok());
     match parsed {
-        Some(v) => {
-            let arr = |key: &str| -> Vec<String> {
-                v[key]
-                    .as_array()
-                    .map(|a| {
-                        a.iter()
-                            .filter_map(|x| x.as_str().map(|s| s.to_string()))
-                            .collect()
-                    })
-                    .unwrap_or_default()
-            };
-            let frozen_specs = v["frozen_specs"]
-                .as_object()
-                .map(|o| {
-                    o.iter()
-                        .map(|(k, val)| (k.clone(), val.as_str().map(|s| s.to_string())))
-                        .collect()
-                })
-                .unwrap_or_default();
-            PyEnv {
-                sys_path: arr("sys_path"),
-                builtin_module_names: arr("builtin"),
-                stdlib_module_names: arr("stdlib"),
-                ext_suffixes: arr("ext_suffixes"),
-                os_path_file: v["os_path_file"].as_str().unwrap_or("").to_string(),
-                frozen_specs,
-            }
-        }
+        Some(v) => from_probe_json(&v),
         None => {
             eprintln!(
                 "prylint: cannot probe the python environment ({exe} failed to run); \

@@ -4,6 +4,7 @@ mod msgstate;
 mod oracle;
 mod reporter;
 mod run;
+mod startup;
 mod stats;
 
 use std::process::ExitCode;
@@ -250,6 +251,14 @@ fn main() -> ExitCode {
         score = false;
         persistent = false;
     }
+
+    // Interpreter sys.path probe (Win B): run it on the SAME unified startup
+    // driver that already did config discovery, capturing the PRISTINE sys.path
+    // BEFORE any init-hook mutates it, and stash the result in PRYLINT_PYENV_JSON
+    // so pyinfer's Engine::new reads it instead of spawning its own probe. Must
+    // precede run_init_hooks so the captured sys.path excludes init-hook
+    // additions (those are forwarded separately via PRYLINT_EXTRA_SYSPATH).
+    startup::probe_into_env();
 
     // init-hook execution: run the hooks through python and capture sys.path
     // additions so import resolution sees them. Non-path effects can't be

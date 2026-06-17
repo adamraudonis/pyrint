@@ -1,7 +1,10 @@
 //! Config-file discovery + parsing and init-hook execution (Phase F,
 //! notes/09-pipeline-noE.md §8). The actual INI/TOML parsing is delegated to
-//! the embedded stdlib-only `config_helper.py` (python3 -I) so configparser /
-//! tomllib edge semantics match pylint bug-for-bug without a Rust parser.
+//! the unified stdlib-only startup driver (`startup_driver.py`, run as ONE
+//! persistent `python -I` coprocess — see startup.rs) so configparser /
+//! tomllib edge semantics match pylint bug-for-bug without a Rust parser, and
+//! discover+parse+probe+init-hook+stats all amortize over a single interpreter
+//! boot (the old code spawned config-helper TWICE: discover then parse).
 //!
 //! - `load_config(rcfile, init_hooks)`: resolve the config path (explicit
 //!   --rcfile, else find_default_config_files' first yield), parse it, and
@@ -11,13 +14,7 @@
 //!   additions to the inference engine via PRYLINT_EXTRA_SYSPATH; non-path
 //!   side effects warn loudly on stderr (can't be replicated in-process).
 
-use std::io::{BufRead, BufReader, Write};
-use std::path::PathBuf;
-use std::process::{Command, Stdio};
-
-use crate::oracle;
-
-const HELPER_SRC: &str = include_str!("config_helper.py");
+use crate::startup;
 
 /// Config-file options prylint consumes (the subset that changes output / exit
 /// in full mode). Each is None/empty when the file did not set it.
@@ -31,44 +28,12 @@ pub struct FileConfig {
     pub fail_on: Vec<String>,
 }
 
-fn embedded_helper_path() -> std::io::Result<PathBuf> {
-    use std::hash::{Hash, Hasher};
-    let mut h = std::collections::hash_map::DefaultHasher::new();
-    HELPER_SRC.hash(&mut h);
-    let dir = std::env::temp_dir();
-    let path = dir.join(format!("prylint-config-helper-{:016x}.py", h.finish()));
-    if let Ok(existing) = std::fs::read_to_string(&path) {
-        if existing == HELPER_SRC {
-            return Ok(path);
-        }
-    }
-    let tmp =
-        dir.join(format!("prylint-config-helper-{:016x}.{}.tmp", h.finish(), std::process::id()));
-    std::fs::write(&tmp, HELPER_SRC)?;
-    std::fs::rename(&tmp, &path)?;
-    Ok(path)
-}
-
+/// Issue one request against the persistent unified startup driver (ONE python
+/// process for discover + parse + probe + init-hook + stats — see startup.rs).
+/// Replaces the former per-call config-helper spawn, which spawned twice
+/// (discover then parse).
 fn helper_request(req: serde_json::Value) -> Option<serde_json::Value> {
-    let helper = embedded_helper_path().ok()?;
-    let mut child = Command::new(oracle::oracle_python())
-        .arg("-I")
-        .arg(&helper)
-        .stdin(Stdio::piped())
-        .stdout(Stdio::piped())
-        .stderr(Stdio::inherit())
-        .spawn()
-        .ok()?;
-    {
-        let mut stdin = child.stdin.take()?;
-        writeln!(stdin, "{req}").ok()?;
-    } // drop stdin -> EOF
-    let stdout = child.stdout.take()?;
-    let mut line = String::new();
-    let mut reader = BufReader::new(stdout);
-    let _ = reader.read_line(&mut line);
-    let _ = child.wait();
-    serde_json::from_str(line.trim()).ok()
+    startup::request(req)
 }
 
 /// Resolve and parse the active config file. Returns None when no config file
@@ -163,20 +128,19 @@ fn parse_yn(v: &str) -> Option<bool> {
 /// so import resolution sees them. Other side effects (env vars, monkeypatches)
 /// cannot be replicated in our Rust process -> a single loud stderr warning.
 pub fn run_init_hooks(hooks: &[String]) {
-    let py = oracle::oracle_python();
-    // Build a small driver: snapshot sys.path, exec each hook, print the new
-    // entries (in order) one per line.
-    let joined = hooks.join("\n");
-    let driver = format!(
-        "import sys, json\n_before=list(sys.path)\n_hooks={hooks_json}\nfor _h in _hooks:\n    exec(_h)\n_after=sys.path\n_added=[p for p in _after if p not in _before]\nsys.stderr.write('')\nprint('\\x00'.join(_added))\n",
-        hooks_json = serde_json::to_string(hooks).unwrap_or_else(|_| "[]".to_string())
-    );
-    let _ = joined; // documented intent
-    match Command::new(&py).arg("-c").arg(&driver).stderr(Stdio::inherit()).output() {
-        Ok(out) if out.status.success() => {
-            let added = String::from_utf8_lossy(&out.stdout);
-            let entries: Vec<&str> =
-                added.trim().split('\u{0}').filter(|s| !s.is_empty()).collect();
+    // Execute the hooks inside the SAME persistent startup interpreter that did
+    // config discovery (startup_driver.py "inithook" op): it snapshots sys.path,
+    // exec's each hook in order, and returns the entries the hooks added. This
+    // is the same exec semantics as before (a dedicated `python -c` subprocess);
+    // it now reuses the already-running driver instead of spawning again.
+    let resp = startup::request(serde_json::json!({"op":"inithook","hooks": hooks}));
+    match resp {
+        Some(v) if v.get("ok").and_then(|b| b.as_bool()) == Some(true) => {
+            let entries: Vec<String> = v
+                .get("added")
+                .and_then(|a| a.as_array())
+                .map(|arr| arr.iter().filter_map(|s| s.as_str().map(|s| s.to_string())).collect())
+                .unwrap_or_default();
             if !entries.is_empty() {
                 // forward to the engine; absolutize relative entries against cwd
                 let abs: Vec<String> = entries
@@ -197,14 +161,10 @@ pub fn run_init_hooks(hooks: &[String]) {
                 entries.len()
             );
         }
-        Ok(out) => {
+        _ => {
             eprintln!(
-                "prylint: init-hook execution failed (exit {}); continuing without its effects.",
-                out.status.code().unwrap_or(-1)
+                "prylint: init-hook execution failed; continuing without its effects."
             );
-        }
-        Err(e) => {
-            eprintln!("prylint: cannot run init-hook ({py}: {e}); continuing.");
         }
     }
 }
