@@ -508,11 +508,16 @@ pub fn run(opts: &RunOpts) -> i32 {
         // thread, the byte-identical path). Some(0) -> auto. Some(N>1) -> N.
         // The PRYLINT_SHARD_PROBE knob only sub-shards the SERIAL thread; it
         // never combines with -j N>1 (parallel always uses real threads).
-        let njobs: usize = match opts.jobs {
-            None | Some(1) => 1,
-            Some(0) => std::thread::available_parallelism().map(|n| n.get()).unwrap_or(1),
-            Some(n) => n,
-        };
+        //
+        // -j/--jobs is currently a SILENT NO-OP: we always run serial. The
+        // parallel implementation exists (run_shard + the threaded dispatch
+        // below) but is parked — it only delivered ~1.1x and its per-shard
+        // cache warmth can diverge from the byte-identical serial path, so
+        // until that's improved we ignore the requested job count entirely.
+        // The flag still parses (no usage error) for drop-in pylint
+        // compatibility; it just never parallelizes.
+        let njobs: usize = 1;
+        let _ = opts.jobs; // accepted, intentionally ignored for now
         // run_shard(k, nshards): the per-worker body. Builds a fresh engine,
         // boots ALL files in order, then walks exactly the modules in residue
         // class `pos % nshards == k`. Returns this shard's (file_index,
