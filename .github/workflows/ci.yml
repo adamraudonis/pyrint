@@ -55,3 +55,7 @@ jobs:
           diff expected.out ours.out
           diff expected.exit ours.exit
           echo "smoke parity OK"
+      - name: Regression suite (user-reported discrepancies)
+        run: |
+          $GITHUB_WORKSPACE/harness/check_regressions.sh
+
