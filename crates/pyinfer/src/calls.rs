@@ -473,9 +473,55 @@ impl Engine {
             );
             return End::Done;
         }
-        // NOTE: the six `with_metaclass` hack (scoped_nodes.py:1577-1615)
-        // is not ported yet; none of the pinned corpora rely on it for the
-        // -E message set (revisit on diff evidence).
+        // The generic `with_metaclass` "drop-the-middle-class" hack
+        // (FunctionDef.infer_call_result, scoped_nodes.py:1577-1615). For a
+        // function literally named `with_metaclass` taking exactly one
+        // positional arg plus *vararg, called with a caller whose first arg
+        // infers to a ClassDef, astroid synthesizes a hidden `temporary_class`
+        // ClassDef whose bases are the caller's remaining args and whose
+        // metaclass is that first arg. This filters the transient
+        // class-generating metaclass out of the inheritance structure (so its
+        // `__new__` never reaches an instance constructor lookup). Not
+        // six-specific — keyed purely on the name + signature shape, exactly
+        // as upstream.
+        let wm_predicate = {
+            let args_node = match &md.tree.nodes[func.n.idx()].kind {
+                NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => {
+                    if md.tree.s(d.name) == "with_metaclass" {
+                        Some(d.args)
+                    } else {
+                        None
+                    }
+                }
+                _ => None,
+            };
+            args_node.is_some_and(|an| match &md.tree.nodes[an.idx()].kind {
+                // len(self.args.args) == 1 and self.args.vararg is not None
+                NodeKind::Arguments(a) => a.args.len() == 1 && a.vararg.is_some(),
+                _ => false,
+            })
+        };
+        drop(md);
+        if wm_predicate {
+            if let Some(call) = caller {
+                // `caller.args[0]` must infer to a ClassDef; the hack consults
+                // `self` (re-entrant inference), so `md` is released above.
+                match self.with_metaclass_hack(call, &ctx) {
+                    Ok(Some(tmp)) => {
+                        // yield new_class; return
+                        yield_v!(sink, tmp);
+                        return End::Done;
+                    }
+                    Ok(None) => {
+                        // Predicate matched but the first caller arg did not
+                        // infer to a ClassDef: fall through to normal
+                        // return-value inference below.
+                    }
+                    Err(e) => return End::Raised(e),
+                }
+            }
+        }
+        let md = self.md(func.m);
         let body: Vec<NodeId> = match &md.tree.nodes[func.n.idx()].kind {
             NodeKind::FunctionDef(d) | NodeKind::AsyncFunctionDef(d) => d.body.clone(),
             // Lambda.infer_call_result (scoped_nodes.py:987-993):
@@ -537,6 +583,91 @@ impl Engine {
             }
         }
         End::Done
+    }
+
+    /// The generic with_metaclass "drop-the-middle-class" hack
+    /// (FunctionDef.infer_call_result, scoped_nodes.py:1583-1615). Builds the
+    /// hidden `temporary_class` ClassDef: metaclass = first inferred value of
+    /// `caller.args[0]` (must be a ClassDef), bases = last inferred value of
+    /// each remaining caller arg (uninferable filtered out). Returns
+    /// `Ok(None)` when the first arg does not infer to a ClassDef (caller then
+    /// falls back to normal return-value inference).
+    fn with_metaclass_hack(
+        &self,
+        caller: GNode,
+        ctx: &Rc<Ctx>,
+    ) -> Result<Option<Value>, ErrKind> {
+        let args: Vec<NodeId> = {
+            let md = self.md(caller.m);
+            match &md.tree.nodes[caller.n.idx()].kind {
+                NodeKind::Call { args, .. } => args.clone(),
+                _ => return Ok(None),
+            }
+        };
+        if args.is_empty() {
+            return Ok(None);
+        }
+        // metaclass = next(caller.args[0].infer(context), None) — first value,
+        // shared context. StopIteration -> None -> not a ClassDef -> fall back.
+        let meta_arg = GNode { m: caller.m, n: args[0] };
+        let metaclass = match self.infer_first(meta_arg, Some(ctx)) {
+            Ok(v) => v,
+            Err(e) if e.is_inference() => return Ok(None),
+            Err(e) => return Err(e),
+        };
+        let is_classdef = matches!(
+            &metaclass,
+            Value::Node(g) if self.kind_is(*g, |k| matches!(k, NodeKind::ClassDef(_)))
+        );
+        if !is_classdef {
+            return Ok(None);
+        }
+        // class_bases = [_infer_last(x, context) for x in caller.args[1:]],
+        // then filtered to drop Uninferable. _infer_last consumes the whole
+        // generator under a cloned context and keeps the LAST value.
+        let mut class_bases: Vec<Value> = Vec::new();
+        for &a in &args[1..] {
+            let g = GNode { m: caller.m, n: a };
+            let last = self.infer_last(g, ctx);
+            if !last.is_uninferable() {
+                class_bases.push(last);
+            }
+        }
+        // ClassDef(name="temporary_class", parent=SYNTHETIC_ROOT, hide=True),
+        // postinit(bases=class_bases, metaclass=metaclass).
+        let (cls, base_slots, meta_slot, _) = self.build_synth_class(
+            "__astroid_synthetic",
+            "temporary_class",
+            0,
+            0,
+            class_bases.len(),
+            true,
+            0,
+        );
+        self.hidden_classes.borrow_mut().insert(cls);
+        {
+            let mut red = self.redirects.borrow_mut();
+            for (slot, v) in base_slots.iter().zip(class_bases) {
+                red.insert(GNode { m: cls.m, n: *slot }, NV::V(v));
+            }
+            if let Some(ms) = meta_slot {
+                red.insert(GNode { m: cls.m, n: ms }, NV::V(metaclass));
+            }
+        }
+        Ok(Some(Value::Node(cls)))
+    }
+
+    /// astroid `_infer_last` (scoped_nodes.py:177-183): drain `arg.infer`
+    /// under a CLONED context and return the LAST value (Uninferable if the
+    /// generator yields nothing or raises).
+    fn infer_last(&self, node: GNode, ctx: &Rc<Ctx>) -> Value {
+        let c = ctx.clone_ctx();
+        let mut last = Value::Uninferable;
+        let _ = self.infer_to(node, &c, &mut |v| {
+            last = v;
+            Drive::Go
+        });
+        last
     }
 
     /// is_generator (scoped_nodes.py:1511-1519): a Yield/YieldFrom not
