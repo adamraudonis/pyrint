@@ -6,7 +6,7 @@ produces **byte-for-byte identical output** — **15–2300× faster** (median ~
 prylint is not "inspired by" pylint. It is a bug-for-bug port: the same
 messages, at the same lines and columns, with the same text, in the same
 order, with the same exit codes and the same `Your code has been rated`
-footer — verified byte-identically against real pylint on **27 production
+footer — verified byte-identically against real pylint on **52 production
 codebases** (~60,000 Python files), including django, numpy, pandas, sympy,
 home-assistant, sqlalchemy, twisted, scikit-learn, and pylint's own functional
 test suite. Where pylint has bugs, prylint reproduces them. Where pylint
@@ -147,7 +147,7 @@ itself) are catalogued in **[LIMITATIONS.md](LIMITATIONS.md)**.
 
 ## Reproducing the test suite
 
-`scripts/setup_corpora.sh` clones all 27 corpora at pinned commits and builds
+`scripts/setup_corpora.sh` clones all 52 corpora at pinned commits and builds
 the pinned pylint/astroid ground-truth venv. The accuracy contract: every
 change must keep the corpora byte-identical (`harness/` holds the differential
 comparators).
