@@ -160,7 +160,35 @@ pub fn safe_infer_cc(eng: &Engine, caches: &u::LintCaches, g: GNode) -> Option<V
             && class_constructors_ambiguous(eng, first, other)
     };
     let ctx = Ctx::new();
-    let res = u::safe_infer_streaming(eng, &ctx, g, Some(&ctor));
+    let mut res = u::safe_infer_streaming(eng, &ctx, g, Some(&ctor));
+    // Multi-branch ternary method-union conservatism (matches pylint's NET
+    // behavior on the E1120/E1121/E1123/E1124/E1125 arg-count path).
+    //
+    // For a call `recv.method(...)` where `recv` is a bare local NAME assigned
+    // by >= 2 separate `x = A if c else B` ternary statements (the
+    // "reassigned across branches" shape, e.g. gml.py:516 `G.has_edge(...)`
+    // with `G = nx.DiGraph() if directed else nx.Graph()` /
+    // `G = nx.MultiDiGraph() if directed else nx.MultiGraph()`), pylint's
+    // `safe_infer(node.func)` returns None and so emits NOTHING. It does so
+    // because astroid's whole-package, *lazily*-evaluated inference yields an
+    // Uninferable among the resolved BoundMethods (a generator-suspension
+    // artifact of inferring that multi-IfExp-assignment union through the
+    // surrounding BoolOp consumer), which trips safe_infer's pytype-set check.
+    // That Uninferable cannot be reproduced from a node in isolation (a full
+    // eager drain yields clean BoundMethods), so prylint detects the exact
+    // triggering shape directly and bails. The gate is deliberately tight so
+    // it does NOT touch the cases pylint DOES flag: receivers that are
+    // attribute chains or come from calls / tuple-unpacks (sklearn
+    // test_split `cv.split`), or 2-way unions (networkx test_planarity
+    // `P.to_undirected`), keep emitting. Scoped to the typecheck arg-count
+    // path only; the general `safe_infer` is unchanged.
+    if matches!(
+        &res,
+        Some(Value::BoundMethod { .. } | Value::UnboundMethod { .. } | Value::DescBM { .. })
+    ) && multi_branch_ternary_method_union(eng, caches, g)
+    {
+        res = None;
+    }
     // PRYLINT_TRACE_SICC="line:col,line:col" — lint-path safe_infer_cc trace:
     // dump the inferred func value + nodes_inferred at the call-site func node
     // (observes the GLOBAL inf_cache warmth at checker query time, unlike the
@@ -188,6 +216,120 @@ pub fn safe_infer_cc(eng: &Engine, caches: &u::LintCaches, g: GNode) -> Option<V
     }
     caches.safe_infer_cc.borrow_mut().put(g, res.clone());
     res
+}
+
+/// Detect the precise "bare local NAME reassigned by >= 2 ternary statements,
+/// then a method called on it" shape that makes astroid's lazy whole-package
+/// inference yield an Uninferable among the resolved BoundMethods (so pylint's
+/// `safe_infer(node.func)` returns None and emits nothing). See the call site
+/// in `safe_infer_cc` for the full rationale. Returns true only when ALL of:
+///   * `g` is an `Attribute` whose receiver (`g.expr`) is a bare `Name`;
+///   * that Name has >= 2 assignment statements in its scope, EVERY one of
+///     which is `name = <IfExp>` (the multi-branch ternary union);
+///   * the receiver infers to >= 2 distinct instance classes;
+///   * the method resolves to >= 2 distinct backing FunctionDefs that are
+///     pairwise argument-ambiguous (utils.function_arguments_are_ambiguous);
+///   * at least one of those FunctionDefs lives in a DIFFERENT module than
+///     the call site (the cross-module depth that produces the astroid
+///     Uninferable; a same-module union does not, and pylint emits there).
+/// All reads are non-mutating (locals borrow + already-cached infer_all), so
+/// the byte-sensitive lookup LRU and global inference cache are untouched.
+fn multi_branch_ternary_method_union(eng: &Engine, caches: &u::LintCaches, g: GNode) -> bool {
+    // receiver = g.expr, must be a bare Name (Attribute only)
+    let md = eng.md(g.m);
+    let recv = match &md.tree.nodes[g.n.idx()].kind {
+        NodeKind::Attribute { expr, .. } => GNode { m: g.m, n: *expr },
+        _ => return false,
+    };
+    let recv_name = match &md.tree.nodes[recv.n.idx()].kind {
+        NodeKind::Name { name } => eng.g(&md, *name),
+        _ => return false,
+    };
+    drop(md);
+    // The Name's assignment statements in its enclosing scope must all be
+    // `name = <IfExp>` ternaries, and there must be at least two of them.
+    let scope = eng.scope(recv);
+    let assign_names: Vec<GNode> = {
+        let md = eng.md(scope.m);
+        let locals = md.locals.borrow();
+        match locals.get(&scope.n).and_then(|l| l.get(&recv_name)) {
+            Some(ids) => ids.clone(),
+            None => return false,
+        }
+    };
+    // Count `name = <IfExp>` ternary assignments. The receiver must be
+    // reassigned by at least two distinct ternaries (the multi-branch union
+    // that triggers the astroid Uninferable). Other, non-ternary assignments
+    // to the same name (e.g. a later `G = nx.relabel_nodes(G, mapping)` in
+    // gml.py:524, which does not reach line 516) are ignored.
+    let mut ternary_assigns = 0usize;
+    for an in &assign_names {
+        let Some(parent) = eng.parent(*an) else { continue };
+        let md = eng.md(parent.m);
+        if let NodeKind::Assign { value, .. } = &md.tree.nodes[parent.n.idx()].kind {
+            if eng.kind_is(GNode { m: parent.m, n: *value }, |k| {
+                matches!(k, NodeKind::IfExp { .. })
+            }) {
+                ternary_assigns += 1;
+            }
+        }
+    }
+    if ternary_assigns < 2 {
+        return false;
+    }
+    // receiver infers to >= 2 distinct instance classes
+    let recv_vals = u::infer_all(eng, caches, recv);
+    let mut recv_classes: Vec<GNode> = Vec::new();
+    for v in recv_vals.iter() {
+        if let Value::Inst { cls, .. } | Value::ExcInst { cls, .. } = v {
+            if !recv_classes.contains(cls) {
+                recv_classes.push(*cls);
+            }
+        }
+    }
+    if recv_classes.len() < 2 {
+        return false;
+    }
+    // method resolves to >= 2 distinct backing FunctionDefs
+    let func_vals = u::infer_all(eng, caches, g);
+    let mut funcs: Vec<GNode> = Vec::new();
+    for v in func_vals.iter() {
+        let f = match v {
+            Value::BoundMethod { func, .. }
+            | Value::UnboundMethod { func }
+            | Value::DescBM { func, .. } => Some(*func),
+            _ => None,
+        };
+        if let Some(f) = f {
+            if is_funcdef(eng, f) && !funcs.contains(&f) {
+                funcs.push(f);
+            }
+        }
+    }
+    if funcs.len() < 2 {
+        return false;
+    }
+    // At least one resolved method must live in a DIFFERENT module than the
+    // call site. The astroid Uninferable that pylint relies on here is a
+    // by-product of the deep, lazily-evaluated CROSS-MODULE inference of the
+    // multi-class union (the networkx Graph/MultiGraph hierarchy lives in
+    // separate modules from the gml.py call). A same-module union (e.g. a
+    // self-contained 4-class repro) does NOT produce the Uninferable, and
+    // pylint DOES emit E1121 there — so this gate keeps prylint matching
+    // pylint on those (no false negative).
+    let call_mod = g.m;
+    if funcs.iter().all(|f| f.m == call_mod) {
+        return false;
+    }
+    // any arg-ambiguous pair (matches function_arguments_are_ambiguous)
+    for i in 0..funcs.len() {
+        for j in (i + 1)..funcs.len() {
+            if u::fn_args_ambiguous_pub(eng, funcs[i], funcs[j]) {
+                return true;
+            }
+        }
+    }
+    false
 }
 
 /// utils.py:1451-1463
@@ -3871,15 +4013,21 @@ impl TypeCk {
             _ => return,
         };
         // decorated inferred values (typecheck.py:2185-2195):
-        // `getattr(inferred, "decorators", None)` — BoundMethod/UnboundMethod
-        // PROXY the wrapped function's decorators
+        // `getattr(inferred, "decorators", None)` — astroid Proxy objects
+        // forward attribute access to `_proxied`, so BoundMethod/UnboundMethod
+        // proxy the wrapped function's decorators and a bare Instance proxies
+        // its `_proxied` ClassDef's decorators (this is why pylint bails on
+        // `@dataclass(slots=True)` instances: the dataclass decorator is a
+        // Call that infers to a function, not a ClassDef, so it `return`s
+        // without ever reaching the supports_getitem check — no E1136).
         let dec_owner: Option<GNode> = match &inferred {
             Value::Node(g) => Some(*g),
             Value::BoundMethod { func, .. }
             | Value::DescBM { func, .. }
             | Value::UnboundMethod { func } => Some(*func),
-            // Property/PartialFunction: postinit without decorators -> None
-            _ => None,
+            // BaseInstance subclasses are astroid Proxy objects: `.decorators`
+            // resolves through `_proxied` to the backing class's decorators.
+            _ => eng.proxied_class(&inferred),
         };
         if let Some(owner) = dec_owner {
             let decs = decorator_nodes(eng, owner);
